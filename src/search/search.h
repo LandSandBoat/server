@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct search_req
 {
-    uint16      zoneid[10];
+    uint16      zoneid[15];
     uint8       jobid;
     uint8       minlvl;
     uint8       maxlvl;

@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _MOB_CONTROLLER_H
 #define _MOB_CONTROLLER_H
 
-#include "../../entities/mobentity.h"
 #include "controller.h"
+#include "entities/mobentity.h"
 
 class CMobController : public CController
 {
@@ -59,7 +59,6 @@ protected:
     bool         CheckHide(CBattleEntity* PTarget);
     bool         CheckLock(CBattleEntity* PTarget);
     bool         CheckDetection(CBattleEntity* PTarget);
-    bool         CanSeePoint(position_t pos);
     virtual bool CanCastSpells();
     void         CastSpell(SpellID spellid);
     virtual void Move();

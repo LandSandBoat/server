@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Galina
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

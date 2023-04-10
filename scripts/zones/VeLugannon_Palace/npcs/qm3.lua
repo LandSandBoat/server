@@ -12,13 +12,14 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.items.BUCCANEERS_KNIFE) then -- Buccaneer's Knife
-        if npc:getLocalVar("PillarCharged") == 1 and math.random(1000) <= 50 then -- 50/1000 chance to obtain on trade.
+        if npc:getLocalVar("PillarCharged") == 1 and math.random(1, 100) <= 5 then -- 5% chance to obtain on trade.
             player:confirmTrade()
             player:messageSpecial(ID.text.KNIFE_CHANGES_SHAPE, xi.items.BUCCANEERS_KNIFE)
             npcUtil.giveItem(player, xi.items.BARTHOLOMEWS_KNIFE) -- Btm. Knife
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
         end
+
         npc:setLocalVar("PillarCharged", 0) -- Pillar always loses charge after a morph attempt.
     end
 end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Wabble-Mopple
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -5,28 +5,28 @@
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
 end
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
     -- local mobOffset = (battlefield:getArea() - 1) * 7  -- Offset to spawn correct mob depending on battlefieldNumber
-    local track_var = 'entered_'.. player:getName()
-    if battlefield:getLocalVar(track_var) ~= 1 then
-        battlefield:setLocalVar(track_var, 1)
+    local trackVar = 'entered_'.. player:getName()
+    if battlefield:getLocalVar(trackVar) ~= 1 then
+        battlefield:setLocalVar(trackVar, 1)
         battlefield:setLocalVar('num_entrants', battlefield:getLocalVar('num_entrants') + 1)
     end
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
 
@@ -38,10 +38,10 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
 end
 
-return battlefield_object
+return battlefieldObject

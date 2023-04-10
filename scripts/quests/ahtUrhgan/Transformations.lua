@@ -142,11 +142,11 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if
-                        questProgress == 1 and
+                        questProgress == 3 and
                         not GetMobByID(alzadaalID.mob.NEPIONIC_SOULFLAYER):isSpawned()
                     then
                         return quest:progressEvent(4)
-                    elseif questProgress == 2 then
+                    elseif questProgress == 4 then
                         return quest:progressEvent(5)
                     end
                 end,
@@ -155,14 +155,37 @@ quest.sections =
             ['Nepionic_Soulflayer'] =
             {
                 onMobDeath = function(mob, player, optParams)
+                    if quest:getVar(player, 'Prog') == 3 then
+                        quest:setVar(player, 'Prog', 4)
+                    end
+                end,
+            },
+
+            onTriggerAreaEnter =
+            {
+                [24] = function(player, triggerArea)
                     if quest:getVar(player, 'Prog') == 1 then
-                        quest:setVar(player, 'Prog', 2)
+                        return quest:progressEvent(2)
+                    end
+                end,
+
+                [25] = function(player, triggerArea)
+                    if quest:getVar(player, 'Prog') == 2 then
+                        return quest:progressEvent(3)
                     end
                 end,
             },
 
             onEventFinish =
             {
+                [2] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 2)
+                end,
+
+                [3] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 3)
+                end,
+
                 [4] = function(player, csid, option, npc)
                     npcUtil.popFromQM(player, npc, alzadaalID.mob.NEPIONIC_SOULFLAYER, { hide = 0 })
                 end,

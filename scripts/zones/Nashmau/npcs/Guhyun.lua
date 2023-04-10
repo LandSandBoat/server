@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Guhyun
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

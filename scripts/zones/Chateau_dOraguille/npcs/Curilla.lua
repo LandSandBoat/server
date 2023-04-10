@@ -23,14 +23,17 @@ local trustMemory = function(player)
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
         memories = memories + 2
     end
+
     -- 4 - OLD_WOUNDS
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS) then
         memories = memories + 4
     end
+
     -- 8 - THE_HEIR_TO_THE_LIGHT
     if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
         memories = memories + 8
     end
+
     -- 16 - Heroine's Combat BCNM
     -- if (playervar for Heroine's Combat) then
     --  memories = memories + 16
@@ -39,6 +42,7 @@ local trustMemory = function(player)
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 32
     end
+
     return memories
 end
 
@@ -79,33 +83,22 @@ entity.onTrigger = function(player, npc)
             player:startEvent(108)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        mJob == xi.job.RDM and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
-
-    -- "Enveloped in Darkness" (RDM AF Shoes)
-    elseif envelopedInDarkness == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.OLD_POCKET_WATCH) and not player:hasKeyItem(xi.ki.OLD_BOOTS) then
-            player:startEvent(93)
-        elseif player:hasKeyItem(xi.ki.OLD_BOOTS) and player:getCharVar("needs_crawler_blood") == 0 then
-            player:startEvent(101)
-        elseif player:getCharVar("needs_crawler_blood") == 1 then
-            player:startEvent(117)
-        end
-    elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
-        envelopedInDarkness == QUEST_AVAILABLE
-    then
-        player:startEvent(94) -- Start
 
     -- Default dialogue after "Peace for the Spirit"
     elseif peaceForTheSpirit == QUEST_COMPLETED then
         player:startEvent(52)
 
     -- Default dialogue after "Enveloped in Darkness"
-    elseif envelopedInDarkness == QUEST_COMPLETED and peaceForTheSpirit == QUEST_AVAILABLE then
+    elseif
+        envelopedInDarkness == QUEST_COMPLETED and
+        peaceForTheSpirit == QUEST_AVAILABLE
+    then
         player:startEvent(114)
 
     -- Default dialogue
@@ -115,16 +108,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 94 and option == 1) then
-        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
-        player:addKeyItem(xi.ki.OLD_POCKET_WATCH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_POCKET_WATCH)
-    elseif (csid == 109 and option == 1) then
+    if csid == 109 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
-        player:setCharVar("needs_crawler_blood", 0)
-    elseif (csid == 101) then
-        player:setCharVar("needs_crawler_blood", 1)
-    elseif (csid == 562) then
+    elseif csid == 562 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     elseif csid == 573 and option == 2 then
         player:addSpell(902, true, true)

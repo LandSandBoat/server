@@ -11,12 +11,19 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
-        mob:setDropID(2911)
-    else
-        mob:setDropID(1972)
-    end
+entity.onMobInitialize = function(mob)
+    mob:addListener("ITEM_DROPS", "ITEM_DROPS_PADFOOD", function(mobArg, loot)
+        if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
+            loot:addGroup(xi.loot.rate.GUARANTEED,
+            {
+                { item = xi.items.ASSAILANTS_RING, weight = 750 },
+                { item = xi.items.ASTRAL_EARRING, weight = 250 },
+            })
+        else
+            loot:addItem(xi.items.SHEEPSKIN, xi.loot.rate.VERY_COMMON)
+            loot:addItem(xi.items.LANOLIN_CUBE, xi.loot.rate.GUARANTEED)
+        end
+    end)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -32,6 +39,7 @@ entity.onMobDespawn = function(mob)
             if v ~= mobId and GetMobByID(v):isSpawned() then
                 DespawnMob(v)
             end
+
             GetMobByID(v):setRespawnTime(respawn)
         end
 

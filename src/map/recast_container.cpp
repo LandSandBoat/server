@@ -212,8 +212,14 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-                        { return recast.ID == id; }) != PRecastList->end();
+    // clang-format off
+    auto maybeRecast = std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
+    {
+        return recast.ID == id;
+    });
+    // clang-format on
+
+    return maybeRecast != PRecastList->end();
 }
 
 /************************************************************************

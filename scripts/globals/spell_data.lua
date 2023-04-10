@@ -43,6 +43,8 @@ xi.magic.spellGroup =
     NINJUTSU  = 4,
     SUMMONING = 5,
     WHITE     = 6,
+    GEOMANCY  = 7,
+    TRUST     = 8,
 }
 
 -----------------------------------
@@ -56,7 +58,7 @@ xi.magic.element =
     ICE       = 2,
     WIND      = 3,
     EARTH     = 4,
-    LIGHTNING = 5,
+    LIGHTNING = 5, -- TODO: Duplicate. Get rid of one.
     THUNDER   = 5,
     WATER     = 6,
     LIGHT     = 7,

@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
-#include "../common/cbasetypes.h"
-#include "../common/kernel.h"
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/cbasetypes.h"
+#include "common/kernel.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include "settings.h"
 #include "socket.h"
+
+#include <sstream>
 
 #include <cstdio>
 #include <cstdlib>
@@ -53,7 +55,7 @@ typedef int socklen_t;
 #define S_EINTR        WSAEINTR
 #define S_ECONNABORTED WSAECONNABORTED
 
-SOCKET sock_arr[FD_SETSIZE];
+SOCKET sock_arr[MAX_FD];
 int    sock_arr_len = 0;
 
 /// Returns the first fd associated with the socket.
@@ -79,7 +81,7 @@ int sock2fd(SOCKET s)
 /// Returns a new fd associated with the socket.
 /// If there are too many sockets it closes the socket, sets an error and
 //  returns -1 instead.
-/// Since fd 0 is reserved, it returns values in the range [1,FD_SETSIZE[.
+/// Since fd 0 is reserved, it returns values in the range [1,MAX_FD[.
 ///
 /// @param s Socket
 /// @return New fd or -1
@@ -178,15 +180,14 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
 
-    // setsocketopts(fd);
     struct linger opt;
     opt.l_onoff  = 0; // SO_DONTLINGER
     opt.l_linger = 0; // Do not care
@@ -199,7 +200,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo(fmt::format("Connecting to {}:{}", ip2str(ip), port));
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
@@ -228,7 +229,9 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 void do_close(int32 fd)
 {
     TracyZoneScoped;
-    sFD_CLR(fd, &readfds);    // this needs to be done before closing the socket
+#ifdef __APPLE__
+    sFD_CLR(fd, &readfds); // this needs to be done before closing the socket
+#endif
     sShutdown(fd, SHUT_RDWR); // Disallow further reads/writes
     sClose(fd);               // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
 }
@@ -254,14 +257,14 @@ bool _vsocket_init()
 #elif defined(HAVE_SETRLIMIT) && !defined(CYGWIN)
     // NOTE: getrlimit and setrlimit have bogus behaviour in cygwin.
     //       "Number of fds is virtually unlimited in cygwin" (sys/param.h)
-    { // set socket limit to FD_SETSIZE
+    { // set socket limit to MAX_FD
         struct rlimit rlp;
         if (0 == getrlimit(RLIMIT_NOFILE, &rlp))
         {
-            rlp.rlim_cur = FD_SETSIZE;
+            rlp.rlim_cur = MAX_FD;
             if (0 != setrlimit(RLIMIT_NOFILE, &rlp))
             { // failed, try setting the maximum too (permission to change system limits is required)
-                rlp.rlim_max = FD_SETSIZE;
+                rlp.rlim_max = MAX_FD;
                 if (0 != setrlimit(RLIMIT_NOFILE, &rlp))
                 { // failed
                     // set to maximum allowed
@@ -270,7 +273,7 @@ bool _vsocket_init()
                     setrlimit(RLIMIT_NOFILE, &rlp);
                     // report limit
                     getrlimit(RLIMIT_NOFILE, &rlp);
-                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).", FD_SETSIZE, (int)rlp.rlim_cur);
+                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).", MAX_FD, (int)rlp.rlim_cur);
                 }
             }
         }
@@ -295,7 +298,7 @@ std::string ip2str(uint32 ip)
     uint32 reversed_ip = htonl(ip);
     char   address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-    return std::string(address);
+    return fmt::format("{}", address);
 }
 
 uint32 str2ip(const char* ip_str)
@@ -379,7 +382,7 @@ static int connect_check(uint32 ip)
     int result = connect_check_(ip);
     if (access_debug)
     {
-        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s", CONVIP(ip), result ? "allowed." : "denied!");
+        ShowInfo(fmt::format("connect_check: Connection from {} {}", ip2str(ip), result ? "allowed." : "denied!"));
     }
     return result;
 }
@@ -403,10 +406,10 @@ static int connect_check_(uint32 ip)
             if (access_debug)
             {
                 ShowInfo(
-                    "connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
-                    CONVIP(ip),
-                    CONVIP(entry.ip),
-                    CONVIP(entry.mask));
+                    fmt::format("connect_check: Found match from allow list:{} IP:{} Mask:{}",
+                                ip2str(ip),
+                                ip2str(entry.ip),
+                                ip2str(entry.mask)));
             }
             is_allowip = 1;
             break;
@@ -420,10 +423,10 @@ static int connect_check_(uint32 ip)
             if (access_debug)
             {
                 ShowInfo(
-                    "connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
-                    CONVIP(ip),
-                    CONVIP(entry.ip),
-                    CONVIP(entry.mask));
+                    fmt::format("connect_check: Found match from deny list:{} IP:{} Mask:{}",
+                                ip2str(ip),
+                                ip2str(entry.ip),
+                                ip2str(entry.mask)));
             }
             is_denyip = 1;
             break;
@@ -491,7 +494,7 @@ static int connect_check_(uint32 ip)
                 if (hist->count++ >= connect_count)
                 { // to many attempts detected
                     hist->ddos = 1;
-                    ShowWarning("connect_check: too many connection attempts detected from %d.%d.%d.%d!", CONVIP(ip));
+                    ShowWarning(fmt::format("connect_check: too many connection attempts detected from {}!", ip2str(ip)));
                     return (connect_ok == 2 ? 1 : 0);
                 }
                 return connect_ok;
@@ -534,7 +537,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
             if ((!hist->ddos && (tick - hist->tick) > connect_interval * 3) || (hist->ddos && (tick - hist->tick) > connect_lockout))
             { // Remove connection history
                 prev_hist->next = hist->next;
-                delete hist;
+                destroy(hist);
                 hist = prev_hist->next;
                 clear++;
             }
@@ -606,7 +609,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 
     if (access_debug)
     {
-        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(mask));
+        ShowInfo(fmt::format("access_ipmask: Loaded IP:{} mask:{}", ip2str(ip), ip2str(mask)));
     }
     acc->ip   = ip;
     acc->mask = mask;
@@ -714,7 +717,7 @@ ParseFunc default_func_parse = null_parse;
 bool session_isValid(int fd)
 {
     TracyZoneScoped;
-    return (fd > 0 && fd < FD_SETSIZE && sessions[fd] != nullptr);
+    return (fd > 0 && fd < MAX_FD && sessions[fd] != nullptr);
 }
 bool session_isActive(int fd)
 {
@@ -739,8 +742,8 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
     TracyZoneScoped;
-    int fd;
-    // struct sockaddr_in client_address;
+
+    int       fd;
     socklen_t len;
 
     len = sizeof(client_address);
@@ -757,16 +760,13 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
-
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
 
     if (ip_rules && !connect_check(ntohl(client_address.sin_addr.s_addr)))
     {
@@ -778,11 +778,9 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     {
         fd_max = fd + 1;
     }
+#ifdef __APPLE__
     sFD_SET(fd, &readfds);
-
-    // create_session(fd, recv_to_fifo, send_from_fifo, default_func_parse);
-    // sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
-
+#endif
     return fd;
 }
 
@@ -809,20 +807,30 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
         return -1;
     }
 
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
 
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
-
     server_address.sin_family = AF_INET;
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
     server_address.sin_port = htons(port);
+
+    // https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux
+    // Avoid hangs in TIME_WAIT state of TCP
+#ifdef WIN32
+    // Windows doesn't seem to have this problem, but apparently this would be the right way to explicitly mimic SO_REUSEADDR unix's behavior.
+    setsockopt(sock_arr[fd], SOL_SOCKET, SO_DONTLINGER, "\x00\x00\x00\x00", 4);
+#else
+    int enable = 1;
+    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    {
+        ShowError("setsockopt SO_REUSEADDR failed!");
+    }
+#endif
 
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
@@ -1060,7 +1068,7 @@ void socket_final_tcp()
         while (hist)
         {
             next_hist = hist->next;
-            delete hist;
+            destroy(hist);
             hist = next_hist;
         }
     }
@@ -1110,9 +1118,9 @@ void set_eof(int32 fd)
 int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc func_parse)
 {
     TracyZoneScoped;
-#ifdef _DEBUG
-    ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
-#endif // _DEBUG
+
+    DebugSockets(fmt::format("create_session fd: {}", fd).c_str());
+
     sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
     sessions[fd]->rdata.reserve(RFIFO_SIZE);
@@ -1127,11 +1135,9 @@ int delete_session(int fd)
 {
     TracyZoneScoped;
 
-#ifdef _DEBUG
-    ShowDebug(fmt::format("delete_session fd: {}", fd).c_str());
-#endif // _DEBUG
+    DebugSockets(fmt::format("delete_session fd: {}", fd).c_str());
 
-    if (fd <= 0 || fd >= FD_SETSIZE)
+    if (fd <= 0 || fd >= MAX_FD)
     {
         return -1;
     }
@@ -1153,11 +1159,7 @@ int delete_session(int fd)
 
     fd_max = std::distance(result, sessions.rend());
 
-#ifdef _DEBUG
-    ShowDebug(fmt::format("Resizing fd_max from {} to {}.", old_fd_max, fd_max).c_str());
-#else
-    std::ignore = old_fd_max;
-#endif // _DEBUG
+    DebugSockets(fmt::format("Resizing fd_max from {} to {}.", old_fd_max, fd_max).c_str());
 
     return 0;
 }
@@ -1201,10 +1203,10 @@ int32 makeBind_udp(uint32 ip, uint16 port)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
@@ -1253,7 +1255,6 @@ void socket_final_udp()
     {
         return;
     }
-    // do_close_udp(listen_fd);
 }
 
 int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr* from, socklen_t* addrlen)

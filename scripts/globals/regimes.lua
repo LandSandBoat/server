@@ -930,13 +930,19 @@ local regimeInfo =
 
 local function getPageByRegimeId(regimeType, zoneId, regimeId)
     local info = regimeInfo[regimeType]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.zone[zoneId]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.page
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     for _, v in pairs(info) do
         if v[8] == regimeId then
@@ -949,10 +955,14 @@ end
 
 local function getPageByNum(regimeType, zoneId, pageNum)
     local info = regimeInfo[regimeType]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.zone[zoneId]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.page
     return info[pageNum]
@@ -963,9 +973,11 @@ local function getUpdateOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].updateOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 
@@ -974,9 +986,11 @@ local function getFinishOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].finishOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 
@@ -1014,7 +1028,7 @@ local function addGovProwessBonusEffect(player)
 
     -- pick one and apply
     if #availableProwesses > 0 then
-        local p = availableProwesses[math.random(#availableProwesses)]
+        local p = availableProwesses[math.random(1, #availableProwesses)]
         local e = player:getStatusEffect(p.effect)
 
         -- get current power
@@ -1054,27 +1068,36 @@ end
 xi.regime.bookOnTrigger = function(player, regimeType)
     local cipher = 0 -- Trust Alter Ego Extravaganza
     local active = xi.extravaganza.campaignActive()
-    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
+
+    if
+        active == xi.extravaganza.campaign.SPRING_FALL or
+        active == xi.extravaganza.campaign.BOTH
+    then
         cipher = 3
     end
 
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
-     -- checks if hunt is active, if so prompts player to cancel
+    -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.main.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.main.ENABLE_GROUNDS_TOMES == 1) then
+    elseif
+        (regimeType == xi.regime.type.FIELDS and xi.settings.main.ENABLE_FIELD_MANUALS == 1) or
+        (regimeType == xi.regime.type.GROUNDS and xi.settings.main.ENABLE_GROUNDS_TOMES == 1)
+    then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
-        local pages = table.getn(info.page)
-        local arg2 = 0
-        local arg4 = 0
+        local pages = #info.page
+        local arg2  = 0
+        local arg4  = 0
+
         for i = 1, 10 do
             if i > pages then
                 arg2 = arg2 + 2^i
             end
         end
+
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
             arg4 = 1
         end
@@ -1090,7 +1113,7 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- check valid option
     local opts = getUpdateOpts(regimeType)
-    local opt = opts[option]
+    local opt  = opts[option]
 
     if not opt then
         return
@@ -1122,21 +1145,21 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 end
 
 xi.regime.bookOnEventFinish = function(player, option, regimeType)
-    local zoneId = player:getZoneID()
-    local msgOffset = zones[zoneId].text.REGIME_REGISTERED
-    local tabs = player:getCurrency("valor_point")
+    local zoneId       = player:getZoneID()
+    local msgOffset    = zones[zoneId].text.REGIME_REGISTERED
+    local tabs         = player:getCurrency("valor_point")
     local regimeRepeat = bit.band(option, 0x80000000)
-    local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
+    local hasKI        = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
 
     if option == 7 then
-      xi.hunts.clearHuntVars(player)
+        xi.hunts.clearHuntVars(player)
     end
 
     -- check valid option
     local opts = getFinishOpts(regimeType)
-    local opt = opts[option]
+    local opt  = opts[option]
 
     if not opt then
         return
@@ -1156,7 +1179,13 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     end
 
     -- check player can eat
-    if opt.food and (player:hasStatusEffect(xi.effect.FOOD) or player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+    if
+        opt.food and
+        (
+            player:hasStatusEffect(xi.effect.FOOD) or
+            player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        )
+    then
         player:messageBasic(xi.msg.basic.IS_FULL)
         return
     end
@@ -1248,9 +1277,9 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['SHELL'] = function()
-                local mLvl = player:getMainLvl()
+                local mLvl  = player:getMainLvl()
                 local power = 0
-                local tier = 0
+                local tier  = 0
 
                 if mLvl < 37 then
                     power = 1055 -- Shell I   (27/256)
@@ -1357,20 +1386,31 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 end
 
 xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
-
     -- dead players, or players not on this training regime, get no credit
     -- also prevents error when this function is called onMobDeath from a mob not killed by a player
-    if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
+    if
+        not player or
+        player:getHP() == 0 or
+        player:getCharVar("[regime]id") ~= regimeId
+    then
         return
     end
 
     -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+    if
+        xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and
+        regimeType == xi.regime.type.FIELDS and
+        player:checkSoloPartyAlliance() == 2
+    then
         return
     end
 
     -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
+    if
+        xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and
+        regimeType == xi.regime.type.GROUNDS and
+        player:checkSoloPartyAlliance() == 2
+    then
         return
     end
 
@@ -1417,9 +1457,13 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- adjust reward down if regime is higher than server mob level cap
     -- example: if you have mobs capped at level 80, and the regime is level 100, you will only get 80% of the reward
-    if xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
+    if
+        xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and
+        page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX
+    then
         local avgCapLevel = (xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
+
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
 
@@ -1430,8 +1474,9 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         -- repeat clears bonus
         if player:hasStatusEffect(xi.effect.PROWESS) then
             -- increase reward based on number of clears. hard caps at 2x base reward.
-            local govClears = player:getStatusEffect(xi.effect.PROWESS):getPower()
+            local govClears  = player:getStatusEffect(xi.effect.PROWESS):getPower()
             local baseReward = reward
+
             reward = reward * (100 + (govClears * 4)) / 100
             reward = utils.clamp(reward, 0, baseReward * 2)
 
@@ -1447,14 +1492,18 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if xi.settings.main.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
+    if
+        xi.settings.main.REGIME_WAIT == 0 or
+        player:getCharVar("[regime]lastReward") < vanadielEpoch
+    then
         -- gil
         player:addGil(reward)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)
 
         -- tabs
         local tabs = math.floor(reward / 10) * xi.settings.main.TABS_RATE
-        tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
+        tabs       = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
+
         player:addCurrency("valor_point", tabs)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 

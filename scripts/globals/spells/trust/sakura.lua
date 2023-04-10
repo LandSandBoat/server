@@ -5,17 +5,17 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/trust")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
     local mlvl = mob:getMainLvl()
@@ -35,15 +35,15 @@ spell_object.onMobSpawn = function(mob)
     end
 
     mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.GEO_REGEN, tick_amount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

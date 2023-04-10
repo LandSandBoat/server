@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Josef
--- Standard Info Npc
 -----------------------------------
 local entity = {}
 

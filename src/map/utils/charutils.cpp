@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/sql.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <array>
 #include <chrono>
@@ -31,70 +32,69 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdio>
 #include <cstring>
 
-#include "../lua/luautils.h"
+#include "lua/luautils.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/item_state.h"
+#include "ai/ai_container.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/item_state.h"
 
-#include "../packets/char_abilities.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_equip.h"
-#include "../packets/char_health.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/char_jobs.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_skills.h"
-#include "../packets/char_stats.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/chat_message.h"
-#include "../packets/conquest_map.h"
-#include "../packets/delivery_box.h"
-#include "../packets/inventory_assign.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/inventory_modify.h"
-#include "../packets/key_items.h"
-#include "../packets/linkshell_equip.h"
-#include "../packets/menu_jobpoints.h"
-#include "../packets/menu_merit.h"
-#include "../packets/message_basic.h"
-#include "../packets/message_combat.h"
-#include "../packets/message_special.h"
-#include "../packets/message_standard.h"
-#include "../packets/monipulator1.h"
-#include "../packets/monipulator2.h"
-#include "../packets/quest_mission_log.h"
-#include "../packets/roe_sparkupdate.h"
-#include "../packets/server_ip.h"
-#include "../packets/timer_bar_util.h"
+#include "packets/char_abilities.h"
+#include "packets/char_appearance.h"
+#include "packets/char_equip.h"
+#include "packets/char_health.h"
+#include "packets/char_job_extra.h"
+#include "packets/char_jobs.h"
+#include "packets/char_recast.h"
+#include "packets/char_skills.h"
+#include "packets/char_stats.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/chat_message.h"
+#include "packets/conquest_map.h"
+#include "packets/delivery_box.h"
+#include "packets/inventory_assign.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/inventory_modify.h"
+#include "packets/key_items.h"
+#include "packets/linkshell_equip.h"
+#include "packets/menu_jobpoints.h"
+#include "packets/menu_merit.h"
+#include "packets/message_basic.h"
+#include "packets/message_combat.h"
+#include "packets/message_special.h"
+#include "packets/message_standard.h"
+#include "packets/monipulator1.h"
+#include "packets/monipulator2.h"
+#include "packets/quest_mission_log.h"
+#include "packets/roe_sparkupdate.h"
+#include "packets/server_ip.h"
+#include "packets/timer_bar_util.h"
 
-#include "../ability.h"
-#include "../alliance.h"
-#include "../conquest_system.h"
-#include "../grades.h"
-#include "../item_container.h"
-#include "../latent_effect_container.h"
-#include "../linkshell.h"
-#include "../map.h"
-#include "../message.h"
-#include "../mob_modifier.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trait.h"
-#include "../treasure_pool.h"
-#include "../unitychat.h"
-#include "../universal_container.h"
-#include "../vana_time.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "alliance.h"
+#include "conquest_system.h"
+#include "grades.h"
+#include "item_container.h"
+#include "latent_effect_container.h"
+#include "linkshell.h"
+#include "map.h"
+#include "message.h"
+#include "mob_modifier.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trait.h"
+#include "treasure_pool.h"
+#include "unitychat.h"
+#include "universal_container.h"
+#include "weapon_skill.h"
 
-#include "../entities/automatonentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/petentity.h"
+#include "entities/automatonentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/petentity.h"
 
 #include "battleutils.h"
 #include "blueutils.h"
@@ -198,8 +198,6 @@ namespace charutils
         raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
                    (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                    (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
-
-        // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
 
         // Calculation on Main Job
         grade = grade::GetJobGrade(mjob, 0);
@@ -376,7 +374,7 @@ namespace charutils
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             PChar->targid = 0x400;
-            PChar->SetName(sql->GetData(0));
+            PChar->SetName(sql->GetStringData(0));
 
             PChar->loc.destination = (uint16)sql->GetIntData(1);
             PChar->loc.prevzone    = (uint16)sql->GetIntData(2);
@@ -665,7 +663,7 @@ namespace charutils
         }
 
         fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
-                   "pet_id, pet_type, pet_hp, pet_mp "
+                   "pet_id, pet_type, pet_hp, pet_mp, pet_level "
                    "FROM char_stats WHERE charid = %u;";
 
         ret          = sql->Query(fmtQuery, PChar->id);
@@ -681,7 +679,7 @@ namespace charutils
             HP = sql->GetIntData(3);
             MP = sql->GetIntData(4);
 
-            PChar->profile.mhflag = (uint8)sql->GetIntData(5);
+            PChar->profile.mhflag = (uint16)sql->GetIntData(5);
             PChar->profile.title  = (uint16)sql->GetIntData(6);
 
             int8* bazaarMessage = sql->GetData(7);
@@ -700,11 +698,17 @@ namespace charutils
             int16 petHP = sql->GetUIntData(11);
             if (petHP)
             {
-                PChar->petZoningInfo.petHP      = petHP;
-                PChar->petZoningInfo.petID      = sql->GetUIntData(9);
-                PChar->petZoningInfo.petMP      = sql->GetIntData(12);
-                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(sql->GetUIntData(10));
-                PChar->petZoningInfo.respawnPet = true;
+                PChar->petZoningInfo.petHP        = petHP;
+                PChar->petZoningInfo.petID        = sql->GetUIntData(9);
+                PChar->petZoningInfo.petMP        = sql->GetIntData(12);
+                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(10));
+                PChar->petZoningInfo.petLevel     = sql->GetUIntData(13);
+                PChar->petZoningInfo.respawnPet   = true;
+                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jugpet-spawn-time");
+                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jugpet-duration-seconds");
+
+                // clear the charvars used for jug state
+                PChar->clearCharVarsWithPrefix("jugpet-");
             }
         }
 
@@ -771,8 +775,8 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux, "
-                   "waypoints "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
+                   "abyssea_conflux, waypoints, eschan_portals, claimed_deeds "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -808,6 +812,16 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(11, &buf, &length);
             memcpy(&PChar->teleport.waypoints, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.waypoints) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(12, &buf, &length);
+            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.eschanPortal) ? sizeof(PChar->teleport.eschanPortal) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(13, &buf, &length);
+            memcpy(&PChar->m_claimedDeeds, buf, (length > sizeof(PChar->m_claimedDeeds) ? sizeof(PChar->m_claimedDeeds) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -846,12 +860,14 @@ namespace charutils
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
-        blueutils::LoadSetSpells(PChar);
-        puppetutils::LoadAutomaton(PChar);
         BuildingCharSkillsTable(PChar);
         BuildingCharAbilityTable(PChar);
         BuildingCharTraitsTable(PChar);
         jobpointutils::RefreshGiftMods(PChar);
+
+        // Order matters as these use merits and JP gifts
+        blueutils::LoadSetSpells(PChar);
+        puppetutils::LoadAutomaton(PChar);
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
@@ -875,7 +891,7 @@ namespace charutils
         std::string enabledContent = "\"\"";
 
         // Compile a string of all enabled expansions
-        for (auto&& expan : { "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA" })
+        for (auto&& expan : { "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV" })
         {
             if (luautils::IsContentEnabled(expan))
             {
@@ -961,14 +977,14 @@ namespace charutils
                         {
                             static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                         }
-                        int8 EncodedString[LinkshellStringLength];
-                        EncodeStringLinkshell(sql->GetData(5), EncodedString);
+                        char EncodedString[LinkshellStringLength] = {};
+                        EncodeStringLinkshell(sql->GetStringData(5).c_str(), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
                     else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                     {
-                        int8 EncodedString[SignatureStringLength];
-                        EncodeStringSignature(sql->GetData(5), EncodedString);
+                        char EncodedString[SignatureStringLength] = {};
+                        EncodeStringSignature(sql->GetStringData(5).c_str(), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
 
@@ -1281,9 +1297,10 @@ namespace charutils
         if (PItem->isType(ITEM_CURRENCY))
         {
             UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
-            delete PItem;
+            destroy(PItem);
             return 0;
         }
+
         if (PItem->getFlag() & ITEM_FLAG_RARE)
         {
             if (HasItem(PChar, PItem->getID()))
@@ -1292,7 +1309,7 @@ namespace charutils
                 {
                     PChar->pushPacket(new CMessageStandardPacket(PChar, PItem->getID(), 0, MsgStd::ItemEx));
                 }
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
         }
@@ -1301,8 +1318,6 @@ namespace charutils
 
         if (SlotID != ERROR_SLOTID)
         {
-            // uint8 charges = (PItem->isType(ITEM_USABLE) ? ((CItemUsable*)PItem)->getCurrentCharges() : 0);
-
             const char* Query = "INSERT INTO char_inventory("
                                 "charid,"
                                 "location,"
@@ -1313,14 +1328,14 @@ namespace charutils
                                 "extra) "
                                 "VALUES(%u,%u,%u,%u,%u,'%s','%s')";
 
-            int8 signature[DecodeStringLength];
+            char signature[DecodeStringLength];
             if (PItem->isType(ITEM_LINKSHELL))
             {
-                DecodeStringLinkshell((int8*)PItem->getSignature(), signature);
+                DecodeStringLinkshell(PItem->getSignature().c_str(), signature);
             }
             else
             {
-                DecodeStringSignature((int8*)PItem->getSignature(), signature);
+                DecodeStringSignature(PItem->getSignature().c_str(), signature);
             }
 
             char extra[sizeof(PItem->m_extra) * 2 + 1];
@@ -1330,7 +1345,7 @@ namespace charutils
             {
                 ShowError("charplugin::AddItem: Cannot insert item to database");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
             PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, SlotID));
@@ -1339,7 +1354,7 @@ namespace charutils
         else
         {
             ShowDebug("charplugin::AddItem: Location %i is full", LocationID);
-            delete PItem;
+            destroy(PItem);
         }
         return SlotID;
     }
@@ -1352,6 +1367,10 @@ namespace charutils
 
     bool HasItem(CCharEntity* PChar, uint16 ItemID)
     {
+        if (ItemID == 0)
+        {
+            return false;
+        }
         for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
         {
             if (PChar->getStorage(LocID)->SearchItem(ItemID) != ERROR_SLOTID)
@@ -1533,7 +1552,7 @@ namespace charutils
                     }
                 }
                 luautils::OnItemDrop(PChar, PItem);
-                delete PItem;
+                destroy(PItem);
             }
         }
         return ItemID;
@@ -1544,7 +1563,7 @@ namespace charutils
     {
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItem(ItemID)->getName(), ItemID, quantity);
+            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -1791,6 +1810,8 @@ namespace charutils
                 }
                 break;
             }
+
+            luautils::OnItemUnequip(PChar, PItem);
 
             if (update)
             {
@@ -2106,8 +2127,23 @@ namespace charutils
 
     bool hasValidStyle(CCharEntity* PChar, CItemEquipment* PItem, CItemEquipment* AItem)
     {
-        return (PItem != nullptr && AItem != nullptr && (((CItemWeapon*)AItem)->getSkillType() == ((CItemWeapon*)PItem)->getSkillType()) &&
-                HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem));
+        if (AItem && PItem)
+        {
+            // Shield special case
+            if (AItem->IsShield() && PItem->IsShield())
+            {
+                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+            }
+
+            CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PItem);
+            CItemWeapon* AWeapon = dynamic_cast<CItemWeapon*>(AItem);
+
+            if (PWeapon && AWeapon && PWeapon->getSkillType() == AWeapon->getSkillType())
+            {
+                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+            }
+        }
+        return false;
     }
 
     void SetStyleLock(CCharEntity* PChar, bool isStyleLocked)
@@ -2136,15 +2172,19 @@ namespace charutils
         PChar->setStyleLocked(isStyleLocked);
     }
 
-    void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem)
+    void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem)
     {
         if (!PChar->getStyleLocked())
         {
             return;
         }
 
-        auto* appearance      = (CItemEquipment*)itemutils::GetItem(PChar->styleItems[equipSlotID]);
-        auto  appearanceModel = (appearance == nullptr) ? 0 : appearance->getModelId();
+        CItemEquipment* appearance      = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(PChar->styleItems[equipSlotID]));
+        uint16          appearanceModel = 0;
+        if (appearance)
+        {
+            appearanceModel = appearance->getModelId();
+        }
 
         switch (equipSlotID)
         {
@@ -2164,19 +2204,23 @@ namespace charutils
                 }
                 else
                 {
-                    switch (PItem->getSkillType())
+                    CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PItem);
+                    if (PWeapon)
                     {
-                        case SKILL_HAND_TO_HAND:
-                            PChar->mainlook.sub = appearanceModel + 0x1000;
-                            break;
-                        case SKILL_GREAT_SWORD:
-                        case SKILL_GREAT_AXE:
-                        case SKILL_SCYTHE:
-                        case SKILL_POLEARM:
-                        case SKILL_GREAT_KATANA:
-                        case SKILL_STAFF:
-                            PChar->mainlook.sub = PChar->look.sub;
-                            break;
+                        switch (PWeapon->getSkillType())
+                        {
+                            case SKILL_HAND_TO_HAND:
+                                PChar->mainlook.sub = appearanceModel + 0x1000;
+                                break;
+                            case SKILL_GREAT_SWORD:
+                            case SKILL_GREAT_AXE:
+                            case SKILL_SCYTHE:
+                            case SKILL_POLEARM:
+                            case SKILL_GREAT_KATANA:
+                            case SKILL_STAFF:
+                                PChar->mainlook.sub = PChar->look.sub;
+                                break;
+                        }
                     }
                 }
                 break;
@@ -2191,8 +2235,17 @@ namespace charutils
                 }
                 break;
             case SLOT_RANGED:
-            case SLOT_AMMO:
-                // Appears as though these aren't implemented by SE.
+                if (hasValidStyle(PChar, PItem, appearance))
+                {
+                    PChar->mainlook.ranged = appearanceModel;
+                }
+                else
+                {
+                    PChar->mainlook.ranged = PChar->look.ranged;
+                }
+
+                break;
+            default:
                 break;
         }
     }
@@ -2204,9 +2257,14 @@ namespace charutils
             return;
         }
 
-        auto  itemID          = PChar->styleItems[equipSlotID];
-        auto* appearance      = (CItemEquipment*)itemutils::GetItem(itemID);
-        auto  appearanceModel = (appearance == nullptr || !HasItem(PChar, itemID)) ? 0 : appearance->getModelId();
+        uint16          itemID          = PChar->styleItems[equipSlotID];
+        CItemEquipment* appearance      = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(itemID));
+        uint16          appearanceModel = 0;
+
+        if (appearance && HasItem(PChar, itemID))
+        {
+            appearanceModel = appearance->getModelId();
+        }
 
         if (!canEquipItemOnAnyJob(PChar, appearance))
         {
@@ -2240,6 +2298,11 @@ namespace charutils
         auto*       RecycleBin     = PChar->getStorage(LOC_RECYCLEBIN);
         auto*       OtherContainer = PChar->getStorage(container);
 
+        if (PItem == nullptr)
+        {
+            return;
+        }
+
         // Try and insert
         uint8 NewSlotID = PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(PItem);
         if (NewSlotID != ERROR_SLOTID)
@@ -2252,6 +2315,7 @@ namespace charutils
                 // Send update packets
                 PChar->pushPacket(new CInventoryItemPacket(nullptr, container, slotID));
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_RECYCLEBIN, NewSlotID));
+                PChar->pushPacket(new CMessageStandardPacket(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway));
             }
             else
             {
@@ -2296,6 +2360,7 @@ namespace charutils
                 CItem* PUpdatedItem = RecycleBin->GetItem(i);
                 PChar->pushPacket(new CInventoryItemPacket(PUpdatedItem, LOC_RECYCLEBIN, i));
             }
+            PChar->pushPacket(new CMessageStandardPacket(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway));
         }
         PChar->pushPacket(new CInventoryFinishPacket());
     }
@@ -2512,6 +2577,11 @@ namespace charutils
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
             BuildingCharWeaponSkills(PChar);
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+        }
+
+        if (PItem != nullptr)
+        {
+            luautils::OnItemEquip(PChar, PItem);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
@@ -3485,7 +3555,7 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    int32 hasTrait(CCharEntity* PChar, uint8 TraitID)
+    int32 hasTrait(CCharEntity* PChar, uint16 TraitID)
     {
         if (PChar->objtype != TYPE_PC)
         {
@@ -3495,7 +3565,7 @@ namespace charutils
         return hasBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
     }
 
-    int32 addTrait(CCharEntity* PChar, uint8 TraitID)
+    int32 addTrait(CCharEntity* PChar, uint16 TraitID)
     {
         if (PChar->objtype != TYPE_PC)
         {
@@ -3505,7 +3575,7 @@ namespace charutils
         return addBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
     }
 
-    int32 delTrait(CCharEntity* PChar, uint8 TraitID)
+    int32 delTrait(CCharEntity* PChar, uint16 TraitID)
     {
         if (PChar->objtype != TYPE_PC)
         {
@@ -4349,8 +4419,6 @@ namespace charutils
 
         capacityPoints = (uint32)(capacityPoints * settings::get<float>("map.EXP_RATE"));
 
-        // uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
-
         if (capacityPoints > 0)
         {
             // Capacity Chains start at lv100 mobs
@@ -4629,7 +4697,7 @@ namespace charutils
                 PChar->jobs.exp[PChar->GetMJob()] = GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1;
                 if (PChar->PParty && PChar->PParty->GetSyncTarget() == PChar)
                 {
-                    PChar->PParty->SetSyncTarget(nullptr, 556);
+                    PChar->PParty->SetSyncTarget("", 556);
                 }
             }
             else
@@ -5045,11 +5113,16 @@ namespace charutils
 
         const char* Query = "UPDATE char_stats "
                             "SET hp = %u, mp = %u, nameflags = %u, mhflag = %u, mjob = %u, sjob = %u, "
-                            "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u "
+                            "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u, pet_level = %u "
                             "WHERE charid = %u;";
 
         sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
-                   PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->id);
+                   PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->petZoningInfo.petLevel, PChar->id);
+
+        // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
+        // we use charvars for jug specific things
+        PChar->setCharVar("jugpet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
+        PChar->setCharVar("jugpet-duration-seconds", PChar->petZoningInfo.jugDuration);
     }
 
     /************************************************************************
@@ -5461,6 +5534,14 @@ namespace charutils
                 sql->Query(query, buf, PChar->id);
                 return;
             }
+            case TELEPORT_TYPE::ESCHAN_PORTAL:
+            {
+                char buf[sizeof(PChar->teleport.eschanPortal) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.eschanPortal, sizeof(PChar->teleport.eschanPortal));
+                const char* query = "UPDATE char_unlocks SET eschan_portals = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
             default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
@@ -5637,18 +5718,33 @@ namespace charutils
         BuildingCharWeaponSkills(PChar);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Opens the characters send box                                        *
-     *                                                                       *
-     ************************************************************************/
-
-    void OpenSendBox(CCharEntity* PChar)
+    void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype)
     {
         PChar->UContainer->Clean();
-        PChar->UContainer->SetType(UCONTAINER_DELIVERYBOX);
+        PChar->UContainer->SetType(UCONTAINER_SEND_DELIVERYBOX);
+        PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 1));
+    }
 
-        PChar->pushPacket(new CDeliveryBoxPacket(0x0D, 2, 0, 0x01));
+    void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype)
+    {
+        PChar->UContainer->Clean();
+        PChar->UContainer->SetType(UCONTAINER_RECV_DELIVERYBOX);
+        PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 1));
+    }
+
+    bool isSendBoxOpen(CCharEntity* PChar)
+    {
+        return PChar->UContainer->GetType() == UCONTAINER_SEND_DELIVERYBOX;
+    }
+
+    bool isRecvBoxOpen(CCharEntity* PChar)
+    {
+        return PChar->UContainer->GetType() == UCONTAINER_RECV_DELIVERYBOX;
+    }
+
+    bool isAnyDeliveryBoxOpen(CCharEntity* PChar)
+    {
+        return isSendBoxOpen(PChar) || isRecvBoxOpen(PChar);
     }
 
     bool CheckAbilityAddtype(CCharEntity* PChar, CAbility* PAbility)
@@ -5934,6 +6030,7 @@ namespace charutils
             if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
             {
                 PChar->PParty->DisbandParty();
+                destroy(PChar->PParty);
             }
         }
     }
@@ -6058,8 +6155,10 @@ namespace charutils
 
         if (type == 2)
         {
-            sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;", (uint32)ipp, (uint32)(ipp >> 32),
-                       PChar->id);
+            auto ip   = (uint32)ipp;
+            auto port = (uint32)(ipp >> 32);
+            sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;",
+                       ip, port, PChar->id);
 
             const char* Query = "UPDATE chars "
                                 "SET "
@@ -6080,6 +6179,15 @@ namespace charutils
         else
         {
             SaveCharPosition(PChar);
+        }
+
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
         }
 
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
@@ -6616,26 +6724,23 @@ namespace charutils
             return false;
         }
 
-        if (entity->targid < 0x400 || entity->targid >= 0x800)
+        if (entity->objtype == TYPE_MOB)
         {
-            if (entity->objtype == TYPE_MOB)
-            {
-                spawnlist = &PChar->SpawnMOBList;
-            }
-            else if (entity->objtype == TYPE_NPC)
-            {
-                spawnlist = &PChar->SpawnNPCList;
-            }
+            spawnlist = &PChar->SpawnMOBList;
         }
-        else if (entity->targid < 0x700)
+        else if (entity->objtype == TYPE_NPC)
+        {
+            spawnlist = &PChar->SpawnNPCList;
+        }
+        else if (entity->objtype == TYPE_PC)
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->targid < 0x780)
+        else if (entity->objtype == TYPE_PET)
         {
             spawnlist = &PChar->SpawnPETList;
         }
-        else if (entity->targid < 0x800)
+        else if (entity->objtype == TYPE_TRUST)
         {
             spawnlist = &PChar->SpawnTRUSTList;
         }

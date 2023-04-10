@@ -11,17 +11,17 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
-    if (caster:getID() ~= target:getID()) then
+spellObject.onMagicCastingCheck = function(caster, target, spell)
+    if caster:getID() ~= target:getID() then
         return xi.msg.basic.CANNOT_PERFORM_TARG
     else
         return 0
     end
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -30,36 +30,36 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 10
-    if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         power = getCurePowerOld(caster)
         divisor = 1
         constant = -10
-        if (power > 100) then
+        if power > 100 then
                 divisor = 57
                 constant = 29.125
-        elseif (power > 60) then
+        elseif power > 60 then
                 divisor = 2
                 constant = 5
         end
     else
         power = getCurePower(caster)
-        if (power < 20) then
+        if power < 20 then
             divisor = 4
             constant = 10
             basepower = 0
-        elseif (power < 40) then
+        elseif power < 40 then
             divisor =  1.3333
             constant = 15
             basepower = 20
-        elseif (power < 125) then
+        elseif power < 125 then
             divisor = 8.5
             constant = 30
             basepower = 40
-        elseif (power < 200) then
+        elseif power < 200 then
             divisor = 15
             constant = 40
             basepower = 125
-        elseif (power < 600) then
+        elseif power < 600 then
             divisor = 20
             constant = 40
             basepower = 200
@@ -70,17 +70,18 @@ spell_object.onSpellCast = function(caster, target, spell)
         end
     end
 
-    if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         basecure = getBaseCureOld(power, divisor, constant)
     else
         basecure = getBaseCure(power, divisor, constant, basepower)
     end
 
     --Apply Afflatus Misery Bonus to Final Result
-    if (caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
-        if (caster:getID() == target:getID()) then -- Let's use a local var to hold the power of Misery so the boost is applied to all targets,
+    if caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) then
+        if caster:getID() == target:getID() then -- Let's use a local var to hold the power of Misery so the boost is applied to all targets,
             caster:setLocalVar("Misery_Power", caster:getMod(xi.mod.AFFLATUS_MISERY))
         end
+
         local misery = caster:getLocalVar("Misery_Power")
         --THIS IS LARELY SEMI-EDUCATED GUESSWORK. THERE IS NOT A
         --LOT OF CONCRETE INFO OUT THERE ON CURA THAT I COULD FIND
@@ -94,7 +95,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
         basecure = basecure + misery
 
-        if (basecure > 175) then
+        if basecure > 175 then
             basecure = 175
         end
 
@@ -103,7 +104,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     final = getCureFinal(caster, spell, basecure, minCure, false)
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
     --Applying server mods
     final = final * xi.settings.main.CURE_POWER
@@ -114,14 +115,18 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     --Enmity for Cura is fixed, so its CE/VE is set in the SQL and not calculated with updateEnmityFromCure
 
-    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
+    if target:getID() == spell:getPrimaryTargetID() then
+        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    else
+        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
-    if (mpBonusPercent > 0) then
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 
     return final
 end
 
-return spell_object
+return spellObject

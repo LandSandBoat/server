@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local regionOwner = GetRegionOwner(xi.region.MOVALPOLOS)
 
-    if (regionOwner ~= xi.nation.WINDURST) then
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.PRESTAPIQ_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.PRESTAPIQ_OPEN_DIALOG)

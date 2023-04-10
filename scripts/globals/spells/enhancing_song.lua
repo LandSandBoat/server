@@ -157,6 +157,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
                 power = math.floor(power + (singingLvl - skillCap) / divisor)
             end
         end
+
         -- NOTE: Ballad, Hymnus, Mazurka have constant base power.
     end
 
@@ -179,7 +180,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
     end
 
     -- Additional Potency from Status Effects.
-    if soulVoicePower == true then -- Soul Voice/Macarato affects Power.
+    if soulVoicePower then -- Soul Voice/Macarato affects Power.
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = math.floor(power * 2)
         elseif caster:hasStatusEffect(xi.effect.MARCATO) then
@@ -218,7 +219,7 @@ xi.spells.enhancing.calculateSongDuration = function(caster, target, spell, inst
     end
 
     -- Additional duration from Status Effects.
-    if soulVoicePower == false then -- Soul Voice/Macarato doesn't affect potency, so it affects Duration.
+    if not soulVoicePower then -- Soul Voice/Macarato doesn't affect potency, so it affects Duration.
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             duration = math.floor(duration * 2)
         elseif caster:hasStatusEffect(xi.effect.MARCATO) then

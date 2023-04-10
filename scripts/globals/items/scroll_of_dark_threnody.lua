@@ -3,14 +3,14 @@
 -- Scroll of Dark Threnody
 -- Teaches the song Dark Threnody
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(461)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(461)
 end
 
-return item_object
+return itemObject

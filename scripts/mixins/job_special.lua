@@ -242,11 +242,18 @@ local abilitiesReady = function(mob)
     local now = os.time()
     local readyTime = mob:getLocalVar("[jobSpecial]readyInitial")
 
-    if readyTime > 0 and now > readyTime and now > mob:getLocalVar("[jobSpecial]cooldown") then
+    if
+        readyTime > 0 and
+        now > readyTime and
+        now > mob:getLocalVar("[jobSpecial]cooldown")
+    then
         local numAbilities = mob:getLocalVar("[jobSpecial]numAbilities")
 
         for i = 1, numAbilities do
-            if now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)  then
+            if
+                now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and
+                mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)
+            then
                 table.insert(abilities, i)
             end
         end
@@ -260,9 +267,9 @@ end
 ---------------------------------------------------------------- --]]
 
 g_mixins.job_special = function(jobSpecialMob)
-
-    -- at spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
+    -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
+
     jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         local ability = nil
         local mJob = mob:getMainJob()

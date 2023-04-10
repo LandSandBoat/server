@@ -9,13 +9,13 @@
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
 
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, 25))
@@ -23,4 +23,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

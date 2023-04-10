@@ -7,17 +7,17 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() == 4651 and mob:getHPP() <= 50) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getPool() == 4651 and mob:getHPP() <= 50 then
         return 0
     else
         return 1
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local maxHeal = target:getMaxHP() - target:getHP()
     target:eraseAllStatusEffect()
     target:addHP(maxHeal)
@@ -27,4 +27,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return maxHeal
 end
 
-return mobskill_object
+return mobskillObject

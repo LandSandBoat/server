@@ -6,19 +6,19 @@ local ID = require("scripts/zones/Cloister_of_Flames/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_COMPLETED) and 1 or 0
@@ -28,22 +28,24 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if not player:hasSpell(298) then
             player:addSpell(298)
             player:messageSpecial(ID.text.IFRIT_UNLOCKED, 0, 0, 0)
         end
+
         if not player:hasItem(4181) then
             player:addItem(4181) -- Scroll of instant warp
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
         end
+
         player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
     end
 end
 
-return battlefield_object
+return battlefieldObject

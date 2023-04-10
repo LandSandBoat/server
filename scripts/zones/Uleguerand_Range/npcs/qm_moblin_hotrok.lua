@@ -17,24 +17,34 @@ entity.onTrade = function(player, npc, trade)
     local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     -- Taking a logical guess what criteria displays what message.
-    if overTheHillsAndFarAway == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1729) then -- 1729 = Moblin Hotrok
+    if
+        overTheHillsAndFarAway == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 1729)
+    then
+        -- 1729 = Moblin Hotrok
         if player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 14 then
-            if player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE) then
+            if
+                player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or
+                player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE)
+            then
                 player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 0, 1, 0)
-                --                                                                       ^ 1 = Remembers you and girl from Tavnazia and asks to TRADE dagger for map
+                --                                                                      ^ 1 = Remembers you and girl from Tavnazia and asks to TRADE dagger for map
             else
                 player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 1, 0)
-                --                                                                 ^ 1   ^ 1 = Remembers you and girl from Tavnazia and asks for the dagger
+                --                                                                ^ 1   ^ 1 = Remembers you and girl from Tavnazia and asks for the dagger
             end
         else
-            if player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE) then
+            if
+                player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or
+                player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE)
+            then
                 player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 1, 0, 0)
-                --                                                                    ^ 1 = Doesn't recognize you and asks to TRADE dagger for map
+                --                                                                   ^ 1 = Doesn't recognize you and asks to TRADE dagger for map
                 -- or
                 --                                                                          ^ 1 = Doesn't recognize you and asks to TRADE dagger for map
             else
                 player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 0, 0)
-                --                                                                 ^ 1 = Doesn't recognize you and asks for the dagger
+                --                                                                ^ 1 = Doesn't recognize you and asks for the dagger
             end
         end
     end
@@ -57,7 +67,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 10 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, { gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE }) then
+    if
+        csid == 10 and
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, { gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE })
+    then
         player:confirmTrade()
     end
 end

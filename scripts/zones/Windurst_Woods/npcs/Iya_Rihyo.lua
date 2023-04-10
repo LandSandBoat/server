@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Iya Rihyo
--- Working 100%
 -----------------------------------
 local entity = {}
 

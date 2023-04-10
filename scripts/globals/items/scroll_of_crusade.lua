@@ -3,14 +3,14 @@
 -- Scroll of Crusade
 -- Teaches the white magic Crusade
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(476)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(476)
 end
 
-return item_object
+return itemObject

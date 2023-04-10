@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Milchupain
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

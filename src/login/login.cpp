@@ -36,20 +36,38 @@
 #include <vector>
 
 #ifdef WIN32
+#include "../ext/wepoll/wepoll.h"
 #include <io.h>
 #define isatty _isatty
 #else
 #include <unistd.h>
+
+// MacOS has no epoll
+#ifdef __APPLE__
+#include <sys/ioctl.h>
+#else
+#include <sys/epoll.h>
+#include <sys/resource.h>
+#endif
+
+typedef int HANDLE;
+#endif
+
+#ifndef __APPLE__
+struct epoll_event events[MAX_FD] = {};
+HANDLE             epollHandle    = 0;
+
+struct epoll_event loginEpollEvent           = { EPOLLIN };
+struct epoll_event login_lobbydataEpollEvent = { EPOLLIN };
+struct epoll_event login_lobbyviewEpollEvent = { EPOLLIN };
 #endif
 
 #include "lobby.h"
 #include "login.h"
 #include "login_auth.h"
-#include "message_server.h"
+#include "login_conf.h"
 
-std::thread messageThread;
-
-std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
+std::unique_ptr<SqlConnection> sql;
 
 uint8 ver_lock   = 0;
 uint8 maint_mode = 0;
@@ -59,13 +77,47 @@ bool requestExit = false;
 int32 do_init(int32 argc, char** argv)
 {
     login_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_AUTH_IP").c_str(), settings::get<uint16>("network.LOGIN_AUTH_PORT"), connect_client_login);
-    ShowInfo("The login-server-auth is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_AUTH_PORT"));
+    ShowInfo(fmt::format("The login-server-auth is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_AUTH_PORT")));
 
     login_lobbydata_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_DATA_IP").c_str(), settings::get<uint16>("network.LOGIN_DATA_PORT"), connect_client_lobbydata);
-    ShowInfo("The login-server-lobbydata is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_DATA_PORT"));
+    ShowInfo(fmt::format("The login-server-lobbydata is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_DATA_PORT")));
 
     login_lobbyview_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_VIEW_IP").c_str(), settings::get<uint16>("network.LOGIN_VIEW_PORT"), connect_client_lobbyview);
-    ShowInfo("The login-server-lobbyview is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_VIEW_PORT"));
+    ShowInfo(fmt::format("The login-server-lobbyview is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_VIEW_PORT")));
+
+#ifndef __APPLE__
+    epollHandle = epoll_create1(0);
+
+    loginEpollEvent.data.fd           = login_fd;
+    login_lobbydataEpollEvent.data.fd = login_lobbydata_fd;
+    login_lobbyviewEpollEvent.data.fd = login_lobbyview_fd;
+#ifdef WIN32
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, sock_arr[login_fd], &loginEpollEvent);
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, sock_arr[login_lobbydata_fd], &login_lobbydataEpollEvent);
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, sock_arr[login_lobbyview_fd], &login_lobbyviewEpollEvent);
+#else
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_fd, &loginEpollEvent);
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_lobbydata_fd, &login_lobbydataEpollEvent);
+    epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_lobbyview_fd, &login_lobbyviewEpollEvent);
+
+    struct rlimit limits;
+
+    // Get old limits
+    if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
+    {
+        // Increase open file limit, which includes sockets, to MAX_FD. This only effects the current process and child processes
+        limits.rlim_cur = MAX_FD;
+        if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
+        {
+            ShowError("Failed to increase rlim_cur to %d", MAX_FD);
+        }
+    }
+#endif
+#endif
+
+    // NOTE: See login_conf.h for more information about what happens on this port
+    // login_lobbyconf_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_CONF_IP").c_str(), settings::get<uint16>("network.LOGIN_CONF_PORT"), connect_client_lobbyconf);
+    // ShowInfo("The login-server-lobbyconf is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_CONF_PORT"));
 
     sql = std::make_unique<SqlConnection>();
 
@@ -88,7 +140,6 @@ int32 do_init(int32 argc, char** argv)
         ShowInfo("Character deletion is currently disabled.");
     }
 
-    messageThread = std::thread(message_server_init, std::ref(requestExit));
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
 
@@ -125,6 +176,13 @@ int32 do_init(int32 argc, char** argv)
         fmt::printf("Maintenance mode changed to %i\n", maint_mode);
     });
 
+    gConsoleService->RegisterCommand(
+    "show_fds", "Print current amount of File Descriptors in use.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::printf("Total fds in use: %i (4 are reserved for login itself)\n", fd_max);
+    });
+
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
     [&](std::vector<std::string> inputs)
     {
@@ -144,11 +202,6 @@ int32 do_init(int32 argc, char** argv)
 void do_final(int code)
 {
     requestExit = true;
-    message_server_close();
-    if (messageThread.joinable())
-    {
-        messageThread.join();
-    }
 
     timer_final();
     socket_final();
@@ -167,61 +220,52 @@ void do_abort()
     do_final(EXIT_FAILURE);
 }
 
-void set_server_type()
+void set_socket_type()
 {
-    SERVER_TYPE = XI_SERVER_LOGIN;
     SOCKET_TYPE = socket_type::TCP;
 }
 
 int do_sockets(fd_set* rfd, duration next)
 {
-    struct timeval timeout;
+    int ret = 0;
 
+#ifdef __APPLE__
+    struct timeval timeout;
     // can timeout until the next tick
     timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
     timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     memcpy(rfd, &readfds, sizeof(*rfd));
-    int ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
+    ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
 
     if (ret == SOCKET_ERROR)
     {
         if (sErrno != S_EINTR)
         {
-            ShowCritical("do_sockets: select() failed, error code %d!", sErrno);
+            ShowCritical(fmt::format("do_sockets: select() failed, error code {}!", sErrno));
             exit(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again
     }
-
+#else
+    ret = epoll_wait(epollHandle, events, fd_max, std::chrono::duration_cast<std::chrono::milliseconds>(next).count());
+    if (ret == SOCKET_ERROR)
+    {
+        if (sErrno != S_EINTR)
+        {
+            ShowCritical("do_sockets: epoll_wait() failed, error code %d!", sErrno);
+            exit(EXIT_FAILURE);
+        }
+        return 0; // interrupted by a signal, just loop and try again
+    }
+    else if (ret == 0)
+    {
+        return 0;
+    }
+#endif
     last_tick = time(nullptr);
 
-#if defined(WIN32_FD_INTERNALS) && defined(WIN32)
-    // on windows, enumerating all members of the fd_set is way faster if we access the internals
-    for (int i = 0; i < (int)rfd->fd_count; ++i)
-    {
-        int fd = sock2fd(rfd->fd_array[i]);
-#ifdef _DEBUG
-        ShowDebug(fmt::format("select fd: {}", i).c_str());
-#endif // _DEBUG
-        if (sessions[fd])
-        {
-            sessions[fd]->func_recv(fd);
-
-            if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
-            {
-                sessions[fd]->func_parse(fd);
-
-                if (!sessions[fd])
-                {
-                    continue;
-                }
-
-                // RFIFOFLUSH(fd);
-            }
-        }
-    }
-#else
+#if __APPLE__
     // otherwise assume that the fd_set is a bit-array and enumerate it in a standard way
     for (int fd = 1; ret && fd < fd_max; ++fd)
     {
@@ -239,15 +283,67 @@ int do_sockets(fd_set* rfd, duration next)
                     {
                         continue;
                     }
-
-                    // RFIFOFLUSH(fd);
                 }
                 --ret;
             }
         }
     }
-#endif // defined(WIN32_FD_INTERNALS) && defined(WIN32)
+#else
+    for (int i = 0; ret > 0 && i < fd_max; i++)
+    {
+        int  fd        = events[i].data.fd;
+        auto thisEvent = events[i].events;
 
+        // https://man7.org/linux/man-pages/man2/epoll_ctl.2.html
+        // Handle all "always reported" error events
+        // EPOLLHUP is an "unexpected" socket shutdown from client, but seems normal when disconnecting
+        // EPOLLERR has not been witnessed, but is probably good to try to handle.
+        if (thisEvent & EPOLLHUP || thisEvent & EPOLLERR)
+        {
+            do_close_tcp(fd);
+            ret--;
+            continue;
+        }
+
+        // Input recieved
+        // EPOLLIN is normal input
+        // EPOLLPRI appears to be "out of band" extra data from the socket. Needed to read data from sockets >1024(?)
+        if (sessions[fd] && (thisEvent & EPOLLIN || thisEvent & EPOLLPRI))
+        {
+            ret--;
+
+            // new session
+            if (fd == login_fd || fd == login_lobbydata_fd || fd == login_lobbyview_fd)
+            {
+                struct epoll_event newEvent;
+                newEvent.events  = EPOLLIN;
+                newEvent.data.fd = sessions[fd]->func_recv(fd);
+#ifdef WIN32
+                epoll_ctl(epollHandle, EPOLL_CTL_ADD, sock_arr[newEvent.data.fd], &newEvent);
+#else
+                epoll_ctl(epollHandle, EPOLL_CTL_ADD, newEvent.data.fd, &newEvent);
+#endif
+            }
+            else
+            {
+                sessions[fd]->func_recv(fd);
+            }
+
+            if (sessions[fd])
+            {
+                if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
+                {
+                    sessions[fd]->func_parse(fd);
+
+                    if (!sessions[fd])
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+#endif
     for (int fd = 1; fd < fd_max; fd++)
     {
         if (!sessions[fd])
@@ -262,7 +358,6 @@ int do_sockets(fd_set* rfd, duration next)
     }
 
     sql->TryPing();
-
     return 0;
 }
 

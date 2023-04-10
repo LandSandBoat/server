@@ -32,9 +32,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [5] = function(player, region)
+                [5] = function(player, triggerArea)
                     return mission:progressEvent(3136, { text_table = 0 })
                 end,
             },

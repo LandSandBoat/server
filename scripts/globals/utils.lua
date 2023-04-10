@@ -1,3 +1,4 @@
+require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/interaction/quest")
 
@@ -12,6 +13,53 @@ utils.MAX_INT32  = 2147483647
 function utils.unused(...)
 end
 
+-- bind and related functions are from https://stackoverflow.com/a/18229720
+local unpack = unpack or table.unpack
+
+local function packn(...)
+    return { n = select('#', ...), ... }
+end
+
+local function unpackn(t)
+    return unpack(t, 1, t.n)
+end
+
+local function mergen(...)
+    local res = { n = 0 }
+    for i = 1, select('#', ...) do
+        local t = select(i, ...)
+        for j = 1, t.n do
+            res.n = res.n + 1
+            res[res.n] = t[j]
+        end
+    end
+
+    return res
+end
+
+function utils.bind(func, ...)
+    local args = packn(...)
+    return function(...)
+        return func(unpackn(mergen(args, packn(...))))
+    end
+end
+
+-- Creates a slice of an input table and returns a new table
+function utils.slice(inputTable, first, last, step)
+    local slicedTable = {}
+    first = first or 1
+    last = last or #inputTable
+    step = step or 1
+    local position = 1
+
+    for i = first, last, step do
+        slicedTable[position] = inputTable[i]
+        position = position + 1
+    end
+
+    return slicedTable
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}
@@ -22,6 +70,36 @@ function utils.shuffle(inputTable)
     end
 
     return shuffledTable
+end
+
+utils.append = nil
+
+-- Recursively appends the input table into the provided base table.
+-- Non-table keys are overwritten by input.
+function utils.append(base, input)
+    for k, v in pairs(input) do
+        local baseValue = base[k]
+        if baseValue ~= nil and type(baseValue) == 'table' and type(v) == 'table' then
+            utils.append(baseValue, v)
+        else
+            base[k] = v
+        end
+    end
+
+    return base
+end
+
+-- Returns a new table with the two input tables joined together.
+-- Values from second input have higher priority.
+function utils.join(input1, input2)
+    local result = {}
+    utils.append(result, input1)
+    utils.append(result, input2)
+    return result
+end
+
+function utils.minutes(minutes)
+    return minutes * 60
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
@@ -66,12 +144,17 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     return resultTable
 end
 
+function utils.chance(likelihood)
+    return math.random(100) <= likelihood
+end
+
 function utils.clamp(input, min_val, max_val)
     if min_val ~= nil and input < min_val then
         input = min_val
     elseif max_val ~= nil and input > max_val then
         input = max_val
     end
+
     return input
 end
 
@@ -169,7 +252,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
             end
         end
 
-        target:setMod(shadowType, shadowsLeft);
+        target:setMod(shadowType, shadowsLeft)
 
         if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -180,12 +263,12 @@ function utils.takeShadows(target, dmg, shadowbehav)
     return dmg
 end
 
-function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimum_percentage)
-    local final_damage = 1
+function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimumPercentage)
+    local finalDamage = 1
     -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
-    -- local cone_angle = skill:getConalAngle()
-    local cone_angle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
+    -- local coneAngle = skill:getConalAngle()
+    local coneAngle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
 
     -- #TODO: Conal attacks hit targets in a cone with a center line of the "primary" target (the mob's
     -- highest enmity target). These primary targets can be within 128 degrees of the mob's front. However,
@@ -193,22 +276,22 @@ function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimu
     -- was trying to hit. Therefore the "damage drop off" here is based from an origin of the mob's rotation
     -- instead. Should conal skills become capable of identifying their primary target, this should be changed
     -- to be based on the degree difference from the primary target instead.
-    local conal_angle_power = cone_angle - math.abs(attacker:getFacingAngle(target))
+    local conalAnglePower = coneAngle - math.abs(attacker:getFacingAngle(target))
 
-    if conal_angle_power < 0 then
+    if conalAnglePower < 0 then
         -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
-        conal_angle_power = 0
+        conalAnglePower = 0
     end
 
     -- Calculate the amount of damage to add above the minimum percentage based on how close
     -- the target is to the center of the conal (0 degrees from the attacker's facing)
-    local minimum_damage = max_damage * minimum_percentage
-    local damage_per_angle = (max_damage - minimum_damage) / cone_angle
-    local additional_damage = damage_per_angle * conal_angle_power
+    local minimumDamage    = maxDamage * minimumPercentage
+    local damagePerAngle   = (maxDamage - minimumDamage) / coneAngle
+    local additionalDamage = damagePerAngle * conalAnglePower
 
-    final_damage = math.max(1, math.ceil(minimum_damage + additional_damage))
+    finalDamage = math.max(1, math.ceil(minimumDamage + additionalDamage))
 
-    return final_damage
+    return finalDamage
 end
 
 -- returns true if taken by third eye
@@ -278,56 +361,69 @@ function utils.getSkillLvl(rank, level)
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if level > 50 then
-         if rank == 1 then
-             return 153 + (level - 50) * 5
-         end
-         if rank == 2 then
-             return 147 + (level - 50) *4.9
-         end
-         if rank == 3 then
-             return 136 + (level - 50) * 4.8
-         end
-         if rank == 4 then
-             return 126 + (level - 50) * 4.7
-         end
-         if rank == 5 then
-             return 116 + (level - 50) * 4.5
-         end
-         if rank == 6 then
-             return 106 + (level - 50) * 4.4
-         end
-         if rank == 7 then
-             return 96 + (level - 50) * 4.3
-         end
-     end
+    if level > 50 then
+        if rank == 1 then
+            return 153 + (level - 50) * 5
+        end
 
-     if rank == 1 then
-         return 6 + (level - 1) * 3
-     end
-     if rank == 2 then
-         return 5 + (level - 1) * 2.9
-     end
-     if rank == 3 then
-         return 5 + (level - 1) * 2.8
-     end
-     if rank == 4 then
-         return 4 + (level - 1) * 2.7
-     end
-     if rank == 5 then
-         return 4 + (level - 1) * 2.5
-     end
-     if rank == 6 then
-         return 3 + (level - 1) * 2.4
-     end
-     if rank == 7 then
-         return 3 + (level - 1) * 2.3
-     end
+        if rank == 2 then
+            return 147 + (level - 50) * 4.9
+        end
+
+        if rank == 3 then
+            return 136 + (level - 50) * 4.8
+        end
+
+        if rank == 4 then
+            return 126 + (level - 50) * 4.7
+        end
+
+        if rank == 5 then
+            return 116 + (level - 50) * 4.5
+        end
+
+        if rank == 6 then
+            return 106 + (level - 50) * 4.4
+        end
+
+        if rank == 7 then
+            return 96 + (level - 50) * 4.3
+        end
+    end
+
+    if rank == 1 then
+        return 6 + (level - 1) * 3
+    end
+
+    if rank == 2 then
+        return 5 + (level - 1) * 2.9
+    end
+
+    if rank == 3 then
+        return 5 + (level - 1) * 2.8
+    end
+
+    if rank == 4 then
+        return 4 + (level - 1) * 2.7
+    end
+
+    if rank == 5 then
+        return 4 + (level - 1) * 2.5
+    end
+
+    if rank == 6 then
+        return 3 + (level - 1) * 2.4
+    end
+
+    if rank == 7 then
+        return 3 + (level - 1) * 2.3
+    end
+
     return 0
 end
 
 -- System Strength Bonus table.  This is used by xi.mobskills.mobBreathMove, but determines weakness of
--- a definding system, vs the attacking system.  This table is indexed by the attacker.
+-- a defending system, vs the attacking system.  This table is indexed by the attacker.
 -- This table can scale beyond two values, but at this time, no data has been recorded.
 -- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
 local systemStrengthTable =
@@ -343,14 +439,11 @@ local systemStrengthTable =
     [xi.eco.ARCANA  ] = { [xi.eco.UNDEAD  ] = 1, },
     [xi.eco.DRAGON  ] = { [xi.eco.DEMON   ] = 1, },
     [xi.eco.DEMON   ] = { [xi.eco.DRAGON  ] = 1, },
-    [xi.eco.LUMORIAN] = { [xi.eco.LUMINION] = 1, },
-    [xi.eco.LUMINION] = { [xi.eco.LUMORIAN] = 1, },
+    [xi.eco.LUMINIAN] = { [xi.eco.LUMINION] = 1, },
+    [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
-function utils.getSystemStrengthBonus(attacker, defender)
-    local attackerSystem = attacker:getSystem()
-    local defenderSystem = defender:getSystem()
-
+function utils.getSystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
             for defId, weakValue in pairs(systemStrengthTable[k]) do
@@ -463,7 +556,7 @@ function utils.randomEntryIdx(t)
     local keys = {}
 
     for key, _ in pairs(t) do
-        keys[#keys+1] = key
+        keys[#keys + 1] = key
     end
 
     local index = keys[math.random(1, #keys)]
@@ -494,12 +587,14 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c)
+        fields[#fields + 1] = c
+    end)
+
     return fields
 end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
-
     --TODO Table of animations that are used for teleports for reference
 
     if hideDuration == nil then
@@ -531,9 +626,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:entityAnimationPacket(disAnim)
     mob:hideName(true)
     mob:setUntargetable(true)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:setPos(pos, 0)
     mob:setSpeed(0)
 
@@ -541,9 +636,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         mobArg:setPos(pos, 0)
         mobArg:hideName(false)
         mobArg:setUntargetable(false)
-        mobArg:SetAutoAttackEnabled(true)
-        mobArg:SetMagicCastingEnabled(true)
-        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setAutoAttackEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
+        mobArg:setMobAbilityEnabled(true)
         mobArg:setSpeed(mobSpeed)
         mobArg:entityAnimationPacket(reapAnim)
 
@@ -562,14 +657,14 @@ end
 function utils.lateralTranslateWithOriginRotation(origin, translation)
     local degrees = utils.ffxiRotToDegrees(origin.rot)
     local rads = math.rad(degrees)
-    local new_coords = {}
+    local newCoords = {}
 
-    new_coords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
-    new_coords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
-    new_coords.y = origin.y
-    new_coords.rot = origin.rot
+    newCoords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
+    newCoords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
+    newCoords.y = origin.y
+    newCoords.rot = origin.rot
 
-    return new_coords
+    return newCoords
 end
 
 function utils.getNearPosition(origin, offset, radians)
@@ -630,7 +725,10 @@ end
 
 function utils.getAngleDifference(a, b)
     local diff = math.abs(b - a)
-    if diff > math.pi then diff = 2 * math.pi - diff end
+    if diff > math.pi then
+        diff = 2 * math.pi - diff
+    end
+
     return diff
 end
 

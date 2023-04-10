@@ -33,6 +33,8 @@
 #include <string>
 #include <vector>
 
+extern uint16 map_port;
+
 namespace
 {
     // static storage, init and access
@@ -126,6 +128,21 @@ namespace moduleutils
         // Load the helper file
         lua.safe_script_file("./modules/module_utils.lua");
 
+        lua.safe_script(R""(
+            function applyOverride(base_table, name, func, fullname, filename)
+                local old = base_table[name]
+
+                local thisenv = getfenv(old)
+
+                local env = { super = old }
+                setmetatable(env, { __index = thisenv })
+
+                setfenv(func, env)
+
+                base_table[name] = func
+            end
+        )"");
+
         // Read lines from init.txt
         std::vector<std::string> list;
         std::ifstream            file("./modules/init.txt", std::ios_base::in);
@@ -145,9 +162,9 @@ namespace moduleutils
         {
             if (std::filesystem::is_directory(entry))
             {
-                for (auto const& innerEntry : std::filesystem::recursive_directory_iterator(entry))
+                for (auto const& innerEntry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(entry))
                 {
-                    auto path = innerEntry.path().relative_path();
+                    auto path = innerEntry.relative_path();
                     expandedList.emplace_back(path.generic_string());
                 }
             }
@@ -179,7 +196,7 @@ namespace moduleutils
                 if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
                 {
                     auto commandName = path.filename().replace_extension("").generic_string();
-                    ShowDebug(fmt::format("Registering module command: !{}", commandName));
+                    DebugModules(fmt::format("Registering module command: !{}", commandName));
                     CCommandHandler::registerCommand(commandName, relPath);
                     continue;
                 }
@@ -195,9 +212,28 @@ namespace moduleutils
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
-                        ShowDebug(fmt::format("Preparing override: {}", name));
+                        DebugModules(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, ".");
+
+                        // If you are running multi-process, all of the overrides in all of your modules will try to apply
+                        // themselves. The zones they're targetting might not exist on this process and then error out, so
+                        // we need to sanity check them here by checking the name and port against the database.
+                        if (parts.size() >= 3 && parts[0] == "xi" && parts[1] == "zones")
+                        {
+                            auto zoneName    = parts[2];
+                            auto currentPort = map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port;
+
+                            auto ret = sql->Query(fmt::format("SELECT `name`, zoneport FROM zone_settings WHERE `name` = '{}' AND zoneport = {};",
+                                                              zoneName, currentPort)
+                                                      .c_str());
+                            if (ret != SQL_ERROR && sql->NumRows() == 0)
+                            {
+                                DebugModules(fmt::format("{} does not appear to exist on this process.", zoneName));
+                                continue;
+                            }
+                        }
+
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
                 }
@@ -231,8 +267,15 @@ namespace moduleutils
 
                     if (part == lastTable)
                     {
-                        ShowDebug(fmt::format("Applying override: {}", override.overrideName));
+                        DebugModules(fmt::format("Applying override: {}", override.overrideName));
 
+                        if (table[lastElem] == sol::lua_nil)
+                        {
+                            DebugModules("Inserting empty function to override for: %s (%s)", override.overrideName, override.filename);
+                            table[lastElem] = []() {};
+                        }
+
+                        // Function defined in LoadLuaModules()
                         lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 
                         override.applied = true;

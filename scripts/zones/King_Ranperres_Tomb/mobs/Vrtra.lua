@@ -45,13 +45,14 @@ entity.onMobFight = function(mob, target)
                 break
             end
         end
+
         mob:setLocalVar("spawnTime", fifteenBlock + 4)
     end
 end
 
 entity.onMobDisengage = function(mob, weather)
     for i, offset in ipairs(offsets) do
-        DespawnMob(mob:getID()+offset)
+        DespawnMob(mob:getID() + offset)
     end
 end
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Iron Muscles
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

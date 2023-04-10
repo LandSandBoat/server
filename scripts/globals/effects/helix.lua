@@ -3,24 +3,24 @@
 -----------------------------------
 require("scripts/globals/utils")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     local dmg = utils.stoneskin(target, effect:getPower())
 
-    if (dmg > 0) then
+    if dmg > 0 then
         target:takeDamage(dmg)
     end
 
-    if (effect:getTick() == 3000) then
+    if effect:getTick() == 3000 then
         effect:setTick(9000)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
 end
 
-return effect_object
+return effectObject

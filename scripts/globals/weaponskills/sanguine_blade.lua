@@ -18,17 +18,16 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local drain = 0
 
-    if (tp >= 1000 and tp <=1999) then
+    if tp >= 1000 and tp <= 1999 then
         drain = 50
-    elseif (tp >= 2000 and tp <= 2999) then
+    elseif tp >= 2000 and tp <= 2999 then
         drain = 75
-    elseif (tp == 3000) then
+    elseif tp == 3000 then
         drain = 100
     end
 
@@ -39,21 +38,21 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.skill = xi.skill.SWORD
     params.includemab = true
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
-        if (tp >= 2000 and tp <= 2999) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if tp >= 2000 and tp <= 2999 then
             drain = 100
-        elseif (tp == 3000) then
+        elseif tp == 3000 then
             drain = 160
         end
     end
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if (target:isUndead() == false) then
-        player:addHP((damage/100) * drain)
+    if not target:isUndead() then
+        player:addHP((damage / 100) * drain)
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

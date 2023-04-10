@@ -92,6 +92,7 @@ local function hasOutpost(player, region)
             hasOP = region <= xi.region.ELSHIMOUPLANDS
         end
     end
+
     return hasOP
 end
 
@@ -99,7 +100,10 @@ local function setHomepointFee(player, guardNation)
     local pNation = player:getNation()
     local fee = 0
 
-    if pNation ~= guardNation and not xi.conquest.areAllies(pNation, guardNation) then
+    if
+        pNation ~= guardNation and
+        not xi.conquest.areAllies(pNation, guardNation)
+    then
         local rank = player:getRank(player:getNation())
         if rank <= 5 then
             fee = 100 * math.pow(2, rank - 1)
@@ -130,6 +134,7 @@ local function getAllowedTeleports(player, nation)
     elseif xi.settings.main.UNLOCK_OUTPOST_WARPS == 1 then
         return 0x3FE0001F -- Allow all outposts except for Tulia and Tavnazia
     end
+
     for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
         if not xi.conquest.canTeleportToOutpost(player, region) then
             allowedTeleports = bit.bor(allowedTeleports, bit.lshift(1, region + 5)) -- Region bits start at 5th bit
@@ -160,7 +165,15 @@ local function suppliesAvailableBitmask(player, nation)
 
     if mask ~= -1 and mask ~= 0xFFFFFFFF then
         for i = 0, 18 do
-            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)) then
+            if
+                GetRegionOwner(i) ~= nation or
+                i == 16 or
+                i == 17 or
+                (
+                    i == 18 and
+                    not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
+                )
+            then
                 mask = mask + 2^(i + 5)
             end
         end
@@ -185,6 +198,7 @@ local function areSuppliesRotten(player, npc, guardType)
         else
             player:showText(npc, text.CONQUEST - 1) -- "Hmm... These supplies you have brought us are too old to be of any use."
         end
+
         local ki = outposts[region].ki
 
         player:delKeyItem(ki)
@@ -571,7 +585,7 @@ end
 
 xi.conquest.toggleRegionalNPCs = function(zone)
     -- Show/Hide regional NPCs
-    -- If there is a draw or a 1st place Alliance, those NPCs won't be available.
+    -- If there is a draw or a 1st place Alliance, those NPCs won't be available anywhere.
     local id = zone:getID()
     if
         id == xi.zone.PORT_BASTOK or
@@ -597,12 +611,20 @@ xi.conquest.toggleRegionalNPCs = function(zone)
             { GetNationRank(xi.nation.WINDURST), xi.zone.WINDURST_WOODS },
         }
 
-        table.sort(rankings, function (a, b) return a[1] > b[1] end)
+        table.sort(rankings, function(a, b)
+            return a[1] < b[1]
+        end)
 
         local firstPlaceZone = rankings[1][2]
+        local secondPlaceZone = rankings[2][2]
 
-        if firstPlaceZone == zone:getID() then
-            print("Making regional conquest NPCs available in: " .. zone:getName())
+        if
+            firstPlaceZone == id and
+            firstPlaceZone ~= secondPlaceZone
+        then
+            print("Showing regional conquest NPCs in: " .. zone:getName())
+        else
+            print("Hiding regional conquest NPCs in: " .. zone:getName())
         end
 
         for _, name in pairs(regionalNPCNames) do
@@ -615,7 +637,10 @@ xi.conquest.toggleRegionalNPCs = function(zone)
 
                     -- If there is a clear winner, and not a tie,
                     -- show the NPCs
-                    if id == firstPlaceZone and not IsConquestAlliance() then
+                    if
+                        id == firstPlaceZone and
+                        firstPlaceZone ~= secondPlaceZone
+                    then
                         entity:setStatus(xi.status.NORMAL)
                     end
                 end
@@ -890,6 +915,7 @@ local function getStock(player, guardNation, option)
             r = overseerInvNation[guardNation][option]
         end
     end
+
     return r
 end
 
@@ -908,7 +934,10 @@ local function canBuyExpRing(player, item)
     end
 
     -- one exp ring per conquest tally
-    if xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and player:getCharVar("CONQUEST_RING_RECHARGE") > os.time() then
+    if
+        xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and
+        player:getCharVar("CONQUEST_RING_RECHARGE") > os.time()
+    then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
         player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
         return false
@@ -930,7 +959,9 @@ xi.conquest.guard =
 }
 
 xi.conquest.areAllies = function(nationA, nationB)
-    return IsConquestAlliance() and GetNationRank(nationA) > 1 and GetNationRank(nationB) > 1
+    return IsConquestAlliance() and
+        GetNationRank(nationA) > 1 and
+        GetNationRank(nationB) > 1
 end
 
 xi.conquest.outpostFee = function(player, region)
@@ -955,6 +986,7 @@ xi.conquest.canTeleportToOutpost = function(player, region)
     then
         return false
     end
+
     return true
 end
 
@@ -1038,6 +1070,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:addRankPoints(addPoints)
                     player:showText(npc, mOffset + 45) -- "We've awarded you rank points for the crystals you've donated."
                 end
+
                 player:confirmTrade()
                 tradeConfirmed = true
             end
@@ -1045,7 +1078,10 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- RECHARGE EXP RING
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
-            if xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
+            if
+                xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
+                player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
+            then
                 local ring = expRings[item]
 
                 if player:getCP() >= ring.cp then
@@ -1057,7 +1093,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                 else
                     player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
                 end
-             else
+            else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
                 player:showText(npc, mOffset + 56, item) -- "Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
@@ -1074,9 +1110,16 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     end
 
     -- SUPPLY RUNS
-    if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
+    if
+        pNation == guardNation and
+        areSuppliesRotten(player, npc, guardType)
+    then
         -- do nothing else
-    elseif pNation == guardNation and guardType >= xi.conquest.guard.OUTPOST and canDeliverSupplies(player, guardNation, guardEvent, guardRegion) then
+    elseif
+        pNation == guardNation and
+        guardType >= xi.conquest.guard.OUTPOST and
+        canDeliverSupplies(player, guardNation, guardEvent, guardRegion)
+    then
         -- do nothing else
 
     -- JEUNO OVERSEERS
@@ -1117,6 +1160,7 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     if guardNation == xi.nation.OTHER then
         guardNation = pNation
     end
+
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
@@ -1135,14 +1179,26 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
             u2 = 1
         end
 
-        if option >= 32933 and option <= 32935 and player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+        if
+            option >= 32933 and
+            option <= 32935 and
+            player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+        then
             u2 = 0
         end
 
         local rankCheck = true
-        if guardNation ~= xi.nation.OTHER and guardNation ~= pNation and GetNationRank(guardNation) <= pRank then -- buy from other nation, must be higher ranked
+        if
+            guardNation ~= xi.nation.OTHER and
+            guardNation ~= pNation and
+            GetNationRank(guardNation) <= pRank
+        then -- buy from other nation, must be higher ranked
             rankCheck = false
-        elseif guardNation ~= xi.nation.OTHER and stock.place ~= nil and guardNation ~= pNation then -- buy from other nation, cannot buy items with nation rank requirement
+        elseif
+            guardNation ~= xi.nation.OTHER and
+            stock.place ~= nil and
+            guardNation ~= pNation
+        then -- buy from other nation, cannot buy items with nation rank requirement
             rankCheck = false
         elseif stock.place ~= nil and pRank > stock.place then -- buy from own nation, check nation rank
             rankCheck = false
@@ -1180,7 +1236,11 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
 
     -- validate price
     local price = stock.cp
-    if stock.rank ~= nil and player:getNation() ~= guardNation and guardNation ~= xi.nation.OTHER then
+    if
+        stock.rank ~= nil and
+        player:getNation() ~= guardNation and
+        guardNation ~= xi.nation.OTHER
+    then
         if price <= 8000 then
             price = price * 2
         else
@@ -1189,7 +1249,11 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
     end
 
     if player:getCP() < price then
-        if option <= 32933 and option >= 32935 and not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+        if
+            option <= 32933 and
+            option >= 32935 and
+            not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+        then
             player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
             return -1
         end
@@ -1221,7 +1285,11 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         end
 
     -- BEGIN SUPPLY RUN
-    elseif option >= 65541 and option <= 65565 and guardType <= xi.conquest.guard.FOREIGN then
+    elseif
+        option >= 65541 and
+        option <= 65565 and
+        guardType <= xi.conquest.guard.FOREIGN
+    then
         local region = option - 65541
         local outpost = outposts[region]
         if outpost ~= nil then
@@ -1270,7 +1338,11 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         end
 
         -- validate exp rings
-        if option >= 32933 and option <= 32935 and not canBuyExpRing(player, stock.item) then
+        if
+            option >= 32933 and
+            option <= 32935 and
+            not canBuyExpRing(player, stock.item)
+        then
             return
         end
 
@@ -1283,6 +1355,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
                     return
                 end
             end
+
             player:delCP(price)
         end
     end
@@ -1345,7 +1418,7 @@ xi.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterE
     if csid == teleporterEvent then
         local region = option - 1073741829
         local fee = xi.conquest.outpostFee(player, region)
-        local cpFee = fee/10
+        local cpFee = fee / 10
 
         player:updateEvent(player:getGil(), fee, 0, cpFee, player:getCP())
     end
@@ -1358,16 +1431,22 @@ xi.conquest.teleporterOnEventFinish = function(player, csid, option, teleporterE
             local region = option - 5
             local fee = xi.conquest.outpostFee(player, region)
 
-            if xi.conquest.canTeleportToOutpost(player, region) and player:delGil(fee) then
+            if
+                xi.conquest.canTeleportToOutpost(player, region) and
+                player:delGil(fee)
+            then
                 player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
             end
 
         -- TELEPORT WITH CP
         elseif option >= 1029 and option <= 1047 then
             local region = option - 1029
-            local cpFee = xi.conquest.outpostFee(player, region)/10
+            local cpFee = xi.conquest.outpostFee(player, region) / 10
 
-            if xi.conquest.canTeleportToOutpost(player, region) and player:getCP() >= cpFee then
+            if
+                xi.conquest.canTeleportToOutpost(player, region) and
+                player:getCP() >= cpFee
+            then
                 player:delCP(cpFee)
                 player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
             end
@@ -1379,112 +1458,129 @@ end
 -- (PUBLIC) conquest messages
 -----------------------------------
 
+xi.conquest.sendConquestTallyStartMessage = function(player, messageBase)
+    player:messageText(player, messageBase, 5)
+end
+
+xi.conquest.sendConquestTallyEndMessage = function(player, messageBase, owner, ranking, isConquestAlliance)
+    player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
+
+    if owner <= 3 then
+        player:messageText(player, messageBase + 2 + owner, 5) -- This region is currently under <nation> control.
+    else
+        player:messageText(player, messageBase + 6, 5) -- This region is currently under beastman control.
+    end
+
+    local offset = 0
+    if bit.band(ranking, 0x03) == 0x01 then
+        offset = offset + 7 -- 7
+        if bit.band(ranking, 0x30) == 0x10 then
+            offset = offset + 1 -- 8
+            if bit.band(ranking, 0x0C) == 0x0C then
+                offset = offset + 1 -- 9
+            end
+        elseif bit.band(ranking, 0x0C) == 0x08 then
+            offset = offset + 3 -- 10
+            if bit.band(ranking, 0x30) == 0x30 then
+                offset = offset + 1 -- 11
+            end
+        elseif bit.band(ranking, 0x0C) == 0x04 then
+            offset = offset + 6 -- 13
+        end
+    elseif bit.band(ranking, 0x0C) == 0x04 then
+        offset = offset + 15 -- 15
+        if bit.band(ranking, 0x30) == 0x02 then
+            offset = offset + 3 -- 18
+            if bit.band(ranking, 0x03) == 0x03 then
+                offset = offset + 1 -- 19
+            end
+        elseif bit.band(ranking, 0x30) == 0x10 then
+            offset = offset + 6 -- 21
+        end
+    elseif bit.band(ranking, 0x30) == 0x10 then
+        offset = offset + 23 -- 23
+        if bit.band(ranking, 0x0C) == 0x08 then
+            offset = offset + 3 -- 26
+            if bit.band(ranking, 0x30) == 0x30 then
+                offset = offset + 1 -- 27
+            end
+        end
+    end
+
+    player:messageText(player, messageBase + offset, 5) -- Global balance of power:
+
+    if isConquestAlliance then
+        if bit.band(ranking, 0x03) == 0x01 then
+            player:messageText(player, messageBase + 50, 5) -- Bastok and Windurst have formed an alliance.
+        elseif bit.band(ranking, 0x0C) == 0x04 then
+            player:messageText(player, messageBase + 51, 5) -- San d'Oria and Windurst have formed an alliance.
+        elseif bit.band(ranking, 0x30) == 0x10 then
+            player:messageText(player, messageBase + 52, 5) -- San d'Oria and Bastok have formed an alliance.
+        end
+    end
+end
+
+xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner, ranking, influence, isConquestAlliance)
+    if owner <= 3 then
+        player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under <nation> control.
+    else
+        player:messageText(player, messageBase + 31, 5) -- This region is currently under beastman control.
+    end
+
+    if influence >= 64 then
+        player:messageText(player, messageBase + 37, 5) -- The beastmen are on the rise.
+    elseif influence == 0 then
+        player:messageText(player, messageBase + 36, 5) -- All three nations are at a deadlock.
+    else
+        local sandoria = bit.band(influence, 0x03)
+        local bastok = bit.rshift(bit.band(influence, 0x0C), 2)
+        local windurst = bit.rshift(bit.band(influence, 0x30), 4)
+
+        player:messageText(player, messageBase + 41 - sandoria, 5) -- Regional influence: San d'Oria
+        player:messageText(player, messageBase + 45 - bastok, 5)   -- Regional influence: Bastok
+        player:messageText(player, messageBase + 49 - windurst, 5) -- Regional influence: Windurst
+    end
+
+    if isConquestAlliance then
+        if bit.band(ranking, 0x03) == 0x01 then
+            player:messageText(player, messageBase + 53, 5) -- Bastok and Windurst are currently allies.
+        elseif bit.band(ranking, 0x0C) == 0x04 then
+            player:messageText(player, messageBase + 54, 5) -- San d'Oria and Windurst are currently allies.
+        elseif bit.band(ranking, 0x30) == 0x10 then
+            player:messageText(player, messageBase + 55, 5) -- San d'Oria and Bastok are currently allies.
+        end
+    end
+end
+
 xi.conquest.onConquestUpdate = function(zone, updatetype)
-    local region = zone:getRegionID()
-    local owner = GetRegionOwner(region)
-    local players = zone:getPlayers()
-    local messageBase = zones[zone:getID()].text.CONQUEST_BASE
-    local ranking = GetConquestBalance()
+    local region             = zone:getRegionID()
+    local influence          = GetRegionInfluence(region)
+    local owner              = GetRegionOwner(region)
+    local players            = zone:getPlayers()
+    local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
+    local ranking            = GetConquestBalance()
+    local isConquestAlliance = IsConquestAlliance()
 
+    -----------------------------------
+    -- Once per zone logic
+    -----------------------------------
+    if updatetype == conquestConstants.TALLY_END then
+        xi.conquest.toggleRegionalNPCs(zone)
+    end
+
+    -----------------------------------
+    -- WARNING: This is iterating every player in a zone, be careful not
+    --        : to put expensive operations like db reads in here!
+    -----------------------------------
     for _, player in pairs(players) do
-
-        -- CONQUEST TALLY START
         if updatetype == conquestConstants.TALLY_START then
-            player:messageText(player, messageBase, 5)
+            xi.conquest.sendConquestTallyStartMessage(player, messageBase)
 
-        -- CONQUEST TALLY END
         elseif updatetype == conquestConstants.TALLY_END then
-            player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
+            xi.conquest.sendConquestTallyEndMessage(player, messageBase, owner, ranking, isConquestAlliance)
 
-            if owner <= 3 then
-                player:messageText(player, messageBase + 2 + owner, 5) -- This region is currently under <nation> control.
-            else
-                player:messageText(player, messageBase + 6, 5) -- This region is currently under beastman control.
-            end
-
-            local offset = 0
-            if bit.band(ranking, 0x03) == 0x01 then
-                offset = offset + 7 -- 7
-                if bit.band(ranking, 0x30) == 0x10 then
-                    offset = offset + 1 -- 8
-                    if bit.band(ranking, 0x0C) == 0x0C then
-                        offset = offset + 1 -- 9
-                    end
-                elseif bit.band(ranking, 0x0C) == 0x08 then
-                    offset = offset + 3 -- 10
-                    if bit.band(ranking, 0x30) == 0x30 then
-                        offset = offset + 1 -- 11
-                    end
-                elseif bit.band(ranking, 0x0C) == 0x04 then
-                    offset = offset + 6 -- 13
-                end
-            elseif bit.band(ranking, 0x0C) == 0x04 then
-                offset = offset + 15 -- 15
-                if bit.band(ranking, 0x30) == 0x02 then
-                    offset = offset + 3 -- 18
-                    if bit.band(ranking, 0x03) == 0x03 then
-                        offset = offset + 1 -- 19
-                    end
-                elseif bit.band(ranking, 0x30) == 0x10 then
-                    offset = offset + 6 -- 21
-                end
-            elseif bit.band(ranking, 0x30) == 0x10 then
-                offset = offset + 23 -- 23
-                if bit.band(ranking, 0x0C) == 0x08 then
-                    offset = offset + 3 -- 26
-                    if bit.band(ranking, 0x30) == 0x30 then
-                        offset = offset + 1 -- 27
-                    end
-                end
-            end
-
-            player:messageText(player, messageBase + offset, 5) -- Global balance of power:
-
-            if IsConquestAlliance() then
-                if bit.band(ranking, 0x03) == 0x01 then
-                    player:messageText(player, messageBase + 50, 5) -- Bastok and Windurst have formed an alliance.
-                elseif bit.band(ranking, 0x0C) == 0x04 then
-                    player:messageText(player, messageBase + 51, 5) -- San d'Oria and Windurst have formed an alliance.
-                elseif bit.band(ranking, 0x30) == 0x10 then
-                    player:messageText(player, messageBase + 52, 5) -- San d'Oria and Bastok have formed an alliance.
-                end
-            end
-
-            xi.conquest.toggleRegionalNPCs(zone)
-
-        -- CONQUEST UPDATE
         elseif updatetype == conquestConstants.UPDATE then
-            local influence = GetRegionInfluence(region)
-
-            if owner <= 3 then
-                player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under <nation> control.
-            else
-                player:messageText(player, messageBase + 31, 5) -- This region is currently under beastman control.
-            end
-
-            if influence >= 64 then
-                player:messageText(player, messageBase + 37, 5) -- The beastmen are on the rise.
-            elseif influence == 0 then
-                player:messageText(player, messageBase + 36, 5) -- All three nations are at a deadlock.
-            else
-                local sandoria = bit.band(influence, 0x03)
-                local bastok = bit.rshift(bit.band(influence, 0x0C), 2)
-                local windurst = bit.rshift(bit.band(influence, 0x30), 4)
-
-                player:messageText(player, messageBase + 41 - sandoria, 5) -- Regional influence: San d'Oria
-                player:messageText(player, messageBase + 45 - bastok, 5)   -- Regional influence: Bastok
-                player:messageText(player, messageBase + 49 - windurst, 5) -- Regional influence: Windurst
-            end
-
-            if IsConquestAlliance() then
-                if bit.band(ranking, 0x03) == 0x01 then
-                    player:messageText(player, messageBase + 53, 5) -- Bastok and Windurst are currently allies.
-                elseif bit.band(ranking, 0x0C) == 0x04 then
-                    player:messageText(player, messageBase + 54, 5) -- San d'Oria and Windurst are currently allies.
-                elseif bit.band(ranking, 0x30) == 0x10 then
-                    player:messageText(player, messageBase + 55, 5) -- San d'Oria and Bastok are currently allies.
-                end
-            end
+            xi.conquest.sendConquestTallyUpdateMessage(player, messageBase, owner, ranking, influence, isConquestAlliance)
         end
     end
 end

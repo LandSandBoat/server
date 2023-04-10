@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Attohwa
 --  NPC: Monberaux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

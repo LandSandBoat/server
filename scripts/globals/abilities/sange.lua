@@ -5,19 +5,18 @@
 -- Recast Time: 3 minutes
 -- Duration: 1 minute
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local potency = player:getMerit(xi.merit.SANGE)-1
 
     player:addStatusEffect(xi.effect.SANGE, potency * 25, 0, 60)
 end
 
-return ability_object
+return abilityObject

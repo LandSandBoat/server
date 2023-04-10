@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Joilevin
--- Standard Info NPC
 -- !pos -319.937 0.000 -467.799 70
 -----------------------------------
 local entity = {}

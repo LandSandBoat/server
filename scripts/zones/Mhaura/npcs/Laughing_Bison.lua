@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Lacia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
@@ -9,7 +8,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- Each boat comes every 1152 seconds/8 game hours, 4 hour offset between Selbina and Aht Urghan
     -- Original timer: local timer = 1152 - ((os.time() - 1009810584)%1152)
     local timer = 1152 - ((os.time() - 1009810802)%1152)
@@ -32,7 +30,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:startEvent(333, timer, direction, 0, destination) -- timer arriving/departing ??? destination
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

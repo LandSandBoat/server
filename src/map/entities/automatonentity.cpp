@@ -105,6 +105,27 @@ uint8 CAutomatonEntity::getElementCapacity(uint8 element)
     return m_ElementEquip[element];
 }
 
+uint8 CAutomatonEntity::getElementalCapacityBonus()
+{
+    return m_elementalCapacityBonus;
+}
+
+void CAutomatonEntity::setElementalCapacityBonus(uint8 bonus)
+{
+    if (bonus == m_elementalCapacityBonus)
+    {
+        return;
+    }
+
+    int8 difference = static_cast<int8>(bonus) - m_elementalCapacityBonus;
+    for (size_t i = 0; i < m_ElementMax.size(); ++i)
+    {
+        m_ElementMax[i] += difference;
+    }
+
+    m_elementalCapacityBonus = bonus;
+}
+
 void CAutomatonEntity::burdenTick()
 {
     for (auto&& burden : m_Burden)

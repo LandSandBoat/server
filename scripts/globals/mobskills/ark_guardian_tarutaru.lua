@@ -3,20 +3,20 @@
 -- Begin Ark Angel TT teleport
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:useMobAbility(mob:getMobMod(xi.mobMod.TELEPORT_END))
     skill:setMsg(xi.msg.basic.NONE)
+
     return 0
 end
 
-return mobskill_object
+return mobskillObject

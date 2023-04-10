@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Esqualea
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

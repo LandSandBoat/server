@@ -14,8 +14,23 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.jsa.CALL_WYVERN, hpp = 100, cooldown = 60 }, -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
-            { id = xi.jsa.MEIKYO_SHISUI, begCode = function(mobArg) mobArg:setLocalVar('order', 0) end, hpp = math.random(90, 95), cooldown = 90 }, -- "Meikyo Shisui is used very frequently."
+            -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
+            {
+                id       = xi.jsa.CALL_WYVERN,
+                hpp      = 100,
+                cooldown = 60,
+            },
+
+            -- "Meikyo Shisui is used very frequently."
+            {
+                id       = xi.jsa.MEIKYO_SHISUI,
+                hpp      = math.random(90, 95),
+                cooldown = 90,
+
+                begCode = function(mobArg)
+                    mobArg:setLocalVar('order', 0)
+                end,
+            },
         },
     })
 end
@@ -23,7 +38,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobid = mob:getID()
 
-    for member = mobid-6, mobid+1 do
+    for member = mobid-6, mobid + 1 do
         local m = GetMobByID(member)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)

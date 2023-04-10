@@ -2,7 +2,6 @@
 -- Area: Windurst Walls
 --  NPC: Hiwon-Biwon
 -- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
--- Working 100%
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
@@ -18,14 +17,9 @@ end
 entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     local cursesFoiledAgain1 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-    local cursesFoiledAgain2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
-
-    -- Curses, Foiled ... Again!?
-    if cursesFoiledAgain2 == QUEST_ACCEPTED and not player:hasItem(xi.items.LOCK_OF_HIWONS_HAIR) then
-        player:startEvent(182) -- get Hiwon's hair
 
     -- Making Headlines
-    elseif makingHeadlines == QUEST_ACCEPTED then
+    if makingHeadlines == QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
         local prog = player:getCharVar("QuestMakingHeadlines_var")
 
@@ -42,10 +36,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(282) -- "Getting back to the maater at hand-wand..."
         end
-
-    -- dialog after CFA2
-    elseif cursesFoiledAgain2 == QUEST_COMPLETED then
-        player:startEvent(185)
 
     -- default dialog
     else
@@ -66,7 +56,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
@@ -74,10 +63,6 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 281 or csid == 283 or csid == 284 then
         npcUtil.giveKeyItem(player, xi.ki.WINDURST_WALLS_SCOOP)
         player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 2, true))
-
-    -- Curses, Foiled...Again!?
-    elseif csid == 182 then
-        npcUtil.giveItem(player, xi.items.LOCK_OF_HIWONS_HAIR)
     end
 end
 

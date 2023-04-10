@@ -4,16 +4,20 @@
 local ID = require('scripts/zones/Abyssea-Tahrongi/IDs')
 require('scripts/globals/abyssea')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -95, 20, -775, 59.5, 50, -560.1)
+zoneObject.onInitialize = function(zone)
+    zone:registerTriggerArea(1, -95, 20, -775, 59.5, 50, -560.1)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-24, 44, -678, 240)
     end
 
@@ -22,32 +26,32 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     xi.abyssea.afterZoneIn(player)
 end
 
-zone_object.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
-            xi.abyssea.onWardRegionEnter(player)
+            xi.abyssea.onWardTriggerAreaEnter(player)
         end,
     }
 end
 
-zone_object.onRegionLeave = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
-            xi.abyssea.onWardRegionLeave(player)
+            xi.abyssea.onWardTriggerAreaLeave(player)
         end,
     }
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

@@ -7,19 +7,18 @@
 --  Range: Unknown cone
 --  Notes: Only used the Aern wielding a sword (RDM, DRK, and PLD).
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(1, 3)
     local accmod = 1
     local dmgmod = 1
@@ -34,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

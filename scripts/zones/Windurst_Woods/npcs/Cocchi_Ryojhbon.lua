@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Cocchi Ryojhbon
--- Working 100%
 -----------------------------------
 local entity = {}
 

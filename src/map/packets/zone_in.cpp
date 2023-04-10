@@ -19,56 +19,61 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "zone_in.h"
 
-#include "../entities/charentity.h"
-#include "../instance.h"
-#include "../status_effect_container.h"
-#include "../utils/zoneutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
-/************************************************************************
- *                                                                       *
- *  Returns the ID of the mog house map to be used                       *
- *                                                                       *
- ************************************************************************/
+#include "entities/charentity.h"
+#include "utils/zoneutils.h"
 
-uint16 GetMogHouseID(CCharEntity* PChar)
+#include "instance.h"
+#include "status_effect_container.h"
+#include "zone.h"
+
+// Returns the Model ID of the mog house to be used
+// This is not the same as the actual Zone ID!
+// (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
+uint16 GetMogHouseModelID(CCharEntity* PChar)
 {
-    // TODO: verify wtf is going on with this function. either these aren't supposed to be zone IDs or somehow Jeuno's mog is western adoulin!
+    // Shift right 7 places, mask the bottom two bits.
+    // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    // 0x0100: ^ As above
+    uint16 moghouse2FModel      = 0x0267 + ((PChar->profile.mhflag >> 7) & 0x03);
+    bool   requestingMoghouse2F = PChar->profile.mhflag & 0x40;
+    if (requestingMoghouse2F)
+    {
+        return moghouse2FModel;
+    }
+
+    // clang-format off
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
         case REGION_TYPE::WEST_AHT_URHGAN:
-            return ZONE_214;
+            return 214;
         case REGION_TYPE::RONFAURE_FRONT:
-            return ZONE_189;
+            return 189;
         case REGION_TYPE::GUSTABERG_FRONT:
-            return ZONE_199;
+            return 199;
         case REGION_TYPE::SARUTA_FRONT:
-            return ZONE_219;
+            return 219;
         case REGION_TYPE::SANDORIA:
-            return (PChar->profile.nation == 0 ? 0x0121 : 0x0101);
+            return PChar->profile.nation == 0 ? 0x0121 : 0x0101;
         case REGION_TYPE::BASTOK:
-            return (PChar->profile.nation == 1 ? 0x0122 : 0x0102);
+            return PChar->profile.nation == 1 ? 0x0122 : 0x0102;
         case REGION_TYPE::WINDURST:
-            return (PChar->profile.nation == 2 ? 0x0123 : 0x0120);
+            return PChar->profile.nation == 2 ? 0x0123 : 0x0120;
         case REGION_TYPE::JEUNO:
             return 0x0100;
+        case REGION_TYPE::ADOULIN_ISLANDS:
+            return 0x0124;
         default:
             ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
             return 0x0100;
     }
+    // clang-format on
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-uint8 GetMogHouseFlag(CCharEntity* PChar)
+uint8 GetMogHouseLeavingFlag(CCharEntity* PChar)
 {
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
@@ -108,30 +113,24 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
     return 0;
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
+CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 {
     this->setType(0x0A);
     this->setSize(0x104);
 
-    // необходимо для работы manaklipper
-    // последние 8 байт похожи на время
+    // It is necessary to work Manaklipper
+    // The last 8 bytes are similar for a while
     // unsigned char packet [] = {
     // 0x0D, 0x3A, 0x0C, 0x00, 0x11, 0x00, 0x19, 0x00, 0x02, 0xE4, 0x93, 0x10, 0x91, 0xE5, 0x93, 0x10}; // 0x2a = 0x10
     // 0x89, 0x39, 0x0C, 0x00, 0x19, 0x00, 0x07, 0x00, 0x5C, 0xE1, 0x93, 0x10, 0x81, 0xE3, 0x93, 0x10}; // 0x2a = 0x08
     // memcpy(data + 0x70, &packet, 16);
 
-    // data[0x2A] = 0x08;//data[0x2A] = 0x80;  // в зоне 3 управляет путями следования транспорта 0x10 и 0x08
+    // data[0x2A] = 0x08;//data[0x2A] = 0x80;  // in zone 3 controls the routes of transport 0x10 and 0x08
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;
 
-    memcpy(data + (0x84), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x84), PChar->GetName().c_str(), PChar->GetName().size());
 
     ref<uint8>(0x0B) = PChar->loc.p.rotation;
     ref<float>(0x0C) = PChar->loc.p.x;
@@ -177,17 +176,23 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint16>(0x60) = PChar->loc.boundary;
     ref<uint16>(0x68) = PChar->loc.zone->GetWeather();
     ref<uint32>(0x6A) = PChar->loc.zone->GetWeatherChangeTime();
+
+    // TODO: Could this be previous weather, for weather transitions?
     // ref<uint32>(0x6C) = PChar->loc.zone->GetWeather();
     // ref<uint32>(0x70) = PChar->loc.zone->GetWeatherChangeTime();
 
+    auto csid = currentEvent->eventId;
     if (csid != -1)
     {
-        // ref<uint8>(data,(0x1F)) = 4;                             // предположительно animation
+        // ref<uint8>(data,(0x1F)) = 4; // Presumably Animation
         // ref<uint8>(data,(0x20)) = 2;
 
         ref<uint16>(0x40) = PChar->currentEvent->textTable == -1 ? PChar->getZone() : PChar->currentEvent->textTable;
         ref<uint16>(0x62) = PChar->getZone();
-        ref<uint16>(0x64) = csid;
+        ref<uint16>(0x64) = currentEvent->eventId;
+
+        // Note that only the first 16 bits are supported by this packet type.
+        ref<uint16>(0x66) = currentEvent->eventFlags & 0xFFFF;
     }
 
     ref<uint16>(0x30) = PChar->getZone();
@@ -195,19 +200,29 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
 
     if (PChar->m_moghouseID != 0)
     {
-        ref<uint8>(0x80)  = 1;
-        ref<uint16>(0xAA) = GetMogHouseID(PChar);   // Mog House id
-        ref<uint8>(0xAE)  = GetMogHouseFlag(PChar); // Mog House leaving flag
+        ref<uint8>(0x80) = 1;
+
+        if (PChar->profile.mhflag & 0x0040) // On MH2F
+        {
+            // Ensure full exit menu appears
+            ref<uint16>(0xA8) = 0x02;
+        }
+
+        ref<uint16>(0xAA) = GetMogHouseModelID(PChar);
     }
     else
     {
         ref<uint8>(0x80)  = 2;
         ref<uint16>(0xAA) = 0x01FF;
-        ref<uint8>(0xAC)  = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
-        ref<uint8>(0xAF)  = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // флаг, позволяет использовать mog menu за пределами mog house
+
+        // TODO: This has also been seen as 0x04 and 0x07
+        ref<uint8>(0xAC) = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
+        ref<uint8>(0xAF) = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
-    ref<uint32>(0xA0) = PChar->GetPlayTime(); // время, проведенное персонажем в игре с момента создания
+    ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
+
+    ref<uint8>(0xAE) = GetMogHouseLeavingFlag(PChar);
 
     uint32 pktTime = CVanaTime::getInstance()->getVanaTime();
 

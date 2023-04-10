@@ -27,7 +27,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getMainLvl() >= 20 and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE then
+    if
+        player:getMainLvl() >= 20 and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE
+    then
         player:startEvent(50, 4365) -- Start quest "Cargo"
     elseif player:getMainLvl() < 20 then
         player:startEvent(53) -- Dialog for low level or low fame
@@ -51,16 +54,13 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if option == 1 then
-            player:addGil(800)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 800)
+            npcUtil.giveCurrency(player, 'gil', 800)
             player:confirmTrade()
         elseif option == 2 then
-            player:addGil(2000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 2000)
+            npcUtil.giveCurrency(player, 'gil', 2000)
             player:confirmTrade()
         elseif option == 3 then
-            player:addGil(3000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 3000)
+            npcUtil.giveCurrency(player, 'gil', 3000)
             player:confirmTrade()
         end
     end

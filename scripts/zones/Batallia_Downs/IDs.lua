@@ -29,33 +29,33 @@ zones[xi.zone.BATALLIA_DOWNS] =
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
         SPARKLING_LIGHT               = 7350,  -- The ground is sparkling with a strange light.
         SENSE_SOMETHING_LURKING       = 7440,  -- You sense something lurking close by!
-        NO_GRASS_GROWING_HERE         = 7500,  -- There is no grass growing here...
-        PLAYER_OBTAINS_ITEM           = 7712,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7713,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7714,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7715,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7720,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 7751,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 7782,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9998,  -- New training regime registered!
-        FRAGMENT_FAR_TOO_SMALL        = 11336, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
-        FRAGMENTS_MELD                = 11337, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
-        SEE_WEATHERED_GRAVESTONE      = 11338, -- You see a weathered gravestone.
-        VOIDWALKER_NO_MOB             = 11339, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 11340, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 11341, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 11342, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 11344, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 11345, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 11346, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 11347, -- Obtained key item: <keyitem>!
-        LEARNS_SPELL                  = 12847, -- <name> learns <spell>!
-        UNCANNY_SENSATION             = 12849, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL         = 12856, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        RAPTOR_OVERCOME_MUNCHIES      = 13009, -- The raptor has overcome the munchies! (<number>/<number>)
-        RAPTOR_SECOND_WIND            = 13010, -- The raptor has gained a second wind!
-        MEET_SYRILLIA                 = 13011, -- Meet up with Syrillia.
-        RAPTOR_SPEEDS_OFF             = 13012, -- The raptor speeds off into the sunset...
+        NO_GRASS_GROWING_HERE         = 7488,  -- There is no grass growing here...
+        PLAYER_OBTAINS_ITEM           = 7700,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7701,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7702,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7703,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7708,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 7739,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 7770,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9986,  -- New training regime registered!
+        FRAGMENT_FAR_TOO_SMALL        = 11324, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
+        FRAGMENTS_MELD                = 11325, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
+        SEE_WEATHERED_GRAVESTONE      = 11326, -- You see a weathered gravestone.
+        VOIDWALKER_NO_MOB             = 11327, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11328, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11329, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11330, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11332, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11333, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11334, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11335, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                  = 12835, -- <name> learns <spell>!
+        UNCANNY_SENSATION             = 12837, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL         = 12844, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RAPTOR_OVERCOME_MUNCHIES      = 12997, -- The raptor has overcome the munchies! (<number>/<number>)
+        RAPTOR_SECOND_WIND            = 12998, -- The raptor has gained a second wind!
+        MEET_SYRILLIA                 = 12999, -- Meet up with Syrillia.
+        RAPTOR_SPEEDS_OFF             = 13000, -- The raptor speeds off into the sunset...
     },
     mob =
     {
@@ -109,6 +109,9 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
+        SYRILLIA         = GetFirstID("Syrillia"),
+        BLUE_BEAM_BASE   = GetFirstID("NPC[2a4]"),
+        RAPTOR_FOOD_BASE = GetFirstID("Raptors_Food_0"),
     },
 }
 

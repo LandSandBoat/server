@@ -2,16 +2,17 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getMainJob() == xi.job.MNK) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getMainJob() == xi.job.MNK then
         return 0
     end
+
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 5
     local accmod = 1
     local dmgmod = 1.4
@@ -21,4 +22,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

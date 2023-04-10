@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Portaure
--- Standard Info NPC
 -----------------------------------
 require("scripts/quests/flyers_for_regine")
 -----------------------------------

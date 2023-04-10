@@ -17,11 +17,18 @@ entity.onTrade = function(player, npc, trade)
     if flowerProgress == 3 then
         if trade:hasItemQty(950, 1) and trade:getItemCount() == 1 then
             if sayFlowers == QUEST_COMPLETED then
-                player:startEvent(525, xi.settings.main.GIL_RATE*400)
+                player:startEvent(525, xi.settings.main.GIL_RATE * 400)
             else
                 player:startEvent(520)
             end
-        elseif offer == 941 or offer == 948 or offer == 949 or offer == 956 or offer == 957 or offer == 958 then
+        elseif
+            offer == 941 or
+            offer == 948 or
+            offer == 949 or
+            offer == 956 or
+            offer == 957 or
+            offer == 958
+        then
             player:startEvent(522) -- Brought wrong flowers.
         end
     end
@@ -32,7 +39,10 @@ entity.onTrigger = function(player, npc)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local needToZone = player:needToZone()
 
-    if sayFlowers == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
+    if
+        sayFlowers == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+    then
         player:startEvent(514) -- Begin Say It with Flowers.
     elseif flowerProgress == 3 or flowerProgress == 1 then
         player:startEvent(515) -- Waiting for trade.
@@ -68,8 +78,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 522 then -- Wrong flowers so complete quest, but smaller reward/fame and no title.
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
-        player:addGil(xi.settings.main.GIL_RATE * 100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, 100)
+        npcUtil.giveCurrency(player, 'gil', 100)
         player:addFame(xi.quest.fame_area.WINDURST, 10)
         player:needToZone(true)
         player:setCharVar("FLOWER_PROGRESS", 0)

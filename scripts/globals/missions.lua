@@ -601,13 +601,13 @@ xi.mission.id =
         CAUTERIZE                       = 72,  -- ±
         UNCERTAIN_DESTINATIONS          = 78,  -- ±
         GANGED_UP_ON                    = 80,  -- ±
-        SACRIFICE                       = 83,
-        SOMBER_DREAMS                   = 86,
-        OF_LIGHT_AND_DARKNESS           = 92,
-        TEMPORARY_FAREWELLS             = 94,
-        BRUSHING_UP                     = 96,
-        KEEP_ON_GIVING                  = 98,
-        PAST_IMPERFECT                  = 100,
+        SACRIFICE                       = 83,  -- ±
+        SOMBER_DREAMS                   = 86,  -- ±
+        OF_LIGHT_AND_DARKNESS           = 92,  -- ±
+        TEMPORARY_FAREWELLS             = 94,  -- ±
+        BRUSHING_UP                     = 96,  -- ±
+        KEEP_ON_GIVING                  = 98,  -- ±
+        PAST_IMPERFECT                  = 100, -- ±
         THE_CURSED_TEMPLE               = 102,
         WISDOM_OF_OUR_FOREFATHERS       = 103,
         WHERE_DIVINITIES_COLLIDE        = 104,
@@ -677,7 +677,7 @@ xi.mission.id =
 -- None yet!
 
 local function rankPointMath(rank)
-    return 0.372*rank^2 - 1.62*rank + 6.2
+    return 0.372 * rank^2 - 1.62 * rank + 6.2
 end
 
 xi.mission.getMissionRankPoints = function(player, missionID)
@@ -704,9 +704,9 @@ xi.mission.getMissionRankPoints = function(player, missionID)
         crystals = 0
     end
 
-    local points_needed = 1024 * (crystals-.25) / (3*rankPointMath(player:getRank(player:getNation())))
+    local pointsNeeded = 1024 * (crystals - 0.25) / (3 * rankPointMath(player:getRank(player:getNation())))
 
-    if player:getRankPoints() >= points_needed then
+    if player:getRankPoints() >= pointsNeeded then
         return true
     end
 

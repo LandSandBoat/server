@@ -10,7 +10,7 @@
 -- Casting Time: 3.25 seconds
 -- Recast Time: 21 seconds
 -- Duration: 60~ seconds
--- Skillchain Element(s): Dark (Primary) and Water (Secondary) - (can open Transfixion, Detonation, Impaction, or Induration can close Compression, Reverberation, or Gravitation)
+-- Skillchain Element(s): Compression/Reverberation
 -- Combos: Defense Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -18,19 +18,20 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.UNDEAD
     params.tpmod = TPMOD_ACC
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.HTH
     params.scattr = SC_COMPRESSION
+    params.scattr2 = SC_REVERBERATION
     params.numhits = 1
     params.multiplier = 1.5
     params.tp150 = 1.5
@@ -44,16 +45,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (target:hasStatusEffect(xi.effect.ATTACK_DOWN)) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.ATTACK_DOWN, 15, 0, 20)
-    end
+    params.effect = xi.effect.ATTACK_DOWN
+    local power = 15
+    local tick = 0
+    local duration = 60
+
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

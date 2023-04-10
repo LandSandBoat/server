@@ -4,14 +4,14 @@
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.job_utils.geomancer.indiOnMagicCastingCheck(caster, target, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-   return xi.job_utils.geomancer.doIndiSpell(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.job_utils.geomancer.doIndiSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

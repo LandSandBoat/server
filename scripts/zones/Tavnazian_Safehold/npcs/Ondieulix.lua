@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Ondieulix
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

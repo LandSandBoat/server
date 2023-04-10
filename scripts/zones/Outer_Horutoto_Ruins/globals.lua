@@ -39,13 +39,18 @@ local outerHorutotoGlobal =
         check to spawn trio NM.
         ..............................................................................................]]
     balloonOnDespawn = function(mob)
-        local phId = mob:getID()
+        local phId   = mob:getID()
         local offset = phId - ID.mob.BALLOON_NM_OFFSET
 
-        if offset >= 0 and offset <= 4 and not trioPrimed() and math.random(100) <= 20 then
+        if
+            offset >= 0 and
+            offset <= 4 and
+            not trioPrimed() and
+            math.random(1, 100) <= 20
+        then
             local nmId = ID.mob.BALLOON_NM_OFFSET + math.random(1, 3)
-            local nm = GetMobByID(nmId)
-            local pop = nm:getLocalVar("pop")
+            local nm   = GetMobByID(nmId)
+            local pop  = nm:getLocalVar("pop")
 
             if os.time() > pop then
                 DisallowRespawn(phId, true)

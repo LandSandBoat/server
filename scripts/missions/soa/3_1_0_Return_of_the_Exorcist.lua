@@ -28,9 +28,9 @@ mission.sections =
         {
             ['Levil'] = mission:event(138),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(130, 256, 23, 2964)
                 end,
             },

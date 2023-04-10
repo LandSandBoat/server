@@ -15,32 +15,6 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1 then
-        local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
-        if
-            a == 0 or
-            (
-                a ~= 4 and
-                a ~= 5 and
-                a ~= 6 and
-                a ~= 12 and
-                a ~= 20 and
-                a ~= 7 and
-                a ~= 28 and
-                a ~= 13 and
-                a ~= 22 and
-                a ~= 14 and
-                a ~= 21 and
-                a ~= 15 and
-                a ~= 23 and
-                a ~= 29 and
-                a ~= 30 and
-                a ~= 31
-            )
-        then
-            player:startEvent(91, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -94,17 +68,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 91 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz1", 4)
-    elseif
+    if
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)
     then
         player:addTitle(xi.title.TWOS_COMPANY)
         player:setCharVar("theLostCardianVar", 0)
-        player:addGil(xi.settings.main.GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*2100)
+        npcUtil.giveCurrency(player, 'gil', 2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
         player:addFame(xi.quest.fame_area.JEUNO, 30)

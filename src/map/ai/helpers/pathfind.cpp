@@ -20,10 +20,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pathfind.h"
-#include "../../../common/utils.h"
-#include "../../entities/baseentity.h"
-#include "../../entities/mobentity.h"
-#include "../../zone.h"
+
+#include "ai/ai_container.h"
+#include "common/utils.h"
+#include "entities/baseentity.h"
+#include "entities/mobentity.h"
+#include "lua/luautils.h"
+#include "zone.h"
 
 namespace
 {
@@ -157,11 +160,6 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
 {
     TracyZoneScoped;
     Clear();
-    // position_t* lastPoint = &point;
-
-    // float randomRadian = xirand::GetRandomNumber<float>(0, 2 * (float)M_PI);
-    // lastPoint->x += cosf(randomRadian) * distanceFromPoint;
-    // lastPoint->z += sinf(randomRadian) * distanceFromPoint;
 
     // save for sliding logic
     m_originalPoint     = point;
@@ -283,8 +281,10 @@ void CPathFind::FollowPath(time_point tick)
         {
             m_timeAtPoint = {};
             ++m_currentPoint;
+            luautils::OnPathPoint(m_POwner);
             if (m_currentPoint >= (int16)m_points.size())
             {
+                luautils::OnPathComplete(m_POwner);
                 FinishedPath();
             }
         }
@@ -327,6 +327,8 @@ void CPathFind::FollowPath(time_point tick)
                 m_timeAtPoint = tick + std::chrono::milliseconds(targetPoint.wait);
                 return;
             }
+
+            luautils::OnPathPoint(m_POwner);
             m_currentPoint++;
         }
         else
@@ -339,6 +341,7 @@ void CPathFind::FollowPath(time_point tick)
 
     if (m_currentPoint >= (int16)m_points.size())
     {
+        luautils::OnPathComplete(m_POwner);
         FinishedPath();
         m_onPoint = true;
     }
@@ -570,16 +573,6 @@ bool CPathFind::InWater()
     return false;
 }
 
-bool CPathFind::CanSeePoint(const position_t& point, bool lookOffMesh)
-{
-    if (isNavMeshEnabled())
-    {
-        return m_POwner->loc.zone->m_navMesh->raycast(m_POwner->loc.p, point, lookOffMesh);
-    }
-
-    return true;
-}
-
 const position_t& CPathFind::GetDestination() const
 {
     return m_points.back().position;
@@ -652,7 +645,7 @@ void CPathFind::FinishedPath()
             Clear();
         }
     }
-    else if (IsPatrolling())
+    else if (IsPatrolling() && m_POwner->PAI->IsRoaming())
     {
         m_currentPoint = 0;
         m_currentTurn  = 0;

@@ -10,7 +10,7 @@ cmdprops =
     parameters = "i"
 }
 
-local god_mode_on = function(player)
+local godModeOn = function(player)
     -- Add bonus effects to the player..
     player:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
     player:addStatusEffect(xi.effect.MAX_MP_BOOST, 1000, 0, 0)
@@ -37,11 +37,11 @@ local god_mode_on = function(player)
     player:addMod(xi.mod.MDEF, 2500)
 
     -- Heal the player from the new buffs..
-    player:addHP( 50000 )
-    player:setMP( 50000 )
+    player:addHP(50000)
+    player:setMP(50000)
 end
 
-local god_mode_off = function(player)
+local godModeOff = function(player)
     -- Remove bonus effects..
     player:delStatusEffect(xi.effect.MAX_HP_BOOST)
     player:delStatusEffect(xi.effect.MAX_MP_BOOST)
@@ -68,21 +68,21 @@ local god_mode_off = function(player)
     player:delMod(xi.mod.MDEF, 2500)
 end
 
-local god_mode_tier_one_on = function(player)
+local godModeTierOneOn = function(player)
     -- Add bonus effects to the player..
-    player:addStatusEffect(xi.effect.MAX_HP_BOOST,200,0,0)
-    player:addStatusEffect(xi.effect.REGAIN,50,0,0)
-    player:addStatusEffect(xi.effect.REFRESH,999,0,0)
-    player:addStatusEffect(xi.effect.REGEN,999,0,0)
+    player:addStatusEffect(xi.effect.MAX_HP_BOOST, 200, 0, 0)
+    player:addStatusEffect(xi.effect.REGAIN, 50, 0, 0)
+    player:addStatusEffect(xi.effect.REFRESH, 999, 0, 0)
+    player:addStatusEffect(xi.effect.REGEN, 999, 0, 0)
     player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
     player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
 
     -- Heal the player from the new buffs..
-    player:addHP( 50000 )
-    player:setMP( 50000 )
+    player:addHP(50000)
+    player:setMP(50000)
 end
 
-local god_mode_tier_one_off = function(player)
+local godModeTierOneOff = function(player)
     -- Remove bonus effects..
     player:delStatusEffect(xi.effect.MAX_HP_BOOST)
     player:delStatusEffect(xi.effect.REGAIN)
@@ -98,32 +98,32 @@ function onTrigger(player, tier)
 
     if mode == 0 and state == 0 then
         player:setCharVar("GodMode", 1)
-        god_mode_on(player)
+        godModeOn(player)
         player:PrintToPlayer("God Mode enabled.")
     elseif mode == 0 and state == 1 then
         player:setCharVar("GodMode", 0)
-        god_mode_off(player)
+        godModeOff(player)
         player:PrintToPlayer("God Mode disabled.")
     elseif mode == 0 and state == 2 then
         player:setCharVar("GodMode", 1)
-        god_mode_tier_one_off(player)
-        god_mode_on(player)
+        godModeTierOneOff(player)
+        godModeOn(player)
         player:PrintToPlayer("God Mode enabled.")
     end
 
     -- Enables a toned down version of god mode
     if mode == 1 and state == 0 then
         player:setCharVar("GodMode", 2)
-        god_mode_tier_one_on(player)
+        godModeTierOneOn(player)
         player:PrintToPlayer("God Mode Tier 1 enabled.")
     elseif mode == 1 and state == 2 then
         player:setCharVar("GodMode", 0)
-        god_mode_tier_one_off(player)
+        godModeTierOneOff(player)
         player:PrintToPlayer("God Mode Tier 1 disabled.")
     elseif mode == 1 and state == 1 then
         player:setCharVar("GodMode", 2)
-        god_mode_off(player)
-        god_mode_tier_one_on(player)
+        godModeOff(player)
+        godModeTierOneOn(player)
         player:PrintToPlayer("God Mode Tier 1 enabled.")
     end
 end

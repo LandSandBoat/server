@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Sleeping Lizard
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -106,7 +106,9 @@ quest.sections =
 
                     if option == 4002 then
                         if quest:complete(player) then
-                            player:setMoghouseFlag(8)
+                            player:confirmTrade()
+                            local mhflag = player:getMoghouseFlag()
+                            player:setMoghouseFlag(mhflag + 0x0008)
                             player:messageSpecial(portJeunoID.text.MOGHOUSE_EXIT)
                         end
                     elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then

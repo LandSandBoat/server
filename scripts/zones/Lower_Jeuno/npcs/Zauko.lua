@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Zauko
--- Involved in Quests: Save the Clock Tower, Community Service
+-- Involved in Quests: Community Service
 -- !pos -3 0 11 245
 -----------------------------------
 require("scripts/zones/Lower_Jeuno/globals")
@@ -15,38 +15,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    ----- Save The Clock Tower Quest -----
-    if
-        trade:hasItemQty(555, 1) == true and
-        trade:getItemCount() == 1
-    then
-        local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
-        if
-            a == 0 or
-            (
-                a ~= 256 and
-                a ~= 288 and
-                a ~= 320 and
-                a ~= 384 and
-                a ~= 768 and
-                a ~= 352 and
-                a ~= 896 and
-                a ~= 416 and
-                a ~= 832 and
-                a ~= 448 and
-                a ~= 800 and
-                a ~= 480 and
-                a ~= 864 and
-                a ~= 928 and
-                a ~= 960 and
-                a ~= 992
-            )
-        then
-            player:startEvent(50, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
-        end
-    end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -57,9 +25,9 @@ entity.onTrigger = function(player, npc)
     local hasMembershipCard = player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) and 1 or 0
 
     local allLampsLit = true
-    for i=0, 11 do
+    for i = 0, 11 do
         local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-        if (lamp:getAnimation() == xi.anim.CLOSE_DOOR) then
+        if lamp:getAnimation() == xi.anim.CLOSE_DOOR then
             allLampsLit = false
             break
         end
@@ -93,7 +61,6 @@ entity.onTrigger = function(player, npc)
     -- default dialog including option to drop membership card
     else
         player:startEvent(118, hasMembershipCard)
-
     end
 end
 
@@ -123,13 +90,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SAVE THE CLOCKTOWER
-    if csid == 50 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz2", 256)
-
     -- COMMUNITY SERVICE
-    elseif csid == 117 then
+    if csid == 117 then
         local params = { title = xi.title.TORCHBEARER, var = "currCommService" }
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED then
             -- first victory
@@ -141,6 +103,7 @@ entity.onEventFinish = function(player, csid, option)
                 params.ki = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
+
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE, params)
 
     elseif csid == 118 and option == 1 then

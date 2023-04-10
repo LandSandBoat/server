@@ -1,9 +1,9 @@
 ﻿/************************************************************************
-* Auction House Announcements
-*
-* This will send a message to the seller of an item when it is bought,
-* informing them that their item sold, to who, and for how much.
-* It will only send this message if the seller is online.
+ * Auction House Announcements
+ *
+ * This will send a message to the seller of an item when it is bought,
+ * informing them that their item sold, to who, and for how much.
+ * It will only send this message if the seller is online.
  ************************************************************************/
 
 #include "map/utils/moduleutils.h"
@@ -21,6 +21,7 @@
 #include <numeric>
 
 extern uint8 PacketSize[512];
+
 extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
 
 class AHAnnouncementModule : public CPPModule
@@ -50,7 +51,7 @@ class AHAnnouncementModule : public CPPModule
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
                 }
                 else
                 {
@@ -64,31 +65,33 @@ class AHAnnouncementModule : public CPPModule
                             {
                                 if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
                                 {
-                                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
                                     return;
                                 }
                             }
                         }
+
                         CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
                         if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
                         {
-                            auto sellerId = 0;
-
-                            auto ret = sql->Query(
-                                "SELECT seller FROM auction_house WHERE itemid = %u AND buyer_name IS NULL "
-                                "AND stack = %u AND price <= %u ORDER BY price LIMIT 1",
-                                itemid, quantity == 0, price);
-
-                            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                            {
-                                sellerId = sql->GetUIntData(0);
-                            }
-
-                            ret = sql->Query(
-                                "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
-                                "AND stack = %u AND price <= %u ORDER BY price LIMIT 1",
-                                PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price);
+                            // clang-format off
+                            auto ret = sql->Query(fmt::format(R"(
+                                UPDATE auction_house
+                                SET buyer_name = '{}', sale = {}, sell_date = {}
+                                WHERE itemid = {}
+                                AND buyer_name IS NULL
+                                AND stack = {}
+                                AND price <= {}
+                                # LAST_INSERT_ID:
+                                # The ID that was generated is maintained in the server on a per-connection basis.
+                                # Always evaluates to a positive integer, therefore true
+                                AND LAST_INSERT_ID(seller)
+                                ORDER BY price
+                                LIMIT 1;
+                                )",
+                                PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price).c_str());
+                            // clang-format on
 
                             if (ret != SQL_ERROR && sql->AffectedRows() != 0)
                             {
@@ -98,15 +101,29 @@ class AHAnnouncementModule : public CPPModule
                                 {
                                     charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price));
 
-                                    PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price));
+                                    PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price, quantity, PItem->getStackSize()));
                                     PChar->pushPacket(new CInventoryFinishPacket());
+
+                                    ret = sql->Query(R"(
+                                        SELECT seller
+                                        FROM auction_house
+                                        WHERE id = LAST_INSERT_ID();
+                                    )");
+
+                                    uint32 sellerId = 0;
+
+                                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                                    {
+                                        sellerId = sql->GetUIntData(0);
+                                    }
 
                                     if (sellerId > 0)
                                     {
+                                        // clang-format off
                                         // Sanitize name
-                                        std::string name = (const char*)PItem->getName();
-                                        auto parts = split(name, "_");
-                                        name = "";
+                                        std::string name  = PItem->getName();
+                                        auto        parts = split(name, "_");
+                                        name              = "";
                                         name += std::accumulate(std::begin(parts), std::end(parts), std::string(),
                                         [](std::string& ss, std::string& s)
                                         {
@@ -117,13 +134,21 @@ class AHAnnouncementModule : public CPPModule
                                         // Send message to seller!
                                         message::send(sellerId, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
                                             fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
+                                        // clang-format on
                                     }
                                 }
                                 return;
                             }
                         }
                     }
-                    PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price));
+                    if (PItem)
+                    {
+                        PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, PItem->getStackSize()));
+                    }
+                    else
+                    {
+                        PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, 0));
+                    }
                 }
             }
             else // Otherwise, call original handler

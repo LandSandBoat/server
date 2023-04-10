@@ -8,92 +8,66 @@ require("scripts/globals/utils")
 --       by using !cs 30034 and exiting the menu
 -----------------------------------
 
--- Song data, from Windower Addon: setbgm.lua
---[[
-    [25]='Voracious Resurgence Unknown 1', [26]='Voracious Resurgence Unknown 2', [27]='Voracious Resurgence Unknown 3', [28]='Voracious Resurgence Unknown 4', [29]="Devils' Delight",
-    [40]='Cloister of Time and Souls', [41]='Royal Wanderlust', [42]='Snowdrift Waltz', [43]='Troubled Shadows', [44]='Where Lords Rule Not', [45]='Summers Lost', [46]='Goddess Divine', [47]='Echoes of Creation', [48]='Main Theme', [49]='Luck of the Mog',
-    [50]='Feast of the Ladies', [51]='Abyssea - Scarlet Skies, Shadowed Plains', [52]='Melodies Errant', [53]='Shinryu', [54]='Everlasting Bonds', [55]='Provenance Watcher', [56]='Where it All Begins', [57]='Steel Sings, Blades Dance', [58]='A New Direction', [59]='The Pioneers',
-    [60]='Into Lands Primeval - Ulbuka', [61]="Water's Umbral Knell", [62]='Keepers of the Wild', [63]='The Sacred City of Adoulin', [64]='Breaking Ground', [65]='Hades', [66]='Arciela', [67]='Mog Resort', [68]='Worlds Away', [69]="Distant Worlds (Nanaa Mihgo's version)",
-    [70]='Monstrosity', [71]="The Pioneers (Nanaa Mihgo's version)", [72]='The Serpentine Labyrinth', [73]='The Divine', [74]='Clouds Over Ulbuka', [75]='The Price', [76]='Forever Today', [77]='Distant Worlds (Instrumental)', [78]='Forever Today (Instrumental)', [79]='Iroha',
-    [80]='The Boundless Black', [81]='Isle of the Gods', [82]='Wail of the Void', [83]="Rhapsodies of Vana'diel", [84]="Full Speed Ahead!", [85]="Times Grow Tense", [86]="Shadow Lord (Record Keeper Remix)", [87]="For a Friend", [88]="Between Dreams and Reality", [89]="Disjoined One", [90]="Winds of Change",
-    [101]='Battle Theme', [102]='Battle in the Dungeon #2', [103]='Battle Theme #2', [104]='A Road Once Traveled', [105]='Mhaura', [106]='Voyager', [107]="The Kingdom of San d'Oria", [108]="Vana'diel March", [109]='Ronfaure',
-    [110]='The Grand Duchy of Jeuno', [111]='Blackout', [112]='Selbina', [113]='Sarutabaruta', [114]='Batallia Downs', [115]='Battle in the Dungeon', [116]='Gustaberg', [117]="Ru'Lude Gardens", [118]='Rolanberry Fields', [119]='Awakening',
-    [120]="Vana'diel March #2", [121]='Shadow Lord', [122]='One Last Time', [123]='Hopelessness', [124]='Recollection', [125]='Tough Battle', [126]='Mog House', [127]='Anxiety', [128]='Airship', [129]='Hook, Line and Sinker',
-    [130]='Tarutaru Female', [131]='Elvaan Female', [132]='Elvaan Male', [133]='Hume Male', [134]='Yuhtunga Jungle', [135]='Kazham', [136]='The Big One', [137]='A Realm of Emptiness', [138]="Mercenaries' Delight", [139]='Delve',
-    [140]='Wings of the Goddess', [141]='The Cosmic Wheel', [142]='Fated Strife -Besieged-', [143]='Hellriders', [144]='Rapid Onslaught -Assault-', [145]='Encampment Dreams', [146]='The Colosseum', [147]='Eastward Bound...', [148]='Forbidden Seal', [149]='Jeweled Boughs',
-    [150]='Ululations from Beyond', [151]='The Federation of Windurst', [152]='The Republic of Bastok', [153]='Prelude', [154]='Metalworks', [155]='Castle Zvahl', [156]="Chateau d'Oraguille", [157]='Fury', [158]='Sauromugue Champaign', [159]='Sorrow',
-    [160]='Repression (Memoro de la Stono)', [161]='Despair (Memoro de la Stono)', [162]='Heavens Tower', [163]='Sometime, Somewhere', [164]='Xarcabard', [165]='Galka', [166]='Mithra', [167]='Tarutaru Male', [168]='Hume Female', [169]='Regeneracy',
-    [170]='Buccaneers', [171]='Altepa Desert', [172]='Black Coffin', [173]='Illusions in the Mist', [174]='Whispers of the Gods', [175]="Bandits' Market", [176]='Circuit de Chocobo', [177]='Run Chocobo, Run!', [178]='Bustle of the Capital', [179]="Vana'diel March #4",
-    [180]='Thunder of the March', [181]='Dash de Chocobo (Low Quality)', [182]='Stargazing', [183]="A Puppet's Slumber", [184]='Eternal Gravestone', [185]='Ever-Turning Wheels', [186]='Iron Colossus', [187]='Ragnarok', [188]='Choc-a-bye Baby', [189]='An Invisible Crown',
-    [190]="The Sanctuary of Zi'Tah", [191]='Battle Theme #3', [192]='Battle in the Dungeon #3', [193]='Tough Battle #2', [194]='Bloody Promises', [195]='Belief', [196]='Fighters of the Crystal', [197]='To the Heavens', [198]="Eald'narche", [199]="Grav'iton",
-    [200]='Hidden Truths', [201]='End Theme', [202]='Moongate (Memoro de la Stono)', [203]='Ancient Verse of Uggalepih', [204]="Ancient Verse of Ro'Maeve", [205]='Ancient Verse of Altepa', [206]='Revenant Maiden', [207]="Ve'Lugannon Palace", [208]='Rabao', [209]='Norg',
-    [210]="Tu'Lia", [211]="Ro'Maeve", [212]='Dash de Chocobo', [213]='Hall of the Gods', [214]='Eternal Oath', [215]='Clash of Standards', [216]='On this Blade', [217]='Kindred Cry', [218]='Depths of the Soul', [219]='Onslaught',
-    [220]='Turmoil', [221]='Moblin Menagerie - Movalpolos', [222]='Faded Memories - Promyvion', [223]='Conflict: March of the Hero', [224]='Dusk and Dawn', [225]="Words Unspoken - Pso'Xja", [226]='Conflict: You Want to Live Forever?', [227]='Sunbreeze Shuffle', [228]="Gates of Paradise - The Garden of Ru'Hmet", [229]='Currents of Time',
-    [230]='A New Horizon - Tavnazian Archipelago', [231]='Celestial Thunder', [232]='The Ruler of the Skies', [233]="The Celestial Capital - Al'Taieu", [234]='Happily Ever After', [235]='First Ode: Nocturne of the Gods', [236]='Fourth Ode: Clouded Dawn', [237]='Third Ode: Memoria de la Stona', [238]='A New Morning', [239]='Jeuno -Starlight Celebration-',
-    [240]='Second Ode: Distant Promises', [241]='Fifth Ode: A Time for Prayer', [242]='Unity', [243]="Grav'iton", [244]='Revenant Maiden', [245]='The Forgotten City - Tavnazian Safehold', [246]='March of the Allied Forces', [247]='Roar of the Battle Drums', [248]='Young Griffons in Flight', [249]='Run Maggot, Run!',
-    [250]='Under a Clouded Moon', [251]='Autumn Footfalls', [252]='Flowers on the Battlefield', [253]='Echoes of a Zypher', [254]='Griffons Never Die',
-    [900]='Distant Worlds'
-]]
+-- See documentation/songdata.txt for extracted table of data.
 
 xi = xi or {}
 xi.symphonic_curator = xi.symphonic_curator or {}
 
 xi.symphonic_curator.onTrigger = function(player, npc)
-
     -- The first time you click, you'll always already be listening to Mog House
     if player:getLocalVar("Symphonic_Curator_Music") == 0 then
         player:setLocalVar("Symphonic_Curator_Music", 126)
     end
 
     -- All music type 6 (Moghouse)
-    local song_packs = 0
+    local songPacks = 0
 
     -- Default: Mog House (126), Vana'diel March (108)
-    song_packs = utils.mask.setBit(song_packs, 0, 1)
+    songPacks = utils.mask.setBit(songPacks, 0, 1)
 
-    song_packs = utils.mask.setBit(song_packs, 1, player:hasKeyItem(xi.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
-    song_packs = utils.mask.setBit(song_packs, 2, player:hasKeyItem(xi.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
-    song_packs = utils.mask.setBit(song_packs, 3, player:hasKeyItem(xi.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
-    song_packs = utils.mask.setBit(song_packs, 4, player:hasKeyItem(xi.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
-    song_packs = utils.mask.setBit(song_packs, 5, player:hasKeyItem(xi.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
-    song_packs = utils.mask.setBit(song_packs, 6, player:hasKeyItem(xi.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
+    songPacks = utils.mask.setBit(songPacks, 1, player:hasKeyItem(xi.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
+    songPacks = utils.mask.setBit(songPacks, 2, player:hasKeyItem(xi.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
+    songPacks = utils.mask.setBit(songPacks, 3, player:hasKeyItem(xi.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
+    songPacks = utils.mask.setBit(songPacks, 4, player:hasKeyItem(xi.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
+    songPacks = utils.mask.setBit(songPacks, 5, player:hasKeyItem(xi.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
+    songPacks = utils.mask.setBit(songPacks, 6, player:hasKeyItem(xi.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
     -- Next page
-    song_packs = utils.mask.setBit(song_packs, 7, player:hasKeyItem(xi.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
-    song_packs = utils.mask.setBit(song_packs, 8, player:hasKeyItem(xi.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
-    song_packs = utils.mask.setBit(song_packs, 9, player:hasKeyItem(xi.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
-    song_packs = utils.mask.setBit(song_packs, 10, false)                                                -- Unknown Item: Rhapsodies of Vana'diel (83)
-    song_packs = utils.mask.setBit(song_packs, 11, player:hasKeyItem(xi.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
-    song_packs = utils.mask.setBit(song_packs, 12, player:hasKeyItem(xi.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
-    song_packs = utils.mask.setBit(song_packs, 13, player:hasKeyItem(xi.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
-    song_packs = utils.mask.setBit(song_packs, 14, player:hasKeyItem(xi.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
-    song_packs = utils.mask.setBit(song_packs, 15, player:hasKeyItem(xi.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
+    songPacks = utils.mask.setBit(songPacks, 7, player:hasKeyItem(xi.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
+    songPacks = utils.mask.setBit(songPacks, 8, player:hasKeyItem(xi.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
+    songPacks = utils.mask.setBit(songPacks, 9, player:hasKeyItem(xi.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
+    songPacks = utils.mask.setBit(songPacks, 10, false)                                                -- Unknown Item: Rhapsodies of Vana'diel (83)
+    songPacks = utils.mask.setBit(songPacks, 11, player:hasKeyItem(xi.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
+    songPacks = utils.mask.setBit(songPacks, 12, player:hasKeyItem(xi.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
+    songPacks = utils.mask.setBit(songPacks, 13, player:hasKeyItem(xi.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
+    songPacks = utils.mask.setBit(songPacks, 14, player:hasKeyItem(xi.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
+    songPacks = utils.mask.setBit(songPacks, 15, player:hasKeyItem(xi.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
 
     -- 0000 = all instruments shown
     -- 1111 = all instruments hidden
-    local instruments_available = 15
+    local instrumentsAvailable = 15
 
-    local orchestrion    = player:findItem(426)
-    local spinet         = player:findItem(3677)
-    local nanaa_statue_1 = player:findItem(286)
-    local nanaa_statue_2 = player:findItem(287)
+    local orchestrion  = player:findItem(426)
+    local spinet       = player:findItem(3677)
+    local nanaaStatue1 = player:findItem(286)
+    local nanaaStatue2 = player:findItem(287)
 
-    local has_orchestrion    = orchestrion and orchestrion:isInstalled()
-    local has_spinet         = spinet and spinet:isInstalled()
-    local has_nanaa_statue_1 = nanaa_statue_1 and nanaa_statue_1:isInstalled()
-    local has_nanaa_statue_2 = nanaa_statue_2 and nanaa_statue_1:isInstalled()
+    local hasOrchestrion  = orchestrion and orchestrion:isInstalled()
+    local hasSpinet       = spinet and spinet:isInstalled()
+    local hasNanaaStatue1 = nanaaStatue1 and nanaaStatue1:isInstalled()
+    local hasNanaaStatue2 = nanaaStatue2 and nanaaStatue2:isInstalled()
 
-    instruments_available = utils.mask.setBit(instruments_available, 0, not has_orchestrion)    -- Orchestrion
-    instruments_available = utils.mask.setBit(instruments_available, 1, not has_spinet)         -- Spinet
-    instruments_available = utils.mask.setBit(instruments_available, 2, not has_nanaa_statue_1) -- Nanaa Statue I
-    instruments_available = utils.mask.setBit(instruments_available, 3, not has_nanaa_statue_2) -- Nanaa Statue II
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 0, not hasOrchestrion)  -- Orchestrion
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 1, not hasSpinet)       -- Spinet
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 2, not hasNanaaStatue1) -- Nanaa Statue I
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 3, not hasNanaaStatue2) -- Nanaa Statue II
 
     -- GMs get access to all music
     if player:getGMLevel() > 0 then
-        song_packs = 65535
-        instruments_available = 0
+        songPacks = 65535
+        instrumentsAvailable = 0
     end
 
-    player:startEvent(30034, 0, 4095, song_packs, instruments_available)
+    player:startEvent(30034, 0, 4095, songPacks, instrumentsAvailable)
 end
 
 -- The options that comes through the event doesn't line up with the song request packet,
@@ -153,16 +127,16 @@ local optionToSongLookup =
 }
 
 xi.symphonic_curator.onEventUpdate = function(player, csid, option)
-    player:ChangeMusic(6, optionToSongLookup[option])
+    player:changeMusic(6, optionToSongLookup[option])
 end
 
 xi.symphonic_curator.onEventFinish = function(player, csid, option)
     if option == 0 then
         -- Reset
-        player:ChangeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
+        player:changeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
     else
         -- Confirmed, set
         player:setLocalVar("Symphonic_Curator_Music", optionToSongLookup[option])
-        player:ChangeMusic(6, optionToSongLookup[option])
+        player:changeMusic(6, optionToSongLookup[option])
     end
 end

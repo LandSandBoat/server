@@ -14,12 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) == false) then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
+        if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(652, skillCap, skillLevel, 2, 239, player:getGil(), 0, 0, 0)
         else
             player:startEvent(652, skillCap, skillLevel, 2, 239, player:getGil(), 7075, 0, 0)
@@ -33,7 +32,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 652 and option == 1) then
+    if csid == 652 and option == 1 then
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
         player:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end

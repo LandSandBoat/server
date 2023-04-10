@@ -46,13 +46,13 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:setMod(xi.mod.REGEN, 10)
-    mob:addMod(xi.mod.BINDRES, 30)
-    mob:addMod(xi.mod.SLOWRES, 10)
-    mob:addMod(xi.mod.BLINDRES, 10)
-    mob:addMod(xi.mod.SLEEPRES, 30)
-    mob:addMod(xi.mod.PETRIFYRES, 10)
-    mob:addMod(xi.mod.GRAVITYRES, 10)
-    mob:addMod(xi.mod.LULLABYRES, 30)
+    mob:addMod(xi.mod.BIND_MEVA, 30)
+    mob:addMod(xi.mod.SLOW_MEVA, 10)
+    mob:addMod(xi.mod.BLIND_MEVA, 10)
+    mob:addMod(xi.mod.SLEEP_MEVA, 30)
+    mob:addMod(xi.mod.PETRIFY_MEVA, 10)
+    mob:addMod(xi.mod.GRAVITY_MEVA, 10)
+    mob:addMod(xi.mod.LULLABY_MEVA, 30)
 end
 
 entity.onMobDisengage = function(mob, target)
@@ -64,7 +64,7 @@ end
 entity.onMobDespawn = function(mob)
     local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
+    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
         secondPrudence:addMod(xi.mod.ATTP, 100)

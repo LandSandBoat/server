@@ -15,7 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 1 then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
+        player:getCharVar('StormsOfFate') == 1
+    then
         player:startEvent(1)
     elseif not xi.bcnm.onTrigger(player, npc) then
         player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
@@ -30,6 +33,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:setCharVar('StormsOfFate', 2)
     end
+
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

@@ -3,14 +3,14 @@
 -- Scroll of Bewitching Etude
 -- Teaches the song Bewitching Etude
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(437)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(437)
 end
 
-return item_object
+return itemObject

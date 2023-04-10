@@ -26,7 +26,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:setHP(mob:getMaxHP()/2)
+    mob:setHP(mob:getMaxHP() / 2)
     mob:setUnkillable(true)
     mob:setMod(xi.mod.REGEN, 50)
 
@@ -41,24 +41,24 @@ end
 entity.onMobRoam = function(mob)
     -- Regen head
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+    if mob:getAnimationSub() == 2 and os.time() > headTimer then
         mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
-        if (mob:getLocalVar("secondHead") == 0) then
+        if mob:getLocalVar("secondHead") == 0 then
             mob:addHP(mob:getMaxHP() * .25)
             mob:setLocalVar("secondHead", 1)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
 
-    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+    elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
         mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
-        if (mob:getLocalVar("thirdHead") == 0) then
+        if mob:getLocalVar("thirdHead") == 0 then
             mob:addHP(mob:getMaxHP() * .25)
             mob:setMod(xi.mod.REGEN, 10)
             mob:setLocalVar("thirdHead", 1)
@@ -71,30 +71,32 @@ end
 
 entity.onMobFight = function(mob, target)
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+    if mob:getAnimationSub() == 2 and os.time() > headTimer then
         mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
-        if (mob:getLocalVar("secondHead") == 0) then
+        if mob:getLocalVar("secondHead") == 0 then
             mob:addHP(mob:getMaxHP() * .25)
             mob:setLocalVar("secondHead", 1)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+
+        if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
+
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
 
-    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+    elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
         mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
-        if (mob:getLocalVar("thirdHead") == 0) then
+        if mob:getLocalVar("thirdHead") == 0 then
             mob:setMod(xi.mod.REGEN, 10)
             mob:addHP(mob:getMaxHP() * .25)
             mob:setLocalVar("thirdHead", 1)
@@ -102,9 +104,11 @@ entity.onMobFight = function(mob, target)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+
+        if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
+
         -- Reverse order, same deal.
         mob:useMobAbility(1828) -- Pyric Blast
         mob:useMobAbility(1830) -- Polar Blast
@@ -115,11 +119,11 @@ end
 entity.onCriticalHit = function(mob)
     local critNum = mob:getLocalVar("crits")
 
-    if ((critNum+1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
-        if (mob:getAnimationSub() == 0) then
+    if (critNum + 1) > mob:getLocalVar("CritToTheFace") then  -- Lose a head
+        if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
-        elseif (mob:getAnimationSub() == 1) then
+        elseif mob:getAnimationSub() == 1 then
             mob:setAnimationSub(2)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         else
@@ -133,6 +137,7 @@ entity.onCriticalHit = function(mob)
     else
         critNum = critNum + 1
     end
+
     mob:setLocalVar("crits", critNum)
 end
 

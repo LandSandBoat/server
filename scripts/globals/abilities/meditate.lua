@@ -8,14 +8,14 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    local amount = 12
+abilityObject.onUseAbility = function(player, target, ability)
+    local amount   = 12
     local duration = 15 + player:getMod(xi.mod.MEDITATE_DURATION)
 
     if player:getMainJob() == xi.job.SAM then
@@ -25,4 +25,4 @@ ability_object.onUseAbility = function(player, target, ability)
     player:addStatusEffectEx(xi.effect.MEDITATE, 0, amount, 3, duration)
 end
 
-return ability_object
+return abilityObject

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Ney Hiparujah
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -19,7 +19,11 @@ entity.onTrigger = function(player, npc)
     player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Boots
-    if (gownQuestProgress > 0 and gownQuestProgress < 3 and not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)) then
+    if
+        gownQuestProgress > 0 and
+        gownQuestProgress < 3 and
+        not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
+    then
         npcUtil.giveKeyItem(player, xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
         player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
 

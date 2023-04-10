@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Ratihb
--- Standard Info NPC
 -- !pos 75.225 -6.000 -137.203 50
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -15,7 +14,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("AgainstAllOdds") == 2 and (player:getCharVar("AgainstAllOddsTimer") < os.time() or player:getCharVar("AgainstAllOddsTimer") == 0) then
+    if
+        player:getCharVar("AgainstAllOdds") == 2 and
+        (
+            player:getCharVar("AgainstAllOddsTimer") < os.time() or
+            player:getCharVar("AgainstAllOddsTimer") == 0
+        )
+    then
         player:startEvent(604) -- reacquire life float, account for chars on quest previously without a var
     else
         player:startEvent(603)

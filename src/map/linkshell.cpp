@@ -72,31 +72,30 @@ void CLinkshell::setPostRights(uint8 postrights)
     sql->Query("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d;", postrights, m_id);
 }
 
-const int8* CLinkshell::getName()
+const std::string& CLinkshell::getName()
 {
-    return (const int8*)m_name.c_str();
+    return m_name;
 }
 
-void CLinkshell::setName(int8* name)
+void CLinkshell::setName(const std::string& name)
 {
-    m_name.clear();
-    m_name.insert(0, (const char*)name);
+    m_name = name;
 }
 
-void CLinkshell::setMessage(const int8* message, const int8* poster)
+void CLinkshell::setMessage(const std::string& message, const std::string& poster)
 {
     char sqlMessage[256];
-    sql->EscapeString(sqlMessage, (const char*)message);
+    sql->EscapeString(sqlMessage, message.c_str());
     sql->Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
                static_cast<uint32>(time(nullptr)), m_id);
 
     int8 packetData[8]{};
     ref<uint32>(packetData, 0) = m_id;
     ref<uint32>(packetData, 4) = 0;
-    if (strlen((const char*)message) != 0)
+    if (message.size() != 0)
     {
         message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData,
-                      new CLinkshellMessagePacket(poster, message, (const int8*)m_name.c_str(), std::numeric_limits<uint32>::min(), true));
+                      new CLinkshellMessagePacket(poster, message, m_name, std::numeric_limits<uint32>::min(), true));
     }
 }
 
@@ -153,7 +152,7 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
 }
 
 // Promotes or demotes the target member (pearlsack/linkpearl)
-void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
+void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
 {
     // topearl = 3
     // tosack = 2
@@ -163,7 +162,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
     {
         for (auto& member : members)
         {
-            if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
+            if (strcmpi(MemberName.c_str(), member->GetName().c_str()) == 0)
             {
                 CCharEntity* PMember = member;
 
@@ -190,7 +189,8 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
                     newShellItem->setSubType(ITEM_LOCKED);
                     uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID     = PItemLinkshell->getSlotID();
-                    delete PItemLinkshell;
+                    destroy(PItemLinkshell);
+
                     PItemLinkshell = newShellItem;
                     char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
                     sql->EscapeStringLen(extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
@@ -227,12 +227,12 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 
 // Remove a character from Linkshell by name.
 // Breaks all pearls/sacks if, kicked by shell holder, otherwise equipped pearl only.
-void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell)
+void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell)
 {
     uint32 lsid = m_id;
     for (auto& member : members)
     {
-        if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
+        if (strcmpi(MemberName.c_str(), member->GetName().c_str()) == 0)
         {
             CCharEntity* PMember = member;
 
@@ -308,16 +308,14 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
 }
 
 // Break and unequip all affiliated pearlsacks and linkpearls
-void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
+void CLinkshell::BreakLinkshell()
 {
     uint32 lsid = m_id;
-    int8   signature[DecodeStringLength];
-    DecodeStringLinkshell(lsname, signature);
 
     // break logged in and equipped members
     while (!members.empty())
     {
-        RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
+        RemoveMemberByName(members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
     sql->Query("UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
@@ -345,7 +343,7 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
             member->pushPacket(newPacket);
         }
     }
-    delete packet;
+    destroy(packet);
 }
 
 void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
@@ -355,7 +353,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         PChar->pushPacket(
-            new CLinkshellMessagePacket(sql->GetData(0), sql->GetData(1), (const int8*)m_name.c_str(), sql->GetUIntData(2), ls1));
+            new CLinkshellMessagePacket(sql->GetStringData(0), sql->GetStringData(1), m_name, sql->GetUIntData(2), ls1));
     }
 }
 
@@ -372,11 +370,11 @@ namespace linkshell
             auto PLinkshell = std::make_unique<CLinkshell>(sql->GetUIntData(0));
 
             PLinkshell->setColor(sql->GetIntData(1));
-            int8 EncodedName[LinkshellStringLength];
+            char EncodedName[LinkshellStringLength];
 
             memset(&EncodedName, 0, sizeof(EncodedName));
 
-            EncodeStringLinkshell(sql->GetData(2), EncodedName);
+            EncodeStringLinkshell(sql->GetStringData(2).c_str(), EncodedName);
             PLinkshell->setName(EncodedName);
             if (sql->GetUIntData(3) < LSTYPE_LINKSHELL || sql->GetUIntData(3) > LSTYPE_LINKPEARL)
             {
@@ -446,13 +444,13 @@ namespace linkshell
         return false;
     }
 
-    bool IsValidLinkshellName(const int8* name)
+    bool IsValidLinkshellName(const std::string& name)
     {
         auto ret = sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1;", name);
         return ret == SQL_ERROR || sql->NumRows() == 0;
     }
 
-    uint32 RegisterNewLinkshell(const int8* name, uint16 color)
+    uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
     {
         if (IsValidLinkshellName(name))
         {

@@ -5,28 +5,32 @@ local ID = require('scripts/zones/Xarcabard/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
 require('scripts/globals/keyitems')
+require('scripts/globals/teleports')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local dynamisMask = player:getCharVar("Dynamis_Status")
 
     local unbridledPassionCS = player:getCharVar("unbridledPassion")
+    local pos = player:getPos()
 
     if prevZone == xi.zone.DYNAMIS_XARCABARD then -- warp player to a correct position after dynamis
         player:setPos(569.312, -0.098, -270.158, 90)
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-136.287, -23.268, 137.302, 91)
+    if
+        pos.x == 0 and pos.y == 0 and pos.z == 0
+    then
+        player:setPos(158, -21, -44, 132)
     end
 
     if
@@ -39,26 +43,34 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif quests.rainbow.onZoneIn(player) then
         cs = 9
     elseif unbridledPassionCS == 3 then
-        cs = 4
+        if
+            math.abs(pos.x - xi.teleport.destination[xi.teleport.id.VAHZL][1]) < 0.1 and
+            math.abs(pos.y - xi.teleport.destination[xi.teleport.id.VAHZL][2]) < 0.1 and
+            math.abs(pos.z - xi.teleport.destination[xi.teleport.id.VAHZL][3]) < 0.1
+        then
+            cs = 5
+        else
+            cs = 4
+        end
     end
 
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 9 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 4 then
         player:setCharVar("unbridledPassion", 4)
     elseif csid == 13 then
@@ -66,4 +78,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

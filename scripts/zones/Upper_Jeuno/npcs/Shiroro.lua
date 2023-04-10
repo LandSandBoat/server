@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Shiroro
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")

@@ -18,7 +18,12 @@ entity.onMobFight = function(mob, target)
     -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
     -- Defenders can also still spawn the Aura Gears while sleeping, etc.
     -- Maximum number of pets Defender can spawn is 5
-    if petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not auraGear:isSpawned() then
+    if
+        petCount <= 5 and
+        mob:getBattleTime() % 15 < 3 and
+        mob:getBattleTime() > 3 and
+        not auraGear:isSpawned()
+    then
         auraGear:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
         auraGear:spawn()
         auraGear:updateEnmity(target)
@@ -45,7 +50,7 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 749, 1, xi.regime.type.GROUNDS)
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
     local auraGearId = mob:getID() + 1
 
     mob:resetLocalVars()

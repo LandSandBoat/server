@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Sajhra
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

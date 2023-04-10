@@ -7,13 +7,13 @@ require("scripts/globals/summon")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 10
@@ -24,7 +24,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     --get resist multiplier (1x if no resist)
     local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.FIRE)
     --get the resisted damage
-    damage.dmg = damage.dmg*resist
+    damage.dmg = damage.dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
     totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, numhits)
@@ -34,4 +34,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return totaldamage
 end
 
-return ability_object
+return abilityObject

@@ -1,13 +1,12 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Roropp
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 17.314, y = -8.000, z = -110.064, wait = 5000 },
     { x = 13.323, z = -102.821, wait = 5000 },
@@ -26,8 +25,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 entity.onTrade = function(player, npc, trade)

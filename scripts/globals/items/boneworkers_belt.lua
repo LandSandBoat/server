@@ -10,26 +10,27 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) == true) then
+    if target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
         result = 241
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 120)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.BONE, 1)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.BONE, 1)
 end
 
-return item_object
+return itemObject

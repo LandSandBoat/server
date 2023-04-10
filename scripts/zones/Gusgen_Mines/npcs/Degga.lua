@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Gusgen Mines
 --  NPC: Degga
--- Type: Standard Info NPC
 -- !pos 40 -68 -259
 -----------------------------------
 require("scripts/globals/keyitems")

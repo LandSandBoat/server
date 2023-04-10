@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Zubu-Abibu
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

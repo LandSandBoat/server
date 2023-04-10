@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
+#include "char_check.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "char_check.h"
-
-#include "../entities/charentity.h"
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "entities/charentity.h"
+#include "utils/itemutils.h"
 
 CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 {
@@ -74,8 +74,8 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
                 ref<uint16>(size * 2 + 0x0A) = ((CItemEquipment*)PItem)->getAugment(2);
                 ref<uint16>(size * 2 + 0x0C) = ((CItemEquipment*)PItem)->getAugment(3);
             }
-
-            memcpy(data + (size * 2 + 0x10), PItem->getSignature(), std::clamp<size_t>(strlen((const char*)PItem->getSignature()), 0, 12));
+            // 12 characters? seems a bit short. // TODO: research.
+            memcpy(data + (size * 2 + 0x10), PItem->getSignature().c_str(), std::clamp<size_t>(PItem->getSignature().size(), 0, 12));
 
             this->setSize(size * 2 + 0x1C);
             count++;
@@ -113,7 +113,8 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
     if ((PLinkshell != nullptr) && PLinkshell->isType(ITEM_LINKSHELL))
     {
         ref<uint16>(0x0E) = PLinkshell->getID();
-        memcpy(data + (0x10), PLinkshell->getSignature(), std::clamp<size_t>(strlen((const char*)PLinkshell->getSignature()), 0, 15));
+        // 15 characters? seems a bit short // TODO: research.
+        memcpy(data + (0x10), PLinkshell->getSignature().c_str(), std::clamp<size_t>(PLinkshell->getSignature().size(), 0, 15));
         // ref<uint16>(0x0C) = PLinkshell->GetLSID();
         ref<uint16>(0x20) = PLinkshell->GetLSRawColor();
     }

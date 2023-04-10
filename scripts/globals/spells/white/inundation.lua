@@ -1,22 +1,16 @@
 -----------------------------------
 -- Spell: Inundation
--- Spell accuracy is most highly affected by Enfeebling Magic Skill, Magic Accuracy, and MND.
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/status")
-require("scripts/globals/utils")
+require("scripts/globals/spells/enfeebling_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    target:addStatusEffect(xi.effect.INUNDATION, 1, 0, 300) --Inundated, 5min duration
-    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-    return xi.effect.INUNDATION
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enfeebling.useEnfeeblingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

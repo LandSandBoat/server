@@ -479,6 +479,7 @@ local function givePrize(player, ki)
                     end
                 end
             end
+
             for i = #addAug, 7 do
                 table.insert(addAug, 0)
             end

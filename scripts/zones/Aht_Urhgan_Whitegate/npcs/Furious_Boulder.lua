@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Furious Boulder
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

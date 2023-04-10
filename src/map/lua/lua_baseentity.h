@@ -58,11 +58,10 @@ public:
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
-
-    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
-
-    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
-    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
+    void messageSpecial(uint16 messageID, sol::variadic_args va);                                                          // Sends Special Message
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1);                                    // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);                                     // Sends Combat Message
+    void messageStandard(uint16 messageID);                                                                                // Send Standard Message
 
     void customMenu(sol::object const& obj);
 
@@ -99,10 +98,10 @@ public:
     bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
-    void  setFlag(uint32 flags);
-    uint8 getMoghouseFlag();
-    void  setMoghouseFlag(uint8 flag);
-    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
+    void   setFlag(uint32 flags);
+    uint16 getMoghouseFlag();
+    void   setMoghouseFlag(uint16 flag);
+    bool   needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
     uint32 getID();
@@ -153,7 +152,7 @@ public:
     void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    void ChangeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
+    void changeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
     void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox();                                                     // Opens send box (to deliver items)
@@ -170,14 +169,14 @@ public:
 
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
-    auto   getZoneName() -> const char*;                                // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    auto   getZoneName() -> const std::string&;                         // Get Entity zone name
+    bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
     bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
@@ -214,8 +213,8 @@ public:
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
-    bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
-    void   createWornItem(uint16 itemID);                                                   // Update this item in worn item (player:createWornItem(itemid))
+    uint8  getWornUses(uint16 itemID);                                                      // Check if the item is already worn
+    uint8  incrementItemWear(uint16 itemID);                                                // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
@@ -370,6 +369,10 @@ public:
     void   setUnityLeader(uint8 leaderID);                                    // Sets a player's unity leader
     uint8  getUnityLeader();                                                  // Returns player's unity leader
     auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
+    auto   getClaimedDeedMask() -> sol::table;                                // Returns a table corresponding to claimed items from AMAN Validator
+    void   toggleReceivedDeedRewards();
+    void   setClaimedDeed(uint16 deedBitNum);
+    void   resetClaimedDeeds();
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -395,6 +398,7 @@ public:
     uint8  getJobPointLevel(uint16 jpType); // Returns Value of Job Point Type
     void   setJobPoints(uint16 amount);     // Set Job Points for current job
     void   setCapacityPoints(uint16 amount);
+    void   masterJob();
 
     uint32 getGil();
     void   addGil(int32 gil);
@@ -443,12 +447,12 @@ public:
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
     void  setMP(int32 value);      // Set mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
-    void  delMP(int32 amount);     // Subtract mp of Entity
+    int32 delMP(int32 amount);     // Subtract mp of Entity
 
     float getTP();
-    void  addTP(int16 amount); // Modify tp of Entity +/-
+    int16 addTP(int16 amount); // Modify tp of Entity +/-
     void  setTP(int16 value);  // Set tp of Entity to value
-    void  delTP(int16 amount); // Subtract tp of Entity
+    int16 delTP(int16 amount); // Subtract tp of Entity
 
     void  updateHealth();
     uint8 getAverageItemLevel();
@@ -511,6 +515,8 @@ public:
 
     bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
+    uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
+
     // Instances
     auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);
@@ -522,13 +528,15 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
-    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
-    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
-    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
-    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
-    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                                                      // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                                                      // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                                                // 1 if this battlefield is full
+    bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
+    bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
+    void  setEnteredBattlefield(bool entered);                                                                                     // Sets if the player has entered into a battlefield or not
+    bool  hasEnteredBattlefield();                                                                                                 // If the player has entered into a battlefield return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -562,6 +570,9 @@ public:
 
     void wakeUp(); // wakes target if necessary
 
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
+
     void recalculateStats();
     bool checkImbuedItems();
 
@@ -589,6 +600,7 @@ public:
     auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
+    void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
@@ -685,8 +697,9 @@ public:
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
-    int32  addFullGambit(lua_State*);
+    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
+    void   removeSimpleGambit(std::string const& id);
+    void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
@@ -694,12 +707,14 @@ public:
 
     bool   hasPet();                                  // returns true if the player has a pet
     auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
-    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
+    uint32 getPetID();                                // returns the PetID of an entity if it is a pet, otherwise 0.
+    bool   isAutomaton();                             // returns true if entity is an automaton.
+    bool   isAvatar();                                // returns true if entity is an avatar
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
 
-    auto getPetName() -> const char*;
+    auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
 
@@ -716,7 +731,7 @@ public:
     void delPetMod(uint16 modID, int16 amount);
 
     bool  hasAttachment(uint16 itemID);
-    auto  getAutomatonName() -> const char*;
+    auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();
     uint8 getAutomatonHead();
     bool  unlockAttachment(uint16 itemID);
@@ -725,6 +740,7 @@ public:
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
@@ -758,23 +774,27 @@ public:
 
     void instantiateMob(uint32 groupID);
 
-    bool hasTrait(uint8 traitID);
+    bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
+    void addImmunity(uint32 immunityID); // Adds immunity to an entity
+    void delImmunity(uint32 immunityID); // Deletes immunity from an entity
 
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
     void setUnkillable(bool unkillable);
     void setUntargetable(bool untargetable);
     bool getUntargetable();
+    void setIsAggroable(bool isAggroable);
+    bool isAggroable();
 
     void setDelay(uint16 delay);   // sets a mobs weapon delay
     void setDamage(uint16 damage); // sets a mobs weapon damage
     bool hasSpellList();
     void setSpellList(uint16 spellList);
-    void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void setMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);
@@ -804,6 +824,7 @@ public:
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
+    void untargetableAndUnactionable(uint32 milliseconds);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
@@ -814,7 +835,6 @@ public:
     uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
     int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
-    void   addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va);    // Adds a modification to the drop list of this mob, erased on death
 
     uint32 getAvailableTraverserStones();
     time_t getTraverserEpoch();
@@ -828,6 +848,12 @@ public:
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table table);
     bool deleteRaisedChocobo();
+
+    void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
+    uint8 getMannequinPose(uint16 itemID);
+
+    void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
+    void clearPacketMods();
 
     static void Register();
 };

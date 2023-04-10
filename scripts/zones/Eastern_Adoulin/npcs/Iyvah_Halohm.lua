@@ -22,9 +22,9 @@ entity.onTrigger = function(player, npc)
     local mummersRank = 0
 
     player:startEvent(562,
-                      imprimatursSpent, adoulinFame,
-                      pioneersRank, peacekeepersRank, couriersRank,
-                      scoutsRank, inventorsRank, mummersRank)
+        imprimatursSpent, adoulinFame,
+        pioneersRank, peacekeepersRank, couriersRank,
+        scoutsRank, inventorsRank, mummersRank)
 end
 
 return entity

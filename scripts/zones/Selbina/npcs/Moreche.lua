@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Moreche
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

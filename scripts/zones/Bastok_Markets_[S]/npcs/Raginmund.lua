@@ -2,7 +2,6 @@
 -- Area: Bastok Markets (S)
 --  NPC: Raginmund
 -- Involved in Quest: Too Many Chefs
--- Standard Info NPC
 -- Location L-10
 -----------------------------------
 local entity = {}
@@ -11,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCharVar("TOO_MANY_CHEFS") == 2) then
+    if player:getCharVar("TOO_MANY_CHEFS") == 2 then
         player:startEvent(112) -- part 3 Too Many Chefs
     else
         player:startEvent(111) -- standard
@@ -22,7 +21,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 112) then
+    if csid == 112 then
         player:setCharVar("TOO_MANY_CHEFS", 3)
     end
 end

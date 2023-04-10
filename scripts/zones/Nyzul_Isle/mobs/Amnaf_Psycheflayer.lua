@@ -33,7 +33,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     local rnd = math.random (1, 100)
     -- This res check is a little screwy till we get the server's resistance handling closer to retail.
     -- looks like applyResistanceAddEffect() doesn't even handle status resistance, only elemental.
-    if (resist > rnd or rnd <= 20) then
+    if resist > rnd or rnd <= 20 then
         return 0, 0, 0
     else
         -- Estimated from https://youtu.be/7jsXnwkqMM4?t=5m42s

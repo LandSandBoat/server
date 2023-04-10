@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Cothric
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

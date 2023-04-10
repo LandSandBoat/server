@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Nery
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

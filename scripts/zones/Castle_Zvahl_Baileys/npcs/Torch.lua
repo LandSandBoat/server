@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and
         not player:hasKeyItem(xi.ki.SHADOW_FLAMES) and
         player:getCharVar("BorghertzCS") >= 2 and
-        npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, { claim=true, hide=0 })
+        npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, { claim = true, hide = 0 })
     then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
 

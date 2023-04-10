@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Kuhn Tsahnpri
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

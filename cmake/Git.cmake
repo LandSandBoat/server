@@ -33,6 +33,3 @@ message(STATUS "GIT_COMMIT_SUBJECT: ${GIT_COMMIT_SUBJECT}")
 if (GIT_COMMIT_SUBJECT)
     string(REGEX REPLACE "\"" "'" GIT_COMMIT_SUBJECT ${GIT_COMMIT_SUBJECT})
 endif()
-
-configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
-               ${CMAKE_SOURCE_DIR}/src/common/version.cpp)

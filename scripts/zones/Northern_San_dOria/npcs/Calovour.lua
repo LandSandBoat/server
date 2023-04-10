@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Calovour
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

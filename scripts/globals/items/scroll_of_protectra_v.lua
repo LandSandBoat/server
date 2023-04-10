@@ -3,14 +3,14 @@
 -- Scroll of Protectra V
 -- Teaches the white magic Protectra V
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(129)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(129)
 end
 
-return item_object
+return itemObject

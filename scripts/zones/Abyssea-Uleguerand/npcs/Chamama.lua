@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Chamama
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

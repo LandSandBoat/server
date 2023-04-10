@@ -3,14 +3,14 @@
 -- Scroll of Fire
 -- Teaches the black magic Fire
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(144)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(144)
 end
 
-return item_object
+return itemObject

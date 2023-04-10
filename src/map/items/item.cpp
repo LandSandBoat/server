@@ -252,32 +252,14 @@ uint32 CItem::getCharPrice() const
  *                                                                       *
  ************************************************************************/
 
-const int8* CItem::getName()
+const std::string& CItem::getName()
 {
-    return (const int8*)m_name.c_str();
+    return m_name;
 }
 
-void CItem::setName(int8* name)
+void CItem::setName(std::string name)
 {
-    m_name.clear();
-    m_name.insert(0, (const char*)name);
-}
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-const int8* CItem::getSender()
-{
-    return (const int8*)m_send.c_str();
-}
-
-void CItem::setSender(int8* sender)
-{
-    m_send.clear();
-    m_send.insert(0, (const char*)sender);
+    m_name = name;
 }
 
 /************************************************************************
@@ -286,15 +268,14 @@ void CItem::setSender(int8* sender)
  *                                                                       *
  ************************************************************************/
 
-const int8* CItem::getReceiver()
+const std::string& CItem::getSender()
 {
-    return (const int8*)m_recv.c_str();
+    return m_send;
 }
 
-void CItem::setReceiver(int8* receiver)
+void CItem::setSender(std::string sender)
 {
-    m_recv.clear();
-    m_recv.insert(0, (const char*)receiver);
+    m_send = sender;
 }
 
 /************************************************************************
@@ -303,14 +284,34 @@ void CItem::setReceiver(int8* receiver)
  *                                                                       *
  ************************************************************************/
 
-const int8* CItem::getSignature()
+const std::string& CItem::getReceiver()
 {
-    return (int8*)m_extra + 0x0C;
+    return m_recv;
 }
 
-void CItem::setSignature(int8* signature)
+void CItem::setReceiver(std::string receiver)
 {
-    memcpy(m_extra + 0x0C, signature, sizeof(m_extra) - 0x0C);
+    m_recv = receiver;
+}
+
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
+const std::string CItem::getSignature()
+{
+    char signature[SignatureStringLength] = {};
+    memcpy(&signature, m_extra + 0x0C, sizeof(signature));
+
+    return signature; // return string copy
+}
+
+void CItem::setSignature(std::string signature)
+{
+    memset(m_extra + 0x0C, 0, sizeof(m_extra) - 0x0C);
+    memcpy(m_extra + 0x0C, signature.c_str(), signature.size());
 }
 
 /************************************************************************

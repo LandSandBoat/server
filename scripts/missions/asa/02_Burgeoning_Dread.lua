@@ -40,7 +40,7 @@ mission.sections =
             onEventUpdate =
             {
                 [71] = function(player, csid, option, npc)
-                    local kit = 2779 + math.random(0,3)
+                    local kit = 2779 + math.random(0, 3)
                     player:updateEvent(kit)
                     xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,
@@ -70,13 +70,13 @@ mission.sections =
             onEventUpdate =
             {
                 [62] = function(player, csid, option, npc)
-                    local kit = 2779 + math.random(0,3)
+                    local kit = 2779 + math.random(0, 3)
                     player:updateEvent(kit)
                     xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,
 
                 [63] = function(player, csid, option, npc)
-                    local kit = 2779 + math.random(0,3)
+                    local kit = 2779 + math.random(0, 3)
                     player:updateEvent(kit)
                     xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,

@@ -3,14 +3,16 @@
 -- Cryohelix Schema
 -- Teaches the black magic Cryohelix
 -----------------------------------
-local item_object = {}
+require("scripts/globals/spell_data")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    return target:canLearnSpell(282)
+itemObject.onItemCheck = function(target)
+    return target:canLearnSpell(xi.magic.spell.CRYOHELIX)
 end
 
-item_object.onItemUse = function(target)
-    target:addSpell(282)
+itemObject.onItemUse = function(target)
+    target:addSpell(xi.magic.spell.CRYOHELIX)
 end
 
-return item_object
+return itemObject

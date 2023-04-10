@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Helmut
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

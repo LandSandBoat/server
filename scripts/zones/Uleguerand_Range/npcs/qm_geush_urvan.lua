@@ -8,7 +8,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1824) and npcUtil.popFromQM(player, npc, ID.mob.GEUSH_URVAN) then -- Haunted Muleta
+    if
+        npcUtil.tradeHas(trade, 1824) and
+        npcUtil.popFromQM(player, npc, ID.mob.GEUSH_URVAN)
+    then
+        -- Haunted Muleta
         player:confirmTrade()
     end
 end

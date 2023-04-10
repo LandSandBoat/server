@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -539, y = 0, z = -481 },
     { x = -556, y = 0, z = -478 },
@@ -22,7 +22,7 @@ local path =
 
 entity.onMobSpawn = function(mob)
     entity.onMobRoam(mob)
-    mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
 end
 
 entity.onMobDeath = function(mob, player, optParams)

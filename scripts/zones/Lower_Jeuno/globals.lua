@@ -35,7 +35,6 @@ local lowerJeunoGlobal =
             else
                 player:startEvent(lampCs, 6) -- You examine the lamp. It seems that it must be lit manually.
             end
-
         end
     end,
 
@@ -70,7 +69,7 @@ local lowerJeunoGlobal =
         ..............................................................................................]]
     lampPath =
     {
-         { x = 0, y = 0, z = 19 },
+        { x = 0, y = 0, z = 19 },
         { x = -2, y = 0, z = 13 },
         { x = -5, y = 0, z = 13 },
         { x = -7, y = 0, z = 12 },

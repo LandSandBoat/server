@@ -3,14 +3,14 @@
 -- Scroll of Foil
 -- Teaches the white magic Foil
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(840)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(840)
 end
 
-return item_object
+return itemObject

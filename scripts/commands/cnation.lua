@@ -26,7 +26,7 @@ function onTrigger(player, target, nation)
     local nationNumToName = {}
 
     for k, v in pairs(nationNameToNum) do
-        nationNumToName[v]=k
+        nationNumToName[v] = k
     end
 
     -- validate target
@@ -35,9 +35,9 @@ function onTrigger(player, target, nation)
         return
     end
 
-    local targ = GetPlayerByName( target )
+    local targ = GetPlayerByName(target)
     if targ == nil then
-        error(player, string.format( "Player named '%s' not found!", target ) )
+        error(player, string.format("Player named '%s' not found!", target))
         return
     end
 
@@ -47,7 +47,7 @@ function onTrigger(player, target, nation)
     else
         nation = tonumber(nation) or nationNameToNum[string.upper(nation)]
 
-        if (nation == nil or nation < 0 or nation > 3) then
+        if nation == nil or nation < 0 or nation > 3 then
             error(player, "Invalid campaign allegiange. Valid choices are SANDORIA (1), BASTOK (2), or WINDURST (3).")
             return
         end

@@ -23,9 +23,9 @@ local denOfRancorGlobal =
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 0):getAnimation() +
-                              GetNPCByID(ID.npc.LANTERN_OFFSET + 1):getAnimation() +
-                              GetNPCByID(ID.npc.LANTERN_OFFSET + 2):getAnimation() +
-                              GetNPCByID(ID.npc.LANTERN_OFFSET + 3):getAnimation()
+                    GetNPCByID(ID.npc.LANTERN_OFFSET + 1):getAnimation() +
+                    GetNPCByID(ID.npc.LANTERN_OFFSET + 2):getAnimation() +
+                    GetNPCByID(ID.npc.LANTERN_OFFSET + 3):getAnimation()
 
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 44 - total)
 
@@ -35,6 +35,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 4):openDoor(30)
                 end
             end
@@ -55,7 +56,7 @@ local denOfRancorGlobal =
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 6):getAnimation() +
-                              GetNPCByID(ID.npc.LANTERN_OFFSET + 7):getAnimation()
+                    GetNPCByID(ID.npc.LANTERN_OFFSET + 7):getAnimation()
 
                 if total == 17 then
                     player:messageSpecial(ID.text.LANTERN_OFFSET + 9)
@@ -66,6 +67,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 8):openDoor(30)
                 end
             end
@@ -88,7 +90,7 @@ local denOfRancorGlobal =
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 9):getAnimation() +
-                              GetNPCByID(ID.npc.LANTERN_OFFSET + 10):getAnimation()
+                    GetNPCByID(ID.npc.LANTERN_OFFSET + 10):getAnimation()
 
                 if total == 17 then
                     player:messageSpecial(ID.text.LANTERN_OFFSET + 9)
@@ -99,6 +101,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 11):openDoor(30)
                 end
             end

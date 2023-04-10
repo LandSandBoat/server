@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 --  NPC: Channon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

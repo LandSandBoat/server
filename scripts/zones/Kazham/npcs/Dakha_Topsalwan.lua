@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local zPos = player:getZPos()
 
-    if (zPos >= -20 and zPos <= -16) then
+    if zPos >= -20 and zPos <= -16 then
         player:startEvent(66)
     else
         player:startEvent(121)

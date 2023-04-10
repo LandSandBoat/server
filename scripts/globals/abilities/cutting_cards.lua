@@ -6,15 +6,15 @@
 -----------------------------------
 require("scripts/globals/job_utils/corsair")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-ability_object.onUseAbility = function(caster, target, ability, action)
+abilityObject.onUseAbility = function(caster, target, ability, action)
     xi.job_utils.corsair.useCuttingCards(caster, target, ability, action)
 end
 
-return ability_object
+return abilityObject

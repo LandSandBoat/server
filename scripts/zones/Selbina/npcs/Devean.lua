@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Devean
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -3,11 +3,14 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
-attachment_object.onEquip = function(automaton)
+attachmentObject.onEquip = function(automaton)
     automaton:addListener("MAGIC_START", "AUTO_ICE_MAKER_START", function(pet, spell, action)
-        if spell:getSkillType() ~= xi.skill.ELEMENTAL_MAGIC then return end
+        if spell:getSkillType() ~= xi.skill.ELEMENTAL_MAGIC then
+            return
+        end
+
         local master = pet:getMaster()
         local maneuvers = master:countEffect(xi.effect.ICE_MANEUVER)
         local amount = 100 + pet:getMod(xi.mod.MATT)
@@ -23,32 +26,38 @@ attachment_object.onEquip = function(automaton)
         else
             return
         end
+
         amount = math.floor(amount)
         pet:addMod(xi.mod.MATT, amount)
         pet:setLocalVar("icemaker", amount)
     end)
+
     automaton:addListener("MAGIC_STATE_EXIT", "AUTO_ICE_MAKER_END", function(pet, spell)
         local master = pet:getMaster()
         local toremove = pet:getLocalVar("icemakermaneuvers")
-        if toremove == 0 then return end
+        if toremove == 0 then
+            return
+        end
+
         for i = 1, toremove do
             master:delStatusEffectSilent(xi.effect.ICE_MANEUVER)
         end
+
         pet:delMod(xi.mod.MATT, pet:getLocalVar("icemaker"))
         pet:setLocalVar("icemaker", 0)
         pet:setLocalVar("icemakermaneuvers", 0)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("AUTO_ICE_MAKER_START")
     pet:removeListener("AUTO_ICE_MAKER_END")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
 end
 
-return attachment_object
+return attachmentObject

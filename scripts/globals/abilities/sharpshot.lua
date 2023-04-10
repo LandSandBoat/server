@@ -5,18 +5,17 @@
 -- Recast Time: 5:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local power = 40 + player:getMod(xi.mod.SHARPSHOT)
     player:addStatusEffect(xi.effect.SHARPSHOT, power, 0, 60)
 end
 
-return ability_object
+return abilityObject

@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.SLEEPRES, 50)
+    mob:setMod(xi.mod.SLEEP_MEVA, 50)
 end
 
 entity.onMobSpawn = function(mob)

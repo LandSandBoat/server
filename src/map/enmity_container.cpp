@@ -109,6 +109,10 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
     TracyZoneScoped;
+    if (PChar->getZone() != m_EnmityHolder->getZone())
+    {
+        return;
+    }
     m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, false, 0 });
     PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
@@ -229,9 +233,14 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
 
 bool CEnmityContainer::HasID(uint32 TargetID)
 {
-    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
-                        { return elem.first == TargetID && elem.second.active; }) !=
-           m_EnmityList.end();
+    // clang-format off
+    auto maybeID = std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
+    {
+        return elem.first == TargetID && elem.second.active;
+    });
+    // clang-format on
+
+    return maybeID != m_EnmityList.end();
 }
 
 /************************************************************************
@@ -462,12 +471,15 @@ void CEnmityContainer::DecayEnmity()
         constexpr int   decay_amount  = (int)(60 / server_tick_rate);
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
-        // ShowDebug("%d: active: %d CE: %d VE: %d", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
     }
 }
 
 bool CEnmityContainer::IsWithinEnmityRange(CBattleEntity* PEntity) const
 {
+    if (PEntity->getZone() != m_EnmityHolder->getZone())
+    {
+        return false;
+    }
     float maxRange = square(m_EnmityHolder->m_Type == MOBTYPE_NOTORIOUS ? 28.f : 25.f);
     return distanceSquared(m_EnmityHolder->loc.p, PEntity->loc.p) <= maxRange;
 }

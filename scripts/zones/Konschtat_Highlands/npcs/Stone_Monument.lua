@@ -15,7 +15,10 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.LUMP_OF_SELBINA_CLAY) and npcUtil.giveItem(player, xi.items.CLAY_TABLET) then
+    if
+        npcUtil.tradeHas(trade, xi.items.LUMP_OF_SELBINA_CLAY) and
+        npcUtil.giveItem(player, xi.items.CLAY_TABLET)
+    then
         player:confirmTrade()
         player:setCharVar("anExplorer-CurrentTablet", 0x00080)
     end

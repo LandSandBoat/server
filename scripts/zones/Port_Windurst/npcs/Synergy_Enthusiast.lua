@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Synergy Enthusiast
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

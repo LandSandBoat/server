@@ -1,22 +1,24 @@
 -----------------------------------
 -- ID: 11002
 -- Dragon Tank
--- Dispense: Dragon Fruit au Lait
+-- Dispense: Flask of Dragon Fruit au Lait
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
-    target:addItem(5933, 1)
+itemObject.onItemUse = function(target)
+    target:addItem(xi.items.FLASK_OF_DRAGON_FRUIT_AU_LAIT, 1)
 end
 
-return item_object
+return itemObject

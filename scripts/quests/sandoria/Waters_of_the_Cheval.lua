@@ -63,7 +63,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHas(trade, xi.items.SKIN_OF_CHEVAL_RIVER_WATER) then
-                       return quest:progressEvent(515)
+                        return quest:progressEvent(515)
                     end
                 end,
 

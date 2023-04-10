@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Lin Megomifu
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -63,6 +63,7 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
         if player:hasStatusEffect(xi.effect.REGEN) then
             player:delStatusEffect(xi.effect.REGEN)
         end
+
         player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
     end
 
@@ -73,7 +74,7 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
     local boost = player:getStatusEffect(xi.effect.BOOST)
     local multiplier = 1.0
     if boost ~= nil then
-        multiplier = (boost:getPower()/100) * 4 -- power is the raw % atk boost
+        multiplier = (boost:getPower() / 100) * 4 -- power is the raw % atk boost
     end
 
     local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
@@ -114,7 +115,7 @@ xi.job_utils.monk.useFootwork = function(player, target, ability)
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)
-   player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
+    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
 end
 
 xi.job_utils.monk.useHundredFists = function(player, target, ability)

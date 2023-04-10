@@ -17,49 +17,53 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.BLINDNESS
     local typeEffectTwo = xi.effect.BIND
     local params = {}
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.ecosystem = xi.ecosystem.BEASTMEN
+    params.effect = typeEffectOne
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
-    local duration = 30 * resist
-    local power = 100 * resist
+    local duration = 30
+    local resistThreshold = 0.5
     local returnEffect = typeEffectOne
 
-    if (resist >= 0.5) then
-        if (target:isFacing(caster)) then
-            if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) and target:getTP() == 0) then
-                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-            elseif (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then
-                target:delTP(power)
-                spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
-            elseif (target:hasStatusEffect(typeEffectOne)) then
-                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
-                target:delTP(power)
-                returnEffect = typeEffectTwo -- make it return bind message if blind can't be inflicted
-                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-            else
-                target:addStatusEffect(typeEffectOne, 50, 0, duration)
-                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
-                target:delTP(power)
+    local resist = applyResistance(caster, target, spell, params)
+    if resist >= resistThreshold then
+
+        spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much
+        target:delTP(100)
+        local actionOne = target:addStatusEffect(typeEffectOne, 10, 0, duration * resist)
+        local actionTwo = target:addStatusEffect(typeEffectTwo, 1, 0, duration * resist)
+
+        -- Gaze move
+        if target:isFacing(caster) and caster:isFacing(target) then
+
+            -- If at least one of effects got applied, set the message type
+            if actionOne or actionTwo then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             end
+
+            -- Set the returnEffect to effectTwo if the first one failed
+            if not actionOne and actionTwo then
+                returnEffect = typeEffectTwo
+            end
+
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return returnEffect
 end
 
-return spell_object
+return spellObject

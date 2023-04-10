@@ -19,22 +19,22 @@
 ===========================================================================
 */
 
+#include "guildutils.h"
+
+#include "common/vana_time.h"
+
 #include <vector>
 
-#include "../items/item_shop.h"
+#include "items/item_shop.h"
 
-#include "../guild.h"
-#include "../item_container.h"
-#include "../map.h"
-#include "../vana_time.h"
 #include "charutils.h"
-#include "guildutils.h"
+#include "guild.h"
+#include "item_container.h"
 #include "itemutils.h"
+#include "map.h"
 #include "serverutils.h"
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild
-
-//#define The number of updated items at RSTOCK (as a percentage of the maximum number)
 
 std::vector<CGuild*>         g_PGuildList;
 std::vector<CItemContainer*> g_PGuildShopList;
@@ -56,7 +56,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), (const char*)sql->GetData(1)));
+                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
         XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
@@ -115,12 +115,15 @@ namespace guildutils
             {
                 CItemShop* PItem = (CItemShop*)PGuildShop->GetItem(slotid);
 
-                PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                        (PItem->getMaxPrice() - PItem->getMinPrice())));
-
-                if (PItem->IsDailyIncrease())
+                if (PItem != nullptr)
                 {
-                    PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
+                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
+                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+
+                    if (PItem->IsDailyIncrease())
+                    {
+                        PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
+                    }
                 }
             }
         }

@@ -20,7 +20,9 @@
 */
 
 #include "common/logging.h"
+#include "common/lua.h"
 #include "common/md52.h"
+#include "common/settings.h"
 #include "common/socket.h"
 #include "common/utils.h"
 
@@ -91,9 +93,9 @@ int32 lobbydata_parse(int32 fd)
         char* buff = &sessions[fd]->rdata[0];
         if (ref<uint8>(buff, 0) == 0x0d)
         {
-            ShowDebug("Posible Crash Attempt from IP: <%s>", ip2str(sessions[fd]->client_addr));
+            ShowWarning(fmt::format("Possible Crash Attempt from IP: <{}>", ip2str(sessions[fd]->client_addr)));
         }
-        ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 0), ip2str(sd->client_addr));
+        ShowDebug(fmt::format("lobbydata_parse:Incoming Packet: <{}> from ip:<{}>", ref<uint8>(buff, 0), ip2str(sd->client_addr)));
 
         auto maintMode  = settings::get<uint8>("login.MAINT_MODE");
         auto searchPort = settings::get<uint16>("network.SEARCH_PORT");
@@ -105,7 +107,7 @@ int32 lobbydata_parse(int32 fd)
             {
                 if (RFIFOREST(fd) < 9)
                 {
-                    ShowError("lobbydata_parse: <%s> sent less then 9 bytes", ip2str(sessions[fd]->client_addr));
+                    ShowError(fmt::format("lobbydata_parse: <{}> sent less then 9 bytes", ip2str(sessions[fd]->client_addr)));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -219,15 +221,15 @@ int32 lobbydata_parse(int32 fd)
                         ref<uint8>(CharList, charListOffset + 46) = MainJob;
                         ref<uint8>(CharList, charListOffset + 73) = lvlMainJob;
 
-                        ref<uint8>(CharList, charListOffset + 44)  = (uint8)sql->GetUIntData(5);   // race;
-                        ref<uint8>(CharList, charListOffset + 56)  = (uint8)sql->GetUIntData(6);   // face;
-                        ref<uint16>(CharList, charListOffset + 58) = (uint16)sql->GetUIntData(7);  // head;
-                        ref<uint16>(CharList, charListOffset + 60) = (uint16)sql->GetUIntData(8);  // body;
-                        ref<uint16>(CharList, charListOffset + 62) = (uint16)sql->GetUIntData(9);  // hands;
-                        ref<uint16>(CharList, charListOffset + 64) = (uint16)sql->GetUIntData(10); // legs;
-                        ref<uint16>(CharList, charListOffset + 66) = (uint16)sql->GetUIntData(11); // feet;
-                        ref<uint16>(CharList, charListOffset + 68) = (uint16)sql->GetUIntData(12); // main;
-                        ref<uint16>(CharList, charListOffset + 70) = (uint16)sql->GetUIntData(13); // sub;
+                        ref<uint8>(CharList, charListOffset + 44)  = (uint8)sql->GetUIntData(5);   // race
+                        ref<uint8>(CharList, charListOffset + 56)  = (uint8)sql->GetUIntData(6);   // face
+                        ref<uint16>(CharList, charListOffset + 58) = (uint16)sql->GetUIntData(7);  // head
+                        ref<uint16>(CharList, charListOffset + 60) = (uint16)sql->GetUIntData(8);  // body
+                        ref<uint16>(CharList, charListOffset + 62) = (uint16)sql->GetUIntData(9);  // hands
+                        ref<uint16>(CharList, charListOffset + 64) = (uint16)sql->GetUIntData(10); // legs
+                        ref<uint16>(CharList, charListOffset + 66) = (uint16)sql->GetUIntData(11); // feet
+                        ref<uint16>(CharList, charListOffset + 68) = (uint16)sql->GetUIntData(12); // main
+                        ref<uint16>(CharList, charListOffset + 70) = (uint16)sql->GetUIntData(13); // sub
 
                         ref<uint8>(CharList, charListOffset + 72)  = (uint8)zone;
                         ref<uint16>(CharList, charListOffset + 78) = zone;
@@ -243,7 +245,6 @@ int32 lobbydata_parse(int32 fd)
                 {
                     LOBBBY_ERROR_MESSAGE(ReservePacketEmptyList);
                     ref<uint16>(ReservePacketEmptyList, 32) = 321;
-                    // std::memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
                     unsigned char Hash[16];
                     uint8         SendBuffSize = ref<uint8>(ReservePacketEmptyList, 0);
@@ -256,7 +257,7 @@ int32 lobbydata_parse(int32 fd)
 
                     RFIFOSKIP(sd->login_lobbyview_fd, sessions[sd->login_lobbyview_fd]->rdata.size());
                     RFIFOFLUSH(sd->login_lobbyview_fd);
-                    ShowWarning("lobbydata_parse: char:(%i) login during maintenance mode (0xA2). Sending error to client.", sd->accid);
+                    ShowWarning(fmt::format("lobbydata_parse: char:({}) login during maintenance mode (0xA2). Sending error to client.", sd->accid));
                     // TODO: consider logging failed attempts during maintenance
                     return -1;
                 }
@@ -281,7 +282,7 @@ int32 lobbydata_parse(int32 fd)
                 }
                 else // Cleanup
                 {
-                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA1). Disconnecting client.", sd->accid);
+                    ShowWarning(fmt::format("lobbydata_parse: char:({}) login data corrupt (0xA1). Disconnecting client.", sd->accid));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -303,7 +304,7 @@ int32 lobbydata_parse(int32 fd)
 
                 if (sessions[sd->login_lobbyview_fd] == nullptr)
                 {
-                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA2). Disconnecting client.", sd->accid);
+                    ShowWarning(fmt::format("lobbydata_parse: char:({}) login data corrupt (0xA2). Disconnecting client.", sd->accid));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -330,7 +331,7 @@ int32 lobbydata_parse(int32 fd)
                     gmlevel  = (uint16)sql->GetUIntData(4);
 
                     // new char only (first login from char create)
-                    if (PrevZone == 0)
+                    if (sd->justCreatedNewChar)
                     {
                         key3[16] += 6;
                     }
@@ -350,7 +351,8 @@ int32 lobbydata_parse(int32 fd)
                     ref<uint32>(ReservePacket, 32) = charid;
                     std::memcpy(ReservePacket + 36, &strCharName, 16);
 
-                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
+                    ShowInfo(fmt::format("lobbydata_parse: zoneid:({}), zoneip:({}), zoneport:({}) for char:({})",
+                                         ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid));
 
                     // Check the number of sessions
                     uint16 sessionCount = 0;
@@ -386,7 +388,7 @@ int32 lobbydata_parse(int32 fd)
 
                     if (!loginLimitOK)
                     {
-                        ShowWarning("%s already has %u active session(s), limit is %u", sd->login, sessionCount, loginLimit);
+                        ShowWarning(fmt::format("{} already has {} active session(s), limit is {}", sd->login, sessionCount, loginLimit));
                     }
 
                     if ((isNotMaint && loginLimitOK) || isGM)
@@ -482,7 +484,7 @@ int32 lobbydata_parse(int32 fd)
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowInfo("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
+                ShowInfo(fmt::format("lobbydata_parse: client {} finished work with lobbyview", ip2str(sd->client_addr)));
                 break;
             }
             default:
@@ -497,18 +499,18 @@ int32 do_close_lobbydata(login_session_data_t* loginsd, int32 fd)
 {
     if (loginsd != nullptr)
     {
-        ShowInfo("lobbydata_parse: %s shutdown the socket", loginsd->login);
+        ShowInfo(fmt::format("lobbydata_parse: {} shutdown the socket", loginsd->login));
         if (session_isActive(loginsd->login_lobbyview_fd))
         {
             do_close_tcp(loginsd->login_lobbyview_fd);
         }
         erase_loginsd_byaccid(loginsd->accid);
-        ShowInfo("lobbydata_parse: %s's login_session_data is deleted", loginsd->login);
+        ShowInfo(fmt::format("lobbydata_parse: {}'s login_session_data is deleted", loginsd->login));
         do_close_tcp(fd);
         return 0;
     }
 
-    ShowInfo("lobbydata_parse: %s shutdown the socket", ip2str(sessions[fd]->client_addr));
+    ShowInfo(fmt::format("lobbydata_parse: {} shutdown the socket", ip2str(sessions[fd]->client_addr)));
     do_close_tcp(fd);
     return 0;
 }
@@ -553,7 +555,7 @@ int32 lobbyview_parse(int32 fd)
         auto maintMode = settings::get<uint8>("login.MAINT_MODE");
 
         char* buff = &sessions[fd]->rdata[0];
-        ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 8), ip2str(sd->client_addr));
+        ShowDebug(fmt::format("lobbyview_parse:Incoming Packet: <{}> from ip:<{}>", ref<uint8>(buff, 8), ip2str(sd->client_addr)));
         uint8 code = ref<uint8>(buff, 8);
         switch (code)
         {
@@ -572,7 +574,7 @@ int32 lobbyview_parse(int32 fd)
 
                 if (ver_mismatch)
                 {
-                    ShowError("lobbyview_parse: Incorrect client version: got %s, expected %s", client_ver_data.c_str(), expected_version.c_str());
+                    ShowError(fmt::format("lobbyview_parse: Incorrect client version: got {}, expected {}", client_ver_data.c_str(), expected_version.c_str()));
 
                     switch (settings::get<uint8>("login.VER_LOCK"))
                     {
@@ -641,7 +643,7 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
-                if (!settings::get<bool>("map.CHARACTER_DELETION"))
+                if (!settings::get<bool>("login.CHARACTER_DELETION"))
                 {
                     int32         sendsize = 0x28;
                     unsigned char MainReservePacket[0x28];
@@ -660,8 +662,8 @@ int32 lobbyview_parse(int32 fd)
                 // delete char
                 uint32 CharID = ref<uint32>(sessions[fd]->rdata.data(), 0x20);
 
-                ShowInfo("lobbyview_parse: attempt to delete char:<%d> from ip:<%s>", CharID,
-                         ip2str(sd->client_addr));
+                ShowInfo(fmt::format("lobbyview_parse: attempt to delete char:<{}> from ip:<{}>",
+                                     CharID, ip2str(sd->client_addr)));
 
                 uint8 sendsize = 0x20;
 
@@ -687,13 +689,13 @@ int32 lobbyview_parse(int32 fd)
             {
                 if (sessions[sd->login_lobbydata_fd] == nullptr)
                 {
-                    ShowInfo("0x1F nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
+                    ShowInfo(fmt::format("0x1F nullptr: fd {} lobbydata fd {} lobbyview fd {}. Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd));
                     uint32 val = 1337;
                     if (sd->login_lobbydata_fd - 1 >= 0 && sessions[sd->login_lobbydata_fd - 1] != nullptr)
                     {
                         val = sessions[sd->login_lobbydata_fd - 1]->client_addr;
                     }
-                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
+                    ShowInfo(fmt::format("Details: {} ip {} and lobbydata-1 fd ip is {}", sd->login, sd->client_addr, val));
                     do_close_tcp(fd);
                     return -1;
                 }
@@ -723,13 +725,13 @@ int32 lobbyview_parse(int32 fd)
             {
                 if (sessions[sd->login_lobbydata_fd] == nullptr)
                 {
-                    ShowInfo("0x07 nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
+                    ShowInfo(fmt::format("0x07 nullptr: fd {} lobbydata fd {} lobbyview fd {}. Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd));
                     uint32 val = 1337;
                     if (sd->login_lobbydata_fd - 1 >= 0 && sessions[sd->login_lobbydata_fd - 1] != nullptr)
                     {
                         val = sessions[sd->login_lobbydata_fd - 1]->client_addr;
                     }
-                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
+                    ShowInfo(fmt::format("Details: {} ip {} and lobbydata-1 fd ip is {}", sd->login, sd->client_addr, val));
                     do_close_tcp(fd);
                     return -1;
                 }
@@ -746,17 +748,14 @@ int32 lobbyview_parse(int32 fd)
                     do_close_lobbyview(sd, fd);
                     return -1;
                 }
-                // char lobbydata_code[] = { 0x15, 0x07 };
-                //              sessions[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
-                //              sessions[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
-                //              WFIFOSET(sd->login_lobbydata_fd,2);
-                ShowInfo("lobbyview_parse: char <%s> was successfully created", sd->charname);
+
+                sd->justCreatedNewChar = true;
+                ShowInfo(fmt::format("lobbyview_parse: char <{}> was successfully created", sd->charname));
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);
                 unsigned char hash[16];
 
                 int32 sendsize = 32;
-                // std::memset(ReservePacket+12,0,sizeof(16));
                 md5((unsigned char*)(ReservePacket), hash, sendsize);
 
                 std::memcpy(ReservePacket + 12, hash, sizeof(hash));
@@ -784,42 +783,86 @@ int32 lobbyview_parse(int32 fd)
                     std::memset(CharName, 0, sizeof(CharName));
                     std::memcpy(CharName, sessions[fd]->rdata.data() + 32, sizeof(CharName));
 
-                    // find assigns
-                    const char* fmtQuery = "SELECT charname FROM chars WHERE charname LIKE '%s'";
+                    // Sanitize name
+                    char escapedCharName[16 * 2 + 1];
+                    sql->EscapeString(escapedCharName, CharName);
 
-                    std::string myNameIs(&CharName[0]);
-                    bool        invalidName = false;
-                    for (auto letters : myNameIs)
+                    std::optional<std::string> invalidNameReason = std::nullopt;
+
+                    // Check for invalid characters
+                    std::string nameStr(&escapedCharName[0]);
+                    for (auto letters : nameStr)
                     {
                         if (!std::isalpha(letters))
                         {
-                            invalidName = true;
+                            invalidNameReason = "Invalid characters present in name.";
                             break;
                         }
                     }
 
-                    char escapedCharName[16 * 2 + 1];
-                    sql->EscapeString(escapedCharName, CharName);
-                    if (sql->Query(fmtQuery, escapedCharName) == SQL_ERROR)
+                    // Check for invalid length name
+                    // NOTE: The client checks for this. This is to guard
+                    // against packet injection
+                    if (nameStr.size() < 3 || nameStr.size() > 15)
                     {
-                        do_close_lobbyview(sd, fd);
-                        return -1;
+                        invalidNameReason = "Invalid name length.";
                     }
 
-                    if (sql->NumRows() != 0 || invalidName)
+                    // Check if the name is already in use by another character
+                    if (sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
                     {
-                        if (invalidName)
+                        invalidNameReason = "Internal entity name query failed.";
+                    }
+                    else if (sql->NumRows() != 0)
+                    {
+                        invalidNameReason = "Name already in use.";
+                    }
+
+                    // (optional) Check if the name is in use by NPC or Mob entities
+                    if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
+                    {
+                        auto query =
+                            "WITH results AS "
+                            "( "
+                            "    SELECT polutils_name AS `name` FROM npc_list "
+                            "    UNION "
+                            "    SELECT packet_name AS `name` FROM mob_pools "
+                            ") "
+                            "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '');";
+
+                        if (sql->Query(query, nameStr) == SQL_ERROR)
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> invalid", CharName);
+                            invalidNameReason = "Internal entity name query failed";
                         }
-                        else
+                        else if (sql->NumRows() != 0)
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> already taken", CharName);
+                            invalidNameReason = "Name already in use.";
                         }
-                        // Send error code
-                        LOBBBY_ERROR_MESSAGE(ReservePacket);
+                    }
+
+                    // (optional) Check if the name contains any words on the bad word list
+                    auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
+                    if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
+                    {
+                        auto potentialName = to_upper(nameStr);
+                        for (auto entry : badWordsList)
+                        {
+                            auto badWord = to_upper(entry.second.as<std::string>());
+                            if (potentialName.find(badWord) != std::string::npos)
+                            {
+                                invalidNameReason = fmt::format("Name matched with bad words list <{}>.", badWord);
+                            }
+                        }
+                    }
+
+                    if (invalidNameReason.has_value())
+                    {
+                        ShowWarning(fmt::format("lobbyview_parse: new character name error <{}>: {}", CharName, (*invalidNameReason).c_str()));
+
+                        // Send error code:
                         // The character name you entered is unavailable. Please choose another name.
-                        // A message is displayed in Japanese
+                        // TODO: This message is displayed in Japanese, needs fixing.
+                        LOBBBY_ERROR_MESSAGE(ReservePacket);
                         ref<uint16>(ReservePacket, 32) = 313;
                         std::memcpy(MainReservePacket, ReservePacket, sendsize);
                     }
@@ -851,7 +894,7 @@ int32 lobbyview_parse(int32 fd)
 
 int32 do_close_lobbyview(login_session_data_t* sd, int32 fd)
 {
-    ShowInfo("lobbyview_parse: %s shutdown the socket", sd->login);
+    ShowInfo(fmt::format("lobbyview_parse: {} shutdown the socket", sd->login));
     do_close_tcp(fd);
     return 0;
 }
@@ -875,8 +918,8 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     // Log that the character attempting to create a non-starting job.
     if (mjob != createchar.m_mjob)
     {
-        ShowInfo("lobby_createchar: %s attempted to create invalid starting job %d substituting %d",
-                 loginsd->charname, mjob, createchar.m_mjob);
+        ShowInfo(fmt::format("lobby_createchar: {} attempted to create invalid starting job {} substituting {}",
+                             loginsd->charname, mjob, createchar.m_mjob));
     }
 
     createchar.m_nation = ref<uint8>(buf, 54);
@@ -919,7 +962,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
         return -1;
     }
 
-    ShowDebug("lobby_createchar: char<%s> successfully saved", createchar.m_name);
+    ShowDebug(fmt::format("lobby_createchar: char<{}> successfully saved", createchar.m_name));
     return 0;
 };
 
@@ -929,7 +972,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (sql->Query(Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
     {
-        ShowDebug("lobby_ccsave: char<%s>, accid: %u, charid: %u", createchar->m_name, accid, charid);
+        ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", createchar->m_name, accid, charid));
         return -1;
     }
 
@@ -937,8 +980,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (sql->Query(Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
     {
-        ShowDebug("lobby_cLook: char<%s>, charid: %u", createchar->m_name, charid);
-
+        ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", createchar->m_name, charid));
         return -1;
     }
 
@@ -946,8 +988,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
-        ShowDebug("lobby_cStats: charid: %u", charid);
-
+        ShowDebug(fmt::format("lobby_cStats: charid: {}", charid));
         return -1;
     }
 
@@ -1008,5 +1049,13 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
         return -1;
     }
 
+    if (settings::get<bool>("main.NEW_CHARACTER_CUTSCENE"))
+    {
+        Query = "INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u);";
+        if (sql->Query(Query, charid, "HQuest[newCharacterCS]notSeen", 1) == SQL_ERROR)
+        {
+            return -1;
+        }
+    }
     return 0;
 }

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Folzen
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

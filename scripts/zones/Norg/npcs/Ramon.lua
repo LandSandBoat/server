@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Ramon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

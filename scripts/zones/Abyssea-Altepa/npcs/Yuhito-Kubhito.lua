@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Yuhito-Kubhito
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

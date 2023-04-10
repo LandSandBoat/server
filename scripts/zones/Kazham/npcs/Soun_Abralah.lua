@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Soun Abralah
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

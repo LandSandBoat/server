@@ -24,8 +24,9 @@ g_mixins.clear_doom = function(doomMob)
     end)
 
     doomMob:addListener("DEATH", "REMOVE_DOOM", function(mob, player)
-        if math.random(100) <= mob:getLocalVar("[remove_doom]removalChance") then
+        if math.random(1, 100) <= mob:getLocalVar("[remove_doom]removalChance") then
             local players = mob:getZone():getPlayers()
+
             for name, playerVal in pairs(players) do
                 if mob:checkDistance(player) < 30 then
                     if playerVal:delStatusEffectSilent(xi.effect.DOOM) then

@@ -3,12 +3,12 @@
 -----------------------------------
 local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onInstanceZoneIn = function(player, instance)
+zoneObject.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     if player:getInstance() == nil then
@@ -25,20 +25,20 @@ zone_object.onInstanceZoneIn = function(player, instance)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 1000 and option == 0 then
         player:setPos(-530.6, -5.7, 59.9, 128, xi.zone.RALA_WATERWAYS)
     end
 end
 
-zone_object.onInstanceLoadFailed = function()
+zoneObject.onInstanceLoadFailed = function()
     return 258 -- Rala Waterways
 end
 
-return zone_object
+return zoneObject

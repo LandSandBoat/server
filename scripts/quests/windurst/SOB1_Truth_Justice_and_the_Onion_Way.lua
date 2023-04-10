@@ -31,7 +31,7 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Kohlo-Lakolo'] = quest:progressEvent(368),-- Quest starting event.
+            ['Kohlo-Lakolo'] = quest:progressEvent(368), -- Quest starting event.
 
             onEventFinish =
             {
@@ -60,18 +60,18 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.RARAB_TAIL) then
-                        return quest:progressEvent(378, 0, xi.items.RARAB_TAIL)
+                        return quest:progressEvent(378, 0, xi.items.RARAB_TAIL, xi.items.JUSTICE_BADGE)
                     end
                 end,
             },
 
             -- Reminder text.
-             ['Gomada-Vulmada'] = quest:event(373),
-             ['Papo-Hopo']      = quest:event(372),
-             ['Pichichi']       = quest:event(374),
-             ['Pyo_Nzon']       = quest:event(375),
-             ['Shanruru']       = quest:event(377),
-             ['Yafa_Yaa']       = quest:event(376),
+            ['Gomada-Vulmada'] = quest:event(373),
+            ['Papo-Hopo']      = quest:event(372),
+            ['Pichichi']       = quest:event(374),
+            ['Pyo_Nzon']       = quest:event(375),
+            ['Shanruru']       = quest:event(377),
+            ['Yafa_Yaa']       = quest:event(376),
 
             onEventFinish =
             {

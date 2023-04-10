@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Ormr
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

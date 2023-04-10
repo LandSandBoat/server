@@ -29,26 +29,34 @@ entity.onMobFight = function(mob, target)
     local lastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
 
-    if (mob:getBattleTime() - lastCast > 30) then
+    if mob:getBattleTime() - lastCast > 30 then
         mob:setLocalVar("COPY_SPELL", 0)
         mob:setLocalVar("delay", 0)
     end
 
-    if (not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or not GetMobByID(ID.mob.KFGHRAH_BLM):isDead()) then -- check for kf'ghrah
-        if (spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE)) then
-            if (delay >= 3) then
+    if
+        not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or
+        not GetMobByID(ID.mob.KFGHRAH_BLM):isDead()
+    then
+        -- check for kf'ghrah
+        if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
+            if delay >= 3 then
                 mob:castSpell(spell)
                 mob:setLocalVar("COPY_SPELL", 0)
                 mob:setLocalVar("delay", 0)
             else
-                mob:setLocalVar("delay", delay+1)
+                mob:setLocalVar("delay", delay + 1)
             end
         end
     end
 end
 
 entity.onMagicHit = function(caster, target, spell)
-    if (spell:tookEffect() and (caster:isPC() or caster:isPet()) and spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE ) then
+    if
+        spell:tookEffect() and
+        (caster:isPC() or caster:isPet()) and
+        spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE
+    then
         -- Handle mimicked spells
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())

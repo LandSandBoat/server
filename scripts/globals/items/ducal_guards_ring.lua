@@ -5,19 +5,21 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if not target:isZoneVisited(243) then
+    if not target:hasVisitedZone(xi.zone.RULUDE_GARDENS) then
         result = 56
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.DUCALGUARD, 0, 3)
 end
 
-return item_object
+return itemObject

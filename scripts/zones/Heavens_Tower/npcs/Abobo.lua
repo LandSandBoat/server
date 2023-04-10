@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Abobo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

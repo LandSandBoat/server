@@ -4,9 +4,9 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.ENLIGHT_EFFECT)
 
     target:addMod(xi.mod.ENSPELL, xi.magic.element.LIGHT)
@@ -14,10 +14,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.ACC, jpValue)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.ENLIGHT_EFFECT)
 
     target:setMod(xi.mod.ENSPELL_DMG, 0)
@@ -25,4 +25,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.ACC, jpValue)
 end
 
-return effect_object
+return effectObject

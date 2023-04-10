@@ -41,21 +41,21 @@ zones[xi.zone.WEST_RONFAURE] =
         PICKPOCKET_ZOVRIACE           = 7395,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
         DISMAYED_CUSTOMER             = 7419,  -- You find some worthless scraps of paper.
         CONQUEST                      = 7541,  -- You've earned conquest points!
-        SOMETHING_IS_AMISS            = 7904,  -- Something is amiss.
-        GARRISON_BASE                 = 7934,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8070,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8071,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8072,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8073,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8078,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10444, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12445, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SOMETHING_IS_AMISS            = 7892,  -- Something is amiss.
+        GARRISON_BASE                 = 7922,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8058,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8059,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8060,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8061,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8066,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10432, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12433, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
         FUNGUS_BEETLE_PH      =
         {
-            [17187026] = 17187047, -- -332.722,-21.032,-112.044
+            [17187026] = 17187047, -- -332.722 -21.032 -112.044
         },
         JAGGEDY_EARED_JACK_PH =
         {

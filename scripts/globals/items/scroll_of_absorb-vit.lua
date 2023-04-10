@@ -3,14 +3,14 @@
 -- Scroll of Absorb-VIT
 -- Teaches the black magic Absorb-VIT
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(268)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(268)
 end
 
-return item_object
+return itemObject

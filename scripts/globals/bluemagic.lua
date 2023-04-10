@@ -1,7 +1,19 @@
+-----------------------------------
+-- Blue Magic utilities
+-- Used for Blue Magic spells.
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
+require("scripts/globals/mobskills")
+require("scripts/globals/settings")
+require("scripts/globals/status")
+-----------------------------------
+xi = xi or {}
+xi.spells = xi.spells or {}
+xi.spells.blue = xi.spells.blue or {}
+-----------------------------------
 
--- The TP modifier
+-- The TP modifier (currently unused)
 TPMOD_NONE = 0
 TPMOD_CRITICAL = 1
 TPMOD_DAMAGE = 2
@@ -9,84 +21,46 @@ TPMOD_ACC = 3
 TPMOD_ATTACK = 4
 TPMOD_DURATION = 5
 
-INT_BASED = 1
-CHR_BASED = 2
-MND_BASED = 3
-
 -----------------------------------
--- Utility functions below
+-- Local functions
 -----------------------------------
 
--- obtains alpha, used for working out WSC
-local function BlueGetAlpha(level)
-    local alpha = 1.00
-    if level <= 5 then
-        alpha = 1.00
-    elseif level <= 11 then
-        alpha = 0.99
-    elseif level <= 17 then
-        alpha = 0.98
-    elseif level <= 23 then
-        alpha = 0.97
-    elseif level <= 29 then
-        alpha = 0.96
-    elseif level <= 35 then
-        alpha = 0.95
-    elseif level <= 41 then
-        alpha = 0.94
-    elseif level <= 47 then
-        alpha = 0.93
-    elseif level <= 53 then
-        alpha = 0.92
-    elseif level <= 59 then
-        alpha = 0.91
-    elseif level <= 61 then
-        alpha = 0.90
-    elseif level <= 63 then
-        alpha = 0.89
-    elseif level <= 65 then
-        alpha = 0.88
-    elseif level <= 67 then
-        alpha = 0.87
-    elseif level <= 69 then
-        alpha = 0.86
-    elseif level <= 71 then
-        alpha = 0.85
-    elseif level <= 73 then
-        alpha = 0.84
+-- Get alpha (level-dependent multiplier on WSC)
+local function calculateAlpha(level)
+    if level < 61 then
+        return math.ceil(100 - (level / 6)) / 100
     elseif level <= 75 then
-        alpha = 0.83
+        return math.ceil(100 - (level - 40) / 2) / 100
     elseif level <= 99 then
-        alpha = 0.85
+        return 0.83
     end
-    return alpha
 end
 
-local function BlueGetWsc(attacker, params)
-    local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
-         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
+-- Get WSC
+local function calculateWSC(attacker, params)
+    local wsc = calculateAlpha(attacker:getMainLvl()) * (
+    attacker:getStat(xi.mod.STR) * params.str_wsc +
+    attacker:getStat(xi.mod.DEX) * params.dex_wsc +
+    attacker:getStat(xi.mod.VIT) * params.vit_wsc +
+    attacker:getStat(xi.mod.AGI) * params.agi_wsc +
+    attacker:getStat(xi.mod.INT) * params.int_wsc +
+    attacker:getStat(xi.mod.MND) * params.mnd_wsc +
+    attacker:getStat(xi.mod.CHR) * params.chr_wsc)
     return wsc
 end
 
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-local function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty
+-- Get cRatio
+local function calculatecRatio(ratio, atk_lvl, def_lvl)
+    -- Get ratio with level penalty
     local levelcor = 0
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
     end
+
     ratio = ratio - levelcor
+    ratio = utils.clamp(ratio, 0, 2)
 
-    -- apply caps
-    if ratio < 0 then
-        ratio = 0
-    elseif ratio > 2 then
-        ratio = 2
-    end
-
-    -- Obtaining cRatio_MIN
+    -- Get cRatiomin
     local cratiomin = 0
     if ratio < 1.25 then
         cratiomin = 1.2 * ratio - 0.5
@@ -96,7 +70,7 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
         cratiomin = 1.2 * ratio - 0.8
     end
 
-    -- Obtaining cRatio_MAX
+    -- Get cRatiomax
     local cratiomax = 0
     if ratio < 0.5 then
         cratiomax = 0.4 + 1.2 * ratio
@@ -105,33 +79,32 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
     elseif ratio <= 2 and ratio > 0.833 then
         cratiomax = 1.2 * ratio
     end
+
+    -- Return data
     local cratio = {}
     if cratiomin < 0 then
         cratiomin = 0
     end
+
     cratio[1] = cratiomin
     cratio[2] = cratiomax
     return cratio
 end
 
--- Gets the fTP multiplier by applying 2 straight lines between ftp1-ftp2 and ftp2-ftp3
--- tp - The current TP
--- ftp1 - The TP 0% value
--- ftp2 - The TP 150% value
--- ftp3 - The TP 300% value
-local function BluefTP(tp, ftp1, ftp2, ftp3)
+-- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
+local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
+    tp = utils.clamp(tp, 0, 3000)
     if tp >= 0 and tp < 1500 then
-        return ftp1 + ( ((ftp2 - ftp1) / 100) * (tp / 10))
-    elseif tp >= 1500 and tp <= 3000 then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
-    else
-        print("blue fTP error: TP value is not between 0-3000!")
+        return ftp0 + ((ftp1500 - ftp0) * (tp / 1500))
+    elseif tp >= 1500 then
+        return ftp1500 + ((ftp3000 - ftp1500) * ((tp - 1500) / 1500))
+    else -- unreachable
+        return 1
     end
-    return 1 -- no ftp mod
 end
 
-local function BluefSTR(dSTR)
+-- Get fSTR
+local function calculatefSTR(dSTR)
     local fSTR2 = nil
     if dSTR >= 12 then
         fSTR2 = (dSTR + 4) / 2
@@ -154,136 +127,99 @@ local function BluefSTR(dSTR)
     return fSTR2
 end
 
-local function BlueGetHitRate(attacker, target, capHitRate)
-    local acc = attacker:getACC()
+-- Get hitrate
+local function calculateHitrate(attacker, target)
+    local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
     local eva = target:getEVA()
+    acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
 
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-    if eva > acc then
-        hitdiff = (-1 * (eva - acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
+    local hitrate = 75 + (acc - eva) / 2
     hitrate = hitrate / 100
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
     return hitrate
 end
 
--- Get the damage for a blue magic physical spell.
--- caster - The entity casting the spell.
--- target - The target of the spell.
--- spell - The blue magic spell itself.
--- params - The parameters for the spell. Broken down into:
---      .tpmod - The TP modifier for the spell (e.g. damage varies, critical varies with TP, etc). Should be a TPMOD_xxx enum.
---      .numHits - The number of hits in the spell.
---      .multiplier - The base multiplier for the spell (not under Chain Affinity) - Every spell must specify this. (equivalent to TP 0%)
---      .tp150 - The TP modifier @ 150% TP (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%).
---               This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .tp300 - The TP modifier @ 300% TP (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%)
---               This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .azuretp - The TP modifier under Azure Lore (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%)
---                  This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .duppercap - The upper cap for D for this spell.
---      .str_wsc - The decimal % value for STR % (e.g. STR 20% becomes 0.2)
---      .dex_wsc - Same as above.
---      .vit_wsc - Same as above.
---      .int_wsc - Same as above.
---      .mnd_wsc - Same as above.
---      .chr_wsc - Same as above.
---      .agi_wsc - Same as above.
-function BluePhysicalSpell(caster, target, spell, params)
-    -- store related values
-    local magicskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC) -- skill + merits + equip bonuses
-    -- TODO: Under Chain affinity?
-    -- TODO: Under Efflux?
-    -- TODO: Merits.
-    -- TODO: Under Azure Lore.
-
-    -----------------------------------
-    -- Calculate the final D value
-    -----------------------------------
-    -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
-
-    local D = math.floor(magicskill * 0.11) * 2 + 3
-    -- cap D
-    if D > params.duppercap then
-        D = params.duppercap
+-- Get the effect of ecosystem correlation
+local function calculateCorrelation(spellEcosystem, monsterEcosystem, merits)
+    local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
+    effect = effect * 0.25
+    if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
+        effect = effect + 0.001 * merits
     end
 
-    local fStr = BluefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
+    return effect
+end
+
+-----------------------------------
+-- Global functions
+-----------------------------------
+
+-- Get the damage for a physical Blue Magic spell
+xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
+    -----------------------
+    -- Get final D value --
+    -----------------------
+
+    -- Initial D value
+    local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
+    initialD = utils.clamp(initialD, 0, params.duppercap)
+
+    -- fSTR
+    local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
-        fStr = 22 -- TODO: Smite of Rage doesn't have this cap applied.
-    end
-
-    local wsc = BlueGetWsc(caster, params)
-
-    local multiplier = params.multiplier
-
-    -- Process chance for Bonus WSC from AF3 Set. BLU AF3 set triples the base
-    -- WSC when it procs and can stack with Chain Affinity. See Final bonus WSC
-    -- calculation below.
-
-    local bonusWSC = 0
-    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
-       bonusWSC = 2
-    end
-
-    -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
-    local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
-    if chainAffinity ~= nil then
-        -- Calculate the total TP available for the fTP multiplier.
-        local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
-        if tp > 3000 then
-            tp = 3000
+        if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
+            fStr = 22
         end
-
-        multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
     end
 
-    -- Calculate final WSC bonuses
-    wsc = wsc + (wsc * bonusWSC)
+    -- Multiplier, bonus WSC
+    local multiplier = 1
+    local bonusWSC = 0
 
-    -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
-    -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
-    -- Affinity for a maximum total of 4x WSC.
+    -- BLU AF3 bonus (triples the base WSC when it procs)
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
+        bonusWSC = 2
+    end
 
-    -- TODO: Modify multiplier to account for family bonus/penalty
-    local finalD = math.floor(D + fStr + wsc) * multiplier
+    -- Chain Affinity -- TODO: add "Damage/Accuracy/Critical Hit Chance varies with TP"
+    if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
+        tp = utils.clamp(tp, 0, 3000)
+        multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
+    end
 
-    -----------------------------------
-    -- Get the possible pDIF range and hit rate
-    -----------------------------------
-    if params.offcratiomod == nil then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
+    -- WSC
+    local wsc = calculateWSC(caster, params)
+    wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
+
+    -- Monster correlation
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+
+    -- Azure Lore
+    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+        multiplier = params.azuretp
+    end
+
+    -- Final D
+    local finalD = math.floor(initialD + fStr + wsc)
+
+    ----------------------------------------------
+    -- Get the possible pDIF range and hit rate --
+    ----------------------------------------------
+
+    if params.offcratiomod == nil then -- For all spells except Cannonball, which uses a DEF mod
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
-    local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = BlueGetHitRate(caster, target, true)
+    local cratio = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
+    local hitrate = calculateHitrate(caster, target)
 
-    -----------------------------------
-    -- Perform the attacks
-    -----------------------------------
+    -------------------------
+    -- Perform the attacks --
+    -------------------------
+
     local hitsdone = 0
     local hitslanded = 0
     local finaldmg = 0
@@ -291,17 +227,17 @@ function BluePhysicalSpell(caster, target, spell, params)
     while hitsdone < params.numhits do
         local chance = math.random()
         if chance <= hitrate then -- it hit
-            -- TODO: Check for shadow absorbs.
+            -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
             -- Generate a random pDIF between min and max
-            local pdif = math.random((cratio[1]*1000), (cratio[2]*1000))
+            local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
 
-            -- Apply it to our final D
-            if hitsdone == 0 then -- only the first hit benefits from multiplier
-                finaldmg = finaldmg + (finalD * pdif)
+            -- Add it to our final damage
+            if hitsdone == 0 then
+                finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif) -- first hit gets full multiplier
             else
-                finaldmg = finaldmg + ((math.floor(D + fStr + wsc)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
+                finaldmg = finaldmg + (finalD * (1 + correlationMultiplier) * pdif)
             end
 
             hitslanded = hitslanded + 1
@@ -315,91 +251,145 @@ function BluePhysicalSpell(caster, target, spell, params)
         hitsdone = hitsdone + 1
     end
 
-    return finaldmg
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
 end
 
--- Blue Magical type spells
+-- Get the damage for a magical Blue Magic spell
+xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
+    -- In individual magical spells, don't use params.effect for the added effect
+    -- This would affect the resistance check for damage here
+    -- We just want that to affect the resistance check for the added effect
+    -- Use params.addedEffect instead
 
-function BlueMagicalSpell(caster, target, spell, params, statMod)
-    local D = caster:getMainLvl() + 2
+    -- Initial values
+    local initialD = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
+    params.skillType = xi.skill.BLUE_MAGIC
 
-    if D > params.duppercap then
-        D = params.duppercap
+    -- WSC
+    local wsc = calculateWSC(caster, params)
+    if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+        wsc = wsc * 2
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
-    local st = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
+    -- INT/MND/CHR dmg bonuses
+    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    local statBonus = params.diff * params.tMultiplier
 
-    if (caster:hasStatusEffect(xi.effect.BURST_AFFINITY)) then
-        st = st * 2
+    -- Azure Lore
+    local azureBonus = 0
+    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+        azureBonus = params.azureBonus or 0
     end
 
-    local convergenceBonus = 1.0
-    if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
-        local convergenceEffect = caster:getStatusEffect(xi.effect.CONVERGENCE)
-        local convLvl = convergenceEffect:getPower()
-        if convLvl == 1 then
-            convergenceBonus = 1.05
-        elseif convLvl == 2 then
-            convergenceBonus = 1.1
-        elseif convLvl == 3 then
-            convergenceBonus = 1.15
+    -- Monster correlation
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+
+    -- Final D value
+    local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
+
+    -- Multitarget damage reduction
+    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(caster, target, spell))
+
+    -- Resistance
+    finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
+
+    -- MAB/MDB/weather/day/affinity/burst effect on damage
+    finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
+
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+end
+
+-- Perform a draining magical Blue Magic spell
+xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, mpDrain)
+    -- determine base damage
+    local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
+    if softCap > 0 then
+        dmg = utils.clamp(dmg, 0, softCap)
+    end
+
+    dmg = dmg * applyResistance(caster, target, spell, params)
+    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+
+    -- limit damage
+    if target:isUndead() then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    else
+        -- only drain what the mob has
+        if mpDrain then
+            dmg = dmg * xi.settings.main.BLUE_POWER
+            dmg = utils.clamp(dmg, 0, target:getMP())
+            target:delMP(dmg)
+            caster:addMP(dmg)
+        else
+            dmg = utils.clamp(dmg, 0, target:getHP())
+            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+            caster:addHP(dmg)
         end
     end
-
-    local statBonus = 0
-    local dStat = 0 -- Please make sure to add an additional stat check if there is to be a spell that uses neither INT, MND, or CHR. None currently exist.
-    if statMod == INT_BASED then -- Stat mod is INT
-        dStat = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-        statBonus = dStat * params.tMultiplier
-    elseif statMod == CHR_BASED then -- Stat mod is CHR
-        dStat = caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR)
-        statBonus = dStat * params.tMultiplier
-    elseif statMod == MND_BASED then -- Stat mod is MND
-        dStat = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
-        statBonus = dStat * params.tMultiplier
-    end
-
-    D = ((D + st) * params.multiplier * convergenceBonus) + statBonus
-
-    -- At this point according to wiki we apply standard magic attack calculations
-
-    local magicAttack = 1.0
-    local multTargetReduction = 1.0 -- TODO: Make this dynamically change, temp static till implemented.
-    magicAttack = math.floor(D * multTargetReduction)
-
-    local rparams = {}
-    rparams.diff = dStat
-    rparams.skillType = xi.skill.BLUE_MAGIC
-    magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
-
-    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
-
-    caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
 
     return dmg
 end
 
-function BlueFinalAdjustments(caster, target, spell, dmg, params)
+-- Get the damage and resistance for a breath Blue Magic spell
+xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
+    local results = {}
+    results[1] = 0 -- damage
+    results[2] = 0 -- resistance (used in spell to determine added effect resistance)
+
+    -- Initial damage
+    local dmg = (caster:getHP() / params.hpMod)
+    if params.lvlMod > 0 then
+        dmg = dmg + (caster:getMainLvl() / params.lvlMod)
+    end
+
+    -- Conal breath spells
+    if isConal then
+        -- Conal check (45° cone)
+        local isInCone = 0
+        if target:isInfront(caster, 32) then
+            isInCone = 1
+        end
+
+        dmg = dmg * isInCone
+    end
+
+    -- Monster correlation
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    dmg = dmg * (1 + correlationMultiplier)
+
+    -- Monster elemental adjustments
+    local mobEleAdjustments = getElementalDamageReduction(target, spell:getElement())
+    dmg = dmg * mobEleAdjustments
+
+    -- Modifiers
+    dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
+
+    -- Resistance
+    local resistance = applyResistance(caster, target, spell, params)
+    dmg = math.floor(dmg * resistance)
+
+    -- Final damage
+    dmg = target:breathDmgTaken(dmg)
+
+    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+    results[2] = resistance
+    return results
+end
+
+-- Apply spell damage
+xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
     if dmg < 0 then
         dmg = 0
     end
 
     dmg = dmg * xi.settings.main.BLUE_POWER
-
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
-    if attackType == xi.attackType.NONE then
-        printf("BlueFinalAdjustments: spell id %d has attackType set to xi.attackType.NONE", spell:getID())
-    end
-
-    if damageType == xi.damageType.NONE then
-        printf("BlueFinalAdjustments: spell id %d has damageType set to xi.damageType.NONE", spell:getID())
-    end
-
-    -- handle One For All, Liement
+    -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
-
         local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
@@ -407,53 +397,145 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
+
         dmg = utils.oneforall(target, dmg)
     end
 
-    -- Handle Phalanx
+    -- handle Phalanx
     if dmg > 0 then
         dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
-    -- handling stoneskin
+    -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
-    -- TP has already been dealt with.
+
     return dmg
 end
 
--- Function to stagger duration of effects by using the resistance to change the value
-function getBlueEffectDuration(caster, resist, effect)
-    local duration = 0
+-- Get the duration of an enhancing Blue Magic spell
+xi.spells.blue.calculateDurationWithDiffusion = function(caster, duration)
+    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
+        local merits = caster:getMerit(xi.merit.DIFFUSION)
+        if merits > 0 then -- each merit after the first increases duration by 5%
+            duration = duration + (duration / 100) * (merits - 5)
+        end
 
-    if resist == 0.125 then
-        resist = 1
-    elseif resist == 0.25 then
-        resist = 2
-    elseif resist == 0.5 then
-        resist = 3
-    else
-        resist = 4
-    end
-
-    if effect == xi.effect.BIND then
-        duration = math.random(0, 5) + resist * 5
-    elseif effect == xi.effect.STUN then
-        duration = math.random(2, 3) + resist
-    elseif effect == xi.effect.WEIGHT then
-        duration = math.random(20, 24) + resist * 9 -- 20-24
-    elseif effect == xi.effect.PARALYSIS then
-        duration = math.random(50, 60) + resist * 15 -- 50- 60
-    elseif effect == xi.effect.SLOW then
-        duration = math.random(60, 120) + resist * 15 -- 60- 120 -- Needs confirmation but capped max duration based on White Magic Spell Slow
-    elseif effect == xi.effect.SILENCE then
-        duration = math.random(60, 180) + resist * 15 -- 60- 180 -- Needs confirmation but capped max duration based on White Magic Spell Silence
-    elseif effect == xi.effect.POISON then
-        duration = math.random(20, 30) + resist * 9 -- 20-30 -- based on magic spell poison
+        caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
     return duration
 end
+
+-- Perform an enfeebling Blue Magic spell
+xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+    -- INT and Blue Magic skill are the default resistance modifiers
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.skillType = xi.skill.BLUE_MAGIC
+    local resist = applyResistanceEffect(caster, target, spell, params)
+
+    -- If unresisted
+    if resist >= resistThreshold then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+        -- If this is a conal move, target needs to be in front of caster
+        if
+            not isConal or
+            (isConal and target:isInfront(caster, 64))
+        then
+
+            -- If this is a gaze move, entities need to face each other
+            if
+                not isGaze or
+                (isGaze and target:isFacing(caster) and caster:isFacing(target))
+            then
+
+                -- If status effect was inflicted
+                if target:addStatusEffect(params.effect, power, tick, duration * resist) then
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+                end
+            end
+        end
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
+
+    return params.effect
+end
+
+-- Perform a curative Blue Magic spell
+xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
+    local power = getCurePowerOld(caster)
+    local divisor = params.divisor0
+    local constant = params.constant0
+
+    if power > params.powerThreshold2 then
+        divisor = params.divisor2
+        constant = params.constant2
+    elseif power > params.powerThreshold1 then
+        divisor = params.divisor1
+        constant = params.constant1
+    end
+
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
+    final = final * xi.settings.main.CURE_POWER
+    final = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
+
+    target:addHP(final)
+    target:wakeUp()
+    caster:updateEnmityFromCure(target, final)
+
+    if target:getID() == spell:getPrimaryTargetID() then
+        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    else
+        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
+
+    return final
+end
+
+-- Inflict an added enfeebling effect (after a physical spell)
+xi.spells.blue.usePhysicalSpellAddedEffect = function(caster, target, spell, params, damage, power, tick, duration)
+    -- Physical spell needs to do damage before added effect can hit
+    if damage > 0 then
+        -- INT and Blue Magic skill are the default resistance modifiers
+        params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        params.skillType = xi.skill.BLUE_MAGIC
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(params.effect, power, tick, duration * resist)
+        end
+    end
+end
+
+-- Inflict an added enfeebling effect (after a magical spell)
+xi.spells.blue.useMagicalSpellAddedEffect = function(caster, target, spell, params, power, tick, duration)
+    -- Blue Magic skill + whichever attribute the spell uses will be used as resistance modifiers
+    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = params.addedEffect -- renamed to avoid magical spells' dmg resistance check being influenced by this
+    local resist = applyResistanceEffect(caster, target, spell, params)
+    if resist >= 0.5 then
+        target:addStatusEffect(params.effect, power, tick, duration * resist)
+    end
+end
+
+--[[
++-------+
+| NOTES |
++-------+
+- Spell values (multiplier, TP, D, WSC, TP etc) from:
+    - https://www.bg-wiki.com/ffxi/Calculating_Blue_Magic_Damage
+    - https://ffxiclopedia.fandom.com/wiki/Calculating_Blue_Magic_Damage
+    - BG-wiki spell pages
+    - Blue Gartr threads with data, such as
+        https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5832112&viewfull=1#post5832112
+        https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5437135&viewfull=1#post5437135
+        https://www.bluegartr.com/threads/107650-Random-Question-Thread-XXIV-Occupy-the-RQT?p=4906565&viewfull=1#post4906565
+    - When values were absent, spell values were decided based on Blue Gartr threads and Wiki page discussions.
+    - Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
+]]--

@@ -17,7 +17,10 @@ entity.onTrigger = function(player, npc)
     local chasingQuotasStatus = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer
-    if rockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SHARP_GRAY_STONE) then
+    if
+        rockRacketeer == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)
+    then
         player:startEvent(261)
 
     elseif chasingQuotasStatus == 3 then
@@ -32,14 +35,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- Rock Racketeer
-    if (csid == 261 and option ~= 1) then
+    if csid == 261 and option ~= 1 then
         player:delKeyItem(xi.ki.SHARP_GRAY_STONE)
         player:addGil(xi.settings.main.GIL_RATE * 10)
         player:setCharVar("rockracketeer_sold", 1)
-    elseif (csid == 261 and option ~= 2) then
+    elseif csid == 261 and option ~= 2 then
         player:setCharVar("rockracketeer_sold", 2)
-
-    elseif (csid == 264) then
+    elseif csid == 264 then
         player:setCharVar("ChasingQuotas_Progress", 4)
     end
 end

@@ -13,39 +13,29 @@
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Regen
 -----------------------------------
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.SLEEP_I
-    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = typeEffect
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    local duration = 60 * resist
+    params.ecosystem = xi.ecosystem.BEAST
+    params.effect = xi.effect.SLEEP_I
+    local power = 1
+    local tick = 0
+    local duration = 60
+    local resistThreshold = 0.50
+    local isGaze = false
+    local isConal = false
 
-    if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(typeEffect, 1, 0, duration)) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        end
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-    end
-
-    return typeEffect
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
-return spell_object
+return spellObject

@@ -8,7 +8,10 @@ local entity = {}
 entity.onMobFight = function(mob, target)
     local lastDoll = mob:getLocalVar("lastDoll")
 
-    if lastDoll == 0 or (lastDoll < 5 and GetMobByID(mob:getID() + lastDoll):isDead()) then
+    if
+        lastDoll == 0 or
+        (lastDoll < 5 and GetMobByID(mob:getID() + lastDoll):isDead())
+    then
         lastDoll = lastDoll + 1
         SpawnMob(mob:getID() + lastDoll):updateEnmity(target)
         mob:setLocalVar("lastDoll", lastDoll)

@@ -3,14 +3,14 @@
 -- Scroll of Dragonfoe Mambo
 -- Teaches the song Dragonfoe Mambo
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(404)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(404)
 end
 
-return item_object
+return itemObject

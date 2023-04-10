@@ -6,17 +6,17 @@ local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
 -- Called on the instance, once it is created and ready
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
     for i, mobId in pairs(ID.mob) do
         SpawnMob(mobId, instance)
     end
 end
 
 -- Once the instance is ready, inform the requester that it's ready
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     if instance then
         player:setInstance(instance)
         player:setPos(0, 0, 0, 0, instance:getZone():getID())
@@ -24,13 +24,13 @@ instance_object.onInstanceCreatedCallback = function(player, instance)
 end
 
 -- When the player zones into the instance
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:countdown(instance:getTimeLimit() * 60)
 end
 
 -- Instance "tick"
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     --xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 
     -- Check for mob death (could do also do this in the mob script)
@@ -48,26 +48,26 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 -- On fail
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     xi.ambuscade.onInstanceFailure(instance)
 end
 
 -- When something in the instance calls: instance:setProgress(...)
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 -- On win
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
     xi.ambuscade.onInstanceComplete(instance)
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
     if csid == 10001 then
         player:setPos(-34.2, -16, 58, 32, 249)
     end
 end
 
-return instance_object
+return instanceObject

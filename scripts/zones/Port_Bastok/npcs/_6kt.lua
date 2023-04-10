@@ -30,13 +30,13 @@ entity.onTimeTrigger = function(npc, triggerID)
         return
     end
 
-    if (triggerID == 0 or triggerID == 2) then
+    if triggerID == 0 or triggerID == 2 then
         --drawbridge needs to open
         local players = npc:getZone():getPlayers()
 
         --If a player is on the bridge, kick them off
         for _, player in pairs(players) do
-            if player:getPlayerRegionInZone() == 2 then
+            if player:getPlayerTriggerAreaInZone() == 2 then
                 player:startEvent(70)
             end
         end
@@ -45,16 +45,15 @@ entity.onTimeTrigger = function(npc, triggerID)
         upperDoor:setAnimation(xi.animation.CLOSE_DOOR)
         npc:setAnimation(xi.animation.CLOSE_DOOR)
 
-    elseif (triggerID == 1 or triggerID == 3) then
+    elseif triggerID == 1 or triggerID == 3 then
         --drawbridge needs to close
         bridge:updateToEntireZone(xi.status.NORMAL, xi.animation.OPEN_DOOR, true)
 
-    elseif (triggerID == 4 or triggerID == 5) then
+    elseif triggerID == 4 or triggerID == 5 then
         --drawbridge has finished closing, reopen entry to walkers
         upperDoor:setAnimation(xi.animation.OPEN_DOOR)
         npc:setAnimation(xi.animation.OPEN_DOOR)
     end
-
 end
 
 return entity

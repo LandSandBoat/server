@@ -1,4 +1,4 @@
-name: changelog
+name: "changelog"
 
 on:
   schedule:
@@ -12,8 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: fregante/setup-git-user@v1
-      with:
-        fetch-depth: 1
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -21,11 +19,12 @@ jobs:
         pip3 install requests
     - name: Generate changelog
       run: |
-          python3 tools/generate_changelog.py ci
+          # https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types
+          python3 tools/generate_changelog.py ci ${{ github.repository }}
           cat changelog-$(date +'%Y-%m-%d').md
     - name: Capture date
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
     - name: Git stash changes
       run: |
           git stash --include-untracked

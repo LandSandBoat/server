@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Vladinek
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

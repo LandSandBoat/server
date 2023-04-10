@@ -30,6 +30,7 @@ local getCrystalTotals = function(player)
     for _, v in pairs(crystalData) do
         params[v.eventparam] = bit.bor(params[v.eventparam], bit.lshift(player:getCurrency(v.name), v.offset))
     end
+
     return params
 end
 
@@ -48,13 +49,17 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
             diff = math.max(diff - hqQty * 12, 0)
 
             -- Confirm the clusters in the trade
-            if hqQty > 0 then trade:confirmItem(v.cluster, hqQty) end
+            if hqQty > 0 then
+                trade:confirmItem(v.cluster, hqQty)
+            end
 
             -- Count normal crystals and and subtract any that won't fit
             local qty = math.min(trade:getItemQty(v.crystal), diff)
 
             -- Confirm the crystals in the trade
-            if qty > 0 then trade:confirmItem(v.crystal, qty) end
+            if qty > 0 then
+                trade:confirmItem(v.crystal, qty)
+            end
 
             -- Calculate the params
             params[v.tradeparam] = bit.bor(hqQty, bit.lshift(qty, 16))
@@ -64,7 +69,7 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
             player:addCurrency(v.name, total)
 
             -- Make sure we flag success if any of the crystals can be traded
-            if (qty > 0) or (hqQty > 0) then
+            if qty > 0 or hqQty > 0 then
                 success = true
             end
         end
@@ -101,8 +106,8 @@ xi.ephemeral.onEventFinish = function(player, option, wasTrade)
             local crystals = quantity % 12
             local clusters = math.floor(quantity / 12)
 
-             -- Player selected "as many as can fit"
-            if (option > 0x80000000) then
+            -- Player selected "as many as can fit"
+            if option > 0x80000000 then
                 -- Recalculate the quantity according to open inventory slots
                 local freeSlots = player:getFreeSlotsCount()
                 if freeSlots > 0 then -- If we don't have any free slots, don't bother. Just fail later.

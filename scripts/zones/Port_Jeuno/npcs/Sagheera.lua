@@ -332,6 +332,7 @@ entity.onTrade = function(player, npc, trade)
                 else
                     player:messageSpecial(ID.text.SAGHEERA_LACK_ABCS)
                 end
+
                 break
             end
         end
@@ -382,20 +383,24 @@ entity.onTrigger = function(player, npc)
         if not utils.mask.getBit(playerSagheera, 0) then
             menu = utils.mask.setBit(menu, 0, true)
         end
+
         -- bit 1 - show "ask about ancient beastcoins" option
         -- Is shown once the player selects "Just wanted to chat"
         if not utils.mask.getBit(playerSagheera, 1) then
             menu = utils.mask.setBit(menu, 1, true)
         end
+
         -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
         if storedABCs > 0 then
             menu = utils.mask.setBit(menu, 2, true)
         end
+
         -- bit 3 - do not give lengthy explaination on relic restoration
         -- Set the first time the player encounters option 5
         if not utils.mask.getBit(playerSagheera, 2) then
             menu = utils.mask.setBit(menu, 3, true)
         end
+
         -- bit 10 - ??? (this bit was set in some captures)
         menu = utils.mask.setBit(menu, 10, true)
         -- bit 11 - ??? (this bit was set in some captures)
@@ -404,6 +409,7 @@ entity.onTrigger = function(player, npc)
         if storedABCs > 0 then
             menu = utils.mask.setBit(menu, 12, true)
         end
+
         -- bit 13 - player has RHAPSODY_IN_MAUVE (lowers Cosmo Cleanse cost)
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) then
             menu = utils.mask.setBit(menu, 13, true)
@@ -454,32 +460,38 @@ end
 local handleMainEvent = function(player, option, coinAmount)
     -- "Just wanted to chat" for the first time
     if option == 1 then
-        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false))
 
     -- purchase COSMO_CLEANSE
     elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
         if cosmoTime == cosmoReady and player:delGil(cost) then
-            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false));
+            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false))
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 
     -- retrieve stored ABCs
     elseif option == 4 then
-        if player:getCurrency("ancient_beastcoin") >= coinAmount and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } }) then
+        if
+            player:getCurrency("ancient_beastcoin") >= coinAmount and
+            npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } })
+        then
             player:delCurrency("ancient_beastcoin", coinAmount)
         end
 
     -- Relic restoration exited
     elseif option == 5 then
-        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false))
 
     -- purchase item using ancient beastcoins
     elseif abcShop[option] then
         local purchase = abcShop[option]
 
-        if player:getCurrency("ancient_beastcoin") >= purchase.abc and npcUtil.giveItem(player, purchase.item) then
+        if
+            player:getCurrency("ancient_beastcoin") >= purchase.abc and
+            npcUtil.giveItem(player, purchase.item)
+        then
             player:delCurrency("ancient_beastcoin", purchase.abc)
         end
 
@@ -501,9 +513,15 @@ end
 
 local handleTradeChipEvent = function(player, option)
     local trade = player:getTrade()
-    if npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } }) then
+    if
+        npcUtil.tradeSetInList(trade, tier1Chips) and
+        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })
+    then
         player:confirmTrade()
-    elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
+    elseif
+        npcUtil.tradeSetInList(trade, tier2Chips) and
+        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } })
+    then
         player:confirmTrade()
     end
 end

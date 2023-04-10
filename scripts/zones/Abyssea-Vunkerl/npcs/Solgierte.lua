@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Vunkeral
 --  NPC: Solgierte
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

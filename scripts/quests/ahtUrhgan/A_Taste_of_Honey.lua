@@ -37,6 +37,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Fochacha'] =
             {
                 onTrigger = function(player, npc)
@@ -114,19 +115,15 @@ quest.sections =
                     if player:getLocalVar("recipe") == 57 then
                         player:setLocalVar("recipe", 1)
                         player:updateEvent(5579, 1, 255, 0, 67108863, 5976652, 4095, 0)
-                        return
                     elseif player:getLocalVar("recipe") == 1 then
                         player:setLocalVar("recipe", 2)
                         player:updateEvent(4096, 615, 936, 1523, 67108863, 5976652, 4, 0)
-                        return
                     elseif player:getLocalVar("recipe") == 2 then
                         player:setLocalVar("recipe", 3)
                         player:updateEvent(2214, 2237, 4509, 5568)
-                       return
                     elseif player:getLocalVar("recipe") == 3 then
                         player:setLocalVar("recipe", 0)
                         player:updateEvent(5575)
-                       return
                     end
                 end,
             },

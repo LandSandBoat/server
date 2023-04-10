@@ -101,6 +101,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getMainLvl() >= self.reqs.mJobLvl and true or false
             end,
+
             flags = set { "retro" },
             reqs = { mJobLvl = 99 },
             reward =
@@ -116,6 +117,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 2000 },
             reward =
@@ -131,6 +133,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 4000 },
             reward =
@@ -146,6 +149,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 6000 },
             reward =
@@ -161,6 +165,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getAverageItemLevel() >= self.reqs.hasItemLevel and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { hasItemLevel = 117 },
             reward =
@@ -320,11 +325,10 @@ function getRoeRecords(triggers)
             trigger = triggers.questComplete,
             flags = set { "retro" },
             check = function(self, player, params)
-                return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) ==
-                    QUEST_COMPLETED or
-                    player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ==
-                    QUEST_COMPLETED
+                return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
+                    player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == QUEST_COMPLETED
             end,
+
             reward = { sparks = 100, xp = 500 },
         },
 
@@ -503,7 +507,7 @@ function getRoeRecords(triggers)
         [630] =
         { -- WAR Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH } },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
         },
@@ -511,7 +515,7 @@ function getRoeRecords(triggers)
         [631] =
         { -- WAR Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT } },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
         },
@@ -2364,6 +2368,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2380,6 +2385,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2396,6 +2402,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2412,6 +2419,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2428,6 +2436,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2444,6 +2453,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2460,6 +2470,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2476,6 +2487,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2492,6 +2504,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -4980,13 +4993,13 @@ function getRoeRecords(triggers)
         },
 
         [886] =
-       { -- Conflict: Escha - Zi'Tah II
-           trigger = triggers.mobKill,
-           goal = 10,
-           reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
-           flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
-       },
+        { -- Conflict: Escha - Zi'Tah II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
 
         [887] =
         { -- Conflict: Escha - Zi'Tah III
@@ -5172,7 +5185,7 @@ function getRoeRecords(triggers)
         },
 
         [948] =
-       { -- Conflict: Reisenjima VI
+        { -- Conflict: Reisenjima VI
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { mobName = set { "Devouring_Mosquito" }, zone = set { 291 } },
@@ -5195,7 +5208,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Quarrelsome_Hippogryph" }, zone = set { 291 } },
             flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
         [951] =
@@ -5210,7 +5223,7 @@ function getRoeRecords(triggers)
         [952] =
         { -- Conflict: Reisenjima X
             trigger = triggers.mobKill,
-           goal = 10,
+            goal = 10,
             reqs = { mobName = set { "Glowering_Ladybug" }, zone = set { 291 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
@@ -5603,6 +5616,254 @@ function getRoeRecords(triggers)
         { -- Subjugation: Byakko
             trigger = triggers.mobKill,
             reqs = { mobID = set { 17309982 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        -----------------------------------
+        -- Content (Dynamis 1)
+        -----------------------------------
+
+        [732] =
+        { -- Subjugation: Overlord's Tombstone
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17534977 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [733] =
+        { -- Subjugation: Bladeburner Rokgevok
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535207 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [734] =
+        { -- Subjugation: Steelshank Kratzvatz
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535208 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [735] =
+        { -- Subjugation: Bloodfist Voshgrosh
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535210 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [736] =
+        { -- Subjugation: Spellspear Djokvukk
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535211 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [737] =
+        { -- Subjugation: Gu'Dha Effigy
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539073 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [738] =
+        { -- Subjugation: Zo'Pha Forgesoul
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539307 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [739] =
+        { -- Subjugation: Ra'Gho Darkfount
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539308 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [740] =
+        { -- Subjugation: Va'Zhe Pummelsong
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539310 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [741] =
+        { -- Subjugation: Bu'Bho Truesteel
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539311 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [742] =
+        { -- Subjugation: Tzee Xicu Idol
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543169 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [743] =
+        { -- Subjugation: Xuu Bhoqa the Enigma
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543464 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [744] =
+        { -- Subjugation: Fuu Tzapo the Blessed
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543466 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [745] =
+        { -- Subjugation: Naa Yixo the Stillrage
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543467 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [746] =
+        { -- Subjugation: Tee Zaska the Ceaseless
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543468 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [747] =
+        { -- Subjugation: Goblin Golem
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547265 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [748] =
+        { -- Subjugation: Quicktrix Hexhands
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547493 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [749] =
+        { -- Subjugation: Feralox Honeylips
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547494 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [750] =
+        { -- Subjugation: Scourquix Scaleskin
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547496 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [751] =
+        { -- Subjugation: Wilywox Tenderpalm
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547498 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        -----------------------------------
+        -- Content (Dynamis 2)
+        -----------------------------------
+
+        [752] =
+        { -- Subjugation: Angra Mainyu
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326081 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [753] =
+        { -- Subjugation: Taquede
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326093 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [754] =
+        { -- Subjugation: Pignonpausard
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326095 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [755] =
+        { -- Subjugation: Hitaume
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326096 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [756] =
+        { -- Subjugation: Cavanneche
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326097 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [757] =
+        { -- Subjugation: Dynamis Lord
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330177 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [758] =
+        { -- Subjugation: Duke Haures
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330185 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [759] =
+        { -- Subjugation: Marquis Caim
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330186 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [760] =
+        { -- Subjugation: Baron Avnas
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330188 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [761] =
+        { -- Subjugation: Count Haagenti
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330189 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -8869,6 +9130,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.exp
                     return true
                 end
+
                 return false
             end,
         },

@@ -78,7 +78,10 @@ quest.sections =
             ['Cacaroon'] =
             {
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, 'Prog') == 2 and npcUtil.tradeHas(trade, xi.items.IMPERIAL_BRONZE_PIECE) then
+                    if
+                        quest:getVar(player, 'Prog') == 2 and
+                        npcUtil.tradeHas(trade, xi.items.IMPERIAL_BRONZE_PIECE)
+                    then
                         return quest:progressEvent(850)
                     end
                 end,

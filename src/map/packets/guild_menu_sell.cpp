@@ -48,6 +48,12 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     {
         CItemShop* PItem = (CItemShop*)PGuild->GetItem(SlotID);
 
+        if (PItem == nullptr)
+        {
+            ShowError("CGuildMenuSellPacket::CGuildMenuSellPacket() - PItem was null for SlotID: %d", SlotID);
+            return;
+        }
+
         if (ItemCount == 30)
         {
             ref<uint8>(0xF4) = ItemCount;

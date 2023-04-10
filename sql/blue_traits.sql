@@ -10,10 +10,10 @@ CREATE TABLE `blue_traits` (
   `modifier` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL,
   PRIMARY KEY (`trait_category`,`trait_points_needed`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records 
+-- Records
 -- ----------------------------
 INSERT INTO `blue_traits` VALUES (1, 2, 32, 230, 8);
 INSERT INTO `blue_traits` VALUES (2, 2, 9, 370, 1);

@@ -3,17 +3,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
-   target:addMod(xi.mod.MACC, 256)
+effectObject.onEffectGain = function(target, effect)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MACC, 256)
+effectObject.onEffectLose = function(target, effect)
 end
 
-return effect_object
+return effectObject

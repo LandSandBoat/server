@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Parradamo Stones
-    if (trade:hasItemQty(1778, 1) and trade:getItemCount() == 1) then
+    if trade:hasItemQty(1778, 1) and trade:getItemCount() == 1 then
         player:tradeComplete()
         player:startEvent(12)
     end
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
             player:startEvent(14, VanadielTime() + (miasmaFilterCD - os.time()))
         else
-            if player:hasItem(1778) == true or player:hasItem(1777) then -- Parradamo Stones, Flaxen Pouch
+            if player:hasItem(1778) or player:hasItem(1777) then -- Parradamo Stones, Flaxen Pouch
                 player:startEvent(15)
             else
                 player:startEvent(13)
@@ -41,12 +41,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 12) then
+    if csid == 12 then
         player:addKeyItem(xi.ki.MIASMA_FILTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIASMA_FILTER)
-        player:setCharVar("[ENM]MiasmaFilter", os.time()+(xi.settings.main.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
-    elseif (csid == 13) then
-        if (player:getFreeSlotsCount() == 0) then
+        player:setCharVar("[ENM]MiasmaFilter", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+    elseif csid == 13 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1777) -- Flaxen Pouch
             return
         else

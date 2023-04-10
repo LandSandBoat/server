@@ -3,14 +3,14 @@
 -- Scroll of Foe Requiem V
 -- Teaches the song Foe Requiem V
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(372)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(372)
 end
 
-return item_object
+return itemObject

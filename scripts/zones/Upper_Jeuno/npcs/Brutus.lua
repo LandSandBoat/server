@@ -32,7 +32,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(70)
 
     -- WINGS OF GOLD
-    elseif pathOfTheBeastmaster == QUEST_COMPLETED and wingsOfGold == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
+    elseif
+        pathOfTheBeastmaster == QUEST_COMPLETED and
+        wingsOfGold == QUEST_AVAILABLE and
+        mJob == xi.job.BST and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+    then
         if player:getCharVar("wingsOfGold_shortCS") == 1 then
             player:startEvent(137) -- Start Quest "Wings of gold" (Short dialog)
         else
@@ -47,7 +52,12 @@ entity.onTrigger = function(player, npc)
         end
 
     -- SCATTERED INTO SHADOW
-    elseif wingsOfGold == QUEST_COMPLETED and scatteredIntoShadow == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.main.AF2_QUEST_LEVEL then
+    elseif
+        wingsOfGold == QUEST_COMPLETED and
+        scatteredIntoShadow == QUEST_AVAILABLE and
+        mJob == xi.job.BST and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL
+    then
         if player:getCharVar("scatIntoShadow_shortCS") == 1 then
             player:startEvent(143)
         else
@@ -55,7 +65,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(141)
         end
     elseif scatteredIntoShadow == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.AQUAFLORA1) or player:hasKeyItem(xi.ki.AQUAFLORA2) or player:hasKeyItem(xi.ki.AQUAFLORA3) then
+        if
+            player:hasKeyItem(xi.ki.AQUAFLORA1) or
+            player:hasKeyItem(xi.ki.AQUAFLORA2) or
+            player:hasKeyItem(xi.ki.AQUAFLORA3)
+        then
             player:startEvent(142)
         elseif scatteredIntoShadowStat == 0 then
             player:startEvent(144)
@@ -89,7 +103,10 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 137 or csid == 139) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
         player:setCharVar("wingsOfGold_shortCS", 0)
-    elseif csid == 138 and npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD, { item = 16680, fame = 20 }) then
+    elseif
+        csid == 138 and
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD, { item = 16680, fame = 20 })
+    then
         player:delKeyItem(xi.ki.GUIDING_BELL)
 
     -- SCATTERED INTO SHADOW

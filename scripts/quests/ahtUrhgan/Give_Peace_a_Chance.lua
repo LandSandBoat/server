@@ -72,6 +72,7 @@ quest.sections =
                 [575] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
+
                 [576] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:needToZone(true)

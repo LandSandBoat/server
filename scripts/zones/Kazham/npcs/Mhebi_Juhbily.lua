@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Mhebi Juhbily
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

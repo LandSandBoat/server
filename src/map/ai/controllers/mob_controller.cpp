@@ -20,21 +20,22 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "mob_controller.h"
-#include "../../../common/utils.h"
-#include "../../enmity_container.h"
-#include "../../entities/mobentity.h"
-#include "../../mob_modifier.h"
-#include "../../mob_spell_container.h"
-#include "../../mobskill.h"
-#include "../../party.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/petutils.h"
-#include "../ai_container.h"
-#include "../helpers/targetfind.h"
-#include "../states/ability_state.h"
-#include "../states/magic_state.h"
-#include "../states/weaponskill_state.h"
+
+#include "ai/ai_container.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/mobentity.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mobskill.h"
+#include "party.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/petutils.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)
@@ -45,7 +46,7 @@ CMobController::CMobController(CMobEntity* PEntity)
 void CMobController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneIString(PMob->GetName());
+    TracyZoneString(PMob->GetName());
 
     m_Tick = tick;
 
@@ -73,14 +74,25 @@ bool CMobController::TryDeaggro()
     // target is no longer valid, so wipe them from our enmity list
     if (!PTarget || PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PMob->loc.zone->GetID() ||
         PMob->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget) || CheckLock(PTarget))
+        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget) || CheckLock(PTarget) ||
+        PMob->getBattleID() != PTarget->getBattleID())
     {
         if (PTarget)
         {
             PMob->PEnmityContainer->Clear(PTarget->id);
         }
         PTarget = PMob->PEnmityContainer->GetHighestEnmity();
-        PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
+        if (PTarget)
+        {
+            PMob->SetBattleTargetID(PTarget->targid);
+            // Reset deaggro time so that the mob is given time to actually try to path towards the new highest enmity target
+            TapDeaggroTime();
+        }
+        else
+        {
+            PMob->SetBattleTargetID(0);
+        }
+
         return TryDeaggro();
     }
 
@@ -90,7 +102,7 @@ bool CMobController::TryDeaggro()
 bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (PMob->m_Detects & DETECT_SCENT)
+    if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
         if (!PMob->PAI->PathFind->InWater() && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
@@ -144,13 +156,14 @@ bool CMobController::CheckLock(CBattleEntity* PTarget)
 bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (CanDetectTarget(PTarget) || CanPursueTarget(PTarget) ||
+    if (CanPursueTarget(PTarget) || CanDetectTarget(PTarget) ||
         PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
         TapDeaggroTime();
     }
 
-    return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s);
+    auto additionalDeaggroTime = std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
+    return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s + additionalDeaggroTime);
 }
 
 void CMobController::TryLink()
@@ -226,7 +239,7 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return false;
     }
 
-    auto detects         = PMob->m_Detects;
+    auto detects         = PMob->getMobMod(MOBMOD_DETECTION);
     auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
     bool detectSight  = (detects & DETECT_SIGHT) || forceSight;
@@ -239,9 +252,11 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         hasSneak     = PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
     }
 
+    bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
+
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((PMob->m_Behaviour & BEHAVIOUR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
@@ -251,7 +266,13 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_HEARING) && currentDistance < PMob->getMobMod(MOBMOD_SOUND_RANGE) && !hasSneak)
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
+    }
+
+    if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
+        PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
+    {
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     // everything below require distance to be below 20
@@ -262,37 +283,20 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
     {
-        return CanSeePoint(PTarget->loc.p);
-    }
-
-    if ((detects & DETECT_MAGIC) && PTarget->PAI->IsCurrentState<CMagicState>() &&
-        static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
-    {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_WEAPONSKILL) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_JOBABILITY) && PTarget->PAI->IsCurrentState<CAbilityState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     return false;
-}
-
-bool CMobController::CanSeePoint(position_t pos)
-{
-    TracyZoneScoped;
-    if (PMob->PAI->PathFind)
-    {
-        return PMob->PAI->PathFind->CanSeePoint(pos);
-    }
-
-    return true;
 }
 
 bool CMobController::MobSkill(int wsList)
@@ -652,6 +656,7 @@ void CMobController::Move()
             if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
             {
                 FaceTarget();
+                return;
             }
         }
         if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
@@ -670,12 +675,23 @@ void CMobController::Move()
             }
             else if (CanMoveForward(currentDistance))
             {
-                if (!PMob->PAI->PathFind->IsFollowingPath() || distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
+                if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
-                    // path to the target if we don't have a path already
+                    // out of melee range, try to path towards
+                    if (currentDistance > PMob->GetMeleeRange())
+                    {
+                        // try to find path towards target
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    }
+                }
+                else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
+                {
+                    // try to find path towards target
                     PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closureDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                 }
+
                 PMob->PAI->PathFind->FollowPath(m_Tick);
+
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     bool needToMove = false;
@@ -769,9 +785,12 @@ void CMobController::DoRoamTick(time_point tick)
         // i'm claimed by someone and need hate towards this person
         PTarget = (CBattleEntity*)PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST);
 
-        PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+        if (PTarget != NULL)
+        {
+            PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+            Engage(PTarget->targid);
+        }
 
-        Engage(PTarget->targid);
         return;
     }
     //#TODO
@@ -1072,8 +1091,13 @@ bool CMobController::Engage(uint16 targid)
 bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    TracyZoneIString(PMob->GetName());
-    TracyZoneIString(PTarget->GetName());
+    TracyZoneString(PMob->GetName());
+    TracyZoneString(PTarget->GetName());
+
+    if (PMob->getBattleID() != PTarget->getBattleID())
+    {
+        return false;
+    }
 
     // Don't aggro I'm neutral
     if ((PMob->getMobMod(MOBMOD_ALWAYS_AGGRO) == 0 && !PMob->m_Aggro) || PMob->m_neutral || PMob->isDead())
@@ -1121,16 +1145,28 @@ bool CMobController::Cast(uint16 targid, SpellID spellid)
 bool CMobController::CanMoveForward(float currentDistance)
 {
     TracyZoneScoped;
-    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < 20)
+
+    uint16 standbackRange = 20;
+
+    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }
 
-    if (PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 && PMob->getMobMod(MOBMOD_HP_STANDBACK) > 0 && currentDistance < 20 &&
-        PMob->GetHPP() >= PMob->getMobMod(MOBMOD_HP_STANDBACK))
+    auto standbackThreshold = PMob->getMobMod(MOBMOD_HP_STANDBACK);
+    if (currentDistance < standbackRange &&
+        standbackThreshold > 0 &&
+        PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 &&
+        PMob->GetHPP() >= standbackThreshold &&
+        (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
         return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+    }
+
+    if (!PMob->CanSeeTarget(PTarget))
+    {
+        return true;
     }
 
     if (PMob->getMobMod(MOBMOD_SPAWN_LEASH) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(MOBMOD_SPAWN_LEASH))

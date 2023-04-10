@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local instance      = player:getInstance()
     local tokens        = player:getCurrency("nyzul_isle_assault_point")
     local prefered      = player:getVar("[Nyzul]preferredItems")
-    local floorGroup    = math.floor(player:getVar("NyzulFloorProgress")/5)
+    local floorGroup    = math.floor(player:getVar("NyzulFloorProgress") / 5)
     local floorProgress = 0xFFFFFFFC - bit.bxor(bit.lshift(2, floorGroup + 1) - 1, 3)
 
     if not player:hasKeyItem(xi.ki.RUNIC_DISC) then
@@ -36,7 +36,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
     local chars    = instance:getChars()
 
-    if csid == 94 and option > 0 and option < 21 and instance:getLocalVar("runeHandler") == player:getID() then
+    if
+        csid == 94 and
+        option > 0 and
+        option < 21 and
+        instance:getLocalVar("runeHandler") == player:getID()
+    then
         local floorCost = xi.nyzul.floorCost[option]
 
         if player:getCurrency("nyzul_isle_assault_point") >= floorCost.cost then
@@ -54,7 +59,9 @@ entity.onEventFinish = function(player, csid, option, npc)
                     players:release()
                 end
 
-                players:timer(1500, function(char) char:startEvent(95) end)
+                players:timer(1500, function(char)
+                    char:startEvent(95)
+                end)
             end
 
             instance:setLocalVar("partySize", playerCount)

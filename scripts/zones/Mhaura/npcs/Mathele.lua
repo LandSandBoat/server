@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Mathele
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

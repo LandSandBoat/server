@@ -14,19 +14,16 @@ entity.onMobRoamAction = function(mob)
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
-    if (mob:isFollowingPath() == false) then
+    if not mob:isFollowingPath() then
         mob:setSpeed(40)
         mob:pathThrough(ID.points[stage][prog].route, 9)
     end
 end
 
 entity.onMobEngaged = function(mob, target)
-    -- local target = mob:getTarget()
-
-    if (target:isPC() or target:isPet()) then
+    if target:isPC() or target:isPet() then
         mob:setLocalVar("runTime", os.time())
     end
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -44,24 +41,29 @@ entity.onMobFight = function(mob, target)
     --    isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     -- end
 
-    if ((mob:isFollowingPath() == false) and (os.time() - runTime > 20)) then
+    if not mob:isFollowingPath() and (os.time() - runTime > 20) then
         mob:setLocalVar("runTime", os.time())
         entity.onMobRoamAction(mob)
-    elseif (mob:isFollowingPath() == true) then
-        if (os.time() - popTime > 7) then
+    elseif mob:isFollowingPath() then
+        if os.time() - popTime > 7 then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:setLocalVar("popTime", os.time())
             mobPet:setStatus(xi.status.MOB)
-            mobPet:timer(1000, function(mobArg) mobArg:useMobAbility(1838) end)
-            mobPet:timer(4000, function(mobArg) mobArg:setStatus(xi.status.DISAPPEAR) end)
+            mobPet:timer(1000, function(mobArg)
+                mobArg:useMobAbility(1838)
+            end)
+
+            mobPet:timer(4000, function(mobArg)
+                mobArg:setStatus(xi.status.DISAPPEAR)
+            end)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
-    DespawnMob(mob:getID() +1, instance) -- despawn bomb
+    DespawnMob(mob:getID() + 1, instance) -- despawn bomb
 end
 
 entity.onMobDespawn = function(mob)

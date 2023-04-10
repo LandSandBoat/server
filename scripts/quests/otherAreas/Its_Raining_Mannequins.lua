@@ -113,12 +113,14 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {
-                        xi.items.MANNEQUIN_HEAD,
-                        xi.items.MANNEQUIN_BODY,
-                        xi.items.MANNEQUIN_HANDS,
-                        xi.items.MANNEQUIN_LEGS,
-                        xi.items.MANNEQUIN_FEET })
+                    if
+                        npcUtil.tradeHasExactly(trade, {
+                            xi.items.MANNEQUIN_HEAD,
+                            xi.items.MANNEQUIN_BODY,
+                            xi.items.MANNEQUIN_HANDS,
+                            xi.items.MANNEQUIN_LEGS,
+                            xi.items.MANNEQUIN_FEET
+                        })
                     then
                         return quest:progressEvent(309)
                     end

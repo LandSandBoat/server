@@ -50,7 +50,7 @@ function Action:progress()
 end
 
 function Action:replaceDefault()
-     -- Always prefer this over falling back to default in lua file
+    -- Always prefer this over falling back to default in lua file
     return self:setPriority(Action.Priority.ReplaceDefault)
 end
 
@@ -61,14 +61,14 @@ function Action:importantEvent()
     return self
 end
 
- -- After the first time the action is performed, it will have a lower priority
+-- After the first time the action is performed, it will have a lower priority
 function Action:importantOnce()
     self.priority = Action.Priority.Event
     self.secondaryPriority = Action.Priority.Default
     return self
 end
 
- -- Only do this action once per zone, unless there's nothing else to do
+-- Only do this action once per zone, unless there's nothing else to do
 function Action:oncePerZone()
     self.secondaryPriority = Action.Priority.Ignore
     return self

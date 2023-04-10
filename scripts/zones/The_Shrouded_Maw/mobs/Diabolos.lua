@@ -18,8 +18,8 @@ local entity = {}
 
 entity.onMobFight = function(mob, target)
     local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET
-    if (mobOffset >= 0 and mobOffset <= 14) then
-        local inst = math.floor(mobOffset/7)
+    if mobOffset >= 0 and mobOffset <= 14 then
+        local inst = math.floor(mobOffset / 7)
 
         local tileDrops =
         {
@@ -33,18 +33,19 @@ entity.onMobFight = function(mob, target)
             { 90, "byc8", "bya8", "byY8" },
         }
 
-        local hpp = ((mob:getHP()/mob:getMaxHP())*100)
+        local hpp = (mob:getHP() / mob:getMaxHP()) * 100
         for k, v in pairs(tileDrops) do
-            if (hpp < v[1]) then
+            if hpp < v[1] then
                 local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
                 local tile = GetNPCByID(tileId)
-                if (tile:getAnimation() == xi.anim.CLOSE_DOOR) then
-                    SendEntityVisualPacket(tileId, v[inst+2])  -- Animation for floor dropping
+                if tile:getAnimation() == xi.anim.CLOSE_DOOR then
+                    SendEntityVisualPacket(tileId, v[inst + 2])  -- Animation for floor dropping
                     SendEntityVisualPacket(tileId, "s123")     -- Tile dropping sound
                     tile:timer(5000, function(tileArg)
                         tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
                     end)
                 end
+
                 break
             end
         end

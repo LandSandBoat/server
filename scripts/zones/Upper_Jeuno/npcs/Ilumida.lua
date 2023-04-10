@@ -20,16 +20,16 @@ entity.onTrigger = function(player, npc)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == QUEST_COMPLETED and RubbishDay == QUEST_COMPLETED and
     --NeverToReturn == QUEST_COMPLETED and SearchingForTheRightWords == QUEST_AVAILABLE and prereq CS complete
-    local searchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
+    local searchingForWordsPrereq = player:getCharVar("QuestSearchRightWords_prereq")
 
-    if searchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
+    if searchingForWordsPrereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
         player:startEvent(197) --SearchingForTheRightWords intro CS
 
     elseif player:getCharVar("QuestSearchRightWords_denied") == 1 then
         player:startEvent(201) --asks player again, SearchingForTheRightWords accept/deny
 
     elseif searchingForWords == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.MOONDROP) == true then
+        if player:hasKeyItem(xi.ki.MOONDROP) then
             player:startEvent(198)
         else
             player:startEvent(199) -- SearchingForTheRightWords quest accepted dialog
@@ -64,8 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4882)
         else
             player:delKeyItem(xi.ki.MOONDROP)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*3000)
-            -- TODO: Actually add Gil?
+            npcUtil.giveCurrency(player, 'gil', 3000)
             player:addItem(4882)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4882)
             player:addFame(xi.quest.fame_area.JEUNO, 30)

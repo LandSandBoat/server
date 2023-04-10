@@ -3,14 +3,14 @@
 -- Scroll of Gravity
 -- Teaches the black magic Gravity
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(216)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(216)
 end
 
-return item_object
+return itemObject

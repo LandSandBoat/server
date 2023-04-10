@@ -3,26 +3,26 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEX, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     -- the effect loses dexterity of 1 every 3 ticks depending on the source of the boost
-    local boostDEX_effect_size = effect:getPower()
-    if (boostDEX_effect_size > 0) then
-        effect:setPower(boostDEX_effect_size - 1)
+    local boostDEXEffectSize = effect:getPower()
+    if boostDEXEffectSize > 0 then
+        effect:setPower(boostDEXEffectSize - 1)
         target:delMod(xi.mod.DEX, 1)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
-    local boostDEX_effect_size = effect:getPower()
-    if (boostDEX_effect_size > 0) then
-        target:delMod(xi.mod.DEX, boostDEX_effect_size)
+effectObject.onEffectLose = function(target, effect)
+    local boostDEXEffectSize = effect:getPower()
+    if boostDEXEffectSize > 0 then
+        target:delMod(xi.mod.DEX, boostDEXEffectSize)
     end
 end
 
-return effect_object
+return effectObject

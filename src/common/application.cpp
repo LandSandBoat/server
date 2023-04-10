@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -22,22 +22,41 @@
 #include "application.h"
 #include "debug.h"
 #include "logging.h"
+#include "lua.h"
+#include "settings.h"
 #include "taskmgr.h"
 
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-Application::Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+Application::Application(std::string serverName, int argc, char** argv)
 : m_ServerName(serverName)
-, m_IsRunning(true)
-, gArgParser(std::move(pArgParser))
+, m_RequestExit(false)
+, gArgParser(std::make_unique<argparse::ArgumentParser>(argv[0]))
 {
 #ifdef _WIN32
     SetConsoleTitleA(fmt::format("{}-server", serverName).c_str());
 #endif
 
-    logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    gArgParser->add_argument("--log")
+        .default_value(fmt::format("log/{}-server.log", serverName));
+
+    try
+    {
+        gArgParser->parse_args(argc, argv);
+    }
+    catch (const std::runtime_error& err)
+    {
+        std::cerr << err.what() << std::endl;
+        std::cerr << *gArgParser;
+        std::exit(1);
+    }
+
+    auto logName = gArgParser->get<std::string>("--log");
+    logging::InitializeLog(serverName, logName, false);
+    lua_init();
+    settings::init();
     ShowInfo("Begin %s-server initialisation...", serverName);
 
     debug::init();
@@ -45,21 +64,30 @@ Application::Application(std::string const& serverName, std::unique_ptr<argparse
     ShowInfo("The %s-server is ready to work...", serverName);
     ShowInfo("=======================================================================");
 
+    // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+
+    gConsoleService->RegisterCommand("exit", "Terminate the program.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("> Goodbye!\n");
+        m_RequestExit = true;
+    });
+    // clang-format on
 }
 
 bool Application::IsRunning()
 {
-    return m_IsRunning;
+    return !m_RequestExit;
 }
 
 void Application::Tick()
 {
     // Main runtime cycle
     duration next;
-    while (m_IsRunning)
+    while (!m_RequestExit)
     {
         next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
-        // do_sockets(&rfd, next);
+        std::this_thread::sleep_for(next);
     }
 }

@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
     local maneuvers = master:countEffect(xi.effect.EARTH_MANEUVER)
     local pMod = math.max(automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE), automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED), automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC))
@@ -45,6 +45,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
             bonus = pMod * 0.75
         end
     end
+
     amount = amount + math.floor(bonus)
 
     if target:addStatusEffect(xi.effect.STONESKIN, amount, 0, duration, 0, 0, 4) then
@@ -56,4 +57,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return xi.effect.STONESKIN
 end
 
-return ability_object
+return abilityObject

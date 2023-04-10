@@ -7,9 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainJob() == xi.job.COR then
         return 0
     else
@@ -17,11 +17,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
     return xi.mobskills.mobHealMove(mob, math.random(350, 500))
 end
 
-return mobskill_object
+return mobskillObject

@@ -15,7 +15,7 @@ InteractionGlobal.zones = InteractionGlobal.zones or {}
 -----------------------------------
 function InteractionGlobal.initZones(zoneIds)
     -- Add the given zones to the zones table
-    for i=1, #zoneIds do
+    for i = 1, #zoneIds do
         local zone = GetZone(zoneIds[i])
         if zone then
             InteractionGlobal.zones[zoneIds[i]] = zone:getName()
@@ -28,11 +28,10 @@ end
 
 -- Add container handlers found for the added zones
 function InteractionGlobal.loadContainers(shouldReloadRequires)
-
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
-       zoneIds[#zoneIds+1] = zoneId
+        zoneIds[#zoneIds + 1] = zoneId
     end
 
     local interactionContainersPath = 'scripts/globals/interaction_containers'
@@ -40,12 +39,13 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
         package.loaded[interactionContainersPath] = nil
     end
 
-    local containerFiles = GetQuestAndMissionFilenamesList()
+    local containerFiles = GetContainerFilenamesList()
     local containers = {}
-    for i=1, #containerFiles do
+    for i = 1, #containerFiles do
         containers[i] = utils.prequire(containerFiles[i])
         containers[i].filename = containerFiles[i]
     end
+
     InteractionGlobal.lookup:addContainers(containers, zoneIds)
 end
 
@@ -123,12 +123,12 @@ function InteractionGlobal.onZoneOut(player, fallbackFn)
     return InteractionGlobal.lookup:onZoneOut(player, fallbackFn)
 end
 
-function InteractionGlobal.onRegionEnter(player, region, fallbackFn)
-    return InteractionGlobal.lookup:onRegionEnter(player, region, fallbackFn)
+function InteractionGlobal.onTriggerAreaEnter(player, triggerArea, fallbackFn)
+    return InteractionGlobal.lookup:onTriggerAreaEnter(player, triggerArea, fallbackFn)
 end
 
-function InteractionGlobal.onRegionLeave(player, region, fallbackFn)
-    return InteractionGlobal.lookup:onRegionLeave(player, region, fallbackFn)
+function InteractionGlobal.onTriggerAreaLeave(player, triggerArea, fallbackFn)
+    return InteractionGlobal.lookup:onTriggerAreaLeave(player, triggerArea, fallbackFn)
 end
 
 function InteractionGlobal.onEventFinish(player, csid, option, npc, fallbackFn)

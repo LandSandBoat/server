@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Tafeesa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

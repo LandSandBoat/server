@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Kachina
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -31,7 +31,7 @@
 class Application
 {
 public:
-    Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    Application(std::string serverName, int argc, char** argv);
     virtual ~Application() = default;
 
     Application(const Application&)            = delete;
@@ -43,8 +43,8 @@ public:
     virtual void Tick();
 
 protected:
-    std::string m_ServerName;
-    bool        m_IsRunning;
+    std::string       m_ServerName;
+    std::atomic<bool> m_RequestExit;
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
     std::unique_ptr<ConsoleService>           gConsoleService;

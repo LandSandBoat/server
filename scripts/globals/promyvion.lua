@@ -45,6 +45,7 @@ local function findMother(mob)
             mother = k
         end
     end
+
     return mother
 end
 
@@ -55,9 +56,9 @@ end
 xi.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]
 
-    -- register teleporter regions
+    -- register teleporter trigger areas
     for k, v in pairs(ID.npc.MEMORY_STREAMS) do
-        zone:registerRegion(k, v[1], v[2], v[3], v[4], v[5], v[6])
+        zone:registerTriggerArea(k, v[1], v[2], v[3], v[4], v[5], v[6])
     end
 
     -- randomize floor exits
@@ -116,16 +117,16 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
     end
 end
 
-xi.promyvion.onRegionEnter = function(player, region)
+xi.promyvion.onTriggerAreaEnter = function(player, triggerArea)
     if player:getAnimation() == 0 then
         local ID = zones[player:getZoneID()]
-        local regionId = region:GetRegionID()
+        local triggerAreaID = triggerArea:GetTriggerAreaID()
         local event = nil
 
-        if regionId < 100 then
-            event = ID.npc.MEMORY_STREAMS[regionId][7][1]
+        if triggerAreaID < 100 then
+            event = ID.npc.MEMORY_STREAMS[triggerAreaID][7][1]
         else
-            local stream = GetNPCByID(regionId)
+            local stream = GetNPCByID(triggerAreaID)
             if stream ~= nil and stream:getAnimation() == xi.anim.OPEN_DOOR then
                 event = stream:getLocalVar("[promy]destination")
             end

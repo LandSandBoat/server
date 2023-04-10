@@ -6,13 +6,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
 
     local currentHP = mob:getHP()
-    local newHP = currentHP - (currentHP * (math.random(5,15)/100))
+    local newHP = currentHP - (currentHP * (math.random(5, 15) / 100))
     mob:setHP(newHP)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
@@ -31,4 +31,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

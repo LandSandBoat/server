@@ -6,25 +6,23 @@
 -- Can be dispelled: Yes
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local power = 1500
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local power    = 1500
     local duration = 300
-    local typeEffect = xi.effect.HASTE
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, power, 0, duration))
+
+    return xi.effect.HASTE
 end
 
-return mobskill_object
+return mobskillObject

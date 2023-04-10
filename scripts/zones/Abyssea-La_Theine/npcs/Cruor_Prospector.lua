@@ -21,7 +21,7 @@ local localProspectorItems =
 
     [itemType.KEYITEM] =
     {
-     -- Sel     Item                                Cost
+    --  Sel     Item                                Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_LA_THEINE,     3500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
@@ -36,7 +36,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.visionsCruorProspectorOnTrigger(player,npc)
+    xi.abyssea.visionsCruorProspectorOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

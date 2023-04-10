@@ -15,8 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local hasScrollsBundle = player:hasKeyItem(xi.ki.BUNDLE_OF_HALF_INSCRIBED_SCROLLS)
-    local hasRainemard = player:hasItem(xi.items.CIPHER_OF_RAINEMARDS_ALTER_EGO) or
-                         player:hasSpell(xi.magic.spell.RAINEMARD)
+    local hasRainemard = player:hasItem(xi.items.CIPHER_OF_RAINEMARDS_ALTER_EGO) or player:hasSpell(xi.magic.spell.RAINEMARD)
 
     if hasScrollsBundle and not hasRainemard then
         player:startEvent(36)

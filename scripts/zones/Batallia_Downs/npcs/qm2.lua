@@ -11,9 +11,12 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local sturmtigerKilled = player:getCharVar("SturmtigerKilled")
 
-    if (player:getCharVar("ChasingQuotas_Progress") == 5 and sturmtigerKilled == 0) then
+    if
+        player:getCharVar("ChasingQuotas_Progress") == 5 and
+        sturmtigerKilled == 0
+    then
         SpawnMob(ID.mob.STURMTIGER, 300):updateClaim(player)
-    elseif (sturmtigerKilled == 1) then
+    elseif sturmtigerKilled == 1 then
         player:addKeyItem(xi.ki.RANCHURIOMES_LEGACY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANCHURIOMES_LEGACY)
         player:setCharVar("ChasingQuotas_Progress", 6)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Polikal-Ramikal
--- Working 100%
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------

@@ -22,9 +22,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _TARGETFIND_H
 #define _TARGETFIND_H
 
-#include "../../../common/cbasetypes.h"
-#include "../../../common/mmo.h"
-#include "../../entities/baseentity.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+#include "entities/baseentity.h"
+
 #include <vector>
 
 class CBattleEntity;
@@ -53,12 +54,13 @@ enum class AURA_TARGET : uint8
 
 enum FINDFLAGS
 {
-    FINDFLAGS_NONE      = 0,
-    FINDFLAGS_DEAD      = 1, // target dead
-    FINDFLAGS_ALLIANCE  = 2, // force target alliance
-    FINDFLAGS_PET       = 4, // force target pet
-    FINDFLAGS_UNLIMITED = 8, // unlimited distance
-    FINDFLAGS_HIT_ALL   = 16 // hit all targets, regardless of party
+    FINDFLAGS_NONE            = 0,
+    FINDFLAGS_DEAD            = 1,  // target dead
+    FINDFLAGS_ALLIANCE        = 2,  // force target alliance
+    FINDFLAGS_PET             = 4,  // force target pet
+    FINDFLAGS_UNLIMITED       = 8,  // unlimited distance
+    FINDFLAGS_HIT_ALL         = 16, // hit all targets, regardless of party
+    FINDFLAGS_IGNORE_BATTLEID = 32, // ignore battle id check
 };
 
 /*
@@ -119,7 +121,6 @@ public:
     bool isWithinArea(position_t* pos);
     bool isWithinCone(position_t* pos);
     bool isWithinRange(position_t* pos, float range);
-    bool canSee(position_t* point);
 
     CBattleEntity* getValidTarget(uint16 actionTargetID, uint16 validTargetFlags);
 

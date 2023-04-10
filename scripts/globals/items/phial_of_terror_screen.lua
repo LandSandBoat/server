@@ -5,17 +5,18 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.NEGATE_TERROR)) then
+itemObject.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.NEGATE_TERROR) then
         return 56
     end
+
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.NEGATE_TERROR, 1, 0, 120)
 end
 
-return item_object
+return itemObject

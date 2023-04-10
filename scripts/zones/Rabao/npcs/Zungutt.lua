@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Zungutt
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

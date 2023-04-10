@@ -66,27 +66,75 @@ local prospectorItems =
         [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,        300 },
     },
 
+    -- Each selection can contain multiple effects in the format of { abysseaEffect, actualEffect, Amt, keyItemRequired, bonusMultiplier }
+    -- and after that table, the cruor cost is defined.
     [itemType.ENHANCEMENT] =
     {
-    --  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
-        [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
-        [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
-        [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 120 },
-        [ 9] = { { { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 100 },
-        [10] = { { { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 100 },
-        [11] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 },
-                   { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 },
-                   { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                   { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 470 },
+        [6] =
+        {
+            {
+                { xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT, 10 },
+            },
+
+            50,
+        },
+
+        [7] =
+        {
+            {
+                { xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT, 5 },
+            },
+
+            120,
+        },
+
+        [8] =
+        {
+            {
+                { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            },
+
+            120,
+        },
+
+        [9] =
+        {
+            {
+                { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            },
+
+            100,
+        },
+
+        [10] =
+        {
+            {
+                { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            },
+
+            100,
+        },
+
+        [11] =
+        {
+            {
+                { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 },
+                { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 },
+                { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            },
+
+            470,
+        },
     },
 }
 

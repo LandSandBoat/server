@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
-attachment_object.onEquip = function(automaton)
+attachmentObject.onEquip = function(automaton)
     automaton:addListener("ENGAGE", "AUTO_TARGETMARKER_ENGAGE", function(pet, target)
         local ignored = pet:getLocalVar("targetmarker")
         if ignored > 0 then
@@ -25,11 +25,13 @@ attachment_object.onEquip = function(automaton)
             elseif maneuvers == 3 then
                 percentage = 0.45
             end
+
             local accbonus = math.floor(eva * percentage)
             pet:addMod(xi.mod.ACC, accbonus)
             pet:setLocalVar("targetmarker", accbonus)
         end
     end)
+
     automaton:addListener("DISENGAGE", "AUTO_TARGETMARKER_DISENGAGE", function(pet)
         local ignored = pet:getLocalVar("targetmarker")
         if ignored > 0 then
@@ -39,12 +41,12 @@ attachment_object.onEquip = function(automaton)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("AUTO_TARGETMARKER_ENGAGE")
     pet:removeListener("AUTO_TARGETMARKER_DISENGAGE")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
     local ignored = pet:getLocalVar("targetmarker")
     local target = pet:getTarget()
     if ignored > 0 and target then
@@ -57,13 +59,14 @@ attachment_object.onManeuverGain = function(pet, maneuvers)
         elseif maneuvers == 3 then
             percentage = 0.45
         end
+
         local accbonus = math.floor(eva * percentage)
         pet:addMod(xi.mod.ACC, accbonus - ignored)
         pet:setLocalVar("targetmarker", accbonus)
     end
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
     local ignored = pet:getLocalVar("targetmarker")
     local target = pet:getTarget()
     if ignored > 0 and target then
@@ -76,10 +79,11 @@ attachment_object.onManeuverLose = function(pet, maneuvers)
         elseif maneuvers == 3 then
             percentage = 0.30
         end
+
         local accbonus = math.floor(eva * percentage)
         pet:delMod(xi.mod.ACC, ignored - accbonus)
         pet:setLocalVar("targetmarker", accbonus)
     end
 end
 
-return attachment_object
+return attachmentObject

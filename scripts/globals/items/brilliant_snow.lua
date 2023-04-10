@@ -3,13 +3,13 @@
 -- Item: Briliant Snow
 -- Creates a spiral of "snow" effects
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
 end
 
-return item_object
+return itemObject

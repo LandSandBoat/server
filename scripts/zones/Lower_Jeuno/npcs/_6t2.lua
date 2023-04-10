@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        player:needToZone() == false and
+        not player:needToZone() and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and
         saveMySon == 2
     then
@@ -90,8 +90,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.LIFE_SAVER)
             player:addItem(13110)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13110)
-            player:addGil(xi.settings.main.GIL_RATE * 2100)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
+            npcUtil.giveCurrency(player, 'gil', 2100)
             player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
             player:addFame(xi.quest.fame_area.JEUNO, 30)

@@ -63,14 +63,15 @@ local function getRandRatio(wRatio)
     if wRatio < 0.38 then
         lowerLimit = math.max(wRatio, 0.5)
     elseif wRatio < 1.25 then
-        lowerLimit = (wRatio * (1176/1024)) - (448/1024)
+        lowerLimit = (wRatio * (1176 / 1024)) - (448 / 1024)
     elseif wRatio < 1.51 then
         lowerLimit = 1
     elseif wRatio < 2.44 then
-        lowerLimit = (wRatio * (1176/1024)) - (755/1024)
+        lowerLimit = (wRatio * (1176 / 1024)) - (755 / 1024)
     else
         lowerLimit = math.min(wRatio - 0.375, maxRatio)
     end
+
     -- Randomly pick a value between lower and upper limits for qRatio
     qRatio = lowerLimit + (math.random() * (upperLimit - lowerLimit))
 
@@ -81,12 +82,14 @@ local function avatarFTP(tp, ftp1, ftp2, ftp3)
     if tp < 1000 then
         tp = 1000
     end
+
     if tp >= 1000 and tp < 2000 then
         return ftp1 + (ftp2 - ftp1) / 100 * (tp - 1000)
     elseif tp >= 2000 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
         return ftp2 + (ftp3 - ftp2) / 100 * (tp - 2000)
     end
+
     return 1 -- no ftp mod
 end
 
@@ -113,7 +116,7 @@ local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
         fSTR = (dSTR + 13) / 4
     end
 
-    local min = math.floor(weaponDmg/9)
+    local min = math.floor(weaponDmg / 9)
     return math.max(-min, fSTR)
 end
 
@@ -170,11 +173,12 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local levelCorrection = 0
     if shouldApplyLevelCorrection then
         if levelDiff > 0 then
-            levelCorrection = math.max((levelDiff*2), 0)
+            levelCorrection = math.max((levelDiff * 2), 0)
         end
     end
+
     -- Delta acc / 2 for hit rate
-    local dAcc = math.floor((acc - eva)/2)
+    local dAcc = math.floor((acc - eva) / 2)
 
     -- Normal hits computed first
     hitrateSubsequent = baseHitRate + dAcc + levelCorrection
@@ -202,6 +206,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         if math.random() < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
         end
+
         numHitsProcessed = numHitsProcessed + 1
     end
 
@@ -233,7 +238,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         if shouldApplyLevelCorrection then
             -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
             if levelDiff > 0 then
-                local correction = levelDiff * 0.05;
+                local correction = levelDiff * 0.05
                 local cappedCorrection = math.min(correction, 1.9)
                 cRatio = cRatio + cappedCorrection
             end
@@ -251,6 +256,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             if isCrit then
                 wRatio = wRatio + 1
             end
+
             -- get a random ratio from min and max
             local qRatio = getRandRatio(wRatio)
 
@@ -271,6 +277,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             if isCrit then
                 wRatio = wRatio + 1
             end
+
             -- get a random ratio from min and max
             local qRatio = getRandRatio(wRatio)
 
@@ -342,6 +349,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
                 skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
+
             target:delStatusEffect(xi.effect.THIRD_EYE)
         end
     end
@@ -354,9 +362,13 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     end
 
     -- handle invincible
-    if target:hasStatusEffect(xi.effect.INVINCIBLE) and skilltype == xi.attackType.PHYSICAL then
+    if
+        target:hasStatusEffect(xi.effect.INVINCIBLE) and
+        skilltype == xi.attackType.PHYSICAL
+    then
         return 0
     end
+
     -- handle pd
     if
         target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
@@ -377,6 +389,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
         if dmg < 0 then
             return dmg
         end
+
         dmg = utils.oneforall(target, dmg)
     end
 
@@ -408,9 +421,17 @@ xi.summon.avatarMiniFightCheck = function(caster)
     local bcnmid
     if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then
         bcnmid = caster:getStatusEffect(xi.effect.BATTLEFIELD):getPower()
-        if bcnmid == 418 or bcnmid == 609 or bcnmid == 450 or bcnmid == 482 or bcnmid == 545 or bcnmid == 578 then -- Mini Avatar Fights
+        if
+            bcnmid == 418 or
+            bcnmid == 609 or
+            bcnmid == 450 or
+            bcnmid == 482 or
+            bcnmid == 545 or
+            bcnmid == 578
+        then -- Mini Avatar Fights
             result = 40 -- Cannot use <spell> in this area.
         end
     end
+
     return result
 end

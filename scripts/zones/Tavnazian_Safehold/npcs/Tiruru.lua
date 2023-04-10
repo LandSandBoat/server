@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Tiruru
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

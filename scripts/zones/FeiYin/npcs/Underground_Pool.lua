@@ -23,7 +23,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(20)
         elseif offset == 1 and player:getCharVar("DabotzKilled") == 1 then
             player:startEvent(18)
-        elseif offset == 1 and player:hasKeyItem(xi.ki.AQUAFLORA3) and not GetMobByID(ID.mob.DABOTZS_GHOST):isSpawned() then
+        elseif
+            offset == 1 and
+            player:hasKeyItem(xi.ki.AQUAFLORA3) and
+            not GetMobByID(ID.mob.DABOTZS_GHOST):isSpawned()
+        then
             SpawnMob(ID.mob.DABOTZS_GHOST):updateClaim(player)
         elseif offset == 2 and player:hasKeyItem(xi.ki.AQUAFLORA1) then
             player:startEvent(21)

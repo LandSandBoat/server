@@ -2,7 +2,7 @@
 -- Area: Bibiki Bay
 --   NM: Intulo
 -----------------------------------
-require("scripts/globals/hunts")
+require('scripts/globals/hunts')
 -----------------------------------
 local entity = {}
 

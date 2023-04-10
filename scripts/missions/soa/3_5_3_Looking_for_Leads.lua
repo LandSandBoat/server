@@ -32,9 +32,9 @@ mission.sections =
 
         [xi.zone.EASTERN_ADOULIN] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [3] = function(player, region)
+                [3] = function(player, triggerArea)
                     return mission:progressEvent(1517)
                 end,
             },

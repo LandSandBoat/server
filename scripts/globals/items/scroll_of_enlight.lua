@@ -3,14 +3,14 @@
 -- Scroll of Enlight
 -- Teaches the white magic Enlight
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(310)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(310)
 end
 
-return item_object
+return itemObject

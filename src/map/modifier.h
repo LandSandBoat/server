@@ -41,16 +41,26 @@ enum class Mod
     MND = 13, // Mind
     CHR = 14, // Charisma
 
-    // Magic Evasion versus elements (resistance)
+    // Magic Evasion versus elements
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_MEVA    = 15, // Fire Resistance
-    ICE_MEVA     = 16, // Ice Resistance
-    WIND_MEVA    = 17, // Wind Resistance
-    EARTH_MEVA   = 18, // Earth Resistance
-    THUNDER_MEVA = 19, // Thunder Resistance
-    WATER_MEVA   = 20, // Water Resistance
-    LIGHT_MEVA   = 21, // Light Resistance
-    DARK_MEVA    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Magic Evasion
+    ICE_MEVA     = 16, // Ice Magic Evasion
+    WIND_MEVA    = 17, // Wind Magic Evasion
+    EARTH_MEVA   = 18, // Earth Magic Evasion
+    THUNDER_MEVA = 19, // Thunder Magic Evasion
+    WATER_MEVA   = 20, // Water Magic Evasion
+    LIGHT_MEVA   = 21, // Light Magic Evasion
+    DARK_MEVA    = 22, // Dark Magic Evasion
+
+    // Magic Evasion RANK versus elements (resistance ranks)
+    FIRE_RES_RANK    = 192, // Fire Resistance Rank
+    ICE_RES_RANK     = 193, // Ice Resistance Rank
+    WIND_RES_RANK    = 194, // Wind Resistance Rank
+    EARTH_RES_RANK   = 195, // Earth Resistance Rank
+    THUNDER_RES_RANK = 196, // Thunder Resistance Rank
+    WATER_RES_RANK   = 197, // Water Resistance Rank
+    LIGHT_RES_RANK   = 198, // Light Resistance Rank
+    DARK_RES_RANK    = 199, // Dark Resistance Rank
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -277,10 +287,10 @@ enum class Mod
     DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
     EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
     HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER = 237, // Enhances "Luminian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
-    // Resistances to enfeebles - Traits/Job Ability
+    // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
     POISONRES   = 241, // Enhances "Resist Poison" effect
     PARALYZERES = 242, // Enhances "Resist Paralyze" effect
@@ -298,6 +308,25 @@ enum class Mod
     LULLABYRES  = 254, // Enhances "Resist Lullaby" effect
     DEATHRES    = 255, // Used by gear and ATMA that give resistance to instance KO
     STATUSRES   = 958, // "Resistance to All Status Ailments"
+
+    // MEVA bonus to enfeebles (Bar-Effect, for example. And modifiers in mobs)
+    SLEEP_MEVA    = 200,
+    POISON_MEVA   = 201,
+    PARALYZE_MEVA = 202,
+    BLIND_MEVA    = 203,
+    SILENCE_MEVA  = 204,
+    VIRUS_MEVA    = 205,
+    PETRIFY_MEVA  = 206,
+    BIND_MEVA     = 207,
+    CURSE_MEVA    = 208,
+    GRAVITY_MEVA  = 209,
+    SLOW_MEVA     = 210,
+    STUN_MEVA     = 211,
+    CHARM_MEVA    = 212,
+    AMNESIA_MEVA  = 213,
+    LULLABY_MEVA  = 214,
+    DEATH_MEVA    = 215,
+    STATUS_MEVA   = 216,
 
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
@@ -387,11 +416,17 @@ enum class Mod
     REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
-    SOULEATER_EFFECT       = 96,  // Souleater power in percents
-    DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907, // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
+    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
+    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
+    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -463,16 +498,24 @@ enum class Mod
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS = 286,  // ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS             = 936,  // accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK         = 888,  // DA% bonus for all jumps
     HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT            = 828,  // Force critical hit for all jumps
     WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
     WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
-    WYVERN_ATTRIBUTE_DA        = 1056, // TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
-    DRAGOON_BREATH_RECAST      = 1057, // TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    WYVERN_ATTRIBUTE_DA        = 1056, // Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST      = 1057, // Restoring/Smithing Breath Recast Reduction (seconds)
+    ENHANCE_DEEP_BREATHING     = 283,  // Add 5/256 to deep breathing bonus per merit level when calculating healing breath
+    UNCAPPED_WYVERN_BREATH     = 284,  // Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
+    ENHANCES_STRAFE            = 282,  // Strafe merit augment, +50 TP gained per merit level on breath use.
+    ENHANCES_SPIRIT_LINK       = 281,  // Adds erase/-na to Spirit Link
 
     // Summoner
     AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
@@ -566,7 +609,7 @@ enum class Mod
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
     SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENTCY           = 491, // Waltz Potentcy Bonus
+    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
     JIG_DURATION             = 492, // Jig duration bonus in percents
     VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
     STEP_FINISH              = 494, // Bonus finishing moves from steps
@@ -681,8 +724,14 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    MAIN_DMG_RATING    = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
-    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
+    DMG_RATING        = 287, // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING   = 366, // adds damage rating to mainhand weapon
+    SUB_DMG_RATING    = 367, // adds damage rating to off hand weapon
+    RANGED_DMG_RATING = 376, // adds damage rating to ranged weapon
+    MAIN_DMG_RANK     = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK      = 378, // adds weapon rank to sub weapon
+    RANGED_DMG_RANK   = 379, // adds weapon rank to ranged weapon
+
     REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
     REGAIN_DOWN        = 406,  // plague, reduce tp
     REFRESH            = 369,  // auto refresh from equipment
@@ -693,10 +742,6 @@ enum class Mod
     CURE_POTENCY_II    = 260,  // % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD  = 375,  // % potency of received cure | healer's roll, some items have this
     CURE_POTENCY_BONUS = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
     DELAYP             = 380,  // delay addition percent (does not affect tp gain)
     RANGED_DELAYP      = 381,  // ranged delay addition percent (does not affect tp gain)
 
@@ -746,10 +791,11 @@ enum class Mod
     LIGHT_NULL = 473, //
     DARK_NULL  = 474, //
 
-    MAGIC_ABSORB     = 475, // Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL       = 476, // Occasionally annuls magic damage taken, in percents
-    PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
+    MAGIC_ABSORB       = 475, // Occasionally absorbs magic damage taken, in percents
+    MAGIC_NULL         = 476, // Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE = 239, // Occasionally annuls ranged damage taken, in percents
+    PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
+    ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
@@ -909,23 +955,22 @@ enum class Mod
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT   = 1075, // Breath damage dealt
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 53
     // 74 to 79
     // 138 to 143
     // 156 to 159
-    // 192 to 223
-    // 239
-    // 261 to 287
-    // 888
-    // 936
+    // 217 to 223
+    // 261 to 280
     //
-    // SPARE = 1069, and onward
+    // SPARE = 1076 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
@@ -945,7 +990,7 @@ struct EnumClassHash
 class CModifier
 {
 public:
-    Mod   getModID();
+    Mod   getModID() const;
     int16 getModAmount() const;
 
     void setModAmount(int16 amount);
@@ -974,7 +1019,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
+    PetModType getPetModType() const;
 
 private:
     PetModType m_pettype{ PetModType::All };

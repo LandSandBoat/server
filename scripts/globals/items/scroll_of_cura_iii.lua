@@ -3,14 +3,14 @@
 -- Scroll of Cura III
 -- Teaches the white magic Cura III
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(475)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(475)
 end
 
-return item_object
+return itemObject

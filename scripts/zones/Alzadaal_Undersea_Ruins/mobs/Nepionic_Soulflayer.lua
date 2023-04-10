@@ -13,9 +13,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("TransformationsProgress") == 4 then
-        player:setCharVar("TransformationsProgress", 5)
-    end
 end
 
 return entity

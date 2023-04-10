@@ -21,10 +21,12 @@ local trustMemory = function(player)
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS) then
         memories = memories + 2
     end
+
     -- 4 - nothing
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
         memories = memories + 8
     end
+
     -- 16 - chocobo racing
     --  memories = memories + 16
     return memories
@@ -41,16 +43,27 @@ entity.onTrigger = function(player, npc)
     local kupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
-    if trustWindurst == QUEST_ACCEPTED and (trustSandoria == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED) then
+    if
+        trustWindurst == QUEST_ACCEPTED and
+        (trustSandoria == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED)
+    then
         player:startEvent(439, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 0 then
         player:startEvent(435, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
-    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 1 and kupipiTrustChatFlag == 0 then
+    elseif
+        trustWindurst == QUEST_ACCEPTED and
+        windurstFirstTrust == 1 and
+        kupipiTrustChatFlag == 0
+    then
         player:startEvent(436)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 2 then
         player:startEvent(437)
-    elseif trustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and kupipiTrustChatFlag == 0 then
+    elseif
+        trustWindurst == QUEST_COMPLETED and
+        not player:hasSpell(901) and
+        kupipiTrustChatFlag == 0
+    then
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then

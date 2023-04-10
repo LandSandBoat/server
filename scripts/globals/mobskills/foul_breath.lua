@@ -10,18 +10,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- not used in Uleguerand_Range
-    if (mob:getZoneID() == 5) then
+    if mob:getZoneID() == 5 then
         return 1
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DISEASE
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 300)
 
@@ -33,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

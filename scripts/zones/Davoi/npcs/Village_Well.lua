@@ -27,7 +27,10 @@ entity.onTrigger = function(player, npc)
     then
         SpawnMob(ID.mob.ONE_EYED_GWAJBOJ):updateClaim(player)
         SpawnMob(ID.mob.THREE_EYED_PROZPUZ):updateClaim(player)
-    elseif player:getCharVar("UnderOathCS") == 6 and player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) then
+    elseif
+        player:getCharVar("UnderOathCS") == 6 and
+        player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION)
+    then
         player:startEvent(112) -- read contents of letter
     else
         player:messageSpecial(ID.text.A_WELL)

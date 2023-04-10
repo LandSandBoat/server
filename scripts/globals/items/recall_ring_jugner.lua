@@ -7,18 +7,19 @@ require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if not target:hasKeyItem(xi.ki.JUGNER_GATE_CRYSTAL) then
-       result = 445
+        result = 445
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.JUGNER, 0, 1)
 end
 
-return item_object
+return itemObject

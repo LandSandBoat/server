@@ -29,21 +29,23 @@ entity.onMobSpawn = function(mob)
             local target   = mobArg:getTarget()
             local targetid = 0
 
-            if target then targetid = target:getTargID() end
+            if target then
+                targetid = target:getTargID()
+            end
 
             mobArg:timer(12000, function(mobTimerArg)
                 mobTimerArg:setHP(mobTimerArg:getMaxHP())
                 mobTimerArg:setAnimationSub(3)
                 mobTimerArg:resetAI()
                 mobTimerArg:stun(3000)
-                local new_target = mobTimerArg:getEntity(targetid)
+                local newTarget = mobTimerArg:getEntity(targetid)
 
-                if new_target and mobTimerArg:checkDistance(new_target) < 40 then
-                    mobTimerArg:updateClaim(new_target)
-                    mobTimerArg:updateEnmity(new_target)
+                if newTarget and mobTimerArg:checkDistance(newTarget) < 40 then
+                    mobTimerArg:updateClaim(newTarget)
+                    mobTimerArg:updateEnmity(newTarget)
                 end
 
-                mobTimerArg:setLocalVar("RERAISES", reraises+1)
+                mobTimerArg:setLocalVar("RERAISES", reraises + 1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
@@ -114,7 +116,7 @@ entity.onMobFight = function(mob, target)
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
     if (hpTrigger > 0) then -- It'll be zero on his first "life"
         local usedAzure = mob:getLocalVar("usedAzureLore")
-        if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
+        if mob:getHPP() <= hpTrigger and usedAzure == 0 then
             mob:setLocalVar("usedAzureLore", 1)
             mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
             mob:useMobAbility(xi.jsa.AZURE_LORE)

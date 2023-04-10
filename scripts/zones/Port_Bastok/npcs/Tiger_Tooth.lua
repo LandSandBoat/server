@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Tiger Tooth
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

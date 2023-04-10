@@ -12,7 +12,7 @@ CREATE TABLE `merits` (
   `upgradeid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `catagoryid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`meritid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `merits`
@@ -166,7 +166,7 @@ INSERT INTO `merits` VALUES (1480,'repair_recast',5,6,131072,6,22);
 INSERT INTO `merits` VALUES (1536,'step_accuracy',5,3,262144,6,23);
 INSERT INTO `merits` VALUES (1538,'haste_samba_effect',5,100,262144,6,23);
 INSERT INTO `merits` VALUES (1540,'reverse_flourish_effect',5,3,262144,6,23);
-INSERT INTO `merits` VALUES (1542,'building_flourish_effect',5,2,262144,6,23);
+INSERT INTO `merits` VALUES (1542,'building_flourish_effect',5,1,262144,6,23);
 INSERT INTO `merits` VALUES (1600,'grimoire_recast',5,2,524288,6,24);
 INSERT INTO `merits` VALUES (1602,'modus_veritas_duration',5,1,524288,6,24);
 INSERT INTO `merits` VALUES (1604,'helix_magic_acc_att',5,1,524288,6,24);
@@ -219,7 +219,7 @@ INSERT INTO `merits` VALUES (2252,'anc_magic_attack_bonus',5,3,8,7,34);
 INSERT INTO `merits` VALUES (2254,'anc_magic_burst_dmg',5,3,8,7,34);
 INSERT INTO `merits` VALUES (2256,'ele_magic_acc',5,5,8,7,34);
 INSERT INTO `merits` VALUES (2258,'ele_magic_debuff_duration',5,12,8,7,34);
-INSERT INTO `merits` VALUES (2260,'ele_magic_debuff_effect',5,2,8,7,34);
+INSERT INTO `merits` VALUES (2260,'ele_magic_debuff_effect',5,1,8,7,34);
 INSERT INTO `merits` VALUES (2262,'aspir_absorption_amount',5,4,8,7,34);
 INSERT INTO `merits` VALUES (2304,'dia_iii',5,30,16,7,35);
 INSERT INTO `merits` VALUES (2306,'slow_ii',5,1,16,7,35);
@@ -241,7 +241,7 @@ INSERT INTO `merits` VALUES (2432,'fealty',5,5,64,7,37);
 INSERT INTO `merits` VALUES (2434,'chivalry',5,5,64,7,37);
 INSERT INTO `merits` VALUES (2436,'iron_will',5,19,64,7,37);
 INSERT INTO `merits` VALUES (2438,'guardian',5,19,64,7,37);
-INSERT INTO `merits` VALUES (2496,'dark_seal',5,1,128,7,38);
+INSERT INTO `merits` VALUES (2496,'dark_seal',5,10,128,7,38);
 INSERT INTO `merits` VALUES (2498,'diabolic_eye',5,5,128,7,38);
 INSERT INTO `merits` VALUES (2500,'muted_soul',5,10,128,7,38);
 INSERT INTO `merits` VALUES (2502,'desperate_blows_effect',5,200,128,7,38);

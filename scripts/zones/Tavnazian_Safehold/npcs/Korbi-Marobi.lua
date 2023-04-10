@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Korbi-Marobi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

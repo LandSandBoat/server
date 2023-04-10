@@ -1,13 +1,12 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Louartain
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 41.878349, y = -6.282223, z = 10.820915 },
     { x = 42.088036, z = 11.867051 },
@@ -22,8 +21,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

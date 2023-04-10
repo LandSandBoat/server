@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Eunsoo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

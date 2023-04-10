@@ -8,13 +8,13 @@ require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------
 
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect1   = xi.effect.ACCURACY_BOOST
     local effect2   = xi.effect.ATTACK_BOOST
     local power1    = 100 --ACC/RACC
@@ -24,4 +24,4 @@ item_object.onItemUse = function(target)
     xi.item_utils.addTwoItemEffects(target, effect1, effect2, power1, power2, duration)
 end
 
-return item_object
+return itemObject

@@ -68,10 +68,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         case ENTITY_SPAWN:
         {
             updatemask = UPDATE_ALL_MOB;
-            if (PEntity->objtype == TYPE_PET)
-            {
-                ref<uint8>(0x28) = 0x04;
-            }
+
             if (PEntity->look.size == MODEL_EQUIPPED || PEntity->look.size == MODEL_CHOCOBO)
             {
                 updatemask = 0x57;
@@ -82,7 +79,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             }
             if (PEntity->spawnAnimation == SPAWN_ANIMATION::SPECIAL)
             {
-                ref<uint8>(0x28) |= 0x45;
+                ref<uint8>(0x28) |= 0x04;
             }
             ref<uint8>(0x0A) = updatemask;
         }
@@ -127,8 +124,8 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
-                ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
-                ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
+                ref<uint32>(0x21) = PNpc->m_flags;
+                ref<uint8>(0x27)  = PNpc->name_prefix; // gender and something else
 
                 if (PNpc->IsTriggerable())
                 {
@@ -144,7 +141,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             {
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);
-                memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+                std::memcpy(data + 0x34, PEntity->GetName().c_str(), std::min<size_t>(PEntity->GetName().size(), PacketNameLength));
             }
         }
         break;
@@ -167,8 +164,9 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 {
                     ref<uint8>(0x27) |= 0x08;
                 }
-                ref<uint8>(0x28) |= (PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00);
+                ref<uint8>(0x28) |= PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00;
                 ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
+                ref<uint8>(0x28) |= PMob->status == STATUS_TYPE::NORMAL && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = PEntity->namevis;
             }
@@ -184,11 +182,11 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
-                    memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+                    std::memcpy(data + 0x34, PEntity->GetName().c_str(), std::min<size_t>(PEntity->GetName().size(), PacketNameLength));
                 }
                 else
                 {
-                    memcpy(data + (0x34), PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
+                    std::memcpy(data + 0x34, PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
                 }
             }
         }
@@ -206,7 +204,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         ref<uint8>(0x28) |= 0x45;
     }
 
-    // Send look data
+    // Set look data
     switch (PEntity->look.size)
     {
         case MODEL_STANDARD:
@@ -220,7 +218,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         case MODEL_CHOCOBO:
         {
             this->setSize(0x48);
-            memcpy(data + (0x30), &(PEntity->look), 20);
+            std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
         }
         break;
         case MODEL_DOOR:
@@ -229,14 +227,37 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
-            memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
+            std::memcpy(data + 0x34, PEntity->GetName().c_str(), (PEntity->GetName().size() > 12 ? 12 : PEntity->GetName().size()));
         }
         break;
     }
 
+    // Slightly bigger packet to encompass both name and model on first spawn, and only for dynamic entities.
+    if (type == ENTITY_SPAWN && PEntity->isRenamed && PEntity->look.size == MODEL_EQUIPPED && PEntity->targid >= 0x700)
+    {
+        this->setSize(0x56);
+
+        // Temporarily override UpdateFlags (0x0A) to perform black magic:
+        ref<uint8>(0x0A) = 0x57; // Carefully chosen bits to make FUNC_Packet_Incoming_0x000E behave (Same type as first 0x00E Fellow packet)
+        ref<uint8>(0x18) = 0x01; // Copy longer name in FUNC_Packet_Incoming_0x000E
+
+        std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
+
+        auto name       = PEntity->packetName;
+        auto nameOffset = 0x44;
+        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
+
+        // Make sure to zero-out the existing name area of the packet
+        auto start = data + nameOffset;
+        auto size  = this->getSize();
+        std::memset(start, 0U, size);
+
+        // Copy in name
+        std::memcpy(start, name.c_str(), maxLength);
+    }
     // If the entity has been renamed, we have to re-send the name during every update.
     // Otherwise it will revert to it's default name (if applicable).
-    if (PEntity->isRenamed)
+    else if (PEntity->isRenamed)
     {
         updatemask |= UPDATE_NAME;
         ref<uint8>(0x0A) |= updatemask;

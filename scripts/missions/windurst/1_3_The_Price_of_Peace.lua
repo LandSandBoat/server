@@ -210,9 +210,9 @@ mission.sections =
         {
             ['Ohbiru-Dohbiru'] = mission:event(144),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(146)
                 end,
             },

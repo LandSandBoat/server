@@ -6,298 +6,210 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathStart =
 {
-    { x = 106, y = 0, z = -3 },
-    { x = 106, z = -4 },
-    { x = 107, z = -5 },
-    { x = 107, z = -6 },
-    { x = 108, z = -7 },
-    { x = 108, z = -9 },
-    { x = 109, z = -10 },
-    { x = 109, z = -11 },
-    { x = 111, z = -15 },
-    { x = 112, z = -16 },
-    { x = 112, z = -18 },
-    { x = 113, z = -18 },
-    { x = 113, z = -19 },
-    { x = 114, z = -21 },
-    { x = 114, z = -23 },
-    { x = 115, z = -24 },
-    { x = 115, z = -27 },
-    { x = 116, z = -32 },
-    { x = 117, z = -33 },
-    { x = 117, z = -38 },
-    { x = 116, z = -39 },
-    { x = 116, z = -40 },
-    { x = 115, z = -41 },
-    { x = 115, z = -43 },
-    { x = 114, z = -44 },
-    { x = 113, z = -45 },
-    { x = 113, z = -46 },
-    { x = 112, z = -46 },
-    { x = 111, z = -47 },
-    { x = 111, z = -48 },
-    { x = 110, z = -48 },
-    { x = 109, z = -49 },
-    { x = 108, z = -50 },
-    { x = 107, z = -50 },
-    { x = 107, z = -51 },
-    { x = 105, z = -51 },
-    { x = 105, z = -52 },
-    { x = 104, z = -52 },
-    { x = 103, y = -1, z = -53 },
-    { x = 101, z = -54 },
-    { x = 100, z = -54 },
-    { x = 98, y = -2, z = -55 },
-    { x = 94, y = -4, z = -57 },
-    { x = 93, y = -4, z = -57 },
-    { x = 92, y = -5, z = -58 },
-    { x = 89, y = -5, z = -58 },
-    { x = 88, y = -6, z = -58 },
-    { x = 87, y = -6, z = -59 },
-    { x = 85, y = -7 },
-    { x = 84, y = -7 },
-    { x = 83, y = -8 },
-    { x = 79, y = -8 },
-    { x = 75, y = -9 },
-    { x = 74, y = -9 },
-    { x = 71, y = -8 },
-    { x = 70 },
-    { x = 69, z = -60 },
-    { x = 69, z = -60 },
-    { x = 68, z = -61 },
-    { x = 67, z = -61 },
-    { x = 66, z = -62 },
-    { x = 65, z = -62 },
-    { x = 64, z = -63 },
-    { x = 64, y = -9, z = -64 },
-    { x = 63, z = -65 },
-    { x = 63, z = -66 },
-    { x = 62, z = -67 },
-    { x = 62, z = -68 },
-    { x = 61, z = -68 },
-    { x = 61, z = -70 },
-    { x = 60, z = -71 },
-    { x = 60, z = -72 },
-    { x = 58, y = -8, z = -78 },
-    { x = 58, z = -79 },
-    { x = 58, z = -80 },
-    { x = 57, z = -81 },
-    { x = 56, z = -83 },
-    { x = 55, y = -9, z = -88 },
-    { x = 54, z = -90 },
-    { x = 53, z = -93 },
-    { x = 53, z = -94 },
-    { x = 52, z = -94 },
-    { x = 51, z = -95 },
-    { x = 51, z = -96 },
-    { x = 50, z = -96 },
-    { x = 49, y = -8, z = -97 },
-    { x = 48, z = -97 },
-    { x = 47, z = -98 },
-    { x = 43, z = -98 },
-    { x = 42, z = -99 },
-    { x = 38, z = -99 },
-    { x = 37, z = -98 },
-    { x = 36 },
-    { x = 35, y = -7 },
-    { x = 32, y = -6 },
-    { x = 30, y = -6 },
-    { x = 29, y = -5 },
-    { x = 27, y = -4, z = -97 },
-    { x = 26, y = -4, z = -97 },
-    { x = 24, y = -3, z = -97 },
-    { x = 23, y = -3, z = -96 },
-    { x = 21, y = -2, z = -96 },
-    { x = 20, y = -2, z = -96 },
-    { x = 19, y = -1, z = -95 },
-    { x = 18, z = -95 },
-    { x = 17, z = -94 },
-    { x = 16, z = -94 },
-    { x = 14, y = 0, z = -93 },
-    { x = 13, z = -92 },
-    { x = 13, z = -92 },
-    { x = 11, z = -91 },
-    { x = 8, z = -89 },
-    { x = 7, z = -88 },
-    { x = 6, z = -88 },
-    { x = 5, z = -87 },
-    { x = 4, z = -87 },
-    { x = 3, z = -86 },
-    { x = 3, z = -85 },
-    { x = 2, z = -84 },
-    { x = 1, z = -84 },
-    { x = 0, z = -83 },
-    { x = 0, z = -81 },
-    { x = -1, z = -81 },
-    { x = -2, z = -80 },
-    { x = -3, z = -79 },
-    { x = -3, z = -78 },
-    { x = -4, z = -77 },
-    { x = -5, z = -76 },
-    { x = -7, z = -74 },
-    { x = -8, z = -72 },
-    { x = -16, z = -63 },
-    { x = -26, z = -51 },
-    { x = -33, z = -43 },
-    { x = -36, z = -41 },
-    { x = -38, z = -38 },
-    { x = -39, z = -37 },
-    { x = -39, z = -36 },
-    { x = -40, z = -35 },
-    { x = -40, z = -34 },
-    { x = -41, z = -33 },
-    { x = -41, z = -32 },
-    { x = -42, z = -31 },
-    { x = -42, z = -28 },
-    { x = -43, z = -27 },
-    { x = -45, z = -20 },
-    { x = -46, z = -16 },
-    { x = -47, z = -11 },
-    { x = -48, z = -8 },
-    { x = -48, z = -7 },
-    { x = -49, z = -6 },
-    { x = -49, z = -2 },
-    { x = -49, z = 0 },
-    { x = -49, z = 1 },
-    { x = -50, z = 2 },
-    { x = -50, z = 6 },
-    { x = -49, z = 7 },
-    { x = -49, z = 11 },
-    { x = -48, z = 12 },
-    { x = -48, z = 15 },
-    { x = -47, z = 16 },
-    { x = -44, z = 26 },
-    { x = -43, z = 30 },
-    { x = -42, z = 33 },
-    { x = -43, z = 32 },
-    { x = -44, z = 31 },
-    { x = -44, z = 15 },
-    { x = -45, z = 11 },
-    { x = -45, z = 7 },
-    { x = -45, z = 6 },
-    { x = -45, z = 5 },
-    { x = -44, z = 4 },
-    { x = -44, z = 1 },
-    { x = -43, z = -5 },
-    { x = -42, z = -9 },
-    { x = -42, z = -13 },
-    { x = -41, z = -19 },
-    { x = -39, z = -34 },
-    { x = -38, z = -35 },
-    { x = -38, z = -37 },
-    { x = -37, z = -38 },
-    { x = -37, z = -39 },
-    { x = -36, z = -41 },
-    { x = -36, z = -42 },
-    { x = -35, z = -43 },
-    { x = -35, z = -44 },
-    { x = -34, z = -45 },
-    { x = -34, z = -46 },
-    { x = -33, z = -47 },
-    { x = -32, z = -48 },
-    { x = -31, z = -49 },
-    { x = -30, z = -49 },
-    { x = -30, z = -50 },
-    { x = -28, z = -52 },
-    { x = -22, z = -57 },
-    { x = -14, z = -64 },
-    { x = -9, z = -69 },
-    { x = 0, z = -77 },
-    { x = 8, z = -84 },
-    { x = 8, z = -84 },
-    { x = 13, y = -0, z = -88 },
-    { x = 18, y = -1, z = -93 },
-    { x = 20, y = -1, z = -94 },
-    { x = 20, y = -2, z = -94 },
-    { x = 22, y = -2, z = -95 },
-    { x = 23, y = -3, z = -95 },
-    { x = 24, y = -3, z = -95 },
-    { x = 25, y = -4, z = -96 },
-    { x = 29, y = -5, z = -97 },
-    { x = 35, y = -7, z = -99 },
-    { x = 36, y = -8, z = -99 },
-    { x = 45, z = -99 },
-    { x = 46, z = -98 },
-    { x = 47, z = -98 },
-    { x = 48, z = -97 },
-    { x = 50, z = -97 },
-    { x = 51, z = -96 },
-    { x = 52, y = -9, z = -96 },
-    { x = 53, y = -8, z = -95 },
-    { x = 54, y = -9, z = -94 },
-    { x = 54, y = -8, z = -93 },
-    { x = 55, z = -93 },
-    { x = 56, z = -92 },
-    { x = 56, z = -91 },
-    { x = 57, z = -90 },
-    { x = 57, z = -87 },
-    { x = 58, z = -86 },
-    { x = 58, z = -81 },
-    { x = 57, z = -80 },
-    { x = 58, z = -79 },
-    { x = 58, z = -77 },
-    { x = 59, z = -76 },
-    { x = 59, z = -75 },
-    { x = 59, y = -9, z = -74 },
-    { x = 60, y = -8, z = -73 },
-    { x = 60, y = -9, z = -72 },
-    { x = 61, z = -71 },
-    { x = 61, z = -70 },
-    { x = 62, z = -69 },
-    { x = 63, z = -68 },
-    { x = 63, z = -67 },
-    { x = 64, z = -66 },
-    { x = 64, z = -65 },
-    { x = 65, z = -64 },
-    { x = 65, y = -8, z = -64 },
-    { x = 66, z = -63 },
-    { x = 67, z = -62 },
-    { x = 68, z = -62 },
-    { x = 69, z = -61 },
-    { x = 71, z = -61 },
-    { x = 72, y = -9, z = -60 },
-    { x = 75, z = -60 },
-    { x = 76, z = -59 },
-    { x = 77, y = -8, z = -59 },
-    { x = 80, z = -59 },
-    { x = 88, y = -6, z = -57 },
-    { x = 92, y = -5, z = -56 },
-    { x = 97, y = -3, z = -55 },
-    { x = 101, y = -1, z = -54 },
-    { x = 102, z = -54 },
-    { x = 103, z = -53 },
-    { x = 104, y = 0, z = -53 },
-    { x = 105, z = -52 },
-    { x = 107, z = -52 },
-    { x = 108, z = -51 },
-    { x = 108, z = -50 },
-    { x = 109, z = -50 },
-    { x = 110, z = -49 },
-    { x = 110, z = -48 },
-    { x = 111, z = -47 },
-    { x = 111, z = -45 },
-    { x = 112, z = -44 },
-    { x = 112, z = -41 },
-    { x = 113, z = -40 },
-    { x = 113, z = -18 },
-    { x = 113, z = -17 },
-    { x = 112, z = -16 },
-    { x = 112, z = -15 },
-    { x = 110, z = -7 },
-    { x = 110, z = -4 },
-    { x = 109, z = -2 },
-    { x = 109, z = -1 },
-    { x = 108, z = 1 },
-    { x = 107, z = 3 },
+    { x = 102.00, y = -0.19, z = 3.00 }
 }
 
-entity.onMobSpawn = function(mob)
-    mob:pathThrough(path, xi.path.flag.PATROL)
+local pathBranch1 =
+{
+    { x = 102.00, y = -0.19, z = 3.00 },
+    { x = 109.49, y = 0.59, z = -0.07 },
+    { x = 124.47, y = 0.00, z = -42.08 },
+    { x = 91.93, y = -5.15, z = -58.24 },
+    { x = 66.46, y = -8.81, z = -62.91 },
+    { x = 60.86, y = -9.02, z = -73.80 },
+    { x = 57.09, y = -9.37, z = -96.88 },
+    { x = 38.39, y = -8.62, z = -98.74 },
+    { x = 15.73, y = -1.02, z = -94.88 },
+    { x = -0.65, y = 0.00, z = -84.13 },
+}
+
+local pathBranch2 =
+{
+    { x = -40.24, y = 0.00, z = -38.35 },
+    { x = -44.36, y = 0.68, z = 13.98 },
+}
+
+local pathBranch3 =
+{
+    { x = -31.28, y = -0.23, z = 48.64 },
+    { x = -0.52, y = 0.00, z = 82.02 },
+}
+
+local pathBranch4 =
+{
+    { x = 3.06, y = 0.15, z = 125.56 },
+    { x = 40.12, y = 0.000, z = 158.89 },
+    { x = 60.35, y = -4.24, z = 143.23 },
+    { x = 79.86, y = -8.75, z = 139.89 },
+    { x = 85.86, y = -8.82, z = 138.11 },
+    { x = 91.87, y = -8.83, z = 142.52 },
+    { x = 101.60, y = -8.71, z = 143.17 },
+}
+
+local pathBranch5 =
+{
+    { x = 100.62, y = -8.75, z = 78.86 },
+    { x = 108.29, y = -4.60, z = 54.26 },
+    { x = 118.98, y = 0.00, z = 38.12 },
+    { x = 102.00, y = -0.19, z = 3.00 },
+}
+
+local pathFind =
+{
+    ['pathFind1'] = function(mob, reversePath)
+        local pathNodes = {}
+        if reversePath == 0 or reversePath == 1 then
+            mob:setLocalVar("mobPath", 2)
+            local reverseCheck = math.random(0, 2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("reversePath", 0)
+                pathNodes = pathBranch1
+            else
+                mob:setLocalVar("reversePath", 1)
+                pathNodes = pathBranch5
+            end
+
+            return pathNodes
+        end
+    end,
+
+    ['pathFind2'] = function(mob, reversePath)
+        local pathNodes = {}
+        mob:setLocalVar("mobPath", 3)
+        if reversePath == 0 then
+            pathNodes = pathBranch2
+        else
+            pathNodes = pathBranch4
+        end
+
+        return pathNodes
+    end,
+
+    ['pathFind3'] = function(mob, reversePath)
+        local pathNodes = {}
+        mob:setLocalVar("mobPath", 4)
+        if reversePath == 0 or reversePath == 1 then
+            pathNodes = pathBranch3
+        end
+
+        return pathNodes
+    end,
+
+    ['pathFind4'] = function(mob, reversePath)
+        local pathNodes = {}
+        if reversePath == 0 then
+            mob:setLocalVar("mobPath", 5)
+            pathNodes = pathBranch4
+        else
+            local reverseCheck = math.random(0, 2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("mobPath", 4)
+                mob:setLocalVar("reversePath", 0)
+                pathNodes = pathBranch3
+            else
+                mob:setLocalVar("mobPath", 5)
+                mob:setLocalVar("reversePath", 1)
+                pathNodes = pathBranch2
+            end
+        end
+
+        return pathNodes
+    end,
+
+    ['pathFind5'] = function(mob, reversePath)
+        local pathNodes = {}
+        if reversePath == 0 then
+            local reverseCheck = math.random(0, 2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("mobPath", 6)
+                mob:setLocalVar("reversePath", 0)
+                pathNodes = pathBranch5
+            else
+                mob:setLocalVar("mobPath", 3)
+                mob:setLocalVar("reversePath", 1)
+                pathNodes = pathBranch4
+            end
+        else
+            mob:setLocalVar("mobPath", 6)
+            pathNodes = pathBranch1
+        end
+
+        return pathNodes
+    end,
+
+    ['pathFind6'] = function(mob, reversePath)
+        local pathNodes = {}
+        if reversePath == 0 or reversePath == 1 then
+            mob:setLocalVar("mobPath", 1)
+            pathNodes = pathStart
+        end
+
+        return pathNodes
+    end,
+}
+
+entity.onMobInitialize = function(mob)
+    --Guivre has increased movespeed, sight range with
+    --natural double/triple attack.
+    mob:setMod(xi.mod.MOVE, 150)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpawn = function(mob)
+    --Guivre will despawn if not claimed within 3-5 hours.
+    mob:setLocalVar("despawnTime", math.random(10800, 18000) + os.time())
+    mob:setLocalVar("isPaused", 0)
+    mob:setLocalVar("mobPath", 1)
+    mob:pathThrough(pathStart, xi.path.flag.COORDS)
+end
+
+entity.onPath = function(mob)
+    if not mob:isFollowingPath() then
+        if mob:getLocalVar("isPaused") ~= 0 then
+            local currentPath = "pathFind" .. mob:getLocalVar("mobPath")
+            local reversePath = mob:getLocalVar("reversePath")
+            local pathNodes = {}
+            mob:setLocalVar("isPaused", 0)
+            mob:clearPath()
+            pathNodes = pathFind[currentPath](mob, reversePath)
+            local newReverse = mob:getLocalVar("reversePath")
+            if newReverse == 0 then
+                mob:pathThrough(pathNodes, xi.path.flag.COORDS)
+            else
+                mob:pathThrough(pathNodes, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+            end
+        else
+            -- Guivre is paused, he will wait and rotate
+            -- a random amount of times before resuming his path
+            mob:clearPath()
+            local x = mob:getXPos()
+            local y = mob:getYPos()
+            local z = mob:getZPos()
+            local rotations = {}
+            local count = math.random(2, 6)
+            for i = 0, count do
+                local wait = math.random(1500, 3000)
+                rotations[i + 1] =
+                {
+                    x = x, y = y, z = z, rotation = math.random(0, 255), wait = wait
+                }
+            end
+
+            mob:pathThrough(rotations, xi.path.flag.COORDS)
+            mob:setLocalVar("isPaused", 1)
+        end
+    end
+end
+
+entity.onMobRoam = function(mob)
+    local despawnCheck = mob:getLocalVar("despawnTime")
+    if despawnCheck <= os.time() then
+        DespawnMob(mob:getID())
+    end
 end
 
 entity.onMobDespawn = function(mob)

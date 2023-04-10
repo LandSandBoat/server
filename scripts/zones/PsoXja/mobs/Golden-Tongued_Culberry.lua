@@ -4,17 +4,21 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/tonberry") }
 local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/items")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
+    mob:addListener("ITEM_DROPS", "ITEM_DROPS_CULBERRY", function(mobArg, loot)
+        loot:addItemFixed(xi.items.UGGALEPIH_PENDANT, mob:getLocalVar("DropRate"))
+    end)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
     if target:isPet() then
         mob:setMod(xi.mod.FASTCAST, 100)
         mob:castSpell(367, target) -- Insta-death any pet with most enmity.

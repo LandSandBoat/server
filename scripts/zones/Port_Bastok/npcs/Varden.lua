@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Varden
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

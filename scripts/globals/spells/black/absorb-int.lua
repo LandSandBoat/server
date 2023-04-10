@@ -7,15 +7,17 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
-    if (target:hasStatusEffect(xi.effect.INT_DOWN) or caster:hasStatusEffect(xi.effect.INT_BOOST)) then
+spellObject.onSpellCast = function(caster, target, spell)
+    if
+        target:hasStatusEffect(xi.effect.INT_DOWN) or
+        caster:hasStatusEffect(xi.effect.INT_BOOST)
+    then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -26,15 +28,16 @@ spell_object.onSpellCast = function(caster, target, spell)
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
-        if (resist <= 0.125) then
+        if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ABSORB_INT)
-            caster:addStatusEffect(xi.effect.INT_BOOST, xi.settings.main.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT*xi.settings.main.ABSORB_SPELL_TICK) -- caster gains INT
-            target:addStatusEffect(xi.effect.INT_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT*xi.settings.main.ABSORB_SPELL_TICK)    -- target loses INT
+            caster:addStatusEffect(xi.effect.INT_BOOST, xi.settings.main.ABSORB_SPELL_AMOUNT * resist * ((100 + (caster:getMod(xi.mod.AUGMENTS_ABSORB))) / 100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK) -- caster gains INT
+            target:addStatusEffect(xi.effect.INT_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT * resist * ((100 + (caster:getMod(xi.mod.AUGMENTS_ABSORB))) / 100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK)    -- target loses INT
         end
     end
+
     return xi.effect.INT_DOWN
 end
 
-return spell_object
+return spellObject

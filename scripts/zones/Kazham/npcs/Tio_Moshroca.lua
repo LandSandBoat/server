@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Tio Moshroca
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

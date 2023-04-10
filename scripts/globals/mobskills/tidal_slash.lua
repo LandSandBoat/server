@@ -8,9 +8,9 @@
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.SAM then
         return 0
     else
@@ -18,12 +18,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 3
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3.5, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3.5, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

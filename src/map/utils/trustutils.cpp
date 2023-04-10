@@ -99,14 +99,14 @@ struct Trust_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_meva;
-    int16 ice_meva;
-    int16 wind_meva;
-    int16 earth_meva;
-    int16 thunder_meva;
-    int16 water_meva;
-    int16 light_meva;
-    int16 dark_meva;
+    int8 fire_res_rank;
+    int8 ice_res_rank;
+    int8 wind_res_rank;
+    int8 earth_res_rank;
+    int8 thunder_res_rank;
+    int8 water_res_rank;
+    int8 light_res_rank;
+    int8 dark_res_rank;
 
     Trust_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
@@ -160,14 +160,14 @@ struct Trust_t
         light_sdt   = 0;
         dark_sdt    = 0;
 
-        fire_meva    = 0;
-        ice_meva     = 0;
-        wind_meva    = 0;
-        earth_meva   = 0;
-        thunder_meva = 0;
-        water_meva   = 0;
-        light_meva   = 0;
-        dark_meva    = 0;
+        fire_res_rank    = 0;
+        ice_res_rank     = 0;
+        wind_res_rank    = 0;
+        earth_res_rank   = 0;
+        thunder_res_rank = 0;
+        water_res_rank   = 0;
+        light_res_rank   = 0;
+        dark_res_rank    = 0;
     }
 };
 
@@ -243,10 +243,10 @@ namespace trustutils
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
                 mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-                mob_resistances.fire_meva, mob_resistances.ice_meva, \
-                mob_resistances.wind_meva, mob_resistances.earth_meva, \
-                mob_resistances.lightning_meva, mob_resistances.water_meva, \
-                mob_resistances.light_meva, mob_resistances.dark_meva \
+                mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, \
+                mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, \
+                mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, \
+                mob_resistances.light_res_rank, mob_resistances.dark_res_rank \
                 FROM spell_list, mob_pools, mob_family_system, mob_resistances \
                 WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid \
@@ -327,14 +327,14 @@ namespace trustutils
                 trust->light_sdt   = (int16)sql->GetIntData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                 trust->dark_sdt    = (int16)sql->GetIntData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_meva    = (int16)sql->GetIntData(44);
-                trust->ice_meva     = (int16)sql->GetIntData(45);
-                trust->wind_meva    = (int16)sql->GetIntData(46);
-                trust->earth_meva   = (int16)sql->GetIntData(47);
-                trust->thunder_meva = (int16)sql->GetIntData(48);
-                trust->water_meva   = (int16)sql->GetIntData(49);
-                trust->light_meva   = (int16)sql->GetIntData(50);
-                trust->dark_meva    = (int16)sql->GetIntData(51);
+                trust->fire_res_rank    = (int8)sql->GetIntData(44);
+                trust->ice_res_rank     = (int8)sql->GetIntData(45);
+                trust->wind_res_rank    = (int8)sql->GetIntData(46);
+                trust->earth_res_rank   = (int8)sql->GetIntData(47);
+                trust->thunder_res_rank = (int8)sql->GetIntData(48);
+                trust->water_res_rank   = (int8)sql->GetIntData(49);
+                trust->light_res_rank   = (int8)sql->GetIntData(50);
+                trust->dark_res_rank    = (int8)sql->GetIntData(51);
 
                 g_PTrustList.push_back(trust);
             }
@@ -356,6 +356,7 @@ namespace trustutils
         CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
         PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
+        PTrust->setBattleID(PMaster->getBattleID());
 
         if (PMaster->PBattlefield)
         {
@@ -377,9 +378,14 @@ namespace trustutils
 
     CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     {
-        auto* PTrust    = new CTrustEntity(PMaster);
+        auto* PTrust = new CTrustEntity(PMaster);
+
+        // clang-format off
         auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
-                                        { return t->trustID == TrustID; });
+        {
+            return t->trustID == TrustID;
+        });
+        // clang-format on
 
         PTrust->loc              = PMaster->loc;
         PTrust->m_OwnerID.id     = PMaster->id;

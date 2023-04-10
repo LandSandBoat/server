@@ -9,22 +9,26 @@ require('scripts/globals/missions')
 require('scripts/globals/chocobo')
 require('scripts/missions/amk/helpers')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(521.922, 28.361, 747.85, 45)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-193, 71, 842, 117)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -39,23 +43,23 @@ zone_object.onZoneIn = function( player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 104 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local hour = VanadielHour()
 
     if hour < 5 or hour >= 17 then
@@ -64,12 +68,20 @@ zone_object.onGameHour = function(zone)
         local vran = GetMobByID(ID.mob.BENDIGEIT_VRAN)
         local time = os.time()
 
-        if phase >= 90 and not haty:isSpawned() and time > haty:getLocalVar("cooldown") then
+        if
+            phase >= 90 and
+            not haty:isSpawned() and
+            time > haty:getLocalVar("cooldown")
+        then
             SpawnMob(ID.mob.HATY)
-        elseif phase <= 10 and not vran:isSpawned() and time > vran:getLocalVar("cooldown") then
+        elseif
+            phase <= 10 and
+            not vran:isSpawned() and
+            time > vran:getLocalVar("cooldown")
+        then
             SpawnMob(ID.mob.BENDIGEIT_VRAN)
         end
     end
 end
 
-return zone_object
+return zoneObject

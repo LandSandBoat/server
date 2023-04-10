@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Raminey
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

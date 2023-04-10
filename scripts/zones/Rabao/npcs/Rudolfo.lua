@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Rudolfo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -3,14 +3,14 @@
 -- Scroll of Protect IV
 -- Teaches the white magic Protect IV
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(46)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(46)
 end
 
-return item_object
+return itemObject

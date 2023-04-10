@@ -10,7 +10,7 @@ require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
 local function pickSetPoint(instance)
     local chars        = instance:getChars()
@@ -42,6 +42,7 @@ local function pickSetPoint(instance)
         for i = xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES do
             table.insert(objective, i)
         end
+
         -- Only remove objectives if not the staging room or free floor
         if instance:getStage() ~= 0 and instance:getStage() ~= 6 then
             table.remove(objective, instance:getStage())
@@ -94,7 +95,7 @@ end
 local function lampsActivate(instance)
     local floorLayout    = instance:getLocalVar("Nyzul_Isle_FloorLayout")
     local lampsObjective = instance:getLocalVar("[Lamps]Objective")
-    local runicLamp_1    = GetNPCByID(ID.npc.RUNIC_LAMP_1, instance)
+    local runicLamp1     = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
     local partySize      = utils.clamp(instance:getLocalVar("partySize"), 3, 5)
     local lampPoints     = {}
 
@@ -107,20 +108,22 @@ local function lampsActivate(instance)
         local spawnPoint = math.random(1, #lampPoints)
 
         instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("partySize"))
-        runicLamp_1:setPos(lampPoints[spawnPoint])
-        runicLamp_1:setStatus(xi.status.NORMAL)
+        runicLamp1:setPos(lampPoints[spawnPoint])
+        runicLamp1:setStatus(xi.status.NORMAL)
+
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         local runicLamps = math.random(2, partySize - 1)
         instance:setLocalVar("[Lamp]count", runicLamps)
 
-        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
+        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
 
             GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
             table.remove(lampPoints, spawnPoint)
         end
+
     -- Lamp Objective: Activate in Order
     elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
         local runicLamps = math.random(2, 4)
@@ -133,7 +136,7 @@ local function lampsActivate(instance)
         instance:setLocalVar("[Lamp]count", runicLamps)
         instance:setLocalVar("[Lamp]lampRegister", 0)
 
-        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
+        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
             local lampRandom = math.random(1, #lampOrder)
 
@@ -362,7 +365,10 @@ local function pickMobs(instance)
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and instance:getLocalVar("Nyzul_Specified_Enemy") == 0 then
+                elseif
+                    instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
+                    instance:getLocalVar("Nyzul_Specified_Enemy") == 0
+                then
                     instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
                 end
 
@@ -378,21 +384,21 @@ local function pickMobs(instance)
 end
 
 -- Requirements for the first player registering the instance
-instance_object.registryRequirements = function(player)
+instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Requirements for further players entering an already-registered instance
-instance_object.entryRequirements = function(player)
+instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Called on the instance once it is created and ready
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
 end
 
 -- Once the instance is ready inform the requester that it's ready
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 
     -- Kill the Nyzul Isle update spam
@@ -404,7 +410,7 @@ instance_object.onInstanceCreatedCallback = function(player, instance)
 end
 
 -- When the player zones into the instance
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     player:messageName(ID.text.COMMENCE, player, 51)
@@ -414,12 +420,12 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 -- Instance "tick"
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed)
 end
 
 -- On fail
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     local chars = instance:getChars()
 
     for _, players in ipairs(chars) do
@@ -429,7 +435,7 @@ instance_object.onInstanceFailure = function(instance)
 end
 
 -- When something in the instance calls: instance:setProgress(...)
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
     if progress > 0 then
         if xi.nyzul.handleProgress(instance, progress) then
             xi.nyzul.activateRuneOfTransfer(instance)
@@ -438,12 +444,12 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 end
 
 -- On win
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
 end
 
 -- Standard event hooks, these will take priority over everything apart from m_event.Script
 -- Omitting this will fallthrough to the same calls in the Zone.lua
-instance_object.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option)
     if csid == 95 then
         local instance = player:getInstance()
 
@@ -453,7 +459,7 @@ instance_object.onEventUpdate = function(player, csid, option)
     end
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
     local chars    = instance:getChars()
 
@@ -471,4 +477,4 @@ instance_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return instance_object
+return instanceObject

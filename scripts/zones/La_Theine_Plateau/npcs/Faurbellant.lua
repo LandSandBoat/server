@@ -15,12 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
-    if (gates == QUEST_COMPLETED) then
+    if gates == QUEST_COMPLETED then
         player:showText(npc, ID.text.FAURBELLANT_4)
-    elseif (gates == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) == true) then
+    elseif gates == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) then
             player:showText(npc, ID.text.FAURBELLANT_2, 0, xi.ki.SCRIPTURE_OF_WIND)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WIND)
             player:addKeyItem(xi.ki.SCRIPTURE_OF_WATER)
@@ -31,7 +30,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.FAURBELLANT_1)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

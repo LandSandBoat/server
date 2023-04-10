@@ -6,14 +6,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MUTE
     local power = 30
     local duration = 75
@@ -23,4 +23,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

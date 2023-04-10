@@ -7,14 +7,14 @@
 -----------------------------------
 require("scripts/globals/automaton")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.automaton.onManeuverCheck(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     return xi.automaton.onUseManeuver(player, target, ability, action)
 end
 
-return ability_object
+return abilityObject

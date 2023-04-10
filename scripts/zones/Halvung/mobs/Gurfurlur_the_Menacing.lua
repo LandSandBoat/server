@@ -19,16 +19,16 @@ end
 entity.onMobFight = function(mob, target)
     if mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10 then
         if not GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 1):isSpawned() then
-            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 1):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 1):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
             SpawnMob(ID.mob.GURFURLUR_THE_MENACING + 1):updateEnmity(target)
         elseif not GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 2):isSpawned() then
-            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 2):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 2):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
             SpawnMob(ID.mob.GURFURLUR_THE_MENACING + 2):updateEnmity(target)
         elseif not GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 3):isSpawned() then
-            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 3):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 3):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
             SpawnMob(ID.mob.GURFURLUR_THE_MENACING + 3):updateEnmity(target)
         elseif not GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 4):isSpawned() then
-            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 4):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+            GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 4):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
             SpawnMob(ID.mob.GURFURLUR_THE_MENACING + 4):updateEnmity(target)
         end
     end

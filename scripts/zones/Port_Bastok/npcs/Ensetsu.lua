@@ -21,12 +21,14 @@ entity.onTrigger = function(player, npc)
     local ayameAndKaede = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
 
     if ayameAndKaede == QUEST_ACCEPTED then
-
         local questStatus = player:getCharVar("AyameAndKaede_Event")
 
-        if (questStatus == 1 or questStatus == 2) and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) == false then
+        if
+            (questStatus == 1 or questStatus == 2) and
+            not player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL)
+        then
             player:startEvent(242)
-        elseif questStatus == 2 and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) == true then
+        elseif questStatus == 2 and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) then
             player:startEvent(245)
         elseif questStatus == 3 then
             player:startEvent(243)
@@ -35,13 +37,19 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(27)
         end
-    elseif ayameAndKaede == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE then
+    elseif
+        ayameAndKaede == QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE
+    then
         player:startEvent(247)
     elseif player:getCharVar("twentyInPirateYearsCS") == 2 then
         player:startEvent(262)
     elseif player:getCharVar("twentyInPirateYearsCS") == 4 then
         player:startEvent(263)
-    elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 0 then
+    elseif
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and
+        player:getCharVar("illTakeTheBigBoxCS") == 0
+    then
         player:startEvent(264)
     elseif player:getCharVar("illTakeTheBigBoxCS") == 1 then
         player:startEvent(265)

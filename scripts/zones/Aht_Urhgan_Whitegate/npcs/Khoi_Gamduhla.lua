@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Khoi Gamduhla
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

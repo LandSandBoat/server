@@ -9,22 +9,23 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-  if (mob:getFamily() == 91) then
-    local mobSkin = mob:getModelId()
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getFamily() == 91 then
+        local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1680) then
-        return 0
-    else
-        return 1
+        if mobSkin == 1680 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_DOWN
 
     local silenced = false
@@ -37,9 +38,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display silenced first, else blind
-    if (silenced == xi.msg.basic.SKILL_ENFEEB_IS) then
+    if silenced == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.DEFENSE_DOWN
-    elseif (blinded == xi.msg.basic.SKILL_ENFEEB_IS) then
+    elseif blinded == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.MAGIC_DEF_DOWN
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
@@ -48,4 +49,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

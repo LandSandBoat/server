@@ -6,21 +6,22 @@
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     -- Need retail verification: Is having set foot in the zone a requirement?
-    if not target:isZoneVisited(162) then
+    if not target:hasVisitedZone(162) then
         result = 56
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     -- May need a retail capture to verify actual position
     -- https://ffxiclopedia.fandom.com/wiki/Shadow_Lord_Shirt states teleports next to HP#1
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.ZVAHL_KEEP, 0, 4)
 end
 
-return item_object
+return itemObject

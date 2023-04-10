@@ -124,7 +124,7 @@ namespace charutils
     bool   EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
     void   CheckUnarmedWeapon(CCharEntity* PChar);
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
-    void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem);
+    void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
@@ -160,9 +160,9 @@ namespace charutils
     int32 addPetAbility(CCharEntity* PChar, uint16 AbilityID);
     int32 delPetAbility(CCharEntity* PChar, uint16 AbilityID);
 
-    int32 hasTrait(CCharEntity* PChar, uint8 TraitID); // check if pchar has trait by traitid and jobid
-    int32 addTrait(CCharEntity* PChar, uint8 TraitID); // add trait by traitid and jobid
-    int32 delTrait(CCharEntity* PChar, uint8 TraitID); // delete trait by traitid and jobid
+    int32 hasTrait(CCharEntity* PChar, uint16 TraitID); // check if pchar has trait by traitid and jobid
+    int32 addTrait(CCharEntity* PChar, uint16 TraitID); // add trait by traitid and jobid
+    int32 delTrait(CCharEntity* PChar, uint16 TraitID); // delete trait by traitid and jobid
 
     int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
@@ -209,7 +209,11 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar);
 
-    void OpenSendBox(CCharEntity* PChar);
+    void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    bool isSendBoxOpen(CCharEntity* PChar);
+    bool isRecvBoxOpen(CCharEntity* PChar);
+    bool isAnyDeliveryBoxOpen(CCharEntity* PChar);
 
     bool CheckAbilityAddtype(CCharEntity* PChar, CAbility* PAbility);
 

@@ -297,7 +297,6 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     if (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIKAGE) && m_attacker->m_Weapons[SLOT_MAIN]->getID() == PWeapon->getID())
     {
         auto shadows = (uint8)m_attacker->getMod(Mod::UTSUSEMI);
-        // ShowDebug(CL_CYAN"Create Attacks: Mikage Active, Rolling Attack Chance for %d Shadowss...", shadows);
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, shadows);
     }
     // Quad/Triple/Double Attack

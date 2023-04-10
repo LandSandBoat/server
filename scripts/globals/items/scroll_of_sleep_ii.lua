@@ -3,14 +3,14 @@
 -- Scroll of Sleep II
 -- Teaches the black magic Sleep II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(259)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(259)
 end
 
-return item_object
+return itemObject

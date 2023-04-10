@@ -21,8 +21,9 @@ ATTACKED - Defender, attacker, action
 DISENGAGE - Entity
 DEATH - Entity, optionalKiller
 DESPAWN - Entity
-
+DEFEATED_MOB - Mob, Attacker, optParams (Note: optParams is the same table in onMobDeath)
 EXPERIENCE_POINTS - Entity, exp
+ITEM_DROPS - Entity, Loot
 
 TAKE_DAMAGE - Entity, amount, optionalAttacker, attackType, damageType
 CRITICAL_TAKE - Target, Attacker

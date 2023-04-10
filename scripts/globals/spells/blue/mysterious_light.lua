@@ -16,21 +16,18 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.ARCANA
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WIND
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
+    params.attribute = xi.mod.CHR
     params.multiplier = 2.0
     params.tMultiplier = 1.0
     params.duppercap = 56
@@ -42,16 +39,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.3
 
-    local resist = applyResistance(caster, target, spell, params)
-    local damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.addedEffect = xi.effect.WEIGHT
+    local power = 25
+    local tick = 0
+    local duration = 60
 
-    if (damage > 0 and resist > 0.0625) then
-        target:delStatusEffect(xi.effect.WEIGHT)
-        target:addStatusEffect(xi.effect.WEIGHT, 4, 0, getBlueEffectDuration(caster, resist, xi.effect.WEIGHT))
-    end
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

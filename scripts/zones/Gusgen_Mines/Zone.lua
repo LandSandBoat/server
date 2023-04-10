@@ -6,37 +6,41 @@ require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(100.007, -61.63, -237.441, 187)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(45, -67, -340, 250)
     end
 
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local totd = VanadielTOTD()
 
     if totd == xi.time.NEW_DAY or totd == xi.time.MIDNIGHT then
@@ -60,4 +64,4 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-return zone_object
+return zoneObject

@@ -438,7 +438,7 @@ local augs =
 -------------------------------------------------------------------------------
 -- This table reduces the total number of augments available by chest tier.
 -- removes total from right to left
--- so { 5,4,3,2,0 },
+-- so { 5, 4, 3, 2, 0 },
 -- will decrease the total augments available for tier 1 chest by 5,
 -- tier 2 by 4, tier 3 by 3 and tier 4 by 2, leaving the full total for tier 5
 -------------------------------------------------------------------------------
@@ -512,7 +512,7 @@ local function GetAugment(npc, itemid, slot)
         randLimit = 80
     end
 
-    if math.random(100) > randLimit then
+    if math.random(1, 100) > randLimit then
         secondAugment = true
     end
 
@@ -532,7 +532,7 @@ local function GetAugment(npc, itemid, slot)
     npc:setLocalVar("ITEM" .. slot .. "AUG1VAL", multival1 - 1)
 
     if secondAugment then
-        randaugment2 = math.random(1,#augs[itemid].augments - augTierDeduction[itemid][tier])
+        randaugment2 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
 
         if randaugment2 == randaugment1 then
             randaugment2 = 0
@@ -544,7 +544,7 @@ local function GetAugment(npc, itemid, slot)
             multival2 = math.random(aug2.min, aug2.max)
 
             if multival2 > 1 then
-                augment2 = bit.bor(aug2.aug,bit.lshift(multival2 -1 ,11))
+                augment2 = bit.bor(aug2.aug, bit.lshift(multival2 - 1, 11))
             else
                 augment2 = aug2.aug
             end
@@ -580,7 +580,7 @@ local function GiveAugItem(player, npc, slot)
                 player:messageSpecial(zones[zoneId].text.ITEM_CANNOT_BE_OBTAINED, item1)
                 return 0
             elseif player:getFreeSlotsCount() > 0 then
-                    if (GetAugItemID(npc,1) ~= 0) then
+                    if GetAugItemID(npc, 1) ~= 0 then
                     player:addItem(item1, 1, item1aug1, item1aug1val, item1aug2, item1aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item1, 0, 0, 0)
                     npc:setLocalVar("ITEM1ID", 0)
@@ -596,8 +596,8 @@ local function GiveAugItem(player, npc, slot)
                 player:messageSpecial(zones[zoneId].text.ITEM_CANNOT_BE_OBTAINED, item2)
                 return 0
             elseif player:getFreeSlotsCount() > 0 then
-                    if GetAugItemID(npc,2) ~= 0 then
-                    player:addItem(item2,1,item2aug1,item2aug1val,item2aug2,item2aug2val)
+                    if GetAugItemID(npc, 2) ~= 0 then
+                    player:addItem(item2, 1, item2aug1, item2aug1val, item2aug2, item2aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item2, 0, 0, 0)
                     npc:setLocalVar("ITEM2ID", 0)
                 end
@@ -624,15 +624,14 @@ xi.pyxis.augItem.setAugmentItems = function(npc, tier)
     local chestid = npc:getLocalVar("CHESTID")
     local chest   = GetNPCByID(chestid)
 
-    npc:setLocalVar("ITEM1ID",item1)
+    npc:setLocalVar("ITEM1ID", item1)
     GetAugment(chest, item1, 1)
     if item2 > 0 then
-        npc:setLocalVar("ITEM1ID",item1)
+        npc:setLocalVar("ITEM1ID", item1)
         GetAugment(chest, item1, 1)
-        npc:setLocalVar("ITEM2ID",item2)
+        npc:setLocalVar("ITEM2ID", item2)
         GetAugment(chest, item2, 2)
     end
-
 end
 
 xi.pyxis.augItem.updateEvent = function(player, npc)

@@ -21,9 +21,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MEVA, 95)
     mob:addMod(xi.mod.MDEF, 30)
-    mob:addMod(xi.mod.SILENCERES, 20)
-    mob:addMod(xi.mod.GRAVITYRES, 20)
-    mob:addMod(xi.mod.LULLABYRES, 30)
+    mob:addMod(xi.mod.SILENCE_MEVA, 20)
+    mob:addMod(xi.mod.GRAVITY_MEVA, 20)
+    mob:addMod(xi.mod.LULLABY_MEVA, 30)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
@@ -67,7 +67,7 @@ entity.onMobFight = function(mob, target)
 
     -- Regens 1% of his HP a tick with Blaze Spikes on
     if mob:hasStatusEffect(xi.effect.BLAZE_SPIKES) then
-        mob:setMod(xi.mod.REGEN, math.floor(mob:getMaxHP()/100))
+        mob:setMod(xi.mod.REGEN, math.floor(mob:getMaxHP() / 100))
     else
         if mob:getMod(xi.mod.REGEN) > 0 then
             mob:setMod(xi.mod.REGEN, 0)

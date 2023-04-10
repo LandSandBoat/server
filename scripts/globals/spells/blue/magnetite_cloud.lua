@@ -16,43 +16,31 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.EARTH
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
+    params.diff = 0 -- no stat increases magic accuracy
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    params.multiplier = 2.0
-    params.tMultiplier = 1.0
-    params.duppercap = 56
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.2
+    params.hpMod = 6
+    params.lvlMod = 1.875
 
-    local resist = applyResistance(caster, target, spell, params)
-    local damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, true)
+    local damage = results[1]
+    local resist = results[2]
 
-    if (damage > 0 and resist > 0.0625) then
-        local typeEffect = xi.effect.WEIGHT
-        target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
+    if resist >= 0.5 then
+        target:addStatusEffect(xi.effect.WEIGHT, 25, 0, 60 * resist)
     end
 
     return damage
 end
 
-return spell_object
+return spellObject

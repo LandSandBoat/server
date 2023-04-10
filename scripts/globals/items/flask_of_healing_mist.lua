@@ -6,16 +6,16 @@
 require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:forMembersInRange(10, function(member)
-        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, member:addHP(600*xi.settings.main.ITEM_POWER))
+        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, member:addHP(600 * xi.settings.main.ITEM_POWER))
     end)
 end
 
-return item_object
+return itemObject

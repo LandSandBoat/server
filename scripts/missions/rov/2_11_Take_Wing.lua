@@ -27,9 +27,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [5] = function(player, region)
+                [5] = function(player, triggerArea)
                     local hasCompletedPath = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) and 1 or 0
 
                     return mission:progressEvent(168, { [0] = hasCompletedPath, text_table = 0 })

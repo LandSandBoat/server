@@ -68,7 +68,7 @@ end
 entity.onEventFinish = function(player, csid, option, target)
     if csid == 32004 then
         DespawnMob(target:getID())
-        local mob = SpawnMob(target:getID()+1)
+        local mob = SpawnMob(target:getID() + 1)
         local bcnmAllies = mob:getBattlefield():getAllies()
         for i, v in pairs(bcnmAllies) do
             v:resetLocalVars()
@@ -76,7 +76,6 @@ entity.onEventFinish = function(player, csid, option, target)
             v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
         end
     end
-
 end
 
 return entity

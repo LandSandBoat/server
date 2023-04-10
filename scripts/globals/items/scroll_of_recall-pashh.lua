@@ -3,14 +3,14 @@
 -- Scroll of Recall-Pashh
 -- Teaches the white magic Recall-Pashh
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(82)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(82)
 end
 
-return item_object
+return itemObject

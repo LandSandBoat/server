@@ -51,7 +51,12 @@ entity.onEventFinish = function(player, csid, option)
         local info = limbusArmor[player:getLocalVar("wilhelmTrade")]
         player:setLocalVar("wilhelmTrade", 0)
 
-        if info and info.csid == csid and info.reward == option and npcUtil.giveItem(player, option) then
+        if
+            info and
+            info.csid == csid and
+            info.reward == option and
+            npcUtil.giveItem(player, option)
+        then
             player:confirmTrade()
         end
     end

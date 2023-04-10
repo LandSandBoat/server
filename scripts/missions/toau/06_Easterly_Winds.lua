@@ -39,9 +39,9 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(10094)
                 end,
             },

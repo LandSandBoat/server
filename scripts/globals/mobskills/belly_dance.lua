@@ -12,14 +12,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     --[[
     power = 1
     tic = 0
@@ -30,8 +29,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     statmod = xi.mod.INT
 
     resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
-    if (resist > 0.2) then
-        if (target:getStatusEffect(typeEffect) == nil) then
+    if resist > 0.2 then
+        if target:getStatusEffect(typeEffect) == nil then
             skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
             target:addStatusEffect(typeEffect, power, tic, duration)
         else
@@ -40,8 +39,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
+
     return typeEffect
     ]]
 end
 
-return mobskill_object
+return mobskillObject

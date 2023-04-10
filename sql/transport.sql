@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `time_anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `zone` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `transport`
@@ -49,8 +49,8 @@ INSERT INTO `transport` VALUES(11, 'Mhaura-Whitegate_Boat', 17797182, 17797181, 
 INSERT INTO `transport` VALUES(12, 'Whitegate-Mhaura_Boat', 16982046, 16982044, -20.726, 3.389, -154.231, 0, 569, 18, 19, 142, 480, 18, 80, 16, 47);
 INSERT INTO `transport` VALUES(13, 'Whitegate-Nashmau_Boat', 16982046, 16982045, 20.726, 3.389, 154.231, 128, 570, 20, 21, 282, 480, 18, 180, 17, 58);
 INSERT INTO `transport` VALUES(14, 'Nashmau-Whitegate_Boat', 16994327, 16994326, 3.24, 3.389, -114.221, 0, 571, 22, 23, 282, 480, 18, 180, 16, 59);
-INSERT INTO `transport` VALUES(15, 'Manaclip_Bibiki-Tours', 16793913, 16793914, 491.500, 0.000, 687.400, 128, 0, 18, 19, 710,720, 20, 40, 20, 3);
-INSERT INTO `transport` VALUES(16, 'Manaclip_Bibiki-Purgonorgo', 16793913, 16793914, 491.500, 0.000, 687.400, 128, 0, 18, 19, 270, 720, 20, 40, 20, 3);
-INSERT INTO `transport` VALUES(17, 'Manaclip_Purgonorgo-Bibiki', 16793913, 16793915, -392.000, 0.000, -364.000, 128, 0, 20, 21, 500, 720, 20, 40, 20, 3);
+INSERT INTO `transport` VALUES(15, 'Manaclip_Bibiki-Tours', 16793983, 16793984, 491.500, 0.000, 687.400, 128, 0, 18, 19, 710,720, 20, 40, 20, 3);
+INSERT INTO `transport` VALUES(16, 'Manaclip_Bibiki-Purgonorgo', 16793983, 16793984, 491.500, 0.000, 687.400, 128, 0, 18, 19, 270, 720, 20, 40, 20, 3);
+INSERT INTO `transport` VALUES(17, 'Manaclip_Purgonorgo-Bibiki', 16793983, 16793985, -392.000, 0.000, -364.000, 128, 0, 20, 21, 500, 720, 20, 40, 20, 3);
 INSERT INTO `transport` VALUES(18, 'Selbina-Mhaura_Boat_Pirates', 17793088, 17793087, 9.294, 0.000, -69.775, 0, 485, 18, 19, 382, 480, 18, 80, 17, 227);
 INSERT INTO `transport` VALUES(19, 'Mhaura-Selbina_Boat_Pirates', 17797182, 17797181, -0.516, 0.026, -8.409, 0, 493, 18, 19, 382, 480, 18, 80, 17, 228);

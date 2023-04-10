@@ -128,6 +128,16 @@ public:
     void setRotation(uint8 rotation);
     void setOrder(uint8 order);
 
+    void  setMannequinRace(uint8 race);
+    uint8 getMannequinRace();
+    void  setMannequinPose(uint8 pose);
+    uint8 getMannequinPose();
+
+    void setOn2ndFloor(bool on2ndFloor);
+    bool getOn2ndFloor();
+
+    bool isGardeningPot();
+
 private:
     uint8  m_storage;
     uint16 m_moghancement;

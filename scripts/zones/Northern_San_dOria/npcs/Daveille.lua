@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Daveille
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

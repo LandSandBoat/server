@@ -31,7 +31,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobid = mob:getID()
 
-    for member = mobid-5, mobid+2 do
+    for member = mobid-5, mobid + 2 do
         local m = GetMobByID(member)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
@@ -40,14 +40,20 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-
-    if (mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) > 0) then
+    if
+        mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
+        bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) > 0
+    then
         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 0)
         mob:setMobMod(xi.mobMod.SPAWN_LEASH, 0)
         mob:setSpellList(0)
     end
-    if (not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) == 0) then
+
+    if
+        not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
+        bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) == 0
+    then
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
         mob:setMobMod(xi.mobMod.SPAWN_LEASH, 22)

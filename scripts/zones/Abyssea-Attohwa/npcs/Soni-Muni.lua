@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Attohwa
 --  NPC: Soni-Muni
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

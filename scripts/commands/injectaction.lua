@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     -- validate actionId
-    if (actionId == nil) then
+    if actionId == nil then
         error(player, "You must provide an action ID.")
         return
     end

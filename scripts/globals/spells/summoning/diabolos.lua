@@ -9,9 +9,9 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/avatars_favor")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
     elseif caster:hasPet() then
@@ -19,10 +19,11 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     elseif caster:getObjType() == xi.objType.PC then
         return xi.summon.avatarMiniFightCheck(caster)
     end
+
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     xi.pet.spawnPet(caster, xi.pet.id.DIABOLOS)
 
     if caster:hasStatusEffect(xi.effect.AVATARS_FAVOR) then
@@ -35,4 +36,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return 0
 end
 
-return spell_object
+return spellObject

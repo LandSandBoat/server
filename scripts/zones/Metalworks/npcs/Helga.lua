@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Helga
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

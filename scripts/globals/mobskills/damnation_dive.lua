@@ -11,22 +11,25 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 -----------------------------------
 -- onMobSkillCheck
 -- Check for Grah Family id 122, 123, 124
 -- if not in Bird form, then ignore.
 -----------------------------------
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if ((mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and mob:getAnimationSub() ~= 3) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if
+        (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and
+        mob:getAnimationSub() ~= 3
+    then
         return 1
     else
         return 0
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = .8
@@ -40,4 +43,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

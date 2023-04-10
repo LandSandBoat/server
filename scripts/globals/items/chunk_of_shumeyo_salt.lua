@@ -8,9 +8,9 @@ require("scripts/globals/status")
 require("scripts/globals/player")
 local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck= function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     local id = target:getID()
     local checkID = true
@@ -30,7 +30,7 @@ item_object.onItemCheck= function(target, player)
     return result
 end
 
-item_object.onItemUse = function(target, player)
+itemObject.onItemUse = function(target, player)
     local salt = target:getLocalVar("salty")
 
     player:messageText(player, ID.text.BEGINS_TO_MELT)
@@ -43,4 +43,4 @@ item_object.onItemUse = function(target, player)
     end
 end
 
-return item_object
+return itemObject

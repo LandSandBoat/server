@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Sassa-Kotassa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

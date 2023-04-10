@@ -22,7 +22,7 @@ CREATE TABLE `mob_pool_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`poolid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -539,6 +539,9 @@ INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
 INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- SIGHT_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);  -- SOUND_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- LINK_RADIUS: 30
+
+-- Kaiser Behemoth (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (6732,3,100,1); -- MP_BASE: 100
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;

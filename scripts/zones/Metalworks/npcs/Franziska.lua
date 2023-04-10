@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Franziska
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

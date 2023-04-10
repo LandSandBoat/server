@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Volgoi
--- Type: Standard NPC
 -- !pos -154 4 -22 256
 -----------------------------------
 require("scripts/globals/missions")
@@ -13,13 +12,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
-    if ((soaMission >= xi.mission.id.soa.BEAUTY_AND_THE_BEAST) and (soaMission <= xi.mission.id.soa.SALVATION)) then
+
+    if
+        soaMission >= xi.mission.id.soa.BEAUTY_AND_THE_BEAST and
+        soaMission <= xi.mission.id.soa.SALVATION
+    then
         -- Speech while Arciela is 'kidnapped'
         player:startEvent(151)
-    else
-        -- Standard dialogue
-        player:startEvent(501)
-        -- Volgoi also has 579 associated with him, but it's the exact same dialogue
     end
 end
 

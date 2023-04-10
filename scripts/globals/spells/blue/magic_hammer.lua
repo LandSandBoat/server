@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Magic Hammer
--- Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead
+-- Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead.
 -- Spell cost: 40 MP
 -- Monster Type: Beastmen
 -- Spell Type: Magical (Light)
@@ -24,25 +24,20 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local dmg = 0
-    local multi = 1.5
-
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
-        multi = multi + 0.50
-    end
-
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHT
-    params.multiplier = multi
+    params.attribute = xi.mod.MND
+    params.multiplier = 1.5
+    params.azureBonus = 0.5
     params.tMultiplier = 1.0
     params.duppercap = 35
     params.str_wsc = 0.0
@@ -50,25 +45,27 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.vit_wsc = 0.0
     params.agi_wsc = 0.0
     params.int_wsc = 0.0
-    params.mnd_wsc = 0.30
+    params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
 
-    if (target:isUndead()) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
+    local damage = 0
+    if target:isUndead() then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        dmg = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
-        dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
-        if (target:getMP() > 0) then
-            if (target:getMP() < dmg) then
-                dmg = target:getMP()
-            end
-            caster:addMP(dmg)
+        damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+
+        local mpDrained = utils.clamp(damage, 0, target:getMP())
+        if mpDrained == 0 then
+            spell:setMsg(xi.msg.basic.MAGIC_DMG)
         else
-            return 0
+            damage = mpDrained
+            caster:addMP(damage)
+            target:delMP(damage)
+            spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP)
         end
     end
 
-    return dmg
+    return damage
 end
 
-return spell_object
+return spellObject

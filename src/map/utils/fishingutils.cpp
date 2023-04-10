@@ -1298,7 +1298,6 @@ namespace fishingutils
         }
 
         return (dx * dx + dz * dz <= radius * radius);
-        // return true;
     }
 
     fishingarea_t* GetFishingArea(CCharEntity* PChar)
@@ -1460,17 +1459,11 @@ namespace fishingutils
 
     int32 CatchNothing(CCharEntity* PChar, uint8 FailType)
     {
-        uint16 MessageOffset = GetMessageOffset(PChar->getZone());
+        uint16 messageOffset = GetMessageOffset(PChar->getZone());
         PChar->animation     = ANIMATION_FISHING_STOP;
         PChar->updatemask |= UPDATE_HP;
 
-        switch (FailType)
-        {
-            case FISHINGFAILTYPE_NONE:
-            default:
-                PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_NOCATCH));
-                break;
-        }
+        PChar->pushPacket(new CMessageTextPacket(PChar, messageOffset + FISHMESSAGEOFFSET_NOCATCH));
 
         return 1;
     }
@@ -1612,7 +1605,7 @@ namespace fishingutils
 
         // PMob->SetLocalVar("QuestBattleID", PChar->GetLocalVar("QuestBattleID"));
         // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
-        if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->m_Detects & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
+        if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
         {
             PMob->PEnmityContainer->AddBaseEnmity(PChar);
             battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);
@@ -1902,7 +1895,7 @@ namespace fishingutils
 
         if (PChar->hookedFish != nullptr)
         {
-            delete PChar->hookedFish;
+            destroy(PChar->hookedFish);
             PChar->hookedFish = nullptr;
         }
 
@@ -1950,7 +1943,8 @@ namespace fishingutils
         if (FishingAreaID > 0)
         {
             PChar->fishingToken = 1 + xirand::GetRandomNumber(9999);
-            delete PChar->hookedFish;
+            destroy(PChar->hookedFish);
+
             PChar->hookedFish              = new fishresponse_t();
             PChar->hookedFish->hooked      = false;
             PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
@@ -2655,7 +2649,7 @@ namespace fishingutils
 
                 if (PChar->hookedFish != nullptr)
                 {
-                    delete PChar->hookedFish;
+                    destroy(PChar->hookedFish);
                     PChar->hookedFish = nullptr;
                 }
 
@@ -2762,7 +2756,7 @@ namespace fishingutils
 
                         if (response != nullptr)
                         {
-                            delete response;
+                            destroy(response);
                             response = nullptr;
                         }
                     }
@@ -2855,7 +2849,7 @@ namespace fishingutils
                         }
                     }
 
-                    delete PChar->hookedFish;
+                    destroy(PChar->hookedFish);
                     PChar->hookedFish = nullptr;
                 }
 
@@ -2865,8 +2859,6 @@ namespace fishingutils
 
             break;
         }
-        // PChar->pushPacket(new CCharUpdatePacket(PChar));
-        // PChar->pushPacket(new CCharSyncPacket(PChar));
     }
 
     /************************************************************************

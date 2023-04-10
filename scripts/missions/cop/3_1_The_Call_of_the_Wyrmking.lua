@@ -48,9 +48,9 @@ mission.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 1 then
                         return mission:progressEvent(305)
                     end

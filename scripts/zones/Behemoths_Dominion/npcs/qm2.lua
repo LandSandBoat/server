@@ -5,6 +5,7 @@
 -- !pos -267 -19 74 127
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
@@ -14,10 +15,19 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if not GetMobByID(ID.mob.BEHEMOTH):isSpawned() and not GetMobByID(ID.mob.KING_BEHEMOTH):isSpawned() then
-        if npcUtil.tradeHasExactly(trade, 3341) and npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH) then
+    if
+        not GetMobByID(ID.mob.BEHEMOTH):isSpawned() and
+        not GetMobByID(ID.mob.KING_BEHEMOTH):isSpawned()
+    then
+        if
+            npcUtil.tradeHasExactly(trade, xi.items.BEASTLY_SHANK) and
+            npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH)
+        then
             player:confirmTrade()
-        elseif npcUtil.tradeHasExactly(trade, 3342) and npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH) then
+        elseif
+            npcUtil.tradeHasExactly(trade, xi.items.SAVORY_SHANK) and
+            npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH)
+        then
             player:confirmTrade()
         end
     end

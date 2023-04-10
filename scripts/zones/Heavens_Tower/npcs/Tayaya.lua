@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Tayaya
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

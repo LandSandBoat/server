@@ -7,15 +7,15 @@
 -----------------------------------
 require("scripts/globals/job_utils/dragoon")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     xi.job_utils.dragoon.useFlyHigh(player, target, ability)
 end
 
-return ability_object
+return abilityObject

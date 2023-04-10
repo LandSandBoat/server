@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Etteh Sulaej
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

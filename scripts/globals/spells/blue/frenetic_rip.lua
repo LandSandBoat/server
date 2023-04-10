@@ -9,32 +9,32 @@
 -- Level: 63
 -- Casting Time: 0.5 seconds
 -- Recast Time: 28.5 seconds
--- Skillchain Element: Ice (can open Impaction, Compression, or Fragmentation can close Induration)
+-- Skillchain Element: Induration
 -- Combos: Accuracy Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.DEMON
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.BLUNT
+    params.damageType = xi.damageType.H2H
     params.scattr = SC_INDURATION
     params.numhits = 3
     params.multiplier = 1.36
     params.tp150 = 2.08
     params.tp300 = 2.36
     params.azuretp = 2.61
-    params.duppercap = 75 -- D upper >=69
+    params.duppercap = 75
     params.str_wsc = 0.2
     params.dex_wsc = 0.2
     params.vit_wsc = 0.0
@@ -42,10 +42,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
-return spell_object
+return spellObject

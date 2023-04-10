@@ -20,17 +20,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "ability_state.h"
-#include "../../../common/utils.h"
-#include "../../ability.h"
-#include "../../enmity_container.h"
-#include "../../entities/charentity.h"
-#include "../../entities/mobentity.h"
-#include "../../packets/action.h"
-#include "../../recast_container.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/charutils.h"
-#include "../ai_container.h"
+
+#include "ability.h"
+#include "ai/ai_container.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "packets/action.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
 : CState(PEntity, targid)
@@ -104,11 +105,11 @@ bool CAbilityState::Update(time_point tick)
         {
             action_t action;
             m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), &action);
+            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
             if (auto* target = GetTarget())
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), &action);
+                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
             }
         }
         Complete();
@@ -139,6 +140,7 @@ bool CAbilityState::CanUseAbility()
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
             return false;
         }
+
         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
             (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) && (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x01 || PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x03)) ||
             (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA &&
@@ -159,11 +161,13 @@ bool CAbilityState::CanUseAbility()
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
                 return false;
             }
-            if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
+
+            if (m_PEntity->loc.zone->CanUseMisc(MISC_LOS_PLAYER_BLOCK) && !m_PEntity->CanSeeTarget(PTarget, false))
             {
                 m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, PAbility->getID(), 0, MSGBASIC_CANNOT_PERFORM_ACTION);
                 return false;
             }
+
             if (PAbility->getID() >= ABILITY_HEALING_RUBY)
             {
                 // Blood pact MP costs are stored under animation ID
@@ -173,6 +177,7 @@ bool CAbilityState::CanUseAbility()
                     return false;
                 }
             }
+
             CBaseEntity* PMsgTarget = PChar;
             int32        errNo      = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
             if (errNo != 0)

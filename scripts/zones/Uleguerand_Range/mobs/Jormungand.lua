@@ -1,59 +1,83 @@
 -----------------------------------
 -- Area: Uleguerand Range
---  HNM: Jormungand
+--  Mob: Jormungand
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-require("scripts/globals/status")
-require("scripts/globals/titles")
+local function setupFlightMode(mob, battleTime)
+    mob:setAnimationSub(1)
+    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+    mob:setMobSkillAttack(732)
+    mob:setLocalVar("changeTime", battleTime)
+end
+
+entity.onMobInitialize = function(mob)
+    mob:setCarefulPathing(true)
+end
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
-    mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
+    -- Reset animation so it starts grounded.
+    mob:setMobSkillAttack(0)
+    mob:setAnimationSub(0)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) == false and mob:actionQueueEmpty() == true) then
-        local changeTime = mob:getLocalVar("changeTime")
+    -- Animation (Ground or flight mode) logic.
+    if
+        not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
+        mob:actionQueueEmpty()
+    then
+        local changeTime  = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
+        local battleTime  = mob:getBattleTime()
+        local animation   = mob:getAnimationSub()
 
-        if (twohourTime == 0) then
+        if twohourTime == 0 then
             twohourTime = math.random(8, 14)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if (mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime) then
-            mob:useMobAbility(695)
-            mob:setLocalVar("twohourTime", (mob:getBattleTime()/15)+20)
-        elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
-            mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
-            -- and record the time this phase was started
-            mob:setLocalVar("changeTime", mob:getBattleTime())
-        -- subanimation 1 is flight, so check if he should land
-        elseif (mob:getAnimationSub() == 1 and
-                mob:getBattleTime() - changeTime > 30) then
-            mob:useMobAbility(1292)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
-        -- subanimation 2 is grounded mode, so check if he should take off
-        elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60) then
-            mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+        -- Initial grounded mode.
+        if
+            animation == 0 and
+            battleTime - changeTime > 60
+        then
+            setupFlightMode(mob, battleTime)
+
+        -- Flight mode.
+        elseif
+            animation == 1 and
+            battleTime - changeTime > 30 and
+            not hasSleepEffects(mob) and mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
+        then
+            mob:useMobAbility(1292) -- This ability also handles animation change to 2.
+
+            mob:setLocalVar("changeTime", battleTime)
+
+        -- Subsequent grounded mode.
+        elseif animation == 2 then
+            if battleTime / 15 > twohourTime then -- 2-Hour logic.
+                mob:useMobAbility(695)
+                mob:setLocalVar("twohourTime", battleTime / 15 + 20)
+
+            elseif battleTime - changeTime > 60 then -- Change mode.
+                setupFlightMode(mob, battleTime)
+            end
         end
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if (skill:getID() == 1296 and mob:getHPP() <= 30) then
+    if skill:getID() == 1296 and mob:getHPP() <= 30 then
         local roarCounter = mob:getLocalVar("roarCounter")
 
-        roarCounter = roarCounter +1
+        roarCounter = roarCounter + 1
         mob:setLocalVar("roarCounter", roarCounter)
 
-        if (roarCounter > 2) then
+        if roarCounter > 2 then
             mob:setLocalVar("roarCounter", 0)
         else
             mob:useMobAbility(1296)

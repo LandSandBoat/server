@@ -175,9 +175,13 @@ xi.pyxis.tempItem.giveTemporaryItems = function(npc, player)
     local alliance = player:getAlliance()
 
     for i = 1, #drops[tier] do
-        local item = drops[tier][math.random(1,#drops[tier])]
+        local item = drops[tier][math.random(1, #drops[tier])]
         for p, member in ipairs(alliance) do
-            if member:isPC() and not member:hasItem(item,3) and member:getZoneID() == player:getZoneID() then
+            if
+                member:isPC() and
+                not member:hasItem(item, 3) and
+                member:getZoneID() == player:getZoneID()
+            then
                 member:addTempItem(item, 1, 0, 0, 0, 0, 0, 0, 0, 0)
             end
         end

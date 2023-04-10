@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, msgId, param1, param2)
     -- validate msgId
-    if (msgId == nil) then
+    if msgId == nil then
         error(player, "You must provide a message ID.")
         return
     end

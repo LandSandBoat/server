@@ -6,17 +6,17 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     target:delStatusEffect(xi.effect.BLINK)
     target:addStatusEffect(xi.effect.BLINK, 3, 0, 900)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return xi.effect.BLINK
 end
 
-return ability_object
+return abilityObject

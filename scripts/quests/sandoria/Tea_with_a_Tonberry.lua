@@ -106,7 +106,10 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, 'Prog') == 1 and npcUtil.tradeHas(trade, xi.items.PIECE_OF_ATTOHWA_GINSENG) then
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        npcUtil.tradeHas(trade, xi.items.PIECE_OF_ATTOHWA_GINSENG)
+                    then
                         return quest:progressEvent(29)
                     end
                 end

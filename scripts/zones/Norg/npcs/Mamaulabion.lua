@@ -63,7 +63,6 @@ entity.onTrade = function(player, npc, trade)
                     player:startEvent(193) -- Traded an item
                 end
             end
-
         end
     end
 end
@@ -74,7 +73,11 @@ entity.onTrigger = function(player, npc)
     local evokersRing = player:hasItem(14625)
     local questday = player:getCharVar("MamaMia_date")
 
-    if mamaMia == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and moonlitPath == QUEST_COMPLETED then
+    if
+        mamaMia == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
+        moonlitPath == QUEST_COMPLETED
+    then
         player:startEvent(191) -- Start Quest "Mama Mia"
 
     elseif mamaMia == QUEST_ACCEPTED then
@@ -99,26 +102,21 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(93) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 191) then
+    if csid == 191 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
-
-    elseif (csid == 193) then
+    elseif csid == 193 then
         player:confirmTrade()
-
-    elseif (csid == 195) then
+    elseif csid == 195 then
         player:confirmTrade()
         player:setCharVar("MamaMia_date", getMidnight())
-
-    elseif (csid == 197) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 197 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14625) -- Evokers Ring
         else
             player:addItem(14625) -- Evokers Ring
@@ -127,9 +125,8 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar("tradesMamaMia", 0)
         end
-
-    elseif (csid == 243) then
-        if (option == 1) then
+    elseif csid == 243 then
+        if option == 1 then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
         end

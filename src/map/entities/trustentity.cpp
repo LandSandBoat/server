@@ -45,13 +45,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 : CMobEntity()
 {
-    objtype        = TYPE_TRUST;
-    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    allegiance     = ALLEGIANCE_TYPE::PLAYER;
-    m_MobSkillList = 0;
-    PMaster        = PChar;
-    m_MovementType = MELEE_RANGE;
-    m_IsClaimable  = false;
+    objtype                     = TYPE_TRUST;
+    m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
+    allegiance                  = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList              = 0;
+    PMaster                     = PChar;
+    m_MovementType              = MELEE_RANGE;
+    m_IsClaimable               = false;
+    m_bReleaseTargIDOnDisappear = true;
+    spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
@@ -115,7 +117,11 @@ void CTrustEntity::Spawn()
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 {
     auto* PAbility = state.GetAbility();
-    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget  = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PTarget)
+    {
+        return;
+    }
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -127,7 +133,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (battleutils::IsParalyzed(this))
         {
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
             return;
         }
 
@@ -156,7 +162,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.messageID       = PAbility->getMessage();
                 actionTarget.param           = 0;
 
-                int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+                int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
                 if (prevMsg == 0) // get default message for the first target
                 {
@@ -171,9 +177,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }
@@ -215,7 +223,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PTarget)
+    {
+        return;
+    }
 
     int32 damage      = 0;
     int32 totalDamage = 0;
@@ -514,7 +526,11 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
-    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PBattleTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PBattleTarget)
+    {
+        return;
+    }
 
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
@@ -529,6 +545,24 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
         else
         {
             PAI->TargetFind->findSingleTarget(PBattleTarget);
+        }
+
+        // Assumed, it's very difficult to produce this due to WS being nearly instant
+        // TODO: attempt to verify.
+        if (PAI->TargetFind->m_targets.size() == 0)
+        {
+            // No targets, perhaps something like Super Jump or otherwise untargetable
+            action.actiontype         = ACTION_MAGIC_FINISH;
+            action.actionid           = 28787; // Some hardcoded magic for interrupts
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.animation       = 0x1FC; // assumed
+            actionTarget.messageID       = 0;
+            actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+
+            return;
         }
 
         for (auto&& PTarget : PAI->TargetFind->m_targets)

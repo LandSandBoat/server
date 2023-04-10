@@ -55,9 +55,9 @@ mission.sections =
             ['Colti']           = mission:event(22),
             ['Neraf-Najiruf']   = mission:event(31):oncePerZone(),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(10048)
                     end

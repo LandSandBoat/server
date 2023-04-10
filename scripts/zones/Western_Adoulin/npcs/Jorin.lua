@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Jorin
--- Type: Standard NPC and Quest Giver
 -- Starts, Involved with, and Finishes Quest: 'The Old Man and the Harpoon'
 -- !pos 92 32 152 256
 -----------------------------------
@@ -16,20 +15,17 @@ end
 entity.onTrigger = function(player, npc)
     local tomath = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
 
-    if (tomath == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(xi.ki.EXTRAVAGANT_HARPOON)) then
+    if tomath == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.EXTRAVAGANT_HARPOON) then
             -- Finishing Quest: 'The Old Man and the Harpoon'
             player:startEvent(2542)
         else
             -- Dialgoue during Quest: 'The Old Man and the Harpoon'
             player:startEvent(2541)
         end
-    elseif (tomath == QUEST_AVAILABLE) then
+    elseif tomath == QUEST_AVAILABLE then
         -- Starts Quest: 'The Old Man and the Harpoon'
         player:startEvent(2540)
-    else
-        -- Standard dialogue
-        player:startEvent(560)
     end
 end
 
@@ -37,12 +33,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 2540) then
+    if csid == 2540 then
         -- Starting Quest: 'The Old Man and the Harpoon'
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
         player:addKeyItem(xi.ki.BROKEN_HARPOON)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BROKEN_HARPOON)
-    elseif (csid == 2542) then
+    elseif csid == 2542 then
         -- Finishing Quest: 'The Old Man and the Harpoon'
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
         player:addExp(500 * xi.settings.main.EXP_RATE)

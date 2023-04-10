@@ -6,14 +6,14 @@ require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
-    zone:registerRegion(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
-    zone:registerRegion(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
-    zone:registerRegion(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
-    zone:registerRegion(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
+zoneObject.onInitialize = function(zone)
+    zone:registerTriggerArea(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
+    zone:registerTriggerArea(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
+    zone:registerTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
+    zone:registerTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
+    zone:registerTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
     UpdateNMSpawnPoint(ID.mob.LIKHO)
     GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
@@ -33,48 +33,47 @@ zone_object.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-181.969, -35.542, 19.995, 254)
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
-    {
-        [1] = function (x)
-            player:startEvent(3) -- ports player to NW room of map 3
-        end,
+local teleportEventsByArea =
+{
+    [1] = 3, -- Teleports player to NW room of map 3
+    [2] = 2, -- Teleports player to SW room of map 3
+    [3] = 1, -- Teleports player to SE room of map 3
+    [4] = 0, -- Teleports player to NE room of map 3
+}
 
-        [2] = function (x)
-            player:startEvent(2) -- ports player to SW room of map 3
-        end,
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local areaId = triggerArea:GetTriggerAreaID()
 
-        [3] = function (x)
-            player:startEvent(1) -- ports player to SE room of map 3
-        end,
-
-        [4] = function (x)
-            player:startEvent(0) -- ports player to NE room of map 3
-        end,
-    }
+    if teleportEventsByArea[areaId] then
+        player:startEvent(teleportEventsByArea[areaId])
+    end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

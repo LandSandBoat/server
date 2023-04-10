@@ -16,16 +16,18 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
+    params.attribute = xi.mod.INT
     params.multiplier = 1.375
     params.tMultiplier = 1.0
     params.duppercap = 30
@@ -36,22 +38,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
+    params.addedEffect = xi.effect.BIND
+    local power = 1
+    local tick = 0
+    local duration = 30
 
-    if (damage > 0 and resist > 0.125) then
-        local typeEffect = xi.effect.BIND
-        target:delStatusEffect(typeEffect) -- Wiki says it can overwrite itself or other binds
-        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
-    end
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

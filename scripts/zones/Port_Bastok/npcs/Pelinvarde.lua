@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Pelinvarde
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

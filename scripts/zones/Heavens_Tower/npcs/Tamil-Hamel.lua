@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Tamil-Hamel
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

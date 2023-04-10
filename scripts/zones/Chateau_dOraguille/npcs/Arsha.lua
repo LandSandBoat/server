@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Arsha
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

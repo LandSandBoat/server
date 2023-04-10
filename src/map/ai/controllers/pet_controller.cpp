@@ -38,9 +38,9 @@ CPetController::CPetController(CPetEntity* _PPet)
 void CPetController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneIString(PPet->GetName());
+    TracyZoneString(PPet->GetName());
 
-    if (PPet->isCharmed && tick > PPet->charmTime)
+    if (PPet->shouldDespawn(tick))
     {
         petutils::DespawnPet(PPet->PMaster);
         return;
@@ -117,7 +117,8 @@ bool CPetController::TryDeaggro()
 
     // target is no longer valid, so wipe them from our enmity list
     if (PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PPet->loc.zone->GetID() ||
-        PPet->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect())
+        PPet->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
+        PPet->getBattleID() != PTarget->getBattleID())
     {
         return true;
     }

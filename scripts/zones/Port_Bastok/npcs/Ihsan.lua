@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Ihsan
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

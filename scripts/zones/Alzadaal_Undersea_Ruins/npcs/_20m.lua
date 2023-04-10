@@ -32,7 +32,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- NOTE: Entrance to Nyzul Isle is two daisy-chained events, so we handle this
     --       here as a special case
-    if csid == 405 and option == 1073741824 and player:getLocalVar("NYZUL_INSTANCE") == 1 then
+    if
+        csid == 405 and
+        option == 1073741824 and
+        player:getLocalVar("NYZUL_INSTANCE") == 1
+    then
         player:startEvent(116, 2) -- This means the event was force terminated. Loop into the entrance animation.
     elseif csid == 116 and option == 1 then
         -- TODO: Entrance message for registrant: "Commencing transport to Nyzul Isle"  This was not being hit

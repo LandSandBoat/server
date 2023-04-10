@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Pontaudarme
--- Type: Standard Info NPC
 -- !pos -51.628 -0.199 16.593 231
 -----------------------------------
 local entity = {}

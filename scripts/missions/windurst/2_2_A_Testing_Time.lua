@@ -48,12 +48,15 @@ local assessment = function(player, npc)
     local completed = player:hasCompletedMission(mission.areaId, mission.missionId)
 
     -- player took too long to speak under requirements in time, so they fail mission
-    if (completed == false and secondsPassed > 3456) or (completed and secondsPassed > 6912) then
+    if
+        (not completed and secondsPassed > 3456) or
+        (completed and secondsPassed > 6912)
+    then
         return mission:progressEvent(202)
     end
 
     -- handle the events for first-time doing the mission
-    if completed == false and secondsPassed > 3312 then
+    if not completed and secondsPassed > 3312 then
         local event = 198
 
         if killCount >= 35 then
@@ -63,6 +66,7 @@ local assessment = function(player, npc)
         elseif killCount >= 19 then
             event = 199
         end
+
         return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
     -- handle the events for repeating mission
     elseif completed and secondsPassed > 6768 then
@@ -73,6 +77,7 @@ local assessment = function(player, npc)
         elseif killCount >= 30 then
             event = 209
         end
+
         return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
     -- player hasn't waited long enough to be assessed
     else
@@ -81,8 +86,11 @@ local assessment = function(player, npc)
         elseif VanadielDayOfTheYear() == startDay + 1 then
             hoursPassed = VanadielHour() - startHour + 24
         else
-            if completed then hoursPassed = (24 - startHour) + VanadielHour() + 24
-            else hoursPassed = (24 - startHour) + VanadielHour(); end
+            if completed then
+                hoursPassed = (24 - startHour) + VanadielHour() + 24
+            else
+                hoursPassed = (24 - startHour) + VanadielHour()
+            end
         end
 
         if completed then

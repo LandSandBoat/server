@@ -1,22 +1,24 @@
 -----------------------------------
 --  ID: 13682
---  Ether Tank
---  When used, you will obtain one Ether
+--  Casaba Melon Tank
+--  When used, you will obtain a Melon Juice
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
-    target:addItem(4424, 1)
+itemObject.onItemUse = function(target)
+    target:addItem(xi.items.BOTTLE_OF_MELON_JUICE, 1)
 end
 
-return item_object
+return itemObject

@@ -14,9 +14,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER)
-        and player:getCharVar("sayItWithAHandbagCS") == 2
-        and npcUtil.tradeHasExactly(trade, { 2012, 850, 816 })
+        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) and
+        player:getCharVar("sayItWithAHandbagCS") == 2 and
+        npcUtil.tradeHasExactly(trade, { 2012, 850, 816 })
     then
         player:startEvent(910)
     end
@@ -28,8 +28,8 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
-        and player:getCharVar("sayItWithAHandbagBonusCS") == 1
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED and
+        player:getCharVar("sayItWithAHandbagBonusCS") == 1
     then
         player:startEvent(914)
     elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
@@ -42,9 +42,12 @@ entity.onTrigger = function(player, npc)
         end
     elseif sayItWithAHandbagCS == 2 then
         player:startEvent(909)
-    elseif player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) and sayItWithAHandbagCS == 1 then
+    elseif
+        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) and
+        sayItWithAHandbagCS == 1
+    then
         player:startEvent(908)
-    elseif xi.crafting.isGuildMember(player, 7) == 1 then
+    elseif xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(651, skillCap, skillLevel, 1, 239, player:getGil(), 0, 0, 0)
         else

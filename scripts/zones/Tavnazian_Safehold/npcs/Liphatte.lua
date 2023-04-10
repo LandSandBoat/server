@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Liphatte
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

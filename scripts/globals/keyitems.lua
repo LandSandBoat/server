@@ -3004,6 +3004,8 @@ xi.keyItem =
     RED_RAPTOR_COMPANION                     = 3102,
     IRON_GIANT_COMPANION                     = 3103,
     BYAKKO_COMPANION                         = 3104,
+    NOBLE_CHOCOBO_COMPANION                  = 3105,
+    IXION_COMPANION                          = 3106,
 
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,

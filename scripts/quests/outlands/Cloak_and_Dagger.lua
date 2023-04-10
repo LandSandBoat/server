@@ -45,7 +45,10 @@ quest.sections =
             onEventFinish =
             {
                 [279] = function(player, csid, option, npc)
-                    if player:hasItem(xi.items.DAGGER_OF_TRIALS) or npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS) then
+                    if
+                        player:hasItem(xi.items.DAGGER_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS)
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end

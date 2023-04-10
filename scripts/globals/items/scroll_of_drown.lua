@@ -3,14 +3,14 @@
 -- Scroll of Drown
 -- Teaches the black magic Drown
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(240)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(240)
 end
 
-return item_object
+return itemObject

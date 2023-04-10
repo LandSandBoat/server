@@ -14,15 +14,13 @@ end
 
 entity.onTrigger = function(player, npc)
     player:startEvent(606)  -- my brother always takes my sweets
---    player:startEvent(598)   --did nothing no speech or text
---    player:startEvent(945)    --black screen and hang
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 606) then
+    if csid == 606 then
         player:setCharVar("BrothersCS", 1)
     end
 end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Gwinar
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

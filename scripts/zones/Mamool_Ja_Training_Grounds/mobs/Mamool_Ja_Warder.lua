@@ -40,12 +40,18 @@ entity.onMobSkillTarget = function(target, mob, skill)
             local instance = mob:getInstance()
             for _, gateid in ipairs(ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].GATES) do
                 local gate = GetMobByID(gateid, instance)
-                if gate and gate:isAlive() and mob:checkDistance(gate) <= 10 and mob:isFacing(gate) then
+                if
+                    gate and
+                    gate:isAlive() and
+                    mob:checkDistance(gate) <= 10 and
+                    mob:isFacing(gate)
+                then
                     return gate
                 end
             end
         end
     end
+
     return target
 end
 

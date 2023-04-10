@@ -3,14 +3,14 @@
 -- Scroll of Bio
 -- Teaches the black magic Bio
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(230)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(230)
 end
 
-return item_object
+return itemObject

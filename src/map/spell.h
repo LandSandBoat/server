@@ -1051,44 +1051,45 @@ public:
     bool isSevere();          // damage spells that have severe effects like Death or Impact
     bool dealsDamage() const; // checks if the spell deals hp damage to target, this is relative to message
 
-    uint16      getTotalTargets() const;
-    SpellID     getID();
-    uint8       getJob(JOBTYPE JobID);
-    uint16      getMPCost() const;
-    uint32      getCastTime() const;
-    uint32      getRecastTime() const;
-    uint16      getValidTarget() const;
-    uint16      getAnimationID() const;
-    uint16      getAnimationTime() const;
-    SPELLGROUP  getSpellGroup();
-    SPELLFAMILY getSpellFamily();
-    uint8       getSkillType() const;
-    uint16      getZoneMisc() const;
-    uint8       getAOE() const;
-    uint16      getBase() const;
-    uint16      getElement() const;
-    float       getMultiplier() const;
-    uint16      getMessage() const;
-    uint16      getDefaultMessage();
-    uint16      getMagicBurstMessage() const;
-    uint16      getCE() const;
-    uint16      getVE() const;
-    uint32      getModifiedRecast() const;
-    float       getRadius() const;
-    uint16      getAoEMessage() const; // returns the single target message for AoE moves
-    uint8       getRequirements() const;
-    uint16      getMeritId() const;
-    uint8       getFlag() const;
-    int8*       getContentTag();
-    float       getRange() const;
-    bool        tookEffect() const; // returns true if the spell landed, not resisted or missed
-    bool        hasMPCost();        // checks if spell costs mp to use
-    bool        isHeal();           // is a heal spell
-    bool        isCure();           // is a Cure spell
-    bool        isDebuff();         // is a debuff spell
-    bool        isNa();             // is a -na spell
-    bool        isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
-    bool        canHitShadow();     // check if spell ignores shadows
+    uint16             getTotalTargets() const;
+    SpellID            getID();
+    uint8              getJob(JOBTYPE JobID);
+    uint16             getMPCost() const;
+    uint32             getCastTime() const;
+    uint32             getRecastTime() const;
+    uint16             getValidTarget() const;
+    uint16             getAnimationID() const;
+    uint16             getAnimationTime() const;
+    SPELLGROUP         getSpellGroup();
+    SPELLFAMILY        getSpellFamily();
+    uint8              getSkillType() const;
+    uint16             getZoneMisc() const;
+    uint8              getAOE() const;
+    uint16             getBase() const;
+    uint16             getElement() const;
+    float              getMultiplier() const;
+    uint16             getMessage() const;
+    uint16             getDefaultMessage();
+    uint16             getMagicBurstMessage() const;
+    uint16             getCE() const;
+    uint16             getVE() const;
+    uint32             getModifiedRecast() const;
+    float              getRadius() const;
+    uint16             getAoEMessage() const; // returns the single target message for AoE moves
+    uint8              getRequirements() const;
+    uint16             getMeritId() const;
+    uint8              getFlag() const;
+    const std::string& getContentTag();
+    float              getRange() const;
+    uint32             getPrimaryTargetID() const;
+    bool               tookEffect() const; // returns true if the spell landed, not resisted or missed
+    bool               hasMPCost();        // checks if spell costs mp to use
+    bool               isHeal();           // is a heal spell
+    bool               isCure();           // is a Cure spell
+    bool               isDebuff();         // is a debuff spell
+    bool               isNa();             // is a -na spell
+    bool               isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
+    bool               canHitShadow();     // check if spell ignores shadows
 
     void setRadius(float radius);
     void setTotalTargets(uint16 total);
@@ -1110,27 +1111,32 @@ public:
     void setMultiplier(float multiplier);
     void setMessage(uint16 message);
     void setMagicBurstMessage(uint16 message);
+    auto getModifier() -> MODIFIER;
+    void setModifier(MODIFIER modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
+    void setPrimaryTargetID(uint32);
+
     void setCE(uint16 ce);
     void setVE(uint16 ve);
     void setRequirements(uint8 requirements);
     void setMeritId(uint16 meritId);
     void setModifiedRecast(uint32 mrec);
     void setFlag(uint8 flag);
-    void setContentTag(int8* contentTag);
+    void setContentTag(const std::string& contentTag);
     void setRange(float range);
 
-    const int8* getName();
-    void        setName(int8* name);
+    const std::string& getName();
+    void               setName(const std::string& name);
 
 protected:
     CSpell(const CSpell&)            = default;
     CSpell& operator=(const CSpell&) = default;
 
 private:
-    SpellID     m_ID;           // spell id
-    uint32      m_castTime{};   // time to cast spell
-    uint32      m_recastTime{}; // recast time
-    uint16      m_animation{};  // animation for spell
+    SpellID     m_ID;                // spell id
+    uint32      m_primaryTargetID{}; // primary target ID
+    uint32      m_castTime{};        // time to cast spell
+    uint32      m_recastTime{};      // recast time
+    uint16      m_animation{};       // animation for spell
     uint16      m_animationTime{};
     uint8       m_skillType{};
     float       m_range{};
@@ -1148,6 +1154,7 @@ private:
     uint16      m_element{};                       // element of spell
     uint16      m_message{};                       // message id
     uint16      m_MagicBurstMessage{};             // Message used for magic bursts.
+    MODIFIER    m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
     uint16      m_CE{};                            // cumulative enmity of spell
     uint16      m_VE{};                            // volatile enmity of spell
     std::string m_name;                            // spell name
@@ -1155,7 +1162,7 @@ private:
     uint8       m_requirements{};                  // requirements before being able to cast spell
     uint16      m_meritId{};                       // associated merit (if applicable)
     uint8       m_flag{};
-    int8*       m_contentTag{};
+    std::string m_contentTag{};
 };
 
 // Namespace to work with spells

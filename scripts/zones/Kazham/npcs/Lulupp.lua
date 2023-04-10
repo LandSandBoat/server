@@ -8,7 +8,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -27.457125, y = -3.043032, z = -22.057966 },
     { x = -27.373426, y = -2.772481, z = -20.974442 },
@@ -32,8 +32,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -51,14 +51,22 @@ entity.onTrade = function(player, npc, trade)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
-    local goodtrade = trade:hasItemQty(483, 1)
-    local badtrade = trade:hasItemQty(22, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1)
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 0 or failed == 1 then
-            if goodtrade then                   -- first or second time trading correctly
+            if trade:hasItemQty(483, 1) then -- first or second time trading correctly
                 player:startEvent(219)
-            elseif badtrade then
+            elseif
+                trade:hasItemQty(22, 1) or
+                trade:hasItemQty(1008, 1) or
+                trade:hasItemQty(1157, 1) or
+                trade:hasItemQty(1158, 1) or
+                trade:hasItemQty(904, 1) or
+                trade:hasItemQty(4599, 1) or
+                trade:hasItemQty(905, 1) or
+                trade:hasItemQty(1147, 1) or
+                trade:hasItemQty(4600, 1)
+            then
                 player:startEvent(229)
             end
         end
@@ -71,7 +79,10 @@ entity.onTrigger = function(player, npc)
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if player:getCharVar("BathedInScent") == 1 and opoOpoAndIStatus == QUEST_AVAILABLE then
+    if
+        player:getCharVar("BathedInScent") == 1 and
+        opoOpoAndIStatus == QUEST_AVAILABLE
+    then
         player:startEvent(217, 0, 483)  -- 483 broken mithran fishing rod
     elseif opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry == 1 then

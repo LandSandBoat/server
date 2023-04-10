@@ -6,13 +6,13 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/summon")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 5
@@ -26,9 +26,11 @@ ability_object.onPetAbility = function(target, pet, skill)
     if resm < 0.25 then
         resm = 0
     end
+
     duration = duration * resm
 
-    if duration > 0 and
+    if
+        duration > 0 and
         xi.summon.avatarPhysicalHit(skill, totaldamage) and
         not target:hasStatusEffect(xi.effect.WEIGHT)
     then
@@ -41,4 +43,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return totaldamage
 end
 
-return ability_object
+return abilityObject

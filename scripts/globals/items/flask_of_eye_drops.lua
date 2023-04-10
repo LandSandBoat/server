@@ -5,17 +5,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
-
-    if (target:hasStatusEffect(xi.effect.BLINDNESS) == true) then
+itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.BLINDNESS) then
         target:delStatusEffect(xi.effect.BLINDNESS)
     end
 end
 
-return item_object
+return itemObject

@@ -15,10 +15,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftp100 = 2.75 params.ftp200 = 3.50 params.ftp300 = 4
     params.str_wsc = 0.0 params.dex_wsc = 0.28 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.28 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
@@ -33,7 +32,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
-
 end
 
-return weaponskill_object
+return weaponskillObject

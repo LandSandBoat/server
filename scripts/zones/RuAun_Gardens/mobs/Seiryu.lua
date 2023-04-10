@@ -9,7 +9,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob ,target)
+entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
 end
 
@@ -30,6 +30,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
             return 237 -- choke
         end
     end
+
     return 0 -- Still need a return, so use 0 when not casting
 end
 

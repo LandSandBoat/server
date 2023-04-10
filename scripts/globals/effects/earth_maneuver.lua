@@ -3,23 +3,23 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:addMod(xi.mod.VIT, effect:getPower())
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:delMod(xi.mod.VIT, effect:getPower())
     end
 end
 
-return effect_object
+return effectObject

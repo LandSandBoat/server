@@ -22,7 +22,7 @@ namespace gambits
 {
     // Validate gambit before it's inserted into the gambit list
     // Check levels, etc.
-    void CGambitsContainer::AddGambit(const Gambit_t& gambit)
+    std::string CGambitsContainer::AddGambit(Gambit_t const& gambit)
     {
         TracyZoneScoped;
 
@@ -40,7 +40,23 @@ namespace gambits
         if (available)
         {
             gambits.push_back(gambit);
+            return gambit.identifier;
         }
+        return "";
+    }
+
+    void CGambitsContainer::RemoveGambit(std::string const& id)
+    {
+        gambits.erase(
+            std::remove_if(gambits.begin(), gambits.end(),
+                           [&id](Gambit_t const& gambit)
+                           { return gambit.identifier == id; }),
+            gambits.end());
+    }
+
+    void CGambitsContainer::RemoveAllGambits()
+    {
+        gambits.clear();
     }
 
     void CGambitsContainer::Tick(time_point tick)
@@ -200,10 +216,8 @@ namespace gambits
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
-                        auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                        std::transform(name.begin(), name.end(), name.begin(),
-                        [](unsigned char c) { return std::tolower(c); });
-                        if (name == "curilla")
+                        auto name = PMember->GetName();
+                        if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             result = true;
                         }
@@ -211,6 +225,20 @@ namespace gambits
                 });
                 // clang-format on
                 return result;
+            }
+            else if (predicate.target == G_TARGET::PARTY_MULTI)
+            {
+                uint8 count = 0;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
+                    {
+                        ++count;
+                    }
+                });
+                // clang-format on
+                return count > 1;
             }
 
             // Fallthrough
@@ -365,10 +393,8 @@ namespace gambits
                     {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
-                            auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                            std::transform(name.begin(), name.end(), name.begin(),
-                                           [](unsigned char c) { return std::tolower(c); });
-                            if (name == "curilla")
+                            auto name = PMember->GetName();
+                            if (strcmpi(name.c_str(), "curilla") == 0)
                             {
                                 target = PMember;
                             }
@@ -468,6 +494,12 @@ namespace gambits
                     {
                         CStatusEffect* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
+                        if (PSCEffect == nullptr)
+                        {
+                            ShowError("G_SELECT::MB_ELEMENT: PSCEffect was null.");
+                            return;
+                        }
+
                         std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
                         if (uint16 power = PSCEffect->GetPower())
                         {
@@ -509,7 +541,6 @@ namespace gambits
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
-                        // bool canWaltz = false;
                         auto currentTP = POwner->health.tp;
 
                         // clang-format off
@@ -525,9 +556,8 @@ namespace gambits
 
                         for (ABILITY const& waltz : wlist)
                         {
-                            auto waltzLevel = ability::GetAbility(waltz)->getLevel();
-                            // auto abilityName = ability::GetAbility(waltz)->getName();
-                            uint16 tpCost = 0;
+                            auto   waltzLevel = ability::GetAbility(waltz)->getLevel();
+                            uint16 tpCost     = 0;
 
                             if (mLevel >= waltzLevel)
                             {
@@ -626,11 +656,11 @@ namespace gambits
                         }
                     }
                 }
-                else if (action.reaction == G_REACTION::MSG)
+                else if (action.reaction == G_REACTION::MS)
                 {
                     if (action.select == G_SELECT::SPECIFIC)
                     {
-                        // trustutils::SendTrustMessage(POwner, action.select_arg);
+                        controller->MobSkill(target->targid, action.select_arg);
                     }
                 }
 
@@ -804,6 +834,11 @@ namespace gambits
                 return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
                 break;
             }
+            case G_CONDITION::HP_MISSING:
+            {
+                return (trigger_target->health.maxhp - trigger_target->health.hp) >= (int16)predicate.condition_arg;
+                break;
+            }
             default:
             {
                 return false;
@@ -942,14 +977,14 @@ namespace gambits
                         for (auto& skill : tp_skills)
                         {
                             std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
 
                             std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
                             if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
                                 possible_skillchain != SC_NONE)
                             {
@@ -981,6 +1016,13 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
+
+                if (PWeaponSkill == nullptr)
+                {
+                    ShowError("G_REACTION::WS: PWeaponSkill was null.");
+                    return false;
+                }
+
                 if (chosen_skill->valid_targets & TARGET_SELF)
                 {
                     target = POwner;
@@ -993,7 +1035,6 @@ namespace gambits
             }
             else // Mobskill
             {
-                // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
                 if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
                 {
                     target = POwner;

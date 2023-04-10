@@ -21,9 +21,79 @@
 
 #include "console_service.h"
 
+#include "lua.h"
+
+#include <sstream>
+
 #ifdef _WIN32
-#include <Windows.h> // ReadConsoleInput et al
+#include <conio.h>
+#include <io.h>
+#include <windows.h>
+#define isatty  _isatty
+#define getchar _getch
+#else
+#include <poll.h>
+#include <sys/socket.h>
+#include <unistd.h>
 #endif
+
+// https://stackoverflow.com/a/71992965
+bool stdinHasData()
+{
+#if defined(_WIN32)
+    // this works by harnessing Windows' black magic:
+    return _kbhit();
+#else
+    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
+
+    // poll the stdin file descriptor until it tells us it's ready
+    // poll returns a 0 if STDIN isn't ready, or a 1 if it is.
+    return poll(&pollFileDescriptor, 1, 0) == 1;
+#endif
+}
+
+bool getLine(std::string& line)
+{
+    // If there is data on stdin we can call _getch() knowing that it won't block!
+    // This makes this routine non-blocking.
+    if (!stdinHasData())
+    {
+        return false;
+    }
+#if defined(_WIN32)
+    auto keyCharacter = static_cast<unsigned char>(getchar());
+    if (keyCharacter == '\r')
+    {
+        fmt::print("\n"); // Windows needs \r\n for newlines in the console, but the enter key is only \r.
+        return true;
+    }
+    if (keyCharacter == '\n')
+    {
+        return true;
+    }
+
+    if (keyCharacter == '\b')
+    {
+        fmt::print("\b \b"); // move cursor left, overwrite with space, move cursor left
+        if (line.size() > 0)
+        {
+            line.pop_back(); // remove last char in buffer if any
+        }
+        return false;
+    }
+
+    fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
+    if (std::isprint(keyCharacter))
+    {
+        line += keyCharacter;
+    }
+
+    return false;
+#else
+    std::getline(std::cin, line);
+    return true;
+#endif
+}
 
 ConsoleService::ConsoleService()
 {
@@ -60,27 +130,38 @@ ConsoleService::ConsoleService()
         }
     });
 
+    RegisterCommand("lua", "Provides a Lua REPL",
+    [](std::vector<std::string> inputs)
+    {
+        if (inputs.size() >= 2)
+        {
+            // Remove "lua" from the front of the inputs
+            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+
+            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+            lua.safe_script(input);
+        }
+    });
+
     bool attached = isatty(0);
     if (attached)
     {
         ShowInfo("Console input thread is ready...");
         ShowInfo("Type 'help' for a list of available commands.");
-        m_consoleInputThread = std::thread([&]()
+        m_consoleInputThread = nonstd::jthread([&]()
         {
-            auto lastInputTime = server_clock::now();
+            std::string line;
 
             while (m_consoleThreadRun)
             {
-                if ((server_clock::now() - lastInputTime) > 1s)
+                std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
+
+                // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
+                if (!m_consoleStopCondition.wait_for(lock, 50ms, [&]{ return !m_consoleThreadRun; }))
                 {
-                    std::lock_guard lock(m_consoleInputBottleneck);
-                    std::string line;
-
-                    line = getLine();
-
-                    if (!m_consoleThreadRun)
+                    if (!getLine(line))
                     {
-                        break;
+                        continue;
                     }
 
                     std::istringstream stream(line);
@@ -106,11 +187,12 @@ ConsoleService::ConsoleService()
                         }
                         else
                         {
-                            fmt::print("> Unknown command.\n");
+                            fmt::print(fmt::format("> Unknown command: {}\n", inputs[0]));
                         }
                     }
+
+                    line = std::string();
                 }
-                std::this_thread::sleep_for(250ms); // TODO: Do this better
             };
             fmt::print("Console input thread exiting...\n");
         });
@@ -120,91 +202,20 @@ ConsoleService::ConsoleService()
 
 ConsoleService::~ConsoleService()
 {
-    m_consoleThreadRun = false;
-
-    if (m_consoleInputThread.joinable())
-    {
-        m_consoleInputThread.join();
-    }
+    stop();
+    m_consoleStopCondition.notify_all();
 }
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
 void ConsoleService::RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>)> func)
 {
-    std::lock_guard lock(m_consoleInputBottleneck);
+    std::lock_guard<std::mutex> lock(m_consoleInputBottleneck);
+
     m_commands[name] = ConsoleCommand{ name, description, func };
 }
 
 void ConsoleService::stop()
 {
     m_consoleThreadRun = false;
-}
-
-std::string ConsoleService::getLine()
-{
-    std::string line;
-
-// Windows doesn't have a proper poll that works for stdin, but we can use some win32 API on the console...
-#ifdef _WIN32
-    INPUT_RECORD record;
-    DWORD        numEvents;
-
-    while (m_consoleThreadRun)
-    {
-        if (!ReadConsoleInput(GetStdHandle(STD_INPUT_HANDLE), &record, 1, &numEvents))
-        {
-            continue; // this is an error state, does this happen in the real world?
-        }
-
-        if (record.EventType != KEY_EVENT)
-        {
-            continue;
-        }
-
-        if (record.Event.KeyEvent.bKeyDown) // only take input on keydown, not key up
-        {
-            WCHAR keyCharacter = record.Event.KeyEvent.uChar.UnicodeChar;
-
-            if (keyCharacter == '\b')
-            {
-                fmt::print("\b \b"); // move cursor left, overwrite with space, move cursor left
-                if (line.size() > 0)
-                {
-                    line.pop_back(); // remove last char in buffer if any
-                }
-                continue;
-            }
-
-            fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
-            if (keyCharacter == '\r')
-            {
-                fmt::print("\n"); // Windows needs \r\n for newlines in the console, but the enter key is only \r.
-                break;
-            }
-
-            if (std::isprint(keyCharacter))
-            {
-                line += keyCharacter;
-            }
-        }
-    }
-// Linux has a proper polling system for stdin
-#else
-    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
-    int           hasData            = 0;
-
-    // poll() can return -1 when stdin is bad, is this a real-world error condition?
-    while (hasData == 0 && m_consoleThreadRun)
-    {
-        // poll for 1000ms. This doesn't seem to have significant overhead.
-        hasData = poll(&pollFileDescriptor, 1, 1000);
-        if (hasData == 1)
-        {
-            std::getline(std::cin, line);
-        }
-    }
-#endif
-
-    return line;
 }

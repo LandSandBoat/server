@@ -8,17 +8,17 @@ require("scripts/globals/status")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_1,
         [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
@@ -47,17 +47,17 @@ spell_object.onMobSpawn = function(mob)
     -- Ranged Attack as much as possible (limited by "weapon" delay)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 
     mob:addMod(xi.mod.STORETP, 40)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Telmoda
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

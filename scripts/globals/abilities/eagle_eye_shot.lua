@@ -6,21 +6,30 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local ranged = player:getStorageItem(0, 0, xi.slot.RANGED)
-    local ammo = player:getStorageItem(0, 0, xi.slot.AMMO)
+    local ammo   = player:getStorageItem(0, 0, xi.slot.AMMO)
 
     if ranged and ranged:isType(xi.itemType.WEAPON) then
         local skilltype = ranged:getSkillType()
-        if skilltype == xi.skill.ARCHERY or skilltype == xi.skill.MARKSMANSHIP or skilltype == xi.skill.THROWING then
-            if ammo and (ammo:isType(xi.itemType.WEAPON) or skilltype == xi.skill.THROWING) then
+        if
+            skilltype == xi.skill.ARCHERY or
+            skilltype == xi.skill.MARKSMANSHIP or
+            skilltype == xi.skill.THROWING
+        then
+            if
+                ammo and
+                (
+                    ammo:isType(xi.itemType.WEAPON) or
+                    skilltype == xi.skill.THROWING
+                )
+            then
                 ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
                 return 0, 0
             end
@@ -30,19 +39,31 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.msg.basic.NO_RANGED_WEAPON, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
+
     local params = {}
+
     params.numHits = 1
-    local ftp = 5
-    params.ftp100 = ftp params.ftp200 = ftp params.ftp300 = ftp
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = true
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+
+    -- TP params.
+    params.ftp100  = 5 params.ftp200  = 5 params.ftp300  = 5
+    params.crit100 = 0 params.crit200 = 0 params.crit300 = 0
+    params.acc100  = 0 params.acc200  = 0 params.acc300  = 0
+    params.atk100  = 1 params.atk200  = 1 params.atk300  = 1
+
+    -- Stat params.
+    params.str_wsc = 0
+    params.dex_wsc = 0
+    params.vit_wsc = 0
+    params.agi_wsc = 0
+    params.int_wsc = 0
+    params.mnd_wsc = 0
+    params.chr_wsc = 0
+
+    params.canCrit    = true
     params.enmityMult = 0.5
 
     -- Job Point Bonus Damage
@@ -63,4 +84,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
     return damage
 end
 
-return ability_object
+return abilityObject

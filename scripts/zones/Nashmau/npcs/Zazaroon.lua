@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Zazaroon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

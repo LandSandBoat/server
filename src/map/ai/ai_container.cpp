@@ -19,13 +19,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "ai_container.h"
+#include "ai/ai_container.h"
 
 #include "../entities/baseentity.h"
 #include "../entities/battleentity.h"
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"
 #include "../packets/entity_animation.h"
+#include "../status_effect_container.h"
 #include "controllers/mob_controller.h"
 #include "controllers/pet_controller.h"
 #include "controllers/player_controller.h"
@@ -174,7 +175,12 @@ bool CAIContainer::UseItem(uint16 targid, uint8 loc, uint8 slotid)
 
 bool CAIContainer::Inactive(duration _duration, bool canChangeState)
 {
-    return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState);
+    return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, false);
+}
+
+bool CAIContainer::Untargetable(duration _duration, bool canChangeState)
+{
+    return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, true);
 }
 
 bool CAIContainer::Internal_Engage(uint16 targetid)
@@ -195,11 +201,19 @@ bool CAIContainer::Internal_Engage(uint16 targetid)
     if (entity)
     {
         //#TODO: remove m_battleTarget if possible (need to check disengage)
-        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()))
+        // Check if an entity can change to the attack state
+        // Allow entity with prevent action effect to very briefly switch to the attack state to be properly engaged
+        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()) || entity->StatusEffectContainer->HasPreventActionEffect(true))
         {
             if (ForceChangeState<CAttackState>(entity, targetid))
             {
                 entity->OnEngage(*static_cast<CAttackState*>(m_stateStack.top().get()));
+
+                // Resume being inactive if entity has a status effect preventing them from doing actions
+                if (entity->StatusEffectContainer->HasPreventActionEffect(true))
+                {
+                    entity->PAI->Inactive(0ms, false);
+                }
             }
         }
         return true;
@@ -212,6 +226,10 @@ bool CAIContainer::Internal_Cast(uint16 targetid, SpellID spellid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CMagicState>(entity, targetid, spellid);
     }
     return false;
@@ -251,6 +269,10 @@ bool CAIContainer::Internal_WeaponSkill(uint16 targid, uint16 wsid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CWeaponSkillState>(entity, targid, wsid);
     }
     return false;
@@ -261,6 +283,10 @@ bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
     auto* entity = dynamic_cast<CMobEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CMobSkillState>(entity, targid, wsid);
     }
     return false;
@@ -271,6 +297,10 @@ bool CAIContainer::Internal_PetSkill(uint16 targid, uint16 abilityid)
     auto* entity = dynamic_cast<CPetEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CPetSkillState>(entity, targid, abilityid);
     }
     return false;
@@ -281,6 +311,10 @@ bool CAIContainer::Internal_Ability(uint16 targetid, uint16 abilityid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CAbilityState>(entity, targetid, abilityid);
     }
     return false;
@@ -291,6 +325,10 @@ bool CAIContainer::Internal_RangedAttack(uint16 targetid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return ChangeState<CRangeState>(entity, targetid);
     }
     return false;
@@ -454,6 +492,11 @@ bool CAIContainer::IsEngaged()
     return PEntity->animation == ANIMATION_ATTACK;
 }
 
+bool CAIContainer::IsUntargetable()
+{
+    return PEntity->PAI->IsCurrentState<CInactiveState>() && static_cast<CInactiveState*>(PEntity->PAI->GetCurrentState())->GetUntargetable();
+}
+
 time_point CAIContainer::getTick()
 {
     return m_Tick;
@@ -486,11 +529,16 @@ bool CAIContainer::QueueEmpty()
     return ActionQueue.isEmpty();
 }
 
-bool CAIContainer::Internal_Despawn()
+void CAIContainer::checkQueueImmediately()
+{
+    ActionQueue.checkAction(server_clock::now());
+}
+
+bool CAIContainer::Internal_Despawn(bool instantDespawn)
 {
     if (!IsCurrentState<CDespawnState>() && !IsCurrentState<CRespawnState>())
     {
-        return ForceChangeState<CDespawnState>(PEntity);
+        return ForceChangeState<CDespawnState>(PEntity, instantDespawn);
     }
     return false;
 }

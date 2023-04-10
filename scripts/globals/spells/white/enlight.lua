@@ -5,13 +5,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.ENLIGHT
     local magicskill = target:getSkillLevel(xi.skill.DIVINE_MAGIC)
     local potency = (magicskill / 8) + 12.5
@@ -25,4 +25,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return effect
 end
 
-return spell_object
+return spellObject

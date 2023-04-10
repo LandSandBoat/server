@@ -18,7 +18,11 @@ entity.onTrigger = function(player, npc)
     player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Boots
-    if loafersQuestProgress > 0 and loafersQuestProgress < 3 and not player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) then
+    if
+        loafersQuestProgress > 0 and
+        loafersQuestProgress < 3 and
+        not player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
+    then
         player:addKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DROGAROGAN_BONEMEAL)
         player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)

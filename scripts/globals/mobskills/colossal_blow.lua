@@ -7,30 +7,25 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
-
-    if (currentForm == 2) then
-        return 0
-    end
-    return 1
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     -- remove all by 5%
     local damage = 0
 
     -- if have more hp then 30%, then reduce to 5%
-    if (target:getHPP() > 30) then
+    if target:getHPP() > 30 then
         damage = currentHP * .95
     else
         -- else you die
         damage = currentHP
     end
+
     local dmg = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
@@ -38,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

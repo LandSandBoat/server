@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -5.453587, y = 0.151494, z = -16.361458 },
     { x = -5.997250, y = 0.229052, z = -15.475480 },
@@ -66,8 +66,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -76,20 +76,21 @@ end
 entity.onTrigger = function(player, npc)
     local vault = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
-    local ironBox = player:hasKeyItem(xi.ki.SEALED_IRON_BOX)
 
-    if vault == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 5 then
+    if
+        vault == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        mLvl >= 5
+    then
         player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
     elseif vault == QUEST_ACCEPTED then
-        if (ironBox == true) then
+        if player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then
             player:startEvent(38) -- Finish quest
         else
             player:startEvent(37, xi.ki.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
         end
     elseif vault == QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
-    else
-        player:startEvent(89) -- Standard Conversation
     end
 end
 

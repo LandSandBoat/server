@@ -16,17 +16,18 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.AQUAN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
+    params.attribute = xi.mod.INT
     params.multiplier = 2.375
     params.tMultiplier = 1.5
     params.duppercap = 69
@@ -37,22 +38,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.3
     params.mnd_wsc = 0.1
     params.chr_wsc = 0.0
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
 
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.addedEffect = xi.effect.STR_DOWN
+    local power = 20
+    local tick = 0
+    local duration = 60
 
-    local resist = applyResistance(caster, target, spell, params)
-    if (damage > 0 and resist > 0.0625) then
-        if (target:canGainStatusEffect(xi.effect.STR_DOWN)) then
-            target:addStatusEffect(xi.effect.STR_DOWN, 20, 3, 60)
-        end
-    end
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

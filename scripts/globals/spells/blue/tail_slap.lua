@@ -9,32 +9,28 @@
 -- Level: 69
 -- Casting Time: 1 seconds
 -- Recast Time: 28.5 seconds
--- Skillchain Element: Water (can open Impaction and Induration can close Reverberation and Fragmentation)
+-- Skillchain Element: Reverberation
 -- Combos: Store TP
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = xi.effect.STUN
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.HTH
     params.scattr = SC_REVERBERATION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
     params.multiplier = 1.625
     params.tp150 = 1.625
@@ -49,15 +45,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.effect = xi.effect.STUN
+    local power = 1
+    local tick = 0
+    local duration = 5
 
-    if (resist > 0.5) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist) -- pre-resist duration needs confirmed/adjusted
-    end
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-entity.onMobEngaged= function(mob, target)
+entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)

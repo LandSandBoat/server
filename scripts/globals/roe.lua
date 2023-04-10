@@ -66,54 +66,71 @@ local checks =
     mobID = function(self, player, params)    -- Mob ID check
         return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
     end,
+
     mobName = function(self, player, params)
         return (params.mob and self.reqs.mobName[params.mob:getName()]) and true or false
     end,
+
     mobXP = function(self, player, params)    -- Mob yields xp
         return (params.mob and player:checkKillCredit(params.mob)) and true or false
     end,
+
     mobFamily = function(self, player, params)   -- Mob family in set
         return (params.mob and self.reqs.mobFamily[params.mob:getFamily()]) and true or false
     end,
+
     mobSystem = function(self, player, params)   -- Mob system in set
         return (params.mob and self.reqs.mobSystem[params.mob:getSystem()]) and true or false
     end,
+
     dmgMin = function(self, player, params)  -- Minimum Dmg Dealt/Taken
         return (params.dmg and params.dmg >= self.reqs.dmgMin) and true or false
     end,
+
     dmgMax = function(self, player, params)  -- Maximum Dmg Dealt/Taken
         return (params.dmg and params.dmg <= self.reqs.dmgMax) and true or false
     end,
+
     atkType = function(self, player, params)  -- Dmg Type is
         return (params.atkType == self.reqs.atkType) and true or false
     end,
+
     healMin = function(self, player, params)  -- Minimum Amount healed
         return (params.heal and params.heal >= self.reqs.healMin) and true or false
     end,
+
     zone = function(self, player, params)  -- Player in Zone
         return (self.reqs.zone[player:getZoneID()]) and true or false
     end,
+
     zoneNot = function(self, player, params)  -- Player not in Zone
         return (not self.reqs.zoneNot[player:getZoneID()]) and true or false
     end,
+
     itemID = function(self, player, params)  -- itemid in set
         return (params.itemid and self.reqs.itemID[params.itemid]) and true or false
     end,
+
     levelSync = function(self, player, params)  -- Player is Level Sync'd
         return self.reqs.levelSync and player:isLevelSync() and true or false
     end,
+
     jobLvl = function(self, player, params)  -- Player has job at minimum level X
         return player:getJobLevel(self.reqs.jobLvl[1]) >= self.reqs.jobLvl[2] and true or false
     end,
+
     questComplete = function(self, player, params) -- Player has { KINGDOM, QUEST } marked complete
         return player:getQuestStatus(self.reqs.questComplete[1], self.reqs.questComplete[2]) == QUEST_COMPLETED
     end,
+
     missionComplete = function(self, player, params) -- Player has { NATION, MISSION } marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
     end,
+
     unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
         return player:getUnityLeader() == self.reqs.unityLeader
     end,
+
     skillType = function(self, player, params) -- Generic numeric check, used for synthSuccess and helmSuccess
         return params.skillType == self.reqs.skillType and true or false
     end,
@@ -127,6 +144,7 @@ local masterCheck = function(self, player, params)
             return false
         end
     end
+
     return true
 end
 
@@ -175,7 +193,7 @@ local defaults =
 }
 
 -- Apply defaults for records
-for i,v in pairs(records) do
+for _, v in pairs(records) do
     setmetatable(v, { __index = defaults })
 end
 
@@ -183,7 +201,7 @@ end
 -- This is used to deny taking records which aren't implemented in the above table.
 RoeParseRecords(records)
 
---[[ **************************************************************************
+--[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
     For external calls use onRecordTrigger below. (see healing.lua for example)
     If record rewards items, and the player cannot carry them, return false.
@@ -193,14 +211,14 @@ RoeParseRecords(records)
     completeRecord(player, record#)
     reward =
     {
-        item = { { 640,2 }, 641 },       -- see npcUtil.giveItem for formats (Only given on first completion)
+        item = { { 640, 2 }, 641 },      -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
         xp = 1000,
         accolades = 300,
         capacity = 400,
     })
-*************************************************************************** --]]
+--------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
     local recordEntry = records[record]
     local recordFlags = recordEntry.flags
@@ -213,7 +231,7 @@ local function completeRecord(player, record)
         end
     end
 
-    player:messageBasic(xi.msg.basic.ROE_COMPLETE,record)
+    player:messageBasic(xi.msg.basic.ROE_COMPLETE, record)
 
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1
@@ -233,6 +251,7 @@ local function completeRecord(player, record)
         else
             player:messageBasic(xi.msg.basic.ROE_REPEAT_OR_CANCEL)
         end
+
         player:setEminenceCompleted(record, true)
     else
         player:setEminenceCompleted(record)
@@ -255,6 +274,7 @@ local function completeRecord(player, record)
         if record ~= 5 then -- Do not grant a bonus for All for One
             bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
+
         local accoladePayout = math.floor(rewards["accolades"] * bonusAccoladeRate)
         player:addCurrency("unity_accolades", accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
         player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency("unity_accolades"))

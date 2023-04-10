@@ -1,21 +1,20 @@
 -----------------------------------
 -- Ability: Last Resort
--- Increases user's attack, but lowers defense.
+-- Description: Increases user's attack, but lowers defense.
 -- Obtained: Dark Knight Level 15
--- Recast Time: 5:00
--- Duration: 3:00
+-- Recast Time: 00:05:00
+-- Duration: 00:03:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.dark_knight.useLastResort(player, target, ability)
 end
 
-return ability_object
+return abilityObject

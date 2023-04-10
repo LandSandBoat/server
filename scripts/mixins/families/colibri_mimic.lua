@@ -17,7 +17,6 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.colibri_mimic = function(colibriMob)
-
     colibriMob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
         if
             target:getAnimationSub() == 0 and
@@ -39,7 +38,12 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         local osTime = os.time()
 
         if mob:getAnimationSub() == 1 then
-            if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
+            if
+                spellToMimic > 0 and
+                osTime > castTime and
+                castWindow > osTime and
+                not mob:hasStatusEffect(xi.effect.SILENCE)
+            then
                 mob:castSpell(spellToMimic)
                 mob:setLocalVar("[colibri]spellToMimic", 0)
                 mob:setLocalVar("[colibri]castWindow", 0)
@@ -62,7 +66,6 @@ g_mixins.families.colibri_mimic = function(colibriMob)
             mob:setAnimationSub(0)
         end
     end)
-
 end
 
 return g_mixins.families.colibri_mimic

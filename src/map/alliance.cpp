@@ -46,9 +46,9 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
 
     m_AllianceID = PEntity->PParty->GetPartyID();
 
-    // will need to deal with these
-    // m_PSyncTarget    = nullptr;
-    //  m_PQuarterMaster = nullptr;
+    // Will need to deal with these:
+    // m_PSyncTarget
+    // m_PQuarterMaster
 
     addParty(PEntity->PParty);
     this->aLeader = PEntity->PParty;
@@ -107,7 +107,10 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
 
         this->partyList.clear();
 
-        delete this;
+        // TODO: This entire system needs rewriting to both:
+        //     : - Make it stable
+        //     : - Get rid of `delete this` and manage memory nicely
+        delete this; // cpp.sh allow
     }
 }
 
@@ -338,7 +341,7 @@ void CAlliance::assignAllianceLeader(const char* name)
 
         for (auto* PParty : partyList)
         {
-            if (PParty->GetMemberByName((const int8*)name))
+            if (PParty->GetMemberByName(name))
             {
                 this->aLeader = PParty;
                 break;

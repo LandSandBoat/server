@@ -1,22 +1,24 @@
 -----------------------------------
 -- ID: 11280
--- Item: elder gilet +1
+-- Item: Elder Gilet +1
 -- Teleport's user to Purgonorgo Isle
 -----------------------------------
-local item_object = {}
-
 require("scripts/globals/teleports")
+require("scripts/globals/zone")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:isZoneVisited(4) == false) then
+    if not target:hasVisitedZone(xi.zone.BIBIKI_BAY) then
         result = 56
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     xi.teleport.to(target, xi.teleport.id.PURGONORGO)
 end
 
-return item_object
+return itemObject

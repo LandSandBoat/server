@@ -2,20 +2,18 @@
 -- Spell: Katon: Ichi
 -----------------------------------
 require("scripts/globals/spells/damage_spell")
-require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 15 + caster:getMerit(xi.merit.KATON_EFFECT) -- T1 bonus debuff duration
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.WATER_MEVA)
+    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 30, 0, duration, 0, xi.mod.WATER_MEVA, 0)
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

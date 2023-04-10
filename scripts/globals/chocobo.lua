@@ -91,7 +91,11 @@ xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
     local info   = chocoboInfo[zoneId]
 
     if info then
-        if player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) and mLvl >= info.levelReq and (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past) then
+        if
+            player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) and
+            mLvl >= info.levelReq and
+            (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past)
+        then
             local price = getPrice(zoneId, info)
             player:setLocalVar("[CHOCOBO]price", price)
 
@@ -123,7 +127,11 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
             local price = player:getLocalVar("[CHOCOBO]price")
             player:setLocalVar("[CHOCOBO]price", 0)
 
-            if price and (info.past and player:getCurrency("allied_notes") >= price) or (not info.past and player:delGil(price)) then
+            if
+                price and
+                (info.past and player:getCurrency("allied_notes") >= price) or
+                (not info.past and player:delGil(price))
+            then
                 if info.past then
                     player:delCurrency("allied_notes", price)
                 end

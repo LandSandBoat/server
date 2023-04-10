@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Laughing Lizard
--- Standard Info NPC (fishing)
 -----------------------------------
 local entity = {}
 

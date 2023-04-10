@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Kamui
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

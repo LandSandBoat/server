@@ -33,7 +33,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 522 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE then
+    if
+        csid == 522 and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE
+    then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
     elseif csid == 518 then
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER, { ki = xi.ki.MAP_OF_KING_RANPERRES_TOMB, title = xi.title.DAYBREAK_GAMBLER, xp = 2000 })

@@ -26,8 +26,9 @@ entity.onMobFight = function(mob, target)
     if mob:getTP() >= 2000 then
         mob:useMobAbility()
     end
+
     if mob:getHPP() <= 35 then
-       mob:setMod(xi.mod.STORETP, 250)
+        mob:setMod(xi.mod.STORETP, 250)
     end
 end
 

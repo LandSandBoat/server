@@ -3,14 +3,14 @@
 -- Scroll of Cure II
 -- Teaches the white magic Cure II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(2)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(2)
 end
 
-return item_object
+return itemObject

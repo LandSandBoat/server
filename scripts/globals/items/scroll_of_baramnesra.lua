@@ -3,14 +3,14 @@
 -- Scroll of Baramnesra
 -- Teaches the white magic Baramnesra
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(85)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(85)
 end
 
-return item_object
+return itemObject

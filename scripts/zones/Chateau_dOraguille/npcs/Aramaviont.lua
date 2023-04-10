@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Aramaviont
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

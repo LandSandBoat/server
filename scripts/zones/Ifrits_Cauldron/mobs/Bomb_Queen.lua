@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.STUN_MEVA, 50)
 end
 
 entity.onMobSpawn = function(mob)
@@ -32,12 +32,14 @@ entity.onMobFight = function(mob, target)
                 break
             end
         end
+
         if canSpawnPet then
             mob:entityAnimationPacket("casm")
             mob:timer(5000, function(bombQueen)
                 if bombQueen:isDead() then
                     return
                 end
+
                 bombQueen:entityAnimationPacket("shsm")
                 local bombQueenId = mob:getID()
 

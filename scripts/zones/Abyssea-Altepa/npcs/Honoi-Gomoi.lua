@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Honoi-Gomoi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

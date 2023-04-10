@@ -13,7 +13,8 @@ xi.sparkshop = xi.sparkshop or {}
 
 local optionToItem =
 {
-    [1] = { -- Items page
+    [1] = -- Items page
+    {
         [ 0] = { cost =    10, id =  4181 }, -- Scroll of Instant Warp
         [ 1] = { cost =    10, id =  4182 }, -- Scroll of Instant Reraise
         [ 2] = { cost =  7500, id =  4064 }, -- Copy of Rem's Tale, chapter 1
@@ -29,7 +30,9 @@ local optionToItem =
         [12] = { cost =  5000, id = 28546 }, -- Capacity Ring
         [13] = { cost = 10000, id =  9009 }, -- Etched Memory
     },
-    [2] = { -- Skill-increasing tomes
+
+    [2] = -- Skill-increasing tomes
+    {
         [ 0] = { cost = 200, id = 6147 }, -- Mikehe's memo
         [ 1] = { cost = 200, id = 6148 }, -- Dagger enchiridion
         [ 2] = { cost = 200, id = 6149 }, -- Swing and Stab
@@ -64,7 +67,9 @@ local optionToItem =
         [31] = { cost = 200, id = 6178 }, -- Hrohj's record
         [32] = { cost = 200, id = 6179 }, -- The Bell Tolls
     },
-    [3] = { -- Equipment (Lv.1 - 9)
+
+    [3] = -- Equipment (Lv.1 - 9)
+    {
         [ 0] = { cost = 50, id = 16385 }, -- Cesti
         [ 1] = { cost = 50, id = 16390 }, -- Bronze knuckles
         [ 2] = { cost = 50, id = 16391 }, -- Brass knuckles
@@ -130,7 +135,9 @@ local optionToItem =
         [62] = { cost = 50, id = 12290 }, -- Maple shield
         [63] = { cost = 50, id = 12299 }, -- Aspis
     },
-    [4] = { -- Equipment (Lv.10 - 19)
+
+    [4] = -- Equipment (Lv.10 - 19)
+    {
         [ 0] = { cost =  60, id = 16407 }, -- Brass baghnakhs
         [ 1] = { cost =  60, id = 16450 }, -- Dagger
         [ 2] = { cost =  60, id = 16466 }, -- Knife
@@ -186,7 +193,9 @@ local optionToItem =
         [52] = { cost =  60, id = 12953 }, -- Lizard Ledelsens
         [53] = { cost =  60, id = 12291 }, -- Elm shield
     },
-    [5] = { -- Equipment (Lv.20 - 29)
+
+    [5] = -- Equipment (Lv.20 - 29)
+    {
         [ 0] = { cost =  87, id = 16392 }, -- Metal knuckles
         [ 1] = { cost = 144, id = 16406 }, -- Baghnakhs
         [ 2] = { cost =  99, id = 16387 }, -- Poison cesti
@@ -240,7 +249,9 @@ local optionToItem =
         [50] = { cost =  70, id = 12414 }, -- Turtle shield
         [51] = { cost = 153, id = 12306 }, -- Kite shield
     },
-    [6] = { -- Equipment (Lv.30 - 39)
+
+    [6] = -- Equipment (Lv.30 - 39)
+    {
         [ 0] = { cost = 182, id = 16411 }, -- Claws
         [ 1] = { cost = 194, id = 16399 }, -- Katars
         [ 2] = { cost = 230, id = 16393 }, -- Mythril Knuckles
@@ -316,7 +327,9 @@ local optionToItem =
         [72] = { cost = 195, id = 12293 }, -- Oak shield
         [73] = { cost = 256, id = 12364 }, -- Nymph shield
     },
-    [7] = { -- Equipment (Lv.40 - 50)
+
+    [7] = -- Equipment (Lv.40 - 50)
+    {
         [ 0] = { cost =  114, id = 16388 }, -- Himantes
         [ 1] = { cost =  298, id = 16412 }, -- Mythril claws
         [ 2] = { cost =  416, id = 16419 }, -- Patas
@@ -397,7 +410,9 @@ local optionToItem =
         [77] = { cost =  311, id = 12301 }, -- Buckler
         [78] = { cost =  128, id = 12294 }, -- Leather shield
     },
-    [8] = { -- Equipment (Lv.51 - 70)
+
+    [8] = -- Equipment (Lv.51 - 70)
+    {
         [ 0] = { cost =  389, id = 16394 }, -- Darksteel knuckles
         [ 1] = { cost =  484, id = 16400 }, -- Darksteel katars
         [ 2] = { cost =  362, id = 16422 }, -- Tigerfangs
@@ -443,7 +458,9 @@ local optionToItem =
         [42] = { cost = 1560, id = 12383 }, -- General's shield
         [43] = { cost =  204, id = 12359 }, -- Hickory shield
     },
-    [9] = { -- Equipment (Lv.71 - 98)
+
+    [9] = -- Equipment (Lv.71 - 98)
+    {
         [ 0] = { cost = 1033, id = 16423 }, -- Manoples
         [ 1] = { cost =  300, id = 18782 }, -- Eyra baghnakhs
         [ 2] = { cost =  300, id = 16470 }, -- Gully
@@ -488,7 +505,9 @@ local optionToItem =
         [41] = { cost = 2755, id = 12385 }, -- Acheron shield
         [42] = { cost =  300,  id = 16189 }, -- Gleaming shield
     },
-    [10] = { -- Equipment (Lv.99)
+
+    [10] = -- Equipment (Lv.99)
+    {
         [ 0] = { cost =  3000, id = 27740 }, -- Outrider mask
         [ 1] = { cost =  5000, id = 27881 }, -- Outrider mail
         [ 2] = { cost =  3000, id = 28029 }, -- Outrider mittens
@@ -549,14 +568,18 @@ local optionToItem =
         [57] = { cost =  7000, id = 21355 }, -- Hachiya shuriken
         [58] = { cost =  7000, id = 22260 }, -- Eminent animator II
     },
-    [12] = { -- Alter Ego Extravaganza Trusts
+
+    [12] = -- Alter Ego Extravaganza Trusts
+    {
         [10133] = { cost =  500, id = xi.items.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
         [10138] = { cost =  500, id = xi.items.CIPHER_OF_CIDS_ALTER_EGO }, -- Cid
         [10148] = { cost =  500, id = xi.items.CIPHER_OF_GILGAMESHS_ALTER_EGO }, -- Gilgamesh
         [10152] = { cost =  500, id = xi.items.CIPHER_OF_QULTADAS_ALTER_EGO }, -- Qultada
         [10181] = { cost =  500, id = xi.items.CIPHER_OF_KINGS_ALTER_EGO }, -- King
     },
-    [20] = { -- Currency Exchange
+
+    [20] = -- Currency Exchange
+    {
         [ 0] = { amount = 1000, name = "spark_of_eminence"      },
         [ 1] = { amount = 1000, name = "conquest_points"        },
         [ 2] = { amount = 1000, name = "imperial_standing"      },
@@ -619,7 +642,7 @@ function xi.sparkshop.onTrigger(player, npc, event)
     player:startEvent(event, 0, sparks, vouchers, naakual, cipher, remainingLimit)
 end
 
-function xi.sparkshop.onEventUpdate(player,csid,option)
+function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     local sparks = player:getCurrency("spark_of_eminence")
     local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
@@ -627,11 +650,11 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
     local selection = bit.rshift(option, 16)
 
     local qty = 1
-    local requested_qty = bit.band(bit.rshift(option, 10), 0x3F)
+    local requestedQty = bit.band(bit.rshift(option, 10), 0x3F)
 
     -- only skillup books and currencies can have qty > 1 aside from special cases such as ammo or shurikens
     if category == 2 or category == 20 or category == 30 then
-        qty = requested_qty
+        qty = requestedQty
     end
 
     -- There are three specific cases for Sparks rewards currently implemented:
@@ -643,7 +666,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         local cost = item.cost * qty
 
         -- makes sure player has room for three stacks of tomes
-        if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
+        if qty > 12 and qty < 99 and player:getFreeSlotsCount() < 3 then
             player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, item.id)
             player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
             return
@@ -700,6 +723,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     elseif category == 30 then
         local copperVouchersStored = player:getCurrency("aman_vouchers")
@@ -714,6 +738,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     end
 end

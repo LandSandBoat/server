@@ -16,8 +16,11 @@ entity.onTrigger = function(player, npc)
     local coloredDrop = 4258 + math.random(0, 7)
 
     -- COP mission
-    if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_3-taru_story")== 1) then
-        if (player:getFreeSlotsCount() == 0) then
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("COP_3-taru_story") == 1
+    then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDrop)
         else
             player:setCharVar("ColoredDrop", coloredDrop)
@@ -30,9 +33,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 43) then
+    if csid == 43 then
         local coloredDropID = player:getCharVar("ColoredDrop")
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDropID)
         else
             player:addItem(coloredDropID)

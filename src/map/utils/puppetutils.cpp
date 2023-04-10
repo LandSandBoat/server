@@ -55,7 +55,7 @@ namespace puppetutils
                 auto* PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
                 if (PZone == nullptr || PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
                 {
-                    delete PChar->PAutomaton;
+                    destroy(PChar->PAutomaton);
                 }
                 else
                 {
@@ -68,6 +68,8 @@ namespace puppetutils
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
                 PChar->PAutomaton = new CAutomatonEntity();
+                PChar->PAutomaton->saveModifiers();
+
                 PChar->PAutomaton->name.insert(0, (const char*)sql->GetData(1));
                 automaton_equip_t tempEquip;
                 attachments = nullptr;
@@ -88,20 +90,21 @@ namespace puppetutils
                         tempEquip.Attachments[i] = 0;
                     }
 
-                    int16 elemCapacityBonus = 0 + PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
-
                     for (int i = 0; i < 6; i++)
                     {
-                        PChar->PAutomaton->setElementMax(i, 5 + elemCapacityBonus);
+                        PChar->PAutomaton->setElementMax(i, 5);
                     }
-                    PChar->PAutomaton->setElementMax(6, 3 + elemCapacityBonus);
-                    PChar->PAutomaton->setElementMax(7, 3 + elemCapacityBonus);
+                    PChar->PAutomaton->setElementMax(6, 3);
+                    PChar->PAutomaton->setElementMax(7, 3);
 
                     for (int i = 0; i < 8; i++)
                     {
                         PChar->PAutomaton->m_ElementEquip[i] = 0;
                     }
                 }
+
+                // Add the elemental bonus before we set the head and frame
+                PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
 
                 setHead(PChar, tempEquip.Head);
                 setFrame(PChar, tempEquip.Frame);

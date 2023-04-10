@@ -37,38 +37,39 @@ struct ahItem
     uint16 ItemID;
     uint32 SingleAmount;
     uint32 StackAmount;
+    uint16 Category;
 };
 
 struct ahHistory
 {
-    uint32 Price;
-    uint32 Data;
-    uint8  Name1[15];
-    uint8  Name2[15];
+    uint32      Price;
+    uint32      Data;
+    std::string Name1;
+    std::string Name2;
 };
 
 struct SearchEntity
 {
-    uint8  name[16];
-    uint32 id;
-    uint8  mjob;
-    uint8  mlvl;
-    uint8  sjob;
-    uint8  slvl;
-    uint8  nation;
-    uint8  rank;
-    uint8  race;
-    uint16 zone;
-    uint16 prevzone;
-    uint16 flags1;
-    uint32 flags2;
-    uint32 linkshellid1;
-    uint32 linkshellid2;
-    uint8  linkshellrank1;
-    uint8  linkshellrank2;
-    bool   mentor;
-    uint8  seacom_type;
-    uint8  languages;
+    std::string name           = {};
+    uint32      id             = 0;
+    uint8       mjob           = 0;
+    uint8       mlvl           = 0;
+    uint8       sjob           = 0;
+    uint8       slvl           = 0;
+    uint8       nation         = 0;
+    uint8       rank           = 0;
+    uint8       race           = 0;
+    uint16      zone           = 0;
+    uint16      prevzone       = 0;
+    uint16      flags1         = 0;
+    uint32      flags2         = 0;
+    uint32      linkshellid1   = 0;
+    uint32      linkshellid2   = 0;
+    uint8       linkshellrank1 = 0;
+    uint8       linkshellrank2 = 0;
+    bool        mentor         = false;
+    uint8       seacom_type    = 0;
+    uint8       languages      = 0;
 };
 
 /************************************************************************
@@ -93,6 +94,7 @@ public:
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
     std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
+    ahItem                   GetAHItemFromItemID(uint16 ItemID);
     void                     ExpireAHItems(uint16 expireAgeInDays);
 
 private:

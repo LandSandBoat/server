@@ -5,22 +5,20 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
-    return typeEffect
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30))
+
+    return xi.effect.BIND
 end
 
-return mobskill_object
+return mobskillObject

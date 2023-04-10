@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Belligerent Sheep
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

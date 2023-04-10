@@ -9,14 +9,13 @@ require("scripts/globals/roe")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
+spellObject.onSpellCast = function(caster, target, spell)
     -- Records of Eminence: Alter Ego: Joachim
     if caster:getEminenceProgress(937) then
         xi.roe.onRecordTrigger(caster, 937)
@@ -25,7 +24,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.POISON, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.POISONA)
@@ -45,15 +44,15 @@ spell_object.onMobSpawn = function(mob)
     -- Try and ranged attack every 60s
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 60)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

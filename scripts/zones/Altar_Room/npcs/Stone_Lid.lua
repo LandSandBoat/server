@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
     if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 7 then
-        if (trade:hasItemQty(xi.items.YAGUDO_HEADGEAR, 1)) then -- Trade Yagudo Headgear
+        if trade:hasItemQty(xi.items.YAGUDO_HEADGEAR, 1) then -- Trade Yagudo Headgear
             player:tradeComplete()
             player:startEvent(50)
         end
@@ -47,10 +47,9 @@ entity.onEventFinish = function(player, csid, option)
             ID.mob.LAA_YAKU_THE_AUSTERE,
             ID.mob.POO_YOZO_THE_BABBLER,
         }
+
         local npc = GetNPCByID(ID.npc.STONE_LID)
-        if npcUtil.popFromQM(player, npc, mobs, {
-            hide = 1
-        }) then
+        if npcUtil.popFromQM(player, npc, mobs, { hide = 1 }) then
             player:messageSpecial(ID.text.DRAWS_NEAR)
         end
     elseif csid == 49 then

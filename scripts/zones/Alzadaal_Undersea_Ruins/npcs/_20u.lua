@@ -59,7 +59,6 @@ entity.onEventUpdate = function(player, csid, option, target)
     end
 
     player:createInstance(instanceid)
-
 end
 
 entity.onEventFinish = function(player, csid, option, target)
@@ -69,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, target)
 end
 
 entity.onInstanceCreated = function(player, target, instance)
-    if (instance) then
+    if instance then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
         player:delKeyItem(xi.ki.REMNANTS_PERMIT)

@@ -80,7 +80,8 @@ local digInfo =
         {  1446,   8, digReq.BORE     },
         {   700,  23, digReq.BORE     },
         {   701,   8, digReq.BORE     },
-        {   696,  30, digReq.BORE     },{ 4570,  10, digReq.MODIFIER },
+        {   696,  30, digReq.BORE     },
+        {  4570,  10, digReq.MODIFIER },
         {  4570,  10, digReq.MODIFIER },
         {  4487,  11, digReq.MODIFIER },
         {  4409,  12, digReq.MODIFIER },
@@ -846,9 +847,15 @@ local function canDig(player)
 
     -- neither player nor zone have reached their dig limit
 
-    if (digCount < 100 and zoneItemsDug < 20) or xi.settings.main.DIG_FATIGUE == 0 then
+    if
+        (digCount < 100 and zoneItemsDug < 20) or
+        xi.settings.main.DIG_FATIGUE == 0
+    then
         -- pesky delays
-        if (zoneInTime + areaDigDelay) <= currentTime and (lastDigTime + digDelay) <= currentTime then
+        if
+            (zoneInTime + areaDigDelay) <= currentTime and
+            (lastDigTime + digDelay) <= currentTime
+        then
             return true
         end
     end
@@ -934,7 +941,12 @@ local function getChocoboDiggingItem(player)
             itemId = 0
         end
     elseif itemId == 1255 then
-        if weather >= xi.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(xi.skill.DIG) >= 7 then
+        if
+            weather >= xi.weather.CLOUDS and
+            moon >= 10 and
+            moon <= 40 and
+            player:getSkillRank(xi.skill.DIG) >= 7
+        then
             itemId = oreMap[VanadielDayOfTheWeek()]
         else
             itemId = 0

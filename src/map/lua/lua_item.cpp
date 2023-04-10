@@ -134,7 +134,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
     return table;
 }
 
-uint8 CLuaItem::getWornItem()
+uint8 CLuaItem::getWornUses()
 {
     return m_PLuaItem->m_extra[0];
 }
@@ -149,10 +149,10 @@ bool CLuaItem::isSubType(uint8 subtype)
     return m_PLuaItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
 
-auto CLuaItem::getName() -> const char*
+auto CLuaItem::getName() -> std::string
 {
     // TODO: Fix c-style cast
-    return (const char*)m_PLuaItem->getName();
+    return m_PLuaItem->getName();
 }
 
 uint16 CLuaItem::getILvl()
@@ -270,20 +270,18 @@ bool CLuaItem::isShield()
 
 auto CLuaItem::getSignature() -> std::string
 {
-    int8 signature[DecodeStringLength];
+    char signature[DecodeStringLength] = {};
 
-    memset(&signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
-        DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
+        DecodeStringLinkshell(m_PLuaItem->getSignature(), signature);
     }
     else
     {
-        DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
+        DecodeStringSignature(m_PLuaItem->getSignature(), signature);
     }
 
-    // TODO: we might lose this...
-    return std::string(reinterpret_cast<const char*>(signature));
+    return signature;
 }
 
 uint8 CLuaItem::getAppraisalID()
@@ -340,7 +338,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
     SOL_REGISTER("getMatchingTrials", CLuaItem::getMatchingTrials);
-    SOL_REGISTER("getWornItem", CLuaItem::getWornItem);
+    SOL_REGISTER("getWornUses", CLuaItem::getWornUses);
     SOL_REGISTER("isType", CLuaItem::isType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);
     SOL_REGISTER("getName", CLuaItem::getName);

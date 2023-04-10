@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Teco Chatpaya
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -3,15 +3,15 @@
 --  Stone Bangles
 --  Enchantment: "Enstone"
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect = xi.effect.ENLIGHT
     doEnspell(target, target, nil, effect)
 end
 
-return item_object
+return itemObject

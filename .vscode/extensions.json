@@ -4,6 +4,7 @@
         "jkiviluoto.tws",
         "sumneko.lua",
         "wwm.better-align",
-        "tomblind.local-lua-debugger-vscode"
+        "tomblind.local-lua-debugger-vscode",
+        "ms-python.python"
     ]
 }

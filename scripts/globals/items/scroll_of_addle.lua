@@ -3,14 +3,14 @@
 -- Scroll of Addle
 -- Teaches the magic Addle
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(286)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(286)
 end
 
-return item_object
+return itemObject

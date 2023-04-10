@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Remus
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

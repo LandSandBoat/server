@@ -20,21 +20,48 @@ entity.onTrigger = function(player, npc)
     local healingTheLand = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
     local sorceryOfTheNorth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
-    if actingInGoodFaith == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+    if
+        actingInGoodFaith == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.GANTINEUXS_LETTER)
+    then
         player:startEvent(680) -- Finish quest "Acting in Good Faith"
-    elseif healingTheLand == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and player:getMainLvl() >= 10 then
+    elseif
+        healingTheLand == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(681) -- Start quest "Healing the Land"
-    elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
+    elseif
+        healingTheLand == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+    then
         player:startEvent(682) -- During quest "Healing the Land"
-    elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) == false then
+    elseif
+        healingTheLand == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+    then
         player:startEvent(683) -- Finish quest "Healing the Land"
-    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() then
+    elseif
+        healingTheLand == QUEST_COMPLETED and
+        sorceryOfTheNorth == QUEST_AVAILABLE and
+        player:needToZone()
+    then
         player:startEvent(684) -- New standard dialog after "Healing the Land"
-    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() == false then
+    elseif
+        healingTheLand == QUEST_COMPLETED and
+        sorceryOfTheNorth == QUEST_AVAILABLE and
+        not player:needToZone()
+    then
         player:startEvent(685) -- Start quest "Sorcery of the North"
-    elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) == false then
+    elseif
+        sorceryOfTheNorth == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+    then
         player:startEvent(686) -- During quest "Sorcery of the North"
-    elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
+    elseif
+        sorceryOfTheNorth == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+    then
         player:startEvent(687) -- Finish quest "Sorcery of the North"
     end
 end
@@ -44,7 +71,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 680 then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4732)
         else
             player:addTitle(xi.title.PILGRIM_TO_MEA)

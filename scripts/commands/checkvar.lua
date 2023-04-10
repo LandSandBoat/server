@@ -18,7 +18,7 @@ function onTrigger(player, arg1, arg2)
     local targ
     local varName
 
-    if (arg2 == nil) then
+    if arg2 == nil then
         -- no player provided. shift arguments by one.
         targ = nil
         varName = arg1
@@ -28,18 +28,18 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
-        if (string.upper(targ) == 'SERVER') then
+        if string.upper(targ) == 'SERVER' then
             targ = 'server'
         else
             local target = targ
             targ = GetPlayerByName(targ)
-            if (targ == nil) then
+            if targ == nil then
                 error(player, string.format("Player named '%s' not found!", target))
                 return
             end
@@ -47,13 +47,13 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate varName
-    if (varName == nil) then
+    if varName == nil then
         error(player, "You must provide a variable name.")
         return
     end
 
     -- show variable
-    if (targ == "server") then
+    if targ == "server" then
         player:PrintToPlayer(string.format("Server variable '%s' : %u ", varName, GetServerVariable(varName)))
     else
         player:PrintToPlayer(string.format("%s's variable '%s' : %u", targ:getName(), varName, targ:getCharVar(varName)))

@@ -33,9 +33,9 @@ mission.sections =
 
         [xi.zone.EASTERN_ADOULIN] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [2] = function(player, region)
+                [2] = function(player, triggerArea)
                     if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
                         return mission:progressEvent(1503)
                     end

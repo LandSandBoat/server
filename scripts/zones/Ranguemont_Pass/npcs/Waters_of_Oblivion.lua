@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.TROS):updateClaim(player)
-    elseif (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and trosKilled == 1) then
+    elseif player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and trosKilled == 1 then
         player:startEvent(8) -- Finish Quest "Painful Memory"
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -35,8 +35,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 8) then
-        if (npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, { item=16766 })) then
+    if csid == 8 then
+        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, { item = 16766 }) then
             player:delKeyItem(xi.ki.MERTAIRES_BRACELET)
             player:setCharVar("TrosKilled", 0)
             player:setCharVar("Tros_Timer", 0)

@@ -5,28 +5,30 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:30:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local pet = player:getPet()
+
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB then
+    elseif
+        (not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB) or
+        pet:getLocalVar("ReceivedFamiliar") == 1
+    then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    elseif pet:getLocalVar("ReceivedFamiliar") == 1 then
-        return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    else
-        pet:setLocalVar("ReceivedFamiliar", 1)
-        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-        return 0, 0
     end
+
+    pet:setLocalVar("ReceivedFamiliar", 1)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+
+    return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     player:familiar()
 
     -- pets powers increase!
@@ -35,4 +37,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return 0
 end
 
-return ability_object
+return abilityObject

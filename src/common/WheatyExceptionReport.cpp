@@ -311,8 +311,21 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Memory dump: %s"), m_szDumpFileName);
         std::time_t t = std::time(nullptr);
         Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
+        Log(_T("Process Uptime: %s"), GetUptimeString());
+        PrintSystemInfo();
+        Log(_T("Process Memory Usage: %s"), GetMemoryUsageString());
+        Log(_T("Git Branch: %s"), version::GetGitBranch());
+        Log(_T("Git Commit Subject: %s"), version::GetGitCommitSubject());
+        Log(_T("Git SHA: %s"), version::GetGitSha());
+        Log(_T("Git Date: %s"), version::GetGitDate());
+        Log(_T("====================================================="));
+
+        DumpBacktrace();
+
+        Log(_T("====================================================="));
 
         GenerateExceptionReport(pExceptionInfo);
+
     }
 
     Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
@@ -638,15 +651,6 @@ PEXCEPTION_POINTERS pExceptionInfo)
     __try
     {
         PEXCEPTION_RECORD pExceptionRecord = pExceptionInfo->ExceptionRecord;
-
-        Log(_T("Process Uptime: %s"), GetUptimeString());
-        PrintSystemInfo();
-        Log(_T("Process Memory Usage: %s"), GetMemoryUsageString());
-        Log(_T("Git Branch: %s"), version::GetGitBranch());
-        Log(_T("Git Commit Subject: %s"), version::GetGitCommitSubject());
-        Log(_T("Git SHA: %s"), version::GetGitSha());
-        Log(_T("Git Date: %s"), version::GetGitDate());
-        Log(_T("====================================================="));
 
         PCONTEXT pCtx = pExceptionInfo->ContextRecord;
 
@@ -974,6 +978,17 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             &symDisplacement,                               // Address of the variable that will receive the displacement
             &sip.si))                                       // Address of the SYMBOL_INFO structure (inside "sip" object)
         {
+            bool isStdLib = sip.si.NameLen > 3 &&
+                            sip.si.Name[0] == 's' &&
+                            sip.si.Name[1] == 't' &&
+                            sip.si.Name[2] == 'd';
+
+            // Don't print things from the std:: namespace, for clarity
+            if (isStdLib)
+            {
+                continue;
+            }
+
             wsprintf((LPSTR)funcNameBuffer.data(), "%hs+%I64X", sip.si.Name, symDisplacement);
         }
         else                                                // No symbol found.  Print out the logical address instead.

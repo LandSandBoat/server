@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Doumina
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

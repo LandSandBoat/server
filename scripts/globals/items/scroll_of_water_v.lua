@@ -3,14 +3,14 @@
 -- Scroll of Water V
 -- Teaches the black magic Water V
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(173)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(173)
 end
 
-return item_object
+return itemObject

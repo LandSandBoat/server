@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Gildge
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

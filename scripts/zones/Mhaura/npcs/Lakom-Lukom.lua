@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Lakom-Lukom
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

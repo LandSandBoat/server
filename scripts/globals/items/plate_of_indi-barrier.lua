@@ -3,14 +3,14 @@
 -- plate_of_indi-barrier
 -- Teaches INDI-BARRIER
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(xi.magic.spell.INDI_BARRIER)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(xi.magic.spell.INDI_BARRIER)
 end
 
-return item_object
+return itemObject

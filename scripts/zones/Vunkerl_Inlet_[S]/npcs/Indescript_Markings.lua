@@ -13,13 +13,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
 
     player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Legs
-    if (pantsQuestProgress > 0 and pantsQuestProgress < 3 and player:hasKeyItem(xi.ki.DJINN_EMBER) == false) then
+    if
+        pantsQuestProgress > 0 and
+        pantsQuestProgress < 3 and
+        not player:hasKeyItem(xi.ki.DJINN_EMBER)
+    then
         player:addKeyItem(xi.ki.DJINN_EMBER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DJINN_EMBER)
         player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)

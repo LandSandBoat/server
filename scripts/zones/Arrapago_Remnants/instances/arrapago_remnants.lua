@@ -4,9 +4,9 @@
 require("scripts/globals/instance")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:messageSpecial(ID.text.SALVAGE_START, 1)
@@ -20,29 +20,28 @@ instance_object.afterInstanceRegister = function(player)
     end
 end
 
-instance_object.onInstanceCreated = function(instance)
-
+instanceObject.onInstanceCreated = function(instance)
     for i, v in pairs(ID.npc[1][1]) do
         local npc = GetNPCByID(v, instance)
         npc:setStatus(xi.status.NORMAL)
     end
+
     instance:setStage(1)
     instance:setProgress(0)
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     if instance then
         player:setInstance(instance)
         player:setPos(0, 0, 0, 0, instance:getZone():getID())
     end
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-instance_object.onInstanceFailure = function(instance)
-
+instanceObject.onInstanceFailure = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -51,16 +50,16 @@ instance_object.onInstanceFailure = function(instance)
     end
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
 end
 
-instance_object.onRegionEnter = function(player, region, instance)
-    if region:GetRegionID() <= 11 then
-        player:startEvent(199 + region:GetRegionID())
+instanceObject.onTriggerAreaEnter = function(player, triggerArea, instance)
+    if triggerArea:GetTriggerAreaID() <= 11 then
+        player:startEvent(199 + triggerArea:GetTriggerAreaID())
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
+instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     if instance:getStage() == 1 and progress == 10 then
         SpawnMob(ID.mob[1][2].rampart, instance)
     elseif instance:getStage() == 2 and progress == 2 then -- attempt to spawn slot
@@ -74,26 +73,26 @@ instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
     elseif instance:getStage() == 7 and progress == 0 then
         local door = GetNPCByID(ID.npc[6].DOOR, instance)
         door:setLocalVar("current", os.time())
-        if (door:getLocalVar("current") - door:getLocalVar("start") <= 420) then
+        if door:getLocalVar("current") - door:getLocalVar("start") <= 420 then
             SpawnMob(ID.mob[6].treasure_hunter1, instance)
             SpawnMob(ID.mob[6].treasure_hunter2, instance)
             SpawnMob(ID.mob[6].qiqirn_mine_1, instance)
             SpawnMob(ID.mob[6].qiqirn_mine_2, instance)
         end
     end
-
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
 
     if csid >= 200 and csid <= 203 and option == 1 then
         for id = ID.mob[2][csid - 199].mobs_start, ID.mob[2][csid - 199].mobs_end do
             SpawnMob(id, instance)
         end
+
         instance:setProgress(csid - 199)
         for id = ID.mob[1][2].rampart, ID.mob[1][2].mobs_end do
             DespawnMob(id, instance)
@@ -104,6 +103,7 @@ instance_object.onEventFinish = function(player, csid, option)
                 SpawnMob(id, instance)
             end
         end
+
         instance:setProgress(csid - 203)
             for id = ID.mob[2][4].mobs_start, ID.mob[2][0].astrologer do
                 DespawnMob(id, instance)
@@ -115,6 +115,7 @@ instance_object.onEventFinish = function(player, csid, option)
             SpawnMob(id, instance)
             SpawnMob(ID.mob[4][csid - 204].rampart2, instance)
         end
+
         instance:setProgress(csid - 204)
         for id = ID.mob[3][1].mobs_start, ID.mob[3].qiqirn_mine_2 do
             DespawnMob(id, instance)
@@ -125,6 +126,7 @@ instance_object.onEventFinish = function(player, csid, option)
                 SpawnMob(id, instance)
             end
         end
+
         SpawnMob(ID.mob[5][csid - 206].rampart1, instance)
         SpawnMob(ID.mob[5][csid - 206].rampart2, instance)
         SpawnMob(ID.mob[5][csid - 206].rampart3, instance)
@@ -136,6 +138,7 @@ instance_object.onEventFinish = function(player, csid, option)
         for id = ID.mob[6][1].mobs_start, ID.mob[6][1].mobs_end do
             SpawnMob(id, instance)
         end
+
         SpawnMob(ID.mob[6].rampart1, instance)
         SpawnMob(ID.mob[6].rampart2, instance)
         instance:setProgress(csid - 208)
@@ -151,4 +154,4 @@ instance_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return instance_object
+return instanceObject

@@ -19,10 +19,11 @@ entity.onMobRoam = function(mob)
 
         -- despawn heliodromos
         for i = ID.mob.HELIODROMOS_OFFSET, ID.mob.HELIODROMOS_OFFSET + 2 do
-            if (GetMobByID(i):isSpawned()) then
+            if GetMobByID(i):isSpawned() then
                 DespawnMob(i)
             end
         end
+
         -- allow placeholders to respawn
         for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
             local ph = GetMobByID(i)
@@ -48,7 +49,7 @@ entity.onMobDespawn = function(mob)
         end
     end
 
-    if (allHeliodromosDead) then
+    if allHeliodromosDead then
         SetServerVariable("Heliodromos_ToD", os.time() + math.random(43200, 54000)) -- 12 to 15 hours
 
         -- allow placeholders to respawn

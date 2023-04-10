@@ -68,8 +68,8 @@ local homepointData =
     [ 57] = { group = 0, fee = 2, dest = {      -80,      46,      62,   0, 160 } }, -- Den of Rancor #1
     [ 58] = { group = 0, fee = 2, dest = {     -554,     -70,      66,   0, 162 } }, -- Castle Zvahl Keep #1
     [ 59] = { group = 0, fee = 2, dest = {        5,     -42,     526,   0, 130 } }, -- Ru'Aun Gardens #1
-    [ 60] = { group = 0, fee = 2, dest = {     -499,     -42,     167,   0, 130 } }, -- Ru'Aun Gardens #2
-    [ 61] = { group = 0, fee = 2, dest = {     -312,     -42,    -422,   0, 130 } }, -- Ru'Aun Gardens #3
+    [ 60] = { group = 0, fee = 2, dest = {     -312,     -42,    -422,   0, 130 } }, -- Ru'Aun Gardens #3
+    [ 61] = { group = 0, fee = 2, dest = {     -499,     -42,     167,   0, 130 } }, -- Ru'Aun Gardens #2
     [ 62] = { group = 0, fee = 2, dest = {      500,     -42,     158,   0, 130 } }, -- Ru'Aun Gardens #4
     [ 63] = { group = 0, fee = 2, dest = {      305,     -42,    -427,   0, 130 } }, -- Ru'Aun Gardens #5
     [ 64] = { group = 6, fee = 1, dest = {       -1,     -28,     107,   0,  26 } }, -- Tavnazian Safehold #1
@@ -146,18 +146,18 @@ local selection =
 
 local travelType = xi.teleport.type.HOMEPOINT
 
-local function getCost (from, to, key)
-
-    if homepointData[from].group == homepointData[to].group and homepointData[to].group ~= 0 then
+local function getCost(from, to, key)
+    if
+        homepointData[from].group == homepointData[to].group and
+        homepointData[to].group ~= 0
+    then
         return 0
     else
         return (500 * homepointData[to].fee) / (key and 5 or 1)
     end
-
 end
 
 local function goToHP(player, choice, index)
-
     local origin = player:getLocalVar("originIndex")
     local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
@@ -169,7 +169,6 @@ local function goToHP(player, choice, index)
         player:delGil(getCost(origin, index, hasKI))
         player:setPos(unpack(homepointData[index].dest))
     end
-
 end
 
 xi.homepoint.onTrigger = function(player, csid, index)
@@ -196,11 +195,9 @@ xi.homepoint.onTrigger = function(player, csid, index)
     player:setLocalVar("originIndex", index)
     local g1, g2, g3, g4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
-
 end
 
 xi.homepoint.onEventUpdate = function(player, csid, option)
-
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
@@ -220,8 +217,9 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
                 for x = 1, 9 do
                     if favs[x] == index then
                         for y = x, 8 do
-                            favs[y] = favs[y+1]
+                            favs[y] = favs[y + 1]
                         end
+
                         favs[9] = -1
                         break
                     end
@@ -234,12 +232,11 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
             end
 
             player:setTeleportMenu(travelType, favs)
-
         end
 
         for x = 1, 3 do -- Condense arrays for event params
-            favs[1] = favs[1] + favs[x+1] * 256^x
-            favs[5] = favs[5] + favs[x+5] * 256^x
+            favs[1] = favs[1] + favs[x + 1] * 256^x
+            favs[5] = favs[5] + favs[x + 5] * 256^x
         end
 
         favs[9] = favs[9] + favs[10] * 256
@@ -250,7 +247,6 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
 end
 
 xi.homepoint.onEventFinish = function(player, csid, option, event)
-
     if csid == event then
         local choice = bit.band(option, 0xFF)
         if choice == selection.SET_HOMEPOINT then
@@ -260,9 +256,11 @@ xi.homepoint.onEventFinish = function(player, csid, option, event)
             else
                 print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
             end
-        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and xi.settings.main.HOMEPOINT_TELEPORT == 1 then
+        elseif
+            xi.settings.main.HOMEPOINT_TELEPORT == 1 and
+            (choice == selection.TELEPORT or choice == selection.SAME_ZONE)
+        then
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end
-
 end

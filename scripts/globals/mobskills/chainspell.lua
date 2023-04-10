@@ -5,13 +5,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobBuffMove(mob, xi.effect.CHAINSPELL, 1, 0, 60)
 
     skill:setMsg(xi.msg.basic.USES)
@@ -19,4 +19,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.effect.CHAINSPELL
 end
 
-return mobskill_object
+return mobskillObject

@@ -9,29 +9,22 @@
 -- Level: 12
 -- Casting Time: 0.5 seconds
 -- Recast Time: 10 seconds
--- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
+-- Skillchain Element(s): Impaction
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = xi.effect.STUN
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
@@ -49,14 +42,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (resist > 0.25) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist)
-    end
+    params.effect = xi.effect.STUN
+    local power = 1
+    local tick = 0
+    local duration = 5
+
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

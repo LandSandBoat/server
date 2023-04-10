@@ -9,32 +9,32 @@
 -- Level: 44
 -- Casting Time: 0.5 seconds
 -- Recast Time: 19.25 seconds
--- Skillchain property(ies): Induration (can open Impaction, Compression, or Fragmentation)
+-- Skillchain property(ies): Induration
 -- Combos: Plantoid Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.VERMIN
     params.tpmod = TPMOD_ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = SC_INDURATION
     params.numhits = 1
     params.multiplier = 2.0
-    params.tp150 = 1.2
-    params.tp300 = 1.4
-    params.azuretp = 1.5
-    params.duppercap = 45 --guesstimated attack % bonuses
+    params.tp150 = 2.0
+    params.tp300 = 2.0
+    params.azuretp = 2.0
+    params.duppercap = 45
     params.str_wsc = 0.2
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0
@@ -43,10 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
-return spell_object
+return spellObject

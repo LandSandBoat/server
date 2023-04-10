@@ -3,14 +3,14 @@
 -- Geohelix Schema
 -- Teaches the black magic Geohelix
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(278)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(278)
 end
 
-return item_object
+return itemObject

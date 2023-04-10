@@ -7,13 +7,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local master             = pet:getMaster()
     local masterEquippedHead = master:getEquipID(xi.slot.HEAD)
     local dmgBoost           = master:getJobPointLevel(xi.jp.CONCENTRIC_PULSE_EFFECT)
@@ -34,9 +34,11 @@ ability_object.onPetAbility = function(target, pet, skill)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 
-    pet:timer(200, function(mobArg) mobArg:setHP(0) end)
+    pet:timer(200, function(mobArg)
+        mobArg:setHP(0)
+    end)
 
     return dmg
 end
 
-return ability_object
+return abilityObject

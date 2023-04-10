@@ -6,22 +6,25 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local lanceTime = mob:getLocalVar("lanceTime")
     local lanceOut = mob:getLocalVar("lanceOut")
-    if (not (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(xi.effect.MAGIC_SHIELD)))
-        and (lanceTime + 60 < mob:getBattleTime()) and target:getCurrentAction() ~= xi.act.MOBABILITY_USING
-        and lanceOut == 1 then
 
+    if
+        not (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) and
+        lanceTime + 60 < mob:getBattleTime() and
+        target:getCurrentAction() ~= xi.act.MOBABILITY_USING and
+        lanceOut == 1
+    then
         return 0
     end
+
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:showText(mob, ID.text.SELHTEUS_TEXT + 1)
 
     local numhits = 1
@@ -44,4 +47,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

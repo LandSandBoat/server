@@ -22,7 +22,7 @@ CREATE TABLE `mob_family_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`familyid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -836,6 +836,10 @@ INSERT INTO `mob_family_mods` VALUES (268,59,120,1); -- WEAPON_BONUS: 120
 
 -- Yovra
 INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
+
+-- Zdei
+INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
+INSERT INTO `mob_family_mods` VALUES (272,102,60,1);  -- MOBMOD_SIGHT_ANGLE
 
 -- Scorpion-Serket
 INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256

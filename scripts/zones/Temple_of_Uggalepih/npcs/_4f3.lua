@@ -42,9 +42,9 @@ entity.onEventFinish = function(player, csid, option)
             GetNPCByID(ID.npc.PLONGEUR_MONBERRY):castSpell(260)
             local mob = GetNPCByID(ID.npc.PLONGEUR_MONBERRY)
             if mob ~= nil then
-                mob:injectActionPacket( 43, 43 )
+                mob:injectActionPacket(43, 43)
             else
-                printf( "MOB IS NULL! %d", ID.npc.PLONGEUR_MONBERRY )
+                printf("MOB IS NULL! %d", ID.npc.PLONGEUR_MONBERRY)
             end
             --]]
         end

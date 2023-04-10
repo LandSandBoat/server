@@ -27,10 +27,16 @@ xi.znm = xi.znm or {}
 xi.znm.soultrapper = xi.znm.soultrapper or {}
 
 xi.znm.soultrapper.onItemCheck = function(target, user)
-    if not user:isFacing(target) then
+    -- Target checks.
+    if
+        target == nil or -- Players can use a macro to bypass the client side targeting restriction.
+        not target:isMob() or
+        not user:isFacing(target)
+    then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
+    -- Equipment checks.
     local id = user:getEquipID(xi.slot.AMMO)
     if
         id ~= xi.items.BLANK_SOUL_PLATE and
@@ -39,6 +45,7 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
+    -- Inventory checks.
     if user:getFreeSlotsCount() == 0 then
         return xi.msg.basic.FULL_INVENTORY
     end
@@ -61,6 +68,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     if hpp <= 5 then
         hpMultiplier = 10
     end
+
     zeni = zeni * hpMultiplier
 
     -- In-Demand System Component

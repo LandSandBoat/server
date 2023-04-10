@@ -18,33 +18,32 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1.56 params.ftp200 = 1.88 params.ftp300 = 2.5
     params.str_wsc = 0.75 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1.5; params.atk200 = 1.5; params.atk300 = 1.5
+    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.atk100 = 1.5 params.atk200 = 1.5 params.atk300 = 1.5
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 1.5625 params.ftp200 = 2.6875 params.ftp300 = 4.125
         params.str_wsc = 0.75
-        params.atk100 = 1.65; params.atk200 = 1.65; params.atk300 = 1.65
+        params.atk100 = 1.65 params.atk200 = 1.65 params.atk300 = 1.65
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
         local duration = 60 * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.PARALYSIS, 25, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

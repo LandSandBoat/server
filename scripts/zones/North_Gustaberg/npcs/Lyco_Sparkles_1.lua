@@ -20,6 +20,7 @@ entity.onTrade = function(player, npc, trade)
         end
     end
 end
+
 entity.onTrigger = function(player, npc)
     if utils.mask.getBit(player:getCharVar("LycopodiumTeleport_Mask"), 2) then
         player:startEvent(263)

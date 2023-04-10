@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Giehnz
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

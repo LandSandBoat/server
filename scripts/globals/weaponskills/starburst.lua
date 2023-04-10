@@ -15,9 +15,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftp100 = 1 params.ftp200 = 2 params.ftp300 = 2.5
     params.str_wsc = 0.0 params.dex_wsc = 0.0
@@ -32,7 +32,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.ele = xi.magic.ele.DARK
     end
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 
@@ -40,4 +40,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

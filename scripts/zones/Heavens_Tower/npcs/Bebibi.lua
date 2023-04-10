@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Bebibi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

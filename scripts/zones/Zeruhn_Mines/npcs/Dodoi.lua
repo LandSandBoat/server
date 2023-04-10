@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Dodoi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -41,7 +41,6 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(656, 0, 889, 939) -- Incorrect or not enough items
         end
-
     end
 end
 
@@ -53,7 +52,11 @@ entity.onTrigger = function(player, npc)
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
 
     -- THE ALL NEW C-3000
-    if legendaryPlanB == QUEST_COMPLETED and allNewC3000 == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 then
+    if
+        legendaryPlanB == QUEST_COMPLETED and
+        allNewC3000 == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4
+    then
         if player:needToZone() then
             player:startEvent(316) -- Post quest text from legendaryPlanB
         else
@@ -67,7 +70,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(301) -- Supplemental text when aGreetingCardian in progress, right before completion
 
     -- LEGENDARY PLAN B
-    elseif aGreetingCardian == QUEST_COMPLETED and legendaryPlanB == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 then
+    elseif
+        aGreetingCardian == QUEST_COMPLETED and
+        legendaryPlanB == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+    then
         if player:needToZone() then
             player:startEvent(306) -- Supplemental text for aGreetingCardian before start of legendaryPlanB
         else
@@ -109,14 +116,20 @@ entity.onEventFinish = function(player, csid, option)
     -- LEGENDARY PLAN B
     elseif csid == 308 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
-    elseif csid == 314 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item=12749, gil=700 }) then
+    elseif
+        csid == 314 and
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item = 12749, gil = 700 })
+    then
         player:confirmTrade()
         player:needToZone(true)
 
     -- THE ALL NEW C-3000
     elseif csid == 655 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
-    elseif csid == 657 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame=10, gil=600 }) then
+    elseif
+        csid == 657 and
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame = 10, gil = 600 })
+    then
         player:confirmTrade()
     end
 end

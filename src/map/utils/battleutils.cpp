@@ -163,7 +163,7 @@ namespace battleutils
             {
                 CWeaponSkill* PWeaponSkill = new CWeaponSkill(sql->GetIntData(0));
 
-                PWeaponSkill->setName(sql->GetData(1));
+                PWeaponSkill->setName(sql->GetStringData(1));
                 PWeaponSkill->setJob(sql->GetData(2));
                 PWeaponSkill->setType(sql->GetIntData(3));
                 PWeaponSkill->setSkillLevel(sql->GetIntData(4));
@@ -209,7 +209,7 @@ namespace battleutils
             {
                 CMobSkill* PMobSkill = new CMobSkill(sql->GetIntData(0));
                 PMobSkill->setAnimationID(sql->GetIntData(1));
-                PMobSkill->setName(sql->GetData(2));
+                PMobSkill->setName(sql->GetStringData(2));
                 PMobSkill->setAoe(sql->GetIntData(3));
                 PMobSkill->setDistance(sql->GetFloatData(4));
                 PMobSkill->setAnimationTime(sql->GetIntData(5));
@@ -319,8 +319,7 @@ namespace battleutils
     {
         for (int32 SkillId = 0; SkillId < MAX_WEAPONSKILL_ID; ++SkillId)
         {
-            delete g_PWeaponSkillList[SkillId];
-            g_PWeaponSkillList[SkillId] = nullptr;
+            destroy(g_PWeaponSkillList[SkillId]);
         }
     }
 
@@ -331,8 +330,7 @@ namespace battleutils
     {
         for (auto& mobskill : g_PMobSkillList)
         {
-            delete mobskill;
-            mobskill = nullptr;
+            destroy(mobskill);
         }
     }
 
@@ -343,7 +341,7 @@ namespace battleutils
     {
         for (auto& petskill : g_PPetSkillList)
         {
-            delete petskill.second;
+            destroy(petskill.second);
         }
         g_PPetSkillList.clear();
     }
@@ -750,20 +748,12 @@ namespace battleutils
     int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
+        int32   damage       = Action->spikesParam;
 
-        int32 damage = Action->spikesParam;
-
-        // int16 intStat = PDefender->INT();
-        // int16 mattStat = PDefender->getMod(Mod::MATT);
-
-        switch (static_cast<SPIKES>(Action->spikesEffect))
+        if (static_cast<SPIKES>(Action->spikesEffect) == SPIKES::SPIKE_DREAD)
         {
-            case SPIKE_DREAD:
-                // drain same as damage taken
-                damage = damageTaken;
-                break;
-            default:
-                break;
+            // drain same as damage taken
+            damage = damageTaken;
         }
 
         damage = MagicDmgTaken(PAttacker, damage, spikeElement); // apply MDT/MDT2/DT, liement to whoever is taking damage
@@ -856,66 +846,70 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
-            switch (static_cast<SPIKES>(Action->spikesEffect))
+            if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
             {
-                case SPIKE_BLAZE:
-                case SPIKE_ICE:
-                case SPIKE_SHOCK:
-                    PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
-                    break;
+                switch (static_cast<SPIKES>(Action->spikesEffect))
+                {
+                    case SPIKE_BLAZE:
+                    case SPIKE_ICE:
+                    case SPIKE_SHOCK:
+                        PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+                        break;
 
-                case SPIKE_DREAD:
-                    if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
-                    {
-                        // is undead no effect
-                        Action->spikesEffect = (SUBEFFECT)0;
-                        return false;
-                    }
-                    else
-                    {
-                        if (PDefender->isAlive())
+                    case SPIKE_DREAD:
+                        if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
                         {
-                            auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
-                            if (PEffect)
-                            {
-                                // see https://www.bg-wiki.com/ffxi/Dread_Spikes
-
-                                // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
-                                int remainingDrain = PEffect->GetSubPower();
-                                if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
-                                {
-                                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
-                                }
-                                else
-                                {
-                                    PEffect->SetSubPower(remainingDrain - abs(damage));
-                                }
-                            }
-                            if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
-                            {
-                                Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
-                                PDefender->addHP(spikesDamage);
-                            }
+                            // is undead no effect
+                            Action->spikesEffect = (SUBEFFECT)0;
+                            return false;
                         }
-                        PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::DARK);
-                    }
-                    break;
+                        else
+                        {
+                            if (PDefender->isAlive())
+                            {
+                                auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
+                                if (PEffect)
+                                {
+                                    // see https://www.bg-wiki.com/ffxi/Dread_Spikes
 
-                case SPIKE_REPRISAL:
-                    if (Action->reaction == REACTION::BLOCK)
-                    {
-                        PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
-                    }
-                    else
-                    {
-                        // only works on shield blocks
-                        Action->spikesEffect = (SUBEFFECT)0;
-                        return false;
-                    }
-                    break;
+                                    // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
+                                    int remainingDrain = PEffect->GetSubPower();
+                                    if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
+                                    {
+                                        PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
+                                    }
+                                    else
+                                    {
+                                        PEffect->SetSubPower(remainingDrain - abs(damage));
+                                    }
+                                }
+                                if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
+                                {
+                                    Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                    PDefender->addHP(spikesDamage);
+                                }
+                            }
+                            PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::DARK);
+                        }
+                        break;
 
-                default:
-                    break;
+                    case SPIKE_REPRISAL:
+                        if ((Action->reaction & REACTION::BLOCK) == REACTION::BLOCK)
+                        {
+                            PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
+                        }
+
+                        else
+                        {
+                            // only works on shield blocks
+                            Action->spikesEffect = (SUBEFFECT)0;
+                            return false;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
 
             // Check for status effect proc. Todo: move to scripts soon™ after item additionalEffect refactor Teo is working on
@@ -1777,24 +1771,24 @@ namespace battleutils
     http://www.ffxiah.com/forum/topic/21671/paladin-faq-info-and-trade-studies/34/#2581818
     https://docs.google.com/spreadsheet/ccc?key=0AkX3maplDraRdFdCZHI2OU93aVgtWlZhN3ozZEtnakE#gid=0
     http://www.ffxionline.com/forums/paladin/55139-shield-data-size-2-vs-size-3-a.html
-    https://www.bg-wiki.com/ffxi/Shield_Skill - Base calculations
+    https://www.bg-wiki.com/ffxi/Shield_Skill - Base calculations - does not floor
     https://www.ffxiah.com/forum/topic/53625/make-paladin-great-again/6/#3434884 - Palisade +base block rate
 
     Base block rates are (small to large shield type) 55% -> 50% -> 45% -> 30%
     Aegis is a special case, having the base block rate of a size 2 type.
     ************************************************************************/
-    uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        int8   base          = 0;
+        float  base          = 0;
         int8   shieldSize    = 3;
-        int8   blockRate     = 0;
-        int8   skillModifier = 0;
+        float  blockRate     = 0;
+        float  skillModifier = 0;
         int16  blockRateMod  = PDefender->getMod(Mod::SHIELDBLOCKRATE);
         int16  palisadeMod   = PDefender->getMod(Mod::PALISADE_BLOCK_BONUS);
         float  reprisalMult  = 1.0f;
         auto*  weapon        = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
         uint16 attackSkill   = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
-        uint16 blockSkill    = PDefender->GetSkill(SKILL_SHIELD);
+        float  blockSkill    = PDefender->GetSkill(SKILL_SHIELD);
 
         if (PDefender->objtype == TYPE_PC)
         {
@@ -1810,27 +1804,59 @@ namespace battleutils
                 return 0;
             }
         }
-        else if (PDefender->objtype == TYPE_MOB && PDefender->GetMJob() == JOB_PLD)
+        else if (PDefender->objtype != TYPE_PC)
         {
-            CMobEntity* PMob = (CMobEntity*)PDefender;
+            CMobEntity* PEntity = (CMobEntity*)PDefender;
+            if (PEntity->getMobMod(MOBMOD_CAN_SHIELD_BLOCK) > 0)
+            {
+                base = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+                if (PDefender->objtype == TYPE_PET)
+                {
+                    skillModifier = (int8)((PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackSkill) * 0.215f);
+                    if (base <= 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return base + skillModifier;
+                    }
+                }
+                else
+                {
+                    // TODO: check trust type for ilvl > 99 when implemented
+                    blockSkill = GetMaxSkill(SKILLTYPE::SKILL_SHIELD, PDefender->GetMJob(), PDefender->GetMLevel() > 99 ? 99 : PDefender->GetMLevel());
 
-            if (PMob->m_EcoSystem != ECOSYSTEM::UNDEAD && PMob->m_EcoSystem != ECOSYSTEM::BEASTMAN)
+                    // Check for Reprisal and adjust skill and block rate bonus multiplier
+                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                    {
+                        blockSkill   = blockSkill * 1.15f;
+                        reprisalMult = 1.5f; // Default is 1.5x
+
+                        // Adamas and Priwen set the multiplier to 3.0x while equipped
+                        if (PDefender->getMod(Mod::REPRISAL_BLOCK_BONUS) > 0)
+                        {
+                            reprisalMult = 3.0f;
+                        }
+                    }
+
+                    skillModifier = (blockSkill - attackSkill) * 0.2325f;
+
+                    // Add skill and Palisade bonuses
+                    base += skillModifier + palisadeMod;
+                    // Multiply by Reprisal's bonus
+                    base = base * reprisalMult;
+
+                    // Apply the lower and upper caps
+                    blockRate = (base < 5) ? 5 : base;
+                    blockRate = (base > 100) ? 100 : base;
+
+                    return blockRate;
+                }
+            }
+            else // No block mobmod, so zero rate
             {
                 return 0;
-            }
-        }
-        else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PET_TYPE::AUTOMATON && PDefender->GetMJob() == JOB_PLD)
-        {
-            skillModifier = (int8)((PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackSkill) * 0.215f);
-            base          = PDefender->getMod(Mod::SHIELDBLOCKRATE);
-
-            if (base <= 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return base + skillModifier;
             }
         }
         else
@@ -1855,8 +1881,8 @@ namespace battleutils
             case 5: // Aegis and Srivatsa
                 base = 50;
                 break;
-            case 6: // Ochain
-                base = 110;
+            case 6: // Ochain -- https://www.bg-wiki.com/ffxi/Category:Shields
+                base = 108;
                 break;
             default:
                 return 0;
@@ -1865,7 +1891,7 @@ namespace battleutils
         // Check for Reprisal and adjust skill and block rate bonus multiplier
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
         {
-            blockSkill   = (uint16)(blockSkill * 1.15f);
+            blockSkill   = blockSkill * 1.15f;
             reprisalMult = 1.5f; // Default is 1.5x
 
             // Adamas and Priwen set the multiplier to 3.0x while equipped
@@ -1875,12 +1901,12 @@ namespace battleutils
             }
         }
 
-        skillModifier = (int16)((blockSkill - attackSkill) * 0.2325f);
+        skillModifier = (blockSkill - attackSkill) * 0.2325f;
 
         // Add skill and Palisade bonuses
         base += skillModifier + palisadeMod;
         // Multiply by Reprisal's bonus
-        base = (int8)(base * reprisalMult);
+        base = base * reprisalMult;
         // Add Chance of Successful Block
         base += blockRateMod;
 
@@ -2086,49 +2112,66 @@ namespace battleutils
                             PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                         }
                     }
-                    else if (PDefender->objtype == TYPE_PET)
-                    {
-                        absorb = 50;
+                }
+                else if (PDefender->objtype == TYPE_PET)
+                {
+                    absorb = 50;
 
-                        // Shield Mastery
-                        if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
-                        {
-                            // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
-                            // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
-                            PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
-                        }
-                    }
-                    else
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        absorb = 50;
+                        // If the pet blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                     }
+                }
+                else if (PDefender->objtype == TYPE_TRUST)
+                {
+                    absorb = 50;
 
-                    // Reprisal
-                    if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
-                        CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-                        float          spikesBonus    = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
-                        int16          effectPower    = (int16)(reprisalEffect->GetPower() * spikesBonus);
-                        int32          blockedDamage  = (damage * (100 - absorb)) / 100;
-                        int32          spikesDamage   = 0;
+                        // If the trust blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
+                    }
+                }
+                else
+                {
+                    absorb = 50;
+                }
+
+                // Reprisal
+                if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                {
+                    // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
+                    CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
+
+                    if (reprisalEffect != nullptr)
+                    {
+                        float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                        int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
+                        int32 blockedDamage = (damage * (100 - absorb)) / 100;
+                        int32 spikesDamage  = 0;
 
                         if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
                         {
-                            blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
                         }
 
-                        spikesDamage = blockedDamage * (effectPower / 100);
+                        spikesDamage = blockedDamage * (effectPower / 100.f);
 
                         // Set Reprisal spike damage
                         PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                     }
                 }
-
                 damage = (damage * absorb) / 100;
             }
         }
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -2137,6 +2180,9 @@ namespace battleutils
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
         damage = std::clamp(damage, -99999, 99999);
+
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
 
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
@@ -2388,8 +2434,8 @@ namespace battleutils
             if (primary)
             // Calculate TP Return from WS
             {
-                standbyTp = ((int16)(((tpMultiplier * baseTp) + bonusTP) *
-                                     (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+                standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
+                                               (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
             }
 
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
@@ -2442,6 +2488,9 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -2532,7 +2581,6 @@ namespace battleutils
             {
                 offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
-            // ShowDebug("Accuracy mod after direction checks: %d", offsetAccuracy);
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
@@ -2679,7 +2727,6 @@ namespace battleutils
                 }
             }
 
-            // ShowDebug("Crit rate mod before Innin/Yonin: %d", crithitrate);
             if (PDefender->objtype == TYPE_PC)
             {
                 critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
@@ -2695,8 +2742,6 @@ namespace battleutils
             {
                 critHitRate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
-
-            // ShowDebug("Crit rate mod after Innin/Yonin: %d", crithitrate);
 
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
@@ -3032,6 +3077,21 @@ namespace battleutils
         int32 rank = 0;
         int32 fstr = 0;
         float dif  = (float)(PAttacker->STR() - PDefender->VIT());
+
+        // does mob FSTR2 for ranged attack apply here?
+        if (PAttacker->objtype == TYPE_MOB || PAttacker->objtype == TYPE_PET)
+        {
+            fstr = (PAttacker->STR() - PDefender->VIT() + 4) / 4;
+
+            // Level -1 mobs are coded as level 1, but they have an fSTR of 1 always
+            if (PAttacker->objtype == TYPE_MOB && PAttacker->GetMLevel() == 1)
+            {
+                return 1;
+            }
+
+            return std::clamp(fstr, -20, 24);
+        }
+
         if (dif >= 12)
         {
             fstr = static_cast<int32>((dif + 4) / 2);
@@ -3064,6 +3124,7 @@ namespace battleutils
         {
             fstr = static_cast<int32>((dif + 13) / 2);
         }
+
         if (SlotID == SLOT_RANGED)
         {
             rank = PAttacker->GetRangedWeaponRank();
@@ -3085,6 +3146,7 @@ namespace battleutils
         else
         {
             fstr /= 2;
+
             if (SlotID == SLOT_MAIN)
             {
                 rank = PAttacker->GetMainWeaponRank();
@@ -3093,31 +3155,11 @@ namespace battleutils
             {
                 rank = PAttacker->GetSubWeaponRank();
             }
+
             // Everything else
             if (fstr <= (-rank))
             {
                 return (-rank);
-            }
-
-            // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-            // fSTR has no upper cap for Avatars, this is likely true for monsters and all pets.
-            // Since I can only confirm Avatars and this has a much larger impact on balance I will
-            // Only change this logic for Avatars pending further testing.
-
-            ENTITYTYPE attackerType = PAttacker->objtype;
-            bool       isAvatar     = false;
-
-            if (attackerType == TYPE_PET)
-            {
-                if (CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker))
-                {
-                    isAvatar = petEntity->getPetType() == PET_TYPE::AVATAR;
-                }
-            }
-
-            if (isAvatar)
-            {
-                return fstr;
             }
 
             if ((fstr > (-rank)) && (fstr <= rank + 8))
@@ -3415,7 +3457,7 @@ namespace battleutils
 
     bool IsParalyzed(CBattleEntity* PAttacker)
     {
-        return (xirand::GetRandomNumber(100) < std::clamp(PAttacker->getMod(Mod::PARALYZE) - PAttacker->getMod(Mod::PARALYZERES), 0, 100));
+        return (xirand::GetRandomNumber(100) < PAttacker->getMod(Mod::PARALYZE));
     }
 
     /************************************************************************
@@ -3538,8 +3580,8 @@ namespace battleutils
             case ECOSYSTEM::LUMINION:
                 KillerEffect = PDefender->getMod(Mod::LUMINION_KILLER);
                 break;
-            case ECOSYSTEM::LUMORIAN:
-                KillerEffect = PDefender->getMod(Mod::LUMORIAN_KILLER);
+            case ECOSYSTEM::LUMINIAN:
+                KillerEffect = PDefender->getMod(Mod::LUMINIAN_KILLER);
                 break;
             case ECOSYSTEM::PLANTOID:
                 KillerEffect = PDefender->getMod(Mod::PLANTOID_KILLER);
@@ -3775,7 +3817,6 @@ namespace battleutils
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
-                //   ShowDebug("duration: %d", PSCEffect->GetDuration());
                 PSCEffect->SetDuration(PSCEffect->GetDuration() - 1000);
                 PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
@@ -3949,6 +3990,12 @@ namespace battleutils
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
+        if (PEffect == nullptr)
+        {
+            ShowWarning("battleutils::TakeSkillchainDamage() - PEffect was null.");
+            return 0;
+        }
+
         // Determine the skill chain level and elemental resistance.
         SKILLCHAIN_ELEMENT skillchain = (SKILLCHAIN_ELEMENT)PEffect->GetPower();
         uint16             chainLevel = PEffect->GetTier();
@@ -3997,7 +4044,7 @@ namespace battleutils
         {
             case TYPE_PC:
             {
-                if (PDefender->animation == ANIMATION_SIT)
+                if (PDefender->animation == ANIMATION_SIT || (PDefender->animation >= ANIMATION_SITCHAIR_0 && PDefender->animation <= ANIMATION_SITCHAIR_10))
                 {
                     PDefender->animation = ANIMATION_NONE;
                     PDefender->updatemask |= UPDATE_HP;
@@ -4057,6 +4104,18 @@ namespace battleutils
             {
                 PPlayer->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
                 PPlayer->updatemask |= UPDATE_HP;
+            }
+            else if (PPlayer->animation == ANIMATION_SIT || (PPlayer->animation >= ANIMATION_SITCHAIR_0 && PPlayer->animation <= ANIMATION_SITCHAIR_10))
+            {
+                PPlayer->animation = ANIMATION_NONE;
+                PPlayer->updatemask |= UPDATE_HP;
+
+                CPetEntity* PPet = dynamic_cast<CPetEntity*>(PPlayer->PPet);
+                if (PPet && (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON))
+                {
+                    PPet->animation = ANIMATION_NONE;
+                    PPet->updatemask |= UPDATE_HP;
+                }
             }
         }
     }
@@ -4398,8 +4457,6 @@ namespace battleutils
             return;
         }
 
-        // CBaseEntity* PMob = CharHateGiver->GetEntity(mobID, TYPE_MOB);
-
         PMob->PEnmityContainer->LowerEnmityByPercent(PHateGiver, percentToTransfer, PHateReceiver);
     }
 
@@ -4410,24 +4467,27 @@ namespace battleutils
      ************************************************************************/
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
     {
-        // Souleater has no effect <10HP.
-        if (m_PChar->GetMJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
+        if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // lost 10% current hp, converted to damage (displayed as just a strong regular hit)
-            float drainPercent = 0.1f;
-
             // at most 2% bonus from gear
-            auto gearBonusPercent = m_PChar->getMod(Mod::SOULEATER_EFFECT);
-            drainPercent          = drainPercent + std::min(0.02f, 0.01f * gearBonusPercent);
+            float souleaterBonus    = std::min(0.2, m_PChar->getMod(Mod::SOULEATER_EFFECT) * 0.01);
+            float souleaterBonusII  = m_PChar->getMod(Mod::SOULEATER_EFFECT_II) * 0.01; // No known cap to this bonus. Used on Agwu's scythe
+            float stalwartSoulBonus = 1 - static_cast<float>(m_PChar->getMod(Mod::STALWART_SOUL)) / 100;
+            float bonusDamage       = m_PChar->health.hp * (0.1f + souleaterBonus + souleaterBonusII);
 
-            damage += (uint32)(m_PChar->health.hp * drainPercent);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * (drainPercent - m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f))));
-        }
-        else if (m_PChar->GetSJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
-        {
-            // lose 10% Current HP, only HALF (5%) converted to damage
-            damage += (uint32)(m_PChar->health.hp * 0.05f);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * 0.1f)));
+            if (bonusDamage >= 1)
+            {
+                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
+
+                if (m_PChar->GetMJob() == JOB_DRK)
+                {
+                    damage += bonusDamage;
+                }
+                else
+                {
+                    damage += bonusDamage / 2;
+                }
+            }
         }
         return damage;
     }
@@ -4473,8 +4533,7 @@ namespace battleutils
             if (infront(m_PChar->loc.p, PDefender->loc.p, 64))
             {
                 uint8 meritCount = m_PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, m_PChar);
-                // ShowDebug("Merits: %u", meritCount);
-                float tmpDamage = static_cast<float>(damage);
+                float tmpDamage  = static_cast<float>(damage);
 
                 switch (meritCount)
                 {
@@ -4885,6 +4944,11 @@ namespace battleutils
             battleutils::RelinquishClaim(static_cast<CCharEntity*>(PVictim));
             PVictim->PMaster = PCharmer;
             PVictim->updatemask |= UPDATE_ALL_CHAR;
+
+            // Prevent auto attacks for a little bit to simulate retail
+            // On retail, you don't engage for a little bit, which we have no mechanism for yet
+            // TODO: implement the delays on engage (also applies to mobs) and verify exact timings for those things.
+            PVictim->PAI->Inactive(5000ms, false);
         }
         PVictim->allegiance = PCharmer->allegiance;
         PVictim->updatemask |= UPDATE_HP;
@@ -4947,9 +5011,6 @@ namespace battleutils
 
         uint8 charmerLvl = PCharmer->GetMLevel();
         uint8 targetLvl  = PTarget->GetMLevel();
-
-        // printf("Charmer = %s, Lvl. %u\n", PCharmer->name.c_str(), charmerLvl);
-        // printf("Target = %s, Lvl. %u\n", PTarget->name.c_str(), targetLvl);
 
         EMobDifficulty mobCheck    = charutils::CheckMob(charmerLvl, targetLvl);
         float          charmChance = 0.f;
@@ -5270,7 +5331,6 @@ namespace battleutils
             }
         }
 
-        // ShowDebug(CL_CYAN"MagicDmgTaken: Element = %d", element);
         return damage;
     }
 
@@ -5339,7 +5399,7 @@ namespace battleutils
         {
             damage = -damage;
         }
-        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_PHYSICAL_DAMAGE))
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_RANGED_DAMAGE))
         {
             damage = 0;
         }
@@ -5414,7 +5474,6 @@ namespace battleutils
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AFFLATUS_MISERY) && damage > 0)
         {
             PDefender->setModifier(Mod::AFFLATUS_MISERY, damage);
-            // ShowDebug("Misery power: %d", damage);
         }
     }
 
@@ -5456,8 +5515,6 @@ namespace battleutils
             {
                 reductionPercent = 25;
             }
-
-            // ShowDebug(CL_CYAN"HandleTranquilHeart: Tranquil Heart is Active! Reduction Percent = %f", reductionPercent);
 
             reductionPercent = reductionPercent / 100.f;
         }
@@ -5547,6 +5604,25 @@ namespace battleutils
         return damage;
     }
 
+    void HandleScarletDelirium(CBattleEntity* PDefender, int32 damage)
+    {
+        // Check for Scarlet Delirium and update Effect Power with bonus from damage
+        CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
+
+        // Damage bonus calculation, update Effect Power
+        if (effectScarDel && effectScarDel->GetPower() == 0)
+        {
+            // Damage to Max HP Ratio
+            int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
+            int8   jpValue  = effectScarDel->GetSubPower();
+            uint32 duration = 90 + jpValue;
+
+            // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
+            PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+        }
+    }
+
     int32 HandleSevereDamageEffect(CBattleEntity* PDefender, EFFECT effect, int32 damage, bool removeEffect)
     {
         if (PDefender->StatusEffectContainer->HasStatusEffect(effect))
@@ -5559,9 +5635,6 @@ namespace battleutils
             // We calcluate the Damage Threshold off of Max HP & the Threshold Percentage
             float damageThreshold = maxHp * threshold;
 
-            // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Severe Damage Occurred! Damage = %d, Threshold = %f, Damage Threshold = %f", damage,
-            // threshold, damageThreshold);
-
             // Severe Damage is when the Attack's Damage Exceeds a Certain Threshold
             if (damage > damageThreshold)
             {
@@ -5573,12 +5646,8 @@ namespace battleutils
                 {
                     PDefender->StatusEffectContainer->DelStatusEffect(effect);
                 }
-
-                // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Reduciing Severe Damage!");
             }
         }
-
-        // ShowDebug(CL_CYAN"HandleSevereDamageEffect: NOT Reducing Severe Damage!");
 
         return damage;
     }
@@ -5590,24 +5659,24 @@ namespace battleutils
      ************************************************************************/
     void assistTarget(CCharEntity* PChar, uint16 TargID)
     {
-        // get the player we want to assist
-        CBattleEntity* PlayerToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
-        if (PlayerToAssist != nullptr)
+        // get the entity we want to assist
+        CBattleEntity* EntityToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
+        if (EntityToAssist != nullptr)
         {
-            if (PlayerToAssist->objtype == TYPE_PC && PlayerToAssist->m_TargID != 0)
+            if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->GetBattleTargetID() != 0)
             {
-                // get that players target (mob,player,pet only)
-                CBattleEntity* EntityToLockon = (CBattleEntity*)PChar->GetEntity(PlayerToAssist->m_TargID, TYPE_MOB | TYPE_PC | TYPE_PET);
+                // get that players engaged target
+                CBattleEntity* EntityToLockon = EntityToAssist->GetBattleTarget();
                 if (EntityToLockon != nullptr)
                 {
                     // lock on to the new target!
                     PChar->pushPacket(new CLockOnPacket(PChar, EntityToLockon));
                 }
             }
-            else if (PlayerToAssist->GetBattleTargetID() != 0)
+            else if (EntityToAssist->GetBattleTargetID() != 0)
             {
                 // lock on to the new target!
-                PChar->pushPacket(new CLockOnPacket(PChar, PlayerToAssist->GetBattleTarget()));
+                PChar->pushPacket(new CLockOnPacket(PChar, EntityToAssist->GetBattleTarget()));
             }
         }
     }
@@ -5703,43 +5772,57 @@ namespace battleutils
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
     {
+        if (PEntity == nullptr || zoneutils::GetZone(PEntity->getZone()) == nullptr)
+        {
+            return WEATHER_NONE;
+        }
+
         return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
     }
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather)
     {
+        if (PEntity == nullptr)
+        {
+            return WEATHER_NONE;
+        }
+
         WEATHER scholarSpell = WEATHER_NONE;
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_FIRESTORM))
+
+        if (!ignoreScholar) // Do not need to check for status effects if we're ignoring scholar spells
         {
-            scholarSpell = WEATHER_HOT_SPELL;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RAINSTORM))
-        {
-            scholarSpell = WEATHER_RAIN;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SANDSTORM))
-        {
-            scholarSpell = WEATHER_DUST_STORM;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_WINDSTORM))
-        {
-            scholarSpell = WEATHER_WIND;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HAILSTORM))
-        {
-            scholarSpell = WEATHER_SNOW;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_THUNDERSTORM))
-        {
-            scholarSpell = WEATHER_THUNDER;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AURORASTORM))
-        {
-            scholarSpell = WEATHER_AURORAS;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VOIDSTORM))
-        {
-            scholarSpell = WEATHER_GLOOM;
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_FIRESTORM))
+            {
+                scholarSpell = WEATHER_HOT_SPELL;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RAINSTORM))
+            {
+                scholarSpell = WEATHER_RAIN;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SANDSTORM))
+            {
+                scholarSpell = WEATHER_DUST_STORM;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_WINDSTORM))
+            {
+                scholarSpell = WEATHER_WIND;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HAILSTORM))
+            {
+                scholarSpell = WEATHER_SNOW;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_THUNDERSTORM))
+            {
+                scholarSpell = WEATHER_THUNDER;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AURORASTORM))
+            {
+                scholarSpell = WEATHER_AURORAS;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VOIDSTORM))
+            {
+                scholarSpell = WEATHER_GLOOM;
+            }
         }
 
         if (ignoreScholar || scholarSpell == WEATHER_NONE || zoneWeather == (scholarSpell + 1))
@@ -5860,6 +5943,19 @@ namespace battleutils
     {
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
+
+        // Make sure we can raycast to that position
+        // from the mob's "eyeline" to the ground where we want to draw players in to
+        if (PMob->loc.zone->lineOfSight)
+        {
+            auto entityHeight = 2.0f;
+            auto mobEyeline   = position_t{ pos.x, pos.y - entityHeight, pos.z, 0, 0 };
+            if (auto optHit = PMob->loc.zone->lineOfSight->Raycast(mobEyeline, nearEntity))
+            {
+                auto hit   = *optHit;
+                nearEntity = { hit.x, hit.y, hit.z, 0, 0 };
+            }
+        }
 
         // Snap nearEntity to a guaranteed valid position
         if (PMob->loc.zone->m_navMesh)
@@ -6244,6 +6340,14 @@ namespace battleutils
                 }
 
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
+                applyArts = false;
+            }
+            // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
+            // https://www.bg-wiki.com/ffxi/Abs._Burgeonet_%2B2
+            // https://www.bg-wiki.com/ffxi/Fallen%27s_Burgeonet
+            else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            {
+                cast      = (uint32)(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
                 applyArts = false;
             }
             else if (applyArts)

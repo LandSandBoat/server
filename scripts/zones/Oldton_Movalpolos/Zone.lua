@@ -7,23 +7,27 @@ require('scripts/globals/missions')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(70.956, 5.99, 139.843, 134)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-286, 0, -99, 253)
     end
 
     if
@@ -38,16 +42,16 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 57 then
         player:setCharVar("COP_jabbos_story", 1)
     end
 end
 
-return zone_object
+return zoneObject

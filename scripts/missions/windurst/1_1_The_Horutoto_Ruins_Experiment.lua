@@ -208,7 +208,7 @@ mission.sections =
 
         [xi.zone.INNER_HORUTOTO_RUINS] =
         {
-             -- Gate: Magical Gizmo
+            -- Gate: Magical Gizmo
             ['_5c5'] = mission:progressEvent(42),
 
             onEventFinish =

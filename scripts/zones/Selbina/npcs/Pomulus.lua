@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Pomulus
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

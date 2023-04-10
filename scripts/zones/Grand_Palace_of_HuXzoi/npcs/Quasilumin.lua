@@ -1,0 +1,40 @@
+-----------------------------------
+-- Area: Grand Palace of Hu'Xzoi
+--  NPC: Quasilumin
+-- Type: Standard NPC
+-- !pos
+-----------------------------------
+local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+require("scripts/globals/npc_util")
+-----------------------------------
+
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    local index = npc:getID() - ID.npc.QUASILUMIN_OFFSET
+    if not player:hasKeyItem(xi.ki.MAP_OF_HUXZOI) then
+        local progress = player:getVar("huxzoi_map_progress")
+        if progress == 1023 then
+            player:showText(npc, ID.text.HUXZOI_MAP_COMPLETE, player:getRace())
+            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_HUXZOI)
+            return
+        else
+            if bit.band(progress, bit.lshift(1, index)) ~= 1 then
+                player:setVar("huxzoi_map_progress", bit.bor(progress, bit.lshift(1, index)))
+            end
+        end
+    end
+
+    player:showText(npc, ID.text.QUASILUMIN_MAP_QUEST_OFFSET + index)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

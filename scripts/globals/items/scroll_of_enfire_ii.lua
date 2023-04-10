@@ -3,14 +3,14 @@
 -- Scroll of Enfire II
 -- Teaches the white magic Enfire II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(312)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(312)
 end
 
-return item_object
+return itemObject

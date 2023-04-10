@@ -8,22 +8,22 @@ require('scripts/globals/treasure')
 require('scripts/globals/status')
 require('scripts/globals/titles')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     for k, v in pairs(ID.npc.PORTALS) do
-        zone:registerRegion(k, unpack(v["coords"]))
+        zone:registerTriggerArea(k, unpack(v["coords"]))
     end
 
     xi.treasure.initZone(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if
@@ -31,14 +31,14 @@ zone_object.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(333.017, -44.896, -458.35, 164)
+        player:setPos(-1, -55, -637, 193)
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
-    local p = ID.npc.PORTALS[region:GetRegionID()]
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local p = ID.npc.PORTALS[triggerArea:GetTriggerAreaID()]
 
     -- Disable yellow teleporters to God Islands when Gods are spawned. https://www.bg-wiki.com/ffxi/Ru%27Aun_Gardens
     if p["genbu"] ~= nil and GetMobByID(ID.mob.GENBU):isAlive() then
@@ -77,23 +77,23 @@ zone_object.onRegionEnter = function(player, region)
 
     elseif type(p["event"]) == "table" then -- portal with random destination
         local events = p["event"]
-        player:startOptionalCutscene(events[math.random(#events)])
+        player:startOptionalCutscene(events[math.random(1, #events)])
 
     else -- portal with static destination
         player:startOptionalCutscene(p["event"])
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 41 and option ~= 0 then
         player:setCharVar("skyShortcut", 1)
     end
 end
 
-return zone_object
+return zoneObject

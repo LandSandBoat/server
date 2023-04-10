@@ -29,8 +29,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   not player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-                   missionStatus == 0
+                not player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+                missionStatus == 0
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -50,8 +50,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-                   missionStatus == 0
+                player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+                missionStatus == 0
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -76,7 +76,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
+                player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -105,7 +105,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   missionStatus == 3
+                missionStatus == 3
         end,
 
         [xi.zone.RALA_WATERWAYS] =

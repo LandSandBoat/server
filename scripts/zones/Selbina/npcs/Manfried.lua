@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Manfried
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

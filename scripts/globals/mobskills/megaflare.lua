@@ -11,35 +11,35 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
 
-    if (mobhp <= 10 and mob:getLocalVar("GigaFlare") ~= 0) then -- make sure Gigaflare has happened first - don't want a random Megaflare to block it.
+    if mobhp <= 10 and mob:getLocalVar("GigaFlare") ~= 0 then -- make sure Gigaflare has happened first - don't want a random Megaflare to block it.
         mob:setLocalVar("MegaFlareQueue", 1) -- set up Megaflare for being called by the script again.
     end
 
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local megaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
     mob:setLocalVar("MegaFlareQueue", megaFlareQueue)
     mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
     mob:setLocalVar("tauntShown", 0)
-    mob:SetMobAbilityEnabled(true) -- re-enable the other actions on success
-    mob:SetMagicCastingEnabled(true)
-    mob:SetAutoAttackEnabled(true)
-    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0) then -- re-enable noturn
+    mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*10, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 10, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

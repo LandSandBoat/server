@@ -16,20 +16,18 @@ function error(player, msg)
 end
 
 function onTrigger(player, typeId, songId)
-
     -- validate typeId
-    if (typeId == nil or typeId < 0 or typeId > 7) then
+    if typeId == nil or typeId < 0 or typeId > 7 then
         error(player, "Invalid type ID.")
         return
     end
 
     -- validate songId
-    if (songId == nil or songId < 0) then
+    if songId == nil or songId < 0 then
         error(player, "Invalid song ID.")
         return
     end
 
     -- change music
-    player:ChangeMusic(typeId, songId)
-
+    player:changeMusic(typeId, songId)
 end

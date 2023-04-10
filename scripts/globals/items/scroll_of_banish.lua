@@ -3,14 +3,14 @@
 -- Scroll of Banish
 -- Teaches the white magic Banish
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(28)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(28)
 end
 
-return item_object
+return itemObject

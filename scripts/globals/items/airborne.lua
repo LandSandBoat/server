@@ -3,13 +3,13 @@
 -- Item: Airborne
 -- A goblin with a rainbow colored parasail rides in a downward spiral
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
 end
 
-return item_object
+return itemObject

@@ -6,24 +6,28 @@ require('scripts/globals/chocobo_digging')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
     GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-100, -13.5, -479.514, 60)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(432, -7, -39, 135)
     end
 
     if prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS then
@@ -33,21 +37,21 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 108 then
         player:setPos(0, 0, 0, 0, 66)
     end
 end
 
-return zone_object
+return zoneObject

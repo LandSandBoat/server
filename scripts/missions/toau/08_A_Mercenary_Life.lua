@@ -42,9 +42,9 @@ mission.sections =
         {
             -- NOTE: Check Naja after zoning
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [3] = function(player, region)
+                [3] = function(player, triggerArea)
                     return mission:progressEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
                 end,
             },

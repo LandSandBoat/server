@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Bujahwa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

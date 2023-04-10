@@ -273,7 +273,10 @@ mission.sections =
                     -- Part II - Bastok > Windurst
                     elseif missionStatus == 6 then
                         return mission:progressEvent(462)
-                    elseif player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and missionStatus == 7 then
+                    elseif
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        missionStatus == 7
+                    then
                         return mission:progressEvent(458) -- Head to Bastok
                     elseif missionStatus == 11 then
                         return mission:progressEvent(468)

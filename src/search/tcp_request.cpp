@@ -62,7 +62,8 @@ CTCPRequestPacket::CTCPRequestPacket(SOCKET* socket)
 
 CTCPRequestPacket::~CTCPRequestPacket()
 {
-    delete[] m_data;
+    destroy_arr(m_data);
+    m_data = nullptr;
 
 #ifdef WIN32
     shutdown(*m_socket, SD_SEND);
@@ -99,7 +100,6 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     }
     if (m_size == 0)
     {
-        // ShowError("TCP Connection closing");
         return 0;
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
@@ -107,7 +107,9 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
         ShowError("Search packetsize wrong. Size %d should be %d.", m_size, ref<uint16>(recvbuf, (0x00)));
         return 0;
     }
-    delete[] m_data;
+
+    destroy_arr(m_data);
+
     m_data = new uint8[m_size];
 
     memcpy(&m_data[0], &recvbuf[0], m_size);

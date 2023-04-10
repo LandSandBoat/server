@@ -13,18 +13,19 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if not target:isInfront(mob, 128) then
         return 1
     elseif mob:getAnimationSub() == 1 then
         return 1
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.2, 1.25, xi.magic.ele.FIRE, 1400)
     dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.9)
 
@@ -34,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

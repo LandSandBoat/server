@@ -3,14 +3,14 @@
 -- Klimaform Schema
 -- Teaches the black magic Klimaform
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(287)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(287)
 end
 
-return item_object
+return itemObject

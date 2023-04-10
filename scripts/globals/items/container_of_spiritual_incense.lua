@@ -8,13 +8,13 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect        = xi.effect.MAGIC_SHIELD
     local duration      = 20
     local power         = 1
@@ -23,4 +23,4 @@ item_object.onItemUse = function(target)
     xi.item_utils.addItemShield(target, power, duration, effect, nospellimmune)
 end
 
-return item_object
+return itemObject

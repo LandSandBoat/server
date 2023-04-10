@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Arquil
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

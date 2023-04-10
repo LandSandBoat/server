@@ -6,13 +6,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 180
     local power = 5000
 
@@ -38,6 +38,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         elseif caster:hasStatusEffect(xi.effect.MARCATO) then
             power = power * 1.5
         end
+
         caster:delStatusEffect(xi.effect.MARCATO)
 
         duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1)
@@ -55,10 +56,9 @@ spell_object.onSpellCast = function(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         end
-
     end
 
     return xi.effect.ELEGY
 end
 
-return spell_object
+return spellObject

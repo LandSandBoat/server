@@ -54,7 +54,7 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
             [17121602] = 17121603,
         },
 
-        MENECHME = DYNAMIC_LOOKUP,
+        MENECHME = GetFirstID("Menechme"),
 
         VOIDWALKER =
         {

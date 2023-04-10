@@ -9,14 +9,13 @@ require("scripts/globals/roe")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
+spellObject.onSpellCast = function(caster, target, spell)
     -- Records of Eminence: Alter Ego: Valaineral
     if caster:getEminenceProgress(933) then
         xi.roe.onRecordTrigger(caster, 933)
@@ -25,7 +24,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     --[[
         Summon: With your courage and valor, Altana's children will live to see a brighter day.
         Summon (Formerly): Let the Royal Family’s blade be seared forever into their memories!
@@ -45,12 +44,12 @@ spell_object.onMobSpawn = function(mob)
                         ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

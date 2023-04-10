@@ -18,7 +18,6 @@ local randChance = { 0.166, 0.333, 0.500, 0.666, 0.833, 1 }
 
 g_mixins.warriors_path_taru = function(mob)
     mob:addListener("COMBAT_TICK", "TARU_CTICK", function(mobArg)
-
         local kukki = mob:getLocalVar("kukki")
         local makki = mob:getLocalVar("makki")
         local cheru = mob:getLocalVar("cheru")
@@ -34,30 +33,33 @@ g_mixins.warriors_path_taru = function(mob)
         then
             if cheru == 1 then
                 mob:showText(mob, ID.text.CHERUKIKI_OFFSET + randOffset)
-                for i = 1,6 do
+                for i = 1, 6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[1][i])
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             elseif makki == 1 then
                 mob:showText(mob, ID.text.MAKKI_CHEBUKKI_OFFSET + randOffset)
-                for i = 1,6 do
+                for i = 1, 6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[2][i])
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             elseif kukki == 1 then
                 mob:showText(mob, ID.text.KUKKI_CHEBUKKI_OFFSET + randOffset)
-                for i = 1,6 do
+                for i = 1, 6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[3][i])
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             end
         end

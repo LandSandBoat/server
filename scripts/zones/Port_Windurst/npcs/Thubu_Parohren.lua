@@ -20,25 +20,23 @@ entity.onTrade = function(player, npc, trade)
     then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setCharVar("FishingExpertQuest",0)
-        player:setLocalVar("FishingTraded",1)
-    elseif newRank ~= 0 and newRank <=9 then
+        player:setCharVar("FishingExpertQuest", 0)
+        player:setLocalVar("FishingTraded", 1)
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setLocalVar("FishingTraded",1)
+        player:setLocalVar("FishingTraded", 1)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(xi.skill.FISHING)
     local testItem = xi.crafting.getTestItem(player, npc, xi.skill.FISHING)
-    local guildMember = xi.crafting.isGuildMember(player, 5)
+    local guildMember = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) and 150995375 or 0
     local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.FISHING)
     local expertQuestStatus = 0
     local rank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (craftSkill - rank) / 32
-
-    if (guildMember == 1) then guildMember = 150995375; end
 
     if player:getCharVar("FishingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC) then
@@ -49,7 +47,7 @@ entity.onTrigger = function(player, npc)
     end
 
     if expertQuestStatus == 550 then
-        --[[
+        --[[ TODO: This is resolved.  Replace with actual logic.
         Feeding the proper parameter currently hangs the client in cutscene. This may
         possibly be due to an unimplemented packet or function (display recipe?) Work
         around to present dialog to player to let them know the trade is ready to be
@@ -68,26 +66,24 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 5)
-
-    if (csid == 10009 and option == 2) then
-        if guildMember == 1 then
-            player:setCharVar("FishingExpertQuest",1)
+    if csid == 10009 and option == 2 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
+            player:setCharVar("FishingExpertQuest", 1)
         end
-    elseif (csid == 10009 and option == 1) then
+    elseif csid == 10009 and option == 1 then
         local crystal = 4101 -- water crystal
 
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.fishing)
+            xi.crafting.signupGuild(player, xi.crafting.guild.FISHING)
         end
     else
         if player:getLocalVar("FishingTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("FishingTraded",0)
+            player:setLocalVar("FishingTraded", 0)
         end
     end
 end

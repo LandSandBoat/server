@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Fouagine
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

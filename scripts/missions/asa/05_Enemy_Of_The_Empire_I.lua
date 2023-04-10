@@ -180,6 +180,7 @@ mission.sections =
                                 player:updateEventString(mobList[mobTwo][1])
                             end
                         end
+
                         if pickupReady then
                             player:updateEvent(0, 18721, 18722, player:getGil())
                         end
@@ -213,13 +214,13 @@ mission.sections =
                     elseif platesTraded == 2 then
                         if mobOne == 99 and mobTwo == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobThree][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobThree][1])
                         elseif mobTwo == 99 and mobThree == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobOne][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobOne][1])
                         elseif mobOne == 99 and mobThree == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobTwo][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobTwo][1])
                         end
                     elseif platesTraded == 3 then
                         player:updateEvent(0, 1)
@@ -237,6 +238,7 @@ mission.sections =
                         if not player:hasItem(18721) then
                             npcUtil.giveItem(player, 18721)
                         end
+
                         npcUtil.giveItem(player, { 18721, 12 })
                         mission:setVar(player, 'AndrauseBuy', 0)
                         mission:setVar(player, 'Soulplate', getMidnight())
@@ -253,6 +255,7 @@ mission.sections =
                             player:addItem(18721)
                             player:messageSpecial(norgID.text.ITEM_OBTAINED, 18721) -- Soultrapper
                         end
+
                         player:addItem(18722, 12)
                         player:messageSpecial(norgID.text.YOU_OBTAIN, 18722, 12) -- Soul Plates
                         mission:setVar(player, 'AndrauseBuy', 0)

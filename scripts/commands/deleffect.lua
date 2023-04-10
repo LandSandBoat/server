@@ -20,10 +20,10 @@ function onTrigger(player, arg1, arg2)
     local targ
     local id
 
-    if (arg1 == nil) then
+    if arg1 == nil then
         error(player, "You must provide an effect ID.")
         return
-    elseif (arg2 == nil) then
+    elseif arg2 == nil then
         targ = player
         id = arg1
     else
@@ -32,23 +32,23 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         error(player, string.format("Player named '%s' not found!", arg1))
         return
     end
 
     -- validate effect
     id = tonumber(id) or xi.effect[string.upper(id)]
-    if (id == nil) then
+    if id == nil then
         error(player, "Invalid effect.")
         return
-    elseif (id == 0) then
+    elseif id == 0 then
         id = 1
     end
 
     -- delete status effect
     targ:delStatusEffect(id)
-    if (targ:getID() ~= player:getID()) then
+    if targ:getID() ~= player:getID() then
         player:PrintToPlayer(string.format("Removed effect %i from %s.", id, targ:getName()))
     end
 end

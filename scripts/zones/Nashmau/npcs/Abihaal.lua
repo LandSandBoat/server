@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Abihaal
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
@@ -16,8 +15,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 221 and option == 333) then
+    if csid == 221 and option == 333 then
         player:delGil(100)
     end
 end

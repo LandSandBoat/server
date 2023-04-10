@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Kyokyoroon
--- Standard Info NPC
 -- !pos 18.020 -6.000 10.467 53
 -----------------------------------
 local entity = {}

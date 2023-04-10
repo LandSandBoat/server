@@ -149,6 +149,10 @@ enum MSGSERVTYPE : uint8
     // gm commands
     MSG_SEND_TO_ZONE,
     MSG_SEND_TO_ENTITY,
+
+    // rpc
+    MSG_RPC_SEND, // sent by sender -> reciever
+    MSG_RPC_RECV, // sent by reciever -> sender
 };
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
@@ -191,6 +195,10 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_SEND_TO_ZONE";
         case MSG_SEND_TO_ENTITY:
             return "MSG_SEND_TO_ENTITY";
+        case MSG_RPC_SEND:
+            return "MSG_RPC_SEND";
+        case MSG_RPC_RECV:
+            return "MSG_RPC_RECV";
         default:
             return "Unknown";
     };
@@ -228,25 +236,6 @@ struct look_t
 
     look_t(uint16 look[10])
     {
-        size    = look[0];
-        modelid = look[1];
-        head    = look[2];
-        body    = look[3];
-        hands   = look[4];
-        legs    = look[5];
-        feet    = look[6];
-        main    = look[7];
-        sub     = look[8];
-        ranged  = look[9];
-    }
-
-    look_t(std::vector<uint16>& look)
-    {
-        if (look.size() != 10)
-        {
-            throw std::runtime_error(fmt::format("Bad look size passed to look_t constructor (expected 10, got: {})", look.size()));
-        }
-
         size    = look[0];
         modelid = look[1];
         head    = look[2];

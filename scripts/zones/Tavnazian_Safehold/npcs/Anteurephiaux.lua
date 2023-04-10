@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Anteurephiaux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

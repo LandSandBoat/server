@@ -42,7 +42,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- Each boat comes every 1152 seconds/8 game hours, 4 hour offset between Selbina and Aht Urghan
     -- Original timer: local timer = 1152 - ((os.time() - 1009810584)%1152)
     local timer = 1152 - ((os.time() - 1009810802)%1152)
@@ -51,14 +50,14 @@ entity.onTrigger = function(player, npc)
     local waiting = 216 -- Offset for Selbina
 
     -- Next ferry is Al Zhabi for higher values.
-    if (timer >= 576) then
+    if timer >= 576 then
         destination = 1
         timer = timer - 576
         waiting = 193
     end
 
     -- Logic to manipulate cutscene results.
-    if (timer <= waiting) then
+    if timer <= waiting then
         direction = 1 -- Ship arrived, switch dialog from "arrive" to "depart"
     else
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
@@ -72,7 +71,6 @@ entity.onTrigger = function(player, npc)
 
     Can't find a way to toggle the destination on 233 or 234, so they are not used.
     Users knowing which ferry is which > using all CSs.]]
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

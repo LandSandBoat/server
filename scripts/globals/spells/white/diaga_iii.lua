@@ -8,13 +8,13 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 3
     local params = {}
     params.dmg = basedmg
@@ -60,4 +60,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

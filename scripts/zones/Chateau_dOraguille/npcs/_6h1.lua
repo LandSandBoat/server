@@ -20,7 +20,10 @@ entity.onTrigger = function(player, npc)
     local whmAf3 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
-    if player:getMainJob() == xi.job.WHM and player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL then
+    if
+        player:getMainJob() == xi.job.WHM and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+    then
         if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
             player:startEvent(551) -- Start Quest "Prelude of Black and White"
         elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then
@@ -28,7 +31,10 @@ entity.onTrigger = function(player, npc)
         end
 
     -- San d'Oria Rank 10 (new default)
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
+    elseif
+        player:getNation() == xi.nation.SANDORIA and
+        player:getRank(player:getNation()) == 10
+    then
         player:startEvent(73)
 
     -- Default dialogue
@@ -41,9 +47,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 551) then
+    if csid == 551 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
-    elseif (csid == 552) then
+    elseif csid == 552 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
     end
 end

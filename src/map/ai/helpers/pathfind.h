@@ -25,8 +25,8 @@ The PathFind class provides an interface for getting an entity to a destination.
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
-#include "../../../common/logging.h"
-#include "../../../common/mmo.h"
+#include "common/logging.h"
+#include "common/mmo.h"
 
 #include <vector>
 
@@ -46,7 +46,7 @@ enum PATHFLAG
     PATHFLAG_SCRIPT   = 0x08, // don't overwrite this path before completion (except via another script)
     PATHFLAG_SLIDE    = 0x10, // Slide to end point if close enough (so no over shoot)
     PATHFLAG_PATROL   = 0x20, // Automatically restart path once it is finished and resume when roaming
-    PATHFLAG_WAITS    = 0x40, // Using waits
+    PATHFLAG_COORDS   = 0x40, // Follows path until end, but will not repeat
 };
 
 class CPathFind
@@ -114,10 +114,6 @@ public:
 
     // returns true if i'm in water
     bool InWater();
-
-    // checks if raycast was broken between current point and given
-    // returns true if raycast didn't hit any walls
-    bool CanSeePoint(const position_t& point, bool lookOffMesh = true);
 
     // returns the final destination of the current path
     const position_t& GetDestination() const;

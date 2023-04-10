@@ -17,9 +17,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
@@ -33,7 +33,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     -- accuracy mods (ONLY USE FOR accURACY VARIES WITH TP) , should be the acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 4.0 params.ftp200 = 4.0 params.ftp300 = 4.0
@@ -53,4 +53,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

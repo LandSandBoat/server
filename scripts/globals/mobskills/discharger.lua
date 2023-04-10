@@ -11,18 +11,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    local mobhp = mob:getHPP()
-
-    if (mobhp < 26) then
-        return 0
-    end
-    return 1
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = xi.effect.MAGIC_SHIELD
     local typeEffectTwo = xi.effect.SHOCK_SPIKES
 
@@ -31,4 +26,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffectOne
 end
 
-return mobskill_object
+return mobskillObject

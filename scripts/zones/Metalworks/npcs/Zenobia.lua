@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Zenobia
--- Standard Info NPC
--- !pos
 -----------------------------------
 local entity = {}
 

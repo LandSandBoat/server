@@ -10,13 +10,13 @@ require('scripts/globals/zone')
 require('scripts/globals/beastmentreasure')
 require('scripts/missions/amk/helpers')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
@@ -25,18 +25,22 @@ zone_object.onInitialize = function(zone)
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
-zone_object.onGameDay = function()
+zoneObject.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(116.825, 6.613, 100, 140)
     end
 
@@ -52,16 +56,16 @@ zone_object.onZoneIn = function( player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 11 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-return zone_object
+return zoneObject

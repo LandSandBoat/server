@@ -1,117 +1,96 @@
 -----------------------------------
--- Crafting functions
--- Info from:
--- http://wiki.ffxiclopedia.org/wiki/Crafts_%26_Hobbies
+-- Crafting Guilds
+-- Ref: http://wiki.ffxiclopedia.org/wiki/Crafts_%26_Hobbies
 -----------------------------------
-require("scripts/globals/status")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/status')
+require('scripts/globals/utils')
 -----------------------------------
-
 xi = xi or {}
 xi.crafting = {}
------------------------------------
--- IDs for signupGuild bitmask
------------------------------------
 
 xi.crafting.guild =
 {
-    ["alchemy"]      = 2,
-    ["bonecraft"]    = 4,
-    ["clothcraft"]   = 8,
-    ["cooking"]      = 16,
-    ["fishing"]      = 32,
-    ["goldsmithing"] = 64,
-    ["leathercraft"] = 128,
-    ["smithing"]     = 256,
-    ["woodworking"]  = 512
-    -- Synergy not implemented yet
+    ALCHEMY      = 1,
+    BONECRAFT    = 2,
+    CLOTHCRAFT   = 3,
+    COOKING      = 4,
+    FISHING      = 5,
+    GOLDSMITHING = 6,
+    LEATHERCRAFT = 7,
+    SMITHING     = 8,
+    WOODWORKING  = 9,
 }
 
------------------------------------
--- Table for Test Item
------------------------------------
+xi.crafting.rank =
+{
+    AMATEUR    = 0,
+    RECRUIT    = 1,
+    INITIATE   = 2,
+    NOVICE     = 3,
+    APPRENTICE = 4,
+    JOURNEYMAN = 5,
+    CRAFTSMAN  = 6,
+    ARTISAN    = 7,
+    ADEPT      = 8,
+    VETERAN    = 9,
+    EXPERT     = 10,
+}
 
-local testItem_Alchemy =      {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 }
-local testItem_Bonecraft =    { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 }
-local testItem_Clothcraft =   { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 }
-local testItem_Cooking =      {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 }
-local testItem_Fishing =      {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 }
-local testItem_Goldsmithing = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 }
-local testItem_Leathercraft = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 }
-local testItem_Smithing =     { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 }
-local testItem_Woodworking =  {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 }
--- local testItem_Synergy =      {}
+-- Keys are based on the player's current rank in the guild in order to be eligible
+-- for the next rank-up test.  Example: At Amateur, a value of 256 is required to
+-- be eligible for the test to move to Recruit
+local requiredSkillForRank =
+{
+    [xi.crafting.rank.AMATEUR]    = 256,
+    [xi.crafting.rank.RECRUIT]    = 577,
+    [xi.crafting.rank.INITIATE]   = 898,
+    [xi.crafting.rank.NOVICE]     = 1219,
+    [xi.crafting.rank.APPRENTICE] = 1540,
+    [xi.crafting.rank.JOURNEYMAN] = 1861,
+    [xi.crafting.rank.CRAFTSMAN]  = 2182,
+    [xi.crafting.rank.ARTISAN]    = 2503,
+    [xi.crafting.rank.ADEPT]      = 2824,
+    [xi.crafting.rank.VETERAN]    = 3145,
+}
+
+-- Table for Test Items
+local testItemsByNPC =
+{
+    ["Abd-al-Raziq"]   = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
+    ["Peshi_Yohnts"]   = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
+    ["Ponono"]         = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
+    ["Piketo-Puketo"]  = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
+    ["Thubu_Parohren"] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
+    ["Reinberta"]      = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
+    ["Faulpie"]        = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
+    ["Mevreauche"]     = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ["Ghemp"]          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ["Cheupirudaux"]   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
+}
 
 local hqCrystals =
 {
-    [1] =
-    {
-        id = 4238,
-        cost = 200
-    },
-    [2] =
-    {
-        id = 4239,
-        cost = 200
-    },
-    [3] =
-    {
-        id = 4240,
-        cost = 200
-    },
-    [4] =
-    {
-        id = 4241,
-        cost = 200
-    },
-    [5] =
-    {
-        id = 4242,
-        cost = 200
-    },
-    [6] =
-    {
-        id = 4243,
-        cost = 200
-    },
-    [7] =
-    {
-        id = 4244,
-        cost = 500
-    },
-    [8] =
-    {
-        id = 4245,
-        cost = 500
-    },
+    [1] = { id = xi.items.INFERNO_CRYSTAL,  cost = 200 },
+    [2] = { id = xi.items.GLACIER_CRYSTAL,  cost = 200 },
+    [3] = { id = xi.items.CYCLONE_CRYSTAL,  cost = 200 },
+    [4] = { id = xi.items.TERRA_CRYSTAL,    cost = 200 },
+    [5] = { id = xi.items.PLASMA_CRYSTAL,   cost = 200 },
+    [6] = { id = xi.items.TORRENT_CRYSTAL,  cost = 200 },
+    [7] = { id = xi.items.AURORA_CRYSTAL,   cost = 500 },
+    [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost = 500 },
 }
 
------------------------------------
--- isGuildMember Action
------------------------------------
+xi.crafting.hasJoinedGuild = function(player, guildId)
+    local joinedGuildMask = player:getCharVar("Guild_Member")
 
-xi.crafting.isGuildMember = function(player, guild)
-    local guildOK = player:getCharVar("Guild_Member")
-    local bit = {}
-
-    for i = 12, 1, -1 do
-        local twop = 2^i
-
-        if guildOK >= twop then
-            bit[i]=1 guildOK = guildOK - twop
-        else
-            bit[i]=0
-        end
-    end
-
-    return bit[guild]
+    return utils.mask.getBit(joinedGuildMask, guildId)
 end
 
------------------------------------
--- signupGuild Action
------------------------------------
-
-xi.crafting.signupGuild = function(player, nbr)
-    player:incrementCharVar("Guild_Member", nbr)
+xi.crafting.signupGuild = function(player, guildId)
+    player:incrementCharVar("Guild_Member", bit.lshift(1, guildId))
 end
 
 -----------------------------------
@@ -119,50 +98,23 @@ end
 -----------------------------------
 
 xi.crafting.getTestItem = function(player, npc, craftID)
-    local testItemList = {}
     local nextRank  = player:getSkillRank(craftID) + 1
 
-    switch (npc:getName()): caseof
-    {
-        ["Abd-al-Raziq"]   = function (x) testItemList = testItem_Alchemy end,
-        ["Peshi_Yohnts"]   = function (x) testItemList = testItem_Bonecraft end,
-        ["Ponono"]         = function (x) testItemList = testItem_Clothcraft end,
-        ["Piketo-Puketo"]  = function (x) testItemList = testItem_Cooking end,
-        ["Thubu_Parohren"] = function (x) testItemList = testItem_Fishing end,
-        ["Reinberta"]      = function (x) testItemList = testItem_Goldsmithing end,
-        ["Faulpie"]        = function (x) testItemList = testItem_Leathercraft end,
-        ["Mevreauche"]     = function (x) testItemList = testItem_Smithing end,
-        ["Ghemp"]          = function (x) testItemList = testItem_Smithing end,
-        ["Cheupirudaux"]   = function (x) testItemList = testItem_Woodworking end,
-    }
-
-    return testItemList[nextRank]
+    return testItemsByNPC[npc:getName()][nextRank]
 end
 
------------------------------------
 -- canGetNewRank Action
------------------------------------
-
-local function canGetNewRank(player, skillLvL, craftID)
-    local rank = player:getSkillRank(craftID) + 1
-    local canGet = 0
+local function canGetNewRank(player, skillLvl, craftId)
+    local requiredSkill = requiredSkillForRank[player:getSkillRank(craftId)]
 
     if
-        (rank == 1 and skillLvL >= 256) or
-        (rank == 2 and skillLvL >= 577) or
-        (rank == 3 and skillLvL >= 898) or
-        (rank == 4 and skillLvL >= 1219) or
-        (rank == 5 and skillLvL >= 1540) or
-        (rank == 6 and skillLvL >= 1861) or
-        (rank == 7 and skillLvL >= 2182) or
-        (rank == 8 and skillLvL >= 2503) or
-        (rank == 9 and skillLvL >= 2824) or
-        (rank == 10 and skillLvL >= 3145)
+        requiredSkill and
+        skillLvl >= requiredSkill
     then
-        canGet = 1
+        return true
     end
 
-    return canGet
+    return false
 end
 
 -----------------------------------
@@ -170,18 +122,17 @@ end
 -----------------------------------
 
 xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
-    local guildID  = craftID - 48
-    local skillLvL = player:getSkillLevel(craftID)
-    local myTI     = xi.crafting.getTestItem(player, npc, craftID)
-    local newRank  = 0
-    -- local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local guildID    = craftID - 48
+    local skillLvL   = player:getSkillLevel(craftID)
+    local testItemId = xi.crafting.getTestItem(player, npc, craftID)
+    local newRank    = 0
 
     if
-        canGetNewRank(player, skillLvL, craftID) == 1 and
-        trade:hasItemQty(myTI, 1) and
-        trade:getItemCount() == 1
+        canGetNewRank(player, skillLvL, craftID) and
+        npcUtil.tradeHasExactly(trade, testItemId)
     then
         newRank = player:getSkillRank(craftID) + 1
+
         if player:getCharVar('[GUILD]currentGuild') == guildID + 1 then
             player:setCharVar('[GUILD]daily_points', 1)
         end
@@ -219,9 +170,9 @@ end
 -----------------------------------
 -- unionRepresentative
 -----------------------------------
-xi.crafting.unionRepresentativeTrigger = function(player, guildID, csid, currency, keyitems)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildID)
-    local rank   = player:getSkillRank(guildID + 48)
+xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank   = player:getSkillRank(guildId + 48)
     local cap    = (rank + 1) * 10
     local kibits = 0
 
@@ -237,7 +188,7 @@ xi.crafting.unionRepresentativeTrigger = function(player, guildID, csid, currenc
 end
 
 xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
-    local ID   = zones[player:getZoneID()]
+    local ID = zones[player:getZoneID()]
 
     player:setSkillRank(craftID, 6)
     player:setSkillLevel(craftID, 700)
@@ -287,12 +238,11 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
         local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
 
         if ki and rank >= ki.rank then
-            if (player:getCurrency(currency) >= ki.cost) then
+            if player:getCurrency(currency) >= ki.cost then
                 player:delCurrency(currency, ki.cost)
-                player:addKeyItem(ki.id)
-                player:messageSpecial(text.KEYITEM_OBTAINED, ki.id)
+                npcUtil.giveKeyItem(player, ki.id)
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     elseif category == 2 or category == 1 then -- item
@@ -305,33 +255,33 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
             if player:getCurrency(currency) >= cost then
                 local delivered = 0
                 for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
-                    if (player:addItem(i.id, true)) then
+                    if player:addItem(i.id, true) then
                         player:delCurrency(currency, i.cost)
                         player:messageSpecial(text.ITEM_OBTAINED, i.id)
                         delivered = delivered + 1
                     end
                 end
+
                 if delivered == 0 then
                     player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
                 end
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     elseif category == 0 and option ~= 1073741824 then -- HQ crystal
         local i = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
         local cost = quantity * i.cost
+
         if i and rank >= 3 then
-            if player:getCurrency(currency) >= cost then
-                if player:addItem(i.id, quantity) then
-                    player:delCurrency(currency, cost)
-                    player:messageSpecial(text.ITEM_OBTAINED, i.id)
-                else
-                    player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
-                end
+            if
+                player:getCurrency(currency) >= cost and
+                npcUtil.giveItem(player, { { i.id, quantity } })
+            then
+                player:delCurrency(currency, cost)
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     end
@@ -348,11 +298,13 @@ xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildI
             local totalPoints = 0
             for i = 0, 8 do
                 local items, points = player:addGuildPoints(guildID, i)
+
                 if items ~= 0 and points ~= 0 then
                     totalPoints = totalPoints + points
                     trade:confirmSlot(i, items)
                 end
             end
+
             if totalPoints > 0 then
                 player:confirmTrade()
                 player:startEvent(csid, totalPoints)

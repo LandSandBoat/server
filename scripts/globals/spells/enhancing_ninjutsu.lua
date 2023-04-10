@@ -42,7 +42,10 @@ xi.spells.enhancing.calculateNinjutsuPower = function(caster, target, spell, spe
         subPower = xi.effect.COPY_IMAGE_3
 
         -- Utsusemi: Ni non-ninja penalty
-        if spellId == xi.magic.spell.UTSUSEMI_NI and caster:getMainJob() ~= xi.job.NIN then
+        if
+            spellId == xi.magic.spell.UTSUSEMI_NI and
+            caster:getMainJob() ~= xi.job.NIN
+        then
             power = power - 1
         end
 
@@ -84,7 +87,6 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
     -- Yain
     elseif spellEffect == xi.effect.PAX then
         target:delStatusEffect(xi.effect.ENMITY_BOOST)
-
     end
 
     ------------------------------------------------------------

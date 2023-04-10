@@ -1,7 +1,5 @@
 -----------------------------------
---
---     TITLES IDs
---
+-- Title IDs
 -----------------------------------
 xi = xi or {}
 
@@ -1064,6 +1062,11 @@ xi.title =
     ONGO_OBLITERATOR                          = 1066,
     AREPATI_ASSAULTER                         = 1067,
     BUMBA_BEFOULER                            = 1068,
+    DHARTOK_DEFILER                           = 1069,
+    GARTELL_GRINDER                           = 1070,
+    TRIBOULEX_TERRORIZER                      = 1071,
+    AITA_ABNEGATER                            = 1072,
+    AMINON_APPREHENDER                        = 1073,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,
@@ -1094,6 +1097,8 @@ xi.title =
     PARTER_OF_THE_VEIL                        = 1143,
     DEMONIC_DREAMER                           = 1144,
     SEARCHER_OF_THE_VORACIOUS                 = 1145,
+    ANOTHER_PSYCHE                            = 1146,
+    SENDER_OF_SHADOW                          = 1147,
 }
 
 -----------------------------------

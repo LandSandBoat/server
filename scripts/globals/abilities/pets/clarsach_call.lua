@@ -6,14 +6,14 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 -- https://www.bg-wiki.com/ffxi/Clarsach_Call
-ability_object.onPetAbility = function(target, pet, petskill, master)
+abilityObject.onPetAbility = function(target, pet, petskill, master)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local level = pet:getMainLvl()
     local damage = 48 + (level * 8)
@@ -39,4 +39,4 @@ ability_object.onPetAbility = function(target, pet, petskill, master)
     return damage
 end
 
-return ability_object
+return abilityObject

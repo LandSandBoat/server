@@ -5,26 +5,23 @@
 -- Type: Magical (Light)
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.FLASH
-    local power = 200
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local power    = 200
     local duration = 20
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, power, 0, duration))
 
-    return typeEffect
+    return xi.effect.FLASH
 end
 
-return mobskill_object
+return mobskillObject

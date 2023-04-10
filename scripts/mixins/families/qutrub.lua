@@ -10,7 +10,6 @@ g_mixins.families = g_mixins.families or {}
 -- 3 = both weapons broken
 -- 4 = main weapon out, sub weapon sheathed
 g_mixins.families.qutrub = function(qutrubMob)
-
     -- set default 10% chance to break weapon on critical hit taken
     -- this can be overridden in onMobSpawn
 
@@ -40,7 +39,7 @@ g_mixins.families.qutrub = function(qutrubMob)
     -- chance to break weapon when taking a critical hit
 
     qutrubMob:addListener("CRITICAL_TAKE", "QUTRUB_CRITICAL_TAKE", function(mob)
-        if math.random(100) <= mob:getLocalVar("qutrubBreakChance") then
+        if math.random(1, 100) <= mob:getLocalVar("qutrubBreakChance") then
             local animationSub = mob:getAnimationSub()
 
             -- break first weapon
@@ -54,9 +53,7 @@ g_mixins.families.qutrub = function(qutrubMob)
                 mob:setLocalVar("swapTime", 0)
             end
         end
-
     end)
-
 end
 
 return g_mixins.families.qutrub

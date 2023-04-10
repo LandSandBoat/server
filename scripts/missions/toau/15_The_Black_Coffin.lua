@@ -35,9 +35,9 @@ mission.sections =
 
         [xi.zone.ARRAPAGO_REEF] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if
                         player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) and
                         player:getMissionStatus(mission.areaId) == 0

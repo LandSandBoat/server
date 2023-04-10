@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Rafid
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

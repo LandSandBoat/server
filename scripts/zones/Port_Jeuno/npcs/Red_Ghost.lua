@@ -8,7 +8,7 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -96, y = -0.001, z = 9, rotation = 192, wait = 4000 },
     { rotation = 64, wait = 1000 },
@@ -18,8 +18,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -33,8 +33,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatJeuno, 15)
     then
         player:startEvent(314)
-    else
-        player:startEvent(34)
     end
 end
 

@@ -68,7 +68,7 @@ end
 local function getOrbEvent(player, trade)
     for itemID, orbData in pairs(shamiOrbItems) do
         if npcUtil.tradeHasExactly(trade, itemID) then
-            if player:hasWornItem(itemID) then
+            if player:getWornUses(itemID) > 0 then
                 return 22
             else
                 return orbData[1]

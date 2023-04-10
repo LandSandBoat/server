@@ -30,7 +30,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 140 and option == 1 and npcUtil.giveKeyItem(player, xi.ki.RUNIC_PORTAL_USE_PERMIT) then
+    if
+        csid == 140 and
+        option == 1 and
+        npcUtil.giveKeyItem(player, xi.ki.RUNIC_PORTAL_USE_PERMIT)
+    then
         player:delCurrency("imperial_standing", 200)
     elseif csid == 140 and option == 2 then
         npcUtil.giveKeyItem(player, xi.ki.RUNIC_PORTAL_USE_PERMIT)

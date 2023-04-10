@@ -15,10 +15,10 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
 -- source https://www.bg-wiki.com/ffxi/Dimidiation, http://wiki.ffo.jp/html/31450.html
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
     params.ftp100 = 2.25 params.ftp200 = 4.5 params.ftp300 = 6.75
@@ -40,4 +40,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

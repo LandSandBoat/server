@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Nafiwaa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

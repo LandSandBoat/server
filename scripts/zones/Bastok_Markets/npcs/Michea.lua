@@ -15,7 +15,11 @@ entity.onTrade = function(player, npc, trade)
     local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
 
     -- DISTANT LOYALTIES
-    if (distantLoyalties == QUEST_ACCEPTED and player:getCharVar("DistantLoyaltiesProgress") == 2 and npcUtil.tradeHas(trade, 653)) then
+    if
+        distantLoyalties == QUEST_ACCEPTED and
+        player:getCharVar("DistantLoyaltiesProgress") == 2 and
+        npcUtil.tradeHas(trade, 653)
+    then
         player:startEvent(317)
     end
 end
@@ -25,8 +29,15 @@ entity.onTrigger = function(player, npc)
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
 
     -- DISTANT LOYALTIES
-    if distantLoyalties == QUEST_ACCEPTED and distantLoyaltiesProgress >= 1 and distantLoyaltiesProgress <= 3 then
-        if distantLoyaltiesProgress == 1 and player:hasKeyItem(xi.ki.GOLDSMITHING_ORDER) then
+    if
+        distantLoyalties == QUEST_ACCEPTED and
+        distantLoyaltiesProgress >= 1 and
+        distantLoyaltiesProgress <= 3
+    then
+        if
+            distantLoyaltiesProgress == 1 and
+            player:hasKeyItem(xi.ki.GOLDSMITHING_ORDER)
+        then
             player:startEvent(315)
         elseif distantLoyaltiesProgress == 2 then
             player:startEvent(316)

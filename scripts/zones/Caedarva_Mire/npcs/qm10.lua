@@ -29,7 +29,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 15 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME, { item=15602, var="OperationTeatimeProgress" })
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME, { item = 15602, var = "OperationTeatimeProgress" })
     end
 end
 

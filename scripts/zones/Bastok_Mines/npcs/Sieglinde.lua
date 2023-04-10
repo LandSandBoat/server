@@ -13,12 +13,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 1)
-    local skillCap    = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
-    local skillLevel  = player:getSkillLevel(xi.skill.SMITHING)
+    local skillCap   = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
+    local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
 
-    if guildMember == 1 then
-        if (player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == false) then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
+        if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
             player:startEvent(124, skillCap, skillLevel, 2, 201, player:getGil(), 0, 4095, 0)
         else
             player:startEvent(124, skillCap, skillLevel, 2, 201, player:getGil(), 7009, 4095, 0)

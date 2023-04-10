@@ -21,9 +21,9 @@
 
 #include "navmesh.h"
 
-#include <detour/DetourCommon.h>
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourCommon.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/utils.h"
 #include "common/xirand.h"
@@ -96,6 +96,16 @@ void CNavMesh::ToDetourPos(const position_t* pos, float* out)
     out[2] = z * -1;
 }
 
+CNavMesh::CNavMesh(CNavMesh* other)
+: m_zoneID(other->m_zoneID)
+, m_navMesh(other->m_navMesh)
+{
+    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
+
+    m_hit.path    = m_hitPath;
+    m_hit.maxPath = 20;
+}
+
 CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
@@ -110,7 +120,7 @@ CNavMesh::~CNavMesh() = default;
 
 bool CNavMesh::load(std::string const& filename)
 {
-    this->filename = filename;
+    this->m_filename = filename;
 
     std::ifstream file(filename.c_str(), std::ios_base::in | std::ios_base::binary);
 
@@ -182,48 +192,12 @@ bool CNavMesh::load(std::string const& filename)
 void CNavMesh::reload()
 {
     this->unload();
-    this->load(this->filename);
+    this->load(this->m_filename);
 }
 
 void CNavMesh::unload()
 {
     m_navMesh.reset();
-}
-
-void CNavMesh::outputError(uint32 status)
-{
-    if (status & DT_WRONG_MAGIC)
-    {
-        ShowError("Detour: Input data is not recognized.");
-    }
-    else if (status & DT_WRONG_VERSION)
-    {
-        ShowError("Detour: Input data is in wrong version.");
-    }
-    else if (status & DT_OUT_OF_MEMORY)
-    {
-        ShowError("Detour: Operation ran out of memory.");
-    }
-    else if (status & DT_INVALID_PARAM)
-    {
-        ShowError("Detour: An input parameter was invalid.");
-    }
-    else if (status & DT_BUFFER_TOO_SMALL)
-    {
-        ShowError("Detour: Result buffer for the query was too small to store all results.");
-    }
-    else if (status & DT_OUT_OF_NODES)
-    {
-        ShowError("Detour: Query ran out of nodes during search.");
-    }
-    else if (status & DT_PARTIAL_RESULT)
-    {
-        ShowError("Detour: Query did not reach the end location, returning best guess.");
-    }
-    else if (status & DT_ALREADY_OCCUPIED)
-    {
-        ShowError("Detour: A tile has already been assigned to the given x,y coordinate");
-    }
 }
 
 std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)
@@ -240,11 +214,9 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
-    // ShowDebug("start pos %f %f %f", spos[0], spos[1], spos[2]);
 
     float epos[3];
     CNavMesh::ToDetourPos(&end, epos);
-    // ShowDebug("end pos %f %f %f", epos[0], epos[1], epos[2]);
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
@@ -604,7 +576,6 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
             // if we are within verticalLimitTrunc of a point, that's our closest.
             if (startHeight != endHeight)
             {
-                // ShowInfo("Different Floors");
                 return false;
             }
         }
@@ -613,7 +584,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     return true;
 }
 
-bool CNavMesh::raycast(const position_t& start, const position_t& end, bool lookOffMesh)
+bool CNavMesh::raycast(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
@@ -703,7 +674,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     // raycasted to - it needs to be on the navmesh. This will check to
     // see if the player is "off-mesh" and raycast to the nearest "on-mesh"
     // point instead. distanceToWall will be 0.0f if the player is "off-mesh".
-    if (distanceToWall < 0.01f && lookOffMesh)
+    if (distanceToWall < 0.01f)
     {
         // Overwrite epos with closest valid point
         status = m_navMeshQuery.closestPointOnPolyBoundary(endRef, epos, epos);

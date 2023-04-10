@@ -14,7 +14,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- CHOCOBILIOUS
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 1 and npcUtil.tradeHas(trade, 938) then
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and
+        player:getCharVar("ChocobiliousQuest") == 1 and
+        npcUtil.tradeHas(trade, 938)
+    then
         player:startEvent(229, 0, 938)
 
     -- PAYING LIP SERVICE
@@ -42,9 +46,9 @@ entity.onTrigger = function(player, npc)
 
     -- PAYING LIP SERVICE
     elseif payingLipService == QUEST_ACCEPTED then
-        player:startEvent(478, 0, 912, 1016, xi.settings.main.GIL_RATE*150, xi.settings.main.GIL_RATE*200)
+        player:startEvent(478, 0, 912, 1016, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
     elseif payingLipService == QUEST_AVAILABLE then
-        player:startEvent(477, 0, 912, 1016, xi.settings.main.GIL_RATE*150, xi.settings.main.GIL_RATE*200)
+        player:startEvent(477, 0, 912, 1016, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
 
     -- STANDARD DIALOG
     else
@@ -67,17 +71,15 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE)
     elseif csid == 479 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame=60, title=xi.title.KISSER_MAKE_UPPER })
+            npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame = 60, title = xi.title.KISSER_MAKE_UPPER })
         else
             player:addFame(xi.quest.fame_area.WINDURST, 8)
         end
 
         if option == 1 then
-            player:addGil(xi.settings.main.GIL_RATE*150)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*150)
+            npcUtil.giveCurrency(player, 'gil', 150)
         else
-            player:addGil(xi.settings.main.GIL_RATE*200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*200)
+            npcUtil.giveCurrency(player, 'gil', 200)
         end
 
         player:confirmTrade()

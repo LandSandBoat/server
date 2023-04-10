@@ -6,19 +6,19 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local level = player:getMainLvl() * 2
 
-    if(player:getMP()<level) then
-       return 87, 0
+    if player:getMP() < level then
+        return 87, 0
     end
 
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, master)
+abilityObject.onPetAbility = function(target, pet, skill, master)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     local level = pet:getMainLvl()
@@ -35,4 +35,4 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     return damage
 end
 
-return ability_object
+return abilityObject

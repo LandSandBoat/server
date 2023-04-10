@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Cotelle
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

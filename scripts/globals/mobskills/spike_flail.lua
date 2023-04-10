@@ -6,9 +6,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
     elseif mob:hasStatusEffect(xi.effect.SUPER_BUFF) then
@@ -22,10 +22,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     elseif mob:getAnimationSub() == 1 then
         return 1
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 2
     local dmgmod = math.random(5, 7)
@@ -35,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

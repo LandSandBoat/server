@@ -21,15 +21,17 @@
 
 #include "transport.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
+#include "common/vana_time.h"
+
+#include <cstdlib>
+
 #include "entities/charentity.h"
 #include "map.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 #include "zone.h"
-#include <cstdlib>
 
 std::unique_ptr<CTransportHandler> CTransportHandler::_instance;
 
@@ -399,6 +401,23 @@ void CTransportHandler::TransportTimer()
         }
     }
 }
+
+// gets returns a pointer to an Elevator_t if available
+Elevator_t* CTransportHandler::getElevator(uint8 elevatorID)
+{
+    for (auto& i : ElevatorList)
+    {
+        Elevator_t* elevator = &i;
+
+        if (elevator->id == elevatorID)
+        {
+            return elevator;
+        }
+    }
+
+    return nullptr;
+}
+
 /************************************************************************
  *                                                                       *
  *  Initializes an elevator                                              *

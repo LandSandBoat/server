@@ -11,13 +11,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local var = 0
-    if player:getMentor() == false then
+    if not player:getMentor() then
         if player:getMainLvl() >= 30 and player:getPlaytime() >= 648000 then
             var = 1
         end
-    elseif player:getMentor() == true then
+    elseif player:getMentor() then
         var = 2
     end
+
     player:startEvent(10026, var)
 end
 

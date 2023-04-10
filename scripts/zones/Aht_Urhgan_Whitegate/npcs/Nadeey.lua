@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Nadeey
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

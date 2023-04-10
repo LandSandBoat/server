@@ -28,7 +28,7 @@ mission.sections[1] = {} -- REMEMBER: Lua is 1-indexed!
 
 mission.sections[1].check = function(player, currentMission, missionStatus, vars)
     return currentMission == mission.missionId and
-           xi.moghouse.isInMogHouseInHomeNation(player)
+        xi.moghouse.isInMogHouseInHomeNation(player)
 end
 
 local moogleTriggerEvent =
@@ -36,11 +36,8 @@ local moogleTriggerEvent =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, {
-                    xi.items.ORCISH_PLATE_ARMOR,
-                    xi.items.QUADAV_BACKSCALE,
-                    xi.items.YAGUDO_CAULK
-                })
+            if
+                npcUtil.tradeHasExactly(trade, { xi.items.ORCISH_PLATE_ARMOR, xi.items.QUADAV_BACKSCALE, xi.items.YAGUDO_CAULK })
             then
                 return mission:progressEvent(30024)
             end

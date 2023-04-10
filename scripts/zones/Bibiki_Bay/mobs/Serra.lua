@@ -2,7 +2,7 @@
 -- Area: Bibiki Bay
 --   NM: Serra
 -----------------------------------
-require("scripts/globals/hunts")
+require('scripts/globals/hunts')
 -----------------------------------
 local entity = {}
 

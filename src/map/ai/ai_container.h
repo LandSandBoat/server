@@ -62,6 +62,7 @@ public:
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(duration _duration, bool canChangeState);
+    bool Untargetable(duration _duration, bool canChangeState); // Used to make owner entity untargetable & inactionable in TargetFind for _duration
 
     /* Internal Controller functions */
     bool Internal_Engage(uint16 targetid);
@@ -76,7 +77,7 @@ public:
     bool Internal_Die(duration);
     bool Internal_Raise();
     bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
-    bool Internal_Despawn();
+    bool Internal_Despawn(bool instantDespawn = false);
     bool Internal_Respawn(duration _duration);
 
     void    Reset();
@@ -106,6 +107,7 @@ public:
     bool IsSpawned();
     bool IsRoaming();
     bool IsEngaged();
+    bool IsUntargetable();
     // whether AI is currently able to change state from external means
     bool CanChangeState();
     bool CanFollowPath();
@@ -120,6 +122,7 @@ public:
 
     void QueueAction(queueAction_t&&);
     bool QueueEmpty();
+    void checkQueueImmediately();
 
     // stores all events and their associated lua callbacks
     CAIEventHandler              EventHandler;

@@ -21,7 +21,7 @@ require("scripts/globals/msg")
 
 npcUtil = {}
 
---[[ *******************************************************************************
+--[[
     Pop mob(s) from question mark NPC.
     If any mob is already spawned, return false.
     Params (table) can contain the following parameters:
@@ -35,7 +35,7 @@ npcUtil = {}
     message (number)
         if set a message will play if a entity spawns
 
-******************************************************************************* --]]
+--]]
 function npcUtil.popFromQM(player, qm, mobId, params)
     local qmId = qm:getID()
 
@@ -43,9 +43,11 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     if not params then
         params = {}
     end
+
     if params.claim == nil or type(params.claim) ~= "boolean" then
         params.claim = true
     end
+
     if params.hide == nil or type(params.hide) ~= "number" then
         params.hide = xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
     end
@@ -117,6 +119,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
                 GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
             end)
         end
+
         -- add in a spawn message if has one
         if params.message then
             player:messageSpecial(params.message)
@@ -126,7 +129,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Queue a position change for an NPC.  We do this because if you setPos() an NPC
     immediately after you setStatus(xi.status.DISAPPEAR) it, the QM does not hide
     on the players' screens.
@@ -136,11 +139,12 @@ end
     { x, y, z, rot }
     { x = x, y = y, z = z }
     { x = x, y = y, z = z, rot = r }
-******************************************************************************* --]]
+--]]
 local function doMove(x, y, z, r)
     if not r then
         r = 0
     end
+
     return function(entity)
         entity:setPos(x, y, z, r)
     end
@@ -150,11 +154,13 @@ function npcUtil.queueMove(npc, point, delay)
     if not delay then
         delay = 3000
     end
+
     if point.rot then
         point = { point.x, point.y, point.z, point.rot }
     elseif point.x then
         point = { point.x, point.y, point.z }
     end
+
     npc:queue(delay, doMove(unpack(point)))
 end
 
@@ -172,7 +178,11 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
 
         if not allowCurrentPosition then
             -- Finding by comparing the NPC's coords
-            if math.floor(v[1]) == math.floor(npc:getXPos()) and math.floor(v[2]) == math.floor(npc:getYPos()) and math.floor(v[3]) == math.floor(npc:getZPos()) then
+            if
+                math.floor(v[1]) == math.floor(npc:getXPos()) and
+                math.floor(v[2]) == math.floor(npc:getYPos()) and
+                math.floor(v[3]) == math.floor(npc:getZPos())
+            then
                 positionIndex = i -- Found where the NPC is!
             end
         end
@@ -192,7 +202,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     return { ["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3] }
 end
 
---[[ *******************************************************************************
+--[[
     Give item(s) to player.
     If player has inventory space, give items, display message, and return true.
     If not, do not give items, display a message to indicate this, and return false.
@@ -212,7 +222,7 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
-******************************************************************************* --]]
+--]]
 function npcUtil.giveItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -225,7 +235,12 @@ function npcUtil.giveItem(player, items, params)
         for _, v in pairs(items) do
             if type(v) == "number" then
                 table.insert(givenItems, { v, 1 })
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
@@ -240,6 +255,7 @@ function npcUtil.giveItem(player, items, params)
             local messageId = params.fromTrade and (ID.text.ITEM_CANNOT_BE_OBTAINED + 4) or ID.text.ITEM_CANNOT_BE_OBTAINED
             player:messageSpecial(messageId, givenItems[1][1])
         end
+
         return false
     end
 
@@ -254,18 +270,21 @@ function npcUtil.giveItem(player, items, params)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
                 end
             end
+
             messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             if not params.silent then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             end
+
             return false
         end
     end
+
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give temp item(s) to player.
     If player has inventory space, give items, display message, and return true.
     If not, do not give items, display a message to indicate this, and return false.
@@ -285,7 +304,7 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
-******************************************************************************* --]]
+--]]
 function npcUtil.giveTempItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -298,7 +317,12 @@ function npcUtil.giveTempItem(player, items, params)
         for _, v in pairs(items) do
             if type(v) == "number" then
                 table.insert(givenItems, { v, 1 })
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.", player:getZoneName()))
@@ -318,25 +342,28 @@ function npcUtil.giveTempItem(player, items, params)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
                 end
             end
+
             messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             if not params.silent then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             end
+
             return false
         end
     end
+
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give currency to a player.
     Message is displayed showing currency obtained.
 
     Examples of valid parameters:
         gil, 500
         bayld, 1000
-******************************************************************************* --]]
+--]]
 function npcUtil.giveCurrency(player, currency, amount)
     local ID = zones[player:getZoneID()]
 
@@ -347,38 +374,39 @@ function npcUtil.giveCurrency(player, currency, amount)
 
     currency = string.lower(currency)
 
-    local currency_types =
+    local currencyTypes =
     {
         ["gil"]   = { "GIL_OBTAINED", xi.settings.main.GIL_RATE },
         ["bayld"] = { "BAYLD_OBTAINED", xi.settings.main.BAYLD_RATE }
     }
 
-    local currency_type = currency_types[currency]
+    local currencyType = currencyTypes[currency]
 
-    if not currency_type then
+    if not currencyType then
         print(string.format("ERROR: invalid currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
         return false
     end
 
-    local message_id = ID.text[currency_type[1]]
-    if not message_id then
+    local messageId = ID.text[currencyType[1]]
+    if not messageId then
         print(string.format("ERROR: no message ID defined for currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
         return false
     end
 
-    amount = amount * currency_type[2]
+    amount = amount * currencyType[2]
 
     if currency == "gil" then
         player:addGil(amount)
     else
         player:addCurrency(currency, amount)
     end
-    player:messageSpecial(message_id, amount)
+
+    player:messageSpecial(messageId, amount)
 
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give key item(s) to player.
     Message is displayed showing key items obtained.
 
@@ -386,7 +414,7 @@ end
         xi.ki.ZERUHN_REPORT
         { xi.ki.PALBOROUGH_MINES_LOGS }
         { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
-******************************************************************************* --]]
+--]]
 function npcUtil.giveKeyItem(player, keyitems)
     local ID = zones[player:getZoneID()]
 
@@ -408,10 +436,11 @@ function npcUtil.giveKeyItem(player, keyitems)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
         end
     end
+
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give a reward (Hidden Quests)
     If hidden quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -431,7 +460,7 @@ end
             title = xi.title.ENTRANCE_DENIED,
             var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.giveReward(player, params)
     params = params or {}
 
@@ -455,7 +484,12 @@ function npcUtil.giveReward(player, params)
     if params["fame"] == nil then
         params["fame"] = 30
     end
-    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
+
+    if
+        params["fameArea"] ~= nil and
+        params["fameArea"]["fame_area"] ~= nil and
+        type(params["fame"]) == "number"
+    then
         player:addFame(params["fameArea"], params["fame"])
     end
 
@@ -484,6 +518,7 @@ function npcUtil.giveReward(player, params)
         elseif type(params["var"]) == "string" then
             table.insert(playerVarsToZero, params["var"])
         end
+
         for _, v in pairs(playerVarsToZero) do
             player:setCharVar(v, 0)
         end
@@ -492,7 +527,7 @@ function npcUtil.giveReward(player, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Complete a quest.
     If quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -512,7 +547,7 @@ end
             title = xi.title.ENTRANCE_DENIED,
             var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.completeQuest(player, area, quest, params)
     params = params or {}
 
@@ -572,6 +607,7 @@ function npcUtil.completeQuest(player, area, quest, params)
         elseif type(params["var"]) == "string" then
             table.insert(playerVarsToZero, params["var"])
         end
+
         for _, v in pairs(playerVarsToZero) do
             player:setCharVar(v, 0)
         end
@@ -594,7 +630,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Complete a Mission.
     If quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -611,7 +647,7 @@ end
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.completeMission(player, logId, missionId, params)
     params = params or {}
 
@@ -690,7 +726,7 @@ function npcUtil.completeMission(player, logId, missionId, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     check whether trade has all required items
         if yes, confirm all the items and return true
         if no, return false
@@ -702,9 +738,11 @@ end
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
         { 640, { "gil", 200 } } -- copper ore x1, gil x200
-******************************************************************************* --]]
+--]]
 function npcUtil.tradeHas(trade, items, exact)
-    if type(exact) ~= "boolean" then exact = false end
+    if type(exact) ~= "boolean" then
+        exact = false
+    end
 
     -- create table of traded items, with key/val of itemId/itemQty
     local tradedItems = {}
@@ -727,16 +765,28 @@ function npcUtil.tradeHas(trade, items, exact)
             if type(v) == "number" then
                 itemIdNeeded = v
                 itemQtyNeeded = 1
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 itemIdNeeded = v[1]
                 itemQtyNeeded = v[2]
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "string" and type(v[2]) == "number" and string.lower(v[1]) == "gil" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "string" and
+                type(v[2]) == "number" and
+                string.lower(v[1]) == "gil"
+            then
                 itemIdNeeded = 65535
                 itemQtyNeeded = v[2]
             else
                 print("ERROR: invalid value contained within items parameter given to npcUtil.tradeHas.")
                 itemIdNeeded = nil
             end
+
             if itemIdNeeded ~= nil then
                 neededItems[itemIdNeeded] = (neededItems[itemIdNeeded] == nil) and itemQtyNeeded or neededItems[itemIdNeeded] + itemQtyNeeded
             end
@@ -769,10 +819,11 @@ function npcUtil.tradeHas(trade, items, exact)
     for k, v in pairs(neededItems) do
         trade:confirmItem(k, v)
     end
+
     return true
 end
 
---[[ *******************************************************************************
+--[[
     check whether trade has exactly required items
         if yes, confirm all the items and return true
         if no, return false
@@ -784,7 +835,7 @@ end
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
         { 640, { "gil", 200 } } -- copper ore x1, gil x200
-******************************************************************************* --]]
+--]]
 function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
 end
@@ -836,19 +887,23 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     if func(npc) then
         return
     end
+
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
             [xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
             [xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
-            [xi.anim.FISHING_FISH] = { duration = 10,
-                                            nextAnim =
-                                            {
-                                                xi.anim.FISHING_CAUGHT,
-                                                xi.anim.FISHING_ROD_BREAK,
-                                                xi.anim.FISHING_LINE_BREAK,
-                                            }
-                                       },
+            [xi.anim.FISHING_FISH] =
+            {
+                duration = 10,
+                nextAnim =
+                {
+                    xi.anim.FISHING_CAUGHT,
+                    xi.anim.FISHING_ROD_BREAK,
+                    xi.anim.FISHING_LINE_BREAK,
+                }
+            },
+
             [xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
             [xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
             [xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },
@@ -869,6 +924,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
                 nextAnimationDuration = anims[nextAnimationId].duration
             end
         end
+
         npcArg:setAnimation(nextAnimationId)
         npcUtil.fishingAnimation(npcArg, nextAnimationDuration, func)
     end)
@@ -883,6 +939,7 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     if func(npc) then
         return
     end
+
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
@@ -893,15 +950,22 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
         npcArg:timer(anims[magicType].duration, function(npcTimerArg)
             npcTimerArg:entityAnimationPacket(anims[magicType].stop)
         end)
+
         npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
+end
+
+function npcUtil.showCrate(crate)
+    crate:setStatus(xi.status.NORMAL)
+    crate:setUntargetable(false)
+    crate:resetLocalVars()
 end
 
 function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
         crate:entityAnimationPacket("kesu")
         crate:timer(3000, function(npc)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
         end)
     else
@@ -910,14 +974,19 @@ function npcUtil.disappearCrate(crate)
     end
 end
 
+-- Opens a crate and sets an 'opened' var so it cannot be opened again.
+--  - crate: The npc crate to open
+--  - callback: The callback function to call if crate is successfully opened. Return true to leave crate open.
 function npcUtil.openCrate(crate, callback)
     if crate:getLocalVar("opened") == 0 then
         crate:setLocalVar("opened", 1)
-        callback()
+        local shouldDisappear = not callback()
         crate:entityAnimationPacket("openH")
 
-        crate:timer(7000, function(npc)
-            npcUtil.disappearCrate(npc)
-        end)
+        if shouldDisappear then
+            crate:timer(7000, function(npc)
+                npcUtil.disappearCrate(npc)
+            end)
+        end
     end
 end

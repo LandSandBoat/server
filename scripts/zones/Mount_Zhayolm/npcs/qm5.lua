@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2583) and npcUtil.popFromQM(player, npc, ID.mob.SARAMEYA, { hide = 0 }) then -- Trade Buffalo Corpse
+    if
+        npcUtil.tradeHas(trade, 2583) and
+        npcUtil.popFromQM(player, npc, ID.mob.SARAMEYA, { hide = 0 })
+    then
+        -- Trade Buffalo Corpse
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

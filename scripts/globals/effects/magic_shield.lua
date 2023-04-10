@@ -12,12 +12,12 @@
 --  1 Fake Magic Shield (does not resist non-damage spells)
 -----------------------------------
 require("scripts/globals/status")
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
     if power == 3 then
-        target:addMod(xi.mod.MAGIC_ABSORB,100)
+        target:addMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:addMod(xi.mod.FIRE_ABSORB, 100)
         target:addMod(xi.mod.EARTH_ABSORB, 100)
@@ -34,13 +34,13 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
     if power == 3 then
-        target:delMod(xi.mod.MAGIC_ABSORB,100)
+        target:delMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:delMod(xi.mod.FIRE_ABSORB, 100)
         target:delMod(xi.mod.EARTH_ABSORB, 100)
@@ -57,4 +57,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

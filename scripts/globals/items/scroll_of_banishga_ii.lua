@@ -3,14 +3,14 @@
 -- Scroll of Banishga II
 -- Teaches the white magic Banishga II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(39)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(39)
 end
 
-return item_object
+return itemObject

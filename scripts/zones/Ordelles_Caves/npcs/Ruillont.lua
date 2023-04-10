@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-     -- Ruillont Default Actions vary based on Nation
+    -- Ruillont Default Actions vary based on Nation
     if player:getNation() == xi.nation.SANDORIA then
         player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 2)
     else

@@ -5,29 +5,33 @@
 -- Recast Time: 0:03:00
 -- Duration: 1:00 or until next Weapon Skill
 -----------------------------------
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
-    if (not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)) then
+abilityObject.onUseAbility = function(player, target, ability, action)
+    if
+        not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
+    then
         target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
+
     local skill = player:getWeaponSkillType(xi.slot.MAIN)
-    local anim = 36
+    local anim  = 36
+
     if skill <= 1 then
         anim = 37
     elseif skill <= 3 then
@@ -51,9 +55,11 @@ ability_object.onUseAbility = function(player, target, ability, action)
     else
         anim = 36
     end
+
     action:setAnimation(target:getID(), anim)
     action:speceffect(target:getID(), 1)
+
     return 0
 end
 
-return ability_object
+return abilityObject

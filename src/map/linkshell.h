@@ -49,16 +49,16 @@ public:
     void setColor(uint16 color);
     void setPostRights(uint8 postrights); // Updates lsmes privilege and writes to db
 
-    const int8* getName();
-    void        setName(int8* name);
-    void        setMessage(const int8* message, const int8* poster);
+    const std::string& getName();
+    void               setName(const std::string& name);
+    void               setMessage(const std::string& message, const std::string& poster);
 
     void AddMember(CCharEntity* PChar, int8 type, uint8 lsNum);
     bool DelMember(CCharEntity* PChar);
 
-    void BreakLinkshell(int8* lsname, bool gm);
-    void RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell = false);
-    void ChangeMemberRank(int8* MemberName, uint8 toSack);
+    void BreakLinkshell();
+    void RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell = false);
+    void ChangeMemberRank(const std::string& MemberName, uint8 toSack);
 
     void PushPacket(uint32 senderID, CBasicPacket* packet);
     void PushLinkshellMessage(CCharEntity* PChar, bool ls1);
@@ -87,7 +87,7 @@ namespace linkshell
     bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
     bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
 
-    uint32      RegisterNewLinkshell(const int8* name, uint16 color);
+    uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
     CLinkshell* GetLinkshell(uint32 id);
 }; // namespace linkshell
 

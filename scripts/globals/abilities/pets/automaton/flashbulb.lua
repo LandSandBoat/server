@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 45)
     local highest = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
     local highestskill = 22
@@ -20,6 +20,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         highestskill = 23
         highest = automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED)
     end
+
     if automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC) > highest then
         highestskill = 24
     end
@@ -40,4 +41,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return xi.effect.FLASH
 end
 
-return ability_object
+return abilityObject

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Wafeeyah
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

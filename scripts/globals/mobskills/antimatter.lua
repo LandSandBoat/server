@@ -3,39 +3,24 @@
 --
 --  Description:  Single-target ranged Light damage (~700-1500), ignores Utsusemi.
 --  Type: Magical
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-
+require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    -- skillList  54 = Omega
-    -- skillList 727 = Proto-Omega
-    -- skillList 728 = Ultima
-    -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp = mob:getHPP()
-    local phase = mob:getLocalVar("battlePhase")
-
-    if ((skillList == 729 and phase < 4) or (skillList == 728 and mobhp < 20)) then
-        if mob:getLocalVar("nuclearWaste") == 0 then
-            return 0
-        end
-    end
-
-    return 1
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 2.5
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local info   = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local dmg    = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+
     return dmg
 end
-return mobskill_object
+
+return mobskillObject

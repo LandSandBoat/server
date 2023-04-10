@@ -5,21 +5,20 @@
 -- Recast Time: 2 minutes
 -- Duration: N/A
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() == nil) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
-        if (player:getPet():getHP() == 0) then
+        if player:getPet():getHP() == 0 then
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
-        elseif (player:getPet():getTarget() == nil) then
+        elseif player:getPet():getTarget() == nil then
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
-        elseif (not player:getPet():hasTPMoves()) then
+        elseif not player:getPet():hasTPMoves() then
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
         else
             return 0, 0
@@ -27,7 +26,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local function doSic(mob)
         if mob:getTP() >= 1000 then
             mob:useMobAbility()
@@ -36,10 +35,9 @@ ability_object.onUseAbility = function(player, target, ability)
         else
             mob:queue(0, doSic)
         end
-
     end
 
     player:getPet():queue(0, doSic)
 end
 
-return ability_object
+return abilityObject

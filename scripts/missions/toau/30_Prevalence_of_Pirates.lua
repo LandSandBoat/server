@@ -41,9 +41,9 @@ mission.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if player:getMissionStatus(mission.areaId) == 1 then
                         return mission:progressEvent(14)
                     end

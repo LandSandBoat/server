@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Taraihi-Perunhi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

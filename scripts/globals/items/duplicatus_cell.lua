@@ -5,18 +5,19 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.OBLIVISCENCE) then
         return 0
     end
+
     return -1
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:delStatusEffectSilent(xi.effect.OBLIVISCENCE)
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 8)
 end
 
-return item_object
+return itemObject

@@ -50,6 +50,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANNOT_USE_IN_AREA    = 40,  /* cannot use in this area */
     MSGBASIC_UNABLE_TO_CAST_SPELLS = 49,  /* The <player> is unable to cast spells. */
     MSGBASIC_MAGIC_NO_EFFECT       = 75,  /* <caster>'s <spell> has no effect on <target>. */
+    MSGBASIC_IS_PARALYZED_2        = 84,  /* <target> is paralyzed. */
     MSGBASIC_MAGIC_TELEPORT        = 93,  /* <caster> casts <spell>. <target> vanishes. */
     MSGBASIC_WAIT_LONGER           = 94,  /* You must wait longer to perform that action. */
     MSGBASIC_PLAYER_DEFEATED_BY    = 97,  /* <player> was defeated by the <target>. */
@@ -57,6 +58,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_USES_JA2              = 101, /* The <player> uses .. */
     MSGBASIC_USES_RECOVERS_HP      = 102, /* The <player> uses .. <target> recovers .. HP. */
     MSGBASIC_SKILL_RECOVERS_HP     = 103, /* The <player> uses .. <target> recovers .. HP. */
+    MSGBASIC_TIME_LEFT             = 202, /* Time left: (h:mm:ss) */
+    MSGBASIC_IS_STATUS             = 203, /* <target> is <status>. */
 
     MSGBASIC_USES_JA_TAKE_DAMAGE      = 317, /* The <player> uses .. <target> takes .. points of damage. */
     MSGBASIC_IS_INTIMIDATED           = 106, /* The <player> is intimidated by <target>'s presence. */
@@ -135,6 +138,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_COUNTER_ABS_BY_SHADOW = 14,  /* The <player>'s attack is countered by the <target>. .. of <player>'s shadows absorbs the damage and disappears. */
     /* THF */
     MSGBASIC_TREASURE_HUNTER_UP = 603, /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
+    /* PUP */
+    MSGBASIC_AUTO_EXCEEDS_CAPACITY = 745, /* Your automaton exceeds one or more elemental capacity values and cannot be activated. */
     /* DNC */
     MSGBASIC_NO_FINISHINGMOVES = 524,
     /* TRUST & ALTER EGO */
@@ -162,6 +167,9 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_ROE_TIMED    = 705, // You have undertaken the timed record X.
     MSGBASIC_ROE_RECORD   = 697, // Records of Eminence: <record>.
     MSGBASIC_ROE_PROGRESS = 698, // Progress: <amount>/<amount>.
+    /* Merits */
+    MSGBASIC_MERIT_INCREASE = 380, // Your <merit> modification has risen to level <level>
+    MSGBASIC_MERIT_DECREASE = 381, // Your <merit> modification has dropped to level <level>
     /* DEBUG MESSAGES */
     MSGBASIC_DEBUG_RESISTED_SPELL   = 66, /* Debug: Resisted spell! */
     MSGBASIC_DEBUG_RECEIVED_STATUS  = 73, /* Debug: <target>'s status is now .. */

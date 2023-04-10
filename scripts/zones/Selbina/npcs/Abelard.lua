@@ -39,7 +39,10 @@ local zoneId =
 }
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
+    if
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 570)
+    then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
 
@@ -69,10 +72,16 @@ entity.onTrigger = function(player, npc)
     local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
 
     -- AN EXPLORER'S FOOTSTEPS
-    if anExplorersFootsteps == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1 then
+    if
+        anExplorersFootsteps == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
+    then
         player:startEvent(40)
     elseif anExplorersFootsteps == QUEST_ACCEPTED then
-        if not player:hasItem(xi.items.CLAY_TABLET) and not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY) then
+        if
+            not player:hasItem(xi.items.CLAY_TABLET) and
+            not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY)
+        then
             if player:getCharVar("anExplorer-CurrentTablet") == -1 then
                 player:startEvent(42)
             else
@@ -83,7 +92,7 @@ entity.onTrigger = function(player, npc)
             local tablets = player:getCharVar("anExplorer-ClayTablets")
 
             for zone = 1, #zoneId, 2 do
-                if tablets % (2*zoneId[zone]) < zoneId[zone] then
+                if tablets % (2 * zoneId[zone]) < zoneId[zone] then
                     if zone < 20 then
                         player:startEvent(43, math.floor(zone / 2))
                     else
@@ -102,10 +111,18 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- AN EXPLORER'S FOOTSTEPS
-    if csid == 40 and option ~= 0 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
+    if
+        csid == 40 and
+        option ~= 0 and
+        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+    then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
-    elseif csid == 42 and option == 100 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
+    elseif
+        csid == 42 and
+        option == 100 and
+        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+    then
         player:setCharVar("anExplorer-CurrentTablet", 0)
     elseif csid == 44 then
         npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
@@ -116,8 +133,7 @@ entity.onEventFinish = function(player, csid, option)
         for zone = 1, #zoneId, 2 do
             if zoneId[zone] == currtab then
                 player:confirmTrade()
-                player:addGil(xi.settings.main.GIL_RATE * zoneId[zone+1])
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * zoneId[zone+1])
+                npcUtil.giveCurrency(player, 'gil', zoneId[zone + 1])
                 player:setCharVar("anExplorer-CurrentTablet", 0)
                 break
             end

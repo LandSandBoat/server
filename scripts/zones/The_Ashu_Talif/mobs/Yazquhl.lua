@@ -9,8 +9,8 @@ mixins = { require("scripts/mixins/job_special") }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 150)
-    mob:addMod(xi.mod.SILENCERES, 150)
+    mob:addMod(xi.mod.SLEEP_MEVA, 150)
+    mob:addMod(xi.mod.SILENCE_MEVA, 150)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillId)
         -- Vorpal Blade
         if skillId == 40 then

@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { power = math.random(40,180), chance = 20 })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { power = math.random(40, 180), chance = 20 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

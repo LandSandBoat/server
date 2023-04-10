@@ -47,11 +47,11 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_UNDYING]                = { xi.mod.MND, 40, xi.mod.CONSERVE_MP, 10, xi.mod.ICEATT, 20 },
     [xi.ki.ATMA_OF_THE_IMPREGNABLE_TOWER]      = { xi.mod.HPP, 30, xi.mod.MACC, 40, xi.mod.MATT, 40 },
     [xi.ki.ATMA_OF_THE_SMOLDERING_SKY]         = { xi.mod.ATT, 20, xi.mod.MACC, 40, xi.mod.FIREATT, 30 },
-    [xi.ki.ATMA_OF_THE_DEMONIC_SKEWER]         = { xi.mod.STR, 20, xi.mod.TP_BONUS, 20, xi.mod.NULL_PHYSICAL_DAMAGE, 5 },
+    [xi.ki.ATMA_OF_THE_DEMONIC_SKEWER]         = { xi.mod.STR, 20, xi.mod.TP_BONUS, 20, xi.mod.NULL_PHYSICAL_DAMAGE, 5, xi.mod.NULL_RANGED_DAMAGE, 5 },
     [xi.ki.ATMA_OF_THE_GOLDEN_CLAW]            = { xi.mod.SKILLCHAINBONUS, 20, xi.mod.STR, 20 },
     [xi.ki.ATMA_OF_THE_GLUTINOUS_OOZE]         = { xi.mod.MND, 20, xi.mod.WATERACC, 20 },
     [xi.ki.ATMA_OF_THE_LIGHTNING_BEAST]        = { xi.mod.FASTCAST, 20, xi.mod.SPELLINTERRUPT, 20 },
-    [xi.ki.ATMA_OF_THE_NOXIOUS_BLOOM]          = { xi.mod.STORETP, 20, xi.mod.WALTZ_POTENTCY, 10 },
+    [xi.ki.ATMA_OF_THE_NOXIOUS_BLOOM]          = { xi.mod.STORETP, 20, xi.mod.WALTZ_POTENCY, 10 },
     [xi.ki.ATMA_OF_THE_GNARLED_HORN]           = { xi.mod.AGI, 50, xi.mod.CRITHITRATE, 20, xi.mod.COUNTER, 10 },
     [xi.ki.ATMA_OF_THE_STRANGLING_WIND]        = { xi.mod.STR, 20, xi.mod.VIT, 20, xi.mod.AGI, 30 },
     [xi.ki.ATMA_OF_THE_DEEP_DEVOURER]          = { xi.mod.SUBTLE_BLOW, 5, xi.mod.STORETP, 5, xi.mod.SONG_SPELLCASTING_TIME, 20 },
@@ -269,7 +269,7 @@ xi.atma.onEffectLose = function(target, effect)
     end
 end
 
-xi.atma.onTrigger = function(player,npc)
+xi.atma.onTrigger = function(player, npc)
     local atmaMask   = getAtmaMask(player)
     local activeAtma = { 0, 0, 0 }
     local menuParams = 0x1000000
@@ -309,11 +309,11 @@ xi.atma.onTrigger = function(player,npc)
     player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
-xi.atma.onEventUpdate = function(player,csid,option)
-    player:updateEvent(0,0)
+xi.atma.onEventUpdate = function(player, csid, option, npc)
+    player:updateEvent(0, 0)
 end
 
-xi.atma.onEventFinish = function(player,csid,option)
+xi.atma.onEventFinish = function(player, csid, option, npc)
     if option < 0x40000000 then
         if option % 0x10000 == 1 then
             local selection = (option - 1) / 0x10000

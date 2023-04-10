@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2589) and npcUtil.popFromQM(player, npc, ID.mob.DEXTROSE) then -- Trade Granulated Sugar
+    if
+        npcUtil.tradeHas(trade, 2589) and
+        npcUtil.popFromQM(player, npc, ID.mob.DEXTROSE)
+    then
+        -- Trade Granulated Sugar
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

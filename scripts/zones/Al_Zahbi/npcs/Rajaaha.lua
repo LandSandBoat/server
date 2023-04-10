@@ -11,11 +11,9 @@ local ID = require("scripts/zones/Al_Zahbi/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 6)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(231, 8, 0, 0, 0, 188, 0, 3, 0)
             else
@@ -26,11 +24,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 6)
     local skillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
 
-    if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
+        if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
             player:startEvent(230, 8, skillLevel, 0, 511, 188, 0, 3, 2184)
         else
             player:startEvent(230, 8, skillLevel, 0, 511, 188, 7101, 3, 2184)

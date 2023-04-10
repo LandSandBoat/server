@@ -99,9 +99,9 @@ quest.sections =
 
             ['Wazyih'] = quest:replaceEvent(689),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [9] = function(player, region)
+                [9] = function(player, triggerArea)
                     return quest:progressEvent(690)
                 end,
             },

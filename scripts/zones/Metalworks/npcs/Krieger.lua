@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Krieger
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

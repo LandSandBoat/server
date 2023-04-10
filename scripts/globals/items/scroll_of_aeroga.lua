@@ -3,14 +3,14 @@
 -- Scroll of Aeroga
 -- Teaches the black magic Aeroga
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(184)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(184)
 end
 
-return item_object
+return itemObject

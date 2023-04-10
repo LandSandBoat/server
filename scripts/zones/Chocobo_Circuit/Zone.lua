@@ -2,25 +2,36 @@
 -- Zone: Chocobo_Circuit
 -----------------------------------
 local ID = require('scripts/zones/Chocobo_Circuit/IDs')
+require('scripts/globals/chocobo_racing')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-59, -14, -124, 188)
+    end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
+    xi.chocoboRacing.onEventUpdate(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
+    xi.chocoboRacing.onEventFinish(player, csid, option)
 end
 
-return zone_object
+return zoneObject

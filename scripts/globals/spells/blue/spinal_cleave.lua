@@ -9,22 +9,22 @@
 -- Level: 63
 -- Casting Time: 0.5 seconds
 -- Recast Time: 28.5 seconds
--- Skillchain Element(s): Earth/Wind (can open Scission, Reverberation, Detonation, Gravitation, or Liquefaction can close Scission or Distortion, Detonation)
+-- Skillchain Element(s): Scission/Detonation
 -- Combos: Attack Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.UNDEAD
     params.tpmod = TPMOD_ACC
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
@@ -43,10 +43,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
-return spell_object
+return spellObject

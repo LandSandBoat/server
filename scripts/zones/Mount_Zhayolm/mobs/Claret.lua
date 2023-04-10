@@ -17,11 +17,11 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP()*.004))
-    mob:addMod(xi.mod.BINDRES, 40)
+    mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP() * 0.004))
+    mob:addMod(xi.mod.BIND_MEVA, 40)
     mob:addMod(xi.mod.MOVE, 15)
     mob:setMobMod(xi.mobMod.ENCROACH_TARGET, 35)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)

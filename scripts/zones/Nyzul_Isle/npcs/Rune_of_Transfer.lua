@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
     if npc:getAnimationSub() == 1 and npc:getLocalVar("cued") == 0 then
-       if instance:getLocalVar("menuChoice") > 1 then
+        if instance:getLocalVar("menuChoice") > 1 then
             -- Normal Menu
             player:startOptionalCutscene(201, { [0] = 7, cs_option = { 1, 2 } })
         else
@@ -32,7 +32,11 @@ entity.onEventUpdate = function(player, csid, option)
     -- Setup 1st person to activate rune to go up to control the porting to next floor
     local instance = player:getInstance()
 
-    if csid == 201 and option ~= 1073741824 and instance:getLocalVar("runeHandler") == 0 then
+    if
+        csid == 201 and
+        option ~= 1073741824 and
+        instance:getLocalVar("runeHandler") == 0
+    then
         local chars = instance:getChars()
         instance:setLocalVar("runeHandler", player:getID())
 
@@ -55,7 +59,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         for _, players in ipairs(chars) do
             players:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
         end
-    elseif csid == 201 and option ~= 1073741824 and instance:getLocalVar("runeHandler") == player:getID() then
+    elseif
+        csid == 201 and
+        option ~= 1073741824 and
+        instance:getLocalVar("runeHandler") == player:getID()
+    then
         -- Leave Assault
         if option == 1 and npc:getLocalVar("runCompleted") == 0 then
             npc:setLocalVar("runCompleted", 1)
@@ -66,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             for _, players in pairs(chars) do
                 local floorProgress = players:getVar("NyzulFloorProgress")
 
-                if xi.settings.RUNIC_DISK_SAVE == 0 then
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     -- Only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
@@ -121,14 +129,16 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 4 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
                     GetNPCByID(i, instance):setAnimationSub(0)
                 end
             end
 
             for _, entities in pairs(chars) do
-                entities:timer(1500, function(char) char:startCutscene(95) end)
+                entities:timer(1500, function(char)
+                    char:startCutscene(95)
+                end)
             end
 
             -- left/right Menu

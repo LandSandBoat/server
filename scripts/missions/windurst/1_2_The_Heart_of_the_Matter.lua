@@ -92,7 +92,7 @@ local placeOrb = function(player, csid, option, npc)
     player:delKeyItem(ki)
 
     -- final orb placed triggers additional message
-    if mission:getVar(player,"OrbsPlaced") == 6 then
+    if mission:getVar(player, "OrbsPlaced") == 6 then
         player:messageSpecial(msgBase + 5) -- "You have set all of the dark Mana Orbs in place."
     end
 end
@@ -100,7 +100,7 @@ end
 local collectOrb = function(player, csid, option, npc)
     local gizmoNum = npc:getID() - outerHorutotoRuinsID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
     local numberCollected = mission:getVar(player, "OrbsCollected")
-    local ki = glowingOrbKI[(numberCollected +1)]
+    local ki = glowingOrbKI[(numberCollected + 1)]
 
     mission:setVarBit(player, 'GizmoEmpty', gizmoNum)
     mission:setVar(player, "OrbsCollected", numberCollected + 1)
@@ -343,7 +343,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus)
             return currentMission == mission.missionId and missionStatus == 3 and
-                mission:getVar(player,"OrbsPlaced") == 6
+                mission:getVar(player, "OrbsPlaced") == 6
         end,
 
         [xi.zone.OUTER_HORUTOTO_RUINS] =
@@ -386,6 +386,7 @@ mission.sections =
                     for i = 1, 6 do
                         player:delKeyItem(glowingOrbKI[i])
                     end
+
                     player:setMissionStatus(mission.areaId, 6)
                 end,
             },
@@ -401,7 +402,8 @@ mission.sections =
                 [145] = function(player, csid, option, npc)
                     for i = 1, 6 do
                         player:delKeyItem(glowingOrbKI[i])
-                   end
+                    end
+
                     mission:complete(player)
                 end,
             },

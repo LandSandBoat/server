@@ -4,15 +4,19 @@
 local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
 require('scripts/globals/keyitems')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         local position = math.random(-2, 2) + 0.150
         player:setPos(position, -2.100, 3.250, 64)
     end
@@ -28,17 +32,17 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(255)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 255 then
         player:setPos(0, 0, 0, 0, 248)
     end
 end
 
-return zone_object
+return zoneObject

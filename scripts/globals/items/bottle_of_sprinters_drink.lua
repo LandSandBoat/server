@@ -7,13 +7,13 @@ require("scripts/globals/settings")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect = xi.effect.FLEE
     local power = 100
     local duration = 60
@@ -21,4 +21,4 @@ item_object.onItemUse = function(target)
     xi.item_utils.addItemEffect(target, effect, power, duration)
 end
 
-return item_object
+return itemObject

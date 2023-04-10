@@ -17,25 +17,26 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
-    if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WATER) == true then
+
+    if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WATER) then
         player:startEvent(620)
     elseif gates == QUEST_ACCEPTED then
         player:showText(npc, ID.text.OLBERGIEUT_DIALOG, xi.ki.SCRIPTURE_OF_WIND)
-    elseif player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and gates == QUEST_AVAILABLE then
+    elseif
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        gates == QUEST_AVAILABLE
+    then
         player:startEvent(619)
     else
         player:startEvent(612)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 619 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
         player:addKeyItem(xi.ki.SCRIPTURE_OF_WIND)
@@ -52,7 +53,6 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13584)
         end
     end
-
 end
 
 return entity

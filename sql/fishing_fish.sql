@@ -53,7 +53,7 @@ CREATE TABLE `fishing_fish` (
   `contest` tinyint(2) NOT NULL DEFAULT '0',
   `disabled` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=23;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=23;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

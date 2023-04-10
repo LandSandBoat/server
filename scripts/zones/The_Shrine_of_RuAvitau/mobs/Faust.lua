@@ -33,6 +33,7 @@ local handleFaustFacingDirectionMechanics = function(faust)
         else
             setFaustFacingDirection(faust, north)
         end
+
         setFaustNextTurnTime(faust)
     end
 end

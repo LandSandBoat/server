@@ -33,14 +33,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
  *                                                                       *
  ************************************************************************/
 
-CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
-: CZone(ZoneID, RegionID, ContinentID)
+CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
+: CZone(ZoneID, RegionID, ContinentID, levelRestriction)
 {
 }
 
 CZoneInstance::~CZoneInstance() = default;
 
-CCharEntity* CZoneInstance::GetCharByName(int8* name)
+CCharEntity* CZoneInstance::GetCharByName(std::string name)
 {
     TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
@@ -168,9 +168,14 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
         {
             if (instance->Failed() || instance->Completed())
             {
-                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s", (const char*)instance->GetName());
+                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s", instance->GetName());
+
+                // clang-format off
                 instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el)
-                                                { return el.get() == instance; }));
+                {
+                    return el.get() == instance;
+                }));
+                // clang-format on
             }
             else
             {
@@ -203,7 +208,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     {
         if (!ZoneTimer)
         {
-            createZoneTimer();
+            createZoneTimers();
         }
 
         PChar->targid = PChar->PInstance->GetNewCharTargID();
@@ -380,7 +385,7 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
     }
 }
 
-void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
+void CZoneInstance::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
     auto it = instanceList.begin();
@@ -388,12 +393,12 @@ void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
     {
         auto& instance = *it;
 
-        instance->ZoneServer(tick, check_regions);
+        instance->ZoneServer(tick);
         instance->CheckTime(tick);
 
         if ((instance->Failed() || instance->Completed()) && instance->CharListEmpty())
         {
-            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s", (const char*)instance->GetName());
+            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s", instance->GetName());
             it = instanceList.erase(it);
             continue;
         }

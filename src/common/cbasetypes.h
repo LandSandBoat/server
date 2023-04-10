@@ -9,36 +9,36 @@
 
 #include "logging.h"
 
+// https://stackoverflow.com/questions/1505582/determining-32-vs-64-bit-in-c
+// Check Windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define ENV64BIT
+#else
+#define ENV32BIT
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define ENV64BIT
+#else
+#define ENV32BIT
+#endif
+#endif
+
 // debug mode
 #if defined(_DEBUG) && !defined(DEBUG)
 #define DEBUG
 #endif
 
-// define a break macro for debugging.
-#if defined(DEBUG)
-#if defined(_MSC_VER)
-#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
-    if (_CONDITION_)                                        \
-    {                                                       \
-        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
-        __debugbreak();                                     \
+// define a break macro for debugging
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                               \
+    if (_CONDITION_)                                                 \
+    {                                                                \
+        ShowCritical("HIT DEBUG BREAK CONDITION: %s", #_CONDITION_); \
     }
-#else
-#include "assert.h"
-#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
-    if (_CONDITION_)                                        \
-    {                                                       \
-        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
-        assert(!(_CONDITION_));                             \
-    }
-#endif
-#else
-#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
-    if (_CONDITION_)                                        \
-    {                                                       \
-        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
-    }
-#endif
 
 // typedef/using
 using int8  = std::int8_t;
@@ -50,6 +50,20 @@ using uint8  = std::uint8_t;
 using uint16 = std::uint16_t;
 using uint32 = std::uint32_t;
 using uint64 = std::uint64_t;
+
+template <typename T>
+inline void destroy(T*& ptr)
+{
+    delete ptr; // cpp.sh allow
+    ptr = nullptr;
+}
+
+template <typename T>
+inline void destroy_arr(T*& ptr)
+{
+    delete[] ptr; // cpp.sh allow
+    ptr = nullptr;
+}
 
 // string case comparison for *nix portability
 #if !defined(_MSC_VER)

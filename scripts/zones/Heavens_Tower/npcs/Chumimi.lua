@@ -44,7 +44,11 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if theThreeMagi == QUEST_AVAILABLE and mJob == xi.job.BLM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
+    if
+        theThreeMagi == QUEST_AVAILABLE and
+        mJob == xi.job.BLM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+    then
         player:startEvent(260, 0, 613, 0, 0, 0, 1104) -- Start Quest "The Three Magi" --- NOTE: 5th parameter is "Meteorites" but he doesn't exist ---
     elseif theThreeMagi == QUEST_ACCEPTED then
         player:startEvent(261, 0, 0, 0, 0, 0, 1104) -- During Quest "The Three Magi"
@@ -62,7 +66,10 @@ entity.onTrigger = function(player, npc)
         recollections == QUEST_AVAILABLE
     then
         player:startEvent(270, 0, 1105) -- Start Quest "Recollections"
-    elseif recollections == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FOE_FINDER_MK_I) then
+    elseif
+        recollections == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.FOE_FINDER_MK_I)
+    then
         player:startEvent(275) -- Finish Quest "Recollections"
     elseif
         recollections == QUEST_COMPLETED and

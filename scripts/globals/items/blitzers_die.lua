@@ -3,14 +3,14 @@
 -- Blitzer's Die
 -- Teaches the job ability Blitzers Roll
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnAbility(xi.jobAbility.BLITZERS_ROLL)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addLearnedAbility(xi.jobAbility.BLITZERS_ROLL)
 end
 
-return item_object
+return itemObject

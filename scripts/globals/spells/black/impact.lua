@@ -6,13 +6,13 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = xi.mod.INT
     params.bonus = 1.0
@@ -36,41 +36,38 @@ spell_object.onSpellCast = function(caster, target, spell)
     local mndLoss = ((target:getStat(xi.mod.MND) / 100) * 20)
     local chrLoss = ((target:getStat(xi.mod.CHR) / 100) * 20)
 
-    if (target:hasStatusEffect(xi.effect.STR_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.STR_DOWN) then
         target:addStatusEffect(xi.effect.STR_DOWN, strLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.DEX_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.DEX_DOWN) then
         target:addStatusEffect(xi.effect.DEX_DOWN, dexLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.VIT_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.VIT_DOWN) then
         target:addStatusEffect(xi.effect.VIT_DOWN, vitLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.AGI_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.AGI_DOWN) then
         target:addStatusEffect(xi.effect.AGI_DOWN, agiLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.INT_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.INT_DOWN) then
         target:addStatusEffect(xi.effect.INT_DOWN, intLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.MND_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.MND_DOWN) then
         target:addStatusEffect(xi.effect.MND_DOWN, mndLoss, 0, duration)
     end
 
-    if (target:hasStatusEffect(xi.effect.CHR_DOWN) == false) then
+    if not target:hasStatusEffect(xi.effect.CHR_DOWN) then
         target:addStatusEffect(xi.effect.CHR_DOWN, chrLoss, 0, duration)
     end
-
-    -- Diverting use of doElementalNuke till spellParams is implemented for this spell
-    -- local dmg = doElementalNuke(caster, target, spell, params)
 
     -- Calculate raw damage
     local dmg = calculateMagicDamage(caster, target, spell, params)
     -- Get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
@@ -81,4 +78,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

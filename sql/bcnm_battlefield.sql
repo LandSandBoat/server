@@ -8,7 +8,7 @@ CREATE TABLE `bcnm_battlefield` (
   `battlefieldNumber` tinyint(3) DEFAULT NULL,
   `monsterId` int(10) NOT NULL,
   `conditions` tinyint(2) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `bcnm_battlefield`
@@ -1285,7 +1285,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomac
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
 
 -- //////////////////////////////////////////////////////////////
---               APPOLYON  SE
+--               APOLLYON  SE
 -- //////////////////////////////////////////////////////////////
 -- FIRST FLOOR
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16932990,1);-- 'Armoury_Crate_Recover'
@@ -1321,7 +1321,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933027,1);-- 'Inhumer'
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933028,1);-- 'Inhumer'
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933020,1);-- 'Grave_Digger'
 -- Fourth Floor
-INSERT INTO `bcnm_battlefield` VALUES (1293,2,16933032,3);-- 'Evil_Armory'
+INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933032,3);-- 'Evil_Armory'
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933033,1);-- 'Flying_Spear'
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933034,1);-- 'Flying_Spear'
 INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933035,1);-- 'Flying_Spear'
@@ -1333,7 +1333,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1293,3,16933040,1);-- 'Flying_Spear'
 
 -- ----------------------------------------------------------------
 -- //////////////////////////////////////////////////////////////
---               APPOLYON  NE
+--               APOLLYON  NE
 -- //////////////////////////////////////////////////////////////
 INSERT INTO `bcnm_battlefield` VALUES (1292,4,16933044,1);-- 'Goobbue_Harvester'
 INSERT INTO `bcnm_battlefield` VALUES (1292,4,16933045,1);-- 'Barometz'
@@ -1401,7 +1401,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1292,4,16933120,3);-- 'Troglodyte_Dhalmel
 INSERT INTO `bcnm_battlefield` VALUES (1292,4,16933121,3);-- 'Troglodyte_Dhalmel'
 INSERT INTO `bcnm_battlefield` VALUES (1292,4,16933122,3);-- 'Troglodyte_Dhalmel'
 -- //////////////////////////////////////////////////////////////
---               APPOLYON  SW
+--               APOLLYON  SW
 -- //////////////////////////////////////////////////////////////
 INSERT INTO `bcnm_battlefield` VALUES (1291,1,16932868,1);-- 'FirBholg'
 INSERT INTO `bcnm_battlefield` VALUES (1291,1,16932869,1);-- 'FirBholg'
@@ -1460,7 +1460,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1291,1,16932931,1);-- 'Light_Elemental'
 INSERT INTO `bcnm_battlefield` VALUES (1291,1,16932932,1);-- 'Water_Elemental'
 INSERT INTO `bcnm_battlefield` VALUES (1291,1,16932933,1);-- 'Thunder_Elemental'
 -- //////////////////////////////////////////////////////////////
---               APPOLYON NW
+--               APOLLYON NW
 -- //////////////////////////////////////////////////////////////
 INSERT INTO `bcnm_battlefield` VALUES (1290,2,16932937,1);-- 'Pluto'
 INSERT INTO `bcnm_battlefield` VALUES (1290,2,16932938,1);-- 'Bardha'
@@ -1497,7 +1497,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1290,2,16932986,1);-- 'Kronprinz_Behemoth
 INSERT INTO `bcnm_battlefield` VALUES (1290,2,16932987,1);-- 'Kronprinz_Behemoth'
 INSERT INTO `bcnm_battlefield` VALUES (1290,2,16932988,1);-- 'Kronprinz_Behemoth'
 -- //////////////////////////////////////////////////////////////
---               APPOLYON CS
+--               APOLLYON CS
 -- //////////////////////////////////////////////////////////////
 INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933129,3);-- 'Carnagechief_Jackbodokk'
 INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933130,0);-- 'Grognard Mesmerizer'
@@ -1524,7 +1524,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933150,0);-- 'Yagudo Prelatess'
 INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933151,0);-- 'Yagudo Kapellmeister'
 INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933152,0);-- 'Yagudo Eradicator'
 -- //////////////////////////////////////////////////////////////
---               APPOLYON CENTRAL
+--               APOLLYON CENTRAL
 -- //////////////////////////////////////////////////////////////
 INSERT INTO `bcnm_battlefield` VALUES (1296,5,16933124,3);-- 'Proto-Omega'
 INSERT INTO `bcnm_battlefield` VALUES (1296,5,16933125,0);-- 'Gunpod'

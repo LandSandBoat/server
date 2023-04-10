@@ -49,6 +49,8 @@ public:
         return false;
     }
 
+    void allowSendRaise();
+
 private:
     CBattleEntity* const m_PEntity;
     duration             m_deathTime;

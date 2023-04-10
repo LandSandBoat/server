@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
-    mob:setMod(xi.mod.SILENCERES, 80)
+    mob:setMod(xi.mod.SILENCE_MEVA, 80)
 end
 
 entity.onMobFight = function(mob, target)

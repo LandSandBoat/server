@@ -53,6 +53,8 @@ namespace message
     moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
     moodycamel::ConcurrentQueue<chat_message_t> incoming_queue;
 
+    std::unordered_map<uint64_t, sol::function> replyMap;
+
     void send_queue()
     {
         TracyZoneScoped;
@@ -107,7 +109,10 @@ namespace message
             }
             case MSG_CHAT_TELL:
             {
-                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
+                char characterName[PacketNameLength] = {};
+                memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+
+                CCharEntity* PChar = zoneutils::GetCharByName(characterName);
                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
                 {
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
@@ -184,11 +189,13 @@ namespace message
             }
             case MSG_CHAT_YELL:
             {
+                // clang-format off
                 zoneutils::ForEachZone([&packet, &extra](CZone* PZone)
-                                       {
+                {
                     if (PZone->CanUseMisc(MISC_YELL))
                     {
-                        PZone->ForEachChar([&packet, &extra](CCharEntity* PChar) {
+                        PZone->ForEachChar([&packet, &extra](CCharEntity* PChar)
+                        {
                             // don't push to sender
                             if (PChar->id != ref<uint32>((uint8*)extra.data(), 0))
                             {
@@ -198,17 +205,24 @@ namespace message
                                 PChar->pushPacket(newPacket);
                             }
                         });
-                    } });
+                    }
+                });
+                // clang-format on
                 break;
             }
             case MSG_CHAT_SERVMES:
             {
+                // clang-format off
                 zoneutils::ForEachZone([&packet](CZone* PZone)
-                                       { PZone->ForEachChar([&packet](CCharEntity* PChar)
-                                                            {
+                {
+                    PZone->ForEachChar([&packet](CCharEntity* PChar)
+                    {
                         CBasicPacket* newPacket = new CBasicPacket();
                         memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                        PChar->pushPacket(newPacket); }); });
+                        PChar->pushPacket(newPacket);
+                    });
+                });
+                // clang-format on
                 break;
             }
             case MSG_PT_INVITE:
@@ -341,7 +355,6 @@ namespace message
                                            { ((CCharEntity*)PMember)->ReloadPartyInc(); });
                     }
                 }
-
                 break;
             }
             case MSG_PT_DISBAND:
@@ -381,13 +394,17 @@ namespace message
 
                 if (PLinkshell)
                 {
-                    PLinkshell->ChangeMemberRank((int8*)extra.data() + 4, ref<uint8>((uint8*)extra.data(), 28));
+                    char memberName[PacketNameLength] = {};
+                    memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+                    PLinkshell->ChangeMemberRank(memberName, ref<uint8>((uint8*)extra.data(), 28));
                 }
                 break;
             }
             case MSG_LINKSHELL_REMOVE:
             {
-                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
+                char memberName[PacketNameLength] = {};
+                memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+                CCharEntity* PChar = zoneutils::GetCharByName(memberName);
 
                 if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra.data(), 24))
                 {
@@ -395,7 +412,7 @@ namespace message
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell1->RemoveMemberByName((int8*)extra.data() + 4,
+                        PChar->PLinkshell1->RemoveMemberByName(memberName,
                                                                (targetLS->GetLSType() == (uint8)LSTYPE_LINKSHELL ? (uint8)LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
@@ -405,7 +422,7 @@ namespace message
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell2->RemoveMemberByName((int8*)extra.data() + 4, kickerRank);
+                        PChar->PLinkshell2->RemoveMemberByName(memberName, kickerRank);
                     }
                 }
                 break;
@@ -562,8 +579,8 @@ namespace message
                     sol::error err = result;
                     ShowError("MSG_LUA_FUNCTION: error: %s: %s", err.what(), str.c_str());
                 }
+                break;
             }
-            break;
             case MSG_CHARVAR_UPDATE:
             {
                 uint8* data   = (uint8*)extra.data();
@@ -580,6 +597,63 @@ namespace message
                     ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
                     player->updateCharVarCache(varName, value);
                 }
+                break;
+            }
+            case MSG_RPC_SEND:
+            {
+                // Extract data
+                uint8*   data     = (uint8*)extra.data();
+                uint16   sendZone = ref<uint16>(data, 2); // here
+                uint16   recvZone = ref<uint16>(data, 4); // origin
+                uint64_t slotKey  = ref<uint64_t>(data, 6);
+                uint16   strSize  = ref<uint16>(data, 14);
+                auto     sendStr  = std::string(data + 16, data + 16 + strSize);
+
+                // Execute Lua & collect payload
+                std::string payload = "";
+                auto        result  = lua.safe_script(sendStr);
+                if (result.valid() && result.return_count())
+                {
+                    payload = result.get<std::string>(0);
+                }
+
+                // Reply w/ payload
+                std::vector<uint8> packetData(16 + payload.size() + 1);
+
+                ref<uint16>(packetData.data(), 2)   = recvZone; // origin
+                ref<uint16>(packetData.data(), 4)   = sendZone; // here
+                ref<uint64_t>(packetData.data(), 6) = slotKey;
+
+                ref<uint16>(packetData.data(), 14) = (uint16)payload.size();
+                std::memcpy(packetData.data() + 16, payload.data(), payload.size());
+
+                packetData[packetData.size() - 1] = '\0';
+
+                message::send(MSG_RPC_RECV, packetData.data(), packetData.size());
+
+                break;
+            }
+            case MSG_RPC_RECV:
+            {
+                uint8* data = (uint8*)extra.data();
+                // No need for any of the zone id data now
+                uint64_t slotKey = ref<uint64_t>(data, 6);
+                uint16   strSize = ref<uint16>(data, 14);
+                auto     payload = std::string(data + 16, data + 16 + strSize);
+
+                auto maybeEntry = replyMap.find(slotKey);
+                if (maybeEntry != replyMap.end())
+                {
+                    auto& recvFunc = maybeEntry->second;
+                    auto  result   = recvFunc(payload);
+                    if (!result.valid())
+                    {
+                        sol::error err = result;
+                        ShowError("message::parse::MSG_RPC_RECV: %s", err.what());
+                    }
+                    replyMap.erase(slotKey);
+                }
+
                 break;
             }
             default:
@@ -737,8 +811,14 @@ namespace message
 
         if (packet)
         {
-            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint)
-                                        { delete[](uint8*) data; });
+            // clang-format off
+            msg.packet = zmq::message_t(*packet, packet->getSize(),
+            [](void* data, void* hint)
+            {
+                auto* intdata = (uint8*)data;
+                destroy_arr(intdata);
+            });
+            // clang-format on
         }
         else
         {
@@ -776,5 +856,24 @@ namespace message
         TracyZoneScoped;
 
         send(charutils::getCharIdFromName(playerName), packet);
+    }
+
+    void rpc_send(uint16 sendZone, uint16 recvZone, std::string const& sendStr, sol::function recvFunc)
+    {
+        uint64_t slotKey  = std::chrono::duration_cast<std::chrono::microseconds>(hires_clock::now().time_since_epoch()).count();
+        replyMap[slotKey] = recvFunc;
+
+        std::vector<uint8> packetData(16 + sendStr.size() + 1);
+
+        ref<uint16>(packetData.data(), 2)   = recvZone; // destination
+        ref<uint16>(packetData.data(), 4)   = sendZone; // origin
+        ref<uint64_t>(packetData.data(), 6) = slotKey;
+
+        ref<uint16>(packetData.data(), 14) = (uint16)sendStr.size();
+        std::memcpy(packetData.data() + 16, sendStr.data(), sendStr.size());
+
+        packetData[packetData.size() - 1] = '\0';
+
+        message::send(MSG_RPC_SEND, packetData.data(), packetData.size());
     }
 }; // namespace message

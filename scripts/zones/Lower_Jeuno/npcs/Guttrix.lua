@@ -11,7 +11,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local rse_map =
+local rseMap =
 {
     -- [race] = { body, hands, legs, feet }
     [xi.race.HUME_M]   = { 12654, 12761, 12871, 13015 },
@@ -26,7 +26,7 @@ local rse_map =
 
 local function hasRSE(player)
     local mask = 0
-    local rse = rse_map[player:getRace()]
+    local rse = rseMap[player:getRace()]
 
     for i = 1, #rse do
         if player:hasItem(rse[i]) then
@@ -53,7 +53,10 @@ entity.onTrigger = function(player, npc)
         if rseGear < 15 then
             if questStatus == QUEST_AVAILABLE then
                 player:startEvent(10016, rseLocation, rseRace)
-            elseif questStatus >= QUEST_ACCEPTED and player:hasKeyItem(xi.ki.MAGICAL_PATTERN) then
+            elseif
+                questStatus >= QUEST_ACCEPTED and
+                player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
+            then
                 player:startEvent(10018, rseGear)
             else
                 player:startEvent(10017, rseLocation, rseRace)
@@ -81,7 +84,7 @@ entity.onEventFinish = function(player, csid, option)
         questStatus >= QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
     then
-        if npcUtil.giveItem(player, rse_map[player:getRace()][option]) then
+        if npcUtil.giveItem(player, rseMap[player:getRace()][option]) then
             if questStatus == QUEST_ACCEPTED then
                 player:addFame(xi.quest.fame_area.JEUNO, 30)
                 player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)

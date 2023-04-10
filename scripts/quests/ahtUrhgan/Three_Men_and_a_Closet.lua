@@ -124,7 +124,10 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if prevZone == xi.zone.AHT_URHGAN_WHITEGATE and quest:getVar(player, 'Prog') == 0 then
+                    if
+                        prevZone == xi.zone.AHT_URHGAN_WHITEGATE and
+                        quest:getVar(player, 'Prog') == 0
+                    then
                         return 510
                     end
                 end,

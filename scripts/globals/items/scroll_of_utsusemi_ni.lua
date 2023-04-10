@@ -3,14 +3,14 @@
 -- Scroll of Utsusemi: Ni
 -- Teaches the ninjutsu Utsusemi: Ni
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(339)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(339)
 end
 
-return item_object
+return itemObject

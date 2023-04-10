@@ -14,7 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCampaignAllegiance() > 0 and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_AVAILABLE then
+    if
+        player:getCampaignAllegiance() > 0 and
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_AVAILABLE
+    then
         player:startEvent(128)
     elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED then
         player:startEvent(160)

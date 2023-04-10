@@ -6,18 +6,19 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.MEDICINE)) then
+itemObject.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.MEDICINE) then
         return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
+
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addTP(1000)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 7200)
 end
 
-return item_object
+return itemObject

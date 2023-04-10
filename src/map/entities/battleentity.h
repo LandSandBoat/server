@@ -59,7 +59,7 @@ enum class ECOSYSTEM : uint8
     EMPTY          = 12,
     HUMANOID       = 13,
     LIZARD         = 14,
-    LUMORIAN       = 15,
+    LUMINIAN       = 15,
     LUMINION       = 16,
     PLANTOID       = 17,
     UNCLASSIFIED   = 18,
@@ -343,7 +343,9 @@ enum SUBEFFECT
     SUBEFFECT_DARKNESS_DAMAGE  = 8,  // 1-00010   17
     SUBEFFECT_SLEEP            = 9,  // 110010    19
     SUBEFFECT_POISON           = 10, // 1-01010   21
-    SUBEFFECT_PARALYSIS        = 11,
+    SUBEFFECT_ADDLE            = 11, // Verified shared group 1
+    SUBEFFECT_AMNESIA          = 11, // Verified shared group 1
+    SUBEFFECT_PARALYSIS        = 11, // Verified shared group 1
     SUBEFFECT_BLIND            = 12, // 1-00110   25
     SUBEFFECT_SILENCE          = 13,
     SUBEFFECT_PETRIFY          = 14,
@@ -351,13 +353,14 @@ enum SUBEFFECT
     SUBEFFECT_STUN             = 16,
     SUBEFFECT_CURSE            = 17,
     SUBEFFECT_DEFENSE_DOWN     = 18, // 1-01001   37
-    SUBEFFECT_EVASION_DOWN     = 18, // Same subeffect as DEFENSE_DOWN
-    SUBEFFECT_ATTACK_DOWN      = 18, // Same subeffect as DEFENSE_DOWN
+    SUBEFFECT_EVASION_DOWN     = 18, // Verified shared group 2
+    SUBEFFECT_ATTACK_DOWN      = 18, // Verified shared group 2
+    SUBEFFECT_SLOW             = 18, // Verified shared group 2
     SUBEFFECT_DEATH            = 19,
     SUBEFFECT_SHIELD           = 20,
     SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
-    SUBEFFECT_MP_DRAIN         = 22, // This is retail correct animation
-    SUBEFFECT_TP_DRAIN         = 22, // Pretty sure this is correct, but might use same animation as HP drain.
+    SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
+    SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
     SUBEFFECT_HASTE            = 23,
     // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 
@@ -416,6 +419,7 @@ enum TARGETTYPE
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100,
     TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
+    TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
 };
 
 enum SKILLCHAIN_ELEMENT
@@ -705,10 +709,13 @@ public:
     virtual void           OnDisengage(CAttackState&);
     /* Casting */
     virtual void OnCastFinished(CMagicState&, action_t&);
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg);
+    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
+
+    // Used to set an action to an "interrupted" state
+    void setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID);
 
     virtual void OnAbility(CAbilityState&, action_t&)
     {
@@ -725,6 +732,9 @@ public:
 
     void     SetBattleStartTime(time_point);
     duration GetBattleTime();
+
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
 
     virtual void Tick(time_point) override;
     virtual void PostTick() override;
@@ -770,6 +780,7 @@ private:
     uint8      m_slvl; // ТЕКУЩИЙ уровень дополнительной профессии
     uint16     m_battleTarget{ 0 };
     time_point m_battleStartTime;
+    uint16     m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // массив модификаторов
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state

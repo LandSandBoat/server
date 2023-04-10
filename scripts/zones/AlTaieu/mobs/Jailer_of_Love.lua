@@ -28,7 +28,11 @@ end
 
 entity.onMobFight = function(mob, target)
     -- reduce regen after nine Xzomits and Hpemdes are killed
-    if mob:getLocalVar("JoL_Regen_Reduction") == 0 and mob:getLocalVar("JoL_Qn_xzomit_Killed") >= 9 and mob:getLocalVar("JoL_Qn_hpemde_Killed") >= 9 then
+    if
+        mob:getLocalVar("JoL_Regen_Reduction") == 0 and
+        mob:getLocalVar("JoL_Qn_xzomit_Killed") >= 9 and
+        mob:getLocalVar("JoL_Qn_hpemde_Killed") >= 9
+    then
         mob:setLocalVar("JoL_Regen_Reduction", 1)
         mob:addMod(xi.mod.REGEN, -260)
     end
@@ -64,7 +68,7 @@ entity.onMobFight = function(mob, target)
             elseif #phuaboUp == 0 or #phuaboUp == 3 then
                 numToSpawn = 3
             elseif #phuaboUp == 1 then
-                numToSpawn = math.random(3)
+                numToSpawn = math.random(1, 3)
             end
 
             -- spawn sharks
@@ -72,6 +76,7 @@ entity.onMobFight = function(mob, target)
                 SpawnMob(phuaboDn[i]):updateEnmity(target)
             end
         end
+
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
 end
@@ -80,7 +85,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    if math.random(100) <= 25 then -- 25% chance to spawn Absolute Virtue
+    if math.random(1, 100) <= 25 then -- 25% chance to spawn Absolute Virtue
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end
 end

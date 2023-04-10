@@ -29,7 +29,7 @@ CREATE TABLE `status_effects` (
   `min_duration` smallint(5) unsigned NOT NULL DEFAULT 0,
   `sort_key` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +253,7 @@ INSERT INTO `status_effects` VALUES (215,'etude',65833,0,0,4,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (216,'carol',65833,0,0,4,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (217,'threnody',66088,0,0,1,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (218,'hymnus',65832,0,0,4,0,0,0,0,2000);
-INSERT INTO `status_effects` VALUES (219,'mazurka',65846,0,0,0,0,0,0,0,2000);
+INSERT INTO `status_effects` VALUES (219,'mazurka',65845,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (220,'sirvente',65833,0,0,4,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (221,'dirge',65833,0,0,4,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (222,'scherzo',65833,0,0,4,0,0,0,0,2000);
@@ -265,15 +265,15 @@ INSERT INTO `status_effects` VALUES (230,'spontaneity',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (231,'marcato',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (233,'auto-regen',32,0,0,4,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (234,'auto-refresh',32,0,0,4,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (235,'fishing_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (236,'woodworking_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (237,'smithing_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (238,'goldsmithing_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (239,'clothcraft_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (240,'leathercraft_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (241,'bonecraft_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (242,'alchemy_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (243,'cooking_imagery',262176,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (235,'fishing_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (236,'woodworking_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (237,'smithing_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (238,'goldsmithing_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (239,'clothcraft_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (240,'leathercraft_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (241,'bonecraft_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (242,'alchemy_imagery',262176,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (243,'cooking_imagery',262176,244,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (244,'imagery',32,244,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (245,'imagery',32,244,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (246,'imagery',32,244,0,0,0,0,0,0,0);
@@ -543,14 +543,14 @@ INSERT INTO `status_effects` VALUES (517,'collimated_fervor',32,0,0,0,0,0,0,0,0)
 INSERT INTO `status_effects` VALUES (518,'dematerialize',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (519,'theurgic_focus',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (522,'elemental_sforzo',4194336,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (523,'ignis',4194336,0,0,4,0,0,1,0,0);
-INSERT INTO `status_effects` VALUES (524,'gelus',4194336,0,0,4,0,0,2,0,0);
-INSERT INTO `status_effects` VALUES (525,'flabra',4194336,0,0,4,0,0,3,0,0);
-INSERT INTO `status_effects` VALUES (526,'tellus',4194336,0,0,4,0,0,4,0,0);
-INSERT INTO `status_effects` VALUES (527,'sulpor',4194336,0,0,4,0,0,5,0,0);
-INSERT INTO `status_effects` VALUES (528,'unda',4194336,0,0,4,0,0,6,0,0);
-INSERT INTO `status_effects` VALUES (529,'lux',4194336,0,0,4,0,0,7,0,0);
-INSERT INTO `status_effects` VALUES (530,'tenebrae',4194336,0,0,4,0,0,8,0,0);
+INSERT INTO `status_effects` VALUES (523,'ignis',13632288,0,0,4,0,0,1,0,0);
+INSERT INTO `status_effects` VALUES (524,'gelus',13632288,0,0,4,0,0,2,0,0);
+INSERT INTO `status_effects` VALUES (525,'flabra',13632288,0,0,4,0,0,3,0,0);
+INSERT INTO `status_effects` VALUES (526,'tellus',13632288,0,0,4,0,0,4,0,0);
+INSERT INTO `status_effects` VALUES (527,'sulpor',13632288,0,0,4,0,0,5,0,0);
+INSERT INTO `status_effects` VALUES (528,'unda',13632288,0,0,4,0,0,6,0,0);
+INSERT INTO `status_effects` VALUES (529,'lux',13632288,0,0,4,0,0,7,0,0);
+INSERT INTO `status_effects` VALUES (530,'tenebrae',13632288,0,0,4,0,0,8,0,0);
 INSERT INTO `status_effects` VALUES (531,'vallation',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (532,'swordplay',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (533,'pflug',4194336,0,0,0,0,0,0,0,0);
@@ -590,7 +590,7 @@ INSERT INTO `status_effects` VALUES (566,'geo_paralysis',8388640,0,0,0,0,0,2,0,0
 INSERT INTO `status_effects` VALUES (567,'geo_weight',8388640,0,0,0,0,0,3,0,0);
 INSERT INTO `status_effects` VALUES (568,'foil',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (569,'blaze_of_glory',4194336,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (570,'battuta',4194336,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (570,'battuta',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (571,'rayke',8388642,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (572,'avoidance_down',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (573,'deluge_spikes',41,0,0,0,0,0,6,0,800);
@@ -632,6 +632,7 @@ INSERT INTO `status_effects` VALUES (609,'negate_curse',289,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (610,'negate_charm',289,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (611,'magic_evasion_boost_ii',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (612,'colure_active',9437440,0,0,3,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (619,'spirit_bond',5243177,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (623,'rampart',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (625,'sirens_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (768,'abyssea_str',256,0,0,0,0,0,1,0,0);

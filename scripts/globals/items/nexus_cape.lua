@@ -7,16 +7,16 @@ require("scripts/globals/teleports")
 require("scripts/globals/status")
 require('scripts/globals/zone')
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    local result = xi.msg.basic.ITEM_UNABLE_TO_USE -- Default is fail.
+itemObject.onItemCheck = function(target)
+    local result = xi.msg.basic.ITEM_UNABLE_TO_USE
     local leader = target:getPartyLeader()
     -- In a party and we were able to find the leader
     -- (currently fails in cross map server situations)
     if leader ~= nil and not leader:isInMogHouse() then
         -- Don't try to teleport to self!
-        if (target:getID() ~= leader:getID()) then
+        if target:getID() ~= leader:getID() then
             local leaderZone = leader:getZoneID()
 
             -- Locations with "**" in comment:
@@ -121,10 +121,14 @@ item_object.onItemCheck = function(target)
                 -- xi.zone.KAMIHR_DRIFTS,
                 -- xi.zone.LEAFALLIA,
             }
+
             -- Make sure we can actually tele to that zone..
+            result = xi.msg.basic.ITEM_UNABLE_TO_USE_PARTY_LEADER
+
             for _, validZone in ipairs(validZoneList) do
-                if validZone == leaderZone and target:isZoneVisited(validZone) then
+                if validZone == leaderZone and target:hasVisitedZone(validZone) then
                     result = 0
+                    break
                 end
             end
         end
@@ -133,8 +137,8 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.LEADER, 0, 1)
 end
 
-return item_object
+return itemObject

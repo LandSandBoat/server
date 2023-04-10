@@ -21,35 +21,31 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("AlchemyExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("AlchemyExpertQuest",0)
-            player:setLocalVar("AlchemyTraded",1)
+            player:setCharVar("AlchemyExpertQuest", 0)
+            player:setLocalVar("AlchemyTraded", 1)
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
 
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
-        player:setLocalVar("AlchemyTraded",1)
+        player:setLocalVar("AlchemyTraded", 1)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.ALCHEMY)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.ALCHEMY)
-    local guildMember       = xi.crafting.isGuildMember(player, 1)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) and 150995375 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.ALCHEMY)
     local realSkill         = (craftSkill - rank) / 32
     local canRankUp         = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
-
-    if guildMember == 1 then
-        guildMember = 150995375
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 120, realSkill, rankCap, 184549887) then
         return
@@ -97,11 +93,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 1)
-
     if csid == 120 and option == 2 then
-        if guildMember == 1 then
-            player:setCharVar("AlchemyExpertQuest",1)
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
+            player:setCharVar("AlchemyExpertQuest", 1)
         end
     elseif csid == 120 and option == 1 then
         local crystal = 4101 -- water crystal
@@ -111,12 +105,12 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.alchemy)
+            xi.crafting.signupGuild(player, xi.crafting.guild.ALCHEMY)
         end
     else
         if player:getLocalVar("AlchemyTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("AlchemyTraded",0)
+            player:setLocalVar("AlchemyTraded", 0)
         end
     end
 

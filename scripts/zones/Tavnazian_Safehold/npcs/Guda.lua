@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Guda
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -134,15 +134,19 @@ zones[xi.zone.NYZUL_ISLE] =
 
     mob =
     {
-        [51] =
+        [51] = -- Nyzul Isle Investigation
         {
-            ARCHAIC_RAMPART1 = 17092629,
-            ARCHAIC_RAMPART2 = 17092630,
-            DAHAK            = 17092823,
-            BAT_EYE          = 17092824,
-            TAISAIJIN        = 17092913,
-            ADAMANTOISE      = 17092999,
-            CERBERUS         = 17093004,
+            ARCHAIC_RAMPART1    = 17092629,
+            ARCHAIC_RAMPART2    = 17092630,
+            OFFSET_REGULAR      = 17092631, -- Greatclaw
+            DAHAK               = 17092823,
+            OFFSET_NM           = 17092824, -- Bat Eye
+            TAISAIJIN           = 17092913,
+            OFFSET_GEARS        = 17092916, -- Gear
+            MOKKE               = 17092944,
+            LONG_HORNED_CHARIOT = 17092968,
+            OFFSET_SPECIFIED    = 17092969, -- Heraldic Imp
+            ADAMANTOISE         = 17092999,
         },
 
         -- Path of Darkness
@@ -183,15 +187,11 @@ zones[xi.zone.NYZUL_ISLE] =
         },
 
         -- Nyzul Isle Investigation
-        RUNIC_LAMP_1        = 17093332,
-        RUNIC_LAMP_2        = 17093333,
-        RUNIC_LAMP_3        = 17093334,
-        RUNIC_LAMP_4        = 17093335,
-        RUNIC_LAMP_5        = 17093336,
-        _257                = 17093359,
-        _259                = 17093361,
-        RUNE_TRANSFER_START = 17093429,
-        VENDING_BOX         = 17093430,
+        RUNIC_LAMP_OFFSET   = GetFirstID("Runic_Lamp"),
+        _257                = GetFirstID("_257"),
+        _259                = GetFirstID("_259"),
+        RUNE_TRANSFER_START = GetFirstID("Rune_of_Transfer_Start"),
+        VENDING_BOX         = GetFirstID("Vending_Box"),
 
         -- Other instances
         WEATHER             = 17093423,

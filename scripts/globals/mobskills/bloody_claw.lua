@@ -11,13 +11,17 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    return 0
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getAnimationSub() ~= 4 then
+        return 1
+    else
+        return 0
+    end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 0.9
@@ -33,4 +37,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

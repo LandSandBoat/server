@@ -2,7 +2,6 @@
 -- Area: Windurst Walls
 --  Location: X:-92  Y:-9  Z:107
 --  NPC: Rutango-Botango
--- Working 100%
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
 require("scripts/globals/quests")
@@ -16,11 +15,11 @@ entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
-    if (toBeeOrNotStatus == 10) then
+    if toBeeOrNotStatus == 10 then
         player:startEvent(65) -- During Too Bee quest before honey given to Zayhi:  "Oh Crumb...lost his voice"
-    elseif (toBee == QUEST_ACCEPTED and toBeeOrNotStatus > 0) then
+    elseif toBee == QUEST_ACCEPTED and toBeeOrNotStatus > 0 then
         player:startEvent(71) -- During Too Bee quest after some honey was given to Zayhi: "lap up more honey"
-    elseif (toBee == QUEST_COMPLETED and player:needToZone()) then
+    elseif toBee == QUEST_COMPLETED and player:needToZone() then
         player:startEvent(76) -- After Too Bee quest but before zone: "master let me speak for you"
     else
         player:startEvent(297) -- Standard Conversation

@@ -4,11 +4,10 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.maat = function(maatMob)
-
     maatMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
-        if (mob:getMainJob() == xi.job.NIN) then
+        if mob:getMainJob() == xi.job.NIN then
             mob:setLocalVar("specialThreshold", 40)
-        elseif (mob:getMainJob() == xi.job.DRG) then
+        elseif mob:getMainJob() == xi.job.DRG then
             mob:setLocalVar("specialThreshold", 75)
         else
             mob:setLocalVar("specialThreshold", math.random(50, 60))
@@ -74,12 +73,14 @@ g_mixins.maat = function(maatMob)
             mob:setLocalVar("specialThreshold", 0)
         end
 
-        if mob:getHPP() < 20 or (mob:getMainJob() == xi.job.WHM and mob:getBattleTime() > 300) then
+        if
+            mob:getHPP() < 20 or
+            (mob:getMainJob() == xi.job.WHM and mob:getBattleTime() > 300)
+        then
             local ID = zones[mob:getZoneID()]
             mob:showText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
             mob:getBattlefield():win()
         end
-
     end)
 
     maatMob:addListener("ITEM_STOLEN", "MAAT_ITEM_STOLEN", function(mob, player, itemId)
@@ -102,15 +103,14 @@ g_mixins.maat = function(maatMob)
 
     maatMob:addListener("WEAPONSKILL_USE", "MAAT_WEAPONSKILL_USE", function(mob, target, wsid, tp, action)
         local ID = zones[mob:getZoneID()]
-        if (wsid == 1028) then -- Tackle
+        if wsid == 1028 then -- Tackle
             mob:messageText(mob, ID.text.TAKE_THAT_YOU_WHIPPERSNAPPER)
-        elseif (wsid == 1033) then -- Dragon Kick
+        elseif wsid == 1033 then -- Dragon Kick
             mob:messageText(mob, ID.text.TEACH_YOU_TO_RESPECT_ELDERS)
-        elseif (wsid == 1034) then -- Asuran Fists
+        elseif wsid == 1034 then -- Asuran Fists
             mob:messageText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
         end
     end)
-
 end
 
 return g_mixins.maat

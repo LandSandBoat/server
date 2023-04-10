@@ -12,7 +12,10 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 3)
 
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR and brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
+    if
+        npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         player:startEvent(10)
     else
         player:messageSpecial(ID.text.TORCH_LIT)

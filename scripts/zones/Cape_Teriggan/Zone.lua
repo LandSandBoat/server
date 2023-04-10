@@ -8,28 +8,32 @@ require('scripts/globals/conquest')
 require('scripts/globals/world')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     local kreutzet = GetMobByID(ID.mob.KREUTZET)
 
     UpdateNMSpawnPoint(ID.mob.KREUTZET)
     kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
-    kreutzet:setLocalVar("cooldown", os.time() + kreutzet:getRespawnTime()/1000)
+    kreutzet:setLocalVar("cooldown", os.time() + kreutzet:getRespawnTime() / 1000)
     DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos( 315.644, -1.517, -60.633, 108)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-219, 0, -318, 191)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -39,19 +43,19 @@ zone_object.onZoneIn = function( player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 2 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local kreutzet = GetMobByID(ID.mob.KREUTZET)
 
     if
@@ -64,4 +68,4 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-return zone_object
+return zoneObject

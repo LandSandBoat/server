@@ -185,11 +185,17 @@ entity.onTrade = function(player, npc, trade)
     then
         if trade:getSlotCount() == 3 then
             if tradeHasPayment then
-                if trade:getItemQty(xi.items.WHITE_PUPPET_TURBAN) == 1 and not player:hasAttachment(xi.items.SOULSOOTHER_HEAD) then
+                if
+                    trade:getItemQty(xi.items.WHITE_PUPPET_TURBAN) == 1 and
+                    not player:hasAttachment(xi.items.SOULSOOTHER_HEAD)
+                then
                     local range = getWaitRange(xi.items.WHITE_PUPPET_TURBAN, trade)
 
                     play_event902(player, 12, math.random(range[1], range[2]))
-                elseif trade:getItemQty(xi.items.BLACK_PUPPET_TURBAN) == 1 and not player:hasAttachment(xi.items.SPIRITREAVER_HEAD) then
+                elseif
+                    trade:getItemQty(xi.items.BLACK_PUPPET_TURBAN) == 1 and
+                    not player:hasAttachment(xi.items.SPIRITREAVER_HEAD)
+                then
                     local range = getWaitRange(xi.items.BLACK_PUPPET_TURBAN, trade)
 
                     play_event902(player, 13, math.random(range[1], range[2]))
@@ -247,9 +253,9 @@ entity.onTrigger = function(player, npc)
         5 - paid mats for valoredge
         6 - paid mats for sharpshot
         7 - paid mats for stormwaker
-        8 - paid mats+coins for valoredge
-        9 - paid mats+coins for sharpshot
-        10 - paid mats+coins for stormwaker
+        8 - paid mats + coins for valoredge
+        9 - paid mats + coins for sharpshot
+        10 - paid mats + coins for stormwaker
         11 - asked about soulsoother/spiritreaver
         12 - paid for soulsoother
         13 - paid for spiritreaver

@@ -3,14 +3,14 @@
 -- Scroll of Esuna
 -- Teaches the white magic Esuna
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(95)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(95)
 end
 
-return item_object
+return itemObject

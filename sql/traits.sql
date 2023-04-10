@@ -27,7 +27,7 @@ CREATE TABLE `traits` (
   `content_tag` varchar(7) DEFAULT NULL,
   `meritid` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`traitid`,`job`,`level`,`rank`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -323,7 +323,7 @@ INSERT INTO `traits` VALUES (41,'arcana killer',8,86,2,232,10,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (42,'demon killer',12,40,1,234,8,NULL,0);
 INSERT INTO `traits` VALUES (42,'demon killer',12,86,2,234,10,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (43,'dragon killer',14,25,1,233,8,NULL,0);
-INSERT INTO `traits` VALUES (43,'dragon killer',14,86,1,233,10,'ABYSSEA',0);
+INSERT INTO `traits` VALUES (43,'dragon killer',14,86,2,233,10,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (48,'resist sleep',7,20,1,240,10,NULL,0);
 INSERT INTO `traits` VALUES (48,'resist sleep',7,40,2,240,15,NULL,0);
 INSERT INTO `traits` VALUES (48,'resist sleep',7,60,3,240,20,NULL,0);

@@ -4,12 +4,12 @@ set(SOURCES
     lobby.h
     login_auth.cpp
     login_auth.h
+    login_conf.cpp
+    login_conf.h
     login_session.cpp
     login_session.h
     login.cpp
     login.h
-    message_server.cpp
-    message_server.h
 )
 
 if(UNIX)
@@ -19,6 +19,10 @@ else()
 endif()
 
 add_executable(xi_connect ${SOURCES} ${resource})
+
+if (APPLE)
+    disable_lto(xi_connect)
+endif()
 
 if(WIN32)
     set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)

@@ -7,16 +7,16 @@
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DOOM, 10, 3, 30))
 
     return xi.effect.DOOM
 end
 
-return mobskill_object
+return mobskillObject

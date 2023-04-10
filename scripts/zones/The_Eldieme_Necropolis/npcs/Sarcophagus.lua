@@ -35,7 +35,10 @@ entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- A NEW DAWN (Beastmaster AF3)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and
+        npc:getID() == ID.npc.SARCOPHAGUS_OFFSET
+    then
         local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
         if aNewDawnEvent == 4 then
@@ -48,7 +51,10 @@ entity.onTrigger = function(player, npc)
     elseif offset == player:getCharVar("TheRequiemRandom") - 1 then
         if player:getCharVar("TheRequiemYumKilled") == 1 then
             player:startEvent(46)
-        elseif player:getCharVar("TheRequiemAlreadyPoped") == 1 and npcUtil.popFromQM(player, npc, { ID.mob.YUM_KIMIL, ID.mob.YUM_KIMIL + 1, ID.mob.YUM_KIMIL + 2 }, { hide = 0 }) then
+        elseif
+            player:getCharVar("TheRequiemAlreadyPoped") == 1 and
+            npcUtil.popFromQM(player, npc, { ID.mob.YUM_KIMIL, ID.mob.YUM_KIMIL + 1, ID.mob.YUM_KIMIL + 2 }, { hide = 0 })
+        then
             player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         else
             player:messageSpecial(ID.text.SARCOPHAGUS_CANNOT_BE_OPENED)
@@ -73,7 +79,10 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.STAR_RING1)
 
     -- A NEW DAWN
-    elseif csid == 45 and npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, { item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE }) then
+    elseif
+        csid == 45 and
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, { item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE })
+    then
         player:setCharVar("ANewDawn_Event", 6)
         player:delKeyItem(xi.ki.TAMERS_WHISTLE)
     end

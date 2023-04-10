@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Jonette
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

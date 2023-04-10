@@ -3,14 +3,16 @@
 -- Earth Spirit Pact
 -- Teaches the summoning magic Earth Spirit
 -----------------------------------
-local item_object = {}
+require("scripts/globals/spell_data")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    return target:canLearnSpell(291)
+itemObject.onItemCheck = function(target)
+    return target:canLearnSpell(xi.magic.spell.EARTH_SPIRIT)
 end
 
-item_object.onItemUse = function(target)
-    target:addSpell(291)
+itemObject.onItemUse = function(target)
+    target:addSpell(xi.magic.spell.EARTH_SPIRIT)
 end
 
-return item_object
+return itemObject

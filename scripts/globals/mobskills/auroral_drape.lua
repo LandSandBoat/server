@@ -6,29 +6,28 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local silenced = false
-    local blinded = false
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local silenced   = false
+    local blinded    = false
     local typeEffect = nil
 
     silenced = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
-    blinded = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 60)
+    blinded  = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 60)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display silenced first, else blind
-    if (silenced == xi.msg.basic.SKILL_ENFEEB_IS) then
+    if silenced == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.SILENCE
-    elseif (blinded == xi.msg.basic.SKILL_ENFEEB_IS) then
+    elseif blinded == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.BLINDNESS
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
@@ -37,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

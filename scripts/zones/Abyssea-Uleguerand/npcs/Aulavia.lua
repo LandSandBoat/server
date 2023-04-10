@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Aulavia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -24,10 +24,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../status_effect_container.h"
 #include "../ai_container.h"
 
-CInactiveState::CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState)
+CInactiveState::CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState, bool untargetable)
 : CState(PEntity, 0)
 , m_duration(_duration)
 , m_canChangeState(canChangeState)
+, m_untargetable(untargetable)
 {
     if (!canChangeState)
     {

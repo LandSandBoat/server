@@ -14,6 +14,16 @@ xi = xi or {}
 xi.garrison = xi.garrison or {}
 xi.garrison.lookup = xi.garrison.lookup or {}
 
+xi.garrison.state =
+{
+    INACTIVE   = 0,
+    SPAWN_NPCS = 1,
+    WAITING    = 2,
+    SPAWN_MOBS = 3,
+    ACTIVE     = 4,
+    ENDED      = 5,
+}
+
 -----------------------------------
 -- Data
 -----------------------------------
@@ -86,6 +96,7 @@ xi.garrison.loot =
 }
 
 -- Zone Data, used for the spawning of enemies and allies
+-- allies: { Sandoria name, Bastok name, Windurst name }
 xi.garrison.data =
 {
     [xi.zone.WEST_RONFAURE] =
@@ -94,6 +105,7 @@ xi.garrison.data =
         textRegion = 0,
         levelCap = 20,
         mobBoss = "Orcish_Fighterchief",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -436,
         yPos = -20,
         zPos = -217,
@@ -111,6 +123,7 @@ xi.garrison.data =
         textRegion = 1,
         levelCap = 20,
         mobBoss = "Lead_Quadav",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -580, -- TODO: Needs adjusting
         yPos = 40,
         zPos = 69,
@@ -128,6 +141,7 @@ xi.garrison.data =
         textRegion = 2,
         levelCap = 20,
         mobBoss = "Yagudo_Condottiere",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -20, -- TODO: Needs adjusting
         yPos = -12,
         zPos = 325,
@@ -145,6 +159,7 @@ xi.garrison.data =
         textRegion = 3,
         levelCap = 30,
         mobBoss = "Goblin_Swindler",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = 141, -- TODO: Needs adjusting
         yPos = -8,
         zPos = 87,
@@ -162,6 +177,7 @@ xi.garrison.data =
         textRegion = 4,
         levelCap = 30,
         mobBoss = "Orcish_Colonel",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = 54, -- TODO: Needs adjusting
         yPos = 1,
         zPos = -1,
@@ -179,6 +195,7 @@ xi.garrison.data =
         textRegion = 5,
         levelCap = 30,
         mobBoss = "Cobalt_Quadav",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = 458, -- TODO: Needs adjusting
         yPos = 24,
         zPos = 421,
@@ -196,6 +213,7 @@ xi.garrison.data =
         textRegion = 6,
         levelCap = 30,
         mobBoss = "Goblin_Guide",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -485, -- TODO: Needs adjusting
         yPos = -29,
         zPos = 58,
@@ -213,6 +231,7 @@ xi.garrison.data =
         textRegion = 7,
         levelCap = 30,
         mobBoss = "Yagudo_Missionary",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -299, -- TODO: Needs adjusting
         yPos = 17,
         zPos = 411,
@@ -230,6 +249,7 @@ xi.garrison.data =
         textRegion = 10,
         levelCap = 30,
         mobBoss = "Hunting_Chief",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -247, -- TODO: Needs adjusting
         yPos = -19,
         zPos = 310,
@@ -247,6 +267,7 @@ xi.garrison.data =
         textRegion = 8,
         levelCap = 40,
         mobBoss = "Gigas_Overseer",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -25, -- TODO: Needs adjusting
         yPos = -60,
         zPos = -110,
@@ -264,6 +285,7 @@ xi.garrison.data =
         textRegion = 11,
         levelCap = 40,
         mobBoss = "Goblin_Doyen",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -43,
         yPos = 1,
         zPos = -140,
@@ -281,6 +303,7 @@ xi.garrison.data =
         textRegion = 14,
         levelCap = 40,
         mobBoss = "Sahagin_Patriarch",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -248,
         yPos = 1,
         zPos = -392,
@@ -298,6 +321,7 @@ xi.garrison.data =
         textRegion = 9,
         levelCap = 50,
         mobBoss = "Demon_Aristocrat",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = 216, -- TODO: Needs adjusting
         yPos = -22,
         zPos = -208,
@@ -315,6 +339,7 @@ xi.garrison.data =
         textRegion = 12,
         levelCap = 50,
         mobBoss = "Centurio_XIII-V",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -245,
         yPos = -9,
         zPos = -249,
@@ -332,6 +357,7 @@ xi.garrison.data =
         textRegion = 15,
         levelCap = 50,
         mobBoss = "Tonberry_Decimator",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = 214,
         yPos = 1,
         zPos = -80,
@@ -349,6 +375,7 @@ xi.garrison.data =
         textRegion = 13,
         levelCap = 99,
         mobBoss = "Goblin_Boss",
+        allies = { "Trader", "Patrician", "Scholar" },
         xPos = -174,
         yPos = 8,
         zPos = -61,
@@ -361,6 +388,35 @@ xi.garrison.data =
         rot = 0,
     },
 }
+
+local allyLooks =
+{
+    ["Patrician"] = -- Gustaberg Sandoria
+    {
+        "0x01000C030010262000303A403A5008611B700000",
+    },
+    ["Trader"] = -- Dunes Sandoria
+    {
+        "0x010009040010762076303A400650736000700000",
+        "0x010006030010762076303A400650736000700000",
+    },
+    ["Recruit"] = -- Gustaberg Bastok
+    {
+        "0x01000701361005206630664066500C6129700000",
+    },
+    ["Candidate"] = -- West Saru Windurst
+    {
+        "0x010007070110322032300E401550AC6000700000",
+        "0x01000E0718101820183015401850B76024700000",
+    },
+    ["Scholar"] = -- Dunes Windurst
+    {
+        "0x01000B051C1073201430144014506C6000700000",
+        "0x0100010777106920693066406950B46000700000",
+        "0x010000067D107820033066406850E96000700000",
+    },
+}
+
 -----------------------------------
 -- Helpers
 -----------------------------------
@@ -407,13 +463,13 @@ local spawnNPC = function(zone, x, y, z, rot, name, look)
         groupId = 35,
         groupZoneId = xi.zone.NORTH_GUSTABERG,
 
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
     })
 
     -- Use the mob object as you normally would
     mob:setSpawn(x, y, z, rot)
-    mob:setDropID(0)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 
     mob:spawn()
@@ -421,6 +477,10 @@ local spawnNPC = function(zone, x, y, z, rot, name, look)
     DisallowRespawn(mob:getID(), true)
     mob:setSpeed(25)
     mob:setAllegiance(1)
+
+    -- NPCs don't cast spells or use TP skills
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     return mob
 end
@@ -432,9 +492,10 @@ local spawnNPCs = function(npc)
     local yPos     = zoneData.yPos
     local zPos     = zoneData.zPos
     local rot      = zoneData.rot
+    local allyName = zoneData.allies[GetRegionOwner(zone:getRegionID()) + 1]
 
     for i = 0, math.random(2, 6) do
-        local mob = spawnNPC(zone, xPos, yPos, zPos, rot, "Trader", "0x010006030010762076303A400650736000700000")
+        local mob = spawnNPC(zone, xPos, yPos, zPos, rot, allyName, utils.randomEntry(allyLooks[allyName]))
         mob:setMobLevel(zoneData.levelCap - math.floor(zoneData.levelCap / 5))
         addLevelCap(mob, zoneData.levelCap)
         table.insert(zoneData.npcs, mob:getID())
@@ -461,55 +522,119 @@ xi.garrison.tick = function(npc)
     local zone     = npc:getZone()
     local zoneData = xi.garrison.data[zone:getID()]
 
-    local allNPCsDead = true
-    for _, entityId in pairs(zoneData.npcs) do
-        local entity = GetMobByID(entityId)
-        if entity:isAlive() then
-            allNPCsDead = false
-        end
-    end
+    switch (zoneData.state) : caseof
+    {
+        [xi.garrison.state.INACTIVE] = function()
+            -- print("State: Inactive")
+            local time = os.time()
+            if time > zoneData.stateTime + 2 then
+                zoneData.stateTime = time
+                zoneData.state = xi.garrison.state.SPAWN_NPCS
+            end
+        end,
 
-    local allPlayersDead = true
-    for _, entityId in pairs(zoneData.players) do
-        local entity = GetPlayerByID(entityId)
-        -- TODO: Only check valid players
-        if entity:isAlive() then
-            allPlayersDead = false
-        end
-    end
+        [xi.garrison.state.SPAWN_NPCS] = function()
+            -- print("State: Spawn NPCs")
+            spawnNPCs(npc)
 
-    local allMobsDead = true
-    for _, entityId in pairs(zoneData.mobs) do
-        local entity = GetMobByID(entityId)
-        if entity:isAlive() then
-            allMobsDead = false
-        end
-    end
+            zoneData.stateTime = os.time()
+            zoneData.state = xi.garrison.state.WAITING
+        end,
+
+        [xi.garrison.state.WAITING] = function()
+            -- print("State: Waiting")
+
+            local time = os.time()
+            if time > zoneData.stateTime + 2 then
+                zoneData.stateTime = time
+                zoneData.state = xi.garrison.state.SPAWN_MOBS
+            end
+        end,
+
+        [xi.garrison.state.SPAWN_MOBS] = function()
+            -- print("State: Spawn Mobs")
+            -- TODO: There is a delay before the mobs spawn
+            -- There are always 8 mobs + 1 boss for Garrison, so we will look up the
+            -- boss's ID using their name and then subtract 8 to get the starting mob ID.
+            local firstMobID = zone:queryEntitiesByName(zoneData.mobBoss)[1]:getID() - 8
+            for id = firstMobID, firstMobID do
+                local mob = SpawnMob(id)
+                addLevelCap(mob, zoneData.levelCap)
+                mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+                table.insert(zoneData.mobs, mob:getID())
+            end
+
+            -- Once the mobs are spawned, make them aggro whatever NPCs are already up
+            aggroGroups(zoneData.mobs, zoneData.npcs)
+
+            zoneData.state = xi.garrison.state.ACTIVE
+        end,
+
+        [xi.garrison.state.ACTIVE] = function()
+            -- print("State: Active")
+            local allNPCsDead = true
+            for _, entityId in pairs(zoneData.npcs) do
+                -- TODO: Don't use GetMobByID here
+                -- Keep a table with { bool: alive/dead, mob object } entries
+                local entity = GetMobByID(entityId)
+                if entity and entity:isAlive() then
+                    allNPCsDead = false
+                end
+            end
+
+            local allPlayersDead = true
+            for _, entityId in pairs(zoneData.players) do
+                local entity = GetPlayerByID(entityId)
+                -- TODO: Only check valid players
+                if entity and entity:isAlive() then
+                    allPlayersDead = false
+                end
+            end
+
+            local allMobsDead = true
+            for _, entityId in pairs(zoneData.mobs) do
+                -- TODO: Don't use GetMobByID here
+                -- Keep a table with { bool: alive/dead, mob object } entries
+                local entity = GetMobByID(entityId)
+                if entity and entity:isAlive() then
+                    allMobsDead = false
+                end
+            end
+
+            if
+                allNPCsDead or
+                allPlayersDead or
+                allMobsDead
+            then
+                -- TODO: Only check valid players
+                for _, entityId in pairs(zoneData.players) do
+                    local entity = GetPlayerByID(entityId)
+                    entity:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+                end
+
+                for _, entityId in pairs(zoneData.npcs) do
+                    DespawnMob(entityId)
+                end
+
+                for _, entityId in pairs(zoneData.mobs) do
+                    DespawnMob(entityId)
+                end
+
+                zoneData.state = xi.garrison.state.ENDED
+            end
+        end,
+
+        [xi.garrison.state.ENDED] = function()
+            -- print("State: Ended")
+            zoneData.continue = false
+        end,
+    }
 
     -- TODO: Check to see if current wave is complete
 
     -- TODO: Check to if all waves are completed
 
-    -- Repeatedly call
-    if
-        allNPCsDead or
-        allPlayersDead or
-        allMobsDead
-    then
-        -- TODO: Only check valid players
-        for _, entityId in pairs(zoneData.players) do
-            local entity = GetPlayerByID(entityId)
-            entity:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-        end
-
-        for _, entityId in pairs(zoneData.npcs) do
-            DespawnMob(entityId)
-        end
-
-        for _, entityId in pairs(zoneData.mobs) do
-            DespawnMob(entityId)
-        end
-    else
+    if zoneData.continue then
         npc:timer(2000, function(npcArg)
             xi.garrison.tick(npcArg)
         end)
@@ -519,32 +644,19 @@ end
 xi.garrison.start = function(player, npc)
     -- TODO: Write lockout information to player
 
-    local zone       = player:getZone()
-    local zoneData   = xi.garrison.data[zone:getID()]
-    zoneData.players = {}
-    zoneData.npcs    = {}
-    zoneData.mobs    = {}
+    local zone         = player:getZone()
+    local zoneData     = xi.garrison.data[zone:getID()]
+    zoneData.players   = {}
+    zoneData.npcs      = {}
+    zoneData.mobs      = {}
+    zoneData.state     = xi.garrison.state.INACTIVE
+    zoneData.continue  = true
+    zoneData.stateTime = os.time()
 
     for _, member in pairs(player:getAlliance()) do
         addLevelCap(member, zoneData.levelCap)
         table.insert(zoneData.players, member:getID())
     end
-
-    spawnNPCs(npc)
-
-    -- TODO: There is a delay before the mobs spawn
-    -- There are always 8 mobs + 1 boss for Garrison, so we will look up the
-    -- boss's ID using their name and then subtract 8 to get the starting mob ID.
-    local firstMobID = zone:queryEntitiesByName(zoneData.mobBoss)[1]:getID() - 8
-    for id = firstMobID, firstMobID + math.random(1, 8) do
-        local mob = SpawnMob(id)
-        addLevelCap(mob, zoneData.levelCap)
-        mob:setRoamFlags(xi.roamFlag.SCRIPTED)
-        table.insert(zoneData.mobs, mob:getID())
-    end
-
-    -- Once the mobs are spawned, make them aggro whatever NPCs are already up
-    aggroGroups(zoneData.mobs, zoneData.npcs)
 
     -- The starting NPC is the 'anchor' for all timers and logic for this Garrison. Even though they
     xi.garrison.tick(npc)

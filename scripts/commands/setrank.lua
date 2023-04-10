@@ -27,10 +27,11 @@ function onTrigger(player, target, rank)
         return
     end
 
-    if rank == nil or ( rank < 1 or rank > 10 ) then
+    if rank == nil or (rank < 1 or rank > 10) then
         error(player, "Improper rank passed. Valid Values: 1 to 10")
         return
     end
+
     player:PrintToPlayer(string.format("You set %s's rank to %d", target, rank))
     targ:setRank(rank)
 end

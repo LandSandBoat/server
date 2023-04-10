@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Orithyia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -15,18 +15,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Lets not heal if we haven't taken any damage..
-    if (mob:getHPP() == 100) then
+    if mob:getHPP() == 100 then
         return 1
     end
 
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:eraseStatusEffect()
     -- Didn't see any msg for the erase in youtube vids.
     skill:setMsg(xi.msg.basic.SELF_HEAL)
@@ -34,4 +34,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * (math.random(4, 6) * 0.01))
 end
 
-return mobskill_object
+return mobskillObject

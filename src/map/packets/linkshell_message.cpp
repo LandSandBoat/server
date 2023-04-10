@@ -25,7 +25,7 @@
 
 #include <cstring>
 
-CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1)
+CLinkshellMessagePacket::CLinkshellMessagePacket(const std::string& poster, const std::string& message, const std::string& lsname, uint32 posttime, bool ls1)
 {
     this->setType(id);
     this->setSize(0xB0);
@@ -41,14 +41,11 @@ CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8*
         ref<uint8>(0x05) |= 0x40; // LS2
     }
 
-    if (message)
-    {
-        memcpy(data + (0x08), message, std::min<size_t>(strlen((const char*)message), 115));
-        memcpy(data + (0x8C), poster, std::min<size_t>(strlen((const char*)poster), 15));
-        memcpy(data + (0xA0), lsname, std::min<size_t>(strlen((const char*)lsname), 16));
+    memcpy(data + (0x08), message.c_str(), std::min<size_t>(message.size(), 128));
+    memcpy(data + (0x8C), poster.c_str(), std::min<size_t>(poster.size(), 15));
+    memcpy(data + (0xA0), lsname.c_str(), std::min<size_t>(lsname.size(), 16));
 
-        ref<uint32>(0x88) = posttime;
-    }
+    ref<uint32>(0x88) = posttime;
 
     ref<uint32>(0x9C) = 0x02;
 }

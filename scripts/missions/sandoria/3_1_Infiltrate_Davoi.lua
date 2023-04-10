@@ -265,13 +265,31 @@ mission.sections =
                         local xPos = npc:getXPos()
                         local zPos = npc:getZPos()
 
-                        if xPos >= 292 and xPos <= 296 and zPos >= -30 and zPos <= -26 and not player:hasKeyItem(xi.ki.EAST_BLOCK_CODE) then
+                        if
+                            xPos >= 292 and
+                            xPos <= 296 and
+                            zPos >= -30 and
+                            zPos <= -26 and
+                            not player:hasKeyItem(xi.ki.EAST_BLOCK_CODE)
+                        then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.EAST_BLOCK_CODE):setPriority(1000)
-                        elseif xPos >= 333 and xPos <= 337 and zPos >= -138 and zPos <= -134 and not player:hasKeyItem(xi.ki.SOUTH_BLOCK_CODE) then
+                        elseif
+                            xPos >= 333 and
+                            xPos <= 337 and
+                            zPos >= -138 and
+                            zPos <= -134 and
+                            not player:hasKeyItem(xi.ki.SOUTH_BLOCK_CODE)
+                        then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.SOUTH_BLOCK_CODE):setPriority(1000)
-                        elseif xPos >= 161 and xPos <= 165 and zPos >= -20 and zPos <= -16 and not player:hasKeyItem(xi.ki.NORTH_BLOCK_CODE) then
+                        elseif
+                            xPos >= 161 and
+                            xPos <= 165 and
+                            zPos >= -20 and
+                            zPos <= -16 and
+                            not player:hasKeyItem(xi.ki.NORTH_BLOCK_CODE)
+                        then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.NORTH_BLOCK_CODE):setPriority(1000)
                         end

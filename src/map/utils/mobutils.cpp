@@ -23,6 +23,7 @@
 
 #include <cmath>
 
+#include "../battlefield.h"
 #include "../grades.h"
 #include "../items/item_weapon.h"
 #include "../lua/luautils.h"
@@ -36,6 +37,7 @@
 #include "battleutils.h"
 #include "mobutils.h"
 #include "petutils.h"
+#include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
 
@@ -543,10 +545,6 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::LIMBUS)
-        {
-            SetupLimbusMob(PMob);
-        }
         else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
@@ -582,7 +580,7 @@ namespace mobutils
             ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
         }
 
-        if (PMob->m_Detects == 0)
+        if (PMob->getMobMod(MOBMOD_DETECTION) == 0)
         {
             ShowError("Mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
         }
@@ -731,15 +729,11 @@ namespace mobutils
         uint16 cool     = 20;
         uint16 rate     = 15;
 
-        switch (PMob->m_EcoSystem)
+        if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
         {
-            case ECOSYSTEM::BEASTMAN:
-                distance = 20;
-                turns    = 5;
-                cool     = 45;
-                break;
-            default:
-                break;
+            distance = 20;
+            turns    = 5;
+            cool     = 45;
         }
 
         // default mob roaming mods
@@ -823,20 +817,6 @@ namespace mobutils
         }
     }
 
-    void SetupLimbusMob(CMobEntity* PMob)
-    {
-        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
-
-        // Battlefield mobs don't drop gil
-        PMob->setMobMod(MOBMOD_GIL_MAX, -1);
-        PMob->setMobMod(MOBMOD_MUG_GIL, -1);
-        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
-
-        // never despawn
-        PMob->SetDespawnTime(0s);
-        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
-    }
-
     void SetupBattlefieldMob(CMobEntity* PMob)
     {
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
@@ -848,6 +828,13 @@ namespace mobutils
 
         // never despawn
         PMob->SetDespawnTime(0s);
+
+        // Stop early if this is a new battlefield
+        if (PMob->PBattlefield != nullptr && PMob->PBattlefield->isInteraction())
+        {
+            return;
+        }
+
         // do not roam around
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
@@ -955,9 +942,6 @@ namespace mobutils
     {
         // add special mob mods
 
-        // this only has to be added once
-        AddCustomMods(PMob);
-
         PMob->m_Immunity |= PMob->getMobMod(MOBMOD_IMMUNITY);
 
         PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
@@ -966,6 +950,7 @@ namespace mobutils
                             92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
         PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
         PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
+        PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
 
         // Killer Effect
         switch (PMob->m_EcoSystem)
@@ -995,9 +980,9 @@ namespace mobutils
                 PMob->addModifier(Mod::VERMIN_KILLER, 5);
                 break;
             case ECOSYSTEM::LUMINION:
-                PMob->addModifier(Mod::LUMORIAN_KILLER, 5);
+                PMob->addModifier(Mod::LUMINIAN_KILLER, 5);
                 break;
-            case ECOSYSTEM::LUMORIAN:
+            case ECOSYSTEM::LUMINIAN:
                 PMob->addModifier(Mod::LUMINION_KILLER, 5);
                 break;
             case ECOSYSTEM::PLANTOID:
@@ -1242,7 +1227,7 @@ Usage:
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-        fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
@@ -1324,25 +1309,14 @@ Usage:
                 PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                 PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(46))); // These are stored as signed integers which
-                PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(47)));  // is directly the modifier starting value.
-                PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(48))); // Positives signify increased resist chance.
-                PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(49)));
-                PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(50)));
-                PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(51)));
-                PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(52)));
-                PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(53)));
-
-                /* Todo: hook this up, seems to force resist tiering
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
-                */
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(46)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(47)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(48)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(49)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(50)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(51)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(52)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(53)));
 
                 PMob->m_Element     = (uint8)sql->GetIntData(54);
                 PMob->m_Family      = (uint16)sql->GetIntData(55);
@@ -1371,15 +1345,21 @@ Usage:
                 PMob->m_Aggro         = sql->GetUIntData(66);
                 PMob->m_MobSkillList  = sql->GetUIntData(67);
                 PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->m_Detects       = sql->GetUIntData(69);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
+
+                CZone* newZone = zoneutils::GetZone(zoneID);
+
+                // Get dynamic targid
+                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+
+                // Ensure dynamic targid is released on death
+                PMob->m_bReleaseTargIDOnDisappear = true;
+
+                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
-
-                // TODO: This shouldn't go into the pet list, it appears to only
-                //     : do this because that was the only way to have temporary
-                //     : entities at the time.
-                zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
 
@@ -1405,7 +1385,7 @@ Usage:
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-        fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
@@ -1482,25 +1462,14 @@ Usage:
                 PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                 PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(46))); // These are stored as signed integers which
-                PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(47)));  // is directly the modifier starting value.
-                PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(48))); // Positives signify increased resist chance.
-                PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(49)));
-                PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(50)));
-                PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(51)));
-                PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(52)));
-                PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(53)));
-
-                /* Todo: hook this up, seems to force resist tiering
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
-                */
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(46)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(47)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(48)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(49)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(50)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(51)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(52)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(53)));
 
                 PMob->m_Element     = (uint8)sql->GetIntData(54);
                 PMob->m_Family      = (uint16)sql->GetIntData(55);
@@ -1525,7 +1494,7 @@ Usage:
                 PMob->m_Aggro         = sql->GetUIntData(66);
                 PMob->m_MobSkillList  = sql->GetUIntData(67);
                 PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->m_Detects       = sql->GetUIntData(69);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));

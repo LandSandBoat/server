@@ -12,7 +12,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
 
@@ -20,23 +19,7 @@ entity.onTrigger = function(player, npc)
         vHour = vHour - 8
     end
 
-    if vHour == -2 then
-        vHour = 8
-    elseif vHour == -1 then
-        vHour = 7
-    elseif vHour ==  0 then
-        vHour = 6
-    elseif vHour ==  1 then
-        vHour = 5
-    elseif vHour ==  2 then
-        vHour = 4
-    elseif vHour ==  3 then
-        vHour = 3
-    elseif vHour ==  4 then
-        vHour = 2
-    elseif vHour ==  5 then
-        vHour = 1
-    end
+    vHour = vHour - (vHour - 3) * 2
 
     if vHour == 8 and vMin <= 40 then
         vHour = 0
@@ -44,7 +27,7 @@ entity.onTrigger = function(player, npc)
 
     local vMinutes = (vHour * 60) + 40 - vMin
 
-    vHour = math.floor( vMinutes / 60 + 0.5)
+    vHour = math.floor(vMinutes / 60 + 0.5)
 
     local message = ID.text.ON_WAY_TO_SELBINA
 
@@ -58,7 +41,7 @@ entity.onTrigger = function(player, npc)
         vHour = 7
     end
 
-    player:messageSpecial(message, math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60), vHour)
+    player:messageSpecial(message, math.abs(math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60)), vHour)
 end
 
 entity.onEventUpdate = function(player, csid, option)

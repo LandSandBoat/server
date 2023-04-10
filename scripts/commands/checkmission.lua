@@ -18,27 +18,27 @@ function error(player, msg)
 end
 
 function onTrigger(player, logId, target)
-
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
-    if (logInfo == nil) then
+    if logInfo == nil then
         error(player, "Invalid logID.")
         return
     end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
@@ -47,9 +47,9 @@ function onTrigger(player, logId, target)
     -- report mission
     local currentMission = targ:getCurrentMission(logId)
 
-    if ((logId <= 3) and (currentMission == 65535)) then
-        player:PrintToPlayer( string.format( "No current %s mission for %s.", logName, targ:getName() ) )
+    if logId <= 3 and currentMission == 65535 then
+        player:PrintToPlayer(string.format("No current %s mission for %s.", logName, targ:getName()))
     else
-        player:PrintToPlayer( string.format( "Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName() ) )
+        player:PrintToPlayer(string.format("Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName()))
     end
 end

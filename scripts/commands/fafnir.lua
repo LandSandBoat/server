@@ -31,8 +31,8 @@ function onTrigger(player)
         rotation = player:getRotPos(),
 
         -- Fafnir's entry in mob_groups:
-        -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
-        --                       groupId ---^       ^--- groupZoneId
+        -- INSERT INTO `mob_groups` VALUES (5, 1280, 154, 'Fafnir', 0, 128, 805, 70000, 0, 90, 90, 0)
+        --                       groupId ---^        ^--- groupZoneId
         groupId = 5,
         groupZoneId = 154,
 
@@ -44,7 +44,7 @@ function onTrigger(player)
 
         -- If set to true, the internal id assigned to this mob will be released for other dynamic entities to use
         -- after this mob has died. Defaults to false.
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
 
         -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
         mixins =
@@ -61,6 +61,8 @@ function onTrigger(player)
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 
     mob:setDropID(0) -- No loot!
+
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 
     mob:spawn()
 

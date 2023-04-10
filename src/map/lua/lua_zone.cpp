@@ -21,14 +21,15 @@
 
 #include "common/logging.h"
 
-#include "../campaign_system.h"
-#include "../entities/charentity.h"
-#include "../entities/npcentity.h"
-#include "../mob_modifier.h"
-#include "../region.h"
-#include "../utils/mobutils.h"
-#include "../zone.h"
-#include "../zone_entities.h"
+#include "campaign_system.h"
+#include "entities/charentity.h"
+#include "entities/npcentity.h"
+#include "mob_modifier.h"
+#include "trigger_area.h"
+#include "utils/mobutils.h"
+#include "zone.h"
+#include "zone_entities.h"
+
 #include "lua_baseentity.h"
 #include "lua_zone.h"
 
@@ -72,12 +73,12 @@ void CLuaZone::resetLocalVars()
 
 /************************************************************************
  *                                                                       *
- * Registering the active area in the zone                               *
+ * Registering the active trigger area in the zone                       *
  * Input data format: RegionID, x1, y1, z1, x2, y2, z2                   *
  *                                                                       *
  ************************************************************************/
 
-void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
+void CLuaZone::registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
     bool circleRegion = false;
     if (approximatelyEqual(x2, 0.0f) &&
@@ -87,13 +88,13 @@ void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, flo
         circleRegion = true; // Parameters were 0, we must be a circle.
     }
 
-    CRegion* Region = new CRegion(RegionID, circleRegion);
+    CTriggerArea* region = new CTriggerArea(triggerAreaID, circleRegion);
 
     // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
-    Region->SetULCorner(x1, y1, z1);
-    Region->SetLRCorner(x2, y2, z2);
+    region->SetULCorner(x1, y1, z1);
+    region->SetLRCorner(x2, y2, z2);
 
-    m_pLuaZone->InsertRegion(Region);
+    m_pLuaZone->InsertTriggerArea(region);
 }
 
 /************************************************************************
@@ -148,9 +149,9 @@ ZONEID CLuaZone::getID()
     return m_pLuaZone->GetID();
 }
 
-std::string CLuaZone::getName()
+const std::string& CLuaZone::getName()
 {
-    return reinterpret_cast<const char*>(m_pLuaZone->GetName());
+    return m_pLuaZone->GetName();
 }
 
 REGION_TYPE CLuaZone::getRegionID()
@@ -232,22 +233,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     // NOTE: Mob allegiance is the default for NPCs
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 
-    uint16 ZoneID = m_pLuaZone->GetID();
+    m_pLuaZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PEntity);
 
-    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
-    //       on despawn/destruction
-    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
-    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
-    if (PEntity->targid >= 0x900)
-    {
-        ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
-    }
-
-    m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
-
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
-
-    PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
     PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
     PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
@@ -258,7 +245,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     if (name.empty())
     {
         ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
-                    PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+                    PEntity->GetName(), m_pLuaZone->GetName());
 
         // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
         name = PEntity->name;
@@ -271,8 +258,10 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     PEntity->isRenamed = true;
 
+    PEntity->m_bReleaseTargIDOnDisappear = table["releaseIdOnDisappear"].get_or(false);
+
     auto typeKey    = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
-    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
+    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][m_pLuaZone->GetName()][typeKey][lookupName];
 
     // Bind any functions that are passed in
     for (auto& [entryKey, entryValue] : table)
@@ -287,11 +276,13 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     {
         PNpc->namevis     = table.get_or<uint8>("namevis", 0);
         PNpc->status      = STATUS_TYPE::NORMAL;
-        PNpc->m_flags     = 0;
         PNpc->name_prefix = 32;
 
         // TODO: Does this even work?
         PNpc->widescan = table.get_or<uint8>("widescan", 1);
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PNpc->m_flags = flags == 0 ? PNpc->m_flags : flags;
 
         // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
@@ -325,15 +316,20 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->saveModifiers();
         PMob->saveMobModifiers();
 
-        PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
+        PMob->m_isAggroable = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PMob->m_flags = flags == 0 ? PMob->m_flags : flags;
 
         // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get<sol::function>();
         if (!onMobDeath.valid())
         {
-            cacheEntry["onMobDeath"] = []() {}; // Empty func
+            // TODO: Using an empty C++ lambda here wasn't working.
+            // Figure out why and fix.
+            cacheEntry["onMobDeath"] = lua.safe_script("return function() end");
         }
 
         m_pLuaZone->InsertMOB(PMob);
@@ -345,16 +341,11 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto lookStr = table.get<std::string>("look");
-        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
-        {
-            PEntity->look.size = MODEL_EQUIPPED;
-        }
-        auto look = stringToLook(lookStr);
-        std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
+        auto lookStr  = table.get<std::string>("look");
+        PEntity->look = stringToLook(lookStr);
     }
 
-    PEntity->updatemask |= UPDATE_ALL_MOB;
+    PEntity->updatemask |= UPDATE_ALL_CHAR;
 
     return CLuaBaseEntity(PEntity);
 }
@@ -447,7 +438,7 @@ void CLuaZone::Register()
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 
-    SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
+    SOL_REGISTER("registerTriggerArea", CLuaZone::registerTriggerArea);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getNPCs", CLuaZone::getNPCs);

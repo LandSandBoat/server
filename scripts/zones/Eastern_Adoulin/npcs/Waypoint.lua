@@ -3,7 +3,7 @@
 --  NPC: Waypoint
 -----------------------------------
 -- Peacekeeper's Coalition : !pos -101.274 -0.15 -10.726 257
--- Scout's Coalition       : !pos -77,944 -0.15 -63.926 257
+-- Scout's Coalition       : !pos -77.944 -0.15 -63.926 257
 -- Statue of the Goddess   : !pos -46.838 -0.075 -12.767 257
 -- Yahse Wharf             : !pos -57.773 -0.15 85.237 257
 -- Rent-a-Room             : !pos -61.865 -0.15 -120.81 257

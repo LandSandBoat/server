@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Damama
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

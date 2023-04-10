@@ -3,14 +3,14 @@
 -- Scroll of Distract
 -- Teaches the black magic Distract II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(842)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(842)
 end
 
-return item_object
+return itemObject

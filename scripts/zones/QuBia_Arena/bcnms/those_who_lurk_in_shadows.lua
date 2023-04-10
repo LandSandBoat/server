@@ -7,22 +7,23 @@ require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if player:hasKeyItem(xi.ki.MARK_OF_SEED) then
         player:delKeyItem(xi.ki.MARK_OF_SEED)
     end
+
     if leavecode == xi.battlefield.leaveCode.WON then
         player:addExp(700)
         local _, clearTime, partySize = battlefield:getRecord()
@@ -33,16 +34,20 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
             player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
             player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
         end
-        if not player:hasKeyItem(xi.ki.IVORY_KEY) and player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
+
+        if
+            not player:hasKeyItem(xi.ki.IVORY_KEY) and
+            player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
+        then
             player:setCharVar("LastIvoryKey", getMidnight())
             player:addKeyItem(xi.ki.IVORY_KEY)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
@@ -50,4 +55,4 @@ battlefield_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return battlefield_object
+return battlefieldObject

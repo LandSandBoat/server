@@ -11,7 +11,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 DROP TABLE IF EXISTS `pet_list`;
 CREATE TABLE IF NOT EXISTS `pet_list` (
-  `petid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `petid` int(10) unsigned NOT NULL,
   `name` char(15) NOT NULL,
   `poolid` int(10) unsigned NOT NULL DEFAULT '0',
   `minLevel` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `pet_list` (
   `time` int(10) unsigned NOT NULL DEFAULT '0',
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`petid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `pet_list`

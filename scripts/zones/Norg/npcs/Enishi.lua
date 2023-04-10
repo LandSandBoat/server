@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Enishi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

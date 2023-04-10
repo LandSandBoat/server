@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Amajal
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -7,7 +7,7 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.blueChest = {}
 
-xi.pyxis.blueChest.startEvent = function(player, npc, event, contentMessage,timeleft)
+xi.pyxis.blueChest.startEvent = function(player, npc, event, contentMessage, timeleft)
     local targetnumber    = npc:getLocalVar("RAND_NUM")
     local failedAttempts  = npc:getLocalVar("FAILED_ATTEMPTS")
     local currentAttempts = npc:getLocalVar("CURRENT_ATTEMPTS")

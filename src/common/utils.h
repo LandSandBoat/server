@@ -23,9 +23,12 @@
 #define _UTILS_H_
 #define _USE_MATH_DEFINES
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+
+#include <filesystem>
 #include <math.h>
+#include <set>
 
 constexpr size_t PacketNameLength = 16; // 15 + null terminator
 
@@ -76,10 +79,10 @@ uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 
 // Encode/Decode Strings to/from FFXI 6-bit format
-void        EncodeStringLinkshell(int8* signature, int8* target);
-void        DecodeStringLinkshell(int8* signature, int8* target);
-int8*       EncodeStringSignature(int8* signature, int8* target);
-void        DecodeStringSignature(int8* signature, int8* target);
+void        EncodeStringLinkshell(const std::string& signature, char* target);
+void        DecodeStringLinkshell(const std::string& signature, char* target);
+std::string EncodeStringSignature(const std::string& signature, char* target);
+void        DecodeStringSignature(const std::string& signature, char* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
 
@@ -88,6 +91,9 @@ auto split(std::string const& s, std::string const& delimiter = " ") -> std::vec
 auto to_lower(std::string const& s) -> std::string;
 auto to_upper(std::string const& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
+bool matches(std::string const& target, std::string const& pattern, std::string const& wildcard = "%");
+bool starts_with(std::string const& target, std::string const& pattern);
+auto replace(std::string const& target, std::string const& search, std::string const& replace) -> std::string;
 
 look_t stringToLook(std::string str);
 
@@ -99,6 +105,17 @@ bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
 void crash();
+
+template <typename T>
+std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
+{
+    std::set<std::filesystem::path> sorted_by_name;
+    for (auto& entry : T(path_name))
+    {
+        sorted_by_name.insert(entry.path());
+    }
+    return sorted_by_name;
+}
 
 class ScopeGuard
 {

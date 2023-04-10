@@ -45,9 +45,9 @@ mission.sections =
         {
             ['Erminold'] = mission:event(1526):replaceDefault(),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(1510)
                 end,
             },

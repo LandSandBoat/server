@@ -20,33 +20,29 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("BonecraftExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_BONEWORKER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.BONECRAFT, newRank)
             player:startEvent(10017, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("BonecraftExpertQuest",0)
-            player:setLocalVar("BonecraftTraded",1)
+            player:setCharVar("BonecraftExpertQuest", 0)
+            player:setLocalVar("BonecraftTraded", 1)
         else
             player:startEvent(10017, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.BONECRAFT, newRank)
         player:startEvent(10017, 0, 0, 0, 0, newRank)
-        player:setLocalVar("BonecraftTraded",1)
+        player:setLocalVar("BonecraftTraded", 1)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.BONECRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.BONECRAFT)
-    local guildMember       = xi.crafting.isGuildMember(player, 2)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) and 64 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.BONECRAFT)
     local realSkill         = (craftSkill - rank) / 32
-
-    if guildMember == 1 then
-        guildMember = 64
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 10016, realSkill, rankCap, 184549887) then
         return
@@ -75,11 +71,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 2)
-
     if csid == 10016 and option == 2 then
-        if guildMember == 1 then
-            player:setCharVar("BonecraftExpertQuest",1)
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
+            player:setCharVar("BonecraftExpertQuest", 1)
         end
     elseif csid == 10016 and option == 1 then
         local crystal = 4098 -- wind crystal
@@ -88,12 +82,12 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.bonecraft)
+            xi.crafting.signupGuild(player, xi.crafting.guild.BONECRAFT)
         end
     else
         if player:getLocalVar("BonecraftTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("BonecraftTraded",0)
+            player:setLocalVar("BonecraftTraded", 0)
         end
     end
 

@@ -5,36 +5,33 @@
 -- Recast Time: 0:30
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() ~= nil ) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-
+abilityObject.onUseAbility = function(player, target, ability)
     local charmChance = player:getCharmChance(target, false)
 
-    if (charmChance >= 75) then
+    if charmChance >= 75 then
         ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM)  -- The <player> should be able to charm <target>.
-    elseif (charmChance >= 50) then
+    elseif charmChance >= 50 then
         ability:setMsg(xi.msg.basic.MIGHT_BE_ABLE_CHARM)   -- The <player> might be able to charm <target>.
-    elseif (charmChance >= 25) then
+    elseif charmChance >= 25 then
         ability:setMsg(xi.msg.basic.DIFFICULT_TO_CHARM)    -- It would be difficult for the <player> to charm <target>.
-    elseif (charmChance >= 1) then
+    elseif charmChance >= 1 then
         ability:setMsg(xi.msg.basic.VERY_DIFFICULT_CHARM)  -- It would be very difficult for the <player> to charm <target>.
     else
         ability:setMsg(xi.msg.basic.CANNOT_CHARM)          -- The <player> cannot charm <target>!
     end
-
 end
 
-return ability_object
+return abilityObject

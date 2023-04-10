@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2572) and npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN) then -- Trade Pandemonium Key
+    if
+        npcUtil.tradeHas(trade, 2572) and
+        npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN)
+    then
+        -- Trade Pandemonium Key
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

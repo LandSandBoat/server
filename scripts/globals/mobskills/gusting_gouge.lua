@@ -8,17 +8,24 @@
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 and (mob:getMainJob() == xi.job.COR or mob:getMainJob() == xi.job.BRD or mob:getMainJob() == xi.job.RDM) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if
+        mob:getAnimationSub() == 0 and
+        (
+            mob:getMainJob() == xi.job.COR or
+            mob:getMainJob() == xi.job.BRD or
+            mob:getMainJob() == xi.job.RDM
+        )
+    then
         return 0
     else
         return 1
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
     local dmgmod = 1.5
@@ -28,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

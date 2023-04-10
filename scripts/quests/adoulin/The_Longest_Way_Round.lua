@@ -8,7 +8,7 @@
 -- Irate Destrier : !pos -72.986 -0.15 -34.96 257
 -- Nhili Uvolep   : !pos 24.06 -22.15 34.488 257
 -- Ploh Trishbahk : !pos 100.58 -40.15 -63.83 257
--- Cunegonde      : !pos -55.964 -0.15,-129.833 257
+-- Cunegonde      : !pos -55.964 -0.15 -129.833 257
 -- Ndah Tolohjin  : !pos -86.808 0.001 -36.867 257
 -----------------------------------
 require('scripts/globals/items')

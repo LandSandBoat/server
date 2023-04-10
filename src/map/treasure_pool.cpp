@@ -141,7 +141,10 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
 
     if (m_TreasurePoolType != TREASUREPOOL_ZONE && members.empty())
     {
-        delete this;
+        // TODO: This entire system needs rewriting to both:
+        //     : - Make it stable
+        //     : - Get rid of `delete this` and manage memory nicely
+        delete this; // cpp.sh allow
         return;
     }
 }
@@ -185,7 +188,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
         for (SlotID = 0; SlotID < 10; ++SlotID)
         {
             CItem* PItem = itemutils::GetItemPointer(m_PoolItems[SlotID].ID);
-            if (!(PItem->getFlag() & (ITEM_FLAG_RARE | ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
+            if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_RARE | ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
             {
                 FreeSlotID = SlotID;
                 oldest     = m_PoolItems[SlotID].TimeStamp;
@@ -197,12 +200,13 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
             for (SlotID = 0; SlotID < 10; ++SlotID)
             {
                 CItem* PItem = itemutils::GetItemPointer(m_PoolItems[SlotID].ID);
-                if (!(PItem->getFlag() & (ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
+                if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
                 {
                     FreeSlotID = SlotID;
                     oldest     = m_PoolItems[SlotID].TimeStamp;
                 }
             }
+
             if (FreeSlotID > TREASUREPOOL_SIZE)
             {
                 // find the oldest item
@@ -214,6 +218,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
                         oldest     = m_PoolItems[SlotID].TimeStamp;
                     }
                 }
+
                 if (FreeSlotID > TREASUREPOOL_SIZE)
                 {
                     // default fallback
@@ -222,6 +227,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
             }
         }
     }
+
     if (SlotID == 10)
     {
         m_PoolItems[FreeSlotID].TimeStamp = get_server_start_time();

@@ -8,31 +8,34 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local effects = target:getStatusEffects()
     local num = 0
 
     for i, effect in pairs(effects) do
         -- check mask bit for xi.effectFlag.DISPELABLE
-        if (utils.mask.getBit(effect:getFlag(), 0) and effect:getType() ~= xi.effect.RERAISE and num < 10) then
+        if
+            utils.mask.getBit(effect:getFlag(), 0) and
+            effect:getType() ~= xi.effect.RERAISE and
+            num < 10
+        then
             target:delStatusEffect(effect:getType())
             num = num + 1
         end
     end
 
     skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
-    if (num == 0) then
+    if num == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
 
     return num
-
 end
 
-return mobskill_object
+return mobskillObject

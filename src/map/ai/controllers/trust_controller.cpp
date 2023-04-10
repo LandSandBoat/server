@@ -69,7 +69,7 @@ void CTrustController::Despawn()
 void CTrustController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneIString(POwner->GetName());
+    TracyZoneString(POwner->GetName());
 
     m_Tick = tick;
 
@@ -363,7 +363,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         for (auto& potential_position : positions)
         {
             // Validate position
-            if (!position_found && POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->PAI->PathFind->CanSeePoint(potential_position, false))
+            if (!position_found && POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->CanSeeTarget(potential_position, true))
             {
                 position_found  = true;
                 target_position = potential_position;

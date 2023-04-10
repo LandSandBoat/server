@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
+#include "auction_house.h"
+
 #include "common/socket.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "auction_house.h"
-
-#include "../entities/charentity.h"
-#include "../map.h"
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "entities/charentity.h"
+#include "map.h"
+#include "utils/itemutils.h"
 
 bool IsAuctionOpen = true; // Trading is allowed at the auction
 
@@ -101,7 +101,7 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 slot, CCharEntity* 
     }
 }
 
-CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 itemid, uint32 price)
+CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 itemid, uint32 price, uint8 quantity, uint8 stacksize)
 {
     this->setType(0x4C);
     this->setSize(0x3C);
@@ -110,6 +110,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 ite
     ref<uint8>(0x06)  = message;
     ref<uint32>(0x08) = price;
     ref<uint16>(0x0C) = itemid;
+    // Following previous nomenclature, "quantity == 0" indicates a stack. This might be 0 = stack 1 = single flag.
+    ref<uint16>(0x10) = quantity == 0 ? stacksize : 1;
 }
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntity* PChar, uint8 slot, bool keepItem)
@@ -127,7 +129,7 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntit
         ref<uint8>(0x14) = 0x03;
         ref<uint8>(0x16) = 0x01; // Value is changed, the purpose is unknown UNKNOWN
 
-        memcpy(data + (0x18), PChar->GetName(), PChar->name.size());
+        memcpy(data + (0x18), PChar->GetName().c_str(), PChar->GetName().size());
 
         ref<uint16>(0x28) = PChar->m_ah_history.at(slot).itemid;    // Id sell items item id
         ref<uint8>(0x2A)  = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size

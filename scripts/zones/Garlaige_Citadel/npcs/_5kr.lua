@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(502, 1) == true and trade:getItemCount() == 1) then -- Garlaige Key (Not Chest/Coffer)
+    if trade:hasItemQty(502, 1) and trade:getItemCount() == 1 then -- Garlaige Key (Not Chest/Coffer)
         player:startEvent(4) -- Open the door
     end
 end
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     local xPos = player:getXPos()
     local zPos = player:getZPos()
 
-    if ((xPos >= 135 and xPos <= 144) and (zPos >= 128 and zPos <= 135)) then
+    if xPos >= 135 and xPos <= 144 and zPos >= 128 and zPos <= 135 then
         player:startEvent(5)
     else
         player:messageSpecial(ID.text.OPEN_WITH_THE_RIGHT_KEY)

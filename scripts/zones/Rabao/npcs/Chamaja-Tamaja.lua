@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Chamaja-Tamaja
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -12,8 +12,8 @@ require("scripts/globals/status")
 local entity = {}
 
 local chargeOptic = function(mob)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     if mob:getLocalVar("opticInduration") ~= 1 then
         mob:timer(5000, function(mobArg)
@@ -22,8 +22,8 @@ local chargeOptic = function(mob)
     elseif mob:getLocalVar("opticInduration") == 1 then
         mob:useMobAbility(1465)
         mob:setLocalVar("opticInduration", 0)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
     end
 end
 
@@ -36,8 +36,8 @@ entity.onMobSpawn = function(mob)
     })
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setLocalVar("healpercent", math.random(15, 25))
 end
 
@@ -46,8 +46,13 @@ entity.onMobEngaged = function(mob, target)
     -- each pot steps off the pedastal after casting initial spell and engaging target
     switch (mobId): caseof
     {
-        [ID.mob.IXZDEI_BASE + 2] = function() mob:pathTo(422.261, 0.000, 412.931) end,
-        [ID.mob.IXZDEI_BASE + 3] = function() mob:pathTo(417.937, 0.000, 413.019) end,
+        [ID.mob.IXZDEI_BASE + 2] = function()
+            mob:pathTo(422.261, 0.000, 412.931)
+        end,
+
+        [ID.mob.IXZDEI_BASE + 3] = function()
+            mob:pathTo(417.937, 0.000, 413.019)
+        end,
     }
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setLocalVar("changeTime", 0)
@@ -56,7 +61,6 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
 
@@ -71,7 +75,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if
-        mob:actionQueueEmpty() == true and
+        mob:actionQueueEmpty() and
         not isBusy
     then -- dont change forms while charging Optic Induration
         if
@@ -120,9 +124,9 @@ entity.onMobFight = function(mob, target)
         local mobID = mob:getID()
         switch (mobID): caseof
         {
-            [ID.mob.IXZDEI_BASE+2] = function()
+            [ID.mob.IXZDEI_BASE + 2] = function()
                 local spawnPos = zdeiOne:getSpawnPos()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
                 mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
                 mob:timer(8000, function(mobArg)
@@ -134,13 +138,14 @@ entity.onMobFight = function(mob, target)
                         mob:setHP(6500)
                         mob:setLocalVar("healed", 1)
                         mob:setLocalVar("heal", 1)
-                        mob:SetMagicCastingEnabled(true)
+                        mob:setMagicCastingEnabled(true)
                     end
                 end)
             end,
-            [ID.mob.IXZDEI_BASE+3] = function()
+
+            [ID.mob.IXZDEI_BASE + 3] = function()
                 local spawnPos = zdeiTwo:getSpawnPos()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
                 mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
                 mob:timer(8000, function(mobArg)
@@ -152,7 +157,7 @@ entity.onMobFight = function(mob, target)
                         mob:setHP(6500)
                         mob:setLocalVar("healed", 1)
                         mob:setLocalVar("heal", 1)
-                        mob:SetMagicCastingEnabled(true)
+                        mob:setMagicCastingEnabled(true)
                     end
                 end)
             end,
@@ -163,10 +168,10 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
     if skillID == 1464 then
-        mob:AnimationSub(0)
+        mob:setAnimationSub(0)
         local opticCounter = mob:getLocalVar("opticCounter")
 
-        opticCounter = opticCounter +1
+        opticCounter = opticCounter + 1
         mob:setLocalVar("opticCounter", opticCounter)
 
         if opticCounter > 2 then
@@ -180,7 +185,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

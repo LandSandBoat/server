@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Sola Jaab
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

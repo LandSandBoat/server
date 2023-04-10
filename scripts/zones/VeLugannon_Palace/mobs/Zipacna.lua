@@ -6,7 +6,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -202, y = 0, z = 391 },
     { x = -209, z = 387 },
@@ -114,7 +114,7 @@ local path =
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 200)
-    mob:pathThrough(path, xi.path.flag.PATROL)
+    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

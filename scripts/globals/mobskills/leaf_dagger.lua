@@ -11,14 +11,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
     local accmod = 1
     local dmgmod = 1.4
@@ -26,8 +25,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     local typeEffect = xi.effect.POISON
-    local power = (mob:getMainLvl()/10)
-    if (power < 1 ) then
+    local power = mob:getMainLvl() / 10
+    if power < 1 then
         power = 1
     end
 
@@ -37,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

@@ -10,16 +10,16 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MULTI_HIT, 6)
-    mob:setMod(xi.mod.BINDRES, 20)
-    mob:setMod(xi.mod.BLINDRES, 20)
-    mob:setMod(xi.mod.SLEEPRES, 20)
-    mob:setMod(xi.mod.LULLABYRES, 20)
-    mob:setMod(xi.mod.GRAVITYRES, 20)
+    mob:setMod(xi.mod.BIND_MEVA, 20)
+    mob:setMod(xi.mod.BLIND_MEVA, 20)
+    mob:setMod(xi.mod.SLEEP_MEVA, 20)
+    mob:setMod(xi.mod.LULLABY_MEVA, 20)
+    mob:setMod(xi.mod.GRAVITY_MEVA, 20)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("tentacles", 6)
-    mob:SetMobSkillAttack(0)
+    mob:setMobSkillAttack(0)
 end
 
 -- Remove a tentacle from Fe'e.  This happens six times during the fight, with final at about 33% HP.
@@ -33,15 +33,16 @@ local function removeTentacle(mob, tentacles)
         mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
     else
         mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
-        mob:SetMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
+        mob:setMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
     end
+
     mob:addMod(xi.mod.ATT, 50)
     mob:addMod(xi.mod.REGAIN, 50)
-    mob:addMod(xi.mod.BINDRES, 10)
-    mob:addMod(xi.mod.BLINDRES, 10)
-    mob:addMod(xi.mod.SLEEPRES, 10)
-    mob:addMod(xi.mod.LULLABYRES, 10)
-    mob:addMod(xi.mod.GRAVITYRES, 10)
+    mob:addMod(xi.mod.BIND_MEVA, 10)
+    mob:addMod(xi.mod.BLIND_MEVA, 10)
+    mob:addMod(xi.mod.SLEEP_MEVA, 10)
+    mob:addMod(xi.mod.LULLABY_MEVA, 10)
+    mob:addMod(xi.mod.GRAVITY_MEVA, 10)
 end
 
 entity.onMobFight = function(mob, target)

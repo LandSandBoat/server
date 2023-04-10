@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Ubahrid
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

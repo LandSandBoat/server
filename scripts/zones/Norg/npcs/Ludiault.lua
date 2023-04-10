@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Ludiault
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

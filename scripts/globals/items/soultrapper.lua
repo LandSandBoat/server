@@ -3,14 +3,14 @@
 -----------------------------------
 require("scripts/globals/znm")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, user)
+itemObject.onItemCheck = function(target, user)
     return xi.znm.soultrapper.onItemCheck(target, user)
 end
 
-item_object.onItemUse = function(target, user, item)
+itemObject.onItemUse = function(target, user, item)
     xi.znm.soultrapper.onItemUse(target, user, item)
 end
 
-return item_object
+return itemObject

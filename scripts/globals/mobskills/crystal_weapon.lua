@@ -12,21 +12,21 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local day = math.random(0, 3)
-    local damage_type = xi.damageType.FIRE + xi.magic.dayElement[day] - 1
+    local damageType = xi.damageType.FIRE + xi.magic.dayElement[day] - 1
     local dmgmod = 1
     local accmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, accmod, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob,skill, target, xi.attackType.MAGICAL, damage_type, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, damage_type)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, damageType, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, damageType)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

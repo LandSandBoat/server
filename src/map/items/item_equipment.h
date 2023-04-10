@@ -77,7 +77,7 @@ public:
     uint16 getEquipSlotId() const;
     uint16 getRemoveSlotId() const;
     uint8  getShieldAbsorption() const;
-    int16  getModifier(Mod mod);
+    int16  getModifier(Mod mod) const;
     uint8  getSlotType() const;
     uint16 getAugment(uint8 slot);
     uint16 getTrialNumber();
@@ -102,8 +102,19 @@ public:
     void ApplyAugment(uint8 slot);
 
     void addModifier(CModifier modifier);
+    void addModifier(Mod mod, int16 modValue)
+    {
+        return addModifier(CModifier(mod, modValue));
+    };
     void addPetModifier(CPetModifier modifier);
+    void addPetModifier(Mod mod, PetModType petType, int16 modValue)
+    {
+        return addPetModifier(CPetModifier(mod, petType, modValue));
+    };
     void addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower);
+
+    bool delModifier(Mod mod, int16 modValue);
+    bool delPetModifier(Mod mod, PetModType petType, int16 modValue);
 
     std::vector<CModifier>    modList;    // список модификаторов
     std::vector<CPetModifier> petModList; // mod list for pets

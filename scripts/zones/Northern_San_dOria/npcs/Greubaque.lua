@@ -14,12 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.SMITHING)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == false) then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
+        if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(628, cost, skillLevel, 0, 205, player:getGil(), 0, 0, 0)
         else
             player:startEvent(628, cost, skillLevel, 0, 205, player:getGil(), 28721, 4095, 0)
@@ -35,7 +34,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.SMITHING)
 
-    if (csid == 628 and option == 1) then
+    if csid == 628 and option == 1 then
         player:delGil(cost)
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 2, 0)
         player:addStatusEffect(xi.effect.SMITHING_IMAGERY, 3, 0, 480)

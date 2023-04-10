@@ -67,9 +67,9 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 1 then
                         local pNation = player:getNation()
                         local hasDefeatedShadowlord = player:hasCompletedMission(pNation, xi.mission.id.nation.SHADOW_LORD)

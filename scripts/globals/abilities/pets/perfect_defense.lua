@@ -6,23 +6,25 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, master)
+abilityObject.onPetAbility = function(target, pet, skill, master)
     local power = 10000 * (master:getMP() / master:getMaxMP())
     local duration = 60
 
     if master ~= nil then
         local summoningSkill = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-        if (summoningSkill > 600) then
+        if summoningSkill > 600 then
             summoningSkill = 600
         end
+
         duration = 30 + summoningSkill / 20
     end
+
     target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
     target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
@@ -30,4 +32,4 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     return xi.effect.PERFECT_DEFENSE
 end
 
-return ability_object
+return abilityObject

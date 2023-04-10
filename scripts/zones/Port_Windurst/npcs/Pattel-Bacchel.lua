@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---  NPC: Pattel_Bacchel
--- Standard Info NPC
+--  NPC: Pattel Bacchel
 -----------------------------------
 local entity = {}
 

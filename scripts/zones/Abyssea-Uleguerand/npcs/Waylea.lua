@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Waylea
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

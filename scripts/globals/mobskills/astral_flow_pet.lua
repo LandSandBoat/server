@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 local function petInactive(pet)
     return
@@ -17,7 +17,7 @@ local function petInactive(pet)
         pet:hasStatusEffect(xi.effect.TERROR)
 end
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- must have pet
     if not mob:hasPet() then
         return 1
@@ -33,15 +33,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ASTRAL_FLOW
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local pet = mob:getPet()
 
     skill:setMsg(xi.msg.basic.USES)
 
     -- no effect if pet is inactive
     if petInactive(pet) then
-        return typeEffect
+        return xi.effect.ASTRAL_FLOW
     end
 
     -- Find proper pet skill
@@ -63,7 +62,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     pet:useMobAbility(skillId)
 
-    return typeEffect
+    return xi.effect.ASTRAL_FLOW
 end
 
-return mobskill_object
+return mobskillObject

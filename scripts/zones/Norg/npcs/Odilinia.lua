@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Odilinia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

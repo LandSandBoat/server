@@ -9,7 +9,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -373.096863, y = -45.742077, z = 340.182159 },
     { x = -361.441864, y = -46.052444, z = 340.367371 },
@@ -305,15 +305,18 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("reported") ~= 1 and npc:atPoint(xi.path.get(path, 45)) then
+    if
+        npc:getLocalVar("reported") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 45))
+    then
         GetNPCByID(npc:getID() + 3):showText(npc, ID.text.PALCOMONDAU_REPORT)
         npc:setLocalVar("reported", 1)
-    elseif npc:atPoint(xi.path.last(path)) then
+    elseif npc:atPoint(xi.path.last(pathNodes)) then
         npc:setLocalVar("reported", 0)
     end
 end

@@ -6,17 +6,16 @@
 -- Recast Time: 00:10:00
 -- Duration: 00:01:00
 -----------------------------------
------------------------------------
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.geomancer.geoOnAbilityCheck(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     return xi.job_utils.geomancer.dematerialize(player, target, ability)
 end
 
-return ability_object
+return abilityObject

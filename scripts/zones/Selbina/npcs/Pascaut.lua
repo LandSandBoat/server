@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Pascaut
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

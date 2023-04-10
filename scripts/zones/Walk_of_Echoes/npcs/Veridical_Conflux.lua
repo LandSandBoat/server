@@ -16,7 +16,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 1004 and option == 0) then
+    if csid == 1004 and option == 0 then
         player:setPos(238, -8, -248, 0, 137)
     end
 end

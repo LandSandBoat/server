@@ -34,25 +34,25 @@ zones[xi.zone.NORTH_GUSTABERG] =
         SHINING_OBJECT_SLIPS_AWAY     = 7449,  -- The shining object slips through your fingers and is washed further down the stream.
         REACH_WATER_FROM_HERE         = 7456,  -- You can reach the water from here.
         CONQUEST                      = 7492,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA             = 7855,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7861,  -- The Goblin slipped away when you were not looking...
-        GARRISON_BASE                 = 7871,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8086,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8087,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8088,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8089,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8094,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 8125,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED             = 10416, -- New training regime registered!
-        VOIDWALKER_NO_MOB             = 11535, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 11536, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 11537, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 11538, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 11540, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 11541, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 11542, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 11543, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL         = 12489, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEMS_ITEMS_LA_LA             = 7843,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7849,  -- The Goblin slipped away when you were not looking...
+        GARRISON_BASE                 = 7859,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8074,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8075,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8076,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8077,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8082,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 8113,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED             = 10404, -- New training regime registered!
+        VOIDWALKER_NO_MOB             = 11523, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11524, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11525, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11526, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11528, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11529, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11530, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11531, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 12477, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -124,12 +124,12 @@ zones[xi.zone.NORTH_GUSTABERG] =
     {
         [17211865] = -- Blobdingnag
         {
-            17211871,-- Septic Boils
-            17211870,-- Septic Boils
-            17211869,-- Septic Boils
-            17211868,-- Septic Boils
-            17211867,-- Septic Boils
-            17211866,-- Septic Boils
+            17211871, -- Septic Boils
+            17211870, -- Septic Boils
+            17211869, -- Septic Boils
+            17211868, -- Septic Boils
+            17211867, -- Septic Boils
+            17211866, -- Septic Boils
         },
     },
 

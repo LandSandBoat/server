@@ -267,7 +267,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
         {
-            return (xirand::GetRandomNumber(100) < battleutils::GetBlockRate(PAttacker, PDefender));
+            return (xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender));
         }
         return false;
     }

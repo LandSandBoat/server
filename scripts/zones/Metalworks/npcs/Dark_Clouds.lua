@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Dark Clouds
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

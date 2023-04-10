@@ -2,10 +2,11 @@
 -- Nyzul Isle Global
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
+require("scripts/globals/appraisal")
 require("scripts/globals/items")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/appraisal")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
@@ -107,7 +108,7 @@ xi.nyzul.pathos =
 xi.nyzul.FloorLayout =
 {
     [0]  = {   -20, -0.5, -380 }, -- boss floors 20, 40, 60, 80
- -- [?]  = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
+--  [?]  = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
     [1]  = {   380, -0.5, -500 },
     [2]  = {   500, -0.5,  -20 },
     [3]  = {   500, -0.5,   60 },
@@ -125,13 +126,13 @@ xi.nyzul.FloorLayout =
     [15] = {  -459, -4.0, -540 },
     [16] = {  -465, -4.0, -340 },
     [17] = { 504.5,  0.0,  -60 },
- -- [18] = {   580,  0.0,  340 },
- -- [19] = {   455,  0.0, -140 },
- -- [20] = {   500,  0.0,   20 },
- -- [21] = {   500,    0,  380 },
- -- [22] = {   460,    0,  100 },
- -- [23] = {   100,    0, -380 },
- -- [24] = { -64.5,    0,   60 },
+--  [18] = {   580,  0.0,  340 },
+--  [19] = {   455,  0.0, -140 },
+--  [20] = {   500,  0.0,   20 },
+--  [21] = {   500,    0,  380 },
+--  [22] = {   460,    0,  100 },
+--  [23] = {   100,    0, -380 },
+--  [24] = { -64.5,    0,   60 },
 }
 
 xi.nyzul.floorCost =
@@ -164,51 +165,56 @@ xi.nyzul.pickMobs =
     {
         [40] = -- 20 and 40 floor Bosses
         {
-            ADAMANTOISE = 17092999,
-            FAFNIR      = 17093001,
+            ADAMANTOISE = ID.mob[51].ADAMANTOISE,
+            FAFNIR      = ID.mob[51].ADAMANTOISE + 2,
         },
         [100] = -- floors 60, 80 and 100 floor bosses
         {
-            KHIMAIRA = 17093002,
-            CERBERUS = 17093004,
+            KHIMAIRA = ID.mob[51].ADAMANTOISE + 3,
+            CERBERUS = ID.mob[51].ADAMANTOISE + 5,
         },
     },
 
     [1] = -- Enemy Leaders, can appear on all floors but %20 that are on objective
     {
-        MOKKE               = 17092944,
-        LONG_HORNED_CHARIOT = 17092968,
+        MOKKE               = ID.mob[51].MOKKE,
+        LONG_HORNED_CHARIOT = ID.mob[51].LONG_HORNED_CHARIOT,
     },
 
     [2] = -- Specified Enemies
     {
         [0] = -- Heraldic Imp x5
         {
-            17092969, 17092970, 17092971, 17092972, 17092973
+            ID.mob[51].OFFSET_SPECIFIED,     ID.mob[51].OFFSET_SPECIFIED + 1, ID.mob[51].OFFSET_SPECIFIED + 2,
+            ID.mob[51].OFFSET_SPECIFIED + 3, ID.mob[51].OFFSET_SPECIFIED + 4
         },
         [1] = -- Psycheflayer x5
         {
-            17092974, 17092975, 17092976, 17092977, 17092978
+            ID.mob[51].OFFSET_SPECIFIED + 5, ID.mob[51].OFFSET_SPECIFIED + 6, ID.mob[51].OFFSET_SPECIFIED + 7,
+            ID.mob[51].OFFSET_SPECIFIED + 8, ID.mob[51].OFFSET_SPECIFIED + 9
         },
         [2] = -- Poroggo Gent x5
         {
-            17092979, 17092980, 17092981, 17092982, 17092983
+            ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 11, ID.mob[51].OFFSET_SPECIFIED + 12,
+            ID.mob[51].OFFSET_SPECIFIED + 13, ID.mob[51].OFFSET_SPECIFIED + 14
         },
         [3] = -- Ebony Pudding x5
         {
-            17092984, 17092985, 17092986, 17092987, 17092988
+            ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 16, ID.mob[51].OFFSET_SPECIFIED + 17,
+            ID.mob[51].OFFSET_SPECIFIED + 18, ID.mob[51].OFFSET_SPECIFIED + 19
         },
         [4] = -- Qiqirn_Treasure_Hunter x2
         {
-            17092989, 17092990
+            ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21
         },
         [5] = -- Qiqirn_Archaeologist x3
         {
-            17092991, 17092992, 17092993
+            ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 23, ID.mob[51].OFFSET_SPECIFIED + 24
         },
         [6] = -- Racing_Chariot x5
         {
-            17092994, 17092995, 17092996, 17092997, 17092998
+            ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 26, ID.mob[51].OFFSET_SPECIFIED + 27,
+            ID.mob[51].OFFSET_SPECIFIED + 28, ID.mob[51].OFFSET_SPECIFIED + 29
         },
     },
 }
@@ -219,23 +225,28 @@ xi.nyzul.randomNMs =
     {
         [1] = -- floor 1 to 19 NM's
         {
-            17092824, 17092825, 17092826, 17092827, 17092828, 17092829, 17092830, 17092831, 17092832,
+            ID.mob[51].OFFSET_NM,     ID.mob[51].OFFSET_NM + 1, ID.mob[51].OFFSET_NM + 2, ID.mob[51].OFFSET_NM + 3, ID.mob[51].OFFSET_NM + 4,
+            ID.mob[51].OFFSET_NM + 5, ID.mob[51].OFFSET_NM + 6, ID.mob[51].OFFSET_NM + 7, ID.mob[51].OFFSET_NM + 8,
         },
         [2] = -- floor 21 to 39 NM's
         {
-            17092842, 17092843, 17092844, 17092845, 17092846, 17092847, 17092848, 17092849, 17092850,
+            ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 19, ID.mob[51].OFFSET_NM + 20, ID.mob[51].OFFSET_NM + 21, ID.mob[51].OFFSET_NM + 22,
+            ID.mob[51].OFFSET_NM + 23, ID.mob[51].OFFSET_NM + 24, ID.mob[51].OFFSET_NM + 25, ID.mob[51].OFFSET_NM + 26,
         },
         [3] = -- floor 41 to 59 NM's
         {
-            17092860, 17092861, 17092862, 17092863, 17092864, 17092865, 17092866, 17092867, 17092868,
+            ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 37, ID.mob[51].OFFSET_NM + 38, ID.mob[51].OFFSET_NM + 39, ID.mob[51].OFFSET_NM + 40,
+            ID.mob[51].OFFSET_NM + 41, ID.mob[51].OFFSET_NM + 42, ID.mob[51].OFFSET_NM + 43, ID.mob[51].OFFSET_NM + 44,
         },
         [4] = -- floor 61 to 79 NM's
         {
-            17092878, 17092879, 17092880, 17092881, 17092882, 17092883, 17092884, 17092885, 17092886,
+            ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 55, ID.mob[51].OFFSET_NM + 56, ID.mob[51].OFFSET_NM + 57, ID.mob[51].OFFSET_NM + 58,
+            ID.mob[51].OFFSET_NM + 59, ID.mob[51].OFFSET_NM + 60, ID.mob[51].OFFSET_NM + 61, ID.mob[51].OFFSET_NM + 62,
         },
         [5] = -- floor 81 to 99 NM's
         {
-            17092896, 17092897, 17092898, 17092899, 17092900, 17092901, 17092902, 17092903, 17092904,
+            ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 73, ID.mob[51].OFFSET_NM + 74, ID.mob[51].OFFSET_NM + 75, ID.mob[51].OFFSET_NM + 76,
+            ID.mob[51].OFFSET_NM + 77, ID.mob[51].OFFSET_NM + 78, ID.mob[51].OFFSET_NM + 79, ID.mob[51].OFFSET_NM + 80,
         },
     },
 
@@ -243,23 +254,28 @@ xi.nyzul.randomNMs =
     {
         [1] = -- floor 1 to 19 NM's
         {
-            17092833, 17092834, 17092835, 17092836, 17092837, 17092838, 17092839, 17092840, 17092841,
+            ID.mob[51].OFFSET_NM + 9,  ID.mob[51].OFFSET_NM + 10, ID.mob[51].OFFSET_NM + 11, ID.mob[51].OFFSET_NM + 12, ID.mob[51].OFFSET_NM + 13,
+            ID.mob[51].OFFSET_NM + 14, ID.mob[51].OFFSET_NM + 15, ID.mob[51].OFFSET_NM + 16, ID.mob[51].OFFSET_NM + 17,
         },
         [2] = -- floor 21 to 39 NM's
         {
-            17092851, 17092852, 17092853, 17092854, 17092855, 17092856, 17092857, 17092858, 17092859,
+            ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 28, ID.mob[51].OFFSET_NM + 29, ID.mob[51].OFFSET_NM + 30, ID.mob[51].OFFSET_NM + 31,
+            ID.mob[51].OFFSET_NM + 32, ID.mob[51].OFFSET_NM + 33, ID.mob[51].OFFSET_NM + 34, ID.mob[51].OFFSET_NM + 35,
         },
         [3] = -- floor 41 to 59 NM's
         {
-            17092869, 17092870, 17092871, 17092872, 17092873, 17092874, 17092875, 17092876, 17092877,
+            ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 46, ID.mob[51].OFFSET_NM + 47, ID.mob[51].OFFSET_NM + 48, ID.mob[51].OFFSET_NM + 49,
+            ID.mob[51].OFFSET_NM + 50, ID.mob[51].OFFSET_NM + 51, ID.mob[51].OFFSET_NM + 52, ID.mob[51].OFFSET_NM + 53,
         },
         [4] = -- floor 61 to 79 NM's
         {
-            17092887, 17092888, 17092889, 17092890, 17092891, 17092892, 17092893, 17092894, 17092895,
+            ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 64, ID.mob[51].OFFSET_NM + 65, ID.mob[51].OFFSET_NM + 66, ID.mob[51].OFFSET_NM + 67,
+            ID.mob[51].OFFSET_NM + 68, ID.mob[51].OFFSET_NM + 69, ID.mob[51].OFFSET_NM + 70, ID.mob[51].OFFSET_NM + 71,
         },
         [5] = -- floor 81 to 99 NM's
         {
-            17092905, 17092906, 17092907, 17092908, 17092909, 17092910, 17092911, 17092912, 17092913,
+            ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 82, ID.mob[51].OFFSET_NM + 83, ID.mob[51].OFFSET_NM + 84, ID.mob[51].OFFSET_NM + 85,
+            ID.mob[51].OFFSET_NM + 86, ID.mob[51].OFFSET_NM + 87, ID.mob[51].OFFSET_NM + 88, ID.mob[51].OFFSET_NM + 89,
         },
     },
 }
@@ -268,104 +284,120 @@ xi.nyzul.floorEntities = -- regular mobs by layout
 {
     [1] = -- Aquans
     {
-        17092631, 17092632, 17092633, 17092634, 17092635, 17092636,
-        17092637, 17092638, 17092639, 17092640, 17092641, 17092642
+        ID.mob[51].OFFSET_REGULAR,     ID.mob[51].OFFSET_REGULAR + 1, ID.mob[51].OFFSET_REGULAR + 2,  ID.mob[51].OFFSET_REGULAR + 3,
+        ID.mob[51].OFFSET_REGULAR + 4, ID.mob[51].OFFSET_REGULAR + 5, ID.mob[51].OFFSET_REGULAR + 6,  ID.mob[51].OFFSET_REGULAR + 7,
+        ID.mob[51].OFFSET_REGULAR + 8, ID.mob[51].OFFSET_REGULAR + 9, ID.mob[51].OFFSET_REGULAR + 10, ID.mob[51].OFFSET_REGULAR + 11
     },
 
     [2] = -- Amorphs
     {
-        17092643, 17092644, 17092645, 17092646, 17092647, 17092648,
-        17092649, 17092650, 17092651, 17092652, 17092653, 17092654
+        ID.mob[51].OFFSET_REGULAR + 12, ID.mob[51].OFFSET_REGULAR + 13, ID.mob[51].OFFSET_REGULAR + 14, ID.mob[51].OFFSET_REGULAR + 15,
+        ID.mob[51].OFFSET_REGULAR + 16, ID.mob[51].OFFSET_REGULAR + 17, ID.mob[51].OFFSET_REGULAR + 18, ID.mob[51].OFFSET_REGULAR + 19,
+        ID.mob[51].OFFSET_REGULAR + 20, ID.mob[51].OFFSET_REGULAR + 21, ID.mob[51].OFFSET_REGULAR + 22, ID.mob[51].OFFSET_REGULAR + 23
     },
 
     [3] = -- Arcana
     {
-        17092655, 17092656, 17092657, 17092658, 17092659, 17092660,
-        17092661, 17092662, 17092663, 17092664, 17092665, 17092666
+        ID.mob[51].OFFSET_REGULAR + 24, ID.mob[51].OFFSET_REGULAR + 25, ID.mob[51].OFFSET_REGULAR + 26, ID.mob[51].OFFSET_REGULAR + 27,
+        ID.mob[51].OFFSET_REGULAR + 28, ID.mob[51].OFFSET_REGULAR + 29, ID.mob[51].OFFSET_REGULAR + 30, ID.mob[51].OFFSET_REGULAR + 31,
+        ID.mob[51].OFFSET_REGULAR + 32, ID.mob[51].OFFSET_REGULAR + 33, ID.mob[51].OFFSET_REGULAR + 34, ID.mob[51].OFFSET_REGULAR + 35
     },
 
     [4] = -- Undead
     {
-        17092667, 17092668, 17092669, 17092670, 17092671, 17092672,
-        17092673, 17092674, 17092675, 17092676, 17092677, 17092678
+        ID.mob[51].OFFSET_REGULAR + 36, ID.mob[51].OFFSET_REGULAR + 37, ID.mob[51].OFFSET_REGULAR + 38, ID.mob[51].OFFSET_REGULAR + 39,
+        ID.mob[51].OFFSET_REGULAR + 40, ID.mob[51].OFFSET_REGULAR + 41, ID.mob[51].OFFSET_REGULAR + 42, ID.mob[51].OFFSET_REGULAR + 43,
+        ID.mob[51].OFFSET_REGULAR + 44, ID.mob[51].OFFSET_REGULAR + 45, ID.mob[51].OFFSET_REGULAR + 46, ID.mob[51].OFFSET_REGULAR + 47
     },
 
     [5] = -- Vermin
     {
-        17092679, 17092680, 17092681, 17092682, 17092683, 17092684,
-        17092685, 17092686, 17092687, 17092688, 17092689, 17092690
+        ID.mob[51].OFFSET_REGULAR + 48, ID.mob[51].OFFSET_REGULAR + 49, ID.mob[51].OFFSET_REGULAR + 50, ID.mob[51].OFFSET_REGULAR + 51,
+        ID.mob[51].OFFSET_REGULAR + 52, ID.mob[51].OFFSET_REGULAR + 53, ID.mob[51].OFFSET_REGULAR + 54, ID.mob[51].OFFSET_REGULAR + 55,
+        ID.mob[51].OFFSET_REGULAR + 56, ID.mob[51].OFFSET_REGULAR + 57, ID.mob[51].OFFSET_REGULAR + 58, ID.mob[51].OFFSET_REGULAR + 59
     },
 
     [6] = -- Demons
     {
-        17092691, 17092692, 17092693, 17092694, 17092695, 17092696,
-        17092697, 17092698, 17092699, 17092700, 17092701, 17092702
+        ID.mob[51].OFFSET_REGULAR + 60, ID.mob[51].OFFSET_REGULAR + 61, ID.mob[51].OFFSET_REGULAR + 62, ID.mob[51].OFFSET_REGULAR + 63,
+        ID.mob[51].OFFSET_REGULAR + 64, ID.mob[51].OFFSET_REGULAR + 65, ID.mob[51].OFFSET_REGULAR + 66, ID.mob[51].OFFSET_REGULAR + 67,
+        ID.mob[51].OFFSET_REGULAR + 68, ID.mob[51].OFFSET_REGULAR + 69, ID.mob[51].OFFSET_REGULAR + 70, ID.mob[51].OFFSET_REGULAR + 71
     },
 
     [7] = -- Dragons
     {
-        17092703, 17092704, 17092705, 17092706, 17092707, 17092708,
-        17092709, 17092710, 17092711, 17092712, 17092713, 17092714
+        ID.mob[51].OFFSET_REGULAR + 72, ID.mob[51].OFFSET_REGULAR + 73, ID.mob[51].OFFSET_REGULAR + 74, ID.mob[51].OFFSET_REGULAR + 75,
+        ID.mob[51].OFFSET_REGULAR + 76, ID.mob[51].OFFSET_REGULAR + 77, ID.mob[51].OFFSET_REGULAR + 78, ID.mob[51].OFFSET_REGULAR + 79,
+        ID.mob[51].OFFSET_REGULAR + 80, ID.mob[51].OFFSET_REGULAR + 81, ID.mob[51].OFFSET_REGULAR + 82, ID.mob[51].OFFSET_REGULAR + 83
     },
 
     [8] = -- Birds
     {
-        17092715, 17092716, 17092717, 17092718, 17092719, 17092720,
-        17092721, 17092722, 17092723, 17092724, 17092725, 17092726
+        ID.mob[51].OFFSET_REGULAR + 84, ID.mob[51].OFFSET_REGULAR + 85, ID.mob[51].OFFSET_REGULAR + 86, ID.mob[51].OFFSET_REGULAR + 87,
+        ID.mob[51].OFFSET_REGULAR + 88, ID.mob[51].OFFSET_REGULAR + 89, ID.mob[51].OFFSET_REGULAR + 90, ID.mob[51].OFFSET_REGULAR + 91,
+        ID.mob[51].OFFSET_REGULAR + 92, ID.mob[51].OFFSET_REGULAR + 93, ID.mob[51].OFFSET_REGULAR + 94, ID.mob[51].OFFSET_REGULAR + 95
     },
 
     [9] = -- Beasts
     {
-        17092727, 17092728, 17092729, 17092730, 17092731, 17092732,
-        17092733, 17092734, 17092735, 17092736, 17092737, 17092738
+        ID.mob[51].OFFSET_REGULAR + 96,  ID.mob[51].OFFSET_REGULAR + 97,  ID.mob[51].OFFSET_REGULAR + 98,  ID.mob[51].OFFSET_REGULAR + 99,
+        ID.mob[51].OFFSET_REGULAR + 100, ID.mob[51].OFFSET_REGULAR + 101, ID.mob[51].OFFSET_REGULAR + 102, ID.mob[51].OFFSET_REGULAR + 103,
+        ID.mob[51].OFFSET_REGULAR + 104, ID.mob[51].OFFSET_REGULAR + 105, ID.mob[51].OFFSET_REGULAR + 106, ID.mob[51].OFFSET_REGULAR + 107
     },
 
     [10] = -- Plantoids
     {
-        17092739, 17092740, 17092741, 17092742, 17092743, 17092744,
-        17092745, 17092746, 17092747, 17092748, 17092749, 17092750
+        ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 109, ID.mob[51].OFFSET_REGULAR + 110, ID.mob[51].OFFSET_REGULAR + 111,
+        ID.mob[51].OFFSET_REGULAR + 112, ID.mob[51].OFFSET_REGULAR + 113, ID.mob[51].OFFSET_REGULAR + 114, ID.mob[51].OFFSET_REGULAR + 115,
+        ID.mob[51].OFFSET_REGULAR + 116, ID.mob[51].OFFSET_REGULAR + 117, ID.mob[51].OFFSET_REGULAR + 118, ID.mob[51].OFFSET_REGULAR + 119
     },
 
     [11] =  -- Lizards
     {
-        17092751, 17092752, 17092753, 17092754, 17092755, 17092756,
-        17092757, 17092758, 17092759, 17092760, 17092761, 17092762
+        ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 121, ID.mob[51].OFFSET_REGULAR + 122, ID.mob[51].OFFSET_REGULAR + 123,
+        ID.mob[51].OFFSET_REGULAR + 124, ID.mob[51].OFFSET_REGULAR + 125, ID.mob[51].OFFSET_REGULAR + 126, ID.mob[51].OFFSET_REGULAR + 127,
+        ID.mob[51].OFFSET_REGULAR + 128, ID.mob[51].OFFSET_REGULAR + 129, ID.mob[51].OFFSET_REGULAR + 130, ID.mob[51].OFFSET_REGULAR + 131
     },
 
     [12] = -- Amorphs
     {
-        17092763, 17092764, 17092765, 17092766, 17092767, 17092768,
-        17092769, 17092770, 17092771, 17092772, 17092773, 17092774
+        ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 133, ID.mob[51].OFFSET_REGULAR + 134, ID.mob[51].OFFSET_REGULAR + 135,
+        ID.mob[51].OFFSET_REGULAR + 136, ID.mob[51].OFFSET_REGULAR + 137, ID.mob[51].OFFSET_REGULAR + 138, ID.mob[51].OFFSET_REGULAR + 139,
+        ID.mob[51].OFFSET_REGULAR + 140, ID.mob[51].OFFSET_REGULAR + 141, ID.mob[51].OFFSET_REGULAR + 142, ID.mob[51].OFFSET_REGULAR + 143
     },
 
     [13] = -- Mixed
     {
-        17092775, 17092776, 17092777, 17092778, 17092779, 17092780,
-        17092781, 17092782, 17092783, 17092784, 17092785, 17092786
+        ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 145, ID.mob[51].OFFSET_REGULAR + 146, ID.mob[51].OFFSET_REGULAR + 147,
+        ID.mob[51].OFFSET_REGULAR + 148, ID.mob[51].OFFSET_REGULAR + 149, ID.mob[51].OFFSET_REGULAR + 150, ID.mob[51].OFFSET_REGULAR + 151,
+        ID.mob[51].OFFSET_REGULAR + 152, ID.mob[51].OFFSET_REGULAR + 153, ID.mob[51].OFFSET_REGULAR + 154, ID.mob[51].OFFSET_REGULAR + 155
     },
 
     [14] = -- Mixed
     {
-        17092787, 17092788, 17092789, 17092790, 17092791, 17092792,
-        17092793, 17092794, 17092795, 17092796, 17092797, 17092798
+        ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 157, ID.mob[51].OFFSET_REGULAR + 158, ID.mob[51].OFFSET_REGULAR + 159,
+        ID.mob[51].OFFSET_REGULAR + 160, ID.mob[51].OFFSET_REGULAR + 161, ID.mob[51].OFFSET_REGULAR + 162, ID.mob[51].OFFSET_REGULAR + 163,
+        ID.mob[51].OFFSET_REGULAR + 164, ID.mob[51].OFFSET_REGULAR + 165, ID.mob[51].OFFSET_REGULAR + 166, ID.mob[51].OFFSET_REGULAR + 167
     },
 
     [15] = -- Amorphs
     {
-        17092799, 17092800, 17092801, 17092802, 17092803, 17092804,
-        17092805, 17092806, 17092807, 17092808, 17092809, 17092810
+        ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 169, ID.mob[51].OFFSET_REGULAR + 170, ID.mob[51].OFFSET_REGULAR + 171,
+        ID.mob[51].OFFSET_REGULAR + 172, ID.mob[51].OFFSET_REGULAR + 173, ID.mob[51].OFFSET_REGULAR + 174, ID.mob[51].OFFSET_REGULAR + 175,
+        ID.mob[51].OFFSET_REGULAR + 176, ID.mob[51].OFFSET_REGULAR + 177, ID.mob[51].OFFSET_REGULAR + 178, ID.mob[51].OFFSET_REGULAR + 179
     },
 
     [16] = -- Arcana
     {
-        17092811, 17092812, 17092813, 17092814, 17092815, 17092816,
-        17092817, 17092818, 17092819, 17092820, 17092821, 17092822
+        ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 181, ID.mob[51].OFFSET_REGULAR + 182, ID.mob[51].OFFSET_REGULAR + 183,
+        ID.mob[51].OFFSET_REGULAR + 184, ID.mob[51].OFFSET_REGULAR + 185, ID.mob[51].OFFSET_REGULAR + 186, ID.mob[51].OFFSET_REGULAR + 187,
+        ID.mob[51].OFFSET_REGULAR + 188, ID.mob[51].OFFSET_REGULAR + 189, ID.mob[51].OFFSET_REGULAR + 190, ID.mob[51].OFFSET_REGULAR + 191
     },
 
     [17] = -- Gears
     {
-        start = 17092916,
-        stop  = 17092921,
+        start = ID.mob[51].OFFSET_GEARS,
+        stop  = ID.mob[51].OFFSET_GEARS + 5
     },
 }
 
@@ -461,10 +493,10 @@ xi.nyzul.appraisalItems =
 -- Local functions
 local function getTokenRate(instance)
     local partySize = instance:getLocalVar("partySize")
-    local rate       = 1
+    local rate      = 1
 
     if partySize > 3 then
-        rate = rate - ((partySize - 3 ) * .1)
+        rate = rate - (partySize - 3) * 0.1
     end
 
     return rate
@@ -477,7 +509,7 @@ local function calculateTokens(instance)
     local floorBonus      = 0
 
     if relativeFloor > 1 then
-        floorBonus = (10 * math.floor((relativeFloor - 1) / 5))
+        floorBonus = 10 * math.floor((relativeFloor - 1) / 5)
     end
 
     potentialTokens = math.floor(potentialTokens + (200 + floorBonus) * rate)
@@ -504,7 +536,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
         if npc:getID() == cofferID and npc:getLocalVar("opened") == 0 then
             -- Appraisal Items
-            local mobOffset = npc:getLocalVar("appraisalItem") - 17092723
+            local mobOffset = npc:getLocalVar("appraisalItem") - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
 
             if mobOffset == 166 or mobOffset == 187 then
                 mobOffset = 108
@@ -533,9 +565,16 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
 
             npc:entityAnimationPacket("open")
             npc:setLocalVar("opened", 1)
-            npc:untargetable(true)
-            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:resetLocalVars() npcvar:setAnimationSub(0) end)
+            npc:setUntargetable(true)
+            npc:queue(10000, function(npcvar)
+                npcvar:entityAnimationPacket("kesu")
+            end)
+
+            npc:queue(12000, function(npcvar)
+                npcvar:setStatus(xi.status.DISAPPEAR)
+                npcvar:resetLocalVars()
+                npcvar:setAnimationSub(0)
+            end)
 
             break
         end
@@ -584,10 +623,10 @@ xi.nyzul.tempBoxPickItems = function(npc)
         [22] = { itemID = xi.items.DUSTY_ELIXIR,               amount = 1                 }
     }
 
-    local random       = math.random(1, #tempBoxItems)
-    local item         = tempBoxItems[random]
-    local item2_random = math.random(1, 10)
-    local item3_random = math.random(1, 10)
+    local random      = math.random(1, #tempBoxItems)
+    local item        = tempBoxItems[random]
+    local item2Random = math.random(1, 10)
+    local item3Random = math.random(1, 10)
 
     if npc:getLocalVar("itemID_1") == 0 then
         npc:setLocalVar("itemID_1", item.itemID)
@@ -595,7 +634,7 @@ xi.nyzul.tempBoxPickItems = function(npc)
         table.remove(tempBoxItems, random)
     end
 
-    if item2_random > 4 then
+    if item2Random > 4 then
         random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
@@ -604,8 +643,8 @@ xi.nyzul.tempBoxPickItems = function(npc)
         table.remove(tempBoxItems, random)
     end
 
-    if item2_random > 4 and item3_random > 8 then
-        random = math.random(1,#tempBoxItems)
+    if item2Random > 4 and item3Random > 8 then
+        random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
         npc:setLocalVar("itemID_3", item.itemID)
@@ -615,42 +654,65 @@ xi.nyzul.tempBoxPickItems = function(npc)
 end
 
 xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
-    local ID = require("scripts/zones/"..player:getZoneName().."/IDs")
-
     if csid == 2 then
-        local item_1 = npc:getLocalVar("itemID_1")
-        local item_2 = npc:getLocalVar("itemID_2")
-        local item_3 = npc:getLocalVar("itemID_3")
+        local item1 = npc:getLocalVar("itemID_1")
+        local item2 = npc:getLocalVar("itemID_2")
+        local item3 = npc:getLocalVar("itemID_3")
 
-        if option == 1 and item_1 > 0 and npc:getLocalVar("itemAmount_1") > 0 then
-            if not player:hasItem(item_1, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_1)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_1)
+        if
+            option == 1 and
+            item1 > 0 and
+            npc:getLocalVar("itemAmount_1") > 0
+        then
+            if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item1)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
                 npc:setLocalVar("itemAmount_1", npc:getLocalVar("itemAmount_1") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 2 and item_2 > 0 and npc:getLocalVar("itemAmount_2") > 0 then
-            if not player:hasItem(item_2, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_2)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_2)
+
+        elseif
+            option == 2 and
+            item2 > 0 and
+            npc:getLocalVar("itemAmount_2") > 0
+        then
+            if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item2)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
                 npc:setLocalVar("itemAmount_2", npc:getLocalVar("itemAmount_2") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 3 and item_3 > 0 and npc:getLocalVar("itemAmount_3") > 0 then
-            if not player:hasItem(item_3, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_3)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_3)
+
+        elseif
+            option == 3 and
+            item3 > 0 and
+            npc:getLocalVar("itemAmount_3") > 0
+        then
+            if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item3)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
                 npc:setLocalVar("itemAmount_3", npc:getLocalVar("itemAmount_3") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
         end
 
-        if npc:getLocalVar("itemAmount_1") == 0 and npc:getLocalVar("itemAmount_2") == 0 and npc:getLocalVar("itemAmount_3") == 0 then
-            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:setAnimationSub(0) npcvar:resetLocalVars() end)
+        if
+            npc:getLocalVar("itemAmount_1") == 0 and
+            npc:getLocalVar("itemAmount_2") == 0 and
+            npc:getLocalVar("itemAmount_3") == 0
+        then
+            npc:queue(10000, function(npcvar)
+                npcvar:entityAnimationPacket("kesu")
+            end)
+
+            npc:queue(12000, function(npcvar)
+                npcvar:setStatus(xi.status.DISAPPEAR)
+                npcvar:setAnimationSub(0)
+                npcvar:resetLocalVars()
+            end)
         end
     end
 end
@@ -666,7 +728,7 @@ xi.nyzul.clearChests = function(instance)
         end
     end
 
-    if xi.settings.ENABLE_NYZUL_CASKETS == 1 then
+    if xi.settings.main.ENABLE_NYZUL_CASKETS then
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
             local casket = GetNPCByID(casketID, instance)
 
@@ -688,14 +750,20 @@ xi.nyzul.handleRunicKey = function(mob)
 
         for _, entity in pairs(chars) do
             -- Does players Runic Disk have data saved to a floor of entering or higher
-            if entity:getVar("NyzulFloorProgress") + 1 >= startFloor and not entity:hasKeyItem(xi.ki.RUNIC_KEY) then
-                if xi.settings.RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
+            if
+                entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
+                not entity:hasKeyItem(xi.ki.RUNIC_KEY)
+            then
+                -- On early version only initiator of floor got progress saves and key credit
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
                         end
                     end
-                else -- Anyone can get a key on 100 win if disk passed check
+
+                -- Anyone can get a key on 100 win if disk passed check
+                else
                     npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY)
                 end
             end
@@ -704,10 +772,8 @@ xi.nyzul.handleRunicKey = function(mob)
 end
 
 xi.nyzul.handleProgress = function(instance, progress)
-    local chars        = instance:getChars()
-    local stage        = instance:getStage()
-    local currectFloor = instance:getLocalVar("Nyzul_Current_Floor")
-    local complete     = false
+    local stage      = instance:getStage()
+    local isComplete = false
 
     if
         ((stage == xi.nyzul.objective.FREE_FLOOR or
@@ -719,18 +785,21 @@ xi.nyzul.handleProgress = function(instance, progress)
         ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
         progress >= instance:getLocalVar("Eliminate"))
     then
+        local chars        = instance:getChars()
+        local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+
         instance:setProgress(0)
         instance:setLocalVar("Eliminate", 0)
         instance:setLocalVar("potential_tokens", calculateTokens(instance))
 
         for _, players in ipairs(chars) do
-            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currectFloor)
+            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currentFloor)
         end
 
-        complete = true
+        isComplete = true
     end
 
-    return complete
+    return isComplete
 end
 
 xi.nyzul.enemyLeaderKill = function(mob)
@@ -758,13 +827,17 @@ end
 
 xi.nyzul.specifiedEnemyKill = function(mob)
     local instance = mob:getInstance()
+    local stage    = instance:getStage()
 
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
+    -- Eliminate specified enemy
+    if stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
         if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
             instance:setProgress(15)
             instance:setLocalVar("Nyzul_Specified_Enemy", 0)
         end
-    elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+
+    -- Eliminiate all enemies
+    elseif stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
@@ -809,7 +882,7 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
 
     -- Every NM can randomly drop a vigil weapon
-    elseif math.random(100) <= 20 and xi.settings.ENABLE_VIGIL_DROPS == 1 then
+    elseif math.random(1, 100) <= 20 and xi.settings.main.ENABLE_VIGIL_DROPS then
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
     end
 end
@@ -818,8 +891,9 @@ xi.nyzul.spawnChest = function(mob, player)
     local instance = mob:getInstance()
     local mobID    = mob:getID()
 
+    -- NM chest spawn.
     if
-        mobID >= ID.mob[51].BAT_EYE and
+        mobID >= ID.mob[51].OFFSET_NM and
         mobID <= ID.mob[51].TAISAIJIN
     then
         xi.nyzul.vigilWeaponDrop(player, mob)
@@ -829,7 +903,7 @@ xi.nyzul.spawnChest = function(mob, player)
 
             if coffer:getStatus() == xi.status.DISAPPEAR then
                 local pos = mob:getPos()
-                coffer:untargetable(false)
+                coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
                 coffer:setLocalVar("appraisalItem", mobID)
                 coffer:setStatus(xi.status.NORMAL)
@@ -837,8 +911,13 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
-        if math.random(100) <= 6 then
+
+    -- NM casket spawn.
+    elseif
+        mobID < ID.mob[51].ADAMANTOISE and
+        xi.settings.main.ENABLE_NYZUL_CASKETS
+    then
+        if math.random(1, 100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
 
@@ -856,7 +935,7 @@ end
 
 xi.nyzul.removePathos = function(instance)
     if instance:getLocalVar("floorPathos") > 0 then
-        for i = 1, 29 do
+        for i = 1, #xi.nyzul.pathos do
             if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
                 local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
@@ -871,7 +950,7 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos",utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
+                instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
             end
         end
     end
@@ -935,49 +1014,60 @@ xi.nyzul.addPenalty = function(mob)
 
     -- Status effect penalty
     else
+        -- Create table with negative pathos that are not currently set.
+        local availablePathos = {}
+
         for i = 1, 17 do
-            local randomEffect = math.random(1, 17)
+            if not utils.mask.getBit(pathos, i) then
+                table.insert(availablePathos, i)
+            end
+        end
 
-            if not utils.mask.getBit(pathos, randomEffect) then
-                instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
-                pathos = xi.nyzul.pathos[randomEffect]
-                local effect = pathos.effect
-                local power  = pathos.power
+        -- Pick a random pathos to apply from the available pathos table.
+        if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
+            local randomEffect = availablePathos[math.random(1, #availablePathos)]
 
-                for _, player in pairs(chars) do
-                    if effect == xi.effect.IMPAIRMENT or effect == xi.effect.OMERTA or effect == xi.effect.DEBILITATION then
-                        if player:hasStatusEffect(effect) then
-                            local statusEffect = player:getStatusEffect(effect)
-                            local effectPower  = statusEffect:getPower()
-                            power              = bit.bor(effectPower, power)
-                        end
-                    end
+            instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
+            pathos = xi.nyzul.pathos[randomEffect]
 
-                    player:addStatusEffect(effect, power, 0, 0)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                    player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
-                    player:messageSpecial(ID.text.MALFUNCTION)
-                    player:messageSpecial(pathos.textId)
+            local effect = pathos.effect
+            local power  = pathos.power
 
-                    if player:hasPet() then
-                        local pet = player:getPet()
-                        pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                        pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+            for _, player in pairs(chars) do
+                if
+                    effect == xi.effect.IMPAIRMENT or
+                    effect == xi.effect.OMERTA or
+                    effect == xi.effect.DEBILITATION
+                then
+                    if player:hasStatusEffect(effect) then
+                        local statusEffect = player:getStatusEffect(effect)
+                        local effectPower  = statusEffect:getPower()
+                        power              = bit.bor(effectPower, power)
                     end
                 end
 
-                break
+                player:addStatusEffect(effect, power, 0, 0)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                player:messageSpecial(ID.text.MALFUNCTION)
+                player:messageSpecial(pathos.textId)
+
+                if player:hasPet() then
+                    local pet = player:getPet()
+                    pet:addStatusEffectEx(effect, effect, power, 0, 0)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                    pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                end
             end
         end
     end
 end
 
 xi.nyzul.getTokenPenalty = function(instance)
-    local floor_penalities = instance:getLocalVar("tokenPenalty")
-    local rate             = getTokenRate(instance)
+    local floorPenalities = instance:getLocalVar("tokenPenalty")
+    local rate            = getTokenRate(instance)
 
-    return math.floor(117 * rate) * floor_penalities
+    return math.floor(117 * rate * floorPenalities)
 end

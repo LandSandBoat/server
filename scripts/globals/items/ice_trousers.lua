@@ -6,14 +6,14 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.ICE_SPIKES, 7, 0, 180)
 end
 
-return item_object
+return itemObject

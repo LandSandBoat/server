@@ -11,11 +11,9 @@ local ID = require("scripts/zones/Al_Zahbi/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 4)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(223, 8, 0, 0, 0, 188, 0, 8, 0)
             else
@@ -26,11 +24,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 4)
     local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
-    if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
+        if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
             player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, 2184)
         else
             player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, 2184)

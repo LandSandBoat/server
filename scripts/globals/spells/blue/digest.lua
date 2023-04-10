@@ -12,53 +12,27 @@
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
 -----------------------------------
-require("scripts/globals/magic")
+require("scripts/globals/bluemagic")
+require("scripts/globals/settings")
 require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
-    local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    --get resist multiplier (1x if no resist)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
-    params.attribute = xi.mod.MND
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
-    --get the resisted damage
-    dmg = dmg*resist
-    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-    --add in final adjustments
-
-    if (dmg < 0) then
-        dmg = 0
-    end
-
-    if (target:isUndead()) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        return dmg
-    end
-
-    if (target:getHP() < dmg) then
-        dmg = target:getHP()
-    end
-
+    params.ecosystem = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
-    dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
-    caster:addHP(dmg)
+    params.diff = 0 -- no stat increases magic accuracy
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.dmgMultiplier = 5
 
-    return dmg
+    return xi.spells.blue.useDrainSpell(caster, target, spell, params, 0, false)
 end
 
-return spell_object
+return spellObject

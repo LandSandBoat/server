@@ -13,20 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local roz = player:getCurrentMission(xi.mission.log_id.ZILART)
-    local rozStat = player:getMissionStatus(xi.mission.log_id.ZILART)
-
     if player:getZPos() < 200 then
-        if
-            roz ~= xi.mission.id.zilart.NONE and
-            (
-                roz > xi.mission.id.zilart.THE_GATE_OF_THE_GODS or
-                (
-                    roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and
-                    rozStat > 0
-                )
-            )
-        then
+        if player:getCurrentMission(xi.mission.log_id.ZILART) >= xi.mission.id.zilart.THE_GATE_OF_THE_GODS then
             player:startEvent(10)
         else
             player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

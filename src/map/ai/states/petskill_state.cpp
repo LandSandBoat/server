@@ -135,12 +135,14 @@ void CPetSkillState::Cleanup(time_point tick)
         action_t action;
         action.id         = m_PEntity->id;
         action.actiontype = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid   = 28787;
 
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = m_PEntity->id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = m_PSkill->getID();
+        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
+        actionTarget.reaction        = REACTION::HIT;
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }

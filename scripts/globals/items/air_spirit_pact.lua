@@ -3,14 +3,16 @@
 -- Air Spirit Pact
 -- Teaches the summoning magic Air Spirit
 -----------------------------------
-local item_object = {}
+require("scripts/globals/spell_data")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    return target:canLearnSpell(290)
+itemObject.onItemCheck = function(target)
+    return target:canLearnSpell(xi.magic.spell.AIR_SPIRIT)
 end
 
-item_object.onItemUse = function(target)
-    target:addSpell(290)
+itemObject.onItemUse = function(target)
+    target:addSpell(xi.magic.spell.AIR_SPIRIT)
 end
 
-return item_object
+return itemObject

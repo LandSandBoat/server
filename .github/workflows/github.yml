@@ -1,0 +1,62 @@
+name: "github"
+
+on:
+  pull_request_target:
+    types: [opened]
+  issues:
+    types: [opened]
+
+jobs:
+  Check_Checkboxes:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            function count_instances(string, word)
+            {
+                return string.split(word).length - 1;
+            }
+
+            const event_type = "${{ github.event_name }}"
+            var   body_text  = ""
+            var   type_name  = ""
+
+            if (event_type === "pull_request_target")
+            {
+                body_text = context.payload.pull_request.body
+                type_name = "PR"
+            }
+            else // issue
+            {
+                body_text = context.payload.issue.body
+                type_name = "report"
+            }
+
+            // Remove block comments
+            body_text = body_text.replaceAll(/<!--.*-->/g, "")
+
+            console.log(`github.event_name: ${event_type}`)
+            console.log(`body_text: ${body_text}`)
+            console.log(`type_name: ${type_name}`)
+
+            // Count the filled in checkboxes:
+            // 1x pre-filled
+            // 2x to be filled
+            // Minimum total: 3
+            const checkbox_count = count_instances(body_text, "[x]")
+            if (checkbox_count < 3)
+            {
+                console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
+                const result = await github.rest.issues.createComment({
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly completed all of the checkboxes in the pre-filled template.`
+                 })
+            }
+            else
+            {
+                console.log(`Found ${checkbox_count} completed checkboxes. All is well.`)
+            }

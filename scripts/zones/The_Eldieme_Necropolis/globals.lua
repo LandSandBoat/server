@@ -46,12 +46,12 @@ local eldiemeGlobal =
     skullTrade = function(player, npc)
         local candleCount =
         {
-             ID.text.SKULL_FIVE_REMAIN,
-             ID.text.SKULL_FOUR_REMAIN,
+            ID.text.SKULL_FIVE_REMAIN,
+            ID.text.SKULL_FOUR_REMAIN,
             ID.text.SKULL_THREE_REMAIN,
-              ID.text.SKULL_TWO_REMAIN,
-              ID.text.SKULL_ONE_REMAIN,
-                   ID.text.SKULL_SPAWN,
+            ID.text.SKULL_TWO_REMAIN,
+            ID.text.SKULL_ONE_REMAIN,
+            ID.text.SKULL_SPAWN,
         }
 
         local tradeCount = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullTradeCount") -- Track how many candles have been lit
@@ -69,6 +69,7 @@ local eldiemeGlobal =
                 for skull = 1, 7 do
                     SpawnMob(ID.mob.SKULL_OFFSET + skull)
                 end
+
                 break
             elseif tradeCount == i and os.time() < tradeWindow and os.time() > active then -- Candle trades 2 through 6
                 GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", i + 1)

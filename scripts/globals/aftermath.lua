@@ -69,38 +69,147 @@ xi.aftermath.effects =
     -----------------------------------
     [29] = -- Conqueror, Glanzfaust, Vajra, Burtgang, Liberator, Aymur, Kogarasumaru, Nagi, Ryunohige, Nirvana, Kenkonken, Terpsichore
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.ATT, function(tp) return math.floor(2 * tp / 50 - 60) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end } },
-        duration = { 60, 90, 120 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.ATT,
+                function(tp)
+                    return math.floor(2 * tp / 50 - 60)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end
+            }
+        },
+
+        duration = { 60, 90, 120 },
     },
+
     [30] = -- Yagrush, Carnwenhan
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.ACC, function(tp) return math.floor(tp / 100 - 10) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end } },
-        duration = { 180, 90, 120 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 100 - 10)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end
+            },
+        },
+
+        duration = { 180, 90, 120 },
     },
+
     [31] = -- Laevateinn, Murgleis, Tupsimati
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.MATT, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end } },
-        duration = { 180, 180, 120 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.MATT,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end
+            }
+        },
+
+        duration = { 180, 180, 120 },
     },
+
     [32] = -- Tizona
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.MACC, function(tp) return math.floor(tp / 100 - 10) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end } },
-        duration = { 60, 90, 120 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 100 - 10)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end
+            }
+        },
+
+        duration = { 60, 90, 120 },
     },
+
     [33] = -- Gastraphetes, Death Penalty
     {
-        mods = { { xi.mod.RACC, function(tp) return math.floor(tp / 100) end },
-                 { xi.mod.RATT, function(tp) return math.floor(2 * tp / 50 - 60) end },
-                 { xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED, function(tp) return 40 end } },
-        duration = { 60, 90, 120 }
+        mods =
+        {
+            {
+                xi.mod.RACC,
+                function(tp)
+                    return math.floor(tp / 100)
+                end
+            },
+
+            {
+                xi.mod.RATT,
+                function(tp)
+                    return math.floor(2 * tp / 50 - 60)
+                end
+            },
+
+            {
+                xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED,
+                function(tp)
+                    return 40
+                end
+            }
+        },
+
+        duration = { 60, 90, 120 },
     },
 
     -----------------------------------
@@ -108,38 +217,147 @@ xi.aftermath.effects =
     -----------------------------------
     [34] = -- Conqueror, Glanzfaust, Vajra, Burtgang, Liberator, Aymur, Kogarasumaru, Nagi, Ryunohige, Nirvana, Kenkonken, Terpsichore
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(3 * tp / 200) end },
-                 { xi.mod.ATT, function(tp) return math.floor(3 * tp / 50 - 90) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 60 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(3 * tp / 200)
+                end
+            },
+
+            {
+                xi.mod.ATT,
+                function(tp)
+                    return math.floor(3 * tp / 50 - 90)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 60
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
+
     [35] = -- Yagrush, Carnwenhan
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(3 * tp / 200) end },
-                 { xi.mod.ACC, function(tp) return math.floor(3 * tp / 200 - 15) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 60 end } },
-        duration = { 270, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(3 * tp / 200)
+                end
+            },
+
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(3 * tp / 200 - 15)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 60
+                end
+            }
+        },
+
+        duration = { 270, 120, 180 },
     },
+
     [36] = -- Laevateinn, Murgleis, Tupsimati
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(3 * tp / 200) end },
-                 { xi.mod.MATT, function(tp) return math.floor(tp / 50 - 20) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 60 end } },
-        duration = { 270, 270, 180 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(3 * tp / 200)
+                end
+            },
+
+            {
+                xi.mod.MATT,
+                function(tp)
+                    return math.floor(tp / 50 - 20)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 60
+                end
+            }
+        },
+
+        duration = { 270, 270, 180 },
     },
+
     [37] = -- Tizona
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(3 * tp / 200) end },
-                 { xi.mod.MACC, function(tp) return math.floor(3 * tp / 200 - 15) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 60 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(3 * tp / 200)
+                end
+            },
+
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(3 * tp / 200 - 15)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 60
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
+
     [38] = -- Gastraphetes, Death Penalty
     {
-        mods = { { xi.mod.RACC, function(tp) return math.floor(tp / 50) end },
-                 { xi.mod.RATT, function(tp) return math.floor(3 * tp / 50 - 90) end },
-                 { xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED, function(tp) return 60 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.RACC,
+                function(tp)
+                    return math.floor(tp / 50)
+                end
+            },
+
+            {
+                xi.mod.RATT,
+                function(tp)
+                    return math.floor(3 * tp / 50 - 90)
+                end
+            },
+
+            {
+                xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED,
+                function(tp)
+                    return 60
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
 
     -----------------------------------
@@ -147,38 +365,172 @@ xi.aftermath.effects =
     -----------------------------------
     [39] = -- Conqueror, Glanzfaust, Vajra, Burtgang, Liberator, Aymur, Kogarasumaru, Nagi, Ryunohige, Nirvana, Kenkonken, Terpsichore
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(tp / 50 + 10) end },
-                 { xi.mod.ATT, function(tp) return math.floor(tp * 0.6 - 80) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end, xi.mod.MYTHIC_OCC_ATT_THRICE, function(tp) return 20 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 50 + 10)
+                end
+            },
+
+            {
+                xi.mod.ATT,
+                function(tp)
+                    return math.floor(tp * 0.6 - 80)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end,
+
+                xi.mod.MYTHIC_OCC_ATT_THRICE,
+                function(tp)
+                    return 20
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
+
     [40] = -- Yagrush, Carnwenhan
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(tp / 50 + 10) end },
-                 { xi.mod.ACC, function(tp) return math.floor(tp / 50 - 10) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end, xi.mod.MYTHIC_OCC_ATT_THRICE, function(tp) return 20 end } },
-        duration = { 270, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 50 + 10)
+                end
+            },
+
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 50 - 10)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end,
+
+                xi.mod.MYTHIC_OCC_ATT_THRICE,
+                function(tp)
+                    return 20
+                end
+            }
+        },
+
+        duration = { 270, 120, 180 },
     },
+
     [41] = -- Laevateinn, Murgleis, Tupsimati
     {
-        mods = { { xi.mod.MACC, function(tp) return math.floor(tp / 50 + 10) end },
-                 { xi.mod.MATT, function(tp) return math.floor(tp / 50 - 10) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end, xi.mod.MYTHIC_OCC_ATT_THRICE, function(tp) return 20 end } },
-        duration = { 270, 270, 180 }
+        mods =
+        {
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 50 + 10)
+                end
+            },
+
+            {
+                xi.mod.MATT,
+                function(tp)
+                    return math.floor(tp / 50 - 10)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end,
+
+                xi.mod.MYTHIC_OCC_ATT_THRICE,
+                function(tp)
+                    return 20
+                end
+            }
+        },
+
+        duration = { 270, 270, 180 },
     },
+
     [42] = -- Tizona
     {
-        mods = { { xi.mod.ACC, function(tp) return math.floor(tp / 50 + 10) end },
-                 { xi.mod.MACC, function(tp) return math.floor(tp / 50 - 10) end },
-                 { xi.mod.MYTHIC_OCC_ATT_TWICE, function(tp) return 40 end, xi.mod.MYTHIC_OCC_ATT_THRICE, function(tp) return 20 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.ACC,
+                function(tp)
+                    return math.floor(tp / 50 + 10)
+                end
+            },
+
+            {
+                xi.mod.MACC,
+                function(tp)
+                    return math.floor(tp / 50 - 10)
+                end
+            },
+
+            {
+                xi.mod.MYTHIC_OCC_ATT_TWICE,
+                function(tp)
+                    return 40
+                end,
+
+                xi.mod.MYTHIC_OCC_ATT_THRICE,
+                function(tp)
+                    return 20
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
+
     [43] = -- Gastraphetes, Death Penalty
     {
-        mods = { { xi.mod.RACC, function(tp) return math.floor(tp / 50 + 10) end },
-                 { xi.mod.RATT, function(tp) return math.floor(tp * 0.6 - 80) end },
-                 { xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED, function(tp) return 40 end, xi.mod.REM_OCC_DO_TRIPLE_DMG_RANGED, function(tp) return 20 end } },
-        duration = { 90, 120, 180 }
+        mods =
+        {
+            {
+                xi.mod.RACC,
+                function(tp)
+                    return math.floor(tp / 50 + 10)
+                end
+            },
+
+            {
+                xi.mod.RATT,
+                function(tp)
+                    return math.floor(tp * 0.6 - 80)
+                end
+            },
+
+            {
+                xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED,
+                function(tp)
+                    return 40
+                end,
+
+                xi.mod.REM_OCC_DO_TRIPLE_DMG_RANGED,
+                function(tp)
+                    return 20
+                end
+            }
+        },
+
+        duration = { 90, 120, 180 },
     },
 
     -----------------------------------
@@ -188,7 +540,7 @@ xi.aftermath.effects =
     {
         mod = xi.mod.REM_OCC_DO_DOUBLE_DMG,
         power = { 30, 40, 50 },
-        duration = { 30, 60, 90 }
+        duration = { 30, 60, 90 },
     },
 
     -----------------------------------
@@ -198,13 +550,15 @@ xi.aftermath.effects =
     {
         mod = xi.mod.REM_OCC_DO_TRIPLE_DMG,
         power = { 30, 40, 50 },
-        duration = { 60, 120, 180 }
+        duration = { 60, 120, 180 },
     }
 }
 
 xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
     local weapon = player:getStorageItem(0, 0, weaponSlot)
-    if not weapon then return end
+    if not weapon then
+        return
+    end
 
     local id = weapon:getMod(xi.mod.AFTERMATH)
 
@@ -227,12 +581,19 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
             invalid = id < 44
         end
     }
-    if invalid then return end
+
+    if invalid then
+        return
+    end
 
     local aftermath = xi.aftermath.effects[id]
-    if not aftermath then return end
+    if not aftermath then
+        return
+    end
 
-    if not xi.aftermath.canOverwrite(player, tp, id, aftermathType) then return end
+    if not xi.aftermath.canOverwrite(player, tp, id, aftermathType) then
+        return
+    end
 
     player:delStatusEffect(xi.effect.AFTERMATH)
     switch (aftermathType) : caseof
@@ -270,7 +631,10 @@ xi.aftermath.onEffectGain = function(target, effect)
         -- Relic
         [1] = function(x)
             local pet = nil
-            if aftermath.includePets then pet = target:getPet() end
+            if aftermath.includePets then
+                pet = target:getPet()
+            end
+
             for i = 1, #aftermath.mods, 2 do
                 target:addMod(aftermath.mods[i], aftermath.mods[i + 1])
                 if pet then
@@ -306,7 +670,10 @@ xi.aftermath.onEffectLose = function(target, effect)
         -- Relic
         [1] = function(x)
             local pet = nil
-            if aftermath.includePets then pet = target:getPet() end
+            if aftermath.includePets then
+                pet = target:getPet()
+            end
+
             for i = 1, #aftermath.mods, 2 do
                 target:delMod(aftermath.mods[i], aftermath.mods[i + 1])
                 if pet then

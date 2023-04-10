@@ -31,6 +31,8 @@ zones[xi.zone.MISAREAUX_COAST] =
         CREATURE_HAS_APPEARED         = 7610, -- A creature has appeared out of nowhere!
         NOTHING_ELSE_OF_INTEREST      = 7611, -- There is nothing else of interest here.
         LOGGING_IS_POSSIBLE_HERE      = 7612, -- Logging is possible here if you have <item>.
+        DROP_OF_OIL                   = 7669, -- A drop of oil trickles down the cheek of the mannequin.
+        LARGE_DROPS_OF_OIL            = 7670, -- Large drops of oil begin pouring from the eyes on the mannequin.
         NOTHING_HERE_YET              = 7671, -- There is nothing here yet. Check again in the morning.
         ALREADY_BAITED                = 7672, -- The trap already contains <item>.
         APPEARS_TO_BE_TRAP            = 7673, -- There appears to be some kind of trap here. Bits of fish are lying around the area.
@@ -50,7 +52,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         BOGGELMANN       = 16879897,
         GRATION          = 16879899,
         ZIPHIUS          = 16879900,
-
+        ALSHA            = 16879898,
     },
     npc =
     {
@@ -64,6 +66,7 @@ zones[xi.zone.MISAREAUX_COAST] =
             16879977,
         },
         ZIPHIUS_QM_BASE  = 16879919,
+        ALSHA_QM         = 16879978,
     },
 }
 

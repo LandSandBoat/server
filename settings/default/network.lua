@@ -23,10 +23,16 @@ xi.settings.network =
     LOGIN_VIEW_PORT = 54001,
     LOGIN_AUTH_IP   = "0.0.0.0",
     LOGIN_AUTH_PORT = 54231,
+    LOGIN_CONF_IP   = "0.0.0.0",
+    LOGIN_CONF_PORT = 51220,
 
     MAP_PORT = 54230,
 
     SEARCH_PORT = 54002,
+
+    ENABLE_HTTP = false,
+    HTTP_HOST   = "localhost",
+    HTTP_PORT   = 8088,
 
     -- Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
     ZMQ_IP   = "127.0.0.1",

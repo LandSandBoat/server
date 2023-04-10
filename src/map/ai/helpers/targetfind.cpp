@@ -21,19 +21,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "targetfind.h"
 
-#include "../../../common/mmo.h"
-#include "../../../common/utils.h"
-#include "../../alliance.h"
-#include "../../enmity_container.h"
-#include "../../entities/charentity.h"
-#include "../../entities/mobentity.h"
-#include "../../entities/trustentity.h"
-#include "../../packets/action.h"
-#include "../../status_effect_container.h"
-#include "../../utils/zoneutils.h"
-#include <cmath>
+#include "ai/ai_container.h"
+#include "ai/states/inactive_state.h"
+#include "alliance.h"
+#include "common/mmo.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/trustentity.h"
+#include "packets/action.h"
+#include "status_effect_container.h"
+#include "utils/zoneutils.h"
 
-#include "../../packets/action.h"
+#include <cmath>
 
 CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 {
@@ -414,22 +415,32 @@ validEntity will check if the given entity can be targeted in the AoE.
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    // Check if entity is already in list
+    // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
     {
         return false;
     }
+
     if (!(m_findFlags & FINDFLAGS_DEAD) && PTarget->isDead())
     {
         return false;
     }
 
     if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance)
+        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance ||
+        ((m_findFlags & FINDFLAGS_IGNORE_BATTLEID) == FINDFLAGS_NONE && m_PBattleEntity->getBattleID() != PTarget->getBattleID()))
     {
         return false;
     }
 
     if (m_PTarget == PTarget || PTarget->getZone() != m_zone || PTarget->GetUntargetable() || PTarget->status == STATUS_TYPE::INVISIBLE)
+    {
+        return false;
+    }
+
+    // Super Jump or otherwise untargetable
+    if (PTarget->PAI->IsUntargetable())
     {
         return false;
     }
@@ -525,8 +536,6 @@ bool CTargetFind::isWithinCone(position_t* pos)
     WPoint.y = (PPoint.x * m_CPoint.z - PPoint.z * m_CPoint.x) / m_scalar;
     WPoint.z = (PPoint.z * m_BPoint.x - PPoint.x * m_BPoint.z) / m_scalar;
 
-    // ShowDebug("A %f, B %f, C %f", WPoint.x, WPoint.y, WPoint.z);
-
     if (WPoint.x < 0 || WPoint.x > 1)
     {
         return false;
@@ -550,18 +559,6 @@ bool CTargetFind::isWithinRange(position_t* pos, float range)
     return distance(m_PBattleEntity->loc.p, *pos) <= range;
 }
 
-bool CTargetFind::canSee(position_t* point)
-{
-    // TODO: the detours raycast is not a line of sight raycast (it's a walkability raycast)
-    // if (m_PBattleEntity->loc.zone && m_PBattleEntity->loc.zone->m_navMesh)
-    //{
-    //    position_t pA {0, m_PBattleEntity->loc.p.x, m_PBattleEntity->loc.p.y - 1, m_PBattleEntity->loc.p.z};
-    //    position_t pB {0, point->x, point->y - 1, point->z};
-    //    return m_PBattleEntity->loc.zone->m_navMesh->raycast(pA, pB);
-    //}
-    return true;
-}
-
 CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTargetFlags)
 {
     CBattleEntity* PTarget = (CBattleEntity*)m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
@@ -576,7 +573,9 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return m_PBattleEntity->PPet;
     }
 
-    if (PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
+    bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;
+    bool hasSameBattleId = m_PBattleEntity->getBattleID() == PTarget->getBattleID();
+    if ((ignoreBattleId || hasSameBattleId) && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {
         return PTarget;
     }

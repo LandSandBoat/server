@@ -3,14 +3,14 @@
 -- Scroll of Barwater
 -- Teaches the white magic Barwater
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(65)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(65)
 end
 
-return item_object
+return itemObject

@@ -5,9 +5,9 @@
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     local mHP = target:getMaxHP()
     local cHP = target:getHP()
@@ -21,10 +21,10 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
-    target:addHP((target:getMaxHP()/100)*25)
-    target:addMP((target:getMaxMP()/100)*25)
+itemObject.onItemUse = function(target)
+    target:addHP((target:getMaxHP() / 100) * 25)
+    target:addMP((target:getMaxMP() / 100) * 25)
     target:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP)
 end
 
-return item_object
+return itemObject

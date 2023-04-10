@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Bellowing Scout
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

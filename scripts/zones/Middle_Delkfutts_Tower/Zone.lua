@@ -9,55 +9,54 @@ require('scripts/globals/treasure')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -36, -50, 83,  -30, -49,  89 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
-    zone:registerRegion(2, -49, -50, -50, -43, -49, -43 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
-    zone:registerRegion(3, 103, -50, 10,  109, -49,  16 ) -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
-    zone:registerRegion(4, -49, -82, -48, -43, -81, -43 ) -- Sixth Floor F-10 porter to Seventh Floor "G"
-    zone:registerRegion(5, -489, -98, -48, -483, -97, -43 ) -- Seventh Floor F-10 porter to Sixth Floor "G"
-    zone:registerRegion(6,  83,  -82, -48, 89, -81, -43 ) -- Sixth Floor J-10 porter to Seventh Floor "H"
-    zone:registerRegion(7, -356, -98, -48, -351, -97, -43 ) -- Seventh Floor J-10 porter to Sixth Floor "H"
-    zone:registerRegion(8,  84,  -82, 83,  89, -81,  89 ) -- Sixth Floor J-6 porter to Seventh Floor "I"
-    zone:registerRegion(9, -356, -98, 84, -351, -97,  88 ) -- Seventh Floor  J-6 porter to Sixth Floor "I"
-    zone:registerRegion(10, -415, -98, 104, -411, -97, 108 ) -- Seventh Floor  H-6 porter to Sixth Floor "J"
-    zone:registerRegion(11, -489, -130, 84, -484, -129, 88 ) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
+zoneObject.onInitialize = function(zone)
+    zone:registerTriggerArea(1, -36, -50, 83,  -30, -49,  89)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
+    zone:registerTriggerArea(2, -49, -50, -50, -43, -49, -43)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
+    zone:registerTriggerArea(3, 103, -50, 10,  109, -49,  16)    -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
+    zone:registerTriggerArea(4, -49, -82, -48, -43, -81, -43)    -- Sixth Floor F-10 porter to Seventh Floor "G"
+    zone:registerTriggerArea(5, -489, -98, -48, -483, -97, -43)  -- Seventh Floor F-10 porter to Sixth Floor "G"
+    zone:registerTriggerArea(6,  83,  -82, -48, 89, -81, -43)    -- Sixth Floor J-10 porter to Seventh Floor "H"
+    zone:registerTriggerArea(7, -356, -98, -48, -351, -97, -43)  -- Seventh Floor J-10 porter to Sixth Floor "H"
+    zone:registerTriggerArea(8,  84,  -82, 83,  89, -81,  89)    -- Sixth Floor J-6 porter to Seventh Floor "I"
+    zone:registerTriggerArea(9, -356, -98, 84, -351, -97,  88)   -- Seventh Floor  J-6 porter to Sixth Floor "I"
+    zone:registerTriggerArea(10, -415, -98, 104, -411, -97, 108) -- Seventh Floor  H-6 porter to Sixth Floor "J"
+    zone:registerTriggerArea(11, -489, -130, 84, -484, -129, 88) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
 
     xi.treasure.initZone(zone)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-43.0914, -47.4255, 77.5126, 120)
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
-    local regionId = region:GetRegionID()
-
-    if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
-        player:startEvent(14)
-    else
-        player:startEvent(regionId - 1)
-    end
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    player:startEvent(triggerAreaID - 1)
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     -- Teleporters
     if csid <= 11 and option == 1 then
         if csid == 0 then
@@ -69,10 +68,7 @@ zone_object.onEventFinish = function(player, csid, option)
         elseif csid == 10 then
             player:setPos(-355, -144, 91, 64, 158)
         end
-    -- BLADE OF EVIL
-    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, { item=12516, title=xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60 }) then
-        player:setCharVar("bladeOfEvilCS", 0)
     end
 end
 
-return zone_object
+return zoneObject

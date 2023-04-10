@@ -18,7 +18,7 @@ function error(player, msg)
 end
 
 function onTrigger(player, updatetype)
-    if (updatetype == nil or updatetype < 0 or updatetype > 2) then
+    if updatetype == nil or updatetype < 0 or updatetype > 2 then
         error(player, "Invalid update type.")
         return
     end

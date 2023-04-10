@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Itzha Delavhitta
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

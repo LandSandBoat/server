@@ -16,7 +16,10 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
-        if player:getCharVar("AyameAndKaede_Event") == 2 and not player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) then
+        if
+            player:getCharVar("AyameAndKaede_Event") == 2 and
+            not player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL)
+        then
             if
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_I):isSpawned() and
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_II):isSpawned() and
@@ -47,7 +50,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

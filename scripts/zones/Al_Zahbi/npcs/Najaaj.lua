@@ -1,12 +1,11 @@
 -----------------------------------
 -- Area: Al Zahbi
 --  NPC: Najaaj
--- Type: Standard NPC
 -- !pos 61.563 -1 36.264 48
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 40.000, y = 0.000, z = 36.000, wait = 2000 },
     { rotation = 0, wait = 3000 },
@@ -16,15 +15,14 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(241)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Ghosa Demuhzo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
@@ -9,7 +8,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCharVar("BathedInScent") == 1) then
+    if player:getCharVar("BathedInScent") == 1 then
         player:startEvent(177) -- scent from Blue Rafflesias
     else
         player:startEvent(87)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Yasuji
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

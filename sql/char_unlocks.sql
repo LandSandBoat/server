@@ -15,7 +15,9 @@ CREATE TABLE `char_unlocks` (
   `survivals` blob DEFAULT NULL,
   `traverser_start` int(10) unsigned NOT NULL DEFAULT 0,
   `traverser_claimed` int(10) unsigned NOT NULL DEFAULT 0,
-  `abyssea_conflux` blob DEFAULT 0,
-  `waypoints` blob DEFAULT 0,
+  `abyssea_conflux` blob DEFAULT NULL,
+  `waypoints` blob DEFAULT NULL,
+  `eschan_portals` blob DEFAULT NULL,
+  `claimed_deeds` blob DEFAULT NULL,
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

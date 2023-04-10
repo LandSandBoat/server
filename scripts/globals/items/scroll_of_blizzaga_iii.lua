@@ -3,14 +3,14 @@
 -- Scroll of Blizzaga III
 -- Teaches the black magic Blizzaga III
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(181)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(181)
 end
 
-return item_object
+return itemObject

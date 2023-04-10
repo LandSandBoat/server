@@ -7,25 +7,26 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local skill = caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    if (skill > 500) then
+    if skill > 500 then
         skill = 500
     end
-    if (dINT > 300) then
+
+    if dINT > 300 then
         dINT = 300
     end
 
     local duration = 3 * (1 + (skill / 11))
-    local base = math.floor((math.floor(0.67 * caster:getMainLvl())/10)*(37 + math.floor(0.67*dINT)))
+    local base = math.floor((math.floor(0.67 * caster:getMainLvl()) / 10) * (37 + math.floor(0.67 * dINT)))
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT
@@ -39,9 +40,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    target:addStatusEffect(xi.effect.KAUSTRA, math.floor(dmg/3), 3, duration)
+    target:addStatusEffect(xi.effect.KAUSTRA, math.floor(dmg / 3), 3, duration)
 
     return dmg
 end
 
-return spell_object
+return spellObject

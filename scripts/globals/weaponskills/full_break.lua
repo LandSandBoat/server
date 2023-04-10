@@ -19,37 +19,39 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
     params.str_wsc = 0.5 params.dex_wsc = 0.0 params.vit_wsc = 0.5 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0) then
-        local duration = (tp/1000 * 30) + 60
-        if (target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
+    if damage > 0 then
+        local duration = (tp / 1000 * 30) + 60
+        if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0))
         end
-        if (target:hasStatusEffect(xi.effect.ATTACK_DOWN) == false) then
+
+        if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0))
         end
-        if (target:hasStatusEffect(xi.effect.EVASION_DOWN) == false) then
+
+        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
             target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0))
         end
-        if (target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
+
+        if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0))
         end
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

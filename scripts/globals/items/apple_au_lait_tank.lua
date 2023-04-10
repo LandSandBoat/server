@@ -3,20 +3,22 @@
 --  Apple au lait Tank
 --  When used, you will obtain one Apple au lait
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
-    target:addItem(4300, 1)
+itemObject.onItemUse = function(target)
+    target:addItem(xi.items.FLASK_OF_APPLE_AU_LAIT, 1)
 end
 
-return item_object
+return itemObject

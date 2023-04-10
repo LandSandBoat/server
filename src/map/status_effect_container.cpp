@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -52,6 +52,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "entities/trustentity.h"
 #include "latent_effect_container.h"
 #include "map.h"
 #include "notoriety_container.h"
@@ -225,7 +226,7 @@ CStatusEffectContainer::~CStatusEffectContainer()
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 }
 
@@ -557,7 +558,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
     }
     else
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 
     return false;
@@ -585,7 +586,7 @@ void CStatusEffectContainer::DeleteStatusEffects()
                 update_icons = true;
             }
             effect_iter = m_StatusEffectSet.erase(effect_iter);
-            delete PStatusEffect;
+            destroy(PStatusEffect);
             effects_removed = true;
         }
         else
@@ -726,7 +727,7 @@ void CStatusEffectContainer::KillAllStatusEffect()
 
             effect_iter = m_StatusEffectSet.erase(effect_iter);
 
-            delete PStatusEffect;
+            destroy(PStatusEffect);
         }
         else
         {
@@ -1483,6 +1484,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         effect == EFFECT_DRAIN_DAZE ||
         effect == EFFECT_ASPIR_DAZE ||
         effect == EFFECT_HASTE_DAZE ||
+        effect == EFFECT_ATMA ||
         effect == EFFECT_BATTLEFIELD)
     {
         name.insert(0, "globals/effects/");
@@ -1494,7 +1496,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         if (Ptem != nullptr)
         {
             name.insert(0, "globals/items/");
-            name.insert(name.size(), (const char*)Ptem->getName());
+            name.insert(name.size(), Ptem->getName());
         }
     }
 
@@ -1625,7 +1627,13 @@ void CStatusEffectContainer::LoadStatusEffects()
 
 void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
-    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    // Print entity name and bail out if entity isn't a player.
+    if (m_POwner->objtype != TYPE_PC)
+    {
+        ShowDebug("Non-player entity %s (ID: %d) attempt to save Status Effect.", m_POwner->GetName(), m_POwner->id);
+
+        return;
+    }
 
     sql->Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 
@@ -1736,19 +1744,22 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
     if (PEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             // clang-format off
-            PEntity->ForParty([&](CBattleEntity* PMember)
+            PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
-                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                if (PMember != nullptr &&
+                    m_POwner->loc.zone->GetID() == PMember->loc.zone->GetID() &&
+                    distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
@@ -1783,11 +1794,11 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
@@ -1951,7 +1962,10 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             m_POwner->addMP(refresh);
         }
 
-        m_POwner->addTP(regain);
+        if (m_POwner->objtype != TYPE_MOB || m_POwner->PAI->IsEngaged())
+        {
+            m_POwner->addTP(regain);
+        }
 
         if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
         {
@@ -1960,8 +1974,13 @@ void CStatusEffectContainer::TickRegen(time_point tick)
     }
 }
 
-bool CStatusEffectContainer::HasPreventActionEffect()
+bool CStatusEffectContainer::HasPreventActionEffect(bool ignoreCharm)
 {
+    if (ignoreCharm)
+    {
+        return HasStatusEffect(
+            { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
+    }
     return HasStatusEffect(
         { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_CHARM, EFFECT_CHARM_II, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
 }

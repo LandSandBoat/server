@@ -35,9 +35,9 @@ function onTrigger(player, number, target)
     local adjustYposBy = 0
 
     if number ~= nil and number > 0 then
-        adjustYposBy = pos.y +number
+        adjustYposBy = pos.y + number
     else
-        adjustYposBy = pos.y +0.5
+        adjustYposBy = pos.y + 0.5
     end
 
     entity:setPos(pos.x, adjustYposBy, pos.z, pos.rot)

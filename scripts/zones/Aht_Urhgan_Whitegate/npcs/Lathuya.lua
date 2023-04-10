@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Lathuya
--- Standard Info NPC
 -- Involved in quests: Omens
 -- !pos -95.081 -6.000 31.638 50
 -----------------------------------
@@ -47,9 +46,15 @@ entity.onTrade = function(player, npc, trade)
 
         local item = craftingItems[player:getCharVar("[BLUAF]Current")]
         if item then
-            if craftingStage == 0  and npcUtil.tradeHasExactly(trade, item.materials) then
+            if
+                craftingStage == 0 and
+                npcUtil.tradeHasExactly(trade, item.materials)
+            then
                 player:startEvent(732 + artifactOffset, item.result, item.currency, item.currencyAmt)
-            elseif craftingStage == 1 and npcUtil.tradeHasExactly(trade, { { item.currency, item.currencyAmt } }) then
+            elseif
+                craftingStage == 1 and
+                npcUtil.tradeHasExactly(trade, { { item.currency, item.currencyAmt } })
+            then
                 player:startEvent(734 + artifactOffset, 0, item.currency, item.currencyAmt)
             end
         end

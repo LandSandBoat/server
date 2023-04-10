@@ -24,7 +24,7 @@ function onTrigger(player, target, logId, questId, variable, value)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -51,5 +51,5 @@ function onTrigger(player, target, logId, questId, variable, value)
 
     local questVarName = Quest.getVarPrefix(logId, questId) .. variable
     targ:setCharVar(questVarName, value)
-    player:PrintToPlayer(string.format( "Set %s's Quest variable '%s' to %i.", targ:getName(), questVarName, value ))
+    player:PrintToPlayer(string.format("Set %s's Quest variable '%s' to %i.", targ:getName(), questVarName, value))
 end

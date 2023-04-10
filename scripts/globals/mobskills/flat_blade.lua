@@ -11,17 +11,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() ~= 4006) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getPool() ~= 4006 then
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 35)
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    if (mob:getPool() == 4006) then -- Trion@Qubia_Arena only
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    if mob:getPool() == 4006 then -- Trion@Qubia_Arena only
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.FLAT_LAND)
     end
 
@@ -31,7 +32,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
-    if (math.random(1, 100) < skill:getTP()/3) then
+    if math.random(1, 100) < skill:getTP() / 3 then
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
     end
 
@@ -40,4 +41,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

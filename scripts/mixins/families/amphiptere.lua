@@ -11,11 +11,13 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         mob:setUntargetable(true)
         mob:setAnimationSub(1)
     end)
+
     amphiptereMob:addListener("ENGAGE", "AMPHIPTERE_ENGAGE", function(mob, target)
         mob:hideName(false)
         mob:setUntargetable(false)
         mob:setAnimationSub(0)
     end)
+
     amphiptereMob:addListener("DISENGAGE", "AMPHIPTERE_DISENGAGE", function(mob, target)
         mob:hideName(true)
         mob:setUntargetable(true)

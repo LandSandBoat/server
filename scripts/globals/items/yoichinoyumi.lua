@@ -6,9 +6,9 @@ require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
@@ -16,8 +16,8 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     npcUtil.giveItem(target, { { xi.items.YOICHIS_ARROW, 99 } })
 end
 
-return item_object
+return itemObject

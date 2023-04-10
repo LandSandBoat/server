@@ -22,7 +22,7 @@ CREATE TABLE `mob_spawn_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`mobid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,6 +360,24 @@ INSERT INTO `mob_spawn_mods` VALUES (16916816,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Qn'Aern
 INSERT INTO `mob_spawn_mods` VALUES (16916817,55,300,1); -- IDLE_DESPAWN: 300
+
+-- Qn'Zdei
+INSERT INTO `mob_spawn_mods` VALUES (16920577, 26, 1000, 1); -- SUBLINK: 1000
+INSERT INTO `mob_spawn_mods` VALUES (16920578, 26, 1000, 1); -- SUBLINK: 1000
+INSERT INTO `mob_spawn_mods` VALUES (16920579, 26, 1000, 1); -- SUBLINK: 1000
+INSERT INTO `mob_spawn_mods` VALUES (16920580, 26, 1000, 1); -- SUBLINK: 1000
+INSERT INTO `mob_spawn_mods` VALUES (16920581, 26, 1001, 1); -- SUBLINK: 1001
+INSERT INTO `mob_spawn_mods` VALUES (16920582, 26, 1001, 1); -- SUBLINK: 1001
+INSERT INTO `mob_spawn_mods` VALUES (16920583, 26, 1001, 1); -- SUBLINK: 1001
+INSERT INTO `mob_spawn_mods` VALUES (16920584, 26, 1001, 1); -- SUBLINK: 1001
+INSERT INTO `mob_spawn_mods` VALUES (16920585, 26, 1002, 1); -- SUBLINK: 1002
+INSERT INTO `mob_spawn_mods` VALUES (16920586, 26, 1002, 1); -- SUBLINK: 1002
+INSERT INTO `mob_spawn_mods` VALUES (16920587, 26, 1002, 1); -- SUBLINK: 1002
+INSERT INTO `mob_spawn_mods` VALUES (16920588, 26, 1002, 1); -- SUBLINK: 1002
+INSERT INTO `mob_spawn_mods` VALUES (16920764, 26, 1003, 1); -- SUBLINK: 1003
+INSERT INTO `mob_spawn_mods` VALUES (16920765, 26, 1003, 1); -- SUBLINK: 1003
+INSERT INTO `mob_spawn_mods` VALUES (16920766, 26, 1003, 1); -- SUBLINK: 1003
+INSERT INTO `mob_spawn_mods` VALUES (16920767, 26, 1003, 1); -- SUBLINK: 1003
 
 -- Jailer Of Fortitude
 INSERT INTO `mob_spawn_mods` VALUES (16921015,55,180,1);  -- IDLE_DESPAWN: 180
@@ -1399,9 +1417,6 @@ INSERT INTO `mob_spawn_mods` VALUES (17596729,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Altedour I Tavnazia
 INSERT INTO `mob_spawn_mods` VALUES (17612836,55,180,1); -- IDLE_DESPAWN: 180
-
--- Capricious Cassie
-INSERT INTO `mob_spawn_mods` VALUES (17613129,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Mimic
 INSERT INTO `mob_spawn_mods` VALUES (17617157,55,120,1); -- IDLE_DESPAWN: 120

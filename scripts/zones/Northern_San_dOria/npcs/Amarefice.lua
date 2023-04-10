@@ -14,12 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 9)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.WOODWORKING)
     local skillLevel = player:getSkillLevel(xi.skill.WOODWORKING)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) == false) then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
+        if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(624, skillCap, skillLevel, 1, 207, player:getGil(), 0, 4095, 0)
         else
             player:startEvent(624, skillCap, skillLevel, 1, 207, player:getGil(), 7127, 4095, 0)
@@ -33,7 +32,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 624 and option == 1) then
+    if csid == 624 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 1, 1)
         player:addStatusEffect(xi.effect.WOODWORKING_IMAGERY, 1, 0, 120)
     end

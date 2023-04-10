@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Merol
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

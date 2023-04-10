@@ -2,8 +2,10 @@ from .util import util, PACKET_HEAD
 
 PD_CODE = 1
 
+
 def set(data, idx, val):
     data[PACKET_HEAD + idx] = val
+
 
 class packets:
     # TODO:
@@ -12,7 +14,9 @@ class packets:
         global PD_CODE
         PD_CODE = PD_CODE + 1
 
-        data = bytearray(PACKET_HEAD + 4 + size + 16) # header + (type, size, seq) + body + md5
+        data = bytearray(
+            PACKET_HEAD + 4 + size + 16
+        )  # header + (type, size, seq) + body + md5
 
         # Header
         util.memcpy(util.pack_16(PD_CODE), 0, data, 0, 2)
@@ -20,7 +24,7 @@ class packets:
         # Body
         data[PACKET_HEAD + 0] = type
         data[PACKET_HEAD + 1] = size
-        data[PACKET_HEAD + 2] = 0 # Seq
+        data[PACKET_HEAD + 2] = 0  # Seq
 
         return data
 
@@ -62,7 +66,8 @@ class packets:
     @staticmethod
     def to_map_b5(message):
         data = packets.generate_starting_packet(0xB5, 130)
-        data[PACKET_HEAD + 0x04] = 0; # Say
+        data[PACKET_HEAD + 0x04] = 0
+        # Say
         util.memcpy(util.to_bytes(message), 0, data, PACKET_HEAD + 0x06, len(message))
         util.packet_md5(data)
         return data

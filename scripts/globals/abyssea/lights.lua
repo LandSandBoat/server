@@ -533,7 +533,10 @@ end
 
 xi.abyssea.AddDeathListeners = function(mob)
     mob:addListener("MAGIC_TAKE", "ABYSSEA_MAGIC_DEATH_CHECK", function(target, caster, spell)
-        if target:getHP() <= 0 and target:getDeathType() == xi.abyssea.deathType.NONE then
+        if
+            target:getHP() <= 0 and
+            target:getDeathType() == xi.abyssea.deathType.NONE
+        then
             target:setDeathType(xi.abyssea.deathType.MAGICAL)
         end
     end)
@@ -542,20 +545,24 @@ xi.abyssea.AddDeathListeners = function(mob)
         -- TODO: Make this human-readable, and break out from the listener
         local magicalWS =
         {
-            19,20,30,33,34,36,37,47,50,51,58,74,76,97,98,107,113,114,130,
-            131,132,133,139,146,147,148,149,160,161,172,177,178,179,180,
-            186,187,188,189,192,208,217,218,220,
+            19, 20, 30, 33, 34, 36, 37, 47, 50, 51, 58, 74, 76, 97, 98, 107, 113, 114, 130,
+            131, 132, 133, 139, 146, 147, 148, 149, 160, 161, 172, 177, 178, 179, 180,
+            186, 187, 188, 189, 192, 208, 217, 218, 220,
         }
 
         local wsType = xi.abyssea.deathType.WS_PHYSICAL
 
-        if target:getHP() <= 0  and target:getDeathType() == xi.abyssea.deathType.NONE then
+        if
+            target:getHP() <= 0 and
+            target:getDeathType() == xi.abyssea.deathType.NONE
+        then
             for i = 1, #magicalWS do
                 if wsid == magicalWS[i] then
                     wsType = xi.abyssea.deathType.WS_MAGICAL
                     break
                 end
             end
+
             target:setDeathType(wsType)
         end
     end)
@@ -565,6 +572,7 @@ xi.abyssea.AddDeathListeners = function(mob)
         if deathType == xi.abyssea.deathType.NONE then
             deathType = xi.abyssea.deathType.PHYSICAL
         end
+
         xi.abyssea.DropLights(player, mobArg:getName(), deathType, mobArg)
 
         xi.abyssea.RemoveDeathListeners(mobArg)
@@ -574,9 +582,9 @@ end
 xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then
         if not killer:isPC() and killer:getAllegiance() == 1 then
-           local master = killer:getMaster()
+            local master = killer:getMaster()
             if master then
-               killer = master
+                killer = master
             end
         end
     else
@@ -589,8 +597,8 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     end
 
     local dropLight = 0
-    local amount = 0
-    local dropRate = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
+    local amount    = 0
+    local dropRate  = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
 
     if lightInfo[zoneID][mobName][lightTypes[killType].lightType] ~= nil then
         amount = lightInfo[zoneID][mobName][lightTypes[killType].lightType]
@@ -599,13 +607,13 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if amount == 0 then
         return
     elseif amount == 100 then
-        if math.random(100) < 20 then
-            amount = 16 * math.random(1,4)
+        if math.random(1, 100) <= 20 then
+            amount = 16 * math.random(1, 4)
         else
-            amount = 16 * math.random(1,2)
+            amount = 16 * math.random(1, 2)
         end
     elseif amount == 50 then
-        amount = 16 * math.random(1,2)
+        amount = 16 * math.random(1, 2)
     end
 
     dropLight = lightTypes[killType].light
@@ -623,7 +631,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             end
         else
             if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 10 then
-                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE /2)
+                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE / 2)
             end
         end
     end
@@ -642,7 +650,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
         end
     end
 
-    local canDrop = math.random(100)
+    local canDrop = math.random(1, 100)
 
     if canDrop <= dropRate then
         for _, member in pairs(killer:getAlliance()) do

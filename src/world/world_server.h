@@ -18,42 +18,33 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-
 #pragma once
 
 #include "common/application.h"
-#include "common/console_service.h"
-#include "common/logging.h"
+#include "common/taskmgr.h"
+
+#include "besieged_system.h"
+#include "campaign_system.h"
+#include "colonization_system.h"
+#include "conquest_system.h"
+#include "http_server.h"
+#include "message_server.h"
 
 class WorldServer final : public Application
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-    : Application("world", std::move(pArgParser))
-    {
-        // World server should _mostly_ be comprised of ZMQ handlers and timed tasks.
+    WorldServer(int argc, char** argv);
+    ~WorldServer() override;
 
-        // clang-format off
-        gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-        [](std::vector<std::string> inputs)
-        {
-            fmt::print("TODO: Some stats!\n");
-        });
-        // clang-format on
-    }
-
-    ~WorldServer() override
-    {
-        // Everything should be handled with RAII
-    }
-
-    void Tick() override
-    {
-        Application::Tick();
-
-        // World Server specific things
-    }
+    void Tick() override;
 
 private:
-    // World server doesn't need external-facing sockets
+    std::unique_ptr<message_server_wrapper_t> messageServer;
+
+    std::unique_ptr<ConquestSystem>     conquestSystem;
+    std::unique_ptr<BesiegedSystem>     besiegedSystem;
+    std::unique_ptr<CampaignSystem>     campaignSystem;
+    std::unique_ptr<ColonizationSystem> colonizationSystem;
+
+    std::unique_ptr<HTTPServer> httpServer;
 };

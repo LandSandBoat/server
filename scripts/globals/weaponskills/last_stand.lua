@@ -19,10 +19,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
     params.ftp100 = 2 params.ftp200 = 2.125 params.ftp300 = 2.25
@@ -31,18 +30,17 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.multiHitfTP = true
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp200 = 3 params.ftp300 = 4
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) * 0.03)
     end
 
     local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
-
 end
 
-return weaponskill_object
+return weaponskillObject

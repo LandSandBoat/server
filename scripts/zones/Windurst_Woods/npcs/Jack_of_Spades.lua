@@ -2,7 +2,6 @@
 -- Area: Windurst Woods
 --  NPC: Jack of Spades
 -- Adventurer's Assistant
--- Working 100%
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")

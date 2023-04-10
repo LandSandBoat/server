@@ -29,24 +29,24 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7322,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         CONQUEST                      = 7930,  -- You've earned conquest points!
-        GARRISON_BASE                 = 8309,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8479,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8480,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8481,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8482,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8487,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 8518,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 8549,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 10728, -- New training regime registered!
-        VOIDWALKER_NO_MOB             = 11847, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 11848, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 11849, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 11850, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 11852, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 11853, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 11854, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 11855, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL         = 12839, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        GARRISON_BASE                 = 8297,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8467,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8468,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8469,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8470,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8475,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 8506,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 8537,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 10716, -- New training regime registered!
+        VOIDWALKER_NO_MOB             = 11835, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11836, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11837, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11838, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11840, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11841, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11842, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11843, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 12827, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 
     mob =
@@ -68,6 +68,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         },
 
         BOWHO_WARMONGER = 17224104,
+        TOXIC_TAMLYN = GetFirstID("Toxic_Tamlyn"),
 
         VOIDWALKER  =
         {
@@ -105,12 +106,12 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
     {
         [17224168] = -- Blobdingnag
         {
-            17224174,-- Septic Boils
-            17224173,-- Septic Boils
-            17224172,-- Septic Boils
-            17224171,-- Septic Boils
-            17224170,-- Septic Boils
-            17224169,-- Septic Boils
+            17224174, -- Septic Boils
+            17224173, -- Septic Boils
+            17224172, -- Septic Boils
+            17224171, -- Septic Boils
+            17224170, -- Septic Boils
+            17224169, -- Septic Boils
         },
     },
 

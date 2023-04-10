@@ -46,11 +46,11 @@ xi.item_utils.removableEffects =
 }
 
 xi.item_utils.skillBookCheck = function(target, skillID)
-    local skill = skillID
+    local skill   = skillID
     local mainCap = target:getMaxSkillLevel(target:getMainLvl(), target:getMainJob(), skill) or 0
-    local subCap = target:getMaxSkillLevel(target:getSubLvl(), target:getSubJob(), skill) or 0
-    local mainDif = (mainCap*10)/10 - (target:getCharSkillLevel(skill)*10)/100
-    local subDif = (subCap*10)/10 - (target:getCharSkillLevel(skill)*10)/100
+    local subCap  = target:getMaxSkillLevel(target:getSubLvl(), target:getSubJob(), skill) or 0
+    local mainDif = (mainCap * 10) / 10 - (target:getCharSkillLevel(skill) * 10) / 100
+    local subDif  = (subCap * 10) / 10 - (target:getCharSkillLevel(skill) * 10) / 100
     local noSkill = 0
 
     if mainCap == 0 then
@@ -92,8 +92,9 @@ xi.item_utils.pickItemRandom = function(target, itemgroup) -- selects an item fr
 
     -- pick the weighted result
     local item = 0
-    local pick = math.random(sum)
+    local pick = math.random(1, sum)
     sum = 0
+
     for i = 1, #items do
         sum = sum + items[i][1]
         if sum >= pick then
@@ -115,7 +116,7 @@ end
 
 xi.item_utils.addItemShield = function(target, power, duration, effect, special)
     if target:hasStatusEffect(effect) then
-        local shield = target:getStatusEffect(effect)
+        local shield            = target:getStatusEffect(effect)
         local activeshieldpower = shield:getPower()
 
         if activeshieldpower > power then
@@ -134,8 +135,9 @@ end
 
 xi.item_utils.addItemEffect = function(target, effect, power, duration, subpower)
     if target:hasStatusEffect(effect) then
-        local buff = target:getStatusEffect(effect)
+        local buff        = target:getStatusEffect(effect)
         local effectpower = buff:getPower()
+
         if effectpower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
@@ -148,8 +150,9 @@ end
 
 xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, power2, duration)
     if target:hasStatusEffect(effect1) then
-        local buff = target:getStatusEffect(effect1)
+        local buff        = target:getStatusEffect(effect1)
         local effectpower = buff:getPower()
+
         if effectpower > power1 then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
@@ -160,8 +163,9 @@ xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, pow
     end
 
     if target:hasStatusEffect(effect2) then
-        local buff = target:getStatusEffect(effect2)
+        local buff        = target:getStatusEffect(effect2)
         local effectpower = buff:getPower()
+
         if effectpower > power2 then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
@@ -180,8 +184,9 @@ xi.item_utils.addItemExpEffect = function(target, effect, power, duration, subpo
     end
 
     if target:hasStatusEffect(effect) then
-        local buff = target:getStatusEffect(effect)
+        local buff        = target:getStatusEffect(effect)
         local effectpower = buff:getPower()
+
         if effectpower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
@@ -200,9 +205,11 @@ xi.item_utils.removeStatus = function(target, effects)
             return true
         end
     end
+
     if target:eraseStatusEffect() ~= 255 then
         return true
     end
+
     return false
 end
 
@@ -220,7 +227,9 @@ xi.item_utils.removeMultipleEffects = function(target, effects, count, random)
             if not xi.item_utils.removeStatus(target, effectsToRemove) then
                 break
             end
+
             removed = removed + 1
+
             if removed >= count then
                 break
             end

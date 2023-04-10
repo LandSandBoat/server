@@ -6,13 +6,13 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.REQUIEM
     local duration = 160
     local power = 8
@@ -35,7 +35,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local iBoost = caster:getMod(xi.mod.REQUIEM_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost
 
-     -- JP Bonus
+    -- JP Bonus
     power = power + caster:getJobPointLevel(xi.jp.REQUIEM_EFFECT) * 3
 
     if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
@@ -43,13 +43,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     elseif caster:hasStatusEffect(xi.effect.MARCATO) then
         power = power * 1.5
     end
+
     caster:delStatusEffect(xi.effect.MARCATO)
 
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1)
 
-    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
         duration = duration * 2
     end
+
     -- Try to overwrite weaker slow / haste
     if canOverwrite(target, effect, power) then
         -- overwrite them
@@ -63,4 +65,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return effect
 end
 
-return spell_object
+return spellObject

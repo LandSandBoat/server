@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Toraimarai Canal
---  NPC: Tome of Magic ( Needed for Mission )
+--  NPC: Tome of Magic (Needed for Mission)
 -- Involved In Windurst Mission 7-1
 -- !zone 169
 -----------------------------------

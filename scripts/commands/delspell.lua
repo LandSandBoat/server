@@ -15,20 +15,19 @@ function error(player, msg)
 end
 
 function onTrigger(player, spellId, target)
-
     -- validate spellId
-    if (spellId == nil) then
+    if spellId == nil then
         error(player, "Invalid spellID.")
         return
     end
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
@@ -37,5 +36,4 @@ function onTrigger(player, spellId, target)
     -- add spell
     targ:delSpell(spellId)
     player:PrintToPlayer(string.format("Deleted spell %i from %s.", spellId, targ:getName()))
-
 end

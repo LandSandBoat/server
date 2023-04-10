@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Meldivon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

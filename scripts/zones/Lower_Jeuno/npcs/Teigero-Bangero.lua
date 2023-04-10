@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
---  NPC: Teigero Bangero
--- Involved in Quests: Save the Clock Tower, The Lost Cardian
+--  NPC: Teigero-Bangero
+-- Involved in Quests: The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
 require("scripts/globals/settings")
@@ -10,35 +10,6 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        trade:hasItemQty(555, 1) == true and
-        trade:getItemCount() == 1
-    then
-        local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
-        if
-            a == 0 or
-            (
-                a ~= 128 and
-                a ~= 160 and
-                a ~= 192 and
-                a ~= 384 and
-                a ~= 640 and
-                a ~= 224 and
-                a ~= 896 and
-                a ~= 416 and
-                a ~= 704 and
-                a ~= 448 and
-                a ~= 672 and
-                a ~= 480 and
-                a ~= 736 and
-                a ~= 928 and
-                a ~= 960 and
-                a ~= 992
-            )
-        then
-            player:startEvent(74, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -55,16 +26,14 @@ entity.onTrigger = function(player, npc)
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE then
         if player:getCharVar("theLostCardianVar") == 0 then
-            player:startEvent(29) -- First dialog for "The lost cardien" quest
+            player:startEvent(29) -- First dialog for "The lost cardian" quest
         else
             player:startEvent(66)
         end
     elseif theKindCardian == QUEST_ACCEPTED then
         player:startEvent(66) -- During quest "The kind cardien"
     elseif theKindCardian == QUEST_COMPLETED then
-        player:startEvent(67) -- New standard dialog after "The kind cardien"
-    else
-        player:startEvent(34) -- Base Standard CS & dialog
+        player:startEvent(67) -- New standard dialog after "The kind cardian"
     end
 end
 
@@ -72,10 +41,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 74 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz2", 128)
-    elseif csid == 29 then
+    if csid == 29 then
         player:setCharVar("theLostCardianVar", 1)
     end
 end

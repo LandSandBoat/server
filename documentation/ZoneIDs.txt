@@ -1,4 +1,7 @@
-﻿List of known zones
+﻿Note: Certain IDs just happen to match values the client uses for loading the sub-zone model of a mog house. 
+      This has in the past lead people to mistakenly think mog houses were these zones.
+
+List of known zones
 
     0 -  00 - Tech Demo Area (Formerly mis-used as Mog House)
     1 -  01 - Phanauet Channel
@@ -189,7 +192,7 @@
   186 -  BA - Dynamis - Bastok
   187 -  BB - Dynamis - Windurst
   188 -  BC - Dynamis - Jeuno
-  189 -  BD - Residential Area Alternate: San d'Orian Barracks
+  189 -  BD - Outer Ra'Kaznar [U3]
   190 -  BE - King Ranperre's Tomb
   191 -  BF - Dangruf Wadi
   192 -  C0 - Inner Horutoto Ruins
@@ -199,7 +202,7 @@
   196 -  C4 - Gusgen Mines
   197 -  C5 - Crawlers' Nest
   198 -  C6 - Maze of Shakhrami
-  199 -  C7 - Residential Area Alternate: Bastokan Barracks
+  199 -  C7 - 
   200 -  C8 - Garlaige Citadel
   201 -  C9 - Cloister of Gales
   202 -  CA - Cloister of Storms
@@ -214,12 +217,12 @@
   211 -  D3 - Cloister of Tides
   212 -  D4 - Gustav Tunnel
   213 -  D5 - Labyrinth of Onzozo
-  214 -  D6 - Residential Area Alternate: Aht Urgan
+  214 -  D6 - 
   215 -  D7 - Abyssea - Attohwa
   216 -  D8 - Abyssea - Misareaux
   217 -  D9 - Abyssea - Vunkerl
   218 -  DA - Abyssea - Altepa
-  219 -  DB - Residential Area Alternate: Windurstian Barracks
+  219 -  DB - 
   220 -  DC - Ship bound for Selbina
   221 -  DD - Ship bound for Mhaura
   222 -  DE - Provenance
@@ -278,12 +281,12 @@
   275 - 113 - Outer Ra'Kaznar [U1]
   276 - 114 - Ra'kaznar Inner Court
   277 - 115 - Ra'Kaznar Turris
-  278 - 116 - unimplemented in client: no zone dat as of 08-10-2022
+  278 - 116 - Gwora - Corridor
   279 - 117 - Walk of Echoes [P2]
   280 - 118 - Mog Garden
   281 - 119 - Leafallia
   282 - 11A - Mount Kamihr
-  283 - 11B - unimplemented in client: Silver Knife
+  283 - 11B - Silver Knife
   284 - 11C - Celennia Memorial Library (formerly Wexworth Library)
   285 - 11D - Feretory
   286 - 11E - unimplemented in client: no zone dat as of 08-10-2022

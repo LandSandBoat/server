@@ -7,14 +7,14 @@ require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 require("scripts/globals/job_utils/summoner")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 -- Modeling this on the known formula for magical Merit BPs of the same level with a merit level of 0
-ability_object.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill)
     local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp     = pet:getTP() / 10
     local master = pet:getMaster()
@@ -26,7 +26,7 @@ ability_object.onPetAbility = function(target, pet, petskill)
     xi.job_utils.summoner.onUseBloodPact(master, pet, target, petskill)
 
     --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
-    local damage = math.floor(512 + 1.72*(tp+1))
+    local damage = math.floor(512 + 1.72 * (tp + 1))
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.magic.ele.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.WIND)
@@ -39,4 +39,4 @@ ability_object.onPetAbility = function(target, pet, petskill)
     return damage
 end
 
-return ability_object
+return abilityObject

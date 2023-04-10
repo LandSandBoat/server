@@ -78,7 +78,12 @@ void CAIActionQueue::handleAction(queueAction_t& action)
 {
     if (action.lua_func.valid())
     {
-        action.lua_func(CLuaBaseEntity(PEntity));
+        auto result = action.lua_func(CLuaBaseEntity(PEntity));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("CAIActionQueue::handleAction for %s (%i): %s", PEntity->name, PEntity->id, err.what());
+        }
     }
 
     if (action.func)

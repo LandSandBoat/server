@@ -9,7 +9,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.FEELER_ANTLION)
-    if (not nm:isSpawned() and trade:hasItemQty(1825, 1) and trade:getItemCount() == 1) then
+    if
+        not nm:isSpawned() and
+        trade:hasItemQty(1825, 1) and
+        trade:getItemCount() == 1
+    then
         player:tradeComplete()
         nm:setSpawn(npc:getXPos() - 3, npc:getYPos() - 2, npc:getZPos() - 1)
         SpawnMob(ID.mob.FEELER_ANTLION):updateClaim(player)

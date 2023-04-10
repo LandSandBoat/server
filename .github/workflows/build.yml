@@ -1,4 +1,4 @@
-name: build
+name: "build"
 
 on:
   pull_request:
@@ -11,22 +11,35 @@ on:
       - base
       - everything
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Install Dependencies
       run: |
+        # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
+        # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
+        wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
+        chmod +x /tmp/mariadb_repo_setup
+        sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
+        # Remove the above when it's no longer necessary
+
         sudo apt-get update
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
+        npm install -g diff-so-fancy
     - id: changed-files
       name: Get Changed Files
-      uses: Ana06/get-changed-files@v2.1.0
+      uses: Ana06/get-changed-files@v2.2.0
       with:
         filter: |
           src/**
@@ -39,6 +52,17 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           echo "${changed_file}"
         done
+    - name: Git Formatting Checks
+      if: github.event_name == 'pull_request'
+      run: |
+        touch git_checks.txt
+        bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+        cat git_checks.txt
+        if [ -s git_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: General File Checks
       if: always()
       run: |
@@ -83,17 +107,23 @@ jobs:
             fi
           fi
         done
-        git diff >> cpp_formatting_checks.txt
-        cat cpp_formatting_checks.txt
+        git diff --color >> cpp_formatting_checks.txt
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
         then
+          echo ""
+          echo "You have errors in your C++ code formatting."
+          echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
+          echo "You can either fix the formatting by hand or use clang-format."
+          echo "(You can safely ignore warnings about \$TERM and tput)"
+          echo ""
+          cat cpp_formatting_checks.txt | diff-so-fancy || true
           exit 1
         fi
         exit 0
     - name: Upload CPP Formatting Diff
       if: hashFiles('cpp_formatting_checks.txt') != ''
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: clang_format_diff
         path: |
@@ -102,6 +132,8 @@ jobs:
       if: always()
       run: |
         touch lua_checks.txt
+        python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
+
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.lua ]]; then
@@ -109,6 +141,9 @@ jobs:
             fi
           fi
         done
+
+        python3 tools/ci/check_lua_binding_usage.py >> lua_checks.txt
+
         cat lua_checks.txt
         if [ -s lua_checks.txt ]
         then
@@ -151,9 +186,10 @@ jobs:
         exit 0
 
   Linux_Clang14_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -175,18 +211,20 @@ jobs:
       run: |
         cmake --build build -j4
     - name: Archive Executables
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: linux_executables
         path: |
           xi_connect
           xi_map
           xi_search
+          xi_world
 
   Linux_GCC11_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -209,11 +247,12 @@ jobs:
         cmake --build build -j4
 
   Windows_32bit:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -232,11 +271,12 @@ jobs:
           cmake --build build -j4
 
   Windows_64bit_Debug:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -254,20 +294,22 @@ jobs:
         run: |
           cmake --build build -j4
       - name: Archive Executables
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: windows_executables
           path: |
             xi_connect.exe
             xi_map.exe
             xi_search.exe
+            xi_world.exe
 
-  Windows_64bit_Release_Tracy_Modules_World:
+  Windows_64bit_Release_Tracy_Modules:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -288,17 +330,18 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
       - name: Build
         shell: cmd
         run: |
           cmake --build build -j4
 
   MacOS_64bit:
+    needs: Sanity_Checks
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
@@ -336,10 +379,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -372,7 +415,7 @@ jobs:
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
-        timeout_minutes: 5
+        timeout_minutes: 15
         max_attempts: 3
         retry_on: timeout
         shell: bash
@@ -380,15 +423,17 @@ jobs:
           chmod +x xi_connect
           chmod +x xi_map
           chmod +x xi_search
+          chmod +x xi_world
           ls -l
 
           printf "\nStart server processes\n"
           screen -d -m -S xi_connect ./xi_connect --log login-server.log
           screen -d -m -S xi_search ./xi_search --log search-server.log
           screen -d -m -S xi_map ./xi_map --log map-server.log
+          screen -d -m -S xi_world ./xi_world --log world-server.log
 
-          printf "\nWaiting 90s for servers to fully start up\n"
-          sleep 90s
+          printf "\nWaiting 5m for servers to fully start up\n"
+          sleep 300s
 
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
@@ -441,6 +486,7 @@ jobs:
         cat login-server*.log
         cat map-server*.log
         cat search-server*.log
+        cat world-server*.log
 
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
@@ -451,6 +497,10 @@ jobs:
         fi
 
         if grep -qi "warning\|error\|crash" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning\|error\|crash" world-server*.log; then
             exit -1
         fi
 
@@ -467,10 +517,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -501,14 +551,16 @@ jobs:
         chmod +x xi_connect
         chmod +x xi_map
         chmod +x xi_search
+        chmod +x xi_world
         ls -l
 
         printf "\nStart server processes\n"
         screen -d -m -S xi_connect ./xi_connect --log login-server.log
         screen -d -m -S xi_search ./xi_search --log search-server.log
-        screen -d -m -S xi_map ./xi_map --log map-server-0.log --port 54230
-        screen -d -m -S xi_map ./xi_map --log map-server-1.log --port 54231
-        sleep 2m
+        screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
+        screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
+        screen -d -m -S xi_world ./xi_world --log world-server.log
+        sleep 300s
         killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
@@ -517,6 +569,7 @@ jobs:
         cat search-server*.log
         cat map-server-0*.log
         cat map-server-1*.log
+        cat world-server*.log
 
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
@@ -534,14 +587,18 @@ jobs:
           exit -1
         fi
 
+        if grep -qi "warning\|error\|crash" world-server*.log; then
+          exit -1
+        fi
+
   Full_Startup_Checks_Windows:
     runs-on: windows-latest
     needs: Windows_64bit_Debug
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: windows_executables
         path: .

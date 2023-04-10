@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Gallagher
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -78,6 +78,7 @@ quest.sections =
                 [102] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
+
                 [103] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.keyItem.ORNAMENTED_SCROLL)

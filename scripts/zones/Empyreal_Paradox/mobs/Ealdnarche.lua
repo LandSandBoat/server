@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.TELEPORT_START, 988)
     mob:setMobMod(xi.mobMod.TELEPORT_END, 989)
     mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
-    mob:setMod(xi.mod.MDEF, 50);
+    mob:setMod(xi.mod.MDEF, 50)
 end
 
 entity.onMobSpawn = function(mob)

@@ -29,15 +29,35 @@ entity.onTrigger = function(player, npc)
         player:startEvent(134) -- You don't have the requirements to start the first quest
     elseif questIntroToTeamwork == QUEST_ACCEPTED then
         player:startEvent(129, 0, 1) -- starts the ready check for all three quests
-    elseif questIntroToTeamwork == QUEST_COMPLETED and questIntermediateTeamwork == QUEST_AVAILABLE and sandyFame >= 3 and player:getMainLvl() >= 10 then
+    elseif
+        questIntroToTeamwork == QUEST_COMPLETED and
+        questIntermediateTeamwork == QUEST_AVAILABLE and
+        sandyFame >= 3 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(133) -- Same race
-    elseif questIntroToTeamwork == QUEST_COMPLETED and questIntermediateTeamwork == QUEST_AVAILABLE and sandyFame < 3 and player:getMainLvl() < 10 then
+    elseif
+        questIntroToTeamwork == QUEST_COMPLETED and
+        questIntermediateTeamwork == QUEST_AVAILABLE and
+        sandyFame < 3 and
+        player:getMainLvl() < 10
+    then
         player:startEvent(132) -- You don't have the requirements to start the second quest
     elseif questIntermediateTeamwork == QUEST_ACCEPTED then
         player:startEvent(129, 0, 2) -- starts the ready check for all three quests
-    elseif questIntermediateTeamwork == QUEST_COMPLETED and questAdvancedTeamwork == QUEST_AVAILABLE and sandyFame >= 4 and player:getMainLvl() >= 10 then
+    elseif
+        questIntermediateTeamwork == QUEST_COMPLETED and
+        questAdvancedTeamwork == QUEST_AVAILABLE and
+        sandyFame >= 4 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(131) -- Same job
-    elseif questIntermediateTeamwork == QUEST_COMPLETED and questAdvancedTeamwork == QUEST_AVAILABLE and sandyFame < 4 and player:getMainLvl() < 10 then
+    elseif
+        questIntermediateTeamwork == QUEST_COMPLETED and
+        questAdvancedTeamwork == QUEST_AVAILABLE and
+        sandyFame < 4 and
+        player:getMainLvl() < 10
+    then
         player:startEvent(130) -- post second and third quest dialog
     elseif questAdvancedTeamwork == QUEST_ACCEPTED then
         player:startEvent(129, 0, 3) -- starts the ready check for all three quests
@@ -71,7 +91,10 @@ entity.onEventUpdate = function(player, csid, option)
             for key, member in pairs(party) do
                 local mRace = member:getRace()
 
-                if member:getZoneID() ~= player:getZoneID() or member:checkDistance(player) > 15 then
+                if
+                    member:getZoneID() ~= player:getZoneID() or
+                    member:checkDistance(player) > 15
+                then
                     player:updateEvent(1) -- member not in zone or range
                     return
                 else
@@ -79,11 +102,20 @@ entity.onEventUpdate = function(player, csid, option)
                         partySameNationCount = partySameNationCount + 1
                     end
 
-                    if (pRace == xi.race.HUME_M or pRace == xi.race.HUME_F) and (mRace == xi.race.HUME_M or mRace == xi.race.HUME_F) then
+                    if
+                        (pRace == xi.race.HUME_M or pRace == xi.race.HUME_F) and
+                        (mRace == xi.race.HUME_M or mRace == xi.race.HUME_F)
+                    then
                         partySameRaceCount = partySameRaceCount + 1
-                    elseif (pRace == xi.race.ELVAAN_M or pRace == xi.race.ELVAAN_F) and (mRace == xi.race.ELVAAN_M or mRace == xi.race.ELVAAN_F) then
+                    elseif
+                        (pRace == xi.race.ELVAAN_M or pRace == xi.race.ELVAAN_F) and
+                        (mRace == xi.race.ELVAAN_M or mRace == xi.race.ELVAAN_F)
+                    then
                         partySameRaceCount = partySameRaceCount + 1
-                    elseif (pRace == xi.race.TARU_M or pRace == xi.race.TARU_F) and (mRace == xi.race.TARU_M or mRace == xi.race.TARU_F) then
+                    elseif
+                        (pRace == xi.race.TARU_M or pRace == xi.race.TARU_F) and
+                        (mRace == xi.race.TARU_M or mRace == xi.race.TARU_F)
+                    then
                         partySameRaceCount = partySameRaceCount + 1
                     elseif pRace == xi.race.GALKA and mRace == xi.race.GALKA then
                         partySameRaceCount = partySameRaceCount + 1
@@ -133,19 +165,28 @@ entity.onEventFinish = function(player, csid, option)
         local questIntermediateTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
         local questAdvancedTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
-        if questIntroToTeamwork == QUEST_ACCEPTED and player:getLocalVar("introToTmwrk_pass") == 1 then
+        if
+            questIntroToTeamwork == QUEST_ACCEPTED and
+            player:getLocalVar("introToTmwrk_pass") == 1
+        then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
                 item = 13442,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.THIRD_RATE_ORGANIZER,
             })
-        elseif questIntermediateTeamwork == QUEST_ACCEPTED and player:getLocalVar("intermedTmwrk_pass") == 1 then
+        elseif
+            questIntermediateTeamwork == QUEST_ACCEPTED and
+            player:getLocalVar("intermedTmwrk_pass") == 1
+        then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
                 item = 4994,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.SECOND_RATE_ORGANIZER,
             })
-        elseif questAdvancedTeamwork == QUEST_ACCEPTED and player:getLocalVar("advTmwrk_pass") == 1 then
+        elseif
+            questAdvancedTeamwork == QUEST_ACCEPTED and
+            player:getLocalVar("advTmwrk_pass") == 1
+        then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
                 item = 13459,
                 fame = 80, -- fame defaults to 30 if not set
@@ -163,4 +204,5 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     end
 end
+
 return entity

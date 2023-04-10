@@ -25,8 +25,8 @@ The NavMesh class will load and find paths given a start point and end point.
 #ifndef _NAVMESH_H
 #define _NAVMESH_H
 
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -36,7 +36,7 @@ The NavMesh class will load and find paths given a start point and end point.
 
 #define MAX_NAV_POLYS 256
 
-static const int NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; //'MSET';
+static const int NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
 static const int NAVMESHSET_VERSION = 1;
 
 struct NavMeshSetHeader
@@ -65,6 +65,7 @@ public:
     static void       ToDetourPos(position_t* out);
 
 public:
+    CNavMesh(CNavMesh* other);
     CNavMesh(uint16 zoneID);
     ~CNavMesh();
 
@@ -83,7 +84,7 @@ public:
     // Recast Detour Docs:
     // Casts a 'walkability' ray along the surface of the navigation mesh from the start position toward the end position.
     // Note: This is not a point-to-point in 3D space calculation, it is 2D across the navmesh!
-    bool raycast(const position_t& start, const position_t& end, bool lookOffMesh);
+    bool raycast(const position_t& start, const position_t& end);
 
     bool validPosition(const position_t& position);
     bool findClosestValidPoint(const position_t& position, float* validPoint);
@@ -92,15 +93,50 @@ public:
     // Like validPosition(), but will also set the given position to the valid position that it finds.
     void snapToValidPosition(position_t& position);
 
+    static inline void outputError(uint32 status)
+    {
+        if (status & DT_WRONG_MAGIC)
+        {
+            ShowError("Detour: Input data is not recognized.");
+        }
+        else if (status & DT_WRONG_VERSION)
+        {
+            ShowError("Detour: Input data is in wrong version.");
+        }
+        else if (status & DT_OUT_OF_MEMORY)
+        {
+            ShowError("Detour: Operation ran out of memory.");
+        }
+        else if (status & DT_INVALID_PARAM)
+        {
+            ShowError("Detour: An input parameter was invalid.");
+        }
+        else if (status & DT_BUFFER_TOO_SMALL)
+        {
+            ShowError("Detour: Result buffer for the query was too small to store all results.");
+        }
+        else if (status & DT_OUT_OF_NODES)
+        {
+            ShowError("Detour: Query ran out of nodes during search.");
+        }
+        else if (status & DT_PARTIAL_RESULT)
+        {
+            ShowError("Detour: Query did not reach the end location, returning best guess.");
+        }
+        else if (status & DT_ALREADY_OCCUPIED)
+        {
+            ShowError("Detour: A tile has already been assigned to the given x,y coordinate");
+        }
+    }
+
 private:
-    void outputError(uint32 status);
     bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
 
-    std::string                filename;
+    std::string                m_filename;
     uint16                     m_zoneID;
     dtRaycastHit               m_hit;
     dtPolyRef                  m_hitPath[20];
-    std::unique_ptr<dtNavMesh> m_navMesh;
+    std::shared_ptr<dtNavMesh> m_navMesh;
     dtNavMeshQuery             m_navMeshQuery;
 };
 

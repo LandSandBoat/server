@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Rasmus
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

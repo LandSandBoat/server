@@ -15,8 +15,13 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 728)
+end
+
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    if mob:getHPP() > 75 then
+    local stage = mob:getLocalVar("stage")
+    if stage == 0 then
         local checker = math.random()
         if checker < 0.50 then
             return abilities[1]
@@ -25,9 +30,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
         else
             return abilities[4]
         end
-    end
-
-    if mob:getHPP() < 20 then
+    elseif stage == 3 then
         -- does a specific order of moves in final phase
         local order = mob:getLocalVar("order")
 
@@ -42,24 +45,31 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
             return abilities[2]
         end
     end
+end
 
+entity.onMobWeaponSkill = function(target, mob, skill)
+    -- After using Nuclear Waste use a random elemental conal attack
+    if skill:getID() == 1268 then
+        mob:timer(4000, function(mobArg)
+            local ability = math.random(1262, 1267)
+            mob:useMobAbility(ability)
+        end)
+    end
 end
 
 entity.onMobFight = function(mob, target)
-    -- Gains regain at under 25% HP
-    if
-       mob:getHPP() < 25 and not
-       mob:hasStatusEffect(xi.effect.REGAIN)
-    then
-        mob:addStatusEffect(xi.effect.REGAIN, 5, 3, 0)
-        mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
-    end
-
-    if mob:getLocalVar("nuclearWaste") == 1 then
-        -- after nuclear waste immediately uses a random element ability
-        local ability = math.random(1262,1267)
-        mob:useMobAbility(ability)
-        mob:setLocalVar("nuclearWaste", 0)
+    local stage = mob:getLocalVar("stage")
+    local hpp = mob:getHPP()
+    if stage == 0 and hpp < 70 then
+        mob:setLocalVar("stage", 1)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 1190)
+    elseif stage == 1 and hpp < 40 then
+        mob:setLocalVar("stage", 2)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 1191)
+    elseif stage == 2 and hpp < 20 then
+        mob:setLocalVar("stage", 3)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 1192)
+        mob:setMod(xi.mod.REGAIN, 100)
     end
 end
 

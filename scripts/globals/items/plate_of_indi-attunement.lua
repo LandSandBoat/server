@@ -3,14 +3,14 @@
 -- plate_of_indi-attunement
 -- Teaches INDI-ATTUNEMENT
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(xi.magic.spell.INDI_ATTUNEMENT)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(xi.magic.spell.INDI_ATTUNEMENT)
 end
 
-return item_object
+return itemObject

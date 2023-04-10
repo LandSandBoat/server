@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 --  NPC: Delaulne
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

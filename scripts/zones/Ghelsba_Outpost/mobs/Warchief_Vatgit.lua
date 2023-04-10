@@ -12,8 +12,8 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
     if
-        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2
-        and player:getNation() == xi.nation.WINDURST
+        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2 and
+        player:getNation() == xi.nation.WINDURST
     then
         if player:getMissionStatus(player:getNation()) == 4 then
             player:setMissionStatus(player:getNation(), 5)

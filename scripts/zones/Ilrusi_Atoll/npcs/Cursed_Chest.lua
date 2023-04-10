@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
     local figureheadChest = instance:getProgress()
 
-    if (npcID == figureheadChest) then
+    if npcID == figureheadChest then
         player:messageSpecial(ID.text.GOLDEN)
         instance:complete()
         for i, v in pairs(ID.mob[2]) do

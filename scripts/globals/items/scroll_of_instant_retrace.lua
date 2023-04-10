@@ -6,9 +6,9 @@
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if target:getCampaignAllegiance() == 0 then
         return 56
     else
@@ -16,10 +16,10 @@ item_object.onItemCheck = function(target)
     end
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if target:getCampaignAllegiance() > 0 then
         target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 2)
     end
 end
 
-return item_object
+return itemObject

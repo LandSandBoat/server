@@ -119,9 +119,11 @@ xi.pyxis.npc.onPyxisTrigger = function(player, npc)
             [xi.pyxis.chestType.BLUE] = function()
                 xi.pyxis.blueChest.startEvent(player, npc, lockedEvent, contentMessage, timeleft)
             end,
+
             [xi.pyxis.chestType.RED] = function()
                 xi.pyxis.redChest.startEvent(player, npc, lockedEvent, contentMessage, timeleft)
             end,
+
             [xi.pyxis.chestType.GOLD] = function()
                 xi.pyxis.goldChest.startEvent(player, npc, lockedEvent, contentMessage, timeleft)
             end,
@@ -136,6 +138,7 @@ xi.pyxis.npc.onPyxisTrigger = function(player, npc)
             [xi.pyxis.chestDropType.TEMPORARY_ITEM] = function()
                 dropTypeEvent = 1
             end,
+
             [xi.pyxis.chestDropType.POPITEM] = function()
                 dropTypeEvent = 2
             end,

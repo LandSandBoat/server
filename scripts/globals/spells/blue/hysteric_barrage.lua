@@ -9,22 +9,22 @@
 -- Level: 69
 -- Casting Time: 0.5 seconds
 -- Recast Time: 28.5 seconds
--- Skillchain Element: Wind (can open Scission or Gravitation can close Detonation)
+-- Skillchain Element: Detonation
 -- Combos: Evasion Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.HTH
@@ -34,7 +34,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.tp150 = 1.625
     params.tp300 = 1.75
     params.azuretp = 1.875
-    params.duppercap = 80 -- D upper >=69
+    params.duppercap = 80
     params.str_wsc = 0.0
     params.dex_wsc = 0.3
     params.vit_wsc = 0.0
@@ -42,10 +42,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
-return spell_object
+return spellObject

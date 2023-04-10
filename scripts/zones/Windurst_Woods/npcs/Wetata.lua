@@ -22,7 +22,11 @@ entity.onTrigger = function(player, npc)
     local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
     local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and xi.settings.main.ENABLE_TRUST_QUESTS == 1 and trustWindurst == QUEST_AVAILABLE then
+    if
+        player:getMainLvl() >= 5 and
+        xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+        trustWindurst == QUEST_AVAILABLE
+    then
         if trustBastok == QUEST_AVAILABLE and trustSandoria == QUEST_AVAILABLE then
             player:startEvent(863)
         elseif trustBastok == QUEST_COMPLETED or trustSandoria == QUEST_COMPLETED then

@@ -3,9 +3,9 @@
 -- Checks eligibility to use
 -- maxBabies set by NM lua
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local momma = mob:getID()
     local fam = 1
     for i = momma + 1, momma + mob:getLocalVar("maxBabies") do
@@ -15,10 +15,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
             break
         end
     end
+
     return fam
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local momma = mob:getID()
     local pos = mob:getPos()
     for babyID = momma + 1, momma + mob:getLocalVar("maxBabies") do
@@ -31,4 +32,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-return mobskill_object
+return mobskillObject

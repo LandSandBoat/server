@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Magephaud
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/keyitems")
@@ -22,7 +21,11 @@ end
 entity.onTrigger = function(player, npc)
     local nFame = player:getFameLevel(xi.quest.fame_area.NORG)
 
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and nFame >= 2 then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and
+        player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and
+        nFame >= 2
+    then
         player:startEvent(116, 748)  -- Quest start - you have tonberry kills?! I got yo back ^.-
     elseif player:getCharVar("EveryonesGrudgeStarted")  == 1 then
         player:startEvent(117, 748)

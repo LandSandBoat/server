@@ -48,7 +48,11 @@ oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
         end
     end
 
-    if mammetDeathCount == 5 and player:hasStatusEffect(xi.effect.BATTLEFIELD) and player:getLocalVar("[OTBF]MammetCS") == 0 then
+    if
+        mammetDeathCount == 5 and
+        player:hasStatusEffect(xi.effect.BATTLEFIELD) and
+        player:getLocalVar("[OTBF]MammetCS") == 0
+    then
         player:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
         player:startEvent(10)
     end
@@ -86,6 +90,7 @@ oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
         returnToAirship(player)
     end
 end
+
 -----------------------------------
 -- Battle 3: Ultima
 -----------------------------------

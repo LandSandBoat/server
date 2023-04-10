@@ -148,7 +148,7 @@ namespace battleutils
     uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-    uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
+    float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent);
@@ -229,6 +229,7 @@ namespace battleutils
     int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage);
     int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage);
     int32 HandleFanDance(CBattleEntity* PDefender, int32 damage);
+    void  HandleScarletDelirium(CBattleEntity* PDefender, int32 damage);
 
     // stores damage for afflatus misery if active
     void HandleAfflatusMiseryDamage(CBattleEntity* PDefender, int32 damage);

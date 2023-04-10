@@ -21,11 +21,20 @@ entity.onTrigger = function(player, npc)
     local gownQuestProgress     = player:getCharVar("AF_SCH_BODY")
 
     -- ON SABBATICAL
-    if offset == 0 and onSabbatical == QUEST_ACCEPTED and onSabbaticalProgress == 2 then
+    if
+        offset == 0 and
+        onSabbatical == QUEST_ACCEPTED and
+        onSabbaticalProgress == 2
+    then
         player:startEvent(2)
 
     -- SCH AF SIDEQUEST: PANTS
-    elseif offset == 1 and pantsQuestProgress > 0 and pantsQuestProgress < 3 and not player:hasKeyItem(xi.ki.SLUG_MUCUS) then
+    elseif
+        offset == 1 and
+        pantsQuestProgress > 0 and
+        pantsQuestProgress < 3 and
+        not player:hasKeyItem(xi.ki.SLUG_MUCUS)
+    then
         npcUtil.giveKeyItem(player, xi.ki.SLUG_MUCUS)
         player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)
 
@@ -46,7 +55,12 @@ entity.onTrigger = function(player, npc)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
 
     -- SCH AF SIDEQUEST: BODY
-    elseif offset == 2 and gownQuestProgress > 0 and gownQuestProgress < 3 and not player:hasKeyItem(xi.ki.PEISTE_DUNG) then
+    elseif
+        offset == 2 and
+        gownQuestProgress > 0 and
+        gownQuestProgress < 3 and
+        not player:hasKeyItem(xi.ki.PEISTE_DUNG)
+    then
         npcUtil.giveKeyItem(player, xi.ki.PEISTE_DUNG)
         player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
 
@@ -69,7 +83,6 @@ entity.onTrigger = function(player, npc)
     -- DEFAULT
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-
     end
 end
 

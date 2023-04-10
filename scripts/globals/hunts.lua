@@ -1240,7 +1240,7 @@ local zone =
 --[[    0  |   0000000000   | 0000000000 |  0000
       1bit |    10 bits     |  10 bits   |  4bit
       lock |   Scyld Qty    | NM pageId #  | status
-                                          (Has distinct values) ]]--
+(Has distinct values) ]]--
 
 function xi.hunts.onTrigger(player, npc)
     local huntId = player:getCharVar("[hunt]id")
@@ -1336,6 +1336,7 @@ function xi.hunts.onEventFinish(player, csid, option)
         else
             player:addCurrency("scyld", scyldBounty)
         end
+
         player:messageSpecial(msg.HUNT_RECORDED)
         player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency("scyld"))
     end

@@ -11,7 +11,10 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") == 2 then
+    if
+        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and
+        player:getCharVar("NavigatingtheUnfriendlySeas") == 2
+    then
         if trade:hasItemQty(2341, 1) and trade:getItemCount() == 1 then -- Trade Hydrogauge
             player:messageSpecial(ID.text.PLACE_HYDROGAUGE, 2341) -- You set the <item> in the trench.
             player:tradeComplete() --Trade Complete
@@ -22,7 +25,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") == 3 then
+    if
+        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and
+        player:getCharVar("NavigatingtheUnfriendlySeas") == 3
+    then
         if player:getCharVar("Leypoint_waitJTime") <= os.time() then
             player:startEvent(508)
             player:setCharVar("NavigatingtheUnfriendlySeas", 4)   -- play cs for having waited enough time

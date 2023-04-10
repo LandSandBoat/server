@@ -4,10 +4,10 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 local physSDT = { xi.mod.SLASH_SDT, xi.mod.PIERCE_SDT, xi.mod.IMPACT_SDT, xi.mod.HTH_SDT }
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     for i = 1, #physSDT do
         local sdtModPhys = target:getMod(physSDT[i])
         local reductionPhys = (1000 - sdtModPhys) * 0.25
@@ -23,10 +23,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     for i = 1, #physSDT do
         local sdtModPhys = target:getMod(physSDT[i])
         local restorePhys = (1000 - sdtModPhys) / 0.75
@@ -48,4 +48,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

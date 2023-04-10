@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst-Jeuno Airship
 --  NPC: Mauricio
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
 -----------------------------------
@@ -11,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
 
@@ -65,7 +63,7 @@ entity.onTrigger = function(player, npc)
         vHour = 0
     end
 
-    player:messageSpecial(message, math.floor((2.4 * vMinutes) / 60), math.floor( vMinutes / 60 + 0.5))
+    player:messageSpecial(message, math.floor((2.4 * vMinutes) / 60), math.floor(vMinutes / 60 + 0.5))
 end
 
 entity.onEventUpdate = function(player, csid, option)

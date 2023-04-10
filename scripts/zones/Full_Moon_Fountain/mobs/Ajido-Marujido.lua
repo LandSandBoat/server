@@ -11,10 +11,10 @@ local entity = {}
 
 local function ajidoSelectTarget(mobArg)
     -- pick a random living target from the two enemies
-    local inst = mobArg:getBattlefield():getArea()
+    local inst       = mobArg:getBattlefield():getArea()
     local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
-
     local livingMobs = {}
+
     for i = 4, 5 do
         local mobTarget = GetMobByID(instOffset + i)
         if not mobTarget:isDead() then
@@ -22,7 +22,7 @@ local function ajidoSelectTarget(mobArg)
         end
     end
 
-    local target = livingMobs[math.random(#livingMobs)]
+    local target = livingMobs[math.random(1, #livingMobs)]
     if not target:isDead() then
         mobArg:addEnmity(target, 0, 1)
     end
@@ -47,7 +47,9 @@ entity.onMobSpawn = function(ajidoMob)
     end)
 
     -- TODO: This doesn't work, but the logic is here.
-    ajidoMob:timer(40000, function(mobArg) ajidoSelectTarget(mobArg) end)
+    ajidoMob:timer(40000, function(mobArg)
+        ajidoSelectTarget(mobArg)
+    end)
 end
 
 entity.onMobRoam = function(mob)
@@ -62,6 +64,7 @@ entity.onMobFight = function(mob, target)
         mob:showText(mob, ID.text.DONT_GIVE_UP)
         mob:setLocalVar("saidMessage", 1)
     end
+
     if target:isEngaged() then
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
     end

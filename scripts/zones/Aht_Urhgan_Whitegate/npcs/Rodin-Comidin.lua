@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Rodin-Comidin
--- Standard Info NPC
--- Involved in Missions: TOAU-41
 -- !pos 17.205 -5.999 51.161 50
 -----------------------------------
 local entity = {}

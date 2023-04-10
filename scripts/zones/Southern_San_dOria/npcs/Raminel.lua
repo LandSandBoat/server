@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -138.436340, y = -2.000000, z = 16.227097 },
     { x = -137.395432, y = -2.000000, z = 15.831898 },
@@ -57,18 +57,21 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("delivered") ~= 1 and npc:atPoint(xi.path.get(path, 39)) then
+    if
+        npc:getLocalVar("delivered") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 39))
+    then
         -- give package to Lusiane, wait 4 seconds, then continue
         local lus = GetNPCByID(ID.npc.LUSIANE)
         lus:showText(npc, ID.text.RAMINEL_DELIVERY)
         npc:showText(lus, ID.text.LUSIANE_THANK)
         npc:setLocalVar("delivered", 1)
-    elseif npc:atPoint(xi.path.last(path)) then
+    elseif npc:atPoint(xi.path.last(pathNodes)) then
         -- when I walk away stop looking at me
         GetNPCByID(ID.npc.LUSIANE):clearTargID()
         npc:setLocalVar("delivered", 0)

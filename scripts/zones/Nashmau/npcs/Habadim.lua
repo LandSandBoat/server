@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Habadim
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

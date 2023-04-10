@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Somnolent Rooster
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

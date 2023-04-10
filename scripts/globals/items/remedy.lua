@@ -6,31 +6,31 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+local removableStatus =
+{
+    xi.effect.SILENCE,
+    xi.effect.BLINDNESS,
+    xi.effect.POISON,
+    xi.effect.PARALYSIS,
+}
 
-    if (target:hasStatusEffect(xi.effect.SILENCE) == true) then
-        target:delStatusEffect(xi.effect.SILENCE)
-    end
-    if (target:hasStatusEffect(xi.effect.BLINDNESS) == true) then
-        target:delStatusEffect(xi.effect.BLINDNESS)
-    end
-    if (target:hasStatusEffect(xi.effect.POISON) == true) then
-        target:delStatusEffect(xi.effect.POISON)
-    end
-    if (target:hasStatusEffect(xi.effect.PARALYSIS) == true) then
-        target:delStatusEffect(xi.effect.PARALYSIS)
+itemObject.onItemUse = function(target)
+    for _, effectId in ipairs(removableStatus) do
+        if target:hasStatusEffect(effectId) then
+            target:delStatusEffect(effectId)
+        end
     end
 
-    local rDisease = math.random(1, 2) -- Disease is not garunteed to be cured, 1 means removed 2 means fail. 50% chance
-    if (rDisease == 1 and target:hasStatusEffect(xi.effect.DISEASE) == true) then
+    local rDisease = math.random(1, 2) -- Disease is not guaranteed to be cured, 1 means removed 2 means fail. 50% chance
+    if rDisease == 1 and target:hasStatusEffect(xi.effect.DISEASE) then
         target:delStatusEffect(xi.effect.DISEASE)
     end
 end
 
-return item_object
+return itemObject

@@ -20,10 +20,12 @@
 */
 
 #include "conquest_system.h"
+
+#include "common/vana_time.h"
+
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 #include "packets/conquest_map.h"
 
@@ -51,10 +53,13 @@ namespace conquest
         zoneutils::ForEachZone([](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Update);
-                PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsZone(); });
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
+                    PChar->PLatentEffectContainer->CheckLatentsZone();
+                });
             }
         });
         // clang-format on
@@ -129,6 +134,12 @@ namespace conquest
 
     void LoseInfluencePoints(CCharEntity* PChar)
     {
+        // http://wiki.ffo.jp/html/498.html
+        if (PChar->GetMLevel() < settings::get<uint8>("map.MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS"))
+        {
+            return;
+        }
+
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
         int         points = 0;
 
@@ -365,7 +376,7 @@ namespace conquest
         zoneutils::ForEachZone([](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
             }
@@ -392,7 +403,7 @@ namespace conquest
         zoneutils::ForEachZone([](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
                 PZone->ForEachChar([](CCharEntity* PChar)

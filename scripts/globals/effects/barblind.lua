@@ -3,17 +3,17 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.BLINDRES, effect:getPower())
+effectObject.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.BLIND_MEVA, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.BLINDRES, effect:getPower())
+effectObject.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.BLIND_MEVA, effect:getPower())
 end
 
-return effect_object
+return effectObject

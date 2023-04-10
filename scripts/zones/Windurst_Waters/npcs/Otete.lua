@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local regionOwner = GetRegionOwner(xi.region.LITELOR)
 
-    if (regionOwner ~= xi.nation.WINDURST) then
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.OTETE_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.OTETE_OPEN_DIALOG)

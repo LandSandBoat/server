@@ -30,10 +30,6 @@
 #include "common/lua.h"
 extern sol::state lua;
 
-#ifdef TRACY_ENABLE
-#include "TracyLua.hpp"
-#endif
-
 // Sol compilation definitions are in the base CMakeLists file
 // SOL_ALL_SAFETIES_ON = 1
 // SOL_NO_CHECK_NUMBER_PRECISION = 1
@@ -49,8 +45,8 @@ extern sol::state lua;
     lua.new_usertype<BindingTypeName>(className)
 #define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
 
-#include "../items/item_equipment.h"
-#include "../spell.h"
+#include "items/item_equipment.h"
+#include "spell.h"
 
 #include "lua_ability.h"
 #include "lua_action.h"
@@ -60,10 +56,10 @@ extern sol::state lua;
 #include "lua_item.h"
 #include "lua_mobskill.h"
 #include "lua_petskill.h"
-#include "lua_region.h"
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
 #include "lua_trade_container.h"
+#include "lua_trigger_area.h"
 #include "lua_zone.h"
 
 /************************************************************************
@@ -83,7 +79,7 @@ class CBattlefield;
 class CItem;
 class CMobSkill;
 class CPetSkill;
-class CRegion;
+class CTriggerArea;
 class CStatusEffect;
 class CTradeContainer;
 class CItemPuppet;
@@ -102,7 +98,7 @@ class CLuaInstance;
 class CLuaItem;
 class CLuaMobSkill;
 class CLuaPetSkill;
-class CLuaRegion;
+class CLuaTriggerArea;
 class CLuaSpell;
 class CLuaStatusEffect;
 class CLuaTradeContainer;
@@ -126,21 +122,23 @@ namespace luautils
 
     void ReloadFilewatchList();
 
-    std::vector<std::string> GetQuestAndMissionFilenamesList();
+    std::vector<std::string> GetContainerFilenamesList();
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
-    void CacheLuaObjectFromFile(std::string filename, bool printOutput = false);
+    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry = false);
     auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
 
     void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
 
-    void  SendEntityVisualPacket(uint32 npcid, const char* command);
-    void  InitInteractionGlobal();
-    auto  GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
-    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    void SendEntityVisualPacket(uint32 npcid, const char* command);
+    void InitInteractionGlobal();
+    auto GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
+    auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetEntityByID(uint32 mobid, sol::object const& instanceObj, sol::object const& arg3) -> std::optional<CLuaBaseEntity>;
+
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
@@ -182,6 +180,7 @@ namespace luautils
     bool   IsMoonNew();  // Returns true if the moon is new
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
+    int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
     void  SetServerVariable(std::string const& name, int32 value);
@@ -201,17 +200,19 @@ namespace luautils
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
-    void  OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
-    void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
-    void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
-    int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
-    void  OnZoneTick(CZone* PZone);                            // triggers when the zone is ticked
-    int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion); // when player enters a region of a zone
-    int32 OnRegionLeave(CCharEntity* PChar, CRegion* Pregion); // when player leaves a region of a zone
+    void  OnZoneIn(CCharEntity* PChar);                                       // triggers when a player zones into a zone
+    void  OnZoneOut(CCharEntity* PChar);                                      // triggers when a player leaves a zone
+    void  AfterZoneIn(CBaseEntity* PChar);                                    // triggers after a player has finished zoning in
+    int32 OnZoneInitialise(uint16 ZoneID);                                    // triggers when zone is loaded
+    void  OnZoneTick(CZone* PZone);                                           // triggers when the zone is ticked
+    int32 OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea); // when player enters a trigger area in a zone
+    int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea); // when player leaves a trigger area in a zone
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
 
+    void OnServerStart();
+    void OnJSTMidnight();
     void OnTimeServerTick();
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
@@ -236,7 +237,9 @@ namespace luautils
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem);                                                                                                          // trigger when an item is dropped
-    int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
+    int32 OnItemEquip(CBaseEntity* PUser, CItem* PItem);
+    int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+    int32 CheckForGearSet(CBaseEntity* PTarget); // check for gear sets
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
@@ -260,7 +263,11 @@ namespace luautils
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
-    int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
+    int32 OnPetLevelRestriction(CBaseEntity* PMob); // Triggers onPetLevelRestriction in global pet script
+
+    int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
+    int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it
+    int32 OnPathComplete(CBaseEntity* PEntity); // triggers when an entity finishes its pathing
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
     int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
@@ -269,6 +276,7 @@ namespace luautils
 
     void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);                  // triggers when enter a bcnm
     void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
+    void OnBattlefieldKick(CCharEntity* PChar);
 
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
@@ -341,6 +349,41 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+
+    template <typename... Targs>
+    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
+    {
+        // Calls the Battlefield event through the interaction object if it can find it
+        sol::table contents = lua["xi"]["battlefield"]["contents"];
+        if (!contents.valid())
+        {
+            return -1;
+        }
+
+        auto battlefield = contents[battlefieldId];
+        if (!battlefield.valid())
+        {
+            return -1;
+        }
+
+        auto content = battlefield.get<sol::table>();
+        auto handler = content[eventName];
+        if (!handler.valid())
+        {
+            return -1;
+        }
+
+        auto result = handler.get<sol::protected_function>()(content, args...);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::%s: %s", eventName, err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

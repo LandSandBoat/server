@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Oleg
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

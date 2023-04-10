@@ -4,23 +4,23 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.HAGAKURE_EFFECT)
 
     target:addMod(xi.mod.SAVETP, 400)
     target:addMod(xi.mod.TP_BONUS, 1000 + (jpValue * 10))
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.HAGAKURE_EFFECT)
 
     target:delMod(xi.mod.SAVETP, 400)
     target:delMod(xi.mod.TP_BONUS, 1000 + (jpValue * 10))
 end
 
-return effect_object
+return effectObject

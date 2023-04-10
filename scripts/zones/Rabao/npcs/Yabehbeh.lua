@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Yabehbeh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

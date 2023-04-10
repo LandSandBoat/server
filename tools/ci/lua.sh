@@ -24,11 +24,11 @@ global_objects=(
     xi
     ai
     os
+    _
 
     Module
     Override
     super
-    applyOverride
 
     common
     zones
@@ -39,6 +39,7 @@ global_objects=(
     mixins
     g_mixins
     applyMixins
+    mixinOptions
 
     set
     printf
@@ -67,7 +68,11 @@ global_objects=(
     Sequence
     Container
     Event
-    LimbusArea
+    Battlefield
+    BattlefieldMission
+    BattlefieldQuest
+    Limbus
+    SeasonalEvent
 
     removeSleepEffects
 
@@ -96,10 +101,6 @@ global_objects=(
     getMeleeDmg
     handleWSGorgetBelt
 
-    getRecommendedAssaultLevel
-
-    PATHFLAG_WALLHACK
-
     RoeParseTimed
     getRoeRecords
     RoeParseRecords
@@ -113,16 +114,9 @@ global_objects=(
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
-    HALLOWEEN_2008
-    HALLOWEEN_2009
-    HALLOWEEN_2010
-
-    salvageUtil
 
     addBonuses
     addBonusesAbility
-    applyBarspell
-    applyBarstatus
     applyResistance
     applyResistanceAbility
     applyResistanceEffect
@@ -132,13 +126,7 @@ global_objects=(
     calculateMagicDamage
     calculatePotency
     canOverwrite
-    dayWeatherBonus
-    doBoostGain
-    doDivineBanishNuke
-    doDivineNuke
-    doElementalNuke
     doEnspell
-    doNinjutsuNuke
     finalMagicAdjustments
     finalMagicNonSpellAdjustments
     getBaseCure
@@ -161,16 +149,12 @@ global_objects=(
     handleThrenody
     hasSleepEffects
     isValidHealTarget
-    skillchainCount
     takeAbilityDamage
 
     FormMagicBurst
     MobFormMagicBurst
 
     AbilityFinalAdjustments
-
-    MOBSKILL_MAGICAL
-    MOBSKILL_PHYSICAL
 
     TPMOD_NONE
     TPMOD_CHANCE
@@ -204,17 +188,10 @@ global_objects=(
     BlueFinalAdjustments
     getBlueEffectDuration
 
-    LEUJAOAM_ASSAULT_POINT
-    MAMOOL_ASSAULT_POINT
-    LEBROS_ASSAULT_POINT
-    PERIQIA_ASSAULT_POINT
-    ILRUSI_ASSAULT_POINT
-    NYZUL_ISLE_ASSAULT_POINT
-
     ForceCrash
     BuildString
 
-    DYNAMIC_LOOKUP
+    GetFirstID
 )
 
 ignores=(
@@ -234,80 +211,5 @@ ignore_rules=(
 --globals ${global_funcs[@]} ${global_objects[@]} \
 --ignore ${ignores[@]} ${ignore_rules[@]} | grep -v "Total:"
 
-python3 << EOF
-import glob
-import re
+python3 ./tools/ci/lua_stylecheck.py ${target}
 
-def check_tables_in_file(name):
-    errcount = 0
-    with open(name, 'r+') as f:
-        counter = 0
-        lines = f.readlines()
-        for line in lines:
-            counter = counter + 1
-
-            # [ ]{0,} : Any number of spaces
-            # =       : = character
-            # [ ]{0,} : Any number of spaces
-            # \{      : { character
-            # [ ]{0,} : Any number of spaces
-            # \n      : newline character
-
-            for match in re.finditer("[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
-                print(f"Incorrectly defined table: {name}:{counter}:{match.start() + 2}")
-                print("")
-                print(lines[counter - 2].strip())
-                print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                print(lines[counter].strip())
-                print("")
-
-            # local     : 'local ' (with a space)
-            # (?=       : Positive lookahead
-            # [^(ID)])  : A token that is NOT 'ID'
-            # (?=[A-Z]) : A token that starts with a capital letter
-
-            for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
-                print(f"Capitalised local name: {name}:{counter}:{match.start() + 2}")
-                print("")
-                print(lines[counter - 2].strip())
-                print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                print(lines[counter].strip())
-                print("")
-
-            # \{         : Opening curly brace
-            # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
-
-            for match in re.finditer("\{[^ ^\n^\}]", line):
-                print(f"Table opened without an appropriate following space or newline: {name}:{counter}:{match.start() + 2}")
-                print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                print("")
-                errcount += 1
-
-            # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
-            # \}         : Closing curly brace
-
-            for match in re.finditer("[^ ^\n^\{]\}", line):
-                print(f"Table closed without an appropriate preceding space or newline: {name}:{counter}:{match.start() + 2}")
-                print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                print("")
-                errcount += 1
-
-        # If you want to modify the files during the checks, write your changed lines to the appropriate
-        # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
-        #
-        # f.seek(0)
-        # f.writelines(lines)
-
-        return errcount
-
-target = '${target}'
-
-if target == 'scripts':
-    totalErrors = 0
-    for filename in glob.iglob('scripts/**/*.lua', recursive=True):
-        totalErrors += check_tables_in_file(filename)
-
-    print(totalErrors)
-else:
-    check_tables_in_file(target)
-EOF

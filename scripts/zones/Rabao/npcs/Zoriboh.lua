@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Zoriboh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

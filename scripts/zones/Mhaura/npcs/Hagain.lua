@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Hagain
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

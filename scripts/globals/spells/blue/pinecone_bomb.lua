@@ -9,62 +9,50 @@
 -- Level: 36
 -- Casting Time: 2.5 seconds
 -- Recast Time: 26.5 seconds
--- Skillchain Element(s): Fire (can open Scission or Fusion and can close Liquefaction)
+-- Skillchain Element(s): Liquefaction
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-local function inverseBellRand(min, max, weight)
-    if not weight then weight = 0.5 end
-    local mid = math.floor((max - min) / 2)
-    local rand = math.floor(mid * math.pow(math.random(), weight))
-    if math.random() < 0.5 then
-        return min + mid - rand
-    else
-        return min + mid + rand
-    end
-end
-
-spell_object.onMagicCastingCheck = function(caster,target,spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster,target,spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.PLANTOID
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
     params.scattr = SC_LIQUEFACTION
+
     params.numhits = 1
     params.multiplier = 2.25
     params.tp150 = 2.25
     params.tp300 = 2.25
     params.azuretp = 2.25
     params.duppercap = 37
-    params.str_wsc = 0.20
+    params.str_wsc = 0.2
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0
-    params.agi_wsc = 0.20
+    params.agi_wsc = 0.2
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.effect = xi.effect.SLEEP_I
+    local power = 1
+    local tick = 0
+    local duration = 60
 
-    -- After damage is applied (which would have woken the target up from a
-    -- preexisting sleep, if necesesary), apply the sleep effect for this spell.
-    if (damage > 0) then
-        local duration = inverseBellRand(15, 60, 0.3)
-        target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, duration)
-    end
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end
 
-return spell_object
+return spellObject

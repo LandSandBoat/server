@@ -3,14 +3,14 @@
 -----------------------------------
 require("scripts/globals/job_utils/summoner")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 -- http://wiki.ffo.jp/html/37926.html
-ability_object.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 3.0
@@ -30,4 +30,4 @@ ability_object.onPetAbility = function(target, pet, petskill)
     return totaldamage
 end
 
-return ability_object
+return abilityObject

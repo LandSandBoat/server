@@ -3,20 +3,21 @@
 -- Item: magna top +1
 -- Teleport's user to Purgonorgo Isle
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
 require("scripts/globals/teleports")
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:isZoneVisited(4) == false) then
+    if not target:hasVisitedZone(4) then
         result = 56
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     xi.teleport.to(target, xi.teleport.id.PURGONORGO)
 end
 
-return item_object
+return itemObject

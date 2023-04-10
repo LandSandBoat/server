@@ -22,9 +22,10 @@
 #include "common/logging.h"
 #include "common/socket.h"
 
+#include "map/message.h"
+
 #include "login.h"
 #include "login_auth.h"
-#include "message_server.h"
 
 #include <cctype>
 #include <cstdio>
@@ -49,9 +50,7 @@ enum ACCOUNT_PRIVILIGE_CODE : uint8
 };
 
 /*
- *
  *       LOGIN SECTION
- *
  */
 int32 connect_client_login(int32 listenfd)
 {
@@ -105,7 +104,7 @@ int32 login_parse(int32 fd)
         // data check
         if (check_string(name, 16) && check_string(password, 16))
         {
-            ShowWarning("login_parse: %s send unreadable data", ip2str(sd->client_addr));
+            ShowWarning(fmt::format("login_parse: {} send unreadable data", ip2str(sd->client_addr)));
             sessions[fd]->wdata.resize(1);
             ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
             do_close_login(sd, fd);
@@ -132,19 +131,9 @@ int32 login_parse(int32 fd)
 
                     if (status & ACCOUNT_STATUS_CODE::NORMAL)
                     {
-                        // fmtQuery = "SELECT * FROM accounts_sessions WHERE accid = %d AND client_port <> 0";
-
-                        // int32 ret = sql->Query(fmtQuery,sd->accid);
-
-                        // if( ret != SQL_ERROR && sql->NumRows() != 0 )
-                        //{
-                        //  ref<uint8>(sessions[fd]->wdata,0) = 0x05; // SESSION has already activated
-                        //  WFIFOSET(fd,33);
-                        //  do_close_login(sd,fd);
-                        //  return 0;
-                        //}
                         fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
                         sql->Query(fmtQuery, sd->accid);
+
                         fmtQuery = "SELECT charid, server_addr, server_port \
                                 FROM accounts_sessions JOIN accounts \
                                 ON accounts_sessions.accid = accounts.id \
@@ -160,13 +149,20 @@ int32 login_parse(int32 fd)
 
                                 ip |= (port << 32);
 
+                                std::ignore = ip;
+
                                 zmq::message_t chardata(sizeof(charid));
                                 ref<uint32>((uint8*)chardata.data(), 0) = charid;
                                 zmq::message_t empty(0);
 
-                                queue_message(ip, MSG_LOGIN, &chardata, &empty);
+                                // TODO: MSG_LOGIN is a no-op in message_server.cpp,
+                                //     : so sending this does nothing?
+                                //     : But in the client (message.cpp), it _could_
+                                //     : be used to clear out lingering PChar data.
+                                // queue_message(ipp, MSG_LOGIN, &chardata, &empty);
                             }
                         }
+
                         memset(&sessions[fd]->wdata[0], 0, 33);
                         sessions[fd]->wdata.resize(33);
                         ref<uint8>(sessions[fd]->wdata.data(), 0)  = LOGIN_SUCCESS;
@@ -178,7 +174,6 @@ int32 login_parse(int32 fd)
                     {
                         memset(&sessions[fd]->wdata[0], 0, 33);
                         sessions[fd]->wdata.resize(33);
-                        //  ref<uint8>(sessions[fd]->wdata,0) = LOGIN_SUCCESS;
                         do_close_login(sd, fd);
                     }
 
@@ -198,14 +193,14 @@ int32 login_parse(int32 fd)
 
                     if (numCons > 1)
                     {
-                        ShowInfo("login_parse: <%s> has logged in %i times! Removing older logins.", escaped_name, numCons);
+                        ShowInfo(fmt::format("login_parse: <{}> has logged in {} times! Removing older logins.", escaped_name, numCons));
                         for (int j = 0; j < (numCons - 1); j++)
                         {
                             for (login_sd_list_t::iterator i = login_sd_list.begin(); i != login_sd_list.end(); ++i)
                             {
                                 if ((*i)->accid == sd->accid)
                                 {
-                                    // ShowInfo("Current login fd=%i Removing fd=%i",sd->login_fd,(*i)->login_fd);
+                                    ShowTrace(fmt::format("Current login fd={} Removing fd={}", sd->login_fd, (*i)->login_fd));
                                     login_sd_list.erase(i);
                                     break;
                                 }
@@ -214,13 +209,13 @@ int32 login_parse(int32 fd)
                     }
                     //////
 
-                    ShowInfo("login_parse: <%s> was connected", escaped_name, status);
+                    ShowInfo(fmt::format("login_parse: <{}> was connected", escaped_name, status));
                     return 0;
                 }
 
                 sessions[fd]->wdata.resize(1);
                 ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                ShowWarning("login_parse: unexisting user <%s> tried to connect", escaped_name);
+                ShowWarning(fmt::format("login_parse: unexisting user <{}> tried to connect", escaped_name));
                 do_close_login(sd, fd);
             }
             break;
@@ -229,8 +224,8 @@ int32 login_parse(int32 fd)
                 // check if account creation is disabled
                 if (!settings::get<bool>("login.ACCOUNT_CREATION"))
                 {
-                    ShowWarning("login_parse: New account attempt <%s> but is disabled in settings.",
-                                escaped_name);
+                    ShowWarning(fmt::format("login_parse: New account attempt <{}> but is disabled in settings.",
+                                            escaped_name));
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
                     do_close_login(sd, fd);
@@ -289,14 +284,14 @@ int32 login_parse(int32 fd)
                         return -1;
                     }
 
-                    ShowInfo("login_parse: account<%s> was created", escaped_name);
+                    ShowInfo(fmt::format("login_parse: account<{}> was created", escaped_name));
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);
                 }
                 else
                 {
-                    ShowWarning("login_parse: account<%s> already exists", escaped_name);
+                    ShowWarning(fmt::format("login_parse: account<{}> already exists", escaped_name));
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
                     do_close_login(sd, fd);
@@ -312,7 +307,7 @@ int32 login_parse(int32 fd)
                 {
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                    ShowWarning("login_parse: user <%s> could not be found using the provided information. Aborting.", escaped_name);
+                    ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", escaped_name));
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -326,7 +321,7 @@ int32 login_parse(int32 fd)
                 {
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    ShowInfo("login_parse: banned user <%s> detected. Aborting.", escaped_name);
+                    ShowInfo(fmt::format("login_parse: banned user <{}> detected. Aborting.", escaped_name));
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -347,8 +342,8 @@ int32 login_parse(int32 fd)
                     {
                         sessions[fd]->wdata.resize(1);
                         ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user <%s>.", size,
-                                    escaped_name);
+                        ShowWarning(fmt::format("login_parse: Invalid packet size ({}). Could not update password for user <{}>.",
+                                                size, escaped_name));
                         do_close_login(sd, fd);
                         return 0;
                     }
@@ -367,7 +362,7 @@ int32 login_parse(int32 fd)
                     {
                         sessions[fd]->wdata.resize(1);
                         ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Error trying to update password in database for user <%s>.", escaped_name);
+                        ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", escaped_name));
                         do_close_login(sd, fd);
                         return 0;
                     }
@@ -385,11 +380,10 @@ int32 login_parse(int32 fd)
             }
             break;
             default:
-                ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>", code, ip2str(sessions[fd]->client_addr));
+                ShowWarning(fmt::format("login_parse: undefined code:[{}], ip sender:<{}>", code, ip2str(sessions[fd]->client_addr)));
                 do_close_login(sd, fd);
                 break;
         };
-        // RFIFOSKIP(fd,33);
     }
     else
     {
@@ -400,7 +394,7 @@ int32 login_parse(int32 fd)
 
 int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 {
-    ShowInfo("login_parse: %s shutdown socket", ip2str(loginsd->client_addr));
+    ShowInfo(fmt::format("login_parse: {} shutdown socket", ip2str(loginsd->client_addr)));
     erase_loginsd(fd);
     do_close_tcp(fd);
     return 0;

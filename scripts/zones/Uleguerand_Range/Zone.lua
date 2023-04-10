@@ -7,9 +7,9 @@ require('scripts/globals/missions')
 require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.JORMUNGAND)
     GetMobByID(ID.mob.JORMUNGAND):setRespawnTime(math.random(86400, 259200))
 
@@ -20,37 +20,44 @@ zone_object.onInitialize = function(zone)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0, 3, 0)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(363.025, 16, -60, 12)
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 then
-        cs=17
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("COP_louverance_story") == 1
+    then
+        cs = 17
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 17 then
         player:setCharVar("COP_louverance_story", 2)
     end
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local waterfall = GetNPCByID(ID.npc.WATERFALL)
 
     if weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS then
@@ -64,4 +71,4 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-return zone_object
+return zoneObject

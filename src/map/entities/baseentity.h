@@ -22,9 +22,10 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "packets/message_basic.h"
+
 #include <map>
 #include <memory>
 #include <vector>
@@ -140,8 +141,11 @@ enum MOUNTTYPE : uint8
     MOUNT_RED_RAPTOR     = 31,
     MOUNT_IRON_GIANT     = 32,
     MOUNT_BYAKKO         = 33,
+    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
+    MOUNT_IXION          = 35,
+    MOUNT_PHUABO         = 36,
     //
-    MOUNT_MAX = 34,
+    MOUNT_MAX = 37,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -163,8 +167,8 @@ enum UPDATETYPE : uint8
     UPDATE_HP       = 0x04,
     UPDATE_COMBAT   = 0x07,
     UPDATE_NAME     = 0x08,
-    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_CHAR = 0x1F,
     UPDATE_DESPAWN  = 0x20,
 };
@@ -214,6 +218,9 @@ struct EntityID_t
     uint16 targid;
 };
 
+class CAIContainer;
+class CBattlefield;
+class CInstance;
 class CZone;
 
 struct location_t
@@ -226,18 +233,14 @@ struct location_t
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
 
     location_t()
+    : destination(0)
+    , zone(nullptr)
+    , prevzone(0)
+    , zoning(false)
+    , boundary(0)
     {
-        destination = 0;
-        zone        = nullptr;
-        prevzone    = 0;
-        zoning      = false;
-        boundary    = 0;
     }
 };
-
-class CAIContainer;
-class CInstance;
-class CBattlefield;
 
 /************************************************************************
  *                                                                       *
@@ -254,8 +257,8 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const int8* GetName();       // Internal name of entity
-    virtual const int8* GetPacketName(); // Name of entity sent to the client
+    virtual const std::string& GetName();       // Internal name of entity
+    virtual const std::string& GetPacketName(); // Name of entity sent to the client
 
     uint16 getZone() const; // Current zone
     float  GetXPos() const; // Position of co-ordinate X
@@ -268,6 +271,9 @@ public:
     bool         IsNameHidden() const;    // checks if name is hidden
     virtual bool GetUntargetable() const; // checks if entity is untargetable
     virtual bool isWideScannable();       // checks if the entity should show up on wide scan
+
+    bool CanSeeTarget(CBaseEntity* target, bool fallbackNavMesh = true);
+    bool CanSeeTarget(const position_t& targetPoint, bool fallbackNavMesh = true);
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();
@@ -307,6 +313,8 @@ public:
     uint8           updatemask; // what to update next server tick to players nearby
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
+
+    bool m_bReleaseTargIDOnDisappear;
 
     SPAWN_ANIMATION spawnAnimation;
 

@@ -15,45 +15,33 @@
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
-require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.MAGIC_ATK_BOOST
     local typeEffectTwo = xi.effect.MAGIC_DEF_BOOST
     local power = 10
-    local duration = 90
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 90)
     local returnEffect = typeEffectOne
 
-    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
-        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
+    local actionOne = target:addStatusEffect(typeEffectOne, power, 0, duration)
+    local actionTwo = target:addStatusEffect(typeEffectTwo, power, 0, duration)
 
-        if (diffMerit > 0) then
-            duration = duration + (duration/100)* diffMerit
-        end
-
-        caster:delStatusEffect(xi.effect.DIFFUSION)
-    end
-
-    if (target:addStatusEffect(typeEffectOne, power, 0, duration) == false and target:addStatusEffect(typeEffectTwo, power, 0, duration) == false) then -- both statuses fail to apply
+    if not actionOne and not actionTwo then -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif (target:addStatusEffect(typeEffectOne, power, 0, duration) == false) then -- the first status fails to apply
-        target:addStatusEffect(typeEffectTwo, power, 0, duration)
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    elseif not actionOne and actionTwo then -- the first status fails to apply
         returnEffect = typeEffectTwo
-    else
-        target:addStatusEffect(typeEffectOne, power, 0, duration)
-        target:addStatusEffect(typeEffectTwo, power, 0, duration)
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    elseif actionOne and not actionTwo then -- the second status fails to apply
+        returnEffect = typeEffectOne
     end
 
     return returnEffect
 end
 
-return spell_object
+return spellObject

@@ -7,14 +7,14 @@
 -----------------------------------
 require("scripts/globals/job_utils/paladin")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.paladin.checkShieldBash(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     return xi.job_utils.paladin.useShieldBash(player, target, ability)
 end
 
-return ability_object
+return abilityObject

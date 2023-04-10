@@ -16,10 +16,9 @@ require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/utils")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local attack =
     {
         ['type'] = xi.attackType.BREATH,
@@ -39,43 +38,44 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local playerHP = player:getHP()
     local wsc = 0
     -- Damage calculations based on https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
-    if (tp == 3000) then
-        wsc = math.floor(playerHP * 120/256)
-    elseif (tp >= 2000) then
+    if tp == 3000 then
+        wsc = math.floor(playerHP * 120 / 256)
+    elseif tp >= 2000 then
         wsc = math.floor(playerHP * (math.floor(0.072 * tp) - 96) / 256)
-    elseif (tp >= 1000) then
+    elseif tp >= 1000 then
         wsc = math.floor(playerHP * (math.floor(0.016 * tp) + 16) / 256)
     end
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- Damage calculations changed based on: http://www.bg-wiki.com/bg/Spirits_Within http://www.bluegartr.com/threads/121610-Rehauled-Weapon-Skills-tier-lists?p=6142188&viewfull=1#post6142188
-        if (tp == 3000) then
+        if tp == 3000 then
             wsc = playerHP
-        elseif (tp >= 2000) then
+        elseif tp >= 2000 then
             wsc = math.floor(playerHP * .5)
-        elseif (tp >= 1000) then
+        elseif tp >= 1000 then
             wsc = math.floor(playerHP * .125)
         end
     end
 
     local damage = target:breathDmgTaken(wsc)
-    if (damage > 0) then
-        if (player:getOffhandDmg() > 0) then
+    if damage > 0 then
+        if player:getOffhandDmg() > 0 then
             calcParams.tpHitsLanded = 2
         else
             calcParams.tpHitsLanded = 1
         end
     end
-    if (player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
-        damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID))/100
+
+    if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
+        damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end
+
     damage = damage * xi.settings.main.WEAPON_SKILL_POWER
     calcParams.finalDmg = damage
 
     damage = takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
-
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -71,9 +71,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.AMARYLLIS) then
                         return quest:progressEvent(160, 0, 236, 2)
                     elseif isTradeInTable(trade, flowerItems) then
-                        local acceptedParam = player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED and 3 or 1
-
-                        return quest:progressEvent(160, 0, 236, acceptedParam)
+                        return quest:progressEvent(160, 0, 236, 1)
                     else
                         return quest:progressEvent(160, 0, 236, 0)
                     end
@@ -88,19 +86,26 @@ quest.sections =
                     -- Three possible event options are returned from the above triggers:
                     -- 0    : Invalid Item was traded
                     -- 1    : Valid Item was traded
+                    -- 10   : Cancel/Exit event option.
                     -- 2002 : Amaryllis was traded
 
-                    if option > 0 then
-                        player:confirmTrade()
-                    end
-
+                    -- Correct trade option (Amaryllis).
                     if option == 2002 then
                         if quest:complete(player) then
-                            player:setMoghouseFlag(2)
+                            player:confirmTrade()
+                            local mhflag = player:getMoghouseFlag()
+                            player:setMoghouseFlag(mhflag + 0x0002)
                             player:messageSpecial(portBastokID.text.MOGHOUSE_EXIT)
                         end
-                    elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
-                        quest:begin(player)
+
+                    else
+                        if option == 1 then
+                            player:confirmTrade()
+                        end
+
+                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                            quest:begin(player)
+                        end
                     end
                 end,
             },

@@ -9,7 +9,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob ,target)
+entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_GENBU):setAnimation(xi.anim.CLOSE_DOOR)
 end
 

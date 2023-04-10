@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Raging Tiger
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

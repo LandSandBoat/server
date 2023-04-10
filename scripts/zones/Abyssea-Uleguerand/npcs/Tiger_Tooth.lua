@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Tiger Tooth
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

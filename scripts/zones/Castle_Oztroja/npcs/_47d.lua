@@ -14,6 +14,7 @@ entity.onTrigger = function(player, npc)
         player:addKeyItem(xi.ki.OLD_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RING)
     end
+
     if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         npc:openDoor()
     end

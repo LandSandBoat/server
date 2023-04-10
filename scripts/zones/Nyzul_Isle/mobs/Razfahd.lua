@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Wiki is wrong, he CAN melee: https://youtu.be/5ko8xHiHvYo?t=14m31s
-    -- mob:SetAutoAttackEnabled(false)
+    -- mob:setAutoAttackEnabled(false)
     mob:setUnkillable(true)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end

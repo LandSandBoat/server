@@ -91,7 +91,7 @@ struct MeritCategoryInfo_t
 };
 
 static const MeritCategoryInfo_t meritCatInfo[] = {
-    { 3, 45, 0 },   // MCATEGORY_HP_MP       catNumber 00
+    { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
     { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
     { 19, 152, 2 }, // MCATEGORY_COMBAT      catNumber 02
     { 14, 112, 4 }, // MCATEGORY_MAGIC       catNumber 03
@@ -165,23 +165,6 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
-    /*
-        XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(merits::GMeritsTemplate));
-
-    memcpy(merits, merits::GMeritsTemplate, sizeof(merits));
-
-    for (uint8 m = 0, i = 0; i < sizeof(Categories)/sizeof(Merit_t*); ++i)
-    {
-        Categories[i] = &merits[m];
-
-        for (uint8 t = 0; t < count[i].MaxMerits; ++t)
-        {
-            merits[m].next = upgrade[count[i].UpgradeID][0];
-            merits[m++].id = ((i + 1) << 6) + (t << 1);
-                }
-    }
-        */
-
     XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate));
 
     memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
@@ -287,6 +270,32 @@ uint16 CMeritPoints::GetLimitPoints() const
 uint8 CMeritPoints::GetMeritPoints() const
 {
     return m_MeritPoints;
+}
+
+/************************************************************************
+ *                                                                       *
+ *  Return the total merits in the same category as the given merit.     *
+ *                                                                       *
+ ************************************************************************/
+
+uint16 CMeritPoints::GetMeritCountInSameCategory(MERIT_TYPE merit)
+{
+    if (!this->IsMeritExist(merit))
+    {
+        return 0;
+    }
+
+    Merit_t* PMerit = Categories[GetMeritCategory(merit)];
+
+    uint16 total = 0;
+
+    for (int i = 0; i < meritCatInfo[GetMeritCategory(merit)].MeritsInCat; ++i)
+    {
+        total += PMerit->count;
+        PMerit++;
+    }
+
+    return total;
 }
 
 /************************************************************************
@@ -420,7 +429,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
 
-    if (m_MeritPoints >= PMerit->next)
+    if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
     {
         m_MeritPoints -= PMerit->next;
 
@@ -466,17 +475,6 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
         }
     }
 }
-
-/************************************************************************
- *                                                                       *
- *  get next merit upgrade                                              *
- *                                                                       *
- ************************************************************************/
-
-// uint16 CMeritPoints::GetNextMeritUpgrade(uint16 catId, uint16 MeritCount)
-//{
-//  return upgrade[count[catId].UpgradeID][MeritCount];
-//}
 
 /************************************************************************
  *                                                                       *
@@ -573,16 +571,6 @@ namespace meritNameSpace
             }
 
             groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
-
-            /* ret = sql->Query("SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
-
-            if (ret != SQL_ERROR)
-            {
-                        while( sql->NextRow() == SQL_SUCCESS )
-                        {
-                    GMeritsTemplate
-                        }
-            }*/
         }
         else
         {

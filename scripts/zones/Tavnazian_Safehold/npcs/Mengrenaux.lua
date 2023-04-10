@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Mengrenaux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

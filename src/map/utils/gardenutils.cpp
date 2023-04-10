@@ -23,14 +23,15 @@
 
 #include "gardenutils.h"
 
+#include "common/vana_time.h"
+
 #include <cmath>
 
-#include "../entities/charentity.h"
-#include "../item_container.h"
-#include "../items/item_flowerpot.h"
-#include "../map.h"
-#include "../packets/inventory_item.h"
-#include "../vana_time.h"
+#include "entities/charentity.h"
+#include "item_container.h"
+#include "items/item_flowerpot.h"
+#include "map.h"
+#include "packets/inventory_item.h"
 
 #define MAX_RESULTID 2500
 
@@ -254,10 +255,12 @@ namespace gardenutils
                     CItem* PItemContained = PContainer->GetItem(slotID);
                     if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
                     {
-                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItemContained);
-                        if (PFurniture->isInstalled())
+                        auto PFurniture = dynamic_cast<CItemFurnishing*>(PItemContained);
+                        if (PFurniture && PFurniture->isInstalled())
                         {
-                            auras[PFurniture->getElement()] += PFurniture->getAura();
+                            // -1 because element values range from 1-8
+                            // Converts from lua 1 based index to c/c++ 0 based index
+                            auras[PFurniture->getElement() - 1] += PFurniture->getAura();
                         }
                     }
                 }
@@ -267,21 +270,12 @@ namespace gardenutils
             uint16 dominantAura = 0;
             for (uint8 elementID = 0; elementID < 8; ++elementID)
             {
-                if (elements[elementID] > dominantAura)
-                {
-                    dominantAura = elements[elementID];
-                }
+                dominantAura = std::max(auras[elementID], dominantAura);
             }
             strength += dominantAura / 10;
         }
 
         strength += (int16)((100 - strength) * (PItem->getStrength() / 32.0f));
-
-        // int resultElement = PItem->getCommonCrystalFeed();
-        // if (PItem->isTree())
-        // {
-        //     resultElement += PItem->getExtraCrystalFeed() << 4;
-        // }
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 

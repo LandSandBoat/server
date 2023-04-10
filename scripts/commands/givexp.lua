@@ -15,26 +15,25 @@ function error(player, msg)
 end
 
 function onTrigger(player, amount, target)
-
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- validate amount
-    if (amount == nil or amount < 1) then
+    if amount == nil or amount < 1 then
         error(player, "Invalid amount.")
         return
     end
 
     -- give XP to target
     targ:addExp(amount)
-    player:PrintToPlayer( string.format( "Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl() ))
+    player:PrintToPlayer(string.format("Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 end

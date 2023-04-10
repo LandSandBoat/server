@@ -3,14 +3,16 @@
 -- Item: Animus Minuo Schema
 -- Teaches the white magic Animus Minuo
 -----------------------------------
-local item_object = {}
+require("scripts/globals/spell_data")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    return target:canLearnSpell(309)
+itemObject.onItemCheck = function(target)
+    return target:canLearnSpell(xi.magic.spell.ANIMUS_MINUO)
 end
 
-item_object.onItemUse = function(target)
-    target:addSpell(309)
+itemObject.onItemUse = function(target)
+    target:addSpell(xi.magic.spell.ANIMUS_MINUO)
 end
 
-return item_object
+return itemObject

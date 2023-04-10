@@ -30,7 +30,7 @@ typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
 class CZoneInstance : public CZone
 {
 public:
-    virtual CCharEntity* GetCharByName(int8* name) override; // finds the player if exists in zone
+    virtual CCharEntity* GetCharByName(std::string name) override; // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id) override;
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) override; // получаем указатель на любую сущность в зоне
 
@@ -63,7 +63,7 @@ public:
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
 
-    virtual void ZoneServer(time_point tick, bool check_regions) override;
+    virtual void ZoneServer(time_point tick) override;
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> func) override;
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func) override;
@@ -71,7 +71,7 @@ public:
 
     CInstance* CreateInstance(uint16 instanceid);
 
-    CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
+    CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     ~CZoneInstance();
 
 private:

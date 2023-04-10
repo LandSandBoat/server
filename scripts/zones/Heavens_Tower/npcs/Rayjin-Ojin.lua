@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Rayjin-Ojin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

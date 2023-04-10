@@ -1,21 +1,26 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Dealer Moogle
--- Standard Info NPC
+-- !pos 153.359 8.499 -44.523 236
+-----------------------------------
+require("scripts/globals/dealer_moogle")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.dealerMoogle.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(398)
+    xi.dealerMoogle.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.dealerMoogle.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.dealerMoogle.onEventFinish(player, csid, option)
 end
 
 return entity

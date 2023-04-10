@@ -57,9 +57,9 @@ local tacticianItems =
 local augmentChance =
 {
     100,
-     50,
-      0,
-      0,
+    50,
+    0,
+    0,
 }
 
 local function isDuplicateAugment(paramList, augmentID)

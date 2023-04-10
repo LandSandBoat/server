@@ -3,14 +3,14 @@
 -- Scroll of Water Carol II
 -- Teaches the song Water Carol II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(451)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(451)
 end
 
-return item_object
+return itemObject

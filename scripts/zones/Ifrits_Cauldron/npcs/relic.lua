@@ -26,7 +26,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 32 and npcUtil.giveItem(player, { xi.items.CLAUSTRUM, { xi.items.LUNGO_NANGO_JADESHELL, 30 } }) then
+    if
+        csid == 32 and
+        npcUtil.giveItem(player, { xi.items.CLAUSTRUM, { xi.items.LUNGO_NANGO_JADESHELL, 30 } })
+    then
         player:setCharVar("RELIC_IN_PROGRESS", 0)
         player:confirmTrade()
     end

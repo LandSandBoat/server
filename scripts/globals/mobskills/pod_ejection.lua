@@ -1,34 +1,30 @@
 -----------------------------------
 -- Pod Ejection
+-- Family: Biotechnological Weapons
+-- Description: Spawns a Gunpod
+-- Type: Summoning
+-- Range: Self
+-- Notes: Used only by Proto-Omega whenever he switches forms for the first time or during final form.
 -----------------------------------
-local mobskill_object = {}
 
-mobskill_object.onMobSkillCheck = function(target,mob,skill)
-    local pod = GetMobByID(mob:getID() + 1)
-    local currentForm = mob:getLocalVar("form")
+local mobskillObject = {}
 
-    if not pod:isSpawned() and currentForm == 2 then -- proto-omega final form
-        return 0
-    end
-
-    return 1
-end
-
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local battlefield = mob:getBattlefield()
-    local pod = GetMobByID(mob:getID() + 1)
-
-    if battlefield and not pod:isSpawned() then
-        local players = battlefield:getPlayers()
-        local random = math.random(1, #players)
-        local xPos = mob:getXPos()
-        local yPos = mob:getYPos()
-        local zPos = mob:getZPos()
-
-        pod:spawn()
-        pod:setPos(xPos, yPos, zPos)
-        pod:updateEnmity(players[random])
-    end
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
-return mobskill_object
+
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    mob:timer(3000, function(mobArg)
+        if mob:isAlive() then
+            local gunpod = GetMobByID(mob:getID() + 1)
+            gunpod:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+            gunpod:spawn()
+            gunpod:updateEnmity(utils.randomEntry(mob:getBattlefield():getPlayers()))
+        end
+    end)
+
+    skill:setMsg(0)
+    return 0
+end
+
+return mobskillObject

@@ -23,21 +23,26 @@ entity.onTrigger = function(player, npc)
 
     -- Need to make sure the quest is flagged the player is no further along in the quest
 
-    if (theMissingPiece == QUEST_ACCEPTED and not(hasAncientTablet or hasAncientFragment or player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)) then
+    if
+        theMissingPiece == QUEST_ACCEPTED and
+        not hasAncientTablet and
+        not hasAncientFragment and
+        not player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM
+    then
         player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)
 
         -- move the ??? to a random location
         local i = math.random(0, 100)
-        if (i >= 0 and i < 20) then
+        if i >= 0 and i < 20 then
             npc:setPos(770, 0, -419, 0)
-        elseif (i >= 20 and i < 40) then
+        elseif i >= 20 and i < 40 then
             npc:setPos(657, 0, -537, 0)
-        elseif (i >= 40 and i < 60) then
+        elseif i >= 40 and i < 60 then
             npc:setPos(749, 0, -573, 0)
-        elseif (i >= 60 and i < 80) then
+        elseif i >= 60 and i < 80 then
             npc:setPos(451, -16, -739, 0)
-        elseif (i >= 80 and i <= 100) then
+        elseif i >= 80 and i <= 100 then
             npc:setPos(787, -16, -819, 0)
         else
             npc:setPos(787, -16, -819, 0)

@@ -14,7 +14,7 @@ cmdprops =
 -- desc: List of zones with their auto-translated group and message id.
 -- note: The format is as follows: groupId, messageId, zoneId
 -----------------------------------
-local zone_list =
+local zoneList =
 {
     { 0x14, 0xA9, 1 }, -- Phanauet Channel
     { 0x14, 0xAA, 2 }, -- Carpenters' Landing
@@ -282,11 +282,12 @@ function error(player, msg)
 end
 
 local function getBytePos(s, needle)
-    for i=1, string.len(s), 1 do
-        if (string.byte(s, i) == needle) then
+    for i = 1, string.len(s), 1 do
+        if string.byte(s, i) == needle then
             return i
         end
     end
+
     return nil
 end
 
@@ -301,20 +302,21 @@ function onTrigger(player, bytes)
     local rot = 0
     local zone
 
-    if (bytes == nil) then
+    if bytes == nil then
         error(player, "You must provide a zone ID or autotranslate phrase.")
         return
     end
+
     bytes = string.sub(bytes, 6)
     local atpos = getBytePos(bytes, 253)
 
     -- validate destination
-    if (atpos ~= nil) then
+    if atpos ~= nil then
         -- destination is an auto-translate phrase
         local groupId = string.byte(bytes, atpos + 3)
         local messageId = string.byte(bytes, atpos + 4)
-        for k, v in pairs(zone_list) do
-            if (v[1] == groupId and v[2] == messageId) then
+        for k, v in pairs(zoneList) do
+            if v[1] == groupId and v[2] == messageId then
                 x = v[4] or 0
                 y = v[5] or 0
                 z = v[6] or 0
@@ -323,19 +325,21 @@ function onTrigger(player, bytes)
                 break
             end
         end
-        if (zone == nil) then
+
+        if zone == nil then
             error(player, "Auto-translated phrase is not a zone.")
             return
         end
     else
         -- destination is a zone ID.
         zone = tonumber(bytes)
-        if (zone == nil or zone < 0 or zone >= xi.zone.MAX_ZONE) then
+        if zone == nil or zone < 0 or zone >= xi.zone.MAX_ZONE then
             error(player, "Invalid zone ID.")
             return
         end
-        for k, v in pairs(zone_list) do
-            if (v[3] == zone) then
+
+        for k, v in pairs(zoneList) do
+            if v[3] == zone then
                 x = v[4] or 0
                 y = v[5] or 0
                 z = v[6] or 0

@@ -110,7 +110,7 @@ quest.sections =
                         local count      = trade:getItemCount()
                         local crawlerEgg = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())
 
-                        if crawlerEgg == true and count < 4 then
+                        if crawlerEgg and count < 4 then
                             return quest:event(93)
                         end
                     end

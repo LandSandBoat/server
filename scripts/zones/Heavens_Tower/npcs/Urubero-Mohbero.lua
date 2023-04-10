@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Urubero-Mohbero
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

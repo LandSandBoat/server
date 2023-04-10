@@ -14,26 +14,27 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")
 
     if changeTime == 0 then
-        mob:setLocalVar("changeTime", math.random(2, 3)*15)
+        mob:setLocalVar("changeTime", math.random(2, 3) * 15)
         return
     end
+
     if mob:getBattleTime() >= changeTime then
         local newElement = element
         while newElement == element do
             newElement = math.random(1, 8)
         end
+
         if element ~= 0 then
             mob:delMod(xi.magic.absorbMod[element], 100)
         end
 
         mob:useMobAbility(624)
         mob:addMod(xi.magic.absorbMod[newElement], 100)
-        mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(2, 3)*15)
+        mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(2, 3) * 15)
         mob:setLocalVar("element", newElement)
     end
 end

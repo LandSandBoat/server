@@ -10,8 +10,8 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function dive(mob)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     -- Om'hpedme in north half of Al'Taieu do not dive or become untargetable
     if mob:getPool() ~= 7033 then
@@ -59,6 +59,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
         if mob:getHPP() == 100 then
             mob:setLocalVar("[hpemde]damaged", 0)
         end
+
         if mob:getAnimationSub() ~= 5 then
             dive(mob)
         end
@@ -78,8 +79,8 @@ g_mixins.families.hpemde = function(hpemdeMob)
             local disengageTime = mob:getLocalVar("[hpemde]disengageTime")
 
             if mob:getHP() < mob:getMaxHP() then
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMobAbilityEnabled(true)
+                mob:setAutoAttackEnabled(true)
+                mob:setMobAbilityEnabled(true)
                 mob:setLocalVar("[hpemde]damaged", 1)
                 mob:setLocalVar("[hpemde]changeTime", mob:getBattleTime() + 30)
             elseif disengageTime > 0 and mob:getBattleTime() > disengageTime then
@@ -87,9 +88,15 @@ g_mixins.families.hpemde = function(hpemdeMob)
                 mob:disengage()
             end
         else
-            if mob:getAnimationSub() == 6 and mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime") then
+            if
+                mob:getAnimationSub() == 6 and
+                mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime")
+            then
                 openMouth(mob)
-            elseif mob:getAnimationSub() == 3 and mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP") then
+            elseif
+                mob:getAnimationSub() == 3 and
+                mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP")
+            then
                 closeMouth(mob)
             end
         end
@@ -97,7 +104,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
 
     hpemdeMob:addListener("CRITICAL_TAKE", "HPEMDE_CRITICAL_TAKE", function(mob)
         if mob:getAnimationSub() == 3 then
-           closeMouth(mob)
+            closeMouth(mob)
         end
     end)
 end

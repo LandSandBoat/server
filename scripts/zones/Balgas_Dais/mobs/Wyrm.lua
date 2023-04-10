@@ -35,7 +35,6 @@ local function notBusy(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     -- Return to ground at 33% HP
     if
         mob:getAnimationSub() == 1 and -- is flying
@@ -45,7 +44,7 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(954)
         -- Touchdown will set the following for us in the skill script:
         -- lifted wings model stance: mob:setAnimationSub(2)
-        -- reset default attack:      mob:SetMobSkillAttack(0)
+        -- reset default attack:      mob:setMobSkillAttack(0)
         -- reset melee attacks:       mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:addStatusEffect(xi.effect.EVASION_BOOST, 75, 0, 0)
         mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 75, 0, 0)
@@ -63,7 +62,7 @@ entity.onMobFight = function(mob, target)
     then
         mob:setAnimationSub(1) -- flying model stance
         mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0) -- melee attacks miss now
-        mob:SetMobSkillAttack(1146) -- change default attack to ranged fire magic damage
+        mob:setMobSkillAttack(1146) -- change default attack to ranged fire magic damage
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1147) -- change skill set to flying moves
         mob:setBehaviour(0) -- face target while flying
     end

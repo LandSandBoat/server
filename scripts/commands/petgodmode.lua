@@ -11,7 +11,7 @@ cmdprops =
 
 function onTrigger(player)
     local pet = player:getPet()
-    if (pet and pet:getLocalVar("GodMode") == 0) then
+    if pet and pet:getLocalVar("GodMode") == 0 then
         -- Toggle GodMode on..
         pet:setLocalVar("GodMode", 1)
 
@@ -41,8 +41,8 @@ function onTrigger(player)
         pet:addMod(xi.mod.MDEF, 2500)
 
         -- Heal the pet from the new buffs..
-        pet:addHP( 50000 )
-        pet:setMP( 50000 )
+        pet:addHP(50000)
+        pet:setMP(50000)
     else
         -- Toggle GodMode off..
         pet:setLocalVar("GodMode", 0)

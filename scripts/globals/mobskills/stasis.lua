@@ -11,20 +11,20 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     -- local dmg = xi.mobskills.mobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
     local typeEffect = xi.effect.PARALYSIS
 
     mob:resetEnmity(target)
 
-    if (xi.mobskills.mobPhysicalHit(skill)) then
+    if xi.mobskills.mobPhysicalHit(skill) then
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))
         return typeEffect
     end
@@ -32,4 +32,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return shadows
 end
 
-return mobskill_object
+return mobskillObject

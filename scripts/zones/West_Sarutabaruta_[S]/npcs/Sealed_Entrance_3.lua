@@ -16,7 +16,10 @@ entity.onTrigger = function(player, npc)
     local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
     local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
 
-    if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
+    if
+        snakeOnThePlains == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+    then
         if not maskBit3 then
             player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 2, true))
 

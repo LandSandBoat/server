@@ -29,7 +29,7 @@ class CZoneEntities
 public:
     void HealAllMobs();
 
-    CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
+    CCharEntity* GetCharByName(const std::string& name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
@@ -68,7 +68,7 @@ public:
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
-    void ZoneServer(time_point tick, bool check_region);
+    void ZoneServer(time_point tick);
 
     CZone* GetZone();
 
@@ -77,7 +77,7 @@ public:
     bool         CharListEmpty() const;
 
     uint16 GetNewCharTargID();
-    uint16 GetNewDynamicTargID();
+    void   AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
 
     EntityList_t m_allyList;
     EntityList_t m_mobList; // список всех MOBs в зоне
@@ -88,6 +88,8 @@ public:
 
     std::set<uint16> charTargIds;    // Sorted set of targids for characters
     std::set<uint16> dynamicTargIds; // Sorted set of targids for dynamic entities
+
+    std::vector<std::pair<uint16, time_point>> dynamicTargIdsToDelete; // List of targids pending deletion at a later date
 
     CZoneEntities(CZone*);
     ~CZoneEntities();

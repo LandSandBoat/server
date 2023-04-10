@@ -188,7 +188,7 @@ void CItemEquipment::addModifier(CModifier modifier)
     modList.push_back(modifier);
 }
 
-int16 CItemEquipment::getModifier(Mod mod)
+int16 CItemEquipment::getModifier(Mod mod) const
 {
     for (auto& i : modList)
     {
@@ -209,6 +209,42 @@ void CItemEquipment::addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod 
 {
     itemLatent latent{ ConditionsID, ConditionsValue, ModValue, ModPower };
     latentList.push_back(latent);
+}
+
+bool CItemEquipment::delModifier(Mod mod, int16 modValue)
+{
+    // clang-format off
+    auto it = std::find_if(modList.begin(), modList.end(), [mod, modValue](const CModifier& compare)
+    {
+        return compare.getModID() == mod && compare.getModAmount() == modValue;
+    });
+    // clang-format on
+
+    if (it == modList.end())
+    {
+        return false;
+    }
+
+    modList.erase(it);
+    return true;
+}
+
+bool CItemEquipment::delPetModifier(Mod mod, PetModType petType, int16 modValue)
+{
+    // clang-format off
+    auto it = std::find_if(petModList.begin(), petModList.end(), [mod, petType, modValue](const CPetModifier& compare)
+    {
+        return compare.getModID() == mod && compare.getPetModType() == petType && compare.getModAmount() == modValue;
+    });
+    // clang-format on
+
+    if (it == petModList.end())
+    {
+        return false;
+    }
+
+    petModList.erase(it);
+    return true;
 }
 
 void CItemEquipment::setTrialNumber(uint16 trial)

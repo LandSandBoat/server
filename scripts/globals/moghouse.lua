@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
@@ -54,32 +55,113 @@ xi.moghouse.moghouseZones =
     xi.zone.EASTERN_ADOULIN,      -- 257
 }
 
+xi.moghouse.moghouse2FUnlockCSs =
+{
+    [xi.zone.SOUTHERN_SAN_DORIA] = 3535,
+    [xi.zone.NORTHERN_SAN_DORIA] = 904,
+    [xi.zone.PORT_SAN_DORIA]     = 820,
+    [xi.zone.BASTOK_MINES]       = 610,
+    [xi.zone.BASTOK_MARKETS]     = 604,
+    [xi.zone.PORT_BASTOK]        = 456,
+    [xi.zone.WINDURST_WATERS]    = 1086,
+    [xi.zone.WINDURST_WALLS]     = 547,
+    [xi.zone.PORT_WINDURST]      = 903,
+    [xi.zone.WINDURST_WOODS]     = 885,
+}
+
 xi.moghouse.isInMogHouseInHomeNation = function(player)
     if not player:isInMogHouse() then
         return false
     end
 
     local currentZone = player:getZoneID()
-    local nation = player:getNation()
+    local nation      = player:getNation()
+
+    -- TODO: Simplify nested conditions
     if nation == xi.nation.BASTOK then
-        if currentZone >= xi.zone.BASTOK_MINES and currentZone <= xi.zone.METALWORKS then
+        if
+            currentZone >= xi.zone.BASTOK_MINES and
+            currentZone <= xi.zone.PORT_BASTOK
+        then
             return true
         end
     elseif nation == xi.nation.SANDORIA then
-        if currentZone >= xi.zone.SOUTHERN_SAN_DORIA and currentZone <= xi.zone.CHATEAU_DORAGUILLE then
+        if
+            currentZone >= xi.zone.SOUTHERN_SAN_DORIA and
+            currentZone <= xi.zone.PORT_SAN_DORIA
+        then
             return true
         end
-    else -- Windurst
-        if currentZone >= xi.zone.WINDURST_WATERS and currentZone <= xi.zone.WINDURST_WOODS then
+    else
+        if
+            currentZone >= xi.zone.WINDURST_WATERS and
+            currentZone <= xi.zone.WINDURST_WOODS
+        then
             return true
         end
     end
+
     return false
+end
+
+xi.moghouse.set2ndFloorStyle = function(player, style)
+    -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    -- 0x0100: ^ As above
+    local mhflag = player:getMoghouseFlag()
+    utils.mask.setBit(mhflag, 0x0080, utils.mask.getBit(style, 0))
+    utils.mask.setBit(mhflag, 0x0100, utils.mask.getBit(style, 1))
+    player:setMoghouseFlag(mhflag)
+end
+
+xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
+    local cs = -1
+
+    player:eraseAllStatusEffect()
+    player:setPos(0, 0, 0, 192)
+
+    -- Moghouse data (bit-packed)
+    -- 0x0001: SANDORIA exit quest flag
+    -- 0x0002: BASTOK exit quest flag
+    -- 0x0004: WINDURST exit quest flag
+    -- 0x0008: JEUNO exit quest flag
+    -- 0x0010: WEST_AHT_URHGAN exit quest flag
+    -- 0x0020: Unlocked Moghouse2F flag
+    -- 0x0040: Moghouse 2F tracker flag (0: default, 1: using 2F)
+    -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    -- 0x0100: ^ As above
+    local mhflag = player:getMoghouseFlag()
+
+    local growingFlowers   = bit.band(mhflag, 0x0001) > 0
+    local aLadysHeart      = bit.band(mhflag, 0x0002) > 0
+    local flowerChild      = bit.band(mhflag, 0x0004) > 0
+    local unlocked2ndFloor = bit.band(mhflag, 0x0020) > 0
+    local using2ndFloor    = bit.band(mhflag, 0x0040) > 0
+
+    -- NOTE: You can test these quest conditions with:
+    -- Reset: !exec player:setMoghouseFlag(0)
+    -- Complete quests: !exec player:setMoghouseFlag(7)
+    if
+        xi.moghouse.isInMogHouseInHomeNation(player) and
+        growingFlowers and
+        aLadysHeart and
+        flowerChild and
+        not unlocked2ndFloor and
+        not using2ndFloor
+    then
+        cs = xi.moghouse.moghouse2FUnlockCSs[player:getZoneID()]
+
+        player:setMoghouseFlag(mhflag + 0x0020) -- Set unlock flag now, rather than in onEventFinish
+
+        local nation = player:getNation()
+        xi.moghouse.set2ndFloorStyle(player, nation)
+    end
+
+    return cs
 end
 
 xi.moghouse.moogleTrade = function(player, npc, trade)
     if player:isInMogHouse() then
-        local numBronze = trade:getItemQty(2184)
+        local numBronze = trade:getItemQty(xi.items.IMPERIAL_BRONZE_PIECE)
 
         if numBronze > 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
@@ -95,8 +177,8 @@ xi.moghouse.moogleTrigger = function(player, npc)
         local lockerTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
 
         if lockerTs ~= nil then
-            if lockerTs == -1 then -- expired
-                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, 2184) -- 2184 is imperial bronze piece item id
+            if lockerTs == -1 then -- Expired
+                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, xi.items.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET, lockerTs)
             end
@@ -115,16 +197,19 @@ end
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)
 xi.moghouse.unlockMogLocker = function(player)
     player:setCharVar(mogLockerTimestampVarName, -1)
-    local currentSize = player:getContainerSize(xi.inv.MOGLOCKER)
-    if currentSize == 0 then -- we do this check in case some servers auto-set 80 slots for mog locker items
+
+    -- Safety check in case some servers auto-set 80 slots for mog locker items.
+    if player:getContainerSize(xi.inv.MOGLOCKER) == 0 then
         player:changeContainerSize(xi.inv.MOGLOCKER, 30)
     end
+
     return -1
 end
 
 -- Sets the mog locker access type (all area or alzahbi only). Returns the new access type.
 xi.moghouse.setMogLockerAccessType = function(player, accessType)
     player:setCharVar(xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE, accessType)
+
     return accessType
 end
 
@@ -137,13 +222,15 @@ end
 xi.moghouse.getMogLockerExpiryTimestamp = function(player)
     local expiryTime = player:getCharVar(mogLockerTimestampVarName)
 
-    if (expiryTime == 0) then
+    if expiryTime == 0 then
         return nil
     end
 
     local now = os.time() - mogLockerStartTimestamp
+
     if now > expiryTime then
         player:setCharVar(mogLockerTimestampVarName, -1)
+
         return -1
     end
 
@@ -155,13 +242,15 @@ end
 -- The expiry time itself is the number of seconds past 2001/12/31 15:00
 -- Returns true if time was added successfully, false otherwise.
 xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
-    local accessType = xi.moghouse.getMogLockerAccessType(player)
+    local accessType       = xi.moghouse.getMogLockerAccessType(player)
     local numDaysPerBronze = 5
+
     if accessType == xi.moghouse.lockerAccessType.ALZAHBI then
         numDaysPerBronze = 7
     end
 
     local currentTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
+
     if currentTs == nil then
         return false
     end
@@ -171,10 +260,12 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
     end
 
     local timeIncrease = 60 * 60 * 24 * numDaysPerBronze * numBronze
-    local newTs = currentTs + timeIncrease
+    local newTs        = currentTs + timeIncrease
 
     player:setCharVar(mogLockerTimestampVarName, newTs)
-    -- send an invent size packet to enable the items if they weren't
+
+    -- Send an invent size packet to enable the items if they weren't.
     player:changeContainerSize(xi.inv.MOGLOCKER, 0)
+
     return true
 end

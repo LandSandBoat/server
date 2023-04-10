@@ -39,8 +39,28 @@ public:
     {
         std::array<uint32_t, std::mt19937::state_size> seed_data;
         std::random_device                             rd;
-        std::generate(seed_data.begin(), seed_data.end(), std::ref(rd));
-        std::seed_seq seq(seed_data.begin(), seed_data.end());
+
+        // Certain systems were noted to have bad seeding via only std::random_device,
+        // the following indicated how we could mix in std::random_device with other seed sources
+        // https://stackoverflow.com/a/68382489
+        for (auto it = seed_data.begin(); it != seed_data.end(); ++it)
+        {
+            // read from std::random_device
+            *it = rd();
+
+            // mix with a C++ equivalent of time(NULL) - UNIX time in seconds
+            *it ^= std::chrono::duration_cast<std::chrono::seconds>(
+                       std::chrono::system_clock::now().time_since_epoch())
+                       .count();
+
+            // mix with a high precision time in microseconds
+            *it ^= std::chrono::duration_cast<std::chrono::microseconds>(
+                       std::chrono::high_resolution_clock::now().time_since_epoch())
+                       .count();
+
+            //*it ^= more_external_random_stuff;
+        }
+        std::seed_seq seq(seed_data.cbegin(), seed_data.cend());
         mt().seed(seq);
     }
 
@@ -66,7 +86,7 @@ public:
     template <typename T>
     static inline typename std::enable_if<std::is_floating_point<T>::value, T>::type GetRandomNumber(T min, T max)
     {
-        if (min == max || min > max)
+        if (min >= max)
         {
             return min;
         }

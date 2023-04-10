@@ -2,13 +2,12 @@
 --  Amatsu Yukiarashi
 --  Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         mob:getObjType() == xi.objType.TRUST or
         mob:getAnimationSub() == 0
@@ -19,20 +18,22 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
-    local power = 1
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local power    = 1
     local duration = 60
-    local numhits = 1
-    local accmod = 2
-    local dmgmod = 6
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5625, 1.875, 2.50)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local numhits  = 1
+    local accmod   = 2
+    local dmgmod   = 6
+    local info     = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5625, 1.875, 2.50)
+    local dmg      = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
     if info.hitslanded > 0 then
-        target:addStatusEffect(typeEffect, power, 0, duration)
+        target:addStatusEffect(xi.effect.BIND, power, 0, duration)
     end
+
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

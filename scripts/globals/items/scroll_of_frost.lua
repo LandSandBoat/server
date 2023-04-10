@@ -3,14 +3,14 @@
 -- Scroll of Frost
 -- Teaches the black magic Frost
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(236)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(236)
 end
 
-return item_object
+return itemObject

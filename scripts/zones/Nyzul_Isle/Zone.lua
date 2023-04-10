@@ -4,12 +4,12 @@
 local ID = require('scripts/zones/Nyzul_Isle/IDs')
 require('scripts/globals/missions')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onInstanceZoneIn = function(player, instance)
+zoneObject.onInstanceZoneIn = function(player, instance)
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 72)
         return
@@ -28,7 +28,7 @@ end
 
 -- NOTE: This is called after onInstanceZoneIn for the fade in cutscene.  onInstanceZoneIn
 -- does not consider event returns.
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- This event is common to all zone in, and is fade from black
@@ -37,20 +37,20 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
     end
 end
 
-zone_object.onInstanceLoadFailed = function()
+zoneObject.onInstanceLoadFailed = function()
     return xi.zone.ALZADAAL_UNDERSEA_RUINS
 end
 
-return zone_object
+return zoneObject

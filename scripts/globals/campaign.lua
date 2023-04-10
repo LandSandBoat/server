@@ -86,15 +86,18 @@ PAST_WINDURST = 7
 
 xi.campaign.getMedalRank = function(player)
     local rank = 0
+    -- TODO: Use xi.ki enum in this table
     local medals =
     {
-         924, 925, 926, 927, 928, 929, 930,
-         931, 932, 933, 934, 935, 936, 937,
-         938, 939, 940, 941, 942, 943
+        924, 925, 926, 927, 928, 929, 930,
+        931, 932, 933, 934, 935, 936, 937,
+        938, 939, 940, 941, 942, 943
     }
-    while (player:hasKeyItem(medals[rank + 1]) == true) do
+
+    while player:hasKeyItem(medals[rank + 1]) do
         rank = rank + 1
     end
+
     return rank
 end
 
@@ -108,7 +111,7 @@ end
 -- -------------------------------------------------------------------
 
 xi.campaign.getSandOriaNotesItem = function(i)
-    local sandOria_AN =
+    local sandOriaAlliedNotesItems =
     {
         [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
         [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
@@ -148,12 +151,12 @@ xi.campaign.getSandOriaNotesItem = function(i)
         [82] = { id = 17684, price = 150000, adj = 100000 }, -- Griffinclaw
         [338] = { id = 11636, price = 75000, adj = 50000 } -- Royal Knight Sigil Ring
     }
-    local item = sandOria_AN[i]
+    local item = sandOriaAlliedNotesItems[i]
     return item.id, item.price, item.adj
 end
 
 xi.campaign.getBastokNotesItem = function(i)
-    local bastok_AN =
+    local bastokAlliedNotesItems =
     {
         [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
         [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
@@ -193,12 +196,12 @@ xi.campaign.getBastokNotesItem = function(i)
         [82] = { id = 17685, price = 150000, adj = 100000 }, -- Lex Talionis
         [338] = { id = 11545, price = 75000, adj = 50000 } -- Fourth Mantle
     }
-    local item = bastok_AN[i]
+    local item = bastokAlliedNotesItems[i]
     return item.id, item.price, item.adj
 end
 
 xi.campaign.getWindurstNotesItem = function(i)
-    local windurst_AN =
+    local windurstAlliedNotesItems =
     {
         [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
         [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
@@ -242,7 +245,7 @@ xi.campaign.getWindurstNotesItem = function(i)
         [82] = { id = 17684, price = 150000, adj = 10000 }, -- Samudra
         [338] = { id = 11636, price = 75000, adj = 50000 } -- Mercenary Major Charm
     }
-    local item = windurst_AN[i]
+    local item = windurstAlliedNotesItems[i]
     return item.id, item.price, item.adj
 end
 
@@ -281,13 +284,13 @@ function hasMawActivated(player, portal)
     local mawActivated = player:getNationTeleport(MAW)
     local bit = {}
 
-    for i = 8,0,-1 do
+    for i = 8, 0, -1 do
         local twop = 2^i
 
         if (mawActivated >= twop) then
-            bit[i]=true mawActivated = mawActivated - twop
+            bit[i] = true mawActivated = mawActivated - twop
         else
-            bit[i]=false
+            bit[i] = false
         end
     end
 

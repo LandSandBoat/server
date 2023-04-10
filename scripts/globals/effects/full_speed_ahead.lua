@@ -4,18 +4,18 @@
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     xi.fsa.onEffectGain(target, effect)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     xi.fsa.tick(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     xi.fsa.onEffectLose(target, effect)
 end
 
-return effect_object
+return effectObject

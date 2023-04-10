@@ -7,5 +7,6 @@ return {
     ['Koru-Moru']       = { event = 193 },
     ['Luuh_Koplehn']    = { event = 322 },
     ['Pakke-Pokke']     = { event = 89 },
+    ['Shantotto']       = { event = 164 },
     ['Yoran-Oran']      = { event = 245 },
 }

@@ -18,36 +18,24 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.FLASH
-    -- local dINT = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus =  150
-    params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
-    local duration = 20 * resist
+    params.ecosystem = xi.ecosystem.LUMINION
+    params.effect = xi.effect.FLASH
     local power = 200
+    local tick = 0
+    local duration = 16
+    local resistThreshold = 0.25
+    local isGaze = false
+    local isConal = false
 
-    if (resist > 0.0625) then -- Do it!
-        if (target:addStatusEffect(typeEffect, power, 0, duration)) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        end
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-    end
-
-    return typeEffect
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
-return spell_object
+return spellObject

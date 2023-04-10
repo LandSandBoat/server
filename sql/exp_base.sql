@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `exp_base` (
   `level` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `exp` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=9;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=9;
 
 --
 -- Contenu de la table `exp_base`

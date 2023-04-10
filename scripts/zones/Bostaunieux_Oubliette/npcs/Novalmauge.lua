@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 41.169430, y = -24.000000, z = 19.860674 },
     { x = 42.256676, y = -24.000000, z = 19.885197 },
@@ -26,14 +26,20 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("troubleAtTheSluiceVar") == 2 and npcUtil.tradeHas(trade, 959) then -- Dahlia
+    if
+        player:getCharVar("troubleAtTheSluiceVar") == 2 and
+        npcUtil.tradeHas(trade, 959)
+    then -- Dahlia
         player:startEvent(17)
-    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 930) then -- Beastman Blood
+    elseif
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 930)
+    then -- Beastman Blood
         player:startEvent(12)
     end
 end
@@ -46,7 +52,10 @@ entity.onTrigger = function(player, npc)
     -- THE HOLY CREST
     if theHolyCrestStat == 1 then
         player:startEvent(6)
-    elseif theHolyCrestStat == 2 and player:getCharVar("theHolyCrestCheck") == 0 then
+    elseif
+        theHolyCrestStat == 2 and
+        player:getCharVar("theHolyCrestCheck") == 0
+    then
         player:startEvent(7)
 
     -- TROUBLE AT THE SLUICE
@@ -56,7 +65,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(16)
 
     -- THE RUMOR
-    elseif theRumor == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and player:getMainLvl() >= 10 then
+    elseif
+        theRumor == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(13)
     elseif theRumor == QUEST_ACCEPTED then
         player:startEvent(11)
@@ -72,7 +85,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("TheHolyCrest_Event", 2)
     elseif csid == 7 then
         player:setCharVar("theHolyCrestCheck", 1)
-    elseif csid == 12 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = 4853 }) then
+    elseif
+        csid == 12 and
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = 4853 })
+    then
         player:confirmTrade()
     elseif csid == 13 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)

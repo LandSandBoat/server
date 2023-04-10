@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Yakuku
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

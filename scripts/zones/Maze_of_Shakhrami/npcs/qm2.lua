@@ -18,9 +18,15 @@ end
 entity.onTrigger = function(player, npc)
     local wyrmfly = ID.mob.WYRMFLY_OFFSET
 
-    if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
-        npcUtil.popFromQM(player, npc, { wyrmfly, wyrmfly + 1, wyrmfly + 2 }, { claim=true, look=true, hide = 0 })
-    elseif player:getCharVar("EcoStatus") == 202 and not player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
+    if
+        player:getCharVar("EcoStatus") == 201 and
+        player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    then
+        npcUtil.popFromQM(player, npc, { wyrmfly, wyrmfly + 1, wyrmfly + 2 }, { claim = true, look = true, hide = 0 })
+    elseif
+        player:getCharVar("EcoStatus") == 202 and
+        not player:hasKeyItem(xi.ki.INDIGESTED_MEAT)
+    then
         npcUtil.giveKeyItem(player, xi.ki.INDIGESTED_MEAT)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

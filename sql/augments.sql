@@ -11,7 +11,7 @@ CREATE TABLE `augments` (
   `isPet` tinyint(1) NOT NULL DEFAULT 0,
   `petType` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`augmentId`,`multiplier`,`modId`,`isPet`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `augments`
@@ -71,8 +71,8 @@ INSERT INTO `augments` VALUES (42,0,166,-1,0,0); -- Enemy crit. hit rate-1%
 INSERT INTO `augments` VALUES (43,0,391,1,0,0); -- Charm+1 Could not determine retail AUGMENT effect. Duration? Chance to land charm? Just set as chance for now.
 INSERT INTO `augments` VALUES (44,0,73,1,0,0); -- Store TP+1 Subtle Blow+1
 INSERT INTO `augments` VALUES (44,0,289,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (45,0,366,1,0,0); -- DMG:+1 (melee,not ranged...Mainhand only?)
-INSERT INTO `augments` VALUES (46,0,366,-1,0,0); -- DMG:-1 (melee,not ranged...Mainhand only?)
+INSERT INTO `augments` VALUES (45,0,287,1,0,0);  -- DMG:+(X+1), Increases damage rating of this weapon (Maximum X=31 for DMG+32) (Retail: melee,not ranged...Mainhand only?) Item displays a value 1 larger than stored in item
+INSERT INTO `augments` VALUES (46,0,287,-1,0,0); -- DMG:-(X+1), Decreases damage rating of this weapon (Maximum X=31 for DMG-32) (Retail: melee,not ranged...Mainhand only?) Item displays a (negative) value 1 larger than stored in item
 INSERT INTO `augments` VALUES (47,0,380,1,0,0); -- Delay:+1% (melee,not ranged)
 INSERT INTO `augments` VALUES (48,0,380,-1,0,0); -- Delay:-1% (melee,not ranged)
 INSERT INTO `augments` VALUES (49,100,384,1,0,0); -- Haste+1
@@ -88,32 +88,32 @@ INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
 INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+10 (Do via Latent: triggered with your current weapon drawn for 10 TP/tick.)
 INSERT INTO `augments` VALUES (60,0,0,0,0,0); -- Latent effect: Refresh+1 (Do via Latent: triggered with your current weapon not drawn for 1 MP/tick. Refresh is not present while resting(/heal),chocobo or /sit.)
 INSERT INTO `augments` VALUES (61,0,958,1,0,0); -- Occ. inc. resist to stat ailments+1
-INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy+33
-INSERT INTO `augments` VALUES (63,0,26,33,0,0); -- Rng.Accuracy+33
-INSERT INTO `augments` VALUES (64,0,30,33,0,0); -- Mag. Acc.+33
-INSERT INTO `augments` VALUES (65,0,23,33,0,0); -- Attack+33
-INSERT INTO `augments` VALUES (66,0,24,33,0,0); -- Rng.Attack+33
-INSERT INTO `augments` VALUES (67,0,452,1,0,0); -- All songs+1
-INSERT INTO `augments` VALUES (68,0,25,1,0,0); -- Accuracy+1 Attack+1
+INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy +33
+INSERT INTO `augments` VALUES (63,0,26,33,0,0); -- Rng.Accuracy +33
+INSERT INTO `augments` VALUES (64,0,30,33,0,0); -- Mag. Acc. +33
+INSERT INTO `augments` VALUES (65,0,23,33,0,0); -- Attack +33
+INSERT INTO `augments` VALUES (66,0,24,33,0,0); -- Rng.Attack +33
+INSERT INTO `augments` VALUES (67,0,452,1,0,0); -- All songs +1
+INSERT INTO `augments` VALUES (68,0,25,1,0,0); -- Accuracy +1 Attack +1
 INSERT INTO `augments` VALUES (68,0,23,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc.+1 Rng.Atk.+1
+INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc. +1 Rng.Atk. +1
 INSERT INTO `augments` VALUES (69,0,24,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc.+33 Mag.Atk.Bns+33
+INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc. +33 Mag.Atk.Bns +33
 INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
 INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
-INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+INSERT INTO `augments` VALUES (72,0,0,1,0,0); -- Exp. Point +1%
+INSERT INTO `augments` VALUES (73,0,0,33,0,0); -- Exp. Point +33%
 INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
 INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
-INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG+33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
+INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG +33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
-INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP+2 (count by 2)
-INSERT INTO `augments` VALUES (79,0,2,3,0,0); -- HP+3 (count by 3)
-INSERT INTO `augments` VALUES (80,0,30,1,0,0); -- Mag. Acc+1/Mag. Dmg+1
+INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP +2 (count by 2)
+INSERT INTO `augments` VALUES (79,0,2,3,0,0); -- HP +3 (count by 3)
+INSERT INTO `augments` VALUES (80,0,30,1,0,0); -- Mag. Acc. +1/Mag. Dmg. +1
 INSERT INTO `augments` VALUES (80,0,311,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (81,0,0,0,0,0); -- Eva+1/Mag Eva$+d (corrupted)
-INSERT INTO `augments` VALUES (82,0,5,2,0,0); -- MP+2 (count by 2)
-INSERT INTO `augments` VALUES (83,0,5,3,0,0); -- MP+3 (count by 3)
+INSERT INTO `augments` VALUES (81,0,0,0,0,0); -- Eva +1/Mag. Eva + d (corrupted)
+INSERT INTO `augments` VALUES (82,0,5,2,0,0); -- MP +2 (count by 2)
+INSERT INTO `augments` VALUES (83,0,5,3,0,0); -- MP +3 (count by 3)
 
 -- 84 to 95 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (84,0,0,0,0,0);
@@ -376,8 +376,8 @@ INSERT INTO `augments` VALUES (296,0,119,1,0,0); -- Singing skill+1
 INSERT INTO `augments` VALUES (297,0,120,1,0,0); -- String instrument skill+1
 INSERT INTO `augments` VALUES (298,0,121,1,0,0); -- Wind instrument skill+1
 INSERT INTO `augments` VALUES (299,0,122,1,0,0); -- Blue Magic skill+1
-INSERT INTO `augments` VALUES (300,0,1026,1,0,0); -- Geomancy Skill+1
-INSERT INTO `augments` VALUES (301,0,1027,1,0,0); -- Handbell Skill+1
+INSERT INTO `augments` VALUES (300,0,123,1,0,0); -- Geomancy Skill+1
+INSERT INTO `augments` VALUES (301,0,124,1,0,0); -- Handbell Skill+1
 
 -- 302 to 319 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (302,0,0,0,0,0);
@@ -1571,7 +1571,7 @@ INSERT INTO `augments` VALUES (1283,0,0,0,0,0); -- Enhances Manafont effect
 INSERT INTO `augments` VALUES (1284,0,0,0,0,0); -- Enhances Chainspell effect
 INSERT INTO `augments` VALUES (1285,0,0,0,0,0); -- Enhances Perfect Dodge effect
 INSERT INTO `augments` VALUES (1286,0,0,0,0,0); -- Enhances Invincible effect
-INSERT INTO `augments` VALUES (1287,0,0,0,0,0); -- Enhances Blood Weapon effect
+INSERT INTO `augments` VALUES (1287,10,1070,1,0,0); -- Enhances Blood Weapon effect
 INSERT INTO `augments` VALUES (1288,0,0,0,0,0); -- Enhances Familiar effect
 INSERT INTO `augments` VALUES (1289,0,0,0,0,0); -- Enhances Soul Voice effect
 INSERT INTO `augments` VALUES (1290,0,0,0,0,0); -- Enhances Eagle Eye Shot effect
@@ -1658,7 +1658,7 @@ INSERT INTO `augments` VALUES (1366,5,1061,1,0,0); -- Enhances "Chivalry" effect
 INSERT INTO `augments` VALUES (1367,2,1065,1,0,0); -- Enhances "Guardian" effect
 INSERT INTO `augments` VALUES (1368,0,0,0,0,0); -- 1368 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1369,0,0,0,0,0); -- 1369 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1370,0,0,0,0,0); -- Enhances "Dark Seal" effect
+INSERT INTO `augments` VALUES (1370,10,1073,1,0,0); -- Enhances "Dark Seal" effect
 INSERT INTO `augments` VALUES (1371,0,0,0,0,0); -- Enhances "Diabolic Eye" effect
 INSERT INTO `augments` VALUES (1372,0,0,0,0,0); -- Enhances "Muted Soul" effect
 INSERT INTO `augments` VALUES (1373,0,0,0,0,0); -- Enhances "Desperate Blows" effect

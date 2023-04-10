@@ -6,21 +6,22 @@ from .blowfish import Blowfish
 # Globals
 PACKET_HEAD = 28
 
+
 class util:
     @staticmethod
     def to_bytes(val):
-        return bytes(val, encoding='utf-8')
+        return bytes(val, encoding="utf-8")
 
     @staticmethod
     def memcpy(src, src_offset, dst, dst_offset, count):
         try:
             src_bytes = util.to_bytes(src[src_offset:])
-        except: # lgtm [py/catch-base-exception]
+        except:
             src_bytes = src
 
         try:
             dst_bytes = util.to_bytes(dst[dst_offset:])
-        except: # lgtm [py/catch-base-exception]
+        except:
             dst_bytes = dst
 
         for idx in range(count):
@@ -28,23 +29,23 @@ class util:
 
     @staticmethod
     def unpack_uint16(data, offset):
-        return struct.unpack_from('<H', data, offset)[0]
+        return struct.unpack_from("<H", data, offset)[0]
 
     @staticmethod
     def unpack_uint32(data, offset):
-        return struct.unpack_from('<I', data, offset)[0]
+        return struct.unpack_from("<I", data, offset)[0]
 
     @staticmethod
     def pack_16(data):
-        return struct.pack('<H', data)
+        return struct.pack("<H", data)
 
     @staticmethod
     def pack_32(data):
-        return struct.pack('<I', data)
+        return struct.pack("<I", data)
 
     @staticmethod
     def int_to_ip(ip):
-        return '.'.join([str((ip >> 8 * i) % 256) for i in [3, 2, 1, 0]])
+        return ".".join([str((ip >> 8 * i) % 256) for i in [3, 2, 1, 0]])
 
     @staticmethod
     def packet_md5(data):
@@ -65,7 +66,7 @@ class util:
         util.memcpy(util.pack_32(starting_key[3]), 0, byte_array, 12, 4)
         util.memcpy(util.pack_32(starting_key[4]), 0, byte_array, 16, 4)
 
-        #print('Blowfish Key: ' + byte_array.hex().strip('0'))
+        # print('Blowfish Key: ' + byte_array.hex().strip('0'))
 
         hash_key = hashlib.md5(byte_array).digest()
 

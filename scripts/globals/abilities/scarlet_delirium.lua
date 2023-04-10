@@ -1,21 +1,20 @@
 -----------------------------------
 -- Ability: Scarlet Delirium
 -- Description: Channels damage taken into enhanced attack and magic attack.
--- Obtained: DRK Level 95
+-- Obtained: Dark Knight Level 95
 -- Recast Time: 00:01:30
 -- Duration: 00:01:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.dark_knight.useScarletDelirium(player, target, ability)
 end
 
-return ability_object
+return abilityObject

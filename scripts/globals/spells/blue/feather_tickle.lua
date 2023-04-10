@@ -17,27 +17,33 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.BIRD
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistance(caster, target, spell, params)
-    local power = 3000 * resist
+    local power = 1500
+    local resistThreshold = 0.5
 
-    if (target:getTP() == 0) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    local resist = applyResistance(caster, target, spell, params)
+    if resist >= resistThreshold then
+        if target:getTP() == 0 then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        else
+            target:delTP(power * resist)
+            spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
+        end
     else
-        target:delTP(power)
-        spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return 0
 end
 
-return spell_object
+return spellObject

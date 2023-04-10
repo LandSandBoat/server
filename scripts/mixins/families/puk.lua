@@ -34,21 +34,37 @@ g_mixins.families.puk = function(mob)
     end)
 
     mob:addListener("ROAM_TICK", "PUK_ROAM_TICK", function(puk)
-        if (VanadielDayOfTheWeek() == xi.day.WINDSDAY or puk:getWeather() == xi.weather.WIND or
-        puk:getWeather() == xi.weather.GALES) and puk:getMod(xi.mod.REGAIN) == 0 then
+        if
+            (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
+            puk:getWeather() == xi.weather.WIND or
+            puk:getWeather() == xi.weather.GALES) and
+            puk:getMod(xi.mod.REGAIN) == 0
+        then
             puk:setMod(xi.mod.REGAIN, 30)
-        elseif VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and puk:getWeather() == xi.weather.WIND and
-        puk:getWeather() == xi.weather.GALES and puk:getMod(xi.mod.REGAIN) ~= 0 then
+        elseif
+            VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and
+            puk:getWeather() == xi.weather.WIND and
+            puk:getWeather() == xi.weather.GALES and
+            puk:getMod(xi.mod.REGAIN) ~= 0
+        then
             puk:setMod(xi.mod.REGAIN, 0)
         end
     end)
 
     mob:addListener("COMBAT_TICK", "PUK_COMBAT_TICK", function(puk)
-        if (VanadielDayOfTheWeek() == xi.day.WINDSDAY or puk:getWeather() == xi.weather.WIND or
-        puk:getWeather() == xi.weather.GALES) and puk:getMod(xi.mod.REGAIN) == 0 then
+        if
+            (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
+            puk:getWeather() == xi.weather.WIND or
+            puk:getWeather() == xi.weather.GALES) and
+            puk:getMod(xi.mod.REGAIN) == 0
+        then
             puk:setMod(xi.mod.REGAIN, 30)
-        elseif VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and puk:getWeather() == xi.weather.WIND and
-        puk:getWeather() == xi.weather.GALES and puk:getMod(xi.mod.REGAIN) ~= 0 then
+        elseif
+            VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and
+            puk:getWeather() == xi.weather.WIND and
+            puk:getWeather() == xi.weather.GALES and
+            puk:getMod(xi.mod.REGAIN) ~= 0
+        then
             puk:setMod(xi.mod.REGAIN, 0)
         end
     end)

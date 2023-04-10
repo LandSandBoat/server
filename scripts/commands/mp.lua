@@ -17,16 +17,16 @@ end
 function onTrigger(player, mp, target)
     -- validate target
     local targ
-    local cursor_target = player:getCursorTarget()
+    local cursorTarget = player:getCursorTarget()
 
     if target then
         targ = GetPlayerByName(target)
         if not targ then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
-    elseif cursor_target and not cursor_target:isNPC() then
-        targ = cursor_target
+    elseif cursorTarget and not cursorTarget:isNPC() then
+        targ = cursorTarget
     else
         targ = player
     end
@@ -49,5 +49,4 @@ function onTrigger(player, mp, target)
     else
         player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
-
 end

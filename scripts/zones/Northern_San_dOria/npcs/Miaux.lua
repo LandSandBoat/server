@@ -19,21 +19,28 @@ entity.onTrigger = function(player, npc)
     local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
 
-    if (player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
-        if (player:getCharVar("has_seen_drgaf1_quest_already") == 0) then
+    if
+        player:getMainJob() == xi.job.DRG and
+        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        aCraftsmansWork == QUEST_AVAILABLE
+    then
+        if player:getCharVar("has_seen_drgaf1_quest_already") == 0 then
             player:startEvent(73)
         else -- If player has seen the big cut scene, give them a smaller one.
             player:startEvent(71)
         end
-    elseif (aCraftsmansWork == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE) == false) then
+    elseif
+        aCraftsmansWork == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
+    then
         player:startEvent(69)
-    elseif (aCraftsmansWork == QUEST_ACCEPTED) then
+    elseif aCraftsmansWork == QUEST_ACCEPTED then
             player:startEvent(70)
-    elseif (quotasStatus == 2) then
+    elseif quotasStatus == 2 then
         player:startEvent(67) -- I found this earring.
-    elseif (quotasStatus == 3 or quotasStatus == 4) then
+    elseif quotasStatus == 3 or quotasStatus == 4 then
         player:startEvent(68) -- Post-earring, move along.
-    elseif (quotasStatus >= 5) then
+    elseif quotasStatus >= 5 then
         player:startEvent(66) -- The earring was helpful?
     else
         player:startEvent(11)
@@ -44,14 +51,14 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
+    if csid == 73 and option == 0 then -- first part of long CS -- declines questgiver
         player:setCharVar("has_seen_drgaf1_quest_already", 1)
-    elseif ((csid == 73 or csid == 71) and option == 1) then
+    elseif (csid == 73 or csid == 71) and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         player:setCharVar("has_seen_drgaf1_quest_already", 0)
         player:setCharVar("aCraftsmanWork", 1)
-    elseif (csid == 70) then -- This is only if player has Altepa Polishing Stone
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16887)-- Peregrine (DRG AF1)
         else
             player:setCharVar("aCraftsmanWork", 0)
@@ -61,12 +68,13 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
-    elseif (csid == 67) then
+    elseif csid == 67 then
         player:addKeyItem(xi.ki.SHINY_EARRING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHINY_EARRING)
         player:setCharVar("ChasingQuotas_Progress", 3)
     end
 end
+
 -- 11 Miaux : "<Sigh> Why must all craftsmen be so uptight?"
 -- 73 Miaux : "I wish to have a breastplate repaired... Y/N dialog
 -- 71 Miaux : "I...I hesitate to impose upon you again, but would it be possible for you to find

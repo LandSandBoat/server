@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
+#include "bazaar_item.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "bazaar_item.h"
-
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "utils/itemutils.h"
 
 CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {
@@ -48,13 +48,14 @@ CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
             uint32 currentTime = CVanaTime::getInstance()->getVanaTime();
             uint32 nextUseTime = ((CItemUsable*)PItem)->getLastUseTime() + ((CItemUsable*)PItem)->getReuseDelay();
 
-            ref<uint8>(0x11) = 0x01; // флаг ITEM_CHARGED
+            ref<uint8>(0x11) = 0x01; // ITEM_CHARGED flag
             ref<uint8>(0x12) = ((CItemUsable*)PItem)->getCurrentCharges();
             ref<uint8>(0x14) = (nextUseTime > currentTime ? 0x90 : 0xD0);
 
-            ref<uint32>(0x15) = nextUseTime;                                        // таймер следующего использования
-            ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime; // таймер задержки использования
+            ref<uint32>(0x15) = nextUseTime;
+            ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;
         }
-        memcpy(data + (0x1D), PItem->getSignature(), std::min<size_t>(strlen((const char*)PItem->getSignature()), 12));
+        // 12? characters? seems a bit short. TODO: research this.
+        memcpy(data + (0x1D), PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
     }
 }

@@ -3,14 +3,14 @@
 -- Scroll of Tractor
 -- Teaches the black magic Tractor
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(264)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(264)
 end
 
-return item_object
+return itemObject
