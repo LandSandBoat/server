@@ -5040,6 +5040,17 @@ namespace battleutils
 
             int8 dLvl = PCharmer->GetMLevel() - PVictim->GetMLevel();
 
+            // This function (TryCharm) is only used by the bst charm ability via charmPet.  Brd uses charm, not charmPet for Maiden's Virelai
+            // Therefore, unless something very wrong has happened, the player is either main or sub BST
+            if (PCharmer->GetSJob() == JOBTYPE::JOB_BST)
+            {
+                int bstLevel = ((CCharEntity*)PCharmer)->jobs.job[JOBTYPE::JOB_BST];
+                if (bstLevel < PCharmer->GetMLevel())
+                {
+                    dLvl = bstLevel - PVictim->GetMLevel();
+                }
+            }
+
             // dLvl -6 or lower
             float dLvlCharmMod = 1 / 24.f;
 
