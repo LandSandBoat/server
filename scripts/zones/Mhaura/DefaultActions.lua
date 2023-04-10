@@ -2,7 +2,7 @@ return {
     ['Amalanbraux']      = { event = 700 },
     ['Galdo']            = { event = 650 },
     ['Hagain']           = { event = 10002 },
-    ['Itzha_Delavhitta'] = { event = 600 },
+    ['Itzha_Delavhitta'] = { event = 900 },
     ['Kotan-Purutan']    = { event = 140 },
     ['Kupupu']           = { event = 800 },
     ['Lacia']            = { event = 10021 },
