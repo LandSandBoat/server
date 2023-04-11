@@ -782,6 +782,7 @@ public:
     uint32 GetFlag() const;
     uint16 GetType() const;
     uint8  GetSlot() const;
+    uint16 GetItemSourceID() const;
 
     uint32         GetTickTime() const;
     uint32         GetDuration() const;
@@ -800,6 +801,7 @@ public:
     void SetDuration(uint32 Duration);
     void SetOwner(CBattleEntity* Owner);
     void SetTickTime(uint32 tick);
+    void SetItemSourceID(uint16 ItemSourceID);
 
     void IncrementElapsedTickCount();
     void SetStartTime(time_point StartTime);
@@ -829,6 +831,7 @@ private:
     uint32 m_Flag{ 0 };               // флаг эффекта (условия его исчезновения)
     uint16 m_Type{ 0 };               // used to enforce only one
     uint8  m_Slot{ 0 };               // used to determine slot order for songs/rolls
+    uint16 m_ItemSourceID{ 0 };       // used for status effects granted by items to note source item ID
 
     uint32     m_TickTime{ 0 };  // время повторения эффекта (млс)
     uint32     m_Duration{ 0 };  // продолжительность эффекта (млс)

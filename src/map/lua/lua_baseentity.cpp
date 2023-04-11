@@ -3368,6 +3368,28 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 }
 
 /************************************************************************
+ *  Function: hasEquipped(equipmentID)
+ *  Purpose : Returns true if the player has the item equipped in any slot
+ *  Example : player:hasEquipped(xi.items.BREATH_MANTLE)
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEquipped(uint16 equipmentID)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        for (uint8 equipmentSlot = 0; equipmentSlot <= 15; equipmentSlot++)
+        {
+            if (getEquipID((SLOTTYPE)equipmentSlot) == equipmentID)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/************************************************************************
  *  Function: hasItem()
  *  Purpose : Returns true if a player possesses an item
  *  Example : if player:hasItem(500) then -- Second var optional
@@ -10824,6 +10846,10 @@ void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
     {
         auto* PBattleEntity = static_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
         PMob->PEnmityContainer->Clear(PBattleEntity->id);
+        if (PEntity->getPet().has_value())
+        {
+            PMob->PEnmityContainer->Clear(PEntity->getPet().value().getID());
+        }
         auto* PTarget = PMob->PEnmityContainer->GetHighestEnmity();
         PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
     }
@@ -10915,9 +10941,10 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subID    = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
-        auto subPower = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
-        auto tier     = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto subID        = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        auto subPower     = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
+        auto tier         = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto itemSourceID = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
 
         CStatusEffect* PEffect = new CStatusEffect(effectID,
                                                    effectIcon,
@@ -10927,6 +10954,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
                                                    subID,
                                                    subPower,
                                                    tier);
+
+        if (itemSourceID > 0)
+        {
+            PEffect->SetItemSourceID(itemSourceID);
+        }
 
         if (PEffect->GetStatusID() == EFFECT_FOOD)
         {
@@ -10998,10 +11030,10 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Function: getStatusEffect()
  *  Purpose : Returns the Object of a specified Status ID
  *  Example : local debilitation = target:getStatusEffect(xi.effect.DEBILITATION)
- *  Notes   :
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -11018,6 +11050,11 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
     {
         auto uint16_SubID = SubID.as<uint16>();
         PStatusEffect     = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
+    }
+    else if (ItemSourceID != sol::lua_nil)
+    {
+        auto uint16_ItemSourceID = ItemSourceID.as<uint16>();
+        PStatusEffect            = PBattleEntity->StatusEffectContainer->GetStatusEffectByItemSource(effect_StatusID, uint16_ItemSourceID);
     }
     else
     {
@@ -11178,12 +11215,13 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Function: delStatusEffect()
  *  Purpose : Deletes a specified Effect from the Entity's Status Effect Container
  *  Example : target:delStatusEffect(xi.effect.RERAISE)
- *  Notes   : Can specify Power of the Effect as an option
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    XI_DEBUG_BREAK_IF(SubID != sol::lua_nil && ItemSourceID != sol::lua_nil);
 
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
@@ -11199,6 +11237,11 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
     {
         auto uint16_SubID = SubID.as<uint16>();
         result            = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
+    }
+    else if (ItemSourceID != sol::lua_nil)
+    {
+        auto uint16_ItemSourceID = ItemSourceID.as<uint16>();
+        result                   = PBattleEntity->StatusEffectContainer->DelStatusEffectByItemSource(effect_StatusID, uint16_ItemSourceID);
     }
     else
     {
@@ -12061,7 +12104,7 @@ int CLuaBaseEntity::getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::objec
 
     if (xirand::GetRandomNumber(100) < hitrate)
     {
-        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f, SLOT_MAIN, 0, false);
+        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 1.f, SLOT_MAIN, 0, false);
         int   damage      = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PDefender, SLOT_MAIN)) * DamageRatio);
 
         return damage;
@@ -13499,6 +13542,7 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         PMob->SetMLevel(level);
+        PMob->SetSLevel(level);
         mobutils::CalculateMobStats(PMob);
         mobutils::GetAvailableSpells(PMob);
     }
@@ -13901,6 +13945,36 @@ bool CLuaBaseEntity::hasTrait(uint16 traitID)
 bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
 {
     return static_cast<CBattleEntity*>(m_PBaseEntity)->hasImmunity(immunityID);
+}
+
+/************************************************************************
+ *  Function: addImmunity()
+ *  Purpose : Adds any immunity
+ *  Example : mob:addImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::addImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity |= immunityID;
+    }
+}
+
+/************************************************************************
+ *  Function: delImmunity()
+ *  Purpose : Delete any immunity
+ *  Example : mob:delImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::delImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity &= ~immunityID;
+    }
 }
 
 /************************************************************************
@@ -15782,6 +15856,7 @@ void CLuaBaseEntity::Register()
     // Items
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     SOL_REGISTER("getEquippedItem", CLuaBaseEntity::getEquippedItem);
+    SOL_REGISTER("hasEquipped", CLuaBaseEntity::hasEquipped);
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
@@ -16349,6 +16424,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("hasTrait", CLuaBaseEntity::hasTrait);
     SOL_REGISTER("hasImmunity", CLuaBaseEntity::hasImmunity);
+    SOL_REGISTER("addImmunity", CLuaBaseEntity::addImmunity);
+    SOL_REGISTER("delImmunity", CLuaBaseEntity::delImmunity);
 
     SOL_REGISTER("setAggressive", CLuaBaseEntity::setAggressive);
     SOL_REGISTER("setTrueDetection", CLuaBaseEntity::setTrueDetection);

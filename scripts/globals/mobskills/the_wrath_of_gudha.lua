@@ -18,9 +18,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, 0, 1, 2, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.NONE, info.hitslanded)
 
+    if not skill:hasMissMsg() then
         xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 80, 0, 10)
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.NONE)
+    end
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.NONE)
     return dmg
 end
 

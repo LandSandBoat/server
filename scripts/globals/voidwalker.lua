@@ -239,6 +239,10 @@ end
 -- Zone On Init
 -----------------------------------
 xi.voidwalker.zoneOnInit = function(zone)
+    if xi.settings.main.ENABLE_VOIDWALKER == 0 then
+        return
+    end
+
     local zoneId = zone:getID()
     local voidwalkerMobs = zones[zoneId].mob.VOIDWALKER
 

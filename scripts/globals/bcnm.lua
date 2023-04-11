@@ -1098,7 +1098,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getCharVar("Quest[3][89]Prog") == 3
+            return player:getCharVar("Quest[3][89]Status") == 3
         end,
 
         [1090] = function() -- Quest: Puppetmaster Blues

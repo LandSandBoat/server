@@ -2475,7 +2475,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     // Before inserting to DBox, check we CAN actually remove this item (locked, etc..)
                     if (!charutils::ValidateUpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
-                        delete PUBoxItem;
+                        destroy(PUBoxItem);
                         return;
                     }
 
@@ -2492,7 +2492,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        delete PUBoxItem;
+                        destroy(PUBoxItem);
                     }
                 }
             }
@@ -2757,7 +2757,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     if (!commit || !sql->TransactionCommit())
                     {
-                        delete PItem;
+                        destroy(PItem);
 
                         sql->TransactionRollback();
                         ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d", PChar->id, boxtype, slotID);
@@ -2798,7 +2798,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, deliverySlotID, received_items, 0x01));
                                 PChar->UContainer->SetItem(deliverySlotID, nullptr);
-                                delete PItem;
+                                destroy(PItem);
                             }
                         }
                     }
@@ -2870,7 +2870,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 {
                                     PChar->UContainer->SetItem(slotID, nullptr);
                                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                                    delete PItem;
+                                    destroy(PItem);
                                     commit = true;
                                 }
                             }
@@ -2954,7 +2954,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
                         PChar->pushPacket(new CInventoryFinishPacket());
                         PChar->UContainer->SetItem(slotID, nullptr);
-                        delete PItem;
+                        destroy(PItem);
                     }
                 }
 
@@ -2980,7 +2980,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->UContainer->SetItem(slotID, nullptr);
 
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                    delete PItem;
+                    destroy(PItem);
                 }
             }
             return;
@@ -3266,7 +3266,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
                     {
                         const char* fmtQuery = "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
-                                               "AND stack = %u AND price <= %u ORDER BY price, date LIMIT 1";
+                                               "AND stack = %u AND price <= %u ORDER BY price, date DESC LIMIT 1";
 
                         if (sql->Query(fmtQuery, PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price) != SQL_ERROR &&
                             sql->AffectedRows() != 0)
@@ -5596,13 +5596,17 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->PMeritPoints->IsMeritExist(merit))
                 {
+                    const Merit_t* PMerit = PChar->PMeritPoints->GetMerit(merit);
+
                     switch (operation)
                     {
                         case 0:
                             PChar->PMeritPoints->LowerMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_DECREASE));
                             break;
                         case 1:
                             PChar->PMeritPoints->RaiseMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_INCREASE));
                             break;
                     }
                     PChar->pushPacket(new CMenuMeritPacket(PChar));
@@ -5743,7 +5747,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             LinkshellID = linkshell::RegisterNewLinkshell(DecodedName, LinkshellColor);
             if (LinkshellID != 0)
             {
-                delete PItemLinkshell;
+                destroy(PItemLinkshell);
                 PItemLinkshell = (CItemLinkshell*)itemutils::GetItem(513);
                 if (PItemLinkshell == nullptr)
                 {

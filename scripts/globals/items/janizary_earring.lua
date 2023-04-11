@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.DEFENSE_BOOST)
-    if effect ~= nil and effect:getSubType() == 14785 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.JANIZARY_EARRING then
         target:delStatusEffect(xi.effect.DEFENSE_BOOST)
     end
 
@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.DEFENSE_BOOST, 32, 0, 180, 14785)
+    if target:hasEquipped(xi.items.JANIZARY_EARRING) then
+        target:addStatusEffect(xi.effect.DEFENSE_BOOST, 32, 0, 180, 0, 0, 0, xi.items.JANIZARY_EARRING)
+    end
 end
 
 return itemObject

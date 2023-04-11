@@ -76,27 +76,28 @@ xi.weaponskills.getAlpha = function(level)
     return alpha
 end
 
+-- http://wiki.ffo.jp/html/1705.html
+-- https://www.ffxiah.com/forum/topic/21497/stalwart-soul/ some anecdotal data that aligns with JP
+-- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
+        local souleaterEffect    = math.min(0.02, attacker:getMod(xi.mod.SOULEATER_EFFECT) * 0.01)
+        local souleaterEffectII  = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01 -- No known cap to this bonus. Used on Agwu's scythe
+        local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
+        local bonusDamage       = attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII)
 
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
+        if bonusDamage >= 1 then
+            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
+
+            if attacker:getMainJob() ~= xi.job.DRK then
+                return bonusDamage / 2
+            end
+
+            return bonusDamage
         end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
     end
 
-    return bonus
+    return 0
 end
 
 local function fencerBonus(attacker)
@@ -254,6 +255,7 @@ xi.weaponskills.getRangedHitRate = function(attacker, target, capHitRate, bonus,
         else
             accVarryTP = (wsParams.acc100 - 1) * 100
         end
+
         bonus = bonus + accVarryTP
     end
 
@@ -278,7 +280,11 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
         pdifCrit =  ratio[2]
         calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
-        if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
+        if
+            isSubAttack and
+            calcParams.extraOffhandHit and
+            calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND
+        then
             ratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
@@ -293,7 +299,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     calcParams.hitRate = utils.clamp(calcParams.hitRate + calcParams.bonusAcc, 0.2, 0.95)
 
-    if firstHitAccBonus ~= nil and firstHitAccBonus == true then
+    if firstHitAccBonus ~= nil and firstHitAccBonus then
         calcParams.hitRate = calcParams.hitRate + 0.5 -- First hit gets a +100 ACC bonus which translates to +50 hit
         calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
     end
@@ -302,7 +308,12 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
 
-    if (missChance <= calcParams.hitRate or calcParams.guaranteedHit or (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100))) and not calcParams.mustMiss then
+    if
+        (missChance <= calcParams.hitRate or
+        calcParams.guaranteedHit or
+        (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100))) and
+        not calcParams.mustMiss
+    then
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
@@ -481,35 +492,55 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         if calcParams.sneakApplicable then
             dmg = dmg + attacker:getStat(xi.mod.DEX)
         end
+
         if calcParams.trickApplicable then
             dmg = dmg + attacker:getStat(xi.mod.AGI)
         end
     end
 
     -- Calculate critrates
-    local critrate = calculateDEXvsAGICritRate(attacker, target)
+    local critrate = 0.05 + calculateDEXvsAGICritRate(attacker, target) -- 5% constant crit floor + dDEX
+    -- mainhand and offhand weapon crit mods aren't included with the regular CRITHITRATE mod
+    local mainSlotCritBonus = 0
+    local subSlotCritBonus = 0
+    if attacker:getEquippedItem(xi.slot.MAIN) ~= nil then
+        mainSlotCritBonus = (attacker:getEquippedItem(xi.slot.MAIN):getMod(xi.mod.CRITHITRATE_SLOT) / 100)
+    end
+
+    if attacker:getEquippedItem(xi.slot.SUB) ~= nil then
+        subSlotCritBonus = attacker:getEquippedItem(xi.slot.SUB):getMod(xi.mod.CRITHITRATE_SLOT) / 100
+    end
 
     if wsParams.canCrit then -- Work out critical hit ratios
-        local nativecrit = 0
-        critrate = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
+        local bonuscrit = 0
+
+        critrate = critrate + xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
-        nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100
+        bonuscrit = bonuscrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100
                                 + fencerBonusVal - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+
+        -- weapon slots use CRIHITRATE_SLOT mod
+        if isRanged then
+            bonuscrit = bonuscrit + attacker:getEquippedItem(xi.slot.RANGED):getMod(xi.mod.CRITHITRATE_SLOT) / 100
+                                    + attacker:getEquippedItem(xi.slot.AMMO):getMod(xi.mod.CRITHITRATE_SLOT) / 100
+        else -- count mainhand only, offhand weapons crit is added only for offhand swings
+            bonuscrit = bonuscrit + mainSlotCritBonus
+        end
 
         -- Innin critical boost when attacker is behind target
         if
             attacker:hasStatusEffect(xi.effect.INNIN) and
             attacker:isBehind(target, 23)
         then
-            nativecrit = nativecrit + attacker:getStatusEffect(xi.effect.INNIN):getPower()
+            bonuscrit = bonuscrit + attacker:getStatusEffect(xi.effect.INNIN):getPower()
         end
 
-        critrate = critrate + nativecrit
+        critrate = critrate + bonuscrit
     end
 
     calcParams.critRate = critrate
@@ -556,30 +587,41 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
 
-    -- Do the extra hit for our offhand if applicable
-    if calcParams.extraOffhandHit and finaldmg < targetHp and calcParams.skillType ~= xi.skill.HAND_TO_HAND then
-        local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams, false, isRanged, true)
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.subAttackInfo, wsParams, hitdmg)
+    if calcParams.extraOffhandHit then
+        -- we want the offhand crit rate which can be different than mainhand depending on equipped weapons
+        calcParams.critRate = calcParams.critRate - mainSlotCritBonus + subSlotCritBonus
+
+        -- Do the extra hit for our offhand if applicable
+        if finaldmg < targetHp and calcParams.skillType ~= xi.skill.HAND_TO_HAND then
+            local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
+
+            hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams, false, isRanged, true)
+            if calcParams.melee then
+                hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.subAttackInfo, wsParams, hitdmg)
+            end
+
+            if hitdmg > 0 then
+                attacker:trySkillUp(calcParams.subSkillType, targetLvl)
+            end
+
+            finaldmg = finaldmg + hitdmg
+            hitsDone = hitsDone + 1
+        elseif finaldmg < targetHp then -- h2h case
+            hitdmg, calcParams = getSingleHitDamage(attacker, target, base, wsParams, calcParams, false, isRanged, false)
+            if calcParams.melee then
+                hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+            end
+
+            if hitdmg > 0 then
+                attacker:trySkillUp(calcParams.skillType, targetLvl)
+            end
+
+            finaldmg = finaldmg + hitdmg
+            hitsDone = hitsDone + 1
         end
-        if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.subSkillType, targetLvl)
-        end
-        calcParams.extraOffhandHit = false
-        finaldmg = finaldmg + hitdmg
-        hitsDone = hitsDone + 1
-    elseif calcParams.extraOffhandHit and finaldmg < targetHp then
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, base, wsParams, calcParams, false, isRanged, false)
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
-        end
-        if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.skillType, targetLvl)
-        end
-        calcParams.extraOffhandHit = false
-        finaldmg = finaldmg + hitdmg
-        hitsDone = hitsDone + 1
+
+        -- going back to the mainhand crit total for the rest of the hits
+        calcParams.critRate = calcParams.critRate + mainSlotCritBonus - subSlotCritBonus
     end
 
     -- Reset fTP if it's not supposed to carry over across all hits for this WS
@@ -588,6 +630,12 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
     local numHits = utils.clamp(getMultiAttacks(attacker, target, wsParams.numHits, wsParams), 0, 8)
+
+    -- adding one to make sure the extra hit from dw or h2h doesnt eat 1 base hit of the ws
+    if calcParams.extraOffhandHit then
+        numHits = utils.clamp(numHits + 1, 0, 8)
+        calcParams.extraOffhandHit = false
+    end
 
     if isRanged then
         numHits = wsParams.numHits
@@ -626,7 +674,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Return our raw damage to then be modified by enemy reductions based off of melee/ranged
     calcParams.finalDmg = finaldmg
-
     return calcParams
 end
 
@@ -636,7 +683,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
-    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
+    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef then
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
 
@@ -688,7 +735,10 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc, false, wsParams, calcParams)
     calcParams.skillType = attack.weaponType
 
-    if calcParams.extraOffhandHit and attack.weaponType ~= xi.skill.HAND_TO_HAND then
+    if
+        calcParams.extraOffhandHit and
+        attack.weaponType ~= xi.skill.HAND_TO_HAND
+    then
         subAttack.weaponType = attacker:getWeaponSkillType(xi.slot.SUB)
         subAttack.damageType = attacker:getWeaponDamageType(xi.slot.SUB)
         calcParams.subAttackInfo = subAttack
@@ -722,7 +772,6 @@ end
 -- Sets up the necessary calcParams for a ranged WS before passing it to xi.weaponskills.calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
 xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -795,7 +844,6 @@ end
 --         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
 
 xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
     {
@@ -1025,6 +1073,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
         else
             accVarryTP = wsParams.acc100 - 1
         end
+
         bonus = bonus + (accVarryTP * 100)
     end
 
@@ -1042,7 +1091,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
 end
 
 xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
-    if (tp < 1000) then
+    if tp < 1000 then
         tp = 1000
     end
 
@@ -1108,7 +1157,10 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     if defender:getMainJob() == xi.job.MNK then
-        if defender:getGuardRate(attacker) > math.random(100) and defender:isFacing(attacker) then
+        if
+            defender:getGuardRate(attacker) > math.random(100) and
+            defender:isFacing(attacker)
+        then
             isGuarded = true
         end
     end
@@ -1124,9 +1176,19 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 end
 
 xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
-    if (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:getSystem() == xi.eco.BEASTMEN and target:getMainJob() == xi.job.PLD) then
+    if
+        target:getBlockRate(attacker) > math.random(100) and
+        target:isFacing(attacker) and
+        target:getSystem() == xi.eco.BEASTMEN and
+        target:getMainJob() == xi.job.PLD
+    then
         finaldmg = math.floor(finaldmg * 0.5)
-    elseif (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:isPC() and (target:getEquippedItem(xi.slot.SUB):getSkillType() == xi.skill.SHIELD)) then
+    elseif
+        target:getBlockRate(attacker) > math.random(100) and
+        target:isFacing(attacker) and
+        target:isPC() and
+        target:getEquippedItem(xi.slot.SUB):getSkillType() == xi.skill.SHIELD
+    then
         local absorb = 100
         absorb = utils.clamp(absorb - target:getShieldAbsorptionRate(), 0, 100)
         absorb = absorb + target:getMod(xi.mod.SHIELD_DEF_BONUS)
@@ -1138,8 +1200,12 @@ end
 
 xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedHit)
     local gHit = guaranteedHit or false
-    if (target:isFacing(attacker) and (target:getParryRate(attacker) >= math.random(100)) and target:getMainJob() ~= xi.job.MNK and not gHit) then -- Try parry, if so miss.
-        if (target:getSystem() == xi.eco.BEASTMEN or target:isPC()) then
+    if
+        target:isFacing(attacker) and
+        target:getParryRate(attacker) >= math.random(100) and
+        target:getMainJob() ~= xi.job.MNK and not gHit
+    then -- Try parry, if so miss.
+        if target:getSystem() == xi.eco.BEASTMEN or target:isPC() then
             missChance = 1
         end
     end

@@ -264,21 +264,22 @@ enum class Mod
     FOOD_DURATION = 937, // Percentage to increase food duration
 
     // Killer-Effects - (Most by Traits/JobAbility)
-    VERMIN_KILLER   = 224, // Enhances "Vermin Killer" effect
-    BIRD_KILLER     = 225, // Enhances "Bird Killer" effect
-    AMORPH_KILLER   = 226, // Enhances "Amorph Killer" effect
-    LIZARD_KILLER   = 227, // Enhances "Lizard Killer" effect
-    AQUAN_KILLER    = 228, // Enhances "Aquan Killer" effect
-    PLANTOID_KILLER = 229, // Enhances "Plantiod Killer" effect
-    BEAST_KILLER    = 230, // Enhances "Beast Killer" effect
-    UNDEAD_KILLER   = 231, // Enhances "Undead Killer" effect
-    ARCANA_KILLER   = 232, // Enhances "Arcana Killer" effect
-    DRAGON_KILLER   = 233, // Enhances "Dragon Killer" effect
-    DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
-    EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
-    HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
-    LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
+    VERMIN_KILLER            = 224,  // Enhances "Vermin Killer" effect
+    BIRD_KILLER              = 225,  // Enhances "Bird Killer" effect
+    AMORPH_KILLER            = 226,  // Enhances "Amorph Killer" effect
+    LIZARD_KILLER            = 227,  // Enhances "Lizard Killer" effect
+    AQUAN_KILLER             = 228,  // Enhances "Aquan Killer" effect
+    PLANTOID_KILLER          = 229,  // Enhances "Plantiod Killer" effect
+    BEAST_KILLER             = 230,  // Enhances "Beast Killer" effect
+    UNDEAD_KILLER            = 231,  // Enhances "Undead Killer" effect
+    ARCANA_KILLER            = 232,  // Enhances "Arcana Killer" effect
+    DRAGON_KILLER            = 233,  // Enhances "Dragon Killer" effect
+    DEMON_KILLER             = 234,  // Enhances "Demon Killer" effect
+    EMPTY_KILLER             = 235,  // Enhances "Empty Killer" effect
+    HUMANOID_KILLER          = 236,  // Enhances "Humanoid Killer" effect
+    LUMORIAN_KILLER          = 237,  // Enhances "Lumorian Killer" effect
+    LUMINION_KILLER          = 238,  // Enhances "Luminion Killer" effect
+    WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
     // Resistances to enfeebles - Traits/Job Ability
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
@@ -390,6 +391,7 @@ enum class Mod
     ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
     ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
     SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
@@ -501,6 +503,7 @@ enum class Mod
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    SPIRIT_SPELLCAST_DELAY    = 1179, // Reduces the time between spellcasts of a summoned spirit by seconds provided
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -633,8 +636,6 @@ enum class Mod
     TP_BONUS    = 345, //
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
-
-    WYRMAL_ABJ_KILLER_EFFECT = 53, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
     // Rune Fencer
     INQUARTATA                  = 963,  // Increases parry rate by a flat %.
@@ -777,7 +778,7 @@ enum class Mod
     ITEM_ADDEFFECT_STATUS   = 951,  // Status Effect ID to try to apply via Additional Effect or Spikes
     ITEM_ADDEFFECT_POWER    = 952,  // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
     ITEM_ADDEFFECT_DURATION = 953,  // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_OPTION   = 1178, // Additional parameters for more specific latents required to proc
+    ITEM_ADDEFFECT_OPTION   = 1180, // Additional parameters for more specific latents required to proc
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -982,7 +983,7 @@ enum class Mod
     // 192 to 223
     // 261 to 280
     //
-    // SPARE = 1179, and onward
+    // SPARE = 1181, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

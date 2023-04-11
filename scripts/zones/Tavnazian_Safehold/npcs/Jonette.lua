@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Jonette
+-- Main Quest NPC for Secrets of Ovens Lost
 -----------------------------------
 local entity = {}
 

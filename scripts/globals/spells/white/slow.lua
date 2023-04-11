@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.bonus = 0
+    params.bonus = 10
     params.effect = xi.effect.SLOW
     params.tier = 1
 

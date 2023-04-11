@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
     elseif
         quotasStatus == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.DRG and
-        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
         quotasNo == 0
     then
         player:startEvent(18) -- Long version of quest start

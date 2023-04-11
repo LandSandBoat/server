@@ -9,16 +9,17 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 18747 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.SMASH_CESTI) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.SMASH_CESTI)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 18747)
+    if target:hasEquipped(xi.items.SMASH_CESTI) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.SMASH_CESTI)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

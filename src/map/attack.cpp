@@ -99,12 +99,12 @@ void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
     }
     else
     {
-        float attBonus = 0.f;
+        float attBonus = 1.f;
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus = footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
+                attBonus = 1.0 + footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
             }
         }
 
@@ -174,13 +174,23 @@ bool CAttack::IsBlocked() const
     return m_isBlocked;
 }
 
+/************************************************************************
+ *                                                                      *
+ *  Gets the Parried flag if set, else calculates a new one and returns.*
+ *                                                                      *
+ ************************************************************************/
 bool CAttack::IsParried()
 {
+    if (m_isParried.has_value())
+    {
+        return m_isParried.value();
+    }
+
     if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
     {
-        return attackutils::IsParried(m_attacker, m_victim);
+        m_isParried.emplace(attackutils::IsParried(m_attacker, m_victim));
     }
-    return false;
+    return m_isParried.value_or(false);
 }
 
 bool CAttack::IsAnticipated() const
@@ -463,11 +473,7 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
     {
         m_baseDamage       = 0;
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
-
-        if (!isKick)
-        {
-            m_baseDamage = m_attacker->GetMainWeaponDmg();
-        }
+        m_baseDamage       = isKick ? m_attacker->getMod(Mod::KICK_DMG) : m_attacker->GetMainWeaponDmg();
 
         if (m_attacker->objtype == TYPE_MOB)
         {

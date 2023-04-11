@@ -243,11 +243,11 @@ xi.dynamis.mobList[zoneID][146].info = {"NM", "Gu'Nhi Noondozer",      "Quadav",
 xi.dynamis.mobList[zoneID][147].info = {"NM", "Ze'Vho Fallsplitter",   "Quadav", "DRK", "ZeVho_killed"} -- Ze'Vho Fallsplitter
 xi.dynamis.mobList[zoneID][148].info = {"NM", "Ko'Dho Cannonball",     "Quadav", "MNK", "KoDho_killed"} -- Ko'Dho Cannonball
 
-xi.dynamis.mobList[zoneID][149].info = {"NM", "Effigy Shield", "Quadav", "PLD", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][150].info = {"NM", "Effigy Shield", "Quadav", "NIN", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][151].info = {"NM", "Effigy Shield", "Quadav", "BRD", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][152].info = {"NM", "Effigy Shield", "Quadav", "DRK", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][153].info = {"NM", "Effigy Shield", "Quadav", "SAM", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][149].info = {"NM", "Effigy Shield PLD", "Quadav", "PLD", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][150].info = {"NM", "Effigy Shield NIN", "Quadav", "NIN", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][151].info = {"NM", "Effigy Shield BRD", "Quadav", "BRD", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][152].info = {"NM", "Effigy Shield DRK", "Quadav", "DRK", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][153].info = {"NM", "Effigy Shield SAM", "Quadav", "SAM", nil } -- Effigy Shield
 
 xi.dynamis.mobList[zoneID][154].info = {"TE normal", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
 xi.dynamis.mobList[zoneID][155].info = {"TE normal", "Vanguard Constable",  "Quadav", "WHM", nil } -- 10min TE
@@ -390,7 +390,7 @@ xi.dynamis.mobList[zoneID][2].wave =
 xi.dynamis.mobList[zoneID][3].wave =
 {
     112, -- (112-Q) Adamantking Effigy
-    113, -- ( 113 ) Adamantking Effigy
+    113, -- (113-Q) Adamantking Effigy
     114, -- (114-Q) Adamantking Effigy
     115, -- (115-Q) Adamantking Effigy
     116, -- (116-Q) Adamantking Effigy
@@ -798,11 +798,11 @@ xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eye.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
-xi.dynamis.mobList[zoneID].timeExtensionList = {1, 19, 41, 146, 113, 154, 155, 156}
+xi.dynamis.mobList[zoneID].timeExtensionList = {1, 19, 41, 110, 146, 154, 155, 156}
 xi.dynamis.mobList[zoneID][1  ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][19 ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][41 ].timeExtension = 20 -- Adamantking Effigy
-xi.dynamis.mobList[zoneID][113].timeExtension = 30 -- Goblin Golem
+xi.dynamis.mobList[zoneID][110].timeExtension = 30 -- Gu'Dha Effigy
 xi.dynamis.mobList[zoneID][146].timeExtension = 30 -- Gu'Nhi Noondozer
 xi.dynamis.mobList[zoneID][154].timeExtension = 10 -- Vanguard Vindicator
 xi.dynamis.mobList[zoneID][155].timeExtension = 10 -- Vanguard Constable

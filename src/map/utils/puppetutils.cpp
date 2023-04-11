@@ -55,7 +55,7 @@ namespace puppetutils
                 auto* PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
                 if (PZone == nullptr || PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
                 {
-                    delete PChar->PAutomaton;
+                    destroy(PChar->PAutomaton);
                 }
                 else
                 {

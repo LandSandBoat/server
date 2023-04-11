@@ -21,9 +21,12 @@ local renterNPCs =
     "xi.zones.Lower_Jeuno.npcs.Miladi-Nildi",
     "xi.zones.Upper_Jeuno.npcs.Zekobi-Morokobi",
     "xi.zones.RuLude_Gardens.npcs.Perisa-Neburusa",
-    "xi.zones.Al_Zahbi.npcs.Krujaal",
-    "xi.zones.Aht_Urhgan_Whitegate.npcs.Zhamwaa",
 }
+
+if xi.settings.main.ENABLE_TOAU == 1 then
+    table.insert(renterNPCs, "xi.zones.Al_Zahbi.npcs.Krujaal")
+    table.insert(renterNPCs, "xi.zones.Aht_Urhgan_Whitegate.npcs.Zhamwaa")
+end
 
 for _, npcString in pairs(renterNPCs) do
     m:addOverride(string.format("%s.onTrigger", npcString), function(player, npc)

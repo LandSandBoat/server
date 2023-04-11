@@ -5,13 +5,13 @@
 local itemObject = {}
 
 itemObject.onItemDrop = function(player, item)
-    player:setLocalVar('TREDECIM_COUNTER', 0)
+    player:setCharVar('TREDECIM_COUNTER', 0)
 end
 
 itemObject.onItemEquip = function(player, item)
     player:addListener("ATTACK", "TREDECIM_ATTACK", function(playerArg, mob)
         -- Setting of critical attack is handled in battleentity.cpp
-        playerArg:setLocalVar("TREDECIM_COUNTER", playerArg:getLocalVar("TREDECIM_COUNTER") + 1)
+        playerArg:setCharVar("TREDECIM_COUNTER", playerArg:getCharVar("TREDECIM_COUNTER") + 1)
     end)
 end
 

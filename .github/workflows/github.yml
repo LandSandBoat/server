@@ -19,6 +19,22 @@ jobs:
                 return string.split(word).length - 1;
             }
 
+            function get_description(str)
+            {
+              var startIndex = str.indexOf("## Please enter a player-facing description");
+              var endIndex = str.indexOf("## What does this pull request do? (Please be technical)");
+
+              if (startIndex === -1 || endIndex === -1) return "";
+
+              startIndex += "## Please enter a player-facing description".length;
+
+              var desc = str.substring(startIndex, endIndex);
+              desc = desc.replace(/(\r\n|\n|\r)/gm, " ");
+              desc = desc.trim();
+
+              return desc;
+            }
+
             const event_type = "${{ github.event_name }}"
             var   body_text  = ""
             var   type_name  = ""
@@ -37,9 +53,15 @@ jobs:
             // Remove block comments
             body_text = body_text.replaceAll(/<!--.*-->/g, "")
 
+            // Get description
+            description = get_description(body_text);
+
             console.log(`github.event_name: ${event_type}`)
             console.log(`body_text: ${body_text}`)
+            console.log(`description: ${description}`)
             console.log(`type_name: ${type_name}`)
+
+            const errors = [];
 
             // Count the filled in checkboxes:
             // 1x pre-filled
@@ -49,14 +71,25 @@ jobs:
             if (checkbox_count < 3)
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
-                const result = await github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly completed all of the checkboxes in the pre-filled template.`
-                 })
+                errors.push("- Check all boxes")
             }
             else
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. All is well.`)
+            }
+
+            if (description.length < 10)
+            {
+              errors.push("- Provide a strong customer-center description of the work.")
+            }
+
+            if (errors.length > 0)
+            {
+              const format = `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly provided all requirements:\n\n${errors.join("\n")}`;
+              const result = await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: format
+              })
             }

@@ -211,6 +211,7 @@ public:
     // Items
     uint16 getEquipID(SLOTTYPE slot);                              // Gets the Item Id of the item in specified slot
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
+    bool   hasEquipped(uint16 equipmentID);                        // Returns true if item is equipped in any slot
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
@@ -609,7 +610,7 @@ public:
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID) -> std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj); // Returns true if the effect can be added
@@ -617,14 +618,14 @@ public:
     uint16 hasStatusEffectByFlag(uint16 StatusID);                          // Checks to see if a character has an effect with the specified flag
     uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubID);                   // Removes Status Effect
-    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
-    bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
-    uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased
-    int32  dispelStatusEffect(sol::object const& flagObj);                               // Used with "Dispel" spell
-    uint8  dispelAllStatusEffect(sol::object const& flagObj);                            // Dispels all effects and returns number erased
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID); // Removes Status Effect
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);                              // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                                      // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                                         // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                                      // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                                              // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                                           // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);                // Used in mob skills to steal effects
 
     void  addMod(uint16 type, int16 amount); // Adds Modifier Value
     int16 getMod(uint16 modID);              // Retrieves Modifier Value
@@ -789,6 +790,8 @@ public:
 
     bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
+    void addImmunity(uint32 immunityID); // Adds immunity to an entity
+    void delImmunity(uint32 immunityID); // Deletes immunity from an entity
 
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);

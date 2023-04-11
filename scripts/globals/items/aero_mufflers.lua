@@ -3,13 +3,10 @@
 -- Aero Mufflers
 --  Enchantment: "Enaero"
 -----------------------------------
+require("scripts/globals/items")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENAERO)
-    if effect ~= nil and effect:getSubType() == 14989 then
-        target:delStatusEffect(xi.effect.ENAERO)
-    end
     return 0
 end
 
@@ -26,7 +23,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 14989)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.AERO_MUFFLERS)
 end
 
 return itemObject

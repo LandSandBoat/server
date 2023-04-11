@@ -267,21 +267,23 @@ CCharEntity::~CCharEntity()
         PTreasurePool->DelMember(this);
     }
 
-    delete TradeContainer;
-    delete Container;
-    delete UContainer;
-    delete CraftContainer;
-    delete PMeritPoints;
-    delete PJobPoints;
+    destroy(TradeContainer);
+    destroy(Container);
+    destroy(UContainer);
+    destroy(CraftContainer);
+    destroy(PMeritPoints);
+    destroy(PJobPoints);
+
     PGuildShop = nullptr;
-    delete eventPreparation;
-    delete currentEvent;
+
+    destroy(eventPreparation);
+    destroy(currentEvent);
 
     while (!eventQueue.empty())
     {
         auto head = eventQueue.front();
         eventQueue.pop_front();
-        delete head;
+        destroy(head);
     }
 }
 
@@ -299,7 +301,8 @@ void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -316,7 +319,7 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         if (PendingPositionPacket)
         {
             PendingPositionPacket->copy(packet);
-            delete packet;
+            destroy(packet);
         }
         else
         {
@@ -407,7 +410,8 @@ void CCharEntity::erasePackets(uint8 num)
 {
     for (auto i = 0; i < num; i++)
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -1342,12 +1346,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
-        if (battleutils::IsParalyzed(this))
-        {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
-            return;
-        }
-
         // get any available merit recast reduction
         uint8 meritRecastReduction = 0;
         uint8 chargeTime           = 0;
@@ -1443,12 +1441,17 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
-        if (battleutils::IsParalyzed(this) && !(PAbility->getRecastTime() == 7200)) // If Paralyzed and Not JSA (7200s = 2Hr)
+        if (battleutils::IsParalyzed(this))
         {
-            // display paralyzed
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-            pushPacket(new CCharRecastPacket(this));
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+
+            // You got paralyzed, reset the timer for this JA which is era behavior, unless it is the 2hr.
+            // RecastID 0 & 254 are starting 2hr and level 96 2hr respectively. 2hrs do not get their recast eaten.
+            if (PAbility->getRecastId() != 0 && PAbility->getRecastId() != 254)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
+                pushPacket(new CCharRecastPacket(this));
+            }
             return;
         }
 
@@ -1697,8 +1700,23 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
     if (battleutils::IsParalyzed(this))
     {
-        // display paralyzed
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        // setup new action packet to send paralyze message
+        action_t paralyze_action = {};
+        setActionInterrupted(paralyze_action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CActionPacket(paralyze_action));
+
+        // Set up /ra action to be interrupted
+        action.actiontype = ACTION_RANGED_INTERRUPT; // This handles some magic numbers in CActionPacket to cancel actions
+        action.id         = id;
+
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = id;
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
+        actionTarget.speceffect      = SPECEFFECT::RECOIL;
+        actionTarget.reaction        = REACTION::NONE;
+
         return;
     }
 
@@ -2852,7 +2870,7 @@ void CCharEntity::tryStartNextEvent()
     EventInfo* oldEvent = currentEvent;
     currentEvent        = eventQueue.front();
     eventQueue.pop_front();
-    delete oldEvent;
+    destroy(oldEvent);
 
     eventPreparation->reset();
 

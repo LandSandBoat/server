@@ -2,6 +2,7 @@
 
 #include "../../../common/utils.h"
 #include "../../entities/petentity.h"
+#include "../../modifier.h"
 #include "../../status_effect_container.h"
 #include "../../utils/battleutils.h"
 #include "../../utils/petutils.h"
@@ -85,22 +86,26 @@ void CSpiritController::Tick(time_point tick)
 
 void CSpiritController::setMagicCooldowns()
 {
-    uint32 castTime = ((48000 + (GetSMNSkillReduction() / 3)) + GetDayWeatherBonus());
+    uint32 spiritCastDelay = ((48000 + (GetSMNSkillReduction() / 3)) + GetDayWeatherBonus());
 
-    if (PSpirit->PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
+    // Reduce cast delay when under effect of Astral Flow
+    if (PSpirit->PMaster && PSpirit->PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
     {
-        castTime -= 5000;
+        spiritCastDelay -= 5000;
     }
 
-    CItemEquipment* legSlotItem = static_cast<CCharEntity*>(PSpirit->PMaster)->getEquip(SLOT_LEGS);
-
-    // Summoner's Spats & Summoner's Spats +1
-    if (legSlotItem && (legSlotItem->getID() == 15131 || legSlotItem->getID() == 15594))
+    if (auto PMaster = dynamic_cast<CCharEntity*>(PSpirit->PMaster))
     {
-        castTime -= 5000;
+        auto legSlotItem = PMaster->getEquip(SLOT_LEGS);
+
+        // Summoner's Spats & Summoner's Spats +1
+        if (legSlotItem && legSlotItem->getModifier(Mod::SPIRIT_SPELLCAST_DELAY))
+        {
+            spiritCastDelay -= (legSlotItem->getModifier(Mod::SPIRIT_SPELLCAST_DELAY) * 1000);
+        }
     }
 
-    PSpirit->m_magicCooldown = std::chrono::milliseconds(castTime);
+    PSpirit->m_magicCooldown = std::chrono::milliseconds(spiritCastDelay);
 }
 
 bool CSpiritController::TrySpellcast(time_point tick)

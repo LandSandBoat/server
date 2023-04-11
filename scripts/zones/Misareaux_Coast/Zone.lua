@@ -54,16 +54,20 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local odqan = ID.mob.ODQAN
 
-    if os.time() > GetServerVariable(string.format("\\[SPAWN\\]%s", odqan)) and weather == xi.weather.FOG then
+    if
+        os.time() > GetServerVariable(string.format("\\[SPAWN\\]%s", odqan)) and
+        weather == xi.weather.FOG
+    then
         local ph = ID.mob.ODQAN_PH[math.random(1, 2)]
         local pos = GetMobByID(ph):getPos()
-        GetMobByID(odqan):setLocalVar("ph", ph)
 
         DisallowRespawn(odqan, false)
         DisallowRespawn(ph, true)
         DespawnMob(ph)
         GetMobByID(odqan):setSpawn(pos.x, pos.y, pos.z)
         SpawnMob(odqan)
+        -- need to set local var after spawning since spawning resets local vars
+        GetMobByID(odqan):setLocalVar("ph", ph)
     else
         DisallowRespawn(odqan, true)
     end

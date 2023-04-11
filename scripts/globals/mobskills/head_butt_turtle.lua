@@ -12,6 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if target:isBehind(mob, 96) then
         return 1
     end
+
     return 0
 end
 
@@ -26,7 +27,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, math.random(120, 180))
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    end
+
     return dmg
 end
 

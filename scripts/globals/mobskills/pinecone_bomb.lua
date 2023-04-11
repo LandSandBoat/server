@@ -28,11 +28,19 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 2, 2.5, 3)
         dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
-        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+
+        if not skill:hasMissMsg() then
+            target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+        end
+
     else
         info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 2, 2.5, 3)
         dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
-        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+
+        if not skill:hasMissMsg() then
+            target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+        end
+
     end
 
     if mob:getPool() ~= 671 and mob:getPool() ~= 1346 then

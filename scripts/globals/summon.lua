@@ -59,6 +59,7 @@ xi.summon.getAvatardINT = function(avatarInt, targetInt, avatar)
     if dINT >= 0 then
         dINT = math.floor(dINT * 1.5)
     end
+
     -- There is no upper limit of dstat, but there is a lower limit of -65
     return utils.clamp(dINT, -65, 100)
 end
@@ -189,7 +190,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
 
         local pDifTable = {}
         -- Calculate pDIF
-        if wsParams.melee == true then
+        if wsParams.melee then
             pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, wsParams, 0, calcParams.tp, xi.slot.MAIN)
         else
             pDifTable = xi.weaponskills.cRangedRatio(avatar, target, wsParams, 0, calcParams.tp)
@@ -330,15 +331,18 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle pd
     if
-        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
         skilltype == xi.attackType.PHYSICAL
     then
         return 0
     end
 
     -- handle super jump
-    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+    if
+        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1
+    then
         skill:setMsg(xi.msg.basic.JA_MISS_2)
         return 0
     end

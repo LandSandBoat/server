@@ -3838,9 +3838,9 @@ INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1162,@COMMON);  -- Tonberry Lant
 INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@RARE);    -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID:  30 - Carmine Dobsonfly
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,@UNCOMMON); -- Dobson Bandana (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,@UNCOMMON); -- Jaeger Ring (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,@RARE);     -- Voyager Sallet (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,@ALWAYS);   -- Dobson Bandana (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,@VCOMMON);  -- Jaeger Ring (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,@UNCOMMON); -- Voyager Sallet (Uncommon, 10%)
 
 -- ZoneID:  51 - Carmine Eruca
 -- ZoneID:  61 - Scoriaceous Eruca
@@ -6913,7 +6913,7 @@ INSERT INTO `mob_droplist` VALUES (829,0,0,1000,2518,120); -- Smilodon Hide (12.
 INSERT INTO `mob_droplist` VALUES (829,0,0,1000,5668,40);  -- Smilodon Liver (4.0%)
 
 -- ZoneID:  30 - Firedrake
-INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,@COMMON);   -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,@VCOMMON);   -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1124,@UNCOMMON); -- Wyvern Wing (Uncommon, 10%)
 
@@ -6998,7 +6998,7 @@ INSERT INTO `mob_droplist` VALUES (840,2,0,1000,1452,0);        -- Ordelle Bronz
 -- ZoneID:  30 - Flamedrake
 INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1122,@COMMON); -- Wyvern Skin (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1124,@COMMON); -- Wyvern Wing (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 
 -- ZoneID: 216 - Flame Skimmer
 INSERT INTO `mob_droplist` VALUES (842,0,0,1000,3178,@UNCOMMON);  -- Ferine Seal Legs (Uncommon, 10%)
@@ -9597,7 +9597,7 @@ INSERT INTO `mob_droplist` VALUES (1165,0,0,1000,12936,@VRARE); -- Greaves (Very
 INSERT INTO `mob_droplist` VALUES (1165,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID:  12 - Goblin Swordsman
-INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@COMMON); -- Sylvan Stone (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@ALWAYS); -- Sylvan Stone (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,508,@RARE);    -- Goblin Helm (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,507,@VRARE);   -- Goblin Mail (Very Rare, 1%)
 
@@ -9612,7 +9612,7 @@ INSERT INTO `mob_droplist` VALUES (1168,0,0,1000,17017,@UNCOMMON); -- Pet Food B
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17860,350);   -- Jug of Carrot Broth (Group 1 - 35%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17864,250);   -- Jug of Herbal Broth (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17876,100);   -- Jug of Fish Broth (Group 1 - 10%)
-INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17920,100);   -- Jug of Meat Broth (Group 1 - 10%)
+INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17870,100);   -- Jug of Meat Broth (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17872,100);   -- Jug of Tree Sap (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17867,50);    -- Jug of Cold Carrion Broth (Group 1 - 5%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17877,50);    -- Jug of Fish Oil Broth (Group 1 - 5%)
@@ -10994,7 +10994,7 @@ INSERT INTO `mob_droplist` VALUES (1351,4,0,1000,1606,0);         -- Remnant Of 
 
 -- ZoneID:  29 - Ignidrake
 -- ZoneID:  29 - Blazedrake
-INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1122,@RARE);   -- Wyvern Skin (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1124,@VRARE);  -- Wyvern Wing (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1352,2,0,1000,1691,0);       -- Giant Scale (Steal)
@@ -16404,7 +16404,7 @@ INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13180,@UNCOMMON); -- Republic S
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13181,@UNCOMMON); -- Federation Stables Scarf (Uncommon, 10%)
 
 -- ZoneID:  29 - Pyrodrake
-INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1122,@RARE);   -- Wyvern Skin (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1124,@VRARE);  -- Wyvern Wing (Very Rare, 1%)
 
@@ -18719,6 +18719,7 @@ INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,505,@RARE);     -- Sheepskin (R
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,@VRARE);   -- Jug Of Selbina Milk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,@VRARE);   -- Jug Of Selbina Milk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2382,2,0,1000,832,0);         -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID:  25 - Tavnazian Sheep
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4372,@VCOMMON); -- Slice Of Giant Sheep Meat (Very Common, 24%)
@@ -18726,6 +18727,7 @@ INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,505,@COMMON);   -- Sheepskin (C
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,882,@RARE);     -- Sheep Tooth (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4378,@RARE);    -- Jug Of Selbina Milk (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2383,2,0,1000,832,0);         -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID: 160 - Tawny-Fingered Mugberry
 INSERT INTO `mob_droplist` VALUES (2384,0,0,1000,13147,@ALWAYS); -- Uggalepih Necklace (Always, 100%)
@@ -19824,6 +19826,8 @@ INSERT INTO `mob_droplist` VALUES (2516,0,0,1000,1852,@RARE);     -- High-Qualit
 INSERT INTO `mob_droplist` VALUES (2516,2,0,1000,1783,0);         -- Sample Of Luminian Tissue (Steal)
 
 -- ZoneID:  33 - Ulxzomit
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1785,@ALWAYS);   -- Xzomit Organ (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1783,@UNCOMMON); -- Luminian Tissue (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4104,125);  -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)
@@ -26389,6 +26393,25 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
+-- ZoneiD: 25 - Orcish Footsoldiers
+-- ZoneiD: 25 - Orcish Gladiators
+-- ZoneiD: 25 - Orcish Troopers
+INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Very Rare, 1%)
+
+-- ZoneiD: 25 - Orcish Bowshooters
+INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon 10%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon 10%)
+
+-- ZoneiD: 24 - Orcish Beastrider
+-- ZoneiD: 24 - Orcish Brawler
+-- ZoneiD: 24 - Orcish Footsoldier
+-- ZoneiD: 24 - Orcish Nightrider
+-- ZoneiD: 24 - Orcish Galdiator
+-- ZoneiD: 24 - Orcish Trooper
+INSERT INTO `mob_droplist` VALUES (3236,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon, 10%)
 --------------------------------
 -- ASB Droplists Start at 6000
 --------------------------------
