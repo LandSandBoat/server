@@ -9,37 +9,14 @@ local m = Module:new("custom_util")
 
 m.rate =
 {
-    VERY_COMMON = 2400,
-    COMMON      = 1500,
-    UNCOMMON    = 1000,
-    RARE        =  500,
-    VERY_RARE   =  100,
-    SUPER_RARE  =   50,
-    ULTRA_RARE  =   10,
+    VERY_COMMON = 240, --  24%
+    COMMON      = 150, --  15%
+    UNCOMMON    = 100, --  10%
+    RARE        =  50, --   5%
+    VERY_RARE   =  10, --   1%
+    SUPER_RARE  =   5, -- 0.5%
+    ULTRA_RARE  =   1, -- 0.1%
 }
-
-m.rateTH =
-{
-    VERY_COMMON = { 2400, 4800, 5600, 6000, 6400, },
-    COMMON      = { 1500, 3000, 4000, 4250, 4500, },
-    UNCOMMON    = { 1000, 1200, 1500, 1650, 1800, },
-    RARE        = {  500,  600,  700,  750,  800, },
-    VERY_RARE   = {  100,  150,  200,  225,  250, },
-    SUPER_RARE  = {   50,   75,  100,  120,  140, },
-    ULTRA_RARE  = {   10,   20,   30,   35,   40, },
-}
-
-m.getRateTH = function(mob, rate)
-    local level = mob:getTHlevel() + 1
-
-    for k, v in pairs(m.rate) do
-        if v == rate then
-            return m.rateTH[k][level]
-        end
-    end
-
-    return rate
-end
 
 -- player, { { rate, item } }, modifier
 m.pickItem = function(player, items, mod)
@@ -93,20 +70,24 @@ m.dialogTable = function(player, tbl, npcName, param)
 
     for i = 1, #tbl do
         local result = tbl[i]
+        local delay  = (i - 1) * 1000
+
         if param then
             result = string.format(tbl[i], param[1], param[2], param[3], param[4])
         end
 
         if tbl[i]:sub(1, 1) == " " then
             -- Paragraph continue
-            player:PrintToPlayer(result, xi.msg.channel.NS_SAY)
+            player:timer(delay, function(playerArg)
+                playerArg:PrintToPlayer(result, xi.msg.channel.NS_SAY)
+            end)
         else
             -- New paragraph
-            player:PrintToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
+            player:timer(delay, function(playerArg)
+                playerArg:PrintToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
+            end)
         end
     end
-
-    -- TODO: timer delay
 end
 
 m.duplicateOverride = function(entity, event, func)

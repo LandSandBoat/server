@@ -11,7 +11,6 @@ local m = Module:new("custom_chest")
 m.zone = {}
 
 m.rate    = customUtil.rate
-m.rateTH  = customUtil.rateTH
 m.respawn =
 {
     SHORT      = {  720000,  900000 }, -- 12-15 minutes
@@ -89,10 +88,7 @@ m.initZone = function(zone)
 
         customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], "onMobDeath", function(mob, player, optParams)
             super(mob, player, optParams)
-
-            if math.random(0, 10000) < customUtil.getRateTH(mob, rate) then
-                player:addTreasure(m.zone[zoneId].id, mob)
-            end
+            player:addTreasure(m.zone[zoneId].id, mob, rate)
         end)
     end
 
