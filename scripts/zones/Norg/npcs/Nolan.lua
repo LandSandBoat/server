@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 local entity = {}
 
-local wsTable = 
+local wsTable =
 {
 -- index           varName
     [2]  = { "hasShijinSpiralUnlock", },
@@ -25,7 +25,7 @@ local wsTable =
     [12] = { "hasRealmrazerUnlock",   },
     [13] = { "hasShattersoulUnlock",  },
     [14] = { "hasApexArrowUnlock",    },
-    [15] = { "hasLastStandUnlock",    }, 
+    [15] = { "hasLastStandUnlock",    },
 }
 
 local unlockWs = function(player, npc, ws)
@@ -44,13 +44,13 @@ local unlockWs = function(player, npc, ws)
             {
                 "Yes, I'm sure!",
                 function(playerArg)
-                    player:timer(100, function(playerArg)
+                    player:timer(100, function(playerArgMenu)
                         if beadsBalance >= wsCost and ws == paidWs then
-                            player:setCurrency("escha_beads", beadsBalance - wsCost)
-                            player:setCharVar("PaidForMeritWs", 0)
-                            player:setCharVar("Afterglow", 1)
-                            player:setCharVar(wsTable[ws][1], 1)
-                            player:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())                
+                            playerArgMenu:setCurrency("escha_beads", beadsBalance - wsCost)
+                            playerArgMenu:setCharVar("PaidForMeritWs", 0)
+                            playerArgMenu:setCharVar("Afterglow", 1)
+                            playerArgMenu:setCharVar(wsTable[ws][1], 1)
+                            playerArgMenu:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())
                         else
                             if ws > 15 or ws < 2 then
                                 player:PrintToPlayer("DEBUG: Incorrect value for variable `ws`. Please contact an administrator.", 0, npc:getPacketName()) -- This message should NEVER trigger.
@@ -70,14 +70,14 @@ local unlockWs = function(player, npc, ws)
                 end,
             },
         },
-        
+
         onCancelled = function(playerArg)
         end,
-        
+
         onEnd = function(playerArg)
         end,
     }
-    
+
     player:timer(150, function(playerArg)
         player:customMenu(menu)
     end)
@@ -85,9 +85,7 @@ end
 
 local completeTransaction = function(player, npc, item, cost)
     local beadsBalance = player:getCurrency("escha_beads")
-    local paidForWs    = player:getCharVar("PaidForMeritWs")
-    
-    local confirmMenu  = 
+    local confirmMenu  =
     {
         title = string.format("Spend %i points? (%i available)", cost, beadsBalance),
         onStart = function(playerArg)
@@ -115,15 +113,15 @@ local completeTransaction = function(player, npc, item, cost)
                 end,
             },
         },
-        
+
         onCancelled = function(playerArg)
         end,
 
         onEnd = function(playerArg)
         end,
     }
-    
-    player:customMenu(confirmMenu)            
+
+    player:customMenu(confirmMenu)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -132,6 +130,7 @@ end
 entity.onTrigger = function(player, npc)
     local beadsBalance = player:getCurrency("escha_beads")
     local item         = 0
+    local cost         = 0
 
     -- Forward declarations (required)
     local menu  = {}
@@ -143,28 +142,29 @@ entity.onTrigger = function(player, npc)
     local page6 = {}
     local page7 = {}
     local page8 = {}
-    
-    local delaySendMenu = function(player)
-        player:timer(100, function(playerArg)
-            playerArg:customMenu(menu)
+    local page9 = {}
+
+    local delaySendMenu = function(playerArg)
+        player:timer(100, function(playerArgMenu)
+            playerArgMenu:customMenu(menu)
         end)
     end
 
     -- Print Beads balance
     player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0, npc:getPacketName())
-    
+
     menu =
     {
         title = "Choose a reward",
         options = {},
     }
-    
+
     page1 =
     {
         {
             "Pearlscale (grants Elvorseal)",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                playerArg:timer(50, function(playerArgMenu)
                     item = 5714
                     cost = 250
                     completeTransaction(player, npc, item, cost)
@@ -174,7 +174,7 @@ entity.onTrigger = function(player, npc)
         {
             "Siren's hair",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 1313
                     cost = 5000
                     completeTransaction(player, npc, item, cost)
@@ -184,7 +184,7 @@ entity.onTrigger = function(player, npc)
         {
             "Scintillant ingot",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 2275
                     cost = 5000
                     completeTransaction(player, npc, item, cost)
@@ -197,15 +197,15 @@ entity.onTrigger = function(player, npc)
                 menu.options = page2
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page2 =
     {
         {
             "Teleport ring: Holla",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 14661
                     cost = 5000
                     completeTransaction(player, npc, item, cost)
@@ -215,7 +215,7 @@ entity.onTrigger = function(player, npc)
         {
             "Teleport ring: Mea",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 14662
                     cost = 5000
                     completeTransaction(player, npc, item, cost)
@@ -225,7 +225,7 @@ entity.onTrigger = function(player, npc)
         {
             "Teleport ring: Dem",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 14663
                     cost = 5000
                     completeTransaction(player, npc, item, cost)
@@ -238,15 +238,15 @@ entity.onTrigger = function(player, npc)
                 menu.options = page3
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page3 =
     {
         {
             "Emico mantle",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 27597
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -256,7 +256,7 @@ entity.onTrigger = function(player, npc)
         {
             "Crested torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28349
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -266,7 +266,7 @@ entity.onTrigger = function(player, npc)
         {
             "Setae ring",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28529
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -276,7 +276,7 @@ entity.onTrigger = function(player, npc)
         {
             "Megasco earring",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28488
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -286,7 +286,7 @@ entity.onTrigger = function(player, npc)
         {
             "Salire belt",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28425
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -296,7 +296,7 @@ entity.onTrigger = function(player, npc)
         {
             "Charitoni sling",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 21347
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -309,15 +309,15 @@ entity.onTrigger = function(player, npc)
                 menu.options = page4
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page4 =
     {
         {
             "Dew silk cape",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 27598
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -327,7 +327,7 @@ entity.onTrigger = function(player, npc)
         {
             "Adsilio boots",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28271
                     cost = 10000
                     completeTransaction(player, npc, item, cost)
@@ -337,7 +337,7 @@ entity.onTrigger = function(player, npc)
         {
             "Fylgja torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 11579
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -347,7 +347,7 @@ entity.onTrigger = function(player, npc)
         {
             "Dew silk cape +1",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 27599
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -357,7 +357,7 @@ entity.onTrigger = function(player, npc)
         {
             "Adsilio boots +1",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 28272
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -370,16 +370,16 @@ entity.onTrigger = function(player, npc)
                 menu.options = page5
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page5 =
-	{
+    {
         {
             "Carver's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
-                    item = 11580
+                player:timer(50, function(playerArgMenu)
+                    item = 10948
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
                 end)
@@ -388,7 +388,7 @@ entity.onTrigger = function(player, npc)
         {
             "Tanner's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10952
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -398,7 +398,7 @@ entity.onTrigger = function(player, npc)
         {
             "Smithy's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10949
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -408,7 +408,7 @@ entity.onTrigger = function(player, npc)
         {
             "Goldsmith's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10950
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -418,7 +418,7 @@ entity.onTrigger = function(player, npc)
         {
             "Boneworker's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10953
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -428,7 +428,7 @@ entity.onTrigger = function(player, npc)
         {
             "Weaver's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10951
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -441,15 +441,15 @@ entity.onTrigger = function(player, npc)
                 menu.options = page6
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page6 =
-	{
+    {
         {
             "Alchemist's torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10954
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -459,7 +459,7 @@ entity.onTrigger = function(player, npc)
         {
             "Culinarian torque",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 10955
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
@@ -469,7 +469,7 @@ entity.onTrigger = function(player, npc)
         {
             "Fylgja torque +1",
             function(playerArg)
-                player:timer(50, function(playerArg)
+                player:timer(50, function(playerArgMenu)
                     item = 11580
                     cost = 25000
                     completeTransaction(player, npc, item, cost)
@@ -482,44 +482,44 @@ entity.onTrigger = function(player, npc)
                 menu.options = page7
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page7 =
     {
         {
             "Apex Arrow (Bow)",
             function(playerArg)
-               unlockWs(player, npc, 14)
+                unlockWs(player, npc, 14)
             end,
         },
         {
             "Blade: Shun (Katana)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 10)
             end,
         },
         {
             "Entropy (Scythe)",
-            function(playerArg)     
+            function(playerArg)
                 unlockWs(player, npc, 8)
             end,
         },
         {
             "Exenterator (Dagger)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 3)
             end,
         },
         {
             "Last Stand (Gun)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 15)
             end,
         },
         {
             "Realmrazer (Club)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 12)
             end,
         },
@@ -529,44 +529,44 @@ entity.onTrigger = function(player, npc)
                 menu.options = page8
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page8 =
     {
         {
             "Requiescat (Sword)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 4)
             end,
         },
         {
             "Resolution (Great Sword)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 5)
             end,
         },
         {
             "Ruinator (Axe)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 6)
             end,
         },
         {
             "Shattersoul (Staff)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 13)
             end,
         },
         {
             "Shijin Spiral (H2H)",
-            function(playerArg) 
-                unlockWs(player, npc, 2)            
+            function(playerArg)
+                unlockWs(player, npc, 2)
             end,
         },
         {
             "Stardiver (Pole)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 9)
             end,
         },
@@ -576,20 +576,20 @@ entity.onTrigger = function(player, npc)
                 menu.options = page9
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page9 =
     {
         {
             "Tachi: Shoha (Great Katana)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 11)
             end,
         },
         {
             "Upheaval (Great Axe)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 7)
             end,
         },
@@ -598,9 +598,9 @@ entity.onTrigger = function(player, npc)
             function(playerArg)
                 return
             end,
-        },        
+        },
     }
-    
+
     menu.options = page1
     delaySendMenu(player)
 end
