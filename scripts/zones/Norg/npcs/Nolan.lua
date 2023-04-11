@@ -50,7 +50,7 @@ local unlockWs = function(player, npc, ws)
                             player:setCharVar("PaidForMeritWs", 0)
                             player:setCharVar("Afterglow", 1)
                             player:setCharVar(wsTable[ws][1], 1)
-                            player:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())                
+                            player:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())
                         else
                             if ws > 15 or ws < 2 then
                                 player:PrintToPlayer("DEBUG: Incorrect value for variable `ws`. Please contact an administrator.", 0, npc:getPacketName()) -- This message should NEVER trigger.
@@ -85,9 +85,7 @@ end
 
 local completeTransaction = function(player, npc, item, cost)
     local beadsBalance = player:getCurrency("escha_beads")
-    local paidForWs    = player:getCharVar("PaidForMeritWs")
-
-    local confirmMenu  = 
+    local confirmMenu  =
     {
         title = string.format("Spend %i points? (%i available)", cost, beadsBalance),
         onStart = function(playerArg)
@@ -490,7 +488,7 @@ entity.onTrigger = function(player, npc)
         {
             "Apex Arrow (Bow)",
             function(playerArg)
-               unlockWs(player, npc, 14)
+                unlockWs(player, npc, 14)
             end,
         },
         {
