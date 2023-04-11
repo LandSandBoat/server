@@ -53,6 +53,26 @@ local onTrigger = function(player, npc)
     end
 end
 
+local addGil = function(player)
+    local partyMembers  = player:getAlliance()
+    local membersInZone = {}
+    local zoneId        = player:getZoneID()
+    local ID            = zones[zoneId]
+
+    for i = 1, #partyMembers do
+        if player:getZoneID() == partyMembers[i]:getZoneID() then
+            table.insert(membersInZone, partyMembers[i])
+        end
+    end
+
+    local gilAmount = math.random(m.zone[zoneId].gil.min, m.zone[zoneId].gil.max)
+    local gilTotal  = gilAmount / #membersInZone
+    for i = 1, #membersInZone do
+        membersInZone[i]:addGil(gilTotal)
+        membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gilTotal)
+    end
+end
+
 local onTrade = function(player, npc, trade)
     local zoneId = npc:getZoneID()
     local keyId  = m.zone[zoneId].id
@@ -63,8 +83,13 @@ local onTrade = function(player, npc, trade)
 
     if npcUtil.tradeHasExactly(trade, keyId) then
         npcUtil.openCrate(npc, function()
-            local result = customUtil.pickItem(player, items)
-            player:addTreasure(result[2])
+            if m.zone[zoneId].gil and math.random(customUtil.rate.GUARANTEED) < m.zone[zoneId].gil.rate then
+                addGil(player)
+            else
+                local result = customUtil.pickItem(player, items)
+                player:addTreasure(result[2])
+            end
+
             player:tradeComplete()
 
             npc:timer(7000, function(npcArg)

@@ -22,6 +22,14 @@ chest.zone[xi.zone.QUFIM_ISLAND] =
         { chest.rate.RARE,        xi.items.PEARL,       }, --  5%
     },
 
+    -- Optional
+    gil =
+    {
+        rate = chest.rate.VERY_COMMON, -- 24%
+        min  = 1000,
+        max  = 2000,
+    },
+
     points =
     {
         { -249.422,  -20.000, 300.000, 120, }, -- !pos -249.422 -20.000 300.000

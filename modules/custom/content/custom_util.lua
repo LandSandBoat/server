@@ -9,13 +9,14 @@ local m = Module:new("custom_util")
 
 m.rate =
 {
-    VERY_COMMON = 240, --  24%
-    COMMON      = 150, --  15%
-    UNCOMMON    = 100, --  10%
-    RARE        =  50, --   5%
-    VERY_RARE   =  10, --   1%
-    SUPER_RARE  =   5, -- 0.5%
-    ULTRA_RARE  =   1, -- 0.1%
+    GUARANTEED  = 1000, -- 100%
+    VERY_COMMON =  240, --  24%
+    COMMON      =  150, --  15%
+    UNCOMMON    =  100, --  10%
+    RARE        =   50, --   5%
+    VERY_RARE   =   10, --   1%
+    SUPER_RARE  =    5, -- 0.5%
+    ULTRA_RARE  =    1, -- 0.1%
 }
 
 -- player, { { rate, item } }, modifier
@@ -32,7 +33,6 @@ m.pickItem = function(player, items, mod)
 
     -- pick weighted result
     local item = items[1]
-
     local pick = math.random(1, sum)
     sum = 0
 
