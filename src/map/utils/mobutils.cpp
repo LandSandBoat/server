@@ -1278,7 +1278,7 @@ Usage:
                 PMob->m_Type        = (uint8)sql->GetIntData(18);
                 PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
                 PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
+                PMob->m_ModelRadius = (float)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
@@ -1431,7 +1431,7 @@ Usage:
                 PMob->m_Type        = (uint8)sql->GetIntData(18);
                 PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
                 PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
+                PMob->m_ModelRadius = (float)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub

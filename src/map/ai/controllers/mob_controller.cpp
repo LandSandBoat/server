@@ -628,7 +628,13 @@ void CMobController::Move()
     float attack_range  = PMob->GetMeleeRange();
     int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
     float offset        = static_cast<float>(offsetMod) / 10.0f;
-    float closeDistance = attack_range - (offsetMod == 0 ? 0.2 : offset);
+    float closeDistance = attack_range - (offsetMod == 0 ? 0.2f : offset);
+
+    // No going negative on the final value.
+    if (closeDistance < 0.0f)
+    {
+        closeDistance = 0.0f;
+    }
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -661,6 +667,7 @@ void CMobController::Move()
                 return;
             }
         }
+
         if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
         {
             // attempt to teleport to target (if in range)
@@ -680,10 +687,10 @@ void CMobController::Move()
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     // out of melee range, try to path towards
-                    if (currentDistance > PMob->GetMeleeRange())
+                    if (currentDistance > (offsetMod == 0 ? PMob->GetMeleeRange() : closeDistance))
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     }
                 }
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
