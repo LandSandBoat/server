@@ -23,14 +23,9 @@ entity.onTrigger = function(player, npc)
     end
 
     local rubbishDay =  player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0
-    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.BROKEN_WAND)
 
-    if rubbishDay and makingAmens then
-        player:startEvent(11, 0)
-    elseif rubbishDay then
+    if rubbishDay then
         player:startEvent(11, 1)
-    elseif makingAmens then
-        player:startEvent(11, 2)
     else
         player:startEvent(11, 3)
     end
