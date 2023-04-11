@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 local entity = {}
 
-local wsTable = 
+local wsTable =
 {
 -- index           varName
     [2]  = { "hasShijinSpiralUnlock", },
@@ -25,7 +25,7 @@ local wsTable =
     [12] = { "hasRealmrazerUnlock",   },
     [13] = { "hasShattersoulUnlock",  },
     [14] = { "hasApexArrowUnlock",    },
-    [15] = { "hasLastStandUnlock",    }, 
+    [15] = { "hasLastStandUnlock",    },
 }
 
 local unlockWs = function(player, npc, ws)
@@ -70,14 +70,14 @@ local unlockWs = function(player, npc, ws)
                 end,
             },
         },
-        
+
         onCancelled = function(playerArg)
         end,
-        
+
         onEnd = function(playerArg)
         end,
     }
-    
+
     player:timer(150, function(playerArg)
         player:customMenu(menu)
     end)
@@ -86,7 +86,7 @@ end
 local completeTransaction = function(player, npc, item, cost)
     local beadsBalance = player:getCurrency("escha_beads")
     local paidForWs    = player:getCharVar("PaidForMeritWs")
-    
+
     local confirmMenu  = 
     {
         title = string.format("Spend %i points? (%i available)", cost, beadsBalance),
@@ -115,15 +115,15 @@ local completeTransaction = function(player, npc, item, cost)
                 end,
             },
         },
-        
+
         onCancelled = function(playerArg)
         end,
 
         onEnd = function(playerArg)
         end,
     }
-    
-    player:customMenu(confirmMenu)            
+
+    player:customMenu(confirmMenu)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -143,7 +143,7 @@ entity.onTrigger = function(player, npc)
     local page6 = {}
     local page7 = {}
     local page8 = {}
-    
+
     local delaySendMenu = function(player)
         player:timer(100, function(playerArg)
             playerArg:customMenu(menu)
@@ -152,13 +152,13 @@ entity.onTrigger = function(player, npc)
 
     -- Print Beads balance
     player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0, npc:getPacketName())
-    
+
     menu =
     {
         title = "Choose a reward",
         options = {},
     }
-    
+
     page1 =
     {
         {
@@ -197,9 +197,9 @@ entity.onTrigger = function(player, npc)
                 menu.options = page2
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page2 =
     {
         {
@@ -238,9 +238,9 @@ entity.onTrigger = function(player, npc)
                 menu.options = page3
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page3 =
     {
         {
@@ -309,9 +309,9 @@ entity.onTrigger = function(player, npc)
                 menu.options = page4
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page4 =
     {
         {
@@ -370,11 +370,11 @@ entity.onTrigger = function(player, npc)
                 menu.options = page5
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page5 =
-	{
+    {
         {
             "Carver's torque",
             function(playerArg)
@@ -441,11 +441,11 @@ entity.onTrigger = function(player, npc)
                 menu.options = page6
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page6 =
-	{
+    {
         {
             "Alchemist's torque",
             function(playerArg)
@@ -482,9 +482,9 @@ entity.onTrigger = function(player, npc)
                 menu.options = page7
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page7 =
     {
         {
@@ -495,31 +495,31 @@ entity.onTrigger = function(player, npc)
         },
         {
             "Blade: Shun (Katana)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 10)
             end,
         },
         {
             "Entropy (Scythe)",
-            function(playerArg)     
+            function(playerArg)
                 unlockWs(player, npc, 8)
             end,
         },
         {
             "Exenterator (Dagger)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 3)
             end,
         },
         {
             "Last Stand (Gun)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 15)
             end,
         },
         {
             "Realmrazer (Club)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 12)
             end,
         },
@@ -529,44 +529,44 @@ entity.onTrigger = function(player, npc)
                 menu.options = page8
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page8 =
     {
         {
             "Requiescat (Sword)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 4)
             end,
         },
         {
             "Resolution (Great Sword)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 5)
             end,
         },
         {
             "Ruinator (Axe)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 6)
             end,
         },
         {
             "Shattersoul (Staff)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 13)
             end,
         },
         {
             "Shijin Spiral (H2H)",
-            function(playerArg) 
-                unlockWs(player, npc, 2)            
+            function(playerArg)
+                unlockWs(player, npc, 2)
             end,
         },
         {
             "Stardiver (Pole)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 9)
             end,
         },
@@ -576,20 +576,20 @@ entity.onTrigger = function(player, npc)
                 menu.options = page9
                 delaySendMenu(playerArg)
             end,
-        },        
+        },
     }
-    
+
     page9 =
     {
         {
             "Tachi: Shoha (Great Katana)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 11)
             end,
         },
         {
             "Upheaval (Great Axe)",
-            function(playerArg)                         
+            function(playerArg)
                 unlockWs(player, npc, 7)
             end,
         },
@@ -598,9 +598,9 @@ entity.onTrigger = function(player, npc)
             function(playerArg)
                 return
             end,
-        },        
+        },
     }
-    
+
     menu.options = page1
     delaySendMenu(player)
 end
