@@ -142,6 +142,7 @@ entity.onTrigger = function(player, npc)
     local page6 = {}
     local page7 = {}
     local page8 = {}
+    local page9 = {}
 
     local delaySendMenu = function(playerArg)
         player:timer(100, function(playerArgMenu)
