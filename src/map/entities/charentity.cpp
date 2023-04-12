@@ -2587,23 +2587,29 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             break;
 
         // NOTE: Exact values for resistances is unknown
+        case MOGLIFICATION_RESIST_DEATH:
+            addModifier(Mod::DEATHRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SLEEP:
+            addModifier(Mod::SLEEPRES, 10 * multiplier);
+            break;
         case MOGLIFICATION_RESIST_POISON:
-            addModifier(Mod::POISONRES, 20 * multiplier);
+            addModifier(Mod::POISONRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PARALYSIS:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::PARALYZERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_SILENCE:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::SILENCERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PETRIFICATION:
-            addModifier(Mod::PETRIFYRES, 20 * multiplier);
+            addModifier(Mod::PETRIFYRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_VIRUS:
-            addModifier(Mod::VIRUSRES, 20 * multiplier);
+            addModifier(Mod::VIRUSRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_CURSE:
-            addModifier(Mod::CURSERES, 20 * multiplier);
+            addModifier(Mod::CURSERES, 10 * multiplier);
             break;
         default:
             break;
