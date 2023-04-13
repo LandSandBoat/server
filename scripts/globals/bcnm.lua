@@ -148,8 +148,8 @@ local battlefields =
         { 5, 1304, 1905 },   -- Central 2nd Floor
         { 6, 1303, 1906 },   -- Central 1st Floor
         { 7, 1301, 2127 },   -- Central Basement
-     -- { 8, 1302,    0 },   -- Central Basement II
-     -- { 9, 1307,    0 },   -- Central 4th Floor II
+    --  { 8, 1302,    0 },   -- Central Basement II
+    --  { 9, 1307,    0 },   -- Central 4th Floor II
     },
 
     [xi.zone.APOLLYON] =
@@ -160,8 +160,8 @@ local battlefields =
         { 3, 1292,    0 },   -- NE Apollyon
         { 4, 1296,   -2 },   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
         { 5, 1294, 2127 },   -- CS Apollyon
-     -- { 6, 1295,    0 },   -- CS Apollyon II
-     -- { 7, 1297,    0 },   -- Central Apollyon II
+    --  { 6, 1295,    0 },   -- CS Apollyon II
+    --  { 7, 1297,    0 },   -- Central Apollyon II
     },
 
     [xi.zone.ARRAPAGO_REEF] =
