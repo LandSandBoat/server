@@ -180,7 +180,7 @@ INSERT INTO `mob_family_system` VALUES (128,'Gigas',74,'Gigas',7,'Beastmen',1.00
 INSERT INTO `mob_family_system` VALUES (129,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2,1,0);
 INSERT INTO `mob_family_system` VALUES (130,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2,1,0);
 INSERT INTO `mob_family_system` VALUES (131,'Gnat',75,'Gnat',20,'Vermin',0.00,40,90,120,4,1,4,2,3,6,6,1,3,1,3,8,1,0);
-INSERT INTO `mob_family_system` VALUES (132,'Gnole',76,'Gnole',7,'Beastmen',1.00,40,120,90,3,2,1,6,6,4,5,1,3,1,3,8,257,0);
+INSERT INTO `mob_family_system` VALUES (132,'Gnole',76,'Gnole',6,'Beast',1.00,40,120,90,3,2,1,6,6,4,5,1,3,1,3,8,257,0);
 INSERT INTO `mob_family_system` VALUES (133,'Goblin',77,'Goblin',7,'Beastmen',0.00,40,91,120,1,3,5,3,4,4,4,1,3,1,3,1,1,0);
 INSERT INTO `mob_family_system` VALUES (134,'God',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0,3,0);
 INSERT INTO `mob_family_system` VALUES (135,'Golem',79,'Golem',3,'Arcana',1.00,40,130,130,2,3,3,5,3,6,5,1,2,1,3,7,33,0);
@@ -533,10 +533,7 @@ INSERT INTO `mob_family_system` VALUES (505,'Fungi',0,'undefined',0,'Unclassifie
 INSERT INTO `mob_family_system` VALUES (506,'Meeble',189,'Meeble',7,'Beastmen',0.00,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
 INSERT INTO `mob_family_system` VALUES (507,'Quasilumin',15,'Luminian',0,'Unclassified',1.00,25,100,100,5,5,5,5,5,5,5,5,5,5,5,0,2,0);
 
-
-
--- ASB SECTION
-
+-- ASB SECTION (TODO: Move this to module)
 INSERT INTO `mob_family_system` VALUES (800,'MemoryReceptacleENM',0,'undefined',12,'Empty',2,40,200,0,1,3,5,4,2,2,5,1,3,1,3,0,256,0);
 INSERT INTO `mob_family_system` VALUES (801,'Annihilated_Anthony',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
 INSERT INTO `mob_family_system` VALUES (802,'Shredded_Samson',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
