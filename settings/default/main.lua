@@ -247,4 +247,8 @@ xi.settings.main =
     FORCE_SPAWN_QM_RESET_TIME    = 180,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     GOBBIE_BOX_MIN_AGE           = 14,    -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
+
+    -- CatsEyeXI
+    DI_EVENT_MULTIPLIER          = 0, -- All Domain Invasion beads multiplied by 1.5.
+    FREE_DIAL_KEY                = 0, -- When enabled, goblin dial NPC's will grant a free key daily.
 }
