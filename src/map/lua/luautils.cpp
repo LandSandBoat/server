@@ -166,6 +166,7 @@ namespace luautils
         lua.set_function("IsMoonNew", &luautils::IsMoonNew);
         lua.set_function("IsMoonFull", &luautils::IsMoonFull);
         lua.set_function("RunElevator", &luautils::StartElevator);
+        lua.set_function("GetElevatorState", &luautils::GetElevatorState);
         lua.set_function("GetServerVariable", &luautils::GetServerVariable);
         lua.set_function("SetServerVariable", &luautils::SetServerVariable);
         lua.set_function("GetVolatileServerVariable", &luautils::GetVolatileServerVariable);
@@ -975,7 +976,7 @@ namespace luautils
         return std::optional<CLuaBaseEntity>(PMob);
     }
 
-    std::optional<CLuaBaseEntity> GetEntityByID(uint32 entityid, sol::object const& instanceObj)
+    std::optional<CLuaBaseEntity> GetEntityByID(uint32 entityid, sol::object const& instanceObj, sol::object const& arg3)
     {
         TracyZoneScoped;
 
@@ -984,6 +985,8 @@ namespace luautils
         {
             PInstance = instanceObj.as<CLuaInstance>().GetInstance();
         }
+
+        bool silenceWarning = arg3.get_type() == sol::type::boolean ? arg3.as<bool>() : false;
 
         CBaseEntity* PEntity{ nullptr };
 
@@ -998,7 +1001,10 @@ namespace luautils
 
         if (!PEntity)
         {
-            ShowWarning("luautils::GetEntityByID Mob doesn't exist (%d)", entityid);
+            if (!silenceWarning)
+            {
+                ShowWarning("luautils::GetEntityByID Mob doesn't exist (%d)", entityid);
+            }
             return std::nullopt;
         }
 
@@ -4535,6 +4541,20 @@ namespace luautils
     {
         TracyZoneScoped;
         CTransportHandler::getInstance()->startElevator(ElevatorID);
+    }
+
+    // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+    int16 GetElevatorState(uint8 id) // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+    {
+        TracyZoneScoped;
+        Elevator_t* elevator = CTransportHandler::getInstance()->getElevator(id);
+
+        if (elevator)
+        {
+            return elevator->state;
+        }
+
+        return -1;
     }
 
     int32 GetServerVariable(std::string const& name)

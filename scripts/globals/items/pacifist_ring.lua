@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENMITY_DOWN, 12, 0, 180, 0, 0, 0, xi.items.PACIFIST_RING)
+    if target:hasEquipped(xi.items.PACIFIST_RING) then
+        target:addStatusEffect(xi.effect.ENMITY_DOWN, 12, 0, 180, 0, 0, 0, xi.items.PACIFIST_RING)
+    end
 end
 
 return itemObject

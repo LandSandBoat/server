@@ -18,10 +18,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if not target:hasStatusEffect(xi.effect.HASTE) then
-        target:addStatusEffect(xi.effect.HASTE, 1000, 0, 180, 0, 0, 0, xi.items.HASTE_BELT)
-    else
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    if target:hasEquipped(xi.items.HASTE_BELT) then
+        if not target:hasStatusEffect(xi.effect.HASTE) then
+            target:addStatusEffect(xi.effect.HASTE, 1000, 0, 180, 0, 0, 0, xi.items.HASTE_BELT)
+        else
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        end
     end
 end
 

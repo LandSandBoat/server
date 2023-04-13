@@ -9,55 +9,24 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local teleport = function(mob, hideDuration) --special move to new target option
-    if mob:isDead() then
-        return
-    end
-    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
-    mob:hideName(true)
-    mob:setUntargetable(true)
-    mob:setAutoAttackEnabled(false)
-    mob:setMobAbilityEnabled(false)
-    mob:setStatus(xi.status.INVISIBLE)
-
-    hideDuration = hideDuration or 500
-
-    if hideDuration < 500 then
-        hideDuration = 500
-    end
-
-    mob:timer(hideDuration, function(mobArg)
-        mobArg:hideName(false)
-        mobArg:setUntargetable(false)
-        mobArg:setAutoAttackEnabled(true)
-        mobArg:setMobAbilityEnabled(true)
-
-        if mobArg:isDead() then
-            return
-        end
-
-        mobArg:setStatus(xi.status.UPDATE)
-    end)
-end
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "PRUDENCE_MIMIC_START", function(mobArg, skillID)
-        local prudenceIDs = { 16912846, 16912847 }
+        local prudenceIDs = { ID.mob.JAILER_OF_PRUDENCE_1, ID.mob.JAILER_OF_PRUDENCE_2 }
         if mobArg:getLocalVar('[JoP]mimic') ~= 1 and mobArg:isAlive() then
             for _, jailer in ipairs(prudenceIDs) do
                 if mobArg:getID() ~= jailer then
-                    local prudence_mimic = GetMobByID(jailer)
+                    local prudenceMimic = GetMobByID(jailer)
                     if
-                        prudence_mimic:isAlive() and
+                        prudenceMimic:isAlive() and
                         mobArg:canUseAbilities() and
-                        prudence_mimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and
-                        mobArg:checkDistance(prudence_mimic) <= 10
+                        prudenceMimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and
+                        mobArg:checkDistance(prudenceMimic) <= 10
                     then
-                        prudence_mimic:setLocalVar('[JoP]mimic', 1)
-                        prudence_mimic:setLocalVar('[JoP]LastAbilityMimic', os.time())
-                        prudence_mimic:useMobAbility(skillID)
+                        prudenceMimic:setLocalVar('[JoP]mimic', 1)
+                        prudenceMimic:setLocalVar('[JoP]LastAbilityMimic', os.time())
+                        prudenceMimic:useMobAbility(skillID)
                     end
                 end
             end
@@ -84,7 +53,8 @@ entity.onMobFight = function(mob)
         mob:checkDistance(mob:getTarget()) >= 12 and
         mob:canUseAbilities()
     then
-        teleport(mob, 1000)
+        local target = mob:getTarget()
+        mob:teleport(target:getPos(), target)
     end
 
     local perfectDodgeHPP =
@@ -104,7 +74,7 @@ entity.onMobFight = function(mob)
     end
 
     if
-        mob:actionQueueEmpty() == true and
+        mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then
         perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
@@ -112,6 +82,7 @@ entity.onMobFight = function(mob)
             perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue") - 1
             if not mob:hasStatusEffect(xi.effect.PERFECT_DODGE) and mob:isAlive() then
                 mob:useMobAbility(693)
+                mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
                 mob:setLocalVar("perfectDodgeQueue", perfectDodgeQueue)
             end
         end
@@ -130,13 +101,23 @@ entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
-        secondPrudence:addMod(xi.mod.ATTP, 100)
-        secondPrudence:delMod(xi.mod.DEFP, -50)
+        -- 100% triple attack
+        secondPrudence:setMod(xi.mod.TRIPLE_ATTACK, 100)
+        -- Boost all damage taken by 50%
+        secondPrudence:setMod(xi.mod.UDMGPHYS, 5000)
+        secondPrudence:setMod(xi.mod.UDMGRANGE, 5000)
+        secondPrudence:setMod(xi.mod.UDMGMAGIC, 5000)
+        secondPrudence:setMod(xi.mod.UDMGBREATH, 5000)
     else
         firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         firstPrudence:setAnimationSub(3) -- Mouth Open
-        firstPrudence:addMod(xi.mod.ATTP, 100)
-        firstPrudence:delMod(xi.mod.DEFP, -50)
+        -- 100% triple attack
+        firstPrudence:setMod(xi.mod.TRIPLE_ATTACK, 100)
+        -- Boost all damage taken by 50%
+        firstPrudence:setMod(xi.mod.UDMGPHYS, 5000)
+        firstPrudence:setMod(xi.mod.UDMGRANGE, 5000)
+        firstPrudence:setMod(xi.mod.UDMGMAGIC, 5000)
+        firstPrudence:setMod(xi.mod.UDMGBREATH, 5000)
     end
 end
 

@@ -19,7 +19,12 @@ local mobskillObject = {}
 -- if not in Bird form, then ignore.
 -----------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and mob:getAnimationSub() ~= 3 then
+    if
+        (mob:getFamily() == 122 or
+        mob:getFamily() == 123 or
+        mob:getFamily() == 124) and
+        mob:getAnimationSub() ~= 3
+    then
         return 1
     else
         return 0
@@ -34,7 +39,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 15)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    end
+
     return dmg
 end
 

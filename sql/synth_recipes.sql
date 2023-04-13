@@ -395,7 +395,7 @@ INSERT INTO `synth_recipes` VALUES (3045,0,0,69,0,0,0,0,0,0,0,4098,4240,711,719,
 INSERT INTO `synth_recipes` VALUES (3046,0,0,70,37,0,0,0,19,0,0,4098,4240,654,717,719,893,932,0,0,0,17220,17227,17227,17227,1,1,1,1,'Heavy Crossbow'); -- one source 32 WW, one ?? Bone, others agree 10/29/21
 INSERT INTO `synth_recipes` VALUES (3047,0,0,70,18,0,0,0,0,0,0,4099,4241,662,725,725,0,0,0,0,0,12359,12370,12370,12370,1,1,1,1,'Hickory Shield'); -- ??SM, 8 & 18 posted (typo?), used 18 (iron sheet caps 22)
 INSERT INTO `synth_recipes` VALUES (3048,0,0,70,0,0,0,0,45,0,0,4098,4240,720,830,2513,2747,2762,0,0,0,18736,18736,18736,18736,1,1,1,1,'Fay Gendawa'); -- ??BO, 45/53 srcs, old era talk crafted at 39 - used 45
-INSERT INTO `synth_recipes` VALUES (3049,2,0,70,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
+INSERT INTO `synth_recipes` VALUES (3049,2,0,80,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
 -- INSERT INTO `synth_recipes` VALUES (3050,0,0,70,0,255,0,0,0,0,0,4099,4241,711,711,711,711,717,717,745,0,444,444,444,444,1,1,1,1,'Luxurious Chest');
 INSERT INTO `synth_recipes` VALUES (3501,0,0,71,0,0,0,0,0,0,0,4099,4241,719,719,927,0,0,0,0,0,17357,17833,17848,17848,1,1,1,1,'Ebony Harp');
 INSERT INTO `synth_recipes` VALUES (3502,0,0,71,0,0,0,0,0,0,0,4099,4241,662,716,716,716,0,0,0,0,95,95,95,95,1,1,1,1,'Water Barrel');
@@ -2116,6 +2116,7 @@ INSERT INTO `synth_recipes` VALUES (29987,1,0,0,0,12,0,0,0,0,0,4100,4242,12449,0
 INSERT INTO `synth_recipes` VALUES (29988,1,0,0,0,12,0,0,0,0,0,4100,4242,12528,0,0,0,0,0,0,0,649,650,850,850,1,1,1,2,'Brass Cap +1 (desynth)');
 INSERT INTO `synth_recipes` VALUES (29989,1,0,0,0,12,0,0,0,0,0,4100,4242,12961,0,0,0,0,0,0,0,649,650,850,850,1,1,1,2,'Brass Leggings (desynth)');
 INSERT INTO `synth_recipes` VALUES (29990,1,0,0,0,12,0,0,0,0,0,4100,4242,13027,0,0,0,0,0,0,0,649,650,850,850,1,1,1,2,'Brass Leggings +1 (desynth)');
+INSERT INTO `synth_recipes` VALUES (29991,1,0,0,0,77,0,0,0,0,0,4100,4242,12674,0,0,0,0,0,0,0,850,931,931,745,2,2,3,1,'Gold Gauntlets (desynth)');
 INSERT INTO `synth_recipes` VALUES (30001,0,0,0,0,0,1,1,0,0,1,4099,4241,917,4497,13568,0,0,0,0,0,5230,5231,5231,5231,1,1,1,1,'Love Chocolate');
 INSERT INTO `synth_recipes` VALUES (30002,1,0,0,0,0,1,0,0,0,0,4098,4240,498,0,0,0,0,0,0,0,817,817,817,817,3,6,9,12,'Yagudo Necklace (desynth)');
 INSERT INTO `synth_recipes` VALUES (30003,0,2011,0,0,0,2,0,0,0,0,4098,4240,840,840,840,840,840,840,2145,0,1221,1221,1221,1221,18,24,30,36,'Chocobo Fletchings');
@@ -4765,7 +4766,6 @@ INSERT INTO `synth_recipes` VALUES (75529,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75530,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4163,0,0,2780,2780,2780,2780,1,1,1,1,'Enfeeb. Kit Blind');
 INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4161,0,0,2781,2781,2781,2781,1,1,1,1,'Enfeeb. Kit Sleep');
 INSERT INTO `synth_recipes` VALUES (75532,0,0,0,9,0,0,0,0,0,0,4100,4242,12432,0,0,0,0,0,0,0,649,850,850,850,1,1,1,1,'Faceguard_Desynth');-- Faceguard desynth
-
 -- -----------
 -- RECIPES END
 

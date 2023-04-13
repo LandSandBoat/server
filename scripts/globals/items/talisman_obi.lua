@@ -9,16 +9,17 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect and effect:getItemSourceID() == xi.items.TALISMAN_OBI then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.TALISMAN_OBI) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.TALISMAN_OBI)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.TALISMAN_OBI)
+    if target:hasEquipped(xi.items.TALISMAN_OBI) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.TALISMAN_OBI)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

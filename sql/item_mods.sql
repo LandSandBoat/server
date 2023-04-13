@@ -19755,6 +19755,7 @@ INSERT INTO `item_mods` VALUES (14074,23,12); -- ATT: 12
 -- Andvaranauts
 INSERT INTO `item_mods` VALUES (14075,1,12);  -- DEF: 12
 INSERT INTO `item_mods` VALUES (14075,12,-7); -- INT: -7
+INSERT INTO `item_mods` VALUES (14075,897,1); -- GILFINDER: 1
 
 -- Hecatomb Mittens
 INSERT INTO `item_mods` VALUES (14076,1,25);     -- DEF: 25
@@ -25525,10 +25526,11 @@ INSERT INTO `item_mods` VALUES (15130,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15130,363,10); -- HIGH_JUMP_ENMITY_REDUCTION: 10
 
 -- Summoners Spats
-INSERT INTO `item_mods` VALUES (15131,1,29);  -- DEF: 29
-INSERT INTO `item_mods` VALUES (15131,5,20);  -- MP: 20
-INSERT INTO `item_mods` VALUES (15131,13,3);  -- MND: 3
-INSERT INTO `item_mods` VALUES (15131,357,2); -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15131,1,29);   -- DEF: 29
+INSERT INTO `item_mods` VALUES (15131,5,20);   -- MP: 20
+INSERT INTO `item_mods` VALUES (15131,13,3);   -- MND: 3
+INSERT INTO `item_mods` VALUES (15131,357,2);  -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15131,1179,5); -- Spirit Spellcast Delay Reduction
 
 -- Warriors Calligae
 INSERT INTO `item_mods` VALUES (15132,1,19); -- DEF: 19
@@ -26810,7 +26812,7 @@ INSERT INTO `item_mods` VALUES (15365,2,12);   -- HP: 12
 INSERT INTO `item_mods` VALUES (15365,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15365,11,5);   -- AGI: 5
 INSERT INTO `item_mods` VALUES (15365,108,10); -- EVASION: 10
-INSERT INTO `item_mods` VALUES (15365,362,10); -- JUMP_ATT_BONUS: 10
+INSERT INTO `item_mods` VALUES (15365,362,15); -- JUMP_ATT_BONUS: 15
 
 -- Evokers Pigaches +1
 INSERT INTO `item_mods` VALUES (15366,1,10);  -- DEF: 10
@@ -27826,9 +27828,10 @@ INSERT INTO `item_mods` VALUES (15593,9,6);    -- DEX: 6
 INSERT INTO `item_mods` VALUES (15593,363,10); -- HIGH_JUMP_ENMITY_REDUCTION: 10
 
 -- Summoners Spats +1
-INSERT INTO `item_mods` VALUES (15594,1,30);  -- DEF: 30
-INSERT INTO `item_mods` VALUES (15594,5,25);  -- MP: 25
-INSERT INTO `item_mods` VALUES (15594,357,2); -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15594,1,30);   -- DEF: 30
+INSERT INTO `item_mods` VALUES (15594,5,25);   -- MP: 25
+INSERT INTO `item_mods` VALUES (15594,357,2);  -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15594,1179,5); -- Spirit Spellcast Delay Reduction
 
 -- Hydra Brais
 INSERT INTO `item_mods` VALUES (15595,1,32);  -- DEF: 32
@@ -48975,7 +48978,7 @@ INSERT INTO `item_mods` VALUES (23321,25,36);   -- ACC: 36
 INSERT INTO `item_mods` VALUES (23321,29,2);    -- MDEF: 2
 INSERT INTO `item_mods` VALUES (23321,31,85);   -- MEVA: 85
 INSERT INTO `item_mods` VALUES (23321,68,72);   -- EVA: 72
-INSERT INTO `item_mods` VALUES (23321,361,24);  -- JUMP_TP_BONUS: 24
+INSERT INTO `item_mods` VALUES (23321,362,24);  -- JUMP_ATT_BONUS: 24
 INSERT INTO `item_mods` VALUES (23321,384,300); -- HASTE_GEAR: 300
 
 -- Convokers Pigaches +2
@@ -51419,7 +51422,7 @@ INSERT INTO `item_mods` VALUES (23656,25,46);   -- ACC: 46
 INSERT INTO `item_mods` VALUES (23656,29,3);    -- MDEF: 3
 INSERT INTO `item_mods` VALUES (23656,31,95);   -- MEVA: 95
 INSERT INTO `item_mods` VALUES (23656,68,82);   -- EVA: 82
-INSERT INTO `item_mods` VALUES (23656,361,26);  -- JUMP_TP_BONUS: 26
+INSERT INTO `item_mods` VALUES (23656,362,26);  -- JUMP_ATT_BONUS: 26
 INSERT INTO `item_mods` VALUES (23656,384,300); -- HASTE_GEAR: 300
 
 -- Convokers Pigaches +3

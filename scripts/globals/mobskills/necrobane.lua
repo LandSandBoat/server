@@ -1,5 +1,8 @@
 -----------------------------------
 -- Necrobane
+-- Paralyzes and afflicts a curse on all targets in an area of effect.
+-- Utsusemi/Blink absorb: Ignores shadows
+-- ToDo missing paralyze
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -36,7 +39,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 1, 0, 60)

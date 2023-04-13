@@ -132,13 +132,14 @@ namespace luautils
 
     void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
 
-    void  SendEntityVisualPacket(uint32 npcid, const char* command);
-    void  InitInteractionGlobal();
-    auto  GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
-    bool  IsZoneActive(uint16 zoneId);
-    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto  GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    void SendEntityVisualPacket(uint32 npcid, const char* command);
+    void InitInteractionGlobal();
+    auto GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
+    bool IsZoneActive(uint16 zoneId);
+    auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetEntityByID(uint32 mobid, sol::object const& instanceObj, sol::object const& arg3) -> std::optional<CLuaBaseEntity>;
+
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
@@ -184,6 +185,7 @@ namespace luautils
     bool   IsMoonNew();  // Returns true if the moon is new
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
+    int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
     void  SetServerVariable(std::string const& name, int32 value);
