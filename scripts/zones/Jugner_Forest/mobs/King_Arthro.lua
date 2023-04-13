@@ -5,7 +5,8 @@
 mixins =
 {
     require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage")
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
 }
 require("scripts/globals/mobs")
 -----------------------------------

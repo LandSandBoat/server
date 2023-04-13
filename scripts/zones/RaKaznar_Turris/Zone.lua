@@ -6,6 +6,10 @@ local ID = require('scripts/zones/RaKaznar_Turris/IDs')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    GetNPCByID(ID.npc.MOOGLE1):renameEntity("Seismic Tower")
+    GetNPCByID(ID.npc.MOOGLE2):renameEntity("Seismic Tower")
+    GetNPCByID(ID.npc.MOOGLE1):setStatus(xi.status.INVISIBLE)
+    GetNPCByID(ID.npc.MOOGLE2):setStatus(xi.status.INVISIBLE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -20,15 +24,6 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     return cs
-end
-
-zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-end
-
-zoneObject.onEventUpdate = function(player, csid, option)
-end
-
-zoneObject.onEventFinish = function(player, csid, option)
 end
 
 return zoneObject

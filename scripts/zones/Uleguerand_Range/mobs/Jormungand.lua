@@ -2,6 +2,11 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
@@ -18,10 +23,22 @@ entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
 end
 
+entity.onMobInitialize = function(mob)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
+end
 entity.onMobSpawn = function(mob)
     -- Reset animation so it starts grounded.
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
+	mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
 entity.onMobFight = function(mob, target)

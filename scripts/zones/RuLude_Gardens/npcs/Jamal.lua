@@ -1,0 +1,20 @@
+-----------------------------------
+-- Area: Ru'Lude Gardens
+--  NPC: Jamal
+-- !pos 3.779 2.000 140.932 243
+-----------------------------------
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

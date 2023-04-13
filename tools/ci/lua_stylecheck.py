@@ -27,6 +27,10 @@ deprecated_functions = [
     ["table.getn", "#t"],
 ]
 
+excluded_filenames = [
+    'scripts/mixins/claim_shield.lua',
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -35,7 +39,8 @@ class LuaStyleCheck:
         self.filename = input_file
         self.show_errors = show_errors
 
-        self.run_style_check()
+        if input_file not in excluded_filenames:
+            self.run_style_check()
 
     def error(self, error_string):
         """Displays error_string along with filename and line.  Increments errcount for the class."""

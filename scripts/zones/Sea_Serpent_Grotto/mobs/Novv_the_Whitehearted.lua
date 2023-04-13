@@ -2,7 +2,11 @@
 -- Area: Sea Serpent Grotto
 --   NM: Novv the Whitehearted
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = 
+{
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/claim_shield")
+}
 -----------------------------------
 local entity = {}
 
