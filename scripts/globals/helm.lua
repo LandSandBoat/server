@@ -1551,10 +1551,24 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                     movePoint(npc, zoneId, info)
                 end
 
+                if
+                    xi.events and
+                    xi.events.egg_hunt and
+                    xi.events.egg_hunt.enabledCheck and
+                    player:getVar("[EGGHUNT]DAILY_HELM") < vanaDay()
+                then
+                    player:timer(3000, function(playerArg)
+                        if npcUtil.giveItem(playerArg, math.random(xi.items.A_EGG, xi.items.Z_EGG)) then
+                            playerArg:setVar("[EGGHUNT]DAILY_HELM", vanaDay())
+                            return
+                        end
+                    end)
+                end
+
                 player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
             end
 
-            -- quest stuff
+            -- quests and missions
             if
                 helmType == xi.helm.type.HARVESTING and
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
