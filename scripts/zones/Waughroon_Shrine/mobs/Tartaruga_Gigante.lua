@@ -27,10 +27,11 @@ local removables =
 
 local intoShell = function(mob)
     for _, effect in ipairs(removables) do
-        if (mob:hasStatusEffect(effect)) then
+        if mob:hasStatusEffect(effect) then
             mob:delStatusEffect(effect)
         end
     end
+
     mob:setAnimationSub(1)
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
@@ -88,10 +89,10 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getHP() <= changeHP then
-        if (mob:getAnimationSub() == 1) then -- In shell
+        if mob:getAnimationSub() == 1 then -- In shell
             mob:setLocalVar("dmgToChange", mob:getHP() - 2000)
             outOfShell(mob)
-        elseif (mob:getAnimationSub() == 2) then -- Out of shell
+        elseif mob:getAnimationSub() == 2 then -- Out of shell
             intoShell(mob)
             mob:setLocalVar("dmgToChange", mob:getHP() - 2000)
         end
