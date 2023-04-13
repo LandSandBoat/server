@@ -1386,8 +1386,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
             }
 
-            destroy(PMob);
             dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
+            it->second = nullptr;
+            destroy(PMob);
 
             m_mobList.erase(it++);
             continue;
