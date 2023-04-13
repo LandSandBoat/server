@@ -64,6 +64,7 @@ local helmInfo =
                     {  470, 1845 }, -- Red Moko Grass
                     {  430, 1524 }, -- Fresh Mugwort
                     {  240,  951 }, -- Wijnruit
+                    {  120, 4273 }, -- Kitron
                 },
 
                 points =
@@ -104,6 +105,7 @@ local helmInfo =
                     {  460, 1524 }, -- Fresh Mugwort
                     {  370,  951 }, -- Wijnruit
                     {  360, 2645 }, -- Eastern Ginger
+                    {  120, 4273 }, -- Kitron
                 },
 
                 points =
@@ -972,10 +974,18 @@ local helmInfo =
                     {  600, 1638 }, -- Moblin Mask
                     {  570,  568 }, -- Goblin Die
                     {  570, 1631 }, -- Moblin Armor
-                    {   80,  645 }, -- Darksteel Ore
-                    {   80,  644 }, -- Mythril Ore
-                    {   70,  737 }, -- Gold Ore
-                    {   70,  738 }, -- Platium Ore
+                    {  150,  645 }, -- Darksteel Ore
+                    {  400,  644 }, -- Mythril Ore
+                    {  300,  737 }, -- Gold Ore
+                    {  200,  738 }, -- Platium Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1000,18 +1010,26 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 1660,  640 }, -- Copper Ore
-                    { 1100,  641 }, -- Tin Ore
-                    { 1450,  642 }, -- Zinc Ore
+                    { 1660, 640 },  -- Copper Ore
+                    { 1100, 641 },  -- Tin Ore
+                    { 1450, 642 },  -- Zinc Ore
                     { 1790, 1654 }, -- Igneous Rock
-                    { 1450,  736 }, -- Silver Ore
-                    {  140,  678 }, -- Aluminum Ore
-                    { 1720,  643 }, -- Iron Ore
-                    {   70,  645 }, -- Darksteel Ore
-                    {  210,  644 }, -- Mythril Ore
-                    {  140,  737 }, -- Gold Ore
-                    {  340,  738 }, -- Platium Ore
-                    {   70,  769 }, -- Colored Rock
+                    { 1450, 736 },  -- Silver Ore
+                    { 240, 678 },   -- Aluminum Ore
+                    { 1720, 643 },  -- Iron Ore
+                    { 150, 645 },   -- Darksteel Ore
+                    { 440, 644 },   -- Mythril Ore
+                    { 240, 737 },   -- Gold Ore
+                    { 340, 738 },   -- Platium Ore
+                    { 100, 769 },   -- Colored Rock
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1033,20 +1051,28 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2250, 1108 }, -- Sulfur
+                    { 2100, 1108 }, -- Sulfur
                     { 2990,  643 }, -- Iron Ore
                     { 1590, 1155 }, -- Iron Sand
                     { 1540,  768 }, -- Flint Stone
                     { 1340,  928 }, -- Bomb Ash
                     {  960, 1632 }, -- Moblin Mail
-                    { 1150, 1625 }, -- Moblin Helm
-                    {  450, 1631 }, -- Moblin Armor
+                    { 1000, 1625 }, -- Moblin Helm
+                    {  930, 1631 }, -- Moblin Armor
                     {  380, 2160 }, -- Troll Pauldron
-                    {  450, 2161 }, -- Troll Vambrace
+                    {  930, 2161 }, -- Troll Vambrace
                     {  430, 1638 }, -- Moblin Mask
-                    {  210,  902 }, -- Demon Horn
-                    {  140,  646 }, -- Adaman Ore
-                    {   30,  685 }, -- Khroma Ore
+                    {  400,  902 }, -- Demon Horn
+                    {  400,  646 }, -- Adaman Ore
+                    {  350,  685 }, -- Khroma Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1085,15 +1111,24 @@ local helmInfo =
                     { 1720,  768 }, -- Flint Stone
                     {  290,  737 }, -- Gold Ore
                     { 1440, 1155 }, -- Iron Sand
-                    {   50, 2228 }, -- Luminium Ore
-                    {  430, 1631 }, -- Moblin Armor
-                    {  430, 1625 }, -- Moblin Helm
+                    {  300, 2228 }, -- Luminium Ore
+                    {  910, 1631 }, -- Moblin Armor
+                    {  910, 1625 }, -- Moblin Helm
                     {  480, 1632 }, -- Moblin Mail
                     {  290, 1638 }, -- Moblin Mask
-                    {  100,  739 }, -- Orichalcum Ore
+                    {  250,  739 }, -- Orichalcum Ore
                     { 1200, 1108 }, -- Pinch of Sulfur
                     {  480, 2160 }, -- Troll Pauldron
                     {  330, 2161 }, -- Troll Vambrace
+                    {  200,  685 }, -- Khroma Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1125,18 +1160,26 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 1870,   640 }, -- Copper Ore
-                    { 1930,   642 }, -- Zinc Ore
-                    { 1500,   641 }, -- Tin Ore
+                    { 1870, 640 },   -- Copper Ore
+                    { 1930, 642 },   -- Zinc Ore
+                    { 1500, 641 },   -- Tin Ore
                     { 1340, 17296 }, -- Pebble
-                    {  860,   736 }, -- Silver Ore
-                    { 1180,   643 }, -- Iron Ore
-                    {  750,   644 }, -- Mythril Ore
-                    {  210,  1638 }, -- Moblin Mask
-                    {  110,  1625 }, -- Moblin Helm
-                    {  110,  1632 }, -- Moblin Mail
-                    {   50,  1631 }, -- Moblin Armor
-                    {  160,   738 }, -- Platium Ore
+                    { 860, 736 },    -- Silver Ore
+                    { 1180, 643 },   -- Iron Ore
+                    { 750, 644 },    -- Mythril Ore
+                    { 210, 1638 },   -- Moblin Mask
+                    { 110, 1625 },   -- Moblin Helm
+                    { 110, 1632 },   -- Moblin Mail
+                    { 50, 1631 },    -- Moblin Armor
+                    { 160, 738 },    -- Platium Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1184,9 +1227,17 @@ local helmInfo =
                     { 1320,   642 }, -- Zinc Ore
                     {  840,   768 }, -- Flint Stone
                     {  360,   736 }, -- Silver Ore
-                    {  170,   769 }, -- Colored Rock
+                    {  100,   769 }, -- Colored Rock
                     {  150,   645 }, -- Darksteel Ore
-                    {  110,   737 }, -- Gold Ore
+                    {  200,   737 }, -- Gold Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1240,6 +1291,14 @@ local helmInfo =
                     {  900,   736 }, -- Silver Ore
                     {  800,   640 }, -- Copper Ore
                     {  100,   738 }, -- Platium Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1277,9 +1336,17 @@ local helmInfo =
                     { 1850,   640 }, -- Copper Ore
                     { 1330,   642 }, -- Zinc Ore
                     { 1120,   641 }, -- Tin Ore
-                    {  550,  1984 }, -- Snapping Mole
-                    {  180,   736 }, -- Silver Ore
-                    {   40,   645 }, -- Darksteel Ore
+                    { 550,  1984 }, -- Snapping Mole
+                    { 180,   736 }, -- Silver Ore
+                    { 100,   645 }, -- Darksteel Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1323,7 +1390,15 @@ local helmInfo =
                     {  810,   736 }, -- Silver Ore
                     {  590,   645 }, -- Darksteel Ore
                     {  400,   769 }, -- Colored Rock
-                    {   80,   737 }, -- Gold Ore
+                    {  300,   737 }, -- Gold Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =
@@ -1353,17 +1428,26 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 3260,   768 }, -- Flint Stone
-                    { 1520,   643 }, -- Iron Ore
-                    {  430,  1108 }, -- Sulfur
-                    {  650, 17316 }, -- Bomb Arm
-                    {  870,   928 }, -- Bomb Ash
-                    { 1300,  1155 }, -- Iron Sand
-                    {  250,   646 }, -- Adaman Ore
-                    {  600,   645 }, -- Darksteel Ore
-                    { 1520,  2126 }, -- Orpiment
-                    {  100,   739 }, -- Orichalcum Ore
-                    {  220,   769 }, -- Colored Rock
+                    {  3260, 768 }, -- Flint Stone
+                    {  1520, 643 }, -- Iron Ore
+                    {  1080, 1108 }, -- Sulfur
+                    {  1130, 17316 }, -- Bomb Arm
+                    {  870, 928 }, -- Bomb Ash
+                    {  1300, 1155 }, -- Iron Sand
+                    {  400, 646 }, -- Adaman Ore
+                    {  600, 645 }, -- Darksteel Ore
+                    {  1520, 2126 }, -- Orpiment
+                    {   300, 739 }, -- Orichalcum Ore
+                    {   600, 769 }, -- Colored Rock
+                    {   250, 685 }, -- Khroma Ore
+                    {   30, 1255 }, -- Fire Ore
+                    {   30, 1256 }, -- Ice Ore
+                    {   30, 1257 }, -- Wind Ore
+                    {   30, 1258 }, -- Earth Ore
+                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1260 }, -- Water Ore
+                    {   30, 1261 }, -- Light Ore
+                    {   30, 1262 }, -- Dark Ore
                 },
 
                 points =

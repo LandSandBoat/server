@@ -105,7 +105,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         end
     end
 
-    player:startEvent(9100, 0, portalBitMask, zoneId, portalGlobalNumber, lockValue, player:getCurrency("escha_silt"), getPortalCost(player), 0)
+    player:startEvent(9100, 0, portalBitMask, zoneId, portalGlobalNumber, lockValue, player:getCurrency("escha_beads"), getPortalCost(player), 0)
 end
 
 xi.escha.portals.eschanPortalEventUpdate = function(player, csid, option)
@@ -122,6 +122,6 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
         option ~= 4 and -- Scintillating Rhapsody usage.
         option ~= 1073741824
     then
-        player:delCurrency("escha_silt", portalCost)
+        player:delCurrency("escha_beads", portalCost)
     end
 end

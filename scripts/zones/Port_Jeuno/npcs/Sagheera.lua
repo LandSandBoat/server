@@ -279,7 +279,9 @@ local cosmoReady = 2147483649 -- BITMASK for the purchase
 
 local function getCosmoCleanseTime(player)
     local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
-    local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
+--    local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
+    -- no cosmo cleanse cooldown
+	local lastCosmoTime = 0
 
     if lastCosmoTime ~= 0 then
         lastCosmoTime = lastCosmoTime + cosmoWaitTime

@@ -3,6 +3,7 @@
 --   NM: Leech King
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+mixins = { require("scripts/mixins/claim_shield") }
 -----------------------------------
 local entity = {}
 

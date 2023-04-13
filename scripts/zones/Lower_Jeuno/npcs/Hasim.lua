@@ -68,7 +68,7 @@ entity.onTrigger = function(player, npc)
         5094,  89804, -- Scroll of Boost-STR
         5098,  94461, -- Scroll of Boost-INT
         5095,  99613, -- Scroll of Boost-DEX
-        5106,  73500, -- Scroll of Inundation
+--        5106,  73500, -- Scroll of Inundation
         4849, 130378, -- Scroll of Addle
         4629,  35000, -- Scroll of Holy
         4647,  20000, -- Scroll of Banishga II

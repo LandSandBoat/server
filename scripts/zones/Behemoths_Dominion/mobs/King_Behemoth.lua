@@ -14,11 +14,24 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-
+    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:addMod(xi.mod.ATT, 150)
+    mob:addMod(xi.mod.DEF, 200)
+    mob:addMod(xi.mod.EVA, 110)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end
@@ -44,6 +57,9 @@ end
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+end
+
+entity.onMobFight = function(mob, target)
 end
 
 return entity

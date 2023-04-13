@@ -11,7 +11,7 @@ local hpEvent = 8700
 local hpIndex = 112
 
 entity.onTrigger = function(player, npc)
-    xi.homepoint.onTrigger(player, hpEvent, hpIndex)
+--    xi.homepoint.onTrigger(player, hpEvent, hpIndex)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -2,7 +2,11 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/status")
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -17,12 +21,22 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
 end
 
 entity.onMobSpawn = function(mob)
     -- Reset animation so it starts grounded.
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
+	mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
 entity.onMobFight = function(mob, target)

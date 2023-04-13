@@ -3,6 +3,7 @@
 --  Mob: Citipati
 -----------------------------------
 require("scripts/globals/hunts")
+mixins = { require("scripts/mixins/claim_shield") }
 -----------------------------------
 local entity = {}
 
