@@ -94,7 +94,24 @@ quest.sections =
 
         [xi.zone.GARLAIGE_CITADEL] =
         {
-            ['Mashira'] = quest:event(11, 3),
+            ['Mashira'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getLocalVar('hatchOpened') == 0 then
+                        return
+                    end
+
+                    local rubbishDay =
+                        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and
+                        player:getCharVar("RubbishDayVar") == 0
+
+                    if rubbishDay then
+                        return quest:progressEvent(11, 0)
+                    else
+                        return quest:progressEvent(11, 3)
+                    end
+                end
+            },
         },
 
         [xi.zone.PORT_WINDURST] =
