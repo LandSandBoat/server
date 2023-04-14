@@ -119,44 +119,49 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
             ItemList.push_back(PAHItem);
         }
     }
-    const char* noQtyQuery = "SELECT item_basic.itemid, item_basic.stackSize "
-                             "FROM item_basic "
-                             "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid "
-                             "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
-                             "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                             "WHERE aH = %u AND auction_house.itemid IS NOT NULL "
-                             "GROUP BY item_basic.itemid "
-                             "%s";
 
-    int32 noQtyRet = sql->Query(noQtyQuery, AHCategoryID, OrderByString);
-    if (noQtyRet != SQL_ERROR && sql->NumRows() != 0)
+    if (settings::get<bool>("search.OMIT_NO_HISTORY"))
     {
-        while (sql->NextRow() == SQL_SUCCESS)
+        const char* noQtyQuery = "SELECT item_basic.itemid, item_basic.stackSize "
+                                 "FROM item_basic "
+                                 "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid "
+                                 "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
+                                 "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                 "WHERE aH = %u AND auction_house.itemid IS NOT NULL "
+                                 "GROUP BY item_basic.itemid "
+                                 "%s";
+
+        int32 noQtyRet = sql->Query(noQtyQuery, AHCategoryID, OrderByString);
+        if (noQtyRet != SQL_ERROR && sql->NumRows() != 0)
         {
-            uint16 CurrItemID = sql->GetUIntData(0);
-            bool   itemFound  = false;
-            for (ahItem* PAHItem : ItemList)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                if (PAHItem->ItemID == CurrItemID)
+                uint16 CurrItemID = sql->GetUIntData(0);
+                bool   itemFound  = false;
+                for (ahItem* PAHItem : ItemList)
                 {
-                    itemFound = true;
-                    break;
+                    if (PAHItem->ItemID == CurrItemID)
+                    {
+                        itemFound = true;
+                        break;
+                    }
                 }
-            }
-            if (!itemFound)
-            {
-                ahItem* PAHItem       = new ahItem;
-                PAHItem->ItemID       = CurrItemID;
-                PAHItem->SingleAmount = 0;
-                PAHItem->StackAmount  = 0;
-                if (sql->GetIntData(1) == 1)
+                if (!itemFound)
                 {
-                    PAHItem->StackAmount = -1;
+                    ahItem* PAHItem       = new ahItem;
+                    PAHItem->ItemID       = CurrItemID;
+                    PAHItem->SingleAmount = 0;
+                    PAHItem->StackAmount  = 0;
+                    if (sql->GetIntData(1) == 1)
+                    {
+                        PAHItem->StackAmount = -1;
+                    }
+                    ItemList.push_back(PAHItem);
                 }
-                ItemList.push_back(PAHItem);
             }
         }
     }
+
     return ItemList;
 }
 
