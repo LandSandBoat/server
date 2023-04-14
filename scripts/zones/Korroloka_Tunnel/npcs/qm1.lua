@@ -17,6 +17,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
+        npc:getStatus() == xi.status.NORMAL and
         npcUtil.tradeHasExactly(trade, 643) and
         npcUtil.popFromQM(player, npc, ID.mob.MORION_WORM, { radius = 1, hide = 0 })
     then

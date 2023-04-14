@@ -40,6 +40,12 @@ npcUtil = {}
 function npcUtil.popFromQM(player, qm, mobId, params)
     local qmId = qm:getID()
 
+    -- add additional check to make sure players can only
+    -- spawn mobs from visible NPCs
+    if qm:getStatus() ~= xi.status.NORMAL then
+        return false
+    end
+
     -- default params
     if not params then
         params = {}
@@ -53,7 +59,10 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         params.hide = xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
     end
 
-    if params.enmityPlayerList == nil or type(params.enmityPlayerList) ~= "table" then
+    if
+        params.enmityPlayerList == nil or
+        type(params.enmityPlayerList) ~= "table"
+    then
         params.enmityPlayerList = false
     end
 
@@ -105,11 +114,12 @@ function npcUtil.popFromQM(player, qm, mobId, params)
 
         --add base enmity to an entire list of players (like a party)
         if params.enmityPlayerList then
-            for _,member in pairs(params.enmityPlayerList) do
+            for _, member in pairs(params.enmityPlayerList) do
                 mob:updateEnmity(member)
             end
+
             --add a bit more (1 CE) to player that pops mob so mob goes for them first
-            mob:addEnmity(player,1,0)
+            mob:addEnmity(player, 1, 0)
         end
 
         -- look

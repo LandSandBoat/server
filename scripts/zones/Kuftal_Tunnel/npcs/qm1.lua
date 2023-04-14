@@ -18,6 +18,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
+        npc:getStatus() == xi.status.NORMAL and
         npcUtil.tradeHasExactly(trade, 645) and
         npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1, hide = 0 })
     then
