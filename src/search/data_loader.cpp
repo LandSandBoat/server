@@ -146,6 +146,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
                         break;
                     }
                 }
+
                 if (!itemFound)
                 {
                     ahItem* PAHItem       = new ahItem;
