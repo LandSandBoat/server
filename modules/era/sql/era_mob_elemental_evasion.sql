@@ -1049,6 +1049,7 @@ UPDATE `mob_pools` SET `ele_eva_id` = 312 WHERE `poolid` = 2224; -- Khroma Quada
 UPDATE `mob_pools` SET `ele_eva_id` = 340 WHERE `poolid` = 2223; -- Khromasoul Bhurborlor
 UPDATE `mob_pools` SET `ele_eva_id` = 159 WHERE `poolid` = 6619; -- Kindred Dark Knight
 UPDATE `mob_pools` SET `ele_eva_id` = 35 WHERE `poolid` = 2247; -- Kindred's Wyvern
+UPDATE `mob_pools` SET `ele_eva_id` = 252 WHERE `poolid` = 2255; -- King Behemoth
 UPDATE `mob_pools` SET `ele_eva_id` = 110 WHERE `poolid` = 2256; -- King Buffalo
 UPDATE `mob_pools` SET `ele_eva_id` = 336 WHERE `poolid` = 2257; -- King Goldemar
 UPDATE `mob_pools` SET `ele_eva_id` = 322 WHERE `poolid` = 2265; -- Kirin
