@@ -181,6 +181,8 @@ public:
     uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
+    void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask); // sends a specific entity's update packet to a specific player only
+
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
     void  showPosition();              // Display current position of character
     float getXPos();                   // Get Entity X position
