@@ -677,7 +677,7 @@ end
 xi.abyssea.spendTravStones = function(player, spentstones)
     local numRemoved = 0
 
-    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
+    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1, -1 do
         if numRemoved == spentstones then
             break
         elseif player:hasKeyItem(keyItem) then
