@@ -45,7 +45,7 @@ enum ENTITYTYPE : uint8
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1,
+    UPDATE        = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
