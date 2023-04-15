@@ -1097,6 +1097,13 @@ xi.abyssea.onZoneIn = function(player)
     end
 end
 
+xi.abyssea.onEventFinish = function(player, csid, option)
+    if csid == 2180 then
+        local zoneID = player:getZoneID()
+        player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
+    end
+end
+
 xi.abyssea.afterZoneIn = function(player)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
