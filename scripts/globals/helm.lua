@@ -1474,7 +1474,7 @@ local function doMove(npc, x, y, z)
     end
 end
 
-local function movePoint(npc, zoneId, info)
+local function movePoint(player, npc, zoneId, info)
     local points = info.zone[zoneId].points
     local point  = points[math.random(1, #points)]
 
@@ -1495,7 +1495,7 @@ xi.helm.initZone = function(zone, helmType)
         local npc = GetNPCByID(npcId)
         if npc then
             npc:setStatus(xi.status.NORMAL)
-            movePoint(npc, zoneId, info)
+            movePoint(nil, npc, zoneId, info)
         end
     end
 end
@@ -1532,7 +1532,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             npc:setLocalVar("uses", uses)
 
             if uses == 0 then
-                movePoint(npc, zoneId, info)
+                movePoint(player, npc, zoneId, info)
             end
 
             player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
