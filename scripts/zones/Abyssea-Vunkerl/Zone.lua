@@ -54,6 +54,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+    xi.abyssea.onEventFinish(player, csid, option)
 end
 
 return zoneObject
