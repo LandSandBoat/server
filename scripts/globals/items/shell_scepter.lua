@@ -11,7 +11,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
-local costumes = {686, 997, 1090, 1249}
+local costumes = { 686, 997, 1090, 1249 }
 
 itemObject.onItemCheck = function(target)
     if not target:canUseMisc(xi.zoneMisc.COSTUME) then
