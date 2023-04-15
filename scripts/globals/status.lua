@@ -3199,3 +3199,28 @@ xi.itemFlag =
     EX           = 0x4000, -- NoTradePC Polutils Value
     RARE         = 0x8000,
 }
+
+-- see `enum ENTITYUPDATE` in src\map\packets\basic.h
+xi.entityUpdate =
+{
+    ENTITY_SPAWN   = 0,
+    ENTITY_SHOW    = 1,
+    ENTITY_UPDATE  = 2,
+    ENTITY_HIDE    = 3,
+    ENTITY_DESPAWN = 4,
+}
+
+-- see `enum UPDATETYPE` in src\map\entities\baseentity.h
+xi.updateType =
+{
+    UPDATE_NONE     = 0x00,
+    UPDATE_POS      = 0x01,
+    UPDATE_STATUS   = 0x02,
+    UPDATE_HP       = 0x04,
+    UPDATE_COMBAT   = 0x07,
+    UPDATE_NAME     = 0x08,
+    UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
+    UPDATE_ALL_CHAR = 0x1F,
+    UPDATE_DESPAWN  = 0x20,
+}
