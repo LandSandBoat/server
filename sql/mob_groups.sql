@@ -601,7 +601,7 @@ INSERT INTO `mob_groups` VALUES (15,1457,15,'Gangly_Gean',900,0,928,0,999,80,83,
 INSERT INTO `mob_groups` VALUES (16,3334,15,'Razorback',300,0,2079,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (17,3466,15,'Sarcophilus',0,128,2163,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (18,1967,15,'Hoary_Ragwort',300,0,1322,0,0,78,88,0);
-INSERT INTO `mob_groups` VALUES (19,491,15,'Bombadeel',0,128,330,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,491,15,'Bombadeel',0,128,330,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (20,29,15,'Abxzomit',300,0,9,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (21,2217,15,'Khalamari',900,0,1433,27000,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (22,3577,15,'Shadow_Funguar',300,0,2227,0,0,78,88,0);
