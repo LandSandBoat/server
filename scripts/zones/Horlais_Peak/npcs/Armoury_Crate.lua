@@ -836,7 +836,7 @@ local loot =
             { itemid = 1110, droprate =  41 },   -- Vial Of Black Beetle Blood
         },
     },
-    
+
     -- KSNM Contaminated Colosseum
     [17] =
     {

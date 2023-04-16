@@ -128,7 +128,7 @@ local loot =
             { itemid = 1132, droprate = 250 }, -- Square Of Raxa
         },
     },
-	
+
     -- The Scarlet King
     [199] =
     {
@@ -186,7 +186,7 @@ local loot =
             { itemid = 1132, droprate = 100 }, -- Square Of Raxa
         }
     },
-	
+
     -- KSNM Eye of the Storm
     [198] =
     {

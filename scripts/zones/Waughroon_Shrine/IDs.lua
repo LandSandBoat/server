@@ -61,7 +61,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         17367183,
         17367193,
     },
-	
+
     operationDesertSwarm =
     {
         [1] =

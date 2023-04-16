@@ -637,7 +637,7 @@ local helmInfo =
                     { 1430,  691 }, -- Maple Log
                     { 1270, 5661 }, -- Walnut
                     {  850,  694 }, -- Chestnut Log
-					{ 1000, 4274 }, -- Persikos
+                    { 1000, 4274 }, -- Persikos
                     { 1000,  639 }, -- Ronfaure Chestnut
                     {  760,  693 }, -- Walnut Log
                     {  490,  574 }, -- Fruit Seeds
@@ -665,7 +665,7 @@ local helmInfo =
                     { 1540,  693 }, -- Walnut Log
                     { 1140,  688 }, -- Arrowwood Log
                     { 1090,  698 }, -- Ash Log
-					{  890, 4274 }, -- Persikos					
+                    {  890, 4274 }, -- Persikos
                     {  860,  699 }, -- Oak Log
                     {  860,  695 }, -- Willow Log
                     {  510, 4504 }, -- Acorn
@@ -692,7 +692,7 @@ local helmInfo =
                     { 2230,  5650 }, -- Nopales
                     { 1650,  5662 }, -- Dragon Fruit
                     { 1490,   847 }, -- Bird Feather
-					{ 1270,  4274 }, -- Persikos					
+                    { 1270,  4274 }, -- Persikos
                     { 1250,  4570 }, -- Bird Egg
                     {  170,  1236 }, -- Cactus Stems
                     {   50, 18175 }, -- Optical Needle
@@ -859,7 +859,7 @@ local helmInfo =
                     { 1190,  689 }, -- Lauan Log
                     { 1190,  940 }, -- Revival Tree Root
                     {  950,  731 }, -- Aquilaria Log
-					{  950, 4274 }, -- Persikos					
+                    {  950, 4274 }, -- Persikos
                     {  480,  912 }, -- Beehive Chip
                     {  480, 1237 }, -- Tree Cuttings
                     {  100, 5662 }, -- Dragon Fruit
@@ -885,7 +885,7 @@ local helmInfo =
                     { 2220,  688 }, -- Arrowwood Log
                     { 2220,  721 }, -- Rattan Lumber
                     { 1130,  689 }, -- Lauan Log
-					{  800, 4274 }, -- Persikos					
+                    {  800, 4274 }, -- Persikos
                     {  780,  912 }, -- Beehive Chip
                     {  650,  923 }, -- Dryad Root
                     {  650, 5908 }, -- Butterpear

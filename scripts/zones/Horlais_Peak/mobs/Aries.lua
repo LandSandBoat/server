@@ -28,17 +28,29 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("sleepyTime", 2)
     end
 
-    if sleepy == 2 or mob:hasStatusEffect(xi.effect.SLEEP_I) or mob:hasStatusEffect(xi.effect.SLEEP_II) or mob:hasStatusEffect(xi.effect.LULLABY) then
+    if
+        sleepy == 2 or mob:hasStatusEffect(xi.effect.SLEEP_I) or
+        mob:hasStatusEffect(xi.effect.SLEEP_II) or
+        mob:hasStatusEffect(xi.effect.LULLABY)
+    then
         mob:setMod(xi.mod.REGEN, math.random(50,150))
         mob:setMod(xi.mod.REGAIN, 500)
     end
 
-    if mob:checkDistance(target) > 20 and mob:getLocalVar("sleepyTime") == 0 and mob:getBattleTime() > wakeyTime then
+    if
+        mob:checkDistance(target) > 20 and
+        mob:getLocalVar("sleepyTime") == 0 and
+        mob:getBattleTime() > wakeyTime
+    then
         mob:setLocalVar("sleepyTime", 1)
     end
 
     mob:addListener("EFFECT_LOSE", "SLEEP_EFFECT_LOSE", function(mobArg, effect)
-        if effect:getType() == xi.effect.SLEEP_I or effect:getType() == xi.effect.SLEEP_II or effect:getType() == xi.effect.LULLABY then
+        if
+            effect:getType() == xi.effect.SLEEP_I or
+            effect:getType() == xi.effect.SLEEP_II or
+            effect:getType() == xi.effect.LULLABY
+        then
             mobArg:setLocalVar("sleepyTime", 0)
             mobArg:setLocalVar("Wakey", mobArg:getBattleTime() + 5)
             mobArg:setMod(xi.mod.REGEN, 0)
@@ -46,7 +58,7 @@ entity.onMobFight = function(mob, target)
             mobArg:setLocalVar("twohour_tp", mob:getTP())
             mobArg:useMobAbility(404)
             mob:addStatusEffect(xi.effect.HASTE, 25, 0, 30)
-        end
+        `end
     end)
 end
 

@@ -48,6 +48,7 @@ local function charm(mob)
             if players[#players] == v then
                 mob:setLocalVar("charmReset", 1)
             end
+
             break
         end
     end
@@ -56,6 +57,7 @@ local function charm(mob)
         for _, v in pairs(players) do
             v:setLocalVar("playerCharmed", 0)
         end
+
         mob:setLocalVar("charmReset", 0)
     end
 end
@@ -82,7 +84,6 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("twoHour", 1)
         mob:useMobAbility(twoHourAbility[job])
     end
-
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -58,7 +58,7 @@ local function getDistanceFromCenter(bfNum, mob)
     local difY = pos.y - centers[bfNum][2]
     local difZ = pos.z - centers[bfNum][3]
 
-    return math.sqrt( math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2) )
+    return math.sqrt( math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2))
 end
 
 local function allJellysInCenter(bfNum)
@@ -69,14 +69,17 @@ local function allJellysInCenter(bfNum)
         if getDistanceFromCenter(bfNum, princess) <= 0.5 then
             totalInCenter = totalInCenter + 1
         end
+
         if princess:isAlive() then
             totalMobsAlive = totalMobsAlive + 1
         end
     end
+
     if totalMobsAlive == 0 then
         -- Win condition
         return false
     end
+
     return totalMobsAlive == totalInCenter
 end
 
@@ -89,6 +92,7 @@ local function princessesTotalHP(bfNum)
             totalHP = totalHP + princess:getHP()
         end
     end
+
     return totalHP
 end
 
