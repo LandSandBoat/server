@@ -67,8 +67,6 @@ local helmInfo =
                     {  240,  951 }, -- Wijnruit
                     {  120, 4273 }, -- Kitron
                 },
-
-
                 points =
                 {
                     { -672.000,  -9.000,  -98.000 },
