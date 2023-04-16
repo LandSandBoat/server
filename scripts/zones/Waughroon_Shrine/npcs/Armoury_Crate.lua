@@ -294,7 +294,7 @@ local loot =
         },
 
         {
-			{ itemid = 17738, droprate =  50 }, -- Hauteclaire (custom drop)
+            { itemid = 17738, droprate =  50 }, -- Hauteclaire (custom drop)
             { itemid = 18047, droprate = 188 }, -- Havoc Scythe
             { itemid = 17939, droprate =  27 }, -- Kriegsbeil
             { itemid = 17937, droprate = 170 }, -- Leopard Axe
@@ -408,7 +408,7 @@ local loot =
             { itemid =  831, droprate = 149 }, -- Square Of Shining Cloth
         },
     },
-	
+    
     -- BCNM Royal Jelly
     [77] =
     {
@@ -466,7 +466,7 @@ local loot =
             { itemid = 4174, droprate =  10 }, -- Vile Elixer
             { itemid = 4172, droprate =   2 }, -- Reraiser
         },
-    },	
+    },    
 
     -- BCNM The Final Bout
     [78] =
@@ -657,13 +657,13 @@ local loot =
         { itemid =  1132, droprate =  200 }, -- Square of Raxa
     },
 },
-	
+    
     -- KSNM Operation Desert Swarm
     [81] =
     {
         {
             { itemid =  1474, droprate = 1000 }, -- Infinity Core (custom drop)
-		},
+        },
         {
             { itemid =  1473, droprate =  813 }, -- High-quality Scorpion Shell
             { itemid = 13552, droprate =   55 }, -- Serket Ring
