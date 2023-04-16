@@ -252,7 +252,7 @@ local battlefields =
         { 13,   13, 1177 },   -- Eye of the Tiger (BS50) -- TODO: Crossthrash mobskill
     --  { 14,   14, 1130 },   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
         { 15,   15, 1175 },   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
-    --  { 16,   16, 1178 },   -- Today's Horoscope (KS30)
+        { 16,   16, 1178 },   -- Today's Horoscope (KS30)
         { 17,   17, 1180 },   -- Contaminated Colosseum (KS30)
     --  { 18,   18, 3351 },   -- Kindergarten Cap (KC30)
     --  { 19,   19, 3352 },   -- Last Orc-Shunned Hero (KC50)
@@ -291,11 +291,11 @@ local battlefields =
     --  { 10,   74, 1551 },   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
         { 11,   75, 1552 },   -- Grove Guardians (BS30)
         { 12,   76, 1553 },   -- The Hills are Alive (KS99) -- TODO: Tartaruga Gigante is not coded
-    --  { 13,   77, 1131 },   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
+        { 13,   77, 1131 },   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
     --  { 14,   78, 1177 },   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
         { 15,   79, 1130 },   -- Up in Arms (BS60)
-    --  { 16,   80, 1175 },   -- Copycat (KS30)
-    --  { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
+        { 16,   80, 1175 },   -- Copycat (KS30)
+        { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
     --  { 18,   82, 1180 },   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
     --  { 19,   83, 3351 },   -- The Palborough Project (KC30)
     --  { 20,   84, 3352 },   -- Shell Shocked (KC50)
@@ -322,7 +322,7 @@ local battlefields =
         {  8,  104, 1552 },   -- Creeping Doom (BS30)
         {  9,  105, 1551 },   -- Charming Trio (BS20)
         { 10,  106, 1552 },   -- Harem Scarem (BS30)
-    --  { 11,  107, 1553 },   -- Early Bird Catches the Wyrm (KS99)
+        { 11,  107, 1553 },   -- Early Bird Catches the Wyrm (KS99)
         { 12,  108, 1131 },   -- Royal Succession (BS40)
         { 13,  109, 1177 },   -- Rapid Raptors (BS50)
         { 14,  110, 1130 },   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
@@ -380,9 +380,9 @@ local battlefields =
         {  2,  194, 1437 },   -- Shattering Stars (SAM LB5)
         {  3,  195, 1438 },   -- Shattering Stars (NIN LB5)
         {  4,  196, 1439 },   -- Shattering Stars (DRG LB5)
-    --  {  5,  197, 1175 },   -- Cactuar Suave (KS30)
+        {  5,  197, 1175 },   -- Cactuar Suave (KS30)
         {  6,  198, 1178 },   -- Eye of the Storm (KS30)
-    --  {  7,  199, 1180 },   -- The Scarlet King (KS30)
+        {  7,  199, 1180 },   -- The Scarlet King (KS30)
     --  {  8,  200,    0 },   -- Roar! A Cat Burglar Bares Her Fangs (MKD10)
     --  {  9,  201, 3352 },   -- Dragon Scales (KC50)
     --  { 10,    ?, 4063 },   -- *Legion XI Comitatensis (SKC20)

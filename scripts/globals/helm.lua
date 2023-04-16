@@ -63,10 +63,10 @@ local helmInfo =
                     {  860, 2156 }, -- Imperial Tea Leaves
                     {  470, 1845 }, -- Red Moko Grass
                     {  430, 1524 }, -- Fresh Mugwort
+                    {  250,  5964 }, -- Felicifruit
                     {  240,  951 }, -- Wijnruit
                     {  120, 4273 }, -- Kitron
                 },
-
                 points =
                 {
                     { -672.000,  -9.000,  -98.000 },
@@ -105,9 +105,9 @@ local helmInfo =
                     {  460, 1524 }, -- Fresh Mugwort
                     {  370,  951 }, -- Wijnruit
                     {  360, 2645 }, -- Eastern Ginger
+                    {  250,  5964 }, -- Felicifruit
                     {  120, 4273 }, -- Kitron
                 },
-
                 points =
                 {
                     { 146.059, -16.499,  338.636 },  -- (R)G-8
@@ -218,6 +218,7 @@ local helmInfo =
                     { 2000, 4374 }, -- Sleepshroom
                     {  700, 4447 }, -- Scream Fungus
                     {  700, 4448 }, -- Puffball
+                    {  500, 5680 }, -- Agaricus
                     {  300, 4386 }, -- King Truffle
                     {  300, 1983 }, -- Mushroom Locust
                 },
@@ -239,6 +240,7 @@ local helmInfo =
                     { 2000, 4374 }, -- Sleepshroom
                     {  700, 4447 }, -- Scream Fungus
                     {  700, 4450 }, -- Coral Fungus
+                    {  500, 5680 }, -- Agaricus
                     {  300, 4449 }, -- Reishi Mushroom
                     {  300, 1983 }, -- Mushroom Locust
                 },
@@ -633,6 +635,7 @@ local helmInfo =
                     { 1430,  691 }, -- Maple Log
                     { 1270, 5661 }, -- Walnut
                     {  850,  694 }, -- Chestnut Log
+                    { 1000, 4274 }, -- Persikos
                     { 1000,  639 }, -- Ronfaure Chestnut
                     {  760,  693 }, -- Walnut Log
                     {  490,  574 }, -- Fruit Seeds
@@ -660,6 +663,7 @@ local helmInfo =
                     { 1540,  693 }, -- Walnut Log
                     { 1140,  688 }, -- Arrowwood Log
                     { 1090,  698 }, -- Ash Log
+                    {  890, 4274 }, -- Persikos
                     {  860,  699 }, -- Oak Log
                     {  860,  695 }, -- Willow Log
                     {  510, 4504 }, -- Acorn
@@ -686,6 +690,7 @@ local helmInfo =
                     { 2230,  5650 }, -- Nopales
                     { 1650,  5662 }, -- Dragon Fruit
                     { 1490,   847 }, -- Bird Feather
+                    { 1270,  4274 }, -- Persikos
                     { 1250,  4570 }, -- Bird Egg
                     {  170,  1236 }, -- Cactus Stems
                     {   50, 18175 }, -- Optical Needle
@@ -852,6 +857,7 @@ local helmInfo =
                     { 1190,  689 }, -- Lauan Log
                     { 1190,  940 }, -- Revival Tree Root
                     {  950,  731 }, -- Aquilaria Log
+                    {  950, 4274 }, -- Persikos
                     {  480,  912 }, -- Beehive Chip
                     {  480, 1237 }, -- Tree Cuttings
                     {  100, 5662 }, -- Dragon Fruit
@@ -877,6 +883,7 @@ local helmInfo =
                     { 2220,  688 }, -- Arrowwood Log
                     { 2220,  721 }, -- Rattan Lumber
                     { 1130,  689 }, -- Lauan Log
+                    {  800, 4274 }, -- Persikos
                     {  780,  912 }, -- Beehive Chip
                     {  650,  923 }, -- Dryad Root
                     {  650, 5908 }, -- Butterpear
