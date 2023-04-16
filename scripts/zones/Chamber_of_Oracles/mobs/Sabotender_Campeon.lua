@@ -56,9 +56,10 @@ entity.onMobFight = function(mob, target)
     local bfNum = mob:getBattlefield():getArea()
     local dest = mob:getLocalVar("target")
 
-    if 
-        mob:getLocalVar("runTimer") < os.time() and 
-        mob:getLocalVar("control") == 0 then
+    if
+        mob:getLocalVar("runTimer") < os.time() and
+        mob:getLocalVar("control") == 0
+    then
         mob:setLocalVar("control", 1)
         mob:setLocalVar("needleControl", 0)
         mob:timer(1000 * math.random(30, 45), function(mobArg)
@@ -72,7 +73,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("target", math.random(1, 5))
             dest = mob:getLocalVar("target")
         end
-        
+
         mob:pathThrough(destinations[bfNum][dest], xi.path.flag.SCRIPT)
     elseif mob:getLocalVar("needleControl") == 0 and mob:checkDistance(target) < 10 then
         mob:setLocalVar("needleControl", 1)

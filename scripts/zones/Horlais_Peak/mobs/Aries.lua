@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
         mob:hasStatusEffect(xi.effect.SLEEP_II) or
         mob:hasStatusEffect(xi.effect.LULLABY)
     then
-        mob:setMod(xi.mod.REGEN, math.random(50,150))
+        mob:setMod(xi.mod.REGEN, math.random(50, 150))
         mob:setMod(xi.mod.REGAIN, 500)
     end
 
@@ -58,7 +58,7 @@ entity.onMobFight = function(mob, target)
             mobArg:setLocalVar("twohour_tp", mob:getTP())
             mobArg:useMobAbility(404)
             mob:addStatusEffect(xi.effect.HASTE, 25, 0, 30)
-        `end
+        end
     end)
 end
 

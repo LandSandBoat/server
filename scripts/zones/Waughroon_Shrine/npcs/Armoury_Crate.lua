@@ -408,7 +408,7 @@ local loot =
             { itemid =  831, droprate = 149 }, -- Square Of Shining Cloth
         },
     },
-    
+
     -- BCNM Royal Jelly
     [77] =
     {
@@ -466,7 +466,7 @@ local loot =
             { itemid = 4174, droprate =  10 }, -- Vile Elixer
             { itemid = 4172, droprate =   2 }, -- Reraiser
         },
-    },    
+    },
 
     -- BCNM The Final Bout
     [78] =
@@ -657,7 +657,7 @@ local loot =
         { itemid =  1132, droprate =  200 }, -- Square of Raxa
     },
 },
-    
+
     -- KSNM Operation Desert Swarm
     [81] =
     {

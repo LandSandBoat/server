@@ -58,7 +58,7 @@ local function getDistanceFromCenter(bfNum, mob)
     local difY = pos.y - centers[bfNum][2]
     local difZ = pos.z - centers[bfNum][3]
 
-    return math.sqrt( math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2))
+    return math.sqrt(math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2))
 end
 
 local function allJellysInCenter(bfNum)

@@ -6254,5 +6254,5 @@ xi.items =
     BOTTLE_OF_CHAMPIONS_DRINK       = 5392,
     FLASK_OF_STRANGE_MILK           = 5437,
     BOTTLE_OF_STRANGE_JUICE         = 5438,
-    DUSTY_ETHER                     = 5432,  
+    DUSTY_ETHER                     = 5432,
 }
