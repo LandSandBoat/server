@@ -405,7 +405,7 @@ local loot =
     [11] =
     {
         {
-		    { itemid = 13556, droprate =  50 }, -- Defending Ring (custom drop)
+            { itemid = 13556, droprate =  50 }, -- Defending Ring (custom drop)
             { itemid =  1441, droprate = 169 }, -- Libation Abjuration
             { itemid = 17939, droprate = 268 }, -- Kriegsbeil
             { itemid = 17823, droprate =  99 }, -- Shinsoku
@@ -781,7 +781,7 @@ local loot =
         },
         {
             { itemid =  1474, droprate = 1000 }, -- Infinity Core (custom drop)
-		},
+        },
         {
             { itemid = 18053, droprate =  222 }, -- Gravedigger
             { itemid = 18097, droprate =  302 }, -- Gondo-Shizunori
@@ -836,7 +836,7 @@ local loot =
             { itemid = 1110, droprate =  41 },   -- Vial Of Black Beetle Blood
         },
     },
-	
+    
     -- KSNM Contaminated Colosseum
     [17] =
     {
