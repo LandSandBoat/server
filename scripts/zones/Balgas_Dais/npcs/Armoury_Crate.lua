@@ -412,7 +412,7 @@ local loot =
         },
 
         {
-			{ itemid = 16555, droprate =  50 }, -- Ridill (custom drop)
+            { itemid = 16555, droprate =  50 }, -- Ridill (custom drop)
             { itemid =  1441, droprate = 312 }, -- Libation Abjuration
             { itemid = 17694, droprate = 182 }, -- Guespiere
             { itemid = 18047, droprate =  65 }, -- Havoc Scythe
