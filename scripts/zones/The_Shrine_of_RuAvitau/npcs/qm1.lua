@@ -9,7 +9,11 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1195, 1) and trade:getItemCount() == 1 then -- Trade Ro'Maeve Water
+    if
+        npc:getStatus() == xi.status.NORMAL and
+        trade:hasItemQty(1195, 1) and
+        trade:getItemCount() == 1
+    then -- Trade Ro'Maeve Water
         for i = ID.mob.OLLAS_OFFSET, ID.mob.OLLAS_OFFSET + 2 do
             if GetMobByID(i):isSpawned() then
                 return

@@ -137,8 +137,10 @@ xi.dynamis.onSpawnYing = function(mob)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
-            dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
-            dynaLord:setMod(xi.mod.UDMGBREATH, -100)
+            dynaLord:setMod(xi.mod.UDMGPHYS, -1000)
+            dynaLord:setMod(xi.mod.UDMGRANGE, -1000)
+            dynaLord:setMod(xi.mod.UDMGMAGIC, -1000)
+            dynaLord:setMod(xi.mod.UDMGBREATH, -1000)
             dynaLord:setLocalVar("magImmune", 0)
         end
     end
@@ -152,8 +154,10 @@ xi.dynamis.onSpawnYang = function(mob)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
-            dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
-            dynaLord:setMod(xi.mod.UDMGBREATH, -100)
+            dynaLord:setMod(xi.mod.UDMGPHYS, -1000)
+            dynaLord:setMod(xi.mod.UDMGRANGE, -1000)
+            dynaLord:setMod(xi.mod.UDMGMAGIC, -1000)
+            dynaLord:setMod(xi.mod.UDMGBREATH, -1000)
             dynaLord:setLocalVar("magImmune", 0)
         end
     end
@@ -349,6 +353,8 @@ xi.dynamis.onDeathYing = function(mob, player, optParams)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") == 0 then
+            dynaLord:setMod(xi.mod.UDMGPHYS, 0)
+            dynaLord:setMod(xi.mod.UDMGRANGE, 0)
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
             if dynaLord:getLocalVar("physImmune") == 1 then -- other dragon is also dead
@@ -378,6 +384,8 @@ xi.dynamis.onDeathYang = function(mob, player, optParams)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("physImmune") == 0 then
+            dynaLord:setMod(xi.mod.UDMGPHYS, 0)
+            dynaLord:setMod(xi.mod.UDMGRANGE, 0)
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
             if dynaLord:getLocalVar("magImmune") == 1 then -- other dragon is also dead

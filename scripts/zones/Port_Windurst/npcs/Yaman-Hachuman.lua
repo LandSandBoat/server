@@ -15,7 +15,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
     if
@@ -23,10 +22,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatWindurst, 16)
     then
         player:startEvent(624)
-    elseif wonderWands == QUEST_ACCEPTED then
-        player:startEvent(256, 0, 0, 0, 17061)
-    elseif wonderWands == QUEST_COMPLETED then
-        player:startEvent(268)
     else
         player:startEvent(233)
     end

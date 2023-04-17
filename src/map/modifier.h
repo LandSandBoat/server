@@ -264,21 +264,22 @@ enum class Mod
     FOOD_DURATION = 937, // Percentage to increase food duration
 
     // Killer-Effects - (Most by Traits/JobAbility)
-    VERMIN_KILLER   = 224, // Enhances "Vermin Killer" effect
-    BIRD_KILLER     = 225, // Enhances "Bird Killer" effect
-    AMORPH_KILLER   = 226, // Enhances "Amorph Killer" effect
-    LIZARD_KILLER   = 227, // Enhances "Lizard Killer" effect
-    AQUAN_KILLER    = 228, // Enhances "Aquan Killer" effect
-    PLANTOID_KILLER = 229, // Enhances "Plantiod Killer" effect
-    BEAST_KILLER    = 230, // Enhances "Beast Killer" effect
-    UNDEAD_KILLER   = 231, // Enhances "Undead Killer" effect
-    ARCANA_KILLER   = 232, // Enhances "Arcana Killer" effect
-    DRAGON_KILLER   = 233, // Enhances "Dragon Killer" effect
-    DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
-    EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
-    HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
-    LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
+    VERMIN_KILLER            = 224,  // Enhances "Vermin Killer" effect
+    BIRD_KILLER              = 225,  // Enhances "Bird Killer" effect
+    AMORPH_KILLER            = 226,  // Enhances "Amorph Killer" effect
+    LIZARD_KILLER            = 227,  // Enhances "Lizard Killer" effect
+    AQUAN_KILLER             = 228,  // Enhances "Aquan Killer" effect
+    PLANTOID_KILLER          = 229,  // Enhances "Plantiod Killer" effect
+    BEAST_KILLER             = 230,  // Enhances "Beast Killer" effect
+    UNDEAD_KILLER            = 231,  // Enhances "Undead Killer" effect
+    ARCANA_KILLER            = 232,  // Enhances "Arcana Killer" effect
+    DRAGON_KILLER            = 233,  // Enhances "Dragon Killer" effect
+    DEMON_KILLER             = 234,  // Enhances "Demon Killer" effect
+    EMPTY_KILLER             = 235,  // Enhances "Empty Killer" effect
+    HUMANOID_KILLER          = 236,  // Enhances "Humanoid Killer" effect
+    LUMORIAN_KILLER          = 237,  // Enhances "Lumorian Killer" effect
+    LUMINION_KILLER          = 238,  // Enhances "Luminion Killer" effect
+    WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
     // Resistances to enfeebles - Traits/Job Ability
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
@@ -502,6 +503,7 @@ enum class Mod
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    SPIRIT_SPELLCAST_DELAY    = 1179, // Reduces the time between spellcasts of a summoned spirit by seconds provided
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -776,7 +778,7 @@ enum class Mod
     ITEM_ADDEFFECT_STATUS   = 951,  // Status Effect ID to try to apply via Additional Effect or Spikes
     ITEM_ADDEFFECT_POWER    = 952,  // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
     ITEM_ADDEFFECT_DURATION = 953,  // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_OPTION   = 1178, // Additional parameters for more specific latents required to proc
+    ITEM_ADDEFFECT_OPTION   = 1180, // Additional parameters for more specific latents required to proc
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -969,8 +971,6 @@ enum class Mod
     VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
     PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
 
-    WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
-
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -983,7 +983,7 @@ enum class Mod
     // 192 to 223
     // 261 to 280
     //
-    // SPARE = 1179, and onward
+    // SPARE = 1181, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

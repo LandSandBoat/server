@@ -15,18 +15,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and
-        player:getCharVar("RubbishDayVar") == 0
-    then
-        player:startEvent(11, 1) -- For the quest "Rubbish day"
-    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.BROKEN_WAND) then
-            player:startEvent(11, 3)
-        else player:startEvent(11, 0) -- Making Amens dialogue
-        end
+    -- Note: You cannot simply Tractor through the door.
+    -- https://ffxiclopedia.fandom.com/wiki/Making_Amens!
+    -- https://ffxiclopedia.fandom.com/wiki/Rubbish_Day
+    if player:getLocalVar('hatchOpened') == 0 then
+        return
+    end
+
+    local rubbishDay =  player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0
+
+    if rubbishDay then
+        player:startEvent(11, 1)
     else
-        player:startEvent(11, 3) -- Standard dialog and menu
+        player:startEvent(11, 3)
     end
 end
 
@@ -35,14 +36,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     local rubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     if csid == 11 and option == 1 and rubbishDay == QUEST_ACCEPTED then
         player:delKeyItem(xi.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDayVar", 1)
-    elseif csid == 11 and option == 0 and makingAmens == QUEST_ACCEPTED then
-        player:addKeyItem(xi.ki.BROKEN_WAND) --Broken Wand
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BROKEN_WAND)
-        player:tradeComplete()
     end
 end
 

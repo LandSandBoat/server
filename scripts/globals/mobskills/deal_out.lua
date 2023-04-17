@@ -27,11 +27,15 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 2, 2.5, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
-        mob:resetEnmity(target)
+    if not skill:hasMissMsg() then
+        -- If this move is fully absorbed by shadows - should it still reset hate?
+        if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+            mob:resetEnmity(target)
+        end
+
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end
 

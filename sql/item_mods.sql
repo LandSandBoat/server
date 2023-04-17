@@ -25526,10 +25526,11 @@ INSERT INTO `item_mods` VALUES (15130,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15130,363,10); -- HIGH_JUMP_ENMITY_REDUCTION: 10
 
 -- Summoners Spats
-INSERT INTO `item_mods` VALUES (15131,1,29);  -- DEF: 29
-INSERT INTO `item_mods` VALUES (15131,5,20);  -- MP: 20
-INSERT INTO `item_mods` VALUES (15131,13,3);  -- MND: 3
-INSERT INTO `item_mods` VALUES (15131,357,2); -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15131,1,29);   -- DEF: 29
+INSERT INTO `item_mods` VALUES (15131,5,20);   -- MP: 20
+INSERT INTO `item_mods` VALUES (15131,13,3);   -- MND: 3
+INSERT INTO `item_mods` VALUES (15131,357,2);  -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15131,1179,5); -- Spirit Spellcast Delay Reduction
 
 -- Warriors Calligae
 INSERT INTO `item_mods` VALUES (15132,1,19); -- DEF: 19
@@ -27827,9 +27828,10 @@ INSERT INTO `item_mods` VALUES (15593,9,6);    -- DEX: 6
 INSERT INTO `item_mods` VALUES (15593,363,10); -- HIGH_JUMP_ENMITY_REDUCTION: 10
 
 -- Summoners Spats +1
-INSERT INTO `item_mods` VALUES (15594,1,30);  -- DEF: 30
-INSERT INTO `item_mods` VALUES (15594,5,25);  -- MP: 25
-INSERT INTO `item_mods` VALUES (15594,357,2); -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15594,1,30);   -- DEF: 30
+INSERT INTO `item_mods` VALUES (15594,5,25);   -- MP: 25
+INSERT INTO `item_mods` VALUES (15594,357,2);  -- BP_DELAY: 2
+INSERT INTO `item_mods` VALUES (15594,1179,5); -- Spirit Spellcast Delay Reduction
 
 -- Hydra Brais
 INSERT INTO `item_mods` VALUES (15595,1,32);  -- DEF: 32
