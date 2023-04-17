@@ -3266,7 +3266,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
                     {
                         const char* fmtQuery = "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
-                                               "AND stack = %u AND price <= %u ORDER BY price, date LIMIT 1";
+                                               "AND stack = %u AND price <= %u ORDER BY price, date DESC LIMIT 1";
 
                         if (sql->Query(fmtQuery, PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price) != SQL_ERROR &&
                             sql->AffectedRows() != 0)
@@ -5596,13 +5596,17 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->PMeritPoints->IsMeritExist(merit))
                 {
+                    const Merit_t* PMerit = PChar->PMeritPoints->GetMerit(merit);
+
                     switch (operation)
                     {
                         case 0:
                             PChar->PMeritPoints->LowerMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_DECREASE));
                             break;
                         case 1:
                             PChar->PMeritPoints->RaiseMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_INCREASE));
                             break;
                     }
                     PChar->pushPacket(new CMenuMeritPacket(PChar));

@@ -18,7 +18,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.physicalTpBonus.DMG_VARIES, 2, 2.5, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    end
 
     local typeEffect = xi.effect.PETRIFICATION
 

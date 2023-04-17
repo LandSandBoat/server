@@ -27,7 +27,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 60)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    end
+
     return dmg
 end
 

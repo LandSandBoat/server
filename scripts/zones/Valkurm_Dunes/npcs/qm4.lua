@@ -46,7 +46,10 @@ entity.onTrade = function(player, npc, trade)
     elseif player:checkSoloPartyAlliance() == 2 then
         player:messageSpecial(ID.text.ALLIANCE_NOT_ALLOWED, 0)
     else
-        if npcUtil.tradeHasExactly(trade, xi.items.PIRATES_CHART) then
+        if
+            npc:getStatus() == xi.status.NORMAL and
+            npcUtil.tradeHasExactly(trade, xi.items.PIRATES_CHART)
+        then
             player:messageSpecial(ID.text.RETURN_TO_SEA, xi.items.PIRATES_CHART)
             player:startEvent(14, 0, 0, 0, 3)
         end
@@ -87,7 +90,6 @@ entity.onEventFinish = function(player, csid, option, npc)
     }
 
     local function rangeChecking(spawnNpc, spawnerID, timeToMobSpawn, timeOfLastCheck, wasInRangeLastCheck, timeOutOfRangeLastMsg)
-
         local spawner = GetPlayerByID(spawnerID)
         -- spawner does not meet some condition so can stop checking
         -- so will not spawn mobs in any case
@@ -139,13 +141,34 @@ entity.onEventFinish = function(player, csid, option, npc)
         rangeChecking(npc, playerID, 50000, ServerEpochTimeMS(), true, 0)
 
         -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
-        panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
-        panictaru:timer(23000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.HURRY_UP) end)
-        panictaru:timer(33000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.ITS_COMING) end)
-        panictaru:timer(43000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.THREE_OF_THEM)  end)
-        panictaru:timer(45000, function(taru) npc:showText(npc, ID.text.NOOOOO) end)
-        panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false) end)
-        panictaru:timer(50000, function(taru) taru:setStatus(xi.status.DISAPPEAR) taru:entityAnimationPacket("stnd") end)
+        panictaru:timer(3000 , function(taru)
+            taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT)
+        end)
+
+        panictaru:timer(23000, function(taru)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.HURRY_UP)
+        end)
+
+        panictaru:timer(33000, function(taru)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.ITS_COMING)
+        end)
+
+        panictaru:timer(43000, function(taru)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.THREE_OF_THEM)
+        end)
+
+        panictaru:timer(45000, function(taru)
+            npc:showText(npc, ID.text.NOOOOO)
+        end)
+
+        panictaru:timer(45000, function(taru)
+            taru:entityAnimationPacket("dead") taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false)
+        end)
+
+        panictaru:timer(50000, function(taru)
+            taru:setStatus(xi.status.DISAPPEAR) taru:entityAnimationPacket("stnd")
+        end)
+
         npc:timer(50000,
         function(npcArg)
             local spawner = GetPlayerByID(playerID)
@@ -169,12 +192,14 @@ entity.onEventFinish = function(player, csid, option, npc)
                     if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                         member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
                     end
+
                     member:changeMusic(0, 0)
                     member:changeMusic(1, 0)
                     member:changeMusic(2, 101)
                     member:changeMusic(3, 102)
                     member:setLocalVar("Chart", 0)
                 end
+
                 -- time limit of 10 mins (600 seconds)
                 , { timeLimit = 600,
                 validPlayerFunc = function(member)
@@ -185,7 +210,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     else
                         return false
                     end
-                 end,
+                end,
+
                 -- give all registered players in confrontation emnity
                 allRegPlayerEnmity = true }
                 )

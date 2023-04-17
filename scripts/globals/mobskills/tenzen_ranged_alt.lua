@@ -19,16 +19,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, 0)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
-    local msg = skill:getMsg()
-    if
-        dmg > 0 and
-        msg ~= xi.msg.basic.SHADOW_ABSORB
-    then
+
+    if not skill:hasMissMsg() then
         target:addTP(20)
         mob:addTP(80)
-    end
-
-    if msg ~= xi.msg.basic.SHADOW_ABSORB then
         target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     end
 

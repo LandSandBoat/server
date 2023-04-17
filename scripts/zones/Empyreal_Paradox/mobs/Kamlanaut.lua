@@ -17,6 +17,19 @@ local skillToAbsorb =
     [828] = xi.mod.WATER_ABSORB, -- water_blade
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
+    mob:setMod(xi.mod.MDEF, 380)
+    mob:addMod(xi.mod.ATT, 100)
+    mob:addMod(xi.mod.DEF, 170)
+    mob:addMod(xi.mod.REFRESH, 100)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+end
+
 entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("nextEnSkill", os.time() + 10)
 end

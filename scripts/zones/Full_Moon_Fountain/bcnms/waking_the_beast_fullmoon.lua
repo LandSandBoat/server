@@ -10,7 +10,7 @@ require('scripts/globals/npc_util')
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
 local loot =
 {
@@ -23,22 +23,22 @@ local loot =
     xi.items.RAMUHS_MACE,
 }
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("carbuncleHP", 20000)
     battlefield:setLocalVar("phase", 1)
 end
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) and 1 or 0
@@ -49,22 +49,24 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
 
             -- Loot has 3 chances to drop. The droprates are as follows: 40% -> 20% -> 10%
             for i = 1, 3 do
-                if math.random(1,100) < lootChance then
-                    player:addTreasure(loot[math.random(1,7)])
+                if math.random(1, 100) < lootChance then
+                    player:addTreasure(loot[math.random(1, 7)])
                 end
+
                 lootChance = lootChance / 2
             end
         end
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
     -- Only award players with faded ruby if they have appropriately
     -- progressed through all battlefields.
     if csid == 32001 then
@@ -91,6 +93,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
             for i = 0, 7 do
                 player:delKeyItem(xi.ki.key[i])
             end
+
             npcUtil.giveKeyItem(player, xi.ki.FADED_RUBY)
             if option == 0 then
                 player:setCharVar("Quest[4][32]Option", 1)
@@ -101,4 +104,4 @@ battlefield_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return battlefield_object
+return battlefieldObject

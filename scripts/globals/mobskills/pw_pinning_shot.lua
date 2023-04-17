@@ -32,7 +32,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BIND
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 30)
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    end
 
     return dmg
 end

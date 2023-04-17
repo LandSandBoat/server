@@ -19,7 +19,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local attmod = 1.5
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.physicalTpBonus.CRIT_VARIES, 2, 2.5, 3, 0, attmod)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    end
+
     return dmg
 end
 

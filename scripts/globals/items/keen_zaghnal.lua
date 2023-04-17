@@ -19,7 +19,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ACCURACY_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.KEEN_ZAGHNAL)
+    if target:hasEquipped(xi.items.KEEN_ZAGHNAL) then
+        target:addStatusEffect(xi.effect.ACCURACY_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.KEEN_ZAGHNAL)
+    end
 end
 
 return itemObject

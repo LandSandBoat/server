@@ -27,7 +27,10 @@ local function openFlower(mob)
     mob:setMod(xi.mod.SLASH_SDT, 2000)
     mob:setMod(xi.mod.PIERCE_SDT, 2000)
     mob:setMod(xi.mod.IMPACT_SDT, 2000)
-    mob:setMod(xi.mod.UDMG, 5000) -- Takes double damage from all sources when open
+    mob:setMod(xi.mod.UDMGMAGIC, 5000) -- Takes double damage from all sources when open
+    mob:setMod(xi.mod.UDMGPHYS, 5000) -- Takes double damage from all sources when open
+    mob:setMod(xi.mod.UDMGRANGE, 5000) -- Takes double damage from all sources when open
+    mob:setMod(xi.mod.UDMGBREATH, 5000) -- Takes double damage from all sources when open
     mob:setAnimationSub(2)
 end
 
@@ -41,8 +44,10 @@ local function closeFlower(mob)
     mob:setMod(xi.mod.SLASH_SDT, 1000)
     mob:setMod(xi.mod.PIERCE_SDT, 1000)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
-    mob:setMod(xi.mod.UDMG, 0) -- Takes predicted damage when open
-
+    mob:setMod(xi.mod.UDMGMAGIC, 0) -- Takes predicted damage when open
+    mob:setMod(xi.mod.UDMGPHYS, 0) -- Takes predicted damage when open
+    mob:setMod(xi.mod.UDMGRANGE, 0) -- Takes predicted damage when open
+    mob:setMod(xi.mod.UDMGBREATH, 0) -- Takes predicted damage when open
     mob:setLocalVar("[euvhi]changeTime", mob:getBattleTime() + 80) -- Flower will open after 80 seconds
     mob:setAnimationSub(1)
 end

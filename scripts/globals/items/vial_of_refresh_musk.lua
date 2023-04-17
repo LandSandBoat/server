@@ -21,7 +21,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.REFRESH, 3, 3, 60, 0, 0, 0, xi.items.VIAL_OF_REFRESH_MUSK)
+    if target:hasEquipped(xi.items.VIAL_OF_REFRESH_MUSK) then
+        target:addStatusEffect(xi.effect.REFRESH, 3, 3, 60, 0, 0, 0, xi.items.VIAL_OF_REFRESH_MUSK)
+    end
 end
 
 return itemObject
