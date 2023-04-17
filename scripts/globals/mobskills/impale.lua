@@ -29,12 +29,18 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
         typeEffect = xi.effect.POISON
-        mob:resetEnmity(target)
+
+        if not skill:hasMissMsg() then
+            mob:resetEnmity(target)
+        end
     end
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, shadows)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 0, 120)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    end
 
     return dmg
 end

@@ -3368,6 +3368,28 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 }
 
 /************************************************************************
+ *  Function: hasEquipped(equipmentID)
+ *  Purpose : Returns true if the player has the item equipped in any slot
+ *  Example : player:hasEquipped(xi.items.BREATH_MANTLE)
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEquipped(uint16 equipmentID)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        for (uint8 equipmentSlot = 0; equipmentSlot <= 15; equipmentSlot++)
+        {
+            if (getEquipID((SLOTTYPE)equipmentSlot) == equipmentID)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/************************************************************************
  *  Function: hasItem()
  *  Purpose : Returns true if a player possesses an item
  *  Example : if player:hasItem(500) then -- Second var optional
@@ -11008,10 +11030,10 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Function: getStatusEffect()
  *  Purpose : Returns the Object of a specified Status ID
  *  Example : local debilitation = target:getStatusEffect(xi.effect.DEBILITATION)
- *  Notes   :
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -11028,6 +11050,11 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
     {
         auto uint16_SubID = SubID.as<uint16>();
         PStatusEffect     = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
+    }
+    else if (ItemSourceID != sol::lua_nil)
+    {
+        auto uint16_ItemSourceID = ItemSourceID.as<uint16>();
+        PStatusEffect            = PBattleEntity->StatusEffectContainer->GetStatusEffectByItemSource(effect_StatusID, uint16_ItemSourceID);
     }
     else
     {
@@ -11188,12 +11215,13 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Function: delStatusEffect()
  *  Purpose : Deletes a specified Effect from the Entity's Status Effect Container
  *  Example : target:delStatusEffect(xi.effect.RERAISE)
- *  Notes   : Can specify Power of the Effect as an option
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    XI_DEBUG_BREAK_IF(SubID != sol::lua_nil && ItemSourceID != sol::lua_nil);
 
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
@@ -11209,6 +11237,11 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
     {
         auto uint16_SubID = SubID.as<uint16>();
         result            = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
+    }
+    else if (ItemSourceID != sol::lua_nil)
+    {
+        auto uint16_ItemSourceID = ItemSourceID.as<uint16>();
+        result                   = PBattleEntity->StatusEffectContainer->DelStatusEffectByItemSource(effect_StatusID, uint16_ItemSourceID);
     }
     else
     {
@@ -12071,7 +12104,7 @@ int CLuaBaseEntity::getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::objec
 
     if (xirand::GetRandomNumber(100) < hitrate)
     {
-        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f, SLOT_MAIN, 0, false);
+        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 1.f, SLOT_MAIN, 0, false);
         int   damage      = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PDefender, SLOT_MAIN)) * DamageRatio);
 
         return damage;
@@ -13509,6 +13542,7 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         PMob->SetMLevel(level);
+        PMob->SetSLevel(level);
         mobutils::CalculateMobStats(PMob);
         mobutils::GetAvailableSpells(PMob);
     }
@@ -15822,6 +15856,7 @@ void CLuaBaseEntity::Register()
     // Items
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     SOL_REGISTER("getEquippedItem", CLuaBaseEntity::getEquippedItem);
+    SOL_REGISTER("hasEquipped", CLuaBaseEntity::hasEquipped);
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);

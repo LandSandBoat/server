@@ -20,8 +20,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 2.5, 2.75, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 15, 0, 120)
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    if not skill:hasMissMsg() then
+        target:addStatusEffect(xi.effect.EVASION_DOWN, 15, 0, 120)
+        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    end
+
     return dmg
 end
 

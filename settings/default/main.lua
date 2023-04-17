@@ -112,6 +112,7 @@ xi.settings.main =
     BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
     -- Note: EXP rates are also influenced by conf setting
     EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
+    SCROLL_EXP_RATE = 1.000, -- Multiplies exp from single use XP Scrolls (e.g. Miratete's Memoirs).
     BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
     TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
     ROE_EXP_RATE    = 1.000, -- Multiplies exp earned from records of eminence.
@@ -224,6 +225,15 @@ xi.settings.main =
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
     STARLIGHT_2021                  = 0,  -- Set to 1 to enable the 2021 version of the Starlight Celebration. Dec. 16 through Dec. 31.
     STARLIGHT_YEAR_ROUND            = 0,  -- Set to 1 to have the Starlight Celebration initialize outside of normal times.
+    EGGHUNT                         =     -- Egg Hunt Egg-stravanganza
+    {
+        START                       = { DAY =  6, MONTH = 4 },
+        FINISH                      = { DAY = 17, MONTH = 4 },
+        MINOR_REWARDS               = true,  -- Consolation prizes from repeat combos
+        ERA_2007                    = false, -- Jeweled Egg and Egg Helm
+        ERA_2008                    = false, -- Tier 2 nation eggs
+        ERA_2009                    = false, -- Egg Buffet set
+    },
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.

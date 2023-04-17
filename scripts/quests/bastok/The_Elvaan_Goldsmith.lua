@@ -40,14 +40,12 @@ quest.sections =
         },
     },
 
+    -- These functions check the status of ~= QUEST_AVAILABLE to support repeating
+    -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED or
-                (
-                    status == QUEST_COMPLETED and
-                    player:getFameLevel(xi.quest.fame_area.BASTOK) == 1 and
-                    not quest:getMustZone(player)
-                )
+            return status ~= QUEST_AVAILABLE or
+            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER) == QUEST_COMPLETED
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -55,21 +53,26 @@ quest.sections =
             ['Michea'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.COPPER_INGOT) then
+                    if
+                        npcUtil.tradeHasExactly(trade, { { xi.items.COPPER_INGOT, 1 } }) and
+                        not player:needToZone()
+                    then
                         return quest:progressEvent(216)
                     end
                 end,
-
-                onTrigger = quest:event(215),
             },
 
             onEventFinish =
             {
                 [216] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade()
-
-                        quest:setMustZone(player)
+                    player:confirmTrade()
+                    if not player:hasCompletedQuest(quest.areaId, quest.questId) then
+                        quest:complete(player)
+                        player:needToZone(true)
+                    else
+                        player:addFame(xi.quest.fame_area.BASTOK, 5)
+                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
+                        player:needToZone(true)
                     end
                 end,
             },

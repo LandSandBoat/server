@@ -41,6 +41,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:setAnimationSub(3)
 
     -- Cannot be resisted
+    -- intentionally not gated with "if not skill:hasMissMsg() then".  This is thematic npc vs monster
     target:addStatusEffect(xi.effect.TERROR, 0, 0, 20)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)

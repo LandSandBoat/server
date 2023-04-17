@@ -33,6 +33,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    -- Note: You cannot simply Tractor through the door.
+    -- https://ffxiclopedia.fandom.com/wiki/Making_Amens!
+    -- https://ffxiclopedia.fandom.com/wiki/Rubbish_Day
+    if csid == 4 then
+        player:setLocalVar('hatchOpened', 1)
+    end
 end
 
 return entity

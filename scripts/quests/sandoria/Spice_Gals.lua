@@ -135,7 +135,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
                         player:addKeyItem(xi.ki.RIVERNEWORT)
-                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RIVERNWORT)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RIVERNEWORT)
                     end
                 end,
             },
@@ -148,7 +148,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
                         player:addKeyItem(xi.ki.RIVERNEWORT)
-                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RIVERNWORT)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RIVERNEWORT)
                     end
                 end,
             },

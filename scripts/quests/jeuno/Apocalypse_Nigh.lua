@@ -20,7 +20,7 @@ quest.reward =
     title    = xi.title.BREAKER_OF_THE_CHAINS,
 }
 
-local possibleItems =
+quest.possibleItems =
 {
     xi.items.STATIC_EARRING,
     xi.items.MAGNETIC_EARRING,
@@ -29,33 +29,36 @@ local possibleItems =
 }
 
 local function finishProgress(player, option)
-    if npcUtil.giveItem(player, possibleItems[option]) then
-        quest:complete(player)
-    end
+    if npcUtil.giveItem(player, quest.possibleItems[option]) then
+        if quest:complete(player) then
+            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
+            player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
+            player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
+            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
 
-    player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
-    player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
-    player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
-    player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
-    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+            quest:setVar(player, 'Status', 7)
+        end
+    end
 end
 
 local function resetProgress(player, option)
     if option == 1 then
         player:delMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
-        player:delMission(xi.mission.log_id.ZILART, xi.mission.id.cop.THE_LAST_VERSE)
+        player:delMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
         player:setMissionStatus(xi.mission.log_id.ZILART, 3)
-        player:setCharVar("PromathiaStatus", 7)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+
+        quest:setVar(player, 'Status', 0)
     end
 end
 
 local function updateItemEvent(player, option)
     if option == 99 then
-        player:updateEvent(252, possibleItems[1], possibleItems[2], possibleItems[3], possibleItems[4])
+        player:updateEvent(252, quest.possibleItems[1], quest.possibleItems[2], quest.possibleItems[3], quest.possibleItems[4])
     end
 end
 
@@ -198,7 +201,7 @@ quest.sections =
             {
                 [10057] = function(player, csid, option, npc)
                     quest:setVar(player, 'Status', 5)
-                    quest:setVar(player, 'Wait', getVanaMidnight())
+                    quest:setVar(player, 'Wait', getMidnight())
                 end
             },
         },
@@ -210,14 +213,14 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Status') == 5 and
-                        VanadielUniqueDay() >= quest:getVar(player, 'Wait')
+                        quest:getVar(player, 'Wait') < os.time()
                     then
                         return quest:progressEvent(232, 252)
                     end
 
                     if
                         quest:getVar(player, 'Status') == 6 and
-                        VanadielUniqueDay() >= quest:getVar(player, 'Wait')
+                        quest:getVar(player, 'Wait') < os.time()
                     then
                         return quest:progressEvent(234, 252)
                     end
@@ -229,12 +232,11 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Status') == 5 and
-                        quest:getVar(player, 'Wait') > VanadielUniqueDay()
+                        quest:getVar(player, 'Wait') > os.time()
                     then
                         return quest:event(235)
                     end
                 end,
-
             },
 
             onEventUpdate =
@@ -253,14 +255,12 @@ quest.sections =
                 [232] = function(player, csid, option, npc)
                     quest:setVar(player, 'Status', 6)
                     if option >= 1 and option <= 4 then
-                        quest:setVar(player, 'Status', 7)
                         finishProgress(player, option)
                     end
                 end,
 
                 [234] = function(player, csid, option, npc)
                     if option >= 1 and option <= 4 then
-                        quest:setVar(player, 'Status', 7)
                         finishProgress(player, option)
                     end
                 end,
@@ -304,7 +304,6 @@ quest.sections =
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Status', 0)
                     resetProgress(player, option)
                 end,
             },

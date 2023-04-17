@@ -24,7 +24,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: The duration needs verification from retail
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 0, 0, 30)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    end
+
     return dmg
 end
 

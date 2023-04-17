@@ -26,11 +26,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- ~400-450ish at tanking/melee range for a PLD with defender up and earth staff.
     -- ~750 for a DRG/BLU w/o Cocoon up at melee range.
     -- Wiki says 1k, videos were actually less, so trusting videos.
-    local distance = mob:checkDistance(target)
-    distance = utils.clamp(distance, 0, 40)
-    dmg = dmg * ((50 - distance) / 50)
+    if not skill:hasMissMsg() then
+        local distance = mob:checkDistance(target)
+        distance = utils.clamp(distance, 0, 40)
+        dmg = dmg * ((50 - distance) / 50)
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.SLASHING)
+        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.SLASHING)
+    end
+
     return dmg
 end
 

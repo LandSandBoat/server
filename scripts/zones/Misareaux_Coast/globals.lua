@@ -41,7 +41,11 @@ local misareauxGlobal =
     -----------------------------------
     ziphiusOnTrade = function(player, npc, trade)
         local baited = npc:getLocalVar("[Ziphius]Baited") == 1
-        if not baited and npcUtil.tradeHas(trade, xi.items.SLICE_OF_CARP) then
+        if
+            npc:getStatus() == xi.status.NORMAL and
+            not baited and
+            npcUtil.tradeHas(trade, xi.items.SLICE_OF_CARP)
+        then
             npc:setLocalVar("[Ziphius]Bait"..player:getName(), 1)
             npc:setLocalVar("[Ziphius]Baited", 1)
             player:confirmTrade()
