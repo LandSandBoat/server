@@ -200,7 +200,7 @@ int32 lobbydata_parse(int32 fd)
                         // uList is sent through data socket (to bootloader)
                         uint32 uListOffset = 16 * (i + 1);
 
-                        ref<uint32>(uList, uListOffset) = contentId;
+                        ref<uint32>(uList, uListOffset)     = contentId;
                         ref<uint16>(uList, uListOffset + 4) = charIdMain;
                         ref<uint8>(uList, uListOffset + 6)  = worldId;
                         ref<uint8>(uList, uListOffset + 7)  = charIdExtra;

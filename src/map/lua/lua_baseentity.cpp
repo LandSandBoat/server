@@ -3268,8 +3268,8 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0) = sql->GetUIntData(0); // target char
-        ref<uint16>(&buf, 4) = m_PBaseEntity->id;   // warping to target char, their server will send us a zoning message with their pos
+        ref<uint32>(&buf, 0) = sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4) = m_PBaseEntity->id;   // warping to target char, their server will send us a zoning message with their pos
 
         message::send(MSG_SEND_TO_ZONE, &buf[0], sizeof(buf), nullptr);
         found = true;
@@ -3297,8 +3297,8 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0)  = sql->GetUIntData(0); // target char
-        ref<uint16>(&buf, 4)  = 0;                   // wanting to bring target char here so wont give our id
+        ref<uint32>(&buf, 0)  = sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4)  = 0;                   // wanting to bring target char here so wont give our id
         ref<uint16>(&buf, 8)  = m_PBaseEntity->getZone();
         ref<uint16>(&buf, 10) = static_cast<uint16>(m_PBaseEntity->loc.p.x);
         ref<uint16>(&buf, 14) = static_cast<uint16>(m_PBaseEntity->loc.p.y);
