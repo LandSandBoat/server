@@ -50,7 +50,7 @@ class AHPaginationModule : public CPPModule
                 {
                     // This will get wiped on zoning
                     auto currentAHPage = PChar->GetLocalVar("AH_PAGE");
-                    PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % ITEMS_PER_PAGE);
+                    PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % TOTAL_PAGES);
 
                     PChar->m_ah_history.clear();
                     PChar->m_AHHistoryTimestamp = curTick;
