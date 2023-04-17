@@ -766,8 +766,17 @@ void CMobController::Move()
         }
     }
 
-    bool  move         = PMob->PAI->PathFind->IsFollowingPath();
-    float attack_range = PMob->GetMeleeRange();
+    bool  move          = PMob->PAI->PathFind->IsFollowingPath();
+    float attack_range  = PMob->GetMeleeRange();
+    int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
+    float offset        = static_cast<float>(offsetMod) / 10.0f;
+    float closeDistance = attack_range - (offsetMod == 0 ? 0.2f : offset);
+
+    // No going negative on the final value.
+    if (closeDistance < 0.0f)
+    {
+        closeDistance = 0.0f;
+    }
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -789,7 +798,7 @@ void CMobController::Move()
         CMobEntity* posShare = (CMobEntity*)PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_POS) + PMob->targid, TYPE_MOB);
         PMob->loc            = posShare->loc;
     }
-    else if (((currentDistance > attack_range - 0.2f) || move) && PMob->PAI->CanFollowPath())
+    else if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
     {
         // #TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN))
@@ -813,6 +822,7 @@ void CMobController::Move()
                 }
             }
         }
+
         if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
         {
             // attempt to teleport to target (if in range)
@@ -832,16 +842,16 @@ void CMobController::Move()
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     // out of melee range, try to path towards
-                    if (currentDistance > PMob->GetMeleeRange())
+                    if (currentDistance > (offsetMod == 0 ? PMob->GetMeleeRange() : closeDistance))
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
                     }
                 }
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
                 {
                     // try to find path towards target
-                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
+                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
                 }
 
                 PMob->PAI->PathFind->FollowPath(m_Tick);
