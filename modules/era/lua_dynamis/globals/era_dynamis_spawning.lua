@@ -1330,22 +1330,25 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             mob:spawn()
             mob:setSpawn(xPos, yPos, zPos, rPos)
             mob:setLocalVar("Clone", 1)
+            -- do not set zone mobIndex for clones as zone 179 should only be real DL
         elseif mainDynaLord == oMob:getID() and mobName == "Ying" or mobName == "Yang" then
             mob:setSpawn(oMob:getXPos(), oMob:getYPos(), oMob:getZPos(), oMob:getRotPos())
             mob:spawn()
             mob:setSpawn(xPos, yPos, zPos, rPos)
+            zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
         else
             mob:setSpawn(xPos, yPos, zPos, rPos)
             mob:spawn()
+            zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
         end
     else
         mob:setSpawn(xPos, yPos, zPos, rPos)
         mob:spawn()
+        zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
     end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar("MobIndex", mobIndex)
-    zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
     mob:setDropID(xi.dynamis.nmInfoLookup[mobName][4])
     if xi.dynamis.nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(xi.dynamis.nmInfoLookup[mobName][5])
