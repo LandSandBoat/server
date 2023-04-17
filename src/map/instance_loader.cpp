@@ -128,7 +128,7 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_Type        = (uint8)sql->GetIntData(21);
             PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(22);
             PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(23);
-            PMob->m_ModelRadius = (uint8)sql->GetIntData(24);
+            PMob->m_ModelRadius = (float)sql->GetIntData(24);
 
             PMob->speed    = (uint8)sql->GetIntData(25);
             PMob->speedsub = (uint8)sql->GetIntData(25);
