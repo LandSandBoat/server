@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 mixins = { require("scripts/mixins/job_special") }
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -59,11 +60,24 @@ entity.onMobDisengage = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+    local count          = player:getLocalVar("prudenceCount")
+
+    if firstPrudence or secondPrudence then
+        player:setLocalVar("prudenceCount", count + 1)
+    end
+
+    if count >= 2 and player:hasEminenceRecord(770) then
+        xi.roe.onRecordTrigger(player, 770)
+        player:setLocalVar("prudenceCount", 0)
+    end
 end
 
 entity.onMobDespawn = function(mob)
-    local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+
     if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
