@@ -680,8 +680,6 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
         this->SetLocalVar("weaponskillHit", 0);
     }
 
-    // if attack has master, if it has a master -> if its a PC and the enmity containter holds the mob
-
     return addHP(-amount);
 }
 
