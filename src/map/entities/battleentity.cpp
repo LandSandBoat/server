@@ -680,6 +680,15 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
         this->SetLocalVar("weaponskillHit", 0);
     }
 
+    if (getMod(Mod::ABSORB_DMG_TO_MP) > 0)
+    {
+        int16 absorbedMP = (int16)(amount * getMod(Mod::ABSORB_DMG_TO_MP) / 100);
+        if (absorbedMP > 0)
+        {
+            addMP(absorbedMP);
+        }
+    }
+
     return addHP(-amount);
 }
 
