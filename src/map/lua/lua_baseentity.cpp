@@ -14645,16 +14645,18 @@ bool CLuaBaseEntity::itemStolen()
 
 /************************************************************************
  *  Function: getTHlevel()
- *  Purpose : Return mob's current Treasure Hunter tier if alive, or its last if dead.
+ *  Purpose : Return mob's current Treasure Hunter tier
  *  Example : local TH = target:getTHlevel()
  ************************************************************************/
 
 int16 CLuaBaseEntity::getTHlevel()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
-    return PMob->isDead() ? PMob->m_THLvl : PMob->PEnmityContainer->GetHighestTH();
+    if (m_PBaseEntity->objtype == TYPE_MOB)
+    {
+        CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+        return PMob->m_THLvl;
+    }
+    return 0;
 }
 
 /************************************************************************
