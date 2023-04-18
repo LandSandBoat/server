@@ -161,6 +161,8 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_SAVIOR]                 = { },
 }
 
+local atmaPrice = 100
+
 local function getSortedKeysFromArray(array, isReverse)
     local keys = {}
 
@@ -281,12 +283,8 @@ local function updateReinfusedMask(player, atmaSlot, atmaValue)
     player:setCharVar("ABYSSEA_LAST_ATMA_INFUSED", newMask)
 end
 
-local function updateHistoryMask(player, atmaValue)
-    local currentAtma = getIdByKeyItemId(atmaValue)
-    local histo =
-    {
-        currentAtma
-    }
+local function getHistoryAtmaArray(player)
+    local atmaHistory = {}
     local atmasSaved =
     {
         [1] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA1")),
@@ -295,6 +293,23 @@ local function updateHistoryMask(player, atmaValue)
     }
     for i = 1, 3 do
         for _, value in pairs(atmasSaved[i]) do
+            table.insert(atmaHistory, value)
+        end
+    end
+
+    return atmaHistory
+end
+
+local function updateHistoryMask(player, atmaValue)
+    local currentAtma = getIdByKeyItemId(atmaValue)
+    local atmaSaved = getHistoryAtmaArray(player)
+    local histo =
+    {
+        currentAtma
+    }
+
+    for i = 1, 3 do
+        for _, value in ipairs(atmaSaved) do
             if value ~= currentAtma then
                 table.insert(histo, value)
             end
@@ -346,6 +361,12 @@ local function delAtma(player, slot)
     end
 end
 
+local function delAllAtma(player)
+    for atmaSlot = 3, 1, -1 do
+        delAtma(player, atmaSlot)
+    end
+end
+
 local function addAtma(player, selectedAtma)
     local keys = getSortedKeysFromArray(xi.atma.atmaMods, false)
     local atmaValue = keys[selectedAtma]
@@ -361,6 +382,7 @@ local function addAtma(player, selectedAtma)
         atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
         updateReinfusedMask(player, availableAtmaSlot, atmaValue)
         updateHistoryMask(player, atmaValue)
+        player:delCurrency("cruor", atmaPrice)
     end
 end
 
@@ -430,20 +452,24 @@ xi.atma.onEventUpdate = function(player, csid, option, npc)
 end
 
 xi.atma.onEventFinish = function(player, csid, option, npc)
+    local ID = zones[player:getZoneID()]
+
     local optionSelected = bit.band(option, 0xF)
     if
-        optionSelected == 1 or
-        optionSelected == 4
-    then -- Infuse Atma or Select from history
+        optionSelected == 1
+    then -- Infuse Atma
         local atma = bit.band(bit.rshift(option, 16), 0xFFFF)
+        local orderKeyItem = getSortedKeysFromArray(xi.atma.atmaMods, false)
+        player:messageSpecial(ID.text.ATMA_INFUSED, atmaPrice, orderKeyItem[atma])
         addAtma(player, atma)
     elseif optionSelected == 2 then -- Purge atma
         local slot = bit.band(bit.rshift(option, 16), 0xFF)
         if slot == 4 then -- Purge all atma
-            for atmaSlot = 3, 1, -1 do
-                delAtma(player, atmaSlot)
-            end
+            player:messageSpecial(ID.text.ALL_ATMA_PURGED)
+            delAllAtma(player)
         else
+            local effectPower = player:getStatusEffect(xi.effect.ATMA, slot):getPower()
+            player:messageSpecial(ID.text.ATMA_PURGED, effectPower)
             delAtma(player, slot)
         end
     elseif
@@ -451,10 +477,36 @@ xi.atma.onEventFinish = function(player, csid, option, npc)
         player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
     then -- Reinfuse Atma
         local atmaReinfused = getAtmasFromMask(player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED"))
+        local numAtma = 0
         for i = 1, 3 do
             if atmaReinfused[i] ~= 0 then
                 addAtma(player, atmaReinfused[i])
+                numAtma = numAtma + 1
             end
         end
+
+        player:messageSpecial(ID.text.PREVIOUS_ATMA_INFUSED, atmaPrice * numAtma)
+    elseif
+        optionSelected == 5
+    then -- infuse history
+        delAllAtma(player)
+        local mask = bit.rshift(option, 17)
+        local indexPos = { }
+        for i = 1, 12 do
+            local submask = bit.band(mask, 0x1)
+            if submask == 1 then
+                table.insert(indexPos, i)
+            end
+
+            mask = bit.rshift(mask, 1)
+        end
+
+        local histo = getHistoryAtmaArray(player)
+
+        for _, index in ipairs(indexPos) do
+            addAtma(player, histo[index])
+        end
+
+        player:messageSpecial(ID.text.HISTORY_ATMA_INFUSED, atmaPrice * #histo)
     end
 end
