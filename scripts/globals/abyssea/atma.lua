@@ -161,6 +161,35 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_SAVIOR]                 = { },
 }
 
+local function getSortedKeysFromArray(array, isReverse)
+    local keys = {}
+
+    for key, v in pairs(array) do
+        table.insert(keys, key)
+    end
+
+    if isReverse then
+        table.sort(keys, function(a, b)
+            return a > b
+        end)
+    else
+        table.sort(keys)
+    end
+
+    return keys
+end
+
+local function getIdByKeyItemId(keyitemId)
+    local keys = getSortedKeysFromArray(xi.atma.atmaMods, false)
+    for index, v in ipairs(keys) do
+        if keyitemId == v then
+            return index
+        end
+    end
+
+    return nil
+end
+
 -- Group 1 Atma consists of 4 parameter values, followed by 2 parameter values for
 -- Group 2.  Calculate these separately just in case there's future additions or changes.
 -- There is minimal impact to efficiency, as we only iterate over each individual
@@ -169,7 +198,6 @@ xi.atma.atmaMods =
 -- number in the array.  See: onTrigger function for handling in a single loop
 local function getAtmaMask(player)
     local atmaMask = { 0, 0, 0, 0, 0, 0 }
-
     local atmaCount = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
     local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
     for i = 1, atmaCount + 1 do
@@ -219,17 +247,109 @@ local function hasDuplicateAtmaEffect(player, atmaValue)
     return false
 end
 
-local function delAtma(player, selectedAtma)
-    if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
-        player:delStatusEffect(xi.effect.ATMA, selectedAtma)
+local function getAtmasFromMask(mask)
+    local atmas =
+    {
+        bit.band(mask, 0xFF),
+        bit.band(bit.rshift(mask, 8), 0xFF),
+        bit.band(bit.rshift(mask, 16), 0xFF),
+        bit.band(bit.rshift(mask, 24), 0xFF),
+    }
+    return atmas
+end
+
+local function updateReinfusedMask(player, atmaSlot, atmaValue)
+    local baseMask = player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+    local atmas = getAtmasFromMask(baseMask)
+    local newMask = 0
+    atmas[atmaSlot] = getIdByKeyItemId(atmaValue)
+
+    if atmaSlot == 1 then
+        atmas[2] = 0
+        atmas[3] = 0
+    end
+
+    for key = 3, 1, -1 do
+        newMask = bit.lshift(newMask, 8)
+
+        local value = atmas[key]
+        if value ~= 0 then
+            newMask = newMask + value
+        end
+    end
+
+    player:setCharVar("ABYSSEA_LAST_ATMA_INFUSED", newMask)
+end
+
+local function updateHistoryMask(player, atmaValue)
+    local currentAtma = getIdByKeyItemId(atmaValue)
+    local histo =
+    {
+        currentAtma
+    }
+    local atmasSaved =
+    {
+        [1] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA1")),
+        [2] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA2")),
+        [3] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA3"))
+    }
+    for i = 1, 3 do
+        for _, value in pairs(atmasSaved[i]) do
+            if value ~= currentAtma then
+                table.insert(histo, value)
+            end
+        end
+    end
+
+    local index = 1
+
+    for i = 1, 9, 4 do
+        local maskAtma = 0
+        for j = 3, 0, -1 do
+            local indexHisto = i + j
+            maskAtma = bit.lshift(maskAtma, 8)
+            maskAtma = maskAtma + histo[indexHisto]
+        end
+
+        player:setCharVar("ABYSSEA_HISTORY_ATMA"..index, maskAtma)
+        index = index + 1
+    end
+end
+
+local function getLunarAbyssiteMask(player)
+    local lunarAbyssiteMask = 0
+    local freeSlot = getFreeAtmaSlot(player)
+
+    if freeSlot == 0 then
+        return lunarAbyssiteMask
+    end
+
+    local lunarAbyssiteArray =
+    {
+        xi.ki.LUNAR_ABYSSITE1,
+        xi.ki.LUNAR_ABYSSITE2,
+        xi.ki.LUNAR_ABYSSITE3
+    }
+
+    for _, abyssite in ipairs(lunarAbyssiteArray) do
+        if player:hasKeyItem(abyssite) then
+            lunarAbyssiteMask = bit.lshift(lunarAbyssiteMask, 1) + 1
+        end
+    end
+
+    return lunarAbyssiteMask
+end
+
+local function delAtma(player, slot)
+    if player:hasStatusEffect(xi.effect.ATMA, slot) then
+        player:delStatusEffect(xi.effect.ATMA, slot)
     end
 end
 
 local function addAtma(player, selectedAtma)
-    local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
-    local atmaValue = atmaBase + selectedAtma
+    local keys = getSortedKeysFromArray(xi.atma.atmaMods, false)
+    local atmaValue = keys[selectedAtma]
     local availableAtmaSlot = getFreeAtmaSlot(player)
-
     if
         availableAtmaSlot > 0 and
         not hasDuplicateAtmaEffect(player, atmaValue)
@@ -239,6 +359,8 @@ local function addAtma(player, selectedAtma)
         local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
         atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
         atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+        updateReinfusedMask(player, availableAtmaSlot, atmaValue)
+        updateHistoryMask(player, atmaValue)
     end
 end
 
@@ -271,56 +393,68 @@ end
 
 xi.atma.onTrigger = function(player, npc)
     local atmaMask   = getAtmaMask(player)
-    local activeAtma = { 0, 0, 0 }
-    local menuParams = 0x1000000
+    local activeAtmaMask = getLunarAbyssiteMask(player)
+    local playerCruor = player:getCurrency("cruor")
 
-    local shiftVal = 0
-    for atmaSlot = 1, 3 do
+    for atmaSlot = 3, 1, -1 do
+        activeAtmaMask = bit.lshift(activeAtmaMask, 8)
         if player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
-            activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
 
-            -- Remove active Atmas from their appropriate bitfield
-            if activeAtma[atmaSlot] ~= 0 then
-                local groupOffset = activeAtma[atmaSlot] >= xi.ki.ATMA_OF_THE_HEIR and xi.ki.ATMA_OF_THE_HEIR or xi.ki.ATMA_OF_THE_LION
-                local parameterNum = math.floor((activeAtma[atmaSlot] - groupOffset + 1 + 32) / 32)
+            local keyItemId = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
+            local keyItemIndex = getIdByKeyItemId(keyItemId)
 
-                if groupOffset >= xi.ki.ATMA_OF_THE_HEIR then
-                    parameterNum = parameterNum + 4
-                end
-
-                menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
-                atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
-                shiftVal = shiftVal + 1
-            end
-
-            -- Set Bits for Active Atma Count (Two different bytes!)
-            if atmaSlot == 1 then
-                menuParams = menuParams + 0x1000000
-            else
-                menuParams = menuParams + 0x10000000
-            end
+            activeAtmaMask = activeAtmaMask + keyItemIndex
         end
     end
 
-    if getFreeAtmaSlot(player) == 0 then
-        atmaMask[1] = 0
-    end
-
-    player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
+    player:startEvent(2003, playerCruor, activeAtmaMask, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
 xi.atma.onEventUpdate = function(player, csid, option, npc)
-    player:updateEvent(0, 0)
+    local reinfuseAtma = 0
+    local histo =
+    {
+        [1] = player:getCharVar("ABYSSEA_HISTORY_ATMA1"),
+        [2] = player:getCharVar("ABYSSEA_HISTORY_ATMA2"),
+        [3] = player:getCharVar("ABYSSEA_HISTORY_ATMA3")
+    }
+
+    if
+        player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED") ~= 0 and
+        not player:hasStatusEffect(xi.effect.ATMA)
+    then
+        reinfuseAtma = player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+    end
+
+    player:updateEvent(reinfuseAtma, histo[1], histo[2], histo[3], 0, 0, 0, 0)
 end
 
 xi.atma.onEventFinish = function(player, csid, option, npc)
-    if option < 0x40000000 then
-        if option % 0x10000 == 1 then
-            local selection = (option - 1) / 0x10000
-            addAtma(player, selection)
+    local optionSelected = bit.band(option, 0xF)
+    if
+        optionSelected == 1 or
+        optionSelected == 4
+    then -- Infuse Atma or Select from history
+        local atma = bit.band(bit.rshift(option, 16), 0xFFFF)
+        addAtma(player, atma)
+    elseif optionSelected == 2 then -- Purge atma
+        local slot = bit.band(bit.rshift(option, 16), 0xFF)
+        if slot == 4 then -- Purge all atma
+            for atmaSlot = 3, 1, -1 do
+                delAtma(player, atmaSlot)
+            end
         else
-            local selection = (option - 2) / 0x10000
-            delAtma(player, selection)
+            delAtma(player, slot)
+        end
+    elseif
+        optionSelected == 3 and
+        player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+    then -- Reinfuse Atma
+        local atmaReinfused = getAtmasFromMask(player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED"))
+        for i = 1, 3 do
+            if atmaReinfused[i] ~= 0 then
+                addAtma(player, atmaReinfused[i])
+            end
         end
     end
 end
