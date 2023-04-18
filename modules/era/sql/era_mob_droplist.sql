@@ -26393,25 +26393,149 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
--- ZoneiD: 25 - Orcish Footsoldiers
--- ZoneiD: 25 - Orcish Gladiators
--- ZoneiD: 25 - Orcish Troopers
-INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,750,0); -- Silver Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Very Rare, 1%)
+-- ZoneID:  37 - Fire Elemental
+-- ZoneID:  37 - Ice Elemental
+-- ZoneID:  37 - Air Elemental
+-- ZoneID:  37 - Earth Elemental
+-- ZoneID:  37 - Thunder Elemental
+-- ZoneID:  37 - Water Elemental
+-- ZoneID:  37 - Dark Elemental
+-- ZoneID:  37 - Mystic_Avatar
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
--- ZoneiD: 25 - Orcish Bowshooters
-INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,750,0); -- Silver Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon 10%)
-INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon 10%)
+-- ZoneID:  37 - Light Elemental
+-- ZoneID:  37 - Mystic_Avatar (Carbuncle)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
--- ZoneiD: 24 - Orcish Beastrider
--- ZoneiD: 24 - Orcish Brawler
--- ZoneiD: 24 - Orcish Footsoldier
--- ZoneiD: 24 - Orcish Nightrider
--- ZoneiD: 24 - Orcish Galdiator
--- ZoneiD: 24 - Orcish Trooper
-INSERT INTO `mob_droplist` VALUES (3236,2,0,1000,750,0); -- Silver Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon, 10%)
+-- ZoneID:  37 - Grognard Mesmerizer
+-- ZoneID:  37 - Grognard Footsoldier
+-- ZoneID:  37 - Grognard Predator
+-- ZoneID:  37 - Grognard Neckchopper
+-- ZoneID:  37 - Grognard Grappler
+-- ZoneID:  37 - Grognard Impaler
+-- ZoneID:  37 - Star Ruby Quadav
+-- ZoneID:  37 - Whitegold Quadav
+-- ZoneID:  37 - Wootz Quadav
+-- ZoneID:  37 - Star Sapphire Quadav
+-- ZoneID:  37 - Lightsteel Quadav
+-- ZoneID:  37 - Yagudo Archpriest
+-- ZoneID:  37 - Yagudo Disciplinant
+-- ZoneID:  37 - Yagudo Kapellmeister
+-- ZoneID:  37 - Yagudo Knight Templar
+-- ZoneID:  37 - Yagudo Prelatess
+-- ZoneID:  37 - Yagudo Eradicator
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Kingslayer_Doggvdegg
+-- ZoneID:  37 - JiGho_Ageless
+-- ZoneID:  37 - Koo_Buzu_the_Theomanic
+-- ZoneID:  37 - Mystic_Avatar
+-- ZoneID:  37 - Enhanced_Koenigstiger
+-- ZoneID:  37 - Enhanced_Pygmaioi
+-- ZoneID:  37 - Enhanced_Kettenkaefer
+-- ZoneID:  37 - Enhanced_Salamander
+-- ZoneID:  37 - Enhanced_Jelly
+-- ZoneID:  37 - Enhanced_Makara
+-- ZoneID:  37 - Enhanced_Akbaba
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+
+-- ZoneID:  135 - Animated Knuckles
+INSERT INTO `mob_droplist` VALUES (3238,0,0,1000,1571,@ALWAYS); -- Mystic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Dagger
+INSERT INTO `mob_droplist` VALUES (3239,0,0,1000,1572,@ALWAYS); -- Ornate Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Longsword
+INSERT INTO `mob_droplist` VALUES (3240,0,0,1000,1573,@ALWAYS); -- Holy Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Claymore
+INSERT INTO `mob_droplist` VALUES (3241,0,0,1000,1574,@ALWAYS); -- Intricate Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Tabar
+INSERT INTO `mob_droplist` VALUES (3242,0,0,1000,1575,@ALWAYS); -- Runaeic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Great Axe
+INSERT INTO `mob_droplist` VALUES (3243,0,0,1000,1576,@ALWAYS); -- Seraphic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Scythe
+INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,1577,@ALWAYS); -- Tenebrous Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Spear
+INSERT INTO `mob_droplist` VALUES (3245,0,0,1000,1578,@ALWAYS); -- Stellar Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Kunai
+INSERT INTO `mob_droplist` VALUES (3246,0,0,1000,1579,@ALWAYS); -- Demoniac Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Tachi
+INSERT INTO `mob_droplist` VALUES (3247,0,0,1000,1580,@ALWAYS); -- Divine Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Hammer
+INSERT INTO `mob_droplist` VALUES (3248,0,0,1000,1581,@ALWAYS); -- Heavenly Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Staff
+INSERT INTO `mob_droplist` VALUES (3249,0,0,1000,1582,@ALWAYS); -- Celestial Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Longbow
+INSERT INTO `mob_droplist` VALUES (3250,0,0,1000,1583,@ALWAYS); -- Snarled Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Horn
+INSERT INTO `mob_droplist` VALUES (3251,0,0,1000,1584,@ALWAYS); -- Mysterial Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Gun
+INSERT INTO `mob_droplist` VALUES (3252,0,0,1000,1585,@ALWAYS); -- Ethereal Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Shield
+INSERT INTO `mob_droplist` VALUES (3253,0,0,1000,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
+
+-- ZoneID: 198 - Wendigo Blm
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3254,2,0,1000,880,0);        -- Bone Chip (Steal)
+
+-- ZoneID: 25 - Orcish Footsoldiers
+-- ZoneID: 25 - Orcish Gladiators
+-- ZoneID: 25 - Orcish Troopers
+INSERT INTO `mob_droplist` VALUES (3255,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3255,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon, 10%) http://www.ffxidb.com/items/1661
+
+-- ZoneID: 25 - Orcish Bowshooters
+INSERT INTO `mob_droplist` VALUES (3256,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3256,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon, 10%)-- http://www.ffxidb.com/items/1661
+INSERT INTO `mob_droplist` VALUES (3256,0,0,1000,5154,@RARE);   -- Tavnazian Liver (Rare 5%) http://www.ffxidb.com/items/5154
+
+-- ZoneID: 24 - Orcish Beastrider
+-- ZoneID: 24 - Orcish Brawler
+-- ZoneID: 24 - Orcish Footsoldier
+-- ZoneID: 24 - Orcish Nightrider
+-- ZoneID: 24 - Orcish Gladiator
+-- ZoneID: 24 - Orcish Trooper
+INSERT INTO `mob_droplist` VALUES (3257,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3257,0,0,1000,5154,@RARE);   -- Tavnazian Liver (Rare, 5%) http://www.ffxidb.com/items/5154
+
+-- ZoneID:123  - Pyuu_the_Spatemaker
+INSERT INTO `mob_droplist` VALUES (3258,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
+
+-- ZoneID:61  - Fahrafahr the Bloodied
+INSERT INTO `mob_droplist` VALUES (3259,0,0,1000,18872,@COMMON);   -- Lyft Ferule (Common, ~15%) http://www.ffxidb.com/items/18872
+
+------------------------------------------------------------------------------
+-- DO NOT ADD ANY NEW DROPLISTS TO THIS SECTION ABOVE - ONLY EDIT THE DROPS
+------------------------------------------------------------------------------
+
 --------------------------------
 -- ASB Droplists Start at 6000
 --------------------------------
