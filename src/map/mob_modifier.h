@@ -102,6 +102,7 @@ enum MOBMODIFIER : int
     MOBMOD_LEADER                 = 71, // Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MOBMOD_MAGIC_RANGE            = 72, // magic aggro range
     MOBMOD_TARGET_DISTANCE_OFFSET = 73, // Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
+    MOBMOD_ONE_WAY_LINKING        = 74, // Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
 };
 
 #endif

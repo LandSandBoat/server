@@ -191,7 +191,7 @@ void CMobController::TryLink()
     }
 
     // Handle monster linking if they are close enough
-    if (PMob->PParty != nullptr)
+    if (PMob->PParty != nullptr && !PMob->getMobMod(MOBMOD_ONE_WAY_LINKING))
     {
         for (auto& member : PMob->PParty->members)
         {
