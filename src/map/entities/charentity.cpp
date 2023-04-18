@@ -1625,6 +1625,28 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
+    if (battleutils::IsParalyzed(this))
+    {
+        // setup new action packet to send paralyze message
+        action_t paralyze_action = {};
+        setActionInterrupted(paralyze_action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CActionPacket(paralyze_action));
+
+        // Set up /ra action to be interrupted
+        action.actiontype = ACTION_RANGED_INTERRUPT; // This handles some magic numbers in CActionPacket to cancel actions
+        action.id         = id;
+
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = id;
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
+        actionTarget.speceffect      = SPECEFFECT::RECOIL;
+        actionTarget.reaction        = REACTION::NONE;
+
+        return;
+    }
+
     int32 damage      = 0;
     int32 totalDamage = 0;
 
@@ -2570,23 +2592,29 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             break;
 
         // NOTE: Exact values for resistances is unknown
+        case MOGLIFICATION_RESIST_DEATH:
+            addModifier(Mod::DEATHRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SLEEP:
+            addModifier(Mod::SLEEPRES, 10 * multiplier);
+            break;
         case MOGLIFICATION_RESIST_POISON:
-            addModifier(Mod::POISONRES, 20 * multiplier);
+            addModifier(Mod::POISONRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PARALYSIS:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::PARALYZERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_SILENCE:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::SILENCERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PETRIFICATION:
-            addModifier(Mod::PETRIFYRES, 20 * multiplier);
+            addModifier(Mod::PETRIFYRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_VIRUS:
-            addModifier(Mod::VIRUSRES, 20 * multiplier);
+            addModifier(Mod::VIRUSRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_CURSE:
-            addModifier(Mod::CURSERES, 20 * multiplier);
+            addModifier(Mod::CURSERES, 10 * multiplier);
             break;
         default:
             break;

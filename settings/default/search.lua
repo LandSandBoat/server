@@ -11,6 +11,9 @@ xi.settings = xi.settings or {}
 
 xi.settings.search =
 {
+    -- Omit items with no buy history from auction house results
+    OMIT_NO_HISTORY = false,
+
     -- After EXPIRE_DAYS, will listed auctions expire?
     EXPIRE_AUCTIONS = true,
 

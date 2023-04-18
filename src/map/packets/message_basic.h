@@ -58,6 +58,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_USES_JA2              = 101, /* The <player> uses .. */
     MSGBASIC_USES_RECOVERS_HP      = 102, /* The <player> uses .. <target> recovers .. HP. */
     MSGBASIC_SKILL_RECOVERS_HP     = 103, /* The <player> uses .. <target> recovers .. HP. */
+    MSGBASIC_TIME_LEFT             = 202, /* Time left: (h:mm:ss) */
     MSGBASIC_IS_STATUS             = 203, /* <target> is <status>. */
 
     MSGBASIC_USES_JA_TAKE_DAMAGE      = 317, /* The <player> uses .. <target> takes .. points of damage. */

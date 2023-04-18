@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global, independent functions for physical calculations.
 -- Includes:
--- fSTR, fSTR2, WSC, fTP
+-- fSTR, fSTR2, WSC, fTP, pDIF
 
 -- For weapon skill:
 -- Damage PER HIT = floor((D + fSTR + WSC) * fTP) * pDIF
@@ -45,6 +45,31 @@ local wsElementalProperties =
     [      14] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 3, Darkness
     [      15] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 4, Light
     [      16] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 4, Darkness
+}
+
+-- Table with pDIF caps per weapon/skill type.
+local pDifWeaponCapTable =
+{
+    -- [Skill/weapon type used] = {pre-randomizer_pDIF_cap}, Values from: https://www.bg-wiki.com/ffxi/PDIF
+    [xi.skill.NONE            ] = { 3    }, -- We will use this for mobs.
+    [xi.skill.HAND_TO_HAND    ] = { 3.5  },
+    [xi.skill.DAGGER          ] = { 3.25 },
+    [xi.skill.SWORD           ] = { 3.25 },
+    [xi.skill.GREAT_SWORD     ] = { 3.75 },
+    [xi.skill.AXE             ] = { 3.25 },
+    [xi.skill.GREAT_AXE       ] = { 3.75 },
+    [xi.skill.SCYTHE          ] = { 4    },
+    [xi.skill.POLEARM         ] = { 3.75 },
+    [xi.skill.KATANA          ] = { 3.25 },
+    [xi.skill.GREAT_KATANA    ] = { 3.5  },
+    [xi.skill.CLUB            ] = { 3.25 },
+    [xi.skill.STAFF           ] = { 3.75 },
+    [xi.skill.AUTOMATON_MELEE ] = { 3    }, -- Unknown value. Copy of value below.
+    [xi.skill.AUTOMATON_RANGED] = { 3    }, -- Unknown value. Reference found in an old post: https://forum.square-enix.com/ffxi/archive/index.php/t-52778.html?s=d906df07788334a185a902b0a6ae6a99
+    [xi.skill.AUTOMATON_MAGIC ] = { 3    }, -- Unknown value. Here for completion sake.
+    [xi.skill.ARCHERY         ] = { 3.25 },
+    [xi.skill.MARKSMANSHIP    ] = { 3.5  },
+    [xi.skill.THROWING        ] = { 3.25 },
 }
 
 local elementalGorget = -- Ordered by element.
@@ -183,19 +208,26 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
     return finalWSC
 end
 
--- TP Multiplier calculations.
-xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
-    local fTP     = 1
-    local actorTP = actor:getTP()
+-- TP factor equation. Used to determine TP modifer across all cases of "X varies with TP"
+xi.combat.physical.calculateTPfactor = function(actor, TP1000, TP2000, TP3000)
+    local tpFactor = 1
+    local actorTP  = actor:getTP()
 
+    if actorTP >= 2000 then
+        tpFactor = TP2000 + (actorTP - 2000) * (TP3000 - TP2000) / 1000
+    elseif actorTP >= 1000 then
+        tpFactor = TP1000 + (actorTP - 1000) * (TP2000 - TP1000) / 1000
+    end
+
+    return tpFactor
+end
+
+-- TP Multiplier calculations.
+xi.combat.physical.calculateFTP = function(actor, tpFactor)
     ------------------------------
     -- Regular fTP
     ------------------------------
-    if actorTP >= 2000 then
-        fTP = wsTP2000 + (((wsTP3000 - wsTP2000) / 1000) * (actorTP - 2000))
-    elseif actorTP >= 1000 then
-        fTP = wsTP1000 + (((wsTP2000 - wsTP1000) / 1000) * (actorTP - 1000))
-    end
+    local fTP = tpFactor
 
     ------------------------------
     -- Equipment fTP bonuses.
@@ -294,7 +326,202 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
     return fTP
 end
 
-xi.combat.physical.calculatePDIF = function(actor, additionalParamsHere)
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
+    local pDif = 0
+
+    ----------------------------------------
+    -- Step 1: Attack / Defense Ratio
+    ----------------------------------------
+    local baseRatio     = 0
+    local actorAttack   = math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod)
+    local targetDefense = target:getStat(xi.mod.DEF)
+
+    -- Actor Attack modifiers.
+    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+
+        if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+            actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+        end
+    end
+
+    -- Target Defense Modifiers.
+    local ignoreDefenseFactor = 1
+
+    if tpIgnoresDefense then
+        ignoreDefenseFactor = tpFactor
+    end
+
+    targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+
+    baseRatio = actorAttack / targetDefense
+
+    -- Apply cap to baseRatio.
+    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+
+    ----------------------------------------
+    -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
+    ----------------------------------------
+    local levelDifFactor = 0
+
+    if applyLevelCorrection then
+        levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
+    end
+
+    -- Only players suffer from negative level difference.
+    if
+        not actor:isPC() and
+        levelDifFactor < 0
+    then
+        levelDifFactor = 0
+    end
+
+    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+
+    ----------------------------------------
+    -- Step 3: wRatio and pDif Caps (Melee)
+    ----------------------------------------
+    local wRatio       = cRatio + isCritical
+    local pDifUpperCap = 0
+    local pDifLowerCap = 0
+
+    -- pDIF upper cap.
+    if wRatio < 0.5 then
+        pDifUpperCap = wRatio + 0.5
+    elseif wRatio < 0.7 then
+        pDifUpperCap = 1
+    elseif wRatio < 1.2 then
+        pDifUpperCap = wRatio + 0.3
+    elseif wRatio < 1.5 then
+        pDifUpperCap = wRatio + wRatio * 0.25
+    else
+        pDifUpperCap = utils.clamp(wRatio + 0.375, 1, 3)
+    end
+
+    -- pDIF lower cap.
+    if wRatio < 0.38 then
+        pDifLowerCap = 0
+    elseif wRatio < 1.25 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 448 / 1024
+    elseif wRatio < 1.51 then
+        pDifLowerCap = 1
+    elseif wRatio < 2.44 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 775 / 1024
+    else
+        pDifLowerCap = wRatio - 0.375
+    end
+
+    pDif = math.random(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
+
+    ----------------------------------------
+    -- Step 4: Apply weapon type caps.
+    ----------------------------------------
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+
+    pDif = utils.clamp(pDif, 0, pDifFinalCap)
+
+    ----------------------------------------
+    -- Step 5: Melee random factor.
+    ----------------------------------------
+    local meleeRandom = math.random(100, 105) / 100
+
+    pDif = pDif * meleeRandom
+
+    return pDif
+end
+
+xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
+    local pDif = 0
+
+    ----------------------------------------
+    -- Step 1: Attack / Defense Ratio
+    ----------------------------------------
+    local baseRatio     = 0
+    local actorAttack   = math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod)
+    local targetDefense = target:getStat(xi.mod.DEF)
+
+    -- Actor Ranged Attack modifiers.
+    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+
+        if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+            actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+        end
+    end
+
+    -- Target Defense Modifiers.
+    local ignoreDefenseFactor = 1
+
+    if tpIgnoresDefense then
+        ignoreDefenseFactor = tpFactor
+    end
+
+    targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+
+    baseRatio = actorAttack / targetDefense
+
+    -- Apply cap to baseRatio.
+    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+
+    ----------------------------------------
+    -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
+    ----------------------------------------
+    local levelDifFactor = 0
+
+    if applyLevelCorrection then
+        levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
+    end
+
+    -- Only players suffer from negative level difference.
+    if
+        not actor:isPC() and
+        levelDifFactor < 0
+    then
+        levelDifFactor = 0
+    end
+
+    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+
+    -- TODO: Presumably, pets get a Cap here if the target checks as "Too Weak". More info needed.
+
+    ----------------------------------------
+    -- Step 3: pDif Caps (Ranged)
+    ----------------------------------------
+    local pDifUpperCap = 0
+    local pDifLowerCap = 0
+
+    -- pDIF upper and lower caps.
+    if cRatio < 0.9 then
+        pDifUpperCap = cRatio * 10 / 9
+        pDifLowerCap = cRatio
+    elseif cRatio < 1.1 then
+        pDifUpperCap = 1
+        pDifLowerCap = 1
+    else
+        pDifUpperCap = cRatio
+        pDifLowerCap = cRatio * 20 / 19 - 3 / 19
+    end
+
+    pDif = math.random(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
+
+    ----------------------------------------
+    -- Step 4: Apply weapon type caps.
+    ----------------------------------------
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+
+    pDif = utils.clamp(pDif, 0, pDifFinalCap)
+
+    ----------------------------------------
+    -- Step 5: Ranged critical factor. Bypasses caps.
+    ----------------------------------------
+    if isCritical == 1 then
+        pDif = pDif * 1.25
+    end
+
+    -- Step 6: Distance correction and True Shot.
+    -- TODO: Implement distance correction and True shot...
+
+    return pDif
 end
 
 xi.combat.physical.calculateNumberOfHits = function(actor, additionalParamsHere)

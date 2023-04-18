@@ -29,6 +29,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 60)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+
+    if mob:getPool() == 6750 then  -- Fahrafahr the Bloodied
+        mob:resetEnmity(target)
+    end
+
     return dmg
 end
 

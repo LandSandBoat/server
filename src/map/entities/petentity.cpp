@@ -551,7 +551,12 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
                 first = false;
             }
         }
-        PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+        if (PSkill->getValidTargets() & TARGET_ENEMY)
+        {
+            PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+
         if (PTargetFound->isDead())
         {
             battleutils::ClaimMob(PTargetFound, this);

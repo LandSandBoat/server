@@ -247,7 +247,7 @@ end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
     local hppRemaining = target:getHPP()
-    local mpCost       = target:getLocalVar("MP_COST")
+    local mpCost       = player:getLocalVar("MP_COST")
     local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
     local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
     local fcMod        = player:getMod(xi.mod.FULL_CIRCLE)

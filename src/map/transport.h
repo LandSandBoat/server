@@ -128,6 +128,8 @@ public:
     void TransportTimer();
     void insertElevator(Elevator_t elevator);
 
+    Elevator_t* getElevator(uint8 elevatorID);
+
     void InitializeTransport();
 
 private:

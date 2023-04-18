@@ -143,7 +143,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.OLD_BOOTS)
 
                         -- Message when acepting to bury boots and blood.
-                        player:messageSpecial(ID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
+                        player:messageSpecial(crawlersID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
                     end
                 end,
 

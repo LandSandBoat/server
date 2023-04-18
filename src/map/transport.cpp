@@ -401,6 +401,23 @@ void CTransportHandler::TransportTimer()
         }
     }
 }
+
+// gets returns a pointer to an Elevator_t if available
+Elevator_t* CTransportHandler::getElevator(uint8 elevatorID)
+{
+    for (auto& i : ElevatorList)
+    {
+        Elevator_t* elevator = &i;
+
+        if (elevator->id == elevatorID)
+        {
+            return elevator;
+        }
+    }
+
+    return nullptr;
+}
+
 /************************************************************************
  *                                                                       *
  *  Initializes an elevator                                              *

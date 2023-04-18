@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
 end
 
 entity.onMobSpawn = function(mob)

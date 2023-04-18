@@ -591,7 +591,7 @@ public:
     void  UpdateHealth();   // пересчет максимального количества hp и mp, а так же корректировка их текущих значений
 
     int16  GetWeaponDelay(bool tp);       // returns delay of combined weapons
-    uint8  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
+    float  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
     int16  GetRangedWeaponDelay(bool tp); // returns delay of ranged weapon + ammo where applicable
     int16  GetAmmoDelay();                // returns delay of ammo (for cooldown between shots)
     uint16 GetMainWeaponDmg();            // returns total main hand DMG
@@ -749,7 +749,7 @@ public:
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
 
-    uint8           m_ModelRadius; // The radius of the entity model, for calculating the range of a physical attack
+    float           m_ModelRadius; // The radius of the entity model, for calculating the range of a physical attack
     ECOSYSTEM       m_EcoSystem;   // Entity eco system
     CItemEquipment* m_Weapons[4];  // Four main slots used to store weapons (weapons only)
     bool            m_dualWield;   // True/false depending on if the entity is using two weapons
