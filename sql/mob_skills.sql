@@ -1365,7 +1365,7 @@ INSERT INTO `mob_skills` VALUES (1528,1087,'floodlight',2,15.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (1529,1089,'hyper_pulse',1,10.0,2000,1500,4,0,0,0,0,0,0); -- Proto-Omega
 INSERT INTO `mob_skills` VALUES (1530,1088,'stun_cannon',4,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1531,772,'wz_recover_all',1,20.0,0,0,1028,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1532,1124,'pod_ejection',0,7.0,4500,1,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1532,1124,'pod_ejection',0,7.0,4500,1,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1533,1117,'pile_pitch',0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1534,1118,'guided_missile',2,5.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1535,1119,'hyper_pulse',1,10.0,2000,1500,4,0,0,0,0,0,0); -- Omega
@@ -1916,7 +1916,7 @@ INSERT INTO `mob_skills` VALUES (2074,1415,'detonating_grip',0,7.0,2000,1000,4,0
 -- INSERT INTO `mob_skills` VALUES (2080,1421,'potent_lunge',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2081,1422,'hammer-go-round',0,7.0,2000,1500,4,0,0,3,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2082,1423,'hammerblow',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2083,1424,'drop_hammer',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2083,1424,'drop_hammer',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2084,1425,'seismohammer',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2085,1829,'venomous_tail',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2086,1830,'grim_reaper',0,7.0,2000,1500,4,0,0,0,0,0,0);

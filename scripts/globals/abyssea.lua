@@ -677,7 +677,7 @@ end
 xi.abyssea.spendTravStones = function(player, spentstones)
     local numRemoved = 0
 
-    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
+    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1, -1 do
         if numRemoved == spentstones then
             break
         elseif player:hasKeyItem(keyItem) then
@@ -711,6 +711,10 @@ xi.abyssea.canGiveNMKI = function(mob, dropChance)
 end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
+    if not xi.abyssea.mob[mob:getName()] then
+        return
+    end
+
     local atmaDrops = xi.abyssea.mob[mob:getName()]['Atma']
     local normalDrops = xi.abyssea.mob[mob:getName()]['Normal']
     local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
@@ -1091,6 +1095,13 @@ xi.abyssea.onZoneIn = function(player)
     -- status.  TODO: nameFlags enum
     if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
         player:addStatusEffectEx(xi.effect.VISITANT, xi.effect.VISITANT, 0, 0, 0)
+    end
+end
+
+xi.abyssea.onEventFinish = function(player, csid, option)
+    if csid == 2180 then
+        local zoneID = player:getZoneID()
+        player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
     end
 end
 

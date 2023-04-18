@@ -832,7 +832,12 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
                 first = false;
             }
         }
-        PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+        if (PSkill->getValidTargets() & TARGET_ENEMY)
+        {
+            PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+
         if (PTargetFound->isDead())
         {
             battleutils::ClaimMob(PTargetFound, this);
@@ -915,7 +920,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
         // return dropCount >= TREASUREPOOL_SIZE;
-		return false; // This is unlimited loot items.
+        return false; // This is unlimited loot items.
     };
 
     // Limit number of items that can drop to the treasure pool size

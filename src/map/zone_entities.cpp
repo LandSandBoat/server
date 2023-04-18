@@ -570,7 +570,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
         SpawnIDList_t::iterator PET         = PChar->SpawnPETList.find(PCurrentPet->id);
 
         // Is this pet "visible" to the player?
-        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::MOB) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
+        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::UPDATE) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
         {
             // pet not in update list for player, add it in
             if (PET == PChar->SpawnPETList.end())
@@ -598,7 +598,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             CNpcEntity*             PCurrentNpc = (CNpcEntity*)it->second;
             SpawnIDList_t::iterator NPC         = PChar->SpawnNPCList.find(PCurrentNpc->id);
 
-            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::MOB)
+            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::UPDATE)
             {
                 // Is this npc "visible" to the player?
                 if (distance(PChar->loc.p, PCurrentNpc->loc.p) <= 50)
@@ -616,6 +616,12 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     PChar->SpawnNPCList.erase(NPC);
                     PChar->updateEntityPacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE);
                 }
+            }
+            // NPC not visible, remove it from spawn list if it's in there
+            else if (NPC != PChar->SpawnNPCList.end())
+            {
+                PChar->SpawnNPCList.erase(NPC);
+                PChar->updateEntityPacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE);
             }
         }
     }
