@@ -74,7 +74,7 @@ struct epoll_event login_lobbyviewEpollEvent = { EPOLLIN };
 #include <wolfssl/wolfcrypt/error-crypt.h>
 #include <wolfssl/wolfio.h>
 
-std::thread messageThread;
+std::thread                    messageThread;
 std::unique_ptr<SqlConnection> sql;
 
 uint8 ver_lock   = 0;
