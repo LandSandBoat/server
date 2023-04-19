@@ -227,6 +227,10 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
                               spell:isAoE() == 0 and
                               params.attackType ~= xi.attackType.RANGED and
                               (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+    local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
+                              spell:isAoE() == 0 and
+                              params.attackType ~= xi.attackType.RANGED) and
+                              caster:getTrickAttackChar(target) or nil
 
     while hitsdone < params.numhits do
         local chance = math.random()
@@ -259,12 +263,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
         if params.attackType ~= xi.attackType.RANGED then
             caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
+            caster:delStatusEffect(xi.effect.TRICK_ATTACK)
         end
 
         hitsdone = hitsdone + 1
     end
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell
@@ -310,7 +315,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
 -- Perform a draining magical Blue Magic spell
@@ -337,7 +342,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
             caster:addMP(dmg)
         else
             dmg = utils.clamp(dmg, 0, target:getHP())
-            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
             caster:addHP(dmg)
         end
     end
@@ -386,13 +391,13 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
 
-    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
     results[2] = resistance
     return results
 end
 
 -- Apply spell damage
-xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
+xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     if dmg < 0 then
         dmg = 0
     end
@@ -423,7 +428,13 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
-    target:updateEnmityFromDamage(caster, dmg)
+    if not target:isPC() then
+        if trickAttackTarget then
+            target:updateEnmityFromDamage(trickAttackTarget, dmg)
+        else
+            target:updateEnmityFromDamage(caster, dmg)
+        end
+    end
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg
