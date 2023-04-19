@@ -920,7 +920,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
         // return dropCount >= TREASUREPOOL_SIZE;
-		return false; // This is unlimited loot items.
+        return false; // This is unlimited loot items.
     };
 
     // Limit number of items that can drop to the treasure pool size
