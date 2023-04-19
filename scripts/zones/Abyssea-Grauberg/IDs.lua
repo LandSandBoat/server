@@ -15,6 +15,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         ITEM_OBTAINED                 = 6390,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6391,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393,  -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394,  -- Lost key item: <keyitem>.
         CRUOR_TOTAL                   = 6988,  -- Obtained <number> cruor. (Total: <number>)
         PLAYER_GAINED_EXPERIENCE      = 6999,  -- <name> gained <number> [points of experience/limit points].
         CARRIED_OVER_POINTS           = 7001,  -- You have carried over <number> login point[/s].
