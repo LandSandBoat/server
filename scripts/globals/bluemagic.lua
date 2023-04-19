@@ -224,13 +224,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local hitslanded = 0
     local finaldmg = 0
     local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
-                              spell:isAoE() == 0 and
-                              params.attackType ~= xi.attackType.RANGED and
-                              (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED and
+                                (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
     local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
-                              spell:isAoE() == 0 and
-                              params.attackType ~= xi.attackType.RANGED) and
-                              caster:getTrickAttackChar(target) or nil
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED) and
+                                caster:getTrickAttackChar(target) or nil
 
     while hitsdone < params.numhits do
         local chance = math.random()
@@ -428,6 +428,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
     dmg = utils.stoneskin(target, dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+
     if not target:isPC() then
         if trickAttackTarget then
             target:updateEnmityFromDamage(trickAttackTarget, dmg)
@@ -435,6 +436,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
             target:updateEnmityFromDamage(caster, dmg)
         end
     end
+
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg
