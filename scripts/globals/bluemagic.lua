@@ -220,10 +220,14 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local hitsdone = 0
     local hitslanded = 0
     local finaldmg = 0
+    local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
+                              spell:isAoE() == 0 and
+                              params.attackType ~= xi.attackType.RANGED and
+                              (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
 
     while hitsdone < params.numhits do
         local chance = math.random()
-        if chance <= hitrate then -- it hit
+        if sneakIsApplicable or chance <= hitrate then -- it hit
             -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
             -- Generate a random pDIF between min and max
@@ -231,18 +235,27 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             pdif = pdif / 1000
 
             -- Add it to our final damage
-            if hitsdone == 0 then
-                finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif) -- first hit gets full multiplier
+            if hitsdone == 0 then -- first hit gets full multiplier
+                if sneakIsApplicable then
+                    finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * (pdif + 0.7))
+                else
+                    finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif)
+                end
             else
                 finaldmg = finaldmg + (finalD * (1 + correlationMultiplier) * pdif)
             end
 
+            sneakIsApplicable = false
             hitslanded = hitslanded + 1
 
             -- increment target's TP (100TP per hit landed)
             if finaldmg > 0 then
                 target:addTP(100)
             end
+        end
+
+        if params.attackType ~= xi.attackType.RANGED then
+            caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
         end
 
         hitsdone = hitsdone + 1
