@@ -1390,7 +1390,6 @@ void CMobEntity::Die()
         PBattlefield->handleDeath(this);
     }
 
-    m_THLvl = PEnmityContainer->GetHighestTH();
     PEnmityContainer->Clear();
     PAI->ClearStateStack();
     if (PPet != nullptr && PPet->isAlive() && GetMJob() == JOB_SMN)
@@ -1416,6 +1415,7 @@ void CMobEntity::Die()
 
             DistributeRewards();
             m_OwnerID.clean();
+            m_THLvl = 0;
         }
     }));
     // clang-format on
