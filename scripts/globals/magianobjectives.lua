@@ -17,11 +17,11 @@ checks.checkMobKill = function(reqs, params)
 end
 
 checks.checkWsOnMobsystem = function(reqs, params)
-    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getSystem()] and reqs.wSkill[params.wSkillId] and 1 or 0
+    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getEcosystem()] and reqs.wSkill[params.wSkillId] and 1 or 0
 end
 
 checks.checkWsKill = function(reqs, params)
-    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getSystem()] and reqs.wSkill[params.wSkillId] and params.mob:isDead() and 1 or 0
+    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getEcosystem()] and reqs.wSkill[params.wSkillId] and params.mob:isDead() and 1 or 0
 end
 
 checks.checkTrials = function(self, player, params)

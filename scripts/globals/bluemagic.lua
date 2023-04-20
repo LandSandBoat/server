@@ -142,7 +142,7 @@ end
 
 -- Get the effect of ecosystem correlation
 local function calculateCorrelation(spellEcosystem, monsterEcosystem, merits)
-    local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
+    local effect = utils.getEcosystemStrengthBonus(spellEcosystem, monsterEcosystem)
     effect = effect * 0.25
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
         effect = effect + 0.001 * merits
@@ -195,7 +195,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Azure Lore
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
@@ -283,7 +283,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     end
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Final D value
     local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
@@ -356,7 +356,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     end
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
     dmg = dmg * (1 + correlationMultiplier)
 
     -- Monster elemental adjustments
