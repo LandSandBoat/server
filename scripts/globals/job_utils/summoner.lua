@@ -126,7 +126,7 @@ xi.job_utils.summoner.calculateTPReturn = function(avatar, target, damage, numHi
     end
 end
 
-xi.job_utils.summoner.useManaCede = function(player, avatar)
+xi.job_utils.summoner.useManaCede = function(player)
     -- TODO: Animation needs to be performed on the avatar, not the player.
     local avatar  = player:getPet()
 
