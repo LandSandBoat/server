@@ -736,7 +736,7 @@ uint16 CSpiritController::DetermineHighestSpellFromMP(std::vector<uint16>& spell
 
         if (static_cast<CBattleEntity*>(PSpirit)->health.mp >= spellMPCost)
         {
-            return *spellIterator;
+            return static_cast<uint16>(*spellIterator);
         }
     }
     return static_cast<uint16>(0);

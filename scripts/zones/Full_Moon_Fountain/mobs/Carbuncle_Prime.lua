@@ -94,8 +94,6 @@ entity.onMobDeath = function(mob, player, optParams)
     local bf = mob:getBattlefield()
     local flag = true
 
-    print(bf:getLocalVar("phase"))
-
     for i = 0, 4 do
         local carby = GetMobByID(ID.primes[1][bf:getArea()] + i)
 
