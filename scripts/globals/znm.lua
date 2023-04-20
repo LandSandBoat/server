@@ -55,7 +55,7 @@ end
 
 xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local hpp = target:getHPP()
-    local system = target:getSystem()
+    local system = target:getEcosystem()
     local isNM = target:isNM()
     local distance = user:checkDistance(target)
     local isFacing = target:isFacing(user)

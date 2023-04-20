@@ -12,7 +12,7 @@ local itemObject = {}
 itemObject.onItemCheck = function(target, player)
     local result = 0
     if
-        target:getSystem() ~= xi.ecosystem.EMPTY and
+        target:getEcosystem() ~= xi.ecosystem.EMPTY and
         player:getZone():getRegionID() == xi.region.PROMYVION
     then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
