@@ -416,42 +416,21 @@ end
 
 xi.atma.onTrigger = function(player, npc)
     local atmaMask   = getAtmaMask(player)
-    local activeAtma = { 0, 0, 0 }
-    local menuParams = 0x1000000
+    local activeAtmaMask = getLunarAbyssiteMask(player)
+    local playerCruor = player:getCurrency("cruor")
 
-    local shiftVal = 0
-    for atmaSlot = 1, 3 do
+    for atmaSlot = 3, 1, -1 do
+        activeAtmaMask = bit.lshift(activeAtmaMask, 8)
         if player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
-            activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
 
-            -- Remove active Atmas from their appropriate bitfield
-            if activeAtma[atmaSlot] ~= 0 then
-                local groupOffset = activeAtma[atmaSlot] >= xi.ki.ATMA_OF_THE_HEIR and xi.ki.ATMA_OF_THE_HEIR or xi.ki.ATMA_OF_THE_LION
-                local parameterNum = math.floor((activeAtma[atmaSlot] - groupOffset + 1 + 32) / 32)
+            local keyItemId = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
+            local keyItemIndex = getIdByKeyItemId(keyItemId)
 
-                if groupOffset >= xi.ki.ATMA_OF_THE_HEIR then
-                    parameterNum = parameterNum + 4
-                end
-
-                menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
-                atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
-                shiftVal = shiftVal + 1
-            end
-
-            -- Set Bits for Active Atma Count (Two different bytes!)
-            if atmaSlot == 1 then
-                menuParams = menuParams + 0x1000000
-            else
-                menuParams = menuParams + 0x10000000
-            end
+            activeAtmaMask = activeAtmaMask + keyItemIndex
         end
     end
 
-    if getFreeAtmaSlot(player) == 0 then
-        atmaMask[1] = 0
-    end
-
-    player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
+    player:startEvent(2003, playerCruor, activeAtmaMask, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
 xi.atma.onEventUpdate = function(player, csid, option, npc)
