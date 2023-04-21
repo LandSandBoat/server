@@ -320,7 +320,7 @@ bool CMobController::MobSkill(int wsList)
         return false;
     }
 
-    std::shuffle(skillList.begin(), skillList.end(), xirand::mt());
+    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
     CBattleEntity* PActionTarget{ nullptr };
 
     for (auto skillid : skillList)
