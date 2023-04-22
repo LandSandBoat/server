@@ -27,8 +27,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.tier = 3
 
     if not xi.magic.differentEffect(caster, target, spell, params) then
-       spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-       return params.effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return params.effect
     end
 
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
@@ -36,7 +36,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if resist >= 0.5 then -- effect taken
         local resduration = duration * resist
 
-        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

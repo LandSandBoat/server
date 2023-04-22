@@ -43,7 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if resist >= 0.5 then --Do it!
         local resduration = duration * resist
 
-        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

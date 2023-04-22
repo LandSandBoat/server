@@ -1010,6 +1010,15 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
         resist = resist / 2
     end
 
+    -- If we're applying a status effect, < 0.5 should be fail, 0.5 is half duration, 1.0 is full duration
+    if effect ~= nil and resist < 0.5 then
+        resist = 0
+    elseif effect ~= nil and resist == 0.5 then
+        resist = 0.5
+    elseif effect ~= nil and resist > 0.5 then
+        resist = 1
+    end
+
     return resist
 end
 
