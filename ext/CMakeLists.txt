@@ -134,6 +134,18 @@ CPMAddPackage(
     GIT_TAG v3.11.2
 ) # defines: nlohmann_json::nlohmann_json
 
+CPMAddPackage(
+    NAME pcg-cpp
+    GITHUB_REPOSITORY imneme/pcg-cpp
+    GIT_TAG 428802d1a5634f96bcd0705fab379ff0113bcf13
+) # defines: pcg-cpp
+
+# pcg-cpp does not include cmake
+if(pcg-cpp_ADDED)
+    add_library(pcg-cpp INTERFACE)
+    target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
+endif()
+
 set(EXTERNAL_LIBS
     spdlog
     concurrentqueue
@@ -148,6 +160,7 @@ set(EXTERNAL_LIBS
     jthread-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
+    pcg-cpp
 )
 
 if (WIN32)
