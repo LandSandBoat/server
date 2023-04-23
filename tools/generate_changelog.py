@@ -111,7 +111,7 @@ response = reqs.get(request)
 data = json.loads(response.text)
 
 print(f"Writing to: changelog-{today}.md...")
-with open(f"changelogs/{today}.md", "w") as file:
+with open(f"changelog-{today}.md", "w") as file:
     file.write(f"## AirSkyBoat Changelog ({today})\n")
     for raw_entry in enumerate(data["items"]):
         entry = raw_entry[1]
@@ -152,7 +152,7 @@ with open(f"changelogs/{today}.md", "w") as file:
         file.write(
             f"- {get_good_description(body, title).capitalize()} [[#{number}]({html_url}), [patch]({patch_url})] ({authors_string})\n"
         )
-with open(f"changelogs/{today}-plain.md", "w") as file:
+with open(f"changelog-{today}-plain.md", "w") as file:
     file.write(f"## AirSkyBoat Changelog ({today})\n")
     for raw_entry in enumerate(data["items"]):
         entry = raw_entry[1]
