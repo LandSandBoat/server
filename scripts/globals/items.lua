@@ -3872,6 +3872,7 @@ xi.items =
     WINGEDGE                        = 17281,
     CHAKRAM                         = 17284,
     PEBBLE                          = 17296,
+    JUJI_SHURIKEN                   = 17302,
     FUMA_SHURIKEN                   = 17304,
     DART                            = 17307,
     IRON_BULLET                     = 17312,
