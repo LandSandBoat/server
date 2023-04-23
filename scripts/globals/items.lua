@@ -4173,6 +4173,7 @@ xi.items =
     GUISARME                        = 19310,
     MOGRATUITY                      = 19776,
     HERJAS_FORK                     = 19799,
+    GARGOUILLE_ARROW                = 19800,
     ADAMAN_BOLT                     = 19801,
     ADAMAN_BULLET                   = 19803,
     WORM_FEELERS                    = 20532,
