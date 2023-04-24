@@ -3,6 +3,7 @@
 -- key_ring_belt
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1115) -- skeleton_key
+    target:addItem(xi.items.SKELETON_KEY)
 end
 
 return itemObject
