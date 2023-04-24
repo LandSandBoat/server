@@ -75,10 +75,10 @@ quest.sections =
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(0)
                         else
-                            player:messageSpecial(ID.text.NOW_THAT_NIGHT_HAS_FALLEN)
+                            return quest:messageSpecial(ID.text.NOW_THAT_NIGHT_HAS_FALLEN)
                         end
                     else
-                        player:messageSpecial(ID.text.THESE_WITHERED_FLOWERS)
+                        return quest:messageSpecial(ID.text.THESE_WITHERED_FLOWERS)
                     end
                 end,
             },
