@@ -626,7 +626,6 @@ local prizes =
 			-- 15515, -- Peacock Amulet
 			-- 18752, -- Retaliators
 			-- 18714, -- Vali's Bow
-			-- 18852, -- Octave Club
 			-- 14469, -- Reverend Mail
 			-- 13915, -- Optical Hat
 			-- 15221, -- Patroclus's Helm
