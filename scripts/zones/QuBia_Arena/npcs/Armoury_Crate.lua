@@ -22,21 +22,21 @@ local loot =
         },
         {
             { itemid = 0,     droprate = 250 }, -- nothing
-            { itemid = 13419, droprate =  50 }, -- Soldier's Earring
-            { itemid = 13420, droprate =  50 }, -- Kampfer Earring
-            { itemid = 13421, droprate =  50 }, -- Medicine Earring
-            { itemid = 13422, droprate =  50 }, -- Sorcerer's Earring
-            { itemid = 13423, droprate =  50 }, -- Fencer's Earring
-            { itemid = 13424, droprate =  50 }, -- Rogue's Earring
-            { itemid = 13425, droprate =  50 }, -- Guardian Earring
-            { itemid = 13426, droprate =  50 }, -- Slayer's Earring
-            { itemid = 13427, droprate =  50 }, -- Tamer's Earring
-            { itemid = 13428, droprate =  50 }, -- Minstrel's Earring
-            { itemid = 13429, droprate =  50 }, -- Tracker's Earring
-            { itemid = 13430, droprate =  50 }, -- Ronin's Earring
-            { itemid = 13431, droprate =  50 }, -- Shinobi Earring
-            { itemid = 13432, droprate =  50 }, -- Drake Earring
-            { itemid = 13433, droprate =  50 }, -- Conjurer Earring
+            { itemid = xi.items.SOLDIERS_EARRING, droprate =  50 }, -- Soldier's Earring
+            { itemid = xi.items.KAMPFER_EARRING, droprate =  50 }, -- Kampfer Earring
+            { itemid = xi.items.MEDICINE_EARRING, droprate =  50 }, -- Medicine Earring
+            { itemid = xi.items.SORCERERS_EARRING, droprate =  50 }, -- Sorcerer's Earring
+            { itemid = xi.items.FENCERS_EARRING, droprate =  50 }, -- Fencer's Earring
+            { itemid = xi.items.ROGUES_EARRING, droprate =  50 }, -- Rogue's Earring
+            { itemid = xi.items.GUARDIAN_EARRING, droprate =  50 }, -- Guardian Earring
+            { itemid = xi.items.SLAYERS_EARRING, droprate =  50 }, -- Slayer's Earring
+            { itemid = xi.items.TAMERS_EARRING, droprate =  50 }, -- Tamer's Earring
+            { itemid = xi.items.MINSTRELS_EARRING, droprate =  50 }, -- Minstrel's Earring
+            { itemid = xi.items.TRACKERS_EARRING, droprate =  50 }, -- Tracker's Earring
+            { itemid = xi.items.RONINS_EARRING, droprate =  50 }, -- Ronin's Earring
+            { itemid = xi.items.SHINOBI_EARRING, droprate =  50 }, -- Shinobi Earring
+            { itemid = xi.items.DRAKE_EARRING, droprate =  50 }, -- Drake Earring
+            { itemid = xi.items.CONJURER_EARRING, droprate =  50 }, -- Conjurer Earring
         },
         {
             { itemid = 0,     droprate = 450 }, -- nothing
