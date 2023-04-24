@@ -2,7 +2,7 @@
 -- Area: Uleguerand_Range
 --  NPC: HomePoint#4
 -----------------------------------
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local entity = {}
 

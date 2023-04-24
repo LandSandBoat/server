@@ -2,7 +2,7 @@
 -- Area: Riverne-Site A01
 --  NPC: HomePoint#1
 -----------------------------------
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local entity = {}
 

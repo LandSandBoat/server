@@ -3,7 +3,7 @@
 --  NPC: HomePoint#1
 -- !pos 757 120 17.5 276
 -----------------------------------
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local entity = {}
 

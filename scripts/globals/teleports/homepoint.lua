@@ -165,7 +165,11 @@ local function goToHP(player, choice, index)
     local hpSet = math.floor(index / 32)
 
     if not player:hasTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet) then
-        printf(string.format("Player %s attempting to teleport to an yet-to-be-unlocked destination.", player))
+        printf("Anti-Cheat: Player attempting to teleport to a not unlocked destination.")
+        printf("Player      : %s", player)
+        printf("Origin      : %s", origin)
+        printf("Destination : %s", index)
+
         player:setCharVar("inJail", 1)
         player:setPos(-620, 11, 660, 0, xi.zone.MORDION_GAOL)
 

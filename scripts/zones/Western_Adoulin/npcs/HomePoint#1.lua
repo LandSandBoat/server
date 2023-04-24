@@ -2,7 +2,7 @@
 -- Area: Western_Adoulin
 --  NPC: HomePoint#1
 -----------------------------------
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local entity = {}
 

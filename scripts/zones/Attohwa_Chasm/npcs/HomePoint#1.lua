@@ -2,7 +2,7 @@
 -- Area: Attohwa Chasm
 --  NPC: HomePoint#2
 -----------------------------------
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local entity = {}
 
