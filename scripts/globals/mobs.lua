@@ -12,7 +12,6 @@ xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
 xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
-    xi.magian.checkMagianTrial(player, { ['mob'] = mob, ['triggerWs'] = false })
 end
 
 -----------------------------------

@@ -65,8 +65,6 @@ xi.settings.main =
 
     -- Magian Trials
     ENABLE_MAGIAN_TRIALS             = 1,
-    MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
-    MAGIAN_TRIALS_TRADE_MULTIPLIER   = 1,
 
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,

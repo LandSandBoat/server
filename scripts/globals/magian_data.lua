@@ -13,7 +13,7 @@ xi.magian = xi.magian or {}
 -- listener.
 
 -- Available Options to define:
--- mobId  : Specific Mob ID(s) required to be defeated
+-- tradeItem  : Item required for trades to delivery crate
 
 xi.magian.trials =
 {
@@ -26,7 +26,6 @@ xi.magian.trials =
         },
 
         textOffset  = 1,
-        mobId       = set{ 17563801 },
         numRequired = 3,
 
         rewardItem =
@@ -44,7 +43,6 @@ xi.magian.trials =
         },
 
         textOffset  = 2,
-        mobId       = set{ 17227972, 17227992 },
         numRequired = 3,
 
         rewardItem =
@@ -70,7 +68,6 @@ xi.magian.trials =
         },
 
         textOffset  = 3,
-        mobId       = set{ 16793646 },
         numRequired = 3,
 
         rewardItem =
@@ -96,7 +93,6 @@ xi.magian.trials =
         },
 
         textOffset  = 43,
-        mobId       = set{ 16822423, 16822427 },
         numRequired = 4,
 
         rewardItem =
@@ -114,7 +110,6 @@ xi.magian.trials =
         },
 
         textOffset  = 44,
-        mobId       = set{ 17121576 },
         numRequired = 4,
 
         rewardItem =
@@ -166,7 +161,6 @@ xi.magian.trials =
         },
 
         textOffset  = 46,
-        mobId       = set{ 17109384, 17113491 },
         numRequired = 6,
 
         rewardItem =
@@ -192,7 +186,6 @@ xi.magian.trials =
         },
 
         textOffset  = 47,
-        mobId       = set{ 17334552, 17338598 },
         numRequired = 6,
 
         rewardItem =

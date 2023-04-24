@@ -65,7 +65,7 @@ public:
     void  addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
     void  delMod(uint16 modID, int16 power); // remove power from mod
 
-    auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
+    auto getAugment(uint8 slot) -> sol::table; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
     uint8  getSkillType();         // get skill type
