@@ -3,7 +3,7 @@
 -- Set if you want Home Points to heal you like in single-player Final Fantasy games.
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/homepoint")
+require("scripts/globals/teleports/homepoint")
 -----------------------------------
 local m = Module:new("homepoint_heal")
 
