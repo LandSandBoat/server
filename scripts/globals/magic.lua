@@ -629,6 +629,32 @@ xi.magic.differentEffect = function(caster, target, spell, params)
     return true
 end
 
+xi.magic.handleBurstMsg = function(caster, target, spell)
+    local element = spell:getElement()
+
+    if element and element ~= xi.magic.ele.NONE then
+        local magicBurst = xi.spells.damage.calculateIfMagicBurst(caster, target, spell, element)
+
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated as this is run per target.
+            target:triggerListener("MAGIC_BURST_TAKE", caster, target, 0)
+            spell:setMsg(spell:getMagicBurstMessage())
+            caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
+        end
+    end
+end
+
+xi.magic.handleSMNBurstMsg = function(pet, target, skill, element, mbmsg)
+    if element and element ~= xi.magic.ele.NONE then
+        local magicBurst = xi.spells.damage.calculateIfMagicBurst(pet, target, skill, element)
+
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated as this is run per target.
+            target:triggerListener("MAGIC_BURST_TAKE", pet, target, 0)
+            skill:setMsg(mbmsg)
+            pet:triggerRoeEvent(xi.roe.triggers.magicBurst)
+        end
+    end
+end
+
 -- USED FOR Status Effect Enfeebs (blind, slow, para, etc.)
 -- Output:
 -- The factor to multiply down duration (1/2 1/4 1/8 1/16)

@@ -37,6 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         --Try to erase a weaker bind.
         elseif target:addStatusEffect(xi.effect.BIND, target:getSpeed(), 0, resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
