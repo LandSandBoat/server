@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Gargouille Arrow
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(19800, 99)
+    target:addItem(xi.items.GARGOUILLE_ARROW, 99)
 end
 
 return itemObject

@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Iron Bullets
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17312, 99)
+    target:addItem(xi.items.IRON_BULLET, 99)
 end
 
 return itemObject
