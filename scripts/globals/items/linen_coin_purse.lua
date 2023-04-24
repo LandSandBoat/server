@@ -4,6 +4,7 @@
 -- Breaks up a Linen Purse
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2488, math.random(50, 99))
+    target:addItem(xi.items.ALEXANDRITE, math.random(50, 99))
 end
 
 return itemObject
