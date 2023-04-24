@@ -4,6 +4,7 @@
 -- Breaks up a Heavy Metal Pouch
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(3509, math.random(3, 19))
+    target:addItem(xi.items.PLATE_OF_HEAVY_METAL, math.random(3, 19))
 end
 
 return itemObject
