@@ -236,6 +236,7 @@ quest.sections =
                         quest:setVar(player, 'Coin', 1)
                     end
                 end,
+
                 [50] = function(player, csid, option, npc)
                     if option == 2 and npcUtil.giveItem(player, xi.items.SHELLING_PIECE) then
                         quest:setVar(player, 'Coin', 1)
@@ -248,11 +249,13 @@ quest.sections =
                         npcUtil.giveItem(player, xi.items.SHELLING_PIECE)
                     end
                 end,
+
                 [47] = function(player, csid, option, npc)
                     if option == 2 then
                         npcUtil.giveItem(player, xi.items.SHELLING_PIECE)
                     end
                 end,
+
                 [51] = function(player, csid, option, npc)
                     if option == 2 then
                         npcUtil.giveItem(player, xi.items.SHELLING_PIECE)
