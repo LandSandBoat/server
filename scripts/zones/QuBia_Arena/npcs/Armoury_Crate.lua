@@ -22,21 +22,21 @@ local loot =
         },
         {
             { itemid = 0,     droprate = 250 }, -- nothing
-            { itemid = 13286, droprate =  50 }, -- Soldier's Earring
-            { itemid = 13287, droprate =  50 }, -- Kampfer Earring
-            { itemid = 13288, droprate =  50 }, -- Medicine Earring
-            { itemid = 13289, droprate =  50 }, -- Sorcerer's Earring
-            { itemid = 13290, droprate =  50 }, -- Fencer's Earring
-            { itemid = 13291, droprate =  50 }, -- Rogue's Earring
-            { itemid = 13292, droprate =  50 }, -- Guardian Earring
-            { itemid = 13293, droprate =  50 }, -- Slayer's Earring
-            { itemid = 13294, droprate =  50 }, -- Tamer's Earring
-            { itemid = 13295, droprate =  50 }, -- Minstrel's Earring
-            { itemid = 13296, droprate =  50 }, -- Tracker's Earring
-            { itemid = 13297, droprate =  50 }, -- Ronin's Earring
-            { itemid = 13298, droprate =  50 }, -- Shinobi Earring
-            { itemid = 13299, droprate =  50 }, -- Drake Earring
-            { itemid = 13300, droprate =  50 }, -- Conjurer Earring
+            { itemid = 13419, droprate =  50 }, -- Soldier's Earring
+            { itemid = 13420, droprate =  50 }, -- Kampfer Earring
+            { itemid = 13421, droprate =  50 }, -- Medicine Earring
+            { itemid = 13422, droprate =  50 }, -- Sorcerer's Earring
+            { itemid = 13423, droprate =  50 }, -- Fencer's Earring
+            { itemid = 13424, droprate =  50 }, -- Rogue's Earring
+            { itemid = 13425, droprate =  50 }, -- Guardian Earring
+            { itemid = 13426, droprate =  50 }, -- Slayer's Earring
+            { itemid = 13427, droprate =  50 }, -- Tamer's Earring
+            { itemid = 13428, droprate =  50 }, -- Minstrel's Earring
+            { itemid = 13429, droprate =  50 }, -- Tracker's Earring
+            { itemid = 13430, droprate =  50 }, -- Ronin's Earring
+            { itemid = 13431, droprate =  50 }, -- Shinobi Earring
+            { itemid = 13432, droprate =  50 }, -- Drake Earring
+            { itemid = 13433, droprate =  50 }, -- Conjurer Earring
         },
         {
             { itemid = 0,     droprate = 450 }, -- nothing
