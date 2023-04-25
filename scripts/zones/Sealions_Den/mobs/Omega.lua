@@ -21,19 +21,34 @@ entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     mob:setMod(xi.mod.REGAIN, 100)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 54)
+    mob:setMod(xi.mod.ATTP, 50)
 end
 
 entity.onMobFight = function(mob)
     -- Gains regain at under 25% HP
     local stage = mob:getLocalVar("stage")
 
-    if mob:getHPP() < 60 and stage == 0 then
-        mob:setDelay(3000)
+    -- need to use this structure in case regens above back to previous stage
+    if mob:getHPP() > 60 and stage ~= 0 then
+        -- delay of 205
+        mob:setDelay(3417)
+        mob:setMod(xi.mod.REGAIN, 100)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 54)
+        mob:setMod(xi.mod.ATTP, 50)
+        mob:setLocalVar("stage", 0)
+    elseif mob:getHPP() > 25 and mob:getHPP() <= 60 and stage ~= 1 then
+        -- delay of 160
+        mob:setDelay(2666)
         mob:setMod(xi.mod.REGAIN, 150)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 54)
+        mob:setMod(xi.mod.ATTP, 50)
         mob:setLocalVar("stage", 1)
-    elseif mob:getHPP() < 25 and stage < 2 then
-        mob:setDelay(2500)
+    elseif mob:getHPP() <= 25 and stage ~= 2 then
+        -- delay of 100
+        mob:setDelay(1666)
         mob:setMod(xi.mod.REGAIN, 200)
+        -- boost by an additional 50% for 100% total boost
+        mob:setMod(xi.mod.ATTP, 100)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1187)
         mob:setLocalVar("stage", 2)
     end

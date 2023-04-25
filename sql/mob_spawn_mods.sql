@@ -1824,6 +1824,14 @@ INSERT INTO `mob_spawn_mods` VALUES (16814232,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16814233,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16814234,55,180,1); -- IDLE_DESPAWN: 180
 
+-- Bahamut v2 and his wyrms (Tiamat, Vrtra, Ouryu, Jormungand)
+-- Need superlinking to make sure mobs link with each other after resetting on wipe
+INSERT INTO `mob_spawn_mods` VALUES (16896157,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896158,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896159,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896160,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896161,26,1,1); -- SUPERLINK 1
+
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -12,8 +12,6 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
-    elseif mob:hasStatusEffect(xi.effect.INVINCIBLE) then
-        return 1
     elseif mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
         return 1
     elseif target:isBehind(mob, 96) then
