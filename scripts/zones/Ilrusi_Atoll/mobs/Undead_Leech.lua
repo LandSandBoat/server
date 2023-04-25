@@ -2,6 +2,8 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Undead Leech
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

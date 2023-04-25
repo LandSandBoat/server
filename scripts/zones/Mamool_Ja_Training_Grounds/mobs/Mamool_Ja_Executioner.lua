@@ -2,6 +2,8 @@
 -- Area: Mamool Ja Training Grounds (Preemptive Strike)
 --  Mob: Mamool Ja Executioner
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

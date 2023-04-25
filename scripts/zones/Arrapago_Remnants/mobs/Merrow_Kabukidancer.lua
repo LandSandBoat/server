@@ -12,7 +12,7 @@ end
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     if instance:getStage() == 1 then
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressInstance(mob, 1)
     end
 end
 

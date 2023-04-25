@@ -2,6 +2,8 @@
 -- Area: Periqia (Shades of Vengeance)
 --  Mob: K23H1-LAMIA
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

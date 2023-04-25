@@ -228,7 +228,18 @@ xi.assault.progressInstance = function(mob, amount)
 
         instance:setProgress(instance:getProgress() + amount)
     end
+end
 
+xi.assault.setProgress = function(mob, amount)
+    local instance = mob:getInstance()
+
+    if instance then
+        if amount == nil then
+            amount = 1
+        end
+
+        instance:setProgress(amount)
+    end
 end
 
 xi.assault.mission =

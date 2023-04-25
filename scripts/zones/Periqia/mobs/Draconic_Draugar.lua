@@ -2,6 +2,8 @@
 -- Area: Periqia (Requiem)
 --  Mob: Draconic Draugar
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

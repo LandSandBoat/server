@@ -40,7 +40,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
                 GATE_1 = 17047567, GATE_2 = 17047568, GATE_3 = 17047569,
             },
 
-            GATES      =
+            GATES =
             {
                 17047567, 17047568, 17047569,
             },
