@@ -9,7 +9,10 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, { 1404, 1405, 1406, 1407 }) then
+    if
+        npc:getStatus() == xi.status.NORMAL and
+        npcUtil.tradeHas(trade, { 1404, 1405, 1406, 1407 })
+    then
         player:startEvent(101)
         player:confirmTrade()
     end

@@ -11,22 +11,33 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
+    if mob:hasStatusEffect(xi.effect.ALL_MISS) then
+        mob:delStatusEffect(xi.effect.ALL_MISS)
+    end
+
+    mob:addImmunity(xi.immunity.SLOW)
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setLocalVar("savageDmgMultipliers", 1)
-    mob:setLocalVar("twoHour", 0)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
-    mob:addMod(xi.mod.EARTH_MEVA, 1000)
-    mob:setMod(xi.mod.BLINDRES, 25)
-    mob:addMod(xi.mod.PARALYZERES, 25)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158)
     mob:setMod(xi.mod.UDMGRANGE, -5000)
-    -- mob:setMod(xi.mod.MATT, -25)
-    -- mob:setMod(xi.mod.ATT, -50)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
     mob:setMod(xi.mod.UFASTCAST, 90)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.DEF, 459)
+    mob:setMod(xi.mod.EVA, 422)
+    mob:setMod(xi.mod.ATT, 436)
+    mob:setMod(xi.mod.MATT, 0) -- Damage output does not show any MATT bonus
+    mob:setMod(xi.mod.REFRESH, 200)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+
+    mob:setLocalVar("twoHour", 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -38,16 +49,21 @@ entity.onMobEngaged = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local twohourTime = mob:getLocalVar("twohour")
     -- use 2hr on 10 min cooldown
-    if mob:getBattleTime()/15 > twohourTime then
+    if
+        mob:getAnimationSub() == 2 and
+        mob:getBattleTime() / 15 > mob:getLocalVar("twohour")
+    then
         mob:useMobAbility(694)
-        mob:setLocalVar("twohour", math.random((mob:getBattleTime()/15)+36, (mob:getBattleTime()/15)+40))
+        mob:setLocalVar("twohour", math.random((mob:getBattleTime() / 15) + 36, (mob:getBattleTime() / 15) + 40))
     end
 
-    if mob:canUseAbilities() then
+    if
+        not mob:hasStatusEffect(xi.effect.INVINCIBLE) and
+        mob:actionQueueEmpty() and
+        mob:canUseAbilities()
+    then
         local changeTime = mob:getLocalVar("changeTime")
-        print(mob:getBattleTime() - changeTime)
 
         -- first flight
         if mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
@@ -58,7 +74,6 @@ entity.onMobFight = function(mob, target)
         -- land
         elseif mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > 120 then
             mob:useMobAbility(1302)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
         -- fly
         elseif mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 120 then
             mob:setAnimationSub(1)
@@ -69,11 +84,16 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Wakeup from sleep immediately if flying
-    if mob:getAnimationSub() == 1 and
-    (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-    mob:hasStatusEffect(xi.effect.SLEEP_II) or
-    mob:hasStatusEffect(xi.effect.LULLABY)) then
-        mob:wakeUp()
+    if hasSleepEffects(mob) and mob:getAnimationSub() == 1 then
+        removeSleepEffects(mob)
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    -- only reset change time if actual perform touchdown
+    -- thus keep trying until we do so
+    if skill:getID() == 1302 then
+        mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end
 

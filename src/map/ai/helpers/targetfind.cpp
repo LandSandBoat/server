@@ -164,7 +164,10 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             withPet = PETS_CAN_AOE_BUFF;
         }
 
-        if (m_findFlags & FINDFLAGS_HIT_ALL || (m_findType == FIND_TYPE::MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->GetCallForHelpFlag()))
+        // In dynamis always find all reguardless of alliance
+        if (m_findFlags & FINDFLAGS_HIT_ALL ||
+            (m_findType == FIND_TYPE::MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->GetCallForHelpFlag()) ||
+            m_PBattleEntity->isInDynamis())
         {
             addAllInZone(m_PMasterTarget, withPet);
         }

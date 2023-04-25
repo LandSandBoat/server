@@ -14,7 +14,11 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
+    if
+        mob:getAnimationSub() == 1 or
+        mob:getMainJob() == xi.job.MNK or
+        mob:getMainJob() == xi.job.PUP
+    then
         return 0
     else
         return 1
@@ -28,6 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 1.5, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.HTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.HTH)
     return dmg
 end

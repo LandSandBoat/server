@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasItem(xi.items.UGGALEPIH_WHISTLE) then
+    if
+        npc:getStatus() == xi.status.NORMAL and
+        not player:hasItem(xi.items.UGGALEPIH_WHISTLE)
+    then
         if npcUtil.giveItem(player, xi.items.UGGALEPIH_WHISTLE) then -- Uggalepih Whistle
             local positions =
             {

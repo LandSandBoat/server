@@ -12,7 +12,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 25, 0, 600))
+    local defBoost = 25
+    if mob:isInDynamis() then
+        defBoost = 50
+    end
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, defBoost, 0, 60))
 
     return xi.effect.DEFENSE_BOOST
 end

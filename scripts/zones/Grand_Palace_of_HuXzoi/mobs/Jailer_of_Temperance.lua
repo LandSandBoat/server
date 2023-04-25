@@ -14,8 +14,44 @@ local chargeOptic = function(mob)
     mob:setMobAbilityEnabled(false)
 
     mob:timer(3000, function(mobArg)
-        mobArg:useMobAbility(1465) -- JoT will use another Optic Induration shortly after using the first one.
+        if mobArg:isAlive() then
+            mobArg:useMobAbility(1465) -- JoT will use another Optic Induration shortly after using the first one.
+        end
     end)
+
+    -- set opticCounter back to 0 and set back to normal
+    -- after the second Optic Induration (even if it fails and thus onMobWeaponSkill not called)
+    mob:timer(6500, function(mobArg)
+        if mobArg:isAlive() then
+            mobArg:setLocalVar("opticCounter", 0)
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
+        end
+    end)
+end
+
+local changeToPot = function(mob)
+            mob:setMod(xi.mod.HTH_SDT, 1000)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 1000)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
+end
+
+local changeToPole = function(mob)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 1000)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
+end
+
+local changeToRings = function(mob)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 1000)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
 end
 
 entity.onMobSpawn = function(mob)
@@ -42,12 +78,15 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PIERCE_SDT, 0)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
-    mob:setMod(xi.mod.DMGMAGIC, -10000)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    -- Confirmed on retail that breath damage does not work
+    mob:setMod(xi.mod.UDMGBREATH, -10000)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
     mob:setMod(xi.mod.ATT, 553)
     mob:setMod(xi.mod.DEF, 514)
     mob:setMod(xi.mod.EVA, 335)
+    mob:setMod(xi.mod.MOVE, 50)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -80,17 +119,9 @@ entity.onMobFight = function(mob)
 
         -- We changed to Poles. Make it only take piercing.
         if aniChange == 2 then
-            mob:setMod(xi.mod.HTH_SDT, 0)
-            mob:setMod(xi.mod.SLASH_SDT, 0)
-            mob:setMod(xi.mod.PIERCE_SDT, 1000)
-            mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToPole(mob)
         else -- We changed to Rings. Make it only take slashing.
-            mob:setMod(xi.mod.HTH_SDT, 0)
-            mob:setMod(xi.mod.SLASH_SDT, 1000)
-            mob:setMod(xi.mod.PIERCE_SDT, 0)
-            mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToRings(mob)
         end
     -- We're in poles, but changing
     elseif
@@ -103,18 +134,10 @@ entity.onMobFight = function(mob)
         -- Changing to Pot, only take Blunt damage
         if aniChange == 0 then
             mob:setAnimationSub(0)
-            mob:setMod(xi.mod.HTH_SDT, 1000)
-            mob:setMod(xi.mod.SLASH_SDT, 0)
-            mob:setMod(xi.mod.PIERCE_SDT, 0)
-            mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToPot(mob)
         else -- Going to Rings, only take slashing
             mob:setAnimationSub(3)
-            mob:setMod(xi.mod.HTH_SDT, 0)
-            mob:setMod(xi.mod.SLASH_SDT, 1000)
-            mob:setMod(xi.mod.PIERCE_SDT, 0)
-            mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToRings(mob)
         end
     -- We're in rings, but going to change to pot or poles
     elseif
@@ -130,17 +153,9 @@ entity.onMobFight = function(mob)
             aniChange == 0 or
             aniChange == 1
         then
-            mob:setMod(xi.mod.HTH_SDT, 1000)
-            mob:setMod(xi.mod.SLASH_SDT, 0)
-            mob:setMod(xi.mod.PIERCE_SDT, 0)
-            mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToPot(mob)
         else -- Changing to poles, only take piercing
-            mob:setMod(xi.mod.HTH_SDT, 0)
-            mob:setMod(xi.mod.SLASH_SDT, 0)
-            mob:setMod(xi.mod.PIERCE_SDT, 1000)
-            mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            changeToPole(mob)
         end
     end
 
@@ -153,15 +168,9 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
     if skillID == 1465 then -- On Optic Induration Do this
-        local opticCounter = mob:getLocalVar("opticCounter")
-
-        if opticCounter == 0 then
+        if mob:getLocalVar("opticCounter") == 0 then
             mob:setLocalVar("opticCounter", 1)
             chargeOptic(mob)
-        else
-            mob:setLocalVar("opticCounter", 0)
-            mob:setAutoAttackEnabled(true)
-            mob:setMobAbilityEnabled(true)
         end
     end
 end

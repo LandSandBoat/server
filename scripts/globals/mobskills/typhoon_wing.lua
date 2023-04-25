@@ -30,15 +30,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 60, 0, 30)
 
     local dmgmod = 1
-    local dmgBoost = 0
-
-    if mob:getPool() == 3070 then -- CoP 4-2 The Savage Ouryu
-        dmgBoost = 2.5
-    else
-        dmgBoost = 5
-    end
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * dmgBoost, xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 5, 5, 5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
     return dmg

@@ -29,6 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if duration >= 150 then
             if target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+                xi.magic.handleBurstMsg(caster, target, spell)
             else
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end

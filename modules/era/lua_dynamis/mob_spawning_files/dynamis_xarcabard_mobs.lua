@@ -147,7 +147,7 @@ xi.dynamis.mobList[zoneID][54 ].info = {"Statue", "Vanguard Eye", nil, nil, nil}
 xi.dynamis.mobList[zoneID][55 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (055-D)
 xi.dynamis.mobList[zoneID][56 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (056-D)
 xi.dynamis.mobList[zoneID][57 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (057-D)
-xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (058-D)
+xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Vanguard Eye", nil, nil, "58_killed"} -- (058-D)
 xi.dynamis.mobList[zoneID][59 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (059-D)
 xi.dynamis.mobList[zoneID][60 ].info = {"Statue", "Tombstone Prototype", nil, nil, nil} -- (060-O)(30) Tombstone Prototype
 xi.dynamis.mobList[zoneID][61 ].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (061-D)
@@ -231,14 +231,14 @@ xi.dynamis.mobList[zoneID][138].info = {"Statue", "Vanguard Eye", nil, nil, nil}
 xi.dynamis.mobList[zoneID][139].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (139-D)  Pops King Zagan DRG
 xi.dynamis.mobList[zoneID][140].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (140-D)  Pops Count Vine SAM
 xi.dynamis.mobList[zoneID][141].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (141-D)  Pops Marquis Cimeries RNG
-xi.dynamis.mobList[zoneID][142].info = {"Statue", "Effigy Prototype", nil, nil, nil} -- (142-Q)(HP)     Effigy Prototype
-xi.dynamis.mobList[zoneID][143].info = {"Statue", "Statue Prototype", nil, nil, nil} -- (143-G)(30)     Statue Prototype
-xi.dynamis.mobList[zoneID][144].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (144-D)
-xi.dynamis.mobList[zoneID][145].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (145-D)
-xi.dynamis.mobList[zoneID][146].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (146-D)
-xi.dynamis.mobList[zoneID][147].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (147-D)
-xi.dynamis.mobList[zoneID][148].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (148-D)
-xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (149-D)
+xi.dynamis.mobList[zoneID][142].info = {"Statue", "Effigy Prototype", nil, nil, "142_killed"} -- (142-Q)(HP)     Effigy Prototype
+xi.dynamis.mobList[zoneID][143].info = {"Statue", "Statue Prototype", nil, nil, "143_killed"} -- (143-G)(30)     Statue Prototype
+xi.dynamis.mobList[zoneID][144].info = {"Statue", "Vanguard Eye", nil, nil, "144_killed"} -- (144-D)
+xi.dynamis.mobList[zoneID][145].info = {"Statue", "Vanguard Eye", nil, nil, "145_killed"} -- (145-D)
+xi.dynamis.mobList[zoneID][146].info = {"Statue", "Vanguard Eye", nil, nil, "146_killed"} -- (146-D)
+xi.dynamis.mobList[zoneID][147].info = {"Statue", "Vanguard Eye", nil, nil, "147_killed"} -- (147-D)
+xi.dynamis.mobList[zoneID][148].info = {"Statue", "Vanguard Eye", nil, nil, "148_killed"} -- (148-D)
+xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, "149_killed"} -- (149-D)
 xi.dynamis.mobList[zoneID][150].info = {"Statue", "Statue Prototype", nil, nil, nil} -- (150-G)(30)     Statue Prototype
 xi.dynamis.mobList[zoneID][151].info = {"NM", "Animated Hammer",    nil, nil, "hammer_killed"} -- ( 151 ) Animated Hammer
 xi.dynamis.mobList[zoneID][152].info = {"NM", "Animated Dagger",    nil, nil, "dagger_killed"} -- ( 152 ) Animated Dagger
@@ -428,8 +428,8 @@ xi.dynamis.mobList[zoneID][1].wave =
     32 , -- (032-D)  Avatar Icon
     33 , -- (033-D)  Manifest Icon
     34 , -- (034-D)  Avatar Icon
-    38 , -- (038-D)  Avatar Icon
-    42 , -- (042-D)  Manifest Icon
+    35 , -- (035-D)  Avatar Icon
+    39 , -- (039-D)  Avatar Icon
     44 , -- (044-D)  Avatar Icon
     45 , -- (045-D)  Manifest Icon
     46 , -- (046-D)  Avatar Idol

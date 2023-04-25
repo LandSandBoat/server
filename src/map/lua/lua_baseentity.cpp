@@ -3268,8 +3268,8 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0) = sql->GetUIntData(0); // target char
-        ref<uint16>(&buf, 4) = m_PBaseEntity->id;   // warping to target char, their server will send us a zoning message with their pos
+        ref<uint32>(&buf, 0) = sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4) = m_PBaseEntity->id;   // warping to target char, their server will send us a zoning message with their pos
 
         message::send(MSG_SEND_TO_ZONE, &buf[0], sizeof(buf), nullptr);
         found = true;
@@ -3297,8 +3297,8 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0)  = sql->GetUIntData(0); // target char
-        ref<uint16>(&buf, 4)  = 0;                   // wanting to bring target char here so wont give our id
+        ref<uint32>(&buf, 0)  = sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4)  = 0;                   // wanting to bring target char here so wont give our id
         ref<uint16>(&buf, 8)  = m_PBaseEntity->getZone();
         ref<uint16>(&buf, 10) = static_cast<uint16>(m_PBaseEntity->loc.p.x);
         ref<uint16>(&buf, 14) = static_cast<uint16>(m_PBaseEntity->loc.p.y);
@@ -13542,6 +13542,7 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         PMob->SetMLevel(level);
+        PMob->SetSLevel(level);
         mobutils::CalculateMobStats(PMob);
         mobutils::GetAvailableSpells(PMob);
     }
@@ -15058,16 +15059,18 @@ bool CLuaBaseEntity::itemStolen()
 
 /************************************************************************
  *  Function: getTHlevel()
- *  Purpose : Return mob's current Treasure Hunter tier if alive, or its last if dead.
+ *  Purpose : Return mob's current Treasure Hunter tier
  *  Example : local TH = target:getTHlevel()
  ************************************************************************/
 
 int16 CLuaBaseEntity::getTHlevel()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
-    return PMob->isDead() ? PMob->m_THLvl : PMob->PEnmityContainer->GetHighestTH();
+    if (m_PBaseEntity->objtype == TYPE_MOB)
+    {
+        CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+        return PMob->m_THLvl;
+    }
+    return 0;
 }
 
 /************************************************************************

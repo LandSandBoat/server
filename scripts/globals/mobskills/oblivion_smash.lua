@@ -18,11 +18,13 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = 0
+
     if mob:getHPP() <= 25 then
         dmg = target:getHP()
         target:setHP(0)
         return dmg
     end
+
     local numhits = 3
     local accmod = 1
     local dmgmod = 1
@@ -32,7 +34,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SILENCE, 0, 0, 120)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIND, 0, 0, 120)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 50, 0, 120)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    end
+
     return dmg
 end
 

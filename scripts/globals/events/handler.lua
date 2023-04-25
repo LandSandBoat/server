@@ -71,6 +71,7 @@ end
 xi.events.registeredEvents =
 {
     require("scripts/globals/events/starlight_celebration"),
+    require("scripts/globals/events/egg_hunt_egg-stravaganza")
 }
 
 xi.events.handler.checkSeasonalEvents = function()
