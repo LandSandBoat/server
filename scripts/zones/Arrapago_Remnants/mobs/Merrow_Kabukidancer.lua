@@ -2,6 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Merrow Kabukidancer
 -----------------------------------
+require("scripts/globals/assault")
 mixins = { require("scripts/mixins/weapon_break") }
 -----------------------------------
 local entity = {}

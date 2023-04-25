@@ -210,8 +210,8 @@ xi.assault.adjustMobLevel = function(mob)
 end
 
 xi.assault.addTempItem = function(mob, player, item, chance)
-    if mob:getLocalVar("dead") == 0 then
-        mob:setLocalVar("dead", 1)
+    if mob:getLocalVar("tempItem") == 0 then
+        mob:setLocalVar("tempItem", 1)
         if math.random(0, 100) <= chance then
             npcUtil.giveTempItem(player, item)
         end
