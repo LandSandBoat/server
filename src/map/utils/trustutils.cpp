@@ -90,14 +90,10 @@ struct Trust_t
     int16 hth_sdt;
     int16 impact_sdt;
 
-    int16 fire_sdt;
-    int16 ice_sdt;
-    int16 wind_sdt;
-    int16 earth_sdt;
-    int16 thunder_sdt;
-    int16 water_sdt;
-    int16 light_sdt;
-    int16 dark_sdt;
+    int16 physical_sdt;
+    int16 ranged_sdt;
+    int16 magical_sdt;
+    int16 breath_sdt;
 
     int8 fire_res_rank;
     int8 ice_res_rank;
@@ -151,14 +147,10 @@ struct Trust_t
         hth_sdt    = 0;
         impact_sdt = 0;
 
-        fire_sdt    = 0;
-        ice_sdt     = 0;
-        wind_sdt    = 0;
-        earth_sdt   = 0;
-        thunder_sdt = 0;
-        water_sdt   = 0;
-        light_sdt   = 0;
-        dark_sdt    = 0;
+        physical_sdt = 0;
+        ranged_sdt   = 0;
+        magical_sdt  = 0;
+        breath_sdt   = 0;
 
         fire_res_rank    = 0;
         ice_res_rank     = 0;
@@ -239,10 +231,7 @@ namespace trustutils
                 mob_family_system.EVA, \
                 mob_resistances.slash_sdt, mob_resistances.pierce_sdt, \
                 mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
-                mob_resistances.fire_sdt, mob_resistances.ice_sdt, \
-                mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
-                mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
-                mob_resistances.light_sdt, mob_resistances.dark_sdt, \
+                mob_resistances.physical_sdt, mob_resistances.ranged_sdt, mob_resistances.magical_sdt, mob_resistances.breath_sdt, \
                 mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, \
                 mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, \
                 mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, \
@@ -318,23 +307,19 @@ namespace trustutils
                 trust->hth_sdt    = (uint16)(sql->GetFloatData(34) * 1000);
                 trust->impact_sdt = (uint16)(sql->GetFloatData(35) * 1000);
 
-                trust->fire_sdt    = (int16)sql->GetIntData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                trust->ice_sdt     = (int16)sql->GetIntData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                trust->wind_sdt    = (int16)sql->GetIntData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                trust->earth_sdt   = (int16)sql->GetIntData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                trust->thunder_sdt = (int16)sql->GetIntData(40); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                trust->water_sdt   = (int16)sql->GetIntData(41); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                trust->light_sdt   = (int16)sql->GetIntData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                trust->dark_sdt    = (int16)sql->GetIntData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                trust->physical_sdt = (int16)sql->GetIntData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                trust->ranged_sdt   = (int16)sql->GetIntData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                trust->magical_sdt  = (int16)sql->GetIntData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                trust->breath_sdt   = (int16)sql->GetIntData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_res_rank    = (int8)sql->GetIntData(44);
-                trust->ice_res_rank     = (int8)sql->GetIntData(45);
-                trust->wind_res_rank    = (int8)sql->GetIntData(46);
-                trust->earth_res_rank   = (int8)sql->GetIntData(47);
-                trust->thunder_res_rank = (int8)sql->GetIntData(48);
-                trust->water_res_rank   = (int8)sql->GetIntData(49);
-                trust->light_res_rank   = (int8)sql->GetIntData(50);
-                trust->dark_res_rank    = (int8)sql->GetIntData(51);
+                trust->fire_res_rank    = (int8)sql->GetIntData(40);
+                trust->ice_res_rank     = (int8)sql->GetIntData(41);
+                trust->wind_res_rank    = (int8)sql->GetIntData(42);
+                trust->earth_res_rank   = (int8)sql->GetIntData(43);
+                trust->thunder_res_rank = (int8)sql->GetIntData(44);
+                trust->water_res_rank   = (int8)sql->GetIntData(45);
+                trust->light_res_rank   = (int8)sql->GetIntData(46);
+                trust->dark_res_rank    = (int8)sql->GetIntData(47);
 
                 g_PTrustList.push_back(trust);
             }

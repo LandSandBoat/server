@@ -1226,7 +1226,7 @@ Usage:
         ecosystemID, mobradius, speed, \
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-        fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+        physical_sdt, ranged_sdt, magical_sdt, breath_sdt, \
         fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
@@ -1300,52 +1300,48 @@ Usage:
                 PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(36) * 1000));
                 PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(37) * 1000));
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGPHYS, (int16)sql->GetIntData(38));   // Modifier 387, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGRANGE, (int16)sql->GetIntData(39));  // Modifier 390, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGMAGIC, (int16)sql->GetIntData(40));  // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGBREATH, (int16)sql->GetIntData(41)); // Modifier 388, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(46)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(47)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(48)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(49)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(50)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(51)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(52)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(53)));
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(42)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(43)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(44)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(45)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(46)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(47)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(48)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(49)));
 
-                PMob->m_Element     = (uint8)sql->GetIntData(54);
-                PMob->m_Family      = (uint16)sql->GetIntData(55);
-                PMob->m_name_prefix = (uint8)sql->GetIntData(56);
-                PMob->m_flags       = (uint32)sql->GetIntData(57);
+                PMob->m_Element     = (uint8)sql->GetIntData(50);
+                PMob->m_Family      = (uint16)sql->GetIntData(51);
+                PMob->m_name_prefix = (uint8)sql->GetIntData(52);
+                PMob->m_flags       = (uint32)sql->GetIntData(53);
 
                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                 // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                 // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                PMob->animationsub = (uint32)sql->GetIntData(58);
+                PMob->animationsub = (uint32)sql->GetIntData(54);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = sql->GetFloatData(59);
-                PMob->MPscale = sql->GetFloatData(60);
+                PMob->HPscale = sql->GetFloatData(55);
+                PMob->MPscale = sql->GetFloatData(56);
 
                 // TODO: Remove me
                 // Check if we should be looking up scripts for this mob
-                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(57);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(58));
 
-                PMob->m_Pool = sql->GetUIntData(63);
+                PMob->m_Pool = sql->GetUIntData(59);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(64));
-                PMob->namevis         = sql->GetUIntData(65);
-                PMob->m_Aggro         = sql->GetUIntData(66);
-                PMob->m_MobSkillList  = sql->GetUIntData(67);
-                PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(60));
+                PMob->namevis         = sql->GetUIntData(61);
+                PMob->m_Aggro         = sql->GetUIntData(62);
+                PMob->m_MobSkillList  = sql->GetUIntData(63);
+                PMob->m_TrueDetection = sql->GetUIntData(64);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(65));
 
                 CZone* newZone = zoneutils::GetZone(zoneID);
 
@@ -1384,7 +1380,7 @@ Usage:
         ecosystemID, mobradius, speed, \
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-        fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+        physical_sdt, ranged_sdt, magical_sdt, breath_sdt, \
         fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
@@ -1453,48 +1449,44 @@ Usage:
                 PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(36) * 1000));
                 PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(37) * 1000));
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGPHYS, (int16)sql->GetIntData(38));   // Modifier 387, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGRANGE, (int16)sql->GetIntData(39));  // Modifier 390, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGMAGIC, (int16)sql->GetIntData(40));  // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGBREATH, (int16)sql->GetIntData(41)); // Modifier 388, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(46)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(47)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(48)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(49)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(50)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(51)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(52)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(53)));
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(42)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(43)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(44)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(45)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(46)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(47)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(48)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(49)));
 
-                PMob->m_Element     = (uint8)sql->GetIntData(54);
-                PMob->m_Family      = (uint16)sql->GetIntData(55);
-                PMob->m_name_prefix = (uint8)sql->GetIntData(56);
-                PMob->m_flags       = (uint32)sql->GetIntData(57);
+                PMob->m_Element     = (uint8)sql->GetIntData(50);
+                PMob->m_Family      = (uint16)sql->GetIntData(51);
+                PMob->m_name_prefix = (uint8)sql->GetIntData(52);
+                PMob->m_flags       = (uint32)sql->GetIntData(53);
 
-                PMob->animationsub = (uint32)sql->GetIntData(58);
+                PMob->animationsub = (uint32)sql->GetIntData(54);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = sql->GetFloatData(59);
-                PMob->MPscale = sql->GetFloatData(60);
+                PMob->HPscale = sql->GetFloatData(55);
+                PMob->MPscale = sql->GetFloatData(56);
 
                 // TODO: Remove me
-                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(57);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(58));
 
-                PMob->m_Pool = sql->GetUIntData(63);
+                PMob->m_Pool = sql->GetUIntData(59);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(64));
-                PMob->namevis         = sql->GetUIntData(65);
-                PMob->m_Aggro         = sql->GetUIntData(66);
-                PMob->m_MobSkillList  = sql->GetUIntData(67);
-                PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(60));
+                PMob->namevis         = sql->GetUIntData(61);
+                PMob->m_Aggro         = sql->GetUIntData(62);
+                PMob->m_MobSkillList  = sql->GetUIntData(63);
+                PMob->m_TrueDetection = sql->GetUIntData(64);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(65));
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
