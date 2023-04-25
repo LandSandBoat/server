@@ -3,6 +3,7 @@
 --  Mob: Razfahd
 -----------------------------------
 require('scripts/zones/Nyzul_Isle/IDs')
+require("scripts/globals/assault")
 require('scripts/globals/status')
 -----------------------------------
 local entity = {}
@@ -19,8 +20,7 @@ entity.onMobFight = function(mob, target)
     if mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0 then
         mob:useMobAbility(1183)
 
-        local instance = mob:getInstance()
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressEvent(mob, 1)
 
         mob:setLocalVar("perfectdef", 1)
     end

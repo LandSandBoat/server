@@ -2,6 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Toad
 -----------------------------------
+require("scripts/globals/assault")
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
 local entity = {}

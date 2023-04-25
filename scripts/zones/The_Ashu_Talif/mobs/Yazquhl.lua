@@ -3,6 +3,7 @@
 --  Mob: Yazquhl
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/assault")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
@@ -30,8 +31,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    instance:setProgress(instance:getProgress() + 1)
+    xi.assault.progressInstance(mob, 1)
 end
 
 return entity

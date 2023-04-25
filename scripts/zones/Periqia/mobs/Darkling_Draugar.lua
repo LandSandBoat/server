@@ -2,6 +2,8 @@
 -- Area: Periqia (Requiem)
 --  Mob: Darkling Draugar
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

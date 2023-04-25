@@ -2,9 +2,10 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Rampart
 -----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/assault")
 mixins = { require("scripts/mixins/families/rampart") }
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -50,7 +51,7 @@ entity.onMobDeath = function(mob, player, optParams)
     if ID.mob[6].rampart1 == mob:getID() or ID.mob[6].rampart2 == mob:getID() then
         if instance:getStage() == 6 and instance:getProgress() >= 1 then
             if optParams.isKiller then
-                instance:setProgress(instance:getProgress() + 1)
+                xi.assault.progressInstance(mob, 1)
             end
         end
     end
