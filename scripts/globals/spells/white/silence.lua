@@ -12,8 +12,12 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
+    if target:hasImmunity(xi.immunity.SILENCE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
 
+    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
     local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --Resist

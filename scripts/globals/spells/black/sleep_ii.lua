@@ -12,6 +12,19 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if
+        target:hasImmunity(xi.immunity.SLEEP) or
+        target:hasImmunity(xi.immunity.DARK_SLEEP)
+    then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
+    if not target:canGainStatusEffect(xi.effect.SLEEP_II) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
     local duration = xi.magic.calculateDuration(90, spell:getSkillType(), spell:getSpellGroup(), caster, target)

@@ -1010,8 +1010,12 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
     end
 
     local p = utils.clamp((magicHitRate / 100), 0.05, 0.95)
-
     p = utils.clamp(p * baseRes, -1, 0.95)
+
+    -- if the p value is negative, this is a full 100% resist
+    if p <= 0 then
+        return 0
+    end
 
     local resist = 1
 

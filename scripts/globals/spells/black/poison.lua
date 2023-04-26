@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.POISON) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local power = 4
     local duration = xi.magic.calculateDuration(30, spell:getSkillType(), spell:getSpellGroup(), caster, target)

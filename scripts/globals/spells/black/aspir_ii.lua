@@ -13,6 +13,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.ASPIR) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local mpDiff = caster:getMaxMP() - caster:getMP()
 
