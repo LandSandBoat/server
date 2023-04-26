@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.GRAVITY) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     -- Pull base stats.
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 

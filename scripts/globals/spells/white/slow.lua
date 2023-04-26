@@ -13,6 +13,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.SLOW) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     if target:hasStatusEffect(xi.effect.HASTE) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return xi.effect.SLOW
