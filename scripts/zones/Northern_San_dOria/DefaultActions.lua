@@ -33,6 +33,7 @@ return {
     ['Maloquedil'] = { event = 21 },
     ['Maurinne']   = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']    = { event = 517 },
+    ['Narcheral']  = { event = 688 },
     ['Nouveil']    = { event = 574 },
     ['Olbergieut'] = { event = 612 },
     ['Pepigort']   = { text = ID.text.PEPIGORT_DIALOG },
