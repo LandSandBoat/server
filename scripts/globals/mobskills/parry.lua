@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         power      = mob:getMod(xi.mod.EVA) * 0.25 -- 25% Evasion Boost in Dyna
     end
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 600))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 60))
     return typeEffect
 end
 

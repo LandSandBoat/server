@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.ELEGY) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local duration = 240
     local power = 10000
 

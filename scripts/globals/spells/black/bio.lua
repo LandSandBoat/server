@@ -58,6 +58,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Do it!
     target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 5, 1)
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
+    xi.magic.handleBurstMsg(caster, target, spell)
 
     -- Try to kill same tier Dia (default behavior)
     if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then

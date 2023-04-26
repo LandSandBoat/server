@@ -30,6 +30,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
+    if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+        return
+    end
+
     if target:isPC() then
         ability:setMsg(xi.msg.basic.NO_EFFECT)
     else
@@ -40,7 +45,9 @@ abilityObject.onUseAbility = function(player, target, ability)
             isTamed = true
         end
 
-        player:charmPet(target)
+        if not player:charmPet(target) then
+            ability:setMsg(xi.msg.basic.JA_MISS)
+        end
 
         if isTamed then
             player:delMod(xi.mod.CHARM_CHANCE, 10)

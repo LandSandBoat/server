@@ -11315,7 +11315,7 @@ INSERT INTO `item_basic` VALUES (13983,0,'gold_bangles','gold_bangles',1,2084,19
 INSERT INTO `item_basic` VALUES (13984,0,'gold_bangles_+1','gold_bangles_+1',1,2080,19,0,4448);
 INSERT INTO `item_basic` VALUES (13985,0,'platinum_bangles','platinum_bangles',1,2084,19,0,4791);
 INSERT INTO `item_basic` VALUES (13986,0,'platinum_bangles_+1','ptm._bangles_+1',1,2080,19,0,5988);
-INSERT INTO `item_basic` VALUES (13987,0,'coral_bangles','coral_bangles',1,2084,19,0,4106);
+INSERT INTO `item_basic` VALUES (13987,0,'coral_bangles','coral_bangles',1,2084,19,0,3492);
 INSERT INTO `item_basic` VALUES (13988,0,'mermans_bangles','mermans_bangles',1,2080,19,0,4106);
 INSERT INTO `item_basic` VALUES (13989,0,'darksteel_gauntlets_+1','dst._gauntlets_+1',1,2080,19,0,5732);
 INSERT INTO `item_basic` VALUES (13990,0,'coral_finger_gauntlets_+1','coral_fng._gnt._+1',1,2080,19,0,5561);

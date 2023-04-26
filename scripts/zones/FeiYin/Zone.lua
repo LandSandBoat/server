@@ -31,12 +31,6 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I then
         cs = 29
-    elseif
-        prevZone == xi.zone.BEAUCEDINE_GLACIER and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and
-        player:getCharVar("pieujesDecisionCS") == 0
-    then
-        cs = 19 -- WHM AF
     end
 
     return cs
@@ -53,9 +47,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 19 then
-        player:setCharVar("pieujesDecisionCS", 1)
-    elseif csid == 29 then
+    if csid == 29 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end

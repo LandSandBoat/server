@@ -42,7 +42,7 @@ void CPetController::Tick(time_point tick)
 
     if (PPet->shouldDespawn(tick))
     {
-        petutils::DespawnPet(PPet->PMaster);
+        petutils::DetachPet(PPet->PMaster, PPet->isCharmed && tick > PPet->charmTime);
         return;
     }
 

@@ -733,7 +733,7 @@ public:
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
 
-    void charmPet(CLuaBaseEntity const* target); // Charms Pet (Beastmaster ability only)
+    bool charmPet(CLuaBaseEntity const* target); // Charms Pet (Beastmaster ability only)
 
     void petAttack(CLuaBaseEntity* PEntity); // Despawns Pet
     void petAbility(uint16 abilityID);       // Function exists, but is not implemented.  Warning will be displayed.

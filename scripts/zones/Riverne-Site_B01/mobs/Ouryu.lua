@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     end
 
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setLocalVar("savageDmgMultipliers", 1)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
     mob:setLocalVar("twoHour", 0)
     -- mods put fight in line with retail difficulty
     mob:addMod(xi.mod.SLEEPRES, 100)

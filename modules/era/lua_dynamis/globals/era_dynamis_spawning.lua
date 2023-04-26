@@ -41,6 +41,7 @@ local m = Module:new("era_dynamis_spawning")
 xi = xi or {  }
 xi.dynamis = xi.dynamis or {  }
 
+xi.dynamis.SUBLINK_ID = 2
 --------------------------------------------
 --          Dynamis Mob Spawning          --
 --------------------------------------------
@@ -408,11 +409,15 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 name = nameObj[job][1],
                 x = oMob:getXPos()+math.random()*6-3,
                 y = oMob:getYPos()-0.3,
-                z = oMob:getXPos()+math.random()*6-3,
+                z = oMob:getZPos()+math.random()*6-3,
                 rotation = oMob:getRotPos(),
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
-                onMobSpawn = function(mobArg) xi.dynamis.setMobStats(mobArg) end,
+                onMobSpawn = function(mobArg)
+                    xi.dynamis.setMobStats(mobArg)
+                    -- set all dyna mobs to same sublink so for example statues link when seeing normal mobs
+                    mobArg:setMobMod(xi.mobMod.SUBLINK, xi.dynamis.SUBLINK_ID)
+                end,
                 onMobEngaged = function(mobArg, target) xi.dynamis.mobOnEngaged(mobArg, target) end,
                 onMobRoam = function(mobArg) end,
                 onMobDeath = function(mobArg, player, optParams)
@@ -552,11 +557,35 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Vanguard Dragon"] = { "V. Dragon", 70, 135, 2559, 0, 87 }, -- VDra
         },
     }
+    -- superlinking is used to make sure dyna-xarc statue triplets with NMs will link
+    -- this is required due to current navmesh and placement of child mobs
+    local superlinkDynaXarcTable = {
+        [127] = 1,
+        [128] = 1,
+        [129] = 1,
+        [130] = 2,
+        [131] = 2,
+        [132] = 2,
+        [133] = 3,
+        [134] = 3,
+        [135] = 3,
+        [136] = 4,
+        [137] = 4,
+        [138] = 4,
+        [139] = 5,
+        [140] = 5,
+        [141] = 5,
+    }
     local mobFunctions =
     {
         ["Statue"] =
         {
-            ["onMobSpawn"] = { function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end },
+            ["onMobSpawn"] = { function(mob)
+                xi.dynamis.setStatueStats(mob, mobIndex)
+                if zoneID == xi.zone.DYNAMIS_XARCABARD and superlinkDynaXarcTable[mobIndex] then
+                    mob:setMobMod(xi.mobMod.SUPERLINK, superlinkDynaXarcTable[mobIndex])
+                end
+            end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob, target) xi.dynamis.statueOnFight(mob, target) end },
             ["onMobRoam"] = { function(mob) xi.dynamis.mobOnRoam(mob) end },
@@ -588,7 +617,10 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Other"] =
         {
-            ["onMobSpawn"] = { function(mob) xi.dynamis.setMobStats(mob) end },
+            ["onMobSpawn"] = { function(mob)
+                xi.dynamis.setMobStats(mob)
+                mob:addImmunity(xi.immunity.SLEEP)
+            end },
             ["onMobEngaged"] = { function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end },
             ["onMobFight"] = { function(mob) end },
             ["onMobRoam"] = { function(mob) end },
@@ -626,7 +658,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         rotation = rPos,
         groupId = nonStandardLookup[mobMobType][mobName][2],
         groupZoneId = nonStandardLookup[mobMobType][mobName][3],
-        onMobSpawn = mobFunctions[mobMobType]["onMobSpawn"][1],
+        onMobSpawn = function(mob)
+            local specFunc = mobFunctions[mobMobType]["onMobSpawn"][1]
+            specFunc(mob)
+            -- set all dyna mobs to same sublink so for example statues link when seeing normal mobs
+            mob:setMobMod(xi.mobMod.SUBLINK, xi.dynamis.SUBLINK_ID)
+        end,
         onMobEngaged = mobFunctions[mobMobType]["onMobEngaged"][1],
         onMobFight = mobFunctions[mobMobType]["onMobFight"][1],
         onMobRoam =  mobFunctions[mobMobType]["onMobRoam"][1],
@@ -842,21 +879,21 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Maa Febi the Steadfast"] = { "Maa.Steadfast", 2, 187, 1560, 4, 5014, "Beastmen" }, -- MaaF (PLD)
         -- Kindred
         -- Dynamis - Xarcabard (Done)
-        ["Count Zaebos"] = { "C.Zaebos", 51, 135, 521, 0, 358, "Beastmen" }, -- Zaeb (WAR)
-        ["Duke Berith"] = { "D.Berith", 47, 135, 714, 3, 358, "Beastmen" }, -- Beri (RDM)
-        ["Marquis Decarabia"] = { "M.Decarabia", 21, 135, 1626, 6, 358, "Beastmen" }, -- Deca (BRD)
-        ["Duke Gomory"] = { "D.Gomory", 39, 135, 715, 0, 358, "Beastmen" }, -- Gomo (MNK)
-        ["Marquis Andras"] = { "M.Andras", 54, 135, 1624, 0, 358, "Beastmen" }, -- Andr (BST)
-        ["Prince Seere"] = { "P.Seere", 43, 135, 2021, 1, 358, "Beastmen" }, -- Seer (WHM)
-        ["Duke Scox"] = { "D.Scox", 57, 135, 717, 5, 358, "Beastmen" }, -- Scox (DRK)
-        ["Marquis Gamygyn"] = { "M.Gamygyn", 65, 135, 1628, 7, 358, "Beastmen" }, -- Gamy (NIN)
-        ["Marquis Orias"] = { "M.Orias", 46, 135, 1630, 5000, 358, "Beastmen" }, -- Oria (BLM)
-        ["Count Raum"] = { "C.Raum", 42, 135, 519, 0, 358, "Beastmen" }, --  Raum (THF)
-        ["Marquis Nebiros"] = { "M.Nebiros", 67, 135, 1629, 0, 358, "Beastmen" }, -- Nebi (SMN)
-        ["Marquis Sabnak"] = { "M.Sabnak", 49, 135, 1631, 4, 358, "Beastmen" }, -- Sabn (PLD)
-        ["Count Vine"] = { "C.Vine", 62, 135, 520, 0, 358, "Beastmen" }, -- Vine (SAM)
-        ["King Zagan"] = { "K.Zagan", 60, 135, 1452, 0, 358, "Beastmen" }, -- Zaga (DRG)
-        ["Marquis Cimeries"] = { "M.Cimeries", 56, 135, 1625, 0, 358, "Beastmen" }, -- Cime (RNG)
+        ["Count Zaebos"] = { "C.Zaebos", 51, 135, 521, 0, 358, "XarcNM" }, -- Zaeb (WAR)
+        ["Duke Berith"] = { "D.Berith", 47, 135, 714, 3, 358, "XarcNM" }, -- Beri (RDM)
+        ["Marquis Decarabia"] = { "M.Decarabia", 21, 135, 1626, 6, 358, "XarcNM" }, -- Deca (BRD)
+        ["Duke Gomory"] = { "D.Gomory", 39, 135, 715, 0, 358, "XarcNM" }, -- Gomo (MNK)
+        ["Marquis Andras"] = { "M.Andras", 54, 135, 1624, 0, 358, "XarcNM" }, -- Andr (BST)
+        ["Prince Seere"] = { "P.Seere", 43, 135, 2021, 1, 358, "XarcNM" }, -- Seer (WHM)
+        ["Duke Scox"] = { "D.Scox", 57, 135, 717, 5, 358, "XarcNM" }, -- Scox (DRK)
+        ["Marquis Gamygyn"] = { "M.Gamygyn", 65, 135, 1628, 7, 358, "XarcNM" }, -- Gamy (NIN)
+        ["Marquis Orias"] = { "M.Orias", 46, 135, 1630, 5000, 358, "XarcNM" }, -- Oria (BLM)
+        ["Count Raum"] = { "C.Raum", 42, 135, 519, 0, 358, "XarcNM" }, --  Raum (THF)
+        ["Marquis Nebiros"] = { "M.Nebiros", 67, 135, 1629, 0, 358, "XarcNM" }, -- Nebi (SMN)
+        ["Marquis Sabnak"] = { "M.Sabnak", 49, 135, 1631, 4, 358, "XarcNM" }, -- Sabn (PLD)
+        ["Count Vine"] = { "C.Vine", 62, 135, 520, 0, 358, "XarcNM" }, -- Vine (SAM)
+        ["King Zagan"] = { "K.Zagan", 60, 135, 1452, 0, 358, "XarcNM" }, -- Zaga (DRG)
+        ["Marquis Cimeries"] = { "M.Cimeries", 56, 135, 1625, 0, 358, "XarcNM" }, -- Cime (RNG)
         -- Hydra
         -- Dynamis - Beaucedine (Done)
         ["Dagourmarche"] = { "Dagourmarche", 10, 134, 559, 0, 359, "Dagourmarche" }, -- Dago (DRG/BST/SMN)
@@ -911,10 +948,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Dynamis Lord"] = { "Dynamis Lord", 1, 135, 730, 86, 361, "Dynamis Lord", 135 }, -- DL
         -- Dynamis - Beaucedine Non-Beastmen (Done)
         ["Angra Mainyu"] = { "Angra Mainyu", 1, 134, 3207, 5000, 4, "Angra Mainyu" }, -- Angr
-        ["Fire Pukis"] = { "Fire Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- FPuk
-        ["Wind Pukis"] = { "Wind Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- WPuk
-        ["Petro Pukis"] = { "Petro Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- PPuk
-        ["Poison Pukis"] = { "Poison Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- pPuk
+        ["Fire Pukis"] = { "Fire Pukis", 2, 135, 0, 0, 87, "Pukis" }, -- FPuk
+        ["Wind Pukis"] = { "Wind Pukis", 2, 135, 0, 0, 87, "Pukis" }, -- WPuk
+        ["Petro Pukis"] = { "Petro Pukis", 2, 135, 0, 0, 87, "Pukis" }, -- PPuk
+        ["Poison Pukis"] = { "Poison Pukis", 2, 135, 0, 0, 87, "Pukis" }, -- pPuk
         ["Dynamis Statue"] = { "D. Statue" , 199, 134, 1144, 1, 92, "Enabled Auto Attack" }, -- Dynamis Statue (DynS)
         ["Dynamis Tombstone"] = { "D. Tombstone" , 201, 134, 2201, 5000, 93, "Enabled Auto Attack" }, -- Dynamis Tombstone (DynT)
         ["Dynamis Effigy"] = { "D. Effigy" , 200, 134, 20, 0, 94, "Enabled Auto Attack" }, -- Dynamis Effigy (DynE)
@@ -956,6 +993,24 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Beastmen"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.setNMStats(mob) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end },
+            ["onMobFight"] = { function(mob) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
+            ["mixins"] = {  require("scripts/mixins/job_special"), require("scripts/mixins/remove_doom")  },
+        },
+        ["XarcNM"] =
+        {
+            ["onMobSpawn"] = { function(mob)
+                xi.dynamis.setNMStats(mob)
+                mob:addImmunity(xi.immunity.SLEEP)
+                if mob:getName() == "DE_M.Orias" then
+                    mob:addImmunity(xi.immunity.SILENCE)
+                end
+            end },
             ["onMobEngaged"] = { function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end },
             ["onMobFight"] = { function(mob) end },
             ["onMobRoam"] = { function(mob) end },
@@ -1218,6 +1273,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
             ["mixins"] = {   },
         },
+        ["Pukis"] =
+        {
+            ["onMobSpawn"] = { function(mob)
+                xi.dynamis.setNMStats(mob)
+                mob:addImmunity(xi.immunity.SLEEP)
+            end },
+            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
+            ["mixins"] = {   },
+        }
+        ,
     }
 
     if xi.dynamis.nmInfoLookup[mobName][8] then
@@ -1233,7 +1304,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         rotation = rPos,
         groupId = xi.dynamis.nmInfoLookup[mobName][2],
         groupZoneId = xi.dynamis.nmInfoLookup[mobName][3],
-        onMobSpawn = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1],
+        onMobSpawn = function(mob)
+            local specFunc = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1]
+            specFunc(mob)
+            -- set all dyna mobs to same sublink so for example statues link when seeing normal mobs
+            mob:setMobMod(xi.mobMod.SUBLINK, xi.dynamis.SUBLINK_ID)
+        end,
         onMobEngaged= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobEngaged"][1],
         onMobFight= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobFight"][1],
         onMobRoam= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobRoam"][1],
@@ -1254,22 +1330,25 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             mob:spawn()
             mob:setSpawn(xPos, yPos, zPos, rPos)
             mob:setLocalVar("Clone", 1)
+            -- do not set zone mobIndex for clones as zone 179 should only be real DL
         elseif mainDynaLord == oMob:getID() and mobName == "Ying" or mobName == "Yang" then
             mob:setSpawn(oMob:getXPos(), oMob:getYPos(), oMob:getZPos(), oMob:getRotPos())
             mob:spawn()
             mob:setSpawn(xPos, yPos, zPos, rPos)
+            zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
         else
             mob:setSpawn(xPos, yPos, zPos, rPos)
             mob:spawn()
+            zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
         end
     else
         mob:setSpawn(xPos, yPos, zPos, rPos)
         mob:spawn()
+        zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
     end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar("MobIndex", mobIndex)
-    zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
     mob:setDropID(xi.dynamis.nmInfoLookup[mobName][4])
     if xi.dynamis.nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(xi.dynamis.nmInfoLookup[mobName][5])
@@ -1602,7 +1681,11 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         rotation = oMob:getRotPos(),
         groupId = nameObj[2],
         groupZoneId = nameObj[3],
-        onMobSpawn = function(mob) xi.dynamis.setPetStats(mob) end,
+        onMobSpawn = function(mob)
+            xi.dynamis.setPetStats(mob)
+            -- set all dyna mobs to same sublink so for example statues link when seeing normal mobs
+            mob:setMobMod(xi.mobMod.SUBLINK, xi.dynamis.SUBLINK_ID)
+        end,
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"][1],
         onMobRoam = petFunctions[mobJob][functionLookup]["onMobRoam"][1],
         onMobDeath = function(mob, player, optParams) xi.dynamis.onPetDeath(mob) end,
@@ -2022,7 +2105,7 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
         if mob:getLocalVar("hasMobVar") == 1 then
             zone:setLocalVar(xi.dynamis.mobList[zoneID][mobIndex].info[5], 1) -- Set Death Requirements Variable
             if zoneID == xi.zone.DYNAMIS_VALKURM then
-                local flies = { 21, 22, 23}
+                local flies = {21, 22, 23}
                 if mobIndex == flies[1] or mobIndex == flies[2] or mobIndex == flies[3] then
                     xi.dynamis.nightmareFlyCheck(mob, zone, zoneID)
                 end

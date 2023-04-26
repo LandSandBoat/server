@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         local pos = mob:getPos()
         GetMobByID(mob:getID() + 1):setSpawn(pos.x, pos.y, pos.z)
-        SpawnMob(mob:getID() + 1):updateEnmity(player)
+        SpawnMob(mob:getID() + 1):updateClaim(player)
     end
 end
 
