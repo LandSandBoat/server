@@ -18,7 +18,7 @@ local abilityobject = {}
 abilityobject.onAbilityCheck = function(player, target, ability)
     local level = player:getMainLvl() * 2
 
-    if(player:getMP() < level) then
+    if player:getMP() < level then
         return 87, 0
     end
 
@@ -52,11 +52,13 @@ abilityobject.onPetAbility = function(target, pet, skill, summoner)
     params.omen = damage
     params.ignoreStateLock = true
 
-    damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
+    local damageTable = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
     summoner:setMP(0)
-    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damageTable.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
+
+    xi.magic.handleSMNBurstMsg(pet, target, skill, params.element, 379)
 
     return totaldamage
 end

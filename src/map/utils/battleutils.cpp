@@ -1923,25 +1923,11 @@ namespace battleutils
              (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && PDefender->GetMJob() != JOB_MNK && PDefender->isInDynamis())) &&
             PDefender->PAI->IsEngaged())
         {
-            // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
-            // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
+            float        defender_parry_skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            CItemWeapon* weapon               = GetEntityWeapon(PAttacker, SLOT_MAIN);
+            uint16       attackSkill          = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
 
-            float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
-
-            float diff = 1.0f + ((PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.05f);
-
-            if (PWeapon != nullptr && PWeapon->isTwoHanded())
-            {
-                // two handed weapons get a bonus
-                diff += 0.1f;
-            }
-
-            float diffCorrect = std::clamp<float>(diff, 0.4f, 1.4f);
-
-            float dex = PAttacker->DEX();
-            float agi = PDefender->AGI();
-
-            auto parryRate = std::clamp<uint8>((uint8)(((skill * 0.125f) + ((agi - dex) * 0.125f)) * diffCorrect), 5, 20);
+            uint8 parryRate = std::clamp<uint8>((uint8)(20.0f + (defender_parry_skill - attackSkill) / 8.0f), 5, 30);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
@@ -4647,7 +4633,7 @@ namespace battleutils
 
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PSource->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE);
+                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE, false, false, false);
                 }
             }
         }
@@ -5018,7 +5004,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    void tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
+    bool tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
     {
         // Gear with Charm + does not affect the success rate of Charm, but increases the duration of the Charm.
         // Each +1 to Charm increases the duration of charm by 5%; +20 Charm doubles the duration of charm.
@@ -5032,7 +5018,7 @@ namespace battleutils
             if (((CMobEntity*)PVictim)->getMobMod(MOBMOD_CHARMABLE) == 0 || PVictim->PMaster != nullptr)
             {
                 PVictim->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_BIND, EFFECT_BIND, 1, 0, xirand::GetRandomNumber(1, 5)));
-                return;
+                return false;
             }
 
             // mob is charmable
@@ -5109,11 +5095,12 @@ namespace battleutils
 
             if (!TryCharm(PCharmer, PVictim))
             {
-                return;
+                return false;
             }
         }
 
         applyCharm(PCharmer, PVictim, std::chrono::seconds(CharmTime));
+        return true;
     }
 
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime)
@@ -5392,12 +5379,7 @@ namespace battleutils
         }
         else
         {
-            damage           = HandleSevereDamage(PDefender, damage, false);
-            int16 absorbedMP = (int16)(damage * PDefender->getMod(Mod::ABSORB_DMG_TO_MP) / 100);
-            if (absorbedMP > 0)
-            {
-                PDefender->addMP(absorbedMP);
-            }
+            damage = HandleSevereDamage(PDefender, damage, false);
         }
 
         // When set mob will only take 0 or 1 damage
@@ -5453,12 +5435,7 @@ namespace battleutils
         }
         else
         {
-            damage           = HandleSevereDamage(PDefender, damage, false);
-            int16 absorbedMP = (int16)(damage * PDefender->getMod(Mod::ABSORB_DMG_TO_MP) / 100);
-            if (absorbedMP > 0)
-            {
-                PDefender->addMP(absorbedMP);
-            }
+            damage = HandleSevereDamage(PDefender, damage, false);
         }
 
         // When set mob will only take 0 or 1 damage
@@ -5593,7 +5570,7 @@ namespace battleutils
             // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
             // JP is known to give 10 VE per point
             uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
-            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false);
+            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
         }
     }
 
@@ -7169,9 +7146,6 @@ namespace battleutils
         {
             dmgToMPMods += PDefender->getMod(Mod::COVER_TO_MP);
         }
-
-        // Get ABSORB_DMG_TO_MP mod
-        dmgToMPMods += PDefender->getMod(Mod::ABSORB_DMG_TO_MP);
 
         // Get ABSORB_PHYSDMG_TO_MP mod
         dmgToMPMods += PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP);

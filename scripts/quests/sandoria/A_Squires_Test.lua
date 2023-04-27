@@ -54,6 +54,7 @@ quest.sections =
                         quest:setVar(player, 'Refuse', 1)
                     elseif option == 0 then
                         quest:begin(player)
+                        quest:setVar(player, 'Prog', 1)
                     end
                 end,
 

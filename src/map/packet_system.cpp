@@ -441,8 +441,6 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->resetPetZoningInfo();
     }
-    // Reset the petZoning info
-    PChar->resetPetZoningInfo();
 }
 
 /************************************************************************
@@ -3266,7 +3264,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
                     {
                         const char* fmtQuery = "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
-                                               "AND stack = %u AND price <= %u ORDER BY price, date DESC LIMIT 1";
+                                               "AND stack = %u AND price <= %u ORDER BY price, date LIMIT 1";
 
                         if (sql->Query(fmtQuery, PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price) != SQL_ERROR &&
                             sql->AffectedRows() != 0)

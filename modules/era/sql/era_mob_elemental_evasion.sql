@@ -539,6 +539,7 @@ REPLACE INTO `mob_ele_evasion` (`ele_eva_id`, `fire_eem`, `ice_eem`, `wind_eem`,
 	(514,100,100,100,100,100,100,100,100), -- MemoryReceptacle
 	(515,100,100,100,100,100,100,100,100), -- Mimic
 	(516,115,115,115,100,115,115,150,70), -- Moblin
+	(517,130,100,100,100,100,50,130,50), -- Morbol
 	(518,130,150,115,100,100,130,100,130), -- Opo-opo
 	(519,150,130,130,130,130,130,50,50), -- Orc-Warmachine
 	(520,115,85,115,115,130,30,130,60), -- Orobon
@@ -1049,6 +1050,7 @@ UPDATE `mob_pools` SET `ele_eva_id` = 312 WHERE `poolid` = 2224; -- Khroma Quada
 UPDATE `mob_pools` SET `ele_eva_id` = 340 WHERE `poolid` = 2223; -- Khromasoul Bhurborlor
 UPDATE `mob_pools` SET `ele_eva_id` = 159 WHERE `poolid` = 6619; -- Kindred Dark Knight
 UPDATE `mob_pools` SET `ele_eva_id` = 35 WHERE `poolid` = 2247; -- Kindred's Wyvern
+UPDATE `mob_pools` SET `ele_eva_id` = 252 WHERE `poolid` = 2255; -- King Behemoth
 UPDATE `mob_pools` SET `ele_eva_id` = 110 WHERE `poolid` = 2256; -- King Buffalo
 UPDATE `mob_pools` SET `ele_eva_id` = 336 WHERE `poolid` = 2257; -- King Goldemar
 UPDATE `mob_pools` SET `ele_eva_id` = 322 WHERE `poolid` = 2265; -- Kirin

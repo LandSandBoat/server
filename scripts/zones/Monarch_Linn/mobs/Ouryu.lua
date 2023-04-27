@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
-    mob:setLocalVar("savageDmgMultipliers", 1)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
     mob:setLocalVar("setTwoHourThreshold", math.random(50, 80))
 end
 
