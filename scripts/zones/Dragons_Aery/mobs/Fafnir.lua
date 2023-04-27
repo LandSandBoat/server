@@ -11,6 +11,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- Level 90 + 50 = 140 Base Weapon Damage
 
     -- Despawn the ???
     GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
