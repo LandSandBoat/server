@@ -1624,6 +1624,7 @@ xi.items =
     BOTTLE_OF_AMRITA                = 4513,
     QUUS                            = 4514,
     SILKWORM_EGG                    = 4526,
+    JUG_OF_MARY_S_MILK              = 4527,
     CRYSTAL_BASS                    = 4528,
     ROLANBERRY_874_CE               = 4530,
     SOFT_BOILED_EGG                 = 4532,
