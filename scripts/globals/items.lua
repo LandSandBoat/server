@@ -4131,6 +4131,7 @@ xi.items =
     FAUCHEUSE                       = 18952,
     GLEAMING_ZAGHNAL                = 18963,
     DIRE_SCYTHE                     = 18964,
+    TERPSICHORE                     = 18989,
     ROSE_STRAP                      = 19041,
     ARIESIAN_GRIP                   = 19042,
     TRAINEE_KNIFE                   = 19101,
