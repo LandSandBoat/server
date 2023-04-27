@@ -3,14 +3,18 @@
 --  HNM: Adamantoise
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
-mixins = { require("scripts/mixins/rage") }
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setLocalVar("[rage]timer", 1200) -- 20 minutes
 
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)

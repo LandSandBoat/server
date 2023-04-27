@@ -3,15 +3,22 @@
 --  HNM: Behemoth
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-mixins = { require("scripts/mixins/rage") }
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
-
+    mob:setLocalVar("[rage]timer", 1200) -- 20 minutes
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:addMod(xi.mod.EVA, 50)
+	
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end

@@ -287,6 +287,67 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
     end
 end
 
+xi.crafting.unionRepresentativeTriggerFishing = function(player, option, target, guildID, currency, keyitems, items)
+    local rank     = player:getSkillRank(guildID + 48)
+    local category = bit.band(bit.rshift(option, 2), 3)
+    local text     = zones[player:getZoneID()].text
+
+    if bit.tobit(option) == -1 and rank >= 3 then
+        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
+        player:setCharVar('[GUILD]currentGuild', guildID + 1)
+
+        if oldGuild == -1 then
+            player:messageSpecial(text.GUILD_NEW_CONTRACT, guildID)
+        else
+            player:messageSpecial(text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
+            player:setCharVar('[GUILD]daily_points', 1)
+        end
+
+    elseif category == 3 then -- keyitem
+        local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
+
+        if ki and rank >= ki.rank then
+            if (player:getCurrency(currency) >= ki.cost) then
+                player:delCurrency(currency, ki.cost)
+                player:addKeyItem(ki.id)
+                player:messageSpecial(text.KEYITEM_OBTAINED, ki.id)
+            else
+               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+            end
+        end
+    elseif (category == 0 and option ~= 1073741824) or category == 1 or category == 2 then -- item
+
+        local idx      = bit.band(option, 3)
+        local i        = items[(category - 1) * 4 + idx]
+        local quantity = math.min(bit.rshift(option, 9), 12)
+        local cost     = quantity * i.cost
+        print('WE ARE IN ITEMS')
+        print('cat', category)
+        print('idx', idx)
+        print('i', i)
+        print('quantity', quantity)
+        print('cost', cost)
+
+        if i and rank >= i.rank then
+            if player:getCurrency(currency) >= cost then
+                local delivered = 0
+                for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
+                    if (player:addItem(i.id, true)) then
+                        player:delCurrency(currency, i.cost)
+                        player:messageSpecial(text.ITEM_OBTAINED, i.id)
+                        delivered = delivered + 1
+                    end
+                end
+                if delivered == 0 then
+                    player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
+                end
+            else
+               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+            end
+        end
+    end
+end
+
 xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildID)
     local _, remainingPoints = player:getCurrentGPItem(guildID)
     local text = zones[player:getZoneID()].text

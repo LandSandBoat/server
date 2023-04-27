@@ -1,4 +1,5 @@
 require('scripts/globals/abyssea')
+require("scripts/globals/afterglow")
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -139,6 +140,7 @@ xi.player.charCreate = function(player)
         player:setGil(xi.settings.main.START_GIL)
     end
 
+    player:addItem(15198) -- Sprout Beret
     if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Add coupon that would normally be added in cutscene.
         player:addItem(xi.items.ADVENTURERS_COUPON)
     end
@@ -150,11 +152,21 @@ xi.player.charCreate = function(player)
     player:setCharVar("TutorialProgress", 1)            -- Has not started tutorial
     player:setCharVar("EinherjarIntro", 1)              -- Has not seen Einherjar intro
     player:setNewPlayer(true)                           -- apply new player flag
+    player:addLinkpearl("CatsEyeXI", true)
 end
 
 -- called by core after a player logs into the server or zones
 xi.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
+
+--[[    -- Send a system message when players come online.
+
+        if player:getCharVar("NoOnlineNotification") ~= 1 then
+            player:PrintToArea(string.format("%s has come online!", player:getName()), xi.msg.area.SYSTEM_2);
+        end
+
+]]--    
+
         -- things checked ONLY during logon go here
         if firstLogin then
             xi.player.charCreate(player)
@@ -239,6 +251,12 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     player:timer(2500, function(playerArg)
         -- Login Campaign rewards points once daily
         xi.events.loginCampaign.onGameIn(playerArg)
+    end)
+    
+    player:timer(3500, function(player)
+        if player:getCharVar("Afterglow") == 1 then
+            xi.afterglow.onTrigger(player)
+        end
     end)
 end
 

@@ -8,7 +8,7 @@ local logIdHelpers = require('scripts/globals/log_ids')
 
 cmdprops =
 {
-    permission = 1,
+    permission = 3,
     parameters = "sss"
 }
 
