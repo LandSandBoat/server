@@ -49,29 +49,27 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Расчет базовой величины оружия монстров                              *
+     *  Calculate mob base weapon damage                                     *
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetWeaponDamage(CMobEntity* PMob)
+    uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
-        uint16 lvl   = PMob->GetMLevel();
-        uint8  bonus = 0;
+        uint16 lvl    = PMob->GetMLevel();
+        int8   bonus  = 2;
+        uint16 damage = 0;
 
-        if (lvl >= 75)
+        if (slot == SLOT_RANGED)
         {
-            bonus = 3;
-        }
-        else if (lvl >= 60)
-        {
-            bonus = 2;
-        }
-        else if (lvl >= 50)
-        {
-            bonus = 1;
+            bonus = 5;
         }
 
-        uint16 damage = lvl + bonus;
+        if (lvl == 1)
+        {
+            bonus = 0;
+        }
+
+        damage = lvl + bonus;
 
         damage = (uint16)(damage * PMob->m_dmgMult / 100.0f);
 
@@ -83,57 +81,84 @@ namespace mobutils
         return damage;
     }
 
-    uint16 GetMagicEvasion(CMobEntity* PMob)
+    // Gest base skill rankings for ACC/ATT/EVA/MEVA
+    uint16 GetBase(CMobEntity* PMob, uint8 rank)
     {
-        uint8 mEvaRank = 3;
+        int8 mlvl = PMob->GetMLevel();
 
-        return GetBase(PMob, mEvaRank);
-    }
-
-    uint16 GetEvasion(CMobEntity* PMob)
-    {
-        uint8 evaRank = PMob->evaRank;
-
-        // Mob evasion is based on job
-        // but occasionally war mobs
-        // might have a different rank
-        switch (PMob->GetMJob())
+        switch (rank)
         {
-            case JOB_THF:
-            case JOB_NIN:
-                evaRank = 1;
-                break;
-            case JOB_MNK:
-            case JOB_DNC:
-            case JOB_SAM:
-            case JOB_PUP:
-            case JOB_RUN:
-                evaRank = 2;
-                break;
-            case JOB_RDM:
-            case JOB_BRD:
-            case JOB_GEO:
-            case JOB_COR:
-                evaRank = 4;
-                break;
-            case JOB_WHM:
-            case JOB_SCH:
-            case JOB_RNG:
-            case JOB_SMN:
-            case JOB_BLM:
-                evaRank = 5;
-                break;
-            default:
-                break;
+            case 1:
+                return battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mlvl); // A+ Skill (1)
+            case 2:
+                return battleutils::GetMaxSkill(SKILL_STAFF, JOB_WAR, mlvl); // B Skill (2)
+            case 3:
+                return battleutils::GetMaxSkill(SKILL_EVASION, JOB_WAR, mlvl); // C Skill (3)
+            case 4:
+                return battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_WAR, mlvl); // D Skill (4)
+            case 5:
+                return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
-        return GetBase(PMob, evaRank);
+        return 0;
+    }
+
+    uint16 GetMagicEvasion(CMobEntity* PMob)
+    {
+        uint8 mEvaRank = PMob->evaRank;
+        return GetBase(PMob, mEvaRank);
     }
 
     /************************************************************************
      *                                                                       *
-     *  Базовое значение для расчера характеристик                           *
-     *  (на название не хватило фантазии)                                    *
+     *  Base value for defense                       *
+     *                                                                       *
+     ************************************************************************/
+
+    uint16 GetDefense(CMobEntity* PMob, uint8 rank)
+    {
+        // family defense = [floor(defRank) + 8 + vit / 2 + job traits] * family multiplier
+        uint8 lvl = PMob->GetMLevel();
+
+        if (lvl > 50)
+        {
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)std::floor(153 + (lvl - 50) * 5.0f);
+                case 2: // B
+                    return (uint16)std::floor(147 + (lvl - 50) * 4.9f);
+                case 3: // C
+                    return (uint16)std::floor(142 + (lvl - 50) * 4.8f);
+                case 4: // D
+                    return (uint16)std::floor(136 + (lvl - 50) * 4.7f);
+                case 5: // E
+                    return (uint16)std::floor(126 + (lvl - 50) * 4.5f);
+            }
+        }
+        else
+        {
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)std::floor(6 + (lvl - 1) * 3.0f);
+                case 2: // B
+                    return (uint16)std::floor(5 + (lvl - 1) * 2.9f);
+                case 3: // C
+                    return (uint16)std::floor(5 + (lvl - 1) * 2.8f);
+                case 4: // D
+                    return (uint16)std::floor(4 + (lvl - 1) * 2.7f);
+                case 5: // E
+                    return (uint16)std::floor(4 + (lvl - 1) * 2.5f);
+            }
+        }
+
+        return 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Base value for stat calculations                                     *
      *                                                                       *
      ************************************************************************/
 
@@ -156,59 +181,6 @@ namespace mobutils
             case 7:
                 return (2 + ((lvl - 1) * 20) / 100); // G
         }
-        return 0;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Базовое значение для расчерта защиты и уклонения                     *
-     *  (на название не хватило фантазии)                                    *
-     *                                                                       *
-     ************************************************************************/
-
-    uint16 GetBase(CMobEntity* PMob, uint8 rank)
-    {
-        uint8 lvl = PMob->GetMLevel();
-        if (lvl > 50)
-        {
-            switch (rank)
-            {
-                case 1: // A
-                    return (uint16)(153 + (lvl - 50) * 5.0f);
-                case 2: // B
-                    return (uint16)(147 + (lvl - 50) * 4.9f);
-                case 3: // C
-                    return (uint16)(136 + (lvl - 50) * 4.8f);
-                case 4: // D
-                    return (uint16)(126 + (lvl - 50) * 4.7f);
-                case 5: // E
-                    return (uint16)(116 + (lvl - 50) * 4.5f);
-                case 6: // F
-                    return (uint16)(106 + (lvl - 50) * 4.4f);
-                case 7: // G
-                    return (uint16)(96 + (lvl - 50) * 4.3f);
-            }
-        }
-        else
-        {
-            switch (rank)
-            {
-                case 1:
-                    return (uint16)(6 + (lvl - 1) * 3.0f);
-                case 2:
-                    return (uint16)(5 + (lvl - 1) * 2.9f);
-                case 3:
-                    return (uint16)(5 + (lvl - 1) * 2.8f);
-                case 4:
-                    return (uint16)(4 + (lvl - 1) * 2.7f);
-                case 5:
-                    return (uint16)(4 + (lvl - 1) * 2.5f);
-                case 6:
-                    return (uint16)(3 + (lvl - 1) * 2.4f);
-                case 7:
-                    return (uint16)(3 + (lvl - 1) * 2.3f);
-            }
-        }
 
         ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
@@ -216,7 +188,7 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Расчет атрибутов (характеристик) монстра                             *
+     *  Calculate mob stats                                                  *
      *                                                                       *
      ************************************************************************/
 
@@ -231,6 +203,7 @@ namespace mobutils
         JOBTYPE   mJob     = PMob->GetMJob();
         JOBTYPE   sJob     = PMob->GetSJob();
         uint8     mLvl     = PMob->GetMLevel();
+        uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
         uint8 grade;
@@ -240,121 +213,90 @@ namespace mobutils
         {
             if (PMob->HPmodifier == 0)
             {
-                int32 mobHP      = 1; // Set mob HP
+                uint32 mobHP = 1; // Set mob HP
 
-                float baseMobHP  = 0; // Define base mobs hp
-                float sjHP       = 0; // Define base subjob hp
+                uint32 baseMobHP = 0; // Define base mobs hp
+                uint32 sjHP      = 0; // Define base subjob hp
 
-                grade            = grade::GetJobGrade(mJob, 0); // main jobs grade
-                gradesj          = grade::GetJobGrade(sJob, 0); // subjobs grade
+                grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
+                gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
 
-                int32 base       = 0; // Column for base hp
-                int32 jobScale   = 1; // Column for job scaling
-                int32 scaleX     = 2; // Column for modifier scale
+                uint8 base     = 0; // Column for base hp
+                uint8 jobScale = 1; // Column for job scaling
+                uint8 scaleX   = 2; // Column for modifier scale
 
-                float BaseHP     = grade::GetMobHPScale(grade,base);     // Main job base HP
-                float JobScale   = grade::GetMobHPScale(grade,jobScale); // Main job scaling
-                float ScaleXHP   = grade::GetMobHPScale(grade,scaleX);   // Main job modifier scale
+                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
 
-                float sjJobScale = grade::GetMobHPScale(gradesj,jobScale); // Sub job scaling
-                float sjScaleXHP = grade::GetMobHPScale(gradesj,scaleX);   // Sub job modifier scale
+                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
+                uint8 RBIbase  = 1;                        // Column for RBI base
 
-                uint8 RBIgrade   = std::min(mLvl,(uint8)5); // RBI Grade
-                int32 RBIbase    = 1;                       // Column for RBI base
+                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
 
-                float RBI        = grade::GetMobRBI(RBIgrade,RBIbase); // RBI
-
-                uint8 mLvlIf     = 0;
-                uint8 mLvlIf30   = 0;
-                int32 raceScale  = 6;
-
-                float mLvl24     = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
-                float mLvl30     = std::floor(mLvl * 0.50); // 31-39 = 1/2 hp sjstats
-                float mLvl39     = std::floor(mLvl * 0.75); // 40-49 = 3/4 hp sjstats
-                float mLvl49     = std::floor(mLvl);        // 50+ = 1 hp sjstats
-
-                if (mLvl > 5)
-                {
-                    mLvlIf = 1;
-                }
-
-                if (mLvl > 30)
-                {
-                    mLvlIf30 = 1;
-                }
+                uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
+                uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
+                uint8 raceScale = 6;
+                uint8 mLvlScale = 0;
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + ( std::min(mLvl,(uint8)5) - 1 ) * ( JobScale + raceScale - 1 ) + RBI + mLvlIf * ( std::min(mLvl,(uint8)30) - 5 ) * ( 2 * (JobScale + raceScale) + std::min(mLvl,(uint8)30) - 6 ) / 2 + mLvlIf30 * ( (mLvl-30) * (63 + ScaleXHP) + (mLvl-31) * ( JobScale + raceScale ) );
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
                 // 50+ = 1 hp sjstats
                 if (mLvl > 49)
                 {
-                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl49 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl49 - 10, 0.f)) + std::max(mLvl49 - 30, 0.f) + std::max(mLvl49 - 50, 0.f) + std::max(mLvl49 - 70, 0.f)) / 2);
+                    mLvlScale = std::floor(mLvl);
                 }
                 // 40-49 = 3/4 hp sjstats
                 else if (mLvl > 39)
                 {
-                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl39 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl39 - 10, 0.f)) + std::max(mLvl39 - 30, 0.f) + std::max(mLvl39 - 50, 0.f) + std::max(mLvl39 - 70, 0.f)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.75);
                 }
                 // 31-39 = 1/2 hp sjstats
                 else if (mLvl > 30)
                 {
-                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl30 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl30 - 10, 0.f)) + std::max(mLvl30 - 30, 0.f) + std::max(mLvl30 - 50, 0.f) + std::max(mLvl30 - 70, 0.f)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.50);
                 }
                 // 25-30 = 1/4 hp sjstats
                 else if (mLvl > 24)
                 {
-                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl24 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl24 - 10, 0.f)) + std::max(mLvl24 - 30, 0.f) + std::max(mLvl24 - 50, 0.f) + std::max(mLvl24 - 70, 0.f)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.25);
                 }
                 // 1-24 = no hp sjstats
                 else
                 {
-                    sjHP = 0;
+                    mLvlScale = 0;
                 }
 
+                sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
+
                 // Orcs 5% more hp
-                if ( (PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407) )
+                if ((PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407))
                 {
                     mobHP = (baseMobHP + sjHP) * 1.05;
                 }
                 // Quadavs 5% less hp
-                else if ( (PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397 ) || (PMob->m_Family == 408) )
+                else if ((PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397) || (PMob->m_Family == 408))
                 {
                     mobHP = (baseMobHP + sjHP) * .95;
+                }
+                // Manticore family has 50% more HP
+                else if (PMob->m_Family == 179)
+                {
+                    mobHP = (baseMobHP + sjHP) * 1.5;
                 }
                 else
                 {
                     mobHP = baseMobHP + sjHP;
                 }
 
-                if (PMob->GetMJob() == JOB_MNK)
-                {
-                    switch (mLvl)
-                    {
-                    case 15:
-                        mobHP += 30;
-                        break;
-                    case 35:
-                        mobHP += 60;
-                        break;
-                    case 55:
-                        mobHP += 120;
-                        break;
-                    case 70:
-                        mobHP += 180;
-                        break;
-
-                    default:
-                        break;
-                    }
-                }
-
-                // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
-                    mobHP *= 0.35f;
+                    mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
                 }
 
                 PMob->health.maxhp = (int16)(mobHP);
@@ -439,14 +381,10 @@ namespace mobutils
                     PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.MOB_MP_MULTIPLIER"));
                 }
             }
-
-            PMob->UpdateHealth();
-            PMob->health.tp = 0;
-            PMob->health.hp = PMob->GetMaxHP();
-            PMob->health.mp = PMob->GetMaxMP();
         }
 
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 
         // reduce weapon delay of MNK
         if (PMob->GetMJob() == JOB_MNK)
@@ -476,13 +414,13 @@ namespace mobutils
         uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
         uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), sLvl);
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), sLvl);
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), sLvl);
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), sLvl);
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), sLvl);
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl);
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl);
 
         // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
         // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
@@ -518,6 +456,7 @@ namespace mobutils
             sVIT /= 4;
         }
 
+        // [stat] = [family Stat] + [main job Stat] + [sub job Stat]
         PMob->stats.STR = fSTR + mSTR + sSTR;
         PMob->stats.DEX = fDEX + mDEX + sDEX;
         PMob->stats.VIT = fVIT + mVIT + sVIT;
@@ -578,10 +517,18 @@ namespace mobutils
             }
         }
 
-        PMob->addModifier(Mod::DEF, GetBase(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetEvasion(PMob));
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));
+        PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
+        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank));  // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+
+        // Only mobs in dynamis can parry
+        if (PMob->isInDynamis())
+        {
+            PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
+        }
 
         // natural magic evasion
         PMob->addModifier(Mod::MEVA, GetMagicEvasion(PMob));
@@ -589,6 +536,12 @@ namespace mobutils
         // add traits for sub and main
         battleutils::AddTraits(PMob, traits::GetTraits(mJob), mLvl);
         battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel());
+
+        // Max [HP/MP] Boost traits
+        PMob->UpdateHealth();
+        PMob->health.tp = 0;
+        PMob->health.hp = PMob->GetMaxHP();
+        PMob->health.mp = PMob->GetMaxMP();
 
         SetupJob(PMob);
         SetupRoaming(PMob);
@@ -1598,4 +1551,3 @@ Usage:
     }
 
 }; // namespace mobutils
-

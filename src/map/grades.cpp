@@ -138,7 +138,7 @@ std::array<std::array<float, 4>, 8> StatScale = { {
 
 std::array<std::array<float, 3>, 8> MobHPScale = { {
     // Base | Job/SJ Scale | ScaleX
-    { 0, 0, 0 },     // 0
+    { 0, 0, 0 },  // 0
     { 36, 9, 1 }, // A
     { 33, 8, 1 }, // B
     { 32, 7, 1 }, // C
@@ -156,11 +156,11 @@ std::array<std::array<float, 3>, 8> MobHPScale = { {
 
 std::array<std::array<float, 2>, 6> MobRBI = { {
     // RBI | Scale
-    { 0, 0  }, // 0
-    { 1, 0  }, // 1
-    { 2, 0  }, // 2
-    { 3, 3  }, // 3
-    { 4, 7  }, // 4
+    { 0, 0 },  // 0
+    { 1, 0 },  // 1
+    { 2, 0 },  // 2
+    { 3, 3 },  // 3
+    { 4, 7 },  // 4
     { 5, 14 }, // 5
 } };
 

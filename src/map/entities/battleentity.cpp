@@ -878,9 +878,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     TracyZoneScoped;
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
-        // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
-        // But there is no place in the DB to set subLV right now.
-        m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+        m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
     }
     else
     {
