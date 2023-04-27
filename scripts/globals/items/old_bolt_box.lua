@@ -4,6 +4,7 @@
 -- When used, you will obtain one partial stack of Dogbolt
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18189, math.random(10, 20))
+    target:addItem(xi.items.DOGBOLT, math.random(10, 20))
 end
 
 return itemObject
