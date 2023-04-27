@@ -4,6 +4,7 @@
 -- Turn into a stack of light crystals
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4102, 12)
+    target:addItem(xi.items.LIGHT_CRYSTAL, 12)
 end
 
 return itemObject
