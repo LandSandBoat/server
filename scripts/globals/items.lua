@@ -4153,6 +4153,7 @@ xi.items =
     FAUCHEUSE                       = 18952,
     GLEAMING_ZAGHNAL                = 18963,
     DIRE_SCYTHE                     = 18964,
+    TERPSICHORE                     = 18989,
     SWORD_STRAP                     = 19024,
     POLE_GRIP                       = 19025,
     SPEAR_STRAP                     = 19026,
