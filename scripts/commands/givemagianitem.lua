@@ -14,9 +14,9 @@ cmdprops =
 function onTrigger(player, target, trialId, isRewardItem)
     local giveRewardItem = isRewardItem and true or false
 
-    if 
-        target == nil or 
-        trialId == nil 
+    if
+        target == nil or
+        trialId == nil
     then
         player:PrintToPlayer("You must enter a valid player name and Trial ID.")
         return
@@ -30,7 +30,6 @@ function onTrigger(player, target, trialId, isRewardItem)
 
     -- Attempt to give the target the item
     if targ:getFreeSlotsCount() == 0 then
-        targ:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemId)
         player:PrintToPlayer(string.format("Player '%s' does not have free space for that item!", target))
     else
         if giveRewardItem then
