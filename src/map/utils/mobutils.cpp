@@ -100,6 +100,7 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
+        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -182,7 +183,6 @@ namespace mobutils
                 return (2 + ((lvl - 1) * 20) / 100); // G
         }
 
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -524,10 +524,15 @@ namespace mobutils
         PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
         PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
-        // Only mobs in dynamis can parry
-        if (PMob->isInDynamis())
+        // Note: Known Base Parry for all mobs is Rank C
+        // MOBMOD_CAN_PARRY uses the mod value as the rank. It is unknown if mobs in current retail or somewhere else have a different parry rank
+        // Known mobs to have parry rating
+        // 1) Dynamis Mobs
+        // 2) ???
+        // 3) ???
+        if (PMob->getMobMod(MOBMOD_CAN_PARRY) > 0)
         {
-            PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
+            PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
         }
 
         // natural magic evasion
@@ -819,7 +824,8 @@ namespace mobutils
 
         // boost dynamis mobs weapon damage
         PMob->setMobMod(MOBMOD_WEAPON_BONUS, 135);
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 
         // job resist traits are much more powerful in dynamis
         // according to wiki

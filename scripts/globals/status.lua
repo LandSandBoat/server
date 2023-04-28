@@ -2583,6 +2583,7 @@ xi.mobMod =
     LEADER                 = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE            = 72, -- magic aggro range
     TARGET_DISTANCE_OFFSET = 73, -- Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
+    CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
 }
 
 -----------------------------------
