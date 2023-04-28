@@ -8,22 +8,23 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local grounded = function(mob)
+entity.grounded = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 end
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.EVA, 50)
-    mob:addMod(xi.mod.ATT, 100)
+    mob:addMod(xi.mod.ATT, 125)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_IGNORE_STATIONARY, 1)
     mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
+    mob:delStatusEffect(xi.effect.ALL_MISS)
     mob:setTP(3000) -- opens fight with a skill
     mob:setLocalVar("state", 0)
-    grounded(mob)
+    entity.grounded(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -32,9 +33,20 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
+    -- Wakeup from sleep immediately if flying
+    if
+        mob:getAnimationSub() == 1 and
+        hasSleepEffects(mob)
+    then
+        mob:wakeUp()
+    end
+
     local state = mob:getLocalVar("state")
 
-    if state == 1 then -- Path to center of arena and fly
+    if
+        state == 1 and
+        mob:actionQueueEmpty()
+    then -- Path to center of arena and fly
         local spawn = mob:getSpawnPos()
         local current = mob:getPos()
         local diffX = spawn.x - current.x
@@ -56,7 +68,7 @@ entity.onMobFight = function(mob, target)
         mob:lookAt(target:getPos())
     end
 
-    if mob:canUseAbilities() then
+    if mob:actionQueueEmpty() then
         -- Fly @ 66%
         if mob:getAnimationSub() == 0 and mob:getHPP() <= 66 and state == 0 then
             local spawn = mob:getSpawnPos()
@@ -66,26 +78,24 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 1 and mob:getHPP() <= 33 and state == 2 then
             mob:setLocalVar("state", 3) -- final state
             mob:useMobAbility(954)
-            grounded(mob)
+            entity.grounded(mob)
             mob:addStatusEffect(xi.effect.EVASION_BOOST, 50, 0, 0)
             mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 50, 0, 0)
             mob:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 40, 0, 0)
         -- Ensure Wyrm lands if Touchdown is interrupted
         elseif mob:getAnimationSub() ~= 2 and state == 3 and mob:canUseAbilities() then
             mob:setAnimationSub(2)
-            grounded(mob)
+            entity.grounded(mob)
             mob:delStatusEffect(xi.effect.ALL_MISS)
             mob:setMobSkillAttack(0)
         end
     end
-
-    -- Wakeup from sleep immediately if flying
-    if mob:getAnimationSub() == 1 and hasSleepEffects(mob) then
-        removeSleepEffects(mob)
-    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    mob:delStatusEffect(xi.effect.EVASION_BOOST)
+    mob:delStatusEffect(xi.effect.DEFENSE_BOOST)
+    mob:delStatusEffect(xi.effect.MAGIC_DEF_BOOST)
 end
 
 return entity
