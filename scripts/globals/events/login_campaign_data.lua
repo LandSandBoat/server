@@ -276,109 +276,109 @@ local prizes =
         -- WEAPON COSTUMES and crafting latent items
 
         -- Cycle #1/#5
-           -- 20514, -- Aphelion Knuckles
-           -- 20578, -- Wind Knife
-           -- 20665, -- Kam'lanaut's Sword
-           -- 20694, -- Fermion Sword
-           -- 21693, -- Irradiance Blade
-           -- 21741, -- Demonic Axe
-           -- 21745, -- Dullahan Axe
-           -- 21820, -- Lost Sickle
-           -- 21862, -- Mizukage Naginata
-           -- 21977, -- Mutsonokami -- BROKEN
-           -- 22005, -- Burrower's Wand
-           -- 22019, -- Jingly Rod
-           -- 22067, -- Levin
-           -- 22124, -- Artemis's Bow
-           -- 22153, -- Silver Gun
-           -- 22282, -- Grudge
-           -- 22283, -- Marvelous Cheer
-           -- 26412, -- Kam'lanaut's Shield
-           -- 28661, -- Glinting Shield
+            -- 20514, -- Aphelion Knuckles
+            -- 20578, -- Wind Knife
+            -- 20665, -- Kam'lanaut's Sword
+            -- 20694, -- Fermion Sword
+            -- 21693, -- Irradiance Blade
+            -- 21741, -- Demonic Axe
+            -- 21745, -- Dullahan Axe
+            -- 21820, -- Lost Sickle
+            -- 21862, -- Mizukage Naginata
+            -- 21977, -- Mutsonokami -- BROKEN
+            -- 22005, -- Burrower's Wand
+            -- 22019, -- Jingly Rod
+            -- 22067, -- Levin
+            -- 22124, -- Artemis's Bow
+            -- 22153, -- Silver Gun
+            -- 22282, -- Grudge
+            -- 22283, -- Marvelous Cheer
+            -- 26412, -- Kam'lanaut's Shield
+            -- 28661, -- Glinting Shield
 
         -- Cycle #2/#6
-           -- 18102, -- Pitchfork
-           -- 18441, -- Shinai
-           -- 18864, -- Dream Bell +1
-           -- 20532, -- Worm Feelers
-           -- 20577, -- Chicken Knife II
-           -- 20713, -- Excalipoor
-           -- 20909, -- Hoe
-           -- 21107, -- Kyuka Uchiwa
-           -- 21658, -- Brave Blade II
-           -- 21770, -- Helgoland
-           -- 21863, -- Tzee Xicu's Blade
-           -- 21967, -- Melon Slicer
-           -- 22017, -- Seika Uchiwa
-           -- 22069, -- Hapy Staff
-           -- 22072, -- Lamia Staff
-           -- 27625, -- Morbol Shield
-           -- 27631, -- Cait Sith Guard
-           -- 28652, -- Hatchling Shield
-           -- 28655, -- Slime Shield
+            -- 18102, -- Pitchfork
+            -- 18441, -- Shinai
+            -- 18864, -- Dream Bell +1
+            -- 20532, -- Worm Feelers
+            -- 20577, -- Chicken Knife II
+            -- 20713, -- Excalipoor
+            -- 20909, -- Hoe
+            -- 21107, -- Kyuka Uchiwa
+            -- 21658, -- Brave Blade II
+            -- 21770, -- Helgoland
+            -- 21863, -- Tzee Xicu's Blade
+            -- 21967, -- Melon Slicer
+            -- 22017, -- Seika Uchiwa
+            -- 22069, -- Hapy Staff
+            -- 22072, -- Lamia Staff
+            -- 27625, -- Morbol Shield
+            -- 27631, -- Cait Sith Guard
+            -- 28652, -- Hatchling Shield
+            -- 28655, -- Slime Shield
 
 
         -- Cycle #3
-           -- 10808, -- Janus Guard
-           -- 10811, -- Chocobo Shield
-           -- 18399, -- Charm Wand
-           -- 18464, -- Ark Tachi
-           -- 18545, -- Ark Tabar
-           -- 18563, -- Ark Scythe
-           -- 18912, -- Ark Saber
-           -- 18913, -- Ark Sword
-           -- 20573, -- Aern Dagger
-           -- 20674, -- Aern Sword
-           -- 20953, -- Escritorio
-           -- 21509, -- Premium Mogti
-           -- 21682, -- Lament
-           -- 21742, -- Aern Axe
-           -- 21759, -- Autarch's Axe
-           -- 21860, -- Aern Spear
-           -- 22004, -- Soulflayer's Wand
-           -- 22065, -- Aern Staff
-           -- 26489, -- Troth
+            -- 10808, -- Janus Guard
+            -- 10811, -- Chocobo Shield
+            -- 18399, -- Charm Wand
+            -- 18464, -- Ark Tachi
+            -- 18545, -- Ark Tabar
+            -- 18563, -- Ark Scythe
+            -- 18912, -- Ark Saber
+            -- 18913, -- Ark Sword
+            -- 20573, -- Aern Dagger
+            -- 20674, -- Aern Sword
+            -- 20953, -- Escritorio
+            -- 21509, -- Premium Mogti
+            -- 21682, -- Lament
+            -- 21742, -- Aern Axe
+            -- 21759, -- Autarch's Axe
+            -- 21860, -- Aern Spear
+            -- 22004, -- Soulflayer's Wand
+            -- 22065, -- Aern Staff
+            -- 26489, -- Troth
 
         -- Cycle #4
-           -- 10809, -- Moogle Guard
-           -- 20569, -- Esikuva
-           -- 20571, -- Infiltrator
-           -- 20576, -- Qutrub Knife
-           -- 20666, -- Blizzard Brand
-           -- 20668, -- Firetongue
-           -- 20933, -- Hotengeki
-           -- 21074, -- Kupo Rod
-           -- 21086, -- Heartstopper
-           -- 21095, -- Heartbeater
-           -- 21153, -- Malice Masher
-           -- 21608, -- Onion Sword II
-           -- 21609, -- Save The Queen II
-           -- 21636, -- Nihility
-           -- 21867, -- Sha Wujing's Lance
-           -- 21965, -- Zanmato
-           -- 22039, -- Floral Hagoita
-           -- 22089, -- Sophistry
-           -- 26410, -- Diamond Buckler
+            -- 10809, -- Moogle Guard
+            -- 20569, -- Esikuva
+            -- 20571, -- Infiltrator
+            -- 20576, -- Qutrub Knife
+            -- 20666, -- Blizzard Brand
+            -- 20668, -- Firetongue
+            -- 20933, -- Hotengeki
+            -- 21074, -- Kupo Rod
+            -- 21086, -- Heartstopper
+            -- 21095, -- Heartbeater
+            -- 21153, -- Malice Masher
+            -- 21608, -- Onion Sword II
+            -- 21609, -- Save The Queen II
+            -- 21636, -- Nihility
+            -- 21867, -- Sha Wujing's Lance
+            -- 21965, -- Zanmato
+            -- 22039, -- Floral Hagoita
+            -- 22089, -- Sophistry
+            -- 26410, -- Diamond Buckler
 
         -- Cycle #5
-           -- 11499, -- Trainees Specs
-           -- 15008, -- Trainee Gloves
-           -- 17764, -- Trainee Sword
-           -- 18502, -- Trainee Axe
-           -- 18763, -- Trainee Scissors
-           -- 18855, -- Trainee Hammer
-           -- 19101, -- Trainee Knife
-           -- 19110, -- Trainees Needle
-           -- 19274, -- Trainee Burin
+            -- 11499, -- Trainees Specs
+            -- 15008, -- Trainee Gloves
+            -- 17764, -- Trainee Sword
+            -- 18502, -- Trainee Axe
+            -- 18763, -- Trainee Scissors
+            -- 18855, -- Trainee Hammer
+            -- 19101, -- Trainee Knife
+            -- 19110, -- Trainees Needle
+            -- 19274, -- Trainee Burin
 
         -- Cycle #6 (Costumes)
-           10849, -- Yagudo Belt
-           10851, -- Slime Belt
-           15919, -- Drover's Belt
-           15921, -- Detonator Belt
-           16273, -- Pullus Torque
-           17031, -- Shell Scepter
-           27718, -- Worm Masque +1
+            10849, -- Yagudo Belt
+            10851, -- Slime Belt
+            15919, -- Drover's Belt
+            15921, -- Detonator Belt
+            16273, -- Pullus Torque
+            17031, -- Shell Scepter
+            27718, -- Worm Masque +1
         },
     },
 
@@ -437,7 +437,7 @@ local prizes =
             28586, -- Craftmasters Ring
             28587, -- Artificers Ring
 
-        -- Dyna currency 
+        -- Dyna currency
             -- static item
             1450, -- Lungo-Nango Jadeshell
             1453, -- Montiont Silverpiece
