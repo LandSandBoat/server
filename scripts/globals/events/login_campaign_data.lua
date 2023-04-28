@@ -389,13 +389,13 @@ local prizes =
         {
 		-- MOUNTS
 
-            -- TODO: Add mounts which only have a KeyItem.
-            -- https://www.bg-wiki.com/ffxi/Levitus_key
-            -- https://www.bg-wiki.com/ffxi/Omega_whistle
-            -- https://www.bg-wiki.com/ffxi/Spectral_chair_companion
-            -- https://www.bg-wiki.com/ffxi/Morbol_companion
-            -- https://www.bg-wiki.com/ffxi/Moogle_companion
-            -- https://www.bg-wiki.com/ffxi/Sheep_companion
+        -- TODO: Add mounts which only have a KeyItem.
+        -- https://www.bg-wiki.com/ffxi/Levitus_key
+        -- https://www.bg-wiki.com/ffxi/Omega_whistle
+        -- https://www.bg-wiki.com/ffxi/Spectral_chair_companion
+        -- https://www.bg-wiki.com/ffxi/Morbol_companion
+        -- https://www.bg-wiki.com/ffxi/Moogle_companion
+        -- https://www.bg-wiki.com/ffxi/Sheep_companion
 
 			10050, -- ♪Tiger
 			10051, -- ♪Crab
@@ -429,6 +429,7 @@ local prizes =
         ["items"] =
         {
 		-- Crafting items, leave these here until we can modify our skillup rates again
+
         -- static item
             11009, -- Shapers Shawl
             25637, -- Midrass Helm +1
