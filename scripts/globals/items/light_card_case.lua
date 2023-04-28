@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Light Cards
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2182, 99)
+    target:addItem(xi.items.LIGHT_CARD, 99)
 end
 
 return itemObject

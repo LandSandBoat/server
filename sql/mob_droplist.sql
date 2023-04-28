@@ -6976,12 +6976,12 @@ INSERT INTO `mob_droplist` VALUES (834,0,0,1000,1617,@VRARE);    -- Flytrap Leaf
 
 -- ZoneID:  15 - Fistule
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,11518,@ALWAYS);   -- Rokugo Hachimaki (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (835,0,0,1000,2931,@UNCOMMON);  -- Vial Of Fistule Discharge (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (835,0,0,1000,2931,@ALWAYS);    -- Vial Of Fistule Discharge (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (835,0,0,1000,2931,@COMMON);    -- Vial Of Fistule Discharge (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,3210,@UNCOMMON);  -- Stone Of Vision (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,3213,@UNCOMMON);  -- Card Of Vision (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,11522,@UNCOMMON); -- Lightsome Cap (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,17808,@UNCOMMON); -- Scathacha (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (835,0,0,1000,2931,@RARE);      -- Vial Of Fistule Discharge (Rare, 5%)
 
 -- ZoneID: 194 - Five Of Batons
 INSERT INTO `mob_droplist` VALUES (836,0,0,1000,1029,60); -- Horutoto Chest Key (6.0%)
@@ -12132,12 +12132,12 @@ INSERT INTO `mob_droplist` VALUES (1467,2,0,1000,17296,0);    -- Pebble (Steal)
 
 -- ZoneID:  15 - Kukulkan
 INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,11520,@ALWAYS);   -- Shunten Hachimaki (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,2932,@ALWAYS);    -- Kukulkans Fang (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,2932,@COMMON);    -- Kukulkans Fang (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,2497,@UNCOMMON);  -- Kukulkans Skin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,2932,@UNCOMMON);  -- Kukulkans Fang (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,3211,@UNCOMMON);  -- Coin Of Vision (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,3212,@UNCOMMON);  -- Jewel Of Vision (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,11731,@UNCOMMON); -- Anguinus Belt (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1468,0,0,1000,2932,@RARE);      -- Kukulkans Fang (Rare, 5%)
 
 -- ZoneID: 253 - Kur
 INSERT INTO `mob_droplist` VALUES (1469,0,0,1000,646,980);         -- Chunk Of Adaman Ore (98.0%)

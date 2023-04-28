@@ -4,6 +4,7 @@
 -- When used, you will obtain one partial stack of Antique Bullets +1
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17276, math.random(10, 20))
+    target:addItem(xi.items.ANTIQUE_BULLET_P1, math.random(10, 20))
 end
 
 return itemObject

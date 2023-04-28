@@ -184,14 +184,14 @@ INSERT INTO `mob_family_mods` VALUES (57,3,50,1);   -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (57,36,50,1);  -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (57,51,4,1);   -- ROAM_TURNS: 4
 INSERT INTO `mob_family_mods` VALUES (57,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (57,59,125,1); -- WEAPON_BONUS: 125
+INSERT INTO `mob_family_mods` VALUES (57,62,10,0);  -- ATTP: 10
 INSERT INTO `mob_family_mods` VALUES (57,63,20,0);  -- DEFP: 20
 
 -- Bugard
 INSERT INTO `mob_family_mods` VALUES (58,36,45,1);  -- ROAM_COOL: 45
 INSERT INTO `mob_family_mods` VALUES (58,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (58,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (58,59,125,1); -- WEAPON_BONUS: 125
+INSERT INTO `mob_family_mods` VALUES (58,62,10,0);  -- ATTP: 10
 INSERT INTO `mob_family_mods` VALUES (58,63,20,0);  -- DEFP: 20
 
 -- Bugbear
@@ -199,7 +199,6 @@ INSERT INTO `mob_family_mods` VALUES (59,10,5,1);   -- SUBLINK: 5
 INSERT INTO `mob_family_mods` VALUES (59,36,50,1);  -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (59,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (59,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (59,59,120,1); -- WEAPON_BONUS: 120
 INSERT INTO `mob_family_mods` VALUES (59,63,20,0);  -- DEFP: 20
 
 -- Cardian
@@ -259,18 +258,15 @@ INSERT INTO `mob_family_mods` VALUES (77,36,15,1); -- ROAM_COOL: 15
 -- Crawler
 INSERT INTO `mob_family_mods` VALUES (79,36,55,1);  -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (79,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (79,59,110,1); -- WEAPON_BONUS: 110
 
 -- Dhalmel
 INSERT INTO `mob_family_mods` VALUES (80,36,30,1);  -- ROAM_COOL: 30
 INSERT INTO `mob_family_mods` VALUES (80,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (80,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (80,59,110,1); -- WEAPON_BONUS: 110
 
 -- Diremite
 INSERT INTO `mob_family_mods` VALUES (81,36,50,1);  -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (81,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (81,59,115,1); -- WEAPON_BONUS: 115
 
 -- Doll
 INSERT INTO `mob_family_mods` VALUES (83,31,5,1);  -- ROAM_DISTANCE: 5
@@ -298,7 +294,7 @@ INSERT INTO `mob_family_mods` VALUES (87,4,18,1);    -- SIGHT_RANGE: 18
 INSERT INTO `mob_family_mods` VALUES (87,5,10,1);    -- SOUND_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (87,36,55,1);   -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (87,54,1000,1); -- GIL_BONUS: 1000
-INSERT INTO `mob_family_mods` VALUES (87,59,120,1);  -- WEAPON_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (87,62,20,0);   -- ATTP: 20
 
 -- Draugar
 INSERT INTO `mob_family_mods` VALUES (88,240,100,0); -- SLEEPRES: 100
@@ -463,7 +459,7 @@ INSERT INTO `mob_family_mods` VALUES (135,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (136,31,5,1);   -- ROAM_DISTANCE: 5
 INSERT INTO `mob_family_mods` VALUES (136,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (136,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (136,59,145,1); -- WEAPON_BONUS: 145
+INSERT INTO `mob_family_mods` VALUES (136,62,10,0);  -- ATTP: 10
 
 -- Hecteyes
 INSERT INTO `mob_family_mods` VALUES (139,36,55,1);   -- ROAM_COOL: 55
@@ -548,7 +544,6 @@ INSERT INTO `mob_family_mods` VALUES (169,31,15,1);   -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (169,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (169,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (169,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (169,59,120,1);  -- WEAPON_BONUS: 120
 INSERT INTO `mob_family_mods` VALUES (169,240,50,0);  -- SLEEPRES: 50
 INSERT INTO `mob_family_mods` VALUES (169,254,25,0);  -- LULLABYRES: 25
 INSERT INTO `mob_family_mods` VALUES (169,389,-25,0); -- UDMGMAGIC: -25
@@ -582,7 +577,7 @@ INSERT INTO `mob_family_mods` VALUES (179,31,30,1);  -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (179,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (179,51,4,1);   -- ROAM_TURNS: 4
 INSERT INTO `mob_family_mods` VALUES (179,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (179,59,125,1); -- WEAPON_BONUS: 125
+INSERT INTO `mob_family_mods` VALUES (179,62,10,0);  -- ATTP: 10
 
 -- Marid
 INSERT INTO `mob_family_mods` VALUES (180,36,30,1); -- ROAM_COOL: 30
@@ -652,14 +647,13 @@ INSERT INTO `mob_family_mods` VALUES (207,3,50,1); -- MP_BASE: 50
 -- Ram
 INSERT INTO `mob_family_mods` VALUES (208,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (208,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (208,59,120,1); -- WEAPON_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (208,62,10,0);  -- ATTP: 10
 INSERT INTO `mob_family_mods` VALUES (208,63,20,0);  -- DEFP: 20
 
 -- Raptor
 INSERT INTO `mob_family_mods` VALUES (210,31,30,1);  -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (210,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (210,51,3,1);   -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (210,59,110,1); -- WEAPON_BONUS: 110
 
 -- Sabotender
 INSERT INTO `mob_family_mods` VALUES (212,10,7,1);  -- SUBLINK: 7
@@ -678,7 +672,7 @@ INSERT INTO `mob_family_mods` VALUES (216,31,20,1); -- ROAM_DISTANCE: 20
 INSERT INTO `mob_family_mods` VALUES (217,23,256,1); -- IMMUNITY: 256
 INSERT INTO `mob_family_mods` VALUES (217,36,55,1);  -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (217,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (217,59,120,1); -- WEAPON_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (217,62,20,0);  -- ATTP: 20
 
 -- Sea Monk
 INSERT INTO `mob_family_mods` VALUES (218,36,30,1); -- ROAM_COOL: 30
@@ -737,13 +731,12 @@ INSERT INTO `mob_family_mods` VALUES (240,10,1,1);   -- SUBLINK: 1
 INSERT INTO `mob_family_mods` VALUES (240,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (240,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (240,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (240,59,120,1); -- WEAPON_BONUS: 120
 
 -- Tiger
 INSERT INTO `mob_family_mods` VALUES (242,31,15,1);  -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (242,36,45,1);  -- ROAM_COOL: 45
 INSERT INTO `mob_family_mods` VALUES (242,51,3,1);   -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (242,59,110,1); -- WEAPON_BONUS: 110
+INSERT INTO `mob_family_mods` VALUES (242,62,10,0);  -- ATTP: 10
 
 -- Tonberry
 INSERT INTO `mob_family_mods` VALUES (243,36,25,1); -- ROAM_COOL: 25
@@ -795,44 +788,34 @@ INSERT INTO `mob_family_mods` VALUES (258,52,30,1); -- ROAM_RATE: 30
 
 -- Wyrm-Ouryu
 INSERT INTO `mob_family_mods` VALUES (259,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (259,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyrm-Fafnir
 INSERT INTO `mob_family_mods` VALUES (260,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (260,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyrm-Cynoprosopi
 INSERT INTO `mob_family_mods` VALUES (261,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (261,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyrm
 INSERT INTO `mob_family_mods` VALUES (262,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (262,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyrm-Nidhogg
 INSERT INTO `mob_family_mods` VALUES (263,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (263,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyrm
 INSERT INTO `mob_family_mods` VALUES (264,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (264,59,125,1); -- WEAPON_BONUS: 125
 
 -- Wyvern-Simorg
 INSERT INTO `mob_family_mods` VALUES (265,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (265,59,120,1); -- WEAPON_BONUS: 120
 
 -- Wyvern
 INSERT INTO `mob_family_mods` VALUES (266,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (266,59,120,1); -- WEAPON_BONUS: 120
 
 -- Wyvern-Guivre
 INSERT INTO `mob_family_mods` VALUES (267,4,20,1);   -- SIGHT_RANGE: 20
 INSERT INTO `mob_family_mods` VALUES (267,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (267,59,120,1); -- WEAPON_BONUS: 120
 
 -- Wyvern-Undead
 INSERT INTO `mob_family_mods` VALUES (268,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (268,59,120,1); -- WEAPON_BONUS: 120
 
 -- Yovra
 INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
@@ -898,7 +881,6 @@ INSERT INTO `mob_family_mods` VALUES (358,31,15,1);   -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (358,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (358,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (358,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (358,59,120,1);  -- WEAPON_BONUS: 120
 INSERT INTO `mob_family_mods` VALUES (358,240,50,0);  -- SLEEPRES: 50
 INSERT INTO `mob_family_mods` VALUES (358,254,25,0);  -- LULLABYRES: 25
 INSERT INTO `mob_family_mods` VALUES (358,389,-25,0); -- UDMGMAGIC: -25
@@ -926,9 +908,6 @@ INSERT INTO `mob_family_mods` VALUES (368,52,30,1); -- ROAM_RATE: 30
 
 -- Leech
 INSERT INTO `mob_family_mods` VALUES (369,31,15,1); -- ROAM_DISTANCE: 15
-
--- Marid
-INSERT INTO `mob_family_mods` VALUES (371,59,125,1); -- WEAPON_BONUS: 125
 
 -- Crab
 INSERT INTO `mob_family_mods` VALUES (372,36,15,1); -- ROAM_COOL: 15

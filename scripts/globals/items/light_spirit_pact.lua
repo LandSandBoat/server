@@ -3,14 +3,16 @@
 -- Light Spirit Pact
 -- Teaches the summoning magic Air Spirit
 -----------------------------------
+require("scripts/globals/spell_data")
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(294)
+    return target:canLearnSpell(xi.magic.spell.LIGHT_SPIRIT)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(294)
+    target:addSpell(xi.magic.spell.LIGHT_SPIRIT)
 end
 
 return itemObject

@@ -2568,7 +2568,7 @@ xi.mobMod =
     HP_STANDBACK           = 56, -- mob will always standback with hp % higher to value
     MAGIC_DELAY            = 57, -- Amount of seconds mob waits before casting first spell
     SPECIAL_DELAY          = 58, -- Amount of seconds mob waits before using first special
-    WEAPON_BONUS           = 59, -- Add a bonus percentage to mob weapon damage ( bonus / 100 )
+    WEAPON_BONUS           = 59, -- Add a flat modifer mob weapon damage ( damage + bonus )
     SPAWN_ANIMATIONSUB     = 60, -- reset animationsub to this on spawn
     HP_SCALE               = 61, -- Scale the mobs max HP. ( hp_scale / 100 ) * maxhp
     NO_STANDBACK           = 62, -- Mob will never standback
@@ -2583,6 +2583,7 @@ xi.mobMod =
     LEADER                 = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE            = 72, -- magic aggro range
     TARGET_DISTANCE_OFFSET = 73, -- Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
+    ONE_WAY_LINKING        = 74, -- Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
     CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
 }
 
