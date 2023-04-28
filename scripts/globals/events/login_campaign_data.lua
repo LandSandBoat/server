@@ -35,7 +35,7 @@ local prizes =
         ["price"] = 50,
         ["items"] =
         {
-		-- CONSUMABLES II and furnishings(7 per cycle)
+        -- CONSUMABLES II and furnishings(7 per cycle)
 
         --static items
             1875, -- Ancient Beastcoin
@@ -317,7 +317,6 @@ local prizes =
             -- 28652, -- Hatchling Shield
             -- 28655, -- Slime Shield
 
-
         -- Cycle #3
             -- 10808, -- Janus Guard
             -- 10811, -- Chocobo Shield
@@ -387,7 +386,7 @@ local prizes =
         ["price"] = 500,
         ["items"] =
         {
-		-- MOUNTS
+        -- MOUNTS
 
         -- TODO: Add mounts which only have a KeyItem.
         -- https://www.bg-wiki.com/ffxi/Levitus_key
@@ -397,28 +396,28 @@ local prizes =
         -- https://www.bg-wiki.com/ffxi/Moogle_companion
         -- https://www.bg-wiki.com/ffxi/Sheep_companion
 
-			10050, -- ♪Tiger
-			10051, -- ♪Crab
-			-- 10052, -- ♪Red Crab
-			10053, -- ♪Bomb
-			10056, -- ♪Crawler
-			10058, -- ♪Beetle
-			10060, -- ♪Magic Pot
-			10061, -- ♪Tulfaire
-			10062, -- ♪Warmachine
-			10063, -- ♪Xzomit
-			10064, -- ♪Hippogryph
-			10066, -- ♪Spheroid
-			10068, -- ♪Coeurl
-			10069, -- ♪Goobbue
-			10070, -- ♪Raaz
-			10072, -- ♪Adamantoise
-			10073, -- ♪Dhalmel
-			10074, -- ♪Doll
-			-- 10075, -- ♪Red Raptor
-			-- 10076, -- ♪Golden Bomb
-			10077, -- ♪Buffalo
-			10078, -- ♪Wivre
+            10050, -- ♪Tiger
+            10051, -- ♪Crab
+            -- 10052, -- ♪Red Crab
+            10053, -- ♪Bomb
+            10056, -- ♪Crawler
+            10058, -- ♪Beetle
+            10060, -- ♪Magic Pot
+            10061, -- ♪Tulfaire
+            10062, -- ♪Warmachine
+            10063, -- ♪Xzomit
+            10064, -- ♪Hippogryph
+            10066, -- ♪Spheroid
+            10068, -- ♪Coeurl
+            10069, -- ♪Goobbue
+            10070, -- ♪Raaz
+            10072, -- ♪Adamantoise
+            10073, -- ♪Dhalmel
+            10074, -- ♪Doll
+            -- 10075, -- ♪Red Raptor
+            -- 10076, -- ♪Golden Bomb
+            10077, -- ♪Buffalo
+            10078, -- ♪Wivre
         },
 
     },
@@ -428,7 +427,7 @@ local prizes =
         ["price"] = 1000,
         ["items"] =
         {
-		-- Crafting items, leave these here until we can modify our skillup rates again
+        -- Crafting items, leave these here until we can modify our skillup rates again
 
         -- static item
             11009, -- Shapers Shawl
@@ -493,7 +492,7 @@ local prizes =
         ["price"] = 1500,
         ["items"] =
         {
-		-- NICE TO HAVE STUFF
+        -- NICE TO HAVE STUFF
 
         -- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
             -- 14568, -- Askar Korazin
