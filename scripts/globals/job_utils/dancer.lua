@@ -6,6 +6,7 @@ require('scripts/globals/magic')
 require('scripts/globals/msg')
 require('scripts/globals/status')
 require('scripts/globals/weaponskills')
+require('scripts/globals/items')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -57,13 +58,19 @@ end
 -- TODO: Determine if step is stacked at 10, and reduce to 1 if necessary.
 local function getStepFinishingMovesBase(player)
     local numAwardedMoves = 1
-
     if player:hasStatusEffect(xi.effect.PRESTO) then
         numAwardedMoves = 5
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
     end
-
+-- If Terpsichore is equipped, adds 1 additional finishing move to player (custom)
+    if
+        player:getEquipID(xi.slot.MAIN) == xi.items.TERPSICHORE or
+        player:getEquipID(xi.slot.SUB) == xi.items.TERPSICHORE
+    then
+        numAwardedMoves = numAwardedMoves + 1
+    end
+-- End of custom code
     return numAwardedMoves
 end
 
