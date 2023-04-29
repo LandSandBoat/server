@@ -8,6 +8,7 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 282)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 644 })
 end
 
 return entity

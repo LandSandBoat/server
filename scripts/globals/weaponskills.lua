@@ -11,7 +11,6 @@
 -- performance of the actual WS (rand numbers, etc)
 -----------------------------------
 require('scripts/globals/magicburst')
-require('scripts/globals/magiantrials')
 require('scripts/globals/ability')
 require('scripts/globals/magic')
 require('scripts/globals/utils')
