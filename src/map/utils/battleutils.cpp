@@ -365,6 +365,13 @@ namespace battleutils
         // than the size of the array.
         auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
+        // TODO: Research on mobs level 99+ is still on-going. This line can be removed once the correct formula/skilltype have been established.
+        // max indexed value and level is capped at 99 as stated above for skill_caps table
+        if (level > 99)
+        {
+            level = 99;
+        }
+
         if (level > maxLevel)
         {
             ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);

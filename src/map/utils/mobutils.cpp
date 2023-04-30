@@ -206,8 +206,8 @@ namespace mobutils
         uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
-        uint8 grade;
-        uint8 gradesj;
+        uint8 mJobGrade; // main jobs grade
+        uint8 sJobGrade; // subjobs grade
 
         if (recover == true)
         {
@@ -218,23 +218,23 @@ namespace mobutils
                 uint32 baseMobHP = 0; // Define base mobs hp
                 uint32 sjHP      = 0; // Define base subjob hp
 
-                grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
-                gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
+                mJobGrade = grade::GetJobGrade(mJob, 0); // main jobs grade
+                sJobGrade = grade::GetJobGrade(sJob, 0); // subjobs grade
 
                 uint8 base     = 0; // Column for base hp
                 uint8 jobScale = 1; // Column for job scaling
                 uint8 scaleX   = 2; // Column for modifier scale
 
-                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
-                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
-                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
-                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
-                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+                uint8 BaseHP     = grade::GetMobHPScale(mJobGrade, base);     // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(mJobGrade, jobScale); // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(mJobGrade, scaleX);   // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(sJobGrade, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(sJobGrade, scaleX);   // Sub job modifier scale
 
-                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
-                uint8 RBIbase  = 1;                        // Column for RBI base
+                uint8 RIgrade = std::min(mLvl, (uint8)5); // RI Grade
+                uint8 RIbase  = 1;                        // Column for RI base
 
-                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+                uint8 RI = grade::GetMobRBI(RIgrade, RIbase); // Random Increment addition per grade vs. base
 
                 uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
                 uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
@@ -243,7 +243,7 @@ namespace mobutils
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
                 // 50+ = 1 hp sjstats
@@ -456,7 +456,7 @@ namespace mobutils
             sVIT /= 4;
         }
 
-        // [stat] = [family Stat] + [main job Stat] + [sub job Stat]
+        // [stat] = floor[family Stat] + floor[main job Stat] + floor[sub job Stat]
         PMob->stats.STR = fSTR + mSTR + sSTR;
         PMob->stats.DEX = fDEX + mDEX + sDEX;
         PMob->stats.VIT = fVIT + mVIT + sVIT;
