@@ -2,14 +2,15 @@
 -- Area: Periqia (Requiem)
 --  Mob: Batteilant Bhoot
 -----------------------------------
+require("scripts/globals/assault")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    instance:setProgress(instance:getProgress() + 1)
+    xi.assault.progressInstance(mob, 1)
 end
 
 return entity

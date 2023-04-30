@@ -209,6 +209,39 @@ xi.assault.adjustMobLevel = function(mob)
     end
 end
 
+xi.assault.addTempItem = function(mob, player, item, chance)
+    if mob:getLocalVar("tempItem") == 0 then
+        mob:setLocalVar("tempItem", 1)
+        if math.random(0, 100) <= chance then
+            npcUtil.giveTempItem(player, item)
+        end
+    end
+end
+
+xi.assault.progressInstance = function(mob, amount)
+    local instance = mob:getInstance()
+
+    if instance then
+        if amount == nil then
+            amount = 1
+        end
+
+        instance:setProgress(instance:getProgress() + amount)
+    end
+end
+
+xi.assault.setProgress = function(mob, amount)
+    local instance = mob:getInstance()
+
+    if instance then
+        if amount == nil then
+            amount = 1
+        end
+
+        instance:setProgress(amount)
+    end
+end
+
 xi.assault.mission =
 {
     LEUJAOAM_CLEANSING                = 1,

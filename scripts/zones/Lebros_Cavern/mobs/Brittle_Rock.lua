@@ -47,7 +47,7 @@ entity.onMobDeath = function(mob, player, optParams)
             GetNPCByID(ID.npc._jr1, instance):setAnimation(xi.animation.OPEN_DOOR)
         end
 
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressInstance(mob, 1)
     end
 end
 
