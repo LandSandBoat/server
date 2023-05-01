@@ -260,7 +260,7 @@ local battlefields =
         { 2,   34, 1551 },   -- Wings of Fury (BS20)
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30)
-    --  { 5,   37,    0 },   -- Mirror, Mirror (Quest)
+        { 5,   37,    0 },   -- Mirror, Mirror (Quest)
     },
 
     [xi.zone.WAUGHROON_SHRINE] =
@@ -603,6 +603,10 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+        end,
+
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
         end,
 
         [64] = function() -- Mission 2-3
@@ -1143,6 +1147,10 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+        end,
+
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
             return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
                 player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and

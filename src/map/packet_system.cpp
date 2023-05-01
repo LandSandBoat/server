@@ -39,6 +39,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
@@ -63,6 +64,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/blacklistutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
+#include "utils/fellowutils.h"
 #include "utils/fishingutils.h"
 #include "utils/gardenutils.h"
 #include "utils/itemutils.h"
@@ -114,6 +116,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/delivery_box.h"
 #include "packets/downloading_data.h"
 #include "packets/entity_update.h"
+#include "packets/fellow_despawn.h"
 #include "packets/furniture_interact.h"
 #include "packets/guild_menu_buy.h"
 #include "packets/guild_menu_buy_update.h"
@@ -441,6 +444,32 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->resetPetZoningInfo();
     }
+
+    // respawn fellow from last zone if applicable
+    if (PChar->fellowZoningInfo.respawnFellow)
+    {
+        // only repawn fellow in valid zones
+        if (PChar->loc.zone->CanUseMisc(MISC_FELLOW) && !PChar->m_moghouseID)
+        {
+            // only respawn in wotg zones if player has unlocked wotg for fellows
+            if (PChar->loc.zone->GetContinentID() == CONTINENT_TYPE::THE_SHADOWREIGN_ERA)
+            {
+                const char* Query = "SELECT wotg_unlock FROM char_fellow WHERE charid = %u;";
+                int32       ret   = sql->Query(Query, PChar->id);
+                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                {
+                    if (sql->GetIntData(0) == 0)
+                        fellowutils::SpawnFellow(PChar, PChar->fellowZoningInfo.fellowID, true);
+                }
+            }
+            else
+            {
+                fellowutils::SpawnFellow(PChar, PChar->fellowZoningInfo.fellowID, true);
+            }
+        }
+    }
+    // Reset the fellowZoning info
+    PChar->resetFellowZoningInfo();
 }
 
 /************************************************************************
@@ -518,6 +547,21 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         else
         {
             PChar->resetPetZoningInfo();
+        }
+
+        if (PChar->m_PFellow != nullptr)
+        {
+            uint16      maxTime  = 0;
+            const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
+            if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                maxTime = (uint16)sql->GetIntData(0);
+            uint32      spawnTime  = 0;
+            const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
+            if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                spawnTime = (uint32)sql->GetIntData(0);
+            sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+                       maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
+            PChar->setFellowZoningInfo();
         }
 
         PSession->shuttingDown = 1;
@@ -869,6 +913,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (auto* PTrust = dynamic_cast<CTrustEntity*>(PChar->GetEntity(TargID, TYPE_TRUST)))
             {
                 PChar->RemoveTrust(PTrust);
+            }
+
+            // Releasing an NPC Fellow
+            if (PChar->m_PFellow != nullptr && PChar->m_PFellow->targid == TargID)
+            {
+                if (data.ref<uint8>(0x0C) == 1)
+                {
+                    fellowutils::TriggerFellowChat(PChar, FELLOWCHAT_DISBAND); // Dismiss Message
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PChar->m_PFellow));
+                    PChar->RemoveFellow();
+                }
+                else
+                    PChar->m_PFellow->PAI->Trigger(PChar);
             }
 
             if (!PChar->isNpcLocked())
@@ -3797,6 +3854,23 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
+    // handle adventuring fellow on zone
+    if (PChar->m_PFellow != nullptr)
+    {
+        uint16      maxTime  = 0;
+        const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
+        if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            maxTime = (uint16)sql->GetIntData(0);
+        uint32      spawnTime  = 0;
+        const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
+        if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            spawnTime = (uint32)sql->GetIntData(0);
+        sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+                   maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
+        PChar->setFellowZoningInfo();
+        PChar->RemoveFellow();
+    }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
     uint8  town          = data.ref<uint8>(0x16);
@@ -7138,6 +7212,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             JOBTYPE prevjob = PChar->GetMJob();
             PChar->resetPetZoningInfo();
+            PChar->resetFellowZoningInfo();
 
             charutils::SaveJobChangeGear(PChar);
             charutils::RemoveAllEquipment(PChar);
@@ -7170,6 +7245,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             JOBTYPE prevsjob = PChar->GetSJob();
             PChar->resetPetZoningInfo();
+            PChar->resetFellowZoningInfo();
 
             PChar->SetSJob(sjob);
             PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);

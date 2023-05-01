@@ -1838,6 +1838,21 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 }
             });
             // clang-format on
+
+            // Apply the aura's buff to the owner of the buff's fellow
+            CBattleEntity* PFellow = (CBattleEntity*)((CCharEntity*)PEntity)->m_PFellow;
+            if (PFellow != nullptr && PEntity->loc.zone->GetID() == PFellow->loc.zone->GetID() &&
+                distanceSquared(m_POwner->loc.p, PFellow->loc.p) < aura_range * aura_range && !PFellow->isDead())
+            {
+                CStatusEffect* PEffect = new CStatusEffect(
+                    (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                    (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                    PStatusEffect->GetSubPower(),      // Power
+                    3,                                 // Tick
+                    4);                                // Duration
+                PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                PFellow->StatusEffectContainer->AddStatusEffect(PEffect, true);
+            }
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {

@@ -34,6 +34,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
 
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
@@ -394,6 +395,30 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
                 }
             }
             PChar->PPet = nullptr;
+        }
+    }
+
+    // remove fellow
+    if (PChar->m_PFellow != nullptr)
+    {
+        PChar->m_PFellow->status = STATUS_TYPE::DISAPPEAR;
+        if (PChar->m_PFellow != nullptr)
+        {
+            PChar->m_PFellow->PAI->Disengage();
+
+            for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+            {
+                // inform other players of the fellows removal
+                CCharEntity*            PCurrentChar = (CCharEntity*)it->second;
+                SpawnIDList_t::iterator Fellow       = PCurrentChar->SpawnPETList.find(PChar->m_PFellow->id);
+
+                if (Fellow != PCurrentChar->SpawnPETList.end())
+                {
+                    PCurrentChar->SpawnPETList.erase(Fellow);
+                    PCurrentChar->pushPacket(new CEntityUpdatePacket(PChar->m_PFellow, ENTITY_DESPAWN, UPDATE_NONE));
+                }
+            }
+            PChar->m_PFellow = nullptr;
         }
     }
 
@@ -929,7 +954,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
     }
     else if (targid < 0x1000) // 1792 - 4096 are dynamic entities
     {
-        if (filter & TYPE_PET)
+        if (filter & TYPE_PET || filter & TYPE_FELLOW)
         {
             EntityList_t::const_iterator it = m_petList.find(targid);
             if (it != m_petList.end())

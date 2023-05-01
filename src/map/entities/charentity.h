@@ -50,6 +50,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 class CItemWeapon;
 class CTrustEntity;
+class CFellowEntity;
 
 struct jobs_t
 {
@@ -180,6 +181,14 @@ struct PetInfo_t
     int16    petHP;        // pets hp
     int16    petMP;        // pets mp
     float    petTP;        // pets tp
+};
+
+struct FellowInfo_t
+{
+    bool  respawnFellow; // used for spawning fellow on zone
+    uint8 fellowID;      // id
+    int16 fellowHP;      // fellow hp
+    int16 fellowMP;      // fellow mp
 };
 
 struct AuctionHistory_t
@@ -363,12 +372,16 @@ public:
     void              setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
     void              resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
     bool              shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
+    FellowInfo_t      fellowZoningInfo;                // used to repawn fellows on zone
+    void              setFellowZoningInfo();           // set fellow zoning info (when zoning and logging out)
+    void              resetFellowZoningInfo();         // reset fellow zoning info (when changing job ect)
     uint8             m_SetBlueSpells[20];             // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
     uint32            m_FieldChocobo;
     time_point        m_nextDataSave; // Sets the next point to save to the DB.
 
     UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
     CAutomatonEntity*     PAutomaton;            // Automaton statistics
+    CFellowEntity*        m_PFellow;             // Player's Fellow
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
@@ -544,6 +557,7 @@ public:
     bool ReloadParty() const;
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
+    void RemoveFellow();
 
     void RequestPersist(CHAR_PERSIST toPersist);
     bool PersistData();

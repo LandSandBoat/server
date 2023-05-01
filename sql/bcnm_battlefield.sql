@@ -186,6 +186,8 @@ INSERT INTO `bcnm_battlefield` VALUES (36,1,17350936,3); -- toadal_recall
 INSERT INTO `bcnm_battlefield` VALUES (36,1,17350937,3);
 INSERT INTO `bcnm_battlefield` VALUES (36,1,17350938,3);
 INSERT INTO `bcnm_battlefield` VALUES (36,1,17350939,3);
+INSERT INTO `bcnm_battlefield` VALUES (37,1,17350941,3); -- mirror_mirror
+INSERT INTO `bcnm_battlefield` VALUES (37,1,17350942,2);
 INSERT INTO `bcnm_battlefield` VALUES (64,1,17367041,3); -- rank_2_mission (Waughroon Shrine)
 INSERT INTO `bcnm_battlefield` VALUES (64,1,17367042,3);
 INSERT INTO `bcnm_battlefield` VALUES (64,2,17367043,3);

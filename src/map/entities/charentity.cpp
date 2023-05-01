@@ -66,6 +66,7 @@
 #include "charentity.h"
 #include "conquest_system.h"
 #include "enmity_container.h"
+#include "fellowentity.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
@@ -220,6 +221,13 @@ CCharEntity::CCharEntity()
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
+
+    fellowZoningInfo.respawnFellow = false;
+    fellowZoningInfo.fellowID      = 0;
+    fellowZoningInfo.fellowHP      = 0;
+    fellowZoningInfo.fellowMP      = 0;
+
+    m_PFellow = nullptr;
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
@@ -497,6 +505,18 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
+void CCharEntity::setFellowZoningInfo()
+{
+    fellowZoningInfo.fellowHP = m_PFellow->health.hp;
+    fellowZoningInfo.fellowMP = m_PFellow->health.mp;
+}
+
+void CCharEntity::resetFellowZoningInfo()
+{
+    fellowZoningInfo.fellowHP      = 0;
+    fellowZoningInfo.fellowMP      = 0;
+    fellowZoningInfo.respawnFellow = false;
+}
 /************************************************************************
  *
  * Return the container with the specified ID.If the ID goes beyond, then *
@@ -722,6 +742,16 @@ void CCharEntity::ClearTrusts()
     PTrusts.clear();
 
     ReloadPartyInc();
+}
+
+void CCharEntity::RemoveFellow()
+{
+    if (m_PFellow == nullptr || !m_PFellow->PAI->IsSpawned())
+        return;
+
+    m_PFellow->PAI->Despawn();
+    m_PFellow = nullptr;
+    pushPacket(new CCharUpdatePacket(this));
 }
 
 void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
