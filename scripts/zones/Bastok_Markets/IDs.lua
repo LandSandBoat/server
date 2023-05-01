@@ -69,6 +69,18 @@ zones[xi.zone.BASTOK_MARKETS] =
         HERE_TAKE_THIS                = 8301,  -- Here, take this...
         IF_YOU_WEAR_THIS              = 8302,  -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 8303,  -- Thank you...
+        EGG_HUNT_REWARD1              = 8310,  -- Egg-cellent! Here's your prize, kupo!
+        EGG_HUNT_REWARD2              = 8311,  -- Egg-straordinary! Here's your special prize, kupo!
+        EGG_HUNT_REWARD3              = 8312,  -- How in-eggs-plicably astounding!
+        EGG_HUNT_WAITING              = 8313,  -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
+        EGG_HUNT_HINTING              = 8314,  -- These initial eggs are really egg-spensive, kupo!
+        EGG_HUNT_TRADE1               = 8315,  -- Eggs-actly what I wanted! Here's your reward, kupo!
+        EGG_HUNT_TRADE2               = 8316,  -- Ku-kupo! Such an egg-stravagant item, for little old me?
+        EGG_HUNT_TRADE3               = 8317,  -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
+        EGG_HUNT_TRADE4               = 8318,  -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
+        EGG_HUNT_DELAY                = 8319,  -- Hey, I can only trade with you once a day.
+        EGG_HUNT_HELP                 = 8320,  -- Hey, you look new here, kupo!
+        EGG_HUNT_REWARD4              = 8321,  -- Heh heh heh... I have something egg-specially egg-citing
         RETRIEVE_DIALOG_ID            = 12909, -- You retrieve <item> from the porter moogle's care.
         TURNING_IN_SPARKS             = 14234, -- Ohohoho... Turning in sparks, I see.
         DO_NOT_POSSESS_ENOUGH         = 14258, -- You do not possess enough <item> to complete the transaction.
@@ -83,8 +95,8 @@ zones[xi.zone.BASTOK_MARKETS] =
     },
     npc =
     {
-        AQUILLINA = GetFirstID("Aquillina"),
-
+        AQUILLINA       = GetFirstID("Aquillina"),
+        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17739805] = 45, -- Olwyn

@@ -1,10 +1,11 @@
--- ----------------------------------
+------------------------------------
 -- Egg Hunt Egg-Stravaganza
--- ----------------------------------
+------------------------------------
 require("scripts/globals/settings")
+require("scripts/globals/zone")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
--- ----------------------------------
+------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.egg_hunt = xi.events.egg_hunt or {}
@@ -21,17 +22,24 @@ local settings =
 
     VAR =
     {
-        DAILY_EGG     = "[EGGHUNT]DAILY_EGG",
-        DAILY_REWARD  = "[EGGHUNT]DAILY_REWARD",
-        DAILY_BONUS   = "[EGGHUNT]DAILY_BONUS",
-        DAILY_HELM    = "[EGGHUNT]DAILY_HELM",
-        INITIAL_THREE = "[EGGHUNT]INITIAL_THREE",
+        DAILY_EGG     = "[EGG_HUNT]DAILY_EGG",
+        DAILY_REWARD  = "[EGG_HUNT]DAILY_REWARD",
+        DAILY_BONUS   = "[EGG_HUNT]DAILY_BONUS",
+        DAILY_HELM    = "[EGG_HUNT]DAILY_HELM",
+        FIRST_THREE   = "[EGG_HUNT]FIRST_THREE",
     },
 
-    -- Default allows additional eras to be added each year
+    -- Default era is 2005
+    ERA_2006 = false, -- Orphic Egg
     ERA_2007 = false, -- Jeweled Egg and Egg Helm
-    ERA_2008 = false, -- Tier 2 nation eggs
+    ERA_2008 = false, -- Tier 2 nation eggs, allows trading Hard-Boiled Eggs
     ERA_2009 = false, -- Egg Buffet set
+    -- 2009, 2010, 2011 and 2012 are identical
+    ERA_2013 = false, -- Prinseggstarta
+    ERA_2014 = false, -- Hatchling Shield, Copse Candy, Cracker
+    ERA_2015 = false, -- Rabbit Cap, show Rabbit Cap wearing NPCs
+    ERA_2018 = false, -- Allows trading Sairui-Ran x99 and Imperial Egg
+    ERA_2019 = false, -- Allows trading Apkallu Egg
 
     -- Consolation prizes for repeating combinations where
     -- the player has already received the relevant reward
@@ -39,10 +47,6 @@ local settings =
 
     -- Don't add words here
     -- settings/main.lua will overwrite these
-    -----------------------------------------------
-    -- Set custom combinations, eg. WORD = 1234
-    -- Where WORD is an arrangement of lettered eggs
-    -- Where 1234 is the itemID for the reward
     BONUS_WORDS = {},
 }
 
@@ -80,31 +84,15 @@ end
 
 event:setEnableCheck(xi.events.egg_hunt.enabledCheck)
 
--- ----------------------------------
+------------------------------------
 -- Data
--- ----------------------------------
+------------------------------------
 
 xi.events.egg_hunt.data =
 {
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
-        id = 17719704,
         cs = 872,
-        message =
-        {
-            REWARD1 = 7402, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 7403, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 7404, -- How in-eggs-plicably astounding!
-            WAITING = 7405, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 7406, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 7407, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 7408, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 7409, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 7410, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 7411, -- Hey, I can only trade with you once a day.
-            HELP    = 7412, -- Hey, you look new here, kupo!
-            REWARD4 = 7413, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 224,  -99.972,  1.000, -57.257, "0x00006B0500000000000000000000000000000000", },
@@ -113,6 +101,9 @@ xi.events.egg_hunt.data =
             { 160,   99.882,  1.000, -57.257, "0x00006B0500000000000000000000000000000000", },
             {  96,  144.679, -2.000, 120.889, "0x00006B0500000000000000000000000000000000", },
             {  96,  152.904, -2.000, 112.697, "0x00006B0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             {  95,  143.780, -2.000, 119.940, "0x01001E0382116F20173017401750006000700000", },
             {  95,  151.890, -2.000, 111.800, "0x01001E0482116F20173017401750006000700000", },
             { 160,  112.000,  1.000, -42.600, "0x01001E0582116F20173017401750006000700000", },
@@ -124,29 +115,16 @@ xi.events.egg_hunt.data =
 
     [xi.zone.NORTHERN_SAN_DORIA] =
     {
-        id = 17723702,
         cs = 832,
-        message =
-        {
-            REWARD1 = 13102, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 13103, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 13104, -- How in-eggs-plicably astounding!
-            WAITING = 13105, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 13106, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 13107, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 13108, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 13109, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 13110, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 13111, -- Hey, I can only trade with you once a day.
-            HELP    = 13112, -- Hey, you look new here, kupo!
-            REWARD4 = 13113, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 163,   87.834, 0.000,  8.015, "0x00006B0500000000000000000000000000000000", },
             { 163,   84.074, 0.000,  4.233, "0x00006B0500000000000000000000000000000000", },
             {   0, -245.045, 7.999, 34.350, "0x00006B0500000000000000000000000000000000", },
             {   0, -245.045, 7.999, 53.650, "0x00006B0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             {   0, -243.800, 8.000, 33.500, "0x01001E0182116F20173017401750006000700000", },
             {   0, -243.800, 8.000, 35.000, "0x01001E0282116F20173017401750006000700000", },
             {   0, -243.800, 8.000, 52.800, "0x01001E0382116F20173017401750006000700000", },
@@ -157,29 +135,16 @@ xi.events.egg_hunt.data =
 
     [xi.zone.BASTOK_MINES] =
     {
-        id = 17735920,
         cs = 561,
-        message =
-        {
-            REWARD1 = 11940, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 11941, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 11942, -- How in-eggs-plicably astounding!
-            WAITING = 11943, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 11944, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 11945, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 11946, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 11947, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 11948, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 11949, -- Hey, I can only trade with you once a day.
-            HELP    = 11950, -- Hey, you look new here, kupo!
-            REWARD4 = 11951, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 192, -10.200, -1.000, -127.100, "0x00006C0500000000000000000000000000000000", },
             { 192, -21.800, -1.000, -127.100, "0x00006C0500000000000000000000000000000000", },
             { 128,  82.000,  0.000,  -66.700, "0x00006C0500000000000000000000000000000000", },
             { 128,  82.000,  0.000,  -77.300, "0x00006C0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             { 127,  80.500,  0.000,  -66.700, "0x01001E0182117120173017401750006000700000", },
             { 127,  80.500,  0.000,  -77.300, "0x01001E0282117120173017401750006000700000", },
             { 192, -10.250, -1.000, -125.900, "0x01001E0382117120173017401750006000700000", },
@@ -189,23 +154,7 @@ xi.events.egg_hunt.data =
 
     [xi.zone.BASTOK_MARKETS] =
     {
-        id = 17740005,
         cs = 467,
-        message =
-        {
-            REWARD1 = 8296, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 8297, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 8298, -- How in-eggs-plicably astounding!
-            WAITING = 8299, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 8300, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 8301, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 8302, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 8303, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 8304, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 8305, -- Hey, I can only trade with you once a day.
-            HELP    = 8306, -- Hey, you look new here, kupo!
-            REWARD4 = 8307, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 128, -153.700,  -4.000,   33.000, "0x00006C0500000000000000000000000000000000", },
@@ -214,6 +163,9 @@ xi.events.egg_hunt.data =
             { 128, -153.700,  -4.000,  -33.000, "0x00006C0500000000000000000000000000000000", },
             { 224, -362.004, -10.002, -173.953, "0x00006C0500000000000000000000000000000000", },
             { 224, -353.928, -10.002, -182.068, "0x00006C0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             { 224, -353.000, -10.000, -181.080, "0x01001E0582117120173017401750006000700000", },
             { 224, -360.900, -10.000, -173.000, "0x01001E0682117120173017401750006000700000", },
             { 127, -155.000,  -4.000,   33.000, "0x01001E0782117120173017401750006000700000", },
@@ -223,29 +175,16 @@ xi.events.egg_hunt.data =
 
     [xi.zone.WINDURST_WATERS] =
     {
-        id = 17752413,
         cs = 969,
-        message =
-        {
-            REWARD1 = 10193, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 10194, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 10195, -- How in-eggs-plicably astounding!
-            WAITING = 10196, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 10197, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 10198, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 10199, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 10200, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 10201, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 10202, -- Hey, I can only trade with you once a day.
-            HELP    = 10203, -- Hey, you look new here, kupo!
-            REWARD4 = 10204, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 192, 164.500, -0.250, -30.000, "0x00006D0500000000000000000000000000000000", },
             { 192, 155.500, -0.250, -30.000, "0x00006D0500000000000000000000000000000000", },
             {  64, -46.800, -4.916, 227.570, "0x00006D0500000000000000000000000000000000", },
             {  64, -33.200, -4.982, 227.570, "0x00006D0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             { 192, 165.000, -0.250, -28.800, "0x01001E0582117020173017401750006000700000", },
             { 192, 164.000, -0.250, -28.800, "0x01001E0682117020173017401750006000700000", },
             { 192, 155.500, -0.250, -28.800, "0x01001E0782117020173017401750006000700000", },
@@ -256,29 +195,16 @@ xi.events.egg_hunt.data =
 
     [xi.zone.WINDURST_WOODS] =
     {
-        id = 17764682,
         cs = 785,
-        message =
-        {
-            REWARD1 = 9783, -- Egg-cellent! Here's your prize, kupo!
-            REWARD2 = 9784, -- Egg-straordinary! Here's your special prize, kupo!
-            REWARD3 = 9785, -- How in-eggs-plicably astounding!
-            WAITING = 9786, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
-            HINTING = 9787, -- These initial eggs are really egg-spensive, kupo!
-            TRADE1  = 9788, -- Eggs-actly what I wanted! Here's your reward, kupo!
-            TRADE2  = 9789, -- Ku-kupo! Such an egg-stravagant item, for little old me?
-            TRADE3  = 9790, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
-            TRADE4  = 9791, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
-            DELAY   = 9792, -- Hey, I can only trade with you once a day.
-            HELP    = 9793, -- Hey, you look new here, kupo!
-            REWARD4 = 9794, -- Heh heh heh... I have something egg-specially egg-citing
-        },
         decorations =
         {
             { 128,  107.630, -5.000, -33.200, "0x00006D0500000000000000000000000000000000", },
             { 128,  107.630, -5.000, -46.800, "0x00006D0500000000000000000000000000000000", },
             {   0, -107.000, -5.250,  35.500, "0x00006D0500000000000000000000000000000000", },
             {   0, -107.000, -5.250,  44.500, "0x00006D0500000000000000000000000000000000", },
+        },
+        helpers =
+        {
             {   0, -105.500, -5.250,  35.500, "0x01001E0282117020173017401750006000700000", },
             {   0, -105.500, -5.250,  44.500, "0x01001E0782117020173017401750006000700000", },
             { 127,  106.500, -5.000, -33.200, "0x01001E0382117020173017401750006000700000", },
@@ -289,9 +215,9 @@ xi.events.egg_hunt.data =
     },
 }
 
--- ----------------------------------
+------------------------------------
 -- Helpers
--- ----------------------------------
+------------------------------------
 
 xi.events.egg_hunt.charToEgg = function(char)
     local letter = string.byte(string.lower(char)) - 97
@@ -327,16 +253,16 @@ xi.events.egg_hunt.stringToEggs = function(text)
     return eggs
 end
 
-local hasInitialThree = function(player)
+local hasFirstThree = function(player)
     return (
-        player:getVar(settings.VAR.INITIAL_THREE) == 1 or
+        player:getCharVar(settings.VAR.FIRST_THREE) == 1 or
         player:hasItem(xi.items.EGG_HELM)
     )
 end
 
--- ----------------------------------
+------------------------------------
 -- Combos
--- ----------------------------------
+------------------------------------
 
 local minorRewards =
 {
@@ -362,7 +288,9 @@ local tradeIn = function(player, npc, trade, zoneID)
         npcUtil.tradeHasExactly(trade, { { xi.items.BIRD_EGG, 12 } }) or
         npcUtil.tradeHasExactly(trade, { { xi.items.LIZARD_EGG, 6 } }) or
         npcUtil.tradeHasExactly(trade, xi.items.SOFT_BOILED_EGG) or
-        npcUtil.tradeHasExactly(trade, xi.items.COLORED_EGG)
+        npcUtil.tradeHasExactly(trade, xi.items.COLORED_EGG) or
+        (settings.ERA_2008 and npcUtil.tradeHasExactly(trade, { { xi.items.HARD_BOILED_EGG, 12 } })) or
+        (settings.ERA_2019 and npcUtil.tradeHasExactly(trade, xi.items.APKALLU_EGG))
     then
         table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
     end
@@ -372,29 +300,39 @@ local tradeIn = function(player, npc, trade, zoneID)
         table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
     end
 
-    if npcUtil.tradeHasExactly(trade, xi.items.LUCKY_EGG) then
+    if
+        npcUtil.tradeHasExactly(trade, xi.items.LUCKY_EGG) or
+        (settings.ERA_2018 and npcUtil.tradeHasExactly(trade, { { xi.items.SAIRUI_RAN, 99 } }))
+    then
         table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
         table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
         table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
     end
 
+    if
+        settings.ERA_2018 and
+        npcUtil.tradeHasExactly(trade, xi.items.IMPERIAL_EGG)
+    then
+        for i = 1, 8 do
+            table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
+        end
+    end
+
     if #reward > 0 then
-        if player:getVar(settings.VAR.DAILY_BONUS) >= vanaDay() then
-            player:messageText(npc, xi.events.egg_hunt.data[zoneID].message.DELAY)
+        if player:getCharVar(settings.VAR.DAILY_BONUS) >= vanaDay() then
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_DELAY)
             return true
         end
 
         if #reward >= 3 then
-            player:messageText(npc, xi.events.egg_hunt.data[zoneID].message.TRADE2)
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_TRADE2)
         else
-            player:messageText(npc, xi.events.egg_hunt.data[zoneID].message.TRADE1)
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_TRADE1)
         end
 
         if npcUtil.giveItem(player, reward) then
             player:confirmTrade()
             player:setVar(settings.VAR.DAILY_BONUS, vanaDay())
-        else
-            player:tradeComplete(false)
         end
 
         return true
@@ -413,20 +351,20 @@ local firstThree = function(player, npc, trade)
             xi.events.egg_hunt.charToEgg(string.sub(charName, 3, 3)),
         })
     then
-        -- if not 2007, or player already has Egg Helm,.minor reward is issued instead
+        -- If not 2007, or player already has Egg Helm,.minor reward is issued instead
         if settings.ERA_2007 and not player:hasItem(xi.items.EGG_HELM) then
-            player:setVar(settings.VAR.INITIAL_THREE, 1)
+            player:setVar(settings.VAR.FIRST_THREE, 1)
             return xi.items.EGG_HELM
         end
 
-        player:setVar(settings.VAR.INITIAL_THREE, 1)
+        player:setVar(settings.VAR.FIRST_THREE, 1)
         return minorReward()
     end
 end
 
 local sevenKind = function(player, npc, trade)
-    -- Initial three required first
-    if not hasInitialThree(player) then
+    -- First three required
+    if not hasFirstThree(player) then
         return
     end
 
@@ -446,8 +384,8 @@ local sevenKind = function(player, npc, trade)
 end
 
 local straightEight = function(player, npc, trade)
-    -- Initial three required first
-    if not hasInitialThree(player) then
+    -- First three required
+    if not hasFirstThree(player) then
         return
     end
 
@@ -513,8 +451,8 @@ local nationRewards =
 }
 
 local regionControl = function(player, npc, trade)
-    -- Initial three required first
-    if not hasInitialThree(player) then
+    -- First three required
+    if not hasFirstThree(player) then
         return
     end
 
@@ -525,40 +463,63 @@ local regionControl = function(player, npc, trade)
             -- Beastmen controlled
             if owner == 3 then
                 local costume = beastCostumes[math.random(#beastCostumes)]
-                player:addStatusEffect(xi.effect.COSTUME, costume, 0, 300)
-                player:tradeComplete()
+                player:addStatusEffect(xi.effect.COSTUME, costume, 0, utils.minutes(60))
+                player:confirmTrade()
 
                 return
             else
                 local reward = nationRewards[owner + 1]
 
+                -- 2005 Reward
                 if not player:hasItem(reward[1]) then
                     return reward[1]
 
+                -- 2007 Reward
+                elseif
+                    settings.ERA_2007 and
+                    not player:hasItem(xi.items.JEWELED_EGG)
+                then
+                    return xi.items.JEWELED_EGG
+
+                -- 2008 Reward
                 elseif
                     settings.ERA_2008 and
                     not player:hasItem(reward[2])
                 then
                     return reward[2]
 
-                elseif settings.ERA_2009 then
-                    if not player:hasItem(reward[3]) then
-                        return reward[3]
-                    elseif not player:hasItem(xi.items.EGG_LANTERN) then
-                        return xi.items.EGG_LANTERN
-                    elseif settings.MINOR_REWARDS then
-                        return minorReward()
-                    end
+                -- 2009 Rewards
+                elseif
+                    settings.ERA_2009 and
+                    not player:hasItem(reward[3])
+                then
+                    return reward[3]
 
                 elseif
-                    settings.ERA_2007 and
-                    not player:hasItem(xi.items.JEWELED_EGG)
+                    settings.ERA_2009 and
+                    not player:hasItem(xi.items.EGG_LANTERN)
                 then
-                    return xi.items.JEWELED_EGG
-                end
+                    return xi.items.EGG_LANTERN
 
-                if settings.MINOR_REWARDS then
+                -- 2013 Reward
+                elseif
+                    settings.ERA_2013 and
+                    player:hasItem(reward[2]) and
+                    player:hasItem(reward[3]) and
+                    player:hasItem(xi.items.EGG_LANTERN) and
+                    not player:hasItem(xi.items.PRINSEGGSTARTA)
+                then
+                    return xi.items.PRINSEGGSTARTA
+
+                -- Repeat Reward (If enabled)
+                elseif
+                    settings.MINOR_REWARDS
+                then
                     return minorReward()
+
+                -- Return nothing
+                else
+                    return
                 end
             end
         end
@@ -578,8 +539,8 @@ local elementNames =
 }
 
 local weekDay = function(player, npc, trade)
-    -- Initial three required first
-    if not hasInitialThree(player) then
+    -- Ignore if not era or first three not completed
+    if (not settings.ERA_2006) or (not hasFirstThree(player)) then
         return
     end
 
@@ -591,6 +552,61 @@ local weekDay = function(player, npc, trade)
         else
             return xi.items.ORPHIC_EGG
         end
+    end
+end
+
+local eraCombo =
+{
+    ELEVEN   = { xi.events.egg_hunt.stringToEggs("ELEVEN"),   xi.items.HATCHLING_SHIELD     },
+    LEAFKIN  = { xi.events.egg_hunt.stringToEggs("LEAFKIN"),  xi.items.PIECE_OF_COPSE_CANDY },
+    VANADIEL = { xi.events.egg_hunt.stringToEggs("VANADIEL"), xi.items.CRACKER              },
+    HARE     = { xi.events.egg_hunt.stringToEggs("HARE"),     xi.items.RABBIT_CAP           },
+    BUNNY    = { xi.events.egg_hunt.stringToEggs("BUNNY"),    xi.items.RABBIT_CAP           },
+    RABBIT   = { xi.events.egg_hunt.stringToEggs("RABBIT"),   xi.items.RABBIT_CAP           },
+}
+
+local testEraCombo = function(player, npc, trade, combo, rewardQty)
+    if npcUtil.tradeHasExactly(trade, combo[1]) then
+        if rewardQty then
+            local qty = math.random(rewardQty[1], rewardQty[2])
+            return { { combo[2], qty } }
+        else
+            return combo[2]
+        end
+    end
+end
+
+local era2014 = function(player, npc, trade)
+    local testEleven = testEraCombo(player, npc, trade, eraCombo.ELEVEN)
+    if testEleven then
+        return testEleven
+    end
+
+    local testLeafkin = testEraCombo(player, npc, trade, eraCombo.LEAFKIN, { 5, 10 })
+    if testLeafkin then
+        return testLeafkin
+    end
+
+    local testVanadiel = testEraCombo(player, npc, trade, eraCombo.VANADIEL, { 5, 10 })
+    if testVanadiel then
+        return testVanadiel
+    end
+end
+
+local era2015 = function(player, npc, trade)
+    return testEraCombo(player, npc, trade, eraCombo.HARE)
+end
+
+-- There is no evidence of these combinations before 2018
+local era2018 = function(player, npc, trade)
+    local testBunny = testEraCombo(player, npc, trade, eraCombo.BUNNY)
+    if testBunny then
+        return testBunny
+    end
+
+    local testRabbit = testEraCombo(player, npc, trade, eraCombo.RABBIT)
+    if testRabbit then
+        return testRabbit
     end
 end
 
@@ -623,12 +639,24 @@ end
 
 xi.events.egg_hunt.combos =
 {
-    { check = firstThree,    message = "REWARD1", daily = true },
-    { check = sevenKind,     message = "REWARD2", daily = true },
-    { check = straightEight, message = "REWARD2", daily = true },
-    { check = regionControl, message = "REWARD2", daily = true },
-    { check = weekDay,       message = "REWARD2", daily = true },
+    { check = firstThree,    message = "EGG_HUNT_REWARD1" },
+    { check = sevenKind,     message = "EGG_HUNT_REWARD2" },
+    { check = straightEight, message = "EGG_HUNT_REWARD2" },
+    { check = regionControl, message = "EGG_HUNT_REWARD2" },
+    { check = weekDay,       message = "EGG_HUNT_REWARD2" },
 }
+
+if settings.ERA_2014 then
+    table.insert(xi.events.egg_hunt.combos, { check = era2014, message = "EGG_HUNT_REWARD2" })
+end
+
+if settings.ERA_2015 then
+    table.insert(xi.events.egg_hunt.combos, { check = era2015, message = "EGG_HUNT_REWARD2" })
+end
+
+if settings.ERA_2018 then
+    table.insert(xi.events.egg_hunt.combos, { check = era2018, message = "EGG_HUNT_REWARD2" })
+end
 
 for k, v in pairs(settings.BONUS_WORDS) do
     local customEggs = xi.events.egg_hunt.stringToEggs(k)
@@ -641,20 +669,19 @@ for k, v in pairs(settings.BONUS_WORDS) do
             end
         end,
 
-        message = "REWARD2",
-        daily = true,
+        message = "EGG_HUNT_REWARD2",
     })
 end
 
--- ----------------------------------
+------------------------------------
 -- Moogle event handlers
--- ----------------------------------
+------------------------------------
 
 xi.events.egg_hunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
-    if player:getVar(settings.VAR.DAILY_EGG) >= vanaDay() then
-        player:messageText(npc, xi.events.egg_hunt.data[zoneID].message.HINTING)
+    if player:getCharVar(settings.VAR.DAILY_EGG) >= vanaDay() then
+        player:messageText(npc, zones[zoneID].text.EGG_HUNT_HINTING)
     else
         local party = player:getParty()
         local options = -1
@@ -720,20 +747,18 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
     for _, v in pairs(xi.events.egg_hunt.combos) do
         local reward = v.check(player, npc, trade)
         if reward then
-            -- If reward already received today, send message and skip everything else
+            -- If reward already received today, send message and finish event
             if
-                v.daily and
-                player:getVar(settings.VAR.DAILY_REWARD) >= vanaDay()
+                player:getCharVar(settings.VAR.DAILY_REWARD) >= vanaDay()
             then
-                player:messageText(npc, xi.events.egg_hunt.data[zoneID].message.WAITING)
-                player:tradeComplete(false)
+                player:messageText(npc, zones[zoneID].text.EGG_HUNT_WAITING)
                 return
             end
 
             -- If reward message is set, attempt to use messageText, if not use custom text
             if v.message ~= nil then
-                if xi.events.egg_hunt.data[zoneID].message[v.message] then
-                    player:messageText(npc, xi.events.egg_hunt.data[zoneID].message[v.message])
+                if zones[zoneID].text[v.message] then
+                    player:messageText(npc, zones[zoneID].text[v.message])
                 else
                     player:PrintToPlayer(string.format("Moogle : %s", v.message), xi.msg.channel.NS_SAY, "Moogle")
                 end
@@ -743,42 +768,36 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
             if npcUtil.giveItem(player, reward) then
                 player:confirmTrade()
 
-                -- One reward per day (If true)
-                if v.daily then
-                    player:setVar(settings.VAR.DAILY_REWARD, vanaDay())
-                end
+                -- One reward per day
+                player:setVar(settings.VAR.DAILY_REWARD, vanaDay())
 
                 -- Call "after" function if it exists
                 if v.after then
                     v.after(player, npc, trade)
                 end
-            else
-                player:tradeComplete(false)
             end
 
             return
         end
     end
-
-    player:tradeComplete(false)
 end
 
--- ----------------------------------
+------------------------------------
 -- Show/hide Moogles and decorations
--- ----------------------------------
+------------------------------------
 
-xi.events.egg_hunt.showMoogle = function(data)
-    local moogle = GetNPCByID(data.id)
+xi.events.egg_hunt.showMoogle = function(zoneID)
+    local moogle = GetNPCByID(zones[zoneID].npc.EGG_HUNT_MOOGLE)
     if moogle then
         moogle:setStatus(xi.status.NORMAL)
     end
 end
 
 xi.events.egg_hunt.hideMoogles = function()
-    for zoneId, data in pairs(xi.events.egg_hunt.data) do
-        local zone = GetZone(zoneId)
+    for zoneID, data in pairs(xi.events.egg_hunt.data) do
+        local zone = GetZone(zoneID)
         if zone then
-            local moogle = GetNPCByID(data.id)
+            local moogle = GetNPCByID(zones[zoneID].npc.EGG_HUNT_MOOGLE)
             if moogle then
                 moogle:setStatus(xi.status.DISAPPEAR)
             end
@@ -786,34 +805,45 @@ xi.events.egg_hunt.hideMoogles = function()
     end
 end
 
+local insertNpc = function(zone, entry)
+    local rot  = entry[1]
+    local x    = entry[2]
+    local y    = entry[3]
+    local z    = entry[4]
+    local look = entry[5]
+
+    local npc = zone:insertDynamicEntity({
+        objtype = xi.objType.NPC,
+        name = "     ",
+        look = look,
+        x = x,
+        y = y,
+        z = z,
+        rotation = rot,
+        widescan = 0,
+        entityFlags = 2075,
+        namevis = 64,
+        releaseIdOnDisappear = true,
+    })
+
+    table.insert(xi.events.egg_hunt.entities, npc:getID())
+end
+
 xi.events.egg_hunt.generateEntities = function()
-    for zoneId, data in pairs(xi.events.egg_hunt.data) do
-        local zone = GetZone(zoneId)
+    for zoneID, data in pairs(xi.events.egg_hunt.data) do
+        local zone = GetZone(zoneID)
         if zone then
-            xi.events.egg_hunt.showMoogle(data)
+            xi.events.egg_hunt.showMoogle(zoneID)
 
             for _, entry in pairs(data.decorations) do
-                local rot  = entry[1]
-                local x    = entry[2]
-                local y    = entry[3]
-                local z    = entry[4]
-                local look = entry[5]
+                insertNpc(zone, entry)
+            end
 
-                local npc = zone:insertDynamicEntity({
-                    objtype = xi.objType.NPC,
-                    name = "     ",
-                    look = look,
-                    x = x,
-                    y = y,
-                    z = z,
-                    rotation = rot,
-                    widescan = 0,
-                    entityFlags = 2075,
-                    namevis = 64,
-                    releaseIdOnDisappear = true,
-                })
-
-                table.insert(xi.events.egg_hunt.entities, npc:getID())
+            -- Helpers wearing the Rabbit Cap
+            if settings.ERA_2015 then
+                for _, entry in pairs(data.helpers) do
+                    insertNpc(zone, entry)
+                end
             end
         end
     end

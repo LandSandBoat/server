@@ -118,6 +118,18 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         HERE_TAKE_THIS                = 13079, -- Here, take this...
         IF_YOU_WEAR_THIS              = 13080, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 13081, -- Thank you...
+        EGG_HUNT_REWARD1              = 13116, -- Egg-cellent! Here's your prize, kupo!
+        EGG_HUNT_REWARD2              = 13117, -- Egg-straordinary! Here's your special prize, kupo!
+        EGG_HUNT_REWARD3              = 13118, -- How in-eggs-plicably astounding!
+        EGG_HUNT_WAITING              = 13119, -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
+        EGG_HUNT_HINTING              = 13120, -- These initial eggs are really egg-spensive, kupo!
+        EGG_HUNT_TRADE1               = 13121, -- Eggs-actly what I wanted! Here's your reward, kupo!
+        EGG_HUNT_TRADE2               = 13122, -- Ku-kupo! Such an egg-stravagant item, for little old me?
+        EGG_HUNT_TRADE3               = 13123, -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
+        EGG_HUNT_TRADE4               = 13124, -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
+        EGG_HUNT_DELAY                = 13125, -- Hey, I can only trade with you once a day.
+        EGG_HUNT_HELP                 = 13126, -- Hey, you look new here, kupo!
+        EGG_HUNT_REWARD4              = 13127, -- Heh heh heh... I have something egg-specially egg-citing
         FFR_LOOKS_CURIOUSLY_BASE      = 13405, -- Coullene looks over curiously for a moment.
         FRAGMENT_FAR_TOO_SMALL        = 18113, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18114, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
@@ -130,6 +142,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
     },
     npc =
     {
+        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17723487] = 53, -- Vichuel

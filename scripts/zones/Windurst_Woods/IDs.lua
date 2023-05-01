@@ -70,6 +70,18 @@ zones[xi.zone.WINDURST_WOODS] =
         NOKKHI_BAD_COUNT              = 9788,  -- What kinda smart-alecky baloney is this!? I told you to bring me the same kinda ammunition in complete sets. And don't forget the flowers, neither.
         NOKKHI_GOOD_TRADE             = 9790,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM               = 9791,  -- I'm real sorry, but there's nothing I can do with those.
+        EGG_HUNT_REWARD1              = 9797,  -- Egg-cellent! Here's your prize, kupo!
+        EGG_HUNT_REWARD2              = 9798,  -- Egg-straordinary! Here's your special prize, kupo!
+        EGG_HUNT_REWARD3              = 9799,  -- How in-eggs-plicably astounding!
+        EGG_HUNT_WAITING              = 9800,  -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
+        EGG_HUNT_HINTING              = 9801,  -- These initial eggs are really egg-spensive, kupo!
+        EGG_HUNT_TRADE1               = 9802,  -- Eggs-actly what I wanted! Here's your reward, kupo!
+        EGG_HUNT_TRADE2               = 9803,  -- Ku-kupo! Such an egg-stravagant item, for little old me?
+        EGG_HUNT_TRADE3               = 9804,  -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
+        EGG_HUNT_TRADE4               = 9805,  -- Kupo... Kupo～～～! Please! No more, kupo! Here, take these
+        EGG_HUNT_DELAY                = 9806,  -- Hey, I can only trade with you once a day.
+        EGG_HUNT_HELP                 = 9807,  -- Hey, you look new here, kupo!
+        EGG_HUNT_REWARD4              = 9808,  -- Heh heh heh... I have something egg-specially egg-citing
         MILLEROVIEUNET_OPEN_DIALOG    = 10016, -- Please have a look at these wonderful products from Qufim Island! You won't regret it!
         MILLEROVIEUNET_CLOSED_DIALOG  = 10017, -- Now that I've finally learned the language here, I'd like to start my own business. If I could only find a supplier...
         CLOUD_BAD_COUNT               = 10142, -- Well, don't just stand there like an idiot! I can't do any bundlin' until you fork over a set of 99 tools and <item>! And I ain't doin' no more than seven sets at one time, so don't even try it!
@@ -92,6 +104,7 @@ zones[xi.zone.WINDURST_WOODS] =
     },
     npc =
     {
+        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17764400] = 55, -- Meriri
