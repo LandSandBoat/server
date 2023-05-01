@@ -12911,7 +12911,7 @@ bool CLuaBaseEntity::isAutomaton()
     if (m_PBaseEntity->objtype == TYPE_PET)
     {
         uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
-        if (petID >= PETID_HARLEQUINFRAME and petID <= PETID_STORMWAKERFRAME)
+        if (petID >= PETID_HARLEQUINFRAME && petID <= PETID_STORMWAKERFRAME)
         {
             return true;
         }
