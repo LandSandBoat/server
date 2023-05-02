@@ -10,6 +10,7 @@ entity.onMobSpawn = function(mob)
     if not mob:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 0)
     end
+
     mob:setMod(xi.mod.UDMGBREATH, -10000)
     mob:setMod(xi.mobMod.DETECTION, bit.bor(xi.detects.SIGHT, xi.detects.MAGIC, xi.detects.SCENT))
     --do not need to set spell list at spawn because it starts with 509
