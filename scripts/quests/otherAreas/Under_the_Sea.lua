@@ -74,9 +74,11 @@ quest.sections =
             ['Zaldon'] =
             {
                 onTrade = function(player, npc, trade)
-                    if not player:hasKeyItem(xi.ki.ETCHED_RING) and
-                    npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE) and
-                    quest:getVar(player, 'status') == 3 then
+                    if
+                        not player:hasKeyItem(xi.ki.ETCHED_RING) and
+                        npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE) and
+                        quest:getVar(player, 'status') == 3
+                    then
                         if math.random(100) <= 20 then
                             player:startEvent(35) -- Ring found!
                         else

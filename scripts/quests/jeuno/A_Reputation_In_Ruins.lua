@@ -39,6 +39,7 @@ quest.sections =
                     else
                         quest:setVar(player, 'KIChoice', xi.keyItem.PHOENIX_PEARL)
                     end
+
                     return quest:progressEvent(10019, 0, quest:getVar(player, 'KIChoice'))
                 end,
             },
@@ -65,16 +66,27 @@ quest.sections =
             ['qm_blue_bracelet'] =
             {
                 onTrigger = function(player, npc)
-                    if GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) and player:getLocalVar("blueKilled") == 0 then
-                        if GetMobByID(ID.mob.BLUE_GARGOYLES):isSpawned() or GetMobByID(ID.mob.BLUE_GARGOYLES + 1):isSpawned() then
+                    if
+                        GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):getAnimation() == 8 and
+                        not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) and
+                        player:getLocalVar("blueKilled") == 0
+                    then
+                        if
+                            GetMobByID(ID.mob.BLUE_GARGOYLES):isSpawned() or
+                            GetMobByID(ID.mob.BLUE_GARGOYLES + 1):isSpawned()
+                        then
                             return
                         end
+
                         GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):setAnimation(9)
                         SpawnMob(ID.mob.BLUE_GARGOYLES):updateEnmity(player)
                         SpawnMob(ID.mob.BLUE_GARGOYLES + 1):updateEnmity(player)
                         player:messageName(ID.text.TRAP_ACTIVATED, player)
                         return quest:noAction()
-                    elseif player:getLocalVar("blueKilled") == 1 and not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) then
+                    elseif
+                        player:getLocalVar("blueKilled") == 1 and
+                        not player:hasKeyItem(xi.keyItem.BLUE_BRACELET)
+                    then
                         player:addKeyItem(xi.keyItem.BLUE_BRACELET)
                         return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_BRACELET)
                     elseif GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):getAnimation() == 9 then
@@ -86,16 +98,25 @@ quest.sections =
             ['qm_green_bracelet'] =
             {
                 onTrigger = function(player, npc)
-                    if GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) and player:getLocalVar("greenKilled") == 0 then
-                        if GetMobByID(ID.mob.GREEN_GARGOYLES):isSpawned() or GetMobByID(ID.mob.GREEN_GARGOYLES + 1):isSpawned() then
-                            return
-                        end
+                    if
+                        GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):getAnimation() == 8 and
+                        not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) and player:getLocalVar("greenKilled") == 0
+                        then
+                            if
+                                GetMobByID(ID.mob.GREEN_GARGOYLES):isSpawned() or
+                                GetMobByID(ID.mob.GREEN_GARGOYLES + 1):isSpawned()
+                            then
+                                return
+                            end
                         GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):setAnimation(9)
                         SpawnMob(ID.mob.GREEN_GARGOYLES):updateEnmity(player)
                         SpawnMob(ID.mob.GREEN_GARGOYLES + 1):updateEnmity(player)
                         player:messageName(ID.text.TRAP_ACTIVATED, player)
                         return quest:noAction()
-                    elseif player:getLocalVar("greenKilled") == 1 and not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) then
+                    elseif
+                        player:getLocalVar("greenKilled") == 1 and
+                        not player:hasKeyItem(xi.keyItem.GREEN_BRACELET)
+                    then
                         player:addKeyItem(xi.keyItem.GREEN_BRACELET)
                         return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GREEN_BRACELET)
                     elseif GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):getAnimation() == 9 then
@@ -107,7 +128,10 @@ quest.sections =
             ['_i95'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(quest:getVar(player, 'KIChoice')) and quest:getVar(player, 'Prog') == 0 then
+                    if
+                        player:hasKeyItem(quest:getVar(player, 'KIChoice')) and
+                        quest:getVar(player, 'Prog') == 0
+                    then
                         return quest:progressEvent(7, 0, quest:getVar(player, 'KIChoice'))
                     end
                 end,
