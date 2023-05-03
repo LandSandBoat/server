@@ -36,7 +36,7 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 and player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) then
-        npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_TREMORS)
+        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_TREMORS)
     end
 end
 
