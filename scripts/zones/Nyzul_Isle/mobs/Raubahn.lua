@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Nyzul_Isle/IDs')
 require('scripts/globals/status')
+require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
 
@@ -20,8 +21,7 @@ entity.onMobSpawn = function(mob)
     ]]
 
     mob:addListener("DEATH", "RAUBAHN_DEATH", function(mobArg)
-        local instance = mobArg:getInstance()
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressInstance(mob, 1)
 
         local reraises = mobArg:getLocalVar("RERAISES")
 

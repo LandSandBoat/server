@@ -37,6 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+                    xi.magic.handleBurstMsg(caster, target, spell)
                 else
                     -- no effect
                     spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

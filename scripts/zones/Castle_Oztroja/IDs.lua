@@ -35,6 +35,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7208, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7264, -- You can't fish here.
         CHEST_UNLOCKED                     = 7435, -- You unlock the chest!
+        TEBHI_ACCEPTS                      = 7446, -- Tebhi happily accepts the
         YAGUDO_AVATAR_ENGAGE               = 7456, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
         YAGUDO_AVATAR_DEATH                = 7457, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
         YAGUDO_KING_ENGAGE                 = 7458, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
@@ -82,6 +83,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         TRAP_DOOR_FLOOR_4      = 17396191,
         FINAL_PASSWORD_STATUE  = 17396192,
         HINT_HANDLE_OFFSET     = 17396196,
+        TEBHI                  = 17396142,
         TREASURE_CHEST         = 17396210,
         TREASURE_COFFER        = 17396211,
     },

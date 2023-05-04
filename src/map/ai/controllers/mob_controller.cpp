@@ -367,7 +367,7 @@ bool CMobController::MobSkill(int wsList)
         return false;
     }
 
-    std::shuffle(skillList.begin(), skillList.end(), xirand::mt());
+    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
     CBattleEntity* PActionTarget{ nullptr };
 
     for (auto skillid : skillList)
@@ -1240,6 +1240,9 @@ bool CMobController::Disengage()
     PMob->updatemask |= (UPDATE_STATUS | UPDATE_HP);
     PMob->SetCallForHelpFlag(false);
     PMob->animation = ANIMATION_NONE;
+    // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
+    PMob->m_THLvl = 0;
+    m_ResetTick   = m_Tick;
 
     return CController::Disengage();
 }

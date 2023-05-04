@@ -14,6 +14,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if not target:canGainStatusEffect(xi.effect.DROWN) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     if target:getStatusEffect(xi.effect.SHOCK) ~= nil then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
@@ -57,6 +62,7 @@ spellObject.onSpellCast = function(caster, target, spell)
                 end
 
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+                xi.magic.handleBurstMsg(caster, target, spell)
                 local duration = math.floor(xi.settings.main.ELEMENTAL_DEBUFF_DURATION * resist)
                 duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 

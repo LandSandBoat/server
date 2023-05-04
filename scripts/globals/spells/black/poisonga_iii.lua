@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.POISON) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local effect = xi.effect.POISON
 
     local duration = 180
@@ -43,12 +48,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     if resist == 1 or resist == 0.5 then -- effect taken
         local resduration = duration * resist
 
-        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
         elseif target:addStatusEffect(effect, power, 3, resduration, 0, params.tier) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end

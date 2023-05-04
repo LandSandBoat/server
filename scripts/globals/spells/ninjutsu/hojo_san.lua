@@ -30,6 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if duration >= 210 then
             if target:addStatusEffect(xi.effect.SLOW, power, 0, duration) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+                xi.magic.handleBurstMsg(caster, target, spell)
             else
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end

@@ -103,6 +103,7 @@ namespace battleutils
     void LoadMobSkillsList();
     void LoadPetSkillsList();
     void LoadSkillChainDamageModifiers();
+    void LoadDistanceCorrection();
 
     uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon);
 
@@ -193,7 +194,7 @@ namespace battleutils
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool);
 
     bool TryCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
-    void tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
+    bool tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
     void unCharm(CBattleEntity* PEntity);
 

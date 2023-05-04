@@ -429,9 +429,7 @@ xi.dynamis.mobList[zoneID][1].wave =
     33 , -- (033-D)  Manifest Icon
     34 , -- (034-D)  Avatar Icon
     35 , -- (035-D)  Avatar Icon
-    38 , -- (038-D)  Avatar Icon
     39 , -- (039-D)  Avatar Icon
-    42 , -- (042-D)  Manifest Icon
     44 , -- (044-D)  Avatar Icon
     45 , -- (045-D)  Manifest Icon
     46 , -- (046-D)  Avatar Idol

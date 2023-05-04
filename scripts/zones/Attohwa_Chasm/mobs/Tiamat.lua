@@ -82,16 +82,13 @@ entity.flight = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local drawInTableNorth =
-    {
-        condition1 = target:getXPos() < -515 and target:getZPos() > 8,
-        position   = { -530.642, -4.013, 6.262, target:getRotPos() },
-    }
-    local drawInTableEast =
-    {
-        condition1 = target:getXPos() > -480 and target:getZPos() > -50,
-        position   = { -481.179, -4, -41.92, target:getRotPos() },
-    }
+    -- Wyrms automatically wake from sleep in the air
+    if
+        hasSleepEffects(mob) and
+        mob:getAnimationSub() == 1
+    then
+        mob:wakeUp()
+    end
 
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
     if mob:getHPP() <= 25 and mob:getMod(xi.mod.ATT) <= 800 then
@@ -133,13 +130,16 @@ entity.onMobFight = function(mob, target)
         mob:setMagicCastingEnabled(true)
     end
 
-    -- Wyrms automatically wake from sleep in the air
-    if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
-    then
-        mob:wakeUp()
-    end
+    local drawInTableNorth =
+    {
+        condition1 = target:getXPos() < -515 and target:getZPos() > 8,
+        position   = { -530.642, -4.013, 6.262, target:getRotPos() },
+    }
+    local drawInTableEast =
+    {
+        condition1 = target:getXPos() > -480 and target:getZPos() > -50,
+        position   = { -481.179, -4, -41.92, target:getRotPos() },
+    }
 
     -- Tiamat draws in from set boundaries leaving her spawn area
     utils.arenaDrawIn(mob, target, drawInTableNorth)
@@ -170,6 +170,7 @@ entity.onMobDisengage = function(mob)
         mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:setMobSkillAttack(0)
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+        mob:resetLocalVars()
     end
 end
 

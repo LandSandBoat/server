@@ -14,10 +14,24 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 152)
     mob:setMod(xi.mod.ATT, 489)
+    mob:setMod(xi.mod.STUNRES, 100)
+    mob:setMod(xi.mod.DARK_EEM, 40)
+    mob:setMod(xi.mod.LIGHT_EEM, 40)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 1)
+    mob:setMod(xi.mod.POISONRES, 10)
+    mob:setMod(xi.mod.SLOWRES, 10)
+    mob:setMod(xi.mod.GRAVITYRES, 10)
+    mob:setMod(xi.mod.PARALYZERES, 15)
+    mob:setMod(xi.mod.BLINDRES, 15)
+    mob:setMod(xi.mod.SLEEPRES, 50)
 
     -- Despawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+    local questionMarks = GetNPCByID(ID.npc.FAFNIR_QM)
+    if questionMarks ~= nil then
+        questionMarks:setStatus(xi.status.DISAPPEAR)
+    end
 end
 
 entity.onMobFight = function(mob, target)
@@ -42,7 +56,10 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+    local questionMarks = GetNPCByID(ID.npc.FAFNIR_QM)
+    if questionMarks ~= nil then
+        questionMarks:updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+    end
 end
 
 return entity

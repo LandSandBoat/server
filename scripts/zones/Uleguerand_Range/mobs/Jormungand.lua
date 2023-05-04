@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 398)
     mob:setMod(xi.mod.DEF, 475)
     mob:setMod(xi.mod.EVA, 434)
-    mob:setMod(xi.mod.MATT, 70)
+    mob:setMod(xi.mod.MATT, 0) -- Despite being /BLM it has 0 MATT
     mob:setMod(xi.mod.REGEN, 22)
     mob:setMod(xi.mod.REFRESH, 200)
     mob:setMod(xi.mod.DARK_MEVA, 70)
@@ -74,26 +74,18 @@ entity.flight = function(mob)
     mob:setAnimationSub(1)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setBehaviour(0)
-    mob:setMobSkillAttack(730)
+    mob:setMobSkillAttack(732)
     mob:setLocalVar("changeTime", os.time() + 30)
 end
 
 entity.onMobFight = function(mob, target)
-    local drawInTableNorth =
-    {
-        condition1 = target:getXPos() < -105 and target:getXPos() > -215 and target:getZPos() > 195,
-        position   = { -201.86, -175.66, 189.32, target:getRotPos() },
-    }
-    local drawInTableSouth =
-    {
-        condition1 = target:getXPos() > -250 and target:getXPos() < -212 and target:getZPos() < 55,
-        position   = { -235.62, -175.17, 62.67, target:getRotPos() },
-    }
-    local drawInTableEast =
-    {
-        condition1 = target:getXPos() > -160 and target:getZPos() > 105 and target:getZPos() < 130,
-        position   = { -166.02, -175.89, 119.38, target:getRotPos() },
-    }
+    -- Wyrms automatically wake from sleep in the air
+    if
+        hasSleepEffects(mob) and
+        mob:getAnimationSub() == 1
+    then
+        mob:wakeUp()
+    end
 
     -- Handle flight and ground timer
     if
@@ -131,13 +123,21 @@ entity.onMobFight = function(mob, target)
         mob:setMagicCastingEnabled(true)
     end
 
-    -- Wyrms automatically wake from sleep in the air
-    if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
-    then
-        mob:wakeUp()
-    end
+    local drawInTableNorth =
+    {
+        condition1 = target:getXPos() < -105 and target:getXPos() > -215 and target:getZPos() > 195,
+        position   = { -201.86, -175.66, 189.32, target:getRotPos() },
+    }
+    local drawInTableSouth =
+    {
+        condition1 = target:getXPos() > -250 and target:getXPos() < -212 and target:getZPos() < 55,
+        position   = { -235.62, -175.17, 62.67, target:getRotPos() },
+    }
+    local drawInTableEast =
+    {
+        condition1 = target:getXPos() > -160 and target:getZPos() > 105 and target:getZPos() < 130,
+        position   = { -166.02, -175.89, 119.38, target:getRotPos() },
+    }
 
     -- Jorm draws in from set boundaries leaving her spawn area
     utils.arenaDrawIn(mob, target, drawInTableNorth)
@@ -190,6 +190,7 @@ entity.onMobDisengage = function(mob)
         mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:setMobSkillAttack(0)
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+        mob:resetLocalVars()
     end
 end
 

@@ -198,10 +198,12 @@ int32 lobbydata_parse(int32 fd)
                         uint8  charIdExtra = (charId >> 16) & 0xFF;
 
                         // uList is sent through data socket (to bootloader)
-                        ref<uint32>(uList, 16 * (i + 1)) = contentId;
-                        ref<uint16>(uList, 20 * (i + 1)) = charIdMain;
-                        ref<uint8>(uList, 22 * (i + 1))  = worldId;
-                        ref<uint8>(uList, 23 * (i + 1))  = charIdExtra;
+                        uint32 uListOffset = 16 * (i + 1);
+
+                        ref<uint32>(uList, uListOffset)     = contentId;
+                        ref<uint16>(uList, uListOffset + 4) = charIdMain;
+                        ref<uint8>(uList, uListOffset + 6)  = worldId;
+                        ref<uint8>(uList, uListOffset + 7)  = charIdExtra;
 
                         // CharList is sent through view socket (to the FFXI client)
                         uint32 charListOffset = 32 + i * 140;

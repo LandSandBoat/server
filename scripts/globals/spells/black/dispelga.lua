@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.DISPEL) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local params = {}
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.ENFEEBLING_MAGIC

@@ -79,6 +79,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
     mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    -- Confirmed on retail that breath damage does not work
+    mob:setMod(xi.mod.UDMGBREATH, -10000)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
     mob:setMod(xi.mod.ATT, 553)

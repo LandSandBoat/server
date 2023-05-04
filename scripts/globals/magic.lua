@@ -629,6 +629,32 @@ xi.magic.differentEffect = function(caster, target, spell, params)
     return true
 end
 
+xi.magic.handleBurstMsg = function(caster, target, spell)
+    local element = spell:getElement()
+
+    if element and element ~= xi.magic.ele.NONE then
+        local magicBurst = xi.spells.damage.calculateIfMagicBurst(caster, target, spell, element)
+
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated as this is run per target.
+            target:triggerListener("MAGIC_BURST_TAKE", caster, target, 0)
+            spell:setMsg(spell:getMagicBurstMessage())
+            caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
+        end
+    end
+end
+
+xi.magic.handleSMNBurstMsg = function(pet, target, skill, element, mbmsg)
+    if element and element ~= xi.magic.ele.NONE then
+        local magicBurst = xi.spells.damage.calculateIfMagicBurst(pet, target, skill, element)
+
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated as this is run per target.
+            target:triggerListener("MAGIC_BURST_TAKE", pet, target, 0)
+            skill:setMsg(mbmsg)
+            pet:triggerRoeEvent(xi.roe.triggers.magicBurst)
+        end
+    end
+end
+
 -- USED FOR Status Effect Enfeebs (blind, slow, para, etc.)
 -- Output:
 -- The factor to multiply down duration (1/2 1/4 1/8 1/16)
@@ -984,8 +1010,12 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
     end
 
     local p = utils.clamp((magicHitRate / 100), 0.05, 0.95)
-
     p = utils.clamp(p * baseRes, -1, 0.95)
+
+    -- if the p value is negative, this is a full 100% resist
+    if p <= 0 then
+        return 0
+    end
 
     local resist = 1
 
@@ -1008,6 +1038,15 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
 
     if eemVal <= 0.50 and damageSpell then
         resist = resist / 2
+    end
+
+    -- If we're applying a status effect, < 0.5 should be fail, 0.5 is half duration, 1.0 is full duration
+    if effect ~= nil and resist < 0.5 then
+        resist = 0
+    elseif effect ~= nil and resist == 0.5 then
+        resist = 0.5
+    elseif effect ~= nil and resist > 0.5 then
+        resist = 1
     end
 
     return resist

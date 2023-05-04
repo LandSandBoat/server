@@ -2,6 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Slime
 -----------------------------------
+require("scripts/globals/assault")
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
 local entity = {}
@@ -18,7 +19,7 @@ entity.onMobDespawn = function(mob)
         SpawnMob(ID.mob.UNDEAD_SLIME, instance)
         slimeMob:setLocalVar("SlimeSpawned", 1)
     else
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressInstance(mob, 1)
     end
 end
 
