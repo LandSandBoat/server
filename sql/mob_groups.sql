@@ -2273,7 +2273,7 @@ INSERT INTO `mob_groups` VALUES (3,1245,45,'Ephemeral_Limule',300,0,523,5000,999
 INSERT INTO `mob_groups` VALUES (4,1843,45,'Gulch_Limule',300,0,1254,0,999,74,75,0);
 INSERT INTO `mob_groups` VALUES (5,1244,45,'Ephemeral_Clionid',300,0,782,5000,999,78,82,0);
 INSERT INTO `mob_groups` VALUES (6,625,45,'Canyon_Eft',300,0,406,0,0,78,82,0);
-INSERT INTO `mob_groups` VALUES (7,2323,45,'Lamenter',0,128,1484,5000,0,78,82,0);
+INSERT INTO `mob_groups` VALUES (7,2323,45,'Lamenter',300,0,1484,5000,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (8,470,45,'Blood_Bat',300,0,308,0,0,74,75,0);
 INSERT INTO `mob_groups` VALUES (9,388,45,'Beholder',300,0,252,0,0,74,75,0);
 INSERT INTO `mob_groups` VALUES (10,2813,45,'Naul',300,0,0,0,0,84,85,0);
