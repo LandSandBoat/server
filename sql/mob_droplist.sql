@@ -27103,6 +27103,56 @@ INSERT INTO `mob_droplist` VALUES (3273,0,0,1000,11641,@VCOMMON); -- Metanoia ri
 INSERT INTO `mob_droplist` VALUES (3274,0,0,1000,2946,@ALWAYS);  -- Tarnished pincerr (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3274,0,0,1000,11640,@COMMON); -- Bifrost ring (Common, 15%)
 
+-- ZoneID:  45 - Cuelebre
+INSERT INTO `mob_droplist` VALUES (3275,0,0,1000,2939,@ALWAYS);   -- Cuelebre's horn (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3275,0,0,1000,2939,@VCOMMON);  -- Cuelebre's horn (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3275,0,0,1000,17626,@VCOMMON); -- Auric dagger (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3275,0,0,1000,11592,@RARE);    -- Tantra Necklace (Rare, 5%)
+
+-- ZoneID:  45 - Mictlantecuhtli
+INSERT INTO `mob_droplist` VALUES (3276,0,0,1000,2940,@ALWAYS);   -- Mictlantecuhtli's habit (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3276,0,0,1000,2940,@VCOMMON);  -- Mictlantecuhtli's habit (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3276,0,0,1000,15019,@VCOMMON); -- Serpentes cuffs (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3276,0,0,1000,11597,@RARE);    -- Unkai nodowa (Rare, 5%)
+
+-- ZoneID:  45 - Chukwa
+INSERT INTO `mob_droplist` VALUES (3277,0,0,1000,2933,@ALWAYS);   -- Chukwa's egg (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3277,0,0,1000,2933,@VCOMMON);  -- Chukwa's egg (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3277,0,0,1000,17185,@VCOMMON); -- Siege bow (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3277,0,0,1000,11595,@RARE);    -- Creed collar (Rare, 5%)
+
+-- ZoneID:  45 - Minhocao
+INSERT INTO `mob_droplist` VALUES (3278,0,0,1000,18510,@VCOMMON); -- Vermeil bhuj (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3278,0,0,1000,11596,@RARE);    -- Sylvan scarf (Rare, 5%)
+
+-- ZoneID:  45 - Adze
+INSERT INTO `mob_droplist` VALUES (3279,0,0,1000,11735,@VCOMMON); -- Impulse belt (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3279,0,0,1000,11594,@RARE);    -- Estoqueur's Collar (Rare, 5%)
+
+-- ZoneID:  45 - Quetzalli
+INSERT INTO `mob_droplist` VALUES (3280,0,0,1000,11551,@VCOMMON); -- Metallon mantle (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3280,0,0,1000,11605,@RARE);    -- Ziel charm (Rare, 5%)
+
+-- ZoneID:  45 - Manananggal
+INSERT INTO `mob_droplist` VALUES (3281,0,0,1000,2934,@ALWAYS);   -- Manananggal's necklet (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3281,0,0,1000,2934,@VCOMMON);  -- Manananggal's necklet (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3281,0,0,1000,11604,@VCOMMON); -- Corvus torque (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3281,0,0,1000,11737,@RARE);    -- Bale Belt (Rare, 5%)
+
+-- ZoneID:  45 - Myrmecoleon
+INSERT INTO `mob_droplist` VALUES (3282,0,0,1000,11517,@ALWAYS);  -- Kengo hachimaki (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3282,0,0,1000,11548,@VCOMMON); -- Tactical mantle (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3282,0,0,1000,3222,@VCOMMON);  -- Balance Stone (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3282,0,0,1000,17113,@COMMON);  -- Owleyes (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3282,0,0,1000,3223,@UNCOMMON); -- Balance Coin (Uncommon, 10%)
+
+-- ZoneID:  45 - Iratham
+INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,11733,@VCOMMON); -- Aquiline belt (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,11637,@VCOMMON); -- Meridian ring (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3222,@VCOMMON);  -- Balance Stone (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3225,@VCOMMON);  -- Balance Card (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,13791,@RARE);    -- Timarli jawshan (Rare, 5%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
