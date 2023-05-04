@@ -3,6 +3,7 @@ return {
     ['Galdo']            = { event = 650 },
     ['Hagain']           = { event = 10002 },
     ['Itzha_Delavhitta'] = { event = 900 },
+    ['Jikka-Abukka']     = { event = 600 },
     ['Kotan-Purutan']    = { event = 140 },
     ['Kupupu']           = { event = 800 },
     ['Lacia']            = { event = 10021 },
