@@ -722,7 +722,7 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
     for k, v in pairs(normalDrops) do
         if xi.abyssea.canGiveNMKI(mob, 20) then
             playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+            playerClaimed:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
         end
     end
 
@@ -732,13 +732,13 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
         for _, member in ipairs(ally) do
             if not member:hasKeyItem(v) and xi.abyssea.canGiveNMKI(mob, 10) then
                 member:addKeyItem(v)
-                member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+                member:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
             end
         end
 
         if not playerClaimed:hasKeyItem(v) then
             playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+            playerClaimed:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
         end
     end
 
