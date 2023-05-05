@@ -1,9 +1,9 @@
 ﻿{
   "configurations": [
     {
-      "name": "x64-Debug",
+      "name": "x64-Release",
       "generator": "Ninja",
-      "configurationType": "Debug",
+      "configurationType": "RelWithDebInfo",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\build\\${name}",
       "cmakeCommandArgs": "",
@@ -13,9 +13,21 @@
       "variables": []
     },
     {
-      "name": "x64-Release",
+      "name": "x64-Release-Tracy",
       "generator": "Ninja",
       "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\build\\${name}",
+      "cmakeCommandArgs": "-DTRACY_ENABLE=ON",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": []
+    },
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\build\\${name}",
       "cmakeCommandArgs": "",
@@ -37,21 +49,9 @@
       "variables": []
     },
     {
-      "name": "x64-Release-Tracy",
+      "name": "x86-Release",
       "generator": "Ninja",
       "configurationType": "RelWithDebInfo",
-      "buildRoot": "${projectDir}\\build\\${name}",
-      "installRoot": "${projectDir}\\build\\${name}",
-      "cmakeCommandArgs": "-DTRACY_ENABLE=ON",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "variables": []
-    },
-    {
-      "name": "x86-Debug",
-      "generator": "Ninja",
-      "configurationType": "Debug",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\build\\${name}",
       "cmakeCommandArgs": "",
@@ -61,9 +61,9 @@
       "variables": []
     },
     {
-      "name": "x86-Release",
+      "name": "x86-Debug",
       "generator": "Ninja",
-      "configurationType": "RelWithDebInfo",
+      "configurationType": "Debug",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\build\\${name}",
       "cmakeCommandArgs": "",
