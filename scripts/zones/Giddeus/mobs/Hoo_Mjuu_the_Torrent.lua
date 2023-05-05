@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
@@ -18,6 +19,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 281)
+    xi.roe.onRecordTrigger(player, 269)
 end
 
 return entity

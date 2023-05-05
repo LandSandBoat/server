@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
@@ -24,6 +25,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar("death", 1)
+    xi.roe.onRecordTrigger(player, 242)
 end
 
 entity.onMobDespawn = function(mob)

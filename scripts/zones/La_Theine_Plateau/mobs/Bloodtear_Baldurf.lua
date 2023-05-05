@@ -3,6 +3,7 @@
 --   NM: Bloodtear Baldurf
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
+require("scripts/globals/roe")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
@@ -26,6 +27,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.THE_HORNSPLITTER)
     xi.tutorial.onMobDeath(player)
+    xi.roe.onRecordTrigger(player, 236)
 end
 
 return entity

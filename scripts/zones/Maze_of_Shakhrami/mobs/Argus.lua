@@ -3,10 +3,12 @@
 --   NM: Argus
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.roe.onRecordTrigger(player, 281)
 end
 
 entity.onMobDespawn = function(mob)

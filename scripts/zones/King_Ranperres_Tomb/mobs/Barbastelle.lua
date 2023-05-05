@@ -3,11 +3,13 @@
 --   NM: Barbastelle
 -----------------------------------
 require("scripts/globals/hunts")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 175)
+    xi.roe.onRecordTrigger(player, 226)
 end
 
 entity.onMobDespawn = function(mob)

@@ -3,6 +3,7 @@
 --   NM: Nunyenunc
 -----------------------------------
 require("scripts/globals/hunts")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
@@ -12,6 +13,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 251)
+    xi.roe.onRecordTrigger(player, 265)
 end
 
 return entity

@@ -2,9 +2,12 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Duke Haborym
 -----------------------------------
+require("scripts/globals/roe")
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.roe.onRecordTrigger(player, 299)
 end
 
 entity.onMobDespawn = function(mob)

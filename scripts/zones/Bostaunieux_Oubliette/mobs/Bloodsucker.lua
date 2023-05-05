@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
@@ -22,6 +23,9 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 613, 1, xi.regime.type.GROUNDS)
+    if mob:getID() == ID.mob.BLOODSUCKER then
+        xi.roe.onRecordTrigger(player, 228)
+    end
 end
 
 entity.onMobDespawn = function(mob)

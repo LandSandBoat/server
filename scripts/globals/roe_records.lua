@@ -3027,8 +3027,6 @@ function getRoeRecords(triggers)
 
         [216] =
         { -- Subjugation: Jaggedy-Eared Jack
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17187111 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3043,8 +3041,6 @@ function getRoeRecords(triggers)
 
         [218] =
         { -- Subjugation: Swamfisk
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17191189, 17191291 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3059,8 +3055,6 @@ function getRoeRecords(triggers)
 
         [220] =
         { -- Subjugation: Thousandarm Deshglesh
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17350826 } },
             reward = { sparks = 250, xp = 550 },
         },
 
@@ -3075,8 +3069,6 @@ function getRoeRecords(triggers)
 
         [222] =
         { -- Subjugation: Hundredscar Hajwaj
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17354828 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3091,8 +3083,6 @@ function getRoeRecords(triggers)
 
         [224] =
         { -- Subjugation: Ashmaker Gotblut
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17358932 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3107,8 +3097,6 @@ function getRoeRecords(triggers)
 
         [226] =
         { -- Subjugation: Barbastelle
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17555721 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3123,8 +3111,6 @@ function getRoeRecords(triggers)
 
         [228] =
         { -- Subjugation: Bloodsucker
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17461478 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3139,8 +3125,6 @@ function getRoeRecords(triggers)
 
         [230] =
         { -- Subjugation: Valkurm Emperor
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17199438 } },
             reward = { sparks = 250, xp = 550 },
         },
 
@@ -3155,8 +3139,6 @@ function getRoeRecords(triggers)
 
         [232] =
         { -- Subjugation: Bendigeit Vran
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17220001 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3171,8 +3153,6 @@ function getRoeRecords(triggers)
 
         [234] =
         { -- Subjugation: Juggler Hecatomb
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17580248 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3187,8 +3167,6 @@ function getRoeRecords(triggers)
 
         [236] =
         { -- Subjugation: Bloodtear Baldurf
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17195318 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3203,8 +3181,6 @@ function getRoeRecords(triggers)
 
         [238] =
         { -- Subjugation: Morbolger
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17568127 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3223,8 +3199,6 @@ function getRoeRecords(triggers)
 
         [240] =
         { -- Subjugation: King Arthro
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17203216 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3239,8 +3213,6 @@ function getRoeRecords(triggers)
 
         [242] =
         { -- Subjugation: Lumber Jack
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17207308 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3255,8 +3227,6 @@ function getRoeRecords(triggers)
 
         [244] =
         { -- Subjugation: Cwn Cyrff
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17576054 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3271,8 +3241,6 @@ function getRoeRecords(triggers)
 
         [246] =
         { -- Subjugation: Hawkeyed Dnatbat
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17387567 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3287,8 +3255,6 @@ function getRoeRecords(triggers)
 
         [248] =
         { -- Subjugation: Maighdean Uaine
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17211702, 17211714 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3303,8 +3269,6 @@ function getRoeRecords(triggers)
 
         [250] =
         { -- Subjugation: Carnero
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17215613, 17215626 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3328,8 +3292,6 @@ function getRoeRecords(triggers)
 
         [253] =
         { -- Subjugation: Zi-Ghi Bone-eater
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17363208 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3344,8 +3306,6 @@ function getRoeRecords(triggers)
 
         [255] =
         { -- Subjugation: Teporingo
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17559584 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3360,8 +3320,6 @@ function getRoeRecords(triggers)
 
         [257] =
         { -- Subjugation: Ni'Zho Bladebender
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17223797 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3376,8 +3334,6 @@ function getRoeRecords(triggers)
 
         [259] =
         { -- Subjugation: Simurgh
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17228242 } },
             reward = { sparks = 250, xp = 1000 },
         },
 
@@ -3392,8 +3348,6 @@ function getRoeRecords(triggers)
 
         [261] =
         { -- Subjugation: Demonic Tiphia
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17584398 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3408,8 +3362,6 @@ function getRoeRecords(triggers)
 
         [263] =
         { -- Subjugation: Zo'Khu Blackcloud
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17379564 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3428,8 +3380,6 @@ function getRoeRecords(triggers)
 
         [265] =
         { -- Subjugation: Nunyenunc
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17248517 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3444,8 +3394,6 @@ function getRoeRecords(triggers)
 
         [267] =
         { -- Subjugation: Spiny Spipi
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17252657 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3460,8 +3408,6 @@ function getRoeRecords(triggers)
 
         [269] =
         { -- Subjugation: Hoo Mjuu the Torrent
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17371515 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3476,8 +3422,6 @@ function getRoeRecords(triggers)
 
         [271] =
         { -- Subjugation: Oni Carcass
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17469587 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3492,8 +3436,6 @@ function getRoeRecords(triggers)
 
         [273] =
         { -- Subjugation: Maltha
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17563749 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3508,8 +3450,6 @@ function getRoeRecords(triggers)
 
         [275] =
         { -- Subjugation: Bomb King
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17572094, 17572142, 17572146 } },
             reward = { sparks = 250, xp = 500 },
         },
 
@@ -3524,8 +3464,6 @@ function getRoeRecords(triggers)
 
         [277] =
         { -- Subjugation: Helldiver
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17260907 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3540,8 +3478,6 @@ function getRoeRecords(triggers)
 
         [279] =
         { -- Subjugation: Serpopard Ishtar
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17256563, 17256690 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3556,8 +3492,6 @@ function getRoeRecords(triggers)
 
         [281] =
         { -- Subjugation: Argus
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17588674 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3572,8 +3506,6 @@ function getRoeRecords(triggers)
 
         [283] =
         { -- Subjugation: Daggerclaw Dracos
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17264818 } },
             reward = { sparks = 250, xp = 600 },
         },
 
@@ -3588,8 +3520,6 @@ function getRoeRecords(triggers)
 
         [285] =
         { -- Subjugation: Roc
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17269106 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3604,8 +3534,6 @@ function getRoeRecords(triggers)
 
         [287] =
         { -- Subjugation: Serket
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17596720 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3620,8 +3548,6 @@ function getRoeRecords(triggers)
 
         [289] =
         { -- Subjugation: Lii Jixa the Somnolist
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17395896 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3640,8 +3566,6 @@ function getRoeRecords(triggers)
 
         [291] =
         { -- Subjugation: Nue
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17231971 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3656,8 +3580,6 @@ function getRoeRecords(triggers)
 
         [293] =
         { -- Subjugation: Gloom Eye
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17457204 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3672,8 +3594,6 @@ function getRoeRecords(triggers)
 
         [295] =
         { -- Subjugation: Goliath
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17613046, 17613048, 17613052, 17613054 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3688,8 +3608,6 @@ function getRoeRecords(triggers)
 
         [297] =
         { -- Subjugation: Biast
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17235988 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3704,8 +3622,6 @@ function getRoeRecords(triggers)
 
         [299] =
         { -- Subjugation: Duke Haborym
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17436923 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3720,8 +3636,6 @@ function getRoeRecords(triggers)
 
         [301] =
         { -- Subjugation: Baron Vapula
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17440963 } },
             reward = { sparks = 250, xp = 800 },
         },
 
@@ -3736,8 +3650,6 @@ function getRoeRecords(triggers)
 
         [303] =
         { -- Subjugation: Dosetsu Tree
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17293640 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
@@ -3752,8 +3664,6 @@ function getRoeRecords(triggers)
 
         [305] =
         { -- Subjugation: Epialtes
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17530881 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3768,8 +3678,6 @@ function getRoeRecords(triggers)
 
         [307] =
         { -- Subjugation: Ogygos
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17420592 } },
             reward = { sparks = 250, xp = 700 },
         },
 
@@ -3784,8 +3692,6 @@ function getRoeRecords(triggers)
 
         [309] =
         { -- Subjugation: Enkelados
-            trigger = triggers.mobKill,
-            reqs = { mobID = set { 17424385, 17424423 } },
             reward = { sparks = 250, xp = 800 },
         },
 

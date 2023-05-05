@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/mobs")
+require("scripts/globals/roe")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}
@@ -25,6 +26,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.tutorial.onMobDeath(player)
+    xi.roe.onRecordTrigger(player, 232)
 end
 
 entity.onMobDespawn = function(mob)

@@ -1,16 +1,13 @@
 -----------------------------------
--- Area: Palborough Mines
---   NM: Zi'Ghi Boneeater
+-- Area: Qufim Island
+--   NM: Dosetsu Tree
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/hunts")
 require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 220)
-    xi.roe.onRecordTrigger(player, 253)
+    xi.roe.onRecordTrigger(player, 303)
 end
 
 return entity

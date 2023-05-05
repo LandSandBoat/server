@@ -3,12 +3,14 @@
 --  HNM: Roc
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
+require("scripts/globals/roe")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.ROC_STAR)
+    xi.roe.onRecordTrigger(player, 285)
 end
 
 entity.onMobDespawn = function(mob)

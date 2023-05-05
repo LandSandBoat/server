@@ -8,6 +8,7 @@ mixins =
     require("scripts/mixins/rage")
 }
 require("scripts/globals/mobs")
+require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
@@ -34,6 +35,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.roe.onRecordTrigger(player, 240)
 end
 
 entity.onMobDespawn = function(mob)

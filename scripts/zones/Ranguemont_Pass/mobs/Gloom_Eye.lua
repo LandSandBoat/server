@@ -3,6 +3,7 @@
 --   NM: Gloom Eye
 -----------------------------------
 require("scripts/globals/hunts")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -27,6 +28,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 346)
+    xi.roe.onRecordTrigger(player, 293)
 end
 
 return entity

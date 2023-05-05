@@ -3,6 +3,7 @@
 --   NM: Serket
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
+require("scripts/globals/roe")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
@@ -18,6 +19,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.SERKET_BREAKER)
+    xi.roe.onRecordTrigger(player, 287)
 end
 
 entity.onMobDespawn = function(mob)

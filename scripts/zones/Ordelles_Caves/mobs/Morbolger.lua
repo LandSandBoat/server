@@ -2,6 +2,7 @@
 -- Area: Ordelles Caves (193)
 --   NM: Morbolger
 -----------------------------------
+require("scripts/globals/roe")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
@@ -13,6 +14,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.MORBOLBANE)
+    xi.roe.onRecordTrigger(player, 238)
 end
 
 entity.onMobDespawn = function(mob)
