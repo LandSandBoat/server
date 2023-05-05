@@ -47,7 +47,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(41) -- Starts Quest.
                     elseif quest:getVar(player, 'Prog') == 1 then --declined first
-                        return quest:event(40)
+                        return quest:progressEvent(40)
                     end
                 end,
             },
@@ -101,19 +101,16 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     local questProgress = quest:getVar(player, 'Prog')
-
-                    if questProgress >= 3 then
-                        if
-                            npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and
-                            questProgress == 3
-                        then
-                            return quest:progressEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
-                        elseif
-                            npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and
-                            questProgress == 4
-                        then
-                            return quest:progressEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
-                        end
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and
+                        questProgress == 3
+                    then
+                        return quest:progressEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
+                    elseif
+                        npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and
+                        questProgress == 4
+                    then
+                        return quest:progressEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
                     end
                 end,
             },

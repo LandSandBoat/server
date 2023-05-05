@@ -45,7 +45,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(45) -- Starts Quest.
                     elseif quest:getVar(player, 'Prog') == 1 then --declined first
-                        return quest:event(43)
+                        return quest:progressEvent(43)
                     end
                 end,
             },
