@@ -1482,7 +1482,7 @@ xi.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
         nation = 2
     end
 
-    player:startEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
+    player:startMenuEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
 end
 
 xi.conquest.vendorOnEventUpdate = function(player, vendorRegion)
