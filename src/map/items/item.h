@@ -26,7 +26,6 @@
 #include "common/mmo.h"
 
 // The main type of item m_type
-
 enum ITEM_TYPE
 {
     ITEM_BASIC      = 0x00,
@@ -41,7 +40,6 @@ enum ITEM_TYPE
 };
 
 // Additional type of object m_subtype
-
 enum ITEM_SUBTYPE
 {
     ITEM_NORMAL    = 0x00,
@@ -52,7 +50,6 @@ enum ITEM_SUBTYPE
 };
 
 // Flags of objects
-
 enum ITEM_FLAG
 {
     ITEM_FLAG_WALLHANGING  = 0x0001,
