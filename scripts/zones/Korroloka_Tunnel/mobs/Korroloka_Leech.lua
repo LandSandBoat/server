@@ -18,15 +18,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if
-        GetMobByID(ID.mob.KORROLOKA_LEECH_I):isDead() and
-        GetMobByID(ID.mob.KORROLOKA_LEECH_II):isDead() and
-        GetMobByID(ID.mob.KORROLOKA_LEECH_III):isDead() and
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED and
-        player:getCharVar("AyameAndKaede_Event") == 2
-    then
-        player:setCharVar("KorrolokaLeeches_Killed", 1)
-    end
 end
 
 return entity

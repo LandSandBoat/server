@@ -9,6 +9,7 @@ return {
     ['Jaucribaix']  = { event = 71 },
     ['Kamui']       = { event = 61 },
     ['Ranemaud']    = { event = 68 },
+    ['Ryoma']       = { event = 94 },
     ['Washu']       = { event = 80 },
     ['Stray_Cloud'] = { event = 231 },
 }

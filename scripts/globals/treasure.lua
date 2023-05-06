@@ -1213,7 +1213,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and
-                                player:getCharVar("trueWillCS") == 2 and
+                                player:getCharVar("Quest[5][145]Prog") == 2 and
                                 not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX)
                         end,
 
