@@ -250,6 +250,7 @@ namespace luautils
 
         // Pet Scripts
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
+        CacheLuaObjectFromFile("./scripts/globals/pets/fellow.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/luopan.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/wyvern.lua");
 
@@ -418,6 +419,13 @@ namespace luautils
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
 
             if (auto cached_func = lua["xi"]["globals"]["pets"][mob_name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["pets"]["fellow"][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -759,6 +767,10 @@ namespace luautils
         {
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
             filename             = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PEntity)->GetScriptName());
+        }
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            filename = fmt::format("./scripts/globals/pets/fellow.lua");
         }
         else if (PEntity->objtype == TYPE_TRUST)
         {
@@ -2067,6 +2079,9 @@ namespace luautils
         {
             case TYPE_NPC:
                 pathFormat = "./scripts/zones/{}/npcs/{}.lua";
+                break;
+            case TYPE_FELLOW:
+                pathFormat = "./scripts/globals/pets/fellow.lua";
                 break;
             case TYPE_MOB:
                 pathFormat = "./scripts/zones/{}/mobs/{}.lua";

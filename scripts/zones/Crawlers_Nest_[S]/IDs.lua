@@ -13,6 +13,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
         ITEM_CANNOT_BE_OBTAINED       = 6906, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6912, -- Obtained: <item>.
         GIL_OBTAINED                  = 6913, -- Obtained <number> gil.
+        FELLOW_MESSAGE_OFFSET         = 6939, -- I'm ready. I suppose.
         KEYITEM_OBTAINED              = 6915, -- Obtained key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7523, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7524, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!

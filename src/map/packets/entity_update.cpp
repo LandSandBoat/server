@@ -28,6 +28,7 @@
 #include "entity_update.h"
 
 #include "../entities/baseentity.h"
+#include "../entities/fellowentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../entities/petentity.h"
@@ -60,6 +61,10 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     {
         case ENTITY_DESPAWN:
         {
+            if (PEntity->objtype == TYPE_FELLOW)
+            {
+                ref<uint8>(0x28) = 0x08;
+            }
             ref<uint8>(0x1F) = 0x02; // despawn animation
             ref<uint8>(0x0A) = 0x30;
             updatemask       = UPDATE_ALL_MOB;
@@ -148,6 +153,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         case TYPE_MOB:
         case TYPE_PET:
         case TYPE_TRUST:
+        case TYPE_FELLOW:
         {
             CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
 
@@ -169,6 +175,16 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x28) |= PMob->status == STATUS_TYPE::NORMAL && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = PEntity->namevis;
+            }
+
+            // Fellow specific params
+            if (PEntity->objtype == TYPE_FELLOW)
+            {
+                ref<uint8>(0x21) = 157;
+                ref<uint8>(0x25) = 0x0c;
+                ref<uint8>(0x28) |= 0x40;
+                ref<uint8>(0x2A) = 0x00;
+                ref<uint8>(0x2B) = 0x02;
             }
 
             if (updatemask & UPDATE_STATUS)

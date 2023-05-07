@@ -744,6 +744,17 @@ public:
     void setPetMod(uint16 modID, int16 amount);
     void delPetMod(uint16 modID, int16 amount);
 
+    // Adventuring Fellow
+    void  spawnFellow(uint8 fellowId);                            // Spawns NPC Fellow
+    void  despawnFellow();                                        // deSpawns NPC Fellow
+    auto  getFellow() -> std::optional<CLuaBaseEntity>;           // Creates an LUA reference to a fellow entity
+    void  triggerFellowChat(uint8 chatType);                      // calls the Chat system when talking to a fellow
+    void  fellowAttack(CLuaBaseEntity* PEntity);                  // Forces Fellow to attack target
+    void  fellowRetreat();                                        // Disengages Fellow
+    int32 getFellowValue(std::string const& option);              // Manipulating DB Fellow Values
+    void  setFellowValue(std::string const& option, int32 value); // Manipulating DB Fellow Values
+    void  delFellowValue();                                       // Clears Fellow from DB
+
     bool  hasAttachment(uint16 itemID);
     auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();

@@ -117,6 +117,7 @@
 #include "packets/event_string.h"
 #include "packets/event_update.h"
 #include "packets/event_update_string.h"
+#include "packets/fellow_despawn.h"
 #include "packets/guild_menu.h"
 #include "packets/guild_menu_buy.h"
 #include "packets/independent_animation.h"
@@ -155,6 +156,7 @@
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
+#include "utils/fellowutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -5433,6 +5435,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
             JOBTYPE prevjob = PChar->GetMJob();
 
             PChar->resetPetZoningInfo();
+            PChar->resetFellowZoningInfo();
 
             PChar->jobs.unlocked |= (1 << newJob);
             PChar->SetMJob(newJob);
@@ -5974,6 +5977,13 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 PPet->health.hp = std::min(hp, PPet->GetMaxHP());
                 PPet->health.mp = std::min(mp, PPet->GetMaxMP());
                 PPet->updatemask |= UPDATE_HP;
+            }
+
+            if (PChar->m_PFellow != nullptr)
+            {
+                CBaseEntity* PFellow = (CBaseEntity*)PChar->m_PFellow;
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PFellow));
+                PChar->RemoveFellow();
             }
         }
     }
@@ -12270,7 +12280,7 @@ uint16 CLuaBaseEntity::getWeaponDmg()
 
 uint16 CLuaBaseEntity::getMobWeaponDmg(uint8 slot)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_FELLOW));
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
@@ -13083,6 +13093,184 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
                        nameValue);
         }
     }
+}
+
+/************************************************************************
+ *  Function: spawnFellow()
+ *  Purpose : Spawns an NPC Fellow
+ *  Example : caster:spawnFellow(fellowid)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::spawnFellow(uint8 fellowId)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    fellowutils::SpawnFellow((CCharEntity*)m_PBaseEntity, fellowId, false);
+}
+
+/************************************************************************
+ *  Function: despawnFellow()
+ *  Purpose : Despawns an NPC Fellow
+ *  Example : target:despawnFellow()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::despawnFellow()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar   = (CCharEntity*)m_PBaseEntity;
+    CBaseEntity* PFellow = (CBaseEntity*)PChar->m_PFellow;
+    if (PFellow != nullptr)
+    {
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PFellow));
+        PChar->RemoveFellow();
+    }
+}
+
+/************************************************************************
+ *  Function: getFellow()
+ *  Purpose : Returns the Entity Object of a player's fellow entity
+ *  Example : local fellow = player:getFellow()
+ *  Notes   :
+ ************************************************************************/
+
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getFellow()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (((CCharEntity*)m_PBaseEntity)->m_PFellow != nullptr)
+    {
+        return std::optional<CLuaBaseEntity>((CMobEntity*)(((CCharEntity*)m_PBaseEntity)->m_PFellow));
+    }
+
+    return std::nullopt;
+}
+
+/************************************************************************
+ *  Function: triggerFellowChat()
+ *  Purpose : calls the Chat system when talking to a fellow
+ *  Example : player:triggerFellowChat(CHAT_GENERAL)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::triggerFellowChat(uint8 chatType)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    fellowutils::TriggerFellowChat(static_cast<CCharEntity*>(m_PBaseEntity), chatType);
+}
+
+/************************************************************************
+ *  Function: fellowAttack()
+ *  Purpose : forces the fellow to engage a target
+ *  Example : player:fellowAttack(target)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::fellowAttack(CLuaBaseEntity* PEntity)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CFellowEntity* PFellow = ((CCharEntity*)m_PBaseEntity)->m_PFellow;
+
+    if (PFellow != nullptr)
+    {
+        fellowutils::AttackTarget(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
+    }
+}
+
+/************************************************************************
+ *  Function: fellowRetreat()
+ *  Purpose : Disengages a fellow from battle, returns to master
+ *  Example : player:fellowRetreat()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::fellowRetreat()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CFellowEntity* PFellow = ((CCharEntity*)m_PBaseEntity)->m_PFellow;
+
+    if (PFellow != nullptr)
+    {
+        fellowutils::RetreatToMaster(static_cast<CBattleEntity*>(m_PBaseEntity));
+    }
+}
+
+/************************************************************************
+ *  Function: getFellowValue()
+ *  Purpose : Returns the value for the passed column value option
+ *  Example : local name = player:getFellowValue("personality")
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::getFellowValue(std::string const& option)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    const char* Query = "SELECT %s FROM char_fellow WHERE charid = %u;";
+    int32       ret   = sql->Query(Query, option, m_PBaseEntity->id);
+
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    {
+        return sql->GetIntData(0);
+    }
+    ShowDebug("Failed to getFellowValue from db. option %s", option);
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setFellowValue()
+ *  Purpose : char_fellow value manipulation
+ *  Example : player:setFellowValue("personality",option)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setFellowValue(std::string const& option, int32 value)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (strcmp(option.c_str(), "bond") == 0)
+    {
+        int         bondCap = 30; // default cap
+        const char* Query   = "SELECT bondcap FROM char_fellow WHERE charid = %u;";
+        int32       ret     = sql->Query(Query, m_PBaseEntity->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            bondCap = sql->GetIntData(0);
+        }
+        if (value > bondCap)
+            return;
+    }
+    const char* Query = "INSERT INTO char_fellow SET charId = %u, %s = %u ON DUPLICATE KEY UPDATE %s = %u;";
+    sql->Query(Query, m_PBaseEntity->id, option, value, option, value);
+}
+
+/************************************************************************
+ *  Function: delFellowValue()
+ *  Purpose : char_fellow deletion
+ *  Example : player:delFellowValue()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::delFellowValue()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    const char* Query = "DELETE FROM char_fellow WHERE charId = %u LIMIT 1";
+    sql->Query(Query, "DELETE FROM char_fellow WHERE charId = %u LIMIT 1", m_PBaseEntity->id);
 }
 
 void CLuaBaseEntity::registerChocobo(uint32 value)
@@ -14631,7 +14819,7 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
 
 void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST && m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST && m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET && m_PBaseEntity->objtype != TYPE_FELLOW);
 
     if (va.size() == 0)
     {
@@ -14881,7 +15069,7 @@ void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
 
 uint32 CLuaBaseEntity::getPool()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST)
+    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST || m_PBaseEntity->objtype == TYPE_FELLOW)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         return PMob->m_Pool;
@@ -15568,7 +15756,7 @@ bool CLuaBaseEntity::clearSession(std::string const& playerName)
 /************************************************************************
 *  Function: sendNpcEmote()
 *  Purpose : Makes an NPC entity emit an emote.
-*  Example : taru:sendEmote(target, tpz.emote.PANIC, tpz.emoteMode.MOTION)
+*  Example : taru:sendEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
 *  Notes   : Originally added for Pirate / Brigand chart events
              target parameter can be nil
 ************************************************************************/
@@ -16401,6 +16589,17 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("removeSimpleGambit", CLuaBaseEntity::removeSimpleGambit);
     SOL_REGISTER("removeAllSimpleGambits", CLuaBaseEntity::removeAllSimpleGambits);
     SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
+
+    // Adventuring Fellow related
+    SOL_REGISTER("spawnFellow", CLuaBaseEntity::spawnFellow);
+    SOL_REGISTER("despawnFellow", CLuaBaseEntity::despawnFellow);
+    SOL_REGISTER("getFellow", CLuaBaseEntity::getFellow);
+    SOL_REGISTER("triggerFellowChat", CLuaBaseEntity::triggerFellowChat);
+    SOL_REGISTER("fellowAttack", CLuaBaseEntity::fellowAttack);
+    SOL_REGISTER("fellowRetreat", CLuaBaseEntity::fellowRetreat);
+    SOL_REGISTER("getFellowValue", CLuaBaseEntity::getFellowValue);
+    SOL_REGISTER("setFellowValue", CLuaBaseEntity::setFellowValue);
+    SOL_REGISTER("delFellowValue", CLuaBaseEntity::delFellowValue);
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
