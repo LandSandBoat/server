@@ -7,7 +7,7 @@ index bcc1930e0f..684df09ba1 100644
      time_point                        m_CombatEndTime;
      time_point                        m_LastHealTickTime;
 -    std::vector<std::chrono::seconds> m_tickDelays      = { 15s, 10s, 10s, 3s };
-+    std::vector<std::chrono::seconds> m_tickDelays      = { 19s, 15s, 15s, 10s };
++    std::vector<std::chrono::seconds> m_tickDelays      = { 19s, 15s, 15s, 6s };
      std::size_t                       m_NumHealingTicks = { 0 };
  
      time_point m_LastRangedAttackTime;
