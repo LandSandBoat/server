@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/trustentity.h"
 #include "../../items/item_weapon.h"
 #include "../../mob_spell_container.h"
+#include "../../notoriety_container.h"
 #include "../../packets/char.h"
 #include "../../recast_container.h"
 #include "../../status_effect_container.h"
@@ -277,7 +278,7 @@ void CTrustController::DoRoamTick(time_point tick)
     }
 
     if (POwner->CanRest() && m_Tick - POwner->LastAttacked > m_tickDelays.at(0) && m_Tick - m_CombatEndTime > m_tickDelays.at(0) &&
-        m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks))
+        m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks) && !POwner->PMaster->PNotorietyContainer->hasEnmity())
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
