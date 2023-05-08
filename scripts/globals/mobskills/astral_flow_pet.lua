@@ -26,7 +26,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local pet = mob:getPet()
 
     -- pet must be an avatar, and active
-    if pet:getSystem() ~= 5 or petInactive(pet) then
+    if pet:getEcosystem() ~= 5 or petInactive(pet) then
         return 1
     end
 

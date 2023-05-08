@@ -2381,7 +2381,7 @@ INSERT INTO `mob_skills` VALUES (2545,1755,'doom_arc',1,18.0,2000,1000,4,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (2547,2291,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2548,2292,'fluid_spread',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2549,176,'fluid_toss_claret',0,15,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2550,2294,'dissolve',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2550,1770,'dissolve',2,7.0,2000,1500,18,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2551,2295,'mucus_spread',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2552,2296,'epoxy_spread',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2553,2297,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);

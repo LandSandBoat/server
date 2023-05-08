@@ -531,6 +531,7 @@ enum class Mod
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -964,7 +965,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 74 to 79
+    // 75 to 79
     // 138 to 143
     // 156 to 159
     // 217 to 223

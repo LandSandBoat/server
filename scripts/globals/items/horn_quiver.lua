@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Horn Arrows
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18156, 99)
+    target:addItem(xi.items.HORN_ARROW, 99)
 end
 
 return itemObject

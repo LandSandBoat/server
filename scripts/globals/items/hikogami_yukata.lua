@@ -3,6 +3,7 @@
 -- hikogami_yukata
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17003, 1) -- super_scoop
+    target:addItem(xi.items.SUPER_SCOOP, 1)
 end
 
 return itemObject

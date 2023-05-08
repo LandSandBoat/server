@@ -4438,7 +4438,7 @@ namespace battleutils
 
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PSource->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE);
+                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE, false, false, false);
                 }
             }
         }
@@ -5269,12 +5269,7 @@ namespace battleutils
         }
         else
         {
-            damage           = HandleSevereDamage(PDefender, damage, false);
-            int16 absorbedMP = (int16)(damage * PDefender->getMod(Mod::ABSORB_DMG_TO_MP) / 100);
-            if (absorbedMP > 0)
-            {
-                PDefender->addMP(absorbedMP);
-            }
+            damage = HandleSevereDamage(PDefender, damage, false);
         }
 
         return damage;
@@ -5324,12 +5319,7 @@ namespace battleutils
         }
         else
         {
-            damage           = HandleSevereDamage(PDefender, damage, false);
-            int16 absorbedMP = (int16)(damage * PDefender->getMod(Mod::ABSORB_DMG_TO_MP) / 100);
-            if (absorbedMP > 0)
-            {
-                PDefender->addMP(absorbedMP);
-            }
+            damage = HandleSevereDamage(PDefender, damage, false);
         }
 
         return damage;
@@ -5444,7 +5434,7 @@ namespace battleutils
             // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
             // JP is known to give 10 VE per point
             uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
-            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false);
+            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
         }
     }
 
@@ -7063,9 +7053,6 @@ namespace battleutils
         {
             dmgToMPMods += PDefender->getMod(Mod::COVER_TO_MP);
         }
-
-        // Get ABSORB_DMG_TO_MP mod
-        dmgToMPMods += PDefender->getMod(Mod::ABSORB_DMG_TO_MP);
 
         // Get ABSORB_PHYSDMG_TO_MP mod
         dmgToMPMods += PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP);
