@@ -362,7 +362,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
 
     float stepDistance = (speed / 10) / 2;
     float distanceTo   = distance(m_POwner->loc.p, pos);
-    float diff_y = pos.y - m_POwner->loc.p.y;
+    float diff_y       = pos.y - m_POwner->loc.p.y;
 
     // face point mob is moving towards
     LookAt(pos);
@@ -390,7 +390,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
                 float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
                 float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
                 // clamp new_y between start and end vertical position
-                new_y = new_y < min_y ? min_y : new_y;
+                new_y             = new_y < min_y ? min_y : new_y;
                 m_POwner->loc.p.y = new_y > max_y ? max_y : new_y;
             }
             else
@@ -414,7 +414,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
             float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
             float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
             // clamp new_y between start and end vertical position
-            new_y = new_y < min_y ? min_y : new_y;
+            new_y             = new_y < min_y ? min_y : new_y;
             m_POwner->loc.p.y = new_y > max_y ? max_y : new_y;
         }
         else
