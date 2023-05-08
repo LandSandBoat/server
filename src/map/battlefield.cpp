@@ -415,10 +415,20 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
 
     // mob, initiator or ally
-    if (entity && !entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
+    if (entity)
     {
-        entity->StatusEffectContainer->AddStatusEffect(
-            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        CStatusEffect* PBattlefieldEffect = entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+        // Update battlefield ID if battlefield effect exists
+        // Tango with a Tracker/Requiem of Sin corner case where NPC IDs are shared between BCs as per retail caps
+        if (PBattlefieldEffect)
+        {
+            PBattlefieldEffect->SetPower(this->GetID());
+        }
+        else
+        {
+            entity->StatusEffectContainer->AddStatusEffect(
+                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        }
     }
 
     return true;
