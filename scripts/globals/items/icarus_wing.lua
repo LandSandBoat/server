@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 4213
 -- Icarus Wing
--- Increases TP of the user by 100
+-- Increases TP of the user by 1000
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")

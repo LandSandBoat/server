@@ -316,7 +316,7 @@ INSERT INTO `status_effects` VALUES (283,'perfect_defense',4194336,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (284,'egg',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (285,'visitant',41943296,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (286,'baramnesia',41,106,0,0,0,0,0,0,500);
-INSERT INTO `status_effects` VALUES (287,'atma',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (287,'atma',0,0,0,4,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (288,'endark',41,94,51,0,0,0,8,0,0);
 INSERT INTO `status_effects` VALUES (289,'enmity_boost',32,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (290,'subtle_blow_plus',32,0,0,0,0,0,0,0,0);

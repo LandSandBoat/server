@@ -473,7 +473,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
  *                                                                       *
  ************************************************************************/
 
-std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 AllianceID)
+std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID)
 {
     std::list<SearchEntity*> PartyList;
 

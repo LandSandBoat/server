@@ -8366,7 +8366,7 @@ INSERT INTO `item_equipment` VALUES (18655,'guttler',90,0,256,347,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (18656,'bravura',90,0,1,339,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (18657,'gungnir',90,0,8192,217,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (18658,'apocalypse',90,0,128,338,0,1,1,0,0);
-INSERT INTO `item_equipment` VALUES (18659,'kikoku',90,0,4096,334,0,1,3,0,0);
+INSERT INTO `item_equipment` VALUES (18659,'kikoku',90,0,4096,344,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (18660,'amanomurakumo',90,0,2048,340,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (18661,'mjollnir',90,0,4,307,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (18662,'claustrum',90,0,16392,342,0,1,1,0,0);

@@ -243,63 +243,48 @@ INSERT INTO `mob_spawn_mods` VALUES (16896161,12,15,1); -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (16900314,12,15,1); -- DRAW_IN: 15
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912394,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912394,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912409,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912409,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912422,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912422,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912426,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912426,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912429,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912429,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912432,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912432,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912435,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912435,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912443,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912443,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912446,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912446,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912449,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912449,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912452,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912452,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912455,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912455,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912468,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912468,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912545,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912545,71,2,1);  -- LEADER: 2
 
 -- Ul'Xzomit
-INSERT INTO `mob_spawn_mods` VALUES (16912548,31,25,1); -- ROAM_DISTANCE: 25
 INSERT INTO `mob_spawn_mods` VALUES (16912548,71,2,1);  -- LEADER: 2
 
 -- Ru'Aern
