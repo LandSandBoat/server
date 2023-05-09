@@ -215,6 +215,22 @@ xi.events.egg_hunt.data =
     },
 }
 
+local messageOffset =
+{
+    REWARD1 = 0,  -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
+    REWARD2 = 1,  -- Egg-straordinary! Here's your special prize, kupo! But how did you figure out the secret combination...?
+    REWARD3 = 2,  -- How in-eggs-plicably astounding! You're truly a hard-boiled detective of the highest degree, kupo! Here's your prize, and don't forget to enjoy the rest of the festivities.
+    WAITING = 3,  -- Hey, don't get all egg-cited! You can only claim one prize a day, kupo!
+    HINTING = 4,  -- These initial eggs are really egg-spensive, kupo! If you want one I'm going to need a little more incentive. No egg-ceptions!
+    TRADE1  = 5,  -- Eggs-actly what I wanted! Here's your reward, kupo!
+    TRADE2  = 6,  -- Ku-kupo! Such an egg-stravagant item, for little old me? Here's a whole basketful of initial eggs for you, kupo!
+    TRADE3  = 7,  -- My eyes! My eyes! Get out of here, and take those egg-ceptionally nasty things with you, kupo!
+    TRADE4  = 8,  -- Kupo... Kupo! Please! No more, kupo! Here, take these and get out of here, kupo!
+    DELAY   = 9,  -- Hey, I can only trade with you once a day. We wouldn't want to make the egg hunt over easy, now, kupo!
+    HELP    = 10, -- Hey, you look new here, kupo! If you need anything, just let me know!
+    REWARD4 = 11, -- Heh heh heh... I have something egg-specially egg-citing in store for you, kupo!
+}
+
 ------------------------------------
 -- Helpers
 ------------------------------------
@@ -320,14 +336,14 @@ local tradeIn = function(player, npc, trade, zoneID)
 
     if #reward > 0 then
         if player:getCharVar(settings.VAR.DAILY_BONUS) >= vanaDay() then
-            player:messageText(npc, zones[zoneID].text.EGG_HUNT_DELAY)
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.DELAY)
             return true
         end
 
         if #reward >= 3 then
-            player:messageText(npc, zones[zoneID].text.EGG_HUNT_TRADE2)
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.TRADE2)
         else
-            player:messageText(npc, zones[zoneID].text.EGG_HUNT_TRADE1)
+            player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.TRADE1)
         end
 
         if npcUtil.giveItem(player, reward) then
@@ -639,23 +655,23 @@ end
 
 xi.events.egg_hunt.combos =
 {
-    { check = firstThree,    message = "EGG_HUNT_REWARD1" },
-    { check = sevenKind,     message = "EGG_HUNT_REWARD2" },
-    { check = straightEight, message = "EGG_HUNT_REWARD2" },
-    { check = regionControl, message = "EGG_HUNT_REWARD2" },
-    { check = weekDay,       message = "EGG_HUNT_REWARD2" },
+    { check = firstThree,    message = messageOffset.REWARD1 },
+    { check = sevenKind,     message = messageOffset.REWARD2 },
+    { check = straightEight, message = messageOffset.REWARD2 },
+    { check = regionControl, message = messageOffset.REWARD2 },
+    { check = weekDay,       message = messageOffset.REWARD2 },
 }
 
 if settings.ERA_2014 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2014, message = "EGG_HUNT_REWARD2" })
+    table.insert(xi.events.egg_hunt.combos, { check = era2014, message = messageOffset.REWARD2 })
 end
 
 if settings.ERA_2015 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2015, message = "EGG_HUNT_REWARD2" })
+    table.insert(xi.events.egg_hunt.combos, { check = era2015, message = messageOffset.REWARD2 })
 end
 
 if settings.ERA_2018 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2018, message = "EGG_HUNT_REWARD2" })
+    table.insert(xi.events.egg_hunt.combos, { check = era2018, message = messageOffset.REWARD2 })
 end
 
 for k, v in pairs(settings.BONUS_WORDS) do
@@ -669,7 +685,7 @@ for k, v in pairs(settings.BONUS_WORDS) do
             end
         end,
 
-        message = "EGG_HUNT_REWARD2",
+        message = messageOffset.REWARD2,
     })
 end
 
@@ -681,7 +697,7 @@ xi.events.egg_hunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
     if player:getCharVar(settings.VAR.DAILY_EGG) >= vanaDay() then
-        player:messageText(npc, zones[zoneID].text.EGG_HUNT_HINTING)
+        player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.HINTING)
     else
         local party = player:getParty()
         local options = -1
@@ -751,14 +767,14 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
             if
                 player:getCharVar(settings.VAR.DAILY_REWARD) >= vanaDay()
             then
-                player:messageText(npc, zones[zoneID].text.EGG_HUNT_WAITING)
+                player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.WAITING)
                 return
             end
 
-            -- If reward message is set, attempt to use messageText, if not use custom text
+            -- If reward message is a message ID, attempt to use messageText, if not use custom text
             if v.message ~= nil then
-                if zones[zoneID].text[v.message] then
-                    player:messageText(npc, zones[zoneID].text[v.message])
+                if type(v.message) == "number" then
+                    player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + v.message)
                 else
                     player:PrintToPlayer(string.format("Moogle : %s", v.message), xi.msg.channel.NS_SAY, "Moogle")
                 end
