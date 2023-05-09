@@ -89,7 +89,6 @@ public:
     bool                      IsFirstSwing() const;                           // Returns the isFirstSwing flag.
     void                      SetAsFirstSwing(bool isFirst = true);           // Sets this attack as the first swing.
     float                     GetDamageRatio() const;                         // Gets the damage ratio.
-    void                      SetGuarded(bool);                               // Sets the isGuarded flag.
     bool                      IsGuarded();                                    // Sets the isGuarded flag. Also alters the damage ratio accordingly.
     bool                      IsEvaded() const;                               // Gets the evaded flag.
     void                      SetEvaded(bool value);                          // Sets the evaded flag.
@@ -106,16 +105,16 @@ public:
     void SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
 
 private:
-    CBattleEntity*            m_attacker;            // The attacker.
-    CBattleEntity*            m_victim;              // The victim.
-    CAttackRound*             m_attackRound;         // Reference to the parent attack round.
-    PHYSICAL_ATTACK_TYPE      m_attackType;          // The attack type (Double, Triple, Zanshin ect).
-    PHYSICAL_ATTACK_DIRECTION m_attackDirection;     // The attack direction (Left, Right).
-    uint8                     m_hitRate{ 0 };        // This attack's hitrate.
-    bool                      m_isCritical{ false }; // Flag: Is this attack a critical attack?
-    bool                      m_isGuarded{ false };  // Flag: Is this attack guarded by the victim?
-    bool                      m_isBlocked{ false };  // Flag: Is this attack blocked by the victim?
-    bool                      m_isEvaded{ false };   // Flag: Is this attack evaded by the victim?
+    CBattleEntity*            m_attacker;                  // The attacker.
+    CBattleEntity*            m_victim;                    // The victim.
+    CAttackRound*             m_attackRound;               // Reference to the parent attack round.
+    PHYSICAL_ATTACK_TYPE      m_attackType;                // The attack type (Double, Triple, Zanshin ect).
+    PHYSICAL_ATTACK_DIRECTION m_attackDirection;           // The attack direction (Left, Right).
+    uint8                     m_hitRate{ 0 };              // This attack's hitrate.
+    bool                      m_isCritical{ false };       // Flag: Is this attack a critical attack?
+    std::optional<bool>       m_isGuarded{ std::nullopt }; // Flag: Is this attack guarded by the victim?
+    bool                      m_isBlocked{ false };        // Flag: Is this attack blocked by the victim?
+    bool                      m_isEvaded{ false };         // Flag: Is this attack evaded by the victim?
     bool                      m_isCountered{ false };
     bool                      m_isCovered{ false }; // Flag: Is someone covering the victim?
     bool                      m_anticipated{ false };
