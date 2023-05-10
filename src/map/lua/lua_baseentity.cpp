@@ -4146,6 +4146,35 @@ void CLuaBaseEntity::tradeComplete()
     PChar->pushPacket(new CInventoryFinishPacket());
 }
 
+/************************************************************************
+ *  Function: tradeRelease()
+ *  Purpose : Completes trade, unreserves items but doesn't consume them.
+ *  Example : player:tradeRelease()
+ ************************************************************************/
+
+void CLuaBaseEntity::tradeRelease()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
+    {
+        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
+        {
+            uint8  invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
+            int32  quantity  = PChar->TradeContainer->getQuantity(slotID);
+            CItem* PItem     = PChar->TradeContainer->getItem(slotID);
+            if (PItem)
+            {
+                PItem->setReserve(0);
+            }
+        }
+    }
+    PChar->TradeContainer->Clean();
+    PChar->pushPacket(new CInventoryFinishPacket());
+}
+
 std::optional<CLuaTradeContainer> CLuaBaseEntity::getTrade()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);

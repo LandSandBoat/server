@@ -4,21 +4,24 @@
 -- !pos 40 8.6 20.012 176
 -----------------------------------
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 749) then
-        if player:getCharVar("SSG_MythrilDoor") == 7 then
-            npc:openDoor(5) -- Open the door if a mythril beastcoin has been traded after checking the door the required number of times
-        end
+    if
+        npcUtil.tradeHas(trade, xi.items.MYTHRIL_BEASTCOIN) and
+        player:getCharVar("SSG_MythrilDoor") == 7
+    then
+        npc:openDoor(5) -- Open the door if a mythril beastcoin has been traded after checking the door the required number of times
+        player:tradeRelease()
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local xPos = player:getXPos()
-    local zPos = player:getZPos()
+    local xPos             = player:getXPos()
+    local zPos             = player:getZPos()
     local mythrilDoorCheck = player:getCharVar("SSG_MythrilDoor")
 
     if xPos >= 40  and zPos >= 15 then
@@ -41,7 +44,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.MYTHRIL_CHECK)
             player:setCharVar("SSG_MythrilDoor", 6)
         elseif mythrilDoorCheck == 6 or mythrilDoorCheck == 7 then -- Door has been checked six or more times
-            player:messageSpecial(ID.text.COMPLETED_CHECK, 749)
+            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.items.MYTHRIL_BEASTCOIN)
             player:setCharVar("SSG_MythrilDoor", 7)
         end
     elseif xPos < 40 and zPos < 24 then

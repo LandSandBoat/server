@@ -233,6 +233,7 @@ public:
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
     void  tradeComplete();                                     // Complete trade with an npc
+    void  tradeRelease();                                      // Complete trade with an npc without taking any item, but properly "unreserving" them
     auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
