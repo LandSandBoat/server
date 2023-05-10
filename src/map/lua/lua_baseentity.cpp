@@ -4162,9 +4162,7 @@ void CLuaBaseEntity::tradeRelease()
     {
         if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
         {
-            uint8  invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
-            int32  quantity  = PChar->TradeContainer->getQuantity(slotID);
-            CItem* PItem     = PChar->TradeContainer->getItem(slotID);
+            CItem* PItem = PChar->TradeContainer->getItem(slotID);
             if (PItem)
             {
                 PItem->setReserve(0);
@@ -15303,6 +15301,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getFreeSlotsCount", CLuaBaseEntity::getFreeSlotsCount);
     SOL_REGISTER("confirmTrade", CLuaBaseEntity::confirmTrade);
     SOL_REGISTER("tradeComplete", CLuaBaseEntity::tradeComplete);
+    SOL_REGISTER("tradeRelease", CLuaBaseEntity::tradeRelease);
     SOL_REGISTER("getTrade", CLuaBaseEntity::getTrade);
 
     // Equipping

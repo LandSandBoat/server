@@ -21,6 +21,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, 548)
     then
         -- Finish Quest: Tenshodo Membership (Invitation)
+        player:tradeRelease() -- Don't take the invitation.
         player:startEvent(108)
     end
 end

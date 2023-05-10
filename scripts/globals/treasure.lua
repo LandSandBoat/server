@@ -1621,6 +1621,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     -- illusion: do not consume tool, and relocate chest after short delay
     if os.time() < illusionCooldown then
         player:messageSpecial(msgBase + 6)
+        player:tradeRelease()
         moveChest(npc, zoneId, chestType)
         return
     end

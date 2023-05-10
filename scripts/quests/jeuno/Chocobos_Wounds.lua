@@ -129,6 +129,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.BUNCH_OF_GYSAHL_GREENS) then
+                        player:tradeRelease()
                         return quest:progressEvent(76)
                     elseif npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS) then
                         if quest:getVar(player, 'Timer') <= os.time() then
@@ -154,11 +155,13 @@ quest.sections =
             onEventFinish =
             {
                 [57] = function(player, csid, option, npc)
+                    player:tradeRelease()
                     quest:setVar(player, 'Timer', os.time() + 45)
                     quest:setVar(player, 'Prog', 2)
                 end,
 
                 [58] = function(player, csid, option, npc)
+                    player:tradeRelease()
                     quest:setVar(player, 'Timer', os.time() + 45)
                     quest:setVar(player, 'Prog', 3)
                 end,
