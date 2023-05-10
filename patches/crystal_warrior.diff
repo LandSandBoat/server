@@ -1,0 +1,137 @@
+diff --git a/src/map/utils/charutils.cpp b/src/map/utils/charutils.cpp
+index 7e0df82ae0..a7ac761654 100644
+--- a/src/map/utils/charutils.cpp
++++ b/src/map/utils/charutils.cpp
+@@ -1850,9 +1850,11 @@ namespace charutils
+             return false;
+         }
+ 
++        bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS");
++
+         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
+             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
+-            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
++            (PItem->getReqLvl() > (noGearScaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
+         {
+             return false;
+         }
+@@ -2609,7 +2611,9 @@ namespace charutils
+                 continue;
+             }
+ 
+-            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
++            bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") == 1;
++
++            if (PItem->getReqLvl() > (noGearScaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
+             {
+                 UnequipItem(PChar, slotID);
+                 continue;
+@@ -3183,7 +3187,16 @@ namespace charutils
+             // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
+ 
+             int16  Diff          = MaxSkill - CurSkill / 10;
+-            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
++            double SkillUpChance = 0;
++
++            if (PChar->getCharVar("[CW]STATUS") == 1)
++            {
++                SkillUpChance = (Diff / 5.0) * (2.0 - log10(1.0 + CurSkill / 100));
++            }
++            else
++            {
++                SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
++            }
+ 
+             double random = xirand::GetRandomNumber(1.);
+ 
+@@ -3266,7 +3279,7 @@ namespace charutils
+                 }
+ 
+                 // Do skill amount multiplier (Will only be applied if default setting is changed)
+-                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
++                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1 && PChar->getCharVar("[CW]STATUS") == 0)
+                 {
+                     SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
+                     if (SkillAmount > 9)
+@@ -3952,6 +3965,11 @@ namespace charutils
+ 
+             EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
+             float          exp      = (float)GetBaseExp(maxlevel, moblevel);
++            
++            if (PMember->getCharVar("[CW]STATUS") == 1 && pcinzone > 1 && !PMember->PParty->HasTrusts())
++            {
++                exp *= 1.2;
++            }
+ 
+             if (mobCheck > EMobDifficulty::TooWeak)
+             {
+@@ -4564,16 +4582,16 @@ namespace charutils
+ 
+     void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
+     {
+-        TracyZoneScoped;
+-
+-        if (PChar->isDead())
+-        {
+-            return;
+-        }
+-
+         if (!expFromRaise)
+         {
+-            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
++            if (PChar->getCharVar("[CW]STATUS") == 1)
++            {
++                exp = exp * 0.5;
++            }
++            else
++            {
++                exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
++            }
+         }
+         uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
+         bool   onLimitMode = false;
+diff --git a/src/map/utils/fishingutils.cpp b/src/map/utils/fishingutils.cpp
+index e503b6af23..b5c99a4801 100644
+--- a/src/map/utils/fishingutils.cpp
++++ b/src/map/utils/fishingutils.cpp
+@@ -1784,7 +1784,10 @@ namespace fishingutils
+         maxChance = std::max(4, distMod + lowerLevelBonus - skillLevelPenalty);
+ 
+         // Configuration multiplier.
+-        maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
++        if (PChar->getCharVar("[CW]STATUS") == 0)
++        {
++            maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
++        }
+ 
+         // Moon phase skillup modifiers
+         uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
+diff --git a/src/map/utils/synthutils.cpp b/src/map/utils/synthutils.cpp
+index 170ada632d..731e4c4dc2 100644
+--- a/src/map/utils/synthutils.cpp
++++ b/src/map/utils/synthutils.cpp
+@@ -455,9 +455,13 @@ namespace synthutils
+             }
+ 
+             // Section 2: Skill up equations and penalties
+-            double skillUpChance = 0;
++            double skillUpChance         = 0;
++            double craftChanceMultiplier = 1.0;
+ 
+-            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
++            if (PChar->getCharVar("[CW]STATUS") == 0)
++            {
++                craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
++            }
+ 
+             if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
+             {
+@@ -565,7 +569,7 @@ namespace synthutils
+                 }
+ 
+                 // Do skill amount multiplier
+-                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
++                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1 && PChar->getCharVar("[CW]STATUS") == 0)
+                 {
+                     skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
+                     if (skillUpAmount > 9)
