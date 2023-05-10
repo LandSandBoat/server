@@ -802,18 +802,31 @@ uint16 CBattleEntity::DEF()
         return DEF / 2;
     }
 
-    return DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]);
+    return std::clamp(DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]), 0, 65535); // Clamp to stop underflows of defense
 }
 
 uint16 CBattleEntity::EVA()
 {
-    int16 evasion = GetSkill(SKILL_EVASION);
+    int16 evasion = 1;
 
-    if (evasion > 200)
-    { // Evasion skill is 0.9 evasion post-200
-        evasion = (int16)(200 + (evasion - 200) * 0.9);
+    if (this->objtype == TYPE_MOB || this->objtype == TYPE_PET)
+    {
+        evasion = m_modStat[Mod::EVA]; // Mobs and pets base evasion is based off the EVA mod
     }
-    return std::max(0, (m_modStat[Mod::EVA] + evasion + AGI() / 2));
+    else // If it is a player then evasion = SKILL_EVASION
+    {
+        evasion = GetSkill(SKILL_EVASION);
+    }
+
+    // Both mobs and players follow the same formula for over 200 evasion
+    if (evasion > 200)
+    {
+        evasion = 200 + (evasion - 200) * 0.9;
+    }
+
+    evasion += AGI() / 2;
+
+    return std::max(0, evasion + (this->objtype == TYPE_MOB || this->objtype == TYPE_PET ? 0 : m_modStat[Mod::EVA])); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
 /************************************************************************
@@ -878,9 +891,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     TracyZoneScoped;
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
-        // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
-        // But there is no place in the DB to set subLV right now.
-        m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+        m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
     }
     else
     {
