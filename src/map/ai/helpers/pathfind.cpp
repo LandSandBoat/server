@@ -485,7 +485,8 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         }
 
         m_turnPoints.push_back(status.second);
-        startPosition = m_turnPoints[i];
+        // setting this chains the roaming points, drawing circles around each subsequent roaming turn
+        // startPosition = m_turnPoints[i];
     }
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
     m_currentPoint = 0;
