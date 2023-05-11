@@ -860,13 +860,13 @@ namespace charutils
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
+        blueutils::LoadSetSpells(PChar);
         BuildingCharSkillsTable(PChar);
         BuildingCharAbilityTable(PChar);
         BuildingCharTraitsTable(PChar);
         jobpointutils::RefreshGiftMods(PChar);
 
         // Order matters as these use merits and JP gifts
-        blueutils::LoadSetSpells(PChar);
         puppetutils::LoadAutomaton(PChar);
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
