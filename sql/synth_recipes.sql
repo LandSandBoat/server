@@ -1119,7 +1119,7 @@ INSERT INTO `synth_recipes` VALUES (14541,0,0,0,94,0,0,0,0,0,0,4096,4238,9130,10
 INSERT INTO `synth_recipes` VALUES (14542,0,0,0,94,0,0,0,0,0,0,4096,4238,655,655,745,854,914,0,0,0,16547,17657,17657,17657,1,1,1,1,'Anelace');
 INSERT INTO `synth_recipes` VALUES (14543,0,0,0,94,0,0,0,0,0,0,4096,4238,1355,9130,0,0,0,0,0,0,26684,26685,26685,26685,1,1,1,1,'Bewitched Celata');
 INSERT INTO `synth_recipes` VALUES (14544,0,0,0,95,44,0,0,0,0,0,4096,4238,652,654,654,719,745,914,0,0,16707,18197,18197,18197,1,1,1,1,'Bhuj');
--- INSERT INTO `synth_recipes` VALUES (14545,0,0,0,95,255,0,0,0,0,0,4099,4241,664,669,745,763,914,1304,1629,1699,14416,14417,14417,14417,1,1,1,1,'Barone Corazza');  -- JPWiki 95SM, 60GS, 35LE unconfirmed, xiclopedia added 59GS/56LE APR2009 with no citation, 2005/2006 forums 59/60GS?, 55/56LE?
+INSERT INTO `synth_recipes` VALUES (14545,0,0,0,95,59,0,56,0,0,0,4099,4241,664,669,745,763,914,1304,1629,1699,14416,14417,14417,14417,1,1,1,1,'Barone Corazza'); -- TODO: Hone in on exact level of GSmith, it is either 59 or 60. We also need a more accurate level for Leather, but it appears to be >= 55. Alla and FFXIclopedia 
 INSERT INTO `synth_recipes` VALUES (14546,0,0,0,95,0,0,0,0,0,0,4096,4238,2538,3919,3919,0,0,0,0,0,20744,20743,20743,20743,1,1,1,1,'Bihkah Sword');
 INSERT INTO `synth_recipes` VALUES (14547,0,0,0,95,52,41,0,0,0,0,4096,4238,655,664,664,745,821,828,855,914,15330,15332,15332,15332,1,1,1,1,'Hachiman Sune-Ate'); -- wiki(GS52+,CC??), BG(GS51,CC??), JPwiki(GS52,CC41), AH(GS51,CC??) checked 25/Nov/2021
 INSERT INTO `synth_recipes` VALUES (14548,0,0,0,95,26,0,0,0,0,0,4096,4238,648,661,665,683,850,0,0,0,1354,1355,1355,1355,1,1,1,1,'Cursed Celata'); -- wiki, BG, jpwiki, AH checked 24/Nov/2021
