@@ -4632,7 +4632,7 @@ std::string CLuaBaseEntity::getPacketName()
  *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::renameEntity(std::string const& newName)
+void CLuaBaseEntity::renameEntity(std::string const& newName, sol::object const& arg2)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -4645,7 +4645,11 @@ void CLuaBaseEntity::renameEntity(std::string const& newName)
     m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
     m_PBaseEntity->isRenamed = true;
 
-    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    bool silent = arg2.get_type() == sol::type::boolean ? arg2.as<bool>() : false;
+    if (!silent)
+    {
+        ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    }
 }
 
 /************************************************************************
