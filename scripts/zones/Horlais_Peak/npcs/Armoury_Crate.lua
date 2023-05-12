@@ -405,7 +405,7 @@ local loot =
     [11] =
     {
         {
-            { itemid = 13556, droprate =  50 }, -- Defending Ring (custom drop)
+            { itemid = 13566, droprate =  50 }, -- Defending Ring (custom drop)
             { itemid =  1441, droprate = 169 }, -- Libation Abjuration
             { itemid = 17939, droprate = 268 }, -- Kriegsbeil
             { itemid = 17823, droprate =  99 }, -- Shinsoku
