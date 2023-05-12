@@ -1468,3 +1468,8 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
         return CBattleEntity::OnAttack(state, action);
     }
 }
+
+bool CMobEntity::isWideScannable()
+{
+    return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
+}

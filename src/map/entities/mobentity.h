@@ -178,6 +178,7 @@ public:
 
     virtual void Spawn() override;
     virtual void FadeOut() override;
+    virtual bool isWideScannable() override;
 
     bool   m_AllowRespawn; // if true, allow respawn
     uint32 m_RespawnTime;  // respawn time
