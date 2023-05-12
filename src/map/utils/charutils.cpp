@@ -860,13 +860,16 @@ namespace charutils
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
+        jobpointutils::RefreshGiftMods(PChar);
+
+        // This must come after refreshing gift modifiers, but before loading job traits.
         blueutils::LoadSetSpells(PChar);
+
         BuildingCharSkillsTable(PChar);
         BuildingCharAbilityTable(PChar);
         BuildingCharTraitsTable(PChar);
-        jobpointutils::RefreshGiftMods(PChar);
 
-        // Order matters as these use merits and JP gifts
+        // Order matters as this uses merits and JP gifts.
         puppetutils::LoadAutomaton(PChar);
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
