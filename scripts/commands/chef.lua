@@ -11,7 +11,7 @@ cmdprops =
     parameters = "i"
 }
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:isCrystalWarrior() then
         player:PrintToPlayer("You cannot use this command as a Crystal Warrior.", xi.msg.channel.SYSTEM_3)
         return
@@ -22,7 +22,7 @@ function onTrigger(player,npc)
         return -1
     else
         player:PrintToPlayer("Welcome to the one-stop Chef Shop!")
-        stock =
+        local stock =
         {
             4153, 8000, -- Antacid
             4376, 2000, -- Meat Jerky
