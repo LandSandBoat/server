@@ -135,3 +135,18 @@ index 170ada632d..731e4c4dc2 100644
                  {
                      skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
                      if (skillUpAmount > 9)
+diff --git "a/src/search/data_loader.cpp" "b/src/search/data_loader.cpp"
+index 56cda7b3d0..b219037cc7 100644
+--- "a/src/search/data_loader.cpp"
++++ "b/src/search/data_loader.cpp"
+@@ -350,6 +350,10 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
+             {
+                 PPlayer->flags1 |= 0x8000;
+             }
++            if (nameflag & FLAG_PLAYONLINE)
++            {
++                PPlayer->flags1 |= 0x0600;
++            }
+ 
+             PPlayer->flags2 = PPlayer->flags1;
+ 
