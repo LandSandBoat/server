@@ -42,14 +42,14 @@ local allowedZones =
 
 function onTrigger(player)
     if player:isCrystalWarrior() then
-        player:PrintToPlayer("You cannot use this command as a Crystal Warrior.",xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer("You cannot use this command as a Crystal Warrior.", xi.msg.channel.SYSTEM_3)
         return
     end
 
     local currentZone = player:getZoneID()
     player:PrintToPlayer("NOTE: This command may only be used in cities.")
 
-    for _,allowedZone in ipairs(allowedZones) do
+    for _, allowedZone in ipairs(allowedZones) do
         if currentZone == allowedZone then
             player:sendMenu(1)
         end
