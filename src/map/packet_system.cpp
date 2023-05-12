@@ -4930,6 +4930,21 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // If the player is already crafting, don't allow them to craft.
+    // This prevents packet injection based multi-craft, or time-based exploits.
+    if (PChar->animation == ANIMATION_SYNTH)
+    {
+        return;
+    }
+
+    // Force full synth duration wait no matter the synth animation length
+    // Thus players can synth on whatever fps they want
+    if (PChar->m_LastSynthTime + 15s > server_clock::now())
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
+        return;
+    }
+
     // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
     // It should be replaced by something more robust or more stateful as soon as is reasonable
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
@@ -4961,12 +4976,6 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
     // End temporary additions
-
-    if (PChar->m_LastSynthTime + 10s > server_clock::now())
-    {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
-        return;
-    }
 
     PChar->CraftContainer->Clean();
 
@@ -6442,6 +6451,13 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
+    // Prevent sitting while crafting.
+    if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+    {
+        return;
+    }
+
     if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
