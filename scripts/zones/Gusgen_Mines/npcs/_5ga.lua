@@ -9,14 +9,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local lever = npc:getID()
-
     npc:openDoor(2) -- Lever animation
-    if GetNPCByID(lever - 6):getAnimation() == 9 then
-        GetNPCByID(lever - 6):setAnimation(8) --open door C (_5g0)
-        GetNPCByID(lever - 5):setAnimation(9) --close door B (_5g1)
-        GetNPCByID(lever - 4):setAnimation(9) --close door A (_5g2)
-    end
+
+    npc:timer(750, function(npcArg)
+        local lever = npcArg:getID()
+
+        if GetNPCByID(lever - 6):getAnimation() == 9 then
+            -- send dustcloud animation
+            SendEntityVisualPacket(GetNPCByID(lever - 6):getID(), "kem1")
+
+            GetNPCByID(lever - 6):setAnimation(8) --open door C (_5g0)
+            GetNPCByID(lever - 5):setAnimation(9) --close door B (_5g1)
+            GetNPCByID(lever - 4):setAnimation(9) --close door A (_5g2)
+        end
+    end)
 end
 
 entity.onEventUpdate = function(player, csid, option)
