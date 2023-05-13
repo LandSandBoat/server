@@ -724,6 +724,15 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             {
                 angle = 45.0f;
             }
+
+            // for mobs that do not turn to face the target
+            if (m_Behaviour & BEHAVIOUR_NO_TURN)
+            {
+                // need to always add the single main target as otherwise player can interrupt cone skill
+                // by spinning around the mob which should not be possible
+                PAI->TargetFind->findSingleTarget(PTarget, findFlags);
+            }
+
             if (PSkill->m_Aoe == 6) // Conal from center of mob
             {
                 PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::ATTACKER, distance, angle, findFlags, 0);
