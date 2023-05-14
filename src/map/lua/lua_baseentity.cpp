@@ -1562,6 +1562,43 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
 }
 
 /************************************************************************
+ *  Function: facePlayer()
+ *  Purpose : change entities rotation to the direction of a player
+ *  Example : npc:facePlayer(player, true/false)
+ *  Notes   : Arbitrary points are not supported!
+ *            Bool set "false" changes the facing for everyone.
+ ************************************************************************/
+
+void CLuaBaseEntity::facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal)
+{
+    CCharEntity* PChar = static_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    if (PChar)
+    {
+        bool onePersonOnly = nonGlobal.get_type() == sol::type::boolean ? nonGlobal.as<bool>() : true;
+
+        if (onePersonOnly)
+        {
+            auto storedRotation           = m_PBaseEntity->loc.p.rotation;
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            // Update 1 player's client only
+            PChar->updateEntityPacket(m_PBaseEntity, static_cast<ENTITYUPDATE>(ENTITY_UPDATE), UPDATE_POS);
+            // Now that the packet is sent to that 1 player, turn this back.
+            m_PBaseEntity->loc.p.rotation = storedRotation;
+        }
+        else
+        {
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            m_PBaseEntity->updatemask |= UPDATE_POS;
+        }
+    }
+    else
+    {
+        ShowError("missing or invalid entity in function call.");
+    }
+}
+
+/************************************************************************
  *  Function: clearTargID()
  *  Purpose : Clears an active target from an Entity
  *  Example : GetNPCByID(17719350):clearTargID()
@@ -2270,7 +2307,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
  *            Returned angle is 255-based rotation value - NOT a 360 angle
  *            Return value is signed to indicate this shortest turn direction.
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
- *            CAREFUL! If the entities are too close, this can return unxpected results.
+ *            CAREFUL! If the entities are too close, this can return unexpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
@@ -15192,6 +15229,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
+    SOL_REGISTER("facePlayer", CLuaBaseEntity::facePlayer);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
 
     SOL_REGISTER("atPoint", CLuaBaseEntity::atPoint);
