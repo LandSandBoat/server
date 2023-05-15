@@ -91,6 +91,17 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 }
 
+bool CMagicState::CheckTarget()
+{
+    if (m_targid != 0)
+    {
+        auto PTarget = m_PEntity->GetEntity(m_targid);
+        UpdateTarget(PTarget);
+    }
+
+    return this->GetTarget() != nullptr;
+}
+
 bool CMagicState::Update(time_point tick)
 {
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
@@ -232,7 +243,6 @@ bool CMagicState::Update(time_point tick)
         }
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
-
         Complete();
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + std::chrono::milliseconds(m_PSpell->getAnimationTime()))

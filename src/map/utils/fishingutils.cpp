@@ -21,8 +21,10 @@
 
 #include "fishingutils.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstring>
+#include <time.h>
 
 #include "../packets/caught_fish.h"
 #include "../packets/caught_monster.h"
@@ -33,6 +35,7 @@
 #include "../packets/entity_animation.h"
 #include "../packets/event.h"
 #include "../packets/fishing.h"
+#include "../packets/fishing_rank.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/inventory_item.h"
 #include "../packets/message_special.h"
@@ -46,6 +49,7 @@
 
 #include "../ai/ai_container.h"
 
+#include "../anticheat.h"
 #include "../enmity_container.h"
 #include "../item_container.h"
 #include "../mob_modifier.h"
@@ -56,6 +60,7 @@
 #include "battleutils.h"
 #include "charutils.h"
 #include "itemutils.h"
+#include "vana_time.h"
 #include "zoneutils.h"
 
 namespace fishingutils
@@ -738,13 +743,12 @@ namespace fishingutils
         lsbret_t lsb;
         uint8    tooBigChance   = 0;
         uint8    tooSmallChance = 0;
-        uint8    lowSkillChance = 0;
         lsb.failReason          = FISHINGFAILTYPE_NONE;
         lsb.chance              = 0;
 
         if (!rod->legendary)
         {
-            if (sizeType > rod->sizeType && ranking > rod->maxRank)
+            if (sizeType > rod->sizeType)
             {
                 tooBigChance = 50;
                 if (fishingSkill < maxSkill)
@@ -757,7 +761,7 @@ namespace fishingutils
                     tooBigChance -= fishingSkill - maxSkill;
                 }
             }
-            else if (sizeType < rod->sizeType && ranking < rod->minRank)
+            else if (sizeType < rod->sizeType)
             {
                 tooSmallChance = 50;
                 if (fishingSkill < maxSkill)
@@ -772,27 +776,46 @@ namespace fishingutils
             }
         }
 
-        if (catchType < FISHINGCATCHTYPE_ITEM && fishingSkill + 7 < maxSkill)
-        {
-            uint8 diff     = maxSkill - (fishingSkill + 7);
-            float diffAdd  = diff * 0.8f;
-            lowSkillChance = (uint8)std::floor(diffAdd); // min 5, max 85
-        }
-
-        if (tooBigChance > 0 && tooBigChance > lowSkillChance)
+        if (tooBigChance > 0)
         {
             lsb.failReason = FISHINGFAILTYPE_LOST_TOOBIG;
-            lsb.chance     = std::clamp<uint8>(tooBigChance, 0, 50);
+            lsb.chance     = std::clamp<uint8>(tooBigChance, 25, 50);
         }
-        else if (tooSmallChance > 0 && tooSmallChance > lowSkillChance)
+        else if (tooSmallChance > 0)
         {
             lsb.failReason = FISHINGFAILTYPE_LOST_TOOSMALL;
-            lsb.chance     = std::clamp<uint8>(tooSmallChance, 0, 50);
+            lsb.chance     = std::clamp<uint8>(tooSmallChance, 25, 50);
         }
-        else if (catchType < FISHINGCATCHTYPE_ITEM && lowSkillChance > 0)
+
+        // Apply 15 level bonus for legendary rods
+        fishingSkill += rod->legendary ? 15 : 0;
+
+        if (catchType < FISHINGCATCHTYPE_ITEM && maxSkill - fishingSkill > 10)
         {
-            lsb.failReason = FISHINGFAILTYPE_LOST_LOWSKILL;
-            lsb.chance     = std::clamp<uint8>(lowSkillChance, 0, 55);
+            uint8 chance = 35;
+            // 5% for 21+ level difference
+            if (maxSkill - fishingSkill > 20)
+            {
+                chance = 95;
+            }
+            else if (maxSkill - fishingSkill > 16)
+            {
+                chance = 85;
+            }
+            else if (maxSkill - fishingSkill > 14)
+            {
+                chance = 75;
+            }
+            else if (maxSkill - fishingSkill > 12)
+            {
+                chance = 60;
+            }
+
+            if (chance > lsb.chance)
+            {
+                lsb.failReason = FISHINGFAILTYPE_LOST_LOWSKILL;
+                lsb.chance     = chance;
+            }
         }
 
         return lsb;
@@ -801,16 +824,24 @@ namespace fishingutils
     lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
     {
         lsbret_t lsb;
-        uint8    levelDiffBonus  = 0;
-        uint8    sizePenalty     = 0;
-        uint8    legendaryBonus  = 0;
-        uint8    totalDurability = 0;
-        lsb.failReason           = FISHINGFAILTYPE_NONE;
-        lsb.chance               = 0;
+        uint8    levelDiffPenalty = 0;
+        uint8    levelDiffBonus   = 0;
+        uint8    sizePenalty      = 0;
+        uint8    legendaryBonus   = 0;
+        uint8    totalDurability  = 0;
+        lsb.failReason            = FISHINGFAILTYPE_NONE;
+        lsb.chance                = 0;
+
+        // Apply 15 level bonus for legendary rods
+        fishingSkill += rod->legendary ? 15 : 0;
 
         if (fishingSkill + 10 > maxSkill)
         {
             levelDiffBonus = 2;
+        }
+        else if (maxSkill - fishingSkill > 20)
+        {
+            levelDiffPenalty = (uint8)std::max<int8>(0, maxSkill - fishingSkill);
         }
 
         if (!rod->legendary && sizeType > rod->sizeType)
@@ -830,7 +861,7 @@ namespace fishingutils
             }
         }
 
-        totalDurability = rod->maxRank + levelDiffBonus + legendaryBonus - sizePenalty;
+        totalDurability = (uint8)std::max<int8>(0, rod->maxRank + levelDiffBonus + legendaryBonus - sizePenalty - levelDiffPenalty);
 
         if (ranking > totalDurability)
         {
@@ -845,20 +876,29 @@ namespace fishingutils
     lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
     {
         lsbret_t lsb;
-        uint8    levelDiffBonus = 0;
-        uint8    legendaryBonus = 0;
-        uint8    sizePenalty    = 0;
-        lsb.failReason          = FISHINGFAILTYPE_NONE;
-        lsb.chance              = 0;
+        uint8    levelDiffPenalty = 0;
+        uint8    levelDiffBonus   = 0;
+        uint8    legendaryBonus   = 0;
+        uint8    sizePenalty      = 0;
+        uint8    totalDurability  = 0;
+        lsb.failReason            = FISHINGFAILTYPE_NONE;
+        lsb.chance                = 0;
 
         if (!rod->breakable)
         {
             return lsb;
         }
 
+        // Apply 15 level bonus for legendary rods
+        fishingSkill += rod->legendary ? 15 : 0;
+
         if (fishingSkill + 10 > maxSkill)
         {
             levelDiffBonus = 2;
+        }
+        else if (maxSkill - fishingSkill > 20)
+        {
+            levelDiffPenalty = (uint8)std::max<int8>(0, maxSkill - fishingSkill);
         }
 
         if (!rod->legendary && sizeType > rod->sizeType)
@@ -875,9 +915,11 @@ namespace fishingutils
             sizePenalty = 5;
         }
 
-        if (ranking > rod->maxRank + levelDiffBonus + legendaryBonus)
+        totalDurability = (uint8)std::max<int8>(0, rod->maxRank + levelDiffBonus + legendaryBonus - sizePenalty - levelDiffPenalty);
+
+        if (ranking > totalDurability)
         {
-            uint8 strDuraDiff = ranking - (rod->maxRank + levelDiffBonus + legendaryBonus);
+            uint8 strDuraDiff = ranking - totalDurability;
             lsb.failReason    = FISHINGFAILTYPE_RODBREAK;
             lsb.chance        = std::clamp<uint8>((uint8)std::floor((strDuraDiff + sizePenalty) * 1.3f), 0, 55);
         }
@@ -1345,7 +1387,7 @@ namespace fishingutils
         XI_DEBUG_BREAK_IF(PBait->isType(ITEM_WEAPON) == false);
         XI_DEBUG_BREAK_IF(PBait->getSkillType() != SKILL_FISHING);
 
-        if (PBait != nullptr)
+        if (PBait != nullptr && PChar->hookedFish != nullptr)
         {
             if (!RemoveFly && (PBait->getStackSize() == 1))
             {
@@ -1509,6 +1551,14 @@ namespace fishingutils
             {
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCaughtFishPacket(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
+
+            // Add to the fishing tracker
+            uint16 rodId = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED))->getID();
+            if (!rodId)
+            {
+                rodId = 0;
+            }
+            AddToFishTracker(PChar, Fish->getID(), PChar->RealSkills.fishing, rodId);
 
             // Update fishing statistics
             PChar->m_fishHistory.fishReeled++;
@@ -1804,53 +1854,6 @@ namespace fishingutils
         // Minimum 4% chance
         maxChance = std::max(4, distMod + lowerLevelBonus - skillLevelPenalty);
 
-        // Configuration multiplier.
-        maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
-
-        // Moon phase skillup modifiers
-        uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
-        uint8 moonDirection = CVanaTime::getInstance()->getMoonDirection();
-        switch (moonDirection)
-        {
-            case 0: // None
-                if (phase == 0)
-                {
-                    skillRoll -= 20;
-                    bonusChanceRoll -= 3;
-                }
-                else if (phase == 100)
-                {
-                    skillRoll += 10;
-                    bonusChanceRoll += 3;
-                }
-                break;
-
-            case 1: // Waning (decending)
-                if (phase <= 10)
-                {
-                    skillRoll -= 15;
-                    bonusChanceRoll -= 2;
-                }
-                else if (phase >= 95 && phase <= 100)
-                {
-                    skillRoll += 5;
-                    bonusChanceRoll += 2;
-                }
-                break;
-
-            case 2: // Waxing (increasing)
-                if (phase <= 5)
-                {
-                    skillRoll -= 10;
-                    bonusChanceRoll -= 1;
-                }
-                else if (phase >= 90 && phase <= 100)
-                {
-                    bonusChanceRoll += 1;
-                }
-                break;
-        }
-
         // Not in City bonus
         if (zoneutils::GetZone(PChar->getZone())->GetType() > ZONE_TYPE::CITY)
         {
@@ -1917,7 +1920,6 @@ namespace fishingutils
         if (PChar->hookedFish != nullptr)
         {
             destroy(PChar->hookedFish);
-            PChar->hookedFish = nullptr;
         }
 
         PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
@@ -1933,16 +1935,30 @@ namespace fishingutils
             return;
         }
 
+        uint16 MessageOffset = GetMessageOffset(PChar->getZone());
+
+        if (charutils::GetHighestLevel(PChar) < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
+        {
+            ShowWarning(fmt::format("Player {} attempting to fish under minimum level", PChar->GetName()));
+            // TODO: Make this more formal. System message for now to indicate to players why this is happening.
+            // PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
+            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "You are currently below the minimum level required to fish"));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
         if (PChar->m_moghouseID > 0)
         {
             ShowError(fmt::format("Player {} attempting to fish inside Mog House", PChar->GetName()));
+            anticheat::ReportCheatIncident(PChar, anticheat::CheatID::CHEAT_ID_FISH_BOT,
+                                           static_cast<uint32>(PChar->m_charAnticheat.fishingStikes),
+                                           "Player is attempting to fish from mog house. Number of strikes has been recorded.");
             return;
         }
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CAMOUFLAGE);
-        uint16       MessageOffset = GetMessageOffset(PChar->getZone());
         CItemWeapon* Rod           = nullptr;
         CItemWeapon* Bait          = nullptr;
         uint8        FishingAreaID = 0;
@@ -1984,7 +2000,7 @@ namespace fishingutils
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
-
+                destroy(PChar->hookedFish);
                 return;
             }
 
@@ -1996,7 +2012,7 @@ namespace fishingutils
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
-
+                destroy(PChar->hookedFish);
                 return;
             }
 
@@ -2005,7 +2021,7 @@ namespace fishingutils
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
-
+                destroy(PChar->hookedFish);
                 return;
             }
 
@@ -2024,6 +2040,7 @@ namespace fishingutils
             {
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+                destroy(PChar->hookedFish);
             }
         }
         else
@@ -2693,6 +2710,14 @@ namespace fishingutils
             return;
         }
 
+        if (charutils::GetHighestLevel(PChar) < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
+        {
+            ShowWarning(fmt::format("Player {} started fishing under minimum level", PChar->GetName()));
+            // Unlikely anyone can get here legit, since we already disabled "startFishing"
+            PChar->animation = ANIMATION_FISHING_STOP;
+            return;
+        }
+
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
         uint32 vanaTime      = CVanaTime::getInstance()->getVanaTime();
 
@@ -2712,7 +2737,6 @@ namespace fishingutils
                 if (PChar->hookedFish != nullptr)
                 {
                     destroy(PChar->hookedFish);
-                    PChar->hookedFish = nullptr;
                 }
 
                 if (fishingArea != nullptr)
@@ -2912,7 +2936,6 @@ namespace fishingutils
                     }
 
                     destroy(PChar->hookedFish);
-                    PChar->hookedFish = nullptr;
                 }
 
                 PChar->animation = ANIMATION_NONE;
@@ -2931,16 +2954,6 @@ namespace fishingutils
             {
                 return (uint8)it.first;
             }
-        }
-
-        return 0;
-    }
-
-    uint32 GetFishIdFromIndex(uint8 index)
-    {
-        if (index > 0 && FishIndex[index])
-        {
-            return FishIndex[index];
         }
 
         return 0;
@@ -2971,6 +2984,18 @@ namespace fishingutils
                 charutils::WriteFishingHistory(PChar);
             }
         }
+    }
+
+    void AddToFishTracker(CCharEntity* PChar, uint32 fishId, uint32 skill, uint32 rodId)
+    {
+        const char* Query = "INSERT INTO char_fish_tracker VALUES (NULL, "
+                            "%u, "     // Char ID
+                            "%u, "     // Item ID
+                            "%u, "     // Char Fishing Skill at time of catch
+                            "%u, "     // Rod ID used
+                            "NOW());"; // Time of catch
+        sql->Query(Query, PChar->id, fishId, skill, rodId);
+        sql->TransactionCommit();
     }
 
     /************************************************************************

@@ -223,7 +223,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == xi.additionalEffect.procType.DEBUFF then
         if addStatus and addStatus > 0 then
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
-            local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
+            local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0, item:getSkillType())
             local immunity = 0
 
             for _, statusTable in pairs(immunityTable) do

@@ -28,9 +28,7 @@ local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETIC
 -- TODO: Verify gil reward occurs on repeat.
 mission.reward =
 {
-    gil = 1000,
-    rank = 2,
-    rankPoints = 200,
+    -- gil = 1000,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -53,9 +51,15 @@ local handleFetichTrade = function(player, npc, trade)
 end
 
 local handleCompleteEvent = function(player, csid, option, npc)
-    if mission:complete(player) then
-        player:confirmTrade()
+    if not player:hasCompletedMission(mission.areaId, mission.missionId) then
+        player:setRank(2)
+        npcUtil.giveCurrency(player, 'gil', 1000)
+    else
+        player:addRankPoints(250)
     end
+
+    player:confirmTrade()
+    mission:complete(player)
 end
 
 mission.sections =

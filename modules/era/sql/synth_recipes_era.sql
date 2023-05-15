@@ -1753,8 +1753,8 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Fire Biscuit'
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bloody Chocolate' AND ID = 71528;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sutlac' AND ID = 71547;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Simit' AND ID = 72008;
-UPDATE `synth_recipes` SET ContentTag = 'ToAU' WHERE ResultName = 'Mercury' AND ID = 60519;
-UPDATE `synth_recipes` SET ContentTag = 'ToAU' WHERE ResultName = 'Pebble' AND ID = 50516;
+UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mercury' AND ID = 60519;
+UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Pebble' AND ID = 50516;
 
 -- ------------------------------------------------------------
 -- WotG Synths

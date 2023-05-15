@@ -232,7 +232,7 @@ xi.crafting.gpRewards =
         ["Items"] =
         {
             [0] = { id = 15449, rank = 3, cost = utils.ternary(xi.settings.main.ENABLE_COP == 1,     10000,  999999) },
-            [1] = { id = 13947, rank = 6, cost = utils.ternary(xi.settings.main.ENABLE_COP == 1,     70000,  999999) },
+            [1] = { id = 13947, rank = 5, cost = utils.ternary(xi.settings.main.ENABLE_COP == 1,     70000,  999999) },
             [2] = { id = 14397, rank = 7, cost = utils.ternary(xi.settings.main.ENABLE_COP == 1,     100000, 999999) },
             [3] = { id = 142,   rank = 9, cost = utils.ternary(xi.settings.main.ENABLE_COP == 1,     150000, 999999) },
             [4] = { id = 336,   rank = 9, cost = utils.ternary(xi.settings.main.ENABLE_TOAU == 1,    200000, 999999) },

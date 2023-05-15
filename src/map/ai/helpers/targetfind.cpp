@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -107,8 +107,17 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     // this is a buff because i'm targetting my self
     bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
 
-    // always add original target first
+    // always try to add original target first (might fail due to validity checks)
     addEntity(PTarget, false); // pet will be added later
+
+    // if original target is not valid (not added in addEntity) then should abandon search as ability/spell should not complete
+    // in many cases checks on original target are also performed before calling targetfind
+    // this is check of last resort
+    if (m_targets.size() == 0)
+    {
+        ShowDebug("Could not add original target in CTargetFind::findWithinArea");
+        return;
+    }
 
     m_PTarget = PTarget;
     isPlayer  = checkIsPlayer(m_PBattleEntity);
@@ -162,10 +171,13 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             m_findType = FIND_TYPE::MONSTER_MONSTER;
         }
 
-        // do not include pets in monster AoE buffs
-        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
+        if (m_PTarget != nullptr)
         {
-            withPet = PETS_CAN_AOE_BUFF;
+            // do not include pets in monster AoE buffs
+            if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
+            {
+                withPet = PETS_CAN_AOE_BUFF;
+            }
         }
 
         // In dynamis always find all reguardless of alliance
@@ -428,6 +440,11 @@ validEntity will check if the given entity can be targeted in the AoE.
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    if (PTarget == nullptr || PTarget->id == 0)
+    {
+        return false;
+    }
+
     // Check if entity is already in list
     // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
@@ -458,15 +475,13 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         return false;
     }
 
-    // this is first target, always add him first
-    if (m_PTarget == nullptr)
+    // if there is already a first target make sure other targets have same allegiance
+    if (m_PTarget != nullptr)
     {
-        return true;
-    }
-
-    if (m_PTarget->allegiance != PTarget->allegiance)
-    {
-        return false;
+        if (m_PTarget->allegiance != PTarget->allegiance)
+        {
+            return false;
+        }
     }
 
     if (PTarget->objtype == TYPE_MOB)

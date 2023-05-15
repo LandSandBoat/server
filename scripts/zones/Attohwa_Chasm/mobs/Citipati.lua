@@ -20,10 +20,18 @@ entity.onMobDisengage = function(mob)
     if VanadielHour() >= 4 and VanadielHour() < 20 then -- Despawn if its day
         DespawnMob(mob:getID())
     end
+
+    DisallowRespawn(ID.mob.CITIPATI, true)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 278)
+    DisallowRespawn(ID.mob.CITIPATI, true)
+end
+
+entity.onMobDespawn = function(mob, player)
+    DisallowRespawn(mob:getID(), true)
+    SetServerVariable("Citipati Death", os.time() + 10800)
 end
 
 return entity

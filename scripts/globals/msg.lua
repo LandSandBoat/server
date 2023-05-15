@@ -386,3 +386,47 @@ xi.msg.system =
     TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
     TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }
+
+-----------------------------------
+-- Sends Contextual Debug Messages to Player if enabled
+-----------------------------------
+
+xi.msg.debug = function(target, msg, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if channel == nil then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        target:PrintToPlayer(msg, channel)
+    end
+end
+
+-----------------------------------
+-- Sends Contextual Debug Messages to Player if enabled
+-----------------------------------
+
+xi.msg.debugValue = function(target, var, value, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if channel == nil then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        target:PrintToPlayer(string.format("%s = %s", var, value), channel)
+    end
+end
+
+-----------------------------------
+-- Send Contextual Debug Messages given a table to the Player if enabled
+-----------------------------------
+
+xi.msg.debugTable = function(target, tbl, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if not channel then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        for key, value in pairs(tbl) do
+            target:PrintToPlayer(string.format("%s = %s", key, value), xi.msg.channel.SYSTEM_3)
+        end
+    end
+end

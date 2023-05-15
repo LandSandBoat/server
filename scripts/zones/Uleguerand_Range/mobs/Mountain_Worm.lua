@@ -8,7 +8,9 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGEN, 50)
+    if mob:getID() == 16798031 then
+        mob:addMod(xi.mod.REGEN, 50)
+    end
 end
 
 entity.onMobEngage = function(mob, target)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Cloister of Gales
 --  Mob: Garuda Prime
--- Involved in Quest: Trial by Wind, Trial Size Trial by Wind
+-- Involved in Quest: Trial by Wind
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

@@ -102,6 +102,7 @@ zoneObject.onEventFinish = function(player, csid, option)
     elseif csid == 201 then
         player:setPos(-11, 2, -142, 192)
     elseif csid == 203 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, -2, 0, 0, 58)
     elseif csid == 204 then
         player:setPos(11, 2, 142, 64)

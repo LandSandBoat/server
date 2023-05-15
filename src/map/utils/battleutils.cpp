@@ -31,6 +31,7 @@
 #include "../packets/char.h"
 #include "../packets/char_health.h"
 #include "../packets/char_update.h"
+#include "../packets/chat_message.h"
 #include "../packets/entity_update.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/message_basic.h"
@@ -44,6 +45,7 @@
 #include "../ai/controllers/player_controller.h"
 #include "../ai/states/magic_state.h"
 #include "../alliance.h"
+#include "../anticheat.h"
 #include "../attack.h"
 #include "../enmity_container.h"
 #include "../entities/battleentity.h"
@@ -585,6 +587,11 @@ namespace battleutils
                 else
                 {
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
+                }
+
+                if (PAttacker->getMod(Mod::ENSPELL) > 0)
+                {
+                    PAttacker->setModifier(Mod::ENSPELL, 0);
                 }
             }
 
@@ -2273,8 +2280,7 @@ namespace battleutils
                     baseTp += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_IKISHOTEN, (CCharEntity*)PAttacker);
                 }
 
-                PAttacker->addTP(
-                    (int16)(tpMultiplier * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker)))))));
+                PAttacker->addTP((int16)(tpMultiplier * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker)))))));
             }
 
             if (giveTPtoVictim)
@@ -2586,12 +2592,6 @@ namespace battleutils
             // https://www.bluegartr.com/threads/68786-Dexterity-s-impact-on-critical-hits?p=3209015&viewfull=1#post3209015
 
             uint16 attackerAcc = PAttacker->ACC(attackNumber, offsetAccuracy);
-
-            // Enlight gives an ACC bonus not a hit rate bonus, ACC bonus is equal to damage dealt
-            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
-            {
-                attackerAcc += PAttacker->getMod(Mod::ENSPELL_DMG);
-            }
 
             hitrate += static_cast<int32>(std::floor((attackerAcc - PDefender->EVA()) / 2));
 
@@ -2936,7 +2936,7 @@ namespace battleutils
             {
                 if (attackerLvl > defenderLvl)
                 {
-                    cRatio = cRatio + correction; // Sets level correction for all mobs and pets
+                    cRatio = cRatio + correction; // Sets positive level correction for all mobs and pets
 
                     if ((attackerType == TYPE_PET) && (charutils::CheckMob(attackerLvl, defenderLvl) == EMobDifficulty::TooWeak)) // Checks if the mob is too weak and if its a pet
                     {
@@ -4262,6 +4262,8 @@ namespace battleutils
             }
         }
 
+        PDefender->PAI->EventHandler.triggerListener("SKILLCHAIN_TAKE", CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), damage);
+
         return damage;
     }
 
@@ -4618,7 +4620,7 @@ namespace battleutils
             {
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount);
                 }
             }
         }
@@ -4803,10 +4805,14 @@ namespace battleutils
             return 0;
         }
 
-        uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
-        uint8 shotCount = 0;                        // the total number of extra hits
+        uint8 shotCount = 0; // the total number of extra hits
 
-        if (PChar->GetSJob() == JOB_RNG)
+        uint8 lvl = 0; // Get Ranger level of char
+        if (PChar->GetMJob() == JOB_RNG)
+        {
+            lvl = PChar->GetMLevel();
+        }
+        else if (PChar->GetSJob() == JOB_RNG)
         { // if rng is sub then use the sub level
             lvl = PChar->GetSLevel();
         }
@@ -5270,12 +5276,32 @@ namespace battleutils
                 }
                 if (!battleTarget || battleTarget == PDefender || battleTarget != attacker->PClaimedMob || PDefender->isDead())
                 {
-                    if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender && attacker->PClaimedMob->isAlive() &&
-                        attacker->PClaimedMob->m_OwnerID.id == attacker->id)
-                    { // unclaim any other living mobs owned by attacker
-                        static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
-                        attacker->PClaimedMob = nullptr;
+                    auto zoneId = PDefender->getZone();
+                    if (zoneId != 0 && (zoneId == ZONE_DYNAMIS_BASTOK ||
+                                        zoneId == ZONE_DYNAMIS_BEAUCEDINE ||
+                                        zoneId == ZONE_DYNAMIS_BUBURIMU ||
+                                        zoneId == ZONE_DYNAMIS_JEUNO ||
+                                        zoneId == ZONE_DYNAMIS_QUFIM ||
+                                        zoneId == ZONE_DYNAMIS_SAN_DORIA ||
+                                        zoneId == ZONE_DYNAMIS_VALKURM ||
+                                        zoneId == ZONE_DYNAMIS_TAVNAZIA ||
+                                        zoneId == ZONE_DYNAMIS_WINDURST ||
+                                        zoneId == ZONE_DYNAMIS_XARCABARD))
+                    {
+                        if (PDefender && PDefender->isDead())
+                        {
+                            attacker->PClaimedMob = nullptr;
+                        }
                     }
+                    else
+                    {
+                        if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender && attacker->PClaimedMob->isAlive() && attacker->PClaimedMob->m_OwnerID.id == attacker->id)
+                        { // unclaim any other living mobs owned by attacker
+                            static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
+                            attacker->PClaimedMob = nullptr;
+                        }
+                    }
+
                     if (!mob->GetCallForHelpFlag())
                     {
                         if (battleutils::HasClaim(PAttacker, PDefender))
@@ -5902,7 +5928,18 @@ namespace battleutils
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
     {
-        return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
+        if (PEntity == nullptr)
+        {
+            return WEATHER::WEATHER_NONE;
+        }
+
+        auto zone = zoneutils::GetZone(PEntity->getZone());
+        if (zone == nullptr)
+        {
+            return WEATHER::WEATHER_NONE;
+        }
+
+        return GetWeather(PEntity, ignoreScholar, zone->GetWeather());
     }
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather)
@@ -6657,6 +6694,7 @@ namespace battleutils
 
         // get Fast Cast reduction, caps at 80%/2 = 40% reduction in recast -- https://www.bg-wiki.com/ffxi/Fast_Cast
         float fastCastReduction = std::clamp(static_cast<float>(PEntity->getMod(Mod::FASTCAST)) / 2.0f, 0.0f, 40.0f);
+
         // no known cap (limited by Inspiration merits + Futhark Trousers augment for a total retail cap value of 60%/2 = 30%)
         float inspirationRecastReduction = static_cast<float>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST)) / 2.0f;
 
@@ -7181,7 +7219,7 @@ namespace battleutils
         }
     }
 
-    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance)
+    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance, bool atk)
     {
         TracyZoneScoped;
 

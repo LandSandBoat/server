@@ -2,7 +2,7 @@
 -- Scooped!
 -----------------------------------
 -- !addquest 2 38
--- Hariga-Origa : !pos -70.244,-3.800,-4.439
+-- Hariga-Origa : !pos -70.244, -3.800, -4.439
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -62,6 +62,7 @@ quest.sections =
             onEventFinish =
             {
                 [680] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     quest:complete(player)
                 end,
             },

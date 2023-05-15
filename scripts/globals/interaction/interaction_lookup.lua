@@ -237,7 +237,7 @@ end
 
 -- Use preprocessed lookup to run relevant handlers
 local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, args)
-    if not data then
+    if not data or not player then
         return { }
     end
 
@@ -378,8 +378,11 @@ end
 local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHandler, defaultReturn, targetId)
     local playerArg = args.playerArg or 1
     local player = args[playerArg]
-    if not player then -- if no player object is present, we can't do anything in the handler system
+
+    if fallbackHandler and not player then -- if no player object is present, we can't do anything in the handler system
         return fallbackHandler(unpack(args))
+    elseif not (fallbackHandler or player) then -- Neither object present
+        return
     end
 
     local actions, priority = getHighestPriorityActions(data, player, secondLevelKey, thirdLevelKey, args)

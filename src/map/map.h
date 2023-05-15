@@ -56,6 +56,8 @@ struct map_session_data_t
     blowfish_t   blowfish           = {};      // unique decypher keys
     CCharEntity* PChar              = nullptr; // game char
     uint8        shuttingDown       = 0;       // prevents double session closing
+    bool         zoning             = false;
+    time_t       last_zone_packet   = 0;
 };
 
 extern uint32 map_amntplayers;

@@ -1816,7 +1816,7 @@ xi.dynamis.setMobStats = function(mob)
         elseif mob:getFamily() == 358 then -- If Kindred
             mob:setMobLevel(math.random(77,80))
         else
-            mob:setMobLevel(math.random(75,77))
+            mob:setMobLevel(math.random(77.78))
         end
 
         if     job == xi.job.WAR then
@@ -2026,7 +2026,8 @@ xi.dynamis.setPetStats = function(mob)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
-    mob:setMobLevel(78)
+    mob:setMobMod(xi.mobMod.CHARMABLE, 0)
+    mob:setMobLevel(79)
     mob:setTrueDetection(true)
     xi.dynamis.setMDB(mob)
 end
@@ -2142,8 +2143,12 @@ m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
         mob:setLocalVar("GaveTimeExtension", 1)
     end
 
-    if player then
-        player:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+    local zone = mob:getZone()
+    if zone:getLocalVar('TitleGranted') < 1 then
+        for _, p in pairs(zone:getPlayers()) do
+            p:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+        end
+        zone:setLocalVar('TitleGranted', 1)
     end
 end)
 

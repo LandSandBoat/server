@@ -22,7 +22,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if hour < 4 or hour >= 18 and skill:getID() == 1401 then
         local tpCount = mob:getLocalVar("tpCount")
 
-        tpCount = tpCount +1
+        tpCount = tpCount + 1
         mob:setLocalVar("tpCount", tpCount)
 
         if tpCount > 1 and chance >= 5 then
@@ -44,7 +44,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hr
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

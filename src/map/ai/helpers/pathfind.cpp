@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pathfind.h"
+#include "../../../common/settings.h"
 #include "../../../common/utils.h"
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
@@ -156,7 +157,7 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         auto PMob = static_cast<CMobEntity*>(m_POwner);
 
-        if (point.y - m_POwner->loc.p.y < -6 && !PMob->PAI->IsRoaming()) // Target is over 6 yalms above me, I should process disengage if needed.
+        if (point.y - m_POwner->loc.p.y <= settings::get<int8>("map.VERTICAL_CHASE_RANGE") && !PMob->PAI->IsRoaming()) // Target is over 6 yalms above me, I should process disengage if needed.
         {
             auto disengageMod = PMob->getMobMod(MOBMOD_DISENGAGE_NO_PATH);
 
@@ -589,7 +590,8 @@ bool CPathFind::OnPoint() const
 
 float CPathFind::GetRealSpeed()
 {
-    uint8 realSpeed = m_POwner->speed;
+    int realSpeed = m_POwner->speed;
+    int speedMod  = settings::get<int8>("map.MOB_SPEED_MOD");
 
     // 'GetSpeed()' factors in movement bonuses such as map confs and modifiers.
     if (m_POwner->objtype != TYPE_NPC)
@@ -606,11 +608,14 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
+            if (realSpeed > 20)
+            {
+                realSpeed += std::clamp(speedMod, 0, realSpeed - 10); // Never allow the mob speed mod to reduce speed so slow they can't move.  Only Bind
+            }
         }
     }
 
-    return realSpeed;
+    return std::clamp<uint8>(realSpeed, 0, 255);
 }
 
 bool CPathFind::IsFollowingPath()

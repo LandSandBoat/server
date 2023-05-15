@@ -81,7 +81,8 @@ namespace mobutils
 
     void AddCustomMods(CMobEntity* PMob);
 
-    void        SetSpellList(CMobEntity*, uint16);
+    void        SetSpellList(CMobEntity* PMob, uint16 spellList);
+    void        SetSkillList(CMobEntity* PMob, uint16 skillList);
     CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr);
     CMobEntity* InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId);
     void        WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level);

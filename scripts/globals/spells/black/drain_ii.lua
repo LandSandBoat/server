@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 1.0
+    params.damageSpell = true
+
     local resist = xi.magic.applyResistance(caster, target, spell, params)
     --get the resisted damage
     dmg = dmg * resist
@@ -42,7 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Upyri: ID 4105
-    if target:isUndead() or target:getPool() == 4105 then
+    if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return 0
     end

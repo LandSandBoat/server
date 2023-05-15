@@ -9,6 +9,10 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    if target:getZoneID() == 131 then
+        return xi.msg.basic.CANT_BE_USED_IN_AREA
+    end
+
     return 0
 end
 

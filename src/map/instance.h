@@ -73,10 +73,10 @@ public:
     void Cancel();                   // Sets instance to fail without calling onInstanceFailure
     bool CheckFirstEntry(uint32 id); // Checks if this is the first time a char is entering
 
-    uint8 GetSoloBattleMusic();
-    uint8 GetPartyBattleMusic();
-    uint8 GetBackgroundMusicDay();
-    uint8 GetBackgroundMusicNight();
+    uint16 GetSoloBattleMusic();
+    uint16 GetPartyBattleMusic();
+    uint16 GetBackgroundMusicDay();
+    uint16 GetBackgroundMusicNight();
 
 private:
     void LoadInstance();
