@@ -19,6 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#ifndef _SEARCH_H_
+#define _SEARCH_H_
+
 #include "common/cbasetypes.h"
 
 struct search_req
@@ -36,3 +39,5 @@ struct search_req
     uint8       nameLen;
     uint8       commentType;
 };
+
+#endif
