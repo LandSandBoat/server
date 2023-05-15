@@ -571,7 +571,6 @@ namespace zoneutils
                                     PMob->m_Type & MOBTYPE_FISHED ||
                                     PMob->m_Type & MOBTYPE_BATTLEFIELD ||
                                     PMob->m_Type & MOBTYPE_NOTORIOUS ||
-                                    zoneType == ZONE_TYPE::BATTLEFIELD ||
                                     zoneType == ZONE_TYPE::DYNAMIS)
                                 {
                                     PMob->setMobMod(MOBMOD_CHARMABLE, 0);

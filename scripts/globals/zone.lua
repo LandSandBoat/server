@@ -13,7 +13,7 @@ xi.zoneType =
     CITY           = 1,
     OUTDOORS       = 2,
     DUNGEON        = 3,
-    BATTLEFIELD    = 4,
+    UNUSED         = 4, -- formerly BATTLEFIELD
     DYNAMIS        = 5,
     INSTANCED      = 6,
 }
