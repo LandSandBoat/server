@@ -1866,7 +1866,7 @@ INSERT INTO `mob_skills` VALUES (1906,917,'ultimate_terror',1,10.0,643,3000,4,0,
 INSERT INTO `mob_skills` VALUES (1907,1127,'dream_shroud',1,10.0,645,3000,1,128,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1908,918,'nightmare',1,10.0,642,3000,4,128,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1909,1128,'cacodemonia',1,10.0,646,3000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1910,1129,'nether_blast',0,10.0,646,3000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1910,1129,'nether_blast',0,15.0,646,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1911,1125,'ruinous_omen',1,30.0,2000,3000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1912,1656,'hypnogenesis',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1913,1657,'stunbolt',0,7.0,2000,1500,4,0,0,0,0,0,0);
