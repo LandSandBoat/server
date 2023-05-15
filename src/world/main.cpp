@@ -18,10 +18,26 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+#include "common/blowfish.h"
+#include "common/cbasetypes.h"
+#include "common/console_service.h"
+#include "common/logging.h"
+#include "common/lua.h"
+#include "common/md52.h"
+#include "common/mmo.h"
+#include "common/settings.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/utils.h"
+#include "message_server.h"
 #include "world_server.h"
 
 // TODO: Standardize our running arguments for shutdown and thread signals
 std::atomic<bool> gRunFlag = true;
+std::thread       messageThread;
+bool              requestExit = false;
 
 int main(int argc, char** argv)
 {
@@ -32,5 +48,10 @@ int main(int argc, char** argv)
         pWorldServer->Tick();
     }
 
+    message_server_close();
+    if (messageThread.joinable())
+    {
+        messageThread.join();
+    }
     return 0;
 }

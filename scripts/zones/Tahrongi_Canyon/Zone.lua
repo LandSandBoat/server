@@ -80,7 +80,11 @@ zoneObject.onZoneWeatherChange = function(weather)
 
         if habrok:isSpawned() and not isHabrokWeather(weather) then
             DespawnMob(ID.mob.HABROK)
-        elseif not habrok:isSpawned() and isHabrokWeather(weather) and os.time() > habrok:getLocalVar("pop") then
+        elseif
+            not habrok:isSpawned() and
+            isHabrokWeather(weather) and
+            os.time() > habrok:getLocalVar("pop")
+        then
             SpawnMob(ID.mob.HABROK)
         end
     end

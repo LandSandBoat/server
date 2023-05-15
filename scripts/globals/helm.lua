@@ -1534,7 +1534,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 player:startEvent(csid, item, broke, full)
             end
 
-            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION, false)
 
             -- WotG : The Price of Valor; Success does not award an item, but only KI.
             if xi.wotg.helpers.helmTrade(player, helmType, broke) then

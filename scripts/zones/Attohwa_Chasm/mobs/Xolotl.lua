@@ -44,6 +44,11 @@ entity.onMobFight = function(mob, target)
             end)
         end
     end
+
+    -- Sets max sleep resist if a sleep lands on Xolotl
+    if hasSleepEffects(mob) then
+        target:setMod(xi.mod.SLEEPRES, 100)
+    end
 end
 
 entity.onMobRoam = function(mob)
@@ -77,12 +82,12 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
 
-    mob:setLocalVar("xolotlDead", 1)
+    SetServerVariable("xolotlDead", 1)
 end
 
 entity.onMobDespawn = function(mob)
     -- Xolotl respawn timer only triggers on death, will respawn next game night if not defeated
-    local xolotlDead = mob:getLocalVar("xolotlDead")
+    local xolotlDead = GetServerVariable("xolotlDead")
     local cooldown = math.random(75600, 86400) -- 21h to 24h
 
     if xolotlDead == 1 then

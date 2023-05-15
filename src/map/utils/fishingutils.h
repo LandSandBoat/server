@@ -27,6 +27,7 @@
 #include "../../common/cbasetypes.h"
 #include "../items/item_fish.h"
 
+#include <cstring>
 #include <list>
 #include <map>
 #include <vector>
@@ -1008,10 +1009,10 @@ namespace fishingutils
     catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* response, rod_t* rod);
     void             FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special);
 
-    // Fish List
-    uint8  GetFishIndex(uint32 fishId);
-    uint32 GetFishIdFromIndex(uint8 index);
-    void   SetPlayerFishIndex(CCharEntity* PChar, uint32 fishId, bool value);
+    // Fish History
+    uint8 GetFishIndex(uint32 fishId);
+    void  SetPlayerFishIndex(CCharEntity* PChar, uint32 fishId, bool value);
+    void  AddToFishTracker(CCharEntity* PChar, uint32 fishId, uint32 skill, uint32 rodId);
 
     // Initialization
     void LoadFishingMessages();

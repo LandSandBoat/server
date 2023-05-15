@@ -20,7 +20,7 @@ local gilPerTrade = 200
 
 quest.reward =
 {
-    fame = 4, -- Baesd on 212 yag necklaces needed to reach level 4 tenshodo fame.
+    fame = 16, -- Baesd on 212 yag necklaces needed to reach level 4 tenshodo fame.
     fameArea = xi.quest.fame_area.NORG,
     title = xi.title.CAT_BURGLAR_GROUPIE,
 }
@@ -106,7 +106,7 @@ quest.sections =
         {
             ['Nanaa_Mihgo'] =
             {
-                onTrigger = function (player, npc)
+                onTrigger = function(player, npc)
                     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) < QUEST_ACCEPTED then
                         return quest:event(89):replaceDefault()
                     end
@@ -124,7 +124,7 @@ quest.sections =
                 [494] = function(player, csid, option, npc)
                     player:confirmTrade()
                     player:addGil(gilPerTrade)
-                    player:addFame(xi.quest.fame_area.NORG, 4)
+                    player:addFame(xi.quest.fame_area.NORG, 16)
                 end,
             },
         },

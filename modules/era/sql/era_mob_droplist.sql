@@ -8982,17 +8982,17 @@ INSERT INTO `mob_droplist` VALUES (1098,2,0,1000,750,0);       -- Silver Beastco
 
 -- ZoneID: 104 - Goblin Leecher
 -- ZoneID: 120 - Goblin Leecher
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4680,@RARE);  -- Scroll Of Barsleep (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4666,@RARE);  -- Scroll Of Paralyze (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4733,@RARE);  -- Scroll Of Protectra (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4745,@RARE); -- Scroll Of Sneak (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4667,@VRARE); -- Scroll Of Silence (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4744,@VRARE); -- Scroll Of Invisible (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4681,@VRARE); -- Scroll Of Barpoison (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,4746,@VRARE); -- Scroll Of Deodorize (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1101,0,0,1000,510,@VRARE);  -- Goblin Armor (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1107,0,0,1000,750,@VRARE);  -- Silver Beastcoin (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1102,0,0,1000,511,@VRARE);  -- Goblin Mask (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4680,@RARE);  -- Scroll Of Barsleep (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4666,@RARE);  -- Scroll Of Paralyze (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4733,@RARE);  -- Scroll Of Protectra (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4745,@RARE); -- Scroll Of Sneak (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4667,@VRARE); -- Scroll Of Silence (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4744,@VRARE); -- Scroll Of Invisible (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4681,@VRARE); -- Scroll Of Barpoison (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,4746,@VRARE); -- Scroll Of Deodorize (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,510,@VRARE);  -- Goblin Armor (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,750,@VRARE);  -- Silver Beastcoin (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1099,0,0,1000,511,@VRARE);  -- Goblin Mask (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1099,2,0,1000,750,0);       -- Silver Beastcoin (Steal)
 
 -- ZoneID: 105 - Goblin Leecher

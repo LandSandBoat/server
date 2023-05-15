@@ -83,18 +83,25 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
     local kvre = GetServerVariable("\\[SPAWN\\]17289575")
-    if not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.DUST_STORM then
+    if
+        not kingV:isSpawned() and
+        os.time() > kvre and
+        weather == xi.weather.DUST_STORM
+    then
         -- 10% chance for KV pop at start of single earth weather
         local chance = math.random(1, 10)
         if chance == 1 then
             DisallowRespawn(kingV:getID(), false)
             SpawnMob(ID.mob.KING_VINEGARROON)
         end
-    elseif not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.SAND_STORM then
+    elseif
+        not kingV:isSpawned() and
+        os.time() > kvre and
+        weather == xi.weather.SAND_STORM
+    then
         DisallowRespawn(kingV:getID(), false)
         SpawnMob(ID.mob.KING_VINEGARROON)
     end
-
 end
 
 return zoneObject

@@ -1973,11 +1973,18 @@ namespace petutils
             PPet = new CPetEntity(petType);
             PPet->saveModifiers();
 
-            if (petType == PET_TYPE::AVATAR || PetID <= PETID_DARKSPIRIT)
+            // If pet is a spirit then set the spirit controller
+            if (PetID <= PETID_DARKSPIRIT)
             {
                 PPet->PMaster = PMaster;
                 PPet->m_PetID = PetID;
                 PPet->PAI->SetController(std::make_unique<CSpiritController>(PPet));
+            }
+            // If pet is an avatar then only set PMaster and PetID
+            else if ((PetID >= PETID_CARBUNCLE && PetID <= PETID_CAIT_SITH) || PetID == PETID_SIREN)
+            {
+                PPet->PMaster = PMaster;
+                PPet->m_PetID = PetID;
             }
         }
 

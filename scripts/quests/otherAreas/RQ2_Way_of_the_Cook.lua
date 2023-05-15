@@ -43,7 +43,7 @@ quest.sections =
                         player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
                         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
                     then
-                        return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
+                        return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.SLICE_OF_DHALMEL_MEAT) -- Way of the Cook starting event.
                     else
                         return quest:event(75) -- Default dialog after completing previous quest.
                     end
@@ -88,7 +88,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.SLICE_OF_DHALMEL_MEAT, xi.items.BEEHIVE_CHIP }) then
                         daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
                         totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
 
@@ -98,7 +98,7 @@ quest.sections =
                             return quest:progressEvent(81) -- Quest completed late.
                         end
                     elseif
-                        npcUtil.tradeHasExactly(trade, { xi.items.DHALMEL_MEAT }) or
+                        npcUtil.tradeHasExactly(trade, { xi.items.SLICE_OF_DHALMEL_MEAT }) or
                         npcUtil.tradeHasExactly(trade, { xi.items.BEEHIVE_CHIP })
                     then
                         return quest:event(73) -- Incomplete trade.

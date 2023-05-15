@@ -26,30 +26,36 @@ Description:
 [8] Position player is sent to after event, if applicable
 --]]
 
-local chocoboInfo =
+xi.chocobo.zoneInfo =
 {
-    [xi.zone.AL_ZAHBI]                = { levelReq = 20, basePrice = 250, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = { 610, -24, 356, 128, 51 } },
-    [xi.zone.WAJAOM_WOODLANDS]        = { levelReq = 20, basePrice = 200, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.SOUTHERN_SAN_DORIA_S]    = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = { 94, -62, 266, 40, 81 } },
-    [xi.zone.JUGNER_FOREST_S]         = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
-    [xi.zone.BASTOK_MARKETS_S]        = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = { 380, 0, 147, 192, 88 } },
-    [xi.zone.PASHHOW_MARSHLANDS_S]    = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
-    [xi.zone.WINDURST_WATERS_S]       = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = { 320, -4, -46, 192, 95 } },
-    [xi.zone.MERIPHATAUD_MOUNTAINS_S] = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
-    [xi.zone.LA_THEINE_PLATEAU]       = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.KONSCHTAT_HIGHLANDS]     = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.EASTERN_ALTEPA_DESERT]   = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.TAHRONGI_CANYON]         = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.YHOATOR_JUNGLE]          = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
-    [xi.zone.SOUTHERN_SAN_DORIA]      = { levelReq = 15, basePrice = 100, addedPrice = 20, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -126, -62, 274, 101, 100 } },
-    [xi.zone.BASTOK_MINES]            = { levelReq = 15, basePrice = 100, addedPrice = 20, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { 580, 0, -305, 64, 107 } },
-    [xi.zone.WINDURST_WOODS]          = { levelReq = 15, basePrice = 100, addedPrice = 20, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -122, -4, -520, 0, 116 } },
-    [xi.zone.UPPER_JEUNO]             = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = { 486, 8, -160, 128, 105 } },
-    [xi.zone.LOWER_JEUNO]             = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = { 340, 24, 608, 112, 110 } },
-    [xi.zone.PORT_JEUNO]              = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = { -574, 2, 400, 0, 120 } },
-    [xi.zone.RABAO]                   = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.00, past = false, pos = { 420, 8, 360, 64, 125 } },
-    [xi.zone.KAZHAM]                  = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -240, 0, 528, 64, 123 } },
-    [xi.zone.NORG]                    = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.00, past = false, pos = { -456, 17, -348, 0, 123 } },
+    [xi.zone.SOUTHERN_SAN_DORIA]      = { levelReq = 15, basePrice = 100, addedPrice = 15, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -126, -62,  274, 101, xi.zone.WEST_RONFAURE         } },
+    [xi.zone.WINDURST_WOODS]          = { levelReq = 15, basePrice = 100, addedPrice = 15, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -122,  -4, -520,   0, xi.zone.EAST_SARUTABARUTA     } },
+    [xi.zone.BASTOK_MINES]            = { levelReq = 15, basePrice = 100, addedPrice = 15, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = {  580,   0, -305,  64, xi.zone.SOUTH_GUSTABERG       } },
+    [xi.zone.UPPER_JEUNO]             = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = {  486,   8, -160, 128, xi.zone.BATALLIA_DOWNS        } },
+    [xi.zone.LOWER_JEUNO]             = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = {  340,  24,  608, 112, xi.zone.ROLANBERRY_FIELDS     } },
+    [xi.zone.PORT_JEUNO]              = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = { -574,   2,  400,   0, xi.zone.SAUROMUGUE_CHAMPAIGN  } },
+
+    [xi.zone.RABAO]                   = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.00, past = false, pos = {  420,   8,  360,  64, xi.zone.WESTERN_ALTEPA_DESERT } },
+    [xi.zone.KAZHAM]                  = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.10, past = false, pos = { -240,   0,  528,  64, xi.zone.YUHTUNGA_JUNGLE       } },
+    [xi.zone.NORG]                    = { levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.00, past = false, pos = { -456,  17, -348,   0, xi.zone.YUHTUNGA_JUNGLE       } },
+
+    [xi.zone.YHOATOR_JUNGLE]          = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+    [xi.zone.EASTERN_ALTEPA_DESERT]   = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+
+    [xi.zone.LA_THEINE_PLATEAU]       = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+    [xi.zone.TAHRONGI_CANYON]         = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+    [xi.zone.KONSCHTAT_HIGHLANDS]     = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+
+    [xi.zone.AL_ZAHBI]                = { levelReq = 20, basePrice = 250, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = {  610, -24,  356, 128,  xi.zone.WAJAOM_WOODLANDS     } },
+    [xi.zone.WAJAOM_WOODLANDS]        = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil                                                     },
+
+    [xi.zone.SOUTHERN_SAN_DORIA_S]    = { levelReq = 15, basePrice = 150, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = {   94, -62,  266,  40,  xi.zone.EAST_RONFAURE_S      } },
+    [xi.zone.WINDURST_WATERS_S]       = { levelReq = 15, basePrice = 150, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = {  320,  -4,  -46, 192,  xi.zone.WEST_SARUTABARUTA_S  } },
+    [xi.zone.BASTOK_MARKETS_S]        = { levelReq = 15, basePrice = 150, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = {  380,   0,  147, 192,  xi.zone.NORTH_GUSTABERG_S    } },
+
+    [xi.zone.JUGNER_FOREST_S]         = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil                                                     },
+    [xi.zone.PASHHOW_MARSHLANDS_S]    = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil                                                     },
+    [xi.zone.MERIPHATAUD_MOUNTAINS_S] = { levelReq = 20, basePrice = 200, addedPrice = 15, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil                                                     },
 }
 
 -----------------------------------
@@ -70,13 +76,25 @@ local function updatePrice(zoneId, info, price)
     SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
 end
 
+local function clearPlayerVars(player)
+    player:setCharVar("[CHOCOBO]paid", 0)
+    player:setCharVar("[CHOCOBO]past", 0)
+    player:setCharVar("[CHOCOBO]price", 0)
+    player:setCharVar("[CHOCOBO]zone", 0)
+    player:setCharVar("Chocopass", 0)
+    player:setCharVar("ChocopassDuration", 0)
+    player:setCharVar("[CHOCOBO]X", 0)
+    player:setCharVar("[CHOCOBO]Y", 0)
+    player:setCharVar("[CHOCOBO]Z", 0)
+end
+
 -----------------------------------
 -- Public functions
 -----------------------------------
 
 xi.chocobo.initZone = function(zone)
     local zoneId = zone:getID()
-    local info = chocoboInfo[zoneId]
+    local info = xi.chocobo.zoneInfo[zoneId]
 
     if info then
         SetServerVariable("[CHOCOBO][" .. zoneId .. "]price", info.basePrice)
@@ -89,7 +107,7 @@ end
 xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
     local mLvl   = player:getMainLvl()
     local zoneId = player:getZoneID()
-    local info   = chocoboInfo[zoneId]
+    local info   = xi.chocobo.zoneInfo[zoneId]
 
     if info then
         if
@@ -97,8 +115,9 @@ xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
             mLvl >= info.levelReq and
             (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past)
         then
-            local price = getPrice(zoneId, info)
-            player:setLocalVar("[CHOCOBO]price", price)
+            local price = math.min(getPrice(zoneId, info), 1000)
+            player:setCharVar("[CHOCOBO]price", price)
+            player:setCharVar("[CHOCOBO]zone", zoneId)
 
             local currency = 0
             if info.past then
@@ -120,10 +139,12 @@ end
 
 xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
     local zoneId = player:getZoneID()
-    local info   = chocoboInfo[zoneId]
+    local info   = xi.chocobo.zoneInfo[zoneId]
 
-    if npcUtil.tradeHasExactly(trade, xi.items.FREE_CHOCOPASS) and
-    (zoneId == xi.zone.WINDURST_WOODS or zoneId == xi.zone.BASTOK_MINES or zoneId == xi.zone.SOUTHERN_SAN_DORIA) then -- Chocopass Fails for Non-Starter Cities
+    if
+        npcUtil.tradeHasExactly(trade, xi.items.FREE_CHOCOPASS) and
+        (zoneId == xi.zone.WINDURST_WOODS or zoneId == xi.zone.BASTOK_MINES or zoneId == xi.zone.SOUTHERN_SAN_DORIA)
+    then -- Chocopass Fails for Non-Starter Cities
         if info.past then -- Fails for Past Zones
             player:startEvent(eventFail)
         else
@@ -131,11 +152,14 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
             local price = 0
 
             player:tradeComplete()
-            player:setLocalVar("Chocopass", 1)
-            player:setLocalVar("ChocopassDuration", 120)
+            player:setCharVar("Chocopass", 1)
+            player:setCharVar("ChocopassDuration", 120)
+
             player:startEvent(eventSucceed, price, currency)
         end
-    elseif npcUtil.tradeHasExactly(trade, xi.items.CHOCOBO_TICKET) then -- Chocobo Ticket
+    elseif
+        npcUtil.tradeHasExactly(trade, xi.items.CHOCOBO_TICKET)
+    then -- Chocobo Ticket
         if info.past then -- Fails for Past Zones
             player:startEvent(eventFail)
         else
@@ -145,10 +169,10 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
             local duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
 
             if mLvl >= 20 and player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) then
-
                 player:tradeComplete()
-                player:setLocalVar("Chocopass", 1)
-                player:setLocalVar("ChocopassDuration", duration)
+                player:setCharVar("Chocopass", 1)
+                player:setCharVar("ChocopassDuration", duration)
+
                 player:startEvent(eventSucceed, price, currency)
             else
                 player:startEvent(eventFail) -- Fail Closed
@@ -162,13 +186,20 @@ end
 xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
     if csid == eventSucceed and option == 0 then
         local mLvl   = player:getMainLvl()
-        local zoneId = player:getZoneID()
-        local info   = chocoboInfo[zoneId]
-        local trade  = player:getLocalVar("Chocopass")
+        local zoneId = player:getCharVar("[CHOCOBO]zone")
+        local info   = xi.chocobo.zoneInfo[zoneId]
+        local trade  = player:getCharVar("Chocopass")
 
         if info then
+            if info.pos then
+                -- Store player coords in case of issue
+                player:setCharVar("[CHOCOBO]X", player:getXPos())
+                player:setCharVar("[CHOCOBO]Y", player:getYPos())
+                player:setCharVar("[CHOCOBO]Z", player:getZPos())
+            end
+
             if trade == 1 then
-                local duration = player:getLocalVar("ChocopassDuration")
+                local duration = player:getCharVar("ChocopassDuration")
 
                 player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
 
@@ -176,12 +207,8 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
                     player:setPos(unpack(info.pos))
                 end
 
-                player:setLocalVar("Chocopass", 0)
-                player:setLocalVar("ChocopassDuration", 0)
-
-            elseif trade ~=1 then
-                local price = player:getLocalVar("[CHOCOBO]price")
-                player:setLocalVar("[CHOCOBO]price", 0)
+            elseif trade ~= 1 then
+                local price = player:getCharVar("[CHOCOBO]price")
 
                 if
                     price and
@@ -189,8 +216,11 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
                     (not info.past and player:delGil(price))
                 then
                     if info.past then
+                        player:setCharVar("[CHOCOBO]past", 1)
                         player:delCurrency("allied_notes", price)
                     end
+
+                    player:setCharVar("[CHOCOBO]paid", 1)
 
                     updatePrice(zoneId, info, price)
 
@@ -203,6 +233,9 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
 
                     if info.pos then
                         player:setPos(unpack(info.pos))
+                    else
+                        player:setCharVar("[CHOCOBO]price", 0)
+                        player:setCharVar("[CHOCOBO]zone", 0)
                     end
                 else
                     printf("[warning] player %s reached succeed without enough currency in xi.chocobo.renterOnEventFinish", player:getName())
@@ -212,4 +245,68 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
             end
         end
     end
+end
+
+xi.chocobo.confirmRentalOnZone = function(player)
+    local currentZoneID = player:getZoneID()
+    local chocoboStartingZoneID = player:getCharVar("[CHOCOBO]zone")
+
+    -- If there's no chocobo zoning variable set, then exit the function
+    if not chocoboStartingZoneID then
+        return
+    end
+
+    local info = xi.chocobo.zoneInfo[chocoboStartingZoneID]
+
+    if
+        info and
+        info.pos and -- for zones that have a nil pos table, this is irrelevant
+        chocoboStartingZoneID == currentZoneID
+    then
+        -- Player was not zoned into the new zone correctly and dumped back to starting zone
+        -- Get previous coordinates, price, and past zone status
+        local xpos = player:getCharVar("[CHOCOBO]X")
+        local ypos = player:getCharVar("[CHOCOBO]Y")
+        local zpos = player:getCharVar("[CHOCOBO]Z")
+
+        -- Reset their previous position
+        player:setPos(xpos, ypos, zpos, 0)
+
+        -- Remove mounted status
+        player:delStatusEffect(xi.effect.MOUNTED)
+
+        -- This messaging must happen after zoning in and is called by the rental zones
+        -- to the xi.chocobo.confirmRentalAfterZoneIn function below
+    else
+        -- Everything is good -- Clear the unused variables
+        clearPlayerVars(player)
+    end
+
+    player:setCharVar("[CHOCOBO]X", 0)
+    player:setCharVar("[CHOCOBO]Y", 0)
+    player:setCharVar("[CHOCOBO]Z", 0)
+    player:setCharVar("[CHOCOBO]zone", 0)
+    player:setCharVar("ChocopassDuration", 0)
+end
+
+xi.chocobo.confirmRentalAfterZoneIn = function(player)
+    local past      = player:getCharVar("[CHOCOBO]past")
+    local cost      = player:getCharVar("[CHOCOBO]price")
+    local paid      = player:getCharVar("[CHOCOBO]paid")
+    local chocoPass = player:getCharVar("Chocopass")
+
+    if not paid then
+        return
+    elseif chocoPass == 1 then
+        npcUtil.giveItem(player, xi.items.FREE_CHOCOPASS)
+        player:PrintToPlayer(string.format("Error while zoning. Your position has been reset and ChocoPass refunded.", cost), xi.msg.channel.SYSTEM_3)
+    elseif past == 1 and paid == 1 then
+        npcUtil.giveCurrency(player, "allied_notes", cost or 0)
+        player:PrintToPlayer(string.format("Error while zoning. Your position has been reset and %s Allied Notes refunded.", cost), xi.msg.channel.SYSTEM_3)
+    elseif cost > 0 and paid == 1 then
+        npcUtil.giveCurrency(player, "gil", cost or 0)
+        player:PrintToPlayer(string.format("Error while zoning. Your position has been reset and %s Gil refunded.", cost), xi.msg.channel.SYSTEM_3)
+    end
+
+    clearPlayerVars(player)
 end

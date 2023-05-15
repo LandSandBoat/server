@@ -7,11 +7,13 @@ mixins =
     require("scripts/mixins/rage"),
     require("scripts/mixins/job_special")
 }
+require("scripts/globals/mobs")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    --xi.mob.nmTODPersistCache(mob:getZone(), mob:getID())
     mob:addMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.EVA, 400)
 end

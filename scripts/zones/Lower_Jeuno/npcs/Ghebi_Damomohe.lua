@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, xi.items.FLORID_STONE) and
         player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-        astralCovenantCD < os.time()
+        astralCovenantCD < VanadielTime()
     then
         player:startEvent(10047, 1782)
         player:confirmTrade()
@@ -31,6 +31,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, xi.items.TENSHODO_INVITE)
     then
         player:startEvent(108)
+        player:tradeComplete(false)
     end
 end
 

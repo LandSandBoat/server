@@ -16,13 +16,13 @@ entity.onTrigger = function(player, npc)
     local x = player:getXPos()
     local z = player:getZPos()
 
-    if x >= 1.51 and x <= 9.49 and z >= 273.1 and z <= 281 then
+    if x >= 4 and x <= 8 and z >= 276 and z <= 280 then
         if player:hasKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) then
             player:startEvent(401)
         else
             player:startEvent(264)
         end
-    else
+    elseif x >= 0 and x <= 3 and z >= 270 and z <= 275 then
         player:startEvent(395)
     end
 

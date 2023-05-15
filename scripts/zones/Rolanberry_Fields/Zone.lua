@@ -21,6 +21,9 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
+zoneObject.onZoneTick = function(zone)
+end
+
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 

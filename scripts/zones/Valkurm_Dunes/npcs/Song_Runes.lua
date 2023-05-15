@@ -34,14 +34,15 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 2 then
-        player:addGil(xi.settings.main.GIL_RATE * 3000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 3000)
-        player:addTitle(xi.title.WANDERING_MINSTREL)
         player:unlockJob(xi.job.BRD) -- Bard
         player:messageSpecial(ID.text.UNLOCK_BARD)  --You can now become a bard!
-        player:setCharVar("PathOfTheBard_Event", 0)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD)
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD, {
+            fameArea = xi.quest.fame_area.JEUNO,
+            fame = 30,
+            title = xi.title.WANDERING_MINSTREL,
+            gil = 3000,
+            var = "PathOfTheBard_Event"
+        })
     end
 end
 

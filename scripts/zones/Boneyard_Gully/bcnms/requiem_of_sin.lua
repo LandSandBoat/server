@@ -50,7 +50,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
     elseif csid == 32002 then
         -- Allow player to get new key item
-        player:setCharVar("CONQUEST_REQUIEM_OF_SIN", 0)
+        player:setCharVar("Quest[4][84]conquestRequiem", 0)
     end
 end
 

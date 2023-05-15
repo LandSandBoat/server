@@ -11,6 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 
@@ -72,8 +73,10 @@ entity.onEventFinish = function(player, csid, option)
         player:unlockJob(xi.job.NIN)
         player:messageSpecial(ID.text.UNLOCK_NINJA)
         player:setCharVar("AyameAndKaede_Event", 0)
-        player:addFame(xi.quest.fame_area.BASTOK, 30)
-        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE, {
+            fameArea = xi.quest.fame_area.BASTOK,
+            fame = 30,
+        })
     elseif csid == 262 then
         player:setCharVar("twentyInPirateYearsCS", 3)
     elseif csid == 264 then

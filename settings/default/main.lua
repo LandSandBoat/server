@@ -171,7 +171,7 @@ xi.settings.main =
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
     NM_LOTTERY_COOLDOWN = 1.0,
 
-	-- GARRISON SETTINGS
+    -- GARRISON SETTINGS
     ENABLE_GARRISON              = false,  -- If true, enables garrison functionality
     DEBUG_GARRISON               = false,  -- If true, garrison will print out debug messages in logs as well as players as smes.
     GARRISON_LOCKOUT             = 1800,   -- Time in seconds before a new garrison can be started (default: 1800)
@@ -274,4 +274,7 @@ xi.settings.main =
 
     -- NM Persistence
     NM_PERSISTENCE = 1, -- When set to 1, timed NM spawns will be persistent through server crashing
+
+    -- Prevents / Allows when a player tries to inject the begin synth packet before completing synth
+    PREVENT_SYNTHESIS_INJECTION = 1,
 }

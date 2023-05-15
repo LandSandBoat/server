@@ -31,7 +31,7 @@ entity.onMobFight = function(mob, target)
         local wynav = GetMobByID(i)
         if
             not wynav:isSpawned() and
-            utils.canUseAbility(mob) == true
+            mob:canUseAbilities()
         then
             local repopWynavs = wynav:getLocalVar("repop") -- see Wynav script
             if mob:getBattleTime() - repopWynavs > 10 then

@@ -124,6 +124,8 @@ namespace synthutils
                         return false;
                     }
                 }
+
+                PChar->m_charCrafting.lastSynthReq = (uint16)sql->GetUIntData(0);
                 return true;
             }
         }
@@ -254,15 +256,15 @@ namespace synthutils
                     hqtier = -1; // No tier
                     break;
                 }
-                else if (synthDiff > -11 && hqtier > 0) // 0-10 levels over recipe
+                else if (synthDiff <= 0 && synthDiff >= -10 && hqtier > 0) // 0-10 levels over recipe
                 {
                     hqtier = 0; // T0
                 }
-                else if (synthDiff > -31 && hqtier > 1) // 11-30 levels over recipe
+                else if (synthDiff <= -11 && synthDiff >= -30 && hqtier > 1) // 11-30 levels over recipe
                 {
                     hqtier = 1; // T1
                 }
-                else if (synthDiff > -51 && hqtier > 2) // 31-50 levels over recipe
+                else if (synthDiff <= -31 && synthDiff >= -50 && hqtier > 2) // 31-50 levels over recipe
                 {
                     hqtier = 2; // T2
                 }
@@ -307,6 +309,11 @@ namespace synthutils
                 //   "According to one of the Japanese wikis, it is said to decrease the minimum break rate from ~5% to 0.5%-2%."
                 success = std::clamp(success, 0.05, 0.99);
 
+                if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
+                {
+                    success = std::clamp(success, 0.05, 0.66); // Desynth should be 33% Break, 33% NQ, 33% HQ
+                }
+
                 if (random >= success) // Synthesis broke
                 {
                     // keep the skill, because of which the synthesis failed.
@@ -345,7 +352,7 @@ namespace synthutils
 
             if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
-                chance = 0.4 + (hqtier * 0.03);
+                chance = 0.50 + (hqtier * 0.03); // Half of successful desynths should be HQ.
             }
 
             // Using x/512 calculation for HQ success rate modifier
@@ -390,17 +397,17 @@ namespace synthutils
                 {
                     random = xirand::GetRandomNumber(1.);
 
-                    if (random < 0.375)
+                    if (random < 0.0366)
                     {
-                        result = SYNTHESIS_HQ;
+                        result = SYNTHESIS_HQ3;
                     }
-                    else if (random < 0.75)
+                    else if (random < 0.2752)
                     {
                         result = SYNTHESIS_HQ2;
                     }
                     else
                     {
-                        result = SYNTHESIS_HQ3;
+                        result = SYNTHESIS_HQ;
                     }
                 }
             }
@@ -498,6 +505,12 @@ namespace synthutils
             if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
             {
                 penalty += 1;
+                // Players will only skill up from desynths if player skill is within 3 levels
+                // of the craft's required level.
+                if (baseDiff > 3)
+                {
+                    skillUpChance = 0.0;
+                }
             }
 
             // No proof this is a thing. Until proven otherwise removing.
@@ -642,6 +655,7 @@ namespace synthutils
                     PChar->WorkingSkills.skill[skillID] += 0x20;
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
+                    luautils::OnPlayerCraftLevelUp(PChar, skillID);
                 }
 
                 charutils::SaveCharSkills(PChar, skillID);
@@ -835,6 +849,8 @@ namespace synthutils
             return 0;
         }
 
+        PChar->SetLocalVar("LastSynthRecipeID", PChar->CraftContainer->getItemID(9));
+
         // Reserve the items after we know we have the right recipe
         for (uint8 container_slotID = 0; container_slotID <= 8; ++container_slotID)
         {
@@ -913,36 +929,10 @@ namespace synthutils
             if (forced)
             {
                 PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);
-                m_synthResult = SYNTHESIS_FAIL;
+                m_synthResult                     = SYNTHESIS_FAIL;
+                PChar->CraftContainer->m_failType = CRAFT_SYNTHESIS_FULL_MATS_LOSS; // Forces crit break if you zone
                 doSynthFail(PChar);
                 return 0;
-            }
-
-            std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
-            if (animationDuration < 10s)
-            {
-                // Attempted cheating - Did not spend enough time doing the synth animation.
-                // Check whether the cheat type action requires us to actively block the cheating attempt
-                // Note: Due to technical reasons jail action also forces us to break the synth
-                // (player cannot be zoned while synth in progress).
-                bool shouldblock = anticheat::GetCheatPunitiveAction(anticheat::CheatID::CHEAT_ID_FASTSYNTH, nullptr, 0) &
-                                   (anticheat::CHEAT_ACTION_BLOCK | anticheat::CHEAT_ACTION_JAIL);
-                if (shouldblock)
-                {
-                    // Block the cheat by forcing the synth to fail
-                    PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);
-                    m_synthResult = SYNTHESIS_FAIL;
-                    doSynthFail(PChar);
-                }
-                // And report the incident (will possibly jail the player)
-                anticheat::ReportCheatIncident(PChar, anticheat::CheatID::CHEAT_ID_FASTSYNTH,
-                                               (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(animationDuration).count(),
-                                               "Player attempted to bypass synth animation by injecting synth done packet.");
-                if (shouldblock)
-                {
-                    // Blocking the cheat also means that the offender should not get any skillups
-                    return 0;
-                }
             }
         }
 

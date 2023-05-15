@@ -271,8 +271,8 @@ uint8 CStatusEffectContainer::GetLowestFreeSlot()
 
 bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
 {
-    EFFECT statusEffect = PStatusEffect->GetStatusID();
     // check for immunities first
+    EFFECT statusEffect = PStatusEffect->GetStatusID();
     switch (statusEffect)
     {
         case EFFECT_SLEEP:
@@ -1605,6 +1605,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
             {
                 StatusEffect->SetIcon(EFFECT_SLEEP);
             }
+
             if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
             {
                 m_POwner->PAI->Inactive(0ms, false);
@@ -1714,6 +1715,10 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
         if (!skipRemove && ((logout && PStatusEffect->GetFlag() & EFFECTFLAG_LOGOUT) || (!logout && PStatusEffect->GetFlag() & EFFECTFLAG_ON_ZONE)))
         {
             RemoveStatusEffect(PStatusEffect, true);
+            continue;
+        }
+        else if (PStatusEffect->GetStatusID() == EFFECT_LEVEL_SYNC) // There are a few status effects we should not persist.
+        {
             continue;
         }
 

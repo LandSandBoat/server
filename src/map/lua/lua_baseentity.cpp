@@ -157,6 +157,7 @@
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
 #include "utils/fellowutils.h"
+#include "utils/fishingcontest.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -588,6 +589,28 @@ void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
     {
         PChar->setVolatileCharVar(varName, value);
     }
+}
+
+/************************************************************************
+ *  Function: getAllLocalVars()
+ *  Purpose : Returns all variables assigned locally to an entity
+ *  Example :
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getAllLocalVars(std::string const& var) -> sol::table
+{
+    auto                          table     = lua.create_table();
+    std::map<std::string, uint32> localVars = m_PBaseEntity->GetAllLocalVars();
+
+    for (auto var : localVars)
+    {
+        auto subtable       = lua.create_table();
+        subtable["varname"] = var.first;
+        subtable["value"]   = var.second;
+        table.add(subtable);
+    }
+    return table;
 }
 
 /************************************************************************
@@ -2173,7 +2196,7 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self = false)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
@@ -2189,6 +2212,11 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
                                         new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+
+            if (self)
+            {
+                PChar->pushPacket(new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+            }
         }
     }
 }
@@ -2690,9 +2718,18 @@ void CLuaBaseEntity::warp()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->loc.boundary    = 0;
-    PChar->loc.p           = PChar->profile.home_point.p;
-    PChar->loc.destination = PChar->profile.home_point.destination;
+    if (jailutils::InPrison(PChar))
+    {
+        PChar->loc.boundary    = 0;
+        PChar->loc.p           = PChar->profile.jail_cell.p;
+        PChar->loc.destination = PChar->profile.jail_cell.destination;
+    }
+    else
+    {
+        PChar->loc.boundary    = 0;
+        PChar->loc.p           = PChar->profile.home_point.p;
+        PChar->loc.destination = PChar->profile.home_point.destination;
+    }
 
     PChar->status    = STATUS_TYPE::DISAPPEAR;
     PChar->animation = ANIMATION_NONE;
@@ -3134,6 +3171,28 @@ void CLuaBaseEntity::setHomePoint()
 }
 
 /************************************************************************
+ *  Function: setCustomHomePoint()
+ *  Purpose : Sets a PC's homepoint.
+ *  Example : player:setHomePoint(xi.teleport.type.HOMEPOINT)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setCustomHomePoint(float x, float y, float z, uint8 zone)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->profile.home_point.destination = PChar->getZone();
+
+    const char* fmtQuery = "UPDATE chars \
+                            SET home_zone = %u, home_rot = %u, home_x = %.3f, home_y = %.3f, home_z = %.3f \
+                            WHERE charid = %u;";
+
+    sql->Query(fmtQuery, zone, 0, x, y, z, PChar->id);
+}
+
+/************************************************************************
  *  Function: isCurrentHomepoint()
  *  Purpose : Checks to see if where the player is standing now is roughly its homepoint.
  *  Example : player:isCurrentHomePoint()
@@ -3160,6 +3219,34 @@ bool CLuaBaseEntity::isCurrentHomepoint()
 }
 
 /************************************************************************
+ *  Function: setJailCell()
+ *  Purpose : Sets a PC's jail cell coordinates.
+ *  Example : player:setJailCell(cellId)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setJailCell()
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->profile.jail_cell.p           = PChar->loc.p;
+    PChar->profile.jail_cell.destination = PChar->getZone();
+    PChar->setCharVar("[JAIL]cellSet", 1);
+
+    const char* fmtQuery = "UPDATE chars \
+                            SET jail_zone = %u, jail_rot = %u, jail_x = %.3f, jail_y = %.3f, jail_z = %.3f \
+                            WHERE charid = %u;";
+
+    sql->Query(fmtQuery, PChar->profile.jail_cell.destination, PChar->profile.jail_cell.p.rotation, PChar->profile.jail_cell.p.x,
+               PChar->profile.jail_cell.p.y, PChar->profile.jail_cell.p.z, PChar->id);
+}
+
+/************************************************************************
  *  Function: resetPlayer()
  *  Purpose : Delete player's account session and send them to Lower Jeuno
  *  Example : player:resetPlayer()
@@ -3168,17 +3255,25 @@ bool CLuaBaseEntity::isCurrentHomepoint()
 
 void CLuaBaseEntity::resetPlayer(const char* charName)
 {
-    uint32 id = 0;
+    uint32 id   = 0;
+    uint32 zone = 0;
+    float  x    = 0;
+    float  y    = 0;
+    float  z    = 0;
 
     // char will not be logged in so get the id manually
     char escapedCharName[16 * 2 + 1];
     sql->EscapeString(escapedCharName, charName);
-    const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
+    const char* Query = "SELECT * FROM chars WHERE charname = '%s';";
     int32       ret   = sql->Query(Query, escapedCharName);
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        id = sql->GetIntData(0);
+        id   = sql->GetUIntData(0);
+        zone = sql->GetUIntData(12);
+        x    = sql->GetFloatData(14);
+        y    = sql->GetFloatData(15);
+        z    = sql->GetFloatData(16);
     }
 
     // could not get player from database
@@ -3206,14 +3301,14 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
             "WHERE charid = %u;";
 
     sql->Query(Query,
-               245,     // lower jeuno
-               122,     // prev zone
-               86,      // rotation
-               33.464f, // x
-               -5.000f, // y
-               69.162f, // z
-               0,       // boundary,
-               0,       // moghouse,
+               zone, // lower jeuno
+               122,  // prev zone
+               86,   // rotation
+               x,    // x
+               y,    // y
+               z,    // z
+               0,    // boundary,
+               0,    // moghouse,
                id);
 
     ShowDebug("Player reset was successful.");
@@ -4018,6 +4113,29 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
         }
     }
     return false;
+}
+
+/************************************************************************
+ *  Function: getLinkshellName()
+ *  Purpose : Returns the string name of the player's linkshell1
+ *  Example : player:getLinkshellName()
+ ************************************************************************/
+
+std::string CLuaBaseEntity::getLinkshellName()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto PChar                         = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto PLink                         = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
+    char signature[DecodeStringLength] = {};
+
+    if (PLink)
+    {
+        DecodeStringLinkshell(PLink->getSignature(), signature);
+        return signature;
+    }
+
+    return "";
 }
 
 auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
@@ -5299,9 +5417,15 @@ bool CLuaBaseEntity::isJailed()
 
 void CLuaBaseEntity::jail()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
 
-    jailutils::Add(static_cast<CCharEntity*>(m_PBaseEntity));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    jailutils::Add(PChar);
+    PChar->StatusEffectContainer->KillAllStatusEffect();
 }
 
 /************************************************************************
@@ -5328,6 +5452,25 @@ bool CLuaBaseEntity::canUseMisc(uint16 misc)
 uint8 CLuaBaseEntity::getSpeed()
 {
     return m_PBaseEntity->speed;
+}
+
+/************************************************************************
+ *  Function: getAdjustedSpeed()
+ *  Purpose : Sets a player's speed or returns their current speed
+ *  Example : player:getAdjustedSpeed()
+ *  Notes   :
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getAdjustedSpeed()
+{
+    if (auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return PEntity->GetSpeed();
+    }
+    else
+    {
+        return m_PBaseEntity->speed;
+    }
 }
 
 /************************************************************************
@@ -6005,6 +6148,41 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
     {
         battleutils::AddTraits(PEntity, traits::GetTraits(jobID), level);
     }
+}
+
+/************************************************************************
+ *  Function: homepoint
+ *  Purpose : Auto homepoints character (on Death)
+ ************************************************************************/
+
+void CLuaBaseEntity::homepoint()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Entity is not a PC.");
+        return;
+    }
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    // remove weakness on homepoint
+    PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+    PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+
+    PChar->SetDeathTimestamp(0);
+
+    PChar->health.hp = PChar->GetMaxHP();
+    PChar->health.mp = PChar->GetMaxMP();
+
+    PChar->status    = STATUS_TYPE::DISAPPEAR;
+    PChar->animation = ANIMATION_NONE;
+    PChar->updatemask |= UPDATE_HP;
+
+    PChar->loc.boundary    = 0;
+    PChar->loc.p           = PChar->profile.home_point.p;
+    PChar->loc.destination = PChar->profile.home_point.destination;
+
+    PChar->clearPacketList();
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 /************************************************************************
@@ -7060,16 +7238,7 @@ void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    // Update Unity Trust, assumes that values have been cleared
-    if (PChar->profile.unity_leader > 0)
-    {
-        uint8 oldUnity = PChar->profile.unity_leader - 1;
-        charutils::delSpell(PChar, ROE_TRUST_ID[oldUnity]);
-        charutils::DeleteSpell(PChar, ROE_TRUST_ID[oldUnity]);
-    }
-
     charutils::SetUnityLeader(PChar, leaderID);
-    roeutils::UpdateUnityTrust(PChar);
 }
 
 /************************************************************************
@@ -10739,7 +10908,10 @@ void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damag
 
 void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 {
-    XI_DEBUG_BREAK_IF(amount < 0);
+    if (m_PBaseEntity == nullptr || amount < 0)
+    {
+        return;
+    }
 
     // clang-format off
     auto* PCurer = [&]() -> CBattleEntity*
@@ -11943,14 +12115,14 @@ uint16 CLuaBaseEntity::getRATT()
 
 /************************************************************************
  *  Function: getILvlMacc()
- *  Purpose : Returns the Magic Accuracy value of an equipped Main Weapon
+ *  Purpose : Returns the Magic Accuracy value of an equipped slotted weapon
  *  Example : caster:getILvlMacc()
  *  Notes   : Value of m_iLvlMacc (private member of CItemWeapon)
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getILvlMacc()
+uint16 CLuaBaseEntity::getILvlMacc(SLOTTYPE slot)
 {
-    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[slot]))
     {
         return weapon->getILvlMacc();
     }
@@ -12280,7 +12452,7 @@ uint16 CLuaBaseEntity::getWeaponDmg()
 
 uint16 CLuaBaseEntity::getMobWeaponDmg(uint8 slot)
 {
-    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_FELLOW));
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_FELLOW || m_PBaseEntity->objtype == TYPE_PET));
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
@@ -14000,6 +14172,27 @@ bool CLuaBaseEntity::isSpawned()
 }
 
 /************************************************************************
+ *  Function: canSpawn()
+ *  Purpose : Returns true if a Mob is set to m_AllowRespawn = true
+ *  Example : if mob:canSpawn() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::canSpawn()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    CMobEntity* PMobEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PMobEntity)
+    {
+        return PMobEntity->PAI->IsSpawned();
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: getSpawnPos()
  *  Purpose : Returns the spawn position for a Mob in a Lua table
  *  Example : local spawn = mob:getSpawnPos()
@@ -14084,6 +14277,10 @@ void CLuaBaseEntity::setRespawnTime(uint32 seconds)
     if (PMob->PAI->IsCurrentState<CRespawnState>())
     {
         PMob->PAI->GetCurrentState()->ResetEntryTime();
+    }
+    else if (!PMob->PAI->IsSpawned())
+    {
+        PMob->PAI->Internal_Respawn(std::chrono::milliseconds(PMob->m_RespawnTime));
     }
 
     PMob->m_AllowRespawn = true;
@@ -15754,6 +15951,69 @@ bool CLuaBaseEntity::clearSession(std::string const& playerName)
 }
 
 /************************************************************************
+ *  Function: spawnType()
+ *  Purpose : Sets the spawn type of a mob.
+ *  Example : mob:setSpawnType(xi.spawnType.AT_NIGHT)
+ ************************************************************************/
+void CLuaBaseEntity::setSpawnType(SPAWNTYPE spawnType)
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        return;
+    }
+
+    CMobEntity* PMob  = static_cast<CMobEntity*>(m_PBaseEntity);
+    PMob->m_SpawnType = spawnType;
+}
+
+/************************************************************************
+ *  Function: getWorldPassRedeemTime()
+ *  Purpose : Returns the time when the character was created with a
+ *            world pass.
+ *  Example : player:getWorldPassRedeemTime()
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getWorldPassRedeemTime()
+{
+    const char* wpQuery = "SELECT UNIX_TIMESTAMP(redeemtime) FROM world_pass WHERE rafid = '%u';";
+
+    uint64 timeStamp = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
+    uint64 ret       = sql->Query(wpQuery, m_PBaseEntity->id);
+    uint64 rafTime   = 0;
+
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        sql->NextRow();
+        rafTime = sql->GetUInt64Data(0);
+        return (((timeStamp - rafTime) / 3600) / 24);
+    }
+
+    return rafTime;
+}
+
+/************************************************************************
+ *  Function: getWorldPassRedeemTime()
+ *  Purpose : Returns the time when the character was created with a
+ *            world pass.
+ *  Example : player:getWorldPassRedeemTime()
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getWorldpassId(uint32 targid)
+{
+    const char* wpQuery = "SELECT worldpass FROM world_pass WHERE purchaseid = '%u' AND rafid = '%u';";
+
+    uint32 ret = sql->Query(wpQuery, m_PBaseEntity->id, targid);
+
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        sql->NextRow();
+        return sql->GetUIntData(0);
+    }
+
+    return 0;
+}
+
+/************************************************************************
 *  Function: sendNpcEmote()
 *  Purpose : Makes an NPC entity emit an emote.
 *  Example : taru:sendEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
@@ -15793,6 +16053,42 @@ void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const
         PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE,
                                    new CCharEmotionPacket(PNpc, EntityId, EntityIndex, emoteID, emoteMode, extra));
     }
+}
+
+void CLuaBaseEntity::setDigTable()
+{
+    if (m_PBaseEntity != nullptr && m_PBaseEntity->objtype == TYPE_PC)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (PChar != nullptr)
+        {
+            PChar->m_charDigging.lastDigX = PChar->loc.p.x;
+            PChar->m_charDigging.lastDigY = PChar->loc.p.y;
+            PChar->m_charDigging.lastDigZ = PChar->loc.p.z;
+            PChar->m_charDigging.lastDigT = time(NULL);
+        }
+    }
+}
+
+auto CLuaBaseEntity::getDigTable() -> sol::table
+{
+    auto pos = lua.create_table();
+
+    if (m_PBaseEntity != nullptr && m_PBaseEntity->objtype == TYPE_PC)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (PChar != nullptr)
+        {
+            pos["x"]       = PChar->m_charDigging.lastDigX;
+            pos["y"]       = PChar->m_charDigging.lastDigY;
+            pos["z"]       = PChar->m_charDigging.lastDigZ;
+            pos["lastDig"] = static_cast<uint64>(PChar->m_charDigging.lastDigT);
+        }
+    }
+
+    return pos;
 }
 
 void CLuaBaseEntity::clearActionQueue()
@@ -15883,6 +16179,169 @@ uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
     return 0;
 }
 
+void CLuaBaseEntity::submitContestFish(uint32 score)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        fishingcontest::SubmitFish(PChar, score);
+    }
+}
+
+void CLuaBaseEntity::withdrawContestFish()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        fishingcontest::WithdrawFish(PChar);
+    }
+}
+
+bool CLuaBaseEntity::hasContestRewardPending(uint16 contestId)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return fishingcontest::HasRewardPending(PChar, contestId);
+    }
+
+    return false;
+}
+
+auto CLuaBaseEntity::getAvailableContestRewards(uint16 contestId) -> sol::table
+{
+    if (m_PBaseEntity && m_PBaseEntity->objtype == TYPE_PC)
+    {
+        std::string Query = "SELECT e.contestid, e.contestrank, COALESCE(("
+                            "    SELECT COUNT(*) "
+                            "    FROM fishing_contest_entries "
+                            "    WHERE contestid   = e.contestid "
+                            "    AND   contestrank = e.contestrank), 1) AS share "
+                            "FROM fishing_contest_entries e "
+                            "LEFT JOIN fishing_contest_rewards r ON e.name = r.name AND e.contestid = r.contestid "
+                            "LEFT JOIN fishing_contest c ON c.contestid = e.contestid "
+                            "WHERE e.name = '%s' "
+                            "AND e.contestrank BETWEEN 1 AND 20 "
+                            "AND c.status >= 4 "
+                            "AND r.time IS NULL ";
+        if (contestId)
+        {
+            Query.append("AND e.contestid = %u");
+        }
+
+        int32 ret = sql->Query(Query.c_str(), m_PBaseEntity->name, contestId);
+
+        if (ret != SQL_ERROR && sql->NumRows() > 0)
+        {
+            auto rewardsTable = lua.create_table();
+
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                auto reward = lua.create_table();
+
+                reward["id"]    = sql->GetUIntData(0);
+                reward["rank"]  = sql->GetUIntData(1);
+                reward["share"] = sql->GetUIntData(2);
+
+                rewardsTable.add(reward);
+            }
+
+            return rewardsTable;
+        }
+    }
+
+    return sol::lua_nil;
+}
+
+void CLuaBaseEntity::giveContestReward(uint16 contestId)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return fishingcontest::GiveContestReward(PChar, contestId);
+    }
+}
+
+uint32 CLuaBaseEntity::getContestScore()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (fish_ranking_entry* entry = fishingcontest::GetPlayerEntry(PChar))
+        {
+            return entry->score;
+        }
+    }
+
+    return 0;
+}
+
+uint8 CLuaBaseEntity::getContestRank()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (fish_ranking_entry* entry = fishingcontest::GetPlayerEntry(PChar))
+        {
+            return entry->contestrank;
+        }
+    }
+
+    return 0;
+}
+
+auto CLuaBaseEntity::getAwardHistory() -> sol::table
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        sol::table table = lua.create_table();
+        table[1]         = 0;
+        table[2]         = 0;
+        table[3]         = 0;
+        table[4]         = 0;
+
+        const char* Query = "SELECT \
+                         CASE \
+                         WHEN contestrank = 1 then 1 \
+                         WHEN contestrank = 2 then 2 \
+                         WHEN contestrank = 3 then 3 \
+                         WHEN contestrank between 4 and 10 then 4 \
+                         END AS `awardLevel`, \
+                         COUNT(*) AS `count` \
+                         FROM `fishing_contest_entries` \
+                         WHERE name = '%s' \
+                         GROUP BY `awardLevel`;";
+
+        int32 ret = sql->Query(Query, m_PBaseEntity->name.c_str());
+        if (!(ret == SQL_ERROR) && sql->NumRows() > 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                table[sql->GetUIntData(0)] = sql->GetUIntData(1);
+            }
+        }
+        else
+        {
+            ShowError("Unable to retrieve fishing contest award history.");
+        }
+
+        return table;
+    }
+    return sol::lua_nil;
+}
+
+/************************************************************************
+ *  Function: faceTarget()
+ *  Purpose : forces NPC to face a target
+ ************************************************************************/
+
+void CLuaBaseEntity::faceTarget(CLuaBaseEntity* npc)
+{
+    CBaseEntity* PBaseEntity = npc->GetBaseEntity();
+
+    if (PBaseEntity->objtype == TYPE_NPC)
+    {
+        PBaseEntity->m_TargID       = m_PBaseEntity->targid;
+        PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
+
+        PBaseEntity->loc.zone->UpdateEntityPacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
+    }
+}
+
 void CLuaBaseEntity::setWallhackAllowed(bool allowed)
 {
     TracyZoneScoped;
@@ -15900,6 +16359,7 @@ void CLuaBaseEntity::Register()
 
     // Messaging System
     SOL_REGISTER("showText", CLuaBaseEntity::showText);
+    SOL_REGISTER("faceTarget", CLuaBaseEntity::faceTarget);
     SOL_REGISTER("messageText", CLuaBaseEntity::messageText);
     SOL_REGISTER("PrintToPlayer", CLuaBaseEntity::PrintToPlayer);
     SOL_REGISTER("PrintToArea", CLuaBaseEntity::PrintToArea);
@@ -15918,6 +16378,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
     SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
+    SOL_REGISTER("getAllLocalVars", CLuaBaseEntity::getAllLocalVars);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
@@ -16037,7 +16498,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setTeleportMenu", CLuaBaseEntity::setTeleportMenu);
     SOL_REGISTER("getTeleportMenu", CLuaBaseEntity::getTeleportMenu);
     SOL_REGISTER("setHomePoint", CLuaBaseEntity::setHomePoint);
+    SOL_REGISTER("setCustomHomePoint", CLuaBaseEntity::setCustomHomePoint);
     SOL_REGISTER("isCurrentHomepoint", CLuaBaseEntity::isCurrentHomepoint);
+    SOL_REGISTER("setJailCell", CLuaBaseEntity::setJailCell);
     SOL_REGISTER("resetPlayer", CLuaBaseEntity::resetPlayer);
 
     SOL_REGISTER("goToEntity", CLuaBaseEntity::goToEntity);
@@ -16062,6 +16525,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentGPItem", CLuaBaseEntity::getCurrentGPItem);
     SOL_REGISTER("breakLinkshell", CLuaBaseEntity::breakLinkshell);
     SOL_REGISTER("addLinkpearl", CLuaBaseEntity::addLinkpearl);
+    SOL_REGISTER("getLinkshellName", CLuaBaseEntity::getLinkshellName);
 
     SOL_REGISTER("addSoulPlate", CLuaBaseEntity::addSoulPlate);
 
@@ -16143,6 +16607,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canUseMisc", CLuaBaseEntity::canUseMisc);
 
     SOL_REGISTER("getSpeed", CLuaBaseEntity::getSpeed);
+    SOL_REGISTER("getAdjustedSpeed", CLuaBaseEntity::getAdjustedSpeed);
     SOL_REGISTER("setSpeed", CLuaBaseEntity::setSpeed);
 
     SOL_REGISTER("getPlaytime", CLuaBaseEntity::getPlaytime);
@@ -16617,6 +17082,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("spawn", CLuaBaseEntity::spawn);
     SOL_REGISTER("isSpawned", CLuaBaseEntity::isSpawned);
+    SOL_REGISTER("canSpawn", CLuaBaseEntity::canSpawn);
     SOL_REGISTER("getSpawnPos", CLuaBaseEntity::getSpawnPos);
     SOL_REGISTER("setSpawn", CLuaBaseEntity::setSpawn);
     SOL_REGISTER("getRespawnTime", CLuaBaseEntity::getRespawnTime);
@@ -16710,15 +17176,22 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
+    SOL_REGISTER("setSpawnType", CLuaBaseEntity::setSpawnType);
     SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
     SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
     SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
 
+    SOL_REGISTER("getWorldPassRedeemTime", CLuaBaseEntity::getWorldPassRedeemTime);
+    SOL_REGISTER("getWorldpassId", CLuaBaseEntity::getWorldpassId);
+    SOL_REGISTER("setDigTable", CLuaBaseEntity::setDigTable);
+    SOL_REGISTER("getDigTable", CLuaBaseEntity::getDigTable);
+
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
     SOL_REGISTER("deleteRaisedChocobo", CLuaBaseEntity::deleteRaisedChocobo);
+    SOL_REGISTER("homepoint", CLuaBaseEntity::homepoint);
 
     // Fishing Data
     SOL_REGISTER("getFishingStats", CLuaBaseEntity::getFishingStats);
@@ -16727,6 +17200,16 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasCaughtFish", CLuaBaseEntity::hasCaughtFish);
     SOL_REGISTER("clearFishCaught", CLuaBaseEntity::clearFishCaught);
     SOL_REGISTER("clearFishHistory", CLuaBaseEntity::clearFishHistory);
+
+    // Fishing Contest
+    SOL_REGISTER("submitContestFish", CLuaBaseEntity::submitContestFish);
+    SOL_REGISTER("getContestScore", CLuaBaseEntity::getContestScore);
+    SOL_REGISTER("getContestRank", CLuaBaseEntity::getContestRank);
+    SOL_REGISTER("withdrawContestFish", CLuaBaseEntity::withdrawContestFish);
+    SOL_REGISTER("getAwardHistory", CLuaBaseEntity::getAwardHistory);
+    SOL_REGISTER("getAvailableContestRewards", CLuaBaseEntity::getAvailableContestRewards);
+    SOL_REGISTER("hasContestRewardPending", CLuaBaseEntity::hasContestRewardPending);
+    SOL_REGISTER("giveContestReward", CLuaBaseEntity::giveContestReward);
 
     // Mannequins
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
