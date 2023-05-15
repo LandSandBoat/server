@@ -19,7 +19,6 @@ def needs_to_run(cur):
 
 
 def migrate(cur, db):
-    efile = open("migration_errors.log", "a")
     cur.execute("SELECT charid FROM chars WHERE LENGTH(missions) < 1050;")
     rows = cur.fetchall()
     for charid in rows:
@@ -43,10 +42,9 @@ def migrate(cur, db):
                 except mariadb.Error as err:
                     print("Something went wrong: {}".format(err))
             except:
-                efile.write(
+                print(
                     "[mission_blob_extra] Error reading missions in chars table for charid: "
                     + str(charid)
                     + "\n"
                 )
     db.commit()
-    efile.close()
