@@ -192,7 +192,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
         end
 
-        chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        -- Do not adjust the chance of effects that are guaranteed (like god winds)
+        if chance ~= 100 then
+            chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        end
     end
 
     --------------------------------------
