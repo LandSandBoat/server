@@ -1106,7 +1106,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                     if type(entry) == 'table' then
                         current = current + entry.droprate
 
-                        if current > roll then
+                        if current >= roll then
                             if entry.itemid == 0 then
                                 break
                             end
