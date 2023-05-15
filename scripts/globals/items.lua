@@ -409,6 +409,7 @@ xi.items =
     REGAL_DIE                       = 1092,
     ANTIQUE_COIN                    = 1093,
     NAIL_PULLER                     = 1094,
+    WELL_WEIGHT                     = 1095,
     TAVNAZIA_PASS                   = 1096,
     CANTEEN_OF_YAGUDO_HOLY_WATER    = 1097,
     TAVNAZIA_BELL                   = 1098,

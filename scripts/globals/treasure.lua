@@ -1130,7 +1130,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getCharVar("UnderOathCS") == 3
+                            return player:getCharVar("Quest[0][92]Prog") == 3
                         end,
 
                         code = function(player)
