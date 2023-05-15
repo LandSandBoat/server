@@ -191,12 +191,12 @@ namespace grade
         return StatScale[rank][scale];
     }
 
-    float GetMobHPScale(uint8 rank, uint8 scale)
+    uint8 GetMobHPScale(uint8 rank, uint8 scale)
     {
         return MobHPScale[rank][scale];
     }
 
-    float GetMobRBI(uint8 rank, uint8 scale)
+    uint8 GetMobRBI(uint8 rank, uint8 scale)
     {
         return MobRBI[rank][scale];
     }
