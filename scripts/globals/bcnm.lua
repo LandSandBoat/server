@@ -701,12 +701,12 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
-            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+            return player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [256] = function() -- ZM8: Return to Delkfutt's Tower
@@ -772,7 +772,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+                not player:hasKeyItem(xi.ki.EYE_OF_GALES)
         end,
 
         [420] = function() -- ASA4: Sugar-coated Directive
@@ -794,7 +794,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+                not player:hasKeyItem(xi.ki.EYE_OF_STORMS)
         end,
 
         [452] = function() -- ASA4: Sugar-coated Directive
@@ -816,7 +816,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+                not player:hasKeyItem(xi.ki.EYE_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -870,7 +870,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+                not player:hasKeyItem(xi.ki.EYE_OF_FLAMES)
         end,
 
         [547] = function() -- ASA4: Sugar-coated Directive
@@ -892,7 +892,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+                not player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
         end,
 
         [580] = function() -- ASA4: Sugar-coated Directive
@@ -910,7 +910,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+                not player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
@@ -1153,12 +1153,12 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
-            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+            return player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [224] = function() -- Quest: The Moonlit Path
