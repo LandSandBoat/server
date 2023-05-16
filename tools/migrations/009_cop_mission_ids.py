@@ -74,43 +74,42 @@ def needs_to_run(cur):
 
 
 def migrate(cur, db):
-    efile = open("migration_errors.log", "a")
-    cur.execute("SELECT charid FROM chars WHERE LENGTH(missions) = 1050;")
-    rows = cur.fetchall()
-    for charid in rows:
-        charid = charid[0]
-        cur.execute("SELECT missions FROM chars WHERE charid = {}".format(charid))
-        row = cur.fetchone()
-        if row:
-            try:
-                row = bytearray(row[0])
-                currentMissionID = int.from_bytes(row[420:422], byteorder="little")
-                if currentMissionID not in mission_map:
-                    if currentMissionID > 100:
-                        continue
-                    efile.write(
-                        "[cop_mission_ids] Invalid CoP mission for charid: "
-                        + str(charid)
-                        + ", Mission ID: "
-                        + str(currentMissionID)
-                        + "."
-                    )
-                    continue
-                newMissionID = mission_map[currentMissionID]
-                row[420:422] = newMissionID.to_bytes(2, "little")
+    with open("migration_errors.log", "a") as efile:
+        cur.execute("SELECT charid FROM chars WHERE LENGTH(missions) = 1050;")
+        rows = cur.fetchall()
+        for charid in rows:
+            charid = charid[0]
+            cur.execute("SELECT missions FROM chars WHERE charid = {}".format(charid))
+            row = cur.fetchone()
+            if row:
                 try:
-                    cur.execute(
-                        "UPDATE chars SET missions = %s WHERE charid = %s",
-                        (bytes(row), charid),
+                    row = bytearray(row[0])
+                    currentMissionID = int.from_bytes(row[420:422], byteorder="little")
+                    if currentMissionID not in mission_map:
+                        if currentMissionID > 100:
+                            continue
+                        efile.write(
+                            "[cop_mission_ids] Invalid CoP mission for charid: "
+                            + str(charid)
+                            + ", Mission ID: "
+                            + str(currentMissionID)
+                            + "."
+                        )
+                        continue
+                    newMissionID = mission_map[currentMissionID]
+                    row[420:422] = newMissionID.to_bytes(2, "little")
+                    try:
+                        cur.execute(
+                            "UPDATE chars SET missions = %s WHERE charid = %s",
+                            (bytes(row), charid),
+                        )
+                        db.commit()
+                    except mariadb.Error as err:
+                        print("Something went wrong: {}".format(err))
+                except:
+                    efile.write(
+                        "[cop_mission_ids] Error reading missions in chars table for charid: "
+                        + str(charid)
+                        + "\n"
                     )
-                    db.commit()
-                except mariadb.Error as err:
-                    print("Something went wrong: {}".format(err))
-            except:
-                efile.write(
-                    "[cop_mission_ids] Error reading missions in chars table for charid: "
-                    + str(charid)
-                    + "\n"
-                )
-    db.commit()
-    efile.close()
+        db.commit()
