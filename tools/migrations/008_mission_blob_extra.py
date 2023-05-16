@@ -19,34 +19,33 @@ def needs_to_run(cur):
 
 
 def migrate(cur, db):
-    efile = open("migration_errors.log", "a")
-    cur.execute("SELECT charid FROM chars WHERE LENGTH(missions) < 1050;")
-    rows = cur.fetchall()
-    for charid in rows:
-        charid = charid[0]
-        cur.execute("SELECT missions FROM chars WHERE charid = {}".format(charid))
-        row = cur.fetchone()
-        if row:
-            try:
-                row = bytearray(row[0])
-                logEx = bytearray(b"\x00\x00\x00\x00")
-                pos = 2
-                for _ in range(1, 16):
-                    row[pos:pos] = logEx
-                    pos += 70
+    with open("migration_errors.log", "a") as efile:
+        cur.execute("SELECT charid FROM chars WHERE LENGTH(missions) < 1050;")
+        rows = cur.fetchall()
+        for charid in rows:
+            charid = charid[0]
+            cur.execute("SELECT missions FROM chars WHERE charid = {}".format(charid))
+            row = cur.fetchone()
+            if row:
                 try:
-                    cur.execute(
-                        "UPDATE chars SET missions = %s WHERE charid = %s",
-                        (bytes(row), charid),
+                    row = bytearray(row[0])
+                    logEx = bytearray(b"\x00\x00\x00\x00")
+                    pos = 2
+                    for _ in range(1, 16):
+                        row[pos:pos] = logEx
+                        pos += 70
+                    try:
+                        cur.execute(
+                            "UPDATE chars SET missions = %s WHERE charid = %s",
+                            (bytes(row), charid),
+                        )
+                        db.commit()
+                    except mariadb.Error as err:
+                        print("Something went wrong: {}".format(err))
+                except:
+                    efile.write(
+                        "[mission_blob_extra] Error reading missions in chars table for charid: "
+                        + str(charid)
+                        + "\n"
                     )
-                    db.commit()
-                except mariadb.Error as err:
-                    print("Something went wrong: {}".format(err))
-            except:
-                efile.write(
-                    "[mission_blob_extra] Error reading missions in chars table for charid: "
-                    + str(charid)
-                    + "\n"
-                )
-    db.commit()
-    efile.close()
+        db.commit()
