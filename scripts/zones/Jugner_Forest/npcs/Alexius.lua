@@ -13,20 +13,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("sinHunting") == 3 then
-        player:startEvent(10)
-    else
-        player:showText(npc, ID.text.ALEXIUS_DEFAULT)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 10 then
-        player:setCharVar("sinHunting", 4)
-    end
 end
 
 return entity

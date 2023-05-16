@@ -12,21 +12,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getCharVar("unbridledPassion") == 4 and
-        not GetMobByID(ID.mob.KOENIGSTIGER):isSpawned()
-    then
-        player:startEvent(8)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 8 then
-        SpawnMob(ID.mob.KOENIGSTIGER):updateClaim(player)
-    end
 end
 
 return entity
