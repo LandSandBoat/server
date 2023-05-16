@@ -468,7 +468,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         return false;
     }
 
-    auto m_turnLength = xirand::GetRandomNumber((int)maxTurns) + 1;
+    auto m_turnLength = static_cast<uint8>(xirand::GetRandomNumber<uint32>(maxTurns)) + 1;
 
     // Seemingly arbitrary value to pass for maxRadius, all values seem to give similar results, likely due to navmesh polygons being too dense?
     float      maxRadiusForPolyQuery = maxRadius / 10.f;
