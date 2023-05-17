@@ -62,7 +62,7 @@ REPLACE INTO `mob_droplist` VALUES (2907,0,0,1000,1455,240); -- Byne Bill 1
 REPLACE INTO `mob_droplist` VALUES (2907,0,0,1000,1455,150); -- Byne Bill 2
 REPLACE INTO `mob_droplist` VALUES (2907,0,0,1000,1455,100); -- Byne Bill 3
 REPLACE INTO `mob_droplist` VALUES (2907,2,0,1000,1455,0); -- Byne Bill (Steal)
-REPLACE INTO `mob_droplist` VALUES (2907,0,0,1000,1456,50); -- 1 Hbyne
+REPLACE INTO `mob_droplist` VALUES (2907,0,0,1000,1456,@VRARE); -- 1 Hbyne
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2558"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2558,1,1,50,15133,91); -- MNK Feet
@@ -707,9 +707,9 @@ REPLACE INTO `mob_droplist` VALUES (3220,2,0,1000,1452,0); -- Bronzepiece (Steal
 DELETE FROM `mob_droplist` WHERE dropid = "730"; -- Dynamis Lord
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,13658,@COMMON); -- Shadow Mantle
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,14646,@UNCOMMON); -- Shadow Ring
-REPLACE INTO `mob_droplist` VALUES (730,1,1,1000,1456,@VCOMMON); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (730,1,1,1000,1450,@VCOMMON); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (730,1,1,1000,1453,@VCOMMON); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,4249,@VCOMMON); -- Schultz's Strategems
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "521"; -- Count Zaebos
@@ -893,9 +893,9 @@ REPLACE INTO `mob_droplist` VALUES (2559,0,0,1000,1452,@ALWAYS); -- Strategems
 -- ---------------------------------
 --           Megaboss            --
 DELETE FROM `mob_droplist` WHERE dropid = "472"; -- Cirrate Christelle
-REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1456,19); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1450,19); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1453,19); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1456,@VRARE); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1450,@VRARE); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (472,0,0,1000,1453,@VRARE); -- Montiont Silverpiece
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "2910"; -- NMs
 REPLACE INTO `mob_droplist` VALUES (2910,1,1,100,2033,66);  -- WAR -1 Head
