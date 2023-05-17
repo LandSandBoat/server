@@ -25,9 +25,11 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/taskmgr.h"
+#include "common/xirand.h"
 
 #include <list>
 #include <map>
+#include <set>
 #include <unordered_map>
 
 #include "battlefield_handler.h"
@@ -460,10 +462,10 @@ enum ZONEMISC
 
 struct zoneMusic_t
 {
-    uint8 m_songDay;   // music (daytime)
-    uint8 m_songNight; // music (nighttime)
-    uint8 m_bSongS;    // battle music (solo)
-    uint8 m_bSongM;    // battle music (party)
+    uint16 m_songDay;   // music (daytime)
+    uint16 m_songNight; // music (nighttime)
+    uint16 m_bSongS;    // battle music (solo)
+    uint16 m_bSongM;    // battle music (party)
 };
 
 struct zoneWeather_t
@@ -493,6 +495,111 @@ struct zoneLine_t
     uint16     m_toZone;
     position_t m_toPos;
     ZONE_TYPE  m_toZoneType;
+};
+
+struct spawnGroup_t
+{
+    uint8                    maxSpawns; // Maximum number of mobs that can be concurrently spawned from this group
+    std::vector<CMobEntity*> groupMobs; // The complete group of mobs that make up the set
+    std::set<CMobEntity*>    readyMobs; // The set of mobs that are allowed to spawn from the group
+
+    spawnGroup_t()
+    {
+        maxSpawns = 0;
+    };
+
+    void shuffle()
+    {
+        std::shuffle(groupMobs.begin(), groupMobs.end(), xirand::rng());
+    };
+
+    // Initialize the set of ready mobs.
+    void prepareMobs()
+    {
+        if (groupMobs.size() > 0)
+        {
+            // Shuffle the vector
+            shuffle();
+
+            // Empty the ready mobs set
+            readyMobs.clear();
+
+            // Iterate over the vector and add mobs to the ready set until it is full
+            for (auto& mob : groupMobs)
+            {
+                if (readyMobs.size() < maxSpawns)
+                {
+                    readyMobs.insert(mob);
+                }
+            }
+        }
+    };
+
+    // Can be used to reset if things disappear and don't respawn
+    void refillMobs()
+    {
+        if (groupMobs.size() > 0)
+        {
+            // Shuffle the vector
+            shuffle();
+
+            // Iterate over the vector and add mobs to the ready set until it is full
+            for (auto& mob : groupMobs)
+            {
+                if (readyMobs.size() < maxSpawns && readyMobs.find(mob) != readyMobs.end())
+                {
+                    readyMobs.insert(mob);
+                }
+            }
+        }
+    };
+
+    CMobEntity* addMob()
+    {
+        // Adds any random mob from the set to the ready set
+        if (readyMobs.size() < maxSpawns)
+        {
+            // Shuffle the vector
+            std::shuffle(groupMobs.begin(), groupMobs.end(), xirand::rng());
+
+            // Iterate over the vector until we find a mob to add
+            for (auto& mob : groupMobs)
+            {
+                // Look for one to add to the set that isn't already added
+                if (readyMobs.size() < maxSpawns && readyMobs.find(mob) == readyMobs.end())
+                {
+                    addMob(mob);
+                    return mob;
+                }
+            }
+        }
+
+        return nullptr;
+    };
+
+    void addMob(CMobEntity* PMob)
+    {
+        if (readyMobs.size() < maxSpawns)
+        {
+            readyMobs.insert(PMob);
+        }
+    }
+
+    void removeMob(CMobEntity* PMob)
+    {
+        readyMobs.erase(PMob);
+    }
+
+    CMobEntity* replaceMob(CMobEntity* PMob)
+    {
+        removeMob(PMob);
+        return addMob();
+    }
+
+    bool isReady(CMobEntity* PMob)
+    {
+        return readyMobs.find(PMob) != readyMobs.end();
+    }
 };
 
 class CBasicPacket;
@@ -531,15 +638,15 @@ public:
     const std::string& GetName();
     zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
-    uint8 GetSoloBattleMusic() const;
-    uint8 GetPartyBattleMusic() const;
-    uint8 GetBackgroundMusicDay() const;
-    uint8 GetBackgroundMusicNight() const;
+    uint16 GetSoloBattleMusic() const;
+    uint16 GetPartyBattleMusic() const;
+    uint16 GetBackgroundMusicDay() const;
+    uint16 GetBackgroundMusicNight() const;
 
-    void SetSoloBattleMusic(uint8 music);
-    void SetPartyBattleMusic(uint8 music);
-    void SetBackgroundMusicDay(uint8 music);
-    void SetBackgroundMusicNight(uint8 music);
+    void SetSoloBattleMusic(uint16 music);
+    void SetPartyBattleMusic(uint16 music);
+    void SetBackgroundMusicDay(uint16 music);
+    void SetBackgroundMusicNight(uint16 music);
 
     auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
 
@@ -597,6 +704,8 @@ public:
 
     time_point      m_TriggerAreaCheckTime;
     weatherVector_t m_WeatherVector; // the probability of each weather type
+
+    std::map<uint8, spawnGroup_t> m_SpawnGroups; // Map of spawn groups
 
     virtual void ZoneServer(time_point tick, bool checkTriggerAreas);
     void         CheckTriggerAreas(CCharEntity* PChar);

@@ -307,6 +307,53 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
             }
         }
 
+        auto minLevel = table["minLevel"].get_or<uint8>(0);
+        if (minLevel > 0)
+        {
+            PMob->m_minLevel = minLevel;
+        }
+
+        auto maxLevel = table["maxLevel"].get_or<uint8>(0);
+        if (maxLevel > 0)
+        {
+            PMob->m_maxLevel = maxLevel;
+        }
+
+        auto dropId = table["dropId"].get_or<uint16>(0);
+        if (dropId > 0)
+        {
+            PMob->m_DropID = dropId;
+        }
+
+        auto skillList = table["skillList"].get_or<uint16>(0);
+        if (skillList > 0)
+        {
+            mobutils::SetSkillList(PMob, skillList);
+        }
+
+        auto spellList = table["spellList"].get_or<uint16>(0);
+        if (spellList > 0)
+        {
+            mobutils::SetSpellList(PMob, spellList);
+        }
+
+        auto respawn = table["respawn"].get_or<uint32>(0);
+        if (respawn > 0)
+        {
+            PMob->m_RespawnTime  = respawn * 1000;
+            PMob->m_AllowRespawn = true;
+        }
+        else
+        {
+            PMob->m_AllowRespawn = false;
+        }
+
+        auto spawnType = table["spawnType"].get_or<uint16>(0);
+        if (spawnType > 0)
+        {
+            PMob->m_SpawnType = (SPAWNTYPE)spawnType;
+        }
+
         luautils::OnEntityLoad(PMob);
 
         luautils::OnMobInitialize(PMob);
@@ -355,7 +402,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
  *  Purpose : Set Solo Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setSoloBattleMusic(uint8 musicId)
+void CLuaZone::setSoloBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetSoloBattleMusic(musicId);
 }
@@ -370,7 +417,7 @@ auto CLuaZone::getSoloBattleMusic()
  *  Purpose : Set Party Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setPartyBattleMusic(uint8 musicId)
+void CLuaZone::setPartyBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetPartyBattleMusic(musicId);
 }
@@ -385,7 +432,7 @@ auto CLuaZone::getPartyBattleMusic()
  *  Purpose : Set Background Day music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicDay(uint8 musicId)
+void CLuaZone::setBackgroundMusicDay(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicDay(musicId);
 }
@@ -400,7 +447,7 @@ auto CLuaZone::getBackgroundMusicDay()
  *  Purpose : Set Background Night music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicNight(uint8 musicId)
+void CLuaZone::setBackgroundMusicNight(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicNight(musicId);
 }

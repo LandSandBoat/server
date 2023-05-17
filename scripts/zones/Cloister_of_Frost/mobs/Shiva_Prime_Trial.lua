@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Cloister of Frost
 -- Mob: Shiva Prime
--- Involved in Quest: Trial by Ice, Trial Size Trial by Ice
+-- Involved in Quest: Trial by Ice
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

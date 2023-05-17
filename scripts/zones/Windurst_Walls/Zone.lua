@@ -13,6 +13,7 @@ zoneObject.onInitialize = function(zone)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
         xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     end
+
     zone:registerTriggerArea(1, -2, -17, 140, 2, -16, 142)
 end
 
@@ -32,6 +33,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     xi.moghouse.exitJobChange(player, prevZone)
 
     return cs
+end
+
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

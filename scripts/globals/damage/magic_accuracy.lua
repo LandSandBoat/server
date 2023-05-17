@@ -12,7 +12,7 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
     local casterJob     = caster:getMainJob()
     local casterWeather = caster:getWeather()
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
-    local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+    local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc(xi.slot.MAIN)
 
     -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
     if skillType ~= 0 then

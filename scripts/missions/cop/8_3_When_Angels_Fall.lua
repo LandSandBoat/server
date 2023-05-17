@@ -41,6 +41,7 @@ local ebonOnTrigger = function(player, npc)
                 return mission:progressEvent(120)
             end
         end
+
         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
     else
         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -113,7 +114,11 @@ mission.sections =
             ['_0zv'] = -- Particle Gate (Brand of Twilight)
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) and mission:getVar(player, 'Status') >= 3 and mission:getVar(player, 'Status') <= 4 then
+                    if
+                        not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) and
+                        mission:getVar(player, 'Status') >= 3 and
+                        mission:getVar(player, 'Status') <= 4
+                    then
                         return mission:progressEvent(111)
                     else
                         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -124,7 +129,11 @@ mission.sections =
             ['_0zu'] = -- Particle Gate (Brand of Dawn)
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and mission:getVar(player, 'Status') >= 3 and mission:getVar(player, 'Status') <= 4 then
+                    if
+                        not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
+                        mission:getVar(player, 'Status') >= 3 and
+                        mission:getVar(player, 'Status') <= 4
+                    then
                         return mission:progressEvent(110)
                     else
                         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -276,6 +285,7 @@ mission.sections =
                         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
                     end
                 end,
+
                 [110] = function(player, csid, option)
                     if option == 1 then
                         player:addKeyItem(xi.ki.BRAND_OF_DAWN)

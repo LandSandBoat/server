@@ -26,12 +26,13 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BLINDNESS
+    local dmgmod = 5
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 60, 0, 30)
-
-    local dmgmod = 4
     if mob:getName() == "Nidhogg" then
-        dmgmod = 5
+        dmgmod = 6
+        xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 160, 0, 30)
+    else
+        xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 100, 0, 30)
     end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

@@ -500,10 +500,7 @@ INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 INSERT INTO `mob_pool_mods` VALUES (3875,59,153,1); -- WEAPON_BONUS: 153
 
 -- Tiamat
-INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
-INSERT INTO `mob_pool_mods` VALUES (3916,162,-50,0);  -- DMGBREATH: -50
-INSERT INTO `mob_pool_mods` VALUES (3916,163,-40,0);  -- DMGMAGIC: -40
 -- need this until the dark_sleep and light_sleep immunities are working
 INSERT INTO `mob_pool_mods` VALUES (3916,254,100,0); -- LULLABYRES: 100
 

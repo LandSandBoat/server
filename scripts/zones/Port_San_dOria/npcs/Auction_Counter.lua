@@ -3,6 +3,8 @@
 --  NPC: Auction Counter
 -- Working 100%
 -----------------------------------
+require("scripts/quests/tutorial")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -52,7 +52,10 @@
 #include "../weapon_skill.h"
 #include "common/timer.h"
 #include "common/utils.h"
+
+#include <algorithm>
 #include <cstring>
+#include <random>
 
 CMobEntity::CMobEntity()
 {
@@ -110,6 +113,8 @@ CMobEntity::CMobEntity()
     defRank = 3;
     accRank = 3;
     evaRank = 3;
+
+    m_spawnSet = 0;
 
     m_dmgMult = 100;
 
@@ -569,6 +574,29 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return false;
 }
 
+bool CMobEntity::CanSpawnFromGroup()
+{
+    /********************************************
+     * Returns true if:
+     *  1.  The mob is a grouped (shared-ph) mob and
+     *  2.  Is selected by its spawn group to be spawned
+     * (Returns true also if not a spawn group member)
+     ********************************************/
+    if (!this->m_spawnSet || !this->loc.zone)
+    {
+        return true;
+    }
+
+    spawnGroup_t* spawngp = &this->loc.zone->m_SpawnGroups[this->m_spawnSet];
+
+    if (spawngp->isReady(this))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void CMobEntity::Spawn()
 {
     TracyZoneScoped;
@@ -585,6 +613,7 @@ void CMobEntity::Spawn()
     SetCallForHelpFlag(false);
 
     PEnmityContainer->Clear();
+    PAI->ClearStateStack();
 
     // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
     // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
@@ -724,6 +753,15 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             {
                 angle = 45.0f;
             }
+
+            // for mobs that do not turn to face the target
+            if (m_Behaviour & BEHAVIOUR_NO_TURN)
+            {
+                // need to always add the single main target as otherwise player can interrupt cone skill
+                // by spinning around the mob which should not be possible
+                PAI->TargetFind->findSingleTarget(PTarget, findFlags);
+            }
+
             if (PSkill->m_Aoe == 6) // Conal from center of mob
             {
                 PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::ATTACKER, distance, angle, findFlags, 0);
@@ -1636,7 +1674,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         for (uint8 i = 0; i < crystalRolls; i++)
         {
-            if (xirand::GetRandomNumber(100) < 50 && AddItemToPool(4095 + m_Element, ++dropCount))
+            if (xirand::GetRandomNumber(100) < 35 && AddItemToPool(4095 + m_Element, ++dropCount))
             {
                 return;
             }
@@ -1739,11 +1777,29 @@ void CMobEntity::OnDeathTimer()
 void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
+
     FadeOut();
+
+    if (this->m_spawnSet > 0)
+    {
+        // Might need some logic in here to control whether you want to force-spawn the same mob
+        // eg. if someone just zoned it and not killed it, etc.
+        auto&       spawnGroup = this->loc.zone->m_SpawnGroups[this->m_spawnSet];
+        CMobEntity* nextMob    = spawnGroup.replaceMob(this);
+        if (nextMob)
+        {
+            if (nextMob->PAI && !nextMob->PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime)))
+            {
+                nextMob->PAI->GetCurrentState()->ResetEntryTime();
+            }
+        }
+    }
+
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));
+
     luautils::OnMobDespawn(this);
     PAI->ClearActionQueue();
-    //#event despawn
+    // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
 

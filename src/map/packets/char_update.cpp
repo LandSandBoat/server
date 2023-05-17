@@ -29,6 +29,7 @@
 #include "../ai/ai_container.h"
 #include "../ai/states/death_state.h"
 #include "../entities/charentity.h"
+#include "../entities/fellowentity.h"
 #include "../status_effect_container.h"
 #include "../utils/itemutils.h"
 #include "../vana_time.h"
@@ -76,6 +77,12 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
         // Enable the full-size treasure menu + other things for Old-Style Dynamis.
         // All claimed mobs show up as red, not purple, etc.
         ref<uint8>(0x29) |= 0x02;
+    }
+
+    if (PChar->m_PFellow != nullptr)
+    {
+        ref<uint16>(0x48) = PChar->m_PFellow->targid;
+        ref<uint8>(0x38) |= 0x80; // initiate fellow menu system
     }
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);

@@ -9,6 +9,9 @@ require("scripts/globals/damage")
 xi = xi or {}
 xi.summon = xi.summon or {}
 
+-- SDT Table for mob SDT
+xi.summon.sdtModTable = { xi.mod.FIRE_SDT, xi.mod.ICE_SDT, xi.mod.WIND_SDT, xi.mod.EARTH_SDT, xi.mod.THUNDER_SDT, xi.mod.WATER_SDT, xi.mod.LIGHT_SDT, xi.mod.DARK_SDT }
+
 local function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
     local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
@@ -39,6 +42,10 @@ local function getDexCritRate(source, target)
         critRate = 1
     end
 
+    if critRate == 0 then
+        return 0
+    end
+
     -- Crit rate from stats caps at +-15
     return math.min(critRate, 15) * sign
 end
@@ -52,16 +59,27 @@ xi.summon.getAvatarfSTR = function(avatarStr, targetVit, avatar)
     return utils.clamp(fSTR, -20, 24)
 end
 
-xi.summon.getAvatardINT = function(avatarInt, targetInt, avatar)
-    -- When dstat is positive it is multiplied by 1.5, when it is negative is is just the raw value
-    local dINT = math.floor(avatarInt - targetInt)
+xi.summon.dStat = function(avatar, target, mod)
+    local avatarStat = avatar:getStat(mod)
+    local targetStat = target:getStat(mod)
 
-    if dINT >= 0 then
-        dINT = math.floor(dINT * 1.5)
+    if not avatarStat then
+        avatarStat = 0
+    end
+
+    if not targetStat then
+        targetStat = 0
+    end
+
+    local dStat = math.floor(avatarStat - targetStat)
+
+    -- When dStat is positive it is multiplied by 1.5, when it is negative is is just the raw value
+    if dStat >= 0 then
+        dStat = math.floor(dStat * 1.5)
     end
 
     -- There is no upper limit of dstat, but there is a lower limit of -65
-    return utils.clamp(dINT, -65, 100)
+    return utils.clamp(dStat, -65, 999)
 end
 
 xi.summon.fTP = function(tp, ftp1, ftp2, ftp3, damagetype)
@@ -161,15 +179,16 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
         returninfo.hitslanded = numHitsLanded
         return returninfo
     else
-        -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
-        -- Crit rate has a base of 5% and no cap, 0-100% are valid
-        -- Dex contribution to crit rate is capped and works in tiers
-        local baseCritRate = 5
-        local maxCritRate = 1 -- 100%
-        local minCritRate = 0 -- 0%
-
-        local critRate = (baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)) / 100
-        critRate = utils.clamp(critRate, minCritRate, maxCritRate)
+        -- Pets do not crit unless specifically told to
+        local critRate = 0
+        if wsParams.critHit ~= nil then
+            -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
+            local baseCritRate = 5
+            local maxCritRate = 1 -- 100%
+            local minCritRate = 0.05 -- 5% (This is useed after /100)
+            critRate = (baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)) / 100
+            critRate = utils.clamp(critRate, minCritRate, maxCritRate)
+        end
 
         -- Calculate wSC
         local str = math.floor(avatar:getStat(xi.mod.STR) * wsParams.str_wsc)
@@ -236,8 +255,6 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
         finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
     end
 
-    finaldmg = xi.damage.applyDamageTaken(target, finaldmg, xi.attackType.PHYSICAL)
-
     returninfo.dmg = finaldmg
     returninfo.hitslanded = numHitsLanded
 
@@ -266,7 +283,7 @@ xi.summon.physicalSDT = function(attacker, target, damagetype, finalDmg)
     return adjustedDamage
 end
 
-xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
+xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav, shareEnmity)
     -- Physical Attack Missed
     if
         skilltype == xi.attackType.PHYSICAL and
@@ -350,6 +367,8 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
+    dmg = xi.damage.applyDamageTaken(target, dmg, skilltype, damagetype)
+
     -- handle One For All, Liement
 
     -- Handle Phalanx
@@ -404,32 +423,25 @@ xi.summon.avatarMiniFightCheck = function(caster)
     return result
 end
 
-xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
-    -- Formula: ((Lvl+2 + WSC) x fTP + dstat) x Magic Burst bonus x resist x day/ weather bonus x  MAB/MDB x mdt
-    local returninfo = {}
-
-    if wsParams.tpBonus == nil then
+-- Prepares the calc params for Magical BPs
+xi.summon.calculateMagicBloodPactParams = function(avatar, target, skill, wsParams)
+    -- set default value for tpBonus if it doesn't exist
+    if not wsParams.tpBonus then
         wsParams.tpBonus = 0
     end
 
-    local calcParams = {}
-    calcParams.skill = skill
-    calcParams.fINT = xi.summon.getAvatardINT(avatar:getStat(xi.mod.INT), target:getStat(xi.mod.INT), avatar)
-    calcParams.melee = false
-    calcParams.tp = avatar:getTP() + wsParams.tpBonus
-    calcParams.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
+    local params = {}
+    params.melee = false
+    params.skill = skill
+    params.dStat = utils.ternary(wsParams.breath, 0, xi.summon.dStat(avatar, target, xi.mod.INT))
+    params.tp = avatar:getTP() + wsParams.tpBonus
+    params.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
+    return params
+end
 
-    if wsParams.breathe then
-        calcParams.fINT =  0
-    end
-
-    -- -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
-    -- if not shadowAbsorb(target) then
-    -- Begin Checks for bonus wsc bonuses. See the following for details:
-    -- https://www.bg-wiki.com/bg/Utu_Grip
-    -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
-
-    -- Calculate wSC
+-- Prepares the WSC values for magical BPs
+xi.summon.calculateMagicWsc = function(avatar, wsParams, alpha)
+    -- Get base stats
     local str = math.floor(avatar:getStat(xi.mod.STR) * wsParams.str_wsc)
     local dex = math.floor(avatar:getStat(xi.mod.DEX) * wsParams.dex_wsc)
     local vit = math.floor(avatar:getStat(xi.mod.VIT) * wsParams.vit_wsc)
@@ -438,39 +450,183 @@ xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
     local mnd = math.floor(avatar:getStat(xi.mod.MND) * wsParams.mnd_wsc)
     local chr = math.floor(avatar:getStat(xi.mod.CHR) * wsParams.chr_wsc)
 
-    local wsMods = math.floor(math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha) -- This calculates WSC, must floor twice in and then out
-    local baseDmg = (avatar:getMainLvl() + 2) + wsMods -- (Lvl+2 + WSC)
+    -- This calculates WSC, must floor twice in and then out
+    return math.floor(math.floor(str + dex + vit + agi + int + mnd + chr) * alpha)
+end
 
-    -- Applying fTP multiplier
-    local ftp = xi.summon.fTP(calcParams.tp, wsParams.ftp000,  wsParams.ftp150,  wsParams.ftp300, xi.attackType.MAGICAL)
-    local dmg = baseDmg * ftp + calcParams.fINT -- ((Lvl+2 + WSC) x fTP + dstat)
+-- Prepares the magical resist values for avatar magical BPs
+xi.summon.calculateResist = function(avatar, target, skill, skillType, spellElement, skillchainCount, params)
+    local resist        = 1 -- The variable we want to calculate
+    local hitRate       = 0.95 -- Default hit rate of capped hit
+    local effectRes     = 0 -- Default value for effect resistance
 
-    if wsParams.omen == nil then
-        wsParams.omen = 1
-    else
-        dmg = wsParams.omen -- This sets the damage to the HP % inside the ruinous omen lua. Then apply bonuses
+    -- Get the effect resistance from the effectEva table
+    if params.effect then
+        effectRes = utils.ternary(xi.magic.effectEva[params.effect], xi.magic.effectEva[params.effect], 0)
     end
 
-    -- Calculate magical bonuses and reductions
-    dmg = xi.magic.addBonusesAbility(avatar, wsParams.element, target, dmg, wsParams) -- mab * day/weather bonus
-    dmg = dmg * xi.magic.applyAbilityResistance(avatar, target, wsParams) -- * resist
+    -- if we're skillchaining, boost macc by 25
+    if skillchainCount > 0 then
+        if not params.maccBonus then
+            params.maccBonus = 0
+        end
 
-    if wsParams.breathe then -- Nether Blast Only until Odin
-        dmg = target:breathDmgTaken(dmg, target) -- Take damage
-    else
-        dmg = target:magicDmgTaken(dmg, wsParams.element) -- Take damage
+        params.maccBonus = params.maccBonus + 25
     end
 
-    if dmg < 0 then
-        dmg = 0
-        return dmg
+    -- Calcluate the hitRate of magic skills (These are always damageSpell)
+    hitRate = xi.magic.getMagicHitRate(avatar, target, skillType, spellElement, params.effect, effectRes, params.maccBonus, params.dStat, skillchainCount, true, true)
+
+    -- (These are always damageSpell)
+    resist  = xi.magic.getMagicResist(hitRate, target, spellElement, effectRes, skillchainCount, params.effect, avatar, true)
+
+    -- Nether Blast does not resist. It only echecks for BDT at the end.
+    if params.netherBlast then
+        resist = 1
     end
 
-    dmg = xi.magic.adjustForTarget(target, dmg, wsParams.element)
+    return resist
+end
 
-    dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+-- Prepares the day/weather bonus for avatar magical BPs
+xi.summon.calculateDayAndWeather = function(avatar, target, skill, spellElement)
+    local dayAndWeather = 1 -- The variable we want to calculate
+    local weather       = avatar:getWeather()
+    local dayElement    = VanadielDayElement()
+    local elementalObi  = { xi.mod.FORCE_FIRE_DWBONUS, xi.mod.FORCE_ICE_DWBONUS, xi.mod.FORCE_WIND_DWBONUS, xi.mod.FORCE_EARTH_DWBONUS, xi.mod.FORCE_LIGHTNING_DWBONUS, xi.mod.FORCE_WATER_DWBONUS, xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
 
-    returninfo.dmg = dmg
+    -- Calculate Weather bonus
+    if math.random() < 0.33 or avatar:getMod(elementalObi[spellElement]) >= 1 then
+        if weather == xi.magic.singleWeatherStrong[spellElement] then
+            dayAndWeather = dayAndWeather + 0.10
+            if avatar:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather + 0.10
+            end
+        elseif weather == xi.magic.singleWeatherWeak[spellElement] then
+            dayAndWeather = dayAndWeather - 0.10
+        elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
+            dayAndWeather = dayAndWeather + 0.25
+            if avatar:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather + 0.10
+            end
+        elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
+            dayAndWeather = dayAndWeather - 0.25
+        end
+    end
 
-    return returninfo
+    -- Calculate day bonus
+    if dayElement == spellElement then
+        dayAndWeather = dayAndWeather + avatar:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
+        if math.random() < 0.33 or avatar:getMod(elementalObi[spellElement]) >= 1 then
+            dayAndWeather = dayAndWeather + 0.10
+        end
+    elseif dayElement == xi.magic.elementDescendant[spellElement] then
+        if math.random() < 0.33 or avatar:getMod(elementalObi[spellElement]) >= 1 then
+            dayAndWeather = dayAndWeather - 0.10
+        end
+    end
+
+    -- Cap bonuses from both day and weather
+    if dayAndWeather > 1.4 then
+        dayAndWeather = 1.4
+    end
+
+    return dayAndWeather
+end
+
+-- Prepares the magic burst damage
+xi.summon.calculateIfMagicBurst = function(avatar, target, skill, spellElement)
+    return xi.spells.damage.calculateIfMagicBurst(avatar, target, skill, spellElement)
+end
+
+-- Apply status effects from magical BPs
+xi.summon.applyBloodPactStatusEffect = function(avatar, target, resist, params)
+    -- If the target already has the status effect, return immediately
+    if params.effect and target:hasStatusEffect(params.effect) then
+        return
+    end
+
+    if
+        params.effect and
+        params.chance and
+        params.chance * resist > math.random() * 150 and
+        params.duration * resist > 0
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    elseif
+        params.effect and
+        params.duration * resist > 0 and
+        not params.chance
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    end
+end
+
+xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
+    -- Formula:
+    -- ((Lvl+2 + WSC) x fTP + dstat)
+    -- x Magic Burst bonus
+    -- x Resist
+    -- x Day&Weather Bonus
+    -- x MAB/MDB
+    -- x MDT
+
+    local finalDamage = 0 -- final return value
+
+    -- Populate some default values in wsParams if necessary
+    if wsParams.effect and not wsParams.tick then
+        wsParams.tick = 0
+    end
+
+    if wsParams.effect and not wsParams.power then
+        wsParams.power = 1
+    end
+
+    -- Get tabled variables
+    local bpParams   = xi.summon.calculateMagicBloodPactParams(avatar, target, skill, wsParams)
+    local spellElement = utils.ternary((wsParams.element ~= nil), wsParams.element, xi.magic.ele.NONE)
+    local skillType    = utils.ternary((wsParams.element ~= nil), xi.skill.ELEMENTAL_MAGIC, nil)
+    local sdtMod       = utils.ternary((wsParams.element ~= nil), xi.summon.sdtModTable[wsParams.element], nil)
+
+    -- Form skillchain
+    local _, skillchainCount = xi.magic.FormMagicBurst(wsParams.element, target)
+
+    -- Variables / Steps to calculate final damage
+    local wsc           = xi.summon.calculateMagicWsc(avatar, wsParams, bpParams.alpha)
+    local ftp           = xi.summon.fTP(bpParams.tp, wsParams.ftp000,  wsParams.ftp150,  wsParams.ftp300, xi.attackType.MAGICAL)
+    local lv2           = utils.ternary((wsParams.hybrid == true), math.floor(10 + 0.5 * avatar:getMainLvl()), avatar:getMainLvl() + 2)
+    local resist        = xi.summon.calculateResist(avatar, target, skill, skillType, spellElement, skillchainCount, wsParams)
+    local magicBurst    = xi.summon.calculateIfMagicBurst(avatar, target, skill, spellElement)
+    local weatherBonus  = xi.summon.calculateDayAndWeather(avatar, target, skill, spellElement)
+    local mab           = 100 + avatar:getMod(xi.mod.MATT)
+    local mdb           = 100 + target:getMod(xi.mod.MDEF)
+    local mdef          = mab / mdb
+    local mdt           = utils.ternary((sdtMod ~= nil), target:getMod(sdtMod), 1)
+    local bonus         = xi.settings.main.WEAPON_SKILL_POWER
+
+    -- Account for potentially 0 MDT
+    if mdt <= 0 then
+        mdt = 1
+    end
+
+    -- Apply any status effects
+    xi.summon.applyBloodPactStatusEffect(avatar, target, resist, wsParams)
+
+    -- ((Lvl+2 + WSC) x fTP + dstat)
+    finalDamage = math.floor(((lv2 + wsc) * ftp) + bpParams.dStat)
+    -- x Magic Burst
+    finalDamage = math.floor(finalDamage * magicBurst)
+    -- x Resist
+    finalDamage = math.floor(finalDamage * resist)
+    -- x Weather & Day Bonus
+    finalDamage = math.floor(finalDamage * weatherBonus)
+    -- x MAB / MDB
+    finalDamage = math.floor(finalDamage * mdef)
+    -- x MDT
+    finalDamage = math.floor(finalDamage * mdt)
+    -- x Server WS Bonus
+    finalDamage = math.floor(finalDamage * bonus)
+
+    -- @TODO: Need to just return the clamped dmg, but it requires updating all magic BP scripts
+    return { dmg = utils.clamp(finalDamage, 0, 99999) }
 end

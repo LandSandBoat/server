@@ -3,6 +3,8 @@ set(AI_CONTROLLER_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/automaton_controller.h
     ${CMAKE_CURRENT_SOURCE_DIR}/controller.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/fellow_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/fellow_controller.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_controller.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_controller.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_controller.cpp

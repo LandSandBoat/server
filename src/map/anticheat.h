@@ -34,7 +34,17 @@ namespace anticheat
         // (0x59) packet. If anti cheating is enabled this will cause all cheated
         // crafts to fail.
         // Argument is the time spent on synth animation.
-        CHEAT_ID_FASTSYNTH = 1,
+        CHEAT_ID_FASTSYNTH       = 1,
+        CHEAT_ID_CLAIMBOT        = 2,
+        CHEAT_ID_POS_HACK        = 3,
+        CHEAT_ID_FAST_DIG        = 4,
+        CHEAT_ID_DIG_BOT         = 5,
+        CHEAT_ID_CRAFT_BOT       = 6,
+        CHEAT_ID_AUTO_CRAFT      = 7,
+        CHEAT_ID_FISH_BOT        = 8,
+        CHEAT_ID_TRADE_DUPE      = 9,
+        CHEAT_ID_SYNTH_INJECTION = 10,
+        CHEAT_ID_SYNTH_SIT       = 11,
         // For boundary checks
         CHEAT_ID_LAST
     };
@@ -78,7 +88,6 @@ namespace anticheat
     // description - Optional text description to be logged
     // returns true on success, false on failure
     bool ReportCheatIncident(CCharEntity* PChar, CheatID cheatid, uint32 cheatarg = 0, const char* description = NULL);
-
 }; // namespace anticheat
 
 #endif

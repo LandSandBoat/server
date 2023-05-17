@@ -27,7 +27,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     effectParams.element = xi.magic.ele.DARK
     effectParams.effect = xi.effect.WEIGHT
     effectParams.duration = 60
-    effectParams.power = 26
+    effectParams.power = 46
     effectParams.tick = 0
     effectParams.maccBonus = 0
 

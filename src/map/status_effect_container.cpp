@@ -271,8 +271,8 @@ uint8 CStatusEffectContainer::GetLowestFreeSlot()
 
 bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
 {
-    EFFECT statusEffect = PStatusEffect->GetStatusID();
     // check for immunities first
+    EFFECT statusEffect = PStatusEffect->GetStatusID();
     switch (statusEffect)
     {
         case EFFECT_SLEEP:
@@ -1605,6 +1605,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
             {
                 StatusEffect->SetIcon(EFFECT_SLEEP);
             }
+
             if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
             {
                 m_POwner->PAI->Inactive(0ms, false);
@@ -1714,6 +1715,10 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
         if (!skipRemove && ((logout && PStatusEffect->GetFlag() & EFFECTFLAG_LOGOUT) || (!logout && PStatusEffect->GetFlag() & EFFECTFLAG_ON_ZONE)))
         {
             RemoveStatusEffect(PStatusEffect, true);
+            continue;
+        }
+        else if (PStatusEffect->GetStatusID() == EFFECT_LEVEL_SYNC) // There are a few status effects we should not persist.
+        {
             continue;
         }
 
@@ -1838,6 +1843,21 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 }
             });
             // clang-format on
+
+            // Apply the aura's buff to the owner of the buff's fellow
+            CBattleEntity* PFellow = (CBattleEntity*)((CCharEntity*)PEntity)->m_PFellow;
+            if (PFellow != nullptr && PEntity->loc.zone->GetID() == PFellow->loc.zone->GetID() &&
+                distanceSquared(m_POwner->loc.p, PFellow->loc.p) < aura_range * aura_range && !PFellow->isDead())
+            {
+                CStatusEffect* PEffect = new CStatusEffect(
+                    (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                    (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                    PStatusEffect->GetSubPower(),      // Power
+                    3,                                 // Tick
+                    4);                                // Duration
+                PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                PFellow->StatusEffectContainer->AddStatusEffect(PEffect, true);
+            }
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {

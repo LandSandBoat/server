@@ -12,21 +12,23 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16392, 4818, 1,    -- Metal Knuckles
-        17044, 6033, 1,    -- Warhammer
-        16390,  224, 3,    -- Bronze Knuckles
-        16391,  828, 3,    -- Brass Knuckles
-        16385,  129, 3,    -- Cesti
-        16407, 1521, 3,    -- Brass Baghnakhs
-        16405,  104, 3,    -- Cat Baghnakhs
-        17042,  312, 3,    -- Bronze Hammer
-        17043, 2083, 3,    -- Brass Hammer
-        17049,   47, 3,    -- Maple Wand
-        17024,   66, 3,    -- Ash Club
-        17059,   90, 3,    -- Bronze Rod
-        17081,  621, 3,    -- Brass Rod
-        17088,   57, 3,    -- Ash Staff
-        17095,  386, 3,    -- Ash Pole
+        -- Only available while Bastok is in first.
+        16392, 5447, 1,  -- Metal Knuckles
+        16643, 12757, 1, -- Battleaxe
+        16705, 4732, 1,  -- Greataxe
+        17044, 6820, 1,  -- Warhammer
+        -- Available when Bastok is in first or second.
+        16391, 936, 2,   -- Brass Knuckles
+        17043, 2407, 2,  -- Brass Hammer
+        16641, 1622, 2,  -- Brass Axe
+        16704, 698, 2,   -- Butterfly Axe
+        -- Always available.
+        16390, 253, 3,   -- Bronze Knuckles
+        16640, 328, 3,   -- Bronze Axe
+        17042, 353, 3,   -- Bronze Hammer
+        17049, 54, 3,    -- Maple Wand
+        17088, 66, 3,    -- Ash Staff
+
     }
 
     player:showText(npc, ID.text.CIQALA_SHOP_DIALOG)

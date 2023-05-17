@@ -23,8 +23,8 @@ zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.CHONCHON)
     end
+
     UpdateNMSpawnPoint(ID.mob.WARAXE_BEAK)
-    GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)

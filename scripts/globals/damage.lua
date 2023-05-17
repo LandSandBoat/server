@@ -6,7 +6,7 @@ require("scripts/globals/status")
 xi = xi or {}
 xi.damage = {} or xi.damage
 
-local dmgMods =
+local attMods =
 {
     [xi.attackType.PHYSICAL] =
     {
@@ -44,10 +44,28 @@ local dmgMods =
     },
 }
 
-xi.damage.applyDamageTaken = function(target, dmg, attackType)
-    local dmgTakenMod = 0
+local dmgMods =
+{
+    [xi.damageType.NONE] = xi.mod.NONE,
+    [xi.damageType.ELEMENTAL] = xi.mod.NONE,
+    [xi.damageType.PIERCING] = xi.mod.PIERCE_SDT,
+    [xi.damageType.SLASHING] = xi.mod.SLASH_SDT,
+    [xi.damageType.BLUNT] = xi.mod.IMPACT_SDT,
+    [xi.damageType.HTH] = xi.mod.HTH_SDT,
+    [xi.damageType.FIRE] = xi.mod.FIRE_SDT,
+    [xi.damageType.ICE] = xi.mod.ICE_SDT,
+    [xi.damageType.WIND] = xi.mod.WIND_SDT,
+    [xi.damageType.EARTH] = xi.mod.EARTH_SDT,
+    [xi.damageType.LIGHTNING] = xi.mod.THUNDER_SDT,
+    [xi.damageType.WATER] = xi.mod.WATER_SDT,
+    [xi.damageType.LIGHT] = xi.mod.LIGHT_SDT,
+    [xi.damageType.DARK] = xi.mod.DARK_SDT,
+}
 
-    for _, mod in pairs(dmgMods[attackType]) do
+xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
+    local dmgTakenMod = 1
+
+    for _, mod in pairs(attMods[attackType]) do
         if mod.min ~= nil then
             dmgTakenMod = dmgTakenMod + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max)
         else
@@ -55,21 +73,21 @@ xi.damage.applyDamageTaken = function(target, dmg, attackType)
         end
     end
 
-    dmgTakenMod = utils.clamp(dmgTakenMod, -1, 1000)
+    -- This is for PIERCE_SDT, SLASH_SDT, IMPACT_SDT, HTH_SDT
+    -- All players and mobs have base of 1000
+    if
+        damageType and
+        dmgMods[damageType] <= xi.mod.HTH_SDT and
+        dmgMods[damageType] >= xi.mod.SLASH_SDT
+    then
+        dmgTakenMod = dmgTakenMod + ((target:getMod(dmgMods[damageType]) - 1000) / 10000)
+    elseif damageType and dmgMods[damageType] then -- This is for elemental SDTs only
+        dmgTakenMod = dmgTakenMod + (target:getMod(dmgMods[damageType]) / 10000)
+    end
 
-    return utils.clamp(dmg * (1 + dmgTakenMod), 0, 99999)
+    return dmgTakenMod
 end
 
-xi.damage.returnDamageTakenMod = function(target, attackType)
-    local dmgTakenMod = 0
-
-    for _, mod in pairs(dmgMods[attackType]) do
-        if mod.min ~= nil then
-            dmgTakenMod = dmgTakenMod + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max)
-        else
-            dmgTakenMod = dmgTakenMod + (target:getMod(mod.mod) / 10000)
-        end
-    end
-
-    return utils.clamp(dmgTakenMod, -1, 1000) + 1
+xi.damage.applyDamageTaken = function(target, dmg, attackType, damageType)
+    return math.floor(dmg * xi.damage.returnDamageTakenMod(target, attackType, damageType))
 end

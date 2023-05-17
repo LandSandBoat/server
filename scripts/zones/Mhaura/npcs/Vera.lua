@@ -71,9 +71,10 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 137 then
         player:tradeComplete()
         player:unlockJob(0)
-        player:setCharVar("VeraOldLadyVar", 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
+        npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES, {
+            var = "VeraOldLadyVar",
+        })
     end
 end
 

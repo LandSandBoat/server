@@ -540,6 +540,9 @@ xi.eraShops.PikiniMikini =
     4112,  819,    -- Potion
     4509,   10,    -- Distilled Water
     917,  1821,    -- Parchment
+    4716,  3974,   -- Regen
+    4718,  7203,   -- Regen II
+    4881,  10304,  -- Sleepga
     17395,   9,    -- Lugworm
     1021,  450,    -- Hatchet
     4376,  108,    -- Meat Jerky

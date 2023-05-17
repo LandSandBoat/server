@@ -36,6 +36,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+end
+
 zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
@@ -60,6 +64,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 700 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 223)
     end
 

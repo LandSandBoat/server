@@ -69,7 +69,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-
     xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), false)
 end
 

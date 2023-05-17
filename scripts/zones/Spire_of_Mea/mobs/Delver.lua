@@ -10,6 +10,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:addMod(xi.mod.DEFP, 35)
     mob:setMod(xi.mod.STORETP, 100)
+    mob:setSpeed(50)
 end
 
 entity.onMobFight = function(mob, target)

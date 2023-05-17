@@ -64,11 +64,13 @@ public:
 
     void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
     void WeatherChange(WEATHER weather);
-    void MusicChange(uint8 BlockID, uint8 MusicTrackID);
+    void MusicChange(uint8 BlockID, uint16 MusicTrackID);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
     void ZoneServer(time_point tick, bool check_trigger_areas);
+
+    void SelectNewRespawnFromGroup(CMobEntity* PMob);
 
     CZone* GetZone();
 
@@ -85,6 +87,8 @@ public:
     EntityList_t m_trustList;
     EntityList_t m_npcList;  // список всех NPCs в зоне
     EntityList_t m_charList; // список всех PCs  в зоне
+
+    std::map<uint8, spawnGroup_t> m_SpawnGroups; // Map of spawn groups
 
     std::set<uint16> charTargIds;    // Sorted set of targids for characters
     std::set<uint16> dynamicTargIds; // Sorted set of targids for dynamic entities

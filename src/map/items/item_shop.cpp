@@ -20,6 +20,9 @@
 */
 
 #include "item_shop.h"
+#include "../map.h"
+#include <string>
+#include <iostream>
 
 CItemShop::CItemShop(uint16 id)
 : CItem(id)
@@ -82,17 +85,32 @@ uint16 CItemShop::getInitialQuantity() const
     return m_InitialQuantity;
 }
 
+// Old formula for guild shops - this causes a lot of items to have the incorrect sell price
+// uint16 CItemShop::getSellPrice()
+// {
+//     if (getID() >= 0x2800 && getID() <= 0x6FFF)
+//     {
+//         return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
+//     }
+//     else
+//     {
+//         return getBasePrice() / 3;
+//     }
+// }
+
 uint16 CItemShop::getSellPrice()
 {
-    // Need to calculate proper resale prices. Current equation is not appropriate.
-    //
-    // if (getID() >= 0x2800 && getID() <= 0x6FFF)
-    // {
-    //     return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
-    // }
-    // else
-    // {
-    //     return getBasePrice() / 3;
-    // }
-    return 1;
+    int itemID = getID();
+    int32 baseSellPrice = 0;
+    int32 ret = (sql->Query("SELECT BaseSell FROM item_basic WHERE itemId = %u", itemID));
+
+    if (ret != SQL_ERROR)
+    {
+        if (sql->NextRow() == SQL_SUCCESS)
+        {
+            baseSellPrice = (int32)sql->GetUIntData(0);
+        }
+    }
+
+    return baseSellPrice * 1.2;
 }
