@@ -493,7 +493,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
  *                                                                       *
  ************************************************************************/
 
-std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 AllianceID)
+std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID)
 {
     std::list<SearchEntity*> PartyList;
 
@@ -507,7 +507,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
         "LEFT JOIN char_profile USING(charid) "
         "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = %u) , partyid = %u) "
         "ORDER BY charname ASC "
-        "LIMIT 64";
+        "LIMIT 256";
 
     int32 ret = sql->Query(Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
 
@@ -594,7 +594,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                                         "LEFT JOIN char_profile USING(charid) "
                                         "WHERE linkshellid1 = %u OR linkshellid2 = %u "
                                         "ORDER BY charname ASC "
-                                        "LIMIT 18";
+                                        "LIMIT 64";
 
     int32 ret = sql->Query(fmtQuery, LinkshellID, LinkshellID);
 

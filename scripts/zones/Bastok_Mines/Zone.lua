@@ -33,6 +33,11 @@ zoneObject.onZoneIn = function(player, prevZone)
     xi.moghouse.exitJobChange(player, prevZone)
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+    xi.chocobo.confirmRentalAfterZoneIn(player)
+end
+
 zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end

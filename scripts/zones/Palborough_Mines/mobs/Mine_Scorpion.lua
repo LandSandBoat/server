@@ -12,10 +12,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    if mob:getID() == ID.mob.SCIMITAR_SCORPION_PH then
+    if ID.mob.SCIMITAR_SCORPION_PH[mob:getID()] then
         mob:setRespawnTime(xi.mob.respawnTimer.DUNGEON)
+        xi.mob.phOnDespawn(mob, ID.mob.SCIMITAR_SCORPION_PH, 30, 1) -- No cooldown
     end
-    xi.mob.phOnDespawn(mob, ID.mob.SCIMITAR_SCORPION_PH, 30, 1) -- No cooldown
 end
 
 return entity

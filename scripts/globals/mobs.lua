@@ -22,7 +22,6 @@ end
 -----------------------------------
 -- placeholder / lottery NMs
 -----------------------------------
-
 -- is a lottery NM already spawned or primed to pop?
 local function lotteryPrimed(phList)
     local nm
@@ -116,21 +115,9 @@ end
 
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
-    if ph:getZone():getLocalVar("[BEASTMEN]GroupIndex") ~= 0 then
-        for _, group in pairs(xi.beastmengroups.zones) do
-            if ph:getZoneID() == group[1] then
-                for it, idtable in pairs(group[3]) do
-                    if idtable[1] == ph:getID() then
-                        DisallowRespawn(ph:getID(), false)
-                        table.remove(group[3], it)
-
-                        break
-                    end
-                end
-
-                break
-            end
-        end
+    -- Confirm the mob is actually dead
+    if ph:getHP() > 0 then
+        return
     end
 
     if type(immediate) ~= "boolean" then
@@ -160,17 +147,14 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
                 not persistLotteryPrimed(phList) and
                 math.random(1, 1000) <= chance
             then
-
                 -- on PH death, replace PH repop with NM repop
                 DisallowRespawn(phId, true)
-                DisallowRespawn(nmId, false)
                 UpdateNMSpawnPoint(nmId)
                 nm:setRespawnTime(immediate and 1 or GetMobRespawnTime(phId)) -- if immediate is true, spawn the nm immediately (1ms) else use placeholder's timer
 
                 nm:addListener("DESPAWN", "DESPAWN_" .. nmId, function(m)
                     -- on NM death, replace NM repop with PH repop
                     DisallowRespawn(nmId, true)
-                    DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
                     m:setLocalVar("pop", os.time() + cooldown)
                     m:removeListener("DESPAWN_" .. nmId)

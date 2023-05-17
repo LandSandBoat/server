@@ -25,7 +25,7 @@ end
 
 entity.onMobDespawn = function(mob)
     local cemCherry = mob:getID()
-    local respawnTime = 86400 -- If something breaks default to 24 hours
+    local respawnTime = 75600 -- If something breaks default to 21 hours
 
     UpdateNMSpawnPoint(mob:getID())
     GetMobByID(cemCherry):setLocalVar("[POP]Cemetery_Cherry", 0)
@@ -47,4 +47,5 @@ entity.onMobDespawn = function(mob)
         DisallowRespawn(cemCherry + offsetTwo, false)
     end
 end
+
 return entity

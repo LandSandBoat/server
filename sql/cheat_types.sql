@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `cheat_types` (
 --
 
 INSERT INTO `cheat_types` (`cheatid`, `name`, `description`, `argument`, `action_bitmask`, `warning_message`) VALUES
-(1, 'FASTSYNTH', 'Player injects a synth done (0x59) packet to perform synth and craft skillups faster than the game allows.', 0, 7, 'A fast craft cheating attempt has been attempted. Successful craft has been blocked and the incident will be reported.');
+(1, 'FASTSYNTH', 'Player injects a synth done (0x59) packet to perform synth and craft skillups faster than the game allows.', 0, 1, 'A fast craft cheating attempt has been attempted. Successful craft has been blocked and the incident will be reported.');
 
 --
 -- Indexes for dumped tables

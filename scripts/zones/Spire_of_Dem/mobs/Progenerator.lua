@@ -12,6 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.TRIPLE_ATTACK, 10)
     mob:addMod(xi.mod.DEFP, 35)
     mob:setMod(xi.mod.STORETP, 100)
+    mob:setSpeed(50)
 end
 
 entity.onMobSpawn = function(mob)

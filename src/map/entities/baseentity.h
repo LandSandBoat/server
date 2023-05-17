@@ -278,6 +278,8 @@ public:
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
 
+    std::map<std::string, uint32> GetAllLocalVars();
+
     // pre-tick update
     virtual void Tick(time_point) = 0;
     // post-tick update

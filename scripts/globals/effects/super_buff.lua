@@ -19,9 +19,9 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DMGMAGIC, -500)
-    target:delMod(xi.mod.DMGPHYS, -5000)
-    target:delMod(xi.mod.DMGRANGE, -5000)
+    target:delMod(xi.mod.UDMGMAGIC, -500)
+    target:delMod(xi.mod.UDMGPHYS, -5000)
+    target:delMod(xi.mod.UDMGRANGE, -5000)
     target:delMod(xi.mod.EVA, 378)
     target:setAnimationSub(0)
 end

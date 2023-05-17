@@ -9,12 +9,15 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 17, 1, xi.regime.type.FIELDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.STINGING_SOPHIE_PH, 5, 1) -- Pure Lottery
+        xi.mob.phOnDespawn(mob, ID.mob.STINGING_SOPHIE_PH, 5, 1) -- Pure Lottery
 end
 
 return entity

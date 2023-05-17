@@ -5,4 +5,5 @@ return {
     ['Hume_Bones']   = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm1']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Sarcophagus']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['Gravestone']   = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
 }

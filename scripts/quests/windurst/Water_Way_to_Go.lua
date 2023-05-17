@@ -93,7 +93,7 @@ quest.sections =
                     then
                         return quest:progressEvent(354)
                     else
-                        return quest:progressEvent(353)
+                        return quest:event(353)
                     end
                 end,
             },
@@ -128,7 +128,10 @@ quest.sections =
             ['Ohbiru-Dohbiru'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CANTEEN_OF_GIDDEUS_WATER) and quest:getVar(player, "waterRepeat") == 1 then
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.CANTEEN_OF_GIDDEUS_WATER) and
+                        quest:getVar(player, "waterRepeat") == 1
+                    then
                         return quest:progressEvent(355, 900)
                     end
                 end,
@@ -186,7 +189,10 @@ quest.sections =
             ['Giddeus_Spring'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.RHINOSTERY_CANTEEN) and quest:getVar(player, "waterRepeat") == 1 then
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.RHINOSTERY_CANTEEN) and
+                        quest:getVar(player, "waterRepeat") == 1
+                    then
                         return quest:progressEvent(55)
                     end
                 end,

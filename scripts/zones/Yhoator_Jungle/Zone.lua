@@ -32,6 +32,8 @@ zoneObject.onInitialize = function(zone)
         xi.mob.nmTODPersistCache(zone, ID.mob.POWDERER_PENNY)
     end
 
+    UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
+    UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.chocobo.initZone(zone)

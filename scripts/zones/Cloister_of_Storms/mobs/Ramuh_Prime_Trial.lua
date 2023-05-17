@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Cloister of Storms
 --  Mob: Ramuh Prime
--- Involved in Quest: Trial by Lightning, Trial Size Trial by Lightning
+-- Involved in Quest: Trial by Lightning
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

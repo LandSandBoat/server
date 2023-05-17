@@ -52,7 +52,7 @@ end
 zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
-	end
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

@@ -24,12 +24,11 @@ entity.onMobFight = function(mob, target)
     local killable = mob:getLocalVar("killable")
 
     if mob:getHPP() == 1 and mob:getMod(xi.mod.DMG) == 0 and not killable then
-        mob:setMod(xi.mod.DMG,-10000)
+        mob:setMod(xi.mod.DMG, -10000)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
 end
 
 return entity

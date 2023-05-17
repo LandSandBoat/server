@@ -787,10 +787,11 @@ public:
     std::vector<int16> m_MSNonItemValues;        // Tracking movement speed from non-item sources
 
 private:
-    JOBTYPE    m_mjob; // главная профессия
-    JOBTYPE    m_sjob; // дополнительная профессия
-    uint8      m_mlvl; // ТЕКУЩИЙ уровень главной профессии
-    uint8      m_slvl; // ТЕКУЩИЙ уровень дополнительной профессии
+    JOBTYPE m_mjob; // главная профессия
+    JOBTYPE m_sjob; // дополнительная профессия
+    uint8   m_mlvl; // ТЕКУЩИЙ уровень главной профессии
+    uint8   m_slvl; // ТЕКУЩИЙ уровень дополнительной профессии
+
     uint16     m_battleTarget{ 0 };
     time_point m_battleStartTime;
     uint16     m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.

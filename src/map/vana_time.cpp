@@ -266,6 +266,45 @@ uint8 CVanaTime::getMoonDirection() const
     }
 }
 
+uint8 CVanaTime::getMoonLatentPhase()
+{
+    uint8 MoonPhase     = CVanaTime::getInstance()->getMoonPhase();
+    uint8 MoonDirection = CVanaTime::getInstance()->getMoonDirection(); // directions: 1 = waning, 2 = waxing, 0 = neither
+
+    if (MoonPhase <= 5 || (MoonPhase <= 10 && MoonDirection == 1)) // New Moon - 10% waning -> 5% waxing
+    {
+        return 0;
+    }
+    else if (MoonPhase >= 7 && MoonPhase <= 38 && MoonDirection == 2) // Waxing Crescent - 7% -> 38% waxing
+    {
+        return 1;
+    }
+    else if (MoonPhase >= 40 && MoonPhase <= 55 && MoonDirection == 2) // First Quarter - 40%% -> 55% waxing
+    {
+        return 2;
+    }
+    else if (MoonPhase >= 57 && MoonPhase <= 88 && MoonDirection == 2) // Waxing Gibbous - 57% -> 88%
+    {
+        return 3;
+    }
+    else if (MoonPhase >= 95 || (MoonPhase >= 90 && MoonDirection == 2)) // Full Moon - waxing 90% -> waning 95%
+    {
+        return 4;
+    }
+    else if (MoonPhase >= 62 && MoonPhase <= 93 && MoonDirection == 1) // Waning Gibbous - 93% -> 62%
+    {
+        return 5;
+    }
+    else if (MoonPhase >= 45 && MoonPhase <= 60 && MoonDirection == 1) // Last Quarter - 60% -> 45%
+    {
+        return 6;
+    }
+    else // Waning Crescent - 43% -> 12%
+    {
+        return 7;
+    }
+}
+
 uint8 CVanaTime::getRSERace() const
 {
     return (uint8)(((m_vanaDate / VTIME_WEEK) - 22) % 8) + 1;

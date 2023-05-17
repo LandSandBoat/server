@@ -142,19 +142,23 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
         panictaru:timer(3000 , function(taru)
-            taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT)
+            taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION)
+            npc:showText(npc, ID.text.SHIMMERY_POINT)
         end)
 
         panictaru:timer(23000, function(taru)
-            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.HURRY_UP)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION)
+            npc:showText(npc, ID.text.HURRY_UP)
         end)
 
         panictaru:timer(33000, function(taru)
-            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.ITS_COMING)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION)
+            npc:showText(npc, ID.text.ITS_COMING)
         end)
 
         panictaru:timer(43000, function(taru)
-            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.THREE_OF_THEM)
+            taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION)
+            npc:showText(npc, ID.text.THREE_OF_THEM)
         end)
 
         panictaru:timer(45000, function(taru)
@@ -162,11 +166,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         end)
 
         panictaru:timer(45000, function(taru)
-            taru:entityAnimationPacket("dead") taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false)
+            taru:entityAnimationPacket("dead")
+            taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false)
         end)
 
         panictaru:timer(50000, function(taru)
-            taru:setStatus(xi.status.DISAPPEAR) taru:entityAnimationPacket("stnd")
+            taru:setStatus(xi.status.DISAPPEAR)
+            taru:entityAnimationPacket("stnd")
         end)
 
         npc:timer(50000,
@@ -179,7 +185,9 @@ entity.onEventFinish = function(player, csid, option, npc)
                 spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) and
                 spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20
             then
-
+                -- need to set qm4 to normal since confrontation uses popFromQM which requires
+                -- npc in normal status
+                GetNPCByID(ID.npc.PIRATE_CHART_QM):setStatus(xi.status.NORMAL)
                 xi.confrontation.start(spawner, npc, mobs,
                 -- if won then cleanup is done by barnacled box when opened
                 -- so do not need to pass in a function

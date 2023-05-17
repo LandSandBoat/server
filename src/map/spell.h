@@ -1088,6 +1088,7 @@ public:
     bool               hasMPCost();        // checks if spell costs mp to use
     bool               isHeal();           // is a heal spell
     bool               isCure();           // is a Cure spell
+    bool               isRegen();          // is a Regen spell
     bool               isDebuff();         // is a debuff spell
     bool               isNa();             // is a -na spell
     bool               isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)

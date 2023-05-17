@@ -21,7 +21,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS
 local function getCurrentTime()
     -- Check if the day has changed
     if xi.settings.main.ERA_CHOCOBOS_WOUNDS then
-       return VanadielUniqueDay()
+        return VanadielUniqueDay()
     end
 
     -- Check if the hour has changed
@@ -164,11 +164,13 @@ quest.sections =
             onEventFinish =
             {
                 [57] = function(player, csid, option, npc)
+                    player:tradeComplete(false)
                     quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 2)
                 end,
 
                 [58] = function(player, csid, option, npc)
+                    player:tradeComplete(false)
                     quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 3)
                 end,

@@ -94,7 +94,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem (xi.ki.BOOK_OF_THE_EAST) then
-                        quest:progressEvent(633)
+                        return quest:progressEvent(633)
                     elseif player:hasKeyItem (xi.ki.BOOK_OF_THE_EAST) then
                         return quest:messageSpecial(ID.text.WAY_OF_THE_SWORD)
                     end
@@ -142,7 +142,6 @@ quest.sections =
                 end,
             },
         },
-
     },
 
     {

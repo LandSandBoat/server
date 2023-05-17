@@ -15,19 +15,16 @@ local escorts =
         ['limit'] = 5,
         ['spawn'] = { x = -260.000, y = -1.000, z = 423.000, rotation = 190 },
     },
-
     [ID.npc.CERMET_ALCOVE_OFFSET + 1] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 797.000, y = -1.000, z = 460.000, rotation = 125 },
     },
-
     [ID.npc.CERMET_ALCOVE_OFFSET + 2] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 540.000, y = -1.000, z = 297.000, rotation = 60 },
     },
-
     [ID.npc.CERMET_ALCOVE_OFFSET + 3] =
     {
         ['limit'] = 40,
@@ -71,6 +68,10 @@ entity.onTrigger = function(player, npc)
     end
 
     npc:setLocalVar("QuasiluminId", quasilumin:getID())
+
+    quasilumin:addListener("DESPAWN", "DESPAWN_QUASILUMIN", function()
+        npc:setLocalVar("QuasiluminId", 0)
+    end)
 
     quasilumin:setSpawn(data.spawn.x, data.spawn.y, data.spawn.z, data.spawn.rotation)
     quasilumin:spawn()

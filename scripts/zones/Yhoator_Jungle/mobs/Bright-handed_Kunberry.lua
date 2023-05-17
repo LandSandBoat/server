@@ -13,7 +13,6 @@ require("scripts/globals/regimes")
 local entity = {}
 
 -- TODO: Implement better pathing systems for guards to follow master
-
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
     mob:addMod(xi.mod.DMG, -5000)

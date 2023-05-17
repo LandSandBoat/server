@@ -20,6 +20,7 @@ zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.LIKHO)
     end
+
     xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_ALLOCEN)
     xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_AMON)
     xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_HABORYM)

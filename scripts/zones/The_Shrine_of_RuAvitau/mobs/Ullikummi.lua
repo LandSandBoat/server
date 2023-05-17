@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 1000)
 
     mob:addListener("WEAPONSKILL_USE", "ULLI_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
-        if action:param(target:getID()) > 1 then
+        if action:getParam(target:getID()) > 1 then
             mobArg:resetEnmity(target)
         end
     end)

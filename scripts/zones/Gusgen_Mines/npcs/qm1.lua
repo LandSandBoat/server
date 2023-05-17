@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             SetDropRate(172, 18246 + i, 0) -- zeros all drop rates
         end
 
-        SetDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
+        SetDropRate(172, 18246 + playerRace - raceOffset, 150) -- sets drop rate to 15% drop rate to specific week's race
 
         local newSpawn = math.random(1, 3) -- determine new spawn point for ???
         if newSpawn == 1 then

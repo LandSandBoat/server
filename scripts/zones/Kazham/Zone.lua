@@ -34,6 +34,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.chocobo.confirmRentalAfterZoneIn(player)
+end
+
 zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10000)
     if player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
