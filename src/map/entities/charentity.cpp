@@ -217,6 +217,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
+    retriggerLatentsAfterPacketParsing = false;
+
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
 
