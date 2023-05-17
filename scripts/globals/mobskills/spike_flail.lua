@@ -13,8 +13,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     elseif mob:hasStatusEffect(xi.effect.SUPER_BUFF) then
         return 1
-    elseif mob:hasStatusEffect(xi.effect.INVINCIBLE) then
-        return 1
     elseif mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
         return 1
     elseif not target:isBehind(mob, 96) then

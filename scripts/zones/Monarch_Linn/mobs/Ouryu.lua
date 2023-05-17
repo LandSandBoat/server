@@ -31,18 +31,14 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    -- only use invincible on the groud
-    if
-        mob:getAnimationSub() == 2 and
-        mob:getHPP() < mob:getLocalVar("setTwoHourThreshold")
-    then
+    -- can use invincible on ground or air
+    if mob:getHPP() < mob:getLocalVar("setTwoHourThreshold") then
         mob:useMobAbility(694)
         --make sure to use only once in case of regen back above threshold
         mob:setLocalVar("setTwoHourThreshold", 0)
     end
 
     if
-        not mob:hasStatusEffect(xi.effect.INVINCIBLE) and
         mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then

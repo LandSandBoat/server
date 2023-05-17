@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 4)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, math.random(5, 15))
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 30)
 
     return dmg

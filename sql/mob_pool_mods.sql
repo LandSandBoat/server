@@ -381,7 +381,7 @@ INSERT INTO `mob_pool_mods` VALUES (2963,252,40,0); -- CHARMRES: 40
 -- Omega
 INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
-INSERT INTO `mob_pool_mods` VALUES (2973,59,112,1); -- WEAPON_BONUS: 112
+INSERT INTO `mob_pool_mods` VALUES (2973,59,115,1); -- WEAPON_BONUS: 115 ( base damage of 75, so (lvl 63 + 2) * 1.15
 
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
@@ -514,9 +514,7 @@ INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
 
 -- Ultima
-INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
-INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
-INSERT INTO `mob_pool_mods` VALUES (4083,59,105,1); -- WEAPON_BONUS: 105
+INSERT INTO `mob_pool_mods` VALUES (4083,59,115,1); -- WEAPON_BONUS: 115 ( base damage of 75, so (lvl 63 + 2) * 1.15
 
 -- Vanguards Crow
 INSERT INTO `mob_pool_mods` VALUES (4186,34,20,1);  -- MAGIC_COOL: 20

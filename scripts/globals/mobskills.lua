@@ -148,7 +148,7 @@ end
 -- All of this should be re-writen like player weapons skills with params.
 -- THIS IS ONLY A WORKAROUND
 
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, critperc, attmod)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, ftp100, ftp200, ftp300, critperc, attmod)
     local returninfo = { }
     local fStr = 0
     local tp = mob:getTP()
@@ -209,13 +209,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     end
 
     -- Calculating with the known era pdif ratio for weaponskills.
-    if mtp000 == nil or mtp150 == nil or mtp300 == nil then -- Nil gate for xi.weaponskills.cMeleeRatio, will default mtp for each level to 1.
-        mtp000 = 1.0
-        mtp150 = 1.0
-        mtp300 = 1.0
+    if ftp100 == nil or ftp200 == nil or ftp300 == nil then -- Nil gate for xi.weaponskills.cMeleeRatio, will default mtp for each level to 1.
+        ftp100 = 1.0
+        ftp200 = 1.0
+        ftp300 = 1.0
     end
 
-    local ftpMult = xi.mobskills.ftP(tp, mtp000, mtp150, mtp300)
+    local ftpMult = xi.mobskills.ftP(tp, ftp100, ftp200, ftp300)
 
     hitdamage = hitdamage * ftpMult
     -- Set everything to 1 because the FTP for mobs iis not supposed to be for attack only.
@@ -325,6 +325,7 @@ end
 -- mob/target/skill should be passed from onMobWeaponSkill.
 -- dmg is the base damage (V value), accmod is a multiplier for accuracy (1 default, more than 1 = higher macc for mob),
 -- ditto for dmg mod but more damage >1 (equivalent of M value)
+-- dStatMult determines if a dINT bonus should be added to damage (1 for adding just dINT, other values add dINT * value)
 -- tpeffect is an enum from one of:
 -- 0 = xi.mobskills.magicalTpBonus.NO_EFFECT
 -- 1 = xi.mobskills.magicalTpBonus.MACC_BONUS
@@ -366,8 +367,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     end
 
     local dStat = 0
+    -- if need to add Dstat as damage bonus then calc
     if dStatMult then
-        dStat = mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+        dStat = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)) * dStatMult
     end
 
     local ftpMult = xi.mobskills.ftP(tp, ftp100, ftp200, ftp300)

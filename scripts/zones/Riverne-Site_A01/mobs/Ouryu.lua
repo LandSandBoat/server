@@ -50,19 +50,12 @@ end
 
 entity.onMobFight = function(mob, target)
     -- use 2hr on 10 min cooldown
-    if
-        mob:getAnimationSub() == 2 and
-        mob:getBattleTime() / 15 > mob:getLocalVar("twohour")
-    then
+    if mob:getBattleTime() / 15 > mob:getLocalVar("twohour") then
         mob:useMobAbility(694)
         mob:setLocalVar("twohour", math.random((mob:getBattleTime() / 15) + 36, (mob:getBattleTime() / 15) + 40))
     end
 
-    if
-        not mob:hasStatusEffect(xi.effect.INVINCIBLE) and
-        mob:actionQueueEmpty() and
-        mob:canUseAbilities()
-    then
+    if mob:actionQueueEmpty() and mob:canUseAbilities() then
         local changeTime = mob:getLocalVar("changeTime")
 
         -- first flight
