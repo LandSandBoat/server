@@ -3401,6 +3401,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
+    PChar->retriggerLatentsAfterPacketParsing = true; // retrigger all latents after all equip packets are parsed
 }
 
 /************************************************************************
