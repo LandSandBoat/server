@@ -468,15 +468,17 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         return false;
     }
 
-    auto m_turnLength = xirand::GetRandomNumber((int)maxTurns) + 1;
+    auto m_turnLength = static_cast<uint8_t>(xirand::GetRandomNumber<uint32>(maxTurns) + 1);
 
-    position_t startPosition = start;
+    // Seemingly arbitrary value to pass for maxRadius, all values seem to give similar results, likely due to navmesh polygons being too dense?
+    float      maxRadiusForPolyQuery = maxRadius / 10.f;
+    position_t startPosition         = start;
 
-    // find end points for turns
-    for (int i = 0; i < m_turnLength; i++)
+    // find end points for turns, iterate potentially twice as many times to account for erroneous turnPoints
+    for (int i = 0; i < m_turnLength * 2; i++)
     {
-        // look for new point centered around the last point
-        auto status = m_POwner->loc.zone->m_navMesh->findRandomPosition(startPosition, maxRadius);
+        // look for new turnPoint. findRandomPosition doesn't guarantee the new point is within the radius
+        auto status = m_POwner->loc.zone->m_navMesh->findRandomPosition(startPosition, maxRadiusForPolyQuery);
 
         // couldn't find one point so just break out
         if (status.first != 0)
@@ -484,11 +486,24 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
             return false;
         }
 
-        m_turnPoints.push_back(status.second);
-        startPosition = m_turnPoints[i];
+        float distSq = distanceSquared(startPosition, status.second, true);
+        // only add the roam point if it's _actually_ within range of the spawn point...
+        if (distSq < maxRadius * maxRadius)
+        {
+            m_turnPoints.push_back(status.second);
+        }
+        // else
+        // {
+        //     ShowDebug("CPathFind::FindRandomPath (%s - %d) random point too far: sq distance (%f)", m_POwner->GetName(), m_POwner->id, distSq);
+        // }
+        if (m_turnPoints.size() >= m_turnLength)
+            break;
     }
-    m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
-    m_currentPoint = 0;
+    if (m_turnPoints.size() > 0)
+    {
+        m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
+        m_currentPoint = 0;
+    }
 
     return !m_points.empty();
 }
