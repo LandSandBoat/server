@@ -7,6 +7,11 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onMobDisengage = function(mob)
+    mob:setLocalVar("phase", 0)
+    mob:setLocalVar("1000", 0)
+end
+
 entity.onMobFight = function(mob, target)
     local lifePercent = mob:getHPP()
     local phase       = mob:getLocalVar("phase")
