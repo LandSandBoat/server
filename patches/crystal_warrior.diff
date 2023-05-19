@@ -1,3 +1,16 @@
+diff --git "a/src/map/utils/synthutils.cpp" "b/src/map/utils/synthutils.cpp"
+index 170ada632d..ef93b36468 100644
+--- "a/src/map/utils/synthutils.cpp"
++++ "b/src/map/utils/synthutils.cpp"
+@@ -619,7 +619,7 @@ namespace synthutils
+                 charutils::SaveCharSkills(PChar, skillID);
+ 
+                 // Skill Up removal if using spezialization system
+-                if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
++                if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS") && PChar->getCharVar("[CW]STATUS") == 0)
+                 {
+                     PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
+                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
 diff --git a/src/map/utils/charutils.cpp b/src/map/utils/charutils.cpp
 index 7e0df82ae0..a7ac761654 100644
 --- a/src/map/utils/charutils.cpp
@@ -6,7 +19,7 @@ index 7e0df82ae0..a7ac761654 100644
              return false;
          }
  
-+        bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS");
++        bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") > 0;
 +
          if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
              (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
@@ -20,7 +33,7 @@ index 7e0df82ae0..a7ac761654 100644
              }
  
 -            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
-+            bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") == 1;
++            bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") > 0;
 +
 +            if (PItem->getReqLvl() > (noGearScaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
              {
@@ -33,7 +46,7 @@ index 7e0df82ae0..a7ac761654 100644
 -            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
 +            double SkillUpChance = 0;
 +
-+            if (PChar->getCharVar("[CW]STATUS") == 1)
++            if (PChar->getCharVar("[CW]STATUS") > 0)
 +            {
 +                SkillUpChance = (Diff / 5.0) * (2.0 - log10(1.0 + CurSkill / 100));
 +            }
@@ -58,7 +71,7 @@ index 7e0df82ae0..a7ac761654 100644
              EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
              float          exp      = (float)GetBaseExp(maxlevel, moblevel);
 +            
-+            if (PMember->getCharVar("[CW]STATUS") == 1 && pcinzone > 1 && !PMember->PParty->HasTrusts())
++            if (PMember->getCharVar("[CW]STATUS") > 0 && pcinzone > 1 && !PMember->PParty->HasTrusts())
 +            {
 +                exp *= 1.2;
 +            }
@@ -79,7 +92,7 @@ index 7e0df82ae0..a7ac761654 100644
          if (!expFromRaise)
          {
 -            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
-+            if (PChar->getCharVar("[CW]STATUS") == 1)
++            if (PChar->getCharVar("[CW]STATUS") > 0)
 +            {
 +                exp = exp * 0.5;
 +            }
@@ -135,18 +148,42 @@ index 170ada632d..731e4c4dc2 100644
                  {
                      skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
                      if (skillUpAmount > 9)
-diff --git "a/src/search/data_loader.cpp" "b/src/search/data_loader.cpp"
-index 56cda7b3d0..b219037cc7 100644
---- "a/src/search/data_loader.cpp"
-+++ "b/src/search/data_loader.cpp"
-@@ -350,6 +350,10 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
+diff --git a/src/search/data_loader.cpp b/src/search/data_loader.cpp
+index d74a3307b7..6cf5aa19b7 100644
+--- a/src/search/data_loader.cpp
++++ b/src/search/data_loader.cpp
+@@ -312,16 +312,11 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
+ 
+             PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
+             PPlayer->languages   = (uint8)sql->GetUIntData(15);
+-            PPlayer->mentor      = sql->GetUIntData(16) & NFLAG_MENTOR;
+             PPlayer->seacom_type = (uint8)sql->GetUIntData(17);
+ 
+             uint32 partyid  = sql->GetUIntData(1);
+             uint32 nameflag = sql->GetUIntData(10);
+ 
+-            if (PPlayer->mentor)
+-            {
+-                PPlayer->flags1 |= 0x0001;
+-            }
+             if (partyid == PPlayer->id)
              {
+                 PPlayer->flags1 |= 0x0008;
+@@ -351,6 +346,19 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                  PPlayer->flags1 |= 0x8000;
              }
-+            if (nameflag & FLAG_PLAYONLINE)
+ 
++            uint32 cwFlag   = settings::get<uint32>("main.CW_FLAG");
++            uint32 ucwFlag  = settings::get<uint32>("main.UCW_FLAG") >> 1;
++            uint32 menuFlag = sql->GetUIntData(16);
++
++            if (nameflag & ucwFlag)
 +            {
-+                PPlayer->flags1 |= 0x0600;
++                PPlayer->flags1 |= 0x0020;
 +            }
- 
++            else if (menuFlag & cwFlag)
++            {
++                PPlayer->flags1 |= 0x0001;
++            }
++
              PPlayer->flags2 = PPlayer->flags1;
- 
