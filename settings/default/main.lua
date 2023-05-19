@@ -251,4 +251,10 @@ xi.settings.main =
     -- CatsEyeXI
     DI_EVENT_MULTIPLIER          = 0, -- All Domain Invasion beads multiplied by 1.5.
     FREE_DIAL_KEY                = 0, -- When enabled, goblin dial NPC's will grant a free key daily.
+
+    -- Crystal Warrior
+    ENABLE_CW      = 1,
+    CW_COLOR       = 0x00002000,
+    CW_FLAG        = 0x02000000, -- (Config Flag) Mentor     (Search: 0x0001 -  Mentor)
+    UCW_FLAG       = 0x00200000, -- (Name Flag) Yellow/Green (Search: 0x0020 - Auto Group)
 }
