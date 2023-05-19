@@ -36,6 +36,12 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 32003 then
         xi.bcnm.onEventFinish(player, csid, option)
     end
+
+    if csid > 0 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
+    end
 end
 
 return entity
