@@ -149,7 +149,7 @@ index 170ada632d..731e4c4dc2 100644
                      skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
                      if (skillUpAmount > 9)
 diff --git a/src/search/data_loader.cpp b/src/search/data_loader.cpp
-index d74a3307b7..2b75baa357 100644
+index d74a3307b7..306f87cb94 100644
 --- a/src/search/data_loader.cpp
 +++ b/src/search/data_loader.cpp
 @@ -312,16 +312,11 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
@@ -173,9 +173,9 @@ index d74a3307b7..2b75baa357 100644
                  PPlayer->flags1 |= 0x8000;
              }
  
-+            uint32 cwFlag   = settings::get<uint32>("main.CW_FLAG");
-+            uint32 ucwFlag  = settings::get<uint32>("main.UCW_FLAG") >> 1;
-+            uint32 menuFlag = sql->GetUIntData(16);
++            uint32  cwFlag   = settings::get<uint32>("main.CW_FLAG");
++            uint32 ucwFlag   = settings::get<uint32>("main.UCW_FLAG");
++            uint32 menuFlag  = sql->GetUIntData(16);
 +
 +            if (nameflag & ucwFlag)
 +            {
