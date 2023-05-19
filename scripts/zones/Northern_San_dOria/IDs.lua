@@ -44,6 +44,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         HUNT_CANCELED                 = 8034,  -- Hunt canceled.
         WHAT_DO_YOU_WANT              = 11162, -- What do you want?
         FFR_GUILBERDRIER              = 11175, -- A magic shop, you say? A bit of magic would come in handy... I know! I'll have my daughter study it for me!
+        YOU_DONATE_GIL                = 11184, -- You donate 10 gil.
         AILBECHE_FATHER_WHERE         = 11201, -- Oh, Father! Where are you?
         ABIOLEGET_DIALOG              = 11251, -- All of Altana's children are welcome here.
         PELLIMIE_DIALOG               = 11252, -- Is this your first time here? Join us in prayer!

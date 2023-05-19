@@ -28,6 +28,7 @@ zones[xi.zone.EAST_RONFAURE] =
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
         RAYOCHINDOT_DIALOG            = 7421,  -- If you are outmatched, run to the city as quickly as you can.
         CROTEILLARD_DIALOG            = 7422,  -- Sorry, no chatting while I'm on duty.
+        THE_WATER_SPARKLES            = 7446,  -- The water sparkles in the light.
         CHEVAL_RIVER_WATER            = 7447,  -- You fill your waterskin with water from the river. You now have <item>.
         BLESSED_WATERSKIN             = 7466,  -- To get water, trade the waterskin you hold with the river.
         LOGGING_IS_POSSIBLE_HERE      = 7497,  -- Logging is possible here if you have <item>.
