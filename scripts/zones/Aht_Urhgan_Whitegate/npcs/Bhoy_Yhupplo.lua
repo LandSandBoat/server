@@ -49,7 +49,7 @@ entity.onEventUpdate = function(player, csid, option)
     if csid == 277 and selectiontype == 2 then
         local item = bit.rshift(option, 14)
         local choice = items[item]
-        local assaultPoints = player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
+        local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL)
         local canEquip = player:canEquipItem(choice.itemid) and 2 or 0
 
         player:updateEvent(0, 0, assaultPoints, 0, canEquip)

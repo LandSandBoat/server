@@ -24,6 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:isInDynamis() and not mob:getMaster() then
         cap = 1055
     end
+
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.magic.ele.DARK, cap)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

@@ -207,6 +207,7 @@ namespace mobutils
         JOBTYPE   mJob     = PMob->GetMJob();
         JOBTYPE   sJob     = PMob->GetSJob();
         uint8     mLvl     = PMob->GetMLevel();
+        uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
         uint8 grade;
@@ -417,13 +418,13 @@ namespace mobutils
         uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
         uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), sLvl);
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), sLvl);
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), sLvl);
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), sLvl);
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), sLvl);
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl);
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl);
 
         // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
         // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
@@ -459,6 +460,7 @@ namespace mobutils
             sVIT /= 4;
         }
 
+        // [stat] = [family Stat] + [main job Stat] + [sub job Stat]
         PMob->stats.STR = fSTR + mSTR + sSTR;
         PMob->stats.DEX = fDEX + mDEX + sDEX;
         PMob->stats.VIT = fVIT + mVIT + sVIT;
@@ -754,14 +756,14 @@ namespace mobutils
 
     void SetupRoaming(CMobEntity* PMob)
     {
-        uint16 distance = 7;
+        uint16 distance = 10;
         uint16 turns    = 1;
         uint16 cool     = 20;
         uint16 rate     = 15;
 
         if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
         {
-            distance = 10;
+            distance = 20;
             turns    = 3;
             cool     = 45;
         }
@@ -967,6 +969,12 @@ namespace mobutils
     {
         PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(spellList);
         RecalculateSpellContainer(PMob);
+    }
+
+    void SetSkillList(CMobEntity* PMob, uint16 skillList)
+    {
+        PMob->m_MobSkillList = skillList;
+        PMob->setMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
     }
 
     void InitializeMob(CMobEntity* PMob, CZone* PZone)
@@ -1264,7 +1272,7 @@ Usage:
         fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
+        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \

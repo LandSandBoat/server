@@ -16,6 +16,8 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 10)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
+    mob:setMod(xi.mod.ATTP, 30)
+    mob:setMod(xi.mod.REGAIN, 30)
     mob:setMod(xi.mod.REGEN, 1)
 end
 
@@ -64,15 +66,28 @@ end
 entity.onMobFight = function(mob, target)
     local stage = mob:getLocalVar("stage")
     local hpp = mob:getHPP()
-    if stage == 0 and hpp < 70 then
+
+    -- need to use this structure in case regens above back to previous stage
+    if stage ~= 0 and hpp > 70 then
+        mob:setLocalVar("stage", 0)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 728)
+        mob:setMod(xi.mod.ATTP, 30)
+        mob:setMod(xi.mod.REGAIN, 30)
+    elseif stage ~= 1 and hpp > 40 and hpp <= 70 then
         mob:setLocalVar("stage", 1)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1190)
-    elseif stage == 1 and hpp < 40 then
+        mob:setMod(xi.mod.ATTP, 30)
+        mob:setMod(xi.mod.REGAIN, 30)
+    elseif stage ~= 2 and hpp > 20 and hpp <= 40 then
         mob:setLocalVar("stage", 2)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1191)
-    elseif stage == 2 and hpp < 20 then
+        mob:setMod(xi.mod.ATTP, 30)
+        mob:setMod(xi.mod.REGAIN, 30)
+    elseif stage ~= 3 and hpp <= 20 then
         mob:setLocalVar("stage", 3)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1192)
+        -- boost to 100%
+        mob:setMod(xi.mod.ATTP, 100)
         mob:setMod(xi.mod.REGAIN, 100)
     end
 end

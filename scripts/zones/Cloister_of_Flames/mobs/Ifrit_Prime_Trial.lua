@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Cloister of Flames
 --  Mob: Ifrit Prime
--- Involved in Quest: Trial by Fire, Trial Size Trial by Fire
+-- Involved in Quest: Trial by Fire
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

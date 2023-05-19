@@ -34,6 +34,10 @@ zones[xi.zone.RANGUEMONT_PASS] =
     },
     mob =
     {
+        BAT_EYE_PH =
+        {
+            [17457225] = 17457226,
+        },
         GLOOM_EYE_PH =
         {
             [17457200] = 17457204,

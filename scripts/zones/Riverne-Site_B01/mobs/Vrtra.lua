@@ -4,28 +4,43 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/status")
+require("scripts/globals/follow")
 -----------------------------------
 local entity = {}
 
 local offsets = { 7, 9, 11, 8, 10, 12 }
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 75)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.DMGMAGIC, -50)
-    mob:setMod(xi.mod.DEF, 500)
+    mob:setMod(xi.mod.DEF, 466)
+    mob:setMod(xi.mod.ATT, 344)
+    mob:setMod(xi.mod.EVA, 450)
+    mob:setMod(xi.mod.UFASTCAST, 50)
+    mob:setMod(xi.mod.DARK_MEVA, 100)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMod(xi.mod.MATT, 75)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:resetLocalVars()
+    -- if engaged then send pets at target
+    for i, offset in ipairs(offsets) do
+        local pet = GetMobByID(mob:getID() + offset)
+        if pet:isAlive() then
+            pet:updateEnmity(mob:getTarget())
+        end
+    end
 end
 
 entity.onMobFight = function(mob, target)
     local spawnTime = mob:getLocalVar("spawnTime")
     local twohourTime = mob:getLocalVar("twohourTime")
-    local fifteenBlock = mob:getBattleTime() / 3
+    local threeSecTick = mob:getBattleTime() / 3
 
     if twohourTime == 0 then
         twohourTime = math.random(1, 2)
@@ -37,29 +52,48 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("spawnTime", spawnTime)
     end
 
-    if fifteenBlock > twohourTime and mob:checkDistance(target) < 17 then -- Spams Charm in bv2 version every 5s
-        mob:setLocalVar("twohour_tp", mob:getTP())
+    if
+        threeSecTick > twohourTime and
+        mob:checkDistance(target) < 17 and
+        mob:canUseAbilities()
+    then -- Spams Charm in bv2 version every 5s
+        mob:setLocalVar("skill_tp", mob:getTP())
         mob:useMobAbility(710)
-        mob:setLocalVar("twohourTime", fifteenBlock + math.random(1, 2))
-    elseif fifteenBlock > spawnTime + 10 then
-        mob:entityAnimationPacket("casm")
-        mob:timer(3000, function(mobArg)
-            local mobId = mobArg:getID()
-            for i, offset in ipairs(offsets) do
-                local pet = GetMobByID(mobId + offset)
+        mob:setLocalVar("twohourTime", threeSecTick + math.random(1, 2))
+    elseif threeSecTick > spawnTime + 10 then
+        local mobId = mob:getID()
 
-                if not pet:isSpawned() then
-                    mobArg:entityAnimationPacket("shsm")
-                    pet:spawn(60)
-                    local pos = mobArg:getPos()
-                    pet:setPos(pos.x, pos.y, pos.z)
-                    pet:updateEnmity(mobArg:getTarget())
+        for _, offset in ipairs(offsets) do
+            local pet = GetMobByID(mobId + offset)
 
-                    break
-                end
+            if not pet:isSpawned() then
+                mob:entityAnimationPacket("casm")
+                mob:setAutoAttackEnabled(false)
+                mob:setMagicCastingEnabled(false)
+                mob:setMobAbilityEnabled(false)
+
+                mob:timer(3000, function(mobArg)
+                    if mobArg:isAlive() then
+                        mobArg:entityAnimationPacket("shsm")
+                        mobArg:setAutoAttackEnabled(true)
+                        mobArg:setMagicCastingEnabled(true)
+                        mobArg:setMobAbilityEnabled(true)
+                        pet:spawn()
+                        local pos = mobArg:getPos()
+                        pet:setPos(pos.x, pos.y, pos.z)
+                        local options = { followDistance = 0.0 }
+                        xi.follow.follow(pet, mobArg, options)
+                        if mobArg:getTarget() ~= nil then
+                            pet:updateEnmity(target)
+                        end
+                    end
+                end)
+
+                break
             end
-        end)
-        mob:setLocalVar("spawnTime", fifteenBlock + 4)
+        end
+
+        mob:setLocalVar("spawnTime", threeSecTick + 4)
     end
 end
 
@@ -70,15 +104,23 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill, action)
     local skillID = skill:getID()
     if skillID == 710 then
-        mob:addTP(mob:getLocalVar("twohour_tp"))
-        mob:setLocalVar("twohour_tp", 0)
+        mob:addTP(mob:getLocalVar("skill_tp"))
+        mob:setLocalVar("skill_tp", 0)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    -- Despawn adds when Vrtra dies
-    for i, offset in ipairs(offsets) do
-        DespawnMob(mob:getID() + offset)
+    if mob:getLocalVar("deathTrigger") == 0 then
+        -- if vrtra dies then kill all pets
+        local mobId = mob:getID()
+        for i, offset in ipairs(offsets) do
+            local pet = GetMobByID(mobId + offset)
+            if pet:isAlive() then
+                pet:setHP(0)
+            end
+        end
+
+        mob:setLocalVar("deathTrigger", 1)
     end
 end
 

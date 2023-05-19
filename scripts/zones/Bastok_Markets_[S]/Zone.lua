@@ -9,7 +9,6 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
-    xi.extravaganza.shadowEraHide(ID.npc.SHENNI)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

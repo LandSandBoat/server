@@ -71,7 +71,10 @@ entity.onEventUpdate = function(player, csid, option)
     local animusTimer = player:getCharVar("[ENM]animusTimer")
     local acrimonyTimer = player:getCharVar("[ENM]acrimonyTimer")
 
-    if csid == 10064 or csid == 10065 then
+    if
+        csid == 10064 or
+        csid == 10065
+    then
         -- Spit out time remaining on KI if on cooldown
         -- Spire of Holla ENM
         if

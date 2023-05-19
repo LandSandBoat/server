@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Cloister of Tremors
 --  Mob: Titan Prime
--- Involved in Quest: Trial by Earth, Trial Size Trial by Earth
+-- Involved in Quest: Trial by Earth
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

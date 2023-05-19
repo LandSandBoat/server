@@ -32,6 +32,8 @@ function onBattlefieldHandlerInitialise(zone)
     return default
 end
 
+xi.loot = xi.loot or {}
+
 xi.battlefield = xi.battlefield or {}
 xi.battlefield.contents = xi.battlefield.contents or {}
 xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
@@ -1093,7 +1095,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
 
             for _, entry in pairs(lootGroup) do
                 if type(entry) == 'table' then
-                    max = max + entry.droprate
+                    max = max + entry.weight
                 end
             end
 
@@ -1104,14 +1106,14 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                 local current = 0
                 for _, entry in pairs(lootGroup) do
                     if type(entry) == 'table' then
-                        current = current + entry.droprate
+                        current = current + entry.weight
 
-                        if current > roll then
+                        if current >= roll then
                             if entry.itemid == 0 then
                                 break
                             end
 
-                            if entry.itemid == 65535 then
+                            if entry.item == 65535 then
                                 local gil = entry.amount / #players
 
                                 for k = 1, #players, 1 do
@@ -1122,7 +1124,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                                 break
                             end
 
-                            players[1]:addTreasure(entry.itemid, npc)
+                            players[1]:addTreasure(entry.item, npc)
                             break
                         end
                     end
@@ -1474,13 +1476,13 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                 local max = 0
 
                 for _, entry in pairs(lootGroup) do
-                    max = max + entry.droprate
+                    max = max + entry.weight
                 end
 
                 local roll = math.random(max)
 
                 for _, entry in pairs(lootGroup) do
-                    max = max - entry.droprate
+                    max = max - entry.weight
 
                     if roll > max then
                         if entry.itemid ~= 0 then

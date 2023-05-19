@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `cheat_incidents` (
   `incident_time` datetime NOT NULL DEFAULT current_timestamp(),
   `cheatid` int(10) unsigned NOT NULL,
   `cheatarg` int(10) unsigned NOT NULL,
-  `description` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+  `description` varchar(512) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

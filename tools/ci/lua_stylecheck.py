@@ -22,6 +22,11 @@ import re
 import regex
 import sys
 
+# [["deprecated func", "suggested replacement"], ...]
+deprecated_functions = [
+    ["table.getn", "#t"],
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -60,15 +65,15 @@ class LuaStyleCheck:
             self.error("Incorrectly defined table")
 
         # \{         : Opening curly brace
-        # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
+        # [^ \n\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
 
-        for _ in re.finditer("\{[^ ^\n^\}]", line):
+        for _ in re.finditer("\{[^ \n\}]", line):
             self.error("Table opened without an appropriate following space or newline")
 
-        # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
+        # [^ \n\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
         # \}         : Closing curly brace
 
-        for _ in re.finditer("[^ ^\n^\{]\}", line):
+        for _ in re.finditer("[^ \n\{]\}", line):
             self.error("Table closed without an appropriate preceding space or newline")
 
     def check_parameter_padding(self, line):
@@ -88,10 +93,15 @@ class LuaStyleCheck:
 
         See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
         """
-        # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
 
-        for _ in re.finditer(".*\;$", line):
-            self.error("Semicolon detected at end of line")
+        # Ignore strings in line
+        quote_regex = regex.compile("\"(([^\"\"]+)|(?R))*+\"|\'(([^\'\']+)|(?R))*+\'", re.S)
+        removed_quote_str = regex.sub(quote_regex, "", line)
+
+        # ; : Any line that contains a semicolon.
+
+        for _ in re.finditer(";", removed_quote_str):
+            self.error("Semicolon detected in line.")
 
     def check_variable_names(self, line):
         """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
@@ -223,17 +233,23 @@ class LuaStyleCheck:
             if not 'if' in condition_end and condition_end != '':
                 self.error("Invalid multiline conditional format")
 
+    def check_deprecated_functions(self, line):
+        for entry in deprecated_functions:
+            deprecated_func = entry[0]
+            replacement     = entry[1]
+            if contains_word(deprecated_func)(line):
+                self.error(f"Use of deprecated function: {deprecated_func}. Suggested replacement: {replacement}")
+
     def run_style_check(self):
-        if self.filename == None:
+        if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
-            return 0
+            return
 
         with open(self.filename, 'r') as f:
             self.lines          = f.readlines()
             in_block_comment    = False
             in_condition        = False
             full_condition      = ""
-            next_indent_level   = 0
 
             for line in self.lines:
                 self.counter = self.counter + 1
@@ -268,6 +284,8 @@ class LuaStyleCheck:
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)
+
+                self.check_deprecated_functions(code_line)
 
                 # Condition blocks/lines should not have outer parentheses
                 # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)
@@ -314,6 +332,8 @@ class LuaStyleCheck:
             # f.seek(0)
             # f.writelines(lines)
 
+        return
+
     show_errors  = True
     lines        = []
     counter      = 0
@@ -337,7 +357,7 @@ if target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 38
+    expected_errors = 41
 else:
     total_errors = LuaStyleCheck(target).errcount
 

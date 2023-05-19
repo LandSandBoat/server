@@ -87,14 +87,12 @@ quest.sections =
             onEventFinish =
             {
                 [475] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.STATIONERY_SET) then
-                        player:confirmTrade()
-                        npcUtil.giveCurrency(player, 'gil', 500)
-                    end
+                    player:confirmTrade()
+                    npcUtil.giveCurrency(player, 'gil', 500)
                 end,
 
                 [477] = function(player, csid, option, npc)
-                    if quest:complete() then
+                    if quest:complete(player) then
                         player:confirmTrade()
                     end
                 end,

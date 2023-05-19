@@ -127,6 +127,9 @@ xi.settings.map =
     -- Enables fishing. 0 = Disbaled. 1 = Enable. ENABLE AT YOUR OWN RISK.
     FISHING_ENABLE = false,
 
+    -- Minimum level (across all jobs) required to for a player to fish.
+    FISHING_MIN_LEVEL = 15,
+
     -- Multipler for fishing skill-up chance. Default = 1.0, very hard.
     FISHING_SKILL_MULTIPLIER = 1.0,
 
@@ -255,6 +258,17 @@ xi.settings.map =
     ITEM_PARALYSIS_LOSS              = true, -- Allow items to be put on recast or deleted when used during a paralysis tick.
     ITEM_PARALYSIS_SCROLL_PROTECTION = false, -- Stops scrolls from being deleted if a paralysis tick occurs.
 
+    -- Moghouse Thingies
+    MH_EXIT_HOMEPOINT  = false, -- Enables A Homepoint Set Prompt On MH Exit
+
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
+
+    -- Engage Time Reduction
+    ENGAGE_TIME_REDUCTION = 0.5, -- Decreases re-engage time(ms) by a percentage. (float)
+    VERTICAL_CHASE_RANGE  = -10,
+
+    -- Rent-A-Room
+    RENT_A_ROOM     = false,
+    ERA_RENT_A_ROOM = false,
 }

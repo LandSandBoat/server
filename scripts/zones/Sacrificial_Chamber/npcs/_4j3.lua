@@ -13,11 +13,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.bcnm.onTrigger(player, npc)
+    player:startOptionalCutscene(32003)
 end
 
-entity.onEventUpdate = function(player, csid, option, extras)
-    xi.bcnm.onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option)
+    xi.bcnm.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)

@@ -29,6 +29,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 1.0
+    params.damageSpell = true
+
     local resist = xi.magic.applyResistance(caster, target, spell, params)
     --get the resisted damage
     dmg = dmg * resist

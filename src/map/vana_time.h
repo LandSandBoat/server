@@ -79,6 +79,7 @@ public:
     uint32 getWeekday() const;
     uint32 getMoonPhase() const;
     uint8  getMoonDirection() const;
+    uint8  getMoonLatentPhase();
     uint8  getRSERace() const;
     uint8  getRSELocation() const;
     uint32 getSysHour();

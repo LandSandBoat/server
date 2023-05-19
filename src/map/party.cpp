@@ -523,6 +523,13 @@ void CParty::AddMember(CBattleEntity* PEntity)
         return;
     }
 
+    // If it's a player party, make sure only 6 players can be in it
+    if (PEntity->objtype == TYPE_PC && m_PartyType == PARTY_PCS && members.size() > 5)
+    {
+        // Party is full -- Do nothing
+        return;
+    }
+
     PEntity->PParty = this;
     members.push_back(PEntity);
 
@@ -591,6 +598,12 @@ void CParty::AddMember(uint32 id)
 {
     if (m_PartyType == PARTY_PCS)
     {
+        // Check for full party
+        if (members.size() > 5)
+        {
+            return;
+        }
+
         uint32 allianceid = 0;
         uint16 Flags      = 0;
         if (m_PAlliance)

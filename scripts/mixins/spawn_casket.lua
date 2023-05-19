@@ -16,10 +16,30 @@ g_mixins.spawn_casket = function(casketMob)
             if mob:getMaster() ~= nil then
                 local master = mob:getMaster()
                 if master:isMob() then -- sanity check, ensuring the mob killed is not a player's pet.
-                    xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                    if
+                        mob:getZone():getType() < xi.zoneType.DUNGEON and
+                        xi.settings.main.ENABLE_WOTG == 1
+                    then
+                        xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                    elseif
+                        mob:getZone():getType() == xi.zoneType.DUNGEON and
+                        xi.settings.main.ENABLE_ABYSSEA == 1
+                    then
+                        xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                    end
                 end
             else
-                xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                if
+                    mob:getZone():getType() < xi.zoneType.DUNGEON and
+                    xi.settings.main.ENABLE_WOTG == 1
+                then
+                    xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                elseif
+                    mob:getZone():getType() == xi.zoneType.DUNGEON and
+                    xi.settings.main.ENABLE_ABYSSEA == 1
+                then
+                    xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                end
             end
         end
     end)

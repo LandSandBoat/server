@@ -20,7 +20,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
-        if (id >= 17016 and id <= 17023) then
+        if
+            id >= 17016 and
+            id <= 17023
+        then
             return 0, 0
         else
             return xi.msg.basic.MUST_HAVE_FOOD, 0
@@ -47,42 +50,49 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     -- TODO: Create lookup table for these switches
     switch (rangeObj) : caseof {
-        [17016] = function (x) -- pet food alpha biscuit
+        [ 17016 ] = function(x) -- pet food alpha biscuit
             minimumHealing = 20
             regenAmount    = 1
             totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 10))
         end,
-        [17017] = function (x) -- pet food beta biscuit
+
+        [ 17017 ] = function(x) -- pet food beta biscuit
             minimumHealing = 50
             regenAmount    = 2
             totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 33))
         end,
-        [17018] = function (x) -- pet food gamma biscuit
+
+        [ 17018 ] = function(x) -- pet food gamma biscuit
             minimumHealing = 100
             regenAmount    = 3
             totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 35)) -- TO BE VERIFIED.
         end,
-        [17019] = function (x) -- pet food delta biscuit
+
+        [ 17019 ] = function(x) -- pet food delta biscuit
             minimumHealing = 150
             regenAmount    = 4
             totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 40)) -- TO BE VERIFIED.
         end,
-        [17020] = function (x) -- pet food epsilon biscuit
+
+        [ 17020 ] = function(x) -- pet food epsilon biscuit
             minimumHealing = 300
             regenAmount    = 5
             totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 45))
         end,
-        [17021] = function (x) -- pet food zeta biscuit
+
+        [ 17021 ] = function(x) -- pet food zeta biscuit
             minimumHealing = 350
             regenAmount    = 6
             totalHealing   = math.floor(minimumHealing + 3 * (playerMnd - 45))
         end,
-        [17022] = function (x) -- pet food eta biscuit
+
+        [ 17022 ] = function(x) -- pet food eta biscuit
             minimumHealing = 1200
             regenAmount    = 17
             totalHealing   = math.floor(minimumHealing + 4 * (playerMnd - 50))
         end,
-        [17023] = function (x) -- pet food theta biscuit
+
+        [ 17023 ] = function(x) -- pet food theta biscuit
             minimumHealing = 1600
             regenAmount    = 20
             totalHealing   = math.floor(minimumHealing + 4 * (playerMnd - 55))
@@ -91,13 +101,14 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     -- Now calculating the bonus based on gear.
     switch (player:getEquipID(xi.slot.BODY)) : caseof {
-        [12646] = function() -- beast jackcoat
+        [ 12646 ] = function() -- beast jackcoat
             -- This will remove Paralyze, Poison and Blind from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
             pet:delStatusEffect(xi.effect.POISON)
             pet:delStatusEffect(xi.effect.BLINDNESS)
         end,
-        [14481] = function (x) -- beast jackcoat +1
+
+        [ 14481 ] = function(x) -- beast jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
             pet:delStatusEffect(xi.effect.POISON)
@@ -106,13 +117,15 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
         end,
-        [15095] = function (x) -- monster jackcoat
+
+        [ 15095 ] = function(x) -- monster jackcoat
             -- This will remove Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.WEIGHT)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
         end,
-        [14508] = function (x) -- monster jackcoat +1
+
+        [ 14508 ] = function(x) -- monster jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
             pet:delStatusEffect(xi.effect.POISON)

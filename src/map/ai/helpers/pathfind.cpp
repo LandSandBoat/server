@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pathfind.h"
+#include "../../../common/settings.h"
 #include "../../../common/utils.h"
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
@@ -156,7 +157,7 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         auto PMob = static_cast<CMobEntity*>(m_POwner);
 
-        if (point.y - m_POwner->loc.p.y < -6 && !PMob->PAI->IsRoaming()) // Target is over 6 yalms above me, I should process disengage if needed.
+        if (point.y - m_POwner->loc.p.y <= settings::get<int8>("map.VERTICAL_CHASE_RANGE") && !PMob->PAI->IsRoaming()) // Target is over 6 yalms above me, I should process disengage if needed.
         {
             auto disengageMod = PMob->getMobMod(MOBMOD_DISENGAGE_NO_PATH);
 
@@ -412,6 +413,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
 
     float stepDistance = (speed / 10) / 2;
     float distanceTo   = distance(m_POwner->loc.p, pos);
+    float diff_y       = pos.y - m_POwner->loc.p.y;
 
     // face point mob is moving towards
     LookAt(pos);
@@ -431,8 +433,21 @@ void CPathFind::StepTo(const position_t& pos, bool run)
             float radians = (1 - (float)m_POwner->loc.p.rotation / 256) * 2 * (float)M_PI;
 
             m_POwner->loc.p.x += cosf(radians) * (distanceTo - m_distanceFromPoint);
-            m_POwner->loc.p.y = pos.y;
             m_POwner->loc.p.z += sinf(radians) * (distanceTo - m_distanceFromPoint);
+            if (abs(diff_y) > .5f)
+            {
+                // Don't step too far vertically by simply utilizing the slope
+                float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, true);
+                float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
+                float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
+                // clamp new_y between start and end vertical position
+                new_y             = new_y < min_y ? min_y : new_y;
+                m_POwner->loc.p.y = new_y > max_y ? max_y : new_y;
+            }
+            else
+            {
+                m_POwner->loc.p.y = pos.y;
+            }
         }
     }
     else
@@ -442,8 +457,21 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         float radians = (1 - (float)m_POwner->loc.p.rotation / 256) * 2 * (float)M_PI;
 
         m_POwner->loc.p.x += cosf(radians) * stepDistance;
-        m_POwner->loc.p.y = pos.y;
         m_POwner->loc.p.z += sinf(radians) * stepDistance;
+        if (abs(diff_y) > .5f)
+        {
+            // Don't step too far vertically by simply utilizing the slope
+            float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, true);
+            float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
+            float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
+            // clamp new_y between start and end vertical position
+            new_y             = new_y < min_y ? min_y : new_y;
+            m_POwner->loc.p.y = new_y > max_y ? max_y : new_y;
+        }
+        else
+        {
+            m_POwner->loc.p.y = pos.y;
+        }
     }
 
     m_POwner->loc.p.moving += (uint16)((0x36 * ((float)m_POwner->speed / 0x28)) - (0x14 * (mode - 1)));
@@ -562,7 +590,8 @@ bool CPathFind::OnPoint() const
 
 float CPathFind::GetRealSpeed()
 {
-    uint8 realSpeed = m_POwner->speed;
+    int realSpeed = m_POwner->speed;
+    int speedMod  = settings::get<int8>("map.MOB_SPEED_MOD");
 
     // 'GetSpeed()' factors in movement bonuses such as map confs and modifiers.
     if (m_POwner->objtype != TYPE_NPC)
@@ -579,11 +608,14 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
+            if (realSpeed > 20)
+            {
+                realSpeed += std::clamp(speedMod, 0, realSpeed - 10); // Never allow the mob speed mod to reduce speed so slow they can't move.  Only Bind
+            }
         }
     }
 
-    return realSpeed;
+    return std::clamp<uint8>(realSpeed, 0, 255);
 }
 
 bool CPathFind::IsFollowingPath()

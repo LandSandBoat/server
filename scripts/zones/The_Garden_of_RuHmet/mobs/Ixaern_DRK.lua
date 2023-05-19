@@ -17,6 +17,7 @@ local entity = {}
 entity.onMobInitialize = function(IxAernDrkMob)
     IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
+
         if math.random (1, 10) < 10 then
             -- reraise
             local target = mob:getTarget()
@@ -106,6 +107,17 @@ end
 
 entity.onMobDespawn = function(mob)
     mob:setLocalVar("AERN_RERAISES", 0)
+
+    local mobId = mob:getID()
+    for i = mobId + 1, mobId + 2 do
+        if GetMobByID(i):isSpawned() then
+            DespawnMob(i)
+        end
+    end
+
+    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
+    qmDrk:setLocalVar("nextMove", os.time() + 1800 + xi.settings.main.FORCE_SPAWN_QM_RESET_TIME) -- 30 minutes from now, once the QM respawns
+    -- the QM's position and hate were already reset when the mob popped, we just need this here in the despawn function for the correct respawn timing
 end
 
 return entity

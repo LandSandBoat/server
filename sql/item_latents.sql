@@ -80,7 +80,7 @@ INSERT INTO `item_latents` VALUES (11301,369,1,39,13);    -- Refresh+1 at night 
 -- -------------------------------------------------------
 -- Rambler's Cloak
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (11312,8,5,7,100);     -- STR+5 while TP >=100%
+INSERT INTO `item_latents` VALUES (11312,8,5,7,1000);     -- STR+5 while TP >=1000%
 
 -- -------------------------------------------------------
 -- Dinner Jacket
@@ -1650,12 +1650,12 @@ INSERT INTO `item_latents` VALUES (15532,370,1,56,2);    -- Latent Effect is tri
 -- -------------------------------------------------------
 -- Rajas Ring
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15543,8,1,51,45);     -- INT+1 above level 45
-INSERT INTO `item_latents` VALUES (15543,8,1,51,60);     -- INT+1 above level 60
-INSERT INTO `item_latents` VALUES (15543,8,1,51,75);     -- INT+1 above level 75
-INSERT INTO `item_latents` VALUES (15543,9,1,51,45);     -- MND+1 above level 45
-INSERT INTO `item_latents` VALUES (15543,9,1,51,60);     -- MND+1 above level 60
-INSERT INTO `item_latents` VALUES (15543,9,1,51,75);     -- MND+1 above level 75
+INSERT INTO `item_latents` VALUES (15543,8,1,51,45);     -- STR+1 above level 45
+INSERT INTO `item_latents` VALUES (15543,8,1,51,60);     -- STR+1 above level 60
+INSERT INTO `item_latents` VALUES (15543,8,1,51,75);     -- STR+1 above level 75
+INSERT INTO `item_latents` VALUES (15543,9,1,51,45);     -- DEX+1 above level 45
+INSERT INTO `item_latents` VALUES (15543,9,1,51,60);     -- DEX+1 above level 60
+INSERT INTO `item_latents` VALUES (15543,9,1,51,75);     -- DEX+1 above level 75
 
 -- -------------------------------------------------------
 -- Tamas Ring

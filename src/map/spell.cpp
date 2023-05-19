@@ -170,6 +170,11 @@ bool CSpell::isCure()
             m_ID == SpellID::Cura_III);
 }
 
+bool CSpell::isRegen()
+{
+    return (m_ID == SpellID::Regen || m_ID == SpellID::Regen_II || m_ID == SpellID::Regen_III || m_ID == SpellID::Regen_IV);
+}
+
 bool CSpell::isDebuff()
 {
     return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT ||

@@ -13,10 +13,15 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    InitializeFishingContestSystem()
 end
 
 zoneObject.onGameHour = function(zone)
     SetServerVariable("Selbina_Destination", math.random(1, 100))
+end
+
+zoneObject.onZoneTick = function(zone)
+    ProgressFishingContest()
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -60,12 +65,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if player:getLocalVar('[BOAT]Paid') == 1 then
+    -- if player:getLocalVar('[BOAT]Paid') == 1 then
         player:startEvent(200)
-    else
-        player:setPos(33.1626, -2.5586, -26.3290, 69)
-        player:setLocalVar('[BOAT]Paid', 0)
-    end
+    -- else
+    --     player:setPos(33.1626, -2.5586, -26.3290, 69)
+    --     player:setLocalVar('[BOAT]Paid', 0)
+    -- end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -73,7 +78,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 200 then
-        if GetServerVariable("Selbina_Destination") >= 89 then
+        if GetServerVariable("Selbina_Destination") >= 75 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)

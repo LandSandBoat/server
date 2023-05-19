@@ -33,11 +33,22 @@
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../items/item_weapon.h"
+#include "../lua/lua_baseentity.h"
 #include "../lua/luautils.h"
 #include "../map.h"
 #include "../mob_modifier.h"
 #include "../mob_spell_list.h"
+#include "../packets/char_abilities.h"
+#include "../packets/char_jobs.h"
+#include "../packets/char_recast.h"
+#include "../packets/char_skills.h"
+#include "../packets/char_spells.h"
+#include "../packets/char_stats.h"
+#include "../packets/char_sync.h"
+#include "../packets/char_update.h"
 #include "../packets/entity_update.h"
+#include "../status_effect_container.h"
+#include "../utils/charutils.h"
 #include "../zone_instance.h"
 #include "mobutils.h"
 #include "zoneutils.h"
@@ -334,7 +345,7 @@ namespace zoneutils
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, \
+        const char* Query = "SELECT mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, \
         mob_spawn_points.pos_rot, mob_spawn_points.pos_x, mob_spawn_points.pos_y, mob_spawn_points.pos_z, \
         mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
         mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, \
@@ -352,14 +363,18 @@ namespace zoneutils
         mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
         mob_groups.content_tag, \
         mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
-        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
-        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-        INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
-        INNER JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
-        INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-        INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem, \
+        mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) \
+        FROM mob_groups \
+        LEFT JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        LEFT JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+        LEFT JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
+        LEFT JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
+        LEFT JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        LEFT JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
+        LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) \
         WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
+        AND NOT mob_groups.poolid = 0 \
         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
         char address[INET_ADDRSTRLEN];
@@ -574,6 +589,20 @@ namespace zoneutils
 
                     PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
+                    PMob->m_spawnSet = (uint8)sql->GetUIntData(86); // Which spawnSet a specific mob belongs to.
+
+                    // Add to the spawn group
+                    if (PMob->m_spawnSet > 0)
+                    {
+                        auto& spawnGroup = GetZone(ZoneID)->m_SpawnGroups[PMob->m_spawnSet];
+                        spawnGroup.groupMobs.push_back(PMob);
+                        spawnGroup.maxSpawns = (uint8)sql->GetUIntData(87);
+                    }
+
+                    // Write defaults
+                    PMob->defaults.d_AllowRespawn = PMob->m_AllowRespawn;
+                    PMob->defaults.d_RespawnTime  = PMob->m_RespawnTime;
+
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
                     if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
@@ -597,6 +626,12 @@ namespace zoneutils
         // clang-format off
         ForEachZone([](CZone* PZone)
         {
+            // Built starting sets for each group
+            for (auto &spawnGroup : PZone->m_SpawnGroups)
+            {
+                spawnGroup.second.prepareMobs();
+            }
+
             PZone->ForEachMob([](CMobEntity* PMob)
             {
                 luautils::OnMobInitialize(PMob);
@@ -604,21 +639,23 @@ namespace zoneutils
                 luautils::ApplyZoneMixins(PMob);
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
+
+                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
             });
 
-            // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
+            // Now that all vectors are set, spawn everything that can be spawned
             PZone->ForEachMob([](CMobEntity* PMob)
             {
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
-                if (PMob->m_AllowRespawn)
+                if ((PMob->m_AllowRespawn && !PMob->m_spawnSet) || (PMob->m_spawnSet && PMob->CanSpawnFromGroup()))
                 {
                     PMob->Spawn();
                 }
                 else
                 {
-                    PMob->PAI->Internal_Respawn(std::chrono::milliseconds(PMob->m_RespawnTime));
+                    PMob->PAI->Internal_Respawn(std::chrono::milliseconds(PMob->m_RespawnTime)); // Set everything else to respawn
                 }
             });
+
         });
         // clang-format on
 
@@ -653,13 +690,14 @@ namespace zoneutils
 
                 if (PMaster == nullptr)
                 {
-                    ShowError("zoneutils::loadMOBList PMaster is NULL. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
+                    ShowDebug("zoneutils::loadMOBList PMaster is NULL. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
                               "database!",
                               masterid);
+                    continue;
                 }
                 else if (PPet == nullptr)
                 {
-                    ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!", petid);
+                    ShowDebug("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!", petid);
                 }
                 else if (masterid == petid)
                 {
@@ -1234,6 +1272,24 @@ namespace zoneutils
         if (PChar != nullptr && (PChar->PBattlefield == nullptr || !PChar->PBattlefield->isEntered(PChar)))
         {
             GetZone(PChar->getZone())->updateCharLevelRestriction(PChar);
+        }
+
+        if (PChar && (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC) || PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION)))
+        {
+            charutils::BuildingCharSkillsTable(PChar);
+            charutils::CalculateStats(PChar);
+            charutils::BuildingCharTraitsTable(PChar);
+            charutils::BuildingCharAbilityTable(PChar);
+            charutils::CheckValidEquipment(PChar);
+            PChar->pushPacket(new CCharJobsPacket(PChar));
+            PChar->pushPacket(new CCharStatsPacket(PChar));
+            PChar->pushPacket(new CCharSkillsPacket(PChar));
+            PChar->pushPacket(new CCharRecastPacket(PChar));
+            PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+            PChar->pushPacket(new CCharSpellsPacket(PChar));
+            PChar->pushPacket(new CCharUpdatePacket(PChar));
+            PChar->pushPacket(new CCharSyncPacket(PChar));
+            PChar->updatemask |= UPDATE_HP;
         }
 
         luautils::AfterZoneIn(PChar);
