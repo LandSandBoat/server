@@ -15,7 +15,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
         GIL_OBTAINED                  = 6391,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393,  -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY       = 6404,  -- There is nothing out of the ordinary here.
-        SENSE_OF_BOREBODING           = 6405,  -- You are suddenly overcome with a sense of foreboding...
+        SENSE_OF_FOREBODING           = 6405,  -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET         = 6419,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -44,7 +44,8 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486002] = 17485980, -- -30.384 1.000 -33.277
             [17486095] = 17485980, -- -85.000 -0.500 -37.000
         },
-        DAME_BLANCHE_PH     =
+
+        DAME_BLANCHE_PH =
         {
             [17486128] = 17486129, -- -345.369 0.716 119.486
             [17486127] = 17486129, -- -319.266 -0.244 130.650
@@ -54,7 +55,8 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486119] = 17486129, -- -277.338 -9.352 139.763
             [17486118] = 17486129, -- -276.713 -9.954 135.353
         },
-        FALCATUS_ARANEI_PH  =
+
+        FALCATUS_ARANEI_PH =
         {
             [17486033] = 17486031, -- -68.852 -5.029 141.069
             [17486032] = 17486031, -- -94.545 -6.095 136.480
@@ -62,10 +64,9 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486027] = 17486031, -- -25.445 -6.073 142.192
             [17486028] = 17486031, -- -33.446 -6.038 141.987
         },
-        KORROLOKA_LEECH_I   = 17486187,
-        KORROLOKA_LEECH_II  = 17486188,
-        KORROLOKA_LEECH_III = 17486189,
-        MORION_WORM         = 17486190,
+
+        KORROLOKA_LEECH = GetFirstID('Korroloka_Leech'),
+        MORION_WORM     = 17486190,
     },
     npc =
     {
