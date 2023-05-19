@@ -97,7 +97,7 @@ xi.instance.lookup =
     {
         { 6300, { 203, 21, -4, 0, 50, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Excavation Duty
         -- Assault: Lebros Supplies
-        -- Assault: Troll Fugitives
+        { 6302, { 203, 23, -4, 0, 70, 2, 1 }, { 203, 4 }, { 208, 4 } }, -- Assault: Troll Fugitives
         -- Assault: Evade and Escape
         -- Assault: Siegemaster Assassination
         -- Assault: Apkallu Breeding
