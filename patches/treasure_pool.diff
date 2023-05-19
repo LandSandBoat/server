@@ -1,9 +1,3 @@
- src/map/ai/helpers/targetfind.cpp | 10 ++++++++++
- src/map/entities/charentity.cpp   |  5 +++++
- src/map/utils/battleutils.cpp     | 10 ++++++++++
- src/map/zone.cpp                  | 14 ++++++++++++--
- 4 files changed, 37 insertions(+), 2 deletions(-)
-
 diff --git a/src/map/ai/helpers/targetfind.cpp b/src/map/ai/helpers/targetfind.cpp
 index a67975756a..3b39d2a8a7 100644
 --- a/src/map/ai/helpers/targetfind.cpp
