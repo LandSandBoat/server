@@ -53,6 +53,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         PRERIVON_DIALOG               = 11255, -- With each sermon, I take another step closer to Paradise.
         MALFINE_DIALOG                = 11256, -- Truly fortunate are we that words of sacrament are read every day!
         COULLENE_DIALOG               = 11257, -- Goddess above, deliver us to Paradise!
+        WILL_PROVIDE_PITTANCE         = 11273, -- I will provide you with <item> for a pittance of <number> gil.
         OLBERGIEUT_DIALOG             = 11299, -- Friar Faurbellant is on retreat at the Crag of Holla. Please give <item> to him.
         ABEAULE_DIALOG_HOME           = 11355, -- Amaura makes her home on Watchdog Alley. If you can't find her, ask someone along the way. I'll be waiting here!
         ABEAULE_DIALOG_THANKS         = 11357, -- You've been a great help, again. I don't know how to thank you!
