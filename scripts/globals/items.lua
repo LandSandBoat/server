@@ -149,6 +149,7 @@ xi.items =
     QUADAV_FETICH_LEGS              = 609,
     FADED_CRYSTAL                   = 613,
     STICK_OF_SELBINA_BUTTER         = 615,
+    POD_OF_BLUE_PEAS                = 618,
     BOX_OF_TARUTARU_RICE            = 620,
     CLUMP_OF_PAMTAM_KELP            = 624,
     STICK_OF_CINNAMON               = 628,
