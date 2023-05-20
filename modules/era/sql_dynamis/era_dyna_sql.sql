@@ -2267,7 +2267,6 @@ REPLACE INTO `mob_spell_lists` VALUES ('Quieitiel',5002,274,56,255);
 --                        Skill Modifictions                        --
 -- --------------------------------------------------------------------
 -- Dynamis - Valkurm
-UPDATE mob_skills SET mob_skill_distance = 15.00 WHERE mob_skill_id = "1332"; -- Extremely Bad Breath should be 15`
 DELETE FROM mob_skills WHERE mob_skill_id = "1605"; -- Miasmic Breath
 REPLACE INTO mob_skills VALUES (1605,63,'miasmic_breath',4,15.0,2000,1500,4,0,0,0,0,0,0);
 DELETE FROM mob_skills WHERE mob_skill_id = "1607"; -- Fragrant Breath
