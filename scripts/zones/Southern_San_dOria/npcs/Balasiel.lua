@@ -32,20 +32,8 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("KnightStalker_Progress") == 2
     then
         player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.
-    elseif lvl < 7 then
-        player:startEvent(668)
-    elseif lvl >= 7 and aSquiresTest ~= QUEST_COMPLETED then
-        if aSquiresTest == 0 then
-            if player:getCharVar("SquiresTest") == 1 then
-                player:startEvent(631)
-            else
-                player:startEvent(616)
-            end
-        elseif aSquiresTest == QUEST_ACCEPTED then
-            player:startEvent(667)
-        end
-    elseif lvl >= 7 and lvl < 15 then
-        player:startEvent(671)
+    if lvl < 15 then
+        player:startEvent(671) -- Event does occur, but need to confirm level required
     elseif lvl >= 15 and aSquiresTestII ~= QUEST_COMPLETED then
         local hasStalactiteDew = player:hasKeyItem(xi.ki.STALACTITE_DEW)
 
@@ -78,27 +66,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 616 then
-        if option == 0 then
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
-        else
-            player:setCharVar("SquiresTest_Event", 1)
-        end
-    elseif csid == 631 and option == 0 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
-        player:setCharVar("SquiresTest_Event", 0)
-    elseif csid == 617 then
-        if player:getFreeSlotsCount(0) >= 1 then
-            player:tradeComplete()
-            player:addTitle(xi.title.KNIGHT_IN_TRAINING)
-            player:addItem(16565)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16565) -- Spatha
-        end
-    elseif csid == 625 or csid == 630 then
+    if csid == 625 or csid == 630 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
     elseif csid == 626 then
         player:tradeComplete()

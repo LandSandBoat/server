@@ -55,6 +55,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         ROSEL_GREETINGS                = 7797,  -- Greetings!
         FFR_ROSEL                      = 7816,  -- Hrmm... Now, this is interesting! It pays to keep an eye on the competition. Thanks for letting me know!
         EXOROCHE_PLEASE_TELL           = 7835,  -- Please tell my son that I'll join him as soon as I'm done, so he's to stay right there.
+        GO_TO_KING_RANPERRES           = 7883,  -- Go to King Ranperre's Tomb and bring back <item>. How, you ask? Use your head. Now begone!
         LUSIANE_SHOP_DIALOG            = 7990,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7991,  -- Welcome, customer. Please have a look.
         ASH_THADI_ENE_SHOP_DIALOG      = 8012,  -- Welcome to Helbort's Blades!
