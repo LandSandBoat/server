@@ -15,12 +15,12 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II) == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.STALACTITE_DEW) and
         player:getCharVar("SquiresTestII") == 0
     then
         player:setCharVar("SquiresTestII", os.time())
-        player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_I)
+        player:messageSpecial(ID.text.A_SQUIRES_TEST_II_DIALOG_I)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
