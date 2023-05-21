@@ -4,15 +4,12 @@
 -- Involved in Quest: A Knight's Test
 -- !pos -221 2 -293 149
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.A_WELL)
 end
 
 entity.onEventUpdate = function(player, csid, option)

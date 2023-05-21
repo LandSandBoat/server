@@ -10,10 +10,12 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/keyitems')
 require('scripts/globals/quests')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+local davoiID            = require('scripts/zones/Davoi/IDs')
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
 -----------------------------------
 
@@ -41,7 +43,7 @@ quest.sections =
             ['Balasiel'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMainLvl() >= 30 then
+                    if player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL then
                         if quest:getVar(player, 'Option') == 0 then
                             return quest:progressEvent(627)
                         else
@@ -114,31 +116,12 @@ quest.sections =
                 end,
             },
 
-            [xi.zone.DAVOI] =
-            {
-                ['Disused_Well'] =
-                {
-                    onTrigger = function(player, npc)
-                        if
-                            player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST) and
-                            player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST)
-                        then
-                            if not player:hasKeyItem(xi.ki.KNIGHTS_SOUL) then
-                                return quest:keyItem(xi.ki.KNIGHTS_SOUL)
-                            else
-                                return quest:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
-                            end
-                        end
-                    end,
-                },
-            },
-
             onEventFinish =
             {
                 [628] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:unlockJob(xi.job.PLD)
-                        player:messageSpecial(ID.text.UNLOCK_PALADIN)
+                        player:messageSpecial(southernSandoriaID.text.UNLOCK_PALADIN)
 
                         player:delKeyItem(xi.ki.KNIGHTS_SOUL)
                         player:delKeyItem(xi.ki.BOOK_OF_TASKS)
@@ -153,6 +136,25 @@ quest.sections =
 
                 [634] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_THE_WEST)
+                end,
+            },
+        },
+
+        [xi.zone.DAVOI] =
+        {
+            ['Disused_Well'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST) and
+                        player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST)
+                    then
+                        if not player:hasKeyItem(xi.ki.KNIGHTS_SOUL) then
+                            return quest:keyItem(xi.ki.KNIGHTS_SOUL)
+                        else
+                            return quest:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
+                        end
+                    end
                 end,
             },
         },
