@@ -368,7 +368,7 @@ function getRoeRecords(triggers)
         [510] =
         { -- Obtain Job: Paladin
             trigger = triggers.questComplete,
-            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST } },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
         },
