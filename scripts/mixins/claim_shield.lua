@@ -65,7 +65,7 @@ g_mixins.claim_shield = function(claimshieldMob)
         mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 999, 3, 9999)
         mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 999, 3, 9999)
         mob:addStatusEffect(xi.effect.ARROW_SHIELD, 999, 3, 9999)
-        mob:stun(claimshieldTime)
+--        mob:stun(claimshieldTime)
 
         mob:timer(claimshieldTime, function(mobArg)
             local enmityList = mobArg:getEnmityList()
