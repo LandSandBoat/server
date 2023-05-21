@@ -21,6 +21,10 @@ entity.onMobInitialize = function(mob)
     end)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setAllegiance(xi.allegiance.PLAYER)
+end
+
 entity.onMobRoam = function(mob)
     local promathia = ID.mob.PROMATHIA_OFFSET + mob:getBattlefield():getArea()
     if not GetMobByID(promathia):isAlive() then

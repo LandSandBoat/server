@@ -1363,8 +1363,8 @@ INSERT INTO `mob_groups` VALUES (7,0,36,'Promathia_htbf',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8,4820,36,'Metus',0,128,0,0,20000,125,125,0);
 INSERT INTO `mob_groups` VALUES (9,0,36,'Omega',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (10,0,36,'Ultima',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (11,3199,36,'Prishe',0,128,0,2200,0,75,75,1); -- ally
-INSERT INTO `mob_groups` VALUES (12,5417,36,'Selhteus',0,128,0,0,0,75,75,1); -- ally
+INSERT INTO `mob_groups` VALUES (11,3199,36,'Prishe',0,128,0,2200,0,75,75,0); -- ally
+INSERT INTO `mob_groups` VALUES (12,5417,36,'Selhteus',0,128,0,0,0,75,75,0); -- ally
 
 -- ------------------------------------------------------------
 -- Temenos (Zone 37)
