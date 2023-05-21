@@ -6742,4 +6742,3 @@ xi.items =
     MOOGLE_STORAGE_SLIP_27          = 29338,
     MOOGLE_STORAGE_SLIP_28          = 29339,
 }
-
