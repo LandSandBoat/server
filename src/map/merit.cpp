@@ -24,6 +24,7 @@
 #include "entities/charentity.h"
 #include "map.h"
 #include "merit.h"
+#include "packets/char_abilities.h"
 #include "packets/char_spells.h"
 #include "utils/charutils.h"
 
@@ -442,6 +443,15 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
                 m_PChar->pushPacket(new CCharSpellsPacket(m_PChar));
             }
         }
+
+        if (PMerit->wsunlockid != 0 && !charutils::hasLearnedWeaponskill(m_PChar, PMerit->wsunlockid))
+        {
+            charutils::addLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
+            charutils::BuildingCharWeaponSkills(m_PChar);
+            charutils::SaveLearnedAbilities(m_PChar);
+            m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
+        }
+
         PMerit->count++;
 
         // Reset traits
@@ -463,6 +473,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
     {
         PMerit->next = upgrade[meritCatInfo[GetMeritCategory(merit)].UpgradeID][--PMerit->count];
     }
+
     if (PMerit->spellid != 0 && PMerit->count == 0)
     {
         if (charutils::delSpell(m_PChar, PMerit->spellid))
@@ -473,6 +484,14 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
             // Reset traits
             charutils::BuildingCharTraitsTable(m_PChar);
         }
+    }
+
+    if (PMerit->wsunlockid != 0 && PMerit->count == 0 && charutils::hasLearnedWeaponskill(m_PChar, PMerit->wsunlockid))
+    {
+        charutils::delLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
+        charutils::BuildingCharWeaponSkills(m_PChar);
+        charutils::SaveLearnedAbilities(m_PChar);
+        m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
     }
 }
 
@@ -524,8 +543,8 @@ namespace meritNameSpace
 
     void LoadMeritsList()
     {
-        int32 ret = sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid FROM merits m LEFT JOIN \
-            spell_list sl ON m.name = sl.name ORDER BY m.meritid ASC LIMIT %u",
+        int32 ret = sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id FROM merits m LEFT JOIN \
+            spell_list sl ON m.name = sl.name LEFT JOIN weapon_skills ws ON m.name = ws.name ORDER BY m.meritid ASC LIMIT %u",
                                MERITS_COUNT);
 
         if (ret != SQL_ERROR && sql->NumRows() != MERITS_COUNT)
@@ -541,14 +560,15 @@ namespace meritNameSpace
             {
                 Merit_t Merit = {}; // creat a new merit template.
 
-                Merit.id        = sql->GetUIntData(0); // set data from db.
-                Merit.value     = sql->GetUIntData(1);
-                Merit.jobs      = sql->GetUIntData(2);
-                Merit.upgrade   = sql->GetUIntData(3);
-                Merit.upgradeid = sql->GetUIntData(4);
-                Merit.catid     = sql->GetUIntData(5);
-                Merit.next      = upgrade[Merit.upgradeid][0];
-                Merit.spellid   = sql->GetUIntData(6);
+                Merit.id         = sql->GetUIntData(0); // set data from db.
+                Merit.value      = sql->GetUIntData(1);
+                Merit.jobs       = sql->GetUIntData(2);
+                Merit.upgrade    = sql->GetUIntData(3);
+                Merit.upgradeid  = sql->GetUIntData(4);
+                Merit.catid      = sql->GetUIntData(5);
+                Merit.next       = upgrade[Merit.upgradeid][0];
+                Merit.spellid    = sql->GetUIntData(6);
+                Merit.wsunlockid = sql->GetUIntData(7);
 
                 GMeritsTemplate[index] = Merit; // add the merit to the array
 

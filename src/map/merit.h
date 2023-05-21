@@ -552,12 +552,13 @@ struct Merit_t
         uint32 data; // data sent in packet
     };
 
-    uint32 value;     // the coefficient of variation of the parameter that is bound to merit
-    uint8  upgrade;   // maximum number of upgrades
-    uint32 jobs;      // bitmask of jobs for which merit has effect
-    uint8  upgradeid; // which set of upgrade values the merit will use
-    uint8  catid;     // cat which merit belongs to
-    uint16 spellid;   // associated spell ID to learn/unlearn
+    uint32 value;      // the coefficient of variation of the parameter that is bound to merit
+    uint8  upgrade;    // maximum number of upgrades
+    uint32 jobs;       // bitmask of jobs for which merit has effect
+    uint8  upgradeid;  // which set of upgrade values the merit will use
+    uint8  catid;      // cat which merit belongs to
+    uint16 spellid;    // associated spell ID to learn/unlearn
+    uint16 wsunlockid; // associated Weaponskill Unlock ID to learn/unlearn
 };
 
 /************************************************************************
