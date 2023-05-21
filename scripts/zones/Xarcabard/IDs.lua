@@ -116,9 +116,9 @@ zones[xi.zone.XARCABARD] =
     npc =
     {
         OVERSEER_BASE      = GetFirstID('Jeantelas_RK'),
-        BOREAL_TIGER_QM    = GetFirstID('qm2'),
-        BOREAL_COEURL_QM   = GetFirstID('qm3'),
-        BOREAL_HOUND_QM    = GetFirstID('qm4'),
+        BOREAL_TIGER_QM    = GetFirstID('qm_boreal_tiger'),
+        BOREAL_COEURL_QM   = GetFirstID('qm_boreal_coeurl'),
+        BOREAL_HOUND_QM    = GetFirstID('qm_boreal_hound'),
     },
 }
 
