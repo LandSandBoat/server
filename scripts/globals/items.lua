@@ -2882,6 +2882,7 @@ xi.items =
     ASPIS                           = 12299,
     TARGE                           = 12300,
     DARKSTEEL_BUCKLER               = 12302,
+    KITE_SHIELD                     = 12306,
     DARKSTEEL_SHIELD                = 12308,
     RITTER_SHIELD                   = 12309,
     HOPLON                          = 12311,
