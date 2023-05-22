@@ -218,6 +218,20 @@ xi.assault.addTempItem = function(mob, player, item, chance)
     end
 end
 
+xi.assault.delTempItem = function(player, item, amount)
+    if amount == nil then
+        amount = 1
+    end
+
+    if player:hasItem(item, xi.inventoryLocation.TEMPITEMS) then
+        player:delItem(item, amount, xi.inventoryLocation.TEMPITEMS)
+    end
+end
+
+xi.assault.hasTempItem = function(player, item)
+    return player:hasItem(item, xi.inventoryLocation.TEMPITEMS)
+end
+
 xi.assault.progressInstance = function(mob, amount)
     local instance = mob:getInstance()
 
