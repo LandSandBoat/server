@@ -419,6 +419,11 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
         return true;
     }
 
+    if (m_PBattleEntity->isInDynamis())
+    {
+        return true;
+    }
+
     bool found = false;
 
     // clang-format off
