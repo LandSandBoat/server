@@ -415,7 +415,7 @@ int16 CBattleEntity::GetAmmoDelay()
 uint16 CBattleEntity::GetMainWeaponDmg()
 {
     TracyZoneScoped;
-    if (objtype == TYPE_PET || objtype == TYPE_MOB)
+    if ((objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::JUG_PET) || objtype == TYPE_MOB)
     {
         return mobutils::GetWeaponDamage(static_cast<CMobEntity*>(this), SLOT_MAIN);
     }
