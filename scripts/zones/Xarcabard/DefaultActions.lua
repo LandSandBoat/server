@@ -7,4 +7,5 @@ return {
     ['qm5']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm6']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm7']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['Perennial_Snow'] = { messageSpecial = ID.text.PERENNIAL_SNOW_DEFAULT },
 }
