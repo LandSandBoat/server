@@ -112,7 +112,7 @@ zones[xi.zone.JUGNER_FOREST] =
 
     npc =
     {
-        OVERSEER_BASE = 17203848, -- Chaplion_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Chaplion_RK'),
         LOGGING =
         {
             17203864,

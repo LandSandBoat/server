@@ -74,7 +74,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     {
         BLUE_RAFFLESIA_OFFSET = 17281586,
         TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
-        OVERSEER_BASE         = 17281600, -- Zorchorevi_RK in npc_list
+        OVERSEER_BASE         = GetFirstID('Zorchorevi_RK'),
         CERMET_HEADSTONE      = 17281625,
         PEDDLESTOX            = 17281640,
         BEASTMEN_TREASURE     =
