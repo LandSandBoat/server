@@ -58,7 +58,7 @@ xi.instance.lookup =
     {
         -- Assault: Golden Salvage
         -- Assault: Lamia No.13
-        -- Assault: Extermination
+        { 5502, { 219, 43, -4, 0, 70, 4, 1 }, { 219, 4 }, { 147, 0 } }, -- Assault: Extermination
         -- Assault: Demolition Duty
         -- Assault: Searat Salvation
         -- Assault: Apkallu Seizure
