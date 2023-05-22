@@ -2263,7 +2263,7 @@ REPLACE INTO mob_skills VALUES (1609,63,'putrid_breath',4,15.0,2000,1500,4,0,0,0
 DELETE FROM mob_skills WHERE mob_skill_id = "1610"; -- Extremely Bad Breath
 REPLACE INTO mob_skills VALUES (1610,63,'extremely_bad_breath',1,15.0,2000,1500,4,0,0,0,0,0,0);
 DELETE FROM mob_skills WHERE mob_skill_id = "1611"; -- Vampiric Lash
-REPLACE INTO mob_skills VALUES (1611,61,'vampiric_lash',1,15.0,2000,1500,4,0,0,0,0,0,0);
+REPLACE INTO mob_skills VALUES (1611,61,'vampiric_lash',0,15.0,2000,1500,4,0,0,0,0,0,0);
 DELETE FROM mob_skills WHERE mob_skill_id = "1617"; -- Blow
 REPLACE INTO mob_skills VALUES (1617,325,'blow',0,7.0,2000,1500,4,0,0,0,0,0,0);
 DELETE FROM mob_skills WHERE mob_skill_id = "1618"; -- Uppercut
