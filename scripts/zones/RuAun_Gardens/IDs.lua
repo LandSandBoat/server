@@ -128,7 +128,7 @@ zones[xi.zone.RUAUN_GARDENS] =
             { coords = {    142, -41,   -156,    145, -39,   -153 }, green = true },
         },
 
-        OVERSEER_BASE   = 17310080,
+        OVERSEER_BASE = GetFirstID('Conquest_Banner'),
     },
 }
 
