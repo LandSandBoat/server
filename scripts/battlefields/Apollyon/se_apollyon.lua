@@ -319,131 +319,155 @@ content.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[1]] =
     {
         {
-            quantity = 4,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1939, droprate =  350 }, -- RDM
-            { itemid = 1941, droprate =  278 }, -- THF
-            { itemid = 1959, droprate =  174 }, -- SMN
-            { itemid = 1949, droprate =  200 }, -- BRD
-            { itemid = 1945, droprate =   47 }, -- DRK
-            { itemid = 1951, droprate =   49 }, -- RNG
-            { itemid = 1955, droprate =  200 }, -- NIN
-            { itemid = 2659, droprate =   62 }, -- COR
-            { itemid = 2715, droprate =  407 }, -- DNC
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1939, droprate =  350 }, -- RDM
-            { itemid = 1941, droprate =  278 }, -- THF
-            { itemid = 1959, droprate =  174 }, -- SMN
-            { itemid = 1949, droprate =  200 }, -- BRD
-            { itemid = 1945, droprate =   47 }, -- DRK
-            { itemid = 1951, droprate =   49 }, -- RNG
-            { itemid = 1955, droprate =  200 }, -- NIN
-            { itemid = 2659, droprate =   62 }, -- COR
-            { itemid = 2715, droprate =  407 }, -- DNC
+            { item = xi.items.SPOOL_OF_BENEDICT_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_KUROGANE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.POT_OF_EBONY_LACQUER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.ARGYRO_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_BENEDICT_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BROWN_DOESKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CANVAS_TOILE, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
     },
+
     [ID.SE_APOLLYON.npc.ITEM_CRATES[2]] =
     {
         {
-            quantity = 4,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1959, droprate =  47 }, -- SMN
-            { itemid = 1949, droprate =  30 }, -- BRD
-            { itemid = 1943, droprate = 200 }, -- PLD
-            { itemid = 1947, droprate = 460 }, -- BST
-            { itemid = 2661, droprate = 400 }, -- PUP
-            { itemid = 1951, droprate =  20 }, -- RNG
-            { itemid = 1955, droprate =  80 }, -- NIN
-            { itemid = 1945, droprate =  90 }, -- DRK
-            { itemid = 2659, droprate = 100 }, -- COR
-            { itemid = 2715, droprate = 120 }, -- DNC
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 999 }, -- Nothing
-            { itemid = 1959, droprate =  47 }, -- SMN
-            { itemid = 1949, droprate =  30 }, -- BRD
-            { itemid = 1943, droprate = 200 }, -- PLD
-            { itemid = 1947, droprate = 460 }, -- BST
-            { itemid = 2661, droprate = 400 }, -- PUP
-            { itemid = 1951, droprate =  20 }, -- RNG
-            { itemid = 1955, droprate =  80 }, -- NIN
-            { itemid = 1945, droprate =  90 }, -- DRK
-            { itemid = 2659, droprate = 100 }, -- COR
-            { itemid = 2715, droprate = 120 }, -- DNC
+            { item = xi.items.ANCIENT_BRASS_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BROWN_DOESKIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ELECTRUM_STUD, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.LOW },
+            { item = xi.items.WHITE_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.POT_OF_EBONY_LACQUER, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
     },
+
     [ID.SE_APOLLYON.npc.ITEM_CRATES[3]] =
     {
         {
-            quantity = 4,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 999 }, -- Nothing
-            { itemid = 1955, droprate =  59 }, -- NIN
-            { itemid = 1959, droprate = 139 }, -- SMN
-            { itemid = 1949, droprate =  39 }, -- BRD
-            { itemid = 1681, droprate =  39 }, -- Light Steel
-            { itemid =  645, droprate =  39 }, -- Darksteel Ore
-            { itemid = 1933, droprate = 627 }, -- MNK
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 500 }, -- Nothing
-            { itemid = 1945, droprate = 159 }, -- DRK
-            { itemid = 1951, droprate = 139 }, -- RNG
-            { itemid = 2659, droprate =  39 }, -- COR
-            { itemid =  664, droprate =  20 }, -- Darksteel Sheet
-            { itemid =  646, droprate =  20 }, -- Adaman Ore
-            { itemid = 1931, droprate = 200 }, -- WAR
+            { item = xi.items.ARGYRO_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.GOLD_STUD, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.LOW },
+            { item = xi.items.BLACK_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.FETID_LANOLIN_CUBE, weight = xi.loot.weight.LOW },
+            { item = xi.items.BLUE_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.ELECTRUM_STUD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.CHUNK_OF_ADAMAN_ORE, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.HANDFUL_OF_CLOT_PLASMA, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.DARKSTEEL_SHEET, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.CHUNK_OF_DARKSTEEL_ORE, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.PIECE_OF_OXBLOOD, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.LIGHT_STEEL_INGOT, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.SPOOL_OF_RAINBOW_THREAD, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.SHELL_POWDER, weight = xi.loot.weight.VERY_LOW },
         },
     },
+
     [ID.SE_APOLLYON.npc.LOOT_CRATE] =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1935, droprate = 220 }, -- WHM
-            { itemid = 1937, droprate = 300 }, -- BLM
-            { itemid = 1957, droprate = 260 }, -- DRG
-            { itemid = 1953, droprate = 340 }, -- SAM
-            { itemid = 2657, droprate = 220 }, -- BLU
-            { itemid = 2717, droprate = 180 }, -- SCH
-            { itemid = 1931, droprate = 300 }, -- WAR
+            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.WHITE_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.BLUE_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1935, droprate = 220 }, -- WHM
-            { itemid = 1937, droprate = 300 }, -- BLM
-            { itemid = 1957, droprate = 260 }, -- DRG
-            { itemid = 1953, droprate = 340 }, -- SAM
-            { itemid = 2657, droprate = 220 }, -- BLU
-            { itemid = 2717, droprate = 180 }, -- SCH
-            { itemid = 1931, droprate = 300 }, -- WAR
+            { item = xi.items.BLACK_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.FETID_LANOLIN_CUBE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CANVAS_TOILE, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1909, droprate = 1000 }, -- Smalt Chip
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.ANCIENT_BRASS_INGOT, weight = xi.loot.weight.LOW },
+            { item = xi.items.SHEET_OF_KUROGANE, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.LOW },
+            { item = xi.items.GOLD_STUD, weight = xi.loot.weight.LOW },
         },
 
         {
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
-            { itemid =    0, droprate = 100 }, -- Nothing
+            { item = xi.items.SMALT_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     },
 }
