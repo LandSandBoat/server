@@ -11,35 +11,28 @@ index 170ada632d..ef93b36468 100644
                  {
                      PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
                      PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
-diff --git a/src/map/utils/charutils.cpp b/src/map/utils/charutils.cpp
-index 7e0df82ae0..a7ac761654 100644
---- a/src/map/utils/charutils.cpp
-+++ b/src/map/utils/charutils.cpp
-@@ -1850,9 +1850,11 @@ namespace charutils
-             return false;
-         }
- 
-+        bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") > 0;
-+
+diff --git "a/src/map/utils/charutils.cpp" "b/src/map/utils/charutils.cpp"
+index e0ac2614ae..aab4a8ad0a 100644
+--- "a/src/map/utils/charutils.cpp"
++++ "b/src/map/utils/charutils.cpp"
+@@ -1852,7 +1852,7 @@ namespace charutils
          if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
              (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
 -            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
-+            (PItem->getReqLvl() > (noGearScaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
++            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || charutils::GetCharVar(PChar, "[CW]STATUS") > 0 ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
          {
              return false;
          }
-@@ -2609,7 +2611,9 @@ namespace charutils
+@@ -2609,7 +2609,7 @@ namespace charutils
                  continue;
              }
  
 -            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
-+            bool noGearScaling = settings::get<bool>("map.DISABLE_GEAR_SCALING") || PChar->getCharVar("[CW]STATUS") > 0;
-+
-+            if (PItem->getReqLvl() > (noGearScaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
++            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || charutils::GetCharVar(PChar, "[CW]STATUS") > 0 ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
              {
                  UnequipItem(PChar, slotID);
                  continue;
-@@ -3183,7 +3187,16 @@ namespace charutils
+@@ -3183,7 +3183,16 @@ namespace charutils
              // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
  
              int16  Diff          = MaxSkill - CurSkill / 10;
@@ -57,7 +50,7 @@ index 7e0df82ae0..a7ac761654 100644
  
              double random = xirand::GetRandomNumber(1.);
  
-@@ -3266,7 +3279,7 @@ namespace charutils
+@@ -3266,7 +3275,7 @@ namespace charutils
                  }
  
                  // Do skill amount multiplier (Will only be applied if default setting is changed)
@@ -66,7 +59,7 @@ index 7e0df82ae0..a7ac761654 100644
                  {
                      SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
                      if (SkillAmount > 9)
-@@ -3952,6 +3965,11 @@ namespace charutils
+@@ -3952,6 +3961,11 @@ namespace charutils
  
              EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
              float          exp      = (float)GetBaseExp(maxlevel, moblevel);
@@ -78,7 +71,7 @@ index 7e0df82ae0..a7ac761654 100644
  
              if (mobCheck > EMobDifficulty::TooWeak)
              {
-@@ -4564,16 +4582,16 @@ namespace charutils
+@@ -4564,16 +4578,16 @@ namespace charutils
  
      void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
      {
