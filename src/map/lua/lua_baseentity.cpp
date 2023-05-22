@@ -5769,17 +5769,17 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
 
             if (PChar->PPet)
             {
-                CPetEntity* PPet = static_cast<CPetEntity*>(PChar->PPet);
-
-                if (PPet->getPetType() == PET_TYPE::CHARMED_MOB)
+                if (PChar->PPet->objtype == TYPE_MOB)
                 {
                     // Charmed mobs only detach if they are above the level restriction
-                    if (PPet->GetMLevel() > NewMLevel)
+                    if (PChar->PPet->GetMLevel() > NewMLevel)
                     {
                         petutils::DetachPet(PChar);
                     }
                     return PChar->m_LevelRestriction;
                 }
+
+                CPetEntity* PPet = static_cast<CPetEntity*>(PChar->PPet);
 
                 // Preserve pet's HP and MP
                 int32 hp = PPet->health.hp;
