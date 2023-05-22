@@ -170,7 +170,7 @@ public:
 
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
-    auto   getZoneName() -> const std::string&;                         // Get Entity zone name
+    auto   getZoneName() -> std::string;                                // Get Entity zone name
     bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region

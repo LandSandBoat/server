@@ -215,8 +215,17 @@ void CZoneEntities::DeleteTRUST(CBaseEntity* PTrust)
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_MOB);
+    if (PEntity == nullptr)
+    {
+        ShowWarning("PEntity was null.");
+        return;
+    }
+
+    if (PEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Non-MOB was passed into function (%s).", PEntity->GetName());
+        return;
+    }
 
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
@@ -350,8 +359,18 @@ void CZoneEntities::MusicChange(uint8 BlockID, uint8 MusicTrackID)
 
 void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+    if (PChar == nullptr)
+    {
+        ShowWarning("PChar is null.");
+        return;
+    }
+
+    if (PChar->loc.zone != m_zone)
+    {
+        ShowWarning("Zone mismatch for %s.", PChar->GetName());
+        return;
+    }
+
     TracyZoneScoped;
 
     battleutils::RelinquishClaim(PChar);

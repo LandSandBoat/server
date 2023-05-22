@@ -144,7 +144,12 @@ protected:
     template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
-        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        if (m_stateStack.size() > 10)
+        {
+            ShowWarning("State Stack size exceeds maximum.");
+            return false;
+        }
+
         if (CanChangeState())
         {
             try
@@ -163,7 +168,12 @@ protected:
     template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
-        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        if (m_stateStack.size() > 10)
+        {
+            ShowWarning("State Stack size exceeds maximum.");
+            return false;
+        }
+
         try
         {
             CheckCompletedStates();

@@ -591,7 +591,11 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 
 void CTreasurePool::TreasureLost(uint8 SlotID)
 {
-    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
+    if (m_PoolItems[SlotID].ID == 0)
+    {
+        ShowWarning("Pool Items for SlotID (%d) was 0.", SlotID);
+        return;
+    }
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 

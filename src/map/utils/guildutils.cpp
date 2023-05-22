@@ -59,7 +59,12 @@ namespace guildutils
                 g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
-        XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
+
+        if (g_PGuildShopList.size() != 0)
+        {
+            ShowWarning("g_PGuildShopList contains information prior to initialization.");
+            return;
+        }
 
         fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
 

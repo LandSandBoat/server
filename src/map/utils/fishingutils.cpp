@@ -1336,12 +1336,21 @@ namespace fishingutils
     bool BaitLoss(CCharEntity* PChar, bool RemoveFly, bool SendUpdate)
     {
         CItemWeapon* PBait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-        XI_DEBUG_BREAK_IF(PBait == nullptr);
-        XI_DEBUG_BREAK_IF(PBait->isType(ITEM_WEAPON) == false);
-        XI_DEBUG_BREAK_IF(PBait->getSkillType() != SKILL_FISHING);
 
         if (PBait != nullptr)
         {
+            if (!PBait->isType(ITEM_WEAPON))
+            {
+                ShowWarning("PBait is not of Weapon Type.");
+                return false;
+            }
+
+            if (PBait->getSkillType() != SKILL_FISHING)
+            {
+                ShowWarning("PBait Skilltype is not Fishing.");
+                return false;
+            }
+
             if (!RemoveFly && (PBait->getStackSize() == 1))
             {
                 return false;
@@ -1369,8 +1378,18 @@ namespace fishingutils
     {
         CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         rod_t*       PRod    = FishingRods[PRanged->getID()];
-        XI_DEBUG_BREAK_IF(PRanged == nullptr);
-        XI_DEBUG_BREAK_IF(PRod == nullptr);
+
+        if (PRanged == nullptr)
+        {
+            ShowWarning("PRod was null.");
+            return;
+        }
+
+        if (PRod == nullptr)
+        {
+            ShowWarning("PRod was null.");
+            return;
+        }
 
         if (PRanged != nullptr && PRod != nullptr)
         {
