@@ -14,7 +14,10 @@ xi.magian.trialCache = xi.magian.trialCache or {}
 local function getPlayerTrials(player)
     local activeTrials = xi.magian.trialCache[player:getID()]
 
-    if activeTrials then
+    if
+        activeTrials and
+        player:getLocalVar('magianUpdated') == 1
+    then
         return activeTrials
     end
 
@@ -30,6 +33,8 @@ local function getPlayerTrials(player)
     end
 
     xi.magian.trialCache[player:getID()] = activeTrials
+
+    player:setLocalVar('magianUpdated', 1)
 
     return activeTrials
 end
