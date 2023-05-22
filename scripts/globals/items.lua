@@ -4289,6 +4289,7 @@ xi.items =
     TIME_HAMMER                     = 17083,
     OAK_STAFF                       = 17091,
     ELM_STAFF                       = 17090,
+    OAK_POLE                        = 17098,
     MISERY_STAFF                    = 17116,
     HYPNO_STAFF                     = 17117,
     SHORTBOW                        = 17152,

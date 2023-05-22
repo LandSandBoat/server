@@ -50,13 +50,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(18.05, -1.38, -56.75)
     end
 
-    if
-        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar("Enagakure_Killed") == 1
-    then
-        cs = 1101
-    end
-
     return cs
 end
 
@@ -83,11 +76,6 @@ zoneObject.onEventFinish = function(player, csid, option)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
         end
-    elseif
-        csid == 1101 and
-        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { "Enagakure_Killed", "illTakeTheBigBoxCS" } })
-    then
-        player:delKeyItem(xi.ki.SEANCE_STAFF)
     elseif csid == 220 and option == 0 then
         player:setLocalVar('[BOAT]Paid', 0)
     elseif csid == 202 then
