@@ -52,6 +52,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "entities/trustentity.h"
 #include "latent_effect_container.h"
 #include "map.h"
 #include "notoriety_container.h"
@@ -1825,19 +1826,22 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
     if (PEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             // clang-format off
-            PEntity->ForParty([&](CBattleEntity* PMember)
+            PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
-                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                if (PMember != nullptr &&
+                    m_POwner->loc.zone->GetID() == PMember->loc.zone->GetID() &&
+                    distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
@@ -1887,11 +1891,11 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
