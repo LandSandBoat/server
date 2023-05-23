@@ -155,7 +155,7 @@ end
 local function suppliesAvailableBitmask(player, nation)
     local mask = 0x7F00001F
 
-    if player:getCharVar("supplyQuest_started") == vanaDay() then
+    if player:getCharVar("supplyQuest_started") == VanadielUniqueDay() then
         mask = 0xFFFFFFFF -- Need to wait 1 vanadiel day
     end
 
@@ -1304,7 +1304,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
         if outpost ~= nil then
             npcUtil.giveKeyItem(player, outpost.ki)
-            player:setCharVar("supplyQuest_started", vanaDay())
+            player:setCharVar("supplyQuest_started", VanadielUniqueDay())
             player:setCharVar("supplyQuest_region", region)
             player:setCharVar("supplyQuest_fresh", getConquestTally())
         end
