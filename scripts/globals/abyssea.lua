@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/spell_data")
 require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -719,26 +720,23 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
     local normalDrops = xi.abyssea.mob[mob:getName()]['Normal']
     local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
 
-    for k, v in pairs(normalDrops) do
+    for _, keyItemId in pairs(normalDrops) do
         if xi.abyssea.canGiveNMKI(mob, 20) then
-            playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
+            npcUtil.giveKeyItem(playerClaimed, keyItemId)
         end
     end
 
-    for k, v in pairs(atmaDrops) do
+    for _, keyItemId in pairs(atmaDrops) do
         local ally = playerClaimed:getAlliance()
 
         for _, member in ipairs(ally) do
-            if not member:hasKeyItem(v) and xi.abyssea.canGiveNMKI(mob, 10) then
-                member:addKeyItem(v)
-                member:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
+            if not member:hasKeyItem(keyItemId) and xi.abyssea.canGiveNMKI(mob, 10) then
+                npcUtil.giveKeyItem(member, keyItemId)
             end
         end
 
-        if not playerClaimed:hasKeyItem(v) then
-            playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.PLAYER_KEYITEM_OBTAINED, v)
+        if not playerClaimed:hasKeyItem(keyItemId) then
+            npcUtil.giveKeyItem(playerClaimed, keyItemId)
         end
     end
 
