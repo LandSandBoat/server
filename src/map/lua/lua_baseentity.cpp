@@ -15398,6 +15398,7 @@ uint32 CLuaBaseEntity::getDropID()
 }
 
 /************************************************************************
+ *  DEPRECATED: Use target:addListener("ITEM_DROPS", ...) instead.
  *  Function: setDropID()
  *  Purpose : Permanently changes the Drop ID assigned to a Mob
  *  Example : target:setDropID(2408)

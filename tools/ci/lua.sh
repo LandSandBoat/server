@@ -40,6 +40,7 @@ global_objects=(
     mixins
     g_mixins
     applyMixins
+    mixinOptions
 
     set
     printf

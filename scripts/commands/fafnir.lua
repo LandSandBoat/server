@@ -60,7 +60,7 @@ function onTrigger(player)
     -- Use the mob object as you normally would
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 
-    mob:setDropID(0) -- No loot!
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 
     mob:spawn()
 
