@@ -7370,8 +7370,17 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
+    if (PChar->BazaarID.id != 0)
+    {
+        ShowWarning("BazaarID.id is not equal to zero.");
+        return;
+    }
+
+    if (PChar->BazaarID.targid != 0)
+    {
+        ShowWarning("BazaarID.targid is not equal to zero.");
+        return;
+    }
 
     uint32 charid = data.ref<uint32>(0x04);
 

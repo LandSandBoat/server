@@ -217,7 +217,12 @@ CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
 : m_StatusEffectSet(statusOrdering)
 {
     m_POwner = PEntity;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
 
     memset(m_StatusIcons, 0xFF, sizeof(m_StatusIcons));
 }
@@ -1467,9 +1472,23 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
 
 void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 {
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() >= MAX_EFFECTID);
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0);
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0);
+    if (StatusEffect->GetStatusID() >= MAX_EFFECTID)
+    {
+        ShowWarning("Status Effect ID (%d) exceeds MAX_EFFECTID", StatusEffect->GetStatusID());
+        return;
+    }
+
+    if (StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0)
+    {
+        ShowWarning("Food Effect has SubID of 0.");
+        return;
+    }
+
+    if (StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0)
+    {
+        ShowWarning("None-type Effect has SubID of 0");
+        return;
+    }
 
     std::string name;
     EFFECT      effect = StatusEffect->GetStatusID();
@@ -1542,7 +1561,11 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
-    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    if (m_POwner->objtype != TYPE_PC)
+    {
+        ShowWarning("Non-PC calling function (%s).", m_POwner->GetName());
+        return;
+    }
 
     const char* Query = "SELECT "
                         "effectid,"
@@ -1709,7 +1732,12 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
 void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 {
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
+
     TracyZoneScoped;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)

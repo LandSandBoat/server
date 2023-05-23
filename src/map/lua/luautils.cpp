@@ -2085,7 +2085,8 @@ namespace luautils
                 break;
             default:
                 // Should never hit this
-                XI_DEBUG_BREAK_IF(true);
+                ShowError("Invalid objtype for entity received.");
+                return -1;
         }
         auto filename = fmt::format(pathFormat, zone, name);
 
@@ -4329,7 +4330,11 @@ namespace luautils
 
     void AfterInstanceRegister(CBaseEntity* PChar)
     {
-        XI_DEBUG_BREAK_IF(!PChar->PInstance);
+        if (!PChar->PInstance)
+        {
+            ShowWarning("PInstance is null.");
+            return;
+        }
 
         TracyZoneScoped;
 

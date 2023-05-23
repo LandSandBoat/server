@@ -166,7 +166,11 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
-    XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate));
+    if (sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate))
+    {
+        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->GetName());
+        return;
+    }
 
     memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
 
@@ -400,7 +404,11 @@ const Merit_t* CMeritPoints::GetMerit(MERIT_TYPE merit)
 
 const Merit_t* CMeritPoints::GetMeritByIndex(uint16 index)
 {
-    XI_DEBUG_BREAK_IF(index >= MERITS_COUNT);
+    if (index >= MERITS_COUNT)
+    {
+        ShowWarning("Invalid Merit Index (%d) passed to function.", index);
+        return nullptr;
+    }
 
     return &merits[index];
 }

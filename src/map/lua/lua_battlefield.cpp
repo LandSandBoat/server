@@ -438,7 +438,13 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 // Mob IDs need to be in the format of { { id, ... }, { ... } } with each subtable being an area
                 auto  mobIds = groupMobIds.get<std::vector<std::vector<uint32>>>();
                 uint8 area   = m_PLuaBattlefield->GetArea() - 1;
-                XI_DEBUG_BREAK_IF(area >= mobIds.size());
+
+                if (area >= mobIds.size())
+                {
+                    ShowWarning("Battlefield Area is greated than groupMobIds size.");
+                    return;
+                }
+
                 addMobIdsForArea(mobIds[area]);
             }
             else
@@ -452,7 +458,11 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         for (CBaseEntity* entity : groupEntities)
         {
             auto PMob = dynamic_cast<CMobEntity*>(entity);
-            XI_DEBUG_BREAK_IF(PMob == nullptr);
+            if (PMob == nullptr)
+            {
+                ShowError("PMob is null.");
+                return;
+            }
 
             // Restore modifiers here since we save the modifiers below but don't want any previous modifiers persisting
             PMob->restoreModifiers();
@@ -473,7 +483,11 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
 
                 // Leave existing party first before joining this new one
                 if (PMob->PParty != nullptr)
@@ -499,7 +513,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
+
                 PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
                 PMob->saveMobModifiers();
             }
@@ -511,7 +530,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
+
                 PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
                 PMob->m_maxRoamDistance = 0.5f;
                 PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
@@ -525,7 +549,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
+
                 for (auto modifier : mods.get<sol::table>())
                 {
                     PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
@@ -540,7 +569,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
+
                 for (auto modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
@@ -581,7 +615,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                if (PMob == nullptr)
+                {
+                    ShowError("PMob is null.");
+                    return;
+                }
+
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
             }
