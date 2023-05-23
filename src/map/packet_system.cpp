@@ -2934,9 +2934,6 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 CItem* PItem = PChar->UContainer->GetItem(slotID);
 
-                // ShowInfo("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
-                // ShowInfo("ItemId %u", PItem->getID());
-
                 if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 0xB9));
@@ -3404,6 +3401,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
+    PChar->retriggerLatentsAfterPacketParsing = true; // retrigger all latents after all equip packets are parsed
 }
 
 /************************************************************************
@@ -7372,8 +7370,17 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
+    if (PChar->BazaarID.id != 0)
+    {
+        ShowWarning("BazaarID.id is not equal to zero.");
+        return;
+    }
+
+    if (PChar->BazaarID.targid != 0)
+    {
+        ShowWarning("BazaarID.targid is not equal to zero.");
+        return;
+    }
 
     uint32 charid = data.ref<uint32>(0x04);
 

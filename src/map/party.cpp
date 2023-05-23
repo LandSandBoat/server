@@ -173,7 +173,11 @@ void CParty::DisbandParty(bool playerInitiated)
 // Assign roles to group members (players only)
 void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
 {
-    XI_DEBUG_BREAK_IF(m_PartyType != PARTY_PCS);
+    if (m_PartyType != PARTY_PCS)
+    {
+        ShowWarning("Attempting to assign role (%d) to %s in Mob Party.", role, MemberName);
+        return;
+    }
 
     // Make sure that the the character is actually a part of this party
     int ret = sql->Query("SELECT chars.charid FROM chars \
@@ -235,7 +239,11 @@ uint8 CParty::MemberCount(uint16 ZoneID)
 // Returns entity pointer to party member by name (used for /pcmd kick or otherwise)
 CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
 {
-    XI_DEBUG_BREAK_IF(m_PartyType != PARTY_PCS);
+    if (m_PartyType != PARTY_PCS)
+    {
+        ShowWarning("Attempting to get Member data for %s in Mob Party.", memberName);
+        return nullptr;
+    }
 
     if (memberName == "")
     {
@@ -542,7 +550,11 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
     if (m_PartyType == PARTY_PCS)
     {
-        XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_PC);
+        if (PEntity->objtype != TYPE_PC)
+        {
+            ShowWarning("Non-Player passed into function (%s).", PEntity->GetName());
+            return;
+        }
 
         CCharEntity* PChar = (CCharEntity*)PEntity;
 

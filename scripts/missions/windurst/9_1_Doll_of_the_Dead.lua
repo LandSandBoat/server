@@ -155,8 +155,6 @@ mission.sections =
                     if missionStatus == 4 or missionStatus == 5 then
                         player:messageText(npc, boyahdaTreeID.text.WARDEN_SPEECH)
                         return mission:messageSpecial(boyahdaTreeID.text.WARDEN_TRANSLATION)
-                    else
-                        return mission:progressEvent(10)
                     end
                 end,
             },

@@ -117,7 +117,7 @@ static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::
 int32 zlib_init()
 {
     std::vector<uint32> dec;
-    if (!read_to_vector("compress.dat", zlib.enc) || !read_to_vector("decompress.dat", dec))
+    if (!read_to_vector("res/compress.dat", zlib.enc) || !read_to_vector("res/decompress.dat", dec))
     {
         return -1;
     }

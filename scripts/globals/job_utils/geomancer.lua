@@ -219,6 +219,11 @@ local function getEffectPotency(player, effect)
         potency = potency + (geomancyMod * potencyData[effect].geoModMultiplier)
     end
 
+    -- Boost potency calculations for Haste/Slow into the no-longer-human-readable-format
+    if effect == xi.effect.GEO_HASTE or effect == xi.effect.GEO_SLOW then
+        potency = math.floor(potency * 100)
+    end
+
     return potency
 end
 
@@ -325,13 +330,7 @@ end
 -- Magic Casting Checks
 -----------------------------------
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
-    if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
-        local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
-        if effect:getSubType() == indiData[spell:getID()].effect then
-            return xi.msg.basic.EFFECT_ALREADY_ACTIVE
-        end
-    end
-
+    -- No checks known as of yet
     return 0
 end
 

@@ -22,9 +22,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(13, -820, 5, -380, 0, 0, 0)
     zone:registerTriggerArea(15, -260, 5, 740, 0, 0, 0)
     zone:registerTriggerArea(17, -340, 5, 660, 0, 0, 0)
-    zone:registerTriggerArea(19, -420, 5, 740, 0, 0, 0)
-    zone:registerTriggerArea(21, -340, 5, 820, 0, 0, 0)
-    zone:registerTriggerArea(23, -409, 5, 800, 0, 0, 0)
+    zone:registerTriggerArea(19, -340, 5, 820, 0, 0, 0)
+    zone:registerTriggerArea(21, -409, 5, 800, 0, 0, 0)
+    zone:registerTriggerArea(23, -420, 5, 740, 0, 0, 0)
     zone:registerTriggerArea(25, -400, 5, 670, 0, 0, 0)
 
     -- Hole in the Sand
@@ -60,7 +60,7 @@ end
 local function getWeight(player)
     local race = player:getRace()
 
-    if race == xi.race.GALKA then
+    if race == xi.race.GALKA or player:hasKeyItem(xi.ki.LOADSTONE) then
         return 3
     elseif race == xi.race.TARU_M or race == xi.race.TARU_F then
         return 1
@@ -73,7 +73,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
     -- holes in the sand
-    if triggerAreaID >= 30 then
+    if player and triggerAreaID >= 30 then
         switch (triggerAreaID): caseof
         {
             [30] = function()
@@ -103,12 +103,34 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
         local totalWeight = plate:getLocalVar("weight")
-        totalWeight = totalWeight + getWeight(player)
-        plate:setLocalVar("weight", totalWeight)
+        if player then
+            totalWeight = totalWeight + getWeight(player)
+            plate:setLocalVar("weight", totalWeight)
+        end
 
-        if player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3 then
-            door:openDoor(15) -- open door with a 15 second time delay.
-            plate:setAnimation(xi.anim.OPEN_DOOR) -- this is supposed to light up the platform but it's not working. Tried other values too.
+        if
+            totalWeight >= 3 and
+            plate:getLocalVar("opening") == 0 and
+            door:getAnimation() == xi.anim.CLOSE_DOOR
+        then
+            SendEntityVisualPacket(plate:getID(), "unlc") -- Play the light animation
+            plate:setLocalVar("opening", 1)
+
+            -- wait 5 seconds to open the door
+            door:timer(5000, function(doorArg)
+                doorArg:openDoor(10) -- open door with a 10 second time delay.
+            end)
+
+            -- allow door to retrigger 17 seconds from now
+            plate:timer(17000, function(plateArg)
+                plateArg:setLocalVar("opening", 0)
+
+                -- retrigger if weight is still enough to do so
+                if plateArg:getLocalVar("weight") >= 3 then
+                    -- retrigger, with nil as player arg, player is not necessary to re-open the door if weight is >= 3.
+                    zoneObject.onTriggerAreaEnter(nil, triggerArea)
+                end
+            end)
         end
     end
 end
@@ -117,16 +139,11 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
     if triggerAreaID < 30 then
-        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight - getWeight(player)
         plate:setLocalVar("weight", totalWeight)
-
-        if plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3 then
-            plate:setAnimation(xi.anim.CLOSE_DOOR)
-        end
     end
 end
 

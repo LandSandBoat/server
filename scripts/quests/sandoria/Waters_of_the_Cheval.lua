@@ -9,18 +9,19 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
-local eastRonfaureID = require('scripts/zones/East_Ronfaure/IDs')
+local eastRonfaureID     = require('scripts/zones/East_Ronfaure/IDs')
+local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
 
 quest.reward =
 {
-    fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.WING_PENDANT,
+    fame       = 30,
+    fameArea   = xi.quest.fame_area.SANDORIA,
+    item       = xi.items.WING_PENDANT,
     itemParams = { fromTrade = true },
-    title = xi.title.THE_PURE_ONE,
+    title      = xi.title.THE_PURE_ONE,
 }
 
 quest.sections =
@@ -80,6 +81,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHas(trade, { { "gil", 10 } }) then
+                        player:messageSpecial(northernSandoriaID.text.YOU_DONATE_GIL)
                         return quest:progressEvent(571)
                     end
                 end,
@@ -110,6 +112,7 @@ quest.sections =
                 end,
             },
         },
+
         [xi.zone.EAST_RONFAURE] =
         {
             ['Cheval_River'] =
@@ -124,11 +127,7 @@ quest.sections =
                     end
                 end,
 
-                onTrigger = function(player, npc)
-                    if player:hasItem(xi.items.BLESSED_WATERSKIN) then
-                        return quest:messageSpecial(eastRonfaureID.text.BLESSED_WATERSKIN)
-                    end
-                end,
+                onTrigger = quest:messageSpecial(eastRonfaureID.text.BLESSED_WATERSKIN),
             },
         },
     },

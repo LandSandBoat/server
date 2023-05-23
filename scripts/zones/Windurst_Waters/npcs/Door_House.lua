@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         elseif letterGreen == 3 then
             player:startEvent(954) -- i'm waiting for 4 imperial mythril pieces
         elseif letterGreen == 4 then
-            if vanaDay() > player:getCharVar("corAfSubmitDay") then
+            if VanadielUniqueDay() > player:getCharVar("corAfSubmitDay") then
                 player:startEvent(944) -- here's your cor gants
             else
                 player:startEvent(945) -- patience. need to wait for vana'diel day
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 946 then
         player:tradeComplete()
         player:setCharVar("LeleroonsletterGreen", 4)
-        player:setCharVar("corAfSubmitDay", vanaDay())
+        player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
     elseif csid == 944 then
         player:setCharVar("LeleroonsletterGreen", 5)
         player:addItem(14929) -- corsair's gants

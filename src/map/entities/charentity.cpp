@@ -217,6 +217,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
+    retriggerLatentsAfterPacketParsing = false;
+
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
 
@@ -546,7 +548,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_RecycleBin.get();
     }
 
-    XI_DEBUG_BREAK_IF(LocationID >= CONTAINER_ID::MAX_CONTAINER_ID); // Unresolved storage ID
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", LocationID);
     return nullptr;
 }
 
@@ -579,12 +581,9 @@ void CCharEntity::SetName(const std::string& name)
 
 int16 CCharEntity::addTP(int16 tp)
 {
-    // int16 oldtp = health.tp;
     tp = CBattleEntity::addTP(tp);
-    //  if ((oldtp < 1000 && health.tp >= 1000 ) || (oldtp >= 1000 && health.tp < 1000))
-    //  {
     PLatentEffectContainer->CheckLatentsTP();
-    //  }
+
     return abs(tp);
 }
 

@@ -860,13 +860,16 @@ namespace charutils
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
+        jobpointutils::RefreshGiftMods(PChar);
+
+        // This must come after refreshing gift modifiers, but before loading job traits.
+        blueutils::LoadSetSpells(PChar);
+
         BuildingCharSkillsTable(PChar);
         BuildingCharAbilityTable(PChar);
         BuildingCharTraitsTable(PChar);
-        jobpointutils::RefreshGiftMods(PChar);
 
-        // Order matters as these use merits and JP gifts
-        blueutils::LoadSetSpells(PChar);
+        // Order matters as this uses merits and JP gifts.
         puppetutils::LoadAutomaton(PChar);
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
@@ -2758,7 +2761,11 @@ namespace charutils
 
     void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID)
     {
-        XI_DEBUG_BREAK_IF(PPet == nullptr || PChar == nullptr);
+        if (PPet == nullptr || PChar == nullptr)
+        {
+            ShowWarning("PPet or PChar was null.");
+            return;
+        }
 
         memset(&PChar->m_PetCommands, 0, sizeof(PChar->m_PetCommands));
 
@@ -3149,11 +3156,16 @@ namespace charutils
         TracyZoneScoped;
 
         // This usually happens after a crash
-        XI_DEBUG_BREAK_IF((unsigned int)SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
-
-        if (((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000)) || useSubSkill)
+        uint8 rawSkillID = static_cast<uint8>(SkillID);
+        if (rawSkillID >= MAX_SKILLTYPE)
         {
-            uint16 CurSkill     = PChar->RealSkills.skill[SkillID];
+            ShowWarning("SkillID (%d) exceeds MAX_SKILLTYPE.", rawSkillID);
+            return;
+        }
+
+        if (((PChar->WorkingSkills.rank[rawSkillID] != 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill)
+        {
+            uint16 CurSkill     = PChar->RealSkills.skill[rawSkillID];
             uint16 MainCapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
             uint16 SubCapSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), PChar->GetSLevel());
             uint16 MainMaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
@@ -4464,8 +4476,17 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        XI_DEBUG_BREAK_IF(retainPercent > 1.0f || retainPercent < 0.0f);
-        XI_DEBUG_BREAK_IF(settings::get<uint8>("map.EXP_LOSS_LEVEL") > 99 || settings::get<uint8>("map.EXP_LOSS_LEVEL") < 1);
+        if (retainPercent > 1.0f || retainPercent < 0.0f)
+        {
+            ShowWarning("Invalid retainPercent value (%f) received.", retainPercent);
+            return;
+        }
+
+        if (settings::get<uint8>("map.EXP_LOSS_LEVEL") > 99 || settings::get<uint8>("map.EXP_LOSS_LEVEL") < 1)
+        {
+            ShowWarning("Invalid EXP_LOSS_LEVEL setting value was obtained (%d).", settings::get<uint8>("map.EXP_LOSS_LEVEL"));
+            return;
+        }
 
         if (PChar->GetMLevel() < settings::get<uint8>("map.EXP_LOSS_LEVEL") && forcedXpLoss == 0)
         {
@@ -5264,7 +5285,11 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+        if (job == JOB_NON || job >= MAX_JOBTYPE)
+        {
+            ShowWarning("Attempt to save Invalid Job with JOBTYPE %d.", job);
+            return;
+        }
 
         const char* fmtQuery;
 
@@ -5354,7 +5379,11 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+        if (job == JOB_NON || job >= MAX_JOBTYPE)
+        {
+            ShowWarning("Attempt to save Char XP with invalid JOBTYPE %d.", job);
+            return;
+        }
 
         const char* Query;
 
@@ -6144,7 +6173,7 @@ namespace charutils
             case 2:
                 return "windurst_cp";
             default:
-                XI_DEBUG_BREAK_IF(true);
+                ShowError("Invalid nation received, returning nullptr.");
                 return nullptr;
         }
     }

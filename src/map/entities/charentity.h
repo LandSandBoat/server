@@ -328,7 +328,7 @@ public:
     uint8             m_TitleList[143];       // List of obtained titles
     uint8             m_Abilities[64];        // List of current abilities
     uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
-    std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
+    std::bitset<64>   m_LearnedWeaponskills;  // LearnableWeaponskills
     uint8             m_TraitList[18];        // List of active job traits in the form of a bit mask
     uint8             m_PetCommands[64];      // List of available pet commands
     uint8             m_WeaponSkills[32];
@@ -418,6 +418,7 @@ public:
     bool           MeritMode; // If true then player is meriting
 
     CLatentEffectContainer* PLatentEffectContainer;
+    bool                    retriggerLatentsAfterPacketParsing; // used to retrigger all latent effects after packet parsing is done in map.cpp
 
     CItemContainer* PGuildShop;                   // текущий магазин гильдии, в котором персонаж производит закупки
     CItemContainer* getStorage(uint8 LocationID); // получение указателя на соответствующее хранилище

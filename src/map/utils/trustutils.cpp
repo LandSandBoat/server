@@ -421,7 +421,7 @@ namespace trustutils
         LoadTrustStatsAndSkills(PTrust);
 
         // Use Mob formulas to work out base "weapon" damage, but scale down to reasonable values.
-        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust));
+        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust, SLOT_MAIN));
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;
@@ -700,7 +700,7 @@ namespace trustutils
         }
 
         PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetEvasion(PTrust));
+        PTrust->addModifier(Mod::EVA, mobutils::GetBase(PTrust, PTrust->evaRank));
         PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
         PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
 
@@ -734,7 +734,7 @@ namespace trustutils
         for (uint16 skill_id : skillList)
         {
             TrustSkill_t skill;
-            if (skill_id <= 240) // Player WSs
+            if (skill_id <= 255) // Player WSs
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(skill_id);
                 if (!PWeaponSkill)

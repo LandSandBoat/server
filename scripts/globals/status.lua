@@ -826,6 +826,7 @@ xi.effect =
     MOOGLE_AMPLIFIER         = 629,
     TAINT                    = 630,
     HAUNT                    = 631,
+    EXPIRATION               = 632,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -1333,6 +1334,7 @@ xi.mod =
     AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    ENHANCES_MANA_CEDE              = 74,   -- Bonus % to Mana Cede effect, +1 = 1%
 
     -- Puppetmaster
     AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
@@ -2584,6 +2586,8 @@ xi.mobMod =
     MAGIC_RANGE            = 72, -- magic aggro range
     TARGET_DISTANCE_OFFSET = 73, -- Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
     ONE_WAY_LINKING        = 74, -- Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
+    CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
+    NO_WIDESCAN            = 76, -- Disables widescan for a specific mob
 }
 
 -----------------------------------

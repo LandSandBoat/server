@@ -79,11 +79,3 @@ function getConquestTally()
     local daysToTally = 6 - lastTally
     return getMidnight() + (daysToTally * (60 * 60 * 24))
 end
-
------------------------------------
---  vanaDay()
---  Small function to make it easier to store the current date
------------------------------------
-function vanaDay()
-    return VanadielYear() * 360 + VanadielDayOfTheYear()
-end

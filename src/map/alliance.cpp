@@ -42,7 +42,11 @@
 
 CAlliance::CAlliance(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity->PParty == nullptr);
+    if (PEntity->PParty == nullptr)
+    {
+        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->GetName());
+        return;
+    }
 
     m_AllianceID = PEntity->PParty->GetPartyID();
 

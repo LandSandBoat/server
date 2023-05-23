@@ -1491,7 +1491,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     end
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
-    local vanadielEpoch = vanaDay()
+    local vanadielEpoch = VanadielUniqueDay()
     if
         xi.settings.main.REGIME_WAIT == 0 or
         player:getCharVar("[regime]lastReward") < vanadielEpoch

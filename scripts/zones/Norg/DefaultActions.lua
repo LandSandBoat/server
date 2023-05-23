@@ -10,6 +10,7 @@ return {
     ['Kamui']      = { event = 61 },
     ['Keal']       = { event = 89 },
     ['Ranemaud']   = { event = 68 },
+    ['Ryoma']      = { event = 94 },
     ['Verctissa']  = { event = 114 },
     ['Washu']      = { event = 80 },
 }

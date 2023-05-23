@@ -507,7 +507,7 @@ void CMobEntity::PostTick()
 
 float CMobEntity::GetRoamDistance()
 {
-    return (float)getMobMod(MOBMOD_ROAM_DISTANCE) / 10.0f;
+    return (float)getMobMod(MOBMOD_ROAM_DISTANCE);
 }
 
 float CMobEntity::GetRoamRate()
@@ -1467,4 +1467,9 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     {
         return CBattleEntity::OnAttack(state, action);
     }
+}
+
+bool CMobEntity::isWideScannable()
+{
+    return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
 }
