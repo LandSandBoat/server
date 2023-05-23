@@ -243,7 +243,7 @@ namespace synthutils
 
                 if (synthDiff <= 0)
                 {
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth lower success rate
                     {
                         success = 0.45;
                     }
@@ -278,7 +278,7 @@ namespace synthutils
                 {
                     canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ.
 
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth lower success rate
                     {
                         success = 0.45 - (synthDiff / 10);
                     }
@@ -347,7 +347,7 @@ namespace synthutils
                     break;
             }
 
-            if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
                 chance *= 1.5;
             }
@@ -361,7 +361,7 @@ namespace synthutils
             if (chance > 0)
             {
                 // limit max hq chance
-                if (PChar->CraftContainer->getCraftType() == 1)
+                if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
                 {
                     chance = std::clamp(chance, 0., 0.800);
                 }
@@ -482,7 +482,7 @@ namespace synthutils
             // Chance penalties.
             uint8 penalty = 1;
 
-            if (PChar->CraftContainer->getCraftType() == 1) // If it's a desynth, lower skill up rate
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
             {
                 penalty += 1;
             }
