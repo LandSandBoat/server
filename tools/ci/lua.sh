@@ -48,7 +48,6 @@ global_objects=(
     getVanaMidnight
     getMidnight
     getConquestTally
-    vanaDay
 
     mission
     Mission

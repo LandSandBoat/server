@@ -65,7 +65,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 5089 then
         player:confirmTrade()
         player:setCharVar("VVC_Status", 2)
-        player:setCharVar("VVC_Gameday_Wait", vanaDay())
+        player:setCharVar("VVC_Gameday_Wait", VanadielUniqueDay())
     end
 end
 
