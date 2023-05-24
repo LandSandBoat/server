@@ -44,6 +44,7 @@ INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 
 -- Airi
 INSERT INTO `mob_pool_mods` VALUES (70,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (70,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Animated Shield
 INSERT INTO `mob_pool_mods` VALUES (154,163,-70,0); -- DMGMAGIC: -70
@@ -241,6 +242,7 @@ INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
 
 -- Iruci
 INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (2105,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Ixzdei Blm
 INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);  -- SIGHT_RANGE: 15
@@ -391,6 +393,7 @@ INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
 
 -- Pey
 INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (3124,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Phantom Worm
 INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50

@@ -21575,8 +21575,8 @@ INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,866,@ALWAYS);   -- Handful Of W
 -- ZoneID: 190 - Vrtra
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1712,@ALWAYS);    -- Clump Of Cashmere Wool (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1713,@ALWAYS);    -- Spool Of Cashmere Thread (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1712,500);        -- Clump Of Cashmere Wool (50.0%)
-INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1713,500);        -- Spool Of Cashmere Thread (50.0%)
+INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1712,@ALWAYS);    -- Clump Of Cashmere Wool (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1713,@ALWAYS);    -- Spool Of Cashmere Thread (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,860,380);         -- Behemoth Hide (38.0%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,15175,@UNCOMMON); -- Revilers Helm (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1816,80);         -- Wyrm Horn (8.0%)

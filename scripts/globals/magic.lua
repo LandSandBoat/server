@@ -2013,25 +2013,30 @@ xi.magic.calculateBuildDuration = function(target, duration, effect, caster)
     if target:isMob() and target:isNM() then
         local buildRes = xi.magic.getEffectResistance(target, effect, true, caster)
 
-        if target:getMod(buildRes) ~= nil then
-            local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
-            local count = target:getLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes))
+        local buildResMod = target:getMod(buildRes)
 
-            if builtRes == 0 then
-                duration = duration
-            else
-                duration = utils.clamp(duration - (builtRes + 3), 0, 65535) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+        if buildResMod ~= nil then
+            local durationDecrease = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
+            local spellCount = target:getLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes))
+
+            duration = utils.clamp(duration - durationDecrease, 0, 65535) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+
+            -- find next duration decrease with min of 1 second (MOD <= 10) and max of 100 seconds (MOD >= 1000)
+            local nextDecrease = utils.clamp(math.floor(buildResMod / 10), 1, 100)
+
+            target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), durationDecrease + nextDecrease)
+            target:setLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes), spellCount + 1)
+            -- set local var to denote that these res should be reset when mob roams at 100% HP
+            if target:getLocalVar("HasStatusResBuild") == 0 then
+                target:setLocalVar("HasStatusResBuild", 1)
             end
-
-            target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), count * 3)
-            target:setLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes), count + 1)
         end
     end
 
     return duration
 end
 
-xi.magic.resetBuildPercent = function(entity, buildRes)
+xi.magic.resetResBuild = function(entity, buildRes)
     entity:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), 0)
 end
 
