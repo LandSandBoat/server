@@ -103,7 +103,7 @@ index 0d26efa4a8..f3b709dfa3 100644
          if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
              (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
 -            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
-+            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || charutils::GetCharVar(PChar, "[CW]STATUS") > 0 ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
++            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || (charutils::GetCharVar(PChar, "[CW]STATUS") > 0) ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
          {
              return false;
          }
@@ -112,7 +112,7 @@ index 0d26efa4a8..f3b709dfa3 100644
              }
  
 -            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
-+            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || charutils::GetCharVar(PChar, "[CW]STATUS") > 0 ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
++            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") || (charutils::GetCharVar(PChar, "[CW]STATUS") > 0) ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
              {
                  UnequipItem(PChar, slotID);
                  continue;
@@ -180,3 +180,25 @@ index 0d26efa4a8..f3b709dfa3 100644
          }
          uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
          bool   onLimitMode = false;
+diff --git "a/src/map/roe.cpp" "b/src/map/roe.cpp"
+index 718518c0ff..408fd8f556 100644
+--- "a/src/map/roe.cpp"
++++ "b/src/map/roe.cpp"
+@@ -218,7 +218,7 @@ namespace roeutils
+     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload)
+     {
+         TracyZoneScoped;
+-        if (!settings::get<bool>("main.ENABLE_ROE") || !PChar || PChar->objtype != TYPE_PC)
++        if (!settings::get<bool>("main.ENABLE_ROE") || !PChar || PChar->objtype != TYPE_PC || PChar->getCharVar("[CW]STATUS") > 0)
+         {
+             return false;
+         }
+@@ -442,7 +442,7 @@ namespace roeutils
+     void onCharLoad(CCharEntity* PChar)
+     {
+         TracyZoneScoped;
+-        if (!settings::get<bool>("main.ENABLE_ROE"))
++        if (!settings::get<bool>("main.ENABLE_ROE") || PChar->getCharVar("[CW]STATUS") > 0)
+         {
+             return;
+         }
