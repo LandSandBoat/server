@@ -180,7 +180,7 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
                         quest:getVar(player, 'nanaaProg') == 1
                     then
-                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, 0, xi.items.PICKAXE)
+                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, player:getNation(), xi.items.PICKAXE)
                     end
                 end,
             },
