@@ -53,6 +53,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/states/ability_state.h"
 
 #include "../mob_modifier.h"
+#include "../notoriety_container.h"
 #include "../packets/char_abilities.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
@@ -1555,6 +1556,25 @@ namespace petutils
             PMob->PMaster    = nullptr;
 
             PMob->PAI->SetController(std::make_unique<CMobController>(PMob));
+
+            // clear all enmity towards a charmed mob when it is released
+            // use two loops to avoid modifying the container while iterating over it
+            auto&                  notorietyContainer = PMob->PNotorietyContainer;
+            std::list<CMobEntity*> mobsToPacify;
+
+            // first collect the mobs with hate towards the formerly charmed mob
+            for (auto* entityWithEnmity : *notorietyContainer)
+            {
+                if (entityWithEnmity->objtype == TYPE_MOB)
+                {
+                    mobsToPacify.push_back(static_cast<CMobEntity*>(entityWithEnmity));
+                }
+            }
+            // then remove the formerly charmed mob from those mobs enmity containers
+            for (auto* mobToPacify : mobsToPacify)
+            {
+                mobToPacify->PEnmityContainer->Clear(PMob->id);
+            }
         }
         else if (PPet->objtype == TYPE_PET)
         {
