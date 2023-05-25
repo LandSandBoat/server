@@ -12023,6 +12023,18 @@ void CLuaBaseEntity::uncharm()
 }
 
 /************************************************************************
+ *  Function: isTandemValid()
+ *  Purpose : checks if the entity satifies all conditions of tandem
+ *  Example : player:isTandemValid()
+ *  Notes   : for tandem strike and tandem blow
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTandemValid()
+{
+    return battleutils::IsTandemValid(static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: addBurden()
  *  Purpose : Adds a Burden to a Target
  *  Example : local overload = target:addBurden(xi.magic.ele.EARTH - 1, burden)
@@ -17031,6 +17043,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("charmDuration", CLuaBaseEntity::charmDuration);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isTandemValid", CLuaBaseEntity::isTandemValid);
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
