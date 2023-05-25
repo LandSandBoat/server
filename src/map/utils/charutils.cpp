@@ -3474,19 +3474,55 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsid)
+    bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
     {
-        return PChar->m_LearnedWeaponskills[wsid];
+        if (PChar == nullptr)
+        {
+            ShowError("PChar is null.");
+            return false;
+        }
+
+        if (wsUnlockId > std::size(PChar->m_LearnedWeaponskills) - 1)
+        {
+            ShowError("wsUnlockId is greater than learned weaponskill bitset.");
+            return false;
+        }
+
+        return PChar->m_LearnedWeaponskills[wsUnlockId];
     }
 
-    void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsid)
+    void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
     {
-        PChar->m_LearnedWeaponskills[wsid] = true;
+        if (PChar == nullptr)
+        {
+            ShowError("PChar is null.");
+            return;
+        }
+
+        if (wsUnlockId > std::size(PChar->m_LearnedWeaponskills) - 1)
+        {
+            ShowError("wsUnlockId is greater than learned weaponskill bitset.");
+            return;
+        }
+
+        PChar->m_LearnedWeaponskills[wsUnlockId] = true;
     }
 
-    void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsid)
+    void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
     {
-        PChar->m_LearnedWeaponskills[wsid] = false;
+        if (PChar == nullptr)
+        {
+            ShowError("PChar is null.");
+            return;
+        }
+
+        if (wsUnlockId > std::size(PChar->m_LearnedWeaponskills) - 1)
+        {
+            ShowError("wsUnlockId is greater than learned weaponskill bitset.");
+            return;
+        }
+
+        PChar->m_LearnedWeaponskills[wsUnlockId] = false;
     }
 
     /************************************************************************

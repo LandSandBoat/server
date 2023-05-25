@@ -9332,11 +9332,11 @@ uint16 CLuaBaseEntity::getCharSkillLevel(uint8 skillID)
 /************************************************************************
  *  Function: addLearnedWeaponskill()
  *  Purpose : Manually add a new weaponskill for the player using WSID
- *  Example : player:addLearnedWeaponskill(xi.weaponskill.DECIMATION)
+ *  Example : player:addLearnedWeaponskill(xi.ws_unlock.DECIMATION)
  *  Notes   : Do not see implemented in any script
  ************************************************************************/
 
-void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsID)
+void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsUnlockId)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -9346,7 +9346,7 @@ void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsID)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    charutils::addLearnedWeaponskill(PChar, wsID);
+    charutils::addLearnedWeaponskill(PChar, wsUnlockId);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -9355,11 +9355,11 @@ void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsID)
 /************************************************************************
  *  Function: hasLearnedWeaponskill()
  *  Purpose : Returns true if a player has learned a particular weaponskill
- *  Example : if player:hasLearnedWeaponskill(xi.weaponskill.DECIMATION) then
+ *  Example : if player:hasLearnedWeaponskill(xi.ws_unlock.DECIMATION) then
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsID)
+bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsUnlockId)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -9367,17 +9367,17 @@ bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsID)
         return false;
     }
 
-    return (charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsID) != 0);
+    return (charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsUnlockId) != 0);
 }
 
 /************************************************************************
  *  Function: delLearnedWeaponskill()
  *  Purpose : Removes a learned weaponskill from the player
- *  Example : player:delLearnedWeaponskill(xi.weaponskill.ASURAN_FISTS)
+ *  Example : player:delLearnedWeaponskill(xi.ws_unlock.ASURAN_FISTS)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
+void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsUnlockId)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -9387,7 +9387,7 @@ void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    charutils::delLearnedWeaponskill(PChar, wsID);
+    charutils::delLearnedWeaponskill(PChar, wsUnlockId);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
