@@ -471,9 +471,9 @@ public:
     void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
     uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level
 
-    void addLearnedWeaponskill(uint8 wsID);
-    bool hasLearnedWeaponskill(uint8 wsID);
-    void delLearnedWeaponskill(uint8 wsID);
+    void addLearnedWeaponskill(uint8 wsUnlockId);
+    bool hasLearnedWeaponskill(uint8 wsUnlockId);
+    void delLearnedWeaponskill(uint8 wsUnlockId);
 
     void trySkillUp(uint8 skill, uint8 level, sol::object const& forceSkillUpObj, sol::object const& useSubSkillObj);
 
