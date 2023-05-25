@@ -62,6 +62,7 @@ instanceObject.onEventUpdate = function(player, csid, option)
 end
 
 instanceObject.onEventFinish = function(player, csid, option)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.BHAFLAU_THICKETS)
 end
 
 return instanceObject
