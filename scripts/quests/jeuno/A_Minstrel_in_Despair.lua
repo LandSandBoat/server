@@ -5,13 +5,12 @@
 -- Mertaire : !pos -17 0 -61 245
 -----------------------------------
 require('scripts/globals/items')
+require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')
------------------------------------
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
 quest.reward =
 {
@@ -25,13 +24,15 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.windurst.THE_OLD_MONUMENT) == QUEST_COMPLETED
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED
         end,
 
         [xi.zone.LOWER_JEUNO] =
         {
-            ['Mertaire'] = {
+            ['Mertaire'] =
+            {
                 onTrade = function(player, npc, trade)
+                    print("triggered")
                     if npcUtil.tradeHasExactly(trade, { xi.items.POETIC_PARCHMENT }) then
                         return quest:progressEvent(101)
                     end

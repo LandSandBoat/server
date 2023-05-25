@@ -36,11 +36,6 @@ quest.sections =
 
         [xi.zone.LOWER_JEUNO] =
         {
-            ['Mertaire'] = quest:progressEvent(102),
-        },
-
-        [xi.zone.LOWER_JEUNO] =
-        {
             ['Bki_Tbujhja'] =
             {
                 onTrigger = function(player, npc)
