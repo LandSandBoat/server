@@ -28,6 +28,12 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 551 and option == 2 then
         player:setPos(729.749, -20.319, 407.153, 90, 29) -- Go to Riverne #B01 (R)
     end
+
+    if csid > 0 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
+    end
 end
 
 return entity

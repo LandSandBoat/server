@@ -873,6 +873,11 @@ bool matches(std::string const& target, std::string const& pattern, std::string 
     return matchesRecur(target.c_str(), pattern.c_str(), wildcard.c_str(), matchesRecur);
 }
 
+bool starts_with(std::string const& target, std::string const& pattern)
+{
+    return target.rfind(pattern, 0) != std::string::npos;
+}
+
 look_t stringToLook(std::string str)
 {
     look_t out{};

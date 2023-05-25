@@ -10,6 +10,7 @@ require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
+require("scripts/globals/loot")
 -----------------------------------
 
 local content = Limbus:new({
@@ -54,7 +55,10 @@ content.groups =
                     end
                 end)
 
-                -- TODO: Aern should drop ABC = 1 + math.min(3, mob:getLocalVar("AERN_RERAISES")) (before the reraise)
+                mob:addListener("ITEM_DROPS", "ITEM_DROPS_AERN", function(mobArg, loot)
+                    local quantity = math.min(3, mob:getLocalVar("AERN_RERAISES"))
+                    loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.GUARANTEED, quantity)
+                end)
             end
 
             -- Aern are split into groups and 6 of the 10 random groups are assigned a time extension to a random mob
@@ -119,12 +123,12 @@ content.loot =
     {
         {
             quantity = 7,
-            { itemid = 1875, droprate = 1000 },
+            { item =  1875, weight = 1000 },
         },
 
         {
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
-            { itemid =    0, droprate = 100 }, -- Nothing
+            { item =  2127, weight =  59 }, -- Metal Chip
+            { item =     0, weight = 100 }, -- Nothing
         },
     }
 }

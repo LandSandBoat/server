@@ -57,6 +57,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "ai/controllers/automaton_controller.h"
 #include "daily_system.h"
+#include "latent_effect_container.h"
 #include "packets/basic.h"
 #include "packets/chat_message.h"
 #include "utils/battleutils.h"
@@ -354,7 +355,13 @@ int32 do_init(int32 argc, char** argv)
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
             fmt::format("You have been set to GM level {}.", level), ""));
+    });
 
+    gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("Reloading settings files\n");
+        settings::init();
     });
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
@@ -788,6 +795,19 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                         SmallPD_Size, PChar->GetName());
         }
     }
+
+    if (PChar->retriggerLatentsAfterPacketParsing)
+    {
+        for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
+        {
+            if (PChar->equip[equipSlotID] != 0)
+            {
+                PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
+            }
+        }
+        PChar->retriggerLatentsAfterPacketParsing = false; // reset for next packet parse
+    }
+
     map_session_data->client_packet_id = SmallPD_Code;
 
     // Google Translate:

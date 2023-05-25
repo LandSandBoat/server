@@ -46,6 +46,37 @@ DropGroup_t::DropGroup_t(uint16 GroupRate)
 {
 }
 
+LootContainer::LootContainer(DropList_t* dropList)
+: dropList(dropList)
+{
+}
+
+void LootContainer::ForEachGroup(const std::function<void(const DropGroup_t&)>& func)
+{
+    for (const auto& group : dropList->Groups)
+    {
+        func(group);
+    }
+
+    for (const auto& group : drops.Groups)
+    {
+        func(group);
+    }
+}
+
+void LootContainer::ForEachItem(const std::function<void(const DropItem_t&)>& func)
+{
+    for (const auto& item : dropList->Items)
+    {
+        func(item);
+    }
+
+    for (const auto& item : drops.Items)
+    {
+        func(item);
+    }
+}
+
 /************************************************************************
  *                                                                       *
  *  Actually methods of working with a global collection of items        *
@@ -581,6 +612,9 @@ namespace itemutils
                 }
             }
         }
+
+        // Populate 0 drop list with an empty list to support mobs that only drop loot through script logic
+        g_pDropList[0] = new DropList_t;
     }
 
     /************************************************************************

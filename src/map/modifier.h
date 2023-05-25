@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -970,6 +970,10 @@ enum class Mod
     SILENCE_MEVA           = 1175, // Silence MEVA from Barspells
     VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
     PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
+
+    // Per PR comment - New ASB section starting at 2000
+    TANDEM_STRIKE = 2000, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
+    TANDEM_BLOW   = 2001, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 

@@ -76,22 +76,22 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 and option == 1 then
         if lampObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
             npc:setAnimationSub(1)
-            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp)
+            npc:timer(xi.settings.main.ACTIVATE_LAMP_TIME, function(lamp)
                 lamp:setAnimationSub(0)
                 lamp:setLocalVar("[Lamp]Wait", os.time() + 30)
             end)
 
             if
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_2, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_3, 0xFFF), xi.objType.NPC):getAnimationSub() == 1
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_OFFSET, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_OFFSET + 1, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_OFFSET + 2, 0xFFF), xi.objType.NPC):getAnimationSub() == 1
             then
                 if lampCount == 3 then
                     instance:setProgress(15)
-                elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_4, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
+                elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_OFFSET + 3, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
                     if lampCount == 4 then
                         instance:setProgress(15)
-                    elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_5, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
+                    elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_OFFSET + 4, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
                         instance:setProgress(15)
                     end
                 end
@@ -110,7 +110,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- print("lamp count: "..instance:getLocalVar("[Lamp]count").." press count: "..instance:getLocalVar("[Lamp]pressCount"))
 
             if lampCount == 3 and lampRegister > 13 then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_3 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 2 do
                     local lamp      = instance:getEntity(bit.band(i, 0xFFF), xi.objType.NPC)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")
@@ -134,7 +134,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     instance:setLocalVar("lampsCorrect", 0)
                 end
             elseif lampCount == 4 and lampRegister > 29 then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_4 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 3 do
                     local lamp      = instance:getEntity(bit.band(i, 0xFFF), xi.objType.NPC)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")
@@ -158,7 +158,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     instance:setLocalVar("lampsCorrect", 0)
                 end
             elseif lampCount == 5 and lampRegister > 61 then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 4 do
                     local lamp      = instance:getEntity(bit.band(i, 0xFFF), xi.objType.NPC)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")

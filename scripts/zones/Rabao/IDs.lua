@@ -15,6 +15,7 @@ zones[xi.zone.RABAO] =
         ITEM_OBTAINED                 = 6412,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6413,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6415,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                  = 6416,  -- Lost Key Item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL           = 6417,  -- You do not have enough gil.
         CARRIED_OVER_POINTS           = 6451,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 6452,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!

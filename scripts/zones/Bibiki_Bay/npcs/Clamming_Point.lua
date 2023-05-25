@@ -42,6 +42,18 @@ local clammingItems =
     5122,  3, 1.000, 1.000  -- Bibiki Slug
 }
 
+entity.firstClammingPointID = -1
+
+entity.onSpawn = function(npc)
+    local firstClammingPoint = npc:getZone():queryEntitiesByName("Clamming_Point")[1]
+
+    if firstClammingPoint then
+        entity.firstClammingPointID = firstClammingPoint:getID()
+    else
+        print("ERROR: Clamming_Point not found in queryEntitiesByName!")
+    end
+end
+
 local function giveImprovedResults(player)
     if player:getMod(xi.mod.CLAMMING_IMPROVED_RESULTS) > 0 then
         return 1
@@ -62,46 +74,61 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.CLAMMING_KIT) then
-        player:setLocalVar("ClammingPointID", npc:getID())
+    -- be noisy to try to get server admins to notice...
+    if entity.firstClammingPointID == -1 then
+        print("ERROR: Clamming_Point not found!")
+        return
+    end
 
-        if GetServerVariable("ClammingPoint_" .. npc:getID() .. "_InUse") == 1 then
+    if player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+        local delay = player:getLocalVar("ClammingPointDelay")
+
+        if delay > 0 and delay > os.time() then
             player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
         else
-            if player:getCharVar("ClammingKitBroken") > 0 then -- Broken bucket
-                player:messageSpecial(ID.text.YOU_CANNOT_COLLECT)
-            else
-                local delay = GetServerVariable("ClammingPoint_" .. npc:getID() .. "_Delay")
+            local eventID = npc:getID() - entity.firstClammingPointID + 20
 
-                if delay > 0 and delay > os.time() then -- player has to wait a little longer
-                    player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
-                else
-                    SetServerVariable("ClammingPoint_" .. npc:getID() .. "_InUse", 1)
-                    SetServerVariable("ClammingPoint_" .. npc:getID() .. "_Delay", 0)
-
-                    player:startEvent(20, 0, 0, 0, 0, 0, 0, 0, 0)
-                end
-            end
+            player:startEvent(eventID, 0, 0, 0, 0, 0, 0, 0, 0)
         end
     else
         player:messageSpecial(ID.text.AREA_IS_LITTERED)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if csid == 20 then
+-- Event update info:
+-- Param 1: Stale weight of bucket in ponze, this is stale so when you have a broken bucket it does not animate when you send the update that you want to dig
+-- Param 2: Max weight of bucket in ponze
+-- Param 3: 0 = no Alraune, 1 = Alraune (used for the Something jumped in the bucket message with bucket size 200)
+entity.onEventUpdate = function(player, csid, option, npc)
+    local eventID = npc:getID() - entity.firstClammingPointID + 20
+
+    if csid == eventID then
+        if player:getCharVar("ClammingKitBroken") > 0 then -- Broken bucket
+            player:messageSpecial(ID.text.YOU_CANNOT_COLLECT)
+            player:updateEvent(player:getCharVar("ClammingKitWeight"), player:getCharVar("ClammingKitSize"))
+            return
+        end
+
         if
             player:getCharVar("ClammingKitSize") == 200 and
             math.random() <= giveReducedIncidents(player)
         then
             player:setLocalVar("SomethingJumpedInBucket", 1)
+            -- SE seems to add 10000 to the previous weight if Alraune had stolen your stuff.
+            -- A weight higher than your capacity prevents the CS performing the clamming animation.
+
+            -- 3rd param of 1 = Alraune CS
+            player:updateEvent(player:getCharVar("ClammingKitWeight"), player:getCharVar("ClammingKitSize"), 1)
+
+            player:incrementCharVar("ClammingKitWeight", 10000)
         else
             local dropRate = math.random()
             local improvedResults = giveImprovedResults(player)
 
+            player:updateEvent(player:getCharVar("ClammingKitWeight"), player:getCharVar("ClammingKitSize"))
+
             for itemDrop = 3, #clammingItems, 4 do
                 if dropRate <= clammingItems[itemDrop + improvedResults] then
-
                     player:setLocalVar("ClammedItem", clammingItems[itemDrop - 2])
                     player:incrementCharVar("ClammedItem_" .. clammingItems[itemDrop - 2], 1)
                     player:incrementCharVar("ClammingKitWeight", clammingItems[itemDrop - 1])
@@ -117,8 +144,10 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 20 then
+entity.onEventFinish = function(player, csid, option, npc)
+    local eventID = npc:getID() - entity.firstClammingPointID + 20
+
+    if csid == eventID then
         if player:getLocalVar("SomethingJumpedInBucket") > 0 then
             player:setLocalVar("SomethingJumpedInBucket", 0)
 
@@ -143,13 +172,10 @@ entity.onEventFinish = function(player, csid, option)
                     player:messageSpecial(ID.text.YOU_FIND_ITEM, clammedItem)
                 end
 
-                SetServerVariable("ClammingPoint_" .. player:getLocalVar("ClammingPointID") .. "_Delay", os.time() + 10)
+                player:setLocalVar("ClammingPointDelay", os.time() + 10)
                 player:setLocalVar("ClammedItem", 0)
             end
         end
-
-        SetServerVariable("ClammingPoint_" .. player:getLocalVar("ClammingPointID") .. "_InUse", 0)
-        player:setLocalVar("ClammingPointID", 0)
     end
 end
 

@@ -12,7 +12,7 @@ zones[xi.zone.WINDURST_WOODS] =
     {
         CONQUEST_BASE                 = 0,     -- Tallying conquest results...
         ITEM_CANNOT_BE_OBTAINED       = 6543,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        DEFAULT_CANNOT_BE_OBTAINED    = 6545,  -- You cannot obtain the item. Come back after sorting your inventory.
+        CANNOT_OBTAIN_THE_ITEM        = 6545,  -- You cannot obtain the item. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6549,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6550,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6552,  -- Obtained key item: <keyitem>.

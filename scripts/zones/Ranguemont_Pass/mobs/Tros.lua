@@ -13,10 +13,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) then
-        player:setCharVar("TrosKilled", 1)
-        player:setCharVar("Tros_Timer", os.time())
-    end
 end
 
 return entity

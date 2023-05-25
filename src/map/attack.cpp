@@ -114,34 +114,18 @@ void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
 
 /************************************************************************
  *                                                                      *
- *  Sets the guarded flag.                                              *
- *                                                                      *
- ************************************************************************/
-void CAttack::SetGuarded(bool isGuarded)
-{
-    m_isGuarded = isGuarded;
-}
-
-/************************************************************************
- *                                                                      *
  *  Gets the guarded flag.                                              *
  *                                                                      *
  ************************************************************************/
 bool CAttack::IsGuarded()
 {
-    m_isGuarded = attackutils::IsGuarded(m_attacker, m_victim);
-    if (m_isGuarded)
+    if (m_isGuarded.has_value())
     {
-        if (m_damageRatio > 1.0f)
-        {
-            m_damageRatio -= 1.0f;
-        }
-        else
-        {
-            m_damageRatio = 0;
-        }
+        return m_isGuarded.value();
     }
-    return m_isGuarded;
+
+    m_isGuarded.emplace(attackutils::IsGuarded(m_attacker, m_victim));
+    return m_isGuarded.value();
 }
 
 /************************************************************************

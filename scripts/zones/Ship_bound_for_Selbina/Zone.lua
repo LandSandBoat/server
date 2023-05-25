@@ -49,23 +49,27 @@ zoneObject.onGameHour = function(zone)
         -- Check for Enagakure
         local players = zone:getPlayers()
         for _, player in pairs(players) do
-            if player:hasKeyItem(xi.ki.SEANCE_STAFF)
-                and player:getVar("Enagakure_Killed") == 0
-                and not GetMobByID(ID.mob.ENAGAKURE):isSpawned()
+            if
+                player:hasKeyItem(xi.ki.SEANCE_STAFF) and
+                player:getVar("Quest[5][144]nmKilled") == 0 and
+                not GetMobByID(ID.mob.ENAGAKURE):isSpawned()
             then
                 GetMobByID(ID.mob.ENAGAKURE):spawn()
             end
         end
+
         if
             math.random() < 0.20 and
             not GetMobByID(ID.mob.PHANTOM):isSpawned()
         then
             GetMobByID(ID.mob.PHANTOM):spawn()
         end
+
     else
         if GetMobByID(ID.mob.PHANTOM):isSpawned() then
             DespawnMob(ID.mob.PHANTOM)
         end
+
         if GetMobByID(ID.mob.ENAGAKURE):isSpawned() then
             DespawnMob(ID.mob.ENAGAKURE)
         end
@@ -87,15 +91,19 @@ zoneObject.onZoneTick = function(zone)
         if GetMobByID(ID.mob.PHANTOM):isSpawned() then
             DespawnMob(ID.mob.PHANTOM)
         end
+
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then
             DespawnMob(ID.mob.SEA_HORROR)
         end
+
         xi.sea_creatures.despawn(ID)
         zone:setLocalVar('state', 0)
+
     elseif zone:getLocalVar('state') == 2 then
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then -- make sure we dont have horror from previous or docked zone
             DespawnMob(ID.mob.SEA_HORROR)
         end
+
         xi.sea_creatures.checkSpawns(ID, 5, 1) -- 5 percent on init
         zone:setLocalVar('state', 0)
     end

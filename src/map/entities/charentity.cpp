@@ -156,6 +156,8 @@ CCharEntity::CCharEntity()
     memset(&m_missionLog, 0, sizeof(m_missionLog));
     m_eminenceCache.activemap.reset();
 
+    memset(&m_claimedDeeds, 0, sizeof(m_claimedDeeds));
+
     for (uint8 i = 0; i <= 3; ++i)
     {
         m_missionLog[i].current = 0xFFFF;
@@ -218,6 +220,8 @@ CCharEntity::CCharEntity()
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
+
+    retriggerLatentsAfterPacketParsing = false;
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
