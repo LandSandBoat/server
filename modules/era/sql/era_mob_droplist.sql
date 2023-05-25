@@ -11827,6 +11827,8 @@ INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,1527,@ALWAYS);  -- Behemoth Ton
 INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,831,@VCOMMON);  -- Square Of Shining Cloth (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,860,@ALWAYS);   -- Behemoth Hide (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,860,@COMMON);   -- Behemoth Hide (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,883,@ALWAYS);   -- Behemoth Horn (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,883,@COMMON);   -- Behemoth Horn (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1450,1,1,1000,13415,950);     -- Pixie Earring (Group 1 - 95.0%)
 INSERT INTO `mob_droplist` VALUES (1450,1,1,1000,13566,@RARE);   -- Defending Ring (Group 1 - Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@ALWAYS,1322,250);   -- Earthen Abjuration Legs (Group 2 - 25.0%)
