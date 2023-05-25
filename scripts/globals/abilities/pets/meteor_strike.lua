@@ -19,7 +19,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.FIRE
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     if summoner ~= nil and summoner:isPC() then
         params.tpBonus = summoner:getMerit(xi.merit.METEOR_STRIKE) -- This was changed to 400 tp/point in 2007. Original value was 320 tp/point

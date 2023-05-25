@@ -337,6 +337,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                 local ftpHybrid = xi.weaponskills.fTP(calcParams.tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
                 local magicdmg = finaldmg * ftpHybrid
 
+                wsParams.damageSpell = true
                 wsParams.bonus = calcParams.bonusAcc
                 magicdmg = magicdmg * xi.magic.applyAbilityResistance(attacker, target, wsParams)
                 magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
@@ -858,6 +859,8 @@ end
 --         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
 
 xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
+    -- Magical WSs do not resist to 0
+    wsParams.damageSpell = true
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
     {

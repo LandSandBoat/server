@@ -50,7 +50,7 @@ abilityobject.onPetAbility = function(target, pet, skill, summoner)
     params.includemab = true -- This does include magic bonuses
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
     params.omen = damage
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     local damageTable = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
