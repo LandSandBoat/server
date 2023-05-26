@@ -90,6 +90,7 @@ zones[xi.zone.BASTOK_MARKETS] =
         CHACHAROON          = GetFirstID("Chacharoon"),
         CHACH_SHEEP         = GetFirstID("Chach_Sheep"),
         CHACH_COEURL        = GetFirstID("Chach_Coeurl"),
+        HISTORY_MOOGLE      = GetFirstID("History_Moogle"),
 
         HALLOWEEN_SKINS =
         {

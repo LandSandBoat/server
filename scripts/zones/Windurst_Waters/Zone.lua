@@ -17,6 +17,7 @@ zoneObject.onInitialize = function(zone)
     xi.vanaversary.hideNpc(ID.npc.CHACHAROON)
     xi.vanaversary.hideNpc(ID.npc.CHACH_SHEEP)
     xi.vanaversary.hideNpc(ID.npc.CHACH_COEURL)
+    xi.vanaversary.hideNpc(ID.npc.HISTORY_MOOGLE)
 
     applyHalloweenNpcCostumes(zone:getID())
 end

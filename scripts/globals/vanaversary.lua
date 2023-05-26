@@ -168,3 +168,49 @@ xi.vanaversary.cofferMoogleEnd = function(player, csid)
         player:setCharVar("[VANAVERSARY]CofferGreeting", 1)
     end
 end
+
+-----------------
+-- History Moogle
+-----------------
+
+xi.vanaversary.historyRewards =
+{
+    [0] = { xi.items.ECHAD_RING     },
+    [1] = { xi.items.TRIZEK_RING    },
+    [2] = { xi.items.CALIBER_RING   },
+    [3] = { xi.items.FACILITY_RING  },
+    [4] = { xi.items.LEAF_BENCH     },
+    [5] = { xi.items.ASTRAL_CUBE    },
+    [6] = { xi.items.ALLIANCE_SHIRT }
+}
+
+xi.vanaversary.historyMoogle = function(player, csid)
+    local chatHist          = player:getHistory(xi.history.CHATS_SENT)
+    local npcHist           = player:getHistory(xi.history.NPC_INTERACTIONS)
+    local partiesJoined     = player:getHistory(xi.history.JOINED_PARTIES)
+    local allianceJoined    = player:getHistory(xi.history.JOINED_ALLIANCES)
+    local battlesFought     = player:getHistory(xi.history.BATTLES_FOUGHT)
+    local koCount           = player:getHistory(xi.history.TIMES_KNOCKED_OUT)
+    local enemiesDefeated   = player:getHistory(xi.history.ENEMIES_DEFEATED)
+    local gmCalls           = player:getHistory(xi.history.GM_CALLS)
+
+    player:startEvent(csid, chatHist, npcHist, partiesJoined, allianceJoined, battlesFought, koCount, enemiesDefeated, gmCalls)
+end
+
+xi.vanaversary.historyMoogleUpdate = function(player, csid, option)
+    local rewardsClaimed = player:getCharVar("[VANAVERSARY]RewardCount")
+
+    player:updateEvent(0, 0, 0, 0, 0, 0, rewardsClaimed, 0)
+
+    if option < 7 then
+        if rewardsClaimed == 0 then
+            if npcUtil.giveItem(player, xi.vanaversary.historyRewards[option]) then
+                player:incrementCharVar("[VANAVERSARY]RewardCount", 1)
+            end
+        elseif rewardsClaimed == 1 then
+            if npcUtil.giveItem(player, xi.vanaversary.historyRewards[option]) then
+                player:incrementCharVar("[VANAVERSARY]RewardCount", 2) -- Not enough information is available for the "Bonus" time based gift to implement.
+            end
+        end
+    end
+end
