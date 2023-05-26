@@ -133,7 +133,6 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
-    getEffectResistance
     getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation
