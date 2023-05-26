@@ -16226,7 +16226,7 @@ void CLuaBaseEntity::setClaimedTraverserStones(uint16 totalStones)
 uint32 CLuaBaseEntity::getHistory(uint8 index)
 {
     uint32 outStat = 0;
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
         switch (index)
