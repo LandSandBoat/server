@@ -826,7 +826,7 @@ xi.effect =
     MOOGLE_AMPLIFIER         = 629,
     TAINT                    = 630,
     HAUNT                    = 631,
-    EXPIRATION               = 632,
+    BLACK_SANCTUS            = 632,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
