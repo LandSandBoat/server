@@ -135,6 +135,7 @@ xi.vanaversary.treasureCoffer = function(player, csid, option)
     if player:getGender() == 1 then -- Male
         xi.vanaversary.goods = xi.vanaversary.cofferItemsM
     end
+
     player:startEvent(csid)
 end
 
@@ -164,6 +165,7 @@ xi.vanaversary.cofferMoogleEnd = function(player, csid)
     if not player:hasItem(xi.items.MOOGLE_SHIRT) then
         npcUtil.giveItem(player, xi.items.MOOGLE_SHIRT)
     end
+
     if player:getCharVar("[VANAVERSARY]CofferGreeting") ~= 1 then
         player:setCharVar("[VANAVERSARY]CofferGreeting", 1)
     end

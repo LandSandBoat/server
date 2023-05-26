@@ -7,10 +7,10 @@
 require('scripts/globals/vanaversary')
 
 local entity = {}
-local csid = 1033
 
 entity.onTrigger = function(player, npc)
-    xi.vanaversary.treasureCoffer(player, csid, option)
+    local csid = 1033
+    xi.vanaversary.treasureCoffer(player, csid)
 end
 
 entity.onEventUpdate = function(player, csid, option)

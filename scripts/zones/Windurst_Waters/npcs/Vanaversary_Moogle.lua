@@ -7,9 +7,9 @@
 require('scripts/globals/vanaversary')
 
 local entity = {}
-local csid = 1169
 
 entity.onTrigger = function(player, npc)
+    local csid = 1169
     xi.vanaversary.cofferMoogle(player, csid)
 end
 

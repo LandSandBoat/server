@@ -7,7 +7,6 @@
 require('scripts/globals/vanaversary')
 
 local entity = {}
-local csid = 1170
 
 entity.onTrigger = function(player, npc)
 -- Primary Menu CSID 1170
