@@ -12305,6 +12305,7 @@ INSERT INTO `item_equipment` VALUES (26485,'chefs_scutum_-1',1,0,4194303,33,4,0,
 INSERT INTO `item_equipment` VALUES (26486,'chefs_shield_-1',1,0,4194303,25,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26517,'shadow_lord_shirt',1,0,4194303,588,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26518,'jody_shirt',1,0,4194303,587,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (26519,'mandragora_shirt',1,0,4194303,586,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26520,'akitu_shirt',1,0,4194303,582,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26523,'delegates_garb',1,0,4194303,441,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26524,'gil_nabber_shirt',1,0,4194303,585,0,0,32,0,0);

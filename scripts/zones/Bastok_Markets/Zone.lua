@@ -10,6 +10,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     applyHalloweenNpcCostumes(zone:getID())
+    xi.vanaversary.hideNpc(ID.npc.VANAVERSARY_COFFER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

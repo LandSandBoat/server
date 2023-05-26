@@ -238,6 +238,13 @@ xi.settings.main =
             -- WORD = 12345,
         },
     },
+    VANAVERSARY_CAMPAIGN            = 0,  -- Set to 1 to enable the Vana'versary Campaign.
+    VANAVERSARY_ANNOUNCE            = 0,  -- Set to 1 to add announcement to player login.
+
+    VANAVERSARY_MESSAGE =
+        "\n \n" .. -- The space between these newlines is intentional
+        "\129\153\129\154 The Vana'versary Celebration Campaign is active! \129\154\129\153\n" ..
+        "Speak to a Moogle in Southern San d'Oria, Bastok Markets, or Windurst Waters for details!",
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.

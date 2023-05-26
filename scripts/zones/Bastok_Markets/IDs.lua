@@ -84,7 +84,8 @@ zones[xi.zone.BASTOK_MARKETS] =
     },
     npc =
     {
-        AQUILLINA = GetFirstID("Aquillina"),
+        AQUILLINA           = GetFirstID("Aquillina"),
+        VANAVERSARY_COFFER  = GetFirstID("Vanaversary_Coffer"),
 
         HALLOWEEN_SKINS =
         {

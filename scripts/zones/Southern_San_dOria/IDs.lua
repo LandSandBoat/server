@@ -125,6 +125,8 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
     },
     npc =
     {
+        VANAVERSARY_COFFER  = GetFirstID("Vanaversary_Coffer"),
+
         HALLOWEEN_SKINS =
         {
             [17719303] = 47, -- Machielle

@@ -74,6 +74,8 @@ zones[xi.zone.WINDURST_WATERS] =
 
     npc =
     {
+        VANAVERSARY_COFFER  = GetFirstID("Vanaversary_Coffer"),
+
         HALLOWEEN_SKINS =
         {
             [17752097] = 61, -- Ensasa
