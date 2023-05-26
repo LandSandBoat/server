@@ -7043,6 +7043,7 @@ xi.items =
     MANDRAGORA_SHIRT                = 26519,
     AKITU_SHIRT                     = 26520,
     GIL_NABBER_SHIRT                = 26524,
+    MOOGLE_SHIRT                    = 26546,
     ARKE_CORAZZA                    = 26533,
     MITHKABOB_SHIRT                 = 26545,
     AGOGE_MASK                      = 26624,

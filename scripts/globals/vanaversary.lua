@@ -127,6 +127,10 @@ xi.vanaversary.hideNpc = function(npc)
     end
 end
 
+---------------------------------
+-- "Free to Take" Treasure Coffer
+---------------------------------
+
 xi.vanaversary.treasureCoffer = function(player, csid, option)
     if player:getGender() == 1 then -- Male
         xi.vanaversary.goods = xi.vanaversary.cofferItemsM
@@ -136,4 +140,31 @@ end
 
 xi.vanaversary.treaureCofferGoods = function(player, csid, option)
     npcUtil.giveItem(player, xi.vanaversary.goods[option])
+end
+
+---------------------------------------------
+-- Vanaversary Moogle (Next to Coffer) Dialog
+---------------------------------------------
+
+xi.vanaversary.cofferMoogle = function(player, csid)
+    local greeting = player:getCharVar("[VANAVERSARY]CofferGreeting")
+
+    if not player:hasItem(xi.items.MOOGLE_SHIRT) then
+        if greeting > 0 then
+            player:startEvent(csid, 2)
+        else
+            player:startEvent(csid)
+        end
+    else
+        player:startEvent(csid, greeting)
+    end
+end
+
+xi.vanaversary.cofferMoogleEnd = function(player, csid)
+    if not player:hasItem(xi.items.MOOGLE_SHIRT) then
+        npcUtil.giveItem(player, xi.items.MOOGLE_SHIRT)
+    end
+    if player:getCharVar("[VANAVERSARY]CofferGreeting") ~= 1 then
+        player:setCharVar("[VANAVERSARY]CofferGreeting", 1)
+    end
 end

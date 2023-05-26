@@ -75,6 +75,10 @@ zones[xi.zone.WINDURST_WATERS] =
     npc =
     {
         VANAVERSARY_COFFER  = GetFirstID("Vanaversary_Coffer"),
+        VANAVERSARY_MOOGLE  = GetFirstID("Vanaversary_Moogle"),
+        CHACHAROON          = GetFirstID("Chacharoon"),
+        CHACH_SHEEP         = GetFirstID("Chach_Sheep"),
+        CHACH_COEURL        = GetFirstID("Chach_Coeurl"),
 
         HALLOWEEN_SKINS =
         {
