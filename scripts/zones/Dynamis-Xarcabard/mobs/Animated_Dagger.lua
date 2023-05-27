@@ -4,7 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 require("scripts/globals/status")
-mixins = { require("scripts/mixins/animated_weapon") }
+mixins = { require("scripts/mixins/families/animated_weapons") }
 mixinOptions = { item = xi.items.ORNATE_FRAGMENT }
 -----------------------------------
 local entity = {}
