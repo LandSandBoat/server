@@ -116,3 +116,37 @@ CCharEmotionPacket::CCharEmotionPacket(CNpcEntity* PNpc, uint32 TargetID, uint16
 
     ref<uint8>(0x16) = static_cast<uint8>(emoteMode);
 }
+
+CCharEmotionPacket::CCharEmotionPacket(CMobEntity* PMob, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra)
+{
+    this->setType(0x5A);
+    this->setSize(0x70);
+
+    ref<uint32>(0x04) = PMob->id;
+    ref<uint32>(0x08) = TargetID;
+    ref<uint16>(0x0C) = PMob->targid;
+    ref<uint16>(0x0E) = TargetIndex;
+    ref<uint8>(0x10)  = EmoteID == Emote::JOB ? static_cast<uint8>(EmoteID) + (extra - 0x1F) : static_cast<uint8>(EmoteID);
+
+    if (EmoteID == Emote::SALUTE)
+    {
+        ref<uint16>(0x12) = extra;
+    }
+    else if (EmoteID == Emote::HURRAY)
+    {
+        ref<uint16>(0x12) = extra;
+    }
+    else if (EmoteID == Emote::BELL)
+    {
+        // No emote text for /bell
+        emoteMode = EmoteMode::MOTION;
+
+        ref<uint8>(0x12) = (extra - 0x06);
+    }
+    else if (EmoteID == Emote::JOB)
+    {
+        ref<uint8>(0x12) = (extra - 0x1F);
+    }
+
+    ref<uint8>(0x16) = static_cast<uint8>(emoteMode);
+}
