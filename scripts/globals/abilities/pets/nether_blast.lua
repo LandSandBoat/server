@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.DARK
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
     params.breath = true
     params.netherBlast = true
 
