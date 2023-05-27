@@ -203,6 +203,11 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
     magicAcc = magicAcc + utils.clamp(maccFood, 0, actor:getMod(xi.mod.FOOD_MACC_CAP))
 
     -----------------------------------
+    -- magicAcc from spell base.
+    -----------------------------------
+    magicAcc = magicAcc + bonusMacc
+
+    -----------------------------------
     -- magicAcc from Magic Burst
     -----------------------------------
     local _, skillchainCount = FormMagicBurst(spellElement, target)
@@ -236,8 +241,13 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
         magicEva = magicEva + target:getMod(mEvaMod) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
-    -- Level correction. Target gets a bonus when higher level. Never a penalty.
-    if levelDiff > 0 then
+    -- Level correction.
+    -- Mobs vs Player: There is no dLvl for this interaction
+    -- Player vs Mobs: Mobs get a bonus when higher level. Never a penalty.
+    if
+        levelDiff > 0 and
+        not target:isPC()
+    then
         magicEva = magicEva + levelDiff * 4
     end
 
@@ -271,26 +281,32 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
         resistRank = target:getMod(elementTable[spellElement][4])
     end
 
+    -- Handles increasing res rank if a skillchain is present
+    local _, skillchainCount = FormMagicBurst(spellElement, target)
+
+    if skillchainCount > 0 then
+        resistRank = utils.clamp(resistRank - 1, -3, 11)
+    end
+
     -- Resistance Ranks "boons".
     if resistRank > 10 then -- Resistance rank 11 is technically the max, but we check for higher JUST IN CASE something altered it.
         -- TODO: Inmunobreak logic probably goes here
 
-        resistRate = 0.0625
-        return resistRate
+        resistRate = 0.125
     elseif resistRank == 10 then
         magicHitRate = 5
     end
 
     -- Determine final resist based on which thresholds have been crossed.
     local resistTier = 0
-    local randomVar  = math.random()
+    local diceRoll  = math.random()
 
     -- NOTE: Elemental magic evasion "Boons".
     -- According to wiki, 1 positive point in the spell element MEVA allows for an additional tier. This would be tier 3, not the resistance rank tier.
     -- However, it also states that a negative value will also prevent full resists, which is redundant. We already wouldnt be eligible for it.
 
     for tierVar = 3, 1, -1 do
-        if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
+        if diceRoll <= (1 - magicHitRate / 100) ^ tierVar then
             resistTier = tierVar
             break
         end
@@ -299,12 +315,17 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     resistRate = 1 / (2 ^ resistTier)
 
     -- Apply additional resistance tier. (The so called "Fourth resist tier"). Subtle sorcery bypasses it.
-    if resistRank >= 4 then
-        if
-            skillType ~= xi.skill.ELEMENTAL_MAGIC or
-            not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY)
-        then
+    if
+        skillType == xi.skill.ELEMENTAL_MAGIC and
+        not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY)
+    then
+        if resistRank >= 4 then
             resistRate = resistRate / 2
+        end
+
+        -- When EEM is 150%, make sure the lowest resist is 0.5 for elemental magic
+        if resistRank < -2 and resistRate < 0.5 then
+            resistRate = 0.5
         end
     end
 
