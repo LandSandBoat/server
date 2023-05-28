@@ -1569,6 +1569,11 @@ xi.conquest.sendConquestTallyEndMessage = function(player, messageBase, owner, r
 end
 
 xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner, ranking, influence, isConquestAlliance)
+    -- don't send regional influence for city zones -- nobody can gain influence here.
+    if owner == 255 then
+        return
+    end
+
     if owner <= 3 then
         player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under <nation> control.
     else
@@ -1600,15 +1605,9 @@ xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner
     end
 end
 
-xi.conquest.onConquestUpdate = function(zone, updatetype)
-    local region             = zone:getRegionID()
-    local influence          = GetRegionInfluence(region)
-    local owner              = GetRegionOwner(region)
-    local players            = zone:getPlayers()
+xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
     local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
-    local ranking            = GetConquestBalance()
-    local isConquestAlliance = IsConquestAlliance()
-
+    local players            = zone:getPlayers()
     -----------------------------------
     -- Once per zone logic
     -----------------------------------
