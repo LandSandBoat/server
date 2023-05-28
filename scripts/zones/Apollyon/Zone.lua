@@ -38,8 +38,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(36, -523, -4, 636, -516, 4, 643) -- Apollyon NW telporter floor 4 to floor 5
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
