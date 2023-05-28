@@ -294,8 +294,9 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         bin2hex(session_key, (uint8*)PSession->blowfish.key, 20);
 
         uint16 destination = PChar->loc.destination;
+        CZone* destZone    = zoneutils::GetZone(destination);
 
-        if (destination >= MAX_ZONEID)
+        if (destination >= MAX_ZONEID || destZone == nullptr)
         {
             // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
             ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
@@ -303,7 +304,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
             charutils::HomePoint(PChar);
         }
 
-        zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
+        destZone->IncreaseZoneCounter(PChar);
 
         PChar->m_ZonesList[PChar->getZone() >> 3] |= (1 << (PChar->getZone() % 8));
 
@@ -311,6 +312,12 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());
+
+        if (currentZone == nullptr)
+        {
+            ShowWarning("currentZone was null for Zone ID %d.", PChar->getZone());
+            return;
+        }
 
         sql->Query(fmtQuery, PChar->targid, session_key, currentZone->GetIP(), PSession->client_port, PChar->id);
 

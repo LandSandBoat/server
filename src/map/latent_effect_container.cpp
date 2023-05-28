@@ -591,7 +591,16 @@ void CLatentEffectContainer::CheckLatentsZone()
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeather()
 {
-    CheckLatentsWeather(zoneutils::GetZone(m_POwner->getZone())->GetWeather());
+    uint16 zoneId = m_POwner->getZone();
+    CZone* PZone  = zoneutils::GetZone(zoneId);
+
+    if (PZone == nullptr)
+    {
+        ShowWarning("PZone was null for Zone ID %d.", zoneId);
+        return;
+    }
+
+    CheckLatentsWeather(PZone->GetWeather());
 }
 
 void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
