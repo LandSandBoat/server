@@ -10467,17 +10467,23 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     if (m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("m_BattlefieldHandler was null for %s.", m_PBaseEntity->GetName());
-        return 0;
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL;
     }
 
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
-        return 0;
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
+
+    if (PZone == nullptr)
+    {
+        ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL;
+    }
 
     // TODO: Verify what happens if -1 makes it to the cast below
     if (arg0 == sol::lua_nil)
@@ -10511,7 +10517,7 @@ bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
     if (m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("m_BattlefieldHandler was null for %s.", m_PBaseEntity->GetName());
-        return 0;
+        return true;
     }
 
     if (m_PBaseEntity->objtype != TYPE_PC)

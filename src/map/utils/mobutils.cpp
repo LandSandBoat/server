@@ -962,7 +962,7 @@ namespace mobutils
         RecalculateSpellContainer(PMob);
     }
 
-    void InitializeMob(CMobEntity* PMob, CZone* PZone)
+    void InitializeMob(CMobEntity* PMob)
     {
         // add special mob mods
 
@@ -1383,7 +1383,7 @@ Usage:
                 newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
 
                 // must be here first to define mobmods
-                mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
+                mobutils::InitializeMob(PMob);
 
                 luautils::OnEntityLoad(PMob);
 
@@ -1520,8 +1520,7 @@ Usage:
                 PMob->m_TrueDetection = sql->GetUIntData(68);
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
-                // must be here first to define mobmods
-                mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
+                mobutils::InitializeMob(PMob);
             }
         }
         return PMob;

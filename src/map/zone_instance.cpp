@@ -259,7 +259,15 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         uint16 zoneid = luautils::OnInstanceLoadFailed(this);
 
-        zoneutils::GetZone(zoneid >= MAX_ZONEID ? PChar->loc.prevzone : zoneid)->IncreaseZoneCounter(PChar);
+        CZone* PZone = zoneutils::GetZone(zoneid);
+        if (PZone)
+        {
+            PZone->IncreaseZoneCounter(PChar);
+        }
+        else
+        {
+            zoneutils::GetZone(PChar->loc.prevzone)->IncreaseZoneCounter(PChar);
+        }
     }
 }
 

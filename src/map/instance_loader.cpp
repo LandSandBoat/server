@@ -216,7 +216,7 @@ CInstance* CInstanceLoader::LoadInstance()
             }
 
             // must be here first to define mobmods
-            mobutils::InitializeMob(PMob, zone);
+            mobutils::InitializeMob(PMob);
             PMob->PInstance = instance;
 
             instance->InsertMOB(PMob);

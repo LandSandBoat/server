@@ -1773,8 +1773,14 @@ namespace luautils
         TracyZoneScoped;
 
         CZone* PZone = zoneutils::GetZone(ZoneID);
-        auto   name  = PZone->GetName();
 
+        if (PZone == nullptr)
+        {
+            ShowWarning("Skipping init for disabled zone %d.", ZoneID);
+            return -1;
+        }
+
+        auto name     = PZone->GetName();
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         CacheLuaObjectFromFile(filename);
@@ -1806,8 +1812,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = PZone->GetName();
-
+        auto name     = PZone->GetName();
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneTick = GetCacheEntryFromFilename(filename)["onZoneTick"];
@@ -1863,7 +1868,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name     = PChar->m_moghouseID ? "Residential_Area" : zoneutils::GetZone(PChar->loc.destination)->GetName();
+        CZone* destinationZone = zoneutils::GetZone(PChar->loc.destination);
+        if (!PChar->m_moghouseID && destinationZone == nullptr)
+        {
+            ShowWarning("Attempt to Zone In player to invalid/disabled zone %d.", PChar->loc.destination);
+            return;
+        }
+
+        auto name     = PChar->m_moghouseID ? "Residential_Area" : destinationZone->GetName();
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneIn"];
@@ -3695,7 +3707,7 @@ namespace luautils
     }
 
     /************************************************************************
-     *   OnGameDayAutomatisation()                                           *
+     *   OnGameDay()                                           *
      *   used for creating action of npc every game day                      *
      *                                                                       *
      ************************************************************************/
@@ -3724,7 +3736,7 @@ namespace luautils
     }
 
     /************************************************************************
-     *   OnGameHourAutomatisation()                                          *
+     *   OnGameHour()                                          *
      *   used for creating action of npc every game hour                     *
      *                                                                       *
      ************************************************************************/
@@ -3756,7 +3768,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = zoneutils::GetZone(ZoneID)->GetName();
+        CZone* PZone = zoneutils::GetZone(ZoneID);
+        if (PZone == nullptr)
+        {
+            ShowWarning("Invalid ZoneID passed to function (%d).", ZoneID);
+            return -1;
+        }
+
+        auto name = PZone->GetName();
 
         auto onZoneWeatherChange = lua["xi"]["zones"][name]["Zone"]["onZoneWeatherChange"];
         if (!onZoneWeatherChange.valid())
@@ -3779,7 +3798,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = zoneutils::GetZone(ZoneID)->GetName();
+        CZone* PZone = zoneutils::GetZone(ZoneID);
+        if (PZone == nullptr)
+        {
+            ShowWarning("Invalid ZoneID passed to function (%d).", ZoneID);
+            return -1;
+        }
+
+        auto name = PZone->GetName();
 
         auto onTOTDChange = lua["xi"]["zones"][name]["Zone"]["onTOTDChange"];
         if (!onTOTDChange.valid())
@@ -4749,6 +4775,15 @@ namespace luautils
 
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
+        if (PZone == nullptr)
+        {
+            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
+            // loc.zone was null in the previous check.
+
+            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
+            return;
+        }
+
         auto zone = PZone->GetName();
         auto name = PBattlefield->GetName();
 
@@ -4782,6 +4817,15 @@ namespace luautils
         TracyZoneScoped;
 
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
+
+        if (PZone == nullptr)
+        {
+            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
+            // loc.zone was null in the previous check.
+
+            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
+            return;
+        }
 
         auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
 
@@ -4832,6 +4876,15 @@ namespace luautils
         TracyZoneScoped;
 
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
+
+        if (PZone == nullptr)
+        {
+            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
+            // loc.zone was null in the previous check.
+
+            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
+            return;
+        }
 
         auto zone = PZone->GetName();
         auto name = PBattlefield->GetName();

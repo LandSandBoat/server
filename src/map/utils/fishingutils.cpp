@@ -1850,7 +1850,8 @@ namespace fishingutils
         }
 
         // Not in City bonus
-        if (zoneutils::GetZone(PChar->getZone())->GetType() > ZONE_TYPE::CITY)
+        CZone* PZone = zoneutils::GetZone(PChar->getZone());
+        if (PZone && PZone->GetType() > ZONE_TYPE::CITY)
         {
             skillRoll -= 10;
         }
@@ -2122,7 +2123,8 @@ namespace fishingutils
         float  mobPoolMoonModifier  = MOONPATTERN_3(GetMoonPhase());
         float  noCatchMoonModifier  = MOONPATTERN_5(GetMoonPhase());
 
-        if (zoneutils::GetZone(PChar->getZone())->GetType() <= ZONE_TYPE::CITY)
+        CZone* PZone = zoneutils::GetZone(PChar->getZone());
+        if (PZone && PZone->GetType() <= ZONE_TYPE::CITY)
         {
             FishPoolWeight = (uint16)std::floor(15 * fishPoolMoonModifier);
             ItemPoolWeight = 25 + (uint16)std::floor(20 * itemPoolMoonModifier);
