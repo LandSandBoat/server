@@ -80,7 +80,7 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
         dmgMods[damageType] <= xi.mod.HTH_SDT and
         dmgMods[damageType] >= xi.mod.SLASH_SDT
     then
-        dmgTakenMod = dmgTakenMod + ((target:getMod(dmgMods[damageType]) - 1000) / 10000)
+        dmgTakenMod = dmgTakenMod * ((target:getMod(dmgMods[damageType])) / 1000)
     elseif damageType and dmgMods[damageType] then -- This is for elemental SDTs only
         dmgTakenMod = dmgTakenMod + (target:getMod(dmgMods[damageType]) / 10000)
     end
