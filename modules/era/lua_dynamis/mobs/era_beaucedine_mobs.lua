@@ -10,6 +10,7 @@ xi.dynamis = xi.dynamis or {}
 
 xi.dynamis.onSpawnAngra = function(mob)
     xi.dynamis.setMegaBossStats(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.mix.jobSpecial.config(mob, {

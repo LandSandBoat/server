@@ -85,7 +85,8 @@ entity.onMobSpawn = function(mob)
     -- damage of 150, so (lvl 92+2) * 1.60
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 160)
     -- gives firaga iv a cast time of ~2 seconds as per retail
-    mob:setMod(xi.mod.UFASTCAST, 75)
+    -- note baha has a job trait with fast cast of 15% so 75% total
+    mob:setMod(xi.mod.UFASTCAST, 60)
     -- 425 + str bonus is 475 total attack
     mob:setMod(xi.mod.ATT, 425)
     mob:setMod(xi.mod.INT, 30)
