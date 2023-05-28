@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobEngaged = function(mob)
     mob:timer(30000, function(mobArg)
         mobArg:useMobAbility(xi.jsa.MIJIN_GAKURE)
-        mobArg:timer((2000), function(mobArg2)
+        mobArg:timer(2000, function(mobArg2)
             mobArg2:setHP(0)
         end)
     end)
