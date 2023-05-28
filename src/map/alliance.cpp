@@ -84,31 +84,15 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
                         WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                    ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
-        // first kick out the third party if it exsists
-        CParty* party = nullptr;
-        if (this->partyList.size() == 3)
+        // Remove all parties. The `delParty` call removes a party from `partyList`.
+        while (partyList.size() > 0)
         {
-            party = this->partyList.at(2);
+            CParty* party = partyList.at(0);
             this->delParty(party);
             party->ReloadParty();
         }
 
-        // kick out the second party
-        if (this->partyList.size() == 2)
-        {
-            party = this->partyList.at(1);
-            this->delParty(party);
-            party->ReloadParty();
-        }
-
-        // kick out the first party
-        if (this->partyList.size() == 1)
-        {
-            party              = this->partyList.at(0);
-            party->m_PAlliance = nullptr;
-            party->ReloadParty();
-        }
-
+        // Clear the party list -- deletion of parties is handled elsewhere if applicable.
         this->partyList.clear();
 
         // TODO: This entire system needs rewriting to both:
@@ -187,9 +171,12 @@ void CAlliance::removeParty(CParty* party)
 void CAlliance::delParty(CParty* party)
 {
     // Delete the party from the alliance list
-    party->m_PAlliance->partyList.erase(
-        std::remove_if(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), [=](CParty* entry)
-                       { return party == entry; }));
+    auto partyToDelete = std::find(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), party);
+
+    if (partyToDelete != party->m_PAlliance->partyList.end())
+    {
+        party->m_PAlliance->partyList.erase(partyToDelete);
+    }
 
     for (auto* entry : party->m_PAlliance->partyList)
     {
@@ -220,6 +207,11 @@ void CAlliance::delParty(CParty* party)
             return;
         }
 
+        if (PChar->PTreasurePool && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
+        {
+            return;
+        }
+
         PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
         PChar->PTreasurePool->AddMember(PChar);
         PChar->PTreasurePool->UpdatePool(PChar);
@@ -239,7 +231,20 @@ void CAlliance::delParty(CParty* party)
 
 void CAlliance::addParty(CParty* party)
 {
+    if (std::find(partyList.begin(), partyList.end(), party) != partyList.end())
+    {
+        ShowWarning("CAlliance::addParty - party is already in the alliance list!");
+        return;
+    }
+
+    if (partyList.size() == 3)
+    {
+        ShowWarning("CAlliance::addParty - Alliance party list was full when trying to add a party.");
+        return;
+    }
+
     party->m_PAlliance = this;
+
     partyList.push_back(party);
 
     uint8 newparty = 0;

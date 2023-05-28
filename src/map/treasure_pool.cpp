@@ -79,6 +79,12 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
         return;
     }
 
+    if (std::find(members.begin(), members.end(), PChar) != members.end())
+    {
+        ShowWarning("CTreasurePool::AddMember() - PChar was already in the members list!");
+        return;
+    }
+
     members.push_back(PChar);
 
     if (m_TreasurePoolType == TREASUREPOOL_SOLO && members.size() > 1)
@@ -112,25 +118,24 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
     {
         if (!m_PoolItems[i].Lotters.empty())
         {
-            for (size_t j = 0; j < m_PoolItems[i].Lotters.size(); j++)
+            auto lotterIterator = m_PoolItems[i].Lotters.begin();
+            while (lotterIterator != m_PoolItems[i].Lotters.end())
             {
                 // remove their lot info
-                if (PChar->id == m_PoolItems[i].Lotters[j].member->id)
+                LotInfo* info = &(*lotterIterator);
+                if (PChar->id == info->member->id)
                 {
-                    m_PoolItems[i].Lotters.erase(m_PoolItems[i].Lotters.begin() + j);
+                    lotterIterator = m_PoolItems[i].Lotters.erase(lotterIterator);
                 }
             }
         }
     }
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    auto memberToDelete = std::find(members.begin(), members.end(), PChar);
+    if (memberToDelete != members.end())
     {
-        if (PChar == members.at(i))
-        {
-            PChar->PTreasurePool = nullptr;
-            members.erase(members.begin() + i);
-            break;
-        }
+        PChar->PTreasurePool = nullptr;
+        members.erase(memberToDelete);
     }
 
     if ((m_TreasurePoolType == TREASUREPOOL_PARTY || m_TreasurePoolType == TREASUREPOOL_ALLIANCE) && members.size() == 1)

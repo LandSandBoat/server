@@ -282,70 +282,65 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
     }
     else
     {
-        for (uint32 i = 0; i < members.size(); ++i)
+        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+
+        if (memberToDelete != members.end())
         {
-            if (PEntity == members.at(i))
+            if (m_PartyType == PARTY_PCS && PEntity->objtype == TYPE_PC)
             {
-                members.erase(members.begin() + i);
+                CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
 
-                if (m_PartyType == PARTY_PCS)
+                if (m_PQuarterMaster == PChar)
                 {
-                    CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
-                    if (PChar)
+                    SetQuarterMaster("");
+                }
+                if (m_PSyncTarget == PChar)
+                {
+                    SetSyncTarget("", 553);
+                    CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
+                    if (sync && sync->GetDuration() == 0)
                     {
-                        if (m_PQuarterMaster == PChar)
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        sync->SetStartTime(server_clock::now());
+                        sync->SetDuration(30000);
+                    }
+                    DisableSync();
+                }
+                if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
+                {
+                    if (PChar->status != STATUS_TYPE::DISAPPEAR)
+                    {
+                        CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
+                        if (sync && sync->GetDuration() == 0)
                         {
-                            SetQuarterMaster("");
-                        }
-                        if (m_PSyncTarget == PChar)
-                        {
-                            SetSyncTarget("", 553);
-                            CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
-                            if (sync && sync->GetDuration() == 0)
-                            {
-                                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
-                                sync->SetStartTime(server_clock::now());
-                                sync->SetDuration(30000);
-                            }
-                            DisableSync();
-                        }
-                        if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
-                        {
-                            if (PChar->status != STATUS_TYPE::DISAPPEAR)
-                            {
-                                CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
-                                if (sync && sync->GetDuration() == 0)
-                                {
-                                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
-                                    sync->SetStartTime(server_clock::now());
-                                    sync->SetDuration(30000);
-                                }
-                            }
-                        }
-                        PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
-
-                        PChar->pushPacket(new CPartyDefinePacket(nullptr));
-                        PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
-                        PChar->pushPacket(new CCharUpdatePacket(PChar));
-                        PChar->PParty = nullptr;
-
-                        sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
-
-                        uint8 data[4]{};
-                        ref<uint32>(data, 0) = m_PartyID;
-                        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
-
-                        if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
-                        {
-                            PChar->PTreasurePool->DelMember(PChar);
-                            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-                            PChar->PTreasurePool->AddMember(PChar);
-                            PChar->PTreasurePool->UpdatePool(PChar);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                            sync->SetStartTime(server_clock::now());
+                            sync->SetDuration(30000);
                         }
                     }
                 }
-                break;
+                PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
+
+                PChar->pushPacket(new CPartyDefinePacket(nullptr));
+                PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
+                PChar->pushPacket(new CCharUpdatePacket(PChar));
+                PChar->PParty = nullptr;
+
+                sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
+
+                uint8 data[4]{};
+                ref<uint32>(data, 0) = m_PartyID;
+                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+
+                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
+                {
+                    PChar->PTreasurePool->DelMember(PChar);
+                    PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
+                    PChar->PTreasurePool->AddMember(PChar);
+                    PChar->PTreasurePool->UpdatePool(PChar);
+                }
             }
+            members.erase(memberToDelete);
         }
     }
 }
@@ -367,23 +362,34 @@ void CParty::DelMember(CBattleEntity* PEntity)
     }
     else
     {
-        for (uint32 i = 0; i < members.size(); ++i)
+        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+
+        if (memberToDelete != members.end())
         {
-            if (PEntity == members.at(i))
+            if (m_PartyType == PARTY_PCS && PEntity->objtype == TYPE_PC)
             {
-                members.erase(members.begin() + i);
+                CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
 
-                if (m_PartyType == PARTY_PCS)
+                if (m_PQuarterMaster == PChar)
                 {
-                    CCharEntity* PChar = (CCharEntity*)PEntity;
-
-                    if (m_PQuarterMaster == PChar)
+                    SetQuarterMaster("");
+                }
+                if (m_PSyncTarget == PChar)
+                {
+                    SetSyncTarget("", 553);
+                    CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
+                    if (sync && sync->GetDuration() == 0)
                     {
-                        SetQuarterMaster("");
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        sync->SetStartTime(server_clock::now());
+                        sync->SetDuration(30000);
                     }
-                    if (m_PSyncTarget == PChar)
+                    DisableSync();
+                }
+                if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
+                {
+                    if (PChar->status != STATUS_TYPE::DISAPPEAR)
                     {
-                        SetSyncTarget("", 553);
                         CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
@@ -391,42 +397,28 @@ void CParty::DelMember(CBattleEntity* PEntity)
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
-                        DisableSync();
-                    }
-                    if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
-                    {
-                        if (PChar->status != STATUS_TYPE::DISAPPEAR)
-                        {
-                            CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
-                            if (sync && sync->GetDuration() == 0)
-                            {
-                                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
-                                sync->SetStartTime(server_clock::now());
-                                sync->SetDuration(30000);
-                            }
-                        }
-                    }
-                    PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
-
-                    PChar->pushPacket(new CPartyDefinePacket(nullptr));
-                    PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
-                    PChar->pushPacket(new CCharUpdatePacket(PChar));
-                    PChar->PParty = nullptr;
-
-                    if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
-                    {
-                        PChar->PTreasurePool->DelMember(PChar);
-                        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-                        PChar->PTreasurePool->AddMember(PChar);
-                        PChar->PTreasurePool->UpdatePool(PChar);
                     }
                 }
-                else
+                PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
+
+                PChar->pushPacket(new CPartyDefinePacket(nullptr));
+                PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
+                PChar->pushPacket(new CCharUpdatePacket(PChar));
+                PChar->PParty = nullptr;
+
+                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
                 {
-                    PEntity->PParty = nullptr;
+                    PChar->PTreasurePool->DelMember(PChar);
+                    PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
+                    PChar->PTreasurePool->AddMember(PChar);
+                    PChar->PTreasurePool->UpdatePool(PChar);
                 }
-                break;
             }
+            else
+            {
+                PEntity->PParty = nullptr;
+            }
+            members.erase(memberToDelete);
         }
         this->ReloadParty();
     }
@@ -434,13 +426,13 @@ void CParty::DelMember(CBattleEntity* PEntity)
 
 void CParty::PopMember(CBattleEntity* PEntity)
 {
-    for (uint32 i = 0; i < members.size(); ++i)
+    auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+
+    if (memberToDelete != members.end())
     {
-        if (PEntity == members.at(i))
-        {
-            members.erase(members.begin() + i);
-        }
+        members.erase(memberToDelete);
     }
+
     // free memory, party will re reinsatiated when they zone back in
     if (members.empty())
     {
@@ -450,12 +442,16 @@ void CParty::PopMember(CBattleEntity* PEntity)
             {
                 m_PAlliance->setMainParty(nullptr);
             }
-            for (std::size_t i = 0; i < m_PAlliance->partyList.size(); ++i)
+
+            auto it = m_PAlliance->partyList.begin();
+            while (it != m_PAlliance->partyList.end())
             {
-                if (this == m_PAlliance->partyList.at(i))
+                if (this == *it)
                 {
-                    m_PAlliance->partyList.erase(m_PAlliance->partyList.begin() + i);
+                    it = m_PAlliance->partyList.erase(it);
+                    continue;
                 }
+                it++;
             }
         }
         delete this; // cpp.sh allow
@@ -535,6 +531,18 @@ void CParty::AddMember(CBattleEntity* PEntity)
         return;
     }
 
+    if (std::find(members.begin(), members.end(), PEntity) != members.end())
+    {
+        ShowWarning("CParty::AddMember() - PEntity was already in the member list!");
+        return;
+    }
+
+    if (PEntity->objtype == TYPE_PC && m_PartyType == PARTY_PCS && members.size() > 5)
+    {
+        ShowWarning("CParty::AddMember() - Party was full when trying to add a member.");
+        return;
+    }
+
     PEntity->PParty = this;
     members.push_back(PEntity);
 
@@ -607,6 +615,12 @@ void CParty::AddMember(uint32 id)
 {
     if (m_PartyType == PARTY_PCS)
     {
+        if (members.size() > 5)
+        {
+            ShowWarning("CParty::AddMember() - Party was full when trying to add a member from out of zone.");
+            return;
+        }
+
         uint32 allianceid = 0;
         uint16 Flags      = 0;
         if (m_PAlliance)
