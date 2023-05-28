@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kohpe Takhabio
--- Working 100%
 -----------------------------------
 local entity = {}
 

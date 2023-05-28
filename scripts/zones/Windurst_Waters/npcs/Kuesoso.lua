@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Kuesoso
--- Working 100%
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/settings")
@@ -22,6 +21,7 @@ entity.onTrigger = function(player, npc)
             return
         end
     end
+
     player:startEvent(586)
 end
 

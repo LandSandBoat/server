@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Four of Spades
--- Working 100%
 -----------------------------------
 local entity = {}
 

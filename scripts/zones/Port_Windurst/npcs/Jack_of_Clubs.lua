@@ -2,7 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Jack of Clubs
 -- Adventurer's Assistant
--- Working 100%
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------

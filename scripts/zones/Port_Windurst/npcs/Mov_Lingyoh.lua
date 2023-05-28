@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Mov Lingyoh
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------
