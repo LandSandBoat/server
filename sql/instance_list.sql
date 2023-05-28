@@ -98,7 +98,7 @@ INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.
 INSERT INTO `instance_list` VALUES (6600,'imperial_agent_rescue',66,52,30,-20.000,2.276,-405.000,63,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.35,-5.0,27.67,46,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6602,'sagelord_elimination',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (6603,'breaking_morale',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6603,'breaking_morale',66,52,15,19.000,2.025,-136.000,64,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6604,'the_double_agent',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6605,'imperial_treasure_retrieval',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6606,'blitzkrieg',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);

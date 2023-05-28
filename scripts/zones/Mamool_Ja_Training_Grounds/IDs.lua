@@ -28,6 +28,9 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
         TIME_REMAINING_SECONDS        = 7521, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN                  = 7523, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
         BRUJEEL_TEXT                  = 7532, -- Am I glad to see you!
+        PECULIAR_SENSATION            = 7545, -- <player> is overcome by a peculia sensation.
+        QUHAAJA_DIALOGUE_OFFSET       = 7548, -- The time for this mission is limited. Get as many supplies as you can from those lizard bastards before time runs out. Let's give 'em hell, soldier!'
+        TRAINER_DIALOGUE_OFFSET       = 7554, -- Scaleless heathen... A taste of my wrath, you shall have!
     },
 
     mob =
@@ -54,6 +57,14 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
                 17047580, 17047581, 17047582, 17047583, 17047584, 17047585, 17047586, 17047587, 17047588, 17047589,
             },
         },
+        [xi.assault.mission.BREAKING_MORALE] =
+        {
+            MOBS_START =
+            {
+                17047610, 17047611, 17047612, 17047613, 17047614, 17047615, 17047616, 17047617, 17047618,
+                17047619, 17047620, 17047621, 17047622, 17047623, 17047624, 17047625, 17047626, 17047627,
+            }
+        }
     },
 
     npc =
