@@ -17,8 +17,13 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.KING_VINEGARROON)
+    -- KV Persistence
+    UpdateNMSpawnPoint(ID.mob.KING_VINEGARROON)
+    DisallowRespawn(GetMobByID(ID.mob.KING_VINEGARROON):getID(), true)
+
+    if os.time() < GetServerVariable("\\[SPAWN\\]17289575") then
+        GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(GetServerVariable("\\[SPAWN\\]17289575") - os.time())
+    end
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
