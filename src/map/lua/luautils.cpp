@@ -258,6 +258,24 @@ namespace luautils
         lua.safe_script_file("./scripts/globals/common.lua");
         roeutils::init(); // TODO: Get rid of the need to do this
 
+        // Load global enums
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/enum"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                auto relative_path_string = entry.relative_path().generic_string();
+
+                ShowTrace("Loading enum script %s", relative_path_string);
+
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
+
         // Then the rest...
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
         {
