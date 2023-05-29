@@ -3061,6 +3061,7 @@ xi.items =
     FLOWER_NECKLACE                 = 13094,
     DOG_COLLAR                      = 13096,
     CORAL_GORGET                    = 13108,
+    BEAST_WHISTLE                   = 13110,
     RABBIT_CHARM                    = 13112,
     BLACK_SILK_NECKERCHIEF          = 13113,
     MOON_AMULET                     = 13114,
