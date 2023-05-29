@@ -131,8 +131,6 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_LINKSHELL_REMOVE:
         case MSG_CHARVAR_UPDATE:
         {
-            char* charName[PacketNameLength] = {};
-            std::memcpy(charName, (uint8*)extra->data(), PacketNameLength);
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
             ret               = sql->Query(query, (int8*)extra->data() + 4);
@@ -387,17 +385,10 @@ void message_server_init(const bool& requestExit)
 
 void message_server_close()
 {
-    ShowInfo("Closing ZMQ");
-
     if (zSocket)
     {
         zSocket->close();
         zSocket = nullptr;
-    }
-
-    if (zmqSql)
-    {
-        zmqSql = nullptr;
     }
 
     zContext.close();
