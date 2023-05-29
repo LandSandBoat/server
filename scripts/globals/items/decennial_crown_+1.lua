@@ -1,8 +1,11 @@
 -----------------------------------
--- ID: 10254
--- Decennial Dress +1
--- Dispense: Bowl of Moogurt
--- Dispenses between 2 and 10 Moogurts
+-- ID: 10432
+-- Decennial Crown +1
+-- Dispense: Chocobiscuit
+-- Despenses between 2 and 10 Chocobiscuits
+-----------------------------------
+require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -18,7 +21,7 @@ end
 itemObject.onItemUse = function(target)
     local qty = math.random(2,10)
 
-    npcUtil.giveItem(target, { { xi.items.BOWL_OF_MOOGURT, qty } })
+    npcUtil.giveItem(target, { { xi.items.CHOCOBISCUIT, qty } })
 end
 
 return itemObject

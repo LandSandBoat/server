@@ -1,7 +1,7 @@
 -----------------------------------
---   ID: 15769
---   Olduum Ring
---   Teleports to Wajoam Woodlands Leypoint
+-- ID: 6683
+-- Porcelain Mine
+-- Displays "20th" Firework
 -----------------------------------
 local itemObject = {}
 
@@ -10,7 +10,6 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WAJAOM_LEYPOINT, 0, 1)
 end
 
 return itemObject

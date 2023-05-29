@@ -5627,7 +5627,7 @@ INSERT INTO `item_basic` VALUES (5931,0,'bowl_of_shimmy_soup','shimmy_soup',1,15
 INSERT INTO `item_basic` VALUES (5932,0,'bottle_of_kitron_juice','kitron_juice',1,1580,58,0,0);
 INSERT INTO `item_basic` VALUES (5933,0,'flask_of_dragon_fruit_au_lait','d._fruit_au_lait',1,1580,58,0,0);
 INSERT INTO `item_basic` VALUES (5934,0,'chocobiscuit','chocobiscuit',99,1544,57,0,2);
-INSERT INTO `item_basic` VALUES (5935,0,'bowl_of_moogurt','moogurt',12,1544,57,0,0);
+INSERT INTO `item_basic` VALUES (5935,0,'bowl_of_moogurt','moogurt',12,1544,57,0,50);
 INSERT INTO `item_basic` VALUES (5936,0,'mog_missile','mog_missile',99,5644,63,1,0);
 INSERT INTO `item_basic` VALUES (5937,0,'bubble_breeze','bubble_breeze',99,5640,63,1,0);
 INSERT INTO `item_basic` VALUES (5938,0,'hiatus_whistle','hiatus_whistle',1,63168,0,1,0);
@@ -5696,8 +5696,8 @@ INSERT INTO `item_basic` VALUES (6005,0,'trailblazing_hatchet_+1','trbl._hatchet
 INSERT INTO `item_basic` VALUES (6006,0,'trailblazing_sickle','trbl._sickle',99,29780,0,1,0);
 INSERT INTO `item_basic` VALUES (6007,0,'trailblazing_sickle_+1','trbl._sickle_+1',99,29780,0,1,0);
 INSERT INTO `item_basic` VALUES (6008,0,'piece_of_copse_candy','copse_candy',12,30296,0,1,0);
-INSERT INTO `item_basic` VALUES (6009,0,'bowl_of_mog_pudding','mog_pudding',12,1548,57,1,0);
-INSERT INTO `item_basic` VALUES (6010,0,'sakura_biscuit','sakura_biscuit',99,1548,57,1,0);
+INSERT INTO `item_basic` VALUES (6009,0,'bowl_of_mog_pudding','mog_pudding',12,1548,57,0,50);
+INSERT INTO `item_basic` VALUES (6010,0,'sakura_biscuit','sakura_biscuit',99,1548,57,0,2);
 INSERT INTO `item_basic` VALUES (6011,0,'celadon_yggrete_shard_i','c._ygg._shard_i',1,34308,64,1,0);
 INSERT INTO `item_basic` VALUES (6012,0,'celadon_yggrete_shard_ii','c._ygg._shard_ii',1,34308,64,1,160);
 INSERT INTO `item_basic` VALUES (6013,0,'celadon_yggrete_shard_iii','c._ygg._shard_iii',1,34308,64,1,0);
@@ -6254,6 +6254,7 @@ INSERT INTO `item_basic` VALUES (6609,0,'serving_of_popotoes_con_queso','popo._c
 INSERT INTO `item_basic` VALUES (6610,0,'serving_of_popotoes_con_queso_+1','popo._con_que._+1',12,1544,54,0,0);
 INSERT INTO `item_basic` VALUES (6611,0,'serving_of_seafood_gratin','seafood_gratin',12,1544,56,0,0);
 INSERT INTO `item_basic` VALUES (6612,0,'serving_of_seafood_gratin_+1','sea._gratin_+1',12,1544,56,0,0);
+INSERT INTO `item_basic` VALUES (6683,0,'porcelain_mine','porcelain_mine',99,1548,63,0,20);
 INSERT INTO `item_basic` VALUES (8193,0,'harlequin_head','harlequin_head',1,0,0,1,0);
 INSERT INTO `item_basic` VALUES (8194,0,'valoredge_x-900_head','valoredge_head',1,0,0,1,0);
 INSERT INTO `item_basic` VALUES (8195,0,'sharpshot_z-500_head','sharpshot_head',1,0,0,1,0);

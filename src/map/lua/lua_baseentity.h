@@ -216,6 +216,7 @@ public:
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
+    bool   isChargedItem(uint16 itemID);                                                    // Check if item is a charged item
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
     uint8  getWornUses(uint16 itemID);                                                      // Check if the item is already worn
     uint8  incrementItemWear(uint16 itemID);                                                // Increment the item's worn value and returns it
