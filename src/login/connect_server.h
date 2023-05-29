@@ -1692,7 +1692,7 @@ protected:
 
                     fmtQuery = "SELECT * \
                                 FROM accounts_sessions \
-                                WHERE accid = %u;";
+                                WHERE accid = %u and client_port != '0';";
 
                     if (sql->Query(fmtQuery, session.accountID) != SQL_ERROR && sql->NumRows() != 0)
                     {
