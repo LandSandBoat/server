@@ -17,14 +17,13 @@ local elementTable =
     [xi.magic.element.DARK   ] = { xi.mod.DARKACC,    xi.mod.DARK_AFFINITY_ACC,    xi.mod.DARK_MEVA,    xi.mod.DARK_RES_RANK,    0                                 },
 }
 
--- actor Magic Accuracy
+-- Actor Magic Accuracy
 xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spell, skillType, spellElement, statUsed, bonusMacc)
-    local actorJob      = actor:getMainJob()
-    local actorWeather  = actor:getWeather()
-    local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
-    local statDiff      = actor:getStat(statUsed) - target:getStat(statUsed)
-
-    local magicAcc      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc()
+    local actorJob     = actor:getMainJob()
+    local actorWeather = actor:getWeather()
+    local spellGroup   = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
+    local statDiff     = actor:getStat(statUsed) - target:getStat(statUsed)
+    local magicAcc     = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
 
     -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
     if skillType ~= 0 then
