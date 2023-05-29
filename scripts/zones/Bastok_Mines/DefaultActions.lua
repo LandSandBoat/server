@@ -21,4 +21,5 @@ return {
     ['Tami']           = { event = 115 },
     ['Virnage']        = { event = 140 },
     ['Wahid']          = { event = 28 },
+    ['Wobke']          = { event = 244 },
 }

@@ -620,6 +620,7 @@ xi.items =
     INGOT_OF_ROYAL_TREASURY_GOLD    = 1682,
     PIECE_OF_ATTOHWA_GINSENG        = 1683,
     GOLD_KEY                        = 1684,
+    BOTTLE_OF_WARDING_OIL           = 1685,
     SOILED_LETTER                   = 1686,
     RECOLLECTION_OF_FEAR            = 1687,
     RECOLLECTION_OF_PAIN            = 1688,
