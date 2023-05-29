@@ -10,8 +10,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

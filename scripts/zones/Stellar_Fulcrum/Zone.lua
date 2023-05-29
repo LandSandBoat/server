@@ -11,8 +11,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(2, 318, -3, 2,  322, 1, 6) -- Exit BCNM to ?
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
