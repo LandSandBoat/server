@@ -27,11 +27,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/lua.h"
 #include "common/md52.h"
 #include "common/settings.h"
+#include "common/sql.h"
 #include "common/utils.h"
-
 #include "map/packets/basic.h"
-
-#include "world/message_server.h"
 
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
@@ -44,6 +42,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#include <zmq.hpp>
 
 #include <nonstd/jthread.hpp>
 
@@ -689,7 +688,11 @@ protected:
                                 ref<uint32>((uint8*)chardata.data(), 0) = charid;
                                 zmq::message_t empty(0);
 
-                                queue_message(ip, MSG_LOGIN, &chardata, &empty);
+                                // TODO: MSG_LOGIN is a no-op in message_server.cpp,
+                                //     : so sending this does nothing?
+                                //     : But in the client (message.cpp), it _could_
+                                //     : be used to clear out lingering PChar data.
+                                // queue_message(ipp, MSG_LOGIN, &chardata, &empty);
                             }
                         }
 
@@ -1963,7 +1966,6 @@ public:
         [&](std::vector<std::string> inputs)
         {
             m_RequestExit = true;
-            message_server = nullptr;
             io_context.stop();
             gConsoleService->stop();
         });
@@ -1985,8 +1987,6 @@ public:
             }
         }
 #endif
-
-        message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit));
 
         try
         {
@@ -2071,7 +2071,4 @@ public:
             }
         }
     }
-
-private:
-    std::unique_ptr<message_server_wrapper_t> message_server;
 };
