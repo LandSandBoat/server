@@ -13,7 +13,6 @@ entity.onMobInitialize = function(mob)
     end
 end
 
-
 entity.onMobDisengage = function(mob)
     -- According to wiki, Mountain Worm will despawn shortly
     --  after disengaging. 10 seconds is being assumed and
