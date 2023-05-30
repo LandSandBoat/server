@@ -4473,6 +4473,7 @@ xi.items =
     SORROWFUL_HARP                  = 17842,
     STORM_FIFE                      = 17851,
     ANIMATOR_P1                     = 17857,
+    ANIMATOR                        = 17859,
     JUG_OF_HUMUS                    = 17868,
     FRANSISCA                       = 17925,
     LOHAR                           = 17927,
