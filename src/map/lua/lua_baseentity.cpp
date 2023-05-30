@@ -3929,8 +3929,8 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
 
 bool CLuaBaseEntity::isChargedItem(uint16 itemID)
 {
-    CItem* PItem = itemutils::GetItem(itemID);
-    uint8 SlotID = ERROR_SLOTID;
+    CItem* PItem  = itemutils::GetItem(itemID);
+    uint8  SlotID = ERROR_SLOTID;
 
     if (PItem != nullptr)
     {
