@@ -72,7 +72,7 @@ quest.sections =
                 onTrade   = quest:progressEvent(62),
             },
 
-            ['Osker']   = quest:progressEvent(62),
+            ['Osker'] = quest:progressEvent(62),
 
             onEventFinish =
             {
@@ -194,20 +194,13 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         end,
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Brutus'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE then
-                        return quest:event(22)
-                    end
-                end,
-            },
-
+            ['Brutus']  = quest:event(22), -- Always used except for importantOnce() for Chocobo on the Loose (10094)
             ['Chocobo'] = quest:event(55),
             ['Osker']   = quest:event(55),
         },

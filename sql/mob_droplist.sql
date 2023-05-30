@@ -6293,20 +6293,20 @@ INSERT INTO `mob_droplist` VALUES (761,2,0,1000,748,0);    -- Gold Beastcoin (St
 INSERT INTO `mob_droplist` VALUES (761,2,0,1000,2531,0);   -- Shard Of Obsidian (Steal)
 
 -- ZoneID: 147 - Emerald Quadav
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,1685,80);      -- Bottle Of Warding Oil (8.0%)
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,1034,30);      -- Beadeaux Chest Key (3.0%)
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12450,30);     -- Padded Cap (3.0%)
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12836,@VRARE); -- Iron Subligar (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (762,2,0,1000,749,0);        -- Mythril Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12706,0);      -- Iron Mittens (0.0%)
-INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12962,0);      -- Leggings (0.0%)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,1685,@UNCOMMON); -- Bottle Of Warding Oil (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,1034,30);        -- Beadeaux Chest Key (3.0%)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12450,30);       -- Padded Cap (3.0%)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12836,@VRARE);   -- Iron Subligar (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12962,@VRARE);   -- Leggings (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (762,2,0,1000,749,0);          -- Mythril Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (762,0,0,1000,12706,0);        -- Iron Mittens (0.0%)
 
 -- ZoneID: 161 - Emerald Quadav
 -- ZoneID: 162 - Emerald Quadav
-INSERT INTO `mob_droplist` VALUES (763,0,0,1000,1685,80); -- Bottle Of Warding Oil (8.0%)
-INSERT INTO `mob_droplist` VALUES (763,0,0,1000,501,20);  -- Quadav Helm (2.0%)
-INSERT INTO `mob_droplist` VALUES (763,2,0,1000,749,0);   -- Mythril Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (763,4,0,1000,4552,0);  -- Serving Of Herb Crawler Eggs (Despoil)
+INSERT INTO `mob_droplist` VALUES (763,0,0,1000,1685,@UNCOMMON); -- Bottle Of Warding Oil (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (763,0,0,1000,501,20);         -- Quadav Helm (2.0%)
+INSERT INTO `mob_droplist` VALUES (763,2,0,1000,749,0);          -- Mythril Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (763,4,0,1000,4552,0);         -- Serving Of Herb Crawler Eggs (Despoil)
 
 -- ZoneID:  52 - Emergent Elm
 INSERT INTO `mob_droplist` VALUES (764,0,0,1000,18386,200);       -- Gloom Claymore (20.0%)

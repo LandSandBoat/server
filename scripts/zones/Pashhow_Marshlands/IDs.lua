@@ -30,6 +30,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         AMK_DIGGING_OFFSET            = 7322,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         CONQUEST                      = 7930,  -- You've earned conquest points!
         GARRISON_BASE                 = 8297,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        GATE_IS_LOCKED                = 8379,  -- The gate is locked.
         PLAYER_OBTAINS_ITEM           = 8467,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8468,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8469,  -- <name> obtains the temporary item: <item>!
