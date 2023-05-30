@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if
         vanadielClockTime > 2130 or
-        vanadielClockTime < 400
+        vanadielClockTime <= 540
     then
         player:messageSpecial(ID.text.NOW_THAT_NIGHT_HAS_FALLEN)
     else

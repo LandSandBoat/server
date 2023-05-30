@@ -2,9 +2,10 @@
 -- A Chocobo's Tale
 -----------------------------------
 -- Log ID: 3, Quest ID: 72
--- Nevela : !pos -60.114 0 81.125 244
--- Wobke  : !pos 29.028 -0.126 -111.626 234
--- qm     : !pos -39.370 -11.093 307.285 105
+-- Nevela       : !pos -60.114 0 81.125 244
+-- Wobke        : !pos 29.028 -0.126 -111.626 234
+-- Outpost Gate : !pos 473.566 23.421 413.134 109
+-- qm           : !pos -39.370 -11.093 307.285 105
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
@@ -38,7 +39,9 @@ end
 
 local function isNMDefeated()
     for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
-        if GetMobByID(nmId):isDead() then
+        local nmMob = GetMobByID(nmId)
+
+        if nmMob:isDead() or not nmMob:isSpawned() then
             return true
         end
     end
@@ -108,7 +111,7 @@ quest.sections =
                         return quest:event(246)
                     elseif questProgress == 3 then
                         return quest:progressEvent(247, 0, xi.items.BOTTLE_OF_WARDING_OIL)
-                    elseif questProgress == 4 then
+                    else
                         return quest:event(248)
                     end
                 end,
@@ -195,6 +198,17 @@ quest.sections =
                     end
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Nevela'] = quest:event(10018):replaceDefault(),
         },
     },
 }

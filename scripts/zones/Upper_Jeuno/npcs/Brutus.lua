@@ -79,8 +79,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(151)
     elseif wingsOfGold == QUEST_COMPLETED then
         player:startEvent(134)
-    else
-        player:startEvent(66, mLvl) -- This might just be a non-zero first parameter
+    elseif not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS) then
+        player:startEvent(66, mLvl)
     end
 end
 

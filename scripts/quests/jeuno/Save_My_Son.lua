@@ -98,7 +98,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 0 and
                         (
                             vanadielClockTime > 2130 or
-                            vanadielClockTime < 400
+                            vanadielClockTime <= 540
                         )
                     then
                         return quest:progressEvent(0)
@@ -127,7 +127,20 @@ quest.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Shalott'] = quest:event(44):replaceDefault(), -- This default may be replaced on completion of A Chocobo's Tale
+            ['Shalott'] = quest:event(44):replaceDefault(),
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Chocobo'] = quest:event(55),
+            ['Osker']   = quest:event(55),
         },
     },
 }

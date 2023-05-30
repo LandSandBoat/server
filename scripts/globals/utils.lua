@@ -758,5 +758,5 @@ end
 
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
-    return tonumber(VanadielHour() .. VanadielMinute())
+    return tonumber(VanadielHour() .. string.format("%02d", VanadielMinute()))
 end
