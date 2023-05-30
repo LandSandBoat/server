@@ -280,6 +280,7 @@ function npcUtil.giveItem(player, items, params)
 
     return true
 end
+
 --[[
     For handling of 1/1 usable items delivered in a "just used" state. Most 1/1 charged items are Rare,
     but some exceptions do exist. Pass a value of 1 in notRare for those exceptions.
