@@ -23,7 +23,7 @@ itemObject.onItemUse = function(target)
         [2] = 1812, -- Toad
     }
 
-    local id = math.random(1,2)
+    local id = math.random(1, 2)
 
     target:addStatusEffect(xi.effect.COSTUME, costumes[id], 0, 3600)
 end

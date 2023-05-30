@@ -290,8 +290,7 @@ function npcUtil.giveUsedItem(player, item, notRare)
 
     -- does player have enough inventory space?
     if player:getFreeSlotsCount() < 1 then
-        local messageId = params.fromTrade and (ID.text.ITEM_CANNOT_BE_OBTAINED + 4) or ID.text.ITEM_CANNOT_BE_OBTAINED
-        player:messageSpecial(messageId, item)
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
 
         return false
     end

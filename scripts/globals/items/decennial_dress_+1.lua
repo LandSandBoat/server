@@ -16,7 +16,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local qty = math.random(2,10)
+    local qty = math.random(2, 10)
 
     npcUtil.giveItem(target, { { xi.items.BOWL_OF_MOOGURT, qty } })
 end
