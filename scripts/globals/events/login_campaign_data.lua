@@ -58,22 +58,22 @@ local prizes =
             -- 3706, -- Vanaclock
 
         -- Cycle #2
-            267, -- Fafnir Statue
-            268, -- N moogle Statue
-            269, -- S lord Statue
-            270, -- Odin Statue
-            271, -- Alexander Statue
-            277, -- Prishe Statue
-            278, -- Cardian Statue
+            -- 267, -- Fafnir Statue
+            -- 268, -- N moogle Statue
+            -- 269, -- S lord Statue
+            -- 270, -- Odin Statue
+            -- 271, -- Alexander Statue
+            -- 277, -- Prishe Statue
+            -- 278, -- Cardian Statue
 
         -- Cycle #3
-            -- 279, -- S Lord Statue II
-            -- 280, -- S Lord Statue III
-            -- 281, -- Atomos Statue
-            -- 284, -- Goobbue Statue
-            -- 286, -- Nanaa Mihgo Statue
-            -- 287, -- Nanaa Mihgo S II
-            -- 320, -- Harpsichord
+            279, -- S Lord Statue II
+            280, -- S Lord Statue III
+            281, -- Atomos Statue
+            284, -- Goobbue Statue
+            286, -- Nanaa Mihgo Statue
+            287, -- Nanaa Mihgo S II
+            320, -- Harpsichord
 
         -- Cycle #4
             -- 365,  -- Poele Classique
@@ -211,38 +211,38 @@ local prizes =
             -- 27867, -- Green Moogle Suit
 
         -- Cycle #6 (Costumes)
-            5113,  -- Cracked Nut
-            5116,  -- Cavorting Worm
-            5203,  -- Hume Mochi
-            5204,  -- Elvaan Mochi
-            5206,  -- Galka Mochi
-            5294,  -- Hume rice cake
-            5295,  -- Elvaan Rice Cake
-            5724,  -- Pungent Powder
-            5733,  -- Miracle Milk
-            6008,  -- Copse Candy
-            6535,  -- Pinch of Pungent Powder II
-            6537,  -- Pinch of Pungent Powder III
+            -- 5113,  -- Cracked Nut
+            -- 5116,  -- Cavorting Worm
+            -- 5203,  -- Hume Mochi
+            -- 5204,  -- Elvaan Mochi
+            -- 5206,  -- Galka Mochi
+            -- 5294,  -- Hume rice cake
+            -- 5295,  -- Elvaan Rice Cake
+            -- 5724,  -- Pungent Powder
+            -- 5733,  -- Miracle Milk
+            -- 6008,  -- Copse Candy
+            -- 6535,  -- Pinch of Pungent Powder II
+            -- 6537,  -- Pinch of Pungent Powder III
 
         -- Seasonal event Harvest Festival. Uncomment for October campaign only
-            -- 203,   -- Bomb Lantern
-            -- 204,   -- Pumpkin Lantern
-            -- 205,   -- Mandra Lantern
-            -- 3622,  -- Jack O' Pricket
-            -- 3623,  -- Djinn Pricket
-            -- 3624,  -- Korrigan Pricket
-            -- 3646,  -- Mandra Pricket
-            -- 3651,  -- Harvest Pastry
-            -- 10446, -- Ahriman Cap
-            -- 11300, -- Eerie Cloak
-            -- 13916, -- Pumpkin-head
-            -- 16075, -- Witch Hat
-            -- 17565, -- Trick Staff
-            -- 18102, -- Pitchfork
-            -- 25586, -- Kakai Cap
-            -- 25711, -- Botulus Suit
-            -- 25910, -- Cait Sith Subligar
-            -- 26707, -- Flan Masque
+            203,   -- Bomb Lantern
+            204,   -- Pumpkin Lantern
+            205,   -- Mandra Lantern
+            3622,  -- Jack O' Pricket
+            3623,  -- Djinn Pricket
+            3624,  -- Korrigan Pricket
+            3646,  -- Mandra Pricket
+            3651,  -- Harvest Pastry
+            10446, -- Ahriman Cap
+            11300, -- Eerie Cloak
+            13916, -- Pumpkin-head
+            16075, -- Witch Hat
+            17565, -- Trick Staff
+            18102, -- Pitchfork
+            25586, -- Kakai Cap
+            25711, -- Botulus Suit
+            25910, -- Cait Sith Subligar
+            26707, -- Flan Masque
 
         -- Seasonal event Starlight Celebration. Uncomment for December campaign only.
             -- 86,    -- Sandorian Tree
@@ -276,25 +276,25 @@ local prizes =
         -- WEAPON COSTUMES and crafting latent items
 
         -- Cycle #1/#5
-            -- 20514, -- Aphelion Knuckles
-            -- 20578, -- Wind Knife
-            -- 20665, -- Kam'lanaut's Sword
-            -- 20694, -- Fermion Sword
-            -- 21693, -- Irradiance Blade
-            -- 21741, -- Demonic Axe
-            -- 21745, -- Dullahan Axe
-            -- 21820, -- Lost Sickle
-            -- 21862, -- Mizukage Naginata
-            -- 21977, -- Mutsonokami -- BROKEN
-            -- 22005, -- Burrower's Wand
-            -- 22019, -- Jingly Rod
-            -- 22067, -- Levin
-            -- 22124, -- Artemis's Bow
-            -- 22153, -- Silver Gun
-            -- 22282, -- Grudge
-            -- 22283, -- Marvelous Cheer
-            -- 26412, -- Kam'lanaut's Shield
-            -- 28661, -- Glinting Shield
+            20514, -- Aphelion Knuckles
+            20578, -- Wind Knife
+            20665, -- Kam'lanaut's Sword
+            20694, -- Fermion Sword
+            21693, -- Irradiance Blade
+            21741, -- Demonic Axe
+            21745, -- Dullahan Axe
+            21820, -- Lost Sickle
+            21862, -- Mizukage Naginata
+            21977, -- Mutsonokami -- BROKEN
+            22005, -- Burrower's Wand
+            22019, -- Jingly Rod
+            22067, -- Levin
+            22124, -- Artemis's Bow
+            22153, -- Silver Gun
+            22282, -- Grudge
+            22283, -- Marvelous Cheer
+            26412, -- Kam'lanaut's Shield
+            28661, -- Glinting Shield
 
         -- Cycle #2/#6
             -- 18102, -- Pitchfork
@@ -371,13 +371,13 @@ local prizes =
             -- 19274, -- Trainee Burin
 
         -- Cycle #6 (Costumes)
-            10849, -- Yagudo Belt
-            10851, -- Slime Belt
-            15919, -- Drover's Belt
-            15921, -- Detonator Belt
-            16273, -- Pullus Torque
-            17031, -- Shell Scepter
-            27718, -- Worm Masque +1
+            -- 10849, -- Yagudo Belt
+            -- 10851, -- Slime Belt
+            -- 15919, -- Drover's Belt
+            -- 15921, -- Detonator Belt
+            -- 16273, -- Pullus Torque
+            -- 17031, -- Shell Scepter
+            -- 27718, -- Worm Masque +1
         },
     },
 
@@ -495,23 +495,23 @@ local prizes =
         -- NICE TO HAVE STUFF
 
         -- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
-            -- 14568, -- Askar Korazin
-            -- 14569, -- Denali Jacket
-            -- 14570, -- Goliard Saio
-            -- 14983, -- Askar Manopolas
-            -- 14984, -- Denali Wristbands
-            -- 14985, -- Goliard Cuffs
-            -- 15647, -- Askar Dirs
-            -- 15648, -- Denali Kecks
-            -- 15649, -- Goliard Trews
-            -- 15733, -- Askar Gambieras
-            -- 15734, -- Denali Gamashes
-            -- 15735, -- Goliard Clogs
-            -- 16106, -- Askar Zucchetto
-            -- 16107, -- Denali Bonnet
-            -- 16108, -- Goliard Chapeau
-            -- 28585, -- Craftkeeper's Ring
-            -- 28587, -- Artificer's Ring
+            14568, -- Askar Korazin
+            14569, -- Denali Jacket
+            14570, -- Goliard Saio
+            14983, -- Askar Manopolas
+            14984, -- Denali Wristbands
+            14985, -- Goliard Cuffs
+            15647, -- Askar Dirs
+            15648, -- Denali Kecks
+            15649, -- Goliard Trews
+            15733, -- Askar Gambieras
+            15734, -- Denali Gamashes
+            15735, -- Goliard Clogs
+            16106, -- Askar Zucchetto
+            16107, -- Denali Bonnet
+            16108, -- Goliard Chapeau
+            28585, -- Craftkeeper's Ring
+            28587, -- Artificer's Ring
 
         -- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
             -- 11343, -- Thrakon Breastplate
@@ -586,17 +586,17 @@ local prizes =
             -- 19235, -- Veuglaire
 
         -- Cycle #6 --Apollyon AF+1 items part 2
-            1951,  -- Charcoal Cotton (RNG)
-            1953,  -- Kurogane (SAM)
-            1955,  -- Ebony Lacquer (NIN)
-            1957,  -- Blue Rivet (DRG)
-            1959,  -- Astral Leather (SMN)
-            2657,  -- Flameshun Cloth (BLU)
-            2659,  -- Canvas Toile (COR)
-            2661,  -- Corduroy Cloth (PUP)
-            2715,  -- Gold Stud (DNC)
-            2717,  -- Electrum Stud (SCH)
-            27556, -- Echad Ring
+            -- 1951,  -- Charcoal Cotton (RNG)
+            -- 1953,  -- Kurogane (SAM)
+            -- 1955,  -- Ebony Lacquer (NIN)
+            -- 1957,  -- Blue Rivet (DRG)
+            -- 1959,  -- Astral Leather (SMN)
+            -- 2657,  -- Flameshun Cloth (BLU)
+            -- 2659,  -- Canvas Toile (COR)
+            -- 2661,  -- Corduroy Cloth (PUP)
+            -- 2715,  -- Gold Stud (DNC)
+            -- 2717,  -- Electrum Stud (SCH)
+            -- 27556, -- Echad Ring
         },
     },
 
@@ -608,14 +608,14 @@ local prizes =
         -- GAMECHANGERS
 
         -- Cycle #1 -- TH/Crafting/EXP/CoP rings
-            -- 11009, -- Shaper's Shawl
-            -- 15220, -- Rain hat
-            -- 15543, -- Raja's Ring
-            -- 15544, -- Sattva Ring
-            -- 15545, -- Tamas Ring
-            -- 25608, -- Tlahtlamah glasses
-            -- 25679, -- White Rarab Cap +1
-            -- 28586, -- Craftmaster's Ring
+            11009, -- Shaper's Shawl
+            15220, -- Rain hat
+            15543, -- Raja's Ring
+            15544, -- Sattva Ring
+            15545, -- Tamas Ring
+            25608, -- Tlahtlamah glasses
+            25679, -- White Rarab Cap +1
+            28586, -- Craftmaster's Ring
 
         -- Cycle #2 -- Divine Might/Apocalypse Nigh
             -- 14740, -- Knight's Earring
@@ -684,26 +684,26 @@ local prizes =
             -- 19042, -- Ariesian Grip
 
         -- Cycle #6 -- Temenos AF+1 items (Change point cost to 1500 for this cycle only!)
-            1930, -- Ecarlate Cloth (WAR)
-            1932, -- Utopian Gold Thread (MNK)
-            1934, -- Benedict Silk (WHM)
-            1936, -- Diabolic Silk (BLM)
-            1938, -- Ruby Silk Thread (RDM)
-            1940, -- Supple Skin (THF)
-            1942, -- Snowy Cermet (PLD)
-            1944, -- Dark Orichalcum (DRK)
-            1946, -- Smalt Leather (BST)
-            1948, -- Coiled Yarn (BRD)
-            1950, -- Chameleon Yarn (RNG)
-            1952, -- Scarlet Odoshi (SAM)
-            1954, -- Plaited Cord (NIN)
-            1956, -- Cobalt Mythril Sheet (DRG)
-            1958, -- Glittering Yarn (SMN)
-            2656, -- Luminian Thread (BLU)
-            2658, -- Silkworm Thread (COR)
-            2660, -- Pantin Wire (PUP)
-            2714, -- Filet Lace (DNC)
-            2716, -- Brilliantine (SCH)
+            -- 1930, -- Ecarlate Cloth (WAR)
+            -- 1932, -- Utopian Gold Thread (MNK)
+            -- 1934, -- Benedict Silk (WHM)
+            -- 1936, -- Diabolic Silk (BLM)
+            -- 1938, -- Ruby Silk Thread (RDM)
+            -- 1940, -- Supple Skin (THF)
+            -- 1942, -- Snowy Cermet (PLD)
+            -- 1944, -- Dark Orichalcum (DRK)
+            -- 1946, -- Smalt Leather (BST)
+            -- 1948, -- Coiled Yarn (BRD)
+            -- 1950, -- Chameleon Yarn (RNG)
+            -- 1952, -- Scarlet Odoshi (SAM)
+            -- 1954, -- Plaited Cord (NIN)
+            -- 1956, -- Cobalt Mythril Sheet (DRG)
+            -- 1958, -- Glittering Yarn (SMN)
+            -- 2656, -- Luminian Thread (BLU)
+            -- 2658, -- Silkworm Thread (COR)
+            -- 2660, -- Pantin Wire (PUP)
+            -- 2714, -- Filet Lace (DNC)
+            -- 2716, -- Brilliantine (SCH)
         },
     },
 }

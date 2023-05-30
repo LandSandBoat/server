@@ -33,7 +33,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- Level 90 + 50 = 140 Base Weapon Damage
 
     -- Despawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+--    GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -45,7 +45,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+--    GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity
