@@ -53,6 +53,7 @@ xi.msg.area =
     SHOUT       = 2, -- Will display in wide area around player
     PARTY       = 3, -- Will display to players entire party/alliance
     YELL        = 4, -- If yell is enabled in zone, will display.
+    UNITY       = 5, -- Also World Wide
 }
 
 -----------------------------------

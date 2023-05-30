@@ -459,79 +459,82 @@ namespace ability
 
     CAbility* GetTwoHourAbility(JOBTYPE JobID)
     {
-        XI_DEBUG_BREAK_IF(JobID < JOB_WAR || JobID >= MAX_JOBTYPE);
-
-        switch (JobID)
+        if (JobID >= JOB_WAR || JobID <= MAX_JOBTYPE)
         {
-            case JOB_WAR:
-                return PAbilityList[ABILITY_MIGHTY_STRIKES];
-                break;
-            case JOB_MNK:
-                return PAbilityList[ABILITY_HUNDRED_FISTS];
-                break;
-            case JOB_WHM:
-                return PAbilityList[ABILITY_BENEDICTION];
-                break;
-            case JOB_BLM:
-                return PAbilityList[ABILITY_MANAFONT];
-                break;
-            case JOB_RDM:
-                return PAbilityList[ABILITY_CHAINSPELL];
-                break;
-            case JOB_THF:
-                return PAbilityList[ABILITY_PERFECT_DODGE];
-                break;
-            case JOB_PLD:
-                return PAbilityList[ABILITY_INVINCIBLE];
-                break;
-            case JOB_DRK:
-                return PAbilityList[ABILITY_BLOOD_WEAPON];
-                break;
-            case JOB_BST:
-                return PAbilityList[ABILITY_FAMILIAR];
-                break;
-            case JOB_BRD:
-                return PAbilityList[ABILITY_SOUL_VOICE];
-                break;
-            case JOB_RNG:
-                return PAbilityList[ABILITY_EAGLE_EYE_SHOT];
-                break;
-            case JOB_SAM:
-                return PAbilityList[ABILITY_MEIKYO_SHISUI];
-                break;
-            case JOB_NIN:
-                return PAbilityList[ABILITY_MIJIN_GAKURE];
-                break;
-            case JOB_DRG:
-                return PAbilityList[ABILITY_SPIRIT_SURGE];
-                break;
-            case JOB_SMN:
-                return PAbilityList[ABILITY_ASTRAL_FLOW];
-                break;
-            case JOB_BLU:
-                return PAbilityList[ABILITY_AZURE_LORE];
-                break;
-            case JOB_COR:
-                return PAbilityList[ABILITY_WILD_CARD];
-                break;
-            case JOB_PUP:
-                return PAbilityList[ABILITY_OVERDRIVE];
-                break;
-            case JOB_DNC:
-                return PAbilityList[ABILITY_TRANCE];
-                break;
-            case JOB_SCH:
-                return PAbilityList[ABILITY_TABULA_RASA];
-                break;
-            case JOB_GEO:
-                return PAbilityList[ABILITY_BOLSTER];
-                break;
-            case JOB_RUN:
-                return PAbilityList[ABILITY_ELEMENTAL_SFORZO];
-                break;
-            default:
-                break;
+            switch (JobID)
+            {
+                case JOB_WAR:
+                    return PAbilityList[ABILITY_MIGHTY_STRIKES];
+                    break;
+                case JOB_MNK:
+                    return PAbilityList[ABILITY_HUNDRED_FISTS];
+                    break;
+                case JOB_WHM:
+                    return PAbilityList[ABILITY_BENEDICTION];
+                    break;
+                case JOB_BLM:
+                    return PAbilityList[ABILITY_MANAFONT];
+                    break;
+                case JOB_RDM:
+                    return PAbilityList[ABILITY_CHAINSPELL];
+                    break;
+                case JOB_THF:
+                    return PAbilityList[ABILITY_PERFECT_DODGE];
+                    break;
+                case JOB_PLD:
+                    return PAbilityList[ABILITY_INVINCIBLE];
+                    break;
+                case JOB_DRK:
+                    return PAbilityList[ABILITY_BLOOD_WEAPON];
+                    break;
+                case JOB_BST:
+                    return PAbilityList[ABILITY_FAMILIAR];
+                    break;
+                case JOB_BRD:
+                    return PAbilityList[ABILITY_SOUL_VOICE];
+                    break;
+                case JOB_RNG:
+                    return PAbilityList[ABILITY_EAGLE_EYE_SHOT];
+                    break;
+                case JOB_SAM:
+                    return PAbilityList[ABILITY_MEIKYO_SHISUI];
+                    break;
+                case JOB_NIN:
+                    return PAbilityList[ABILITY_MIJIN_GAKURE];
+                    break;
+                case JOB_DRG:
+                    return PAbilityList[ABILITY_SPIRIT_SURGE];
+                    break;
+                case JOB_SMN:
+                    return PAbilityList[ABILITY_ASTRAL_FLOW];
+                    break;
+                case JOB_BLU:
+                    return PAbilityList[ABILITY_AZURE_LORE];
+                    break;
+                case JOB_COR:
+                    return PAbilityList[ABILITY_WILD_CARD];
+                    break;
+                case JOB_PUP:
+                    return PAbilityList[ABILITY_OVERDRIVE];
+                    break;
+                case JOB_DNC:
+                    return PAbilityList[ABILITY_TRANCE];
+                    break;
+                case JOB_SCH:
+                    return PAbilityList[ABILITY_TABULA_RASA];
+                    break;
+                case JOB_GEO:
+                    return PAbilityList[ABILITY_BOLSTER];
+                    break;
+                case JOB_RUN:
+                    return PAbilityList[ABILITY_ELEMENTAL_SFORZO];
+                    break;
+                default:
+                    break;
+            }
         }
+
+        ShowWarning("Attempt to get two hour ability with invalid JOBTYPE %d.", JobID);
         return nullptr;
     }
 

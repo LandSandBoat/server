@@ -65,7 +65,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
     },
     npc =
     {
-        OVERSEER_BASE     = 17285650, -- Ilieumort_RK in npc_list
+        OVERSEER_BASE     = GetFirstID('Ilieumort_RK'),
         PEDDLESTOX        = 17285686,
         BEASTMEN_TREASURE =
         {

@@ -34,11 +34,8 @@ entity.onTrigger = function(player, npc)
             player:startEvent(147)
         end
 
-    -- Standard Dialog 54 probably isnt correct (Which is why its not living in DefaultActions)
     elseif aNewDawn == QUEST_COMPLETED then
         player:startEvent(145)
-    else
-        player:startEvent(54)
     end
 end
 

@@ -17,14 +17,13 @@ local elementTable =
     [xi.magic.element.DARK   ] = { xi.mod.DARKACC,    xi.mod.DARK_AFFINITY_ACC,    xi.mod.DARK_MEVA,    xi.mod.DARK_RES_RANK,    0                                 },
 }
 
--- actor Magic Accuracy
-xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spell, skillType, spellElement, statUsed)
-    local actorJob      = actor:getMainJob()
-    local actorWeather  = actor:getWeather()
-    local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
-    local statDiff      = actor:getStat(statUsed) - target:getStat(statUsed)
-
-    local magicAcc      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc()
+-- Actor Magic Accuracy
+xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spell, skillType, spellElement, statUsed, bonusMacc)
+    local actorJob     = actor:getMainJob()
+    local actorWeather = actor:getWeather()
+    local spellGroup   = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
+    local statDiff     = actor:getStat(statUsed) - target:getStat(statUsed)
+    local magicAcc     = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
 
     -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
     if skillType ~= 0 then
@@ -42,18 +41,25 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
         magicAcc            = magicAcc + elementBonus + affinityBonus
     end
 
-    -- Get dStat Magic Accuracy. NOTE: Ninjutsu does not get this bonus/penalty.
-    if skillType ~= xi.skill.NINJUTSU then
-        if statDiff >= 70 then
-            magicAcc = magicAcc + 30
-        elseif statDiff > 30 then
-            magicAcc = magicAcc + 20 + math.floor((statDiff - 30) / 4)
-        elseif statDiff > 10 then
-            magicAcc = magicAcc + 10 + math.floor((statDiff - 10) / 2)
-        else
-            magicAcc = magicAcc + statDiff
-        end
+    -- Get dStat Magic Accuracy.
+    -- dStat is calculated the same for all types of Magic
+    -- https://wiki.ffo.jp/html/3500.html
+    -- https://wiki.ffo.jp/html/19417.html (Difference in INT validation)
+    local dStatMacc = 0
+
+    if statDiff <= -31 then
+        dStatMacc = -20 + (statDiff + 30) / 4
+    elseif statDiff <= -11 then
+        dStatMacc = -10 + (statDiff + 10) / 2
+    elseif statDiff < 11 then -- Between -11 and 11
+        dStatMacc = statDiff
+    elseif statDiff >= 31 then
+        dStatMacc = 20 + (statDiff - 30) / 4
+    elseif statDiff >= 11 then
+        dStatMacc = 10 + (statDiff - 10) / 2
     end
+
+    magicAcc = magicAcc + utils.clamp(dStatMacc, -30, 30)
 
     -----------------------------------
     -- magicAcc from status effects.

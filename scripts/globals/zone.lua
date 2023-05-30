@@ -391,9 +391,10 @@ xi.zone =
     DYNAMIS_WINDURST_D              = 296,
     DYNAMIS_JEUNO_D                 = 297,
     WALK_OF_ECHOES_P1               = 298,
+    GWORA_THRONE_ROOM               = 299,
 
     -- Increment this when adding new zones
-    MAX_ZONE                        = 299
+    MAX_ZONE                        = 300,
 }
 
 xi.expansionRegion = xi.expansionRegion or {}

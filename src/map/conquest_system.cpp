@@ -49,13 +49,19 @@ namespace conquest
     void UpdateConquestSystem()
     {
         TracyZoneScoped;
+
+        uint8 ranking            = conquest::GetBalance();
+        bool  isConquestAlliance = conquest::IsAlliance();
         // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
-                luautils::OnConquestUpdate(PZone, Conquest_Update);
+                uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+
+                luautils::OnConquestUpdate(PZone, Conquest_Update, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
                     PChar->PLatentEffectContainer->CheckLatentsZone();
@@ -372,13 +378,18 @@ namespace conquest
         // TODO: move to lobby server
         // launch conquest message in all zone (monday server midnight)
 
+        uint8 ranking            = conquest::GetBalance();
+        bool  isConquestAlliance = conquest::IsAlliance();
         // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
-                luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
+                uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+
+                luautils::OnConquestUpdate(PZone, Conquest_Tally_Start, influence, owner, ranking, isConquestAlliance);
             }
         });
         // clang-format on
@@ -399,13 +410,19 @@ namespace conquest
             luautils::SetRegionalConquestOverseers(i);
         }
 
+        ranking            = conquest::GetBalance();
+        isConquestAlliance = conquest::IsAlliance();
+
         // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
             {
-                luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
+                uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+
+                luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
                     PChar->pushPacket(new CConquestPacket(PChar));

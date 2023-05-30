@@ -118,7 +118,11 @@ namespace traits
 
     TraitList_t* GetTraits(uint8 JobID)
     {
-        XI_DEBUG_BREAK_IF(JobID >= MAX_JOBTYPE);
+        if (JobID >= MAX_JOBTYPE)
+        {
+            ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", JobID);
+            return nullptr;
+        }
 
         return &PTraitsList[JobID];
     }

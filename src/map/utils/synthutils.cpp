@@ -130,7 +130,7 @@ namespace synthutils
      *                                                                           *
      ****************************************************************************/
 
-    double getSynthDifficulty(CCharEntity* PChar, uint8 skillID)
+    int16 getSynthDifficulty(CCharEntity* PChar, uint8 skillID)
     {
         Mod ModID = Mod::NONE;
 
@@ -162,10 +162,10 @@ namespace synthutils
                 break;
         }
 
-        uint8  charSkill = PChar->RealSkills.skill[skillID] / 10; // Player skill level is truncated before synth difficulty is calculated
-        double difficult = PChar->CraftContainer->getQuantity(skillID - 40) - (double)(charSkill + PChar->getMod(ModID));
+        uint8 charSkill  = PChar->RealSkills.skill[skillID] / 10; // Player skill level is truncated before synth difficulty is calculated
+        int16 difficulty = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill - PChar->getMod(ModID);
 
-        return difficult;
+        return difficulty;
     }
 
     /*************************************************************
@@ -221,196 +221,197 @@ namespace synthutils
 
     uint8 calcSynthResult(CCharEntity* PChar)
     {
-        uint8 result      = SYNTHESIS_SUCCESS; // We assume by default that we succed
-        uint8 hqtier      = 0;
-        uint8 finalhqtier = 4;
-        bool  canHQ       = true; // We assume by default that we can HQ
+        //------------------------------
+        // Section 1: Variable definitions.
+        //------------------------------
+        uint8 synthResult = SYNTHESIS_SUCCESS; // We assume that we succeed.
+        float successRate = 95;                // We assume that success rate is maxed (95%).
+        uint8 finalHQTier = 4;                 // We assume that max HQ tier is available.
+        bool  canHQ       = true;              // We assume that we can HQ.
 
-        double chance    = 0;
-        double random    = 0;
-        double success   = 0;
-        double synthDiff = 0;
+        uint8 skillID         = 0; // Current crafting skill being checked.
+        uint8 recipeSkill     = 0; // Recipe current skill level, based on current skill ID being checked.
+        int16 synthDifficulty = 0; // Recipe difficulty, based on current skill ID being checked from player and recipe.
+        uint8 currentHQTier   = 0; // Recipe current available HQ tier, based on current skill ID being checked.
+        float chanceHQ        = 0;
+        uint8 maxChanceHQ     = 50;
+        uint8 randomRoll      = 0; // 1 to 100.
 
-        // Section 1: Break handling
-        for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower base success rate.
         {
-            uint8 checkSkill = PChar->CraftContainer->getQuantity(skillID - 40);
-            if (checkSkill != 0)
+            successRate = 45;
+            maxChanceHQ = 80;
+        }
+
+        //------------------------------
+        // Section 2: Break handling
+        //------------------------------
+        for (skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+        {
+            recipeSkill = PChar->CraftContainer->getQuantity(skillID - 40);
+
+            // Only do stuff if the recipe actually uses that skill.
+            if (recipeSkill != 0)
             {
-                random    = xirand::GetRandomNumber(1.);        // Random call must be called for each involved skill.
-                hqtier    = 0;                                  // Set HQ Tier to 0 AGAIN. Or else bad things happen.
-                synthDiff = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
+                randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
+                currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
+                synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
 
-                if (synthDiff <= 0)
+                if (synthDifficulty <= 0)
                 {
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    // Check what the current HQ tier is.
+                    if (synthDifficulty >= -10) // 0-10 levels over recipe.
                     {
-                        success = 0.45;
+                        currentHQTier = 1;
                     }
-                    else
+                    else if (synthDifficulty >= -30) // 11-30 levels over recipe.
                     {
-                        success = 0.95;
+                        currentHQTier = 2;
                     }
-
-                    if (synthDiff > -11) // 0-10 levels over recipe
+                    else if (synthDifficulty >= -50) // 31-50 levels over recipe.
                     {
-                        hqtier = 1;
+                        currentHQTier = 3;
                     }
-                    else if (synthDiff > -31) // 11-30 levels over recipe
+                    else // 51 or more levels over recipe.
                     {
-                        hqtier = 2;
-                    }
-                    else if (synthDiff > -51) // 31-50 levels over recipe
-                    {
-                        hqtier = 3;
-                    }
-                    else // 51+ levels over recipe
-                    {
-                        hqtier = 4;
+                        currentHQTier = 4;
                     }
 
-                    if (hqtier < finalhqtier)
+                    // Set final HQ Tier available if needed.
+                    if (currentHQTier < finalHQTier)
                     {
-                        finalhqtier = hqtier; // set var to limit possible hq if needed
+                        finalHQTier = currentHQTier;
                     }
                 }
                 else
                 {
-                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ.
+                    canHQ       = false; // Player skill level is lower than recipe skill level. Cannot HQ.
+                    successRate = successRate - synthDifficulty * 10;
 
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    if (successRate < 5)
                     {
-                        success = 0.45 - (synthDiff / 10);
-                    }
-                    else
-                    {
-                        success = 0.95 - (synthDiff / 10);
-                    }
-
-                    if (success < 0.05)
-                    {
-                        success = 0.05;
+                        successRate = 5;
                     }
                 }
 
-                // Apply synthesis success rate modifier
-                int16 modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
-                success += (double)modSynthSuccess * 0.01;
+                // Apply synthesis success rate modifier, based on synth type.
+                if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
+                {
+                    successRate = successRate + PChar->getMod(Mod::DESYNTH_SUCCESS);
+                }
+                else
+                {
+                    successRate = successRate + PChar->getMod(Mod::SYNTH_SUCCESS);
+                }
 
+                // Crafting ring handling.
                 if (!canSynthesizeHQ(PChar, skillID))
                 {
-                    success += 0.01; // the crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
-                    canHQ = false;   // assuming here that if a crafting ring is used matching a recipe's subsynth, overall HQ will still be blocked
+                    canHQ       = false;           // Assuming here that if a crafting ring is used matching a recipe's subsynth, overall HQ will still be blocked
+                    successRate = successRate + 1; // The crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
                 }
 
-                if (success > 0.99)
+                // Clamp success rate to 0.99
+                // https://www.bluegartr.com/threads/120352-CraftyMath
+                // http://www.ffxiah.com/item/5781/kitron-macaron
+                if (successRate > 99)
                 {
-                    // Clamp success rate to 0.99
-                    // Even if using kitron macaron, breaks can still happen
-                    // https://www.bluegartr.com/threads/120352-CraftyMath
-                    //   "I get a 99% success rate, so Kitron is doing something and it's not small."
-                    // http://www.ffxiah.com/item/5781/kitron-macaron
-                    //   "According to one of the Japanese wikis, it is said to decrease the minimum break rate from ~5% to 0.5%-2%."
-                    success = 0.99;
+                    successRate = 99;
                 }
 
-                if (random >= success) // Synthesis broke
+                if (randomRoll > successRate) // Synthesis broke
                 {
-                    // keep the skill, because of which the synthesis failed.
-                    // use the slotID of the crystal cell, because it was removed at the beginning of the synthesis
+                    // Keep the skill because of which the synthesis failed.
+                    // Use the slotID of the crystal cell, because it was removed at the beginning of the synthesis.
                     PChar->CraftContainer->setInvSlotID(0, skillID);
-                    result = SYNTHESIS_FAIL;
+                    synthResult = SYNTHESIS_FAIL;
+
                     break;
                 }
             }
         }
 
-        // Section 2: HQ handling
-        if (result != SYNTHESIS_FAIL && canHQ) // It hasn't broken, so lets continue.
+        //------------------------------
+        // Section 3: HQ handling
+        //------------------------------
+        if (synthResult != SYNTHESIS_FAIL && canHQ) // It hasn't broken, so lets continue.
         {
-            switch (finalhqtier)
+            switch (finalHQTier)
             {
                 case 4: // 1 in 2
-                    chance = 0.5;
+                    chanceHQ = 50.0;
                     break;
                 case 3: // 1 in 4
-                    chance = 0.25;
+                    chanceHQ = 25.0;
                     break;
                 case 2: // 1 in 20
-                    chance = 0.05;
+                    chanceHQ = 5.0;
                     break;
                 case 1: // 1 in 100
-                    chance = 0.01;
+                    chanceHQ = 1.0;
                     break;
                 default: // No chance
-                    chance = 0;
+                    chanceHQ = 0.0;
                     break;
             }
 
-            if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
-                chance *= 1.5;
+                chanceHQ = chanceHQ * 1.5;
             }
 
-            int16 modSynthHqRate = PChar->getMod(Mod::SYNTH_HQ_RATE);
+            // HQ success rate modifier.
+            // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
+            chanceHQ = chanceHQ + PChar->getMod(Mod::SYNTH_HQ_RATE) / 512;
 
-            // Using x/512 calculation for HQ success rate modifier
-            // see: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update
-            chance += (double)modSynthHqRate / 512.;
-
-            if (chance > 0)
+            // limit max hq chance
+            if (chanceHQ > maxChanceHQ)
             {
-                // limit max hq chance
-                if (PChar->CraftContainer->getCraftType() == 1)
-                {
-                    chance = std::clamp(chance, 0., 0.800);
-                }
-                else
-                {
-                    chance = std::clamp(chance, 0., 0.500);
-                }
+                chanceHQ = maxChanceHQ;
             }
 
-            if (random < chance) // We HQ. Proceed to selct HQ Tier
+            if (randomRoll < chanceHQ) // We HQ. Proceed to selct HQ Tier
             {
-                result = SYNTHESIS_HQ;
-                random = xirand::GetRandomNumber(1, 100);
+                synthResult = SYNTHESIS_HQ;
+                randomRoll  = xirand::GetRandomNumber(1, 100);
 
-                if (random < 26) // 25% Chance after HQ to upgrade to HQ2
+                if (randomRoll <= 25) // 25% Chance after HQ to upgrade to HQ2
                 {
-                    result = SYNTHESIS_HQ2;
-                    random = xirand::GetRandomNumber(1, 100);
+                    synthResult = SYNTHESIS_HQ2;
+                    randomRoll  = xirand::GetRandomNumber(1, 100);
 
-                    if (random < 26) // 25% Chance after HQ2 to upgrade to HQ3
+                    if (randomRoll <= 25) // 25% Chance after HQ2 to upgrade to HQ3
                     {
-                        result = SYNTHESIS_HQ3;
+                        synthResult = SYNTHESIS_HQ3;
                     }
                 }
             }
         }
 
-        // Section 3: System handling. The result of the synthesis is written in the quantity field of the crystal cell.
-        PChar->CraftContainer->setQuantity(0, result);
+        //------------------------------
+        // Section 4: System handling. The result of the synthesis is written in the quantity field of the crystal cell.
+        //------------------------------
+        PChar->CraftContainer->setQuantity(0, synthResult);
 
-        switch (result)
+        switch (synthResult)
         {
             case SYNTHESIS_FAIL:
-                result = RESULT_FAIL;
+                synthResult = RESULT_FAIL;
                 break;
             case SYNTHESIS_SUCCESS:
-                result = RESULT_SUCCESS;
+                synthResult = RESULT_SUCCESS;
                 break;
             case SYNTHESIS_HQ:
-                result = RESULT_HQ;
+                synthResult = RESULT_HQ;
                 break;
             case SYNTHESIS_HQ2:
-                result = RESULT_HQ;
+                synthResult = RESULT_HQ;
                 break;
             case SYNTHESIS_HQ3:
-                result = RESULT_HQ;
+                synthResult = RESULT_HQ;
                 break;
         }
-        return result;
+        return synthResult;
     }
 
     /********************************************************************
@@ -418,12 +419,13 @@ namespace synthutils
      * Do Skill Up                                                       *
      *                                                                   *
      ********************************************************************/
-
     int32 doSynthSkillUp(CCharEntity* PChar)
     {
         for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // Check for all skills involved in a recipe, to check for skill up
         {
+            //------------------------------
             // Section 1: Checks
+            //------------------------------
 
             // We don't Skill Up if the recipe doesn't involve the currently checked skill.
             if (PChar->CraftContainer->getQuantity(skillID - 40) == 0)
@@ -454,7 +456,9 @@ namespace synthutils
                 continue; // Break current loop iteration.
             }
 
+            //------------------------------
             // Section 2: Skill up equations and penalties
+            //------------------------------
             double skillUpChance = 0;
 
             double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
@@ -482,7 +486,7 @@ namespace synthutils
             // Chance penalties.
             uint8 penalty = 1;
 
-            if (PChar->CraftContainer->getCraftType() == 1) // If it's a desynth, lower skill up rate
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
             {
                 penalty += 1;
             }
@@ -494,7 +498,9 @@ namespace synthutils
 
             skillUpChance = skillUpChance / penalty; // Lower skill up chance if synth breaks
 
+            //------------------------------
             // Section 3: Calculate Skill Up and Skill Up Amount
+            //------------------------------
             double random = xirand::GetRandomNumber(1.);
 
             if (random < skillUpChance) // If character skills up
@@ -580,7 +586,9 @@ namespace synthutils
                     skillUpAmount = maxSkill - charSkill;
                 }
 
+                //------------------------------
                 // Section 4: Spezialization System (Craft delevel system over certain point)
+                //------------------------------
                 uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
                 uint16 skillCumulation   = skillUpAmount;
                 uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
@@ -603,7 +611,9 @@ namespace synthutils
                     }
                 }
 
+                //------------------------------
                 // Section 5: Handle messages and save results.
+                //------------------------------
 
                 // Skill Up addition:
                 PChar->RealSkills.skill[skillID] += skillUpAmount;
@@ -635,6 +645,7 @@ namespace synthutils
                 }
             }
         }
+
         return 0;
     }
 
@@ -648,9 +659,9 @@ namespace synthutils
 
     int32 doSynthFail(CCharEntity* PChar)
     {
-        uint8  currentCraft     = PChar->CraftContainer->getInvSlotID(0);
-        double synthDiff        = getSynthDifficulty(PChar, currentCraft);
-        int16  modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
+        uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
+        int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
+        int16 modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
 
         // We are able to get the correct elemental mod here by adding the element to it since they are in the same order
         double reduction = PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_FIRE + PChar->CraftContainer->getType()));
@@ -665,7 +676,7 @@ namespace synthutils
         uint8 totalCount = 0;
 
         double random   = 0;
-        double lostItem = std::clamp(0.15 - reduction + (synthDiff > 0 ? synthDiff / 20 : 0), 0.0, 1.0);
+        double lostItem = std::clamp(0.15 - reduction + (synthDifficulty > 0 ? synthDifficulty / 20 : 0), 0.0, 1.0);
 
         // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
         // see: http://wiki.ffo.jp/html/18416.html

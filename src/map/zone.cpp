@@ -592,7 +592,11 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
 void CZone::SetWeather(WEATHER weather)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+    if (weather >= MAX_WEATHER_ID)
+    {
+        ShowWarning("Weather value (%d) exceeds MAX_WEATHER_ID.", weather);
+        return;
+    }
 
     if (m_Weather == weather)
     {

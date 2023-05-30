@@ -33,8 +33,6 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
     this->setType(0x2A);
     this->setSize(0x20);
 
-    // XI_DEBUG_BREAK_IF(PEntity == nullptr);
-
     ref<uint32>(0x04) = PEntity->id;
 
     ref<uint32>(0x08) = param0;

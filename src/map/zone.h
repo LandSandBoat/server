@@ -342,7 +342,8 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_WINDURST_D             = 296,
     ZONE_DYNAMIS_JEUNO_D                = 297,
     ZONE_WALK_OF_ECHOES_P1              = 298,
-    MAX_ZONEID                          = 299,
+    ZONE_GWORA_THRONE_ROOM              = 299,
+    MAX_ZONEID                          = 300,
 };
 
 enum class REGION_TYPE : uint8

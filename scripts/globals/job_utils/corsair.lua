@@ -270,7 +270,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             roll = roll + math.random(1, 6)
         end
 
-        if roll > 12 then -- bust
+        if roll >= 12 then -- bust
             roll = 12
             caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
         end

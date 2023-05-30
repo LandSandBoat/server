@@ -274,7 +274,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
             cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE, true);
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
     else
@@ -415,10 +415,20 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
 
     // mob, initiator or ally
-    if (entity && !entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
+    if (entity)
     {
-        entity->StatusEffectContainer->AddStatusEffect(
-            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        CStatusEffect* PBattlefieldEffect = entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+        // Update battlefield ID if battlefield effect exists
+        // Tango with a Tracker/Requiem of Sin corner case where NPC IDs are shared between BCs as per retail caps
+        if (PBattlefieldEffect)
+        {
+            PBattlefieldEffect->SetPower(this->GetID());
+        }
+        else
+        {
+            entity->StatusEffectContainer->AddStatusEffect(
+                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        }
     }
 
     return true;

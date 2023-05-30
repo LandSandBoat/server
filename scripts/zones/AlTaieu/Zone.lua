@@ -10,8 +10,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -47,6 +47,10 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
         player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
     end
+end
+
+zoneObject.afterZoneIn = function(player)
+    player:entityVisualPacket("on00", player) -- Fog effect on zone in
 end
 
 return zoneObject

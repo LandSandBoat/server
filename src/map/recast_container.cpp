@@ -38,7 +38,11 @@
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PEntity == nullptr)
+    if (m_PEntity == nullptr)
+    {
+        ShowError("m_PEntity is null.");
+    }
+
     std::ignore = m_PEntity;
 }
 
@@ -60,7 +64,7 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
             break;
     }
     // Unhandled Scenario
-    XI_DEBUG_BREAK_IF(true);
+    ShowError("Invalid RECASTTYPE received, returning nullptr.");
     return nullptr;
 }
 
