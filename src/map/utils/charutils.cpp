@@ -878,6 +878,7 @@ namespace charutils
         }
 
         charutils::LoadInventory(PChar);
+        charutils::ValidateAndSetMeritMode(PChar);
 
         CalculateStats(PChar);
         BuildingCharSkillsTable(PChar);
@@ -5148,6 +5149,12 @@ namespace charutils
                 SaveCharJob(PChar, PChar->GetMJob());
                 SaveCharExp(PChar, PChar->GetMJob());
 
+                if (PChar->jobs.job[PChar->GetMJob()] == 75)
+                {
+                    // if the player just hit 75, they may not be eligble to apply merit mode setting from a previous 75
+                    charutils::ValidateAndSetMeritMode(PChar);
+                }
+
                 PChar->pushPacket(new CCharJobsPacket(PChar));
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
@@ -5185,6 +5192,30 @@ namespace charutils
         if (PMob != PChar) // Only mob kills count for gain EXP records
         {
             roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
+        }
+    }
+
+    /*************************************************************************
+     *                                                                       *
+     *  Validates if MeritMode should be set and disable if it is not valid  *
+     *                                                                       *
+     ************************************************************************/
+    void ValidateAndSetMeritMode(CCharEntity* PChar)
+    {
+        bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+        if (!canUseMeritMode && PChar->MeritMode == true)
+        {
+            PChar->MeritMode = false;
+        }
+        else if (canUseMeritMode)
+        {
+            // Get a fresh pull of merit mode as this may have been disabled due to changing to a sub 75
+            int ret = sql->Query("SELECT mode FROM char_exp WHERE charid = %u;", PChar->id);
+
+            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            {
+                PChar->MeritMode = (uint8)sql->GetIntData(0);
+            }
         }
     }
 
