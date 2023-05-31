@@ -368,7 +368,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             },
             [xi.zone.DYNAMIS_VALKURM] =
             {
-                [337] = { 3131 }, -- Quadav
+                [337] = { 2554 }, -- Quadav
                 [334] = { 2544 }, -- Orc
                 [327] = { 2539 }, -- Goblin
                 [360] = { 2549 }, -- Yagudo
