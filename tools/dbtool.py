@@ -361,14 +361,16 @@ def fetch_files(express=False):
     else:
         for (_, _, filenames) in os.walk(from_server_path("sql/")):
             for filename in sorted(filenames):
-                import_files.append(from_server_path("sql/" + filename))
+                if filename.endswith('.sql'):
+                    import_files.append(from_server_path("sql/" + filename))
             break
     check_protected()
     backups.clear()
     for (_, _, filenames) in os.walk(from_server_path("sql/backups/")):
         for file in sorted(filenames):
             if not ".gitignore" in file:
-                backups.append(from_server_path("sql/backups/" + file))
+                if file.endswith('.sql'):
+                    backups.append(from_server_path("sql/backups/" + file))
         break
     backups.sort()
     import_files.sort()
