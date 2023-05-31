@@ -1,29 +1,27 @@
 -----------------------------------
--- The Antique Collector
+-- Northward
 -----------------------------------
--- Log ID: 3, Quest ID: 25
--- Imasuke : !pos -165 11 94 246
+-- Log ID: 3, Quest ID: 24
+-- Radeivepart : !pos 5 9 -39 243
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
-
--- TODO: Quest reward has conflicting information from various resources.  Need to confirm
--- that XP and Gil rewards are also given when the player does not have the KI reward.
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 
 quest.reward =
 {
+    exp      = 2000,
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
-    keyitem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
-    title    = xi.title.TRADER_OF_ANTIQUITIES,
+    gil      = 2000,
+    keyItem  = xi.ki.MAP_OF_CASTLE_ZVAHL,
+    title    = xi.title.ENVOY_TO_THE_NORTH,
 }
 
 quest.sections =
@@ -31,16 +29,16 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2
+                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
         end,
 
-        [xi.zone.PORT_JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
-            ['Imasuke'] = quest:progressEvent(13),
+            ['Radeivepart'] = quest:progressEvent(159, { [0] = 1, [7] = 8 }),
 
             onEventFinish =
             {
-                [13] = function(player, csid, option, npc)
+                [159] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
                     end
@@ -54,27 +52,38 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.PORT_JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
-            ['Imasuke'] =
+            ['Radeivepart'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.KAISER_SWORD) then
-                        return quest:progressEvent(15)
+                    if npcUtil.tradeHasExactly(trade, xi.items.FLAME_DEGEN) then
+                        return quest:progressEvent(61)
                     end
                 end,
 
-                onTrigger = quest:event(14),
+                onTrigger = quest:event(159, { [0] = 2, [7] = 8 }),
             },
 
             onEventFinish =
             {
-                [15] = function(player, csid, option, npc)
+                [61] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
                     end
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Radeivepart'] = quest:event(159, { [0] = 3, [7] = 8 }):replaceDefault(),
         },
     },
 }

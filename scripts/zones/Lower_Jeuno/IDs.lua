@@ -37,6 +37,7 @@ zones[xi.zone.LOWER_JEUNO] =
         LAMP_MSG_OFFSET               = 7262,  -- All the lamps are lit.
         ZAUKO_IS_RECRUITING           = 7270,  -- Zauko is recruiting an adventurer to light the lamps.
         CHOCOBO_DIALOG                = 7332,  -- Hmph.
+        MERTAIRE_MALLIEBELL_LEFT      = 7413,  -- Ugh... Malliebell... This time she's left me forever...
         MERTAIRE_DEFAULT              = 7438,  -- Who are you? Leave me alone!
         ITS_LOCKED                    = 7600,  -- It's locked.
         PAWKRIX_SHOP_DIALOG           = 7648,  -- Hey, we're fixin' up some stew. Gobbie food's good food!
