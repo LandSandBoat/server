@@ -1,8 +1,8 @@
 -----------------------------------
--- A Lady's Heart
+-- Flower Child
 -----------------------------------
--- Log ID: 1, Quest ID: 50
--- Valah Molkot : !pos 59 8 -221 236
+-- Log ID: 2, Quest ID: 65
+-- Ojha Rhawash : !pos -209 0 -134 239
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
@@ -10,15 +10,15 @@ require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
+local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.quest.fame_area.WINDURST,
 }
 
 local flowerItems =
@@ -63,45 +63,47 @@ quest.sections =
             return status ~= QUEST_COMPLETED
         end,
 
-        [xi.zone.PORT_BASTOK] =
+        [xi.zone.WINDURST_WALLS] =
         {
-            ['Valah_Molkot'] =
+            ['Ojha_Rhawash'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.AMARYLLIS) then
-                        return quest:progressEvent(160, 0, 236, 2)
+                    if npcUtil.tradeHasExactly(trade, xi.items.LILAC) then
+                        return quest:progressEvent(10000, 0, 239, 2)
                     elseif isTradeInTable(trade, flowerItems) then
-                        return quest:progressEvent(160, 0, 236, 1)
+                        return quest:progressEvent(10000, 0, 239, 1)
                     else
-                        return quest:progressEvent(160, 0, 236, 0)
+                        return quest:progressEvent(10000, 0, 239, 0)
                     end
                 end,
 
-                onTrigger = quest:progressEvent(160, 0, 236, 10),
+                onTrigger = quest:progressEvent(10000, 0, 239, 10),
             },
 
             onEventFinish =
             {
-                [160] = function(player, csid, option, npc)
+                [10000] = function(player, csid, option, npc)
                     -- Three possible event options are returned from the above triggers:
                     -- 0    : Invalid Item was traded
                     -- 1    : Valid Item was traded
                     -- 10   : Cancel/Exit event option.
-                    -- 2002 : Amaryllis was traded
+                    -- 3002 : Lilac was traded
 
-                    -- Correct trade option (Amaryllis).
-                    if option == 2002 then
+                    -- Correct trade option (Lilac).
+                    if option == 3002 then
                         if quest:complete(player) then
                             player:confirmTrade()
-                            player:setMoghouseFlag(2)
-                            player:messageSpecial(portBastokID.text.MOGHOUSE_EXIT)
+                            player:setMoghouseFlag(4)
+                            player:messageSpecial(windurstWallsID.text.MOGHOUSE_EXIT)
                         end
 
                     else
+                        -- Confirm trade if there was a trade.
                         if option == 1 then
                             player:confirmTrade()
                         end
 
+                        -- Start quest if it wasn't.
                         if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
                             quest:begin(player)
                         end
@@ -116,23 +118,23 @@ quest.sections =
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.PORT_BASTOK] =
+        [xi.zone.WINDURST_WALLS] =
         {
-            ['Valah_Molkot'] =
+            ['Ojha_Rhawash'] =
             {
                 onTrade = function(player, npc, trade)
                     -- NOTE: After completing this quest, trade is not consumed.
 
-                    if npcUtil.tradeHasExactly(trade, xi.items.AMARYLLIS) then
-                        return quest:progressEvent(160, 0, 236, 4)
+                    if npcUtil.tradeHasExactly(trade, xi.items.LILAC) then
+                        return quest:progressEvent(10000, 0, 239, 4)
                     elseif isTradeInTable(trade, flowerItems) then
-                        return quest:progressEvent(160, 0, 236, 5)
+                        return quest:progressEvent(10000, 0, 239, 5)
                     else
-                        return quest:progressEvent(160, 0, 236, 0)
+                        return quest:progressEvent(10000, 0, 239, 0)
                     end
                 end,
 
-                onTrigger = quest:progressEvent(160, 0, 236, 10),
+                onTrigger = quest:progressEvent(10000, 0, 239, 10),
             },
         },
     },

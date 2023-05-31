@@ -271,4 +271,10 @@ xi.settings.map =
     -- Rent-A-Room
     RENT_A_ROOM     = false,
     ERA_RENT_A_ROOM = false,
+
+    -- Send stack traces to the client after caught Lua errors if
+    -- their GM level is the same or higher than this number.
+    -- The max GM level is 5, so setting this to 6 disables it
+    -- for everone. Setting it to 0 enables for everyone.
+    REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 6,
 }
