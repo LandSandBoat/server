@@ -55,7 +55,7 @@ local homepointData =
     [ 33] = { group = 4, fee = 1, dest = {       32,      -1,     -44,   0, xi.zone.UPPER_JEUNO            } }, -- Upper Jeuno #2
     [ 34] = { group = 4, fee = 1, dest = {      -52,       1,      16,   0, xi.zone.UPPER_JEUNO            } }, -- Upper Jeuno #3
     [ 35] = { group = 4, fee = 1, dest = {      -99,       0,    -183,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #1
-    [ 36] = { group = 4, fee = 1, dest = {       18,      -1,      54,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #2
+    [ 36] = { group = 4, fee = 1, dest = {      8.4,      -8,    9.39,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #2
     [ 37] = { group = 4, fee = 1, dest = {       37,       0,       9,   0, xi.zone.PORT_JEUNO             } }, -- Port Jeuno #1
     [ 38] = { group = 4, fee = 1, dest = {     -155,      -1,      -4,   0, xi.zone.PORT_JEUNO             } }, -- Port Jeuno #2
     [ 39] = { group = 0, fee = 1, dest = {       78,     -13,     -94,   0, xi.zone.KAZHAM                 } }, -- Kazham #1
