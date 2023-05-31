@@ -626,10 +626,10 @@ end
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
-xi.spells.damage.calculateTMDA = function(caster, target, damageType)
-    local targetMagicDamageAdjustment = 1 -- The variable we want to calculate
+xi.spells.damage.calculateTMDA = function(caster, target, spellElement)
+    local damageType                  = xi.damageType.ELEMENTAL + spellElement
+    local targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- Check for Liement.
 
-    targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- check for Liement.
     if targetMagicDamageAdjustment < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
         return targetMagicDamageAdjustment
     end
@@ -639,13 +639,13 @@ xi.spells.damage.calculateTMDA = function(caster, target, damageType)
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step.
 
-    local globalDamageTaken     = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
-    local magicDamageTaken      = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
-    local magicDamageTakenII    = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
-    local uMagicDamageTaken     = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
+    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
+    local magicDamageTaken    = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
+    local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
+    local uMagicDamageTaken   = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
+    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
 
-    local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
-    targetMagicDamageAdjustment = utils.clamp(1 + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
+    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
     targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
 
     return targetMagicDamageAdjustment
@@ -818,12 +818,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local finalDamage  = 0 -- The variable we want to calculate
 
     -- Get Tabled Variables.
-    local spellId         = spell:getID()
-    local skillType       = spell:getSkillType()
-    local spellGroup      = spell:getSpellGroup()
-    local spellElement    = spell:getElement()
-    local statUsed        = pTable[spellId][stat]
-    local spellDamageType = xi.damageType.ELEMENTAL + spellElement
+    local spellId      = spell:getID()
+    local skillType    = spell:getSkillType()
+    local spellGroup   = spell:getSpellGroup()
+    local spellElement = spell:getElement()
+    local statUsed     = pTable[spellId][stat]
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statUsed)
@@ -836,7 +835,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellGroup, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spellElement)
-    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, spellDamageType)
+    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, spellElement)
     local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, target, spell)
     local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, target, spell)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(caster, target, spell, skillType)
