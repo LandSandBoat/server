@@ -48,8 +48,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 572 then
         player:tradeComplete()
         player:addTitle(xi.title.FANG_FINDER)
-        player:addGil(xi.settings.main.GIL_RATE * 2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
+        npcUtil.giveCurrency(player, 'gil', 2100)
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)

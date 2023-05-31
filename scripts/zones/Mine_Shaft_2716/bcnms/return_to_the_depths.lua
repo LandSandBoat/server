@@ -36,8 +36,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:setCharVar("Quest[1][78]prog", 10)
         end
 
-        player:addGil(10000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, 10000)
+        npcUtil.giveCurrency(player, 'gil', 10000)
     end
 end
 

@@ -70,16 +70,13 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         if player:hasStatusEffect(xi.effect.MUTE) then
             player:delStatusEffect(xi.effect.MUTE)
-            player:addGil(xi.settings.main.GIL_RATE * 1000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1000)
+            npcUtil.giveCurrency(player, 'gil', 1000)
         elseif player:hasStatusEffect(xi.effect.BANE) then
             player:delStatusEffect(xi.effect.BANE)
-            player:addGil(xi.settings.main.GIL_RATE * 1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1200)
+            npcUtil.giveCurrency(player, 'gil', 1200)
         elseif player:hasStatusEffect(xi.effect.PLAGUE) then
             player:delStatusEffect(xi.effect.PLAGUE)
-            player:addGil(xi.settings.main.GIL_RATE * 1500)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1500)
+            npcUtil.giveCurrency(player, 'gil', 1500)
         end
 
         player:setCharVar("QuestCatchItIfYouCan_var", 0)

@@ -28,7 +28,6 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
-
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -107,7 +106,7 @@ quest.sections =
 
                 [387] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,
 
@@ -117,7 +116,7 @@ quest.sections =
 
                 [389] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },
@@ -151,7 +150,10 @@ quest.sections =
             ['Apururu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 and player:hasKeyItem(xi.ki.JOKER_CARD) then
+                    if
+                        quest:getVar(player, 'Prog') == 3 and
+                        player:hasKeyItem(xi.ki.JOKER_CARD)
+                    then
                         return quest:progressEvent(600) -- 2nd meeting with Apururu after meeting him in Hero's hause.
                     end
                 end,
@@ -161,7 +163,7 @@ quest.sections =
             {
                 [600] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },

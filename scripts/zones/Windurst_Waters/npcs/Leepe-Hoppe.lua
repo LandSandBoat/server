@@ -96,7 +96,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
     -- Tuning Out
-    elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE and os.time() > tuningOutWait then
+    elseif
+        tuningIn == QUEST_COMPLETED and
+        tuningOut == QUEST_AVAILABLE and
+        os.time() > tuningOutWait
+    then
         player:startEvent(888) -- Starting dialogue
 
     elseif
@@ -190,8 +194,7 @@ entity.onEventFinish = function(player, csid, option)
         elseif option == 5 then
             reward = 1208 -- Ancient's Key
         elseif option == 6 then
-            player:addGil(xi.settings.main.GIL_RATE * 15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 15000) -- Gil
+            npcUtil.giveCurrency(player, 'gil', 15000)
         elseif option == 7 then
             player:addSpell(297) -- Pact
         elseif option == 8 then
