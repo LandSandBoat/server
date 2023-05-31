@@ -382,12 +382,12 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
-xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statUsed)
+xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillType, spellElement, statUsed)
     -- Get Bonus Magic Accruacy for the spell
     local bonusMacc = pTable[spell:getID()][bonusSpellMacc]
 
     -- Get Caster Magic Accuracy.
-    local magicAcc = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed, bonusMacc)
+    local magicAcc = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
 
     -- Get Target Magic Evasion.
     local magicEva = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
@@ -427,7 +427,7 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
     return magicBurst
 end
 
-xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement)
+xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, spellGroup, spellElement)
     local magicBurstBonus        = 1 -- The variable we want to calculate
     local modBurst               = 1
     local ancientMagicBurstBonus = 0
@@ -442,8 +442,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     -- MBB = MBB + trait
 
     if
-        spell and
-        spell:getSpellGroup() == 3 and
+        spellGroup == xi.magic.spellGroup.BLUE and
         not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE))
     then
         return magicBurstBonus
@@ -821,6 +820,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     -- Get Tabled Variables.
     local spellId         = spell:getID()
     local skillType       = spell:getSkillType()
+    local spellGroup      = spell:getSpellGroup()
     local spellElement    = spell:getElement()
     local statUsed        = pTable[spellId][stat]
     local spellDamageType = xi.damageType.ELEMENTAL + spellElement
@@ -831,9 +831,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
     local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
-    local resist                      = xi.spells.damage.calculateResist(caster, target, spell, skillType, spellElement, statUsed)
-    local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
-    local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
+    local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed)
+    local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target, spell, spellElement)
+    local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellGroup, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, spellDamageType)
