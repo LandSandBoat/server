@@ -844,14 +844,6 @@ xi.magic.applyAbilityResistance = function(player, target, params)
 
     local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount, params.effect, player, utils.ternary(params.damageSpell, true, false))
 
-    if not params.ignoreStateLock then
-        if resist < 0.5 then
-            resist = 0
-        elseif resist < 1 then
-            resist = 0.5
-        end
-    end
-
     if
         params.effect and
         params.chance and
@@ -922,12 +914,12 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effect, 
         dStatAcc = -10 + (bonusDStat / 2)
     elseif dStat > -11 and dStat < 11 then
         dStatAcc = dStat
-    elseif dStat >= 11 then
-        bonusDStat = dStat - 10
-        dStatAcc = 10 + (bonusDStat / 2)
     elseif dStat >= 31 then
         bonusDStat = dStat - 30
         dStatAcc = 20 + (bonusDStat / 4)
+    elseif dStat >= 11 then
+        bonusDStat = dStat - 10
+        dStatAcc = 10 + (bonusDStat / 2)
     end
 
     xi.msg.debugValue(caster, "dStat", dStat)
@@ -1034,6 +1026,13 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effect, 
         xi.msg.debugValue(caster, "Skillchain Bonus Magic Accuracy", magicacc)
     end
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(caster)
+    if tandemBonus > 0 then
+        magicacc = magicacc + tandemBonus
+        xi.msg.debugValue(caster, "Tandem Strike Magic Accuracy Bonus", magicacc)
+    end
+
     magicacc = magicacc + bonusAcc
 
     -- Add macc% from food
@@ -1118,8 +1117,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
         eighthTrigger = true
     end
 
-    -- There are no quarter triggers for players vs mobs (If the target is a player then set to true if conditions are met)
-    if resTriggerPoints[2] and damageSpell and target:isPC() then
+    if resTriggerPoints[2] and damageSpell then
         quarterTrigger = true
     end
 
@@ -2220,4 +2218,21 @@ xi.magic.calculateMEVAMult = function(tier)
     end
 
     return eemVal
+end
+
+xi.magic.handleTandemStrikeBonus = function(caster)
+    if
+        caster:getMod(xi.mod.TANDEM_STRIKE) > 0 and
+        caster:isTandemValid()
+    then
+        return caster:getMod(xi.mod.TANDEM_STRIKE)
+    elseif
+        (caster:getMaster() ~= nil and
+        caster:getMaster():getMod(xi.mod.TANDEM_STRIKE) > 0) and
+        caster:isTandemValid()
+    then
+        return caster:getMaster():getMod(xi.mod.TANDEM_STRIKE)
+    end
+
+    return 0
 end

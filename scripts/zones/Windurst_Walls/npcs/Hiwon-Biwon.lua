@@ -2,7 +2,6 @@
 -- Area: Windurst Walls
 --  NPC: Hiwon-Biwon
 -- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
--- Working 100%
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/keyitems")

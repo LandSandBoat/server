@@ -12023,6 +12023,18 @@ void CLuaBaseEntity::uncharm()
 }
 
 /************************************************************************
+ *  Function: isTandemValid()
+ *  Purpose : checks if the entity satifies all conditions of tandem
+ *  Example : player:isTandemValid()
+ *  Notes   : for tandem strike and tandem blow
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTandemValid()
+{
+    return battleutils::IsTandemValid(static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: addBurden()
  *  Purpose : Adds a Burden to a Target
  *  Example : local overload = target:addBurden(xi.magic.ele.EARTH - 1, burden)
@@ -16143,6 +16155,48 @@ void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const
     }
 }
 
+/************************************************************************
+*  Function: sendMobEmote()
+*  Purpose : Makes a mob entity emit an emote.
+*  Example : mob:sendMobEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
+*  Notes   : Intended only for humanoid mobs that have the
+             same skeletal meshes for animations as players; such as fomor
+************************************************************************/
+
+void CLuaBaseEntity::sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    // 1st parameter is optional
+    XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CMobEntity* PMob        = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PMob)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PMob, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
 void CLuaBaseEntity::setDigTable()
 {
     if (m_PBaseEntity != nullptr && m_PBaseEntity->objtype == TYPE_PC)
@@ -17031,6 +17085,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("charmDuration", CLuaBaseEntity::charmDuration);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isTandemValid", CLuaBaseEntity::isTandemValid);
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
@@ -17269,6 +17324,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
     SOL_REGISTER("setSpawnType", CLuaBaseEntity::setSpawnType);
     SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
+    SOL_REGISTER("sendMobEmote", CLuaBaseEntity::sendMobEmote);
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
     SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);

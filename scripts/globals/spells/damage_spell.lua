@@ -560,6 +560,13 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         xi.msg.debugValue(caster, "Skillchain Bonus Magic Accuracy", magicAcc)
     end
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(caster)
+    if tandemBonus > 0 then
+        magicAcc = magicAcc + tandemBonus
+        xi.msg.debugValue(caster, "Tandem Strike Magic Accuracy Bonus", magicAcc)
+    end
+
     -----------------------------------
     -- magicAcc from Job Points.
     -----------------------------------

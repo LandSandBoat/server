@@ -55,7 +55,7 @@ quest.sections =
             ['Narcheral'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.MOCCASINS, xi.items.YAGUDO_HOLY_WATER }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.MOCCASINS, xi.items.CANTEEN_OF_YAGUDO_HOLY_WATER }) then
                         return quest:progressEvent(691)
                     end
                 end,

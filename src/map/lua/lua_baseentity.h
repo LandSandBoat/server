@@ -660,6 +660,7 @@ public:
     void charm(CLuaBaseEntity const* target);                          // applies charm on target
     void charmDuration(CLuaBaseEntity const* target, uint32 duration); // applies charm on target for duration
     void uncharm();                                                    // removes charm on target
+    bool isTandemValid();                                              // verifies that the entity satifies all tandem conditions for tandem blow and tandem strike
 
     uint8 addBurden(uint8 element, uint8 burden);
     uint8 getOverloadChance(uint8 element);
@@ -905,6 +906,7 @@ public:
     uint32 getWorldPassRedeemTime();
     uint32 getWorldpassId(uint32 targid);
     void   sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
+    void   sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
     void   clearActionQueue();
     void   clearTimerQueue();
     void   setDigTable();               // Sets PChar Last Dig Table

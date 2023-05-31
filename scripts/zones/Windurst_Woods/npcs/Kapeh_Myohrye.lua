@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kapeh Myohrye
--- Working 100%
 -----------------------------------
 local entity = {}
 

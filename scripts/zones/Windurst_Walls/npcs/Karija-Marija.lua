@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Karija-Marija
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------
