@@ -42,8 +42,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif trialSizeWind == QUEST_COMPLETED then
         player:startEvent(111) -- Defeated Avatar
-    else
-        player:startEvent(71) -- Standard dialogue
     end
 end
 

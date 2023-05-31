@@ -35,8 +35,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif guardian == QUEST_COMPLETED and needToZone then
         player:startEvent(72)
-    else
-        player:startEvent(84) --Standard Dialogue
     end
 end
 
