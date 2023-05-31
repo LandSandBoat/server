@@ -31,7 +31,11 @@ CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)
     this->setType(0x55);
     this->setSize(0x88);
 
-    XI_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
+    if (KeyTable >= MAX_KEYS_TABLE)
+    {
+        ShowWarning("KeyTable (%d) exceeds MAX_KEYS_TABLE.", KeyTable);
+        return;
+    }
 
     memcpy(data + (0x04), &(PChar->keys.tables[KeyTable].keyList), 0x40);
     memcpy(data + (0x44), &(PChar->keys.tables[KeyTable].seenList), 0x40);

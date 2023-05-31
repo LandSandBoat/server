@@ -578,7 +578,7 @@ namespace zoneutils
                                 }
 
                                 // must be here first to define mobmods
-                                mobutils::InitializeMob(PMob, PMob->loc.zone);
+                                mobutils::InitializeMob(PMob);
 
                                 PZone->InsertMOB(PMob);
                             }

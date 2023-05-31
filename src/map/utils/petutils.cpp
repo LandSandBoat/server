@@ -1230,7 +1230,11 @@ namespace petutils
 
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet != nullptr);
+        if (PMaster->PPet != nullptr)
+        {
+            ShowWarning("Pet was not null for %s.", PMaster->GetName());
+            return;
+        }
 
         if (PMaster->objtype == TYPE_PC &&
             (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
@@ -1349,9 +1353,23 @@ namespace petutils
 
     void DetachPet(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(PMaster == nullptr);
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
-        XI_DEBUG_BREAK_IF(PMaster->objtype != TYPE_PC);
+        if (PMaster == nullptr)
+        {
+            ShowWarning("PMaster is null.");
+            return;
+        }
+
+        if (PMaster->PPet == nullptr)
+        {
+            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            return;
+        }
+
+        if (PMaster->objtype != TYPE_PC)
+        {
+            ShowWarning("Non-PC passed into function (%s)", PMaster->GetName());
+            return;
+        }
 
         CBattleEntity* PPet  = PMaster->PPet;
         CCharEntity*   PChar = static_cast<CCharEntity*>(PMaster);
@@ -1449,8 +1467,17 @@ namespace petutils
 
     void DespawnPet(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(PMaster == nullptr);
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr)
+        {
+            ShowWarning("PMaster is null.");
+            return;
+        }
+
+        if (PMaster->PPet == nullptr)
+        {
+            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            return;
+        }
 
         petutils::DetachPet(PMaster);
     }
@@ -1690,8 +1717,17 @@ namespace petutils
 
     void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
-        XI_DEBUG_BREAK_IF(PMaster == nullptr);
-        XI_DEBUG_BREAK_IF(PetID >= MAX_PETID);
+        if (PMaster == nullptr)
+        {
+            ShowWarning("PMaster is null.");
+            return;
+        }
+
+        if (PetID >= MAX_PETID)
+        {
+            ShowWarning("PetID (%d) exceeds MAX_PETID", PetID);
+            return;
+        }
 
         // clang-format off
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)

@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    --player:startEvent(10101, 0) -- Rambling about chocobo breeding
+    --player:startEvent(10101, 0) -- Rambling about chocobo breeding (This CS is displayed when interacting for the first time, 10108 after)
 
     --player:startEvent(10102, 0) -- We might have a new egg tomorrow (CS)
 

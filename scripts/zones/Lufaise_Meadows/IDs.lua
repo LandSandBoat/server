@@ -56,7 +56,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
     },
     npc =
     {
-        OVERSEER_BASE = 16875865, -- Jemmoquel_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Jemmoquel_RK'),
         LOGGING       =
         {
             16875883,

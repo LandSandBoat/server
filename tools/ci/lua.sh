@@ -48,7 +48,6 @@ global_objects=(
     getVanaMidnight
     getMidnight
     getConquestTally
-    vanaDay
 
     mission
     Mission
@@ -134,7 +133,6 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
-    getEffectResistance
     getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation

@@ -30,6 +30,8 @@ zones[xi.zone.BATALLIA_DOWNS] =
         SPARKLING_LIGHT               = 7350,  -- The ground is sparkling with a strange light.
         SENSE_SOMETHING_LURKING       = 7440,  -- You sense something lurking close by!
         NO_GRASS_GROWING_HERE         = 7488,  -- There is no grass growing here...
+        YOU_ARE_BEING_ATTACKED        = 7625,  -- You are being attacked!
+        YOU_FIND_NOTHING              = 7628,  -- You find nothing.
         PLAYER_OBTAINS_ITEM           = 7700,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7701,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7702,  -- <name> obtains the temporary item: <item>!
@@ -70,6 +72,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         },
 
         AHTU              = 17207657,
+        BADSHAH_OFFSET    = GetFirstID('Badshah'),
         STURMTIGER        = 17207696,
         SUPARNA           = 17207697,
         SUPARNA_FLEDGLING = 17207698,

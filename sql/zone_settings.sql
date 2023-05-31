@@ -340,6 +340,7 @@ INSERT INTO `zone_settings` VALUES (295,5,'127.0.0.1',54230,'Dynamis-Bastok_[D]'
 INSERT INTO `zone_settings` VALUES (296,5,'127.0.0.1',54230,'Dynamis-Windurst_[D]',88,88,88,88,0,0.00,6544);
 INSERT INTO `zone_settings` VALUES (297,5,'127.0.0.1',54230,'Dynamis-Jeuno_[D]',88,88,88,88,0,0.00,6544);
 INSERT INTO `zone_settings` VALUES (298,0,'127.0.0.1',54230,'Walk_of_Echoes_[P1]',186,186,186,186,0,0.00,2048);
+INSERT INTO `zone_settings` VALUES (299,0,'127.0.0.1',54230,'Gwora-Throne_Room',0,0,0,0,0,0.00,0);
 
 -- NOTE: To disable a zone, you must set the zoneip and zoneport to '' and 0 respectively!
 

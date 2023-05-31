@@ -504,7 +504,7 @@ function applyResistanceEffect(caster, target, spell, params)
     end
 
     if effect ~= nil then
-        percentBonus = percentBonus - getEffectResistance(target, effect)
+        percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
     local p = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
@@ -605,53 +605,40 @@ function getMagicResist(magicHitRate)
     return resist
 end
 
--- Returns the amount of resistance the
--- target has to the given effect (stun, sleep, etc..)
--- TODO: Use keyed table and lookup
-function getEffectResistance(target, effect)
-    local effectres = 0
-    local statusres = target:getMod(xi.mod.STATUSRES)
-    if effect == xi.effect.SLEEP_I or effect == xi.effect.SLEEP_II then
-        effectres = xi.mod.SLEEPRES
-    elseif effect == xi.effect.LULLABY then
-        effectres = xi.mod.LULLABYRES
-    elseif effect == xi.effect.POISON then
-        effectres = xi.mod.POISONRES
-    elseif effect == xi.effect.PARALYSIS then
-        effectres = xi.mod.PARALYZERES
-    elseif effect == xi.effect.BLINDNESS then
-        effectres = xi.mod.BLINDRES
-    elseif effect == xi.effect.SILENCE then
-        effectres = xi.mod.SILENCERES
-    elseif effect == xi.effect.PLAGUE or effect == xi.effect.DISEASE then
-        effectres = xi.mod.VIRUSRES
-    elseif effect == xi.effect.PETRIFICATION then
-        effectres = xi.mod.PETRIFYRES
-    elseif effect == xi.effect.BIND then
-        effectres = xi.mod.BINDRES
-    elseif
-        effect == xi.effect.CURSE_I or
-        effect == xi.effect.CURSE_II or
-        effect == xi.effect.BANE
-    then
-        effectres = xi.mod.CURSERES
-    elseif effect == xi.effect.WEIGHT then
-        effectres = xi.mod.GRAVITYRES
-    elseif effect == xi.effect.SLOW or effect == xi.effect.ELEGY then
-        effectres = xi.mod.SLOWRES
-    elseif effect == xi.effect.STUN then
-        effectres = xi.mod.STUNRES
-    elseif effect == xi.effect.CHARM_I or effect == xi.effect.CHARM_II then
-        effectres = xi.mod.CHARMRES
-    elseif effect == xi.effect.AMNESIA then
-        effectres = xi.mod.AMNESIARES
+-- Returns the amount of resistance the target has to the given effect
+local effectToResistanceMod =
+{
+    [xi.effect.SLEEP_I      ] = xi.mod.SLEEPRES,
+    [xi.effect.SLEEP_II     ] = xi.mod.SLEEPRES,
+    [xi.effect.LULLABY      ] = xi.mod.LULLABYRES,
+    [xi.effect.POISON       ] = xi.mod.POISONRES,
+    [xi.effect.PARALYSIS    ] = xi.mod.PARALYZERES,
+    [xi.effect.BLINDNESS    ] = xi.mod.BLINDRES,
+    [xi.effect.SILENCE      ] = xi.mod.SILENCERES,
+    [xi.effect.PLAGUE       ] = xi.mod.VIRUSRES,
+    [xi.effect.DISEASE      ] = xi.mod.VIRUSRES,
+    [xi.effect.PETRIFICATION] = xi.mod.PETRIFYRES,
+    [xi.effect.BIND         ] = xi.mod.BINDRES,
+    [xi.effect.CURSE_I      ] = xi.mod.CURSERES,
+    [xi.effect.CURSE_II     ] = xi.mod.CURSERES,
+    [xi.effect.BANE         ] = xi.mod.CURSERES,
+    [xi.effect.WEIGHT       ] = xi.mod.GRAVITYRES,
+    [xi.effect.SLOW         ] = xi.mod.SLOWRES,
+    [xi.effect.ELEGY        ] = xi.mod.SLOWRES,
+    [xi.effect.STUN         ] = xi.mod.STUNRES,
+    [xi.effect.CHARM_I      ] = xi.mod.CHARMRES,
+    [xi.effect.CHARM_II     ] = xi.mod.CHARMRES,
+    [xi.effect.AMNESIA      ] = xi.mod.AMNESIARES,
+}
+
+xi.magic.getEffectResistance = function(target, effectId)
+    local statusResistance = target:getMod(xi.mod.STATUSRES)
+
+    if effectToResistanceMod[effectId] then
+        statusResistance = statusResistance + effectToResistanceMod[effectId]
     end
 
-    if effectres ~= 0 then
-        return target:getMod(effectres) + statusres
-    end
-
-    return statusres
+    return statusResistance
 end
 
 function handleAfflatusMisery(caster, spell, dmg)

@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         local artifactOffset = 8 * totalCraftedPieces
 
         if currentTask == 0 and totalCraftedPieces ~= 3 then
-            if vanaDay() > player:getCharVar("[BLUAF]RestingDay") then
+            if VanadielUniqueDay() > player:getCharVar("[BLUAF]RestingDay") then
                 if totalCraftedPieces == 2 then
                     currentTask = math.floor(remainingBLUAF / 2) + 1
                     player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
@@ -85,7 +85,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(737 + (artifactOffset - 8)) -- Asleep message, wait until 1 day passes
             end
         elseif currentTask > 0 then
-            local pickupReady = vanaDay() > player:getCharVar("[BLUAF]PaymentDay")
+            local pickupReady = VanadielUniqueDay() > player:getCharVar("[BLUAF]PaymentDay")
             local item = craftingItems[currentTask]
             if craftingStage == 0 then
                 player:startEvent(731 + artifactOffset, 0, item.currency, item.currencyAmt)
@@ -142,7 +142,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 734 + artifactOffset then
         player:confirmTrade()
         player:setCharVar("[BLUAF]CraftingStage", 2)
-        player:setCharVar("[BLUAF]PaymentDay", vanaDay())
+        player:setCharVar("[BLUAF]PaymentDay", VanadielUniqueDay())
         npcUtil.giveKeyItem(player, xi.ki.MAGUS_ORDER_SLIP)
     elseif csid == 736 + artifactOffset and currentTask > 0 then
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
@@ -155,7 +155,7 @@ entity.onEventFinish = function(player, csid, option)
                 -- Player is finished with Lathuya
                 player:setCharVar("[BLUAF]RestingDay", 0)
             else
-                player:setCharVar("[BLUAF]RestingDay", vanaDay())
+                player:setCharVar("[BLUAF]RestingDay", VanadielUniqueDay())
             end
 
             player:delKeyItem(xi.ki.MAGUS_ORDER_SLIP)

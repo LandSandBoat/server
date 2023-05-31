@@ -35,7 +35,11 @@ CGuildMenuBuyUpdatePacket::CGuildMenuBuyUpdatePacket(CCharEntity* PChar, uint8 s
     this->setType(0x82);
     this->setSize(0x08);
 
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    if (PChar == nullptr)
+    {
+        ShowWarning("PChar is null.");
+        return;
+    }
 
     ref<uint16>(0x04) = itemID;
     ref<uint8>(0x06)  = stock;

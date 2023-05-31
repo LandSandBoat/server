@@ -83,7 +83,11 @@ bool CPetEntity::isBstPet()
 
 int32 CPetEntity::getJugSpawnTime()
 {
-    XI_DEBUG_BREAK_IF(m_PetType != PET_TYPE::JUG_PET)
+    if (m_PetType != PET_TYPE::JUG_PET)
+    {
+        ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
+        return 0;
+    }
 
     const auto epoch = m_jugSpawnTime.time_since_epoch();
     return static_cast<int32>(std::chrono::duration_cast<std::chrono::seconds>(epoch).count());
@@ -91,21 +95,33 @@ int32 CPetEntity::getJugSpawnTime()
 
 void CPetEntity::setJugSpawnTime(int32 spawnTime)
 {
-    XI_DEBUG_BREAK_IF(m_PetType != PET_TYPE::JUG_PET);
+    if (m_PetType != PET_TYPE::JUG_PET)
+    {
+        ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
+        return;
+    }
 
     m_jugSpawnTime = std::chrono::system_clock::time_point(std::chrono::duration<int>(spawnTime));
 }
 
 int32 CPetEntity::getJugDuration()
 {
-    XI_DEBUG_BREAK_IF(m_PetType != PET_TYPE::JUG_PET);
+    if (m_PetType != PET_TYPE::JUG_PET)
+    {
+        ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
+        return 0;
+    }
 
     return static_cast<int32>(std::chrono::duration_cast<std::chrono::seconds>(m_jugDuration).count());
 }
 
 void CPetEntity::setJugDuration(int32 seconds)
 {
-    XI_DEBUG_BREAK_IF(m_PetType != PET_TYPE::JUG_PET);
+    if (m_PetType != PET_TYPE::JUG_PET)
+    {
+        ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
+        return;
+    }
 
     m_jugDuration = std::chrono::seconds(seconds);
 }
@@ -146,7 +162,11 @@ const std::string CPetEntity::GetScriptName()
 
 WYVERN_TYPE CPetEntity::getWyvernType()
 {
-    XI_DEBUG_BREAK_IF(PMaster == nullptr);
+    if (PMaster == nullptr)
+    {
+        ShowWarning("PMaster is null.");
+        return WYVERN_TYPE::NONE;
+    }
 
     switch (PMaster->GetSJob())
     {
@@ -271,7 +291,11 @@ bool CPetEntity::shouldDespawn(time_point tick)
 
 void CPetEntity::loadPetZoningInfo()
 {
-    XI_DEBUG_BREAK_IF(!PAI->IsSpawned())
+    if (!PAI->IsSpawned())
+    {
+        ShowWarning("Attempt to load info without Pet spawned.");
+        return;
+    }
 
     if (auto* master = dynamic_cast<CCharEntity*>(PMaster))
     {

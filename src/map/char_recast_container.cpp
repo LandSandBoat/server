@@ -35,7 +35,10 @@ CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar)
 : CRecastContainer(PChar)
 , m_PChar(PChar)
 {
-    XI_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
+    if (m_PChar == nullptr || m_PChar->objtype != TYPE_PC)
+    {
+        ShowError("m_PChar is null or not a Player.");
+    }
 }
 
 /************************************************************************
@@ -145,7 +148,7 @@ RecastList_t* CCharRecastContainer::GetRecastList(RECASTTYPE type)
             return &RecastLootList;
     }
     // Unhandled Scenario
-    XI_DEBUG_BREAK_IF(true);
+    ShowError("Invalid RECASTTYPE received, returning nullptr.");
     return nullptr;
 }
 

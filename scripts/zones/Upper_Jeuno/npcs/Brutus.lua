@@ -18,7 +18,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local saveMySon = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
     local pathOfTheBeastmaster = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
     local wingsOfGold = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
     local scatteredIntoShadow = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
@@ -27,12 +26,8 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    -- PATH OF THE BEASTMASTER
-    if saveMySon == QUEST_COMPLETED and pathOfTheBeastmaster == QUEST_AVAILABLE then
-        player:startEvent(70)
-
     -- WINGS OF GOLD
-    elseif
+    if
         pathOfTheBeastmaster == QUEST_COMPLETED and
         wingsOfGold == QUEST_AVAILABLE and
         mJob == xi.job.BST and
@@ -84,23 +79,14 @@ entity.onTrigger = function(player, npc)
         player:startEvent(151)
     elseif wingsOfGold == QUEST_COMPLETED then
         player:startEvent(134)
-    elseif pathOfTheBeastmaster == QUEST_COMPLETED then
-        player:startEvent(20)
-    else
+    elseif not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS) then
         player:startEvent(66, mLvl)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- PATH OF THE BEASTMASTER
-    if csid == 70 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
-        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER, { title = xi.title.ANIMAL_TRAINER })
-        player:unlockJob(xi.job.BST)
-        player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_BEASTMASTER)
-
     -- WINGS OF GOLD
-    elseif (csid == 137 or csid == 139) and option == 1 then
+    if (csid == 137 or csid == 139) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
         player:setCharVar("wingsOfGold_shortCS", 0)
     elseif

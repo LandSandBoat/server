@@ -230,6 +230,13 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PEntity = mobutils::InstantiateDynamicMob(groupId, groupZoneId, m_pLuaZone->GetID());
     }
 
+    // This can happen if the Target's Zone ID is invalid.
+    if (PEntity == nullptr)
+    {
+        ShowWarning("Failed to insert Dynamic Entity.");
+        return std::nullopt;
+    }
+
     // NOTE: Mob allegiance is the default for NPCs
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 

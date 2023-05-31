@@ -366,6 +366,13 @@ namespace battleutils
         // than the size of the array.
         auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
+        // TODO: Research on mobs level 99+ is still on-going. This line can be removed once the correct formula/skilltype have been established.
+        // max indexed value and level is capped at 99 as stated above for skill_caps table
+        if (level > 99)
+        {
+            level = 99;
+        }
+
         if (level > maxLevel)
         {
             ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
@@ -440,9 +447,9 @@ namespace battleutils
 
     CWeaponSkill* GetWeaponSkill(uint16 WSkillID)
     {
-        XI_DEBUG_BREAK_IF(WSkillID >= MAX_WEAPONSKILL_ID);
         if (WSkillID >= MAX_WEAPONSKILL_ID)
         {
+            ShowError("WSkillID (%d) exceeds MAX_WEAPONSKILL_ID.", WSkillID);
             return nullptr;
         }
 
@@ -459,7 +466,11 @@ namespace battleutils
 
     const std::list<CWeaponSkill*>& GetWeaponSkills(uint8 skill)
     {
-        XI_DEBUG_BREAK_IF(skill >= MAX_SKILLTYPE);
+        if (skill >= MAX_SKILLTYPE)
+        {
+            ShowWarning("Skill (%d) exceeds MAX_SKILLTYPE", skill);
+            return g_PWeaponSkillsList[SKILL_NONE];
+        }
 
         return g_PWeaponSkillsList[skill];
     }
@@ -1748,7 +1759,6 @@ namespace battleutils
             if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
             {
                 auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->GetPower();
-                // ShowDebug("Aquaveil counter: %u", aquaCount);
                 if (aquaCount - 1 == 0) // removes the status, but still prevents the interrupt
                 {
                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_AQUAVEIL);
@@ -2554,7 +2564,6 @@ namespace battleutils
         }
         else
         {
-            // ShowDebug("Accuracy mod before direction checks: %d", offsetAccuracy);
             // Check For Ambush Merit - Melee
             if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
             {
@@ -2612,7 +2621,7 @@ namespace battleutils
 
             if (shouldApplyLevelCorrection)
             {
-                int16 dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
+                int16 dLvl = 0;
                 // Skip penalties for avatars, this should likely be all pets and mobs but I have no proof
                 // of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
                 bool isPet    = PAttacker->objtype == TYPE_PET;
@@ -2626,17 +2635,17 @@ namespace battleutils
 
                 if (isAvatar)
                 {
-                    if (dLvl > 0)
-                    {
-                        // Avatars have a known level difference cap of 38
-                        hitrate += static_cast<int16>(std::min(dLvl, (int16)38) * 2);
-                    }
+                    dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
+                    // Avatars have a known level difference cap of 38
+                    dLvl = std::clamp(dLvl, static_cast<int16>(0), static_cast<int16>(38));
                 }
-                else
+                // Only players are penalized for dLvl
+                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMLevel() < PDefender->GetMLevel())
                 {
-                    // Everything else has no known caps, though it's likely 38 like avatars
-                    hitrate += static_cast<int16>(dLvl * 2);
+                    dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
                 }
+
+                hitrate += static_cast<int16>(dLvl * 2);
             }
 
             // https://www.bg-wiki.com/bg/Hit_Rate
@@ -3796,7 +3805,12 @@ namespace battleutils
             {
                 if (PSCEffect->GetTier() == 0)
                 {
-                    XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
+                    if (!PSCEffect->GetPower())
+                    {
+                        ShowWarning("PSCEffect Power was 0.");
+                        return SUBEFFECT_NONE;
+                    }
+
                     // Previous effect is an opening effect, meaning the power is
                     // actually the ID of the opening weaponskill.  We need all 3
                     // of the possible skillchain properties on the initial link.
@@ -3916,7 +3930,7 @@ namespace battleutils
                 break;
 
             default:
-                XI_DEBUG_BREAK_IF(true);
+                ShowWarning("Invalid Skillchain Type received (%d).", element);
                 return 0;
                 break;
         }
@@ -4004,7 +4018,11 @@ namespace battleutils
         ELEMENT            appliedEle = ELEMENT_NONE;
         int16              resistance = GetSkillchainMinimumResistance(skillchain, PDefender, &appliedEle);
 
-        XI_DEBUG_BREAK_IF(chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5);
+        if (chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5)
+        {
+            ShowWarning("chainLevel (%d) or chainCount (%d) exceeds bounds.", chainLevel, chainCount);
+            return 0;
+        }
 
         // Skill chain damage = (Closing Damage)
         //                      × (Skill chain Level/Number from Table)
@@ -4069,12 +4087,17 @@ namespace battleutils
 
     CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot)
     {
-        XI_DEBUG_BREAK_IF(Slot < SLOT_HEAD || Slot > SLOT_LINK2);
+        if (Slot < SLOT_HEAD || Slot > SLOT_LINK2)
+        {
+            ShowWarning("Invalid Slot Type (%d) passed to function.", static_cast<uint8>(Slot));
+            return nullptr;
+        }
 
         if (PEntity->objtype == TYPE_PC)
         {
             return (((CCharEntity*)PEntity)->getEquip(Slot));
         }
+
         return nullptr;
     }
 
@@ -6258,7 +6281,12 @@ namespace battleutils
 
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {
-        XI_DEBUG_BREAK_IF(PTarget == nullptr);
+        if (PTarget == nullptr)
+        {
+            ShowWarning("PTarget is null.");
+            return false;
+        }
+
         CBattleEntity* PMaster = PEntity;
 
         if (PEntity->PMaster != nullptr)
@@ -6558,14 +6586,15 @@ namespace battleutils
             {
                 recast = static_cast<int32>(recast * 0.5f);
             }
+
             // The following modifiers are not multiplicative - as such they must be applied last.
-            // ShowDebug("Recast before reduction: %u", recast);
             if (PEntity->objtype == TYPE_PC)
             {
                 if (PSpell->getID() == SpellID::Magic_Finale) // apply Finale recast merits
                 {
                     recast -= ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_FINALE_RECAST, (CCharEntity*)PEntity) * 1000;
                 }
+
                 if (PSpell->getID() == SpellID::Foe_Lullaby || PSpell->getID() == SpellID::Foe_Lullaby_II || PSpell->getID() == SpellID::Horde_Lullaby ||
                     PSpell->getID() == SpellID::Horde_Lullaby_II) // apply Lullaby recast merits
                 {
@@ -6573,7 +6602,6 @@ namespace battleutils
                 }
             }
             recast -= PEntity->getMod(Mod::SONG_RECAST_DELAY) * 1000;
-            // ShowDebug("Recast after merit reduction: %u", recast);
         }
 
         if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))

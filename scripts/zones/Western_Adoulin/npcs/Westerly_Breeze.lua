@@ -60,7 +60,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and
-        not player:needToZone() and vanaDay() > player:getCharVar("Westerly_Breeze_Wait")
+        not player:needToZone() and VanadielUniqueDay() > player:getCharVar("Westerly_Breeze_Wait")
     then
         if
             amqtr ~= QUEST_COMPLETED and

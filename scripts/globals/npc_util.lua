@@ -415,7 +415,7 @@ end
         { xi.ki.PALBOROUGH_MINES_LOGS }
         { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
 --]]
-function npcUtil.giveKeyItem(player, keyitems)
+function npcUtil.giveKeyItem(player, keyitems, msgId)
     local ID = zones[player:getZoneID()]
 
     -- create table of keyitems
@@ -430,10 +430,15 @@ function npcUtil.giveKeyItem(player, keyitems)
     end
 
     -- give key items to player, with message
-    for _, v in pairs(givenKeyItems) do
-        if not player:hasKeyItem(v) then
-            player:addKeyItem(v)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+    for _, keyItemId in ipairs(givenKeyItems) do
+        if not player:hasKeyItem(keyItemId) then
+            player:addKeyItem(keyItemId)
+
+            if msgId then
+                player:messageSpecial(msgId, keyItemId)
+            else
+                player:messageSpecial(ID.text.KEYITEM_OBTAINED, keyItemId)
+            end
         end
     end
 

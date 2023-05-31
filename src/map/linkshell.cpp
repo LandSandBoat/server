@@ -402,7 +402,12 @@ namespace linkshell
     // add character to online linkshell list, used to send messages
     bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum)
     {
-        XI_DEBUG_BREAK_IF(PChar == nullptr);
+        if (PChar == nullptr)
+        {
+            ShowWarning("PChar is null.");
+            return false;
+        }
+
         if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
         {
             CLinkshell* PLinkshell = nullptr;
@@ -425,7 +430,12 @@ namespace linkshell
     // remove online member so we don't try to send messages to them
     bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell)
     {
-        XI_DEBUG_BREAK_IF(PChar == nullptr);
+        if (PChar == nullptr)
+        {
+            ShowWarning("PChar is null.");
+            return false;
+        }
+
         if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
         {
             try

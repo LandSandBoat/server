@@ -188,9 +188,23 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+    if (PChar == nullptr)
+    {
+        ShowWarning("PChar is null.");
+        return;
+    }
+
+    if (PChar->loc.zone != nullptr)
+    {
+        ShowWarning("Zone was not null for %s.", PChar->GetName());
+        return;
+    }
+
+    if (PChar->PTreasurePool != nullptr)
+    {
+        ShowWarning("PTreasurePool was not empty for %s.", PChar->GetName());
+        return;
+    }
 
     // return char to instance (d/c or logout)
     if (!PChar->PInstance)
@@ -245,7 +259,15 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         uint16 zoneid = luautils::OnInstanceLoadFailed(this);
 
-        zoneutils::GetZone(zoneid >= MAX_ZONEID ? PChar->loc.prevzone : zoneid)->IncreaseZoneCounter(PChar);
+        CZone* PZone = zoneutils::GetZone(zoneid);
+        if (PZone)
+        {
+            PZone->IncreaseZoneCounter(PChar);
+        }
+        else
+        {
+            zoneutils::GetZone(PChar->loc.prevzone)->IncreaseZoneCounter(PChar);
+        }
     }
 }
 

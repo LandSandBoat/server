@@ -204,7 +204,11 @@ int32 CTCPRequestPacket::CheckPacketHash()
 
 uint8 CTCPRequestPacket::GetPacketType()
 {
-    XI_DEBUG_BREAK_IF(m_data == nullptr)
+    if (m_data == nullptr)
+    {
+        ShowError("m_data is nullptr.");
+        return 0;
+    }
 
     return m_data[0x0B];
 }

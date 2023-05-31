@@ -301,5 +301,6 @@ List of known zones
   295 - 127 - Dynamis - Bastok [D]
   296 - 128 - Dynamis - Windurst [D]
   297 - 129 - Dynamis - Jeuno [D]
-  298 - 130 - Walk of Echoes [P1]
+  298 - 12A - Walk of Echoes [P1]
+  299 - 12B - Gwora - Throne Room
 

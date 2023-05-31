@@ -294,8 +294,9 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         bin2hex(session_key, (uint8*)PSession->blowfish.key, 20);
 
         uint16 destination = PChar->loc.destination;
+        CZone* destZone    = zoneutils::GetZone(destination);
 
-        if (destination >= MAX_ZONEID)
+        if (destination >= MAX_ZONEID || destZone == nullptr)
         {
             // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
             ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
@@ -303,7 +304,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
             charutils::HomePoint(PChar);
         }
 
-        zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
+        destZone->IncreaseZoneCounter(PChar);
 
         PChar->m_ZonesList[PChar->getZone() >> 3] |= (1 << (PChar->getZone() % 8));
 
@@ -311,6 +312,12 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());
+
+        if (currentZone == nullptr)
+        {
+            ShowWarning("currentZone was null for Zone ID %d.", PChar->getZone());
+            return;
+        }
 
         sql->Query(fmtQuery, PChar->targid, session_key, currentZone->GetIP(), PSession->client_port, PChar->id);
 
@@ -955,6 +962,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 0x07: // weaponskill
         {
+            if (!PChar->PAI->IsEngaged() && settings::get<bool>("map.PREVENT_UNENGAGED_WS")) // Prevent Weaponskill usage if player isn't engaged.
+            {
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_WS));
+                return;
+            }
+
             uint16 WSkillID = data.ref<uint16>(0x0C);
             PChar->PAI->WeaponSkill(TargID, WSkillID);
         }
@@ -2934,9 +2947,6 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 CItem* PItem = PChar->UContainer->GetItem(slotID);
 
-                // ShowInfo("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
-                // ShowInfo("ItemId %u", PItem->getID());
-
                 if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 0xB9));
@@ -3404,6 +3414,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
+    PChar->retriggerLatentsAfterPacketParsing = true; // retrigger all latents after all equip packets are parsed
 }
 
 /************************************************************************
@@ -4926,6 +4937,21 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // If the player is already crafting, don't allow them to craft.
+    // This prevents packet injection based multi-craft, or time-based exploits.
+    if (PChar->animation == ANIMATION_SYNTH)
+    {
+        return;
+    }
+
+    // Force full synth duration wait no matter the synth animation length
+    // Thus players can synth on whatever fps they want
+    if (PChar->m_LastSynthTime + 15s > server_clock::now())
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
+        return;
+    }
+
     // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
     // It should be replaced by something more robust or more stateful as soon as is reasonable
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
@@ -4957,12 +4983,6 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
     // End temporary additions
-
-    if (PChar->m_LastSynthTime + 10s > server_clock::now())
-    {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
-        return;
-    }
 
     PChar->CraftContainer->Clean();
 
@@ -6438,6 +6458,13 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
+    // Prevent sitting while crafting.
+    if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+    {
+        return;
+    }
+
     if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
@@ -7372,8 +7399,17 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
-    XI_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
+    if (PChar->BazaarID.id != 0)
+    {
+        ShowWarning("BazaarID.id is not equal to zero.");
+        return;
+    }
+
+    if (PChar->BazaarID.targid != 0)
+    {
+        ShowWarning("BazaarID.targid is not equal to zero.");
+        return;
+    }
 
     uint32 charid = data.ref<uint32>(0x04);
 

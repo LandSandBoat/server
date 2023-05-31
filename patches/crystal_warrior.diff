@@ -187,19 +187,6 @@ index 718518c0ff..408fd8f556 100644
          {
              return;
          }
-diff --git a/src/map/lua/lua_baseentity.cpp b/src/map/lua/lua_baseentity.cpp
-index 886b81aa05..c09f477de2 100644
---- a/src/map/lua/lua_baseentity.cpp
-+++ b/src/map/lua/lua_baseentity.cpp
-@@ -12507,7 +12507,7 @@ bool CLuaBaseEntity::hasValidJugPetItem()
- 
-     CItemWeapon* PItem = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(m_PBaseEntity)->getEquip(SLOT_AMMO));
- 
--    if (PItem != nullptr && PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI)
-+    if (PItem != nullptr && (PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI) || (PItem->getSubSkillType() == SUBSKILL_DSANCHEZ))
-     {
-         return true;
-     }
 diff --git "a/src/map/battlefield.cpp" "b/src/map/battlefield.cpp"
 index 4b05a8e9a8..d28ff46a3f 100644
 --- "a/src/map/battlefield.cpp"
