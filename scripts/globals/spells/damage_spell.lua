@@ -382,10 +382,7 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
-xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillType, spellElement, statUsed)
-    -- Get Bonus Magic Accruacy for the spell
-    local bonusMacc = pTable[spell:getID()][bonusSpellMacc]
-
+xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     -- Get Caster Magic Accuracy.
     local magicAcc = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
 
@@ -823,6 +820,8 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local spellGroup   = spell:getSpellGroup()
     local spellElement = spell:getElement()
     local statUsed     = pTable[spellId][stat]
+    local bonusMacc    = pTable[spellId][bonusSpellMacc]
+
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statUsed)
@@ -830,7 +829,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
     local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
-    local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed)
+    local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target, spell, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellGroup, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
