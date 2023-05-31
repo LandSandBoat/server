@@ -479,6 +479,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 if (PMob->PParty != nullptr)
                 {
                     PMob->PParty->RemoveMember(PMob);
+                    PMob->PParty = nullptr;
                 }
 
                 if (party == nullptr)

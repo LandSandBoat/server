@@ -67,9 +67,9 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
 
     for _, mod in pairs(attMods[attackType]) do
         if mod.min ~= nil then
-            dmgTakenMod = dmgTakenMod + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max)
+            dmgTakenMod = dmgTakenMod * (1 + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max))
         else
-            dmgTakenMod = dmgTakenMod + (target:getMod(mod.mod) / 10000)
+            dmgTakenMod = dmgTakenMod * (1 + (target:getMod(mod.mod) / 10000))
         end
     end
 
@@ -82,7 +82,7 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
     then
         dmgTakenMod = dmgTakenMod * ((target:getMod(dmgMods[damageType])) / 1000)
     elseif damageType and dmgMods[damageType] then -- This is for elemental SDTs only
-        dmgTakenMod = dmgTakenMod + (target:getMod(dmgMods[damageType]) / 10000)
+        dmgTakenMod = dmgTakenMod * (1 + (target:getMod(dmgMods[damageType]) / 10000))
     end
 
     return dmgTakenMod
