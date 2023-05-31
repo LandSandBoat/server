@@ -34,8 +34,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -78,7 +78,10 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     if xi.settings.main.ENABLE_WOTG == 1 then
-        if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
+        if
+            os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and
+            weather == xi.weather.FOG
+        then
             local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
             local count = 1
 

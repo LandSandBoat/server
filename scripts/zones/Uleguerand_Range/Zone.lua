@@ -21,8 +21,8 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0, 3, 0)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -35,6 +35,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         player:setPos(363.025, 16, -60, 12)
     end
+
     return cs
 end
 
