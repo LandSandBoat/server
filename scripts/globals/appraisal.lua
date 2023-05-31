@@ -1801,7 +1801,6 @@ xi.appraisal.appraisalItems =
             },
         },
 
-
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             items =
