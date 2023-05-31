@@ -489,8 +489,8 @@ xi.instance.updateInstanceTime = function(instance, elapsed, text)
         (
             wipeTime ~= 0 and
             (elapsed - wipeTime) / 1000 > 180
-        )
-        or players == nil
+        ) or
+        players == nil
     then
         instance:fail()
         return
