@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("wildRagePower", 1)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 10)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
 
     mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORPION_MIMIC_STOP", function(mobArg, skillID)
         local bf = mobArg:getBattlefield():getArea()
@@ -25,8 +25,9 @@ entity.onMobSpawn = function(mob)
                     mobArg:getID() ~= allyID and
                     mimic:isAlive() and mimic ~= nil and
                     mimic:getLocalVar("mimicTimer") < os.time() and
-                    mobArg:checkDistance(mimic) < 15 and not
-                    (mimic:hasStatusEffect(xi.effect.SLEEP_I) or mimic:hasStatusEffect(xi.effect.SLEEP_II))
+                    mobArg:checkDistance(mimic) < 15 and
+                    not (mimic:hasStatusEffect(xi.effect.SLEEP_I) or
+                    mimic:hasStatusEffect(xi.effect.SLEEP_II))
                 then
                     mobArg:getZone():setLocalVar(string.format("mimicControl_%s", bf), 1)
                     mobArg:timer(5000, function(mimicArg)
@@ -49,7 +50,6 @@ entity.onMobSpawn = function(mob)
                 mobArg1:setAutoAttackEnabled(true)
             end)
         end
-
     end)
 end
 
