@@ -12,7 +12,7 @@ xi.settings = xi.settings or {}
 xi.settings.login =
 {
     -- Expected Client version (wrong version cannot log in)
-    CLIENT_VER = "30230328_0",
+    CLIENT_VER = "30230518_0",
 
     -- 0 - disabled (every version allowed)
     -- 1 - enabled - strict (only exact CLIENT_VER allowed)
@@ -26,7 +26,7 @@ xi.settings.login =
     MAINT_MODE = 0,
 
     -- Logging of user IP address to database (true/false)
-    LOG_USER_IP = false,
+    LOG_USER_IP = true,
 
     -- Allow account creation via the loader (true/false)
     ACCOUNT_CREATION = true,
