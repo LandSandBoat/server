@@ -38,18 +38,6 @@ local stealableSPEffects =
 -----------------------------------
 -- Local Functions
 -----------------------------------
-local function getTHFlvl(player)
-    local thfLevel = 0
-
-    if player:getMainJob() == xi.job.THF then
-        thfLevel = player:getMainLvl()
-    else
-        thfLevel = player:getSubLvl()
-    end
-
-    return thfLevel
-end
-
 local function processDebuff(player, target, ability, debuff)
     local power = 10
 
@@ -207,7 +195,7 @@ xi.job_utils.thief.useConspirator = function(player, target, ability)
 end
 
 xi.job_utils.thief.useDespoil = function(player, target, ability, action)
-    local level         = getTHFlvl(player)
+    local level         = utils.getActiveJobLevel(player, xi.job.THF)
     local despoilMod    = player:getMod(xi.mod.DESPOIL)
     local despoilChance = 50 + despoilMod * 2 + level - target:getMainLvl() -- Same math as Steal
 
@@ -328,7 +316,7 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
 end
 
 xi.job_utils.thief.useMug = function(player, target, ability, action)
-    local thfLevel = getTHFlvl(player)
+    local thfLevel = utils.getActiveJobLevel(player, xi.job.THF)
     local gil      = 0
     -- TODO: Need to verify if there's a message associated with this
     local jpValue = player:getJobPointLevel(xi.jp.MUG_EFFECT)
@@ -397,7 +385,7 @@ xi.job_utils.thief.useSneakAttack = function(player, target, ability)
 end
 
 xi.job_utils.thief.useSteal = function(player, target, ability, action)
-    local thfLevel    = getTHFlvl(player)
+    local thfLevel    = utils.getActiveJobLevel(player, xi.job.THF)
     local stolen      = action:getParam(target:getID())
     local stealMod    = player:getMod(xi.mod.STEAL)
     local stealChance = 50 + stealMod * 2 + thfLevel - target:getMainLvl()
