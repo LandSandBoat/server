@@ -7,6 +7,7 @@
 -----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 local abilityObject = {}
 
@@ -25,13 +26,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     -- Yes, even Blade Bash deals damage dependant of Dark Knight level
-    local damage = 0
-
-    if player:getMainJob() == xi.job.DRK then
-        damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
-    elseif player:getSubJob() == xi.job.DRK then
-        damage = math.floor(((player:getSubLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
-    end
+    local jobLevel = utils.getActiveJobLevel(player, xi.job.DRK)
+    local damage   = math.floor(player:getMod(xi.mod.WEAPON_BASH) + (jobLevel + 11) / 4)
 
     -- Calculating and applying Blade Bash damage
     damage = utils.stoneskin(target, damage)
