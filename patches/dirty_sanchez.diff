@@ -21,7 +21,7 @@ index 10211143373..6efd3050ca5 100644
      CItemWeapon* PItem = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(m_PBaseEntity)->getEquip(SLOT_AMMO));
  
 -    if (PItem != nullptr && PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI)
-+    if (PItem != nullptr && PItem->getSubSkillType() != nullptr && ((PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI) || (PItem->getSubSkillType() == SUBSKILL_DSANCHEZ)))
++    if (PItem != nullptr && PItem->getSubSkillType() > 0 && ((PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI) || (PItem->getSubSkillType() == SUBSKILL_DSANCHEZ)))
      {
          return true;
      }
