@@ -202,7 +202,7 @@ local pTable =
 -----------------------------------
 -- Basic Functions
 -----------------------------------
-xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, skillType, statUsed)
+xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillType, statUsed)
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
     local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
@@ -314,7 +314,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
 end
 
 -- Calculate: Multiple Target Damage Reduction (MTDR)
-xi.spells.damage.calculateMTDR = function(caster, target, spell)
+xi.spells.damage.calculateMTDR = function(spell)
     local multipleTargetReduction = 1 -- The variable we want to calculate.
     local targets                 = spell:getTotalTargets()
 
@@ -329,7 +329,7 @@ xi.spells.damage.calculateMTDR = function(caster, target, spell)
     return multipleTargetReduction
 end
 
-xi.spells.damage.calculateEleStaffBonus = function(caster, spell, spellElement)
+xi.spells.damage.calculateEleStaffBonus = function(caster, spellElement)
     local eleStaffBonus = caster:getMod(strongAffinityDmg[spellElement])
 
     if eleStaffBonus > 0 then
@@ -341,7 +341,7 @@ xi.spells.damage.calculateEleStaffBonus = function(caster, spell, spellElement)
     return eleStaffBonus
 end
 
-xi.spells.damage.calculateMagianAffinity = function(caster, spell)
+xi.spells.damage.calculateMagianAffinity = function()
     -- TODO: IMPLEMENT MAGIAN TRIALS AFFINITY SYSTEM, which could be as simple as introducing a new modifier. Out of the scope of this rewrite, for now
     local magianAffinity = 1
 
@@ -352,7 +352,7 @@ xi.spells.damage.calculateMagianAffinity = function(caster, spell)
 end
 
 -- Elemental Specific Damage Taken (Elemental SDT)
-xi.spells.damage.calculateSDT = function(caster, target, spell, spellElement)
+xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdt    = 1 -- The variable we want to calculate
     local sdtMod = 0
 
@@ -398,7 +398,7 @@ xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillTyp
     return resist
 end
 
-xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellElement)
+xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
     local magicBurst         = 1 -- The variable we want to calculate
     local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
@@ -472,7 +472,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     return magicBurstBonus
 end
 
-xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellId, spellElement)
+xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement)
     local dayAndWeather = 1 -- The variable we want to calculate
     local weather       = caster:getWeather()
     local dayElement    = VanadielDayElement()
@@ -535,7 +535,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellI
 end
 
 -- Magic Attack Bonus VS Magic Defense Bonus
-xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spell, spellId, skillType, spellElement)
+xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, skillType, spellElement)
     local magicBonusDiff = 1 -- The variable we want to calculate
     local casterJob      = caster:getMainJob()
     local mab            = caster:getMod(xi.mod.MATT)
@@ -623,7 +623,7 @@ end
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
-xi.spells.damage.calculateTMDA = function(caster, target, spellElement)
+xi.spells.damage.calculateTMDA = function(target, spellElement)
     local damageType                  = xi.damageType.ELEMENTAL + spellElement
     local targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- Check for Liement.
 
@@ -649,7 +649,7 @@ xi.spells.damage.calculateTMDA = function(caster, target, spellElement)
 end
 
 -- Divine Emblem applies its own damage multiplier.
-xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, target, spell)
+xi.spells.damage.calculateDivineEmblemMultiplier = function(caster)
     local divineEmblemMultiplier = 1
 
     if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) then
@@ -661,7 +661,7 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, target, spel
 end
 
 -- Ebullience applies an entirely separate multiplier.
-xi.spells.damage.calculateEbullienceMultiplier = function(caster, target, spell)
+xi.spells.damage.calculateEbullienceMultiplier = function(caster)
     local ebullienceMultiplier = 1
 
     if caster:hasStatusEffect(xi.effect.EBULLIENCE) then
@@ -673,7 +673,7 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster, target, spell)
 end
 
 -- CUSTOM function supported in scripts/globals/settings.lua
-xi.spells.damage.calculateSkillTypeMultiplier = function(caster, target, spell, skillType)
+xi.spells.damage.calculateSkillTypeMultiplier = function(skillType)
     local skillTypeMultiplier = 1
 
     if skillType == xi.skill.ELEMENTAL_MAGIC then
@@ -689,7 +689,7 @@ xi.spells.damage.calculateSkillTypeMultiplier = function(caster, target, spell, 
     return skillTypeMultiplier
 end
 
-xi.spells.damage.calculateNinSkillBonus = function(caster, target, spell, spellId, skillType)
+xi.spells.damage.calculateNinSkillBonus = function(caster, spellId, skillType)
     local ninSkillBonus = 1
 
     if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
@@ -707,7 +707,7 @@ xi.spells.damage.calculateNinSkillBonus = function(caster, target, spell, spellI
     return ninSkillBonus
 end
 
-xi.spells.damage.calculateNinFutaeBonus = function(caster, target, spell, skillType)
+xi.spells.damage.calculateNinFutaeBonus = function(caster, skillType)
     local ninFutaeBonus = 1
 
     if
@@ -721,7 +721,7 @@ xi.spells.damage.calculateNinFutaeBonus = function(caster, target, spell, skillT
     return ninFutaeBonus
 end
 
-xi.spells.damage.calculateUndeadDivinePenalty = function(caster, target, spell, skillType)
+xi.spells.damage.calculateUndeadDivinePenalty = function(target, skillType)
     local undeadDivinePenalty = 1
 
     if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
@@ -744,7 +744,7 @@ xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
     return scarletDeliriumMultiplier
 end
 
-xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
+xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
 
     -- Calculate chance for spell absorption.
@@ -765,7 +765,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, 
 end
 
 -- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
-xi.spells.damage.calculateNukeWallFactor = function(caster, target, spell, spellElement, finalDamage)
+xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalDamage)
     local nukeWallFactor = 1
 
     -- Initial check.
@@ -822,27 +822,26 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local statUsed     = pTable[spellId][stat]
     local bonusMacc    = pTable[spellId][bonusSpellMacc]
 
-
     -- Variables/steps to calculate finalDamage.
-    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statUsed)
-    local multipleTargetReduction     = xi.spells.damage.calculateMTDR(caster, target, spell)
-    local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
-    local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
-    local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
+    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, skillType, statUsed)
+    local multipleTargetReduction     = xi.spells.damage.calculateMTDR(spell)
+    local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spellElement)
+    local magianAffinity              = xi.spells.damage.calculateMagianAffinity()
+    local sdt                         = xi.spells.damage.calculateSDT(target, spellElement)
     local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
-    local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target, spell, spellElement)
+    local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(target, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellGroup, spellElement)
-    local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
-    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spellElement)
-    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, spellElement)
-    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, target, spell)
-    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, target, spell)
-    local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(caster, target, spell, skillType)
-    local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
-    local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, target, spell, skillType)
-    local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellId, spellElement)
+    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
+    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
+    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster)
+    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster)
+    local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
+    local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, spellId, skillType)
+    local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
+    local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(target, skillType)
     local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
-    local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
+    local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spellElement)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -865,7 +864,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
-    local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(caster, target, spell, spellElement, finalDamage)
+    local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, finalDamage)
 
     finalDamage = math.floor(finalDamage * nukeWallFactor)
 
