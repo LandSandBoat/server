@@ -2,18 +2,14 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Staff
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("scripts/globals/status")
+mixins = { require("scripts/mixins/families/animated_weapons") }
+mixinOptions = { item = xi.items.CELESTIAL_FRAGMENT }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(115, 1582, 1000)
-    else
-        SetDropRate(115, 1582, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_STAFF_DIALOG)
 end
 

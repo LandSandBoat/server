@@ -2,18 +2,14 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Gun
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("scripts/globals/status")
+mixins = { require("scripts/mixins/families/animated_weapons") }
+mixinOptions = { item = xi.items.ETHEREAL_FRAGMENT }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(105, 1585, 1000)
-    else
-        SetDropRate(105, 1585, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_GUN_DIALOG)
 end
 

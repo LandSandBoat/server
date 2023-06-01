@@ -2,18 +2,14 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Shield
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("scripts/globals/status")
+mixins = { require("scripts/mixins/families/animated_weapons") }
+mixinOptions = { item = xi.items.SUPERNAL_FRAGMENT }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(113, 1822, 1000)
-    else
-        SetDropRate(113, 1822, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_SHIELD_DIALOG)
 end
 

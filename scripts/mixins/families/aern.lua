@@ -31,7 +31,6 @@ g_mixins.families.aern = function(aernMob)
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         end
 
-        local dropid   = mob:getDropID()
         local target   = mob:getTarget()
         local targetID = 0
         local masterID = 0
@@ -60,7 +59,6 @@ g_mixins.families.aern = function(aernMob)
             end
 
             mobArg:setHP(mob:getMaxHP())
-            mobArg:setDropID(dropid)
             mobArg:setAnimationSub(3)
             mobArg:setLocalVar("AERN_RERAISES", currReraise + 1)
             mobArg:resetAI()

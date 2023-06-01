@@ -51,15 +51,20 @@ enum DROP_TYPE
 struct DropItem_t
 {
     DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate);
+    DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate, bool hasFixedRate);
     uint8  DropType;
     uint16 ItemID;
     uint16 DropRate;
+    bool   hasFixedRate;
 };
 
 struct DropGroup_t
 {
     DropGroup_t(uint16 GroupRate);
+    DropGroup_t(uint16 GroupRate, bool hasFixedRate);
+
     uint16                  GroupRate;
+    bool                    hasFixedRate;
     std::vector<DropItem_t> Items;
 };
 

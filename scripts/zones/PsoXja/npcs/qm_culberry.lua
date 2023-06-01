@@ -5,6 +5,7 @@
 -- !pos -270.063 31.395 256.812 9
 -----------------------------------
 local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -22,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, ID.mob.GOLDEN_TONGUED_CULBERRY)
     then
         player:confirmTrade()
-        SetDropRate(1190, 13145, pendantChance)
+        GetMobByID(ID.mob.GOLDEN_TONGUED_CULBERRY):setLocalVar("DropRate", pendantChance)
     end
 end
 

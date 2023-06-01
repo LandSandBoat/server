@@ -3,6 +3,7 @@
 --  Mob: Ix'aern MNK
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+require("scripts/globals/items")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/items")
@@ -21,6 +22,7 @@ local bracerMode = function(mob, qnAern1, qnAern2)
     if qnAern2:isAlive() then
         qnAern2:useMobAbility(689) -- Benediction
     end
+
     mob:addMod(xi.mod.ATT, 200)
 
     for i = mobID + 1, mobID + 2 do
@@ -31,26 +33,25 @@ local bracerMode = function(mob, qnAern1, qnAern2)
             pet:setDelay(2100)
         end
     end
+
     -- slightly delay adding local var to avoid adding bracers to Ix'Mnk while Hundred Fists is still active.
     mob:timer(3000, function(mobArg)
         mobArg:setLocalVar("enableBracers", 1)
     end)
 end
 
+entity.onMobInitialize = function(mob)
+    mob:addListener("ITEM_DROPS", "ITEM_DROPS_IXAERN_MNK", function(mobArg, loot)
+        local rate = mob:getLocalVar("[SEA]IxAern_DropRate")
+        loot:addGroupFixed(rate,
+        {
+            { item = xi.items.DEED_OF_PLACIDITY, weight = 750 },
+            { item = xi.items.VICE_OF_ANTIPATHY, weight = 250 },
+        })
+    end)
+end
+
 entity.onMobSpawn = function(mob)
-    -- adjust drops based on number of HQ Aern Organs traded to QM
-    local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
-    local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
-    if math.random(0, 3) > 0 then
-        SetDropRate(2845, xi.items.DEED_OF_PLACIDITY, chance * 10) -- Deed Of Placidity
-        SetDropRate(2845, xi.items.VICE_OF_ANTIPATHY, 0)
-    else
-        SetDropRate(2845, xi.items.DEED_OF_PLACIDITY, 0)
-        SetDropRate(2845, xi.items.VICE_OF_ANTIPATHY, chance * 10) -- Vice of Antipathy
-    end
-
-    qm:setLocalVar("[SEA]IxAern_DropRate", 0)
-
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
     mob:setLocalVar("enableBracers", 0)
 end
@@ -71,8 +72,12 @@ entity.onMobFight = function(mob, target)
             bracerMode(mob, qnAern1, qnAern2)
         end
     end
+
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
-    if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and mob:getLocalVar("enableBracers") == 1 then
+    if
+        not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and
+        mob:getLocalVar("enableBracers") == 1
+    then
         mob:setAnimationSub(2) -- Bracers
     end
 end

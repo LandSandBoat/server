@@ -38,11 +38,27 @@ DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate)
 : DropType(DropType)
 , ItemID(ItemID)
 , DropRate(DropRate)
+, hasFixedRate(false)
+{
+}
+
+DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate, bool hasFixedRate)
+: DropType(DropType)
+, ItemID(ItemID)
+, DropRate(DropRate)
+, hasFixedRate(hasFixedRate)
 {
 }
 
 DropGroup_t::DropGroup_t(uint16 GroupRate)
 : GroupRate(GroupRate)
+, hasFixedRate(false)
+{
+}
+
+DropGroup_t::DropGroup_t(uint16 GroupRate, bool hasFixedRate)
+: GroupRate(GroupRate)
+, hasFixedRate(hasFixedRate)
 {
 }
 
