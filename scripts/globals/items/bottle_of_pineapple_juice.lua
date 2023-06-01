@@ -3,7 +3,6 @@
 -- Item: Pineapple Juice
 -- Item Effect: Restores 80 MP over 240 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

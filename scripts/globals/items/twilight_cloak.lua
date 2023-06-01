@@ -3,8 +3,6 @@
 -- Equip: Twilight Cloak
 -- Able to cast "Impact"
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 -- Item: Zoolater Hat
 -- Item Effect: Pet gets meditate
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

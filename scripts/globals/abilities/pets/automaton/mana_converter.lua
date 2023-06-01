@@ -2,8 +2,6 @@
 -- Mana Converter
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}

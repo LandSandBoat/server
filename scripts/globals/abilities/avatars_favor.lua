@@ -1,8 +1,6 @@
 ---------------------------------------------
 -- Avatars Favor - Ability
 ---------------------------------------------
-require("scripts/globals/status")
----------------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

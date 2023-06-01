@@ -3,7 +3,6 @@
 -- Item: bottle_of_swiftshot_drink
 -- Item Effect: Double Shot +100
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ELEMENTAL_SFORZO
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

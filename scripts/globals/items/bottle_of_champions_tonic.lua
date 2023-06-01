@@ -3,7 +3,6 @@
 -- Item: bottle_of_champions_tonic
 -- Item Effect: Haste (Magic) 15% - CRITHITRATE 3%
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

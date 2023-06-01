@@ -5,8 +5,6 @@
 -- 15% chance to use bomb_toss_suicide if bomb_toss is picked (50%)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

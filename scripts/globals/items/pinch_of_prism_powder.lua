@@ -3,9 +3,6 @@
 -- Prism Powder
 -- When applied, it makes things invisible.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

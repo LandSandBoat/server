@@ -7,7 +7,6 @@
 -- MP % 10 (cap 85)
 -- Agility -1
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

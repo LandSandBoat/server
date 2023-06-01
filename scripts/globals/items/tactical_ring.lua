@@ -4,8 +4,6 @@
 -- Item Effect: Regain 20
 -- Duration: 2 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

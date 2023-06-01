@@ -21,7 +21,7 @@
 
 enum class Mod
 {
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     NONE = 0,       // Essential, but does nothing :)
                     //  NAME                  = ID, // Comment
@@ -977,7 +977,7 @@ enum class Mod
     TANDEM_STRIKE = 2000, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW   = 2001, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
 
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.

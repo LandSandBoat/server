@@ -12,7 +12,6 @@
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
 ------------------------------------------------------------------------------
 require("scripts/globals/teleports") -- For warp weapon proc.
-require("scripts/globals/status")
 require("scripts/globals/magic") -- For resist functions
 require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")

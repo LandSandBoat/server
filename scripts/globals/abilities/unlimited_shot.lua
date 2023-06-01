@@ -5,8 +5,6 @@
 -- Recast Time: 3:00
 -- Duration: 1:00 or One Successful Ranged Attack.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

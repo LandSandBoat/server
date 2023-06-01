@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- Enhanced "Cure" potency
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

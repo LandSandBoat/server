@@ -3,8 +3,6 @@
 -- Item: Antacid
 -- Item Effect: This medicine helps remove meal effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

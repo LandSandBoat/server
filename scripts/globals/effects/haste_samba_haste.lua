@@ -2,8 +2,6 @@
 -- xi.effect.HASTE_SAMBA_HASTE
 -- JA Haste 5-10%
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

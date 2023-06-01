@@ -8,7 +8,6 @@
 -- Defense +17% - 50 Cap
 -- HP 5% - 50 Cap
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

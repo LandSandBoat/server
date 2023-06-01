@@ -3,8 +3,6 @@
 -- Item: Bottle of Hallowed Water
 -- Item Effect: Removes curse. Better chance to remove doom.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

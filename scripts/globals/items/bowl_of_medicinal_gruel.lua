@@ -8,7 +8,6 @@
 -- Ranged Accuracy % 15 (cap 15)
 -- HP Recovered While Healing 4
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -4,8 +4,6 @@
 -- Obtained: SMN Level 87
 -- Recast Time: 00:05:00
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Magian Trial Objectives
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 -----------------------------------
 

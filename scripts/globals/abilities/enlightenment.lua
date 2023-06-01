@@ -6,7 +6,6 @@
 -- Duration: 0:01:00 or 1 Spell, whichever occurs first
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

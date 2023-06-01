@@ -3,7 +3,6 @@
 -- ID 5368
 -- Unlocks hand equipment
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
 local itemObject = {}

@@ -6,7 +6,6 @@
 -- HP 10
 -- Agility 1
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

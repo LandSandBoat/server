@@ -3,8 +3,6 @@
 --  Scroll of Instant Protect
 --  Grants the effect of Protect
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

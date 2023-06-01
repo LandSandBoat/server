@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- From GoV
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
