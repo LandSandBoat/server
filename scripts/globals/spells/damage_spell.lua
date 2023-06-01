@@ -829,6 +829,8 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spell, spell
     if skillType == xi.skill.NINJUTSU then
         -- Ninja Category 2 merits.
         mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
+        -- Ninja nuke bonus (for example from Koga Hatsuburi)
+        mab = mab + caster:getMod(xi.mod.NIN_NUKE_BONUS)
         -- Ninja Category 1 merits
         -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then use spellFamily here instead of spellID
         if
