@@ -126,7 +126,9 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
                 if (PChar->id == info->member->id)
                 {
                     lotterIterator = m_PoolItems[i].Lotters.erase(lotterIterator);
+                    continue;
                 }
+                lotterIterator++;
             }
         }
     }
