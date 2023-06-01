@@ -9,10 +9,7 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if
-        target:hasStatusEffect(xi.effect.FOOD) or
-        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
-    then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         return xi.msg.basic.IS_FULL
     end
 
