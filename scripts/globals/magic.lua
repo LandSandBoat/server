@@ -635,7 +635,7 @@ xi.magic.getEffectResistance = function(target, effectId)
     local statusResistance = target:getMod(xi.mod.STATUSRES)
 
     if effectToResistanceMod[effectId] then
-        statusResistance = statusResistance + effectToResistanceMod[effectId]
+        statusResistance = statusResistance + target:getMod(effectToResistanceMod[effectId])
     end
 
     return statusResistance
