@@ -4,8 +4,9 @@ require("scripts/globals/mixins")
 g_mixins = g_mixins or {}
 
 g_mixins.wtb_prime = function(prime)
-    prime:addListener("TAKE_DAMAGE", "PRIME_TAKE_DAMAGE", function(mob, amount, attacker)
-        if amount > mob:getHP() then
+    prime:addListener("DEATH", "PRIME_DEATH", function(mob, killer)
+        if mob:getLocalVar("control") == 0 then
+            mob:setLocalVar("control", 1)
             local bf = mob:getBattlefield()
             local phase = bf:getLocalVar("phase")
             local bfNum = bf:getArea()
@@ -14,12 +15,12 @@ g_mixins.wtb_prime = function(prime)
 
             if bf:getLocalVar("primesDead") >= phase then
                 -- Respawn Carbuncle
-                SpawnMob(ID.primes[1][bfNum]):updateEnmity(attacker)
+                SpawnMob(ID.primes[1][bfNum]):updateEnmity(killer)
                 bf:setLocalVar("phase", bf:getLocalVar("phase") + 1)
 
                 if bf:getLocalVar("phase") >= 4 then
                     for i = 1, 4 do
-                        SpawnMob(ID.primes[1][bfNum] + i):updateEnmity(attacker)
+                        SpawnMob(ID.primes[1][bfNum] + i):updateEnmity(killer)
                     end
                 end
             end
