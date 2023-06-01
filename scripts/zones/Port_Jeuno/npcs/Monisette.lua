@@ -1,16 +1,16 @@
 -----------------------------------
--- Area: Port Jeuno
---  NPC: Monisette
+-- Area: Mhaura
+--  NPC: Amalanbraux
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/settings")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:startEvent(700)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -20,5 +20,3 @@ entity.onEventFinish = function(player, csid, option)
 end
 
 return entity
-
-

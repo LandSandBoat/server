@@ -1,15 +1,16 @@
 -----------------------------------
--- Area: Lower Jeuno
---  NPC: Hunter (Nantoto)
+-- Area: Mhaura
+--  NPC: Galdo
 -----------------------------------
-require("scripts/globals/utils")
-
+require("scripts/globals/settings")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:startEvent(650)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,7 +1,6 @@
 -----------------------------------
--- Area: Ru'Lude Gardens
---  NPC: Jamal
--- !pos 3.779 2.000 140.932 243
+-- Area: Mhaura
+--  NPC: Lakom-Lukom
 -----------------------------------
 local entity = {}
 
@@ -9,6 +8,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:startEvent(600)
 end
 
 entity.onEventUpdate = function(player, csid, option)
