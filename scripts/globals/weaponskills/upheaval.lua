@@ -18,12 +18,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local unlockedWS = xi.aeonics.onTrigger(player, wsID)
-
-    if not unlockedWS then
-        return
-    end
-	
     local params = {}
     params.numHits = 4
     params.ftp100 = 1.0 params.ftp200 = 3.5 params.ftp300 = 6.5

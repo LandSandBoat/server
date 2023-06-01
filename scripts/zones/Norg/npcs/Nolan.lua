@@ -11,24 +11,36 @@ local entity = {}
 
 local wsTable =
 {
--- index           varName
-    [2]  = { "hasShijinSpiralUnlock", },
-    [3]  = { "hasExenteratorUnlock",  },
-    [4]  = { "hasRequiescatUnlock",   },
-    [5]  = { "hasResolutionUnlock",   },
-    [6]  = { "hasRuinatorUnlock",     },
-    [7]  = { "hasUpheavalUnlock",     },
-    [8]  = { "hasEntropyUnlock",      },
-    [9]  = { "hasStardiverUnlock",    },
-    [10] = { "hasBladeShunUnlock",    },
-    [11] = { "hasTachiShohaUnlock",   },
-    [12] = { "hasRealmrazerUnlock",   },
-    [13] = { "hasShattersoulUnlock",  },
-    [14] = { "hasApexArrowUnlock",    },
-    [15] = { "hasLastStandUnlock",    },
+-- [index] = { "varName", ws unlock ID, defined in database },
+    [2]  = { "hasShijinSpiralUnlock", 60 },
+    [3]  = { "hasExenteratorUnlock",  53 },
+    [4]  = { "hasRequiescatUnlock",   56 },
+    [5]  = { "hasResolutionUnlock",   57 },
+    [6]  = { "hasRuinatorUnlock",     58 },
+    [7]  = { "hasUpheavalUnlock",     63 },
+    [8]  = { "hasEntropyUnlock",      52 },
+    [9]  = { "hasStardiverUnlock",    61 },
+    [10] = { "hasBladeShunUnlock",    51 },
+    [11] = { "hasTachiShohaUnlock",   62 },
+    [12] = { "hasRealmrazerUnlock",   55 },
+    [13] = { "hasShattersoulUnlock",  59 },
+    [14] = { "hasApexArrowUnlock",    50 },
+    [15] = { "hasLastStandUnlock",    54 },
 }
 
-local unlockWs = function(player, npc, ws)
+local function reLearnWeaponSkill(player)
+    for i = 2, 15 do
+        if
+            player:getCharVar(wsTable[i][1]) == 1 and
+            not player:hasLearnedWeaponskill(wsTable[i][2])
+        then
+            player:setCharVar(wsTable[i][1], 0)
+            player:addLearnedWeaponskill(wsTable[i][2])
+        end
+    end
+end
+
+local function unlockWs(player, npc, ws)
     local paidWs       = player:getCharVar("PaidForMeritWs")
     local beadsBalance = player:getCurrency("escha_beads")
     local wsCost       = 50000
@@ -36,8 +48,6 @@ local unlockWs = function(player, npc, ws)
     local menu =
     {
         title = string.format("Spend %i points? (%i available)", wsCost, beadsBalance),
-        onStart = function(playerArg)
-        end,
 
         options =
         {
@@ -49,7 +59,8 @@ local unlockWs = function(player, npc, ws)
                             playerArgMenu:setCurrency("escha_beads", beadsBalance - wsCost)
                             playerArgMenu:setCharVar("PaidForMeritWs", 0)
                             playerArgMenu:setCharVar("Afterglow", 1)
-                            playerArgMenu:setCharVar(wsTable[ws][1], 1)
+                            -- playerArgMenu:setCharVar(wsTable[ws][1], 1) -- TODO: Remove charvar usage. Future some1-else problem, get fucked.
+                            player:addLearnedWeaponskill(wsTable[ws][2])
                             playerArgMenu:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())
                         else
                             if ws > 15 or ws < 2 then
@@ -70,12 +81,6 @@ local unlockWs = function(player, npc, ws)
                 end,
             },
         },
-
-        onCancelled = function(playerArg)
-        end,
-
-        onEnd = function(playerArg)
-        end,
     }
 
     player:timer(150, function(playerArg)
@@ -83,13 +88,11 @@ local unlockWs = function(player, npc, ws)
     end)
 end
 
-local completeTransaction = function(player, npc, item, cost)
+local function completeTransaction(player, npc, item, cost)
     local beadsBalance = player:getCurrency("escha_beads")
-    local confirmMenu  =
+    local confirmMenu =
     {
         title = string.format("Spend %i points? (%i available)", cost, beadsBalance),
-        onStart = function(playerArg)
-        end,
 
         options =
         {
@@ -113,12 +116,6 @@ local completeTransaction = function(player, npc, item, cost)
                 end,
             },
         },
-
-        onCancelled = function(playerArg)
-        end,
-
-        onEnd = function(playerArg)
-        end,
     }
 
     player:customMenu(confirmMenu)
@@ -128,6 +125,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- First thing: Let's convert Weaponskills to the proper unlock system.
+    reLearnWeaponSkill(player)
+
+    -- Now do whatever you wanna do.
     local beadsBalance = player:getCurrency("escha_beads")
     local item         = 0
     local cost         = 0
