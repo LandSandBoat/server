@@ -7,8 +7,6 @@
 --  Range: Melee
 --  Notes: One shotted a 75 nin/dnc for 1142 dmg.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

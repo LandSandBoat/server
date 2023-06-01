@@ -1,9 +1,5 @@
 -----------------------------------
---
 -- xi.effect.TENEBRAE
---
------------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

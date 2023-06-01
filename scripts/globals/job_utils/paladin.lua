@@ -2,8 +2,6 @@
 -- Paladin Job Utilities
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}

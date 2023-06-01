@@ -3,7 +3,6 @@
 -- Item:        bottle_of_ascetics_tonic
 -- Item Effect: MATK/MACC 25
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

@@ -2,7 +2,6 @@
 -- Attachment: Economizer
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
 local attachmentObject = {}
 

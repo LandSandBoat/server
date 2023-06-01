@@ -2,11 +2,8 @@
 -- Blue Magic utilities
 -- Used for Blue Magic spells.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}

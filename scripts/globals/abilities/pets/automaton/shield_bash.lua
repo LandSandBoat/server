@@ -1,10 +1,7 @@
 -----------------------------------
 --  Shield Bash
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
-
 -----------------------------------
 local abilityObject = {}
 

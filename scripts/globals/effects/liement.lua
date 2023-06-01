@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.LIEMENT
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 -- these functions are intentionally blank. See scripts/globals/job_utils/rune_fencer.lua

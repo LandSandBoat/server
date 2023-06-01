@@ -2,7 +2,6 @@
 -- ID: 5607
 -- vomp_carrot
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

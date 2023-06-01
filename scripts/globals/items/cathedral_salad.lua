@@ -10,7 +10,6 @@
 -- Vitality -5
 -- Ranged Accuracy +17
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

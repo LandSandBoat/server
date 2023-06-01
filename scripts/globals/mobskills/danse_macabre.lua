@@ -5,11 +5,8 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: N/A
 -- Range: Single target
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

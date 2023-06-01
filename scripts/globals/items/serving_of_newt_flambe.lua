@@ -10,7 +10,6 @@
 -- Virus Resist 4
 -- Curse Resist 4
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

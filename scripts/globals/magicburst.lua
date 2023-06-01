@@ -1,5 +1,3 @@
-require("scripts/globals/status")
-
 SC_NONE          =  0 -- Lv0 None
 SC_TRANSFIXION   =  1 -- Lv1 Light
 SC_COMPRESSION   =  2 -- Lv1 Dark

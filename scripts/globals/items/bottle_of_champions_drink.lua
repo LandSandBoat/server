@@ -3,7 +3,6 @@
 -- Item: bottle_of_champions_drink
 -- Item Effect: Haste (Magic) 18% - CRITHITRATE 5%
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

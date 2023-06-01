@@ -8,7 +8,6 @@
 -- Max bonus: 11111 exp
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/item_utils")
 -----------------------------------
 local itemObject = {}

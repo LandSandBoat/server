@@ -1,6 +1,3 @@
------------------------------------
---  World Enums
------------------------------------
 xi = xi or {}
 
 xi.weather =
@@ -25,28 +22,4 @@ xi.weather =
     STELLAR_GLARE   = 17,
     GLOOM           = 18,
     DARKNESS        = 19,
-}
-
-xi.day =
-{
-    FIRESDAY      = 0,
-    EARTHSDAY     = 1,
-    WATERSDAY     = 2,
-    WINDSDAY      = 3,
-    ICEDAY        = 4,
-    LIGHTNINGDAY  = 5,
-    LIGHTSDAY     = 6,
-    DARKSDAY      = 7,
-}
-
-xi.time =
-{
-    NONE        = 0,
-    MIDNIGHT    = 1,
-    NEW_DAY     = 2,
-    DAWN        = 3,
-    DAY         = 4,
-    DUSK        = 5,
-    EVENING     = 6,
-    NIGHT       = 7,
 }

@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- Increased HP and MP
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

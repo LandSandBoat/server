@@ -8,7 +8,6 @@
 -- Intelligence -3
 -- Attack 18% Cap 90
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

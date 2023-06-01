@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 

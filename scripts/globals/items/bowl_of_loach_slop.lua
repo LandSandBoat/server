@@ -9,7 +9,6 @@
 -- HP 7% Cap 15
 -- Evasion 3
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

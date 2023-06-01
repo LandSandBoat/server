@@ -4,7 +4,6 @@
 -- Item Effect: When applied, grants DMGMAGIC -5000 for 60s
 --              Does not Grant Spell Immunity (nospellimmune = 1)
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

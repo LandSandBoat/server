@@ -9,7 +9,6 @@
 -- Resist Virus 12
 -- HP Recovered While Healing 9
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

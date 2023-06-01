@@ -3,8 +3,6 @@
 -- Item: X-Potion
 -- Item Effect: Restores 150 HP
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

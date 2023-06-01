@@ -2,8 +2,6 @@
 -- xi.effect.BLINK
 -- No need for addMod since blinks never stack.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

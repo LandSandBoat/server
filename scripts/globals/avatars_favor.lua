@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/pets")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

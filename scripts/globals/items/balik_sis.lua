@@ -11,7 +11,6 @@
 -- Ranged ATT % 13
 -- Ranged ATT Cap 65
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

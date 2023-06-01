@@ -7,7 +7,6 @@
 -- Duration: 2:00
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

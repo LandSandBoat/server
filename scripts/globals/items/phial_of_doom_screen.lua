@@ -3,8 +3,6 @@
 -- Item: Doom Screen
 -- Effect: 2 Mins of immunity to "Doom" effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -4,7 +4,6 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require('scripts/globals/interaction/container')
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 

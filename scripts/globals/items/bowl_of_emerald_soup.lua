@@ -8,7 +8,6 @@
 -- Health Regen While Healing 3
 -- Ranged ACC 6
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

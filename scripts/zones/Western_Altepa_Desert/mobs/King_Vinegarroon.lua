@@ -3,7 +3,6 @@
 --   NM: King Vinegarroon
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/world")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

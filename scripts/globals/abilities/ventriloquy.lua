@@ -7,7 +7,6 @@
 -----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/pets")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

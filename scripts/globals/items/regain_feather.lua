@@ -4,7 +4,6 @@
 -- Status Effect: Medicated, 2 hours
 -- Instantly restors HP/MP full TP
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

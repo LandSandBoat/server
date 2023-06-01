@@ -6,7 +6,6 @@ require("scripts/globals/settings")
 require("scripts/globals/besieged")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}

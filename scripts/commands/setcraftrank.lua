@@ -2,8 +2,6 @@
 -- func: setcraftRank <craft skill or ID> <craft rank> <target>
 -- desc: sets target's RANK of specified craft skill
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

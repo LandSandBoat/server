@@ -3,7 +3,6 @@
 -- Item: Yagudo Drink
 -- Item Effect: Restores 120 MP over 3 minutes
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

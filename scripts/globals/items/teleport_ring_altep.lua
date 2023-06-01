@@ -3,7 +3,6 @@
 -- Teleport ring: Altep
 -- Enchantment: "Teleport-Altep"
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------

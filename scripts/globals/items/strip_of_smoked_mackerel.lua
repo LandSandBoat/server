@@ -7,7 +7,6 @@
 -- Vitality -3
 -- Evasion +5
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

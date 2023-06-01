@@ -10,7 +10,6 @@
 -- Health Regen While Healing 2
 -- Defense % 12 (cap 60)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

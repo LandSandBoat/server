@@ -4,8 +4,6 @@
 -- getPower()       = ATTP
 -- getSubPower()    = RATTP
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
