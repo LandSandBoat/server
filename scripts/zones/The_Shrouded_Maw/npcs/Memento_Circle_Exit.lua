@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Spire_of_Holla
---  NPC: web of regret
+-- Area: The Shrouded Maw
+--  NPC: Memento Circle Exit
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

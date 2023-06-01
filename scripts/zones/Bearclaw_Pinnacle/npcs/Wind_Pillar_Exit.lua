@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Spire_of_Holla
---  NPC: web of regret
+-- Area: Bearclaw Pinnacle
+--  NPC: Wind Pillar Exit
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------
