@@ -1223,7 +1223,7 @@ protected:
                 }
             }
             break;
-            case 0x26: // 38: Version + Expansions
+            case 0x26: // 38: Version + Expansions, "Setting up connection."
             {
                 std::string client_ver_data((data_ + 0x74), 6); // Full length is 10 but we drop last 4. This contains "E" in the english client. Perhaps this can be used as a hint for language?
                 client_ver_data = client_ver_data + "xx_x";     // And then we replace those last 4
@@ -1268,9 +1268,12 @@ protected:
 
                 if (fatalMismatch)
                 {
-                    generateErrorMessage(data_, 331); // "The games data has been updated"
-                    do_write(0x24);
-                    return;
+                    if (auto data = session.view_session.get())
+                    {
+                        generateErrorMessage(data->data_, 331); // "The games data has been updated"
+                        data->do_write(0x24);
+                        return;
+                    }
                 }
 
                 std::array<uint8, 0x28> packet = {};
