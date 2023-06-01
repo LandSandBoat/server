@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.CARBUNCLES_FAVOR
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 
 local effectObject = {}
 

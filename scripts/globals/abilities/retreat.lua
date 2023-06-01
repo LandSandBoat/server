@@ -4,8 +4,6 @@
 -- Obtained: Summoner Level 1
 -- Recast Time: 10 sec
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

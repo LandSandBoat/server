@@ -2,9 +2,6 @@
 -- func: changejob
 -- desc: Changes the players current job.
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

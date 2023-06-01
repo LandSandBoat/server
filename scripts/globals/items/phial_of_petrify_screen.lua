@@ -3,8 +3,6 @@
 -- Item: Petrify Screen
 -- Effect: 2 Mins of immunity to "Petrify" effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

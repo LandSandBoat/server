@@ -3,8 +3,6 @@
 -- Reactor core fails and self-destructs, damaging any nearby targets.
 -- Note: Very rare, estimated 5% chance
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

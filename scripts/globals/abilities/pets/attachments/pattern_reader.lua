@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Pattern Reader
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(automaton)

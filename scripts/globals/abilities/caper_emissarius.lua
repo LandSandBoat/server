@@ -7,7 +7,6 @@
 -- target:transferEnmity(player, 99, 20.6)
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

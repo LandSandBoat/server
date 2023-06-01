@@ -3,7 +3,6 @@
 -- Item: bottle_of_fanatics_tonic
 -- Item Effect: When applied, grants DMGPHYS -5000 for 60s
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

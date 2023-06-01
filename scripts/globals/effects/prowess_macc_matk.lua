@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- Enhanced magic acc. and magic atk
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

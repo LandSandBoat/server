@@ -3,7 +3,6 @@
 -- Item: Persikos au Lait
 -- Item Effect: Restores 800 HP over 600 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -2,8 +2,6 @@
 -- xi.effect.INHIBIT_TP
 -- Reduces TP Gain By a % Factor
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

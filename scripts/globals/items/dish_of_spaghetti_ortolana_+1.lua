@@ -9,7 +9,6 @@
 -- StoreTP +6
 -- Resist Blind +10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

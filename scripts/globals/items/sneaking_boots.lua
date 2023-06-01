@@ -2,9 +2,6 @@
 --  ID: 15698
 --  Sneaking Boots
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

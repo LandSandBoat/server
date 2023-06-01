@@ -2,7 +2,6 @@
 -- func: setbag
 -- desc: Sets the players bag size
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/quests")
 
 local bagparam =

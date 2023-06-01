@@ -7,7 +7,6 @@
 -- Beast Killer 12
 -- Resist Sleep 12
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

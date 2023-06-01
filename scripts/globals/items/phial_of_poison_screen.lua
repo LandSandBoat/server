@@ -3,8 +3,6 @@
 -- Item: Poison Screen
 -- Effect: 2 Mins of immunity to "Poison" effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

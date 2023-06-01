@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- "Killer" effects bonus
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

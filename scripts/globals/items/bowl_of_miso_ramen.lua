@@ -11,7 +11,6 @@
 -- Magic Def. Bonus +5
 -- Resist Slow +10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

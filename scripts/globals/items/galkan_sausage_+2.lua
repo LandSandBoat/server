@@ -8,7 +8,6 @@
 -- Attack 11
 -- Ranged Attack 11
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

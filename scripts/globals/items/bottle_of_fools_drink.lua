@@ -3,7 +3,6 @@
 -- Item: bottle_of_fools_drink
 -- Item Effect: When applied, grants UDMGMAGIC -10000 for 60s
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

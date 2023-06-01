@@ -6,7 +6,6 @@
 -- Health 18
 -- Magic 18
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

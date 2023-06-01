@@ -3,11 +3,8 @@
 --
 --  Description: Deals ice damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Ice)
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

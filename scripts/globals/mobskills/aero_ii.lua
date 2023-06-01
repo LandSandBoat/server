@@ -3,7 +3,6 @@
 -- Deals wind elemental damage. Damage varies with TP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

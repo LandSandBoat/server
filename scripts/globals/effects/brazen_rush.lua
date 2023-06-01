@@ -2,7 +2,6 @@
 -- xi.effect.BRAZEN_RUSH
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

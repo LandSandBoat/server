@@ -3,8 +3,6 @@
 -- Item: Panacea
 -- Item Effect: Removes any number of status effects
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

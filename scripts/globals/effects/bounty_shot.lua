@@ -2,8 +2,6 @@
 -- xi.effect.BOUNTY_SHOT
 -- https://www.bg-wiki.com/ffxi/Bounty_Shot
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

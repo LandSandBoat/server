@@ -6,7 +6,6 @@
 -- Charisma -2
 -- Defense % 26 Cap 135
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

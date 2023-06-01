@@ -3,7 +3,6 @@
 -- Gyokuto Obi
 -- Enchantment: 60Min, Costume - Large Rarab
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

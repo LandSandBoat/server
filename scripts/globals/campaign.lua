@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
-require("scripts/globals/status")
 require("scripts/globals/items")
 -----------------------------------
 xi = xi or {}

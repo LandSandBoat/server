@@ -7,7 +7,6 @@
 -- Cost: 2 Finishing Move charges
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

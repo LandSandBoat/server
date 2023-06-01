@@ -3,7 +3,6 @@
 -- Item: Flask of Strange Milk
 -- Item Effect: Restores 500 HP over 300 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

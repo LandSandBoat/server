@@ -3,7 +3,6 @@
 -- Jug of Miracle Milk
 -- Enchantment: 60Min, Costume - Chigoe (red)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

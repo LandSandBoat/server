@@ -4,8 +4,6 @@
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
 require("scripts/globals/roe")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")

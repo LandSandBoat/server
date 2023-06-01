@@ -2,7 +2,6 @@
 -- xi.effect.DYNAMIS
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 local effectObject = {}

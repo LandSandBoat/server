@@ -2,8 +2,6 @@
 -- func: addallmounts
 -- desc: Adds all mount key items to player, granting access to their associated mounts
 -----------------------------------
-
-require("scripts/globals/status")
 require("scripts/globals/keyitems")
 
 cmdprops =

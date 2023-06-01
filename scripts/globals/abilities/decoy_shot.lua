@@ -6,7 +6,6 @@
 -- Duration: 00:03:00
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

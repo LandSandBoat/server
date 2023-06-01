@@ -1,7 +1,6 @@
 require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 
 xi = xi or {}
 

@@ -3,7 +3,6 @@
 -- Item: Flask of Dragon Fruit au Lait
 -- Item Effect: Restores 600 HP over 300 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

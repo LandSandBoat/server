@@ -3,7 +3,6 @@
 -- Item: pinch_of_fools_powder
 -- Item Effect: When applied, grants UDMGMAGIC -10000 to party members in range for 60s
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

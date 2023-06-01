@@ -6,7 +6,6 @@
 -- MP % 10 Cap 200
 -- MP Healing 3
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

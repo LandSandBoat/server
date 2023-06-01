@@ -8,8 +8,6 @@
 --   Bonus experience earned in smaller parties
 --   Increased defense and evasion against attacks from your auto-attack target when even match or lower
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

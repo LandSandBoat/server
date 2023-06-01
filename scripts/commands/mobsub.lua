@@ -2,9 +2,6 @@
 -- func: mobsub
 -- desc: Changes the sub-animation of the given mob. (For testing purposes.)
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

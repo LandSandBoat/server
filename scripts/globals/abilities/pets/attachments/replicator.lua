@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Replicator
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)

@@ -5,8 +5,6 @@
 -- Recast Time: 0:05:00
 -- Duration: 0:01:00 or the next usage of Phantom Roll or Double-Up
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

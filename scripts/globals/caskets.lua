@@ -2,8 +2,6 @@
 -- Global Casket utility script
 -----------------------------------
 require("scripts/globals/casket_loot")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------

@@ -1,9 +1,8 @@
 -----------------------------------
---
---  KEYITEMS IDS
---
+--  KEYITEM IDS
 -----------------------------------
 xi = xi or {}
+
 xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
@@ -3141,4 +3140,5 @@ xi.keyItem =
     REPAIRED_BREATHING_PEARL                 = 3267,
     SHEET_OF_ANCIENT_TUNES                   = 3268,
 }
+
 xi.ki = xi.keyItem

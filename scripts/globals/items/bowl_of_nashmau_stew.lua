@@ -15,7 +15,6 @@
 -- Defense -100
 -- Evasion -100
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

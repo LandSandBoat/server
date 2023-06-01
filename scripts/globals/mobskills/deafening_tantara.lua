@@ -8,8 +8,6 @@
 -- Notes: Doesn't use this if its horn is broken.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
