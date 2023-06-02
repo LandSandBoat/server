@@ -6,15 +6,14 @@
 require("scripts/globals/mixins")
 require("scripts/globals/utils")
 require("scripts/globals/status")
-
+----------------------------------------------------------------
 g_mixins = g_mixins or {}
 
-local claimshieldTime = 4000
+local claimshieldTime = 4000 -- In miliseconds.
 
 -- Checks the list to see if the entry exists already
 local function listContains(list, element)
-    for _, v in pairs(list)
-    do
+    for _, v in pairs(list) do
         if v == element then
             return true
         end
@@ -65,14 +64,13 @@ g_mixins.claim_shield = function(claimshieldMob)
         mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 999, 3, 9999)
         mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 999, 3, 9999)
         mob:addStatusEffect(xi.effect.ARROW_SHIELD, 999, 3, 9999)
---        mob:stun(claimshieldTime)
 
         mob:timer(claimshieldTime, function(mobArg)
             local enmityList = mobArg:getEnmityList()
 
-            -- Filter so that pets will only count as a single entry along
-            -- with their masters
+            -- Filter so that pets will only count as a single entry along with their masters
             local entries = {}
+
             for _, v in pairs(enmityList) do
                 local entity = v["entity"]
                 local master = entity:getMaster()
@@ -186,36 +184,21 @@ g_mixins.claim_shield = function(claimshieldMob)
                 textToAdd = textToAdd .. "</ul><br><br>"
                 logListToFile(fileName, textToAdd)
 
-                -- Drop mods
-                mobArg:setClaimable(true)
-                mobArg:setUnkillable(false)
-                mobArg:setCallForHelpBlocked(false)
-                mobArg:setAutoAttackEnabled(true)
-                mobArg:setMobAbilityEnabled(true)
-                mobArg:resetAI()
-                mobArg:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
-                mobArg:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
-                mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
-                mobArg:delStatusEffectsByFlag(0xFFFF)
-                mobArg:setHP(mobArg:getMaxHP())
-
                 -- Update Claim to winner
                 mobArg:updateClaim(claimWinner)
                 mobArg:addEnmity(claimWinner, 1, 1000)
-            else
-                -- Drop mods
-                mobArg:setClaimable(true)
-                mobArg:setUnkillable(false)
-                mobArg:setCallForHelpBlocked(false)
-                mobArg:setAutoAttackEnabled(true)
-                mobArg:setMobAbilityEnabled(true)
-                mobArg:resetAI()
-                mobArg:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
-                mobArg:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
-                mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
-                mobArg:delStatusEffectsByFlag(0xFFFF)
-                mobArg:setHP(mobArg:getMaxHP())
             end
+
+            mobArg:setClaimable(true)
+            mobArg:setUnkillable(false)
+            mobArg:setCallForHelpBlocked(false)
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
+            mobArg:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
+            mobArg:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
+            mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
+            mobArg:delStatusEffectsByFlag(0xFFFF)
+            mobArg:setHP(mobArg:getMaxHP())
         end)
     end)
 end
