@@ -11811,7 +11811,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subID    = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        auto subType  = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
         auto subPower = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
         auto tier     = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
 
@@ -11820,7 +11820,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
                                                    power,
                                                    tick,
                                                    duration,
-                                                   subID,
+                                                   subType,
                                                    subPower,
                                                    tier);
 
@@ -11871,7 +11871,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
     auto duration   = static_cast<uint32>(va[4].as<double>());
 
     // Optional
-    auto subID      = va[5].is<uint32>() ? va[5].as<uint32>() : 0;
+    auto subType    = va[5].is<uint32>() ? va[5].as<uint32>() : 0;
     auto subPower   = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
     auto tier       = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
     auto effectFlag = va[8].is<uint32>() ? va[8].as<uint32>() : 0;
@@ -11882,7 +11882,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
                           power,
                           tick,
                           duration,
-                          subID,
+                          subType,
                           subPower,
                           tier,
                           effectFlag); // Effect Flag (i.e in lua xi.effectFlag.AURA will make this an aura effect)
@@ -11897,7 +11897,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -11914,10 +11914,10 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
     CStatusEffect* PStatusEffect   = nullptr;
     auto           effect_StatusID = static_cast<EFFECT>(StatusID);
 
-    if (SubID != sol::lua_nil)
+    if (SubType != sol::lua_nil)
     {
-        auto uint16_SubID = SubID.as<uint16>();
-        PStatusEffect     = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
+        auto uint16_SubType = SubType.as<uint16>();
+        PStatusEffect       = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubType);
     }
     else
     {
@@ -12018,7 +12018,7 @@ bool CLuaBaseEntity::canGainStatusEffect(uint16 effect, sol::object const& power
  *  Notes   : More specific in scope than hasStatusEffectByFlag()
  ************************************************************************/
 
-bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubID)
+bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubType)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -12035,10 +12035,10 @@ bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubID)
     bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
-    if (SubID != sol::lua_nil)
+    if (SubType != sol::lua_nil)
     {
-        auto uint16_SubID = SubID.as<uint16>();
-        hasEffect         = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID, uint16_SubID);
+        auto uint16_SubType = SubType.as<uint16>();
+        hasEffect           = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID, uint16_SubType);
     }
     else
     {
@@ -12105,7 +12105,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Notes   : Can specify Power of the Effect as an option
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -12123,10 +12123,10 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
-    if (SubID != sol::lua_nil)
+    if (SubType != sol::lua_nil)
     {
-        auto uint16_SubID = SubID.as<uint16>();
-        result            = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
+        auto uint16_SubType = SubType.as<uint16>();
+        result              = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubType);
     }
     else
     {
@@ -12531,7 +12531,7 @@ bool CLuaBaseEntity::addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 
                                                power,                                          // Power
                                                tick,                                           // Tick
                                                duration,                                       // Duration
-                                               (arg6 != sol::lua_nil) ? arg6.as<uint32>() : 0, // SubID or 0
+                                               (arg6 != sol::lua_nil) ? arg6.as<uint32>() : 0, // SubType or 0
                                                (arg7 != sol::lua_nil) ? arg7.as<uint16>() : 0, // SubPower or 0
                                                (arg8 != sol::lua_nil) ? arg8.as<uint16>() : 0  // Tier or 0
     );
@@ -12624,14 +12624,14 @@ uint16 CLuaBaseEntity::healingWaltz()
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick, uint16 duration, uint16 subID, uint16 subPower, uint16 tier)
+bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick, uint16 duration, uint16 subType, uint16 subPower, uint16 tier)
 {
     CStatusEffect* PEffect = new CStatusEffect(static_cast<EFFECT>(effectID), // Effect ID
                                                effectID,                      // Effect Icon (Associated with ID)
                                                power,                         // Power
                                                tick,                          // Tick
                                                duration,                      // Duration
-                                               subID,                         // SubID
+                                               subType,                       // SubType
                                                subPower,                      // SubPower
                                                tier                           // Tier
     );

@@ -1478,13 +1478,9 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         return;
     }
 
-    if (StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0)
-    {
-        ShowWarning("Food Effect has SubID of 0.");
-        return;
-    }
+    auto subType = StatusEffect->GetSubID();
 
-    if (StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0)
+    if (StatusEffect->GetStatusID() == EFFECT_NONE && subType == 0)
     {
         ShowWarning("None-type Effect has SubID of 0");
         return;
@@ -1494,8 +1490,8 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     EFFECT      effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
-    if (StatusEffect->GetSubID() == 0 ||
-        StatusEffect->GetSubID() > 20000 ||
+    if (subType == 0 ||
+        subType > 20000 ||
         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
         (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
         effect == EFFECT_RUNEISTS_ROLL ||
@@ -1510,8 +1506,8 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     }
     else
     {
-        CItem* Ptem = itemutils::GetItemPointer(StatusEffect->GetSubID());
-        if (Ptem != nullptr)
+        CItem* Ptem = itemutils::GetItemPointer(subType);
+        if (Ptem != nullptr && subType > 0)
         {
             name.insert(0, "globals/items/");
             name.insert(name.size(), Ptem->getName());

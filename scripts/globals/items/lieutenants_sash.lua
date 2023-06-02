@@ -11,7 +11,6 @@ end
 
 itemObject.onItemUse = function(target)
     target:delStatusEffect(xi.effect.FOOD)
-    target:delStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
 end
 
 return itemObject

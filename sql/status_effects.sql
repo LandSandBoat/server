@@ -656,7 +656,6 @@ INSERT INTO `status_effects` VALUES (785,'prowess_macc_matk',768,0,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (786,'prowess_cure_potency',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (787,'prowess_ws_dmg',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (788,'prowess_killer',768,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (789,'field_support_food',8421408,0,0,2,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (790,'mark_of_seed',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (791,'all_miss',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (792,'super_buff',32,0,0,0,0,0,0,0,0);
