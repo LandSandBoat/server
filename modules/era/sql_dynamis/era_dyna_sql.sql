@@ -979,30 +979,30 @@ REPLACE INTO `mob_droplist` VALUES (2544,1,1,@RARE,15131,67);  -- SMN Legs
 REPLACE INTO `mob_droplist` VALUES (2544,0,0,1000,1452,@COMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (2544,0,0,1000,1452,@UNCOMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (2544,2,0,1000,1452,0); -- Bronzepiece
-DELETE FROM `mob_droplist` WHERE dropid = "3131"; -- Quadav
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15132,66);  -- WAR Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15133,66);  -- MNK Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15134,66);  -- WHM Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15135,66);  -- BLM Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15136,66);  -- RDM Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15077,67);  -- THF Head
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15138,67);  -- PLD Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15139,67);  -- DRK Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15080,67);  -- BST Head
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15141,67);  -- BRD Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15112,67);  -- RNG Hands
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15143,67);  -- SAM Feet
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15129,67);  -- NIN Legs
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15130,67);  -- DRG Legs
-REPLACE INTO `mob_droplist` VALUES (3131,1,1,@RARE,15131,67);  -- SMN Legs
--- REPLACE INTO `mob_droplist` VALUES (3131,1,2,@RARE,11382,333); -- BLU Feet  (Comment in for ToAU)
--- REPLACE INTO `mob_droplist` VALUES (3131,1,2,@RARE,16349,333); -- COR Legs  (Comment in for ToAU)
--- REPLACE INTO `mob_droplist` VALUES (3131,1,2,@RARE,16352,334); -- PUP Legs  (Comment in for ToAU)
--- REPLACE INTO `mob_droplist` VALUES (3131,1,3,@RARE,15038,500); -- DNC Hands (Comment in for WoTG)
--- REPLACE INTO `mob_droplist` VALUES (3131,1,3,@RARE,15040,500); -- SCH Hands (Comment in for WoTG)
-REPLACE INTO `mob_droplist` VALUES (3131,0,0,1000,1455,@COMMON); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (3131,0,0,1000,1455,@UNCOMMON); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (3131,2,0,1000,1455,0); -- Byne Bill
+DELETE FROM `mob_droplist` WHERE dropid = "2554"; -- Quadav
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15132,66);  -- WAR Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15133,66);  -- MNK Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15134,66);  -- WHM Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15135,66);  -- BLM Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15136,66);  -- RDM Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15077,67);  -- THF Head
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15138,67);  -- PLD Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15139,67);  -- DRK Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15080,67);  -- BST Head
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15141,67);  -- BRD Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15112,67);  -- RNG Hands
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15143,67);  -- SAM Feet
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15129,67);  -- NIN Legs
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15130,67);  -- DRG Legs
+REPLACE INTO `mob_droplist` VALUES (2554,1,1,@RARE,15131,67);  -- SMN Legs
+-- REPLACE INTO `mob_droplist` VALUES (2554,1,2,@RARE,11382,333); -- BLU Feet  (Comment in for ToAU)
+-- REPLACE INTO `mob_droplist` VALUES (2554,1,2,@RARE,16349,333); -- COR Legs  (Comment in for ToAU)
+-- REPLACE INTO `mob_droplist` VALUES (2554,1,2,@RARE,16352,334); -- PUP Legs  (Comment in for ToAU)
+-- REPLACE INTO `mob_droplist` VALUES (2554,1,3,@RARE,15038,500); -- DNC Hands (Comment in for WoTG)
+-- REPLACE INTO `mob_droplist` VALUES (2554,1,3,@RARE,15040,500); -- SCH Hands (Comment in for WoTG)
+REPLACE INTO `mob_droplist` VALUES (2554,0,0,1000,1455,@COMMON); -- Byne Bill
+REPLACE INTO `mob_droplist` VALUES (2554,0,0,1000,1455,@UNCOMMON); -- Byne Bill
+REPLACE INTO `mob_droplist` VALUES (2554,2,0,1000,1455,0); -- Byne Bill
 DELETE FROM `mob_droplist` WHERE dropid = "2549"; -- Yagudo
 REPLACE INTO `mob_droplist` VALUES (2549,1,1,@RARE,15132,66);  -- WAR Feet
 REPLACE INTO `mob_droplist` VALUES (2549,1,1,@RARE,15133,66);  -- MNK Feet
