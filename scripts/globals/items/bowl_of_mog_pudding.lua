@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 6009
 -- Item: Bowl of Mog Pudding
--- Food Effect: 30Min, All Races
+-- Food Effect: 60Min, All Races
 -----------------------------------
 -- HP 7
 -- MP 7
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6009)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 6009)
 end
 
 itemObject.onEffectGain = function(target, effect)

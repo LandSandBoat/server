@@ -19,11 +19,19 @@ end
 itemObject.onItemUse = function(target)
     local costumes =
     {
-        [1] = 1811, -- Poroggo
-        [2] = 1812, -- Toad
+        [1] = 1811, -- Poroggo (Green)
+        [2] = 1812, -- Toad (Green)
+        [3] = 1813, -- Poroggo (Red)
+        [4] = 2951, -- Squib
+        --[[
+            Server Operators seeking additional variety:
+            2666: Toad (Red)
+            2098: Toad (Blue)
+            3598: Poroggo (Purple)
+        --]]
     }
 
-    local id = math.random(1, 2)
+    local id = math.random(1, 4)
 
     target:addStatusEffect(xi.effect.COSTUME, costumes[id], 0, 3600)
 end

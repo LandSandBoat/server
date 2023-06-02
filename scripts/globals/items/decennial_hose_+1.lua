@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 10596
 -- Decennial Hose +1
--- Enchantment: Invisible, Sneak, and Deodorize effects 5m base duration
+-- Enchantment: Invisible, Sneak, and Deodorize effects 5m fixed duration
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/msg")
@@ -18,8 +18,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.SNEAK, xi.effect.SNEAK, 1, 10, math.floor(300 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
-    target:addStatusEffectEx(xi.effect.INVISIBLE, xi.effect.INVISIBLE, 1, 10, math.floor(300 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
+    target:addStatusEffectEx(xi.effect.SNEAK, xi.effect.SNEAK, 1, 10, 300)
+    target:addStatusEffectEx(xi.effect.INVISIBLE, xi.effect.INVISIBLE, 1, 10, 300)
     target:addStatusEffectEx(xi.effect.DEODORIZE, xi.effect.DEODORIZE, 1, 10, 300)
 end
 

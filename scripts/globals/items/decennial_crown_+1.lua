@@ -2,7 +2,7 @@
 -- ID: 10432
 -- Decennial Crown +1
 -- Dispense: Chocobiscuit
--- Despenses between 2 and 10 Chocobiscuits
+-- Despenses between 1 and 10 Chocobiscuits
 -----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/items")
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local qty = math.random(2, 10)
+    local qty = math.random(1, 10)
 
     npcUtil.giveItem(target, { { xi.items.CHOCOBISCUIT, qty } })
 end

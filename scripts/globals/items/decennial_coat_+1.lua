@@ -2,7 +2,7 @@
 -- ID: 10253
 -- Decennial Coat +1
 -- Dispense: Bowl of Moogurt
--- Dispenses between 2 and 10 Moogurts
+-- Dispenses between 1 and 3 Moogurts
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +16,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local qty = math.random(2, 10)
+    local qty = math.random(1, 3)
 
     npcUtil.giveItem(target, { { xi.items.BOWL_OF_MOOGURT, qty } })
 end

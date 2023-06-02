@@ -2,7 +2,7 @@
 -- ID: 10810
 -- Item: Moogle Guard +1
 -- Dispense: Mog Pudding
--- Dispenses between 1 and 10 Mog Puddings
+-- Dispenses between 1 and 12 Mog Puddings
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/msg")
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local qty = math.random(1, 10)
+    local qty = math.random(1, 12)
 
     npcUtil.giveItem(target, { { xi.items.MOG_PUDDING, qty } })
 end
