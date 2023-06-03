@@ -3,8 +3,6 @@
 --  Mob: Myrmidon Apu-apu
 -- BCNM: Royal Succession
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

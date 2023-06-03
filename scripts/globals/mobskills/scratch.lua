@@ -1,14 +1,10 @@
 -----------------------------------
 --  Scratch
---
 --  Description: Strikes a single target in the face. Additional effect: Blind
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

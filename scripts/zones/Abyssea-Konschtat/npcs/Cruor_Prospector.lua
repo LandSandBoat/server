@@ -6,8 +6,6 @@
 -----------------------------------
 require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
-require("scripts/globals/status")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

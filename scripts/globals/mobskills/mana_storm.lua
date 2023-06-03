@@ -1,15 +1,11 @@
 -----------------------------------
 -- Mana Storm
---
 -- Description: Steals MP from players within range.
 -- Type: Magical
 -- Utsusemi/Blink absorb: Unknown
 -- Range: Unknown radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

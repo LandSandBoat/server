@@ -6,7 +6,6 @@
 --  Range: Front cone
 --  Notes: Only used by Gurfurlur the Menacing.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

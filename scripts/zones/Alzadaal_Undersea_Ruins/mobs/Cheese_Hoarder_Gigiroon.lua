@@ -4,7 +4,6 @@
 -- TODO: Running around mechanic and dropping bombs
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

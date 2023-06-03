@@ -9,7 +9,6 @@
 -- !pos -280 5.00 240 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

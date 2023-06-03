@@ -5,7 +5,6 @@ local ID = require('scripts/zones/RuAun_Gardens/IDs')
 require('scripts/globals/missions')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 require('scripts/globals/titles')
 -----------------------------------
 local zoneObject = {}

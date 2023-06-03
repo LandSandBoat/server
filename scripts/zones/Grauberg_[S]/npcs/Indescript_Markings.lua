@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Grauberg_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

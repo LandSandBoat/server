@@ -1,14 +1,10 @@
 -----------------------------------
 --  Viscid Emission
---
 --  Inflicts amnesia in an area of effect.
 --  Type: Magical (Enfeebling)
 --  Range: Unknown cone
 --  Utsusemi/Blink absorb: Ignores shadows
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

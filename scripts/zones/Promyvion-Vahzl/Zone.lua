@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Promyvion-Vahzl/IDs')
 require('scripts/globals/promyvion')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

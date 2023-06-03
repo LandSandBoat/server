@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 
 local carpentersLandingGlobal =

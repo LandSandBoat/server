@@ -1,9 +1,6 @@
 -----------------------------------
 -- Mix: Dragon Shield - Applies Magic Defense Bonus to all party members for 60 seconds.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

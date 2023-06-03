@@ -10,13 +10,11 @@
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.50      3.00
 -----------------------------------
-local mobskillObject = {}
-
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/mobskills")
 -----------------------------------
+local mobskillObject = {}
+
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

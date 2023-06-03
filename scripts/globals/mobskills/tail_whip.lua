@@ -1,7 +1,7 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- Tail Whip
+-----------------------------------
 require("scripts/globals/mobskills")
-
 -----------------------------------
 local mobskillObject = {}
 

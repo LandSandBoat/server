@@ -3,7 +3,6 @@
 --  Mob: Qiqirn Mine
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

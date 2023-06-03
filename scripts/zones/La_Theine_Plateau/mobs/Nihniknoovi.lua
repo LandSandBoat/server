@@ -3,7 +3,6 @@
 --  Mob: Nihniknoovi
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

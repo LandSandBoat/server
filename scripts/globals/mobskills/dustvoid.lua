@@ -1,15 +1,11 @@
 -----------------------------------
 -- Dustvoid
---
 -- Description: (**not in yet** Removes all equipment from player.) Additional effect: Knockback
 -- Type: Breath
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: AoE 10'
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

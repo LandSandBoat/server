@@ -4,8 +4,6 @@
 -- Notes: Opens door @ J-8 from behind
 -- !pos 105.502 -25.262 57.138 27
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

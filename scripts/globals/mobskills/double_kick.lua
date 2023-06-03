@@ -1,14 +1,11 @@
 -----------------------------------
 --  Double Kick
---
 --  Description: Deals damage to a single target. Additional effect: Stun
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Stun may or may not take xi.effect.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

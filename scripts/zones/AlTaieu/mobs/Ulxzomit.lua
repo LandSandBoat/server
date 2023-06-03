@@ -3,7 +3,6 @@
 --  Mob: Ul'xzomit
 -----------------------------------
 require("scripts/globals/follow")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

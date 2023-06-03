@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

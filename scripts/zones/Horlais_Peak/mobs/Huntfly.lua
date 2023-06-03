@@ -3,8 +3,6 @@
 --  Mob: Huntfly
 -- BCNM: Dropping Like Flies
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

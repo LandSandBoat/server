@@ -4,7 +4,6 @@
 -- !pos -89.901 .225 -159.694 92
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

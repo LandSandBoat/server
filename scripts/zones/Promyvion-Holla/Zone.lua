@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Promyvion-Holla/IDs')
 require('scripts/globals/promyvion')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

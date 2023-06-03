@@ -1,14 +1,10 @@
 -----------------------------------
 --  Razor Fang
---
 --  Description: Bites a single target in a twofold attack.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2 shadows
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

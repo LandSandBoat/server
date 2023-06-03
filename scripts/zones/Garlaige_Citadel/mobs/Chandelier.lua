@@ -4,7 +4,6 @@
 -- Note: Spawned for quest "Hitting the Marquisate"
 -----------------------------------
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

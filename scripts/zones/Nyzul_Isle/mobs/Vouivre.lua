@@ -4,7 +4,6 @@
 -- Info: NM
 -----------------------------------
 require('scripts/globals/nyzul')
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

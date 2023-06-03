@@ -1,14 +1,10 @@
 -----------------------------------
 --  Impale
---
 --  Description: Deals damage to a single target. Additional effect: Paralysis (NM version AE applies a strong poison effect and resets enmity on target)
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow (NM version ignores shadows)
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

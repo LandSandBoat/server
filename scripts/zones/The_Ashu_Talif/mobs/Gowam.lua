@@ -2,7 +2,6 @@
 -- Area: The Ashu Talif (Against All Odds)
 --  Mob: Gowam
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

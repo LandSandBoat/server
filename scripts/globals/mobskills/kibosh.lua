@@ -5,11 +5,8 @@
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

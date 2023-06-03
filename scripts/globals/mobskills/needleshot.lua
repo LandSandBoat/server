@@ -1,14 +1,10 @@
 -----------------------------------
 --  Needleshot
---
 --  Description: Fires a needle at a single target.
 --  Type: Ranged
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Unknown
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

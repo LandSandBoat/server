@@ -4,7 +4,6 @@
 -- Info: Enemy Leader, Thief job, runs around dropping bombs
 -----------------------------------
 require('scripts/globals/pathfind')
-require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}

@@ -2,7 +2,6 @@
 -- Trust: Sakura
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}

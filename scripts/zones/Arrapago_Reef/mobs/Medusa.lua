@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

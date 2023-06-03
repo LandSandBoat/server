@@ -3,9 +3,6 @@
 --  Mob: Honor
 -- Coming of Age (San dOria Mission 8-1)
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

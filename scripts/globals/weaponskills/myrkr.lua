@@ -2,7 +2,6 @@
 -- Myrkr
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

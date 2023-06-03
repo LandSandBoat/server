@@ -2,7 +2,6 @@
 -- Spell: Cursna
 -- Removes curse and bane from target.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

@@ -7,7 +7,6 @@ mixins =
     require("scripts/mixins/job_special"),
     require("scripts/mixins/rage")
 }
-require("scripts/globals/status")
 -----------------------------------
 -- Detailed Notes & Todos
 -- (please remove these if you handle any)

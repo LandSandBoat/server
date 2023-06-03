@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Newton_Movalpolos/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

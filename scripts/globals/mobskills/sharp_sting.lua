@@ -7,8 +7,6 @@
 --  Range: 10' single
 --  Notes: Appears to be very inaccurate.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

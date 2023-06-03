@@ -1,14 +1,10 @@
 -----------------------------------
 --  Ion Shower
---
 --  Description: Calls forth an ion storm, dealing Lightning damage to all nearby targets. Additional effect: Stun
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Unknown radial
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

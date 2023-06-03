@@ -2,7 +2,6 @@
 -- Spell: Paralyna
 -- Removes paralysis from target.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

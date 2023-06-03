@@ -2,7 +2,6 @@
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 -----------------------------------
 local ID = require('scripts/zones/Fort_Karugo-Narugo_[S]/IDs')
-require('scripts/globals/status')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

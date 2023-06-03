@@ -3,10 +3,9 @@
 --  Mob: Dark Dragon
 -- Mission 2-3 BCNM Fight
 -----------------------------------
-local entity = {}
-
 require("scripts/globals/titles")
-require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)

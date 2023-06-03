@@ -1,7 +1,7 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- The Wrath of Gudha
+-----------------------------------
 require("scripts/globals/mobskills")
-
 -----------------------------------
 local mobskillObject = {}
 

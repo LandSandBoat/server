@@ -1,13 +1,8 @@
 -----------------------------------
 --  Ink Jet
---
 --  Description: Unleashes a torrent of black spores in a fan-shaped area of effect, dealing dark damage to targets. Additional effect: Blind
 --  Type: Magical Dark (Element)
---
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

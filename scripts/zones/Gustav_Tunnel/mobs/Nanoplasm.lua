@@ -3,8 +3,6 @@
 --   NM: Nanoplasm
 -- Note: Part of mission "The Salt of the Earth"
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

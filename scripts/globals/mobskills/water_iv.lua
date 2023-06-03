@@ -2,8 +2,6 @@
 -- Water IV
 -- Deals water elemental damage. Damage varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

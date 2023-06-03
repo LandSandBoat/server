@@ -1,13 +1,9 @@
 -----------------------------------
 --  Guided_Missile_II
---
 --  Description: ~475 magic damage, ignores Utsusemi
 --  Type: Magical
---
 --  Range: 5 yalms
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

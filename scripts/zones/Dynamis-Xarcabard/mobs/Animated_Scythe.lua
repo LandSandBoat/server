@@ -3,7 +3,6 @@
 --  Mob: Animated Scythe
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

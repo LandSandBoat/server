@@ -2,8 +2,6 @@
 -- Area: Korroloka Tunnel (173)
 --  Mob: Morion Worm
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

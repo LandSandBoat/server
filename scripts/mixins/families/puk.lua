@@ -1,6 +1,5 @@
 -- Puk family mixin
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 g_mixins = g_mixins or {}

@@ -4,7 +4,6 @@
 -----------------------------------
 local global = require("scripts/zones/QuBia_Arena/Globals")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

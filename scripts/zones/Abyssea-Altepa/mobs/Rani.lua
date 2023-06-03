@@ -2,7 +2,6 @@
 -- Area: Abyssea - Altepa
 --   NM: Rani
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

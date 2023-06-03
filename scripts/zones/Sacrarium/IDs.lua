@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Sacrarium
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 

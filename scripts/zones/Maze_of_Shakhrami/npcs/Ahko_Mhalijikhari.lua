@@ -5,8 +5,6 @@
 -- !pos -344.617 -12.226 -166.233 198
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

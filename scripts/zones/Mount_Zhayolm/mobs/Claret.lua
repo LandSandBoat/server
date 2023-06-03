@@ -6,8 +6,6 @@
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Claret
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 

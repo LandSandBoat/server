@@ -3,9 +3,6 @@
 --  Mob: Nepionic Bladmall
 --  ENM: Shell We Dance?
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
