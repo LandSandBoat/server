@@ -286,7 +286,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
 
     -- Multitarget damage reduction
-    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(caster, target, spell))
+    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(spell))
 
     -- Resistance
     finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
@@ -387,7 +387,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)

@@ -369,6 +369,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     local skillType    = spell:getSkillType()
     local spellElement = spell:getElement()
+    local spellGroup   = spell:getSpellGroup()
     local statUsed     = pTable[spellId][2]
     local mEvaMod      = pTable[spellId][4]
     local resistStages = pTable[spellId][8]
@@ -376,7 +377,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local bonusMacc    = pTable[spellId][13]
 
     -- Magic Hit Rate calculations.
-    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed, bonusMacc)
+    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 

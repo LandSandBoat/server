@@ -18,10 +18,9 @@ local elementTable =
 }
 
 -- Actor Magic Accuracy
-xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spell, skillType, spellElement, statUsed, bonusMacc)
+xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local actorJob     = actor:getMainJob()
     local actorWeather = actor:getWeather()
-    local spellGroup   = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
     local statDiff     = actor:getStat(statUsed) - target:getStat(statUsed)
     local magicAcc     = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
 
