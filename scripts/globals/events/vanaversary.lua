@@ -245,6 +245,7 @@ xi.events.vanaversary.generateEntities = function()
                 local look          = entry[ 9]
                 local behavior      = entry[10]
                 local entityCsid    = entry[11]
+                local csid          = nil
                 local params        = {}
 
                 if behavior == xi.events.vanaversary.npcType.HISTORY then
@@ -263,11 +264,14 @@ xi.events.vanaversary.generateEntities = function()
                     onTrigger = function(player, npc)
                         npc:facePlayer(player, true)
                         xi.events.vanaversary.historyMoogle(player, entityCsid)
-                        npc:setRotation(rot)
                     end,
 
                     onEventUpdate = function(player, npc, option)
                         xi.events.vanaversary.historyMoogleUpdate(player, csid, option)
+                    end,
+
+                    onEventFinish = function(player, csid, option, npc)
+                        npc:setRotation(rot)
                     end,
                     })
                 end
@@ -286,12 +290,18 @@ xi.events.vanaversary.generateEntities = function()
                     namevis = namevis,
                     releaseIdOnDisappear = true,
                     onTrigger = function(player, npc)
+                        npc:entityAnimationPacket("open")
                         xi.events.vanaversary.treasureCoffer(player, entityCsid)
                     end,
 
                     onEventUpdate = function(player, csid, option)
                         xi.events.vanaversary.treaureCofferGoods(player, csid, option)
                     end,
+
+                    onEventFinish = function(player, csid, option, npc)
+                        npc:entityAnimationPacket("close")
+                    end,
+
                     })
                 end
 
@@ -309,12 +319,19 @@ xi.events.vanaversary.generateEntities = function()
                     namevis = namevis,
                     releaseIdOnDisappear = true,
                     onTrigger = function(player, npc)
+                        player:timer(400, function (player)
+                            player:lookAt(npc:getPos())
+                        end)
+                        npc:facePlayer(player, true)
+                        -- TODO: Better handling of Moogle CS Behavior. Add missing Animations.
                         xi.events.vanaversary.tshirtMoogle(player, entityCsid)
                     end,
 
-                    onEventFinish = function(player, csid, option)
+                    onEventFinish = function(player, csid, option, npc)
                         xi.events.vanaversary.tshirtMoogleEnd(player, csid)
+                        npc:setRotation(rot)
                     end,
+
                     })
                 end
 
@@ -333,9 +350,16 @@ xi.events.vanaversary.generateEntities = function()
                     releaseIdOnDisappear = true,
                     onTrigger = function(player, npc)
                         npc:facePlayer(player, true)
-                        player:PrintToPlayer("Mandragoria Mania Madness is currently unavailable. Happy Vana'versary!", 0, npc:getPacketName())
-                        npc:setRotation(rot)
+                        player:PrintToPlayer("Mandragoria Mania Madness is currently unavailable.", 0, npc:getPacketName())
+                        npc:timer(600, function (npc)
+                            player:PrintToPlayer("Happy Vana'versary!", 0, npc:getPacketName())
+                            npc:setRotation(rot)
+                        end)
+                        npc:timer(1000, function (npc)
+                            npc:setRotation(rot)
+                        end)
                     end,
+
                     })
                 end
 
