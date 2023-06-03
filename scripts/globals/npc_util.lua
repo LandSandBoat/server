@@ -301,7 +301,7 @@ function npcUtil.giveUsedItem(player, item, notRare)
     end
 
     -- attempt to give the used item to player
-    if notRare == true then
+    if notRare then
         player:addUsedItem(item)
         player:messageSpecial(ID.text.ITEM_OBTAINED, item)
 

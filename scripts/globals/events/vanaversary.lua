@@ -245,10 +245,10 @@ xi.events.vanaversary.generateEntities = function()
                 local look          = entry[ 9]
                 local behavior      = entry[10]
                 local entityCsid    = entry[11]
-                local npc           = {}
+                local params        = {}
 
                 if behavior == xi.events.vanaversary.npcType.HISTORY then
-                    npc = zone:insertDynamicEntity({
+                    params = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
                     name = name,
                     look = look,
@@ -265,15 +265,15 @@ xi.events.vanaversary.generateEntities = function()
                         xi.events.vanaversary.historyMoogle(player, entityCsid)
                         npc:setRotation(rot)
                     end,
-                    onEventUpdate = function (player, npc, option)
+
+                    onEventUpdate = function(player, npc, option)
                         xi.events.vanaversary.historyMoogleUpdate(player, csid, option)
                     end,
                     })
-
                 end
 
                 if behavior == xi.events.vanaversary.npcType.COFFER then
-                    npc = zone:insertDynamicEntity({
+                    params = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
                     name = name,
                     look = look,
@@ -288,17 +288,15 @@ xi.events.vanaversary.generateEntities = function()
                     onTrigger = function(player, npc)
                         xi.events.vanaversary.treasureCoffer(player, entityCsid)
                     end,
+
                     onEventUpdate = function(player, csid, option)
                         xi.events.vanaversary.treaureCofferGoods(player, csid, option)
                     end,
                     })
-
-                    table.insert(xi.events.vanaversary.entities, npc:getID())
-
                 end
 
                 if behavior == xi.events.vanaversary.npcType.T_SHIRT then
-                    npc = zone:insertDynamicEntity({
+                    params = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
                     name = name,
                     look = look,
@@ -313,15 +311,15 @@ xi.events.vanaversary.generateEntities = function()
                     onTrigger = function(player, npc)
                         xi.events.vanaversary.tshirtMoogle(player, entityCsid)
                     end,
+
                     onEventFinish = function(player, csid, option)
                         xi.events.vanaversary.tshirtMoogleEnd(player, csid)
                     end,
                     })
-
                 end
 
                 if behavior == xi.events.vanaversary.npcType.CHACHA then
-                    npc = zone:insertDynamicEntity({
+                    params = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
                     name = name,
                     look = look,
@@ -339,11 +337,10 @@ xi.events.vanaversary.generateEntities = function()
                         npc:setRotation(rot)
                     end,
                     })
-
                 end
 
                 if behavior == xi.events.vanaversary.npcType.PETS then
-                    npc = zone:insertDynamicEntity({
+                    params = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
                     name = name,
                     look = look,
@@ -356,10 +353,9 @@ xi.events.vanaversary.generateEntities = function()
                     namevis = namevis,
                     releaseIdOnDisappear = true,
                     })
-
                 end
 
-                table.insert(xi.events.vanaversary.entities, npc:getID())
+                table.insert(xi.events.vanaversary.entities, params:getID())
             end
         end
     end
