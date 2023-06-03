@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
 require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

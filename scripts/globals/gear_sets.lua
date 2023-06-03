@@ -3,7 +3,6 @@
 -- Allows the use of gear sets with modifiers
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/status')
 -----------------------------------
 
 xi = xi or {}

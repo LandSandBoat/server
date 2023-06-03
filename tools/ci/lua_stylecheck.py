@@ -27,6 +27,12 @@ deprecated_functions = [
     ["table.getn", "#t"],
 ]
 
+deprecated_requires = [
+    "scripts/globals/status",
+    "scripts/globals/settings",
+    "scripts/enum",
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -240,6 +246,12 @@ class LuaStyleCheck:
             if contains_word(deprecated_func)(line):
                 self.error(f"Use of deprecated function: {deprecated_func}. Suggested replacement: {replacement}")
 
+    def check_deprecated_require(self, line):
+        if ("require(") in line:
+            for deprecated_str in deprecated_requires:
+                if deprecated_str in line:
+                    self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -281,6 +293,7 @@ class LuaStyleCheck:
                 self.check_no_newline_after_function_decl(code_line)
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
+                self.check_deprecated_require(code_line)
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)

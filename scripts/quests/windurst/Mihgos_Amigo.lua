@@ -9,7 +9,6 @@
 require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/settings')
-require('scripts/globals/status')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------

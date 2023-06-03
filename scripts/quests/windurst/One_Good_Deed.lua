@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/items')
 -----------------------------------
 local bibikiID = require('scripts/zones/Bibiki_Bay/IDs')
