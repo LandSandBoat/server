@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

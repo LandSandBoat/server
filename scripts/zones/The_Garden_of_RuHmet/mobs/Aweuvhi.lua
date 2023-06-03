@@ -2,9 +2,6 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'euvhi
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

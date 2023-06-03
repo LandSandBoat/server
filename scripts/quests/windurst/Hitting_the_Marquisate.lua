@@ -20,7 +20,6 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 local garlaigeID = require("scripts/zones/Garlaige_Citadel/IDs")

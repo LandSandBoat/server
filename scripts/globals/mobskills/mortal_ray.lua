@@ -1,12 +1,9 @@
 -----------------------------------
 -- Mortal Ray
---
 -- Description: Inflicts Doom upon an enemy.
 -- Type: Magical (Dark)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- Spell: Stona
 -- Removes petrification from target.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

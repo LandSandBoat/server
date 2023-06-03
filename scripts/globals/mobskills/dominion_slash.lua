@@ -1,16 +1,12 @@
 -----------------------------------
 -- Dominion Slash
---
 -- Description: Performs an area of effect slashing weaponskill. Additional effect: Silence
 -- Type: Physical
 -- 2-3 Shadows
 -- Range: Unknown radial
-
 -- One source also mentions that it "can dispel important buffs."
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

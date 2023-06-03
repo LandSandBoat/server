@@ -4,8 +4,6 @@
 -- KSNM: Early Bird Catches the Wyrm
 -- For future reference: Trusts are not allowed in this fight
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

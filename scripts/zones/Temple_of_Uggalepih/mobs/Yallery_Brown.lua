@@ -5,8 +5,6 @@
 -- Involved in Quest: Axe The Competition
 -- !pos 220 -8.11 205.38 159
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -1,11 +1,8 @@
 -----------------------------------
 --  Whirlwind
---
 --  Description: Deals wind damage to enemies within range. Additional effect: VIT Down.
 --  Type: Magical (Wind)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

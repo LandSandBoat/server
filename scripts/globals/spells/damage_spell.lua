@@ -6,9 +6,7 @@ require("scripts/globals/combat/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/msg")
-require("scripts/globals/settings")
 require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

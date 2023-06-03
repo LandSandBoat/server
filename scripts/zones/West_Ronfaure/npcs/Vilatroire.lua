@@ -8,7 +8,6 @@
 local ID = require("scripts/zones/West_Ronfaure/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

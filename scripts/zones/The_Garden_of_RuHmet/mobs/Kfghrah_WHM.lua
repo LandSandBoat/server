@@ -2,9 +2,6 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Kf'ghrah WHM
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic") -- no spells are currently set due to lack of info
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

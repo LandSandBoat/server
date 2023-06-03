@@ -1,12 +1,9 @@
 -----------------------------------
 -- Mind Wall
---
 -- Description: Activates a shield to absorb all incoming magical damage.
 -- Type: Magical
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

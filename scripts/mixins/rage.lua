@@ -9,7 +9,6 @@ https://ffxiclopedia.fandom.com/wiki/Rage
 --]]
 
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 

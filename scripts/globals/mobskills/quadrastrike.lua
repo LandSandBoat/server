@@ -1,5 +1,6 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- Quadrastrike
+-----------------------------------
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -1,14 +1,10 @@
 -----------------------------------
 --  Tail Crush
---
 --  Description: Smashes a single target with its tail. Additional effect: Poison
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

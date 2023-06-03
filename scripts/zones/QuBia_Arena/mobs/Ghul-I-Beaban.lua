@@ -3,8 +3,6 @@
 --  Mob: Ghul-I-Beaban
 -- BCNM: Undying Promise
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 local function reraiseGhul(mob, reraises, target)

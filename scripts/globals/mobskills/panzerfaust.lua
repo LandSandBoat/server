@@ -1,15 +1,11 @@
 -----------------------------------
 --  Panzerfaust
---
 --  Description: Strikes a target twice with an armored fist. Additional effect: Knockback
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2 shadows
 --  Range: Melee
---  Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

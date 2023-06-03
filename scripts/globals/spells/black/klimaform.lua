@@ -4,8 +4,6 @@
 -----------------------------------
 local spellObject = {}
 
-require("scripts/globals/status")
-
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end

@@ -1,5 +1,6 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- Pecking Flurry
+-----------------------------------
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

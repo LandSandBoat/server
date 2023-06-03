@@ -2,7 +2,6 @@
 -- Helper file for "One to be Feared" Battlefield
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local oneToBeFeared = {}

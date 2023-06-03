@@ -2,7 +2,6 @@
 -- Spell: Silena
 -- Removes silence and mute from target.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

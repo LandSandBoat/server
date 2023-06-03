@@ -13,7 +13,6 @@
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local spellObject = {}
 

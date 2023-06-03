@@ -2,7 +2,6 @@
 -- Spell: Geo-Gravity
 -- Weighs down enemies within area of effect and lowers their movement speed.
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

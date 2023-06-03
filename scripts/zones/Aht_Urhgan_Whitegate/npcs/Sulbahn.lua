@@ -4,7 +4,6 @@
 -- Type: Alchemy Adv. Image Support
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")

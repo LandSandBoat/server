@@ -4,7 +4,6 @@
 -- Type: Fishing Synthesis Image Support
 -- !pos -178.400 -3.835 60.480 240
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------

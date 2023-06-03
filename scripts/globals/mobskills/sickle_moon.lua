@@ -3,8 +3,6 @@
 -- Delivers a two-hit attack. Damage varies with TP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

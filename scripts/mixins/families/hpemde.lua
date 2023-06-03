@@ -3,7 +3,6 @@ https://ffxiclopedia.fandom.com/wiki/Category:Hpemde
 https://www.bg-wiki.com/ffxi/Category:Hpemde
 --]]
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 g_mixins = g_mixins or {}

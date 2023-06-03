@@ -1,14 +1,10 @@
 -----------------------------------
 --  Vicious Claw
---
 --  Description: Slashes up a single target.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

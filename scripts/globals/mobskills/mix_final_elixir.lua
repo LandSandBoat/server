@@ -2,9 +2,6 @@
 -- Mix: Final Elixir - Restores all HP/MP to party members.
 -- Used once per elixir donation. He will need a refill to use it again.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

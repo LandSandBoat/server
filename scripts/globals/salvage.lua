@@ -1,7 +1,6 @@
 -----------------------------------
 -- Salvage Global Functions
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}

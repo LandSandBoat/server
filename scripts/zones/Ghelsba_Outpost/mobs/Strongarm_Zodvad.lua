@@ -3,8 +3,6 @@
 --   NM: Strongarm Zodvad
 -- Involved in Mission: Save the Children
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

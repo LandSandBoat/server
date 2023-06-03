@@ -4,7 +4,6 @@
 -- BCNM: Crustacean Conundrum
 -- TODO: You can only do 0-2 damage no matter what your attack is.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

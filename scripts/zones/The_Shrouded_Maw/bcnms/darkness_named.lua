@@ -5,7 +5,6 @@
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local battlefieldObject = {}

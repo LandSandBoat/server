@@ -1,12 +1,9 @@
 -----------------------------------
 -- Warm-Up
---
 -- Description: Enhances accuracy and evasion.
 -- Type: Magical (Earth)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

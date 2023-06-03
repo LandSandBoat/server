@@ -1,11 +1,8 @@
 -----------------------------------
 -- Plasma Charge
 -- Covers the user in Shock spikes and absorbs damage. Enemies that hit it take fire damage.
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

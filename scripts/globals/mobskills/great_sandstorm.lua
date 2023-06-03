@@ -1,14 +1,10 @@
 -----------------------------------
 --  Great Sandstorm
---
 --  Description: Deals Earth damage to single target. Additional effect: Blind
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Single target
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

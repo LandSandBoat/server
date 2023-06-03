@@ -2,8 +2,6 @@
 -- Spell: Diaga III
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")

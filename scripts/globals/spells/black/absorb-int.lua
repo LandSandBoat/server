@@ -2,8 +2,6 @@
 -- Spell: Absorb-INT
 -- Steals an enemy's intelligence.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

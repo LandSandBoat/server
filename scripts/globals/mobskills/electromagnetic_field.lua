@@ -1,12 +1,9 @@
 -----------------------------------
 -- Electromagnetic Field
---
 -- Description: Deals thunder damage.
 -- Type: Magical (Thunder)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

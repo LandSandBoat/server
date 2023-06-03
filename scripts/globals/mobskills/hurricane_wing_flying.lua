@@ -7,8 +7,6 @@
 --  Range: 30' radial.
 --  Notes: Used only by Wyrm when in the air. Only use in a dedicated flying skill set.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

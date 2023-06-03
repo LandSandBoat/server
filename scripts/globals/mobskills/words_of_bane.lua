@@ -1,15 +1,11 @@
 -----------------------------------
 --  Words of Bane
---
 --  Description: Curses a single target.
 --  Type: Enfeebling
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Single Target
---  Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

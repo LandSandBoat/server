@@ -1,14 +1,10 @@
 -----------------------------------
 --  Poison Pick
---
 --  Description: Deals damage to a single target. Additional effect: poison
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

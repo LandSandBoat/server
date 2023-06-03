@@ -3,8 +3,6 @@
 --   NM: Charybdis
 -- !pos -152 48 -328 176
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

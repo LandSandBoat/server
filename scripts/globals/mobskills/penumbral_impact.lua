@@ -1,14 +1,10 @@
 -----------------------------------
 --  Penumbral Impact
---
 --  Description: Deals dark damage to a single target.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

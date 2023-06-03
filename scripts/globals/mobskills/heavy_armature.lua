@@ -2,7 +2,6 @@
 -- Heavy Armature
 -- Adds buffs Haste, Shell, Protect, Blink
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

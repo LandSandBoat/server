@@ -3,7 +3,6 @@
 -- TODO: A benediction effect animation should play on doom removal
 
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 
 xi = xi or {}

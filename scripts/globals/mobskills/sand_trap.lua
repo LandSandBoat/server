@@ -1,15 +1,11 @@
 -----------------------------------
 -- Sand Trap
---
 -- Description: AOE Petrify and resets hate.
 -- Type: Physical
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 15' radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

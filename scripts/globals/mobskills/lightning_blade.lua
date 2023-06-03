@@ -5,8 +5,6 @@
 -- Used only by Kam'lanaut. Enthunder aspect adds 70+ to his melee attacks.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

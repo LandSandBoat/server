@@ -5,8 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 require("scripts/globals/allyassist")
-require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 

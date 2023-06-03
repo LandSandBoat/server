@@ -2,8 +2,6 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Seiryu (Pet version)
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobMagicPrepare = function(mob, target, spellId)

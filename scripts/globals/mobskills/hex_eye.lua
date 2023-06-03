@@ -1,15 +1,11 @@
 -----------------------------------
 -- Hex Eye
---
 -- Description: Paralyzes with a gaze.
 -- Type: Gaze
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Line of sight
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

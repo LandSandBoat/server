@@ -1,9 +1,6 @@
 -----------------------------------
 -- Mix: Panacea-1 - Removes anything a Panacea can remove.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

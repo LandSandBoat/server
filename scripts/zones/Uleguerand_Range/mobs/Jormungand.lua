@@ -2,7 +2,6 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

@@ -4,11 +4,6 @@
 -- Type: Tutorial NPC
 -- !pos -364.121 -11.034 -167.456 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/status")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

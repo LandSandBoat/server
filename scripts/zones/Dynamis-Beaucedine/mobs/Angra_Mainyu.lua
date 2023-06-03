@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/dynamis")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

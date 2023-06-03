@@ -1,15 +1,11 @@
 -----------------------------------
 -- Petrifactive Breath
---
 -- Description: Petrifies a single target.
 -- Type: Breath
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -1,15 +1,11 @@
 -----------------------------------
 -- Shibaraku
---
 -- Description: Damages enemies in an area of effect. Additional effect: Stun + Knockback
 -- Type: Physical
 -- Utsusemi/Blink absorb: 2-3 shadows
 -- Range: 10' radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

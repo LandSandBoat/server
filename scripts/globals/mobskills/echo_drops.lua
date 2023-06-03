@@ -1,7 +1,6 @@
 -----------------------------------
 -- Echo Drops - Removes Silence.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

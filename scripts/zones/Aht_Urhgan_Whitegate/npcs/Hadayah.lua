@@ -5,7 +5,6 @@
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}

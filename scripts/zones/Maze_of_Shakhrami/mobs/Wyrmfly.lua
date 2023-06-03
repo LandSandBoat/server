@@ -4,8 +4,6 @@
 -- Involved in Eco Warrior (Windurst)
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

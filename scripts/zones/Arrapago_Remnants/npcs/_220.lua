@@ -1,5 +1,4 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

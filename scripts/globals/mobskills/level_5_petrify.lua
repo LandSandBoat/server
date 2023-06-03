@@ -1,15 +1,11 @@
 -----------------------------------
 -- Level 5 Petrify
---
 -- Description: AOE Petrify and on multiples of 5.
 -- Type: Physical
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 15' radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

@@ -9,8 +9,6 @@
 -- Aerns will generally not attempt to use this ability if no erasable effects exist on them.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

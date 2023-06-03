@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Garlaige_Citadel/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

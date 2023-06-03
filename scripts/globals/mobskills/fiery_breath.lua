@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Tiamat, Smok and Ildebrann
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------
