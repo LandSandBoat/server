@@ -21,4 +21,6 @@ itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.SNEAK, xi.effect.SNEAK, 1, 10, 300)
     target:addStatusEffectEx(xi.effect.INVISIBLE, xi.effect.INVISIBLE, 1, 10, 300)
     target:addStatusEffectEx(xi.effect.DEODORIZE, xi.effect.DEODORIZE, 1, 10, 300)
+end
+
 return itemObject

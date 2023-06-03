@@ -12,12 +12,6 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- Used for Windurst Mission 1-3
     zone:registerTriggerArea(1, 23, -12, -208, 31, -8, -197)
-    xi.vanaversary.hideNpc(ID.npc.VANAVERSARY_COFFER)
-    xi.vanaversary.hideNpc(ID.npc.VANAVERSARY_MOOGLE)
-    xi.vanaversary.hideNpc(ID.npc.CHACHAROON)
-    xi.vanaversary.hideNpc(ID.npc.CHACH_SHEEP)
-    xi.vanaversary.hideNpc(ID.npc.CHACH_COEURL)
-    xi.vanaversary.hideNpc(ID.npc.HISTORY_MOOGLE)
 
     applyHalloweenNpcCostumes(zone:getID())
 end

@@ -10,12 +10,6 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     applyHalloweenNpcCostumes(zone:getID())
-    xi.vanaversary.hideNpc(ID.npc.VANAVERSARY_COFFER)
-    xi.vanaversary.hideNpc(ID.npc.VANAVERSARY_MOOGLE)
-    xi.vanaversary.hideNpc(ID.npc.CHACHAROON)
-    xi.vanaversary.hideNpc(ID.npc.CHACH_SHEEP)
-    xi.vanaversary.hideNpc(ID.npc.CHACH_COEURL)
-    xi.vanaversary.hideNpc(ID.npc.HISTORY_MOOGLE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
