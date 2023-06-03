@@ -1,4 +1,5 @@
 import socket
+import ssl
 import re
 import time
 import threading
@@ -37,7 +38,13 @@ class HXIClient:
         self.sessionHash = ""
 
     def login(self):
-        self.login_connect()
+        self.ssl_context = ssl.create_default_context()
+        self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        # TODO: load CA cert chain from windows/linux. For now, ignore remote verification.
+        self.ssl_context.check_hostname = False
+        self.ssl_context.verify_mode = ssl.CERT_NONE
+
+        self.login_connect(self.ssl_context)
 
         data = bytearray(86)
         data[0x00] = 0xFF # magic for new xiloader
@@ -101,10 +108,10 @@ class HXIClient:
         self.map_send_logout()
         self.stop_map_listener()
 
-    def login_connect(self):
+    def login_connect(self, ssl_context):
         server_address = (self.server, 54231)
-        print("Starting up login connection on %s port %s" % server_address)
-        self.login_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print("Starting up login connection over TLS on %s port %s" % server_address)
+        self.login_sock = ssl_context.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM), server_hostname=self.server)
         self.login_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.login_sock.connect(server_address)
 
@@ -220,7 +227,6 @@ class HXIClient:
                     44 + (self.slot * 140) : 44 + (self.slot * 140) + 16
                 ].decode("utf-8", "ignore")
                 self.char_name = re.sub(r"\d+", "", self.char_name)
-
                 # TODO: Parse the rest of the char data
 
                 print(self.char_id, self.char_name)
@@ -241,7 +247,7 @@ class HXIClient:
         try:
             data = bytearray(88)
             data[8] = 0x07
-            util.memcpy(util.pack_32(self.char_id), 0, data, 32, 4)
+            util.memcpy(util.pack_32(self.char_id), 0, data, 28, 4)
             util.pack_string(data, 36, self.char_name, len(self.char_name))
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)

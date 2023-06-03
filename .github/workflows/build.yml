@@ -505,18 +505,29 @@ jobs:
           printf "\nRunning HeadlessXI for 60 seconds\n"
           python3 << EOF
           import time
-          from tools.headlessxi.hxiclient import HXIClient
-          hxi_client = HXIClient('admin', 'admin', 'localhost')
-          hxi_client.login()
-          print('Sleeping 60s')
-          time.sleep(60)
-          hxi_client.logout()
+          try:
+              from tools.headlessxi.hxiclient import HXIClient
+              hxi_client = HXIClient('admin', 'admin', 'localhost')
+              hxi_client.login()
+              print('Sleeping 60s')
+              time.sleep(60)
+              hxi_client.logout()
+              exit(0)
+          except Exception as e:
+              exit(-1)
           EOF
+          hxi_result=$?
 
           pkill -SIGINT xi_map
           pkill -SIGINT xi_search
           pkill -SIGINT xi_connect
+          pkill -SIGINT xi_world
 
+          # fail if hxi had a non-zero exit code
+          if [[ "$hxi_result" -ne "0" ]]; then
+              echo "hxi exited with code $hxi_result"
+              exit $hxi_result
+          fi
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |

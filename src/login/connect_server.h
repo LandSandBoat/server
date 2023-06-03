@@ -31,10 +31,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/utils.h"
 #include "map/packets/basic.h"
 
+// openssl applink.c prevents issues with debug vs release vs threaded/single threaded .dlls at runtime
+// apparently not an issue with linux
+#ifdef _WIN32
+#include <ms/applink.c>
+#endif
+
+#include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <chrono>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <thread>
@@ -86,12 +94,11 @@ class handler_session
 : public std::enable_shared_from_this<handler_session>
 {
 public:
-    handler_session(asio::ip::tcp::socket socket)
+    handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
     : socket_(std::move(socket))
-    , data_()
     {
-        socket_.set_option(asio::socket_base::reuse_address(true));
-        ipAddress = socket_.remote_endpoint().address().to_string();
+        socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
+        ipAddress = socket_.lowest_layer().remote_endpoint().address().to_string();
     }
 
     virtual ~handler_session() = default;
@@ -106,7 +113,7 @@ public:
         auto self(shared_from_this());
 
         // clang-format off
-        socket_.async_read_some(asio::buffer(data_, max_length),
+        socket_.next_layer().async_read_some(asio::buffer(data_, max_length),
         [this, self](std::error_code ec, std::size_t length)
         {
             if (!ec)
@@ -130,7 +137,7 @@ public:
     {
         auto self(shared_from_this());
         // clang-format off
-        asio::async_write(socket_, asio::buffer(data_, length),
+        asio::async_write(socket_.next_layer(), asio::buffer(data_, length),
         [this, self](std::error_code ec, std::size_t /*length*/)
         {
             if (!ec)
@@ -148,9 +155,10 @@ public:
     virtual void read_func()  = 0;
     virtual void write_func() = 0;
 
-    asio::ip::tcp::socket socket_;
-    std::string           ipAddress;   // Sore IP address in class -- once the file handle is invalid this can no longer be obtained from socket_
-    std::string           sessionHash; // Store session hash here additionally to clean up sockets easier
+    std::string ipAddress;   // Store IP address in class -- once the file handle is invalid this can no longer be obtained from socket_
+    std::string sessionHash; // Store session hash here additionally to clean up sockets easier
+
+    asio::ssl::stream<asio::ip::tcp::socket> socket_;
 
     // TODO: Use std::array
     enum
@@ -237,35 +245,25 @@ struct session_t
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS
 {
-    // If this flag is set, then all communications will happen over a
-    // secure TLS session.
-    USE_TLS = 1 << 0,
-
     // Information to be sent during login sequence.
     // Each item is added to the data sequentially,
     // after username and password, which are mandatory:
-    // [username][password][email][hostname][macaddr]
-    // If you opted not to use email and hostname:
-    // [username][password][macaddr]
-    SEND_EMAIL       = 1 << 1,
-    SEND_HOSTNAME    = 1 << 2,
-    SEND_MAC_ADDRESS = 1 << 3,
+    // [username][password][email]
+    // If you opted not to use email:
+    // [username][password]
+    SEND_EMAIL       = 1 << 0,
+    SEND_HOSTNAME    = 1 << 1,
+    SEND_MAC_ADDRESS = 1 << 2,
 
     // These flags enable additional workflows between connect and xiloader
-    ENABLE_ACCOUNT_CREATE  = 1 << 4, // Ability for a user to create an account
-    ENABLE_ACCOUNT_DELETE  = 1 << 5, // Ability for a user to delete their account
-    ENABLE_PASSWORD_CHANGE = 1 << 6, // Ability for a user to change their password through xiloader
-    ENABLE_PASSWORD_RESET  = 1 << 7, // Ability for a user to flag their account for a password reset through connect server
+    ENABLE_ACCOUNT_CREATE  = 1 << 3, // Ability for a user to create an account
+    ENABLE_ACCOUNT_DELETE  = 1 << 4, // Ability for a user to delete their account
+    ENABLE_PASSWORD_CHANGE = 1 << 5, // Ability for a user to change their password through xiloader
+    ENABLE_PASSWORD_RESET  = 1 << 6, // Ability for a user to flag their account for a password reset through connect server
 };
 
 // [ip_addr][session_hash] = session
 std::unordered_map<std::string, std::map<std::string, session_t>> authenticatedSessions_;
-
-session_t& get_authenticated_session(asio::ip::tcp::socket& socket, std::string sessionHash)
-{
-    std::string ip_str = socket.remote_endpoint().address().to_string();
-    return authenticatedSessions_[ip_str][sessionHash]; // NOTE: Will construct if doesn't exist
-}
 
 session_t& get_authenticated_session(std::string ipAddr, std::string sessionHash)
 {
@@ -579,13 +577,56 @@ int32 createCharacter(session_t& session, char* buf)
 class auth_session : public handler_session
 {
 public:
-    auth_session(asio::ip::tcp::socket socket)
+    auth_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
     : handler_session(std::move(socket))
     {
         DebugSockets("auth_session");
     }
 
+public:
+    void start()
+    {
+        auto self(shared_from_this());
+        // clang-format off
+
+        socket_.async_handshake(asio::ssl::stream_base::server,
+        [this, self](std::error_code ec)
+        {
+            if (!ec)
+            {
+                do_read();
+            }
+            else
+            {
+                ShowWarning(fmt::format("Error: ({}), {}", ec.value(), ec.message()));
+                ShowWarning("Failed to handshake!");
+                socket_.next_layer().close();
+            }
+        });
+        // clang-format on
+    }
+
 protected:
+    void do_read()
+    {
+        auto self(shared_from_this());
+        // clang-format off
+        socket_.async_read_some(asio::buffer(data_, max_length),
+        [this, self](std::error_code ec, std::size_t length)
+        {
+            if (!ec)
+            {
+                read_func();
+            }
+            else
+            {
+                DebugSockets(ec.message());
+                handle_error(ec, self);
+            }
+        });
+        // clang-format on
+    }
+
     void read_func() override
     {
         auto newModeFlag = ref<uint8>(data_, 0) == 0xFF;
@@ -597,12 +638,13 @@ protected:
             return;
         }
 
-        auto componentFlags = ref<uint64>(data_, 1);
+        /*auto componentFlags = ref<uint64>(data_, 1);
 
-        if (componentFlags & AUTH_COMPONENTS::USE_TLS)
+        if (componentFlags & )
         {
             // ...
-        }
+        }*/
+
         char usernameBuffer[17] = {};
         char passwordBuffer[17] = {};
 
@@ -674,7 +716,7 @@ protected:
                         {
                             while (sql->NextRow() == SQL_SUCCESS)
                             {
-                                uint32 charid = sql->GetUIntData(0);
+                                /*uint32 charid = sql->GetUIntData(0);
                                 uint64 ip     = sql->GetUIntData(1);
                                 uint64 port   = sql->GetUIntData(2);
 
@@ -688,7 +730,8 @@ protected:
                                 //     : so sending this does nothing?
                                 //     : But in the client (message.cpp), it _could_
                                 //     : be used to clear out lingering PChar data.
-                                // queue_message(ipp, MSG_LOGIN, &chardata, &empty);
+                                queue_message(ipp, MSG_LOGIN, &chardata, &empty);
+                                */
                             }
                         }
 
@@ -729,7 +772,7 @@ protected:
 
                         do_write(21);
 
-                        auto& session          = get_authenticated_session(socket_, std::string(reinterpret_cast<const char*>(hash), sizeof(hash)));
+                        auto& session          = get_authenticated_session(ipAddress, std::string(reinterpret_cast<const char*>(hash), sizeof(hash)));
                         session.accountID      = accountID;
                         session.authorizedTime = server_clock::now();
                     }
@@ -900,6 +943,25 @@ protected:
     void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) override
     {
     }
+
+    void do_write(std::size_t length)
+    {
+        auto self(shared_from_this());
+        // clang-format off
+        asio::async_write(socket_, asio::buffer(data_, length),
+        [this, self](std::error_code ec, std::size_t /*length*/)
+        {
+            if (!ec)
+            {
+                write_func();
+            }
+            else
+            {
+                ShowError(ec.message());
+            }
+        });
+        // clang-format on
+    }
 };
 
 void PrintPacket(const char* data, uint32 size)
@@ -928,10 +990,9 @@ void PrintPacket(const char* data, uint32 size)
     }
 }
 
-std::string getHashFromPacket(asio::ip::tcp::socket& socket, char* data)
+std::string getHashFromPacket(std::string ip_str, char* data)
 {
-    std::string hash   = std::string(data + 12, 16);
-    std::string ip_str = socket.remote_endpoint().address().to_string();
+    std::string hash = std::string(data + 12, 16);
 
     if (authenticatedSessions_[ip_str].find(hash) == authenticatedSessions_[ip_str].end())
     {
@@ -951,7 +1012,7 @@ std::string getHashFromPacket(asio::ip::tcp::socket& socket, char* data)
 class view_session : public handler_session
 {
 public:
-    view_session(asio::ip::tcp::socket socket)
+    view_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
     : handler_session(std::move(socket))
     {
         DebugSockets("view_session");
@@ -962,17 +1023,17 @@ protected:
     {
         uint8 code = ref<uint8>(data_, 8);
 
-        std::string sessionHash = getHashFromPacket(socket_, data_);
+        std::string sessionHash = getHashFromPacket(ipAddress, data_);
 
         if (sessionHash == "")
         {
             ShowWarning("Session requested without valid sessionHash!");
             return;
         }
-        session_t& session = get_authenticated_session(socket_, sessionHash);
+        session_t& session = get_authenticated_session(ipAddress, sessionHash);
         if (!session.view_session)
         {
-            session.view_session = std::make_shared<view_session>(std::forward<asio::ip::tcp::socket>(socket_));
+            session.view_session = std::make_shared<view_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
         }
         session.view_session->sessionHash = sessionHash;
 
@@ -1010,7 +1071,7 @@ protected:
                 if (accountID != session.accountID)
                 {
                     ShowError("Client tried to login as character not in their account");
-                    socket_.close();
+                    socket_.lowest_layer().close();
                     return;
                 }
 
@@ -1066,7 +1127,7 @@ protected:
                 // creating new char
                 if (createCharacter(session, data_) == -1)
                 {
-                    socket_.close();
+                    socket_.lowest_layer().close();
                     return;
                 }
 
@@ -1398,7 +1459,7 @@ protected:
 class data_session : public handler_session
 {
 public:
-    data_session(asio::ip::tcp::socket socket)
+    data_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
     : handler_session(std::move(socket))
     {
         DebugSockets("data_session");
@@ -1407,7 +1468,7 @@ public:
 protected:
     void read_func() override
     {
-        std::string sessionHash = getHashFromPacket(socket_, data_);
+        std::string sessionHash = getHashFromPacket(ipAddress, data_);
 
         if (sessionHash == "")
         {
@@ -1420,10 +1481,10 @@ protected:
             }
         }
 
-        session_t& session = get_authenticated_session(socket_, sessionHash);
+        session_t& session = get_authenticated_session(ipAddress, sessionHash);
         if (!session.data_session)
         {
-            session.data_session              = std::make_shared<data_session>(std::forward<asio::ip::tcp::socket>(socket_));
+            session.data_session              = std::make_shared<data_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
             session.data_session->sessionHash = sessionHash;
         }
 
@@ -1467,7 +1528,7 @@ protected:
                     else
                     {
                         // TODO: throw error to client here?
-                        socket_.close();
+                        socket_.lowest_layer().close();
                         return;
                     }
 
@@ -1486,7 +1547,7 @@ protected:
                     ret = sql->Query(pfmtQuery, session.accountID, CharList[28]);
                     if (ret == SQL_ERROR)
                     {
-                        socket_.close();
+                        socket_.lowest_layer().close();
                         return;
                     }
 
@@ -1627,12 +1688,12 @@ protected:
 
                     generateErrorMessage(data_, 321);
                     do_write(0x24);
-                    socket_.close();
+                    socket_.lowest_layer().close();
                     return;
                 }
 
                 uint32      charid    = session.requestedCharacterID;
-                uint32      accountIP = str2ip(socket_.remote_endpoint().address().to_string().c_str());
+                uint32      accountIP = str2ip(ipAddress.c_str());
                 const char* fmtQuery  = "SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname \
                                              FROM zone_settings, chars \
                                              WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = %u AND accid = %u;";
@@ -1810,8 +1871,8 @@ protected:
                     std::memcpy(data->data_, MainReservePacket, sizeof(MainReservePacket));
                     data->do_write(SendBuffSize);
 
-                    data->socket_.shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
-                    data->socket_.close();
+                    data->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
+                    data->socket_.lowest_layer().close();
                     session.view_session = nullptr;
                 }
 
@@ -1893,9 +1954,15 @@ class handler
 public:
     handler(asio::io_context& io_context, unsigned int port)
     : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
-    , socket_(io_context)
+    , sslContext_(asio::ssl::context::tls_server)
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
+
+        sslContext_.set_options(asio::ssl::context::default_workarounds | asio::ssl::context::verify_fail_if_no_peer_cert);
+        sslContext_.set_default_verify_paths();
+        sslContext_.use_rsa_private_key_file("login.key", asio::ssl::context::file_format::pem);
+        sslContext_.use_certificate_chain_file("login.cert");
+
         do_accept();
     }
 
@@ -1903,24 +1970,24 @@ private:
     void do_accept()
     {
         // clang-format off
-        acceptor_.async_accept(socket_,
-        [this](std::error_code ec)
+        acceptor_.async_accept(
+        [this](std::error_code ec, asio::ip::tcp::socket socket)
         {
             if (!ec)
             {
                 if constexpr (std::is_same_v<T, auth_session>)
                 {
-                    auto auth_handler = std::make_shared<T>(std::move(socket_));
+                    auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     auth_handler->start();
                 }
                 else if constexpr (std::is_same_v<T, view_session>)
                 {
-                    auto view_handler = std::make_shared<T>(std::move(socket_));
+                    auto view_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     view_handler->start();
                 }
                 else if constexpr (std::is_same_v<T, data_session>)
                 {
-                    auto data_handler = std::make_shared<T>(std::move(socket_));
+                    auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     data_handler->start();
                 }
             }
@@ -1935,7 +2002,7 @@ private:
     }
 
     asio::ip::tcp::acceptor acceptor_;
-    asio::ip::tcp::socket   socket_;
+    asio::ssl::context      sslContext_;
 };
 
 class ConnectServer final : public Application
@@ -1988,8 +2055,121 @@ public:
 
         try
         {
-            // Handler creates session of type T for specific port on connection.
+            if (std::filesystem::exists("login.key"))
+            {
+                FILE* fileHandle = fopen("login.key", "r");
+                if (fileHandle)
+                {
+                    EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, NULL, NULL, NULL);
+                    if (pkey)
+                    {
+                        ShowInfo(fmt::format("Found existing login.key"));
+                    }
+                }
+                fclose(fileHandle);
+            }
+
+            if (std::filesystem::exists("login.cert"))
+            {
+                FILE* fileHandle = fopen("login.cert", "r");
+                if (fileHandle)
+                {
+                    X509* cert = PEM_read_X509(fileHandle, NULL, NULL, NULL);
+                    if (cert)
+                    {
+                        char cn[2048] = {};
+                        int  size     = sizeof(cn);
+
+                        X509_NAME_oneline(X509_get_subject_name(cert), cn, size);
+                        X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
+                        ShowInfo(fmt::format("Found existing login.cert", cn));
+
+                        // if current time not within the bounds of valid date, note it's expired
+                        if (X509_cmp_time(X509_get_notAfter(cert), NULL) != 1 || X509_cmp_time(X509_get_notBefore(cert), NULL) != -1)
+                        {
+                            ShowWarning("Existing login.cert is not valid for the current time. Please regenerate or obtain a new certificate.");
+                        }
+                    }
+
+                    fclose(fileHandle);
+                }
+            }
+
+            if (!std::filesystem::exists("login.key") && !std::filesystem::exists("login.cert"))
+            {
+                ShowInfo("Generating self-signed certificate");
+
+                EVP_PKEY* pkey = EVP_RSA_gen(4096);
+
+                if (pkey == NULL)
+                {
+                    ShowError("Failed to generate RSA private key!");
+                }
+
+                X509* x509 = X509_new();
+
+                if (x509 == NULL)
+                {
+                    ShowError("Failed to generate allocate X509 cert!");
+                }
+
+                ASN1_INTEGER_set(X509_get_serialNumber(x509), 1);         // cert #1 for self-signed
+                X509_gmtime_adj(X509_get_notBefore(x509), 0);             // valid from now
+                X509_gmtime_adj(X509_get_notAfter(x509), 31536000L * 20); // expires 20 years from now
+
+                if (!X509_set_pubkey(x509, pkey))
+                {
+                    ShowError("Failed to assign private key to X509 cert!");
+                }
+
+                X509_NAME* name;
+                name = X509_get_subject_name(x509);
+
+                std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
+                unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
+
+                std::memcpy(commonNameIpAddr, authIpAddr.c_str(), authIpAddr.length());
+
+                // TODO: do we need to set/support country code, among others?
+                /* X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC,
+                                           (unsigned char*)"CA", -1, -1, 0);*/
+                X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC,
+                                           (unsigned char*)"LSB self-signed certificate for login server", -1, -1, 0);
+                X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC,
+                                           commonNameIpAddr, -1, -1, 0);
+
+                X509_set_issuer_name(x509, name);
+
+                if (!X509_sign(x509, pkey, EVP_sha384()))
+                {
+                    ShowError("Failed to sign X509 cert!");
+                }
+
+                FILE* fileHandle = fopen("login.key", "wb");
+                if (fileHandle)
+                {
+                    if (!PEM_write_PrivateKey(fileHandle, pkey, NULL, NULL, 0, 0, NULL))
+                    {
+                        ShowError("Failed to write login.key!");
+                    }
+                    fclose(fileHandle);
+                }
+
+                fileHandle = fopen("login.cert", "wb");
+                if (fileHandle)
+                {
+                    if (!PEM_write_X509(fileHandle, x509))
+                    {
+                        ShowError("Failed to write login.cert!");
+                    }
+                    fclose(fileHandle);
+                }
+                EVP_PKEY_free(pkey);
+            }
+
             ShowInfo("creating ports");
+
+            // Handler creates session of type T for specific port on connection.
             handler<auth_session> auth(io_context, 54231);
             handler<view_session> view(io_context, 54001);
             handler<data_session> data(io_context, 54230);
