@@ -1,7 +1,7 @@
 # add_subdirectory(lua) # Handled globally
 # add_subdirectory(mysql) # Handled globally
 # add_subdirectory(zmq) # Handled globally
-
+# add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
 add_subdirectory(sol)
 
@@ -148,9 +148,9 @@ endif()
 
 CPMAddPackage(
     NAME asio
-    VERSION 1.24.1
+    VERSION 1.28.0
     GITHUB_REPOSITORY chriskohlhoff/asio
-    GIT_TAG asio-1-24-0 # asio uses non-standard version tag, we must specify GIT_TAG
+    GIT_TAG asio-1-28-0 # asio uses non-standard version tag, we must specify GIT_TAG
 ) #defines asio
 
 # ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
@@ -200,17 +200,6 @@ if(asio_ADDED)
     endif()
 endif()
 
-message(STATUS "Downloading wolfssl, this might take a while!")
-CPMAddPackage(
-  NAME wolfssl
-  GITHUB_REPOSITORY wolfSSL/wolfssl
-  GIT_TAG 4fbd4fd36a21efd9d1a7e17aba390e91c78693b1
-  OPTIONS
-    "BUILD_SHARED_LIBS OFF"
-    "WOLFSSL_CRYPT_TESTS no"
-    "WOLFSSL_EXAMPLES no"
-)
-
 set(EXTERNAL_LIBS
     spdlog
     concurrentqueue
@@ -227,7 +216,6 @@ set(EXTERNAL_LIBS
     nlohmann_json::nlohmann_json
     pcg-cpp
     asio
-    wolfssl
 )
 
 if(WIN32)
