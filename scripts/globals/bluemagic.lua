@@ -266,7 +266,6 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local wsc = calculateWSC(caster, params)
     if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
         wsc = wsc * 2
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
     -- INT/MND/CHR dmg bonuses

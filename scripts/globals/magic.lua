@@ -225,10 +225,17 @@ local function calculateMagicBurst(caster, spell, target, params)
     local modburst = 1.0
 
     if
-        spell:getSpellGroup() == 3 and
-        not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE))
+        spell and
+        spell:getSpellGroup() == xi.magic.spellGroup.BLUE
     then
-        return burst
+        if
+            not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
+            caster:hasStatusEffect(xi.effect.AZURE_LORE))
+        then
+            return burst
+        end
+
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
     -- Obtain first multiplier from gear, atma and job traits
