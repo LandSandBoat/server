@@ -3,7 +3,6 @@
 -- Hapy Staff
 -- Enchantment: 60Min, Costume - Frog (Various)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

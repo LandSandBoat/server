@@ -5,7 +5,6 @@
 -- Requires player to have previously visited Wajaom Woodlands to activate.
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

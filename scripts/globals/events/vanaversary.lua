@@ -1,7 +1,6 @@
 -------------------------------------
 -- Vana'versary Celebration Campaign
 -------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/zone")
@@ -245,7 +244,6 @@ xi.events.vanaversary.generateEntities = function()
                 local look          = entry[ 9]
                 local behavior      = entry[10]
                 local entityCsid    = entry[11]
-                local csid          = nil
                 local params        = {}
 
                 if behavior == xi.events.vanaversary.npcType.HISTORY then
@@ -266,13 +264,14 @@ xi.events.vanaversary.generateEntities = function()
                         xi.events.vanaversary.historyMoogle(player, entityCsid)
                     end,
 
-                    onEventUpdate = function(player, npc, option)
+                    onEventUpdate = function(player, csid, option)
                         xi.events.vanaversary.historyMoogleUpdate(player, csid, option)
                     end,
 
                     onEventFinish = function(player, csid, option, npc)
                         npc:setRotation(rot)
                     end,
+
                     })
                 end
 
@@ -319,9 +318,10 @@ xi.events.vanaversary.generateEntities = function()
                     namevis = namevis,
                     releaseIdOnDisappear = true,
                     onTrigger = function(player, npc)
-                        player:timer(400, function (player)
-                            player:lookAt(npc:getPos())
+                        player:timer(400, function(playerArg)
+                            playerArg:lookAt(npc:getPos())
                         end)
+
                         npc:facePlayer(player, true)
                         -- TODO: Better handling of Moogle CS Behavior. Add missing Animations.
                         xi.events.vanaversary.tshirtMoogle(player, entityCsid)
@@ -351,12 +351,13 @@ xi.events.vanaversary.generateEntities = function()
                     onTrigger = function(player, npc)
                         npc:facePlayer(player, true)
                         player:PrintToPlayer("Mandragoria Mania Madness is currently unavailable.", 0, npc:getPacketName())
-                        npc:timer(600, function (npc)
-                            player:PrintToPlayer("Happy Vana'versary!", 0, npc:getPacketName())
-                            npc:setRotation(rot)
+                        npc:timer(600, function(npcArg)
+                            player:PrintToPlayer("Happy Vana'versary!", 0, npcArg:getPacketName())
+                            npcArg:setRotation(rot)
                         end)
-                        npc:timer(1000, function (npc)
-                            npc:setRotation(rot)
+
+                        npc:timer(1000, function(npcArg)
+                            npcArg:setRotation(rot)
                         end)
                     end,
 

@@ -121,7 +121,7 @@ uint8 CVanaTime::getSysMonth()
 
     _localtime_s(&ltm, &now);
 
-    return ltm.tm_mon + 1; //tm_mon returns 0-11
+    return ltm.tm_mon + 1; // tm_mon returns 0-11
 }
 
 uint8 CVanaTime::getSysDay()
