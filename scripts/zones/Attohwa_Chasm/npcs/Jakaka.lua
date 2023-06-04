@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

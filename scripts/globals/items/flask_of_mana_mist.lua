@@ -3,7 +3,6 @@
 -- Item: flask_of_mana_mist
 -- Item Effect: Restores 300 MP to Party members within 10'
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

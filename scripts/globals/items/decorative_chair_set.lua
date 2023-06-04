@@ -3,7 +3,6 @@
 -- Item: Decorative Chair
 -- Item Effect: Grant Decorative chair key item
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------

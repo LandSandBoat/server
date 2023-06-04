@@ -3,7 +3,6 @@
 -- Item: Ether +1
 -- Item Effect: Restores 25 MP
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

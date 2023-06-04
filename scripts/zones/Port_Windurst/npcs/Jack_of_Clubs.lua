@@ -3,8 +3,6 @@
 --  NPC: Jack of Clubs
 -- Adventurer's Assistant
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,10 +4,7 @@
 -- !pos 322 24 113
 -- Quest NPC
 -----------------------------------
-require("scripts/globals/campaign")
-require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Module helpers
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

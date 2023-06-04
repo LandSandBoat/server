@@ -12,7 +12,6 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
-require('scripts/globals/settings')
 -----------------------------------
 local upperJeunoID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------

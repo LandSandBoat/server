@@ -4,7 +4,6 @@
 -- Type: Tenshodo Merchant
 -- !pos 1.300 0.000 19.259 252
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Norg/IDs")

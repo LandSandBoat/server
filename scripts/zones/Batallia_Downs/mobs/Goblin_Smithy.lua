@@ -3,7 +3,6 @@
 --  Mob: Goblin Smithy
 -----------------------------------
 require("scripts/globals/regimes")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 -----------------------------------

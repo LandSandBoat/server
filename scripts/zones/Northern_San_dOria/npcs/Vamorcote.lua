@@ -5,7 +5,6 @@
 -- !pos -137.070 10.999 161.855 231
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 local entity = {}

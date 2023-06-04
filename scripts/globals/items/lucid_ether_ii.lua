@@ -3,7 +3,6 @@
 -- Item: Lucid Ether II
 -- Item Effect: Restores 500 MP
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -3,7 +3,6 @@
 --  NPC: Grilau
 -- !pos -241.987 6.999 57.887 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------

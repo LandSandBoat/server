@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Sleepless Nights
 -- !pos 158 -6 17 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

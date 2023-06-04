@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Port_Windurst/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}

@@ -2,7 +2,6 @@
 -- Assault Utilities
 -- desc: Common functionality for Assaults
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/besieged")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")

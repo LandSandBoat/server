@@ -4,7 +4,6 @@
 -- Starts Quest: Acting in Good Faith
 -- !pos -83 -9 3 238
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
