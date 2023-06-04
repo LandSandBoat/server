@@ -436,11 +436,15 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     -- MBB = 1.0 + Gear + Atma/Atmacite + AMII Merits + others -- This Caps at 1.4
     -- MBB = MBB + trait
 
-    if
-        spellGroup == xi.magic.spellGroup.BLUE and
-        not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE))
-    then
-        return magicBurstBonus
+    if spellGroup == xi.magic.spellGroup.BLUE then
+        if
+            not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
+            caster:hasStatusEffect(xi.effect.AZURE_LORE))
+        then
+            return magicBurstBonus
+        end
+
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
     -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
