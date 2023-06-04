@@ -6,7 +6,6 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")

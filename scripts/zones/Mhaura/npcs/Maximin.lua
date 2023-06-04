@@ -2,8 +2,6 @@
 -- Area: Mhaura
 --  NPC: Maximin
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

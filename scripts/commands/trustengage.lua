@@ -2,8 +2,6 @@
 -- func: trustengage
 -- desc: Sets the engagement type of a players trusts
 -----------------------------------
-require("scripts/globals/settings")
-
 cmdprops =
 {
     permission = 0,

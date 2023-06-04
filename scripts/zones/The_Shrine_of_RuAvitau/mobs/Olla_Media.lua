@@ -3,7 +3,6 @@
 --  Mob: Olla Media
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

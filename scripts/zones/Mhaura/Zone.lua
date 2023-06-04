@@ -5,7 +5,6 @@ local ID = require('scripts/zones/Mhaura/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}

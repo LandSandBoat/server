@@ -3,7 +3,6 @@
 --  NPC: Dulsie
 -- Adventurer's Assistant
 -----------------------------------
-require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}

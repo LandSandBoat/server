@@ -5,7 +5,6 @@
 -- !pos 0 -16 124 239
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")

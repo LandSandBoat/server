@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
 require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

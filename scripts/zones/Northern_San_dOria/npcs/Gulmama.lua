@@ -5,7 +5,6 @@
 -- Involved in Quest: Class Reunion
 -- !pos -186 0 107 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea - Grauberg
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

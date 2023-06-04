@@ -5,7 +5,6 @@
 -- !pos 3.78 9.54 56.21 247
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")

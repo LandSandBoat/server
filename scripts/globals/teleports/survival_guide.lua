@@ -1,7 +1,6 @@
 -----------------------------------
 -- Survival guides global file
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 -----------------------------------

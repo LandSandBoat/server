@@ -5,7 +5,6 @@
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

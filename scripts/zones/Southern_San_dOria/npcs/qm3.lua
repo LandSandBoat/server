@@ -3,7 +3,6 @@
 --  NPC: The Picture ??? in Vemalpeau's house
 -- Involved in Quests: Under Oath
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

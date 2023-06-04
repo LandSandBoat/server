@@ -4,7 +4,6 @@
 -- Type: Guild Merchant: Fishing Guild
 -- !pos 4.986 -2.101 -12.026 59
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Silver_Sea_route_to_Al_Zahbi/IDs")
 -----------------------------------

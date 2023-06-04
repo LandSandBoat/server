@@ -5,7 +5,6 @@ local ID = require('scripts/zones/Windurst_Woods/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
-require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/zone')
 -----------------------------------
