@@ -12,7 +12,7 @@ xi.settings = xi.settings or {}
 xi.settings.login =
 {
     -- Expected Client version (wrong version cannot log in)
-    CLIENT_VER = "30230518_0",
+    CLIENT_VER = "30230328_0",
 
     -- 0 - disabled (every version allowed)
     -- 1 - enabled - strict (only exact CLIENT_VER allowed)
@@ -26,7 +26,7 @@ xi.settings.login =
     MAINT_MODE = 0,
 
     -- Logging of user IP address to database (true/false)
-    LOG_USER_IP = true,
+    LOG_USER_IP = false,
 
     -- Allow account creation via the loader (true/false)
     ACCOUNT_CREATION = true,
@@ -59,6 +59,10 @@ xi.settings.login =
     MOG_WARDROBE_6 = true,
     MOG_WARDROBE_7 = true,
     MOG_WARDROBE_8 = true,
+
+    -- CW specific settings
+    DISABLE_CW_LOGIN         = true,
+    DISABLE_CW_CHAR_CREATION = true,
 
     -- If true, blocks character creation with names of NPCs and Mobs in the database (Fafnir, Shantotto, etc.)
     DISABLE_MOB_NPC_CHAR_NAMES = false,
