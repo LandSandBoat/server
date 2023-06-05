@@ -22,7 +22,6 @@ quest.reward =
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
     gil      = 3000,
-    item     = xi.items.CHORAL_SLIPPERS,
     title    = xi.title.WANDERING_MINSTREL,
 }
 quest.sections =
