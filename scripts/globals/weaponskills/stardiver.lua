@@ -25,9 +25,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
+    -- https://www.bluegartr.com/threads/106679-Test-Server-Findings?p=4920448&viewfull=1#post4920448
+    params.multiHitfTP = true
+
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.STARDIVER) * 0.03)
-        params.multiHitfTP = true
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
