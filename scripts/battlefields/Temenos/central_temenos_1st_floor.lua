@@ -31,8 +31,9 @@ function content:handleMobPartnerDeath(mobs, battlefield, mob, count)
         return
     end
 
-    local zone = mob:getZone()
+    local zone   = mob:getZone()
     local target = zone:queryEntitiesByName(mobs[1])[1]
+
     if target and mob:getID() == target:getID() then
         target = zone:queryEntitiesByName(mobs[2])[1]
     end
@@ -48,17 +49,17 @@ end
 content.groups =
 {
     {
-        mobs = { "Airi", "Temenos_Cleaner" },
+        mobs  = { "Airi", "Temenos_Cleaner" },
         death = utils.bind(content.handleMobPartnerDeath, content, { "Airi", "Temenos_Cleaner" }),
     },
 
     {
-        mobs = { "Iruci", "Temenos_Weapon" },
+        mobs  = { "Iruci", "Temenos_Weapon" },
         death = utils.bind(content.handleMobPartnerDeath, content, { "Iruci", "Temenos_Weapon" }),
     },
 
     {
-        mobs = { "Enhanced_Dragon", "Enhanced_Ahriman" },
+        mobs  = { "Enhanced_Dragon", "Enhanced_Ahriman" },
         death = utils.bind(content.handleMobPartnerDeath, content, { "Enhanced_Dragon", "Enhanced_Ahriman" }),
     },
 
@@ -73,7 +74,7 @@ content.groups =
             "Enhanced_Ahriman",
         },
 
-        mods = { [xi.mod.REGEN] = 24 },
+        mods     = { [xi.mod.REGEN] = 24 },
         allDeath = function(battlefield, mob)
             xi.limbus.spawnFrom(mob, ID.CENTRAL_TEMENOS_1ST_FLOOR.npc.LOOT_CRATE)
         end
@@ -93,22 +94,22 @@ content.loot =
             { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.NORMAL },
             { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PANTIN_WIRE,             weight = xi.loot.weight.NORMAL },
         },
 
         {
             { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN,     weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN,  weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW },
-            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW       },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_FILET_LACE,     weight = xi.loot.weight.LOW       },
         },
 
         {
@@ -116,8 +117,8 @@ content.loot =
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     }
 }

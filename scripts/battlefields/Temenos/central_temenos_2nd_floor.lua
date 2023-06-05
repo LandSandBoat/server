@@ -28,8 +28,9 @@ local content = Limbus:new({
 
 local function weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield, mob, count)
     -- Remove the elemental bonus effects
-    local zone = mob:getZone()
+    local zone      = mob:getZone()
     local carbuncle = zone:queryEntitiesByName("Mystic_Avatar_Carbuncle")[1]
+
     if elementalMod ~= xi.mod.NONE then
         carbuncle:setMod(elementalMod, 0)
     end
@@ -41,7 +42,8 @@ function content:handleElementalDeath(elementalMod, bonusMod, bonusAmount, weakE
     -- Spawn the Mystic Avatar if this elemental died from morphing
     if mob:getLocalVar("morphed") == 1 then
         local mysticID = mob:getID() + 6
-        local mystic = GetMobByID(mysticID)
+        local mystic   = GetMobByID(mysticID)
+
         mystic:timer(3000, function(mobArg)
             mystic:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
             SpawnMob(mysticID)
@@ -53,8 +55,9 @@ function content:handleElementalDeath(elementalMod, bonusMod, bonusAmount, weakE
     weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield, mob, count)
 
     -- Morph the weak elemental into a Mystic Avatar
-    local zone = mob:getZone()
+    local zone      = mob:getZone()
     local elemental = zone:queryEntitiesByName(weakElemental)[1]
+
     if elemental:isAlive() then
         elemental:setLocalVar("morphed", 1)
         elemental:setHP(0)
@@ -78,8 +81,8 @@ content.groups =
         -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
         mods =
         {
-            [xi.mod.UDMGPHYS] = -10000,
-            [xi.mod.UDMGMAGIC] = 5000,
+            [xi.mod.UDMGPHYS    ] = -10000,
+            [xi.mod.UDMGMAGIC   ] = 5000,
             [xi.mobMod.DETECTION] = xi.detects.HEARING,
         },
     },
@@ -87,97 +90,97 @@ content.groups =
     -- Each Mystic Avatar has special elemental SDTs
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Ifrit" },
+        mobs    = { "Mystic_Avatar_Ifrit" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS   ] = 2500,
             [xi.mod.FIRE_ABSORB] = 100,
-            [xi.mod.FIRE_SDT] = -10000,
-            [xi.mod.ICE_SDT] = 9000,
+            [xi.mod.FIRE_SDT   ] = -10000,
+            [xi.mod.ICE_SDT    ] = 9000,
             [xi.mod.THUNDER_SDT] = 9000,
-            [xi.mod.EARTH_SDT] = 9000,
-            [xi.mod.WIND_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.EARTH_SDT  ] = 9000,
+            [xi.mod.WIND_SDT   ] = 9000,
+            [xi.mod.DARK_SDT   ] = 9000,
         },
     },
 
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Shiva" },
+        mobs    = { "Mystic_Avatar_Shiva" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
-            [xi.mod.ICE_ABSORB] = 100,
-            [xi.mod.ICE_SDT] = -10000,
-            [xi.mod.WATER_SDT] = 9000,
+            [xi.mod.UDMGPHYS   ] = 2500,
+            [xi.mod.ICE_ABSORB ] = 100,
+            [xi.mod.ICE_SDT    ] = -10000,
+            [xi.mod.WATER_SDT  ] = 9000,
             [xi.mod.THUNDER_SDT] = 9000,
-            [xi.mod.EARTH_SDT] = 9000,
-            [xi.mod.WIND_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.EARTH_SDT  ] = 9000,
+            [xi.mod.WIND_SDT   ] = 9000,
+            [xi.mod.DARK_SDT   ] = 9000,
         },
     },
 
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Garuda" },
+        mobs    = { "Mystic_Avatar_Garuda" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS   ] = 2500,
             [xi.mod.WIND_ABSORB] = 100,
-            [xi.mod.WIND_SDT] = -10000,
-            [xi.mod.FIRE_SDT] = 9000,
-            [xi.mod.WATER_SDT] = 9000,
+            [xi.mod.WIND_SDT   ] = -10000,
+            [xi.mod.FIRE_SDT   ] = 9000,
+            [xi.mod.WATER_SDT  ] = 9000,
             [xi.mod.THUNDER_SDT] = 9000,
-            [xi.mod.EARTH_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.EARTH_SDT  ] = 9000,
+            [xi.mod.DARK_SDT   ] = 9000,
         },
     },
 
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Titan" },
+        mobs    = { "Mystic_Avatar_Titan" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS    ] = 2500,
             [xi.mod.EARTH_ABSORB] = 100,
-            [xi.mod.EARTH_SDT] = -10000,
-            [xi.mod.ICE_SDT] = 9000,
-            [xi.mod.FIRE_SDT] = 9000,
-            [xi.mod.WATER_SDT] = 9000,
-            [xi.mod.THUNDER_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.EARTH_SDT   ] = -10000,
+            [xi.mod.ICE_SDT     ] = 9000,
+            [xi.mod.FIRE_SDT    ] = 9000,
+            [xi.mod.WATER_SDT   ] = 9000,
+            [xi.mod.THUNDER_SDT ] = 9000,
+            [xi.mod.DARK_SDT    ] = 9000,
         },
     },
 
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Ramuh" },
+        mobs    = { "Mystic_Avatar_Ramuh" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS   ] = 2500,
             [xi.mod.LTNG_ABSORB] = 100,
             [xi.mod.THUNDER_SDT] = -10000,
-            [xi.mod.ICE_SDT] = 9000,
-            [xi.mod.FIRE_SDT] = 9000,
-            [xi.mod.WATER_SDT] = 9000,
-            [xi.mod.WIND_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.ICE_SDT    ] = 9000,
+            [xi.mod.FIRE_SDT   ] = 9000,
+            [xi.mod.WATER_SDT  ] = 9000,
+            [xi.mod.WIND_SDT   ] = 9000,
+            [xi.mod.DARK_SDT   ] = 9000,
         },
     },
 
     {
         spawned = false,
-        mobs = { "Mystic_Avatar_Leviathan" },
+        mobs    = { "Mystic_Avatar_Leviathan" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS    ] = 2500,
             [xi.mod.WATER_ABSORB] = 100,
-            [xi.mod.WATER_SDT] = -10000,
-            [xi.mod.FIRE_SDT] = 9000,
-            [xi.mod.ICE_SDT] = 9000,
-            [xi.mod.EARTH_SDT] = 9000,
-            [xi.mod.WIND_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 9000,
+            [xi.mod.WATER_SDT   ] = -10000,
+            [xi.mod.FIRE_SDT    ] = 9000,
+            [xi.mod.ICE_SDT     ] = 9000,
+            [xi.mod.EARTH_SDT   ] = 9000,
+            [xi.mod.WIND_SDT    ] = 9000,
+            [xi.mod.DARK_SDT    ] = 9000,
         },
     },
 
@@ -251,7 +254,7 @@ content.groups =
     },
 
     {
-        mobs = { "Light_Elemental" },
+        mobs  = { "Light_Elemental" },
         death = utils.bind(weakenCarbuncle, content, xi.mod.NONE, xi.mod.DARK_SDT, 2500),
     },
 
@@ -269,13 +272,13 @@ content.groups =
         mobs = { "Mystic_Avatar_Carbuncle" },
         mods =
         {
-            [xi.mod.FIRE_SDT] = 9000,
-            [xi.mod.ICE_SDT] = 9000,
-            [xi.mod.WIND_SDT] = 9000,
-            [xi.mod.EARTH_SDT] = 9000,
+            [xi.mod.FIRE_SDT   ] = 9000,
+            [xi.mod.ICE_SDT    ] = 9000,
+            [xi.mod.WIND_SDT   ] = 9000,
+            [xi.mod.EARTH_SDT  ] = 9000,
             [xi.mod.THUNDER_SDT] = 9000,
-            [xi.mod.WATER_SDT] = 9000,
-            [xi.mod.DARK_SDT] = 5000,
+            [xi.mod.WATER_SDT  ] = 9000,
+            [xi.mod.DARK_SDT   ] = 5000,
         },
 
         setup = function(battlefield, mobs)
@@ -305,24 +308,24 @@ content.loot =
 
         {
             { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER,  weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE,     weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD,             weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW       },
         },
 
         {
@@ -330,8 +333,8 @@ content.loot =
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     }
 }

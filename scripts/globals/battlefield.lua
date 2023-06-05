@@ -985,7 +985,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     then
         local itemId    = self.requiredItems[1]
         local uses      = player:incrementItemWear(itemId)
-        local totalUses = xi.battlefield.itemUses[itemId] or 1 -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
+        local totalUses = xi.battlefield.itemUses[itemId] or 1 -- Gets number of item uses. (Tests = 3; Else = 1)
 
         if totalUses > 1 then
             local remaining = totalUses - uses

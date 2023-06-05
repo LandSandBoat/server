@@ -33,8 +33,10 @@ end
 
 function content:handleStrengthenBosses(bonusMod, amount, battlefield, mob, count)
     local bosses = { "Abyssdweller_Jhabdebb", "Orichalcum_Quadav", "Pee_Qoho_the_Python" }
+
     for _, name in ipairs(bosses) do
         local boss = mob:getZone():queryEntitiesByName(name)[1]
+
         if boss:isAlive() then
             boss:injectActionPacket(boss:getID(), 11, 439, 0, 24, 0, 307, 0)
             boss:addMod(bonusMod, amount)
@@ -74,8 +76,8 @@ content.groups =
     },
 
     {
-        mobs = { "Yagudos_Avatar" },
-        mixins = { require("scripts/mixins/families/avatar") },
+        mobs    = { "Yagudos_Avatar" },
+        mixins  = { require("scripts/mixins/families/avatar") },
         spawned = false,
     },
 
@@ -132,17 +134,17 @@ content.groups =
     },
 
     {
-        mobs = { "Abyssdweller_Jhabdebb" },
+        mobs  = { "Abyssdweller_Jhabdebb" },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.ATTP, 50),
     },
 
     {
-        mobs = { "Orichalcum_Quadav" },
+        mobs  = { "Orichalcum_Quadav" },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGPHYS, 5000),
     },
 
     {
-        mobs = { "Pee_Qoho_the_Python" },
+        mobs  = { "Pee_Qoho_the_Python" },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGMAGIC, 5000),
     },
 
@@ -156,11 +158,11 @@ content.groups =
 
         mods =
         {
-            [xi.mod.REGAIN] = 150,
+            [xi.mod.REGAIN      ] = 150,
             [xi.mobMod.DETECTION] = xi.detects.HEARING,
         },
 
-        isParty = true,
+        isParty  = true,
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetEntityByID(ID.CENTRAL_TEMENOS_3RD_FLOOR.npc.LOOT_CRATE))
         end
@@ -178,34 +180,34 @@ content.loot =
         },
 
         {
-            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.NORMAL },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                      weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK,   weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK,   weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.PLAITED_CORD,             weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.LOW },
-            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW       },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.PANTIN_WIRE,              weight = xi.loot.weight.LOW       },
         },
 
         {
@@ -213,8 +215,8 @@ content.loot =
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     }
 }
