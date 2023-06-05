@@ -24,7 +24,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.items.METAL_CHIP },
     name             = "CS_APOLLYON",
-    timeExtension   = 5,
+    timeExtension    = 5,
 })
 
 function content:isValidEntry(player, npc)
@@ -52,17 +52,20 @@ function content:onBattlefieldTick(battlefield, tick)
     end
 
     -- Do nothing if aggroTime hasn't been set or aggroTime hasn't been reached yet
-    local now = os.time()
+    local now       = os.time()
     local aggroTime = battlefield:getLocalVar("AutoAggroTime")
+
     if aggroTime == 0 or aggroTime > now then
         return
     end
 
     -- Get which player is going to be aggrod
     local player = GetPlayerByID(battlefield:getLocalVar("AutoAggroTarget"))
+
     if player:isDead() then
         -- Need to find a new target
         local players = battlefield:getPlayers()
+
         for _, battlefieldPlayer in pairs(players) do
             if battlefieldPlayer:isAlive() then
                 player = battlefieldPlayer
@@ -73,7 +76,8 @@ function content:onBattlefieldTick(battlefield, tick)
 
     -- Determine which boss should aggro next
     local previousBoss = battlefield:getLocalVar("AutoAggro")
-    local nextBoss = 0
+    local nextBoss     = 0
+
     if previousBoss == ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK then
         nextBoss = ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR
     elseif previousBoss == ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR then
@@ -101,9 +105,9 @@ function content:onBattlefieldWipe(battlefield, players)
 end
 
 function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
-    local group = boss:getLocalVar("supportGroup")
+    local group   = boss:getLocalVar("supportGroup")
     local offsets = group == 1 and supportOffsets or otherSupportOffsets
-    local bossID = boss:getID()
+    local bossID  = boss:getID()
 
     for _, offset in ipairs(offsets) do
         if GetMobByID(bossID + offset):getStatus() ~= xi.status.DISAPPEAR then
@@ -118,6 +122,7 @@ function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     local bossZ = boss:getZPos()
 
     offsets = group == 0 and supportOffsets or otherSupportOffsets
+
     for _, offset in ipairs(offsets) do
         local support = GetMobByID(bossID + offset)
         support:setSpawn(bossX + math.random(-2, 2), bossY, bossZ + math.random(-2, 2))
@@ -142,6 +147,7 @@ end
 
 local setupSharedHate = function(bossID, battlefield, mobs)
     local targID = GetMobByID(bossID):getTargID()
+
     for _, mob in ipairs(mobs) do
         if mob:getID() ~= bossID then
             mob:setMobMod(xi.mobMod.SHARE_TARGET, targID)
@@ -170,16 +176,16 @@ content.groups =
 
         mods =
         {
-            [xi.mod.SLASH_SDT] = 2000,
-            [xi.mod.UDMGMAGIC] = 2000,
+            [xi.mod.SLASH_SDT ] = 2000,
+            [xi.mod.UDMGMAGIC ] = 2000,
             [xi.mod.IMPACT_SDT] = 100,
-            [xi.mod.HTH_SDT] = 100,
+            [xi.mod.HTH_SDT   ] = 100,
             [xi.mod.PIERCE_SDT] = 100,
         },
 
-        isParty = true,
-        superlink = true,
-        spawned = false,
+        isParty    = true,
+        superlink  = true,
+        spawned    = false,
         initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK),
     },
 
@@ -202,15 +208,15 @@ content.groups =
         mods =
         {
             [xi.mod.PIERCE_SDT] = 2000,
-            [xi.mod.UDMGMAGIC] = 2000,
+            [xi.mod.UDMGMAGIC ] = 2000,
             [xi.mod.IMPACT_SDT] = 100,
-            [xi.mod.HTH_SDT] = 100,
-            [xi.mod.SLASH_SDT] = 100,
+            [xi.mod.HTH_SDT   ] = 100,
+            [xi.mod.SLASH_SDT ] = 100,
         },
 
-        isParty = true,
-        superlink = true,
-        spawned = false,
+        isParty    = true,
+        superlink  = true,
+        spawned    = false,
         initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.NAQBA_CHIRURGEON),
     },
 
@@ -235,13 +241,13 @@ content.groups =
         mods =
         {
             [xi.mod.IMPACT_SDT] = 2000,
-            [xi.mod.HTH_SDT] = 2000,
-            [xi.mod.UDMGMAGIC] = 100,
+            [xi.mod.HTH_SDT   ] = 2000,
+            [xi.mod.UDMGMAGIC ] = 100,
         },
 
-        isParty = true,
-        superlink = true,
-        spawned = false,
+        isParty    = true,
+        superlink  = true,
+        spawned    = false,
         initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR),
     },
 
@@ -256,7 +262,7 @@ content.groups =
         mobMods =
         {
             [xi.mobMod.SOUND_RANGE] = 10,
-            [xi.mobMod.DETECTION] = bit.bor(xi.detects.SIGHT, xi.detects.HEARING),
+            [xi.mobMod.DETECTION]   = bit.bor(xi.detects.SIGHT, xi.detects.HEARING),
         },
 
         death = function(battlefield, mob, count)
@@ -282,13 +288,13 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }
