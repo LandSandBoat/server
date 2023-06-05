@@ -1507,17 +1507,3 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
         battlefield:setLocalVar("lootSeen", 1)
     end
 end
-
--- TODO(jmcmorris): This is no longer needed once Limbus uses the new Battlefield system
-function xi.battlefield.HealPlayers(battlefield, players)
-    players = players or battlefield:getPlayers()
-    for _, player in pairs(players) do
-        local recoverHP = player:getMaxHP() - player:getHP()
-        local recoverMP = player:getMaxMP() - player:getMP()
-        player:addHP(recoverHP)
-        player:addMP(recoverMP)
-        player:resetRecasts()
-        player:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
-        player:messageBasic(xi.msg.basic.ALL_ABILITIES_RECHARGED)
-    end
-end
