@@ -27,8 +27,10 @@ local content = Limbus:new({
 
 local despawnFloorMobs = function(crateOffset, count)
     local mobOffset = crateOffset + count
+
     for i = 1, count do
         local mob = GetMobByID(mobOffset + i - 1)
+
         if mob:isAlive() then
             -- Pseudo death as the mob shouldn't drop items, give xp or even broadcast a message that it has died
             mob:setAnimation(xi.animation.DEATH)
@@ -43,6 +45,7 @@ end
 local despawnFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
+
         if crate:getLocalVar("opened") == 0 then
             crate:setLocalVar("opened", 1)
             npcUtil.disappearCrate(crate)
@@ -53,6 +56,7 @@ end
 local lockFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
+
         if crate:getLocalVar("opened") == 0 then
             crate:setLocalVar("opened", 1)
             crate:addListener("ON_TRIGGER", "TRIGGER_LOCKED_CRATE", function(player, npc)
@@ -63,11 +67,13 @@ local lockFloorCrates = function(crateOffset, count)
 end
 
 local unlockFloorCrates = function(floor, mobCount, battlefield, mob, count)
-    local crateOffset = ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[floor]
+    local crateOffset   = ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[floor]
     local unlockedCrate = false
+
     for i = 1, mobCount do
         local crate = GetEntityByID(crateOffset + i - 1)
         crate:removeListener("TRIGGER_LOCKED_CRATE")
+
         if crate:getStatus() == xi.status.NORMAL then
             crate:setLocalVar("opened", 0)
             unlockedCrate = true
@@ -81,6 +87,7 @@ end
 
 local setupItemCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
+
     xi.limbus.hideCrate(crate)
     crate:setModelId(961)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
@@ -104,6 +111,7 @@ end
 
 local setupMysticCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
+
     xi.limbus.hideCrate(crate)
     crate:setModelId(961)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
@@ -113,9 +121,9 @@ local setupMysticCrate = function(crateID, floor, crateOffset, count)
             lockFloorCrates(crateOffset, count)
 
             -- Skip over the crates and mobs which are always equal in size
-            local mysticID = crateOffset + count * 2
             -- Spawn the Mystic Avatar
-            local mystic = GetMobByID(mysticID)
+            local mysticID = crateOffset + count * 2
+            local mystic   = GetMobByID(mysticID)
             mystic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
             mystic:spawn()
             mystic:updateEnmity(player)
@@ -125,6 +133,7 @@ end
 
 local setupTimeCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
+
     xi.limbus.hideCrate(crate)
     crate:setModelId(962)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
@@ -140,6 +149,7 @@ end
 
 local setupRecoverCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
+
     xi.limbus.hideCrate(crate)
     crate:setModelId(960)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
@@ -148,6 +158,7 @@ local setupRecoverCrate = function(crateID, floor, crateOffset, count)
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
             content:openDoor(player:getBattlefield(), floor)
+
             -- Use wz_recover_all to heal players
             crate:useMobAbility(1531, player)
         end)
@@ -168,8 +179,9 @@ function content:onBattlefieldInitialise(battlefield)
     -- Crates are always spawned with sequential IDs
     -- Randomize crate type order by shuffling setup functions
     for floor, crateOffset in ipairs(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS) do
-        local count = (floor == 7 and 2) or 4
+        local count      = (floor == 7 and 2) or 4
         local setupFuncs = utils.shuffle(utils.slice(crateSetupFuncs, 1, count))
+
         for i = 1, count do
             setupFuncs[i](crateOffset + i - 1, floor, crateOffset, count)
         end
@@ -249,7 +261,7 @@ content.paths =
 content.groups =
 {
     {
-        mobs = { "Armoury_Crate_E" },
+        mobs  = { "Armoury_Crate_E" },
         setup = function(battlefield, crates)
             for _, crate in ipairs(crates) do
                 crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
@@ -272,14 +284,14 @@ content.groups =
         -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
         mods =
         {
-            [xi.mod.UDMGPHYS] = 10000,
+            [xi.mod.UDMGPHYS ] = 10000,
             [xi.mod.UDMGMAGIC] = -5000,
-            [xi.mod.FASTCAST] = 20,
+            [xi.mod.FASTCAST ] = 20,
         },
 
         mobMods =
         {
-            [xi.mobMod.DETECTION] = bit.bor(xi.detects.HEARING, xi.detects.MAGIC),
+            [xi.mobMod.DETECTION  ] = bit.bor(xi.detects.HEARING, xi.detects.MAGIC),
             [xi.mobMod.LINK_RADIUS] = 7,
             [xi.mobMod.MAGIC_RANGE] = 10,
         },
@@ -287,73 +299,73 @@ content.groups =
     },
 
     {
-        mobs = { "Fire_Elemental_E" },
+        mobs  = { "Fire_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 1),
     },
 
     {
-        mobs = { "Mystic_Avatar_Ifrit_E" },
+        mobs    = { "Mystic_Avatar_Ifrit_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 1, 4),
+        death   = utils.bind(unlockFloorCrates, 1, 4),
     },
 
     {
-        mobs = { "Ice_Elemental_E" },
+        mobs  = { "Ice_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 2),
     },
 
     {
-        mobs = { "Mystic_Avatar_Shiva_E" },
+        mobs    = { "Mystic_Avatar_Shiva_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 2, 4),
+        death   = utils.bind(unlockFloorCrates, 2, 4),
     },
 
     {
-        mobs = { "Air_Elemental_E" },
+        mobs  = { "Air_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 3),
     },
 
     {
-        mobs = { "Mystic_Avatar_Garuda_E" },
+        mobs    = { "Mystic_Avatar_Garuda_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 3, 4),
+        death   = utils.bind(unlockFloorCrates, 3, 4),
     },
 
     {
-        mobs = { "Earth_Elemental_E" },
+        mobs  = { "Earth_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 4),
     },
 
     {
-        mobs = { "Mystic_Avatar_Titan_E" },
+        mobs    = { "Mystic_Avatar_Titan_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 4, 4),
+        death   = utils.bind(unlockFloorCrates, 4, 4),
     },
 
     {
-        mobs = { "Thunder_Elemental_E" },
+        mobs  = { "Thunder_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 5),
     },
 
     {
-        mobs = { "Mystic_Avatar_Ramuh_E" },
+        mobs    = { "Mystic_Avatar_Ramuh_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 5, 4),
+        death   = utils.bind(unlockFloorCrates, 5, 4),
     },
 
     {
-        mobs = { "Water_Elemental_E" },
+        mobs  = { "Water_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 6),
     },
 
     {
-        mobs = { "Mystic_Avatar_LeviathanE" },
+        mobs    = { "Mystic_Avatar_LeviathanE" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 6, 4),
+        death   = utils.bind(unlockFloorCrates, 6, 4),
     },
 
     {
-        mobs = { "Dark_Elemental_E" },
+        mobs     = { "Dark_Elemental_E" },
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7]))
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7] + 1))
@@ -361,9 +373,9 @@ content.groups =
     },
 
     {
-        mobs = { "Mystic_Avatar_Fenrir_E" },
+        mobs    = { "Mystic_Avatar_Fenrir_E" },
         spawned = false,
-        death = utils.bind(unlockFloorCrates, 7, 2),
+        death   = utils.bind(unlockFloorCrates, 7, 2),
     },
 }
 
@@ -378,16 +390,16 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW },
-            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                      weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD,       weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW       },
+            { item = xi.items.PLAITED_CORD,              weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.LOW       },
         },
     },
 
@@ -405,19 +417,19 @@ content.loot =
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.PANTIN_WIRE,              weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.LOW       },
+            { item = xi.items.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_FILET_LACE,     weight = xi.loot.weight.LOW       },
         },
     },
 
@@ -430,15 +442,15 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN,     weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER,   weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.NORMAL },
         },
     },
 
@@ -451,13 +463,13 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD,             weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
@@ -472,15 +484,15 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT,   weight = xi.loot.weight.NORMAL },
             { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE,    weight = xi.loot.weight.NORMAL },
         },
     },
 
@@ -493,23 +505,23 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_COILED_YARN,    weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PANTIN_WIRE,             weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.LOW },
-            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.LOW },
-            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW       },
         },
     },
 
@@ -522,23 +534,23 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
             { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.NORMAL },
             { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.LOW },
-            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.LOW },
-            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN,    weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.LOW       },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW       },
         },
 
         {
@@ -546,8 +558,8 @@ content.loot =
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }
