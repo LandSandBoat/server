@@ -212,9 +212,6 @@ INSERT INTO `mob_pool_mods` VALUES (1663,29,3,1); -- ASSIST: 3
 -- Goblin Swordsman
 INSERT INTO `mob_pool_mods` VALUES (1719,29,2,1); -- ASSIST: 2
 
--- Golden-Tongued Culberry
-INSERT INTO `mob_pool_mods` VALUES (1750,56,1,1); -- HP_STANDBACK: 1
-
 -- Goliath
 INSERT INTO `mob_pool_mods` VALUES (1754,4,4,1); -- SIGHT_RANGE: 4
 
