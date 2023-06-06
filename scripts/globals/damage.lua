@@ -82,7 +82,10 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
     then
         dmgTakenMod = dmgTakenMod * ((target:getMod(dmgMods[damageType])) / 1000)
     elseif damageType and dmgMods[damageType] then -- This is for elemental SDTs only
-        dmgTakenMod = dmgTakenMod * (1 + (target:getMod(dmgMods[damageType]) / 10000))
+        -- Magic SDT range from -10000 to 10000
+        -- Positive numbers mean less damage taken. Negative mean more damage taken.
+        -- Example: a value of 5000 -> 50% LESS damage taken.
+        dmgTakenMod = dmgTakenMod * (1 - target:getMod(dmgMods[damageType]) / 10000)
     end
 
     return dmgTakenMod
