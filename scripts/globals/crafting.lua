@@ -95,7 +95,6 @@ end
 -----------------------------------
 -- getTestItem Action
 -----------------------------------
-
 xi.crafting.getTestItem = function(player, npc, craftID)
     local nextRank  = player:getSkillRank(craftID) + 1
 
@@ -119,7 +118,6 @@ end
 -----------------------------------
 -- tradeTestItem Action
 -----------------------------------
-
 xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
     local guildID    = craftID - 48
     local skillLvL   = player:getSkillLevel(craftID)
@@ -167,25 +165,8 @@ xi.crafting.getAdvImageSupportCost = function(player, craftID)
 end
 
 -----------------------------------
--- unionRepresentative
+-- Rank Renouncement functions
 -----------------------------------
-xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
-    local rank   = player:getSkillRank(guildId + 48)
-    local cap    = (rank + 1) * 10
-    local kibits = 0
-
-    for kbit, ki in pairs(keyitems) do
-        if rank >= ki.rank then
-            if not player:hasKeyItem(ki.id) then
-                kibits = bit.bor(kibits, bit.lshift(1, kbit))
-            end
-        end
-    end
-
-    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
-end
-
 xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
     local ID = zones[player:getZoneID()]
 
@@ -216,6 +197,52 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
     end
 
     return false
+end
+
+--------------------------------------------------
+-- Guild Point NPCs (Union Representatives)
+--------------------------------------------------
+xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildID)
+    local _, remainingPoints = player:getCurrentGPItem(guildID)
+    local text = zones[player:getZoneID()].text
+
+    if player:getCharVar('[GUILD]currentGuild') - 1 == guildID then
+        if remainingPoints == 0 then
+            player:messageText(npc, text.NO_MORE_GP_ELIGIBLE)
+        else
+            local totalPoints = 0
+            for i = 0, 8 do
+                local items, points = player:addGuildPoints(guildID, i)
+
+                if items ~= 0 and points ~= 0 then
+                    totalPoints = totalPoints + points
+                    trade:confirmSlot(i, items)
+                end
+            end
+
+            if totalPoints > 0 then
+                player:confirmTrade()
+                player:startEvent(csid, totalPoints)
+            end
+        end
+    end
+end
+
+xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank   = player:getSkillRank(guildId + 48)
+    local cap    = (rank + 1) * 10
+    local kibits = 0
+
+    for kbit, ki in pairs(keyitems) do
+        if rank >= ki.rank then
+            if not player:hasKeyItem(ki.id) then
+                kibits = bit.bor(kibits, bit.lshift(1, kbit))
+            end
+        end
+    end
+
+    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
 end
 
 xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, guildID, currency, keyitems, items)
@@ -281,32 +308,6 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
                 player:delCurrency(currency, cost)
             else
                 player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
-            end
-        end
-    end
-end
-
-xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildID)
-    local _, remainingPoints = player:getCurrentGPItem(guildID)
-    local text = zones[player:getZoneID()].text
-
-    if player:getCharVar('[GUILD]currentGuild') - 1 == guildID then
-        if remainingPoints == 0 then
-            player:messageText(npc, text.NO_MORE_GP_ELIGIBLE)
-        else
-            local totalPoints = 0
-            for i = 0, 8 do
-                local items, points = player:addGuildPoints(guildID, i)
-
-                if items ~= 0 and points ~= 0 then
-                    totalPoints = totalPoints + points
-                    trade:confirmSlot(i, items)
-                end
-            end
-
-            if totalPoints > 0 then
-                player:confirmTrade()
-                player:startEvent(csid, totalPoints)
             end
         end
     end
