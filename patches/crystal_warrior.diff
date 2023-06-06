@@ -1,7 +1,7 @@
-diff --git a/src/search/data_loader.cpp b/src/search/data_loader.cpp
-index d74a3307b7..306f87cb94 100644
---- a/src/search/data_loader.cpp
-+++ b/src/search/data_loader.cpp
+diff --git "a/src/search/data_loader.cpp" "b/src/search/data_loader.cpp"
+index d74a3307b7..ec24628040 100644
+--- "a/src/search/data_loader.cpp"
++++ "b/src/search/data_loader.cpp"
 @@ -312,16 +312,11 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
  
              PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
@@ -19,19 +19,14 @@ index d74a3307b7..306f87cb94 100644
              if (partyid == PPlayer->id)
              {
                  PPlayer->flags1 |= 0x0008;
-@@ -351,6 +346,19 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
+@@ -351,6 +346,14 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                  PPlayer->flags1 |= 0x8000;
              }
  
-+            uint32  cwFlag   = settings::get<uint32>("main.CW_FLAG");
-+            uint32 ucwFlag   = settings::get<uint32>("main.UCW_FLAG");
-+            uint32 menuFlag  = sql->GetUIntData(16);
++            uint32  cwFlag  = settings::get<uint32>("main.CW_FLAG");
++            uint32 menuFlag = sql->GetUIntData(16);
 +
-+            if (nameflag & ucwFlag)
-+            {
-+                PPlayer->flags1 |= 0x0020;
-+            }
-+            else if (menuFlag & cwFlag)
++            if (menuFlag & cwFlag)
 +            {
 +                PPlayer->flags1 |= 0x0001;
 +            }
