@@ -105,6 +105,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
     local params = {}
     params.bonusmab   = 0
     params.includemab = false
+    params.damageSpell = true
 
     if
         addType == xi.additionalEffect.procType.DAMAGE and
