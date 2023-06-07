@@ -79,7 +79,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-            quest:getVar(player, 'Option') < getConquestTally()
+            quest:getVar(player, 'Stage') < getConquestTally()
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
@@ -89,7 +89,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FADED_RUBY) then
                         return quest:progressEvent(208)
-                    elseif quest:getVar(player, 'Option') < getConquestTally() then
+                    elseif not player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) then
                         return quest:progressEvent(207)
                     end
                 end,
