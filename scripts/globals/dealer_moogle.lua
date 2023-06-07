@@ -177,13 +177,24 @@ local itemList =
         xi.items.ASTUTE_CAPE,
     },
 
-    --[[
-    -- Kupon W-E85: Lv85 Empyrean Weapons (deprecated)
+    -- Kupon W-E85: Lv85 Empyrean Weapons (MOG_KUPON_W_E85 = 2958)
     [6] =
     {
-
+        xi.items.VERETHRAGNA_85,
+        xi.items.TWASHTAR_85,
+        xi.items.ALMACE_85,
+        xi.items.CALADBOLG_85,
+        xi.items.FARSHA_85,
+        xi.items.UKONVASARA_85,
+        xi.items.REDEMPTION_85,
+        xi.items.KANNAGI_85,
+        xi.items.MASAMUNE_85,
+        xi.items.GAMBANTEINN_85,
+        xi.items.HVERGELMIR_85,
+        xi.items.GANDIVA_85,
+        xi.items.ARMAGEDDON_85,
     },
-
+    --[[
     -- Kupon A-RJob: Lv70 Relic Armor Accessories (deprecated)
     [7] =
     {
@@ -544,6 +555,7 @@ local buildMask = function(player, shift)
     end
 
     return {mask, kiID} -- return both the completed mask and the kiID
+
 end
 
 xi.dealerMoogle.onTrade = function(player, npc, trade)
