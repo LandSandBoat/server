@@ -96,7 +96,7 @@ g_mixins.claim_shield = function(claimshieldMob)
 
             -- Select a winner
             local winningNum  = math.random(1, #entries)
-            local winningName = "Carver"
+            local winningName = "NOONE"
 
             for index, entryName in ipairs(entries) do
                 if index == winningNum then
