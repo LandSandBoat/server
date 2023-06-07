@@ -287,6 +287,31 @@ local itemList =
         { xi.items.DAURDABLA_90,    xi.items.DENSE_CLUSTER, { xi.items.PINCH_OF_RIFTCINDER, 60 },                                    },
         { xi.items.OCHAIN_90,       xi.items.DENSE_CLUSTER, { xi.items.PINCH_OF_RIFTCINDER, 60 },                                    },
     },
+
+    -- Kupon A-E+2: Empyrean Armor +2 (MOG_KUPON_A_E2 = 3441)
+    [11] =
+    {
+        { xi.items.RAVAGERS_MASK_P2,        xi.items.RAVAGERS_LORICA_P2,    xi.items.RAVAGERS_MUFFLERS_P2,      xi.items.RAVAGERS_CUISSES_P2,   xi.items.RAVAGERS_CALLIGAE_P2   },
+        { xi.items.TANTRA_CROWN_P2,         xi.items.TANTRA_CYCLAS_P2,      xi.items.TANTRA_GLOVES_P2,          xi.items.TANTRA_HOSE_P2,        xi.items.TANTRA_GAITERS_P2      },
+        { xi.items.ORISON_CAP_P2,           xi.items.ORISON_BLIAUD_P2,      xi.items.ORISON_MITTS_P2,           xi.items.ORISON_PANTALOONS_P2,  xi.items.ORISON_DUCKBILLS_P2    },
+        { xi.items.GOETIA_PETASOS_P2,       xi.items.GOETIA_COAT_P2,        xi.items.GOETIA_GLOVES_P2,          xi.items.GOETIA_CHAUSSES_P2,    xi.items.GOETIA_SABOTS_P2       },
+        { xi.items.ESTOQUEURS_CHAPPEL_P2,   xi.items.ESTOQUEURS_SAYON_P2,   xi.items.ESTOQUEURS_GANTHEROTS_P2,  xi.items.ESTOQUEURS_FUSEAU_P2,  xi.items.ESTOQUEURS_HOUSEAUX_P2 },
+        { xi.items.RAIDERS_BONNET_P2,       xi.items.RAIDERS_VEST_P2,       xi.items.RAIDERS_ARMLETS_P2,        xi.items.RAIDERS_CULOTTES_P2,   xi.items.RAIDERS_POULAINES_P2   },
+        { xi.items.CREED_ARMET_P2,          xi.items.CREED_CUIRASS_P2,      xi.items.CREED_GAUNTLETS_P2,        xi.items.CREED_CUISSES_P2,      xi.items.CREED_SABATONS_P2      },
+        { xi.items.BALE_BURGEONET_P2,       xi.items.BALE_CUIRASS_P2,       xi.items.BALE_GAUNTLETS_P2,         xi.items.BALE_FLANCHARD_P2,     xi.items.BALE_SOLLERETS_P2      },
+        { xi.items.FERINE_CABASSET_P2,      xi.items.FERINE_GAUSAPE_P2,     xi.items.FERINE_MANOPLAS_P2,        xi.items.FERINE_QUIJOTES_P2,    xi.items.FERINE_OCREAE_P2       },
+        { xi.items.AOIDOS_CALOT_P2,         xi.items.AOIDOS_HONGRELINE_P2,  xi.items.AOIDOS_MANCHETTES_P2,      xi.items.AOIDOS_RHINGRAVE_P2,   xi.items.AOIDOS_COTHURNES_P2    },
+        { xi.items.SYLVAN_GAPETTE_P2,       xi.items.SYLVAN_CABAN_P2,       xi.items.SYLVAN_GLOVELETTES_P2,     xi.items.SYLVAN_BRAGUES_P2,     xi.items.SYLVAN_BOTTILLONS_P2   },
+        { xi.items.UNKAI_KABUTO_P2,         xi.items.UNKAI_DOMARU_P2,       xi.items.UNKAI_KOTE_P2,             xi.items.UNKAI_HAIDATE_P2,      xi.items.UNKAI_SUNE_ATE_P2      },
+        { xi.items.IGA_ZUKIN_P2,            xi.items.IGA_NINGI_P2,          xi.items.IGA_TEKKO_P2,              xi.items.IGA_HAKAMA_P2,         xi.items.IGA_KYAHAN_P2          },
+        { xi.items.LANCERS_MEZAIL_P2,       xi.items.LANCERS_PLACKART_P2,   xi.items.LANCERS_VAMBRACES_P2,      xi.items.LANCERS_CUISSOTS_P2,   xi.items.LANCERS_SCHYNBALDS_P2  },
+        { xi.items.CALLERS_HORN_P2,         xi.items.CALLERS_DOUBLET_P2,    xi.items.CALLERS_BRACERS_P2,        xi.items.CALLERS_SPATS_P2,      xi.items.CALLERS_PIGACHES_P2    },
+        { xi.items.MAVI_KAVUK_P2,           xi.items.MAVI_MINTAN_P2,        xi.items.MAVI_BAZUBANDS_P2,         xi.items.MAVI_TAYT_P2,          xi.items.MAVI_BASMAK_P2         },
+        { xi.items.NAVARCHS_TRICORNE_P2,    xi.items.NAVARCHS_FRAC_P2,      xi.items.NAVARCHS_GANTS_P2,         xi.items.NAVARCHS_CULOTTES_P2,  xi.items.NAVARCHS_BOTTES_P2     },
+        { xi.items.CIRQUE_CAPPELLO_P2,      xi.items.CIRQUE_FARSETTO_P2,    xi.items.CIRQUE_GUANTI_P2,          xi.items.CIRQUE_PANTALONI_P2,   xi.items.CIRQUE_SCARPE_P2       },
+        { xi.items.CHARIS_TIARA_P2,         xi.items.CHARIS_CASAQUE_P2,     xi.items.CHARIS_BANGLES_P2,         xi.items.CHARIS_TIGHTS_P2,      xi.items.CHARIS_TOE_SHOES_P2    },
+        { xi.items.SAVANTS_BONNET_P2,       xi.items.SAVANTS_GOWN_P2,       xi.items.SAVANTS_BRACERS_P2,        xi.items.SAVANTS_PANTS_P2,      xi.items.SAVANTS_LOAFERS_P2     },
+    },
     --[[
     -- Kupon I-Seal: 8 to 10 of any Empyrean Armor upgrade seals
     [12] =
