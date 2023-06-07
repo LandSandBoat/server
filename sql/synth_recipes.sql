@@ -1151,7 +1151,7 @@ INSERT INTO `synth_recipes` VALUES (14574,0,0,0,97,58,0,0,0,0,0,4096,4238,664,66
 -- INSERT INTO `synth_recipes` VALUES (14575,0,0,0,97,255,0,0,0,0,0,4096,4238,650,711,3919,3923,0,0,0,0,21292,21293,21293,21293,1,1,1,1,'Bandeiras Gun');  -- JPWiki data 97SM, ??WW, ??GS, no sub level data confirmed yet
 -- INSERT INTO `synth_recipes` VALUES (14576,0,0,0,97,0,0,255,0,0,0,4096,4238,1629,2170,8990,8992,0,0,0,0,27224,27225,27225,27225,1,1,1,1,'Gefechtdiechlings');  -- JPWiki data 97SM, ??LE, no sub level data confirmed yet
 INSERT INTO `synth_recipes` VALUES (14577,0,0,0,97,0,0,0,0,0,0,4096,4238,1285,16547,0,0,0,0,0,0,17703,17703,17703,17703,1,1,1,1,'Pealing Anelace');
--- INSERT INTO `synth_recipes` VALUES (14578,0,0,255,97,0,0,255,0,0,0,4096,4238,655,655,655,655,655,655,717,1122,16597,16955,16955,16955,1,1,1,1,'Nagan');  -- duplicate recipe (14566)?  JPWiki 97SM, 48LE, 44WW xiclopedia edit AUG2020 matches, others ??subs
+INSERT INTO `synth_recipes` VALUES (14578,0,0,44,97,0,0,48,0,0,0,4096,4238,655,655,655,655,655,655,717,1122,16597,16955,16955,16955,1,1,1,1,'Nagan');  -- duplicate recipe (14566)?  JPWiki 97SM, 48LE, 44WW xiclopedia edit AUG2020 matches, others ??subs
 INSERT INTO `synth_recipes` VALUES (14579,0,0,0,97,0,0,0,0,0,0,4096,4238,1284,16659,0,0,0,0,0,0,17949,17949,17949,17949,1,1,1,1,'Furnace Tabarzin');
 INSERT INTO `synth_recipes` VALUES (14580,0,0,0,97,0,0,0,0,0,0,4096,4238,1466,1466,0,0,0,0,0,0,1467,1467,1467,1467,1,1,1,1,'Relic Steel');
 INSERT INTO `synth_recipes` VALUES (14581,0,0,0,97,0,0,0,0,0,0,4096,4238,1286,16423,0,0,0,0,0,0,18361,18361,18361,18361,1,1,1,1,'Ponder. Manoples');
