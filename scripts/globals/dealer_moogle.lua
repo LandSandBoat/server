@@ -16,29 +16,79 @@ local csidLookup =
     [xi.zone.PORT_WINDURST]   = { 856, 857 },
 }
 
--- TODO: Where is Kupon A-E +2
--- TODO: Where is Kupon AW-GeIV
--- TODO: Where is Kupon AW-UWIII
-
--- WARNING!
--- These items cannot be customised!
+-- WARNING!!! These items cannot be customised!
 -- Everything is dictacted by the client!
 local kuponLookup =
 {
     -- [coupon item id] = { related key item id, index of items in itemList (table below) }
-    [xi.items.MOG_KUPON_A_DBCD] = { xi.ki.MOG_KUPON_A_DBCD, 1 },
-    [xi.items.MOG_KUPON_A_DXAR] = { xi.ki.MOG_KUPON_A_DXAR, 2 },
-    [xi.items.MOG_KUPON_AW_ABS] = { xi.ki.MOG_KUPON_AW_ABS, 3 },
-    [xi.items.MOG_KUPON_AW_PAN] = { xi.ki.MOG_KUPON_AW_PAN, 4 },
-    [xi.items.MOG_KUPON_A_LUM ] = { xi.ki.MOG_KUPON_A_LUM,  5 },
+    [xi.items.MOG_KUPON_A_DBCD   ] = { xi.ki.MOG_KUPON_A_DBCD,    1 },
+    [xi.items.MOG_KUPON_A_DXAR   ] = { xi.ki.MOG_KUPON_A_DXAR,    2 },
+    [xi.items.MOG_KUPON_AW_ABS   ] = { xi.ki.MOG_KUPON_AW_ABS,    3 },
+    [xi.items.MOG_KUPON_AW_PAN   ] = { xi.ki.MOG_KUPON_AW_PAN,    4 },
+    [xi.items.MOG_KUPON_A_LUM    ] = { xi.ki.MOG_KUPON_A_LUM,     5 },
+    [xi.items.MOG_KUPON_W_E85    ] = { xi.ki.MOG_KUPON_W_E85,     6 },
+    [xi.items.MOG_KUPON_A_RJOB   ] = { xi.ki.MOG_KUPON_A_RJOB,    7 },
+    [xi.items.MOG_KUPON_W_R90    ] = { xi.ki.MOG_KUPON_W_R90,     8 },
+    [xi.items.MOG_KUPON_W_M90    ] = { xi.ki.MOG_KUPON_W_M90,     9 },
+    [xi.items.MOG_KUPON_W_E90    ] = { xi.ki.MOG_KUPON_W_E90,    10 },
+    [xi.items.MOG_KUPON_A_E2     ] = { xi.ki.MOG_KUPON_A_E2,     11 },
+    [xi.items.MOG_KUPON_I_SEAL   ] = { xi.ki.MOG_KUPON_I_SEAL,   12 },
+    [xi.items.MOG_KUPON_A_DEII   ] = { xi.ki.MOG_KUPON_A_DEII,   13 },
+    [xi.items.MOG_KUPON_A_DE     ] = { xi.ki.MOG_KUPON_A_DE,     14 },
+    [xi.items.MOG_KUPON_A_SAL    ] = { xi.ki.MOG_KUPON_A_SAL,    15 },
+    [xi.items.MOG_KUPON_A_NYZ    ] = { xi.ki.MOG_KUPON_A_NYZ,    16 },
+    [xi.items.MOG_KUPON_I_S5     ] = { xi.ki.MOG_KUPON_I_S5,     17 },
+    [xi.items.MOG_KUPON_I_S2     ] = { xi.ki.MOG_KUPON_I_S2,     18 },
+    [xi.items.MOG_KUPON_I_ORCHE  ] = { xi.ki.MOG_KUPON_I_ORCHE,  19 },
+    [xi.items.MOG_KUPON_I_AF109  ] = { xi.ki.MOG_KUPON_I_AF109,  20 },
+    [xi.items.MOG_KUPON_W_EWS    ] = { xi.ki.MOG_KUPON_W_EWS,    21 },
+    [xi.items.MOG_KUPON_AW_WK    ] = { xi.ki.MOG_KUPON_AW_WK,    22 },
+    [xi.items.MOG_KUPON_I_S3     ] = { xi.ki.MOG_KUPON_I_S3,     23 },
+    [xi.items.MOG_KUPON_A_PK109  ] = { xi.ki.MOG_KUPON_A_PK109,  24 },
+    [xi.items.MOG_KUPON_I_S1     ] = { xi.ki.MOG_KUPON_I_S1,     25 },
+    [xi.items.MOG_KUPON_I_SKILL  ] = { xi.ki.MOG_KUPON_I_SKILL,  26 },
+    [xi.items.MOG_KUPON_I_RME    ] = { xi.ki.MOG_KUPON_I_RME,    27 },
+--  [xi.items.NOT_IN_USE         ] = { xi.ki.MOG_KUPON_I,        28 },
+    [xi.items.MOG_KUPON_W_JOB    ] = { xi.ki.MOG_KUPON_W_JOB,    29 },
+    [xi.items.MOG_KUPON_I_MAT    ] = { xi.ki.MOG_KUPON_I_MAT,    30 },
+    [xi.items.MOG_KUPON_W_DEIII  ] = { xi.ki.MOG_KUPON_W_DEIII,  31 },
+    [xi.items.MOG_KUPON_AW_MIS   ] = { xi.ki.MOG_KUPON_AW_MIS,   32 },
+    [xi.items.MOG_KUPON_AW_VGR   ] = { xi.ki.MOG_KUPON_AW_VGR,   33 },
+    [xi.items.MOG_KUPON_AW_VGRII ] = { xi.ki.MOG_KUPON_AW_VGRII, 34 },
+    [xi.items.MOG_KUPON_W_PULSE  ] = { xi.ki.MOG_KUPON_W_PULSE,  35 },
+    [xi.items.MOG_KUPON_I_STONE  ] = { xi.ki.MOG_KUPON_I_STONE,  36 },
+    [xi.items.MOG_KUPON_AW_GFIII ] = { xi.ki.MOG_KUPON_AW_GFIII, 37 },
+    [xi.items.MOG_KUPON_AW_GFII  ] = { xi.ki.MOG_KUPON_AW_GFII,  38 },
+    [xi.items.MOG_KUPON_AW_GF    ] = { xi.ki.MOG_KUPON_AW_GF,    39 },
+    [xi.items.MOG_KUPON_AW_UWIII ] = { xi.ki.MOG_KUPON_AW_UWIII, 40 },
+    [xi.items.MOG_KUPON_AW_UWII  ] = { xi.ki.MOG_KUPON_AW_UWII,  41 },
+    [xi.items.MOG_KUPON_AW_UW    ] = { xi.ki.MOG_KUPON_AW_UW,    42 },
+    [xi.items.MOG_KUPON_A_AB     ] = { xi.ki.MOG_KUPON_A_AB,     43 },
+    [xi.items.MOG_KUPON_AW_COS   ] = { xi.ki.MOG_KUPON_AW_COS,   44 },
+    [xi.items.MOG_KUPON_AW_KUPO  ] = { xi.ki.MOG_KUPON_AW_KUPO,  45 },
+    [xi.items.MOG_KUPON_W_EMI    ] = { xi.ki.MOG_KUPON_W_EMI,    46 },
+    [xi.items.MOG_KUPON_A_EMI    ] = { xi.ki.MOG_KUPON_A_EMI,    47 },
+    [xi.items.MOG_KUPON_W_SRW    ] = { xi.ki.MOG_KUPON_W_SRW,    48 },
+    [xi.items.MOG_KUPON_W_SCC    ] = { xi.ki.MOG_KUPON_W_SCC,    49 },
+    [xi.items.MOG_KUPON_A_SYW    ] = { xi.ki.MOG_KUPON_A_SYW,    50 },
+    [xi.items.MOG_KUPON_W_ASRW   ] = { xi.ki.MOG_KUPON_W_ASRW,   51 },
+    [xi.items.MOG_KUPON_W_ASCC   ] = { xi.ki.MOG_KUPON_W_ASCC,   52 },
+    [xi.items.MOG_KUPON_A_ASYW   ] = { xi.ki.MOG_KUPON_A_ASYW,   53 },
+    [xi.items.MOG_KUPON_W_R119   ] = { xi.ki.MOG_KUPON_W_R119,   54 },
+    [xi.items.MOG_KUPON_W_M119   ] = { xi.ki.MOG_KUPON_W_M119,   55 },
+    [xi.items.MOG_KUPON_W_E119   ] = { xi.ki.MOG_KUPON_W_E119,   56 },
+    [xi.items.MOG_KUPON_W_A119   ] = { xi.ki.MOG_KUPON_W_A119,   57 },
+    [xi.items.MOG_KUPON_AW_GEIV  ] = { xi.ki.MOG_KUPON_AW_GEIV,  58 },
+    [xi.items.MOG_KUPON_A_OMII   ] = { xi.ki.MOG_KUPON_A_OMII,   59 },
+    [xi.items.MOG_KUPON_I_AF119  ] = { xi.ki.MOG_KUPON_I_AF119,  60 },
+    [xi.items.MOG_KUPON_AW_OM    ] = { xi.ki.MOG_KUPON_AW_OM,    61 },
+    [xi.items.MOG_KUPON_W_RMEA   ] = { xi.ki.MOG_KUPON_W_RMEA,   62 },
+--  [xi.items.NEXT_POTENTIAL_ID  ] = { xi.ki.NEXT_POTENTIAL_ID,  63 },
 
-    --[xi.items.MOG_KUPON_W_PULSE] = { xi.keyItem.MOG_KUPON_W_PULSE, 35 },
 }
 
--- WARNING!
--- These items cannot be customised, and must be in the order
--- they appear in the in-game menus!
--- Everything is dictacted by the client!
+-- WARNING!!! These items cannot be customised, and must be in the order
+-- they appear in the in-game menus! Everything is dictated by the client!
 local itemList =
 {
     -- Kupon A-DBcd: Dynamis - Beaucedine (MOG_KUPON_A_DBCD = 2745)
@@ -472,27 +522,36 @@ local listToKeyItem = function(listID)
     return nil
 end
 
-local buildMask1 = function(player)
-    return 0
-end
-
-local buildMask2 = function(player)
+local buildMask = function(player, shift)
     local mask = 0
+    local kiID = 0
     for k, v in pairs (kuponLookup) do
-        if k > 32 then
-            return mask
-        end
-
-        if player:hasKeyItem(v[1]) then
-            mask = mask + bit.lshift(1, v[2])
+        if shift == 2 then
+            if v[2] >= 32 and v[2] <= 62 then -- Mask 1 contains index 32 -> 62
+                if player:hasKeyItem(v[1]) then
+                    mask = mask + bit.lshift(shift, v[2])
+                    kiID = v[2] -- Store the Key Item Index ID, used if there is only one KI found
+                end
+            end
+        else
+            if v[2] >= 1 and v[2] <= 31 then -- Mask 2 contains index 1 -> 31
+                if player:hasKeyItem(v[1]) then
+                    mask = mask + bit.lshift(shift, v[2])
+                    kiID = v[2]
+                end
+            end
         end
     end
 
-    return mask
+    return {mask, kiID} -- return both the completed mask and the kiID
 end
 
 xi.dealerMoogle.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
+    if trade:getItemCount() > 1 then
+        return -- Prevent accidental trade of stacks (first vana'diel problems, kupo!)
+    end
+
     if not kuponLookup[itemID] then
         return
     end
@@ -502,46 +561,47 @@ xi.dealerMoogle.onTrade = function(player, npc, trade)
     local kiID   = kuponLookup[itemID][1]
     local listID = kuponLookup[itemID][2]
 
-    -- Whatever happens, the item is gone now. It will be replaced with a key item version!
-    -- No need to tell the player, the CS handles all of the messaging.
-    if player:hasItem(itemID) then
-        trade:confirmItem(itemID, 1)
-        player:confirmTrade()
-        player:addKeyItem(kiID)
+    -- Trade Item (itemID) will only be consumed if the player does not yet have the corresponding KI. It will be replaced with a
+    -- key item version! No need to tell the player, the CS handles all of the messaging. If the Player already has the Key Item
+    -- (kiID), the itemID will not be consumed, but the kiID will be consumed upon completing a successful transaction.
 
-        player:startEvent(csid, itemID, kiID, listID)
+    -- Scenario 1:  Player trades the item, but does NOT already have the corresponding Key Item. The trade is consumed. Player will
+    --              either receive the item(s) of their choice or they will receive the corresponding Key Item if they back out of
+    --              the menu without completing a transaction.
+
+    -- Scenario 2:  Player trades the item and DOES already have the corresponding Key Item. The CS menu will present as if the player
+    --              triggered the dealer while in posession of the Key Item. If the player completes the transaction, they will receive
+    --              the item(s) of their choice, the Key Item will be consumed, the traded item will not be consumed. If the player does
+    --              not complete the transaction, they will retain both the traded Item and Key Item.
+
+    if player:hasItem(itemID) then
+        if player:hasKeyItem(kiID) then -- Player already has the KI for the traded item. Present the KI version of the CS, consume the KI only if transaction completes.
+            player:startEvent(csid, itemID, kiID, listID, 1)
+        else -- Player doesn't have the KI corresponding to the item. Consume the item on trade and convert to Key Item.
+            trade:confirmItem(itemID, 1)
+            player:confirmTrade()
+            player:addKeyItem(kiID)
+
+            player:startEvent(csid, itemID, kiID, listID)
+        end
     end
 end
 
 xi.dealerMoogle.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
-
-    -- Found a KI (or more)
-    local cs     = csidLookup[zoneID][1]
+    local cs     = csidLookup[zoneID][2]
     local numKIs = countKeyItems(player)
-    local mask1  = 0
-    local mask2  = 0
+    local mask1  = buildMask(player, 2)[1]
+    local mask2  = buildMask(player, 1)[1]
+    local kiID   = buildMask(player, 2)[2] + buildMask(player, 1)[2]
 
-    if numKIs > 0 then
-        numKIs = 2 -- NOTE: This forces the multiple-choice menu
-        cs     = csidLookup[zoneID][2]
-        mask1  = buildMask1(player)
-        mask2  = buildMask2(player)
+    if numKIs < 1 then -- Found a KI (or more)
+        cs = csidLookup[zoneID][1]
     end
-
-    -- mask1:
-    -- 1: Set menu to blank
-
-    -- mask2:
-    -- 1: Set menu to blank
-    -- 2: Kupon A-DBcd
-    -- 4: Kupon A-DXar
-    -- 8: Kupon AW-Abs
-    -- ...
 
     -- Capture of multiple stored KIs: CS2: 0, 0, 51, 4, 0, 0, 1843200, 0
 
-    player:startEvent(cs, 0, 0, 0, numKIs, 0, 0, mask1, mask2)
+    player:startEvent(cs, 0, 0, kiID, numKIs, 0, 0, mask1, mask2)
 end
 
 xi.dealerMoogle.onEventUpdate = function(player, csid, option)
