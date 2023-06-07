@@ -194,13 +194,32 @@ local itemList =
         xi.items.GANDIVA_85,
         xi.items.ARMAGEDDON_85,
     },
-    --[[
+
     -- Kupon A-RJob: Lv70 Relic Armor Accessories (deprecated)
     [7] =
     {
-
+        xi.items.WARRIORS_STONE,
+        xi.items.MELEE_CAPE,
+        xi.items.CLERICS_BELT,
+        xi.items.SORCERERS_BELT,
+        xi.items.DUELISTS_BELT,
+        xi.items.ASSASSINS_CAPE,
+        xi.items.VALOR_CAPE,
+        xi.items.ABYSS_CAPE,
+        xi.items.MONSTER_BELT,
+        xi.items.BARDS_CAPE,
+        xi.items.SCOUTS_BELT,
+        xi.items.SAOTOME_KOSHI_ATE,
+        xi.items.KOGA_SARASHI,
+        xi.items.WYRM_BELT,
+        xi.items.SUMMONERS_CAPE,
+        xi.items.MIRAGE_MANTLE,
+        xi.items.COMMODORE_BELT,
+        xi.items.PANTIN_CAPE,
+        xi.items.ETOILE_CAPE,
+        xi.items.ARGUTE_BELT,
     },
-
+    --[[
     -- Kupon W-R90: Lv90 Relic Weapons and upgrade materials (deprecated)
     [8] =
     {
@@ -554,8 +573,7 @@ local buildMask = function(player, shift)
         end
     end
 
-    return {mask, kiID} -- return both the completed mask and the kiID
-
+    return { mask, kiID } -- return both the completed mask and the kiID
 end
 
 xi.dealerMoogle.onTrade = function(player, npc, trade)
