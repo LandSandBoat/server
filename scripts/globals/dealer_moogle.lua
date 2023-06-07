@@ -219,13 +219,28 @@ local itemList =
         xi.items.ETOILE_CAPE,
         xi.items.ARGUTE_BELT,
     },
-    --[[
+
     -- Kupon W-R90: Lv90 Relic Weapons and upgrade materials (deprecated)
     [8] =
     {
-
+        { { xi.items.AEGIS_90,          1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }                           },
+        { { xi.items.GJALLARHORN_90,    1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }                           },
+        { { xi.items.SPHARAI_90,        1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.MANDAU_90,         1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.EXCALIBUR_90,      1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.RAGNAROK_90,       1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.GUTTLER_90,        1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.BRAVURA_90,        1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.GUGNIR_90,         1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.APOCALYPSE_90,     1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.KIKOKU_90,         1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.AMANOMURAKUMO_90,  1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.MJOLLNIR_90,       1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.CLAUSTRUM_90,      1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.ANNIHILATOR_90,    1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { { xi.items.YOICHINOYUMI_90,   1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
     },
-
+    --[[
     -- Kupon W-M90: Lv90 Mythic Weapons (deprecated)
     [9] =
     {
