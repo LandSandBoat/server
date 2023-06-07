@@ -187,6 +187,7 @@ local itemList =
         xi.items.FARSHA_85,
         xi.items.UKONVASARA_85,
         xi.items.REDEMPTION_85,
+        xi.items.RHONGOMIANT_85,
         xi.items.KANNAGI_85,
         xi.items.MASAMUNE_85,
         xi.items.GAMBANTEINN_85,
@@ -195,7 +196,7 @@ local itemList =
         xi.items.ARMAGEDDON_85,
     },
 
-    -- Kupon A-RJob: Lv70 Relic Armor Accessories (deprecated)
+    -- Kupon A-RJob: Lv70 Relic Armor Accessories (MOG_KUPON_A_RJOB = 2959)
     [7] =
     {
         xi.items.WARRIORS_STONE,
@@ -220,7 +221,7 @@ local itemList =
         xi.items.ARGUTE_BELT,
     },
 
-    -- Kupon W-R90: Lv90 Relic Weapons and upgrade materials (deprecated)
+    -- Kupon W-R90: Lv90 Relic Weapons and upgrade materials (MOG_KUPON_W_R90 = 3438)
     [8] =
     {
         { { xi.items.AEGIS_90,          1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }                           },
@@ -240,13 +241,32 @@ local itemList =
         { { xi.items.ANNIHILATOR_90,    1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { { xi.items.YOICHINOYUMI_90,   1 }, { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
     },
-    --[[
-    -- Kupon W-M90: Lv90 Mythic Weapons (deprecated)
+
+    -- Kupon W-M90: Lv90 Mythic Weapons (MOG_KUPON_W_M90 = 3439)
     [9] =
     {
-
+        { { xi.items.CONQUEROR_90,      1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.GLANZFAUST_90,     1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.YAGRUSH_90,        1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.LAEVATEINN_90,     1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.MURGLEIS_90,       1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.VAJRA_90,          1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.BURTGANG_90,       1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.LIBERATOR_90,      1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.AYMUR_90,          1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.CARNWENHAN_90,     1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.GASTRAPHETES_90,   1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.KOGARASUMARU_90,   1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.NAGI_90,           1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.RYUNOHIGE_90,      1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.NIRVANA_90,        1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.TIZONA_90,         1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.DEATH_PENALTY_90,  1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.KENKONKEN_90,      1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.TERPSICHORE_90,    1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
+        { { xi.items.TUPSIMATI_90,      1 }, { xi.items.MULCIBARS_SCORIA, 3 }, { xi.items.BEITETSU, 300 } },
     },
-
+    --[[
     -- Kupon W-E90: Lv90 Empyrean Weapons (deprecated)
     [11] =
     {
@@ -607,12 +627,14 @@ xi.dealerMoogle.onTrade = function(player, npc, trade)
     local listID = kuponLookup[itemID][2]
 
     -- Trade Item (itemID) will only be consumed if the player does not yet have the corresponding KI. It will be replaced with a
-    -- key item version! No need to tell the player, the CS handles all of the messaging. If the Player already has the Key Item
-    -- (kiID), the itemID will not be consumed, but the kiID will be consumed upon completing a successful transaction.
+    -- key item version! No need to tell the player, the CS handles all of the messaging. If the Player already has the Key Item,
+    -- the itemID will not be consumed, but the Key Item will only be consumed upon completing a successful transaction.
 
     -- Scenario 1:  Player trades the item, but does NOT already have the corresponding Key Item. The trade is consumed. Player will
     --              either receive the item(s) of their choice or they will receive the corresponding Key Item if they back out of
-    --              the menu without completing a transaction.
+    --              the menu without completing a transaction. In actuality, the Key Item is added silently as soon as the trade
+    --              occurs, and deleted only if the player completes the transaction. This is to prevent the player from losing
+    --              access to the reward in the event of a disconnect mid-transaction.
 
     -- Scenario 2:  Player trades the item and DOES already have the corresponding Key Item. The CS menu will present as if the player
     --              triggered the dealer while in posession of the Key Item. If the player completes the transaction, they will receive
@@ -622,7 +644,7 @@ xi.dealerMoogle.onTrade = function(player, npc, trade)
     if player:hasItem(itemID) then
         if player:hasKeyItem(kiID) then -- Player already has the KI for the traded item. Present the KI version of the CS, consume the KI only if transaction completes.
             player:startEvent(csid, itemID, kiID, listID, 1)
-        else -- Player doesn't have the KI corresponding to the item. Consume the item on trade and convert to Key Item.
+        else -- Player doesn't have the KI corresponding to the item. Consume the item on trade and convert to Key Item immediately.
             trade:confirmItem(itemID, 1)
             player:confirmTrade()
             player:addKeyItem(kiID)
@@ -640,7 +662,7 @@ xi.dealerMoogle.onTrigger = function(player, npc)
     local mask2  = buildMask(player, 1)[1]
     local kiID   = buildMask(player, 2)[2] + buildMask(player, 1)[2]
 
-    if numKIs < 1 then -- Found a KI (or more)
+    if numKIs < 1 then -- play default CS if no KIs found
         cs = csidLookup[zoneID][1]
     end
 
