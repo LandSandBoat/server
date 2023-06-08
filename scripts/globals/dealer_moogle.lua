@@ -312,13 +312,31 @@ local itemList =
         { xi.items.CHARIS_TIARA_P2,         xi.items.CHARIS_CASAQUE_P2,     xi.items.CHARIS_BANGLES_P2,         xi.items.CHARIS_TIGHTS_P2,      xi.items.CHARIS_TOE_SHOES_P2    },
         { xi.items.SAVANTS_BONNET_P2,       xi.items.SAVANTS_GOWN_P2,       xi.items.SAVANTS_BRACERS_P2,        xi.items.SAVANTS_PANTS_P2,      xi.items.SAVANTS_LOAFERS_P2     },
     },
-    --[[
-    -- Kupon I-Seal: 8 to 10 of any Empyrean Armor upgrade seals
+    -- Kupon I-Seal: 10 (Body) or 8 (other) of any One Empyrean Armor upgrade seals (MOG_KUPON_I_SEAL = 3442)
     [12] =
-    {
-
+    {-- List 12 uses submenus and requires different table formatting to address each { itemid, qty } pairing. Item = List[12][Job][Slot]
+        { { xi.items.RAVAGERS_SEAL_HEAD,   8 }, { xi.items.RAVAGERS_SEAL_BODY,   10 }, { xi.items.RAVAGERS_SEAL_HANDS,   8 }, { xi.items.RAVAGERS_SEAL_LEGS,   8 }, { xi.items.RAVAGERS_SEAL_FEET,   8 } },
+        { { xi.items.TANTRA_SEAL_HEAD,     8 }, { xi.items.TANTRA_SEAL_BODY,     10 }, { xi.items.TANTRA_SEAL_HANDS,     8 }, { xi.items.TANTRA_SEAL_LEGS,     8 }, { xi.items.TANTRA_SEAL_FEET,     8 } },
+        { { xi.items.ORISON_SEAL_HEAD,     8 }, { xi.items.ORISON_SEAL_BODY,     10 }, { xi.items.ORISON_SEAL_HANDS,     8 }, { xi.items.ORISON_SEAL_LEGS,     8 }, { xi.items.ORISON_SEAL_FEET,     8 } },
+        { { xi.items.GOETIA_SEAL_HEAD,     8 }, { xi.items.GOETIA_SEAL_BODY,     10 }, { xi.items.GOETIA_SEAL_HANDS,     8 }, { xi.items.GOETIA_SEAL_LEGS,     8 }, { xi.items.GOETIA_SEAL_FEET,     8 } },
+        { { xi.items.ESTOQUEURS_SEAL_HEAD, 8 }, { xi.items.ESTOQUEURS_SEAL_BODY, 10 }, { xi.items.ESTOQUEURS_SEAL_HANDS, 8 }, { xi.items.ESTOQUEURS_SEAL_LEGS, 8 }, { xi.items.ESTOQUEURS_SEAL_FEET, 8 } },
+        { { xi.items.RAIDERS_SEAL_HEAD,    8 }, { xi.items.RAIDERS_SEAL_BODY,    10 }, { xi.items.RAIDERS_SEAL_HANDS,    8 }, { xi.items.RAIDERS_SEAL_LEGS,    8 }, { xi.items.RAIDERS_SEAL_FEET,    8 } },
+        { { xi.items.CREED_SEAL_HEAD,      8 }, { xi.items.CREED_SEAL_BODY,      10 }, { xi.items.CREED_SEAL_HANDS,      8 }, { xi.items.CREED_SEAL_LEGS,      8 }, { xi.items.CREED_SEAL_FEET,      8 } },
+        { { xi.items.BALE_SEAL_HEAD,       8 }, { xi.items.BALE_SEAL_BODY,       10 }, { xi.items.BALE_SEAL_HANDS,       8 }, { xi.items.BALE_SEAL_LEGS,       8 }, { xi.items.BALE_SEAL_FEET,       8 } },
+        { { xi.items.FERINE_SEAL_HEAD,     8 }, { xi.items.FERINE_SEAL_BODY,     10 }, { xi.items.FERINE_SEAL_HANDS,     8 }, { xi.items.FERINE_SEAL_LEGS,     8 }, { xi.items.FERINE_SEAL_FEET,     8 } },
+        { { xi.items.AOIDOS_SEAL_HEAD,     8 }, { xi.items.AOIDOS_SEAL_BODY,     10 }, { xi.items.AOIDOS_SEAL_HANDS,     8 }, { xi.items.AOIDOS_SEAL_LEGS,     8 }, { xi.items.AOIDOS_SEAL_FEET,     8 } },
+        { { xi.items.SYLVAN_SEAL_HEAD,     8 }, { xi.items.SYLVAN_SEAL_BODY,     10 }, { xi.items.SYLVAN_SEAL_HANDS,     8 }, { xi.items.SYLVAN_SEAL_LEGS,     8 }, { xi.items.SYLVAN_SEAL_FEET,     8 } },
+        { { xi.items.UNKAI_SEAL_HEAD,      8 }, { xi.items.UNKAI_SEAL_BODY,      10 }, { xi.items.UNKAI_SEAL_HANDS,      8 }, { xi.items.UNKAI_SEAL_LEGS,      8 }, { xi.items.UNKAI_SEAL_FEET,      8 } },
+        { { xi.items.IGA_SEAL_HEAD,        8 }, { xi.items.IGA_SEAL_BODY,        10 }, { xi.items.IGA_SEAL_HANDS,        8 }, { xi.items.IGA_SEAL_LEGS,        8 }, { xi.items.IGA_SEAL_FEET,        8 } },
+        { { xi.items.LANCERS_SEAL_HEAD,    8 }, { xi.items.LANCERS_SEAL_BODY,    10 }, { xi.items.LANCERS_SEAL_HANDS,    8 }, { xi.items.LANCERS_SEAL_LEGS,    8 }, { xi.items.LANCERS_SEAL_FEET,    8 } },
+        { { xi.items.CALLERS_SEAL_HEAD,    8 }, { xi.items.CALLERS_SEAL_BODY,    10 }, { xi.items.CALLERS_SEAL_HANDS,    8 }, { xi.items.CALLERS_SEAL_LEGS,    8 }, { xi.items.CALLERS_SEAL_FEET,    8 } },
+        { { xi.items.MAVI_SEAL_HEAD,       8 }, { xi.items.MAVI_SEAL_BODY,       10 }, { xi.items.MAVI_SEAL_HANDS,       8 }, { xi.items.MAVI_SEAL_LEGS,       8 }, { xi.items.MAVI_SEAL_FEET,       8 } },
+        { { xi.items.NAVARCHS_SEAL_HEAD,   8 }, { xi.items.NAVARCHS_SEAL_BODY,   10 }, { xi.items.NAVARCHS_SEAL_HANDS,   8 }, { xi.items.NAVARCHS_SEAL_LEGS,   8 }, { xi.items.NAVARCHS_SEAL_FEET,   8 } },
+        { { xi.items.CIRQUE_SEAL_HEAD,     8 }, { xi.items.CIRQUE_SEAL_BODY,     10 }, { xi.items.CIRQUE_SEAL_HANDS,     8 }, { xi.items.CIRQUE_SEAL_LEGS,     8 }, { xi.items.CIRQUE_SEAL_FEET,     8 } },
+        { { xi.items.CHARIS_SEAL_HEAD,     8 }, { xi.items.CHARIS_SEAL_BODY,     10 }, { xi.items.CHARIS_SEAL_HANDS,     8 }, { xi.items.CHARIS_SEAL_LEGS,     8 }, { xi.items.CHARIS_SEAL_FEET,     8 } },
+        { { xi.items.SAVANTS_SEAL_HEAD,    8 }, { xi.items.SAVANTS_SEAL_BODY,    10 }, { xi.items.SAVANTS_SEAL_HANDS,    8 }, { xi.items.SAVANTS_SEAL_LEGS,    8 }, { xi.items.SAVANTS_SEAL_FEET,    8 } },
     },
-
+    --[[
     -- Kupon A-DeII: Delve boss armor pieces
     [13] =
     {
@@ -725,16 +743,31 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
     local itemCsid = csidLookup[zoneID][2]
 
     if csid == itemCsid then
-        local list = bit.band(option, 0xFF)
-        local idx = bit.rshift(option, 8)
+        local list      = bit.band(option, 0xFF)
+        local idx       = bit.rshift(option, 8)
+        local idxAlt1   = 0
+        local idxAlt2   = 0
+
+        if list == 12 then -- Special handling for list with sub menu
+            idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF) -- Job
+            idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Slot
+        end
 
         -- DEBUG:
         -- print(string.format("list: %u, idx: %u", list, idx))
+        -- print(string.format("list: %u, idx: %u, job %u, slot: %u", list, idx, idxAlt1, idxAlt2))
 
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
-            local item = itemList[list][idx]
+            local item = 0
+
+            if list == 12 then -- list 12 has sub menus, table the results here to save table space.
+                item = { itemList[list][idxAlt1][idxAlt2] }
+            else
+                item = itemList[list][idx]
+            end
+
             if npcUtil.giveItem(player, item) then
                 player:delKeyItem(listToKeyItem(list))
             else
