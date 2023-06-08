@@ -336,14 +336,24 @@ local itemList =
         { { xi.items.CHARIS_SEAL_HEAD,     8 }, { xi.items.CHARIS_SEAL_BODY,     10 }, { xi.items.CHARIS_SEAL_HANDS,     8 }, { xi.items.CHARIS_SEAL_LEGS,     8 }, { xi.items.CHARIS_SEAL_FEET,     8 } },
         { { xi.items.SAVANTS_SEAL_HEAD,    8 }, { xi.items.SAVANTS_SEAL_BODY,    10 }, { xi.items.SAVANTS_SEAL_HANDS,    8 }, { xi.items.SAVANTS_SEAL_LEGS,    8 }, { xi.items.SAVANTS_SEAL_FEET,    8 } },
     },
-    --[[
-    -- Kupon A-DeII: Delve boss armor pieces
-    [13] =
+    -- Kupon A-DeII: Delve boss armor pieces (MOG_KUPON_A_DEII = 3967)
+     [13] =
     {
-
+        xi.items.YAOYOTL_HELM,
+        xi.items.YAOYOTL_GLOVES,
+        xi.items.WHIRLPOOL_MASK,
+        xi.items.WHIRLPOOL_GREAVES,
+        xi.items.NAHTIRAH_HAT,
+        xi.items.NAHTIRAH_TROUSERS,
+        xi.items.UMBANI_CAP,
+        xi.items.UMBANI_BOOTS,
+        xi.items.UMUTHI_HAT,
+        xi.items.UMUTHI_GLOVES,
+        xi.items.IGHWA_CAP,
+        xi.items.IGHWA_TROUSERS,
     },
-
-    -- Kupon A-De: Delve boss armor pieces (deprecated)
+    --[[
+    -- Kupon A-De: Delve field armor pieces (MOG_KUPON_A_DE = 3968)
     [14] =
     {
 
