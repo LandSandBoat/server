@@ -218,7 +218,7 @@ end
 --------------------------------------------------
 -- Guild Point NPCs (Union Representatives)
 --------------------------------------------------
-xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildID)
+xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildID)
     local _, remainingPoints = player:getCurrentGPItem(guildID)
     local ID                 = zones[player:getZoneID()]
 
@@ -244,7 +244,7 @@ xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildI
     end
 end
 
-xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+xi.crafting.guildPointNPConTrigger = function(player, guildId, csid, currency, keyitems)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(guildId + 48)
     local cap                     = (rank + 1) * 10
@@ -261,7 +261,7 @@ xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currenc
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
 end
 
-xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, guildID, currency, keyitems, items)
+xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildID, currency, keyitems, items)
     local rank     = player:getSkillRank(guildID + 48)
     local category = bit.band(bit.rshift(option, 2), 3)
     local ID       = zones[player:getZoneID()]
