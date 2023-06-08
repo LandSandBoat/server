@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.crafting.guildPointNPConTrigger(player, 1, 731)
+    xi.crafting.guildPointNPConTrigger(player, 731, 1)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

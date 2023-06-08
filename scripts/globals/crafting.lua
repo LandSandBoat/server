@@ -445,7 +445,7 @@ xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildID)
     end
 end
 
-xi.crafting.guildPointNPConTrigger = function(player, guildId, csid)
+xi.crafting.guildPointNPConTrigger = function(player, csid, guildId)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(guildTable[guildId][1])
     local cap                     = (rank + 1) * 10
