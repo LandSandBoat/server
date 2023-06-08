@@ -318,7 +318,7 @@ end
 -- tradeTestItem Action
 -----------------------------------
 xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
-    local guildID    = craftID - 48
+    local guildId    = craftID - 48
     local skillLvL   = player:getSkillLevel(craftID)
     local testItemId = xi.crafting.getTestItem(player, npc, craftID)
     local newRank    = 0
@@ -329,7 +329,7 @@ xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
     then
         newRank = player:getSkillRank(craftID) + 1
 
-        if player:getCharVar('[GUILD]currentGuild') == guildID + 1 then
+        if player:getCharVar('[GUILD]currentGuild') == guildId + 1 then
             player:setCharVar('[GUILD]daily_points', 1)
         end
     end
@@ -419,17 +419,17 @@ end
 --------------------------------------------------
 -- Guild Point NPCs (Union Representatives)
 --------------------------------------------------
-xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildID)
-    local _, remainingPoints = player:getCurrentGPItem(guildID)
+xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildId)
+    local _, remainingPoints = player:getCurrentGPItem(guildId)
     local ID                 = zones[player:getZoneID()]
 
-    if player:getCharVar('[GUILD]currentGuild') - 1 == guildID then
+    if player:getCharVar('[GUILD]currentGuild') - 1 == guildId then
         if remainingPoints == 0 then
             player:messageText(npc, ID.text.NO_MORE_GP_ELIGIBLE)
         else
             local totalPoints = 0
             for i = 0, 8 do
-                local items, points = player:addGuildPoints(guildID, i)
+                local items, points = player:addGuildPoints(guildId, i)
 
                 if items ~= 0 and points ~= 0 then
                     totalPoints = totalPoints + points
@@ -464,23 +464,23 @@ xi.crafting.guildPointNPConTrigger = function(player, csid, guildId)
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
 end
 
-xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildID)
-    local rank     = player:getSkillRank(guildTable[guildID][1])
+xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildId)
+    local rank     = player:getSkillRank(guildTable[guildId][1])
     local category = bit.band(bit.rshift(option, 2), 3)
     local ID       = zones[player:getZoneID()]
-    local currency = guildTable[guildID][2]
-    local keyitems = guildKeyItemTable[guildID]
-    local items    = guildItemTable[guildID]
+    local currency = guildTable[guildId][2]
+    local keyitems = guildKeyItemTable[guildId]
+    local items    = guildItemTable[guildId]
 
     -- Contract Dialog.
     if bit.tobit(option) == -1 and rank >= 3 then
         local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
-        player:setCharVar('[GUILD]currentGuild', guildID + 1)
+        player:setCharVar('[GUILD]currentGuild', guildId + 1)
 
         if oldGuild == -1 then
-            player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildID)
+            player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildId)
         else
-            player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
+            player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildId, oldGuild)
             player:setCharVar('[GUILD]daily_points', 1)
         end
 
