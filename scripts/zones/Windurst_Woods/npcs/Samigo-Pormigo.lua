@@ -10,22 +10,22 @@ require("scripts/globals/crafting")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.crafting.guildPointNPConTrade(player, npc, trade, 10023, 6)
+    xi.crafting.guildPointOnTrade(player, npc, trade, 10023, 6)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.crafting.guildPointNPConTrigger(player, 10022, 6)
+    xi.crafting.guildPointOnTrigger(player, 10022, 6)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 10022 then
-        xi.crafting.guildPointNPConEventFinish(player, option, npc, 6)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, 6)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10022 then
-        xi.crafting.guildPointNPConEventFinish(player, option, npc, 6)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, 6)
     elseif csid == 10023 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

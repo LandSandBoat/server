@@ -78,14 +78,15 @@ local testItemsByNPC =
 
 local hqCrystals =
 {
-    [1] = { id = xi.items.INFERNO_CRYSTAL,  cost = 200 },
-    [2] = { id = xi.items.GLACIER_CRYSTAL,  cost = 200 },
-    [3] = { id = xi.items.CYCLONE_CRYSTAL,  cost = 200 },
-    [4] = { id = xi.items.TERRA_CRYSTAL,    cost = 200 },
-    [5] = { id = xi.items.PLASMA_CRYSTAL,   cost = 200 },
-    [6] = { id = xi.items.TORRENT_CRYSTAL,  cost = 200 },
-    [7] = { id = xi.items.AURORA_CRYSTAL,   cost = 500 },
-    [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost = 500 },
+    [0] = { id = xi.items.ROBBER_RIG,       cost = 1500 }, -- Robber Rig is located in category 3. Not a typo.
+    [1] = { id = xi.items.INFERNO_CRYSTAL,  cost =  200 },
+    [2] = { id = xi.items.GLACIER_CRYSTAL,  cost =  200 },
+    [3] = { id = xi.items.CYCLONE_CRYSTAL,  cost =  200 },
+    [4] = { id = xi.items.TERRA_CRYSTAL,    cost =  200 },
+    [5] = { id = xi.items.PLASMA_CRYSTAL,   cost =  200 },
+    [6] = { id = xi.items.TORRENT_CRYSTAL,  cost =  200 },
+    [7] = { id = xi.items.AURORA_CRYSTAL,   cost =  500 },
+    [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost =  500 },
 }
 
 local guildTable =
@@ -182,12 +183,12 @@ local guildItemTable =
 {
     [0] = -- Fishing
     {
-        [0] = { id = xi.items.ROBBER_RIG,           rank = xi.crafting.rank.NOVICE,     cost =   1500 },
-        [1] = { id = xi.items.FISHERMANS_BELT,      rank = xi.crafting.rank.APPRENTICE, cost =  10000 },
-        [2] = { id = xi.items.WADERS,               rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
-        [3] = { id = xi.items.FISHERMANS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
-        [4] = { id = xi.items.FISHING_HOLE_MAP,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
-        [5] = { id = xi.items.FISHERMANS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [0] = { id = xi.items.FISHERMANS_BELT,      rank = xi.crafting.rank.APPRENTICE, cost =  10000 },
+        [1] = { id = xi.items.WADERS,               rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.FISHERMANS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.FISHING_HOLE_MAP,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.FISHERMANS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        -- There is a blank space here. Robber Rig SHOULD be here, but it isnt. It's with the crystals.
         [6] = { id = xi.items.NET_AND_LURE,         rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
         [7] = { id = xi.items.FISHERMENS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
     },
@@ -419,7 +420,7 @@ end
 --------------------------------------------------
 -- Guild Point NPCs (Union Representatives)
 --------------------------------------------------
-xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildId)
+xi.crafting.guildPointOnTrade = function(player, npc, trade, csid, guildId)
     local ID                 = zones[player:getZoneID()]
     local _, remainingPoints = player:getCurrentGPItem(guildId)
 
@@ -445,7 +446,7 @@ xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildId)
     end
 end
 
-xi.crafting.guildPointNPConTrigger = function(player, csid, guildId)
+xi.crafting.guildPointOnTrigger = function(player, csid, guildId)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(guildTable[guildId][1])
     local skillCap                = (rank + 1) * 10
@@ -464,7 +465,7 @@ xi.crafting.guildPointNPConTrigger = function(player, csid, guildId)
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, skillCap, 0, keyItemBits)
 end
 
-xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildId)
+xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
     local ID       = zones[player:getZoneID()]
     local rank     = player:getSkillRank(guildTable[guildId][1])
     local category = bit.band(bit.rshift(option, 2), 3)
