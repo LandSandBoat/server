@@ -183,7 +183,7 @@ local guildItemTable =
     [0] = -- Fishing
     {
         [0] = { id = xi.items.ROBBER_RIG,           rank = xi.crafting.rank.NOVICE,     cost =   1500 },
-        [1] = { id = xi.items.FISHERMANS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.FISHERMANS_BELT,      rank = xi.crafting.rank.APPRENTICE, cost =  10000 },
         [2] = { id = xi.items.WADERS,               rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
         [3] = { id = xi.items.FISHERMANS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
         [4] = { id = xi.items.FISHING_HOLE_MAP,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
