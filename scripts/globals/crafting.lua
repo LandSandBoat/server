@@ -420,20 +420,20 @@ end
 -- Guild Point NPCs (Union Representatives)
 --------------------------------------------------
 xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildId)
-    local _, remainingPoints = player:getCurrentGPItem(guildId)
     local ID                 = zones[player:getZoneID()]
+    local _, remainingPoints = player:getCurrentGPItem(guildId)
 
     if player:getCharVar('[GUILD]currentGuild') - 1 == guildId then
         if remainingPoints == 0 then
             player:messageText(npc, ID.text.NO_MORE_GP_ELIGIBLE)
         else
             local totalPoints = 0
-            for i = 0, 8 do
-                local items, points = player:addGuildPoints(guildId, i)
+            for tradeSlot = 0, 8 do
+                local items, points = player:addGuildPoints(guildId, tradeSlot)
 
                 if items ~= 0 and points ~= 0 then
                     totalPoints = totalPoints + points
-                    trade:confirmSlot(i, items)
+                    trade:confirmSlot(tradeSlot, items)
                 end
             end
 
@@ -448,28 +448,28 @@ end
 xi.crafting.guildPointNPConTrigger = function(player, csid, guildId)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(guildTable[guildId][1])
-    local cap                     = (rank + 1) * 10
-    local kibits                  = 0
+    local skillCap                = (rank + 1) * 10
+    local keyItemBits             = 0
     local currency                = guildTable[guildId][2]
-    local keyitems                = guildKeyItemTable[guildId]
+    local keyItems                = guildKeyItemTable[guildId]
 
-    for kbit, ki in pairs(keyitems) do
-        if rank >= ki.rank then
-            if not player:hasKeyItem(ki.id) then
-                kibits = bit.bor(kibits, bit.lshift(1, kbit))
+    for currentBit, keyItem in pairs(keyItems) do
+        if rank >= keyItem.rank then
+            if not player:hasKeyItem(keyItem.id) then
+                keyItemBits = bit.bor(keyItemBits, bit.lshift(1, currentBit))
             end
         end
     end
 
-    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
+    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, skillCap, 0, keyItemBits)
 end
 
 xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildId)
+    local ID       = zones[player:getZoneID()]
     local rank     = player:getSkillRank(guildTable[guildId][1])
     local category = bit.band(bit.rshift(option, 2), 3)
-    local ID       = zones[player:getZoneID()]
     local currency = guildTable[guildId][2]
-    local keyitems = guildKeyItemTable[guildId]
+    local keyItems = guildKeyItemTable[guildId]
     local items    = guildItemTable[guildId]
 
     -- Contract Dialog.
@@ -486,12 +486,12 @@ xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildI
 
     -- GP Key Item Option.
     elseif category == 3 then
-        local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
+        local keyItem = keyItems[bit.band(bit.rshift(option, 5), 15) - 1]
 
-        if ki and rank >= ki.rank then
-            if player:getCurrency(currency) >= ki.cost then
-                player:delCurrency(currency, ki.cost)
-                npcUtil.giveKeyItem(player, ki.id)
+        if keyItem and rank >= keyItem.rank then
+            if player:getCurrency(currency) >= keyItem.cost then
+                player:delCurrency(currency, keyItem.cost)
+                npcUtil.giveKeyItem(player, keyItem.id)
             else
                 player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
@@ -499,25 +499,25 @@ xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildI
 
     -- GP Item Option.
     elseif category == 2 or category == 1 then
-        local idx      = bit.band(option, 3)
-        local i        = items[(category - 1) * 4 + idx]
+        local index    = bit.band(option, 3)
+        local item     = items[(category - 1) * 4 + index]
         local quantity = math.min(bit.rshift(option, 9), 12)
-        local cost     = quantity * i.cost
+        local cost     = quantity * item.cost
 
-        if i and rank >= i.rank then
+        if item and rank >= item.rank then
             if player:getCurrency(currency) >= cost then
                 local delivered = 0
 
                 for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
-                    if player:addItem(i.id, true) then
-                        player:delCurrency(currency, i.cost)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, i.id)
+                    if player:addItem(item.id, true) then
+                        player:delCurrency(currency, item.cost)
+                        player:messageSpecial(ID.text.ITEM_OBTAINED, item.id)
                         delivered = delivered + 1
                     end
                 end
 
                 if delivered == 0 then
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, i.id)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item.id)
                 end
             else
                 player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
@@ -526,14 +526,14 @@ xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildI
 
     -- HQ crystal Option.
     elseif category == 0 and option ~= 1073741824 then
-        local i        = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
+        local crystal  = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
-        local cost     = quantity * i.cost
+        local cost     = quantity * crystal.cost
 
-        if i and rank >= 3 then
+        if crystal and rank >= 3 then
             if
                 player:getCurrency(currency) >= cost and
-                npcUtil.giveItem(player, { { i.id, quantity } })
+                npcUtil.giveItem(player, { { crystal.id, quantity } })
             then
                 player:delCurrency(currency, cost)
             else

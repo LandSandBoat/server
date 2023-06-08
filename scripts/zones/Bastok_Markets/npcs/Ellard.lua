@@ -10,7 +10,7 @@ require('scripts/globals/crafting')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.crafting.guildPointNPConTradeplayer, npc, trade, 341, 3)
+    xi.crafting.guildPointNPConTrade(player, npc, trade, 341, 3)
 end
 
 entity.onTrigger = function(player, npc)
