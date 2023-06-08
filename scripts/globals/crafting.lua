@@ -8,17 +8,19 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.crafting = {}
 
+-- Ordered by ACTUAL guild ID.
+-- I'll change the actual numbers later, once I get to guild masters and I make sure I dont break stuff.
 xi.crafting.guild =
 {
-    ALCHEMY      = 1,
-    BONECRAFT    = 2,
-    CLOTHCRAFT   = 3,
-    COOKING      = 4,
     FISHING      = 5,
-    GOLDSMITHING = 6,
-    LEATHERCRAFT = 7,
-    SMITHING     = 8,
     WOODWORKING  = 9,
+    SMITHING     = 8,
+    GOLDSMITHING = 6,
+    CLOTHCRAFT   = 3,
+    LEATHERCRAFT = 7,
+    BONECRAFT    = 2,
+    ALCHEMY      = 1,
+    COOKING      = 4,
 }
 
 xi.crafting.rank =
@@ -39,6 +41,12 @@ xi.crafting.rank =
 -- Keys are based on the player's current rank in the guild in order to be eligible
 -- for the next rank-up test.  Example: At Amateur, a value of 256 is required to
 -- be eligible for the test to move to Recruit
+
+-- This magic numbers make no sense to me. At all.
+-- Example:
+-- At rank Amateur (Very first rank): I should have (in the database) 80+ skill points, AKA, lvl 8+ to be eligible for next rank.
+-- At rank Craftsman (Last rank before the specialitation): I should have 680+ skill points, AKA lvl 68+ to be eligible for next rank.
+-- So what does 256 or 2182 even mean?
 local requiredSkillForRank =
 {
     [xi.crafting.rank.AMATEUR]    = 256,
@@ -78,6 +86,199 @@ local hqCrystals =
     [6] = { id = xi.items.TORRENT_CRYSTAL,  cost = 200 },
     [7] = { id = xi.items.AURORA_CRYSTAL,   cost = 500 },
     [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost = 500 },
+}
+
+local guildTable =
+{
+    -- [guildId] = { skill used,   "currency used"      },
+    [0] = { xi.skill.FISHING,      "guild_fishing"      },
+    [1] = { xi.skill.WOODWORKING,  "guild_woodworking"  },
+    [2] = { xi.skill.SMITHING,     "guild_smithing"     },
+    [3] = { xi.skill.GOLDSMITHING, "guild_goldsmithing" },
+    [4] = { xi.skill.CLOTHCRAFT,   "guild_weaving"      },
+    [5] = { xi.skill.LEATHERCRAFT, "guild_leathercraft" },
+    [6] = { xi.skill.BONECRAFT,    "guild_bonecraft"    },
+    [7] = { xi.skill.ALCHEMY,      "guild_alchemy"      },
+    [8] = { xi.skill.COOKING,      "guild_cooking"      },
+}
+
+local guildKeyItemTable =
+{
+    [0] = -- Fishing
+    {
+        [0] = { id = xi.ki.FROG_FISHING,    rank = xi.crafting.rank.NOVICE,  cost =  30000 },
+        [1] = { id = xi.ki.SERPENT_RUMORS,  rank = xi.crafting.rank.ADEPT,   cost =  95000 },
+        [2] = { id = xi.ki.MOOCHING,        rank = xi.crafting.rank.VETERAN, cost = 115000 },
+        [3] = { id = xi.ki.ANGLERS_ALMANAC, rank = xi.crafting.rank.VETERAN, cost =  20000 },
+    },
+    [1] = -- Woodworking
+    {
+        [0] = { id = xi.ki.WOOD_PURIFICATION,    rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.WOOD_ENSORCELLMENT,   rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.LUMBERJACK,           rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.BOLTMAKER,            rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [4] = { id = xi.ki.WAY_OF_THE_CARPENTER, rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [2] = -- Smithing
+    {
+        [0] = { id = xi.ki.METAL_PURIFICATION,    rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.METAL_ENSORCELLMENT,   rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.CHAINWORK,             rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.SHEETING,              rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [4] = { id = xi.ki.WAY_OF_THE_BLACKSMITH, rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [3] = -- Goldsmithing
+    {
+        [0] = { id = xi.ki.GOLD_PURIFICATION,    rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.GOLD_ENSORCELLMENT,   rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.CHAINWORK,            rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.SHEETING,             rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [4] = { id = xi.ki.CLOCKMAKING,          rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [5] = { id = xi.ki.WAY_OF_THE_GOLDSMITH, rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [4] = -- Clothcraft
+    {
+        [0] = { id = xi.ki.CLOTH_PURIFICATION,  rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.CLOTH_ENSORCELLMENT, rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.SPINNING,            rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.FLETCHING,           rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [4] = { id = xi.ki.WAY_OF_THE_WEAVER,   rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [5] = -- Leathercraft
+    {
+        [0] = { id = xi.ki.LEATHER_PURIFICATION,  rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.LEATHER_ENSORCELLMENT, rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.TANNING,               rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.WAY_OF_THE_TANNER,     rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [6] = -- Bonecraft
+    {
+        [0] = { id = xi.ki.BONE_PURIFICATION,     rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [1] = { id = xi.ki.BONE_ENSORCELLMENT,    rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.FILING,                rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [3] = { id = xi.ki.WAY_OF_THE_BONEWORKER, rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [7] = -- Alchemy
+    {
+        [0] = { id = xi.ki.ANIMA_SYNTHESIS,        rank = xi.crafting.rank.NOVICE,  cost = 20000 },
+        [1] = { id = xi.ki.ALCHEMIC_PURIFICATION,  rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [2] = { id = xi.ki.ALCHEMIC_ENSORCELLMENT, rank = xi.crafting.rank.NOVICE,  cost = 40000 },
+        [3] = { id = xi.ki.TRITURATION,            rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [4] = { id = xi.ki.CONCOCTION,             rank = xi.crafting.rank.NOVICE,  cost = 20000 },
+        [5] = { id = xi.ki.IATROCHEMISTRY,         rank = xi.crafting.rank.NOVICE,  cost = 10000 },
+        [6] = { id = xi.ki.WAY_OF_THE_ALCHEMIST,   rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+    [8] = -- Cooking
+    {
+        [0] = { id = xi.ki.RAW_FISH_HANDLING,     rank = xi.crafting.rank.NOVICE,  cost = 30000 },
+        [1] = { id = xi.ki.NOODLE_KNEADING,       rank = xi.crafting.rank.NOVICE,  cost = 30000 },
+        [2] = { id = xi.ki.PATISSIER,             rank = xi.crafting.rank.NOVICE,  cost =  8000 },
+        [3] = { id = xi.ki.STEWPOT_MASTERY,       rank = xi.crafting.rank.NOVICE,  cost = 30000 },
+        [4] = { id = xi.ki.WAY_OF_THE_CULINARIAN, rank = xi.crafting.rank.VETERAN, cost = 20000 },
+    },
+}
+
+local guildItemTable =
+{
+    [0] = -- Fishing
+    {
+        [0] = { id = xi.items.ROBBER_RIG,           rank = xi.crafting.rank.NOVICE,     cost =   1500 },
+        [1] = { id = xi.items.FISHERMANS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [2] = { id = xi.items.WADERS,               rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [3] = { id = xi.items.FISHERMANS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [4] = { id = xi.items.FISHING_HOLE_MAP,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [5] = { id = xi.items.FISHERMANS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [6] = { id = xi.items.NET_AND_LURE,         rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.FISHERMENS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [1] = -- Woodworking
+    {
+        [0] = { id = xi.items.CARPENTERS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.CARPENTERS_GLOVES,    rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.CARPENTERS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.DRAWING_DESK,         rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.CARPENTERS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.CARPENTERS_RING,      rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.CARPENTERS_KIT,       rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.CARPENTERS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [2] = -- Smithing
+    {
+        [0] = { id = xi.items.BLACKSMITHS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.SMITHYS_MITTS,         rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.BLACKSMITHS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.MASTERSMITH_ANVIL,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.BLACKSMITHS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.SMITHS_RING,           rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.STONE_HEARTH,          rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.BLACKSMITHS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [3] = -- Goldsmithing
+    {
+        [0] = { id = xi.items.GOLDSMITHS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.SHADED_SPECTACLES,    rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.GOLDSMITHS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.STACK_OF_FOOLS_GOLD,  rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.GOLDSMITHS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.GOLDSMITHS_RING,      rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.GEMSCOPE,             rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.GOLDSMITHS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [4] = -- Clothcraft
+    {
+        [0] = { id = xi.items.WEAVERS_BELT,          rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.MAGNIFYING_SPECTACLES, rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.WEAVERS_APRON,         rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.GILT_TAPESTRY,         rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.WEAVERS_SIGNBOARD,     rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.TAILORS_RING,          rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.SPINNING_WHEEL,        rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.WEAVERS_EMBLEM,        rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [5] = -- Leathercraft
+    {
+        [0] = { id = xi.items.TANNERS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.TANNERS_GLOVES,    rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.TANNERS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.GOLDEN_FLEECE,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.TANNERS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.TANNERS_RING,      rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.HIDE_STRETCHER,    rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.TANNERS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [6] = -- Bonecraft
+    {
+        [0] = { id = xi.items.BONEWORKERS_BELT,          rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.PROTECTIVE_SPECTACLES,     rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.BONEWORKERS_APRON,         rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.DROGAROGAS_FANG,           rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.BONEWORKERS_SIGNBOARD,     rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.BONECRAFTERS_RING,         rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.SET_OF_BONECRAFTING_TOOLS, rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.BONEWORKERS_EMBLEM,        rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [7] = -- Alchemy
+    {
+        [0] = { id = xi.items.ALCHEMISTS_BELT,      rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.CADUCEUS,             rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.ALCHEMISTS_APRON,     rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.COPY_OF_EMERALDA,     rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.ALCHEMISTS_SIGNBOARD, rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.ALCHEMISTS_RING,      rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.ALEMBIC,              rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.ALCHEMISTS_EMBLEM,    rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
+    [8] = -- Cooking
+    {
+        [0] = { id = xi.items.CULINARIANS_BELT,        rank = xi.crafting.rank.NOVICE,     cost =  10000 },
+        [1] = { id = xi.items.CHEFS_HAT,               rank = xi.crafting.rank.JOURNEYMAN, cost =  70000 },
+        [2] = { id = xi.items.CULINARIANS_APRON,       rank = xi.crafting.rank.ARTISAN,    cost = 100000 },
+        [3] = { id = xi.items.CORDON_BLEU_COOKING_SET, rank = xi.crafting.rank.VETERAN,    cost = 150000 },
+        [4] = { id = xi.items.CULINARIANS_SIGNBOARD,   rank = xi.crafting.rank.VETERAN,    cost = 200000 },
+        [5] = { id = xi.items.CHEFS_RING,              rank = xi.crafting.rank.CRAFTSMAN,  cost =  80000 },
+        [6] = { id = xi.items.BRASS_CROCK,             rank = xi.crafting.rank.ARTISAN,    cost =  50000 },
+        [7] = { id = xi.items.CULINARIANS_EMBLEM,      rank = xi.crafting.rank.VETERAN,    cost =  15000 },
+    },
 }
 
 xi.crafting.hasJoinedGuild = function(player, guildId)
@@ -244,11 +445,13 @@ xi.crafting.guildPointNPConTrade = function(player, npc, trade, csid, guildID)
     end
 end
 
-xi.crafting.guildPointNPConTrigger = function(player, guildId, csid, currency, keyitems)
+xi.crafting.guildPointNPConTrigger = function(player, guildId, csid)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
-    local rank                    = player:getSkillRank(guildId + 48)
+    local rank                    = player:getSkillRank(guildTable[guildId][1])
     local cap                     = (rank + 1) * 10
     local kibits                  = 0
+    local currency                = guildTable[guildId][2]
+    local keyitems                = guildKeyItemTable[guildId]
 
     for kbit, ki in pairs(keyitems) do
         if rank >= ki.rank then
@@ -261,10 +464,13 @@ xi.crafting.guildPointNPConTrigger = function(player, guildId, csid, currency, k
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
 end
 
-xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildID, currency, keyitems, items)
-    local rank     = player:getSkillRank(guildID + 48)
+xi.crafting.guildPointNPConEventFinish = function(player, option, target, guildID)
+    local rank     = player:getSkillRank(guildTable[guildID][1])
     local category = bit.band(bit.rshift(option, 2), 3)
     local ID       = zones[player:getZoneID()]
+    local currency = guildTable[guildID][2]
+    local keyitems = guildKeyItemTable[guildID]
+    local items    = guildItemTable[guildID]
 
     -- Contract Dialog.
     if bit.tobit(option) == -1 and rank >= 3 then
