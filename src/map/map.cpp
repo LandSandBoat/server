@@ -297,6 +297,8 @@ int32 do_init(int32 argc, char** argv)
 
     luautils::OnServerStart();
 
+    zoneutils::ValidateTriggerAreaVolumes();
+
     moduleutils::ReportLuaModuleUsage();
 
     ShowInfo("The map-server is ready to work!");

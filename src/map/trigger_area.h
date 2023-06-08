@@ -46,6 +46,8 @@ public:
     void SetLRCorner(float x, float y, float z); // The lower right corner
 
     bool isPointInside(position_t pos) const;
+    bool isCircle() const;
+    bool intersectsOtherTriggerArea(CTriggerArea* other) const;
 
 private:
     uint32 m_TriggerAreaID;

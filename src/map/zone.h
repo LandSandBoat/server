@@ -601,6 +601,7 @@ public:
 
     virtual void ZoneServer(time_point tick);
     void         CheckTriggerAreas();
+    void         ValidateTriggerAreaVolumes();
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func);

@@ -103,3 +103,24 @@ bool CTriggerArea::isPointInside(position_t pos) const
 
     return (x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z);
 }
+
+bool CTriggerArea::isCircle() const
+{
+    return circle;
+}
+
+bool CTriggerArea::intersectsOtherTriggerArea(CTriggerArea* other) const
+{
+    if (this->isCircle() && other->isCircle())
+    {
+        // Remember, X and Z are the coords, and Y is the radius!
+        double distance = std::sqrt((this->x1 - other->x1) * (this->x1 - other->x1) +
+                                    (this->z1 - other->z1) * (this->z1 - other->z1));
+
+        return distance < (this->y1 + other->y1);
+    }
+    else if (!this->isCircle() && !other->isCircle())
+    {
+
+    }
+}

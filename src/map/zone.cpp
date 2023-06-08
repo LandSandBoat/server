@@ -1248,3 +1248,24 @@ void CZone::CheckTriggerAreas()
         PChar->m_InsideTriggerAreaID = triggerAreaID;
     }
 }
+
+void CZone::ValidateTriggerAreaVolumes()
+{
+    TracyZoneScoped;
+    for (auto* triggerAreaA : m_triggerAreaList)
+    {
+        for (auto* triggerAreaB : m_triggerAreaList)
+        {
+            if (triggerAreaA->GetTriggerAreaID() == triggerAreaB->GetTriggerAreaID())
+            {
+                continue;
+            }
+
+            if (triggerAreaA->intersectsOtherTriggerArea(triggerAreaB))
+            {
+                ShowError(fmt::format("Trigger area {} intersects with trigger area {} - in {} (ID: {})",
+                    triggerAreaA->GetTriggerAreaID(), triggerAreaB->GetTriggerAreaID(), this->GetName(), this->GetID()))
+            }
+        }
+    }
+}
