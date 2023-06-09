@@ -170,6 +170,12 @@ void CAlliance::removeParty(CParty* party)
 
 void CAlliance::delParty(CParty* party)
 {
+    // Don't delete parties when there's no party in the alliance
+    if (!party->m_PAlliance || party->m_PAlliance->partyList.size() == 0)
+    {
+        return;
+    }
+
     // Delete the party from the alliance list
     auto partyToDelete = std::find(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), party);
 
@@ -186,7 +192,7 @@ void CAlliance::delParty(CParty* party)
     party->m_PAlliance = nullptr;
     party->SetPartyNumber(0);
 
-    // Remove party members from the alliance treasure pool
+    // Remove party members from the alliance treasure pool, but not the zonewide pool.
     for (auto* entry : party->members)
     {
         auto* member = dynamic_cast<CCharEntity*>(entry);
@@ -196,35 +202,13 @@ void CAlliance::delParty(CParty* party)
         }
     }
 
-    // Create a a new treasure pool for whoever is in the server from this party (if anyone)
-    if (!party->members.empty())
+    // Reload pools, assign new ones as appropriate.
+    for (auto& member : party->members)
     {
-        auto* PChar = dynamic_cast<CCharEntity*>(party->members.at(0));
-
-        if (!PChar)
+        auto* PMember = dynamic_cast<CCharEntity*>(member);
+        if (PMember && PMember->PParty)
         {
-            ShowWarning("CAlliance::delParty - Party Member at Position 0 is not of type CCharEntity.");
-            return;
-        }
-
-        if (PChar->PTreasurePool && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
-        {
-            return;
-        }
-
-        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
-        PChar->PTreasurePool->AddMember(PChar);
-        PChar->PTreasurePool->UpdatePool(PChar);
-
-        for (auto& member : party->members)
-        {
-            auto* PMember = dynamic_cast<CCharEntity*>(member);
-            if (PMember && (PChar != PMember))
-            {
-                PMember->PTreasurePool = PChar->PTreasurePool;
-                PChar->PTreasurePool->AddMember(PMember);
-                PChar->PTreasurePool->UpdatePool(PMember);
-            }
+            PMember->PParty->ReloadTreasurePool(PMember);
         }
     }
 }
