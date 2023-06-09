@@ -337,7 +337,7 @@ local itemList =
         { { xi.items.SAVANTS_SEAL_HEAD,    8 }, { xi.items.SAVANTS_SEAL_BODY,    10 }, { xi.items.SAVANTS_SEAL_HANDS,    8 }, { xi.items.SAVANTS_SEAL_LEGS,    8 }, { xi.items.SAVANTS_SEAL_FEET,    8 } },
     },
     -- Kupon A-DeII: Delve boss armor pieces (MOG_KUPON_A_DEII = 3967)
-     [13] =
+    [13] =
     {
         xi.items.YAOYOTL_HELM,
         xi.items.YAOYOTL_GLOVES,
@@ -352,13 +352,27 @@ local itemList =
         xi.items.IGHWA_CAP,
         xi.items.IGHWA_TROUSERS,
     },
-    --[[
+
     -- Kupon A-De: Delve field armor pieces (MOG_KUPON_A_DE = 3968)
     [14] =
     {
-
+        { xi.items.MIKINAAK_HELM,           { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MIKINAAK_BREASTPLATE,    { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MIKINAAK_GAUNTLETS,      { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MIKINAAK_CUISSES,        { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MIKINAAK_GREAVES,        { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MANIBOZHO_BERET,         { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MANIBOZHO_JERKIN,        { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MANIBOZHO_GLOVES,        { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MANIBOZHO_BRAIS,         { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.MANIBOZHO_BOOTS,         { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.BOKWUS_CIRCLET,          { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.BOKWUS_ROBE,             { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.BOKWUS_GLOVES,           { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.BOKWUS_SLOPS,            { xi.items.AIRLIXIR_P2, 3 } },
+        { xi.items.BOKWUS_BOOTS,            { xi.items.AIRLIXIR_P2, 3 } },
     },
-
+    --[[
     -- Kupon A-Sal: Salvage II (deprecated)
     [15] =
     {
