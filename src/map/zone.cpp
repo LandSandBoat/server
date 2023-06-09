@@ -537,11 +537,11 @@ void CZone::DeleteTRUST(CBaseEntity* PTrust)
  *                                                                       *
  ************************************************************************/
 
-void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
+void CZone::InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea)
 {
     if (triggerArea != nullptr)
     {
-        m_triggerAreaList.emplace_back(triggerArea);
+        m_triggerAreaList.emplace_back(std::move(triggerArea));
     }
 }
 
@@ -1224,15 +1224,15 @@ void CZone::CheckTriggerAreas()
         //     : use them here to make the search domain smaller.
 
         uint32 triggerAreaID = 0;
-        for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
+        for (auto const& triggerArea : m_triggerAreaList)
         {
-            if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
+            if (triggerArea->IsPointInside(PChar->loc.p))
             {
-                triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
+                triggerAreaID = triggerArea->GetTriggerAreaID();
 
-                if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                if (triggerArea->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
                 {
-                    luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
+                    luautils::OnTriggerAreaEnter(PChar, triggerArea);
                 }
 
                 if (PChar->m_InsideTriggerAreaID == 0)
@@ -1240,9 +1240,9 @@ void CZone::CheckTriggerAreas()
                     break;
                 }
             }
-            else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+            else if (triggerArea->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
             {
-                luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
+                luautils::OnTriggerAreaLeave(PChar, triggerArea);
             }
         }
         PChar->m_InsideTriggerAreaID = triggerAreaID;
@@ -1252,19 +1252,19 @@ void CZone::CheckTriggerAreas()
 void CZone::ValidateTriggerAreaVolumes()
 {
     TracyZoneScoped;
-    for (auto* triggerAreaA : m_triggerAreaList)
+    for (auto const& triggerAreaA : m_triggerAreaList)
     {
-        for (auto* triggerAreaB : m_triggerAreaList)
+        for (auto const& triggerAreaB : m_triggerAreaList)
         {
             if (triggerAreaA->GetTriggerAreaID() == triggerAreaB->GetTriggerAreaID())
             {
                 continue;
             }
 
-            if (triggerAreaA->intersectsOtherTriggerArea(triggerAreaB))
+            if (triggerAreaA->IntersectsOtherTriggerArea(triggerAreaB))
             {
                 ShowError(fmt::format("Trigger area {} intersects with trigger area {} - in {} (ID: {})",
-                    triggerAreaA->GetTriggerAreaID(), triggerAreaB->GetTriggerAreaID(), this->GetName(), this->GetID()))
+                                      triggerAreaA->GetTriggerAreaID(), triggerAreaB->GetTriggerAreaID(), this->GetName(), this->GetID()))
             }
         }
     }

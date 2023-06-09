@@ -1967,7 +1967,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea)
+    int32 OnTriggerAreaEnter(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea)
     {
         TracyZoneScoped;
 
@@ -2003,7 +2003,7 @@ namespace luautils
         }
 
         auto onTriggerAreaEnterFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTriggerAreaEnter"];
-        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaEnter);
+        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea.get()), onTriggerAreaEnter);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2021,7 +2021,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea)
+    int32 OnTriggerAreaLeave(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea)
     {
         TracyZoneScoped;
 
@@ -2057,7 +2057,7 @@ namespace luautils
         }
 
         auto onTriggerAreaLeaveFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTriggerAreaLeave"];
-        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaLeave);
+        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea.get()), onTriggerAreaLeave);
         if (!result.valid())
         {
             sol::error err = result;

@@ -506,8 +506,8 @@ class CTrustEntity;
 class CTreasurePool;
 class CZoneEntities;
 
-typedef std::list<CTriggerArea*> triggerAreaList_t;
-typedef std::list<zoneLine_t*>   zoneLineList_t;
+typedef std::list<std::unique_ptr<ITriggerArea>> triggerAreaList_t;
+typedef std::list<zoneLine_t*>                   zoneLineList_t;
 
 typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
@@ -586,7 +586,7 @@ public:
     virtual void TransportDepart(uint16 boundary, uint16 zone);  // transport is sent, it is necessary to collect passengers
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // removesTheCharacter'sLevelRestrictionIfTheZoneHasALevelRestrictionItAppliesTheZone'sAfterRemovingIt
 
-    void InsertTriggerArea(CTriggerArea* triggerArea); // Add an active area to the zone
+    void InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea); // Add an active area to the zone
 
     virtual void TOTDChange(TIMETYPE TOTD);
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*);

@@ -44,7 +44,10 @@ public:
     void setLocalVar(const char* key, uint32 value);
     void resetLocalVars();
 
-    void               registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2);
+    void registerCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+    void registerCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
+    void registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
+
     sol::object        levelRestriction();
     auto               getPlayers() -> sol::table;
     auto               getNPCs() -> sol::table;
