@@ -372,19 +372,57 @@ local itemList =
         { xi.items.BOKWUS_SLOPS,            { xi.items.AIRLIXIR_P2, 3 } },
         { xi.items.BOKWUS_BOOTS,            { xi.items.AIRLIXIR_P2, 3 } },
     },
-    --[[
-    -- Kupon A-Sal: Salvage II (deprecated)
+
+    -- Kupon A-Sal: Salvage II (MOG_KUPON_A_SAL = 3969)
     [15] =
     {
-
+        xi.items.ARES_MASK_P1,
+        xi.items.ARES_CUIRASS_P1,
+        xi.items.ARES_GAUNTLETS_P1,
+        xi.items.ARES_FLANCHARD_P1,
+        xi.items.ARES_SOLLERETS_P1,
+        xi.items.SKADIS_VISOR_P1,
+        xi.items.SKADIS_CUIRIE_P1,
+        xi.items.SKADIS_BAZUBANDS_P1,
+        xi.items.SKADIS_CHAUSSES_P1,
+        xi.items.SKADIS_JAMBEAUX_P1,
+        xi.items.USUKANE_SOMEN_P1,
+        xi.items.USUKANE_HARAMAKI_P1,
+        xi.items.USUKANE_GOTE_P1,
+        xi.items.USUKANE_HIZAYOROI_P1,
+        xi.items.USUKANE_SUNE_ATE_P1,
+        xi.items.MARDUKS_TIARA_P1,
+        xi.items.MARDUKS_JUBBAH_P1,
+        xi.items.MARDUKS_DASTANAS_P1,
+        xi.items.MARDUKS_SHALWAR_P1,
+        xi.items.MARDUKS_CRACKOWS_P1,
+        xi.items.MORRIGANS_CORONAL_P1,
+        xi.items.MORRIGANS_ROBE_P1,
+        xi.items.MORRIGANS_CUFFS_P1,
+        xi.items.MORRIGANS_SLOPS_P1,
+        xi.items.MORRIGANS_PIGACHES_P1,
     },
 
-    -- Kupon A-Nyz: Nyzul Isle Uncharted Area Survey (deprecated)
+    -- Kupon A-Nyz: Nyzul Isle Uncharted Area Survey (MOG_KUPON_A_NYZ = 3970)
     [16] =
     {
-
+        xi.items.PHORCYS_SALADE,
+        xi.items.PHORCYS_KORAZIN,
+        xi.items.PHORCYS_MITTS,
+        xi.items.PHORCYS_DIRS,
+        xi.items.PHORCYS_SCHUHS,
+        xi.items.THAUMAS_HAT,
+        xi.items.THAUMAS_COAT,
+        xi.items.THAUMAS_GLOVES,
+        xi.items.THAUMAS_KECKS,
+        xi.items.THAUMAS_NAILS,
+        xi.items.NARES_CAP,
+        xi.items.NARES_SAIO,
+        xi.items.NARES_CUFFS,
+        xi.items.NARES_TREWS,
+        xi.items.NARES_CLOGS,
     },
-
+    --[[
     -- Kupon I-S5: Skirmish Rank V Simulacrum Segments
     [17] =
     {
