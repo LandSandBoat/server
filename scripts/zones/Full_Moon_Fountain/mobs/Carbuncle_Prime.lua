@@ -59,6 +59,7 @@ entity.onMobSpawn = function(mob)
         mobArg:setHP(bf:getLocalVar("carbuncleHP"))
         bf:setLocalVar("abilityControl", 0)
         bf:setLocalVar("primesDead", 0)
+        bf:setLocalVar("phaseControl", 0)
     end)
 end
 
@@ -83,7 +84,7 @@ entity.onMobFight = function(mob, target)
             local carby = GetMobByID(ID.primes[1][bf:getArea()] + i)
 
             if carby:isAlive() then
-                carby:useMobAbility(912)
+                carby:useMobAbility(919)
             end
         end
     end
@@ -92,6 +93,8 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local bf = mob:getBattlefield()
     local flag = true
+
+    print(bf:getLocalVar("phase"))
 
     for i = 0, 4 do
         local carby = GetMobByID(ID.primes[1][bf:getArea()] + i)
