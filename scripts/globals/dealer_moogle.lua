@@ -422,61 +422,179 @@ local itemList =
         xi.items.NARES_TREWS,
         xi.items.NARES_CLOGS,
     },
-    --[[
-    -- Kupon I-S5: Skirmish Rank V Simulacrum Segments
+    -- Kupon I-S5: Skirmish Rank V Simulacrum Segments (MOG_KUPON_I_S5 = 3971)
     [17] =
     {
-
+        xi.items.RALA_VISAGE_V,
+        xi.items.CIRDAS_VISAGE_V,
+        xi.items.FAITHFULS_TORSO_V,
+        xi.items.PAIR_OF_FAITHFULS_LEGS_V,
+        xi.items.YORCIA_VISAGE_V,
+        xi.items.RAKAZNAR_VISGE_V,
     },
 
-    -- Kupon I-S2: Skirmish Rank II Simulacrum Segments
+    -- Kupon I-S2: Skirmish Rank II Simulacrum Segments (MOG_KUPON_I_S2 = 3972)
     [18] =
     {
-
+        xi.items.RALA_VISAGE_II,
+        xi.items.CIRDAS_VISAGE_II,
+        xi.items.FAITHFULS_TORSO_II,
+        xi.items.PAIR_OF_FAITHFULS_LEGS_II,
+        xi.items.YORCIA_VISAGE_II,
+        xi.items.RAKAZNAR_VISGE_II,
     },
 
-    -- Kupon I-Orche: Orchestrion music
+    -- Kupon I-Orche: Orchestrion music (MOG_KUPON_I_ORCHE = 3973)
     [19] =
     {
-
+        xi.keyItem.SHEET_OF_E_ADOULINIAN_TUNES,
+        xi.keyItem.SHEET_OF_W_ADOULINIAN_TUNES,
+        xi.keyItem.SHEET_OF_ZILART_TUNES,
+        xi.keyItem.SHEET_OF_CONFLICT_TUNES,
     },
-
-    -- Kupon I-AF109: 12 of each REM's Tale Chapters 1-10
+    -- Kupon I-AF109: 12 of each REM's Tale Chapters 1-10 (MOG_KUPON_I_AF109 = 8729)
     [20] =
     {
-
+        {
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_1,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_2,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_3,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_4,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_5,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_6,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_7,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_8,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_9,  12 },
+            { xi.items.COPY_OF_REMS_TALE_CHAPTER_10, 12 },
+        },
     },
 
-    -- Kupon W-EWS: Walk of Echoes Weapons (deprecated)
+    -- Kupon W-EWS: Walk of Echoes Weapons (MOG_KUPON_W_EWS = 8730)
     [21] =
     {
-
+        xi.items.DUMUZIS,
+        xi.items.KHANDORMA,
+        xi.items.BRUNELLO,
+        xi.items.XIPHIAS,
+        xi.items.SACRIPANTE,
+        xi.items.SHAMASH,
+        xi.items.UMILIATI,
+        xi.items.DABOYA,
+        xi.items.KASASAGI,
+        xi.items.TORIGASHIRANOTACHI,
+        xi.items.ROSE_COUVERTE,
+        xi.items.PAIKEA,
+        xi.items.CIRCINAE,
+        xi.items.MOLLFRITH,
     },
-
-    -- Kupon AW-WK: Weapon or Armor from Wildskeeper Reives
+    -- Kupon AW-WK: Weapon or Armor from Wildskeeper Reives (MOG_KUPON_AW_WKR = 8731)
     [22] =
     {
-
+        -- Colkhab
+        {
+            { xi.items.PHAWAYLLA_EARRING    },
+            { xi.items.IK_CAPE              },
+            { xi.items.HUANI_COLLAR         },
+            { xi.items.KUKU_STONE           },
+            { xi.items.HATXIIK              },
+            { xi.items.KUAKUAKAIT           },
+            { xi.items.KAABNAX_HAT          },
+            { xi.items.KAABNAX_TROUSERS     },
+            { xi.items.TAIKOGANE            },
+        },
+        -- Tchakka
+        {
+            { xi.items.ATZINTLI_NECKLACE    },
+            { xi.items.TUILHA_CAPE          },
+            { xi.items.KALBORON_STONE       },
+            { xi.items.CHOJ_BAND            },
+            { xi.items.ATOYAC               },
+            { xi.items.AZUKINAGAMITSU       },
+            { xi.items.ATETEPEYORG          },
+            { xi.items.EJEKAMAL_MASK        },
+            { xi.items.EJEKAMAL_BOOTS       },
+        },
+        -- Achuka
+        {
+            { xi.items.CUAMIZ_COLLAR        },
+            { xi.items.BUQUWIK_CAPE         },
+            { xi.items.AQREQAQ_BOMBLET      },
+            { xi.items.ACHAQ_GRIP           },
+            { xi.items.MAOCHINOLI           },
+            { xi.items.XIUTLEATO            },
+            { xi.items.OTOMI_HELM           },
+            { xi.items.OTOMI_GLOVES         },
+        },
+        -- Hurkan
+        {
+            { xi.items.HUNAHPU              },
+            { xi.items.XBALANQUE            },
+            { xi.items.TZACAB_GRIP          },
+            { xi.items.ANIMIKII_BULLET      },
+            { xi.items.KAQULJAAN            },
+            { xi.items.UKUXKAJ_CAP          },
+            { xi.items.UKUXKAJ_BOOTS        },
+            { xi.items.JUKUKIK_FEATHER      },
+            { xi.items.KAYAPA_CAPE          },
+            { xi.items.PAQICHIKAJI_RING     },
+            { xi.items.JAQIJ_SASH           },
+        },
+        -- Yumcax
+        {
+            { xi.items.IXTAB                },
+            { xi.items.TAMAXCHI             },
+            { xi.items.BUREMTE_HAT          },
+            { xi.items.BUREMTE_GLOVES       },
+            { xi.items.PAHTLI_CAPE          },
+            { xi.items.OCACHI_GORGET        },
+            { xi.items.KUNAJI_RING          },
+            { xi.items.IXIMULEW_CAPE        },
+            { xi.items.CHUQABA_BELT         },
+            { xi.items.QUANPUR_NECKLACE     },
+            { xi.items.BARATARIA_RING       },
+        },
+        -- Kumhau
+        {
+            { xi.items.TORO_CAPE            },
+            { xi.items.FRIOMISI_EARRING     },
+            { xi.items.TLAMIZTLI_COLLAR     },
+            { xi.items.CETL_BELT            },
+            { xi.items.AJJUB_BOW            },
+            { xi.items.BAQIL_STAFF          },
+            { xi.items.QUIAHUIZ_HELM        },
+            { xi.items.QUIAHUIZ_TROUSERS    },
+            { xi.items.NEPOTE_BELL          },
+        },
     },
 
-    -- Kupon I-S3: Skirmish Rank III Simulacrum Segments
+    -- Kupon I-S3: Skirmish Rank III Simulacrum Segments (MOG_KUPON_I_S3 = 8732)
     [23] =
     {
-
+        xi.items.RALA_VISAGE_III,
+        xi.items.CIRDAS_VISAGE_III,
+        xi.items.FAITHFULS_TORSO_III,
+        xi.items.PAIR_OF_FAITHFULS_LEGS_III,
+        xi.items.YORCIA_VISAGE_III,
+        xi.items.RAKAZNAR_VISGE_III,
     },
-
+    --[[
     -- Kupon A-PK109: iLevel 109 Peacekeeper Coalition Armor
     [24] =
     {
 
     },
-
-    -- Kupon I-S1: Skirmish Rank I Simulacrum Segments
+    --]]
+    -- Kupon I-S1: Skirmish Rank I Simulacrum Segments (MOG_KUPON_I_S1 = 8734)
     [25] =
     {
-
+        xi.items.RALA_VISAGE_I,
+        xi.items.CIRDAS_VISAGE_I,
+        xi.items.FAITHFULS_TORSO_I,
+        xi.items.PAIR_OF_FAITHFULS_LEGS_I,
+        xi.items.YORCIA_VISAGE_I,
+        xi.items.RAKAZNAR_VISGE_I,
     },
-
+    --[[
     -- Kupon I-Skill: Skill books (deprecated)
     [26] =
     {
@@ -810,9 +928,14 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
         local idxAlt1   = 0
         local idxAlt2   = 0
 
-        if list == 12 then -- Special handling for list with sub menu
+        if list == 12 then -- I-Seal submenu format
             idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF) -- Job
             idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Slot
+        end
+
+        if list == 22 then -- AW-WK submenu format
+            idxAlt1 = bit.rshift(option, 24) -- Naakul
+            idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Slot
         end
 
         -- DEBUG:
@@ -822,18 +945,35 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
-            local item = 0
+            local item      = 0
+            local keyItems  = 0
 
-            if list == 12 then -- list 12 has sub menus, table the results here to save table space.
-                item = { itemList[list][idxAlt1][idxAlt2] }
+            if list == 12 then
+                item = { itemList[list][idxAlt1][idxAlt2] } -- Tabling here to save 100 pairs of { }
+            elseif list == 22 then
+                item = itemList[list][idxAlt1][idxAlt2]
             else
                 item = itemList[list][idx]
             end
 
-            if npcUtil.giveItem(player, item) then
-                player:delKeyItem(listToKeyItem(list))
+            if list == 19 then -- List 19 has keyitems
+                keyItems = 1
+            end
+
+            if keyItems == 0 then
+                if npcUtil.giveItem(player, item) then
+                    player:delKeyItem(listToKeyItem(list))
+                else
+                    -- TODO: CS Messaging that getting the item has failed
+                end
             else
-                -- TODO: Messaging that getting the item has failed
+                if not player:hasKeyItem(item) then
+                    npcUtil.giveKeyItem(player, item)
+                    player:delKeyItem(listToKeyItem(list))
+                else
+                    player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, item)
+                    -- TODO: CS Messaging that getting the item has failed
+                end
             end
         end
     end
