@@ -19,9 +19,10 @@ g_mixins.wtb_prime = function(prime)
                 -- Respawn Carbuncle
                 SpawnMob(carby:getID()):updateEnmity(killer)
 
+                -- Phase Control resets on carby spawn
                 if bf:getLocalVar("phaseControl") == 0 then
                     bf:setLocalVar("phase", phase + 1)
-                    bf:setLocalVar("phaseControl", 1) -- Reset when carby spawns
+                    bf:setLocalVar("phaseControl", 1)
 
                     if bf:getLocalVar("phase") >= 4 then
                         for i = 1, 4 do
