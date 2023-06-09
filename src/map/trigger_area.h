@@ -28,7 +28,7 @@
 class ITriggerArea
 {
 public:
-    ITriggerArea(uint32 triggerAreaID);
+    ITriggerArea(uint32 _triggerAreaID);
     virtual ~ITriggerArea() = default;
 
     uint32 GetTriggerAreaID() const;
@@ -53,7 +53,7 @@ private:
 class CCuboidTriggerArea : public ITriggerArea
 {
 public:
-    CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+    CCuboidTriggerArea(uint32 _triggerAreaID, float _xMin, float _yMin, float _zMin, float _xMax, float _yMax, float _zMax);
 
     bool IsPointInside(float x, float y, float z) const override;
     bool IsPointInside(position_t pos) const override;
@@ -70,7 +70,7 @@ public:
 class CCylindricalTriggerArea : public ITriggerArea
 {
 public:
-    CCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
+    CCylindricalTriggerArea(uint32 _triggerAreaID, float _xPos, float _zPos, float _radius);
 
     bool IsPointInside(float x, float y, float z) const override;
     bool IsPointInside(position_t pos) const override;
@@ -84,7 +84,7 @@ public:
 class CSphericalTriggerArea : public ITriggerArea
 {
 public:
-    CSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
+    CSphericalTriggerArea(uint32 _triggerAreaID, float _xPos, float _yPos, float _zPos, float _radius);
 
     bool IsPointInside(float x, float y, float z) const override;
     bool IsPointInside(position_t pos) const override;

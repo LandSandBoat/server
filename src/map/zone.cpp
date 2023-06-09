@@ -1252,19 +1252,36 @@ void CZone::CheckTriggerAreas()
 void CZone::ValidateTriggerAreaVolumes()
 {
     TracyZoneScoped;
+    std::unordered_set<uint64> alreadyChecked;
     for (auto const& triggerAreaA : m_triggerAreaList)
     {
         for (auto const& triggerAreaB : m_triggerAreaList)
         {
-            if (triggerAreaA->GetTriggerAreaID() == triggerAreaB->GetTriggerAreaID())
+            auto a = (uint64)triggerAreaA->GetTriggerAreaID();
+            auto b = (uint64)triggerAreaB->GetTriggerAreaID();
+
+            if (a == b)
+            {
+                continue;
+            }
+            else if (a > b)
+            {
+                std::swap(a, b);
+            }
+
+            uint64 key = (a << 32) + b;
+
+            if (alreadyChecked.find(key) != alreadyChecked.end())
             {
                 continue;
             }
 
+            alreadyChecked.insert(key);
+
             if (triggerAreaA->IntersectsOtherTriggerArea(triggerAreaB))
             {
                 ShowError(fmt::format("Trigger area {} intersects with trigger area {} - in {} (ID: {})",
-                                      triggerAreaA->GetTriggerAreaID(), triggerAreaB->GetTriggerAreaID(), this->GetName(), this->GetID()))
+                                      a, b, this->GetName(), this->GetID()))
             }
         }
     }

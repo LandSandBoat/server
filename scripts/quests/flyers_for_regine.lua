@@ -56,7 +56,7 @@ quests.flyers_for_regine.initZone = function(zone)
 
     if data then
         for k, v in pairs(data) do
-            zone:registerTriggerArea(v.triggerArea, v.x, 10, v.z, 0, 0, 0)
+            zone:registerCylindricalTriggerArea(v.triggerArea, v.x, v.z, 10)
         end
     end
 end

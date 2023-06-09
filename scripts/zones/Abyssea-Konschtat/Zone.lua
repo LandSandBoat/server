@@ -13,7 +13,7 @@ require("scripts/globals/abyssea")
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 70, -80, -850, 170, -70, -773)
+    zone:registerCuboidTriggerArea(1, 70, -80, -850, 170, -70, -773)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

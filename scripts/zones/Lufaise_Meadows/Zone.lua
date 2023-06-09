@@ -13,7 +13,7 @@ require('scripts/globals/helm')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 179, -26, 327, 219, -18, 347)
+    zone:registerCuboidTriggerArea(1, 179, -26, 327, 219, -18, 347)
 
     SetServerVariable("realPadfoot", math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do

@@ -9,22 +9,22 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Banishing Gate #1
-    zone:registerTriggerArea(1, -208, -1, 224, -206, 1, 227)
-    zone:registerTriggerArea(2, -208, -1, 212, -206, 1, 215)
-    zone:registerTriggerArea(3, -213, -1, 224, -211, 1, 227)
-    zone:registerTriggerArea(4, -213, -1, 212, -211, 1, 215)
+    zone:registerCuboidTriggerArea(1, -208, -1, 224, -206, 1, 227)
+    zone:registerCuboidTriggerArea(2, -208, -1, 212, -206, 1, 215)
+    zone:registerCuboidTriggerArea(3, -213, -1, 224, -211, 1, 227)
+    zone:registerCuboidTriggerArea(4, -213, -1, 212, -211, 1, 215)
 
     -- Banishing Gate #2
-    zone:registerTriggerArea(10,  -51, -1,  82,  -49, 1,  84)
-    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84)
-    zone:registerTriggerArea(12,  -51, -1, 115,  -49, 1, 117)
-    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117)
+    zone:registerCuboidTriggerArea(10,  -51, -1,  82,  -49, 1,  84)
+    zone:registerCuboidTriggerArea(11, -151, -1,  82, -149, 1,  84)
+    zone:registerCuboidTriggerArea(12,  -51, -1, 115,  -49, 1, 117)
+    zone:registerCuboidTriggerArea(13, -151, -1, 115, -149, 1, 117)
 
     -- Banishing Gate #3
-    zone:registerTriggerArea(19, -190, -1, 355, -188, 1, 357)
-    zone:registerTriggerArea(20, -130, -1, 355, -128, 1, 357)
-    zone:registerTriggerArea(21, -190, -1, 322, -188, 1, 324)
-    zone:registerTriggerArea(22, -130, -1, 322, -128, 1, 324)
+    zone:registerCuboidTriggerArea(19, -190, -1, 355, -188, 1, 357)
+    zone:registerCuboidTriggerArea(20, -130, -1, 355, -128, 1, 357)
+    zone:registerCuboidTriggerArea(21, -190, -1, 322, -188, 1, 324)
+    zone:registerCuboidTriggerArea(22, -130, -1, 322, -128, 1, 324)
 
     UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
     GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))

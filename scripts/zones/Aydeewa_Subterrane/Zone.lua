@@ -6,7 +6,7 @@ local ID = require('scripts/zones/Aydeewa_Subterrane/IDs')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 378, -3, 338, 382, 3, 342)
+    zone:registerCuboidTriggerArea(1, 378, -3, 338, 382, 3, 342)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

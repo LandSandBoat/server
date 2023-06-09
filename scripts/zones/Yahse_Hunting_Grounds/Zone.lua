@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Ergon Locus area at F-6
-    zone:registerTriggerArea(1, -447.7, 6.6, 362.799, 0, 0, 0)
+    zone:registerCuboidTriggerArea(1, -447.7, 6.6, 362.799, 0, 0, 0)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

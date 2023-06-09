@@ -29,31 +29,56 @@ namespace
 {
     bool CuboidCuboidIntersect(CCuboidTriggerArea const* a, CCuboidTriggerArea const* b)
     {
-        // Points of b
-        auto p0 = position_t(b->xMax, b->yMax, b->zMax, 0, 0);
-        auto p1 = position_t(b->xMax, b->yMax, b->zMin, 0, 0);
-        auto p2 = position_t(b->xMax, b->yMin, b->zMax, 0, 0);
-        auto p3 = position_t(b->xMax, b->yMin, b->zMin, 0, 0);
-        auto p4 = position_t(b->xMin, b->yMax, b->zMax, 0, 0);
-        auto p5 = position_t(b->xMin, b->yMax, b->zMin, 0, 0);
-        auto p6 = position_t(b->xMin, b->yMin, b->zMax, 0, 0);
-        auto p7 = position_t(b->xMin, b->yMin, b->zMin, 0, 0);
-
-        // For each point of b, is it contained inside a?
-        for (auto& pos : { p0, p1, p2, p3, p4, p5, p6, p7 })
+        // clang-format off
+        auto check = [](CCuboidTriggerArea const* a, CCuboidTriggerArea const* b) -> bool
         {
-            if (a->IsPointInside(pos))
-            {
-                return true;
-            }
-        }
+            // Corners of b
+            auto p0 = position_t(b->xMax, b->yMax, b->zMax, 0, 0);
+            auto p1 = position_t(b->xMax, b->yMax, b->zMin, 0, 0);
+            auto p2 = position_t(b->xMax, b->yMin, b->zMax, 0, 0);
+            auto p3 = position_t(b->xMax, b->yMin, b->zMin, 0, 0);
+            auto p4 = position_t(b->xMin, b->yMax, b->zMax, 0, 0);
+            auto p5 = position_t(b->xMin, b->yMax, b->zMin, 0, 0);
+            auto p6 = position_t(b->xMin, b->yMin, b->zMax, 0, 0);
+            auto p7 = position_t(b->xMin, b->yMin, b->zMin, 0, 0);
 
-        return false;
+            // Generate one more point for the center of the cube
+            auto xMid = b->xMax - b->xMin;
+            auto yMid = b->yMax - b->yMin;
+            auto zMid = b->zMax - b->zMin;
+            auto p8   = position_t(xMid, yMid, zMid, 0, 0);
+
+            // For each point of b, is it contained inside a?
+            for (auto& pos : { p0, p1, p2, p3, p4, p5, p6, p7, p8 })
+            {
+                if (a->IsPointInside(pos))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+        // clang-format on
+
+        return check(a, b) || check(b, a);
     }
 
     bool CuboidCylinderIntersect(CCuboidTriggerArea const* a, CCylindricalTriggerArea const* b)
     {
-        return false;
+        // NOTE: In order to make this easier, we're going to treat the cylinder as if it's a cuboid!
+        // TODO: Look up the maths for this and do it properly!
+        float xMin = b->xPos - b->radius;
+        float yMin = std::numeric_limits<float>::min();
+        float zMin = b->zPos - b->radius;
+
+        float xMax = b->xPos + b->radius;
+        float yMax = std::numeric_limits<float>::max();
+        float zMax = b->zPos + b->radius;
+
+        CCuboidTriggerArea tempCuboid(b->GetTriggerAreaID(), xMin, yMin, zMin, xMax, yMax, zMax);
+
+        return CuboidCuboidIntersect(a, &tempCuboid);
     }
 
     bool CylinderCylinderIntersect(CCylindricalTriggerArea const* a, CCylindricalTriggerArea const* b)
@@ -67,11 +92,13 @@ namespace
 
     bool SphereCuboidIntersect(CSphericalTriggerArea const* a, CCuboidTriggerArea const* b)
     {
+        ShowWarning("SphereCuboidIntersect not implemented");
         return false;
     }
 
     bool SphereCylinderIntersect(CSphericalTriggerArea const* a, CCylindricalTriggerArea const* b)
     {
+        ShowWarning("SphereCylinderIntersect not implemented");
         return false;
     }
 
@@ -88,8 +115,8 @@ namespace
 
 // Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.
-ITriggerArea::ITriggerArea(uint32 triggerAreaID)
-: m_TriggerAreaID(triggerAreaID)
+ITriggerArea::ITriggerArea(uint32 _triggerAreaID)
+: m_TriggerAreaID(_triggerAreaID)
 , m_Count(0)
 {
     if (m_TriggerAreaID == 0)
@@ -126,8 +153,14 @@ int16 ITriggerArea::DelCount(int16 count)
  *                                                                       *
  ************************************************************************/
 
-CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
-: ITriggerArea(triggerAreaID)
+CCuboidTriggerArea::CCuboidTriggerArea(uint32 _triggerAreaID, float _xMin, float _yMin, float _zMin, float _xMax, float _yMax, float _zMax)
+: ITriggerArea(_triggerAreaID)
+, xMin(_xMin)
+, yMin(_yMin)
+, zMin(_zMin)
+, xMax(_xMax)
+, yMax(_yMax)
+, zMax(_zMax)
 {
 }
 
@@ -168,8 +201,11 @@ bool CCuboidTriggerArea::IntersectsOtherTriggerArea(std::unique_ptr<ITriggerArea
  *                                                                       *
  ************************************************************************/
 
-CCylindricalTriggerArea::CCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius)
-: ITriggerArea(triggerAreaID)
+CCylindricalTriggerArea::CCylindricalTriggerArea(uint32 _triggerAreaID, float _xPos, float _zPos, float _radius)
+: ITriggerArea(_triggerAreaID)
+, xPos(_xPos)
+, zPos(_zPos)
+, radius(_radius)
 {
 }
 
@@ -223,12 +259,12 @@ bool CCylindricalTriggerArea::IntersectsOtherTriggerArea(std::unique_ptr<ITrigge
  *                                                                       *
  ************************************************************************/
 
-CSphericalTriggerArea::CSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius)
-: ITriggerArea(triggerAreaID)
-, xPos(xPos)
-, yPos(yPos)
-, zPos(zPos)
-, radius(radius)
+CSphericalTriggerArea::CSphericalTriggerArea(uint32 _triggerAreaID, float _xPos, float _yPos, float _zPos, float _radius)
+: ITriggerArea(_triggerAreaID)
+, xPos(_xPos)
+, yPos(_yPos)
+, zPos(_zPos)
+, radius(_radius)
 {
 }
 
