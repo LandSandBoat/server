@@ -21,19 +21,21 @@ local elements =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
-    mob:setMod(xi.mod.UDMGRANGE, -7500)
-    mob:setMod(xi.mod.UDMGPHYS, -7500)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGPHYS, -5000)
+    mob:setMod(xi.mod.UDMGMAGIC, 3500)
+    mob:setMod(xi.mod.MEVA, -75)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.STONESKIN, 150, 0, 300)
-
-    mob:setLocalVar("triggerElement1", elements[math.random(1,8)])
-    mob:setLocalVar("triggerElement2", elements[math.random(1,8)])
+    mob:setLocalVar("triggerElement1", elements[math.random(1, 8)])
+    mob:setLocalVar("triggerElement2", elements[math.random(1, 8)])
 
     mob:addListener("TAKE_DAMAGE", "RAZON_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        if attackType == xi.attackType.MAGICAL and
-            (damageType == mob:getLocalVar("triggerElement1") or damageType == mob:getLocalVar("triggerElement2"))
+        if
+            attackType == xi.attackType.MAGICAL and
+            (damageType == mob:getLocalVar("triggerElement1") or
+            damageType == mob:getLocalVar("triggerElement2"))
         then
             local tp = mobArg:getTP()
             mobArg:useMobAbility(626) -- dust cloud

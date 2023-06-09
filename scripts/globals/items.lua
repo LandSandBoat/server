@@ -4537,6 +4537,7 @@ xi.items =
     DREIZACK                        = 18088,
     MILITARY_SPEAR                  = 18090,
     MIGHTY_LANCE                    = 18091,
+    BOURDONASSE                     = 18092,
     GONDO_SHIZUNORI                 = 18097,
     MARTIAL_LANCE                   = 18098,
     LOVE_HALBERD                    = 18100,
