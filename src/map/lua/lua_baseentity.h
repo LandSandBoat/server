@@ -716,6 +716,7 @@ public:
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
+    uint8  getMinimumPetLevel(); // Returns the minimum level of the pet, such as level 23 for Courier Carrie or 0 if non applicable.
 
     auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
