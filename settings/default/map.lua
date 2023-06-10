@@ -226,10 +226,7 @@ xi.settings.map =
     BLOCK_TELL_TO_HIDDEN_GM = true,
 
     -- Prevent players from performing WS while unengaged using packet injection.
-    PREVENT_UNENGAGED_WS = false,
-
-    -- Prevent players from performing WS while unengaged using packet injection.
-    PREVENT_UNENGAGED_WS = false,
+    PREVENT_UNENGAGED_WS = true,
 
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
