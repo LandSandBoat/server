@@ -1037,7 +1037,7 @@ local itemList =
         { { xi.items.FRAYED_SACK_OF_PLENTY,       12 } },
         { { xi.items.FRAYED_SACK_OF_OPULENCE,     12 } },
     },
-    -- Kupon AW-GFIII: Geas Fete (Content Level 119+) (MOG_KUPON_AW-GFIII = 9175)
+    -- Kupon AW-GFIII: Geas Fete (Content Level 119+) (MOG_KUPON_AW_GFIII = 9175)
     [37] =
     {
             -- HAND-TO-HAND WEAPONS
@@ -1395,19 +1395,427 @@ local itemList =
             xi.items.SEKI_SHURIKEN_POUCH,
         },
     },
-    --[[
-    -- Kupon AW-GFII: Geas Fete (MOG_KUPN_AW-GWII = 9176)
+
+    -- Kupon AW-GFII: Geas Fete (MOG_KUPN_AW_GWII = 9176)
     [38] =
     {
-
+            -- HAND-TO-HAND WEAPONS
+        {
+            xi.items.NIBIRU_SAINTI,
+            xi.items.CHASTISERS,
+            xi.items.HAMMERFISTS,
+            xi.items.MIDNIGHTS,
+            xi.items.ESHUS,
+            xi.items.CONDEMNERS,
+        },
+            -- DAGGERS
+        {
+            xi.items.NIBIRU_KNIFE,
+            xi.items.ENCHUFLA,
+            xi.items.SHIJO,
+            xi.items.KALI,
+            xi.items.SKINFLAYER,
+        },
+            -- SWORDS
+        {
+            xi.items.NIBIRU_BLADE,
+            xi.items.NIXXER,
+            xi.items.EMISSARY,
+            xi.items.IRIS,
+            xi.items.COLADA,
+        },
+            -- GREAT SWORDS
+        {
+            xi.items.NIBIRU_FAUSSAR,
+            xi.items.BIDENHANDER,
+            xi.items.ZULFIQAR,
+        },
+            -- AXES
+        {
+            xi.items.NIBIRU_TABAR,
+            xi.items.SKULLRENDER,
+            xi.items.DIGIRBALAG,
+        },
+            -- GREAT AXES
+        {
+            xi.items.NIBIRU_CHOPPER,
+            xi.items.ROUTER,
+            xi.items.INSTIGATOR,
+            xi.items.AGANOSHE,
+        },
+            -- POLEARMS
+        {
+            xi.items.NIBIRU_LANCE,
+            xi.items.ANNEALED_LANCE,
+            xi.items.RHOMPHAIA,
+            xi.items.REIENKYO,
+        },
+            -- SCYTHES
+        {
+            xi.items.NIBIRU_SICKLE,
+            xi.items.DEATHBANE,
+            xi.items.OBSCHINE,
+        },
+            -- KATANAS
+        {
+            xi.items.MIJIN,
+            xi.items.AIZUSHINTOGO,
+            xi.items.KANARIA,
+        },
+            -- GREAT KATANAS
+        {
+            xi.items.SENSUI,
+            xi.items.ICHIGOHITOFURI,
+            xi.items.UMARU,
+        },
+            -- CLUBS
+        {
+            xi.items.NIBIRU_CUDGEL,
+            xi.items.QUELLER_ROD,
+            xi.items.SOLSTICE,
+            xi.items.SUCELLUS,
+            xi.items.GADA,
+        },
+            -- STAVES
+        {
+            xi.items.NIBIRU_STAFF,
+            xi.items.ESPIRITUS,
+            xi.items.AKADEMOS,
+            xi.items.LATHI,
+            xi.items.GRIOAVOLR,
+        },
+            -- THROWING WEAPONS
+        {
+            xi.items.SERAPHIC_AMPULLA,
+            xi.items.GRENADE_CORE,
+            xi.items.SAPIENCE_ORB,
+            xi.items.FALCON_EYE,
+            xi.items.ALBIN_BANE,
+            xi.items.AMAR_CLUSTER,
+            xi.items.HYDROCERA,
+            xi.items.MANTOPTERA_EYE,
+            xi.items.EXPEDITIOUS_PINION,
+            xi.items.PEMPHREDO_TATHLUM,
+        },
+            -- BOWS
+        {
+            xi.items.NIBIRU_BOW,
+            xi.items.VIJAYA_BOW,
+            xi.items.TELLER,
+        },
+            -- GUNS
+        {
+            xi.items.NIBIRU_GUN,
+            xi.items.COMPENSATOR,
+            xi.items.NONE, -- Gap slot 3
+            xi.items.HOLLIDAY,
+        },
+            -- SHIELDS
+        {
+            xi.items.NIBIRU_SHIELD,
+        },
+            -- INSTRUMENTS
+        {
+            xi.items.NIBIRU_HARP,
+        },
+            -- GRIPS
+        {
+            xi.items.CLEMENCY_GRIP,
+            xi.items.WILLPOWER_GRIP,
+            xi.items.FOREFATHERS_GRIP,
+            xi.items.GIUOCO_GRIP,
+            xi.items.BALARAMA_GRIP,
+            xi.items.NIOBID_STRAP,
+            xi.items.POTENT_GRIP,
+        },
+            -- HEADGEAR
+        {
+            xi.items.ESCHITE_HELM,
+            xi.items.PSYCLOTH_TIARA,
+            xi.items.RAWHIDE_MASK,
+            xi.items.DESPAIR_HELM,
+            xi.items.VANYA_HOOD,
+            xi.items.PURSUERS_BERET,
+            xi.items.NAGA_SOMEN,
+            xi.items.SKORMOTH_MASK,
+            xi.items.ODYSSEAN_HELM,
+            xi.items.VALOROUS_MASK,
+            xi.items.HERCULEAN_HELM,
+            xi.items.MERLINIC_HOOD,
+            xi.items.CHIRONIC_HAT,
+        },
+            -- CHEST ARMOR
+        {
+            xi.items.ESCHITE_BREASTPLATE,
+            xi.items.PSYCLOTH_VEST,
+            xi.items.RAWHIDE_VEST,
+            xi.items.DESPAIR_MAIL,
+            xi.items.VANYA_ROBE,
+            xi.items.PURSUERS_DOUBLET,
+            xi.items.NAGA_SAMUE,
+            xi.items.SWELLERS_HARNESS,
+            xi.items.ONCA_SUIT,
+            xi.items.KUBIRA_MEIKOGAI,
+            xi.items.ANNOINTED_KALASIRIS,
+            xi.items.MAKORA_MEIKOGAI,
+            xi.items.ENFORCERS_HARNESS,
+            xi.items.UAC_JERKIN,
+            xi.items.SHANGO_ROBE,
+            xi.items.ABNOBA_KAFTAN,
+        },
+            -- GLOVES AND GAUNTLETS
+        {
+            xi.items.NAGA_TEKKO,
+            xi.items.ESCHITE_GAUNTLETS,
+            xi.items.PSYCLOTH_MANILLAS,
+            xi.items.RAWHIDE_GLOVES,
+            xi.items.DESPAIR_FINGER_GLOVES,
+            xi.items.VANYA_CUFFS,
+            xi.items.PURSUERS_CUFFS,
+            xi.items.SHRIEKERS_CUFFS,
+            xi.items.KURYS_GLOVES,
+            xi.items.ODYSSEAN_GAUNTLETS,
+            xi.items.VALOROUS_MITTS,
+            xi.items.HERCULEAN_GLOVES,
+            xi.items.MERLINIC_DASTANAS,
+            xi.items.CHIRONIC_GLOVES,
+        },
+            -- LEG ARMOR
+        {
+            xi.items.NAGA_HAKAMA,
+            xi.items.ESCHITE_CUISSES,
+            xi.items.PSYCLOTH_LAPPAS,
+            xi.items.RAWHIDE_TROUSERS,
+            xi.items.DESPAIR_CUISSES,
+            xi.items.VANYA_SLOPS,
+            xi.items.PURSUERS_PANTS,
+            xi.items.DOYEN_PANTS,
+            xi.items.OBATALA_SUBLIGAR,
+            xi.items.SELVANS_SUBLIGAR,
+            xi.items.ODYSSEAN_CUISSES,
+            xi.items.VALOROUS_HOSE,
+            xi.items.HERCULEAN_TROUSERS,
+            xi.items.MERLINIC_SHALWAR,
+            xi.items.CHIRONIC_HOSE,
+        },
+            -- BOOTS AND GREAVES
+        {
+            xi.items.PURSUERS_GAITERS,
+            xi.items.NAGA_KYAHAN,
+            xi.items.ESCHITE_GREAVES,
+            xi.items.PSYCLOTH_BOOTS,
+            xi.items.RAWHIDE_BOOTS,
+            xi.items.DESPAIR_GREAVES,
+            xi.items.VANYA_CLOGS,
+            xi.items.INSPIRITED_BOOTS,
+            xi.items.TUTYR_SABOTS,
+            xi.items.ODYSSEAN_GREAVES,
+            xi.items.VALOROUS_GREAVES,
+            xi.items.HERCULEAN_BOOTS,
+            xi.items.MERLINIC_CRACKOWS,
+            xi.items.CHIRONIC_SLIPPERS,
+        },
+            -- NECK PIECES
+        {
+            xi.items.MARKED_GORGET,
+            xi.items.SUBTLETY_SPECTACLES,
+            xi.items.DAMPENERS_TORQUE,
+            xi.items.EMPATH_NECKLACE,
+            xi.items.RETI_PENDANT,
+            xi.items.DIEMER_GORGET,
+            xi.items.CARO_NECKLACE,
+            xi.items.NODENS_GORGET,
+            xi.items.CLOTHARIUS_TORQUE,
+            xi.items.DEINO_COLLAR,
+            xi.items.HOMERIC_GORGET,
+        },
+            -- EARRINGS
+        {
+            xi.items.MENDICANTS_EARRING,
+            xi.items.INFUSED_EARRING,
+            xi.items.CALAMITOUS_EARRING,
+            xi.items.HERMETIC_EARRING,
+            xi.items.HALASZ_EARRING,
+            xi.items.ASSUAGE_EARRING,
+            xi.items.ISHVARA_EARRING,
+            xi.items.EVANS_EARRING,
+            xi.items.LEMPO_EARRING,
+            xi.items.THUREOUS_EARRING,
+            xi.items.DIGNITARYS_EARRING,
+        },
+            -- BELTS AND SASHES
+        {
+            xi.items.LUCIDITY_SASH,
+            xi.items.SINEW_BELT,
+            xi.items.ESCHAN_STONE,
+            xi.items.GRUNFELD_ROPE,
+            xi.items.POROUS_ROPE,
+            xi.items.SULLA_BELT,
+            xi.items.YEMAYA_BELT,
+            xi.items.CHANNELERS_STONE,
+            xi.items.ASKLEPIAN_BELT,
+            xi.items.SARISSAPHOROI_BELT,
+        },
+            -- RINGS
+        {
+            xi.items.OVERBEARING_RING,
+            xi.items.RESONANCE_RING,
+            xi.items.PURITY_RING,
+            xi.items.WARDENS_RING,
+            xi.items.PETROV_RING,
+            xi.items.FORTIFIED_RING,
+            xi.items.VERTIGO_RING,
+            xi.items.EVANESCENCE_RING,
+            xi.items.BEGRUDGING_RING,
+            xi.items.APATE_RING,
+            xi.items.PERSIS_RING,
+        },
+            -- CAPES AND CLOAKS
+        {
+            xi.items.DISPERSERS_CAPE,
+            xi.items.THAUMATURGES_CAPE,
+            xi.items.PENETRATING_CAPE,
+            xi.items.PHILIDOR_MANTLE,
+            xi.items.SOKOLSKI_MANTLE,
+            xi.items.QUARREL_MANTLE,
+            xi.items.XUCAU_MANTLE,
+            xi.items.TANTALIC_CAPE,
+            xi.items.SCINTILLATING_CAPE,
+            xi.items.PHALANGITE_MANTLE,
+        },
     },
 
-    -- Kupon AW-GF: Geas Fete (Content Level 119) (MOG_KUPON_AW-GF = 9177)
+    -- Kupon AW-GF: Geas Fete (Content Level 119) (MOG_KUPON_AW_GF = 9177)
     [39] =
     {
+        { --[[ Null Menu 01 --]] },
+        { --[[ Null Menu 02 --]] },
+        { --[[ Null Menu 03 --]] },
+        { --[[ Null Menu 04 --]] },
+        { --[[ Null Menu 05 --]] },
+        { --[[ Null Menu 06 --]] },
+        { --[[ Null Menu 07 --]] },
+        { --[[ Null Menu 08 --]] },
+        { --[[ Null Menu 09 --]] },
+        { --[[ Null Menu 10 --]] },
+        { --[[ Null Menu 11 --]] },
+        { --[[ Null Menu 12 --]] },
 
+            -- THROWING WEAPONS
+        {
+            xi.items.GRENADE_CORE,
+            xi.items.SERAPHIC_AMPULLA,
+            xi.items.ALBIN_BANE,
+            xi.items.AMAR_CLUSTER,
+            xi.items.HYDROCERA,
+            xi.items.MANTOPTERA_EYE,
+        },
+
+        { --[[ Null Menu 14 --]] },
+        { --[[ Null Menu 15 --]] },
+        { --[[ Null Menu 16 --]] },
+        { --[[ Null Menu 17 --]] },
+
+            -- GRIPS
+        {
+            xi.items.WILLPOWER_GRIP,
+            xi.items.CLEMENCY_GRIP,
+            xi.items.GIUOCO_GRIP,
+            xi.items.BALARAMA_GRIP,
+        },
+            -- HEADGEAR
+        {
+            xi.items.ESCHITE_HELM,
+            xi.items.VANYA_HOOD,
+            xi.items.PSYCLOTH_TIARA,
+            xi.items.DESPAIR_HELM,
+            xi.items.PURSUERS_BERET,
+            xi.items.RAWHIDE_MASK,
+            xi.items.NAGA_SOMEN,
+        },
+            -- CHEST ARMOR
+        {
+            xi.items.VANYA_ROBE,
+            xi.items.ESCHITE_BREASTPLATE,
+            xi.items.PSYCLOTH_VEST,
+            xi.items.DESPAIR_MAIL,
+            xi.items.PURSUERS_DOUBLET,
+            xi.items.RAWHIDE_VEST,
+            xi.items.NAGA_SAMUE,
+        },
+            -- GLOVES AND GAUNTLETS
+        {
+            xi.items.VANYA_CUFFS,
+            xi.items.ESCHITE_GAUNTLETS,
+            xi.items.PSYCLOTH_MANILLAS,
+            xi.items.DESPAIR_FINGER_GLOVES,
+            xi.items.PURSUERS_CUFFS,
+            xi.items.RAWHIDE_GLOVES,
+            xi.items.NAGA_TEKKO,
+        },
+            -- LEG ARMOR
+        {
+            xi.items.VANYA_SLOPS,
+            xi.items.ESCHITE_CUISSES,
+            xi.items.PSYCLOTH_LAPPAS,
+            xi.items.DESPAIR_CUISSES,
+            xi.items.PURSUERS_PANTS,
+            xi.items.RAWHIDE_TROUSERS,
+            xi.items.NAGA_HAKAMA,
+        },
+            -- BOOTS AND GREAVES
+        {
+            xi.items.VANYA_CLOGS,
+            xi.items.ESCHITE_GREAVES,
+            xi.items.PSYCLOTH_BOOTS,
+            xi.items.DESPAIR_GREAVES,
+            xi.items.PURSUERS_GAITERS,
+            xi.items.RAWHIDE_BOOTS,
+            xi.items.NAGA_KYAHAN,
+        },
+            -- NECK PIECES
+        {
+            xi.items.SUBTLETY_SPECTACLES,
+            xi.items.MARKED_GORGET,
+            xi.items.RETI_PENDANT,
+            xi.items.DIEMER_GORGET,
+            xi.items.CARO_NECKLACE,
+            xi.items.NODENS_GORGET,
+        },
+            -- EARRINGS
+        {
+            xi.items.INFUSED_EARRING,
+            xi.items.MENDICANTS_EARRING,
+            xi.items.HALASZ_EARRING,
+            xi.items.ASSUAGE_EARRING,
+            xi.items.ISHVARA_EARRING,
+            xi.items.EVANS_EARRING,
+        },
+            -- BELTS AND SASHES
+        {
+            xi.items.LUCIDITY_SASH,
+            xi.items.GRUNFELD_ROPE,
+            xi.items.POROUS_ROPE,
+            xi.items.SULLA_BELT,
+        },
+            -- RINGS
+        {
+            xi.items.OVERBEARING_RING,
+            xi.items.RESONANCE_RING,
+            xi.items.PETROV_RING,
+            xi.items.FORTIFIED_RING,
+            xi.items.VERTIGO_RING,
+            xi.items.EVANESCENCE_RING,
+        },
+            -- CAPES AND CLOAKS
+        {
+            xi.items.DISPERSERS_CAPE,
+            xi.items.PHILIDOR_MANTLE,
+            xi.items.SOKOLSKI_MANTLE,
+            xi.items.QUARREL_MANTLE,
+        },
     },
-
+    --[[
     -- Kupon AW-UWII: Level 119-128 Unity Wanted Battles
     [40] =
     {
@@ -1672,7 +2080,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
             list == 22 or                   -- AW-WK
             list == 26 or                   -- I-Skill
             (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-            list == 37                      -- GFIII
+            (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
         then
             idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
             idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -1702,7 +2110,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
                 list == 22 or                   -- AW-WK
                 list == 26 or                   -- I-Skill
                 (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-                list == 37                      -- GFIII
+                (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
             then
                 item = itemList[list][idxAlt1][idxAlt2]
 
