@@ -487,83 +487,83 @@ local itemList =
         xi.items.CIRCINAE,
         xi.items.MOLLFRITH,
     },
-    -- Kupon AW-WK: Weapon or Armor from Wildskeeper Reives (MOG_KUPON_AW_WKR = 8731)
+    -- Kupon AW-WK: Weapon or Armor from Wildskeeper Reives (MOG_KUPON_AW_WK = 8731)
     [22] =
     {
         -- Colkhab
         {
-            { xi.items.PHAWAYLLA_EARRING    },
-            { xi.items.IK_CAPE              },
-            { xi.items.HUANI_COLLAR         },
-            { xi.items.KUKU_STONE           },
-            { xi.items.HATXIIK              },
-            { xi.items.KUAKUAKAIT           },
-            { xi.items.KAABNAX_HAT          },
-            { xi.items.KAABNAX_TROUSERS     },
-            { xi.items.TAIKOGANE            },
+            xi.items.PHAWAYLLA_EARRING,
+            xi.items.IK_CAPE,
+            xi.items.HUANI_COLLAR,
+            xi.items.KUKU_STONE,
+            xi.items.HATXIIK,
+            xi.items.KUAKUAKAIT,
+            xi.items.KAABNAX_HAT,
+            xi.items.KAABNAX_TROUSERS,
+            xi.items.TAIKOGANE,
         },
         -- Tchakka
         {
-            { xi.items.ATZINTLI_NECKLACE    },
-            { xi.items.TUILHA_CAPE          },
-            { xi.items.KALBORON_STONE       },
-            { xi.items.CHOJ_BAND            },
-            { xi.items.ATOYAC               },
-            { xi.items.AZUKINAGAMITSU       },
-            { xi.items.ATETEPEYORG          },
-            { xi.items.EJEKAMAL_MASK        },
-            { xi.items.EJEKAMAL_BOOTS       },
+            xi.items.ATZINTLI_NECKLACE,
+            xi.items.TUILHA_CAPE,
+            xi.items.KALBORON_STONE,
+            xi.items.CHOJ_BAND,
+            xi.items.ATOYAC,
+            xi.items.AZUKINAGAMITSU,
+            xi.items.ATETEPEYORG,
+            xi.items.EJEKAMAL_MASK,
+            xi.items.EJEKAMAL_BOOTS,
         },
         -- Achuka
         {
-            { xi.items.CUAMIZ_COLLAR        },
-            { xi.items.BUQUWIK_CAPE         },
-            { xi.items.AQREQAQ_BOMBLET      },
-            { xi.items.ACHAQ_GRIP           },
-            { xi.items.MAOCHINOLI           },
-            { xi.items.XIUTLEATO            },
-            { xi.items.OTOMI_HELM           },
-            { xi.items.OTOMI_GLOVES         },
+            xi.items.CUAMIZ_COLLAR,
+            xi.items.BUQUWIK_CAPE,
+            xi.items.AQREQAQ_BOMBLET,
+            xi.items.ACHAQ_GRIP,
+            xi.items.MAOCHINOLI,
+            xi.items.XIUTLEATO,
+            xi.items.OTOMI_HELM,
+            xi.items.OTOMI_GLOVES,
         },
         -- Hurkan
         {
-            { xi.items.HUNAHPU              },
-            { xi.items.XBALANQUE            },
-            { xi.items.TZACAB_GRIP          },
-            { xi.items.ANIMIKII_BULLET      },
-            { xi.items.KAQULJAAN            },
-            { xi.items.UKUXKAJ_CAP          },
-            { xi.items.UKUXKAJ_BOOTS        },
-            { xi.items.JUKUKIK_FEATHER      },
-            { xi.items.KAYAPA_CAPE          },
-            { xi.items.PAQICHIKAJI_RING     },
-            { xi.items.JAQIJ_SASH           },
+            xi.items.HUNAHPU,
+            xi.items.XBALANQUE,
+            xi.items.TZACAB_GRIP,
+            xi.items.ANIMIKII_BULLET,
+            xi.items.KAQULJAAN,
+            xi.items.UKUXKAJ_CAP,
+            xi.items.UKUXKAJ_BOOTS,
+            xi.items.JUKUKIK_FEATHER,
+            xi.items.KAYAPA_CAPE,
+            xi.items.PAQICHIKAJI_RING,
+            xi.items.JAQIJ_SASH,
         },
         -- Yumcax
         {
-            { xi.items.IXTAB                },
-            { xi.items.TAMAXCHI             },
-            { xi.items.BUREMTE_HAT          },
-            { xi.items.BUREMTE_GLOVES       },
-            { xi.items.PAHTLI_CAPE          },
-            { xi.items.OCACHI_GORGET        },
-            { xi.items.KUNAJI_RING          },
-            { xi.items.IXIMULEW_CAPE        },
-            { xi.items.CHUQABA_BELT         },
-            { xi.items.QUANPUR_NECKLACE     },
-            { xi.items.BARATARIA_RING       },
+            xi.items.IXTAB,
+            xi.items.TAMAXCHI,
+            xi.items.BUREMTE_HAT,
+            xi.items.BUREMTE_GLOVES,
+            xi.items.PAHTLI_CAPE,
+            xi.items.OCACHI_GORGET,
+            xi.items.KUNAJI_RING,
+            xi.items.IXIMULEW_CAPE,
+            xi.items.CHUQABA_BELT,
+            xi.items.QUANPUR_NECKLACE,
+            xi.items.BARATARIA_RING,
         },
         -- Kumhau
         {
-            { xi.items.TORO_CAPE            },
-            { xi.items.FRIOMISI_EARRING     },
-            { xi.items.TLAMIZTLI_COLLAR     },
-            { xi.items.CETL_BELT            },
-            { xi.items.AJJUB_BOW            },
-            { xi.items.BAQIL_STAFF          },
-            { xi.items.QUIAHUIZ_HELM        },
-            { xi.items.QUIAHUIZ_TROUSERS    },
-            { xi.items.NEPOTE_BELL          },
+            xi.items.TORO_CAPE,
+            xi.items.FRIOMISI_EARRING,
+            xi.items.TLAMIZTLI_COLLAR,
+            xi.items.CETL_BELT,
+            xi.items.AJJUB_BOW,
+            xi.items.BAQIL_STAFF,
+            xi.items.QUIAHUIZ_HELM,
+            xi.items.QUIAHUIZ_TROUSERS,
+            xi.items.NEPOTE_BELL,
         },
     },
 
@@ -782,6 +782,8 @@ local itemList =
         {
             xi.items.KYUJUTSUGI,
             xi.items.LENTUS_GRIP,
+            xi.items.NONE, -- Gap slot 3
+            xi.items.NONE, -- Gap slot 4
             xi.items.TRUX_EARRING,
             xi.items.SANARE_EARRING,
             xi.items.GELAI_EARRING,
@@ -1035,13 +1037,365 @@ local itemList =
         { { xi.items.FRAYED_SACK_OF_PLENTY,       12 } },
         { { xi.items.FRAYED_SACK_OF_OPULENCE,     12 } },
     },
-    --[[
     -- Kupon AW-GFIII: Geas Fete (Content Level 119+) (MOG_KUPON_AW-GFIII = 9175)
     [37] =
     {
-
+            -- HAND-TO-HAND WEAPONS
+        {
+            xi.items.NIBIRU_SAINTI,
+            xi.items.CHASTISERS,
+            xi.items.HAMMERFISTS,
+            xi.items.MIDNIGHTS,
+            xi.items.ESHUS,
+            xi.items.CONDEMNERS,
+        },
+            -- DAGGERS
+        {
+            xi.items.NIBIRU_KNIFE,
+            xi.items.ENCHUFLA,
+            xi.items.SHIJO,
+            xi.items.KALI,
+            xi.items.SKINFLAYER,
+            xi.items.SANGOMA,
+        },
+            -- SWORDS
+        {
+            xi.items.NIBIRU_BLADE,
+            xi.items.NIXXER,
+            xi.items.EMISSARY,
+            xi.items.IRIS,
+            xi.items.COLADA,
+            xi.items.NONE, -- Gap slot 6
+            xi.items.DEACON_SABER,
+            xi.items.DEACON_SWORD,
+            xi.items.KOBOTO,
+            xi.items.REIKIKO,
+        },
+            -- GREAT SWORDS
+        {
+            xi.items.NIBIRU_FAUSSAR,
+            xi.items.BIDENHANDER,
+            xi.items.ZULFIQAR,
+        },
+            -- AXES
+        {
+            xi.items.NIBIRU_TABAR,
+            xi.items.SKULLRENDER,
+            xi.items.DIGIRBALAG,
+            xi.items.NONE, -- Gap slot 4
+            xi.items.DEACON_TABAR,
+        },
+            -- GREAT AXES
+        {
+            xi.items.NIBIRU_CHOPPER,
+            xi.items.ROUTER,
+            xi.items.INSTIGATOR,
+            xi.items.AGANOSHE,
+            xi.items.NONE, -- Gap slot 5
+            xi.items.REIKIONO,
+            xi.items.JOKUSHUONO,
+        },
+            -- POLEARMS
+        {
+            xi.items.NIBIRU_LANCE,
+            xi.items.ANNEALED_LANCE,
+            xi.items.RHOMPHAIA,
+            xi.items.REIENKYO,
+            xi.items.NONE, -- Gap slot 5
+            xi.items.HABILE_MAZRAK,
+        },
+            -- SCYTHES
+        {
+            xi.items.NIBIRU_SICKLE,
+            xi.items.DEATHBANE,
+            xi.items.OBSCHINE,
+            xi.items.MISANTHROPY,
+            xi.items.DACNOMANIA,
+            xi.items.DEACON_SCYTHE,
+            xi.items.SHUKUYUS_SCYTHE,
+        },
+            -- KATANAS
+        {
+            xi.items.MIJIN,
+            xi.items.AIZUSHINTOGO,
+            xi.items.KANARIA,
+        },
+            -- GREAT KATANAS
+        {
+            xi.items.SENSUI,
+            xi.items.ICHIGOHITOFURI,
+            xi.items.UMARU,
+            xi.items.NONE, -- Gap slot 4
+            xi.items.DEACON_BLADE,
+        },
+            -- CLUBS
+        {
+            xi.items.NIBIRU_CUDGEL,
+            xi.items.QUELLER_ROD,
+            xi.items.SOLSTICE,
+            xi.items.SUCELLUS,
+            xi.items.GADA,
+        },
+            -- STAVES
+        {
+            xi.items.NIBIRU_STAFF,
+            xi.items.ESPIRITUS,
+            xi.items.AKADEMOS,
+            xi.items.LATHI,
+            xi.items.GRIOAVOLR,
+            xi.items.NONE, -- Gap slot 6
+            xi.items.NONE, -- Gap slot 7
+            xi.items.REIKIKON,
+        },
+            -- THROWING WEAPONS
+        {
+            xi.items.SERAPHIC_AMPULLA,
+            xi.items.GRENADE_CORE,
+            xi.items.SAPIENCE_ORB,
+            xi.items.FALCON_EYE,
+            xi.items.ALBIN_BANE,
+            xi.items.AMAR_CLUSTER,
+            xi.items.HYDROCERA,
+            xi.items.MANTOPTERA_EYE,
+            xi.items.EXPEDITIOUS_PINION,
+            xi.items.PEMPHREDO_TATHLUM,
+            xi.items.ELIS_TOME,
+        },
+            -- BOWS
+        {
+            xi.items.NIBIRU_BOW,
+            xi.items.VIJAYA_BOW,
+            xi.items.TELLER,
+        },
+            -- GUNS
+        {
+            xi.items.NIBIRU_GUN,
+            xi.items.COMPENSATOR,
+            xi.items.NONE, -- Gap slot 3
+            xi.items.HOLLIDAY,
+            xi.items.MOLYBDOSIS,
+        },
+            -- SHIELDS
+        {
+            xi.items.NIBIRU_SHIELD,
+            xi.items.GENMEI_SHIELD,
+        },
+            -- INSTRUMENTS
+        {
+            xi.items.NIBIRU_HARP,
+        },
+            -- GRIPS
+        {
+            xi.items.CLEMENCY_GRIP,
+            xi.items.WILLPOWER_GRIP,
+            xi.items.FOREFATHERS_GRIP,
+            xi.items.GIUOCO_GRIP,
+            xi.items.BALARAMA_GRIP,
+            xi.items.NIOBID_STRAP,
+            xi.items.POTENT_GRIP,
+            xi.items.THRACE_STRAP,
+            xi.items.ALBER_STRAP,
+        },
+            -- HEADGEAR
+        {
+            xi.items.ESCHITE_HELM,
+            xi.items.PSYCLOTH_TIARA,
+            xi.items.RAWHIDE_MASK,
+            xi.items.DESPAIR_HELM,
+            xi.items.VANYA_HOOD,
+            xi.items.PURSUERS_BERET,
+            xi.items.NAGA_SOMEN,
+            xi.items.SKORMOTH_MASK,
+            xi.items.ODYSSEAN_HELM,
+            xi.items.VALOROUS_MASK,
+            xi.items.HERCULEAN_HELM,
+            xi.items.MERLINIC_HOOD,
+            xi.items.CHIRONIC_HAT,
+            xi.items.NONE, -- Gap slot 14
+            xi.items.NONE, -- Gap slot 15
+            xi.items.GENMEI_KABUTO,
+        },
+            -- CHEST ARMOR
+        {
+            xi.items.ESCHITE_BREASTPLATE,
+            xi.items.PSYCLOTH_VEST,
+            xi.items.RAWHIDE_VEST,
+            xi.items.DESPAIR_MAIL,
+            xi.items.VANYA_ROBE,
+            xi.items.PURSUERS_DOUBLET,
+            xi.items.NAGA_SAMUE,
+            xi.items.SWELLERS_HARNESS,
+            xi.items.ONCA_SUIT,
+            xi.items.KUBIRA_MEIKOGAI,
+            xi.items.ANNOINTED_KALASIRIS,
+            xi.items.MAKORA_MEIKOGAI,
+            xi.items.ENFORCERS_HARNESS,
+            xi.items.UAC_JERKIN,
+            xi.items.SHANGO_ROBE,
+            xi.items.ABNOBA_KAFTAN,
+            xi.items.ODYSSEAN_CHESTPLATE,
+            xi.items.VALOROUS_MAIL,
+            xi.items.HERCULEAN_VEST,
+            xi.items.MERLINIC_JUBBAH,
+            xi.items.CHIRONIC_DOUBLET,
+            xi.items.NONE, -- Gap slot 22
+            xi.items.NONE, -- Gap slot 23
+            xi.items.NONE, -- Gap slot 24
+            xi.items.ZENDIK_ROBE,
+            xi.items.REIKI_OSODE,
+        },
+            -- GLOVES AND GAUNTLETS
+        {
+            xi.items.NAGA_TEKKO,
+            xi.items.ESCHITE_GAUNTLETS,
+            xi.items.PSYCLOTH_MANILLAS,
+            xi.items.RAWHIDE_GLOVES,
+            xi.items.DESPAIR_FINGER_GLOVES,
+            xi.items.VANYA_CUFFS,
+            xi.items.PURSUERS_CUFFS,
+            xi.items.SHRIEKERS_CUFFS,
+            xi.items.KURYS_GLOVES,
+            xi.items.ODYSSEAN_GAUNTLETS,
+            xi.items.VALOROUS_MITTS,
+            xi.items.HERCULEAN_GLOVES,
+            xi.items.MERLINIC_DASTANAS,
+            xi.items.CHIRONIC_GLOVES,
+            xi.items.COMPOSERS_MITTS,
+            xi.items.NONE, -- Gap slot 16
+            xi.items.NONE, -- Gap slot 17
+            xi.items.KOBO_KOTE,
+        },
+            -- LEG ARMOR
+        {
+            xi.items.NAGA_HAKAMA,
+            xi.items.ESCHITE_CUISSES,
+            xi.items.PSYCLOTH_LAPPAS,
+            xi.items.RAWHIDE_TROUSERS,
+            xi.items.DESPAIR_CUISSES,
+            xi.items.VANYA_SLOPS,
+            xi.items.PURSUERS_PANTS,
+            xi.items.DOYEN_PANTS,
+            xi.items.OBATALA_SUBLIGAR,
+            xi.items.SELVANS_SUBLIGAR,
+            xi.items.ODYSSEAN_CUISSES,
+            xi.items.VALOROUS_HOSE,
+            xi.items.HERCULEAN_TROUSERS,
+            xi.items.MERLINIC_SHALWAR,
+            xi.items.CHIRONIC_HOSE,
+            xi.items.NONE, -- Gap slot 16
+            xi.items.JOKUSHU_HAIDATE,
+        },
+            -- BOOTS AND GREAVES
+        {
+            xi.items.PURSUERS_GAITERS,
+            xi.items.NAGA_KYAHAN,
+            xi.items.ESCHITE_GREAVES,
+            xi.items.PSYCLOTH_BOOTS,
+            xi.items.RAWHIDE_BOOTS,
+            xi.items.DESPAIR_GREAVES,
+            xi.items.VANYA_CLOGS,
+            xi.items.INSPIRITED_BOOTS,
+            xi.items.TUTYR_SABOTS,
+            xi.items.ODYSSEAN_GREAVES,
+            xi.items.VALOROUS_GREAVES,
+            xi.items.HERCULEAN_BOOTS,
+            xi.items.MERLINIC_CRACKOWS,
+            xi.items.CHIRONIC_SLIPPERS,
+            xi.items.COMPOSERS_SABOTS,
+            xi.items.NONE, -- Gap slot 16
+            xi.items.NONE, -- Gap slot 17
+            xi.items.NONE, -- Gap slot 18
+            xi.items.SHUKUYU_SUNE_ATE,
+        },
+            -- NECK PIECES
+        {
+            xi.items.MARKED_GORGET,
+            xi.items.SUBTLETY_SPECTACLES,
+            xi.items.DAMPENERS_TORQUE,
+            xi.items.EMPATH_NECKLACE,
+            xi.items.RETI_PENDANT,
+            xi.items.DIEMER_GORGET,
+            xi.items.CARO_NECKLACE,
+            xi.items.NODENS_GORGET,
+            xi.items.CLOTHARIUS_TORQUE,
+            xi.items.DEINO_COLLAR,
+            xi.items.HOMERIC_GORGET,
+            xi.items.AINIA_COLLAR,
+            xi.items.JOKUSHU_CHAIN,
+        },
+            -- EARRINGS
+        {
+            xi.items.MENDICANTS_EARRING,
+            xi.items.INFUSED_EARRING,
+            xi.items.CALAMITOUS_EARRING,
+            xi.items.HERMETIC_EARRING,
+            xi.items.HALASZ_EARRING,
+            xi.items.ASSUAGE_EARRING,
+            xi.items.ISHVARA_EARRING,
+            xi.items.EVANS_EARRING,
+            xi.items.LEMPO_EARRING,
+            xi.items.THUREOUS_EARRING,
+            xi.items.DIGNITARYS_EARRING,
+            xi.items.TELOS_EARRING,
+            xi.items.GENMEI_EARRING,
+        },
+            -- BELTS AND SASHES
+        {
+            xi.items.LUCIDITY_SASH,
+            xi.items.SINEW_BELT,
+            xi.items.ESCHAN_STONE,
+            xi.items.GRUNFELD_ROPE,
+            xi.items.POROUS_ROPE,
+            xi.items.SULLA_BELT,
+            xi.items.YEMAYA_BELT,
+            xi.items.CHANNELERS_STONE,
+            xi.items.ASKLEPIAN_BELT,
+            xi.items.SARISSAPHOROI_BELT,
+            xi.items.LUMINARY_SASH,
+            xi.items.KERYGMA_BELT,
+            xi.items.REIKI_YOTAI,
+            xi.items.KOBO_OBI,
+        },
+            -- RINGS
+        {
+            xi.items.OVERBEARING_RING,
+            xi.items.RESONANCE_RING,
+            xi.items.PURITY_RING,
+            xi.items.WARDENS_RING,
+            xi.items.PETROV_RING,
+            xi.items.FORTIFIED_RING,
+            xi.items.VERTIGO_RING,
+            xi.items.EVANESCENCE_RING,
+            xi.items.BEGRUDGING_RING,
+            xi.items.APATE_RING,
+            xi.items.PERSIS_RING,
+            xi.items.HETAIROI_RING,
+            xi.items.SHUKUYU_RING,
+            xi.items.RAHAB_RING,
+        },
+            -- CAPES AND CLOAKS
+        {
+            xi.items.DISPERSERS_CAPE,
+            xi.items.THAUMATURGES_CAPE,
+            xi.items.PENETRATING_CAPE,
+            xi.items.PHILIDOR_MANTLE,
+            xi.items.SOKOLSKI_MANTLE,
+            xi.items.QUARREL_MANTLE,
+            xi.items.XUCAU_MANTLE,
+            xi.items.TANTALIC_CAPE,
+            xi.items.SCINTILLATING_CAPE,
+            xi.items.PHALANGITE_MANTLE,
+            xi.items.PERIMEDE_CAPE,
+            xi.items.AGEMA_CAPE,
+            xi.items.ENUMA_MANTLE,
+            xi.items.REIKI_CLOAK,
+        },
+            -- OTHER
+        {
+            xi.items.SEKI_SHURIKEN_POUCH,
+        },
     },
-
+    --[[
     -- Kupon AW-GFII: Geas Fete (MOG_KUPN_AW-GWII = 9176)
     [38] =
     {
@@ -1313,56 +1667,87 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
         local idxAlt1   = 0
         local idxAlt2   = 0
 
-        if list == 12 then -- I-Seal submenu format
-            idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF) -- Job
-            idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Slot
-        end
+        if
+            list == 12 or                   -- I-Seal
+            list == 22 or                   -- AW-WK
+            list == 26 or                   -- I-Skill
+            (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
+            list == 37                      -- GFIII
+        then
+            idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
+            idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
 
-        if list == 22 or (list >= 32 and list <= 34) then -- AW-WK / AW-Mis / AW-Vgr / AW-VgrII submenu format
-            idxAlt1 = bit.rshift(option, 24) -- Naakul / Battlefield / Vagary Target
-            idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Item
+            if list == 12 then
+                idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF)
+            end
         end
-
-        if list == 26 then -- I-Skill submenu format
-            idxAlt1 = bit.rshift(option, 24) -- Combat / Magic
-            idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Item
-        end
-
-        -- DEBUG:
-        -- print(string.format("list: %u, idx: %u", list, idx))
-        -- print(string.format("list: %u, idx: %u, job %u, slot: %u", list, idx, idxAlt1, idxAlt2))
 
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
+            local debug         = false
+            local debugShowItem = false
+            local debugMode     =
+            {
+                PLAYER  = 1,
+                CONSOLE = 2,
+            }
+
+            local debugOut  = debugMode.PLAYER
             local item      = 0
             local keyItems  = 0
 
-            if list == 12 then
-                item = { itemList[list][idxAlt1][idxAlt2] } -- Tabling here to save 100 pairs of { }
-            elseif list == 22 or list == 26 or (list >= 32 and list <= 34) then
+            if
+                list == 12 or                   -- I-Seal
+                list == 22 or                   -- AW-WK
+                list == 26 or                   -- I-Skill
+                (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
+                list == 37                      -- GFIII
+            then
                 item = itemList[list][idxAlt1][idxAlt2]
+
+                if list == 12 then  -- Item, Quantity
+                    item = { item } -- Tabling here to save 100 pairs of { }
+                end
             else
                 item = itemList[list][idx]
             end
 
-            if list == 19 then -- List 19 has keyitems
+            if list == 19 then -- List has keyitems
                 keyItems = 1
             end
 
-            if keyItems == 0 then
-                if npcUtil.giveItem(player, item) then
-                    player:delKeyItem(listToKeyItem(list))
+            if debug then -- DEBUG will disable ki consumption and print instead
+                local ID = zones[player:getZoneID()]
+
+                if debugShowItem then
+                    if keyItems == 0 then
+                        player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+                    else
+                        player:messageSpecial(xi.msg.basic.KEYITEM_OBTAINED, item)
+                    end
+                end
+
+                if debugOut == debugMode.PLAYER then
+                    player:PrintToPlayer(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
                 else
-                    -- TODO: CS Messaging that getting the item has failed
+                    print(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2))
                 end
             else
-                if not player:hasKeyItem(item) then
-                    npcUtil.giveKeyItem(player, item)
-                    player:delKeyItem(listToKeyItem(list))
+                if keyItems == 0 then
+                    if npcUtil.giveItem(player, item) then
+                        player:delKeyItem(listToKeyItem(list))
+                    else
+                        -- TODO: CS Messaging that getting the item has failed
+                    end
                 else
-                    player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, item)
-                    -- TODO: CS Messaging that getting the item has failed
+                    if not player:hasKeyItem(item) then
+                        npcUtil.giveKeyItem(player, item)
+                        player:delKeyItem(listToKeyItem(list))
+                    else
+                        player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, item)
+                        -- TODO: CS Messaging that getting the item has failed
+                    end
                 end
             end
         end
