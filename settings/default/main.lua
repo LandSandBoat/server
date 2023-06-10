@@ -256,5 +256,5 @@ xi.settings.main =
     ENABLE_CW      = 1,
     CW_COLOR       = 0x00002000,
     CW_FLAG        = 0x02000000, -- (Config Flag) Mentor     (Search: 0x0001 -  Mentor)
-    UCW_FLAG       = 0x00200000, -- (Name Flag) Yellow/Green (Search: 0x0020 - Auto Group)
+    UCW_FLAG       = 0x00010000, -- (Name Flag) Yellow/Green (Search: 0x0020 - Auto Group)
 }
