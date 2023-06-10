@@ -689,19 +689,52 @@ local itemList =
         xi.items.DUNNA,
         xi.items.AETTIR,
     },
-    --[[
     -- Kupon I-Mat: One type of special material (MOG_KUPON_I_MAT = 8794)
     [30] =
     {
-
+        xi.items.BZTAVIAN_STINGER,
+        xi.items.BZTAVIAN_WING,
+        xi.items.ROCKFIN_TOOTH,
+        xi.items.ROCKFIN_FIN,
+        xi.items.GABBRATH_HORN,
+        xi.items.SLICE_OF_GABBRATH_MEAT,
+        xi.items.WAKTZA_ROSTRUM,
+        xi.items.WAKTZA_CREST,
+        xi.items.YGGDREANT_BOLE,
+        xi.items.YGGDREANT_ROOT,
+        xi.items.CEHUETZI_CLAW,
+        xi.items.CEHUETZI_PELT,
+        xi.items.CEHUETZI_ICE_SHARD,
+        xi.items.SCARLETITE_INGOT,
+        xi.items.ORMOLU_INGOT,
+        xi.items.VOIDWROUGHT_PLATE,
+        xi.items.KAGGENS_CUTICLE,
+        xi.items.AKVANS_PENNON,
+        xi.items.SUIT_OF_HAHAVAS_MAIL,
+        xi.items.PILS_TUILLIE,
+        xi.items.CELAENOS_CLOTH,
     },
 
-    -- Kupon W-DeIII: Delve boss weapons
+    -- Kupon W-DeIII: Delve boss weapons (MOG_KUPON_DEIII = 8795)
     [31] =
     {
-
+        xi.items.OATIXUR,
+        xi.items.KEREHCATL,
+        xi.items.UPUKIREX,
+        xi.items.IZHIIKOH,
+        xi.items.TSURUMARU,
+        xi.items.ILLAPA,
+        xi.items.BURAMENKAH,
+        xi.items.UKUDYONI,
+        xi.items.IZIZOEKSI,
+        xi.items.TAJABIT,
+        xi.items.QALGWER,
+        xi.items.BOLELABUNGA,
+        xi.items.NGQOQWANB,
+        xi.items.FALUBEZA,
+        xi.items.JUSHIMATSU,
     },
-
+    --[[
     -- Kupon AW-Mis: Equipment or a weapon from High-Tier Mission Battlefields
     [32] =
     {
