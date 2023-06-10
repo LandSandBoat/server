@@ -734,13 +734,221 @@ local itemList =
         xi.items.FALUBEZA,
         xi.items.JUSHIMATSU,
     },
-    --[[
-    -- Kupon AW-Mis: Equipment or a weapon from High-Tier Mission Battlefields
+
+    -- Kupon AW-Mis: Equipment or a weapon from High-Tier Mission Battlefields (MOG_KUPON_AW_MIS = 8796)
     [32] =
     {
-
+            -- Ark Angel 1
+        {
+            xi.items.LITHELIMB_CAP,
+            xi.items.BLOODRAIN_STRAP,
+            xi.items.ANAHERA_SABER,
+            xi.items.CASTIGATION,
+            xi.items.MANABYSS_PIGACHES,
+        },
+            -- Ark Angel 2
+        {
+            xi.items.ANAHERA_SCYTHE,
+            xi.items.FRAVASHI_MANTLE,
+            xi.items.VENABULUM,
+            xi.items.SCAMPS_SOLLERETS,
+            xi.items.THEURGISTS_SLACKS,
+        },
+            -- Ark Angel 3
+        {
+            xi.items.SEKHMET_CORSET,
+            xi.items.REGIMEN_MITTENS,
+            xi.items.FELISTRIS_MASK,
+            xi.items.RAIMITSUKANE,
+            xi.items.ANAHERA_TABAR,
+        },
+            -- Ark Angel 4
+        {
+            xi.items.CAGLIOSTROS_ROD,
+            xi.items.ANAHERA_SWORD,
+            xi.items.PATRICIUS_RING,
+            xi.items.DYNASTY_MITTS,
+            xi.items.OSMIUM_CUISSES,
+        },
+            -- Ark Angel 5
+        {
+            xi.items.AGITATORS_COLLAR,
+            xi.items.DAIHANSHI_HABAKI,
+            xi.items.TUNGLMYRKVI,
+            xi.items.LURID_MITTS,
+            xi.items.ANAHERA_BLADE,
+        },
+            -- Pentacide Perpetrator
+        {
+            xi.items.KYUJUTSUGI,
+            xi.items.LENTUS_GRIP,
+            xi.items.TRUX_EARRING,
+            xi.items.SANARE_EARRING,
+            xi.items.GELAI_EARRING,
+            xi.items.CREMATIO_EARRING,
+            xi.items.TRIPUDIO_EARRING,
+        },
+            -- Return to Delkfutt's Tower
+        {
+            xi.items.MESYOHI_HAUBERGEON,
+            xi.items.MESYOHI_SLACKS,
+            xi.items.MESYOHI_SWORD,
+            xi.items.MESYOHI_ROD,
+        },
+            -- The Celestial Nexus
+        {
+            xi.items.VANIR_GUN,
+            xi.items.VANIR_KNIFE,
+            xi.items.VANIR_COTEHARDIE,
+            xi.items.VANIR_BATTERY,
+            xi.items.VANIR_BOOTS,
+        },
+            -- The Savage
+        {
+            xi.items.ISCHEMIA_CHASUBLE,
+            xi.items.SCUFFLERS_COSCIALES,
+            xi.items.HEGIRA_WRISTBANDS,
+            xi.items.METALSINGER_BELT,
+            xi.items.DOMESTICATORS_EARRING,
+        },
+            -- The Warriors Path
+        {
+            xi.items.HANGAKU_NO_YUMI,
+            xi.items.SUKEROKU_HACHIMAKI,
+            xi.items.BATTLECAST_GAITERS,
+            xi.items.GINSEN,
+            xi.items.MIZUKAGE_NO_KUBIKAZARI,
+        },
+            -- Puppet In Peril
+        {
+            xi.items.SAVAS_JAWSHAN,
+            xi.items.SIFAHIR_SLACKS,
+            xi.items.SAHIP_HELM,
+            xi.items.BESTAS_BANE,
+            xi.items.PRATIK_EARRING,
+        },
+            -- Legacy of the Lost
+        {
+            xi.items.PTICA_HEADGEAR,
+            xi.items.KARMESIN_VEST,
+            xi.items.KANDZA_CRACKOWS,
+            xi.items.TENGU_NO_HANE,
+            xi.items.TENGU_NO_OBI,
+        },
+            -- Rank Five Missions
+        {
+            xi.items.LIGHTREAVER,
+            xi.items.DREAD_JUPON,
+            xi.items.ONIMUSHA_NO_KOTE,
+            xi.items.PERDITION_SLOPS,
+            xi.items.TREPIDITY_MANTLE,
+        },
+            -- Head Wind
+        {
+            xi.items.DURGAI_LEGGINGS,
+            xi.items.CHIDORI,
+            xi.items.BAGHERE_SALADE,
+            xi.items.SHETAL_STONE,
+            xi.items.NILGAL_POLE,
+        },
+            -- Trial By Fire
+        {
+            xi.items.ATAKIGIRI,
+            xi.items.COALRAKE_SABOTS,
+            xi.items.PERFERVID_SWORD,
+            xi.items.IMMOLATION_GRIP,
+            xi.items.ANNEALED_MANTLE,
+        },
+            -- Trial By Ice
+        {
+            xi.items.FRAZIL_STAFF,
+            xi.items.FLOESTONE,
+            xi.items.CALVED_CLAWS,
+            xi.items.NILAS_GLOVES,
+            xi.items.RIMEICE_EARRING,
+        },
+            -- Trial By Wind
+        {
+            xi.items.LEVANTE_DAGGER,
+            xi.items.PONENTE_SASH,
+            xi.items.LEBECHE_RING,
+            xi.items.TRAMONTANE_AXE,
+            xi.items.OSTRO_GREAVES,
+        },
+            -- Trial By Earth
+        {
+            xi.items.MAFIC_CUDGEL,
+            xi.items.SUPERSHEAR_RING,
+            xi.items.TOGAKUSHI_SHURIKEN_POUCH,
+            xi.items.FORESHOCK_SWORD,
+            xi.items.PLUMOSE_SACHET,
+        },
+            -- Trial By Lightning
+        {
+            xi.items.STACCATO_STAFF,
+            xi.items.DONAR_GUN,
+            xi.items.UKKO_SASH,
+            xi.items.VOLTSURGE_TORQUE,
+            xi.items.BRONTES_CUISSES,
+        },
+            -- Trial By Water
+        {
+            xi.items.PHREATIC_AXE,
+            xi.items.PELAGOS_LANCE,
+            xi.items.VADOSE_ROD,
+            xi.items.BENTHOS_GRIP,
+            xi.items.NERITIC_EARRING,
+        },
+            -- The Moonlit Path
+        {
+            xi.items.MEDEINA_KILIJ,
+            xi.items.CAPITOLINE_STRAP,
+            xi.items.MAIITSOH_HAUBE,
+            xi.items.VRIKODARA_JUPON,
+            xi.items.LUPINE_CAPE,
+        },
+            -- Waking the Beast
+        {
+            xi.items.MARQUETRY_STAFF,
+            xi.items.LAPIDARY_TUNIC,
+            xi.items.DIAMANTAIRE_SOLLERETS,
+            xi.items.SATLADA_NECKLACE,
+            xi.items.ENGRAVED_BELT,
+        },
+            -- Waking Dreams
+        {
+            xi.items.SHUHANSADAMUNE,
+            xi.items.CHOZORON_COSELETE,
+            xi.items.LOAGAETH_CUFFS,
+            xi.items.DARKSIDE_EARRING,
+            xi.items.PERNICIOUS_RING,
+        },
+            -- One to Be Feared
+        {
+            xi.items.DENOUEMENTS,
+            xi.items.TERMINAL_HELM,
+            xi.items.TERMINAL_PLATE,
+            xi.items.CONSUMMATION_TORQUE,
+            xi.items.CULMINUS,
+            xi.items.CESSANCE_EARRING,
+        },
+            -- Dawn
+        {
+            xi.items.GYVE_DOUBLET,
+            xi.items.FETTERING_BLADE,
+            xi.items.VENERY_BOW,
+            xi.items.LATRIA_SASH,
+            xi.items.GYVE_TROUSERS,
+            xi.items.LAIC_MANTLE,
+        },
+            -- Other
+        {
+            xi.items.DIVINATOR,
+            xi.items.DIVINATOR_II,
+            xi.items.SERAPHICALLER,
+        },
     },
-
+    --[[
     -- Kupon AW-Vgr: Equipment from Vagary Notorious Monsters Perfiden and Plouton
     [33] =
     {
@@ -1041,8 +1249,8 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
             idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Slot
         end
 
-        if list == 22 then -- AW-WK submenu format
-            idxAlt1 = bit.rshift(option, 24) -- Naakul
+        if list == 22 or list == 32 then -- AW-WK / AW-Mis submenu format
+            idxAlt1 = bit.rshift(option, 24) -- Naakul/ Battlefield
             idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Item
         end
 
@@ -1063,7 +1271,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
 
             if list == 12 then
                 item = { itemList[list][idxAlt1][idxAlt2] } -- Tabling here to save 100 pairs of { }
-            elseif list == 22 or list == 26 then
+            elseif list == 22 or list == 26 or list == 32 then
                 item = itemList[list][idxAlt1][idxAlt2]
             else
                 item = itemList[list][idx]

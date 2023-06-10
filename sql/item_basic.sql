@@ -18551,7 +18551,7 @@ INSERT INTO `item_basic` VALUES (22114,0,'steinthor','steinthor',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (22115,0,'yoichinoyumi','yoichinoyumi',1,64584,0,1,0);
 INSERT INTO `item_basic` VALUES (22116,0,'gandiva','gandiva',1,64584,0,1,0);
 INSERT INTO `item_basic` VALUES (22117,0,'fail-not','fail-not',1,64584,0,1,0);
-INSERT INTO `item_basic` VALUES (22118,0,'venery_bows','venery_bow',1,63572,0,1,0);
+INSERT INTO `item_basic` VALUES (22118,0,'venery_bow','venery_bow',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (22119,0,'wochowsen','wochowsen',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (22120,0,'imati','imati',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (22121,0,'imati_+1','imati_+1',1,63569,0,1,0);
