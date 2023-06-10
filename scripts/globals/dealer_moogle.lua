@@ -577,13 +577,27 @@ local itemList =
         xi.items.YORCIA_VISAGE_III,
         xi.items.RAKAZNAR_VISGE_III,
     },
-    --[[
-    -- Kupon A-PK109: iLevel 109 Peacekeeper Coalition Armor
+
+    -- Kupon A-PK109: iLevel 109 Peacekeeper Coalition Armor (MOG_KUPON_A_PK109 = 8733)
     [24] =
     {
-
+        xi.items.KARIEYH_MORION_P1,
+        xi.items.KARIEYH_HAUBERT_P1,
+        xi.items.KARIEYH_MOUFLES_P1,
+        xi.items.KARIEYH_BRAYETTES_P1,
+        xi.items.KARIEYH_SOLLERETS_P1,
+        xi.items.THURANDAUT_CHAPEAU_P1,
+        xi.items.THURANDAUT_TABARD_P1,
+        xi.items.THURANDAUT_GLOVES_P1,
+        xi.items.THURANDAUT_TIGHTS_P1,
+        xi.items.THURANDAUT_BOOTS_P1,
+        xi.items.ORVAIL_CORONA_P1,
+        xi.items.ORVAIL_ROBE_P1,
+        xi.items.ORVAIL_CUFFS_P1,
+        xi.items.ORVAIL_PANTS_P1,
+        xi.items.ORVAIL_SOULIERS_P1,
     },
-    --]]
+
     -- Kupon I-S1: Skirmish Rank I Simulacrum Segments (MOG_KUPON_I_S1 = 8734)
     [25] =
     {
