@@ -608,13 +608,51 @@ local itemList =
         xi.items.YORCIA_VISAGE_I,
         xi.items.RAKAZNAR_VISGE_I,
     },
-    --[[
-    -- Kupon I-Skill: Skill books (deprecated)
+
+    -- Kupon I-Skill: Skill books (MOG_KUPON_I_SKILL = 8735)
     [26] =
     {
-
+        -- Combat
+        {
+            xi.items.COPY_OF_MIKHES_MEMO,
+            xi.items.DAGGER_ENCHIRIDION,
+            xi.items.COPY_OF_SWING_AND_STAB,
+            xi.items.COPY_OF_MIEUSELOIRS_DIARY,
+            xi.items.COPY_OF_STRIKING_BULLS_DIARY,
+            xi.items.COPY_OF_DEATH_FOR_DIMWITS,
+            xi.items.COPY_OF_LUDWIGS_REPORT,
+            xi.items.COPY_OF_CLASH_OF_TITANS,
+            xi.items.COPY_OF_KAGETORAS_DIARY,
+            xi.items.COPY_OF_NOILLURIES_LOG,
+            xi.items.COPY_OF_FERREOUSS_DIARY,
+            xi.items.COPY_OF_KAYEEL_PAYEELS_MEMOIRS,
+            xi.items.COPY_OF_PERIHS_PRIMER,
+            xi.items.COPY_OF_BARRELS_OF_FUN,
+            xi.items.THROWING_WEAPON_ENCHIRIDION,
+            xi.items.COPY_OF_MIKHES_NOTE,
+            xi.items.COPY_OF_SONIAS_DIARY,
+            xi.items.COPY_OF_THE_SUCCESSOR,
+            xi.items.COPY_OF_KATETORAS_JOURNAL,
+        },
+        -- Magic
+        {
+            xi.items.COPY_OF_ALTANAS_HYMN,
+            xi.items.COPY_OF_COVEFFE_BARROWS_MUSINGS,
+            xi.items.COPY_OF_AID_FOR_ALL,
+            xi.items.INVESTIGATIVE_REPORT,
+            xi.items.BOUNTY_LIST,
+            xi.items.COPY_OF_DARK_DEEDS,
+            xi.items.COPY_OF_BREEZY_LIBRETTO,
+            xi.items.CAVERNOUS_SCORE,
+            xi.items.BEAMING_SCORE,
+            xi.items.COPY_OF_YOMIS_DIAGRAM,
+            xi.items.COPY_OF_ASTRAL_HOMELAND,
+            xi.items.COPY_OF_LIFE_FORM_STUDY,
+            xi.items.COPY_OF_HROHJS_RECORD,
+            xi.items.COPY_OF_THE_BELL_TOLLS,
+        },
     },
-
+    --[[
     -- Kupon I-RME: RME Upgrade Materials x300
     [27] =
     {
@@ -949,7 +987,12 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
 
         if list == 22 then -- AW-WK submenu format
             idxAlt1 = bit.rshift(option, 24) -- Naakul
-            idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Slot
+            idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Item
+        end
+
+        if list == 26 then -- I-Skill submenu format
+            idxAlt1 = bit.rshift(option, 24) -- Combat / Magic
+            idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Item
         end
 
         -- DEBUG:
@@ -964,7 +1007,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
 
             if list == 12 then
                 item = { itemList[list][idxAlt1][idxAlt2] } -- Tabling here to save 100 pairs of { }
-            elseif list == 22 then
+            elseif list == 22 or list == 26 then
                 item = itemList[list][idxAlt1][idxAlt2]
             else
                 item = itemList[list][idx]
