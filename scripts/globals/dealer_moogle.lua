@@ -652,22 +652,45 @@ local itemList =
             xi.items.COPY_OF_THE_BELL_TOLLS,
         },
     },
-    --[[
-    -- Kupon I-RME: RME Upgrade Materials x300
+
+    -- Kupon I-RME: RME Upgrade Materials x300 (MOG_KUPON_I_RME = 8738)
     [27] =
     {
-
+        { { xi.items.PLUTON,            300 } },
+        { { xi.items.BEITETSU,          300 } },
+        { { xi.items.RIFTBORN_BOULDER,  300 } },
     },
 
     -- 28: blank menu
 
-    -- Kupon W-Job: JSE Oboro Weapons
+    -- Kupon W-Job: JSE Oboro Weapons (MOG_KUPON_W_JOB = 8793)
     [29] =
     {
-
+        xi.items.MINOS,
+        xi.items.NYEPEL,
+        xi.items.SINDRI,
+        xi.items.KALADANDA,
+        xi.items.EGEKING,
+        xi.items.SANDUNG,
+        xi.items.PRIWEN,
+        xi.items.CRONUS,
+        xi.items.ARKTOI,
+        xi.items.TERPANDER,
+        xi.items.LIONSQUALL,
+        xi.items.KURIKARANOTACHI,
+        xi.items.SHIGI,
+        xi.items.AREADBHAR,
+        xi.items.GRIDARVOR,
+        xi.items.MIMESIS,
+        xi.items.DEATHLOCKE,
+        xi.items.OHTAS,
+        xi.items.POLYHYMNIA,
+        xi.items.COEUS,
+        xi.items.DUNNA,
+        xi.items.AETTIR,
     },
-
-    -- Kupon I-Mat: One type of special material (deprecated)
+    --[[
+    -- Kupon I-Mat: One type of special material (MOG_KUPON_I_MAT = 8794)
     [30] =
     {
 
