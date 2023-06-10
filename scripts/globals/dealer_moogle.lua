@@ -993,13 +993,26 @@ local itemList =
             xi.items.DEVIVIFIER,
         },
     },
-    --[[
-    -- Mog Kupon W-Pulse: Pulse weapons
+    -- Mog Kupon W-Pulse: Pulse weapons (MOG_KUPON_W_PULSE = 9089)
     [35] =
     {
         xi.items.GIRRU,
+        xi.items.CORUSCANTI,
+        xi.items.ASTERIA,
+        xi.items.GUSTERION,
+        xi.items.SAGASINGER,
+        xi.items.EPHEMERON,
+        xi.items.BOREALIS,
+        xi.items.AYTANRI,
+        xi.items.HIMTHIGE,
+        xi.items.DELPHINIUS,
+        xi.items.ADFLICTIO,
+        xi.items.IKARIGIRI,
+        xi.items.MURASAMEMARU,
+        xi.items.TENKOMARU,
+        xi.items.DUKKHA,
     },
-
+    --[[
     -- Kupon AW-GFII: Geas Fete (Content Level 119+) (deprecated)
     [37] =
     {
