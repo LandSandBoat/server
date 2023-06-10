@@ -169,6 +169,12 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
                     local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+                    local blockTrustMessage = "Crystal Warriors must complete their quests to unlock Trusts."
+
+                    if player:isCrystalWarrior() then
+                        player:PrintToPlayer(blockTrustMessage, xi.msg.channel.SYSTEM_3)
+                        return false
+                    end
 
                     if trustWindurst == QUEST_AVAILABLE and trustSandoria == QUEST_AVAILABLE then
                         return quest:progressEvent(434)
