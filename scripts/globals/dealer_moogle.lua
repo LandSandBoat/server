@@ -948,19 +948,52 @@ local itemList =
             xi.items.SERAPHICALLER,
         },
     },
-    --[[
-    -- Kupon AW-Vgr: Equipment from Vagary Notorious Monsters Perfiden and Plouton
+
+    -- Kupon AW-Vgr: Equipment from Vagary Notorious Monsters Perfiden and Plouton (MOG_KUPON_AW_VGR = 9087)
     [33] =
     {
-
+            -- Perfidien
+        {
+            xi.items.COUNTS_GARB,
+            xi.items.COUNTS_CUFFS,
+            xi.items.ETIOLATION_EARRING,
+            xi.items.ENERVATING_EARRING,
+        },
+            -- Plouton
+        {
+            xi.items.TARTARUS_PLATEMAIL,
+            xi.items.BEFOULED_CROWN,
+            xi.items.ODIUM,
+            xi.items.INCARNATION_SASH,
+        }
     },
 
-    -- Kupon AW-VgrII: Equipment from Vagary NMs Palloritus, Putraxia and Rancibus
+    -- Kupon AW-VgrII: Equipment from Vagary NMs Palloritus, Putraxia and Rancibus (MOG_KUPON_AW_VGRII = 9088)
     [34] =
     {
-
+            -- Palloritus
+        {
+            xi.items.ACHIUCHIKAPU,
+            xi.items.RHADAMANTHUS,
+            xi.items.PUNCHINELLOS,
+            xi.items.DEFIANT_COLLAR,
+        },
+            -- Putraxia
+        {
+            xi.items.SOULCLEAVER,
+            xi.items.ACCLIMATOR,
+            xi.items.CRUSHERS_GAUNTLETS,
+            xi.items.RUMINATION_SASH,
+        },
+            -- Rancibus
+        {
+            xi.items.MIASMIC_PANTS,
+            xi.items.CRYPTIC_EARRING,
+            xi.items.MINDMELTER,
+            xi.items.DEVIVIFIER,
+        },
     },
-
+    --[[
     -- Mog Kupon W-Pulse: Pulse weapons
     [35] =
     {
@@ -1249,8 +1282,8 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
             idxAlt2 = bit.band(bit.rshift(option, 8), 0x3F) -- Slot
         end
 
-        if list == 22 or list == 32 then -- AW-WK / AW-Mis submenu format
-            idxAlt1 = bit.rshift(option, 24) -- Naakul/ Battlefield
+        if list == 22 or (list >= 32 and list <= 34) then -- AW-WK / AW-Mis / AW-Vgr / AW-VgrII submenu format
+            idxAlt1 = bit.rshift(option, 24) -- Naakul / Battlefield / Vagary Target
             idxAlt2 = bit.band(bit.rshift(option, 8), 0xF) -- Item
         end
 
@@ -1271,7 +1304,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
 
             if list == 12 then
                 item = { itemList[list][idxAlt1][idxAlt2] } -- Tabling here to save 100 pairs of { }
-            elseif list == 22 or list == 26 or list == 32 then
+            elseif list == 22 or list == 26 or (list >= 32 and list <= 34) then
                 item = itemList[list][idxAlt1][idxAlt2]
             else
                 item = itemList[list][idx]
