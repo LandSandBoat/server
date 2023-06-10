@@ -1012,20 +1012,43 @@ local itemList =
         xi.items.TENKOMARU,
         xi.items.DUKKHA,
     },
+
+    -- Kupon I-Stone: Skirmish Stones +2 (MOG_KUPON_I_STONE = 9090)
+    [36] =
+    {
+        { { xi.items.VERDIGRIS_STONE_P2,          12 } },
+        { { xi.items.GHASTLY_STONE_P2,            12 } },
+        { { xi.items.WAILING_STONE_P2,            12 } },
+        { { xi.items.SNOWSLIT_STONE_P2,           12 } },
+        { { xi.items.SNOWTIP_STONE_P2,            12 } },
+        { { xi.items.SNOWDIM_STONE_P2,            12 } },
+        { { xi.items.SNOWORB_STONE_P2,            12 } },
+        { { xi.items.LEAFSLIT_STONE_P2,           12 } },
+        { { xi.items.LEAFTIP_STONE_P2,            12 } },
+        { { xi.items.LEAFDIM_STONE_P2,            12 } },
+        { { xi.items.LEAFORB_STONE_P2,            12 } },
+        { { xi.items.DUSKSLIT_STONE_P2,           12 } },
+        { { xi.items.DUSKTIP_STONE_P2,            12 } },
+        { { xi.items.DUSKDIM_STONE_P2,            12 } },
+        { { xi.items.DUSKORB_STONE_P2,            12 } },
+        { { xi.items.FRAYED_SACK_OF_FECUNDITY,    12 } },
+        { { xi.items.FRAYED_SACK_OF_PLENTY,       12 } },
+        { { xi.items.FRAYED_SACK_OF_OPULENCE,     12 } },
+    },
     --[[
-    -- Kupon AW-GFII: Geas Fete (Content Level 119+) (deprecated)
+    -- Kupon AW-GFIII: Geas Fete (Content Level 119+) (MOG_KUPON_AW-GFIII = 9175)
     [37] =
     {
 
     },
 
-    -- Kupon I-Stone: Augment stones (deprecated)
+    -- Kupon AW-GFII: Geas Fete (MOG_KUPN_AW-GWII = 9176)
     [38] =
     {
 
     },
 
-    -- Kupon AW-GF: Geas Fete (Content Level 119) (deprecated)
+    -- Kupon AW-GF: Geas Fete (Content Level 119) (MOG_KUPON_AW-GF = 9177)
     [39] =
     {
 
