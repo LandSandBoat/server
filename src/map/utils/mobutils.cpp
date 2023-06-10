@@ -568,7 +568,7 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
+        else if (PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
         }
