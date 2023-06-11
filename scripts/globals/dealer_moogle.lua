@@ -2522,13 +2522,32 @@ local itemList =
         xi.items.EMINENT_FLUTE,
         xi.items.EMINENT_ANIMATOR_II,
     },
-    --[[
-    -- Kupon A-EMI: iLevel 117 Records of Eminence armor
+    -- Kupon A-EMI: iLevel 117 Records of Eminence armor (MOG_KUPON_A_EMI = 9226)
     [47] =
     {
-
+        {
+            xi.items.OUTRIDER_MASK,
+            xi.items.OUTRIDER_MAIL,
+            xi.items.OUTRIDER_MITTENS,
+            xi.items.OUTRIDER_HOSE,
+            xi.items.OUTRIDER_GREAVES,
+        },
+        {
+            xi.items.ESPIAL_CAP,
+            xi.items.ESPIAL_GAMBISON,
+            xi.items.ESPIAL_BRACERS,
+            xi.items.ESPIAL_HOSE,
+            xi.items.ESPIAL_SOCKS,
+        },
+        {
+            xi.items.WAYFARER_CIRCLET,
+            xi.items.WAYFARER_ROBE,
+            xi.items.WAYFARER_CUFFS,
+            xi.items.WAYFARER_SLOPS,
+            xi.items.WAYFARER_CLOGS,
+        },
     },
-
+    --[[
     -- Kupon W-SRW: Rala Waterways Skirmish Weapons +2
     [48] =
     {
@@ -2672,7 +2691,8 @@ local getIndexParams = function(list, option)
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
-        list == 44                      -- AW-Cos
+        list == 44 or                   -- AW-Cos
+        list == 47                      -- A-EMI
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2697,9 +2717,10 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         list == 22 or                   -- AW-WK
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-        (list >= 37 and list <= 41)     -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
+        (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
+        list == 47
     then
-        if debug.ENABLED then
+        if debug.ENABLED and not debug.SHOWITEM then
             item = 0
         else
             item = itemList[list][idxAlt1][idxAlt2]
