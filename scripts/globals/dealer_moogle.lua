@@ -1822,20 +1822,401 @@ local itemList =
             xi.items.QUARREL_MANTLE,
         },
     },
-    --[[
-    -- Kupon AW-UWII: Level 119-128 Unity Wanted Battles
+    -- Kupon AW-UWIII: Unity Wanted Battles 119 - 145 (MOG_KUPON_AW_UWIII = 9179)
     [40] =
     {
-
+            -- HAND-TO-HAND WEAPONS,
+        {
+            xi.items.FISTS_OF_FURY_P1,
+            xi.items.EMEICI_P1,
+            xi.items.COMEUPPANCES_P1,
+        },
+            -- DAGGERS,
+        {
+            xi.items.JUGO_KUKRI_P1,
+            xi.items.ANATHEMA_HARPE_P1,
+            xi.items.TERNION_DAGGER_P1,
+            xi.items.KUSTAWI_P1,
+        },
+            -- SWORDS,
+        {
+            xi.items.SANGARIUS_P1,
+            xi.items.PUKULATMUJ_P1,
+            xi.items.DEMERSAL_DEGEN_P1,
+            xi.items.TANMOGAYI_P1,
+            xi.items.FLYSSA_P1,
+            xi.items.COMBUSTER_P1,
+        },
+            -- GREAT SWORDS,
+        {
+            xi.items.KLADENETS_P1,
+            xi.items.MONTANTE_P1,
+            xi.items.NULLIS_P1,
+            xi.items.USHENZI_P1,
+        },
+            -- AXES,
+        {
+            xi.items.BURAMGH_P1,
+            xi.items.PERUN_P1,
+            xi.items.MDOMO_AXE_P1,
+            xi.items.HABILITATOR_P1,
+        },
+            -- GREAT AXES,
+        {
+            xi.items.AIZKORA_P1,
+            xi.items.BEHEADER_P1,
+        },
+            -- POLEARMS,
+        {
+            xi.items.GAE_DERG_P1,
+        },
+            -- SCYTHES,
+        {
+            xi.items.TRISKA_SCYTHE_P1,
+            xi.items.PIXQUIZPAN_P1,
+        },
+            -- KATANAS,
+        {
+            xi.items.TANCHO_P1,
+            xi.items.RAICHO_P1,
+        },
+            -- GREAT KATANAS,
+        {
+            xi.items.KUNIMUNE_P1,
+            xi.items.NORIFUSA_P1,
+        },
+            -- CLUBS,
+        {
+            xi.items.MAGESMASHER_P1,
+            xi.items.LOXOTIC_MACE_P1,
+            xi.items.SEPTOPTIC_P1,
+        },
+            -- STAVES,
+        {
+            xi.items.POUWHENUA_P1,
+            xi.items.ABABINILI_P1,
+            xi.items.MARIN_STAFF_P1,
+            xi.items.CONTEMPLATOR_P1,
+        },
+            -- THROWING WEAPONS,
+        {
+            xi.items.WINGCUTTER_P1,
+            xi.items.GHASTLY_TATHLUM_P1,
+            xi.items.SEETHING_BOMBLET_P1,
+            xi.items.ANTITAIL_P1,
+        },
+            -- BOWS,
+        {
+            xi.items.MENGADO_P1,
+            xi.items.PALOMA_BOW_P1,
+        },
+            -- GUNS,
+        {
+            xi.items.MALISON_P1,
+            xi.items.IMATI_P1,
+        },
+            -- SHIELDS,
+        {
+            xi.items.EVALACH_P1,
+            xi.items.AJAX_P1,
+            xi.items.DELIVERANCE_P1,
+            xi.items.FORFEND_P1,
+        },
+        { --[[ INSTRUMENTS --]] },
+            -- GRIPS,
+        {
+            xi.items.RIGOROUS_GRIP_P1,
+            xi.items.REFINED_GRIP_P1,
+        },
+            -- HEADGEAR,
+        {
+            xi.items.IMPERIAL_WING_HAIRPIN_P1,
+            xi.items.ADORNED_HELM_P1,
+            xi.items.STINGER_HELM_P1,
+            xi.items.HIKE_KHAT_P1,
+            xi.items.ALHAZEN_HAT_P1,
+            xi.items.BLISTERING_SALLET_P1,
+            xi.items.LOESS_BARBUTA_P1,
+        },
+            -- CHEST ARMOR,
+        {
+            xi.items.ROSETTE_JASERAN_P1,
+            xi.items.EMET_HARNESS_P1,
+            xi.items.HIME_DOMARU_P1,
+            xi.items.SHOMONJIJOE_P1,
+            xi.items.LUGRA_CLOAK_P1,
+            xi.items.AGONY_JERKIN_P1,
+            xi.items.COHORT_CLOAK_P1,
+            xi.items.TATENASHI_HARAMAKI_P1,
+            xi.items.OBVIATION_CUIRASS_P1,
+        },
+            -- GLOVES AND GAUNTLETS,
+        {
+            xi.items.MACABRE_GAUNTLETS_P1,
+            xi.items.SHIGURE_TEKKO_P1,
+            xi.items.KACHIMUSHA_KOTE_P1,
+            xi.items.ASTERIA_MITTS_P1,
+            xi.items.LAMASSU_MITTS_P1,
+            xi.items.TATENASHI_GOTE_P1,
+            xi.items.GAZU_BRACELETS_P1,
+        },
+            -- LEG ARMOR,
+        {
+            xi.items.ASSIDUITY_PANTS_P1,
+            xi.items.AUGURY_CUISSES_P1,
+            xi.items.ZOAR_SUBLIGAR_P1,
+            xi.items.TATENASHI_HAIDATE_P1,
+        },
+            -- BOOTS AND GREAVES,
+        {
+            xi.items.REGAL_PUMPS_P1,
+            xi.items.JUTE_BOOTS_P1,
+            xi.items.HIPPOMENES_SOCKS_P1,
+            xi.items.HYGIEIA_CLOGS_P1,
+            xi.items.TATENASHI_SUNE_ATE_P1,
+        },
+            -- NECK PIECES,
+        {
+            xi.items.UNMOVING_COLLAR_P1,
+            xi.items.CANTO_NECKLACE_P1,
+            xi.items.WARDERS_CHARM_P1,
+            xi.items.BATHY_CHOKER_P1,
+            xi.items.VIM_TORQUE_P1,
+            xi.items.LORICATE_TORQUE_P1,
+        },
+            -- EARRINGS,
+        {
+            xi.items.NOURISHING_EARRING_P1,
+            xi.items.HANDLERS_EARRING_P1,
+            xi.items.ARETE_DEL_LUNA_P1,
+            xi.items.LUGRA_EARRING_P1,
+            xi.items.ZWAZO_EARRING_P1,
+            xi.items.DOMINANCE_EARRING_P1,
+            xi.items.ODNOWA_EARRING_P1,
+        },
+            -- BELTS AND SASHES,
+        {
+            xi.items.SHINJUTSU_NO_OBI_P1,
+            xi.items.SAILFI_BELT_P1,
+            xi.items.ACUITY_BELT_P1,
+            xi.items.KENTARCH_BELT_P1,
+        },
+            -- RINGS,
+        {
+            xi.items.METAMORPH_RING_P1,
+            xi.items.APEILE_RING_P1,
+            xi.items.MEPHITASS_RING_P1,
+            xi.items.GELATINOUS_RING_P1,
+            xi.items.CACOETHIC_RING_P1,
+        },
+            -- CAPES AND CLOAKS,
+        {
+            xi.items.GROUNDED_MANTLE_P1,
+            xi.items.FI_FOLLET_CAPE_P1,
+            xi.items.AURISTS_CAPE_P1,
+        },
+            -- OTHER,
+        {
+            xi.items.STINGER_BULLET_POUCH,
+        },
     },
-
-    -- Kupon AW-UW: Level 119 Unity Wanted Battles
+    -- Kupon AW-UWII: Unity Wanted Battles 119 - 128 (MOG_KUPON_AW_UWII = 9180)
     [41] =
     {
-
+            -- HAND-TO-HAND WEAPONS,
+        {
+            xi.items.FISTS_OF_FURY_P1,
+            xi.items.EMEICI_P1,
+        },
+            -- DAGGERS,
+        {
+            xi.items.JUGO_KUKRI_P1,
+            xi.items.ANATHEMA_HARPE_P1,
+            xi.items.TERNION_DAGGER_P1,
+            xi.items.KUSTAWI_P1,
+        },
+            -- SWORDS,
+        {
+            xi.items.SANGARIUS_P1,
+            xi.items.PUKULATMUJ_P1,
+            xi.items.DEMERSAL_DEGEN_P1,
+        },
+            -- GREAT SWORDS,
+        {
+            xi.items.KLADENETS_P1,
+            xi.items.USHENZI_P1,
+        },
+            -- AXES,
+        {
+            xi.items.BURAMGH_P1,
+            xi.items.PERUN_P1,
+            xi.items.MDOMO_AXE_P1,
+        },
+            -- GREAT AXES,
+        {
+            xi.items.AIZKORA_P1,
+            xi.items.BEHEADER_P1,
+        },
+            -- POLEARMS,
+        {
+            xi.items.GAE_DERG_P1,
+        },
+            -- SCYTHES,
+        {
+            xi.items.TRISKA_SCYTHE_P1,
+            xi.items.PIXQUIZPAN_P1,
+        },
+            -- KATANAS,
+        {
+            xi.items.TANCHO_P1,
+            xi.items.RAICHO_P1,
+        },
+            -- GREAT KATANAS,
+        {
+            xi.items.KUNIMUNE_P1,
+            xi.items.NORIFUSA_P1,
+        },
+            -- CLUBS,
+        {
+            xi.items.MAGESMASHER_P1,
+            xi.items.LOXOTIC_MACE_P1,
+        },
+            -- STAVES,
+        {
+            xi.items.POUWHENUA_P1,
+            xi.items.ABABINILI_P1,
+            xi.items.MARIN_STAFF_P1,
+        },
+            -- THROWING WEAPONS,
+        {
+            xi.items.WINGCUTTER_P1,
+            xi.items.GHASTLY_TATHLUM_P1,
+            xi.items.SEETHING_BOMBLET_P1,
+        },
+            -- BOWS,
+        {
+            xi.items.MENGADO_P1,
+            xi.items.PALOMA_BOW_P1,
+        },
+            -- GUNS,
+        {
+            xi.items.IMATI_P1,
+        },
+            -- SHIELDS,
+        {
+            xi.items.EVALACH_P1,
+            xi.items.AJAX_P1,
+            xi.items.DELIVERANCE_P1,
+        },
+        { --[[ INSTRUMENTS --]] },
+            -- GRIPS,
+        {
+            xi.items.RIGOROUS_GRIP_P1,
+            xi.items.REFINED_GRIP_P1,
+        },
+            -- HEADGEAR,
+        {
+            xi.items.IMPERIAL_WING_HAIRPIN_P1,
+            xi.items.ADORNED_HELM_P1,
+            xi.items.STINGER_HELM_P1,
+            xi.items.HIKE_KHAT_P1,
+            xi.items.ALHAZEN_HAT_P1,
+            xi.items.BLISTERING_SALLET_P1,
+        },
+            -- CHEST ARMOR,
+        {
+            xi.items.ROSETTE_JASERAN_P1,
+            xi.items.EMET_HARNESS_P1,
+            xi.items.HIME_DOMARU_P1,
+            xi.items.SHOMONJIJOE_P1,
+            xi.items.LUGRA_CLOAK_P1,
+            xi.items.AGONY_JERKIN_P1,
+            xi.items.COHORT_CLOAK_P1,
+        },
+            -- GLOVES AND GAUNTLETS,
+        {
+            xi.items.MACABRE_GAUNTLETS_P1,
+            xi.items.SHIGURE_TEKKO_P1,
+            xi.items.KACHIMUSHA_KOTE_P1,
+            xi.items.ASTERIA_MITTS_P1,
+            xi.items.LAMASSU_MITTS_P1,
+            xi.items.GAZU_BRACELETS_P1,
+        },
+            -- LEG ARMOR,
+        {
+            xi.items.ASSIDUITY_PANTS_P1,
+            xi.items.AUGURY_CUISSES_P1,
+            xi.items.ZOAR_SUBLIGAR_P1,
+        },
+            -- BOOTS AND GREAVES,
+        {
+            xi.items.REGAL_PUMPS_P1,
+            xi.items.JUTE_BOOTS_P1,
+            xi.items.HIPPOMENES_SOCKS_P1,
+            xi.items.HYGIEIA_CLOGS_P1,
+        },
+            -- NECK PIECES,
+        {
+            xi.items.UNMOVING_COLLAR_P1,
+            xi.items.CANTO_NECKLACE_P1,
+            xi.items.WARDERS_CHARM_P1,
+            xi.items.BATHY_CHOKER_P1,
+        },
+            -- EARRINGS,
+        {
+            xi.items.NOURISHING_EARRING_P1,
+            xi.items.HANDLERS_EARRING_P1,
+            xi.items.ARETE_DEL_LUNA_P1,
+            xi.items.LUGRA_EARRING_P1,
+            xi.items.ZWAZO_EARRING_P1,
+            xi.items.ODNOWA_EARRING_P1,
+        },
+            -- BELTS AND SASHES,
+        {
+            xi.items.SHINJUTSU_NO_OBI_P1,
+            xi.items.SAILFI_BELT_P1,
+            xi.items.ACUITY_BELT_P1,
+            xi.items.KENTARCH_BELT_P1,
+        },
+            -- RINGS,
+        {
+            xi.items.METAMORPH_RING_P1,
+            xi.items.APEILE_RING_P1,
+            xi.items.MEPHITASS_RING_P1,
+            xi.items.GELATINOUS_RING_P1,
+            xi.items.CACOETHIC_RING_P1,
+        },
+            -- CAPES AND CLOAKS,
+        {
+            xi.items.GROUNDED_MANTLE_P1,
+            xi.items.FI_FOLLET_CAPE_P1,
+            xi.items.AURISTS_CAPE_P1,
+        },
+            -- OTHER,
+        {
+            xi.items.STINGER_BULLET_POUCH,
+        },
     },
-
-    -- Kupon A-Ab: iLevel 119 +1 Abjuration Armor pieces
+    -- Kupon AW-UW: Unity Wanted Battles 119 (MOG_KUPON_AW_UW = 9181)
+    [42] =
+    {
+        xi.items.BURAMGH_P1,
+        xi.items.TANCHO_P1,
+        xi.items.WINGCUTTER_P1,
+        xi.items.EVALACH_P1,
+        xi.items.IMPERIAL_WING_HAIRPIN_P1,
+        xi.items.MACABRE_GAUNTLETS_P1,
+        xi.items.ASSIDUITY_PANTS_P1,
+        xi.items.REGAL_PUMPS_P1,
+        xi.items.HIPPOMENES_SOCKS_P1,
+        xi.items.UNMOVING_COLLAR_P1,
+        xi.items.NOURISHING_EARRING_P1,
+        xi.items.METAMORPH_RING_P1,
+        xi.items.APEILE_RING_P1,
+        xi.items.SHINJUTSU_NO_OBI_P1,
+    },
+    --[[
+    -- Kupon A-Ab: iLevel 119 P1 Abjuration Armor pieces
     [43] =
     {
 
@@ -2013,7 +2394,7 @@ local getIndexParams = function(list, option)
         list == 22 or                   -- AW-WK
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-        (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
+        (list >= 37 and list <= 41)     -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2038,7 +2419,7 @@ local getItemSelection = function(list, idx, idxAlt1, idxAlt2)
         list == 22 or                   -- AW-WK
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-        (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
+        (list >= 37 and list <= 41)     -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
     then
         item = itemList[list][idxAlt1][idxAlt2]
 

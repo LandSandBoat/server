@@ -20486,8 +20486,8 @@ INSERT INTO `item_basic` VALUES (27146,0,'bewegt_cuffs','bewegt_cuffs',1,63572,0
 INSERT INTO `item_basic` VALUES (27147,0,'redan_gloves','redan_gloves',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (27148,0,'tatenashi_gote','tatena._gote',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (27149,0,'tatenashi_gote_+1','tatena._gote_+1',1,63569,0,1,0);
-INSERT INTO `item_basic` VALUES (27150,0,'gazu_bracelet','gazu_bracelet',1,63568,0,1,0);
-INSERT INTO `item_basic` VALUES (27151,0,'gazu_bracelet_+1','gazu_bracelet_+1',1,63569,0,1,0);
+INSERT INTO `item_basic` VALUES (27150,0,'gazu_bracelets','gazu_bracelets',1,63568,0,1,0);
+INSERT INTO `item_basic` VALUES (27151,0,'gazu_bracelets_+1','gazu_bracelets_+1',1,63569,0,1,0);
 INSERT INTO `item_basic` VALUES (27152,0,'agoge_cuisses','agoge_cuisses',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (27153,0,'agoge_cuisses_+1','agoge_cuisses_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (27154,0,'hesychasts_hose','hes._hose',1,63552,0,1,0);
