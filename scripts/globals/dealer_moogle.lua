@@ -2296,25 +2296,207 @@ local itemList =
             xi.items.RYUO_SUNE_ATE_P1,
         },
     },
-    --[[
-    -- Kupon AW-Cos: Various Costumes
+
+    -- Kupon AW-Cos: Various Costumes (MOG_KUPON_AW_COS = 9182)
+    -- Some items are gender specific, with varying shifts between the F/M versions of
+    -- items. Index defaults to the itemID for the Female version of the item, and
+    -- has the shift distance specififed as a second param. Final/actual itemID is
+    -- processed in getItemSelection.
+    --
+    -- Example: { xi.items.COSSIE_TOP_P1,         2 }, itemID 26968, shift value of 2
+    --          The Male version of the item is xi.items.TA_MOKO_P1 = 26966
     [44] =
     {
-
+            -- HAND-TO-HAND WEAPONS
+        {
+            { xi.items.WORM_FEELERS_P1          },
+        },
+            -- SWORDS
+        {
+            { xi.items.IBUSHI_SHINAI_P1         },
+            { xi.items.ARK_SABER                },
+            { xi.items.ARK_SWORD                },
+            { xi.items.EXCALIPOOR_II            },
+        },
+            -- AXES
+        {
+            { xi.items.ARK_TABAR                },
+        },
+            -- POLEARMS
+        {
+            { xi.items.PITCHFORK_P1             },
+        },
+            -- SCYTHES
+        {
+            { xi.items.ARK_SCYTHE               },
+        },
+            -- GREAT KATANAS
+        {
+            { xi.items.HARDWOOD_KATANA          },
+            { xi.items.LOTUS_KATANA             },
+            { xi.items.SHINAI                   },
+            { xi.items.ARK_TACHI                },
+        },
+            -- CLUBS
+        {
+            { xi.items.CHOCOBO_WAND             },
+            { xi.items.CHARM_WAND_P1            },
+            { xi.items.NOMAD_MOOGLE_ROD         },
+            { xi.items.MIRACLE_WAND_P1          },
+            { xi.items.BATTLEDORE               },
+            { xi.items.DREAM_BELL_P1            },
+            { xi.items.HEARTSTOPPER_P1          },
+            { xi.items.HEARTBEATER_P1           },
+            { xi.items.LEAFKIN_BOPPER_P1        },
+            { xi.items.KYUKA_UCHIWA_P1          },
+            { xi.items.PURPLE_SPRIGGAN_CLUB     },
+            { xi.items.RED_SPRIGGAN_CLUB        },
+            { xi.items.HAGOITA                  },
+            { xi.items.GREEN_SPRIGGAN_CLUB      },
+            { xi.items.SEIKA_UCHIWA_P1          },
+            { xi.items.JINGLY_ROD_P1            },
+        },
+            -- STAVES
+        {
+            { xi.items.TREAT_STAFF              },
+            { xi.items.TREAT_STAFF_II           },
+            { xi.items.MALICE_MASHER_P1         },
+        },
+            -- SHIELDS
+        {
+            { xi.items.JANUS_GUARD              },
+            { xi.items.MOOGLE_GUARD_P1          },
+            { xi.items.CHOCOBO_SHIELD_P1        },
+            { xi.items.CASSIES_SHIELD           },
+            { xi.items.CAIT_SITH_GUARD_P1       },
+            { xi.items.SHE_SLIME_SHIELD         },
+            { xi.items.METAL_SLIME_SHIELD       },
+            { xi.items.HATCHLING_SHIELD         },
+            { xi.items.MUNDUS_SHIELD            },
+            { xi.items.SLIME_SHIELD             },
+            { xi.items.GLINTING_SHIELD          },
+        },
+            -- HEADGEAR 1
+        {
+            { xi.items.DECENNIAL_TIARA_P1,    1 },
+            { xi.items.PYRACMON_CAP             },
+            { xi.items.SNOW_BUNNY_HAT_P1        },
+            { xi.items.HORROR_HEAD              },
+            { xi.items.HORROR_HEAD_II           },
+            { xi.items.DREAM_HAT_P1             },
+            { xi.items.COVEN_HAT                },
+            { xi.items.EGG_HELM                 },
+            { xi.items.REDEYES                  },
+            { xi.items.BUFFALO_CAP              },
+            { xi.items.STARLET_FLOWER,        1 },
+            { xi.items.CARBIE_CAP_P1            },
+            { xi.items.CASSIES_CAP              },
+            { xi.items.LYCOPODIUM_MASQUE_P1     },
+            { xi.items.MANDRAGORA_MASQUE_P1     },
+            { xi.items.FLAN_MASQUE_P1           },
+            { xi.items.CAIT_SITH_CAP_P1         },
+            { xi.items.SHEEP_CAP_P1             },
+            { xi.items.FROSTY_CAP               },
+            { xi.items.COROLLA                  },
+            { xi.items.CELESTE_CAP              },
+            { xi.items.LEAFKIN_CAP_P1           },
+            { xi.items.RABBIT_CAP               },
+            { xi.items.SHOBUHOUOU_KABUTO        },
+            { xi.items.BEHEMOTH_MASQUE_P1       },
+            { xi.items.GOBLIN_MASQUE            },
+            { xi.items.GREEN_MOOGLE_MASQUE      },
+            { xi.items.WORM_MASQUE_P1           },
+            { xi.items.SHE_SLIME_HAT            },
+            { xi.items.METAL_SLIME_HAT          },
+        },
+            -- HEADGEAR 2
+        {
+            { xi.items.SLIME_CAP                },
+            { xi.items.BOMB_MASQUE_P1           },
+            { xi.items.CHOCOBO_MASQUE_P1        },
+            { xi.items.WYRMKING_MASQUE_P1       },
+            { xi.items.SNOLL_MASQUE_P1          },
+            { xi.items.RARAB_CAP_P1             },
+            { xi.items.CRAB_CAP_P1              },
+            { xi.items.KAKAI_CAP_P1             },
+            { xi.items.CUMULUS_MASQUE_P1        },
+        },
+            -- CHEST ARMOR
+        {
+            { xi.items.DECENNIAL_DRESS_P1,    1 },
+            { xi.items.EERIE_CLOAK_P1           },
+            { xi.items.OMINAESHI_YUKATA,      1 },
+            { xi.items.DINNER_JACKET            },
+            { xi.items.NOVENNIAL_DRESS,       1 },
+            { xi.items.HIMEGAMI_YUKATA,       1 },
+            { xi.items.LADYS_YUKATA,          1 },
+            { xi.items.DREAM_ROBE_P1            },
+            { xi.items.ONNAGIMI_YUKATA,       1 },
+            { xi.items.BOTULUS_SUIT_P1          },
+            { xi.items.TRACK_SHIRT_P1           },
+            { xi.items.HEART_APRON_P1           },
+            { xi.items.PUPILS_SHIRT             },
+            { xi.items.BEHEMOTH_SUIT_P1         },
+            { xi.items.POROGGO_COAT_P1          },
+            { xi.items.COSSIE_TOP_P1,         2 },
+            { xi.items.STARLET_JABOT,         1 },
+            { xi.items.SHOAL_MAILLOT_P1,      1 },
+            { xi.items.MANDRAGORA_SUIT_P1       },
+            { xi.items.SHOKUJO_HAPPI,         1 },
+            { xi.items.GOBLIN_SUIT              },
+            { xi.items.GREEN_MOOGLE_SUIT        },
+            { xi.items.PURPLE_SPRIGGAN_COAT     },
+            { xi.items.RED_SPRIGGAN_COAT        },
+            { xi.items.ALLIANCE_SHIRT_P1        },
+            { xi.items.GREEN_SPRIGGAN_COAT      },
+            { xi.items.CHOCOBO_SUIT_P1          },
+            { xi.items.WYRMKING_SUIT_P1         },
+            { xi.items.RHAPSODY_SHIRT_P1        },
+            { xi.items.AKITU_SHIRT              },
+        },
+            -- CHEST ARMOR 2
+        {
+            { xi.items.JUBILEE_SHIRT            },
+        },
+            -- GLOVES AND GAUNTLETS
+        {
+            { xi.items.DREAM_MITTENS_P1         },
+            { xi.items.STARLET_GLOVES,        1 },
+        },
+            -- LEG ARMOR
+        {
+            { xi.items.DECENNIAL_HOSE_P1,     1 },
+            { xi.items.NOVENNIAL_THIGH_BOOTS, 1 },
+            { xi.items.DREAM_PANTS_P1,        2 },
+            { xi.items.DINNER_HOSE              },
+            { xi.items.PUPILS_TROUSERS          },
+            { xi.items.COSSIE_BOTTOM_P1,      2 },
+            { xi.items.STARLET_SKIRT,         1 },
+            { xi.items.TRACK_PANTS_P1           },
+            { xi.items.SHOAL_TRUNKS_P1,       1 },
+            { xi.items.SHOKUJO_HANMOMOHIKI,   1 },
+            { xi.items.ALLIANCE_PANTS           },
+        },
+            -- BOOTS AND GREAVES
+        {
+            { xi.items.DREAM_BOOTS_P1           },
+            { xi.items.PUPILS_SHOES             },
+            { xi.items.STARLET_BOOTS,         1 },
+            { xi.items.ALLIANCE_BOOTS           },
+        },
     },
 
     -- Kupon AW-Kupo: All four Kupo items
     [45] =
     {
         {
-            -- TODO: Move to items.lua
-            21074, -- Kupo Rod
-            25645, -- Kupo Masque
-            25726, -- Kupo Suit
-            26406, -- Kupo Shield
+            xi.items.KUPO_ROD,
+            xi.items.KUPO_MASQUE,
+            xi.items.KUPO_SUIT,
+            xi.items.KUPO_SHIELD,
         },
     },
-
+    --[[
     -- Kupon W-EMI: iLevel 117 Sparks of Eminence Weapons
     [46] =
     {
@@ -2469,7 +2651,8 @@ local getIndexParams = function(list, option)
         list == 22 or                   -- AW-WK
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-        (list >= 37 and list <= 41)     -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
+        (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
+        list == 44                      -- AW-Cos
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2486,7 +2669,7 @@ local getIndexParams = function(list, option)
     return { idxAlt1, idxAlt2, keyItems }
 end
 
-local getItemSelection = function(list, idx, idxAlt1, idxAlt2)
+local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
     local item = 0
 
     if
@@ -2496,11 +2679,23 @@ local getItemSelection = function(list, idx, idxAlt1, idxAlt2)
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
         (list >= 37 and list <= 41)     -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
     then
-        item = itemList[list][idxAlt1][idxAlt2]
+        if debug.ENABLED then
+            item = 0
+        else
+            item = itemList[list][idxAlt1][idxAlt2]
+        end
 
         if list == 12 then  -- Item, Quantity
             item = { item } -- Tabling here to save 100 pairs of { }
         end
+    elseif
+        list == 44 -- AW-Cos (Index Defaults to Female itemID, CS will automatically swap items based on gender)
+    then
+        local gender    = player:getGender()                        -- Female: 0, Male: 1
+        local itemID    = itemList[list][idxAlt1][idxAlt2][1]       -- Extract the base itemID (F) from the index
+        local modifier  = itemList[list][idxAlt1][idxAlt2][2] or 0  -- Extract the base shift value from the index (typically 1 or 2)
+
+        item = itemID - ( gender * modifier ) -- Generate the actual itemID by subtracting the shift value from the base itemID
     else
         item = itemList[list][idx]
     end
@@ -2613,7 +2808,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
-            local item = getItemSelection(list, idx, idxAlt1, idxAlt2)
+            local item = getItemSelection(player, list, idx, idxAlt1, idxAlt2)
 
             if debug.ENABLED then
                 debugInfo(player, item, list, option, altIDs, idx)
