@@ -8,6 +8,13 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.dealerMoogle = xi.dealerMoogle or {}
 
+local debug =
+{
+    ENABLED     = false,    -- will disable ki consumption and print instead
+    SHOWITEM    = true,     -- will display acquisition message to player if debug.ENABLED
+    TO_PLAYER   = true,     -- will print debug info to player if debug.ENABLED
+}
+
 local csidLookup =
 {
     [xi.zone.CHOCOBO_CIRCUIT] = { 416, 417 },
@@ -1996,6 +2003,76 @@ local buildMask = function(player, shift)
     return { mask, kiID } -- return both the completed mask and the kiID
 end
 
+local getIndexParams = function(list, option)
+    local idxAlt1  = 0
+    local idxAlt2  = 0
+    local keyItems = 0
+
+    if
+        list == 12 or                   -- I-Seal
+        list == 22 or                   -- AW-WK
+        list == 26 or                   -- I-Skill
+        (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
+        (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
+    then
+        idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
+        idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
+
+        if list == 12 then
+            idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF)
+        end
+    end
+
+    if list == 19 then -- List has keyitems
+        keyItems = 1
+    end
+
+    return { idxAlt1, idxAlt2, keyItems }
+end
+
+local getItemSelection = function(list, idx, idxAlt1, idxAlt2)
+    local item = 0
+
+    if
+        list == 12 or                   -- I-Seal
+        list == 22 or                   -- AW-WK
+        list == 26 or                   -- I-Skill
+        (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
+        (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
+    then
+        item = itemList[list][idxAlt1][idxAlt2]
+
+        if list == 12 then  -- Item, Quantity
+            item = { item } -- Tabling here to save 100 pairs of { }
+        end
+    else
+        item = itemList[list][idx]
+    end
+
+    return item
+end
+
+local debugInfo = function(player, item, list, option, altIDs, idx)
+    local ID        = zones[player:getZoneID()]
+    local idxAlt1   = altIDs[1]
+    local idxAlt2   = altIDs[2]
+    local keyitem   = altIDs[3]
+
+    if debug.SHOWITEM then
+        if keyitem == 0 then
+            player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+        else
+            player:messageSpecial(xi.msg.basic.KEYITEM_OBTAINED, item)
+        end
+    end
+
+    if debug.TO_PLAYER then
+        player:PrintToPlayer(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
+    else
+        print(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2))
+    end
+end
+
 xi.dealerMoogle.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     if trade:getItemCount() > 1 then
@@ -2072,75 +2149,18 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
     if csid == itemCsid then
         local list      = bit.band(option, 0xFF)
         local idx       = bit.rshift(option, 8)
-        local idxAlt1   = 0
-        local idxAlt2   = 0
-
-        if
-            list == 12 or                   -- I-Seal
-            list == 22 or                   -- AW-WK
-            list == 26 or                   -- I-Skill
-            (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-            (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
-        then
-            idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
-            idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
-
-            if list == 12 then
-                idxAlt1 = bit.band(bit.rshift(option, 16), 0xFF)
-            end
-        end
+        local altIDs    = getIndexParams(list, option)
+        local idxAlt1   = altIDs[1]
+        local idxAlt2   = altIDs[2]
+        local keyItems  = altIDs[3]
 
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
-            local debug         = false
-            local debugShowItem = false
-            local debugMode     =
-            {
-                PLAYER  = 1,
-                CONSOLE = 2,
-            }
+            local item = getItemSelection(list, idx, idxAlt1, idxAlt2)
 
-            local debugOut  = debugMode.PLAYER
-            local item      = 0
-            local keyItems  = 0
-
-            if
-                list == 12 or                   -- I-Seal
-                list == 22 or                   -- AW-WK
-                list == 26 or                   -- I-Skill
-                (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
-                (list >= 37 and list <= 39)     -- AW-GFIII / AW-GFII / AW-GF
-            then
-                item = itemList[list][idxAlt1][idxAlt2]
-
-                if list == 12 then  -- Item, Quantity
-                    item = { item } -- Tabling here to save 100 pairs of { }
-                end
-            else
-                item = itemList[list][idx]
-            end
-
-            if list == 19 then -- List has keyitems
-                keyItems = 1
-            end
-
-            if debug then -- DEBUG will disable ki consumption and print instead
-                local ID = zones[player:getZoneID()]
-
-                if debugShowItem then
-                    if keyItems == 0 then
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, item)
-                    else
-                        player:messageSpecial(xi.msg.basic.KEYITEM_OBTAINED, item)
-                    end
-                end
-
-                if debugOut == debugMode.PLAYER then
-                    player:PrintToPlayer(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
-                else
-                    print(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2))
-                end
+            if debug.ENABLED then
+                debugInfo(player, item, list, option, altIDs, idx)
             else
                 if keyItems == 0 then
                     if npcUtil.giveItem(player, item) then
