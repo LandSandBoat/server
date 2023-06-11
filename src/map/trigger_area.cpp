@@ -68,6 +68,8 @@ namespace
     {
         // NOTE: In order to make this easier, we're going to treat the cylinder as if it's a cuboid!
         // TODO: Look up the maths for this and do it properly!
+        ShowInfo("Using CuboidCuboidIntersect for CuboidCylinderIntersect test");
+
         float xMin = b->xPos - b->radius;
         float yMin = std::numeric_limits<float>::min();
         float zMin = b->zPos - b->radius;
@@ -85,29 +87,47 @@ namespace
     {
         // clang-format off
         auto distance = std::sqrt(std::pow(a->xPos - b->xPos, 2) +
-                                   std::pow(a->zPos - b->zPos, 2));
+                                  std::pow(a->zPos - b->zPos, 2));
         return distance <= (a->radius + b->radius);
         // clang-format on
     }
 
     bool SphereCuboidIntersect(CSphericalTriggerArea const* a, CCuboidTriggerArea const* b)
     {
-        ShowWarning("SphereCuboidIntersect not implemented");
-        return false;
+        // NOTE: In order to make this easier, we're going to treat the sphere as if it's a cuboid!
+        // TODO: Look up the maths for this and do it properly!
+        ShowInfo("Using CuboidCuboidIntersect for SphereCuboidIntersect test");
+
+        float xMin = a->xPos - a->radius;
+        float yMin = a->yPos - a->radius;
+        float zMin = a->zPos - a->radius;
+
+        float xMax = a->xPos + a->radius;
+        float yMax = a->yPos + a->radius;float>::max();
+        float zMax = a->zPos + a->radius;
+
+        CCuboidTriggerArea tempCuboid(a->GetTriggerAreaID(), xMin, yMin, zMin, xMax, yMax, zMax);
+
+        return CuboidCuboidIntersect(&tempCuboid, b);
     }
 
     bool SphereCylinderIntersect(CSphericalTriggerArea const* a, CCylindricalTriggerArea const* b)
     {
-        ShowWarning("SphereCylinderIntersect not implemented");
-        return false;
+        // NOTE: In order to make this easier, we're going to treat the sphere as if it's a cylinder!
+        // TODO: Look up the maths for this and do it properly!
+        ShowInfo("Using CylinderCylinderIntersect for SphereCylinderIntersect test");
+
+        CCylindricalTriggerArea tempCylinder(a->GetTriggerAreaID(), a->xPos, a->zPos, a->radius);
+
+        return CylinderCylinderIntersect(&tempCylinder, b);
     }
 
     bool SphereSphereIntersect(CSphericalTriggerArea const* a, CSphericalTriggerArea const* b)
     {
         // clang-format off
         auto distance = std::sqrt(std::pow(a->xPos - b->xPos, 2) +
-                                   std::pow(a->yPos - b->yPos, 2) +
-                                   std::pow(a->zPos - b->zPos, 2));
+                                  std::pow(a->yPos - b->yPos, 2) +
+                                  std::pow(a->zPos - b->zPos, 2));
         return distance <= (a->radius + b->radius);
         // clang-format on
     }
