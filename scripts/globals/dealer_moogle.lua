@@ -2496,13 +2496,33 @@ local itemList =
             xi.items.KUPO_SHIELD,
         },
     },
-    --[[
-    -- Kupon W-EMI: iLevel 117 Sparks of Eminence Weapons
+    -- Kupon W-EMI: iLevel 117 Sparks of Eminence Weapons (MOG_KUPON_W_EMI = 9188)
     [46] =
     {
-
+        xi.items.EMINENT_BAGHNAKHS,
+        xi.items.EMINENT_DAGGER,
+        xi.items.EMINENT_SCIMITAR,
+        xi.items.EMINENT_SWORD,
+        xi.items.EMINENT_AXE,
+        xi.items.EMINENT_VOULGE,
+        xi.items.EMINENT_SICKLE,
+        xi.items.EMINENT_LANCE,
+        xi.items.KAITSUBURI,
+        xi.items.ICHIMONJI_YOFUSA,
+        xi.items.EMINENT_WAND,
+        xi.items.EMINENT_STAFF,
+        xi.items.EMINENT_POLE,
+        xi.items.EMINENT_BOW,
+        xi.items.EMINENT_CROSSBOW,
+        xi.items.EMINENT_GUN,
+        xi.items.EMINENT_SHIELD,
+        xi.items.EMINENT_ANIMATOR,
+        xi.items.EMINENT_SACHET,
+        xi.items.EMINENT_BELL,
+        xi.items.EMINENT_FLUTE,
+        xi.items.EMINENT_ANIMATOR_II,
     },
-
+    --[[
     -- Kupon A-EMI: iLevel 117 Records of Eminence armor
     [47] =
     {
@@ -2695,7 +2715,7 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         local itemID    = itemList[list][idxAlt1][idxAlt2][1]       -- Extract the base itemID (F) from the index
         local modifier  = itemList[list][idxAlt1][idxAlt2][2] or 0  -- Extract the base shift value from the index (typically 1 or 2)
 
-        item = itemID - ( gender * modifier ) -- Generate the actual itemID by subtracting the shift value from the base itemID
+        item = itemID - (gender * modifier) -- Generate the actual itemID by subtracting the shift value from the base itemID
     else
         item = itemList[list][idx]
     end
