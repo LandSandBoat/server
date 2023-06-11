@@ -53,7 +53,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS or
+            (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS or
             xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS, 'Option') > 0)
         end,
 
