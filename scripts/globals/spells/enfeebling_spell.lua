@@ -50,9 +50,9 @@ local pTable =
     [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
     [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
     [xi.magic.spell.SLEEP        ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_II,           xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
+    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
     [xi.magic.spell.SLEEPGA      ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_II,           xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
+    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
     [xi.magic.spell.STUN         ] = { xi.effect.STUN,               xi.mod.INT,     xi.mod.STUNRES,     xi.mod.STUN_MEVA,        1,   0,        5,      4,   0,        8, false,     false,   200 },
     [xi.magic.spell.VIRUS        ] = { xi.effect.PLAGUE,             xi.mod.INT,     xi.mod.VIRUSRES,    xi.mod.VIRUS_MEVA,       5,   3,       60,      2,   0,        0, false,     false,     0 },
 

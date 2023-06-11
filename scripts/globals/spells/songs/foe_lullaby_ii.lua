@@ -12,17 +12,15 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local duration = 60
-    -- local pCHR = caster:getStat(xi.mod.CHR)
-    -- local mCHR = target:getStat(xi.mod.CHR)
-    -- local dCHR = pCHR - mCHR
-    local params = {}
-    params.diff = nil
+    local params     = {}
+    params.diff      = nil
     params.attribute = xi.mod.CHR
     params.skillType = xi.skill.SINGING
-    params.bonus = 0
-    params.effect = xi.effect.LULLABY
-    local resm = applyResistanceEffect(caster, target, spell, params)
+    params.bonus     = 0
+    params.effect    = xi.effect.SLEEP_I
+
+    local resm     = applyResistanceEffect(caster, target, spell, params)
+    local duration = 60
 
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
@@ -35,14 +33,14 @@ spellObject.onSpellCast = function(caster, target, spell)
             duration = duration * 2
         end
 
-        if target:addStatusEffect(xi.effect.LULLABY, 1, 0, duration) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+        if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     end
 
-    return xi.effect.LULLABY
+    return xi.effect.SLEEP_I
 end
 
 return spellObject
