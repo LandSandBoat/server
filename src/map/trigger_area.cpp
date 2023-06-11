@@ -84,8 +84,8 @@ namespace
     bool CylinderCylinderIntersect(CCylindricalTriggerArea const* a, CCylindricalTriggerArea const* b)
     {
         // clang-format off
-        auto distance = std::sqrtf(std::powf(a->xPos - b->xPos, 2) +
-                                   std::powf(a->zPos - b->zPos, 2));
+        auto distance = std::sqrt(std::pow(a->xPos - b->xPos, 2) +
+                                   std::pow(a->zPos - b->zPos, 2));
         return distance <= (a->radius + b->radius);
         // clang-format on
     }
@@ -105,9 +105,9 @@ namespace
     bool SphereSphereIntersect(CSphericalTriggerArea const* a, CSphericalTriggerArea const* b)
     {
         // clang-format off
-        auto distance = std::sqrtf(std::powf(a->xPos - b->xPos, 2) +
-                                   std::powf(a->yPos - b->yPos, 2) +
-                                   std::powf(a->zPos - b->zPos, 2));
+        auto distance = std::sqrt(std::pow(a->xPos - b->xPos, 2) +
+                                   std::pow(a->yPos - b->yPos, 2) +
+                                   std::pow(a->zPos - b->zPos, 2));
         return distance <= (a->radius + b->radius);
         // clang-format on
     }
@@ -270,9 +270,9 @@ CSphericalTriggerArea::CSphericalTriggerArea(uint32 _triggerAreaID, float _xPos,
 
 bool CSphericalTriggerArea::IsPointInside(float x, float y, float z) const
 {
-    float xAbs = std::powf(x - xPos, 2);
-    float yAbs = std::powf(y - yPos, 2);
-    float zAbs = std::powf(z - zPos, 2);
+    float xAbs = std::pow(x - xPos, 2);
+    float yAbs = std::pow(y - yPos, 2);
+    float zAbs = std::pow(z - zPos, 2);
     return (xAbs + yAbs + zAbs) <= radius;
 }
 
