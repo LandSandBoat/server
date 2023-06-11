@@ -2215,13 +2215,88 @@ local itemList =
         xi.items.APEILE_RING_P1,
         xi.items.SHINJUTSU_NO_OBI_P1,
     },
-    --[[
-    -- Kupon A-Ab: iLevel 119 P1 Abjuration Armor pieces
+    -- Kupon A-Ab: iLevel 119 P1 Abjuration Armor Sets (MOG_KUPON_A_AB = 9178)
     [43] =
     {
-
+        {
+            xi.items.ARGOSY_CELATA_P1,
+            xi.items.ARGOSY_HAUBERK_P1,
+            xi.items.ARGOSY_MUFFLERS_P1,
+            xi.items.ARGOSY_BREECHES_P1,
+            xi.items.ARGOSY_SOLLERETS_P1,
+        },
+        {
+            xi.items.ADHEMAR_BONNET_P1,
+            xi.items.ADHEMAR_JACKET_P1,
+            xi.items.ADHEMAR_WRISTBANDS_P1,
+            xi.items.ADHEMAR_KECKS_P1,
+            xi.items.ADHEMAR_GAMASHES_P1,
+        },
+        {
+            xi.items.APOGEE_CROWN_P1,
+            xi.items.APOGEE_DALMATICA_P1,
+            xi.items.APOGEE_MITTS_P1,
+            xi.items.APOGEE_SLACKS_P1,
+            xi.items.APOGEE_PUMPS_P1,
+        },
+        {
+            xi.items.AMALRIC_COIF_P1,
+            xi.items.AMALRIC_DOUBLET_P1,
+            xi.items.AMALRIC_GAGES_P1,
+            xi.items.AMALRIC_SLOPS_P1,
+            xi.items.AMALRIC_NAILS_P1,
+        },
+        {
+            xi.items.EMICHO_CORONET_P1,
+            xi.items.EMICHO_HAUBERT_P1,
+            xi.items.EMICHO_GAUNTLETS_P1,
+            xi.items.EMICHO_HOSE_P1,
+            xi.items.EMICHO_GAMBIERAS_P1,
+        },
+        {
+            xi.items.CARMINE_MASK_P1,
+            xi.items.CARMINE_SCALE_MAIL_P1,
+            xi.items.CARMINE_FINGER_GAUNTLETS_P1,
+            xi.items.CARMINE_CUISSES_P1,
+            xi.items.CARMINE_GREAVES_P1,
+        },
+        {
+            xi.items.KAYKAUS_MITRA_P1,
+            xi.items.KAYKAUS_BLIAUT_P1,
+            xi.items.KAYKAUS_CUFFS_P1,
+            xi.items.KAYKAUS_TIGHTS_P1,
+            xi.items.KAYKAUS_BOOTS_P1,
+        },
+        {
+            xi.items.SOUVERAN_SCHALLER_P1,
+            xi.items.SOUVERAN_CUIRASS_P1,
+            xi.items.SOUVERAN_HANDSCHUHS_P1,
+            xi.items.SOUVERAN_DIECHLINGS_P1,
+            xi.items.SOUVERAN_SCHUHS_P1,
+        },
+        {
+            xi.items.LUSTRATIO_CAP_P1,
+            xi.items.LUSTRATIO_HARNESS_P1,
+            xi.items.LUSTRATIO_MITTENS_P1,
+            xi.items.LUSTRATIO_SUBLIGAR_P1,
+            xi.items.LUSTRATIO_LEGGINGS_P1,
+        },
+        {
+            xi.items.RAO_KABUTO_P1,
+            xi.items.RAO_TOGI_P1,
+            xi.items.RAO_KOTE_P1,
+            xi.items.RAO_HAIDATE_P1,
+            xi.items.RAO_SUNE_ATE_P1,
+        },
+        {
+            xi.items.RYUO_SOMEN_P1,
+            xi.items.RYUO_DOMARU_P1,
+            xi.items.RYUO_TEKKO_P1,
+            xi.items.RYUO_HAKAMA_P1,
+            xi.items.RYUO_SUNE_ATE_P1,
+        },
     },
-
+    --[[
     -- Kupon AW-Cos: Various Costumes
     [44] =
     {
