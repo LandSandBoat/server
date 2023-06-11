@@ -444,6 +444,10 @@ xi.dynamis.mobList[zoneID][1].wave =
     25, -- (025-G) Goblin Replica
     26, -- (026-G) Goblin Replica
     27, -- (027-G) Goblin Replica
+    28, -- (028-G) Goblin Replica
+    29, -- (029-G) Goblin Replica
+    30, -- (030-G) Goblin Replica
+    31, -- (031-G) Goblin Replica
     32, -- (032-G) Goblin Replica
     33, -- (033-G) Goblin Replica
     34, -- (034-G) Goblin Replica
@@ -623,7 +627,6 @@ xi.dynamis.mobList[zoneID][70 ].mobchildren = {   1, nil, nil,   1,   1, nil, ni
 -- boolean value = forceLink true/false
 
 -- Wave 1
-xi.dynamis.mobList[zoneID][64 ].nmchildren = { true, 28, 29, 30, 31        } -- ( 064 ) Gigas NM (Antaeus) (Spawns 065-138)
 xi.dynamis.mobList[zoneID][51 ].nmchildren = { true, 244, 245, 246         } -- ( 051 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][52 ].nmchildren = { true, 247, 248, 249         } -- ( 052 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][53 ].nmchildren = { true, 250, 251, 252         } -- ( 053 ) Nightmare Stirge (×4)

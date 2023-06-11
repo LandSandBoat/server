@@ -198,13 +198,6 @@ end
 -----------------------------------
 -- Variable for addTeleport and getRegionPoint
 -----------------------------------
-LEUJAOAM_ASSAULT_POINT   = 0
-MAMOOL_ASSAULT_POINT     = 1
-LEBROS_ASSAULT_POINT     = 2
-PERIQIA_ASSAULT_POINT    = 3
-ILRUSI_ASSAULT_POINT     = 4
-NYZUL_ISLE_ASSAULT_POINT = 5
-
 xi.besieged.addRunicPortal = function(player, portal)
     player:addTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
 end

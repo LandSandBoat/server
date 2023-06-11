@@ -51,15 +51,20 @@ enum DROP_TYPE
 struct DropItem_t
 {
     DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate);
+    DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate, bool hasFixedRate);
     uint8  DropType;
     uint16 ItemID;
     uint16 DropRate;
+    bool   hasFixedRate;
 };
 
 struct DropGroup_t
 {
     DropGroup_t(uint16 GroupRate);
+    DropGroup_t(uint16 GroupRate, bool hasFixedRate);
+
     uint16                  GroupRate;
+    bool                    hasFixedRate;
     std::vector<DropItem_t> Items;
 };
 
@@ -77,6 +82,18 @@ struct LootItem_t
 };
 
 typedef std::vector<LootItem_t> LootList_t;
+
+struct LootContainer
+{
+    LootContainer(DropList_t* dropList);
+    DropList_t drops;
+
+    void ForEachGroup(const std::function<void(const DropGroup_t&)>& func);
+    void ForEachItem(const std::function<void(const DropItem_t&)>& func);
+
+private:
+    DropList_t* dropList;
+};
 
 /************************************************************************
  *                                                                       *

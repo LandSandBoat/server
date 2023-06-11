@@ -24,6 +24,8 @@ zones[xi.zone.FEIYIN] =
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7202,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7239,  -- You can't fish here.
         CHEST_UNLOCKED                     = 7370,  -- You unlock the chest!
+        CONSPICUOUSLY_EVIL_PRESENCE        = 7410,  -- You feel a conspicuously evil presence.
+        ITS_FINALLY_OVER                   = 7412,  -- It is finally...over... Ahh... I can... I can see... Tavnazia... The land of wind...and light... My... My home...!
         SOFTLY_SHIMMERING_LIGHT            = 7496,  -- You see a softly shimmering light...
         YOU_REACH_OUT_TO_THE_LIGHT         = 7497,  -- You reach out to the light, and one facet of a curious seed-shaped emblem materializes on the back of your hand. It emanates an otherworldly [red/orange/yellow/green/cerulean/blue/golden/silver/white] radiance.
         THE_LIGHT_DWINDLES                 = 7498,  -- However, the light dwindles and grows dim almost at once...
@@ -59,19 +61,19 @@ zones[xi.zone.FEIYIN] =
         },
         NORTHERN_SHADOW_PH  =
         {
-            [17613098] = 17613102, -- -159.000 -16.000 146.000
+            [17613098] = 17613102,
         },
         EASTERN_SHADOW_PH   =
         {
-            [17613107] = 17613109, -- -86.000 -15.000 152.000
+            [17613107] = 17613109,
         },
         SOUTHERN_SHADOW_PH  =
         {
-            [17613117] = 17613120, -- -169.000 -16.000 87.000
+            [17613117] = 17613120,
         },
         WESTERN_SHADOW_PH   =
         {
-            [17613094] = 17613095, -- -204.000 -15.000 118.000
+            [17613094] = 17613095,
         },
         ALTEDOUR_I_TAVNAZIA = 17612836,
         MISER_MURPHY        = 17612849,

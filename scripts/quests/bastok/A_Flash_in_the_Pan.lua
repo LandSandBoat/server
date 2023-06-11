@@ -69,6 +69,12 @@ quest.sections =
                         GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', os.time() + 900)
                     end
                 end,
+
+                [218] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:confirmTrade(false)
+                    end
+                end,
             },
         },
     },

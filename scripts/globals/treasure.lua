@@ -292,7 +292,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and
-                                player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(13121)
+                                player:getCharVar("Quest[3][61]Prog") == 1 and not player:hasItem(xi.items.BEAST_COLLAR) -- BST AF2
                         end,
 
                         code = function(player)
@@ -1022,9 +1022,9 @@ xi.treasure.treasureInfo =
                     { -139.729,  -71.750,  -53.252,  63 },
                     { -100.197,  -72.511,  -13.141,  65 },
                 },
-                gil = { 0.652, 7320, 18000 },
+                gil = { 0.752, 7320, 18000 },
                 gem = { 0.044, 791, 801, 810, 784, 802, 797, 803, 805 },
-                item = { 0.304, 14670 },
+                item = { 0.204, 14670, 13548 },
             },
 
             [xi.zone.THE_BOYAHDA_TREE] = -- 153
@@ -1130,7 +1130,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getCharVar("UnderOathCS") == 3
+                            return player:getCharVar("Quest[0][92]Prog") == 3
                         end,
 
                         code = function(player)
@@ -1213,7 +1213,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and
-                                player:getCharVar("trueWillCS") == 2 and
+                                player:getCharVar("Quest[5][145]Prog") == 2 and
                                 not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX)
                         end,
 
@@ -1677,6 +1677,8 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     -- illusion: do not consume tool, and relocate chest after short delay
     if os.time() < illusionCooldown then
         player:messageSpecial(msgBase + 6)
+        player:PrintToPlayer("You discern that the illusion will remain for " .. tostring(math.floor(((illusionCooldown - os.time()) / 60))) .. " minutes.", xi.msg.channel.NS_SAY)
+        player:tradeComplete(false)
         moveChest(npc, zoneId, chestType)
         return
     end
@@ -1709,8 +1711,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         local gilAmount = math.random(info.gil[2], info.gil[3])
         local gil = gilAmount / #membersInZone
         for i = 1, #membersInZone do
-            membersInZone[i]:addGil(gil)
-            membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)
+            npcUtil.giveCurrency(membersInZone[i], 'gil', gil)
         end
 
     -- gem

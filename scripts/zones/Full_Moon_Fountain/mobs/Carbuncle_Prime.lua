@@ -32,14 +32,14 @@ local spawnPrime = function(mob, target)
 
         -- Assure the same avatar isn't summoned more than once
         while control do
-            local random = math.random(2,7)
+            local random = math.random(2, 7)
 
             if bf:getLocalVar(avatars[random]) == 0 then
                 bf:setLocalVar(avatars[random], 1)
                 local prime = ID.primes[random][bf:getArea()]
 
                 SpawnMob(prime):updateEnmity(target)
-                GetMobByID(prime):setPos(pos.x + math.random(-3,3), pos.y, pos.z + math.random(-3, 3), pos.rot)
+                GetMobByID(prime):setPos(pos.x + math.random(-3, 3), pos.y, pos.z + math.random(-3, 3), pos.rot)
                 control = false
             end
         end
@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, target)
     if hp < 10 and bf:getLocalVar("2hrControl") == 0 then
         bf:setLocalVar("2hrControl", 1)
         for i = 0, 4 do
-            local carby = GetMobByID(ID.primes[1][bf:getArea()]+i)
+            local carby = GetMobByID(ID.primes[1][bf:getArea()] + i)
 
             if carby:isAlive() then
                 carby:useMobAbility(912)
@@ -90,6 +90,25 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    local bf = mob:getBattlefield()
+    local flag = true
+
+    for i = 0, 4 do
+        local carby = GetMobByID(ID.primes[1][bf:getArea()] + i)
+
+        if carby:isAlive() then
+            flag = false
+        end
+    end
+
+    -- Only complete the battlefield if the final carbuncle is killed in phase 4
+    if
+        bf:getLocalVar("phase") >= 4 and
+        optParams.isKiller and
+        flag
+    then
+        bf:setLocalVar("lootSpawned", 0)
+    end
 end
 
 return entity

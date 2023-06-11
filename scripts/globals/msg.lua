@@ -217,21 +217,22 @@ xi.msg.basic =
     EATS_FINDS_NOTHING      = 604,  -- <actor> eats a <item>, but finds nothing inside...
 
     -- Items
-    ITEM_USES               = 28,   -- <actor> uses a <item>.
-    ITEM_UNABLE_TO_USE      = 55,   -- Unable to use item.
-    ITEM_UNABLE_TO_USE_2    = 56,   -- Unable to use item.
-    ITEM_FAILS_TO_ACTIVATE  = 62,   -- The <item> fails to activate.
-    ITEM_NO_PETRAS          = 65,   -- You are not carrying any Petras.<br>You cannot use the <item>.
-    ITEM_DOES_NOT_HAVE      = 91,   -- <actor> does not have any <item>.
-    ITEM_CANNOT_USE_ON      = 92,   -- Cannot use the <item> on <target>.
-    ITEM_YOU_OBTAIN_FROM    = 98,   -- You obtain a <item> from <target>.
-    ITEM_NO_USE_LEVEL       = 104,  -- Unable to use item.<br>You do not meet the level requirement.
-    ITEM_NO_USE_MEDICATED   = 111,  -- You cannot use <item> while medicated.
-    ITEM_NO_USE_INVENTORY   = 308,  -- Unable to use the <item>.<br><target>'s inventory is full.
-    ITEM_RECEIVES_EFFECT    = 375,  -- <actor> uses a <item>.<br><target> receives the effect of <status>.
-    ITEM_OBTAINS_A          = 376,  -- <actor> uses a <item>.<br><target> obtains a <item2>.
-    ITEM_OBTAINS            = 377,  -- <actor> uses a <item>.<br><target> obtains <item2>.
-    ITEM_EFFECT_DISAPPEARS  = 378,  -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
+    ITEM_USES                       = 28,  -- <actor> uses a <item>.
+    ITEM_UNABLE_TO_USE              = 55,  -- Unable to use item.
+    ITEM_UNABLE_TO_USE_2            = 56,  -- Unable to use item.
+    ITEM_FAILS_TO_ACTIVATE          = 62,  -- The <item> fails to activate.
+    ITEM_NO_PETRAS                  = 65,  -- You are not carrying any Petras.<br>You cannot use the <item>.
+    ITEM_DOES_NOT_HAVE              = 91,  -- <actor> does not have any <item>.
+    ITEM_CANNOT_USE_ON              = 92,  -- Cannot use the <item> on <target>.
+    ITEM_YOU_OBTAIN_FROM            = 98,  -- You obtain a <item> from <target>.
+    ITEM_NO_USE_LEVEL               = 104, -- Unable to use item.<br>You do not meet the level requirement.
+    ITEM_NO_USE_MEDICATED           = 111, -- You cannot use <item> while medicated.
+    ITEM_NO_USE_INVENTORY           = 308, -- Unable to use the <item>.<br><target>'s inventory is full.
+    ITEM_RECEIVES_EFFECT            = 375, -- <actor> uses a <item>.<br><target> receives the effect of <status>.
+    ITEM_OBTAINS_A                  = 376, -- <actor> uses a <item>.<br><target> obtains a <item2>.
+    ITEM_OBTAINS                    = 377, -- <actor> uses a <item>.<br><target> obtains <item2>.
+    ITEM_EFFECT_DISAPPEARS          = 378, -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
+    ITEM_UNABLE_TO_USE_PARTY_LEADER = 580, -- Unable to use <item>. The party leader is in either an area beyond warping range or a place you have yet to visit.
 
     -- Ranged
     NO_RANGED_WEAPON       = 216, -- You do not have an appropriate ranged weapon equipped.
@@ -239,7 +240,7 @@ xi.msg.basic =
     MOVE_AND_INTERRUPT     = 218, -- You move and interrupt your aim.
 
     -- Additional effects and spike effects
-    SPIKES_EFFECT_DMG      = 44 , -- <Defender>'s spikes deal <number> points of damage to the <Attacker>.
+    SPIKES_EFFECT_DMG      = 44,  -- <Defender>'s spikes deal <number> points of damage to the <Attacker>.
     SPIKES_EFFECT_HP_DRAIN = 132, -- <Defender>'s spikes drain <number> HP from the <Attacker>.
     ADD_EFFECT_MP_HEAL     = 152, -- Additional effect: The <player> recovers <number> MP.
     ADD_EFFECT_STATUS      = 160, -- Additional effect: <Status Effect>.
@@ -386,3 +387,47 @@ xi.msg.system =
     TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
     TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }
+
+-----------------------------------
+-- Sends Contextual Debug Messages to Player if enabled
+-----------------------------------
+
+xi.msg.debug = function(target, msg, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if channel == nil then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        target:PrintToPlayer(msg, channel)
+    end
+end
+
+-----------------------------------
+-- Sends Contextual Debug Messages to Player if enabled
+-----------------------------------
+
+xi.msg.debugValue = function(target, var, value, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if channel == nil then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        target:PrintToPlayer(string.format("%s = %s", var, value), channel)
+    end
+end
+
+-----------------------------------
+-- Send Contextual Debug Messages given a table to the Player if enabled
+-----------------------------------
+
+xi.msg.debugTable = function(target, tbl, channel)
+    if target:getLocalVar("enableDebugPrint") == 1 then
+        if not channel then
+            channel = xi.msg.channel.SYSTEM_3
+        end
+
+        for key, value in pairs(tbl) do
+            target:PrintToPlayer(string.format("%s = %s", key, value), xi.msg.channel.SYSTEM_3)
+        end
+    end
+end

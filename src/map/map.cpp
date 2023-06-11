@@ -42,6 +42,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mob_spell_list.h"
 #include "packet_guard.h"
 #include "packet_system.h"
+#include "packets/downloading_data.h"
+#include "packets/stop_downloading.h"
+#include "packets/zone_in.h"
+#include "packets/zone_visited.h"
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -53,10 +57,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "ai/controllers/automaton_controller.h"
 #include "daily_system.h"
+#include "latent_effect_container.h"
 #include "packets/basic.h"
 #include "packets/chat_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "utils/fellowutils.h"
 #include "utils/fishingutils.h"
 #include "utils/gardenutils.h"
 #include "utils/guildutils.h"
@@ -170,6 +176,10 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
 
+    if (port == 0)
+    {
+        ShowDebug("WARNING: Attempting to create session on port 0!");
+    }
     auto ipstr    = ip2str(map_session_data->client_addr);
     auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1;", ipstr);
 
@@ -264,7 +274,9 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadMobSkillsList();
     battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
+    battleutils::LoadDistanceCorrection();
     petutils::LoadPetList();
+    fellowutils::LoadFellowList();
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
     jobpointutils::LoadGifts();
@@ -274,6 +286,7 @@ int32 do_init(int32 argc, char** argv)
     ShowInfo("do_init: loading zones");
     zoneutils::LoadZoneList();
 
+    fellowutils::LoadFellowMessages();
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
@@ -342,7 +355,13 @@ int32 do_init(int32 argc, char** argv)
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
             fmt::format("You have been set to GM level {}.", level), ""));
+    });
 
+    gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("Reloading settings files\n");
+        settings::init();
     });
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
@@ -511,7 +530,7 @@ int32 do_sockets(fd_set* rfd, duration next)
 
             if (map_session_data == nullptr)
             {
-                map_session_data = mapsession_createsession(ip, ntohs(from.sin_port));
+                map_session_data = mapsession_createsession(ip, port);
                 if (map_session_data == nullptr)
                 {
                     map_session_list.erase(ipp);
@@ -727,7 +746,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         SmallPD_Size = (ref<uint8>(SmallPD_ptr, 1) & 0x0FE);
         SmallPD_Type = (ref<uint16>(SmallPD_ptr, 0) & 0x1FF);
 
-        if (PacketSize[SmallPD_Type] == SmallPD_Size || PacketSize[SmallPD_Type] == 0) // Tests incoming packets for the correct size prior to processing
+        if (PacketSize[SmallPD_Type] == SmallPD_Size || PacketSize[SmallPD_Type] == 0 || (SmallPD_Type == 0x04B && SmallPD_Size == 0x18)) // Tests incoming packets for the correct size prior to processing
         {
             // Google Translate:
             // if the code of the current package is less than or equal to the last received
@@ -776,6 +795,19 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                         SmallPD_Size, PChar->GetName());
         }
     }
+
+    if (PChar->retriggerLatentsAfterPacketParsing)
+    {
+        for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
+        {
+            if (PChar->equip[equipSlotID] != 0)
+            {
+                PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
+            }
+        }
+        PChar->retriggerLatentsAfterPacketParsing = false; // reset for next packet parse
+    }
+
     map_session_data->client_packet_id = SmallPD_Code;
 
     // Google Translate:
@@ -784,6 +816,15 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     if (ref<uint16>(buff, 2) != map_session_data->server_packet_id)
     {
+        /**
+         * If the client and server have become out of sync, then caching takes place. However, caching
+         * zone packets will result in the client never properly connecting. Ignore those specifically.
+         */
+        if (SmallPD_Type == 0x0A)
+        {
+            return 0;
+        }
+
         ref<uint16>(map_session_data->server_packet_data, 2) = SmallPD_Code;
         ref<uint16>(map_session_data->server_packet_data, 8) = (uint32)time(nullptr);
 
@@ -793,8 +834,6 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         map_session_data->server_packet_data = buff;
         return -1;
     }
-
-    // GT: increase the number of the sent packet only if new data is sent
 
     map_session_data->server_packet_id += 1;
 
@@ -1003,11 +1042,13 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
     {
         map_session_data_t* map_session_data = it->second;
 
-        CCharEntity* PChar = map_session_data->PChar;
+        CCharEntity* PChar       = map_session_data->PChar;
+        time_t       currentTime = time(nullptr);
+        time_t       timeDelta   = currentTime - map_session_data->last_update;
 
-        if ((time(nullptr) - map_session_data->last_update) > 5)
+        if (timeDelta > 8) // Originally 5s.  Added 3s to allow for zone lag on busy server
         {
-            if (PChar != nullptr && !(PChar->nameflags.flags & FLAG_DC))
+            if (PChar && !(PChar->nameflags.flags & FLAG_DC))
             {
                 PChar->nameflags.flags |= FLAG_DC;
                 PChar->updatemask |= UPDATE_HP;
@@ -1016,49 +1057,68 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     PChar->loc.zone->SpawnPCs(PChar);
                 }
             }
-            if ((time(nullptr) - map_session_data->last_update) > settings::get<uint16>("map.MAX_TIME_LASTUPDATE"))
+
+            if (timeDelta > settings::get<uint16>("map.MAX_TIME_LASTUPDATE"))
             {
-                if (PChar != nullptr)
+                // Session has exceed the max allowable time for no-transmission on this server
+                // Need to determine whether to terminate the session (Delete from DB) or
+                // Transfer it to another map server (Kill session, leave in DB)
+                if (PChar)
                 {
+                    // Check if the PChar current zone is on this server
+                    // Returns true if the player's zone is > 0 and not in the current server's g_PZoneList
+                    bool otherMap = (PChar->loc.zone && PChar->loc.zone->GetID() && (g_PZoneList.find(PChar->loc.zone->GetID()) == g_PZoneList.end()));
+
                     if (map_session_data->shuttingDown == 0)
                     {
-                        // [Alliance] fix to stop server crashing:
-                        // if a party within an alliance only has 1 char (that char will be party leader)
-                        // if char then disconnects we need to tell the server about the alliance change
-                        if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
+                        // shuttingDown == 0 means the player did not actually opt to close down from the menu, and is not zoning
+                        if (!otherMap)
                         {
-                            if (PChar->PParty->HasOnlyOneMember())
+                            // Player is on this server, but session hasn't been active in 60s or more
+                            if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
                             {
-                                if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
+                                // [Alliance] fix to stop server crashing:
+                                // if a party within an alliance only has 1 char (that char will be party leader)
+                                // if char then disconnects we need to tell the server about the alliance change
+                                if (PChar->PParty->HasOnlyOneMember())
                                 {
-                                    PChar->PParty->m_PAlliance->dissolveAlliance();
-                                }
-                                else
-                                {
-                                    PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
+                                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
+                                    {
+                                        PChar->PParty->m_PAlliance->dissolveAlliance();
+                                    }
+                                    else
+                                    {
+                                        PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
+                                    }
                                 }
                             }
+
+                            // uncharm pet if player d/c
+                            if (PChar->PPet && PChar->PPet->objtype == TYPE_MOB)
+                            {
+                                petutils::DespawnPet(PChar);
+                            }
+
+                            PChar->StatusEffectContainer->SaveStatusEffects(true, false);
+                            charutils::SaveCharPosition(PChar);
+
+                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
+
+                            PChar->status = STATUS_TYPE::SHUTDOWN;
+                            PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
                         }
-
-                        // uncharm pet if player d/c
-                        if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
-                        {
-                            petutils::DespawnPet(PChar);
-                        }
-
-                        PChar->StatusEffectContainer->SaveStatusEffects(true, false);
-                        charutils::SaveCharPosition(PChar);
-
-                        ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
-
-                        PChar->status = STATUS_TYPE::SHUTDOWN;
-                        PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
                     }
                     else
                     {
-                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true, false);
-                        sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        // shuttingDown == 1 (logout) or 2 (zoning).  Either way, we haven't heard from them, so it's time to drop them from this session
+                        if (!otherMap)
+                        {
+                            // Player session is attached to this cluster, and has stopped responding.  DC them.
+                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true, false);
+                            sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        }
 
+                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
                         destroy_arr(map_session_data->server_packet_data);
                         destroy(map_session_data->PChar);
                         destroy(map_session_data);
@@ -1069,10 +1129,11 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
                 else if (map_session_data->shuttingDown == 0)
                 {
-                    ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
+                    // Session dead, and no PChar data attached to the session.
+                    ShowWarning("map_cleanup: WITHOUT CHAR timed out, session closed");
 
-                    const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
+                    const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u AND server_port = %u";
+                    sql->Query(Query, map_session_data->client_addr, map_session_data->client_port, map_port);
 
                     destroy_arr(map_session_data->server_packet_data);
                     map_session_list.erase(it++);
@@ -1081,7 +1142,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
             }
         }
-        else if (PChar != nullptr && (PChar->nameflags.flags & FLAG_DC))
+        else if (PChar && (PChar->nameflags.flags & FLAG_DC))
         {
             PChar->nameflags.flags &= ~FLAG_DC;
             PChar->updatemask |= UPDATE_HP;

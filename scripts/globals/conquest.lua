@@ -599,9 +599,9 @@ local crystals =
 
 local expRings =
 {
-    [xi.items.CHARIOT_BAND] = { cp = 350, charges = 7 },
-    [xi.items.EMPRESS_BAND] = { cp = 700, charges = 7 },
-    [xi.items.EMPEROR_BAND] = { cp = 600, charges = 3 },
+    [xi.items.CHARIOT_BAND] = { cp = 350, charges = 7, costPerCharge = 50 },
+    [xi.items.EMPRESS_BAND] = { cp = 700, charges = 7, costPerCharge = 100 },
+    [xi.items.EMPEROR_BAND] = { cp = 600, charges = 3, costPerCharge = 200 },
 }
 
 local function conquestRanking()
@@ -1110,16 +1110,29 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                 player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
             then
                 local ring = expRings[item]
+                local cpCost = ring.cp
+                local chargesSpent = ring.charges
+
+                local ringItem = player:findItem(item)
+                if ringItem then
+                    chargesSpent = ring.charges - ringItem:getCurrentCharges()
+                    if
+                        chargesSpent > 0 and
+                        chargesSpent < ring.charges
+                    then
+                        cpCost = chargesSpent * ring.costPerCharge
+                    end
+                end
 
                 if player:getCP() >= ring.cp then
-                    player:delCP(ring.cp)
+                    player:delCP(cpCost)
                     player:confirmTrade()
                     player:addItem(item)
                     player:setCharVar("CONQUEST_RING_RECHARGE", getConquestTally())
-                    player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- "Your ring is now fully recharged."
+                    player:showText(npc, mOffset + 58, item, cpCost, chargesSpent) -- "Your ring is now fully recharged."
                 else
                     player:tradeComplete(false)
-                    player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
+                    player:showText(npc, mOffset + 55, item, cpCost) -- "You do not have the required conquest points to recharge."
                 end
             else
                 -- TODO: Verify that message is retail correct.
@@ -1556,6 +1569,11 @@ xi.conquest.sendConquestTallyEndMessage = function(player, messageBase, owner, r
 end
 
 xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner, ranking, influence, isConquestAlliance)
+    -- don't send regional influence for city zones -- nobody can gain influence here.
+    if owner == 255 then
+        return
+    end
+
     if owner <= 3 then
         player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under <nation> control.
     else
@@ -1587,15 +1605,9 @@ xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner
     end
 end
 
-xi.conquest.onConquestUpdate = function(zone, updatetype)
-    local region             = zone:getRegionID()
-    local influence          = GetRegionInfluence(region)
-    local owner              = GetRegionOwner(region)
-    local players            = zone:getPlayers()
+xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
     local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
-    local ranking            = GetConquestBalance()
-    local isConquestAlliance = IsConquestAlliance()
-
+    local players            = zone:getPlayers()
     -----------------------------------
     -- Once per zone logic
     -----------------------------------
@@ -1617,6 +1629,106 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
         elseif updatetype == conquestConstants.UPDATE then
             xi.conquest.sendConquestTallyUpdateMessage(player, messageBase, owner, ranking, influence, isConquestAlliance)
         end
+    end
+end
+
+-----------------------------------
+-- (IMMIGRATION)
+-----------------------------------
+xi.conquest.immigration = xi.conquest.immigration or {}
+
+xi.conquest.immigration =
+{
+    cost =
+    {
+        [1] = 40000,
+        [2] = 12000,
+        [3] = 4000,
+    },
+
+    cs =
+    {
+        [xi.nation.SANDORIA] =
+        {
+            inTrouble  = 609,
+            sameNation = 608,
+            hasMission = 607,
+            success    = 606,
+        },
+
+        [xi.nation.BASTOK] =
+        {
+            inTrouble  = 363,
+            sameNation = 362,
+            hasMission = 361,
+            success    = 360,
+        },
+
+        [xi.nation.WINDURST] =
+        {
+            inTrouble  = 10005,
+            sameNation = 10004,
+            hasMission = 10003,
+            success    = 10002,
+        },
+
+    }
+}
+
+xi.conquest.immigration.getCost = function(newNation)
+    local nationRank = GetNationRank(newNation)
+    local cost = xi.conquest.immigration.cost[nationRank] or 0 -- Default to maximum
+
+    if nationRank > 1 and IsConquestAlliance() then
+        cost = xi.conquest.immigration.cost[3]
+    end
+
+    return cost
+end
+
+xi.conquest.immigration.onTrigger = function(player, npc, newNation)
+    local oldNation = player:getNation()
+
+    -- Can't change to your current nation
+    if oldNation == newNation then
+        player:startEvent(xi.conquest.immigration.cs[newNation].sameNation, 0, 0, 0, oldNation)
+        return
+    end
+
+    -- Can't have a mission active
+    if
+        player:getCurrentMission(oldNation) ~= xi.mission.id.nation.NONE or
+        player:getMissionStatus(player:getNation()) ~= 0
+    then
+        player:startEvent(xi.conquest.immigration.cs[newNation].hasMission, 0, 0, 0, newNation)
+        return
+    end
+
+    -- Can't be exactly rank 5 (Nation is in trouble)
+    if player:getRank(oldNation) == 5 then
+        player:startEvent(xi.conquest.immigration.cs[newNation].inTrouble, 0, 0, 0, oldNation)
+        return
+    end
+
+    local cost = xi.conquest.immigration.getCost(newNation) or 0
+    local hasGil = player:getGil() >= cost and 1 or 0
+
+    player:startEvent(xi.conquest.immigration.cs[newNation].success, {
+        [1] = 1,
+        [2] = player:getRank(newNation),
+        [3] = newNation,
+        [4] = hasGil,
+        [5] = cost
+    })
+end
+
+xi.conquest.immigration.onEventFinish = function(player, csid, option, newNation)
+    if csid == xi.conquest.immigration.cs[newNation].success and option == 1 then
+        local cost = xi.conquest.immigration.getCost(newNation) or 0
+
+        player:setNation(newNation)
+        player:delGil(cost)
+        player:setRankPoints(0)
     end
 end
 

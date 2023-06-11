@@ -32,6 +32,19 @@ function onBattlefieldHandlerInitialise(zone)
     return default
 end
 
+xi.loot = xi.loot or {}
+
+xi.loot.weight =
+{
+    EXTREMELY_LOW  = 2,
+    VERY_LOW       = 10,
+    LOW            = 30,
+    NORMAL         = 50,
+    HIGH           = 70,
+    VERY_HIGH      = 100,
+    EXTREMELY_HIGH = 140,
+}
+
 xi.battlefield = xi.battlefield or {}
 xi.battlefield.contents = xi.battlefield.contents or {}
 xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
@@ -60,17 +73,6 @@ xi.battlefield.leaveCode =
     WON    = 2,
     WARPDC = 3,
     LOST   = 4
-}
-
-xi.battlefield.dropChance =
-{
-    EXTREMELY_LOW  = 2,
-    VERY_LOW       = 10,
-    LOW            = 30,
-    NORMAL         = 50,
-    HIGH           = 70,
-    VERY_HIGH      = 100,
-    EXTREMELY_HIGH = 140,
 }
 
 xi.battlefield.id =
@@ -1093,7 +1095,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
 
             for _, entry in pairs(lootGroup) do
                 if type(entry) == 'table' then
-                    max = max + entry.droprate
+                    max = max + entry.weight
                 end
             end
 
@@ -1104,25 +1106,24 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                 local current = 0
                 for _, entry in pairs(lootGroup) do
                     if type(entry) == 'table' then
-                        current = current + entry.droprate
+                        current = current + entry.weight
 
-                        if current > roll then
+                        if current >= roll then
                             if entry.itemid == 0 then
                                 break
                             end
 
-                            if entry.itemid == 65535 then
+                            if entry.item == 65535 then
                                 local gil = entry.amount / #players
 
                                 for k = 1, #players, 1 do
-                                    players[k]:addGil(gil)
-                                    players[k]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                    npcUtil.giveCurrency(players[k], 'gil', gil)
                                 end
 
                                 break
                             end
 
-                            players[1]:addTreasure(entry.itemid, npc)
+                            players[1]:addTreasure(entry.item, npc)
                             break
                         end
                     end
@@ -1488,8 +1489,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                                 local gil = entry.amount / #players
 
                                 for j = 1, #players, 1 do
-                                    players[j]:addGil(gil)
-                                    players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                    npcUtil.giveCurrency(players[j], 'gil', gil)
                                 end
 
                                 break

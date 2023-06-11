@@ -367,7 +367,7 @@ bool CMobController::MobSkill(int wsList)
         return false;
     }
 
-    std::shuffle(skillList.begin(), skillList.end(), xirand::mt());
+    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
     CBattleEntity* PActionTarget{ nullptr };
 
     for (auto skillid : skillList)
@@ -793,7 +793,7 @@ void CMobController::Move()
     }
     else if (((currentDistance > attack_range - 0.2f) || move) && PMob->PAI->CanFollowPath())
     {
-        //#TODO: can this be moved to scripts entirely?
+        // #TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN))
         {
             uint8  drawInRange  = PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) : PMob->GetMeleeRange() * 2;
@@ -965,7 +965,7 @@ void CMobController::DoRoamTick(time_point tick)
         Engage(PTarget->targid);
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -1001,6 +1001,44 @@ void CMobController::DoRoamTick(time_point tick)
                 PMob->m_giveExp     = true;
                 PMob->m_ExpPenalty  = 0;
                 PMob->m_UsedSkillIds.clear();
+
+                // check local var to see if mob has built up resistance to any status
+                if (PMob->GetLocalVar("HasStatusResBuild") == 1)
+                {
+                    const std::list<Mod> statusesWithResBuilding = {
+                        Mod::SLEEPRESBUILD,
+                        Mod::LULLABYRESBUILD,
+                        Mod::POISONRESBUILD,
+                        Mod::PARALYZERESBUILD,
+                        Mod::BLINDRESBUILD,
+                        Mod::SILENCERESBUILD,
+                        Mod::VIRUSRESBUILD,
+                        Mod::PETRIFYRESBUILD,
+                        Mod::BINDRESBUILD,
+                        Mod::CURSERESBUILD,
+                        Mod::GRAVITYRESBUILD,
+                        Mod::SLOWRESBUILD,
+                        Mod::STUNRESBUILD,
+                        Mod::CHARMRESBUILD,
+                        Mod::AMNESIARESBUILD
+                    };
+
+                    // go through each status for which a mob can build resistance
+                    for (const Mod& statusWithRes : statusesWithResBuilding)
+                    {
+                        // build the name of the local variables that store the resistance info
+                        const std::string resBuildTotal = "[RESBUILD]Base_" + std::to_string(static_cast<int>(statusWithRes));
+                        const std::string resBuildCount = resBuildTotal + "_Count";
+                        // if the mob has any built up resistance to a status then clear that resistance
+                        if (PMob->GetLocalVar(resBuildCount.c_str()) > 0)
+                        {
+                            PMob->SetLocalVar(resBuildTotal.c_str(), 0);
+                            PMob->SetLocalVar(resBuildCount.c_str(), 0);
+                        }
+                    }
+                    // denote that all resistances have been been cleared
+                    PMob->SetLocalVar("HasStatusResBuild", 0);
+                }
             }
         }
         m_ResetTick = m_Tick;
@@ -1082,7 +1120,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
                     {
                         // Animation to go underground
@@ -1240,6 +1278,9 @@ bool CMobController::Disengage()
     PMob->updatemask |= (UPDATE_STATUS | UPDATE_HP);
     PMob->SetCallForHelpFlag(false);
     PMob->animation = ANIMATION_NONE;
+    // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
+    PMob->m_THLvl = 0;
+    m_ResetTick   = m_Tick;
 
     return CController::Disengage();
 }

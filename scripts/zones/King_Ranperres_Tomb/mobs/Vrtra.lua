@@ -10,18 +10,26 @@ local entity = {}
 local offsets = { 1, 3, 5, 2, 4, 6 }
 
 entity.onMobSpawn = function(mob)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMod(xi.mod.DEF, 466)
     mob:setMod(xi.mod.ATT, 344)
     mob:setMod(xi.mod.EVA, 450)
+    mob:setMod(xi.mod.REGEN, 50) -- Says high very regen
     mob:setMod(xi.mod.UFASTCAST, 50)
-    mob:setMod(xi.mod.DARK_MEVA, 100)
+    mob:setMod(xi.mod.REFRESH, 100)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 30)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("spawnTime", os.time() + 45)
 end
 
 entity.onMobFight = function(mob, target)
@@ -44,13 +52,17 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("spawnTime", spawnTime)
     end
 
-    if fifteenBlock > twohourTime and mob:getHPP() <= 85 and mob:canUseAbilities() then
+    if
+        fifteenBlock > twohourTime and
+        mob:getHPP() <= 90 and
+        mob:canUseAbilities()
+    then
         mob:setLocalVar("skill_tp", mob:getTP())
         mob:useMobAbility(710)
         mob:setLocalVar("twohourTime", fifteenBlock + math.random(4, 6))
     end
 
-    if os.time() > spawnTime and mob:canUseAbilities() then
+    if fifteenBlock > spawnTime and mob:canUseAbilities() then
         local mobId = mob:getID()
 
         for _, offset in ipairs(offsets) do
@@ -72,15 +84,17 @@ entity.onMobFight = function(mob, target)
                         local pos = mob:getPos()
                         pet:setPos(pos.x, pos.y, pos.z)
                         if mob:getTarget() ~= nil then
-                            pet:updateEnmity(target)
+                            pet:updateEnmity(mob:getTarget())
                         end
                     end
                 end)
+
                 break
             end
         end
-        local random = math.random(40, 45)
-        mob:setLocalVar("spawnTime", os.time() + random)
+
+        spawnTime = math.random(3, 5)
+        mob:setLocalVar("spawnTime", fifteenBlock + spawnTime)
     end
 
     -- Vrtra draws in if you attempt to leave the room
@@ -102,7 +116,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENDARK, { power = math.random(45, 90), chance = 10 })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENDARK, { power = math.random(55, 90), chance = 25 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

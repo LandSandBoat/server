@@ -114,34 +114,18 @@ void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
 
 /************************************************************************
  *                                                                      *
- *  Sets the guarded flag.                                              *
- *                                                                      *
- ************************************************************************/
-void CAttack::SetGuarded(bool isGuarded)
-{
-    m_isGuarded = isGuarded;
-}
-
-/************************************************************************
- *                                                                      *
  *  Gets the guarded flag.                                              *
  *                                                                      *
  ************************************************************************/
 bool CAttack::IsGuarded()
 {
-    m_isGuarded = attackutils::IsGuarded(m_attacker, m_victim);
-    if (m_isGuarded)
+    if (m_isGuarded.has_value())
     {
-        if (m_damageRatio > 1.0f)
-        {
-            m_damageRatio -= 1.0f;
-        }
-        else
-        {
-            m_damageRatio = 0;
-        }
+        return m_isGuarded.value();
     }
-    return m_isGuarded;
+
+    m_isGuarded.emplace(attackutils::IsGuarded(m_attacker, m_victim));
+    return m_isGuarded.value();
 }
 
 /************************************************************************
@@ -497,6 +481,15 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
     else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
         m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetRangedDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0));
+    }
+
+    // Apply Scarlet Delirium damage bonus
+    // EFFECT_SCARLET_DELIRIUM_1 is only active after damage has been dealt to the DRK and EFFECT_SCARLET_DELIRIUM has been removed.
+    if (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SCARLET_DELIRIUM_1))
+    {
+        float effectPower = 1.0f + (m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM_1)->GetPower() / 100.0f);
+
+        m_damage = (uint32)(m_damage * effectPower);
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Kayeel-Payeel
--- Working 100%
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/events/starlight_celebrations")
@@ -17,6 +16,7 @@ entity.onTrigger = function(player, npc)
             return
         end
     end
+
     player:startEvent(975)
 end
 

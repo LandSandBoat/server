@@ -58,14 +58,17 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if player:getLocalVar('[BOAT]Paid') == 1 then
+    -- if player:getLocalVar('[BOAT]Paid') == 1 then
         if transport == 47 or transport == 46 then
-            if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
+            if
+                not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or
+                xi.settings.main.ENABLE_TOAU == 0
+            then
                 player:setPos(8.200, -1.363, 3.445, 192)
                 player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
             else
@@ -74,10 +77,10 @@ zoneObject.onTransportEvent = function(player, transport)
         else
             player:startEvent(200)
         end
-    else
-        player:setPos(48.1156, -8.0000, 40.8011, 66)
-        player:setLocalVar('[BOAT]Paid', 0)
-    end
+    -- else
+        -- player:setPos(48.1156, -8.0000, 40.8011, 66)
+        -- player:setLocalVar('[BOAT]Paid', 0)
+    -- end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -88,7 +91,7 @@ zoneObject.onEventFinish = function(player, csid, option)
         local DepartureTime = VanadielHour()
 
         if DepartureTime % 8 == 0 then
-            if GetServerVariable("Mhaura_Destination") >= 89 then
+            if GetServerVariable("Mhaura_Destination") >= 75 then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)

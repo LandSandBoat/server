@@ -113,8 +113,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if option == 5 then
-                player:addGil(xi.settings.main.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
+                npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
                 player:addSpell(302) -- Avatar
                 player:messageSpecial(ID.text.SHIVA_UNLOCKED, 0, 0, 4)

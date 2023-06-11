@@ -15,6 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT
 
 quest.reward =
 {
+    item = xi.items.STATIONERY_SET,
     gil = 700,
     fame = 75,
     fameArea = xi.quest.fame_area.WINDURST,
@@ -23,8 +24,12 @@ quest.reward =
 quest.sections =
 {
     {
+        -- Players can only start the quest if they are below rank 4 fame
+        -- else they must complete let sleeping dogs lie
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and
+            (player:getFameLevel(xi.quest.fame_area.WINDURST) < 4 or
+            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE))
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -53,7 +58,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -82,16 +87,13 @@ quest.sections =
             onEventFinish =
             {
                 [475] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.STATIONERY_SET) then
-                        player:confirmTrade()
-                        player:addGil(500)
-                    end
+                    player:confirmTrade()
+                    npcUtil.giveCurrency(player, 'gil', 500)
                 end,
 
                 [477] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.STATIONERY_SET) then
+                    if quest:complete(player) then
                         player:confirmTrade()
-                        quest:complete(player)
                     end
                 end,
             },

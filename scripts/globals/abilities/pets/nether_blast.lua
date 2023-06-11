@@ -21,14 +21,16 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.DARK
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
-    params.breathe = true
+    params.damageSpell = true
+    params.breath = true
     params.netherBlast = true
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.BREATH, xi.damageType.DARK)
+
+    xi.magic.handleSMNBurstMsg(pet, target, skill, params.element, 379)
 
     return totaldamage
 end

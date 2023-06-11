@@ -56,8 +56,13 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+    xi.chocobo.confirmRentalAfterZoneIn(player)
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
@@ -96,12 +101,16 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10010 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 223)
     elseif csid == 10011 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 225)
     elseif csid == 10012 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 224)
     elseif csid == 10013 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 226)
     end
 

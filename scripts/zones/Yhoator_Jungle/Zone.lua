@@ -32,6 +32,8 @@ zoneObject.onInitialize = function(zone)
         xi.mob.nmTODPersistCache(zone, ID.mob.POWDERER_PENNY)
     end
 
+    UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
+    UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.chocobo.initZone(zone)
@@ -49,8 +51,8 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE124_ITEMS", 0)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneWeatherChange = function(weatherType)

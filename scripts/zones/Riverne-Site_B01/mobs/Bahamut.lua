@@ -18,16 +18,34 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
     mob:setMobMod(xi.mobMod.STANDBACK_COOL, 10)
-    mob:addMod(xi.mod.REGAIN, 200)
+    -- base damage of 136, so (lvl 83 + 2) * 1.60
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 160)
+    -- gives firaga iv a cast time of ~2 seconds as per retail
+    -- note baha has a job trait with fast cast of 15% so 75% total
+    mob:setMod(xi.mod.UFASTCAST, 60)
+    mob:setMod(xi.mod.ATT, 425)
+    mob:setMod(xi.mod.INT, 30)
+    mob:addMod(xi.mod.MATT, -28)
+    -- Bahamut should use tp move every 20 sec
+    mob:addMod(xi.mod.REGAIN, 450)
+    mob:addMod(xi.mod.REGEN, 50)
+    mob:setMod(xi.mod.MDEF, 62)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
     mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
     mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
     mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
     mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
-    mob:setMod(xi.mod.ATT, 500)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -84,10 +102,11 @@ entity.onMobFight = function(mob, target)
                     mob:setLocalVar("tauntShown", 2)
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
+
                 -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
                 if mob:checkDistance(target) <= 15 then
                     -- default behaviour
-                    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then
+                    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
 
@@ -107,6 +126,7 @@ entity.onMobFight = function(mob, target)
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
                 mob:setLocalVar("tauntShown", 3)
             end
+
             -- default behaviour
             if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
@@ -115,6 +135,18 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(1552)
             mob:setLocalVar("GigaFlare", 1)
             mob:setLocalVar("MegaFlareQueue", 0)
+        end
+    end
+
+    -- Bahamut should use tp move every 20 sec
+    -- decrease regain under 25% to keep approx timing
+    if mob:getHPP() <= 25 then
+        if mob:getMod(xi.mod.REGAIN) ~= 150 then
+            mob:setMod(xi.mod.REGAIN, 150)
+        end
+    else
+        if mob:getMod(xi.mod.REGAIN) ~= 450 then
+            mob:setMod(xi.mod.REGAIN, 450)
         end
     end
 end

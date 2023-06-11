@@ -2,7 +2,6 @@
 -- Area: Port Bastok
 --  NPC: Dulsie
 -- Adventurer's Assistant
--- Working 100%
 -----------------------------------
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -25,8 +24,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 8 then
         player:tradeComplete()
-        player:addGil(xi.settings.main.GIL_RATE * 50)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 50)
+        npcUtil.giveCurrency(player, 'gil', 50)
     end
 end
 

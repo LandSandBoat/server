@@ -171,7 +171,7 @@ xi.settings.main =
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
     NM_LOTTERY_COOLDOWN = 1.0,
 
-	-- GARRISON SETTINGS
+    -- GARRISON SETTINGS
     ENABLE_GARRISON              = false,  -- If true, enables garrison functionality
     DEBUG_GARRISON               = false,  -- If true, garrison will print out debug messages in logs as well as players as smes.
     GARRISON_LOCKOUT             = 1800,   -- Time in seconds before a new garrison can be started (default: 1800)
@@ -248,6 +248,12 @@ xi.settings.main =
     DIG_DISTANCE_REQ             = 0, -- Sets the distance squared in yalms of how far a player has to move.
     DIG_FATIGUE_SKILL_UP         = false, -- Allows for skilling up while at fatigue.
 
+    -- NYZUL
+    RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
+    ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
+    ENABLE_VIGIL_DROPS   = true, -- Enable Vigil Weapon drops from NMs.
+    ACTIVATE_LAMP_TIME   = 6000, -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
+
     -- MISC
     ERA_CHOCOBO_ZONE_DISMOUNT    = true, -- If true, forces players to dismount a chocobo before entering a city or dungeon.
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
@@ -268,6 +274,13 @@ xi.settings.main =
     -- Synergy
     ENABLE_SYNERGY = 0, -- Default to off as Synergy is not coded
 
+    -- Adventuring Fellows
+    ENABLE_ADVENTURING_FELLOWS         = true, -- Enable or disable the ability to quest and call Adventuring Fellows
+    ALLOW_ADVENTURING_FELLOW_KATANA_DW = true, -- Enable or disable dual wielding katanas for Adventuring Fellows
+
     -- NM Persistence
     NM_PERSISTENCE = 1, -- When set to 1, timed NM spawns will be persistent through server crashing
+
+    -- Prevents / Allows when a player tries to inject the begin synth packet before completing synth
+    PREVENT_SYNTHESIS_INJECTION = 1,
 }

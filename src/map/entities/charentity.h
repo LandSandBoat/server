@@ -50,6 +50,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 class CItemWeapon;
 class CTrustEntity;
+class CFellowEntity;
 
 struct jobs_t
 {
@@ -76,8 +77,10 @@ struct profile_t
     uint8      rank[3];    // RAGN in three states
     uint16     rankpoints; // rank glasses in three states
     location_t home_point; // Renaissance point character
+    location_t jail_cell;  // Jail Cell Coordinates For Character
     uint8      campaign_allegiance;
     uint8      unity_leader;
+    uint16     raf[15]; // Recruit a Friend
 
     profile_t()
     {
@@ -182,6 +185,14 @@ struct PetInfo_t
     float    petTP;        // pets tp
 };
 
+struct FellowInfo_t
+{
+    bool  respawnFellow; // used for spawning fellow on zone
+    uint8 fellowID;      // id
+    int16 fellowHP;      // fellow hp
+    int16 fellowMP;      // fellow mp
+};
+
 struct AuctionHistory_t
 {
     uint16 itemid;
@@ -240,17 +251,6 @@ struct CharHistory_t
     uint32 distanceTravelled = 0;
 };
 
-enum FISHING_HISTORY
-{
-    FISH_CAUGHT = 0,
-    FISH_LINESCAST,
-    FISH_REELED,
-    FISH_LONGEST,
-    FISH_LONGEST_ID,
-    FISH_HEAVIEST,
-    FISH_HEAVIEST_ID,
-};
-
 struct CharFishing_t
 {
     uint32 fishList[6];    // Maps to the index of each fish [0-5]
@@ -271,6 +271,45 @@ struct CharFishing_t
         fishHeaviest   = 0;
         fishHeaviestId = 0;
     }
+};
+
+struct CharAnticheat_t
+{
+    time_t lastTeleport       = 0;
+    time_t gracePeriod        = 0;
+    time_t lastCheckTime      = 0;
+    uint8  overSpeedCounter   = 0;
+    uint8  speedResetCounter  = 0;
+    time_t prevDigT_1         = 0;
+    float  prevDigX_1         = 0;
+    float  prevDigZ_1         = 0;
+    uint32 digDiffTotal       = 0;
+    uint16 digCount           = 0;
+    uint16 digDiffAvg         = 0;
+    uint32 digDistDiffTotal   = 0;
+    uint16 digDistDiffAvg     = 0;
+    uint8  digDistGrace       = 0;
+    time_t lastSynthStart     = 0;
+    float  synthStartTotal    = 0;
+    uint16 synthCount         = 0;
+    uint32 synthTimeDiffAvg   = 0;
+    uint16 lastSynthReq       = 0;
+    time_t firstFishingStrike = 0;
+    uint16 fishingStikes      = 0;
+};
+
+struct CharDigging_t
+{
+    float  lastDigX = 0;
+    float  lastDigY = 0;
+    float  lastDigZ = 0;
+    time_t lastDigT = 0;
+};
+
+struct CharCrafting_t
+{
+    time_t lastSynthTime = 0;
+    uint16 lastSynthReq  = 0;
 };
 
 enum CHAR_SUBSTATE
@@ -363,12 +402,17 @@ public:
     void              setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
     void              resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
     bool              shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
+    FellowInfo_t      fellowZoningInfo;                // used to repawn fellows on zone
+    void              setFellowZoningInfo();           // set fellow zoning info (when zoning and logging out)
+    void              resetFellowZoningInfo();         // reset fellow zoning info (when changing job ect)
     uint8             m_SetBlueSpells[20];             // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
     uint32            m_FieldChocobo;
     time_point        m_nextDataSave; // Sets the next point to save to the DB.
+    uint32            m_claimedDeeds[5];
 
     UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
     CAutomatonEntity*     PAutomaton;            // Automaton statistics
+    CFellowEntity*        m_PFellow;             // Player's Fellow
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
@@ -438,6 +482,7 @@ public:
     bool           MeritMode; // If true then player is meriting
 
     CLatentEffectContainer* PLatentEffectContainer;
+    bool                    retriggerLatentsAfterPacketParsing; // used to retrigger all latent effects after packet parsing is done in map.cpp
 
     CItemContainer* PGuildShop;                   // текущий магазин гильдии, в котором персонаж производит закупки
     CItemContainer* getStorage(uint8 LocationID); // получение указателя на соответствующее хранилище
@@ -497,8 +542,11 @@ public:
     uint32 m_moghouseID;
     uint16 m_moghancementID;
 
-    CharHistory_t m_charHistory;
-    CharFishing_t m_fishHistory; // Player fishing data
+    CharHistory_t   m_charHistory;
+    CharAnticheat_t m_charAnticheat;
+    CharDigging_t   m_charDigging;
+    CharCrafting_t  m_charCrafting;
+    CharFishing_t   m_fishHistory; // Player fishing data
 
     int8 getShieldSize();
 
@@ -544,6 +592,7 @@ public:
     bool ReloadParty() const;
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
+    void RemoveFellow();
 
     void RequestPersist(CHAR_PERSIST toPersist);
     bool PersistData();
@@ -610,7 +659,8 @@ public:
 
     void clearCharVarsWithPrefix(std::string const& prefix);
 
-    bool m_Locked; // Is the player locked in a cutscene
+    bool   m_Locked;       // Is the player locked in a cutscene
+    uint32 m_prevTargetId; // ID of the last target for the player.
 
     CCharEntity();
     ~CCharEntity();

@@ -159,7 +159,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16814432,9,80,1);    -- HP_HEAL_CHANCE: 80
 INSERT INTO `mob_spawn_mods` VALUES (16814432,29,33,0);   -- MDEF: 33
 INSERT INTO `mob_spawn_mods` VALUES (16814432,55,900,1);  -- IDLE_DESPAWN: 900
 INSERT INTO `mob_spawn_mods` VALUES (16814432,168,2,0);   -- SPELLINTERRUPT: 2
-INSERT INTO `mob_spawn_mods` VALUES (16814432,170,50,0);  -- FASTCAST: 50
+INSERT INTO `mob_spawn_mods` VALUES (16814432,170,10,0);  -- FASTCAST: 10
 
 -- Goblin Wolfman
 INSERT INTO `mob_spawn_mods` VALUES (16822459,55,300,1); -- IDLE_DESPAWN: 300
@@ -1823,6 +1823,14 @@ INSERT INTO `mob_spawn_mods` VALUES (16814231,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16814232,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16814233,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16814234,55,180,1); -- IDLE_DESPAWN: 180
+
+-- Bahamut v2 and his wyrms (Tiamat, Vrtra, Ouryu, Jormungand)
+-- Need superlinking to make sure mobs link with each other after resetting on wipe
+INSERT INTO `mob_spawn_mods` VALUES (16896157,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896158,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896159,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896160,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896161,26,1,1); -- SUPERLINK 1
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

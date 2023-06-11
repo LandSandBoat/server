@@ -13,6 +13,7 @@ zoneObject.onInitialize = function(zone)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
         xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     end
+
     zone:registerTriggerArea(1, -2, -17, 140, 2, -16, 142)
 end
 
@@ -34,8 +35,12 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

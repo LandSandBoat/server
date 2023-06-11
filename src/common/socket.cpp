@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
-#include "../common/cbasetypes.h"
-#include "../common/kernel.h"
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/cbasetypes.h"
+#include "common/kernel.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include "settings.h"
 #include "socket.h"
+
+#include <sstream>
 
 #include <cstdio>
 #include <cstdlib>
@@ -227,7 +229,9 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 void do_close(int32 fd)
 {
     TracyZoneScoped;
-    sFD_CLR(fd, &readfds);    // this needs to be done before closing the socket
+#ifdef __APPLE__
+    sFD_CLR(fd, &readfds); // this needs to be done before closing the socket
+#endif
     sShutdown(fd, SHUT_RDWR); // Disallow further reads/writes
     sClose(fd);               // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
 }
@@ -774,8 +778,9 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     {
         fd_max = fd + 1;
     }
+#ifdef __APPLE__
     sFD_SET(fd, &readfds);
-
+#endif
     return fd;
 }
 
@@ -813,6 +818,19 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     server_address.sin_family = AF_INET;
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
     server_address.sin_port = htons(port);
+
+    // https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux
+    // Avoid hangs in TIME_WAIT state of TCP
+#ifdef WIN32
+    // Windows doesn't seem to have this problem, but apparently this would be the right way to explicitly mimic SO_REUSEADDR unix's behavior.
+    setsockopt(sock_arr[fd], SOL_SOCKET, SO_DONTLINGER, "\x00\x00\x00\x00", 4);
+#else
+    int enable = 1;
+    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    {
+        ShowError("setsockopt SO_REUSEADDR failed!");
+    }
+#endif
 
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)

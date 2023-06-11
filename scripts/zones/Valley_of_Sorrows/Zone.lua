@@ -10,8 +10,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -28,7 +28,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+zoneObject.onZoneTick = function(zone)
+end
+
+zoneObject.onRegionEnter = function(player, region)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

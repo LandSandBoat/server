@@ -33,7 +33,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:setMobAbilityEnabled(true) -- enable the spells/other mobskills again
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
-        if (mob:getBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN)) == 0) then -- re-enable noturn
+        if mob:getBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN)) == 0 then -- re-enable noturn
             mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
         end
     elseif mob:getID() == 16896157 then -- BV2 Bahamut
@@ -44,13 +44,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
-        if (mob:getBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN)) == 0) then -- re-enable noturn
+        if mob:getBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN)) == 0 then -- re-enable noturn
             mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
         end
     end
 
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 8, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dStatMult = 1.5
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, 14 * mob:getMainLvl(), xi.magic.ele.FIRE, nil, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, nil, nil, nil, dStatMult)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

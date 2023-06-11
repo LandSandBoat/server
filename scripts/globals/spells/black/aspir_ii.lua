@@ -13,8 +13,12 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.ASPIR) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
-    local mpDiff = caster:getMaxMP() - caster:getMP()
 
     --get resist multiplier (1x if no resist)
     local params = {}
@@ -22,6 +26,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 1.0
+    params.damageSpell = 1
+
     local resist = xi.magic.applyResistance(caster, target, spell, params)
     --get the resisted damage
     dmg = dmg * resist
@@ -51,9 +57,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delMP(dmg)
     end
 
-    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, math.min(dmg, mpDiff))
+    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, dmg)
 
-    return math.min(dmg, mpDiff)
+    return dmg
 end
 
 return spellObject

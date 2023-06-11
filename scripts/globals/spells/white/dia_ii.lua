@@ -44,6 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
     spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
+    xi.magic.handleBurstMsg(caster, target, spell)
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 

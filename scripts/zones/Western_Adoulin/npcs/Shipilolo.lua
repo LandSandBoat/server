@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Shipilolo
--- Type: Standard NPC and Quest NPC
 --  Involved with Quests: 'A Certain Substitute Patrolman'
 --                        'Fertile Ground'
 --                        'The Old Man and the Harpoon'
@@ -41,13 +40,7 @@ entity.onTrigger = function(player, npc)
         then
             -- Progresses Quest: 'Wayward Waypoints'
             player:startEvent(79)
-        else
-            -- Standard dialogue
-            player:startEvent(535)
         end
-    else
-        -- Dialogue prior to joining colonization effort
-        player:startEvent(526)
     end
 end
 

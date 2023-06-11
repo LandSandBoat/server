@@ -15,12 +15,14 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local IASvar = player:getCharVar("IASvar")
-
     -- In a Stew
-    if IASvar == 3 then
+    if player:getCharVar("IASvar") == 3 then
         local count = trade:getItemCount()
-        if trade:hasItemQty(4373, 3) and count == 3 then
+        if
+            trade:hasItemQty(4373, 3) and
+            count == 3 and
+            player:getCharVar("IASconquest") < getConquestTally()
+        then
             player:startEvent(556) -- Correct items given, advance quest
         else
             player:startEvent(555, 0, 4373) -- incorrect or not enough, play reminder dialog
@@ -105,16 +107,14 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 259 and option == 2 then  -- A Crisis in the Making + ITEM: Repeatable Quest Offer - REFUSED
         player:needToZone(true)
     elseif csid == 267 then -- A Crisis in the Making: Quest Finish
-        player:addGil(xi.settings.main.GIL_RATE * 400)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 400)
+        npcUtil.giveCurrency(player, 'gil', 400)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif csid == 268 then -- A Crisis in the Making: Repeatable Quest Finish
-        player:addGil(xi.settings.main.GIL_RATE * 400)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 400)
+        npcUtil.giveCurrency(player, 'gil', 400)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(xi.quest.fame_area.WINDURST, 8)
@@ -126,6 +126,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 556 then
         player:tradeComplete()
         player:setCharVar("IASvar", 4)
+        player:setCharVar("IASconquest", getConquestTally())
         player:addKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     end

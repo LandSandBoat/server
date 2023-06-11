@@ -85,13 +85,14 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.GUGRU_TUNA) then
                         local fishingStats = player:getFishingStats()
-                        return quest:progressEvent(193, { [1] = fishingStats["fishLinesCast"],
-                                                          [2] = fishingStats["fishReeled"],
-                                                          [3] = fishingStats["fishLongestLength"],
-                                                          [4] = fishingStats["fishLongestId"],
-                                                          [5] = fishingStats["fishHeaviestWeight"],
-                                                          [6] = fishingStats["fishHeaviestId"],
-                                                          })
+                        return quest:progressEvent(193, {
+                            [1] = fishingStats["fishLinesCast"],
+                            [2] = fishingStats["fishReeled"],
+                            [3] = fishingStats["fishLongestLength"],
+                            [4] = fishingStats["fishLongestId"],
+                            [5] = fishingStats["fishHeaviestWeight"],
+                            [6] = fishingStats["fishHeaviestId"],
+                        })
                     end
                 end,
             },
@@ -117,34 +118,36 @@ quest.sections =
             ['Katsunaga'] =
             {
                 onTrigger = function(player, csid, option, npc)
-                    return quest:progressEvent(197, xi.fish.countFish(player:getFishingCatches())) -- Number of fish caught
+                    return quest:progressEvent(197, xi.fishing.countFish(player:getFishingCatches())) -- Number of fish caught
                 end,
             },
 
             onEventUpdate =
             {
                 [197] = function(player, csid, option, npc)
-                    if (option == 33554432) then
+                    if option == 33554432 then
                         -- "Catching Fish"
                         local fishingStats = player:getFishingStats()
-                        player:updateEvent( { [0] = xi.fish.countFish(player:getFishingCatches()),
-                                              [1] = fishingStats["fishLinesCast"],
-                                              [2] = fishingStats["fishReeled"],
-                                              [3] = fishingStats["fishLongestLength"],
-                                              [4] = fishingStats["fishLongestId"],
-                                              [5] = fishingStats["fishHeaviestWeight"],
-                                              [6] = fishingStats["fishHeaviestId"],
-                                              })
-                    elseif (option == 0) then
+                        player:updateEvent({
+                            [0] = xi.fishing.countFish(player:getFishingCatches()),
+                            [1] = fishingStats["fishLinesCast"],
+                            [2] = fishingStats["fishReeled"],
+                            [3] = fishingStats["fishLongestLength"],
+                            [4] = fishingStats["fishLongestId"],
+                            [5] = fishingStats["fishHeaviestWeight"],
+                            [6] = fishingStats["fishHeaviestId"],
+                        })
+                    elseif option == 0 then
                         -- "Types of Fish Caught"
                         local fishingCatches = player:getFishingCatches()
-                        player:updateEvent( { [0] = fishingCatches[1],
-                                              [1] = fishingCatches[2],
-                                              [2] = fishingCatches[3],
-                                              [3] = fishingCatches[4],
-                                              [4] = fishingCatches[5],
-                                              [5] = fishingCatches[6],
-                                              })
+                        player:updateEvent({
+                            [0] = fishingCatches[1],
+                            [1] = fishingCatches[2],
+                            [2] = fishingCatches[3],
+                            [3] = fishingCatches[4],
+                            [4] = fishingCatches[5],
+                            [5] = fishingCatches[6],
+                        })
                     end
                 end,
             },

@@ -7,7 +7,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -95, 0, 75, -85, 5, 85)
+    zone:registerTriggerArea(1, -95, 0, 75, -85, 5, 85)        -- Garden area near Chalvatot
+    zone:registerTriggerArea(2, -87, -1.75, 55.5, -81, -1, 60) -- Stairs approaching Garden
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -24,8 +25,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

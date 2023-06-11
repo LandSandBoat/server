@@ -617,9 +617,10 @@ void CLatentEffectContainer::CheckLatentsWeather()
 void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
 {
     ProcessLatentEffects([this, weather](CLatentEffect& latent) {
-        if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
+        auto owner = dynamic_cast<CBattleEntity*>(m_POwner);
+        if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT && owner != nullptr)
         {
-            auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
+            auto element = zoneutils::GetWeatherElement(battleutils::GetWeather(owner, false, weather));
             return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
         }
         return false;
@@ -673,9 +674,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     auto expression  = false;
     auto latentFound = true;
 
-    if (m_POwner == nullptr)
+    // this gets the current zone ID or destination zone ID if zoning
+    uint16 playerZoneID = m_POwner->getZone();
+    if (m_POwner == nullptr || playerZoneID == 0)
     {
-        ShowWarning("m_POwner was a nullptr, stopping case steps");
         return false;
     }
 
@@ -726,25 +728,25 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         {
             CBattleEntity* PTarget = m_POwner->GetBattleTarget();
             expression =
-                PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
+                PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && zoneutils::GetCurrentRegion(playerZoneID) < REGION_TYPE::WEST_AHT_URHGAN;
             break;
         }
         case LATENT::SANCTION_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = zoneutils::GetCurrentRegion(playerZoneID) >= REGION_TYPE::WEST_AHT_URHGAN && zoneutils::GetCurrentRegion(playerZoneID) <= REGION_TYPE::ALZADAAL &&
                          m_POwner->GetHPP() < latentEffect.GetConditionsValue();
             break;
         case LATENT::SANCTION_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = zoneutils::GetCurrentRegion(playerZoneID) >= REGION_TYPE::WEST_AHT_URHGAN && zoneutils::GetCurrentRegion(playerZoneID) <= REGION_TYPE::ALZADAAL &&
                          m_POwner->GetMPP() < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+            expression = zoneutils::GetCurrentRegion(playerZoneID) >= REGION_TYPE::RONFAURE_FRONT &&
+                         zoneutils::GetCurrentRegion(playerZoneID) <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          m_POwner->GetHPP() < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+            expression = zoneutils::GetCurrentRegion(playerZoneID) >= REGION_TYPE::RONFAURE_FRONT &&
+                         zoneutils::GetCurrentRegion(playerZoneID) <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          m_POwner->GetMPP() < latentEffect.GetConditionsValue();
             break;
         case LATENT::STATUS_EFFECT_ACTIVE:
@@ -763,7 +765,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
-                    if (member->getZone() == m_POwner->getZone())
+                    if (member->getZone() == playerZoneID)
                     {
                         ++inZone;
                     }
@@ -822,7 +824,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         case LATENT::ZONE:
-            expression = latentEffect.GetConditionsValue() == m_POwner->getZone();
+            expression = latentEffect.GetConditionsValue() == playerZoneID;
             break;
         case LATENT::SYNTH_TRAINEE:
             // todo: figure this out
@@ -1038,13 +1040,15 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::NATION_CONTROL:
         {
-            // player is logging in/zoning
+
+            // player is logging in/zoning, for some reason this latent does not work with
+            // destination zone, maybe client related?
             if (m_POwner->loc.zone == nullptr)
             {
-                break;
+                return false;
             }
 
-            auto region      = m_POwner->loc.zone->GetRegionID();
+            auto region      = zoneutils::GetCurrentRegion(playerZoneID);
             auto hasSignet   = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET);
             auto hasSanction = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION);
             auto hasSigil    = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL);
@@ -1066,25 +1070,26 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         }
         case LATENT::ZONE_HOME_NATION:
         {
-            // player is logging in/zoning
+
+            // player is logging in/zoning, for some reason this latent does not work with
+            // destination zone, maybe client related?
             if (m_POwner->loc.zone == nullptr)
             {
-                break;
+                return false;
             }
 
-            auto* PZone  = m_POwner->loc.zone;
             auto  region = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
 
             switch (region)
             {
                 case REGION_TYPE::SANDORIA:
-                    expression = m_POwner->profile.nation == 0 && PZone->GetRegionID() == region;
+                    expression = m_POwner->profile.nation == 0 && zoneutils::GetCurrentRegion(playerZoneID) == region;
                     break;
                 case REGION_TYPE::BASTOK:
-                    expression = m_POwner->profile.nation == 1 && PZone->GetRegionID() == region;
+                    expression = m_POwner->profile.nation == 1 && zoneutils::GetCurrentRegion(playerZoneID) == region;
                     break;
                 case REGION_TYPE::WINDURST:
-                    expression = m_POwner->profile.nation == 2 && PZone->GetRegionID() == region;
+                    expression = m_POwner->profile.nation == 2 && zoneutils::GetCurrentRegion(playerZoneID) == region;
                     break;
                 default:
                     break;

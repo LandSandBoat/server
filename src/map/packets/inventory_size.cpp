@@ -61,11 +61,13 @@ CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
     ref<uint8>(0x24) = 1 + PChar->getStorage(LOC_INVENTORY)->GetBuff();
     ref<uint8>(0x26) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetBuff();
     ref<uint8>(0x28) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
+    ref<uint8>(0x28) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
     ref<uint8>(0x2A) = 1 + PChar->getStorage(LOC_TEMPITEMS)->GetBuff();
-    ref<uint8>(0x2C) = charutils::hasMogLockerAccess(PChar) ? 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff() : 0x00;
+    ref<uint8>(0x2C) = 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff();
     ref<uint8>(0x2E) = 1 + PChar->getStorage(LOC_MOGSATCHEL)->GetBuff();
     ref<uint8>(0x30) = 1 + PChar->getStorage(LOC_MOGSACK)->GetBuff();
     ref<uint8>(0x32) = 1 + PChar->getStorage(LOC_MOGCASE)->GetBuff();
+    ref<uint8>(0x34) = 1 + PChar->getStorage(LOC_WARDROBE)->GetBuff();
     ref<uint8>(0x34) = 1 + PChar->getStorage(LOC_WARDROBE)->GetBuff();
     ref<uint8>(0x36) = 1 + PChar->getStorage(LOC_MOGSAFE2)->GetBuff();
     ref<uint8>(0x38) = 1 + PChar->getStorage(LOC_WARDROBE2)->GetBuff();

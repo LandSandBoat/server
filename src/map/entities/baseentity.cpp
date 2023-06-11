@@ -186,6 +186,11 @@ uint32 CBaseEntity::GetLocalVar(const char* var)
     return m_localVars[var];
 }
 
+std::map<std::string, uint32> CBaseEntity::GetAllLocalVars()
+{
+    return m_localVars;
+}
+
 void CBaseEntity::SetLocalVar(const char* var, uint32 val)
 {
     m_localVars[var] = val;

@@ -35,6 +35,7 @@ enum SPAWNTYPE
     SPAWNTYPE_NORMAL    = 0x00, // 00:00-24:00
     SPAWNTYPE_ATNIGHT   = 0x01, // 20:00-04:00
     SPAWNTYPE_ATEVENING = 0x02, // 18:00-06:00
+    SPAWNTYPE_ATDUSK    = 0x03, // 17:00-7:00
     SPAWNTYPE_WEATHER   = 0x04,
     SPAWNTYPE_FOG       = 0x08, // 02:00-07:00
     SPAWNTYPE_MOONPHASE = 0x10,
@@ -99,6 +100,18 @@ enum BEHAVIOUR : uint16
     BEHAVIOUR_NOHELP       = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
     BEHAVIOUR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
     BEHAVIOUR_NO_TURN      = 0x400  // mob does not turn to face target
+};
+
+struct mobDefaults_t
+{
+    bool d_AllowRespawn;
+    bool d_RespawnTime;
+
+    mobDefaults_t()
+    {
+        d_AllowRespawn = false;
+        d_RespawnTime  = false;
+    }
 };
 
 class CMobSkillState;
@@ -176,19 +189,19 @@ public:
 
     virtual void OnDespawn(CDespawnState&) override;
 
+    bool         CanSpawnFromGroup();
     virtual void Spawn() override;
     virtual void FadeOut() override;
 
     virtual bool CanMove();
+
+    mobDefaults_t defaults; // Structure to hold any default values to reference back later
 
     bool   m_AllowRespawn; // if true, allow respawn
     uint32 m_RespawnTime;  // respawn time
     uint32 m_DropItemTime; // time until monster death animation
 
     uint32 m_DropID; // dropid of items to be dropped. dropid in Database (mob_droplist)
-
-    // ItemID, <Droprate, DropType>
-    std::map<uint16, std::pair<uint16, uint8>> m_DropListModifications;
 
     uint8  m_minLevel; // lowest possible level of the mob
     uint8  m_maxLevel; // highest possible level of the mob
@@ -256,6 +269,8 @@ public:
     uint8 m_unk0; // possibly campaign related (entity 0x24)
     uint8 m_unk1; // (entity_update 0x25)
     uint8 m_unk2; // (entity_update 0x26)
+
+    uint8 m_spawnSet; // spawnSet Mob Belongs To
 
     uint16 m_pathFindDisengage;
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Panaa Fom
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

@@ -23,8 +23,8 @@ zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.CHONCHON)
     end
+
     UpdateNMSpawnPoint(ID.mob.WARAXE_BEAK)
-    GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
@@ -59,8 +59,8 @@ zoneObject.onZoneOut = function(player)
     end
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onGameDay = function()

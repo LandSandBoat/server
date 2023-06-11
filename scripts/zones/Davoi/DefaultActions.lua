@@ -10,5 +10,6 @@ return {
     ['qm2']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Sedal-Godjal'] = { event = 27 },
     ['Storage_Hole'] = { messageSpecial = ID.text.YOU_SEE_NOTHING },
+    ['Village_Well'] = { messageSpecial = ID.text.A_WELL },
     ['Zantaviat']    = { event = 101 },
 }

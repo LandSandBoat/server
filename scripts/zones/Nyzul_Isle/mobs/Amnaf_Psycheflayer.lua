@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Nyzul_Isle/IDs')
 require('scripts/globals/status')
+require("scripts/globals/assault")
 require('scripts/globals/msg')
 -----------------------------------
 local entity = {}
@@ -55,8 +56,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    instance:setProgress(instance:getProgress() + 2)
+    xi.assault.progressInstance(mob, 2)
 end
 
 return entity

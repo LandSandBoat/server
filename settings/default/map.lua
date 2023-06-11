@@ -118,16 +118,19 @@ xi.settings.map =
     -- Use current retail skill up rates and margins (Retail = High Skill-Up rate; Skill-Up when at or under 10 levels above synth recipe level.)
     CRAFT_MODERN_SYSTEM = false,
 
-    -- Craft level limit from witch specialization points beging to count. (Retail = 700; Level 75 era:600)
+    -- Craft level limit from which specialization points beginning to count. (Retail = 700; Level 75 era:600)
     CRAFT_COMMON_CAP = 600,
 
     -- Amount of points allowed in crafts over the level defined above. Points are shared across all crafting skills. (Retail = 400; All skills can go to max = 3200)
     CRAFT_SPECIALIZATION_POINTS = 400,
 
-    -- Enables fishing. 0 = Disbaled. 1 = Enable. ENABLE AT YOUR OWN RISK.
+    -- Enables fishing. 0 = Disabled. 1 = Enable. ENABLE AT YOUR OWN RISK.
     FISHING_ENABLE = false,
 
-    -- Multipler for fishing skill-up chance. Default = 1.0, very hard.
+    -- Minimum level (across all jobs) required to for a player to fish.
+    FISHING_MIN_LEVEL = 15,
+
+    -- Multiplier for fishing skill-up chance. Default = 1.0, very hard.
     FISHING_SKILL_MULTIPLIER = 1.0,
 
     -- Enable/disable skill-ups from bloodpacts
@@ -255,6 +258,23 @@ xi.settings.map =
     ITEM_PARALYSIS_LOSS              = true, -- Allow items to be put on recast or deleted when used during a paralysis tick.
     ITEM_PARALYSIS_SCROLL_PROTECTION = false, -- Stops scrolls from being deleted if a paralysis tick occurs.
 
+    -- Moghouse Thingies
+    MH_EXIT_HOMEPOINT  = false, -- Enables A Homepoint Set Prompt On MH Exit
+
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
+
+    -- Engage Time Reduction
+    ENGAGE_TIME_REDUCTION = 0.5, -- Decreases re-engage time(ms) by a percentage. (float)
+    VERTICAL_CHASE_RANGE  = -10,
+
+    -- Rent-A-Room
+    RENT_A_ROOM     = false,
+    ERA_RENT_A_ROOM = false,
+
+    -- Send stack traces to the client after caught Lua errors if
+    -- their GM level is the same or higher than this number.
+    -- The max GM level is 5, so setting this to 6 disables it
+    -- for everone. Setting it to 0 enables for everyone.
+    REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 6,
 }

@@ -42,8 +42,6 @@ entity.onTrigger = function(player, npc)
     then
         -- They got their Key items. tell them to goto sandy
         player:startEvent(9, 0, xi.ki.ANCIENT_TABLET_FRAGMENT)
-    else
-        player:startEvent(52) -- standard dialogue
     end
 end
 

@@ -38,19 +38,19 @@ namespace jailutils
     bool InPrison(CCharEntity* PChar)
     {
         TracyZoneScoped;
-        return PChar->m_GMlevel == 0 && PChar->getZone() == ZONE_MORDION_GAOL;
+        return PChar->getCharVar("[JAIL]inJail") > 0;
     }
 
     void Add(CCharEntity* PChar)
     {
-        PChar->PAI->SetController(nullptr);
+        // PChar->PAI->SetController(nullptr);
 
         // TODO:
     }
 
     void Del(CCharEntity* PChar)
     {
-        PChar->PAI->SetController(std::make_unique<CPlayerController>(PChar));
+        // PChar->PAI->SetController(std::make_unique<CPlayerController>(PChar));
 
         // TODO:
     }

@@ -20,6 +20,7 @@ zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.LIKHO)
     end
+
     xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_ALLOCEN)
     xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_AMON)
     xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_HABORYM)
@@ -29,8 +30,8 @@ zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

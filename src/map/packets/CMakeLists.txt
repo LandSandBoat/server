@@ -94,8 +94,12 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/event_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/event_update_string.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/event_update_string.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/fellow_despawn.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/fellow_despawn.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fishing.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fishing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishing_rank.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishing_rank.h
     ${CMAKE_CURRENT_SOURCE_DIR}/furniture_interact.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/furniture_interact.h
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu.cpp

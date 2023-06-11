@@ -75,8 +75,6 @@ xi.events.registeredEvents =
 }
 
 xi.events.handler.checkSeasonalEvents = function()
-    print("Checking Seasonal Events")
-
     for _, event in pairs(xi.events.registeredEvents) do
         event:checkEnding()
     end

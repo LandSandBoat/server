@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Florencia
--- Working 100%
 -----------------------------------
 local entity = {}
 

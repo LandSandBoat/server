@@ -3,10 +3,7 @@
 # add_subdirectory(zmq) # Handled globally
 
 add_subdirectory(concurrentqueue)
-add_subdirectory(detour)
-add_subdirectory(recast)
 add_subdirectory(sol)
-add_subdirectory(spdlog)
 
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 
@@ -62,6 +59,27 @@ if(TRACY_ENABLE)
     endif()
 endif(TRACY_ENABLE)
 
+# NOTE: We are not using the latest versions of spdlog, since the
+#     : version of fmt it is bundled with deprecated some arg mapping
+#     : that we use in a lot of places (formatting enums as ints and
+#     : formatting non-void pointers).
+CPMAddPackage(
+    NAME spdlog
+    GITHUB_REPOSITORY gabime/spdlog
+    GIT_TAG v1.9.2
+) # defines: spdlog
+
+# NOTE: Using the 'release-2.0' branch
+CPMAddPackage(
+    NAME recastnavigation
+    GITHUB_REPOSITORY recastnavigation/recastnavigation
+    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    OPTIONS
+        "RECASTNAVIGATION_DEMO OFF"
+        "RECASTNAVIGATION_TESTS OFF"
+        "RECASTNAVIGATION_EXAMPLES OFF"
+) # defines: RecastNavigation::Recast, RecastNavigation::Detour
+
 CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
@@ -99,18 +117,31 @@ CPMAddPackage(
     GIT_TAG v3.11.2
 ) # defines: nlohmann_json::nlohmann_json
 
+CPMAddPackage(
+    NAME pcg-cpp
+    GITHUB_REPOSITORY imneme/pcg-cpp
+    GIT_TAG 428802d1a5634f96bcd0705fab379ff0113bcf13
+) # defines: pcg-cpp
+
+# pcg-cpp does not include cmake
+if(pcg-cpp_ADDED)
+    add_library(pcg-cpp INTERFACE)
+    target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
+endif()
+
 set(EXTERNAL_LIBS
+    spdlog
     concurrentqueue
     mariadbclient
-    spdlog
-    recast
-    detour
+    RecastNavigation::Recast
+    RecastNavigation::Detour
     sol2_single
     argparse
     efsw
     jthread-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
+    pcg-cpp
 )
 
 if (WIN32)

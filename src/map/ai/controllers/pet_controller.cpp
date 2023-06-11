@@ -42,7 +42,7 @@ void CPetController::Tick(time_point tick)
 
     if (PPet->shouldDespawn(tick))
     {
-        petutils::DespawnPet(PPet->PMaster);
+        petutils::DetachPet(PPet->PMaster, PPet->isCharmed && tick > PPet->charmTime);
         return;
     }
 
@@ -51,7 +51,7 @@ void CPetController::Tick(time_point tick)
 
 void CPetController::DoRoamTick(time_point tick)
 {
-    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
+    if ((PPet->PMaster == nullptr || PPet->PMaster->id == 0 || PPet->PMaster->name == "" || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
     {
         PPet->Die();
         return;

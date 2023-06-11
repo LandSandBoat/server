@@ -80,7 +80,7 @@ INSERT INTO `item_latents` VALUES (11301,369,1,39,13);    -- Refresh+1 at night 
 -- -------------------------------------------------------
 -- Rambler's Cloak
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (11312,8,5,7,100);     -- STR+5 while TP >=100%
+INSERT INTO `item_latents` VALUES (11312,8,5,7,1000);     -- STR+5 while TP >=1000%
 
 -- -------------------------------------------------------
 -- Dinner Jacket
@@ -257,6 +257,18 @@ INSERT INTO `item_latents` VALUES (12403,5,5,8,15);
 INSERT INTO `item_latents` VALUES (12461,369,1,13,4);
 INSERT INTO `item_latents` VALUES (12589,370,2,13,3);
 INSERT INTO `item_latents` VALUES (12621,370,2,13,3);
+
+-- Evokers Doublet
+INSERT INTO `item_latents` VALUES (12650,21,20,9,8);
+INSERT INTO `item_latents` VALUES (12650,22,20,9,9);
+INSERT INTO `item_latents` VALUES (12650,15,20,9,10);
+INSERT INTO `item_latents` VALUES (12650,18,20,9,11);
+INSERT INTO `item_latents` VALUES (12650,20,20,9,12);
+INSERT INTO `item_latents` VALUES (12650,17,20,9,13);
+INSERT INTO `item_latents` VALUES (12650,16,20,9,14);
+INSERT INTO `item_latents` VALUES (12650,19,20,9,15);
+INSERT INTO `item_latents` VALUES (12650,22,20,9,16);
+
 INSERT INTO `item_latents` VALUES (12717,71,5,13,6);
 INSERT INTO `item_latents` VALUES (12742,1,32,56,0);     -- Rune Bangles +32 Def.
 INSERT INTO `item_latents` VALUES (12742,68,5,56,0);     -- Rune Bangles +5 Eva.
@@ -1650,12 +1662,12 @@ INSERT INTO `item_latents` VALUES (15532,370,1,56,2);    -- Latent Effect is tri
 -- -------------------------------------------------------
 -- Rajas Ring
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15543,8,1,51,45);     -- INT+1 above level 45
-INSERT INTO `item_latents` VALUES (15543,8,1,51,60);     -- INT+1 above level 60
-INSERT INTO `item_latents` VALUES (15543,8,1,51,75);     -- INT+1 above level 75
-INSERT INTO `item_latents` VALUES (15543,9,1,51,45);     -- MND+1 above level 45
-INSERT INTO `item_latents` VALUES (15543,9,1,51,60);     -- MND+1 above level 60
-INSERT INTO `item_latents` VALUES (15543,9,1,51,75);     -- MND+1 above level 75
+INSERT INTO `item_latents` VALUES (15543,8,1,51,45);     -- STR+1 above level 45
+INSERT INTO `item_latents` VALUES (15543,8,1,51,60);     -- STR+1 above level 60
+INSERT INTO `item_latents` VALUES (15543,8,1,51,75);     -- STR+1 above level 75
+INSERT INTO `item_latents` VALUES (15543,9,1,51,45);     -- DEX+1 above level 45
+INSERT INTO `item_latents` VALUES (15543,9,1,51,60);     -- DEX+1 above level 60
+INSERT INTO `item_latents` VALUES (15543,9,1,51,75);     -- DEX+1 above level 75
 
 -- -------------------------------------------------------
 -- Tamas Ring

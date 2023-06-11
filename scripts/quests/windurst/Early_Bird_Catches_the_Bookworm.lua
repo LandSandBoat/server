@@ -46,8 +46,8 @@ quest.sections =
                     -- https://ffxiclopedia.fandom.com/wiki/Early_Bird_Catches_the_Bookworm
                     if
                         player:getNation() ~= xi.nation.WINDURST or
-                        (not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and
-                        not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY)
+                        (player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.LOST_FOR_WORDS and
+                        player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.THE_SIXTH_MINISTRY)
                     then
                         return quest:progressEvent(387)
                     end

@@ -368,7 +368,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             },
             [xi.zone.DYNAMIS_VALKURM] =
             {
-                [337] = { 3131 }, -- Quadav
+                [337] = { 2554 }, -- Quadav
                 [334] = { 2544 }, -- Orc
                 [327] = { 2539 }, -- Goblin
                 [360] = { 2549 }, -- Yagudo
@@ -911,22 +911,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Dynamis - Windurst (Done)
         ["Tzee Xicu Manifest"] = { "Tzee Xicu Mani.", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
         -- Dynamis - Xarcabard Non-Beastmen (Done)
-        ["Animated Hammer"] = { "A.Hammer", 81, 135, 99, 0, 9, "Animated Weapon" }, -- AHam
-        ["Animated Staff"] = { "A.Staff", 87, 135, 108, 0, 23, "Animated Weapon" }, -- ASta
-        ["Animated Longsword"] = { "A.Longsword", 84, 135, 104, 0, 24, "Animated Weapon" }, -- ALon
-        ["Animated Tabar"] = { "A.Tabar", 88, 135, 109, 0, 8, "Animated Weapon" }, -- ATab
-        ["Animated Great Axe"] = { "A.Great Axe", 80, 135, 97, 0, 12, "Animated Weapon" }, -- AGre
-        ["Animated Claymore"] = { "A.Claymore", 78, 135, 95, 0, 14, "Animated Weapon" }, -- ACla
-        ["Animated Spear"] = { "A.Spear", 86, 135, 107, 0, 19, "Animated Weapon" }, -- ASpe
-        ["Animated Scythe"] = { "A.Scythe", 85, 135, 105, 0, 20, "Animated Weapon" }, -- AScy
-        ["Animated Kunai"] = { "A.Kunai", 83, 135, 102, 0, 17, "Animated Weapon" }, -- AKun
-        ["Animated Tachi"] = { "A.Tachi", 89, 135, 110, 0, 13, "Animated Weapon" }, -- ATac
-        ["Animated Dagger"] = { "A.Dagger", 79, 135, 96, 0, 11, "Animated Weapon" }, -- ADag
-        ["Animated Knuckles"] = { "A.Knuckles", 82, 135, 101, 0,15, "Animated Weapon" }, -- AKnu
-        ["Animated Longbow"] = { "A.Longbow", 11, 135, 103, 0, 7, "Animated Weapon" }, -- Alon
-        ["Animated Gun"] = { "A.Gun", 12, 135, 98, 0, 18, "Animated Weapon" }, -- AGun
-        ["Animated Horn"] = { "A.Horn", 13, 135, 100, 0, 16, "Animated Weapon" }, -- AHor
-        ["Animated Shield"] = { "A.Shield", 14, 135, 106, 0, 21, "Animated Weapon" }, -- AShi
+        ["Animated Hammer"] = { "A.Hammer", 81, 135, 0, 0, 9, "Animated Weapon" }, -- AHam
+        ["Animated Staff"] = { "A.Staff", 87, 135, 0, 0, 23, "Animated Weapon" }, -- ASta
+        ["Animated Longsword"] = { "A.Longsword", 84, 135, 0, 0, 24, "Animated Weapon" }, -- ALon
+        ["Animated Tabar"] = { "A.Tabar", 88, 135, 0, 0, 8, "Animated Weapon" }, -- ATab
+        ["Animated Great Axe"] = { "A.Great Axe", 80, 135, 0, 0, 12, "Animated Weapon" }, -- AGre
+        ["Animated Claymore"] = { "A.Claymore", 78, 135, 0, 0, 14, "Animated Weapon" }, -- ACla
+        ["Animated Spear"] = { "A.Spear", 86, 135, 0, 0, 19, "Animated Weapon" }, -- ASpe
+        ["Animated Scythe"] = { "A.Scythe", 85, 135, 0, 0, 20, "Animated Weapon" }, -- AScy
+        ["Animated Kunai"] = { "A.Kunai", 83, 135, 0, 0, 17, "Animated Weapon" }, -- AKun
+        ["Animated Tachi"] = { "A.Tachi", 89, 135, 0, 0, 13, "Animated Weapon" }, -- ATac
+        ["Animated Dagger"] = { "A.Dagger", 79, 135, 0, 0, 11, "Animated Weapon" }, -- ADag
+        ["Animated Knuckles"] = { "A.Knuckles", 82, 135, 0, 0,15, "Animated Weapon" }, -- AKnu
+        ["Animated Longbow"] = { "A.Longbow", 11, 135, 0, 0, 7, "Animated Weapon" }, -- Alon
+        ["Animated Gun"] = { "A.Gun", 12, 135, 0, 0, 18, "Animated Weapon" }, -- AGun
+        ["Animated Horn"] = { "A.Horn", 13, 135, 0, 0, 16, "Animated Weapon" }, -- AHor
+        ["Animated Shield"] = { "A.Shield", 14, 135, 0, 0, 21, "Animated Weapon" }, -- AShi
         ["Satellite Hammer"] = { "S.Hammer", 81, 135, 0, 0, 9, "Satellite Weapon", 5251 }, -- SHam
         ["Satellite Staff"] = { "S.Staff", 87, 135, 0, 0, 23, "Satellite Weapon", 5251 }, -- SSta
         ["Satellite Longsword"] = { "S.Longsword", 84, 135, 0, 0, 24, "Satellite Weapon", 5763 }, -- SLon
@@ -1816,7 +1816,7 @@ xi.dynamis.setMobStats = function(mob)
         elseif mob:getFamily() == 358 then -- If Kindred
             mob:setMobLevel(math.random(77,80))
         else
-            mob:setMobLevel(math.random(75,77))
+            mob:setMobLevel(math.random(77.78))
         end
 
         if     job == xi.job.WAR then
@@ -2026,7 +2026,8 @@ xi.dynamis.setPetStats = function(mob)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
-    mob:setMobLevel(78)
+    mob:setMobMod(xi.mobMod.CHARMABLE, 0)
+    mob:setMobLevel(79)
     mob:setTrueDetection(true)
     xi.dynamis.setMDB(mob)
 end
@@ -2142,8 +2143,12 @@ m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
         mob:setLocalVar("GaveTimeExtension", 1)
     end
 
-    if player then
-        player:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+    local zone = mob:getZone()
+    if zone:getLocalVar('TitleGranted') < 1 then
+        for _, p in pairs(zone:getPlayers()) do
+            p:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+        end
+        zone:setLocalVar('TitleGranted', 1)
     end
 end)
 

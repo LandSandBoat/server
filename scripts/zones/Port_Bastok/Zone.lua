@@ -17,8 +17,8 @@ zoneObject.onInitialize = function(zone)
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -43,6 +43,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
@@ -62,10 +66,56 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 71 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, 0, 0, 224)
     end
 
     xi.moghouse.exitJobChangeFinish(player, csid, option)
+end
+
+zoneObject.onGameHour = function(zone)
+    local regionalNPCNames =
+    {
+        "Nokkhi_Jinjahl",
+        "Ominous_Cloud",
+        "Valeriano",
+        "Mokop-Sankop",
+        "Cheh_Raihah",
+        "Nalta",
+        "Dahjal"
+    }
+
+    if
+        GetNationRank(xi.nation.BASTOK) == 1 and
+        (GetNationRank(xi.nation.SANDORIA) ~= GetNationRank(xi.nation.BASTOK) and
+        GetNationRank(xi.nation.BASTOK) ~= GetNationRank(xi.nation.WINDURST))
+    then
+        for _, name in pairs(regionalNPCNames) do
+            local results = zone:queryEntitiesByName(name)
+            for _, entity in pairs(results) do
+                -- Will be the real entity if it has an X position
+                if math.abs(entity:getXPos()) > 0 then
+                    -- Hide all of these NPCs by default
+                    entity:setStatus(xi.status.NORMAL)
+                    -- If there is a clear winner, and not a tie,
+                    -- show the NPCs
+                end
+            end
+        end
+    else
+        for _, name in pairs(regionalNPCNames) do
+            local results = zone:queryEntitiesByName(name)
+            for _, entity in pairs(results) do
+                -- Will be the real entity if it has an X position
+                if math.abs(entity:getXPos()) > 0 then
+                    -- Hide all of these NPCs by default
+                    entity:setStatus(xi.status.DISAPPEAR)
+                    -- If there is a clear winner, and not a tie,
+                    -- show the NPCs
+                end
+            end
+        end
+    end
 end
 
 return zoneObject

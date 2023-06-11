@@ -31,6 +31,7 @@
 #include "../packets/char.h"
 #include "../packets/char_health.h"
 #include "../packets/char_update.h"
+#include "../packets/chat_message.h"
 #include "../packets/entity_update.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/message_basic.h"
@@ -44,9 +45,11 @@
 #include "../ai/controllers/player_controller.h"
 #include "../ai/states/magic_state.h"
 #include "../alliance.h"
+#include "../anticheat.h"
 #include "../attack.h"
 #include "../enmity_container.h"
 #include "../entities/battleentity.h"
+#include "../entities/fellowentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/petentity.h"
 #include "../entities/trustentity.h"
@@ -309,6 +312,14 @@ namespace battleutils
                 g_SkillChainDamageModifiers[level][count] = value;
             }
         }
+    }
+
+    /************************************************************************
+     *  Load Distance Correction                                            *
+     ************************************************************************/
+    void LoadDistanceCorrection()
+    {
+        luautils::CacheLuaObjectFromFile("./scripts/globals/damage/distance_correction.lua");
     }
 
     /************************************************************************
@@ -576,6 +587,11 @@ namespace battleutils
                 else
                 {
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
+                }
+
+                if (PAttacker->getMod(Mod::ENSPELL) > 0)
+                {
+                    PAttacker->setModifier(Mod::ENSPELL, 0);
                 }
             }
 
@@ -1923,25 +1939,11 @@ namespace battleutils
              (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && PDefender->GetMJob() != JOB_MNK && PDefender->isInDynamis())) &&
             PDefender->PAI->IsEngaged())
         {
-            // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
-            // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
+            float        defender_parry_skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            CItemWeapon* weapon               = GetEntityWeapon(PAttacker, SLOT_MAIN);
+            uint16       attackSkill          = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
 
-            float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
-
-            float diff = 1.0f + ((PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.05f);
-
-            if (PWeapon != nullptr && PWeapon->isTwoHanded())
-            {
-                // two handed weapons get a bonus
-                diff += 0.1f;
-            }
-
-            float diffCorrect = std::clamp<float>(diff, 0.4f, 1.4f);
-
-            float dex = PAttacker->DEX();
-            float agi = PDefender->AGI();
-
-            auto parryRate = std::clamp<uint8>((uint8)(((skill * 0.125f) + ((agi - dex) * 0.125f)) * diffCorrect), 5, 20);
+            uint8 parryRate = std::clamp<uint8>((uint8)(20.0f + (defender_parry_skill - attackSkill) / 8.0f), 5, 30);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
@@ -2171,6 +2173,9 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         // When set mob will only take 0 or 1 damage
         if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
         {
@@ -2214,12 +2219,22 @@ namespace battleutils
                     {
                         ((CPetEntity*)PDefender)
                             ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
-                    }
 
+                        if (PAttacker->objtype == TYPE_MOB)
+                        {
+                            // charmed mob should lose enmity from normal attacks
+                            ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                        }
+                    }
                     break;
 
                 case TYPE_PET:
                     ((CPetEntity*)PDefender)->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
+                    if (PAttacker->objtype == TYPE_MOB)
+                    {
+                        // pets should lose enmity from normal attacks
+                        ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                    }
                     break;
                 case TYPE_PC:
                     if (PAttacker->objtype == TYPE_MOB)
@@ -2278,8 +2293,7 @@ namespace battleutils
                     baseTp += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_IKISHOTEN, (CCharEntity*)PAttacker);
                 }
 
-                PAttacker->addTP(
-                    (int16)(tpMultiplier * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker)))))));
+                PAttacker->addTP((int16)(tpMultiplier * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker)))))));
             }
 
             if (giveTPtoVictim)
@@ -2485,6 +2499,9 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         // When set mob will only take 0 or 1 damage
         if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
         {
@@ -2581,6 +2598,16 @@ namespace battleutils
             {
                 offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
+            // Check for Tandem Strike accuracy bonus via mod
+            if (PAttacker->getMod(Mod::TANDEM_STRIKE) > 0 && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->getMod(Mod::TANDEM_STRIKE);
+            }
+            // Check for Tandem Strike accuracy bonus via master's mod
+            else if ((PAttacker->PMaster && PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE) > 0) && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE);
+            }
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
@@ -2591,12 +2618,6 @@ namespace battleutils
             // https://www.bluegartr.com/threads/68786-Dexterity-s-impact-on-critical-hits?p=3209015&viewfull=1#post3209015
 
             uint16 attackerAcc = PAttacker->ACC(attackNumber, offsetAccuracy);
-
-            // Enlight gives an ACC bonus not a hit rate bonus, ACC bonus is equal to damage dealt
-            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
-            {
-                attackerAcc += PAttacker->getMod(Mod::ENSPELL_DMG);
-            }
 
             hitrate += static_cast<int32>(std::floor((attackerAcc - PDefender->EVA()) / 2));
 
@@ -2941,7 +2962,7 @@ namespace battleutils
             {
                 if (attackerLvl > defenderLvl)
                 {
-                    cRatio = cRatio + correction; // Sets level correction for all mobs and pets
+                    cRatio = cRatio + correction; // Sets positive level correction for all mobs and pets
 
                     if ((attackerType == TYPE_PET) && (charutils::CheckMob(attackerLvl, defenderLvl) == EMobDifficulty::TooWeak)) // Checks if the mob is too weak and if its a pet
                     {
@@ -3683,6 +3704,43 @@ namespace battleutils
 
     /************************************************************************
      *                                                                       *
+     *  Checks if the tandem case is valid                                   *
+     *  Used for Tandem Strike and tbd for Tandem Blow                       *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsTandemValid(CBattleEntity* PAttacker)
+    {
+        CBattleEntity* tandemPartner;
+        // Tandem is valid only if both the master and the pet are engaged with the same target
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            // No Pet - No Tandem
+            if (PAttacker->PPet == nullptr)
+                return false;
+
+            tandemPartner = PAttacker->PPet;
+        }
+        else
+        {
+            // No Master - No Tandem
+            if (PAttacker->PMaster == nullptr || PAttacker->PMaster->objtype != TYPE_PC)
+                return false;
+
+            tandemPartner = PAttacker->PMaster;
+        }
+
+        // Partner is engaged.  Partner has a target. Partner's target matches the attacker's target.
+        if (tandemPartner->PAI->IsEngaged() && tandemPartner->GetBattleTarget() != nullptr && tandemPartner->GetBattleTargetID() == PAttacker->GetBattleTargetID())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Gets SkillChain Effect                                               *
      *                                                                       *
      ************************************************************************/
@@ -4267,6 +4325,8 @@ namespace battleutils
             }
         }
 
+        PDefender->PAI->EventHandler.triggerListener("SKILLCHAIN_TAKE", CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), damage);
+
         return damage;
     }
 
@@ -4585,6 +4645,19 @@ namespace battleutils
             }
         }
 
+        // Check fellow for TA target
+        if (auto* PChar = dynamic_cast<CCharEntity*>(taUser))
+        {
+            if (PChar->m_PFellow)
+            {
+                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->m_PFellow))
+                {
+                    if (isValidTrickAttackHelper(fellow))
+                        return fellow;
+                }
+            }
+        }
+
         // No Trick attack party member available
         return nullptr;
     }
@@ -4610,7 +4683,7 @@ namespace battleutils
             {
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount);
                 }
             }
         }
@@ -4647,7 +4720,7 @@ namespace battleutils
 
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PSource->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE);
+                    PCurrentMob->PEnmityContainer->UpdateEnmity(PSource, CE, VE, false, false, false);
                 }
             }
         }
@@ -4795,10 +4868,14 @@ namespace battleutils
             return 0;
         }
 
-        uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
-        uint8 shotCount = 0;                        // the total number of extra hits
+        uint8 shotCount = 0; // the total number of extra hits
 
-        if (PChar->GetSJob() == JOB_RNG)
+        uint8 lvl = 0; // Get Ranger level of char
+        if (PChar->GetMJob() == JOB_RNG)
+        {
+            lvl = PChar->GetMLevel();
+        }
+        else if (PChar->GetSJob() == JOB_RNG)
         { // if rng is sub then use the sub level
             lvl = PChar->GetSLevel();
         }
@@ -5018,7 +5095,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    void tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
+    bool tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
     {
         // Gear with Charm + does not affect the success rate of Charm, but increases the duration of the Charm.
         // Each +1 to Charm increases the duration of charm by 5%; +20 Charm doubles the duration of charm.
@@ -5032,7 +5109,7 @@ namespace battleutils
             if (((CMobEntity*)PVictim)->getMobMod(MOBMOD_CHARMABLE) == 0 || PVictim->PMaster != nullptr)
             {
                 PVictim->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_BIND, EFFECT_BIND, 1, 0, xirand::GetRandomNumber(1, 5)));
-                return;
+                return false;
             }
 
             // mob is charmable
@@ -5109,11 +5186,12 @@ namespace battleutils
 
             if (!TryCharm(PCharmer, PVictim))
             {
-                return;
+                return false;
             }
         }
 
         applyCharm(PCharmer, PVictim, std::chrono::seconds(CharmTime));
+        return true;
     }
 
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime)
@@ -5261,12 +5339,32 @@ namespace battleutils
                 }
                 if (!battleTarget || battleTarget == PDefender || battleTarget != attacker->PClaimedMob || PDefender->isDead())
                 {
-                    if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender && attacker->PClaimedMob->isAlive() &&
-                        attacker->PClaimedMob->m_OwnerID.id == attacker->id)
-                    { // unclaim any other living mobs owned by attacker
-                        static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
-                        attacker->PClaimedMob = nullptr;
+                    auto zoneId = PDefender->getZone();
+                    if (zoneId != 0 && (zoneId == ZONE_DYNAMIS_BASTOK ||
+                                        zoneId == ZONE_DYNAMIS_BEAUCEDINE ||
+                                        zoneId == ZONE_DYNAMIS_BUBURIMU ||
+                                        zoneId == ZONE_DYNAMIS_JEUNO ||
+                                        zoneId == ZONE_DYNAMIS_QUFIM ||
+                                        zoneId == ZONE_DYNAMIS_SAN_DORIA ||
+                                        zoneId == ZONE_DYNAMIS_VALKURM ||
+                                        zoneId == ZONE_DYNAMIS_TAVNAZIA ||
+                                        zoneId == ZONE_DYNAMIS_WINDURST ||
+                                        zoneId == ZONE_DYNAMIS_XARCABARD))
+                    {
+                        if (PDefender && PDefender->isDead())
+                        {
+                            attacker->PClaimedMob = nullptr;
+                        }
                     }
+                    else
+                    {
+                        if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender && attacker->PClaimedMob->isAlive() && attacker->PClaimedMob->m_OwnerID.id == attacker->id)
+                        { // unclaim any other living mobs owned by attacker
+                            static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
+                            attacker->PClaimedMob = nullptr;
+                        }
+                    }
+
                     if (!mob->GetCallForHelpFlag())
                     {
                         if (battleutils::HasClaim(PAttacker, PDefender))
@@ -5583,7 +5681,7 @@ namespace battleutils
             // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
             // JP is known to give 10 VE per point
             uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
-            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false);
+            static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
         }
     }
 
@@ -5744,6 +5842,25 @@ namespace battleutils
         return damage;
     }
 
+    void HandleScarletDelirium(CBattleEntity* PDefender, int32 damage)
+    {
+        // Check for Scarlet Delirium and update Effect Power with bonus from damage
+        CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
+
+        // Damage bonus calculation, update Effect Power
+        if (effectScarDel && effectScarDel->GetPower() == 0)
+        {
+            // Damage to Max HP Ratio
+            int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
+            int8   jpValue  = effectScarDel->GetSubPower();
+            uint32 duration = 90 + jpValue;
+
+            // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
+            PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+        }
+    }
+
     int32 HandleSevereDamageEffect(CBattleEntity* PDefender, EFFECT effect, int32 damage, bool removeEffect)
     {
         if (PDefender->StatusEffectContainer->HasStatusEffect(effect))
@@ -5893,7 +6010,18 @@ namespace battleutils
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
     {
-        return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
+        if (PEntity == nullptr)
+        {
+            return WEATHER::WEATHER_NONE;
+        }
+
+        auto zone = zoneutils::GetZone(PEntity->getZone());
+        if (zone == nullptr)
+        {
+            return WEATHER::WEATHER_NONE;
+        }
+
+        return GetWeather(PEntity, ignoreScholar, zone->GetWeather());
     }
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather)
@@ -6648,6 +6776,7 @@ namespace battleutils
 
         // get Fast Cast reduction, caps at 80%/2 = 40% reduction in recast -- https://www.bg-wiki.com/ffxi/Fast_Cast
         float fastCastReduction = std::clamp(static_cast<float>(PEntity->getMod(Mod::FASTCAST)) / 2.0f, 0.0f, 40.0f);
+
         // no known cap (limited by Inspiration merits + Futhark Trousers augment for a total retail cap value of 60%/2 = 30%)
         float inspirationRecastReduction = static_cast<float>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST)) / 2.0f;
 
@@ -7172,104 +7301,27 @@ namespace battleutils
         }
     }
 
-    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance)
+    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance, bool atk)
     {
-        CCharEntity* PChar = nullptr;
+        TracyZoneScoped;
 
-        if (PBattleEntity->objtype == TYPE_PC)
+        auto distanceCorrectionGetValue = lua["xi"]["damage"]["distanceCorrection"]["getValue"];
+        if (!distanceCorrectionGetValue.valid())
         {
-            PChar = (CCharEntity*)PBattleEntity;
-        }
-        else // Automaton
-        {
-            if (distance <= 3.0f) // Automaton will generally stay around 3' from the target.
-                return 1.0f;
-            if (distance <= 25.0f) // Beyond 3' linearly drop 1%/yalm
-                return 1.0f - (distance / 100.0f);
-
-            return 0.75f; // Cap at 0.75 modifier past 25 yalms
+            sol::error err = distanceCorrectionGetValue;
+            ShowError("battleutils::GetRangedDistanceCorrection: %s", err.what());
+            return 1.00f;
         }
 
-        if (PChar == nullptr)
+        auto result = distanceCorrectionGetValue(CLuaBaseEntity(PBattleEntity), distance);
+        if (!result.valid())
         {
-            return 1.0f; // Just in case PChar is null, then we will just return full damage.
+            sol::error err = result;
+            ShowError("battleutils::GetRangedDistanceCorrection: %s", err.what());
+            return 1.00f;
         }
 
-        uint8 RMainType = 0;
-        uint8 RMainSub  = 0;
-
-        CItemEquipment* PRangedSlot = PChar->getEquip(SLOT_RANGED);
-
-        if (PRangedSlot)
-        {
-            RMainType = ((CItemWeapon*)PRangedSlot)->getSkillType();
-            RMainSub  = ((CItemWeapon*)PRangedSlot)->getSubSkillType();
-        }
-
-        bool LongBowCurve  = (RMainType == 25 && RMainSub == 9);                                         // Longbows Only
-        bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
-        bool GunCurve      = (RMainType == 26 && RMainSub == 1);                                         // Guns Only
-
-        if (LongBowCurve)
-        {
-            if (distance <= 3.00f) // <=3'
-                return 0.65f + ((1.67f * distance) / 100);
-            if (distance <= 5.00f) // <=5.0'
-                return 0.65f + ((2.60f * distance) / 100);
-            if (distance < 7.50f) // <7.5'
-                return 0.65f + ((4.66f * distance) / 100);
-            if (distance <= 10.50f) // Sweet Spot from 7.5' to 10.5'
-                return 1.00f;
-            if (distance <= 15.00f) // <=15.0'
-                return 1.00f + ((-1.78f * distance) / 100);
-            if (distance <= 20.00f) // <=20.0'
-                return 1.00f + ((-1.15f * distance) / 100);
-
-            return 1.00f + ((-0.90f * distance) / 100); // Default to >20' Curve w/o Cap
-        }
-        else if (CrossBowCurve)
-        {
-            if (distance <= 3.00f) // <=3'
-                return 0.65f + ((3.30f * distance) / 100);
-            if (distance <= 5.00f) // <=5'
-                return 0.65f + ((4.40f * distance) / 100);
-            if (distance < 6.00f) // <6'
-                return 0.65f + ((5.83f * distance) / 100);
-            if (distance <= 10.00f) // Sweet Spot from 6' to 10'
-                return 1.00f;
-            if (distance <= 15.00f) // <=15'
-                return 1.00f + ((-2.00f * distance) / 100);
-            if (distance <= 20.00f) // <=20'
-                return 1.00f + ((-1.10f * distance) / 100);
-
-            return 0.86f; // Default to >20' Curve w/ 86% Cap
-        }
-        else if (GunCurve)
-        {
-            if (distance <= 3.00f) // <=3'
-                return 0.75 + ((3.33f * distance) / 100);
-            if (distance < 4.50f) // <4.5'
-                return 0.75 + ((5.56f * distance) / 100);
-            if (distance <= 5.50f) // Sweet spot from 4.5' to 5.5'
-                return 1.00f;
-            if (distance <= 7.50f) // <=7.5'
-                return 1.00f + ((-2.50f * distance) / 100);
-            if (distance <= 10) // <=10'
-                return 1.00f + ((-2.22f * distance) / 100);
-            if (distance <= 15) // <=15'
-                return 1.00f + ((-1.26f * distance) / 100);
-            if (distance <= 20) // <=20'
-                return 1.00f + ((-0.96f * distance) / 100);
-
-            return 1.00f + ((-0.67f * distance) / 100);
-        }
-        else // Default to Throwing Curve
-        {
-            if (distance <= 1.0f)
-                return 1.00f; // Sweet Spot Under or at 1'
-
-            return 1.00f - ((1.00f * distance) / 100); // Lose 1%/yalm
-        }
+        return result.get_type() == sol::type::number ? result.get<float>() : 1.0f;
     }
 
     float CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType)

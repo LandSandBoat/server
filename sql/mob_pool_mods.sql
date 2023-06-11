@@ -43,7 +43,8 @@ INSERT INTO `mob_pool_mods` VALUES (44,59,150,1); -- WEAPON_BONUS: 150
 INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 
 -- Airi
-INSERT INTO `mob_pool_mods` VALUES (70,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (70,48,307,1); -- SHARE_TARGET: 307
+INSERT INTO `mob_pool_mods` VALUES (70,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Animated Shield
 INSERT INTO `mob_pool_mods` VALUES (154,163,-70,0); -- DMGMAGIC: -70
@@ -211,9 +212,6 @@ INSERT INTO `mob_pool_mods` VALUES (1663,29,3,1); -- ASSIST: 3
 -- Goblin Swordsman
 INSERT INTO `mob_pool_mods` VALUES (1719,29,2,1); -- ASSIST: 2
 
--- Golden-Tongued Culberry
-INSERT INTO `mob_pool_mods` VALUES (1750,56,1,1); -- HP_STANDBACK: 1
-
 -- Goliath
 INSERT INTO `mob_pool_mods` VALUES (1754,4,4,1); -- SIGHT_RANGE: 4
 
@@ -240,7 +238,8 @@ INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0); -- DMGMAGIC: -100
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
 
 -- Iruci
-INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (2105,48,307,1); -- SHARE_TARGET: 307
+INSERT INTO `mob_pool_mods` VALUES (2105,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Ixzdei Blm
 INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);  -- SIGHT_RANGE: 15
@@ -381,7 +380,7 @@ INSERT INTO `mob_pool_mods` VALUES (2963,252,40,0); -- CHARMRES: 40
 -- Omega
 INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
-INSERT INTO `mob_pool_mods` VALUES (2973,59,112,1); -- WEAPON_BONUS: 112
+INSERT INTO `mob_pool_mods` VALUES (2973,59,115,1); -- WEAPON_BONUS: 115 ( base damage of 75, so (lvl 63 + 2) * 1.15
 
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
@@ -390,7 +389,8 @@ INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
 
 -- Pey
-INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
+INSERT INTO `mob_pool_mods` VALUES (3124,48,307,1); -- SHARE_TARGET: 307
+INSERT INTO `mob_pool_mods` VALUES (3124,1152,100,0); -- LULLABYRESBUILD: 100
 
 -- Phantom Worm
 INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
@@ -500,10 +500,7 @@ INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 INSERT INTO `mob_pool_mods` VALUES (3875,59,153,1); -- WEAPON_BONUS: 153
 
 -- Tiamat
-INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
-INSERT INTO `mob_pool_mods` VALUES (3916,162,-50,0);  -- DMGBREATH: -50
-INSERT INTO `mob_pool_mods` VALUES (3916,163,-40,0);  -- DMGMAGIC: -40
 -- need this until the dark_sleep and light_sleep immunities are working
 INSERT INTO `mob_pool_mods` VALUES (3916,254,100,0); -- LULLABYRES: 100
 
@@ -517,9 +514,7 @@ INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
 
 -- Ultima
-INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
-INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
-INSERT INTO `mob_pool_mods` VALUES (4083,59,105,1); -- WEAPON_BONUS: 105
+INSERT INTO `mob_pool_mods` VALUES (4083,59,115,1); -- WEAPON_BONUS: 115 ( base damage of 75, so (lvl 63 + 2) * 1.15
 
 -- Vanguards Crow
 INSERT INTO `mob_pool_mods` VALUES (4186,34,20,1);  -- MAGIC_COOL: 20

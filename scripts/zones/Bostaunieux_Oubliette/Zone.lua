@@ -54,86 +54,110 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)
+        [1] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[1]):openDoor(15)
         end,
-        [2] = function (x)
+
+        [2] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[2]):openDoor(15)
         end,
-        [3] = function (x)
+
+        [3] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[3]):openDoor(15)
         end,
-        [4] = function (x)
+
+        [4] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[4]):openDoor(15)
         end,
-        [5] = function (x)
+
+        [5] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[5]):openDoor(15)
         end,
-        [6] = function (x)
+
+        [6] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[6]):openDoor(15)
         end,
-        [7] = function (x)
+
+        [7] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[7]):openDoor(15)
         end,
-        [8] = function (x)
+
+        [8] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[8]):openDoor(15)
         end,
-        [9] = function (x)
+
+        [9] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[9]):openDoor(15)
         end,
-        [10] = function (x)
+
+        [10] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[10]):openDoor(15)
         end,
-        [11] = function (x)
+
+        [11] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[11]):openDoor(15)
         end,
-        [12] = function (x)
+
+        [12] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[12]):openDoor(15)
         end,
-        [13] = function (x)
+
+        [13] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[13]):openDoor(15)
         end,
-        [14] = function (x)
+
+        [14] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[14]):openDoor(15)
         end,
-        [15] = function (x)
+
+        [15] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[15]):openDoor(15)
         end,
-        [16] = function (x)
+
+        [16] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[16]):openDoor(15)
         end,
-        [17] = function (x)
+
+        [17] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[17]):openDoor(15)
         end,
-        [18] = function (x)
+
+        [18] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[18]):openDoor(15)
         end,
-        [19] = function (x)
+
+        [19] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[19]):openDoor(15)
         end,
-        [20] = function (x)
+
+        [20] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[20]):openDoor(15)
         end,
-        [21] = function (x)
+
+        [21] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[21]):openDoor(15)
         end,
-        [22] = function (x)
+
+        [22] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[22]):openDoor(15)
         end,
-        [23] = function (x)
+
+        [23] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[23]):openDoor(15)
         end,
-        [24] = function (x)
+
+        [24] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[24]):openDoor(15)
         end,
-        [25] = function (x)
+
+        [25] = function(x)
             GetNPCByID(ID.npc.TRAPDOOR[25]):openDoor(15)
         end,
     }

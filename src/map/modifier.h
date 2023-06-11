@@ -971,6 +971,10 @@ enum class Mod
     VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
     PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
 
+    // Per PR comment - New ASB section starting at 2000
+    TANDEM_STRIKE = 2000, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
+    TANDEM_BLOW   = 2001, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

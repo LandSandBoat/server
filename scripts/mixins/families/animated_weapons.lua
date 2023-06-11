@@ -29,8 +29,27 @@ local dialogChoice =
     ["DE_A.Shield"] = ID.text.ANIMATED_SHIELD_DIALOG,
 }
 
-g_mixins.families.animated_weapons = function(animatedMob)
+local animatedFragments =
+{
+    ["DE_A.Claymore"]  = xi.items.INTRICATE_FRAGMENT,
+    ["DE_A.Dagger"]    = xi.items.ORNATE_FRAGMENT,
+    ["DE_A.Great Axe"] = xi.items.SERAPHIC_FRAGMENT,
+    ["DE_A.Gun"]       = xi.items.ETHEREAL_FRAGMENT,
+    ["DE_A.Hammer"]    = xi.items.HEAVENLY_FRAGMENT,
+    ["DE_A.Horn"]      = xi.items.MYSTERIAL_FRAGMENT,
+    ["DE_A.Knuckles"]  = xi.items.MYSTIC_FRAGMENT,
+    ["DE_A.Kunai"]     = xi.items.DEMONIAC_FRAGMENT,
+    ["DE_A.Longbow"]   = xi.items.SNARLED_FRAGMENT,
+    ["DE_A.Longsword"] = xi.items.HOLY_FRAGMENT,
+    ["DE_A.Scythe"]    = xi.items.TENEBROUS_FRAGMENT,
+    ["DE_A.Shield"]    = xi.items.SUPERNAL_FRAGMENT,
+    ["DE_A.Spear"]     = xi.items.STELLAR_FRAGMENT,
+    ["DE_A.Staff"]     = xi.items.CELESTIAL_FRAGMENT,
+    ["DE_A.Tabar"]     = xi.items.RUNAEIC_FRAGMENT,
+    ["DE_A.Tachi"]     = xi.items.DIVINE_FRAGMENT
+}
 
+g_mixins.families.animated_weapons = function(animatedMob)
     animatedMob:addListener("SPAWN", "AWEAPON_SPAWN", function(mob)
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
@@ -62,7 +81,6 @@ g_mixins.families.animated_weapons = function(animatedMob)
             mob:setLocalVar("dialogTwo", mob:getLocalVar("Text_Index_2") + 2)
             mob:setLocalVar("dialogQueue", mob:getLocalVar("dialogQueue") - 1)
         end
-
     end)
 
     animatedMob:addListener("MAGIC_START", "AWEAPON_MAGIC_START", function(mob, spell, action)
@@ -93,6 +111,14 @@ g_mixins.families.animated_weapons = function(animatedMob)
     animatedMob:addListener("DEATH", "AWEAPON_DEATH", function(mob, killer)
         if mob:getLocalVar("warpDeath") ~= 1 then
             mob:showText(mob, mob:getLocalVar("Text") + 1)
+        end
+    end)
+
+    animatedMob:addListener("ITEM_DROPS", "ITEM_DROPS_ANIMATED", function(mob, loot)
+        for k, v in pairs(animatedFragments) do
+            if mob:getName() == k then
+                loot:addItem(v, xi.loot.rate.GUARANTEED)
+            end
         end
     end)
 end

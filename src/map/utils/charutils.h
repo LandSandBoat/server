@@ -92,6 +92,7 @@ namespace charutils
     float ApplyTH(int16 m_THLvl, uint16 rate);
     void  AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak,
                               bool isexpchain = false);
+    void  ValidateAndSetMeritMode(CCharEntity* Pchar);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
@@ -274,6 +275,8 @@ namespace charutils
 
     uint32 getCharIdFromName(std::string const& name);
     void   releaseEvent(CCharEntity* PChar, bool skipMessage = false);
+
+    uint8 GetHighestLevel(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

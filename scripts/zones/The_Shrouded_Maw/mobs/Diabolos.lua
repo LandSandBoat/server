@@ -7,6 +7,25 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
+local useCamisado = function(mob)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
+
+    mob:timer(3000, function(mobArg)
+        if mobArg:isAlive() then
+            -- Camisado
+            mobArg:useMobAbility(656)
+        end
+    end)
+
+    mob:timer(7000, function(mobArg)
+        if mobArg:isAlive() then
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
+        end
+    end)
+end
+
 -- TODO: CoP Diabolos
 -- 1) Make the diremites in the pit all aggro said player that falls into region. Should have a respawn time of 10 seconds.
 -- 2) Diremites also shouldnt follow you back to the fight area if you make it there. Should despawn and respawn instantly if all players
@@ -50,7 +69,8 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("Area", area)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
-    mob:setMod(xi.mod.DMGPHYS, -5000)
+    mob:setMod(xi.mod.UDMGPHYS, -5000)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
 end
 
 entity.onMobFight = function(mob, target)
@@ -88,6 +108,26 @@ entity.onMobFight = function(mob, target)
                 end)
             end
         end
+    end
+
+    -- Diabolos has regain under 50% HP according to retail capture
+    if hpp < 50 then
+        if mob:getMod(xi.mod.REGAIN) == 0 then
+            -- Regain of 50 implies an TP move every 60 sec when HP > 25%
+            mob:setMod(xi.mod.REGAIN, 50)
+        end
+    else
+        if mob:getMod(xi.mod.REGAIN) ~= 0 then
+            mob:setMod(xi.mod.REGAIN, 0)
+        end
+    end
+end
+
+-- After Nightmare or Ultimate Terror then always use Camisado
+entity.onMobWeaponSkill = function(target, mob, skill)
+    local skillID = skill:getID()
+    if skillID == 659 or skillID == 1908 then
+        useCamisado(mob)
     end
 end
 

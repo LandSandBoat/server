@@ -65,8 +65,8 @@ zoneObject.onZoneOut = function(player)
     end
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onGameDay = function()
@@ -76,7 +76,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         triggerArea:GetTriggerAreaID() == 1 and
-        player:getCharVar("UnderOathCS") == 7
+        player:getVar("Quest[0][92]Prog") == 7
     then
         -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
@@ -91,7 +91,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
-        player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
+        player:setCharVar("Quest[0][92]Prog", 8) -- Quest: Under Oath - PLD AF3
     end
 end
 

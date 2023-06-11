@@ -289,6 +289,26 @@ auto CLuaItem::getSignature() -> std::string
     return signature;
 }
 
+uint8 CLuaItem::getMaxCharges()
+{
+    if (auto* PUsableItem = dynamic_cast<CItemUsable*>(m_PLuaItem))
+    {
+        return PUsableItem->getMaxCharges();
+    }
+
+    return 0;
+}
+
+uint8 CLuaItem::getCurrentCharges()
+{
+    if (auto* PUsableItem = dynamic_cast<CItemUsable*>(m_PLuaItem))
+    {
+        return PUsableItem->getCurrentCharges();
+    }
+
+    return 0;
+}
+
 uint8 CLuaItem::getAppraisalID()
 {
     return m_PLuaItem->m_extra[0x16];
@@ -328,6 +348,21 @@ auto CLuaItem::getSoulPlateData() -> sol::table
     return table;
 }
 
+auto CLuaItem::getFishData() -> sol::table
+{
+    if (auto PFish = static_cast<CItemFish*>(m_PLuaItem))
+    {
+        sol::table table = lua.create_table();
+
+        table["length"] = PFish->GetLength();
+        table["weight"] = PFish->GetWeight();
+        table["ranked"] = PFish->IsRanked();
+
+        return table;
+    }
+    return sol::lua_nil;
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -362,9 +397,12 @@ void CLuaItem::Register()
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
     SOL_REGISTER("getAppraisalID", CLuaItem::getAppraisalID);
     SOL_REGISTER("setAppraisalID", CLuaItem::setAppraisalID);
+    SOL_REGISTER("getMaxCharges", CLuaItem::getMaxCharges);
+    SOL_REGISTER("getCurrentCharges", CLuaItem::getCurrentCharges);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);
+    SOL_REGISTER("getFishData", CLuaItem::getFishData);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaItem& item)

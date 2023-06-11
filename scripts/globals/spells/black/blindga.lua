@@ -12,6 +12,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.BLIND) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
+
     -- Pull base stats.
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND) --blind uses caster INT vs target MND
 
@@ -34,16 +39,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.BLINDNESS
-    duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if duration >= 60 then --Do it!
+        local resduration = duration * resist
 
-        local resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
         elseif target:addStatusEffect(params.effect, power, 0, resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end

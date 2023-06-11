@@ -32,9 +32,9 @@ local sharedLoot =
     },
     item3 =
     {
-        [       xi.items.FUSCINA] = 880,
-        [xi.items.MERCURIAL_KRIS] =  28,
-        [       xi.items.OXBLOOD] =  92,
+        [         xi.items.FUSCINA] = 880,
+        [  xi.items.MERCURIAL_KRIS] =  28,
+        [xi.items.PIECE_OF_OXBLOOD] =  92,
     },
     item4 =
     {
@@ -56,10 +56,10 @@ local convertToWeighted = function(loot)
 end
 
 -- Generate weighted loot tables now (on server init) so it doesn't have to be done at runtime
-local w_item1 = convertToWeighted(sharedLoot.item1)
-local w_item2 = convertToWeighted(sharedLoot.item2)
-local w_item3 = convertToWeighted(sharedLoot.item3)
-local w_item4 = convertToWeighted(sharedLoot.item4)
+local wItem1 = convertToWeighted(sharedLoot.item1)
+local wItem2 = convertToWeighted(sharedLoot.item2)
+local wItem3 = convertToWeighted(sharedLoot.item3)
+local wItem4 = convertToWeighted(sharedLoot.item4)
 
 local weightedRandomSelect = function(w_loot)
     -- Takes a weighted loot table and returns a single random result
@@ -73,13 +73,13 @@ entity.onTrigger = function(player, npc)
     local chestOwner = npc:getLocalVar("leaderID")
 
     -- First reward is 1 item from the item1 pool
-    local boxitem1 = weightedRandomSelect(w_item1)
+    local boxitem1 = weightedRandomSelect(wItem1)
     -- Second reward is 1 item from the item2 pool
-    local boxitem2 = weightedRandomSelect(w_item2)
+    local boxitem2 = weightedRandomSelect(wItem2)
     -- Third reward is a 1 item from the item3 pool
-    local boxitem3 = weightedRandomSelect(w_item3)
+    local boxitem3 = weightedRandomSelect(wItem3)
     -- Final reward is the Albatross Ring
-    local boxitem4 = weightedRandomSelect(w_item4)
+    local boxitem4 = weightedRandomSelect(wItem4)
 
     --Distribute rewards
     if npc:getLocalVar("open") == 0 and player:getLeaderID() == chestOwner then
@@ -89,8 +89,13 @@ entity.onTrigger = function(player, npc)
         player:addTreasure(boxitem2, npc)
         player:addTreasure(boxitem3, npc)
         player:addTreasure(boxitem4, npc)
-        npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
-        npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
+        npc:timer(15000, function(npcArg)
+            npcArg:entityAnimationPacket("kesu")
+        end)
+
+        npc:timer(16000, function(npcArg)
+            npcArg:setStatus(xi.status.DISAPPEAR)
+        end)
     end
 
     local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
@@ -100,6 +105,7 @@ entity.onTrigger = function(player, npc)
         if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         end
+
         member:changeMusic(0, 0)
         member:changeMusic(1, 0)
         member:changeMusic(2, 101)

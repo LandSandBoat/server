@@ -60,6 +60,7 @@ zoneObject.onInitialize = function(zone)
     qmDrk:setLocalVar("position", qmDrkPos)
     qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     qmDrk:setLocalVar("hatedPlayer", 0)
+    qmDrk:setLocalVar("nextMove", os.time() + 1800) -- 30 minutes from now
 
     -- Give the Faith ??? a random spawn
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
@@ -98,16 +99,20 @@ zoneObject.onGameHour = function(zone)
     end
 
     -- Ix'DRK spawn randomiser
-    if vanadielHour % 12 == 0 and qmDrk:getStatus() ~= xi.status.DISAPPEAR then -- Change ??? position every 12 hours Vana'diel time (30 mins)
+    if
+        qmDrk:getStatus() ~= xi.status.DISAPPEAR and
+        qmDrk:getLocalVar("nextMove") < os.time()
+    then -- Change ??? position every 30 mins
         qmDrk:hideNPC(30)
         local qmDrkPos = math.random(1, 4)
         qmDrk:setLocalVar("position", qmDrkPos)
+        qmDrk:setLocalVar("nextMove", os.time() + 1800) -- 30 minutes later
         qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     end
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -108,6 +108,7 @@ player_data = [
     "char_equip.sql",
     "char_equip_saved.sql",
     "char_exp.sql",
+    "char_fellow.sql",
     "char_history.sql",
     "char_inventory.sql",
     "char_jobs.sql",

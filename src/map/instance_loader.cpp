@@ -76,12 +76,13 @@ CInstance* CInstanceLoader::LoadInstance()
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
             mob_family_system.charmable, \
-            mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, \
-            mob_resistances.water_eem, mob_resistances.light_eem, mob_resistances.dark_eem \
+            mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, mob_ele_evasion.lightning_eem, \
+            mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
             FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid \
             INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid and mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
             INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+            INNER JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
 

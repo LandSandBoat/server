@@ -25,6 +25,7 @@ local loot =
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("carbuncleHP", 20000)
+    battlefield:setLocalVar("lootSpawned", 1)
     battlefield:setLocalVar("phase", 1)
 end
 

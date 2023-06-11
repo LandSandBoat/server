@@ -19,12 +19,14 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.element = xi.magic.ele.WATER
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.WATER)
+
+    xi.magic.handleSMNBurstMsg(pet, target, skill, params.element, 379)
 
     return totaldamage
 end

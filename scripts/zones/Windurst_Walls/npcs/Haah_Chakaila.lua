@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Haah Chakaila
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

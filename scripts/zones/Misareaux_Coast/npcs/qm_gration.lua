@@ -4,6 +4,7 @@
 -- !pos 113.563 -16.302 38.912 25
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -18,13 +19,16 @@ entity.onTrade = function(player, npc, trade)
         npc:setLocalVar("shield", 2)
     end
 
-    if shieldChance > 0 and npcUtil.popFromQM(player, npc, ID.mob.GRATION) then
+    if
+        shieldChance > 0 and
+        npcUtil.popFromQM(player, npc, ID.mob.GRATION)
+    then
         player:confirmTrade()
-        SetDropRate(1218, 12360, shieldChance)
+        GetMobByID(ID.mob.GRATION):setLocalVar("DropRate", shieldChance)
         if npc:getLocalVar("shield") == 1 then
-            player:messageSpecial(ID.text.SNATCHED_AWAY, 12359)
+            player:messageSpecial(ID.text.SNATCHED_AWAY, xi.items.HICKORY_SHIELD)
         else
-            player:messageSpecial(ID.text.SNATCHED_AWAY, 12370)
+            player:messageSpecial(ID.text.SNATCHED_AWAY, xi.items.PICAROONS_SHIELD)
         end
     end
 end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Toi-Poi
--- Working 100%
 -----------------------------------
 local entity = {}
 

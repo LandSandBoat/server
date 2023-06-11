@@ -18,11 +18,6 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    -- RNG AF2
-    if player:getCharVar("fireAndBrimstone") == 2 then
-        cs = 4
-    end
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -34,8 +29,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -45,9 +40,6 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 4 then
-        player:setCharVar("fireAndBrimstone", 3)
-    end
 end
 
 return zoneObject

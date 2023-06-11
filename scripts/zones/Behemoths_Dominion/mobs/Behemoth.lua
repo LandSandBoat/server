@@ -16,9 +16,20 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MDEF, 20)
     mob:setMod(xi.mod.EVA, 315)
     mob:setMod(xi.mod.ATT, 256)
+    mob:setMod(xi.mod.POISONRES, 10)
+    mob:setMod(xi.mod.SLOWRES, 10)
+    mob:setMod(xi.mod.GRAVITYRES, 10)
+    mob:setMod(xi.mod.PARALYZERES, 15)
+    mob:setMod(xi.mod.BLINDRES, 15)
+    mob:setMod(xi.mod.SLEEPRES, 100)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.SILENCERES, 100)
 
     -- Despawn the ???
-    GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
+    local questionMarks = GetNPCByID(ID.npc.BEHEMOTH_QM)
+    if questionMarks ~= nil then
+        questionMarks:setStatus(xi.status.DISAPPEAR)
+    end
 end
 
 entity.onMobFight = function(mob, target)
@@ -43,7 +54,10 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Respawn the ???
-    GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+    local questionMarks = GetNPCByID(ID.npc.BEHEMOTH_QM)
+    if questionMarks ~= nil then
+        questionMarks:updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
+    end
 end
 
 return entity

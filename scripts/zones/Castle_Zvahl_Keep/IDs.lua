@@ -50,6 +50,16 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP] =
     npc =
     {
         TREASURE_CHEST = 17441088,
+        TELEPORTERS =
+        {
+            17441070, -- Center tele
+            17441071, -- North west tele
+            17441072, -- South west tele
+            17441073, -- North east tele
+            17441074, -- South east tele
+            17441076, -- North final tele
+            17441077, -- South final tele
+        },
     },
 }
 

@@ -105,6 +105,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
     local params = {}
     params.bonusmab   = 0
     params.includemab = false
+    params.damageSpell = true
 
     if
         addType == xi.additionalEffect.procType.DAMAGE and
@@ -192,7 +193,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
         end
 
-        chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        -- Do not adjust the chance of effects that are guaranteed (like god winds)
+        if chance ~= 100 then
+            chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        end
     end
 
     --------------------------------------
@@ -220,7 +224,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == xi.additionalEffect.procType.DEBUFF then
         if addStatus and addStatus > 0 then
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
-            local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
+            local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0, item:getSkillType())
             local immunity = 0
 
             for _, statusTable in pairs(immunityTable) do

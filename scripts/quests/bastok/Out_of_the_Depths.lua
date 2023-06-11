@@ -89,23 +89,19 @@ quest.sections =
 
                 [309] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:addGil(100)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 100)
+                        npcUtil.giveCurrency(player, 'gil', 100)
                         player:delKeyItem(xi.ki.DUSTY_TOME)
                         quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 2 then
-                        player:addGil(200)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 200)
+                        npcUtil.giveCurrency(player, 'gil', 200)
                         player:delKeyItem(xi.ki.POINTED_JUG)
                         quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 3 then
-                        player:addGil(300)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 300)
+                        npcUtil.giveCurrency(player, 'gil', 300)
                         player:delKeyItem(xi.ki.CRACKED_CLUB)
                         quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 4 then
-                        player:addGil(400)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 400)
+                        npcUtil.giveCurrency(player, 'gil', 400)
                         player:delKeyItem(xi.ki.PEELING_HAIRPIN)
                         quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 5 then

@@ -35,8 +35,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 6, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dStatMult = 1.5
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, 10 * mob:getMainLvl(), xi.magic.ele.FIRE, nil, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, nil, nil, nil, dStatMult)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

@@ -65,10 +65,10 @@ public:
     auto getBackgroundMusicDay();
     auto getBackgroundMusicNight();
 
-    void setSoloBattleMusic(uint8 musicId);
-    void setPartyBattleMusic(uint8 musicId);
-    void setBackgroundMusicDay(uint8 musicId);
-    void setBackgroundMusicNight(uint8 musicId);
+    void setSoloBattleMusic(uint16 musicId);
+    void setPartyBattleMusic(uint16 musicId);
+    void setBackgroundMusicDay(uint16 musicId);
+    void setBackgroundMusicNight(uint16 musicId);
 
     sol::table queryEntitiesByName(std::string const& name);
 

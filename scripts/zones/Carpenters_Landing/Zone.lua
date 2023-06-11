@@ -48,8 +48,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onGameHour = function(zone)
@@ -69,7 +69,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-
     xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), false)
 end
 

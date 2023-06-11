@@ -32,6 +32,7 @@
 #include "../conquest_system.h"
 #include "../enmity_container.h"
 #include "../entities/charentity.h"
+#include "../lua/lua_loot.h"
 #include "../mob_modifier.h"
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
@@ -52,7 +53,10 @@
 #include "../weapon_skill.h"
 #include "common/timer.h"
 #include "common/utils.h"
+
+#include <algorithm>
 #include <cstring>
+#include <random>
 
 CMobEntity::CMobEntity()
 {
@@ -110,6 +114,8 @@ CMobEntity::CMobEntity()
     defRank = 3;
     accRank = 3;
     evaRank = 3;
+
+    m_spawnSet = 0;
 
     m_dmgMult = 100;
 
@@ -569,6 +575,29 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return false;
 }
 
+bool CMobEntity::CanSpawnFromGroup()
+{
+    /********************************************
+     * Returns true if:
+     *  1.  The mob is a grouped (shared-ph) mob and
+     *  2.  Is selected by its spawn group to be spawned
+     * (Returns true also if not a spawn group member)
+     ********************************************/
+    if (!this->m_spawnSet || !this->loc.zone)
+    {
+        return true;
+    }
+
+    spawnGroup_t* spawngp = &this->loc.zone->m_SpawnGroups[this->m_spawnSet];
+
+    if (spawngp->isReady(this))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void CMobEntity::Spawn()
 {
     TracyZoneScoped;
@@ -585,6 +614,7 @@ void CMobEntity::Spawn()
     SetCallForHelpFlag(false);
 
     PEnmityContainer->Clear();
+    PAI->ClearStateStack();
 
     // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
     // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
@@ -724,6 +754,15 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             {
                 angle = 45.0f;
             }
+
+            // for mobs that do not turn to face the target
+            if (m_Behaviour & BEHAVIOUR_NO_TURN)
+            {
+                // need to always add the single main target as otherwise player can interrupt cone skill
+                // by spinning around the mob which should not be possible
+                PAI->TargetFind->findSingleTarget(PTarget, findFlags);
+            }
+
             if (PSkill->m_Aoe == 6) // Conal from center of mob
             {
                 PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::ATTACKER, distance, angle, findFlags, 0);
@@ -1231,66 +1270,22 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         return false; // dropCount >= TREASUREPOOL_SIZE;
     };
 
-    auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)
-    {
-        // Try and update droprate for an item in place
-        bool updated = false;
-        for (auto& entry : list)
-        {
-            if (!updated && entry.ItemID == itemID)
-            {
-                entry.DropRate = dropRate;
-                updated        = true;
-            }
-        }
-
-        // If that item wasn't found and updated, add the item and droprate to the list
-        if (!updated)
-        {
-            list.emplace_back(DropItem_t(dropType, itemID, dropRate));
-        }
-    };
-
     // Limit number of items that can drop to the treasure pool size
     uint8 dropCount = 0;
 
-    // Make a temporary copy of the global droplist entry for this drop id
-    // so we can modify it without modifying the global lists
-    DropList_t DropList;
-    if (auto droplistPtr = itemutils::GetDropList(m_DropID))
-    {
-        DropList = *droplistPtr;
-    }
+    DropList_t* dropList = itemutils::GetDropList(m_DropID);
 
-    // Apply m_DropListModifications changes to DropList
-    for (auto& entry : m_DropListModifications)
-    {
-        uint16    itemID   = entry.first;
-        uint16    dropRate = entry.second.first;
-        DROP_TYPE dropType = static_cast<DROP_TYPE>(entry.second.second);
-
-        if (dropType == DROP_NORMAL)
-        {
-            UpdateDroprateOrAddToList(DropList.Items, DROP_NORMAL, itemID, dropRate);
-        }
-        else if (dropType == DROP_GROUPED)
-        {
-            for (auto& group : DropList.Groups)
-            {
-                UpdateDroprateOrAddToList(group.Items, DROP_NORMAL, itemID, dropRate);
-            }
-        }
-    }
-
-    // Make sure m_DropListModifications doesn't persist by clearing it out now
-    m_DropListModifications.clear();
-
-    if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
+    if (!getMobMod(MOBMOD_NO_DROPS) && dropList != nullptr && (!dropList->Items.empty() || !dropList->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
         int16 maxRolls = 1;
 
-        for (const DropGroup_t& group : DropList.Groups)
+        LootContainer loot(dropList);
+
+        PAI->EventHandler.triggerListener("ITEM_DROPS", CLuaBaseEntity(this), CLuaLootContainer(&loot));
+
+        // clang-format off
+        loot.ForEachGroup([&](const DropGroup_t& group)
         {
             uint16 total = 0;
             for (const DropItem_t& item : group.Items)
@@ -1298,7 +1293,10 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 total += item.DropRate;
             }
 
-            for (int16 roll = 0; roll < maxRolls; ++roll)
+            // NOTE: When switching over to the correct TH table method fixed rate means to not use the TH table
+            int16 rolls = group.hasFixedRate ? 1 : maxRolls;
+
+            for (int16 roll = 0; roll < rolls; ++roll)
             {
                 // Determine if this group should drop an item and determine bonus
                 float bonus = ApplyTH(m_THLvl, group.GroupRate);
@@ -1323,11 +1321,14 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
                 }
             }
-        }
+        });
 
-        for (const DropItem_t& item : DropList.Items)
+        loot.ForEachItem([&](const DropItem_t& item)
         {
-            for (int16 roll = 0; roll < maxRolls; ++roll)
+            // NOTE: When switching over to the correct TH table method fixed rate means to not use the TH table
+            int16 rolls = item.hasFixedRate ? 1 : maxRolls;
+
+            for (int16 roll = 0; roll < rolls; ++roll)
             {
                 float bonus = ApplyTH(m_THLvl, item.DropRate);
                 if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < std::round(item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus))
@@ -1339,7 +1340,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
                 }
             }
-        }
+        });
+        // clang-format on
     }
 
     ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
@@ -1636,7 +1638,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         for (uint8 i = 0; i < crystalRolls; i++)
         {
-            if (xirand::GetRandomNumber(100) < 50 && AddItemToPool(4095 + m_Element, ++dropCount))
+            if (xirand::GetRandomNumber(100) < 35 && AddItemToPool(4095 + m_Element, ++dropCount))
             {
                 return;
             }
@@ -1739,11 +1741,29 @@ void CMobEntity::OnDeathTimer()
 void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
+
     FadeOut();
+
+    if (this->m_spawnSet > 0)
+    {
+        // Might need some logic in here to control whether you want to force-spawn the same mob
+        // eg. if someone just zoned it and not killed it, etc.
+        auto&       spawnGroup = this->loc.zone->m_SpawnGroups[this->m_spawnSet];
+        CMobEntity* nextMob    = spawnGroup.replaceMob(this);
+        if (nextMob)
+        {
+            if (nextMob->PAI && !nextMob->PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime)))
+            {
+                nextMob->PAI->GetCurrentState()->ResetEntryTime();
+            }
+        }
+    }
+
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));
+
     luautils::OnMobDespawn(this);
     PAI->ClearActionQueue();
-    //#event despawn
+    // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
 
@@ -1756,7 +1776,6 @@ void CMobEntity::Die()
         PBattlefield->handleDeath(this);
     }
 
-    m_THLvl = PEnmityContainer->GetHighestTH();
     PEnmityContainer->Clear();
     PAI->ClearStateStack();
     if (PPet != nullptr && PPet->isAlive() && GetMJob() == JOB_SMN)
@@ -1782,6 +1801,7 @@ void CMobEntity::Die()
 
             DistributeRewards();
             m_OwnerID.clean();
+            m_THLvl = 0;
         }
     }));
     // clang-format on

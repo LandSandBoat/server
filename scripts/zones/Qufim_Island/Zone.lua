@@ -11,8 +11,8 @@ zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -47,8 +47,9 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
     if
-        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")
-        and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
+        not dosetsu:isSpawned() and
+        os.time() > dosetsu:getLocalVar("respawn") and
+        (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
     then
         DisallowRespawn(dosetsu:getID(), false)
         dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after thunder weather starts

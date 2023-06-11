@@ -8,20 +8,17 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGEN, 50)
-end
-
-entity.onMobEngage = function(mob, target)
-    mob:setLocalVar("disengage", 0)
+    if mob:getID() == 16798031 then
+        mob:addMod(xi.mod.REGEN, 50)
+    end
 end
 
 entity.onMobDisengage = function(mob)
     -- According to wiki, Mountain Worm will despawn shortly
     --  after disengaging. 10 seconds is being assumed and
     --  needs further information
-    mob:setLocalVar("disengage", 1)
     mob:timer(10000, function(mobArg)
-        if mob:getLocalVar("disengage") == 1 then
+        if not mob:isEngaged() then
             DespawnMob(mobArg:getID())
         end
     end)

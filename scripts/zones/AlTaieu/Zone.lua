@@ -10,8 +10,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,6 +31,10 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+end
+
+zoneObject.afterZoneIn = function(player)
+    player:entityVisualPacket("on00", player) -- Fog effect on zone in
 end
 
 return zoneObject

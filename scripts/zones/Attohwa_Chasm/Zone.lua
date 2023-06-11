@@ -47,11 +47,13 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.PARRA_MIASMA[4]):addPeriodicTrigger(0, 3, 0)
 
     -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.XOLOTL)
     xi.mob.nmTODPersistCache(zone, ID.mob.TIAMAT)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
     end
 
+    DisallowRespawn(ID.mob.CITIPATI, true)
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
@@ -69,8 +71,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -103,16 +105,22 @@ zoneObject.onGameHour = function(zone)
 
     -- Don't allow Citipati or Xolotl to spawn outside of night
     local xolre = GetServerVariable(string.format("\\[SPAWN\\]"..ID.mob.XOLOTL))
+    local citipatiDeath = GetServerVariable("Citipati Death")
 
     if VanadielHour() >= 4 and VanadielHour() < 20 then
         DisallowRespawn(ID.mob.CITIPATI, true)
         DisallowRespawn(ID.mob.XOLOTL, true)
     else
-        DisallowRespawn(ID.mob.CITIPATI, false)
-        DisallowRespawn(ID.mob.XOLOTL, false)
         if os.time() > xolre and VanadielHour() == 20 then
+            DisallowRespawn(ID.mob.XOLOTL, false)
             SpawnMob(ID.mob.XOLOTL)
-            GetMobByID(ID.mob.XOLOTL):setLocalVar("xolotlDead", 0)
+            SetServerVariable("xolotlDead", 0)
+        end
+
+        -- Make sure this cannot spawn unless time is up. Due to this being a lottery and night time spawn this needs to be here or it instantly respawns.
+        DisallowRespawn(ID.mob.CITIPATI, true)
+        if os.time() > citipatiDeath then
+            DisallowRespawn(ID.mob.CITIPATI, false)
         end
     end
 end

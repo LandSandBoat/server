@@ -277,18 +277,18 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
-            { itemid =    0, droprate = 100 }, -- Nothing
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     },
 }

@@ -20,7 +20,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.element = xi.magic.ele.LIGHTNING
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
@@ -38,6 +38,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     if totaldamage > 0 then
         xi.magic.applyAbilityResistance(pet, target, effectParams)
     end
+
+    xi.magic.handleSMNBurstMsg(pet, target, skill, params.element, 379)
 
     return totaldamage
 end

@@ -32,11 +32,10 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if resist >= 0.5 then -- Do it!
         local resduration = duration * resist
-        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
-        if resduration == 0 then
-            spell:setMsg(xi.msg.basic.NONE)
-        elseif target:addStatusEffect(params.effect, power, 0, resduration, 0, 1) then
+        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
+        if target:addStatusEffect(params.effect, power, 0, resduration, 0, 1) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end

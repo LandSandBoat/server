@@ -20,15 +20,15 @@ local spawnPet = function(mob)
 
     -- Handle for SMN
     if job == xi.job.SMN then
-        mob:setLocalVar("petModel", math.random(1,7)) -- Random Avatar
+        mob:setLocalVar("petModel", math.random(1, 7)) -- Random Avatar
         pet:setModelId(ID.jobTable[job].petModelID[mob:getLocalVar("petModel")]) -- Set Model
     -- Handle for BST
     elseif job == xi.job.BST then
-        mob:setLocalVar("petModel", math.random(1,4)) -- Random Beast
+        mob:setLocalVar("petModel", math.random(1, 4)) -- Random Beast
         pet:setModelId(ID.jobTable[job].petModelID[mob:getLocalVar("petModel")]) -- Set Model
     -- Handle for PUP
     elseif job == xi.job.PUP then
-        mob:setLocalVar("petModel", math.random(1,3)) -- Random Puppet
+        mob:setLocalVar("petModel", math.random(1, 3)) -- Random Puppet
         pet:setModelId(ID.jobTable[job].petModelID[mob:getLocalVar("petModel")][1]) -- Set Model
         pet:changeJob(ID.jobTable[job].petModelID[mob:getLocalVar("petModel")][2]) -- Change Job
     end
@@ -43,7 +43,7 @@ local spawnPet = function(mob)
             mobArg:setMobAbilityEnabled(true)
             mob:setLocalVar("control", 0)
             SpawnMob(pet:getID())
-            pet:setPos(pos.x + math.random(-2,2), pos.y, pos.z + math.random(-2,2), pos.rot)
+            pet:setPos(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
         end
     end)
 end
@@ -62,36 +62,54 @@ entity.onMobSpawn = function(mob)
         end
 
         mobArg:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+
+        -- Apply job mods (Useful for balancing)
+        if ID.jobTable[job].mods ~= nil then
+            for _, mod in pairs(ID.jobTable[job].mods) do
+                mobArg:setMod(mod[1], mod[2])
+            end
+        end
     end)
 end
 
 entity.onMobFight = function(mob, target)
     -- Pet summoning control
     if mob:getLocalVar("petID") > 0 then
-        if not GetMobByID(mob:getLocalVar("petID")):isSpawned() and mob:getLocalVar("petSpawned") == 0 then
+        if
+            not GetMobByID(mob:getLocalVar("petID")):isSpawned() and
+            mob:getLocalVar("petSpawned") == 0
+        then
             spawnPet(mob)
-        elseif not GetMobByID(mob:getLocalVar("petID")):isSpawned() and mob:getLocalVar("control") == 0 then
+        elseif
+            not GetMobByID(mob:getLocalVar("petID")):isSpawned() and
+            mob:getLocalVar("control") == 0
+        then
             mob:setLocalVar("control", 1)
             mob:timer(30000, function(mobArg)
-                mob:setLocalVar("petSpawned", 0)
+                mobArg:setLocalVar("petSpawned", 0)
             end)
         end
     end
 
     -- If Fantoccini used Chainspell or Manafont
-    if mob:hasStatusEffect(xi.effect.CHAINSPELL) or mob:hasStatusEffect(xi.effect.MANAFONT) then
+    if
+        mob:hasStatusEffect(xi.effect.CHAINSPELL) or
+        mob:hasStatusEffect(xi.effect.MANAFONT)
+    then
         mob:setMobMod(xi.mobMod.SPELL_LIST, ID.jobTable[mob:getMainJob()].spellListID)
     else
         mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
     end
 end
 
-entity.onMobDeath = function(mob)
-    local moblin = GetMobByID(mob:getID()-2)
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        local moblin = GetMobByID(mob:getID()-2)
 
-    moblin:showText(moblin, ID.text.NOT_HOW)
-    DespawnMob(mob:getLocalVar("petID"))
-    DespawnMob(moblin:getID())
+        moblin:showText(moblin, ID.text.NOT_HOW)
+        DespawnMob(mob:getLocalVar("petID"))
+        DespawnMob(moblin:getID())
+    end
 end
 
 return entity

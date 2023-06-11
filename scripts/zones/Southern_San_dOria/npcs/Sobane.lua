@@ -15,20 +15,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- SHARPENING THE SWORD
-    if player:getCharVar("sharpeningTheSwordCS") >= 2 then
-        player:startEvent(52)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SHARPENING THE SWORD
-    if csid == 52 then
-        player:setCharVar("sharpeningTheSwordCS", 3)
-    end
 end
 
 return entity

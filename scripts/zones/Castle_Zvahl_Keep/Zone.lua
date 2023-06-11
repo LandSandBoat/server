@@ -20,8 +20,8 @@ zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -49,11 +49,51 @@ local teleportEventsByArea =
     [7] = 7, -- Teleports player to position G-8 on map 2
 }
 
+local teleportPortalByArea =
+{
+    [1] = 17441070, -- Center
+    [2] = 17441073, -- NE
+    [3] = 17441074, -- SE
+    [4] = 17441071, -- NW
+    [5] = 17441072, -- SW
+    [6] = 17441076, -- N
+    [7] = 17441077, -- S
+}
+
+zoneObject.onZoneTick = function(zone)
+    if zone:getLocalVar("tele_timer") < os.time() then
+        local randTele = math.random(1, #ID.npc.TELEPORTERS)
+
+        -- Ensure the same portal isn't selected twice in a row
+        while randTele == zone:getLocalVar("last_tele") do
+            randTele = math.random(1, #ID.npc.TELEPORTERS)
+        end
+
+        zone:setLocalVar("last_tele", randTele)
+
+        local tele = GetNPCByID(ID.npc.TELEPORTERS[randTele])
+
+        tele:openDoor(10)
+        tele:setLocalVar("isOpen", 1)
+        tele:timer(10000, function(teleArg)
+            teleArg:setLocalVar("isOpen", 0)
+        end)
+
+        zone:setLocalVar("tele_timer", os.time() + 5)
+    end
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local areaId = triggerArea:GetTriggerAreaID()
 
-    if teleportEventsByArea[areaId] then
+    if
+        GetNPCByID(teleportPortalByArea[areaId]):getLocalVar("isOpen") == 1 and
+        teleportEventsByArea[areaId]
+    then
         player:startCutscene(teleportEventsByArea[areaId])
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     end
 end
 

@@ -52,6 +52,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "entities/trustentity.h"
 #include "latent_effect_container.h"
 #include "map.h"
 #include "notoriety_container.h"
@@ -271,8 +272,8 @@ uint8 CStatusEffectContainer::GetLowestFreeSlot()
 
 bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
 {
-    EFFECT statusEffect = PStatusEffect->GetStatusID();
     // check for immunities first
+    EFFECT statusEffect = PStatusEffect->GetStatusID();
     switch (statusEffect)
     {
         case EFFECT_SLEEP:
@@ -420,7 +421,9 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
         }
         else if (overwrite == EFFECTOVERWRITE::EQUAL_HIGHER)
         {
-            if (PStatusEffect->GetTier() != 0 && existingEffect->GetTier() != 0)
+            if (PStatusEffect->GetTier() != 0 &&
+                existingEffect->GetTier() != 0 &&
+                PStatusEffect->GetTier() != existingEffect->GetTier())
             {
                 return PStatusEffect->GetTier() >= existingEffect->GetTier();
             }
@@ -1605,6 +1608,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
             {
                 StatusEffect->SetIcon(EFFECT_SLEEP);
             }
+
             if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
             {
                 m_POwner->PAI->Inactive(0ms, false);
@@ -1716,6 +1720,10 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
             RemoveStatusEffect(PStatusEffect, true);
             continue;
         }
+        else if (PStatusEffect->GetStatusID() == EFFECT_LEVEL_SYNC) // There are a few status effects we should not persist.
+        {
+            continue;
+        }
 
         if (PStatusEffect->deleted)
         {
@@ -1820,24 +1828,42 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
     if (PEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             // clang-format off
-            PEntity->ForParty([&](CBattleEntity* PMember)
+            PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
-                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                if (PMember != nullptr &&
+                    m_POwner->loc.zone->GetID() == PMember->loc.zone->GetID() &&
+                    distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
             });
             // clang-format on
+
+            // Apply the aura's buff to the owner of the buff's fellow
+            CBattleEntity* PFellow = (CBattleEntity*)((CCharEntity*)PEntity)->m_PFellow;
+            if (PFellow != nullptr && PEntity->loc.zone->GetID() == PFellow->loc.zone->GetID() &&
+                distanceSquared(m_POwner->loc.p, PFellow->loc.p) < aura_range * aura_range && !PFellow->isDead())
+            {
+                CStatusEffect* PEffect = new CStatusEffect(
+                    (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                    (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                    PStatusEffect->GetSubPower(),      // Power
+                    3,                                 // Tick
+                    4);                                // Duration
+                PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                PFellow->StatusEffectContainer->AddStatusEffect(PEffect, true);
+            }
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {
@@ -1867,11 +1893,11 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }

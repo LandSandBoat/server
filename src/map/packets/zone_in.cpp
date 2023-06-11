@@ -174,11 +174,11 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint16>(0x54) = 0xFFFF;
     }
 
-    ref<uint8>(0x56) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicDay() : PChar->loc.zone->GetBackgroundMusicDay();
-    ref<uint8>(0x58) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicNight() : PChar->loc.zone->GetBackgroundMusicNight();
-    ref<uint8>(0x5A) = PChar->PInstance ? PChar->PInstance->GetSoloBattleMusic() : PChar->loc.zone->GetSoloBattleMusic();
-    ref<uint8>(0x5C) = PChar->PInstance ? PChar->PInstance->GetPartyBattleMusic() : PChar->loc.zone->GetPartyBattleMusic();
-    ref<uint8>(0x5E) = PChar->animation == ANIMATION_MOUNT ? 0x54 : 0xD4;
+    ref<uint16>(0x56) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicDay() : PChar->loc.zone->GetBackgroundMusicDay();
+    ref<uint16>(0x58) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicNight() : PChar->loc.zone->GetBackgroundMusicNight();
+    ref<uint16>(0x5A) = PChar->PInstance ? PChar->PInstance->GetSoloBattleMusic() : PChar->loc.zone->GetSoloBattleMusic();
+    ref<uint16>(0x5C) = PChar->PInstance ? PChar->PInstance->GetPartyBattleMusic() : PChar->loc.zone->GetPartyBattleMusic();
+    ref<uint8>(0x5E)  = PChar->animation == ANIMATION_MOUNT ? 0x54 : 0xD4;
 
     ref<uint16>(0x60) = PChar->loc.boundary;
     ref<uint16>(0x68) = PChar->loc.zone->GetWeather();
@@ -208,6 +208,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint8>(0x80)  = 1;
         ref<uint16>(0xAA) = GetMogHouseID(PChar);   // Mog House id
         ref<uint8>(0xAE)  = GetMogHouseFlag(PChar); // Mog House leaving flag
+        PChar->setCharVar("[Moghouse]Exit_Pending", 1);
     }
     else
     {

@@ -19,6 +19,7 @@ zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.NANDI)
     end
+
     xi.mob.nmTODPersistCache(zone, ID.mob.CACTROT_RAPIDO)
     xi.mob.nmTODPersistCache(zone, ID.mob.CENTURIO_XII_I)
 
@@ -26,8 +27,8 @@ zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

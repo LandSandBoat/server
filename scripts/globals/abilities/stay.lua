@@ -27,6 +27,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         if xi.settings.main.ENABLE_TOAU == 1 then
             tick = 10
         end
+
         pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, tick, 0)
         pet:setAnimation(0)
     end

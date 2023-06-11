@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Suhie-Kaihie
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

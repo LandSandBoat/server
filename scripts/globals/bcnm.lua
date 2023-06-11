@@ -7,6 +7,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
 -----------------------------------
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}
@@ -260,7 +261,7 @@ local battlefields =
         { 2,   34, 1551 },   -- Wings of Fury (BS20)
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30)
-    --  { 5,   37,    0 },   -- Mirror, Mirror (Quest)
+        { 5,   37,    0 },   -- Mirror, Mirror (Quest)
     },
 
     [xi.zone.WAUGHROON_SHRINE] =
@@ -605,6 +606,10 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+        end,
+
         [64] = function() -- Mission 2-3
             return nationStatus == 10 and
                 (
@@ -696,12 +701,12 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
-            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+            return player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [256] = function() -- ZM8: Return to Delkfutt's Tower
@@ -767,7 +772,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+                not player:hasKeyItem(xi.ki.EYE_OF_GALES)
         end,
 
         [420] = function() -- ASA4: Sugar-coated Directive
@@ -789,7 +794,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+                not player:hasKeyItem(xi.ki.EYE_OF_STORMS)
         end,
 
         [452] = function() -- ASA4: Sugar-coated Directive
@@ -811,7 +816,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+                not player:hasKeyItem(xi.ki.EYE_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -865,7 +870,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+                not player:hasKeyItem(xi.ki.EYE_OF_FLAMES)
         end,
 
         [547] = function() -- ASA4: Sugar-coated Directive
@@ -887,7 +892,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+                not player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
         end,
 
         [580] = function() -- ASA4: Sugar-coated Directive
@@ -905,7 +910,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-                not player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+                not player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
@@ -1143,33 +1148,65 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+        end,
+
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
-            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+            return player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES)
+        end,
+
+        [224] = function() -- Quest: The Moonlit Path
+            return player:hasKeyItem(xi.ki.MOON_BAUBLE)
+        end,
+
+        [416] = function() -- Trial by Wind
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND)
         end,
 
         [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
         end,
 
+        [448] = function() -- Trial by Lightning
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
+        end,
+
         [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [480] = function() -- Trial by Ice
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE)
         end,
 
         [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
         end,
 
+        [544] = function() -- Trial by Fire
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
+        end,
+
         [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
         end,
 
+        [576] = function() -- Trial by Earth
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
+        end,
+
         [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [608] = function() -- Trial by Water
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         end,
 
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
@@ -1964,6 +2001,7 @@ xi.bcnm.onTrigger = function(player, npc)
             mask = 268435455
         end
 
+
         -- mask = 268435455 -- uncomment to open menu with all possible battlefields
         if mask ~= 0 then
             player:startEvent(32000, 0, 0, 0, mask, 0, 0, 0, 0)
@@ -1977,6 +2015,7 @@ end
 -----------------------------------
 -- onEventUpdate
 -----------------------------------
+-- luacheck: ignore 561
 xi.bcnm.onEventUpdate = function(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
 
@@ -2024,6 +2063,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
                 player:hasStatusEffect(xi.effect.BATTLEFIELD)
                 -- and id:getStatus() == xi.battlefield.status.OPEN -- TODO: Uncomment only once that can-of-worms is dealt with.
             then
+
                 player:enterBattlefield()
                 player:setTP(0)
             end
@@ -2057,6 +2097,11 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
                     end
                 end
 
+                player:setTP(0)
+
+                local validMembersIDs = tostring(player:getID())
+                local validMembersNames = tostring(player:getName())
+
                 -- Handle party/alliance members
                 local alliance = player:getAlliance()
                 for _, member in pairs(alliance) do
@@ -2066,7 +2111,10 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
                         not member:getBattlefield()
                     then
                         member:addStatusEffect(effect)
+                        member:setTP(0)
                         member:registerBattlefield(id, area, player:getID())
+                        validMembersIDs = validMembersIDs .. ":" .. member:getID()
+                        validMembersNames = validMembersNames .. ":" .. member:getName()
                     end
                 end
             end
@@ -2079,6 +2127,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
     -- Leaving a battlefield
     elseif csid == 32003 and option == 2 then
         player:updateEvent(3)
+
         return true
     elseif csid == 32003 and option == 3 then
         player:updateEvent(0)
@@ -2095,6 +2144,11 @@ end
 xi.bcnm.onEventFinish = function(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
+
+    if csid == 32000 then
+        player:setCharVar("OpenedArmouryCrate", 0)
+        player:setEnteredBattlefield(true)
+    end
 
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         if csid == 32003 and option == 4 then

@@ -38,11 +38,22 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(130, -0.2, -3, 160)
     end
 
+    if prevZone == player:getZoneID() then
+        xi.moghouse.exitJobChange(player, prevZone)
+    else
+        player:setCharVar('[Moghouse]Exit_Pending', 0)
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
+    end
+
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.afterZoneIn = function(player)
+    xi.moghouse.afterZoneIn(player)
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -76,11 +87,14 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 569 then
+        player:setCharVar('[Moghouse]Exit_Job_Change', 0)
         player:setPos(0, 0, -13, 192, 233)
     elseif csid == 16 then
         player:setCharVar("Wait1DayM8-1_date", 0)
         player:setCharVar("Mission8-1Completed", 1)
     end
+
+    xi.moghouse.exitJobChangeFinish(player, csid, option)
 end
 
 return zoneObject

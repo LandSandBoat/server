@@ -55,9 +55,15 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if player:getFreeSlotsCount() == 0 then
                         return quest:messageSpecial(carpentersID.text.FULL_INVENTORY_AFTER_TRADE, xi.items.BLACKENED_SIREDON)
-                    elseif npcUtil.tradeHasExactly(trade,  xi.items.MUDDY_SIREDON) and quest:getVar(player, 'Status') == 0 then
+                    elseif
+                        npcUtil.tradeHasExactly(trade,  xi.items.MUDDY_SIREDON) and
+                        quest:getVar(player, 'Status') == 0
+                    then
                         return quest:progressEvent(24, 0, 0, 100)
-                    elseif npcUtil.tradeHasExactly(trade, { { "gil", 100 } }) and quest:getVar(player, 'Status') == 1 then
+                    elseif
+                        npcUtil.tradeHasExactly(trade, { { "gil", 100 } }) and
+                        quest:getVar(player, 'Status') == 1
+                    then
                         return quest:progressEvent(25)
                     end
                 end,
@@ -98,9 +104,15 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if player:getFreeSlotsCount() == 0 then
                         return quest:messageSpecial(carpentersID.text.FULL_INVENTORY_AFTER_TRADE, xi.items.BLACKENED_SIREDON)
-                    elseif npcUtil.tradeHasExactly(trade,  xi.items.MUDDY_SIREDON) and quest:getVar(player, 'Status') == 0 then
+                    elseif
+                        npcUtil.tradeHasExactly(trade,  xi.items.MUDDY_SIREDON) and
+                        quest:getVar(player, 'Status') == 0
+                    then
                         return quest:progressEvent(24, 0, 0, 100)
-                    elseif npcUtil.tradeHasExactly(trade, { { "gil", 100 } }) and quest:getVar(player, 'Status') == 1 then
+                    elseif
+                        npcUtil.tradeHasExactly(trade, { { "gil", 100 } }) and
+                        quest:getVar(player, 'Status') == 1
+                    then
                         return quest:progressEvent(25)
                     end
                 end,

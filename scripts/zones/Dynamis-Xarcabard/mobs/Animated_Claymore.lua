@@ -2,18 +2,14 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Claymore
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("scripts/globals/status")
+mixins = { require("scripts/mixins/families/animated_weapons") }
+mixinOptions = { item = xi.items.INTRICATE_FRAGMENT }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(102, 1574, 1000)
-    else
-        SetDropRate(102, 1574, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_CLAYMORE_DIALOG)
 end
 
