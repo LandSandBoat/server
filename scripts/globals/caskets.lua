@@ -405,7 +405,7 @@ end
 -----------------------------------
 -- Grab random drops from zone item or temp tables depending on type of chest
 -----------------------------------
-local function getDrops(npc, dropType, zoneId)
+local function getDrops(npc, dropType, zoneId, player)
     local chestType = casketInfo.dropTypes[dropType]
 
     if npc:getLocalVar("[caskets]ITEMS_SET") == 1 then
@@ -500,7 +500,15 @@ local function getDrops(npc, dropType, zoneId)
                 items[i] = 4112 -- default to potion
             else
                 if math.random() < 0.05 then
-                    items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #xi.casket_loot.casketItems[zoneId].regionalItems)]
+
+                    if
+                        not player:isCrystalWarrior() and
+                        xi.casket_loot[zoneId].mazeItems ~= nil
+                    then
+                        items[1] = xi.casket_loot.casketItems[zoneId].mazeItems[math.random(1, #xi.casket_loot.casketItems[zoneId].mazeItems)]
+                    else
+                        items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #xi.casket_loot.casketItems[zoneId].regionalItems)]
+                    end
                 else
                     items[i] = item
                 end
@@ -687,7 +695,7 @@ xi.caskets.onTrigger = function(player, npc)
         return
     end
 
-    getDrops(npc, itemType, player:getZoneID())
+    getDrops(npc, itemType, player:getZoneID(), player)
 
     -----------------------------------
     -- Chest Locked
