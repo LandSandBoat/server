@@ -395,6 +395,7 @@ namespace luautils
 
         for (auto const& filename : filenames)
         {
+            ShowInfo("[FileWatcher] %s", filename);
             CacheLuaObjectFromFile(filename, true);
         }
     }
@@ -563,7 +564,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // xi.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string filename, bool printOutput /*= false*/)
+    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry /* = false*/)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -739,18 +740,20 @@ namespace luautils
         {
             if (part == parts.back())
             {
-                table[sol::override_value][part] = file_result;
+                if (overwriteCurrentEntry)
+                {
+                    table[sol::override_value][part] = file_result;
+                }
+                else
+                {
+                    table[sol::update_if_empty][part] = file_result;
+                }
             }
             else
             {
                 table = table[part].get_or_create<sol::table>(lua.create_table());
             }
             out_str += "." + part;
-        }
-
-        if (printOutput)
-        {
-            ShowInfo("[FileWatcher] %s -> %s", filename, out_str);
         }
 
         moduleutils::TryApplyLuaModules();

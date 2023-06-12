@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Moogle
 -----------------------------------
+require("scripts/globals/status")
 require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}
@@ -15,6 +16,19 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+
+    local mlvl = mob:getMainLvl()
+    local tick_amount
+    if mlvl == 99 then
+        tick_amount = 3
+    elseif mlvl < 99 and mlvl > 58 then
+        tick_amount = 2
+    else
+        tick_amount = 1
+    end
+
+    mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.GEO_REFRESH, tick_amount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)
