@@ -17,11 +17,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5, 2.0, 2.5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
     local typeEffect = xi.effect.WEIGHT
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 300)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 75, 0, 300)
 
     if not skill:hasMissMsg() then
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)

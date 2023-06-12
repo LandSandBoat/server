@@ -629,8 +629,17 @@ namespace itemutils
             }
         }
 
-        // Populate 0 drop list with an empty list to support mobs that only drop loot through script logic
-        g_pDropList[0] = new DropList_t;
+        // Populate nullptrs in g_pDropList with an empty drop list
+        // this support mobs that only drop loot through script logic
+        // even if they do not have the default dropID of 0
+        auto emptyDropList = new DropList_t;
+        for (int32 dropID = 0; dropID < MAX_DROPID; ++dropID)
+        {
+            if (g_pDropList[dropID] == nullptr)
+            {
+                g_pDropList[dropID] = emptyDropList;
+            }
+        }
     }
 
     /************************************************************************
