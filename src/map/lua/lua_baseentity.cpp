@@ -520,6 +520,21 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
     PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
 }
 
+/************************************************************************
+ *  Function: messageStandard(id)
+ *  Purpose : Sends a standard message
+ *  Example : player:messageStandard(287)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::messageStandard(uint16 messageID)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->pushPacket(new CMessageStandardPacket(messageID));
+    }
+}
+
 void CLuaBaseEntity::customMenu(sol::object const& obj)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -2197,7 +2212,7 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self = false)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
@@ -11184,7 +11199,7 @@ bool CLuaBaseEntity::getClaimable()
  *  Function: clearEnmityForEntity(...)
  *  Purpose :
  *  Example : mob:clearEnmityForEntity(player)
- *  Notes   : Taken from LSB. When merging from upstream, please accept theirs.
+ *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
@@ -16521,6 +16536,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
     SOL_REGISTER("messageSystem", CLuaBaseEntity::messageSystem);
     SOL_REGISTER("messageCombat", CLuaBaseEntity::messageCombat);
+    SOL_REGISTER("messageStandard", CLuaBaseEntity::messageStandard);
     SOL_REGISTER("customMenu", CLuaBaseEntity::customMenu);
 
     // Variables
@@ -17052,6 +17068,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearEnmity", CLuaBaseEntity::clearEnmity);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
+    SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);

@@ -19,6 +19,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for "Led Astry" Quest cutscene.
     zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for "Led Astry" Quest cutscene.
     zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
+    zone:registerTriggerArea(10,  22,   2,  -98,     0,    0,    0) -- Sets Mark for "The Prankster" Quest cutscene.
+    zone:registerTriggerArea(11,  27,   7, -123,     0,    0,    0) -- Sets Mark for "The Prankster" Quest cutscene.
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

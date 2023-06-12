@@ -62,6 +62,7 @@ instanceObject.onInstanceComplete = function(instance)
 end
 
 instanceObject.onEventFinish = function(player, csid, option)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.CAEDARVA_MIRE)
 end
 
 -- TODO: Reduce complexity

@@ -30,7 +30,7 @@ CREATE TABLE `item_equipment` (
   `su_level` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `race` tinyint(3) unsigned NOT NULL DEFAULT 255,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -10798,6 +10798,7 @@ INSERT INTO `item_equipment` VALUES (21827,'ajja_scythe',99,119,393,194,0,0,1,0,
 INSERT INTO `item_equipment` VALUES (21828,'eletta_scythe',99,119,393,201,0,0,1,0,0,255);
 INSERT INTO `item_equipment` VALUES (21829,'kaja_scythe',99,119,393,842,0,0,1,0,0,255);
 INSERT INTO `item_equipment` VALUES (21830,'drepanum',99,119,393,842,0,0,1,0,0,255);
+INSERT INTO `item_equipment` VALUES (21832,'agwus_scythe',99,119,128,883,0,0,1,0,0,255);
 INSERT INTO `item_equipment` VALUES (21854,'reienkyo',99,119,8192,391,0,0,1,0,0,255);
 INSERT INTO `item_equipment` VALUES (21855,'lembing',99,119,8192,214,0,0,1,0,0,255);
 INSERT INTO `item_equipment` VALUES (21857,'gungnir',99,119,8192,549,0,1,1,0,0,255);

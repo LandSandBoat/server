@@ -7,7 +7,7 @@
 #include "cbasetypes.h"
 
 #define TracyFrameMark          FrameMark
-#define TracyZoneScoped         ZoneScoped; ShowTrace(__func__)
+#define TracyZoneScoped         ZoneScoped;
 #define TracyZoneScopedN(n)     ZoneScopedN(n)
 #define TracyZoneNamed(var)     ZoneNamedN(var, #var, true)
 #define TracyZoneText(n, l)     ZoneText(n, l)

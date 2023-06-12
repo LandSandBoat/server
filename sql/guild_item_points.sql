@@ -11,7 +11,7 @@ CREATE TABLE `guild_item_points` (
   `max_points` smallint(5) unsigned NOT NULL DEFAULT '0',
   `pattern` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guildid`,`itemid`,`pattern`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records

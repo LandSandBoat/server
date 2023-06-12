@@ -195,6 +195,34 @@ void SqlConnection::SetupKeepalive()
     m_PingInterval = timeout + reserve;
 }
 
+void SqlConnection::CheckCollation()
+{
+    // Check collation is what we require
+    auto ret = QueryStr("SHOW VARIABLES LIKE 'collation%';");
+    if (ret != SQL_ERROR && NumRows())
+    {
+        bool foundError = false;
+        while (NextRow() == SQL_SUCCESS)
+        {
+            auto collationType     = GetStringData(0);
+            auto collectionSetting = GetStringData(1);
+            if (!starts_with(collectionSetting, "utf8"))
+            {
+                foundError = true;
+                // clang-format off
+                ShowWarning(fmt::format("Unexpected collation setting in database: {}: {}. Expected utf8*.",
+                    collationType, collectionSetting).c_str());
+                // clang-format on
+            }
+        }
+
+        if (foundError)
+        {
+            ShowWarning("This can result in data reads and writes being corrupted!");
+        }
+    }
+}
+
 int32 SqlConnection::TryPing()
 {
     TracyZoneScoped;

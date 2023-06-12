@@ -33,7 +33,7 @@ CREATE TABLE `weapon_skills` (
   `main_only` tinyint(1) NOT NULL DEFAULT '0',
   `unlock_id` tinyint(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`weaponskillid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

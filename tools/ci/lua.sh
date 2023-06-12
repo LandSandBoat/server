@@ -29,7 +29,6 @@ global_objects=(
     Module
     Override
     super
-    applyOverride
 
     common
     zones

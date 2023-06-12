@@ -2153,6 +2153,12 @@ void CCharEntity::OnRaise()
 
             uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
 
+            // Player died within a battlefield, reward the battlefield level equivalent EXP
+            if (StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+            {
+                expLost = m_LevelRestriction <= 67 ? (charutils::GetExpNEXTLevel(m_LevelRestriction) * 8) / 100 : 2400;
+            }
+
             // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
             if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
             {

@@ -33,7 +33,7 @@ CREATE TABLE `mob_resistances` (
   `light_res_rank` smallint(3) NOT NULL DEFAULT 0,
   `dark_res_rank` smallint(3) NOT NULL DEFAULT 0,
   PRIMARY KEY (`resist_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=128;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=128;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
 
