@@ -2646,7 +2646,7 @@ INSERT INTO `mob_groups` VALUES (42,2541,52,'Mamool_Jas_Wyvern',0,128,0,0,0,76,7
 INSERT INTO `mob_groups` VALUES (43,5140,52,'Nis_Puk',0,32,2894,13000,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (44,2523,52,'Mamool_Ja_Lurker',300,0,1593,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (45,2507,52,'Mamool_Ja_Blusterer',300,0,1586,0,0,81,83,0);
-INSERT INTO `mob_groups` VALUES (46,3153,52,'Plague_Chigoe',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (46,3153,52,'Plague_Chigoe',0,128,0,3000,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (47,393,52,'Berried_Chigoe',0,128,255,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (48,716,52,'Chigoes_Nit',0,128,0,0,0,48,48,0);
 INSERT INTO `mob_groups` VALUES (49,916,52,'Dark_Rider',0,128,0,0,0,95,95,0);
