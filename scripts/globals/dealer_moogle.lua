@@ -2574,19 +2574,62 @@ local itemList =
         xi.items.UFFRAT_P2,
         xi.items.BOCLUAMNI_P2,
     },
-    --[[
-    -- Kupon A-SYW: Yorcia Weald Skirmish Armor +1
+
+    -- Kupon A-SYW: Yorcia Weald Skirmish Armor +1 (MOG_KUPON_A_SYW = 9227)
     [50] =
     {
-
+        {
+            xi.items.CIZIN_HELM_P1,
+            xi.items.CIZIN_MAIL_P1,
+            xi.items.CIZIN_MUFFLERS_P1,
+            xi.items.CIZIN_BREECHES_P1,
+            xi.items.CIZIN_GREAVES_P1,
+        },
+        {
+            xi.items.OTRONIF_MASK_P1,
+            xi.items.OTRONIF_HARNESS_P1,
+            xi.items.OTRONIF_GLOVES_P1,
+            xi.items.OTRONIF_BRAIS_P1,
+            xi.items.OTRONIF_BOOTS_P1,
+        },
+        {
+            xi.items.IUITL_HEADGEAR_P1,
+            xi.items.IUITL_VEST_P1,
+            xi.items.IUITL_WRISTBANDS_P1,
+            xi.items.IUITL_TIGHTS_P1,
+            xi.items.IUITL_GAITERS_P1,
+        },
+        {
+            xi.items.GENDEWITHA_CAUBEEN_P1,
+            xi.items.GENDEWITHA_BLIAUT_P1,
+            xi.items.GENDEWITHA_GAGES_P1,
+            xi.items.GENDEWITHA_SPATS_P1,
+            xi.items.GENDEWITHA_GALOSHES_P1,
+        },
+        {
+            xi.items.HAGONDES_HAT_P1,
+            xi.items.HAGONDES_COAT_P1,
+            xi.items.HAGONDES_CUFFS_P1,
+            xi.items.HAGONDES_PANTS_P1,
+            xi.items.HAGONDES_SABOTS_P1,
+        },
+        {
+            xi.items.BEATIFIC_SHIELD_P1,
+        },
     },
-
-    -- Kupon W-ASRW: Rala Waterways Alluvion Skirmish Weapons
+    -- Kupon W-ASRW: Rala Waterways Alluvion Skirmish Weapons (MOG_KUPON_W_ASRW = 9191)
     [51] =
     {
-
+        xi.items.OHRMAZD,
+        xi.items.IPETAM,
+        xi.items.CLAIDHEAMH_SOLUIS,
+        xi.items.MACBAIN,
+        xi.items.KUMBHAKARNA,
+        xi.items.SVARGA,
+        xi.items.INANNA,
+        xi.items.KERAUNOS,
     },
-
+    --[[
     -- Kupon W-ASCC: Cirdas Caverns Alluvion Skirmish Weapons
     [52] =
     {
@@ -2707,7 +2750,8 @@ local getIndexParams = function(list, option)
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
         list == 44 or                   -- AW-Cos
-        list == 47                      -- A-EMI
+        list == 47 or                   -- A-EMI
+        list == 50                      -- A-SYW
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2733,7 +2777,9 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         list == 26 or                   -- I-Skill
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
-        list == 47
+        list == 47 or                   -- A-EMI
+        list == 50                      -- A-SYW
+
     then
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
