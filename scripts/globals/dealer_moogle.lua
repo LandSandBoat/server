@@ -2629,19 +2629,60 @@ local itemList =
         xi.items.INANNA,
         xi.items.KERAUNOS,
     },
-    --[[
-    -- Kupon W-ASCC: Cirdas Caverns Alluvion Skirmish Weapons
+
+    -- Kupon W-ASCC: Cirdas Caverns Alluvion Skirmish Weapons (MOG_KUPON_W_ASCC = 9192)
     [52] =
     {
-
+        xi.items.OLYNDICUS,
+        xi.items.IZUNA,
+        xi.items.NENEKIRIMARU,
+        xi.items.NEHUSHTAN,
+        xi.items.PHAOSPHAELIA,
+        xi.items.LINOS,
+        xi.items.DOOMSDAY,
+        xi.items.SVALINN,
     },
 
-    -- Kupon A-ASYW: Yorcia Weald Alluvion Skirmish Armor
+    -- Kupon A-ASYW: Yorcia Weald Alluvion Skirmish Armor (MOG_KUPON_A_ASYW = 9228)
     [53] =
     {
-
+        {
+            xi.items.YORIUM_BARBUTA,
+            xi.items.YORIUM_CUIRASS,
+            xi.items.YORIUM_GAUNTLETS,
+            xi.items.YORIUM_CUISSES,
+            xi.items.YORIUM_SABATONS,
+        },
+        {
+            xi.items.ACRO_HELM,
+            xi.items.ACRO_SURCOAT,
+            xi.items.ACRO_GAUNTLETS,
+            xi.items.ACRO_BREECHES,
+            xi.items.ACRO_LEGGINGS,
+        },
+        {
+            xi.items.TAEON_CHAPEAU,
+            xi.items.TAEON_TABARD,
+            xi.items.TAEON_GLOVES,
+            xi.items.TAEON_TIGHTS,
+            xi.items.TAEON_BOOTS,
+        },
+        {
+            xi.items.TELCHINE_CAP,
+            xi.items.TELCHINE_CHASUBLE,
+            xi.items.TELCHINE_GLOVES,
+            xi.items.TELCHINE_BRACONI,
+            xi.items.TELCHINE_PIGACHES,
+        },
+        {
+            xi.items.HELIOS_BAND,
+            xi.items.HELIOS_JACKET,
+            xi.items.HELIOS_GLOVES,
+            xi.items.HELIOS_SPATS,
+            xi.items.HELIOS_BOOTS,
+        },
     },
-
+    --[[
     -- Kupon W-R119: iLevel 119 III Relic Weapons (deprecated)
     [54] =
     {
@@ -2751,7 +2792,8 @@ local getIndexParams = function(list, option)
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
         list == 44 or                   -- AW-Cos
         list == 47 or                   -- A-EMI
-        list == 50                      -- A-SYW
+        list == 50 or                   -- A-SYW
+        list == 53                      -- A-ASYW
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2778,8 +2820,8 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         (list >= 32 and list <= 34) or  -- AW-Mis / AW-Vgr / AW-VgrII
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
         list == 47 or                   -- A-EMI
-        list == 50                      -- A-SYW
-
+        list == 50 or                   -- A-SYW
+        list == 53                      -- A-ASYW
     then
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
