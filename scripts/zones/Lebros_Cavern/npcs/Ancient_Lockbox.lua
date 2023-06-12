@@ -2,7 +2,6 @@
 -- Area: Lebros Cavern
 -- Ancient Lockbox
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/appraisal")
 require("scripts/globals/assault")
 require("scripts/globals/items")
@@ -16,26 +15,52 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
-                { itemid = xi.items.APPRAISAL_BOX,     droprate = 300 },
-                { itemid = xi.items.APPRAISAL_EARRING, droprate = 700 },
+                { itemid = xi.items.UNAPPRAISED_BOX,     droprate = 300 },
+                { itemid = xi.items.UNAPPRAISED_EARRING, droprate = 700 },
             },
         },
 
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
-                { itemid = xi.items.APPRAISAL_BOX,  droprate = 300 },
-                { itemid = xi.items.APPRAISAL_CAPE, droprate = 700 },
+                { itemid = xi.items.UNAPPRAISED_BOX,  droprate = 300 },
+                { itemid = xi.items.UNAPPRAISED_CAPE, droprate = 700 },
             },
         },
 
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
-                { itemid = xi.items.APPRAISAL_AXE,       droprate = 300 },
-                { itemid = xi.items.APPRAISAL_POLEARM,   droprate = 200 },
-                { itemid = xi.items.APPRAISAL_HEADPIECE, droprate = 100 },
-                { itemid = xi.items.APPRAISAL_BOX,       droprate = 400 },
+                { itemid = xi.items.UNAPPRAISED_AXE,       droprate = 300 },
+                { itemid = xi.items.UNAPPRAISED_POLEARM,   droprate = 200 },
+                { itemid = xi.items.UNAPPRAISED_HEADPIECE, droprate = 100 },
+                { itemid = xi.items.UNAPPRAISED_BOX,       droprate = 400 },
+            },
+        },
+
+        [xi.assault.mission.EVADE_AND_ESCAPE] =
+        {
+            {
+                { itemid = xi.items.UNAPPRAISED_DAGGER, droprate = 700 },
+                { itemid = xi.items.UNAPPRAISED_BOX,    droprate = 300 },
+            },
+        },
+
+        [xi.assault.mission.SIEGEMASTER_ASSASSINATION] =
+        {
+            {
+                { itemid = xi.items.UNAPPRAISED_POLEARM, droprate = 500 },
+                { itemid = xi.items.UNAPPRAISED_AXE,     droprate = 100 },
+                { itemid = xi.items.UNAPPRAISED_BOX,     droprate = 400 },
+            },
+        },
+
+        [xi.assault.mission.APKALLU_BREEDING] =
+        {
+            {
+                { itemid = xi.items.UNAPPRAISED_EARRING, droprate = 300 },
+                { itemid = xi.items.UNAPPRAISED_SASH,    droprate = 300 },
+                { itemid = xi.items.UNAPPRAISED_BOX,     droprate = 400 },
             },
         },
     }
@@ -103,6 +128,50 @@ entity.onTrigger = function(player, npc)
             {
                 { itemid = xi.items.HI_ETHER_TANK, droprate = 100 },
                 { itemid = 0,                      droprate = 900 },
+            },
+        },
+
+        [xi.assault.mission.EVADE_AND_ESCAPE] =
+        {
+            {
+                { itemid = xi.items.HI_POTION_P3, droprate = 1000 },
+            },
+
+            {
+                { itemid = xi.items.RERAISER, droprate = 250 },
+                { itemid = 0,                 droprate = 750 },
+            },
+
+            {
+                { itemid = xi.items.HI_POTION_TANK, droprate = 250 },
+                { itemid = 0,                       droprate = 750 },
+            },
+
+            {
+                { itemid = xi.items.HI_ETHER_TANK, droprate = 250 },
+                { itemid = 0,                      droprate = 750 },
+            },
+        },
+
+        [xi.assault.mission.SIEGEMASTER_ASSASSINATION] =
+        {
+            {
+                { itemid = xi.items.HI_POTION_P3, droprate = 1000 },
+            },
+
+            {
+                { itemid = xi.items.RERAISER, droprate = 100 },
+                { itemid = 0,                 droprate = 900 },
+            },
+
+            {
+                { itemid = xi.items.HI_POTION_TANK, droprate = 250 },
+                { itemid = 0,                       droprate = 750 },
+            },
+
+            {
+                { itemid = xi.items.HI_ETHER_TANK, droprate = 250 },
+                { itemid = 0,                      droprate = 750 },
             },
         },
     }
