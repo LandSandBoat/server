@@ -131,8 +131,9 @@ end
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
 -- TODO: Reduce complexity in this function:
--- - replace giant if/else chain with switch statement
--- - replace each handler (elseif addType == xi.additionalEffect.procType.DEBUFF then) with a function
+-- - replace giant if/else chain with table+key functions
+--   e.g. [procType.DAMAGE] = { code }
+-- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
@@ -178,6 +179,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         if defender:isNM() then
             chance = chance / 1.5
         end
+    end
+
+    -- If player is level synced below the level of the item, do no proc
+    if item:getReqLvl() > attacker:getMainLvl() then
+        return 0, 0, 0
     end
 
     -- If we're not going to proc, lets not execute all those checks!
@@ -344,10 +350,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0
         end
 
-    --------------------------------------
-    -- Absorbs status effects from target
-    --------------------------------------
-    elseif addType == xi.additionalEffect.procType.ABSORB then
+    elseif addType == xi.additionalEffect.procType.ABSORB_STATUS then
         -- Ripping off Aura Steal here
         local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
         if resist > 0.0625 then

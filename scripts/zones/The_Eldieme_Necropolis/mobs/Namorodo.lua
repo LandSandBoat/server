@@ -23,7 +23,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local personality = player:getFellowValue("personality")
     local fellow = player:getFellow()
     if fellow ~= nil then

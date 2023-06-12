@@ -44,13 +44,16 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if os.time() > mob:getLocalVar("selfDestruct") and mob:getBattlefield():getLocalVar("control") == 0 then
+    if
+        os.time() > mob:getLocalVar("selfDestruct") and
+        mob:getBattlefield():getLocalVar("control") == 0
+    then
         mob:getBattlefield():setLocalVar("control", 1)
         mob:useMobAbility(256)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player:getBattlefield():getLocalVar("control") == 0 then
         player:getBattlefield():setLocalVar("lootSpawned", 0)
     end

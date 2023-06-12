@@ -48,4 +48,4 @@ CREATE TABLE `chars` (
   PRIMARY KEY (`charid`),
   KEY `accid` (`accid`),
   FULLTEXT KEY `charname` (`charname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

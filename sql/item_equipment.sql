@@ -30,7 +30,7 @@ CREATE TABLE `item_equipment` (
   `su_level` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `race` tinyint(3) unsigned NOT NULL DEFAULT 255,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -42,7 +42,7 @@ CREATE TABLE `mob_family_system` (
   `detects` smallint(5) NOT NULL DEFAULT 0,
   `charmable` tinyint(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`familyID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=128;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=128;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
