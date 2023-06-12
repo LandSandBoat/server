@@ -2496,6 +2496,7 @@ local itemList =
             xi.items.KUPO_SHIELD,
         },
     },
+
     -- Kupon W-EMI: iLevel 117 Sparks of Eminence Weapons (MOG_KUPON_W_EMI = 9188)
     [46] =
     {
@@ -2522,6 +2523,7 @@ local itemList =
         xi.items.EMINENT_FLUTE,
         xi.items.EMINENT_ANIMATOR_II,
     },
+
     -- Kupon A-EMI: iLevel 117 Records of Eminence armor (MOG_KUPON_A_EMI = 9226)
     [47] =
     {
@@ -2547,19 +2549,32 @@ local itemList =
             xi.items.WAYFARER_CLOGS,
         },
     },
-    --[[
-    -- Kupon W-SRW: Rala Waterways Skirmish Weapons +2
+
+    -- Kupon W-SRW: Rala Waterways Skirmish Weapons +2 (MOG_KUPON_W_SRW = 9189)
     [48] =
     {
-
+        xi.items.AEDOLD_P2,
+        xi.items.CROBACI_P2,
+        xi.items.FAIZZEER_P2,
+        xi.items.HGAFIRCIAN_P2,
+        xi.items.ICLAMAR_P2,
+        xi.items.KANNAKIRI_P2,
+        xi.items.LEHBRAILG_P2,
     },
 
-    -- Kupon W-SCC: Cirdas Caverns Skirmish Weapons +2
+    -- Kupon W-SCC: Cirdas Caverns Skirmish Weapons +2 (MOG_KUPON_W_SCC = 9190)
     [49] =
     {
-
+        xi.items.NINZAS_P2,
+        xi.items.LEISILONU_P2,
+        xi.items.IZTAASU_P2,
+        xi.items.IIZAMAL_P2,
+        xi.items.QATSUNOCI_P2,
+        xi.items.SHICHISHITO_P2,
+        xi.items.UFFRAT_P2,
+        xi.items.BOCLUAMNI_P2,
     },
-
+    --[[
     -- Kupon A-SYW: Yorcia Weald Skirmish Armor +1
     [50] =
     {
