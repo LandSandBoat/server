@@ -10,7 +10,7 @@ xi.dealerMoogle = xi.dealerMoogle or {}
 
 local debug =
 {
-    ENABLED     = true,    -- will disable ki consumption and print instead
+    ENABLED     = false,    -- will disable ki consumption and print instead
     SHOWITEM    = true,     -- will display acquisition message to player if debug.ENABLED
     TO_PLAYER   = true,     -- will print debug info to player if debug.ENABLED
 }
@@ -3131,23 +3131,39 @@ local itemList =
             xi.items.SEKI_SHURIKEN_POUCH,
         },
     },
-    --[[
-    -- Kupon A-OmII: Body pieces from Omen bosses
+
+    -- Kupon A-OmII: Body pieces from Omen bosses (MOG_KUPON_A_OMII = 9169)
     [59] =
     {
-
+        xi.items.DAGON_BREASTPLATE,
+        xi.items.ASHERA_HARNESS,
+        xi.items.SHAMASH_ROBE,
+        xi.items.UDUG_JACKET,
+        xi.items.NISHROCH_JERKIN,
     },
 
-    -- Kupon I-AF119: Scale needed for the Reforged Artifact Armor +3 process
+    -- Kupon I-AF119: Scale needed for the Reforged Artifact Armor +3 process (MOG_KUPON_I_AF119 = 9170)
     [60] =
     {
-
+        xi.items.KINS_SCALE,
+        xi.items.GINS_SCALE,
+        xi.items.KEIS_SCALE,
+        xi.items.KYOUS_SCALE,
+        xi.items.FUS_SCALE,
     },
 
-    -- Kupon AW-Om: Equipment pieces from Omen mid-bosses
+    -- Kupon AW-Om: Equipment pieces from Omen mid-bosses (MOG_KUPON_AW_OM = 9171)
     [61] =
     {
-
+        xi.items.ENKI_STRAP,
+        xi.items.KNOBKIERRIE,
+        xi.items.ADAD_AMULET,
+        xi.items.ANU_TORQUE,
+        xi.items.ERRA_PENDANT,
+        xi.items.SHERIDA_EARRING,
+        xi.items.KISHAR_RING,
+        xi.items.ADAPA_SHIELD,
+        xi.items.NUSKU_SHIELD,
     },
 
     -- Kupon W-RMEA: iLevel 119 III Relic, Mythic, Empyrean or Aeonic Weapon
