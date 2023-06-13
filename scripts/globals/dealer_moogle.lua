@@ -239,7 +239,7 @@ local itemList =
         { xi.items.RAGNAROK_90,         { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { xi.items.GUTTLER_90,          { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { xi.items.BRAVURA_90,          { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
-        { xi.items.GUGNIR_90,           { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
+        { xi.items.GUNGNIR_90,          { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { xi.items.APOCALYPSE_90,       { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { xi.items.KIKOKU_90,           { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
         { xi.items.AMANOMURAKUMO_90,    { xi.items.VIAL_OF_UMBRAL_MARROW, 5 }, { xi.items.PLUTON, 300 } },
@@ -2682,31 +2682,92 @@ local itemList =
             xi.items.HELIOS_BOOTS,
         },
     },
-    --[[
-    -- Kupon W-R119: iLevel 119 III Relic Weapons (deprecated)
+    -- Kupon W-R119: iLevel 119 III Relic Weapons (MOG_KUPON_W_R119 = 9183)
     [54] =
     {
-
+        xi.items.SPHARAI_119_III,
+        xi.items.MANDAU_119_III,
+        xi.items.EXCALIBUR_119_III,
+        xi.items.RAGNAROK_119_III,
+        xi.items.GUTTLER_119_III,
+        xi.items.BRAVURA_119_III,
+        xi.items.APOCALYPSE_119_III,
+        xi.items.GUNGNIR_119_III,
+        xi.items.KIKOKU_119_III,
+        xi.items.AMANOMURAKUMO_119_III,
+        xi.items.MJOLLNIR_119_III,
+        xi.items.CLAUSTRUM_119_III,
+        xi.items.YOICHINOYUMI_119_III,  -- Quiver Version
+        xi.items.ANNIHILATOR_119_III,   -- Quiver Version
     },
 
-    -- Kupon W-M119: iLevel 119 III Mythic Weapons and Ergon Weapons (deprecated)
+    -- Kupon W-M119: iLevel 119 III Mythic Weapons and Ergon Weapons (MOG_KUPON_W_M119 = 9184)
     [55] =
     {
-
+        xi.items.GLANZFAUST_119_III,
+        xi.items.KENKONKEN_119_III,
+        xi.items.VAJRA_119_III,
+        xi.items.CARNWENHAN_119_III,
+        xi.items.TERPSICHORE_119_III,
+        xi.items.MURGLEIS_119_III,
+        xi.items.BURTGANG_119_III,
+        xi.items.TIZONA_119_III,
+        xi.items.EPEOLATRY_119_II,
+        xi.items.AYMUR_119_III,
+        xi.items.CONQUEROR_119_III,
+        xi.items.LIBERATOR_119_III,
+        xi.items.RYUNOHIGE_119_III,
+        xi.items.NAGI_119_III,
+        xi.items.KOGARASUMARU_119_III,
+        xi.items.YAGRUSH_119_III,
+        xi.items.IDRIS_119_II,
+        xi.items.LAEVATEINN_119_III,
+        xi.items.NIRVANA_119_III,
+        xi.items.TUPSIMATI_119_III,
+        xi.items.GASTRAPHETES_119_III,  -- Quiver Version
+        xi.items.DEATH_PENALTY_119_III, -- Quiver Version
     },
 
-    -- Kupon W-E119: iLevel 119 III Empyrean Weapons (deprecated)
+    -- Kupon W-E119: iLevel 119 III Empyrean Weapons (MOG_KUPON_W_E119 = 9185)
     [56] =
     {
-
+        xi.items.VERETHRAGNA_119_III,
+        xi.items.TWASHTAR_119_III,
+        xi.items.ALMACE_119_III,
+        xi.items.CALADBOLG_119_III,
+        xi.items.FARSHA_119_III,
+        xi.items.UKONVASARA_119_III,
+        xi.items.REDEMPTION_119_III,
+        xi.items.RHONGOMIANT_119_III,
+        xi.items.KANNAGI_119_III,
+        xi.items.MASAMUNE_119_III,
+        xi.items.GAMBANTEINN_119_III,
+        xi.items.HVERGELMIR_119_III,
+        xi.items.GANDIVA_119_III,       -- Quiver Version
+        xi.items.ARMAGEDDON_119_III,    -- Quiver Version
     },
 
-    -- Kupon W-A119: Aeonic Weapons (deprecated)
+    -- Kupon W-A119: Aeonic Weapons (MOG_KUPON_W_A119 = 9186)
     [57] =
     {
-
+        xi.items.GODHANDS,
+        xi.items.AENEAS,
+        xi.items.SEQUENCE,
+        xi.items.LIONHEART,
+        xi.items.TRI_EDGE,
+        xi.items.CHANGO,
+        xi.items.TRISHULA,
+        xi.items.ANGUTA,
+        xi.items.HEISHI_SHORINKEN,
+        xi.items.DOJIKIRI_YASUTSUNA,
+        xi.items.TISHTRYA,
+        xi.items.KHATVANGA,
+        xi.items.FAIL_NOT,      -- Quiver Version
+        xi.items.FOMALHAUT,     -- Quiver Version
+        xi.items.SRIVATSA,
+        xi.items.MARSYAS,
     },
-
+    --[[
     -- Kupon A-OmII: Body pieces from Omen bosses
     [59] =
     {
