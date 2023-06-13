@@ -270,15 +270,9 @@ local attackTypeShields =
 
 xi.summon.physicalSDT = function(attacker, target, damagetype, finalDmg)
     local adjustedDamage = finalDmg
-    adjustedDamage = target:physicalDmgTaken(adjustedDamage, damagetype)
-
-    if damagetype == xi.damageType.BLUNT then
-        adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
-    elseif damagetype == xi.damageType.PIERCING then
-        adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
-    elseif damagetype == xi.damageType.SLASHING then
-        adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
-    end
+    -- need to pass in ignoreDmgMods option to physicalDmgTaken otherwise dmg mods are applied both here
+    -- as called by avatarFinalAdjustments and in applyDamageTaken as called by avatarPhysicalMove
+    adjustedDamage = target:physicalDmgTaken(adjustedDamage, damagetype, true)
 
     return adjustedDamage
 end

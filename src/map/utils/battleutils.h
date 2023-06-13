@@ -212,10 +212,10 @@ namespace battleutils
     void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     void RelinquishClaim(CCharEntity* PDefender);
 
-    int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage);
-    int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element);
-    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
-    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
+    int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage, bool ignoreDmgMods = false);
+    int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element, bool ignoreDmgMods = false);
+    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false, bool ignoreDmgMods = false);
+    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false, bool ignoreDmgMods = false);
     int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType);
 
     void  HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttacker);
