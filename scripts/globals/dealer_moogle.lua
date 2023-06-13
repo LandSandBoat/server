@@ -10,7 +10,7 @@ xi.dealerMoogle = xi.dealerMoogle or {}
 
 local debug =
 {
-    ENABLED     = false,    -- will disable ki consumption and print instead
+    ENABLED     = true,    -- will disable ki consumption and print instead
     SHOWITEM    = true,     -- will display acquisition message to player if debug.ENABLED
     TO_PLAYER   = true,     -- will print debug info to player if debug.ENABLED
 }
@@ -2767,6 +2767,370 @@ local itemList =
         xi.items.SRIVATSA,
         xi.items.MARSYAS,
     },
+
+    -- Kupon AW-GeIV: Geas Fete (Any Content Level) (MOG_KUPON_AW_GEIV = 9187)
+    [58] =
+    {
+            -- HAND-TO-HAND WEAPONS
+        {
+            xi.items.NIBIRU_SAINTI,
+            xi.items.CHASTISERS,
+            xi.items.HAMMERFISTS,
+            xi.items.MIDNIGHTS,
+            xi.items.ESHUS,
+            xi.items.CONDEMNERS,
+            xi.items.SUWAIYAS,
+        },
+            -- DAGGERS
+        {
+            xi.items.NIBIRU_KNIFE,
+            xi.items.ENCHUFLA,
+            xi.items.SHIJO,
+            xi.items.KALI,
+            xi.items.SKINFLAYER,
+            xi.items.SANGOMA,
+        },
+            -- SWORDS
+        {
+            xi.items.NIBIRU_BLADE,
+            xi.items.NIXXER,
+            xi.items.EMISSARY,
+            xi.items.IRIS,
+            xi.items.COLADA,
+            xi.items.FIRANGI,
+            xi.items.DEACON_SABER,
+            xi.items.DEACON_SWORD,
+            xi.items.KOBOTO,
+            xi.items.REIKIKO,
+        },
+            -- GREAT SWORDS
+        {
+            xi.items.NIBIRU_FAUSSAR,
+            xi.items.BIDENHANDER,
+            xi.items.ZULFIQAR,
+            xi.items.TAKOBA,
+        },
+            -- AXES
+        {
+            xi.items.NIBIRU_TABAR,
+            xi.items.SKULLRENDER,
+            xi.items.DIGIRBALAG,
+            xi.items.FREYDIS,
+            xi.items.DEACON_TABAR,
+        },
+            -- GREAT AXES
+        {
+            xi.items.NIBIRU_CHOPPER,
+            xi.items.ROUTER,
+            xi.items.INSTIGATOR,
+            xi.items.AGANOSHE,
+            xi.items.HODADENON,
+            xi.items.REIKIONO,
+            xi.items.JOKUSHUONO,
+        },
+            -- POLEARMS
+        {
+            xi.items.NIBIRU_LANCE,
+            xi.items.ANNEALED_LANCE,
+            xi.items.RHOMPHAIA,
+            xi.items.REIENKYO,
+            xi.items.LEMBING,
+            xi.items.HABILE_MAZRAK,
+        },
+            -- SCYTHES
+        {
+            xi.items.NIBIRU_SICKLE,
+            xi.items.DEATHBANE,
+            xi.items.OBSCHINE,
+            xi.items.MISANTHROPY,
+            xi.items.DACNOMANIA,
+            xi.items.DEACON_SCYTHE,
+            xi.items.SHUKUYUS_SCYTHE,
+        },
+            -- KATANAS
+        {
+            xi.items.MIJIN,
+            xi.items.AIZUSHINTOGO,
+            xi.items.KANARIA,
+            xi.items.TAKA,
+        },
+            -- GREAT KATANAS
+        {
+            xi.items.SENSUI,
+            xi.items.ICHIGOHITOFURI,
+            xi.items.UMARU,
+            xi.items.SHISHIO,
+            xi.items.DEACON_BLADE,
+        },
+            -- CLUBS
+        {
+            xi.items.NIBIRU_CUDGEL,
+            xi.items.QUELLER_ROD,
+            xi.items.SOLSTICE,
+            xi.items.SUCELLUS,
+            xi.items.GADA,
+            xi.items.IZCALLI,
+        },
+            -- STAVES
+        {
+            xi.items.NIBIRU_STAFF,
+            xi.items.ESPIRITUS,
+            xi.items.AKADEMOS,
+            xi.items.LATHI,
+            xi.items.GRIOAVOLR,
+            xi.items.ORANYAN,
+            xi.items.GOZUKI_MEZUKI,
+            xi.items.REIKIKON,
+        },
+            -- THROWING WEAPONS
+        {
+            xi.items.SERAPHIC_AMPULLA,
+            xi.items.GRENADE_CORE,
+            xi.items.SAPIENCE_ORB,
+            xi.items.FALCON_EYE,
+            xi.items.ALBIN_BANE,
+            xi.items.AMAR_CLUSTER,
+            xi.items.HYDROCERA,
+            xi.items.MANTOPTERA_EYE,
+            xi.items.EXPEDITIOUS_PINION,
+            xi.items.PEMPHREDO_TATHLUM,
+            xi.items.ELIS_TOME,
+        },
+            -- BOWS
+        {
+            xi.items.NIBIRU_BOW,
+            xi.items.VIJAYA_BOW,
+            xi.items.TELLER,
+            xi.items.STEINTHOR,
+        },
+            -- GUNS
+        {
+            xi.items.NIBIRU_GUN,
+            xi.items.COMPENSATOR,
+            xi.items.WOCHOWSEN,
+            xi.items.HOLLIDAY,
+            xi.items.MOLYBDOSIS,
+        },
+            -- SHIELDS
+        {
+            xi.items.NIBIRU_SHIELD,
+            xi.items.GENMEI_SHIELD,
+        },
+            -- INSTRUMENTS
+        {
+            xi.items.NIBIRU_HARP,
+        },
+            -- GRIPS
+        {
+            xi.items.CLEMENCY_GRIP,
+            xi.items.WILLPOWER_GRIP,
+            xi.items.FOREFATHERS_GRIP,
+            xi.items.GIUOCO_GRIP,
+            xi.items.BALARAMA_GRIP,
+            xi.items.NIOBID_STRAP,
+            xi.items.POTENT_GRIP,
+            xi.items.THRACE_STRAP,
+            xi.items.ALBER_STRAP,
+        },
+            -- HEADGEAR
+        {
+            xi.items.ESCHITE_HELM,
+            xi.items.PSYCLOTH_TIARA,
+            xi.items.RAWHIDE_MASK,
+            xi.items.DESPAIR_HELM,
+            xi.items.VANYA_HOOD,
+            xi.items.PURSUERS_BERET,
+            xi.items.NAGA_SOMEN,
+            xi.items.SKORMOTH_MASK,
+            xi.items.ODYSSEAN_HELM,
+            xi.items.VALOROUS_MASK,
+            xi.items.HERCULEAN_HELM,
+            xi.items.MERLINIC_HOOD,
+            xi.items.CHIRONIC_HAT,
+            xi.items.IPOCA_BERET,
+            xi.items.YNGLINGA_SALLET,
+            xi.items.GENMEI_KABUTO,
+        },
+            -- CHEST ARMOR
+        {
+            xi.items.ESCHITE_BREASTPLATE,
+            xi.items.PSYCLOTH_VEST,
+            xi.items.RAWHIDE_VEST,
+            xi.items.DESPAIR_MAIL,
+            xi.items.VANYA_ROBE,
+            xi.items.PURSUERS_DOUBLET,
+            xi.items.NAGA_SAMUE,
+            xi.items.SWELLERS_HARNESS,
+            xi.items.ONCA_SUIT,
+            xi.items.KUBIRA_MEIKOGAI,
+            xi.items.ANNOINTED_KALASIRIS,
+            xi.items.MAKORA_MEIKOGAI,
+            xi.items.ENFORCERS_HARNESS,
+            xi.items.UAC_JERKIN,
+            xi.items.SHANGO_ROBE,
+            xi.items.ABNOBA_KAFTAN,
+            xi.items.ODYSSEAN_CHESTPLATE,
+            xi.items.VALOROUS_MAIL,
+            xi.items.HERCULEAN_VEST,
+            xi.items.MERLINIC_JUBBAH,
+            xi.items.CHIRONIC_DOUBLET,
+            xi.items.VEDIC_COAT,
+            xi.items.NZINGHA_CUIRASS,
+            xi.items.SAYADIOS_KAFTAN,
+            xi.items.ZENDIK_ROBE,
+            xi.items.REIKI_OSODE,
+        },
+            -- GLOVES AND GAUNTLETS
+        {
+            xi.items.NAGA_TEKKO,
+            xi.items.ESCHITE_GAUNTLETS,
+            xi.items.PSYCLOTH_MANILLAS,
+            xi.items.RAWHIDE_GLOVES,
+            xi.items.DESPAIR_FINGER_GLOVES,
+            xi.items.VANYA_CUFFS,
+            xi.items.PURSUERS_CUFFS,
+            xi.items.SHRIEKERS_CUFFS,
+            xi.items.KURYS_GLOVES,
+            xi.items.ODYSSEAN_GAUNTLETS,
+            xi.items.VALOROUS_MITTS,
+            xi.items.HERCULEAN_GLOVES,
+            xi.items.MERLINIC_DASTANAS,
+            xi.items.CHIRONIC_GLOVES,
+            xi.items.COMPOSERS_MITTS,
+            xi.items.MRIGAVYADHA_GLOVES,
+            xi.items.IKTOMI_DASTANAS,
+            xi.items.KOBO_KOTE,
+        },
+            -- LEG ARMOR
+        {
+            xi.items.NAGA_HAKAMA,
+            xi.items.ESCHITE_CUISSES,
+            xi.items.PSYCLOTH_LAPPAS,
+            xi.items.RAWHIDE_TROUSERS,
+            xi.items.DESPAIR_CUISSES,
+            xi.items.VANYA_SLOPS,
+            xi.items.PURSUERS_PANTS,
+            xi.items.DOYEN_PANTS,
+            xi.items.OBATALA_SUBLIGAR,
+            xi.items.SELVANS_SUBLIGAR,
+            xi.items.ODYSSEAN_CUISSES,
+            xi.items.VALOROUS_HOSE,
+            xi.items.HERCULEAN_TROUSERS,
+            xi.items.MERLINIC_SHALWAR,
+            xi.items.CHIRONIC_HOSE,
+            xi.items.ARJUNA_BREECHES,
+            xi.items.JOKUSHU_HAIDATE,
+        },
+            -- BOOTS AND GREAVES
+        {
+            xi.items.PURSUERS_GAITERS,
+            xi.items.NAGA_KYAHAN,
+            xi.items.ESCHITE_GREAVES,
+            xi.items.PSYCLOTH_BOOTS,
+            xi.items.RAWHIDE_BOOTS,
+            xi.items.DESPAIR_GREAVES,
+            xi.items.VANYA_CLOGS,
+            xi.items.INSPIRITED_BOOTS,
+            xi.items.TUTYR_SABOTS,
+            xi.items.ODYSSEAN_GREAVES,
+            xi.items.VALOROUS_GREAVES,
+            xi.items.HERCULEAN_BOOTS,
+            xi.items.MERLINIC_CRACKOWS,
+            xi.items.CHIRONIC_SLIPPERS,
+            xi.items.COMPOSERS_SABOTS,
+            xi.items.AHOSI_LEGGINGS,
+            xi.items.SKAOI_BOOTS,
+            xi.items.NAVON_CRACKOWS,
+            xi.items.SHUKUYU_SUNE_ATE,
+        },
+            -- NECK PIECES
+        {
+            xi.items.MARKED_GORGET,
+            xi.items.SUBTLETY_SPECTACLES,
+            xi.items.DAMPENERS_TORQUE,
+            xi.items.EMPATH_NECKLACE,
+            xi.items.RETI_PENDANT,
+            xi.items.DIEMER_GORGET,
+            xi.items.CARO_NECKLACE,
+            xi.items.NODENS_GORGET,
+            xi.items.CLOTHARIUS_TORQUE,
+            xi.items.DEINO_COLLAR,
+            xi.items.HOMERIC_GORGET,
+            xi.items.AINIA_COLLAR,
+            xi.items.JOKUSHU_CHAIN,
+        },
+            -- EARRINGS
+        {
+            xi.items.MENDICANTS_EARRING,
+            xi.items.INFUSED_EARRING,
+            xi.items.CALAMITOUS_EARRING,
+            xi.items.HERMETIC_EARRING,
+            xi.items.HALASZ_EARRING,
+            xi.items.ASSUAGE_EARRING,
+            xi.items.ISHVARA_EARRING,
+            xi.items.EVANS_EARRING,
+            xi.items.LEMPO_EARRING,
+            xi.items.THUREOUS_EARRING,
+            xi.items.DIGNITARYS_EARRING,
+            xi.items.TELOS_EARRING,
+            xi.items.GENMEI_EARRING,
+        },
+            -- BELTS AND SASHES
+        {
+            xi.items.LUCIDITY_SASH,
+            xi.items.SINEW_BELT,
+            xi.items.ESCHAN_STONE,
+            xi.items.GRUNFELD_ROPE,
+            xi.items.POROUS_ROPE,
+            xi.items.SULLA_BELT,
+            xi.items.YEMAYA_BELT,
+            xi.items.CHANNELERS_STONE,
+            xi.items.ASKLEPIAN_BELT,
+            xi.items.SARISSAPHOROI_BELT,
+            xi.items.LUMINARY_SASH,
+            xi.items.KERYGMA_BELT,
+            xi.items.REIKI_YOTAI,
+            xi.items.KOBO_OBI,
+        },
+            -- RINGS
+        {
+            xi.items.OVERBEARING_RING,
+            xi.items.RESONANCE_RING,
+            xi.items.PURITY_RING,
+            xi.items.WARDENS_RING,
+            xi.items.PETROV_RING,
+            xi.items.FORTIFIED_RING,
+            xi.items.VERTIGO_RING,
+            xi.items.EVANESCENCE_RING,
+            xi.items.BEGRUDGING_RING,
+            xi.items.APATE_RING,
+            xi.items.PERSIS_RING,
+            xi.items.HETAIROI_RING,
+            xi.items.SHUKUYU_RING,
+            xi.items.RAHAB_RING,
+        },
+            -- CAPES AND CLOAKS
+        {
+            xi.items.DISPERSERS_CAPE,
+            xi.items.THAUMATURGES_CAPE,
+            xi.items.PENETRATING_CAPE,
+            xi.items.PHILIDOR_MANTLE,
+            xi.items.SOKOLSKI_MANTLE,
+            xi.items.QUARREL_MANTLE,
+            xi.items.XUCAU_MANTLE,
+            xi.items.TANTALIC_CAPE,
+            xi.items.SCINTILLATING_CAPE,
+            xi.items.PHALANGITE_MANTLE,
+            xi.items.PERIMEDE_CAPE,
+            xi.items.AGEMA_CAPE,
+            xi.items.ENUMA_MANTLE,
+            xi.items.REIKI_CLOAK,
+        },
+            -- OTHER
+        {
+            xi.items.SEKI_SHURIKEN_POUCH,
+        },
+    },
     --[[
     -- Kupon A-OmII: Body pieces from Omen bosses
     [59] =
@@ -2854,7 +3218,8 @@ local getIndexParams = function(list, option)
         list == 44 or                   -- AW-Cos
         list == 47 or                   -- A-EMI
         list == 50 or                   -- A-SYW
-        list == 53                      -- A-ASYW
+        list == 53 or                   -- A-ASYW
+        list == 58                      -- AW-GeIV
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -2882,7 +3247,8 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         (list >= 37 and list <= 41) or  -- AW-GFIII / AW-GFII / AW-GF / AW-UWIII / AW-UWII
         list == 47 or                   -- A-EMI
         list == 50 or                   -- A-SYW
-        list == 53                      -- A-ASYW
+        list == 53 or                   -- A-ASYW
+        list == 58                      -- AW-GeIV
     then
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
