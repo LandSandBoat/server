@@ -78,6 +78,7 @@
 #include "ai/states/weaponskill_state.h"
 
 #include "ai/controllers/mob_controller.h"
+#include "ai/controllers/spirit_controller.h"
 #include "ai/controllers/trust_controller.h"
 
 #include "ai/helpers/gambits_container.h"
@@ -13619,9 +13620,13 @@ bool CLuaBaseEntity::charmPet(CLuaBaseEntity const* target)
 void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    if (static_cast<CBattleEntity*>(m_PBaseEntity)->PPet != nullptr)
+    CPetEntity* pet = static_cast<CPetEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet);
+    if (pet != nullptr)
     {
+        // A temporary fix until we move the spirit controller to lua.
+        if (pet->m_PetID >= PETID::PETID_AIRSPIRIT && pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            static_cast<CSpiritController*>(pet->PAI->GetController())->setMagicCooldowns();
+
         petutils::AttackTarget(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
     }
 }
@@ -13649,10 +13654,14 @@ void CLuaBaseEntity::petRetreat()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-
-    if (PBattle->PPet != nullptr)
+    auto*       PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CPetEntity* pet     = static_cast<CPetEntity*>(PBattle->PPet);
+    if (pet != nullptr)
     {
+        // A temporary fix until we move the spirit controller to lua.
+        if (pet->m_PetID >= PETID::PETID_AIRSPIRIT && pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            static_cast<CSpiritController*>(pet->PAI->GetController())->setMagicCooldowns();
+
         petutils::RetreatToMaster(PBattle);
     }
 }
