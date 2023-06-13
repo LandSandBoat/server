@@ -3166,12 +3166,92 @@ local itemList =
         xi.items.NUSKU_SHIELD,
     },
 
-    -- Kupon W-RMEA: iLevel 119 III Relic, Mythic, Empyrean or Aeonic Weapon
+    -- Kupon W-RMEA: iLevel 119 III Relic, Mythic, Empyrean or Aeonic Weapon (MOG_KUPON_W_RMEA = 9879)
     [62] =
+    -- TODO: Implement and Apply Rank Augments
     {
-
-    },
-    ]]
+            -- Relic
+        {
+            xi.items.SPHARAI_119_III,
+            xi.items.MANDAU_119_III,
+            xi.items.EXCALIBUR_119_III,
+            xi.items.RAGNAROK_119_III,
+            xi.items.GUTTLER_119_III,
+            xi.items.BRAVURA_119_III,
+            xi.items.APOCALYPSE_119_III,
+            xi.items.GUNGNIR_119_III,
+            xi.items.KIKOKU_119_III,
+            xi.items.AMANOMURAKUMO_119_III,
+            xi.items.MJOLLNIR_119_III,
+            xi.items.CLAUSTRUM_119_III,
+            { xi.items.YOICHINOYUMI_119_III_NO_QUIVER,  xi.items.YOICHIS_QUIVER             },
+            { xi.items.ANNIHILATOR_119_III_NO_QUIVER,   xi.items.ERADICATING_BULLET_POUCH   },
+        },
+            -- Mythic
+        {
+            xi.items.GLANZFAUST_119_III,
+            xi.items.KENKONKEN_119_III,
+            xi.items.VAJRA_119_III,
+            xi.items.CARNWENHAN_119_III,
+            xi.items.TERPSICHORE_119_III,
+            xi.items.MURGLEIS_119_III,
+            xi.items.BURTGANG_119_III,
+            xi.items.TIZONA_119_III,
+            xi.items.AYMUR_119_III,
+            xi.items.CONQUEROR_119_III,
+            xi.items.LIBERATOR_119_III,
+            xi.items.RYUNOHIGE_119_III,
+            xi.items.NAGI_119_III,
+            xi.items.KOGARASUMARU_119_III,
+            xi.items.YAGRUSH_119_III,
+            xi.items.LAEVATEINN_119_III,
+            xi.items.NIRVANA_119_III,
+            xi.items.TUPSIMATI_119_III,
+            { xi.items.GASTRAPHETES_119_III_NO_QUIVER,  xi.items.QUELLING_BOLT_QUIVER   },
+            { xi.items.DEATH_PENALTY_119_III_NO_QUIVER, xi.items.LIVING_BULLET_POUCH    },
+        },
+            -- Empyrean
+        {
+            xi.items.VERETHRAGNA_119_III,
+            xi.items.TWASHTAR_119_III,
+            xi.items.ALMACE_119_III,
+            xi.items.CALADBOLG_119_III,
+            xi.items.FARSHA_119_III,
+            xi.items.UKONVASARA_119_III,
+            xi.items.REDEMPTION_119_III,
+            xi.items.RHONGOMIANT_119_III,
+            xi.items.KANNAGI_119_III,
+            xi.items.MASAMUNE_119_III,
+            xi.items.GAMBANTEINN_119_III,
+            xi.items.HVERGELMIR_119_III,
+            { xi.items.GANDIVA_119_III_NO_QUIVER,       xi.items.ARTEMISS_QUIVER            },
+            { xi.items.ARMAGEDDON_119_III_NO_QUIVER,    xi.items.DEVASTATING_BULLET_POUCH   },
+        },
+            -- Ergon
+        {
+            xi.items.IDRIS_119_II,
+            xi.items.EPEOLATRY_119_II,
+        },
+            -- Aeonic
+        {
+            xi.items.GODHANDS,
+            xi.items.AENEAS,
+            xi.items.SEQUENCE,
+            xi.items.LIONHEART,
+            xi.items.TRI_EDGE,
+            xi.items.CHANGO,
+            xi.items.TRISHULA,
+            xi.items.ANGUTA,
+            xi.items.HEISHI_SHORINKEN,
+            xi.items.DOJIKIRI_YASUTSUNA,
+            xi.items.TISHTRYA,
+            xi.items.KHATVANGA,
+            { xi.items.FAIL_NOT_NO_QUIVER,              xi.items.CHRONO_QUIVER          },
+            { xi.items.FOMALHAUT_NO_QUIVER,             xi.items.CHRONO_BULLET_POUCH    },
+            xi.items.SRIVATSA,
+            xi.items.MARSYAS,
+        },
+    }
 }
 
 local countKeyItems = function(player)
@@ -3235,7 +3315,8 @@ local getIndexParams = function(list, option)
         list == 47 or                   -- A-EMI
         list == 50 or                   -- A-SYW
         list == 53 or                   -- A-ASYW
-        list == 58                      -- AW-GeIV
+        list == 58 or                   -- AW-GeIV
+        list == 62                      -- W-RMEA
     then
         idxAlt1 = bit.rshift(option, 24)                -- Submenu ID
         idxAlt2 = bit.band(bit.rshift(option, 8), 0xFF) -- Item ID
@@ -3264,7 +3345,8 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         list == 47 or                   -- A-EMI
         list == 50 or                   -- A-SYW
         list == 53 or                   -- A-ASYW
-        list == 58                      -- AW-GeIV
+        list == 58 or                   -- AW-GeIV
+        list == 62                      -- W-RMEA
     then
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
