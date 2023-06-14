@@ -103,8 +103,8 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
     -- Elemental seal
     if
         actor:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) and
-        not skillType == xi.skill.DARK_MAGIC and
-        not skillType == xi.skill.DIVINE_MAGIC and
+        skillType ~= xi.skill.DARK_MAGIC and
+        skillType ~= xi.skill.DIVINE_MAGIC and
         spellElement > 0
     then
         magicAcc = magicAcc + 256
@@ -263,34 +263,36 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
 end
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate)
-    local resistRate = 0 -- The variable we return.
-    local resistRank = 0
+    local targetResistRate = 0 -- The variable we return.
+    local targetResistRank = 0
 
     ----------------------------------------
     -- Handle "Magic Shield" status effect.
     ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return resistRate
+        return targetResistRate
     end
 
     ----------------------------------------
     -- Handle target resistance rank.
     ----------------------------------------
     if spellElement ~= xi.magic.ele.NONE then
-        resistRank = target:getMod(elementTable[spellElement][4])
+        targetResistRank = target:getMod(elementTable[spellElement][4])
     end
 
     -- Skillchains lowers target resistance rank by 1.
     local _, skillchainCount = FormMagicBurst(spellElement, target)
 
     if skillchainCount > 0 then
-        resistRank = resistRank - 1
+        targetResistRank = targetResistRank - 1
     end
 
-     ----------------------------------------
+    -- TODO: Rayke logic might be needed here, depending on how it's implemented.
+
+    ----------------------------------------
     -- Handle magic hit rate.
     ----------------------------------------
-    if resistRank >= 10 then
+    if targetResistRank >= 10 then
         magicHitRate = 5
     end
 
@@ -311,33 +313,33 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
         end
     end
 
-    resistRate = 1 / (2 ^ resistTier)
+    targetResistRate = 1 / (2 ^ resistTier)
 
     -- Force 1/8 if target has max resistance rank.
-    if resistRank >= 11 then
-        -- TODO: Inmunobreak logic probably goes here
+    if targetResistRank >= 11 then
+        -- TODO: Immunobreak logic probably goes here
 
-        resistRate = 0.125
+        targetResistRate = 0.125
     end
 
     -- Force just 1/2 resist tier if target resistance rank is -3 (150% EEM).
     if
-        resistRank <= -3 and -- Very weak.
-        resistRate < 0.5     -- More than 1 resist tier triggered.
+        targetResistRank <= -3 and -- Very weak.
+        targetResistRate < 0.5     -- More than 1 resist tier triggered.
     then
-        resistRate = 0.5
+        targetResistRate = 0.5
     end
 
     ----------------------------------------
     -- Calculate additional resist tier.
     ----------------------------------------
     if
-        not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY) -- Subtle sorcery bypasses this tier.
-        resistRank >= 4 and                           -- Forced only at and after rank 4 (50% EEM).
-        skillType == xi.skill.ELEMENTAL_MAGIC               -- Only applies to nukes.
+        not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY) and -- Subtle sorcery bypasses this tier.
+        targetResistRank >= 4 and                               -- Forced only at and after rank 4 (50% EEM).
+        skillType == xi.skill.ELEMENTAL_MAGIC                   -- Only applies to nukes.
     then
-        resistRate = resistRate / 2
+        targetResistRate = targetResistRate / 2
     end
 
-    return resistRate
+    return targetResistRate
 end
