@@ -237,8 +237,12 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
         magicEva = magicEva + target:getMod(mEvaMod) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
-    -- Level correction. Target gets a bonus when higher level. Never a penalty.
-    if levelDiff > 0 then
+    -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
+    if
+        levelDiff > 0 and
+        xi.combat.levelCorrection.isLevelCorrectedZone(actor) and
+        not target:isPC()
+    then
         magicEva = magicEva + levelDiff * 4
     end
 
