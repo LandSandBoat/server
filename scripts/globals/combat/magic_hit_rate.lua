@@ -263,30 +263,40 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
 end
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate)
-    local resistRate = 0
+    local resistRate = 0 -- The variable we return.
     local resistRank = 0
 
-    -- Magic Shield exception.
+    ----------------------------------------
+    -- Handle "Magic Shield" status effect.
+    ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
         return resistRate
     end
 
-    -- Fetch resistance rank modifier.
+    ----------------------------------------
+    -- Handle target resistance rank.
+    ----------------------------------------
     if spellElement ~= xi.magic.ele.NONE then
         resistRank = target:getMod(elementTable[spellElement][4])
     end
 
-    -- Resistance Ranks "boons".
-    if resistRank > 10 then -- Resistance rank 11 is technically the max, but we check for higher JUST IN CASE something altered it.
-        -- TODO: Inmunobreak logic probably goes here
+    -- Skillchains lowers target resistance rank by 1.
+    local _, skillchainCount = FormMagicBurst(spellElement, target)
 
-        resistRate = 0.0625
-        return resistRate
-    elseif resistRank == 10 then
+    if skillchainCount > 0 then
+        resistRank = resistRank - 1
+    end
+
+     ----------------------------------------
+    -- Handle magic hit rate.
+    ----------------------------------------
+    if resistRank >= 10 then
         magicHitRate = 5
     end
 
-    -- Determine final resist based on which thresholds have been crossed.
+    ----------------------------------------
+    -- Calculate first 3 resist tiers.
+    ----------------------------------------
     local resistTier = 0
     local randomVar  = math.random()
 
@@ -303,14 +313,30 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
 
     resistRate = 1 / (2 ^ resistTier)
 
-    -- Apply additional resistance tier. (The so called "Fourth resist tier"). Subtle sorcery bypasses it.
-    if resistRank >= 4 then
-        if
-            skillType ~= xi.skill.ELEMENTAL_MAGIC or
-            not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY)
-        then
-            resistRate = resistRate / 2
-        end
+    -- Force 1/8 if target has max resistance rank.
+    if resistRank >= 11 then
+        -- TODO: Inmunobreak logic probably goes here
+
+        resistRate = 0.125
+    end
+
+    -- Force just 1/2 resist tier if target resistance rank is -3 (150% EEM).
+    if
+        resistRank <= -3 and -- Very weak.
+        resistRate < 0.5     -- More than 1 resist tier triggered.
+    then
+        resistRate = 0.5
+    end
+
+    ----------------------------------------
+    -- Calculate additional resist tier.
+    ----------------------------------------
+    if
+        not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY) -- Subtle sorcery bypasses this tier.
+        resistRank >= 4 and                           -- Forced only at and after rank 4 (50% EEM).
+        skillType == xi.skill.ELEMENTAL_MAGIC               -- Only applies to nukes.
+    then
+        resistRate = resistRate / 2
     end
 
     return resistRate
