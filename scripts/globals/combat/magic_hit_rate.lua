@@ -32,12 +32,15 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
         magicAcc = magicAcc + utils.getSkillLvl(1, actor:getMainLvl())
     end
 
+    -- Add action bonus magic accuracy.
+    magicAcc = magicAcc + bonusMacc
+
     -- Add acc for elemental affinity accuracy and element specific accuracy
     if spellElement ~= xi.magic.ele.NONE then
         local elementBonus  = actor:getMod(elementTable[spellElement][1])
         local affinityBonus = actor:getMod(elementTable[spellElement][2]) * 10
 
-        magicAcc            = magicAcc + elementBonus + affinityBonus
+        magicAcc = magicAcc + elementBonus + affinityBonus
     end
 
     -- Get dStat Magic Accuracy.
