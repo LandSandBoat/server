@@ -6425,7 +6425,7 @@ namespace battleutils
         return bonus;
     }
 
-    void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
+    void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, bool mobSubJobCheck)
     {
         CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
 
@@ -6484,6 +6484,16 @@ namespace battleutils
                     {
                         add = false;
                     }
+                }
+
+                // Mobs SJ level is equal to their MJ level, however certain SJ traits (like double attack)
+                // are gained as if mobs SJ level was half their MJ level (like players),
+                // thus we need check for these special traits
+                if (mobSubJobCheck && PEntity->objtype == TYPE_MOB &&
+                    (PTrait->getID() == TRAIT_DOUBLE_ATTACK || PTrait->getID() == TRAIT_TRIPLE_ATTACK) &&
+                    std::max(static_cast<int>(std::floor(level / 2)), 1) < PTrait->getLevel())
+                {
+                    add = false;
                 }
 
                 if (add)
