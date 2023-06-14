@@ -13931,6 +13931,27 @@ void CLuaBaseEntity::setPet(sol::object const& petObj)
     return;
 }
 
+// Returns the minimum level of the pet, such as level 23 for Courier Carrie or 0 if non applicable.
+uint8 CLuaBaseEntity::getMinimumPetLevel()
+{
+    CPetEntity* PPet = dynamic_cast<CPetEntity*>(m_PBaseEntity);
+
+    if (PPet)
+    {
+        Pet_t* petInfo = petutils::GetPetInfo(PPet->m_PetID);
+        if (petInfo)
+        {
+            return petInfo->minLevel;
+        }
+    }
+    else
+    {
+        ShowWarning("Non-CPetEntity called this function");
+    }
+
+    return 0;
+}
+
 /************************************************************************
  *  Function: getMaster()
  *  Purpose : Returns the Entity object for a pet's master
@@ -17206,6 +17227,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isAvatar", CLuaBaseEntity::isAvatar);
     SOL_REGISTER("getPetElement", CLuaBaseEntity::getPetElement);
     SOL_REGISTER("setPet", CLuaBaseEntity::setPet);
+    SOL_REGISTER("getMinimumPetLevel", CLuaBaseEntity::getMinimumPetLevel);
     SOL_REGISTER("getMaster", CLuaBaseEntity::getMaster);
 
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);
