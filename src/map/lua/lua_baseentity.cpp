@@ -12315,9 +12315,10 @@ int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType    = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool        ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, false, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12331,9 +12332,10 @@ int32 CLuaBaseEntity::magicDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    ELEMENT elementType = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
+    ELEMENT elementType   = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
+    bool    ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType);
+    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12347,9 +12349,10 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType    = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool        ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, false, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12359,11 +12362,13 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
  *  Notes   : Passes argument to BreathDmgTaken member of battleutils
  ************************************************************************/
 
-int32 CLuaBaseEntity::breathDmgTaken(double damage)
+int32 CLuaBaseEntity::breathDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage));
+    bool ignoreDmgMods = va[0].is<bool>() ? va[0].as<bool>() : false;
+
+    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), ignoreDmgMods);
 }
 
 /************************************************************************
