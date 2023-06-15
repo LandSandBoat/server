@@ -323,7 +323,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
     if
         (missChance <= calcParams.hitRate or
         calcParams.guaranteedHit or
-        (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100))) and
+        calcParams.melee) and
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
