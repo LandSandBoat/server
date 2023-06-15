@@ -13,6 +13,9 @@ require("scripts/globals/msg")
 ---------------------------------------------
 local m = Module:new("era_pet_skills")
 
+xi = xi or {}
+xi.dynamis = xi.dynamis or {}
+
 xi.dynamis.onFightApocDRG = function(mob, target)
     if not mob:getMaster() or mob:getMaster():getHP() == 0 then
         DespawnMob(mob:getID())
@@ -33,6 +36,21 @@ xi.dynamis.onRoamApocDRG = function(mob)
     end
 
     if mob:getMaster() and (os.time() >= mob:getMaster():getLocalVar("next2hrTime")) then
+        DespawnMob(mob:getID())
+    end
+end
+
+-- For mobs with multiple pets - we are at risk for unxpected behavior due to pet AI relying on master's AI state
+-- Most if not all core actions assume a single pet and take action only on the single known pet
+-- As an interim fix - despawn pets when the master is dead.
+xi.dynamis.onFightMultiPet = function(mob, target)
+    if not mob:getMaster() or mob:getMaster():isDead() then
+        DespawnMob(mob:getID())
+    end
+end
+
+xi.dynamis.onRoamMultiPet = function(mob)
+    if not mob:getMaster() or mob:getMaster():isDead() then
         DespawnMob(mob:getID())
     end
 end
