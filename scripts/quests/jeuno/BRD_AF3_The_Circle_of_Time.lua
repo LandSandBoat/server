@@ -13,7 +13,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
+local xarcabardID = require("scripts/zones/Xarcabard/IDs")
+local monasticID = require("scripts/zones/Monastic_Cavern/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
@@ -130,7 +131,7 @@ quest.sections =
                     elseif os.time() > quest:getVar(player, 'ringBuried') then
                         return quest:progressEvent(2)
                     else
-                        return quest:messageSpecial(ID.text.PERENNIAL_SNOW_WAIT, 225)
+                        return quest:messageSpecial(xarcabardID.text.PERENNIAL_SNOW_WAIT, 225)
                     end
                 end,
             },
@@ -203,7 +204,7 @@ quest.sections =
                     then
                         if
                             quest:getVar(player, 'Prog') == 7 and
-                            npcUtil.popFromQM(player, npc, ID.mob.BUGABOO, { hide = 0 })
+                            npcUtil.popFromQM(player, npc, monasticID.mob.BUGABOO, { hide = 0 })
                         then
                             return quest:noAction()
                         elseif  quest:getVar(player, 'Prog') == 8 then
