@@ -8,6 +8,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    target:addStatusEffect(xi.effect.PROTECT, 220, 0, 300)
+    target:addStatusEffect(xi.effect.SHELL, 2930, 0, 300)
+
     return 0
 end
 
