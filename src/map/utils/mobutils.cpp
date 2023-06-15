@@ -539,7 +539,8 @@ namespace mobutils
 
         // add traits for sub and main
         battleutils::AddTraits(PMob, traits::GetTraits(mJob), mLvl);
-        battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel());
+        // pass in bool param to stop from adding certain traits to mobs that should not be added
+        battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel(), true);
 
         // Max [HP/MP] Boost traits
         PMob->UpdateHealth();
