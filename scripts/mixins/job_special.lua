@@ -183,6 +183,7 @@ local charmList =
     "Eurymedon",
     "Nephiyl Moatfiller",
     "Ophion",
+    "Skadi",
 }
 
 xi.mix.jobSpecial.config = function(mob, params)
@@ -320,14 +321,23 @@ g_mixins.job_special = function(jobSpecialMob)
             end
 
             -- Certain mobs should Charm instead of Familiar if their pet is dead
-            for _,v in pairs(charmList) do
-                if mob:getName() == v and not mob:hasPet() then
+            for _, v in pairs(charmList) do
+                if
+                    mob:getName() == v and
+                    not (mob:hasPet() and
+                    mob:getPet():isAlive())
+                then
                     ability = 710
                     break
                 end
             end
 
-            if mob:isInDynamis() and mob:getMainJob() == xi.job.BST and not mob:hasPet() then
+            if
+                mob:isInDynamis() and
+                mob:getMainJob() == xi.job.BST and
+                not (mob:hasPet() and
+                mob:getPet():isAlive())
+            then
                 ability = 710 -- Charm
             end
 
