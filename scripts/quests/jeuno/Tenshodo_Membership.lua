@@ -109,8 +109,9 @@ quest.sections =
             onEventFinish =
             {
                 [107] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
+                    end
                 end,
 
                 [108] = function(player, csid, option, npc)

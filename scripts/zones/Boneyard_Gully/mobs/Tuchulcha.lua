@@ -12,6 +12,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar("Sandpits", 0)
@@ -20,15 +21,15 @@ end
 
 -- Reset restHP when re-engaging after a sandpit
 entity.onMobEngaged = function(mob, target)
-    if mob:getMobMod(xi.mobMod.NO_REST) == 1 then
-        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-        mob:setMobMod(xi.mobMod.NO_REST, 0)
-    end
     local engaged = mob:getLocalVar("engaged")
+
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+
     if engaged == 0 then
         for _, v in pairs(mob:getBattlefield():getPlayers()) do
             v:messageSpecial(ID.text.GIANT_ANTLION)
         end
+
         mob:setLocalVar("engaged", 1)
     else
         for _, v in pairs(mob:getBattlefield():getPlayers()) do
@@ -50,10 +51,9 @@ entity.onMobFight = function(mob, target)
         mob:timer(4000, function(tuchulcha)
             tuchulcha:disengage()
             tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
-            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
-            local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
-            local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
-            tuchulcha:setSpawn(coords[1],coords[2],coords[3],0)
+            local posIndex = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
+            local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
+            tuchulcha:setSpawn(coords[1], coords[2], coords[3], 0)
 
             tuchulcha:setPos(coords)
             local players = tuchulcha:getBattlefield():getPlayers()
@@ -77,7 +77,7 @@ entity.onMobDeath = function(mob, player, optParams)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID)
 
         -- Armoury Crate drops at Tuchulchua's feet
-        GetNPCByID(mob:getID()+4):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+        GetNPCByID(mob:getID() + 4):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
         for _, v in pairs(mob:getBattlefield():getPlayers()) do
             v:messageSpecial(ID.text.TUCHCULA_CRATE)
         end
