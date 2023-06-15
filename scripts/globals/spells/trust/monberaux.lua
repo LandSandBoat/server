@@ -22,26 +22,22 @@ spellObject.onMobSpawn = function(mob)
 
     -- Tends to be particular about which potions to use. Seems to favor healing for just the
     -- right amount of HP instead of defaulting to the highest-rank potion.
-	
-	mob:addMod(xi.mod.MPP, -80)
-	mob:addMod(xi.mod.HPP, 50)
-	
-	mob:addSimpleGambit(ai.t.CASTER, ai.c.MPP_LT, 25, ai.r.MS, ai.s.SPECIFIC, 4254, healingMoveCooldown)
-	
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 90, ai.r.MS, ai.s.SPECIFIC, 4236, healingMoveCooldown) -- Max Potion (500 HP)
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75, ai.r.MS, ai.s.SPECIFIC, 4237, healingMoveCooldown) -- Mix: Max Potion (700 HP)
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.POISON, ai.r.MS, ai.s.SPECIFIC, 4238, healingMoveCooldown) -- Mix: Antidote
+    mob:addMod(xi.mod.MPP, -80)
+    mob:addMod(xi.mod.HPP, 50)
+    mob:addSimpleGambit(ai.t.CASTER, ai.c.MPP_LT, 25, ai.r.MS, ai.s.SPECIFIC, 4254, healingMoveCooldown)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 90, ai.r.MS, ai.s.SPECIFIC, 4236, healingMoveCooldown) -- Max Potion (500 HP)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75, ai.r.MS, ai.s.SPECIFIC, 4237, healingMoveCooldown) -- Mix: Max Potion (700 HP)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.POISON, ai.r.MS, ai.s.SPECIFIC, 4238, healingMoveCooldown) -- Mix: Antidote
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SILENCE, ai.r.MS, ai.s.SPECIFIC, 4241, healingMoveCooldown) -- Echo Drops
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.PARALYSIS, ai.r.MS, ai.s.SPECIFIC, 4247, healingMoveCooldown) -- Mix: Para-B-Gone
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE, ai.r.MS, ai.s.SPECIFIC, 4245, healingMoveCooldown) -- Mix: Panacea-1
-	
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.REGEN, ai.r.MS, ai.s.SPECIFIC, 4257, healingMoveCooldown) -- Mix: Life Water
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.STR_BOOST, ai.r.MS, ai.s.SPECIFIC, 4261, healingMoveCooldown)
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_DEF_BOOST, ai.r.MS, ai.s.SPECIFIC, 4259, healingMoveCooldown) -- Mix: Dragon Shield
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_ATK_BOOST, ai.r.MS, ai.s.SPECIFIC, 4258, healingMoveCooldown)
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.PROTECT, ai.r.MS, ai.s.SPECIFIC, 4255, healingMoveCooldown)
-	mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.NEGATE_SLEEP, ai.r.MS, ai.s.SPECIFIC, 4256, healingMoveCooldown)
-	mob:addSimpleGambit(ai.t.TARGET, ai.c.HP_MISSING, 99, ai.r.MS, ai.s.SPECIFIC, 4260, healingMoveCooldown) -- Dark Potion (666 Dark Damage)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.PARALYSIS, ai.r.MS, ai.s.SPECIFIC, 4247, healingMoveCooldown) -- Mix: Para-B-Gone
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE, ai.r.MS, ai.s.SPECIFIC, 4245, healingMoveCooldown) -- Mix: Panacea-1
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.REGEN, ai.r.MS, ai.s.SPECIFIC, 4257, healingMoveCooldown) -- Mix: Life Water
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.STR_BOOST, ai.r.MS, ai.s.SPECIFIC, 4261, healingMoveCooldown)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_DEF_BOOST, ai.r.MS, ai.s.SPECIFIC, 4259, healingMoveCooldown) -- Mix: Dragon Shield
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_ATK_BOOST, ai.r.MS, ai.s.SPECIFIC, 4258, healingMoveCooldown)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.PROTECT, ai.r.MS, ai.s.SPECIFIC, 4255, healingMoveCooldown)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.NEGATE_SLEEP, ai.r.MS, ai.s.SPECIFIC, 4256, healingMoveCooldown)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.HP_MISSING, 99, ai.r.MS, ai.s.SPECIFIC, 4260, healingMoveCooldown) -- Dark Potion (666 Dark Damage)
 
     mob:setAutoAttackEnabled(false)
 
