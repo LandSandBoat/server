@@ -56,22 +56,26 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.CASTLE_FLOOR_PLANS, 1 } }) and
-                        quest:getVar(player, 'Prog') == 2
-                        then
-                            return quest:progressEvent(648, 0, 530)
+                    npcUtil.tradeHasExactly(trade, { { xi.items.CASTLE_FLOOR_PLANS, 1 } }) and
+                    quest:getVar(player, 'Prog') == 2
+                    then
+                        return quest:progressEvent(648, 0, xi.items.CASTLE_FLOOR_PLANS)
                     end
                 end,
 
                 onTrigger = function(player, npc)
+                    print(quest:getVar(player, 'Prog'))
                     if player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE) then
                         return quest:event(645)
+
                     elseif quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(646, 0, 530)
+                        return quest:progressEvent(646, 0, xi.items.CASTLE_FLOOR_PLANS)
+
                     elseif quest:getVar(player, 'Prog') == 2 then
-                        return quest:event(647, 0, 530)
+                        return quest:event(647, 0, xi.items.CASTLE_FLOOR_PLANS)
+
                     elseif player:hasCompletedQuest(quest.areaId, quest.questId) then
-                        return quest:event(650, 0, 530)
+                        return quest:progressEvent(650, 0, xi.items.CASTLE_FLOOR_PLANS)
                     end
                 end,
             },
@@ -85,19 +89,19 @@ quest.sections =
                 end,
 
                 [648] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                        if not player:hasCompletedQuest(quest.areaId, quest.questId) then
-                            quest:complete(player)
-                        else
-                            player:addFame(xi.quest.fame_area.SANDORIA, 5)
-                            npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 900)
-                            quest:setVar(player, 'Prog', 0)
-                        end
+                    if player:hasCompletedQuest(quest.areaId, quest.questId) then
+                        quest.fame = 5
+                    end
+
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                    end
                 end,
 
                 [650] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:setVar(player, 'Prog', 2)
+                        quest:begin(player)
                     end
                 end,
             },
@@ -109,7 +113,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE) then
-                        return quest:event(549)
+                        return quest:progressEvent(549)
                     end
                 end,
             },
