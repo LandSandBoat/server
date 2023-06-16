@@ -2,6 +2,7 @@
 -- Zone: Apollyon
 -----------------------------------
 local ID = require('scripts/zones/Apollyon/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
 require('scripts/globals/status')
@@ -167,9 +168,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 200 and csid <= 219 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

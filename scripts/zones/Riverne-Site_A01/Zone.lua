@@ -2,6 +2,7 @@
 -- Zone: Riverne-Site_A01
 -----------------------------------
 local ID = require('scripts/zones/Riverne-Site_A01/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
 require('scripts/globals/settings')
 require('scripts/globals/status')
@@ -44,9 +45,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid >= 2 and csid <= 39 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 
