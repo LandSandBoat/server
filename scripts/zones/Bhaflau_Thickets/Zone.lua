@@ -29,7 +29,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(-100, -13.5, -479.514, 60)
+        player:setPos(432, -7, -39, 135)
     end
 
     if prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS then

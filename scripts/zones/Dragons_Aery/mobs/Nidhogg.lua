@@ -23,6 +23,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PARALYZERES, 15)
     mob:setMod(xi.mod.BLINDRES, 15)
     mob:setMod(xi.mod.SLEEPRES, 50)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 50)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 50)
     mob:setMod(xi.mod.STUNRES, 100)
     mob:setMod(xi.mod.SILENCERES, 100)
 

@@ -11,49 +11,64 @@ namespace daily
     std::vector<uint16> sundries1DialItems;
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
+    std::vector<uint16> gobbieJunk = {
+        2542, // Goblin Mess Tin
+        2543, // Goblin Weel
+        4324, // Hobgoblin Chocolate
+        4325, // Hobgoblin Pie
+        4328, // Hobgoblin Bread
+        4458, // Goblin Bread
+        4495, // Goblin Chocolate
+        4539  // Goblin Pie
+    };
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        int                 selection;
-        std::vector<uint16> dialItems;
+        uint16               selection;
+        std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
             case 1:
             {
-                dialItems = materialsDialItems;
+                dialItems = &materialsDialItems;
                 break;
             }
             case 2:
             {
-                dialItems = foodDialItems;
+                dialItems = &foodDialItems;
                 break;
             }
             case 3:
             {
-                dialItems = medicineDialItems;
+                dialItems = &medicineDialItems;
                 break;
             }
             case 4:
             {
-                dialItems = sundries1DialItems;
+                dialItems = &sundries1DialItems;
                 break;
             }
             case 5:
             {
-                dialItems = sundries2DialItems;
+                dialItems = &sundries2DialItems;
                 break;
             }
             case 6:
             {
-                dialItems = specialDialItems;
+                dialItems = &specialDialItems;
                 break;
             }
         }
-        do
+        selection = xirand::GetRandomElement(dialItems);
+
+        // Check if Rare item is already owned and substitute with Goblin trash item.
+        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
         {
-            selection = std::rand() % dialItems.size();
-        } while ((itemutils::GetItem(dialItems[selection])->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, dialItems[selection]));
-        return dialItems[selection];
+            dialItems = &gobbieJunk;
+            selection = xirand::GetRandomElement(dialItems);
+        }
+
+        return selection;
     }
 
     void LoadDailyItems()
@@ -154,8 +169,8 @@ namespace daily
 
     void UpdateDailyTallyPoints()
     {
-        uint16 dailyTallyLimit  = settings::get<uint16>("map.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("map.DAILY_TALLY_AMOUNT");
+        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
+        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
 
         const char* fmtQuery = "UPDATE char_points \
                 SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \

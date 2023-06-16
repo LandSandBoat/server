@@ -27,7 +27,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(70.956, 5.99, 139.843, 134)
+        player:setPos(-286, 0, -99, 253)
     end
 
     return cs

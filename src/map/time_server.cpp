@@ -95,8 +95,16 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
-            daily::UpdateDailyTallyPoints();
-            roeutils::CycleDailyRecords();
+            if (settings::get<bool>("main.ENABLE_DAILY_TALLY"))
+            {
+                daily::UpdateDailyTallyPoints();
+            }
+
+            if (settings::get<bool>("main.ENABLE_ROE"))
+            {
+                roeutils::CycleDailyRecords();
+            }
+
             guildutils::UpdateGuildPointsPattern();
             luautils::OnJSTMidnight();
             lastTickedJstMidnight = tick;

@@ -733,6 +733,7 @@ xi.quest.id =
         SCOUTING_THE_ASHU_TALIF          = 101,
         ROYAL_PAINTER_ESCORT             = 102,
         TARGETING_THE_CAPTAIN            = 103,
+        THE_PRANKSTER                    = 104,
     },
 
     -----------------------------------

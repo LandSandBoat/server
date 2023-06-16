@@ -33,7 +33,7 @@ jobs:
         # Remove the above when it's no longer necessary
 
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
         npm install -g diff-so-fancy
@@ -371,7 +371,7 @@ jobs:
     needs: Linux_Clang14_64bit
     services:
       mysql:
-        image: mariadb
+        image: mariadb:10.6
         env:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
@@ -389,7 +389,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -518,7 +518,7 @@ jobs:
     needs: Linux_Clang14_64bit
     services:
       mysql:
-        image: mariadb
+        image: mariadb:10.6
         env:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
@@ -536,7 +536,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"

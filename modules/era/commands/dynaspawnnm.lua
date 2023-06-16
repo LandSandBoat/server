@@ -54,5 +54,5 @@ function onTrigger(player, zoneName, mobIndex)
     end
 
     xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zone:getID())
-    player:PrintToPlayer(string.format("[DynaSetWave] Spawned Notorious Monster %n", mobIndex))
+    player:PrintToPlayer(string.format("[DynaSetWave] Spawned Notorious Monster %s", mobIndex))
 end

@@ -5,26 +5,6 @@ require("scripts/globals/settings")
 require("scripts/globals/utils")
 -----------------------------------
 
--- Global, for use in C++
-function applyOverride(base_table, name, func, fullname, filename)
-    local old = base_table[name]
-
-    if old == nil then
-        if xi.settings.logging.DEBUG_MODULES then
-            print(string.format("Inserting empty function to override for: %s (%s)", fullname, filename))
-        end
-        old = function() end -- Insert empty function
-    end
-
-    local thisenv = getfenv(old)
-
-    local env = { super = old }
-    setmetatable(env, { __index = thisenv })
-
-    setfenv(func, env)
-    base_table[name] = func
-end
-
 -- Override Object
 Override = {}
 Override.__index = Override

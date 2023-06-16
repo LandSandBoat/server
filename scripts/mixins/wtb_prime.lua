@@ -5,22 +5,29 @@ g_mixins = g_mixins or {}
 
 g_mixins.wtb_prime = function(prime)
     prime:addListener("DEATH", "PRIME_DEATH", function(mob, killer)
+        local bf    = mob:getBattlefield()
+        local phase = bf:getLocalVar("phase")
+        local bfNum = bf:getArea()
+        local carby = GetMobByID(ID.primes[1][bfNum])
+
         if mob:getLocalVar("control") == 0 then
             mob:setLocalVar("control", 1)
-            local bf = mob:getBattlefield()
-            local phase = bf:getLocalVar("phase")
-            local bfNum = bf:getArea()
 
             bf:setLocalVar("primesDead", bf:getLocalVar("primesDead") + 1)
 
             if bf:getLocalVar("primesDead") >= phase then
                 -- Respawn Carbuncle
-                SpawnMob(ID.primes[1][bfNum]):updateEnmity(killer)
-                bf:setLocalVar("phase", bf:getLocalVar("phase") + 1)
+                SpawnMob(carby:getID()):updateEnmity(killer)
 
-                if bf:getLocalVar("phase") >= 4 then
-                    for i = 1, 4 do
-                        SpawnMob(ID.primes[1][bfNum] + i):updateEnmity(killer)
+                -- Phase Control resets on carby spawn
+                if bf:getLocalVar("phaseControl") == 0 then
+                    bf:setLocalVar("phase", phase + 1)
+                    bf:setLocalVar("phaseControl", 1)
+
+                    if bf:getLocalVar("phase") >= 4 then
+                        for i = 1, 4 do
+                            SpawnMob(carby:getID() + i):updateEnmity(killer)
+                        end
                     end
                 end
             end

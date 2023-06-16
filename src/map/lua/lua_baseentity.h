@@ -58,11 +58,10 @@ public:
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
-
-    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
-
-    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
-    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
+    void messageSpecial(uint16 messageID, sol::variadic_args va);                                                          // Sends Special Message
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1);                                    // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);                                     // Sends Combat Message
+    void messageStandard(uint16 messageID);                                                                                // Send Standard Message
 
     void customMenu(sol::object const& obj);
 
@@ -679,7 +678,7 @@ public:
     int32 physicalDmgTaken(double damage, sol::variadic_args va);
     int32 magicDmgTaken(double damage, sol::variadic_args va);
     int32 rangedDmgTaken(double damage, sol::variadic_args va);
-    int32 breathDmgTaken(double damage);
+    int32 breathDmgTaken(double damage, sol::variadic_args va);
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();

@@ -109,6 +109,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         FLYER_ALREADY                 = 12072, -- This person already has a flyer.
         MOGHOUSE_EXIT                 = 12371, -- You have learned your way through the back alleys of San d'Oria! Now you can exit to any area from your residence.
         AILBECHE_WHEN_FISHING         = 12391, -- Oh, when will my father take me fishing...
+        AILBECHE_TRADE_FISH           = 12456, -- What? You caught the big one? Amazing! I doubt I could have done the same.
         OH_I_WANT_MY_ITEM             = 12630, -- Oh, I want my <item>.
         GAUDYLOX_SHOP_DIALOG          = 12631, -- <Phssshooooowoooo> You never see Goblinshhh from underworld? Me no bad. Me sell chipshhh. You buy. Use with shhhtone heart. You get lucky!
         MILLECHUCA_CLOSED_DIALOG      = 12632, -- I've been trying to import goods from Vollbow, but it's so hard to get items from areas that aren't under San d'Orian control.

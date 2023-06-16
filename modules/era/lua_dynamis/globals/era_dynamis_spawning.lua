@@ -1612,8 +1612,8 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
             ["Dagourmarche"] =
             {
-                ["onMobFight"] = { function(mob, target) end },
-                ["onMobRoam"] = { function(mob) end },
+                ["onMobFight"] = { function(mob, target) xi.dynamis.onFightMultiPet(mob, target) end },
+                ["onMobRoam"] = { function(mob) xi.dynamis.onRoamMultiPet(mob) end },
                 ["mixins"] = {  require("scripts/mixins/families/avatar"), },
             },
             ["Normal"] =
@@ -1627,8 +1627,8 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         {
             ["Dagourmarche"] =
             {
-                ["onMobFight"] = { function(mob, target) end },
-                ["onMobRoam"] = { function(mob) end },
+                ["onMobFight"] = { function(mob, target) xi.dynamis.onFightMultiPet(mob, target) end },
+                ["onMobRoam"] = { function(mob) xi.dynamis.onRoamMultiPet(mob) end },
                 ["mixins"] = {   },
             },
             ["Normal"] =
@@ -1648,8 +1648,8 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
             ["Dagourmarche"] =
             {
-                ["onMobFight"] = { function(mob, target) end },
-                ["onMobRoam"] = { function(mob) end },
+                ["onMobFight"] = { function(mob, target) xi.dynamis.onFightMultiPet(mob, target) end },
+                ["onMobRoam"] = { function(mob) xi.dynamis.onRoamMultiPet(mob) end },
                 ["mixins"] = {   },
             },
             ["Normal"] =

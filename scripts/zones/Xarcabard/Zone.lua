@@ -30,7 +30,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     if
         pos.x == 0 and pos.y == 0 and pos.z == 0
     then
-        player:setPos(-136.287, -23.268, 137.302, 91)
+        player:setPos(158, -21, -44, 132)
     end
 
     if

@@ -386,7 +386,11 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
     local statMultiplier = waltzInfo[2]
     local amtCured       = 0
 
-    if not player:hasStatusEffect(xi.effect.TRANCE) then
+    -- Handle TP cost.
+    if
+        not player:hasStatusEffect(xi.effect.TRANCE) and
+        target:getID() == ability:getPrimaryTargetID() -- Ensure TP is only used once, and not once per target.
+    then
         player:delTP(waltzInfo[1])
     end
 

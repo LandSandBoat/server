@@ -93,7 +93,7 @@ quest.sections =
                     elseif questProgress == 4 then
                         return quest:event(60) -- During Quest "A Boy's Dream" (after trading bug) madame ?
                     elseif questProgress == 5 then
-                        return quest:progressEvent(47) -- During Quest "A Boy's Dream" (after trading odontotyrannus)
+                        return quest:messageSpecial(ID.text.AILBECHE_TRADE_FISH)
                     elseif questProgress == 6 then
                         return quest:progressEvent(25) -- During Quest "A Boy's Dream" (after Zaldon CS)
                     end
@@ -168,7 +168,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        quest:getVar(player, 'Prog') == 4 and
+                        quest:getVar(player, 'Prog') >= 4 and
                         npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS)
                     then
                         return quest:progressEvent(85)
