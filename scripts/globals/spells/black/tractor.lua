@@ -7,7 +7,12 @@ require("scripts/globals/msg")
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    if target:isMob() then -- Because Prishe in CoP mission
+    if
+        target:isMob() or                             -- Because Prishe in CoP mission.
+        target:isAlive() or                           -- Can't cast on alive targets.
+        target:hasRaiseTractorMenu() or               -- Raise and tractor menus both block the casting.
+        target:hasStatusEffect(xi.effect.BATTLEFIELD) -- Cannot be cast on BCNMs.
+    then
         return xi.msg.basic.CANNOT_ON_THAT_TARG
     end
 
