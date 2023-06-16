@@ -382,9 +382,23 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     local adjustedDamage = rawDamage
 
     if not wsParams.formless then
-        -- need to pass in ignoreDmgMods option to physicalDmgTaken otherwise dmg mods are applied both here
-        -- and in final ws damage by applyDamageTaken
-        adjustedDamage = target:physicalDmgTaken(adjustedDamage, attackTbl.damageType, true)
+        adjustedDamage = target:physicalDmgTaken(adjustedDamage, attackTbl.damageType)
+
+        if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTH_SDT) / 1000
+        elseif
+            attackTbl.weaponType == xi.skill.DAGGER or
+            attackTbl.weaponType == xi.skill.POLEARM
+        then
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
+        elseif
+            attackTbl.weaponType == xi.skill.CLUB or
+            attackTbl.weaponType == xi.skill.STAFF
+        then
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
+        else
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
+        end
     end
 
     -- Scarlet Delirium
@@ -846,9 +860,8 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
 
     -- Calculate reductions
-    -- need to pass in ignoreDmgMods option to rangedDmgTaken otherwise dmg mods are applied both here
-    -- and in final ws damage by applyDamageTaken
-    finaldmg = target:rangedDmgTaken(finaldmg, xi.damageType.NONE, true)
+    finaldmg = target:rangedDmgTaken(finaldmg)
+    finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
@@ -933,9 +946,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         -- Calculate magical bonuses and reductions
         dmg = xi.magic.addBonusesAbility(attacker, wsParams.element, target, dmg, wsParams)
         dmg = dmg * xi.magic.applyAbilityResistance(attacker, target, wsParams)
-        -- need to pass in ignoreDmgMods option to magicDmgTaken otherwise dmg mods are applied both here
-        -- and in final ws damage by applyDamageTaken
-        dmg = target:magicDmgTaken(dmg, wsParams.element, true)
+
+        dmg = target:magicDmgTaken(dmg, wsParams.element)
 
         if dmg < 0 then
             calcParams.finalDmg = dmg
@@ -1010,8 +1022,6 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
-
-    finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, attack.type, attack.damageType)
 
     local targetTPMult = wsParams.targetTPMult or 1
     local attackerTPMult = wsParams.attackerTPMult or 1

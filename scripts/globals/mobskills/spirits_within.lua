@@ -32,7 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
 
-    dmg = target:breathDmgTaken(dmg, true)
+    dmg = target:breathDmgTaken(dmg)
 
     -- Handling phalanx
     dmg = dmg - target:getMod(xi.mod.PHALANX)

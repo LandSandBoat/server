@@ -82,7 +82,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
 
         dmg = utils.clamp(dmg, 0, player:getMainLvl() * 10) -- Damage is capped to player's level * 10, before WS damage mods
-        damage = target:breathDmgTaken(dmg, true)
+        damage = target:breathDmgTaken(dmg)
         if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
             damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
         end

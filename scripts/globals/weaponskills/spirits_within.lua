@@ -57,7 +57,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
     end
 
-    local damage = target:breathDmgTaken(wsc, true)
+    local damage = target:breathDmgTaken(wsc)
     if damage > 0 then
         if player:getOffhandDmg() > 0 then
             calcParams.tpHitsLanded = 2
