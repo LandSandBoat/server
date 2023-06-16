@@ -4106,7 +4106,7 @@ INSERT INTO `mob_skills` VALUES (4245,2604,'mix_panacea-1',0,7.0,2000,0,3,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (4253,556,'mix_panacea-1',0,7.0,2000,0,3,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (4254,2599,'mix_dry_ether_concoction',0,7.0,2000,0,3,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (4255,2607,'mix_guard_drink',1,7.0,2000,0,3,4,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (4256,560,'mix_insomniant',0,7.0,2000,0,3,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (4256,560,'mix_insomniant',0,7.0,2000,0,3,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (4257,2609,'mix_life_water',1,7.0,2000,0,3,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (4258,2610,'mix_elemental_power',1,7.0,2000,0,3,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (4259,2610,'mix_dragon_shield',1,7.0,2000,0,3,4,0,0,0,0,0);
