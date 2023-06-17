@@ -6,7 +6,6 @@
 -- Underpass_Hatch : !pos 314.083 -1.160 -181.455 84
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')

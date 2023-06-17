@@ -4,7 +4,6 @@
 -- Involved in quest Dances with Luopans
 -- pos 420.399 24.389 28.734
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

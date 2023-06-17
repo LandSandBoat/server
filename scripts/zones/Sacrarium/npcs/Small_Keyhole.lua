@@ -4,7 +4,6 @@
 -- !pos 99.772 -1.614 51.545 28
 -----------------------------------
 local ID = require("scripts/zones/Sacrarium/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

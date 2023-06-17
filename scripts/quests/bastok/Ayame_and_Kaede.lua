@@ -8,7 +8,6 @@
 -- qm2      : !pos -208 -9 176 173
 -- Ryoma    : !pos -23 0 -9 252
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

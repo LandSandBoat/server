@@ -5,7 +5,6 @@
 -- !pos -116 30 50 193
 -----------------------------------
 local ID = require("scripts/zones/Ordelles_Caves/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

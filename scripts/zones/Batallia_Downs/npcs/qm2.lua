@@ -4,7 +4,6 @@
 -- Pop for the quest "Chasing Quotas"
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Symphonic Curator (Moghouse)
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 -----------------------------------
 -- NOTE: You can force the Symphonic Curator to appear

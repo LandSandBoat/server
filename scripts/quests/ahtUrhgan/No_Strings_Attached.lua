@@ -8,7 +8,6 @@
 -- qm10         : !pos 457.128 -8.249 60.795 54
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

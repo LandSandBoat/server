@@ -4,7 +4,6 @@
 -- Notes: Pick Temp items for assault
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/keyitems")
 require("scripts/zones/Nyzul_Isle/IDs")
 -----------------------------------
 local entity = {}

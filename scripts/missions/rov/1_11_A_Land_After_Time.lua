@@ -8,7 +8,6 @@
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

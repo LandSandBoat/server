@@ -6,7 +6,6 @@
 -- !pos 2 0.1 0.1 233
 -----------------------------------
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

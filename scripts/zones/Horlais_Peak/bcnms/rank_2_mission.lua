@@ -3,7 +3,6 @@
 -- Horlais Peak mission battlefield
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

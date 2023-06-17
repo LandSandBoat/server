@@ -5,7 +5,6 @@
 
 -- event 41:  without addons (ZM) ?
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

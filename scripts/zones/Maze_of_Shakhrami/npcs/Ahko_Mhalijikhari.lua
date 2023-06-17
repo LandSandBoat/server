@@ -4,7 +4,6 @@
 -- Type: Quest NPC
 -- !pos -344.617 -12.226 -166.233 198
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

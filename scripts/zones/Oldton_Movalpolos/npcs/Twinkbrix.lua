@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

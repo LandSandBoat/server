@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Cloister_of_Storms/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

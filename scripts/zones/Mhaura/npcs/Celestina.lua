@@ -8,7 +8,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------

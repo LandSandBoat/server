@@ -10,7 +10,6 @@
 -- _1l0 (Rock Slab) : !pos -99 -7 -91 57
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')

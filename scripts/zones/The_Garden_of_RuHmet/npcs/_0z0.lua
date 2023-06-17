@@ -3,7 +3,6 @@
 --  NPC: _0z0
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}

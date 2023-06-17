@@ -8,7 +8,6 @@
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

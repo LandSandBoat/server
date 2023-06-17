@@ -12,7 +12,6 @@
 -- Sedal-Godjal     : !pos 185 -3 -116 149
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

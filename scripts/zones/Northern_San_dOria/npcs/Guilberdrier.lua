@@ -5,7 +5,6 @@
 -- !pos -159.082 12.000 253.794 231
 -----------------------------------
 require("scripts/quests/flyers_for_regine")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

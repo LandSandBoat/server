@@ -5,7 +5,6 @@
 -- !pos -17 0 59 195 (I-10)
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

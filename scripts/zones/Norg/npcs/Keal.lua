@@ -4,7 +4,6 @@
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

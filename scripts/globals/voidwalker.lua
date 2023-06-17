@@ -1,7 +1,6 @@
 -----------------------------------
 -- The Voidwalker NM System
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
 require("scripts/globals/voidwalkerpos")
 require("scripts/globals/zone")

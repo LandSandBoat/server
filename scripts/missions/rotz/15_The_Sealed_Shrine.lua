@@ -8,7 +8,6 @@
 -- Ru'Avitau Main Entrance : !pos -0.2171 -45.013 -119.7575
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

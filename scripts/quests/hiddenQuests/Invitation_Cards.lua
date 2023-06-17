@@ -4,7 +4,6 @@
 -- Naja: !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/hidden_quest')

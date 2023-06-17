@@ -8,7 +8,6 @@
 -- qm3 (Valkurm)   : !pos -767 -4 192 103
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

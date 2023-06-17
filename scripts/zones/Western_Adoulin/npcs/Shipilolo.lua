@@ -9,7 +9,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 local entity = {}

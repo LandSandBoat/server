@@ -10,7 +10,6 @@
 -- Fountain of Kings     : !pos 567 18 -939 208
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

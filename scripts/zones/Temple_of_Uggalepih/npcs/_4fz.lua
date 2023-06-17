@@ -5,7 +5,6 @@
 -- !pos 60 0.1 8 159
 -----------------------------------
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

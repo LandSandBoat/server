@@ -12,7 +12,6 @@
 -- Ndah Tolohjin  : !pos -86.808 0.001 -36.867 257
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

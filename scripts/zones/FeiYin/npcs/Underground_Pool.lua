@@ -7,7 +7,6 @@
 -- Offset 2 (H-8) !pos 7 0 32 204
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

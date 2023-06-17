@@ -32,12 +32,15 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
         magicAcc = magicAcc + utils.getSkillLvl(1, actor:getMainLvl())
     end
 
+    -- Add action bonus magic accuracy.
+    magicAcc = magicAcc + bonusMacc
+
     -- Add acc for elemental affinity accuracy and element specific accuracy
     if spellElement ~= xi.magic.ele.NONE then
         local elementBonus  = actor:getMod(elementTable[spellElement][1])
         local affinityBonus = actor:getMod(elementTable[spellElement][2]) * 10
 
-        magicAcc            = magicAcc + elementBonus + affinityBonus
+        magicAcc = magicAcc + elementBonus + affinityBonus
     end
 
     -- Get dStat Magic Accuracy.
@@ -100,8 +103,8 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
     -- Elemental seal
     if
         actor:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) and
-        not skillType == xi.skill.DARK_MAGIC and
-        not skillType == xi.skill.DIVINE_MAGIC and
+        skillType ~= xi.skill.DARK_MAGIC and
+        skillType ~= xi.skill.DIVINE_MAGIC and
         spellElement > 0
     then
         magicAcc = magicAcc + 256
@@ -234,8 +237,12 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
         magicEva = magicEva + target:getMod(mEvaMod) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
-    -- Level correction. Target gets a bonus when higher level. Never a penalty.
-    if levelDiff > 0 then
+    -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
+    if
+        levelDiff > 0 and
+        xi.combat.levelCorrection.isLevelCorrectedZone(actor) and
+        not target:isPC()
+    then
         magicEva = magicEva + levelDiff * 4
     end
 
@@ -256,30 +263,42 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
 end
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate)
-    local resistRate = 0
-    local resistRank = 0
+    local targetResistRate = 0 -- The variable we return.
+    local targetResistRank = 0
 
-    -- Magic Shield exception.
+    ----------------------------------------
+    -- Handle "Magic Shield" status effect.
+    ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return resistRate
+        return targetResistRate
     end
 
-    -- Fetch resistance rank modifier.
+    ----------------------------------------
+    -- Handle target resistance rank.
+    ----------------------------------------
     if spellElement ~= xi.magic.ele.NONE then
-        resistRank = target:getMod(elementTable[spellElement][4])
+        targetResistRank = target:getMod(elementTable[spellElement][4])
     end
 
-    -- Resistance Ranks "boons".
-    if resistRank > 10 then -- Resistance rank 11 is technically the max, but we check for higher JUST IN CASE something altered it.
-        -- TODO: Inmunobreak logic probably goes here
+    -- Skillchains lowers target resistance rank by 1.
+    local _, skillchainCount = FormMagicBurst(spellElement, target)
 
-        resistRate = 0.0625
-        return resistRate
-    elseif resistRank == 10 then
+    if skillchainCount > 0 then
+        targetResistRank = targetResistRank - 1
+    end
+
+    -- TODO: Rayke logic might be needed here, depending on how it's implemented.
+
+    ----------------------------------------
+    -- Handle magic hit rate.
+    ----------------------------------------
+    if targetResistRank >= 10 then
         magicHitRate = 5
     end
 
-    -- Determine final resist based on which thresholds have been crossed.
+    ----------------------------------------
+    -- Calculate first 3 resist tiers.
+    ----------------------------------------
     local resistTier = 0
     local randomVar  = math.random()
 
@@ -294,17 +313,33 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
         end
     end
 
-    resistRate = 1 / (2 ^ resistTier)
+    targetResistRate = 1 / (2 ^ resistTier)
 
-    -- Apply additional resistance tier. (The so called "Fourth resist tier"). Subtle sorcery bypasses it.
-    if resistRank >= 4 then
-        if
-            skillType ~= xi.skill.ELEMENTAL_MAGIC or
-            not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY)
-        then
-            resistRate = resistRate / 2
-        end
+    -- Force 1/8 if target has max resistance rank.
+    if targetResistRank >= 11 then
+        -- TODO: Immunobreak logic probably goes here
+
+        targetResistRate = 0.125
     end
 
-    return resistRate
+    -- Force just 1/2 resist tier if target resistance rank is -3 (150% EEM).
+    if
+        targetResistRank <= -3 and -- Very weak.
+        targetResistRate < 0.5     -- More than 1 resist tier triggered.
+    then
+        targetResistRate = 0.5
+    end
+
+    ----------------------------------------
+    -- Calculate additional resist tier.
+    ----------------------------------------
+    if
+        not actor:hasStatusEffect(xi.effect.SUBTLE_SORCERY) and -- Subtle sorcery bypasses this tier.
+        targetResistRank >= 4 and                               -- Forced only at and after rank 4 (50% EEM).
+        skillType == xi.skill.ELEMENTAL_MAGIC                   -- Only applies to nukes.
+    then
+        targetResistRate = targetResistRate / 2
+    end
+
+    return targetResistRate
 end

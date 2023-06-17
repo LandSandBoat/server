@@ -5,7 +5,6 @@
 -- !pos 345 0.1 20 184
 -----------------------------------
 local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

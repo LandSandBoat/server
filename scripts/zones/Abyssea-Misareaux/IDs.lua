@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Misareaux
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

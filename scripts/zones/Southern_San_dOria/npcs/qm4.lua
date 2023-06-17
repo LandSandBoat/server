@@ -3,7 +3,6 @@
 --  NPC: The ??? on the stack of papers in 2nd Flr of Vemalpeau's house.
 -- General Info NPC
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")

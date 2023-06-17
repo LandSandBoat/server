@@ -5,7 +5,6 @@
 -- !pos 422.461 -48.000 175
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------

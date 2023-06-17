@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/mobskills")
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

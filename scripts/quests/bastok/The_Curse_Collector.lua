@@ -6,7 +6,6 @@
 -- The Mute  : !pos -166.230 -1 -73.685 147
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

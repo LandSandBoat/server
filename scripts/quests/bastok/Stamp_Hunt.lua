@@ -11,7 +11,6 @@
 -- Ehrhard       : !pos -70.661 4.898 44.886 236
 -- Latifah       : !pos 51.241 7.499 -55.407 236
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

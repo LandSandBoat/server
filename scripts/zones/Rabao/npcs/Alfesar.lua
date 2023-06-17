@@ -3,7 +3,6 @@
 --  NPC: Alfesar
 --Starts The Missing Piece
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")

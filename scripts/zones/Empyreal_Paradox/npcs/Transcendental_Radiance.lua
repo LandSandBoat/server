@@ -4,7 +4,6 @@
 -- !pos 540 0 -594 36
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/bcnm")
 -----------------------------------

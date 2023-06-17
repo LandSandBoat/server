@@ -6,7 +6,6 @@
 -- Levil        : !pos -87.204 3.350 12.655 256
 -- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

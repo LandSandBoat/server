@@ -7,13 +7,11 @@
 -- Fellow Emotes do not currently work
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 -- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
-
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
 
@@ -58,7 +56,6 @@ quest.sections = {
             },
         },
     },
-
 
     -- Section: Questing
     {

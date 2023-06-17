@@ -5,7 +5,6 @@
 -- !pos 44 4 -159 256
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- NOTE: There are 3 Indescript Markings
 -----------------------------------
 local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

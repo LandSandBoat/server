@@ -9,7 +9,6 @@
 -- EAST_RONFAURE_S      : !zone 81
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')

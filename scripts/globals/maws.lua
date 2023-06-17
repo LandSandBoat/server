@@ -1,7 +1,6 @@
 -----------------------------------
 -- Cavernous Maw global functions
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")

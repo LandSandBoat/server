@@ -4,7 +4,6 @@
 -- !pos 540 -18 -441 79
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

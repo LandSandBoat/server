@@ -3,7 +3,6 @@
 -- Item: Chocobo Chair
 -- Item Effect: Grant Chocobo chair key item
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

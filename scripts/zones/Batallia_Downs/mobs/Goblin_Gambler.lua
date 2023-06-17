@@ -3,7 +3,6 @@
 --  Mob: Goblin Gambler
 -----------------------------------
 require("scripts/globals/regimes")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 -----------------------------------
 local entity = {}
