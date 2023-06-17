@@ -3,7 +3,6 @@
 -- desc: Adds a key item to the player.
 -----------------------------------
 
-
 cmdprops =
 {
     permission = 1,
