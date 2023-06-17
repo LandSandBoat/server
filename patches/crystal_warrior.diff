@@ -72,11 +72,11 @@ index e503b6af23..681a67e30b 100644
  
          // Moon phase skillup modifiers
          uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
-diff --git a/src/map/utils/charutils.cpp b/src/map/utils/charutils.cpp
-index e0ac2614ae..b9ab1644ad 100644
---- a/src/map/utils/charutils.cpp
-+++ b/src/map/utils/charutils.cpp
-@@ -1852,7 +1852,7 @@ namespace charutils
+diff --git "a/src/map/utils/charutils.cpp" "b/src/map/utils/charutils.cpp"
+index a3d1ee95b1..fa45f94b54 100644
+--- "a/src/map/utils/charutils.cpp"
++++ "b/src/map/utils/charutils.cpp"
+@@ -1855,7 +1855,7 @@ namespace charutils
  
          if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
              (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
@@ -85,7 +85,7 @@ index e0ac2614ae..b9ab1644ad 100644
          {
              return false;
          }
-@@ -2609,7 +2609,7 @@ namespace charutils
+@@ -2612,7 +2612,7 @@ namespace charutils
                  continue;
              }
  
@@ -94,7 +94,7 @@ index e0ac2614ae..b9ab1644ad 100644
              {
                  UnequipItem(PChar, slotID);
                  continue;
-@@ -3185,6 +3185,14 @@ namespace charutils
+@@ -3197,6 +3197,14 @@ namespace charutils
              int16  Diff          = MaxSkill - CurSkill / 10;
              double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
  
@@ -109,7 +109,7 @@ index e0ac2614ae..b9ab1644ad 100644
              double random = xirand::GetRandomNumber(1.);
  
              if (SkillUpChance > 0.5)
-@@ -3266,7 +3274,7 @@ namespace charutils
+@@ -3278,7 +3286,7 @@ namespace charutils
                  }
  
                  // Do skill amount multiplier (Will only be applied if default setting is changed)
@@ -118,19 +118,31 @@ index e0ac2614ae..b9ab1644ad 100644
                  {
                      SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
                      if (SkillAmount > 9)
-@@ -3953,6 +3961,11 @@ namespace charutils
+@@ -4001,6 +4009,23 @@ namespace charutils
              EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
              float          exp      = (float)GetBaseExp(maxlevel, moblevel);
  
 +            if ((charutils::GetCharVar(PMember, "[CW]STATUS") > 0) && pcinzone > 1 && !PMember->PParty->HasTrusts())
 +            {
-+                exp *= 1.2;
++                if (memberlevel >= 60)
++                {
++                    exp *= 1.3;
++                }
++                else if (memberlevel >= 30)
++                {
++                    exp *= 1.2;
++                }
++                else if (memberlevel >= 20)
++                {
++                    exp *= 1.1;
++                }
++                // 1-19 = 1.0
 +            }
 +
              if (mobCheck > EMobDifficulty::TooWeak)
              {
                  if (PMember->getZone() == PMob->getZone())
-@@ -4562,19 +4575,20 @@ namespace charutils
+@@ -4619,19 +4644,20 @@ namespace charutils
       *                                                                       *
       ************************************************************************/
  
@@ -159,7 +171,7 @@ index e0ac2614ae..b9ab1644ad 100644
 +
          uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
          bool   onLimitMode = false;
- 
+
 diff --git a/src/map/roe.cpp b/src/map/roe.cpp
 index 718518c0ff..408fd8f556 100644
 --- a/src/map/roe.cpp

@@ -197,7 +197,7 @@ xi.settings.map =
     MAX_GIL_BONUS = 9999,
 
     -- Allow mobs to walk back home instead of despawning
-    MOB_NO_DESPAWN = 1,
+    MOB_NO_DESPAWN = 0,
 
     -- Adds extra time to mob despawn in seconds. Base time is 25s, so a setting of 5 here would be a total of 30 seconds.
     MOB_ADDITIONAL_TIME_TO_DEAGGRO = 0,
