@@ -3,7 +3,6 @@
 -- desc: Deletes the given key item from the player.
 -----------------------------------
 
-
 cmdprops =
 {
     permission = 1,
