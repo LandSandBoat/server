@@ -15,7 +15,6 @@
 -- Granite Door     : !pos 340 0.1 329 159
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

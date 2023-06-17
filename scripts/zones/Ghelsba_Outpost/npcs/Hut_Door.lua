@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------

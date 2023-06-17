@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/assault")
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

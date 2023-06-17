@@ -11,7 +11,6 @@
 -- Door: Great Hall     : !pos 0 -1 13 233
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

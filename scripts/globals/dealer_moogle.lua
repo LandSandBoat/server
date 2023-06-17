@@ -3,7 +3,6 @@
 -- https://www.bg-wiki.com/ffxi/Category:Mog_Bonanza
 -----------------------------------
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}

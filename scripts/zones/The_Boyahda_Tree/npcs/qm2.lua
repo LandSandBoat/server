@@ -5,7 +5,6 @@
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
 local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

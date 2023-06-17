@@ -6,7 +6,6 @@
 -- Levil          : !pos -87.204 3.350 12.655 256
 -- Yeggha_Dolashi : !pos 260 -5.768 60 258
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

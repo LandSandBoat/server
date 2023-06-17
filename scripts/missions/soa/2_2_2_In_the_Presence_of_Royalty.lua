@@ -6,7 +6,6 @@
 -- Ergon_Locus_3      : !pos 442.000 0.660 -224.000 263
 -- Pellucid_Afflusion : !pos -175.100 1.700 387.700 263
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

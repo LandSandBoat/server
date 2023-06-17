@@ -13,7 +13,6 @@
 -- Todo: NPC moving. In retail these move around with 3-5+ pos EACH
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/utils")

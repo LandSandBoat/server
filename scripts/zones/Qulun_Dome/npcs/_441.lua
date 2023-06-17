@@ -4,7 +4,6 @@
 -- Involved in Mission: Limit Break 3
 -- !pos 299.999 37.864 47.067 148
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 -----------------------------------
 local entity = {}

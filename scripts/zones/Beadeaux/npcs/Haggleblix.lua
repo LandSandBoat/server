@@ -5,7 +5,6 @@
 -- !pos -255.847 0.595 106.485 147
 -----------------------------------
 local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 
 local timelessHourglassID = 4236

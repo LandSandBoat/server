@@ -12,7 +12,6 @@ local ID = require("scripts/zones/Temenos/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 local content = Limbus:new({

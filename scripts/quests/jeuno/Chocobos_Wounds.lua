@@ -8,7 +8,6 @@
 -- _6t2    : !pos -88.2 -7.65 -168.8 245
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

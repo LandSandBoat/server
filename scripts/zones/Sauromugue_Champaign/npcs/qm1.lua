@@ -5,7 +5,6 @@
 -- Notes: Spawns Dribblix Greasemaw for ACP mission "Gatherer of Light (I)"
 -----------------------------------
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

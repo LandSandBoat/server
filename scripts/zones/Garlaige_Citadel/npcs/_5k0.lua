@@ -3,7 +3,6 @@
 --  NPC: Banishing Gate #1
 -- !pos -201.000 -2.994 220 200
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
 local entity = {}

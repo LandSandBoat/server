@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Ceizak Battlegrounds (261)
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/colonization_reives')
 require('scripts/globals/zone')

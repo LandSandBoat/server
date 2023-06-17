@@ -5,7 +5,6 @@
 -- Qm9 !pos -406 6.5 -440 68
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

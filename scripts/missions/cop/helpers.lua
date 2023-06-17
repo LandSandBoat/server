@@ -1,7 +1,6 @@
 -----------------------------------
 -- Chains of Promathia Helpers
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 -----------------------------------
 local hallID = require('scripts/zones/Hall_of_Transference/IDs')

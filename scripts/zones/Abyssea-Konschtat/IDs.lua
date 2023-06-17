@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Konschtat
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

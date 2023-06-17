@@ -3,7 +3,6 @@
 -- Item: Portable Container
 -- Item Effect: Grant Portable container key item
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

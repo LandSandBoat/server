@@ -5,7 +5,6 @@
 -- !pos 143 9 -219 198
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

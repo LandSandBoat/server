@@ -9,7 +9,6 @@
 -- 3. Talk to Monberaux:    !pos -43 0 -1 244
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 -----------------------------------

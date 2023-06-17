@@ -2,7 +2,6 @@
 -- Area: East_Ronfaure
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 zones = zones or {}

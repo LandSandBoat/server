@@ -9,7 +9,6 @@
 -- Raustigne    : !pos 3.979 -1.999 44.456 80
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/missions')
 require('scripts/globals/quests')

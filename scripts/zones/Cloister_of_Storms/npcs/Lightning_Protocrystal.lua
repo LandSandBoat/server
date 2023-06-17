@@ -5,7 +5,6 @@
 -- !pos 534.5 -13 492 202
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Storms/IDs")
 -----------------------------------

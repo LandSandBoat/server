@@ -3,7 +3,6 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 local eldiemeGlobal =

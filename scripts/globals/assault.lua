@@ -3,7 +3,6 @@
 -- desc: Common functionality for Assaults
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/zone")
 -----------------------------------

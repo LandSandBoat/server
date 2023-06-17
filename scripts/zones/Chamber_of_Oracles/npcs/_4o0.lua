@@ -3,7 +3,6 @@
 --  NPC: Cermet Door (Exit)
 -- Involved in Zilart Mission 7
 -----------------------------------
-require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

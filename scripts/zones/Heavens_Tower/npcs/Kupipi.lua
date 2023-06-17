@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

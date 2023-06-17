@@ -4,7 +4,6 @@
 -- Type: Guildworker's Union Representative
 -- !pos -112.561 -2 55.205 238
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------

@@ -4,7 +4,6 @@
 --     http://wiki.ffxiclopedia.org/wiki/Chocobo_Renter
 --     http://ffxi.allakhazam.com/wiki/Traveling_in_Vana'diel
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------

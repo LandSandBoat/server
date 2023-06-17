@@ -3,7 +3,6 @@
 --  NPC: Anton
 -- !pos -19 -8 27 232
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

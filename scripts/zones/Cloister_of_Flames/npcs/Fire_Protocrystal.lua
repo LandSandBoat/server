@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Flames/IDs")

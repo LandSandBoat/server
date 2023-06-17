@@ -7,7 +7,6 @@
 -- Old Toolbox : !pos 113.649 -32.8 79.617 143
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

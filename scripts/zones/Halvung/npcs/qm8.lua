@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Halvung/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/keyitems")
 require("scripts/globals/items")
 -----------------------------------
 local entity = {}

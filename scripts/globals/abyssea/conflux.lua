@@ -1,7 +1,6 @@
 -----------------------------------
 -- Veridical Conflux Global
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 -----------------------------------

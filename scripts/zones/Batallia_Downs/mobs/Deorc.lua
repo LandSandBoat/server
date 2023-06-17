@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Deorc
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

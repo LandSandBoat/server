@@ -5,7 +5,6 @@
 -- !pos -2.251 -1 21.654 252
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------

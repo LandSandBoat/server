@@ -5,7 +5,6 @@
 -- !addmission 5 48
 -- Blank (Cait Sith) : !pos 221.857 -49.213 176.24 81
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

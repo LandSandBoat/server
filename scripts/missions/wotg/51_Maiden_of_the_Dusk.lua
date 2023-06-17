@@ -6,7 +6,6 @@
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -- Ornate Door       : !pos -700 -20.25 -303.398 89
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

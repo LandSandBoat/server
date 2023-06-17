@@ -7,7 +7,6 @@
 -- Scalable Area 2 : !pos 271.483 -59.917 92.095 266
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

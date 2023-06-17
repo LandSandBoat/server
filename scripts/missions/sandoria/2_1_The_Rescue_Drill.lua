@@ -17,7 +17,6 @@
 -- Ruillont     : !pos -70 1 607 193
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

@@ -6,7 +6,6 @@
 -- _6s2   : !pos -80 0 104 244
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

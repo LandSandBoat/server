@@ -6,7 +6,6 @@
 -- Abelard : !pos -52 -11 -13 248
 -- Ekokoko : !pos -78 -24 28 249
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

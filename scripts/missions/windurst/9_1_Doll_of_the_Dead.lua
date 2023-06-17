@@ -12,7 +12,6 @@
 -- Mandragora Warden : !pos 81.981 7.593 139.556 153
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
