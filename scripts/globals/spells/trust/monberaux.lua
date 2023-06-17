@@ -35,7 +35,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_DEF_BOOST, ai.r.MS, ai.s.SPECIFIC, 4259, healingMoveCooldown) -- Mix: Dragon Shield
     mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.MAGIC_ATK_BOOST, ai.r.MS, ai.s.SPECIFIC, 4258, healingMoveCooldown) -- Mix: Elemental Power
     mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.PROTECT, ai.r.MS, ai.s.SPECIFIC, 4255, healingMoveCooldown) -- Mix: Guard Drink
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.NEGATE_SLEEP, ai.r.MS, ai.s.SPECIFIC, 4256, healingMoveCooldown) -- Insomniant
+    -- mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.NEGATE_SLEEP, ai.r.MS, ai.s.SPECIFIC, 4256, healingMoveCooldown) -- Insomniant
     mob:addSimpleGambit(ai.t.TARGET, ai.c.HP_MISSING, 99, ai.r.MS, ai.s.SPECIFIC, 4260, healingMoveCooldown) -- Dark Potion (666 Dark Damage)
 
     mob:setAutoAttackEnabled(false)
@@ -45,13 +45,9 @@ spellObject.onMobSpawn = function(mob)
         mobArg:setTP(0)
     end)
 
-    -- TODO: Monberaux's moves all come out with ACTION_ITEM_START and ACTION_ITEM_FINISH in their start/end action
-    --     : packets, so we either need to fully implement a mob/trust's ability to use items (faking inventory space
-    --     : etc.), or we need more workarounds like below to intercept and change the messages.
-    --     : Currently, we only have enough bindings and triggers to change the action end packet.
-    -- mob:addListener("WEAPONSKILL_USE", "MONBERAUX_ITEM_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
-    --     action:setCategory(5) -- ACTION_ITEM_FINISH
-    -- end)
+    mob:addListener("WEAPONSKILL_USE", "MONBERAUX_WS", function(mobArg, targetArg, skillid, spentTP, action)
+        action:setCategory(xi.action.MOBABILITY_FINISH)
+    end)
 end
 
 spellObject.onMobDespawn = function(mob)

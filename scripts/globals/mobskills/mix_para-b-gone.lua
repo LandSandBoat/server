@@ -8,8 +8,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    target:delStatusEffect(xi.effect.PARALYSIS)
-    return 0
+    if target:hasStatusEffect(xi.effect.PARALYSIS) then
+        target:delStatusEffect(xi.effect.PARALYSIS)
+        return xi.effect.PARALYSIS
+    end
+
+    skill:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    return xi.effect.NONE
 end
 
 return mobskillObject
