@@ -153,5 +153,22 @@ void CMobSkillState::Cleanup(time_point tick)
         actionTarget.reaction        = REACTION::HIT;
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+
+        // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
+        // But lose 25% at < 2900 TP.
+        // Testing was done via charm on a steelshell, methodology was the following on BST/DRK with a scythe
+        // charm -> build tp -> leave -> stun -> interrupt TP move with weapon bash -> charm and check TP. Note that weapon bash incurs damage and thus adds TP.
+        if (m_PEntity->StatusEffectContainer && m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT::EFFECT_STUN))
+        {
+            int16 tp = m_spentTP;
+            if (tp >= 2900)
+            {
+                m_PEntity->health.tp = std::floor(std::round(0.333333f * tp));
+            }
+            else
+            {
+                m_PEntity->health.tp = std::floor(0.25f * tp);
+            }
+        }
     }
 }
