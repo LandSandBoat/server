@@ -10,7 +10,6 @@
 -- '!'            : !pos 211 2 -104 149
 -- Papal Chambers : !pos 131 -11 122 231
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

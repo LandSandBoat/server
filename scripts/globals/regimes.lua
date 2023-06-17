@@ -9,7 +9,6 @@
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")

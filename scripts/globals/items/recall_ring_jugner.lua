@@ -3,7 +3,6 @@
 -- Recall ring: Jugner
 -- Enchantment: "Recall-Jugner"
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

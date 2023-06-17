@@ -8,7 +8,6 @@
 -- Disused Well : !pos -221 2 -293 149
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

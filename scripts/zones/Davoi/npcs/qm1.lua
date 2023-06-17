@@ -5,7 +5,6 @@
 -- !pos -115.830 -0.427 -184.289 149
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------

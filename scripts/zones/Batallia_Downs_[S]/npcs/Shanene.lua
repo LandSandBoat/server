@@ -3,7 +3,6 @@
 --  NPC: Shanene
 -- !pos 161.183 0.468 91.111 84
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------

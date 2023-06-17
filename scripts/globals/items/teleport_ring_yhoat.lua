@@ -3,7 +3,6 @@
 -- Teleport ring: Yhoat
 -- Enchantment: "Teleport-Yhoat"
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

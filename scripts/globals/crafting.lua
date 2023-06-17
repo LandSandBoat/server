@@ -3,7 +3,6 @@
 -- Ref: http://wiki.ffxiclopedia.org/wiki/Crafts_%26_Hobbies
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 -----------------------------------

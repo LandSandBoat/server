@@ -3,7 +3,6 @@
 -- Teleport ring: Vahzl
 -- Enchantment: "Teleport-Vahzl"
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

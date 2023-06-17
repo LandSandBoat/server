@@ -12,7 +12,6 @@
 -- Tombstone            : !pos -73.594 7.585 20.130 190
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

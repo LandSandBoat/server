@@ -5,7 +5,6 @@
 -- !pos -85 -6 89 230
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------

@@ -4,7 +4,6 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/globals/points")

@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/sparkshop")
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------

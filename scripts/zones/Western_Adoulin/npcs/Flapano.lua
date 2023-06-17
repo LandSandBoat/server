@@ -7,7 +7,6 @@
 -- !pos 70 0 -13 256
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

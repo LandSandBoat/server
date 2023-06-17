@@ -9,7 +9,6 @@
 -- Saldinor       : !pos -338.882 -1.000 -308.252 258
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

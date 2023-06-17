@@ -4,7 +4,6 @@
 -- !pos 180 0 -39 62 72
 -----------------------------------
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

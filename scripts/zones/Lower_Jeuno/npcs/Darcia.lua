@@ -4,7 +4,6 @@
 --  SoA: Mission NPC
 -- !pos 25 -38.617 -1.000
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

@@ -3,7 +3,6 @@
 --   NM: Dribblix Greasemaw
 -----------------------------------
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

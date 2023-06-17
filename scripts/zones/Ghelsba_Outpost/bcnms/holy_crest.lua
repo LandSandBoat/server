@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

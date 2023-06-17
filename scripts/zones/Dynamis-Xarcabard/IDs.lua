@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-Xarcabard
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------

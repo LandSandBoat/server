@@ -4,7 +4,6 @@
 -- Starts Quest: Unforgiven
 -- !pos -50.410 -22.204 -41.640 26
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

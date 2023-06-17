@@ -5,7 +5,6 @@
 -- !pos -504 20 -419 208
 -----------------------------------
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/The_Garden_of_RuHmet/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
-require('scripts/globals/keyitems')
 -----------------------------------
 local zoneObject = {}
 

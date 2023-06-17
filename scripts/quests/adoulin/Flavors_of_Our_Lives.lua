@@ -10,7 +10,6 @@
 -- Sickle           : !additem 1020
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/helm')
 require('scripts/globals/interaction/quest')

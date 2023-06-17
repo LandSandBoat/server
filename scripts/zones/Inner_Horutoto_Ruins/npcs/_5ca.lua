@@ -6,7 +6,6 @@
 -- !pos -11 0 20 192
 -----------------------------------
 local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

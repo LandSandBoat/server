@@ -4,7 +4,6 @@
 -- Involved in Quests: Missionary Man
 -- !pos -175 0 181 231
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

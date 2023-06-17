@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Tahrongi
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

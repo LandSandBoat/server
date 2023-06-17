@@ -2,7 +2,6 @@
 -- Global file for Apollyopn and Temenos
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require('scripts/globals/interaction/container')
 require("scripts/globals/zone")
 -----------------------------------

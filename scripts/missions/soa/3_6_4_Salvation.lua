@@ -5,7 +5,6 @@
 -- !addmission 12 69
 -- Crawling Cave : !pos -349.302 40.339 -379.79 267
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

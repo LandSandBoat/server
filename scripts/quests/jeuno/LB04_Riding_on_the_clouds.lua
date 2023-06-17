@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 131
 -- Maat : !pos 8 3 118 243
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

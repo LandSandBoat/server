@@ -5,7 +5,6 @@
 -- !pos -539 1 -493 209
 -----------------------------------
 local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}

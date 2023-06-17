@@ -5,7 +5,6 @@
 -- !pos -20.814 -22 8.399 26
 -----------------------------------
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
