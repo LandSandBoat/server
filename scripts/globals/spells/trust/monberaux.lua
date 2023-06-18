@@ -22,8 +22,8 @@ spellObject.onMobSpawn = function(mob)
     -- TODO: Add Gold Needle skill (remove petrify)
     -- TODO: Add Holy Water skill (removes curse, zombie, and doom)
     -- TODO: Add Cover ability with proper conditions (stand behind Monberaux when you have top enmity)
+    -- TODO: Add paralyze immunity via PARALYZE_MEVA. Need to test messages returned when Monberaux resists paralyze, and verify actual immunity.
     -- TODO: Add mechanic for turning status removal skills into AoE -- https://www.bg-wiki.com/ffxi/BGWiki:Trusts#Monberaux
-    
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
     local healingMoveCooldown = 3 -- Retail values from BGWiki
@@ -31,7 +31,7 @@ spellObject.onMobSpawn = function(mob)
     -- Tends to be particular about which potions to use. Seems to favor healing for just the
     -- right amount of HP instead of defaulting to the highest-rank potion.
     mob:addMod(xi.mod.MPP, -90)
-    mob:addMod(xi.mod.PARALYZERES, 100)
+    -- mob:addMod(xi.mod.PARALYZERES, 100)
     mob:addSimpleGambit(ai.t.CASTER, ai.c.MPP_LT, 25, ai.r.MS, ai.s.SPECIFIC, 4254, healingMoveCooldown) -- Mix: Dry Ether Concoction
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 90, ai.r.MS, ai.s.SPECIFIC, 4236, healingMoveCooldown) -- Max Potion (500 HP)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75, ai.r.MS, ai.s.SPECIFIC, 4237, healingMoveCooldown) -- Mix: Max Potion (700 HP)
