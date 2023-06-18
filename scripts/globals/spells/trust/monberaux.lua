@@ -18,8 +18,9 @@ spellObject.onMobSpawn = function(mob)
     -- TODO: Summon (2 doses of Final Elixir ready): I received two vials of a most valuable medicine. They should prove useful in times of emergency.
     -- TODO: Find right animation for Mix: Insomniant.
     -- TODO: Add PLD/RUN traits like Resist Sleep and Tenacity.
-    -- TODO: Add Vaccine skill
-    -- TODO: Add Gold Needle skill
+    -- TODO: Add Vaccine skill (removes plague)
+    -- TODO: Add Gold Needle skill (remove petrify)
+    -- TODO: Add Holy Water skill (removes curse, zombie, and doom)
     -- TODO: Add Cover ability with proper conditions (stand behind Monberaux when you have top enmity)
     -- TODO: Add mechanic for turning status removal skills into AoE -- https://www.bg-wiki.com/ffxi/BGWiki:Trusts#Monberaux
     
