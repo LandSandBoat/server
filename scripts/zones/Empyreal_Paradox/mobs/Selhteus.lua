@@ -17,7 +17,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setAllegiance(xi.allegiance.PLAYER)
 end
 
 entity.onMobFight = function(mob, target)

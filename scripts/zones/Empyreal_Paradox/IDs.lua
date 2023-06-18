@@ -28,7 +28,7 @@ zones[xi.zone.EMPYREAL_PARADOX] =
     },
     mob =
     {
-        PROMATHIA_OFFSET = 16924672,
+        PROMATHIA_OFFSET = 16924671,
     },
     npc =
     {
