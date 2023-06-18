@@ -32,7 +32,7 @@ entity.onMobInitialize = function(mob)
                 { item = xi.items.PIECE_OF_OXBLOOD },
                 { item = xi.items.HANDFUL_OF_CLOT_PLASMA },
                 { item = xi.items.LIGHT_STEEL_INGOT },
-                { item = xi.items.SHELL_POWDER },
+                { item = xi.items.PONZE_OF_SHELL_POWDER },
             }
         elseif result <= 86 then
             -- AF+1 Materials

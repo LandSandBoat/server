@@ -6119,7 +6119,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                         petutils::CalculateAutomatonStats(PChar, PPet);
                         break;
                     case PET_TYPE::LUOPAN:
-                        petutils::CalculateLoupanStats(PChar, PPet);
+                        petutils::CalculateLuopanStats(PChar, PPet);
                         break;
                     default:
                         petutils::DespawnPet(PChar);

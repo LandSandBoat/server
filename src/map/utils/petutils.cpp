@@ -1279,7 +1279,7 @@ namespace petutils
         FinalizePetStatistics(PMaster, PPet);
     }
 
-    void CalculateLoupanStats(CBattleEntity* PMaster, CPetEntity* PPet)
+    void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         PPet->SetMLevel(PMaster->GetMLevel());
         PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
@@ -2078,7 +2078,7 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {
-            CalculateLoupanStats(PMaster, PPet);
+            CalculateLuopanStats(PMaster, PPet);
         }
 
         PPet->setSpawnLevel(PPet->GetMLevel());
