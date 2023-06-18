@@ -270,9 +270,15 @@ local attackTypeShields =
 
 xi.summon.physicalSDT = function(attacker, target, damagetype, finalDmg)
     local adjustedDamage = finalDmg
-    -- need to pass in ignoreDmgMods option to physicalDmgTaken otherwise dmg mods are applied both here
-    -- as called by avatarFinalAdjustments and in applyDamageTaken as called by avatarPhysicalMove
-    adjustedDamage = target:physicalDmgTaken(adjustedDamage, damagetype, true)
+    adjustedDamage = target:physicalDmgTaken(adjustedDamage, damagetype)
+
+    if damagetype == xi.damageType.BLUNT then
+        adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
+    elseif damagetype == xi.damageType.PIERCING then
+        adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
+    elseif damagetype == xi.damageType.SLASHING then
+        adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
+    end
 
     return adjustedDamage
 end
@@ -361,7 +367,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
-    dmg = xi.damage.applyDamageTaken(target, dmg, skilltype, damagetype)
+    -- if magic then apply magic mods here
+    -- (physical mods are applied in physicalSDT)
+    if skilltype == xi.attackType.MAGICAL then
+        dmg = xi.damage.applyDamageTaken(target, dmg, skilltype, damagetype)
+    end
 
     -- handle One For All, Liement
 
