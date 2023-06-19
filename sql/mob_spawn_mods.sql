@@ -75,13 +75,13 @@ INSERT INTO `mob_spawn_mods` VALUES (16806031,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16806117,288,40,0); -- DOUBLE_ATTACK: 40
 
 -- Xolotl
-INSERT INTO `mob_spawn_mods` VALUES (16806215,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806215,10,32,1); -- SUBLINK: 32
 
 -- Xolotl'S Hound Warrior
-INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806216,10,32,1); -- SUBLINK: 32
 
 -- Xolotl'S Sacrifice
-INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806217,10,32,1); -- SUBLINK: 32
 
 -- Feeler Antlion
 INSERT INTO `mob_spawn_mods` VALUES (16806242,55,120,1); -- IDLE_DESPAWN: 120
