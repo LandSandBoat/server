@@ -151,7 +151,7 @@ end
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, ftp100, ftp200, ftp300, critperc, attmod)
     local returninfo = { }
     local fStr = 0
-    local tp = mob:getTP()
+    local tp = skill:getTP()
     -- Leaving this in here in case Jimmayus info says otherwise
     -- if wSCdex == nil then
     --     wSCdex = 0
@@ -229,9 +229,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     local paramsRanged = { atk100 = 1, atk200 = 1, atk300 = 1 }
     -- Getting PDIF
-    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.MAIN)
+    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, tp, xi.slot.MAIN)
     if tpeffect == xi.mobskills.physicalTpBonus.RANGED then
-        pdifTable = xi.weaponskills.cRangedRatio(mob, target, paramsRanged, 0, mob:getTP())
+        pdifTable = xi.weaponskills.cRangedRatio(mob, target, paramsRanged, 0, tp)
     end
 
     local pdif = pdifTable[1]
@@ -277,7 +277,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     while hitsdone < numberofhits do
         chance = math.random()
-        pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
+        pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, tp, xi.slot.main)
         pdif = pdifTable[1]
         pdifcrit = pdifTable[2]
 
@@ -352,7 +352,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     --get all the stuff we need
     local resist = 1
-    local tp = mob:getTP()
+    local tp = skill:getTP()
 
     -- This needs to be taken out - to not cause Nil errors leave and set to damage
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
