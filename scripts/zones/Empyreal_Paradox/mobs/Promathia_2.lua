@@ -20,7 +20,8 @@ end
 
 entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
-    if GetMobByID(ID.mob.PROMATHIA_OFFSET + battlefield:getArea()):isDead() then
+    -- Need to multiply getArea by 2 due to the two Promathia versions
+    if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() * 2)):isDead() then
         battlefield:setLocalVar("phaseChange", 0)
     end
 end
@@ -74,6 +75,7 @@ entity.onMobFight = function(mob, target)
         else
             mob:castSpell(218, target)
         end
+
         mob:setLocalVar("spellWait", os.time() + 66)
     end
 end
