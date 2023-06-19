@@ -39,15 +39,11 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.WOODWORKING)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.WOODWORKING)
-    local guildMember       = xi.crafting.isGuildMember(player, 9)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) and 150995375 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.WOODWORKING)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.WOODWORKING)
     local realSkill         = (craftSkill - rank) / 32
-
-    if guildMember == 1 then
-        guildMember = 150995375
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 621, realSkill, rankCap, 184549887) then
         return
@@ -76,10 +72,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 9)
-
     if csid == 621 and option == 2 then
-        if guildMember == 1 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
             player:setCharVar("WoodworkingExpertQuest", 1)
         end
     elseif csid == 621 and option == 1 then
@@ -88,9 +82,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(4098)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4098) -- Wind Crystal
-            xi.crafting.signupGuild(player, xi.crafting.guild.woodworking)
+            xi.crafting.signupGuild(player, xi.crafting.guild.WOODWORKING)
         end
-    elseif (csid == 621 and option > 900) then
+    elseif csid == 621 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("WoodworkingTraded") == 1 then

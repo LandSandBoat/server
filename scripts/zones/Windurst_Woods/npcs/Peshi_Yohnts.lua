@@ -38,15 +38,11 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.BONECRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.BONECRAFT)
-    local guildMember       = xi.crafting.isGuildMember(player, 2)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) and 64 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.BONECRAFT)
     local realSkill         = (craftSkill - rank) / 32
-
-    if guildMember == 1 then
-        guildMember = 64
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 10016, realSkill, rankCap, 184549887) then
         return
@@ -75,10 +71,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 2)
-
     if csid == 10016 and option == 2 then
-        if guildMember == 1 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
             player:setCharVar("BonecraftExpertQuest", 1)
         end
     elseif csid == 10016 and option == 1 then
@@ -88,9 +82,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.bonecraft)
+            xi.crafting.signupGuild(player, xi.crafting.guild.BONECRAFT)
         end
-    elseif (csid == 10016 and option > 900) then
+    elseif csid == 10016 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("BonecraftTraded") == 1 then

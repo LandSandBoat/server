@@ -52,15 +52,11 @@ entity.onTrigger = function(player, npc)
 
     local craftSkill        = player:getSkillLevel(xi.skill.CLOTHCRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.CLOTHCRAFT)
-    local guildMember       = xi.crafting.isGuildMember(player, 3)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) and 10000 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.CLOTHCRAFT)
     local realSkill         = (craftSkill - rank) / 32
-
-    if guildMember == 1 then
-        guildMember = 10000
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 10011, realSkill, rankCap, 184549887) then
         return
@@ -105,8 +101,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 3)
-
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then
@@ -114,7 +108,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("moral", 4)
         end
     elseif csid == 10011 and option == 2 then
-        if guildMember == 1 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) then
             player:setCharVar("ClothcraftExpertQuest", 1)
         end
     elseif csid == 10011 and option == 1 then
@@ -123,9 +117,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(4099) -- earth crystal
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
-            xi.crafting.signupGuild(player, xi.crafting.guild.clothcraft)
+            xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
         end
-    elseif (csid == 10011 and option > 900) then
+    elseif csid == 10011 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("ClothcraftTraded") == 1 then

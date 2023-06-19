@@ -12,9 +12,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 5)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
         if npcUtil.tradeHas(trade, 2184) then
             if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
                 player:confirmTrade()
@@ -27,17 +25,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 5)
-    -- local skillLevel = player:getSkillLevel(xi.skill.FISHING)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
         if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(642, 8, 0, 0, 511, 1, 0, 0, 2184)
         else
             player:startEvent(642, 8, 0, 0, 511, 1, 19267, 0, 2184)
         end
     else
-        player:startEvent(642, 0, 0, 0, 0, 0, 0, 0, 0) -- Standard Dialogue
+        player:startEvent(642) -- Standard Dialogue
     end
 end
 

@@ -38,15 +38,11 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill  = player:getSkillLevel(xi.skill.GOLDSMITHING)
     local testItem    = xi.crafting.getTestItem(player, npc, xi.skill.GOLDSMITHING)
-    local guildMember = xi.crafting.isGuildMember(player, 6)
+    local guildMember = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) and 150995375 or 0
     local rankCap     = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
     local rank        = player:getSkillRank(xi.skill.GOLDSMITHING)
     local realSkill   = (craftSkill - rank) / 32
     local expertQuestStatus = 0
-
-    if guildMember == 1 then
-        guildMember = 150995375
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 300, realSkill, rankCap, 184549887) then
         return
@@ -74,10 +70,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 6)
-
     if csid == 300 and option == 2 then
-        if guildMember == 1 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
             player:setCharVar("GoldsmithingExpertQuest", 1)
         end
     elseif csid == 300 and option == 1 then
@@ -87,9 +81,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.goldsmithing)
+            xi.crafting.signupGuild(player, xi.crafting.guild.GOLDSMITHING)
         end
-    elseif (csid == 300 and option > 900) then
+    elseif csid == 300 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("GoldsmithingTraded") == 1 then
