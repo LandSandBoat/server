@@ -208,6 +208,8 @@ namespace battleutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
+            // get SMN abilities so can setAbilityID for bloodpacts
+            std::vector<CAbility*> AbilitiesList = ability::GetAbilities(JOB_SMN);
             while (sql->NextRow() == SQL_SUCCESS)
             {
                 CMobSkill* PMobSkill = new CMobSkill(sql->GetIntData(0));
@@ -225,6 +227,18 @@ namespace battleutils
                 PMobSkill->setSecondarySkillchain(sql->GetUIntData(12));
                 PMobSkill->setTertiarySkillchain(sql->GetUIntData(13));
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
+
+                // Need to set the ability ID (for bloodpacts) so that info (such as MP) can be accessed
+                // in mobentity when the actual bloodpact completes (and MP is deducted)
+                for (auto PAbility : AbilitiesList)
+                {
+                    if (PAbility->getMobSkillID() == PMobSkill->getID())
+                    {
+                        PMobSkill->setBloodPactAbilityID(PAbility->getID());
+                        break;
+                    }
+                }
+
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
                 auto filename = fmt::format("./scripts/globals/mobskills/{}.lua", PMobSkill->getName());
