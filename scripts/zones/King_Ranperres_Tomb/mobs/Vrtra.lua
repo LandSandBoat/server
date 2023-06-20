@@ -30,6 +30,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("twohourTime", 0)
+    mob:setLocalVar("spawnTime", 0)
 end
 
 entity.onMobFight = function(mob, target)
