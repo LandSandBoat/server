@@ -346,6 +346,15 @@ enum ZONEID : uint16
     MAX_ZONEID                          = 300,
 };
 
+enum NATION_TYPE : uint8
+{
+    NATION_SANDORIA = 0x00,
+    NATION_BASTOK   = 0x01,
+    NATION_WINDURST = 0x02,
+    NATION_BEASTMEN = 0x03,
+    NATION_NEUTRAL  = 0xFF,
+};
+
 enum class REGION_TYPE : uint8
 {
     RONFAURE         = 0,
