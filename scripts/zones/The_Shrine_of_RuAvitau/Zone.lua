@@ -2,6 +2,7 @@
 -- Zone: The_Shrine_of_RuAvitau (178)
 -----------------------------------
 local ID = require('scripts/zones/The_Shrine_of_RuAvitau/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
 -----------------------------------
@@ -93,9 +94,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 1 and csid <= 19 and option == 0 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

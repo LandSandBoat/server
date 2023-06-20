@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Promyvion-Vahzl/IDs')
 require('scripts/globals/promyvion')
+require("scripts/globals/teleports")
 require('scripts/globals/settings')
 require('scripts/globals/status')
 -----------------------------------
@@ -38,9 +39,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 30 and csid <= 44 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

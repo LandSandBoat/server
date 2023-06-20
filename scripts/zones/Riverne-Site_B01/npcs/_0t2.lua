@@ -3,6 +3,7 @@
 --  NPC: Unstable Displacement
 -----------------------------------
 local riverneBGlobal = require("scripts/zones/Riverne-Site_B01/globals")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -19,9 +20,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 22 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

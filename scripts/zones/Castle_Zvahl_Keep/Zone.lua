@@ -2,6 +2,7 @@
 -- Zone: Castle_Zvahl_Keep (162)
 -----------------------------------
 local ID = require('scripts/zones/Castle_Zvahl_Keep/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
@@ -91,9 +92,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         teleportEventsByArea[areaId]
     then
         player:startCutscene(teleportEventsByArea[areaId])
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

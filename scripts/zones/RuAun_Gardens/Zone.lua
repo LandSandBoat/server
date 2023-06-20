@@ -2,6 +2,7 @@
 -- Zone: RuAun_Gardens (130)
 -----------------------------------
 local ID = require('scripts/zones/RuAun_Gardens/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/missions')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
@@ -89,9 +90,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 1 and csid <= 40 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 
