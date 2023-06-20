@@ -39,12 +39,12 @@ public:
     void Tick() override;
 
 private:
-    std::unique_ptr<message_server_wrapper_t> messageServer;
+    std::shared_ptr<ConquestSystem> conquestSystem;
 
-    std::unique_ptr<ConquestSystem>     conquestSystem;
     std::unique_ptr<BesiegedSystem>     besiegedSystem;
     std::unique_ptr<CampaignSystem>     campaignSystem;
     std::unique_ptr<ColonizationSystem> colonizationSystem;
 
-    std::unique_ptr<HTTPServer> httpServer;
+    std::unique_ptr<HTTPServer>               httpServer;
+    std::unique_ptr<message_server_wrapper_t> messageServer;
 };

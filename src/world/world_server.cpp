@@ -21,12 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "world_server.h"
 
 #include "common/application.h"
-#include "common/console_service.h"
 #include "common/logging.h"
+#include "common/vana_time.h"
 
 namespace
 {
-    std::unique_ptr<SqlConnection> sql;
+    std::unique_ptr<SqlConnection>  sql;
+    std::shared_ptr<ConquestSystem> conquest;
 } // namespace
 
 void UpdateDailyTallyPoints()
@@ -69,6 +70,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestTally + 1h))
         {
+            conquest->updateWeekConquest();
             lastConquestTally = tick;
         }
     }
@@ -77,6 +79,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
+            conquest->updateHourlyConquest();
             lastConquestUpdate = tick;
         }
     }
@@ -135,19 +138,19 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
+, conquestSystem(std::make_shared<ConquestSystem>())
 , httpServer(std::make_unique<HTTPServer>())
+, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
 {
     // Anonymous namespace preparation
-    sql = std::make_unique<SqlConnection>();
+    sql      = std::make_unique<SqlConnection>();
+    conquest = conquestSystem;
 
     // Tasks
     CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
 }
 
-WorldServer::~WorldServer()
-{
-}
+WorldServer::~WorldServer() = default;
 
 void WorldServer::Tick()
 {
