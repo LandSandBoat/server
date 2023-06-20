@@ -11,8 +11,8 @@ xi.dealerMoogle = xi.dealerMoogle or {}
 local debug =
 {
     ENABLED     = false,    -- will disable ki consumption and print instead
-    SHOWITEM    = true,     -- will display acquisition message to player if debug.ENABLED
-    TO_PLAYER   = true,     -- will print debug info to player if debug.ENABLED
+    SHOWITEM    = false,    -- will display acquisition message to player if debug.ENABLED
+    TO_PLAYER   = false,    -- will print debug info to player if debug.ENABLED
 }
 
 local csidLookup =
