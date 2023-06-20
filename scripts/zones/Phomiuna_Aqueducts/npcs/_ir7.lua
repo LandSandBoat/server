@@ -6,7 +6,6 @@
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

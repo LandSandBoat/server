@@ -3,8 +3,6 @@
 -- Item: Super Reraiser
 -- Item Effect: This potion functions the same way as the spell Reraise.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

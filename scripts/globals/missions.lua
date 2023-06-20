@@ -1,4 +1,3 @@
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 

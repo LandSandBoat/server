@@ -2,7 +2,6 @@
 -- Inertia Stream
 -- Deals light ele damage to enemies within range. Additional Effect: "Bind."
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

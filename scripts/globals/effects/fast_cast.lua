@@ -1,9 +1,5 @@
 -----------------------------------
---
 -- xi.effect.FAST_CAST -- used by Inspiration Merits in Vallation/Valiance
---
------------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

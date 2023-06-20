@@ -3,7 +3,6 @@
 -- Mandragora Beret
 -- Enchantment: 60Min, Costume - Mandragora (white)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -2,8 +2,6 @@
 -- Spell: Absorb-TP
 -- Steals an enemy's TP.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

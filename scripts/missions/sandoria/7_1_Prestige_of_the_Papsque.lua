@@ -10,10 +10,8 @@
 -- qm4                   : !pos -695 -40 21 100
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

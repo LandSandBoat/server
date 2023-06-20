@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

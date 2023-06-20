@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/spell_data")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 mixins = 
 {
     require("scripts/mixins/job_special"),

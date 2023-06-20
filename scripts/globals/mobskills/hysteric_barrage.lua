@@ -3,7 +3,6 @@
 --  Description: Delivers a fivefold attack. Damage varies with TP.
 --  Type: Physical only when weapon is broken
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

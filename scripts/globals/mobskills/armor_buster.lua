@@ -5,7 +5,6 @@
 -- additional effect: WEIGHT
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- func: getwspoints
 -- desc: prints current ws points, optionaly specifying the weapon slot to check (default main)
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 
 cmdprops =

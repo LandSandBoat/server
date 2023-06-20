@@ -4,7 +4,6 @@
 -- Note: Phase 2
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
 -----------------------------------

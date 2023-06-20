@@ -1,14 +1,10 @@
 -----------------------------------
 --  Dynamic Implosion
---
 --  Description: Deals damage to players within an area of effect. Additional effect: Stun (Status Effect)
 --  Type: Physical
 --  Utsusemi/Blink absorb: Unknown
 --  Range: Unknown radial
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

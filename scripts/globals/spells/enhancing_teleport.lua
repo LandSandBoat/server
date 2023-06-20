@@ -3,8 +3,6 @@
 -----------------------------------
 require("scripts/globals/spell_data")
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}

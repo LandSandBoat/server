@@ -10,7 +10,7 @@ params is a table that can contain the following keys:
     chance     : Percent chance that a mob will use a special at all during engagement. (0 to 100)
     delay      : Grace period at start of fight, during which a mob not use any special, regardless of HPP. Min-clamped at 2 to avoid insta-flow. (2 to any)
     specials   : Table of job specials, with each entry a table that can contain the following keys:
-      id       : the job ability ID (see xi.jobSpecialAbility definition in scripts/globals/status.lua). Required.
+      id       : the job ability ID (see xi.jobSpecialAbility definition in scripts/enum/jobSpecialAbility.lua). Required.
       cooldown : cooldown in seconds for this special. Optional. Default 7200.
       duration : duration in seconds for specials that apply a status effect for a non-standard number of seconds.  Optional.  No default. (1 to any)
       hpp      : mob must be below this HP percent to use this special.  Optional.  Default random 40 to 60. (0 to 100)
@@ -84,7 +84,6 @@ xi.mix.jobSpecial.config(mob, {
 })
 ---------------------------------------------------------------- --]]
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 

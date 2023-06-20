@@ -7,7 +7,6 @@
 -- Andreine       : !pos -91.944 -2.14 -91.538 284
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

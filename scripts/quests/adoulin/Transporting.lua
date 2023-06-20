@@ -7,7 +7,6 @@
 -- qm_sluice_gate_6 : !pos -563 -5.768 61.5 258
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

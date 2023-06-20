@@ -1,14 +1,10 @@
 -----------------------------------
 --  Whip Tongue
---
 --  Description: Whiplashes a single target with its tongue. Additional effect: Stun
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Unknown
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

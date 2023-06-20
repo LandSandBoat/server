@@ -3,7 +3,6 @@
 -- Item: tube_of_clear_salve_ii
 -- Item Effect: Instantly removes all negative status effects from pet
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------

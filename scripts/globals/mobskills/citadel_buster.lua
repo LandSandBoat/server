@@ -8,8 +8,6 @@
 -- 2816/MDB * (256-MDT)/256 (day+weather bonus)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -4,7 +4,6 @@
 -- Ally during Windurst Mission 9-2
 -----------------------------------
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

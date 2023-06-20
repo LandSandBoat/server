@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.THUNDER_MANEUVER
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

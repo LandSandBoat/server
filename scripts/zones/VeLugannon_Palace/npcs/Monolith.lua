@@ -3,7 +3,6 @@
 --  NPC: Monolith
 -----------------------------------
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 -- Item Effect: STR +10
 -- Duration: 60 seconds
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

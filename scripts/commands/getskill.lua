@@ -2,8 +2,6 @@
 -- func: getskill <skill name or ID> <target>
 -- desc: returns target's level of specified skill
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

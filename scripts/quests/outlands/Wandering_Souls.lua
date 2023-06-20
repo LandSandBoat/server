@@ -5,7 +5,6 @@
 -- Cermet Headstone : !pos -107 -8 450 113
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

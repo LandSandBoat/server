@@ -1,8 +1,6 @@
 -----------------------------------
 -- Geocrush
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
@@ -34,7 +32,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.EARTH)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
     damage = damage * xi.settings.main.AVATAR_DAMAGE_MOD
-	
+
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.EARTH)
     target:updateEnmityFromDamage(pet, damage)
 

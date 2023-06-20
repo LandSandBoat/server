@@ -3,7 +3,6 @@
 --  NPC: Abda Lurabda
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/status")
 require("scripts/globals/pets")
 -----------------------------------
 local entity = {}

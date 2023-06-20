@@ -5,7 +5,6 @@
 -- this set of functions emulates.
 -----------------------------------
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")

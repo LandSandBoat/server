@@ -1,15 +1,11 @@
 -----------------------------------
 -- Tortoise Song
---
 -- Description: Removes all status effects in an area of effect.
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 20' radial
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

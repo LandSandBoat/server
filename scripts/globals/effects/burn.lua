@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BURN
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

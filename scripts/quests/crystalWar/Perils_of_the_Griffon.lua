@@ -4,7 +4,6 @@
 -- !addquest 7 37
 -- Rholont : !pos -168 -2 56 80
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

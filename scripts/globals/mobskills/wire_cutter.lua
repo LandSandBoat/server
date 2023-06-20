@@ -1,10 +1,7 @@
 -----------------------------------
 -- Wire_Cutter
 -- Single-target damage (~500-1500), absorbed by 2 Utsusemi shadows.
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

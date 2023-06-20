@@ -4,10 +4,8 @@
 -- !pos -40 0 -151 178
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

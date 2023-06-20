@@ -3,8 +3,6 @@
 -- https://www.bg-wiki.com/ffxi/Category:Chocobo_Racing
 -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Racing_Guide
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------

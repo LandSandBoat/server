@@ -9,7 +9,6 @@
 -- Humus-rich Earth (present) : !pos -510.535 7.568 289.283 104
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

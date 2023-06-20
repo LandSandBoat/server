@@ -9,17 +9,13 @@
 -- MP recovered while healing 3
 -- Undead Killer 10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if
-        target:hasStatusEffect(xi.effect.FOOD) or
-        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
-    then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
 

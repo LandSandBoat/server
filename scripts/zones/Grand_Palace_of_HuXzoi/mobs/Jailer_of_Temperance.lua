@@ -4,7 +4,6 @@
 -----------------------------------
 local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

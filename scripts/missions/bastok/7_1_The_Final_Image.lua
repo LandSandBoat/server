@@ -11,10 +11,8 @@
 -- qm2     : !pos 102 -4 -114 122 (Varies)
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

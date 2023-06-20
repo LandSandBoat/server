@@ -2,7 +2,6 @@
 -- Area: Abyssea - La Theine
 --  Mob: Briareus
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }

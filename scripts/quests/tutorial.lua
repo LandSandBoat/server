@@ -1,10 +1,7 @@
 -----------------------------------
 -- Tutorial Mini-Quest
 -----------------------------------
-require('scripts/globals/status')
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
-require('scripts/globals/settings')
 require('scripts/globals/npc_util')
 -----------------------------------
 

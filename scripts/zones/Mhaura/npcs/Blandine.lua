@@ -4,7 +4,6 @@
 -- Start Quest: The Sand Charmz
 -- !pos 23 -7 41 249
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

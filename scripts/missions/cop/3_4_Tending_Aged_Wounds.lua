@@ -7,7 +7,6 @@
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

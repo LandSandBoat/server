@@ -7,13 +7,10 @@
 --  Range: Unknown cone
 --  Notes: Only used the Aern wielding a sword (RDM, DRK, and PLD).
 -----------------------------------
+require("scripts/globals/mobskills")
+-----------------------------------
 local mobskillObject = {}
 
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
-
------------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

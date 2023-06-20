@@ -12,8 +12,6 @@
 -- 4.50      6.00      7.50
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local weaponskillObject = {}

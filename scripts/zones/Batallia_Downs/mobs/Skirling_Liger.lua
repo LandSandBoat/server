@@ -3,7 +3,6 @@
 --  Mob: Skirling Liger
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

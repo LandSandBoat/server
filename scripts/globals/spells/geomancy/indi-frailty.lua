@@ -2,7 +2,6 @@
 -- Spell: Indi-Frailty
 -- Reduces defense of enemies near the caster.
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

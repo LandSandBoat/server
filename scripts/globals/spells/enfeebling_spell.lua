@@ -7,7 +7,6 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/msg")
 require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -51,9 +50,9 @@ local pTable =
     [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
     [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
     [xi.magic.spell.SLEEP        ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_II,           xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
+    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
     [xi.magic.spell.SLEEPGA      ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_II,           xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
+    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
     [xi.magic.spell.STUN         ] = { xi.effect.STUN,               xi.mod.INT,     xi.mod.STUNRES,     xi.mod.STUN_MEVA,        1,   0,        5,      4,   0,        8, false,     false,   200 },
     [xi.magic.spell.VIRUS        ] = { xi.effect.PLAGUE,             xi.mod.INT,     xi.mod.VIRUSRES,    xi.mod.VIRUS_MEVA,       5,   3,       60,      2,   0,        0, false,     false,     0 },
 
@@ -369,6 +368,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     local skillType    = spell:getSkillType()
     local spellElement = spell:getElement()
+    local spellGroup   = spell:getSpellGroup()
     local statUsed     = pTable[spellId][2]
     local mEvaMod      = pTable[spellId][4]
     local resistStages = pTable[spellId][8]
@@ -376,7 +376,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local bonusMacc    = pTable[spellId][13]
 
     -- Magic Hit Rate calculations.
-    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed, bonusMacc)
+    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 

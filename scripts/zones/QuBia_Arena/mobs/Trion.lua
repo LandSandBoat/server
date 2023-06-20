@@ -4,7 +4,6 @@
 -- Ally during San d'Oria Mission 9-2
 -----------------------------------
 local ID = require("scripts/zones/QuBia_Arena/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

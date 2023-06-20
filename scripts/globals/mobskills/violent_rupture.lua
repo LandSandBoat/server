@@ -1,14 +1,10 @@
 -----------------------------------
---  Dynamic Implosion
---
+--  Violent Rupture
 --  Description: Deals Water damage to enemies in a fan-shaped area of effect. Additional effect: STR Down
 --  Type: Breath
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

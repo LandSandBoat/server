@@ -3,8 +3,6 @@
 --  Mob: Flesh Eater
 -- BCNM: The Worm's Turn
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

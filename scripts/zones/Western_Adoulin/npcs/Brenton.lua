@@ -4,7 +4,6 @@
 -- Type: SOA Mission NPC
 -- !pos -86.036 3.349 18.121 256
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Western_Adoulin/IDs")

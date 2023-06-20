@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/mobs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

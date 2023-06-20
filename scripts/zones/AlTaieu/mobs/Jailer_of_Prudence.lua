@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/AlTaieu/IDs")
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

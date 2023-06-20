@@ -1,13 +1,9 @@
 -----------------------------------
 -- Electrocharge
---
 -- Description: Deals thunder damage.
 -- Type: Magical (thunder)
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

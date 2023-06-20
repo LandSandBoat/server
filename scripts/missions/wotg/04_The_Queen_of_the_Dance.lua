@@ -6,12 +6,10 @@
 -- Lion Springs Door : !pos 96 0 106 80
 -- Turlough          : !pos -58.697 0.000 103.553 244
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/maws')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

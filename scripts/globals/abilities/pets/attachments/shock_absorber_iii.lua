@@ -2,7 +2,6 @@
 -- Attachment: Shock Absorber III
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
 local attachmentObject = {}
 

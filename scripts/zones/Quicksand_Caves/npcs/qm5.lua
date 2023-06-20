@@ -11,7 +11,6 @@
 -- spawn in npc_list is 770 0 -419
 -----------------------------------
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

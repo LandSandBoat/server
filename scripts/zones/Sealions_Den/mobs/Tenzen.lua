@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
 local tenzenFunctions = require("scripts/zones/Sealions_Den/helpers/TenzenFunctions")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local entity = {}

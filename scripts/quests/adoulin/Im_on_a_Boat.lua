@@ -6,7 +6,6 @@
 -- Castoff_Point_4 : !pos 220 0.800 146 262
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

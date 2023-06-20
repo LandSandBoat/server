@@ -2,7 +2,6 @@
 -- Area: Al'Taieu
 --   NM: Jailer of Justice
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

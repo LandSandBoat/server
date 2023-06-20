@@ -1,15 +1,11 @@
 -----------------------------------
 -- Mind Purge
---
 -- Description: Dispels all buffs from a single target, including food.
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Dispels shadows
 -- Range: Single target
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

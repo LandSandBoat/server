@@ -2,7 +2,6 @@
 -- xi.effect.SEIGAN
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

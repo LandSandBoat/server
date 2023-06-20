@@ -6,7 +6,6 @@ require("scripts/globals/summon")
 require("scripts/globals/bcnm")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local spellObject = {}
 

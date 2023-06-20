@@ -4,9 +4,6 @@
 -- Any zone in which contains a mob over lvl 99, level correction is deactivated.
 -- Adoulin zones, zones with Apex or Locus mobs, etc...
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.levelCorrection = xi.combat.levelCorrection or {}

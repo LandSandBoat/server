@@ -5,7 +5,6 @@
 -- Traiffeaux : !pos 437.451 63 -290.512 267
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

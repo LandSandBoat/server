@@ -2,14 +2,9 @@
 -- Soothing Aroma
 -- Family: Rafflesia
 -- Description: Charms nearby players.
--- Type:
 -- Utsusemi/Blink absorb:
--- Range:
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

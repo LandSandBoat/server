@@ -5,7 +5,6 @@
 -- !addmission 12 1
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

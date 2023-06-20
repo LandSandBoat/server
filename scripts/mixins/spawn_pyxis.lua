@@ -2,7 +2,6 @@
 -- Sturdy Pyxis Mixin
 -----------------------------------
 require("scripts/globals/abyssea/sturdypyxis/spawn")
-require("scripts/globals/status")
 require("scripts/globals/mixins")
 -----------------------------------
 g_mixins = g_mixins or {}

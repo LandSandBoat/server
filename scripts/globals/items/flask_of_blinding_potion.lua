@@ -3,7 +3,6 @@
 -- Item: Blinding Potion
 -- Item Effect: This potion induces blindness.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

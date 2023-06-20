@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 134
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

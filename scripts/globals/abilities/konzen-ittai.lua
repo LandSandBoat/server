@@ -6,7 +6,6 @@
 -- Duration: 1:00 or until next Weapon Skill
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local abilityObject = {}

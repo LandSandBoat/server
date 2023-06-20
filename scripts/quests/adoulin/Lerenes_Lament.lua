@@ -5,7 +5,6 @@
 -- Lerene : !pos -46.876 -179.334 -28.602 274
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

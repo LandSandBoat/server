@@ -1,7 +1,6 @@
 -----------------------------------
 -- SOA Geomagnetic Founts
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 

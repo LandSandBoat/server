@@ -3,9 +3,7 @@
 --  MOB: Dilapidated_Gate
 -----------------------------------
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
-require("scripts/globals/status")
 -----------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

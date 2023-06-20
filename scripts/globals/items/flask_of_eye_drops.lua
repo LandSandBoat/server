@@ -3,8 +3,6 @@
 -- Item: Eye Drops
 -- Item Effect: This potion remedies blindness.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

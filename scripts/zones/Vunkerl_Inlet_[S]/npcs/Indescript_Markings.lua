@@ -5,7 +5,6 @@
 -- !pos -629.179 -49.002 -429.104 1 83
 -----------------------------------
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

@@ -8,7 +8,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Tahrongi/IDs')
 require("scripts/globals/abyssea")
-require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 --  NPC: _5ki (Banishing Gate #3)
 -- !pos -100 -3.008 359 200
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
 local entity = {}

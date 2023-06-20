@@ -7,7 +7,6 @@
 -- Gravestone  : !pos 254.428 -32.999 20.001 175
 -- Sarcophagus : !pos 336.594 -33.500 -56.728 175
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

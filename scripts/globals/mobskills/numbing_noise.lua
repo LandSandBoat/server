@@ -1,15 +1,11 @@
 -----------------------------------
 -- Numbing Noise
---
 -- Description: Creates an unsettling sound. Additional effect: Stun
 -- Type: Physical
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 10' cone
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

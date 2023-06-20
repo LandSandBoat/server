@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/LaLoff_Amphitheater/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}

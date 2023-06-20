@@ -6,7 +6,6 @@
 -- Weak to water elemental damage
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

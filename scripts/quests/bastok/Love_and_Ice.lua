@@ -5,7 +5,6 @@
 -- Carmelo           : !pos -146.476 -7.48 -10.889 236
 -- Mirror Pond (J-8) : !pos -96.165 1.518 -392.700 111
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -10,10 +10,8 @@
 -- _5a0: Heavy Stone Dr  : !pos -39 4.823 20 190
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

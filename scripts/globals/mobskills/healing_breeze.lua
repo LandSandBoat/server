@@ -1,14 +1,9 @@
 -----------------------------------
 -- Healing Breeze
---
 -- Description: Restores HP for party members within area of effect.
 -- Type: Magical (Wind)
---
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

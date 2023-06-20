@@ -5,9 +5,7 @@
 -- !pos -28 0.1 -6 233
 -----------------------------------
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

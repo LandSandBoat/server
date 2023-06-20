@@ -3,8 +3,6 @@
 -- Weapon skill for Time Bomb (BCNM 50 3, 2, 1...)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

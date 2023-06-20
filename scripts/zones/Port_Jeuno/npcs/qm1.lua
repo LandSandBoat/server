@@ -4,7 +4,6 @@
 -- Finish Quest: Borghertz's Hands (AF Hands, Many jobs)
 -- !pos -51 8 -4 246
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

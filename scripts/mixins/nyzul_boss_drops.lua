@@ -2,7 +2,6 @@
 -- Nyzul Boss Drop ID Mixin
 -----------------------------------
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

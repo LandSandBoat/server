@@ -3,8 +3,6 @@
 -- ID 5373
 -- Unlocks support job
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

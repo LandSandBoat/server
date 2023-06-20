@@ -1,8 +1,6 @@
 -----------------------------------
 -- Flaming Crush M=10, 2, 2? (STILL don't know)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/summon")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
@@ -28,7 +26,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
     totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, numhits)
-	totaldamage = math.floor(totaldamage * xi.settings.main.AVATAR_DAMAGE_MOD)
+    totaldamage = math.floor(totaldamage * xi.settings.main.AVATAR_DAMAGE_MOD)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.FIRE)
     target:updateEnmityFromDamage(pet, totaldamage)
 

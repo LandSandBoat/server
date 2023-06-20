@@ -3,7 +3,6 @@
 --  NPC: Hari Pakhroib
 -- Starts and Finishes Quest: Greetings to the Guardian
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Kazham/IDs")

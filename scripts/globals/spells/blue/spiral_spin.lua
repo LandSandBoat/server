@@ -13,7 +13,6 @@
 -- Combos: Plantoid Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

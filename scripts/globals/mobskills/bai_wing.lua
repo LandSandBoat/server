@@ -8,8 +8,6 @@
 -- Notes: Used only by Ouryu and Cuelebre while flying.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

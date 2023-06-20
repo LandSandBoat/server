@@ -1,15 +1,11 @@
 -----------------------------------
 -- Reprobation
---
 -- Description: Dispels all buffs from targets in area of effect, including food.
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Dispels shadows
 -- Range: Area of Effect
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

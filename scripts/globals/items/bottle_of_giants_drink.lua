@@ -3,8 +3,6 @@
 -- Item: Reraiser
 -- Item Effect: +100% HP
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

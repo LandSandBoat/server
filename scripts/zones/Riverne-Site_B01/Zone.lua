@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Riverne-Site_B01/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

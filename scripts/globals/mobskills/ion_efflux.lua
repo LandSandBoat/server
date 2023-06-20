@@ -1,14 +1,10 @@
 -----------------------------------
 -- Ion_Efflux
---
 -- Description: 10'(?) cone  Paralysis, ignores Utsusemi
 -- Type: Magical
---
 -- Range: 10 yalms
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

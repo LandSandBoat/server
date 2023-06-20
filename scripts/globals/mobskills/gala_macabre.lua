@@ -8,8 +8,6 @@
 -- Notes: Only used by some notorious monsters like Xolotl and Giltine.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

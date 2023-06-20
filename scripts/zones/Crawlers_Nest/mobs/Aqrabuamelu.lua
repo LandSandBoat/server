@@ -3,7 +3,6 @@
 --   NM: Aqrabuamelu
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

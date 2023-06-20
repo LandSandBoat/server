@@ -1,9 +1,6 @@
 -----------------------------------
 -- xi.effect.IFRITS_FAVOR
 -----------------------------------
-require("scripts/globals/status")
----------------------------------------------
-
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

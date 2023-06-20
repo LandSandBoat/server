@@ -1,12 +1,9 @@
 -----------------------------------
 -- Enervation
---
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical (Dark)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

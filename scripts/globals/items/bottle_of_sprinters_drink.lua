@@ -3,7 +3,6 @@
 -- Item: bottle_of_sprinters_drink
 -- Item Effect: Grants Flee for 60s
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------

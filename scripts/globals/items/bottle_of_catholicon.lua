@@ -3,7 +3,6 @@
 -- Item: bottle_of_catholicon
 -- Item Effect: Instantly removes up to 3 negative status effects from target
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------

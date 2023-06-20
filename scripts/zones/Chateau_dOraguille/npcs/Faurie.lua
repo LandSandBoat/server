@@ -3,8 +3,6 @@
 --  NPC: Faurie
 -- Chat Text and Zone Exit Menu
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

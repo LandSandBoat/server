@@ -3,7 +3,6 @@
 -- Ram Staff
 -- Enchantment: "Retrace" (Southern San d'Oria[S])
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

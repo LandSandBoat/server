@@ -2,7 +2,6 @@
 -- Zone: Ship_bound_for_Selbina (220)
 -----------------------------------
 local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
-require('scripts/globals/keyitems')
 -----------------------------------
 local zoneObject = {}
 

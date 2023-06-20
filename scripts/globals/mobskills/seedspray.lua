@@ -5,11 +5,8 @@
 -- Type: Physical
 -- Utsusemi/Blink absorb: Absorbed by 3 shadows.
 -- Range: 11.5 yalms
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

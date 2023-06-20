@@ -1,17 +1,13 @@
 -----------------------------------
 --  Stormwind
---
 --  Description: Creates a whirlwind that deals Wind damage to targets in an area of effect.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Unknown radial
---  Notes:
+-----------------------------------
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
-
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0

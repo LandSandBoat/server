@@ -4,7 +4,6 @@
 -- Involved In Quest: Recollections
 -- !pos -14 0 69 162
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
 -----------------------------------
 local entity = {}

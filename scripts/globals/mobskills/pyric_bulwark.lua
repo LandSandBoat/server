@@ -1,14 +1,10 @@
 -----------------------------------
 -- Pyric Bulwark
---
 -- Description: Grants a Physical Shield effect for a time.
 -- Type: Enhancing
---
 -- Range: Self
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

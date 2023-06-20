@@ -5,7 +5,6 @@
 -- !pos 28.149 2.899 -44.780 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,6 @@
 -- Item: flask_of_healing_powder
 -- Item Effect: Restores 25% of Maximum HP to Party members within 10'
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

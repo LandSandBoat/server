@@ -727,7 +727,7 @@ enum EFFECT
     EFFECT_PROWESS_WS_DMG        = 787, // (Unimplemented) 2% per tier.
     EFFECT_PROWESS_KILLER        = 788, // *flat +4 for now
     // End GoV Prowess fakery
-    EFFECT_FIELD_SUPPORT_FOOD  = 789, // Used by Fov/GoV food buff.
+
     EFFECT_MARK_OF_SEED        = 790, // Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
     EFFECT_ALL_MISS            = 791, // All attacks miss (ie - Tiamat while flying)
     EFFECT_SUPER_BUFF          = 792, // Boss buff (ie - Nidhogg "2hour")
@@ -746,6 +746,7 @@ enum EFFECT
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
 
+    // 789
     // 807-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };

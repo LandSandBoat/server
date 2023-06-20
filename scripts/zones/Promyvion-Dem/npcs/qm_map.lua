@@ -7,7 +7,6 @@
 -- !pos 159.998 -2.327 0.000 18
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

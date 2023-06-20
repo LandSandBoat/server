@@ -5,9 +5,7 @@
 local ID = require("scripts/zones/Spire_of_Dem/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefieldObject = {}

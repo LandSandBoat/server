@@ -2,7 +2,6 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/status")
 -----------------------------------
 
 local lowerJeunoGlobal =

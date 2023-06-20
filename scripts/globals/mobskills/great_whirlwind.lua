@@ -1,14 +1,10 @@
 -----------------------------------
 --  Great Whirlwind
---
 --  Description: Deals Wind damage to targets in front. Additional effect: Choke
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -2,9 +2,7 @@
 -- Zone: Aht_Urhgan_Whitegate (50)
 -----------------------------------
 local ID = require('scripts/zones/Aht_Urhgan_Whitegate/IDs')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}

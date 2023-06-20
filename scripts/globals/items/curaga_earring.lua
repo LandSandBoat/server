@@ -4,7 +4,6 @@
 -- Item Effect: Casts Curaga
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/settings")
 -----------------------------------
 local itemObject = {}
 

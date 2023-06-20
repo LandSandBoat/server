@@ -1,9 +1,6 @@
 -----------------------------------
 -- Mix: Life Water - Applies Regen (20 HP/3 seconds) to all party members for 1 minute.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
