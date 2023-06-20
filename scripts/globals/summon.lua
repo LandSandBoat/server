@@ -390,7 +390,6 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     if dmg > 0 then
         target:updateEnmityFromDamage(mob, dmg)
-        target:addEnmity(mob:getMaster(), 1, 0)
         target:handleAfflatusMiseryDamage(dmg)
     end
 

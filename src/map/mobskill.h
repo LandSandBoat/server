@@ -75,6 +75,7 @@ public:
     uint8  getPrimarySkillchain() const;
     uint8  getSecondarySkillchain() const;
     uint8  getTertiarySkillchain() const;
+    uint16 getBloodPactAbilityID() const;
 
     bool isDamageMsg() const;
 
@@ -96,6 +97,7 @@ public:
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
+    void setBloodPactAbilityID(uint16 bloodPactAbilityID);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -120,6 +122,7 @@ private:
     uint8  m_primarySkillchain; // weaponskill ID of skillchain properties
     uint8  m_secondarySkillchain;
     uint8  m_tertiarySkillchain;
+    uint16 m_bloodPactAbilityID;
 
     std::string m_name;
 };

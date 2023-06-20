@@ -42,6 +42,7 @@ CMobSkill::CMobSkill(uint16 id)
     m_HP                  = 0;
     m_HPP                 = 0;
     m_knockback           = 0;
+    m_bloodPactAbilityID  = 0;
 }
 
 bool CMobSkill::hasMissMsg() const
@@ -422,4 +423,14 @@ void CMobSkill::setSecondarySkillchain(uint8 skillchain)
 void CMobSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
+}
+
+uint16 CMobSkill::getBloodPactAbilityID() const
+{
+    return m_bloodPactAbilityID;
+}
+
+void CMobSkill::setBloodPactAbilityID(uint16 bloodPactAbilityID)
+{
+    m_bloodPactAbilityID = bloodPactAbilityID;
 }

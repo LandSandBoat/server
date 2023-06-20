@@ -21,6 +21,7 @@
 
 #include "mobentity.h"
 
+#include "../ability.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/mob_controller.h"
 #include "../ai/helpers/pathfind.h"
@@ -827,6 +828,37 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     PSkill->setTP(state.GetSpentTP());
     PSkill->setHP(health.hp);
     PSkill->setHPP(GetHPP());
+
+    // Spend MP for blood pacts here so MP is only deducted if successful
+    if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR &&
+        PMaster && PMaster->objtype == TYPE_PC)
+    {
+        CAbility* PPactAbility = ability::GetAbility(PSkill->getBloodPactAbilityID());
+
+        if (PPactAbility->getID() >= ABILITY_HEALING_RUBY && PPactAbility->getID() <= ABILITY_PERFECT_DEFENSE)
+        {
+            // Blood Pact mp cost stored in animation ID
+            float mpCost = PPactAbility->getAnimationID();
+
+            if (PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
+            {
+                mpCost *= 1.5f;
+                PMaster->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
+            }
+
+            // Blood Boon (does not affect Astral Flow BPs)
+            if ((PPactAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
+            {
+                int16 bloodBoonRate = PMaster->getMod(Mod::BLOOD_BOON);
+                if (xirand::GetRandomNumber(100) < bloodBoonRate)
+                {
+                    mpCost *= xirand::GetRandomNumber(8.f, 16.f) / 16.f;
+                }
+            }
+
+            PMaster->addMP((int32)-mpCost);
+        }
+    }
 
     uint16 msg            = 0;
     uint16 defaultMessage = PSkill->getMsg();
