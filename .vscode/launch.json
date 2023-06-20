@@ -121,5 +121,14 @@
             "MIMode": "lldb",
             "targetArchitecture": "x64",
         },
+        {
+          "name": "(OSX) xi_world",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/xi_world",
+          "cwd": "${workspaceFolder}",
+          "MIMode": "lldb",
+          "targetArchitecture": "x64"
+        }
     ],
 }
