@@ -3,7 +3,6 @@
 -- Item: Lucid Elixir I
 -- Item Effect: Restores 50% of HP and MP
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

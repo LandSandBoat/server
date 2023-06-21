@@ -1,9 +1,7 @@
 -----------------------------------
 -- Plenilune_Embrace
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

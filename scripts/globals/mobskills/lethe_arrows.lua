@@ -1,15 +1,11 @@
 -----------------------------------
 -- Lethe Arrows
---
 -- Description: Deals a ranged attack to target. Additional effect: Knockback, Bind, and Amnesia
 -- Type: Ranged
 -- Utsusemi/Blink absorb: Ignores Utsusemi
 -- Range: Unknown
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

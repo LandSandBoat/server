@@ -5,7 +5,6 @@
 -- !pos 105 1 382 104
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

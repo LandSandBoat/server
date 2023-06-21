@@ -7,7 +7,6 @@ mixins =
     require("scripts/mixins/rage"),
     require("scripts/mixins/claim_shield")
 }
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

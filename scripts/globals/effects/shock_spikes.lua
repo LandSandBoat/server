@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SHOCK_SPIKES
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

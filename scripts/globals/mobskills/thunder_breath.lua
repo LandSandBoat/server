@@ -1,13 +1,8 @@
 -----------------------------------
 --  Thunder Breath
---
 --  Description: Deals thunder damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Thunder)
---
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

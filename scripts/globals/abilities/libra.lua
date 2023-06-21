@@ -4,8 +4,6 @@
 -- Obtained: SCH Level 76
 -- Recast Time: 00:01:00
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

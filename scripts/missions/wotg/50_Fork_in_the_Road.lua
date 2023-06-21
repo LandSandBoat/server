@@ -11,7 +11,6 @@
 -- Throne Room (S)         : !pos 19.003 0 -4.487
 -- Walk of Echoes          : !pos -702.325 0.399 -481.664
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

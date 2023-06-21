@@ -14,8 +14,6 @@
 -- 100%        200%      300%
 -- 0.6875    0.6875      0.6875
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

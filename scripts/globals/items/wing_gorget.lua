@@ -3,7 +3,6 @@
 -- Item: wing gorget
 -- Item Effect: gives regain
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 local ID = require("scripts/zones/PsoXja/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

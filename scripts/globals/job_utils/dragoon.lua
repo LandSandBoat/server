@@ -5,9 +5,7 @@ require("scripts/globals/ability")
 require("scripts/globals/items")
 require("scripts/globals/jobpoints")
 require("scripts/globals/msg")
-require("scripts/globals/settings")
 require("scripts/globals/spells/damage_spell")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 xi = xi or {}
@@ -303,7 +301,9 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     wyvern:delStatusEffect(xi.effect.DOOM)
 
     -- If you can use Spirit Link at all, sleep is removed. Empathy merits control use at 100% HP.
-    removeSleepEffects(wyvern)
+    wyvern:delStatusEffect(xi.effect.SLEEP_I)
+    wyvern:delStatusEffect(xi.effect.SLEEP_II)
+    wyvern:delStatusEffect(xi.effect.LULLABY)
 
     if player:getMod(xi.mod.ENHANCES_SPIRIT_LINK) > 0 then
         -- https://www.ffxiah.com/forum/topic/44396/sigurds-descendants-the-art-of-dragon-slaying/108/#3646600
@@ -709,13 +709,13 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     end
 
     local bonusMacc = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC)
-    local element = damageType - xi.damageType.ELEMENTAL
+    local element   = damageType - xi.damageType.ELEMENTAL
 
     -- "Breath accuracy is directly affected by a wyvern's current HP", but no data exists.
-    local resist              = xi.spells.damage.calculateResist(wyvern, target,  nil, 0, element, 0, bonusMacc)
-    local sdt                 = xi.spells.damage.calculateSDT(wyvern, target, nil, element)
-    local magicBurst          = xi.spells.damage.calculateIfMagicBurst(wyvern, target,  0, element)
-    local nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(wyvern, target, nil, element)
+    local resist              = xi.spells.damage.calculateResist(wyvern, target, 0, 0, element, 0, bonusMacc)
+    local sdt                 = xi.spells.damage.calculateSDT(target, element)
+    local magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element)
+    local nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
 
     -- It appears that MB breaths don't do more damage based on testing.
     damage = damage * resist * sdt * nukeAbsorbOrNullify

@@ -6,7 +6,6 @@ AnimationSub(2) large neck pouch
 AnimationSub(3) sleeping z's
 --]]
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 g_mixins = g_mixins or {}

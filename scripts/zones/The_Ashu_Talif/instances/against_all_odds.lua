@@ -3,7 +3,6 @@
 -- !instance 6001
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
 local instanceObject = {}

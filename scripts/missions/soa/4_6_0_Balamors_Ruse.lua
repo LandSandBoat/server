@@ -5,7 +5,6 @@
 -- !addmission 12 104
 -- Levil           : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

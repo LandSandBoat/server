@@ -4,7 +4,6 @@
 -- Involved in Quest: Grave Concerns
 -- !pos -129 -6 92 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------

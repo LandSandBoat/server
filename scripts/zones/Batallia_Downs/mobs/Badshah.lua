@@ -2,8 +2,6 @@
 -- Area: Batallia Downs (105)
 --  Mob: Badshah
 -----------------------------------
-require('scripts/globals/status')
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

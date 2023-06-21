@@ -3,7 +3,6 @@
 --  NPC: Rajesh
 -- !pos -62 1 -8 236
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

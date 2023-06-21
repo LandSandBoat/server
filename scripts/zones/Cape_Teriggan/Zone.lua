@@ -5,7 +5,6 @@ local ID = require('scripts/zones/Cape_Teriggan/IDs')
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
-require('scripts/globals/world')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}

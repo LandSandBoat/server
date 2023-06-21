@@ -4,9 +4,6 @@
 -- Item Effect: TP +10
 -- Durration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

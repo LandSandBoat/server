@@ -1,14 +1,10 @@
 -----------------------------------
 --  Tortoise Stomp
---
 --  Description: Single target Defense Down xi.effect.
 --  Type: Physical
 --  Utsusemi/Blink absorb:&nbsp??
 --  Range: Varying Area of Effect
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

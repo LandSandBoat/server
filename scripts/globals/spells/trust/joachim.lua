@@ -4,7 +4,6 @@
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/roe")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")

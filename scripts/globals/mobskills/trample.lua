@@ -4,11 +4,7 @@
 --  Description: Deals physical damage to enemies in an area of effect. Additional effect: Knockback + Bind
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
---  Range:
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

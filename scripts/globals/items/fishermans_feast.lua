@@ -7,17 +7,13 @@
 --  https://ffxiclopedia.fandom.com/wiki/Fisherman's_Feast
 --  https://www.bg-wiki.com/ffxi/Fisherman%27s_Feast
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if
-        target:hasStatusEffect(xi.effect.FOOD) or
-        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
-    then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
 

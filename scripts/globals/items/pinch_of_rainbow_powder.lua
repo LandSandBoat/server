@@ -4,9 +4,6 @@
 -- When applied, it makes things invisible.
 -- Removed Medicated status as per https://www.bg-wiki.com/ffxi/Rainbow_Powder
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

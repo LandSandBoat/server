@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 mixins  = {require("scripts/mixins/job_special"),
            require("scripts/mixins/rage")}
-           require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 entity.onMobInitialize = function(mob)

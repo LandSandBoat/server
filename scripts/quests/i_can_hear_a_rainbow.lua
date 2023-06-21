@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/quests')
 require('scripts/globals/utils')
-require('scripts/globals/world')
 require('scripts/globals/zone')
 -----------------------------------
 

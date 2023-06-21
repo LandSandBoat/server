@@ -3,7 +3,6 @@
 --  Mob: Slave Globe
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -412,7 +412,7 @@ enum class ZONE_TYPE : uint8
     CITY              = 1,
     OUTDOORS          = 2,
     DUNGEON           = 3,
-    BATTLEFIELD       = 4,
+    UNUSED            = 4, // formerly BATTLEFIELD
     DYNAMIS           = 5,
     DUNGEON_INSTANCED = 6,
 };

@@ -8,7 +8,6 @@
 -- Antiquated_Sluice_Gate  : !pos -529.361 -7.000 59.988 258
 -- WATERWAY_FACILITY_CRANK : !addkeyitem 2450
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

@@ -8,7 +8,6 @@
 -- Norg        : !zone 252
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/utils')

@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Sacrarium/IDs')
 local professorTables = require('scripts/zones/Sacrarium/globals')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/utils')
 -----------------------------------

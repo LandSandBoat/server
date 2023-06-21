@@ -4,7 +4,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/claim_shield") }
 require("scripts/globals/titles")
-require("scripts/globals/world")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

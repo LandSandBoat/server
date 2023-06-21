@@ -1,14 +1,9 @@
 -----------------------------------
 --  Wild Oats
---
 --  Description: Additional effect: Vitality Down. Duration of effect varies on TP.
 --  Type: Physical (Piercing)
---
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

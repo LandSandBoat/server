@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Fear of the dark
 -- !pos -160 -0 137 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")

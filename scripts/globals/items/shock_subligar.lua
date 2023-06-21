@@ -3,9 +3,6 @@
 -- Item: shock subligar
 -- Item Effect: Shock Spikes
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

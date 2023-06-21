@@ -11,7 +11,6 @@
 -- Brazier (H-9) : !pos 259 -33 -58 195
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

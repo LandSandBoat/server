@@ -5,7 +5,6 @@
 mixins = { require("scripts/mixins/claim_shield") }
 require("scripts/globals/pathfind")
 require("scripts/globals/regimes")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

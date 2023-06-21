@@ -4,7 +4,6 @@
 -- will instead deal darkness damage. Ineffective against undead.
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

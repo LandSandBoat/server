@@ -9,9 +9,6 @@
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
@@ -1179,13 +1176,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     end
 
     -- check player can eat
-    if
-        opt.food and
-        (
-            player:hasStatusEffect(xi.effect.FOOD) or
-            player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
-        )
-    then
+    if opt.food and player:hasStatusEffect(xi.effect.FOOD) then
         player:messageBasic(xi.msg.basic.IS_FULL)
         return
     end
@@ -1314,27 +1305,27 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['DRIED_MEAT'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 1, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0)
             end,
 
             ['SALTED_FISH'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 2, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0)
             end,
 
             ['HARD_COOKIE'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 3, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0)
             end,
 
             ['INSTANT_NOODLES'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 4, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0)
             end,
 
             ['DRIED_AGARICUS'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 5, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0)
             end,
 
             ['INSTANT_RICE'] = function()
-                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
+                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0)
             end,
 
             ['CIPHER_SAKURA'] = function()

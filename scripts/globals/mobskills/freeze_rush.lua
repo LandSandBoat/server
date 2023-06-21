@@ -1,14 +1,10 @@
 -----------------------------------
 --  Freeze Rush
---
 --  Description: Makes an icy charge at a single target.
 --  Type: Magical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

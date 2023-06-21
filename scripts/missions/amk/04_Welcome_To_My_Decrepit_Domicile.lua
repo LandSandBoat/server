@@ -8,7 +8,6 @@
 -- PIECE_OF_RUGGED_TREE_BARK : !addkeyitem 1137
 -- SAVORY_LAMB_ROAST         : !addkeyitem 1138
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

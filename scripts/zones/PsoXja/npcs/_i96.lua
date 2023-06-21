@@ -5,7 +5,6 @@
 -- !pos -310.000 -1.925 -238.399 9
 -----------------------------------
 local ID = require("scripts/zones/PsoXja/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

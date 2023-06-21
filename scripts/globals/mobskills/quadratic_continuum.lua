@@ -1,5 +1,6 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- Quadratic Continuum
+-----------------------------------
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

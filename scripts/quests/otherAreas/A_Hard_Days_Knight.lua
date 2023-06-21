@@ -6,7 +6,6 @@
 -- qm_hard_days_knight : !pos -38.605 -9.022 -290.700 24
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

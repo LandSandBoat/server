@@ -3,8 +3,6 @@
 --  NPC: Dakha Topsalwan
 -- !zone 250
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

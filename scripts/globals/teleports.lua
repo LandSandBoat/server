@@ -1,7 +1,6 @@
 -----------------------------------
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 

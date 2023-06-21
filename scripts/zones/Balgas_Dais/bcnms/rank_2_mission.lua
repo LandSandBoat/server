@@ -4,7 +4,6 @@
 -- !pos 299 -123 345 146
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

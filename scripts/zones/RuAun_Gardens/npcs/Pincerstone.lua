@@ -4,7 +4,6 @@
 -- NPCs which activates the blue teleports in sky
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

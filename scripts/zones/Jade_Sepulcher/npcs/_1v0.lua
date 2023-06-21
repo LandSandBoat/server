@@ -4,7 +4,6 @@
 -- Involved in Missions: TOAU-29
 -- !pos 299 0 -199 67
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
 -----------------------------------

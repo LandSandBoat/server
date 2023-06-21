@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Water, Trial Size Trial by Water
 -- !pos 560 36 560 211
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Tides/IDs")
 -----------------------------------

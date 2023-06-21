@@ -27,10 +27,10 @@ local content = BattlefieldMission:new({
 
 function content:onEventFinishBattlefield(player, csid, option)
     local battlefield = player:getBattlefield()
-    local area = battlefield:getArea()
+    local area        = battlefield:getArea()
+    local phaseTwoId  = ID.mob.SHADOW_LORD_PHASE_2_OFFSET + (area - 1)
+    local phaseTwo    = GetMobByID(phaseTwoId)
 
-    local phaseTwoId = ID.mob.SHADOW_LORD_PHASE_2_OFFSET + (area - 1)
-    local phaseTwo = GetMobByID(phaseTwoId)
     if phaseTwo:isSpawned() then
         return
     end
@@ -52,13 +52,14 @@ content.groups =
     {
         mobIds =
         {
-            { ID.mob.SHADOW_LORD_PHASE_1_OFFSET },
+            { ID.mob.SHADOW_LORD_PHASE_1_OFFSET     },
             { ID.mob.SHADOW_LORD_PHASE_1_OFFSET + 1 },
             { ID.mob.SHADOW_LORD_PHASE_1_OFFSET + 2 }
         },
 
         death = function(battlefield, mob)
             local players = battlefield:getPlayers()
+
             for _, player in pairs(players) do
                 player:startEvent(32004)
             end
@@ -69,13 +70,13 @@ content.groups =
     {
         mobIds =
         {
-            { ID.mob.SHADOW_LORD_PHASE_2_OFFSET },
+            { ID.mob.SHADOW_LORD_PHASE_2_OFFSET     },
             { ID.mob.SHADOW_LORD_PHASE_2_OFFSET + 1 },
             { ID.mob.SHADOW_LORD_PHASE_2_OFFSET + 2 }
         },
 
         spawned = false,
-        death = function(battlefield, mob)
+        death   = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end
     }

@@ -73,8 +73,6 @@ global_objects=(
     Limbus
     SeasonalEvent
 
-    removeSleepEffects
-
     QUEST_AVAILABLE
     QUEST_ACCEPTED
     QUEST_COMPLETED
@@ -145,7 +143,6 @@ global_objects=(
     handleAfflatusMisery
     handleNinjutsuDebuff
     handleThrenody
-    hasSleepEffects
     isValidHealTarget
     takeAbilityDamage
 

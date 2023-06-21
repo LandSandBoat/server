@@ -5,7 +5,6 @@
 --       Does not retreat into its shell, and does not poison you, unlike other uragnites.
 -----------------------------------
 require('scripts/globals/hunts')
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

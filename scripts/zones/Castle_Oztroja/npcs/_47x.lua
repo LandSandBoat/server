@@ -4,8 +4,6 @@
 -- Notes: Opens door _477
 -- !pos -99 -71 -41 151
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

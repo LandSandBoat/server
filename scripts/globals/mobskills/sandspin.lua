@@ -5,8 +5,6 @@
 -- The Additional Effect: Accuracy Down may not always process.
 -- Duration: Three minutes ?
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

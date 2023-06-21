@@ -7,7 +7,6 @@
 -- Mourices  : !pos -50.646 -0.501 -27.642 241
 -----------------------------------
 require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

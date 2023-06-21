@@ -2,8 +2,6 @@
 -- Abyssea Atma Global
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

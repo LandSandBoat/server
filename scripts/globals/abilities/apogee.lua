@@ -6,7 +6,6 @@
 -- Duration: 1 Blood Pact or 60 seconds, whichever occurs first.
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

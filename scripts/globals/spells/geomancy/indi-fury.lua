@@ -2,7 +2,6 @@
 -- Spell: Indi-Fury
 -- Enhances attack for party members near the caster.
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

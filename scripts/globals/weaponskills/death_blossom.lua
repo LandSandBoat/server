@@ -13,8 +13,6 @@
 -- 1.125      1.125      1.125        old
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

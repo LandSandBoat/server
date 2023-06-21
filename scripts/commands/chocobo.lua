@@ -9,8 +9,6 @@
 -- Black chocobo with all look changes: !chocobo black head feet tail
 -- etc.
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

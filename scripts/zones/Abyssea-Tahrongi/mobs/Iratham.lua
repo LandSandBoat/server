@@ -2,7 +2,6 @@
 -- Area: Abyssea - Tahrongi
 --   NM: Iratham
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

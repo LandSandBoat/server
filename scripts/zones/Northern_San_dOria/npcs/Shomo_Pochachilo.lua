@@ -3,7 +3,6 @@
 --  NPC: Shomo Pochachilo
 -- !pos 28.369 -0.199 30.061 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

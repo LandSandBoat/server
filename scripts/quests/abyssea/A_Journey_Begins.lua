@@ -5,7 +5,6 @@
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

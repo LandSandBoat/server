@@ -10,7 +10,6 @@ mixins =
     require("scripts/mixins/claim_shield")
 }
 local ID = require("scripts/zones/Halvung/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

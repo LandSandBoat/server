@@ -3,7 +3,6 @@
 --  ZNM: Iriz Ima
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 -- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 

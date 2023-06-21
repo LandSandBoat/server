@@ -5,10 +5,7 @@
 -- !pos 0.1 30 21 242
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

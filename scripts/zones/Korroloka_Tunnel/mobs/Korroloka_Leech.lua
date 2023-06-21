@@ -3,8 +3,6 @@
 --   NM: Korroloka Leech
 -- Involved in Quest: Ayame and Kaede
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

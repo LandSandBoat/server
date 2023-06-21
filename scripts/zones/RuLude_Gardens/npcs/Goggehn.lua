@@ -4,7 +4,6 @@
 -- Involved in Mission: Bastok 3-3, 4-1
 -- !pos 3 9 -76 243
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

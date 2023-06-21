@@ -3,7 +3,6 @@
 -- Item: Uleguerand Milk
 -- Item Effect: Restores 80 HP over 120 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -3,8 +3,6 @@
 --  Mob: Wamouracampa
 -- TODO: Damage resistances in streched and curled stances. Halting movement during stance change. Morph into Wamoura.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 mixins = { require("scripts/mixins/families/wamouracampa") }
 -----------------------------------
 local entity = {}

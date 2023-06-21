@@ -3,7 +3,6 @@
 -- Item: Bottle of Frontier Soda
 -- Item Effect: Restores 20 TP over 60 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

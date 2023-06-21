@@ -2,7 +2,6 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'ghrah
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

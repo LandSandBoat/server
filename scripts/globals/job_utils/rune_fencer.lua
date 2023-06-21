@@ -2,7 +2,6 @@
 -- Rune Fencer Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
@@ -492,16 +491,16 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus       = xi.spells.damage.calculateEleStaffBonus(player, nil, element)
-    multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity(player, nil)         -- presumed but untested
-    multipliers.SDT                 = xi.spells.damage.calculateSDT(player, target, nil, element)
-    multipliers.resist              = xi.spells.damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
-    multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(player, target,  0, element)
-    multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
-    multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, target, nil, 0, element)
-    multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                = xi.spells.damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
-    multipliers.nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
+    multipliers.eleStaffBonus       = xi.spells.damage.calculateEleStaffBonus(player, element)
+    multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
+    multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
+    multipliers.resist              = xi.spells.damage.calculateResist(player, target, 0, 0, element, 0, bonusMacc)
+    multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element)
+    multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, 0, element)
+    multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, 0, element)
+    multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element)
+    multipliers.TMDA                = xi.spells.damage.calculateTMDA(target, element)
+    multipliers.nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
 
     return multipliers
 end

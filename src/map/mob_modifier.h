@@ -23,7 +23,7 @@
 
 /*
 This is a list of mob specific modifiers. They can be added to pools / families / spawn points.
-Gets mapped for convenience in scripts/globals/status.lua#2223+ -- always edit both
+Gets mapped for convenience in scripts/enum/mobMod.lua -- always edit both
 */
 
 enum MOBMODIFIER : int

@@ -5,10 +5,6 @@
 -- TODO: The mobskill actually finishes but with no animation,
 --       and the category changes to 7 instead of 11 (mobskill finish)
 -----------------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
-require("scripts/globals/player")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

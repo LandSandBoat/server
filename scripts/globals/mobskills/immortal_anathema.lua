@@ -1,15 +1,11 @@
 -----------------------------------
 -- Immortal Anathema
---
 -- Description: Inflicts a curse on all targets in an area of effect.
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: AoE
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

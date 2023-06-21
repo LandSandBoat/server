@@ -2,9 +2,6 @@
 -- Area: Al'Taieu
 --  Mob: Ul'yovra
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

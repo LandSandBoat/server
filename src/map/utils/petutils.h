@@ -61,6 +61,136 @@ enum PETID
     MAX_PETID                = 77,
 };
 
+struct Pet_t
+{
+    uint16      PetID; // ID in pet_list.sql
+    look_t      look;
+    std::string name;
+    ECOSYSTEM   EcoSystem;
+
+    uint8 minLevel;
+    uint8 maxLevel;
+
+    uint8  name_prefix;
+    uint8  radius; // Model Radius - affects melee range etc.
+    uint16 m_Family;
+    uint32 time; // Duration of pet's "life span" before despawning
+
+    uint8 mJob;
+    uint8 sJob;
+    uint8 m_Element;
+    float HPscale; // HP boost percentage
+    float MPscale; // MP boost percentage
+
+    uint16 cmbDelay;
+    uint8  speed;
+    // stat ranks
+    uint8 strRank;
+    uint8 dexRank;
+    uint8 vitRank;
+    uint8 agiRank;
+    uint8 intRank;
+    uint8 mndRank;
+    uint8 chrRank;
+    uint8 attRank;
+    uint8 defRank;
+    uint8 evaRank;
+    uint8 accRank;
+
+    uint16 m_MobSkillList;
+
+    // magic stuff
+    bool   hasSpellScript;
+    uint16 spellList;
+
+    // resists
+    int16 slash_sdt;
+    int16 pierce_sdt;
+    int16 hth_sdt;
+    int16 impact_sdt;
+
+    int16 fire_sdt;
+    int16 ice_sdt;
+    int16 wind_sdt;
+    int16 earth_sdt;
+    int16 thunder_sdt;
+    int16 water_sdt;
+    int16 light_sdt;
+    int16 dark_sdt;
+
+    int8 fire_res_rank;
+    int8 ice_res_rank;
+    int8 wind_res_rank;
+    int8 earth_res_rank;
+    int8 thunder_res_rank;
+    int8 water_res_rank;
+    int8 light_res_rank;
+    int8 dark_res_rank;
+
+    Pet_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    {
+        PetID = 0;
+
+        minLevel = -1;
+        maxLevel = 99;
+
+        name_prefix = 0;
+        radius      = 0;
+        m_Family    = 0;
+        time        = 0;
+
+        mJob      = 0;
+        sJob      = 0;
+        m_Element = 0;
+        HPscale   = 0.f;
+        MPscale   = 0.f;
+
+        cmbDelay = 0;
+        speed    = 0;
+
+        strRank = 0;
+        dexRank = 0;
+        vitRank = 0;
+        agiRank = 0;
+        intRank = 0;
+        mndRank = 0;
+        chrRank = 0;
+        attRank = 0;
+        defRank = 0;
+        evaRank = 0;
+        accRank = 0;
+
+        m_MobSkillList = 0;
+
+        hasSpellScript = false;
+        spellList      = 0;
+
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
+
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
+
+        fire_res_rank    = 0;
+        ice_res_rank     = 0;
+        wind_res_rank    = 0;
+        earth_res_rank   = 0;
+        thunder_res_rank = 0;
+        water_res_rank   = 0;
+        light_res_rank   = 0;
+        dark_res_rank    = 0;
+    }
+};
+
 class CBattleEntity;
 class CPetEntity;
 
@@ -89,6 +219,8 @@ namespace petutils
     void SetupPetWithMaster(CBattleEntity* PMaster, CPetEntity* PPet);
 
     bool CheckPetModType(CBattleEntity* PPet, PetModType petmod);
+
+    Pet_t* GetPetInfo(uint32 PetID);
 }; // namespace petutils
 
 #endif

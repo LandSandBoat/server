@@ -1,13 +1,8 @@
 -----------------------------------
 --  Radiant Breath
---
 --  Description: Deals light damage to enemies within a fan-shaped area of effect originating from the caster. Additional effect: Slow and Silence.
 --  Type: Magical (Light)
---
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

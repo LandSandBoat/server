@@ -4,11 +4,8 @@
 -- Description: Transfers all ailments to target
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: 2-3 shadows
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

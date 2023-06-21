@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

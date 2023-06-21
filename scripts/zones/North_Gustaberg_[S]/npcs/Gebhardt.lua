@@ -4,7 +4,6 @@
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

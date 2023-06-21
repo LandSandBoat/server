@@ -1,13 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Evisceration
 -- Delivers a fivefold attack
 -- Type: Physical
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

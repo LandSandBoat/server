@@ -3,7 +3,6 @@
 -- Item: bottle_of_bravers_drink
 -- Item Effect: all stats +15
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 

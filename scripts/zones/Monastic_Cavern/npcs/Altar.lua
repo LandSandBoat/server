@@ -5,7 +5,6 @@
 -- !pos 108 -2 -144 150
 -----------------------------------
 local ID = require("scripts/zones/Monastic_Cavern/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

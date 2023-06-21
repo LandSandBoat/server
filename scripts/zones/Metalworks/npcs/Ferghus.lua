@@ -3,7 +3,6 @@
 --  NPC: Ferghus
 -- Starts Quest: Too Many Chefs (1, 86)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

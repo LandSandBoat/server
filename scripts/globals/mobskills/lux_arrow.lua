@@ -3,8 +3,6 @@
 -- Trust: Semih Lafihna
 -- Fragmentation/Distortion skillchain properties
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

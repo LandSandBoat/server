@@ -1,11 +1,8 @@
 -----------------------------------
 -- Summer Breeze
---
 -- Description: AoE Erase xi.effect. (If nothing to Erase, it instead gains Regain.)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

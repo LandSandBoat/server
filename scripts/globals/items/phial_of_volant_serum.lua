@@ -3,7 +3,6 @@
 -- Phial of Volant Serum
 -- Enchantment: 60Min, Costume - bat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -3,7 +3,6 @@
 --  ZNM: Chigre
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

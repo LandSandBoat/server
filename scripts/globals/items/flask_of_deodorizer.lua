@@ -3,7 +3,6 @@
 -- Deodorizer
 -- When applied, this powerful deodorant neutralizes even the strongest of odors!!.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

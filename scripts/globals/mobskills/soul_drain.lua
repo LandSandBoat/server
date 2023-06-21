@@ -1,15 +1,11 @@
 -----------------------------------
 -- Soul Drain
---
 -- Description: Steals an enemy's HP.
 -- Type: Magical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
--- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- Conflux Surveyor Global
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}

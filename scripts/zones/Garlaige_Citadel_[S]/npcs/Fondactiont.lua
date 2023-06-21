@@ -5,7 +5,6 @@
 -- !pos -95 0 196 164
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

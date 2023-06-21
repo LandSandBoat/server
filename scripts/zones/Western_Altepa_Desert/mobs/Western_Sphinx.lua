@@ -2,10 +2,6 @@
 -- Area: Western Altepa Desert
 --  Mob: Western Sphinx
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

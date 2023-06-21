@@ -3,10 +3,6 @@
 --  NPC: rock slab (corsair job flag quest)
 -- !pos -99 -7 -91 57
 -----------------------------------
-local ID = require("scripts/zones/Talacca_Cove/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}

@@ -1,14 +1,10 @@
 -----------------------------------
 --  Double Ray
---
 --  Description: An energy ray zaps a single target.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

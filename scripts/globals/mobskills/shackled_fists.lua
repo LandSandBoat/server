@@ -1,5 +1,6 @@
-require("scripts/globals/settings")
-require("scripts/globals/status")
+-----------------------------------
+-- Shackled Fists
+-----------------------------------
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

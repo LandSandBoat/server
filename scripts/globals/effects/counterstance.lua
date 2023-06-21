@@ -2,8 +2,6 @@
 -- xi.effect..COUNTERSTANCE
 -- DEF is removed in core as equip swaps can mess this up otherwise!
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

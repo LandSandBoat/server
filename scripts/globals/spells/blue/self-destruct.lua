@@ -12,12 +12,10 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Auto Refresh
 -----------------------------------
-local spellObject = {}
-
-require("scripts/globals/settings")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/bluemagic")
+-----------------------------------
+local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     caster:setLocalVar("selfdestructHp", caster:getHP())

@@ -4,8 +4,6 @@
 -- Item Effect: HP +15, Enmity +2
 -- Duration: 30 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -13,7 +13,6 @@ local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
 
@@ -49,15 +48,15 @@ end
 content.groups =
 {
     {
-        mobs = { "Proto-Omega" },
+        mobs       = { "Proto-Omega" },
         stationary = true,
-        death = function(mob, count)
+        death      = function(mob, count)
             npcUtil.showCrate(GetNPCByID(ID.CENTRAL_APOLLYON.npc.LOOT_CRATE))
         end,
     },
 
     {
-        mobs = { "Gunpod" },
+        mobs    = { "Gunpod" },
         spawned = false,
     }
 }
@@ -73,15 +72,15 @@ content.loot =
 
         {
             quantity = 2,
-            { item = xi.items.PIECE_OF_OMEGAS_EYE, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SEGMENT_OF_OMEGAS_FORELEG, weight = xi.loot.weight.LOW },
-            { item = xi.items.SEGMENT_OF_OMEGAS_HIND_LEG, weight = xi.loot.weight.LOW },
-            { item = xi.items.SEGMENT_OF_OMEGAS_TAIL, weight = xi.loot.weight.LOW },
+            { item = xi.items.PIECE_OF_OMEGAS_EYE,        weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SEGMENT_OF_OMEGAS_FORELEG,  weight = xi.loot.weight.LOW    },
+            { item = xi.items.SEGMENT_OF_OMEGAS_HIND_LEG, weight = xi.loot.weight.LOW    },
+            { item = xi.items.SEGMENT_OF_OMEGAS_TAIL,     weight = xi.loot.weight.LOW    },
         },
 
         {
-            { item = xi.items.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
-            { item = xi.items.PIECE_OF_OMEGAS_HEART, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.NONE,                  weight = xi.loot.weight.EXTREMELY_HIGH },
+            { item = xi.items.PIECE_OF_OMEGAS_HEART, weight = xi.loot.weight.NORMAL         },
         },
     },
 }

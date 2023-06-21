@@ -2,7 +2,6 @@
 -- doomvoid
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 -----------------------------------
 local instanceObject = {}
 

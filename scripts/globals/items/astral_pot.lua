@@ -4,7 +4,6 @@
 -- Item Effect: Pet Magical Attack +22
 -- Duration 5 Minutes
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

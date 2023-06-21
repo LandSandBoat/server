@@ -12,8 +12,6 @@
 -- Combos: Auto Refresh
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

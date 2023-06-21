@@ -3,7 +3,6 @@
 --  ZNM: Pandemonium Warden
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 -----------------------------------

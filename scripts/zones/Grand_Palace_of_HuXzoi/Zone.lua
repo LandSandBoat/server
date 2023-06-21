@@ -4,7 +4,6 @@
 local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
 local ID = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

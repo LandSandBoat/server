@@ -4,7 +4,6 @@
 -- Teleports to Chocobo Stables (Bastok)
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------

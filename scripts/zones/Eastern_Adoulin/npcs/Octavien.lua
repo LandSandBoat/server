@@ -6,7 +6,6 @@
 -- !pos 100.580 -40.150 -63.830
 -----------------------------------
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Eastern_Adoulin/IDs")

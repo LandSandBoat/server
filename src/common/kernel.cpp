@@ -247,18 +247,21 @@ int main(int argc, char** argv)
         duration next = std::chrono::milliseconds(200);
 
         // clang-format off
-        auto watchdog = Watchdog(2000ms, [&]()
+        auto period   = settings::get<uint32>("main.INACTIVITY_WATCHDOG_PERIOD");
+        auto periodMs = (period > 0) ? std::chrono::milliseconds(period) : 2000ms;
+        auto watchdog = Watchdog(periodMs, [&]()
         {
-            ShowCritical("Process main tick has taken 2000ms or more.");
+            ShowCritical(fmt::format("Process main tick has taken {}ms or more.", period).c_str());
             if (debug::isRunningUnderDebugger())
             {
                 ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
             }
-            else
+            else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
             {
 #ifndef SIGKILL
 #define SIGKILL 9
 #endif // SIGKILL
+                ShowCritical("Watchdog thread time exceeded. Killing process.");
                 std::raise(SIGKILL);
             }
         });

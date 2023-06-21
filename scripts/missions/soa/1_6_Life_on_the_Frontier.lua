@@ -5,7 +5,6 @@
 -- !addmission 12 7
 -- Brenton : !pos -86.036 3.349 18.121 256
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

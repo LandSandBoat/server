@@ -3,7 +3,6 @@
 -- Item: Blink Band
 -- Item Effect: 3 shadows
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -11,7 +11,6 @@
 -- Chalvatot        : !pos -105 0.1 72 233
 -- Dreamrose        : !pos -262.403 -10.155 49.164 125
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

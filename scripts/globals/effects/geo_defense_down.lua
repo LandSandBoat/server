@@ -1,8 +1,6 @@
 -----------------------------------
 -- Effect: GEO Defense Down
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Sacrificial_Chamber/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------

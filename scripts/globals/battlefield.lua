@@ -1,7 +1,6 @@
 require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 
 xi = xi or {}
 
@@ -328,29 +327,29 @@ xi.battlefield.id =
 
 xi.battlefield.itemUses =
 {
-    [xi.items.WARRIORS_TESTIMONY] = 3,
-    [xi.items.MONKS_TESTIMONY] = 3,
-    [xi.items.WHITE_MAGES_TESTIMONY] = 3,
-    [xi.items.BLACK_MAGES_TESTIMONY] = 3,
-    [xi.items.RED_MAGES_TESTIMONY] = 3,
-    [xi.items.THIEFS_TESTIMONY] = 3,
-    [xi.items.PALADINS_TESTIMONY] = 3,
-    [xi.items.DARK_KNIGHTS_TESTIMONY] = 3,
-    [xi.items.BEASTMASTERS_TESTIMONY] = 3,
-    [xi.items.BARDS_TESTIMONY] = 3,
-    [xi.items.RANGERS_TESTIMONY] = 3,
-    [xi.items.SAMURAIS_TESTIMONY] = 3,
-    [xi.items.NINJAS_TESTIMONY] = 3,
-    [xi.items.DRAGOONS_TESTIMONY] = 3,
-    [xi.items.SUMMONERS_TESTIMONY] = 3,
-    [xi.items.BLUE_MAGES_TESTIMONY] = 3,
-    [xi.items.CORSAIRS_TESTIMONY] = 3,
+    [xi.items.WARRIORS_TESTIMONY]      = 3,
+    [xi.items.MONKS_TESTIMONY]         = 3,
+    [xi.items.WHITE_MAGES_TESTIMONY]   = 3,
+    [xi.items.BLACK_MAGES_TESTIMONY]   = 3,
+    [xi.items.RED_MAGES_TESTIMONY]     = 3,
+    [xi.items.THIEFS_TESTIMONY]        = 3,
+    [xi.items.PALADINS_TESTIMONY]      = 3,
+    [xi.items.DARK_KNIGHTS_TESTIMONY]  = 3,
+    [xi.items.BEASTMASTERS_TESTIMONY]  = 3,
+    [xi.items.BARDS_TESTIMONY]         = 3,
+    [xi.items.RANGERS_TESTIMONY]       = 3,
+    [xi.items.SAMURAIS_TESTIMONY]      = 3,
+    [xi.items.NINJAS_TESTIMONY]        = 3,
+    [xi.items.DRAGOONS_TESTIMONY]      = 3,
+    [xi.items.SUMMONERS_TESTIMONY]     = 3,
+    [xi.items.BLUE_MAGES_TESTIMONY]    = 3,
+    [xi.items.CORSAIRS_TESTIMONY]      = 3,
     [xi.items.PUPPETMASTERS_TESTIMONY] = 3,
 }
 
-Battlefield = setmetatable({}, { __index = Container })
+Battlefield         = setmetatable({}, { __index = Container })
 Battlefield.__index = Battlefield
-Battlefield.__eq = function(m1, m2)
+Battlefield.__eq    = function(m1, m2)
     return m1.id == m2.id
 end
 
@@ -379,15 +378,15 @@ end
 --  - lossEventParams: Parameters given to the loss event (32002). Defaults to none. (optional)
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
-    setmetatable(obj, self)
-    obj.zoneId = data.zoneId
-    obj.battlefieldId = data.battlefieldId
-    obj.maxPlayers = data.maxPlayers
-    obj.timeLimit = data.timeLimit
-    obj.index = data.index
-    obj.entryNpc = data.entryNpc
 
-    obj.area = data.area
+    setmetatable(obj, self)
+    obj.zoneId        = data.zoneId
+    obj.battlefieldId = data.battlefieldId
+    obj.maxPlayers    = data.maxPlayers
+    obj.timeLimit     = data.timeLimit
+    obj.index         = data.index
+    obj.entryNpc      = data.entryNpc
+    obj.area          = data.area
 
     if data.exitNpcs then
         obj.exitNpcs = data.exitNpcs
@@ -395,25 +394,26 @@ function Battlefield:new(data)
         obj.exitNpcs = { data.exitNpc }
     end
 
-    obj.title = data.title
-    obj.grantXP = data.grantXP
-    obj.levelCap = data.levelCap or 0
-    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
-    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
-    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
-    obj.showTimer = (data.showTimer == nil or data.showTimer) or false
-    obj.delayToExit = data.delayToExit or 5
-    obj.requiredItems = data.requiredItems or {}
+    obj.title            = data.title
+    obj.grantXP          = data.grantXP
+    obj.levelCap         = data.levelCap or 0
+    obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
+    obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
+    obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
+    obj.delayToExit      = data.delayToExit or 5
+    obj.requiredItems    = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
-    obj.lossEventParams = data.lossEventParams or {}
+    obj.lossEventParams  = data.lossEventParams or {}
 
     obj.sections = { { [obj.zoneId] = {} } }
-    obj.groups = {}
-    obj.paths = {}
-    obj.loot = {}
+    obj.groups   = {}
+    obj.paths    = {}
+    obj.loot     = {}
 
     -- Determine which items need to be traded as the requiredItems format is incompatable with npcUtil.tradeHasExactly
     obj.tradeItems = {}
+
     for index, value in ipairs(obj.requiredItems) do
         obj.tradeItems[index] = value
     end
@@ -427,17 +427,20 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    local setupEvents = true
+    local setupEvents   = true
     local setupEntryNpc = true
     local setupExitNpcs = true
+
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
+
         for _, content in ipairs(contents) do
             -- Always setup listeners if we're reloading a battlefield
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
-                setupEvents = true
+                setupEvents   = true
                 setupEntryNpc = true
                 setupExitNpcs = true
+
                 break
             end
 
@@ -454,6 +457,7 @@ function Battlefield:register()
                 for _, exitNpc in ipairs(self.exitNpcs) do
                     if utils.contains(exitNpc, content.exitNpcs) then
                         setupExitNpcs = false
+
                         break
                     end
                 end
@@ -504,6 +508,7 @@ function Battlefield:register()
     end
 
     xi.battlefield.contents[self.battlefieldId] = self
+
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         table.insert(xi.battlefield.contentsByZone[self.zoneId], self)
     else
@@ -533,9 +538,11 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
 
             -- Only need one from the group
             local hasAny = false
+
             for _, subitem in ipairs(keyItem) do
                 if player:hasKeyItem(subitem) then
                     hasAny = true
+
                     break
                 end
             end
@@ -578,11 +585,13 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Validate battlefield status
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) and not onUpdate then
         player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+
         return
     end
 
     -- Check if another party member has battlefield status effect. If so, don't allow trade.
     local alliance = player:getAlliance()
+
     for _, member in pairs(alliance) do
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
             player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
@@ -595,8 +604,10 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     -- Determine which battlefields are available given the traded items
     local options = xi.battlefield.getBattlefieldOptions(player, npc, trade)
+
     if options == 0 then
         local noEntryMessage = zones[zoneId].text.NO_BATTLEFIELD_ENTRY
+
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
@@ -606,6 +617,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     -- Ensure that the traded item(s) are not worn out
     local contents = xi.battlefield.contentsByZone[zoneId]
+
     for _, content in ipairs(contents) do
         if
             #content.requiredItems > 0 and
@@ -615,6 +627,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
             local itemId = content.requiredItems[1]
             -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
             local totalUses = xi.battlefield.itemUses[itemId] or 1
+
             if player:getWornUses(itemId) >= totalUses then
                 if totalUses > 1 then
                     player:messageSpecial(content.requiredItems.wornMessage, itemId)
@@ -642,10 +655,10 @@ function Battlefield.onEntryTrigger(player, npc)
     -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         -- Player is outside battlefield. Attempting to enter.
-        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        local id = status:getPower()
-
+        local status  = player:getStatusEffect(xi.effect.BATTLEFIELD)
+        local id      = status:getPower()
         local content = xi.battlefield.contents[id]
+
         if not content then
             return
         end
@@ -656,12 +669,14 @@ function Battlefield.onEntryTrigger(player, npc)
 
         local options = utils.mask.setBit(0, content.index, true)
         player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+
         return
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
     -- Check if another party member has battlefield status effect. If so, that means the player is trying to enter a closed battlefield.
     local alliance = player:getAlliance()
+
     for _, member in pairs(alliance) do
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
             player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_ARE_ENGAGED)
@@ -680,6 +695,7 @@ function Battlefield.onEntryTrigger(player, npc)
     -- options = 268435455 -- uncomment to open menu with all possible battlefields
     if options == 0 then
         local noEntryMessage = zones[player:getZoneID()].text.NO_BATTLEFIELD_ENTRY
+
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
@@ -697,10 +713,12 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     end
 
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
-    local value = bit.rshift(option, 4)
+    local value    = bit.rshift(option, 4)
+
     for _, content in pairs(contents) do
         if value == content.index then
             content:onEntryEventUpdate(player, csid, option, npc)
+
             break
         end
     end
@@ -710,8 +728,8 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
     local name      = "Meme"
     local partySize = 1
+    local area      = self.area or (player:getLocalVar("[battlefield]area") + 1)
 
-    local area = self.area or (player:getLocalVar("[battlefield]area") + 1)
     if self.area then
         area = self.area
     end
@@ -777,12 +795,14 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local autoSkipCS = self:getLocalVar(player, "CS") == 1 and 100 or 0
     player:updateEvent(result, self.index, autoSkipCS, clearTime, partySize, self:checkSkipCutscene(player))
     player:updateEventString(name)
+
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
 
 function Battlefield.redirectEventCall(eventName, player, csid, option)
     local battlefieldID = 0
-    local battlefield = player:getBattlefield()
+    local battlefield   = player:getBattlefield()
+
     if battlefield then
         battlefieldID = battlefield:getID()
     else
@@ -856,7 +876,7 @@ end
 function Battlefield:onBattlefieldTick(battlefield, tick)
     local status        = battlefield:getStatus()
     local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
-    local isExiting = status == xi.battlefield.status.LOST or status == xi.battlefield.status.WON
+    local isExiting     = status == xi.battlefield.status.LOST or status == xi.battlefield.status.WON
 
     if isExiting then
         battlefield:setLocalVar("cutsceneTimer", cutsceneTimer - 1)
@@ -867,6 +887,7 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
     self:handleWipe(battlefield, players)
 
     local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
+
     if not hasTimeRemaining then
         for _, player in pairs(players) do
             player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
@@ -906,6 +927,7 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
+
             for _, member in pairs(alliance) do
                 if
                     member:hasStatusEffect(xi.effect.BATTLEFIELD) and
@@ -922,14 +944,15 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     player:setLocalVar("battlefieldID", battlefield:getID())
 
     local initiatorId, _ = battlefield:getInitiator()
+
     if
         #self.requiredKeyItems > 0 and
         (not self.requiredKeyItems.onlyInitiator or player:getID() == initiatorId)
     then
 
         local items = {}
-        for _, item in ipairs(self.requiredKeyItems) do
 
+        for _, item in ipairs(self.requiredKeyItems) do
             -- If this item is a table then that means we only need one of them so delete the first one we find
             if type(item) == 'table' then
                 for _, subitem in ipairs(item) do
@@ -960,10 +983,10 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
         self.requiredItems.wearMessage and
         player:hasItem(self.requiredItems[1])
     then
-        local itemId = self.requiredItems[1]
-        local uses = player:incrementItemWear(itemId)
-        -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
-        local totalUses = xi.battlefield.itemUses[itemId] or 1
+        local itemId    = self.requiredItems[1]
+        local uses      = player:incrementItemWear(itemId)
+        local totalUses = xi.battlefield.itemUses[itemId] or 1 -- Gets number of item uses. (Tests = 3; Else = 1)
+
         if totalUses > 1 then
             local remaining = totalUses - uses
             player:messageSpecial(self.requiredItems.wearMessage, itemId, remaining + 1, remaining)
@@ -974,6 +997,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
 
     local ID = zones[self.zoneId]
     player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.index)
+
     if self.maxPlayers > 6 then
         -- NOTE: Update tooling does not allow for duplicate messages to be stored in IDs.lua, even if the ID is different.
         -- Apollyon does not differentiate between party and alliance for message, so if the entry is nil, use party message.
@@ -1057,14 +1081,15 @@ end
 
 function Battlefield:addEssentialMobs(mobNames)
     table.insert(self.groups, {
-        mobs = mobNames,
+        mobs      = mobNames,
         superlink = true,
-        allDeath = utils.bind(self.handleAllMonstersDefeated, self),
+        allDeath  = utils.bind(self.handleAllMonstersDefeated, self),
     })
 end
 
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
+
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
         npcUtil.showCrate(crate)
@@ -1081,12 +1106,14 @@ function Battlefield:handleOpenArmouryCrate(player, npc)
         self:handleLootRolls(battlefield, self.loot, npc)
         battlefield:setStatus(xi.battlefield.status.WON)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+
         return true
     end)
 end
 
 function Battlefield:handleLootRolls(battlefield, lootTable, npc)
     local players = battlefield:getPlayers()
+
     for i = 1, #lootTable, 1 do
         local lootGroup = lootTable[i]
 
@@ -1100,10 +1127,11 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
             end
 
             local quantity = lootGroup.quantity or 1
-            for j = 1, quantity do
-                local roll = math.random(max)
 
+            for j = 1, quantity do
+                local roll    = math.random(max)
                 local current = 0
+
                 for _, entry in pairs(lootGroup) do
                     if type(entry) == 'table' then
                         current = current + entry.weight
@@ -1124,6 +1152,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                             end
 
                             players[1]:addTreasure(entry.item, npc)
+
                             break
                         end
                     end
@@ -1134,7 +1163,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
 end
 
 function xi.battlefield.getBattlefieldOptions(player, npc, trade)
-    local result = 0
+    local result   = 0
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
 
     if contents == nil then
@@ -1157,9 +1186,11 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
     for _, member in pairs(player:getAlliance()) do
         if member:isLevelSync() then
             local zoneId = player:getZoneID()
-            local ID = zones[zoneId]
+            local ID     = zones[zoneId]
+
             -- Your party is unable to participate because certain members' levels are restricted
             player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
+
             return true
         end
     end
@@ -1167,9 +1198,9 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
     return false
 end
 
-BattlefieldMission = setmetatable({ }, { __index = Battlefield })
+BattlefieldMission         = setmetatable({ }, { __index = Battlefield })
 BattlefieldMission.__index = BattlefieldMission
-BattlefieldMission.__eq = function(m1, m2)
+BattlefieldMission.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
@@ -1186,14 +1217,16 @@ BattlefieldMission.isMission = true
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to false. (optional)
 function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
+
     setmetatable(obj, self)
-    obj.missionArea = data.missionArea
-    obj.mission = data.mission
-    obj.missionStatusArea = data.missionStatusArea
-    obj.missionStatus = data.missionStatus
+    obj.missionArea           = data.missionArea
+    obj.mission               = data.mission
+    obj.missionStatusArea     = data.missionStatusArea
+    obj.missionStatus         = data.missionStatus
     obj.requiredMissionStatus = data.requiredMissionStatus
-    obj.skipMissionStatus = data.skipMissionStatus or data.requiredMissionStatus
-    obj.canLoseExp = data.canLoseExp or false
+    obj.skipMissionStatus     = data.skipMissionStatus or data.requiredMissionStatus
+    obj.canLoseExp            = data.canLoseExp or false
+
     return obj
 end
 
@@ -1203,36 +1236,42 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
     end
 
     local missionArea = self.missionArea or player:getNation()
-    local current = player:getCurrentMission(missionArea)
+    local current     = player:getCurrentMission(missionArea)
 
     if self.requiredMissionStatus ~= nil then
         local missionStatusArea = self.missionStatusArea or player:getNation()
-        local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
-        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or (current == self.mission and status >= self.requiredMissionStatus))) or
+        local status            = player:getMissionStatus(missionStatusArea, self.missionStatus)
+
+        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
+            (current == self.mission and status >= self.requiredMissionStatus))) or
             (current == self.mission and status == self.requiredMissionStatus)
     else
-        return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or current == self.mission
+        return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or
+            current == self.mission
     end
 end
 
 function BattlefieldMission:checkSkipCutscene(player)
-    local missionArea = self.missionArea or player:getNation()
-    local current = player:getCurrentMission(missionArea)
+    local missionArea       = self.missionArea or player:getNation()
+    local current           = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
-    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
+    local status            = player:getMissionStatus(missionStatusArea, self.missionStatus)
+
     return player:hasCompletedMission(missionArea, self.mission) or
         (current == self.mission and status > self.skipMissionStatus)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
     local missionArea = self.missionArea or player:getNation()
-    local current = player:getCurrentMission(missionArea)
+    local current     = player:getCurrentMission(missionArea)
+
     if current == self.mission then
         player:setLocalVar("battlefieldWin", battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS = (current ~= self.mission) and 1 or 0
+    local canSkipCS               = (current ~= self.mission) and 1 or 0
+
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
@@ -1248,9 +1287,9 @@ function BattlefieldMission:onEventFinishWin(player, csid, option)
     end
 end
 
-BattlefieldQuest = setmetatable({ }, { __index = Battlefield })
+BattlefieldQuest         = setmetatable({ }, { __index = Battlefield })
 BattlefieldQuest.__index = BattlefieldQuest
-BattlefieldQuest.__eq = function(m1, m2)
+BattlefieldQuest.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
@@ -1264,9 +1303,11 @@ BattlefieldQuest.isQuest = true
 function BattlefieldQuest:new(data)
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
-    obj.questArea = data.questArea
-    obj.quest = data.quest
+
+    obj.questArea  = data.questArea
+    obj.quest      = data.quest
     obj.canLoseExp = data.canLoseExp or false
+
     return obj
 end
 
@@ -1284,12 +1325,14 @@ end
 
 function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local status = player:getQuestStatus(self.questArea, self.quest)
+
     if status == QUEST_ACCEPTED then
         player:setLocalVar("battlefieldWin", battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS = status ~= QUEST_ACCEPTED and 1 or 0
+    local canSkipCS               = status ~= QUEST_ACCEPTED and 1 or 0
+
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
@@ -1297,7 +1340,6 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
     local canLeave      = false
-
     local mobs          = battlefield:getMobs(true, false)
     local status        = battlefield:getStatus()
     local players       = battlefield:getPlayers()
@@ -1460,6 +1502,7 @@ end
 
 function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
+
     if
         battlefield:getStatus() == xi.battlefield.status.WON and
         battlefield:getLocalVar("lootSeen") == 0
@@ -1506,19 +1549,5 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
 
         battlefield:setLocalVar("cutsceneTimer", 10)
         battlefield:setLocalVar("lootSeen", 1)
-    end
-end
-
--- TODO(jmcmorris): This is no longer needed once Limbus uses the new Battlefield system
-function xi.battlefield.HealPlayers(battlefield, players)
-    players = players or battlefield:getPlayers()
-    for _, player in pairs(players) do
-        local recoverHP = player:getMaxHP() - player:getHP()
-        local recoverMP = player:getMaxMP() - player:getMP()
-        player:addHP(recoverHP)
-        player:addMP(recoverMP)
-        player:resetRecasts()
-        player:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
-        player:messageBasic(xi.msg.basic.ALL_ABILITIES_RECHARGED)
     end
 end

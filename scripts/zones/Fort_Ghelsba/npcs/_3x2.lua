@@ -3,8 +3,6 @@
 --  NPC: Elevator Lever (upper)
 -- !pos  8.112 -52.665 96.084 141
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

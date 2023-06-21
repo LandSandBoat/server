@@ -4,7 +4,6 @@
 -- !pos -15 8 44 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

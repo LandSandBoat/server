@@ -2,7 +2,6 @@
 -- xi.effect.SUBLIMATION_ACTIVATED
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 
