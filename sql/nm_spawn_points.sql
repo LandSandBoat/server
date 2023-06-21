@@ -4102,7 +4102,7 @@ INSERT INTO `nm_spawn_points` VALUES (17387644,7,-50.378,0.009,59.088);
 INSERT INTO `nm_spawn_points` VALUES (17387644,8,-60.572,-0.097,45.966);
 INSERT INTO `nm_spawn_points` VALUES (17387644,9,-70.363,-0.148,17.687);
 INSERT INTO `nm_spawn_points` VALUES (17387644,10,-60.045,-0.517,41.996);
-INSERT INTO `nm_spawn_points` VALUES (17387920,0,-25.947,-0.075,23.783); -- Blubbery Bulge
+INSERT INTO `nm_spawn_points` VALUES (17387920,0,-225.237,2.295,-294.764); -- Blubbery Bulge
 INSERT INTO `nm_spawn_points` VALUES (17391802,0,219,-2,-99); -- Orcish Overlord
 INSERT INTO `nm_spawn_points` VALUES (17395800,0,-207.840,-0.498,109.939); -- Mee Deggi the Punisher
 INSERT INTO `nm_spawn_points` VALUES (17395800,1,-178.119,-0.644,153.039);

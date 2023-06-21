@@ -1984,13 +1984,23 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(82,84))
-    mob:setMod(xi.mod.DMG, -5000)
+    mob:setMod(xi.mod.UDMG, -5000)
+    -- if an eye then does not have slow movement speed and has lower HP in xarc
+    if mob:getFamily() == 4 then
+        -- base hp of eyes is 2600 for beauc, xarc eyes have about 1040
+        if mob:getZoneID() == xi.zone.DYNAMIS_XARCABARD then
+            mob:addMod(xi.mod.HPP, -60)
+        end
+    -- all other statues have slow movement speed
+    else
+        mob:setSpeed(20)
+    end
+
     mob:setTrueDetection(true)
     -- Disabling WHM job trait mods because their job is set to WHM in the DB.
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.MPHEAL, 0)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    mob:setSpeed(20)
 
     xi.dynamis.setMDB(mob)
     xi.dynamis.addParentListeners(mob)
