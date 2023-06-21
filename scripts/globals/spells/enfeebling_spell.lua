@@ -14,76 +14,76 @@ xi.spells = xi.spells or {}
 xi.spells.enfeebling = xi.spells.enfeebling or {}
 -----------------------------------
 local pTable =
-{   --                                 1                             2               3                   4                    5      6    7         8       9    10        11         12       13
-    --                 [Spell ID ] = { Effect,                       Stat-Used,      Resist-Mod,         MEVA-Mod,            pBase, DoT, Duration, Resist, msg, immunity, pSaboteur, pResist, mAcc },
+{   --                                 1                             2           3                   4                    5      6    7         8       9    10        11         12
+    --                 [Spell ID ] = { Effect,                       Stat-Used,  Resist-Mod,         MEVA-Mod,            pBase, DoT, Duration, Resist, msg, immunity, pSaboteur, mAcc },
 
     -- Black Magic
-    [xi.magic.spell.BIND         ] = { xi.effect.BIND,               xi.mod.INT,     xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,     false,     0 },
-    [xi.magic.spell.BINDGA       ] = { xi.effect.BIND,               xi.mod.INT,     xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,     false,     0 },
-    [xi.magic.spell.BLIND        ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,      false,     0 },
-    [xi.magic.spell.BLIND_II     ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,      false,     0 },
-    [xi.magic.spell.BLINDGA      ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,      false,     0 },
-    [xi.magic.spell.BREAK        ] = { xi.effect.PETRIFICATION,      xi.mod.INT,     xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,     false,     0 },
-    [xi.magic.spell.BREAKGA      ] = { xi.effect.PETRIFICATION,      xi.mod.INT,     xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,     false,     0 },
-    [xi.magic.spell.BURN         ] = { xi.effect.BURN,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.CHOKE        ] = { xi.effect.CHOKE,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.CURSE        ] = { xi.effect.CURSE_I,            xi.mod.INT,     xi.mod.CURSERES,    xi.mod.CURSE_MEVA,      50,   0,      300,      2,   0,        0, false,     false,     0 },
-    [xi.magic.spell.DISPEL       ] = { xi.effect.NONE,               xi.mod.INT,     0,                  0,                       0,   0,        0,      4,   0,        0, false,     false,   175 },
-    [xi.magic.spell.DISPELGA     ] = { xi.effect.NONE,               xi.mod.INT,     0,                  0,                       0,   0,        0,      4,   0,        0, false,     false,     0 },
-    [xi.magic.spell.DISTRACT     ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.DISTRACT_II  ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.DISTRACT_III ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.DROWN        ] = { xi.effect.DROWN,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.FRAZZLE      ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.FRAZZLE_II   ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.FRAZZLE_III  ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true ,   150 },
-    [xi.magic.spell.FROST        ] = { xi.effect.FROST,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.GRAVITY      ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    26,   0,      120,      2,   0,        2, true,      false,     0 },
-    [xi.magic.spell.GRAVITY_II   ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    32,   0,      180,      2,   0,        2, true,      false,     0 },
-    [xi.magic.spell.GRAVIGA      ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    50,   0,      120,      2,   0,        2, true,      false,     0 },
-    [xi.magic.spell.POISON       ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,      false,     0 },
-    [xi.magic.spell.POISON_II    ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,      false,    30 },
-    [xi.magic.spell.POISON_III   ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,      false,     0 },
-    [xi.magic.spell.POISONGA     ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,      false,     0 },
-    [xi.magic.spell.POISONGA_II  ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,      false,     0 },
-    [xi.magic.spell.POISONGA_III ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,      false,     0 },
-    [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false,     0 },
-    [xi.magic.spell.SLEEP        ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEPGA      ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false,     0 },
-    [xi.magic.spell.STUN         ] = { xi.effect.STUN,               xi.mod.INT,     xi.mod.STUNRES,     xi.mod.STUN_MEVA,        1,   0,        5,      4,   0,        8, false,     false,   200 },
-    [xi.magic.spell.VIRUS        ] = { xi.effect.PLAGUE,             xi.mod.INT,     xi.mod.VIRUSRES,    xi.mod.VIRUS_MEVA,       5,   3,       60,      2,   0,        0, false,     false,     0 },
+    [xi.magic.spell.BIND         ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,       0 },
+    [xi.magic.spell.BINDGA       ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,       0 },
+    [xi.magic.spell.BLIND        ] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,        0 },
+    [xi.magic.spell.BLIND_II     ] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,        0 },
+    [xi.magic.spell.BLINDGA      ] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,        0 },
+    [xi.magic.spell.BREAK        ] = { xi.effect.PETRIFICATION,      xi.mod.INT, xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,       0 },
+    [xi.magic.spell.BREAKGA      ] = { xi.effect.PETRIFICATION,      xi.mod.INT, xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,       0 },
+    [xi.magic.spell.BURN         ] = { xi.effect.BURN,               xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.CHOKE        ] = { xi.effect.CHOKE,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.CURSE        ] = { xi.effect.CURSE_I,            xi.mod.INT, xi.mod.CURSERES,    xi.mod.CURSE_MEVA,      50,   0,      300,      2,   0,        0, false,       0 },
+    [xi.magic.spell.DISPEL       ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0,        0, false,     175 },
+    [xi.magic.spell.DISPELGA     ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0,        0, false,       0 },
+    [xi.magic.spell.DISTRACT     ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.DISTRACT_II  ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.DISTRACT_III ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.DROWN        ] = { xi.effect.DROWN,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.FRAZZLE      ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.FRAZZLE_II   ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.FRAZZLE_III  ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0,        0, true,      150 },
+    [xi.magic.spell.FROST        ] = { xi.effect.FROST,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.GRAVITY      ] = { xi.effect.WEIGHT,             xi.mod.INT, xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    26,   0,      120,      2,   0,        2, true,        0 },
+    [xi.magic.spell.GRAVITY_II   ] = { xi.effect.WEIGHT,             xi.mod.INT, xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    32,   0,      180,      2,   0,        2, true,        0 },
+    [xi.magic.spell.GRAVIGA      ] = { xi.effect.WEIGHT,             xi.mod.INT, xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    50,   0,      120,      2,   0,        2, true,        0 },
+    [xi.magic.spell.POISON       ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISON_II    ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,       30 },
+    [xi.magic.spell.POISON_III   ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA     ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_II  ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_III ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
+    [xi.magic.spell.SLEEP        ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,       0 },
+    [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,       0 },
+    [xi.magic.spell.SLEEPGA      ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,       0 },
+    [xi.magic.spell.SLEEPGA_II   ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,       0 },
+    [xi.magic.spell.STUN         ] = { xi.effect.STUN,               xi.mod.INT, xi.mod.STUNRES,     xi.mod.STUN_MEVA,        1,   0,        5,      4,   0,        8, false,     200 },
+    [xi.magic.spell.VIRUS        ] = { xi.effect.PLAGUE,             xi.mod.INT, xi.mod.VIRUSRES,    xi.mod.VIRUS_MEVA,       5,   3,       60,      2,   0,        0, false,       0 },
 
     -- White Magic
-    [xi.magic.spell.FLASH        ] = { xi.effect.FLASH,              xi.mod.MND,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,     300,   0,       12,      4,   0,        0, true,      false,   200 },
-    [xi.magic.spell.INUNDATION   ] = { xi.effect.INUNDATION,         xi.mod.MND,     0,                  0,                       1,   0,      300,      5,   0,        0, false,     false,     0 },
-    [xi.magic.spell.PARALYZE     ] = { xi.effect.PARALYSIS,          xi.mod.MND,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,      true ,   -10 },
-    [xi.magic.spell.PARALYZE_II  ] = { xi.effect.PARALYSIS,          xi.mod.MND,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,      true ,     0 },
-    [xi.magic.spell.PARALYGA     ] = { xi.effect.PARALYSIS,          xi.mod.MND,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,      true ,     0 },
-    [xi.magic.spell.REPOSE       ] = { xi.effect.SLEEP_II,           xi.mod.MND,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   1,        1, false,     false,     0 },
-    [xi.magic.spell.SILENCE      ] = { xi.effect.SILENCE,            xi.mod.MND,     xi.mod.SILENCERES,  xi.mod.SILENCE_MEVA,     1,   0,      120,      2,   0,       16, false,     false,     0 },
-    [xi.magic.spell.SILENCEGA    ] = { xi.effect.SILENCE,            xi.mod.MND,     xi.mod.SILENCERES,  xi.mod.SILENCE_MEVA,     1,   0,      120,      2,   0,       16, false,     false,     0 },
-    [xi.magic.spell.SLOW         ] = { xi.effect.SLOW,               xi.mod.MND,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,      true ,    10 },
-    [xi.magic.spell.SLOW_II      ] = { xi.effect.SLOW,               xi.mod.MND,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,      true ,    10 },
-    [xi.magic.spell.SLOWGA       ] = { xi.effect.SLOW,               xi.mod.MND,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,      true ,     0 },
+    [xi.magic.spell.FLASH        ] = { xi.effect.FLASH,              xi.mod.MND, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,     300,   0,       12,      4,   0,        0, true,      200 },
+    [xi.magic.spell.INUNDATION   ] = { xi.effect.INUNDATION,         xi.mod.MND, 0,                  0,                       1,   0,      300,      5,   0,        0, false,       0 },
+    [xi.magic.spell.PARALYZE     ] = { xi.effect.PARALYSIS,          xi.mod.MND, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,      -10 },
+    [xi.magic.spell.PARALYZE_II  ] = { xi.effect.PARALYSIS,          xi.mod.MND, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,        0 },
+    [xi.magic.spell.PARALYGA     ] = { xi.effect.PARALYSIS,          xi.mod.MND, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0,       32, true,        0 },
+    [xi.magic.spell.REPOSE       ] = { xi.effect.SLEEP_II,           xi.mod.MND, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   1,        1, false,       0 },
+    [xi.magic.spell.SILENCE      ] = { xi.effect.SILENCE,            xi.mod.MND, xi.mod.SILENCERES,  xi.mod.SILENCE_MEVA,     1,   0,      120,      2,   0,       16, false,       0 },
+    [xi.magic.spell.SILENCEGA    ] = { xi.effect.SILENCE,            xi.mod.MND, xi.mod.SILENCERES,  xi.mod.SILENCE_MEVA,     1,   0,      120,      2,   0,       16, false,       0 },
+    [xi.magic.spell.SLOW         ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,       10 },
+    [xi.magic.spell.SLOW_II      ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,       10 },
+    [xi.magic.spell.SLOWGA       ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,        0 },
 
     -- Ninjutsu
-    [xi.magic.spell.AISHA_ICHI   ] = { xi.effect.ATTACK_DOWN,        xi.mod.INT,     0,                  0,                      15,   0,      120,      4,   1,        0, false,     false,     0 },
-    [xi.magic.spell.DOKUMORI_ICHI] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      3,   3,       60,      2,   0,      256, false,     false,     0 },
-    [xi.magic.spell.DOKUMORI_NI  ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,     10,   3,      120,      2,   0,      256, false,     false,     0 },
-    [xi.magic.spell.DOKUMORI_SAN ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,     20,   3,      360,      2,   0,      256, false,     false,     0 },
-    [xi.magic.spell.HOJO_ICHI    ] = { xi.effect.SLOW,               xi.mod.INT,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     1465,   0,      180,      2,   0,      128, false,     false,     0 },
-    [xi.magic.spell.HOJO_NI      ] = { xi.effect.SLOW,               xi.mod.INT,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     1953,   0,      300,      2,   0,      128, false,     false,     0 },
-    [xi.magic.spell.HOJO_SAN     ] = { xi.effect.SLOW,               xi.mod.INT,     xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     2930,   0,      420,      2,   0,      128, false,     false,     0 },
-    [xi.magic.spell.JUBAKU_ICHI  ] = { xi.effect.PARALYSIS,          xi.mod.INT,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   20,   0,      180,      2,   1,       32, false,     false,     0 },
-    [xi.magic.spell.JUBAKU_NI    ] = { xi.effect.PARALYSIS,          xi.mod.INT,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   30,   0,      300,      2,   1,       32, false,     false,     0 },
-    [xi.magic.spell.JUBAKU_SAN   ] = { xi.effect.PARALYSIS,          xi.mod.INT,     xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   35,   0,      420,      2,   1,       32, false,     false,     0 },
-    [xi.magic.spell.KURAYAMI_ICHI] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      20,   0,      180,      2,   0,       64, false,     false,     0 },
-    [xi.magic.spell.KURAYAMI_NI  ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      30,   0,      300,      2,   0,       64, false,     false,     0 },
-    [xi.magic.spell.KURAYAMI_SAN ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      40,   0,      420,      2,   0,       64, false,     false,     0 },
-    [xi.magic.spell.YURIN_ICHI   ] = { xi.effect.INHIBIT_TP,         xi.mod.INT,     0,                  0,                      10,   0,      180,      3,   1,        0, false,     false,     0 },
+    [xi.magic.spell.AISHA_ICHI   ] = { xi.effect.ATTACK_DOWN,        xi.mod.INT, 0,                  0,                      15,   0,      120,      4,   1,        0, false,       0 },
+    [xi.magic.spell.DOKUMORI_ICHI] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      3,   3,       60,      2,   0,      256, false,       0 },
+    [xi.magic.spell.DOKUMORI_NI  ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,     10,   3,      120,      2,   0,      256, false,       0 },
+    [xi.magic.spell.DOKUMORI_SAN ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,     20,   3,      360,      2,   0,      256, false,       0 },
+    [xi.magic.spell.HOJO_ICHI    ] = { xi.effect.SLOW,               xi.mod.INT, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     1465,   0,      180,      2,   0,      128, false,       0 },
+    [xi.magic.spell.HOJO_NI      ] = { xi.effect.SLOW,               xi.mod.INT, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     1953,   0,      300,      2,   0,      128, false,       0 },
+    [xi.magic.spell.HOJO_SAN     ] = { xi.effect.SLOW,               xi.mod.INT, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,     2930,   0,      420,      2,   0,      128, false,       0 },
+    [xi.magic.spell.JUBAKU_ICHI  ] = { xi.effect.PARALYSIS,          xi.mod.INT, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   20,   0,      180,      2,   1,       32, false,       0 },
+    [xi.magic.spell.JUBAKU_NI    ] = { xi.effect.PARALYSIS,          xi.mod.INT, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   30,   0,      300,      2,   1,       32, false,       0 },
+    [xi.magic.spell.JUBAKU_SAN   ] = { xi.effect.PARALYSIS,          xi.mod.INT, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,   35,   0,      420,      2,   1,       32, false,       0 },
+    [xi.magic.spell.KURAYAMI_ICHI] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      20,   0,      180,      2,   0,       64, false,       0 },
+    [xi.magic.spell.KURAYAMI_NI  ] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      30,   0,      300,      2,   0,       64, false,       0 },
+    [xi.magic.spell.KURAYAMI_SAN ] = { xi.effect.BLINDNESS,          xi.mod.INT, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,      40,   0,      420,      2,   0,       64, false,       0 },
+    [xi.magic.spell.YURIN_ICHI   ] = { xi.effect.INHIBIT_TP,         xi.mod.INT, 0,                  0,                      10,   0,      180,      3,   1,        0, false,       0 },
 }
 
 local elementalDebuffTable =
@@ -373,21 +373,13 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local mEvaMod      = pTable[spellId][4]
     local resistStages = pTable[spellId][8]
     local message      = pTable[spellId][9]
-    local bonusMacc    = pTable[spellId][13]
+    local bonusMacc    = pTable[spellId][12]
 
     -- Magic Hit Rate calculations.
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-
-    -- Calculate individualy resist rates for potency and duration.
-    local resistDuration = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
-    local resistPotency  = 1
-
-    -- Check if potency is affected by resist rate.
-    if pTable[spellId][12] then
-        resistPotency  = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
-    end
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
 
     ------------------------------
     -- STEP 3: Check if spell resists.
@@ -398,13 +390,11 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             skillType == xi.skill.ENFEEBLING_MAGIC and
             caster:hasStatusEffect(xi.effect.STYMIE)
         then
-            resistDuration = 1
-            resistPotency  = 1
+            resistRate = 1
 
         -- Fealty
         elseif target:hasStatusEffect(xi.effect.FEALTY) then
-            resistDuration = 0
-            resistPotency  = 0
+            resistRate = 1
         end
     end
 
@@ -419,11 +409,10 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- Calculate Duration.
     local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId, spellEffect, skillType)
-    duration       = math.floor(duration * resistDuration)
+    duration       = math.floor(duration * resistRate)
 
     -- Calculate potency.
     local potency = xi.spells.enfeebling.calculatePotency(caster, target, spellId, spellEffect, skillType, statUsed)
-    potency       = math.floor(potency * resistPotency)
 
     -- Set tick (Poison, etc...)
     local tick = pTable[spellId][6]
