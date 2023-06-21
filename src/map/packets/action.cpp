@@ -113,8 +113,8 @@ CActionPacket::CActionPacket(action_t& action)
         {
             uint16 id = action.actionid;
 
-            // higher number of bits than anything else that we know of. CAP OF 4095 (2300ish is abyssea tp moves)!
-            packBitsBE(data, id, 86, 12);
+            // higher number of bits than anything else that we know of. CAP OF 8191 (2300ish is abyssea tp moves)!
+            packBitsBE(data, id, 86, 13);
         }
         break;
         case ACTION_ITEM_START:
