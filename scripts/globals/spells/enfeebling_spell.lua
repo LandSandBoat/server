@@ -16,7 +16,6 @@ xi.spells.enfeebling = xi.spells.enfeebling or {}
 local pTable =
 {   --                                 1                             2           3                   4                    5      6    7         8       9    10        11         12
     --                 [Spell ID ] = { Effect,                       Stat-Used,  Resist-Mod,         MEVA-Mod,            pBase, DoT, Duration, Resist, msg, immunity, pSaboteur, mAcc },
-
     -- Black Magic
     [xi.magic.spell.BIND         ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,       0 },
     [xi.magic.spell.BINDGA       ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0,        4, false,       0 },
@@ -95,6 +94,20 @@ local elementalDebuffTable =
     [xi.effect.FROST] = { xi.effect.BURN  },
     [xi.effect.RASP ] = { xi.effect.CHOKE },
     [xi.effect.SHOCK] = { xi.effect.RASP  },
+}
+
+local immunobreakTable =
+{
+    [xi.effect.SLEEP_I      ] = { xi.mod.SLEEP_IMMUNOBREAK    },
+    [xi.effect.POISON       ] = { xi.mod.POISON_IMMUNOBREAK   },
+    [xi.effect.PARALYSIS    ] = { xi.mod.PARALYZE_IMMUNOBREAK },
+    [xi.effect.BLINDNESS    ] = { xi.mod.BLIND_IMMUNOBREAK    },
+    [xi.effect.SILENCE      ] = { xi.mod.SILENCE_IMMUNOBREAK  },
+    [xi.effect.PETRIFICATION] = { xi.mod.PETRIFY_IMMUNOBREAK  },
+    [xi.effect.BIND         ] = { xi.mod.BIND_IMMUNOBREAK     },
+    [xi.effect.WEIGHT       ] = { xi.mod.GRAVITY_IMMUNOBREAK  },
+    [xi.effect.SLOW         ] = { xi.mod.SLOW_IMMUNOBREAK     },
+    [xi.effect.ADDLE        ] = { xi.mod.ADDLE_IMMUNOBREAK    },
 }
 
 local function getElementalDebuffPotency(caster, statUsed)
@@ -374,12 +387,18 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local resistStages = pTable[spellId][8]
     local message      = pTable[spellId][9]
     local bonusMacc    = pTable[spellId][12]
+    local rankModifier = 0
+
+    -- Calculate rank modifier.
+    if immunobreakTable[spellEffect] then
+        rankModifier = target:getMod(immunobreakTable[spellEffect][1])
+    end
 
     -- Magic Hit Rate calculations.
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod, rankModifier)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate, rankModifier)
 
     ------------------------------
     -- STEP 3: Check if spell resists.
@@ -394,11 +413,30 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
 
         -- Fealty
         elseif target:hasStatusEffect(xi.effect.FEALTY) then
-            resistRate = 1
+            resistRate = 0
         end
     end
 
-    if resistDuration <= 1 / (2 ^ resistStages) then
+    if resistRate <= 1 / (2 ^ resistStages) then
+        -- Attempt immunobreak.
+        if
+            caster:isPC() and
+            target:isMob() and
+            immunobreakTable[spellEffect] and
+            skillType == xi.skill.ENFEEBLING_MAGIC
+        then
+            local immunobreakRandom = math.random(1, 100)
+            local immunobreakChance = magicHitRate / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
+
+            -- We successfuly trigger Immunobreak. Change tagret modifier and set correct message.
+            if immunobreakRandom <= immunobreakChance then
+                target:setMod(immunobreakTable[spellEffect][1], rankModifier + 1) -- TODO: Add equipment modifier (x2) here.
+
+                spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
+            end
+        end
+
+        -- We still resited.
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect

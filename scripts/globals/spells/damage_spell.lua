@@ -385,13 +385,13 @@ xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillTyp
     local magicAcc = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
 
     -- Get Target Magic Evasion.
-    local magicEva = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
+    local magicEva = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0, 0) -- false = not an enfeeble.
 
     -- Calculate Magic Hit Rate with the previous 2 values.
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
     -- Calculate Resist Rate.
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate, 0)
 
     return resist
 end

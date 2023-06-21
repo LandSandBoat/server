@@ -220,7 +220,7 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
 end
 
 -- Target Magic Evasion
-xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spellElement, isEnfeeble, mEvaMod)
+xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spellElement, isEnfeeble, mEvaMod, rankModifier)
     local magicEva   = target:getMod(xi.mod.MEVA) -- Base MACC.
     local resistRank = 0 -- Elemental specific Resistance rank. Acts as multiplier to base MACC.
     local resMod     = 0 -- Elemental specific magic evasion. Acts as a additive bonus to base MACC after affected by resistance rank.
@@ -231,6 +231,10 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
         resMod     = target:getMod(elementTable[spellElement][3])
         resistRank = target:getMod(elementTable[spellElement][4])
+
+        if resistRank > 4 then
+            resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
+        end
 
         magicEva = magicEva * (1 + (resistRank * 0.075))
         magicEva = magicEva + resMod
@@ -266,9 +270,9 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     return magicHitRate
 end
 
-xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate)
+xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
     local targetResistRate = 0 -- The variable we return.
-    local targetResistRank = 0
+    local targetResistRank = target:getMod(elementTable[spellElement][4])
 
     ----------------------------------------
     -- Handle "Magic Shield" status effect.
@@ -280,8 +284,11 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     ----------------------------------------
     -- Handle target resistance rank.
     ----------------------------------------
+    -- Elemental resistance rank.
     if spellElement ~= xi.magic.ele.NONE then
-        targetResistRank = target:getMod(elementTable[spellElement][4])
+        if targetResistRank > 4 then
+            targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
+        end
     end
 
     -- Skillchains lowers target resistance rank by 1.
