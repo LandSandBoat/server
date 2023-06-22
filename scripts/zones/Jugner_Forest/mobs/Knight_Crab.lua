@@ -11,6 +11,8 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     -- King Arthro PHs are not charmable
     mob:setMobMod(xi.mobMod.CHARMABLE, 0)
+    -- Should not despawn when too far from spawn area
+    mob:setMobMod(xi.mobMod.NO_DESPAWN, 1)
 end
 
 entity.onMobSpawn = function(mob)
