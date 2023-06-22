@@ -387,7 +387,13 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local resistStages = pTable[spellId][8]
     local message      = pTable[spellId][9]
     local bonusMacc    = pTable[spellId][12]
+    local resistRank   = 0
     local rankModifier = 0
+
+    -- Get target resistance rank.
+    if spellElement ~= xi.magic.ele.NONE then
+        resistRank = target:getMod(xi.combat.magicHitRate.elementTable[spellElement][4])
+    end
 
     -- Calculate rank modifier.
     if immunobreakTable[spellEffect] then
@@ -401,7 +407,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate, rankModifier)
 
     ------------------------------
-    -- STEP 3: Check if spell resists.
+    -- STEP 3: Check if spell resists and Immunobreak.
     ------------------------------
     if spellEffect ~= xi.effect.NONE then
         -- Stymie
@@ -417,13 +423,15 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         end
     end
 
+    -- The effect will get resisted.
     if resistRate <= 1 / (2 ^ resistStages) then
         -- Attempt immunobreak.
         if
             caster:isPC() and
             target:isMob() and
-            immunobreakTable[spellEffect] and
-            skillType == xi.skill.ENFEEBLING_MAGIC
+            immunobreakTable[spellEffect] and          -- Only certain effects can be immunobroken.
+            skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
+            resistRank > 4                             -- Only mobs with a resistace rank of 5+ (50% EEM) can be immunobroken.
         then
             local immunobreakRandom = math.random(1, 100)
             local immunobreakChance = magicHitRate / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
