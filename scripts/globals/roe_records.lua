@@ -1840,7 +1840,7 @@ function getRoeRecords(triggers)
         [1373] =
         { -- Rhapsodies of Vana'diel 1-1 +
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER } },
+            reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL } },
             flags = set { "retro" },
             reward = { item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
         },
