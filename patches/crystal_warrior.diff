@@ -73,7 +73,7 @@ index e503b6af23..681a67e30b 100644
          // Moon phase skillup modifiers
          uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
 diff --git "a/src/map/utils/charutils.cpp" "b/src/map/utils/charutils.cpp"
-index a3d1ee95b1..fa45f94b54 100644
+index a3d1ee95b1..88e5bf2595 100644
 --- "a/src/map/utils/charutils.cpp"
 +++ "b/src/map/utils/charutils.cpp"
 @@ -1855,7 +1855,7 @@ namespace charutils
@@ -171,6 +171,7 @@ index a3d1ee95b1..fa45f94b54 100644
 +
          uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
          bool   onLimitMode = false;
+ 
 
 diff --git a/src/map/roe.cpp b/src/map/roe.cpp
 index 718518c0ff..408fd8f556 100644
