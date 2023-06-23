@@ -122,7 +122,7 @@ index a3d1ee95b1..fa45f94b54 100644
              EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
              float          exp      = (float)GetBaseExp(maxlevel, moblevel);
  
-+            if ((charutils::GetCharVar(PMember, "[CW]STATUS") > 0) && pcinzone > 1 && !PMember->PParty->HasTrusts())
++            if ((charutils::GetCharVar(PMember, "[CW]STATUS") > 0) && pcinzone > 1 && PMember != nullptr && PMember->PParty != nullptr && !PMember->PParty->HasTrusts())
 +            {
 +                if (memberlevel >= 60)
 +                {
@@ -206,4 +206,4 @@ index 4b05a8e9a8..d28ff46a3f 100644
 +        if (!settings::get<bool>("map.LV_CAP_MISSION_BCNM") && m_isMission == 1 && PChar->getCharVar("[CW]STATUS") == 0)
          {
              cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
-         }
+         
