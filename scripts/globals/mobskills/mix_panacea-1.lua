@@ -39,13 +39,17 @@ local statii =
     xi.effect.MAGIC_ATK_DOWN,
 }
 
+-- TODO: verify messaging
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local lastEffect = 0
     for _, effect in pairs(statii) do
-        target:delStatusEffect(effect)
+        if target:delStatusEffect(effect) then
+            lastEffect = effect
+        end
     end
 
     skill:setMsg(xi.msg.basic.SKILL_ERASE)
-    return 0
+    return lastEffect
 end
 
 return mobskillObject

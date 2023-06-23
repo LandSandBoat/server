@@ -43,10 +43,10 @@ jobs:
 
             // Count the filled in checkboxes:
             // 1x pre-filled
-            // 2x to be filled
-            // Minimum total: 3
+            // 3x to be filled
+            // Minimum total: 4
             const checkbox_count = count_instances(body_text, "[x]")
-            if (checkbox_count < 3)
+            if (checkbox_count < 4)
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
                 const result = await github.rest.issues.createComment({

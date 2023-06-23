@@ -3,8 +3,10 @@
 --  ZNM: Gotoh Zha the Redolent
 --Mobid: 16986430
 -----------------------------------
-mixins ={require("scripts/mixins/job_special"),
-         require("scripts/mixins/rage")}
+mixins ={
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/rage")
+}
 -----------------------------------
 local entity = {}
 entity.onMobInitialize = function(mob)

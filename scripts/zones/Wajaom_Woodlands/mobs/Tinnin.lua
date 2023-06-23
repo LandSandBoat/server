@@ -4,8 +4,11 @@
 -- !pos 276 0 -694 51
 -- Spawned with Monkey Wine: !additem 2573
 -----------------------------------
-mixins ={require("scripts/mixins/job_special"),
-require("scripts/mixins/rage")}
+mixins =
+{
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/rage")
+}
 -----------------------------------
 local entity = {}
 

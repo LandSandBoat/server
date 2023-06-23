@@ -5,8 +5,10 @@
 -- Mobid: 17101205
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
-mixins  = {require("scripts/mixins/job_special"),
-           require("scripts/mixins/rage")}
+mixins  = {
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/rage")
+}
 -----------------------------------
 local entity = {}
 entity.onMobInitialize = function(mob)

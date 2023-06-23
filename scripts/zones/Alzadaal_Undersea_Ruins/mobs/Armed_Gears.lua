@@ -4,9 +4,11 @@
 -- !pos -19 -4 -153
 -- Mobid: 17072178
 -----------------------------------
-mixins ={require("scripts/mixins/job_special"),
-         require("scripts/mixins/families/gears"),
-         require("scripts/mixins/rage")}
+mixins ={
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/families/gears"),
+    require("scripts/mixins/rage")
+}
 
 -----------------------------------
 local entity = {}
