@@ -1,7 +1,7 @@
-diff --git a/src/map/entities/battleentity.h b/src/map/entities/battleentity.h
-index d03fd3160c3..afa119cc719 100644
---- a/src/map/entities/battleentity.h
-+++ b/src/map/entities/battleentity.h
+diff --git "a/src/map/entities/battleentity.h" "b/src/map/entities/battleentity.h"
+index b804caaa77..a8a3c4799e 100644
+--- "a/src/map/entities/battleentity.h"
++++ "b/src/map/entities/battleentity.h"
 @@ -210,7 +210,8 @@ enum SUBSKILLTYPE
      SUBSKILL_RAPHIE     = 65,
      SUBSKILL_MAC        = 66,
