@@ -196,7 +196,7 @@ index 718518c0ff..408fd8f556 100644
              return;
          }
 diff --git "a/src/map/battlefield.cpp" "b/src/map/battlefield.cpp"
-index 4b05a8e9a8..d28ff46a3f 100644
+index d262b3fa4a..c33b4140b5 100644
 --- "a/src/map/battlefield.cpp"
 +++ "b/src/map/battlefield.cpp"
 @@ -269,7 +269,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
@@ -207,4 +207,4 @@ index 4b05a8e9a8..d28ff46a3f 100644
 +        if (!settings::get<bool>("map.LV_CAP_MISSION_BCNM") && m_isMission == 1 && PChar->getCharVar("[CW]STATUS") == 0)
          {
              cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
-         
+         }
