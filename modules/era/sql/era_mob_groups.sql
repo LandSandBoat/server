@@ -954,6 +954,7 @@ UPDATE mob_groups SET minLevel = 52, maxLevel = 58 WHERE name = "Bloodsucker_fis
 -- Toraimarai_Canal (Zone 169)
 -- ------------------------------------------------------------
 
+UPDATE mob_groups SET content_tag='WOTG' WHERE name='Brazen_Bones' AND groupid='40' AND zoneid='169';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Blackwater_Pugil' AND groupid='24' AND zoneid='169';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Plunderer_Crab' AND groupid='25' AND zoneid='169';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Deviling_Bats' AND groupid='28' AND zoneid='169';
