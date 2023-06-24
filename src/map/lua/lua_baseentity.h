@@ -544,6 +544,8 @@ public:
     // Battle Utilities
     bool isAlive();
     bool isDead();
+
+    bool hasRaiseTractorMenu();
     void sendRaise(uint8 raiseLevel);
     void sendReraise(uint8 raiseLevel);
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
