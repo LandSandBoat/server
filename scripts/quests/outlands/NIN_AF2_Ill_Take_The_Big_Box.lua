@@ -166,6 +166,21 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
+        {
+            ['Enagakure'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if
+                        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
+                        quest:getVar(player, 'nmKilled') == 0
+                    then
+                        quest:setVar(player, 'nmKilled', 1)
+                    end
+                end,
+            },
+        },
     },
 }
 
