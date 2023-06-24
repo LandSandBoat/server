@@ -1185,7 +1185,13 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         slot = xi.slot.MAIN
     end
 
-    if defender:getMainJob() == xi.job.MNK then
+    -- Mobs guarding a weponskill is a reduction in dmg.
+    -- Players guarding a mobskill handled in handleGuard
+    if
+        defender:getMainJob() == xi.job.MNK or
+        defender:getMainJob() == xi.job.PUP and
+        not defender:isPC()
+    then
         if
             defender:getGuardRate(attacker) > math.random(100) and
             defender:isFacing(attacker)
@@ -1222,6 +1228,7 @@ xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
         absorb = utils.clamp(absorb - target:getShieldAbsorptionRate(), 0, 100)
         absorb = absorb + target:getMod(xi.mod.SHIELD_DEF_BONUS)
         finaldmg = math.floor(finaldmg * (absorb / 100))
+        target:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
     end
 
     return finaldmg
@@ -1236,6 +1243,32 @@ xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedH
     then -- Try parry, if so miss.
         if target:getSystem() == xi.eco.BEASTMEN or target:isPC() then
             missChance = 1
+        end
+
+        if target:isPC() then
+            target:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+        end
+    end
+
+    return missChance
+end
+
+xi.weaponskills.handleGuard = function(attacker, target, missChance, guaranteedHit)
+    local gHit = guaranteedHit or false
+    if
+        target:getMainJob() == xi.job.MNK or
+        target:getMainJob() == xi.job.PUP
+    then
+        if
+            target:getGuardRate(attacker) > math.random(100) and
+            target:isFacing(attacker) and
+            target:isPC() and
+            not gHit
+        then
+            -- Per testing shown by genome mob skills register as a miss when guarded
+            -- https://genomeffxi.livejournal.com/18269.html
+            missChance = 1
+            target:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
         end
     end
 
