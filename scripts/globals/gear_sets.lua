@@ -2540,7 +2540,19 @@ xi.gear_sets.createItemToSetId = function()
 
     for setId, setData in pairs(gearSets) do
         for _, itemId in ipairs(setData.items) do
-            itemTable[itemId] = setId
+            if itemTable[itemId] ~= nil then -- Handle items that belong to multiple sets such as Virtue Stone
+                if type(itemTable[itemId]) == 'table' then
+                    table.insert(itemTable[itemId], setId)
+                else
+                    local setIdTable = {}
+
+                    setIdTable[1] = itemTable[itemId]
+                    setIdTable[2] = setId
+                    itemTable[itemId] = setIdTable
+                end
+            else
+                itemTable[itemId] = setId
+            end
         end
     end
 
@@ -2561,7 +2573,13 @@ xi.gear_sets.checkForGearSet = function(player)
         local setId   = xi.gear_sets.itemToSetId[equipId]
 
         if setId then
-            equippedSets[setId] = equippedSets[setId] and (equippedSets[setId] + 1) or 1
+            if type(setId) == 'table' then
+                for _, v in ipairs(setId) do
+                    equippedSets[v] = equippedSets[v] and (equippedSets[v] + 1) or 1
+                end
+            else
+                equippedSets[setId] = equippedSets[setId] and (equippedSets[setId] + 1) or 1
+            end
         end
     end
 
