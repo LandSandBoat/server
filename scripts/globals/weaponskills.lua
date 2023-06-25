@@ -596,9 +596,13 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- store bonus damage for first hit, for use after other calculations are done
     local firstHitBonus = (finaldmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100
 
-    local hitsDone = 1
+    -- Reset fTP if it's not supposed to carry over across all hits for this WS
+    -- We'll recalculate our mainhand damage after doing offhand
+    if not wsParams.multiHitfTP then
+        ftp = 1
+    end
 
-    ftp = 1 + calcParams.bonusfTP
+    local hitsDone = 1
 
     base = (calcParams.weaponDamage[1] + wsMods) * ftp
 
@@ -641,7 +645,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         calcParams.critRate = calcParams.critRate + mainSlotCritBonus - subSlotCritBonus
     end
 
-    -- Reset fTP if it's not supposed to carry over across all hits for this WS
     calcParams.tpHitsLanded = calcParams.hitsLanded -- Store number of TP hits that have landed thus far
     calcParams.hitsLanded = 0 -- Reset counter to start tracking additional hits (from WS or Multi-Attacks)
 
