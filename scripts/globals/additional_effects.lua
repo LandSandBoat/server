@@ -117,6 +117,18 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
         params.skillType = item:getSkillType()
         params.damageSpell = true
         params.includemab = true
+    -- need to also specify skill and params for bloody bolts
+    elseif
+        addType == xi.additionalEffect.procType.HP_DRAIN and
+        element == xi.magic.ele.DARK and
+        item:getSkillType() == xi.skill.MARKSMANSHIP
+    then
+        params.element = xi.magic.ele.DARK
+        params.attribute = xi.mod.INT
+        params.skillType = item:getSkillType()
+    -- need to also specify the skill for any other bolts
+    elseif item:getSkillType() == xi.skill.MARKSMANSHIP then
+        params.skillType = item:getSkillType()
     end
 
     damage = xi.magic.addBonusesAbility(attacker, element, defender, damage, params)
