@@ -19,11 +19,13 @@ end
 zoneObject.onInitialize = function(zone)
     -- KV Persistence
     UpdateNMSpawnPoint(ID.mob.KING_VINEGARROON)
-    DisallowRespawn(GetMobByID(ID.mob.KING_VINEGARROON):getID(), true)
 
-    if os.time() < GetServerVariable("\\[SPAWN\\]17289575") then
-        GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(GetServerVariable("\\[SPAWN\\]17289575") - os.time())
+    if os.time() < GetServerVariable("\\[SPAWN\\]" .. tostring(ID.mob.KING_VINEGARROON)) then
+        GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(GetServerVariable("\\[SPAWN\\]" .. tostring(ID.mob.KING_VINEGARROON)) - os.time())
     end
+
+    -- need DisallowRespawn after setRespawnTime because setRespawnTime sets allowRespawn to true
+    DisallowRespawn(ID.mob.KING_VINEGARROON, true)
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
@@ -86,26 +88,48 @@ zoneObject.onZoneWeatherChange = function(weather)
         end
     end
 
-    local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
-    local kvre = GetServerVariable("\\[SPAWN\\]17289575")
+    local zone = GetZone(xi.zone.WESTERN_ALTEPA_DESERT)
     if
-        not kingV:isSpawned() and
-        os.time() > kvre and
-        weather == xi.weather.DUST_STORM
-    then
-        -- 10% chance for KV pop at start of single earth weather
-        local chance = math.random(1, 10)
-        if chance == 1 then
-            DisallowRespawn(kingV:getID(), false)
-            SpawnMob(ID.mob.KING_VINEGARROON)
-        end
-    elseif
-        not kingV:isSpawned() and
-        os.time() > kvre and
+        weather == xi.weather.DUST_STORM or
         weather == xi.weather.SAND_STORM
     then
-        DisallowRespawn(kingV:getID(), false)
-        SpawnMob(ID.mob.KING_VINEGARROON)
+        zone:setLocalVar("NeedToCheckKV", 1)
+    else
+        zone:setLocalVar("NeedToCheckKV", 0)
+    end
+end
+
+zoneObject.onZoneTick = function(zone)
+    -- Need to check KV because of weather
+    if zone:getLocalVar("NeedToCheckKV") == 1 then
+        local kvre = GetServerVariable("\\[SPAWN\\]" .. tostring(ID.mob.KING_VINEGARROON))
+        -- Cannot set NeedToCheckKV to 0 until after this condition
+        -- in case window opens during this weather
+        if os.time() > kvre then
+            local weather = zone:getWeather()
+            local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
+
+            if
+                not kingV:isSpawned() and
+                weather == xi.weather.DUST_STORM
+            then
+                -- 10% chance for KV pop at start of single earth weather
+                local chance = math.random(1, 10)
+                if chance == 1 then
+                    DisallowRespawn(ID.mob.KING_VINEGARROON, false)
+                    SpawnMob(ID.mob.KING_VINEGARROON)
+                end
+            elseif
+                not kingV:isSpawned() and
+                weather == xi.weather.SAND_STORM
+            then
+                DisallowRespawn(ID.mob.KING_VINEGARROON, false)
+                SpawnMob(ID.mob.KING_VINEGARROON)
+            end
+
+            -- did a full check during this weather
+            zone:setLocalVar("NeedToCheckKV", 0)
+        end
     end
 end
 
