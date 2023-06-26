@@ -252,6 +252,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     if tpeffect ~= xi.mobskills.physicalTpBonus.RANGED then
         chance = xi.weaponskills.handleParry(mob, target, chance)
+        chance = xi.weaponskills.handleGuard(mob, target, chance)
     end
 
     -- first hit has a higher chance to land

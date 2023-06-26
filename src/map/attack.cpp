@@ -115,17 +115,23 @@ void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
 /************************************************************************
  *                                                                      *
  *  Gets the guarded flag.                                              *
+ *      param calculate: defaults to true.                              *
+ *      Determines if a calc of the value is allowed if not present     *
  *                                                                      *
  ************************************************************************/
-bool CAttack::IsGuarded()
+bool CAttack::IsGuarded(bool calculate)
 {
     if (m_isGuarded.has_value())
     {
         return m_isGuarded.value();
     }
 
-    m_isGuarded.emplace(attackutils::IsGuarded(m_attacker, m_victim));
-    return m_isGuarded.value();
+    if (calculate)
+    {
+        m_isGuarded.emplace(attackutils::IsGuarded(m_attacker, m_victim));
+    }
+
+    return m_isGuarded.value_or(false);
 }
 
 /************************************************************************
@@ -161,16 +167,18 @@ bool CAttack::IsBlocked() const
 /************************************************************************
  *                                                                      *
  *  Gets the Parried flag if set, else calculates a new one and returns.*
+ *      param calculate: defaults to true.                              *
+ *      Determines if a calc of the value is allowed if not present     *
  *                                                                      *
  ************************************************************************/
-bool CAttack::IsParried()
+bool CAttack::IsParried(bool calculate)
 {
     if (m_isParried.has_value())
     {
         return m_isParried.value();
     }
 
-    if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
+    if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN && calculate)
     {
         m_isParried.emplace(attackutils::IsParried(m_attacker, m_victim));
     }

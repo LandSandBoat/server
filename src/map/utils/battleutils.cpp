@@ -1957,7 +1957,7 @@ namespace battleutils
             CItemWeapon* weapon               = GetEntityWeapon(PAttacker, SLOT_MAIN);
             uint16       attackSkill          = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
 
-            uint8 parryRate = std::clamp<uint8>((uint8)(20.0f + (defender_parry_skill - attackSkill) / 8.0f), 5, 30);
+            int parryRate = std::clamp<int>((int)(20.0f + (defender_parry_skill - attackSkill) / 8.0f), 5, 30);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
