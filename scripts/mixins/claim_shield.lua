@@ -110,7 +110,11 @@ g_mixins.claim_shield = function(claimshieldMob)
                 -- Setup Log File
                 local fileName  = os.date("%x", os.time()):gsub("/", "-")
                 local textToAdd = "<h3>[" .. os.date("%X", os.time()) .. "] - { " .. mobArg:getName() .. " }</h3><br><b>&emsp;Winners:</b><br>&emsp;<ul>"
-
+            
+                if claimWinner:isPC() then
+                    claimWinner:incrementCharVar("[LB]CLAIMS", 1)
+                end
+            
                 -- Message winner and their party/alliance that they've won
                 local alliance = claimWinner:getAlliance()
 
