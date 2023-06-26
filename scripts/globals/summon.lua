@@ -124,7 +124,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
     calcParams.skill = skill
     calcParams.fSTR = xi.summon.getAvatarfSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
     calcParams.melee = true
-    calcParams.tp = avatar:getTP()
+    calcParams.tp = skill:getTP()
     calcParams.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
 
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
@@ -437,7 +437,7 @@ xi.summon.calculateMagicBloodPactParams = function(avatar, target, skill, wsPara
     params.melee = false
     params.skill = skill
     params.dStat = utils.ternary(wsParams.breath, 0, xi.summon.dStat(avatar, target, xi.mod.INT))
-    params.tp = avatar:getTP() + wsParams.tpBonus
+    params.tp = skill:getTP() + wsParams.tpBonus
     params.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
     return params
 end
