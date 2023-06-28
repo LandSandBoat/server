@@ -1,11 +1,9 @@
-xi = xi or {}
-xi.loot = xi.loot or {}
-
 ------------------------------------
 -- Drop Rarity Rates
 ------------------------------------
+xi = xi or {}
 
-xi.loot.rate =
+xi.drop_rate =
 {
     NEVER       = 0, --   0.00%
     ULTRA_RARE  = 1, --   0.10%
