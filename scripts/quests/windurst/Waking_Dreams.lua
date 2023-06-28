@@ -50,7 +50,6 @@ quest.sections =
             ['Kerutoto'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: Options still appear even if player has the item or spell
                     if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
                         local availRewards = 0
                             + (player:hasItem(xi.items.DIABOLOSS_POLE) and 1 or 0)    -- Diabolos's Pole
@@ -64,9 +63,27 @@ quest.sections =
                             xi.items.DIABOLOSS_EARRING,
                             xi.items.DIABOLOSS_RING,
                             xi.items.DIABOLOSS_TORQUE,
-                            { availRewards })
+                            0, 0, 0, availRewards)
                     end
                 end,
+            },
+
+            onEventUpdate =
+            {
+                [920] = function(player, csid, option, npc)
+                    local availRewards = 0
+                        + (player:hasItem(xi.items.DIABOLOSS_POLE) and 1 or 0)    -- Diabolos's Pole
+                        + (player:hasItem(xi.items.DIABOLOSS_EARRING) and 2 or 0) -- Diabolos's Earring
+                        + (player:hasItem(xi.items.DIABOLOSS_RING) and 4 or 0)    -- Diabolos's Ring
+                        + (player:hasItem(xi.items.DIABOLOSS_TORQUE) and 8 or 0)  -- Diabolos's Torque
+                        + (player:hasSpell(304) and 32 or 16) -- Pact or gil
+
+                    player:updateEvent(xi.items.DIABOLOSS_POLE,
+                        xi.items.DIABOLOSS_EARRING,
+                        xi.items.DIABOLOSS_RING,
+                        xi.items.DIABOLOSS_TORQUE,
+                        0, 0, 0, availRewards)
+                end
             },
 
             onEventFinish =
