@@ -25,10 +25,10 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.RUGHADJEEN] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.GADALAR] = xi.trust.message_offset.TEAMWORK_2,
-        [xi.magic.spell.NAJELITH] = xi.trust.message_offset.TEAMWORK_3,
-        [xi.magic.spell.ZAZARG] = xi.trust.message_offset.TEAMWORK_4,
+        [xi.magic.spell.RUGHADJEEN] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.GADALAR] = xi.trust.messageOffset.TEAMWORK_2,
+        [xi.magic.spell.NAJELITH] = xi.trust.messageOffset.TEAMWORK_3,
+        [xi.magic.spell.ZAZARG] = xi.trust.messageOffset.TEAMWORK_4,
     })
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
@@ -62,18 +62,18 @@ spellObject.onMobSpawn = function(mob)
         if wsid == 3203 then -- Scouring Bubbles
         -- Bah! Guess I'll pull out another one of my trrricks!
             if math.random(1, 100) <= 33 then
-                xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+                xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
         end
     end)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

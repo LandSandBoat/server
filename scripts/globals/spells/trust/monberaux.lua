@@ -23,7 +23,7 @@ spellObject.onMobSpawn = function(mob)
     -- TODO: Add Holy Water skill (removes curse, zombie, and doom)
     -- TODO: Add Cover ability with proper conditions (stand behind Monberaux when you have top enmity)
     -- TODO: Add mechanic for turning status removal skills into AoE -- https://www.bg-wiki.com/ffxi/BGWiki:Trusts#Monberaux
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     local healingMoveCooldown = 3 -- Retail values from BGWiki
 
@@ -56,14 +56,16 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "MONBERAUX_WS", function(mobArg, targetArg, skillid, spentTP, action)
         action:setCategory(xi.action.MOBABILITY_FINISH)
     end)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

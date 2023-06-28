@@ -16,7 +16,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0, ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE, 45)
@@ -46,7 +46,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "SHANTOTTO_II_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3740 then -- Final Exam
             -- And yet again, the flames of life are snuffed out, and I'll say this--it was an out and out rout!
-            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end
     end)
 
@@ -54,17 +54,19 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("MAGIC_USE", "SHANTOTTO_II_MAGIC", function(mobArg, target, spell, action)
         if math.random(1, 100) <= 33 then
             -- Ohohohohoho!
-            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_2)
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_2)
         end
     end)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

@@ -20,23 +20,41 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "trust_controller.h"
-#include "player_controller.h"
 
-#include "../../ability.h"
-#include "../../ai/helpers/gambits_container.h"
-#include "../../ai/states/despawn_state.h"
-#include "../../ai/states/magic_state.h"
-#include "../../ai/states/range_state.h"
-#include "../../enmity_container.h"
-#include "../../entities/charentity.h"
-#include "../../entities/trustentity.h"
-#include "../../items/item_weapon.h"
-#include "../../mob_spell_container.h"
-#include "../../packets/char.h"
-#include "../../recast_container.h"
-#include "../../status_effect_container.h"
-#include "../../utils/charutils.h"
-#include "../ai_container.h"
+#include "ability.h"
+#include "ai/helpers/gambits_container.h"
+#include "ai/states/despawn_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/range_state.h"
+#include "enmity_container.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "items/item_weapon.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "packets/char.h"
+#include "player_controller.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/charutils.h"
+
+namespace
+{
+    enum TRUST_MOVEMENT_TYPE
+    {
+        // NOTE: If you need to add special movement types, add descending into the minus values.
+        //     : All of the positive values are taken for the ranged movement range.
+        // NOTE: You can use any positive value as a distance, and it will act as MID_RANGE or LONG_RANGE, but with the value you've provided.
+        //     : For example:
+        //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
+        //     : Will set the combat distance the trust tries to stick to to 20'
+        // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
+        NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+        MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
+        MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
+        LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
+    };
+} // namespace
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
@@ -134,9 +152,11 @@ void CTrustController::DoCombatTick(time_point tick)
 
             POwner->PAI->PathFind->LookAt(PTarget->loc.p);
 
-            switch (PTrust->m_MovementType)
+            int16 movementDistance = PTrust->getMobMod(MOBMOD_TRUST_DISTANCE);
+
+            switch (movementDistance)
             {
-                case NO_MOVE:
+                case TRUST_MOVEMENT_TYPE::NO_MOVE:
                 {
                     if (currentDistanceToMaster > CastingDistance)
                     {
@@ -148,18 +168,7 @@ void CTrustController::DoCombatTick(time_point tick)
                     }
                     break;
                 }
-                case MID_RANGE:
-                {
-                    PathOutToDistance(PTarget, 6.0f);
-                    break;
-                }
-                case LONG_RANGE:
-                {
-                    PathOutToDistance(PTarget, 12.0f);
-                    break;
-                }
-                case MELEE_RANGE:
-                default:
+                case TRUST_MOVEMENT_TYPE::MELEE:
                 {
                     std::unique_ptr<CBasicPacket> err;
                     if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
@@ -177,6 +186,15 @@ void CTrustController::DoCombatTick(time_point tick)
                             }
                         }
                     }
+                    break;
+                }
+                case TRUST_MOVEMENT_TYPE::MID_RANGE:
+                    [[fallthrough]];
+                case TRUST_MOVEMENT_TYPE::LONG_RANGE:
+                    [[fallthrough]];
+                default: // Using the positive-non-zero movementDistance mobMod value
+                {
+                    PathOutToDistance(PTarget, static_cast<float>(movementDistance));
                     break;
                 }
             }

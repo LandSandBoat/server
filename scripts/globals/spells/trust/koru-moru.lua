@@ -19,9 +19,9 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.SHANTOTTO_II] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.SHANTOTTO] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.SHANTOTTO_II] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 5, ai.r.JA, ai.s.SPECIFIC, xi.ja.CONVERT)
@@ -46,14 +46,16 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.SHELL, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SHELL)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

@@ -105,6 +105,7 @@ enum MOBMODIFIER : int
     MOBMOD_ONE_WAY_LINKING        = 74, // Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
     MOBMOD_CAN_PARRY              = 75, // Check if a mob is allowed to have parry rank (Rank Value 1-5)
     MOBMOD_NO_WIDESCAN            = 76, // Disables widescan for a specific mob
+    MOBMOD_TRUST_DISTANCE         = 77, // TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
 };
 
 #endif

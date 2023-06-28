@@ -28,7 +28,7 @@ spellObject.onMobSpawn = function(mob)
         Summon: With your courage and valor, Altana's children will live to see a brighter day.
         Summon (Formerly): Let the Royal Family’s blade be seared forever into their memories!
     ]]
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,
                         ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
@@ -44,11 +44,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

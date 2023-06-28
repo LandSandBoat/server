@@ -22,12 +22,12 @@ end
 spellObject.onMobSpawn = function(mob)
     local master = mob:getMaster()
     if isWearingApururuShirt(master) then
-        xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_2)
+        xi.trust.message(mob, xi.trust.messageOffset.TEAMWORK_2)
     else
-        xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+        xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
     end
 
-    -- Unity ranking high : xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_1)
+    -- Unity ranking high : xi.trust.message(mob, xi.trust.messageOffset.TEAMWORK_1)
 
     -- TODO: Nott weaponskill needs implemented and logic added here for Apururu to use at 50% MP at level 50.
     -- TODO: UC trusts are supposed to get bonuses depending on unity ranking. Needs research.
@@ -65,14 +65,16 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGAIN, 75)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.MID_RANGE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject
