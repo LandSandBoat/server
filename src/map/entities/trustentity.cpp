@@ -50,7 +50,6 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     allegiance                  = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList              = 0;
     PMaster                     = PChar;
-    m_MovementType              = MELEE_RANGE;
     m_IsClaimable               = false;
     m_bReleaseTargIDOnDisappear = true;
     spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation

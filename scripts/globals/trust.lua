@@ -10,6 +10,17 @@ require("scripts/globals/roe")
 xi = xi or {}
 xi.trust = xi.trust or {}
 
+xi.trust.movementType =
+{
+    -- NOTE: If you need to add special movement types, add descending into the minus values.
+    --     : All of the positive values are taken for the ranged movement range.
+    --     : See trust_controller.cpp for more.
+    NO_MOVE    = -1,
+    MELEE      = 0, -- Default
+    MID_RANGE  = 6,
+    LONG_RANGE = 12,
+}
+
 xi.trust.messageOffset =
 {
     SPAWN          = 1,
