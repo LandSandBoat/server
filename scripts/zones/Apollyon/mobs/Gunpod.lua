@@ -61,12 +61,12 @@ entity.onMobInitialize = function(mob)
             }
         else
             -- Acient Beastcoins
-            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.GUARANTEED, 5)
-            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.COMMON)
+            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.drop_rate.GUARANTEED, 5)
+            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.drop_rate.COMMON)
             return
         end
 
-        loot:addGroup(xi.loot.rate.GUARANTEED, group)
+        loot:addGroup(xi.drop_rate.GUARANTEED, group)
     end)
 end
 
