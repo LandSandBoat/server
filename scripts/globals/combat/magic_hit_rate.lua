@@ -1,4 +1,8 @@
 -----------------------------------
+-- Global file for magic based skills magic hit rate.
+-----------------------------------
+require("scripts/globals/combat/level_correction")
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}

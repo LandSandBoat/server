@@ -9,7 +9,6 @@ local ID = require("scripts/zones/Temenos/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
-require("scripts/globals/loot")
 -----------------------------------
 
 local content = Limbus:new({
@@ -59,7 +58,7 @@ content.groups =
                 mob:addListener("ITEM_DROPS", "ITEM_DROPS_AERN", function(mobArg, loot)
                     local quantity = math.min(3, mob:getLocalVar("AERN_RERAISES"))
 
-                    loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.GUARANTEED, quantity)
+                    loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.drop_rate.GUARANTEED, quantity)
                 end)
             end
 
