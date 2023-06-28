@@ -14,14 +14,14 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:addListener("ITEM_DROPS", "ITEM_DROPS_PADFOOD", function(mobArg, loot)
         if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
-            loot:addGroup(xi.loot.rate.GUARANTEED,
+            loot:addGroup(xi.drop_rate.GUARANTEED,
             {
                 { item = xi.items.ASSAILANTS_RING, weight = 750 },
                 { item = xi.items.ASTRAL_EARRING, weight = 250 },
             })
         else
-            loot:addItem(xi.items.SHEEPSKIN, xi.loot.rate.VERY_COMMON)
-            loot:addItem(xi.items.LANOLIN_CUBE, xi.loot.rate.GUARANTEED)
+            loot:addItem(xi.items.SHEEPSKIN, xi.drop_rate.VERY_COMMON)
+            loot:addItem(xi.items.LANOLIN_CUBE, xi.drop_rate.GUARANTEED)
         end
     end)
 end
