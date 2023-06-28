@@ -46,6 +46,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.SHELL, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SHELL)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)

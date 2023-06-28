@@ -15,6 +15,8 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.LONG_RANGE)
 end
 
 spellObject.onMobDespawn = function(mob)

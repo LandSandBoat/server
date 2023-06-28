@@ -56,6 +56,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "MONBERAUX_WS", function(mobArg, targetArg, skillid, spentTP, action)
         action:setCategory(xi.action.MOBABILITY_FINISH)
     end)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)

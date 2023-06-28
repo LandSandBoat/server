@@ -35,6 +35,8 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
                         ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE, 60)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)

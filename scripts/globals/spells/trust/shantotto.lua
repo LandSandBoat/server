@@ -33,6 +33,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end
 
 spellObject.onMobDespawn = function(mob)

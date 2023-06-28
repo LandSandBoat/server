@@ -44,6 +44,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 60)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.MID_RANGE)
 end
 
 spellObject.onMobDespawn = function(mob)
