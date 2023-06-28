@@ -3775,7 +3775,7 @@ namespace battleutils
             // Chainbound active on target
             if (PCBEffect)
             {
-                if (PCBEffect->GetStartTime() + 3s < server_clock::now())
+                if (PCBEffect->GetStartTime() + 2s < server_clock::now())
                 {
                     // Konzen-Ittai
                     if (PCBEffect->GetPower() > 1)
