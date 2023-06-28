@@ -21,7 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     -- HPP/MPP mods migrated to sql/mob_pool_mods
     mob:addMod(xi.mod.REFRESH, 2)
@@ -52,7 +52,7 @@ spellObject.onMobSpawn = function(mob)
         if wsid == 170 then -- Randgrith
         -- Return to the dust whence you came! Randgrith!!!
             if math.random(1, 100) <= 66 then
-                xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+                xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
 
             mob:addStatusEffect(xi.effect.ACCURACY_BOOST, 20, 0, 20) -- Cheat in Relic AM ACC
@@ -64,11 +64,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

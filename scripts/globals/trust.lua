@@ -10,7 +10,7 @@ require("scripts/globals/roe")
 xi = xi or {}
 xi.trust = xi.trust or {}
 
-xi.trust.message_offset =
+xi.trust.messageOffset =
 {
     SPAWN          = 1,
     TEAMWORK_1     = 4,

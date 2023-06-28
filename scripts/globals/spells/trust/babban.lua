@@ -22,21 +22,21 @@ end
 spellObject.onMobSpawn = function(mob)
     local master = mob:getMaster()
     if isWearingMandragoraGear(master) then
-        xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+        xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
     end
 end
 
 spellObject.onMobDespawn = function(mob)
     local master = mob:getMaster()
     if isWearingMandragoraGear(master) then
-        xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+        xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
     end
 end
 
 spellObject.onMobDeath = function(mob)
     local master = mob:getMaster()
     if isWearingMandragoraGear(master) then
-        xi.trust.message(mob, xi.trust.message_offset.DEATH)
+        xi.trust.message(mob, xi.trust.messageOffset.DEATH)
     end
 end
 

@@ -17,11 +17,11 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
-        [xi.magic.spell.KORU_MORU] = xi.trust.message_offset.TEAMWORK_3,
-        [xi.magic.spell.KARAHA_BARUHA] = xi.trust.message_offset.TEAMWORK_4,
-        [xi.magic.spell.SEMIH_LAFIHNA] = xi.trust.message_offset.TEAMWORK_5,
+        [xi.magic.spell.SHANTOTTO] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.STAR_SIBYL] = xi.trust.messageOffset.TEAMWORK_2,
+        [xi.magic.spell.KORU_MORU] = xi.trust.messageOffset.TEAMWORK_3,
+        [xi.magic.spell.KARAHA_BARUHA] = xi.trust.messageOffset.TEAMWORK_4,
+        [xi.magic.spell.SEMIH_LAFIHNA] = xi.trust.messageOffset.TEAMWORK_5,
     })
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0,
@@ -38,11 +38,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

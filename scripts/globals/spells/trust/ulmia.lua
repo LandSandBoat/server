@@ -15,8 +15,8 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.PRISHE] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.MILDAURION] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.PRISHE] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.MILDAURION] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
     -- TODO: BRD trusts need better logic and major overhaul, for now they compliment each other
@@ -27,11 +27,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject
