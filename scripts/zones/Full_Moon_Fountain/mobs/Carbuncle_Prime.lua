@@ -108,7 +108,7 @@ entity.onMobDeath = function(mob, player, optParams)
         optParams.isKiller and
         flag
     then
-        bf:setLocalVar("lootSpawned", 0)
+        bf:setLocalVar("phaseChange", 0)
     end
 end
 
