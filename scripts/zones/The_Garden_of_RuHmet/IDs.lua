@@ -61,6 +61,11 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
 
     npc =
     {
+        EBON_PANEL_HUME = 16921076,
+        EBON_PANEL_MITHRA = 16921079,
+        EBON_PANEL_ELVAAN = 16921080,
+        EBON_PANEL_TARU = 16921081,
+        EBON_PANEL_GALKA = 16921082,
         QM_IXAERN_DRK_POS =
         {
             { -560, 5.00, 239 }, -- Taru-Mithra

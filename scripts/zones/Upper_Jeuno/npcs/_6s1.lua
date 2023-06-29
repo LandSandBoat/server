@@ -4,32 +4,26 @@
 -- !pos -96.6 -0.2 92.3 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
+require("scripts/globals/items")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
 local ring =
 {
-    15543, -- Rajas Ring
-    15544, -- Sattva Ring
-    15545  -- Tamas Ring
+    xi.items.RAJAS_RING,
+    xi.items.SATTVA_RING,
+    xi.items.TAMAS_RING
 }
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local status = player:getCharVar("PromathiaStatus")
     local mission = player:getCurrentMission(xi.mission.log_id.COP)
 
     if
-        mission == xi.mission.id.cop.DAWN and
-        status == 4
-    then
-        player:startEvent(129)
-
-    elseif
-        (mission == xi.mission.id.cop.DAWN and status > 4) or
+        (mission == xi.mission.id.cop.DAWN and player:getCharVar('Mission[6][840]Status') > 8) or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
     then
         local hasRing = false
@@ -73,9 +67,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 129 then
-        player:setCharVar("PromathiaStatus", 5)
-    elseif
+    if
         (csid == 84 or csid == 204) and
         option >= 5 and
         option <= 7
