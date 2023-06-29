@@ -2055,14 +2055,14 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         CItem* PItem = PItemContainer->GetItem(slotID);
 
-        if ((PItem != nullptr) && (PItem->getQuantity() < PItem->getStackSize()) && !PItem->isSubType(ITEM_LOCKED))
+        if ((PItem != nullptr) && (PItem->getQuantity() < PItem->getStackSize()) && !PItem->isSubType(ITEM_LOCKED) && (PItem->getReserve() == 0))
         {
             for (uint8 slotID2 = slotID + 1; slotID2 <= size; ++slotID2)
             {
                 CItem* PItem2 = PItemContainer->GetItem(slotID2);
 
                 if ((PItem2 != nullptr) && (PItem2->getID() == PItem->getID()) && (PItem2->getQuantity() < PItem2->getStackSize()) &&
-                    !PItem2->isSubType(ITEM_LOCKED))
+                    !PItem2->isSubType(ITEM_LOCKED) && (PItem2->getReserve() == 0))
                 {
                     uint32 totalQty = PItem->getQuantity() + PItem2->getQuantity();
                     uint32 moveQty  = 0;
