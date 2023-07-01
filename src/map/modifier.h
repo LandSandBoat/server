@@ -328,6 +328,18 @@ enum class Mod
     DEATH_MEVA    = 215,
     STATUS_MEVA   = 216,
 
+    // Status effect Immunobreak modifiers.
+    SLEEP_IMMUNOBREAK    = 261,
+    POISON_IMMUNOBREAK   = 262,
+    PARALYZE_IMMUNOBREAK = 263,
+    BLIND_IMMUNOBREAK    = 264,
+    SILENCE_IMMUNOBREAK  = 265,
+    PETRIFY_IMMUNOBREAK  = 266,
+    BIND_IMMUNOBREAK     = 267,
+    GRAVITY_IMMUNOBREAK  = 268,
+    SLOW_IMMUNOBREAK     = 269,
+    ADDLE_IMMUNOBREAK    = 270,
+
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
@@ -969,7 +981,7 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 217 to 223
-    // 261 to 280
+    // 271 to 280
     //
     // SPARE = 1076 and onward
 };

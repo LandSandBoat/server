@@ -243,6 +243,8 @@ xi.mod =
     HUMANOID_KILLER                 = 236,
     LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
+
+    -- Status effect Job trait resistance modifiers.
     SLEEPRES                        = 240,
     POISONRES                       = 241,
     PARALYZERES                     = 242,
@@ -260,6 +262,8 @@ xi.mod =
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
     STATUSRES                       = 958, -- "Resistance to All Status Ailments"
+
+    -- Status effect Magic Evasion modifiers.
     SLEEP_MEVA                      = 200,
     POISON_MEVA                     = 201,
     PARALYZE_MEVA                   = 202,
@@ -277,6 +281,19 @@ xi.mod =
     LULLABY_MEVA                    = 214,
     DEATH_MEVA                      = 215,
     STATUS_MEVA                     = 216,
+
+    -- Status effect magic Evasion modifiers.
+    SLEEP_IMMUNOBREAK               = 261,
+    POISON_IMMUNOBREAK              = 262,
+    PARALYZE_IMMUNOBREAK            = 263,
+    BLIND_IMMUNOBREAK               = 264,
+    SILENCE_IMMUNOBREAK             = 265,
+    PETRIFY_IMMUNOBREAK             = 266,
+    BIND_IMMUNOBREAK                = 267,
+    GRAVITY_IMMUNOBREAK             = 268,
+    SLOW_IMMUNOBREAK                = 269,
+    ADDLE_IMMUNOBREAK               = 270,
+
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
