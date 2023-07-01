@@ -120,6 +120,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         HERE_TAKE_THIS                = 13079, -- Here, take this...
         IF_YOU_WEAR_THIS              = 13080, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 13081, -- Thank you...
+        EGG_HUNT_OFFSET               = 13116, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         FFR_LOOKS_CURIOUSLY_BASE      = 13405, -- Coullene looks over curiously for a moment.
         FRAGMENT_FAR_TOO_SMALL        = 18113, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18114, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
@@ -132,6 +133,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
     },
     npc =
     {
+        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17723487] = 53, -- Vichuel
