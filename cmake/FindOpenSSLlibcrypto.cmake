@@ -9,7 +9,7 @@ find_library(OpenSSLlibcrypto_LIBRARY
         /usr/lib/
         /usr/local/
         /usr/local/bin/
-		/usr/local/opt/openssl/lib/ # OSX brew install location
+        /usr/local/opt/openssl/lib/		 # OSX brew install location
         /opt/)
 
 set(OpenSSLlibcrypto_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/ext/openssl/include/) # Only look internally

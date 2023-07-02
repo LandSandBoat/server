@@ -17,7 +17,6 @@ class HXIClient:
         self.server = server
         self.slot = slot
         self.debug_packets = debug_packets
-        self.macAddress = "CA:FE:BE:EF:00:00"
         self.xiloaderVersionNumber = "1.0.0" # compatible xiloader version
 
         # Read from version.conf default
@@ -46,7 +45,7 @@ class HXIClient:
 
         self.login_connect(self.ssl_context)
 
-        data = bytearray(86)
+        data = bytearray(102)
         data[0x00] = 0xFF # magic for new xiloader
         data[0x01] = 0    # unused feature flags
         data[0x02] = 0
@@ -59,13 +58,12 @@ class HXIClient:
         util.memcpy(self.username, 0, data, 0x09, len(self.username))
         util.memcpy(self.password, 0, data, 0x19, len(self.password))
 
-        data[0x29] = 0x10  # Auto-login
+        data[0x39] = 0x10  # Auto-login
 
-	# memory space fro changed pasword, unused in 0x10
+	# 17 bytes of reserved space starting at 0x50
         util.memcpy(self.password, 0, data, 0x30, len(self.password))
 
-        util.memcpy(self.macAddress, 0, data, 0x40, 17)
-        util.memcpy(self.xiloaderVersionNumber, 0, data, 0x51, 5)
+        util.memcpy(self.xiloaderVersionNumber, 0, data, 0x61, 5)
 
         self.login_sock.sendall(data)
 
