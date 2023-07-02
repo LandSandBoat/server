@@ -349,10 +349,10 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
         if hitrate > 0.95 then
             hitrate = 0.95
         end
+    end
 
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
+    if hitrate < 0.2 then
+        hitrate = 0.2
     end
 
     return hitrate
@@ -1091,10 +1091,10 @@ function getHitRate(attacker, target, capHitRate, bonus)
         if hitrate > 0.95 then
             hitrate = 0.95
         end
+    end
 
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
+    if hitrate < 0.2 then
+        hitrate = 0.2
     end
 
     return hitrate
