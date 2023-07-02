@@ -1391,6 +1391,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Lt. Steel Shee
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44539;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44541;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44545;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 53007;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1607,7 +1608,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'High Healing 
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Stone Bangles' AND ID = 52513;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Macuahuitl' AND ID = 52520;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Beak Necklace' AND ID = 52526;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ID = 53007;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Mittens' AND ID = 53011;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Scapegoat' AND ID = 53013;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Leggings' AND ID = 53018;

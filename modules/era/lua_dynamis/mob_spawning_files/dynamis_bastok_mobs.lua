@@ -249,9 +249,9 @@ xi.dynamis.mobList[zoneID][151].info = {"NM", "Effigy Shield BRD", "Quadav", "BR
 xi.dynamis.mobList[zoneID][152].info = {"NM", "Effigy Shield DRK", "Quadav", "DRK", nil } -- Effigy Shield
 xi.dynamis.mobList[zoneID][153].info = {"NM", "Effigy Shield SAM", "Quadav", "SAM", nil } -- Effigy Shield
 
-xi.dynamis.mobList[zoneID][154].info = {"TE normal", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][155].info = {"TE normal", "Vanguard Constable",  "Quadav", "WHM", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][156].info = {"TE normal", "Vanguard Militant",   "Quadav", "MNK", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][154].info = {"Beastmen", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][155].info = {"Beastmen", "Vanguard Constable",  "Quadav", "WHM", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][156].info = {"Beastmen", "Vanguard Militant",   "Quadav", "MNK", nil } -- 10min TE
 
 
 ----------------------------------------------------------------------------------------------------

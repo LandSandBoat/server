@@ -12,14 +12,17 @@ local oneToBeFeared = {}
 -- Not to be confused with an actual instance.
 
 local function healCharacter(player)
-    player:setHP(player:getMaxHP())
-    player:setMP(player:getMaxMP())
-    player:setTP(0)
-    if player:getPet() ~= nil then
-        local pet = player:getPet()
-        pet:setHP(pet:getMaxHP())
-        pet:setMP(pet:getMaxMP())
-        pet:setTP(0)
+    -- only heal players if alive otherwise bugs out player
+    if player:isAlive() then
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
+        if player:getPet() ~= nil then
+            local pet = player:getPet()
+            pet:setHP(pet:getMaxHP())
+            pet:setMP(pet:getMaxMP())
+            pet:setTP(0)
+        end
     end
 end
 
