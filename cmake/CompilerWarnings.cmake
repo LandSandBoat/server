@@ -19,9 +19,6 @@ function(set_project_warnings project_name)
       /wd4458 # declaration of 'var' hides class member
       /wd4459 # declaration of 'var' hides global declaration
 
-      # Very common in WolfSSL
-      /wd4820 # 'n' bytes padding added after data member 'member'
-
       # TODO: concurrentqueue triggers this. Remove once MSVC fixes it.
       # https://developercommunity2.visualstudio.com/t/C4554-triggers-when-both-lhs-and-rhs-is/10034931
       /wd4554 # 'operator' : check operator precedence for possible error; use parentheses to clarify precedence
