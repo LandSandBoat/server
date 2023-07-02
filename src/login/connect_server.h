@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/settings.h"
 #include "common/sql.h"
 #include "common/utils.h"
+#include "common/xirand.h"
 #include "map/packets/basic.h"
 
 // openssl applink.c prevents issues with debug vs release vs threaded/single threaded .dlls at runtime
@@ -2017,12 +2018,12 @@ public:
         gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
         [](std::vector<std::string> inputs)
         {
-            size_t uniqueIPs      = authenticatedSessions_.size();
+            size_t uniqueIPs      = loginHelpers::authenticatedSessions_.size();
             size_t uniqueAccounts = 0;
 
-            for (auto ipAddrMap: authenticatedSessions_)
+            for (auto ipAddrMap: loginHelpers::authenticatedSessions_)
             {
-                uniqueAccounts += authenticatedSessions_[ipAddrMap.first].size();
+                uniqueAccounts += loginHelpers::authenticatedSessions_[ipAddrMap.first].size();
             }
             ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
         });
@@ -2052,120 +2053,12 @@ public:
             }
         }
 #endif
+        xirand::seed();
 
         try
         {
-            if (std::filesystem::exists("login.key"))
-            {
-                FILE* fileHandle = fopen("login.key", "r");
-                if (fileHandle)
-                {
-                    EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, NULL, NULL, NULL);
-                    if (pkey)
-                    {
-                        ShowInfo(fmt::format("Found existing login.key"));
-                    }
-                }
-                fclose(fileHandle);
-            }
-
-            if (std::filesystem::exists("login.cert"))
-            {
-                FILE* fileHandle = fopen("login.cert", "r");
-                if (fileHandle)
-                {
-                    X509* cert = PEM_read_X509(fileHandle, NULL, NULL, NULL);
-                    if (cert)
-                    {
-                        char cn[2048] = {};
-                        int  size     = sizeof(cn);
-
-                        X509_NAME_oneline(X509_get_subject_name(cert), cn, size);
-                        X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
-                        ShowInfo(fmt::format("Found existing login.cert", cn));
-
-                        // if current time not within the bounds of valid date, note it's expired
-                        if (X509_cmp_time(X509_get_notAfter(cert), NULL) != 1 || X509_cmp_time(X509_get_notBefore(cert), NULL) != -1)
-                        {
-                            ShowWarning("Existing login.cert is not valid for the current time. Please regenerate or obtain a new certificate.");
-                        }
-                    }
-
-                    fclose(fileHandle);
-                }
-            }
-
-            if (!std::filesystem::exists("login.key") && !std::filesystem::exists("login.cert"))
-            {
-                ShowInfo("Generating self-signed certificate");
-
-                EVP_PKEY* pkey = EVP_RSA_gen(4096);
-
-                if (pkey == NULL)
-                {
-                    ShowError("Failed to generate RSA private key!");
-                }
-
-                X509* x509 = X509_new();
-
-                if (x509 == NULL)
-                {
-                    ShowError("Failed to generate allocate X509 cert!");
-                }
-
-                ASN1_INTEGER_set(X509_get_serialNumber(x509), 1);         // cert #1 for self-signed
-                X509_gmtime_adj(X509_get_notBefore(x509), 0);             // valid from now
-                X509_gmtime_adj(X509_get_notAfter(x509), 31536000L * 20); // expires 20 years from now
-
-                if (!X509_set_pubkey(x509, pkey))
-                {
-                    ShowError("Failed to assign private key to X509 cert!");
-                }
-
-                X509_NAME* name;
-                name = X509_get_subject_name(x509);
-
-                std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
-                unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
-
-                std::memcpy(commonNameIpAddr, authIpAddr.c_str(), authIpAddr.length());
-
-                // TODO: do we need to set/support country code, among others?
-                /* X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC,
-                                           (unsigned char*)"CA", -1, -1, 0);*/
-                X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC,
-                                           (unsigned char*)"LSB self-signed certificate for login server", -1, -1, 0);
-                X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC,
-                                           commonNameIpAddr, -1, -1, 0);
-
-                X509_set_issuer_name(x509, name);
-
-                if (!X509_sign(x509, pkey, EVP_sha384()))
-                {
-                    ShowError("Failed to sign X509 cert!");
-                }
-
-                FILE* fileHandle = fopen("login.key", "wb");
-                if (fileHandle)
-                {
-                    if (!PEM_write_PrivateKey(fileHandle, pkey, NULL, NULL, 0, 0, NULL))
-                    {
-                        ShowError("Failed to write login.key!");
-                    }
-                    fclose(fileHandle);
-                }
-
-                fileHandle = fopen("login.cert", "wb");
-                if (fileHandle)
-                {
-                    if (!PEM_write_X509(fileHandle, x509))
-                    {
-                        ShowError("Failed to write login.cert!");
-                    }
-                    fclose(fileHandle);
-                }
-                EVP_PKEY_free(pkey);
-            }
+            // Generate a self signed cert if one doesn't exist.
+            certificateHelpers::generateSelfSignedCert();
 
             ShowInfo("creating ports");
 
@@ -2209,8 +2102,8 @@ public:
     {
         if (!error)
         {
-            auto ipAddrIterator = authenticatedSessions_.begin();
-            while (ipAddrIterator != authenticatedSessions_.end())
+            auto ipAddrIterator = loginHelpers::authenticatedSessions_.begin();
+            while (ipAddrIterator != loginHelpers::authenticatedSessions_.end())
             {
                 auto sessionIterator = ipAddrIterator->second.begin();
                 while (sessionIterator != ipAddrIterator->second.end())
@@ -2233,7 +2126,7 @@ public:
                 // If this map entry is empty, clean it up
                 if (ipAddrIterator->second.size() == 0)
                 {
-                    ipAddrIterator = authenticatedSessions_.erase(ipAddrIterator);
+                    ipAddrIterator = loginHelpers::authenticatedSessions_.erase(ipAddrIterator);
                 }
                 else
                 {
