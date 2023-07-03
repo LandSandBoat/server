@@ -97,21 +97,16 @@ def populate_migrations():
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
 
-# NOTE: Everything is returned as a dict of dicts of strings. If you are looking for bools or values
-#     : you'll need to convert them yourself.
+
 def populate_settings():
     settings = {}
-    default_settings = {}
 
     def load_into_dict(filename, settings):
         if os.path.exists(filename) and os.path.isfile(filename):
             try:
                 with open(filename) as f:
                     filename_key = filename[:-4].split(os.sep)[-1]
-
-                    # Get or default, so we update any existing dict
-                    # instead of wiping it out
-                    current_settings = settings.get(filename_key, {})
+                    current_settings = {}
                     for line in f.readlines():
                         if not line:
                             break
@@ -156,7 +151,6 @@ def populate_settings():
 
     for filename in os.listdir(from_server_path("settings/default")):
         full_path = from_server_path("settings/default")
-        load_into_dict(os.path.join(full_path, filename), default_settings)
         load_into_dict(os.path.join(full_path, filename), settings)
 
     for filename in os.listdir(from_server_path("settings")):
@@ -169,11 +163,11 @@ def populate_settings():
     #         print(f"| {k} | {ik} | {iv} |")
     # exit()
 
-    return settings, default_settings
+    return settings
 
 
 # Settings are automatically scraped from the settings folder(s)
-settings, default_settings = populate_settings()
+settings = populate_settings()
 
 
 # These are the 'protected' files
