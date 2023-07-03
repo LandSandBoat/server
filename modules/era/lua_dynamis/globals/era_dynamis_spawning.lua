@@ -1984,7 +1984,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(82,84))
-    mob:setMod(xi.mod.UDMG, -5000)
+    mob:setMod(xi.mod.DMG, -5000)
     -- if an eye then does not have slow movement speed and has lower HP in xarc
     if mob:getFamily() == 4 then
         -- base hp of eyes is 2600 for beauc, xarc eyes have about 1040
