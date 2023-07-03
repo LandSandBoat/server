@@ -97,16 +97,21 @@ def populate_migrations():
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
 
-
+# NOTE: Everything is returned as a dict of dicts of strings. If you are looking for bools or values
+#     : you'll need to convert them yourself.
 def populate_settings():
     settings = {}
+    default_settings = {}
 
     def load_into_dict(filename, settings):
         if os.path.exists(filename) and os.path.isfile(filename):
             try:
                 with open(filename) as f:
                     filename_key = filename[:-4].split(os.sep)[-1]
-                    current_settings = {}
+
+                    # Get or default, so we update any existing dict
+                    # instead of wiping it out
+                    current_settings = settings.get(filename_key, {})
                     for line in f.readlines():
                         if not line:
                             break
@@ -151,6 +156,7 @@ def populate_settings():
 
     for filename in os.listdir(from_server_path("settings/default")):
         full_path = from_server_path("settings/default")
+        load_into_dict(os.path.join(full_path, filename), default_settings)
         load_into_dict(os.path.join(full_path, filename), settings)
 
     for filename in os.listdir(from_server_path("settings")):
@@ -163,11 +169,11 @@ def populate_settings():
     #         print(f"| {k} | {ik} | {iv} |")
     # exit()
 
-    return settings
+    return settings, default_settings
 
 
 # Settings are automatically scraped from the settings folder(s)
-settings = populate_settings()
+settings, default_settings = populate_settings()
 
 
 # These are the 'protected' files
@@ -274,37 +280,20 @@ def fetch_credentials():
 
 def fetch_versions():
     global current_client, release_version, release_client
-    current_client = release_version = release_client = None
+
+    current_client = None
+    release_version = None
+    release_client = None
+
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
     except Exception as e:
         print_red("Unable to read current version hash.")
         print(e)
-    try:
-        with open(from_server_path("settings/default/login.lua")) as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
-                if match:
-                    release_client = match.group(1)
-    except Exception as e:
-        print_red("Unable to read settings/default/login.lua.")
-        print(e)
-    if os.path.exists(from_server_path("settings/login.lua")):
-        try:
-            with open(from_server_path("settings/login.lua")) as f:
-                while True:
-                    line = f.readline()
-                    if not line:
-                        break
-                    match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
-                    if match:
-                        current_client = match.group(1)
-        except Exception as e:
-            print_red("Unable to read settings/login.lua")
-            print(e)
+
+    release_client = default_settings["login"]["CLIENT_VER"]
+    current_client = settings["login"]["CLIENT_VER"]
+
     if db_ver and release_version:
         fetch_files(True)
     else:
