@@ -97,6 +97,85 @@ def populate_migrations():
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
 
+# NOTE: Everything is returned as a dict of dicts of strings. If you are looking for bools or values
+#     : you'll need to convert them yourself.
+def populate_settings():
+    settings = {}
+    default_settings = {}
+
+    def load_into_dict(filename, settings):
+        if os.path.exists(filename) and os.path.isfile(filename):
+            try:
+                with open(filename) as f:
+                    filename_key = filename[:-4].split(os.sep)[-1]
+
+                    # Get or default, so we update any existing dict
+                    # instead of wiping it out
+                    current_settings = settings.get(filename_key, {})
+                    for line in f.readlines():
+                        if not line:
+                            break
+
+                        if "=" in line:
+                            # remove newline
+                            line = line.replace("\n", "")
+
+                            # NOTE: Do not use split or rsplit in herewithout a counter,
+                            #     : to make sure you leave the contents of val alone!
+                            parts = line.split("=", 1)
+
+                            key = parts[0].strip()
+                            val = parts[1].strip()
+
+                            # ignore commented out entries
+                            if key.startswith("--"):
+                                continue
+
+                            # strip off comments
+                            val = val.rsplit("--")[0].strip()
+
+                            # pop off leading quote
+                            if val.startswith('\"'):
+                                val = val[1:]
+
+                            # pop off trailing comma
+                            if val.endswith(','):
+                                val = val[:-1]
+
+                            # pop off trailing quote
+                            if val.endswith('\"'):
+                                val = val[:-1]
+
+                            current_settings[key] = val
+
+                        settings[filename_key] = current_settings
+            except Exception as e:
+                print_red("Error fetching settings.")
+                print(e)
+                return False
+
+    for filename in os.listdir(from_server_path("settings/default")):
+        full_path = from_server_path("settings/default")
+        load_into_dict(os.path.join(full_path, filename), default_settings)
+        load_into_dict(os.path.join(full_path, filename), settings)
+
+    for filename in os.listdir(from_server_path("settings")):
+        full_path = from_server_path("settings")
+        load_into_dict(os.path.join(full_path, filename), settings)
+
+    # DEBUG:
+    # for k, v in settings.items():
+    #     for ik, iv in v.items():
+    #         print(f"| {k} | {ik} | {iv} |")
+    # exit()
+
+    return settings, default_settings
+
+
+# Settings are automatically scraped from the settings folder(s)
+settings, default_settings = populate_settings()
+
+
 # These are the 'protected' files
 player_data = [
     "accounts.sql",
@@ -191,69 +270,30 @@ def db_query(query):
 
 
 def fetch_credentials():
-    global database, host, port, login, password
-    credentials = {}
-    # Grab mysql credentials
-    filename = from_server_path("settings/default/network.lua")
-    if os.path.exists(from_server_path("settings/network.lua")):
-        filename = from_server_path("settings/network.lua")
-    try:
-        with open(filename) as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                if "SQL_" in line:
-                    line = line.replace(",", "").replace('"', "").replace("\n", "")
-                    parts = line.split("=")
-                    type = parts[0].strip()
-                    val = parts[1].strip()
-                    credentials[type] = val
-        database = os.getenv("XI_NETWORK_SQL_DATABASE") or credentials["SQL_DATABASE"]
-        host = os.getenv("XI_NETWORK_SQL_HOST") or credentials["SQL_HOST"]
-        port = os.getenv("XI_NETWORK_SQL_PORT") or int(credentials["SQL_PORT"])
-        login = os.getenv("XI_NETWORK_SQL_LOGIN") or credentials["SQL_LOGIN"]
-        password = os.getenv("XI_NETWORK_SQL_PASSWORD") or credentials["SQL_PASSWORD"]
-    except Exception as e:
-        print_red("Error fetching credentials.\nCheck settings/network.lua.")
-        print(e)
-        return False
-    return True
+    global settings, database, host, port, login, password
+    database = os.getenv("XI_NETWORK_SQL_DATABASE") or settings["network"]["SQL_DATABASE"]
+    host = os.getenv("XI_NETWORK_SQL_HOST") or settings["network"]["SQL_HOST"]
+    port = os.getenv("XI_NETWORK_SQL_PORT") or int(settings["network"]["SQL_PORT"])
+    login = os.getenv("XI_NETWORK_SQL_LOGIN") or settings["network"]["SQL_LOGIN"]
+    password = os.getenv("XI_NETWORK_SQL_PASSWORD") or settings["network"]["SQL_PASSWORD"]
 
 
 def fetch_versions():
     global current_client, release_version, release_client
-    current_client = release_version = release_client = None
+
+    current_client = None
+    release_version = None
+    release_client = None
+
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
     except Exception as e:
         print_red("Unable to read current version hash.")
         print(e)
-    try:
-        with open(from_server_path("settings/default/login.lua")) as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
-                if match:
-                    release_client = match.group(1)
-    except Exception as e:
-        print_red("Unable to read settings/default/login.lua.")
-        print(e)
-    if os.path.exists(from_server_path("settings/login.lua")):
-        try:
-            with open(from_server_path("settings/login.lua")) as f:
-                while True:
-                    line = f.readline()
-                    if not line:
-                        break
-                    match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
-                    if match:
-                        current_client = match.group(1)
-        except Exception as e:
-            print_red("Unable to read settings/login.lua")
-            print(e)
+
+    release_client = default_settings["login"]["CLIENT_VER"]
+    current_client = settings["login"]["CLIENT_VER"]
+
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -723,7 +763,7 @@ def bad_selection():
     time.sleep(0.5)
 
 
-def settings():
+def settings_menu():
     fetch_configs()
     print_green("Current MySQL bin location: " + colorama.Style.RESET_ALL + mysql_bin)
     if input("Change this location? [y/N] ").lower() == "y":
@@ -1013,8 +1053,7 @@ def tasks_menu():
 def main():
     try:
         global mysql_bin, exe
-        if fetch_credentials() == False:
-            return
+        fetch_credentials()
         fetch_configs()
         # Check MySQL path/availability
         if not os.path.exists(mysql_bin + "mysql" + exe):
@@ -1090,7 +1129,7 @@ def main():
                 "4": ["Restore/Import", restore_backup],
                 "r": ["Reset DB", reset_db],
                 "t": ["Maintenance Tasks", tasks_menu],
-                "s": ["Settings", settings],
+                "s": ["Settings", settings_menu],
                 "q": ["Quit", close],
             }
 
