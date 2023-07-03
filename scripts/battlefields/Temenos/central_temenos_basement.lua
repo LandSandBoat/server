@@ -10,7 +10,6 @@ require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
-require("scripts/globals/loot")
 -----------------------------------
 
 local content = Limbus:new({

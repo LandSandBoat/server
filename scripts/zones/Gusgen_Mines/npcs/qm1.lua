@@ -4,7 +4,6 @@
 -- Spawns Aroma Fly - RSE Satchets
 -----------------------------------
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
-require("scripts/globals/loot")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

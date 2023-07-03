@@ -2,7 +2,6 @@
 -- Area: Apollyon Central
 --  Mob: Gunpod
 -----------------------------------
-require("scripts/globals/loot")
 -----------------------------------
 
 local entity = {}
