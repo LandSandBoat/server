@@ -2540,7 +2540,13 @@ xi.gear_sets.createItemToSetId = function()
 
     for setId, setData in pairs(gearSets) do
         for _, itemId in ipairs(setData.items) do
-            itemTable[itemId] = setId
+            if itemTable[itemId] == nil then
+                local setIdTable = {}
+
+                itemTable[itemId] = setIdTable
+            end
+
+            table.insert(itemTable[itemId], setId)
         end
     end
 
@@ -2561,7 +2567,9 @@ xi.gear_sets.checkForGearSet = function(player)
         local setId   = xi.gear_sets.itemToSetId[equipId]
 
         if setId then
-            equippedSets[setId] = equippedSets[setId] and (equippedSets[setId] + 1) or 1
+            for _, v in ipairs(setId) do
+                equippedSets[v] = equippedSets[v] and (equippedSets[v] + 1) or 1
+            end
         end
     end
 
