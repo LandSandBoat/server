@@ -382,6 +382,7 @@ xi.items =
     SACRED_BRANCH                   = 1153,
     THREE_LEAF_MANDRAGORA_BUD       = 1154,
     HANDFUL_OF_IRON_SAND            = 1155,
+    CRAWLER_CALCULUS                = 1156,
     WYVERN_EGG                      = 1159,
     FRAG_ROCK                       = 1160,
     LOCK_OF_MANTICORE_HAIR          = 1163,
