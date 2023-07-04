@@ -15,9 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CREEPY_CR
 quest.reward =
 {
     title = xi.title.CRAWLER_CULLER,
-    famre = 30,
 }
-
 quest.sections =
 {
     {
@@ -50,10 +48,11 @@ quest.sections =
             ['Illu_Bohjaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHas(trade, { { xi.items.SPOOL_OF_SILK_THREAD, 3 } }) or
-                        npcUtil.tradeHas(trade, { { xi.items.CRAWLER_CALCULUS, 3 } })
-                    then
+                    if npcUtil.tradeHas(trade, { { xi.items.SPOOL_OF_SILK_THREAD, 3 } }) then
+                        player:addFame(xi.quest.fame_area.WINDURST, 15)
+                        return quest:event(335, 600, xi.items.SPOOL_OF_SILK_THREAD, 0, xi.items.CRAWLER_CALCULUS)
+                    elseif npcUtil.tradeHas(trade, { { xi.items.CRAWLER_CALCULUS, 3 } }) then
+                        player:addFame(xi.quest.fame_area.WINDURST, 30)
                         return quest:event(335, 600, xi.items.SPOOL_OF_SILK_THREAD, 0, xi.items.CRAWLER_CALCULUS)
                     end
                 end,
@@ -64,9 +63,11 @@ quest.sections =
             onEventFinish =
             {
                 [335] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade()
-                        player:addGil(600 * xi.settings.main.GIL_RATE) -- moved from reward section due to csis string ID#6549 included message special for gil
+                    player:confirmTrade()
+                    player:addGil(600 * xi.settings.main.GIL_RATE) -- moved from reward section due to csis string ID#6549 included message special for gil
+
+                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CREEPY_CRAWLIES) == QUEST_ACCEPTED then
+                        quest:complete(player)
                     end
                 end,
             },
@@ -85,11 +86,13 @@ quest.sections =
                 onTrigger = quest:event(336):replaceDefault(),
 
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHas(trade, { { xi.items.SPOOL_OF_SILK_THREAD, 3 } }) or
-                        npcUtil.tradeHas(trade, { { xi.items.CRAWLER_CALCULUS, 3 } })
-                    then
+                    if npcUtil.tradeHas(trade, { { xi.items.SPOOL_OF_SILK_THREAD, 3 } }) then
                         player:addFame(xi.quest.fame_area.WINDURST, 15)
+                        player:confirmTrade()
+                        player:addGil(600 * xi.settings.main.GIL_RATE) -- moved from reward section due to csis string ID#6549 included message special for gil
+                        return quest:event(335, 600, xi.items.SPOOL_OF_SILK_THREAD, 0, xi.items.CRAWLER_CALCULUS)
+                    elseif npcUtil.tradeHas(trade, { { xi.items.CRAWLER_CALCULUS, 3 } }) then
+                        player:addFame(xi.quest.fame_area.WINDURST, 30)
                         player:confirmTrade()
                         player:addGil(600 * xi.settings.main.GIL_RATE) -- moved from reward section due to csis string ID#6549 included message special for gil
                         return quest:event(335, 600, xi.items.SPOOL_OF_SILK_THREAD, 0, xi.items.CRAWLER_CALCULUS)
