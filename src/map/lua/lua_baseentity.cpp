@@ -13625,12 +13625,19 @@ bool CLuaBaseEntity::charmPet(CLuaBaseEntity const* target)
 void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-    CPetEntity* pet = static_cast<CPetEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet);
-    if (pet != nullptr)
+
+    CBattleEntity* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity)->PPet;
+    if (PBattle != nullptr)
     {
-        // A temporary fix until we move the spirit controller to lua.
-        if (pet->m_PetID >= PETID::PETID_AIRSPIRIT && pet->m_PetID <= PETID::PETID_DARKSPIRIT)
-            static_cast<CSpiritController*>(pet->PAI->GetController())->setMagicCooldowns();
+        if (PBattle->objtype == TYPE_PET)
+        {
+            CPetEntity* Pet = static_cast<CPetEntity*>(PBattle);
+            // A temporary fix until we move the spirit controller to lua.
+            if (Pet->getPetType() == PET_TYPE::AVATAR && Pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            {
+                static_cast<CSpiritController*>(Pet->PAI->GetController())->setMagicCooldowns();
+            }
+        }
 
         petutils::AttackTarget(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
     }
@@ -13659,15 +13666,22 @@ void CLuaBaseEntity::petRetreat()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto*       PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CPetEntity* pet     = static_cast<CPetEntity*>(PBattle->PPet);
-    if (pet != nullptr)
-    {
-        // A temporary fix until we move the spirit controller to lua.
-        if (pet->m_PetID >= PETID::PETID_AIRSPIRIT && pet->m_PetID <= PETID::PETID_DARKSPIRIT)
-            static_cast<CSpiritController*>(pet->PAI->GetController())->setMagicCooldowns();
+    CBattleEntity* PBattleMaster = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattlePet    = PBattleMaster->PPet;
 
-        petutils::RetreatToMaster(PBattle);
+    if (PBattlePet != nullptr)
+    {
+        if (PBattlePet->objtype == TYPE_PET)
+        {
+            CPetEntity* Pet = static_cast<CPetEntity*>(PBattlePet);
+            // A temporary fix until we move the spirit controller to lua.
+            if (Pet->getPetType() == PET_TYPE::AVATAR && Pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            {
+                static_cast<CSpiritController*>(Pet->PAI->GetController())->setMagicCooldowns();
+            }
+        }
+
+        petutils::RetreatToMaster(PBattleMaster);
     }
 }
 
