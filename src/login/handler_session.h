@@ -23,6 +23,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
+#include <asio/ssl.hpp>
+#include <common/logging.h>
 
 class handler_session
 : public std::enable_shared_from_this<handler_session>

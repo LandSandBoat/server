@@ -1,7 +1,20 @@
 set(SOURCES
     ${COMMON_SOURCES}
+    auth_session.h
+    auth_session.cpp
     connect_server.h
+    data_session.h
+    data_session.cpp
+    handler.h
+    handler_session.h
+    login_errors.h
+    login_helpers.h
+    login_helpers.cpp
+    login_packets.h
     main.cpp
+    session.h
+    view_session.h
+    view_session.cpp
 )
 
 # Temporarily remove clashing old code
