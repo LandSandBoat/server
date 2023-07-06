@@ -53,7 +53,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
 
     if leftOver > 0 then
-        caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver / caster:getMaxHP()) * 100, 0, 60)
+        caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver / caster:getMaxHP()) * 100, 0, 180)
     end
 
     caster:addHP(dmg)
