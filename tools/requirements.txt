@@ -1,8 +1,0 @@
-mariadb
-gitpython
-pylint
-pyyaml
-colorama
-zmq
-black
-regex
