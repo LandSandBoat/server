@@ -370,7 +370,7 @@ namespace synthutils
                 chanceHQ = maxChanceHQ;
             }
 
-            if (randomRoll < chanceHQ) // We HQ. Proceed to selct HQ Tier
+            if (randomRoll <= chanceHQ) // We HQ. Proceed to selct HQ Tier
             {
                 synthResult = SYNTHESIS_HQ;
                 randomRoll  = xirand::GetRandomNumber(1, 100);
