@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2023 LandSandBoat Dev Teams
@@ -25,7 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace certificateHelpers
 {
-    void generateSelfSignedCert()
+    inline void generateSelfSignedCert()
     {
         if (std::filesystem::exists("login.key"))
         {
