@@ -88,6 +88,8 @@ struct Trust_t
     int16 hth_sdt;
     int16 impact_sdt;
 
+    int16 magical_sdt;
+
     int16 fire_sdt;
     int16 ice_sdt;
     int16 wind_sdt;
@@ -147,6 +149,7 @@ struct Trust_t
         hth_sdt    = 0;
         impact_sdt = 0;
 
+        magical_sdt = 0;
         fire_sdt    = 0;
         ice_sdt     = 0;
         wind_sdt    = 0;
@@ -234,6 +237,7 @@ namespace trustutils
                 mob_family_system.EVA, \
                 mob_resistances.slash_sdt, mob_resistances.pierce_sdt, \
                 mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
+                mob_resistances.magical_sdt, \
                 mob_resistances.fire_sdt, mob_resistances.ice_sdt, \
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
@@ -312,23 +316,25 @@ namespace trustutils
                 trust->hth_sdt    = (uint16)(sql->GetFloatData(33) * 1000);
                 trust->impact_sdt = (uint16)(sql->GetFloatData(34) * 1000);
 
-                trust->fire_sdt    = (int16)sql->GetIntData(35); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                trust->ice_sdt     = (int16)sql->GetIntData(36); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                trust->wind_sdt    = (int16)sql->GetIntData(37); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                trust->earth_sdt   = (int16)sql->GetIntData(38); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                trust->thunder_sdt = (int16)sql->GetIntData(30); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                trust->water_sdt   = (int16)sql->GetIntData(40); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                trust->light_sdt   = (int16)sql->GetIntData(41); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                trust->dark_sdt    = (int16)sql->GetIntData(42); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                trust->magical_sdt = (int16)sql->GetIntData(35); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_res_rank    = (int8)sql->GetIntData(43);
-                trust->ice_res_rank     = (int8)sql->GetIntData(44);
-                trust->wind_res_rank    = (int8)sql->GetIntData(45);
-                trust->earth_res_rank   = (int8)sql->GetIntData(46);
-                trust->thunder_res_rank = (int8)sql->GetIntData(47);
-                trust->water_res_rank   = (int8)sql->GetIntData(48);
-                trust->light_res_rank   = (int8)sql->GetIntData(49);
-                trust->dark_res_rank    = (int8)sql->GetIntData(50);
+                trust->fire_sdt    = (int16)sql->GetIntData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                trust->ice_sdt     = (int16)sql->GetIntData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                trust->wind_sdt    = (int16)sql->GetIntData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                trust->earth_sdt   = (int16)sql->GetIntData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                trust->thunder_sdt = (int16)sql->GetIntData(40); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                trust->water_sdt   = (int16)sql->GetIntData(41); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                trust->light_sdt   = (int16)sql->GetIntData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                trust->dark_sdt    = (int16)sql->GetIntData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+
+                trust->fire_res_rank    = (int8)sql->GetIntData(44);
+                trust->ice_res_rank     = (int8)sql->GetIntData(45);
+                trust->wind_res_rank    = (int8)sql->GetIntData(46);
+                trust->earth_res_rank   = (int8)sql->GetIntData(47);
+                trust->thunder_res_rank = (int8)sql->GetIntData(48);
+                trust->water_res_rank   = (int8)sql->GetIntData(49);
+                trust->light_res_rank   = (int8)sql->GetIntData(50);
+                trust->dark_res_rank    = (int8)sql->GetIntData(51);
 
                 g_PTrustList.push_back(trust);
             }
