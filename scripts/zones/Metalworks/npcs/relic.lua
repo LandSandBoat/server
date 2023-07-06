@@ -4,7 +4,6 @@
 -- !pos -20 -11 33 237
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

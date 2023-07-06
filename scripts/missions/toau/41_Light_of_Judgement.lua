@@ -5,7 +5,6 @@
 -- !addmission 4 39
 -- Rodin-Comidin : !pos 17.205 -5.999 51.161 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

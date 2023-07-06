@@ -6,7 +6,6 @@
 -- Southern San'doria, Sharzalion,  !pos 95   0 111 230
 -- Southern San'doria, Valderotaux, !pos 97 0.1 113 230
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

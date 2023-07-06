@@ -9,7 +9,6 @@
 -- GOLD_BEASTCOIN     : !additem 748
 -- NYUMOMO_DOLL       : !additem 1706
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

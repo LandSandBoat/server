@@ -6,7 +6,6 @@
 -- Chateau d'Oraguille, Curilla,     !pos 27 0.1 0.1 233
 -- Northern San'doria,  Pagisalis,   !pos 97 0.1 113 231
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

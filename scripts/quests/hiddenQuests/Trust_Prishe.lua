@@ -3,7 +3,6 @@
 -----------------------------------
 -- Walnut Door : !pos 117.029 -42.799 41.997 26
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')

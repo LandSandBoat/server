@@ -2,8 +2,6 @@
 -- Information on Mannequins
 ----------------------------
 
-require("scripts/globals/items")
-
 xi = xi or {}
 xi.mannequin = xi.mannequin or {}
 

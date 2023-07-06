@@ -7,7 +7,6 @@
 -- Jazaraat's Headstone : !pos -389 6 -570 79
 -----------------------------------
 require("scripts/globals/besieged")
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

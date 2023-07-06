@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local portBastokID = require('scripts/zones/Port_Bastok/IDs')
 local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')

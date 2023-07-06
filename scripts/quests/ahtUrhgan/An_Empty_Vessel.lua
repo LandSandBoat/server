@@ -5,7 +5,6 @@
 -- Waoud : !pos 65 -6 -78 50
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------

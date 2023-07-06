@@ -6,7 +6,6 @@
 -- Giwahb Watchtower: !pos -339 -37 654 51
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')

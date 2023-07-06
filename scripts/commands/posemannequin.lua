@@ -2,7 +2,6 @@
 -- func: posemannequin
 -- desc: changes the pose of a mannequin
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/mannequins")
 -----------------------------------
 

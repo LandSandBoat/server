@@ -6,7 +6,6 @@
 -- qm8 (???) Ordelles Caves !pos 44 30 430 193
 -- qm1 (???) Ranguemont Pass !pos 54 10 -147 166
 -----------------------------------
-require('scripts/globals/items')
 -- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

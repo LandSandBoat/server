@@ -3,8 +3,6 @@
 -- Scroll of Adventurer's Dirge
 -- Teaches the song Adventurer's Dirge
 -----------------------------------
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

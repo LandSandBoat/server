@@ -12,7 +12,6 @@
 -- Helaku  : !pos 49 -2 -12 231
 -- Melek   : !pos -80.6 -5.5 157.3 240
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

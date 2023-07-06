@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local windurstWoodsID = require('scripts/zones/Windurst_Woods/IDs')
 local capeTerigganID = require('scripts/zones/Cape_Teriggan/IDs')

@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local kazhamID = require('scripts/zones/Kazham/IDs')
 local gustavTunnelID = require('scripts/zones/Gustav_Tunnel/IDs')
