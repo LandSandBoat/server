@@ -38,14 +38,14 @@ struct packet_t
 
 namespace loginPackets
 {
-    uint32_t getTerminator()
+    inline uint32_t getTerminator()
     {
         uint8_t terminator[4] = { 0x49, 0x58, 0x46, 0x46 }; // "IXFF" special terminator
 
         return terminator[0] | (terminator[1] << 8) | (terminator[2] << 16) | (terminator[3] << 24);
     }
 
-    void copyHashIntoPacket(packet_t& packet, uint8_t hash[16])
+    inline void copyHashIntoPacket(packet_t& packet, uint8_t hash[16])
     {
         for (uint8_t i = 0; i < 16; i++)
         {
@@ -53,7 +53,7 @@ namespace loginPackets
         }
     }
 
-    void clearIdentifier(packet_t& packet)
+    inline void clearIdentifier(packet_t& packet)
     {
         for (uint8_t i = 0; i < 16; i++)
         {
@@ -137,7 +137,6 @@ struct lpkt_chr_info_sub2
     char              world_name[16];     // PS2: world_name
     TC_OPERATION_MAKE character_info;     // PS2: character_info
 };
-
 
 // PS2: lpkt_chr_info2 https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0020_ResponseChrInfo2.md
 struct lpkt_chr_info2 : packet_t

@@ -2018,12 +2018,12 @@ public:
         gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
         [](std::vector<std::string> inputs)
         {
-            size_t uniqueIPs      = loginHelpers::authenticatedSessions_.size();
+            size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
             size_t uniqueAccounts = 0;
 
-            for (auto ipAddrMap: loginHelpers::authenticatedSessions_)
+            for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
             {
-                uniqueAccounts += loginHelpers::authenticatedSessions_[ipAddrMap.first].size();
+                uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
             }
             ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
         });
@@ -2102,8 +2102,9 @@ public:
     {
         if (!error)
         {
-            auto ipAddrIterator = loginHelpers::authenticatedSessions_.begin();
-            while (ipAddrIterator != loginHelpers::authenticatedSessions_.end())
+            auto& sessions       = loginHelpers::getAuthenticatedSessions();
+            auto  ipAddrIterator = sessions.begin();
+            while (ipAddrIterator != sessions.end())
             {
                 auto sessionIterator = ipAddrIterator->second.begin();
                 while (sessionIterator != ipAddrIterator->second.end())
@@ -2126,7 +2127,7 @@ public:
                 // If this map entry is empty, clean it up
                 if (ipAddrIterator->second.size() == 0)
                 {
-                    ipAddrIterator = loginHelpers::authenticatedSessions_.erase(ipAddrIterator);
+                    ipAddrIterator = sessions.erase(ipAddrIterator);
                 }
                 else
                 {
