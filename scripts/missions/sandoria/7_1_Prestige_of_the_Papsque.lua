@@ -9,7 +9,6 @@
 -- Papal Chambers (_6fc) : !pos 131 -11 122 231
 -- qm4                   : !pos -695 -40 21 100
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

@@ -4,7 +4,6 @@
 -- !addquest 9 56
 -- Apolliane : !pos 447.088 -15.846 -320 265
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

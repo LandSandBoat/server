@@ -3,7 +3,6 @@
 -- Fancy Top
 -- Dispenses Persikos Snow Cone
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

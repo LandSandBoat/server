@@ -10,7 +10,6 @@
 -- Waudeen : !pos 673.882 -23.995 367.604 61
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 -----------------------------------

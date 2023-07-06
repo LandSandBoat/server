@@ -5,7 +5,6 @@
 -- !addmission 4 28
 -- Ornamental Door : !pos 299 0 -199 67
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

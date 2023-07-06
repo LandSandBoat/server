@@ -4,7 +4,6 @@
 -- Log ID: 6, Quest ID: 44
 -- Fari-Wari: !pos 80 -6 -137 50
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')

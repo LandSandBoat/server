@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 29
 -- Michea : !pos -298 -16 -157 235
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

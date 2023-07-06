@@ -7,7 +7,6 @@
 -- Ghatsad      : !pos 34.325 -7.804 57.511 50
 -- qm10         : !pos 457.128 -8.249 60.795 54
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Trust: Maat
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')

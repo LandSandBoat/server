@@ -6,7 +6,6 @@
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

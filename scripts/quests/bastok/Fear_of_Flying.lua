@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 35
 -- Kurando : !pos -23.887 3.898 0.870 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
