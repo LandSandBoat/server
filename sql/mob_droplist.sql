@@ -26771,7 +26771,7 @@ INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3222,@VCOMMON);  -- Balance Sto
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3225,@VCOMMON);  -- Balance Card (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,13791,@RARE);    -- Timarli jawshan (Rare, 5%)
 
---ZoneID:  96 - Emela-ntouka
+-- ZoneID:  96 - Emela-ntouka
 INSERT INTO `mob_droplist` VALUES (3284,0,0,1000,19120,@UNCOMMON); -- Avis (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
