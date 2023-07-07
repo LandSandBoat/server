@@ -67294,7 +67294,7 @@ INSERT INTO `item_mods` VALUES (27595,1,12);  -- DEF: 12
 INSERT INTO `item_mods` VALUES (27595,28,12); -- MATT: 12
 
 -- Emico Mantle
-INSERT INTO `item_mods` VALUES (27597,1,12);     -- DEF: 35
+INSERT INTO `item_mods` VALUES (27597,1,12);     -- DEF: 12
 INSERT INTO `item_mods` VALUES (27597,2,20);     -- HP: 20
 INSERT INTO `item_mods` VALUES (27597,10,3);     -- VIT: 3
 INSERT INTO `item_mods` VALUES (27597,18,10);    -- EARTH_RES: 10
