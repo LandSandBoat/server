@@ -146,13 +146,5 @@ time_point get_server_start_time()
 
 uint32 getCurrentTimeMs()
 {
-#ifdef WIN32
-    SYSTEMTIME oSystemTime;
-    GetSystemTime(&oSystemTime);
-    return oSystemTime.wMilliseconds;
-#else
-    timeval tv;
-    gettimeofday(&tv, 0);
-    return tv.tv_usec;
-#endif
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() % 1000;
 }
