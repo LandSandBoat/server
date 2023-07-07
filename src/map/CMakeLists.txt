@@ -45,8 +45,11 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_zmq.h
     ${CMAKE_CURRENT_SOURCE_DIR}/daily_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/daily_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/enmity_container.cpp

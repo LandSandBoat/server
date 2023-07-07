@@ -11,6 +11,7 @@ set(SOURCES
     http_server.cpp
     http_server.h
     main.cpp
+    message_handler.h
     message_server.cpp
     message_server.h
     world_server.cpp
@@ -47,5 +48,9 @@ target_include_directories(xi_world
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+if (APPLE)
+    disable_lto(xi_world)
+endif()
 
 set_target_output_directory(xi_world)
