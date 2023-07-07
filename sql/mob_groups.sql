@@ -6441,7 +6441,7 @@ INSERT INTO `mob_groups` VALUES (9,2167,96,'Jumbo_Rafflesia',330,0,313,0,0,65,69
 INSERT INTO `mob_groups` VALUES (10,6326,96,'Dragonfly',330,0,142,0,0,55,60,0);
 INSERT INTO `mob_groups` VALUES (11,5766,96,'Demoiselle_Desolee',0,32,3050,20000,0,83,84,0);
 INSERT INTO `mob_groups` VALUES (12,5642,96,'War_Lizard',330,0,221,0,0,40,43,0);
-INSERT INTO `mob_groups` VALUES (13,4706,96,'Emela-ntouka',0,128,0,5000,0,52,52,0);
+INSERT INTO `mob_groups` VALUES (13,4706,96,'Emela-ntouka',0,0,3284,5000,0,52,52,0);
 INSERT INTO `mob_groups` VALUES (14,5483,96,'Yagudo_Interrogator',330,0,1890,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (15,5490,96,'Yagudo_Drummer',330,0,2704,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (16,5489,96,'Yagudo_Votary',330,0,1890,0,0,66,69,0);
