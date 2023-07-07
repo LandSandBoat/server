@@ -67293,6 +67293,13 @@ INSERT INTO `item_mods` VALUES (27594,288,4); -- DOUBLE_ATTACK: 4
 INSERT INTO `item_mods` VALUES (27595,1,12);  -- DEF: 12
 INSERT INTO `item_mods` VALUES (27595,28,12); -- MATT: 12
 
+-- Emico Mantle
+INSERT INTO `item_mods` VALUES (27597,1,12);     -- DEF: 35
+INSERT INTO `item_mods` VALUES (27597,2,20);     -- HP: 20
+INSERT INTO `item_mods` VALUES (27597,10,3);     -- VIT: 3
+INSERT INTO `item_mods` VALUES (27597,18,10);    -- EARTH_RES: 10
+INSERT INTO `item_mods` VALUES (27597,27,4);     -- ENMITY: 4
+
 -- Dew Silk Cape
 INSERT INTO `item_mods` VALUES (27598,1,7);   -- DEF: 7
 INSERT INTO `item_mods` VALUES (27598,13,5);  -- MND: 5
