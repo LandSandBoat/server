@@ -255,27 +255,15 @@ local function magicAccuracyFromMagicBurst(target, spellElement)
     then
         -- Strong weathers.
         if weather == xi.combat.element.strongSingleWeather[spellElement] then
-            magicAcc = magicAcc + 5
-            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                magicAcc = magicAcc + 5
-            end
+            magicAcc = magicAcc + actor:getMod(xi.mod.IRIDESCENCE) * 5 + 5
         elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
-            magicAcc = magicAcc + 10
-            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                magicAcc = magicAcc + 5
-            end
+            magicAcc = magicAcc + actor:getMod(xi.mod.IRIDESCENCE) * 5 + 10
 
         -- Weak weathers.
         elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
-            magicAcc = magicAcc - 5
-            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                magicAcc = magicAcc - 5
-            end
+            magicAcc = magicAcc - actor:getMod(xi.mod.IRIDESCENCE) * 5 - 5
         elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
-            magicAcc = magicAcc - 10
-            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                magicAcc = magicAcc - 5
-            end
+            magicAcc = magicAcc - actor:getMod(xi.mod.IRIDESCENCE) * 5 - 10
         end
     end
 
