@@ -2,6 +2,7 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
+require("scripts/globals/combat/element_tables")
 require("scripts/globals/combat/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
@@ -20,23 +21,6 @@ xi.spells.damage = xi.spells.damage or {}
 -----------------------------------
 -- Tables
 -----------------------------------
--- Structure:       function = { Fire,                 Ice,                   Air,                  Earth,                 Thunder,                  Water,                    Light,                    Dark                     }
-xi.magic.dayStrong           = { xi.day.FIRESDAY,      xi.day.ICEDAY,         xi.day.WINDSDAY,      xi.day.EARTHSDAY,      xi.day.LIGHTNINGDAY,      xi.day.WATERSDAY,         xi.day.LIGHTSDAY,         xi.day.DARKSDAY          }
-xi.magic.dayWeak             = { xi.day.WATERSDAY,     xi.day.FIRESDAY,       xi.day.ICEDAY,        xi.day.WINDSDAY,       xi.day.EARTHSDAY,         xi.day.LIGHTNINGDAY,      xi.day.DARKSDAY,          xi.day.LIGHTSDAY         }
-xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL, xi.weather.SNOW,       xi.weather.WIND,      xi.weather.DUST_STORM, xi.weather.THUNDER,       xi.weather.RAIN,          xi.weather.AURORAS,       xi.weather.GLOOM         }
-xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE, xi.weather.BLIZZARDS,  xi.weather.GALES,     xi.weather.SAND_STORM, xi.weather.THUNDERSTORMS, xi.weather.SQUALL,        xi.weather.STELLAR_GLARE, xi.weather.DARKNESS      }
-xi.magic.singleWeatherWeak   = { xi.weather.RAIN,      xi.weather.HOT_SPELL,  xi.weather.SNOW,      xi.weather.WIND,       xi.weather.DUST_STORM,    xi.weather.THUNDER,       xi.weather.GLOOM,         xi.weather.AURORAS       }
-xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,    xi.weather.HEAT_WAVE,  xi.weather.BLIZZARDS, xi.weather.GALES,      xi.weather.SAND_STORM,    xi.weather.THUNDERSTORMS, xi.weather.DARKNESS,      xi.weather.STELLAR_GLARE }
-xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,      xi.mod.ICE_SDT,        xi.mod.WIND_SDT,      xi.mod.EARTH_SDT,      xi.mod.THUNDER_SDT,       xi.mod.WATER_SDT,         xi.mod.LIGHT_SDT,         xi.mod.DARK_SDT          }
-xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,   xi.mod.ICE_ABSORB,     xi.mod.WIND_ABSORB,   xi.mod.EARTH_ABSORB,   xi.mod.LTNG_ABSORB,       xi.mod.WATER_ABSORB,      xi.mod.LIGHT_ABSORB,      xi.mod.DARK_ABSORB       }
-xi.magic.barSpell            = { xi.effect.BARFIRE,    xi.effect.BARBLIZZARD, xi.effect.BARAERO,    xi.effect.BARSTONE,    xi.effect.BARTHUNDER,     xi.effect.BARWATER        }
-
-local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,   xi.mod.FORCE_ICE_DWBONUS,   xi.mod.FORCE_WIND_DWBONUS,   xi.mod.FORCE_EARTH_DWBONUS,   xi.mod.FORCE_LIGHTNING_DWBONUS,   xi.mod.FORCE_WATER_DWBONUS,  xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
-local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,    xi.mod.ICE_AFFINITY_DMG,    xi.mod.WIND_AFFINITY_DMG,    xi.mod.EARTH_AFFINITY_DMG,    xi.mod.THUNDER_AFFINITY_DMG,      xi.mod.WATER_AFFINITY_DMG,   xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
-local nullMod                = { xi.mod.FIRE_NULL,            xi.mod.ICE_NULL,            xi.mod.WIND_NULL,            xi.mod.EARTH_NULL,            xi.mod.LTNG_NULL,                 xi.mod.WATER_NULL,           xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL          }
-local resistRankMod          = { xi.mod.FIRE_RES_RANK,        xi.mod.ICE_RES_RANK,        xi.mod.WIND_RES_RANK,        xi.mod.EARTH_RES_RANK,        xi.mod.THUNDER_RES_RANK,          xi.mod.WATER_RES_RANK,       xi.mod.LIGHT_RES_RANK,      xi.mod.DARK_RES_RANK      }
-local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY, xi.merit.ICE_MAGIC_POTENCY, xi.merit.WIND_MAGIC_POTENCY, xi.merit.EARTH_MAGIC_POTENCY, xi.merit.LIGHTNING_MAGIC_POTENCY, xi.merit.WATER_MAGIC_POTENCY }
-
 -- Table variables.
 local stat            = 1
 local bonusSpellMacc  = 2
@@ -328,7 +312,7 @@ xi.spells.damage.calculateMTDR = function(spell)
 end
 
 xi.spells.damage.calculateEleStaffBonus = function(caster, spellElement)
-    local eleStaffBonus = caster:getMod(strongAffinityDmg[spellElement])
+    local eleStaffBonus = caster:getMod(xi.combat.element.strongAffinityDmg[spellElement])
 
     if eleStaffBonus > 0 then
         eleStaffBonus = 1 + eleStaffBonus * 0.05
@@ -355,7 +339,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdtMod = 0
 
     if spellElement > 0 then
-        sdtMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement])
+        sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
@@ -404,7 +388,7 @@ xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
         local rankBonus  = 0
 
         if spellElement ~= xi.magic.ele.NONE then
-            local resistRank = target:getMod(resistRankMod[spellElement])
+            local resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
             local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
 
             if resistRank <= -3 then
@@ -437,10 +421,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     -- MBB = MBB + trait
 
     if spellGroup == xi.magic.spellGroup.BLUE then
-        if
-            not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-            caster:hasStatusEffect(xi.effect.AZURE_LORE))
-        then
+        if not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
             return magicBurstBonus
         end
 
@@ -481,57 +462,60 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     local isHelixSpell  = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
-    if spellId >= 278 and spellId <= 285 then
+    if spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX then
         isHelixSpell = true
     end
 
     -- Calculate Weather bonus
     if
-        math.random() < 0.33 or
-        caster:getMod(elementalObi[spellElement]) >= 1 or
+        math.random(1, 100) <= 33 or
+        caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
         isHelixSpell
     then
-        if weather == xi.magic.singleWeatherStrong[spellElement] then
-            dayAndWeather = dayAndWeather + 0.10
+        -- Strong weathers.
+        if weather == xi.combat.element.strongSingleWeather[spellElement] then
+            dayAndWeather = dayAndWeather + 0.1
             if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayAndWeather = dayAndWeather + 0.10
+                dayAndWeather = dayAndWeather + 0.05
             end
-        elseif weather == xi.magic.singleWeatherWeak[spellElement] then
-            dayAndWeather = dayAndWeather - 0.10
-        elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
+        elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
             dayAndWeather = dayAndWeather + 0.25
             if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayAndWeather = dayAndWeather + 0.10
+                dayAndWeather = dayAndWeather + 0.1
             end
-        elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
+
+        -- Weak weathers.
+        elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
+            dayAndWeather = dayAndWeather - 0.1
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather - 0.05
+            end
+        elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
             dayAndWeather = dayAndWeather - 0.25
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather - 0.1
+            end
         end
     end
 
     -- Calculate day bonus
-    if dayElement == spellElement then
-        dayAndWeather = dayAndWeather + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
-        if
-            math.random() < 0.33 or
-            caster:getMod(elementalObi[spellElement]) >= 1 or
-            isHelixSpell
-        then
-            dayAndWeather = dayAndWeather + 0.10
-        end
-    elseif dayElement == xi.magic.elementDescendant[spellElement] then
-        if
-            math.random() < 0.33 or
-            caster:getMod(elementalObi[spellElement]) >= 1 or
-            isHelixSpell
-        then
-            dayAndWeather = dayAndWeather - 0.10
+    if
+        math.random(1, 100) <= 33 or
+        caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
+        isHelixSpell
+    then
+        -- Strong day.
+        if dayElement == spellElement then
+            dayAndWeather = dayAndWeather + 0.1 + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
+
+        -- Weak day.
+        elseif dayElement == xi.combat.element.weakDay[spellElement] then
+            dayAndWeather = dayAndWeather - 0.1
         end
     end
 
     -- Cap bonuses from both day and weather
-    if dayAndWeather > 1.4 then
-        dayAndWeather = 1.4
-    end
+    dayAndWeather = utils.clamp(dayAndWeather, 0.6, 1.4)
 
     return dayAndWeather
 end
@@ -583,18 +567,19 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         end
     end
 
-    if math.random(1, 100) < mabCrit then
+    if math.random(1, 100) <= mabCrit then
         mab = mab + 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE)
     end
 
-    -- Bar Spells bonuses
+    -- Bar Spells bonuses and BLM merits.
     if
         spellElement >= xi.magic.element.FIRE and
         spellElement <= xi.magic.element.WATER
     then
-        mab = mab + caster:getMerit(blmMerit[spellElement])
-        if target:hasStatusEffect(xi.magic.barSpell[spellElement]) then -- bar- spell magic defense bonus
-            mDefBarBonus = target:getStatusEffect(xi.magic.barSpell[spellElement]):getSubPower()
+        mab = mab + caster:getMerit(xi.combat.element.blmMerit[spellElement])
+
+        if target:hasStatusEffect(xi.combat.element.barSpell[spellElement]) then -- bar- spell magic defense bonus
+            mDefBarBonus = target:getStatusEffect(xi.combat.element.barSpell[spellElement]):getSubPower()
         end
     end
 
@@ -674,7 +659,7 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster)
     return ebullienceMultiplier
 end
 
--- CUSTOM function supported in scripts/globals/settings.lua
+-- CUSTOM function supported in settings.
 xi.spells.damage.calculateSkillTypeMultiplier = function(skillType)
     local skillTypeMultiplier = 1
 
@@ -750,14 +735,14 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
 
     -- Calculate chance for spell absorption.
-    if math.random(1, 100) <= target:getMod(xi.magic.absorbMod[spellElement]) then
+    if math.random(1, 100) <= target:getMod(xi.combat.element.absorbMod[spellElement]) then
         nukeAbsorbOrNullify = -1
     end
 
     -- Calculate chance for spell nullification.
     local nullifyChance = math.random(1, 100)
     if
-        nullifyChance <= target:getMod(nullMod[spellElement]) or
+        nullifyChance <= target:getMod(xi.combat.element.nullMod[spellElement]) or
         nullifyChance <= target:getMod(xi.mod.MAGIC_NULL)
     then
         nukeAbsorbOrNullify = 0

@@ -1,26 +1,13 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
+require("scripts/globals/combat/element_tables")
 require("scripts/globals/combat/level_correction")
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
 -----------------------------------
-
--- Modifier table per element.
-xi.combat.magicHitRate.elementTable =
-{
-    [xi.magic.element.FIRE   ] = { xi.mod.FIREACC,    xi.mod.FIRE_AFFINITY_ACC,    xi.mod.FIRE_MEVA,    xi.mod.FIRE_RES_RANK,    xi.merit.FIRE_MAGIC_ACCURACY      },
-    [xi.magic.element.ICE    ] = { xi.mod.ICEACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.ICE_MEVA,     xi.mod.ICE_RES_RANK,     xi.merit.ICE_MAGIC_ACCURACY       },
-    [xi.magic.element.WIND   ] = { xi.mod.WINDACC,    xi.mod.WIND_AFFINITY_ACC,    xi.mod.WIND_MEVA,    xi.mod.WIND_RES_RANK,    xi.merit.WIND_MAGIC_ACCURACY      },
-    [xi.magic.element.EARTH  ] = { xi.mod.EARTHACC,   xi.mod.EARTH_AFFINITY_ACC,   xi.mod.EARTH_MEVA,   xi.mod.EARTH_RES_RANK,   xi.merit.EARTH_MAGIC_ACCURACY     },
-    [xi.magic.element.THUNDER] = { xi.mod.THUNDERACC, xi.mod.THUNDER_AFFINITY_ACC, xi.mod.THUNDER_MEVA, xi.mod.THUNDER_RES_RANK, xi.merit.LIGHTNING_MAGIC_ACCURACY },
-    [xi.magic.element.WATER  ] = { xi.mod.WATERACC,   xi.mod.WATER_AFFINITY_ACC,   xi.mod.WATER_MEVA,   xi.mod.WATER_RES_RANK,   xi.merit.WATER_MAGIC_ACCURACY     },
-    [xi.magic.element.LIGHT  ] = { xi.mod.LIGHTACC,   xi.mod.LIGHT_AFFINITY_ACC,   xi.mod.LIGHT_MEVA,   xi.mod.LIGHT_RES_RANK,   0                                 },
-    [xi.magic.element.DARK   ] = { xi.mod.DARKACC,    xi.mod.DARK_AFFINITY_ACC,    xi.mod.DARK_MEVA,    xi.mod.DARK_RES_RANK,    0                                 },
-}
-
 -- Actor Magic Accuracy
 xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local actorJob     = actor:getMainJob()
@@ -41,8 +28,8 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
 
     -- Add acc for elemental affinity accuracy and element specific accuracy
     if spellElement ~= xi.magic.ele.NONE then
-        local elementBonus  = actor:getMod(xi.combat.magicHitRate.elementTable[spellElement][1])
-        local affinityBonus = actor:getMod(xi.combat.magicHitRate.elementTable[spellElement][2]) * 10
+        local elementBonus  = actor:getMod(xi.combat.element.elementalMagicAcc[spellElement])
+        local affinityBonus = actor:getMod(xi.combat.element.strongAffinityAcc[spellElement]) * 10
 
         magicAcc = magicAcc + elementBonus + affinityBonus
     end
@@ -181,7 +168,7 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
                 spellElement >= xi.magic.element.FIRE and
                 spellElement <= xi.magic.element.WATER
             then
-                magicAcc = magicAcc + actor:getMerit(xi.combat.magicHitRate.elementTable[spellElement][5])
+                magicAcc = magicAcc + actor:getMerit(xi.combat.element.rdmMerit[spellElement])
             end
 
             -- Category 2
@@ -229,8 +216,8 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     -- Elemental magic evasion.
     if spellElement ~= xi.magic.ele.NONE then
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
-        resMod     = target:getMod(xi.combat.magicHitRate.elementTable[spellElement][3])
-        resistRank = target:getMod(xi.combat.magicHitRate.elementTable[spellElement][4])
+        resMod     = target:getMod(xi.combat.element.elementalMagicEva[spellElement])
+        resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
 
         if resistRank > 4 then
             resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
@@ -272,7 +259,7 @@ end
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
     local targetResistRate = 0 -- The variable we return.
-    local targetResistRank = target:getMod(xi.combat.magicHitRate.elementTable[spellElement][4])
+    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
 
     ----------------------------------------
     -- Handle "Magic Shield" status effect.
