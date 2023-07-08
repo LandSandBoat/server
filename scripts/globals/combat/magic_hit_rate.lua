@@ -236,6 +236,61 @@ local function magicAccuracyFromMagicBurst(target, spellElement)
         magicAcc = 100
     end
 
+    -----------------------------------
+    -- magicAcc from Weather
+    -----------------------------------
+    local weather = actor:getWeather()
+
+    -- Calculate Weather bonus
+    if
+        math.random(1, 100) <= 33 or
+        actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1
+    then
+        -- Strong weathers.
+        if weather == xi.combat.element.strongSingleWeather[spellElement] then
+            magicAcc = magicAcc + 5
+            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                magicAcc = magicAcc + 5
+            end
+        elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
+            magicAcc = magicAcc + 10
+            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                magicAcc = magicAcc + 5
+            end
+
+        -- Weak weathers.
+        elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
+            magicAcc = magicAcc - 5
+            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                magicAcc = magicAcc - 5
+            end
+        elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
+            magicAcc = magicAcc - 10
+            if actor:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                magicAcc = magicAcc - 5
+            end
+        end
+    end
+
+    -----------------------------------
+    -- magicAcc from Day
+    -----------------------------------
+    local dayElement = VanadielDayElement()
+
+    if
+        math.random(1, 100) <= 33 or
+        actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1
+    then
+        -- Strong day.
+        if dayElement == spellElement then
+            magicAcc = magicAcc + 5
+
+        -- Weak day.
+        elseif dayElement == xi.combat.element.weakDay[spellElement] then
+            magicAcc = magicAcc - 5
+        end
+    end
+
     return magicAcc
 end
 
