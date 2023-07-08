@@ -3,7 +3,6 @@
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
 require("scripts/globals/combat/element_tables")
-require("scripts/globals/combat/element_tables")
 require("scripts/globals/combat/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
@@ -422,10 +421,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     -- MBB = MBB + trait
 
     if spellGroup == xi.magic.spellGroup.BLUE then
-        if
-            not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-            not caster:hasStatusEffect(xi.effect.AZURE_LORE)
-        then
+        if not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
             return magicBurstBonus
         end
 
@@ -466,10 +462,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     local isHelixSpell  = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
-    if
-        spellId >= xi.magic.spell.GEOHELIX and
-        spellId <= xi.magic.spell.LUMINOHELIX
-    then
+    if spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX then
         isHelixSpell = true
     end
 
@@ -477,21 +470,31 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     if
         math.random(1, 100) <= 33 or
         caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
-        math.random(1, 100) <= 33 or
-        caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
         isHelixSpell
     then
         -- Strong weathers.
         if weather == xi.combat.element.strongSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.1
+            dayAndWeather = dayAndWeather + 0.1
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather + 0.05
+            end
         elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.25
+            dayAndWeather = dayAndWeather + 0.25
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather + 0.1
+            end
 
         -- Weak weathers.
         elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.1
+            dayAndWeather = dayAndWeather - 0.1
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather - 0.05
+            end
         elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.25
+            dayAndWeather = dayAndWeather - 0.25
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather - 0.1
+            end
         end
     end
 
