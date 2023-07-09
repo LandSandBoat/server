@@ -15,7 +15,8 @@ set(SOURCES
     message_server.cpp
     message_server.h
     world_server.cpp
-    world_server.h)
+    world_server.h
+        )
 
 # Temporarily remove clashing old code
 # TODO: Remove this block

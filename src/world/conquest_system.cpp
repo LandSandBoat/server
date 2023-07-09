@@ -107,8 +107,8 @@ void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones, uint64 ipp)
     ref<uint8>((uint8*)data, 2) = shouldUpdateZones;
 
     // Influences controls array
-    ref<uint32>((uint8*)data, 3) = influences.size();
-    for (int i = 0; i < influences.size(); i++)
+    ref<std::size_t>((uint8*)data, 3) = influences.size();
+    for (std::size_t i = 0; i < influences.size(); i++)
     {
         // Everything is offset by i*size of region control struct + headerLength
         const std::size_t start              = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
@@ -152,8 +152,8 @@ void ConquestSystem::sendRegionControlsMsg(CONQUESTMSGTYPE msgType, uint64 ipp)
     ref<uint8>((uint8*)data, 1) = msgType;
 
     // Region controls array
-    ref<uint32>((uint8*)data, 2) = regionControls.size();
-    for (int i = 0; i < regionControls.size(); i++)
+    ref<std::size_t>((uint8*)data, 2) = regionControls.size();
+    for (std::size_t i = 0; i < regionControls.size(); i++)
     {
         // Everything is offset by i*size of region control struct + headerLength + size of size_t
         const std::size_t offset             = headerLength + sizeof(size_t) + sizeof(region_control_t) * i;
