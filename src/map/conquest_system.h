@@ -19,13 +19,11 @@
 ===========================================================================
 */
 
-#ifndef _CONQUESTSYSTEM_H
-#define _CONQUESTSYSTEM_H
+#pragma once
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "conquest_data.h"
-#include "conquest_zmq.h"
 #include "zone.h"
 
 enum ConquestUpdate : uint8
@@ -71,5 +69,3 @@ namespace conquest
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
 };                                                            // namespace conquest
-
-#endif

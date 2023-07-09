@@ -26,7 +26,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "alliance.h"
 #include "conquest_system.h"
-#include "conquest_zmq.h"
 #include "linkshell.h"
 #include "party.h"
 #include "status_effect_container.h"
