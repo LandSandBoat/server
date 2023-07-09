@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
-    local itemKeyItemMapping = 
+    local itemKeyItemMapping =
     {
         [2694] = xi.ki.HABALOS_ECLOGUE_VERSE_I,
         [2695] = xi.ki.HABALOS_ECLOGUE_VERSE_II,
@@ -22,8 +22,7 @@ entity.onTrade = function(player, npc, trade)
         [2701] = xi.ki.HABALOS_ECLOGUE_VERSE_VIII
     }
     -- Make sure we're only trading 1 Basket at a time.
-    if npcUtil.tradeHasExactly(trade, itemID) and
-    itemKeyItemMapping[itemID]
+    if npcUtil.tradeHasExactly(trade, itemID) and itemKeyItemMapping[itemID]
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]
