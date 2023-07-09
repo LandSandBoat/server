@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2023 LandSandBoat Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,6 +19,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 #include "connect_server.h"
+
+// openssl applink.c prevents issues with debug vs release vs threaded/single threaded .dlls at runtime
+// apparently not an issue with linux
+#ifdef _WIN32
+#include <ms/applink.c>
+#endif
 
 // TODO: Standardize our running arguments for shutdown and thread signals
 std::atomic<bool> gRunFlag = true;

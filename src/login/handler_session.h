@@ -30,63 +30,17 @@ class handler_session
 : public std::enable_shared_from_this<handler_session>
 {
 public:
-    handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
-    : socket_(std::move(socket))
-    {
-        socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
-        ipAddress = socket_.lowest_layer().remote_endpoint().address().to_string();
-    }
+    handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket);
 
     virtual ~handler_session() = default;
 
-    void start()
-    {
-        do_read();
-    }
+    void start();
 
-    void do_read()
-    {
-        auto self(shared_from_this());
+    void do_read();
 
-        // clang-format off
-        socket_.next_layer().async_read_some(asio::buffer(data_, max_length),
-        [this, self](std::error_code ec, std::size_t length)
-        {
-            if (!ec)
-            {
-                read_func();
-            }
-            else
-            {
-                DebugSockets("async_read_some error in from IP {}:\n{}", ipAddress, ec.message());
-                handle_error(ec, self);
-            }
-        });
-        // clang-format on
-    }
+    virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self);
 
-    virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
-    {
-    }
-
-    void do_write(std::size_t length)
-    {
-        auto self(shared_from_this());
-        // clang-format off
-        asio::async_write(socket_.next_layer(), asio::buffer(data_, length),
-        [this, self](std::error_code ec, std::size_t /*length*/)
-        {
-            if (!ec)
-            {
-                write_func();
-            }
-            else
-            {
-                ShowError(ec.message());
-            }
-        });
-        // clang-format on
-    }
+    void do_write(std::size_t length);
 
     virtual void read_func()  = 0;
     virtual void write_func() = 0;

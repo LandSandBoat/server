@@ -175,9 +175,10 @@ void view_session::read_func()
         break;
         case 0x22: // 34: Checking name and Gold World Pass
         {
-            // block creation of character if in maintenance mode
-            auto maintMode = settings::get<uint8>("login.MAINT_MODE");
-            if (maintMode > 0)
+            // block creation of character if in maintenance mode or generally disabled
+            auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
+            auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
+            if (maintMode > 0 || !enableCharacterCreation)
             {
                 loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
                 do_write(0x24);

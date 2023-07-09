@@ -3,10 +3,12 @@ set(SOURCES
     auth_session.h
     auth_session.cpp
     connect_server.h
+    connect_server.cpp
     data_session.h
     data_session.cpp
     handler.h
     handler_session.h
+    handler_session.cpp
     login_errors.h
     login_helpers.h
     login_helpers.cpp
