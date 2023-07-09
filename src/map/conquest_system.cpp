@@ -35,7 +35,8 @@
 
 namespace conquest
 {
-    std::shared_ptr<ConquestData> conquestData;
+    static std::shared_ptr<ConquestData> conquestData;
+
     std::shared_ptr<ConquestData> GetConquestData()
     {
         if (conquestData == nullptr)
