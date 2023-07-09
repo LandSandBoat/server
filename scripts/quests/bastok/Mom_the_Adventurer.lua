@@ -36,7 +36,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status ~= QUEST_ACCEPTED and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) < 2 and
                 vars.Prog == 0
         end,
 
