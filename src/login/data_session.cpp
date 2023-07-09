@@ -1,4 +1,25 @@
-﻿#include "data_session.h"
+﻿/*
+===========================================================================
+
+Copyright (c) 2023 LandSandBoat Dev Teams
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "data_session.h"
 
 #include <common/utils.h>
 
@@ -159,12 +180,16 @@ void data_session::read_func()
                     }
                 }
 
-                // make extra char slots available if no characters are occupying the slots and their max content IDs supports it
-                while (characterInfoResponse.characters < numContentIds)
+                auto allowCharacterCreation = settings::get<uint8>("login.CHARACTER_CREATION");
+                if (allowCharacterCreation)
                 {
-                    characterInfoResponse.character_info[characterInfoResponse.characters].status            = 0x01; // Available
-                    characterInfoResponse.character_info[characterInfoResponse.characters].character_name[0] = 0x20; // space to display empty character slot, NULL displays a hume in a slot.
-                    characterInfoResponse.characters++;
+                    // make extra char slots available if no characters are occupying the slots and their max content IDs supports it
+                    while (characterInfoResponse.characters < numContentIds)
+                    {
+                        characterInfoResponse.character_info[characterInfoResponse.characters].status            = 0x01; // Available
+                        characterInfoResponse.character_info[characterInfoResponse.characters].character_name[0] = 0x20; // space to display empty character slot, NULL displays a hume in a slot.
+                        characterInfoResponse.characters++;
+                    }
                 }
 
                 // the filtering above removes any non-GM characters so
