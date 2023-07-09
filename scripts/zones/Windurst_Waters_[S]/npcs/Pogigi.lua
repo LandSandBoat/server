@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]
-        npc:showText(npc, 13398) --Need to confirm these texts, used KO captures but might be outdated.
+        npc:showText(npc, 13417)
         npcUtil.giveKeyItem(player, keyItem)
     end
 end
