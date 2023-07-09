@@ -83,7 +83,7 @@ void auth_session::read_func()
     std::memcpy(usernameBuffer, data_ + 0x09, 16);
     std::memcpy(passwordBuffer, data_ + 0x19, 32);
     // 1 byte of command at 0x39
-    // 17 bytes of reserved space starting at 0x50
+    // 17 bytes of operator specific space starting at 0x50. This region will be used for anything server operators may install into custom launchers.
     std::string version(data_ + 0x61, 5);
 
     std::string username(usernameBuffer, 16);
@@ -327,7 +327,7 @@ void auth_session::read_func()
             if (status & ACCOUNT_STATUS_CODE::NORMAL)
             {
                 // Account info verified, grab password
-                std::string updated_password(data_ + 0x30, 16);
+                std::string updated_password(data_ + 0x40, 32);
 
                 if (updated_password == "")
                 {
@@ -337,7 +337,7 @@ void auth_session::read_func()
                     return;
                 }
 
-                char escaped_updated_password[16 * 2 + 1];
+                char escaped_updated_password[32 * 2 + 1];
                 sql->EscapeString(escaped_updated_password, updated_password.c_str());
 
                 sql->Query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accid);
