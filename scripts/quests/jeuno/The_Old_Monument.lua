@@ -6,7 +6,6 @@
 -- Bki Tbujhja : !pos -22 0 -60 245
 -- Song Runes  : !pos -244 16 -280 118
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -2,8 +2,6 @@
 -- Abjurations
 -- Used by Alphollon C Meriard
 -----------------------------------
-require('scripts/globals/items')
------------------------------------
 
 xi = xi or {}
 

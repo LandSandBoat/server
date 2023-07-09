@@ -10,7 +10,6 @@
 -- Cid     : !pos -12 -12 1 237
 -- qm2     : !pos 102 -4 -114 122 (Varies)
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

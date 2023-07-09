@@ -3,7 +3,6 @@
 -- Dark Cluster
 -- Turn into a stack of dark crystals
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

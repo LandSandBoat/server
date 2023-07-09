@@ -1,7 +1,6 @@
 -----------------------------------
 -- Pankration System + Helpers
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/utils")

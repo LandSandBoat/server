@@ -8,7 +8,6 @@
 -- VELKK_MASK     : !additem 3929
 -- Felmsy         : !pos -53.111 -0.150 88.456 257
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

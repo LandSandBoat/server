@@ -4,7 +4,6 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 -----------------------------------
 local instanceObject = {}
 

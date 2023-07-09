@@ -3,8 +3,6 @@
 -- Scroll of Foe Sirvente
 -- Teaches the song Foe Sirvente
 -----------------------------------
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

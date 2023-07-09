@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 4
 -- Corann : !pos 90.935 -8.772 32.564 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

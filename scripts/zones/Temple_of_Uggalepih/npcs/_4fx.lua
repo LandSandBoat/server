@@ -4,7 +4,6 @@
 -- !pos 340 0.1 329 159
 -----------------------------------
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require('scripts/globals/items')
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

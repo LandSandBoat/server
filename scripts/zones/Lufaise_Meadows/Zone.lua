@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Lufaise_Meadows/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

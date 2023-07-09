@@ -4,7 +4,6 @@
 -- !pos -221 -24 19 206
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

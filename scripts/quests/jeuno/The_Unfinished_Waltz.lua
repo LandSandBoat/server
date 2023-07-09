@@ -6,7 +6,6 @@
 -- qm1   : !pos -157.16 -8 596.9 89
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

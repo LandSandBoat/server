@@ -12,7 +12,6 @@
 -- Orcish Scale Mail : ItemID 1112
 -- Bat Fang          : ItemID 891
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

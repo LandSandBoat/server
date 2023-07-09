@@ -5,7 +5,6 @@
 -- !pos 41.169 3.899 -51.005 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

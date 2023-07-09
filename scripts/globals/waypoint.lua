@@ -2,7 +2,6 @@
 -- Waypoint Teleporters
 -- https://www.bg-wiki.com/ffxi/Waypoint
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------

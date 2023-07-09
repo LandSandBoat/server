@@ -8,7 +8,6 @@
 -- Ququroon       : !pos -2.400 -1 66.824 53
 -- Kyokyoroon     : !pos 18.020 -6.000 10.467 53
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/utils')
 require('scripts/globals/zone')

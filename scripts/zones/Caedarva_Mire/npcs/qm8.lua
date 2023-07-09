@@ -4,7 +4,6 @@
 -- Gives Lamian Fang Key
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
