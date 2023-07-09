@@ -1257,7 +1257,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or
+                player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
@@ -2000,7 +2001,6 @@ xi.bcnm.onTrigger = function(player, npc)
         if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
             mask = 268435455
         end
-
 
         -- mask = 268435455 -- uncomment to open menu with all possible battlefields
         if mask ~= 0 then
