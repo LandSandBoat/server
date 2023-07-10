@@ -394,7 +394,7 @@ xi.zone =
     GWORA_THRONE_ROOM               = 299,
 
     -- Increment this when adding new zones
-    MAX_ZONE                        = 300,
+    MAX_ZONE                        = 299,
 }
 
 xi.expansionRegion = xi.expansionRegion or {}
