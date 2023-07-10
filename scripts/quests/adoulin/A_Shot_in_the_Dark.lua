@@ -7,7 +7,6 @@
 -- UMBRIL_OOZE : !additem 3935
 -- Pudith      : !pos -109.533 -0.150 56.939 257
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

@@ -12852,8 +12852,8 @@ INSERT INTO `item_equipment` VALUES (27146,'bewegt_cuffs',99,119,512,242,0,0,64,
 INSERT INTO `item_equipment` VALUES (27147,'redan_gloves',99,119,193,111,0,0,64,0,0);
 INSERT INTO `item_equipment` VALUES (27148,'tatena._gote',99,119,7171,227,0,0,64,0,0);
 INSERT INTO `item_equipment` VALUES (27149,'tatena._gote_+1',99,119,7171,227,0,0,64,0,0);
-INSERT INTO `item_equipment` VALUES (27150,'gazu_bracelet',99,119,4179646,0,0,0,64,0,0);
-INSERT INTO `item_equipment` VALUES (27151,'gazu_bracelet_+1',99,119,4179646,0,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (27150,'gazu_bracelets',99,119,4179646,0,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (27151,'gazu_bracelets_+1',99,119,4179646,0,0,0,64,0,0);
 INSERT INTO `item_equipment` VALUES (27152,'agoge_cuisses',99,109,1,65,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (27153,'agoge_cuisses_+1',99,119,1,65,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (27154,'hes._hose',99,109,2,67,0,0,128,0,0);

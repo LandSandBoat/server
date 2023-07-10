@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
 local ifritsCauldronID = require('scripts/zones/Ifrits_Cauldron/IDs')

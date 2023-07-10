@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
 local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')

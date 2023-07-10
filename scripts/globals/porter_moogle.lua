@@ -2,8 +2,6 @@
 -- Porter Moogle Utilities
 -- desc: Common functionality for Porter Moogles.
 -----------------------------------
-require('scripts/globals/items')
------------------------------------
 local slipItems = require('scripts/globals/porter_slip_items')
 -----------------------------------
 xi = xi or {}

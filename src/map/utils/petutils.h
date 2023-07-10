@@ -109,6 +109,8 @@ struct Pet_t
     int16 hth_sdt;
     int16 impact_sdt;
 
+    int16 magical_sdt;
+
     int16 fire_sdt;
     int16 ice_sdt;
     int16 wind_sdt;
@@ -170,6 +172,8 @@ struct Pet_t
         pierce_sdt = 0;
         hth_sdt    = 0;
         impact_sdt = 0;
+
+        magical_sdt = 0;
 
         fire_sdt    = 0;
         ice_sdt     = 0;

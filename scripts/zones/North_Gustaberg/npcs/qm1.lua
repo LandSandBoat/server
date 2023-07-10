@@ -4,7 +4,6 @@
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/items")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

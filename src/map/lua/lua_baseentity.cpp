@@ -10674,6 +10674,26 @@ bool CLuaBaseEntity::isDead()
 }
 
 /************************************************************************
+ *  Function: hasRaiseTractorMenu()
+ *  Purpose : Returns true if player has Raise or Tractor menu. Used to block casting on players with menu.
+ *  Example : if target:hasRaiseTractorMenu() then
+ ************************************************************************/
+bool CLuaBaseEntity::hasRaiseTractorMenu()
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/************************************************************************
  *  Function: sendRaise()
  *  Purpose : Updates the m_hasRaise private member with the Raise Level
  *  Example : target:sendRaise(1) -- 2, 3 or 4 for R2, R3, Arise
@@ -17066,6 +17086,7 @@ void CLuaBaseEntity::Register()
     // Battle Utilities
     SOL_REGISTER("isAlive", CLuaBaseEntity::isAlive);
     SOL_REGISTER("isDead", CLuaBaseEntity::isDead);
+    SOL_REGISTER("hasRaiseTractorMenu", CLuaBaseEntity::hasRaiseTractorMenu);
 
     SOL_REGISTER("sendRaise", CLuaBaseEntity::sendRaise);
     SOL_REGISTER("sendReraise", CLuaBaseEntity::sendReraise);

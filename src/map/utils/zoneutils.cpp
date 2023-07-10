@@ -180,16 +180,16 @@ namespace zoneutils
         return nullptr;
     }
 
-    CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary)
+    CCharEntity* GetCharToUpdate(uint32 primary, uint32 tertiary)
     {
         CCharEntity* PPrimary   = nullptr;
         CCharEntity* PSecondary = nullptr;
-        CCharEntity* PTernary   = nullptr;
+        CCharEntity* PTertiary  = nullptr;
 
         for (auto PZone : g_PZoneList)
         {
             // clang-format off
-            PZone.second->ForEachChar([primary, ternary, &PPrimary, &PSecondary, &PTernary](CCharEntity* PChar)
+            PZone.second->ForEachChar([primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
             {
                 if (!PPrimary)
                 {
@@ -201,9 +201,9 @@ namespace zoneutils
                     {
                         PSecondary = PChar;
                     }
-                    else if (PChar->id == ternary)
+                    else if (PChar->id == tertiary)
                     {
-                        PTernary = PChar;
+                        PTertiary = PChar;
                     }
                 }
             });
@@ -219,7 +219,7 @@ namespace zoneutils
             return PSecondary;
         }
 
-        return PTernary;
+        return PTertiary;
     }
 
     std::vector<uint16> GetZonesOnThisProcess()
@@ -409,7 +409,7 @@ namespace zoneutils
                         ecosystemID, mobradius, speed, \
                         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
                         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-                        fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+                        magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
                         fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
                         Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
                         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
@@ -496,29 +496,31 @@ namespace zoneutils
                                 PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
                                 PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
 
-                                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::UDMGMAGIC, (int16)sql->GetIntData(42)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-                                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(50)));
-                                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(51)));
-                                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(52)));
-                                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(53)));
-                                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(54)));
-                                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(55)));
-                                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(56)));
-                                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(57)));
+                                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(43));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(44));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(45));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(46));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(47)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(48));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(49));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(50));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                                PMob->m_Element     = (uint8)sql->GetIntData(58);
-                                PMob->m_Family      = (uint16)sql->GetIntData(59);
-                                PMob->m_SuperFamily = (uint16)sql->GetIntData(60);
-                                PMob->m_name_prefix = (uint8)sql->GetIntData(61);
-                                PMob->m_flags       = (uint32)sql->GetIntData(62);
+                                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(51)));
+                                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(52)));
+                                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(53)));
+                                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(54)));
+                                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(55)));
+                                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(56)));
+                                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(57)));
+                                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(58)));
+
+                                PMob->m_Element     = (uint8)sql->GetIntData(59);
+                                PMob->m_Family      = (uint16)sql->GetIntData(60);
+                                PMob->m_SuperFamily = (uint16)sql->GetIntData(61);
+                                PMob->m_name_prefix = (uint8)sql->GetIntData(62);
+                                PMob->m_flags       = (uint32)sql->GetIntData(63);
 
                                 // Cap Level if Necessary (Don't Cap NMs)
                                 if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -534,7 +536,7 @@ namespace zoneutils
                                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                                 // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                                 // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                                PMob->animationsub = (uint32)sql->GetIntData(63);
+                                PMob->animationsub = (uint32)sql->GetIntData(64);
 
                                 if (PMob->animationsub != 0)
                                 {
@@ -542,28 +544,28 @@ namespace zoneutils
                                 }
 
                                 // Setup HP / MP Stat Percentage Boost
-                                PMob->HPscale = sql->GetFloatData(64);
-                                PMob->MPscale = sql->GetFloatData(65);
+                                PMob->HPscale = sql->GetFloatData(65);
+                                PMob->MPscale = sql->GetFloatData(66);
 
                                 // TODO: Remove me
                                 // Check if we should be looking up scripts for this mob
-                                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(66);
+                                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(67);
 
-                                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(67));
+                                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(68));
 
-                                PMob->m_Pool = sql->GetUIntData(68);
+                                PMob->m_Pool = sql->GetUIntData(69);
 
-                                PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(69));
-                                PMob->namevis    = sql->GetUIntData(70);
-                                PMob->m_Aggro    = sql->GetUIntData(71);
+                                PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(70));
+                                PMob->namevis    = sql->GetUIntData(71);
+                                PMob->m_Aggro    = sql->GetUIntData(72);
 
-                                PMob->m_roamFlags    = (uint16)sql->GetUIntData(72);
-                                PMob->m_MobSkillList = sql->GetUIntData(73);
+                                PMob->m_roamFlags    = (uint16)sql->GetUIntData(73);
+                                PMob->m_MobSkillList = sql->GetUIntData(74);
 
-                                PMob->m_TrueDetection = sql->GetUIntData(74);
-                                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(75));
+                                PMob->m_TrueDetection = sql->GetUIntData(75);
+                                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(76));
 
-                                PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
+                                PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(77));
 
                                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                                 // can be set in mob_spawn_mods or in their onInitialize

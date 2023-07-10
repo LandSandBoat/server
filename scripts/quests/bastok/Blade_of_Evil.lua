@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 59
 -- qm1 : !pos 84 -79 77 157
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

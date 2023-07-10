@@ -18,7 +18,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     -- Stun all the things!
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0,
@@ -44,11 +44,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

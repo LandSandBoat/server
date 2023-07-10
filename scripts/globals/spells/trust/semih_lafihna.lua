@@ -19,8 +19,8 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.STAR_SIBYL] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.BARRAGE,
@@ -39,7 +39,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "SEMIH_LAFIHNA_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3490 then -- Stellar Arrow
             -- I'll show you no quarter!
-            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end
     end)
 
@@ -49,14 +49,16 @@ spellObject.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
 
     mob:addMod(xi.mod.STORETP, 40)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.LONG_RANGE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

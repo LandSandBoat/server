@@ -5,7 +5,6 @@
 -- !pos -18 -13 181 198
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 39
 -- Gerbaum : !pos -119.899 -3.492 -74.651 234
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

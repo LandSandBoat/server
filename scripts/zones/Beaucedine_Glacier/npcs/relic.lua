@@ -4,7 +4,6 @@
 -- !pos -89 0 -374 111
 -----------------------------------
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

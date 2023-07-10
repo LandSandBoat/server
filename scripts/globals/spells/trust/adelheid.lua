@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ADDENDUM_BLACK, ai.r.JA, ai.s.SPECIFIC, xi.ja.DARK_ARTS)
     -- TODO: Restrict Addendum Black to Level 30+
@@ -51,18 +51,18 @@ spellObject.onMobSpawn = function(mob)
         if wsid == 3469 then -- Twirling Dervish
         -- You may want to cover your ears!
             if math.random(1, 100) <= 33 then
-                xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+                xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
         end
     end)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

@@ -16,7 +16,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     -- On cooldown
     mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
@@ -25,17 +25,17 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "MAAT_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3263 then -- Bear Killer
             --  Heh heh heh
-            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end
     end)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

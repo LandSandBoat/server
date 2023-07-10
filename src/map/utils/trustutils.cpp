@@ -52,8 +52,6 @@ struct Trust_t
     uint8  radius; // Model Radius - affects melee range etc.
     uint16 m_Family;
 
-    uint16 behaviour;
-
     uint8 mJob;
     uint8 sJob;
     float HPscale; // HP boost percentage
@@ -90,6 +88,8 @@ struct Trust_t
     int16 hth_sdt;
     int16 impact_sdt;
 
+    int16 magical_sdt;
+
     int16 fire_sdt;
     int16 ice_sdt;
     int16 wind_sdt;
@@ -117,8 +117,6 @@ struct Trust_t
         name_prefix = 0;
         radius      = 0;
         m_Family    = 0;
-
-        behaviour = 0;
 
         mJob    = 0;
         sJob    = 0;
@@ -151,6 +149,7 @@ struct Trust_t
         hth_sdt    = 0;
         impact_sdt = 0;
 
+        magical_sdt = 0;
         fire_sdt    = 0;
         ice_sdt     = 0;
         wind_sdt    = 0;
@@ -218,7 +217,6 @@ namespace trustutils
                 mob_pools.cmbDelay,\
                 mob_pools.cmbDmgMult,\
                 mob_pools.name_prefix,\
-                mob_pools.behavior,\
                 mob_pools.skill_list_id,\
                 spell_list.spellid, \
                 mob_family_system.mobradius,\
@@ -239,6 +237,7 @@ namespace trustutils
                 mob_family_system.EVA, \
                 mob_resistances.slash_sdt, mob_resistances.pierce_sdt, \
                 mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
+                mob_resistances.magical_sdt, \
                 mob_resistances.fire_sdt, mob_resistances.ice_sdt, \
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
@@ -283,40 +282,41 @@ namespace trustutils
                 trust->cmbDmgMult = (uint16)sql->GetIntData(11);
 
                 trust->name_prefix    = (uint8)sql->GetUIntData(12);
-                trust->behaviour      = (uint16)sql->GetUIntData(13);
-                trust->m_MobSkillList = (uint16)sql->GetUIntData(14);
+                trust->m_MobSkillList = (uint16)sql->GetUIntData(13);
 
-                std::ignore = (uint16)sql->GetUIntData(15); // SpellID
+                std::ignore = (uint16)sql->GetUIntData(14); // SpellID
 
-                trust->radius    = sql->GetUIntData(16);
-                trust->EcoSystem = (ECOSYSTEM)sql->GetIntData(17);
-                trust->HPscale   = sql->GetFloatData(18);
-                trust->MPscale   = sql->GetFloatData(19);
+                trust->radius    = sql->GetUIntData(15);
+                trust->EcoSystem = (ECOSYSTEM)sql->GetIntData(16);
+                trust->HPscale   = sql->GetFloatData(17);
+                trust->MPscale   = sql->GetFloatData(18);
 
                 // retail seems to have a static *155* for all Trusts in client memory
                 // TODO: trust->speed = 155;
-                trust->speed = (uint8)sql->GetIntData(20);
+                trust->speed = (uint8)sql->GetIntData(19);
 
                 // similarly speedSub is always 50
                 trust->subSpeed = 50;
 
-                trust->strRank = (uint8)sql->GetIntData(21);
-                trust->dexRank = (uint8)sql->GetIntData(22);
-                trust->vitRank = (uint8)sql->GetIntData(23);
-                trust->agiRank = (uint8)sql->GetIntData(24);
-                trust->intRank = (uint8)sql->GetIntData(25);
-                trust->mndRank = (uint8)sql->GetIntData(26);
-                trust->chrRank = (uint8)sql->GetIntData(27);
-                trust->defRank = (uint8)sql->GetIntData(28);
-                trust->attRank = (uint8)sql->GetIntData(29);
-                trust->accRank = (uint8)sql->GetIntData(30);
-                trust->evaRank = (uint8)sql->GetIntData(31);
+                trust->strRank = (uint8)sql->GetIntData(20);
+                trust->dexRank = (uint8)sql->GetIntData(21);
+                trust->vitRank = (uint8)sql->GetIntData(22);
+                trust->agiRank = (uint8)sql->GetIntData(23);
+                trust->intRank = (uint8)sql->GetIntData(24);
+                trust->mndRank = (uint8)sql->GetIntData(25);
+                trust->chrRank = (uint8)sql->GetIntData(26);
+                trust->defRank = (uint8)sql->GetIntData(27);
+                trust->attRank = (uint8)sql->GetIntData(28);
+                trust->accRank = (uint8)sql->GetIntData(29);
+                trust->evaRank = (uint8)sql->GetIntData(30);
 
                 // resistances
-                trust->slash_sdt  = (uint16)(sql->GetFloatData(32) * 1000);
-                trust->pierce_sdt = (uint16)(sql->GetFloatData(33) * 1000);
-                trust->hth_sdt    = (uint16)(sql->GetFloatData(34) * 1000);
-                trust->impact_sdt = (uint16)(sql->GetFloatData(35) * 1000);
+                trust->slash_sdt  = (uint16)(sql->GetFloatData(31) * 1000);
+                trust->pierce_sdt = (uint16)(sql->GetFloatData(32) * 1000);
+                trust->hth_sdt    = (uint16)(sql->GetFloatData(33) * 1000);
+                trust->impact_sdt = (uint16)(sql->GetFloatData(34) * 1000);
+
+                trust->magical_sdt = (int16)sql->GetIntData(35); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
                 trust->fire_sdt    = (int16)sql->GetIntData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
                 trust->ice_sdt     = (int16)sql->GetIntData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
@@ -409,7 +409,6 @@ namespace trustutils
         PTrust->status         = STATUS_TYPE::NORMAL;
         PTrust->m_ModelRadius  = trustData->radius;
         PTrust->m_EcoSystem    = trustData->EcoSystem;
-        PTrust->m_MovementType = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);
 
         PTrust->SetMJob(trustData->mJob);
         PTrust->SetSJob(trustData->sJob);

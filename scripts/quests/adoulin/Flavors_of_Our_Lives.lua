@@ -9,7 +9,6 @@
 -- Harvesting Point : !pos 196.000 0.001 289.500 260
 -- Sickle           : !additem 1020
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/helm')
 require('scripts/globals/interaction/quest')

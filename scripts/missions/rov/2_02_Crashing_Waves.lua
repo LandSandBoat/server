@@ -5,7 +5,6 @@
 -- !addmission 13 46
 -- Ru'Lude Homepoint 1 : !pos -6 3 0.001 243
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')

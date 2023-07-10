@@ -101,7 +101,7 @@ namespace petutils
                 mob_family_system.EVA, \
                 hasSpellScript, spellList, \
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-                fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+                magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
                 fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
                 cmbDelay, name_prefix, mob_pools.skill_list_id \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
@@ -157,28 +157,30 @@ namespace petutils
                 Pet->hth_sdt    = (uint16)(sql->GetFloatData(30) * 1000);
                 Pet->impact_sdt = (uint16)(sql->GetFloatData(31) * 1000);
 
-                Pet->fire_sdt    = (int16)sql->GetIntData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)sql->GetIntData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)sql->GetIntData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)sql->GetIntData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)sql->GetIntData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)sql->GetIntData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)sql->GetIntData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)sql->GetIntData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->magical_sdt = (int16)sql->GetIntData(32); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+
+                Pet->fire_sdt    = (int16)sql->GetIntData(33); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)sql->GetIntData(34); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)sql->GetIntData(35); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)sql->GetIntData(36); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)sql->GetIntData(37); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)sql->GetIntData(38); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)sql->GetIntData(39); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)sql->GetIntData(40); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_res_rank    = (int8)sql->GetIntData(40);
-                Pet->ice_res_rank     = (int8)sql->GetIntData(41);
-                Pet->wind_res_rank    = (int8)sql->GetIntData(42);
-                Pet->earth_res_rank   = (int8)sql->GetIntData(43);
-                Pet->thunder_res_rank = (int8)sql->GetIntData(44);
-                Pet->water_res_rank   = (int8)sql->GetIntData(45);
-                Pet->light_res_rank   = (int8)sql->GetIntData(46);
-                Pet->dark_res_rank    = (int8)sql->GetIntData(47);
+                Pet->fire_res_rank    = (int8)sql->GetIntData(41);
+                Pet->ice_res_rank     = (int8)sql->GetIntData(42);
+                Pet->wind_res_rank    = (int8)sql->GetIntData(43);
+                Pet->earth_res_rank   = (int8)sql->GetIntData(44);
+                Pet->thunder_res_rank = (int8)sql->GetIntData(45);
+                Pet->water_res_rank   = (int8)sql->GetIntData(46);
+                Pet->light_res_rank   = (int8)sql->GetIntData(47);
+                Pet->dark_res_rank    = (int8)sql->GetIntData(48);
 
-                Pet->cmbDelay       = (uint16)sql->GetIntData(48);
-                Pet->name_prefix    = (uint8)sql->GetUIntData(49);
-                Pet->m_MobSkillList = (uint16)sql->GetUIntData(50);
+                Pet->cmbDelay       = (uint16)sql->GetIntData(49);
+                Pet->name_prefix    = (uint8)sql->GetUIntData(50);
+                Pet->m_MobSkillList = (uint16)sql->GetUIntData(51);
 
                 g_PPetList.push_back(Pet);
             }
@@ -1200,6 +1202,8 @@ namespace petutils
             PPet->setModifier(Mod::PIERCE_SDT, petData->pierce_sdt);
             PPet->setModifier(Mod::HTH_SDT, petData->hth_sdt);
             PPet->setModifier(Mod::IMPACT_SDT, petData->impact_sdt);
+
+            PPet->setModifier(Mod::UDMGMAGIC, petData->magical_sdt);
 
             PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);
             PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);

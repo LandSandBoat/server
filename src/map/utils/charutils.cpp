@@ -4544,6 +4544,10 @@ namespace charutils
             exploss = (uint16)(exploss * settings::get<float>("map.EXP_LOSS_RATE"));
         }
 
+        // Save exp lost.
+        PChar->setCharVar("expLost", exploss);
+
+        // Handle deleveling
         if (PChar->jobs.exp[PChar->GetMJob()] < exploss)
         {
             if (PChar->jobs.job[PChar->GetMJob()] > 1)

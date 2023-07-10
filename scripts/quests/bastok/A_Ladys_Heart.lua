@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 50
 -- Valah Molkot : !pos 59 8 -221 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
