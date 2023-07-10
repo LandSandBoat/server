@@ -5908,10 +5908,13 @@ namespace charutils
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHTENMENT);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ALTRUISM);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_TRANQUILITY);
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PERPETUANCE);
             if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE)
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ACCESSION);
+            }
+            if (PSpell->getSkillType() == SKILL_ENHANCING_MAGIC)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PERPETUANCE);
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
