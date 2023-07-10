@@ -180,16 +180,16 @@ namespace zoneutils
         return nullptr;
     }
 
-    CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary)
+    CCharEntity* GetCharToUpdate(uint32 primary, uint32 tertiary)
     {
         CCharEntity* PPrimary   = nullptr;
         CCharEntity* PSecondary = nullptr;
-        CCharEntity* PTernary   = nullptr;
+        CCharEntity* PTertiary  = nullptr;
 
         for (auto PZone : g_PZoneList)
         {
             // clang-format off
-            PZone.second->ForEachChar([primary, ternary, &PPrimary, &PSecondary, &PTernary](CCharEntity* PChar)
+            PZone.second->ForEachChar([primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
             {
                 if (!PPrimary)
                 {
@@ -201,9 +201,9 @@ namespace zoneutils
                     {
                         PSecondary = PChar;
                     }
-                    else if (PChar->id == ternary)
+                    else if (PChar->id == tertiary)
                     {
-                        PTernary = PChar;
+                        PTertiary = PChar;
                     }
                 }
             });
@@ -219,7 +219,7 @@ namespace zoneutils
             return PSecondary;
         }
 
-        return PTernary;
+        return PTertiary;
     }
 
     std::vector<uint16> GetZonesOnThisProcess()
