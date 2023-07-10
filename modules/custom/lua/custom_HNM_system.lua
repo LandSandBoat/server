@@ -2,7 +2,6 @@
 -- Common Requires
 -----------------------------------
 require("modules/module_utils")
-require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/zone")
 

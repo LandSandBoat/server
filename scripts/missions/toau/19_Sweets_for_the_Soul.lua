@@ -5,7 +5,6 @@
 -- !addmission 4 18
 -----------------------------------
 require("scripts/globals/besieged")
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

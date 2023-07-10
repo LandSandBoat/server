@@ -7,7 +7,6 @@
 -- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 -----------------------------------

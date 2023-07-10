@@ -3,7 +3,6 @@
 --  NPC: Ferchinne
 -- Note: Involved in quest: "Fly High"
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

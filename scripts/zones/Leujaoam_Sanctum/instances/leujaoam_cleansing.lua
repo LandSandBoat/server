@@ -5,7 +5,6 @@
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 -----------------------------------
 local instanceObject = {}
 

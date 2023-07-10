@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 18
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

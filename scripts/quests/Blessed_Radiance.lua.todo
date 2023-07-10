@@ -6,7 +6,6 @@
 -- Mirror Pond !pos 251 1 219 111
 -- Fellow Emotes do not currently work
 -----------------------------------
-require('scripts/globals/items')
 -- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

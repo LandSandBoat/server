@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 require("scripts/globals/assault")
-require("scripts/globals/items")
 require("scripts/globals/appraisal")
 -----------------------------------
 local entity = {}

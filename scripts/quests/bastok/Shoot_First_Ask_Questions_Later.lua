@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local metalworksID = require('scripts/zones/Metalworks/IDs')
 local boyahdaTreeID = require('scripts/zones/The_Boyahda_Tree/IDs')

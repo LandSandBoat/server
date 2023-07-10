@@ -5,7 +5,6 @@
 --  Quest THE_TENSHODO_SHOWDOWN active
 -----------------------------------
 local ID = require("scripts/zones/Beadeaux/IDs")
-require('scripts/globals/items')
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

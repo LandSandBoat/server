@@ -3,7 +3,6 @@
 -- magnus_stone_pouch
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

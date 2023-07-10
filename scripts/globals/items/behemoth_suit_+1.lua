@@ -12,7 +12,6 @@
 --  0/164 Savory Shank
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 require("scripts/globals/item_utils")
 require("scripts/globals/npc_util")
 -----------------------------------

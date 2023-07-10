@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 8
 -- Talib : !pos -101.133 4.649 28.803 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

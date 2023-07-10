@@ -5,7 +5,6 @@
 -- Oggbi : !pos -159 -7 5 236
 -- qm4   : !pos -174 0 369 196
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

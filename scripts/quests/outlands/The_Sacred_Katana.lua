@@ -6,7 +6,6 @@
 -- Ranemaud        : !pos 15 0 23 252
 -- qm3 (Zi'Tah)    : !pos -416 0 46 121
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
