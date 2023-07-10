@@ -22,9 +22,7 @@ entity.onTrade = function(player, npc, trade)
         [2685] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VIII
     }
     -- Make sure we're only trading 1 Basket at a time.
-    if
-        npcUtil.tradeHasExactly(trade, itemID) and
-        itemKeyItemMapping[itemID]
+    if npcUtil.tradeHasExactly(trade, itemID) and itemKeyItemMapping[itemID]
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]

@@ -22,9 +22,7 @@ entity.onTrade = function(player, npc, trade)
         [2693] = xi.ki.THE_WORDS_OF_DONHU_VIII
     }
     -- Make sure we're only trading 1 Strongbox at a time.
-    if
-        npcUtil.tradeHasExactly(trade, itemID) and
-        itemKeyItemMapping[itemID]
+    if npcUtil.tradeHasExactly(trade, itemID) and itemKeyItemMapping[itemID]
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]
