@@ -2,6 +2,7 @@
 -- Avatar Global Functions
 -----------------------------------
 require("scripts/globals/combat/level_correction")
+require("scripts/globals/combat/physical_utilities")
 require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
@@ -91,33 +92,6 @@ local function avatarFTP(tp, ftp1, ftp2, ftp3)
     end
 
     return 1 -- no ftp mod
-end
-
-local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
-    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-    -- fSTR for avatars has no cap and a lower bound of floor(weaponDmg/9)
-    local dSTR = avatarStr - targetVit
-    local fSTR = dSTR
-    if dSTR >= 12 then
-        fSTR = (dSTR + 4) / 4
-    elseif dSTR >= 6 then
-        fSTR = (dSTR + 6) / 4
-    elseif dSTR >= 1 then
-        fSTR = (dSTR + 7) / 4
-    elseif dSTR >= -2 then
-        fSTR = (dSTR + 8) / 4
-    elseif dSTR >= -7 then
-        fSTR = (dSTR + 9) / 4
-    elseif dSTR >= -15 then
-        fSTR = (dSTR + 10) / 4
-    elseif dSTR >= -21 then
-        fSTR = (dSTR + 12) / 4
-    else
-        fSTR = (dSTR + 13) / 4
-    end
-
-    local min = math.floor(weaponDmg / 9)
-    return math.max(-min, fSTR)
 end
 
 local function avatarHitDmg(weaponDmg, fSTR, pDif)
@@ -224,7 +198,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         local weaponDmg = avatar:getWeaponDmg()
 
-        local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
+        local fSTR = xi.combat.physical.calculateMeleeStatFactor(avatar, target)
 
         -- https://www.bg-wiki.com/bg/PDIF
         -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
