@@ -113,7 +113,7 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
 void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
 {
     int     ret = SQL_ERROR;
-    in_addr from_ip;
+    in_addr from_ip{};
     uint16  from_port = 0;
     bool    ipstring  = false;
     char    from_address[INET_ADDRSTRLEN];

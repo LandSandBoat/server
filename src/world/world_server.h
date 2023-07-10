@@ -38,9 +38,10 @@ public:
 
     void Tick() override;
 
-private:
-    std::shared_ptr<ConquestSystem> conquestSystem;
+    std::unique_ptr<SqlConnection>  sql;
+    std::unique_ptr<ConquestSystem> conquestSystem;
 
+private:
     std::unique_ptr<BesiegedSystem>     besiegedSystem;
     std::unique_ptr<CampaignSystem>     campaignSystem;
     std::unique_ptr<ColonizationSystem> colonizationSystem;

@@ -8,12 +8,16 @@ set(SOURCES
     colonization_system.h
     conquest_system.cpp
     conquest_system.h
+    gobbie_box.h
+    gobbie_box.cpp
     http_server.cpp
     http_server.h
     main.cpp
     message_handler.h
     message_server.cpp
     message_server.h
+    time_server.h
+    time_server.cpp
     world_server.cpp
     world_server.h)
 

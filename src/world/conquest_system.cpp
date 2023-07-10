@@ -49,12 +49,10 @@ bool ConquestSystem::handleMessage(std::vector<uint8> payload,
         std::memcpy(&nation, payload.data() + 6, sizeof(uint32));
         std::memcpy(&region, payload.data() + 10, sizeof(uint8));
 
-        // TODO: Buffer / flush influence point changes instead of immediately broadcasting to all map servers
-        if (updateInfluencePoints(points, nation, (REGION_TYPE)region))
-        {
-            sendInfluencesMsg(false);
-        }
-
+        // We update influence but do not immediately send this update to all map servers
+        // Influence updates are sent periodically via time_server instead.
+        // It is okay for map servers to be eventually consistent.
+        updateInfluencePoints(points, nation, (REGION_TYPE)region);
         return true;
     }
 
@@ -107,8 +105,8 @@ void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones, uint64 ipp)
     ref<uint8>((uint8*)data, 2) = shouldUpdateZones;
 
     // Influences controls array
-    ref<uint32>((uint8*)data, 3) = influences.size();
-    for (int i = 0; i < influences.size(); i++)
+    ref<std::size_t>((uint8*)data, 3) = influences.size();
+    for (std::size_t i = 0; i < influences.size(); i++)
     {
         // Everything is offset by i*size of region control struct + headerLength
         const std::size_t start              = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
@@ -152,8 +150,8 @@ void ConquestSystem::sendRegionControlsMsg(CONQUESTMSGTYPE msgType, uint64 ipp)
     ref<uint8>((uint8*)data, 1) = msgType;
 
     // Region controls array
-    ref<uint32>((uint8*)data, 2) = regionControls.size();
-    for (int i = 0; i < regionControls.size(); i++)
+    ref<std::size_t>((uint8*)data, 2) = regionControls.size();
+    for (std::size_t i = 0; i < regionControls.size(); i++)
     {
         // Everything is offset by i*size of region control struct + headerLength + size of size_t
         const std::size_t offset             = headerLength + sizeof(size_t) + sizeof(region_control_t) * i;
@@ -254,6 +252,11 @@ void ConquestSystem::updateWeekConquest()
 void ConquestSystem::updateHourlyConquest()
 {
     sendInfluencesMsg(true);
+}
+
+void ConquestSystem::updateVanaHourlyConquest()
+{
+    sendInfluencesMsg(false);
 }
 
 auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
