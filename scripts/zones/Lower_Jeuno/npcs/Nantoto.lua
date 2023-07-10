@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Galdo
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

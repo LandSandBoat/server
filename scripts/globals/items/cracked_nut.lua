@@ -3,7 +3,6 @@
 -- Cracked Nut
 -- Enchantment: 60Min, Costume - Colibri
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

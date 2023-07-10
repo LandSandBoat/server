@@ -2,7 +2,6 @@
 -- Area: Caedarva Mire
 --  ZNM: Reaction
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -6,7 +6,6 @@
 -- Baby Cockatrice (2916)
 -- Porxie (2928) QoL
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

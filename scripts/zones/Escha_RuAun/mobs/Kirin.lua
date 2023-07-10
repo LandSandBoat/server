@@ -4,7 +4,6 @@
 -- !spawnmob 17961571
 -----------------------------------
 local ID = require("scripts/zones/Escha_RuAun/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
 require("scripts/globals/titles")
 -----------------------------------

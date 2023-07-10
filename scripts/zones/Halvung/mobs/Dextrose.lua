@@ -2,7 +2,6 @@
 -- Area: Halvung
 --  ZNM: Dextrose
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

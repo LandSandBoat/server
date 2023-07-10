@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Amalanbraux
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

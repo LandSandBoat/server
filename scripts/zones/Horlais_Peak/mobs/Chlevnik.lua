@@ -3,7 +3,6 @@
 -- Mob: Chlevnik
 -- KSNM99
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

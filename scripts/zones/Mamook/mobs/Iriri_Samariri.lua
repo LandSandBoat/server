@@ -3,7 +3,6 @@
 --   NM: Iriri Samariri (T2 ZNM)
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

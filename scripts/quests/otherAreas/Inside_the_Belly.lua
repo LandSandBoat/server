@@ -4,10 +4,8 @@
 -- Log ID: 4, Quest ID: 26
 -- Zaldon  : !pos -11.810 -7.287 -6.742
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

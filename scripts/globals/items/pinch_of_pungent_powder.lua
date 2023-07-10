@@ -6,7 +6,6 @@
 -- Baby Coeurl (2921)
 -- Baby Bugard (2927)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

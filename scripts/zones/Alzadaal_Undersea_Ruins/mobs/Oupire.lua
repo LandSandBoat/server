@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/hunts")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobs")
 require("scripts/globals/npc_util")

@@ -3,7 +3,6 @@
 -- Slime Belt
 -- Enchantment: 60Min, Costume - Slime
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

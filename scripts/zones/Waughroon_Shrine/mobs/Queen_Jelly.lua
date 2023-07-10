@@ -3,7 +3,6 @@
 -- Mob: Queen Jelly
 -- BCNM: Royal Jelly
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

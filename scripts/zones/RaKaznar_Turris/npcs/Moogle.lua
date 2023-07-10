@@ -3,7 +3,6 @@
 --  NPC: Seismic Tower
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/status")
 
 local entity = {}
 

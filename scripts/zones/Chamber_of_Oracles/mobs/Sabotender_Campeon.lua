@@ -3,7 +3,6 @@
 --  Mob: Sabotender Campeon
 -- KSNM: Cactuar Suave
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}

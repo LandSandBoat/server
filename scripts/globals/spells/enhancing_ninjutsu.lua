@@ -1,7 +1,6 @@
 -----------------------------------
 -- Enhancing Spell Utilities
 -----------------------------------
-require("settings/main")
 require("scripts/globals/spell_data")
 require("scripts/globals/msg")
 -----------------------------------

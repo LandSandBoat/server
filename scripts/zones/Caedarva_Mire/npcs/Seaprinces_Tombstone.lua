@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
 local entity = {}
