@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/bcnm")
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 

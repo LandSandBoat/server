@@ -10,7 +10,6 @@ mixins =
 }
 require("scripts/globals/magic")
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")

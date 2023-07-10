@@ -4,9 +4,7 @@
 -- Log ID: 4, Quest ID: 22
 -- Oswald  : !pos 47.119 -15.273 7.989 248
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

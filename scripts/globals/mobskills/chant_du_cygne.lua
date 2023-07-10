@@ -7,8 +7,6 @@
 -- Range: Melee
 -----------------------------------
 require("scripts/globals/mobskills")
-require("settings/main")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskill_object = {}

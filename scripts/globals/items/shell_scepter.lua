@@ -7,7 +7,6 @@
 -- Goblin Dynamis (1090)
 -- Goblin on Chocobo (1249)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

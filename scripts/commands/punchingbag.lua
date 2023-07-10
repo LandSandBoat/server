@@ -3,7 +3,6 @@
 -- desc: Summon a fightable Fafnir (no loot)
 -- note:
 -----------------------------------
-require('scripts/globals/status')
 
 cmdprops =
 {

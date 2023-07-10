@@ -7,7 +7,6 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 local counter = 0

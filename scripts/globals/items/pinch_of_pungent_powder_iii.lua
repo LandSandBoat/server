@@ -6,7 +6,6 @@
 -- Baby Behemoth (2937)
 -- Baby Fafnir (2944)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

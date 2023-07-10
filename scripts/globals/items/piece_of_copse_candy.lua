@@ -3,7 +3,6 @@
 -- Copse Candy
 -- Enchantment: 60Min, Costume - Ygnas
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

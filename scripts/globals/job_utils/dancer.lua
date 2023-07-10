@@ -5,7 +5,6 @@ require('scripts/globals/jobpoints')
 require('scripts/globals/magic')
 require('scripts/globals/msg')
 require('scripts/globals/weaponskills')
-require('scripts/globals/items')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}

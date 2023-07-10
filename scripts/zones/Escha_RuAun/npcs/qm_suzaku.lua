@@ -2,8 +2,6 @@
 -- Area: Escha Ru'Aun
 --  NPC: ??? (qm_suzaku)
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
 local ID = require("scripts/zones/Escha_RuAun/IDs")
 
 local entity = {}

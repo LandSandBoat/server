@@ -5,12 +5,8 @@
 -- !gotoid 16982132
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/status")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("settings/main")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

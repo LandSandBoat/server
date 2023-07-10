@@ -2,7 +2,6 @@
 -- Area: Mount Z
 --  ZNM: Anantaboga
 -----------------------------------
-require("scripts/globals/status")
 mixins = {require("scripts/mixins/rage")}
 -----------------------------------
 local entity = {}
