@@ -3,7 +3,6 @@
 -- Earth Card Case
 -- When used, you will obtain one stack of Earth Cards
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

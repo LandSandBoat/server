@@ -5,7 +5,6 @@
 -- !addmission 4 35
 -- Entry Gate : !pos 486 -227.6 -20 78
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

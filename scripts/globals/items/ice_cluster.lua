@@ -4,7 +4,6 @@
 -- Turn into a stack of ice crystals
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

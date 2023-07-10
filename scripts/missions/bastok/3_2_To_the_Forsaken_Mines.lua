@@ -10,7 +10,6 @@
 -- Davyad       : !pos 83 0 30 234
 -- qm2 (Gusgen) : !pos 206 -60 -101 196
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

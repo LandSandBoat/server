@@ -1,7 +1,6 @@
 -------------------------------------------
 -- Escha/Reisenjima Portals Global
 -------------------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")

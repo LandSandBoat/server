@@ -3,7 +3,6 @@
 -- Ctn. Purse (Alx.)
 -- Breaks up a Cotton Purse
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -7,7 +7,6 @@
 -- Mhaura, Take,         !pos  20.616  -8.000 69.757 249
 -- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

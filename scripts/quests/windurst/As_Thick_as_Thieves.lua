@@ -16,7 +16,6 @@
 -- qm2 (???)      : !pos -232.924 99.107 442.990 106
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

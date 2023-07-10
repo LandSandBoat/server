@@ -4,7 +4,6 @@
 -- !pos 73 4 -174 113
 -----------------------------------
 local ID = require("scripts/zones/Cape_Teriggan/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- Dispense: Berry Snowcone
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
