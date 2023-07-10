@@ -682,7 +682,7 @@ namespace message
                             const std::size_t             headerLength   = 2 * sizeof(uint8);
                             uint32                        size           = ref<uint32>(data, 2);
                             std::vector<region_control_t> regionControls = std::vector<region_control_t>(size);
-                            for (int i = 0; i < size; i++)
+                            for (std::size_t i = 0; i < size; i++)
                             {
                                 const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
 
@@ -703,7 +703,7 @@ namespace message
                             bool                     shouldUpdateZones = ref<bool>(data, 2);
                             uint32                   size              = ref<uint32>(data, 3);
                             std::vector<influence_t> influencePoints   = std::vector<influence_t>(size);
-                            for (int i = 0; i < size; i++)
+                            for (std::size_t i = 0; i < size; i++)
                             {
                                 const std::size_t start = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
 
@@ -725,7 +725,7 @@ namespace message
                             const std::size_t             headerLength = 2 * sizeof(uint8);
                             uint32                        size         = ref<uint32>(data, 2);
                             std::vector<region_control_t> regionControls;
-                            for (int i = 0; i < size; i++)
+                            for (std::size_t i = 0; i < size; i++)
                             {
                                 const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
 

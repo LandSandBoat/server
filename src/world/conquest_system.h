@@ -55,6 +55,12 @@ public:
      */
     void updateHourlyConquest();
 
+    /**
+     * Called every vana hour (every 2.4 min). Used to send updated influence data
+     * to all map servers. Does not request a zone update.
+     */
+    void updateVanaHourlyConquest();
+
 private:
     std::unique_ptr<SqlConnection> sql;
 
