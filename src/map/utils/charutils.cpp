@@ -5908,6 +5908,7 @@ namespace charutils
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHTENMENT);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ALTRUISM);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_TRANQUILITY);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PERPETUANCE);
             if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE)
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ACCESSION);
