@@ -184,7 +184,7 @@ namespace zoneutils
     {
         CCharEntity* PPrimary   = nullptr;
         CCharEntity* PSecondary = nullptr;
-        CCharEntity* PTertiary   = nullptr;
+        CCharEntity* PTertiary  = nullptr;
 
         for (auto PZone : g_PZoneList)
         {
