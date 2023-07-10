@@ -10,10 +10,10 @@ xi.summon = xi.summon or {}
 
 local function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
-    local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    local dDex    = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
     local dDexAbs = math.abs(dDex)
+    local sign    = 1
 
-    local sign = 1
     if dDex < 0 then
         -- target has higher AGI so this will be a decrease to crit rate
         sign = -1
@@ -43,11 +43,10 @@ local function getDexCritRate(source, target)
 end
 
 local function getRandRatio(wRatio)
-    local qRatio = wRatio
+    local qRatio     = wRatio
     local upperLimit = 0
     local lowerLimit = 0
-    -- 4.25 for Avatars, they count as 1H but same as mobs don't have a non-crit cap
-    local maxRatio = 4.25
+    local maxRatio   = 4.25 -- 4.25 for Avatars, they count as 1H but same as mobs don't have a non-crit cap
 
     if wRatio < 0.5 then
         upperLimit = math.max(wRatio + 0.5, 0.5)
@@ -102,9 +101,9 @@ local function avatarHitDmg(weaponDmg, fSTR, pDif)
 end
 
 xi.summon.getSummoningSkillOverCap = function(avatar)
-    local summoner = avatar:getMaster()
+    local summoner       = avatar:getMaster()
     local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
+    local maxSkill       = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
 
     return math.max(summoningSkill - maxSkill, 0)
 end
@@ -117,6 +116,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local acc = avatar:getACC() + xi.summon.getSummoningSkillOverCap(avatar)
     local eva = target:getEVA()
 
+    -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
+    -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
     local shouldApplyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(avatar)
 
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
@@ -132,15 +133,12 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- bonuses cap at level diff of 38 based on this testing:
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- If there are penalties they seem to be applied differently similarly to monsters.
-    local baseHitRate = 75
-    -- First hit gets a +100 ACC bonus which translates to +50 hit
-    local firstHitAccBonus = 50
-    local hitrateFirst = 0
+    local hitrateFirst      = 0 -- First hit gets a +100 ACC bonus which translates to +50 hit
     local hitrateSubsequent = 0
-    -- Max level diff is 38
-    local levelDiff = math.min(avatar:getMainLvl() - target:getMainLvl(), 38)
+    local levelDiff         = math.min(avatar:getMainLvl() - target:getMainLvl(), 38) -- Max level diff is 38
+    local levelCorrection   = 0
+
     -- Only bonuses are applied for avatar level correction
-    local levelCorrection = 0
     if shouldApplyLevelCorrection then
         if levelDiff > 0 then
             levelCorrection = math.max((levelDiff * 2), 0)
@@ -151,25 +149,22 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local dAcc = math.floor((acc - eva) / 2)
 
     -- Normal hits computed first
-    hitrateSubsequent = baseHitRate + dAcc + levelCorrection
-    -- First hit gets bonus hit rate
-    hitrateFirst = hitrateSubsequent + firstHitAccBonus
-
+    hitrateSubsequent = 75 + dAcc + levelCorrection
+    hitrateFirst      = hitrateSubsequent + 50 -- First hit gets bonus hit rate
     hitrateSubsequent = hitrateSubsequent / 100
-    hitrateFirst = hitrateFirst / 100
-
+    hitrateFirst      = hitrateFirst / 100
     hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    hitrateFirst      = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
 
     -- Compute hits first so we can exit early
-    local firstHitLanded = false
-    local numHitsLanded = 0
+    local firstHitLanded   = false
+    local numHitsLanded    = 0
     local numHitsProcessed = 1
-    local finaldmg = 0
+    local finaldmg         = 0
 
     if math.random() < hitrateFirst then
         firstHitLanded = true
-        numHitsLanded = numHitsLanded + 1
+        numHitsLanded  = numHitsLanded + 1
     end
 
     while numHitsProcessed < numberofhits do
@@ -189,35 +184,33 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         -- Crit rate has a base of 5% and no cap, 0-100% are valid
         -- Dex contribution to crit rate is capped and works in tiers
         local baseCritRate = 5
-        local maxCritRate = 1 -- 100%
-        local minCritRate = 0 -- 0%
+        local maxCritRate  = 1 -- 100%
+        local minCritRate  = 0 -- 0%
+        local critRate     = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
 
-        local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
         critRate = critRate / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
         local weaponDmg = avatar:getWeaponDmg()
-
-        local fSTR = xi.combat.physical.calculateMeleeStatFactor(avatar, target)
+        local fSTR      = xi.combat.physical.calculateMeleeStatFactor(avatar, target)
 
         -- https://www.bg-wiki.com/bg/PDIF
         -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
-        local ratio = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
+        local ratio  = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
         local cRatio = ratio
 
         if shouldApplyLevelCorrection then
             -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
             if levelDiff > 0 then
-                local correction = levelDiff * 0.05
+                local correction       = levelDiff * 0.05
                 local cappedCorrection = math.min(correction, 1.9)
-                cRatio = cRatio + cappedCorrection
+                cRatio                 = cRatio + cappedCorrection
             end
         end
 
         --Everything past this point is randomly computed per hit
 
-        numHitsProcessed = 0
-
+        numHitsProcessed      = 0
         local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
 
         if firstHitLanded then
@@ -227,17 +220,14 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
                 wRatio = wRatio + 1
             end
 
-            -- get a random ratio from min and max
-            local qRatio = getRandRatio(wRatio)
-
-            --Final pDif is qRatio randomized with a 1-1.05 multiplier
-            local pDif = qRatio * (1 + (math.random() * 0.05))
+            local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max
+            local pDif   = qRatio * (1 + (math.random() * 0.05)) -- Final pDif is qRatio randomized with a 1-1.05 multiplier
 
             if isCrit then
                 pDif = pDif * critAttackBonus
             end
 
-            finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
+            finaldmg         = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
             numHitsProcessed = 1
         end
 
@@ -248,17 +238,14 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
                 wRatio = wRatio + 1
             end
 
-            -- get a random ratio from min and max
-            local qRatio = getRandRatio(wRatio)
-
-            --Final pDif is qRatio randomized with a 1-1.05 multiplier
-            local pDif = qRatio * (1 + (math.random() * 0.05))
+            local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max.
+            local pDif   = qRatio * (1 + (math.random() * 0.05)) -- Final pDif is qRatio randomized with a 1-1.05 multiplier.
 
             if isCrit then
                 pDif = pDif * critAttackBonus
             end
 
-            finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
+            finaldmg         = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
         end
 
@@ -268,7 +255,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
     end
 
-    returninfo.dmg = finaldmg
+    returninfo.dmg        = finaldmg
     returninfo.hitslanded = numHitsLanded
 
     return returninfo
@@ -299,7 +286,12 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle Third Eye using shadowbehav as a guide
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
-    if teye ~= nil and skilltype == xi.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
+
+    -- T.Eye only procs when active with PHYSICAL stuff
+    if
+        teye ~= nil and
+        skilltype == xi.attackType.PHYSICAL
+    then
         if shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- e.g. aoe moves
             target:delStatusEffect(xi.effect.THIRD_EYE)
         elseif shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- it can be absorbed by shadows
