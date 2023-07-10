@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]
-        npc:showText(npc, 13417)
+        npc:showText(npc, ID.text.POGIGI_TURN_IN)
         npcUtil.giveKeyItem(player, keyItem)
     end
 end
