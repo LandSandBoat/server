@@ -374,8 +374,12 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local resistStages = pTable[spellId][8]
     local message      = pTable[spellId][9]
     local bonusMacc    = pTable[spellId][12]
-    local resistRank   = target:getMod(xi.combat.element.resistRankMod[spellElement]) or 0
-    local rankModifier = target:getMod(immunobreakTable[spellEffect][1]) or 0
+    local rankModifier = 0
+
+    -- Fetch immunobreak modifier to resistance rank if aplicable.
+    if immunobreakTable[spellEffect] then
+        rankModifier = target:getMod(immunobreakTable[spellEffect][1])
+    end
 
     -- Magic Hit Rate calculations.
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
@@ -402,7 +406,13 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
 
     -- The effect will get resisted.
     if resistRate <= 1 / (2 ^ resistStages) then
-        -- Attempt immunobreak.
+        -- Attempt immunobreak. Fetch resistance rank modifier.
+        local resistRank = 0
+
+        if spellElement ~= xi.magic.ele.NONE then
+            resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+        end
+
         if
             caster:isPC() and
             target:isMob() and
