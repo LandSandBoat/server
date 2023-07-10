@@ -1,10 +1,10 @@
 -----------------------------------
--- Area: Windurst Waters (S)
---  NPC: Pogigi
--- !pos -29.787 -4.499 42.603 94
+-- Area: Bastok Markets [S]
+--  NPC: Kevan
+-- !pos -308.590 -012.000 -094.227 189
 -- Sealed Container NPC
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
 -----------------------------------
 local entity = {}
 
@@ -12,29 +12,29 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemKeyItemMapping =
     {
-        [2694] = xi.ki.HABALOS_ECLOGUE_VERSE_I,
-        [2695] = xi.ki.HABALOS_ECLOGUE_VERSE_II,
-        [2696] = xi.ki.HABALOS_ECLOGUE_VERSE_III,
-        [2697] = xi.ki.HABALOS_ECLOGUE_VERSE_IV,
-        [2698] = xi.ki.HABALOS_ECLOGUE_VERSE_V,
-        [2699] = xi.ki.HABALOS_ECLOGUE_VERSE_VI,
-        [2700] = xi.ki.HABALOS_ECLOGUE_VERSE_VII,
-        [2701] = xi.ki.HABALOS_ECLOGUE_VERSE_VIII
+        [2686] = xi.ki.THE_WORDS_OF_DONHU_I,
+        [2687] = xi.ki.THE_WORDS_OF_DONHU_II,
+        [2688] = xi.ki.THE_WORDS_OF_DONHU_III,
+        [2689] = xi.ki.THE_WORDS_OF_DONHU_IV,
+        [2690] = xi.ki.THE_WORDS_OF_DONHU_V,
+        [2691] = xi.ki.THE_WORDS_OF_DONHU_VI,
+        [2692] = xi.ki.THE_WORDS_OF_DONHU_VII,
+        [2693] = xi.ki.THE_WORDS_OF_DONHU_VIII
     }
-    -- Make sure we're only trading 1 Basket at a time.
+    -- Make sure we're only trading 1 Strongbox at a time.
     if
         npcUtil.tradeHasExactly(trade, itemID) and
         itemKeyItemMapping[itemID]
     then
         player:tradeComplete()
         local keyItem = itemKeyItemMapping[itemID]
-        npc:showText(npc, 13417)
+        npc:showText(npc, 13565)
         npcUtil.giveKeyItem(player, keyItem)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(330)
+    player:startEvent(334)
 end
 
 entity.onEventUpdate = function(player, csid, option)
