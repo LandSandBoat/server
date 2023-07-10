@@ -19,29 +19,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "world_server.h"
+#pragma once
 
-#include "common/application.h"
-#include "common/logging.h"
-#include "time_server.h"
+#include "common/sql.h"
 
-WorldServer::WorldServer(int argc, char** argv)
-: Application("world", argc, argv)
-, sql(std::make_unique<SqlConnection>())
-, httpServer(std::make_unique<HTTPServer>())
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
-, conquestSystem(std::make_unique<ConquestSystem>())
-, besiegedSystem(std::make_unique<BesiegedSystem>())
-, campaignSystem(std::make_unique<CampaignSystem>())
-, colonizationSystem(std::make_unique<ColonizationSystem>())
+namespace dailytally
 {
-    // Tasks
-    CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
-}
-
-WorldServer::~WorldServer() = default;
-
-void WorldServer::Tick()
-{
-    Application::Tick();
+    void UpdateDailyTallyPoints(std::unique_ptr<SqlConnection> const& sql);
 }

@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-Copyright (c) 2023 LandSandBoat Dev Teams
+Copyright (c) 2022 LandSandBoat Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,9 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class CampaignSystem
-{
-public:
-    CampaignSystem()  = default;
-    ~CampaignSystem() = default;
-};
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
+
+int32 time_server(time_point tick, CTaskMgr::CTask* PTask);
