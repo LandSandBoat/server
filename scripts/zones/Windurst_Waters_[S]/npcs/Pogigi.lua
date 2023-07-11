@@ -12,14 +12,14 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemKeyItemMapping =
     {
-        [2694] = xi.ki.HABALOS_ECLOGUE_VERSE_I,
-        [2695] = xi.ki.HABALOS_ECLOGUE_VERSE_II,
-        [2696] = xi.ki.HABALOS_ECLOGUE_VERSE_III,
-        [2697] = xi.ki.HABALOS_ECLOGUE_VERSE_IV,
-        [2698] = xi.ki.HABALOS_ECLOGUE_VERSE_V,
-        [2699] = xi.ki.HABALOS_ECLOGUE_VERSE_VI,
-        [2700] = xi.ki.HABALOS_ECLOGUE_VERSE_VII,
-        [2701] = xi.ki.HABALOS_ECLOGUE_VERSE_VIII
+        [xi.items.BAMBOO_GRASS_BASKET] = xi.ki.HABALOS_ECLOGUE_VERSE_I,
+        [xi.items.BAMBOO_MEDICINE_BASKET] = xi.ki.HABALOS_ECLOGUE_VERSE_II,
+        [xi.items.BAMBOO_BUGCAGE] = xi.ki.HABALOS_ECLOGUE_VERSE_III,
+        [xi.items.BAMBOO_FLOWER_BASKET] = xi.ki.HABALOS_ECLOGUE_VERSE_IV,
+        [xi.items.BAMBOO_BIRDCAGE] = xi.ki.HABALOS_ECLOGUE_VERSE_V,
+        [xi.items.BAMBOO_CHARCOAL_BASKET] = xi.ki.HABALOS_ECLOGUE_VERSE_VI,
+        [xi.items.BAMBOO_TEA_BASKET] = xi.ki.HABALOS_ECLOGUE_VERSE_VII,
+        [xi.items.BAMBOO_SNAKECAGE] = xi.ki.HABALOS_ECLOGUE_VERSE_VIII
     }
     -- Make sure we're only trading 1 Basket at a time.
     if
