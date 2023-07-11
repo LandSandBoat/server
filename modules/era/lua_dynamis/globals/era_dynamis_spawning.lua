@@ -702,7 +702,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
 
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
-        if forceLink == true then mob:updateEnmity(oMob:getTarget()) end
+        if forceLink == true then mob:updateEnmity(target) end
     end
 end
 
