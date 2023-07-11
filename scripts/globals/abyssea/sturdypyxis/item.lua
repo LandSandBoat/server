@@ -1,8 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Item
 -----------------------------------
-require('scripts/globals/items')
------------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

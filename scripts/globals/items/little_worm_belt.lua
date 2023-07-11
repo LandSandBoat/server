@@ -3,7 +3,6 @@
 -- little_worm_belt
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

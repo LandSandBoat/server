@@ -3,7 +3,6 @@
 -- Horlais Peak Level Break
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

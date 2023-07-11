@@ -11,7 +11,6 @@
 -- Goggehn : !pos 3 9 -76 243
 -- _542    : !pos 596 16 -19 184
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

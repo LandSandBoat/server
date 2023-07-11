@@ -3,7 +3,6 @@
 -- key_ring_belt
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

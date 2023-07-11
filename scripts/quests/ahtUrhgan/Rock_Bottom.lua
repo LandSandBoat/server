@@ -2,7 +2,6 @@
 -- Rock Bottom
 -- !pos 838.243 -14.475 231.871 61
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

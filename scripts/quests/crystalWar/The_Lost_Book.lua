@@ -13,7 +13,6 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -155,7 +154,7 @@ quest.sections =
             ['Door_Optistery'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.VELLUM) then
+                    if npcUtil.tradeHasExactly(trade, xi.items.SHEET_OF_VELLUM) then
                         return quest:progressEvent(146)
                     end
                 end,
