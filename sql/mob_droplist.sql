@@ -17816,8 +17816,6 @@ INSERT INTO `mob_droplist` VALUES (2244,0,0,1000,4374,180); -- Sleepshroom (18.0
 INSERT INTO `mob_droplist` VALUES (2244,0,0,1000,4375,130); -- Danceshroom (13.0%)
 INSERT INTO `mob_droplist` VALUES (2244,2,0,1000,4374,0);   -- Sleepshroom (Steal)
 
--- ZoneID:  54 - Dweomershell
-
 -- ZoneID:  61 - Sicklemoon Crab
 INSERT INTO `mob_droplist` VALUES (2245,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2245,0,0,1000,1889,60);        -- Sack Of White Sand (6.0%)
