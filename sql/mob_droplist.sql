@@ -14704,7 +14704,6 @@ INSERT INTO `mob_droplist` VALUES (1816,0,0,1000,4400,@UNCOMMON); -- Slice Of La
 INSERT INTO `mob_droplist` VALUES (1816,0,0,1000,881,@VRARE);     -- Crab Shell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1816,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
 
--- ZoneID:  54 - Dweomershell
 -- ZoneID:  74 - Nipper
 INSERT INTO `mob_droplist` VALUES (1817,0,0,1000,5377,@UNCOMMON); -- Fractus Cell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1817,0,0,1000,5378,@UNCOMMON); -- Congestus Cell (Uncommon, 10%)
@@ -17816,6 +17815,8 @@ INSERT INTO `mob_droplist` VALUES (2243,2,0,1000,4374,0);         -- Sleepshroom
 INSERT INTO `mob_droplist` VALUES (2244,0,0,1000,4374,180); -- Sleepshroom (18.0%)
 INSERT INTO `mob_droplist` VALUES (2244,0,0,1000,4375,130); -- Danceshroom (13.0%)
 INSERT INTO `mob_droplist` VALUES (2244,2,0,1000,4374,0);   -- Sleepshroom (Steal)
+
+-- ZoneID:  54 - Dweomershell
 
 -- ZoneID:  61 - Sicklemoon Crab
 INSERT INTO `mob_droplist` VALUES (2245,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
@@ -21907,6 +21908,7 @@ INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1449,0);        -- Tukuku White
 INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1452,0);        -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1455,0);        -- One Byne Bill (Steal)
 
+-- ZoneID:  54 - Dweomershell
 -- ZoneID:  61 - Wootzshell
 -- ZoneID:  61 - Orichalcumshell
 INSERT INTO `mob_droplist` VALUES (2668,0,0,1000,4400,160);   -- Slice Of Land Crab Meat (16.0%)
