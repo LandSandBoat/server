@@ -18,6 +18,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+
 #pragma once
 
 #include "common/application.h"
@@ -38,13 +39,13 @@ public:
 
     void Tick() override;
 
-private:
+    std::unique_ptr<SqlConnection> sql;
+
+    std::unique_ptr<HTTPServer>               httpServer;
     std::unique_ptr<message_server_wrapper_t> messageServer;
 
     std::unique_ptr<ConquestSystem>     conquestSystem;
     std::unique_ptr<BesiegedSystem>     besiegedSystem;
     std::unique_ptr<CampaignSystem>     campaignSystem;
     std::unique_ptr<ColonizationSystem> colonizationSystem;
-
-    std::unique_ptr<HTTPServer> httpServer;
 };
