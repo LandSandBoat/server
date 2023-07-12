@@ -47,6 +47,78 @@ namespace conquest
         return conquestData;
     }
 
+    void HandleZMQMessage(uint8* data)
+    {
+        uint8 subtype = ref<uint8>(data, 1);
+        switch (subtype)
+        {
+            case CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START:
+            {
+                HandleWeeklyTallyStart();
+                break;
+            }
+            case CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END:
+            {
+                const std::size_t             headerLength   = 2 * sizeof(uint8);
+                uint32                        size           = ref<uint32>(data, 2);
+                std::vector<region_control_t> regionControls = std::vector<region_control_t>(size);
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
+
+                    region_control_t regionControl;
+                    regionControl.current = ref<uint8>(data, start);
+                    regionControl.prev    = ref<uint8>(data, start + 1);
+
+                    regionControls[i] = regionControl;
+                }
+
+                HandleWeeklyTallyEnd(regionControls);
+                break;
+            }
+            case CONQUEST_WORLD2MAP_INFLUENCE_POINTS:
+            {
+                const std::size_t        headerLength      = 2 * sizeof(uint8);
+                bool                     shouldUpdateZones = ref<bool>(data, 2);
+                uint32                   size              = ref<uint32>(data, 3);
+                std::vector<influence_t> influencePoints   = std::vector<influence_t>(size);
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
+
+                    influence_t influence;
+                    influence.sandoria_influence = ref<uint16>(data, start);
+                    influence.bastok_influence   = ref<uint16>(data, start + 2);
+                    influence.windurst_influence = ref<uint16>(data, start + 4);
+                    influence.beastmen_influence = ref<uint16>(data, start + 6);
+
+                    influencePoints[i] = influence;
+                }
+
+                HandleInfluenceUpdate(influencePoints, shouldUpdateZones);
+                break;
+            }
+            case CONQUEST_WORLD2MAP_REGION_CONTROL:
+            {
+                const std::size_t             headerLength = 2 * sizeof(uint8);
+                uint32                        size         = ref<uint32>(data, 2);
+                std::vector<region_control_t> regionControls;
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
+
+                    region_control_t regionControl;
+                    regionControl.current = ref<uint8_t>(data, start);
+                    regionControl.prev    = ref<uint8_t>(data, start + 1);
+                    regionControls.push_back(regionControl);
+                }
+
+                GetConquestData()->updateRegionControls(regionControls);
+                break;
+            }
+        }
+    }
+
     void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
     {
         // Send update message to world server

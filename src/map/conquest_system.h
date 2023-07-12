@@ -44,6 +44,8 @@ namespace conquest
 {
     std::shared_ptr<ConquestData> GetConquestData(); // Cached data with influences / region controls
 
+    void HandleZMQMessage(uint8* data);
+
     void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
     void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
     void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence

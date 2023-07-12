@@ -662,84 +662,33 @@ namespace message
                 // Extract data
                 uint8* data      = (uint8*)extra.data();
                 uint8  eventType = ref<uint8>(data, 0);
-                uint8  subtype   = ref<uint8>(data, 1);
+                // uint8  subtype   = ref<uint8>(data, 1);
 
                 // Handle each event type and subtype.
-                // Consider refactoring this as the types grow.
                 switch (eventType)
                 {
                     case REGIONAL_EVT_MSG_CONQUEST:
                     {
-                        if (subtype == CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START)
-                        {
-                            conquest::HandleWeeklyTallyStart();
-                            return;
-                        }
-
-                        if (subtype == CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END)
-                        {
-                            const std::size_t             headerLength   = 2 * sizeof(uint8);
-                            uint32                        size           = ref<uint32>(data, 2);
-                            std::vector<region_control_t> regionControls = std::vector<region_control_t>(size);
-                            for (std::size_t i = 0; i < size; i++)
-                            {
-                                const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
-
-                                region_control_t regionControl;
-                                regionControl.current = ref<uint8>(data, start);
-                                regionControl.prev    = ref<uint8>(data, start + 1);
-
-                                regionControls[i] = regionControl;
-                            }
-
-                            conquest::HandleWeeklyTallyEnd(regionControls);
-                            return;
-                        }
-
-                        if (subtype == CONQUEST_WORLD2MAP_INFLUENCE_POINTS)
-                        {
-                            const std::size_t        headerLength      = 2 * sizeof(uint8);
-                            bool                     shouldUpdateZones = ref<bool>(data, 2);
-                            uint32                   size              = ref<uint32>(data, 3);
-                            std::vector<influence_t> influencePoints   = std::vector<influence_t>(size);
-                            for (std::size_t i = 0; i < size; i++)
-                            {
-                                const std::size_t start = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
-
-                                influence_t influence;
-                                influence.sandoria_influence = ref<uint16>(data, start);
-                                influence.bastok_influence   = ref<uint16>(data, start + 2);
-                                influence.windurst_influence = ref<uint16>(data, start + 4);
-                                influence.beastmen_influence = ref<uint16>(data, start + 6);
-
-                                influencePoints[i] = influence;
-                            }
-
-                            conquest::HandleInfluenceUpdate(influencePoints, shouldUpdateZones);
-                            return;
-                        }
-
-                        if (subtype == CONQUEST_WORLD2MAP_REGION_CONTROL)
-                        {
-                            const std::size_t             headerLength = 2 * sizeof(uint8);
-                            uint32                        size         = ref<uint32>(data, 2);
-                            std::vector<region_control_t> regionControls;
-                            for (std::size_t i = 0; i < size; i++)
-                            {
-                                const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
-
-                                region_control_t regionControl;
-                                regionControl.current = ref<uint8_t>(data, start);
-                                regionControl.prev    = ref<uint8_t>(data, start + 1);
-                                regionControls.push_back(regionControl);
-                            }
-
-                            conquest::GetConquestData()->updateRegionControls(regionControls);
-                            return;
-                        }
-
+                        conquest::HandleZMQMessage(data);
                         break;
                     }
+                    /*
+                    case REGIONAL_EVT_MSG_BESIEGED:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_CAMPAIGN:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_COLONIZATION:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    */
                     default:
                     {
                         ShowWarning("Message: unhandled regional event type %d", eventType);
