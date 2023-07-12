@@ -4030,6 +4030,10 @@ INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1467);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1468);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1469);
 
+-- Dynamis - Tavnazia
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_worm',4048,427);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_worm',4048,429);
+
 -- End of AirSkyBoat section
 
 -- ------------------------------------------------------------
