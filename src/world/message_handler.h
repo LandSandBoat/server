@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2023 LandSandBoat Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -30,6 +30,10 @@ public:
     {
     }
 
+    /*
+     * NOTE: The copy of payload here is intentional, since these systems will eventually
+     *     : be moved to their own threads.
+     */
     virtual bool handleMessage(std::vector<uint8> payload,
                                in_addr            from_addr,
                                uint16             from_port) = 0;

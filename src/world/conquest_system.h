@@ -38,6 +38,8 @@ public:
 
     /**
      * IMessageHandler implementation. Used to handle messages from message_server.
+     * NOTE: The copy of payload here is intentional, since these systems will eventually
+     *     : be moved to their own threads.
      */
     bool handleMessage(std::vector<uint8> payload,
                        in_addr            from_addr,
