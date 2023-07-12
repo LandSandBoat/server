@@ -138,6 +138,25 @@ xi.moghouse.moogleTrade = function(player, npc, trade)
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 2, xi.moghouse.getMogLockerExpiryTimestamp(player))
             end
         end
+
+        local eggComponents =
+        {
+            xi.items.EGG_LOCKER,
+            xi.items.EGG_TABLE,
+            xi.items.EGG_STOOL,
+            xi.items.EGG_LANTERN,
+        }
+
+        if npcUtil.tradeHasExactly(trade, eggComponents) then
+            if npcUtil.giveItem(player, xi.items.EGG_BUFFET) then
+                player:tradeComplete()
+            end
+
+        elseif npcUtil.tradeHasExactly(trade, xi.items.EGG_BUFFET) then
+            if npcUtil.giveItem(player, eggComponents) then
+                player:tradeComplete()
+            end
+        end
     end
 end
 
@@ -374,7 +393,11 @@ end
 
 xi.moghouse.isRented = function(player)
     local playerzone = player:getZoneID()
-    local isrentexempt = (playerzone >= xi.zone.SOUTHERN_SAN_DORIA_S and playerzone <= xi.zone.WINDURST_WATERS_S) or (playerzone >= xi.zone.WESTERN_ADOULIN and playerzone <= xi.zone.EASTERN_ADOULIN)
+    local isrentexempt =
+        (playerzone >= xi.zone.SOUTHERN_SAN_DORIA_S and
+            playerzone <= xi.zone.WINDURST_WATERS_S) or
+        (playerzone >= xi.zone.WESTERN_ADOULIN and
+            playerzone <= xi.zone.EASTERN_ADOULIN)
 
     if isrentexempt or not xi.settings.map.RENT_A_ROOM then
         return true
