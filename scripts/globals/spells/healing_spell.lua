@@ -2,7 +2,6 @@
 -- Healing Spell
 -- Used for spells that heal directly.
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/utils")
