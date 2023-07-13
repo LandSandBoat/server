@@ -5,7 +5,6 @@
 -- !pos 189.015 -40.000 241.025 266
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
 -----------------------------------
 local entity = {}
 

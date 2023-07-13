@@ -3,8 +3,6 @@
 -- Ionohelix Schema
 -- Teaches the black magic Ionohelix
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
