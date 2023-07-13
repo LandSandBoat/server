@@ -94,7 +94,7 @@ class LuaStyleCheck:
         """
         # ,[^ \n] : Any comma that does not have space or newline following
 
-        for _ in re.finditer(",[^ \n]", line):
+        for _ in re.finditer(",[^ \n\"]", line):
             self.error("Multiple parameters used without an appropriate following space or newline")
 
     def check_semicolon(self, line):

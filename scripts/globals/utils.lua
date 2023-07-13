@@ -627,7 +627,7 @@ end
 
 -- Split a single string argument into multiple arguments
 function utils.splitArg(s)
-    local comma   = string.gsub(s, ',', " ")
+    local comma   = string.gsub(s, ",", " ")
     local spaces  = string.gsub(comma, "%s+", " ")
     local trimmed = utils.trimStr(spaces)
 
