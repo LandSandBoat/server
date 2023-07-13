@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     local zPos = player:getZPos()
 
     if
-        npcUtil.tradeHas(trade, 1142) and
+        npcUtil.tradeHas(trade, xi.items.JUDGMENT_KEY) and
         player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
         zPos >= 80 and zPos < 86
     then

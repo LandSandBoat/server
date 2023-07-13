@@ -16,7 +16,10 @@ entity.onTrigger = function(player, npc)
 
     if theHolyCrest == 2 then
         player:startEvent(65)
-    elseif (theHolyCrest == 3 and player:hasItem(1159)) or theHolyCrest == 4 then -- Wyvern Egg
+    elseif
+        (theHolyCrest == 3 and player:hasItem(xi.items.WYVERN_EGG)) or
+        theHolyCrest == 4
+    then -- Wyvern Egg
         player:startEvent(62)
     end
 end

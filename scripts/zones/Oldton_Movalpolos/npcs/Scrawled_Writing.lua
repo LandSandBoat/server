@@ -17,7 +17,7 @@ local scrawledWritingPositions =
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 4541) and
+        npcUtil.tradeHas(trade, xi.items.BOTTLE_OF_GOBLIN_DRINK) and
         npcUtil.popFromQM(player, npc, ID.mob.GOBLIN_WOLFMAN, { radius = 2, hide = 900 })
     then
         player:confirmTrade()

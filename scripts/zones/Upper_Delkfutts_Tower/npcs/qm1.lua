@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2385) and
+        npcUtil.tradeHas(trade, xi.items.MOLDY_BUCKLER) and
         npcUtil.popFromQM(player, npc, ID.mob.ALKYONEUS)
     then
-        -- Moldy Buckler
         player:confirmTrade()
     end
 end

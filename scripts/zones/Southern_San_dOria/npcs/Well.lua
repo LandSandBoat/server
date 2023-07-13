@@ -11,10 +11,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED then
-        if trade:hasItemQty(547, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.TOMB_GUARDS_WATERSKIN, 1) and
+            trade:getItemCount() == 1
+        then
             player:tradeComplete()
-            player:addItem(567)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 567) -- Tomb Waterskin
+            player:addItem(xi.items.SKIN_OF_WELL_WATER)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SKIN_OF_WELL_WATER) -- Tomb Waterskin
         end
     end
 end

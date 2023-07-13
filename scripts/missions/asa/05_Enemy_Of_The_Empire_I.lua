@@ -138,13 +138,13 @@ mission.sections =
                     local mobThree = mission:getVar(player, 'MobThree')
 
                     if option == 4 then
-                        player:updateEvent(18721, 18722, 2477)
+                        player:updateEvent(xi.items.SOULTRAPPER, xi.items.BLANK_SOUL_PLATE, 2477)
                     elseif option == 1 then
                         player:updateEventString(mobList[mobOne][1], mobList[mobTwo][1], mobList[mobThree][1], '', 49284, 524420, 0, 0, 0, 0, 0, 0)
                     elseif option == 6 then
                         -- Param 0 = allowed to buy a camera, >0 = 'im out of stock'
                         -- param 3 = x .:(You have x) (maybe number of blank plates?)
-                        player:updateEvent(0, 18721, 18722, player:getGil())
+                        player:updateEvent(0, xi.items.SOULTRAPPER, xi.items.BLANK_SOUL_PLATE, player:getGil())
                     elseif option == 5 then
                         mission:setVar(player, 'AndrauseBuy', 1)
                     end
@@ -181,10 +181,10 @@ mission.sections =
                         end
 
                         if pickupReady then
-                            player:updateEvent(0, 18721, 18722, player:getGil())
+                            player:updateEvent(0, xi.items.SOULTRAPPER, xi.items.BLANK_SOUL_PLATE, player:getGil())
                         end
                     elseif option == 4 then
-                        player:updateEvent(18721, 18722)
+                        player:updateEvent(xi.items.SOULTRAPPER, xi.items.BLANK_SOUL_PLATE)
                     elseif option == 5 then
                         mission:setVar(player, 'AndrauseBuy', 1)
                     end
@@ -234,11 +234,11 @@ mission.sections =
                 [237] = function(player, csid, option, npc)
                     if mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() > 800 then
                         player:delGil(800)
-                        if not player:hasItem(18721) then
-                            npcUtil.giveItem(player, 18721)
+                        if not player:hasItem(xi.items.SOULTRAPPER) then
+                            npcUtil.giveItem(player, xi.items.SOULTRAPPER)
                         end
 
-                        npcUtil.giveItem(player, { 18721, 12 })
+                        npcUtil.giveItem(player, { xi.items.SOULTRAPPER, 12 })
                         mission:setVar(player, 'AndrauseBuy', 0)
                         mission:setVar(player, 'Soulplate', getMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then
@@ -250,13 +250,13 @@ mission.sections =
                 [238] = function(player, csid, option, npc)
                     if mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() > 800 then
                         player:delGil(800)
-                        if not player:hasItem(18721) then
-                            player:addItem(18721)
-                            player:messageSpecial(norgID.text.ITEM_OBTAINED, 18721) -- Soultrapper
+                        if not player:hasItem(xi.items.SOULTRAPPER) then
+                            player:addItem(xi.items.SOULTRAPPER)
+                            player:messageSpecial(norgID.text.ITEM_OBTAINED, xi.items.SOULTRAPPER) -- Soultrapper
                         end
 
-                        player:addItem(18722, 12)
-                        player:messageSpecial(norgID.text.YOU_OBTAIN, 18722, 12) -- Soul Plates
+                        player:addItem(xi.items.BLANK_SOUL_PLATE, 12)
+                        player:messageSpecial(norgID.text.YOU_OBTAIN, xi.items.BLANK_SOUL_PLATE, 12) -- Soul Plates
                         mission:setVar(player, 'AndrauseBuy', 0)
                         mission:setVar(player, 'Soulplate', getMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then

@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 4105) then -- Ice Cluster Trade
+    if npcUtil.tradeHas(trade, xi.items.ICE_CLUSTER) then
         player:confirmTrade()
         GetNPCByID(npc:getID() + 5):openDoor(90)
     end

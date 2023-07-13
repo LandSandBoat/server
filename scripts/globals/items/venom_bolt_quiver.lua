@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18152, 99)
+    target:addItem(xi.items.VENOM_BOLT, 99)
 end
 
 return itemObject

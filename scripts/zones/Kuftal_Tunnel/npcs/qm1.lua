@@ -18,10 +18,9 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 645) and
+        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_DARKSTEEL_ORE) and
         npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1 })
     then
-        -- Darksteel Ore
         player:confirmTrade()
     end
 end

@@ -57,13 +57,13 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("twentyInPirateYearsCS", 1)
     elseif csid == 134 then
         if player:getFreeSlotsCount() <= 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17771)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ANJU)
         else
             player:delKeyItem(xi.ki.TRICK_BOX)
-            player:addItem(17771)
-            player:addItem(17772)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17771) -- Anju
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17772) -- Zushio
+            player:addItem(xi.items.ANJU)
+            player:addItem(xi.items.ZUSHIO)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ANJU) -- Anju
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ZUSHIO) -- Zushio
             player:needToZone()
             player:setCharVar("twentyInPirateYearsCS", 0)
             player:addFame(xi.quest.fame_area.NORG, 30)

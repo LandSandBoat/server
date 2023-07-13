@@ -9,9 +9,9 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1197) then
+    if npcUtil.tradeHas(trade, xi.items.SAHAGIN_KEY) then
         npc:openDoor(8) -- Open the door if a Sahagin key has been traded
-        player:messageSpecial(ID.text.SAHAGIN_DOOR_TRADED, 0, 1197) -- Give a message telling the PC the item is lost
+        player:messageSpecial(ID.text.SAHAGIN_DOOR_TRADED, 0, xi.items.SAHAGIN_KEY) -- Give a message telling the PC the item is lost
         player:confirmTrade()
     end
 end
