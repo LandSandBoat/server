@@ -24,11 +24,11 @@ entity.onTrigger = function(player, npc)
     if
         iCanHearARainbow == QUEST_AVAILABLE and
         player:getMainLvl() >= 30 and
-        player:hasItem(1125)
+        player:hasItem(xi.items.CARBUNCLES_RUBY)
     then
-        player:startEvent(384, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
+        player:startEvent(384, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
     elseif iCanHearARainbow == QUEST_ACCEPTED then
-        player:startEvent(385, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
+        player:startEvent(385, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
 
     -- CLASS REUNION
     elseif

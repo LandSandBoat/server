@@ -14,7 +14,10 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and
         player:getCharVar("NavigatingtheUnfriendlySeas") <= 2
     then
-        if trade:hasItemQty(2341, 1) and trade:getItemCount() == 1 then -- Trade Hydrogauage
+        if
+            trade:hasItemQty(xi.items.HYDROGAUGE, 1) and
+            trade:getItemCount() == 1
+        then
             player:startEvent(283)
             player:setCharVar("NavigatingtheUnfriendlySeas", 2)
         end

@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2185) then -- Silver
+    if npcUtil.tradeHas(trade, xi.items.IMPERIAL_SILVER_PIECE) then
         player:startEvent(163)
     end
 end

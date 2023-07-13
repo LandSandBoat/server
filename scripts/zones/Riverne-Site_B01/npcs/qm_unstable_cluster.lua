@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1880) and
+        npcUtil.tradeHas(trade, xi.items.POT_OF_CLUSTERED_TAR) and
         npcUtil.popFromQM(player, npc, ID.mob.UNSTABLE_CLUSTER)
     then
-        -- Clustered tar
         player:confirmTrade()
     end
 end

@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 4514) and
+        npcUtil.tradeHas(trade, xi.items.QUUS) and
         not GetMobByID(ID.mob.CANCER):isSpawned() and
         not GetMobByID(ID.mob.CANCER + 1):isSpawned()
     then

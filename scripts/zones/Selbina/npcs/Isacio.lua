@@ -16,11 +16,20 @@ entity.onTrade = function(player, npc, trade)
     if questStatus == QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
 
-        if IsacioElderMemVar == 1 and npcUtil.tradeHas(trade, 538) then
-            player:startEvent(115, 537)
-        elseif IsacioElderMemVar == 2 and npcUtil.tradeHas(trade, 537) then
-            player:startEvent(116, 539)
-        elseif IsacioElderMemVar == 3 and npcUtil.tradeHas(trade, 539) then
+        if
+            IsacioElderMemVar == 1 and
+            npcUtil.tradeHas(trade, xi.items.MAGICKED_SKULL)
+        then
+            player:startEvent(115, xi.items.DAMSELFLY_WORM)
+        elseif
+            IsacioElderMemVar == 2 and
+            npcUtil.tradeHas(trade, xi.items.DAMSELFLY_WORM)
+        then
+            player:startEvent(116, xi.items.CRAB_APRON)
+        elseif
+            IsacioElderMemVar == 3 and
+            npcUtil.tradeHas(trade, xi.items.CRAB_APRON)
+        then
             player:startEvent(117)
         end
     end
@@ -39,15 +48,15 @@ entity.onTrigger = function(player, npc)
         if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(117)
         elseif  IsacioElderMemVar == 1 then
-            player:startEvent(114, 538)
+            player:startEvent(114, xi.items.MAGICKED_SKULL)
         elseif IsacioElderMemVar == 2 then
-            player:startEvent(114, 537)
+            player:startEvent(114, xi.items.DAMSELFLY_WORM)
         elseif IsacioElderMemVar == 3 then
-            player:startEvent(114, 539)
+            player:startEvent(114, xi.items.CRAB_APRON)
         end
     else
         if player:getMainLvl() >= xi.settings.main.SUBJOB_QUEST_LEVEL then
-            player:startEvent(111, 538)
+            player:startEvent(111, xi.items.MAGICKED_SKULL)
         else
             player:startEvent(119)
         end

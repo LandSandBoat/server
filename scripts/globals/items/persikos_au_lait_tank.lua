@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4303, 1)
+    target:addItem(xi.items.FLASK_OF_PERSIKOS_AU_LAIT, 1)
 end
 
 return itemObject

@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 15066) and
+        npcUtil.tradeHas(trade, xi.items.RELIC_SHIELD) and
         npcUtil.popFromQM(player, npc, ID.mob.AMALTHEIA)
     then
-        -- Relic Shield
         player:confirmTrade()
     end
 end

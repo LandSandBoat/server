@@ -27,9 +27,9 @@ entity.onTrigger = function(player, npc)
     elseif
         carbuncleDebacle == QUEST_ACCEPTED and
         carbuncleDebacleProgress == 3 and
-        not player:hasItem(1172)
+        not player:hasItem(xi.items.LIGHTNING_PENDULUM)
     then
-        player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
+        player:startEvent(10023, 0, xi.items.LIGHTNING_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
     elseif
@@ -48,21 +48,21 @@ entity.onTrigger = function(player, npc)
     elseif trialByLightning == QUEST_ACCEPTED and hasWhisperOfStorms then
         local numitem = 0
 
-        if player:hasItem(17531) then
+        if player:hasItem(xi.items.RAMUHS_STAFF) then
             numitem = numitem + 1
-        end  -- Ramuh's Staff
+        end
 
-        if player:hasItem(13245) then
+        if player:hasItem(xi.items.LIGHTNING_BELT) then
             numitem = numitem + 2
-        end  -- Lightning Belt
+        end
 
-        if player:hasItem(13564) then
+        if player:hasItem(xi.items.LIGHTNING_RING) then
             numitem = numitem + 4
-        end  -- Lightning Ring
+        end
 
-        if player:hasItem(1206) then
+        if player:hasItem(xi.items.ELDER_BRANCH) then
             numitem = numitem + 8
-        end   -- Elder Branch
+        end
 
         if player:hasSpell(303) then
             numitem = numitem + 32
@@ -93,13 +93,13 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 10019 then
         local item = 0
         if option == 1 then
-            item = 17531         -- Ramuh's Staff
+            item = xi.items.RAMUHS_STAFF
         elseif option == 2 then
-            item = 13245  -- Lightning Belt
+            item = xi.items.LIGHTNING_BELT
         elseif option == 3 then
-            item = 13564  -- Lightning Ring
+            item = xi.items.LIGHTNING_RING
         elseif option == 4 then
-            item = 1206     -- Elder Branch
+            item = xi.items.ELDER_BRANCH
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
@@ -123,11 +123,11 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 10022 or csid == 10023 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(1172)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1172)
+            player:addItem(xi.items.LIGHTNING_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LIGHTNING_PENDULUM)
             player:setCharVar("CarbuncleDebacleProgress", 3)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1172)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.LIGHTNING_PENDULUM)
         end
     end
 end

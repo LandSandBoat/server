@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18738)
+    target:addItem(xi.items.TEMPLE_KNIGHTS_ARROW)
 end
 
 return itemObject

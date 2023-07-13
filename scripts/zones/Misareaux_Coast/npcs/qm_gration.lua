@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        (npcUtil.tradeHas(trade, 12370) or npcUtil.tradeHas(trade, 12359)) and
+        (npcUtil.tradeHas(trade, xi.items.PICAROONS_SHIELD) or npcUtil.tradeHas(trade, xi.items.HICKORY_SHIELD)) and
         npcUtil.popFromQM(player, npc, ID.mob.GRATION)
     then
-        -- Hickory Shield or Picaroon's Shield
         player:confirmTrade()
     end
 end

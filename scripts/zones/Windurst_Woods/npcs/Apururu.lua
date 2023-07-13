@@ -50,14 +50,14 @@ entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 969)
+        npcUtil.tradeHas(trade, xi.items.TEN_OF_CUPS_CARD)
     then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 551)
+        npcUtil.tradeHas(trade, xi.items.BRUISED_STARFRUIT)
     then
         player:startEvent(325, 0, 20000, 5000)
     end
