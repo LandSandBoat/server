@@ -16,7 +16,7 @@ end
 -- http://wiki.ffo.jp/html/37931.html
 abilityObject.onPetAbility = function(target, pet, petskill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp   = pet:getTP()
+    local tp   = petskill:getTP()
 
     xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
 
