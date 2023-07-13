@@ -43227,6 +43227,11 @@ INSERT INTO `item_mods` VALUES (21345,23,10);  -- ATT: 10
 INSERT INTO `item_mods` VALUES (21345,25,-10); -- ACC: -10
 INSERT INTO `item_mods` VALUES (21345,288,2);  -- DOUBLE_ATTACK: 2
 
+-- Charitoni Sling
+INSERT INTO `item_mods` VALUES (21347,2,25);  -- HP: 25
+INSERT INTO `item_mods` VALUES (21347,10,2);  -- VIT: 2
+INSERT INTO `item_mods` VALUES (21347,27,1);  -- ENMITY: 1
+
 -- Wingcutter +1
 INSERT INTO `item_mods` VALUES (21350,9,5);   -- DEX: 5
 INSERT INTO `item_mods` VALUES (21350,11,6);  -- AGI: 6
