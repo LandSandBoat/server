@@ -2,7 +2,6 @@
 --  Automaton Global
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/spell_data")
 -----------------------------------
 xi = xi or {}
 xi.automaton = {}
