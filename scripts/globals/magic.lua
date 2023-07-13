@@ -475,7 +475,7 @@ function applyResistanceEffect(caster, target, spell, params)
         -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
         elseif
             target:hasStatusEffect(xi.effect.FEALTY) and
-            not family == xi.magic.spellFamily.FOE_REQUIEM and
+            family ~= xi.magic.spellFamily.FOE_REQUIEM and
             not (family >= xi.magic.spellFamily.FIRE_THRENODY and
             family <= xi.magic.spellFamily.DARK_THRENODY)
         then

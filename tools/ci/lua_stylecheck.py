@@ -32,6 +32,7 @@ deprecated_requires = [
     "scripts/globals/keyitems",
     "scripts/globals/loot",
     "scripts/globals/settings",
+    "scripts/globals/spell_data",
     "scripts/globals/status",
     "scripts/enum",
 ]
