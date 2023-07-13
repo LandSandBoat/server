@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5770, 1)
+    target:addItem(xi.items.SUPER_RERAISER, 1)
 end
 
 return itemObject

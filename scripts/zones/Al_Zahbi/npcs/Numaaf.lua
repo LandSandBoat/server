@@ -11,7 +11,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
-        if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:getItemCount() == 1
+        then
             if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(223, 8, 0, 0, 0, 188, 0, 8, 0)
@@ -27,9 +30,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
         if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
-            player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, 2184)
+            player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, xi.items.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, 2184)
+            player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, xi.items.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(222, 0, 0, 0, 0, 0, 0, 8, 0) -- Standard Dialogue

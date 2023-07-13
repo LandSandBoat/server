@@ -14,15 +14,15 @@ entity.onTrade = function(player, npc, trade)
     local nbr = 0
     local reward = 0
     if trade:getItemCount() == 1 then
-        if trade:hasItemQty(2187, 1) then
+        if trade:hasItemQty(xi.items.IMPERIAL_GOLD_PIECE, 1) then
             nbr = 5
-            reward = 2186
-        elseif trade:hasItemQty(2186, 1) then
+            reward = xi.items.IMPERIAL_MYTHRIL_PIECE
+        elseif trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, 1) then
             nbr = 2
-            reward = 2185
-        elseif trade:hasItemQty(2185, 1) then
+            reward = xi.items.IMPERIAL_SILVER_PIECE
+        elseif trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
             nbr = 5
-            reward = 2184
+            reward = xi.items.IMPERIAL_BRONZE_PIECE
         end
     end
 

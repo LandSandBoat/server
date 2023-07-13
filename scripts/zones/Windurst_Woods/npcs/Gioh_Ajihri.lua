@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("GiohAijhriSpokenTo") == 1 and
         not player:needToZone() and
-        npcUtil.tradeHas(trade, 13360)
+        npcUtil.tradeHas(trade, xi.items.TWINSTONE_EARRING)
     then
         player:startEvent(490)
     end
@@ -25,17 +25,17 @@ entity.onTrigger = function(player, npc)
 
     if twinstoneBonding == QUEST_COMPLETED then
         if player:needToZone() then
-            player:startEvent(491, 0, 13360)
+            player:startEvent(491, 0, xi.items.TWINSTONE_EARRING)
         else
-            player:startEvent(488, 0, 13360)
+            player:startEvent(488, 0, xi.items.TWINSTONE_EARRING)
         end
     elseif twinstoneBonding == QUEST_ACCEPTED then
-        player:startEvent(488, 0, 13360)
+        player:startEvent(488, 0, xi.items.TWINSTONE_EARRING)
     elseif
         twinstoneBonding == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
-        player:startEvent(487, 0, 13360)
+        player:startEvent(487, 0, xi.items.TWINSTONE_EARRING)
     else
         player:startEvent(424)
     end

@@ -111,7 +111,7 @@ local rubyData =
 quests.i_can_hear_a_rainbow.onZoneIn = function(player)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
-        player:hasItem(1125, 0)
+        player:hasItem(xi.items.CARBUNCLES_RUBY, 0)
     then
         local trigger = false
 

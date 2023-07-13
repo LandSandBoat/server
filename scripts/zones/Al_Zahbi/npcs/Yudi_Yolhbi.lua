@@ -11,7 +11,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
-        if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:getItemCount() == 1
+        then
             if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(235, 8, 0, 0, 0, 188, 0, 1, 0)
@@ -27,9 +30,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
         if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
-            player:startEvent(234, 8, skillLevel, 0, 511, 188, 0, 1, 2184)
+            player:startEvent(234, 8, skillLevel, 0, 511, 188, 0, 1, xi.items.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(234, 8, skillLevel, 0, 511, 188, 7055, 1, 2184)
+            player:startEvent(234, 8, skillLevel, 0, 511, 188, 7055, 1, xi.items.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(234, 0, 0, 0, 0, 0, 0, 1, 0) -- Standard Dialogue

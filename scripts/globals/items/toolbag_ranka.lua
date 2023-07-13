@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(8803, 99)
+    target:addItem(xi.items.RANKA, 99)
 end
 
 return itemObject

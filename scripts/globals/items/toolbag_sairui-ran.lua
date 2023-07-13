@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1188, 99)
+    target:addItem(xi.items.SAIRUI_RAN, 99)
 end
 
 return itemObject

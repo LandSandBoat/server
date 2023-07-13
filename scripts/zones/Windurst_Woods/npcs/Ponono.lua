@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EARTH_CRYSTAL)
         else
-            player:addItem(4099) -- earth crystal
+            player:addItem(xi.items.EARTH_CRYSTAL)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
             xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
         end
