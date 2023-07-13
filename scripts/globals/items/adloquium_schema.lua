@@ -3,8 +3,6 @@
 -- Item: Adloquium Schema
 -- Teaches the white magic Adloquium
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Item: Animus Augeo Schema
 -- Teaches the white magic Animus Augeo
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

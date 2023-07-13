@@ -3,8 +3,6 @@
 -- Hydrohelix Schema
 -- Teaches the black magic Hydrohelix
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -8,7 +8,6 @@
 -- But for a glorious few days, BRDs could tank surprisingly well.
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/spell_data")
 -----------------------------------
 local m = Module:new("mazurka_generates_enmity")
 
