@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2180, 99)
+    target:addItem(xi.items.THUNDER_CARD, 99)
 end
 
 return itemObject

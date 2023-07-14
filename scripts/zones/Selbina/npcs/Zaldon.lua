@@ -574,7 +574,7 @@ entity.onTrade = function(player, npc, trade)
     if
         underTheSea == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ETCHED_RING) and
-        npcUtil.tradeHas(trade, 4501)
+        npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE)
     then
         if math.random(1, 100) <= 20 then
             player:startEvent(35) -- Ring found !

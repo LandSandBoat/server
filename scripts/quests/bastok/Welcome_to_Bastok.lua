@@ -5,7 +5,6 @@
 -- Powhatan   : !pos -152.135 -7.48 19.014 236
 -- Bartolomeo : !pos -84.967 1.896 -18.679 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/titles')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

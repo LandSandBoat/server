@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17331, 99)
+    target:addItem(xi.items.OLD_ARROW, 99)
 end
 
 return itemObject

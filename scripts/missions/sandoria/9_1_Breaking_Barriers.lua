@@ -11,7 +11,6 @@
 -- qm5 (Xarcabard)       : !pos 179 -33 82 112
 -- qm3 (Batallia Downs)  : !pos 210 17 -615 105
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

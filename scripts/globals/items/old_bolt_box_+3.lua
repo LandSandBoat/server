@@ -4,7 +4,6 @@
 -- When used, you will obtain one partial stack of Dogbolt +3
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

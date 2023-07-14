@@ -14,15 +14,15 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and
         trade:getItemCount() == 1
     then
-        if trade:hasItemQty(557, 1) then
+        if trade:hasItemQty(xi.items.AHRIMAN_LENS, 1) then
             player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
-        elseif trade:hasItemQty(556, 1) then
+        elseif trade:hasItemQty(xi.items.DIVINATION_SPHERE, 1) then
             player:startEvent(196) -- Trade divination sphere, finish quest
         end
 
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_ACCEPTED and
-        trade:hasItemQty(12507, 1) and
+        trade:hasItemQty(xi.items.HORN_HAIRPIN, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(203) -- Finish "Never to return" quest
@@ -111,11 +111,11 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 203 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13477)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GARNET_RING)
         else
             npcUtil.giveCurrency(player, 'gil', 1200)
-            player:addItem(13477)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
+            player:addItem(xi.items.GARNET_RING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GARNET_RING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)

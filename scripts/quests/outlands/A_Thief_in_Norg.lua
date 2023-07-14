@@ -7,7 +7,6 @@
 -- Phoochuchu      : !pos -4 -4 69 249
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -112,7 +111,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.CHARRED_HELM) and
-                        npcUtil.tradeHasExactly(trade, xi.items.GOLD_THREAD)
+                        npcUtil.tradeHasExactly(trade, xi.items.SPOOL_OF_GOLD_THREAD)
                     then
                         return quest:progressEvent(162)
                     end

@@ -25,6 +25,7 @@
 
 #include <ctime>
 
+#include "common/vana_time.h"
 #include "lua/luautils.h"
 #include "packets/chat_message.h"
 #include "utils/charutils.h"

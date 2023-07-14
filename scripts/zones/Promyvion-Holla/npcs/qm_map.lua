@@ -16,7 +16,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1720) and
+        npcUtil.tradeHas(trade, xi.items.TEAL_MEMOSPHERE) and
         not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_HOLLA)
     then
         player:startEvent(49)

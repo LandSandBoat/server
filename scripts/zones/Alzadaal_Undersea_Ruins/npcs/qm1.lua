@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2592) and
+        npcUtil.tradeHas(trade, xi.items.FLASK_OF_COG_LUBRICANT) and
         npcUtil.popFromQM(player, npc, ID.mob.OB)
     then
         -- Trade Cog Lubricant

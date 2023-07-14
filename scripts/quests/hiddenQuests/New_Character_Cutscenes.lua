@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/cutscenes')
 require('scripts/globals/interaction/hidden_quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
 -----------------------------------
@@ -55,7 +54,7 @@ quest.sections =
                 [7] = function(player, csid, option, npc)
                     local ID = zones[player:getZoneID()]
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
 
                     player:setPos(-280, -12, -90, 0)
@@ -85,7 +84,7 @@ quest.sections =
                 [1] = function(player, csid, option, npc)
                     local ID = zones[player:getZoneID()]
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
 
                     player:setPos(-45, -0, 25, 192)
@@ -116,7 +115,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     player:setPos(134, 8.5, -11, 96)
                     player:setHomePoint()
@@ -147,7 +146,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     player:setPos(0, 0, -12, 192)
                     player:setHomePoint()
@@ -178,7 +177,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     player:setPos(-100, 1, -40, 224) --cs exit
                     player:setHomePoint()
@@ -208,7 +207,7 @@ quest.sections =
                 [500] = function(player, csid, option, npc)
                     local ID = zones[player:getZoneID()]
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
 
                     player:setPos(-100, -8, -125, 224)
@@ -250,7 +249,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     -- The HP position is slightly different than the CS exit.
                     player:setPos(-40.0, -5, 100, 64)
@@ -283,7 +282,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     player:setPos(30, 2, -40, 128)
                     player:setHomePoint()
@@ -314,7 +313,7 @@ quest.sections =
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.
-                    npcUtil.giveItem(player, xi.items.ADVENTURERS_COUPON)
+                    npcUtil.giveItem(player, xi.items.ADVENTURER_COUPON)
 
                     player:setPos(-120, -5.5, 175, 48)
                     player:setHomePoint()

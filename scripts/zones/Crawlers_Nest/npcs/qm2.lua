@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 4365) then -- Rolanberry
+    if npcUtil.tradeHas(trade, xi.items.ROLANBERRY) then -- Rolanberry
         player:confirmTrade()
         if
             math.random(1, 100) > 38 or

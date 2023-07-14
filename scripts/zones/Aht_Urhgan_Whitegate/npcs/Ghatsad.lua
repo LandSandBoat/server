@@ -4,7 +4,6 @@
 -- Involved in quest: No Strings Attached
 -- !pos 34.325 -7.804 57.511 50
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -47,7 +46,7 @@ local headAndFrameItems =
 
     [3] =
     {
-        xi.items.ROSEWOOD_LUMBER,
+        xi.items.PIECE_OF_ROSEWOOD_LUMBER,
         xi.items.SQUARE_OF_KARAKUL_CLOTH,
         xi.items.SQUARE_OF_KARAKUL_LEATHER,
         xi.items.HEAVY_CROSSBOW
@@ -55,7 +54,7 @@ local headAndFrameItems =
 
     [4] =
     {
-        xi.items.GOLD_THREAD,
+        xi.items.SPOOL_OF_GOLD_THREAD,
         xi.items.SQUARE_OF_VELVET_CLOTH,
         xi.items.SQUARE_OF_WAMOURA_CLOTH,
         xi.items.BRASS_RING

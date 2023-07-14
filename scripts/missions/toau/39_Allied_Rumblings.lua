@@ -4,7 +4,6 @@
 -----------------------------------
 -- !addmission 4 38
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

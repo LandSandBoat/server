@@ -6,7 +6,6 @@
 -- Andelain  : !pos 664.231 -12.849 -539.413 101
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

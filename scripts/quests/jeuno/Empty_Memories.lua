@@ -4,7 +4,6 @@
 -- !addquest 3 70
 -- Harith : !pos -4.349 1 134.014 243
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')

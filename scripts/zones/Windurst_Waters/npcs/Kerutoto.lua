@@ -22,12 +22,12 @@ entity.onTrigger = function(player, npc)
     -- WAKING DREAMS
     if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
         local availRewards = 0
-            + (player:hasItem(17599) and 1 or 0) -- Diabolos's Pole
-            + (player:hasItem(14814) and 2 or 0) -- Diabolos's Earring
-            + (player:hasItem(15557) and 4 or 0) -- Diabolos's Ring
-            + (player:hasItem(15516) and 8 or 0) -- Diabolos's Torque
+            + (player:hasItem(xi.items.DIABOLOSS_POLE) and 1 or 0) -- Diabolos's Pole
+            + (player:hasItem(xi.items.DIABOLOSS_EARRING) and 2 or 0) -- Diabolos's Earring
+            + (player:hasItem(xi.items.DIABOLOSS_RING) and 4 or 0) -- Diabolos's Ring
+            + (player:hasItem(xi.items.DIABOLOSS_TORQUE) and 8 or 0) -- Diabolos's Torque
             + (player:hasSpell(304) and 32 or 16) -- Pact or gil
-        player:startEvent(920, 17599, 14814, 15557, 15516, 0, 0, 0, availRewards)
+        player:startEvent(920, xi.items.DIABOLOSS_POLE, xi.items.DIABOLOSS_EARRING, xi.items.DIABOLOSS_RING, xi.items.DIABOLOSS_TORQUE, 0, 0, 0, availRewards)
     elseif
         not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
         (
@@ -55,14 +55,14 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 920 then
         local reward = { fame = 0 }
 
-        if option == 1 and not player:hasItem(17599) then
-            reward.item = 17599
-        elseif option == 2 and not player:hasItem(14814) then
-            reward.item = 14814
-        elseif option == 3 and not player:hasItem(15557) then
-            reward.item = 15557
-        elseif option == 4 and not player:hasItem(15516) then
-            reward.item = 15516
+        if option == 1 and not player:hasItem(xi.items.DIABOLOSS_POLE) then
+            reward.item = xi.items.DIABOLOSS_POLE
+        elseif option == 2 and not player:hasItem(xi.items.DIABOLOSS_EARRING) then
+            reward.item = xi.items.DIABOLOSS_EARRING
+        elseif option == 3 and not player:hasItem(xi.items.DIABOLOSS_RING) then
+            reward.item = xi.items.DIABOLOSS_RING
+        elseif option == 4 and not player:hasItem(xi.items.DIABOLOSS_TORQUE) then
+            reward.item = xi.items.DIABOLOSS_TORQUE
         elseif option == 5 then
             reward.gil = 15000
         elseif option == 6 and not player:hasSpell(304) then

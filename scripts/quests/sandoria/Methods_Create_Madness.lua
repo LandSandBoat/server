@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local southernSandOriaID = require('scripts/zones/Southern_San_dOria/IDs')
 local seaSerpentGrottoID = require('scripts/zones/Sea_Serpent_Grotto/IDs')

@@ -7,7 +7,6 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

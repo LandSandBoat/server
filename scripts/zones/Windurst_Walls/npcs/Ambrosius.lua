@@ -27,19 +27,19 @@ entity.onTrade = function(player, npc, trade)
         local reward = 0
 
         -- TODO: Table this on converting to Interaction
-        if trade:hasItemQty(584, 1) then
+        if trade:hasItemQty(xi.items.TORN_EPISTLE, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(585, 1) then
+        if trade:hasItemQty(xi.items.MUDDY_BAR_TAB, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(586, 1) then
+        if trade:hasItemQty(xi.items.ODD_POSTCARD, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(587, 1) then
+        if trade:hasItemQty(xi.items.DAMP_ENVELOPE, 1) then
             reward = reward + 1
         end
 

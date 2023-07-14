@@ -66,11 +66,11 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 307 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17386)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
         else
             player:tradeComplete()
-            player:addItem(17386)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17386)
+            player:addItem(xi.items.LU_SHANGS_FISHING_ROD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
             player:addTitle(xi.title.CARP_DIEM)
             player:addKeyItem(xi.ki.TESTIMONIAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TESTIMONIAL)

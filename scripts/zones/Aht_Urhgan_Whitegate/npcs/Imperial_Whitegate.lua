@@ -3,7 +3,6 @@
 --  NPC: Imperial Whitegate
 -- pos: 152, -2, 0, 50
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 require("scripts/globals/besieged")
@@ -39,7 +38,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local standardParam = 0
-        if not player:hasItem(129) then
+        if not player:hasItem(xi.items.IMPERIAL_STANDARD) then
             standardParam = 1
         end
 

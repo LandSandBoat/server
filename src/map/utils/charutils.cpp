@@ -5912,6 +5912,10 @@ namespace charutils
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ACCESSION);
             }
+            if (PSpell->getSkillType() == SKILL_ENHANCING_MAGIC)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PERPETUANCE);
+            }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
         {

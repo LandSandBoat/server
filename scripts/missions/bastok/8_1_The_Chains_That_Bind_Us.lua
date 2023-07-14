@@ -11,7 +11,6 @@
 -- qm6        : !pos -469 0 620 208
 -- qm4        : !pos -533 -0.851 -415
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
@@ -96,6 +95,15 @@ mission.sections =
 
         [xi.zone.METALWORKS] =
         {
+            ['_6ld'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 3 then
+                        return mission:progressEvent(702)
+                    end
+                end,
+            },
+
             ['Iron_Eater'] =
             {
                 onTrigger = function(player, npc)
@@ -104,8 +112,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(767)
                     elseif missionStatus == 3 then
-                        -- TODO: This needs to move to IDs.lua, and de-magic-number it
-                        return mission:messageText(8596)
+                        return mission:progressEvent(702)
                     elseif missionStatus == 4 then
                         return mission:progressEvent(768)
                     end

@@ -32,19 +32,19 @@ entity.onTrigger = function(player, npc)
     elseif trialByEarth == QUEST_ACCEPTED and hasWhisperOfTremors then
         local numitem = 0
 
-        if player:hasItem(17438) then
+        if player:hasItem(xi.items.TITANS_CUDGEL) then
             numitem = numitem + 1
         end  -- Titan's Cudgel
 
-        if player:hasItem(13244) then
+        if player:hasItem(xi.items.EARTH_BELT) then
             numitem = numitem + 2
         end  -- Earth Belt
 
-        if player:hasItem(13563) then
+        if player:hasItem(xi.items.EARTH_RING) then
             numitem = numitem + 4
         end  -- Earth Ring
 
-        if player:hasItem(1205) then
+        if player:hasItem(xi.items.DOSE_OF_DESERT_LIGHT) then
             numitem = numitem + 8
         end   -- Desert Light
 
@@ -75,13 +75,13 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 252 then
         local item = 0
         if option == 1 then
-            item = 17438         -- Titan's Cudgel
+            item = xi.items.TITANS_CUDGEL
         elseif option == 2 then
-            item = 13244  -- Earth Belt
+            item = xi.items.EARTH_BELT
         elseif option == 3 then
-            item = 13563  -- Earth Ring
+            item = xi.items.EARTH_RING
         elseif option == 4 then
-            item = 1205     -- Desert Light
+            item = xi.items.DOSE_OF_DESERT_LIGHT
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then

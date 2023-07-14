@@ -10,7 +10,6 @@
 -- Tosuka-Porika    : !pos -26 -6 103 238
 -- _4pc             : !pos 132 12 -19 169
 require('scripts/globals/interaction/mission')
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

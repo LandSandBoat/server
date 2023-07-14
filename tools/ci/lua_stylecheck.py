@@ -28,12 +28,38 @@ deprecated_functions = [
 ]
 
 deprecated_requires = [
+    "scripts/globals/items",
     "scripts/globals/keyitems",
     "scripts/globals/loot",
-    "scripts/globals/status",
     "scripts/globals/settings",
+    "scripts/globals/status",
     "scripts/enum",
 ]
+
+# 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
+# Parameters are 0-indexed
+disallowed_numeric_parameters = {
+    "addItem"               : [ 0 ],
+    "addKeyItem"            : [ 0 ],
+    "addStatusEffect"       : [ 0 ],
+    "addStatusEffectSilent" : [ 0 ],
+    "addUsedItem"           : [ 0 ],
+    "delItem"               : [ 0 ],
+    "delKeyItem"            : [ 0 ],
+    "delStatusEffect"       : [ 0 ],
+    "delStatusEffectEx"     : [ 0 ],
+    "getEquipID"            : [ 0 ],
+    "getEquippedItem"       : [ 0 ],
+    "hasItem"               : [ 0 ],
+    "hasItemQty"            : [ 0 ],
+    "messageBasic"          : [ 0 ],
+    "messageName"           : [ 0 ],
+    "messageSpecial"        : [ 0 ],
+    "messageText"           : [ 0 ],
+    "npcUtil.giveKeyItem"   : [ 1, 2 ],
+    "npcUtil.tradeHas"      : [ 1 ],
+    "showText"              : [ 0 ],
+}
 
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
@@ -254,6 +280,21 @@ class LuaStyleCheck:
                 if deprecated_str in line:
                     self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
 
+    def check_function_parameters(self, line):
+        # Iterate through all entries in the disallowed table
+        for fn_name, param_locations in disallowed_numeric_parameters.items():
+            regex_str = r'{0}\(([^)]+)\)'.format(fn_name)
+
+            # For each match of the current entry in the line
+            for parameter_str in re.findall(regex_str, line):
+                parameter_list = parameter_str.split(",")
+
+                # For each parameter location
+                for position in param_locations:
+                    if position < len(parameter_list) and parameter_list[position].strip().isnumeric():
+                        self.error(f"Magic Number is not allowed at this location ({position}).")
+
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -301,6 +342,7 @@ class LuaStyleCheck:
                 self.check_multiline_condition_format(code_line)
 
                 self.check_deprecated_functions(code_line)
+                self.check_function_parameters(code_line)
 
                 # Condition blocks/lines should not have outer parentheses
                 # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)

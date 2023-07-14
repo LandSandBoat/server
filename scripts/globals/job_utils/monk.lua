@@ -1,8 +1,6 @@
 -----------------------------------
 -- Monk Job Utilities
 -----------------------------------
-require('scripts/globals/items')
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.monk = xi.job_utils.monk or {}

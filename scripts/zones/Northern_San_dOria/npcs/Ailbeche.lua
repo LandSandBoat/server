@@ -99,11 +99,11 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("sharpeningTheSwordCS", 1)
     elseif csid == 44 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17643)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.HONOR_SWORD)
         else
             player:delKeyItem(xi.ki.ORDELLE_WHETSTONE)
-            player:addItem(17643)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17643) -- Honor Sword
+            player:addItem(xi.items.HONOR_SWORD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.HONOR_SWORD) -- Honor Sword
             player:setCharVar("sharpeningTheSwordCS", 0)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)

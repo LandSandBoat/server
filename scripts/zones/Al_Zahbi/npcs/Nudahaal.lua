@@ -11,7 +11,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
-        if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:getItemCount() == 1
+        then
             if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(225, 8, 0, 0, 0, 188, 0, 6, 0)
@@ -27,9 +30,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
-            player:startEvent(224, 8, skillLevel, 0, 511, 188, 0, 6, 2184)
+            player:startEvent(224, 8, skillLevel, 0, 511, 188, 0, 6, xi.items.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(224, 8, skillLevel, 0, 511, 188, 7121, 6, 2184)
+            player:startEvent(224, 8, skillLevel, 0, 511, 188, 7121, 6, xi.items.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(224, 0, 0, 0, 0, 0, 0, 6, 0) -- Standard Dialogue

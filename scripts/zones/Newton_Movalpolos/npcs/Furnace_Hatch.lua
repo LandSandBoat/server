@@ -8,7 +8,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 947) then
+    if npcUtil.tradeHas(trade, xi.items.JAR_OF_FIRESAND) then
         local offset = npc:getID() - ID.npc.FURNACE_HATCH_OFFSET
         player:confirmTrade()
         player:startEvent(21 + offset) -- THUD!

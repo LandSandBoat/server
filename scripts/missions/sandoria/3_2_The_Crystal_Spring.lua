@@ -7,7 +7,6 @@
 -- Grilau               : !pos -241.987 6.999 57.887 231
 -- Endracion            : !pos -110 1 -34 230
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

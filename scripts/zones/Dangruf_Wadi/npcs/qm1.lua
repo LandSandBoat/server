@@ -11,10 +11,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1898) and
+        npcUtil.tradeHas(trade, xi.items.VIAL_OF_FRESH_BLOOD) and
         npcUtil.popFromQM(player, npc, ID.mob.CHOCOBOLEECH, { radius = 1 })
     then
-        -- fresh blood
         player:confirmTrade()
 
         local positions =

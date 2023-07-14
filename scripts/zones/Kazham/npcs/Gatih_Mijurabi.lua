@@ -39,11 +39,11 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE)
     elseif csid == 193 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13247)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MITHRAN_STONE)
         else
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE)
-            player:addItem(13247) -- Mithran Stone
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13247)
+            player:addItem(xi.items.MITHRAN_STONE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MITHRAN_STONE)
         end
     end
 end

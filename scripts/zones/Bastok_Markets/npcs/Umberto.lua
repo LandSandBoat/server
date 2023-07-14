@@ -23,10 +23,10 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 473 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 5674)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.AILEENS_DELIGHT)
         else
-            player:addItem(5674)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5674)
+            player:addItem(xi.items.AILEENS_DELIGHT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.AILEENS_DELIGHT)
             player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:setCharVar("TOO_MANY_CHEFS", 0)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
