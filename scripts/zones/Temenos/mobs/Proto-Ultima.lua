@@ -55,7 +55,10 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- After using Nuclear Waste use a random elemental conal attack
-    if skill:getID() == 1268 then
+    if
+        skill:getID() == 1268 and
+        mob:getLocalVar("nuclearWaste") == 1
+    then
         mob:timer(4000, function(mobArg)
             local ability = math.random(1262, 1267)
             mob:useMobAbility(ability)
