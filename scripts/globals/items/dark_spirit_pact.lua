@@ -3,8 +3,6 @@
 -- Dark Spirit Pact
 -- Teaches the summoning magic Dark Spirit
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

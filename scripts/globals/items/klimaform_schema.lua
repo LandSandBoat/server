@@ -3,8 +3,6 @@
 -- Klimaform Schema
 -- Teaches the black magic Klimaform
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
