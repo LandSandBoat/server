@@ -258,7 +258,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         name = PEntity->name;
     }
 
-    auto lookupName = "DE_" + name;
+    auto defaultLookupName = "DE_" + name;
+    auto lookupName        = table.get_or<std::string>("lookupName", defaultLookupName);
 
     PEntity->name       = lookupName;
     PEntity->packetName = name;
