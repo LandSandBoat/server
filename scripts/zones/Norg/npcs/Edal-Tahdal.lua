@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Eye of Nept
 
-        if player:hasSpell(300) then
+        if player:hasSpell(xi.magic.spell.LEVIATHAN) then
             numitem = numitem + 32
         end  -- Ability to summon Leviathan
 
@@ -94,7 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(300) -- Avatar
+                player:addSpell(xi.magic.spell.LEVIATHAN) -- Avatar
                 player:messageSpecial(ID.text.AVATAR_UNLOCKED, 0, 0, 2)
             else
                 player:addItem(item)

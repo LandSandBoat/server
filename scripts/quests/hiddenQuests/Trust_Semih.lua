@@ -12,7 +12,7 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasSpell(940) and
+            return not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
                 not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO) and
                 player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED) and
                 xi.settings.main.ENABLE_ROV == 1

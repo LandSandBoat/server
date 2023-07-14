@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Elder Branch
 
-        if player:hasSpell(303) then
+        if player:hasSpell(xi.magic.spell.RAMUH) then
             numitem = numitem + 32
         end  -- Ability to summon Ramuh
 

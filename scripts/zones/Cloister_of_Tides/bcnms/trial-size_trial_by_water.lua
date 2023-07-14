@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(300) then
-            player:addSpell(300)
+        if not player:hasSpell(xi.magic.spell.LEVIATHAN) then
+            player:addSpell(xi.magic.spell.LEVIATHAN)
             player:messageSpecial(ID.text.LEVIATHAN_UNLOCKED, 0, 0, 2)
         end
 

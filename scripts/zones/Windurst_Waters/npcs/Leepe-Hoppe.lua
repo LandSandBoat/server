@@ -55,7 +55,7 @@ local function getFenrirRewardMask(player)
         rewardMask = rewardMask + 16
     end -- Ancient's Key
 
-    if player:hasSpell(297) then
+    if player:hasSpell(xi.magic.spell.FENRIR) then
         rewardMask = rewardMask + 64
     end  -- Pact
 
@@ -194,7 +194,7 @@ entity.onEventFinish = function(player, csid, option)
         elseif option == 6 then
             npcUtil.giveCurrency(player, 'gil', 15000)
         elseif option == 7 then
-            player:addSpell(297) -- Pact
+            player:addSpell(xi.magic.spell.FENRIR) -- Pact
         elseif option == 8 then
             player:addKeyItem(xi.ki.FENRIR_WHISTLE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FENRIR_WHISTLE)

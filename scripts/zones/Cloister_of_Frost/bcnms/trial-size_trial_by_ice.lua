@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(302) then
-            player:addSpell(302)
+        if not player:hasSpell(xi.magic.spell.SHIVA) then
+            player:addSpell(xi.magic.spell.SHIVA)
             player:messageSpecial(ID.text.SHIVA_UNLOCKED, 0, 0, 4)
         end
 

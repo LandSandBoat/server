@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(437)
     elseif
         trustWindurst == QUEST_COMPLETED and
-        not player:hasSpell(901) and
+        not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         kupipiTrustChatFlag == 0
     then
         player:startEvent(438)
