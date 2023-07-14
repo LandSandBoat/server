@@ -17,8 +17,8 @@ end
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local moatCarp = trade:getItemQty(4401)
-    local forestCarp = trade:getItemQty(4289)
+    local moatCarp = trade:getItemQty(xi.items.MOAT_CARP)
+    local forestCarp = trade:getItemQty(xi.items.FOREST_CARP)
     local fishCountVar = player:getCharVar("theCompetitionFishCountVar")
     local totalFish = moatCarp + forestCarp + fishCountVar
 

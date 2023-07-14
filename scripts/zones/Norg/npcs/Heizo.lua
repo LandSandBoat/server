@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
-    local legging = trade:getItemQty(14117)
+    local legging = trade:getItemQty(xi.items.RUSTY_LEGGINGS)
     local turnedInVar = player:getCharVar("shiningLeggings_nb")
     local totalLeggings = legging + turnedInVar
 
