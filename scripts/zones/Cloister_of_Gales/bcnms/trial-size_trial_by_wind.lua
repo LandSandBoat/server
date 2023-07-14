@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(301) then
-            player:addSpell(301)
+        if not player:hasSpell(xi.magic.spell.GARUDA) then
+            player:addSpell(xi.magic.spell.GARUDA)
             player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)
         end
 

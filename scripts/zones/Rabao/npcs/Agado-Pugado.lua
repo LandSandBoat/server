@@ -72,7 +72,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Bubbly Water
 
-        if player:hasSpell(301) then
+        if player:hasSpell(xi.magic.spell.GARUDA) then
             numitem = numitem + 32
         end  -- Ability to summon Garuda
 
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(301) -- Garuda Spell
+                player:addSpell(xi.magic.spell.GARUDA) -- Garuda Spell
                 player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)
             else
                 player:addItem(item)

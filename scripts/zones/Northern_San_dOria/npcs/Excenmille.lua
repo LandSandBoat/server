@@ -60,7 +60,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(895)
     elseif
         trustSandoria == QUEST_COMPLETED and
-        not player:hasSpell(902) and
+        not player:hasSpell(xi.magic.spell.CURILLA) and
         excenmilleTrustChatFlag == 0
     then
         player:startEvent(896, 0, 0, 0, 0, 0, 0, 0, rank3)

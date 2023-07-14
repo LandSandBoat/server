@@ -55,6 +55,7 @@ disallowed_numeric_parameters = {
     "getItemQty"            : [ 0 ],
     "hasItem"               : [ 0 ],
     "hasItemQty"            : [ 0 ],
+    "hasSpell"              : [ 0 ],
     "messageBasic"          : [ 0 ],
     "messageName"           : [ 0 ],
     "messageSpecial"        : [ 0 ],
