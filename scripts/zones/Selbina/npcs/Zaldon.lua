@@ -527,6 +527,7 @@ local function tradeFish(player, fishId)
     end
 
     if not found then
+        player:confirmTrade()
         player:startEvent(167)
     end
 end
