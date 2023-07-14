@@ -84,8 +84,8 @@ zones[xi.zone.BASTOK_MARKETS] =
     },
     npc =
     {
-        AQUILLINA       = GetFirstID("Aquillina"),
-        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
+        AQUILLINA = GetFirstID("Aquillina"),
+
         HALLOWEEN_SKINS =
         {
             [17739805] = 45, -- Olwyn

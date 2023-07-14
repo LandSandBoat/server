@@ -94,7 +94,8 @@ xi.events.egg_hunt.data =
 {
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
-        cs = 872,
+        cs          = 872,
+        moogle      = { 194, 56.195, 1.999, -25.207 }, --!pos 56.195 1.999 -25.207 230
         decorations =
         {
             { 224,  -99.972,  1.000, -57.257, "0x00006B0500000000000000000000000000000000", },
@@ -117,7 +118,8 @@ xi.events.egg_hunt.data =
 
     [xi.zone.NORTHERN_SAN_DORIA] =
     {
-        cs = 832,
+        cs          = 832,
+        moogle      = { 128, -224.135, 8.000, 53.476 }, -- !pos -224.135 8.000 53.476 231
         decorations =
         {
             { 163,   87.834, 0.000,  8.015, "0x00006B0500000000000000000000000000000000", },
@@ -137,7 +139,8 @@ xi.events.egg_hunt.data =
 
     [xi.zone.BASTOK_MINES] =
     {
-        cs = 561,
+        cs          = 561,
+        moogle      = { 0, -33.600, -0.001, -110.000 }, -- !pos -33.600 -0.001 -110.000 234
         decorations =
         {
             { 192, -10.200, -1.000, -127.100, "0x00006C0500000000000000000000000000000000", },
@@ -156,7 +159,8 @@ xi.events.egg_hunt.data =
 
     [xi.zone.BASTOK_MARKETS] =
     {
-        cs = 467,
+        cs          = 467,
+        moogle      = { 40, -260.440, -12.021, -79.538 }, -- !pos -260.440 -12.021 -79.538 235
         decorations =
         {
             { 128, -153.700,  -4.000,   33.000, "0x00006C0500000000000000000000000000000000", },
@@ -177,7 +181,8 @@ xi.events.egg_hunt.data =
 
     [xi.zone.WINDURST_WATERS] =
     {
-        cs = 969,
+        cs          = 969,
+        moogle      = { 0, -55.470, -5.391, 216.362 }, -- !pos -55.470 -5.391 216.362 238
         decorations =
         {
             { 192, 164.500, -0.250, -30.000, "0x00006D0500000000000000000000000000000000", },
@@ -197,7 +202,8 @@ xi.events.egg_hunt.data =
 
     [xi.zone.WINDURST_WOODS] =
     {
-        cs = 785,
+        cs          = 785,
+        moogle      = { 161, 104.823, -5.000, -55.745 }, -- !pos 104.823 -5.000 -55.745 241
         decorations =
         {
             { 128,  107.630, -5.000, -33.200, "0x00006D0500000000000000000000000000000000", },
@@ -769,6 +775,8 @@ end
 xi.events.egg_hunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
+    npc:facePlayer(player, true)
+
     if player:getCharVar(settings.VAR.DAILY_EGG) >= VanadielUniqueDay() then
         player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.HINTING)
     else
@@ -829,6 +837,8 @@ end
 xi.events.egg_hunt.onTrade = function(player, npc, trade)
     local zoneID = player:getZoneID()
 
+    npc:facePlayer(player, true)
+
     if tradeIn(player, npc, trade, zoneID) then
         return
     end
@@ -875,26 +885,7 @@ end
 -- Show/hide Moogles and decorations
 ------------------------------------
 
-xi.events.egg_hunt.showMoogle = function(zoneID)
-    local moogle = GetNPCByID(zones[zoneID].npc.EGG_HUNT_MOOGLE)
-    if moogle then
-        moogle:setStatus(xi.status.NORMAL)
-    end
-end
-
-xi.events.egg_hunt.hideMoogles = function()
-    for zoneID, data in pairs(xi.events.egg_hunt.data) do
-        local zone = GetZone(zoneID)
-        if zone then
-            local moogle = GetNPCByID(zones[zoneID].npc.EGG_HUNT_MOOGLE)
-            if moogle then
-                moogle:setStatus(xi.status.DISAPPEAR)
-            end
-        end
-    end
-end
-
-local insertNpc = function(zone, entry)
+local function insertNpc(zone, entry)
     local rot  = entry[1]
     local x    = entry[2]
     local y    = entry[3]
@@ -902,16 +893,35 @@ local insertNpc = function(zone, entry)
     local look = entry[5]
 
     local npc = zone:insertDynamicEntity({
-        objtype = xi.objType.NPC,
-        name = "     ",
-        look = look,
-        x = x,
-        y = y,
-        z = z,
-        rotation = rot,
-        widescan = 0,
+        objtype     = xi.objType.NPC,
+        name        = "     ",
+        look        = look,
+        x           = x,
+        y           = y,
+        z           = z,
+        rotation    = rot,
+        widescan    = 0,
         entityFlags = 2075,
-        namevis = 64,
+        namevis     = 64,
+        releaseIdOnDisappear = true,
+    })
+
+    table.insert(xi.events.egg_hunt.entities, npc:getID())
+end
+
+local function insertMoogle(zone, pos)
+    local npc = zone:insertDynamicEntity({
+        objtype       = xi.objType.NPC,
+        name          = "Egg_Hunt_Moogle",
+        packetName    = "Moogle",
+        look          = 82,
+        x             = pos[2],
+        y             = pos[3],
+        z             = pos[4],
+        rotation      = pos[1],
+        onTrigger     = xi.events.egg_hunt.onTrigger,
+        onEventFinish = xi.events.egg_hunt.onEventFinish,
+        onTrade       = xi.events.egg_hunt.onTrade,
         releaseIdOnDisappear = true,
     })
 
@@ -922,7 +932,7 @@ xi.events.egg_hunt.generateEntities = function()
     for zoneID, data in pairs(xi.events.egg_hunt.data) do
         local zone = GetZone(zoneID)
         if zone then
-            xi.events.egg_hunt.showMoogle(zoneID)
+            insertMoogle(zone, data.moogle)
 
             for _, entry in pairs(data.decorations) do
                 insertNpc(zone, entry)
@@ -956,7 +966,6 @@ xi.events.egg_hunt.showEntities = function(enabled)
 
     if not enabled then
         xi.events.egg_hunt.entities = {}
-        xi.events.egg_hunt.hideMoogles()
     end
 end
 

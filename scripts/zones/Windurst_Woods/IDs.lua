@@ -93,7 +93,6 @@ zones[xi.zone.WINDURST_WOODS] =
     },
     npc =
     {
-        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17764400] = 55, -- Meriri

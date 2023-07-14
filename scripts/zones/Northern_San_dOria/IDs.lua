@@ -133,7 +133,6 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
     },
     npc =
     {
-        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17723487] = 53, -- Vichuel

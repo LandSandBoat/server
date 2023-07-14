@@ -96,7 +96,6 @@ zones[xi.zone.BASTOK_MINES] =
     },
     npc =
     {
-        EGG_HUNT_MOOGLE = GetFirstID("Egg_Hunt_Moogle"),
         HALLOWEEN_SKINS =
         {
             [17735742] = 41, -- Faustin
