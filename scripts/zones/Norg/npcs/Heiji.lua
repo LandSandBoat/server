@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
-    local subligar = trade:getItemQty(14242)
+    local subligar = trade:getItemQty(xi.items.RUSTY_SUBLIGAR)
     local turnedInVar = player:getCharVar("shiningSubligar_nb")
     local totalSubligar = subligar + turnedInVar
 
