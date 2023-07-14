@@ -46,7 +46,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     uint8 bastok_prev      = conquestData->getPrevRegionControlCount(NATION_BASTOK);
     uint8 windurst_prev    = conquestData->getPrevRegionControlCount(NATION_WINDURST);
 
-    for (uint8 regionId = (uint8)REGION_TYPE::RONFAURE; regionId != (uint8)REGION_TYPE::EAST_ULBUKA; regionId++)
+    for (uint8 regionId = (uint8)REGION_TYPE::RONFAURE; regionId <= (uint8)REGION_TYPE::TAVNAZIA; regionId++)
     {
         uint8 region_owner              = conquestData->getRegionOwner((REGION_TYPE)regionId);
         int32 san_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_SANDORIA);

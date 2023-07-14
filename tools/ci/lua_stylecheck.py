@@ -50,6 +50,7 @@ disallowed_numeric_parameters = {
     "delStatusEffectEx"     : [ 0 ],
     "getEquipID"            : [ 0 ],
     "getEquippedItem"       : [ 0 ],
+    "getItemQty"            : [ 0 ],
     "hasItem"               : [ 0 ],
     "hasItemQty"            : [ 0 ],
     "messageBasic"          : [ 0 ],

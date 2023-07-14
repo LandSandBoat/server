@@ -24,6 +24,10 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
         -- NOTE: This name CAN include spaces and underscores.
         name = "Horro",
 
+        -- Optional: Define a different name that is visible to players.
+        -- "Horro" (DE_Horro) will still be used internally for lookups.
+        -- packetName = "New Horro",
+
         -- You can use regular model ids (See documentation/model_ids.txt, or play around with !costume)
         look = 2430,
 
