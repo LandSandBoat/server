@@ -4,7 +4,6 @@
 -- When used, you will obtain 1-2 random initial eggs
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

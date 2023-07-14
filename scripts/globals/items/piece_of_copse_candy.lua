@@ -3,7 +3,6 @@
 -- Piece of Copse Candy
 -- Enchantment: 60Min, Costume - Leafkin
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

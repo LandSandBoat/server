@@ -1,7 +1,6 @@
 ------------------------------------
 -- Egg Hunt Egg-Stravaganza
 ------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/zone")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
@@ -50,14 +49,17 @@ local settings =
     BONUS_WORDS = {},
 }
 
-local function loadSettings(tbl, name)
-    if not xi.settings.main[name] then
+local function loadSettings(currentTable, settingsName)
+    local settingTable = xi.settings.main[settingsName]
+
+    if not settingTable then
         return
     end
 
-    for k, v in pairs(tbl) do
-        if xi.settings.main[name][k] then
-            tbl[k] = xi.settings.main[name][k]
+    -- Load from main settings into current table
+    for settingName, _ in pairs(currentTable) do
+        if settingTable[settingName] then
+            currentTable[settingName] = settingTable[settingName]
         end
     end
 end
@@ -236,37 +238,41 @@ local messageOffset =
 ------------------------------------
 
 xi.events.egg_hunt.charToEgg = function(char)
-    local letter = string.byte(string.lower(char)) - 97
-    return xi.items.A_EGG + letter
+    -- Char offset from "A", eg. B = 1, C = 2, etc.
+    local charOffset = string.byte(string.lower(char)) - 97
+    return xi.items.A_EGG + charOffset
 end
 
-xi.events.egg_hunt.eggInList = function(eggs, egg)
-    for j = 1, #eggs do
-        if eggs[j] and eggs[j][1] == egg then
-            return j
+-- If egg is already in table, return index so it can be added to total eg. 2x "A" Egg
+xi.events.egg_hunt.findEggIndex = function(eggList, eggLetter)
+    for index, egg in pairs(eggList) do
+        if egg and egg[1] == eggLetter then
+            return index
         end
     end
 
     return -1
 end
 
+-- Convert string to table of lettered eggs
 xi.events.egg_hunt.stringToEggs = function(text)
-    local str = string.lower(text)
-    local eggs = {}
+    local str     = string.lower(text)
+    local eggList = {}
 
-    for i = 1, #str do
-        local letter = string.byte(string.sub(str, i, i))
-        local egg = xi.items.A_EGG + (letter - 97)
-        local pos = xi.events.egg_hunt.eggInList(eggs, egg)
+    for char = 1, #str do
+        local ascii   = string.byte(string.sub(str, char, char))
+        local itemID  = xi.items.A_EGG + (ascii - 97)
+        local itemPos = xi.events.egg_hunt.findEggIndex(eggList, itemID)
 
-        if pos > -1 then
-            eggs[pos][2] = eggs[pos][2] + 1
+        -- If table already contains this egg, add to total
+        if itemPos > -1 then
+            eggList[itemPos][2] = eggList[itemPos][2] + 1
         else
-            table.insert(eggs, { egg, 1 })
+            table.insert(eggList, { itemID, 1 })
         end
     end
 
-    return eggs
+    return eggList
 end
 
 local hasFirstThree = function(player)
@@ -297,45 +303,112 @@ local minorReward = function()
     return minorRewards[math.random(#minorRewards)]
 end
 
-local tradeIn = function(player, npc, trade, zoneID)
-    local reward = {}
+local tradeInReward =
+{
+    -- Bird Egg       x12 or
+    -- Lizard Egg      x6 or
+    -- Soft-boiled Egg x1 or
+    -- Colored Egg     x1 =
+    ------------------------
+    -- <Random> Egg    x1
+    {
+        rewardAmount = 1,
+        itemsAccepted =
+        {
+            { { xi.items.BIRD_EGG, 12 } },
+            { { xi.items.LIZARD_EGG, 6 } },
+            xi.items.SOFT_BOILED_EGG,
+            xi.items.COLORED_EGG,
+        },
+        conditional =
+        {
+            { settings.ERA_2008, { { xi.items.HARD_BOILED_EGG, 12 } } },
+            { settings.ERA_2019, xi.items.APKALLU_EGG },
+        },
+    },
 
-    if
-        npcUtil.tradeHasExactly(trade, { { xi.items.BIRD_EGG, 12 } }) or
-        npcUtil.tradeHasExactly(trade, { { xi.items.LIZARD_EGG, 6 } }) or
-        npcUtil.tradeHasExactly(trade, xi.items.SOFT_BOILED_EGG) or
-        npcUtil.tradeHasExactly(trade, xi.items.COLORED_EGG) or
-        (settings.ERA_2008 and npcUtil.tradeHasExactly(trade, { { xi.items.HARD_BOILED_EGG, 12 } })) or
-        (settings.ERA_2019 and npcUtil.tradeHasExactly(trade, xi.items.APKALLU_EGG))
-    then
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
+    -- Party Egg    x1 =
+    --------------------
+    -- <Random> Egg x2
+    {
+        rewardAmount  = 2,
+        itemsAccepted =
+        {
+            xi.items.PARTY_EGG
+        },
+    },
+
+    -- Lucky Egg    x1 =
+    --------------------
+    -- <Random> Egg x3
+    {
+        rewardAmount  = 3,
+        itemsAccepted =
+        {
+            xi.items.LUCKY_EGG
+        },
+        conditional   =
+        {
+            { settings.ERA_2018, { { xi.items.SAIRUI_RAN, 99 } } },
+        },
+    },
+
+    -- Imperial Egg x1 =
+    --------------------
+    -- <Random> Egg x8
+    {
+        rewardAmount = 8,
+        conditional  =
+        {
+            { settings.ERA_2018, xi.items.IMPERIAL_EGG },
+        },
+    },
+}
+
+local rollRewardAmount = function(rewardAmount)
+    if rewardAmount == 1 then
+        return { math.random(xi.items.A_EGG, xi.items.Z_EGG) }
     end
 
-    if npcUtil.tradeHasExactly(trade, xi.items.PARTY_EGG) then
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
+    local rewardTable = {}
+
+    for i = 1, rewardAmount do
+        table.insert(rewardTable, math.random(xi.items.A_EGG, xi.items.Z_EGG))
     end
 
-    if
-        npcUtil.tradeHasExactly(trade, xi.items.LUCKY_EGG) or
-        (settings.ERA_2018 and npcUtil.tradeHasExactly(trade, { { xi.items.SAIRUI_RAN, 99 } }))
-    then
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
-        table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
-    end
+    return rewardTable
+end
 
-    if
-        settings.ERA_2018 and
-        npcUtil.tradeHasExactly(trade, xi.items.IMPERIAL_EGG)
-    then
-        for i = 1, 8 do
-            table.insert(reward, math.random(xi.items.A_EGG, xi.items.Z_EGG))
+local getTradeInReward = function(player, trade)
+    for _, tradeType in pairs(tradeInReward) do
+        if tradeType.itemsAccepted ~= nil then
+            for _, items in pairs(tradeType.itemsAccepted) do
+                if npcUtil.tradeHasExactly(trade, items) then
+                    return rollRewardAmount(tradeType.rewardAmount)
+                end
+            end
+        end
+
+        if tradeType.conditional ~= nil then
+            for _, items in pairs(tradeType.conditional) do
+                if
+                    npcUtil.tradeHasExactly(trade, items[2]) and
+                    items[1] -- Check trade condition, eg. settings
+                then
+                    return rollRewardAmount(tradeType.rewardAmount)
+                end
+            end
         end
     end
 
+    return {}
+end
+
+local tradeIn = function(player, npc, trade, zoneID)
+    local reward = getTradeInReward(player, trade)
+
     if #reward > 0 then
-        if player:getCharVar(settings.VAR.DAILY_BONUS) >= vanaDay() then
+        if player:getCharVar(settings.VAR.DAILY_BONUS) >= VanadielUniqueDay() then
             player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.DELAY)
             return true
         end
@@ -348,7 +421,7 @@ local tradeIn = function(player, npc, trade, zoneID)
 
         if npcUtil.giveItem(player, reward) then
             player:confirmTrade()
-            player:setVar(settings.VAR.DAILY_BONUS, vanaDay())
+            player:setVar(settings.VAR.DAILY_BONUS, VanadielUniqueDay())
         end
 
         return true
@@ -384,8 +457,8 @@ local sevenKind = function(player, npc, trade)
         return
     end
 
-    for i = 0, 26 do
-        if npcUtil.tradeHasExactly(trade, { { xi.items.A_EGG + i, 7 } }) then
+    for letterOffset = 0, 26 do
+        if npcUtil.tradeHasExactly(trade, { { xi.items.A_EGG + letterOffset, 7 } }) then
             if not player:hasItem(xi.items.FORTUNE_EGG) then
                 return xi.items.FORTUNE_EGG
             end
@@ -405,8 +478,8 @@ local straightEight = function(player, npc, trade)
         return
     end
 
-    local initial = string.lower(string.sub(player:getName(), 1, 1))        -- eg. "a"
-    local letter = string.byte(initial) - 97 + xi.items.A_EGG -- itemID
+    local initial = string.lower(string.sub(player:getName(), 1, 1)) -- eg. "a"
+    local letter = string.byte(initial) - 97 + xi.items.A_EGG        -- itemID
     local eggs = {}
 
     for i = 1, 8 do
@@ -472,9 +545,9 @@ local regionControl = function(player, npc, trade)
         return
     end
 
-    for k, v in pairs(regionNames) do
-        if npcUtil.tradeHasExactly(trade, v) then
-            local owner = GetRegionOwner(k - 1)
+    for regionID, regionName in pairs(regionNames) do
+        if npcUtil.tradeHasExactly(trade, regionName) then
+            local owner = GetRegionOwner(regionID - 1)
 
             -- Beastmen controlled
             if owner == 3 then
@@ -629,13 +702,13 @@ end
 local getSecondInitial = function(player, option)
     local party = player:getParty()
 
-    for i = 1, #party do
+    for _, member in pairs(party) do
         if
-            party[i]           ~= nil and                -- Player exists
-            player:getName()   ~= party[i]:getName() and -- Different player
-            player:getZoneID() == party[i]:getZoneID()   -- Same zone
+            member             ~= nil and              -- Player exists
+            player:getName()   ~= member:getName() and -- Different player
+            player:getZoneID() == member:getZoneID()   -- Same zone
         then
-            local playerName   = party[i]:getName()
+            local playerName   = member:getName()
             local initial      = string.sub(playerName, 1, 1)
             local firstLetter  = string.byte(string.lower(initial)) - 97
             local second       = string.sub(playerName, 2, 2)
@@ -643,7 +716,7 @@ local getSecondInitial = function(player, option)
 
             if
                 firstLetter == (option - 3) and
-                party[i]:getEquipID(xi.slot.HEAD) == xi.items.EGG_HELM
+                member:getEquipID(xi.slot.HEAD) == xi.items.EGG_HELM
             then
                 return xi.items.A_EGG + secondLetter
             end
@@ -674,14 +747,14 @@ if settings.ERA_2018 then
     table.insert(xi.events.egg_hunt.combos, { check = era2018, message = messageOffset.REWARD2 })
 end
 
-for k, v in pairs(settings.BONUS_WORDS) do
-    local customEggs = xi.events.egg_hunt.stringToEggs(k)
+for bonusWord, rewardItem in pairs(settings.BONUS_WORDS) do
+    local customEggs = xi.events.egg_hunt.stringToEggs(bonusWord)
 
     table.insert(xi.events.egg_hunt.combos,
     {
         check = function(player, npc, trade)
             if npcUtil.tradeHasExactly(trade, customEggs) then
-                return v
+                return rewardItem
             end
         end,
 
@@ -696,19 +769,19 @@ end
 xi.events.egg_hunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
-    if player:getCharVar(settings.VAR.DAILY_EGG) >= vanaDay() then
+    if player:getCharVar(settings.VAR.DAILY_EGG) >= VanadielUniqueDay() then
         player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.HINTING)
     else
         local party = player:getParty()
         local options = -1
 
-        for i = 1, #party do
+        for _, member in pairs(party) do
             if
-                party[i]           ~= nil and                -- Player exists
-                player:getName()   ~= party[i]:getName() and -- Different player
-                player:getZoneID() == party[i]:getZoneID()   -- Same zone
+                member             ~= nil and                -- Player exists
+                player:getName()   ~= member:getName() and -- Different player
+                player:getZoneID() == member:getZoneID()   -- Same zone
             then
-                local initial = string.sub(party[i]:getName(), 1, 1)
+                local initial = string.sub(member:getName(), 1, 1)
                 local letter = string.byte(string.lower(initial)) - 97
                 options = utils.mask.setBit(options, letter, 0)
             end
@@ -742,13 +815,13 @@ xi.events.egg_hunt.onEventFinish = function(player, csid, option)
         end
 
         if npcUtil.giveItem(player, eggsGiven) then
-            player:setVar(settings.VAR.DAILY_EGG, vanaDay())
+            player:setVar(settings.VAR.DAILY_EGG, VanadielUniqueDay())
         end
 
     -- Random daily letter
     else
         if npcUtil.giveItem(player, math.random(xi.items.A_EGG, xi.items.Z_EGG)) then
-            player:setVar(settings.VAR.DAILY_EGG, vanaDay())
+            player:setVar(settings.VAR.DAILY_EGG, VanadielUniqueDay())
         end
     end
 end
@@ -765,7 +838,7 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
         if reward then
             -- If reward already received today, send message and finish event
             if
-                player:getCharVar(settings.VAR.DAILY_REWARD) >= vanaDay()
+                player:getCharVar(settings.VAR.DAILY_REWARD) >= VanadielUniqueDay()
             then
                 player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + messageOffset.WAITING)
                 return
@@ -785,7 +858,7 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
                 player:confirmTrade()
 
                 -- One reward per day
-                player:setVar(settings.VAR.DAILY_REWARD, vanaDay())
+                player:setVar(settings.VAR.DAILY_REWARD, VanadielUniqueDay())
 
                 -- Call "after" function if it exists
                 if v.after then
