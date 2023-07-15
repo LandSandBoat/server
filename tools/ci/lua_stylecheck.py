@@ -411,7 +411,10 @@ target = sys.argv[1]
 total_errors    = 0
 expected_errors = 0
 
-if target == 'scripts':
+if target == 'modules':
+    for filename in glob.iglob('modules/**/*.lua', recursive = True):
+        total_errors += LuaStyleCheck(filename).errcount
+elif target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
