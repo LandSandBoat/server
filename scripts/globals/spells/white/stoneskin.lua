@@ -5,7 +5,6 @@
 -- Max 350 damage absorbed
 -- (before cap bonus gear, with no settings.lua adjustment)
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local spellObject = {}

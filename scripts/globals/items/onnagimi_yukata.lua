@@ -3,8 +3,6 @@
 -- onnagimi_yukata
 -- Dispense: Datechochin x99
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

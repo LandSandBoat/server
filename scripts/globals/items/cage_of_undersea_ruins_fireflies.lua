@@ -3,7 +3,6 @@
 -- Alzadaal Fireflies
 -- Transports the user to Nyzul Isle Staging Point
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

@@ -3,8 +3,6 @@
 -- Item: Invisible Mantle
 -- Item Effect: gives invisible
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Toolbag Soshi
 -- When used, you will obtain one stack of soshi
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

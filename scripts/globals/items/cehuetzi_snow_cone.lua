@@ -9,8 +9,6 @@
 -- Magic Atk. Bonus +13
 -- Lizard Killer +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

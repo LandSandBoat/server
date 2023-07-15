@@ -3,7 +3,6 @@
 -- Dispels a single buff at random (which could be food)<-Pending verification. It does not reset hate.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

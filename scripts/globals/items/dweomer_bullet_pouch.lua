@@ -3,8 +3,6 @@
 -- Dweomer Bullet Pouch
 -- When used, you will obtain one stack of Dweomer Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

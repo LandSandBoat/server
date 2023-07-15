@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/hunts")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 

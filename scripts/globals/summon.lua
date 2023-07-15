@@ -4,6 +4,7 @@
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/damage")
+require("scripts/globals/combat/level_correction")
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}

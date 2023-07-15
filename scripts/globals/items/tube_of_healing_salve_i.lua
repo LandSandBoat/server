@@ -3,8 +3,6 @@
 -- Item: tube_of_healing_salve_i
 -- Item Effect: Instantly restores 50% of pet HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

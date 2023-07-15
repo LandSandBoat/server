@@ -3,8 +3,6 @@
 -- Toolbag Kawa
 -- When used, you will obtain one stack of kawahori-ogi
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

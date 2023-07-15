@@ -8,8 +8,6 @@
 -- Charisma -5
 -- Resist Virus +20
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

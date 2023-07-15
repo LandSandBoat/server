@@ -3,7 +3,6 @@
 -- End Ark Angel TT teleport
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

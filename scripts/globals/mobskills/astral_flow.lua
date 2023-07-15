@@ -2,8 +2,7 @@
 -- Astral Flow
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
-require("modules/era/lua_dynamis/globals/era_dynamis_spawning")
+require("modules/era/lua_dynamis/globals/era_dynamis_spawning"))
 -----------------------------------
 local mobskillObject = {}
 

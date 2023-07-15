@@ -6,8 +6,6 @@
 -- Vitality 1
 -- Speed 12.5%
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

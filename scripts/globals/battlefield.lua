@@ -1,4 +1,3 @@
-require("scripts/globals/msg")
 require("scripts/globals/pathfind")
 
 xi = xi or {}

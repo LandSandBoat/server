@@ -3,8 +3,6 @@
 -- Item: Coated Shield
 -- Item Effect: Shell
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

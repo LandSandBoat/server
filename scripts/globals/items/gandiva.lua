@@ -2,7 +2,6 @@
 -- ID: 19468
 -- Item: Gandiva
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 local itemObject = {}

@@ -3,8 +3,6 @@
 -- Item: kawahori_kabuto
 -- Effect: blindness
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

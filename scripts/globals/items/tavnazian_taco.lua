@@ -14,8 +14,6 @@
 -- MP Recovered While Healing 1
 -- Defense Cap 150
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

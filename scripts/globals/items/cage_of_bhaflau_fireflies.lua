@@ -3,7 +3,6 @@
 -- Bhaflau Fireflies
 -- Transports the user to Mamool Ja Staging Point
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

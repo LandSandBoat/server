@@ -4,8 +4,6 @@
 -- Item Effect: Pet Regen
 -- Duration 3 Minutes
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

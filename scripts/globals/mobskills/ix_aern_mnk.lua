@@ -3,7 +3,6 @@
 -- Meant for Ix'Aern (MNK)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

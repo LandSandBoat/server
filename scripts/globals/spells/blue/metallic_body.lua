@@ -14,7 +14,6 @@
 -- Combos: Max MP Boost
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

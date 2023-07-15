@@ -3,8 +3,6 @@
 -- Old Bolt Box +4
 -- When used, you will obtain one partial stack of Dogbolt +4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

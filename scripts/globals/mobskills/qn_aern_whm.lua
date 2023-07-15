@@ -3,7 +3,6 @@
 -- Meant for Qn'aern (WHM) with Ix'Aern encounter
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

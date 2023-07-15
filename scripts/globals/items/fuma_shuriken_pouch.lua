@@ -3,8 +3,6 @@
 -- Item: Fuma Sh. Pouch
 -- When used, you will obtain one stack of Fuma Shurikens
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

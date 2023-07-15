@@ -3,8 +3,6 @@
 -- Item: Max-Potion
 -- Item Effect: Restores 500 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

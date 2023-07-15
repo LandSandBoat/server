@@ -3,8 +3,6 @@
 -- Fire Cluster
 -- Turn into a stack of fire crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

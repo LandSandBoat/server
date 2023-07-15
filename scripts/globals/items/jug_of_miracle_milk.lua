@@ -3,8 +3,6 @@
 -- Jug of Miracle Milk
 -- Enchantment: 60Min, Costume - Chigoe (red)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -8,8 +8,6 @@
 -- Intelligence -3
 -- Attack 18% Cap 90
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

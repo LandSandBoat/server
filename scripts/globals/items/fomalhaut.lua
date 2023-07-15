@@ -2,7 +2,6 @@
 -- ID: 22143
 -- Item: Fomalhaut
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 local itemObject = {}

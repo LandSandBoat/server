@@ -3,8 +3,6 @@
 -- Holy Bolt Quiver
 -- When used, you will obtain one stack of Holy Bolts
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
