@@ -3,7 +3,6 @@
 -- Mob: Tarutaru Automaton
 -- ENM: Automaton Assault
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

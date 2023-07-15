@@ -1,7 +1,6 @@
 -----------------------------------
 -- Data for Fishing
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------

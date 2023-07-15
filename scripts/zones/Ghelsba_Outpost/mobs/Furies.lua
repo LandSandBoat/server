@@ -3,7 +3,6 @@
 --  Mob: Furies
 -- BCNM: Wings of Fury
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

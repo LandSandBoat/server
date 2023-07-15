@@ -3,7 +3,6 @@
 --  Mob: Son of Anansi
 -- BCNM: Come into my Parlor
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

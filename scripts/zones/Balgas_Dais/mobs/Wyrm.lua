@@ -4,7 +4,6 @@
 -- KSNM: Early Bird Catches the Wyrm
 -- For future reference: Trusts are not allowed in this fight
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.grounded = function(mob)

@@ -3,7 +3,6 @@
 --  Mob: Houndfly
 -- BCNM: Dropping Like Flies
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

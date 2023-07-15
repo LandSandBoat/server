@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Mauh Halaapah
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,7 +3,6 @@
 -- Deals lightning elemental damage. Damage varies with TP.
 -- Range: Melee------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

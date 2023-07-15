@@ -2,7 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Gizerl's Ghost
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

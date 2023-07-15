@@ -3,7 +3,6 @@
 --  Mob: Neman
 -- BCNM: Birds of a Feather
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,7 +2,6 @@
 -- desc: Sets or unsets whether a player has caught a particular fish
 -----------------------------------
 require("scripts/globals/fish")
-require("scripts/globals/msg")
 
 cmdprops =
 {

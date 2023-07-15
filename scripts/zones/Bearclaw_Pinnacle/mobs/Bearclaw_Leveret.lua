@@ -3,7 +3,6 @@
 -- Mob: Bearclaw Leveret
 -- ENM: Follow the White Rabbit
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

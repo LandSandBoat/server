@@ -3,7 +3,6 @@
 --  Mob: Flesh Eater
 -- BCNM: The Worm's Turn
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

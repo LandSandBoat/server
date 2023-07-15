@@ -2,7 +2,6 @@
 -- Area: PsoXja
 --  NPC: TOWER_C_Lift_E !pos 310 1.250 290
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

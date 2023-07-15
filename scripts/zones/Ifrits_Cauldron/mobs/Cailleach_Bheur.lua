@@ -5,7 +5,6 @@
 -- Involved in Quest: Blood and Glory
 -- !pos 117.074 19.403 144.834 205
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

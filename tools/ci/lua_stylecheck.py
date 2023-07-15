@@ -31,6 +31,7 @@ deprecated_requires = [
     "scripts/globals/items",
     "scripts/globals/keyitems",
     "scripts/globals/loot",
+    "scripts/globals/msg",
     "scripts/globals/settings",
     "scripts/globals/spell_data",
     "scripts/globals/status",

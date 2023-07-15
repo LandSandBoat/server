@@ -5,7 +5,6 @@
 -- !pos 112.5 0.8 -126.2 176
 -- Involved in Quest: Methods Create Madness
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

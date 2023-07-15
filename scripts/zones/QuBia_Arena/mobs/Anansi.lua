@@ -3,7 +3,6 @@
 --  Mob: Anansi
 -- BCNM: Come into my Parlor
 -----------------------------------
------------------------------------
 local entity = {}
 
 local function spawnSpider(mob, attacker, uint)

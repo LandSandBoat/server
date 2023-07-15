@@ -3,7 +3,6 @@
 -- Item: Reviler's Helm
 -- Item Effect: Provoke
 -----------------------------------------
-require("scripts/globals/msg")
 -----------------------------------------
 local itemObject = {}
 

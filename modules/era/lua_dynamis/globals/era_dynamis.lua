@@ -11,7 +11,6 @@ require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/pathfind")
 require("modules/module_utils")
 --------------------------------------------

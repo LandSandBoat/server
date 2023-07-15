@@ -4,7 +4,6 @@
 -- Starlight Celebration Fame Reward
 -----------------------------------
 require('scripts/globals/npc_util')
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 

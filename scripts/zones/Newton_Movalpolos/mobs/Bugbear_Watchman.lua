@@ -2,7 +2,6 @@
 -- Area: Newton Movalpolos
 --  Mob: Bugbear Watchman
 -----------------------------------
------------------------------------
 local entity = {}
 
 -- entity.onMobSpawn = function(mob)

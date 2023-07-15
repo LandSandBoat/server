@@ -4,8 +4,6 @@
 -- Item Effect: Conserve MP
 -- Duration: 45 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

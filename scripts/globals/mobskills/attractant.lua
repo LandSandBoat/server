@@ -7,7 +7,6 @@
 -- Range: 15' yalm around Nant'ina
 -- Notes: Only used by Nant'ina
 ---------------------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

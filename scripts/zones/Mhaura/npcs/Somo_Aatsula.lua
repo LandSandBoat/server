@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Standing Bear
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

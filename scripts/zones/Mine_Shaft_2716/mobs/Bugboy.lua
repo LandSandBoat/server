@@ -3,7 +3,6 @@
 -- Mob: Bugboy
 -- ENM: Bionic Bug
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -3,8 +3,6 @@
 -- Item: Carbuncles Pole
 -- Item Effect: Restores 160-170 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -9,7 +9,6 @@ require("modules/module_utils")
 require("scripts/globals/mobskills/astral_flow")
 require("scripts/globals/mobskills/call_wyvern")
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 ---------------------------------------------
 local m = Module:new("era_pet_skills")
 

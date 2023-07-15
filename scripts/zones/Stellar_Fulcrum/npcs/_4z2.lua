@@ -2,7 +2,6 @@
 -- Area: Stellar Fulcrum
 --  NPC: Qe'Lov Gate
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,7 +2,6 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Tiger
 -----------------------------------
------------------------------------
 local entity = {}
 
 -- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.

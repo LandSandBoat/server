@@ -3,7 +3,6 @@
 -- Mob: Razon
 -- ENM: Fire in the Sky
 -----------------------------------
------------------------------------
 local entity = {}
 
 local elements =

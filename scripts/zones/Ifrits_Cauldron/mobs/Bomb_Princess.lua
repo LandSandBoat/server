@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Princess
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

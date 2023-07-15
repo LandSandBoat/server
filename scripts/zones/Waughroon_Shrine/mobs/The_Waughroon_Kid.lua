@@ -3,7 +3,6 @@
 --  Mob: The Waughroon Kid
 -- BCNM: The Final Bout
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

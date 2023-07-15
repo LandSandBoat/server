@@ -3,7 +3,6 @@
 --  NPC: Jack of Diamonds
 -- Adventurer's Assistant
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

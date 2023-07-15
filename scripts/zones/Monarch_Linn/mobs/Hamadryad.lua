@@ -3,7 +3,6 @@
 -- Mob: Hamadryad
 -- ENM: Bad Seed
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

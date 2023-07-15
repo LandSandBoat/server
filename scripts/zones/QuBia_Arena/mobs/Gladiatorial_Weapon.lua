@@ -3,7 +3,6 @@
 -- Mob: Gladiatorial Weapon
 -- BCNM: Die by the Sword
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

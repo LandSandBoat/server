@@ -2,7 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Mammet-19 Epsilon
 -----------------------------------
------------------------------------
 local entity = {}
 
 local forms =

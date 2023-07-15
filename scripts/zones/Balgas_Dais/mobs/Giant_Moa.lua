@@ -3,7 +3,6 @@
 --  Mob: Giant Moa
 -- KSNM: Moa Constrictors
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

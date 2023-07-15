@@ -1,7 +1,6 @@
 -----------------------------------
 -- Avatar Global Functions
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/damage")
 require("scripts/globals/combat/level_correction")

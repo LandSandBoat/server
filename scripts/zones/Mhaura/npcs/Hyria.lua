@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Hyria
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
