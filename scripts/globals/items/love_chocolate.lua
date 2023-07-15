@@ -5,8 +5,6 @@
 -----------------------------------
 -- Magic Regen While Healing 4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

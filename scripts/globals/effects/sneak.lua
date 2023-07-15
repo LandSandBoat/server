@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SNEAK
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

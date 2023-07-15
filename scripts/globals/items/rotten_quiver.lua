@@ -3,8 +3,6 @@
 -- Rotten Quiver
 -- When used, you will obtain 18 Old Arrows
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

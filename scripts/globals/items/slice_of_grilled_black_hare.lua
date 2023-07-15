@@ -8,8 +8,6 @@
 -- Attack % 20
 -- Attack Cap 30
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

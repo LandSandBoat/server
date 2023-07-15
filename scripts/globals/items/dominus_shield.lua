@@ -3,8 +3,6 @@
 -- Item: Dominus Shield
 -- Item Effect: Restores 20-35 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

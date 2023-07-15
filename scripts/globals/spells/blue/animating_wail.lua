@@ -13,8 +13,6 @@
 -----------------------------------
 -- Combos: Dual Wield
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

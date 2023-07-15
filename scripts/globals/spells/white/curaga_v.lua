@@ -3,7 +3,6 @@
 -- Restores HP of all party members within area of effect.
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

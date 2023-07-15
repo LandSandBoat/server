@@ -3,8 +3,6 @@
 -- Bolt Belt
 -- When used, you will obtain one stack of Bronze Bolts
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

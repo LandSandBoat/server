@@ -3,8 +3,6 @@
 -- Item: Trooper's Ring
 -- Item Effect: Restores 100-115 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,8 +2,6 @@
 -- Petal Pirouette
 -- Description: Whirling petals reduce tp to zero.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

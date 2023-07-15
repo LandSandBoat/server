@@ -12,8 +12,6 @@
 -- Def +40
 -- Arcana Killer (guesstimated 5%)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

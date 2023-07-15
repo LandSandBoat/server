@@ -3,8 +3,6 @@
 -- Item: Hermes Quencher
 -- Item Effect: Flee for 30 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

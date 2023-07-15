@@ -3,8 +3,6 @@
 --   Pellet Belt
 --   When used, you will obtain 12 Pebbles
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

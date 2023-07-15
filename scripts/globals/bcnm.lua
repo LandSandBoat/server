@@ -5,7 +5,6 @@ require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}

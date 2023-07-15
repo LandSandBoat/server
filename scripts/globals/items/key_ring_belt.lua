@@ -2,8 +2,6 @@
 -- ID: 15880
 -- key_ring_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -7,8 +7,6 @@
 -- Silence resistance +10
 -- MP recovered while healing +3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

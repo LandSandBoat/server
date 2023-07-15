@@ -4,8 +4,6 @@
 -- Obtained: PUP Level 79
 -- Recast Time: 00:03:00
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

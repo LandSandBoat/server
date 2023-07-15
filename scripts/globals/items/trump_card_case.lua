@@ -3,8 +3,6 @@
 -- Lua By Reefed406
 -- ItemID : 5870
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

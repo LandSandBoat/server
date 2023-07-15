@@ -6,7 +6,6 @@
 --  Notes: Removes one detrimental magic effect for party members within area of effect.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

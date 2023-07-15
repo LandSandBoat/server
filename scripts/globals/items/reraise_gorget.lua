@@ -3,8 +3,6 @@
 -- Reraise Gorget
 --  This necklace functions in the same way as the spell Reraise II.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

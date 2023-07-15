@@ -8,7 +8,6 @@
 -- Notes: Used only by Lamia NM's, particularly in Besieged.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

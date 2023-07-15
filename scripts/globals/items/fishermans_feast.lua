@@ -7,8 +7,6 @@
 --  https://ffxiclopedia.fandom.com/wiki/Fisherman's_Feast
 --  https://www.bg-wiki.com/ffxi/Fisherman%27s_Feast
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

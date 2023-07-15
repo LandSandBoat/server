@@ -11,8 +11,6 @@
 -- Stun Resist +4
 -- HP recovered while healing +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

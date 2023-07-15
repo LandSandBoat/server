@@ -3,8 +3,6 @@
 -- Item: Magic Slacks
 -- Item Effect: Restores 30-39 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -7,8 +7,6 @@
 -- Dexterity -1
 -- Vitality 2
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

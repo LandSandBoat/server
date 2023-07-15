@@ -5,8 +5,6 @@
 -- Recast Time: 5 Minutes
 -- Duration: 1 Blood Pact or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

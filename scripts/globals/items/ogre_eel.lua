@@ -7,8 +7,6 @@
 -- Mind -4
 -- Evasion 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,7 +1,6 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.magic = xi.magic or {}

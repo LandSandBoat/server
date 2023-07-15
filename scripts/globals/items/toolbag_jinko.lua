@@ -3,8 +3,6 @@
 -- Toolbag Jinko
 -- When used, you will obtain one stack of jinko
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
