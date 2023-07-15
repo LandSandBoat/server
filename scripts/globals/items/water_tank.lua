@@ -3,8 +3,6 @@
 --  Water Tank
 --  When used, you will obtain one stack of Distilled Water
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Item: Zoolater Hat
 -- Item Effect: Pet gets meditate
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

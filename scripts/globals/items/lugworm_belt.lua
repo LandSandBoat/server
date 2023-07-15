@@ -2,8 +2,6 @@
 -- ID: 15453
 -- lugworm_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

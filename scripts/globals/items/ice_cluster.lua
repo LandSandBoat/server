@@ -3,8 +3,6 @@
 -- Ice Cluster
 -- Turn into a stack of ice crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

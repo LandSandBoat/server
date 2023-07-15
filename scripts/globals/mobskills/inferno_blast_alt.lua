@@ -7,7 +7,6 @@
 -- Notes: Used only by Tiamat, Smok and Ildebrann while flying in place of standard attacks
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

@@ -3,8 +3,6 @@
 -- Detonator Belt
 -- Enchantment: 60Min, Costume - Cluster (Black)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

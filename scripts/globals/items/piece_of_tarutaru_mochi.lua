@@ -3,8 +3,6 @@
 -- Piece of Tarutaru Mochi
 -- Enchantment: 60Min, Costume - Tarutaru child (male)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

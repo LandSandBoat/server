@@ -7,8 +7,6 @@
 -- Strength -1
 -- MP % 10 (cap 85)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Item: Tomato Juice
 -- Item Effect: Restores 60 MP over 180 seconds.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

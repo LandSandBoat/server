@@ -3,7 +3,6 @@
 -- Description: AoE Erase xi.effect. (If nothing to Erase, it instead gains Regain.)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

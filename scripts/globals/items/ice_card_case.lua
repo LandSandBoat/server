@@ -3,8 +3,6 @@
 -- Ice Card Case
 -- When used, you will obtain one stack of Ice Cards
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -6,8 +6,6 @@
 -- Strength -5
 -- Mind 3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

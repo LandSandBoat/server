@@ -7,8 +7,6 @@
 -- Mind -1
 -- Ranged ATT % 14 (cap 45)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

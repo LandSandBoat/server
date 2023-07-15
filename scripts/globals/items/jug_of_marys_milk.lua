@@ -3,8 +3,6 @@
 -- Item: Jug of marys milk
 -- Item Effect: This potion induces sleep.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

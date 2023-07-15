@@ -7,8 +7,6 @@
 -- Intelligence 1
 -- MP recovered while healing 1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

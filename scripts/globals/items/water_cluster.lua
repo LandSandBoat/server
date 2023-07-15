@@ -3,8 +3,6 @@
 -- Water Cluster
 -- Turn into a stack of water crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

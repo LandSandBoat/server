@@ -2,7 +2,6 @@
 -- Blade: Ku
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

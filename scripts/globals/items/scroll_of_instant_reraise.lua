@@ -3,8 +3,6 @@
 --  Scroll of Instant ReRaise
 --  Brings you back from the dead~!
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,7 +2,6 @@
 -- Economizer
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

@@ -3,8 +3,6 @@
 -- Item: Ephramadian Throne
 -- Item Effect: Grant Ephramadian throne key item
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local keyItemId = xi.ki.EPHRAMADIAN_THRONE

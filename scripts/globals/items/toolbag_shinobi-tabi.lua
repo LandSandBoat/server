@@ -3,8 +3,6 @@
 -- Toolbag Shinobi-tabi
 -- When used, you will obtain one stack of Shinobi-tabi
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -8,8 +8,6 @@
 -- Defense % 16 Cap 75
 -- HP Healing 7
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

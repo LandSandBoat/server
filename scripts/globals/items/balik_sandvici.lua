@@ -9,8 +9,6 @@
 -- Mind -2
 -- Ranged ACC 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
