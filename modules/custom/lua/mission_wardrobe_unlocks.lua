@@ -3,7 +3,6 @@
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/missions")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("mission_wardrobe_unlocks")
