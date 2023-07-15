@@ -7,7 +7,6 @@ require("scripts/zones/GM_Home/Zone")
 local m = Module:new("test_npcs_in_gm_home")
 
 m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
-
     -- Call the zone's original function for onInitialize
     super(zone)
 

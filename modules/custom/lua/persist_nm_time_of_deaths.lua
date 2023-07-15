@@ -13,35 +13,42 @@ local m = Module:new("persist_nm_time_of_deaths")
 -- Example: King Behemoth       => King_Behemoth
 -- { zone name, mob name, function to generate respawn time}
 -- Format:
-local nms_to_persist =
+local nmsToPersist =
 {
-    { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+    -- 21 - 24 hours with half hour windows
+    {
+        "Behemoths_Dominion",
+        "Behemoth",
+        function()
+            return 75600 + math.random(0, 6) * 1800
+        end
+    },
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
 --     : so we deal with everything as strings for now.
-for _, entry in pairs(nms_to_persist) do
-    local zone_name = entry[1]
-    local mob_name = entry[2]
-    local var_name = "[Respawn]" .. mob_name
-    local respawn_func = entry[3]
+for _, entry in pairs(nmsToPersist) do
+    local zoneName    = entry[1]
+    local mobName     = entry[2]
+    local varName     = "[Respawn]" .. mobName
+    local respawnFunc = entry[3]
 
-    m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zone_name, mob_name),
+    m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName),
     function(mob)
         super(mob)
 
-        local respawn = respawn_func()
+        local respawn = respawnFunc()
         mob:setRespawnTime(respawn)
-        SetServerVariable(var_name, (os.time() + respawn))
+        SetServerVariable(varName, (os.time() + respawn))
         print(string.format("Writing respawn time to server vars: %s %i", mob:getName(), respawn))
     end)
 
-    m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zone_name),
+    m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneName),
     function(zone)
         super(zone)
 
-        local mob = zone:queryEntitiesByName(mob_name)[1]
-        local respawn = GetServerVariable(var_name)
+        local mob = zone:queryEntitiesByName(mobName)[1]
+        local respawn = GetServerVariable(varName)
         print(string.format("Getting respawn time from server vars: %s %i", mob:getName(), respawn))
 
         if os.time() < respawn then
