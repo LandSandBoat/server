@@ -71,8 +71,10 @@ local testItemsByNPC =
     ["Cheupirudaux"]   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
 }
 
+-- need to have robber rig here because it uses the same logic
 local hqCrystals =
 {
+    [0] = { id = xi.items.ROBBER_RIG,       cost = 1500 },
     [1] = { id = xi.items.INFERNO_CRYSTAL,  cost = 200 },
     [2] = { id = xi.items.GLACIER_CRYSTAL,  cost = 200 },
     [3] = { id = xi.items.CYCLONE_CRYSTAL,  cost = 200 },
@@ -483,7 +485,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
                 end
             end
         end
-    elseif category == 0 and option ~= 1073741824 then -- HQ crystal
+    elseif category == 0 and option ~= 1073741824 then -- HQ crystal or robber rig
         local i = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
         local cost = quantity * i.cost
