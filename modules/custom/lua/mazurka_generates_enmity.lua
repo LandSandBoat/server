@@ -16,7 +16,10 @@ local raptorMazurkaPower = 1.1
 
 local mazurkaProvoke = function(caster, target, spell, power)
     -- If not Mazurka, bail out
-    if spell:getID() ~= xi.magic.spell.CHOCOBO_MAZURKA and spell:getID() ~= xi.magic.spell.RAPTOR_MAZURKA then
+    if
+        spell:getID() ~= xi.magic.spell.CHOCOBO_MAZURKA and
+        spell:getID() ~= xi.magic.spell.RAPTOR_MAZURKA
+    then
         return
     end
 
