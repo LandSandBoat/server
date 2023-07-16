@@ -443,7 +443,7 @@ local cutscenes =
     -- 40: Player gives the chocobo x
     -- 48: Happy to see you
     -- 51: Hangs its head in shame
-    -- 53: Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
+    HAVENT_SEEN_YOU = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
     -- 70: Chocobo full of energy!
@@ -572,6 +572,89 @@ local compareTables = function(t1, t2)
     return true
 end
 
+-- NOTE: This is playable, but not quite right.
+-- Day1-4 should be condensed together, with the
+-- hatching CS playing at the end.
+-- Currently this outputs:
+-- Day1-4: Basic care
+-- Day 4: Hatching CS
+-- Day 5-onwards: As normal
+-- It should output:
+-- Day1-4: Basic care, then hatching CS
+-- Day5-onwards: As normal
+local condenseEvents = function(player, chocoState, events)
+    local cutEvent = function(t, eStart, eEnd, csList)
+        table.insert(t, { eStart, eEnd, csList })
+    end
+
+    local condensedEvents = {}
+    local currentStartDay = nil
+    local currentEndDay = nil
+    local currentEventCSTable = nil
+
+    -- Each event is a table of cs's
+    debug(player, "Raw Events")
+    for _, entry in pairs(events) do
+        debug(player, "Day", entry[1], ":", entry[2][1])
+        -- Only condense days with the same table contents
+        if compareTables(entry[2], currentEventCSTable) then
+            -- Increase the span
+            currentEndDay = currentEndDay + 1
+        else
+            -- If there is an active span, cut it now
+            if currentEventCSTable then
+                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+            end
+
+            -- Start a new span
+            currentEventCSTable = entry[2]
+            currentStartDay = entry[1]
+            currentEndDay = entry[1]
+        end
+    end
+
+    -- Final "cut"
+    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+
+    debug(player, "Condensed Events & Spans")
+    for _, entry in pairs(condensedEvents) do
+        debug(player, "Days", entry[1], "to", entry[2], ":", entry[3][1])
+    end
+
+    return condensedEvents
+end
+
+local onRaisingEventPlayout = function(player, csOffset, chocoState)
+    switch (csOffset): caseof
+    {
+        [cutscenes.REPORT_BASIC_CARE] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- TODO: Add settings multipliers
+            -- TODO Make sure these are clamped!
+            chocoState.strength    = chocoState.strength + 1
+            chocoState.endurance   = chocoState.endurance + 1
+            chocoState.discernment = chocoState.discernment + 1
+            chocoState.receptivity = chocoState.receptivity + 1
+
+            chocoState.affection = chocoState.affection - 1
+            chocoState.energy    = chocoState.energy - 1
+        end,
+
+        [cutscenes.CRYING_AT_NIGHT] = function()
+            -- NOTE: The messaging is handled in the CS
+            player:addKeyItem(xi.ki.WHITE_HANDKERCHIEF)
+            player:setCharVar("[choco]WH_TIME", os.time() * utils.days(1))
+        end,
+
+        [cutscenes.HAVENT_SEEN_YOU] = function()
+            player:delKeyItem(xi.ki.WHITE_HANDKERCHIEF)
+            player:setCharVar("[choco]WH_TIME", 0)
+        end,
+    }
+
+    return chocoState
+end
+
 xi.chocoboRaising.initChocoboData = function(player)
     local chocoState = player:getChocoboRaisingInfo()
     if chocoState == nil then
@@ -658,65 +741,41 @@ xi.chocoboRaising.initChocoboData = function(player)
 
         local event = { age, { possibleCarePlanEvent } }
 
+        table.insert(events, event)
+
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
             if currentStage == entry[1] and age >= entry[2] then
-                table.insert(event[2], entry[3])
+                table.insert(events, { age, { entry[3] } })
             end
         end
 
-        table.insert(events, event)
+        -- Start White Handkerchief quest
+        local whiteHandkerchiefStarted = false
+        if
+            -- TODO: Should this be a charvar to track this?
+            not player:hasKeyItem(xi.ki.WHITE_HANDKERCHIEF) and
+            age == 7
+        then
+            table.insert(events, { age, { cutscenes.CRYING_AT_NIGHT } })
+            whiteHandkerchiefStarted = true
+        end
+
+        -- Cancel White Handkerchief quest
+        if
+            whiteHandkerchiefStarted and
+            age == 15 and
+            reportLength >= 7
+        then
+            table.insert(events, { age, { cutscenes.HAVENT_SEEN_YOU } })
+        end
 
         -- TODO: Remove used days from care plan and write back to chocoState + db
     end
 
-    -- TODO: This is not quite right. Day1-4 should be condensed together, with the
-    -- hatching CS playing at the end. Then Day5 as it's own entry afterwards.
-
     -- Step 3: Condense that table down
-    -- Example: In the above example, if days 1, 2, and 3 are the same
-    -- thing, they will be condensed down to a single Day1-Day3 update.
-
-    local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList })
-    end
-
-    local condensedEvents = {}
-    local currentStartDay = nil
-    local currentEndDay = nil
-    local currentEventCSTable = nil
-    -- local currentEventSize = nil
-
-    -- Each event is a table of cs's
-    for idx, entry in pairs(events) do
-        -- DEBUG
-        -- print(entry)
-        -- Only condense days with the same table contents
-        if compareTables(entry[2], currentEventCSTable) then
-            -- Increase the span
-            currentEndDay = currentEndDay + 1
-        else
-            -- If there is an active span, cut it now
-            if currentEventCSTable then
-                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-            end
-
-            -- Start a new span
-            currentEventCSTable = entry[2]
-            currentStartDay = chocoState.report.day_start + idx - 1
-            currentEndDay = chocoState.report.day_start + idx - 1
-            -- currentEventSize = entry[2]
-        end
-    end
-
-    -- Final "cut"
-    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-
     -- Step 4: Assign this report to the cache
-    chocoState.report.events = condensedEvents
-
-    -- DEBUG
-    -- print(condensedEvents)
+    chocoState.report.events = condenseEvents(player, chocoState, events)
 
     return chocoState
 end
@@ -729,6 +788,10 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
     local rejectionCsid = csidTable[player:getZoneID()][4]
 
     local chocoState = xi.chocoboRaising.initChocoboData(player)
+    if chocoState == nil then
+        print("ERROR! startCutscene 'chocoState' is nil!")
+        return
+    end
 
     if trade ~= nil then -- Trade
         if
@@ -1541,6 +1604,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                     chocoState.stage = stage.ADULT_4
                 end
 
+                chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
+
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
                     0, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
@@ -1552,6 +1617,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
 
             [504] = function() -- Skip report
+                debug(player, "Skip report (Currently doesn't work!)")
                 -- TODO: Do empty playout of report so that age and state are up-to-date
                 chocoState.last_update_age = chocoState.age
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
