@@ -24,7 +24,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.2, 1.25, xi.magic.ele.DARK, 1150)
-    dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.9)
+    dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.2)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

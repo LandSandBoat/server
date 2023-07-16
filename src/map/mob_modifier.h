@@ -111,6 +111,7 @@ enum MOBMODIFIER : int
     MOBMOD_ATTRACT_FAMILY_NM         = 105, // NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
     MOBMOD_LEDGE_AGGRO               = 106, // Used to increase vertical aggro range
     MOBMOD_DISENGAGE_NO_PATH         = 107, // Used to force a disengage when there is no vertical path to the target rather than despawn.
+    MOBMOD_NO_CRYSTAL_SEAL_DROPS     = 108, // Prevents a mob from dropping crystals or seals (to prevent pushing treasure out of pool for some mobs)
 };
 
 #endif
