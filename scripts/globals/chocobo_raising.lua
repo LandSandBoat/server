@@ -572,6 +572,48 @@ local compareTables = function(t1, t2)
     return true
 end
 
+local condenseEvents = function(player, chocoState, events)
+    local cutEvent = function(t, eStart, eEnd, csList)
+        table.insert(t, { eStart, eEnd, csList })
+    end
+
+    local condensedEvents = {}
+    local currentStartDay = nil
+    local currentEndDay = nil
+    local currentEventCSTable = nil
+
+    -- Each event is a table of cs's
+    debug(player, "Raw Events")
+    for idx, entry in pairs(events) do
+        debug(player, "Day", entry[1], ":", entry[2][1])
+        -- Only condense days with the same table contents
+        if compareTables(entry[2], currentEventCSTable) then
+            -- Increase the span
+            currentEndDay = currentEndDay + 1
+        else
+            -- If there is an active span, cut it now
+            if currentEventCSTable then
+                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+            end
+
+            -- Start a new span
+            currentEventCSTable = entry[2]
+            currentStartDay = chocoState.report.day_start + idx - 1
+            currentEndDay = chocoState.report.day_start + idx - 1
+        end
+    end
+
+    -- Final "cut"
+    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+
+    debug(player, "Condensed Events & Spans")
+    for _, entry in pairs(condensedEvents) do
+        debug(player, "Days", entry[1], "to", entry[2], ":", entry[3][1])
+    end
+
+    return condensedEvents
+end
+
 xi.chocoboRaising.initChocoboData = function(player)
     local chocoState = player:getChocoboRaisingInfo()
     if chocoState == nil then
@@ -658,14 +700,14 @@ xi.chocoboRaising.initChocoboData = function(player)
 
         local event = { age, { possibleCarePlanEvent } }
 
+        table.insert(events, event)
+
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
             if currentStage == entry[1] and age >= entry[2] then
-                table.insert(event[2], entry[3])
+                table.insert(events, { age, { entry[3] } })
             end
         end
-
-        table.insert(events, event)
 
         -- TODO: Remove used days from care plan and write back to chocoState + db
     end
@@ -677,46 +719,8 @@ xi.chocoboRaising.initChocoboData = function(player)
     -- Example: In the above example, if days 1, 2, and 3 are the same
     -- thing, they will be condensed down to a single Day1-Day3 update.
 
-    local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList })
-    end
-
-    local condensedEvents = {}
-    local currentStartDay = nil
-    local currentEndDay = nil
-    local currentEventCSTable = nil
-    -- local currentEventSize = nil
-
-    -- Each event is a table of cs's
-    for idx, entry in pairs(events) do
-        -- DEBUG
-        -- print(entry)
-        -- Only condense days with the same table contents
-        if compareTables(entry[2], currentEventCSTable) then
-            -- Increase the span
-            currentEndDay = currentEndDay + 1
-        else
-            -- If there is an active span, cut it now
-            if currentEventCSTable then
-                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-            end
-
-            -- Start a new span
-            currentEventCSTable = entry[2]
-            currentStartDay = chocoState.report.day_start + idx - 1
-            currentEndDay = chocoState.report.day_start + idx - 1
-            -- currentEventSize = entry[2]
-        end
-    end
-
-    -- Final "cut"
-    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-
     -- Step 4: Assign this report to the cache
-    chocoState.report.events = condensedEvents
-
-    -- DEBUG
-    -- print(condensedEvents)
+    chocoState.report.events = condenseEvents(player, chocoState, events)
 
     return chocoState
 end
