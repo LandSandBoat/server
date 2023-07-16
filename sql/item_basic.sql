@@ -1851,7 +1851,7 @@ INSERT INTO `item_basic` VALUES (1958,0,'spool_of_glittering_yarn','glittering_y
 INSERT INTO `item_basic` VALUES (1959,0,'square_of_astral_leather','astral_leather',12,28756,0,1,0);
 INSERT INTO `item_basic` VALUES (1960,0,'chocobo_return_ticket','ch._ret._ticket',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (1961,0,'handful_of_gold_arrowheads','gold_arrowheads',99,4,43,0,190);
-INSERT INTO `item_basic` VALUES (1962,0,'handful_of_platinum_arrowheads','plt._arrowheads',99,4,43,0,1151);
+INSERT INTO `item_basic` VALUES (1962,0,'handful_of_platinum_arrowheads','plt._arrowheads',99,4,43,0,360);
 INSERT INTO `item_basic` VALUES (1963,0,'square_of_magical_cotton_cloth','mag._ctn._cloth',12,4,40,0,197);
 INSERT INTO `item_basic` VALUES (1964,0,'square_of_magical_linen_cloth','mag._lin._cloth',12,4,40,0,361);
 INSERT INTO `item_basic` VALUES (1965,0,'square_of_magical_silk_cloth','mag._silk_cloth',12,4,40,0,871);
