@@ -10,7 +10,6 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:delSpell(363)
     target:addSpell(273)
 end
 

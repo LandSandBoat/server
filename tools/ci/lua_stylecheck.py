@@ -47,6 +47,7 @@ disallowed_numeric_parameters = {
     "addUsedItem"             : [ 0 ],
     "delItem"                 : [ 0 ],
     "delKeyItem"              : [ 0 ],
+    "delSpell"                : [ 0 ],
     "delStatusEffect"         : [ 0 ],
     "delStatusEffectEx"       : [ 0 ],
     "getEquipID"              : [ 0 ],
