@@ -488,6 +488,12 @@ bool CMobController::TryCastSpell()
         return false;
     }
 
+    // Having a distance check here (before the check in magic_state) prevents the mob from standing still during chainspell
+    if (distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) > 28.5f)
+    {
+        return false;
+    }
+
     // Control for worms to only cast when target is out of melee range
     if (PMob->m_roamFlags & ROAMFLAG_WORM && distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) <= 3)
     {

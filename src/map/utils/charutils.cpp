@@ -896,8 +896,9 @@ namespace charutils
 
         charutils::LoadEquip(PChar);
         charutils::EmptyRecycleBin(PChar);
-        PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
-        PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
+        bool canRestore  = zoneutils::IsResidentialArea(PChar) && HP > 0;
+        PChar->health.hp = canRestore ? PChar->GetMaxHP() : HP;
+        PChar->health.mp = canRestore ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
 
         luautils::OnZoneIn(PChar);
