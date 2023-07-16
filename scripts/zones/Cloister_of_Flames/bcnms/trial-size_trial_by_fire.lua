@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(298) then
-            player:addSpell(298)
+        if not player:hasSpell(xi.magic.spell.IFRIT) then
+            player:addSpell(xi.magic.spell.IFRIT)
             player:messageSpecial(ID.text.IFRIT_UNLOCKED, 0, 0, 0)
         end
 

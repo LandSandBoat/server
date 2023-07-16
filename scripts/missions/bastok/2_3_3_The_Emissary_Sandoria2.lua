@@ -36,7 +36,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 8 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust = (not player:hasSpell(xi.magic.spell.HALVER) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(503, { [7] = needsHalverTrust })
                     elseif missionStatus <= 10 then
@@ -51,7 +51,7 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 9)
 
                     if
-                        not player:hasSpell(972) and
+                        not player:hasSpell(xi.magic.spell.HALVER) and
                         not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)

@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getRank(player:getNation()) >= 6 and
         player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
-        not player:hasSpell(905)
+        not player:hasSpell(xi.magic.spell.TRION)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif csid == 574 and option == 2 then
-        player:addSpell(905, false, true)
+        player:addSpell(xi.magic.spell.TRION, false, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
 end

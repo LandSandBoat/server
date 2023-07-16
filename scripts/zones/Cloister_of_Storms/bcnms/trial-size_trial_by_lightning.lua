@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(303) then
-            player:addSpell(303)
+        if not player:hasSpell(xi.magic.spell.RAMUH) then
+            player:addSpell(xi.magic.spell.RAMUH)
             player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)
         end
 

@@ -94,7 +94,7 @@ entity.onTrigger = function(player, npc)
         -- TRUST
     elseif
         player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
-        not player:hasSpell(904)
+        not player:hasSpell(xi.magic.spell.AJIDO_MARUJIDO)
     then
         local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
@@ -126,8 +126,8 @@ entity.onEventFinish = function(player, csid, option)
 
         -- TRUST
     elseif csid == 866 and option == 2 then
-        player:addSpell(904, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 904)
+        player:addSpell(xi.magic.spell.AJIDO_MARUJIDO, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.AJIDO_MARUJIDO)
     end
 end
 

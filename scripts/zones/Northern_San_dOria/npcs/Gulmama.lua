@@ -68,7 +68,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Rust 'B' Gone
 
-        if player:hasSpell(302) then
+        if player:hasSpell(xi.magic.spell.SHIVA) then
             numitem = numitem + 32
         end  -- Ability to summon Shiva
 
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(302) -- Avatar
+                player:addSpell(xi.magic.spell.SHIVA) -- Avatar
                 player:messageSpecial(ID.text.SHIVA_UNLOCKED, 0, 0, 4)
             else
                 player:addItem(item)

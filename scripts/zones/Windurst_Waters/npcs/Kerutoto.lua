@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
             + (player:hasItem(xi.items.DIABOLOSS_EARRING) and 2 or 0) -- Diabolos's Earring
             + (player:hasItem(xi.items.DIABOLOSS_RING) and 4 or 0) -- Diabolos's Ring
             + (player:hasItem(xi.items.DIABOLOSS_TORQUE) and 8 or 0) -- Diabolos's Torque
-            + (player:hasSpell(304) and 32 or 16) -- Pact or gil
+            + (player:hasSpell(xi.magic.spell.DIABOLOS) and 32 or 16) -- Pact or gil
         player:startEvent(920, xi.items.DIABOLOSS_POLE, xi.items.DIABOLOSS_EARRING, xi.items.DIABOLOSS_RING, xi.items.DIABOLOSS_TORQUE, 0, 0, 0, availRewards)
     elseif
         not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
@@ -65,8 +65,8 @@ entity.onEventFinish = function(player, csid, option)
             reward.item = xi.items.DIABOLOSS_TORQUE
         elseif option == 5 then
             reward.gil = 15000
-        elseif option == 6 and not player:hasSpell(304) then
-            player:addSpell(304)
+        elseif option == 6 and not player:hasSpell(xi.magic.spell.DIABOLOS) then
+            player:addSpell(xi.magic.spell.DIABOLOS)
             player:messageSpecial(ID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
         end
 
