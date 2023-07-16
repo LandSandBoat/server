@@ -3,8 +3,6 @@
 -- Item: Bloody Bolt Quiver
 -- When used, you will obtain one stack of Bloody Bolts
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

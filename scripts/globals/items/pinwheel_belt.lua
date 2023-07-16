@@ -2,8 +2,6 @@
 -- ID: 15927
 -- pinwheel_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

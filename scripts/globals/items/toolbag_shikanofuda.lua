@@ -3,8 +3,6 @@
 -- Toolbag Shika
 -- When used, you will obtain one stack of shikanofuda
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

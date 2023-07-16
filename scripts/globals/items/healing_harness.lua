@@ -3,8 +3,6 @@
 -- Item: Healing Harness
 -- Item Effect: Restores 50-75 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Toolbag Jusa
 -- When used, you will obtain one stack of jusatsu
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

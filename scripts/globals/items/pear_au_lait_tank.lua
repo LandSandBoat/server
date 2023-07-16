@@ -3,8 +3,6 @@
 --  Pear au lait Tank
 --  When used, you will obtain one Pear au lait
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

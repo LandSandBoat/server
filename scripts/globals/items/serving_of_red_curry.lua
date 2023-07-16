@@ -14,8 +14,6 @@
 -- Demon Killer +4
 -- Resist Sleep +3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

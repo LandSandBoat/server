@@ -8,8 +8,6 @@
 -- Ranged ACC % 14 (cap 68)
 -- Resist sleep +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

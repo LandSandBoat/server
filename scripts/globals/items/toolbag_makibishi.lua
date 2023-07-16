@@ -3,8 +3,6 @@
 -- Toolbag Maki
 -- When used, you will obtain one stack of makibishi
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

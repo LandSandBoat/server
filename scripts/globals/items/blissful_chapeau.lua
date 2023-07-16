@@ -3,8 +3,6 @@
 -- Item: Blissful Chapeau
 -- Item Effect: Restores 30-40 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

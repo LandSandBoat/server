@@ -2,7 +2,6 @@
 -- Claim Shield
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("claim_shield")

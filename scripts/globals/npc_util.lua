@@ -15,7 +15,6 @@
     npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     npcUtil.fishingAnimation(npc, phaseDuration, func)
 --]]
-require("scripts/globals/msg")
 
 npcUtil = {}
 

@@ -7,7 +7,6 @@
 -- Duration: 720 min
 -- Max bonus: 15000 exp
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------
 local itemObject = {}

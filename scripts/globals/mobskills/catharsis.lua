@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

@@ -6,7 +6,6 @@
 -- Range: Line of sight
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

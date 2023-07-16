@@ -6,7 +6,6 @@
 -- Range: 10' radial
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

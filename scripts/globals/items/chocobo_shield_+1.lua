@@ -3,8 +3,6 @@
 -- Item: Chocobo Shield +1
 -- Dispense: Sakura Biscuit
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

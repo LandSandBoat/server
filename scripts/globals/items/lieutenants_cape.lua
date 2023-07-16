@@ -3,8 +3,6 @@
 -- Item: Lieutenant's Cape
 -- Item Effect: Restores 50% hp and 25% mp
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

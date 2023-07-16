@@ -14,8 +14,6 @@
 -- Ranged ATT Cap 75
 -- Resist Stun +4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

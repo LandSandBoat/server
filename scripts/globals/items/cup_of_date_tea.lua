@@ -9,8 +9,6 @@
 -- Charisma 5
 -- Intelligence 3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

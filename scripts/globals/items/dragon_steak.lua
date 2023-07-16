@@ -14,8 +14,6 @@
 -- Ranged ATT Cap 150
 -- Demon Killer 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

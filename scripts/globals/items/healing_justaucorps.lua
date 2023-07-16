@@ -3,8 +3,6 @@
 -- Item: Healing Justaucorps
 -- Item Effect: Restores 150-175 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

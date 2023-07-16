@@ -10,8 +10,6 @@
 -- Virus Resist 4
 -- Curse Resist 4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -8,8 +8,6 @@
 -- Magic Accuracy +10
 -- Magic Def. Bonus +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

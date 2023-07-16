@@ -6,8 +6,6 @@
 -- Dexterity 2
 -- Charisma -4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Woodsy Gilet +1
 -- Dispense: Berry Snowcone
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

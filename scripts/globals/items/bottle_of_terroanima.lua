@@ -3,8 +3,6 @@
 -- Item: Bottle Of Terroanima
 -- Item Effect: Terror
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

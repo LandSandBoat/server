@@ -3,8 +3,6 @@
 -- Sasu. Sh. Pouch +1
 -- A small leather pouch made for storing sasuke shuriken +1.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

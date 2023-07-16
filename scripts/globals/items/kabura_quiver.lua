@@ -3,8 +3,6 @@
 -- Kabura Quiver
 -- When used, you will obtain one stack of Kabura Arrows
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

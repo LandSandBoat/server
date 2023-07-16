@@ -3,8 +3,6 @@
 -- Item: X-Potion
 -- Item Effect: Restores 150 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
