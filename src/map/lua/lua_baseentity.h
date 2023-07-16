@@ -822,6 +822,7 @@ public:
     bool getUntargetable();
     void setIsAggroable(bool isAggroable);
     bool isAggroable();
+    void setAlwaysRender(bool alwaysRender);
 
     void  setDelay(uint16 delay);             // sets a mobs weapon delay
     int16 getDelay();                         // return the delay value

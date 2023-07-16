@@ -226,12 +226,14 @@ xi.settings.main =
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
 
     -- CELEBRATIONS
-    EXPLORER_MOOGLE_LV              = 0, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
-    HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
-    HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
-    STARLIGHT_2021                  = 0,  -- Set to 1 to enable the 2021 version of the Starlight Celebration. Dec. 16 through Dec. 31.
-    STARLIGHT_YEAR_ROUND            = 0,  -- Set to 1 to have the Starlight Celebration initialize outside of normal times.
-    EGG_HUNT                        =     -- Egg Hunt Egg-stravanganza
+    EXPLORER_MOOGLE_LV              = 0,    -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
+    HALLOWEEN_2005                  = 0,    -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
+    HALLOWEEN_YEAR_ROUND            = 0,    -- Set to 1 to have Harvest Festival initialize outside of normal times.
+    STARLIGHT_2021                  = 0,    -- Set to 1 to enable the 2021 version of the Starlight Celebration. Dec. 16 through Dec. 31.
+    STARLIGHT_YEAR_ROUND            = 0,    -- Set to 1 to have the Starlight Celebration initialize outside of normal times.
+    SUNBREEZE                       = 1,    -- Set to 1 to have the Sunbreeze Festival be active from Aug 1 to Aug 31.
+    SUNBREEZE_VENDOR_ERA            = 2005, -- Set to any value between 2005 - *Undefined*
+    EGGHUNT                         =       -- Egg Hunt Egg-stravanganza
     {
         START                       = { DAY = 6,  MONTH = 4 },
         FINISH                      = { DAY = 17, MONTH = 4 },

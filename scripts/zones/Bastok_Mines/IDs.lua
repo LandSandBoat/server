@@ -88,6 +88,7 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_RUN_AWAY       = 12837, -- Your chocobo has run away. You cannot feed it now.
         CHOCOBO_FEEDING_STILL_EGG      = 12838, -- You cannot feed a chocobo that has not hatched yet.
         CHOCOBO_FEEDING_ITEM           = 13921, -- #: %
+        SUNBREEZE_MOOGLE_VENDOR        = 14471, -- Welcome, kupo!
         COMMON_SENSE_SURVIVAL          = 16026, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE        = 16625, -- There appears to be a tear in the fabric of space...
         -- Starlight Celebration Dialog --

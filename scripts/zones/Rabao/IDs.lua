@@ -49,7 +49,8 @@ zones[xi.zone.RABAO] =
     },
     npc =
     {
-        MILEON                        = 17788987, -- Lucky Roll Npc
+        MILEON       = 17788987, -- Lucky Roll Npc
+        GOLDFISH_NPC = 17789025,
     },
 }
 
