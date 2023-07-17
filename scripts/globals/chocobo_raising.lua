@@ -630,7 +630,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.REPORT_BASIC_CARE] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
             -- TODO: Add settings multipliers
-            -- TODO Make sure these are clamped!
+            -- TODO: Make sure these are clamped!
             chocoState.strength    = chocoState.strength + 1
             chocoState.endurance   = chocoState.endurance + 1
             chocoState.discernment = chocoState.discernment + 1
@@ -940,16 +940,26 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             local fname = xi.chocoboNames[offset1]
             local lname = xi.chocoboNames[offset2]
 
-            if fname ~= nil and lname ~= nil then
+            local fullnamekey = string.format("%s %s", fname, lname)
+
+            -- If renaming fails, the name will remain as "Chocobo Chocobo" and the
+            -- rejection CS will play
+            if fname == nil or lname == nil then
+                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+            elseif xi.bannedChocoboNames[fullnamekey] then
+                print(string.format("ERROR! %s selected banned name for chocobo: %s", player:getName(), fullnamekey))
+            else
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                debug(player, string.format("%s updating chocobo name: %s %s", player:getName(), fname, lname))
+                debug(player, string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
-            else
-                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+
+                -- Set synthetic CS option for later CSs
+                option = 0xFF
+                debug(player, string.format("CS (Synthetic) Update: %i", option))
             end
         end
 
@@ -1648,6 +1658,16 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             [240] = function() -- Give up your chocobo
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
                 player:deleteRaisedChocobo()
+            end,
+
+            [255] = function() -- Synthetic update: Change/set chocobo name
+                -- If the name is still "Chocobo Chocobo" then the renaming failed or was
+                -- rejected, play the appropriate response.
+                if chocoState.first_name == "Chocobo" and chocoState.last_name == "Chocobo" then
+                    player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
+                else
+                    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+                end
             end,
 
             [40] = function() -- Retire your chocobo
