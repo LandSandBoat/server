@@ -12,6 +12,8 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, { { xi.items.CLUSTER_CORE, 2 } }) then -- Cluster Core x2
         player:startEvent(8, 1667)
+    else
+        player:startEvent(7)
     end
 end
 
