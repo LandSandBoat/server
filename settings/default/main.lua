@@ -226,6 +226,11 @@ xi.settings.main =
     ENABLE_VIGIL_DROPS   = true, -- Enable Vigil Weapon drops from NMs.
     ACTIVATE_LAMP_TIME   = 6000, -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
 
+    -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
+    -- GM command: `!chocoboraising`
+    ENABLE_CHOCOBO_RAISING = false, -- true/false. Enable Chocobo Raising features.
+    DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
+
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200,  -- time in seconds that lanterns in the Den of Rancor stay lit.
