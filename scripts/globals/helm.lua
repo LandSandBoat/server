@@ -1533,8 +1533,8 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
 
             if
                 xi.events and
-                xi.events.egg_hunt and
-                xi.events.egg_hunt.enabledCheck and
+                xi.events.eggHunt and
+                xi.events.eggHunt.enabledCheck and
                 player:getCharVar("[EGG_HUNT]DAILY_HELM") < VanadielUniqueDay()
             then
                 player:timer(3000, function(playerArg)

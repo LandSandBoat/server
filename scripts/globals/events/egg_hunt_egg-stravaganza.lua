@@ -1,21 +1,29 @@
 ------------------------------------
 -- Egg Hunt Egg-Stravaganza
 ------------------------------------
+-- Southern San d'Oria !pos 56.195 1.999 -25.207 230
+-- Northern San d'Oria !pos -224.135 8.000 53.476 231
+-- Bastok Mines        !pos -33.600 -0.001 -110.000 234
+-- Bastok Markets      !pos -260.440 -12.021 -79.538 235
+-- Windurst Waters     !pos -55.470 -5.391 216.362 238
+-- Windurst Woods      !pos 104.823 -5.000 -55.745 241
+------------------------------------
 require("scripts/globals/zone")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 ------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
-xi.events.egg_hunt = xi.events.egg_hunt or {}
-xi.events.egg_hunt.data = xi.events.egg_hunt.data or {}
-xi.events.egg_hunt.entities = xi.events.egg_hunt.entities or {}
+xi.events.eggHunt = xi.events.eggHunt or {}
+xi.events.eggHunt.data = xi.events.eggHunt.data or {}
+xi.events.eggHunt.entities = xi.events.eggHunt.entities or {}
 
 local event = SeasonalEvent:new("egg_hunt")
 
 -- Default settings
 local settings =
 {
+    ANNOUNCE = false, -- Announce settings on load
     START  = { DAY   =  6, MONTH = 4 },
     FINISH = { DAY   = 17, MONTH = 4 },
 
@@ -53,7 +61,15 @@ local function loadSettings(currentTable, settingsName)
     local settingTable = xi.settings.main[settingsName]
 
     if not settingTable then
+        if currentTable.ANNOUNCE then
+            print("[EggHunt] No settings in main.lua, using default")
+        end
+
         return
+    else
+        if currentTable.ANNOUNCE then
+            print("[EggHunt] Loading settings from main.lua")
+        end
     end
 
     -- Load from main settings into current table
@@ -66,7 +82,7 @@ end
 
 loadSettings(settings, "EGG_HUNT")
 
-xi.events.egg_hunt.enabledCheck = function()
+xi.events.eggHunt.enabledCheck = function()
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
@@ -84,13 +100,13 @@ xi.events.egg_hunt.enabledCheck = function()
     return false
 end
 
-event:setEnableCheck(xi.events.egg_hunt.enabledCheck)
+event:setEnableCheck(xi.events.eggHunt.enabledCheck)
 
 ------------------------------------
 -- Data
 ------------------------------------
 
-xi.events.egg_hunt.data =
+xi.events.eggHunt.data =
 {
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
@@ -243,14 +259,14 @@ local messageOffset =
 -- Helpers
 ------------------------------------
 
-xi.events.egg_hunt.charToEgg = function(char)
+xi.events.eggHunt.charToEgg = function(char)
     -- Char offset from "A", eg. B = 1, C = 2, etc.
     local charOffset = string.byte(string.lower(char)) - 97
     return xi.items.A_EGG + charOffset
 end
 
 -- If egg is already in table, return index so it can be added to total eg. 2x "A" Egg
-xi.events.egg_hunt.findEggIndex = function(eggList, eggLetter)
+xi.events.eggHunt.findEggIndex = function(eggList, eggLetter)
     for index, egg in pairs(eggList) do
         if egg and egg[1] == eggLetter then
             return index
@@ -261,14 +277,14 @@ xi.events.egg_hunt.findEggIndex = function(eggList, eggLetter)
 end
 
 -- Convert string to table of lettered eggs
-xi.events.egg_hunt.stringToEggs = function(text)
+xi.events.eggHunt.stringToEggs = function(text)
     local str     = string.lower(text)
     local eggList = {}
 
     for char = 1, #str do
         local ascii   = string.byte(string.sub(str, char, char))
         local itemID  = xi.items.A_EGG + (ascii - 97)
-        local itemPos = xi.events.egg_hunt.findEggIndex(eggList, itemID)
+        local itemPos = xi.events.eggHunt.findEggIndex(eggList, itemID)
 
         -- If table already contains this egg, add to total
         if itemPos > -1 then
@@ -441,9 +457,9 @@ local firstThree = function(player, npc, trade)
 
     if
         npcUtil.tradeHasExactly(trade, {
-            xi.events.egg_hunt.charToEgg(string.sub(charName, 1, 1)),
-            xi.events.egg_hunt.charToEgg(string.sub(charName, 2, 2)),
-            xi.events.egg_hunt.charToEgg(string.sub(charName, 3, 3)),
+            xi.events.eggHunt.charToEgg(string.sub(charName, 1, 1)),
+            xi.events.eggHunt.charToEgg(string.sub(charName, 2, 2)),
+            xi.events.eggHunt.charToEgg(string.sub(charName, 3, 3)),
         })
     then
         -- If not 2007, or player already has Egg Helm,.minor reward is issued instead
@@ -510,25 +526,25 @@ end
 
 local regionNames =
 {
-    xi.events.egg_hunt.stringToEggs("RONFA"),
-    xi.events.egg_hunt.stringToEggs("ZULKH"),
-    xi.events.egg_hunt.stringToEggs("NORVA"),
-    xi.events.egg_hunt.stringToEggs("GUSTA"),
-    xi.events.egg_hunt.stringToEggs("DERFL"),
-    xi.events.egg_hunt.stringToEggs("SARUT"),
-    xi.events.egg_hunt.stringToEggs("KOLSH"),
-    xi.events.egg_hunt.stringToEggs("ARAGO"),
-    xi.events.egg_hunt.stringToEggs("FAURE"),
-    xi.events.egg_hunt.stringToEggs("VALDE"),
-    xi.events.egg_hunt.stringToEggs("QUFIM"),
-    xi.events.egg_hunt.stringToEggs("LITEL"),
-    xi.events.egg_hunt.stringToEggs("KUZOT"),
-    xi.events.egg_hunt.stringToEggs("VOLLB"),
-    xi.events.egg_hunt.stringToEggs("ELSHI"),
-    xi.events.egg_hunt.stringToEggs("ELSHI"),
-    xi.events.egg_hunt.stringToEggs("TULIA"),
-    xi.events.egg_hunt.stringToEggs("MOVAL"),
-    xi.events.egg_hunt.stringToEggs("TAVNA"),
+    xi.events.eggHunt.stringToEggs("RONFA"),
+    xi.events.eggHunt.stringToEggs("ZULKH"),
+    xi.events.eggHunt.stringToEggs("NORVA"),
+    xi.events.eggHunt.stringToEggs("GUSTA"),
+    xi.events.eggHunt.stringToEggs("DERFL"),
+    xi.events.eggHunt.stringToEggs("SARUT"),
+    xi.events.eggHunt.stringToEggs("KOLSH"),
+    xi.events.eggHunt.stringToEggs("ARAGO"),
+    xi.events.eggHunt.stringToEggs("FAURE"),
+    xi.events.eggHunt.stringToEggs("VALDE"),
+    xi.events.eggHunt.stringToEggs("QUFIM"),
+    xi.events.eggHunt.stringToEggs("LITEL"),
+    xi.events.eggHunt.stringToEggs("KUZOT"),
+    xi.events.eggHunt.stringToEggs("VOLLB"),
+    xi.events.eggHunt.stringToEggs("ELSHI"),
+    xi.events.eggHunt.stringToEggs("ELSHI"),
+    xi.events.eggHunt.stringToEggs("TULIA"),
+    xi.events.eggHunt.stringToEggs("MOVAL"),
+    xi.events.eggHunt.stringToEggs("TAVNA"),
 }
 
 local beastCostumes =
@@ -623,14 +639,14 @@ end
 
 local elementNames =
 {
-    { xi.events.egg_hunt.stringToEggs("FIRE"),    xi.items.RED_DROP    },
-    { xi.events.egg_hunt.stringToEggs("ICE"),     xi.items.CLEAR_DROP  },
-    { xi.events.egg_hunt.stringToEggs("AIR"),     xi.items.GREEN_DROP  },
-    { xi.events.egg_hunt.stringToEggs("EARTH"),   xi.items.YELLOW_DROP },
-    { xi.events.egg_hunt.stringToEggs("THUNDER"), xi.items.PURPLE_DROP },
-    { xi.events.egg_hunt.stringToEggs("WATER"),   xi.items.BLUE_DROP   },
-    { xi.events.egg_hunt.stringToEggs("LIGHT"),   xi.items.WHITE_DROP  },
-    { xi.events.egg_hunt.stringToEggs("DARK"),    xi.items.BLACK_DROP  },
+    { xi.events.eggHunt.stringToEggs("FIRE"),    xi.items.RED_DROP    },
+    { xi.events.eggHunt.stringToEggs("ICE"),     xi.items.CLEAR_DROP  },
+    { xi.events.eggHunt.stringToEggs("AIR"),     xi.items.GREEN_DROP  },
+    { xi.events.eggHunt.stringToEggs("EARTH"),   xi.items.YELLOW_DROP },
+    { xi.events.eggHunt.stringToEggs("THUNDER"), xi.items.PURPLE_DROP },
+    { xi.events.eggHunt.stringToEggs("WATER"),   xi.items.BLUE_DROP   },
+    { xi.events.eggHunt.stringToEggs("LIGHT"),   xi.items.WHITE_DROP  },
+    { xi.events.eggHunt.stringToEggs("DARK"),    xi.items.BLACK_DROP  },
 }
 
 local weekDay = function(player, npc, trade)
@@ -652,12 +668,12 @@ end
 
 local eraCombo =
 {
-    ELEVEN   = { xi.events.egg_hunt.stringToEggs("ELEVEN"),   xi.items.HATCHLING_SHIELD     },
-    LEAFKIN  = { xi.events.egg_hunt.stringToEggs("LEAFKIN"),  xi.items.PIECE_OF_COPSE_CANDY },
-    VANADIEL = { xi.events.egg_hunt.stringToEggs("VANADIEL"), xi.items.CRACKER              },
-    HARE     = { xi.events.egg_hunt.stringToEggs("HARE"),     xi.items.RABBIT_CAP           },
-    BUNNY    = { xi.events.egg_hunt.stringToEggs("BUNNY"),    xi.items.RABBIT_CAP           },
-    RABBIT   = { xi.events.egg_hunt.stringToEggs("RABBIT"),   xi.items.RABBIT_CAP           },
+    ELEVEN   = { xi.events.eggHunt.stringToEggs("ELEVEN"),   xi.items.HATCHLING_SHIELD     },
+    LEAFKIN  = { xi.events.eggHunt.stringToEggs("LEAFKIN"),  xi.items.PIECE_OF_COPSE_CANDY },
+    VANADIEL = { xi.events.eggHunt.stringToEggs("VANADIEL"), xi.items.CRACKER              },
+    HARE     = { xi.events.eggHunt.stringToEggs("HARE"),     xi.items.RABBIT_CAP           },
+    BUNNY    = { xi.events.eggHunt.stringToEggs("BUNNY"),    xi.items.RABBIT_CAP           },
+    RABBIT   = { xi.events.eggHunt.stringToEggs("RABBIT"),   xi.items.RABBIT_CAP           },
 }
 
 local testEraCombo = function(player, npc, trade, combo, rewardQty)
@@ -732,7 +748,7 @@ local getSecondInitial = function(player, option)
     return 0
 end
 
-xi.events.egg_hunt.combos =
+xi.events.eggHunt.combos =
 {
     { check = firstThree,    message = messageOffset.REWARD1 },
     { check = sevenKind,     message = messageOffset.REWARD2 },
@@ -742,21 +758,21 @@ xi.events.egg_hunt.combos =
 }
 
 if settings.ERA_2014 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2014, message = messageOffset.REWARD2 })
+    table.insert(xi.events.eggHunt.combos, { check = era2014, message = messageOffset.REWARD2 })
 end
 
 if settings.ERA_2015 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2015, message = messageOffset.REWARD2 })
+    table.insert(xi.events.eggHunt.combos, { check = era2015, message = messageOffset.REWARD2 })
 end
 
 if settings.ERA_2018 then
-    table.insert(xi.events.egg_hunt.combos, { check = era2018, message = messageOffset.REWARD2 })
+    table.insert(xi.events.eggHunt.combos, { check = era2018, message = messageOffset.REWARD2 })
 end
 
 for bonusWord, rewardItem in pairs(settings.BONUS_WORDS) do
-    local customEggs = xi.events.egg_hunt.stringToEggs(bonusWord)
+    local customEggs = xi.events.eggHunt.stringToEggs(bonusWord)
 
-    table.insert(xi.events.egg_hunt.combos,
+    table.insert(xi.events.eggHunt.combos,
     {
         check = function(player, npc, trade)
             if npcUtil.tradeHasExactly(trade, customEggs) then
@@ -772,7 +788,7 @@ end
 -- Moogle event handlers
 ------------------------------------
 
-xi.events.egg_hunt.onTrigger = function(player, npc)
+xi.events.eggHunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
     npc:facePlayer(player, true)
@@ -797,14 +813,14 @@ xi.events.egg_hunt.onTrigger = function(player, npc)
 
         if options ~= -1 then
             options = utils.mask.setBit(options, 26, 0)
-            player:startEvent(xi.events.egg_hunt.data[zoneID].cs, 3, options)
+            player:startEvent(xi.events.eggHunt.data[zoneID].cs, 3, options)
         else
-            player:startEvent(xi.events.egg_hunt.data[zoneID].cs, 1)
+            player:startEvent(xi.events.eggHunt.data[zoneID].cs, 1)
         end
     end
 end
 
-xi.events.egg_hunt.onEventFinish = function(player, csid, option)
+xi.events.eggHunt.onEventFinish = function(player, csid, option)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
 
@@ -834,7 +850,7 @@ xi.events.egg_hunt.onEventFinish = function(player, csid, option)
     end
 end
 
-xi.events.egg_hunt.onTrade = function(player, npc, trade)
+xi.events.eggHunt.onTrade = function(player, npc, trade)
     local zoneID = player:getZoneID()
 
     npc:facePlayer(player, true)
@@ -843,7 +859,7 @@ xi.events.egg_hunt.onTrade = function(player, npc, trade)
         return
     end
 
-    for _, v in pairs(xi.events.egg_hunt.combos) do
+    for _, v in pairs(xi.events.eggHunt.combos) do
         local reward = v.check(player, npc, trade)
         if reward then
             -- If reward already received today, send message and finish event
@@ -906,7 +922,7 @@ local function insertNpc(zone, entry)
         releaseIdOnDisappear = true,
     })
 
-    table.insert(xi.events.egg_hunt.entities, npc:getID())
+    table.insert(xi.events.eggHunt.entities, npc:getID())
 end
 
 local function insertMoogle(zone, pos)
@@ -919,17 +935,17 @@ local function insertMoogle(zone, pos)
         y             = pos[3],
         z             = pos[4],
         rotation      = pos[1],
-        onTrigger     = xi.events.egg_hunt.onTrigger,
-        onEventFinish = xi.events.egg_hunt.onEventFinish,
-        onTrade       = xi.events.egg_hunt.onTrade,
+        onTrigger     = xi.events.eggHunt.onTrigger,
+        onEventFinish = xi.events.eggHunt.onEventFinish,
+        onTrade       = xi.events.eggHunt.onTrade,
         releaseIdOnDisappear = true,
     })
 
-    table.insert(xi.events.egg_hunt.entities, npc:getID())
+    table.insert(xi.events.eggHunt.entities, npc:getID())
 end
 
-xi.events.egg_hunt.generateEntities = function()
-    for zoneID, data in pairs(xi.events.egg_hunt.data) do
+xi.events.eggHunt.generateEntities = function()
+    for zoneID, data in pairs(xi.events.eggHunt.data) do
         local zone = GetZone(zoneID)
         if zone then
             insertMoogle(zone, data.moogle)
@@ -948,12 +964,12 @@ xi.events.egg_hunt.generateEntities = function()
     end
 end
 
-xi.events.egg_hunt.showEntities = function(enabled)
-    if enabled and #xi.events.egg_hunt.entities == 0 then
-        xi.events.egg_hunt.generateEntities()
+xi.events.eggHunt.showEntities = function(enabled)
+    if enabled and #xi.events.eggHunt.entities == 0 then
+        xi.events.eggHunt.generateEntities()
     end
 
-    for _, entityID in pairs(xi.events.egg_hunt.entities) do
+    for _, entityID in pairs(xi.events.eggHunt.entities) do
         local entity = GetNPCByID(entityID)
         if entity then
             if enabled then
@@ -965,16 +981,16 @@ xi.events.egg_hunt.showEntities = function(enabled)
     end
 
     if not enabled then
-        xi.events.egg_hunt.entities = {}
+        xi.events.eggHunt.entities = {}
     end
 end
 
 event:setStartFunction(function()
-    xi.events.egg_hunt.showEntities(true)
+    xi.events.eggHunt.showEntities(true)
 end)
 
 event:setEndFunction(function()
-    xi.events.egg_hunt.showEntities(false)
+    xi.events.eggHunt.showEntities(false)
 end)
 
 return event
