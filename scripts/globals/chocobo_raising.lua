@@ -650,6 +650,22 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
     return chocoState
 end
 
+local updateChocoState = function(player, chocoState)
+    -- Update age and last_update_age
+    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.last_update_age = chocoState.age
+
+    debug(player, "Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+
+    -- Write to cache
+    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+    -- Write to db
+    player:setChocoboRaisingInfo(chocoState)
+
+    return chocoState
+end
+
 xi.chocoboRaising.initChocoboData = function(player)
     local chocoState = player:getChocoboRaisingInfo()
     if chocoState == nil then
@@ -1187,13 +1203,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 end
 
                 chocoState.foodGiven = nil
-                chocoState.last_update_age = chocoState.age
 
-                -- Write to cache
-                xi.chocoboRaising.chocoState[player:getID()] = chocoState
-
-                -- Write to db
-                player:setChocoboRaisingInfo(chocoState)
+                updateChocoState(player, chocoState)
             end,
 
             [244] = function() -- Present chocobo appearance
@@ -1630,10 +1641,10 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
             [504] = function() -- Skip report
                 debug(player, "Skip report (Currently doesn't work!)")
+
                 -- TODO: Do empty playout of report so that age and state are up-to-date
-                chocoState.last_update_age = chocoState.age
-                xi.chocoboRaising.chocoState[player:getID()] = chocoState
-                player:setChocoboRaisingInfo(chocoState)
+
+                updateChocoState(player, chocoState)
             end,
 
             [221] = function() -- Buy your chocobo whistle
@@ -1702,8 +1713,7 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
             return
         end
 
-        chocoState.last_update_age = chocoState.age
-        player:setChocoboRaisingInfo(chocoState)
+        updateChocoState(player, chocoState)
     end
 
     -- TODO: Hand out cards and plaques etc.
