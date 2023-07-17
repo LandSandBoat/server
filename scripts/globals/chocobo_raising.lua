@@ -942,10 +942,17 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
             local fullnamekey = string.format("%s %s", fname, lname)
 
+            -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
+            -- "... with the caveat that your chocobo's name may be no more than 15 letters in total."
+            -- NOTE: This is enforced by the client, this is here to stop malicious naming attempts
+            local nameTooLong = string.len(fullnamekey) > (15 + 1) -- 15 + the space character
+
             -- If renaming fails, the name will remain as "Chocobo Chocobo" and the
             -- rejection CS will play
             if fname == nil or lname == nil then
                 print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+            elseif nameTooLong then
+                print(string.format("ERROR! %s selected name combination too long for chocobo: %s", player:getName(), fullnamekey))
             elseif xi.bannedChocoboNames[fullnamekey] then
                 print(string.format("ERROR! %s selected banned name for chocobo: %s", player:getName(), fullnamekey))
             else
