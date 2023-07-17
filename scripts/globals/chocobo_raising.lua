@@ -36,11 +36,6 @@ xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
 
--- FOR HEAVILY-IN-DEVELOPMET TESTING, you can use the `!chocoboraising`
--- command to toggle these settings
-xi.settings.main.ENABLE_CHOCOBO_RAISING = false
-xi.settings.main.DEBUG_CHOCOBO_RAISING = false
-
 local debug = function(player, ...)
     if xi.settings.main.DEBUG_CHOCOBO_RAISING then
         local t = { ... }
