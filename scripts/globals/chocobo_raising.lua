@@ -650,6 +650,44 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
     return chocoState
 end
 
+local handleCSUpdate = function(player, chocoState, doEventUpdate)
+    -- Generate final CS value from (location offset * 256) + cutscene offset
+    local csOffset = chocoState.csList[1]
+    local locationOffset = raisingLocation[player:getZoneID()] * 256
+    local csToPlay = locationOffset + csOffset
+
+    debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+    table.remove(chocoState.csList, 1)
+
+    local currentAgeOfChocoboDuringCutscene = 0
+
+    -- TODO: Move this into initData
+    if csOffset == cutscenes.EGG_HATCHING then
+        chocoState.stage = stage.CHICK
+    elseif csOffset == cutscenes.CHICK_TO_ADOLESCENT then
+        chocoState.stage = stage.ADOLESCENT
+    elseif csOffset == cutscenes.ADOLESCENT_TO_ADULT_1 then
+        chocoState.stage = stage.ADULT_1
+    elseif csOffset == cutscenes.ADULT_1_TO_ADULT_2 then
+        chocoState.stage = stage.ADULT_2
+    elseif csOffset == cutscenes.ADULT_2_TO_ADULT_3 then
+        chocoState.stage = stage.ADULT_3
+    elseif csOffset == cutscenes.ADULT_3_TO_ADULT_4 then
+        chocoState.stage = stage.ADULT_4
+    end
+
+    chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
+
+    if doEventUpdate then
+        player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
+            0, 0, 0, 0, 0, 0, 0, 0)
+        player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
+            chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
+    end
+
+    return chocoState
+end
+
 local updateChocoState = function(player, chocoState)
     -- Update age and last_update_age
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
@@ -1602,37 +1640,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
 
             [246] = function() -- Update CS
-                -- Generate final CS value from (location offset * 256) + cutscene offset
-                local csOffset = chocoState.csList[1]
-                local locationOffset = raisingLocation[player:getZoneID()] * 256
-                local csToPlay = locationOffset + csOffset
-
-                debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
-                table.remove(chocoState.csList, 1)
-
-                local currentAgeOfChocoboDuringCutscene = 0
-
-                -- TODO: Move this into initData
-                if csOffset == cutscenes.EGG_HATCHING then
-                    chocoState.stage = stage.CHICK
-                elseif csOffset == cutscenes.CHICK_TO_ADOLESCENT then
-                    chocoState.stage = stage.ADOLESCENT
-                elseif csOffset == cutscenes.ADOLESCENT_TO_ADULT_1 then
-                    chocoState.stage = stage.ADULT_1
-                elseif csOffset == cutscenes.ADULT_1_TO_ADULT_2 then
-                    chocoState.stage = stage.ADULT_2
-                elseif csOffset == cutscenes.ADULT_2_TO_ADULT_3 then
-                    chocoState.stage = stage.ADULT_3
-                elseif csOffset == cutscenes.ADULT_3_TO_ADULT_4 then
-                    chocoState.stage = stage.ADULT_4
-                end
-
-                chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
-
-                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
-                    0, 0, 0, 0, 0, 0, 0, 0)
-                player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
-                    chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
+                chocoState = handleCSUpdate(player, chocoState, true)
             end,
 
             [256] = function() -- Brief report?
@@ -1640,9 +1648,29 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
 
             [504] = function() -- Skip report
-                debug(player, "Skip report (Currently doesn't work!)")
+                -- TODO: Set up movement between chocoState.report.events and chocoState.csList to
+                --     : include the length of each playout in days, so it can be used in handleCSUpdate()
+                --     : to multiply values etc.
+                -- Prepare chocoState.csList
+                for _, currentEvent in pairs (chocoState.report.events) do
+                    local eventStartStart = currentEvent[1]
+                    -- local eventStartEnd = currentEvent[2]
+                    local eventCSList = currentEvent[3]
 
-                -- TODO: Do empty playout of report so that age and state are up-to-date
+                    chocoState.age = eventStartStart
+                    chocoState.stage = ageToStage(chocoState.age)
+
+                    for _, cs in pairs(eventCSList) do
+                        table.insert(chocoState.csList, cs)
+                    end
+                end
+
+                chocoState.report.events = {}
+
+                -- NOTE: each cs will be popped off inside of handleCSUpdate
+                while #chocoState.csList > 0 do
+                    chocoState = handleCSUpdate(player, chocoState, false)
+                end
 
                 updateChocoState(player, chocoState)
             end,
