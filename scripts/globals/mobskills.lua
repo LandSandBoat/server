@@ -444,6 +444,7 @@ end
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- used for SMN magical bloodpacts and all mob magical skills
     local ignore = ignoreres or false
     local magicDefense = xi.magic.getElementalDamageReduction(target, ele)
+    local dayElement    = VanadielDayElement()
 
     if not ignore then
         dmg = math.floor(dmg * magicDefense)
@@ -469,11 +470,11 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- us
         end
     end
 
-    if VanadielDayElement() == xi.magic.dayStrong[ele] then
+    if dayElement == ele then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif VanadielDayElement() == xi.magic.dayWeak[ele] then
+    elseif dayElement == xi.magic.dayWeak[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
