@@ -92,7 +92,7 @@ class LuaStyleCheck:
 
         See: TBD
         """
-        # ,[^ \n] : Any comma that does not have space or newline following
+        # ,[^ \n\"] : Any comma that does not have space or newline or close quote following
 
         for _ in re.finditer(",[^ \n\"]", line):
             self.error("Multiple parameters used without an appropriate following space or newline")
