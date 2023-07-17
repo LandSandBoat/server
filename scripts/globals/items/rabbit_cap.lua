@@ -3,8 +3,6 @@
 -- Item: Rabbit Cap
 -- When used, you will obtain 1-2 random initial eggs
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
