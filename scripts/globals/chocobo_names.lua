@@ -5,6 +5,9 @@
 --       the menu to a name string.
 --       This is not customisable!
 ----------------------------------
+require("scripts/globals/utils")
+----------------------------------
+
 xi = xi or {}
 xi.chocoboNames =
 {
@@ -861,3 +864,11 @@ xi.chocoboNames =
     [829] = "Destruction",
     [830] = "Firecracker",
 }
+
+-- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
+local bannedChocoboNames =
+{
+    "Blazing Uranus",
+    "Uranus Meteor",
+}
+xi.bannedChocoboNames = set(bannedChocoboNames)
