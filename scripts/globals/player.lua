@@ -241,12 +241,6 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         -- Login Campaign rewards points once daily
         xi.events.loginCampaign.onGameIn(playerArg)
     end)
-    
-    player:timer(3500, function(player)
-        if player:getCharVar("Afterglow") == 1 then
-            xi.afterglow.onTrigger(player)
-        end
-    end)
 end
 
 xi.player.onPlayerDeath = function(player)
