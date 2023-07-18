@@ -23,6 +23,7 @@ quest.sections =
             return status ~= QUEST_ACCEPTED and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
                 not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) and
                 vars.Stage < os.time()
         end,
 
