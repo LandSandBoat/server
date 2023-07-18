@@ -52,7 +52,7 @@ INSERT INTO `fishing_bait` VALUES (16999,'Ball of Trout Paste',0,1,1,0,0,0);
 INSERT INTO `fishing_bait` VALUES (17000,'Meatball',0,1,1,0,0,0);
 INSERT INTO `fishing_bait` VALUES (17001,'Giant Shell Bug',0,1,1,0,0,0);
 INSERT INTO `fishing_bait` VALUES (17002,'Robber Rig',1,1,1,72,0,0);
-INSERT INTO `fishing_bait` VALUES (17003,'Super Scoop',0,3,1,32,0,0);
+INSERT INTO `fishing_bait` VALUES (17003,'Super Scoop',0,1,1,32,0,0);
 INSERT INTO `fishing_bait` VALUES (17005,'Lufaise Fly',0,1,1,0,0,0);
 INSERT INTO `fishing_bait` VALUES (17006,'Drill Calamary',0,1,1,0,0,0);
 INSERT INTO `fishing_bait` VALUES (17007,'Dwarf Pugil',0,1,1,0,0,0);
