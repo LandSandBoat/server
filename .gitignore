@@ -237,3 +237,7 @@ docker-compose*
 xi_map.dSYM
 xi_connect.dSYM
 xi_search.dSYM
+
+# Keys and Certs
+**/*.key
+**/*.cert
