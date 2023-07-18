@@ -9,10 +9,37 @@ xi = xi or {}
 xi.magic = xi.magic or {}
 
 -----------------------------------
+-- Day to Element Mapping
+-----------------------------------
+
+xi.magic.dayElement =
+{
+    [xi.day.FIRESDAY]     = xi.magic.element.FIRE,
+    [xi.day.ICEDAY]       = xi.magic.element.ICE,
+    [xi.day.WINDSDAY]     = xi.magic.element.WIND,
+    [xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
+    [xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
+    [xi.day.WATERSDAY]    = xi.magic.element.WATER,
+    [xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
+    [xi.day.DARKSDAY]     = xi.magic.element.DARK,
+}
+
+-----------------------------------
 -- Tables by element
 -----------------------------------
 
-xi.magic.dayStrong             = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
+xi.magic.dayWeak =
+{
+    xi.magic.dayElement[xi.day.WATERSDAY],
+    xi.magic.dayElement[xi.day.FIRESDAY],
+    xi.magic.dayElement[xi.day.ICEDAY],
+    xi.magic.dayElement[xi.day.WINDSDAY],
+    xi.magic.dayElement[xi.day.EARTHSDAY],
+    xi.magic.dayElement[xi.day.LIGHTNINGDAY],
+    xi.magic.dayElement[xi.day.DARKSDAY],
+    xi.magic.dayElement[xi.day.LIGHTSDAY]
+}
+
 xi.magic.singleWeatherStrong   = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
 xi.magic.doubleWeatherStrong   = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
 xi.magic.elementalObi          = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
@@ -27,7 +54,6 @@ local nullMod                  = { xi.mod.FIRE_NULL,             xi.mod.ICE_NULL
 local blmMerit                 = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY                                                          }
 local rdmMerit                 = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY                                                         }
 xi.magic.barSpell              = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER                                                                    }
-xi.magic.dayWeak               = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
 xi.magic.singleWeatherWeak     = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
 xi.magic.doubleWeatherWeak     = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
 xi.magic.eemStatus             = { xi.effect.FIRE_EEM_MOD,       xi.effect.ICE_EEM_MOD,       xi.effect.WIND_EEM_MOD,        xi.effect.EARTH_EEM_MOD,       xi.effect.THUNDER_EEM_MOD,         xi.effect.WATER_EEM_MOD,        xi.effect.LIGHT_EEM_MOD,    xi.effect.DARK_EEM_MOD    }
