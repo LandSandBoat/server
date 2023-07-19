@@ -42,9 +42,11 @@ deprecated_requires = [
 disallowed_numeric_parameters = {
     "addItem"                 : [ 0 ],
     "addKeyItem"              : [ 0 ],
+    "addSpell"                : [ 0 ],
     "addStatusEffect"         : [ 0 ],
     "addStatusEffectSilent"   : [ 0 ],
     "addUsedItem"             : [ 0 ],
+    "canLearnSpell"           : [ 0 ],
     "delItem"                 : [ 0 ],
     "delKeyItem"              : [ 0 ],
     "delSpell"                : [ 0 ],
