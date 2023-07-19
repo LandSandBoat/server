@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Windurst_Woods/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
@@ -92,6 +93,8 @@ zoneObject.onGameHour = function(zone)
             end
         end
     end
+
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

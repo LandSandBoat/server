@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Eastern_Altepa_Desert/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
@@ -58,6 +59,10 @@ zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
     end
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

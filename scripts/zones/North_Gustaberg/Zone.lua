@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/North_Gustaberg/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
@@ -49,6 +50,10 @@ end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
     xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

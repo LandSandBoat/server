@@ -31,6 +31,8 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         QUH_BERHUJA_STOLEN_ORBS       = 7406, -- Yowl! That was a close call, with those ferrral Carrrdians barrrging in therrre! Of courrrse, I rrran away...for help, I mean...
         PORE_OHRE_DIALOG              = 7408, -- There are reports of evil Cardians attacking people to steal the Mana Orbs created at this tower. Yikey-wikey, is this job scary!?
         PORE_OHRE_STOLEN_ORBS         = 7450, -- If you're heading back to town, then please go tell Minister Apururu at the Manustery about those feral Cardians stealing our Mana Orbs! Thanks, and be careful on your way homey-womey!
+        GOLDFISH_NPC_DIALOGUE         = 7504, -- Step right up and test your skill at Grabbin' Goldfish!
+        GOLDFISH_POINT_UPDATE         = 7551, -- Your point total is now <int>.
         PLAYER_OBTAINS_ITEM           = 7573, -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7574, -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7575, -- <name> obtains the temporary item: <item>!
@@ -79,6 +81,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
             [17253122] = 17253122,  -- Smile Helper
             [17253123] = 17253123,  -- Smile Helper
         },
+        GOLDFISH_NPC = 17253106, -- Sunbreeze Festival Goldfish NPC
     },
 }
 

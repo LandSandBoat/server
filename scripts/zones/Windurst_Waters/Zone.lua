@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Windurst_Waters/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
@@ -49,6 +50,10 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     xi.moghouse.exitJobChangeFinish(player, csid, option)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

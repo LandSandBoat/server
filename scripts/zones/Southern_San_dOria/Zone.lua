@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Southern_San_dOria/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
@@ -105,6 +106,8 @@ zoneObject.onGameHour = function(zone)
             end
         end
     end
+
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

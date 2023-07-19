@@ -2,6 +2,7 @@
 -- Zone: Western_Altepa_Desert (125)
 -----------------------------------
 local ID = require('scripts/zones/Western_Altepa_Desert/IDs')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
@@ -28,6 +29,10 @@ zoneObject.onInitialize = function(zone)
     DisallowRespawn(ID.mob.KING_VINEGARROON, true)
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

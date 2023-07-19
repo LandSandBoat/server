@@ -14640,6 +14640,20 @@ bool CLuaBaseEntity::isAggroable()
 }
 
 /************************************************************************
+ *  Function: setAlwaysRender()
+ *  Purpose : Determines wheter or not an NPC will always render for the player
+ *  Example : npc:setAlwaysRender(true)
+ *  Notes   : This is only used in specific cases: fireworks / festival deco
+ *          : or other instances where an NPC should always render in a zone.
+ ************************************************************************/
+
+void CLuaBaseEntity::setAlwaysRender(bool alwaysRender)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+    static_cast<CNpcEntity*>(m_PBaseEntity)->m_alwaysRender = alwaysRender;
+}
+
+/************************************************************************
  *  Function: setDelay()
  *  Purpose : Override default delay settings for a Mob
  *  Example : mob:setDelay(2400)
@@ -17295,6 +17309,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
     SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
     SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
+    SOL_REGISTER("setAlwaysRender", CLuaBaseEntity::setAlwaysRender);
 
     SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
     SOL_REGISTER("getDelay", CLuaBaseEntity::getDelay);

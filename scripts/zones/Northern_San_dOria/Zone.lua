@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Northern_San_dOria/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
@@ -95,6 +96,10 @@ zoneObject.onEventFinish = function(player, csid, option)
     end
 
     xi.moghouse.exitJobChangeFinish(player, csid, option)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject
