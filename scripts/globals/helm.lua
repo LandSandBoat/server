@@ -1530,6 +1530,20 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 movePoint(player, npc, zoneId, info)
             end
 
+            if
+                xi.events and
+                xi.events.eggHunt and
+                xi.events.eggHunt.enabledCheck and
+                player:getCharVar("[EGG_HUNT]DAILY_HELM") < VanadielUniqueDay()
+            then
+                player:timer(3000, function(playerArg)
+                    if npcUtil.giveItem(playerArg, math.random(xi.items.A_EGG, xi.items.Z_EGG)) then
+                        playerArg:setCharVar("[EGG_HUNT]DAILY_HELM", VanadielUniqueDay())
+                        return
+                    end
+                end)
+            end
+
             player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
         end
 
