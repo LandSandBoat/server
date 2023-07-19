@@ -19,12 +19,6 @@ entity.onTrigger = function(player, npc)
     local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(player:getCharVar("WildcatJeuno"), 13)
-    then
-        player:startEvent(10053)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_COMPLETED and
         cooksPride == QUEST_AVAILABLE
     then
@@ -93,9 +87,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
         end
-
-    elseif csid == 10053 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 13, true))
     end
 end
 
