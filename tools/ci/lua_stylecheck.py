@@ -121,7 +121,7 @@ class LuaStyleCheck:
 
         See: TBD
         """
-        # ,[^ \n\"] : Any comma that does not have space or newline or close quote following
+        # ,[^ \n] : Any comma that does not have space or newline following
 
         # Replace quoted strings with a placeholder
         removed_string_line = re.sub('\"([^\"]*?)\"', "strVal", line)
