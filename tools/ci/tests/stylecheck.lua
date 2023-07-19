@@ -171,3 +171,14 @@ local reallyLongVariableNameTwo = 2
 
 if reallyLongVariableNameOne == reallyLongVariableNameTwo and reallyLongVariableNameTwo - reallyLongVariableNameOne == 0 then -- FAIL
 end
+
+-- String values in parameters
+(a,"b",c) -- FAIL x2
+("a", b)  -- PASS
+(",", b)  -- PASS
+(",",b)   -- FAIL
+
+(a,'b',c) -- FAIL x2
+('a', b)  -- PASS
+(',', b)  -- PASS
+(',',b)   -- FAIL
