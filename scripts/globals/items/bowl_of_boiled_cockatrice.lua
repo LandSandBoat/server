@@ -13,8 +13,6 @@
 -- Ranged ATT Cap 60
 -- Resist petrify +4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -13,8 +13,6 @@
 -- Lizard Killer +5
 -- hHP +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

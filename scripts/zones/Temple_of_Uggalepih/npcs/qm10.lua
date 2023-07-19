@@ -9,10 +9,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2387) and
+        npcUtil.tradeHas(trade, xi.items.FLICKERING_LANTERN) and
         npcUtil.popFromQM(player, npc, ID.mob.SOZU_ROGBERRY)
     then
-        -- Flickering Lantern
         player:confirmTrade()
     end
 end

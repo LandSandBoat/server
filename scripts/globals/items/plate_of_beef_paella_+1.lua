@@ -8,8 +8,6 @@
 -- Attack % 19 Cap 95
 -- Undead Killer 6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

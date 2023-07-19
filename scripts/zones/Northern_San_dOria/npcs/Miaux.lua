@@ -56,12 +56,12 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("aCraftsmanWork", 1)
     elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16887)-- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PEREGRINE)-- Peregrine (DRG AF1)
         else
             player:setCharVar("aCraftsmanWork", 0)
             player:delKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
-            player:addItem(16887)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16887) -- Peregrine (DRG AF1)
+            player:addItem(xi.items.PEREGRINE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PEREGRINE) -- Peregrine (DRG AF1)
             player:addFame(xi.quest.fame_area.SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end

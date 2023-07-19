@@ -12,8 +12,6 @@
 -- hHP 5
 -- hMP 1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

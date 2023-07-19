@@ -3,8 +3,6 @@
 --  Item: Red Drop
 --  Strength 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

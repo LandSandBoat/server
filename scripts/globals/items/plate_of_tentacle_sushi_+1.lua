@@ -10,8 +10,6 @@
 -- Ranged Accuracy % 20 (cap 20)
 -- Double Attack 1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

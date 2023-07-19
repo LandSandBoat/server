@@ -3,8 +3,6 @@
 -- Item: Curaga Earring
 -- Item Effect: Casts Curaga
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

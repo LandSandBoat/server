@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/combat/level_correction")
 require("scripts/globals/combat/physical_utilities")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}

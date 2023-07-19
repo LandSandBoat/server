@@ -1,12 +1,25 @@
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
-
 xi = xi or {}
 xi.magic = xi.magic or {}
+
+-----------------------------------
+-- Day to Element Mapping
+-----------------------------------
+
+xi.magic.dayElement =
+{
+    [xi.day.FIRESDAY]     = xi.magic.element.FIRE,
+    [xi.day.ICEDAY]       = xi.magic.element.ICE,
+    [xi.day.WINDSDAY]     = xi.magic.element.WIND,
+    [xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
+    [xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
+    [xi.day.WATERSDAY]    = xi.magic.element.WATER,
+    [xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
+    [xi.day.DARKSDAY]     = xi.magic.element.DARK,
+}
 
 -----------------------------------
 -- Tables by element
@@ -477,7 +490,7 @@ function applyResistanceEffect(caster, target, spell, params)
         -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
         elseif
             target:hasStatusEffect(xi.effect.FEALTY) and
-            not family == xi.magic.spellFamily.FOE_REQUIEM and
+            family ~= xi.magic.spellFamily.FOE_REQUIEM and
             not (family >= xi.magic.spellFamily.FIRE_THRENODY and
             family <= xi.magic.spellFamily.DARK_THRENODY)
         then

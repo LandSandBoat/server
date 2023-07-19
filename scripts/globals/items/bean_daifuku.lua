@@ -14,8 +14,6 @@
 -- Ranged Accuracy +10% (cap 75)
 -- Haste +3%
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

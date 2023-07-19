@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2580) and
+        npcUtil.tradeHas(trade, xi.items.HELLCAGE_BUTTERFLY) and
         npcUtil.popFromQM(player, npc, ID.mob.VULPANGUE)
     then
         -- Trade Hellcage Butterfly

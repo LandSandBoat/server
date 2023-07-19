@@ -5,7 +5,6 @@
 --  Range: Melee range radial
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

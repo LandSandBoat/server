@@ -38,7 +38,7 @@ local zoneId =
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 570)
+        npcUtil.tradeHas(trade, xi.items.CLAY_TABLET)
     then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")

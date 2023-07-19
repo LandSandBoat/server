@@ -14,8 +14,6 @@
 -- Charisma 1
 -- HP Recovered While Healing 3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

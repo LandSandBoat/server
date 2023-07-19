@@ -243,8 +243,8 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", 
         monster = behemothDomID.mob.KING_BEHEMOTH
     end
 
-    UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
-    GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
+    UpdateNMSpawnPoint(monster)
+    GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespawn", function(mob)

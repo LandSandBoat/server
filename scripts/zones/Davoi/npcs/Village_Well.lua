@@ -9,7 +9,10 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("UnderOathCS") == 5 and npcUtil.tradeHas(trade, 1095) then
+    if
+        player:getCharVar("UnderOathCS") == 5 and
+        npcUtil.tradeHas(trade, xi.items.WELL_WEIGHT)
+    then
         player:startEvent(113)
     else
         player:messageSpecial(ID.text.A_WELL)
@@ -20,7 +23,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("UnderOathCS") == 5 and
         player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER) and
-        not player:hasItem(1095) and
+        not player:hasItem(xi.items.WELL_WEIGHT) and
         not GetMobByID(ID.mob.ONE_EYED_GWAJBOJ):isSpawned() and
         not GetMobByID(ID.mob.THREE_EYED_PROZPUZ):isSpawned()
     then

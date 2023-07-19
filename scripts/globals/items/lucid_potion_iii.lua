@@ -3,8 +3,6 @@
 -- Item: Lucid Potion III
 -- Item Effect: Restores 2000 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

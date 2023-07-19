@@ -47,6 +47,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         NOKKHI_BAD_COUNT               = 7407,  -- What kinda smart-alecky baloney is this!? I told you to bring me the same kinda ammunition in complete sets. And don't forget the flowers, neither.
         NOKKHI_GOOD_TRADE              = 7409,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM                = 7410,  -- I'm real sorry, but there's nothing I can do with those.
+        EGG_HUNT_OFFSET                = 7416,  -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         YOU_CANNOT_ENTER_DYNAMIS       = 7444,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7446,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7456,  -- There is an unusual arrangement of branches here.

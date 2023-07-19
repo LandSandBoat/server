@@ -8,8 +8,6 @@
 -- Bird Killer 10
 -- Resist Paralyze 10
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

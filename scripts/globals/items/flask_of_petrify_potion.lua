@@ -3,8 +3,6 @@
 -- Item: Petrify Potion
 -- Item Effect: This potion induces petrify.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

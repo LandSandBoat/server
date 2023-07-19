@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local standardParam = 0
-        if not player:hasItem(129) then
+        if not player:hasItem(xi.items.IMPERIAL_STANDARD) then
             standardParam = 1
         end
 

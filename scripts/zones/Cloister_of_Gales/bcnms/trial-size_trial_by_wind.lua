@@ -33,14 +33,14 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(301) then
-            player:addSpell(301)
+        if not player:hasSpell(xi.magic.spell.GARUDA) then
+            player:addSpell(xi.magic.spell.GARUDA)
             player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)
         end
 
-        if not player:hasItem(4181) then
-            player:addItem(4181) -- Scroll of instant warp
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
+        if not player:hasItem(xi.items.SCROLL_OF_INSTANT_WARP) then
+            player:addItem(xi.items.SCROLL_OF_INSTANT_WARP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_INSTANT_WARP)
         end
 
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)

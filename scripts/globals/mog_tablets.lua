@@ -268,8 +268,8 @@ xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
         -- Use zoneId to lookup
 
         -- Deliver results to player
-        player:updateEventString("Test")
-        player:messageSpecial(14331, xi.mogTablet.tablets.CHARITY)
+        -- player:updateEventString("Test")
+        -- player:messageSpecial(14331, xi.mogTablet.tablets.CHARITY)
     end
 end
 

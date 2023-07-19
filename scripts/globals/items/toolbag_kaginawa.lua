@@ -3,8 +3,6 @@
 -- Toolbag Kagi
 -- When used, you will obtain one stack of kaginawa
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1185, 99)
+    target:addItem(xi.items.KAGINAWA, 99)
 end
 
 return itemObject

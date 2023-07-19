@@ -2,8 +2,6 @@
 -- ID: 4197
 -- rusty_bolt_case
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17335, 99) -- 99x rusty_bolt
+    target:addItem(xi.items.RUSTY_BOLT, 99) -- 99x rusty_bolt
 end
 
 return itemObject

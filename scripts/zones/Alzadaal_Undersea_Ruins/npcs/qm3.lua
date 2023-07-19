@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2574) and
+        npcUtil.tradeHas(trade, xi.items.BAR_OF_FERRITE) and
         npcUtil.popFromQM(player, npc, ID.mob.ARMED_GEARS)
     then
         -- Trade Ferrite

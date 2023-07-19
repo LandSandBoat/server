@@ -10,8 +10,6 @@
 -- DEF +11% (Max. 125)
 -- Enmity +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

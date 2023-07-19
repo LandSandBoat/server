@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         aLittleKnowledge == QUEST_COMPLETED and
         mJob == xi.job.SCH and
         mLvl >= 5 and
-        not (player:hasSpell(478) and player:hasSpell(502))
+        not (player:hasSpell(xi.magic.spell.EMBRAVA) and player:hasSpell(xi.magic.spell.KAUSTRA))
     then
         player:startEvent(47)
     elseif
@@ -66,9 +66,12 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 47 then
-        if player:canLearnSpell(478) and player:canLearnSpell(502) then
-            player:addSpell(478, true)
-            player:addSpell(502, true)
+        if
+            player:canLearnSpell(xi.magic.spell.EMBRAVA) and
+            player:canLearnSpell(xi.magic.spell.KAUSTRA)
+        then
+            player:addSpell(xi.magic.spell.EMBRAVA, true)
+            player:addSpell(xi.magic.spell.KAUSTRA, true)
             player:messageSpecial(ID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
         end
     elseif csid == 18 then
@@ -83,8 +86,8 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
             player:delKeyItem(xi.ki.SCHULTZS_SEALED_LETTER)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
-            player:addItem(6058) --klimaform
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 6058)
+            player:addItem(xi.items.KLIMAFORM_SCHEMA) --klimaform
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.KLIMAFORM_SCHEMA)
             player:setCharVar("onSabbatical", 0)
             player:setCharVar("Erlene_Sabbatical_Timer", VanadielDayOfTheYear())
         end
@@ -98,8 +101,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
-            player:addItem(15004) -- Schlar's Bracers
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 15004)
+            player:addItem(xi.items.SCHOLARS_BRACERS) -- Schlar's Bracers
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCHOLARS_BRACERS)
             player:setCharVar("DownwardHelix", 0)
         end
     end

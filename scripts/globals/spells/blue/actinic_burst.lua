@@ -15,7 +15,6 @@
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

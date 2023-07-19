@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 549) then -- Delkfutt Key
+    if npcUtil.tradeHas(trade, xi.items.DELKFUTT_KEY) then -- Delkfutt Key
         player:startEvent(6)
     end
 end

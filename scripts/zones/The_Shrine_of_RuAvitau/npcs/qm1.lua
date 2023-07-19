@@ -8,7 +8,10 @@ local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1195, 1) and trade:getItemCount() == 1 then -- Trade Ro'Maeve Water
+    if
+        trade:hasItemQty(xi.items.FLASK_OF_ROMAEVE_SPRING_WATER, 1) and
+        trade:getItemCount() == 1
+    then
         for i = ID.mob.OLLAS_OFFSET, ID.mob.OLLAS_OFFSET + 2 do
             if GetMobByID(i):isSpawned() then
                 return

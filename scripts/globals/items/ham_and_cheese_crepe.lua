@@ -10,8 +10,6 @@
 -- Magic Defense +3
 -- hHP +2
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

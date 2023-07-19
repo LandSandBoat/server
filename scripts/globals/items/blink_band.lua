@@ -3,8 +3,6 @@
 -- Item: Blink Band
 -- Item Effect: 3 shadows
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

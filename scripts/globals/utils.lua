@@ -97,8 +97,19 @@ function utils.join(input1, input2)
     return result
 end
 
+-- For use alongside os.time()
 function utils.minutes(minutes)
     return minutes * 60
+end
+
+-- For use alongside os.time()
+function utils.hours(hours)
+    return hours * 60 * 60
+end
+
+-- For use alongside os.time()
+function utils.days(days)
+    return days * 60 * 60 * 24
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val

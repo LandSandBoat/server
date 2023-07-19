@@ -8,7 +8,6 @@
 -- But for a glorious few days, BRDs could tank surprisingly well.
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/spell_data")
 -----------------------------------
 local m = Module:new("mazurka_generates_enmity")
 
@@ -17,7 +16,10 @@ local raptorMazurkaPower = 1.1
 
 local mazurkaProvoke = function(caster, target, spell, power)
     -- If not Mazurka, bail out
-    if spell:getID() ~= xi.magic.spell.CHOCOBO_MAZURKA and spell:getID() ~= xi.magic.spell.RAPTOR_MAZURKA then
+    if
+        spell:getID() ~= xi.magic.spell.CHOCOBO_MAZURKA and
+        spell:getID() ~= xi.magic.spell.RAPTOR_MAZURKA
+    then
         return
     end
 

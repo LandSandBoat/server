@@ -6,9 +6,9 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2127) then
+    if npcUtil.tradeHas(trade, xi.items.METAL_CHIP) then
         player:startEvent(221, 65)
-    elseif npcUtil.tradeHas(trade, { 1909, 1910, 1987, 1988 }) then
+    elseif npcUtil.tradeHas(trade, { xi.items.SMALT_CHIP, xi.items.SMOKY_CHIP, xi.items.CHARCOAL_CHIP, xi.items.MAGENTA_CHIP }) then
         player:startEvent(221, 33)
     end
 end
@@ -20,7 +20,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     player:updateEvent(
         0,
-        GetServerVariable("[SE_APOLLYON]Time"),      -- SW Apollyon
+        GetServerVariable("[SW_APOLLYON]Time"),      -- SW Apollyon
         GetServerVariable("[NW_APOLLYON]Time"),      -- NW Apollyon
         GetServerVariable("[SE_APOLLYON]Time"),      -- SE Apollyon
         GetServerVariable("[NE_APOLLYON]Time"),      -- NE Apollyon

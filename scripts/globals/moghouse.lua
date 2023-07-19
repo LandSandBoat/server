@@ -166,6 +166,25 @@ xi.moghouse.moogleTrade = function(player, npc, trade)
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 2, xi.moghouse.getMogLockerExpiryTimestamp(player))
             end
         end
+
+        local eggComponents =
+        {
+            xi.items.EGG_LOCKER,
+            xi.items.EGG_TABLE,
+            xi.items.EGG_STOOL,
+            xi.items.EGG_LANTERN,
+        }
+
+        if npcUtil.tradeHasExactly(trade, eggComponents) then
+            if npcUtil.giveItem(player, xi.items.EGG_BUFFET) then
+                player:confirmTrade()
+            end
+
+        elseif npcUtil.tradeHasExactly(trade, xi.items.EGG_BUFFET) then
+            if npcUtil.giveItem(player, eggComponents) then
+                player:confirmTrade()
+            end
+        end
     end
 end
 

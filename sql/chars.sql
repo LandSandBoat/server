@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `chars`;
 CREATE TABLE `chars` (
   `charid` int(10) unsigned NOT NULL,
   `accid` int(10) unsigned NOT NULL,
+  `original_accid` int(10) unsigned NOT NULL DEFAULT '0',
   `charname` varchar(15) NOT NULL,
   `nation` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `pos_zone` smallint(3) unsigned NOT NULL,

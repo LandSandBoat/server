@@ -2,7 +2,6 @@
 -- Area: Mamook
 --  Mob: Hundredfaced Hapool Ja
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/titles")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

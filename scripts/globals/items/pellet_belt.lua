@@ -3,8 +3,6 @@
 --   Pellet Belt
 --   When used, you will obtain 12 Pebbles
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17296, 12)
+    target:addItem(xi.items.PEBBLE, 12)
 end
 
 return itemObject

@@ -33,14 +33,14 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(299) then
-            player:addSpell(299)
+        if not player:hasSpell(xi.magic.spell.TITAN) then
+            player:addSpell(xi.magic.spell.TITAN)
             player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
         end
 
-        if not player:hasItem(4181) then
-            player:addItem(4181) -- Scroll of instant warp
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
+        if not player:hasItem(xi.items.SCROLL_OF_INSTANT_WARP) then
+            player:addItem(xi.items.SCROLL_OF_INSTANT_WARP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_INSTANT_WARP)
         end
 
         player:addFame(xi.quest.fame_area.BASTOK, 30)

@@ -6,7 +6,6 @@
 -- Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

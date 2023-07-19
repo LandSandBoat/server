@@ -3,7 +3,6 @@
 -- B. Rem. Fireflies
 -- Transports the user out of Bhaflau Remnants
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

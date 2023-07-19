@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 5210) and
+        npcUtil.tradeHas(trade, xi.items.BOWL_OF_ADAMANTOISE_SOUP) and
         npcUtil.popFromQM(player, npc, ID.mob.KURREA)
     then
-        -- Adamantoise Soup
         player:messageSpecial(ID.text.KURREA_TEXT + 1, xi.items.BOWL_OF_ADAMANTOISE_SOUP)
         player:confirmTrade()
     end

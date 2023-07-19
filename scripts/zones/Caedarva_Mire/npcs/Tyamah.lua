@@ -4,11 +4,13 @@
 -- Type: Alzadaal Undersea Ruins
 -- !pos 320.003 0.124 -700.011 79
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:getItemCount() == 1 and trade:hasItemQty(2185, 1) then -- Silver
+    if
+        trade:getItemCount() == 1 and
+        trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1)
+    then
         player:tradeComplete()
         player:startEvent(163)
     end
