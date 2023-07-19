@@ -630,6 +630,21 @@ function utils.splitStr(s, sep)
     return fields
 end
 
+-- Remove whitespace from the beginning and end of a string
+function utils.trimStr(s)
+    local s1 = string.gsub(s, "^s%+", "")
+    return string.gsub(s1, "%s+$", "")
+end
+
+-- Split a single string argument into multiple arguments
+function utils.splitArg(s)
+    local comma   = string.gsub(s, ",", " ")
+    local spaces  = string.gsub(comma, "%s+", " ")
+    local trimmed = utils.trimStr(spaces)
+
+    return utils.splitStr(trimmed, " ")
+end
+
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     --TODO Table of animations that are used for teleports for reference
 
