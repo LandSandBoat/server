@@ -70,6 +70,7 @@ zones[xi.zone.WINDURST_WOODS] =
         NOKKHI_BAD_COUNT              = 9788,  -- What kinda smart-alecky baloney is this!? I told you to bring me the same kinda ammunition in complete sets. And don't forget the flowers, neither.
         NOKKHI_GOOD_TRADE             = 9790,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM               = 9791,  -- I'm real sorry, but there's nothing I can do with those.
+        EGG_HUNT_OFFSET               = 9797,  -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         MILLEROVIEUNET_OPEN_DIALOG    = 10016, -- Please have a look at these wonderful products from Qufim Island! You won't regret it!
         MILLEROVIEUNET_CLOSED_DIALOG  = 10017, -- Now that I've finally learned the language here, I'd like to start my own business. If I could only find a supplier...
         CLOUD_BAD_COUNT               = 10142, -- Well, don't just stand there like an idiot! I can't do any bundlin' until you fork over a set of 99 tools and <item>! And I ain't doin' no more than seven sets at one time, so don't even try it!
