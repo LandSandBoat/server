@@ -7,11 +7,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(497)
+    return target:canLearnSpell(xi.magic.spell.BLIZZAJA)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(497)
+    target:addSpell(xi.magic.spell.BLIZZAJA)
 end
 
 return itemObject
