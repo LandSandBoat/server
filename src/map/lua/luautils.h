@@ -310,11 +310,11 @@ namespace luautils
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
     int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
-    uint32 GetMobRespawnTime(uint32 mobid);                        // get the respawn time of a mob
-    void   DisallowRespawn(uint32 mobid, bool allowRespawn);       // Allow or prevent a mob from spawning
-    void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
-    void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
-    int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
+    uint32 GetMobRespawnTime(uint32 mobid);                  // get the respawn time of a mob
+    void   DisallowRespawn(uint32 mobid, bool allowRespawn); // Allow or prevent a mob from spawning
+    void   UpdateNMSpawnPoint(uint32 mobid);                 // Update the spawn point of an NM
+
+    std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
