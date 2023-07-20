@@ -73,6 +73,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid >= 150 and csid <= 159 then
         xi.teleport.clearEnmityList(player)
+        player:setLocalVar("Hu-Xzoi-TP", 0)
     end
 end
 
