@@ -149,9 +149,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
                                 "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = %d), "
                                 "partyid = %d) GROUP BY server_addr, server_port;";
 
-            uint32 partyid                        = ref<uint32>((uint8*)extra->data(), 0);
-            ref<uint32>((uint8*)extra->data(), 0) = sql->GetUIntData(2);
-            ret                                   = sql->Query(query, partyid, partyid);
+            uint32 partyid = ref<uint32>((uint8*)extra->data(), 0);
+            ret            = sql->Query(query, partyid, partyid);
             break;
         }
         case MSG_CHAT_LINKSHELL:
