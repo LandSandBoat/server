@@ -25,7 +25,7 @@
 #include <cstring>
 
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 #include "trade_update.h"
 

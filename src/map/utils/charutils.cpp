@@ -91,8 +91,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../treasure_pool.h"
 #include "../unitychat.h"
 #include "../universal_container.h"
-#include "../vana_time.h"
 #include "../weapon_skill.h"
+#include "common/vana_time.h"
 
 #include "../entities/automatonentity.h"
 #include "../entities/charentity.h"

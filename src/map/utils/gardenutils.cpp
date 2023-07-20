@@ -30,7 +30,7 @@
 #include "../items/item_flowerpot.h"
 #include "../map.h"
 #include "../packets/inventory_item.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 #define MAX_RESULTID 2500
 

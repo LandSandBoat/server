@@ -34,6 +34,8 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/xirand.h
     ${CMAKE_CURRENT_SOURCE_DIR}/utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/version.cpp # auto-generated
     ${CMAKE_CURRENT_SOURCE_DIR}/version.h
     ${CMAKE_CURRENT_SOURCE_DIR}/watchdog.cpp

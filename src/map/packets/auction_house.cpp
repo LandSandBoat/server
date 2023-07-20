@@ -28,7 +28,7 @@
 #include "../entities/charentity.h"
 #include "../map.h"
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 bool IsAuctionOpen = true; // Trading is allowed at the auction
 

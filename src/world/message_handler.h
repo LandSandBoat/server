@@ -21,9 +21,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class BesiegedSystem
+#include "common/mmo.h"
+
+class IMessageHandler
 {
 public:
-    BesiegedSystem()  = default;
-    ~BesiegedSystem() = default;
+    virtual ~IMessageHandler()
+    {
+    }
+
+    /*
+     * NOTE: The copy of payload here is intentional, since these systems will eventually
+     *     : be moved to their own threads.
+     */
+    virtual bool handleMessage(std::vector<uint8> payload,
+                               in_addr            from_addr,
+                               uint16             from_port) = 0;
 };

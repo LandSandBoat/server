@@ -27,7 +27,7 @@
 #include "bazaar_item.h"
 
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {

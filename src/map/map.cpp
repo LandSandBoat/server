@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
+#include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
@@ -51,7 +52,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "time_server.h"
 #include "transport.h"
-#include "vana_time.h"
 #include "zone.h"
 #include "zone_entities.h"
 

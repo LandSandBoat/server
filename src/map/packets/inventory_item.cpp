@@ -27,7 +27,7 @@
 #include "inventory_item.h"
 
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {

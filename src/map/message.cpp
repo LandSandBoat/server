@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "message.h"
 
 #include "alliance.h"
+#include "conquest_system.h"
 #include "linkshell.h"
 #include "party.h"
 #include "status_effect_container.h"
@@ -663,6 +664,46 @@ namespace message
                         ShowError("message::parse::MSG_RPC_RECV: %s", err.what());
                     }
                     replyMap.erase(slotKey);
+                }
+
+                break;
+            }
+            case MSG_WORLD2MAP_REGIONAL_EVENT:
+            {
+                // Extract data
+                uint8* data      = (uint8*)extra.data();
+                uint8  eventType = ref<uint8>(data, 0);
+                // uint8  subtype   = ref<uint8>(data, 1);
+
+                // Handle each event type and subtype.
+                switch (eventType)
+                {
+                    case REGIONAL_EVT_MSG_CONQUEST:
+                    {
+                        conquest::HandleZMQMessage(data);
+                        break;
+                    }
+                    /*
+                    case REGIONAL_EVT_MSG_BESIEGED:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_CAMPAIGN:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_COLONIZATION:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    */
+                    default:
+                    {
+                        ShowWarning("Message: unhandled regional event type %d", eventType);
+                    }
                 }
 
                 break;

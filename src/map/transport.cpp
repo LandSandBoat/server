@@ -22,12 +22,12 @@
 #include "transport.h"
 
 #include "../common/timer.h"
+#include "common/vana_time.h"
 #include "entities/charentity.h"
 #include "map.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 #include "zone.h"
 #include <cstdlib>
 
