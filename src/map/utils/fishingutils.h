@@ -676,6 +676,17 @@ enum FISHINGBAITTYPE : uint8
     FISHINGBAITTYPE_SPECIAL = 2  // Used to fish up NM, one time use only
 };
 
+enum FISHINGBAITID : uint16
+{
+    FISHINGBAIT_SUPER_SCOOP = 17003,
+};
+
+enum GOLDFISH_FISHID : uint16
+{
+    TINY_GOLDFISH   = 4310,
+    BLACK_BUBBLEEYE = 4311,
+};
+
 enum FISHINGBAITPOWER : uint8
 {
     FISHINGBAITPOWER_NONE     = 0, // will not catch
@@ -694,7 +705,8 @@ enum FISHINGBOUNDTYPE : uint8
 enum FISHFLAG : uint32
 {
     FISHFLAG_NORMAL    = 0x00,
-    FISHFLAG_SHELLFISH = 0x01
+    FISHFLAG_SHELLFISH = 0x01,
+    FISHFLAG_GOLDFISH  = 0x02,
 };
 
 enum RODFLAG : uint32
@@ -858,6 +870,8 @@ enum FISHINGGEAR : uint32
     ANGLERS_TUNICA    = 13809,
     FISHERMANS_APRON  = 14400,
     FISHERMANS_SMOCK  = 11337,
+    LORDS_YUKATA      = 13821,
+    LADYS_YUKATA      = 13822,
     // hands
     FISHERMANS_GLOVES = 14070,
     ANGLERS_GLOVES    = 14071,
@@ -951,7 +965,7 @@ namespace fishingutils
                                           uint32 legendary_flags, uint8 sizeType, rod_t* rod, bait_t* bait);
     uint8               CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill,
                                              uint8 catchSkill, uint8 sizeType, rod_t* rod, bait_t* bait, bool legendary);
-    uint16              CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod);
+    uint16              CalculateHookChance(CCharEntity* PChar, uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod);
     uint8               CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count);
     uint8               CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count);
     uint8               CalculateFishSense(CCharEntity* PChar, fishresponse_t* response,

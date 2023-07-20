@@ -105,8 +105,13 @@ INSERT INTO `fishing_bait_affinity` VALUES (16999,4307,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5462,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,4354,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5458,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16999,5330,10);
-INSERT INTO `fishing_bait_affinity` VALUES (16999,5329,10);
+INSERT INTO `fishing_bait_affinity` VALUES (16999,5330,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (16999,5329,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4310,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4311,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4312,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,5714,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,5715,10); -- Goldfish Scooping (Sunbreeze Festival)
 INSERT INTO `fishing_bait_affinity` VALUES (17006,5127,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17006,5468,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17006,4475,2);
