@@ -323,6 +323,27 @@ auto CLuaItem::getSoulPlateData() -> sol::table
     return table;
 }
 
+auto CLuaItem::getExData() -> sol::table
+{
+    sol::table table = lua.create_table();
+    for (std::size_t idx = 0; idx < m_PLuaItem->extra_size; ++idx)
+    {
+        table[idx] = m_PLuaItem->m_extra[idx];
+    }
+    return table;
+}
+
+void CLuaItem::setExData(sol::table newData)
+{
+    for (auto const& [keyObj, valObj] : newData)
+    {
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+
+        m_PLuaItem->m_extra[key] = val;
+    }
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -359,6 +380,8 @@ void CLuaItem::Register()
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);
+    SOL_REGISTER("getExData", CLuaItem::getExData);
+    SOL_REGISTER("setExData", CLuaItem::setExData);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaItem& item)
