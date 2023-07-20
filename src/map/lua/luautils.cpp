@@ -204,7 +204,6 @@ namespace luautils
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
-        lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
@@ -5035,30 +5034,27 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *   DEPRECATED: Use mob:addListener("ITEM_DROPS", ...) instead.         *
-     *   Change drop rate of a mob                                           *
-     *   1st number: dropid in mob_droplist.sql                              *
-     *   2nd number: itemid in mob_droplist.sql                              *
-     *   3rd number: new rate                                                *
-     ************************************************************************/
-
-    void SetDropRate(uint16 dropid, uint16 itemid, uint16 rate)
+    std::string GetServerMessage(uint8 language)
     {
         TracyZoneScoped;
 
-        DropList_t* DropList = itemutils::GetDropList(dropid);
-
-        if (DropList != nullptr)
+        // xi.server.getServerMessage = function(language) ...
+        auto getServerMessage = lua["xi"]["server"]["getServerMessage"];
+        if (!getServerMessage.valid())
         {
-            for (auto& Item : DropList->Items)
-            {
-                if (Item.ItemID == itemid)
-                {
-                    Item.DropRate = rate;
-                }
-            }
+            ShowWarning("luautils::getServerMessage");
+            return "";
         }
+
+        auto result = getServerMessage(language);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::getServerMessage: %s", err.what());
+            return "";
+        }
+
+        return result.get_type() == sol::type::string ? result.get<std::string>() : "";
     }
 
     /***************************************************************************
