@@ -69,6 +69,23 @@ function onTrigger(player)
         })
 
         table.insert(menu.options, {
+            "Debug #1",
+            function(playerArg)
+                playerArg:deleteRaisedChocobo()
+
+                local egg = {}
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                player:setChocoboRaisingInfo(newChoco)
+
+                local info = playerArg:getChocoboRaisingInfo()
+                info["created"] = info["created"] - (epochDay * 10)
+                playerArg:setChocoboRaisingInfo(info)
+
+                playerArg:PrintToPlayer("Setting up debug scenario 1 (10d update)", xi.msg.channel.SYSTEM_3, "")
+            end,
+        })
+
+        table.insert(menu.options, {
             "Change sex",
             function(playerArg)
                 local info = playerArg:getChocoboRaisingInfo()
@@ -113,6 +130,23 @@ function onTrigger(player)
             "Give Egg",
             function(playerArg)
                 npcUtil.giveItem(playerArg, xi.items.CHOCOBO_EGG_SLIGHTLY_WARM)
+            end,
+        })
+
+        table.insert(menu.options, {
+            "Debug #1",
+            function(playerArg)
+                playerArg:deleteRaisedChocobo()
+
+                local egg = {}
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                player:setChocoboRaisingInfo(newChoco)
+
+                local info = playerArg:getChocoboRaisingInfo()
+                info["created"] = info["created"] - (epochDay * 10)
+                playerArg:setChocoboRaisingInfo(info)
+
+                playerArg:PrintToPlayer("Setting up debug scenario 1 (10d update)", xi.msg.channel.SYSTEM_3, "")
             end,
         })
     end

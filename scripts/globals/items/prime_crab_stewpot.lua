@@ -14,8 +14,6 @@
 -- Defense 20% Cap 75
 -- Evasion +6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

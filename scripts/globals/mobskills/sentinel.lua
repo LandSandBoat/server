@@ -1,8 +1,6 @@
 -----------------------------------
 -- Sentinel
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

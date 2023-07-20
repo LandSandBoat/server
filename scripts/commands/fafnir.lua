@@ -24,6 +24,10 @@ function onTrigger(player)
         -- NOTE: This name CAN include spaces and underscores.
         name = "Fafnir",
 
+        -- Optional: Define a different name that is visible to players.
+        -- "Fafnir" (DE_Fafnir) will still be used internally for lookups.
+        -- packetName = "Fake Fafnir",
+
         -- Set the position using in-game x, y and z
         x = player:getXPos(),
         y = player:getYPos(),

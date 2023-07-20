@@ -3,8 +3,6 @@
 -- Toolbag Sai
 -- When used, you will obtain one stack of sairui-ran
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1188, 99)
+    target:addItem(xi.items.SAIRUI_RAN, 99)
 end
 
 return itemObject

@@ -3325,11 +3325,17 @@ namespace charutils
 
     void CheckWeaponSkill(CCharEntity* PChar, uint8 skill)
     {
-        auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
-        if (!weapon || weapon->getSkillType() != skill)
+        auto* weapon       = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
+        auto* rangedWeapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_RANGED]);
+
+        bool noOrInvalidMainWeapon   = !weapon || weapon->getSkillType() != skill;
+        bool noOrInvalidRangedWeapon = !rangedWeapon || rangedWeapon->getSkillType() != skill;
+
+        if (noOrInvalidMainWeapon && noOrInvalidRangedWeapon)
         {
             return;
         }
+
         const auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
         uint16      curSkill        = PChar->RealSkills.skill[skill] / 10;
 
@@ -5911,6 +5917,10 @@ namespace charutils
             if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE)
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_ACCESSION);
+            }
+            if (PSpell->getSkillType() == SKILL_ENHANCING_MAGIC)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_PERPETUANCE);
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)

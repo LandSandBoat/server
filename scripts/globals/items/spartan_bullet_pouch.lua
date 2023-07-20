@@ -3,8 +3,6 @@
 -- Spartan Bullet Pouch
 -- When used, you will obtain one stack of Spartan Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18160, 99)
+    target:addItem(xi.items.SPARTAN_BULLET, 99)
 end
 
 return itemObject

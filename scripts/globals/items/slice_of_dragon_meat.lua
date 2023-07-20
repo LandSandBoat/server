@@ -7,8 +7,6 @@
 -- Intelligence -8
 -- Demon Killer +2 (?)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

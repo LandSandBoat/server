@@ -3,8 +3,6 @@
 -- Item: Vampire Juice
 -- Item Effect: Restores 60 HP and MP over 90 seconds.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

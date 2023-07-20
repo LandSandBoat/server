@@ -12,8 +12,6 @@
 -- Ranged ATT % 27 (cap 35)
 -- Evasion 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

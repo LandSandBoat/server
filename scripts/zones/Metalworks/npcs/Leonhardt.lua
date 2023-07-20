@@ -7,7 +7,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("TOO_MANY_CHEFS") == 3 then
-        if trade:hasItemQty(2527, 1) then -- Trade Red Oven Mitt
+        if trade:hasItemQty(xi.items.RED_OVEN_MITT, 1) then
             player:tradeComplete()
             player:startEvent(950)
         end

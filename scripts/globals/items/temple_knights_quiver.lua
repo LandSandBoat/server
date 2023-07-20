@@ -3,8 +3,6 @@
 -- Temple Knight's Quiver
 -- When used, you will obtain one Temple Knight's Arrow
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18738)
+    target:addItem(xi.items.TEMPLE_KNIGHTS_ARROW)
 end
 
 return itemObject

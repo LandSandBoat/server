@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1159) and
+        npcUtil.tradeHas(trade, xi.items.WYVERN_EGG) and
         player:getCharVar("TheHolyCrest_Event") == 4
     then
         player:startEvent(56)

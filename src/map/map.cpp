@@ -38,6 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
+#include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
 #include "message.h"

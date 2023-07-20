@@ -620,13 +620,13 @@ end
 
 function xi.sparkshop.onTrade(player, npc, trade, eventid)
     local copperVouchersStored = player:getCurrency("aman_vouchers")
-    local count = trade:getItemQty(8711)
+    local count = trade:getItemQty(xi.items.COPPER_AMAN_VOUCHER)
 
     if count > 0 then
-        trade:confirmItem(8711, count)
+        trade:confirmItem(xi.items.COPPER_AMAN_VOUCHER, count)
         player:addCurrency("aman_vouchers", count)
         player:confirmTrade()
-        player:startEvent(eventid, 8711, count + copperVouchersStored, 230)
+        player:startEvent(eventid, xi.items.COPPER_AMAN_VOUCHER, count + copperVouchersStored, 230)
     end
 end
 
@@ -726,7 +726,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
             end
             player:messageSpecial(zones[player:getZoneID()].text.YOU_NOW_HAVE_AMT_CURRENCY, selection, player:getCurrency(currency.name))
         else
-            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
+            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, xi.items.COPPER_AMAN_VOUCHER)
         end
 
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
@@ -741,7 +741,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, selection)
             end
         else
-            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
+            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, xi.items.COPPER_AMAN_VOUCHER)
         end
 
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))

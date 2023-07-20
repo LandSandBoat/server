@@ -117,7 +117,7 @@ mission.sections =
                     if missionStatus == 11 then
                         return mission:progressEvent(507)
                     elseif missionStatus == 0 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust = (not player:hasSpell(xi.magic.spell.HALVER) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(505, { [7] = needsHalverTrust })
                     else
@@ -133,7 +133,7 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
 
                     if
-                        not player:hasSpell(972) and
+                        not player:hasSpell(xi.magic.spell.HALVER) and
                         not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)

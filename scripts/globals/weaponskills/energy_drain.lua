@@ -2,7 +2,6 @@
 -- Energy Drain
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/msg")
 -----------------------------------
 local weaponskillObject = {}
 

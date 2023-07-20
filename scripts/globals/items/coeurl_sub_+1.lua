@@ -15,8 +15,6 @@
 -- Sleep Resist 1
 -- Stun Resist 4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

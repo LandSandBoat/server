@@ -2,8 +2,6 @@
 -- ID: 4203
 -- vitality_potion
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

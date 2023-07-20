@@ -3,7 +3,6 @@
 --  NPC: Degga
 -- !pos 40 -68 -259
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

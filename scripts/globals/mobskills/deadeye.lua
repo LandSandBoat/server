@@ -8,7 +8,6 @@
 -- Notes: Used only by certain Notorious Monsters. Strong xi.effect.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

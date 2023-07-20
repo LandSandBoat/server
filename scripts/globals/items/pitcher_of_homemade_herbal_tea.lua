@@ -9,8 +9,6 @@
 -- Ranged Attack +10% (cap 40)
 -- hHP +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

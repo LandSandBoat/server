@@ -3,8 +3,6 @@
 -- Old Quiver +7
 -- When used, you will obtain one partial stack of Crude Arrows +7
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Toolbag Ino
 -- When used, you will obtain one stack of inoshishinofuda
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2971, 99)
+    target:addItem(xi.items.INOSHISHINOFUDA, 99)
 end
 
 return itemObject

@@ -10,8 +10,6 @@
 -- MP Recovered While Healing 2
 -- Enmity -4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

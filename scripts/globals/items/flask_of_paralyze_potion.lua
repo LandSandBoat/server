@@ -3,8 +3,6 @@
 -- Item: Paralyze Potion
 -- Item Effect: This potion induces paralyze.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

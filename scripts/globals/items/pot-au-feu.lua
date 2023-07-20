@@ -10,8 +10,6 @@
 -- Ranged ACC % 10 Cap 50
 -- Enmity -3
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

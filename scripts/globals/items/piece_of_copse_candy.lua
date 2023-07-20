@@ -1,9 +1,7 @@
 -----------------------------------
 -- ID: 6008
--- Copse Candy
--- Enchantment: 60Min, Costume - Ygnas
------------------------------------
-require("scripts/globals/msg")
+-- Piece of Copse Candy
+-- Enchantment: 60Min, Costume - Leafkin
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.COSTUME, 3118, 0, 3600)
+    target:addStatusEffect(xi.effect.COSTUME, 2706, 0, 3600)
 end
 
 return itemObject

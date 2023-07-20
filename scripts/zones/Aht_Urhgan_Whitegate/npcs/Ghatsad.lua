@@ -46,7 +46,7 @@ local headAndFrameItems =
 
     [3] =
     {
-        xi.items.ROSEWOOD_LUMBER,
+        xi.items.PIECE_OF_ROSEWOOD_LUMBER,
         xi.items.SQUARE_OF_KARAKUL_CLOTH,
         xi.items.SQUARE_OF_KARAKUL_LEATHER,
         xi.items.HEAVY_CROSSBOW
@@ -54,7 +54,7 @@ local headAndFrameItems =
 
     [4] =
     {
-        xi.items.GOLD_THREAD,
+        xi.items.SPOOL_OF_GOLD_THREAD,
         xi.items.SQUARE_OF_VELVET_CLOTH,
         xi.items.SQUARE_OF_WAMOURA_CLOTH,
         xi.items.BRASS_RING

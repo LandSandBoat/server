@@ -6,7 +6,6 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

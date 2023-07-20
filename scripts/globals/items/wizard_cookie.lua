@@ -7,8 +7,6 @@
 -- Plantoid Killer 12
 -- Slow Resist 12
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

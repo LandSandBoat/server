@@ -1,9 +1,6 @@
 -----------------------------------
 -- Enhancing Spell Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
-require("scripts/globals/msg")
------------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
 xi.spells.enhancing = xi.spells.enhancing or {}

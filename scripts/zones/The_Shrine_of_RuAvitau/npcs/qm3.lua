@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2388) and
+        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_DIORITE) and
         npcUtil.popFromQM(player, npc, ID.mob.ULLIKUMMI)
     then
         -- Diorite

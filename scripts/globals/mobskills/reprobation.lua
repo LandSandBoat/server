@@ -6,7 +6,6 @@
 -- Range: Area of Effect
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

@@ -13,7 +13,6 @@
 -- Combos: Resist Sleep
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

@@ -2,8 +2,6 @@
 -- ID: 5412
 -- scapegoat
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

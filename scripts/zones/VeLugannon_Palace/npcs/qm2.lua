@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 16575) and
+        npcUtil.tradeHas(trade, xi.items.CURTANA) and
         npcUtil.popFromQM(player, npc, ID.mob.BRIGANDISH_BLADE)
     then
         player:confirmTrade()

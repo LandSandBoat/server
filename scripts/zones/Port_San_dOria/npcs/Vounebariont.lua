@@ -11,7 +11,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE then
-        if trade:hasItemQty(889, 5) and trade:getItemCount() == 5 then -- Trade Beetle Shell
+        if
+            trade:hasItemQty(xi.items.BEETLE_SHELL, 5) and
+            trade:getItemCount() == 5
+        then
             player:startEvent(514)
         end
     end

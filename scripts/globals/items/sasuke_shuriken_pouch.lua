@@ -3,8 +3,6 @@
 -- Sasu. Sh. Pouch
 -- A small leather pouch made for storing sasuke shuriken.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(22276, 99)
+    target:addItem(xi.items.SASUKE_SHURIKEN, 99)
 end
 
 return itemObject

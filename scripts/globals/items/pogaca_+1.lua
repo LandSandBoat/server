@@ -8,8 +8,6 @@
 -- HP Recovered While Healing 6
 -- MP Recovered While Healing 6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

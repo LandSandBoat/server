@@ -8,8 +8,6 @@
 -- Magic Accuracy 6
 -- Undead Killer 6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

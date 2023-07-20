@@ -2,8 +2,6 @@
 -- ID: 15296
 -- tathlum_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17298, 8) -- tathlum
+    target:addItem(xi.items.TATHLUM, 8) -- tathlum
 end
 
 return itemObject

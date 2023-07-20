@@ -3,7 +3,6 @@
 -- Description: Reduces tp to zero.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

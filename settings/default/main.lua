@@ -211,6 +211,35 @@ xi.settings.main =
     EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
     HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
+    EGG_HUNT                        =
+    {
+        START                       = { DAY = 6,  MONTH = 4 },
+        FINISH                      = { DAY = 17, MONTH = 4 },
+
+        -- Default era is 2005
+        ERA_2006 = false, -- Orphic Egg
+        ERA_2007 = false, -- Jeweled Egg and Egg Helm
+        ERA_2008 = false, -- Tier 2 nation eggs, allows trading Hard-Boiled Eggs
+        ERA_2009 = false, -- Egg Buffet set
+        -- 2009, 2010, 2011 and 2012 are identical
+        ERA_2013 = false, -- Prinseggstarta
+        ERA_2014 = false, -- Hatchling Shield, Copse Candy, Cracker
+        ERA_2015 = false, -- Rabbit Cap, show Rabbit Cap wearing NPCs
+        ERA_2018 = false, -- Allows trading Sairui-Ran x99 and Imperial Egg
+        ERA_2019 = false, -- Allows trading Apkallu Egg
+
+        -- Consolation prizes for repeating combinations where
+        -- the player has already received the relevant reward
+        MINOR_REWARDS = true,
+
+        -- Set custom combinations, eg. WORD = 12345
+        -- Where WORD  is an arrangement of lettered eggs
+        -- Where 12345 is the itemID for the reward
+        BONUS_WORDS =
+        {
+            -- WORD = 12345,
+        },
+    },
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
@@ -229,6 +258,11 @@ xi.settings.main =
     ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
     ENABLE_VIGIL_DROPS   = true, -- Enable Vigil Weapon drops from NMs.
     ACTIVATE_LAMP_TIME   = 6000, -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
+
+    -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
+    -- GM command: `!chocoboraising`
+    ENABLE_CHOCOBO_RAISING = false, -- true/false. Enable Chocobo Raising features.
+    DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
 
     -- MISC
     AVATAR_DAMAGE_MOD            = .6,

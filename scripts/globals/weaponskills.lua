@@ -15,7 +15,6 @@ require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 
 -- Obtains alpha, used for working out WSC on legacy servers

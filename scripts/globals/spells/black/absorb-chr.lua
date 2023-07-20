@@ -3,7 +3,6 @@
 -- Steals an enemy's Charism.
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

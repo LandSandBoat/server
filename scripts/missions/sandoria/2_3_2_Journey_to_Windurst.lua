@@ -55,7 +55,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        local needsSemihTrust = (not player:hasSpell(940) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, needsSemihTrust)
                     elseif missionStatus == 5 then
@@ -95,7 +95,7 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.SHIELD_OFFERING)
 
                     if
-                        not player:hasSpell(940) and
+                        not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
                         not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)

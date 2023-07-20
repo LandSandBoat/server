@@ -8,8 +8,6 @@
 -- INT +1
 -- Wind resistance +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

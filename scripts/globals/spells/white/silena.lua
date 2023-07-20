@@ -2,8 +2,6 @@
 -- Spell: Silena
 -- Removes silence and mute from target.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

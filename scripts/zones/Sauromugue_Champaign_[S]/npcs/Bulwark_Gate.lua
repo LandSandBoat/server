@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("KnotQuiteThere") == 1
     then
         if
-            trade:hasItemQty(2562, 1) and
+            trade:hasItemQty(xi.items.ONE_HUNDRED_EIGHT_KNOT_QUIPU, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then

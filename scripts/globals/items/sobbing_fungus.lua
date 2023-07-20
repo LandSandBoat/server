@@ -4,8 +4,6 @@
 -- Food Effect: 3 Mins, All Races
 -- Silence
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

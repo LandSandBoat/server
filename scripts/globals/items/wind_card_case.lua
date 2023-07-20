@@ -3,8 +3,6 @@
 -- Wind Card Case
 -- When used, you will obtain one stack of Wind Cards
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2178, 99)
+    target:addItem(xi.items.WIND_CARD, 99)
 end
 
 return itemObject

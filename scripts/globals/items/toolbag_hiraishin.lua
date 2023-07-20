@@ -3,8 +3,6 @@
 -- Toolbag Hira
 -- When used, you will obtain one stack of hiraishin
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1173, 99)
+    target:addItem(xi.items.HIRAISHIN, 99)
 end
 
 return itemObject

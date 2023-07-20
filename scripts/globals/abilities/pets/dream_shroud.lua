@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

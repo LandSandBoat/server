@@ -7,7 +7,6 @@
 require("scripts/globals/magicburst")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
