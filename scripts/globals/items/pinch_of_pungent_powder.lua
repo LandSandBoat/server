@@ -6,8 +6,6 @@
 -- Baby Coeurl (2921)
 -- Baby Bugard (2927)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local costumes = { 2920, 2921, 2927 }

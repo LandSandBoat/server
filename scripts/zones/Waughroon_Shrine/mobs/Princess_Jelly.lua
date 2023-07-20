@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/pathfind")
 require("scripts/globals/utils")
-require("scripts/globals/spell_data")
 -----------------------------------
 local elementalSpells =
 {

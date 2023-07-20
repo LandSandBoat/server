@@ -3,8 +3,6 @@
 -- Slime Belt
 -- Enchantment: 60Min, Costume - Slime
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

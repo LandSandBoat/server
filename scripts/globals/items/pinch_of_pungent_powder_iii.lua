@@ -6,8 +6,6 @@
 -- Baby Behemoth (2937)
 -- Baby Fafnir (2944)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 local costumes = { 2925, 2937, 2944 }
 

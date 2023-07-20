@@ -2,9 +2,6 @@
 -- func: !Chef
 -- desc: opens a Chef Shop.
 -----------------------------
-require("scripts/globals/msg")
------------------------------
-
 cmdprops =
 {
     permission = 0,

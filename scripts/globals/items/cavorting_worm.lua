@@ -3,8 +3,6 @@
 -- Cavorting Worm
 -- Enchantment: 60Min, Costume - Meeble
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

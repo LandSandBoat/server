@@ -3,8 +3,6 @@
 -- Yagudo Belt
 -- Enchantment: 60Min, Costume - Yagudo (Various [S])
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 local costumes = { 2085, 2114, 2115 }
 

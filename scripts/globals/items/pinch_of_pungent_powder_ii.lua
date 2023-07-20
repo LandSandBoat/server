@@ -6,8 +6,6 @@
 -- Baby Cockatrice (2916)
 -- Porxie (2928) QoL
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local costumes = { 2914, 2916, 2928 }

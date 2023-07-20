@@ -3,8 +3,6 @@
 -- Worm Masque +1
 -- Enchantment: 60Min, Costume - Big Worm
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

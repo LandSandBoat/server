@@ -7,8 +7,6 @@
 -- Goblin Dynamis (1090)
 -- Goblin on Chocobo (1249)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 local costumes = { 686, 997, 1090, 1249 }
 

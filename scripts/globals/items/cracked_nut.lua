@@ -3,8 +3,6 @@
 -- Cracked Nut
 -- Enchantment: 60Min, Costume - Colibri
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

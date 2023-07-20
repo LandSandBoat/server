@@ -3,8 +3,6 @@
 -- Beitetsu Parcel
 -- Breaks up a Beitetsu Parcel
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
