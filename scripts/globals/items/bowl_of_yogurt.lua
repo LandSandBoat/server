@@ -3,8 +3,6 @@
 -- Item: Yogurt
 -- Item Effect: Restores 60 HP over 180 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

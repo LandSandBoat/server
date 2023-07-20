@@ -159,8 +159,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:addFame(xi.quest.fame_area.NORG, 30)
     elseif csid == 865 and option == 2 then
-        player:addSpell(901, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
+        player:addSpell(xi.magic.spell.NANAA_MIHGO, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NANAA_MIHGO)
     end
 end
 

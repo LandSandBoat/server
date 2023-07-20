@@ -15,7 +15,10 @@ entity.onTrigger = function(player, npc)
     -- TODO: Use xi.items enum and table items.
     if
         player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and
-        not (player:hasItem(15962) or player:hasItem(15963) or player:hasItem(15964) or player:hasItem(15965))
+        not player:hasItem(xi.items.STATIC_EARRING) and
+        not player:hasItem(xi.items.MAGNETIC_EARRING) and
+        not player:hasItem(xi.items.HOLLOW_EARRING) and
+        not player:hasItem(xi.items.ETHEREAL_EARRING)
     then
         player:startEvent(5)
     else

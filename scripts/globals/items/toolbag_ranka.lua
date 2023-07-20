@@ -3,8 +3,6 @@
 -- Toolbag Ranka
 -- When used, you will obtain one stack of Ranka
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(8803, 99)
+    target:addItem(xi.items.RANKA, 99)
 end
 
 return itemObject

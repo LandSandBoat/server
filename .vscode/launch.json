@@ -11,6 +11,7 @@
                 "(Windows) xi_map",
                 "(Windows) xi_connect",
                 "(Windows) xi_search",
+                "(Windows) xi_world",
             ],
         }
     ],
@@ -121,5 +122,14 @@
             "MIMode": "lldb",
             "targetArchitecture": "x64",
         },
+        {
+          "name": "(OSX) xi_world",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/xi_world",
+          "cwd": "${workspaceFolder}",
+          "MIMode": "lldb",
+          "targetArchitecture": "x64"
+        }
     ],
 }

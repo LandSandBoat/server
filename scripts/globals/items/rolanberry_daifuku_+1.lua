@@ -18,8 +18,6 @@
 -- Magic Accuracy +80
 -- https://www.bg-wiki.com/bg/Rolan._Daifuku_%2B1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

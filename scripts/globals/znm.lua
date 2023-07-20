@@ -8,7 +8,6 @@
 -- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 require("scripts/globals/pankration")
 require("scripts/globals/utils")

@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         (ImmortalLuShang == QUEST_ACCEPTED or ImmortalLuShang == QUEST_COMPLETED) and
-        npcUtil.tradeHas(trade, { 720, 489, 4102 })
+        npcUtil.tradeHas(trade, { 720, xi.items.BROKEN_LU_SHANGS_FISHING_ROD, xi.items.LIGHT_CRYSTAL })
     then
         player:startEvent(78)
     elseif
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     local indomitableTimer = player:getCharVar("IndomitableSpiritTimer")
 
     if
-        player:hasItem(489) and
+        player:hasItem(xi.items.BROKEN_LU_SHANGS_FISHING_ROD) and
         (ImmortalLuShang == QUEST_AVAILABLE or ImmortalLuShang == QUEST_COMPLETED)
     then
         player:startEvent(77) --Offer the quest if the player has the broken rod

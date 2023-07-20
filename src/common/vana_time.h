@@ -35,7 +35,7 @@
 
 #define JST_OFFSET 32400 // JST +offset from UTC
 
-#include "../common/cbasetypes.h"
+#include "cbasetypes.h"
 
 enum DAYTYPE : uint8
 {

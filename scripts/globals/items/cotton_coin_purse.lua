@@ -3,8 +3,6 @@
 -- Ctn. Purse (Alx.)
 -- Breaks up a Cotton Purse
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

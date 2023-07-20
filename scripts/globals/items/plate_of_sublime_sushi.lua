@@ -13,8 +13,6 @@
 -- Ranged Accuracy +10% (cap 100)
 -- Resist Sleep +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -8,8 +8,6 @@
 -- Attack/Ranged Attack +11% (cap 55 on master, cap 80 on pet)
 -- Master MAB + 4 , Pet MAB + 15
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -9,7 +9,11 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1192, 1) and trade:getItemCount() == 1 then -- Quest: Wish Upon a Star - Trade Fallen Star
+    -- Quest: Wish Upon a Star - Trade Fallen Star
+    if
+        trade:hasItemQty(xi.items.FALLEN_STAR, 1) and
+        trade:getItemCount() == 1
+    then
         if player:getCharVar("WishUponAStar_Status") == 3 then
             if
                 player:getWeather() == xi.weather.NONE and
@@ -44,8 +48,8 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
         player:addFame(xi.quest.fame_area.BASTOK, 50)
-        player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 1236)
+        player:addItem(xi.items.BAG_OF_CACTUS_STEMS, 4) -- Reward for quest completion: Cactus Stems x 4
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BAG_OF_CACTUS_STEMS)
     end
 end
 

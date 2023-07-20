@@ -2,8 +2,6 @@
 -- Call Wyvern
 -- Call my pet.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

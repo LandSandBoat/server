@@ -3,8 +3,6 @@
 -- Scorpion Quiver
 -- When used, you will obtain one stack of Scorpion Arrows
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18155, 99)
+    target:addItem(xi.items.SCORPION_ARROW, 99)
 end
 
 return itemObject

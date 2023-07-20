@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.FEELER_ANTLION)
     if
         not nm:isSpawned() and
-        trade:hasItemQty(1825, 1) and
+        trade:hasItemQty(xi.items.ANTLION_TRAP, 1) and
         trade:getItemCount() == 1
     then
         player:tradeComplete()

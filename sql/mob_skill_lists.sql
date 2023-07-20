@@ -3855,7 +3855,9 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3651); -- august
 
 INSERT INTO `mob_skill_lists` VALUES ('Fahrafahr_the_Bloodied',1198,2083); -- drop_hammer
 
--- Next available ID: 1198
+INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1099,368); -- blockhead
+
+-- Next available ID: 2000
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

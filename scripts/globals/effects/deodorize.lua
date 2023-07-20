@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.DEODORIZE
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

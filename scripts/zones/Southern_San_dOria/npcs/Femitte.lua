@@ -54,11 +54,11 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("DistantLoyaltiesProgress", 1)
     elseif csid == 665 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13585)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WHITE_CAPE)
         else
             player:delKeyItem(xi.ki.MYTHRIL_HEARTS)
-            player:addItem(13585, 1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13585)
+            player:addItem(xi.items.WHITE_CAPE, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.WHITE_CAPE)
             player:setCharVar("DistantLoyaltiesProgress", 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
         end

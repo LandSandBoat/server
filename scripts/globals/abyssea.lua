@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Global
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

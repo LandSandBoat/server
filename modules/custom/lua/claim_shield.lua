@@ -2,7 +2,6 @@
 -- Claim Shield
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("claim_shield")
@@ -59,6 +58,7 @@ local tableFindPosByID = function(t, target)
             return index
         end
     end
+
     return nil
 end
 
@@ -120,6 +120,7 @@ local timerFunc = function(mob)
             if #alliance == 1 then
                 str = string.format("You have won the lottery for %s! (out of %i players)", mob:getPacketName(), numEntries)
             end
+
             member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
 
             -- Remove from entries table
@@ -136,6 +137,7 @@ local timerFunc = function(mob)
             if #alliance == 1 then
                 str = string.format("Your were not successful in the lottery for %s. (out of %i players)", mob:getPacketName(), numEntries)
             end
+
             member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
             mob:clearEnmityForEntity(member)
         end

@@ -3,7 +3,6 @@ require("scripts/globals/weaponskills")
 require("scripts/globals/magicburst")
 require("scripts/globals/utils")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 
 local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
     local acc = (melee and attacker:getACC() or attacker:getRACC()) + (bonus or 0)

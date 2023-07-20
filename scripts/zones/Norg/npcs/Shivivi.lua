@@ -70,9 +70,9 @@ entity.onTrigger = function(player, npc)
         dampScroll == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
         mLvl >= 10 and
-        player:hasItem(1210)
+        player:hasItem(xi.items.DAMP_SCROLL)
     then
-        player:startEvent(31, 1210) -- Start the quest
+        player:startEvent(31, xi.items.DAMP_SCROLL) -- Start the quest
     elseif dampScroll == QUEST_ACCEPTED then
         player:startEvent(32) -- Reminder Dialogue
     else

@@ -3,8 +3,6 @@
 -- Darksteel Bolt Quiver
 -- When used, you will obtain one stack of Darksteel Bolts
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

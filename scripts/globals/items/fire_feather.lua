@@ -3,8 +3,6 @@
 -- Item: Fire Feather
 -- Status Effect: Enfire
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

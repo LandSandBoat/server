@@ -13,8 +13,6 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

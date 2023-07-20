@@ -11,8 +11,6 @@
 -- Charisma -5
 -- Defense % 9 (cap 100)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

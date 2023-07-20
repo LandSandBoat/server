@@ -3,8 +3,6 @@
 -- Item: Astral Cube
 -- Item Effect: Grant Astral cube key item
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local keyItemId = xi.ki.ASTRAL_CUBE

@@ -5,8 +5,6 @@
 -- Recast Time: 5:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

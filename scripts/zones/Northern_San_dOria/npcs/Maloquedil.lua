@@ -13,7 +13,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE then
-        if trade:hasItemQty(1018, 2) and trade:getItemCount() == 2 then -- Trade Shaman Garlic
+        if
+            trade:hasItemQty(xi.items.BULB_OF_SHAMAN_GARLIC, 2) and
+            trade:getItemCount() == 2
+        then
             player:startEvent(23)
         end
     end

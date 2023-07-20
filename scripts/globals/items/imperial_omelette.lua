@@ -24,8 +24,6 @@
 -- Attack % 20 (cap 80)
 -- Ranged ATT % 20 (cap 80)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

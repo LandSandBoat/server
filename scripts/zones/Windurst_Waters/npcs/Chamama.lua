@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         (inAPickle == QUEST_ACCEPTED or inAPickle == QUEST_COMPLETED) and
-        trade:hasItemQty(583, 1) and
+        trade:hasItemQty(xi.items.SMOOTH_STONE, 1) and
         trade:getItemCount() == 1 and
         trade:getGil() == 0
     then
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     if inAPickle == QUEST_AVAILABLE and not needToZone then
         local rand = math.random(1, 2)
         if rand == 1 then
-            player:startEvent(654, 0, 4444) -- IN A PICKLE + RARAB TAIL: Quest Begin
+            player:startEvent(654, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Begin
         else
             player:startEvent(651) -- Standard Conversation
         end
@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
         inAPickle == QUEST_ACCEPTED or
         player:getCharVar("QuestInAPickle_var") == 1
     then
-        player:startEvent(655, 0, 4444) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
+        player:startEvent(655, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
     elseif inAPickle == QUEST_COMPLETED and needToZone then
         player:startEvent(660) -- IN A PICKLE: After Quest
     elseif
@@ -80,8 +80,8 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
         player:needToZone(true)
-        player:addItem(12505)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 12505)
+        player:addItem(xi.items.BONE_HAIRPIN)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BONE_HAIRPIN)
         npcUtil.giveCurrency(player, 'gil', 200)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
     elseif csid == 661 and option == 1 then

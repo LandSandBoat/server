@@ -3,8 +3,6 @@
 -- Item: Pamama au Lait
 -- Item Effect: Restores 400 HP over 600 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

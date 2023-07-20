@@ -3,8 +3,6 @@
 -- Item: Viper Potion
 -- Item Effect: Removes 300 HP over 3 mins
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

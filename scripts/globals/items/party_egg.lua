@@ -8,8 +8,6 @@
 -- Attack 5
 -- Ranged Attack 4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

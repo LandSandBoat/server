@@ -7,8 +7,6 @@
 -- Vermin Killer 12
 -- Poison Resist 12
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

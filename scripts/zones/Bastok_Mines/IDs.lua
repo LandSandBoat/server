@@ -79,6 +79,7 @@ zones[xi.zone.BASTOK_MINES] =
         YOU_CANNOT_ENTER_DYNAMIS       = 11755, -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 11757, -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 11768, -- There is an unusual arrangement of pebbles here.
+        EGG_HUNT_OFFSET                = 11954, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         THE_GATE_IS_LOCKED             = 12190, -- The gate is locked.
         EMALIVEULAUX_COP_NOT_COMPLETED = 12271, -- I'd like to start my own business someday, but I just haven't found anything that truly interests me.
         EMALIVEULAUX_OPEN_DIALOG       = 12272, -- Rare Tavnazian imports! Get them before they're gone!

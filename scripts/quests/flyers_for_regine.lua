@@ -88,7 +88,7 @@ end
 quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 532)
+        npcUtil.tradeHas(trade, xi.items.MAGICMART_FLYER)
     then
         local zoneId = player:getZoneID()
         local ID = zones[zoneId]

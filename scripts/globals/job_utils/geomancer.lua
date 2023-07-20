@@ -2,8 +2,6 @@
 -- Geomancer Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/spell_data")
-require("scripts/globals/msg")
 require("scripts/globals/pets")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")

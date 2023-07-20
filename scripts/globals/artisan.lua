@@ -79,16 +79,11 @@ xi.artisan.moogleOnUpdate = function(player, csid, option)
     end
 end
 
-xi.artisan.moogleOnFinish = function(player, csid, option)
-    local zone = zones[player:getZoneID()]
-
+xi.artisan.moogleOnFinish = function(player, csid, option, npc)
     if option == 99 then -- Get Scroll
         if player:getCharVar("[artisan]nextScroll") < getMidnight() then
-            if player:addItem(4181) then
-                player:messageSpecial(zone.text.ITEM_OBTAINED, 4181)
+            if npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) then
                 player:setCharVar("[artisan]nextScroll", getMidnight())
-            else
-                player:messageSpecial(zone.text.ITEM_CANNOT_BE_OBTAINED, 4181)
             end
         end
     end

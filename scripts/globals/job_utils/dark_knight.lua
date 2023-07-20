@@ -1,7 +1,6 @@
 -----------------------------------
 -- Dark Knight Job Utilities
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

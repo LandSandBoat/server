@@ -8,7 +8,6 @@
 --  Notes: Only used by Urd, Verthandi, and Carabosse.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

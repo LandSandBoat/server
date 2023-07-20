@@ -19,18 +19,12 @@
 ===========================================================================
 */
 
-#ifndef _CONQUESTSYSTEM_H
-#define _CONQUESTSYSTEM_H
+#pragma once
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
+#include "conquest_data.h"
 #include "zone.h"
-
-#define NATION_SANDORIA 0x00
-#define NATION_BASTOK   0x01
-#define NATION_WINDURST 0x02
-#define NATION_BEASTMEN 0x03
-#define NATION_NEUTRAL  0xFF
 
 enum ConquestUpdate : uint8
 {
@@ -39,19 +33,20 @@ enum ConquestUpdate : uint8
     Conquest_Update      = 2
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 class CCharEntity;
 
+/**
+ * Conquest System operations for map server.
+ * These methods should never update DB. Instead, they should send a message to the world server and
+ * let the world server's conquest system perform DB updates.
+ */
 namespace conquest
 {
-    void UpdateConquestSystem(); // Update conquest information in the DB
+    std::shared_ptr<ConquestData> GetConquestData(); // Cached data with influences / region controls
 
-    void UpdateInfluencePoints(int points, unsigned int nation, unsigned int region);
+    void HandleZMQMessage(uint8* data);
+
+    void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
     void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
     void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence
 
@@ -60,8 +55,9 @@ namespace conquest
     uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);
     uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf);
 
-    void UpdateConquestGM(ConquestUpdate type); // Update conquest system by GM (modify in the DB and use @updateconquest)
-    void UpdateWeekConquest();                  // Update conquest system every sunday
+    void HandleInfluenceUpdate(std::vector<influence_t> const& influences, bool shouldUpdateZones); // Triggered periodically when world server sends updates of the latest influence data.
+    void HandleWeeklyTallyStart();                                                                  // Triggered on update conquest system every sunday (by world server msg)
+    void HandleWeeklyTallyEnd(std::vector<region_control_t> const& regionControls);                 // Triggered when conquest update ends (by world server msg)
 
     uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, // Ranking for 3 nations
                      uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
@@ -75,5 +71,3 @@ namespace conquest
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
 };                                                            // namespace conquest
-
-#endif

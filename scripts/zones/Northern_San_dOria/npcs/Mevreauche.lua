@@ -76,10 +76,10 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 626 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FIRE_CRYSTAL)
         else
-            player:addItem(4096)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
+            player:addItem(xi.items.FIRE_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FIRE_CRYSTAL) -- Fire Crystal
             xi.crafting.signupGuild(player, xi.crafting.guild.SMITHING)
         end
     else

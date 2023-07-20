@@ -6,7 +6,6 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/pets")
 require("scripts/globals/utils")
 -----------------------------------

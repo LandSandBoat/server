@@ -14704,7 +14704,6 @@ INSERT INTO `mob_droplist` VALUES (1816,0,0,1000,4400,@UNCOMMON); -- Slice Of La
 INSERT INTO `mob_droplist` VALUES (1816,0,0,1000,881,@VRARE);     -- Crab Shell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1816,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
 
--- ZoneID:  54 - Dweomershell
 -- ZoneID:  74 - Nipper
 INSERT INTO `mob_droplist` VALUES (1817,0,0,1000,5377,@UNCOMMON); -- Fractus Cell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1817,0,0,1000,5378,@UNCOMMON); -- Congestus Cell (Uncommon, 10%)
@@ -21907,6 +21906,7 @@ INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1449,0);        -- Tukuku White
 INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1452,0);        -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (2667,2,0,1000,1455,0);        -- One Byne Bill (Steal)
 
+-- ZoneID:  54 - Dweomershell
 -- ZoneID:  61 - Wootzshell
 -- ZoneID:  61 - Orichalcumshell
 INSERT INTO `mob_droplist` VALUES (2668,0,0,1000,4400,160);   -- Slice Of Land Crab Meat (16.0%)
@@ -26770,6 +26770,9 @@ INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,11637,@VCOMMON); -- Meridian ri
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3222,@VCOMMON);  -- Balance Stone (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3225,@VCOMMON);  -- Balance Card (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,13791,@RARE);    -- Timarli jawshan (Rare, 5%)
+
+-- ZoneID:  96 - Emela-ntouka
+INSERT INTO `mob_droplist` VALUES (3284,0,0,1000,19120,@UNCOMMON); -- Avis (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

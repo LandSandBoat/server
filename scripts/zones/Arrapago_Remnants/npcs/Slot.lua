@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2377) then
+    if npcUtil.tradeHas(trade, xi.items.BHAFLAU_CARD) then
         local instance = npc:getInstance()
         SpawnMob(ID.mob[2][2].princess, instance):updateClaim(player)
         player:confirmTrade()

@@ -3,8 +3,6 @@
 --  Pear au lait Tank
 --  When used, you will obtain one Pear au lait
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4301, 1)
+    target:addItem(xi.items.FLASK_OF_PEAR_AU_LAIT, 1)
 end
 
 return itemObject

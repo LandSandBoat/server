@@ -3,7 +3,6 @@
 --  Mob: Amnaf Psycheflayer
 -----------------------------------
 local ID = require('scripts/zones/Nyzul_Isle/IDs')
-require('scripts/globals/msg')
 -----------------------------------
 local entity = {}
 

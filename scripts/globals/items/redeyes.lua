@@ -2,8 +2,6 @@
 -- ID: 16120
 -- redeyes
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5441, 99) -- Angelwing x99
+    target:addItem(xi.items.ANGELWING, 99) -- Angelwing x99
     target:messageBasic(xi.msg.basic.ITEM_OBTAINED, 5441)
 end
 

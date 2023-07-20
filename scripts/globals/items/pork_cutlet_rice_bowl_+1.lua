@@ -14,8 +14,6 @@
 -- Ranged Attack +24% (cap 130)
 -- Store TP +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

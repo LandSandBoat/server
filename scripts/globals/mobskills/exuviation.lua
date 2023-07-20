@@ -6,7 +6,6 @@
 -- Notes: Erases all negative effects on the mob and heals an amount for each removed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 
