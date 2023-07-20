@@ -451,6 +451,44 @@ local cutscenes =
 xi.chocoboRaising.newChocobo = function(player, egg)
     local newChoco = {}
 
+    -- TODO: If egg exdata is empty (historic objects, etc.) then generate it randomly now.
+    --     : Otherwise, extract the exdata for use.
+    -- local exData = egg:getExData();
+
+    --[[
+        https://github.com/Ivaar/Windower-addons/blob/master/chococard/chococard.lua
+
+        plan        = {[0]='A','B','C','D'},
+        gender      = {[0]='Male','Female'},
+        color       = {[0]='Yellow','Black','Blue','Red','Green'},
+        ability     = {[0]='None','Gallop','Canter','Burrow','Bore','Auto-Regen','Treasure Finder'},
+
+        fields.egg = {
+            DNA         = {'b3b3b3', 0x00+1,        fn=map_fields+{'color'}},
+            ability     = {'b4',     0x01+1, 1+1},
+            unknown1    = {'b1',     0x01+1, 5+1},
+            plan        = {'b2',     0x01+1, 6+1},
+            unknown2    = {'b15',    0x02+1},
+            is_bred     = {'q',      0x03+1, 7+1},
+        }
+
+        Egg exData from Dabih Jajalioh (CHOCOBO_EGG_FAINTLY_WARM: 2312):
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+        Egg exData from breeder:(CHOCOBO_EGG_A_BIT_WARM: 2317)
+
+        8C C0 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+        8C: 1000 1100
+        C0: 1100 0000
+        00: 0000 0000
+        80: 1000 0000
+
+        Plan: D
+        DNA: [Green, Black, Blue]
+        Ability: None
+    ]]
+
     newChoco.first_name = "Chocobo"
     newChoco.last_name = "Chocobo"
     newChoco.sex = math.ceil(math.random() - 0.5) -- Random 0 or 1
@@ -1729,8 +1767,11 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
     local chocoState = xi.chocoboRaising.chocoState[player:getID()]
 
     if csid == tradeCsid and option == 252 then
-        -- TODO: Pull egg exdata from item
-        local egg = {}
+        -- TODO: Validate this! Really validate this!
+        --     : It has to be the same egg item as was traded at the start of the CS!
+        local trade = player:getTrade()
+        local egg   = trade:getItem()
+        -- TODO: Make sure problems here don't leak into core and cause a crash!
         local newChoco = xi.chocoboRaising.newChocobo(player, egg)
         if player:setChocoboRaisingInfo(newChoco) then
             player:confirmTrade()
