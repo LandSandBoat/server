@@ -24,7 +24,7 @@
 #include "item_usable.h"
 
 #include "../map.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 CItemUsable::CItemUsable(uint16 id)
 : CItem(id)

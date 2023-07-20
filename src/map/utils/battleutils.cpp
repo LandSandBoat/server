@@ -318,7 +318,7 @@ namespace battleutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; sql->NextRow() == SQL_SUCCESS; ++x)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 uint16 level                              = (uint16)sql->GetIntData(0);
                 uint16 count                              = (uint16)sql->GetIntData(1);

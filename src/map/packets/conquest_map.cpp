@@ -23,8 +23,9 @@
 
 #include <cstring>
 
-#include "../conquest_system.h"
-#include "../entities/charentity.h"
+#include "conquest_data.h"
+#include "conquest_system.h"
+#include "entities/charentity.h"
 
 #include "../utils/charutils.h"
 
@@ -35,75 +36,38 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     this->setType(0x5E);
     this->setSize(0xB4);
 
-    const char* Query = "SELECT region_id, region_control, region_control_prev, \
-                         sandoria_influence, bastok_influence, windurst_influence, \
-                         beastmen_influence FROM conquest_system;";
+    auto  conquestData     = conquest::GetConquestData();
+    uint8 sandoria_regions = conquestData->getRegionControlCount(NATION_SANDORIA);
+    uint8 bastok_regions   = conquestData->getRegionControlCount(NATION_BASTOK);
+    uint8 windurst_regions = conquestData->getRegionControlCount(NATION_WINDURST);
+    uint8 sandoria_prev    = conquestData->getPrevRegionControlCount(NATION_SANDORIA);
+    uint8 bastok_prev      = conquestData->getPrevRegionControlCount(NATION_BASTOK);
+    uint8 windurst_prev    = conquestData->getPrevRegionControlCount(NATION_WINDURST);
 
-    int32 ret = sql->Query(Query);
-
-    uint8 sandoria_regions = 0;
-    uint8 bastok_regions   = 0;
-    uint8 windurst_regions = 0;
-    uint8 sandoria_prev    = 0;
-    uint8 bastok_prev      = 0;
-    uint8 windurst_prev    = 0;
-
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    for (uint8 regionId = (uint8)REGION_TYPE::RONFAURE; regionId <= (uint8)REGION_TYPE::TAVNAZIA; regionId++)
     {
-        while (sql->NextRow() == SQL_SUCCESS)
+        uint8 region_owner              = conquestData->getRegionOwner((REGION_TYPE)regionId);
+        int32 san_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_SANDORIA);
+        int32 bas_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_BASTOK);
+        int32 win_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_WINDURST);
+        int32 bst_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_BEASTMEN);
+        ref<uint8>(0x1A + regionId * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf, bst_inf);
+        ref<uint8>(0x1B + regionId * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf);
+        ref<uint8>(0x1C + regionId * 4) = conquest::GetInfluenceGraphics(san_inf, bas_inf, win_inf, bst_inf);
+        ref<uint8>(0x1D + regionId * 4) = region_owner + 1;
+
+        int64 total         = san_inf + bas_inf + win_inf;
+        int64 totalBeastmen = total + bst_inf;
+
+        if (PChar->loc.zone->GetRegionID() == static_cast<REGION_TYPE>(regionId))
         {
-            int regionid            = sql->GetIntData(0);
-            int region_control      = sql->GetIntData(1);
-            int region_control_prev = sql->GetIntData(2);
-
-            if (region_control == 0)
-            {
-                sandoria_regions++;
-            }
-            else if (region_control == 1)
-            {
-                bastok_regions++;
-            }
-            else if (region_control == 2)
-            {
-                windurst_regions++;
-            }
-
-            if (region_control_prev == 0)
-            {
-                sandoria_prev++;
-            }
-            else if (region_control_prev == 1)
-            {
-                bastok_prev++;
-            }
-            else if (region_control_prev == 2)
-            {
-                windurst_prev++;
-            }
-
-            int32 san_inf                   = sql->GetIntData(3);
-            int32 bas_inf                   = sql->GetIntData(4);
-            int32 win_inf                   = sql->GetIntData(5);
-            int32 bst_inf                   = sql->GetIntData(6);
-            ref<uint8>(0x1A + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf, bst_inf);
-            ref<uint8>(0x1B + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf);
-            ref<uint8>(0x1C + regionid * 4) = conquest::GetInfluenceGraphics(san_inf, bas_inf, win_inf, bst_inf);
-            ref<uint8>(0x1D + regionid * 4) = region_control + 1;
-
-            int64 total         = san_inf + bas_inf + win_inf;
-            int64 totalBeastmen = total + bst_inf;
-
-            if (PChar->loc.zone->GetRegionID() == static_cast<REGION_TYPE>(regionid))
-            {
-                ref<uint8>(0x86) = (uint8)((san_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
-                ref<uint8>(0x87) = (uint8)((bas_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
-                ref<uint8>(0x88) = (uint8)((win_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
-                ref<uint8>(0x89) = (uint8)((san_inf * 100) / (total == 0 ? 1 : total));
-                ref<uint8>(0x8A) = (uint8)((bas_inf * 100) / (total == 0 ? 1 : total));
-                ref<uint8>(0x8B) = (uint8)((win_inf * 100) / (total == 0 ? 1 : total));
-                ref<uint8>(0x94) = (uint8)((bst_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
-            }
+            ref<uint8>(0x86) = (uint8)((san_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
+            ref<uint8>(0x87) = (uint8)((bas_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
+            ref<uint8>(0x88) = (uint8)((win_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
+            ref<uint8>(0x89) = (uint8)((san_inf * 100) / (total == 0 ? 1 : total));
+            ref<uint8>(0x8A) = (uint8)((bas_inf * 100) / (total == 0 ? 1 : total));
+            ref<uint8>(0x8B) = (uint8)((win_inf * 100) / (total == 0 ? 1 : total));
+            ref<uint8>(0x94) = (uint8)((bst_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
         }
     }
 

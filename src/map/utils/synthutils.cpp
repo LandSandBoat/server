@@ -43,7 +43,7 @@
 #include "../map.h"
 #include "../roe.h"
 #include "../trade_container.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 #include "charutils.h"
 #include "itemutils.h"

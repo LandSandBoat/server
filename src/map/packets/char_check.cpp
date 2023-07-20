@@ -28,7 +28,7 @@
 
 #include "../entities/charentity.h"
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 {

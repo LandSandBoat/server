@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class BesiegedSystem
+#include "common/sql.h"
+
+namespace dailytally
 {
-public:
-    BesiegedSystem()  = default;
-    ~BesiegedSystem() = default;
-};
+    void UpdateDailyTallyPoints(std::unique_ptr<SqlConnection> const& sql);
+}

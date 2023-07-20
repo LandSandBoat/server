@@ -21,9 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class BesiegedSystem
-{
-public:
-    BesiegedSystem()  = default;
-    ~BesiegedSystem() = default;
-};
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
+
+int32 time_server(time_point tick, CTaskMgr::CTask* PTask);

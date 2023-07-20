@@ -19,11 +19,10 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "logging.h"
 
 #include <ctime>
 
-#include "utils/zoneutils.h"
 #include "vana_time.h"
 
 CVanaTime* CVanaTime::_instance = nullptr;

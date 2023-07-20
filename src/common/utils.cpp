@@ -583,7 +583,6 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
 std::string EncodeStringSignature(const std::string& signature, char* target)
 {
     uint8 encodedSignature[SignatureStringLength] = {};
-    uint8 chars                                   = 0;
     auto  length                                  = std::min<size_t>(15u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
@@ -602,7 +601,6 @@ std::string EncodeStringSignature(const std::string& signature, char* target)
             tempChar = signature[currChar] - 'a' + 37;
         }
         packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
-        chars++;
     }
 
     return strncpy(target, reinterpret_cast<const char*>(encodedSignature), SignatureStringLength);

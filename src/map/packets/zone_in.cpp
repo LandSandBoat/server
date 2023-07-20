@@ -25,7 +25,7 @@
 #include "../instance.h"
 #include "../status_effect_container.h"
 #include "../utils/zoneutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 #include "map/zone.h"
 #include "zone_in.h"
 

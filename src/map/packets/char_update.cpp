@@ -32,7 +32,7 @@
 #include "../entities/fellowentity.h"
 #include "../status_effect_container.h"
 #include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "common/vana_time.h"
 
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {

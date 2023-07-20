@@ -41,6 +41,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/daily_system.cpp
@@ -122,8 +124,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/unitychat.h
     ${CMAKE_CURRENT_SOURCE_DIR}/universal_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/universal_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/weapon_skill.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/weapon_skill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_entities.cpp

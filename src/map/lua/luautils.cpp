@@ -61,6 +61,7 @@
 #include "alliance.h"
 #include "battlefield.h"
 #include "campaign_system.h"
+#include "common/vana_time.h"
 #include "conquest_system.h"
 #include "daily_system.h"
 #include "entities/automatonentity.h"
@@ -95,7 +96,6 @@
 #include "utils/moduleutils.h"
 #include "utils/serverutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 #include "weapon_skill.h"
 
 void ReportErrorToPlayer(CBaseEntity* PEntity, std::string const& message = "") noexcept
