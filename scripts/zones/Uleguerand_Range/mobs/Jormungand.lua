@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 398)
     mob:setMod(xi.mod.DEF, 475)
     mob:setMod(xi.mod.EVA, 434)
-    mob:setMod(xi.mod.MATT, 0) -- Despite being /BLM it has 0 MATT
+    mob:setMod(xi.mod.MATT, 30) -- Jorm has 30 MAB
     mob:setMod(xi.mod.REGEN, 22)
     mob:setMod(xi.mod.REFRESH, 200)
     mob:setMod(xi.mod.DARK_MEVA, 70)
