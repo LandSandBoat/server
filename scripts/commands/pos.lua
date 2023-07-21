@@ -21,6 +21,12 @@ function onTrigger(player, arg)
     local y
     local z
     local targ
+
+    if arg == nil then
+        player:PrintToPlayer(string.format("%s's position: X %.4f  Y %.4f  Z %.4f  Rot %i  (Zone: %i)", player:getName(), player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID()), xi.msg.channel.SYSTEM_3)
+        return
+    end
+
     local args = utils.splitArg(arg)
 
     -- shift arguments depending on number passed
