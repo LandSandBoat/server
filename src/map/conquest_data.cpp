@@ -63,6 +63,12 @@ void ConquestData::load(std::unique_ptr<SqlConnection>& sql)
 
 int32 ConquestData::getInfluence(REGION_TYPE region, NATION_TYPE nation) const
 {
+    if (static_cast<std::size_t>(region) > influences.size() - 1U)
+    {
+        ShowError("Invalid influence region requested");
+        return 0;
+    }
+
     switch (nation)
     {
         case NATION_SANDORIA:
