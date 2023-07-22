@@ -361,7 +361,6 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -402,7 +401,6 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -430,7 +428,6 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LEPHEMERE)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -804,7 +801,6 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LANCIENNE)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
