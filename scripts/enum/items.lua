@@ -4900,6 +4900,7 @@ xi.items =
     ANJU                            = 17771,
     ZUSHIO                          = 17772,
     KODACHI_OF_TRIALS               = 17773,
+    FUKURO                          = 17775,
     RAI_KUNIMITSU                   = 17791,
     NIKKARIAOE                      = 17792,
     MUMEITO                         = 17809,
