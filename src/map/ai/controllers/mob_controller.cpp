@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
+#include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "common/utils.h"
@@ -37,7 +38,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
-#include "states/inactive_state.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)

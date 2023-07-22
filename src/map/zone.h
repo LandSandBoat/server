@@ -35,7 +35,6 @@
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
 #include "common/vana_time.h"
-#include "trigger_area.h"
 #include "los/zone_los.h"
 #include "navmesh.h"
 #include "packets/weather.h"
@@ -753,8 +752,8 @@ public:
     uint8  GetZoneAnimation();
     uint32 GetZoneAnimStartTime();
     uint16 GetZoneAnimLength();
-    void LoadNavMesh();
-    void LoadZoneLos();
+    void   LoadNavMesh();
+    void   LoadZoneLos();
 
 private:
     ZONEID         m_zoneID;

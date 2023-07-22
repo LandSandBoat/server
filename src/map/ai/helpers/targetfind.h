@@ -121,6 +121,7 @@ public:
     bool isWithinArea(position_t* pos);
     bool isWithinCone(position_t* pos);
     bool isWithinRange(position_t* pos, float range);
+    bool canSee(position_t* point);
 
     CBattleEntity* getValidTarget(uint16 actionTargetID, uint16 validTargetFlags);
 

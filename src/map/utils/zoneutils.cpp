@@ -19,11 +19,12 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
-#include "common/timer.h"
+#include "zoneutils.h"
 #include "ai/ai_container.h"
 #include "battlefield.h"
 #include "campaign_system.h"
+#include "common/logging.h"
+#include "common/timer.h"
 #include "conquest_system.h"
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -34,6 +35,7 @@
 #include "map.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
+#include "mobutils.h"
 #include "packets/char_abilities.h"
 #include "packets/char_jobs.h"
 #include "packets/char_recast.h"
@@ -46,11 +48,9 @@
 #include "status_effect_container.h"
 #include "utils/charutils.h"
 #include "zone_instance.h"
-#include "mobutils.h"
-#include "zoneutils.h"
 
-#include <cstring>
 #include <algorithm>
+#include <cstring>
 #include <execution>
 
 std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
