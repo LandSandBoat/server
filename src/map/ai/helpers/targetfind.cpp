@@ -21,22 +21,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "targetfind.h"
 
-#include "../../../common/mmo.h"
-#include "../../../common/utils.h"
-#include "../../ai/ai_container.h"
-#include "../../ai/states/inactive_state.h"
-#include "../../alliance.h"
-#include "../../enmity_container.h"
-#include "../../entities/charentity.h"
-#include "../../entities/fellowentity.h"
-#include "../../entities/mobentity.h"
-#include "../../entities/trustentity.h"
-#include "../../packets/action.h"
-#include "../../status_effect_container.h"
-#include "../../utils/zoneutils.h"
+#include "ai/ai_container.h"
+#include "ai/states/inactive_state.h"
+#include "alliance.h"
+#include "common/mmo.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/charentity.h"
+#include "entities/fellowentity.h"
+#include "entities/mobentity.h"
+#include "entities/trustentity.h"
+#include "packets/action.h"
+#include "status_effect_container.h"
+#include "utils/zoneutils.h"
 #include <cmath>
-
-#include "../../packets/action.h"
 
 CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 {
@@ -612,14 +610,7 @@ bool CTargetFind::isWithinRange(position_t* pos, float range)
 
 bool CTargetFind::canSee(position_t* point)
 {
-    // TODO: the detours raycast is not a line of sight raycast (it's a walkability raycast)
-    // if (m_PBattleEntity->loc.zone && m_PBattleEntity->loc.zone->m_navMesh)
-    //{
-    //    position_t pA {0, m_PBattleEntity->loc.p.x, m_PBattleEntity->loc.p.y - 1, m_PBattleEntity->loc.p.z};
-    //    position_t pB {0, point->x, point->y - 1, point->z};
-    //    return m_PBattleEntity->loc.zone->m_navMesh->raycast(pA, pB);
-    //}
-    return true;
+    return m_PBattleEntity->loc.zone->lineOfSight->CanEntitySee(m_PBattleEntity, *point);
 }
 
 CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTargetFlags)

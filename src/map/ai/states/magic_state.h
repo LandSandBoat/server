@@ -71,7 +71,7 @@ public:
     }
 
 protected:
-    bool CanCastSpell(CBattleEntity* PTarget);
+    bool CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast);
 
     bool HasCost();
 
