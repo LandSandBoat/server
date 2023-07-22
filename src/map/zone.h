@@ -781,9 +781,9 @@ private:
     triggerAreaList_t m_triggerAreaList;
     zoneLineList_t    m_zoneLineList;
 
-    void LoadZoneSettings();
-    void LoadZoneLines();
-    void LoadZoneWeather();
+    void LoadZoneLines();    // список zonelines (можно было бы заменить этот метод методом InsertZoneLine)
+    void LoadZoneWeather();  // погода
+    void LoadZoneSettings(); // настройки зоны
 
     CTreasurePool* m_TreasurePool;
 
