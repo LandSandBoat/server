@@ -33,11 +33,13 @@ local firstEyes  = { "eyeOneKilled", "eyeTwoKilled" }
 local secondEyes = { "eyeThreeKilled", "eyeFourKilled" }
 
 xi.dynamis.onSpawnNightmareWorm = function(mob)
+    xi.dynamis.setNMStats(mob)
     local newPosition = math.random(1, #wormPositions)
     mob:setPos(wormPositions[newPosition][1],wormPositions[newPosition][2],wormPositions[newPosition][3],wormPositions[newPosition][4])
 end
 
 xi.dynamis.onSpawnNightmareAntlion = function(mob)
+    xi.dynamis.setNMStats(mob)
     mob:setMobMod(xi.mobMod.ROAM_TURNS, 0)
     mob:setMobMod(xi.mobMod.ROAM_RATE, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)

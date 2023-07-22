@@ -7180,7 +7180,7 @@ INSERT INTO `mob_pools` VALUES (20015,'Thousand_Eyes_KRT','Thousand_Eyes_KRT',13
 INSERT INTO `mob_pools` VALUES (20016,'Diatryma','Diatryma',125,0x0000500100000000000000000000000000000000,1,1,11,240,100,0,0,0,1,0,0,0,680,131,0,0,0,0,0,125,125);
 
 -- Dynamis - Tavnazia
-INSERT INTO `mob_pools` VALUES (20017,'Nightmare_Antlion','Nightmare_Antlion',357,0x0000440500000000000000000000000000000000,4,4,7,240,100,0,1,0,1,0,0,0,1,3,0,0,0,0,128,357,357);
+INSERT INTO `mob_pools` VALUES (20017,'Nightmare_Antlion','Nightmare_Antlion',357,0x0000440500000000000000000000000000000000,1,1,6,200,100,512,1,0,1,2,0,0,0,3,0,0,0,0,128,357,357);
 
 -- End of AirSkyBoat section
 -- ------------------------------------------------------------

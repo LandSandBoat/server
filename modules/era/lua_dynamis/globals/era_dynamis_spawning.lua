@@ -392,8 +392,8 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         local nameObj = nil
         local spawnAnim = oMob ~= nil
         if oMob:getFamily() == 4 then
-            if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
-                nameObj = normalMobLookup[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
+            if xi.dynamis.mobList[mobZoneID][oMobIndex].info[6] == 2 or xi.dynamis.mobList[mobZoneID][oMobIndex].info[6] == 3 then
+                nameObj = normalMobLookup[mobFamily][mobZoneID][xi.dynamis.mobList[mobZoneID][oMobIndex].info[6]]
             else
                 nameObj = normalMobLookup[mobFamily][mobZoneID]
             end
