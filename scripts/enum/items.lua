@@ -4824,6 +4824,7 @@ xi.items =
     SILVER_BULLET                   = 17341,
     BRONZE_BULLET                   = 17343,
     CORNETTE                        = 17344,
+    SIREN_FLUTE                     = 17346,
     FAERIE_PICCOLO                  = 17349,
     LAMIA_HARP                      = 17356,
     MARYS_HORN                      = 17366,
