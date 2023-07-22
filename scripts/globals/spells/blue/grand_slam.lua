@@ -9,7 +9,7 @@
 -- Level: 30
 -- Casting Time: 1 seconds
 -- Recast Time: 14.25 seconds
--- Skillchain Element(s): Ice (can open Impaction, Compression, or Fragmentation can close Induration)
+-- Skillchain Element(s): Induration
 -- Combos: Defense Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,10 +24,9 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.BLUNT
+    params.damageType = xi.damageType.H2H
     params.scattr = SC_INDURATION
     params.numhits = 1
     params.multiplier = 1.0
@@ -39,13 +38,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.dex_wsc = 0.0
     params.vit_wsc = 0.3
     params.agi_wsc = 0.0
-    params.int_wsc = 0.1
-    params.mnd_wsc = 0.1
-    params.chr_wsc = 0.1
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.0
+    params.chr_wsc = 0.0
+    params.ignorefstrcap = true -- Grand Slam doesn't have an fSTR cap
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

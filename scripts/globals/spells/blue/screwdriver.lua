@@ -9,7 +9,7 @@
 -- Level: 26
 -- Casting Time: 0.5 seconds
 -- Recast Time: 14 seconds
--- Skillchain Element(s): Light (Primary) and Earth (Secondary) -- (can open Compression, Reverberation, Detonation, Liquefaction, or Distortion can close Transfixion, Scission, or Distortion)
+-- Skillchain Element(s): Transfixion/Scission
 -- Combos: Evasion Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.AQUAN
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
@@ -43,10 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.2
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

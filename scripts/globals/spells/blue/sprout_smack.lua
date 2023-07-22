@@ -9,14 +9,13 @@
 -- Level: 4
 -- Casting Time: 0.5 seconds
 -- Recast Time: 7.25 seconds
--- Skillchain property: Reverberation (can open Induration or Impaction)
+-- Skillchain property: Reverberation
 -- Combos: Beast Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local spellObject = {}
 
@@ -26,7 +25,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.PLANTOID
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
@@ -44,14 +43,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if target:hasStatusEffect(xi.effect.SLOW) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.SLOW, 1500, 0, 20)
-    end
+    params.effect = xi.effect.SLOW
+    local power = 1500
+    local tick = 0
+    local duration = 180
+
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

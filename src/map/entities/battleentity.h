@@ -60,7 +60,7 @@ enum class ECOSYSTEM : uint8
     EMPTY          = 12,
     HUMANOID       = 13,
     LIZARD         = 14,
-    LUMORIAN       = 15,
+    LUMINIAN       = 15,
     LUMINION       = 16,
     PLANTOID       = 17,
     UNCLASSIFIED   = 18,
