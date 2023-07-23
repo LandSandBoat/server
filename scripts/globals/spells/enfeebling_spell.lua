@@ -416,6 +416,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         if
             caster:isPC() and
             target:isMob() and
+            xi.settings.main.ENABLE_IMMUNOBREAK and
             immunobreakTable[spellEffect] and          -- Only certain effects can be immunobroken.
             skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
             resistRank > 4                             -- Only mobs with a resistace rank of 5+ (50% EEM) can be immunobroken.
