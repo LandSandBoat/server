@@ -40,6 +40,7 @@ function onTrigger(player, jobId, level)
             error(player, "Invalid level. Level must be between 1 and 99!")
             return
         end
+
         -- setting none sjob to a different level
         if jobId == 0 then
             error(player, "Invalid argument. NONE must have no level parameter, e.g. !changesjob NONE.")

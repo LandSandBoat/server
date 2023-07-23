@@ -21,6 +21,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     if pet:hasStatusEffect(xi.effect.HEALING) then
         pet:delStatusEffect(xi.effect.HEALING)
     end
+
     target:despawnPet()
 end
 

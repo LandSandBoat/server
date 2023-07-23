@@ -35,6 +35,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     if totaldamage > 0 then
         xi.magic.applyAbilityResistance(pet, target, effectParams)
     end
+
     return totaldamage
 end
 

@@ -244,6 +244,8 @@ xi.mod =
     LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
     WYRMAL_ABJ_KILLER_EFFECT        = 1178, -- Wyrmal Abjuration (Crimson/Blood) which makes players susceptible to Dragon Killer effects
+
+    -- Status effect Job trait resistance modifiers.
     SLEEPRES                        = 240,
     POISONRES                       = 241,
     PARALYZERES                     = 242,
@@ -261,6 +263,8 @@ xi.mod =
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
     STATUSRES                       = 958, -- "Resistance to All Status Ailments"
+
+    -- Status effect Magic Evasion modifiers.
     SLEEP_MEVA                      = 200,
     POISON_MEVA                     = 201,
     PARALYZE_MEVA                   = 202,
@@ -278,6 +282,19 @@ xi.mod =
     LULLABY_MEVA                    = 214,
     DEATH_MEVA                      = 215,
     STATUS_MEVA                     = 216,
+
+    -- Status effect magic Evasion modifiers.
+    SLEEP_IMMUNOBREAK               = 261,
+    POISON_IMMUNOBREAK              = 262,
+    PARALYZE_IMMUNOBREAK            = 263,
+    BLIND_IMMUNOBREAK               = 264,
+    SILENCE_IMMUNOBREAK             = 265,
+    PETRIFY_IMMUNOBREAK             = 266,
+    BIND_IMMUNOBREAK                = 267,
+    GRAVITY_IMMUNOBREAK             = 268,
+    SLOW_IMMUNOBREAK                = 269,
+    ADDLE_IMMUNOBREAK               = 270,
+
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
@@ -359,7 +376,6 @@ xi.mod =
     ENSPELL_CHANCE                  = 856,
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
-    PERPETUATION_REDUCTION          = 346,
 
     -- Warrior
     BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
@@ -909,8 +925,7 @@ xi.mod =
     PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
     PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
-    DIG_BYPASS_FATIGUE            = 1157, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
-
+    -- 1157 FREE
     FIRE_EEM                      = 1158, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     ICE_EEM                       = 1159, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     WIND_EEM                      = 1160, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
@@ -924,13 +939,6 @@ xi.mod =
     CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
     ATT_SLOT                      = 1169, -- ATT for slot
     UDMG                          = 1170, -- Uncapped dmg taken (all types)
-    SLEEP_MEVA                    = 1171, -- Sleep MEVA from Barspells
-    POISON_MEVA                   = 1172, -- Poison MEVA from Barspells
-    PARALYZE_MEVA                 = 1173, -- Paralyze MEVA from Barspells
-    BLIND_MEVA                    = 1174, -- Blind MEVA from Barspells
-    SILENCE_MEVA                  = 1175, -- Silence MEVA from Barspells
-    VIRUS_MEVA                    = 1176, -- Virus MEVA from Barspells
-    PETRIFY_MEVA                  = 1177, -- Petrify MEVA from Barspells
 
     -- New ASB section created per PR comment, starting at 2000
     TANDEM_STRIKE = 2000, -- Beastmaster trait - provides acc/macc to master and pet when both engage the same target
