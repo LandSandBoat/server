@@ -40,10 +40,10 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10002)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 10002 then
         player:setPos(0, 0, 0, 0, 225)
     end

@@ -72,7 +72,7 @@ function quest.unlockingMyth.onTrigger(player, npc)
     end
 end
 
-function quest.unlockingMyth.onEventFinish(player, csid, option)
+function quest.unlockingMyth.onEventFinish(player, csid, option, npc)
     local questId = quest.unlockingMyth.getQuestId(option)
     if csid == 10086 then
         if option == 53 then

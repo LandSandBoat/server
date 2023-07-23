@@ -13,10 +13,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(25, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -121,8 +121,8 @@ entity.onMobDeath = function(mob, player, optParams)
     oneToBeFeared.handleMammetDeath(mob, player, optParams)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    oneToBeFeared.handleMammetBattleEnding(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    oneToBeFeared.handleMammetBattleEnding(player, csid, option, npc)
 end
 
 return entity

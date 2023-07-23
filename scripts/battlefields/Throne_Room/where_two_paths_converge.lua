@@ -24,7 +24,7 @@ local content = BattlefieldMission:new({
     skipMissionStatus     = 4,
 })
 
-function content:onEventFinishBattlefield(player, csid, option)
+function content:onEventFinishBattlefield(player, csid, option, npc)
     local area         = player:getBattlefield():getArea()
     local zeidId       = ID.mob.ZEID_BCNM_OFFSET + (area - 1) * 4
     local playerCoords =

@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         (csid == 84 or csid == 204) and
         option == 4
@@ -72,7 +72,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 129 then
         player:setCharVar("PromathiaStatus", 5)
     elseif

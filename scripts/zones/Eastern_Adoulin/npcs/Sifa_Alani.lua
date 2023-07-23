@@ -61,10 +61,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(7530, 0, mapMask, frontierMask, playerBayld)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local eventOption    = bit.band(option, 0xF)
     local eventSelection = bit.rshift(option, 8) + 1
     local playerBayld    = player:getCurrency('bayld')

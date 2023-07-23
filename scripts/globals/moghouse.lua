@@ -204,10 +204,10 @@ xi.moghouse.moogleTrigger = function(player, npc)
     end
 end
 
-xi.moghouse.moogleEventUpdate = function(player, csid, option)
+xi.moghouse.moogleEventUpdate = function(player, csid, option, npc)
 end
 
-xi.moghouse.moogleEventFinish = function(player, csid, option)
+xi.moghouse.moogleEventFinish = function(player, csid, option, npc)
 end
 
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)

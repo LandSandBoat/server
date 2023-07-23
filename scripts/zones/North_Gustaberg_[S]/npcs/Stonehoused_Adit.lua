@@ -14,12 +14,12 @@ entity.onTrigger = function(player, npc)
     xi.instance.onTrigger(player, npc, xi.zones.RUHOTZ_SILVERMINES)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.instance.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.instance.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.instance.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.instance.onEventFinish(player, csid, option, npc)
 end
 
 return entity

@@ -22,14 +22,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 220 and player:delGil(1000) then
         player:setLocalVar("paidYin", 1)
         player:updateEvent(1)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 220 and player:getLocalVar("paidYin") == 1 then
         player:setLocalVar("paidYin", 0)
         player:setCharVar("BorghertzHandsFirstTime", 0)

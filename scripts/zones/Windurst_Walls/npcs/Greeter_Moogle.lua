@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
     xi.events.loginCampaign.onTrigger(player, csid)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.events.loginCampaign.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.events.loginCampaign.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

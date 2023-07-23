@@ -57,7 +57,7 @@ quest.sections =
 
             onEventUpdate =
             {
-                [1] = function(player, csid, option)
+                [1] = function(player, csid, option, npc)
                     if option == 1 then
                         player:updateEvent(xi.abyssea.getZoneKIReward(player))
                     end

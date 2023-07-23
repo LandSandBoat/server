@@ -13,10 +13,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(28)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 and option == 1 then
         player:setPos(-279.709, 19.976, 60.353, 0, 267)
     end

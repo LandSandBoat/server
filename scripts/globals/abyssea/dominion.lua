@@ -189,7 +189,7 @@ xi.abyssea.sergeantOnTrigger = function(player, npc)
     end
 end
 
-xi.abyssea.sergeantOnEventUpdate = function(player, csid, option)
+xi.abyssea.sergeantOnEventUpdate = function(player, csid, option, npc)
     local updateType = bit.band(option, 0xF)
 
     if updateType == 2 then

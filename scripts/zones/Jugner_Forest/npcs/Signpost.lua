@@ -56,10 +56,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 and option == 1 then
         player:setCharVar("CleanSignPost", utils.mask.setBit(player:getCharVar("CleanSignPost"), 0, true))
     elseif csid == 7 and option == 1 then

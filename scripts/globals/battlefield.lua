@@ -815,13 +815,13 @@ function Battlefield.redirectEventCall(eventName, player, csid, option)
     content[eventName](content, player, csid, option)
 end
 
-function Battlefield:onEventFinishEnter(player, csid, option)
+function Battlefield:onEventFinishEnter(player, csid, option, npc)
     player:setEnteredBattlefield(true)
     player:setLocalVar("[battlefield]area", 0)
     self:setLocalVar(player, "CS", 1)
 end
 
-function Battlefield:onEventFinishWin(player, csid, option)
+function Battlefield:onEventFinishWin(player, csid, option, npc)
     if self.title then
         player:addTitle(self.title)
     end
@@ -845,17 +845,17 @@ function Battlefield:onExitEventUpdate(player, csid, option, npc)
     end
 end
 
-function Battlefield:onEventFinishLeave(player, csid, option)
+function Battlefield:onEventFinishLeave(player, csid, option, npc)
     player:leaveBattlefield(1)
 end
 
-function Battlefield:onEventFinishExit(player, csid, option)
+function Battlefield:onEventFinishExit(player, csid, option, npc)
     if option == 4 and player:getBattlefield() then
         player:leaveBattlefield(1)
     end
 end
 
-function Battlefield:onEventFinishBattlefield(player, csid, option)
+function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
@@ -1273,7 +1273,7 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
-function BattlefieldMission:onEventFinishWin(player, csid, option)
+function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
     if self.title then
         player:addTitle(self.title)
     end

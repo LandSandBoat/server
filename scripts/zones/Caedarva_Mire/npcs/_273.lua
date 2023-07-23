@@ -22,13 +22,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
-    xi.assault.onAssaultUpdate(player, csid, option)
-    xi.instance.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.assault.onAssaultUpdate(player, csid, option, npc)
+    xi.instance.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
-    xi.instance.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.instance.onEventFinish(player, csid, option, npc)
 end
 
 return entity

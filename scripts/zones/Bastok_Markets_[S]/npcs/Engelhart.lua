@@ -47,10 +47,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 116 then
         player:setCharVar("BetterPartOfValProg", 1)
         player:delKeyItem(xi.ki.CLUMP_OF_ANIMAL_HAIR)

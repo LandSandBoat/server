@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 350 and option == 2 then
         npcUtil.giveItem(player, xi.items.PRISHE_STATUE)
     end

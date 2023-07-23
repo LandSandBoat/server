@@ -31,10 +31,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
         player:setCharVar("star_ringburied", os.time() + 60) -- wait 1 minute
     elseif csid == 2 then

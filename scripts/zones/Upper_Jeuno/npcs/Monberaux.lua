@@ -62,10 +62,10 @@ end
 --Tenzen     10011
 --Tenzen     10012
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)

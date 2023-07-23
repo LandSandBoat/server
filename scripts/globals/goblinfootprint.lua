@@ -368,7 +368,7 @@ function xi.goblinfootprint.rewatch(player, trigger)
     end
 end
 
-function xi.goblinfootprint.startEvent(player, csid, option)
+function xi.goblinfootprint.startEvent(player, csid, option, npc)
     local zone = player:getZoneID()
     local ID = zones[zone]
     if csid == gobCS[zone] and cutscene[zone][option] ~= nil then

@@ -339,10 +339,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 620 or csid == 621 then
         player:setCharVar("PUP_AttachmentStatus", option + 1)
     elseif csid == 627 then

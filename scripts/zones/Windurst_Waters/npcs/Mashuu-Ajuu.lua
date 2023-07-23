@@ -61,10 +61,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         ((csid == 463 and option == 3) or (csid == 479 and option == 3)) and
         player:getFreeSlotsCount() == 0

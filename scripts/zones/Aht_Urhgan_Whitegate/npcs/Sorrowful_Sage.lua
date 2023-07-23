@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     --end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 --[[
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
@@ -49,7 +49,7 @@ entity.onEventUpdate = function(player, csid, option)
 ]]--
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then

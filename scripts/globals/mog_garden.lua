@@ -30,8 +30,8 @@ end
 xi.mog_garden.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-xi.mog_garden.onEventUpdate = function(player, csid, option)
+xi.mog_garden.onEventUpdate = function(player, csid, option, npc)
 end
 
-xi.mog_garden.onEventFinish = function(player, csid, option)
+xi.mog_garden.onEventFinish = function(player, csid, option, npc)
 end

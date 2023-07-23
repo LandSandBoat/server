@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if xi.instance.onEventUpdate(player, csid, option) then
+entity.onEventUpdate = function(player, csid, option, npc)
+    if xi.instance.onEventUpdate(player, csid, option, npc) then
         if csid == 5511 and option == 843 then
             print(1)
             player:updateEvent(258, 8, 0, 1, 0, 0, 0, 1)
@@ -30,8 +30,8 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.instance.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.instance.onEventFinish(player, csid, option, npc)
 end
 
 return entity

@@ -43,10 +43,10 @@ entity.onTrigger = function(player, npc)
     -- cs 321: Buy / Trade mannequins
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     --local itemId = 255 + option
     --local race = player:getRace()
 

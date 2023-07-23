@@ -236,7 +236,7 @@ xi.voidwalker.npcOnTrigger = function(player, npc)
     player:startEvent(10120, currentKIS)
 end
 
-xi.voidwalker.npcOnEventUpdate = function(player, csid, option)
+xi.voidwalker.npcOnEventUpdate = function(player, csid, option, npc)
     local opt = bit.band(option, 0xF)
 
     if
@@ -256,7 +256,7 @@ xi.voidwalker.npcOnEventUpdate = function(player, csid, option)
     end
 end
 
-xi.voidwalker.npcOnEventFinish = function(player, csid, option)
+xi.voidwalker.npcOnEventFinish = function(player, csid, option, npc)
     local opt = bit.band(option, 0xF)
 
     if csid == 10120 then

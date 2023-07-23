@@ -24,10 +24,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 183 then
         player:setPos(-219.977, -4, 474.522, 64, 72) -- To Alzadaal Undersea Ruins (R)
     end
