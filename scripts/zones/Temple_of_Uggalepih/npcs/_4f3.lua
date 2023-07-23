@@ -26,10 +26,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 66 and option == 1 then
         if player:delGil(250 * (player:getCharVar("EVERYONES_GRUDGE_KILLS") / 20 + 1)) then
             player:setCharVar("EVERYONES_GRUDGE_KILLS", 0)

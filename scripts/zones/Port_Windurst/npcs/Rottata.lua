@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
     xi.conquest.teleporterOnTrigger(player, teleporterNation, teleporterEvent)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     xi.conquest.teleporterOnEventUpdate(player, csid, option, teleporterEvent)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.conquest.teleporterOnEventFinish(player, csid, option, teleporterEvent)
 end
 

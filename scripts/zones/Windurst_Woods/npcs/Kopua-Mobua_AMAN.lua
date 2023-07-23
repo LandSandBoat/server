@@ -22,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(10026, var)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10026 and option == 0 then
         player:setMentor(true)
     end

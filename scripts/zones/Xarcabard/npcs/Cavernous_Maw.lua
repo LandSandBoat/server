@@ -30,10 +30,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 58 then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_MAN_EATING_MITE)
     elseif csid == 59 then

@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 300 and option == 99 then
         if player:delGil(148000) then
             player:addKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
@@ -41,7 +41,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 300 and option == 33 and
         player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)

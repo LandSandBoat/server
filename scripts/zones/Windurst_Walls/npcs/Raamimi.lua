@@ -40,10 +40,10 @@ end
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
 --  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 67 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.POT_OF_HONEY) -- Cannot give Honey because player Inventory is full

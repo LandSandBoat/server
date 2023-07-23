@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         (csid == 818 or csid == 820) and
         option == 10 and
@@ -69,7 +69,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local currentday = tonumber(os.date("%j"))
 
     if (csid == 818 or csid == 820) and option == 100 then

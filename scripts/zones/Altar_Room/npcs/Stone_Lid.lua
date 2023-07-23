@@ -31,10 +31,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 48 then
         local mobs =
         {
@@ -47,7 +47,6 @@ entity.onEventFinish = function(player, csid, option)
             ID.mob.POO_YOZO_THE_BABBLER,
         }
 
-        local npc = GetNPCByID(ID.npc.STONE_LID)
         if npcUtil.popFromQM(player, npc, mobs, { hide = 1 }) then
             player:messageSpecial(ID.text.DRAWS_NEAR)
         end

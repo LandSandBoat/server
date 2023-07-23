@@ -14,8 +14,8 @@ entity.onTrigger = function(player, npc)
     xi.extravaganza.shadowEraTrigger(player, npc, notes)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.extravaganza.shadowEraFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.extravaganza.shadowEraFinish(player, csid, option, npc)
 end
 
 return entity

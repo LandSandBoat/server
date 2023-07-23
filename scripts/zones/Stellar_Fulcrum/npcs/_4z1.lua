@@ -12,10 +12,10 @@ entity.onTrigger = function(player, npc)
     return 1
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local pZone = player:getZoneID()
 
     if csid == 32003 and option == 4 then

@@ -27,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 652 and option == 1 then
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
         player:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)

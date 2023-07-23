@@ -28,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 516 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE then
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)

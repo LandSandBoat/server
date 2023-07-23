@@ -84,7 +84,7 @@ xi.survivalGuide.onTrigger = function(player)
     end
 end
 
-xi.survivalGuide.onEventUpdate = function(player, csid, option)
+xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
     local choice = bit.band(option, 0xFF)
 
     if

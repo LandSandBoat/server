@@ -14,8 +14,8 @@ entity.onTrigger = function(player, npc)
     xi.conflux.confluxOnTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.conflux.confluxEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.conflux.confluxEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

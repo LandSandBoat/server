@@ -68,7 +68,7 @@ return {
         end
     end,
 
-    rubiousCrystalOnEventFinish = function(player, csid, option)
+    rubiousCrystalOnEventFinish = function(player, csid, option, npc)
         local npcId = player:getEventTarget():getID()
         local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_BASE
         local cVar = antiquityVars[crystalOffset]

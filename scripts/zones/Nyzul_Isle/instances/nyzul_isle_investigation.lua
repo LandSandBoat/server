@@ -446,7 +446,7 @@ end
 
 -- Standard event hooks, these will take priority over everything apart from m_event.Script
 -- Omitting this will fallthrough to the same calls in the Zone.lua
-instanceObject.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 95 then
         local instance = player:getInstance()
 
@@ -456,7 +456,7 @@ instanceObject.onEventUpdate = function(player, csid, option)
     end
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
     local chars    = instance:getChars()
 

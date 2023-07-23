@@ -41,10 +41,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 197 and option == 0 then --quest denied, special eventIDs available
         player:setCharVar("QuestSearchRightWords_prereq", 0) --remove charVar from memory
         player:setCharVar("QuestSearchRightWords_denied", 1)

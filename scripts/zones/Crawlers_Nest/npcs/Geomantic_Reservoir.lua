@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_STR)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_STR)
 end
 

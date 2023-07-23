@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 62 and option == 1 then
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
     elseif csid == 65 then

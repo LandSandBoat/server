@@ -58,10 +58,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 then
         player:delKeyItem(xi.ki.SCROLL_OF_TREASURE)
         npcUtil.giveCurrency(player, "gil", 3000)

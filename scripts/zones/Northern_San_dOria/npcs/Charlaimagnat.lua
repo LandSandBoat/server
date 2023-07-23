@@ -32,10 +32,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 703 then
         player:setCharVar("TheMissingPiece_date", os.time() + 60)
         player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)

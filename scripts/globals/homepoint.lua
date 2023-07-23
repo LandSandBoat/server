@@ -197,7 +197,7 @@ xi.homepoint.onTrigger = function(player, csid, index)
     player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
 end
 
-xi.homepoint.onEventUpdate = function(player, csid, option)
+xi.homepoint.onEventUpdate = function(player, csid, option, npc)
     local choice = bit.band(option, 0xFF)
     local favs   = player:getTeleportMenu(xi.teleport.type.HOMEPOINT)
 

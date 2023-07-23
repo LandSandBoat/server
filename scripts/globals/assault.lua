@@ -40,9 +40,8 @@ xi.assault.hasOrders = function(player)
     return false
 end
 
-xi.assault.onAssaultUpdate = function(player, csid, option)
+xi.assault.onAssaultUpdate = function(player, csid, option, npc)
     local ID = zones[player:getZoneID()]
-    local npc = player:getEventTarget()
 
     local cap = bit.band(option, 0x03)
     if cap == 0 then
@@ -141,7 +140,7 @@ xi.assault.instanceOnEventFinish = function(player, csid, zone)
     end
 end
 
-xi.assault.runeReleaseFinish = function(player, csid, option)
+xi.assault.runeReleaseFinish = function(player, csid, option, npc)
     if csid == 100 and option == 1 then
         local instance = player:getInstance()
         local chars = instance:getChars()

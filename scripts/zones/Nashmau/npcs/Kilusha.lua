@@ -59,13 +59,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 24 and option == 6 then -- about Entry Conditions
         player:updateEvent(53, 10, 3, player:getLocalVar("reentryTime"), 10, 231, xi.items.SMOLDERING_LAMP, xi.items.GLOWING_LAMP)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 then
         player:setCharVar("EinherjarIntro", 0) -- deletes CharVar set at character creation
     elseif csid == 24 and option ~= 1073741824 and option ~= 0 then

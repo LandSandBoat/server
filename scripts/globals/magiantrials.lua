@@ -336,7 +336,7 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     returnUselessItems(player, items, currentItem.id)
 end
 
-xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
+xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     local optionMod      = bit.band(option, 0xFF)
     local itemTrialId    = player:getLocalVar("storeItemTrialId")
     local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
@@ -356,7 +356,7 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
     end
 end
 
-xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
     local optionMod         = bit.band(option, 0xFF)
     local zoneid            = player:getZoneID()
     local msg               = zones[zoneid].text

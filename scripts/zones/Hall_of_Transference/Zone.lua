@@ -109,10 +109,10 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 103 and option == 1 then
         player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau (R)
     elseif csid == 104 and option == 1 then

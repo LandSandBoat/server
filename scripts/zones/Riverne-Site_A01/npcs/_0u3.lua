@@ -14,10 +14,10 @@ entity.onTrigger = function(player, npc)
     riverneAGlobal.unstableDisplacementTrigger(player, npc, 19)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity
