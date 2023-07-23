@@ -231,7 +231,7 @@ xi.settings.main =
     HALLOWEEN_YEAR_ROUND            = 0,    -- Set to 1 to have Harvest Festival initialize outside of normal times.
     STARLIGHT_2021                  = 0,    -- Set to 1 to enable the 2021 version of the Starlight Celebration. Dec. 16 through Dec. 31.
     STARLIGHT_YEAR_ROUND            = 0,    -- Set to 1 to have the Starlight Celebration initialize outside of normal times.
-    SUNBREEZE                       = 1,    -- Set to 1 to have the Sunbreeze Festival be active from Aug 1 to Aug 31.
+    SUNBREEZE                       = 0,    -- Set to 1 to have the Sunbreeze Festival be active from Aug 1 to Aug 31.
     SUNBREEZE_VENDOR_ERA            = 2005, -- Set to any value between 2005 - *Undefined*
     EGGHUNT                         =       -- Egg Hunt Egg-stravanganza
     {
