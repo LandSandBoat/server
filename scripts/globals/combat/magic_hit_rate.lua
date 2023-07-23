@@ -320,6 +320,25 @@ end
 ---------------------------------------------------------------------------
 -- Calculate Target Magic Evasion
 ---------------------------------------------------------------------------
+local resistRankMultiplier =
+{
+-- [Rank] = Magic Evasion multiplier.
+    [-3] = 0.95,
+    [-2] = 0.96019,
+    [-1] = 0.98,
+    [ 0] = 1,
+    [ 1] = 1.023,
+    [ 2] = 1.049,
+    [ 3] = 1.0905,
+    [ 4] = 1.126,
+    [ 5] = 1.2075,
+    [ 6] = 1.3475,
+    [ 7] = 1.70065,
+    [ 8] = 2.141,
+    [ 9] = 2.2,
+    [10] = 2.275, -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
+    [11] = 2.35,  -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
+}
 
 xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spellElement, isEnfeeble, mEvaMod, rankModifier)
     local magicEva   = target:getMod(xi.mod.MEVA) -- Base MACC.
@@ -331,14 +350,13 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     if spellElement ~= xi.magic.ele.NONE then
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
         resMod     = target:getMod(xi.combat.element.elementalMagicEva[spellElement])
-        resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+        resistRank = utils.clamp(target:getMod(xi.combat.element.resistRankMod[spellElement]), -3, 11)
 
         if resistRank > 4 then
             resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
         end
 
-        magicEva = magicEva * (1 + (resistRank * 0.075))
-        magicEva = magicEva + resMod
+        magicEva = math.floor(magicEva * resistRankMultiplier[resistRank]) + resMod
     end
 
     -- Magic evasion against specific status effects.
