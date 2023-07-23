@@ -60,10 +60,10 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

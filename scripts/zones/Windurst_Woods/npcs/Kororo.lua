@@ -51,10 +51,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- A Greeting Cardian
     if csid == 296 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)

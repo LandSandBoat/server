@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, optParams)
     global.tryPhaseChange(player)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     global.phaseEventFinish(player, csid)
 end
 

@@ -20,10 +20,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 103 and option == 1 then
         local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
         -- If you use TP, you need to wait 1 real day for using Kaduru TP

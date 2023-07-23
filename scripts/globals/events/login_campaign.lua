@@ -141,7 +141,7 @@ end
 
 -- Shows list of items depending on option selected.
 -- It also is in charge of purchasing selected item.
-xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
+xi.events.loginCampaign.onEventUpdate = function(player, csid, option, npc)
     if not xi.events.loginCampaign.isCampaignActive() then
         return
     end

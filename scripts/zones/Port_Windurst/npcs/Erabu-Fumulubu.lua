@@ -27,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10012 and option == 1 then
         player:messageSpecial(ID.text.FISHING_SUPPORT, 0, 0, 1)
         player:addStatusEffect(xi.effect.FISHING_IMAGERY, 1, 0, 3600)

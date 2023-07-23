@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     local passwordGuess = player:getLocalVar("passwordGuess")
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar("password")
     local password = passwordTable[passwordIndex]
@@ -66,7 +66,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local passwordGuess = player:getLocalVar("passwordGuess")
 
     if csid == 13 and passwordGuess == 3 then

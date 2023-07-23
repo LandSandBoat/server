@@ -155,7 +155,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 1 and option == 10 then -- start
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 1 then -- windows
@@ -170,7 +170,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
         player:setPos(0, 0, 0, 0, 74)
     elseif csid == 116 and player:getLocalVar("SalvageSilverSea") == 1 then -- enter Salvage Arrapago zone

@@ -152,7 +152,7 @@ xi.besieged.onTrigger = function(player, npc, eventBase)
     end
 end
 
-xi.besieged.onEventUpdate = function(player, csid, option)
+xi.besieged.onEventUpdate = function(player, csid, option, npc)
     local itemId = getISPItem(option)
     if itemId and option < 0x40000000 then
         local maps = getMapBitmask(player)
@@ -160,7 +160,7 @@ xi.besieged.onEventUpdate = function(player, csid, option)
     end
 end
 
-xi.besieged.onEventFinish = function(player, csid, option)
+xi.besieged.onEventFinish = function(player, csid, option, npc)
     local ID = zones[player:getZoneID()]
     if option == 0 or option == 16 or option == 32 or option == 48 then
         -- Sanction

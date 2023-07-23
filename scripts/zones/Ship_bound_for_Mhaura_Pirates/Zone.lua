@@ -28,10 +28,10 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(512)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 512 then
         player:setPos(0, 0, 0, 0, xi.zone.MHAURA)
     end

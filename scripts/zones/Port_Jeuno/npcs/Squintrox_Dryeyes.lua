@@ -71,10 +71,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local acpMission     = player:getCurrentMission(xi.mission.log_id.ACP)
     local salad          = player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
     local juice          = player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)

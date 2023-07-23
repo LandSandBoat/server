@@ -33,10 +33,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10000 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
     elseif csid == 10001 then

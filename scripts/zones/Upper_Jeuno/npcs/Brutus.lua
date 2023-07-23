@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- WINGS OF GOLD
     if (csid == 137 or csid == 139) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)

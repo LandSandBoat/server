@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- Setup 1st person to activate rune to go up to control the porting to next floor
     local instance = player:getInstance()
 

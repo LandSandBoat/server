@@ -15,7 +15,7 @@ function xi.matrimonialcoffer.startEvent(player)
     end
 end
 
-function xi.matrimonialcoffer.finishEvent(player, csid, option)
+function xi.matrimonialcoffer.finishEvent(player, csid, option, npc)
     local zone = player:getZoneID()
     local ID = zones[zone]
     local playerGender = player:getGender()

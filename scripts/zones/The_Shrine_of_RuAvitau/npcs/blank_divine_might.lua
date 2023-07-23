@@ -92,7 +92,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         (csid == 55 or csid == 59) and
         option == 2
@@ -101,7 +101,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- Flag Divine Might
     if
         (csid == 54 or csid == 56) and

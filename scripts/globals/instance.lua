@@ -358,10 +358,9 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     end
 end
 
-xi.instance.onEventUpdate = function(player, csid, option)
+xi.instance.onEventUpdate = function(player, csid, option, npc)
     local instanceId = player:getLocalVar("INSTANCE_ID")
     local party = player:getParty()
-    local npc = player:getEventTarget()
     local ID = zones[player:getZoneID()]
 
     if party ~= nil then
@@ -432,7 +431,7 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
     end
 end
 
-xi.instance.onEventFinish = function(player, csid, option)
+xi.instance.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
     if instance then
         local instanceZoneId = instance:getZone():getID()

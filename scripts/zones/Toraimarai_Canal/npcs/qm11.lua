@@ -25,10 +25,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 48 and option ~= 0 then
         SpawnMob(ID.mob.MAGIC_SLUDGE):updateClaim(player)
     end

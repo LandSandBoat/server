@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
     xi.armorStorage.onTrigger(player, 396)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     xi.armorStorage.onEventUpdate(player, csid, option, 396)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.armorStorage.onEventFinish(player, csid, option, 395, 396)
 end
 

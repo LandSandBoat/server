@@ -105,7 +105,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(120, dominionNotes, 0, 0, 0, 0, trophyMask)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     local menuCategory = bit.band(option, 0xF)
 
     if menuCategory == 6 then
@@ -115,7 +115,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local itemCategory = bit.band(option, 0xF)
     local itemSelected = bit.rshift(option, 8)
     local dominionNotes = player:getCurrency("dominion_note")

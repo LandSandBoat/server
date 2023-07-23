@@ -56,7 +56,7 @@ xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
     end
 end
 
-xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
+xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option, npc)
     if csid == 386 then
         -- Present Hallmarks menu
         if option == 1 then
@@ -83,7 +83,7 @@ xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
     end
 end
 
-xi.ambuscade.onEventFinishGorpaMasorpa = function(player, csid, option)
+xi.ambuscade.onEventFinishGorpaMasorpa = function(player, csid, option, npc)
     if csid == 385 then
         xi.roe.onRecordTrigger(player, 499)
     end
@@ -118,7 +118,7 @@ xi.ambuscade.onTriggerTome = function(player, npc)
     --player:startEvent(378)
 end
 
-xi.ambuscade.onEventUpdateTome = function(player, csid, option)
+xi.ambuscade.onEventUpdateTome = function(player, csid, option, npc)
     -- Options
     -- Intense VD : 1
     -- Intense D  : 2
@@ -136,7 +136,7 @@ xi.ambuscade.onEventUpdateTome = function(player, csid, option)
     end
 end
 
-xi.ambuscade.onEventFinishTome = function(player, csid, option)
+xi.ambuscade.onEventFinishTome = function(player, csid, option, npc)
     if csid == 374 and option == 5 then
         player:createInstance(30000)
     elseif csid == 378 then

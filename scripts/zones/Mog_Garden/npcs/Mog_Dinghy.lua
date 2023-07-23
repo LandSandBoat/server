@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(1015, 1, 1, 1, 1, 1, 1, 1, 1)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1015 then
         -- TODO: Capture correct exit positions for all of these
         if option == 1 then -- 1: Whence I came

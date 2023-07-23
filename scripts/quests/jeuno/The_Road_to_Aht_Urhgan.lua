@@ -74,7 +74,7 @@ local advancedSingleList =
     xi.items.SCHOLARS_TESTIMONY,
 }
 
-local function handleEventUpdate(player, csid, option)
+local function handleEventUpdate(player, csid, option, npc)
     if option == 10 then
         player:updateEvent(537, 538, 539, 540, 541, 542, 0, 0)
     elseif option == 12 then

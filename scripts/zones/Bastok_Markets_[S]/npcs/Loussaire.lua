@@ -153,7 +153,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 49 or csid == 53 then
         -- Display Loafers
         if option == 2 then
@@ -185,7 +185,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 49 and option == 0 then
         player:setCharVar("AF_Loussaire", 1)
 

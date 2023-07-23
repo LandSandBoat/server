@@ -118,7 +118,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, 100, 200, 300)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 202 then
         if option == 20737 then
             giveAllItems(player)

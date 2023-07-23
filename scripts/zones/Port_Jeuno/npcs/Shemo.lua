@@ -42,10 +42,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(csid, sealBit1, sealBit2, sealBit3, isTradeNum2)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 352 then
         local addnum    = bit.rshift(option, 8)
         local outSeal   = bit.rshift(bit.band(option, 0xFF), 4) - 1

@@ -42,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 11 and option == 1 then
         player:setPos(-508.582, -8.471, -387.670, 92, 30) -- To Riv Site A (Retail confirmed)
     elseif csid == 10 and option == 1 then
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 7 and option == 1 then
         player:setPos(-538.526, -29.5, 359.219, 255, 25) -- back to Misareaux Coast (Retail confirmed)
     else
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

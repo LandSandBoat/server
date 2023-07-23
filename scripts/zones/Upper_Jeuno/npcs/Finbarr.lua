@@ -53,10 +53,10 @@ entity.onTrigger = function(player, npc)
     --player:startEvent(10108) -- Purchase menu
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- 1: purchase gourmet
     -- 2: purchase sports
     -- 3: purchase hiking

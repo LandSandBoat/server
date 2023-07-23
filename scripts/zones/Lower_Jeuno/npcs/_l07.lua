@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     lowerJeunoGlobal.lampTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     lowerJeunoGlobal.lampEventFinish(player, csid, option, 7)
 end
 

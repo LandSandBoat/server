@@ -17,10 +17,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- If instance loading or entry fails (for you or your party):
     -- Force the Nyzul Isle loop to bail out
-    if xi.instance.onEventUpdate(player, csid, option) then
+    if xi.instance.onEventUpdate(player, csid, option, npc) then
         player:setLocalVar("NYZUL_INSTANCE", 1)
     -- This was causing entry to fail out, and 116 to not be hit.  Handled inside
     -- Path of Darkness instance script.
@@ -41,7 +41,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 116 and option == 1 then
         -- TODO: Entrance message for registrant: "Commencing transport to Nyzul Isle"  This was not being hit
         -- by Path of Darkness, and has been moved (in that case) into the mission script.
-        xi.instance.onEventFinish(player, csid, option)
+        xi.instance.onEventFinish(player, csid, option, npc)
     end
 end
 

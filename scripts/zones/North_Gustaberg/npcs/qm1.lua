@@ -55,13 +55,11 @@ entity.onTrigger = function(player, npc)
     player:startEvent(10)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10 and option == 0 then
-        local npc = player:getEventTarget()
-
         if
             player:getEquipID(xi.slot.MAIN) == 0 and
             player:getEquipID(xi.slot.SUB) == 0

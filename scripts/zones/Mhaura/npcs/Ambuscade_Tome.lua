@@ -14,12 +14,12 @@ entity.onTrigger = function(player, npc)
     xi.ambuscade.onTriggerTome(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.ambuscade.onEventUpdateTome(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.ambuscade.onEventUpdateTome(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.ambuscade.onEventFinishTome(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.ambuscade.onEventFinishTome(player, csid, option, npc)
 end
 
 return entity

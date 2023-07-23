@@ -56,10 +56,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local festiveItems = getFestiveItems(player)
     if csid == 503 then
         if npcUtil.giveItem(player, festiveItems[option]) then

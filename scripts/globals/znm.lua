@@ -133,7 +133,7 @@ xi.znm.ryo.onTrigger = function(player, npc)
     player:startEvent(913)
 end
 
-xi.znm.ryo.onEventUpdate = function(player, csid, option)
+xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
     if csid == 914 then
         local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
         player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
@@ -147,7 +147,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option)
     end
 end
 
-xi.znm.ryo.onEventFinish = function(player, csid, option)
+xi.znm.ryo.onEventFinish = function(player, csid, option, npc)
 end
 
 -----------------------------------
@@ -193,10 +193,10 @@ xi.znm.sanraku.onTrigger = function(player, npc)
     -- 909: Further interactions
 end
 
-xi.znm.sanraku.onEventUpdate = function(player, csid, option)
+xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
 end
 
-xi.znm.sanraku.onEventFinish = function(player, csid, option)
+xi.znm.sanraku.onEventFinish = function(player, csid, option, npc)
     if csid == 910 then
         player:confirmTrade()
         player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())

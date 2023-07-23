@@ -29,12 +29,12 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1 then
         player:setCharVar('StormsOfFate', 2)
     end
 
-    xi.bcnm.onEventFinish(player, csid, option)
+    xi.bcnm.onEventFinish(player, csid, option, npc)
 end
 
 return entity

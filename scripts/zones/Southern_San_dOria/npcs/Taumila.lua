@@ -39,10 +39,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 574 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
     elseif csid == 572 then

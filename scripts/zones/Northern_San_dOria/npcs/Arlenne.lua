@@ -36,10 +36,10 @@ entity.onTrigger = function(player, npc)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

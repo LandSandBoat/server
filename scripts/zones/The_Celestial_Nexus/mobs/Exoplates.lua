@@ -53,16 +53,16 @@ entity.onMobDeath = function(mob, player, optParams)
     ealdnarche:delStatusEffect(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32004 then
-        DespawnMob(target:getID())
-        DespawnMob(target:getID() - 1)
-        DespawnMob(target:getID() + 2)
-        DespawnMob(target:getID() + 3)
-        local mob = SpawnMob(target:getID() + 1)
+        DespawnMob(npc:getID())
+        DespawnMob(npc:getID() - 1)
+        DespawnMob(npc:getID() + 2)
+        DespawnMob(npc:getID() + 3)
+        local mob = SpawnMob(npc:getID() + 1)
         mob:updateEnmity(player)
         -- the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
         mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)

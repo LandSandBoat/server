@@ -25,10 +25,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 and player:getCharVar("ClassReunionProgress") == 5 then
         player:setCharVar("ClassReunionProgress", 6)
     end

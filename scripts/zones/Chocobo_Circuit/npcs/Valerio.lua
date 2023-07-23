@@ -12,10 +12,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(351)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinsih = function(player, csid, option)
+entity.onEventFinsih = function(player, csid, option, npc)
 end
 
 return entity

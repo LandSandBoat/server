@@ -44,10 +44,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(message, math.abs(math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60)), vHour)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

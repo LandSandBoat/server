@@ -36,10 +36,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 129 then
         player:addItem(xi.items.HI_ELIXIR)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4144)

@@ -94,7 +94,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- THE FANGED ONE
     if csid == 351 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)

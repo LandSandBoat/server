@@ -15,12 +15,12 @@ entity.onTrigger = function(player, npc)
     xi.mogTablet.moogleOnTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.mogTablet.moogleOnEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.mogTablet.moogleOnEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.mogTablet.moogleOnEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.mogTablet.moogleOnEventFinish(player, csid, option, npc)
 end
 
 return entity

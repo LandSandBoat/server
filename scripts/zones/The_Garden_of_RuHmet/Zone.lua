@@ -197,7 +197,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if
         (csid > 149 and csid < 184) or
         csid == 102 or
@@ -208,7 +208,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
         player:setCharVar("Ru-Hmet-TP", 0)

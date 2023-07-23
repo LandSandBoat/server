@@ -91,7 +91,7 @@ function Limbus:register()
     return self
 end
 
-function Limbus:onEventFinishEnter(player, csid, option)
+function Limbus:onEventFinishEnter(player, csid, option, npc)
     Battlefield.onEventFinishEnter(self, player, csid, option)
 
     local battlefield    = player:getBattlefield()

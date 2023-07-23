@@ -18,10 +18,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 131 and option == 1 then
         player:setPos(690, -18.5, 220, 128, 51)        --> Wajaom Woodlands, at northeastern tower
     elseif csid == 130 and option == 1 then

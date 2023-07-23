@@ -36,10 +36,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     }
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         npcUtil.giveKeyItem(player, xi.ki.SILVERY_PLATE)
     end
