@@ -112,11 +112,11 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
     elseif csid == 797 then
-        player:setCharVar("AgainstAllOdds", 1) -- Set For Corsair BCNM
+        player:setCharVar("Quest[6][26]Prog", 1) -- Set For Corsair BCNM
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         player:addKeyItem(xi.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIFE_FLOAT)
-        player:setCharVar("AgainstAllOddsTimer", getMidnight())
+        player:setCharVar("Quest[6][26]Timer", getMidnight())
     end
 
     xi.moghouse.exitJobChangeFinish(player, csid, option)
