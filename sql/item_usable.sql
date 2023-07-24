@@ -1947,6 +1947,7 @@ INSERT INTO `item_usable` VALUES (6538,'altanas_repast',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6539,'altanas_repast_+1',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6540,'altanas_repast_+2',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6565,'per._snow_cone',1,1,28,1,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6566,'bonanza_biscuit',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6567,'tropical_crepe',1,1,28,1,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6568,'crepe_des_rois',1,1,28,1,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6569,'scroll_of_slow_ii',1,1,11,5,0,0,0,0);
