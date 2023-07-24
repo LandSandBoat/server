@@ -639,6 +639,24 @@ INSERT INTO `item_mods_pet` VALUES (21529,25,40,0); -- All Pets - ACC: 40
 INSERT INTO `item_mods_pet` VALUES (21529,26,40,0); -- All Pets - RACC: 40
 INSERT INTO `item_mods_pet` VALUES (21529,30,40,0); -- All Pets - MACC: 40
 
+-- Varga Purnikawa (Level 119)
+INSERT INTO `item_mods_pet` VALUES (21533,25,25,3); -- Automaton: Accuracy+25
+INSERT INTO `item_mods_pet` VALUES (21533,26,25,3); -- Automaton: Ranged Accuracy+25
+INSERT INTO `item_mods_pet` VALUES (21533,30,25,3); -- Automaton: Magic Accuracy+25
+INSERT INTO `item_mods_pet` VALUES (21533,1044,1,3); -- Automaton: Lv. +1
+
+-- Varga Purnikawa (Level 119 II)
+INSERT INTO `item_mods_pet` VALUES (21534,25,30,3); -- Automaton: Accuracy+30
+INSERT INTO `item_mods_pet` VALUES (21534,26,30,3); -- Automaton: Ranged Accuracy+30
+INSERT INTO `item_mods_pet` VALUES (21534,30,30,3); -- Automaton: Magic Accuracy+30
+INSERT INTO `item_mods_pet` VALUES (21534,1044,2,3); -- Automaton: Lv. +2
+
+-- Varga Purnikawa (Level 119 III)
+INSERT INTO `item_mods_pet` VALUES (21535,25,35,3); -- Automaton: Accuracy+35
+INSERT INTO `item_mods_pet` VALUES (21535,26,35,3); -- Automaton: Ranged Accuracy+35
+INSERT INTO `item_mods_pet` VALUES (21535,30,35,3); -- Automaton: Magic Accuracy+35
+INSERT INTO `item_mods_pet` VALUES (21535,1044,3,3); -- Automaton: Lv. +3
+
 -- Arasy Tabar
 INSERT INTO `item_mods_pet` VALUES (21704,25,10,0); -- All Pets - ACC: 10
 
