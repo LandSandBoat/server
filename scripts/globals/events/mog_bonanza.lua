@@ -22,6 +22,22 @@ local localSettings =
     -- 0x5C: 21st Vana'versary Nomad Mog Bonanza
     -- 0x5E: <number>
     EVENT = 0x5E,
+
+    COLLECTION_SERVER_MESSAGE =
+        'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
+        '\n' ..
+        'Rank 3 prize: "7" (last digit)-- 13,298 winners.\n' ..
+        'Rank 2 prize: "71" (last two digits)-- 1,299 winners.\n' ..
+        'Rank 1 prize: "800" (all three digits)-- 62 winners.\n' ..
+        '*The number of winners for each prize is a combined total from all worlds.\n' ..
+        '\n' ..
+        'Collection period: On July 11, 2023 at 1:00 (PDT) / 8:00 (GMT) to July 31, at 7:59 (PDT) / 14:59 (GMT)\n' ..
+        'Details on the prize can be confirmed by speaking to a Bonanza Moogle at one of the following locations:\n' ..
+        'Port San d\'Oria (I-9) / Port Bastok (L-8) / Port Windurst (F-6) / Chocobo Circuit (H-8)\n',
+
+    -- When WINNING_NUMBER is nil, false, or anything that isn't a type() == 'number', the whole system will be in
+    -- the buying period. Once WINNING_NUMBER is set, everything will be in the collection period until the event ends.
+    WINNING_NUMBER = nil,
 }
 
 local event = SeasonalEvent:new('MogBonanza')
@@ -51,7 +67,7 @@ local csidLookup =
     },
     [xi.zone.CHOCOBO_CIRCUIT] =
     {
-        -- TODO
+        baseCs = 503,
     },
 }
 
@@ -87,6 +103,8 @@ local getPrizeRank = function(player, winningNumber, guessNumber)
     local winningNumberStr = tostring(winningNumber)
     local guessNumberStr   = tostring(guessNumber)
 
+    -- TODO: guessNumber has to be zero padded on the left once it's a string
+
     if
         type(winningNumber) ~= 'number' or
         type(guessNumber) ~= 'number' or
@@ -99,6 +117,7 @@ local getPrizeRank = function(player, winningNumber, guessNumber)
     end
 
     -- This assumes the strings are the same length, and that the length arg is less than their length
+    -- TODO: Refactor to be baseStr and guessStr, and do 2 passes:
     local getMatchOfLength = function(str1, str2, length)
         local strLength = #str1
         for strIdx1 = 1, strLength - length + 1 do
@@ -160,6 +179,14 @@ local giveBonanzaPearl = function(player, number)
             [7] = 0, -- 0x23, -- These might not be needed
         }
     })
+end
+
+local isInPurchasingPeriod = function()
+    return xi.events.mogBonanza.enabledCheck() and type(localSettings.WINNING_NUMBER) ~= 'number'
+end
+
+local isInCollectionPeriod = function()
+    return xi.events.mogBonanza.enabledCheck() and type(localSettings.WINNING_NUMBER) == 'number'
 end
 
 xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
