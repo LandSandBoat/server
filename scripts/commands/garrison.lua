@@ -6,9 +6,6 @@
 -- !garrison win (player) win the garrison (if any) currently running in the player's zone
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/status")
-require("scripts/globals/common")
-
 cmdprops =
 {
     permission = 1,
@@ -31,6 +28,7 @@ function onTrigger(player, command, target)
     local targ = player:getCursorTarget()
     if target ~= nil then
         targ = GetPlayerByName(target)
+
         if targ == nil then
             error(player, string.format("Player named '%s' not found", target))
             return
@@ -50,10 +48,12 @@ function onTrigger(player, command, target)
             xi.garrison.start(targ, targ)
             targ:PrintToPlayer(string.format("%s garrison started", zone:getName()))
         end,
+
         ["stop"] = function()
             xi.garrison.stop(targ:getZone())
             targ:PrintToPlayer(string.format("%s garrison stopped", zone:getName()))
         end,
+
         ["win"] = function()
             xi.garrison.win(targ:getZone())
         end,
