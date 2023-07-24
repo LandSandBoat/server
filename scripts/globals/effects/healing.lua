@@ -112,7 +112,11 @@ effectObject.onEffectTick = function(target, effect)
             end
 
             target:addHP(healHP)
-            if target:getHPP() < 100 then
+
+            if
+                target:getHPP() < 100  and
+                target:getMaster() == nil
+            then
                 target:updateEnmityFromCure(target, healHP)
             end
 
