@@ -619,7 +619,7 @@ xi.garrison.handleGilPayout = function(levelCap, players)
     -- We have two captures at level 30 being rewarded a total of 3k gil.
     -- This is an assumption of how the rest of tiers work.
     local payout = xi.settings.main.GIL_RATE * levelCap * 100 * #players
-    print("Payout: " .. payout)
+    debugLog("Payout: " .. payout)
     for _, player in ipairs(players) do
         if player ~= nil then
             local gil = payout / #players
