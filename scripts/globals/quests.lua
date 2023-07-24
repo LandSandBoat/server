@@ -74,7 +74,7 @@ xi.quest.fame_area =
 xi.quest.id =
 {
     -----------------------------------
-    --  San d'Oria
+    --  San d'Oria - 0
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.SANDORIA]] =
     {
@@ -163,7 +163,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Bastok
+    --  Bastok - 1
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.BASTOK]] =
     {
@@ -263,7 +263,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Windurst
+    --  Windurst - 2
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.WINDURST]] =
     {
@@ -360,7 +360,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Jeuno
+    --  Jeuno - 3
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.JEUNO]] =
     {
@@ -515,7 +515,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Other Areas
+    --  Other Areas - 4
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.OTHER_AREAS]] =
     {
@@ -588,7 +588,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Outlands
+    --  Outlands - 5
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.OUTLANDS]] =
     {
@@ -660,7 +660,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Aht Urhgan
+    --  Aht Urhgan - 6
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.AHT_URHGAN]] =
     {
@@ -675,7 +675,7 @@ xi.quest.id =
         FINDING_FAULTS                   = 8,
         GIVE_PEACE_A_CHANCE              = 9, -- + Converted
         THE_ART_OF_WAR                   = 10,
-        -- AT QUEST 00                   = 11,
+        -- JP ENTRIES OR INVALID
         A_TASTE_OF_HONEY                 = 12, -- + Converted
         SUCH_SWEET_SORROW                = 13, -- + Converted
         FEAR_OF_THE_DARK_II              = 14, -- + Converted
@@ -697,11 +697,17 @@ xi.quest.id =
         MOMENT_OF_TRUTH                  = 30,
         THREE_MEN_AND_A_CLOSET           = 31, -- + Converted
         FIVE_SECONDS_OF_FAME             = 32,
+        -- JP ENTRIES OR INVALID
+        THE_BEAST_WITHIN                 = 40,
+        BREAKING_THE_BONDS_OF_FATE       = 41,
+        -- JP ENTRIES OR INVALID
         SAGA_OF_THE_SKYSERPENT           = 43, -- + Converted
         ODE_TO_THE_SERPENTS              = 44, -- + Converted
         WHEN_THE_BOW_BREAKS              = 45, -- + Converted
         FIST_OF_THE_PEOPLE               = 46, -- + Converted
         SOOTHING_WATERS                  = 47, -- + Converted
+        -- JP ENTRIES OR INVALID
+        THE_PRANKSTER                    = 60,
         DELIVERING_THE_GOODS             = 61, -- + Converted
         VANISHING_ACT                    = 62, -- + Converted
         STRIKING_A_BALANCE               = 63, -- + Converted
@@ -720,6 +726,7 @@ xi.quest.id =
         THE_RIDER_COMETH                 = 76,
         UNWAVERING_RESOLVE               = 77,
         A_STYGIAN_PACT                   = 78,
+        -- JP ENTRIES OR INVALID
         PROMOTION_PRIVATE_FIRST_CLASS    = 90, -- + Converted
         PROMOTION_SUPERIOR_PRIVATE       = 91, -- + Converted
         PROMOTION_LANCE_CORPORAL         = 92, -- + Converted
@@ -730,6 +737,7 @@ xi.quest.id =
         PROMOTION_SECOND_LIEUTENANT      = 97,
         PROMOTION_FIRST_LIEUTENANT       = 98,
         PROMOTION_CAPTAIN                = 99,
+        -- JP ENTRIES OR INVALID
         SCOUTING_THE_ASHU_TALIF          = 101,
         ROYAL_PAINTER_ESCORT             = 102,
         TARGETING_THE_CAPTAIN            = 103,
@@ -737,7 +745,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Crystal War
+    --  Crystal War - 7
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
@@ -839,7 +847,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Abyssea
+    --  Abyssea - 8
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.ABYSSEA]] =
     {
@@ -1040,7 +1048,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Adoulin
+    --  Adoulin - 9
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.ADOULIN]] =
     {
@@ -1146,7 +1154,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Coalition
+    --  Coalition - 10
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.COALITION]] =
     {
