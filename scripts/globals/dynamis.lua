@@ -930,13 +930,17 @@ xi.dynamis.mapShopCosts =
 }
 
 xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
-    local gil   = trade:getGil()
-    local count = trade:getItemCount()
+    local gil       = trade:getGil()
+    local count     = trade:getItemCount()
+    local tradeItem = trade:getItemId(0)
 
     local zoneId   = player:getZoneID()
     local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
     local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
     local shop     = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].shop
+
+    -- Zero this out, just in case
+    player:setLocalVar("currencyExchange", 0)
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
@@ -964,9 +968,19 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
             player:startEvent(baseCs + 6, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif -- 10'000's to 100's
             count == 1 and
-            trade:hasItemQty(currency[3], 1)
+            trade:hasItemQty(currency[3], 1) and
+            tradeItem == currency[3]
         then
-            player:startEvent(baseCs + 8, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+            player:setLocalVar("currencyExchange", currency[2])
+            player:startEvent(baseCs + 8, tradeItem, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif -- (optional) 100's to 1's
+            xi.settings.main.ENABLE_EXCHANGE_100S_TO_1S and
+            count == 1 and
+            trade:hasItemQty(currency[2], 1) and
+            tradeItem == currency[2]
+        then
+            player:setLocalVar("currencyExchange", currency[1])
+            player:startEvent(baseCs + 8, tradeItem, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
@@ -1079,23 +1093,27 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
             player:messageSpecial(ID.text.ITEM_OBTAINED, currency[3])
         end
 
-    -- 10k pieces to hundreds
+    -- 10k pieces to hundreds (or hundreds to singles)
     elseif csid == baseCs + 8 then
-        local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
+        local currencyExchange = player:getLocalVar("currencyExchange")
+        local slotsReq         = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
         if player:getFreeSlotsCount() < slotsReq then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currencyExchange)
         else
             player:tradeComplete()
             for i = 1, slotsReq do
                 if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
-                    player:addItem(currency[2], 99)
+                    player:addItem(currencyExchange, 99)
                 else
-                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
+                    player:addItem(currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
                 end
             end
 
-            player:messageSpecial(ID.text.ITEMS_OBTAINED, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+            player:messageSpecial(ID.text.ITEMS_OBTAINED, currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         end
+
+        -- Zero this out, just in case
+        player:setLocalVar("currencyExchange", 0)
 
     -- bought item from shop
     elseif csid == baseCs + 7 then
