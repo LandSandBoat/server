@@ -1529,7 +1529,7 @@ namespace mobutils
         }
         else
         {
-            ShowError("Unable to find entity with groupId: %d, zoneId: %d. Check that mob_pools.ele_eva_id, group and zoneid match.", groupid, groupZoneId);
+            ShowError("Unable to find entity with groupId: %d, zoneId: %d.", groupid, groupZoneId);
         }
 
         return PMob;

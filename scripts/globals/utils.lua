@@ -272,9 +272,11 @@ end
 -- applying the given mapping function to the given table elements
 function utils.map(tbl, func)
     local t = {}
+
     for k, v in pairs(tbl) do
         t[k] = func(k, v)
     end
+
     return t
 end
 
@@ -338,7 +340,7 @@ end
 -- matches the given predicate
 -- e.g: utils.sum({ "a, "a", "b" }, utils.counter(function (k, v) return v == "a" end)) --> 2
 function utils.counter(predicate)
-    return function (k, v)
+    return function(k, v)
         if predicate(k, v) then
             return 1
         else
