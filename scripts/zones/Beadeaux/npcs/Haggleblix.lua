@@ -21,7 +21,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade(player, csid, option, npc)
+    xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish(player, csid, option, npc)
 end
 
 return entity
