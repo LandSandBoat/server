@@ -73,7 +73,7 @@ index e503b6af23..681a67e30b 100644
          // Moon phase skillup modifiers
          uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
 diff --git "a/src/map/utils/charutils.cpp" "b/src/map/utils/charutils.cpp"
-index a3d1ee95b1..88e5bf2595 100644
+index 7ea2ff6879..ef20d5f6c8 100644
 --- "a/src/map/utils/charutils.cpp"
 +++ "b/src/map/utils/charutils.cpp"
 @@ -1855,7 +1855,7 @@ namespace charutils
@@ -118,7 +118,7 @@ index a3d1ee95b1..88e5bf2595 100644
                  {
                      SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
                      if (SkillAmount > 9)
-@@ -4001,6 +4009,23 @@ namespace charutils
+@@ -4007,6 +4015,23 @@ namespace charutils
              EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
              float          exp      = (float)GetBaseExp(maxlevel, moblevel);
  
@@ -142,7 +142,21 @@ index a3d1ee95b1..88e5bf2595 100644
              if (mobCheck > EMobDifficulty::TooWeak)
              {
                  if (PMember->getZone() == PMob->getZone())
-@@ -4619,19 +4644,20 @@ namespace charutils
+@@ -4033,7 +4058,12 @@ namespace charutils
+                         region >= REGION_TYPE::WEST_AHT_URHGAN &&
+                         region <= REGION_TYPE::ALZADAAL;
+ 
+-                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
++                    bool isInSigilZone =
++                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
++                        region >= REGION_TYPE::RONFAURE_FRONT &&
++                        region <  REGION_TYPE::ABYSSEA;
++
++                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone || isInSigilZone);
+ 
+                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
+                     {
+@@ -4629,19 +4659,20 @@ namespace charutils
       *                                                                       *
       ************************************************************************/
  
@@ -172,7 +186,6 @@ index a3d1ee95b1..88e5bf2595 100644
          uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
          bool   onLimitMode = false;
  
-
 diff --git a/src/map/roe.cpp b/src/map/roe.cpp
 index 718518c0ff..408fd8f556 100644
 --- a/src/map/roe.cpp
