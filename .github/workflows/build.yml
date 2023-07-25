@@ -367,6 +367,32 @@ jobs:
         run: |
           cmake --build build -j4
 
+  Linux_Clang14_64bit_ClangTidy:
+    needs: Sanity_Checks
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-clang
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
+        mkdir -p build
+        cmake -S . -B build -DENABLE_CLANG_TIDY=ON
+    - name: Build
+      run: |
+        cmake --build build -j4
+
   Full_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
     needs: Linux_Clang14_64bit
