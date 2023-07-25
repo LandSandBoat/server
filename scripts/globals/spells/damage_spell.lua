@@ -708,6 +708,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     local magicBurstBonus        = 1.0
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
+    local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
     if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
@@ -745,7 +746,11 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     -- Magic Burst Damage I is found in gear. caps at 40% with innin, AM2 and such
     -- Magic Burst Damage II is found in other gear and BLM job traits pertain to this one OR to a third, separate one. neither has known cap
 
-    return modBurst
+    if skillchainCount > 0 then
+        magicBurstBonus = modBurst -- + modBurstTrait once investigated. Probably needs to be divided by 100
+    end
+
+    return magicBurstBonus
 end
 
 xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellId, spellElement)
@@ -1068,8 +1073,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target)
-    local eemTier         = xi.magic.calculateEEMTier(target, spellElement, skillchainCount)
-    local eemValue        = xi.magic.calculateEEMVal(eemTier)
     local failedDiceRoll  = utils.ternary(math.random() >= 0.95, false, true)
 
     -- Variables/steps to calculate finalDamage.
@@ -1127,12 +1130,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     xi.msg.debugValue(caster, "Resist Damage", finalDamage)
 
     -- Apply magic burst damage
-    if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated since this is recalculated for each target.
-        finalDamage = math.floor(finalDamage * magicBurst)
-        xi.msg.debugValue(caster, "Magic Burst Damage", finalDamage)
-        finalDamage = math.floor(finalDamage * magicBurstBonus)
-        xi.msg.debugValue(caster, "Magic Burst Bonus Damage", finalDamage)
-    end
+    finalDamage = math.floor(finalDamage * magicBurst)
+    xi.msg.debugValue(caster, "Magic Burst Damage", finalDamage)
+    finalDamage = math.floor(finalDamage * magicBurstBonus)
+    xi.msg.debugValue(caster, "Magic Burst Bonus Damage", finalDamage)
 
     finalDamage = math.floor(finalDamage * dayAndWeather)
     xi.msg.debugValue(caster, "Day/Weather Damage", finalDamage)
@@ -1156,13 +1157,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     xi.msg.debugValue(caster, "Scarlet Delirium Damage", finalDamage)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
     xi.msg.debugValue(caster, "Nuke Absorb / Nullify Damage", finalDamage)
-
-    -- If the EEM Value is 0.5 or greater,
-    -- the final damage of the nuke should be subject to a 50% reduction
-    if eemValue <= 0.5 then
-        finalDamage = math.floor(finalDamage * 0.5)
-        xi.msg.debugValue(caster, "Resist Tier Damage", finalDamage)
-    end
 
     if finalDamage > 0 then
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
