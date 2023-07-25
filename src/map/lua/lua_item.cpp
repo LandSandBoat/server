@@ -340,6 +340,12 @@ void CLuaItem::setExData(sol::table newData)
         uint8 key = keyObj.as<uint8>();
         uint8 val = valObj.as<uint8>();
 
+        if (key >= CItem::extra_size)
+        {
+            ShowWarning("Tried to write to key too large for item exdata array: %s[%i]", m_PLuaItem->getName(), key);
+            continue;
+        }
+
         m_PLuaItem->m_extra[key] = val;
     }
 }
