@@ -20,7 +20,7 @@
 */
 
 #include "lua_ability.h"
-#include "../ability.h"
+#include "ability.h"
 
 /************************************************************************
  *                                                                        *

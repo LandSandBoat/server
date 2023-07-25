@@ -22,8 +22,8 @@
 #ifndef _LUALOOT_H
 #define _LUALOOT_H
 
-#include "../utils/itemutils.h"
 #include "luautils.h"
+#include "utils/itemutils.h"
 
 struct action_t;
 struct actionList_t;

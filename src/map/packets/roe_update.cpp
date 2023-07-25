@@ -23,7 +23,7 @@
 
 #include "roe_update.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CRoeUpdatePacket::CRoeUpdatePacket(CCharEntity* PChar)
 {

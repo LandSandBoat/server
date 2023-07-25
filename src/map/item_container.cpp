@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <cstring>
 

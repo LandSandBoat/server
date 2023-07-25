@@ -31,8 +31,8 @@
 #include <variant>
 #include <vector>
 
-#include "../common/cbasetypes.h"
 #include "ai/helpers/event_handler.h"
+#include "common/cbasetypes.h"
 #include "packets/weather.h"
 
 class CItemContainer;

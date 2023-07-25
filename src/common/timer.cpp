@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
-#include "../common/timer.h"
-#include "../common/logging.h"
-#include "../common/utils.h"
+#include "common/timer.h"
+#include "common/logging.h"
+#include "common/utils.h"
 
 #include <cstdio>
 #include <cstdlib>

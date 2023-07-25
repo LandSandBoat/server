@@ -23,9 +23,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "entity_set_name.h"
 
-#include "../entities/baseentity.h"
-#include "../entities/charentity.h"
-#include "../entities/trustentity.h"
+#include "entities/baseentity.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
 
 CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
 {

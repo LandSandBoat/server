@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "battlefield.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"

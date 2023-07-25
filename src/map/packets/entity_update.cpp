@@ -27,12 +27,12 @@
 
 #include "entity_update.h"
 
-#include "../entities/baseentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/npcentity.h"
-#include "../entities/petentity.h"
-#include "../entities/trustentity.h"
-#include "../status_effect_container.h"
+#include "entities/baseentity.h"
+#include "entities/mobentity.h"
+#include "entities/npcentity.h"
+#include "entities/petentity.h"
+#include "entities/trustentity.h"
+#include "status_effect_container.h"
 
 CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {

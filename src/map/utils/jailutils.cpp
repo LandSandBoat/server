@@ -21,11 +21,11 @@
 
 #include "jailutils.h"
 
-#include "../conquest_system.h"
-#include "../entities/charentity.h"
+#include "conquest_system.h"
+#include "entities/charentity.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/player_controller.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/player_controller.h"
 
 /************************************************************************
  *                                                                       *

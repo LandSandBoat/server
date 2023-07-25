@@ -22,14 +22,14 @@
 #ifndef _BATTLEUTILS_H
 #define _BATTLEUTILS_H
 
-#include "../blue_spell.h"
-#include "../merit.h"
-#include "../status_effect.h"
+#include "blue_spell.h"
 #include "common/cbasetypes.h"
+#include "merit.h"
+#include "status_effect.h"
 
 #include <list>
 
-#include "../entities/battleentity.h"
+#include "entities/battleentity.h"
 
 class CAbility;
 class CItemWeapon;

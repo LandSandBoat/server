@@ -21,11 +21,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "player_charm_controller.h"
 
-#include "../../../common/utils.h"
-#include "../../entities/charentity.h"
-#include "../../packets/char.h"
-#include "../../status_effect_container.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "common/utils.h"
+#include "entities/charentity.h"
+#include "packets/char.h"
+#include "status_effect_container.h"
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
 : CPlayerController(PChar)

@@ -22,7 +22,7 @@
 #ifndef _CMERIT_H
 #define _CMERIT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /************************************************************************
  *                                                                       *

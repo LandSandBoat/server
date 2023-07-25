@@ -22,8 +22,8 @@
 #ifndef _CABILITY_H
 #define _CABILITY_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "packets/action.h"
 
 #include "entities/battleentity.h"

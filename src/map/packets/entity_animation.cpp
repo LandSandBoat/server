@@ -23,7 +23,7 @@
 
 #include "entity_animation.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 const char* CEntityAnimationPacket::Fade_Out = "kesu";
 

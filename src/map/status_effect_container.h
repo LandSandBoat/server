@@ -22,8 +22,8 @@
 #ifndef _STATUSEFFECTCONTAINER_H
 #define _STATUSEFFECTCONTAINER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include <set>
 

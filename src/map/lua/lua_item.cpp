@@ -21,13 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../items/item.h"
-#include "../items/item_equipment.h"
-#include "../items/item_general.h"
-#include "../items/item_weapon.h"
-#include "../map.h"
-#include "../utils/itemutils.h"
 #include "common/logging.h"
+#include "items/item.h"
+#include "items/item_equipment.h"
+#include "items/item_general.h"
+#include "items/item_weapon.h"
+#include "map.h"
+#include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_PLuaItem(PItem)

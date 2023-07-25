@@ -21,9 +21,9 @@
 
 #include "common/logging.h"
 
-#include "../spell.h"
-#include "../utils/battleutils.h"
 #include "lua_spell.h"
+#include "spell.h"
+#include "utils/battleutils.h"
 
 /************************************************************************
  *                                                                        *

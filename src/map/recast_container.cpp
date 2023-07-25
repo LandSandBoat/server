@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"

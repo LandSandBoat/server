@@ -22,7 +22,7 @@
 #ifndef _RECASTCONTAINER_H
 #define _RECASTCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <vector>
 

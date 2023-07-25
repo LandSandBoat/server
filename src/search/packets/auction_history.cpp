@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "common/socket.h"
 
-#include "../data_loader.h"
+#include "data_loader.h"
 
 #include "auction_history.h"
 

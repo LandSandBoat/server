@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "alliance.h"
 #include "entities/battleentity.h"

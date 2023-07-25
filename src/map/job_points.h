@@ -19,9 +19,9 @@
 
 #include <vector>
 
-#include "../common/cbasetypes.h"
 #include "./entities/battleentity.h"
 #include "ability.h"
+#include "common/cbasetypes.h"
 #include "modifier.h"
 
 /************************************************************************

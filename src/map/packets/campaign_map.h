@@ -24,8 +24,8 @@
 
 #include "common/cbasetypes.h"
 
-#include "../campaign_system.h"
 #include "basic.h"
+#include "campaign_system.h"
 
 class CCharEntity;
 

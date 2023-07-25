@@ -22,8 +22,8 @@
 #ifndef _COMMAND_HANDLER_H
 #define _COMMAND_HANDLER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/logging.h"
+#include "common/cbasetypes.h"
+#include "common/logging.h"
 
 #include <list>
 #include <string>

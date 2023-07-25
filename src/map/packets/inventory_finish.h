@@ -24,8 +24,8 @@
 
 #include "common/cbasetypes.h"
 
-#include "../item_container.h"
 #include "basic.h"
+#include "item_container.h"
 
 class CInventoryFinishPacket : public CBasicPacket
 {

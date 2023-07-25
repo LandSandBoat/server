@@ -25,8 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
 
 enum class PHYSICAL_ATTACK_TYPE;
 

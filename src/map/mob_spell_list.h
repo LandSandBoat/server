@@ -24,8 +24,8 @@
 
 #include <vector>
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "spell.h"
 

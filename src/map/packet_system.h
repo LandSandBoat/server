@@ -22,7 +22,7 @@
 #ifndef _PACKETSYSTEM_H
 #define _PACKETSYSTEM_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "packets/basic.h"
 
 #include "entities/charentity.h"

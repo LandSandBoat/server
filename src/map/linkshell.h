@@ -22,8 +22,8 @@
 #ifndef _CLINKSHELL_H
 #define _CLINKSHELL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <vector>
 

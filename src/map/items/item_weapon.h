@@ -22,8 +22,8 @@
 #ifndef _CITEMWEAPON_H
 #define _CITEMWEAPON_H
 
-#include "../entities/battleentity.h"
 #include "common/cbasetypes.h"
+#include "entities/battleentity.h"
 
 #include "item_equipment.h"
 

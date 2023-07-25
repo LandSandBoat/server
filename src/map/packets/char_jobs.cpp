@@ -23,8 +23,8 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
 #include "char_jobs.h"
+#include "entities/charentity.h"
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {

@@ -21,7 +21,7 @@
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 #include <cstring>
 

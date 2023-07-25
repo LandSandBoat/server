@@ -21,15 +21,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "ai/ai_container.h"
 
-#include "../entities/baseentity.h"
-#include "../entities/battleentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../packets/entity_animation.h"
-#include "../status_effect_container.h"
-#include "controllers/mob_controller.h"
-#include "controllers/pet_controller.h"
-#include "controllers/player_controller.h"
+#include "ai/controllers/mob_controller.h"
+#include "ai/controllers/pet_controller.h"
+#include "ai/controllers/player_controller.h"
+#include "entities/baseentity.h"
+#include "entities/battleentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "packets/entity_animation.h"
 #include "states/ability_state.h"
 #include "states/attack_state.h"
 #include "states/death_state.h"
@@ -44,6 +43,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "states/respawn_state.h"
 #include "states/trigger_state.h"
 #include "states/weaponskill_state.h"
+#include "status_effect_container.h"
 
 CAIContainer::CAIContainer(CBaseEntity* _PEntity)
 : CAIContainer(_PEntity, nullptr, nullptr, nullptr)

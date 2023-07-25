@@ -21,10 +21,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
-#include "../trade_container.h"
+#include "entities/charentity.h"
 #include "synth_message.h"
 #include "synth_result.h"
+#include "trade_container.h"
 
 CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
 {
