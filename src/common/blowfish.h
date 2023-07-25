@@ -22,7 +22,7 @@
 #ifndef _BLOWFISH_H
 #define _BLOWFISH_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum BLOWFISH
 {

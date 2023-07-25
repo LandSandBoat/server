@@ -20,7 +20,7 @@
 */
 
 #include "alliance.h"
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <algorithm>
 #include <cstring>

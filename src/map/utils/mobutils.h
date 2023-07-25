@@ -27,8 +27,8 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-#include "../entities/mobentity.h"
-#include "../modifier.h"
+#include "entities/mobentity.h"
+#include "modifier.h"
 
 struct ModsList_t
 {

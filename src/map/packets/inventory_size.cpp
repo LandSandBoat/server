@@ -21,10 +21,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
-#include "../item_container.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
 #include "inventory_size.h"
+#include "item_container.h"
+#include "utils/charutils.h"
 
 /************************************************************************
  *

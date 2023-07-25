@@ -23,7 +23,7 @@
 
 #include "roe_questlog.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CRoeQuestLogPacket::CRoeQuestLogPacket(CCharEntity* PChar, uint8 order)
 {

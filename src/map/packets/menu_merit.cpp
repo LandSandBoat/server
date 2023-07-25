@@ -24,8 +24,8 @@
 #include "job_points.h"
 #include "menu_merit.h"
 
-#include "../entities/charentity.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
+#include "utils/charutils.h"
 
 CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 {

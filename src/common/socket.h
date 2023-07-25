@@ -4,7 +4,7 @@
 #define _SOCKET_H_
 
 #ifndef _CBASETYPES_H_
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #endif
 
 #ifdef __APPLE__

@@ -22,7 +22,7 @@
 #ifndef _CTREASUREPOOL_H
 #define _CTREASUREPOOL_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <vector>
 

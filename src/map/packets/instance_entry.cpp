@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "instance_entry.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 CInstanceEntryPacket::CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response)
 {

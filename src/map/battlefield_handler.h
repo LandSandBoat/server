@@ -17,8 +17,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CBATTLEFIELDHANDLER_H
 #define _CBATTLEFIELDHANDLER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <map>
 #include <memory>

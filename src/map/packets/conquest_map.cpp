@@ -23,7 +23,6 @@
 
 #include <cstring>
 
-#include "../conquest_system.h"
 #include "besieged_system.h"
 #include "conquest_data.h"
 #include "conquest_system.h"

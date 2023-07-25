@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/blowfish.h"
+#include "common/blowfish.h"
 
 #include <cstring>
 

@@ -25,7 +25,7 @@
 
 #include "bazaar_message.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CBazaarMessagePacket::CBazaarMessagePacket(CCharEntity* PChar)
 {

@@ -26,10 +26,10 @@
 
 #include "char_stats.h"
 
-#include "../entities/charentity.h"
-#include "../modifier.h"
-#include "../roe.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
+#include "modifier.h"
+#include "roe.h"
+#include "utils/charutils.h"
 
 CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 {

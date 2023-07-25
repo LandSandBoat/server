@@ -22,7 +22,7 @@
 #ifndef _MD52_H
 #define _MD52_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 typedef struct
 {

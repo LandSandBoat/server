@@ -21,7 +21,7 @@
 
 #include "item_equipment.h"
 
-#include "../map.h"
+#include "map.h"
 #include <cstring>
 
 CItemEquipment::CItemEquipment(uint16 id)

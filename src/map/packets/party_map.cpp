@@ -23,7 +23,7 @@
 
 #include "party_map.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
 {

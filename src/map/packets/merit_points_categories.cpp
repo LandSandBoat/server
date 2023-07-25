@@ -25,7 +25,7 @@
 
 #include "merit_points_categories.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 /*
 пакет, содержащий информацию об примененных меритах и количестве, необходимом для следующего усиления

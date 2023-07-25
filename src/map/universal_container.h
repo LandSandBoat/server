@@ -22,7 +22,7 @@
 #ifndef _CUNIVERSALCONTAINER_H
 #define _CUNIVERSALCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <vector>
 
 enum UCONTAINERTYPE

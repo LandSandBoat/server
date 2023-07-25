@@ -25,8 +25,8 @@
 #include "basic.h"
 #include "common/cbasetypes.h"
 
-#include "../entities/battleentity.h"
-#include "../spell.h"
+#include "entities/battleentity.h"
+#include "spell.h"
 
 #define MAX_ACTION_TARGETS 16
 

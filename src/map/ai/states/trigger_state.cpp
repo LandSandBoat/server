@@ -21,10 +21,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "trigger_state.h"
 
-#include "../../entities/charentity.h"
-#include "../../entities/npcentity.h"
-#include "../../lua/luautils.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/charentity.h"
+#include "entities/npcentity.h"
+#include "lua/luautils.h"
 
 CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door)
 : CState(PEntity, targid)

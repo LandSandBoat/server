@@ -22,7 +22,7 @@
 #ifndef _CTRADECONTAINER_H
 #define _CTRADECONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <vector>
 
 #define CONTAINER_SIZE       17

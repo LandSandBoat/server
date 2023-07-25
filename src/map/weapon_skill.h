@@ -22,8 +22,8 @@
 #ifndef _CWEAPONSKILL_H
 #define _CWEAPONSKILL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "entities/battleentity.h"
 

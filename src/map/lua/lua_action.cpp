@@ -20,7 +20,7 @@
 */
 
 #include "lua_action.h"
-#include "../packets/action.h"
+#include "packets/action.h"
 
 CLuaAction::CLuaAction(action_t* Action)
 : m_PLuaAction(Action)

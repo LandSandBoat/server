@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 
-#include "../zone.h"
+#include "zone.h"
 
 /************************************************************************
  *                                                                       *

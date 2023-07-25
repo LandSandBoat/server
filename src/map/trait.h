@@ -22,7 +22,7 @@
 #ifndef _CTRAIT_H
 #define _CTRAIT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "modifier.h"
 #include <vector>

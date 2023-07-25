@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _ACTIONQUEUE_H
 #define _ACTIONQUEUE_H
 
-#include "../../../common/cbasetypes.h"
-#include "../../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include <functional>
 #include <memory>
 #include <queue>

@@ -474,7 +474,7 @@ void data_session::read_func()
     }
 }
 
-    void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
+void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
 {
     if (self->sessionHash != "")
     {
