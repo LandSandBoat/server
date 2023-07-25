@@ -7,8 +7,10 @@
 #include "cbasetypes.h"
 #include "sql_prepared_stmt.h"
 
-#include <mysql.h>
+#include <thread>
 #include <unordered_map>
+
+#include <mysql.h>
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -117,6 +119,11 @@ public:
     size_t EscapeString(char* out_to, const char* from);
     size_t EscapeStringLen(char* out_to, const char* from, size_t from_len);
 
+    /// Escapes a string.
+    ///
+    /// @return The escaped string
+    std::string EscapeString(std::string const& input);
+
     /// Executes a query.
     /// Any previous result is freed.
     /// The query is used directly.
@@ -205,5 +212,7 @@ private:
     void InitPreparedStatements();
 
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
+
+    std::thread::id m_ThreadId;
 };
 #endif // _COMMON_SQL_H

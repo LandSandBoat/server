@@ -26951,6 +26951,54 @@ INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
+-- ZoneID:  135 - Animated Knuckles
+INSERT INTO `mob_droplist` VALUES (3238,0,0,100,1571,@ALWAYS); -- Mystic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Dagger
+INSERT INTO `mob_droplist` VALUES (3239,0,0,100,1572,@ALWAYS); -- Ornate Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Longsword
+INSERT INTO `mob_droplist` VALUES (3240,0,0,100,1573,@ALWAYS); -- Holy Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Claymore
+INSERT INTO `mob_droplist` VALUES (3241,0,0,100,1574,@ALWAYS); -- Intricate Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Tabar
+INSERT INTO `mob_droplist` VALUES (3242,0,0,100,1575,@ALWAYS); -- Runaeic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Great Axe
+INSERT INTO `mob_droplist` VALUES (3243,0,0,100,1576,@ALWAYS); -- Seraphic Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Scythe
+INSERT INTO `mob_droplist` VALUES (3244,0,0,100,1577,@ALWAYS); -- Tenebrous Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Spear
+INSERT INTO `mob_droplist` VALUES (3245,0,0,100,1578,@ALWAYS); -- Stellar Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Kunai
+INSERT INTO `mob_droplist` VALUES (3246,0,0,100,1579,@ALWAYS); -- Demoniac Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Tachi
+INSERT INTO `mob_droplist` VALUES (3247,0,0,100,1580,@ALWAYS); -- Divine Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Hammer
+INSERT INTO `mob_droplist` VALUES (3248,0,0,100,1581,@ALWAYS); -- Heavenly Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Staff
+INSERT INTO `mob_droplist` VALUES (3249,0,0,100,1582,@ALWAYS); -- Celestial Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Longbow
+INSERT INTO `mob_droplist` VALUES (3250,0,0,100,1583,@ALWAYS); -- Snarled Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Horn
+INSERT INTO `mob_droplist` VALUES (3251,0,0,100,1584,@ALWAYS); -- Mysterial Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Gun
+INSERT INTO `mob_droplist` VALUES (3252,0,0,100,1585,@ALWAYS); -- Ethereal Fragment (Always, 100%)
+
+-- ZoneID:  135 - Animated Shield
+INSERT INTO `mob_droplist` VALUES (3253,0,0,100,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
