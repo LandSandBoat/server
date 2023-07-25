@@ -20,13 +20,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "petskill_state.h"
-#include "../../enmity_container.h"
-#include "../../entities/petentity.h"
-#include "../../packets/action.h"
-#include "../../petskill.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "enmity_container.h"
+#include "entities/petentity.h"
+#include "packets/action.h"
+#include "petskill.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
 
 CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)

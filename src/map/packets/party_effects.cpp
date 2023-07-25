@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "party_effects.h"
-#include "../entities/battleentity.h"
-#include "../party.h"
-#include "../status_effect_container.h"
+#include "entities/battleentity.h"
+#include "party.h"
+#include "status_effect_container.h"
 
 CPartyEffectsPacket::CPartyEffectsPacket()
 {

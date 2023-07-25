@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "zone_visited.h"
 
 CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity* PChar)

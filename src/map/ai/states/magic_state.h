@@ -22,7 +22,7 @@
 #ifndef _CMAGIC_STATE_H
 #define _CMAGIC_STATE_H
 
-#include "../../spell.h"
+#include "spell.h"
 #include "state.h"
 
 struct action_t;

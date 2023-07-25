@@ -21,7 +21,7 @@
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "synth_animation.h"
 
 CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param)

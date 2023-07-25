@@ -3,7 +3,7 @@
 #ifndef _TIMER_H
 #define _TIMER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #define DIFF_TICK(a, b) ((uint32)((a) - (b)))
 

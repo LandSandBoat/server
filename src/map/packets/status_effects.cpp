@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "status_effects.h"
-#include "../entities/charentity.h"
-#include "../status_effect_container.h"
 #include "common/timer.h"
+#include "entities/charentity.h"
+#include "status_effect_container.h"
 
 CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
 {

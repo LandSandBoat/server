@@ -25,10 +25,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "party_member_update.h"
 
-#include "../alliance.h"
-#include "../entities/charentity.h"
-#include "../entities/trustentity.h"
-#include "../party.h"
+#include "alliance.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "party.h"
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
 {

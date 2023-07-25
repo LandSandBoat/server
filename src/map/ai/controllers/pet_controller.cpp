@@ -21,11 +21,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "pet_controller.h"
 
-#include "../../../common/utils.h"
-#include "../../entities/petentity.h"
-#include "../../status_effect_container.h"
-#include "../../utils/petutils.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "common/utils.h"
+#include "entities/petentity.h"
+#include "status_effect_container.h"
+#include "utils/petutils.h"
 
 CPetController::CPetController(CPetEntity* _PPet)
 : CMobController(_PPet)

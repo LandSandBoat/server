@@ -2,7 +2,7 @@
 
 #include "timer_bar_util.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CTimerBarUtilPacket::CTimerBarUtilPacket()
 {

@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 
-#include "../merit.h"
+#include "merit.h"
 
 #include "basic.h"
 

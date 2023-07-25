@@ -22,8 +22,8 @@
 #ifndef _CPETSKILL_H
 #define _CPETSKILL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 class CPetSkill
 {

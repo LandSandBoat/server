@@ -20,11 +20,11 @@
 */
 
 #include "attackutils.h"
-#include "../attack.h"
-#include "../items/item_weapon.h"
-#include "../status_effect_container.h"
+#include "attack.h"
 #include "battleutils.h"
 #include "common/utils.h"
+#include "items/item_weapon.h"
+#include "status_effect_container.h"
 
 namespace attackutils
 {

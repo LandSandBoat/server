@@ -20,11 +20,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "blacklistutils.h"
-#include "../entities/charentity.h"
-#include "../map.h"
 #include "common/utils.h"
+#include "entities/charentity.h"
+#include "map.h"
 
-#include "../packets/stop_downloading.h"
+#include "packets/stop_downloading.h"
 
 namespace blacklistutils
 {

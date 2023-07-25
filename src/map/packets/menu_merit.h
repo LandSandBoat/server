@@ -24,8 +24,8 @@
 
 #include "common/cbasetypes.h"
 
-#include "../merit.h"
 #include "basic.h"
+#include "merit.h"
 
 class CCharEntity;
 

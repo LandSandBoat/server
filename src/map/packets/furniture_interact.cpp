@@ -26,7 +26,7 @@
 
 #include "furniture_interact.h"
 
-#include "../items/item.h"
+#include "items/item.h"
 
 CFurnitureInteractPacket::CFurnitureInteractPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {

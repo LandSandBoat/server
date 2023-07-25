@@ -53,6 +53,7 @@ target_link_libraries(xi_connect
 
 target_include_directories(xi_connect
     PUBLIC
+        ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )

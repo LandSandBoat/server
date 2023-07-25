@@ -22,18 +22,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "common/timer.h"
 
-#include "../ai/ai_container.h"
-#include "../battlefield.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/npcentity.h"
-#include "../entities/trustentity.h"
-#include "../mob_modifier.h"
-#include "../status_effect_container.h"
-#include "../utils/mobutils.h"
-#include "../utils/zoneutils.h"
+#include "ai/ai_container.h"
+#include "battlefield.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/npcentity.h"
+#include "entities/trustentity.h"
 #include "lua_baseentity.h"
 #include "lua_battlefield.h"
+#include "mob_modifier.h"
+#include "status_effect_container.h"
+#include "utils/mobutils.h"
+#include "utils/zoneutils.h"
 
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 : m_PLuaBattlefield(PBattlefield)

@@ -22,8 +22,8 @@
 #ifndef _EVENT_INFO_H
 #define _EVENT_INFO_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <bitset>
 #include <deque>

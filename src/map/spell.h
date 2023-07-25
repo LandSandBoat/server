@@ -22,8 +22,8 @@
 #ifndef _CSPELL_H
 #define _CSPELL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "entities/battleentity.h"
 #include "entities/charentity.h"

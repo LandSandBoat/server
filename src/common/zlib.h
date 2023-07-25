@@ -2,7 +2,7 @@
 #ifndef _ZLIB_H
 #define _ZLIB_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 static inline size_t zlib_compressed_size(const size_t sz)
 {

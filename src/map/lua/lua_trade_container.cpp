@@ -19,12 +19,12 @@
 ===========================================================================
 */
 
-#include "../items/item.h"
 #include "common/logging.h"
+#include "items/item.h"
 
-#include "../trade_container.h"
 #include "lua_item.h"
 #include "lua_trade_container.h"
+#include "trade_container.h"
 
 //======================================================//
 
