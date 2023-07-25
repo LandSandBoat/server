@@ -19,13 +19,13 @@
 ===========================================================================
 */
 
-#include "map.h"
 #include "auction_house.h"
+#include "map.h"
 
 #include "common/socket.h"
 #include "common/vana_time.h"
-#include "utils/itemutils.h"
 #include "entities/charentity.h"
+#include "utils/itemutils.h"
 
 #include <cstring>
 

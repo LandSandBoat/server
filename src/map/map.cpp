@@ -19,15 +19,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "map.h"
-
 #include "common/blowfish.h"
 #include "common/console_service.h"
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/timer.h"
 #include "common/utils.h"
-#include "common/vana_time.h"
 #include "common/version.h"
 #include "common/zlib.h"
 
@@ -41,6 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
+#include "map.h"
 #include "message.h"
 #include "mob_spell_list.h"
 #include "packet_guard.h"

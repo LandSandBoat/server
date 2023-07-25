@@ -27,18 +27,9 @@
 
 #include "items/item_shop.h"
 
-<<<<<<< HEAD
-#include "../guild.h"
-#include "../item_container.h"
-#include "../map.h"
-#include "charutils.h"
-#include "common/vana_time.h"
-#include "guildutils.h"
-=======
 #include "charutils.h"
 #include "guild.h"
 #include "item_container.h"
->>>>>>> 0f01578129 ([core] Update more vana_time includes)
 #include "itemutils.h"
 #include "map.h"
 #include "serverutils.h"

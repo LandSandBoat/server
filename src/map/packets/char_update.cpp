@@ -30,6 +30,7 @@
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
 #include "entities/charentity.h"
+#include "entities/fellowentity.h"
 #include "status_effect_container.h"
 #include "utils/itemutils.h"
 

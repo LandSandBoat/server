@@ -19,12 +19,9 @@
 ===========================================================================
 */
 
-#include "luautils.h"
-
 #include "common/filewatcher.h"
 #include "common/logging.h"
 #include "common/utils.h"
-#include "common/vana_time.h"
 #include "common/version.h"
 
 #include <array>
@@ -46,6 +43,7 @@
 #include "lua_trade_container.h"
 #include "lua_trigger_area.h"
 #include "lua_zone.h"
+#include "luautils.h"
 
 #include "ability.h"
 #include "ai/ai_container.h"

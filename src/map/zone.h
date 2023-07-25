@@ -25,8 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/taskmgr.h"
-#include "common/xirand.h"
 #include "common/vana_time.h"
+#include "common/xirand.h"
 
 #include <list>
 #include <map>
