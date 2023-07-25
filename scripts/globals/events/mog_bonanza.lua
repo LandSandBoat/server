@@ -42,16 +42,16 @@ local localSettings =
         'Port San d\'Oria (I-9) / Port Bastok (L-8) / Port Windurst (F-6) / Chocobo Circuit (H-8)\n',
 
     -- Winning Numbers are three independent values for each rank prize:
-    WINNING_NUMBER_RANK1 = 800,
-    WINNING_NUMBER_RANK2 = 71,
-    WINNING_NUMBER_RANK3 = 7,
+    WINNING_NUMBERS =
+    {
+        [1] = 800,
+        [2] = 71,
+        [3] = 7,
+    },
 }
 
 local event = SeasonalEvent:new('MogBonanza')
 
--- Start Date (Buying Period)
--- Prize Collection Period
--- End Date
 xi.events.mogBonanza.enabledCheck = function()
     return true
 end
@@ -76,22 +76,10 @@ event:setEnableCheck(xi.events.mogBonanza.enabledCheck)
 
 local csidLookup =
 {
-    [xi.zone.PORT_SAN_DORIA] =
-    {
-        baseCs = 824,
-    },
-    [xi.zone.PORT_BASTOK] =
-    {
-        baseCs = 467,
-    },
-    [xi.zone.PORT_WINDURST] =
-    {
-        baseCs = 912,
-    },
-    [xi.zone.CHOCOBO_CIRCUIT] =
-    {
-        baseCs = 503,
-    },
+    [xi.zone.PORT_SAN_DORIA ] = 824,
+    [xi.zone.PORT_BASTOK    ] = 467,
+    [xi.zone.PORT_WINDURST  ] = 912,
+    [xi.zone.CHOCOBO_CIRCUIT] = 503,
 }
 
 -- NOTE: Each Reward Rank can support up to 46 items along with a gil reward.  This is bit-packed
@@ -244,87 +232,17 @@ local function getRewardEventUpdate(option)
     return updateTable
 end
 
---[[
-    Will return the rank of the prize given winningNumber and guessNumber.
-    1: 3 matching numbers
-    2: 2 matchiung numbers
-    3: 1 matching number
-    4: 0 matching numbers
+-- Will return the rank of prize when compared to the winning number table.
+local getPrizeRank = function(player, fullNumber)
+    for prizeRank, winningNumber in pairs(localSettings.WINNING_NUMBERS) do
+        -- TODO: Can we pick numbers shorter than max len?
+        local matchingNumber = tonumber(string.sub(fullNumber, -1 * string.len(winningNumber)))
 
-    Tested:
-    print('Prize', getPrizeRank(123, 123))
-    print('Prize', getPrizeRank(123, 124))
-    print('Prize', getPrizeRank(123, 234))
-    print('Prize', getPrizeRank(123, 199))
-    print('Prize', getPrizeRank(123, 919))
-    print('Prize', getPrizeRank(123, 991))
-    print('Prize', getPrizeRank(123, 999))
-    print('Prize', getPrizeRank(nil, nil))
-    print('Prize', getPrizeRank(1, 1))
-
-    Prize 1
-    Prize 2
-    Prize 2
-    Prize 3
-    Prize 3
-    Prize 3
-    Prize 4
-    Prize 4
-    Prize 4
-]]--
-local getPrizeRank = function(player, winningNumber, guessNumber)
-    local winningNumberStr = tostring(winningNumber)
-    local guessNumberStr   = tostring(guessNumber)
-
-    -- TODO: guessNumber has to be zero padded on the left once it's a string
-
-    if
-        type(winningNumber) ~= 'number' or
-        type(guessNumber) ~= 'number' or
-        #winningNumberStr ~= #guessNumberStr or
-        #winningNumberStr ~= 3 or
-        #guessNumberStr ~= 3
-    then
-        print(string.format('getPrizeRank: %s tried to get prize rank with invalid number: %d', player:getName(), tonumber(guessNumber)))
-        return 4
-    end
-
-    -- This assumes the strings are the same length, and that the length arg is less than their length
-    -- TODO: Refactor to be baseStr and guessStr, and do 2 passes:
-    local getMatchOfLength = function(str1, str2, length)
-        local strLength = #str1
-        for strIdx1 = 1, strLength - length + 1 do
-            for strIdx2 = 1, strLength - length + 1 do
-                local part1 = string.sub(str1, strIdx1, strIdx1 + length - 1)
-                local part2 = string.sub(str2, strIdx2, strIdx2 + length - 1)
-                if
-                    #part1 == length and
-                    #part2 == length and
-                    part1 == part2
-                then
-                    return true
-                end
-            end
+        if matchingNumber == winningNumber then
+            return prizeRank
         end
-        return false
     end
 
-    -- Rank 1
-    if getMatchOfLength(winningNumberStr, guessNumberStr, 3) then
-        return 1
-    end
-
-    -- Rank 2
-    if getMatchOfLength(winningNumberStr, guessNumberStr, 2) then
-        return 2
-    end
-
-    -- Rank 3
-    if getMatchOfLength(winningNumberStr, guessNumberStr, 1) then
-        return 3
-    end
-
-    -- Rank 4
     return 4
 end
 
@@ -363,7 +281,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
         return
     end
 
-    local baseCs = csidLookup[player:getZoneID()].baseCs
+    local baseCs = csidLookup[player:getZoneID()]
 
     if npcUtil.tradeHasExactly(trade, xi.items.BONANZA_PEARL) then
         player:startEvent(baseCs + 2)
@@ -375,17 +293,26 @@ xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
         return
     end
 
-    local baseCs = csidLookup[player:getZoneID()].baseCs
+    local baseCs = csidLookup[player:getZoneID()]
 
     if isInPurchasingPeriod() then
         local disablePrimevalBrew = 1
 
-        player:startEvent(baseCs, 0, disablePrimevalBrew, 0, 0, 0, 0, 0, localSettings.EVENT)
+        player:startEvent(baseCs,
+            localSettings.MAX_PEARLS,
+            disablePrimevalBrew,
+            0,
+            0,
+            0,
+            0,
+            0,
+            localSettings.EVENT
+        )
     elseif isInCollectionPeriod() then
         player:startEvent(baseCs + 1,
-            localSettings.WINNING_NUMBER_RANK1,
-            localSettings.WINNING_NUMBER_RANK2,
-            localSettings.WINNING_NUMBER_RANK3,
+            localSettings.WINNING_NUMBERS[1],
+            localSettings.WINNING_NUMBERS[2],
+            localSettings.WINNING_NUMBERS[3],
             0,
             0,
             0,
@@ -399,12 +326,8 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
-
-    local baseCs = csidLookup[player:getZoneID()].baseCs
-
-    -- option: 62722
-    -- option: 771
-    -- option: 44034
+    print("Incoming Option: " .. option)
+    local baseCs = csidLookup[player:getZoneID()]
 
     if csid == baseCs + 1 then
         player:updateEvent(unpack(getRewardEventUpdate(option)))
@@ -422,9 +345,15 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
         end
 
     -- Purchase
-    elseif csid == baseCs and option == 44290 then
-        player:updateEvent(459877491, 137258278, 0, 0, 35929248, 54166282, 4095, 0)
+    elseif csid == baseCs then
+        local optionType = bit.band(option, 0xFF)
 
+        if optionType == 2 then
+            local selectedNumber = bit.rshift(option, 8)
+            player:updateEvent(459877491, 137258278, 0, 0, 35929248, 54166282, 4095, 0)
+        else
+            player:updateEvent(unpack(getRewardEventUpdate(option)))
+        end
     else
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end
@@ -435,7 +364,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
         return
     end
 
-    local baseCs = csidLookup[player:getZoneID()].baseCs
+    local baseCs = csidLookup[player:getZoneID()]
 
     -- Give Pearl
     if csid == baseCs and option == 3 then
