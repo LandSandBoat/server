@@ -13280,8 +13280,8 @@ INSERT INTO `mob_groups` VALUES (7,6954,209,'Titan_Prime_HTBF',0,128,0,0,0,99,99
 -- GM Zone (Zone 210)
 -- ------------------------------------------------------------
 
--- Garrison npcs (1 per cap). These are inserted dynamically. Only min/max level matters.
--- Consider adding a dynamic entitiy spawn param for min / max level so we only need 1 base mob group.
+-- Garrison NPCs (1 per level cap). These are inserted dynamically. Only min/max level matters.
+-- Consider adding a dynamic entity spawn param for min / max level so we only need 1 base mob group.
 INSERT INTO `mob_groups` VALUES (1,20001,210,'Garrison_20',0,129,0,0,0,15,20,1);
 INSERT INTO `mob_groups` VALUES (2,20001,210,'Garrison_30',0,129,0,0,0,25,30,1);
 INSERT INTO `mob_groups` VALUES (3,20001,210,'Garrison_40',0,129,0,0,0,35,40,1);
