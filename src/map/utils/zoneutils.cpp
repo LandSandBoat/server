@@ -870,13 +870,9 @@ namespace zoneutils
 #endif // ENV32BIT
 
         // clang-format off
-        std::for_each(
-#ifndef __APPLE__ // TODO: OSX machines in CI don't have a compiler compliant with this
-            std::execution::par,
-#endif // __APPLE__
-            std::begin(zones),
-            std::end(zones),
-            [](uint16 zone)
+        {
+            ts::task_system ts;
+            for (auto zone : zones)
             {
                 ts.schedule([zone]()
                 {
