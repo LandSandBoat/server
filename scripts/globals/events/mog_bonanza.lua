@@ -21,7 +21,13 @@ local localSettings =
     -- 0x5A: 20th Vana'versary Nomad Mog Bonanza
     -- 0x5C: 21st Vana'versary Nomad Mog Bonanza
     -- 0x5E: <number>
-    EVENT = 0x5E,
+    EVENT = 0x5C,
+
+    -- These are local times, and should be tweaked based on your time zone
+    BUYING_PERIOD_START     = os.time({ year = 2023, month = 5, day = 17, hour = 1, min =  0 }),
+    BUYING_PERIOD_END       = os.time({ year = 2023, month = 6, day = 15, hour = 7, min = 59 }),
+    COLLECTION_PERIOD_START = os.time({ year = 2023, month = 7, day = 11, hour = 1, min =  0 }),
+    COLLECTION_PERIOD_END   = os.time({ year = 2023, month = 7, day = 31, hour = 7, min = 59 }),
 
     COLLECTION_SERVER_MESSAGE =
         'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
@@ -35,9 +41,10 @@ local localSettings =
         'Details on the prize can be confirmed by speaking to a Bonanza Moogle at one of the following locations:\n' ..
         'Port San d\'Oria (I-9) / Port Bastok (L-8) / Port Windurst (F-6) / Chocobo Circuit (H-8)\n',
 
-    -- When WINNING_NUMBER is nil, false, or anything that isn't a type() == 'number', the whole system will be in
-    -- the buying period. Once WINNING_NUMBER is set, everything will be in the collection period until the event ends.
-    WINNING_NUMBER = nil,
+    -- Winning Numbers are three independent values for each rank prize:
+    WINNING_NUMBER_RANK1 = 800,
+    WINNING_NUMBER_RANK2 = 71,
+    WINNING_NUMBER_RANK3 = 7,
 }
 
 local event = SeasonalEvent:new('MogBonanza')
@@ -47,6 +54,22 @@ local event = SeasonalEvent:new('MogBonanza')
 -- End Date
 xi.events.mogBonanza.enabledCheck = function()
     return true
+end
+
+local isInPurchasingPeriod = function()
+    local currentTime = os.time()
+
+    return xi.events.mogBonanza.enabledCheck() and
+        currentTime >= localSettings.BUYING_PERIOD_START and
+        currentTime <= localSettings.BUYING_PERIOD_END
+end
+
+local isInCollectionPeriod = function()
+    local currentTime = os.time()
+
+    return xi.events.mogBonanza.enabledCheck() and
+        currentTime >= localSettings.COLLECTION_PERIOD_START and
+        currentTime <= localSettings.COLLECTION_PERIOD_END
 end
 
 event:setEnableCheck(xi.events.mogBonanza.enabledCheck)
@@ -318,7 +341,8 @@ local giveBonanzaPearl = function(player, number)
     end
 
     player:addItem({ id = xi.items.BONANZA_PEARL,
-        exdata = {
+        exdata =
+        {
             [0] = bit.band(number, 0xFF),
             [1] = bit.band(bit.rshift(number,  8), 0xFF),
             [2] = bit.band(bit.rshift(number, 16), 0xFF),
@@ -331,46 +355,47 @@ local giveBonanzaPearl = function(player, number)
     })
 end
 
-local isInPurchasingPeriod = function()
-    return xi.events.mogBonanza.enabledCheck() and type(localSettings.WINNING_NUMBER) ~= 'number'
-end
-
-local isInCollectionPeriod = function()
-    return xi.events.mogBonanza.enabledCheck() and type(localSettings.WINNING_NUMBER) == 'number'
-end
-
 xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
-
-    -- TODO: Empty?
-
-    if not xi.events.mogBonanza.enabledCheck() then
+    if
+        not xi.events.mogBonanza.enabledCheck() or
+        not isInCollectionPeriod()
+    then
         return
+    end
+
+    local baseCs = csidLookup[player:getZoneID()].baseCs
+
+    if npcUtil.tradeHasExactly(trade, xi.items.BONANZA_PEARL) then
+        player:startEvent(baseCs + 2)
     end
 end
 
 xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
-
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
 
     local baseCs = csidLookup[player:getZoneID()].baseCs
 
-    local disablePrimevalBrew = 1
+    if isInPurchasingPeriod() then
+        local disablePrimevalBrew = 1
 
-    -- Args 5,6,7 might be garbage
-    --player:startEvent(912, 1, disablePrimevalBrew, 0, 0, 67108863, 148230686, 4095, 3)
-
-    -- 912: Buying phase
-    -- 913: Priza phase
-
-    -- 914: What is this?
-
-    player:startEvent(baseCs, 397, 79, 1, 0, 65830911, 2632028, 4095, 131096)
+        player:startEvent(baseCs, 0, disablePrimevalBrew, 0, 0, 0, 0, 0, localSettings.EVENT)
+    elseif isInCollectionPeriod() then
+        player:startEvent(baseCs + 1,
+            localSettings.WINNING_NUMBER_RANK1,
+            localSettings.WINNING_NUMBER_RANK2,
+            localSettings.WINNING_NUMBER_RANK3,
+            0,
+            0,
+            0,
+            0,
+            localSettings.EVENT
+        )
+    end
 end
 
 xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option, npc)
-
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
@@ -383,6 +408,18 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
 
     if csid == baseCs + 1 then
         player:updateEvent(unpack(getRewardEventUpdate(option)))
+    elseif csid == baseCs + 2 then
+        if option == 8 then
+            -- Winning Options:
+            -- Rank 4: 0, 0
+            -- Rank 3: 2, 0
+            -- Rank 2: 1, 0
+            -- Rank 1: 0, 1
+
+            player:updateEvent(0, 1)
+        else
+            player:updateEvent(unpack(getRewardEventUpdate(option)))
+        end
 
     -- Purchase
     elseif csid == baseCs and option == 44290 then
@@ -394,7 +431,6 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
 end
 
 xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option, npc)
-
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
