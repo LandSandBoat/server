@@ -71,7 +71,7 @@ local csidLookup =
     },
 }
 
--- NOTE: Each Reward Rank can support up to 52 items along with a gil reward.  This is bit-packed
+-- NOTE: Each Reward Rank can support up to 46 items along with a gil reward.  This is bit-packed
 -- where param0 in the event update is the gil reward, and each following parameter contains two items
 -- (upper and lower 16 bits).  There are 3 event update requests per rank.  Any 0-value parameter
 -- will stop the event from processing further values.
@@ -84,32 +84,32 @@ local rewardList =
 
         rewardItems =
         {
-            [ 1] = xi.items.ICE_BRAND,
-            [ 2] = xi.items.ONION_SWORD_III,
-            [ 3] = xi.items.AIR_KNIFE,
-            [ 4] = xi.items.ZANMATO_P2,
-            [ 5] = xi.items.DRAGON_FANGS,
-            [ 6] = xi.items.MALEFIC_AXE,
-            [ 7] = xi.items.DRASTIC_AXE,
-            [ 8] = xi.items.ARTEMISS_BOW_P2,
-            [ 9] = xi.items.MIRACLE_CHEER,
-            [10] = xi.items.FINAL_SICKLE,
-            [11] = xi.items.PANDITS_STAFF,
-            [12] = xi.items.CHOCOBO_KNIFE,
-            [13] = xi.items.DIAMOND_ASPIS,
-            [14] = xi.items.FLAMETONGUE,
-            [15] = xi.items.MUTSU_NO_KAMI_YOSHIYUKI,
-            [16] = xi.items.HEBOS_SPEAR,
-            [17] = xi.items.PREMIUM_HEART,
-            [18] = xi.items.SAVE_THE_QUEEN_III,
-            [19] = xi.items.YAGYU_DARKBLADE,
-            [20] = xi.items.BRAVE_BLADE_III,
-            [21] = xi.items.WIZARDS_ROD,
-            [22] = xi.items.EXETER,
-            [23] = xi.items.COPY_OF_JUDGMENT_DAY,
-            [24] = xi.items.EBISU_FISHING_ROD,
-            [25] = xi.items.MOG_KUPON_AW_KUPO,
-            [26] = xi.items.ABDHALJS_TOME,
+            [ 0] = xi.items.ICE_BRAND,
+            [ 1] = xi.items.ONION_SWORD_III,
+            [ 2] = xi.items.AIR_KNIFE,
+            [ 3] = xi.items.ZANMATO_P2,
+            [ 4] = xi.items.DRAGON_FANGS,
+            [ 5] = xi.items.MALEFIC_AXE,
+            [ 6] = xi.items.DRASTIC_AXE,
+            [ 7] = xi.items.ARTEMISS_BOW_P2,
+            [ 8] = xi.items.MIRACLE_CHEER,
+            [ 9] = xi.items.FINAL_SICKLE,
+            [10] = xi.items.PANDITS_STAFF,
+            [11] = xi.items.CHOCOBO_KNIFE,
+            [12] = xi.items.DIAMOND_ASPIS,
+            [13] = xi.items.FLAMETONGUE,
+            [14] = xi.items.MUTSU_NO_KAMI_YOSHIYUKI,
+            [15] = xi.items.HEBOS_SPEAR,
+            [16] = xi.items.PREMIUM_HEART,
+            [17] = xi.items.SAVE_THE_QUEEN_III,
+            [18] = xi.items.YAGYU_DARKBLADE,
+            [19] = xi.items.BRAVE_BLADE_III,
+            [20] = xi.items.WIZARDS_ROD,
+            [21] = xi.items.EXETER,
+            [22] = xi.items.COPY_OF_JUDGMENT_DAY,
+            [23] = xi.items.EBISU_FISHING_ROD,
+            [24] = xi.items.MOG_KUPON_AW_KUPO,
+            [25] = xi.items.ABDHALJS_TOME,
         },
     },
 
@@ -120,26 +120,26 @@ local rewardList =
 
         rewardItems =
         {
-            [ 1] = xi.items.MOG_KUPON_A_OMII,
-            [ 2] = xi.items.MOG_KUPON_AW_UWIII,
-            [ 3] = xi.items.MOG_KUPON_I_AF119,
-            [ 4] = xi.items.MOG_KUPON_AW_VGR,
-            [ 5] = xi.items.MOG_KUPON_I_RME,
-            [ 6] = xi.items.MOG_KUPON_W_PULSE,
-            [ 7] = xi.items.MOG_KUPON_AW_VGRII,
-            [ 8] = xi.items.MOG_KUPON_W_JOB,
-            [ 9] = xi.items.MOG_KUPON_A_DEII,
-            [10] = xi.items.MOG_KUPON_W_DEIII,
-            [11] = xi.items.WAILING_BELT,
-            [12] = xi.items.SHAPERS_SHAWL,
-            [13] = xi.items.TEN_THOUSAND_BYNE_BILL,
-            [14] = xi.items.RANPERRE_GOLDPIECE,
-            [15] = xi.items.RIMILALA_STRIPESHELL,
-            [16] = xi.items.BAYLD_CRYSTAL,
-            [17] = xi.items.DENSE_CLUSTER,
-            [18] = xi.items.CATS_EYE,
-            [19] = xi.items.MOG_KUPON_AW_GFIII,
-            [20] = xi.items.LU_SHANGS_FISHING_ROD,
+            [ 0] = xi.items.MOG_KUPON_A_OMII,
+            [ 1] = xi.items.MOG_KUPON_AW_UWIII,
+            [ 2] = xi.items.MOG_KUPON_I_AF119,
+            [ 3] = xi.items.MOG_KUPON_AW_VGR,
+            [ 4] = xi.items.MOG_KUPON_I_RME,
+            [ 5] = xi.items.MOG_KUPON_W_PULSE,
+            [ 6] = xi.items.MOG_KUPON_AW_VGRII,
+            [ 7] = xi.items.MOG_KUPON_W_JOB,
+            [ 8] = xi.items.MOG_KUPON_A_DEII,
+            [ 9] = xi.items.MOG_KUPON_W_DEIII,
+            [10] = xi.items.WAILING_BELT,
+            [11] = xi.items.SHAPERS_SHAWL,
+            [12] = xi.items.TEN_THOUSAND_BYNE_BILL,
+            [13] = xi.items.RANPERRE_GOLDPIECE,
+            [14] = xi.items.RIMILALA_STRIPESHELL,
+            [15] = xi.items.BAYLD_CRYSTAL,
+            [16] = xi.items.DENSE_CLUSTER,
+            [17] = xi.items.CATS_EYE,
+            [18] = xi.items.MOG_KUPON_AW_GFIII,
+            [19] = xi.items.LU_SHANGS_FISHING_ROD,
         },
     },
 
@@ -150,35 +150,76 @@ local rewardList =
 
         rewardItems =
         {
-            [ 1] = xi.items.MOG_KUPON_AW_UW,
-            [ 2] = xi.items.MOG_KUPON_AW_COS,
-            [ 3] = xi.items.AUCUBA_CROWN,
-            [ 4] = xi.items.CURMUDGEONS_HELMET,
-            [ 5] = xi.items.GAZERS_HELMET,
-            [ 6] = xi.items.RETCHING_HELMET,
-            [ 7] = xi.items.KARAKUL_CAP,
-            [ 8] = xi.items.HOTENGEKI,
-            [ 9] = xi.items.GRUDGE,
-            [10] = xi.items.PLUTON_COFFER,
-            [11] = xi.items.BEITETSU_COFFER,
-            [12] = xi.items.RIFT_BOULDER_COFFER,
-            [13] = xi.items.MARBLE_MOG_PELL,
-            [14] = xi.items.OCHRE_MOG_PELL,
-            [15] = xi.items.MARS_ORB,
-            [16] = xi.items.CHOCOBO_ROPE,
-            [17] = xi.items.CHOCOBO_TORQUE,
-            [18] = xi.items.MOG_KUPON_A_SAP,
-            [19] = xi.items.MOG_KUPON_A_JAD,
-            [20] = xi.items.MOG_KUPON_A_RUB,
-            [21] = xi.items.DEMONIC_AXE,
-            [22] = xi.items.BRAVE_BLADE_II,
-            [23] = xi.items.ONION_SWORD_II,
-            [24] = xi.items.MOG_KUPON_I_ORCHE,
-            [25] = xi.items.SHEET_OF_PROMATHIAN_TUNES,
-            [26] = xi.items.SHEET_OF_ADOULINIAN_TUNES,
+            [ 0] = xi.items.MOG_KUPON_AW_UW,
+            [ 1] = xi.items.MOG_KUPON_AW_COS,
+            [ 2] = xi.items.AUCUBA_CROWN,
+            [ 3] = xi.items.CURMUDGEONS_HELMET,
+            [ 4] = xi.items.GAZERS_HELMET,
+            [ 5] = xi.items.RETCHING_HELMET,
+            [ 6] = xi.items.KARAKUL_CAP,
+            [ 7] = xi.items.HOTENGEKI,
+            [ 8] = xi.items.GRUDGE,
+            [ 9] = xi.items.PLUTON_COFFER,
+            [10] = xi.items.BEITETSU_COFFER,
+            [11] = xi.items.RIFT_BOULDER_COFFER,
+            [12] = xi.items.MARBLE_MOG_PELL,
+            [13] = xi.items.OCHRE_MOG_PELL,
+            [14] = xi.items.MARS_ORB,
+            [15] = xi.items.CHOCOBO_ROPE,
+            [16] = xi.items.CHOCOBO_TORQUE,
+            [17] = xi.items.MOG_KUPON_A_SAP,
+            [18] = xi.items.MOG_KUPON_A_JAD,
+            [19] = xi.items.MOG_KUPON_A_RUB,
+            [20] = xi.items.DEMONIC_AXE,
+            [21] = xi.items.BRAVE_BLADE_II,
+            [22] = xi.items.ONION_SWORD_II,
+            [23] = xi.items.MOG_KUPON_I_ORCHE,
+            [24] = xi.items.SHEET_OF_PROMATHIAN_TUNES,
+            [25] = xi.items.SHEET_OF_ADOULINIAN_TUNES,
         },
     },
 }
+
+-- NOTE: The observed offset indices are 0, 1, and 4 for event updates.  All events seem to be heavily
+-- reliant on base 2; however, there is no use of bit1 (2 value).  The below function implements the above
+-- logic, but there may be something else that was deprecated in the past.
+local function getRewardEventUpdate(option)
+    local prizeRank    = bit.rshift(option, 8) + 1
+    local updateOffset = math.min(bit.band(option, 0xF), 2)
+    local maxItems     = updateOffset == 0 and 13 or 15
+    local startIndex   = updateOffset * 14
+    local updateTable  = { 0, 0, 0, 0, 0, 0, 0, 0 }
+
+    if updateOffset == 0 then
+        updateTable[0] = rewardList[prizeRank].gilReward
+    end
+
+    local updateParameter = 0
+    for indexVal = startIndex, startIndex + maxItems do
+        local updateIndex = math.floor((indexVal - startIndex) / 2) + 1
+        if updateOffset == 0 then
+            updateIndex = updateIndex + 1
+        end
+
+        if not rewardList[prizeRank].rewardItems[indexVal] then
+            if updateParameter > 0 then
+                updateTable[updateIndex] = updateParameter
+            end
+
+            break
+        end
+
+        if updateParameter > 0 then
+            updateParameter = updateParameter + bit.lshift(rewardList[prizeRank].rewardItems[indexVal], 16)
+            updateTable[updateIndex] = updateParameter
+            updateParameter = 0
+        else
+            updateParameter = rewardList[prizeRank].rewardItems[indexVal]
+        end
+    end
+
+    return updateTable
+end
 
 --[[
     Will return the rank of the prize given winningNumber and guessNumber.
@@ -340,34 +381,16 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
     -- option: 771
     -- option: 44034
 
-    -- Rank 1
-    if csid == baseCs and option == 0 then
-        player:updateEvent(0, 1410879680, 1418220610, 1426347229, 1440503094, 1451316821, 1725585129, 241189491)
-    elseif csid == baseCs and option == 1 then
-        player:updateEvent(601184012, 0, 0, 0, 0, 0, 0, 0)
-    elseif csid == baseCs and option == 4 then
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-
-    -- Rank 2
-    elseif csid == baseCs and option == 256 then
-        player:updateEvent(0, 601564113, 601301970, 595534370, 595665792, 576463449, 576393087, 95290801)
-    elseif csid == baseCs and option == 257 then
-        player:updateEvent(576652715, 225649458, 0, 0, 0, 0, 0, 0)
-
-    -- Rank 3
-    elseif csid == baseCs and option == 512 then
-        player:updateEvent(0, 260383709, 600187870, 1680876502, 1555194930, 1371890737, 428103434, 428153222)
-    elseif csid == baseCs and option == 513 then
-        player:updateEvent(416028875, 0, 0, 0, 0, 0, 0, 0)
-    elseif csid == baseCs and option == 516 then
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    if csid == baseCs + 1 then
+        player:updateEvent(unpack(getRewardEventUpdate(option)))
 
     -- Purchase
     elseif csid == baseCs and option == 44290 then
         player:updateEvent(459877491, 137258278, 0, 0, 35929248, 54166282, 4095, 0)
-    end
 
-    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    else
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    end
 end
 
 xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option, npc)
