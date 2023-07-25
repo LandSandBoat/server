@@ -52,6 +52,9 @@ def contains_delete(line):
 
     return "delete " in line or "delete[]" in line or "delete []" in line
 
+def contains_relative_include(line):
+    return "#include \"../" in line
+
 def check(name):
     if os.path.isfile(name):
         with open(name) as f:
@@ -60,6 +63,9 @@ def check(name):
                 counter = counter + 1
                 if contains_delete(line):
                     print(f"{name}:{counter}: Found naked delete. Please use destroy(ptr) or destroy_arr(ptr).")
+                    print(line)
+                if contains_relative_include(line):
+                    print(f"{name}:{counter}: Found relative include. Please non-relative paths.")
                     print(line)
 
 if target == 'src':
