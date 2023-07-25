@@ -12,13 +12,48 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.dancer = xi.job_utils.dancer or {}
 -----------------------------------
 
+-----------------------------------
+-- Local tables.
+-----------------------------------
+local waltzAbilities =
+{
+--  [Ability ID] =     { tpCost, statMultiplier, baseHp }
+    [xi.jobAbility.CURING_WALTZ    ] = { 200, 0.25,  60 },
+    [xi.jobAbility.CURING_WALTZ_II ] = { 350, 0.50, 130 },
+    [xi.jobAbility.CURING_WALTZ_III] = { 500, 0.75, 270 },
+    [xi.jobAbility.CURING_WALTZ_IV ] = { 650, 1.00, 450 },
+    [xi.jobAbility.CURING_WALTZ_V  ] = { 800, 1.25, 600 },
+    [xi.jobAbility.DIVINE_WALTZ    ] = { 400, 0.25,  60 },
+    [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
+}
+
+local animationTable =
+{
+-- [weapon type] = { step, flourish }
+    [ 0] = { 15, 25 },
+    [ 1] = { 15, 25 },
+    [ 2] = { 14, 24 },
+    [ 3] = { 14, 24 },
+    [ 4] = { 19, 29 },
+    [ 5] = { 16, 26 },
+    [ 6] = { 18, 28 },
+    [ 7] = { 18, 28 },
+    [ 8] = { 20, 30 },
+    [ 9] = { 21, 31 },
+    [10] = { 22, 32 },
+    [11] = { 17, 27 },
+    [12] = { 23, 33 },
+}
+
+-----------------------------------
+-- Local functions.
+-----------------------------------
 local function getMaxFinishingMoves(player)
     return 5 + player:getMod(xi.mod.MAX_FINISHING_MOVE_BONUS)
 end
 
--- This function returns the default number of finishing moves awarded.  Expand this
--- function as needed.
-
+-- This function returns the default number of finishing moves awarded.
+-- Expand this function as needed.
 -- TODO: Determine if step is stacked at 10, and reduce to 1 if necessary.
 local function getStepFinishingMovesBase(player)
     local numAwardedMoves = 1
@@ -32,8 +67,8 @@ local function getStepFinishingMovesBase(player)
     return numAwardedMoves
 end
 
--- When a finishing move effect wears for the player, it is always Finishing Move 1.  In this case,
--- use FM1 to track via power, and update icon as necessary (6 being the 5+).
+-- When a finishing move effect wears for the player, it is always Finishing Move 1.
+-- In this case, use FM1 to track via power, and update icon as necessary (6 being the 5+).
 local function getFinishingMoveIcon(numMoves)
     local effectIconId = xi.effect.FINISHING_MOVE_1
 
@@ -67,7 +102,26 @@ local function setFinishingMoves(player, numMoves)
     end
 end
 
-xi.job_utils.dancer.stepAbilityCheck = function(player, target, ability)
+local function getStepAnimation(weaponSkillType)
+    if weaponSkillType <= 12 then
+        return animationTable[weaponSkillType][1]
+    else
+        return 0
+    end
+end
+
+local function getFlourishAnimation(weaponSkillType)
+    if weaponSkillType <= 12 then
+        return animationTable[weaponSkillType][2]
+    else
+        return 0
+    end
+end
+
+-----------------------------------
+-- Ability Check.
+-----------------------------------
+xi.job_utils.dancer.checkStepAbility = function(player, target, ability)
     if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
@@ -81,6 +135,76 @@ xi.job_utils.dancer.stepAbilityCheck = function(player, target, ability)
     end
 end
 
+xi.job_utils.dancer.checkNoFootRiseAbility = function(player, target, ability)
+    local fmEffect = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
+
+    if
+        fmEffect and
+        fmEffect:getPower() >= getMaxFinishingMoves(player)
+    then
+        return 561, 0
+    else
+        return 0, 0
+    end
+end
+
+xi.job_utils.dancer.checkFlourishAbility = function(player, target, ability, combatOnly, minimumCost)
+    -- Combat Check.
+    if
+        combatOnly and
+        player:getAnimation() ~= 1
+    then
+        return xi.msg.basic.REQUIRES_COMBAT, 0
+    end
+
+    -- Finishing Move check.
+    local numFinishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+    if numFinishingMoves >= minimumCost then
+        return 0, 0
+    else
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
+    end
+end
+
+xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
+    local waltzInfo = waltzAbilities[ability:getID()]
+
+    if target:getHP() == 0 then
+        return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
+    elseif player:hasStatusEffect(xi.effect.SABER_DANCE) then
+        return xi.msg.basic.UNABLE_TO_USE_JA2, 0
+    elseif player:hasStatusEffect(xi.effect.TRANCE) then
+        ability:setRecast(math.min(ability:getRecast(), 6))
+
+        return 0, 0
+    elseif player:getTP() < waltzInfo[1] then
+        return xi.msg.basic.NOT_ENOUGH_TP, 0
+    else
+        -- Waltz Delay (-1s per mod value)
+        local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
+        if recastMod ~= 0 then
+            local newRecast = ability:getRecast() + recastMod
+            ability:setRecast(utils.clamp(newRecast, 0, newRecast))
+        end
+
+        -- Apply "Fan Dance" Waltz recast reduction.  All tiers above 1 grant 5%
+        -- recast reduction each.
+        local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
+        if
+            player:hasStatusEffect(xi.effect.FAN_DANCE) and
+            fanDanceMerits > 1
+        then
+            ability:setRecast(ability:getRecast() * (1 - 0.05 * (fanDanceMerits - 1)))
+        end
+
+        return 0, 0
+    end
+end
+
+-----------------------------------
+-- Ability Use.
+-----------------------------------
 xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, stepEffect, missId, hitId)
     local hitType          = missId
     local stepDurationGift = player:getJobPointLevel(xi.jp.STEP_DURATION)
@@ -151,19 +275,6 @@ xi.job_utils.dancer.usePrestoAbility = function(player, target, ability, action)
     target:addStatusEffect(xi.effect.PRESTO, 19, 3, 30)
 end
 
-xi.job_utils.dancer.checkNoFootRiseAbility = function(player, target, ability)
-    local fmEffect = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
-
-    if
-        fmEffect and
-        fmEffect:getPower() >= getMaxFinishingMoves(player)
-    then
-        return 561, 0
-    else
-        return 0, 0
-    end
-end
-
 xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability, action)
     local addedMoves = player:getMerit(xi.merit.NO_FOOT_RISE)
     local fmEffect   = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
@@ -176,14 +287,6 @@ xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability, act
     setFinishingMoves(player, addedMoves)
 
     return addedMoves
-end
-
-xi.job_utils.dancer.checkReverseFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-        return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
-    end
 end
 
 xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability, action)
@@ -202,14 +305,6 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     return tpGained
 end
 
-xi.job_utils.dancer.checkAnimatedFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-        return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
-    end
-end
-
 xi.job_utils.dancer.useAnimatedFlourishAbility = function(player, target, ability, action)
     local jpBonusVE = player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT) * 10
     local numMoves  = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
@@ -218,18 +313,6 @@ xi.job_utils.dancer.useAnimatedFlourishAbility = function(player, target, abilit
 
     target:addEnmity(player, 0, veGranted + jpBonusVE)
     setFinishingMoves(player, numMoves - usedMoves)
-end
-
-xi.job_utils.dancer.checkDesperateFlourishAbility = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-            return 0, 0
-        else
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        end
-    end
 end
 
 xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, ability, action)
@@ -265,18 +348,6 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
     else
         ability:setMsg(xi.msg.basic.JA_MISS)
         return 0
-    end
-end
-
-xi.job_utils.dancer.checkViolentFlourishAbility = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-            return 0, 0
-        else
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        end
     end
 end
 
@@ -334,64 +405,58 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
     end
 end
 
-local waltzAbilities =
-{
---  Spell ID                           { tpCost, statMultiplier, baseHp }
-    [xi.jobAbility.CURING_WALTZ    ] = { 200, 0.25,  60 },
-    [xi.jobAbility.CURING_WALTZ_II ] = { 350, 0.50, 130 },
-    [xi.jobAbility.CURING_WALTZ_III] = { 500, 0.75, 270 },
-    [xi.jobAbility.CURING_WALTZ_IV ] = { 650, 1.00, 450 },
-    [xi.jobAbility.CURING_WALTZ_V  ] = { 800, 1.25, 600 },
-    [xi.jobAbility.DIVINE_WALTZ    ] = { 400, 0.25,  60 },
-    [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
-}
+xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, ability)
+    local flourishMerits = player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT)
+    local availableMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
 
-xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
-    local waltzInfo = waltzAbilities[ability:getID()]
+    local power = utils.clamp(availableMoves, 0, 3)
 
-    if target:getHP() == 0 then
-        return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
-    elseif player:hasStatusEffect(xi.effect.SABER_DANCE) then
-        return xi.msg.basic.UNABLE_TO_USE_JA2, 0
-    elseif player:hasStatusEffect(xi.effect.TRANCE) then
-        ability:setRecast(math.min(ability:getRecast(), 6))
+    player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
+    setFinishingMoves(player, availableMoves - power)
+end
 
-        return 0, 0
-    elseif player:getTP() < waltzInfo[1] then
-        return xi.msg.basic.NOT_ENOUGH_TP, 0
+xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, action)
+    local numMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+    if
+        not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
+    then
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 1, 0, 5, 0, 1)
     else
-        -- Waltz Delay (-1s per mod value)
-        local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
-        if recastMod ~= 0 then
-            local newRecast = ability:getRecast() + recastMod
-            ability:setRecast(utils.clamp(newRecast, 0, newRecast))
-        end
-
-        -- Apply "Fan Dance" Waltz recast reduction.  All tiers above 1 grant 5%
-        -- recast reduction each.
-        local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
-        if
-            player:hasStatusEffect(xi.effect.FAN_DANCE) and
-            fanDanceMerits > 1
-        then
-            ability:setRecast(ability:getRecast() * (1 - 0.05 * (fanDanceMerits - 1)))
-        end
-
-        return 0, 0
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
+
+    action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+    action:speceffect(target:getID(), 1)
+    setFinishingMoves(player, numMoves - 2)
+
+    return 0
+end
+
+-- TODO: Implement Contradance status effect.
+xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
+    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
-    local waltzInfo      = waltzAbilities[ability:getID()]
+    local abilityId      = ability:getID()
+    local waltzInfo      = waltzAbilities[abilityId]
     local statMultiplier = waltzInfo[2]
     local amtCured       = 0
 
     -- Handle TP cost.
-    if
-        not player:hasStatusEffect(xi.effect.TRANCE) and
-        target:getID() == ability:getPrimaryTargetID() -- Ensure TP is only used once, and not once per target.
-    then
-        player:delTP(waltzInfo[1])
+    if not player:hasStatusEffect(xi.effect.TRANCE) then
+        if
+            abilityId == xi.jobAbility.DIVINE_WALTZ or
+            abilityId == xi.jobAbility.DIVINE_WALTZ_II
+        then
+            if player:getID() == target:getID() then
+                player:delTP(waltzInfo[1])
+            end
+        else
+            player:delTP(waltzInfo[1])
+        end
     end
 
     if player:getMainJob() ~= xi.job.DNC then
