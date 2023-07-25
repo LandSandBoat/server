@@ -18,12 +18,12 @@ entity.onTrigger = function(player, npc)
         16466,  2522, 3,    -- Knife
         17059,   104, 3,    -- Bronze Rod
         17081,   717, 3,    -- Brass Rod
-        17060,  2652, 1,    -- Rod
+        17060,  2758, 1,    -- Rod
         17034,   195, 3,    -- Bronze Mace
-        17035,  4848, 2,    -- Mace
+        17035,  5041, 2,    -- Mace
         16640,   328, 3,    -- Bronze Axe
         16583,  2828, 3,    -- Claymore
-        16584, 42000, 1,    -- Mythril Claymore
+        16584, 43680, 1,    -- Mythril Claymore
         16833,   915, 3,    -- Bronze Spear
         16834,  5408, 3,    -- Brass Spear
         16835, 18345, 3,    -- Spear
