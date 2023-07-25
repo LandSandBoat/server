@@ -24,6 +24,9 @@ target=${1:-src}
 cppcheck -v -j 4 --force --quiet --inconclusive --std=c++17 \
 --enable=information,performance,portability --inline-suppr \
 --suppress=passedByValue:src/map/packet_system.cpp \
+--suppress=useInitializationList \
+--suppress=unmatchedSuppression \
+--inconclusive \
 -DSA_INTERRUPT -DZMQ_DEPRECATED -DZMQ_EVENT_MONITOR_STOPPED -DTRACY_ENABLE \
 ${target}
 
