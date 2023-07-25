@@ -105,7 +105,6 @@ end
 -- Spawns and npc for the given zone and with the given name, look, pose
 -- Uses dynamic entities
 xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, look)
-    local moddedLook = xi.garrison.addWeaponIfNecessary(look)
     local mob = zone:insertDynamicEntity({
         objtype     = xi.objType.MOB,
         allegiance  = xi.allegiance.PLAYER,
@@ -114,7 +113,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
         y           = y,
         z           = z,
         rotation    = rot,
-        look        = moddedLook,
+        look        = look,
         groupId     = groupId,
         groupZoneId = xi.zone.GM_HOME,
 
@@ -145,17 +144,27 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
     return mob
 end
 
--- Adds a random weapon if the given look does not contain one.
--- Weapons are on the byte found in digits 31-32 (including 0x prefix)
-xi.garrison.addWeaponIfNecessary = function(look)
-    -- Weapon already set. Don't change it.
-    if string.sub(look, 31, 32) ~= "00" then
-        return look
+xi.garrison.getAllyInfo = function(zoneData, regionIndex)
+    -- Get zone garrison data
+    local allyName    = xi.garrison.allyNames[zoneData.levelCap][regionIndex]
+    local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][regionIndex]
+    local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+
+    if
+        allyName    == nil or
+        allyGroupId == nil or
+        allyLooks   == nil or
+        #allyLooks  == 0
+    then
+        debugLogf("Garrison data is missing for regiom %u.", regionIndex)
+        return false
     end
 
-    local weapon = utils.randomEntry(xi.garrison.allyArsenal)
-
-    return string.sub(look, 1, 30) .. weapon .. string.sub(look, 33, string.len(look))
+    return {
+        name    = allyName,
+        looks   = allyLooks,
+        groupId = allyGroupId,
+    }
 end
 
 -- Spawns all npcs for the zone in the given garrison starting npc
@@ -167,15 +176,18 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
 
     -- xi.nation starts at 0. Since we use it as index, add off by 1
     local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
-    local allyName    = xi.garrison.allyNames[zoneData.levelCap][regionIndex]
-    local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][regionIndex]
-    local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+    local allyInfo    = xi.garrison.getAllyInfo(zoneData, regionIndex)
 
-    debugLogf("Spawning %d npcs. GroupId: %d", #zoneData.players, allyGroupId)
+    -- If info is missing, a debug message will be logged and NPCs will not be spawned
+    if not allyInfo then
+        return false
+    end
+
+    debugLogf("Spawning %d npcs. GroupId: %d", #zoneData.players, allyInfo.groupId)
 
     -- Spawn 1 npc per player in alliance
     for i = 1, #zoneData.players do
-        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyName, allyGroupId, utils.randomEntry(allyLooks))
+        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyInfo.name, allyInfo.groupId, utils.randomEntry(allyInfo.looks))
         -- Note: This does change the mob level because ally npcs are of type mob, and
         -- level_restriction is only applied to PCs. However, we need the status to validate that the
         -- npcs are part of the garrison.
@@ -194,6 +206,8 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
             zPos = zPos - zoneData.zChange
         end
     end
+
+    return true
 end
 
 -- Spawns a mob with the given id for the given zone.
@@ -319,10 +333,14 @@ xi.garrison.tick = function(npc)
     {
         [xi.garrison.state.SPAWN_NPCS] = function()
             debugLog("State: Spawn NPCs")
-            xi.garrison.spawnNPCs(zone, zoneData)
-
             zoneData.stateTime = os.time()
-            zoneData.state     = xi.garrison.state.BATTLE
+
+            if xi.garrison.spawnNPCs(zone, zoneData) then
+                zoneData.state = xi.garrison.state.BATTLE
+            else
+                debugPrintToPlayers(players, "Unable to spawn NPCs")
+                zoneData.state = xi.garrison.state.ENDED
+            end
         end,
 
         [xi.garrison.state.BATTLE] = function()
@@ -585,7 +603,19 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
         return false
     end
 
-    local zoneData = xi.garrison.zoneData[player:getZoneID()]
+    -- Get zone information
+    local zone        = player:getZone()
+    local zoneID      = zone:getID()
+    local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
+    local zoneData    = xi.garrison.zoneData[zoneID]
+
+    -- If info is missing, a debug message will be logged and Garrison will not begin
+    if not xi.garrison.getAllyInfo(zoneData, regionIndex) then
+        player:PrintToPlayer("Garrison is currently unavailable for this region.", xi.msg.channel.SYSTEM_3)
+        debugLog("Garrison was cancelled due to missing data.")
+
+        return false
+    end
 
     if npcUtil.tradeHasExactly(trade, zoneData.itemReq) then
         if not xi.garrison.validateEntry(zoneData, player, npc, guardNation) then
