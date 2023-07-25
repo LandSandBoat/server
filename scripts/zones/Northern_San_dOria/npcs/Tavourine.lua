@@ -14,17 +14,20 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16584, 37800, 1,    -- Mythril Claymore
-        16466,  2182, 1,    -- Knife
-        17060,  2386, 1,    -- Rod
-        16640,   284, 2,    -- Bronze Axe
-        16465,   147, 2,    -- Bronze Knife
-        17081,   621, 2,    -- Brass Rod
-        16583,  2448, 2,    -- Claymore
-        17035,  4363, 2,    -- Mace
-        17059,    90, 3,    -- Bronze Rod
-        17034,   169, 3,    -- Bronze Mace
-        16845, 16578, 3,    -- Lance
+        16465,   164, 3,    -- Bronze Knife
+		16466,  2425, 3,    -- Knife
+		17059,   100, 3,    -- Bronze Rod
+		17081,   690, 3,    -- Brass Rod
+        17060,  2652, 1,    -- Rod
+		17034,   188, 3,    -- Bronze Mace
+        17035,  4848, 2,    -- Mace
+        16640,   316, 3,    -- Bronze Axe
+        16583,  2720, 3,    -- Claymore
+		16584, 42000, 1,    -- Mythril Claymore
+		16833,   880, 3,    -- Bronze Spear
+		16834,  5200, 3,    -- Brass Spear
+		16835, 17640, 3,    -- Spear
+		16845, 18420, 3,    -- Lance
     }
 
     player:showText(npc, ID.text.TAVOURINE_SHOP_DIALOG)
