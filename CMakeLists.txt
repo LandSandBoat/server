@@ -62,6 +62,12 @@ find_package(ZeroMQ REQUIRED)
 # Find LuaJIT
 find_package(LuaJIT REQUIRED)
 
+# Find OpenSSL libcrypto
+find_package(OpenSSLlibcrypto REQUIRED)
+
+# Find OpenSSL libssl
+find_package(OpenSSLlibssl REQUIRED)
+
 if(UNIX AND NOT APPLE)
     find_package(Binutils REQUIRED)
 endif()
