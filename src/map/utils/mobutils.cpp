@@ -982,9 +982,6 @@ namespace mobutils
     {
         // add special mob mods
 
-        // this only has to be added once
-        AddCustomMods(PMob);
-
         PMob->m_Immunity |= PMob->getMobMod(MOBMOD_IMMUNITY);
 
         PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
