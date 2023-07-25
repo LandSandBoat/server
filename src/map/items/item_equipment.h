@@ -28,9 +28,9 @@
 
 #include "item_usable.h"
 
-#include "../latent_effect.h"
-#include "../modifier.h"
-#include "../status_effect.h"
+#include "latent_effect.h"
+#include "modifier.h"
+#include "status_effect.h"
 
 // типы событий, в которых участвует логика предмета
 

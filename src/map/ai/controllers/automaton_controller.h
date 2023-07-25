@@ -22,10 +22,10 @@
 #ifndef _AUTOMATONCONTROLLER_H
 #define _AUTOMATONCONTROLLER_H
 
-#include "../../entities/automatonentity.h"
-#include "../../spell.h"
-#include "../../status_effect.h"
+#include "entities/automatonentity.h"
 #include "pet_controller.h"
+#include "spell.h"
+#include "status_effect.h"
 #include <optional>
 
 struct CurrentManeuvers

@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CWEAPONSKILL_STATE_H
 #define _CWEAPONSKILL_STATE_H
 
-#include "../../weapon_skill.h"
 #include "state.h"
+#include "weapon_skill.h"
 
 class CWeaponSkillState : public CState
 {

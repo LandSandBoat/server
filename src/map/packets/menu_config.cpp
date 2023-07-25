@@ -23,7 +23,7 @@
 
 #include "menu_config.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 {

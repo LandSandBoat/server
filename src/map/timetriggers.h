@@ -22,7 +22,7 @@
 #ifndef _CTIMETRIGGERS_H
 #define _CTIMETRIGGERS_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/npcentity.h"
 #include <vector>
 

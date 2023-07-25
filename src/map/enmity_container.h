@@ -22,7 +22,7 @@
 #ifndef _CENMITYCONTAINER_H
 #define _CENMITYCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <unordered_map>
 
 class CBattleEntity;

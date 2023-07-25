@@ -22,8 +22,8 @@
 #ifndef _CMOBSKILL_H
 #define _CMOBSKILL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 enum SKILLFLAG
 {

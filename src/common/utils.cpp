@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../common/utils.h"
-#include "../common/logging.h"
-#include "../common/md52.h"
+#include "common/utils.h"
+#include "common/logging.h"
+#include "common/md52.h"
 
 #include <algorithm>
 #include <cctype>

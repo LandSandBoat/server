@@ -22,7 +22,7 @@
 #ifndef _CTRANSPORT_H
 #define _CTRANSPORT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/npcentity.h"
 #include <vector>
 

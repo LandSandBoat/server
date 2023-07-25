@@ -59,8 +59,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "data_session.h"
 #include "handler.h"
 #include "handler_session.h"
-#include "login_packets.h"
 #include "login_helpers.h"
+#include "login_packets.h"
 #include "session.h"
 #include "view_session.h"
 

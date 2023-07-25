@@ -21,11 +21,11 @@
 
 #include "common/taskmgr.h"
 
-#include "../ai/ai_container.h"
-#include "../utils/zoneutils.h"
+#include "ai/ai_container.h"
 #include "npcentity.h"
+#include "utils/zoneutils.h"
 
-#include "../packets/entity_update.h"
+#include "packets/entity_update.h"
 
 /************************************************************************
  *                                                                       *

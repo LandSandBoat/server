@@ -21,8 +21,8 @@
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
 #include "char_appearance.h"
+#include "entities/charentity.h"
 
 CCharAppearancePacket::CCharAppearancePacket(CCharEntity* PChar)
 {

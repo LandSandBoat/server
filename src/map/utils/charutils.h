@@ -24,9 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/cbasetypes.h"
 
-#include "../entities/charentity.h"
-#include "../items/item_equipment.h"
-#include "../trait.h"
+#include "entities/charentity.h"
+#include "items/item_equipment.h"
+#include "trait.h"
 
 class CPetEntity;
 class CMobEntity;

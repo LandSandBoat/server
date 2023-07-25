@@ -60,7 +60,7 @@ namespace loginPackets
             packet.identifer[i] = 0;
         }
     }
-}
+} // namespace loginPackets
 
 // PS2: lpkt_next_login: https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x000B_ResponseNextLogin.md
 struct lpkt_next_login : packet_t
@@ -159,6 +159,6 @@ struct lpkt_world_name
 // PS2: lpkt_world_list https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0023_ResponseWorldList.md
 struct lpkt_world_list : packet_t
 {
-    uint32_t sumofworld;            // PS2: sumofworld
-    lpkt_world_name world_name[1];  // PS2: world_name // size is 1 as we do not support multiple worlds yet.
+    uint32_t        sumofworld;    // PS2: sumofworld
+    lpkt_world_name world_name[1]; // PS2: world_name // size is 1 as we do not support multiple worlds yet.
 };

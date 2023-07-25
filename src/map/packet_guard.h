@@ -1,7 +1,7 @@
 ﻿#ifndef _PACKETGUARD_H
 #define _PACKETGUARD_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "packet_system.h"
 #include "packets/basic.h"
 

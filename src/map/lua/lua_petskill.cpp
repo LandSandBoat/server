@@ -21,8 +21,8 @@
 
 #include "common/logging.h"
 
-#include "../petskill.h"
 #include "lua_petskill.h"
+#include "petskill.h"
 
 /************************************************************************
  *                                                                       *

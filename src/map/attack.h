@@ -22,7 +22,7 @@
 #ifndef _CATTACK_H
 #define _CATTACK_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/battleentity.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"

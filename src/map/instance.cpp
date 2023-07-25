@@ -28,7 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 #include "zone.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 
 CInstance::CInstance(CZone* zone, uint16 instanceid)
 : CZoneEntities(zone)

@@ -18,8 +18,8 @@
 
 #include "jobpoint_update.h"
 
-#include "../entities/charentity.h"
-#include "../job_points.h"
+#include "entities/charentity.h"
+#include "job_points.h"
 
 CJobPointUpdatePacket::CJobPointUpdatePacket(CCharEntity* PChar, JOBPOINT_TYPE jpType)
 {

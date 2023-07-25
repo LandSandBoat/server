@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../instance_loader.h"
-#include "../lua/luautils.h"
+#include "instance_loader.h"
+#include "lua/luautils.h"
 
 #include "instanceutils.h"
 #include "zoneutils.h"

@@ -25,12 +25,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <common/md52.h>
 #include <common/mmo.h>
-#include <common/sql.h>
 #include <common/socket.h> // for ref<T>
+#include <common/sql.h>
 #include <common/xirand.h>
 
-#include "session.h"
 #include "login_errors.h"
+#include "session.h"
 
 namespace loginHelpers
 {

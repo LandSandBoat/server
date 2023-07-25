@@ -21,9 +21,9 @@
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
-#include "../utils/zoneutils.h"
+#include "entities/charentity.h"
 #include "server_ip.h"
+#include "utils/zoneutils.h"
 
 CServerIPPacket::CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp)
 {

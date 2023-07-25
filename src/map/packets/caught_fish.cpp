@@ -20,8 +20,8 @@
 */
 
 #include "caught_fish.h"
-#include "../../common/socket.h"
-#include "../entities/charentity.h"
+#include "common/socket.h"
+#include "entities/charentity.h"
 #include <string.h>
 
 CCaughtFishPacket::CCaughtFishPacket(CCharEntity* PChar, uint16 param0, uint16 messageID, uint8 count)

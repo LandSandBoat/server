@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "event_update_string.h"
 
 CEventUpdateStringPacket::CEventUpdateStringPacket(std::string const& string0, std::string const& string1, std::string const& string2,

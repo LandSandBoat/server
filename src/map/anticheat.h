@@ -22,7 +22,7 @@
 #ifndef _CANTICHEAT_H
 #define _CANTICHEAT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/charentity.h"
 
 namespace anticheat

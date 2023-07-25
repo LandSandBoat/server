@@ -18,8 +18,8 @@
 
 #include "menu_unity.h"
 
-#include "../entities/charentity.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
+#include "utils/charutils.h"
 
 CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
 {

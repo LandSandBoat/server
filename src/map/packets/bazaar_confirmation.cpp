@@ -25,8 +25,8 @@
 
 #include "bazaar_confirmation.h"
 
-#include "../entities/charentity.h"
-#include "../utils/itemutils.h"
+#include "entities/charentity.h"
+#include "utils/itemutils.h"
 
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 SlotID, uint8 Quantity)
 {

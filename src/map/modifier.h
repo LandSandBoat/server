@@ -17,7 +17,7 @@
 #ifndef _CMODIFIER_H
 #define _CMODIFIER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum class Mod
 {

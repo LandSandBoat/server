@@ -26,12 +26,12 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../alliance.h"
-#include "../map.h"
-#include "../modifier.h"
-#include "../party.h"
-#include "../trait.h"
+#include "alliance.h"
 #include "baseentity.h"
+#include "map.h"
+#include "modifier.h"
+#include "party.h"
+#include "trait.h"
 
 enum DEATH_TYPE
 {

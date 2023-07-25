@@ -23,9 +23,9 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
-#include "../trade_container.h"
+#include "entities/charentity.h"
 #include "shop_items.h"
+#include "trade_container.h"
 
 CShopItemsPacket::CShopItemsPacket(CCharEntity* PChar)
 {

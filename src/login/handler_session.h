@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
+#include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
-#include <asio/ssl.hpp>
 #include <common/logging.h>
 
 class handler_session

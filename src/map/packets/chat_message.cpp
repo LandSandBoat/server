@@ -20,8 +20,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "chat_message.h"
-#include "../entities/charentity.h"
 #include "common/socket.h"
+#include "entities/charentity.h"
 #include <cstring>
 
 CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender)
