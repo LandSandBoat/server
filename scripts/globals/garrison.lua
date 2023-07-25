@@ -144,10 +144,19 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
     return mob
 end
 
-xi.garrison.getAllyInfo = function(zoneData, regionIndex)
+local nationName =
+{
+    [xi.nation.SANDORIA] = "San d'Oria",
+    [xi.nation.BASTOK]   = "Bastok",
+    [xi.nation.WINDURST] = "Windurst",
+    [xi.nation.BEASTMEN] = "Beastmen",
+    [xi.nation.OTHER]    = "Other",
+}
+
+xi.garrison.getAllyInfo = function(zoneData, nationID)
     -- Get zone garrison data
-    local allyName    = xi.garrison.allyNames[zoneData.levelCap][regionIndex]
-    local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][regionIndex]
+    local allyName    = xi.garrison.allyNames[zoneData.levelCap][nationID]
+    local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][nationID]
     local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
 
     if
@@ -156,8 +165,8 @@ xi.garrison.getAllyInfo = function(zoneData, regionIndex)
         allyLooks   == nil or
         #allyLooks  == 0
     then
-        debugLogf("Garrison data is missing for regiom %u.", regionIndex)
-        return false
+        debugLogf("Garrison data missing for %s level %u.", nationName[nationID], zoneData.levelCap)
+        return nil
     end
 
     return {
@@ -174,12 +183,11 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
     local zPos     = zoneData.zPos
     local rot      = zoneData.rot
 
-    -- xi.nation starts at 0. Since we use it as index, add off by 1
-    local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
-    local allyInfo    = xi.garrison.getAllyInfo(zoneData, regionIndex)
+    local nationID = GetRegionOwner(zone:getRegionID())
+    local allyInfo = xi.garrison.getAllyInfo(zoneData, nationID)
 
     -- If info is missing, a debug message will be logged and NPCs will not be spawned
-    if not allyInfo then
+    if allyInfo == nil then
         return false
     end
 
@@ -604,13 +612,13 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     end
 
     -- Get zone information
-    local zone        = player:getZone()
-    local zoneID      = zone:getID()
-    local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
-    local zoneData    = xi.garrison.zoneData[zoneID]
+    local zone     = player:getZone()
+    local zoneID   = zone:getID()
+    local nationID = GetRegionOwner(zone:getRegionID())
+    local zoneData = xi.garrison.zoneData[zoneID]
 
     -- If info is missing, a debug message will be logged and Garrison will not begin
-    if not xi.garrison.getAllyInfo(zoneData, regionIndex) then
+    if xi.garrison.getAllyInfo(zoneData, nationID) == nil then
         player:PrintToPlayer("Garrison is currently unavailable for this region.", xi.msg.channel.SYSTEM_3)
         debugLog("Garrison was cancelled due to missing data.")
 

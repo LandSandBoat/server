@@ -29,79 +29,87 @@ xi.garrison.allyGroupIds =
     [75] = 5,
 }
 
--- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
+-- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost - More data needed)
 xi.garrison.allyLooks =
 {
     [20] =
     {
+        [xi.nation.SANDORIA] =
         {
-            -- San d'Oria Lv20
             "0x01000C030010262000303A403A5008611B700000",
             "0x01000A040010262019303A40195008611C700000",
             -- (Missing capture for 1 (?) NPC here)
         },
+
+        [xi.nation.BASTOK] =
         {
-            -- Bastok Lv20
             -- (Missing capture)
         },
+
+        [xi.nation.WINDURST] =
         {
-            -- Windurst Lv20
             -- (Missing capture)
         },
     },
     --level 30 garrison looks
     [30] =
     {
+        [xi.nation.SANDORIA] =
         {
-            -- San d'Oria Lv30
             "0x010006030010762076303A400650736000700000",
             "0x01000F0300101520153015401550006000700000",
             "0x010009040010762076303A400650736000700000",
             "0x01000E0400101520003015401550006000700000"
         },
+
+        [xi.nation.BASTOK] =
         {
-            -- Bastok Lv30
             -- (Missing capture)
         },
+
+        [xi.nation.WINDURST] =
         {
-            -- Windurst Lv30
             -- (Missing capture)
         },
     },
     --level 40 garrison looks
     [40] =
     {
+        [xi.nation.SANDORIA] =
         {
-            -- San d'Oria Lv40
             "0x01000E04191019201930194019506B601C700000",
             "0x01000903191019201930194019506B601C700000"
             -- (Missing capture for 2 NPCs here)
         },
+
+        [xi.nation.BASTOK] =
         {
-            -- Bastok Lv40
             "0x0100020260102420603060406050B56000700000",
             "0x010008083D1024203D3010401050756075700000",
             "0x01000008371024203730374037506F6018700000",
             "0x0100040105102420053005400550BB6000700000"
         },
+
+        [xi.nation.WINDURST] =
         {
-            -- Windurst Lv40
             -- (Missing capture)
         },
     },
     --level 50 garrison looks
     [50] =
     {
+        [xi.nation.SANDORIA] =
         {
-            -- San d'Oria Lv50
             -- (Missing capture)
         },
+
+        [xi.nation.BASTOK] =
         {
-            -- Bastok Lv50
             -- (Missing capture)
         },
+
+        [xi.nation.WINDURST] =
         {
-            -- Windurst Lv50
             "0x0100020600106320633063406350056122700000",
             "0x010004067C102D20193019401950506100700000",
             "0x0100080669106B206B306B406B50FE6000700000"
@@ -111,17 +119,19 @@ xi.garrison.allyLooks =
     --level 75 garrison looks
     [75] =
     {
+        [xi.nation.SANDORIA] =
         {
-            -- San d'Oria Lv75
             -- (Missing capture)
         },
+
+        [xi.nation.BASTOK] =
         {
-            -- Bastok Lv75
             "0x010002071C1070201C301C401C50C46000700000",
             -- (Missing capture for 1 (?) NPC here)
         },
+
+        [xi.nation.WINDURST] =
         {
-            -- Windurst Lv75
             -- (Missing capture)
         },
     },
