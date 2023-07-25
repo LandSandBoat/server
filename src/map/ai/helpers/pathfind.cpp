@@ -28,6 +28,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 #include "zone.h"
 
+#include <cfloat>
+
 namespace
 {
     bool arePositionsClose(const position_t& a, const position_t& b)

@@ -30,10 +30,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
+#include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
+#include "zone_entities.h"
+#include "zone_instance.h"
 
 #include "utils/instanceutils.h"
 #include "utils/mobutils.h"
