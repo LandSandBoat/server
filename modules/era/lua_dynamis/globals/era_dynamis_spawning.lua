@@ -588,7 +588,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob, target) xi.dynamis.statueOnFight(mob, target) end },
-            ["onMobRoam"] = { function(mob) xi.dynamis.mobOnRoam(mob) end },
+            ["onMobRoam"] = { function(mob)  end },
             ["mixins"] = {  }
         },
         ["Nightmare"] =
@@ -681,6 +681,8 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     mob:getZone():setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
 
+    xi.dynamis.generatePath(mob, mobIndex)
+
     if dropLists[zoneID] and dropLists[zoneID][mob:getFamily()] then
         dropList = dropLists[zoneID][mob:getFamily()]
     end
@@ -730,6 +732,15 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     xi.dynamis.nmInfoLookup =
     {
+        -- 1 - name
+        -- 2 - groupId
+        -- 3 - groupZoneId
+        -- 4 - dropId
+        -- 5 - spellList
+        -- 6 - skillList
+        -- 7 - Type of mob
+        -- 8 - flags
+
         -- Below use used to lookup Beastmen NMs
         -- Goblin
         -- Dynamis - Beaucedine (Done)
@@ -1324,6 +1335,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         entityFlags = flags,
         mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
     })
+
+    xi.dynamis.generatePath(mob, mobIndex)
+
     if oMob ~= nil then
         if mainDynaLord == oMob:getID() and mobName == "Dynamis Lord" then
             mob:setSpawn(target:getXPos(), target:getYPos(), target:getZPos(), target:getRotPos())
@@ -1713,40 +1727,18 @@ end
 --        Dynamis Mob Pathing/Roam        --
 --------------------------------------------
 
-xi.dynamis.mobOnRoam = function(mob) -- Handle pathing.
-    if mob:getRoamFlags() == xi.roamFlag.SCRIPTED then
-        local zoneID = mob:getZoneID()
-        local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
-        for _, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
-            local table = xi.dynamis.mobList[zoneID][index].patrolPath
-            local maxDest = #table
-            if mobIndex == index then
-                for path, point in pairs(table) do
-                    local next = table[path + 1]
-                    local last = table[maxDest]
-                    local first = table[1]
-                    local prev = { x = point[1], y = point[2], z = point[3]}
-                    local dest = nil
-                    if next ~= nil then
-                        dest = { x = next[1], y = next[2], z = next[3]}
-                    end
-                    local last = { x = last[1], y = last[2], z = last[3]}
-                    local first = { x = first[1], y = first[2], z = first[3]}
-                    local spawn = mob:getSpawnPos()
-                    local current = mob:getPos()
-                    if last.x == current.x and last.y == current.y and last.z == current.z then
-                        mob:pathTo(first.x, first.y, first.z)
-                        return
-                    elseif prev.x == current.x and prev.y == current.y and prev.z == current.z then
-                        mob:pathTo(dest.x, dest.y, dest.z)
-                        return
-                    elseif spawn.x == current.x and spawn.y == current.y and spawn.z == current.z then
-                        mob:pathTo(first.x, first.y, first.z)
-                        return
-                    end
-                end
-            end
-        end
+xi.dynamis.generatePath = function(mob, mobIndex) -- Handle pathing.
+    local zoneID = mob:getZoneID()
+    if xi.dynamis.mobList[zoneID][mobIndex] ~= nil and xi.dynamis.mobList[zoneID][mobIndex].patrolPath ~= nil then
+        local table = xi.dynamis.mobList[zoneID][mobIndex].patrolPath
+        local first = table[1]
+        local second = table[2]
+        local pathNodes =
+        {
+            { x = first[1], y = first[2], z = first[3], wait = 1000 },
+            { x = second[1], y = second[2], z = second[3], wait = 1000 }
+        }
+        mob:pathThrough(pathNodes, xi.path.flag.PATROL)
     end
 end
 
