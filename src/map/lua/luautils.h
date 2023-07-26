@@ -345,7 +345,7 @@ namespace luautils
 
     auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
     bool HasCustomMenuContext(CCharEntity* PChar);
-    void HandleCustomMenu(CCharEntity* PChar, std::string selection);
+    void HandleCustomMenu(CCharEntity* PChar, const std::string& selection);
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
