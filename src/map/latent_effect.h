@@ -22,10 +22,10 @@
 #ifndef _LATENTEFFECT_H
 #define _LATENTEFFECT_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
 #include "./entities/battleentity.h"
 #include "./items/item_equipment.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "modifier.h"
 
 enum class LATENT : uint16

@@ -25,13 +25,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <memory>
 #include <stack>
 
-#include "../entities/baseentity.h"
-#include "../packets/message_basic.h"
-#include "controllers/controller.h"
+#include "ai/controllers/controller.h"
+#include "entities/baseentity.h"
 #include "helpers/action_queue.h"
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
+#include "packets/message_basic.h"
 #include "states/state.h"
 
 class CBaseEntity;

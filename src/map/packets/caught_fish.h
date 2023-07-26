@@ -24,8 +24,8 @@
 #ifndef _CCAUGHTFISHPACKET_H_
 #define _CCAUGHTFISHPACKET_H_
 
-#include "../../common/cbasetypes.h"
 #include "basic.h"
+#include "common/cbasetypes.h"
 
 class CCharEntity;
 

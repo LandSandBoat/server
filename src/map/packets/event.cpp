@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "event.h"
 
 CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)

@@ -19,10 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 150 and option == 1 then
         player:setPos(-93.268, 0, 170.749, 162, 20) -- To Promyvion Mea (R)
     end

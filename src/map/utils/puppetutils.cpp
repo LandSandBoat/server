@@ -20,16 +20,16 @@
 */
 
 #include "puppetutils.h"
-#include "../entities/automatonentity.h"
-#include "../job_points.h"
-#include "../lua/luautils.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/message_basic.h"
-#include "../status_effect_container.h"
 #include "battleutils.h"
 #include "charutils.h"
+#include "entities/automatonentity.h"
 #include "itemutils.h"
+#include "job_points.h"
+#include "lua/luautils.h"
+#include "packets/char_job_extra.h"
+#include "packets/message_basic.h"
 #include "petutils.h"
+#include "status_effect_container.h"
 #include "zoneutils.h"
 
 namespace puppetutils

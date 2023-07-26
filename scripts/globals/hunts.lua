@@ -1266,7 +1266,7 @@ function xi.hunts.onTrigger(player, npc)
     player:startEvent(1500, scyldBits, zone[player:getZoneID()].huntMenu[1])
 end
 
-function xi.hunts.onEventUpdate(player, csid, option)
+function xi.hunts.onEventUpdate(player, csid, option, npc)
     local registryZone = zone[player:getZoneID()]
     local region = registryZone[option]
     player:updateEvent(0, 0, registryZone.huntMenu[option])
@@ -1297,7 +1297,7 @@ xi.hunts.clearHuntVars = function(player)
     player:setCharVar("[hunt]status", 0)
 end
 
-function xi.hunts.onEventFinish(player, csid, option)
+function xi.hunts.onEventFinish(player, csid, option, npc)
     local zoneid = player:getZoneID()
     -- local registryZone = zone[zoneid]
     local huntEntry = hunts[bit.rshift(option, 3)]

@@ -15,12 +15,12 @@ entity.onTrigger = function(player, npc)
     xi.besieged.onTrigger(player, npc, 253)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.besieged.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.besieged.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.besieged.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.besieged.onEventFinish(player, csid, option, npc)
 end
 
 return entity

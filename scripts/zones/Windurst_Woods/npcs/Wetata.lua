@@ -39,10 +39,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 863 or csid == 867) and option == 2 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
         npcUtil.giveKeyItem(player, xi.ki.GREEN_INSTITUTE_CARD)

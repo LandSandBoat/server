@@ -1897,7 +1897,7 @@ end
 -- onEventFinish Action
 -----------------------------------
 
-xi.bcnm.onEventFinish = function(player, csid, option)
+xi.bcnm.onEventFinish = function(player, csid, option, npc)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
 

@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CABILITY_STATE_H
 #define _CABILITY_STATE_H
 
-#include "../../ability.h"
+#include "ability.h"
 #include "state.h"
 
 class CCharEntity;

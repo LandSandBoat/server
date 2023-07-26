@@ -1,6 +1,6 @@
 ﻿#include "common/socket.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 #include "entity_enable_list.h"
 

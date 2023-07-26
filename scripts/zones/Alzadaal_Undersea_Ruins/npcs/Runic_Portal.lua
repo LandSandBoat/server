@@ -38,10 +38,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if option == 1 then
         if csid == 121 or csid == 122 then
             xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.NYZUL)

@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 26 then
         if option == 1 then
             -- Half the players MP and HP unless the HP is really low, to avoid
@@ -77,7 +77,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
         if option == 0 then

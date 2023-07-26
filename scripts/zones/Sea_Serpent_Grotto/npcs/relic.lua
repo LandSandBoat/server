@@ -65,10 +65,10 @@ entity.onTrigger = function(player, npc)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 11 and
         npcUtil.giveItem(player, { xi.items.KIKOKU, { xi.items.ONE_HUNDRED_BYNE_BILL, 30 } })

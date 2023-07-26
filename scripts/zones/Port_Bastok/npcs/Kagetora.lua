@@ -14,22 +14,15 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCharVar("twentyInPirateYearsCS") == 1 then
         player:startEvent(261)
-    elseif
-        player:getCharVar("FadedPromises") == 2 and
-        player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
-    then
-        player:startEvent(296)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 261 then
         player:setCharVar("twentyInPirateYearsCS", 2)
-    elseif csid == 296 then
-        player:setCharVar("FadedPromises", 3)
     end
 end
 

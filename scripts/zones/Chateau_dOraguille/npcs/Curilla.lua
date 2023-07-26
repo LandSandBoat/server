@@ -104,7 +104,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 109 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
     elseif csid == 562 then

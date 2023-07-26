@@ -13,10 +13,10 @@ entity.onTrigger = function(player, npc)
     -- This NPC is relevant only to San d'Orians on missions and has no default
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

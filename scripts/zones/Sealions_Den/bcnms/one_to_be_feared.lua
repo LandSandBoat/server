@@ -34,10 +34,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     -- NOTE: On completion, all members are sent back to Sealion's Den.
     -- If you're eligible for the cutscene when you zone in, you'll be sent to Lufaise directly afterwards.
     if csid == 32001 then

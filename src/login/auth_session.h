@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
+#include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
-#include <asio/ssl.hpp>
 
 #include "handler_session.h"
 #include "login_helpers.h"
@@ -50,7 +50,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define LOGIN_ERROR_VERSION_UNSUPPORTED 0x0B
 
 #define SUPPORTED_XILOADER_VERSION "1.0.0"
-
 
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS

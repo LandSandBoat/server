@@ -51,13 +51,13 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 2 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

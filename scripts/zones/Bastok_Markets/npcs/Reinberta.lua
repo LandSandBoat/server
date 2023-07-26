@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(300, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 300 and
         option >= xi.skill.WOODWORKING and
@@ -68,7 +68,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 300 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
             player:setCharVar("GoldsmithingExpertQuest", 1)

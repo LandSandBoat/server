@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CCAUGHTMONSTERPACKET_H_
 #define _CCAUGHTMONSTERPACKET_H_
 
-#include "../../common/cbasetypes.h"
 #include "basic.h"
+#include "common/cbasetypes.h"
 
 class CCharEntity;
 

@@ -3452,11 +3452,11 @@ xi.dealerMoogle.onTrigger = function(player, npc)
     player:startEvent(cs, 0, 0, kiID, numKIs, 0, 0, mask1, mask2)
 end
 
-xi.dealerMoogle.onEventUpdate = function(player, csid, option)
+xi.dealerMoogle.onEventUpdate = function(player, csid, option, npc)
     -- print("update", csid, option)
 end
 
-xi.dealerMoogle.onEventFinish = function(player, csid, option)
+xi.dealerMoogle.onEventFinish = function(player, csid, option, npc)
     -- print("finish", csid, option)
     if option == 0 then
         return

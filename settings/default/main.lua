@@ -121,6 +121,10 @@ xi.settings.main =
     USE_ADOULIN_WEAPON_SKILL_CHANGES = false, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = true, -- true/false.
 
+    USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
+    DISABLE_PARTY_EXP_PENALTY        = true,  -- true/false.
+    ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
+
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
     ENABLE_TRUST_QUESTS            = 1,
@@ -177,6 +181,7 @@ xi.settings.main =
     TIMELESS_HOURGLASS_COST     = 500000,   -- Refund for the timeless hourglass for Dynamis.
     PRISMATIC_HOURGLASS_COST    = 50000,    -- Cost of the prismatic hourglass for Dynamis.
     CURRENCY_EXCHANGE_RATE      = 100,      -- X Tier 1 ancient currency -> 1 Tier 2, and so on. Certain values may conflict with shop items. Not designed to exceed 198.
+    ENABLE_EXCHANGE_100S_TO_1S  = false,    -- true/false. Allow exchange of 100s to 1s, like you can with 10Ks to 100s.
     RELIC_2ND_UPGRADE_WAIT_TIME = 7200,     -- Wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 7200s = 2 hours.
     RELIC_3RD_UPGRADE_WAIT_TIME = 3600,     -- Wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
     FREE_COP_DYNAMIS            = 0,        -- Authorize player to entering inside COP Dynamis without completing COP mission (1 = enable 0 = disable)

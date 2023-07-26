@@ -20,8 +20,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "zone_instance.h"
-#include "../common/timer.h"
 #include "ai/ai_container.h"
+#include "common/timer.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
 #include "status_effect_container.h"

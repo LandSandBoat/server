@@ -63,10 +63,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 231 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     elseif csid == 246 and option == 0 then

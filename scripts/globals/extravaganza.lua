@@ -70,7 +70,7 @@ end
 -- Choose the right cipher depending on Menu Option
 ------------------------------------------------------
 
-xi.extravaganza.shadowEraFinish = function(player, csid, option)
+xi.extravaganza.shadowEraFinish = function(player, csid, option, npc)
     local ID = zones[player:getZoneID()]
     local notes = player:getCurrency("allied_notes")
     local cipherid = { player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2") }

@@ -25,7 +25,7 @@
 
 #include "bazaar_check.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CBazaarCheckPacket::CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type)
 {

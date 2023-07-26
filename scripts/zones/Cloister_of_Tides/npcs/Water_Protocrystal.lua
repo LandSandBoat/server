@@ -28,14 +28,14 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 then
         player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
         player:addKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_COUNTERSEAL)
         player:setCharVar("ASA4_Cerulean", "2")
     else
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(221, 31)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     player:updateEvent(
         0,
         GetServerVariable("[SW_APOLLYON]Time"),      -- SW Apollyon
@@ -29,7 +29,7 @@ entity.onEventUpdate = function(player, csid, option)
     )
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

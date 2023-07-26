@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 293 then
         player:setCharVar("TuningOut_Progress", 2)
     end

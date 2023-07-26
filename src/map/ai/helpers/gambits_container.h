@@ -1,14 +1,14 @@
 ﻿#ifndef _GAMBITSCONTAINER
 #define _GAMBITSCONTAINER
 
-#include "../../../common/cbasetypes.h"
-#include "../../entities/charentity.h"
-#include "../../entities/trustentity.h"
-#include "../../mob_spell_container.h"
-#include "../../status_effect.h"
-#include "../../status_effect_container.h"
-#include "../ai_container.h"
-#include "../controllers/trust_controller.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/trust_controller.h"
+#include "common/cbasetypes.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "mob_spell_container.h"
+#include "status_effect.h"
+#include "status_effect_container.h"
 
 #include <set>
 

@@ -26,10 +26,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1 and option == 0 then
         player:addKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GREEN_RECOMMENDATION_LETTER)

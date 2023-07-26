@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5034 then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
         player:setCharVar("Raptor_Rapture_Status", 5)

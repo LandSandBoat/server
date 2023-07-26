@@ -62,13 +62,13 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
         player:setLocalVar("Hu-Xzoi-TP", 1)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
         player:setLocalVar("Hu-Xzoi-TP", 0)
     end

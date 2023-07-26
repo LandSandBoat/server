@@ -51,10 +51,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 10000 then
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then

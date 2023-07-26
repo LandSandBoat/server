@@ -23,7 +23,7 @@
 
 #include "chocobo_digging.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CChocoboDiggingPacket::CChocoboDiggingPacket(CCharEntity* PChar)
 {

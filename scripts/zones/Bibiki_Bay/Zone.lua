@@ -51,10 +51,10 @@ zoneObject.onTransportEvent = function(player, transport)
     xi.manaclipper.onTransportEvent(player, transport)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
         player:startEvent(10) -- arrive at Sunset Docks CS
     elseif csid == 13 then

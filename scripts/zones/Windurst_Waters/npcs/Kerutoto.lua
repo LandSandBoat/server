@@ -44,10 +44,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- WAKING DREAMS
     if csid == 918 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)

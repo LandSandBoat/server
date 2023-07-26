@@ -18,10 +18,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 204 and option == 1 then
         player:setPos(25.299, -2.799, 579, 193, 33) -- To AlTaieu (R)
     end

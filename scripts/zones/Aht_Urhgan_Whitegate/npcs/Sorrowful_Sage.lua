@@ -14,11 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = xi.besieged.getMercenaryRank(player)
-    local haveimperialIDtag
-    local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
-    local floorProgress = player:getCharVar("NyzulFloorProgress")
-
+    -- local rank = xi.besieged.getMercenaryRank(player)
+    -- local haveimperialIDtag
+    -- local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
+--[[
     if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         haveimperialIDtag = 1
     else
@@ -26,14 +25,14 @@ entity.onTrigger = function(player, npc)
     end
 
     if rank > 0 then
-        player:startEvent(278, rank, haveimperialIDtag, tokens, player:getCurrentAssault(), floorProgress)
-    else
+        player:startEvent(278, rank, haveimperialIDtag, tokens, player:getCurrentAssault())
+    else]]
         player:startEvent(284) -- no rank
-    end
+    --end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-
+entity.onEventUpdate = function(player, csid, option, npc)
+--[[
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
         if categorytype == 3 then
@@ -47,10 +46,10 @@ entity.onEventUpdate = function(player, csid, option)
             local item = bit.rshift(option, 16)
         end
     end
-
+]]--
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then

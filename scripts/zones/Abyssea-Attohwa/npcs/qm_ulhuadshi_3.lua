@@ -16,12 +16,12 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, ID.mob.ULHUADSHI_3, { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK })
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.abyssea.qmOnEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.abyssea.qmOnEventFinish(player, csid, option, npc)
 end
 
 return entity

@@ -23,8 +23,8 @@
 
 #include "linkshell_equip.h"
 
-#include "../entities/charentity.h"
-#include "../linkshell.h"
+#include "entities/charentity.h"
+#include "linkshell.h"
 
 CLinkshellEquipPacket::CLinkshellEquipPacket(CCharEntity* PChar, uint8 number)
 {

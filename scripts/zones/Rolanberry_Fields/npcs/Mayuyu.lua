@@ -20,10 +20,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(8008, 0, legendary, capacity)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- Event needs work, also the Legion Pass item is "tagged" via fields not yet implemented in core.
 end
 

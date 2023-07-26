@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     xi.bmt.handleNpcOnTrade(player, trade, ID.npc.BEASTMEN_TREASURE)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.bmt.handleNpcOnEventFinish(player, csid)
 end
 

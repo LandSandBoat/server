@@ -25,9 +25,9 @@
 
 #include "char.h"
 
-#include "../entities/charentity.h"
-#include "../status_effect_container.h"
-#include "../utils/itemutils.h"
+#include "entities/charentity.h"
+#include "status_effect_container.h"
+#include "utils/itemutils.h"
 
 CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {

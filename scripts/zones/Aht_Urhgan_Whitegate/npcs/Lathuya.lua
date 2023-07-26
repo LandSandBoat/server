@@ -102,7 +102,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local artifactOffset = 8 * totalCraftedPieces
@@ -129,7 +129,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local currentTask = player:getCharVar("[BLUAF]Current")

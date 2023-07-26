@@ -10,4 +10,3 @@ set(AI_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ai_container.h
     PARENT_SCOPE
 )
-

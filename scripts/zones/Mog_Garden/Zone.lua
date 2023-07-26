@@ -30,12 +30,12 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     xi.mog_garden.onTriggerAreaEnter(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
-    xi.mog_garden.onEventUpdate(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
+    xi.mog_garden.onEventUpdate(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
-    xi.mog_garden.onEventFinish(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
+    xi.mog_garden.onEventFinish(player, csid, option, npc)
 end
 
 return zoneObject

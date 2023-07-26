@@ -22,8 +22,8 @@
 #ifndef _STATUSEFFECT_H
 #define _STATUSEFFECT_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <vector>
 

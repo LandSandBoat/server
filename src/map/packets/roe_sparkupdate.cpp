@@ -25,7 +25,7 @@
 
 #include "roe_sparkupdate.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 {

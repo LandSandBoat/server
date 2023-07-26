@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "key_items.h"
 
 CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)

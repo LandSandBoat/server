@@ -24,10 +24,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 124 then
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
         player:addTitle(xi.title.RAINBOW_WEAVER)

@@ -325,4 +325,4 @@ namespace loginHelpers
         }
         return hash;
     }
-}
+} // namespace loginHelpers

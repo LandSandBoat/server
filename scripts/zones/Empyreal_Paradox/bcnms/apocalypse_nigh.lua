@@ -26,10 +26,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
         if
             player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and

@@ -97,7 +97,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 382 then
         local canEquip = 0
         local hasBody = 0
@@ -114,7 +114,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
 
     if csid == 380 then

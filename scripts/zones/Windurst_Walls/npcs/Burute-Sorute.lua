@@ -155,10 +155,10 @@ entity.onTrigger = function(player, npc)
     player:PrintToPlayer("Title NPC's have been disabled to prevent exploiting weekly HNM hunts.")
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
 
