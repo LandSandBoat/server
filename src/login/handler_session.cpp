@@ -54,11 +54,6 @@ void handler_session::do_read()
     // clang-format on
 }
 
-void handler_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
-{
-    // Intentionally empty
-}
-
 void handler_session::do_write(std::size_t length)
 {
     auto self(shared_from_this());

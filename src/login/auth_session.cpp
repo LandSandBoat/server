@@ -203,7 +203,7 @@ void auth_session::read_func()
                     ref<uint32>(data_, 1) = accountID;
 
                     unsigned char hash[16];
-                    uint32        hashData = std::time(0) ^ getpid();
+                    uint32        hashData = std::time(nullptr) ^ getpid();
                     md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
                     std::memcpy(data_ + 5, hash, 16);
 
@@ -268,8 +268,8 @@ void auth_session::read_func()
                 accid = (accid < 1000 ? 1000 : accid);
 
                 // creating new account
-                time_t timecreate;
-                tm     timecreateinfo;
+                time_t timecreate{};
+                tm     timecreateinfo{};
 
                 time(&timecreate);
                 _localtime_s(&timecreateinfo, &timecreate);

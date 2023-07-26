@@ -38,7 +38,7 @@ public:
 
     void do_read();
 
-    virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self);
+    virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) = 0;
 
     void do_write(std::size_t length);
 
