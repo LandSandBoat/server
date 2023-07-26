@@ -7016,8 +7016,8 @@ void SmallPacket0x0FE(map_session_data_t* const PSession, CCharEntity* const PCh
         if (isEmptyingPot == 0 && PItem->getStage() == FLOWERPOT_STAGE_MATURE_PLANT)
         {
             // Harvesting plant
-            uint16 resultID;
-            uint8  totalQuantity;
+            uint16 resultID                   = 0;
+            uint8  totalQuantity              = 0;
             std::tie(resultID, totalQuantity) = gardenutils::CalculateResults(PChar, PItem);
             uint8 stackSize                   = itemutils::GetItemPointer(resultID)->getStackSize();
             uint8 requiredSlots               = (uint8)ceil(float(totalQuantity) / stackSize);
