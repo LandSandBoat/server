@@ -208,7 +208,7 @@ void CTransportHandler::InitializeTransport()
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            TransportZone_Voyage voyageZone;
+            TransportZone_Voyage voyageZone{};
 
             voyageZone.voyageZone = nullptr;
             voyageZone.voyageZone = zoneutils::GetZone((uint8)sql->GetUIntData(0));

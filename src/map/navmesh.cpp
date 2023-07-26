@@ -294,7 +294,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.emplace_back({ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0 });
+            ret.emplace_back(pathpoint_t{ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0, false });
         }
     }
 

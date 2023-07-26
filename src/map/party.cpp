@@ -515,9 +515,9 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            memberinfo.emplace_back({ sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2),
-                                      std::string((const char*)sql->GetData(3)), static_cast<uint16>(sql->GetUIntData(4)),
-                                      static_cast<uint16>(sql->GetUIntData(5)), static_cast<uint16>(sql->GetUIntData(6)) });
+            memberinfo.emplace_back(CParty::partyInfo_t{ sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2),
+                                                         std::string((const char*)sql->GetData(3)), static_cast<uint16>(sql->GetUIntData(4)),
+                                                         static_cast<uint16>(sql->GetUIntData(5)), static_cast<uint16>(sql->GetUIntData(6)) });
         }
     }
     return memberinfo;
