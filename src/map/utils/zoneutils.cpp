@@ -242,7 +242,7 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                auto zoneId = static_cast<uint16>(sql->GetUIntData(0));
+                uint16 zoneId = static_cast<uint16>(sql->GetUIntData(0));
                 zonesOnThisProcess.emplace_back(zoneId);
             }
         }
@@ -731,7 +731,7 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                zones.emplace_back(sql->GetUIntData(0));
+                zones.emplace_back(static_cast<uint16>(sql->GetUIntData(0)));
             }
         }
         else

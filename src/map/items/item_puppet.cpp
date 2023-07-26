@@ -23,6 +23,8 @@
 
 CItemPuppet::CItemPuppet(uint16 id)
 : CItem(id)
+, m_equipSlot(0)
+, m_elementSlots(0)
 {
     setType(ITEM_PUPPET);
 }

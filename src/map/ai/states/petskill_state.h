@@ -60,7 +60,7 @@ private:
     CPetEntity* const          m_PEntity;
     std::unique_ptr<CPetSkill> m_PSkill;
     time_point                 m_finishTime;
-    duration                   m_castTime;
+    duration                   m_castTime{};
     int16                      m_spentTP;
 };
 
