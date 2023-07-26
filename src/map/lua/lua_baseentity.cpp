@@ -11024,9 +11024,9 @@ void CLuaBaseEntity::resetRecasts()
  *  Notes   : Function along with statements must be passed in L3
  ************************************************************************/
 
-void CLuaBaseEntity::addListener(std::string const& eventName, std::string const& identifier, sol::function func)
+void CLuaBaseEntity::addListener(std::string const& eventName, std::string const& identifier, sol::function const& func)
 {
-    m_PBaseEntity->PAI->EventHandler.addListener(eventName, func, std::move(identifier));
+    m_PBaseEntity->PAI->EventHandler.addListener(eventName, func, identifier);
 }
 
 /************************************************************************

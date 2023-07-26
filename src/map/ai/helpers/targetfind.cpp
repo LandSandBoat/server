@@ -38,20 +38,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 {
-    isPlayer          = false;
-    m_scalar          = 0.f;
-    m_BPoint.x        = 0.f;
-    m_BPoint.y        = 0.f;
-    m_BPoint.z        = 0.f;
-    m_BPoint.moving   = 0;
-    m_BPoint.rotation = 0;
-    m_CPoint.x        = 0.f;
-    m_CPoint.y        = 0.f;
-    m_CPoint.z        = 0.f;
-    m_CPoint.moving   = 0;
-    m_CPoint.rotation = 0;
-
+    isPlayer        = false;
+    m_radius        = 0.0f;
+    m_PRadiusAround = nullptr;
     m_PBattleEntity = PBattleEntity;
+    m_scalar        = 0.f;
+    m_PMasterTarget = nullptr;
+    m_PTarget       = nullptr;
+    m_zone          = 0;
+    m_findType      = {};
+    m_findFlags     = 0;
+    m_conal         = false;
+    m_scalar        = 0.0f;
+    m_APoint        = nullptr;
+    m_BPoint        = {};
+    m_CPoint        = {};
 
     reset();
 }

@@ -129,7 +129,7 @@ public:
     ~CStatusEffectContainer();
 
 private:
-    CBattleEntity* m_POwner;
+    CBattleEntity* m_POwner = nullptr;
 
     // void ReplaceStatusEffect(EFFECT effect); //this needs to be implemented
     void RemoveStatusEffect(uint32 id, bool silent = false);              // удаляем эффект по его номеру в контейнере
@@ -140,7 +140,7 @@ private:
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);
 
-    std::multiset<CStatusEffect*, bool (*)(CStatusEffect* AStatus, CStatusEffect* BStatus)> m_StatusEffectSet;
+    std::multiset<CStatusEffect*, bool (*)(CStatusEffect* AStatus, CStatusEffect* BStatus)> m_StatusEffectSet{};
 };
 
 /************************************************************************

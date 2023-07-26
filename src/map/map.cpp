@@ -781,7 +781,8 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                 // NOTE:
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
                 // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
-                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
+                auto basicPacket = CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr));
+                PacketParser[SmallPD_Type](map_session_data, PChar, basicPacket);
             }
         }
         else
@@ -1105,8 +1106,9 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                         ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
 
-                        PChar->status = STATUS_TYPE::SHUTDOWN;
-                        PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
+                        PChar->status    = STATUS_TYPE::SHUTDOWN;
+                        auto basicPacket = CBasicPacket();
+                        PacketParser[0x00D](map_session_data, PChar, basicPacket);
                     }
                     else
                     {

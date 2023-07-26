@@ -40,8 +40,15 @@ namespace
 
 CPathFind::CPathFind(CBaseEntity* PTarget)
 : m_POwner(PTarget)
+, m_distanceFromPoint(0.0f)
 , m_pathFlags(0)
 , m_patrolFlags(0)
+, m_roamFlags(0)
+, m_onPoint(false)
+, m_currentPoint(0)
+, m_currentTurn(0)
+, m_distanceMoved(0.0f)
+, m_maxDistance(0.0f)
 , m_carefulPathing(false)
 {
     m_originalPoint.x        = 0.f;

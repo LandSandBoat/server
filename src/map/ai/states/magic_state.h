@@ -77,7 +77,7 @@ protected:
 
     CBattleEntity* const    m_PEntity;
     std::unique_ptr<CSpell> m_PSpell;
-    duration                m_castTime;
+    duration                m_castTime{};
     position_t              m_startPos;
     bool                    m_interrupted{ false };
     bool                    m_instantCast{ false };

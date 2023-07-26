@@ -566,7 +566,7 @@ public:
     void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
     void resetRecasts();                            // Reset recasts for the caller
 
-    void addListener(std::string const& eventName, std::string const& identifier, sol::function func);
+    void addListener(std::string const& eventName, std::string const& identifier, sol::function const& func);
     void removeListener(std::string const& identifier);
     void triggerListener(std::string const& eventName, sol::variadic_args args);
 
