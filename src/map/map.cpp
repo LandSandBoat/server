@@ -411,7 +411,7 @@ void do_final(int code)
 
     if (code != EXIT_SUCCESS)
     {
-        exit(code);
+        std::quick_exit(code);
     }
 }
 

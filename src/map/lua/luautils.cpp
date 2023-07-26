@@ -4311,7 +4311,7 @@ namespace luautils
             });
         });
         // clang-format on
-        exit(1);
+        std::quick_exit(1);
     }
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table

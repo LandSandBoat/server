@@ -9,14 +9,14 @@ SqlPreparedStatement::SqlPreparedStatement(MYSQL* handle, std::string const& que
     if (m_Statement == nullptr)
     {
         ShowError("mysql_stmt_init: %s", mysql_stmt_error(m_Statement));
-        std::exit(-1);
+        std::quick_exit(-1);
     }
 
     auto res = mysql_stmt_prepare(m_Statement, query.c_str(), static_cast<unsigned int>(query.size()));
     if (res != 0)
     {
         ShowError("mysql_stmt_prepare: %s", mysql_stmt_error(m_Statement));
-        std::exit(-1);
+        std::quick_exit(-1);
     }
 
     std::size_t fieldCount = mysql_stmt_field_count(m_Statement);
