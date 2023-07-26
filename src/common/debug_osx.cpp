@@ -72,13 +72,13 @@ bool debug::isRunningUnderDebugger()
 
     if (!isCheckedAlready)
     {
-        if (ptrace(PTRACE_TRACEME, 0, NULL, 0) < 0)
+        if (ptrace(PTRACE_TRACEME, 0, nullptr, 0) < 0)
         {
             underDebugger = true;
         }
         else
         {
-            ptrace(PTRACE_DETACH, 0, NULL, 0);
+            ptrace(PTRACE_DETACH, 0, nullptr, 0);
         }
 
         isCheckedAlready = true;

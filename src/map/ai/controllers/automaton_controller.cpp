@@ -447,8 +447,8 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
     threshold                  = std::clamp<float>(threshold + PAutomaton->getMod(Mod::AUTO_HEALING_THRESHOLD), 30.f, 90.f);
     CBattleEntity* PCastTarget = nullptr;
 
-    bool          haveHate = false;
-    EnmityList_t* enmityList;
+    bool          haveHate   = false;
+    EnmityList_t* enmityList = nullptr;
 
     auto* PMob = dynamic_cast<CMobEntity*>(PTarget);
     if (PMob)
@@ -1735,7 +1735,7 @@ namespace automaton
                 uint16           id = (uint16)sql->GetUIntData(0);
                 AutomatonAbility PAbility{ (uint8)sql->GetUIntData(2), (uint16)sql->GetUIntData(3) };
 
-                autoAbilityList[id] = std::move(PAbility);
+                autoAbilityList[id] = PAbility;
 
                 auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
                 luautils::CacheLuaObjectFromFile(filename);

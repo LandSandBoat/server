@@ -86,7 +86,7 @@ static uint32 tick()
     struct timeval tval
     {
     };
-    gettimeofday(&tval, NULL);
+    gettimeofday(&tval, nullptr);
     return tval.tv_sec * 1000 + tval.tv_usec / 1000;
 #endif
 }

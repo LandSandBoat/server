@@ -32,7 +32,7 @@ namespace certificateHelpers
             FILE* fileHandle = fopen("login.key", "r");
             if (fileHandle)
             {
-                EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, NULL, NULL, NULL);
+                EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, nullptr, nullptr, nullptr);
                 if (pkey)
                 {
                     ShowInfo(fmt::format("Found existing login.key"));
@@ -46,7 +46,7 @@ namespace certificateHelpers
             FILE* fileHandle = fopen("login.cert", "r");
             if (fileHandle)
             {
-                X509* cert = PEM_read_X509(fileHandle, NULL, NULL, NULL);
+                X509* cert = PEM_read_X509(fileHandle, nullptr, nullptr, nullptr);
                 if (cert)
                 {
                     char cn[2048] = {};
@@ -57,7 +57,7 @@ namespace certificateHelpers
                     ShowInfo(fmt::format("Found existing login.cert", cn));
 
                     // if current time not within the bounds of valid date, note it's expired
-                    if (X509_cmp_time(X509_get_notAfter(cert), NULL) != 1 || X509_cmp_time(X509_get_notBefore(cert), NULL) != -1)
+                    if (X509_cmp_time(X509_get_notAfter(cert), nullptr) != 1 || X509_cmp_time(X509_get_notBefore(cert), nullptr) != -1)
                     {
                         ShowWarning("Existing login.cert is not valid for the current time. Please regenerate or obtain a new certificate.");
                     }
@@ -73,14 +73,14 @@ namespace certificateHelpers
 
             EVP_PKEY* pkey = EVP_RSA_gen(4096);
 
-            if (pkey == NULL)
+            if (pkey == nullptr)
             {
                 ShowError("Failed to generate RSA private key!");
             }
 
             X509* x509 = X509_new();
 
-            if (x509 == NULL)
+            if (x509 == nullptr)
             {
                 ShowError("Failed to generate allocate X509 cert!");
             }
@@ -120,7 +120,7 @@ namespace certificateHelpers
             FILE* fileHandle = fopen("login.key", "wb");
             if (fileHandle)
             {
-                if (!PEM_write_PrivateKey(fileHandle, pkey, NULL, NULL, 0, 0, NULL))
+                if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, 0, nullptr))
                 {
                     ShowError("Failed to write login.key!");
                 }

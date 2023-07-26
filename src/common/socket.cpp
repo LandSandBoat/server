@@ -1050,7 +1050,7 @@ void socket_init_tcp()
     CTaskMgr::getInstance()->AddTask(
         "connect_check_clear",
         server_clock::now() + 1s,
-        NULL,
+        nullptr,
         CTaskMgr::TASK_INTERVAL,
         connect_check_clear,
         5min);
