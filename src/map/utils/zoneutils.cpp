@@ -865,19 +865,32 @@ namespace zoneutils
             g_PZoneList[0] = CreateZone(0);
         }
 
+#ifdef ENV32BIT
+        ShowInfo("NOTE: LOS meshes wont be loaded on the 32-bit build. They take up enough memory to crash to process.");
+#endif // ENV32BIT
+
         // clang-format off
-        std::for_each(
-#ifndef __APPLE__ // TODO: OSX machines in CI don't have a compiler compliant with this
-            std::execution::par,
-#endif // __APPLE__
-            std::begin(zones),
-            std::end(zones),
-            [](uint16 zone)
+        {
+            ts::task_system ts;
+            for (auto zone : zones)
             {
-                // NOTE: It is not safe to use SQL in this parallel loop!
-                g_PZoneList[zone]->LoadNavMesh();
-                g_PZoneList[zone]->LoadZoneLos();
-            });
+                ts.schedule([zone]()
+                {
+                    // NOTE: It is not safe to use SQL in this parallel loop!
+                    g_PZoneList[zone]->LoadNavMesh();
+                });
+#ifndef ENV32BIT
+                // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
+                // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
+                // TODO: Find a sane way around this
+                ts.schedule([zone]()
+                {
+                    // NOTE: It is not safe to use SQL in this parallel loop!
+                    g_PZoneList[zone]->LoadZoneLos();
+                });
+#endif // !ENV32BIT
+            }
+        }
         // clang-format on
 
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
