@@ -4198,7 +4198,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     CCharEntity*    PChar          = (CCharEntity*)m_PBaseEntity;
     CItemLinkshell* PItemLinkPearl = PChar->m_GMlevel > 0 ? (CItemLinkshell*)itemutils::GetItem(514) : (CItemLinkshell*)itemutils::GetItem(515);
     LSTYPE          lstype         = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
-    if (PItemLinkPearl != NULL)
+    if (PItemLinkPearl != nullptr)
     {
         const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
         int32       ret   = sql->Query(Query, lsname);
@@ -12855,7 +12855,7 @@ int CLuaBaseEntity::getRACC()
 
     if (weapon == nullptr)
     {
-        ShowDebug("lua::getRACC weapon in ranged slot is NULL!");
+        ShowDebug("lua::getRACC weapon in ranged slot is nullptr!");
         return 0;
     }
 
@@ -12895,7 +12895,7 @@ uint16 CLuaBaseEntity::getRATT()
 
     if (weapon == nullptr)
     {
-        ShowDebug("lua::getRATT weapon in ranged slot is NULL!");
+        ShowDebug("lua::getRATT weapon in ranged slot is nullptr!");
         return 0;
     }
 
@@ -13072,7 +13072,7 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
 
     if (weapon == nullptr)
     {
-        ShowDebug("lua::getWeaponDmg weapon in main slot is NULL!");
+        ShowDebug("lua::getWeaponDmg weapon in main slot is nullptr!");
         return 0;
     }
 
@@ -13240,7 +13240,7 @@ uint16 CLuaBaseEntity::getAmmoDmg()
 
     if (weapon == nullptr)
     {
-        ShowDebug("lua::getAmmoDmg weapon in ammo slot is NULL!");
+        ShowDebug("lua::getAmmoDmg weapon in ammo slot is nullptr!");
         return 0;
     }
 
@@ -13500,7 +13500,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
                 }
                 else
                 {
-                    ShowError("CLuaBaseEntity::spawnPet : PetID is NULL");
+                    ShowError("CLuaBaseEntity::spawnPet : PetID is nullptr");
                 }
             }
 
@@ -13509,7 +13509,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
         }
         else
         {
-            ShowError("CLuaBaseEntity::spawnPet : PetID is NULL");
+            ShowError("CLuaBaseEntity::spawnPet : PetID is nullptr");
         }
     }
     else if (m_PBaseEntity->objtype == TYPE_MOB)

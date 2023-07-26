@@ -6488,7 +6488,7 @@ namespace battleutils
     {
         if (PSpell == nullptr)
         {
-            ShowWarning("battleutils::CalculateMPCost Spell is NULL");
+            ShowWarning("battleutils::CalculateMPCost Spell is nullptr");
             return 0;
         }
 
