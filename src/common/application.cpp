@@ -50,7 +50,7 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     {
         std::cerr << err.what() << std::endl;
         std::cerr << *gArgParser;
-        std::quick_exit(1);
+        std::exit(1);
     }
 
     auto logName = gArgParser->get<std::string>("--log");

@@ -513,7 +513,7 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CBaseEntity* PSpeaker;
+    CBaseEntity* PSpeaker = nullptr;
     if (speaker != sol::lua_nil)
     {
         CLuaBaseEntity* PLuaBaseEntity = speaker.as<CLuaBaseEntity*>();
@@ -908,7 +908,7 @@ EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, Even
             {
                 if (kv.second.is<int32>())
                 {
-                    cutsceneOptions.push_back(kv.second.as<int32>());
+                    cutsceneOptions.emplace_back(kv.second.as<int32>());
                 }
             }
         }
@@ -1760,7 +1760,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
 
             auto wait  = pointData["wait"];
             point.wait = wait.valid() ? wait.get<uint32>() : 0;
-            points.push_back(std::move(point));
+            points.emplace_back(std::move(point));
         }
     }
     else
@@ -1768,7 +1768,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
         // Grab points from array and store in points array
         for (std::size_t i = 1; i < pointsTable.size(); i += 3)
         {
-            points.push_back({ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, 0 });
+            points.emplace_back(pathpoint_t{ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, 0, false });
         }
     }
 
@@ -2046,7 +2046,7 @@ void CLuaBaseEntity::addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffse
         return;
     }
 
-    Trigger_t trigger;
+    Trigger_t trigger{};
 
     trigger.id           = id;
     trigger.period       = period;
@@ -3693,7 +3693,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                     if (augmentsObj.is<sol::table>())
                     {
                         auto augmentsTable = augmentsObj.as<sol::table>();
-                        for (auto& entryPair : augmentsTable)
+                        for (auto const& entryPair : augmentsTable)
                         {
                             auto   pair   = entryPair.second.as<sol::table>();
                             uint16 augid  = pair[0];
@@ -3707,7 +3707,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                 if (exdataObj.is<sol::table>())
                 {
                     auto exdataTable = exdataObj.as<sol::table>();
-                    for (auto& entryPair : exdataTable)
+                    for (auto const& entryPair : exdataTable)
                     {
                         uint8 index = entryPair.first.as<uint8>();
                         uint8 value = entryPair.second.as<uint8>();
@@ -4488,7 +4488,7 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
 
     uint8           containerID = (container != sol::lua_nil) ? container.as<uint8>() : (uint8)LOC_INVENTORY;
     uint8           SLOT        = PChar->getStorage(containerID)->SearchItem(itemID);
-    CItemEquipment* PItem;
+    CItemEquipment* PItem       = nullptr;
 
     if (SLOT != ERROR_SLOTID)
     {
@@ -4638,7 +4638,7 @@ void CLuaBaseEntity::addGearSetMod(uint8 setId, Mod modId, uint16 modValue)
     gearSetMod.modId        = modId;
     gearSetMod.modValue     = modValue;
 
-    PChar->m_GearSetMods.push_back(gearSetMod);
+    PChar->m_GearSetMods.emplace_back(gearSetMod);
     PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
 }
 
@@ -4758,7 +4758,7 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
         }
     }
 
-    for (auto itemId : storedItemIds)
+    for (auto const& itemId : storedItemIds)
     {
         if (itemId != 0)
         {
@@ -9799,7 +9799,7 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
 {
     if (static_cast<CCharEntity*>(m_PBaseEntity)->PParty != nullptr)
     {
-        for (auto& member : static_cast<CCharEntity*>(m_PBaseEntity)->PParty->members)
+        for (auto const& member : static_cast<CCharEntity*>(m_PBaseEntity)->PParty->members)
         {
             CCharEntity* PTarget = static_cast<CCharEntity*>(member);
 
@@ -9933,7 +9933,7 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
     std::vector<uint16> args(7, 0);
 
     uint8 idx = 0;
-    for (auto v : va)
+    for (auto const& v : va)
     {
         args[idx++] = v.get<uint16>();
     }
@@ -15587,7 +15587,7 @@ sol::table CLuaBaseEntity::getEnmityList()
     if (enmityList)
     {
         auto table = lua.create_table();
-        for (auto member : *enmityList)
+        for (auto const& member : *enmityList)
         {
             if (member.second.PEnmityOwner)
             {
@@ -16065,7 +16065,7 @@ uint16 CLuaBaseEntity::getStealItem()
             // Steal item randomly selected from steal drop table
             std::vector<uint16> items;
 
-            for (const DropItem_t& drop : PDropList->Items)
+            for (DropItem_t const& drop : PDropList->Items)
             {
                 if (drop.DropType == DROP_STEAL)
                 {
@@ -16106,7 +16106,7 @@ uint16 CLuaBaseEntity::getDespoilItem()
 
         if (PDropList && !PMob->m_ItemStolen)
         {
-            for (const DropItem_t& drop : PDropList->Items)
+            for (DropItem_t const& drop : PDropList->Items)
             {
                 if (drop.DropType == DROP_DESPOIL)
                 {

@@ -931,7 +931,7 @@ std::vector<AccessControl> get_access_list(std::string const& access_list)
         AccessControl acc{};
         if (access_ipmask(entry.c_str(), &acc))
         {
-            result.push_back(acc);
+            result.emplace_back(acc);
         }
         else
         {

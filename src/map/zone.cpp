@@ -267,7 +267,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     {
         if (matches(PNpc->GetName(), pattern))
         {
-            entities.push_back(PNpc);
+            entities.emplace_back(PNpc);
         }
     });
 
@@ -275,7 +275,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     {
         if (matches(PMob->GetName(), pattern))
         {
-            entities.push_back(PMob);
+            entities.emplace_back(PMob);
         }
      });
     // clang-format on
@@ -341,7 +341,7 @@ void CZone::LoadZoneLines()
             zl->m_toPos.z        = sql->GetFloatData(4);
             zl->m_toPos.rotation = (uint8)sql->GetIntData(5);
 
-            m_zoneLineList.push_back(zl);
+            m_zoneLineList.emplace_back(zl);
         }
     }
 }

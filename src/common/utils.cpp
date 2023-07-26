@@ -768,10 +768,10 @@ std::vector<std::string> split(std::string const& s, std::string const& delimite
     {
         token     = s.substr(pos_start, pos_end - pos_start);
         pos_start = pos_end + delim_len;
-        res.push_back(token);
+        res.emplace_back(token);
     }
 
-    res.push_back(s.substr(pos_start));
+    res.emplace_back(s.substr(pos_start));
     return res;
 }
 

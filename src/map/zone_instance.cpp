@@ -461,6 +461,6 @@ void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(
 CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
 {
     TracyZoneScoped;
-    instanceList.push_back(std::make_unique<CInstance>(this, instanceid));
+    instanceList.emplace_back(std::make_unique<CInstance>(this, instanceid));
     return instanceList.back().get();
 }

@@ -39,7 +39,7 @@ namespace gambits
         }
         if (available)
         {
-            gambits.push_back(gambit);
+            gambits.emplace_back(gambit);
             return gambit.identifier;
         }
         return "";
@@ -503,9 +503,9 @@ namespace gambits
                         std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
                         if (uint16 power = PSCEffect->GetPower())
                         {
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 8));
                         }
 
                         std::optional<SpellID> spell_id;
@@ -945,15 +945,15 @@ namespace gambits
                         std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
                         if (uint16 power = PSCEffect->GetPower())
                         {
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 8));
                         }
 
                         std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.primary);
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.tertiary);
                         if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
                             possible_skillchain != SC_NONE)
                         {
@@ -977,14 +977,14 @@ namespace gambits
                         for (auto& skill : tp_skills)
                         {
                             std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.primary);
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                            resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)skill.tertiary);
 
                             std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
+                            skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
+                            skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
+                            skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
                             if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
                                 possible_skillchain != SC_NONE)
                             {

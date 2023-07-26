@@ -218,7 +218,7 @@ namespace jobpointutils
                 gift.modId      = sql->GetUIntData(2);
                 gift.value      = sql->GetUIntData(3);
 
-                jpGifts[jobId].push_back(gift);
+                jpGifts[jobId].emplace_back(gift);
             }
         }
     }
@@ -242,7 +242,7 @@ namespace jobpointutils
                 break;
             }
 
-            currentGifts->push_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
+            currentGifts->emplace_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
         }
 
         PChar->addModifiers(currentGifts);

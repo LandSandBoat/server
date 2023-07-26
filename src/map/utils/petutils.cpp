@@ -182,7 +182,7 @@ namespace petutils
                 Pet->name_prefix    = (uint8)sql->GetUIntData(50);
                 Pet->m_MobSkillList = (uint16)sql->GetUIntData(51);
 
-                g_PPetList.push_back(Pet);
+                g_PPetList.emplace_back(Pet);
             }
         }
     }
@@ -448,7 +448,7 @@ namespace petutils
         int32 scaleOver60       = 2; // Column number with a modifier for calculating MP after level 60
         // int32 scaleOver75       = 3; // Column number with a modifier for calculating Stats after level 75
 
-        uint8 grade;
+        uint8 grade = 0;
 
         uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();
@@ -617,7 +617,7 @@ namespace petutils
         int32 scaleOver60       = 2; // column number with a modifier for calculating MP after level 60
         int32 scaleOver75       = 3; // column number with a modifier for calculating Stats after level 75
 
-        uint8 grade;
+        uint8 grade = 0;
 
         uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();

@@ -403,7 +403,7 @@ namespace luautils
         // "scripts/quests/(area|expansion)/(filename).lua"
         // "scripts/missions/(area|expansion)/(filename).lua"
         // "scripts/battlefields/(zone)/(filename).lua"
-        auto scrapeSubdir = [&](std::string subFolder) -> void
+        auto scrapeSubdir = [&](std::string const& subFolder) -> void
         {
             for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(subFolder))
             {
@@ -551,7 +551,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // xi.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry /* = false*/)
+    void CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry /* = false*/)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -764,7 +764,7 @@ namespace luautils
         moduleutils::TryApplyLuaModules();
     }
 
-    sol::table GetCacheEntryFromFilename(std::string filename)
+    sol::table GetCacheEntryFromFilename(std::string const& filename)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -990,7 +990,7 @@ namespace luautils
         // clang-format off
         zoneutils::ForEachZone([&zoneIds](CZone* PZone)
         {
-            zoneIds.push_back(PZone->GetID());
+            zoneIds.emplace_back(PZone->GetID());
         });
         // clang-format on
 
@@ -1249,13 +1249,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        int32 day;
-        int32 month;
-        int32 year;
-
-        day   = CVanaTime::getInstance()->getDayOfTheMonth();
-        month = CVanaTime::getInstance()->getMonth();
-        year  = CVanaTime::getInstance()->getYear();
+        int32 day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        int32 month = CVanaTime::getInstance()->getMonth();
+        int32 year  = CVanaTime::getInstance()->getYear();
 
         return (year * 360) + (month * 30 - 30) + day;
     }
@@ -1270,11 +1266,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        int32 day;
-        int32 month;
-
-        day   = CVanaTime::getInstance()->getDayOfTheMonth();
-        month = CVanaTime::getInstance()->getMonth();
+        int32 day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        int32 month = CVanaTime::getInstance()->getMonth();
 
         return (month * 30 - 30) + day;
     }
@@ -1661,7 +1654,7 @@ namespace luautils
             {
                 while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    magianColumns.push_back(sql->GetStringData(0));
+                    magianColumns.emplace_back(sql->GetStringData(0));
                 }
             }
             else
@@ -1678,7 +1671,7 @@ namespace luautils
                 int32 field{ 0 };
                 if (sql->Query(Query, trial) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                 {
-                    for (auto column : magianColumns)
+                    for (auto const& column : magianColumns)
                     {
                         table[column] = sql->GetIntData(field++);
                     }
@@ -1696,7 +1689,7 @@ namespace luautils
                     {
                         auto  inner_table = table.create_named(trial);
                         int32 field{ 0 };
-                        for (auto column : magianColumns)
+                        for (auto const& column : magianColumns)
                         {
                             inner_table[column] = sql->GetIntData(field++);
                         }
@@ -4311,7 +4304,7 @@ namespace luautils
             });
         });
         // clang-format on
-        std::quick_exit(1);
+        std::exit(1);
     }
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
@@ -5240,7 +5233,7 @@ namespace luautils
         }
     }
 
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string const& text)
     {
         TracyZoneScoped;
 
@@ -5412,7 +5405,7 @@ namespace luautils
             onStart(CLuaBaseEntity(PChar));
         }
 
-        auto escape = [](std::string s)
+        auto escape = [](std::string const& s)
         {
             return fmt::format("\"{}\"", s);
         };
@@ -5437,7 +5430,7 @@ namespace luautils
         return context != customMenuContext.end();
     }
 
-    void HandleCustomMenu(CCharEntity* PChar, std::string selection)
+    void HandleCustomMenu(CCharEntity* PChar, std::string const& selection)
     {
         // Selection is of the form:
         // GMTELL(Testo): Question(Test Menu): Result (Option 1)

@@ -1116,7 +1116,7 @@ namespace fishingutils
         {
             if (FishList[fish.first]->item)
             {
-                pool.push_back(FishList[fish.first]);
+                pool.emplace_back(FishList[fish.first]);
             }
         }
 
@@ -1133,7 +1133,7 @@ namespace fishingutils
             {
                 if (!mob.second->questOnly)
                 {
-                    pool.push_back(mob.second);
+                    pool.emplace_back(mob.second);
                 }
             }
         }
@@ -3036,7 +3036,7 @@ namespace fishingutils
                     {
                         uint16 fishid = 0;
                         memcpy(&fishid, &reqFish[i * sizeof(uint16)], sizeof(uint16));
-                        fish->reqFish->push_back(fishid);
+                        fish->reqFish->emplace_back(fishid);
                     }
                 }
 

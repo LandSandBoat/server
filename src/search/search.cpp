@@ -323,7 +323,7 @@ int32 main(int32 argc, char** argv)
             if (sErrno != S_EINTR)
             {
                 ShowCritical("do_sockets: select() failed, error code %d!", sErrno);
-                std::quick_exit(EXIT_FAILURE);
+                std::exit(EXIT_FAILURE);
             }
             continue; // interrupted by a signal, just loop and try again
         }
@@ -375,7 +375,7 @@ int32 main(int32 argc, char** argv)
             if (sErrno != S_EINTR)
             {
                 ShowCritical("select() failed, error code %d!", sErrno);
-                std::quick_exit(EXIT_FAILURE);
+                std::exit(EXIT_FAILURE);
             }
             continue;
         }
@@ -961,7 +961,7 @@ void do_final(int code)
 
     logging::ShutDown();
 
-    std::quick_exit(code);
+    std::exit(code);
 }
 
 void do_abort()

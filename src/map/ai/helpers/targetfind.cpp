@@ -338,7 +338,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
                     if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() &&
                         PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
                     {
-                        m_targets.push_back(PBattleEntity);
+                        m_targets.emplace_back(PBattleEntity);
                     }
                 }
             }
@@ -350,7 +350,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
             {
                 if (PChar && isWithinArea(&(PChar->loc.p)) && !PChar->isDead())
                 {
-                    m_targets.push_back(PChar);
+                    m_targets.emplace_back(PChar);
                 }
             });
             // clang-format on
@@ -362,13 +362,13 @@ void CTargetFind::addEntity(CBattleEntity* PTarget, bool withPet)
 {
     if (validEntity(PTarget))
     {
-        m_targets.push_back(PTarget);
+        m_targets.emplace_back(PTarget);
     }
 
     // add my pet too, if its allowed
     if (withPet && PTarget->PPet != nullptr && validEntity(PTarget->PPet))
     {
-        m_targets.push_back(PTarget->PPet);
+        m_targets.emplace_back(PTarget->PPet);
     }
 }
 
