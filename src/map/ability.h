@@ -747,8 +747,8 @@ private:
     JOBTYPE     m_Job;
     uint8       m_level;
     uint16      m_animationID;
-    duration    m_animationTime;
-    duration    m_castTime;
+    duration    m_animationTime{};
+    duration    m_castTime{};
     float       m_range;
     uint8       m_aoe;
     uint16      m_validTarget;
@@ -761,7 +761,7 @@ private:
     uint16      m_meritModID;
     std::string m_name;
     uint16      m_mobskillId;
-    ACTIONTYPE  m_actionType;
+    ACTIONTYPE  m_actionType{};
 };
 
 /************************************************************************

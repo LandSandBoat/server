@@ -123,9 +123,11 @@ struct Trust_t
         HPscale = 0.f;
         MPscale = 0.f;
 
+        cmbSkill   = 0;
         cmbDmgMult = 0;
         cmbDelay   = 0;
         speed      = 0;
+        subSpeed   = 0;
 
         strRank = 0;
         dexRank = 0;

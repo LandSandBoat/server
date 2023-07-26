@@ -361,7 +361,7 @@ struct JobPoints_t
     uint16         capacityPoints;
     uint16         currentJp;
     uint16         totalJpSpent;
-    JobPointType_t job_point_types[JOBPOINTS_JPTYPE_PER_CATEGORY];
+    JobPointType_t job_point_types[JOBPOINTS_JPTYPE_PER_CATEGORY]{};
 };
 
 struct JobPointGifts_t
@@ -408,7 +408,7 @@ public:
 
 private:
     CCharEntity* m_PChar;
-    JobPoints_t  m_jobPoints[MAX_JOBTYPE];
+    JobPoints_t  m_jobPoints[MAX_JOBTYPE]{};
 };
 
 namespace jobpointutils

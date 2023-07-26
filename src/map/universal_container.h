@@ -78,9 +78,9 @@ public:
 private:
     UCONTAINERTYPE m_ContainerType;
 
-    bool                m_lock;
-    uint8               m_count;
-    uint16              m_target;
+    bool                m_lock{};
+    uint8               m_count{};
+    uint16              m_target{};
     std::vector<CItem*> m_PItem;
 };
 
