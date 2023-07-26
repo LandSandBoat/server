@@ -8,7 +8,6 @@
 -- Notes: Used by some notorious monsters in place of Scratch.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

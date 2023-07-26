@@ -9,7 +9,6 @@
 -- Mind -1
 -- Charisma 4
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

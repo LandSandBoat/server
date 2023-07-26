@@ -9,7 +9,6 @@
 -- Intelligence -8
 -- Demon Killer 10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

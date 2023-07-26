@@ -10,7 +10,6 @@
 -- Ranged ACC % 8
 -- Ranged ACC Cap 25
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

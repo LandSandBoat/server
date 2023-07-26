@@ -7,7 +7,6 @@
 -- Vitality +1
 -- Resist Amnesia +20
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

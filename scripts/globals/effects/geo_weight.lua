@@ -1,8 +1,6 @@
 -----------------------------------
 -- Effect: Geo-Weight
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

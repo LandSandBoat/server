@@ -7,7 +7,6 @@
 -- Vitality 3
 -- Defense +16%
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

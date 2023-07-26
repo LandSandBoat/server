@@ -3,7 +3,6 @@
 -- Piece of Galka Mochi
 -- Enchantment: 60Min, Costume - Galka Child
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

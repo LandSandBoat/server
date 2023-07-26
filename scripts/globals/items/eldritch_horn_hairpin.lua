@@ -4,8 +4,6 @@
 -- Item Effect: INT+3 MND+3
 -- Duration: 30 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

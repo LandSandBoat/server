@@ -8,7 +8,6 @@
 -- Accuracy 9% (caps @ 11)
 -- Attack 10% (caps @ 16)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

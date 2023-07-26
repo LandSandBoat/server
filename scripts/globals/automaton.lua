@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/spell_data")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.automaton = {}

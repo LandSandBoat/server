@@ -14,7 +14,6 @@
 -- 90      |5       |48 seconds
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

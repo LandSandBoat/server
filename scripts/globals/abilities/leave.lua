@@ -5,8 +5,6 @@
 -- Recast Time: 10 seconds
 -- Duration: N/A
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -23,6 +21,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     if pet:hasStatusEffect(xi.effect.HEALING) then
         pet:delStatusEffect(xi.effect.HEALING)
     end
+
     target:despawnPet()
 end
 

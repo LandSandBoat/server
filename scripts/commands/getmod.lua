@@ -2,8 +2,6 @@
 -- func: getmod <modID>
 -- desc: gets a mod by ID on the player or cursor target
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 3,

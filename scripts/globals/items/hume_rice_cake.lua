@@ -3,7 +3,6 @@
 -- Hume Rice Cake
 -- Enchantment: 60Min, Costume - Hume child (female)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

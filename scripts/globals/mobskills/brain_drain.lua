@@ -2,8 +2,6 @@
 -- Brain Drain
 -- Deals damage to a single target. Additional effect: INT Down
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

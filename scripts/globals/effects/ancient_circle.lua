@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ANCIENT_CIRCLE
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

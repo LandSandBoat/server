@@ -1,7 +1,6 @@
 -----------------------------------
 -- xi.effect.LEVEL_RESTRICTION
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local effectObject = {}

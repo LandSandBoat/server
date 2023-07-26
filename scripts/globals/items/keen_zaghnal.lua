@@ -5,8 +5,6 @@
 -- Enchantment will wear off if weapon is unequipped.
 --  Effect lasts for 30 minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

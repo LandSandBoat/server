@@ -7,7 +7,6 @@
 -- Duration (Charged): 2 hours
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

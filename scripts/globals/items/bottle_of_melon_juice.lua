@@ -3,7 +3,6 @@
 -- Item: Melon Juice
 -- Item Effect: Restores 90 MP over 135 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

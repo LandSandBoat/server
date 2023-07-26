@@ -3,7 +3,6 @@
 -- ID 5376
 -- Removes STR Down effect
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
 local itemObject = {}

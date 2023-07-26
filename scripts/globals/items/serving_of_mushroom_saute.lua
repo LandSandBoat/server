@@ -7,7 +7,6 @@
 -- Mind 6
 -- MP Recovered While Healing 6
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

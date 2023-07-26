@@ -3,7 +3,6 @@
 -- Knockback and damage, knockback varies with gear count
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 -- TODO: The potency of the knockback effect varies with
 -- the number of gears in the enemy formation. A single gear produces only a

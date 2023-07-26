@@ -3,7 +3,6 @@
 -- Knockback and damage, knockback varies with gear count
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -4,8 +4,8 @@
 require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}

@@ -3,7 +3,6 @@
 -- Item: Venom Potion
 -- Item Effect: Removes 300 HP over 180 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

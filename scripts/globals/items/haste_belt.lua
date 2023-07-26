@@ -3,7 +3,6 @@
 -- Item: Haste Belt
 -- Item Effect: 10% haste
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -7,7 +7,6 @@
 --    Per wiki, can actually obtain without license, but cannot use, so we DO check that.
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

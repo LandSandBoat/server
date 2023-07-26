@@ -3,7 +3,6 @@
 -- Item:        bottle_of_ascetics_gambir
 -- Item Effect: MATK/MACC 50
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

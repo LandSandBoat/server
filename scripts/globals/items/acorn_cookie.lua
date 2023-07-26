@@ -7,7 +7,6 @@
 -- Silence resistance +10
 -- MP recovered while healing +3
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

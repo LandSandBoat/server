@@ -3,7 +3,6 @@
 -- Item: Goblin Drink
 -- Item Effect: Restores 1 MP while healing / 3 tick 180 mins.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
