@@ -183,7 +183,7 @@ int32 do_init(int32 argc, char** argv)
     {
         if (strcmp(argv[i], "--ip") == 0)
         {
-            uint32 ip;
+            uint32 ip = 0;
             inet_pton(AF_INET, argv[i + 1], &ip);
             map_ip.s_addr = ip;
         }
@@ -307,13 +307,13 @@ int32 do_init(int32 argc, char** argv)
     gConsoleService = std::make_unique<ConsoleService>();
 
     gConsoleService->RegisterCommand("crash", "Force-crash the process.",
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         crash();
     });
 
     gConsoleService->RegisterCommand("gm", "Change a character's GM level.",
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         if (inputs.size() != 3)
         {
@@ -349,14 +349,14 @@ int32 do_init(int32 argc, char** argv)
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
-    [&](std::vector<std::string> inputs)
+    [&](std::vector<std::string>& inputs)
     {
         fmt::print("Reloading settings files\n");
         settings::init();
     });
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
-    [&](std::vector<std::string> inputs)
+    [&](std::vector<std::string>& inputs)
     {
         fmt::print("> Goodbye!\n");
         gConsoleService->stop();
@@ -411,7 +411,7 @@ void do_final(int code)
 
     if (code != EXIT_SUCCESS)
     {
-        std::quick_exit(code);
+        std::exit(code);
     }
 }
 
@@ -479,8 +479,10 @@ int32 do_sockets(fd_set* rfd, duration next)
 {
     message::handle_incoming();
 
-    struct timeval timeout;
-    int32          ret;
+    struct timeval timeout
+    {
+    };
+    int32 ret = 0;
     memcpy(rfd, &readfds, sizeof(*rfd));
 
     timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
@@ -501,8 +503,10 @@ int32 do_sockets(fd_set* rfd, duration next)
 
     if (sFD_ISSET(map_fd, rfd))
     {
-        struct sockaddr_in from;
-        socklen_t          fromlen = sizeof(from);
+        struct sockaddr_in from
+        {
+        };
+        socklen_t fromlen = sizeof(from);
 
         ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
         if (ret != -1)
@@ -573,8 +577,8 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
 {
     TracyZoneScoped;
 
-    uint16 tmp;
-    uint16 i;
+    uint16 tmp = 0;
+    uint16 i   = 0;
 
     // counting blocks whose size = 4 byte
     tmp = (uint16)((size - FFXI_HEADER_SIZE) / 4);
@@ -858,7 +862,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CCharEntity* PChar = map_session_data->PChar;
     TracyZoneString(PChar->name);
 
-    CBasicPacket* PSmallPacket;
+    CBasicPacket* PSmallPacket = nullptr;
 
     uint32 PacketSize  = UINT32_MAX;
     size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);

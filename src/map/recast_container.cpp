@@ -104,7 +104,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
 
     if (recast == nullptr)
     {
-        GetRecastList(type)->push_back({ id, time(nullptr), duration, chargeTime, maxCharges });
+        GetRecastList(type)->emplace_back({ id, time(nullptr), duration, chargeTime, maxCharges });
         return &GetRecastList(type)->back();
     }
     else

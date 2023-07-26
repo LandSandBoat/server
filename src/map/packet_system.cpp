@@ -3152,7 +3152,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                         ah.price  = sql->GetUIntData(1);
                         ah.stack  = (uint8)sql->GetIntData(2);
                         ah.status = 0;
-                        PChar->m_ah_history.push_back(ah);
+                        PChar->m_ah_history.emplace_back(ah);
                     }
                 }
                 ShowDebug("%s has %i items up on the AH. ", PChar->GetName(), PChar->m_ah_history.size());
@@ -7416,7 +7416,7 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
         EntityID_t EntityID = { PChar->id, PChar->targid };
 
         PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_ENTER));
-        PTarget->BazaarCustomers.push_back(EntityID);
+        PTarget->BazaarCustomers.emplace_back(EntityID);
 
         CItemContainer* PBazaar = PTarget->getStorage(LOC_INVENTORY);
 

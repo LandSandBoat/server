@@ -135,7 +135,7 @@ namespace zoneutils
         }
     }
 
-    CCharEntity* GetCharByName(std::string name)
+    CCharEntity* GetCharByName(std::string const& name)
     {
         for (auto PZone : g_PZoneList)
         {
@@ -731,7 +731,7 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                zones.push_back(sql->GetUIntData(0));
+                zones.emplace_back(sql->GetUIntData(0));
             }
         }
         else

@@ -323,12 +323,12 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         else
         {
             PendingPositionPacket = packet;
-            PacketList.push_back(packet);
+            PacketList.emplace_back(packet);
         }
     }
     else
     {
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
     }
 }
 
@@ -344,7 +344,7 @@ void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 
     {
         // No existing packet update for the given char, so we push new packet
         CCharPacket* packet = new CCharPacket(PChar, type, updatemask);
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
         PendingCharPackets.emplace(PChar->id, packet);
     }
     else
@@ -361,7 +361,7 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     {
         // No existing packet update for the given entity, so we push new packet
         CEntityUpdatePacket* packet = new CEntityUpdatePacket(PEntity, type, updatemask);
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
         PendingEntityPackets.emplace(PEntity->id, packet);
     }
     else
@@ -2663,7 +2663,7 @@ void CCharEntity::endCurrentEvent()
 
 void CCharEntity::queueEvent(EventInfo* eventToQueue)
 {
-    eventQueue.push_back(eventToQueue);
+    eventQueue.emplace_back(eventToQueue);
     tryStartNextEvent();
 }
 

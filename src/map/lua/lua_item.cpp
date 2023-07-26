@@ -333,7 +333,7 @@ auto CLuaItem::getExData() -> sol::table
     return table;
 }
 
-void CLuaItem::setExData(sol::table newData)
+void CLuaItem::setExData(sol::table const& newData)
 {
     for (auto const& [keyObj, valObj] : newData)
     {

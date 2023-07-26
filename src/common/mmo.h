@@ -356,16 +356,16 @@ struct keyitems_t
 
 struct position_t
 {
-    float  x;
-    float  y; // Entity height, relative to "sea level"
-    float  z;
-    uint16 moving; // Something like the travel distance, the number of steps required for correct rendering in the client.
+    float  x      = 0.0f;
+    float  y      = 0.0f; // Entity height, relative to "sea level"
+    float  z      = 0.0f;
+    uint16 moving = 0; // Something like the travel distance, the number of steps required for correct rendering in the client.
 
     // The angle of rotation of the entity relative to its position. A maximum rotation value of
     // 255 is used as the rotation is stored in `uint8`. Use `rotationToRadian()` and
     // `radianToRotation()` util functions to convert back and forth between the 255-encoded
     // rotation value and the radian value.
-    uint8 rotation;
+    uint8 rotation = 0;
 
     position_t()
     {
@@ -388,7 +388,13 @@ struct position_t
 
 struct stats_t
 {
-    uint16 STR, DEX, VIT, AGI, INT, MND, CHR;
+    uint16 STR;
+    uint16 DEX;
+    uint16 VIT;
+    uint16 AGI;
+    uint16 INT;
+    uint16 MND;
+    uint16 CHR;
 
     stats_t()
     {
@@ -527,8 +533,8 @@ struct bazaar_t
 
 struct pathpoint_t
 {
-    position_t position;
-    uint32     wait;
+    position_t position{};
+    uint32     wait        = 0;
     bool       setRotation = false;
 };
 

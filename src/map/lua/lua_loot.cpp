@@ -121,7 +121,7 @@ void CLuaLootContainer::addGroupToContainer(uint16 groupRate, sol::table items, 
         group.Items.emplace_back(DROP_TYPE::DROP_GROUPED, item.get<uint16>(), weight);
     }
 
-    m_PLootContainer->drops.Groups.push_back(std::move(group));
+    m_PLootContainer->drops.Groups.emplace_back(std::move(group));
 }
 
 void CLuaLootContainer::Register()
