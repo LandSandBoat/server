@@ -205,7 +205,7 @@ namespace roeutils
         {
             uint8 day       = entry.first.as<uint8>() - 1;
             auto  timeslots = entry.second.as<sol::table>();
-            for (auto slot_entry : timeslots)
+            for (auto const& slot_entry : timeslots)
             {
                 auto   block    = slot_entry.first.as<uint16>() - 1;
                 uint16 recordID = slot_entry.second.as<uint16>();

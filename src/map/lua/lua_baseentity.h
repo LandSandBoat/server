@@ -821,9 +821,9 @@ public:
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    void castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    void useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
-    void useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
+    void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
+    void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);
@@ -852,7 +852,7 @@ public:
     uint32 getHistory(uint8 index);
 
     auto getChocoboRaisingInfo() -> sol::table;
-    bool setChocoboRaisingInfo(sol::table table);
+    bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);

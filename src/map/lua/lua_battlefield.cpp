@@ -303,7 +303,7 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
-void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
+void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas)
 {
     // get the global function "applyMixins"
     sol::function applyMixins = lua["applyMixins"];

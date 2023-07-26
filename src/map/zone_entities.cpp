@@ -1444,7 +1444,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             }
 
             destroy(it->second);
-            dynamicTargIdsToDelete.emplace_back({ it->first, server_clock::now() });
+            dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
             m_npcList.erase(it++);
             continue;

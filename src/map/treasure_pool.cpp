@@ -163,7 +163,7 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
 
 uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 {
-    uint8      SlotID;
+    uint8      SlotID     = 0;
     uint8      FreeSlotID = -1;
     time_point oldest     = time_point::max();
 

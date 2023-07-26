@@ -30,7 +30,7 @@ class CBaseEntity;
 class ZoneLos
 {
 public:
-    static ZoneLos* Load(uint16 zoneId, std::string pathToObj);
+    static ZoneLos* Load(uint16 zoneId, std::string const& pathToObj);
 
     bool CanEntitySee(CBaseEntity* source, CBaseEntity* target) const;
     bool CanEntitySee(CBaseEntity* source, position_t const& targetPointBase) const;
