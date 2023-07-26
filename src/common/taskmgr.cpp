@@ -47,10 +47,10 @@ void CTaskMgr::delInstance()
     }
 }
 
-CTaskMgr::CTask* CTaskMgr::AddTask(std::string InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
+CTaskMgr::CTask* CTaskMgr::AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
 {
     TracyZoneScoped;
-    return AddTask(new CTask(std::move(InitName), InitTick, std::move(InitData), InitType, InitFunc, InitInterval));
+    return AddTask(new CTask(InitName, InitTick, std::move(InitData), InitType, InitFunc, InitInterval));
 }
 
 CTaskMgr::CTask* CTaskMgr::AddTask(CTask* PTask)
