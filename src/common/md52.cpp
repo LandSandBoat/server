@@ -52,11 +52,11 @@ void md5_starts( md5_context *ctx )
 
 void md5_process( md5_context *ctx, const uint8 data[64] )
 {
-    uint32 X[16];
-    uint32 A;
-    uint32 B;
-    uint32 C;
-    uint32 D;
+    uint32 X[16]{};
+    uint32 A = 0;
+    uint32 B = 0;
+    uint32 C = 0;
+    uint32 D = 0;
 
     GET_UINT32( X[0],  data,  0 );
     GET_UINT32( X[1],  data,  4 );
@@ -180,8 +180,8 @@ void md5_process( md5_context *ctx, const uint8 data[64] )
 
 void md5_update(md5_context* ctx, uint8* input, uint32 length)
 {
-    uint32 left;
-    uint32 fill;
+    uint32 left = 0;
+    uint32 fill = 0;
 
     if (!length)
     {
@@ -229,11 +229,11 @@ static uint8 md5_padding[64] = { 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 void md5_finish(md5_context* ctx, uint8 digest[16])
 {
-    uint32 last;
-    uint32 padn;
-    uint32 high;
-    uint32 low;
-    uint8  msglen[8];
+    uint32 last = 0;
+    uint32 padn = 0;
+    uint32 high = 0;
+    uint32 low  = 0;
+    uint8  msglen[8]{};
 
     high = (ctx->total[0] >> 29) | (ctx->total[1] << 3);
     low  = (ctx->total[0] << 3);
@@ -259,7 +259,7 @@ void md5_finish(md5_context* ctx, uint8 digest[16])
 
 void md5(unsigned char* text, unsigned char* hash, int size)
 {
-    md5_context ctx;
+    md5_context ctx{};
     md5_starts(&ctx);
     md5_update(&ctx, text, size);
     md5_finish(&ctx, hash);

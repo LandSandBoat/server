@@ -81,6 +81,9 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 
     InitPreparedStatements();
 
+    // these members will be set up in SetupKeepalive(), they need to be init'd here to appease clang-tidy
+    m_PingInterval = 0;
+    m_LastPing     = 0;
     SetupKeepalive();
 }
 
@@ -116,8 +119,8 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
 {
     if (out_timeout && SQL_SUCCESS == Query("SHOW VARIABLES LIKE 'wait_timeout'"))
     {
-        char*  data;
-        size_t len;
+        char*  data = nullptr;
+        size_t len  = 0;
         if (SQL_SUCCESS == NextRow() && SQL_SUCCESS == GetData(1, &data, &len))
         {
             *out_timeout = (uint32)strtoul(data, nullptr, 10);
@@ -133,9 +136,9 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
 
 int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf_len, char sep)
 {
-    char*  data;
-    size_t len;
-    size_t off = 0;
+    char*  data = nullptr;
+    size_t len  = 0;
+    size_t off  = 0;
 
     if (self == nullptr || SQL_ERROR == Query("EXPLAIN `%s`", table))
     {
@@ -485,7 +488,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (uint64)strtoull(self->row[col], NULL, 10) : 0);
+            return (self->row[col] ? (uint64)strtoull(self->row[col], nullptr, 10) : 0);
         }
     }
     ShowCritical("Query: %s", self->buf);
