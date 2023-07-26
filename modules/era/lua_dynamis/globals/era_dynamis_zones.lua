@@ -136,7 +136,7 @@ for _, zoneID in pairs(dynamisZones) do
     function(zone)
         xi.dynamis.handleDynamis(zone)
     end)
-    if zoneID[3] >= 7 then
+    if zoneID[3] >= 7 and zoneID[3] < 10 then
         m:addOverride(string.format("xi.zones.%s.npcs.qm0.onTrigger", zoneID[2]),
         function(player, npc)
             xi.dynamis.sjQMOnTrigger(npc)
@@ -147,10 +147,10 @@ for _, zoneID in pairs(dynamisZones) do
         function(player, npc)
             xi.dynamis.timeExtensionOnTrigger(player, npc)
         end)
-        -- m:addOverride(string.format("xi.zones.%s.npcs.qm1.onTrigger", zoneID[2]),
-        -- function(player, npc)
-        --     xi.dynamis.timeExtensionOnTrigger(player, npc)
-        -- end)
+        m:addOverride(string.format("xi.zones.%s.npcs.qm1.onTrigger", zoneID[2]),
+        function(player, npc)
+            xi.dynamis.timeExtensionOnTrigger(player, npc)
+        end)
     end
 end
 

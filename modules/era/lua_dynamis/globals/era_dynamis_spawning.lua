@@ -2155,6 +2155,17 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
 
+        if mobIndex ~= nil and zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+            if
+                mobIndex == 9 or
+                mobIndex == 15 or
+                mobIndex == 67 or
+                mobIndex == 75
+            then
+                xi.dynamis.tavQMSpawnCheck(mob, zone, zoneID) -- Check to see if the ??? can spawn.
+            end
+        end
+
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
     end
 

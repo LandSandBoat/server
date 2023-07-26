@@ -697,8 +697,7 @@ xi.dynamis.dynaInfoEra =
         winQM = nil,
         entryPos = {0.1, -7, -21, 190, xi.zone.DYNAMIS_TAVNAZIA},
         ejectPos = {0  , -7, -23, 195, xi.zone.TAVNAZIAN_SAFEHOLD},
-        timeExtensionNPCOne = 16949396,
-        timeExtensionNPCTwo = 16949397,
+        timeExtensions = { 16949396, 16949397 },
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
@@ -1008,7 +1007,7 @@ xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
                 local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
                 local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
                 local expirationTime = prevExpire + (60 * timeExtension) -- Add more time to increase previous expiration point.
-                playersInZone = zone:getPlayers()
+                local playersInZone = zone:getPlayers()
                 SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
 
                 for _, player in pairs(playersInZone) do
@@ -1031,10 +1030,10 @@ xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
             end
         end
     else -- Used for Dynamis - Tavnazia
-        local playersInZone = zone:getPlayers()
         local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
         local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
-        local expirationTime = prevExpire + (60 * 30) -- Add more time to increase previous expiration point.
+        local expirationTime = prevExpire + (1800) -- Add more time to increase previous expiration point.
+        local playersInZone = zone:getPlayers()
         for _, player in pairs(playersInZone) do
             player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, 30) -- Send extension time message.
             xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
@@ -1127,6 +1126,11 @@ xi.dynamis.registerDynamis = function(player)
     local instanceID = RegisterDynamisInstance(zoneID, player:getID())
 
     local expirationTime = os.time() + (60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
+
+    if zoneID == xi.zone.TAVNAZIAN_SAFEHOLD then
+        expirationTime = os.time() + 60 * 15 -- Initial time for Dyna Tav should only be 15 minutes
+    end
+
     SetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), (xi.dynamis.dynaInfoEra[zoneID].dynaZone + expirationTime)) -- Sets Dynamis Token Based on original expiration time and zone ID
     SetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), expirationTime) -- Sets original timepoint which dynamis will expire.
     SetServerVariable(string.format("[DYNA]RegTimepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), os.time()) -- Sets last registered time.
@@ -1388,10 +1392,8 @@ xi.dynamis.timeExtensionOnTrigger = function(player, npc)
     local zone = player:getZone()
     xi.dynamis.addTimeToDynamis(zone, nil) -- Add Time
     for _, member in pairs(zone:getPlayers()) do
-        member:ChangeMusic(0, 0)
-        member:ChangeMusic(1, 0)
-        member:ChangeMusic(2, 227)
-        member:ChangeMusic(3, 227)
+        member:changeMusic(0, 227) -- 0 Background Music (Sunbreeze Music)
+        member:changeMusic(1, 227) -- 1 Background Music (Sunbreeze Music)
     end
 
     if npc:getID() == 16949396 then

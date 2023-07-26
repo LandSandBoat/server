@@ -781,7 +781,7 @@ xi.dynamis.mobList[zoneID][86 ].pos = { 78.73, -34.37, 59.60, 67 }  -- (086-D)
 xi.dynamis.mobList[zoneID][87 ].pos = { 80.92, -38.75, 26.42, 151 } -- (087-D)
 xi.dynamis.mobList[zoneID][88 ].pos = { 93.67, -41, 40.09, 123 } -- (088-D)
 xi.dynamis.mobList[zoneID][89 ].pos = { 113.12, -41, 41.79, 126 } -- (089-D)
-xi.dynamis.mobList[zoneID][90 ].pos = { 98.33, -41.01, 6.71, 191 }  -- (090-D)
+xi.dynamis.mobList[zoneID][90 ].pos = { 43.37, -36.1, 42.54, 250 }  -- (090-D)
 xi.dynamis.mobList[zoneID][91 ].pos = { 26.18, -35.92, -25.99, 0 } -- ( 091 )-Nightmare Hornet (×3)
 xi.dynamis.mobList[zoneID][92 ].pos = { 47.43, -36.06, -43.24, 0 } -- ( 092 )-Nightmare Hornet (×3)
 xi.dynamis.mobList[zoneID][93 ].pos = { 80.73, -36.19, -43.01, 125 } -- (093-D)
@@ -789,7 +789,7 @@ xi.dynamis.mobList[zoneID][94 ].pos = { 79.37, -34.78, -57.62, 196 } -- (094-D)
 xi.dynamis.mobList[zoneID][95 ].pos = { 82.25, -39.20, -25.12, 105 } -- (095-D)
 xi.dynamis.mobList[zoneID][96 ].pos = { 93.95, -41, -44.25, 127 } -- (096-D)
 xi.dynamis.mobList[zoneID][97 ].pos = { 112.95, -41, -42.22, 125 } -- (097-D)
-xi.dynamis.mobList[zoneID][98 ].pos = { 98.22, -41, -6.71, 67 } -- (098-D)
+xi.dynamis.mobList[zoneID][98 ].pos = { 43.37, -36.1, -42.54, 0 } -- (098-D)
 xi.dynamis.mobList[zoneID][99 ].pos = { 86.83, -33.93, 65.52, 0 } -- ( 099 )-Nightmare Cluster (×3)
 xi.dynamis.mobList[zoneID][100].pos = { 88.14, -28, 39.44, 0 } -- ( 100 )-Nightmare Cluster (×3)
 xi.dynamis.mobList[zoneID][101].pos = { 87.68, -33.72, -60.55, 0 } -- ( 101 )-Nightmare Cluster (×3)
@@ -813,10 +813,12 @@ xi.dynamis.mobList[zoneID][113].pos = { 8.28, -26.28, 123.05, 143 } -- ( 113 )-D
 --             Patrol Paths             --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
-xi.dynamis.mobList[zoneID].patrolPaths = { 4, 5, 10, 11, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-                                    26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,40,
-                                    41, 42, 43, 44, 45, 46, 47, 56,57, 58, 59, 60, 61, 68, 69,
-                                    76, 77, 78, 79, 80, 81, 82, 83, 84, 91, 92 }
+xi.dynamis.mobList[zoneID].patrolPaths =
+    {
+        4, 5, 10, 11, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+        28, 29, 30, 31, 32, 33, 38, 39, 44, 45, 46, 47, 56, 57, 58,
+        59, 60, 61, 68, 69, 76, 77, 78, 79, 80, 81, 82, 83, 84, 91, 92
+    }
 
 xi.dynamis.mobList[zoneID][4  ].patrolPath = { { -26.358, -21.97, 26.411 }, { -40.109, 22.232, 40.212 } }
 xi.dynamis.mobList[zoneID][5  ].patrolPath = { { -48.085, -22.051, 43.469 }, { -63.012, -22.03, 43.799 } }
@@ -840,16 +842,8 @@ xi.dynamis.mobList[zoneID][30 ].patrolPath = { { -87.10, -12.55, -8.09 }, { -87.
 xi.dynamis.mobList[zoneID][31 ].patrolPath = { { -90.97, -13.04, -7.25 }, { -78.84, -11.23, -7.36 } }
 xi.dynamis.mobList[zoneID][32 ].patrolPath = { { -26.358, -21.97, 26.411 }, { -40.109, 22.232, 40.212 } }
 xi.dynamis.mobList[zoneID][33 ].patrolPath = { { -48.085, -22.051, 43.469 }, { -63.012, -22.03, 43.799 } }
-xi.dynamis.mobList[zoneID][34 ].patrolPath = { { -76.9, -22.978, 32.81 }, { -78.262, -20, 66.832 } }
-xi.dynamis.mobList[zoneID][35 ].patrolPath = { { -96.831, -26.889, 33.834 }, { -97.564, -27, 54.292 } }
-xi.dynamis.mobList[zoneID][36 ].patrolPath = { { -109.281, -27.010, 56.199 }, { -109.728, -26.898, 36.731 } }
-xi.dynamis.mobList[zoneID][37 ].patrolPath = { { -96.43, -26.82, 25.97 }, { -98.02, -26.74, 3.29 } }
 xi.dynamis.mobList[zoneID][38 ].patrolPath = { { -27.114, -22.075, -26.941 }, { -37.896, -22.169, -37.871 } }
 xi.dynamis.mobList[zoneID][39 ].patrolPath = { { -44.921, -22.026, -43.388 }, { -63.904, -22.028, -43.865 } }
-xi.dynamis.mobList[zoneID][40 ].patrolPath = { { -74, -11.14, 16.16 }, { -73.76, -11.08, 8.89 } }
-xi.dynamis.mobList[zoneID][41 ].patrolPath = { { -74.09, -11.09, 7.78 }, { -74.10, -11.91, 2.04 } }
-xi.dynamis.mobList[zoneID][42 ].patrolPath = { { -87.31, -12.64, 8.62 }, { -87.68, -13.36, 1.44 } }
-xi.dynamis.mobList[zoneID][43 ].patrolPath = { { -89.58, -12.71, 6.76 }, { -79.12, -11.34, 7.71 } }
 xi.dynamis.mobList[zoneID][44 ].patrolPath = { { -75.824, -20, 65.71 }, { -88.177, -19.96, 66.99 } }
 xi.dynamis.mobList[zoneID][45 ].patrolPath = { { -88.107, -19.82, 64.57 }, { -88.06, -15.29, 49.79 } }
 xi.dynamis.mobList[zoneID][46 ].patrolPath = { { -88.119, -14.54, 47.74 }, { -87.79, -14, 36.53 } }

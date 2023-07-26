@@ -47,47 +47,47 @@ xi.dynamis.onSpawnNightmareAntlion = function(mob)
     mob:setPos(antlionPositions[newPosition][1],antlionPositions[newPosition][2],antlionPositions[newPosition][3],antlionPositions[newPosition][4])
 end
 
-xi.dynamis.tavFirstQMSpawnCheck = function(mob, zone, zoneID)
-    local timeNPC = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].timeExtensionNPCOne)
+xi.dynamis.tavQMSpawnCheck = function(mob, zone, zoneID)
+    local timeNPCOne = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].timeExtensions[1])
+    local timeNPCTwo = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].timeExtensions[2])
     local req = 0
+    local reqT = 0
+
     for _, eye in pairs(firstEyes) do
         if zone:getLocalVar(eye) == 1 then
             req = req + 1
         end
     end
 
-    if req == 1 and timeNPC:getStatus() ~= xi.status.NORMAL then
+    if req == 1 and timeNPCOne:getStatus() ~= xi.status.NORMAL then
         local chance = math.random(1, 2)
         if chance == 2 then
-            timeNPC:setStatus(xi.status.NORMAL) -- Make visible
+            timeNPCOne:setStatus(xi.status.NORMAL) -- Make visible
         end
-    elseif req == 2 and timeNPC:getStatus() ~= xi.status.NORMAL then
-        timeNPC:setStatus(xi.status.NORMAL) -- Make visible
+    elseif req == 2 and timeNPCOne:getStatus() ~= xi.status.NORMAL then
+        timeNPCOne:setStatus(xi.status.NORMAL) -- Make visible
     end
-end
 
-xi.dynamis.tavFirstQMSpawnCheck = function(mob, zone, zoneID)
-    local timeNPC = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].timeExtensionNPCTwo)
-    local req = 0
     for _, eye in pairs(secondEyes) do
         if zone:getLocalVar(eye) == 1 then
-            req = req + 1
+            reqT = reqT + 1
         end
     end
 
-    if req == 1 and timeNPC:getStatus() ~= xi.status.NORMAL then
+    if reqT == 1 and timeNPCTwo:getStatus() ~= xi.status.NORMAL then
         local chance = math.random(1, 2)
         if chance == 2 then
-            timeNPC:setStatus(xi.status.NORMAL) -- Make visible
+            timeNPCTwo:setStatus(xi.status.NORMAL) -- Make visible
         end
-    elseif req == 2 and timeNPC:getStatus() ~= xi.status.NORMAL then
-        timeNPC:setStatus(xi.status.NORMAL) -- Make visible
+    elseif reqT == 2 and timeNPCTwo:getStatus() ~= xi.status.NORMAL then
+        timeNPCTwo:setStatus(xi.status.NORMAL) -- Make visible
     end
 end
 
 xi.dynamis.antlionDeath = function(mob)
     local zone = mob:getZone()
     local worm = zone:getLocalVar("wormDeath")
+    local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
 
     zone:setLocalVar("antlionDeath", 1)
 
@@ -99,6 +99,8 @@ xi.dynamis.antlionDeath = function(mob)
         end
         zone:setLocalVar("SJUnlock", 1)
     end
+
+    xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
 end
 
 xi.dynamis.wormDeath = function(mob)
