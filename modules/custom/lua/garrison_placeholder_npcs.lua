@@ -15,7 +15,7 @@ local allyNames =
 {
     [20] = { "Patrician",       "Recruit",         "Candidate"       },
     [30] = { "Trader",          "Mariner",         "Scholar"         },
-    [40] = { "TempleKnight",    "GoldMusketeer",   "Mercenary"       }, -- Missing capture for Windurst 40
+    [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
     [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
     [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
