@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = math.min(1, (mob:getMainLvl() / 10)) * 2
+    local power = math.max(1, (mob:getMainLvl() / 10)) * 2
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, 60)
 
