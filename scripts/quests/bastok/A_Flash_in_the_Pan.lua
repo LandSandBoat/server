@@ -55,7 +55,7 @@ quest.sections =
                         if npc:getLocalVar('tradeCooldown') <= os.time() then
                             return quest:progressEvent(219)
                         else
-                            return quest:progressEvent(218)
+                            return quest:event(218)
                         end
                     end
                 end,
@@ -64,15 +64,13 @@ quest.sections =
             onEventFinish =
             {
                 [219] = function(player, csid, option, npc)
+                    if player:hasCompletedQuest(quest.areaId, quest.questId) then
+                        quest.reward.fame = 15
+                    end
+
                     if quest:complete(player) then
                         player:confirmTrade()
                         GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', os.time() + 900)
-                    end
-                end,
-
-                [218] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade(false)
                     end
                 end,
             },
