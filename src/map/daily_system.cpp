@@ -1,4 +1,26 @@
+/*
+===========================================================================
+
+Copyright (c) 2022 LandSandBoat Dev Teams
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
 #include "daily_system.h"
+
 #include "items/item.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -11,7 +33,10 @@ namespace daily
     std::vector<uint16> sundries1DialItems;
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
-    std::vector<uint16> gobbieJunk = {
+
+    // clang-format off
+    std::vector<uint16> gobbieJunk =
+    {
         2542, // Goblin Mess Tin
         2543, // Goblin Weel
         4324, // Hobgoblin Chocolate
@@ -21,10 +46,10 @@ namespace daily
         4495, // Goblin Chocolate
         4539  // Goblin Pie
     };
+    // clang-format on
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        uint16               selection;
         std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
@@ -59,7 +84,7 @@ namespace daily
                 break;
             }
         }
-        selection = xirand::GetRandomElement(dialItems);
+        uint16 selection = xirand::GetRandomElement(dialItems);
 
         // Check if Rare item is already owned and substitute with Goblin trash item.
         if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
@@ -164,34 +189,6 @@ namespace daily
         else
         {
             ShowError("Failed to load daily tally items");
-        }
-    }
-
-    void UpdateDailyTallyPoints()
-    {
-        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
-
-        const char* fmtQuery = "UPDATE char_points \
-                SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-                WHERE char_points.daily_tally > -1;";
-
-        int32 ret = sql->Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
-
-        if (ret == SQL_ERROR)
-        {
-            ShowError("Failed to update daily tally points");
-        }
-        else
-        {
-            ShowDebug("Distributed daily tally points");
-        }
-
-        fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
-
-        if (sql->Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
-        {
-            ShowError("Failed to delete daily tally char_vars entries");
         }
     }
 } // namespace daily
