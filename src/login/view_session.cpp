@@ -254,7 +254,7 @@ void view_session::read_func()
                 if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
                 {
                     auto potentialName = to_upper(nameStr);
-                    for (auto entry : badWordsList)
+                    for (auto const& entry : badWordsList)
                     {
                         auto badWord = to_upper(entry.second.as<std::string>());
                         if (potentialName.find(badWord) != std::string::npos)

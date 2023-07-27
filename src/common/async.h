@@ -35,8 +35,8 @@ public:
     static Async* getInstance();
 
     void query(std::string const& query);
-    void query(std::function<void(SqlConnection*)> func);
-    void submit(std::function<void()> func);
+    void query(std::function<void(SqlConnection*)> const& func);
+    void submit(std::function<void()> const& func);
 
 private:
     Async() = default;

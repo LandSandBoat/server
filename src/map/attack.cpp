@@ -243,7 +243,7 @@ uint8 CAttack::GetWeaponSlot()
  ************************************************************************/
 uint16 CAttack::GetAnimationID()
 {
-    AttackAnimation animation;
+    AttackAnimation animation{};
 
     // Try normal kick attacks (without footwork)
     if (this->m_attackType == PHYSICAL_ATTACK_TYPE::KICK)

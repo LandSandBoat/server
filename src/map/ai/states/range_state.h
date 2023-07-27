@@ -52,7 +52,7 @@ protected:
 
 private:
     CBattleEntity* const m_PEntity;
-    duration             m_aimTime;
+    duration             m_aimTime{};
     bool                 m_rapidShot{ false };
     position_t           m_startPos;
 };

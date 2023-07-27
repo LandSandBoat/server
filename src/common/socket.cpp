@@ -163,9 +163,11 @@ time_t stall_time = 60;
 int32 makeConnection(uint32 ip, uint16 port, int32 type)
 {
     TracyZoneScoped;
-    struct sockaddr_in remote_address;
-    int32              fd;
-    int32              result;
+    struct sockaddr_in remote_address
+    {
+    };
+    int32 fd     = 0;
+    int32 result = 0;
 
     fd = sSocket(AF_INET, type, 0);
 
@@ -188,7 +190,9 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         return -1;
     }
 
-    struct linger opt;
+    struct linger opt
+    {
+    };
     opt.l_onoff  = 0; // SO_DONTLINGER
     opt.l_linger = 0; // Do not care
     if (sSetsockopt(fd, SOL_SOCKET, SO_LINGER, (char*)&opt, sizeof(opt)))
@@ -303,7 +307,7 @@ std::string ip2str(uint32 ip)
 
 uint32 str2ip(const char* ip_str)
 {
-    uint32 ip;
+    uint32 ip = 0;
     inet_pton(AF_INET, ip_str, &ip);
 
     return ntohl(ip);
@@ -521,14 +525,13 @@ static int connect_check_(uint32 ip)
 static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 {
     TracyZoneScoped;
-    int             i;
     int             clear = 0;
     int             list  = 0;
-    ConnectHistory  root;
-    ConnectHistory* prev_hist;
-    ConnectHistory* hist;
+    ConnectHistory  root{};
+    ConnectHistory* prev_hist = nullptr;
+    ConnectHistory* hist      = nullptr;
 
-    for (i = 0; i < 0x10000; ++i)
+    for (int i = 0; i < 0x10000; ++i)
     {
         prev_hist = &root;
         root.next = hist = connect_history[i];
@@ -562,11 +565,11 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 int access_ipmask(const char* str, AccessControl* acc)
 {
     TracyZoneScoped;
-    uint32       ip;
-    uint32       mask;
-    unsigned int a[4];
-    unsigned int m[4];
-    int          n;
+    uint32       ip   = 0;
+    uint32       mask = 0;
+    unsigned int a[4]{};
+    unsigned int m[4]{};
+    int          n = 0;
 
     if (strcmp(str, "all") == 0)
     {
@@ -620,7 +623,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 int recv_to_fifo(int fd)
 {
     TracyZoneScoped;
-    int len;
+    int len = 0;
 
     if (!session_isActive(fd))
     {
@@ -654,7 +657,7 @@ int recv_to_fifo(int fd)
 int send_from_fifo(int fd)
 {
     TracyZoneScoped;
-    int len;
+    int len = 0;
 
     if (!session_isValid(fd))
     {
@@ -743,8 +746,8 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
 {
     TracyZoneScoped;
 
-    int       fd;
-    socklen_t len;
+    int       fd = 0;
+    socklen_t len{};
 
     len = sizeof(client_address);
 
@@ -787,9 +790,11 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
 int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 {
     TracyZoneScoped;
-    struct sockaddr_in server_address;
-    int                fd;
-    int                result;
+    struct sockaddr_in server_address
+    {
+    };
+    int fd     = 0;
+    int result = 0;
 
     fd = sSocket(AF_INET, SOCK_STREAM, 0);
 
@@ -861,7 +866,7 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 int32 RFIFOSKIP(int32 fd, size_t len)
 {
     TracyZoneScoped;
-    struct socket_data* s;
+    struct socket_data* s = nullptr;
 
     if (!session_isActive(fd))
     {
@@ -903,11 +908,11 @@ void do_close_tcp(int32 fd)
 /// <param name="access_list">The access list that we are parsing for individual entries.</param>
 /// <returns>std::vector<AccessControl> collection that contains all AccessControl entries.</returns>
 ///
-std::vector<AccessControl> get_access_list(std::string access_list)
+std::vector<AccessControl> get_access_list(std::string const& access_list)
 {
     // with the provided comma delimited access list, we will convert into a
     // vector of string entries
-    std::vector<AccessControl> result;
+    std::vector<AccessControl> result{};
 
     std::stringstream ss(access_list);
     while (ss.good())
@@ -926,7 +931,7 @@ std::vector<AccessControl> get_access_list(std::string access_list)
         AccessControl acc{};
         if (access_ipmask(entry.c_str(), &acc))
         {
-            result.push_back(acc);
+            result.emplace_back(acc);
         }
         else
         {
@@ -1045,7 +1050,7 @@ void socket_init_tcp()
     CTaskMgr::getInstance()->AddTask(
         "connect_check_clear",
         server_clock::now() + 1s,
-        NULL,
+        nullptr,
         CTaskMgr::TASK_INTERVAL,
         connect_check_clear,
         5min);
@@ -1059,8 +1064,8 @@ void socket_final_tcp()
         return;
     }
 
-    ConnectHistory* hist;
-    ConnectHistory* next_hist;
+    ConnectHistory* hist      = nullptr;
+    ConnectHistory* next_hist = nullptr;
 
     for (int i = 0; i < 0x10000; ++i)
     {
@@ -1186,9 +1191,11 @@ void set_nonblocking(int fd, unsigned long yes)
 int32 makeBind_udp(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
-    struct sockaddr_in server_address;
-    int                fd;
-    int                result;
+    struct sockaddr_in server_address
+    {
+    };
+    int fd     = 0;
+    int result = 0;
 
     fd = sSocket(AF_INET, SOCK_DGRAM, 0);
 

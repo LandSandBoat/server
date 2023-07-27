@@ -19,11 +19,12 @@
 ===========================================================================
 */
 
+#include "item_linkshell.h"
+
 #include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
-
-#include "item_linkshell.h"
 
 CItemLinkshell::CItemLinkshell(uint16 id)
 : CItem(id)
@@ -71,7 +72,7 @@ const std::string CItemLinkshell::getSignature()
     return signature; // return string copy
 }
 
-void CItemLinkshell::setSignature(std::string signature)
+void CItemLinkshell::setSignature(std::string const& signature)
 {
     memset(m_extra + 0x09, 0, sizeof(m_extra) - 0x09);
     memcpy(m_extra + 0x09, signature.c_str(), signature.size());

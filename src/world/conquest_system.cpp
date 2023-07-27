@@ -275,7 +275,7 @@ auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
             influence.bastok_influence   = sql->GetIntData(1);
             influence.windurst_influence = sql->GetIntData(2);
             influence.beastmen_influence = sql->GetIntData(3);
-            influences.push_back(influence);
+            influences.emplace_back(influence);
         }
     }
 
@@ -296,7 +296,7 @@ auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
             region_control_t regionControl{};
             regionControl.current = sql->GetIntData(0);
             regionControl.prev    = sql->GetIntData(1);
-            controllers.push_back(regionControl);
+            controllers.emplace_back(regionControl);
         }
     }
 
