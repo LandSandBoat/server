@@ -21,7 +21,7 @@
 
 #include "item_equipment.h"
 
-#include "../map.h"
+#include "map.h"
 #include <cstring>
 
 CItemEquipment::CItemEquipment(uint16 id)
@@ -185,7 +185,7 @@ void CItemEquipment::addModifier(CModifier modifier)
         }
         m_absorption = std::min<uint8>(pdt, 100);
     }
-    modList.push_back(modifier);
+    modList.emplace_back(modifier);
 }
 
 int16 CItemEquipment::getModifier(Mod mod) const
@@ -202,13 +202,13 @@ int16 CItemEquipment::getModifier(Mod mod) const
 
 void CItemEquipment::addPetModifier(CPetModifier modifier)
 {
-    petModList.push_back(modifier);
+    petModList.emplace_back(modifier);
 }
 
 void CItemEquipment::addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower)
 {
     itemLatent latent{ ConditionsID, ConditionsValue, ModValue, ModPower };
-    latentList.push_back(latent);
+    latentList.emplace_back(latent);
 }
 
 bool CItemEquipment::delModifier(Mod mod, int16 modValue)

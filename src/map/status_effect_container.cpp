@@ -29,8 +29,8 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include <array>
 #include <cstring>
@@ -846,7 +846,7 @@ EFFECT CStatusEffectContainer::EraseStatusEffect()
     {
         if (PStatusEffect->GetFlag() & EFFECTFLAG_ERASABLE && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            erasableList.push_back(PStatusEffect);
+            erasableList.emplace_back(PStatusEffect);
         }
     }
     if (!erasableList.empty())
@@ -867,7 +867,7 @@ EFFECT CStatusEffectContainer::HealingWaltz()
         if ((PStatusEffect->GetFlag() & EFFECTFLAG_WALTZABLE || PStatusEffect->GetFlag() & EFFECTFLAG_ERASABLE) && PStatusEffect->GetDuration() > 0 &&
             !PStatusEffect->deleted)
         {
-            waltzableList.push_back(PStatusEffect);
+            waltzableList.emplace_back(PStatusEffect);
         }
     }
     if (!waltzableList.empty())
@@ -912,7 +912,7 @@ EFFECT CStatusEffectContainer::DispelStatusEffect(EFFECTFLAG flag)
     {
         if (PStatusEffect->GetFlag() & flag && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            dispelableList.push_back(PStatusEffect);
+            dispelableList.emplace_back(PStatusEffect);
         }
     }
     if (!dispelableList.empty())
@@ -1332,7 +1332,7 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
     {
         if (PStatusEffect->GetFlag() & flag && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            dispelableList.push_back(PStatusEffect);
+            dispelableList.emplace_back(PStatusEffect);
         }
     }
     if (!dispelableList.empty())
@@ -1412,7 +1412,7 @@ std::vector<EFFECT> CStatusEffectContainer::GetStatusEffectsInIDRange(EFFECT sta
     {
         if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
         {
-            effectList.push_back(PStatusEffect->GetStatusID());
+            effectList.emplace_back(PStatusEffect->GetStatusID());
         }
     }
     return effectList;
@@ -1621,7 +1621,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                                   sql->GetUIntData(3), duration, sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
                                   (uint16)sql->GetUIntData(7), flags);
 
-            PEffectList.push_back(PStatusEffect);
+            PEffectList.emplace_back(PStatusEffect);
 
             // load shadows left
             if (PStatusEffect->GetStatusID() == EFFECT_COPY_IMAGE)

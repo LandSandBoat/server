@@ -24,7 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "pet_sync.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 /************************************************************************
  *                                                                       *

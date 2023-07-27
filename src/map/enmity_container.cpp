@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/utils.h"
+#include "common/logging.h"
+#include "common/utils.h"
 
 #include "ai/ai_container.h"
 #include "alliance.h"

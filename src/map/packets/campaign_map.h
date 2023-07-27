@@ -24,15 +24,15 @@
 
 #include "common/cbasetypes.h"
 
-#include "../campaign_system.h"
 #include "basic.h"
+#include "campaign_system.h"
 
 class CCharEntity;
 
 class CCampaignPacket : public CBasicPacket
 {
 public:
-    CCampaignPacket(CCharEntity* PChar, CampaignState state, uint8 number);
+    CCampaignPacket(CCharEntity* PChar, CampaignState const& state, uint8 number);
 
 private:
     void SetRegions(std::vector<CampaignRegion> areas, int start = 0);

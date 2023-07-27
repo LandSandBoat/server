@@ -23,8 +23,8 @@
 #ifndef _CSTATE_H
 #define _CSTATE_H
 
-#include "../../../common/mmo.h"
-#include "../../packets/message_basic.h"
+#include "common/mmo.h"
+#include "packets/message_basic.h"
 #include <memory>
 
 class CBattleEntity;

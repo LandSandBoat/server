@@ -22,7 +22,7 @@
 #ifndef _CANTICHEAT_H
 #define _CANTICHEAT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/charentity.h"
 
 namespace anticheat
@@ -77,7 +77,7 @@ namespace anticheat
     // cheatarg - Optional argument (varies by cheat ID)
     // description - Optional text description to be logged
     // returns true on success, false on failure
-    bool ReportCheatIncident(CCharEntity* PChar, CheatID cheatid, uint32 cheatarg = 0, const char* description = NULL);
+    bool ReportCheatIncident(CCharEntity* PChar, CheatID cheatid, uint32 cheatarg = 0, const char* description = nullptr);
 
 }; // namespace anticheat
 

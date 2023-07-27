@@ -22,7 +22,7 @@
 #ifndef _CHARRECASTCONTAINER_H
 #define _CHARRECASTCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "recast_container.h"
 
 #include <vector>

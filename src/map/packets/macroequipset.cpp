@@ -22,10 +22,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "macroequipset.h"
 #include "common/socket.h"
 
-#include "../item_container.h"
-#include "../items/item_equipment.h"
-#include "../utils/charutils.h"
-#include "../utils/itemutils.h"
+#include "item_container.h"
+#include "items/item_equipment.h"
+#include "utils/charutils.h"
+#include "utils/itemutils.h"
 
 // This packet is sent to the map server whenever a client is assembling an equip set.
 // On retail, it seems to do the following:

@@ -403,7 +403,7 @@ namespace luautils
         // "scripts/quests/(area|expansion)/(filename).lua"
         // "scripts/missions/(area|expansion)/(filename).lua"
         // "scripts/battlefields/(zone)/(filename).lua"
-        auto scrapeSubdir = [&](std::string subFolder) -> void
+        auto scrapeSubdir = [&](std::string const& subFolder) -> void
         {
             for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(subFolder))
             {
@@ -551,7 +551,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // xi.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry /* = false*/)
+    void CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry /* = false*/)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -764,7 +764,7 @@ namespace luautils
         moduleutils::TryApplyLuaModules();
     }
 
-    sol::table GetCacheEntryFromFilename(std::string filename)
+    sol::table GetCacheEntryFromFilename(std::string const& filename)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -990,7 +990,7 @@ namespace luautils
         // clang-format off
         zoneutils::ForEachZone([&zoneIds](CZone* PZone)
         {
-            zoneIds.push_back(PZone->GetID());
+            zoneIds.emplace_back(PZone->GetID());
         });
         // clang-format on
 
@@ -1249,13 +1249,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        int32 day;
-        int32 month;
-        int32 year;
-
-        day   = CVanaTime::getInstance()->getDayOfTheMonth();
-        month = CVanaTime::getInstance()->getMonth();
-        year  = CVanaTime::getInstance()->getYear();
+        int32 day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        int32 month = CVanaTime::getInstance()->getMonth();
+        int32 year  = CVanaTime::getInstance()->getYear();
 
         return (year * 360) + (month * 30 - 30) + day;
     }
@@ -1270,11 +1266,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        int32 day;
-        int32 month;
-
-        day   = CVanaTime::getInstance()->getDayOfTheMonth();
-        month = CVanaTime::getInstance()->getMonth();
+        int32 day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        int32 month = CVanaTime::getInstance()->getMonth();
 
         return (month * 30 - 30) + day;
     }
@@ -1661,7 +1654,7 @@ namespace luautils
             {
                 while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    magianColumns.push_back(sql->GetStringData(0));
+                    magianColumns.emplace_back(sql->GetStringData(0));
                 }
             }
             else
@@ -1678,7 +1671,7 @@ namespace luautils
                 int32 field{ 0 };
                 if (sql->Query(Query, trial) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                 {
-                    for (auto column : magianColumns)
+                    for (auto const& column : magianColumns)
                     {
                         table[column] = sql->GetIntData(field++);
                     }
@@ -1696,7 +1689,7 @@ namespace luautils
                     {
                         auto  inner_table = table.create_named(trial);
                         int32 field{ 0 };
-                        for (auto column : magianColumns)
+                        for (auto const& column : magianColumns)
                         {
                             inner_table[column] = sql->GetIntData(field++);
                         }
@@ -4311,7 +4304,7 @@ namespace luautils
             });
         });
         // clang-format on
-        exit(1);
+        std::exit(1);
     }
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
@@ -5240,7 +5233,7 @@ namespace luautils
         }
     }
 
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string const& text)
     {
         TracyZoneScoped;
 
@@ -5412,7 +5405,7 @@ namespace luautils
             onStart(CLuaBaseEntity(PChar));
         }
 
-        auto escape = [](std::string s)
+        auto escape = [](std::string const& s)
         {
             return fmt::format("\"{}\"", s);
         };
@@ -5437,12 +5430,37 @@ namespace luautils
         return context != customMenuContext.end();
     }
 
-    void HandleCustomMenu(CCharEntity* PChar, std::string selection)
+    void HandleCustomMenu(CCharEntity* PChar, const std::string& selection)
     {
-        // Selection is of the form:
-        // GMTELL(Testo): Question(Test Menu): Result (Option 1)
-        // Cancelled:
-        // GMTELL(Testo): Question(Test Menu (Play Effect)): Result (Canceled.)
+        /*
+        Japanese Responses:
+            現在イベント中です。このgmtellは無効です。
+            現在4つのgmtellを受け付けています。このgmtellは無効です。
+            GMTELL(%s):質問(%s):結果(イベントが起動したためキャンセル)
+            GMTELL(%s):質問(%s):結果(キャンセル)
+            GMTELL(%s):質問(%s):結果(%s)
+
+        English Responses:
+            Currently in an event. This GMTELL was invalidated.
+            Currently four GMTELL's have been received. This GMTELL was invalidated.
+            GMTELL(%s): Question(%s): Result (Canceled due to event activation.)
+            GMTELL(%s): Question(%s): Result (Canceled.)
+            GMTELL(%s): Question(%s): Result (%s)
+
+        French Responses:
+            Evénement en cours. Ce GMTELL a été invalidé.
+            Quatre GMTELL ont été reçus. Ce GMTELL a été invalidé.
+            GMTELL(%s) : Question(%s) : Résultat (annulé pour cause d'activation d'événement)
+            GMTELL(%s) : Question(%s) : Résultat (annulé)
+            GMTELL(%s) : Question(%s) : Résultat (%s)
+
+        German Responses:
+            Es wird derzeit ein Ereignis ausgeführt. Dieser SLRUF ist nicht gültig.
+            Er wurden vier SLRUFe empfangen. Dieser SLRUF ist nicht gültig.
+            SLRUF(%s): Frage(%s): Ergebnis (Wegen Auslösen eines Ereignisses abgebrochen.)
+            SLRUF(%s): Frage(%s): Ergebnis (Abgebrochen.)
+            SLRUF(%s): Frage(%s): Ergebnis (%s)
+        */
 
         if (selection.empty())
         {
@@ -5450,21 +5468,73 @@ namespace luautils
             return;
         }
 
-        std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
-        cleanedSelection.pop_back(); // Remove trailing ')'
+        // clang-format off
+        // Messages used to denote the player cancelled the GM tell manually..
+        const std::vector<std::string> cancelMsgs =
+        {
+            // JP: GMTELL(%s):質問(%s):結果(キャンセル)
+            "\x3A\x8C\x8B\x89\xCA\x28\x83\x4C\x83\x83\x83\x93\x83\x5A\x83\x8B\x29",
 
-        auto context = customMenuContext[PChar->id];
-        if (strcmp(cleanedSelection.c_str(), "Canceled.") == 0)
+            // NA: GMTELL(%s): Question(%s): Result (Canceled.)
+            "\x3A\x20\x52\x65\x73\x75\x6C\x74\x20\x28\x43\x61\x6E\x63\x65\x6C\x65\x64\x2E\x29",
+        };
+
+        // Messages used to denote the player cancelled the GM tell automatically due to an event or other conditions..
+        const std::vector<std::string> eventCancelMsgs =
+        {
+            // JP: 現在イベント中です。このgmtellは無効です。
+            "\x8C\xBB\x8D\xDD\x83\x43\x83\x78\x83\x93\x83\x67\x92\x86\x82\xC5\x82\xB7\x81\x42\x82\xB1\x82\xCC\x67\x6D\x74\x65\x6C\x6C\x82\xCD\x96\xB3\x8C\xF8\x82\xC5\x82\xB7\x81\x42",
+            // JP: 現在4つのgmtellを受け付けています。このgmtellは無効です。
+            "\x8C\xBB\x8D\xDD\x34\x82\xC2\x82\xCC\x67\x6D\x74\x65\x6C\x6C\x82\xF0\x8E\xF3\x82\xAF\x95\x74\x82\xAF\x82\xC4\x82\xA2\x82\xDC\x82\xB7\x81\x42\x82\xB1\x82\xCC\x67\x6D\x74\x65\x6C\x6C\x82\xCD\x96\xB3\x8C\xF8\x82\xC5\x82\xB7\x81\x42",
+            // JP: GMTELL(%s):質問(%s):結果(イベントが起動したためキャンセル)
+            "\x3A\x8C\x8B\x89\xCA\x28\x83\x43\x83\x78\x83\x93\x83\x67\x82\xAA\x8B\x4E\x93\xAE\x82\xB5\x82\xBD\x82\xBD\x82\xDF\x83\x4C\x83\x83\x83\x93\x83\x5A\x83\x8B\x29",
+
+            // NA: Currently in an event. This GMTELL was invalidated.
+            "\x43\x75\x72\x72\x65\x6E\x74\x6C\x79\x20\x69\x6E\x20\x61\x6E\x20\x65\x76\x65\x6E\x74\x2E\x20\x54\x68\x69\x73\x20\x47\x4D\x54\x45\x4C\x4C\x20\x77\x61\x73\x20\x69\x6E\x76\x61\x6C\x69\x64\x61\x74\x65\x64\x2E",
+            // NA: Currently four GMTELL's have been received. This GMTELL was invalidated.
+            "\x43\x75\x72\x72\x65\x6E\x74\x6C\x79\x20\x66\x6F\x75\x72\x20\x47\x4D\x54\x45\x4C\x4C\x27\x73\x20\x68\x61\x76\x65\x20\x62\x65\x65\x6E\x20\x72\x65\x63\x65\x69\x76\x65\x64\x2E\x20\x54\x68\x69\x73\x20\x47\x4D\x54\x45\x4C\x4C\x20\x77\x61\x73\x20\x69\x6E\x76\x61\x6C\x69\x64\x61\x74\x65\x64\x2E",
+            // NA: GMTELL(%s): Question(%s): Result (Canceled due to event activation.)
+            "\x3A\x20\x52\x65\x73\x75\x6C\x74\x20\x28\x43\x61\x6E\x63\x65\x6C\x65\x64\x20\x64\x75\x65\x20\x74\x6F\x20\x65\x76\x65\x6E\x74\x20\x61\x63\x74\x69\x76\x61\x74\x69\x6F\x6E\x2E\x29",
+        };
+
+        const auto wasCancelled = std::any_of(cancelMsgs.begin(), cancelMsgs.end(), [&selection](const auto& s)
+        {
+            return selection.find(s) != selection.npos;
+        });
+
+        const auto wasCancelledEvent = std::any_of(eventCancelMsgs.begin(), eventCancelMsgs.end(), [&selection](const auto& s)
+        {
+            return selection.find(s) != selection.npos;
+        });
+        // clang-format on
+
+        const auto context = customMenuContext[PChar->id];
+
+        if (wasCancelled || wasCancelledEvent)
         {
             auto onCancelled = context["onCancelled"];
             if (onCancelled.valid())
             {
-                onCancelled(CLuaBaseEntity(PChar));
+                onCancelled(CLuaBaseEntity(PChar), wasCancelledEvent);
             }
         }
         else
         {
-            for (auto& entry : context["options"].get<sol::table>())
+            const std::string resultJp = "\x3A\x8C\x8B\x89\xCA\x28";
+            const std::string resultNa = "\x3A\x20\x52\x65\x73\x75\x6C\x74\x20\x28";
+
+            std::string result = selection.find(resultJp) != selection.npos ? selection.substr(selection.find(resultJp) + resultJp.size()) : "";
+            if (result.empty())
+            {
+                result = selection.find(resultNa) != selection.npos ? selection.substr(selection.find(resultNa) + resultNa.size()) : "";
+            }
+
+            if (!result.empty())
+            {
+                result.pop_back();
+            }
+
+            for (const auto& entry : context["options"].get<sol::table>())
             {
                 if (entry.second.get_type() == sol::type::table)
                 {
@@ -5472,7 +5542,7 @@ namespace luautils
                     auto name  = table[1].get<std::string>();
                     auto func  = table[2].get<sol::function>();
 
-                    if (cleanedSelection.compare(name) == 0)
+                    if (result.compare(name) == 0)
                     {
                         auto result = func(CLuaBaseEntity(PChar));
                         if (!result.valid())

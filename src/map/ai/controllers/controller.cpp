@@ -21,8 +21,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "controller.h"
 
-#include "../../entities/battleentity.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/battleentity.h"
 
 CController::CController(CBattleEntity* _POwner)
 : m_Tick(server_clock::now())

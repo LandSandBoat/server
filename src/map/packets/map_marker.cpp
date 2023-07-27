@@ -21,8 +21,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "map_marker.h"
 
-#include "../entities/charentity.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
+#include "utils/charutils.h"
 
 CMapMarkerPacket::CMapMarkerPacket(CCharEntity* PChar)
 {

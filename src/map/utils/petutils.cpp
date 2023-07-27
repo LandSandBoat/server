@@ -26,37 +26,37 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstring>
 #include <vector>
 
-#include "../ability.h"
-#include "../enmity_container.h"
-#include "../entities/automatonentity.h"
-#include "../entities/mobentity.h"
-#include "../grades.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../latent_effect_container.h"
-#include "../map.h"
-#include "../mob_spell_list.h"
-#include "../status_effect_container.h"
-#include "../zone_instance.h"
+#include "ability.h"
 #include "battleutils.h"
 #include "charutils.h"
+#include "enmity_container.h"
+#include "entities/automatonentity.h"
+#include "entities/mobentity.h"
+#include "grades.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "latent_effect_container.h"
+#include "map.h"
+#include "mob_spell_list.h"
 #include "petutils.h"
 #include "puppetutils.h"
+#include "status_effect_container.h"
+#include "zone_instance.h"
 #include "zoneutils.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/automaton_controller.h"
-#include "../ai/controllers/mob_controller.h"
-#include "../ai/controllers/pet_controller.h"
-#include "../ai/states/ability_state.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/automaton_controller.h"
+#include "ai/controllers/mob_controller.h"
+#include "ai/controllers/pet_controller.h"
+#include "ai/states/ability_state.h"
 
-#include "../mob_modifier.h"
-#include "../packets/char_abilities.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/entity_update.h"
-#include "../packets/message_standard.h"
-#include "../packets/pet_sync.h"
+#include "mob_modifier.h"
+#include "packets/char_abilities.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/entity_update.h"
+#include "packets/message_standard.h"
+#include "packets/pet_sync.h"
 
 std::vector<Pet_t*> g_PPetList;
 
@@ -182,7 +182,7 @@ namespace petutils
                 Pet->name_prefix    = (uint8)sql->GetUIntData(50);
                 Pet->m_MobSkillList = (uint16)sql->GetUIntData(51);
 
-                g_PPetList.push_back(Pet);
+                g_PPetList.emplace_back(Pet);
             }
         }
     }
@@ -448,7 +448,7 @@ namespace petutils
         int32 scaleOver60       = 2; // Column number with a modifier for calculating MP after level 60
         // int32 scaleOver75       = 3; // Column number with a modifier for calculating Stats after level 75
 
-        uint8 grade;
+        uint8 grade = 0;
 
         uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();
@@ -617,7 +617,7 @@ namespace petutils
         int32 scaleOver60       = 2; // column number with a modifier for calculating MP after level 60
         int32 scaleOver75       = 3; // column number with a modifier for calculating Stats after level 75
 
-        uint8 grade;
+        uint8 grade = 0;
 
         uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();

@@ -14,7 +14,7 @@
 ===========================================================================
 */
 
-#include "../common/utils.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -38,7 +38,7 @@ void CUnityChat::AddMember(CCharEntity* PChar)
 {
     sql->Query("UPDATE accounts_sessions SET unitychat = %u WHERE charid = %u", this->getLeader(), PChar->id);
     PChar->PUnityChat = this;
-    members.push_back(PChar);
+    members.emplace_back(PChar);
 }
 
 bool CUnityChat::DelMember(CCharEntity* PChar)

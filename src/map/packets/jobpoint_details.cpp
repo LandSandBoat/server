@@ -18,8 +18,8 @@
 
 #include "jobpoint_details.h"
 
-#include "../entities/charentity.h"
-#include "../job_points.h"
+#include "entities/charentity.h"
+#include "job_points.h"
 
 CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
 {

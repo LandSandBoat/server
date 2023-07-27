@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "battlefield.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
@@ -355,7 +355,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     {
         PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? STATUS_TYPE::DISAPPEAR : STATUS_TYPE::NORMAL;
         PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-        m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
+        m_NpcList.emplace_back(static_cast<CNpcEntity*>(PEntity));
     }
     else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
     {
@@ -381,11 +381,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
 
                 if (mob.condition & CONDITION_WIN_REQUIREMENT)
                 {
-                    m_RequiredEnemyList.push_back(mob);
+                    m_RequiredEnemyList.emplace_back(mob);
                 }
                 else
                 {
-                    m_AdditionalEnemyList.push_back(mob);
+                    m_AdditionalEnemyList.emplace_back(mob);
                 }
 
                 // todo: this can be greatly improved
@@ -402,7 +402,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         // ally
         else
         {
-            m_AllyList.push_back(static_cast<CMobEntity*>(PEntity));
+            m_AllyList.emplace_back(static_cast<CMobEntity*>(PEntity));
         }
     }
 
@@ -956,7 +956,7 @@ void CBattlefield::addGroup(BattlefieldGroup group)
     {
         group.randomMobId = xirand::GetRandomElement(group.mobIds);
     }
-    m_groups.push_back(group);
+    m_groups.emplace_back(group);
 }
 
 void CBattlefield::handleDeath(CBaseEntity* PEntity)

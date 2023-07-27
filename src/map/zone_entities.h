@@ -24,6 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "zone.h"
 
+#include <set>
+#include <vector>
+
 class CZoneEntities
 {
 public:

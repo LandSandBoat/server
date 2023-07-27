@@ -69,7 +69,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
             PAHHistory->Name1 = sql->GetStringData(2);
             PAHHistory->Name2 = sql->GetStringData(3);
 
-            HistoryList.push_back(PAHHistory);
+            HistoryList.emplace_back(PAHHistory);
         }
         std::reverse(HistoryList.begin(), HistoryList.end());
     }
@@ -116,7 +116,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
                 PAHItem->StackAmount = -1;
             }
 
-            ItemList.push_back(PAHItem);
+            ItemList.emplace_back(PAHItem);
         }
     }
 
@@ -157,7 +157,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
                     {
                         PAHItem->StackAmount = -1;
                     }
-                    ItemList.push_back(PAHItem);
+                    ItemList.emplace_back(PAHItem);
                 }
             }
         }
@@ -452,7 +452,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
             if (visibleResults < 40)
             {
-                PlayersList.push_back(PPlayer);
+                PlayersList.emplace_back(PPlayer);
                 visibleResults++;
             }
             totalResults++;
@@ -548,7 +548,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
 
             PPlayer->flags2 = PPlayer->flags1;
 
-            PartyList.push_back(PPlayer);
+            PartyList.emplace_back(PPlayer);
         }
     }
     return PartyList;
@@ -629,7 +629,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
             PPlayer->flags2 = PPlayer->flags1;
 
-            LinkshellList.push_back(PPlayer);
+            LinkshellList.emplace_back(PPlayer);
         }
     }
 

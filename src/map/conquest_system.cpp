@@ -66,7 +66,7 @@ namespace conquest
                 {
                     const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
 
-                    region_control_t regionControl;
+                    region_control_t regionControl{};
                     regionControl.current = ref<uint8>(data, start);
                     regionControl.prev    = ref<uint8>(data, start + 1);
 
@@ -86,7 +86,7 @@ namespace conquest
                 {
                     const std::size_t start = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
 
-                    influence_t influence;
+                    influence_t influence{};
                     influence.sandoria_influence = ref<uint16>(data, start);
                     influence.bastok_influence   = ref<uint16>(data, start + 2);
                     influence.windurst_influence = ref<uint16>(data, start + 4);
@@ -107,10 +107,10 @@ namespace conquest
                 {
                     const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
 
-                    region_control_t regionControl;
+                    region_control_t regionControl{};
                     regionControl.current = ref<uint8_t>(data, start);
                     regionControl.prev    = ref<uint8_t>(data, start + 1);
-                    regionControls.push_back(regionControl);
+                    regionControls.emplace_back(regionControl);
                 }
 
                 GetConquestData()->updateRegionControls(regionControls);

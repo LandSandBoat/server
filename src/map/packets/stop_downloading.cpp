@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "stop_downloading.h"
 
 CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, std::string>> blacklist)

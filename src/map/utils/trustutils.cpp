@@ -13,24 +13,24 @@
 #include "mobutils.h"
 #include "zoneutils.h"
 
-#include "../grades.h"
-#include "../map.h"
-#include "../mob_modifier.h"
-#include "../mob_spell_list.h"
+#include "grades.h"
+#include "map.h"
+#include "mob_modifier.h"
+#include "mob_spell_list.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/trust_controller.h"
-#include "../ai/helpers/gambits_container.h"
-#include "../entities/mobentity.h"
-#include "../entities/trustentity.h"
-#include "../items/item_weapon.h"
-#include "../mobskill.h"
-#include "../packets/char_sync.h"
-#include "../packets/entity_update.h"
-#include "../packets/message_standard.h"
-#include "../status_effect_container.h"
-#include "../weapon_skill.h"
-#include "../zone_instance.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/trust_controller.h"
+#include "ai/helpers/gambits_container.h"
+#include "entities/mobentity.h"
+#include "entities/trustentity.h"
+#include "items/item_weapon.h"
+#include "mobskill.h"
+#include "packets/char_sync.h"
+#include "packets/entity_update.h"
+#include "packets/message_standard.h"
+#include "status_effect_container.h"
+#include "weapon_skill.h"
+#include "zone_instance.h"
 
 struct TrustSpell_ID
 {
@@ -123,9 +123,11 @@ struct Trust_t
         HPscale = 0.f;
         MPscale = 0.f;
 
+        cmbSkill   = 0;
         cmbDmgMult = 0;
         cmbDelay   = 0;
         speed      = 0;
+        subSpeed   = 0;
 
         strRank = 0;
         dexRank = 0;
@@ -191,7 +193,7 @@ namespace trustutils
 
                 trustID->spellID = (uint32)sql->GetIntData(0);
 
-                g_PTrustIDList.push_back(trustID);
+                g_PTrustIDList.emplace_back(trustID);
             }
         }
 
@@ -336,7 +338,7 @@ namespace trustutils
                 trust->light_res_rank   = (int8)sql->GetIntData(50);
                 trust->dark_res_rank    = (int8)sql->GetIntData(51);
 
-                g_PTrustList.push_back(trust);
+                g_PTrustList.emplace_back(trust);
             }
         }
     }
@@ -535,7 +537,7 @@ namespace trustutils
         int32 scaleOver60       = 2;
         // int32 scaleOver75       = 3;
 
-        uint8 grade;
+        uint8 grade = 0;
 
         int32 mainLevelOver30     = std::clamp(mLvl - 30, 0, 30);
         int32 mainLevelUpTo60     = (mLvl < 60 ? mLvl - 1 : 59);

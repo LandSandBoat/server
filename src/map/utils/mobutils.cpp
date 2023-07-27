@@ -23,20 +23,20 @@
 
 #include <cmath>
 
-#include "../battlefield.h"
-#include "../grades.h"
-#include "../items/item_weapon.h"
-#include "../lua/luautils.h"
-#include "../mob_modifier.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../packets/action.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trait.h"
+#include "battlefield.h"
 #include "battleutils.h"
+#include "grades.h"
+#include "items/item_weapon.h"
+#include "lua/luautils.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mob_spell_list.h"
 #include "mobutils.h"
+#include "packets/action.h"
 #include "petutils.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trait.h"
 #include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
@@ -206,8 +206,8 @@ namespace mobutils
         uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
-        uint8 mJobGrade; // main jobs grade
-        uint8 sJobGrade; // subjobs grade
+        uint8 mJobGrade = 0; // main jobs grade
+        uint8 sJobGrade = 0; // subjobs grade
 
         if (recover == true)
         {
@@ -613,7 +613,7 @@ namespace mobutils
     {
         JOBTYPE mJob = PMob->GetMJob();
         JOBTYPE sJob = PMob->GetSJob();
-        JOBTYPE job;
+        JOBTYPE job{};
 
         if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN) // check if mainjob gives mp or is NIN
         {
@@ -1060,11 +1060,11 @@ Usage:
                 int8 isMobMod = sql->GetIntData(3);
                 if (isMobMod == 1)
                 {
-                    familyMods->mobMods.push_back(mod);
+                    familyMods->mobMods.emplace_back(mod);
                 }
                 else
                 {
-                    familyMods->mods.push_back(mod);
+                    familyMods->mods.emplace_back(mod);
                 }
             }
         }
@@ -1089,11 +1089,11 @@ Usage:
                 int8 isMobMod = sql->GetIntData(3);
                 if (isMobMod == 1)
                 {
-                    poolMods->mobMods.push_back(mod);
+                    poolMods->mobMods.emplace_back(mod);
                 }
                 else
                 {
-                    poolMods->mods.push_back(mod);
+                    poolMods->mods.emplace_back(mod);
                 }
             }
         }
@@ -1115,11 +1115,11 @@ Usage:
                 int8 isMobMod = sql->GetIntData(3);
                 if (isMobMod == 1)
                 {
-                    spawnMods->mobMods.push_back(mod);
+                    spawnMods->mobMods.emplace_back(mod);
                 }
                 else
                 {
-                    spawnMods->mods.push_back(mod);
+                    spawnMods->mods.emplace_back(mod);
                 }
             }
         }

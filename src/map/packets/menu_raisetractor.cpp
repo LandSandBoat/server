@@ -21,7 +21,7 @@
 
 #include "common/socket.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "menu_raisetractor.h"
 
 CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity* PChar, REVIVAL_TYPE type)

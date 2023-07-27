@@ -28,7 +28,7 @@ ConnectServer::ConnectServer(int argc, char** argv)
 
     // clang-format off
         gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-        [](std::vector<std::string> inputs)
+        [](std::vector<std::string>& inputs)
         {
             size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
             size_t uniqueAccounts = 0;
@@ -41,7 +41,7 @@ ConnectServer::ConnectServer(int argc, char** argv)
         });
 
         gConsoleService->RegisterCommand("exit", "Safely close the login server",
-        [&](std::vector<std::string> inputs)
+        [&](std::vector<std::string>& inputs)
         {
             m_RequestExit = true;
             io_context.stop();
@@ -50,7 +50,9 @@ ConnectServer::ConnectServer(int argc, char** argv)
     // clang-format on
 
 #ifndef _WIN32
-    struct rlimit limits;
+    struct rlimit limits
+    {
+    };
 
     uint32 newRLimit = 10240;
 

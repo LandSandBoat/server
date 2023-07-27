@@ -24,9 +24,9 @@
 #ifndef _SERVERUTILS_H
 #define _SERVERUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
-#include "../../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+#include "common/taskmgr.h"
 
 namespace serverutils
 {

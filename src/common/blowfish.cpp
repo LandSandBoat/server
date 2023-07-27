@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/blowfish.h"
+#include "common/blowfish.h"
 
 #include <cstring>
 
@@ -361,10 +361,10 @@ cycle:
 
 #else
 
-    uint32 Xl;
-    uint32 Xr;
-    uint32 temp;
-    uint16 i;
+    uint32 Xl   = 0;
+    uint32 Xr   = 0;
+    uint32 temp = 0;
+    uint16 i    = 0;
 
     const int32 N = 16;
     Xl            = *xl;
@@ -459,10 +459,10 @@ cycle:
 
 #else
 
-    uint32 Xl;
-    uint32 Xr;
-    uint32 temp;
-    uint16 i;
+    uint32 Xl   = 0;
+    uint32 Xr   = 0;
+    uint32 temp = 0;
+    uint16 i    = 0;
 
     Xl            = *xl;
     Xr            = *xr;
@@ -494,12 +494,12 @@ cycle:
 
 uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S)
 {
-    int16  i;
-    int16  j;
-    int16  k;
-    uint32 data;
-    uint32 datal;
-    uint32 datar;
+    int16  i     = 0;
+    int16  j     = 0;
+    int16  k     = 0;
+    uint32 data  = 0;
+    uint32 datal = 0;
+    uint32 datar = 0;
 
     const int32 N = 16;
     memcpy(P, subkey, 72);

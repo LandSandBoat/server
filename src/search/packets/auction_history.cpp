@@ -23,15 +23,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "common/socket.h"
 
-#include "../data_loader.h"
+#include "data_loader.h"
 
 #include "auction_history.h"
 
 CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
-: m_count(0)
 {
-    memset(m_PData, 0, sizeof(m_PData));
-
     // Comments and RE by atom0s
     ref<uint8>(m_PData, 0x0A)  = 0x80;        // flags, may be int8 as it's checked against negative.
     ref<uint8>(m_PData, 0x0B)  = 0x85;        // packet type, masked as val & 0x1F

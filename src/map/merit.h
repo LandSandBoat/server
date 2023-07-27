@@ -22,7 +22,7 @@
 #ifndef _CMERIT_H
 #define _CMERIT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /************************************************************************
  *                                                                       *
@@ -597,10 +597,10 @@ private:
     uint16       m_LimitPoints;
     uint8        m_MeritPoints;
     CCharEntity* m_PChar;
-    Merit_t      merits[MERITS_COUNT];
+    Merit_t      merits[MERITS_COUNT]{};
 
     Merit_t* GetMeritPointer(MERIT_TYPE merit);
-    Merit_t* Categories[MCATEGORY_COUNT / 64 - 1]; // 51 pointers to the first merit of each catagory
+    Merit_t* Categories[MCATEGORY_COUNT / 64 - 1]{}; // 51 pointers to the first merit of each catagory
 };
 
 namespace meritNameSpace

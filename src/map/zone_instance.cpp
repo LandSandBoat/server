@@ -20,8 +20,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "zone_instance.h"
-#include "../common/timer.h"
 #include "ai/ai_container.h"
+#include "common/timer.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
 #include "status_effect_container.h"
@@ -40,7 +40,7 @@ CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE
 
 CZoneInstance::~CZoneInstance() = default;
 
-CCharEntity* CZoneInstance::GetCharByName(std::string name)
+CCharEntity* CZoneInstance::GetCharByName(std::string const& name)
 {
     TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
@@ -428,7 +428,7 @@ void CZoneInstance::ZoneServer(time_point tick)
     }
 }
 
-void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
+void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
     for (const auto& instance : instanceList)
@@ -440,7 +440,7 @@ void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
     }
 }
 
-void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func)
+void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PChar : PEntity->PInstance->GetCharList())
@@ -449,7 +449,7 @@ void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void
     }
 }
 
-void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func)
+void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PMob : PEntity->PInstance->m_mobList)
@@ -461,6 +461,6 @@ void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(
 CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
 {
     TracyZoneScoped;
-    instanceList.push_back(std::make_unique<CInstance>(this, instanceid));
+    instanceList.emplace_back(std::make_unique<CInstance>(this, instanceid));
     return instanceList.back().get();
 }

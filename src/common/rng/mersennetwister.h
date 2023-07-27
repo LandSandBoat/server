@@ -45,7 +45,7 @@ public:
         // https://stackoverflow.com/a/68382489
         for (auto it = seed_data.begin(); it != seed_data.end(); ++it)
         {
-            // start with a C++ equivalent of time(NULL) - UNIX time in seconds
+            // start with a C++ equivalent of time(nullptr) - UNIX time in seconds
             *it = std::chrono::duration_cast<std::chrono::seconds>(
                       std::chrono::system_clock::now().time_since_epoch())
                       .count();

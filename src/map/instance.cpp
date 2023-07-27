@@ -28,7 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 #include "zone.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 
 CInstance::CInstance(CZone* zone, uint16 instanceid)
 : CZoneEntities(zone)
@@ -142,7 +142,7 @@ void CInstance::RegisterChar(CCharEntity* PChar)
     {
         m_commander = PChar->id;
     }
-    m_registeredChars.push_back(PChar->id);
+    m_registeredChars.emplace_back(PChar->id);
 }
 
 uint8 CInstance::GetLevelCap() const

@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 
-#include "../zone.h"
+#include "zone.h"
 
 /************************************************************************
  *                                                                       *
@@ -52,7 +52,7 @@ namespace zoneutils
     CZone*       GetZone(uint16 ZoneID);
     CNpcEntity*  GetTrigger(uint16 TargID, uint16 ZoneID);
     CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);
-    CCharEntity* GetCharByName(std::string name);
+    CCharEntity* GetCharByName(std::string const& name);
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);  // returns pointer to character by id and target id
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returns pointer to preferred char to update for party changes

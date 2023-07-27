@@ -26,7 +26,7 @@
 
 #include "message_special.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0, uint32 param1, uint32 param2, uint32 param3, bool ShowName)
 {

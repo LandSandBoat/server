@@ -26,8 +26,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <unordered_map>
 #include <vector>
 
-#include "../../../common/cbasetypes.h"
-#include "../../lua/luautils.h"
+#include "common/cbasetypes.h"
+#include "lua/luautils.h"
 
 struct ai_event_t
 {
@@ -44,7 +44,7 @@ struct ai_event_t
 class CAIEventHandler
 {
 public:
-    void addListener(std::string const& eventname, sol::function lua_func, std::string const& identifier);
+    void addListener(std::string const& eventname, sol::function const& lua_func, std::string const& identifier);
     void removeListener(std::string const& identifier);
     bool hasListener(std::string const& eventName);
 

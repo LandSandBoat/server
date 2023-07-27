@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/socket.h"
 #include "common/utils.h"
 
-#include "../data_loader.h"
+#include "data_loader.h"
 #include "search_list.h"
 
 #include <cstring>
@@ -34,8 +34,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CLinkshellListPacket::CLinkshellListPacket(uint32 linkshellid, uint32 Total)
 : m_offset(192)
 {
-    memset(m_data, 0, sizeof(m_data));
-
     ref<uint8>(m_data, (0x0A)) = 0x00; // is final packet
     ref<uint8>(m_data, (0x0B)) = 0x82; // packet type
 

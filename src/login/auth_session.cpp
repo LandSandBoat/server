@@ -130,7 +130,7 @@ void auth_session::read_func()
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
             int32 ret = sql->Query("SELECT accounts.id,accounts.status FROM accounts WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')",
-                                    escaped_name, escaped_pass);
+                                   escaped_name, escaped_pass);
 
             if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
@@ -147,7 +147,7 @@ void auth_session::read_func()
                                         FROM accounts_sessions JOIN accounts \
                                         ON accounts_sessions.accid = accounts.id \
                                         WHERE accounts.id = %d;",
-                                        accountID);
+                                     accountID);
 
                     if (ret != SQL_ERROR && sql->NumRows() == 1)
                     {
@@ -203,7 +203,7 @@ void auth_session::read_func()
                     ref<uint32>(data_, 1) = accountID;
 
                     unsigned char hash[16];
-                    uint32        hashData = std::time(0) ^ getpid();
+                    uint32        hashData = std::time(nullptr) ^ getpid();
                     md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
                     std::memcpy(data_ + 5, hash, 16);
 
@@ -268,8 +268,8 @@ void auth_session::read_func()
                 accid = (accid < 1000 ? 1000 : accid);
 
                 // creating new account
-                time_t timecreate;
-                tm     timecreateinfo;
+                time_t timecreate{};
+                tm     timecreateinfo{};
 
                 time(&timecreate);
                 _localtime_s(&timecreateinfo, &timecreate);
@@ -279,7 +279,7 @@ void auth_session::read_func()
 
                 if (sql->Query("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
                                 VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);",
-                                accid, escaped_name, escaped_pass, strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
+                               accid, escaped_name, escaped_pass, strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
                 {
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
                     do_write(1);
@@ -303,7 +303,7 @@ void auth_session::read_func()
             int32 ret = sql->Query("SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')",
-                                    escaped_name, escaped_pass);
+                                   escaped_name, escaped_pass);
             if (ret == SQL_ERROR || sql->NumRows() == 0)
             {
                 ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", escaped_name));
@@ -343,7 +343,7 @@ void auth_session::read_func()
                 sql->Query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accid);
 
                 ret = sql->Query("UPDATE accounts SET accounts.password = PASSWORD('%s') WHERE accounts.id = %d",
-                                    escaped_updated_password, accid);
+                                 escaped_updated_password, accid);
                 if (ret == SQL_ERROR)
                 {
                     ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", escaped_name));

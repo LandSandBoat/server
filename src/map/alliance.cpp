@@ -20,7 +20,7 @@
 */
 
 #include "alliance.h"
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <algorithm>
 #include <cstring>
@@ -229,7 +229,7 @@ void CAlliance::addParty(CParty* party)
 
     party->m_PAlliance = this;
 
-    partyList.push_back(party);
+    partyList.emplace_back(party);
 
     uint8 newparty = 0;
 
@@ -292,7 +292,7 @@ void CAlliance::addParty(uint32 partyid) const
 void CAlliance::pushParty(CParty* PParty, uint8 number)
 {
     PParty->m_PAlliance = this;
-    partyList.push_back(PParty);
+    partyList.emplace_back(PParty);
     PParty->SetPartyNumber(number);
 
     for (std::size_t i = 0; i < PParty->members.size(); ++i)

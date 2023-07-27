@@ -21,10 +21,10 @@
 
 #include "moduleutils.h"
 
-#include "../command_handler.h"
-#include "../lua/luautils.h"
+#include "command_handler.h"
 #include "common/cbasetypes.h"
 #include "common/utils.h"
+#include "lua/luautils.h"
 
 #include <filesystem>
 #include <fstream>

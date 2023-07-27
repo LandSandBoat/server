@@ -7,7 +7,7 @@
 #include "kernel.h"
 
 #define BACKWARD_HAS_BFD 1
-#include "../../ext/backward/backward.hpp"
+#include "ext/backward/backward.hpp"
 
 // https://man7.org/linux/man-pages/man7/signal-safety.7.html
 void safe_print(const char* str)
@@ -40,7 +40,9 @@ void dumpBacktrace(int signal)
 
 void debug::init()
 {
-    struct rlimit core_limits;
+    struct rlimit core_limits
+    {
+    };
     core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
     setrlimit(RLIMIT_CORE, &core_limits);
 

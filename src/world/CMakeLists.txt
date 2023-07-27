@@ -50,6 +50,7 @@ target_link_libraries(xi_world
 
 target_include_directories(xi_world
     PUBLIC
+        ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )

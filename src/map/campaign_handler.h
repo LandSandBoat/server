@@ -17,7 +17,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CAMPAIGNHANDLER_H
 #define _CAMPAIGNHANDLER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <vector>
 
 class CZone;

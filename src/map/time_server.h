@@ -22,8 +22,8 @@
 #ifndef _TIMESERVER_H
 #define _TIMESERVER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 int32 time_server(time_point tick, CTaskMgr::CTask*);
 

@@ -443,8 +443,8 @@ void data_session::read_func()
             {
                 // Log clients IP info when player spawns into map server
 
-                time_t rawtime;
-                tm     convertedTime;
+                time_t rawtime{};
+                tm     convertedTime{};
                 time(&rawtime);
                 _localtime_s(&convertedTime, &rawtime);
 
@@ -474,7 +474,7 @@ void data_session::read_func()
     }
 }
 
-    void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
+void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
 {
     if (self->sessionHash != "")
     {

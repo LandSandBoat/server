@@ -158,17 +158,17 @@ namespace roeutils
                     if (flag == "daily")
                     {
                         roeutils::RoeSystem.DailyRecords.set(recordID);
-                        roeutils::RoeSystem.DailyRecordIDs.push_back(recordID);
+                        roeutils::RoeSystem.DailyRecordIDs.emplace_back(recordID);
                     }
                     else if (flag == "weekly")
                     {
                         roeutils::RoeSystem.WeeklyRecords.set(recordID);
-                        roeutils::RoeSystem.WeeklyRecordIDs.push_back(recordID);
+                        roeutils::RoeSystem.WeeklyRecordIDs.emplace_back(recordID);
                     }
                     else if (flag == "unity")
                     {
                         roeutils::RoeSystem.UnityRecords.set(recordID);
-                        roeutils::RoeSystem.UnityRecordIDs.push_back(recordID);
+                        roeutils::RoeSystem.UnityRecordIDs.emplace_back(recordID);
                     }
                     else if (flag == "timed")
                     {
@@ -205,7 +205,7 @@ namespace roeutils
         {
             uint8 day       = entry.first.as<uint8>() - 1;
             auto  timeslots = entry.second.as<sol::table>();
-            for (auto slot_entry : timeslots)
+            for (auto const& slot_entry : timeslots)
             {
                 auto   block    = slot_entry.first.as<uint16>() - 1;
                 uint16 recordID = slot_entry.second.as<uint16>();

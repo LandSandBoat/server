@@ -20,27 +20,27 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "trustentity.h"
-#include "../ai/ai_container.h"
-#include "../ai/controllers/trust_controller.h"
-#include "../ai/helpers/pathfind.h"
-#include "../ai/helpers/targetfind.h"
-#include "../ai/states/ability_state.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/mobskill_state.h"
-#include "../ai/states/range_state.h"
-#include "../ai/states/weaponskill_state.h"
-#include "../attack.h"
-#include "../enmity_container.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../packets/char_health.h"
-#include "../packets/entity_set_name.h"
-#include "../packets/entity_update.h"
-#include "../recast_container.h"
-#include "../status_effect_container.h"
-#include "../utils/battleutils.h"
-#include "../utils/trustutils.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/trust_controller.h"
+#include "ai/helpers/pathfind.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/mobskill_state.h"
+#include "ai/states/range_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "attack.h"
+#include "enmity_container.h"
+#include "mob_spell_container.h"
+#include "mob_spell_list.h"
+#include "packets/char_health.h"
+#include "packets/entity_set_name.h"
+#include "packets/entity_update.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/trustutils.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 : CMobEntity()
@@ -572,10 +572,10 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
 
             actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-            uint16         tpHitsLanded;
-            uint16         extraHitsLanded;
-            int32          damage;
-            CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+            uint16         tpHitsLanded    = 0;
+            uint16         extraHitsLanded = 0;
+            int32          damage          = 0;
+            CBattleEntity* taChar          = battleutils::getAvailableTrickAttackChar(this, PTarget);
 
             actionTarget.reaction                           = REACTION::NONE;
             actionTarget.speceffect                         = SPECEFFECT::NONE;

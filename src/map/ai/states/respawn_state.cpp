@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "respawn_state.h"
-#include "../../entities/baseentity.h"
-#include "../../entities/mobentity.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/baseentity.h"
+#include "entities/mobentity.h"
 
 CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
 : CState(_PEntity, _PEntity->targid)

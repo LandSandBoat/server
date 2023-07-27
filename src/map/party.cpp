@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "alliance.h"
 #include "entities/battleentity.h"
@@ -515,9 +515,9 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            memberinfo.push_back({ sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2),
-                                   std::string((const char*)sql->GetData(3)), static_cast<uint16>(sql->GetUIntData(4)),
-                                   static_cast<uint16>(sql->GetUIntData(5)), static_cast<uint16>(sql->GetUIntData(6)) });
+            memberinfo.emplace_back(CParty::partyInfo_t{ sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2),
+                                                         std::string((const char*)sql->GetData(3)), static_cast<uint16>(sql->GetUIntData(4)),
+                                                         static_cast<uint16>(sql->GetUIntData(5)), static_cast<uint16>(sql->GetUIntData(6)) });
         }
     }
     return memberinfo;
@@ -544,7 +544,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
     }
 
     PEntity->PParty = this;
-    members.push_back(PEntity);
+    members.emplace_back(PEntity);
 
     if (PEntity->objtype == TYPE_PC && this->members.size() > 1)
     {
@@ -667,7 +667,7 @@ void CParty::PushMember(CBattleEntity* PEntity)
     }
 
     PEntity->PParty = this;
-    members.push_back(PEntity);
+    members.emplace_back(PEntity);
 
     auto info = GetPartyInfo();
 

@@ -1,5 +1,5 @@
-﻿#include "../common/zlib.h"
-#include "../common/logging.h"
+﻿#include "common/zlib.h"
+#include "common/logging.h"
 #include <cassert>
 #include <cstring>
 #include <memory>
@@ -108,6 +108,7 @@ static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::
             // The pointers at offsets -3 and -2 in table must be zero for each non-zero data entry
             // This approach assumes pointers are at least 8bit on the system.
             static_assert(sizeof(std::uintptr_t) >= sizeof(uint8), "Pointer can't hold a 8bit value");
+            // NOLINTNEXTLINE
             jump[i].ptr = reinterpret_cast<void*>(static_cast<std::uintptr_t>(dec[i]));
             assert(!jump[i].ptr || (!jump[i - 2].ptr && !jump[i - 3].ptr));
         }

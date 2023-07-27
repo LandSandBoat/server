@@ -56,7 +56,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
+                g_PGuildList.emplace_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
 
@@ -74,7 +74,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildShopList.push_back(new CItemContainer(sql->GetIntData(0)));
+                g_PGuildShopList.emplace_back(new CItemContainer(sql->GetIntData(0)));
             }
         }
         for (auto* PGuildShop : g_PGuildShopList)

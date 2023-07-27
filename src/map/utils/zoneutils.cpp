@@ -135,7 +135,7 @@ namespace zoneutils
         }
     }
 
-    CCharEntity* GetCharByName(std::string name)
+    CCharEntity* GetCharByName(std::string const& name)
     {
         for (auto PZone : g_PZoneList)
         {
@@ -242,7 +242,7 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                auto zoneId = static_cast<uint16>(sql->GetUIntData(0));
+                uint16 zoneId = static_cast<uint16>(sql->GetUIntData(0));
                 zonesOnThisProcess.emplace_back(zoneId);
             }
         }
@@ -609,13 +609,13 @@ namespace zoneutils
 
                             if (PMaster == nullptr)
                             {
-                                ShowError("zoneutils::loadMOBList PMaster is NULL. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
+                                ShowError("zoneutils::loadMOBList PMaster is nullptr. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
                                         "database!",
                                         masterid);
                             }
                             else if (PPet == nullptr)
                             {
-                                ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!", petid);
+                                ShowError("zoneutils::loadMOBList PPet is nullptr. petid: %d. Make sure x,y,z are not zeros!", petid);
                             }
                             else if (masterid == petid)
                             {
@@ -731,7 +731,7 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                zones.push_back(sql->GetUIntData(0));
+                zones.emplace_back(static_cast<uint16>(sql->GetUIntData(0)));
             }
         }
         else

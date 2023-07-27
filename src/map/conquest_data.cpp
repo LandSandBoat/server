@@ -44,12 +44,12 @@ void ConquestData::load(std::unique_ptr<SqlConnection>& sql)
         uint8 regionId = 0;
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            region_control_t regionControl;
+            region_control_t regionControl{};
             regionControl.current    = sql->GetIntData(0);
             regionControl.prev       = sql->GetIntData(1);
             regionControls[regionId] = regionControl;
 
-            influence_t influence;
+            influence_t influence{};
             influence.sandoria_influence = sql->GetIntData(2);
             influence.bastok_influence   = sql->GetIntData(3);
             influence.windurst_influence = sql->GetIntData(4);
@@ -159,7 +159,7 @@ void ConquestData::updateInfluencePoints(std::vector<influence_t> const& influen
     influences.clear();
     for (const auto& influence : influencePoints)
     {
-        influences.push_back(influence);
+        influences.emplace_back(influence);
     }
 }
 
@@ -168,6 +168,6 @@ void ConquestData::updateRegionControls(std::vector<region_control_t> const& upd
     regionControls.clear();
     for (const auto& regionControl : updatedRegionControls)
     {
-        regionControls.push_back(regionControl);
+        regionControls.emplace_back(regionControl);
     }
 }

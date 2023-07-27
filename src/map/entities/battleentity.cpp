@@ -24,28 +24,28 @@
 
 #include "battleentity.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/despawn_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/weaponskill_state.h"
-#include "../attack.h"
-#include "../attackround.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../lua/luautils.h"
-#include "../notoriety_container.h"
-#include "../packets/action.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../status_effect_container.h"
-#include "../utils/battleutils.h"
-#include "../utils/petutils.h"
-#include "../utils/puppetutils.h"
-#include "../weapon_skill.h"
+#include "ai/ai_container.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/despawn_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "attack.h"
+#include "attackround.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "lua/luautils.h"
+#include "notoriety_container.h"
+#include "packets/action.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
+#include "weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
 {
@@ -1307,7 +1307,7 @@ uint16 CBattleEntity::GetSkill(uint16 SkillID)
 void CBattleEntity::addTrait(CTrait* PTrait)
 {
     TracyZoneScoped;
-    TraitList.push_back(PTrait);
+    TraitList.emplace_back(PTrait);
     addModifier(PTrait->getMod(), PTrait->getValue());
 }
 

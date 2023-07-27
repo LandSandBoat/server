@@ -44,7 +44,7 @@ namespace loginHelpers
         // clang-format on
     }
 
-    session_t& get_authenticated_session(std::string ipAddr, std::string sessionHash)
+    session_t& get_authenticated_session(std::string const& ipAddr, std::string const& sessionHash)
     {
         return authenticatedSessions_[ipAddr][sessionHash]; // NOTE: Will construct if doesn't exist
     }
@@ -60,7 +60,7 @@ namespace loginHelpers
 
     uint32 str2ip(const char* ip_str)
     {
-        uint32 ip;
+        uint32 ip = 0;
         inet_pton(AF_INET, ip_str, &ip);
 
         return ntohl(ip);
@@ -108,7 +108,7 @@ namespace loginHelpers
         };
 
         // apply the expansion masks where available
-        for (auto expansion : expansions)
+        for (auto const& expansion : expansions)
         {
             if (settings::get<bool>(expansion.first))
             {
@@ -133,7 +133,7 @@ namespace loginHelpers
         };
 
         // apply the feature masks where available
-        for (auto feature : features)
+        for (auto const& feature : features)
         {
             if (settings::get<bool>(feature.first))
             {
@@ -257,14 +257,20 @@ namespace loginHelpers
         switch (createchar.m_nation)
         {
             case 0x02: // windy start
+            {
                 createchar.m_zone = windurstStartingZones[xirand::GetRandomNumber(3)];
                 break;
+            }
             case 0x01: // bastok start
+            {
                 createchar.m_zone = bastokStartingZones[xirand::GetRandomNumber(3)];
                 break;
+            }
             case 0x00: // sandy start
+            {
                 createchar.m_zone = sandoriaStartingZones[xirand::GetRandomNumber(3)];
                 break;
+            }
         }
 
         const char* fmtQuery = "SELECT max(charid) FROM chars";
@@ -315,7 +321,7 @@ namespace loginHelpers
         }
     }
 
-    std::string getHashFromPacket(std::string ip_str, char* data)
+    std::string getHashFromPacket(std::string const& ip_str, char* data)
     {
         std::string hash = std::string(data + 12, 16);
 
@@ -325,4 +331,4 @@ namespace loginHelpers
         }
         return hash;
     }
-}
+} // namespace loginHelpers

@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "event_string.h"
 
 CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
@@ -64,7 +64,7 @@ CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
         ref<uint16>(0x0E) = 8; // if the parameter is less than 8, then after the event is over the camera will "jump" behind the character
     }
 
-    for (auto stringPair : eventInfo->strings)
+    for (auto const& stringPair : eventInfo->strings)
     {
         memcpy(data + 0x10 + 0x10 * stringPair.first, stringPair.second.c_str(), stringPair.second.size());
     }

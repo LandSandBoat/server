@@ -23,7 +23,7 @@
 
 #include "message_combat.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 CMessageCombatPacket::CMessageCombatPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID)
 {

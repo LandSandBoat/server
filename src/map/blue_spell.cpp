@@ -115,5 +115,5 @@ void CBlueSpell::setTertiarySkillchain(uint8 sc)
 
 void CBlueSpell::addModifier(CModifier modifier)
 {
-    modList.push_back(modifier);
+    modList.emplace_back(modifier);
 }

@@ -21,8 +21,8 @@
 
 #include "common/socket.h"
 
-#include "../campaign_system.h"
 #include "campaign_map.h"
+#include "campaign_system.h"
 
 /*
 Both Packets:
@@ -83,7 +83,7 @@ Region Order:
 24 - Castle Zvahl Keep [S]
 25 - Throne Room [S]
 */
-CCampaignPacket::CCampaignPacket(CCharEntity* PChar, CampaignState state, uint8 number)
+CCampaignPacket::CCampaignPacket(CCharEntity* PChar, CampaignState const& state, uint8 number)
 {
     this->setType(0x71);
     this->setSize(0xCC);

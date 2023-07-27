@@ -17,8 +17,8 @@
 #ifndef _CUNITYCHAT_H
 #define _CUNITYCHAT_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <vector>
 

@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/utils.h"
 
 #ifdef WIN32
-#include "../ext/wepoll/wepoll.h"
+#include <wepoll.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else
@@ -112,17 +112,16 @@ extern std::unique_ptr<ConsoleService> gConsoleService;
 
 void PrintPacket(char* data, int size)
 {
-    std::printf("\n");
-
+    fmt::printf("\n");
     for (int32 y = 0; y < size; y++)
     {
-        std::printf("%02x ", (uint8)data[y]);
+        fmt::printf("%02x ", (uint8)data[y]);
         if (((y + 1) % 16) == 0)
         {
-            printf("\n");
+            fmt::printf("\n");
         }
     }
-    printf("\n");
+    fmt::printf("\n");
 }
 
 int32 main(int32 argc, char** argv)
@@ -161,13 +160,15 @@ int32 main(int32 argc, char** argv)
 
     auto expireDays = settings::get<uint16>("search.EXPIRE_DAYS");
 
-    int iResult;
+    int iResult{};
 
     SOCKET ListenSocket = INVALID_SOCKET;
     SOCKET ClientSocket = INVALID_SOCKET;
 
     struct addrinfo* result = nullptr;
-    struct addrinfo  hints;
+    struct addrinfo  hints
+    {
+    };
 
 #ifdef WIN32
     // Initialize Winsock
@@ -286,20 +287,20 @@ int32 main(int32 argc, char** argv)
     gConsoleService = std::make_unique<ConsoleService>();
     gConsoleService->RegisterCommand(
     "ah_cleanup", fmt::format("AH task to return items older than {} days.", expireDays),
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         ah_cleanup(server_clock::now(), nullptr);
     });
     gConsoleService->RegisterCommand(
     "expire_all", "Force-expire all items on the AH, returning to sender.",
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         CDataLoader data;
         data.ExpireAHItems(0);
     });
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
-    [&](std::vector<std::string> inputs)
+    [&](std::vector<std::string>& inputs)
     {
         fmt::print("> Goodbye!\n");
         gConsoleService->stop();
@@ -322,7 +323,7 @@ int32 main(int32 argc, char** argv)
             if (sErrno != S_EINTR)
             {
                 ShowCritical("do_sockets: select() failed, error code %d!", sErrno);
-                exit(EXIT_FAILURE);
+                std::exit(EXIT_FAILURE);
             }
             continue; // interrupted by a signal, just loop and try again
         }
@@ -374,7 +375,7 @@ int32 main(int32 argc, char** argv)
             if (sErrno != S_EINTR)
             {
                 ShowCritical("select() failed, error code %d!", sErrno);
-                exit(EXIT_FAILURE);
+                std::exit(EXIT_FAILURE);
             }
             continue;
         }
@@ -895,7 +896,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
             }
         }
     }
-    printf("\n");
+    fmt::printf("\n");
 
     ShowInfo("Name: %s Job: %u Lvls: %u ~ %u ", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
 
@@ -960,7 +961,7 @@ void do_final(int code)
 
     logging::ShutDown();
 
-    exit(code);
+    std::exit(code);
 }
 
 void do_abort()

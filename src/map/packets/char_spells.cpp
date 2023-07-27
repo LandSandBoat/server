@@ -25,7 +25,7 @@
 
 #include "char_spells.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
 {

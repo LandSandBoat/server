@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../common/utils.h"
-#include "../common/logging.h"
-#include "../common/md52.h"
+#include "common/utils.h"
+#include "common/logging.h"
+#include "common/md52.h"
 
 #include <algorithm>
 #include <cctype>
@@ -77,8 +77,8 @@ int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 /// @param count Number of bytes to convert
 bool bin2hex(char* output, unsigned char* input, size_t count)
 {
-    char   toHex[] = "0123456789abcdef";
-    size_t i;
+    char        toHex[] = "0123456789abcdef";
+    std::size_t i       = 0;
 
     for (i = 0; i < count; ++i)
     {
@@ -358,7 +358,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     bitmask >>= (64 - lengthInBit);
     bitmask <<= bitOffset;
 
-    uint64 retVal;
+    uint64 retVal = 0;
 
     if ((lengthInBit + bitOffset) <= 8)
     {
@@ -402,7 +402,7 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     byteOffset += (bitOffset >> 3); // correct bitOffsets >= 8
     bitOffset %= 8;
 
-    uint8 bytesNeeded; // calculate how many bytes are needed
+    uint8 bytesNeeded = 0; // calculate how many bytes are needed
     if ((bitOffset + lengthInBit) <= 8)
     {
         bytesNeeded = 1;
@@ -458,7 +458,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
 
-    uint8 bytesNeeded;
+    uint8 bytesNeeded = 0;
     if ((bitOffset + lengthInBit) <= 8)
     {
         bytesNeeded = 1;
@@ -481,7 +481,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
         return 0;
     }
 
-    uint64 retVal;
+    uint64 retVal = 0;
 
     uint8* modifiedTarget = new uint8[bytesNeeded];
 
@@ -694,8 +694,8 @@ std::string UnpackSoultrapperName(uint8 input[])
     uint8       remainder = 0;
     uint8       shift     = 1;
     uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
-    char        indexChar;
-    std::string output = "";
+    char        indexChar = 0;
+    std::string output    = "";
 
     // Unpack and shift 7-bit to 8-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -712,7 +712,7 @@ std::string UnpackSoultrapperName(uint8 input[])
         indexChar = (char)(tempLeft | remainder);
         if (indexChar >= '0' && indexChar <= 'z')
         {
-            output = output + (char)(tempLeft | remainder);
+            output += (char)(tempLeft | remainder);
         }
 
         remainder = tempRight << (7 - shift);
@@ -725,7 +725,7 @@ std::string UnpackSoultrapperName(uint8 input[])
         {
             if (char(remainder) >= '0' && char(remainder) <= 'z')
             {
-                output = output + char(remainder);
+                output += char(remainder);
             }
             remainder = 0;
             shift     = 1;
@@ -758,19 +758,20 @@ std::string escape(std::string const& s)
 std::vector<std::string> split(std::string const& s, std::string const& delimiter)
 {
     std::size_t pos_start = 0;
-    std::size_t pos_end, delim_len = delimiter.length();
-    std::string token;
+    std::size_t pos_end   = 0;
+    std::size_t delim_len = delimiter.length();
+    std::string token     = "";
 
-    std::vector<std::string> res;
+    std::vector<std::string> res{};
 
     while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
     {
         token     = s.substr(pos_start, pos_end - pos_start);
         pos_start = pos_end + delim_len;
-        res.push_back(token);
+        res.emplace_back(token);
     }
 
-    res.push_back(s.substr(pos_start));
+    res.emplace_back(s.substr(pos_start));
     return res;
 }
 
@@ -902,7 +903,7 @@ look_t stringToLook(std::string str)
     // A 16-bit number is represented by *4* string characters
     // Iterate in groups of 4
     std::vector<uint16> hex(str.size() / 4, 0);
-    uint16              value;
+    uint16              value = 0;
     for (std::size_t i = 0; i < str.size() / 4; i++)
     {
         auto begin = str.data() + (i * 4);
@@ -963,7 +964,7 @@ bool definitelyLessThan(float a, float b)
 
 void crash()
 {
-    int* volatile ptr = 0;
+    int* volatile ptr = nullptr;
     // cppcheck-suppress nullPointer
     *ptr = 0xDEAD;
 }

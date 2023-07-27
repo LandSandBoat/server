@@ -25,11 +25,11 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
 
-#include "../blue_spell.h"
-#include "../spell.h"
+#include "blue_spell.h"
+#include "spell.h"
 
 namespace blueutils
 {

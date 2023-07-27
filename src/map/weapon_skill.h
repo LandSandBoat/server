@@ -22,8 +22,8 @@
 #ifndef _CWEAPONSKILL_H
 #define _CWEAPONSKILL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "entities/battleentity.h"
 
@@ -74,10 +74,10 @@ public:
 private:
     uint16   m_ID;
     uint8    m_TypeID;
-    uint8    m_Job[MAX_JOBTYPE];
+    uint8    m_Job[MAX_JOBTYPE]{};
     uint16   m_Skilllevel;
     uint8    m_AnimationId;
-    duration m_AnimationTime;
+    duration m_AnimationTime{};
     uint8    m_Element;
     uint8    m_PrimarySkillchain;
     uint8    m_SecondarySkillchain;

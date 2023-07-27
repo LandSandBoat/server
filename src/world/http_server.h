@@ -49,5 +49,5 @@ private:
     {
         uint32                                 activeSessionCount;
         std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
-    } m_apiDataCache;
+    } m_apiDataCache{};
 };

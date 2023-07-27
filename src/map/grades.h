@@ -22,7 +22,7 @@
 #ifndef _GRADES_H
 #define _GRADES_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "entities/battleentity.h"
 
