@@ -15300,7 +15300,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
  *  Note    : Params can assume a default value by passing nil
  *          : e.g. triggerDrawIn(true) to pull in a party/alliance
  ************************************************************************/
-inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
@@ -15309,10 +15309,11 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
     CBattleEntity* PTarget = PMob->GetBattleTarget();
 
     // Default values
-    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
-    uint16 maximumReach = 0xFFFF;
-    bool   includeParty = false;
-    float  offset       = PMob->GetMeleeRange() - 0.2f;
+    uint8  drawInRange         = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach        = 0xFFFF;
+    bool   includeParty        = false;
+    float  offset              = PMob->GetMeleeRange() - 0.2f;
+    bool   includeDeadAndMount = false;
 
     if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
     {
@@ -15335,10 +15336,15 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
         includeParty = includePt.as<bool>();
     }
 
+    if (incDeadAndMount != sol::lua_nil)
+    {
+        includeDeadAndMount = incDeadAndMount.as<bool>();
+    }
+
     if (PTarget)
     {
         // Draw in requires a target
-        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty, includeDeadAndMount);
     }
 
     return 0;
