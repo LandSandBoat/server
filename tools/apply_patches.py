@@ -18,10 +18,9 @@ def apply_patches():
     for filename in os.listdir(patch_dir):
         if filename.endswith(".patch"):
             patch_path = os.path.abspath(os.path.join(patch_dir, filename))
-            print(os.path.abspath(patch_path))
             try:
                 # Use subprocess to run the 'git apply' command
-                subprocess.run(["git", "apply", "-R", patch_path], cwd="../", check=True)
+                # subprocess.run(["git", "apply", "-R", patch_path], cwd="../")
                 subprocess.run(["git", "apply", "-v", patch_path], cwd="../", check=True)
                 print(f"Applied patch: {filename}")
             except subprocess.CalledProcessError as e:

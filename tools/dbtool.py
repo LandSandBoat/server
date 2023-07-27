@@ -759,6 +759,7 @@ def reset_db():
 
 
 def apply_patches():
+    print(colorama.ansi.clear_screen())
     subprocess.run(['py', 'apply_patches.py'], check=True)
     time.sleep(1)
 
