@@ -25,7 +25,7 @@
 
 #include "char_mounts.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar)
 {

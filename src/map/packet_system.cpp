@@ -2279,20 +2279,9 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
     uint32 msg_offset = data.ref<uint32>(0x10); // The offset to start obtaining the server message
     // uint32  msg_request_len = data.ref<uint32>(0x14); // The total requested size of send to the client
 
-    if (msg_language == 0x02)
-    {
-        std::string login_message = settings::get<std::string>("main.SERVER_MESSAGE");
-        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE"))
-        {
-            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE"));
-        }
-        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE"))
-        {
-            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXPO_MESSAGE"));
-        }
-        PChar->pushPacket(new CServerMessagePacket(login_message, msg_language, msg_timestamp, msg_offset));
-    }
+    std::string login_message = luautils::GetServerMessage(msg_language);
 
+    PChar->pushPacket(new CServerMessagePacket(login_message, msg_language, msg_timestamp, msg_offset));
     PChar->pushPacket(new CCharSyncPacket(PChar));
 
     // todo: kill player til theyre dead and bsod
@@ -4728,7 +4717,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug("(Party)Altering permissions of %s to %d", data[0x04], data[0x15]);
+                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", memberName, data[0x15]));
                 PChar->PParty->AssignPartyRole(memberName, data.ref<uint8>(0x15));
             }
         }
@@ -4764,7 +4753,10 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar &&
                 PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
             {
-                ShowDebug("(Alliance)Changing leader to %s", data[0x04]);
+                char memberName[PacketNameLength] = {};
+                memcpy(&memberName, data[0x04], PacketNameLength - 1);
+
+                ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberName));
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
                 uint8 leaderData[4]{};
                 ref<uint32>(leaderData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;

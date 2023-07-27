@@ -20,11 +20,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "despawn_state.h"
-#include "../../entities/baseentity.h"
-#include "../../entities/mobentity.h"
-#include "../../packets/entity_animation.h"
-#include "../../zone.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/baseentity.h"
+#include "entities/mobentity.h"
+#include "packets/entity_animation.h"
+#include "zone.h"
 
 CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 : CState(_PEntity, _PEntity->targid)

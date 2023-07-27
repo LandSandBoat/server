@@ -27,8 +27,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <set>
 #include <vector>
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "sol/sol.hpp"
 #include <unordered_map>
 

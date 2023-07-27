@@ -462,10 +462,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     local tick     = ae.tick or 0
                     local duration = params.duration or ae.duration
 
-                    if dLevel < 0 then
-                        duration = duration - dLevel
-                    end
-
                     duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
 
                     target:addStatusEffect(ae.eff, power, tick, duration)

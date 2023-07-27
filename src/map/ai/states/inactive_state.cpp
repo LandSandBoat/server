@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "inactive_state.h"
-#include "../../entities/battleentity.h"
-#include "../../status_effect_container.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/battleentity.h"
+#include "status_effect_container.h"
 
 CInactiveState::CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState, bool untargetable)
 : CState(PEntity, 0)

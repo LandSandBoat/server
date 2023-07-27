@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     -- I think its linked to Ulima's Quest on Three Paths (Where Messengers Gather)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

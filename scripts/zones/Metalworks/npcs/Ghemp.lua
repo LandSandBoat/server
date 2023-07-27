@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 908  909  910  920  927  101  102
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 101 and
         option >= xi.skill.WOODWORKING and
@@ -69,7 +69,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
             player:setCharVar("SmithingExpertQuest", 1)

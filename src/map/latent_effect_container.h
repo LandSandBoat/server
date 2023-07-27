@@ -22,8 +22,8 @@
 #ifndef _LATENTEFFECTCONTAINER_H
 #define _LATENTEFFECTCONTAINER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include "entities/petentity.h"
 #include "items/item_equipment.h"

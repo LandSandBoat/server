@@ -23,8 +23,8 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
 #include "bazaar_close.h"
+#include "entities/charentity.h"
 
 CBazaarClosePacket::CBazaarClosePacket(CCharEntity* PChar)
 {

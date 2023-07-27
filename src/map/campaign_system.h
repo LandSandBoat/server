@@ -17,8 +17,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CAMPAIGNSYSTEM_H
 #define _CAMPAIGNSYSTEM_H
 
-#include "../common/cbasetypes.h"
 #include "campaign_handler.h"
+#include "common/cbasetypes.h"
 #include <vector>
 
 class CCharEntity;

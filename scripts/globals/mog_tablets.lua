@@ -219,7 +219,7 @@ xi.mogTablet.moogleOnTrigger = function(player, npc)
     end
 end
 
-xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
+xi.mogTablet.moogleOnEventUpdate = function(player, csid, option, npc)
     -- print("update", csid, option)
     -- TODO: Check server vars
 
@@ -273,7 +273,7 @@ xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
     end
 end
 
-xi.mogTablet.moogleOnEventFinish = function(player, csid, option)
+xi.mogTablet.moogleOnEventFinish = function(player, csid, option, npc)
     -- print("finish", csid, option)
 
     -- Hand out prizes

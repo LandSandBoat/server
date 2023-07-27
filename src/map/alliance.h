@@ -22,7 +22,7 @@
 #ifndef _CALLIANCE_H
 #define _CALLIANCE_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "map.h"
 
 #include <vector>

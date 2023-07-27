@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CMOBSKILL_TATE_H
 #define _CMOBSKILL_TATE_H
 
-#include "../../mobskill.h"
+#include "mobskill.h"
 #include "state.h"
 
 class CMobEntity;

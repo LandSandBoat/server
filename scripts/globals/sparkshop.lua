@@ -748,5 +748,5 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     end
 end
 
-function xi.sparkshop.onEventFinish(player, csid, option)
+function xi.sparkshop.onEventFinish(player, csid, option, npc)
 end

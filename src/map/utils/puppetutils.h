@@ -22,9 +22,9 @@
 #ifndef _PUPUTILS_H
 #define _PUPUTILS_H
 
-#include "../entities/charentity.h"
-#include "../items/item_puppet.h"
-#include "../status_effect.h"
+#include "entities/charentity.h"
+#include "items/item_puppet.h"
+#include "status_effect.h"
 
 namespace puppetutils
 {

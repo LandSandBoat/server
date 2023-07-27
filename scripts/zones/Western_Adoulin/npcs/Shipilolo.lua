@@ -43,10 +43,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2543 then
         -- Progresses Quest: 'The Old Man and the Harpoon'
         player:delKeyItem(xi.ki.BROKEN_HARPOON)

@@ -82,10 +82,10 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     end
 end
 
-instanceObject.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
 
     if csid >= 200 and csid <= 203 and option == 1 then

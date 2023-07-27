@@ -18,9 +18,9 @@
 
 #include "menu_jobpoints.h"
 
-#include "../entities/battleentity.h"
-#include "../entities/charentity.h"
-#include "../job_points.h"
+#include "entities/battleentity.h"
+#include "entities/charentity.h"
+#include "job_points.h"
 
 CMenuJobPointsPacket::CMenuJobPointsPacket(CCharEntity* PChar)
 {

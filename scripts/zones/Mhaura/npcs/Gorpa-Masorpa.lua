@@ -14,12 +14,12 @@ entity.onTrigger = function(player, npc)
     xi.ambuscade.onTriggerGorpaMasorpa(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.ambuscade.onEventUpdateGorpaMasorpa(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.ambuscade.onEventUpdateGorpaMasorpa(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.ambuscade.onEventFinishGorpaMasorpa(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.ambuscade.onEventFinishGorpaMasorpa(player, csid, option, npc)
 end
 
 return entity

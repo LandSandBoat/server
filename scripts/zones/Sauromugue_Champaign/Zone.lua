@@ -54,7 +54,7 @@ zoneObject.onGameDay = function(zone)
     GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
     end

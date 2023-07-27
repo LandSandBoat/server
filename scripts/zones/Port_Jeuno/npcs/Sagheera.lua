@@ -433,7 +433,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
         local info = afArmorPlusOne[option]
@@ -517,7 +517,7 @@ local handleTradeChipEvent = function(player, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local coinAmount = bit.rshift(option, 16)
     option = bit.band(option, 65535) -- Only use the first 16 bits
 

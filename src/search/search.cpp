@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/utils.h"
 
 #ifdef WIN32
-#include "../ext/wepoll/wepoll.h"
+#include <wepoll.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else

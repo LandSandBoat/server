@@ -142,7 +142,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(326, bastokMissions, bastokQuests, otherQuests, seekersOfAdoulin, 0xFFFFFFFE, 0xFFFFFFFE, 10, gil)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if not player:delGil(10) then
         player:setLocalVar("Lamepaue_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
@@ -151,7 +151,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if player:getLocalVar("Lamepaue_PlayCutscene") < 2 then
         if option == 1 then        -- Fetichism.
             player:startEvent(1008)

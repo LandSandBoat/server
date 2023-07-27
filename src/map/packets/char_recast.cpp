@@ -24,10 +24,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
-#include "../recast_container.h"
 #include "char_recast.h"
+#include "recast_container.h"
 
 CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 {

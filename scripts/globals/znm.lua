@@ -135,7 +135,7 @@ xi.znm.ryo.onTrigger = function(player, npc)
     player:startEvent(913)
 end
 
-xi.znm.ryo.onEventUpdate = function(player, csid, option)
+xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
     if csid == 914 then
         local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
         player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
@@ -149,7 +149,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option)
     end
 end
 
-xi.znm.ryo.onEventFinish = function(player, csid, option)
+xi.znm.ryo.onEventFinish = function(player, csid, option, npc)
 end
 
 -----------------------------------
@@ -284,7 +284,7 @@ if player:getCharVar("ZeniStatus") == 0 then
     
 end
 
-xi.znm.sanraku.onEventUpdate = function(player, csid, option)
+xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
   printf("updateRESULT: %u",option)
     
     local lures =
@@ -295,21 +295,11 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
         2595, 2596, 2593, 2572
     }
 
-    local seals =
-    {
-        xi.ki.MAROON_SEAL, xi.ki.MAROON_SEAL, xi.ki.MAROON_SEAL,
-        xi.ki.APPLE_GREEN_SEAL,xi.ki.APPLE_GREEN_SEAL,xi.ki.APPLE_GREEN_SEAL,
-        xi.ki.CHARCOAL_GREY_SEAL, xi.ki.DEEP_PURPLE_SEAL, xi.ki.CHESTNUT_COLORED_SEAL,
-        xi.ki.LILAC_COLORED_SEAL,
-        xi.ki.CERISE_SEAL,xi.ki.CERISE_SEAL,xi.ki.CERISE_SEAL,
-        xi.ki.SALMON_COLORED_SEAL,xi.ki.SALMON_COLORED_SEAL,xi.ki.SALMON_COLORED_SEAL,
-        xi.ki.PURPLISH_GREY_SEAL, xi.ki.GOLD_COLORED_SEAL, xi.ki.COPPER_COLORED_SEAL,
-        xi.ki.BRIGHT_BLUE_SEAL,
-        xi.ki.PINE_GREEN_SEAL,xi.ki.PINE_GREEN_SEAL,xi.ki.PINE_GREEN_SEAL,
-        xi.ki.AMBER_COLORED_SEAL,xi.ki.AMBER_COLORED_SEAL,xi.ki.AMBER_COLORED_SEAL,
-        xi.ki.FALLOW_COLORED_SEAL,xi.ki.TAUPE_COLORED_SEAL,xi.ki.SIENNA_COLORED_SEAL,
-        xi.ki.LAVENDER_COLORED_SEAL
-    }
+xi.znm.sanraku.onEventFinish = function(player, csid, option, npc)
+    if csid == 910 then
+        player:confirmTrade()
+        player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())
+        player:incrementCharVar("[ZNM][Sanraku]TradedPlates", 1)
 
     if csid == 909 then
         local zeni = player:getCurrency("zeni_point")

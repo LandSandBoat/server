@@ -56,7 +56,7 @@ instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 5, 10)
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return instanceObject

@@ -107,7 +107,7 @@ xi.maws.onTrigger = function(player, npc)
     end
 end
 
-xi.maws.onEventFinish = function(player, csid, option)
+xi.maws.onEventFinish = function(player, csid, option, npc)
     local maw = xi.maws.pastMaws[player:getZoneID()]
 
     if csid == maw.cs.warp and option == 1 then

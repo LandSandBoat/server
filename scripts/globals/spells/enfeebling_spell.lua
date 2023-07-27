@@ -414,6 +414,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         end
 
         if
+            xi.settings.main.ENABLE_IMMUNOBREAK and
             caster:isPC() and
             target:isMob() and
             immunobreakTable[spellEffect] and          -- Only certain effects can be immunobroken.

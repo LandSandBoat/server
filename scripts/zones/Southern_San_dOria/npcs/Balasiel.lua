@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 63 then
         player:setCharVar("KnightStalker_Progress", 3)
     end

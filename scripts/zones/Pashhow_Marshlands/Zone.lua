@@ -75,7 +75,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 13 then
         quests.rainbow.onEventUpdate(player)
     end

@@ -21,10 +21,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 205 and
         npcUtil.giveItem(player, { xi.items.GUTTLER, { xi.items.LUNGO_NANGO_JADESHELL, 30 } })

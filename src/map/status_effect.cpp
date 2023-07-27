@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/utils.h"
+#include "common/utils.h"
 
 #include "entities/battleentity.h"
 #include "status_effect.h"

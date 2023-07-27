@@ -21,26 +21,26 @@
 
 #include "common/utils.h"
 
-#include "../packets/char_job_extra.h"
-#include "../packets/char_spells.h"
+#include "packets/char_job_extra.h"
+#include "packets/char_spells.h"
 
 #include <cmath>
 
-#include "../packets/char_health.h"
-#include "../packets/char_stats.h"
-#include "../packets/message_basic.h"
+#include "packets/char_health.h"
+#include "packets/char_stats.h"
+#include "packets/message_basic.h"
 
-#include "../blue_spell.h"
-#include "../blue_trait.h"
-#include "../grades.h"
-#include "../job_points.h"
-#include "../merit.h"
-#include "../modifier.h"
-#include "../party.h"
-#include "../spell.h"
 #include "battleutils.h"
+#include "blue_spell.h"
+#include "blue_trait.h"
 #include "blueutils.h"
 #include "charutils.h"
+#include "grades.h"
+#include "job_points.h"
+#include "merit.h"
+#include "modifier.h"
+#include "party.h"
+#include "spell.h"
 
 namespace blueutils
 {

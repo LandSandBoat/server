@@ -37,10 +37,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 5056 then
         -- Successfully finished introduction CS event chain for Quest: 'Raptor Rapture'.
         player:setCharVar("Raptor_Rapture_Status", 3)

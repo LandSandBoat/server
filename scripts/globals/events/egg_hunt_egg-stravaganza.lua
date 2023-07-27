@@ -820,7 +820,7 @@ xi.events.eggHunt.onTrigger = function(player, npc)
     end
 end
 
-xi.events.eggHunt.onEventFinish = function(player, csid, option)
+xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
 

@@ -23,12 +23,12 @@
 
 #include <cstring>
 
-#include "../utils/puppetutils.h"
 #include "char_job_extra.h"
+#include "utils/puppetutils.h"
 
-#include "../entities/automatonentity.h"
-#include "../entities/charentity.h"
-#include "../merit.h"
+#include "entities/automatonentity.h"
+#include "entities/charentity.h"
+#include "merit.h"
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {

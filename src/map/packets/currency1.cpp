@@ -23,8 +23,8 @@
 
 #include "currency1.h"
 
-#include "../entities/charentity.h"
-#include "../utils/charutils.h"
+#include "entities/charentity.h"
+#include "utils/charutils.h"
 
 CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 {

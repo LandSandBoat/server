@@ -22,7 +22,7 @@
 #ifndef _CPARTY_H
 #define _CPARTY_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "map.h"
 
 #include <vector>

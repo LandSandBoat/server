@@ -22,7 +22,7 @@
 #ifndef _CITEMCONTAINER_H
 #define _CITEMCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum CONTAINER_ID
 {

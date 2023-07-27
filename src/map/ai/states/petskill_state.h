@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CPETSKILL_TATE_H
 #define _CPETSKILL_TATE_H
 
-#include "../../petskill.h"
+#include "petskill.h"
 #include "state.h"
 
 class CPetEntity;

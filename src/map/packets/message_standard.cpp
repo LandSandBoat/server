@@ -25,7 +25,7 @@
 
 #include "message_standard.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
 {

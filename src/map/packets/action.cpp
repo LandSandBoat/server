@@ -27,13 +27,13 @@
 
 #include "action.h"
 
-#include "../ability.h"
-#include "../entities/battleentity.h"
-#include "../items/item_weapon.h"
-#include "../mobskill.h"
-#include "../spell.h"
-#include "../utils/battleutils.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "entities/battleentity.h"
+#include "items/item_weapon.h"
+#include "mobskill.h"
+#include "spell.h"
+#include "utils/battleutils.h"
+#include "weapon_skill.h"
 
 /************************************************************************
  *

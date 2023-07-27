@@ -39,7 +39,7 @@ xi.artisan.moogleOnTrigger = function(player, npc)
     player:startEvent(csid, 0, 0, 0, sackSize, 0, 0, menuMask, mogVisited)
 end
 
-xi.artisan.moogleOnUpdate = function(player, csid, option)
+xi.artisan.moogleOnUpdate = function(player, csid, option, npc)
     if option == 1 then -- Buy sack
         if player:getGil() >= 9980 and player:getContainerSize(xi.inv.MOGSACK) == 0 then
             player:delGil(9980)
