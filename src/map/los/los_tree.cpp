@@ -41,15 +41,15 @@ LosTree::LosTree(Triangle* elements, int elementCount)
 
     root = new LosTreeNode(this->elements, boundingBoxes, this->elementNexts, indices, 0, elementCount - 1, 100, 1, 5, true);
 
-    delete[] boundingBoxes;
-    delete[] indices;
+    destroy_arr(boundingBoxes);
+    destroy_arr(indices);
 }
 
 LosTree::~LosTree()
 {
-    delete root;
-    delete[] elements;
-    delete[] elementNexts;
+    destroy(root);
+    destroy_arr(elements);
+    destroy_arr(elementNexts);
 }
 
 LosTreeNodeStats LosTree::GetStats()
