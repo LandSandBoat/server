@@ -38,17 +38,22 @@ xi.garrison.allyLooks =
         {
             "0x01000C030010262000303A403A5008611B700000",
             "0x01000A040010262019303A40195008611C700000",
-            -- (Missing capture for 1 (?) NPC here)
         },
 
         [xi.nation.BASTOK] =
         {
-            -- (Missing capture)
+            "0x01000E02000066000100010001009F0000000000",
+            "0x010001017D000000150015001500B70000000000",
+            "0x01000701361005206630664066500C6129700000",
+            "0x0100020103000300000000000000DC0000000000",
+            "0x010006020F0000000F000F000F00820082000000",
+            "0x01000402740014000000000003002C0100000000",
         },
 
         [xi.nation.WINDURST] =
         {
-            -- (Missing capture)
+            "0x010007070110322032300E401550AC6000700000",
+            "0x01000E0718101820183015401850B76024700000",
         },
     },
     --level 30 garrison looks
@@ -69,7 +74,10 @@ xi.garrison.allyLooks =
 
         [xi.nation.WINDURST] =
         {
-            -- (Missing capture)
+            "0x01000B051C1073201430144014506C6000700000",
+            "0x0100010777106920693066406950B46000700000",
+            "0x010000067D107820033066406850E96000700000",
+            "0x0100020700100220023002400250006000700000", -- Naih_Arihmepp
         },
     },
     --level 40 garrison looks
@@ -79,7 +87,6 @@ xi.garrison.allyLooks =
         {
             "0x01000E04191019201930194019506B601C700000",
             "0x01000903191019201930194019506B601C700000"
-            -- (Missing capture for 2 NPCs here)
         },
 
         [xi.nation.BASTOK] =
@@ -113,7 +120,6 @@ xi.garrison.allyLooks =
             "0x0100020600106320633063406350056122700000",
             "0x010004067C102D20193019401950506100700000",
             "0x0100080669106B206B306B406B50FE6000700000"
-            -- (Missing capture for 1 NPC here)
         },
     },
     --level 75 garrison looks
@@ -127,7 +133,6 @@ xi.garrison.allyLooks =
         [xi.nation.BASTOK] =
         {
             "0x010002071C1070201C301C401C50C46000700000",
-            -- (Missing capture for 1 (?) NPC here)
         },
 
         [xi.nation.WINDURST] =
