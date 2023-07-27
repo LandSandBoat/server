@@ -713,13 +713,12 @@ public:
     bool           IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
-    time_point      m_TriggerAreaCheckTime;
     weatherVector_t m_WeatherVector; // the probability of each weather type
 
     std::map<uint8, spawnGroup_t> m_SpawnGroups; // Map of spawn groups
 
-    virtual void ZoneServer(time_point tick, bool checkTriggerAreas);
-    void         CheckTriggerAreas(CCharEntity* PChar);
+    virtual void ZoneServer(time_point tick);
+    void         CheckTriggerAreas();
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func);
@@ -800,9 +799,10 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimer;             // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimerTriggerAreas; //
 
-    void createZoneTimer();
+    void createZoneTimers();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);
 

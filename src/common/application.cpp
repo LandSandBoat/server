@@ -79,5 +79,6 @@ void Application::Tick()
     while (!m_RequestExit)
     {
         next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
+        std::this_thread::sleep_for(next);
     }
 }
