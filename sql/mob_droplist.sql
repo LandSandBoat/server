@@ -1034,7 +1034,23 @@ INSERT INTO `mob_droplist` VALUES (94,0,0,1000,2893,280); -- Gargantuan Black Ti
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,884,170);  -- Black Tiger Fang (17.0%)
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,861,130);  -- Black Tiger Hide (13.0%)
 
--- 95-110 Available
+-- ZoneID: 155 - Yagudo Yojimbo
+INSERT INTO `mob_droplist` VALUES (95,0,0,1000,2519,@VRARE);    -- Yagudo Osode (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (95,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (95,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
+
+-- ZoneID:  98 - Yagudo Abbot
+-- ZoneID: 164 - Yagudo Abbot
+INSERT INTO `mob_droplist` VALUES (96,0,0,1000,841,@COMMON);  -- Yagudo Feather (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (96,0,0,1000,2562,@COMMON); -- One Hundred Eight-knot Quipu (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (96,2,0,1000,751,0);        -- Platinum Beastcoin (Steal)
+
+-- ZoneID:  99 - Yagudo Abbot
+INSERT INTO `mob_droplist` VALUES (97,0,0,1000,841,@COMMON); -- Yagudo Feather (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (97,2,0,1000,751,0);       -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (97,4,0,1000,4537,0);      -- Roast Carp (Despoil)
+
+-- 98-110 Available
 
 -- ZoneID: 218 - Ansherekh
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,2168,@ALWAYS); -- Cerberus Claw (Always, 100%)
@@ -10911,7 +10927,7 @@ INSERT INTO `mob_droplist` VALUES (1337,0,0,1000,18422,@UNCOMMON); -- Ryumon (Un
 
 -- ZoneID: 141 - Hundredscar Hajwaj
 INSERT INTO `mob_droplist` VALUES (1338,0,0,1000,13051,@ALWAYS); -- Coarse Leggings (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1338,0,0,1000,17412,@RARE);   -- Wild Cudgel (Uncommon, 5%)
+INSERT INTO `mob_droplist` VALUES (1338,0,0,1000,17412,@RARE);   -- Wild Cudgel (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1338,2,0,1000,656,0);         -- Beastcoin (Steal)
 
 -- ZoneID:   7 - Hunter Antlion
@@ -15274,8 +15290,6 @@ INSERT INTO `mob_droplist` VALUES (1870,0,0,1000,4368,60);        -- Two-Leaf Ma
 -- ZoneID:  99 - Yagudo Conductor
 -- ZoneID: 155 - Orcish Prophetess
 -- ZoneID: 155 - Orcish Wyrmbrander
--- ZoneID: 164 - Yagudo Abbot
--- ZoneID: 164 - Yagudo Missionary
 INSERT INTO `mob_droplist` VALUES (1871,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
 INSERT INTO `mob_droplist` VALUES (1871,2,0,1000,751,0);   -- Platinum Beastcoin (Steal)
 
@@ -21922,11 +21936,10 @@ INSERT INTO `mob_droplist` VALUES (2639,0,0,1000,1031,30); -- Gusgen Chest Key (
 INSERT INTO `mob_droplist` VALUES (2639,2,0,1000,880,0);   -- Bone Chip (Steal)
 
 -- ZoneID: 192 - Wendigo Blm
--- ZoneID: 198 - Wendigo Blm
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,210);    -- Bone Chip (21.0%)
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,544,90);     -- Pile Of Answer Sheets (9.0%)
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE); -- Scroll Of Gravity (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);      -- Bone Chip (Steal)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,544,@RARE);    -- Pile Of Answer Sheets (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);        -- Bone Chip (Steal)
 
 -- ZoneID: 167 - Werebat
 INSERT INTO `mob_droplist` VALUES (2641,0,0,1000,922,@VCOMMON); -- Bat Wing (Very Common, 24%)
@@ -22288,16 +22301,12 @@ INSERT INTO `mob_droplist` VALUES (2687,0,0,1000,3142,120);      -- Iga Seal Bod
 INSERT INTO `mob_droplist` VALUES (2687,0,0,1000,3134,110);      -- Estoqueurs Seal Body (11.0%)
 INSERT INTO `mob_droplist` VALUES (2687,0,0,1000,3142,90);       -- Iga Seal Body (9.0%)
 
--- ZoneID:  98 - Yagudo Abbot
--- ZoneID:  98 - Yagudo Missionary
 -- ZoneID:  98 - Yagudo Zealot
--- ZoneID:  99 - Yagudo Sentinel
--- ZoneID:  99 - Yagudo Abbot
--- ZoneID: 155 - Yagudo Yojimbo
 -- ZoneID: 164 - Yagudo Zealot
-INSERT INTO `mob_droplist` VALUES (2688,0,0,1000,841,20);  -- Yagudo Feather (2.0%)
-INSERT INTO `mob_droplist` VALUES (2688,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2688,2,0,1000,751,0);   -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2688,0,0,1000,841,@COMMON);  -- Yagudo Feather (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2688,0,0,1000,2525,@RARE);   -- Bottled Pixie (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2688,0,0,1000,2562,@COMMON); -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2688,2,0,1000,751,0);        -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 151 - Yagudo Abbot
 INSERT INTO `mob_droplist` VALUES (2689,0,0,1000,1097,340);     -- Canteen Of Yagudo Holy Water (34.0%)
@@ -22477,7 +22486,6 @@ INSERT INTO `mob_droplist` VALUES (2707,0,0,1000,2525,20);        -- Bottled Pix
 INSERT INTO `mob_droplist` VALUES (2707,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID:  99 - Yagudo Flagellant
--- ZoneID: 138 - Yagudo Eradicator
 INSERT INTO `mob_droplist` VALUES (2708,0,0,1000,841,20);  -- Yagudo Feather (2.0%)
 INSERT INTO `mob_droplist` VALUES (2708,0,0,1000,2520,20); -- Yagudo Kote (2.0%)
 INSERT INTO `mob_droplist` VALUES (2708,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
@@ -22572,10 +22580,11 @@ INSERT INTO `mob_droplist` VALUES (2718,0,0,1000,12960,@VRARE); -- Bronze Leggin
 INSERT INTO `mob_droplist` VALUES (2718,2,0,1000,656,0);        -- Beastcoin (Steal)
 
 -- ZoneID:  98 - Yagudo Inquisitor
-INSERT INTO `mob_droplist` VALUES (2719,0,0,1000,2520,20);    -- Yagudo Kote (2.0%)
-INSERT INTO `mob_droplist` VALUES (2719,0,0,1000,2525,20);    -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2719,0,0,1000,841,@VRARE); -- Yagudo Feather (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2719,2,0,1000,751,0);      -- Platinum Beastcoin (Steal)
+-- ZoneID:  98 - Yagudo Missionary
+-- ZoneID: 164 - Yagudo Missionary
+INSERT INTO `mob_droplist` VALUES (2719,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2719,0,0,1000,2562,@COMMON);   -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2719,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 151 - Yagudo Inquisitor
 INSERT INTO `mob_droplist` VALUES (2720,0,0,1000,12700,30);     -- Raptor Gloves (3.0%)
@@ -22614,17 +22623,13 @@ INSERT INTO `mob_droplist` VALUES (2723,2,0,1000,750,0);        -- Silver Beastc
 
 -- ZoneID:  97 - Yagudo Knight Templar
 INSERT INTO `mob_droplist` VALUES (2724,0,0,1000,2567,@UNCOMMON); -- Dorter Key (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2724,0,0,1000,2520,20);        -- Yagudo Kote (2.0%)
-INSERT INTO `mob_droplist` VALUES (2724,0,0,1000,2525,20);        -- Bottled Pixie (2.0%)
+INSERT INTO `mob_droplist` VALUES (2724,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2724,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (2724,4,0,1000,4538,0);         -- Roast Pipira (Despoil)
 
--- ZoneID:  98 - Yagudo Lutenist
+-- ZoneID: 138 - Yagudo Eradicator
 -- ZoneID: 138 - Yagudo Knight Templar
-INSERT INTO `mob_droplist` VALUES (2725,0,0,1000,5022,170); -- Scroll Of Warding Round (17.0%)
-INSERT INTO `mob_droplist` VALUES (2725,0,0,1000,2558,130); -- Block Of Yagudo Glue (13.0%)
-INSERT INTO `mob_droplist` VALUES (2725,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2725,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2725,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
 
 -- ZoneID: 151 - Yagudo Lutenist
 INSERT INTO `mob_droplist` VALUES (2726,0,0,1000,5008,60); -- Scroll Of Blade Madrigal (6.0%)
@@ -22646,10 +22651,13 @@ INSERT INTO `mob_droplist` VALUES (2728,0,0,1000,5008,@RARE); -- Scroll Of Blade
 INSERT INTO `mob_droplist` VALUES (2728,0,0,1000,841,20);     -- Yagudo Feather (2.0%)
 INSERT INTO `mob_droplist` VALUES (2728,2,0,1000,749,0);      -- Mythril Beastcoin (Steal)
 
+-- ZoneID:  98 - Yagudo Lutenist
 -- ZoneID: 164 - Yagudo Lutenist
-INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,2558,130); -- Block Of Yagudo Glue (13.0%)
-INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2729,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,2558,@VCOMMON);  -- Block Of Yagudo Glue (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,2562,@COMMON);   -- One Hundred Eight-knot Quipu (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,5022,@COMMON);   -- Scroll Of Warding Round (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2729,0,0,1000,5072,@UNCOMMON); -- Scroll Of Goddesss Hymnus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2729,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID:  95 - Yagudo Mendicant
 INSERT INTO `mob_droplist` VALUES (2730,0,0,1000,4898,40); -- Air Spirit Pact (4.0%)
@@ -22687,11 +22695,10 @@ INSERT INTO `mob_droplist` VALUES (2733,2,0,1000,656,0);        -- Beastcoin (St
 INSERT INTO `mob_droplist` VALUES (2734,0,0,1000,841,20); -- Yagudo Feather (2.0%)
 
 -- ZoneID:  99 - Yagudo Nokizaru
-INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2566,210); -- Jar Of Gnat Pellets (21.0%)
-INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2519,80);  -- Yagudo Osode (8.0%)
-INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2520,20);  -- Yagudo Kote (2.0%)
-INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2735,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2566,@COMMON);   -- Jar Of Gnat Pellets (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2519,@VRARE);    -- Yagudo Osode (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2735,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2735,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 120 - Yagudo Oracle
 -- ZoneID: 155 - Yagudo Nokizaru
@@ -22888,14 +22895,13 @@ INSERT INTO `mob_droplist` VALUES (2752,0,0,1000,4745,@VRARE); -- Scroll Of Snea
 INSERT INTO `mob_droplist` VALUES (2752,2,0,1000,750,0);       -- Silver Beastcoin (Steal)
 
 -- ZoneID:  98 - Yagudo Prior
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4764,40);     -- Scroll Of Aero Iii (4.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4816,40);     -- Scroll Of Tornado (4.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,841,20);      -- Yagudo Feather (2.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,2525,20);     -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4765,20);     -- Scroll Of Aero Iv (2.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4793,20);     -- Scroll Of Aeroga Ii (2.0%)
-INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4794,@VRARE); -- Scroll Of Aeroga Iii (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2753,2,0,1000,751,0);       -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4764,@SRARE);  -- Scroll Of Aero Iii (Super Rare, 0.5%)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4816,@VRARE);  -- Scroll Of Tornado (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4765,@VRARE);  -- Scroll Of Aero Iv (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4793,@RARE);   -- Scroll Of Aeroga Ii (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,4794,@VRARE);  -- Scroll Of Aeroga Iii (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2753,0,0,1000,2562,@COMMON); -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2753,2,0,1000,751,0);        -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 151 - Yagudo Prior
 INSERT INTO `mob_droplist` VALUES (2754,0,0,1000,1035,30);      -- Oztroja Chest Key (3.0%)
@@ -22919,25 +22925,23 @@ INSERT INTO `mob_droplist` VALUES (2756,0,0,1000,841,20); -- Yagudo Feather (2.0
 INSERT INTO `mob_droplist` VALUES (2756,2,0,1000,749,0);  -- Mythril Beastcoin (Steal)
 
 -- ZoneID: 164 - Yagudo Prior
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4764,90); -- Scroll Of Aero Iii (9.0%)
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4793,40); -- Scroll Of Aeroga Ii (4.0%)
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4794,30); -- Scroll Of Aeroga Iii (3.0%)
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4816,30); -- Scroll Of Tornado (3.0%)
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4765,20); -- Scroll Of Aero Iv (2.0%)
-INSERT INTO `mob_droplist` VALUES (2757,2,0,1000,748,0);   -- Gold Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4764,@SRARE);  -- Scroll Of Aero Iii (Super Rare, 0.5%)
+INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4765,@VRARE);  -- Scroll Of Aero Iv (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4793,@VRARE);  -- Scroll Of Aeroga Ii (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,4794,@SRARE);  -- Scroll Of Aeroga Iii (Super Rare, 0.5%)
+INSERT INTO `mob_droplist` VALUES (2757,0,0,1000,2562,@COMMON); -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2757,2,0,1000,748,0);        -- Gold Beastcoin (Steal)
 
--- ZoneID:  97 - Yagudo Prioress
 -- ZoneID:  98 - Yagudo Pythoness
 -- ZoneID: 164 - Yagudo Pythoness
-INSERT INTO `mob_droplist` VALUES (2758,0,0,1000,4898,40); -- Air Spirit Pact (4.0%)
-INSERT INTO `mob_droplist` VALUES (2758,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2758,2,0,1000,751,0);   -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2758,0,0,1000,4898,@RARE);   -- Air Spirit Pact (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2758,0,0,1000,2562,@COMMON); -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2758,2,0,1000,751,0);        -- Platinum Beastcoin (Steal)
 
+-- ZoneID:  97 - Yagudo Prioress
 -- ZoneID:  99 - Yagudo Prioress
 INSERT INTO `mob_droplist` VALUES (2759,0,0,1000,2567,@UNCOMMON); -- Dorter Key (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2759,0,0,1000,4898,40);        -- Air Spirit Pact (4.0%)
-INSERT INTO `mob_droplist` VALUES (2759,0,0,1000,2525,20);        -- Bottled Pixie (2.0%)
+INSERT INTO `mob_droplist` VALUES (2759,0,0,1000,4898,@UNCOMMON); -- Air Spirit Pact (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2759,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID:  95 - Yagudo Scribe
@@ -22974,10 +22978,11 @@ INSERT INTO `mob_droplist` VALUES (2763,0,0,1000,12984,@VRARE); -- Ash Clogs (Ve
 INSERT INTO `mob_droplist` VALUES (2763,2,0,1000,656,0);        -- Beastcoin (Steal)
 
 -- ZoneID:  97 - Yagudo Sentinel
-INSERT INTO `mob_droplist` VALUES (2764,0,0,1000,841,20);  -- Yagudo Feather (2.0%)
-INSERT INTO `mob_droplist` VALUES (2764,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2764,2,0,1000,751,0);   -- Platinum Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (2764,4,0,1000,4537,0);  -- Roast Carp (Despoil)
+-- ZoneID:  99 - Yagudo Sentinel
+INSERT INTO `mob_droplist` VALUES (2764,0,0,1000,841,@COMMON); -- Yagudo Feather (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2764,0,0,1000,2525,@RARE);  -- Bottled Pixie (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2764,2,0,1000,751,0);       -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2764,4,0,1000,4537,0);      -- Roast Carp (Despoil)
 
 -- ZoneID: 138 - Yagudo Sentinel
 -- ZoneID: 151 - Yagudo Sentinel
@@ -22998,18 +23003,18 @@ INSERT INTO `mob_droplist` VALUES (2766,0,0,1000,12827,@VRARE); -- Cuir Trousers
 INSERT INTO `mob_droplist` VALUES (2766,2,0,1000,749,0);        -- Mythril Beastcoin (Steal)
 
 -- ZoneID:  99 - Yagudo Superior
-INSERT INTO `mob_droplist` VALUES (2767,0,0,1000,2566,220); -- Jar Of Gnat Pellets (22.0%)
-INSERT INTO `mob_droplist` VALUES (2767,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2767,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2767,0,0,1000,2566,@COMMON); -- Jar Of Gnat Pellets (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2767,0,0,1000,4898,@VRARE);  -- Air Spirit pact (Very Rare, 1%%)
+INSERT INTO `mob_droplist` VALUES (2767,2,0,1000,751,0);        -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 151 - Yagudo Templar
 INSERT INTO `mob_droplist` VALUES (2768,0,0,1000,1437,@VCOMMON); -- Samurais Testimony (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2768,2,0,1000,656,0);    -- Beastcoin (Steal)
 
 -- ZoneID: 164 - Yagudo Templar
-INSERT INTO `mob_droplist` VALUES (2769,0,0,1000,2520,20); -- Yagudo Kote (2.0%)
-INSERT INTO `mob_droplist` VALUES (2769,0,0,1000,2525,20); -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2769,2,0,1000,751,0);   -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2769,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2769,0,0,1000,2562,@COMMON);   -- One Hundred Eight-knot Quipu (Common, 15.0%)
+INSERT INTO `mob_droplist` VALUES (2769,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 119 - Yagudo Theologist
 INSERT INTO `mob_droplist` VALUES (2770,0,0,1000,2742,@UNCOMMON); -- Seedspall Astrum (Uncommon, 10%)
@@ -23096,11 +23101,10 @@ INSERT INTO `mob_droplist` VALUES (2776,0,0,1000,12969,@VRARE);   -- Cotton Kyah
 INSERT INTO `mob_droplist` VALUES (2776,2,0,1000,750,0);          -- Silver Beastcoin (Steal)
 
 -- ZoneID:  99 - Yagudo Yojimbo
-INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2566,220); -- Jar Of Gnat Pellets (22.0%)
-INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2519,80);  -- Yagudo Osode (8.0%)
-INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2520,20);  -- Yagudo Kote (2.0%)
-INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
-INSERT INTO `mob_droplist` VALUES (2777,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2566,@COMMON);   -- Jar Of Gnat Pellets (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2519,@VRARE);    -- Yagudo Osode (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2777,0,0,1000,2520,@UNCOMMON); -- Yagudo Kote (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2777,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 151 - Yagudo Zealot
 INSERT INTO `mob_droplist` VALUES (2778,0,0,1000,1035,70);      -- Oztroja Chest Key (7.0%)
@@ -26998,6 +27002,11 @@ INSERT INTO `mob_droplist` VALUES (3252,0,0,100,1585,@ALWAYS); -- Ethereal Fragm
 
 -- ZoneID:  135 - Animated Shield
 INSERT INTO `mob_droplist` VALUES (3253,0,0,100,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
+
+-- ZoneID: 198 - Wendigo Blm
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3254,2,0,1000,880,0);        -- Bone Chip (Steal)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
