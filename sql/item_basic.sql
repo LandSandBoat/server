@@ -18613,7 +18613,7 @@ INSERT INTO `item_basic` VALUES (22097,0,'argute_staff','argute_staff',1,2080,12
 INSERT INTO `item_basic` VALUES (22098,0,'pedagogy_staff','pedagogy_staff',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22099,0,'musa','musa',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22100,0,'mpacas_staff','mpacas_staff',1,59456,0,1,0);
-INSERT INTO `item_basic` VALUES (22101,0,'sages_staff','sages_staff',1,64576,0,1,0);
+INSERT INTO `item_basic` VALUES (22101,0,'pandits_staff','pandits_staff',1,64576,0,1,0);
 INSERT INTO `item_basic` VALUES (22102,0,'prime_staff','prime_staff',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22103,0,'opashoro','opashoro',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22104,0,'opashoro','opashoro',1,63552,0,1,0);
@@ -20318,7 +20318,7 @@ INSERT INTO `item_basic` VALUES (26357,0,'skrymir_cord_+1','skrymir_cord_+1',1,2
 INSERT INTO `item_basic` VALUES (26358,0,'ligeia_sash','ligeia_sash',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (26359,0,'orpheuss_sash','orpheuss_sash',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26360,0,'gerdr_belt','gerdr_belt',1,2080,23,0,0);
-INSERT INTO `item_basic` VALUES (26361,0,'gerdr_belt+1','gerdr_belt+1',1,2080,23,0,0);
+INSERT INTO `item_basic` VALUES (26361,0,'gerdr_belt_+1','gerdr_belt_+1',1,2080,23,0,0);
 INSERT INTO `item_basic` VALUES (26362,0,'tellen_belt','tellen_belt',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26363,0,'obstinate_sash','obstin._sash',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26364,0,'sroda_belt','sroda_belt',1,34820,23,0,0);

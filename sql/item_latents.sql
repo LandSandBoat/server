@@ -3230,16 +3230,16 @@ INSERT INTO `item_latents` VALUES (19949,976,5,13,60);   -- Guard +5% if Dodge A
 -- -------------------------------------------------------
 -- Eminent Baghnakhs
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);      -- Att+10 TP<1000
-INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);      -- Acc+39 (24 normal, +15 more) TP<1000
-INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);      -- Dmg+4  TP<1000
+INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);  -- Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);  -- Acc+39 (24 normal, +15 more) TP<1000
+INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);  -- Dmg+4  TP<1000
 
 -- -------------------------------------------------------
 -- Eminent Scimitar
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
-INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
-INSERT INTO `item_latents` VALUES (20726,287,6,6,1000);      -- Dmg+6  TP>1000
+INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);  -- Att+10 TP>1000
+INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);  -- Acc+15 TP>1000
+INSERT INTO `item_latents` VALUES (20726,287,6,6,1000);  -- Dmg+6  TP>1000
 
 -- -------------------------------------------------------
 -- Conqueror 119
@@ -3285,9 +3285,14 @@ INSERT INTO `item_latents` VALUES (20483,976,5,13,60);   -- Guard +5% if Dodge A
 -- INSERT INTO `item_latents` VALUES (21525,26,40,??,0); -- Pitre Fists: Dynamis (D): Automaton: Ranged Accuracy+40
 -- INSERT INTO `item_latents` VALUES (21525,30,10,??,0); -- Pitre Fists: Dynamis (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21525,30,40,??,0); -- Pitre Fists: Dynamis (D): Automaton: Magic Accuracy+40
-INSERT INTO `item_latents` VALUES (21558,11,5,56,0);         -- Rune Kris: Agi+5     MP>0
-INSERT INTO `item_latents` VALUES (21558,73,5,56,0);         -- Rune Kris: StoreTP+5 MP>0
-INSERT INTO `item_latents` VALUES (21558,369,-3,56,0);       -- Rune Kris: Refresh-3 MP>0
+-- INSERT INTO `item_latents` VALUES (21533,355,??,??,??)    -- Sortie: Maru Kala
+-- INSERT INTO `item_latents` VALUES (21534,355,??,??,??)    -- Sortie: Maru Kala
+-- INSERT INTO `item_latents` VALUES (21534,??,??,??,??)     -- Sortie: Aftermath (Incl. Automaton): Physical damage limit+
+-- INSERT INTO `item_latents` VALUES (21535,355,??,??,??)    -- Sortie: Maru Kala
+-- INSERT INTO `item_latents` VALUES (21535,??,??,??,??)     -- Sortie: Aftermath (Incl. Automaton): Physical damage limit+
+INSERT INTO `item_latents` VALUES (21558,11,5,56,0);     -- Rune Kris: Agi+5     MP>0
+INSERT INTO `item_latents` VALUES (21558,73,5,56,0);     -- Rune Kris: StoreTP+5 MP>0
+INSERT INTO `item_latents` VALUES (21558,369,-3,56,0);   -- Rune Kris: Refresh-3 MP>0
 -- INSERT INTO `item_latents` VALUES (21573,25,10,??,0); -- Assassin's Knife: Dynamis (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21573,30,10,??,0); -- Assassin's Knife: Dynamis (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21574,25,10,??,0); -- Plunderer's Knife: Dynamis (D): Accuracy+10
@@ -3310,6 +3315,7 @@ INSERT INTO `item_latents` VALUES (21558,369,-3,56,0);       -- Rune Kris: Refre
 -- INSERT INTO `item_latents` VALUES (21582,30,10,??,0); -- Etoile Knife: Dynamis (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21583,25,10,??,0); -- Horos Knife: Dynamis (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21583,30,10,??,0); -- Horos Knife: Dynamis (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES (21588,355,232,??,??) -- Sortie: Merciless Strike
 -- INSERT INTO `item_latents` VALUES (21625,25,10,??,0); -- Duelist's Sword: (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21625,30,10,??,0); -- Duelist's Sword: (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21626,25,10,??,0); -- Vitiation Sword: (D): Accuracy+10
@@ -3442,6 +3448,13 @@ INSERT INTO `item_latents` VALUES (22118,944,5,13,198);  -- Venery Bow: Minuet: 
 -- INSERT INTO `item_latents` VALUES (22266,288,??,??,0); -- Antitail: Unity Ranking: "Double Attack"+1~3%
 -- INSERT INTO `item_latents` VALUES (22267,288,??,??,0); -- Antitail +1: Unity Ranking: "Double Attack"+1~3%
 
+INSERT INTO `item_latents` VALUES (23096,291,16,13,354);  -- Kasuga Kabuto +2: Seigan: "Counter" rate +16
+
+INSERT INTO `item_latents` VALUES (23097,288,11,13,421);    -- Hattori Zukin +2: Innin: "Double Attack"+11%
+
+INSERT INTO `item_latents` VALUES (23103,165,1,13,443);    -- Maculele Tiara +2: Climactic Flourish: Critical hit rate +1
+INSERT INTO `item_latents` VALUES (23103,421,28,13,443);    -- Maculele Tiara +2: Climactic Flourish: Critical hit damage +28%
+
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
 
 -- -------------------------------------------------------
@@ -3472,6 +3485,17 @@ INSERT INTO `item_latents` VALUES (23685,399,18,52,5);   -- Pedagogy Loafers+3: 
 INSERT INTO `item_latents` VALUES (23685,399,18,52,6);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (THUNDER)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,7);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (LIGHT)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,8);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (DARK)
+
+-- -------------------------------------------------------
+-- Turms Mitten
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (25994,??,75,??,??); -- Parry: Recover HP+75
+
+-- -------------------------------------------------------
+-- Turms Mitten +1
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (25995,??,100,??,??); -- Parry: Recover HP+100
+
 INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27366,399,15,52,1);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (FIRE)
