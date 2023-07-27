@@ -3448,6 +3448,13 @@ INSERT INTO `item_latents` VALUES (22118,944,5,13,198);  -- Venery Bow: Minuet: 
 -- INSERT INTO `item_latents` VALUES (22266,288,??,??,0); -- Antitail: Unity Ranking: "Double Attack"+1~3%
 -- INSERT INTO `item_latents` VALUES (22267,288,??,??,0); -- Antitail +1: Unity Ranking: "Double Attack"+1~3%
 
+INSERT INTO `item_latents` VALUES (23096,291,16,13,354);  -- Kasuga Kabuto +2: Seigan: "Counter" rate +16
+
+INSERT INTO `item_latents` VALUES (23097,288,11,13,421);    -- Hattori Zukin +2: Innin: "Double Attack"+11%
+
+INSERT INTO `item_latents` VALUES (23103,165,1,13,443);    -- Maculele Tiara +2: Climactic Flourish: Critical hit rate +1
+INSERT INTO `item_latents` VALUES (23103,421,28,13,443);    -- Maculele Tiara +2: Climactic Flourish: Critical hit damage +28%
+
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
 
 -- -------------------------------------------------------
@@ -3478,6 +3485,17 @@ INSERT INTO `item_latents` VALUES (23685,399,18,52,5);   -- Pedagogy Loafers+3: 
 INSERT INTO `item_latents` VALUES (23685,399,18,52,6);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (THUNDER)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,7);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (LIGHT)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,8);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (DARK)
+
+-- -------------------------------------------------------
+-- Turms Mitten
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (25994,??,75,??,??); -- Parry: Recover HP+75
+
+-- -------------------------------------------------------
+-- Turms Mitten +1
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (25995,??,100,??,??); -- Parry: Recover HP+100
+
 INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27366,399,15,52,1);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (FIRE)
