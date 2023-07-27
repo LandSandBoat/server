@@ -247,14 +247,10 @@ jobs:
       run: |
         touch clang-tidy.txt
         cmake --build build -j4 >> clang-tidy.txt || true
-        grep -q "warning\|error" clang-tidy.txt
-        if [ $? -eq 0 ]
-        then
-          cat clang-tidy.txt
-          exit 1
-        fi
         cat clang-tidy.txt
-        exit 0
+        if grep -q warning\|error clang-tidy.txt; then
+            exit 1
+        fi
 
   Linux_GCC11_64bit:
     needs: Sanity_Checks
