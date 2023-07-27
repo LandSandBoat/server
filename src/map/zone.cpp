@@ -34,7 +34,6 @@
 #include <cstring>
 
 #include "battlefield.h"
-#include "common/vana_time.h"
 #include "enmity_container.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -1041,18 +1040,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     }
     else
     {
-//        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-//        PChar->PTreasurePool->AddMember(PChar);
-        if (m_TreasurePool != nullptr)
-        {
-            PChar->PTreasurePool = m_TreasurePool;
-            PChar->PTreasurePool->AddMember(PChar);
-        }
-        else
-        {
-            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-            PChar->PTreasurePool->AddMember(PChar);
-        }
+        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
+        PChar->PTreasurePool->AddMember(PChar);
     }
 
     if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
