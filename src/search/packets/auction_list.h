@@ -36,10 +36,10 @@ public:
     uint16 GetSize() const;
 
 private:
-    uint8  m_count;
-    uint16 m_offset;
+    uint8  m_count{};
+    uint16 m_offset{};
 
-    uint8 m_PData[256];
+    uint8 m_PData[256]{};
 };
 
 #endif

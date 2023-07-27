@@ -31,7 +31,6 @@ CJobPoints::CJobPoints(CCharEntity* PChar)
 
 void CJobPoints::LoadJobPoints()
 {
-    memset(m_jobPoints, 0, sizeof(m_jobPoints));
     if (
         sql->Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
                    "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
