@@ -676,6 +676,7 @@ jobs:
         sed -i 's/topazadmin/root/g' settings/network.lua
         sed -i 's/topazisawesome/root/g' settings/network.lua
         sed -i 's/tpzdb/xidb/g' settings/network.lua
+        sed -i 's/33066/3306/g' settings/network.lua
     - name: Install Python Dependencies
       run: |
         pip install -r tools/requirements.txt
