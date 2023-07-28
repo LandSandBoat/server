@@ -5071,6 +5071,7 @@ xi.items =
     USESHI                          = 18760,
     ACANTHA_SHAVERS                 = 18761,
     TRAINEE_SCISSORS                = 18763,
+	POPPET_KATARS                   = 18768,
     SAVATE_FISTS                    = 18774,
     GIRRU                           = 18786,
     GUSTERION                       = 18830,

@@ -2955,7 +2955,11 @@ INSERT INTO `item_latents` VALUES (18763,131,1,24,40);   -- Clothcraft +1 under 
 -- INSERT INTO `item_latents` VALUES (18776,355,10,?,13);     -- Final Heaven available after 13 weapon skills
 
 INSERT INTO `item_latents` VALUES (18767,25,3,59,8);     -- Birdbanes - Vs. birds: Accuracy+3
-INSERT INTO `item_latents` VALUES (18768,23,12,9,4);
+
+-- -------------------------------------------------------
+-- Poppet Katars
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18768,23,12,9,4);     -- Latent: Attack +12 when automaton is active
 
 -- -------------------------------------------------------
 -- Lyft Sainti
