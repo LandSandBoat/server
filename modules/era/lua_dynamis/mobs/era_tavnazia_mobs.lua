@@ -34,6 +34,7 @@ local secondEyes = { "eyeThreeKilled", "eyeFourKilled" }
 
 xi.dynamis.onSpawnNightmareWorm = function(mob)
     xi.dynamis.setNMStats(mob)
+    mob:setRoamFlags(xi.roamFlag.WORM)
     local newPosition = math.random(1, #wormPositions)
     mob:setPos(wormPositions[newPosition][1],wormPositions[newPosition][2],wormPositions[newPosition][3],wormPositions[newPosition][4])
 end

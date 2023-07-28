@@ -483,7 +483,7 @@ xi.dynamis.entryInfoEra =
         enabled = true,
         winVar = "DynaTavnazia_Win",
         enteredVar = "DynaTavnazia_entered",
-        hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
+        hasSeenWinCSVar = "DynaTavnazia_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
         reqs =
@@ -691,7 +691,7 @@ xi.dynamis.dynaInfoEra =
     {
         winVar = "DynaTavnazia_Win",
         enteredVar = "DynaTavnazia_entered",
-        hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
+        hasSeenWinCSVar = "DynaTavnazia_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         winTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
         winQM = nil,
@@ -1034,6 +1034,7 @@ xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
         local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
         local expirationTime = prevExpire + (1800) -- Add more time to increase previous expiration point.
         local playersInZone = zone:getPlayers()
+        SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
         for _, player in pairs(playersInZone) do
             player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, 30) -- Send extension time message.
             xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
@@ -1401,6 +1402,8 @@ xi.dynamis.timeExtensionOnTrigger = function(player, npc)
     elseif npc:getID() == 16949397 then
         zone:setLocalVar("qmTwo", 1)
     end
+
+    npc:setStatus(xi.status.DISAPPEAR)
 end
 
 m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()

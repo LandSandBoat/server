@@ -148,16 +148,16 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         --{
             -- [ZoneID] -- If applicable
             --{
-                -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+                -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
             -- },
             -- [ZoneID] -- If applicable
             --{
                 -- [FloorVar]
                 -- {
-                    -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+                    -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
                 --  },
             -- },
-            -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+            -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
         -- },
         [4] = -- Vanguard Eye
         {
@@ -365,8 +365,8 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             },
             [xi.zone.DYNAMIS_TAVNAZIA] =
             {
-                [359] = { 0 }, -- Hydra
-                [358] = { 0 }, -- Kindred
+                [359] = { 1342 }, -- Hydra
+                [358] = { 1441 }, -- Kindred
             },
             [xi.zone.DYNAMIS_VALKURM] =
             {
@@ -484,6 +484,14 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     local zone = GetZone(zoneID)
     local nonStandardLookup =
     {
+        -- 1 - name
+        -- 2 - groupId
+        -- 3 - groupZoneId
+        -- 4 - dropId
+        -- 5 - spellList
+        -- 6 - skillList
+        -- 7 - Type of mob
+        -- 8 - flags
         ["Statue"] =
         {
             ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 4 }, -- Vanguard Eye (VEye)
@@ -514,12 +522,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Raven"] = { "N. Raven" , 100, 40, 1788, 0, 55 }, -- NRav
             ["Nightmare Scorpion"] = { "N. Scorpion" , 96, 40, 1787, 0, 217 }, -- NSco
             ["Nightmare Urganite"] = { "N. Urganite" , 95, 40, 1785, 0, 251 }, -- NUrg
-            ["Nightmare Cluster"] = { "N. Cluster" , 40, 42, 0, 0, 68 }, -- NClu
-            ["Nightmare Hornet"] = { "N. Hornet" , 10, 42, 0, 0, 48 }, -- NHor
-            ["Nightmare Leech"] = { "N. Leech" , 41, 42, 0, 0, 172 }, -- NLee
-            ["Nightmare Makara"] = { "N. Makara" , 34, 42, 0, 0, 197 }, -- NMak
-            ["Nightmare Taurus"] = { "N. Taurus" , 33, 42, 0, 0, 240 }, -- NTau
-            ["Nightmare Bugard"] = { "N. Bugard" , 6, 42, 0, 0, 58 }, -- NBug
+            ["Nightmare Cluster"] = { "N. Cluster" , 40, 42, 1786, 0, 68 }, -- NClu
+            ["Nightmare Hornet"] = { "N. Hornet" , 10, 42, 1795, 0, 48 }, -- NHor
+            ["Nightmare Leech"] = { "N. Leech" , 41, 42, 1796, 0, 172 }, -- NLee
+            ["Nightmare Makara"] = { "N. Makara" , 34, 42, 1797, 0, 197 }, -- NMak
+            ["Nightmare Taurus"] = { "N. Taurus" , 33, 42, 2854, 0, 240 }, -- NTau
+            ["Nightmare Bugard"] = { "N. Bugard" , 6, 42, 1795, 0, 58 }, -- NBug
             ["Nightmare Hippogryph"] = { "N. Hippogryph" , 2, 39, 1792, 0, 141 }, -- NHip
             ["Nightmare Manticore"] = { "N. Manticore" , 3, 39, 1799, 0, 179 }, -- NMat
             ["Nightmare Sabotender"] = { "N. Sabotender" , 11, 39, 1792, 0, 212 }, -- NSab
@@ -732,6 +740,15 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     xi.dynamis.nmInfoLookup =
     {
+        -- 1 - name
+        -- 2 - groupId
+        -- 3 - groupZoneId
+        -- 4 - dropId
+        -- 5 - spellList
+        -- 6 - skillList
+        -- 7 - Type of mob
+        -- 8 - flags
+
         -- Below use used to lookup Beastmen NMs
         -- Goblin
         -- Dynamis - Beaucedine (Done)
@@ -986,7 +1003,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Antaeus"] = { "Antaeus", 1, 41, 112, 0, 126, "Antaeus" }, -- Anta
         -- Dynamis - Tavnazia Non-Beastmen
         ["Nightmare Antlion"] = { "N. Antlion" , 64, 42, 0, 0, 26, "Nightmare Antlion" }, -- NAnt
-        ["Nightmare Worm"] = { "N. Worm" , 7, 42, 42, 5061, 4033, "Nightmare Worm" }, -- NWor
+        ["Nightmare Worm"] = { "N. Worm" , 7, 42, 1807, 5075, 4048, "Nightmare Worm" }, -- NWor
         ["Umbral Diabolos"] = { "U. Diabolos", 4, 42, 0, nil, nil, "Enabled Auto Attack" }, -- UmbD
         ["Diabolos Club"] = { "D. Club", 4, 42, 0, nil, nil, "Diabolos Club" }, -- DiaC
         ["Diabolos Diamond"] = { "D. Diamond", 3, 42, 0, nil, nil, "Diabolos Diamond" }, -- DiaD
