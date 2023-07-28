@@ -984,7 +984,7 @@ INSERT INTO `mob_groups` VALUES (27,1553,25,'Gigas_Braver',330,0,982,0,0,41,44,0
 INSERT INTO `mob_groups` VALUES (28,1573,25,'Gigas_Martialist',330,0,991,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (29,3034,25,'Orcish_Stonelauncher',330,0,1942,0,0,43,46,0);
 INSERT INTO `mob_groups` VALUES (30,6283,25,'Orcish_Trooper',330,0,3255,0,0,41,44,0);
-INSERT INTO `mob_groups` VALUES (31,6277,25,'Orcish_Bowshooter',330,0,3255,0,0,41,44,0);
+INSERT INTO `mob_groups` VALUES (31,6277,25,'Orcish_Bowshooter',330,0,3256,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (32,940,25,'Death_Jacket',330,0,584,0,0,37,40,0);
 INSERT INTO `mob_groups` VALUES (33,277,25,'Atomic_Cluster',330,8,187,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (34,1599,25,'Gigas_Warwolf',330,0,1000,0,0,41,44,0);
