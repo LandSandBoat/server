@@ -29,7 +29,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobDeath = function(mob)
 end
 
 entity.onMobDespawn = function(mob)

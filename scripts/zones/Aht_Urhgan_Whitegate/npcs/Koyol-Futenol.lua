@@ -112,8 +112,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
---    xi.title.changerOnTrigger(player, eventId, titleInfo)
-    player:PrintToPlayer("Title NPC's have been disabled to prevent exploiting weekly HNM hunts.")
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

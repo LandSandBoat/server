@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
         player:startEvent(9600)
     else
-      player:startEvent(9601)
+        player:startEvent(9601)
     end
 end
 

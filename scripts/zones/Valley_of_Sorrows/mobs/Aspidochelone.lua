@@ -8,20 +8,8 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    -- prevent cheesiness
-    mob:setMod(xi.mod.SILENCERES, 50)
-    mob:setMod(xi.mod.STUNRES, 50)
-    mob:setMod(xi.mod.BINDRES, 50)
-    mob:setMod(xi.mod.GRAVITYRES, 50)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.POISONRES, 100)
-    mob:setMod(xi.mod.PARALYZERES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 10000)
-end
-
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)

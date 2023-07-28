@@ -5,12 +5,7 @@
 -- TODO: resists, attack/def boosts
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
-mixins = 
-{
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage"),
-    require("scripts/mixins/claim_shield")
-}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -20,20 +15,9 @@ entity.onMobSpawn = function(mob)
         chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
         specials =
         {
-            {id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99)},
+            { id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99) },
         },
     })
-	
-    -- prevent cheesiness
-    mob:setMod(xi.mod.SILENCERES, 50)
-    mob:setMod(xi.mod.STUNRES, 50)
-    mob:setMod(xi.mod.BINDRES, 50)
-    mob:setMod(xi.mod.GRAVITYRES, 50)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.POISONRES, 100)
-    mob:setMod(xi.mod.PARALYZERES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 10000)	
-    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
 end
 
 entity.onMobEngaged = function(mob, target)
