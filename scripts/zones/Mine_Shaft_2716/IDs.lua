@@ -21,7 +21,6 @@ zones[xi.zone.MINE_SHAFT_2716] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7432, -- Tallying conquest results...
-        -- Moblin Fantocciniman Combat Dialogue
         TIME_FOR_GOODEBYONGO          = 7855, -- Ho-ho, ho-ho! Time for goodebyongo!
         HERE_TO_STAY                  = 7856, -- Hey-hey, hey-hey! Are you here to stay?
         ROLY_POLY                     = 7857, -- Roly-poly, roly-poly♪

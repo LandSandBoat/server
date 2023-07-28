@@ -43,14 +43,14 @@ zones[xi.zone.NORG] =
         NOMAD_MOOGLE_DIALOG           = 10554, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
         FOUIVA_DIALOG                 = 10578, -- Oi 'av naw business wi' de likes av you.
         SOLBYMAHOLBY_SHOP_DIALOG      = 10592, -- Hiya! My name's Solby-Maholby! I'm new here, so they put me on tooty-fruity shop duty. I'll give you a super-duper deal on unwanted items!
+        LUCKY_ROLL_EXACT              = 10767, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
+        LUCKY_ROLL_CLOSE              = 10768, -- And for bringing the total so close to 400, here is your extra prize!
+        LUCKY_ROLL_GAMEOVER           = 10769, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
         TACHI_KASHA_LEARNED           = 10815, -- You have learned the weapon skill Tachi: Kasha!
         BLADE_KU_LEARNED              = 10840, -- You have learned the weapon skill Blade: Ku!
         RETRIEVE_DIALOG_ID            = 11293, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 12303, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         DIDYA_GET_BUMPED              = 12331, -- Didya get bumped about by the waves on yer way here, <name>? No matter. The boss be waitin' inside fer ya.
-        LUCKY_ROLL_GAMEOVER           = 10763, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
-        LUCKY_ROLL_EXACT              = 10761, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
-        LUCKY_ROLL_CLOSE              = 10762, -- And for bringing the total so close to 400, here is your extra prize!
     },
     mob =
     {

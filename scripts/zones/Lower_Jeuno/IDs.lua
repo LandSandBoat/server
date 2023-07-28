@@ -34,6 +34,7 @@ zones[xi.zone.LOWER_JEUNO] =
         RHIMONNE_SHOP_DIALOG          = 7151,  -- Howdy! Thanks for visiting the Chocobo Shop!
         GUIDE_STONE                   = 7153,  -- Up: Upper Jeuno (facing San d'Oria) Down: Port Jeuno (facing Windurst)
         ALDO_DIALOG                   = 7158,  -- Hi. I'm Aldo, head of Tenshodo. We deal in things you can't buy anywhere else. Take your time and have a look around.
+        VHANA_DEFAULT                 = 7258,  -- Sorry, I'm busy.
         LAMP_MSG_OFFSET               = 7262,  -- All the lamps are lit.
         ZAUKO_IS_RECRUITING           = 7270,  -- Zauko is recruiting an adventurer to light the lamps.
         CHOCOBO_DIALOG                = 7332,  -- Hmph.
@@ -57,7 +58,6 @@ zones[xi.zone.LOWER_JEUNO] =
         ARTIFACT_HAS_BEEN_CHARGED     = 10367, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME      = 10368, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER        = 10369, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
-        VHANA_DEFAULT                 = 7258,  -- Sorry, I'm busy.
     },
     mob =
     {
