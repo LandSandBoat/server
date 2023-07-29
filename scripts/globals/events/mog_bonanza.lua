@@ -54,7 +54,10 @@ local localSettings =
 local event = SeasonalEvent:new('MogBonanza')
 
 xi.events.mogBonanza.enabledCheck = function()
-    return true
+    local currentTime = os.time()
+
+    return currentTime >= localSettings.BUYING_PERIOD_START and
+        currentTime <= localSettings.COLLECTION_PERIOD_END
 end
 
 local isInPurchasingPeriod = function()
