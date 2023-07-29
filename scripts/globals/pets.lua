@@ -3,7 +3,7 @@
 --  PETS ID
 --
 -----------------------------------
-require("scripts/globals/nyzul/NII_pathos")
+require("scripts/globals/nyzul/pathos")
 
 xi = xi or {}
 xi.pet = xi.pet or {}

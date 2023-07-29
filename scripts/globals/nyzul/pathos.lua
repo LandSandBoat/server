@@ -161,7 +161,7 @@ xi.nyzul.removePathos = function(instance)
     end
 end
 
-xi.nyzul.addFloorPathos = function(instance)
+xi.nyzul.addPathos = function(instance)
     local randomPathos = instance:getLocalVar("randomPathos")
 
     if randomPathos > 0 then
