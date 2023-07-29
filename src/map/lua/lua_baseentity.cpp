@@ -3605,6 +3605,23 @@ bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
 }
 
 /************************************************************************
+ *  Function: getItemCount()
+ *  Purpose : Returns the total count of a specific item across all inventories
+ *  Example : if player:getItemCount(xi.items.BONANZA_PEARL) then
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getItemCount(uint16 itemID)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return false;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::getItemCount(PChar, itemID);
+}
+
+/************************************************************************
  *  Function: addItem()
  *  Purpose : Adds an item to a player's inventory
  *  Example : player:addItem(4102, 12) -- a stack of Light Crystals
@@ -16760,6 +16777,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     SOL_REGISTER("getEquippedItem", CLuaBaseEntity::getEquippedItem);
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
+    SOL_REGISTER("getItemCount", CLuaBaseEntity::getItemCount);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
     SOL_REGISTER("addUsedItem", CLuaBaseEntity::addUsedItem);
