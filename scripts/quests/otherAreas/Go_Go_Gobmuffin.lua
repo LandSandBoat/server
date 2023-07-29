@@ -16,7 +16,7 @@ local ID = require('scripts/zones/Riverne-Site_B01/IDs')
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GO_GO_GOBMUFFIN)
 
-quest.rewards =
+quest.reward =
 {
     keyItem = xi.ki.MAP_OF_CAPE_RIVERNE,
 }
