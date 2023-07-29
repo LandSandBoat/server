@@ -88,12 +88,30 @@ ConnectServer::ConnectServer(int argc, char** argv)
         // if io_context finishes!
         ShowInfo("starting io_context");
 
-        io_context.run();
+        // This busy loop looks nasty, however --
+        // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
+        /* If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
+            run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
+            It is then the responsibility of the application to catch the exception.
+        */
+
+        while (Application::IsRunning())
+        {
+            try
+            {
+                io_context.run();
+                break;
+            }
+            catch (std::exception& e)
+            {
+                // TODO: make a list of "allowed exceptions", the rest can/should cause shutdown.
+                ShowError(fmt::format("Inner fatal: {}", e.what()));
+            }
+        }
     }
     catch (std::exception& e)
     {
-        ShowError(fmt::format("Fatal: {}", e.what()));
-        io_context.stop();
+        ShowError(fmt::format("Outer fatal: {}", e.what()));
     }
 }
 
