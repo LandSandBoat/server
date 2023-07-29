@@ -10931,7 +10931,7 @@ INSERT INTO `item_equipment` VALUES (22096,'draumstafir',99,119,16384,820,0,0,1,
 INSERT INTO `item_equipment` VALUES (22097,'argute_staff',99,119,524288,326,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (22098,'pedagogy_staff',99,119,524288,326,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (22099,'musa',99,119,524288,820,0,0,1,0,5);
-INSERT INTO `item_equipment` VALUES (22101,'sages_staff',99,119,16388,291,0,0,1,0,0); -- TODO: capture model from retail (using Onion Staff model)
+INSERT INTO `item_equipment` VALUES (22101,'pandits_staff',99,119,16388,291,0,0,1,0,0); -- TODO: capture model from retail (using Onion Staff model)
 INSERT INTO `item_equipment` VALUES (22107,'ullr',99,119,7665,144,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22108,'tokko_bow',99,119,7665,41,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22109,'ajja_bow',99,119,7665,38,0,0,4,0,0);
@@ -10970,7 +10970,7 @@ INSERT INTO `item_equipment` VALUES (22141,'death_penalty',99,119,65536,107,0,1,
 INSERT INTO `item_equipment` VALUES (22142,'armageddon',99,119,66560,109,0,1,4,0,0);
 INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,134,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22144,'voluspa_gun',99,119,66560,59,0,0,4,0,0);
-INSERT INTO `item_equipment` VALUES (22145,'artemiss_bow_+1',99,119,1024,138,0,0,4,0,0); -- TODO: capture model from retail (using Artemis's Bow model)
+INSERT INTO `item_equipment` VALUES (22145,'artemiss_bow_+2',99,119,1024,138,0,0,4,0,0); -- TODO: capture model from retail (using Artemis's Bow model)
 INSERT INTO `item_equipment` VALUES (22147,'scouts_crossbow',99,119,1024,52,0,0,4,0,4);
 INSERT INTO `item_equipment` VALUES (22148,'arke_crossbow',99,119,1024,52,0,0,4,0,4);
 INSERT INTO `item_equipment` VALUES (22149,'sharanga',99,119,1024,142,0,0,4,0,5);

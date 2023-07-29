@@ -1384,6 +1384,31 @@ namespace charutils
         return false;
     }
 
+    uint32 getItemCount(CCharEntity* PChar, uint16 ItemID)
+    {
+        if (ItemID == 0)
+        {
+            return false;
+        }
+
+        uint32 itemCount = 0;
+        for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
+        {
+            CItemContainer* PItemContainer = PChar->getStorage(LocID);
+            // clang-format off
+            PItemContainer->ForEachItem([&ItemID, &itemCount](CItem* PItem)
+            {
+                if (PItem->getID() == ItemID)
+                {
+                    itemCount++;
+                }
+            });
+            // clang-format on
+        }
+
+        return itemCount;
+    }
+
     void UpdateSubJob(CCharEntity* PChar)
     {
         jobpointutils::RefreshGiftMods(PChar);

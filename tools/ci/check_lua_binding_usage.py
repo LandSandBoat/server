@@ -118,9 +118,9 @@ def main():
                     # Try and ignore comments
                     line = line.split("--", 1)[0]
 
-                    # Don't look inside strings
-                    line = line.split("printf", 1)[0]
-                    line = line.split("print", 1)[0]
+                    # Don't look inside strings (replace with placeholder)
+                    line = re.sub('\"([^\"]*?)\"', "strVal", line)
+                    line = re.sub("\'([^\"]*?)\'", "strVal", line)
 
                     # Try and ignore function definitions
                     line = line.split("function", 1)[0]
