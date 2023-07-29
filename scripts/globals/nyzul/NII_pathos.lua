@@ -51,7 +51,7 @@ xi.nyzul.pathosList =
 }
 
 -----------------------------------
--- 
+-- Penalty selection local function.
 -----------------------------------
 local function addPenalty(mob)
     local instance = mob:getInstance()
