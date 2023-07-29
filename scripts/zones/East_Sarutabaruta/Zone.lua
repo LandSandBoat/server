@@ -23,9 +23,8 @@ zoneObject.onInitialize = function(zone)
         xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_DECAPOD)
     end
 
-    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-        xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
-    end
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
