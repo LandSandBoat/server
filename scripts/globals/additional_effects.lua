@@ -142,7 +142,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         return 0, 0, 0
     end
 
-    --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
     if xi.additionalEffect.isRanged(item) then
         if element then
@@ -151,7 +150,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
-    --------------------------------------
 
     if addType == procType.DAMAGE then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
