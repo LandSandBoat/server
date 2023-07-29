@@ -2064,14 +2064,14 @@ namespace fishingutils
             Bait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
             // Players cannot fish using the goldfishing basket outside of the sunbreeze event or goldfishing designated zones
-            if (Rod->getID() == GOLDFISH_BASKET && !settings::get<bool>("main.SUNBREEZE"))
+            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && !settings::get<bool>("main.SUNBREEZE"))
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
                 destroy(PChar->hookedFish);
                 return;
             }
-            else if (Rod->getID() == GOLDFISH_BASKET && zone != 238 && zone != 239 && zone != 241 && zone != 231 && zone != 234 && zone != 235 &&
+            else if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && zone != 238 && zone != 239 && zone != 241 && zone != 231 && zone != 234 && zone != 235 &&
                      zone != 247 && zone != 100 && zone != 107 && zone != 116)
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
