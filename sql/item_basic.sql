@@ -3856,7 +3856,7 @@ INSERT INTO `item_basic` VALUES (4085,0,'handful_of_beryllium_bolt_heads','ber._
 INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,0,20);
 INSERT INTO `item_basic` VALUES (4087,0,'lustreless_hide','lustreless_hide',99,4,46,0,20);
 INSERT INTO `item_basic` VALUES (4088,0,'lustreless_wing','lustreless_wing',99,4,46,0,20);
-INSERT INTO `item_basic` VALUES (4089,0,'bonanza_pearl','bonanza_pearl',1,61536,0,1,0);
+INSERT INTO `item_basic` VALUES (4089,0,'bonanza_pearl','bonanza_pearl',1,28768,0,1,0);
 INSERT INTO `item_basic` VALUES (4090,0,'dream_flower_petal','dream_fl._petal',12,4,0,1,0);
 INSERT INTO `item_basic` VALUES (4091,0,'blazing_buffaloes_cowbell_alpha','bb_cowbell_a.',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (4092,0,'blazing_buffaloes_cowbell_beta','bb_cowbell_b.',1,61504,0,1,0);

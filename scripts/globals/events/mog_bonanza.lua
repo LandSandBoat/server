@@ -14,7 +14,7 @@ xi.events.mogBonanza.entities = xi.events.mogBonanza.entities or {}
 
 local localSettings =
 {
-    PEARL_COST = 200000,
+    PEARL_COST = 200000, -- NOTE: This number is hardcoded in the event
     MAX_PEARLS = 1,
 
     -- 0x55: New Year's Nomad Mog Bonanza 2021
@@ -29,6 +29,7 @@ local localSettings =
     COLLECTION_PERIOD_START = os.time({ year = 2023, month = 7, day = 11, hour = 1, min =  0 }),
     COLLECTION_PERIOD_END   = os.time({ year = 2023, month = 7, day = 31, hour = 7, min = 59 }),
 
+    -- TODO: toP(S/D)T and toGMT functions
     COLLECTION_SERVER_MESSAGE =
         'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
         '\n' ..
@@ -232,10 +233,17 @@ local function getRewardEventUpdate(option)
     return updateTable
 end
 
+local prizeRankOptions =
+{
+    [1] = { 0, 1 },
+    [2] = { 1, 0 },
+    [3] = { 2, 0 },
+    [4] = { 3, 0 },
+}
+
 -- Will return the rank of prize when compared to the winning number table.
 local getPrizeRank = function(player, fullNumber)
     for prizeRank, winningNumber in pairs(localSettings.WINNING_NUMBERS) do
-        -- TODO: Can we pick numbers shorter than max len?
         local matchingNumber = tonumber(string.sub(fullNumber, -1 * string.len(winningNumber)))
 
         if matchingNumber == winningNumber then
@@ -247,11 +255,12 @@ local getPrizeRank = function(player, fullNumber)
 end
 
 local giveBonanzaPearl = function(player, number)
-    -- MAX: 16777215
+    -- Absolute Max: 16777215
+    -- Current events only allow for a 3-digit number, so this is restricted here.
     number = tonumber(number)
     if
         number == nil or
-        number > 16777215 or
+        number > 999 or
         number < 0
     then
         print(string.format('giveBonanzaPearl: %s tried to create a pear with invalid number: %d', player:getName(), number))
@@ -275,50 +284,57 @@ end
 
 xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
     if
-        not xi.events.mogBonanza.enabledCheck() or
-        not isInCollectionPeriod()
+        xi.events.mogBonanza.enabledCheck() and
+        isInCollectionPeriod() and
+        npcUtil.tradeHasExactly(trade, xi.items.BONANZA_PEARL)
     then
-        return
-    end
+        local bonanzaPearl = trade:getItem(0)
+        local exData       = bonanzaPearl:getExData()
+        local eventId      = exData[3]
 
-    local baseCs = csidLookup[player:getZoneID()]
+        if eventId == localSettings.EVENT then
+            local baseCs      = csidLookup[player:getZoneID()]
+            local pearlNumber = 0
 
-    if npcUtil.tradeHasExactly(trade, xi.items.BONANZA_PEARL) then
-        player:startEvent(baseCs + 2)
+            for exIndex = 0, 2 do
+                pearlNumber = pearlNumber + bit.lshift(exData[exIndex], 8 * exIndex)
+            end
+
+            player:setLocalVar('prizeRank', getPrizeRank(player, pearlNumber))
+            player:startEvent(baseCs + 2, 0, 0, 0, 0, 0, 0, 0, localSettings.EVENT)
+        end
     end
 end
 
 xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
-    if not xi.events.mogBonanza.enabledCheck() then
-        return
-    end
+    if xi.events.mogBonanza.enabledCheck() then
+        local baseCs = csidLookup[player:getZoneID()]
 
-    local baseCs = csidLookup[player:getZoneID()]
+        if isInPurchasingPeriod() then
+            local disablePrimevalBrew = 1
 
-    if isInPurchasingPeriod() then
-        local disablePrimevalBrew = 1
-
-        player:startEvent(baseCs,
-            localSettings.MAX_PEARLS,
-            disablePrimevalBrew,
-            0,
-            0,
-            0,
-            0,
-            0,
-            localSettings.EVENT
-        )
-    elseif isInCollectionPeriod() then
-        player:startEvent(baseCs + 1,
-            localSettings.WINNING_NUMBERS[1],
-            localSettings.WINNING_NUMBERS[2],
-            localSettings.WINNING_NUMBERS[3],
-            0,
-            0,
-            0,
-            0,
-            localSettings.EVENT
-        )
+            player:startEvent(baseCs,
+                localSettings.MAX_PEARLS,
+                disablePrimevalBrew,
+                0,
+                0,
+                0,
+                0,
+                0,
+                localSettings.EVENT
+            )
+        elseif isInCollectionPeriod() then
+            player:startEvent(baseCs + 1,
+                localSettings.WINNING_NUMBERS[1],
+                localSettings.WINNING_NUMBERS[2],
+                localSettings.WINNING_NUMBERS[3],
+                0,
+                0,
+                0,
+                0,
+                localSettings.EVENT
+            )
+        end
     end
 end
 
@@ -326,20 +342,21 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
-    print("Incoming Option: " .. option)
+
     local baseCs = csidLookup[player:getZoneID()]
 
     if csid == baseCs + 1 then
         player:updateEvent(unpack(getRewardEventUpdate(option)))
     elseif csid == baseCs + 2 then
         if option == 8 then
-            -- Winning Options:
-            -- Rank 4: 0, 0
-            -- Rank 3: 2, 0
-            -- Rank 2: 1, 0
-            -- Rank 1: 0, 1
+            local prizeRank = player:getLocalVar('prizeRank')
 
-            player:updateEvent(0, 1)
+            if prizeRankOptions[prizeRank] then
+                player:updateEvent(unpack(prizeRankOptions[prizeRank]))
+            else
+                print("ERROR: Bonanza event update received without valid prizeRank.")
+                return
+            end
         else
             player:updateEvent(unpack(getRewardEventUpdate(option)))
         end
@@ -350,7 +367,19 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
 
         if optionType == 2 then
             local selectedNumber = bit.rshift(option, 8)
-            player:updateEvent(459877491, 137258278, 0, 0, 35929248, 54166282, 4095, 0)
+
+            if player:getGil() < localSettings.PEARL_COST then
+                -- TODO: This is a generic I cannot serve you at this time.  There may be a specific message
+                -- for lack of gil.
+
+                player:updateEvent(0, 0, 0, 0, 0, 0, 0, 1)
+            elseif player:hasItem(xi.items.BONANZA_PEARL) then
+                player:updateEvent(0, localSettings.MAX_PEARLS, 0, 0, 0, 0, 0, 3)
+            else
+                -- Second param is optArg for a failure
+                -- Do stuff here to setup for the finish and giving item
+                player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+            end
         else
             player:updateEvent(unpack(getRewardEventUpdate(option)))
         end
@@ -363,14 +392,35 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
-
+    print(option)
     local baseCs = csidLookup[player:getZoneID()]
-
     -- Give Pearl
-    if csid == baseCs and option == 3 then
-        -- Already have a pearl
-    elseif csid == baseCs and option == 771 then
-        -- TODO
+    if csid == baseCs then
+        if option == 3 then
+            -- Already have a pearl
+        elseif option == 771 then
+            -- TODO
+        end
+    elseif csid == baseCs + 2 then
+        local optionType = bit.band(option, 0xFF)
+
+        if optionType == 4 then
+            local prizeRank    = player:getLocalVar('prizeRank')
+            local selectedItem = bit.rshift(option, 16) - 1
+
+            if
+                rewardList[prizeRank] and
+                rewardList[prizeRank].rewardItems[selectedItem] and
+                npcUtil.giveItem(player, rewardList[prizeRank].rewardItems[selectedItem])
+            then
+                player:confirmTrade()
+            end
+        elseif
+            optionType == 6 and
+            npcUtil.giveItem(player, xi.items.BONANZA_BISCUIT)
+        then
+            player:confirmTrade()
+        end
     end
 end
 
