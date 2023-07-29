@@ -26774,6 +26774,9 @@ INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,13791,@RARE);    -- Timarli jaw
 -- ZoneID:  96 - Emela-ntouka
 INSERT INTO `mob_droplist` VALUES (3284,0,0,1000,19120,@UNCOMMON); -- Avis (Uncommon, 10%)
 
+-- ZoneID:  88 - Olgoi-Khorkhoi
+INSERT INTO `mob_droplist` VALUES (3285,0,0,1000,18768,@COMMON); -- Poppet Katars (Uncommon, 15%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
