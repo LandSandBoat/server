@@ -8,7 +8,6 @@
 --  Notes: Only used by armed BST Mamool Ja
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

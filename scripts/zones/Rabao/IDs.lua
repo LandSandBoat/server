@@ -43,6 +43,7 @@ zones[xi.zone.RABAO] =
         LUCKY_ROLL_GAMEOVER           = 10324, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
         LUCKY_ROLL_EXACT              = 10322, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
         LUCKY_ROLL_CLOSE              = 10323, -- And for bringing the total so close to 400, here is your extra prize!
+        GOLDFISH_NPC_DIALOGUE         = 10403, -- Goldfish... Goldfish...something...
     },
     mob =
     {

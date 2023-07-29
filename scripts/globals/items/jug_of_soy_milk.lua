@@ -3,7 +3,6 @@
 -- Item: Soy Milk
 -- Item Effect: Restores 40 HP over 120 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

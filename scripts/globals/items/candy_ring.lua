@@ -7,7 +7,6 @@
 -- Agility 4
 -- Charisma 4
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

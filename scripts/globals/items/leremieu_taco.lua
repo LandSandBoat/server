@@ -14,7 +14,6 @@
 -- Defense % 25
 -- Defense Cap 160
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

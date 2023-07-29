@@ -4,8 +4,6 @@
 -- Item Effect: Counter 5%
 -- Duration: 3 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

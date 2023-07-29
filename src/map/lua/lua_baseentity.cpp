@@ -2183,9 +2183,10 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
 
 void CLuaBaseEntity::openSendBox()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    charutils::OpenSendBox(static_cast<CCharEntity*>(m_PBaseEntity));
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::OpenSendBox(PChar, 0x0D, 2);
+    }
 }
 
 /************************************************************************
@@ -2854,6 +2855,9 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
             PChar->teleport.waypoints.access[index] |= (1 << setBit);
         }
         break;
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            PChar->teleport.eschanPortal |= bit;
+            break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
@@ -2916,6 +2920,9 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionO
 
             return PChar->teleport.abysseaConflux[abysseaRegion];
         }
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            return PChar->teleport.eschanPortal;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -7804,6 +7811,41 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetJobPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+}
+
+/************************************************************************
+ *  Function: masterJob()
+ *  Purpose : Fully masters / unlocks player's current job
+ *  Example : player:masterJob()
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::masterJob()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to master job for non-PC type!");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    auto jpCategory = 0x020 * PChar->GetMJob();
+    for (auto i = jpCategory; i < jpCategory + 0xA; i++)
+    {
+        auto points       = PChar->PJobPoints->GetJobPointType((JOBPOINT_TYPE)i);
+        auto pointsNeeded = 20 - points->value;
+        auto currentJP    = PChar->PJobPoints->GetJobPoints();
+
+        for (auto x = 0; x < pointsNeeded; x++)
+        {
+            auto cost = JobPointCost(points->value);
+            PChar->PJobPoints->SetJobPoints(currentJP + cost);
+            PChar->PJobPoints->RaiseJobPoint((JOBPOINT_TYPE)i);
+        }
+    }
+
     PChar->pushPacket(new CMenuJobPointsPacket(PChar));
 }
 
@@ -15258,7 +15300,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
  *  Note    : Params can assume a default value by passing nil
  *          : e.g. triggerDrawIn(true) to pull in a party/alliance
  ************************************************************************/
-inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
@@ -15267,10 +15309,11 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
     CBattleEntity* PTarget = PMob->GetBattleTarget();
 
     // Default values
-    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
-    uint16 maximumReach = 0xFFFF;
-    bool   includeParty = false;
-    float  offset       = PMob->GetMeleeRange() - 0.2f;
+    uint8  drawInRange         = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach        = 0xFFFF;
+    bool   includeParty        = false;
+    float  offset              = PMob->GetMeleeRange() - 0.2f;
+    bool   includeDeadAndMount = false;
 
     if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
     {
@@ -15293,10 +15336,15 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
         includeParty = includePt.as<bool>();
     }
 
+    if (incDeadAndMount != sol::lua_nil)
+    {
+        includeDeadAndMount = incDeadAndMount.as<bool>();
+    }
+
     if (PTarget)
     {
         // Draw in requires a target
-        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty, includeDeadAndMount);
     }
 
     return 0;
@@ -16902,6 +16950,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addCapacityPoints", CLuaBaseEntity::addCapacityPoints);
     SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);
     SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
+    SOL_REGISTER("masterJob", CLuaBaseEntity::masterJob);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
     SOL_REGISTER("addGil", CLuaBaseEntity::addGil);

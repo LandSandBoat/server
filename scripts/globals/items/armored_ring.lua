@@ -4,8 +4,6 @@
 -- Item Effect: Defence +8
 -- Duration 30 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

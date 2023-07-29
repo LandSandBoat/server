@@ -323,7 +323,7 @@ bool CPlayerController::CanUseAbility(uint16 targid, uint16 abilityid)
             PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
             return false;
         }
-        if (!PChar->PAI->TargetFind->canSee(&PTarget->loc.p))
+        if (!PChar->CanSeeTarget(PTarget, false))
         {
             errMsg = std::make_unique<CMessageBasicPacket>(PChar, PTarget, PAbility->getID(), 0, MSGBASIC_CANNOT_PERFORM_ACTION);
             PChar->HandleErrorMessage(errMsg);

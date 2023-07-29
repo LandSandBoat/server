@@ -9,7 +9,6 @@
 -- Ranged Attack % 22 (cap 70)
 -- Evasion +7
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

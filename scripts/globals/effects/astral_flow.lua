@@ -2,7 +2,6 @@
 -- xi.effect.ASTRAL_FLOW
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

@@ -172,8 +172,8 @@ LosTreeNode::LosTreeNode(
 
 LosTreeNode::~LosTreeNode()
 {
-    delete left;
-    delete right;
+    destroy(left);
+    destroy(right);
 }
 
 void LosTreeNode::SetElements(Triangle* elements, int* elementNexts, int* elementIndices, int indexStart, int indexEnd)

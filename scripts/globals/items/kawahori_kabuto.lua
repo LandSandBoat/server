@@ -3,7 +3,6 @@
 -- Item: kawahori_kabuto
 -- Effect: blindness
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

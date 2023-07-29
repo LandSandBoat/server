@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.CONFRONTATION
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

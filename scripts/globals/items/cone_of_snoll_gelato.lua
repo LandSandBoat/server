@@ -6,7 +6,6 @@
 -- MP % 16 (cap 75)
 -- MP Recovered While Healing 1
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

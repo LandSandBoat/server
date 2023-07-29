@@ -3,7 +3,6 @@
 -- Deals wind elemental damage to enemies within area of effect.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -1,13 +1,8 @@
 -----------------------------------
 --  Benthic Typhoon
---
 --  Description: Delivers an area attack that lowers target's defense and magic defense. Damage varies with TP.
 --  Type: Physical (Piercing)
---
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

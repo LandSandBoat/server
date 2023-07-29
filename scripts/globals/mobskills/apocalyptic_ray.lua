@@ -5,7 +5,6 @@
 -- Type: Magical (Dark)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

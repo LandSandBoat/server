@@ -9,7 +9,6 @@
 -- MP Recovered While Healing 1
 -- Enmity -2
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

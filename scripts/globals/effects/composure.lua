@@ -4,7 +4,6 @@
 -- and black magic you cast on yourself last longer.
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

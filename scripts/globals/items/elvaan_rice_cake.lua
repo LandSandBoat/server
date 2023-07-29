@@ -3,7 +3,6 @@
 -- Elvaan Rice Cake
 -- Enchantment: 60Min, Costume - Elvaan Child (female)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

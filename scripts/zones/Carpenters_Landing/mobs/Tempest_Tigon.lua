@@ -2,6 +2,7 @@
 -- Area: Carpenters' Landing
 --   NM: Tempest Tigon
 -----------------------------------
+local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
@@ -23,7 +24,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.nmTODPersist(ID.mob.WEEPING_WILLOW, math.random(3600, 7200)) -- 1 to 2 hours
+    xi.mob.nmTODPersist(ID.mob.TEMPEST_TIGON, math.random(3600, 7200)) -- 1 to 2 hours
 end
 
 return entity

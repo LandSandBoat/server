@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.REPRISAL
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

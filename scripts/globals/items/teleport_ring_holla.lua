@@ -3,7 +3,6 @@
 -- Teleport ring: Holla
 -- Enchantment: "Teleport-Holla"
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------

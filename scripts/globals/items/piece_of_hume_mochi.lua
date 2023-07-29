@@ -3,7 +3,6 @@
 -- Piece of Hume Mochi
 -- Enchantment: 60Min, Costume - Hume child (male)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

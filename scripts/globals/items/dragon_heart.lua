@@ -9,7 +9,6 @@
 -- HP 40
 -- Dragon Killer 10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

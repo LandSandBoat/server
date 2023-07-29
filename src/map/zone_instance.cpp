@@ -203,7 +203,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     {
         if (!ZoneTimer)
         {
-            createZoneTimer();
+            createZoneTimers();
         }
 
         PChar->targid = PChar->PInstance->GetNewCharTargID();
@@ -380,7 +380,7 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
     }
 }
 
-void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
+void CZoneInstance::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
     auto it = instanceList.begin();
@@ -388,7 +388,7 @@ void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
     {
         auto& instance = *it;
 
-        instance->ZoneServer(tick, check_regions);
+        instance->ZoneServer(tick);
         instance->CheckTime(tick);
 
         if ((instance->Failed() || instance->Completed()) && instance->CharListEmpty())

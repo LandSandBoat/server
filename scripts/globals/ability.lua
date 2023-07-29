@@ -1,9 +1,6 @@
 -----------------------------------
---
 -- ABILITIES
---
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 
 xi = xi or {}

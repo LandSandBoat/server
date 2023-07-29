@@ -4,7 +4,6 @@
 -- Food Effect: 10 Mins, All Races
 -- Poison 10HP / 3Tic
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

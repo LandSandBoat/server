@@ -3,7 +3,6 @@
 -- Stirge Belt
 -- Enchantment: 60Min, Costume - Bat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -8,7 +8,6 @@
 -- Ranged ACC % 15 (cap 72)
 -- Resist Sleep +2
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

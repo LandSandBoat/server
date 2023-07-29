@@ -9,7 +9,6 @@
 -- Attack % 22
 -- Attack Cap 60
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

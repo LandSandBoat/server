@@ -3,7 +3,6 @@
 -- Item: bottle_of_monarchs_drink
 -- Item Effect: Regain
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

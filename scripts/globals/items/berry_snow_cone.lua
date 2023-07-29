@@ -6,7 +6,6 @@
 -- MP % 30 Cap 30
 -- Intelligence 1
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

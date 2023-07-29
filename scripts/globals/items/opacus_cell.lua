@@ -3,8 +3,6 @@
 -- 5374
 -- Unlocks job abilities, weapon skills
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

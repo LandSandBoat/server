@@ -10,7 +10,6 @@
 -- Magic Defense +4
 -- hHP +3
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -10,7 +10,6 @@
 -- DEF +11% (Max. 120)
 -- Enmity +4
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -2,7 +2,6 @@
 -- xi.effect.ENDARK
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

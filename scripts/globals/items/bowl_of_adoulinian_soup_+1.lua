@@ -8,7 +8,6 @@
 -- Defense % 16 Cap 75
 -- HP Healing 7
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

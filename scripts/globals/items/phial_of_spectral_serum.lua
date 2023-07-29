@@ -3,7 +3,6 @@
 -- Phial of spectral Serum
 -- Enchantment: 60Min, Costume - ghost
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

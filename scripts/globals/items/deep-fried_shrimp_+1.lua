@@ -9,7 +9,6 @@
 -- Ranged Accuracy +21% (cap 75)
 -- Subtle Blow +9
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

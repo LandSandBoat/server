@@ -1,7 +1,20 @@
-# pip3 install requests
+# py -m pip install requests
+#
+# Usage:
+# .\tools\generate_changelog.py <days to generate, or "ci"> <repo owner name/repo name> <optional changelog title>
+#
+# NOTE: If you don't populate the optional changelog title, the repo owner name will be used
+#
+# Examples:
+# .\tools\generate_changelog.py ci LandSandBoat/server
+# => ## LandSandBoat Changelog
+#
+# .\tools\generate_changelog.py 7 LandSandBoat/server YourServerName
+# => ## YourServerName Changelog
+
+import glob
 import os
 import re
-import glob
 import sys
 from datetime import date
 from datetime import datetime
@@ -81,21 +94,27 @@ def remove_real_names(authors):
         except:
             pass
 
-length_days = 0
+length_days = 14
 last_run = get_last_date()
 if last_run is not None:
     length_days = (date.today() - last_run).days
 
-if len(sys.argv) >= 2:
+if len(sys.argv) < 3:
+    print("Usage:\ngenerate_changelog.py <days to generate, or 'ci'> <repo owner name/repo name> <optional changelog title>")
+    sys.exit(-1)
+elif len(sys.argv) >= 2:
     if "ci" in sys.argv[1]:
         length_days = days_since_last_run()
     else:
         length_days = int(sys.argv[1])
 
+repo_name = sys.argv[2]
+user = repo_name.split("/")[0]
+repo = repo_name.split("/")[1]
 
-if length_days < 1:
-    print(f"Unable to get changes for {length_days} days...")
-    exit(-1)
+title = user
+if len(sys.argv) >= 4:
+    title = sys.argv[3]
 
 print(f"Calculating changes for {length_days} days...")
 
@@ -103,7 +122,7 @@ today = date.today()
 last_week = today - timedelta(days=length_days)
 
 params = {
-    "q": f"user:AirSkyBoat repo:AirSkyBoat state:closed is:pr merged:>={str(last_week)}"
+    "q": f"user:{user} repo:{repo} state:closed is:pr merged:>={str(last_week)}"
 }
 query_string = urllib.parse.urlencode(params)
 request = f"https://api.github.com/search/issues?page=1&per_page=100&{query_string}"
@@ -112,7 +131,7 @@ data = json.loads(response.text)
 
 print(f"Writing to: changelog-{today}.md...")
 with open(f"changelog-{today}.md", "w") as file:
-    file.write(f"## AirSkyBoat Changelog ({today})\n")
+    file.write(f"## {title} Changelog ({today})\n")
     for raw_entry in enumerate(data["items"]):
         entry = raw_entry[1]
         title = entry["title"]

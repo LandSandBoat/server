@@ -1,8 +1,6 @@
 -----------------------------------
 -- Camisado M=3.5 (Pet version)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/summon")
 -----------------------------------

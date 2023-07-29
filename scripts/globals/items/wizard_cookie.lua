@@ -7,7 +7,6 @@
 -- Plantoid Killer 12
 -- Slow Resist 12
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -3,7 +3,6 @@
 --   NM: Odqan
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/world")
 require("scripts/globals/mobs")
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
 ------------------------------
