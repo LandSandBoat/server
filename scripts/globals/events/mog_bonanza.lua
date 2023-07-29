@@ -373,10 +373,9 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
                 -- for lack of gil.
 
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 1)
-            elseif player:hasItem(xi.items.BONANZA_PEARL) then
+            elseif player:getItemCount(xi.items.BONANZA_PEARL) >= localSettings.MAX_PEARLS then
                 player:updateEvent(0, localSettings.MAX_PEARLS, 0, 0, 0, 0, 0, 3)
             else
-                -- Second param is optArg for a failure
                 -- Do stuff here to setup for the finish and giving item
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end
@@ -392,6 +391,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
     if not xi.events.mogBonanza.enabledCheck() then
         return
     end
+
     print(option)
     local baseCs = csidLookup[player:getZoneID()]
     -- Give Pearl
