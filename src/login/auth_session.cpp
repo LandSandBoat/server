@@ -26,22 +26,25 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 void auth_session::start()
 {
     auto self(shared_from_this());
-    // clang-format off
-    socket_.async_handshake(asio::ssl::stream_base::server,
-    [this, self](std::error_code ec)
+    if (socket_.lowest_layer().is_open())
     {
-        if (!ec)
+        // clang-format off
+        socket_.async_handshake(asio::ssl::stream_base::server,
+        [this, self](std::error_code ec)
         {
-            do_read();
-        }
-        else
-        {
-            ShowWarning(fmt::format("Error from{}: ({}), {}", ipAddress, ec.value(), ec.message()));
-            ShowWarning("Failed to handshake!");
-            socket_.next_layer().close();
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                do_read();
+            }
+            else
+            {
+                ShowWarning(fmt::format("Error from {}: ({}), {}", ipAddress, ec.value(), ec.message()));
+                ShowWarning("Failed to handshake!");
+                socket_.next_layer().close();
+            }
+        });
+        // clang-format on
+    }
 }
 
 void auth_session::do_read()
