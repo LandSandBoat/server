@@ -21,7 +21,7 @@ local localSettings =
     -- 0x5A: 20th Vana'versary Nomad Mog Bonanza
     -- 0x5C: 21st Vana'versary Nomad Mog Bonanza
     -- 0x5E: <number>
-    EVENT = 0x5C,
+    BONANZA_ID = 0x5C,
 
     -- These are local times, and should be tweaked based on your time zone
     BUYING_PERIOD_START     = os.time({ year = 2023, month = 5, day = 17, hour = 1, min =  0 }),
@@ -273,7 +273,7 @@ local giveBonanzaPearl = function(player, number)
             [0] = bit.band(number, 0xFF),
             [1] = bit.band(bit.rshift(number,  8), 0xFF),
             [2] = bit.band(bit.rshift(number, 16), 0xFF),
-            [3] = bit.band(localSettings.EVENT, 0xFF),
+            [3] = bit.band(localSettings.BONANZA_ID, 0xFF),
             [4] = 0, -- 0xCE, -- These might not be needed
             [5] = 0, -- 0x62, -- These might not be needed
             [6] = 0, -- 0x95, -- These might not be needed
@@ -292,7 +292,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
         local exData       = bonanzaPearl:getExData()
         local eventId      = exData[3]
 
-        if eventId == localSettings.EVENT then
+        if eventId == localSettings.BONANZA_ID then
             local baseCs      = csidLookup[player:getZoneID()]
             local pearlNumber = 0
 
@@ -301,7 +301,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
             end
 
             player:setLocalVar('prizeRank', getPrizeRank(player, pearlNumber))
-            player:startEvent(baseCs + 2, 0, 0, 0, 0, 0, 0, 0, localSettings.EVENT)
+            player:startEvent(baseCs + 2, 0, 0, 0, 0, 0, 0, 0, localSettings.BONANZA_ID)
         end
     end
 end
@@ -321,7 +321,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
                 0,
                 0,
                 0,
-                localSettings.EVENT
+                localSettings.BONANZA_ID
             )
         elseif isInCollectionPeriod() then
             player:startEvent(baseCs + 1,
@@ -332,7 +332,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
                 0,
                 0,
                 0,
-                localSettings.EVENT
+                localSettings.BONANZA_ID
             )
         end
     end
@@ -368,7 +368,10 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
         if optionType == 2 then
             local selectedNumber = bit.rshift(option, 8)
 
-            if player:getGil() < localSettings.PEARL_COST then
+            if
+                player:getGil() < localSettings.PEARL_COST or
+                player:getFreeSlotsCount() == 0
+            then
                 -- TODO: This is a generic I cannot serve you at this time.  There may be a specific message
                 -- for lack of gil.
 
@@ -376,50 +379,52 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
             elseif player:getItemCount(xi.items.BONANZA_PEARL) >= localSettings.MAX_PEARLS then
                 player:updateEvent(0, localSettings.MAX_PEARLS, 0, 0, 0, 0, 0, 3)
             else
-                -- Do stuff here to setup for the finish and giving item
+                player:setLocalVar('selectedNumber', selectedNumber)
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end
         else
             player:updateEvent(unpack(getRewardEventUpdate(option)))
         end
     else
+        print("Fallthrough!  Cover this scenario!")
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end
 end
 
 xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option, npc)
-    if not xi.events.mogBonanza.enabledCheck() then
-        return
-    end
+    if xi.events.mogBonanza.enabledCheck() then
+        local zoneId = player:getZoneID()
+        local baseCs = csidLookup[player:getZoneID()]
 
-    print(option)
-    local baseCs = csidLookup[player:getZoneID()]
-    -- Give Pearl
-    if csid == baseCs then
-        if option == 3 then
-            -- Already have a pearl
-        elseif option == 771 then
-            -- TODO
-        end
-    elseif csid == baseCs + 2 then
-        local optionType = bit.band(option, 0xFF)
+        if csid == baseCs then
+            if option == 3 then
+                local selectedNumber = player:getLocalVar('selectedNumber')
+                local ID             = zones[zoneId]
 
-        if optionType == 4 then
-            local prizeRank    = player:getLocalVar('prizeRank')
-            local selectedItem = bit.rshift(option, 16) - 1
+                player:delGil(localSettings.PEARL_COST)
+                giveBonanzaPearl(player, selectedNumber)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BONANZA_PEARL)
+            end
+        elseif csid == baseCs + 2 then
+            local optionType = bit.band(option, 0xFF)
 
-            if
-                rewardList[prizeRank] and
-                rewardList[prizeRank].rewardItems[selectedItem] and
-                npcUtil.giveItem(player, rewardList[prizeRank].rewardItems[selectedItem])
+            if optionType == 4 then
+                local prizeRank    = player:getLocalVar('prizeRank')
+                local selectedItem = bit.rshift(option, 16) - 1
+
+                if
+                    rewardList[prizeRank] and
+                    rewardList[prizeRank].rewardItems[selectedItem] and
+                    npcUtil.giveItem(player, rewardList[prizeRank].rewardItems[selectedItem])
+                then
+                    player:confirmTrade()
+                end
+            elseif
+                optionType == 6 and
+                npcUtil.giveItem(player, xi.items.BONANZA_BISCUIT)
             then
                 player:confirmTrade()
             end
-        elseif
-            optionType == 6 and
-            npcUtil.giveItem(player, xi.items.BONANZA_BISCUIT)
-        then
-            player:confirmTrade()
         end
     end
 end
