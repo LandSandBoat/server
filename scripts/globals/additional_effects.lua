@@ -196,7 +196,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage
-        defender:addHP(-damage)
         attacker:addHP(damage)
 
     elseif
