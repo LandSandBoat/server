@@ -24,7 +24,7 @@ xi.additionalEffect.isRanged = function(item)
 end
 
 xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damage)
-    -- Copied from existing scripts.
+    -- Copied from existing scripts. Todo: rework into additional modifier for dStat?
     local bonus = 0
 
     if element == xi.magic.ele.LIGHT then
@@ -123,11 +123,12 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         HP_DRAIN      = 5,
         MP_DRAIN      = 6,
         TP_DRAIN      = 7,
-        HPMPTP_DRAIN  = 8,
-        DISPEL        = 9,
-        ABSORB_STATUS = 10,
-        SELF_BUFF     = 11,
-        DEATH         = 12,
+        HPMP_DRAIN    = 8,
+        HPMPTP_DRAIN  = 9,
+        DISPEL        = 10,
+        ABSORB_STATUS = 11,
+        SELF_BUFF     = 12,
+        DEATH         = 13,
     }
 
     -- If player is level synced below the level of the item, do no proc
@@ -149,7 +150,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
-
     --------------------------------------
 
     if addType == procType.DAMAGE then
