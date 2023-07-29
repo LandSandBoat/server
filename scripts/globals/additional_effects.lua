@@ -112,6 +112,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local duration  = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
     local msgID     = 0
     local msgParam  = 0
+    local drainRoll = math.random(1, 3) -- Temp, being refactored out
 
     local procType =
     {
@@ -186,7 +187,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     elseif
         addType == procType.HP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
+        (addType == procType.HPMPTP_DRAIN and drainRoll == 1)
     then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
@@ -200,7 +201,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     elseif
         addType == procType.MP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
+        (addType == procType.HPMPTP_DRAIN and drainRoll == 2)
     then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
@@ -215,7 +216,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     elseif
         addType == procType.TP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
+        (addType == procType.HPMPTP_DRAIN and drainRoll == 3)
     then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
