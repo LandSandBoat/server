@@ -112,7 +112,7 @@ namespace PacketGuard
         // Sort
         using pair_t = std::pair<std::string, uint32>;
         std::vector<pair_t> sortedVec;
-        sortedVec.resize(packetCounterMap.size());
+        sortedVec.reserve(packetCounterMap.size());
         for (auto& entry : packetCounterMap)
         {
             sortedVec.emplace_back(entry);
