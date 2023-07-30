@@ -285,7 +285,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
         }
 
         // i starts at 3 so the start position is ignored
-        ret.resize(straightPathCount * 3);
+        ret.reserve(straightPathCount - 1);
         for (int i = 3; i < straightPathCount * 3;)
         {
             float pathPos[3];
