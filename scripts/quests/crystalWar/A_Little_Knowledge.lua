@@ -73,9 +73,10 @@ quest.sections =
                     -- In addition, need to determine if partial stacks are consumed and implement that if needed.
 
                     if
-                        npcUtil.tradeHas(trade, { { xi.items.ROLANBERRY, 12 } }) and
                         questOption >= 1 and
-                        questOption <= 3
+                        questOption <= 3 and
+                        trade:getItemQty(xi.items.ROLANBERRY) >= 12 and
+                        trade:hasItemQty(xi.items.ROLANBERRY, trade:getItemCount())
                     then
                         local numAwardedVellum = math.min(4, math.floor(trade:getItemCount() / 12))
                         trade:confirmItem(xi.items.ROLANBERRY, numAwardedVellum * 12)
