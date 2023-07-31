@@ -14,7 +14,7 @@ public:
     uint16 GetSize();
 
 private:
-    uint8 data[204];
+    uint8 data[204]{};
 };
 
 #endif

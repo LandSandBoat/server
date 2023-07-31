@@ -403,7 +403,7 @@ namespace ability
                 PAbility->setAddType(sql->GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;
-                PAbilitiesList[PAbility->getJob()].push_back(PAbility);
+                PAbilitiesList[PAbility->getJob()].emplace_back(PAbility);
 
                 auto filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
                 if (PAbility->isPetAbility())
@@ -430,7 +430,7 @@ namespace ability
                 PCharge->chargeTime = sql->GetUIntData(4);
                 PCharge->merit      = sql->GetUIntData(5);
 
-                PChargesList.push_back(PCharge);
+                PChargesList.emplace_back(PCharge);
             }
         }
     }

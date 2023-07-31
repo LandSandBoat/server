@@ -212,6 +212,7 @@ public:
     uint16 getEquipID(SLOTTYPE slot);                              // Gets the Item Id of the item in specified slot
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
+    uint32 getItemCount(uint16 itemID);                            // Get total number of items the player has across all inventories
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
@@ -566,7 +567,7 @@ public:
     void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
     void resetRecasts();                            // Reset recasts for the caller
 
-    void addListener(std::string const& eventName, std::string const& identifier, sol::function func);
+    void addListener(std::string const& eventName, std::string const& identifier, sol::function const& func);
     void removeListener(std::string const& identifier);
     void triggerListener(std::string const& eventName, sol::variadic_args args);
 
@@ -821,9 +822,9 @@ public:
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    void castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    void useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
-    void useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
+    void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
+    void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);
@@ -852,7 +853,7 @@ public:
     uint32 getHistory(uint8 index);
 
     auto getChocoboRaisingInfo() -> sol::table;
-    bool setChocoboRaisingInfo(sol::table table);
+    bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);

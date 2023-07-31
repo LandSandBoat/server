@@ -30,7 +30,7 @@
 #include <windows.h>
 #endif
 
-Application::Application(std::string serverName, int argc, char** argv)
+Application::Application(std::string const& serverName, int argc, char** argv)
 : m_ServerName(serverName)
 , m_RequestExit(false)
 , gArgParser(std::make_unique<argparse::ArgumentParser>(argv[0]))
@@ -68,7 +68,7 @@ Application::Application(std::string serverName, int argc, char** argv)
     gConsoleService = std::make_unique<ConsoleService>();
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
-    [&](std::vector<std::string> inputs)
+    [&](std::vector<std::string>& inputs)
     {
         fmt::print("> Goodbye!\n");
         m_RequestExit = true;

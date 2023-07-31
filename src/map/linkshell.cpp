@@ -113,7 +113,7 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
         return;
     }
 
-    members.push_back(PChar);
+    members.emplace_back(PChar);
 
     if (lsNum == 1)
     {

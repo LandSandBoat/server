@@ -26,22 +26,25 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 void auth_session::start()
 {
     auto self(shared_from_this());
-    // clang-format off
-    socket_.async_handshake(asio::ssl::stream_base::server,
-    [this, self](std::error_code ec)
+    if (socket_.lowest_layer().is_open())
     {
-        if (!ec)
+        // clang-format off
+        socket_.async_handshake(asio::ssl::stream_base::server,
+        [this, self](std::error_code ec)
         {
-            do_read();
-        }
-        else
-        {
-            ShowWarning(fmt::format("Error from{}: ({}), {}", ipAddress, ec.value(), ec.message()));
-            ShowWarning("Failed to handshake!");
-            socket_.next_layer().close();
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                do_read();
+            }
+            else
+            {
+                ShowWarning(fmt::format("Error from {}: ({}), {}", ipAddress, ec.value(), ec.message()));
+                ShowWarning("Failed to handshake!");
+                socket_.next_layer().close();
+            }
+        });
+        // clang-format on
+    }
 }
 
 void auth_session::do_read()
@@ -203,7 +206,7 @@ void auth_session::read_func()
                     ref<uint32>(data_, 1) = accountID;
 
                     unsigned char hash[16];
-                    uint32        hashData = std::time(0) ^ getpid();
+                    uint32        hashData = std::time(nullptr) ^ getpid();
                     md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
                     std::memcpy(data_ + 5, hash, 16);
 
@@ -268,8 +271,8 @@ void auth_session::read_func()
                 accid = (accid < 1000 ? 1000 : accid);
 
                 // creating new account
-                time_t timecreate;
-                tm     timecreateinfo;
+                time_t timecreate{};
+                tm     timecreateinfo{};
 
                 time(&timecreate);
                 _localtime_s(&timecreateinfo, &timecreate);

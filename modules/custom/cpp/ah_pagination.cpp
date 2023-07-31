@@ -1,9 +1,9 @@
 ﻿/************************************************************************
-* Auction House Pagination
-*
-* This allows players to list and view more than the client-restricted 7
-* entries. This works by using multiple pages of 6 entries and pages
-* through them every time the player opens their AH listing page.
+ * Auction House Pagination
+ *
+ * This allows players to list and view more than the client-restricted 7
+ * entries. This works by using multiple pages of 6 entries and pages
+ * through them every time the player opens their AH listing page.
  ************************************************************************/
 
 #include "map/utils/moduleutils.h"
@@ -13,8 +13,8 @@
 #include "map/packets/chat_message.h"
 #include "map/zone.h"
 
-extern uint8 PacketSize[512];
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
+extern uint8                                                                             PacketSize[512];
+extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 class AHPaginationModule : public CPPModule
 {
@@ -24,14 +24,14 @@ class AHPaginationModule : public CPPModule
 
         // If this is set to 7, the client won't let you put up more than 7 items. So, 6.
         auto ITEMS_PER_PAGE = 6U;
-        auto TOTAL_PAGES = 6;
+        auto TOTAL_PAGES    = 6;
 
         ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
-        lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
+            lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
 
         auto originalHandler = PacketParser[0x04E];
 
-        auto newHandler = [this, ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data) -> void
+        auto newHandler = [this, ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
@@ -57,16 +57,15 @@ class AHPaginationModule : public CPPModule
                     PChar->pushPacket(new CAuctionHousePacket(action));
 
                     const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u and sale=0 ORDER BY id ASC LIMIT %u OFFSET %u;";
-                    int32 ret = sql->Query(Query, PChar->id, ITEMS_PER_PAGE, currentAHPage * ITEMS_PER_PAGE);
+                    int32       ret   = sql->Query(Query, PChar->id, ITEMS_PER_PAGE, currentAHPage * ITEMS_PER_PAGE);
 
                     if (ret != SQL_ERROR && sql->NumRows() == 0)
                     {
-                        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.",
-                            currentAHPage + 1, TOTAL_PAGES).c_str(), ""));
+                        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, TOTAL_PAGES).c_str(), ""));
 
                         // Reset to Page 1
                         const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u and sale=0 ORDER BY id ASC LIMIT %u OFFSET %u;";
-                        ret = sql->Query(Query, PChar->id, ITEMS_PER_PAGE, 0);
+                        ret               = sql->Query(Query, PChar->id, ITEMS_PER_PAGE, 0);
 
                         // Show Page 1 this time
                         currentAHPage = 0;
@@ -75,8 +74,7 @@ class AHPaginationModule : public CPPModule
                         PChar->SetLocalVar("AH_PAGE", currentAHPage + 1);
                     }
 
-                    PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.",
-                        currentAHPage + 1, TOTAL_PAGES, sql->NumRows()).c_str(), ""));
+                    PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, TOTAL_PAGES, sql->NumRows()).c_str(), ""));
 
                     if (ret != SQL_ERROR && sql->NumRows() != 0)
                     {

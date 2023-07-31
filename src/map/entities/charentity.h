@@ -319,36 +319,38 @@ public:
     uint16          m_EquipFlag;         // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
     uint16          m_EquipBlock;        // заблокированные ячейки экипировки
     uint16          m_StatsDebilitation; // Debilitation arrows
-    uint8           equip[18];           //      SlotID where equipment is
-    uint8           equipLoc[18];        // ContainerID where equipment is
-    uint16          styleItems[16];      // Item IDs for items that are style locked.
+    uint8           equip[18]{};         //      SlotID where equipment is
+    uint8           equipLoc[18]{};      // ContainerID where equipment is
+    uint16          styleItems[16]{};    // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[38];        // List of visited zone character
-    std::bitset<1024> m_SpellList;            // List of studied spells
-    uint8             m_TitleList[143];       // List of obtained titles
-    uint8             m_Abilities[64];        // List of current abilities
-    uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
-    std::bitset<64>   m_LearnedWeaponskills;  // LearnableWeaponskills
-    uint8             m_TraitList[18];        // List of active job traits in the form of a bit mask
-    uint8             m_PetCommands[64];      // List of available pet commands
-    uint8             m_WeaponSkills[32];
-    questlog_t        m_questLog[MAX_QUESTAREA];       // список всех квестов
-    missionlog_t      m_missionLog[MAX_MISSIONAREA];   // список миссий
-    eminencelog_t     m_eminenceLog;                   // Record of Eminence log
-    eminencecache_t   m_eminenceCache;                 // Caching data for Eminence lookups
-    assaultlog_t      m_assaultLog;                    // список assault миссий
-    campaignlog_t     m_campaignLog;                   // список campaign миссий
-    uint32            m_lastBcnmTimePrompt;            // the last message prompt in seconds
-    PetInfo_t         petZoningInfo;                   // used to repawn dragoons pets ect on zone
-    void              setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
-    void              resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
-    bool              shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
-    uint8             m_SetBlueSpells[20];             // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
-    uint32            m_FieldChocobo;
-    uint32            m_claimedDeeds[5];
+    uint8             m_ZonesList[38]{};        // List of visited zone character
+    std::bitset<1024> m_SpellList;              // List of studied spells
+    uint8             m_TitleList[143]{};       // List of obtained titles
+    uint8             m_Abilities[64]{};        // List of current abilities
+    uint8             m_LearnedAbilities[49]{}; // LearnableAbilities (corsairRolls)
+    std::bitset<64>   m_LearnedWeaponskills;    // LearnableWeaponskills
+    uint8             m_TraitList[18]{};        // List of active job traits in the form of a bit mask
+    uint8             m_PetCommands[64]{};      // List of available pet commands
+    uint8             m_WeaponSkills[32]{};
+    questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
+    missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
+    eminencelog_t     m_eminenceLog;                 // Record of Eminence log
+    eminencecache_t   m_eminenceCache;               // Caching data for Eminence lookups
+    assaultlog_t      m_assaultLog;                  // список assault миссий
+    campaignlog_t     m_campaignLog;                 // список campaign миссий
+    uint32            m_lastBcnmTimePrompt;          // the last message prompt in seconds
+    PetInfo_t         petZoningInfo{};               // used to repawn dragoons pets ect on zone
 
-    UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
-    CAutomatonEntity*     PAutomaton;            // Automaton statistics
+    void setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
+    void resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
+    bool shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
+
+    uint8  m_SetBlueSpells[20]{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
+    uint32 m_FieldChocobo{};
+    uint32 m_claimedDeeds[5]{};
+
+    UnlockedAttachments_t m_unlockedAttachments{}; // Unlocked Automaton Attachments (1 bit per attachment)
+    CAutomatonEntity*     PAutomaton;              // Automaton statistics
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
@@ -439,9 +441,9 @@ public:
     void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
     time_point   lastTradeInvite;
-    EntityID_t   TradePending;    // character ID offering trade
-    EntityID_t   InvitePending;   // character ID sending party invite
-    EntityID_t   BazaarID;        // Pointer to the bazaar we are browsing.
+    EntityID_t   TradePending{};  // character ID offering trade
+    EntityID_t   InvitePending{}; // character ID sending party invite
+    EntityID_t   BazaarID{};      // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
     uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
@@ -623,7 +625,7 @@ private:
     std::unordered_map<std::string, int32> charVarCache;
     std::unordered_set<std::string>        charVarChanges;
 
-    uint8      dataToPersist;
+    uint8      dataToPersist = 0;
     time_point nextDataPersistTime;
 
     PacketList_t                                     PacketList;           // the list of packets to be sent to the character during the next network cycle

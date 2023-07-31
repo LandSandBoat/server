@@ -165,7 +165,18 @@ void lua_print(sol::variadic_args va)
     std::vector<std::string> vec;
     for (std::size_t i = 0; i < va.size(); ++i)
     {
-        vec.emplace_back(lua_to_string(va[i]));
+        // Determine if this value is an integer.
+        // NOTE: Since all known values in Lua are referenced as uint32, this conversion
+        // is being done here.
+
+        if (va[i].is<double>() && va[i].as<double>() == std::floor(va[i].as<double>()))
+        {
+            vec.emplace_back(fmt::format("{0:d}", va[i].as<uint32>()));
+        }
+        else
+        {
+            vec.emplace_back(lua_to_string(va[i]));
+        }
     }
 
     ShowLua(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());

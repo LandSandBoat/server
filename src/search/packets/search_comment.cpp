@@ -7,8 +7,6 @@
 
 SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string const& comment)
 {
-    memset(data, 0, sizeof(data));
-
     ref<uint8>(data, 0x08) = 154;  // Search comment packet size
     ref<uint8>(data, 0x0A) = 0x80; // Search server packet
     ref<uint8>(data, 0x0B) = 0x88; // Packet type

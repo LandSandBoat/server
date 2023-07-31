@@ -31,7 +31,7 @@
 class Application
 {
 public:
-    Application(std::string serverName, int argc, char** argv);
+    Application(std::string const& serverName, int argc, char** argv);
     virtual ~Application() = default;
 
     Application(const Application&)            = delete;

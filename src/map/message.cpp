@@ -902,7 +902,7 @@ namespace message
     void rpc_send(uint16 sendZone, uint16 recvZone, std::string const& sendStr, sol::function recvFunc)
     {
         uint64_t slotKey  = std::chrono::duration_cast<std::chrono::microseconds>(hires_clock::now().time_since_epoch()).count();
-        replyMap[slotKey] = recvFunc;
+        replyMap[slotKey] = std::move(recvFunc);
 
         std::vector<uint8> packetData(16 + sendStr.size() + 1);
 

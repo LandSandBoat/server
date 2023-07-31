@@ -24,13 +24,23 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 handler_session::handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
 : socket_(std::move(socket))
 {
+    asio::error_code ec = {};
     socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
-    ipAddress = socket_.lowest_layer().remote_endpoint().address().to_string();
+    ipAddress = socket_.lowest_layer().remote_endpoint(ec).address().to_string();
+
+    if (ec)
+    {
+        ipAddress = "error";
+        socket_.lowest_layer().close();
+    }
 }
 
 void handler_session::start()
 {
-    do_read();
+    if (socket_.lowest_layer().is_open())
+    {
+        do_read();
+    }
 }
 
 void handler_session::do_read()
@@ -52,11 +62,6 @@ void handler_session::do_read()
         }
     });
     // clang-format on
-}
-
-void handler_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
-{
-    // Intentionally empty
 }
 
 void handler_session::do_write(std::size_t length)

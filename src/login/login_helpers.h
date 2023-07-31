@@ -80,7 +80,7 @@ namespace loginHelpers
 
     bool check_string(std::string const& str, std::size_t max_length);
 
-    session_t& get_authenticated_session(std::string ipAddr, std::string sessionHash);
+    session_t& get_authenticated_session(std::string const& ipAddr, std::string const& sessionHash);
 
     // hostname/ip conversion functions
     std::string ip2str(uint32 ip);
@@ -100,5 +100,5 @@ namespace loginHelpers
 
     void PrintPacket(const char* data, uint32 size);
 
-    std::string getHashFromPacket(std::string ip_str, char* data);
+    std::string getHashFromPacket(std::string const& ip_str, char* data);
 } // namespace loginHelpers

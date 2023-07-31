@@ -63,8 +63,8 @@ private:
     uint8       m_id;
     std::string pointsName;
 
-    std::array<uint8, GP_ITEM_RANKS>                 m_GPItemsRank;
-    std::array<std::vector<GPItem_t>, GP_ITEM_RANKS> m_GPItems;
+    std::array<uint8, GP_ITEM_RANKS>                 m_GPItemsRank{};
+    std::array<std::vector<GPItem_t>, GP_ITEM_RANKS> m_GPItems{};
 };
 
 #endif

@@ -32,7 +32,7 @@ void CMobSpellList::AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl)
 {
     MobSpell_t Mob_Spell = { spellId, minLvl, maxLvl };
 
-    m_spellList.push_back(Mob_Spell);
+    m_spellList.emplace_back(Mob_Spell);
 }
 
 // Implement namespace to work with spells

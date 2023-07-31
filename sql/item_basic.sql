@@ -3417,6 +3417,9 @@ INSERT INTO `item_basic` VALUES (3529,0,'lofty_trophy','lofty_trophy',1,45124,0,
 INSERT INTO `item_basic` VALUES (3530,0,'mired_trophy','mired_trophy',1,45124,0,1,0);
 INSERT INTO `item_basic` VALUES (3531,0,'soaring_trophy','soaring_trophy',1,45124,0,1,0);
 INSERT INTO `item_basic` VALUES (3532,0,'veiled_trophy','veiled_trophy',1,45124,0,1,0);
+INSERT INTO `item_basic` VALUES (3533,0,'mog_kupon_a-sap','kupon_a-sap',99,28736,0,1,0);
+INSERT INTO `item_basic` VALUES (3534,0,'mog_kupon_a-jad','kupon_a-jad',99,28736,0,1,0);
+INSERT INTO `item_basic` VALUES (3537,0,'mog_kupon_a-rub','kupon_a-rub',99,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (3541,0,'seasoning_stone','seasoning_stone',12,28740,0,1,0);
 INSERT INTO `item_basic` VALUES (3542,0,'fossilized_bone','fossilized_bone',12,12356,0,1,0);
 INSERT INTO `item_basic` VALUES (3543,0,'fossilized_fang','fossilized_fang',12,12356,0,1,0);
@@ -3853,7 +3856,7 @@ INSERT INTO `item_basic` VALUES (4085,0,'handful_of_beryllium_bolt_heads','ber._
 INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,0,20);
 INSERT INTO `item_basic` VALUES (4087,0,'lustreless_hide','lustreless_hide',99,4,46,0,20);
 INSERT INTO `item_basic` VALUES (4088,0,'lustreless_wing','lustreless_wing',99,4,46,0,20);
-INSERT INTO `item_basic` VALUES (4089,0,'bonanza_pearl','bonanza_pearl',1,61536,0,1,0);
+INSERT INTO `item_basic` VALUES (4089,0,'bonanza_pearl','bonanza_pearl',1,28768,0,1,0);
 INSERT INTO `item_basic` VALUES (4090,0,'dream_flower_petal','dream_fl._petal',12,4,0,1,0);
 INSERT INTO `item_basic` VALUES (4091,0,'blazing_buffaloes_cowbell_alpha','bb_cowbell_a.',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (4092,0,'blazing_buffaloes_cowbell_beta','bb_cowbell_b.',1,61504,0,1,0);
@@ -18613,7 +18616,7 @@ INSERT INTO `item_basic` VALUES (22097,0,'argute_staff','argute_staff',1,2080,12
 INSERT INTO `item_basic` VALUES (22098,0,'pedagogy_staff','pedagogy_staff',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22099,0,'musa','musa',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22100,0,'mpacas_staff','mpacas_staff',1,59456,0,1,0);
-INSERT INTO `item_basic` VALUES (22101,0,'sages_staff','sages_staff',1,64576,0,1,0);
+INSERT INTO `item_basic` VALUES (22101,0,'pandits_staff','sages_staff',1,64576,0,1,0);
 INSERT INTO `item_basic` VALUES (22102,0,'prime_staff','prime_staff',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22103,0,'opashoro','opashoro',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22104,0,'opashoro','opashoro',1,63552,0,1,0);
@@ -18657,7 +18660,7 @@ INSERT INTO `item_basic` VALUES (22141,0,'death_penalty','death_penalty',1,63552
 INSERT INTO `item_basic` VALUES (22142,0,'armageddon','armageddon',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22143,0,'fomalhaut','fomalhaut',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22144,0,'voluspa_gun','voluspa_gun',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (22145,0,'artemiss_bow_+1','artemiss_bow_+1',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (22145,0,'artemiss_bow_+2','artemiss_bow_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22147,0,'scouts_crossbow','scouts_crossbow',1,2080,13,0,0);
 INSERT INTO `item_basic` VALUES (22148,0,'arke_crossbow','arke_crossbow',1,2080,13,0,0);
 INSERT INTO `item_basic` VALUES (22149,0,'sharanga','sharanga',1,2080,13,0,0);

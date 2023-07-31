@@ -144,7 +144,7 @@ namespace charutils
         int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
         int32 scaleOver75       = 3; // The speaker number with the modifier to calculate the stats after the 75th level
 
-        uint8 grade;
+        uint8 grade = 0;
 
         uint8      mlvl        = PChar->GetMLevel();
         uint8      slvl        = PChar->GetSLevel();
@@ -1382,6 +1382,31 @@ namespace charutils
             }
         }
         return false;
+    }
+
+    uint32 getItemCount(CCharEntity* PChar, uint16 ItemID)
+    {
+        if (ItemID == 0)
+        {
+            return false;
+        }
+
+        uint32 itemCount = 0;
+        for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
+        {
+            CItemContainer* PItemContainer = PChar->getStorage(LocID);
+            // clang-format off
+            PItemContainer->ForEachItem([&ItemID, &itemCount](CItem* PItem)
+            {
+                if (PItem->getID() == ItemID)
+                {
+                    itemCount++;
+                }
+            });
+            // clang-format on
+        }
+
+        return itemCount;
     }
 
     void UpdateSubJob(CCharEntity* PChar)
@@ -2710,7 +2735,7 @@ namespace charutils
     {
         memset(&PChar->m_WeaponSkills, 0, sizeof(PChar->m_WeaponSkills));
 
-        CItemWeapon* PItem;
+        CItemWeapon* PItem        = nullptr;
         int          main_ws      = 0;
         int          range_ws     = 0;
         int          main_ws_dyn  = 0;
@@ -3815,7 +3840,7 @@ namespace charutils
             {
                 if (PPartyMember->getZone() == PMob->getZone() && distanceSquared(PPartyMember->loc.p, PMob->loc.p) < square(100.f))
                 {
-                    members.push_back((CCharEntity*)PPartyMember);
+                    members.emplace_back((CCharEntity*)PPartyMember);
                 }
             });
             // clang-format on
@@ -5337,7 +5362,7 @@ namespace charutils
             return;
         }
 
-        const char* fmtQuery;
+        const char* fmtQuery = "";
 
         switch (job)
         {
@@ -5431,7 +5456,7 @@ namespace charutils
             return;
         }
 
-        const char* Query;
+        const char* Query = "";
 
         switch (job)
         {

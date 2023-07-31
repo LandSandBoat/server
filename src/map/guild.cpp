@@ -64,7 +64,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                m_GPItems[i].push_back(
+                m_GPItems[i].emplace_back(
                     GPItem_t(itemutils::GetItemPointer(sql->GetUIntData(0)), sql->GetUIntData(2), sql->GetUIntData(1)));
             }
         }
