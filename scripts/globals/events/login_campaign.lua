@@ -13,7 +13,7 @@ xi.events.loginCampaign = xi.events.loginCampaign or {}
 -- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
 local loginCampaignYear = 2023
-local loginCampaignMonth = 7
+local loginCampaignMonth = 8
 local loginCampaignDay = 1
 local loginCampaignDuration = 29 -- Duration is set in Earth days (Average is 23 days)
 
@@ -141,7 +141,7 @@ end
 
 -- Shows list of items depending on option selected.
 -- It also is in charge of purchasing selected item.
-xi.events.loginCampaign.onEventUpdate = function(player, csid, option, npc)
+xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
     if not xi.events.loginCampaign.isCampaignActive() then
         return
     end

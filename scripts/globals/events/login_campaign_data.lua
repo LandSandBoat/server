@@ -76,21 +76,21 @@ local prizes =
            --  320, -- Harpsichord
 
         -- Cycle #4
-            365,  -- Poele Classique
-            366,  -- Kanonenofen
-            367,  -- Pot Topper
-            415,  -- Aldebaran Horn
-            426,  -- Orchestrion
-            3585, -- Galley Kitchen
-            3652, -- Memorial Cake
+        --    365,  -- Poele Classique
+        --    366,  -- Kanonenofen
+        --    367,  -- Pot Topper
+        --    415,  -- Aldebaran Horn
+        --    426,  -- Orchestrion
+        --    3585, -- Galley Kitchen
+        --    3652, -- Memorial Cake
 
         -- Cycle # 5
-            -- 88,   -- Timepiece
-            -- 3679, -- Beastman Gonfalon
-            -- 3681, -- Alzadaal Table
-            -- 3698, -- Cherry Tree
-            -- 3705, -- Far East Hearth
-            -- 3717, -- Birch Tree
+            88,   -- Timepiece
+            3679, -- Beastman Gonfalon
+            3681, -- Alzadaal Table
+            3698, -- Cherry Tree
+            3705, -- Far East Hearth
+            3717, -- Birch Tree
 
         -- Cycle # 6
             -- 195,  -- The Big One
@@ -110,22 +110,22 @@ local prizes =
         -- COSTUMES
 
         -- Cycle #1/#6
-            -- 10250, -- Moogle Suit
-            -- 10384, -- Cumulus Masque
-            -- 10429, -- Moogle Masque
-            -- 25632, -- Carbie Cap
-            -- 25711, -- Botulus Suit
-            -- 26705, -- Mandragora Masque
-            -- 26798, -- Behemoth Masque
-            -- 26889, -- Heart Apron
-            -- 26954, -- Behemoth Suit
-            -- 26956, -- Poroggo Coat
-            -- 27715, -- Goblin Masque
-            -- 27765, -- Chocobo Masque
-            -- 27854, -- Mandragora Suit
-            -- 27859, -- Kengyu Happi
-            -- 27866, -- Goblin Suit
-            -- 27911, -- Chocobo Suit
+            10250, -- Moogle Suit
+            10384, -- Cumulus Masque
+            10429, -- Moogle Masque
+            25632, -- Carbie Cap
+            25711, -- Botulus Suit
+            26705, -- Mandragora Masque
+            26798, -- Behemoth Masque
+            26889, -- Heart Apron
+            26954, -- Behemoth Suit
+            26956, -- Poroggo Coat
+            27715, -- Goblin Masque
+            27765, -- Chocobo Masque
+            27854, -- Mandragora Suit
+            27859, -- Kengyu Happi
+            27866, -- Goblin Suit
+            27911, -- Chocobo Suit
 
         -- Cycle #2
             -- 11491, -- Snow Bunny Hat +1
@@ -245,26 +245,26 @@ local prizes =
             -- 26707, -- Flan Masque
 
         -- Seasonal event Starlight Celebration. Uncomment for December campaign only.
-            86,    -- Sandorian Tree
-            115,   -- Bastokan Tree
-            116,   -- Windurstian Tree
-            138,   -- Jeunoan Tree
-            176,   -- Snowman Knight
-            177,   -- Snowman Miner
-            178,   -- Snowman Mage
-            3619,  -- Cour Des Etoiles
-            3620,  -- Silberkranz
-            3621,  -- Leafberry Wreath
-            10383, -- Dream Mittens +1
-            10875, -- Snowman Cap
-            11490, -- Snow Bunny Hat
-            11966, -- Dream Trousers +1
-            11968, -- Dream Pants +1
-            14520, -- Dream Robe +1
-            15179, -- Dream Hat +1
-            15753, -- Dream Boots +1
-            18863, -- Dream Bell
-            21097, -- Leafkin Bopper
+        --    86,    -- Sandorian Tree
+        --    115,   -- Bastokan Tree
+        --    116,   -- Windurstian Tree
+        --    138,   -- Jeunoan Tree
+        --    176,   -- Snowman Knight
+        --    177,   -- Snowman Miner
+        --    178,   -- Snowman Mage
+        --    3619,  -- Cour Des Etoiles
+        --    3620,  -- Silberkranz
+        --    3621,  -- Leafberry Wreath
+        --    10383, -- Dream Mittens +1
+        --    10875, -- Snowman Cap
+        --    11490, -- Snow Bunny Hat
+        --    11966, -- Dream Trousers +1
+        --    11968, -- Dream Pants +1
+        --    14520, -- Dream Robe +1
+        --    15179, -- Dream Hat +1
+        --    15753, -- Dream Boots +1
+        --    18863, -- Dream Bell
+        --    21097, -- Leafkin Bopper
         },
     },
 
@@ -297,46 +297,46 @@ local prizes =
             -- 28661, -- Glinting Shield
 
         -- Cycle #2/#6
-            18102, -- Pitchfork
-            18441, -- Shinai
-            18864, -- Dream Bell +1
-            20532, -- Worm Feelers
-            20577, -- Chicken Knife II
-            20713, -- Excalipoor
-            20909, -- Hoe
-            21107, -- Kyuka Uchiwa
-            21658, -- Brave Blade II
-            21770, -- Helgoland
-            21863, -- Tzee Xicu's Blade
-            21967, -- Melon Slicer
-            22017, -- Seika Uchiwa
-            22069, -- Hapy Staff
-            22072, -- Lamia Staff
-            27625, -- Morbol Shield
-            27631, -- Cait Sith Guard
-            28652, -- Hatchling Shield
-            28655, -- Slime Shield
+        --    18102, -- Pitchfork
+        --    18441, -- Shinai
+        --    18864, -- Dream Bell +1
+        --    20532, -- Worm Feelers
+        --    20577, -- Chicken Knife II
+        --    20713, -- Excalipoor
+        --    20909, -- Hoe
+        --    21107, -- Kyuka Uchiwa
+        --    21658, -- Brave Blade II
+        --    21770, -- Helgoland
+        --    21863, -- Tzee Xicu's Blade
+        --    21967, -- Melon Slicer
+        --    22017, -- Seika Uchiwa
+        --    22069, -- Hapy Staff
+        --    22072, -- Lamia Staff
+        --    27625, -- Morbol Shield
+        --    27631, -- Cait Sith Guard
+        --    28652, -- Hatchling Shield
+        --    28655, -- Slime Shield
 
         -- Cycle #3
-            -- 10808, -- Janus Guard
-            -- 10811, -- Chocobo Shield
-            -- 18399, -- Charm Wand
-            -- 18464, -- Ark Tachi
-            -- 18545, -- Ark Tabar
-            -- 18563, -- Ark Scythe
-            -- 18912, -- Ark Saber
-            -- 18913, -- Ark Sword
-            -- 20573, -- Aern Dagger
-            -- 20674, -- Aern Sword
-            -- 20953, -- Escritorio
-            -- 21509, -- Premium Mogti
-            -- 21682, -- Lament
-            -- 21742, -- Aern Axe
-            -- 21759, -- Autarch's Axe
-            -- 21860, -- Aern Spear
-            -- 22004, -- Soulflayer's Wand
-            -- 22065, -- Aern Staff
-            -- 26489, -- Troth
+            10808, -- Janus Guard
+            10811, -- Chocobo Shield
+            18399, -- Charm Wand
+            18464, -- Ark Tachi
+            18545, -- Ark Tabar
+            18563, -- Ark Scythe
+            18912, -- Ark Saber
+            18913, -- Ark Sword
+            20573, -- Aern Dagger
+            20674, -- Aern Sword
+            20953, -- Escritorio
+            21509, -- Premium Mogti
+            21682, -- Lament
+            21742, -- Aern Axe
+            21759, -- Autarch's Axe
+            21860, -- Aern Spear
+            22004, -- Soulflayer's Wand
+            22065, -- Aern Staff
+            26489, -- Troth
 
         -- Cycle #4
             -- 10809, -- Moogle Guard
@@ -514,42 +514,42 @@ local prizes =
             -- 28587, -- Artificer's Ring
 
         -- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
-            11343, -- Thrakon Breastplate
-            11538, -- Nexus Cape
-            11546, -- Aesir Mantle
-            11547, -- Colossus's Mantle
-            11589, -- Aesir Torque
-            11590, -- Colossus's Torque
-            13177, -- Stone Gorget
-            14889, -- Barbarian Mittens
-            15457, -- Swift Belt
-            16035, -- Altdorf's Earring
-            16036, -- Wilhelm's Earring
-            16057, -- Aesir Ear Pendant
-            16058, -- Colossus's Earring
-            17208, -- Hamayumi
-            17466, -- Dia Wand
-            18019, -- X's Knife
-            18057, -- Y's Scythe
-            18101, -- Z's Trident
-            27556, -- Echad Ring
+        --    11343, -- Thrakon Breastplate
+        --    11538, -- Nexus Cape
+        --    11546, -- Aesir Mantle
+        --    11547, -- Colossus's Mantle
+        --    11589, -- Aesir Torque
+        --    11590, -- Colossus's Torque
+        --    13177, -- Stone Gorget
+        --    14889, -- Barbarian Mittens
+        --    15457, -- Swift Belt
+        --    16035, -- Altdorf's Earring
+        --    16036, -- Wilhelm's Earring
+        --    16057, -- Aesir Ear Pendant
+        --    16058, -- Colossus's Earring
+        --    17208, -- Hamayumi
+        --    17466, -- Dia Wand
+        --    18019, -- X's Knife
+        --    18057, -- Y's Scythe
+        --    18101, -- Z's Trident
+        --    27556, -- Echad Ring
 
         -- Cycle #3 -- WOTG Nations
-            -- 14589, -- Fourth Brunne
-            -- 14590, -- Cobra Harness
-            -- 14591, -- Cobra Robe
-            -- 15010, -- Fourth Hentzes
-            -- 15011, -- Cobra Mittens
-            -- 15012, -- Cobra Gloves
-            -- 15756, -- Fourth Schuhs
-            -- 15757, -- Cobra Leggings
-            -- 15758, -- Cobra Crackows
-            -- 16147, -- Fourth Haube
-            -- 16148, -- Cobra Cap
-            -- 16149, -- Cobra Cloche
-            -- 16316, -- Fourth Schoss
-            -- 16317, -- Cobra Subligar
-            -- 16318, -- Cobra Trews
+            14589, -- Fourth Brunne
+            14590, -- Cobra Harness
+            14591, -- Cobra Robe
+            15010, -- Fourth Hentzes
+            15011, -- Cobra Mittens
+            15012, -- Cobra Gloves
+            15756, -- Fourth Schuhs
+            15757, -- Cobra Leggings
+            15758, -- Cobra Crackows
+            16147, -- Fourth Haube
+            16148, -- Cobra Cap
+            16149, -- Cobra Cloche
+            16316, -- Fourth Schoss
+            16317, -- Cobra Subligar
+            16318, -- Cobra Trews
 
         -- Cycle #4 -- Assault gear
             -- 14525, -- Amir Korazin
@@ -618,31 +618,31 @@ local prizes =
             -- 28586, -- Craftmaster's Ring
 
         -- Cycle #2 -- Divine Might/Apocalypse Nigh
-            14740, -- Knight's Earring
-            14741, -- Abyssal Earring
-            14742, -- Beastly Earring
-            14743, -- Bushinomimi
-            15962, -- Static Earring
-            15963, -- Magnetic Earring
-            15964, -- Hollow Earring
-            15965, -- Ethereal Earring
+        --    14740, -- Knight's Earring
+        --    14741, -- Abyssal Earring
+        --    14742, -- Beastly Earring
+        --    14743, -- Bushinomimi
+        --    15962, -- Static Earring
+        --    15963, -- Magnetic Earring
+        --    15964, -- Hollow Earring
+        --    15965, -- Ethereal Earring
 
         -- Cycle #3 -- Useful NM drops/MMM
-            -- 13303, -- Jelly Ring
-            -- 13567, -- Bomb Queen Ring
-            -- 13915, -- Optical Hat
-            -- 14469, -- Reverend Mail
-            -- 14986, -- Ochimusha Kote
-            -- 15221, -- Patroclus's Helm
-            -- 15224, -- Empress Hairpin
-            -- 15351, -- Bounding Boots
-            -- 15515, -- Peacock Amulet
-            -- 15736, -- Trotter Boots
-            -- 15737, -- Sarutobi Kyahan
-            -- 17759, -- Koggelmander
-            -- 18714, -- Vali's Bow
-            -- 18752, -- Retaliators
-            -- 19236, -- Hightail Bullet
+            13303, -- Jelly Ring
+            13567, -- Bomb Queen Ring
+            13915, -- Optical Hat
+            14469, -- Reverend Mail
+            14986, -- Ochimusha Kote
+            15221, -- Patroclus's Helm
+            15224, -- Empress Hairpin
+            15351, -- Bounding Boots
+            15515, -- Peacock Amulet
+            15736, -- Trotter Boots
+            15737, -- Sarutobi Kyahan
+            17759, -- Koggelmander
+            18714, -- Vali's Bow
+            18752, -- Retaliators
+            19236, -- Hightail Bullet
 
         -- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
             -- 3340,  -- Sweet Tea (Nidhogg pop)
