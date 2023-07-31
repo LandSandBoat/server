@@ -1,0 +1,211 @@
+-----------------------------------
+-- Brygid the Stylist Returns
+-----------------------------------
+-- Log ID: 1, Quest ID: 74
+-- Brygid : !pos -90 -4 -108 235
+-----------------------------------
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
+-----------------------------------
+
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+
+quest.reward =
+{
+    fame     = 30,
+    fameArea = xi.quest.fame_area.BASTOK,
+    title    = xi.title.BASTOKS_SECOND_BEST_DRESSED,
+}
+
+local requestedBodyItems =
+{
+    xi.items.BREASTPLATE,
+    xi.items.SILVER_MAIL,
+    xi.items.BANDED_MAIL,
+    xi.items.CUIR_BOUILLI,
+    xi.items.RAPTOR_JERKIN,
+    xi.items.PADDED_ARMOR,
+    xi.items.GAMBISON,
+    xi.items.WOOL_GAMBISON,
+    xi.items.VELVET_ROBE,
+    xi.items.SILK_COAT,
+    xi.items.CLOAK,
+    xi.items.WHITE_CLOAK,
+    xi.items.BEAK_JERKIN,
+    xi.items.CARAPACE_HARNESS,
+    xi.items.PYRO_ROBE,
+    xi.items.FROST_ROBE,
+    xi.items.LINEN_DOUBLET,
+    xi.items.WOOL_DOUBLET,
+    xi.items.IRON_SCALE_MAIL,
+    xi.items.BISHOPS_ROBE,
+}
+
+local requestedLegItems =
+{
+    xi.items.CUISSES,
+    xi.items.SILVER_HOSE,
+    xi.items.BREECHES,
+    xi.items.CUIR_TROUSERS,
+    xi.items.RAPTOR_TROUSERS,
+    xi.items.BEAK_TROUSERS,
+    xi.items.IRON_SUBLIGAR,
+    xi.items.CARAPACE_SUBLIGAR,
+    xi.items.SCORPION_SUBLIGAR,
+    xi.items.HOSE,
+    xi.items.WOOL_HOSE,
+    xi.items.VELVET_SLOPS,
+    xi.items.SILK_SLOPS,
+    xi.items.LINEN_SLACKS,
+    xi.items.WHITE_SLACKS,
+    xi.items.IRON_CUISSES,
+}
+
+-- [option] = { rewardItem, requiredItem }
+local optionToItems =
+{
+    [ 1] = { xi.items.DUENDE_COTEHARDIE,   xi.items.ARIES_SUBLIGAR       },
+    [ 2] = { xi.items.NOKIZARU_GI,         xi.items.TAURUS_SUBLIGAR      },
+    [ 3] = { xi.items.RAPPAREE_HARNESS,    xi.items.GEMINI_SUBLIGAR      },
+    [ 4] = { xi.items.SHINIMUSHA_HARA_ATE, xi.items.CANCER_SUBLIGAR      },
+    [ 5] = { xi.items.WYVERN_MAIL,         xi.items.LEO_SUBLIGAR         },
+    [ 6] = { xi.items.SHIKAREE_AKETON,     xi.items.VIRGO_SUBLIGAR       },
+    [ 7] = { xi.items.CERISE_DOUBLET,      xi.items.LIBRA_SUBLIGAR       },
+    [ 8] = { xi.items.GLAMOR_JUPON,        xi.items.SCORPIUS_SUBLIGAR    },
+    [ 9] = { xi.items.GLOOM_BREASTPLATE,   xi.items.SAGITTARIUS_SUBLIGAR },
+    [10] = { xi.items.NIMBUS_DOUBLET,      xi.items.CAPRICORNUS_SUBLIGAR },
+    [11] = { xi.items.AIKIDO_GI,           xi.items.AQUARIUS_SUBLIGAR    },
+    [12] = { xi.items.PARADE_CUIRASS,      xi.items.PISCES_SUBLIGAR      },
+    [13] = { xi.items.GAUDY_HARNESS,       xi.items.OPHIUCHUS_SUBLIGAR   },
+}
+
+local getRandomEquippableItem = function(player, itemList)
+    -- To not repeatedly select a random number and compare, first generate a list
+    -- of known items that can be equipped.
+    local equippableItems = {}
+
+    for _, itemId in ipairs(itemList) do
+        if player:canEquipItem(itemId, false) then
+            table.insert(equippableItems, itemId)
+        end
+    end
+
+    return equippableItems[math.random(1, #equippableItems)]
+end
+
+local hasArtifactArmorEquipped = function(player)
+    for equipSlot = xi.slot.HEAD, xi.slot.FEET do
+        if xi.equip.isArtifactArmor(player:getEquipID(equipSlot)) then
+            return true
+        end
+    end
+
+    return false
+end
+
+quest.sections =
+{
+    {
+        check = function(player, status, vars)
+            return status ~= QUEST_ACCEPTED and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST) and
+                hasArtifactArmorEquipped(player)
+        end,
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Brygid'] =
+            {
+                onTrigger = function(player, npc)
+                    local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.items.ROBE and 1 or 0
+                    local requestedBody   = getRandomEquippableItem(player, requestedBodyItems)
+                    local requestedLegs   = getRandomEquippableItem(player, requestedLegItems)
+
+                    quest:setVar(player, 'requestedBody', requestedBody)
+                    quest:setVar(player, 'requestedLegs', requestedLegs)
+
+                    return quest:progressEvent(380, hasRobeEquipped, requestedBody, requestedLegs, player:getMainJob())
+                end,
+            },
+
+            onEventFinish =
+            {
+                [380] = function(player, csid, option, npc)
+                    player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+                    quest:begin(player)
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_ACCEPTED
+        end,
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Brygid'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, optionToItems[quest:getVar(player, 'Option')][2]) then
+                        return quest:progressEvent(383)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    local questOption = quest:getVar(player, 'Option')
+
+                    if questOption == 0 then
+                        if
+                            player:getEquipID(xi.slot.BODY) == quest:getVar(player, 'requestedBody') and
+                            player:getEquipID(xi.slot.LEGS) == quest:getVar(player, 'requestedLegs')
+                        then
+                            return quest:progressEvent(382)
+                        else
+                            local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.items.ROBE and 1 or 0
+                            local requestedBody   = quest:getVar(player, 'requestedBody')
+                            local requestedLegs   = quest:getVar(player, 'requestedLegs')
+
+                            return quest:event(381, hasRobeEquipped, requestedBody, requestedLegs, player:getMainJob())
+                        end
+                    else
+                        local optionList = optionToItems[questOption]
+
+                        return quest:event(385, 0, optionList[1], optionList[2])
+                    end
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [382] = function(player, csid, option, npc)
+                    local rewardItem     = xi.items.DUENDE_COTEHARDIE - 1 + option
+                    local canEquipReward = player:canEquipItem(rewardItem, true) and 1 or 0
+                    local hasReward      = not player:hasItem(rewardItem) and 1 or 0
+
+                    player:updateEvent(0, option - 1, hasReward, canEquipReward)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [382] = function(player, csid, option, npc)
+                    if option ~= 99 then
+                        quest:setVar(player, 'Option', option)
+                    end
+                end,
+
+                [383] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, optionToItems[quest:getVar(player, 'Option')][1]) then
+                        quest:complete(player)
+                    end
+                end,
+            },
+        },
+    },
+}
+
+return quest
