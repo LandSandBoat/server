@@ -416,6 +416,14 @@ UPDATE mob_groups SET minLevel = 75, maxLevel = 78 WHERE name = "Aerns_Wynav" an
 UPDATE mob_groups SET minLevel = 75, maxLevel = 78 WHERE name = "Aerns_Euvhi" and zoneid = 35;
 
 -- ------------------------------------------------------------
+-- Dynamis-Tavnazia (Zone 42)
+-- ------------------------------------------------------------
+UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Hornet" and zoneid = 42;
+UPDATE mob_groups SET HP = 7200 WHERE name = "Nightmare_Bugard" and zoneid = 42;
+UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Taurus" and zoneid = 42;
+UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Makara" and zoneid = 42;
+
+-- ------------------------------------------------------------
 -- West_Ronfaure (Zone 100)
 -- ------------------------------------------------------------
 

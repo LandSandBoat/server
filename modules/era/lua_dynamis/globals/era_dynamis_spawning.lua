@@ -22,6 +22,7 @@ require("modules/module_utils")
 require("modules/era/lua_dynamis/mobs/era_beaucedine_mobs")
 require("modules/era/lua_dynamis/mobs/era_buburimu_mobs")
 require("modules/era/lua_dynamis/mobs/era_qufim_mobs")
+require("modules/era/lua_dynamis/mobs/era_tavnazia_mobs")
 require("modules/era/lua_dynamis/mobs/era_valkurm_mobs")
 require("modules/era/lua_dynamis/mobs/era_xarcabard_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_bastok_mobs")
@@ -29,6 +30,7 @@ require("modules/era/lua_dynamis/mob_spawning_files/dynamis_beaucedine_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_buburimu_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_jeuno_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_qufim_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_tavnazia_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_san_d_oria_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_valkurm_mobs")
 require("modules/era/lua_dynamis/mob_spawning_files/dynamis_windurst_mobs")
@@ -146,16 +148,16 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         --{
             -- [ZoneID] -- If applicable
             --{
-                -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+                -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
             -- },
             -- [ZoneID] -- If applicable
             --{
                 -- [FloorVar]
                 -- {
-                    -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+                    -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
                 --  },
             -- },
-            -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList },
+            -- [JobID] = { Name, groupId, groupZoneId, SpellList, SkillList, flags, skipSpawnAnimation },
         -- },
         [4] = -- Vanguard Eye
         {
@@ -363,8 +365,8 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             },
             [xi.zone.DYNAMIS_TAVNAZIA] =
             {
-                [359] = { 0 }, -- Hydra
-                [358] = { 0 }, -- Kindred
+                [359] = { 1342 }, -- Hydra
+                [358] = { 1441 }, -- Kindred
             },
             [xi.zone.DYNAMIS_VALKURM] =
             {
@@ -390,8 +392,8 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         local nameObj = nil
         local spawnAnim = oMob ~= nil
         if oMob:getFamily() == 4 then
-            if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
-                nameObj = normalMobLookup[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
+            if xi.dynamis.mobList[mobZoneID][oMobIndex].info[6] == 2 or xi.dynamis.mobList[mobZoneID][oMobIndex].info[6] == 3 then
+                nameObj = normalMobLookup[mobFamily][mobZoneID][xi.dynamis.mobList[mobZoneID][oMobIndex].info[6]]
             else
                 nameObj = normalMobLookup[mobFamily][mobZoneID]
             end
@@ -482,6 +484,14 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     local zone = GetZone(zoneID)
     local nonStandardLookup =
     {
+        -- 1 - name
+        -- 2 - groupId
+        -- 3 - groupZoneId
+        -- 4 - dropId
+        -- 5 - spellList
+        -- 6 - skillList
+        -- 7 - Type of mob
+        -- 8 - flags
         ["Statue"] =
         {
             ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 4 }, -- Vanguard Eye (VEye)
@@ -512,14 +522,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Raven"] = { "N. Raven" , 100, 40, 1788, 0, 55 }, -- NRav
             ["Nightmare Scorpion"] = { "N. Scorpion" , 96, 40, 1787, 0, 217 }, -- NSco
             ["Nightmare Urganite"] = { "N. Urganite" , 95, 40, 1785, 0, 251 }, -- NUrg
-            ["Nightmare Cluster"] = { "N. Cluster" , 130, 134, 0, 0, 68 }, -- NClu
-            ["Nightmare Hornet"] = { "N. Hornet" , 130, 134, 0, 0, 48 }, -- NHor
-            ["Nightmare Leech"] = { "N. Leech" , 130, 134, 0, 0, 172 }, -- NLee
-            ["Nightmare Makara"] = { "N. Makara" , 130, 134, 0, 0, 197 }, -- NMak
-            ["Nightmare Taurus"] = { "N. Taurus" , 130, 134, 0, 0, 240 }, -- NTau
-            ["Nightmare Antlion"] = { "N. Antlion" , 130, 134, 0, 0, 26 }, -- NAnt
-            ["Nightmare Bugard"] = { "N. Bugard" , 130, 134, 0, 0, 58 }, -- NBug
-            ["Nightmare Worm"] = { "N. Worm" , 130, 134, 0, 0, 258 }, -- NWor
+            ["Nightmare Cluster"] = { "N. Cluster" , 40, 42, 1786, 0, 68 }, -- NClu
+            ["Nightmare Hornet"] = { "N. Hornet" , 10, 42, 1795, 0, 48 }, -- NHor
+            ["Nightmare Leech"] = { "N. Leech" , 41, 42, 1796, 0, 172 }, -- NLee
+            ["Nightmare Makara"] = { "N. Makara" , 34, 42, 1797, 0, 197 }, -- NMak
+            ["Nightmare Taurus"] = { "N. Taurus" , 33, 42, 2854, 0, 240 }, -- NTau
+            ["Nightmare Bugard"] = { "N. Bugard" , 6, 42, 1795, 0, 58 }, -- NBug
             ["Nightmare Hippogryph"] = { "N. Hippogryph" , 2, 39, 1792, 0, 141 }, -- NHip
             ["Nightmare Manticore"] = { "N. Manticore" , 3, 39, 1799, 0, 179 }, -- NMat
             ["Nightmare Sabotender"] = { "N. Sabotender" , 11, 39, 1792, 0, 212 }, -- NSab
@@ -593,10 +601,10 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Nightmare"] =
         {
-            ["onMobSpawn"] = { function(mob) xi.dynamis.setNightmareStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end },
+            ["onMobSpawn"] = { function(mob) xi.dynamis.setNightmareStats(mob) end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob) end },
-            ["onMobRoam"] = { function(mob) end },
+            ["onMobRoam"] = { function(mob) xi.dynamis.mobOnRoam(mob) end },
             ["mixins"] = {  }
         },
         ["Beastmen"] =
@@ -696,7 +704,9 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     if nonStandardLookup[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
         mob:setMobMod(xi.mobMod.SKILL_LIST, nonStandardLookup[mobMobType][mobName][6])
     end
-
+    if nonStandardLookup[mobMobType][mobName][7] ~= nil then -- If Floor
+        mob:setLocalVar("Floor", nonStandardLookup[mobMobType][mobName][7])
+    end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
         mob:setLocalVar("hasMobVar", 1)
@@ -994,6 +1004,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Stringes"] = { "Stringes", 79, 41, 3131, 0, 46, "Enabled Auto Attack" }, -- Stri
         ["Antaeus"] = { "Antaeus", 1, 41, 112, 0, 126, "Antaeus" }, -- Anta
         -- Dynamis - Tavnazia Non-Beastmen
+        ["Nightmare Antlion"] = { "N. Antlion" , 64, 42, 0, 0, 26, "Nightmare Antlion" }, -- NAnt
+        ["Nightmare Worm"] = { "N. Worm" , 7, 42, 1807, 5075, 4048, "Nightmare Worm" }, -- NWor
+        ["Umbral Diabolos"] = { "U. Diabolos", 4, 42, 0, nil, nil, "Enabled Auto Attack" }, -- UmbD
         ["Diabolos Club"] = { "D. Club", 4, 42, 0, nil, nil, "Diabolos Club" }, -- DiaC
         ["Diabolos Diamond"] = { "D. Diamond", 3, 42, 0, nil, nil, "Diabolos Diamond" }, -- DiaD
         ["Diabolos Heart"] = { "D. Heart", 2, 42, 0, nil, nil, "Diabolos Heart" }, -- DiaH
@@ -1290,16 +1303,33 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
                 xi.dynamis.setNMStats(mob)
                 mob:addImmunity(xi.immunity.SLEEP)
             end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
+            ["mixins"] = {   },
+        },
+        ["Nightmare Worm"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnNightmareWorm(mob) end },
+            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) mob:triggerDrawIn(mob, true, 1, 35, target) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob) xi.dynamis.wormDeath(mob) end },
+            ["mixins"] = {   },
+        },
+        ["Nightmare Antlion"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnNightmareAntlion(mob) end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob, target) end },
             ["onMobRoam"] = { function(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
             ["onMobWeaponSkillPrepare"] = { function(mob) end },
             ["onMobWeaponSkill"] = { function(mob) end },
-            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
-            ["mixins"] = {   },
-        }
-        ,
+            ["onMobDeath"] = { function(mob) xi.dynamis.antlionDeath(mob) end },
+            ["mixins"] = { require("scripts/mixins/families/antlion_ambush") },
+        },
     }
 
     if xi.dynamis.nmInfoLookup[mobName][8] then
@@ -1927,6 +1957,12 @@ xi.dynamis.setNightmareStats = function(mob)
 
         -- Add Check After Calcs
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+
+        if mob:getZone():getID() == xi.zone.DYNAMIS_TAVNAZIA then
+            mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+        else
+            mob:setRoamFlags(xi.roamFlag.NONE)
+        end
     end
 end
 
@@ -2086,13 +2122,13 @@ xi.dynamis.teleport = function(mob, hideDuration)
 end
 
 xi.dynamis.addParentListeners = function(mob)
-        mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
-            xi.dynamis.parentOnEngaged(mobArg, attacker)
-        end)
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
 
-        mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
-            xi.dynamis.parentOnEngaged(mobArg, target)
-        end)
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
 end
 
 --------------------------------------------
@@ -2117,6 +2153,17 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
 
         if mobIndex ~= 0 and mobIndex ~= nil then
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
+        end
+
+        if mobIndex ~= nil and zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+            if
+                mobIndex == 9 or
+                mobIndex == 15 or
+                mobIndex == 67 or
+                mobIndex == 75
+            then
+                xi.dynamis.tavQMSpawnCheck(mob, zone, zoneID) -- Check to see if the ??? can spawn.
+            end
         end
 
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
