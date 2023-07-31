@@ -257,7 +257,7 @@ const std::string& CItem::getName()
     return m_name;
 }
 
-void CItem::setName(std::string name)
+void CItem::setName(std::string const& name)
 {
     m_name = name;
 }
@@ -273,7 +273,7 @@ const std::string& CItem::getSender()
     return m_send;
 }
 
-void CItem::setSender(std::string sender)
+void CItem::setSender(std::string const& sender)
 {
     m_send = sender;
 }
@@ -289,7 +289,7 @@ const std::string& CItem::getReceiver()
     return m_recv;
 }
 
-void CItem::setReceiver(std::string receiver)
+void CItem::setReceiver(std::string const& receiver)
 {
     m_recv = receiver;
 }
@@ -308,7 +308,7 @@ const std::string CItem::getSignature()
     return signature; // return string copy
 }
 
-void CItem::setSignature(std::string signature)
+void CItem::setSignature(std::string const& signature)
 {
     memset(m_extra + 0x0C, 0, sizeof(m_extra) - 0x0C);
     memcpy(m_extra + 0x0C, signature.c_str(), signature.size());

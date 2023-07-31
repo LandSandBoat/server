@@ -142,7 +142,7 @@ void CInstance::RegisterChar(CCharEntity* PChar)
     {
         m_commander = PChar->id;
     }
-    m_registeredChars.push_back(PChar->id);
+    m_registeredChars.emplace_back(PChar->id);
 }
 
 uint8 CInstance::GetLevelCap() const

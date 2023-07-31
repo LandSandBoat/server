@@ -230,17 +230,17 @@ private:
     time_point             m_StartTime;
     time_point             m_Tick;
     time_point             m_FightTick;
-    duration               m_TimeLimit;
+    duration               m_TimeLimit{};
     time_point             m_WipeTime;
-    duration               m_FinishTime;
-    duration               m_LastPromptTime;
+    duration               m_FinishTime{};
+    duration               m_LastPromptTime{};
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
     uint32     m_armouryCrate = 0;
     const bool m_isInteraction;
 
-    time_point m_cleanupTime;
+    time_point m_cleanupTime{};
     bool       m_cleanedPlayers = false;
     bool       m_Cleanup        = false;
     bool       m_Attacked       = false;

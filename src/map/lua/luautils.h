@@ -126,8 +126,8 @@ namespace luautils
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
-    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry = false);
-    auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
+    void CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry = false);
+    auto GetCacheEntryFromFilename(std::string const& filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
 
     void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
@@ -329,7 +329,7 @@ namespace luautils
     void OnPlayerLevelDown(CCharEntity* PChar);
     void OnPlayerMount(CCharEntity* PChar);
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string const& text);
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre); // chocobo digging, pre = check
 

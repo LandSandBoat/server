@@ -74,7 +74,7 @@ private:
 
     blowfish_t blowfish;
 
-    int8 key[24];
+    int8 key[24]{};
 
     int32 decipher();
     int32 CheckPacketHash();

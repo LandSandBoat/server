@@ -443,8 +443,8 @@ void data_session::read_func()
             {
                 // Log clients IP info when player spawns into map server
 
-                time_t rawtime;
-                tm     convertedTime;
+                time_t rawtime{};
+                tm     convertedTime{};
                 time(&rawtime);
                 _localtime_s(&convertedTime, &rawtime);
 

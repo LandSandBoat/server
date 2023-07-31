@@ -193,7 +193,7 @@ void CTransportHandler::InitializeTransport()
                 continue;
             }
 
-            townZoneList.push_back(zoneTown);
+            townZoneList.emplace_back(zoneTown);
         }
     }
 
@@ -208,7 +208,7 @@ void CTransportHandler::InitializeTransport()
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            TransportZone_Voyage voyageZone;
+            TransportZone_Voyage voyageZone{};
 
             voyageZone.voyageZone = nullptr;
             voyageZone.voyageZone = zoneutils::GetZone((uint8)sql->GetUIntData(0));
@@ -224,7 +224,7 @@ void CTransportHandler::InitializeTransport()
 
                 voyageZone.state = STATE_TRANSPORTZONE_INIT;
 
-                voyageZoneList.push_back(voyageZone);
+                voyageZoneList.emplace_back(voyageZone);
             }
             else
             {
@@ -487,7 +487,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     elevator.LowerDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_CLOSE_DOOR : ANIMATION_OPEN_DOOR;
     elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_OPEN_DOOR : ANIMATION_CLOSE_DOOR;
 
-    ElevatorList.push_back(elevator);
+    ElevatorList.emplace_back(elevator);
 }
 
 /************************************************************************

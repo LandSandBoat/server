@@ -23,7 +23,7 @@
 
 Watchdog::Watchdog(duration timeout, std::function<void()> callback)
 : m_timeout(timeout)
-, m_callback(callback)
+, m_callback(std::move(callback))
 , m_lastUpdate(server_clock::now())
 , m_running(true)
 {

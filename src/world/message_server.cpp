@@ -30,17 +30,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct chat_message_t
 {
-    uint64         dest;
-    MSGSERVTYPE    type;
-    zmq::message_t data;
-    zmq::message_t packet;
+    uint64         dest = 0;
+    MSGSERVTYPE    type{};
+    zmq::message_t data{};
+    zmq::message_t packet{};
 };
 
 struct zone_settings_t
 {
-    uint16 zoneid;
-    uint64 ipp;
-    uint32 misc;
+    uint16 zoneid = 0;
+    uint64 ipp    = 0;
+    uint32 misc   = 0;
 };
 
 namespace
@@ -102,7 +102,7 @@ std::string ipp_to_string(uint64 ipp)
     // Ip / port pair is stored as uint32 port MSB and uint32 Ip LSB
     uint32  port = (uint32)(ipp >> 32);
     uint32  ip   = (uint32)(ipp);
-    in_addr target;
+    in_addr target{};
     target.s_addr = ip;
     char target_address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
@@ -326,7 +326,7 @@ void cache_zone_settings()
         inet_pton(AF_INET, sql->GetStringData(1).c_str(), &ip);
         uint64 port = sql->GetUIntData(2);
 
-        zone_settings_t zone_settings;
+        zone_settings_t zone_settings{};
         zone_settings.zoneid = sql->GetUInt64Data(0);
         zone_settings.ipp    = ip | (port << 32);
         zone_settings.misc   = sql->GetUIntData(3);
