@@ -3009,6 +3009,366 @@ xi.magian.trials =
         },
     },
 
+    [4156] = -- Ravager's mask -> Ravager's mask +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_MASK,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.RAVAGERS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_MASK_P1,
+        },
+    },
+
+    [4157] = -- Tantra Crown -> Tantra Crown +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_CROWN,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.TANTRA_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_CROWN_P1,
+        },
+    },
+
+    [4158] = -- Orison Cap -> Orison Cap +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_CAP,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.ORISON_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_CAP_P1,
+        },
+    },
+
+    [4159] = -- Goetia Petasos -> Goetia Petasos +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_PETASOS,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.GOETIA_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_PETASOS_P1,
+        },
+    },
+
+    [4160] = -- Estoqueur's Chappel -> Estoqueur's Chappel +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_CHAPPEL,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.ESTOQUEURS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_CHAPPEL_P1,
+        },
+    },
+
+    [4161] = -- Raider's Bonnet -> Raider's Bonnet +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_BONNET,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.RAIDERS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_BONNET_P1,
+        },
+    },
+
+    [4162] = -- Creed Armet -> Creed Armet +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_ARMET,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.CREED_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_ARMET_P1,
+        },
+    },
+
+    [4163] = -- Bale Burgeonet -> Bale Burgeonet +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_BURGEONET,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.BALE_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_BURGEONET_P1,
+        },
+    },
+
+    [4164] = -- Ferine Cabasset -> Ferine Cabasset +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_CABASSET,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.FERINE_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_CABASSET_P1,
+        },
+    },
+
+    [4165] = -- Aoidos' Calot -> Aoidos' Calot +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_CALOT,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.AOIDOS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_CALOT_P1,
+        },
+    },
+
+    [4166] = -- Sylvan Gapette -> Sylvan Gapette +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_GAPETTE,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.SYLVAN_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_GAPETTE_P1,
+        },
+    },
+
+    [4167] = -- Unkai Kabuto -> Unkai Kabuto +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_KABUTO,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.UNKAI_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_KABUTO_P1,
+        },
+    },
+
+    [4168] = -- Iga Zukin -> Iga Zukin +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_ZUKIN,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.IGA_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_ZUKIN_P1,
+        },
+    },
+
+    [4169] = -- Lancer's Mezail -> Lancer's Mezail +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_MEZAIL,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.LANCERS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_MEZAIL_P1,
+        },
+    },
+
+    [4170] = -- Caller's Horn -> Caller's Horn +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_HORN,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.CALLERS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_HORN_P1,
+        },
+    },
+
+    [4171] = -- Mavi Kavuk -> Mavi Kavuk +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_KAVUK,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.MAVI_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_KAVUK_P1,
+        },
+    },
+
+    [4172] = -- Navarch's Tricorne -> Navarch's Tricorne +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_TRICORNE,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.NAVARCHS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_TRICORNE_P1,
+        },
+    },
+
+    [4173] = -- Cirque Cappello -> Cirque Cappello +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_CAPPELLO,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.CIRQUE_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_CAPPELLO_P1,
+        },
+    },
+
+    [4174] = -- Charis Tiara -> Charis Tiara +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_TIARA,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.CHARIS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_TIARA_P1,
+        },
+    },
+
+    [4175] = -- Savant's Bonnet -> Savant's Bonnet +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_BONNET,
+        },
+
+        textOffset  = 1049,
+        tradeItem   = xi.items.SAVANTS_SEAL_HEAD,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_BONNET_P1,
+        },
+    },
+
     [4654] = -- Warrior's Mask -> Warrior's Mask +2 - 50 Forgotten Thought
     {
         previousTrial = 0,
