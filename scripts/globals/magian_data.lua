@@ -3369,6 +3369,366 @@ xi.magian.trials =
         },
     },
 
+    [4316] = -- Ravager's Mufflers -> Ravager's Mufflers +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_MUFFLERS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.RAVAGERS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_MUFFLERS_P1,
+        },
+    },
+
+    [4317] = -- Tantra Gloves -> Tantra Gloves +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_GLOVES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.TANTRA_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_GLOVES_P1,
+        },
+    },
+
+    [4318] = -- Orison Mitts -> Orison Mitts +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_MITTS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.ORISON_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_MITTS_P1,
+        },
+    },
+
+    [4319] = -- Goetia Gloves -> Goetia Gloves +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_GLOVES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.GOETIA_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_GLOVES_P1,
+        },
+    },
+
+    [4320] = -- Estoqueur's Gantherots -> Estoqueur's Gantherots +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_GANTHEROTS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.ESTOQUEURS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_GANTHEROTS_P1,
+        },
+    },
+
+    [4321] = -- Raider's Armlets -> Raider's Armlets +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_ARMLETS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.RAIDERS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_ARMLETS_P1,
+        },
+    },
+
+    [4322] = -- Creed Gauntlets -> Creed Gauntlets +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_GAUNTLETS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.CREED_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_GAUNTLETS_P1,
+        },
+    },
+
+    [4323] = -- Bale Gauntlets -> Bale Gauntlets +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_GAUNTLETS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.BALE_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_GAUNTLETS_P1,
+        },
+    },
+
+    [4324] = -- Ferine Manoplas -> Ferine Manoplas +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_MANOPLAS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.FERINE_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_MANOPLAS_P1,
+        },
+    },
+
+    [4325] = -- Aoidos' Manchettes -> Aoidos' Manchettes +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_MANCHETTES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.AOIDOS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_MANCHETTES_P1,
+        },
+    },
+
+    [4326] = -- Sylvan Glovelettes -> Sylvan Glovelettes +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_GLOVELETTES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.SYLVAN_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_GLOVELETTES_P1,
+        },
+    },
+
+    [4327] = -- Unkai Kote -> Unkai Kote +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_KOTE,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.UNKAI_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_KOTE_P1,
+        },
+    },
+
+    [4328] = -- Iga Tekko -> Iga Tekko +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_TEKKO,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.IGA_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_TEKKO_P1,
+        },
+    },
+
+    [4329] = -- Lancer's Vambraces -> Lancer's Vambraces +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_VAMBRACES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.LANCERS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_VAMBRACES_P1,
+        },
+    },
+
+    [4330] = -- Caller's Bracers -> Caller's Bracers +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_BRACERS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.CALLERS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_BRACERS_P1,
+        },
+    },
+
+    [4331] = -- Mavi Bazubands -> Mavi Bazubands +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_BAZUBANDS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.MAVI_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_BAZUBANDS_P1,
+        },
+    },
+
+    [4332] = -- Navarch's Gants -> Navarch's Gants +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_GANTS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.NAVARCHS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_GANTS_P1,
+        },
+    },
+
+    [4333] = -- Cirque Ganti -> Cirque Ganti +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_GUANTI,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.CIRQUE_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_GUANTI_P1,
+        },
+    },
+
+    [4334] = -- Charis Bangles -> Charis Bangles +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_BANGLES,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.CHARIS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_BANGLES_P1,
+        },
+    },
+
+    [4335] = -- Savant's Bracers -> Savant's Bracers +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_BRACERS,
+        },
+
+        textOffset  = 1053,
+        tradeItem   = xi.items.SAVANTS_SEAL_HANDS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_BRACERS_P1,
+        },
+    },
+
     [4336] = -- Ravager's Lorica -> Ravager's Lorica +1
     {
         previousTrial = 0,
