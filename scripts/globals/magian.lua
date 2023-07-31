@@ -2,11 +2,8 @@
 -- Magian Trial Global
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/items')
 require('scripts/globals/magian_data')
-require('scripts/globals/msg')
 require('scripts/globals/npc_util')
-require('scripts/globals/status')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
@@ -29,7 +26,12 @@ local function getPlayerTrialData(player)
     local playerId  = player:getID()
     local trialData = xi.magian.playerCache[playerId]
 
-    if trialData then
+    -- NOTE: This cached data may vary across processes, therefore as a safety measure, refresh
+    -- the cache any time the player has zoned.
+    if
+        trialData and
+        player:getLocalVar('magianZoned') == 1
+    then
         return trialData
     end
 
@@ -60,14 +62,17 @@ local function getPlayerTrialData(player)
         slotLookup = slotLookup,
     }
 
+    player:setLocalVar('magianZoned', 1)
+
     return xi.magian.playerCache[playerId]
 end
 
 local function getTrialProgress(player, trialId)
     local playerTrials = getPlayerTrialData(player)
+    local trialSlot    = playerTrials.slotLookup[trialId]
 
-    if playerTrials.slotLookup[trialId] then
-        return playerTrials.trialData.progress
+    if trialSlot then
+        return playerTrials.trialData[trialSlot].progress
     end
 
     return nil
@@ -312,12 +317,10 @@ xi.magian.magianOnTrade = function(player, npc, trade)
 
     if
         player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and
-        trade:getSlotCount() == 1
+        trade:getSlotCount() == 1 and
+        itemObj:isType(moogleData[7])
     then
-        if
-            #availableTrials == 0 and
-            itemObj:isType(moogleData[7])
-        then
+        if #availableTrials == 0 then
             -- Invalid/Unsupported Item was Traded
             player:startEvent(moogleData[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32)
 
@@ -366,9 +369,6 @@ xi.magian.magianOnTrade = function(player, npc, trade)
             player:startEvent(moogleData[4], availableTrials[1], availableTrials[2], availableTrials[3], availableTrials[4], 0, itemId)
 
             return
-        else
-            -- TODO: This message should change based on Moogle that has been interacted with
-            player:messageSpecial(ruludeID.text.ITEM_NOT_WEAPON_MAGIAN)
         end
     end
 end
@@ -681,7 +681,7 @@ end
 xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     local optionMod         = bit.band(option, 0xFF)
     local tradedItemId      = player:getLocalVar("tradedItemId")
-    local numRelevantTrials = #getPlayerTrialsByTradeItemId(player, xi.magian.trials[tradedItemId].tradeItem)
+    local numRelevantTrials = #getPlayerTrialsByTradeItemId(player, tradedItemId)
     local maxNumber         = 31 -- TODO: What does this do?  I bet this is a bitmask of active trials, and the shift is cheesing it out of scope
 
     if csid == 10134 then

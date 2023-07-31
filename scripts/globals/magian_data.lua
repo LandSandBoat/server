@@ -2,8 +2,6 @@
 -- Magian Trial Data
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/items')
-require('scripts/globals/status')
 -----------------------------------
 xi = xi or {}
 xi.magian = xi.magian or {}
@@ -3008,6 +3006,3606 @@ xi.magian.trials =
             {
                 [1] = { 45, 10 }, -- DMG:+11
             },
+        },
+    },
+
+    [4654] = -- Warrior's Mask -> Warrior's Mask +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_MASK,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_MASK_P2,
+        },
+    },
+
+    [4655] = -- Warrior's Mask +1 -> Warrior's Mask +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_MASK_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_MASK_P2,
+        },
+    },
+
+    [4656] = -- Warrior's Lorica -> Warrior's Lorica +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_LORICA,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_LORICA_P2,
+        },
+    },
+
+    [4657] = -- Warrior's Lorica +1 -> Warrior's Lorica +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_LORICA_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_LORICA_P2,
+        },
+    },
+
+    [4658] = -- Warrior's Mufflers -> Warrior's Mufflers +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_MUFFLERS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_MUFFLERS_P2,
+        },
+    },
+
+    [4659] = -- Warrior's Mufflers +1 -> Warrior's Mufflers +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_MUFFLERS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_MUFFLERS_P2,
+        },
+    },
+
+    [4660] = -- Warrior's Cuisses -> Warrior's Cuisses +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_CUISSES,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_CUISSES_P2,
+        },
+    },
+
+    [4661] = -- Warrior's Cuisses +1 -> Warrior's Cuisses +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_CUISSES_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_CUISSES_P2,
+        },
+    },
+
+    [4662] = -- Warrior's Calligae -> Warrior's Calligae +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_CALLIGAE,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_CALLIGAE_P2,
+        },
+    },
+
+    [4663] = -- Warrior's Calligae +1 -> Warrior's Calligae +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WARRIORS_CALLIGAE_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WARRIORS_CALLIGAE_P2,
+        },
+    },
+
+    [4664] = -- Melee Crown -> Melee Crown +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_CROWN,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_CROWN_P2,
+        },
+    },
+
+    [4665] = -- Melee Crown +1 -> Melee Crown +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_CROWN_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_CROWN_P2,
+        },
+    },
+
+    [4666] = -- Melee Cyclas -> Melee Cyclas +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_CYCLAS,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_CYCLAS_P2,
+        },
+    },
+
+    [4667] = -- Melee Cyclas +1 -> Melee Cyclas +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_CYCLAS_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_CYCLAS_P2,
+        },
+    },
+
+    [4668] = -- Melee Gloves -> Melee Gloves +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_GLOVES,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_GLOVES_P2,
+        },
+    },
+
+    [4669] = -- Melee Gloves +1 -> Melee Gloves +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_GLOVES_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_GLOVES_P2,
+        },
+    },
+
+    [4670] = -- Melee Hose -> Melee Hose +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_HOSE,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_HOSE_P2,
+        },
+    },
+
+    [4671] = -- Melee Hose +1 -> Melee Hose +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_HOSE_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_HOSE_P2,
+        },
+    },
+
+    [4672] = -- Melee Gaiters -> Melee Gaiters +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_GAITERS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_GAITERS_P2,
+        },
+    },
+
+    [4673] = -- Melee Gaiters +1 -> Melee Gaiters +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MELEE_GAITERS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MELEE_GAITERS_P2,
+        },
+    },
+
+    [4674] = -- Cleric's Cap -> Cleric's Cap +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_CAP,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_CAP_P2,
+        },
+    },
+
+    [4675] = -- Cleric's Cap +1 -> Cleric's Cap +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_CAP_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_CAP_P2,
+        },
+    },
+
+    [4676] = -- Cleric's Briault -> Cleric's Briault +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_BRIAULT,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_BRIAULT_P2,
+        },
+    },
+
+    [4677] = -- Cleric's Briault +1 -> Cleric's Briault +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_BRIAULT_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_BRIAULT_P2,
+        },
+    },
+
+    [4678] = -- Cleric's Mitts -> Cleric's Mitts +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_MITTS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_MITTS_P2,
+        },
+    },
+
+    [4679] = -- Cleric's Mitts +1 -> Cleric's Mitts +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_MITTS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_MITTS_P2,
+        },
+    },
+
+    [4680] = -- Cleric's Pantaloons -> Cleric's Pantaloons +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_PANTALOONS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_PANTALOONS_P2,
+        },
+    },
+
+    [4681] = -- Cleric's Pantaloons +1 -> Cleric's Pantaloons +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_PANTALOONS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_PANTALOONS_P2,
+        },
+    },
+
+    [4682] = -- Cleric's Duckbills -> Cleric's Duckbills +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_DUCKBILLS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_DUCKBILLS_P2,
+        },
+    },
+
+    [4683] = -- Cleric's Duckbills +1 -> Cleric's Duckbills +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CLERICS_DUCKBILLS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLERICS_DUCKBILLS_P2,
+        },
+    },
+
+    [4684] = -- Sorcerer's Petasos -> Sorcerer's Petasos +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_PETASOS,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_PETASOS_P2,
+        },
+    },
+
+    [4685] = -- Sorcerer's Petasos +1 -> Sorcerer's Petasos +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_PETASOS_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_PETASOS_P2,
+        },
+    },
+
+    [4686] = -- Sorcerer's Coat -> Sorcerer's Coat +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_COAT,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_COAT_P2,
+        },
+    },
+
+    [4687] = -- Sorcerer's Coat +1 -> Sorcerer's Coat +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_COAT_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_COAT_P2,
+        },
+    },
+
+    [4688] = -- Sorcerer's Gloves -> Sorcerer's Gloves +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_GLOVES,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_GLOVES_P2,
+        },
+    },
+
+    [4689] = -- Sorcerer's Gloves +1 -> Sorcerer's Gloves +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_GLOVES_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_GLOVES_P2,
+        },
+    },
+
+    [4690] = -- Sorcerer's Tonban -> Sorcerer's Tonban +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_TONBAN,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_TONBAN_P2,
+        },
+    },
+
+    [4691] = -- Sorcerer's Tonban +1 -> Sorcerer's Tonban +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_TONBAN_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_TONBAN_P2,
+        },
+    },
+
+    [4692] = -- Sorcerer's Sabots -> Sorcerer's Sabots +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_SABOTS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_SABOTS_P2,
+        },
+    },
+
+    [4693] = -- Sorcerer's Sabots +1 -> Sorcerer's Sabots +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SORCERERS_SABOTS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SORCERERS_SABOTS_P2,
+        },
+    },
+
+    [4694] = -- Duelist's Chapeau -> Duelist's Chapeau +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_CHAPEAU,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_CHAPEAU_P2,
+        },
+    },
+
+    [4695] = -- Duelist's Chapeau +1 -> Duelist's Chapeau +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_CHAPEAU_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_CHAPEAU_P2,
+        },
+    },
+
+    [4696] = -- Duelist's Tabard -> Duelist's Tabard +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_TABARD,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_TABARD_P2,
+        },
+    },
+
+    [4697] = -- Duelist's Tabard +1 -> Duelist's Tabard +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_TABARD_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_TABARD_P2,
+        },
+    },
+
+    [4698] = -- Duelist's Gloves -> Duelist's Gloves +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_GLOVES,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_GLOVES_P2,
+        },
+    },
+
+    [4699] = -- Duelist's Gloves +1 -> Duelist's Gloves +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_GLOVES_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_GLOVES_P2,
+        },
+    },
+
+    [4700] = -- Duelist's Tights -> Duelist's Tights +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_TIGHTS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_TIGHTS_P2,
+        },
+    },
+
+    [4701] = -- Duelist's Tights +1 -> Duelist's Tights +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_TIGHTS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_TIGHTS_P2,
+        },
+    },
+
+    [4702] = -- Duelist's Boots -> Duelist's Boots +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_BOOTS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_BOOTS_P2,
+        },
+    },
+
+    [4703] = -- Duelist's Boots +1 -> Duelist's Boots +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.DUELISTS_BOOTS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.DUELISTS_BOOTS_P2,
+        },
+    },
+
+    [4704] = -- Assassin's Bonnet -> Assassin's Bonnet +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_BONNET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_BONNET_P2,
+        },
+    },
+
+    [4705] = -- Assassin's Bonnet +1 -> Assassin's Bonnet +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_BONNET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_BONNET_P2,
+        },
+    },
+
+    [4706] = -- Assassin's Vest -> Assassin's Vest +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_VEST,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_VEST_P2,
+        },
+    },
+
+    [4707] = -- Assassin's Vest +1 -> Assassin's Vest +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_VEST_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_VEST_P2,
+        },
+    },
+
+    [4708] = -- Assassin's Armlets -> Assassin's Armlets +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_ARMLETS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_ARMLETS_P2,
+        },
+    },
+
+    [4709] = -- Assassin's Armlets +1 -> Assassin's Armlets +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_ARMLETS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_ARMLETS_P2,
+        },
+    },
+
+    [4710] = -- Assassin's Culottes -> Assassin's Culottes +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_CULOTTES,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_CULOTTES_P2,
+        },
+    },
+
+    [4711] = -- Assassin's Culottes +1 -> Assassin's Culottes +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_CULOTTES_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_CULOTTES_P2,
+        },
+    },
+
+    [4712] = -- Assassin's Poulaines -> Assassin's Poulaines +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_POULAINES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_POULAINES_P2,
+        },
+    },
+
+    [4713] = -- Assassin's Poulaines +1 -> Assassin's Poulaines +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ASSASSINS_POULAINES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ASSASSINS_POULAINES_P2,
+        },
+    },
+
+    [4714] = -- Valor Coronet -> Valor Coronet +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_CORONET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_CORONET_P2,
+        },
+    },
+
+    [4715] = -- Valor Coronet +1 -> Valor Coronet +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_CORONET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_CORONET_P2,
+        },
+    },
+
+    [4716] = -- Valor Surcoat -> Valor Surcoat +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_SURCOAT,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_SURCOAT_P2,
+        },
+    },
+
+    [4717] = -- Valor Surcoat +1 -> Valor Surcoat +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_SURCOAT_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_SURCOAT_P2,
+        },
+    },
+
+    [4718] = -- Valor Gauntlets -> Valor Gauntlets +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_GAUNTLETS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_GAUNTLETS_P2,
+        },
+    },
+
+    [4719] = -- Valor Gauntlets +1 -> Valor Gauntlets +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_GAUNTLETS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_GAUNTLETS_P2,
+        },
+    },
+
+    [4720] = -- Valor Breeches -> Valor Breeches +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_BREECHES,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_BREECHES_P2,
+        },
+    },
+
+    [4721] = -- Valor Breeches +1 -> Valor Breeches +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_BREECHES_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_BREECHES_P2,
+        },
+    },
+
+    [4722] = -- Valor Leggings -> Valor Leggings +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_LEGGINGS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_LEGGINGS_P2,
+        },
+    },
+
+    [4723] = -- Valor Leggings +1 -> Valor Leggings +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.VALOR_LEGGINGS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.VALOR_LEGGINGS_P2,
+        },
+    },
+
+    [4724] = -- Abyss Burgeonet -> Abyss Burgeonet +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_BURGEONET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_BURGEONET_P2,
+        },
+    },
+
+    [4725] = -- Abyss Burgeonet +1 -> Abyss Burgeonet +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_BURGEONET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_BURGEONET_P2,
+        },
+    },
+
+    [4726] = -- Abyss Cuirass -> Abyss Cuirass +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_CUIRASS,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_CUIRASS_P2,
+        },
+    },
+
+    [4727] = -- Abyss Cuirass +1 -> Abyss Cuirass +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_CUIRASS_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_CUIRASS_P2,
+        },
+    },
+
+    [4728] = -- Abyss Gauntlets -> Abyss Gauntlets +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_GAUNTLETS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_GAUNTLETS_P2,
+        },
+    },
+
+    [4729] = -- Abyss Gauntlets +1 -> Abyss Gauntlets +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_GAUNTLETS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_GAUNTLETS_P2,
+        },
+    },
+
+    [4730] = -- Abyss Flanchard -> Abyss Flanchard +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_FLANCHARD,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_FLANCHARD_P2,
+        },
+    },
+
+    [4731] = -- Abyss Flanchard +1 -> Abyss Flanchard +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_FLANCHARD_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_FLANCHARD_P2,
+        },
+    },
+
+    [4732] = -- Abyss Sollerets -> Abyss Sollerets +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_SOLLERETS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_SOLLERETS_P2,
+        },
+    },
+
+    [4733] = -- Abyss Sollerets +1 -> Abyss Sollerets +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ABYSS_SOLLERETS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ABYSS_SOLLERETS_P2,
+        },
+    },
+
+    [4734] = -- Monster Helm -> Monster Helm +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_HELM,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_HELM_P2,
+        },
+    },
+
+    [4735] = -- Monster Helm +1 -> Monster Helm +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_HELM_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_HELM_P2,
+        },
+    },
+
+    [4736] = -- Monster Jackcoat -> Monster Jackcoat +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_JACKCOAT,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_JACKCOAT_P2,
+        },
+    },
+
+    [4737] = -- Monster Jackcoat +1 -> Monster Jackcoat +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_JACKCOAT_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_JACKCOAT_P2,
+        },
+    },
+
+    [4738] = -- Monster Gloves -> Monster Gloves +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_GLOVES,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_GLOVES_P2,
+        },
+    },
+
+    [4739] = -- Monster Gloves +1 -> Monster Gloves +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_GLOVES_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_GLOVES_P2,
+        },
+    },
+
+    [4740] = -- Monster Trousers -> Monster Trousers +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_TROUSERS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_TROUSERS_P2,
+        },
+    },
+
+    [4741] = -- Monster Trousers +1 -> Monster Trousers +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_TROUSERS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_TROUSERS_P2,
+        },
+    },
+
+    [4742] = -- Monster Gaiters -> Monster Gaiters +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_GAITERS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_GAITERS_P2,
+        },
+    },
+
+    [4743] = -- Monster Gaiters +1 -> Monster Gaiters +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MONSTER_GAITERS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MONSTER_GAITERS_P2,
+        },
+    },
+
+    [4744] = -- Bard's Roundlet -> Bard's Roundlet +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_ROUNDLET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_ROUNDLET_P2,
+        },
+    },
+
+    [4745] = -- Bard's Roundlet +1 -> Bard's Roundlet +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_ROUNDLET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_ROUNDLET_P2,
+        },
+    },
+
+    [4746] = -- Bard's Justaucorps -> Bard's Justaucorps +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_JUSTAUCORPS,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_JUSTAUCORPS_P2,
+        },
+    },
+
+    [4747] = -- Bard's Justaucorps +1 -> Bard's Justaucorps +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_JUSTAUCORPS_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_JUSTAUCORPS_P2,
+        },
+    },
+
+    [4748] = -- Bard's Cuffs -> Bard's Cuffs +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_CUFFS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_CUFFS_P2,
+        },
+    },
+
+    [4749] = -- Bard's Cuffs +1 -> Bard's Cuffs +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_CUFFS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_CUFFS_P2,
+        },
+    },
+
+    [4750] = -- Bard's Cannions -> Bard's Cannions +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_CANNIONS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_CANNIONS_P2,
+        },
+    },
+
+    [4751] = -- Bard's Cannions +1 -> Bard's Cannions +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_CANNIONS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_CANNIONS_P2,
+        },
+    },
+
+    [4752] = -- Bard's Slippers -> Bard's Slippers +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_SLIPPERS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_SLIPPERS_P2,
+        },
+    },
+
+    [4753] = -- Bard's Slippers +1 -> Bard's Slippers +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BARDS_SLIPPERS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.BARDS_SLIPPERS_P2,
+        },
+    },
+
+    [4754] = -- Scout's Beret -> Scout's Beret +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BERET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BERET_P2,
+        },
+    },
+
+    [4755] = -- Scout's Beret +1 -> Scout's Beret +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BERET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BERET_P2,
+        },
+    },
+
+    [4756] = -- Scout's Jerkin -> Scout's Jerkin +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_JERKIN,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_JERKIN_P2,
+        },
+    },
+
+    [4757] = -- Scout's Jerkin +1 -> Scout's Jerkin +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_JERKIN_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_JERKIN_P2,
+        },
+    },
+
+    [4758] = -- Scout's Bracers -> Scout's Bracers +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BRACERS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BRACERS_P2,
+        },
+    },
+
+    [4759] = -- Scout's Bracers +1 -> Scout's Bracers +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BRACERS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BRACERS_P2,
+        },
+    },
+
+    [4760] = -- Scout's Braccae -> Scout's Braccae +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BRACCAE,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BRACCAE_P2,
+        },
+    },
+
+    [4761] = -- Scout's Braccae +1 -> Scout's Braccae +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_BRACCAE_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_BRACCAE_P2,
+        },
+    },
+
+    [4762] = -- Scout's Socks -> Scout's Socks +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_SOCKS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_SOCKS_P2,
+        },
+    },
+
+    [4763] = -- Scout's Socks +1 -> Scout's Socks +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SCOUTS_SOCKS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SCOUTS_SOCKS_P2,
+        },
+    },
+
+    [4764] = -- Saotome Kabuto -> Saotome Kabuto +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_KABUTO,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_KABUTO_P2,
+        },
+    },
+
+    [4765] = -- Saotome Kabuto +1 -> Saotome Kabuto +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_KABUTO_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_KABUTO_P2,
+        },
+    },
+
+    [4766] = -- Saotome Domaru -> Saotome Domaru +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_DOMARU,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_DOMARU_P2,
+        },
+    },
+
+    [4767] = -- Saotome Domaru +1 -> Saotome Domaru +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_DOMARU_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_DOMARU_P2,
+        },
+    },
+
+    [4768] = -- Saotome Kote -> Saotome Kote +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_KOTE,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_KOTE_P2,
+        },
+    },
+
+    [4769] = -- Saotome Kote +1 -> Saotome Kote +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_KOTE_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_KOTE_P2,
+        },
+    },
+
+    [4770] = -- Saotome Haidate -> Saotome Haidate +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_HAIDATE,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_HAIDATE_P2,
+        },
+    },
+
+    [4771] = -- Saotome Haidate +1 -> Saotome Haidate +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_HAIDATE_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_HAIDATE_P2,
+        },
+    },
+
+    [4772] = -- Saotome Sune-ate -> Saotome Sune-ate +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_SUNE_ATE,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_SUNE_ATE_P2,
+        },
+    },
+
+    [4773] = -- Saotome Sune-ate +1 -> Saotome Sune-ate +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAOTOME_SUNE_ATE_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAOTOME_SUNE_ATE_P2,
+        },
+    },
+
+    [4774] = -- Koga Hatsuburi -> Koga Hatsuburi +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_HATSUBURI,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_HATSUBURI_P2,
+        },
+    },
+
+    [4775] = -- Koga Hatsuburi +1 -> Koga Hatsuburi +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_HATSUBURI_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_HATSUBURI_P2,
+        },
+    },
+
+    [4776] = -- Koga Chainmail -> Koga Chainmail +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_CHAINMAIL,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_CHAINMAIL_P2,
+        },
+    },
+
+    [4777] = -- Koga Chainmail +1 -> Koga Chainmail +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_CHAINMAIL_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_CHAINMAIL_P2,
+        },
+    },
+
+    [4778] = -- Koga Tekko -> Koga Tekko +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_TEKKO,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_TEKKO_P2,
+        },
+    },
+
+    [4779] = -- Koga Tekko +1 -> Koga Tekko +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_TEKKO_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_TEKKO_P2,
+        },
+    },
+
+    [4780] = -- Koga Hakama -> Koga Hakama +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_HAKAMA,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_HAKAMA_P2,
+        },
+    },
+
+    [4781] = -- Koga Hakama +1 -> Koga Hakama +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_HAKAMA_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_HAKAMA_P2,
+        },
+    },
+
+    [4782] = -- Koga Kyahan -> Koga Kyahan +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_KYAHAN,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_KYAHAN_P2,
+        },
+    },
+
+    [4783] = -- Koga Kyahan +1 -> Koga Kyahan +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.KOGA_KYAHAN_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.KOGA_KYAHAN_P2,
+        },
+    },
+
+    [4784] = -- Wyrm Armet -> Wyrm Armet +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_ARMET,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_ARMET_P2,
+        },
+    },
+
+    [4785] = -- Wyrm Armet +1 -> Wyrm Armet +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_ARMET_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_ARMET_P2,
+        },
+    },
+
+    [4786] = -- Wyrm Mail -> Wyrm Mail +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_MAIL,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_MAIL_P2,
+        },
+    },
+
+    [4787] = -- Wyrm Mail +1 -> Wyrm Mail +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_MAIL_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_MAIL_P2,
+        },
+    },
+
+    [4788] = -- Wyrm Finger Gauntlets -> Wyrm Finger Gauntlets +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_FINGER_GAUNTLETS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_FINGER_GAUNTLETS_P2,
+        },
+    },
+
+    [4789] = -- Wyrm Finger Gauntlets +1 -> Wyrm Finger Gauntlets +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_FINGER_GAUNTLETS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_FINGER_GAUNTLETS_P2,
+        },
+    },
+
+    [4790] = -- Wyrm Brais -> Wyrm Brais +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_BRAIS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_BRAIS_P2,
+        },
+    },
+
+    [4791] = -- Wyrm Brais +1 -> Wyrm Brais +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_BRAIS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_BRAIS_P2,
+        },
+    },
+
+    [4792] = -- Wyrm Greaves -> Wyrm Greaves +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_GREAVES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_GREAVES_P2,
+        },
+    },
+
+    [4793] = -- Wyrm Greaves +1 -> Wyrm Greaves +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.WYRM_GREAVES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.WYRM_GREAVES_P2,
+        },
+    },
+
+    [4794] = -- Summoner's Horn -> Summoner's Horn +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_HORN,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_HORN_P2,
+        },
+    },
+
+    [4795] = -- Summoner's Horn +1 -> Summoner's Horn +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_HORN_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_HORN_P2,
+        },
+    },
+
+    [4796] = -- Summoner's Doublet -> Summoner's Doublet +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_DOUBLET,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_DOUBLET_P2,
+        },
+    },
+
+    [4797] = -- Summoner's Doublet +1 -> Summoner's Doublet +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_DOUBLET_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_DOUBLET_P2,
+        },
+    },
+
+    [4798] = -- Summoner's Bracers -> Summoner's Bracers +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_BRACERS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_BRACERS_P2,
+        },
+    },
+
+    [4799] = -- Summoner's Bracers +1 -> Summoner's Bracers +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_BRACERS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_BRACERS_P2,
+        },
+    },
+
+    [4800] = -- Summoner's Spats -> Summoner's Spats +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_SPATS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_SPATS_P2,
+        },
+    },
+
+    [4801] = -- Summoner's Spats +1 -> Summoner's Spats +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_SPATS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_SPATS_P2,
+        },
+    },
+
+    [4802] = -- Summoner's Pigaches -> Summoner's Pigaches +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_PIGACHES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_PIGACHES_P2,
+        },
+    },
+
+    [4803] = -- Summoner's Pigaches +1 -> Summoner's Pigaches +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SUMMONERS_PIGACHES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.SUMMONERS_PIGACHES_P2,
+        },
+    },
+
+    [4804] = -- Mirage Keffiyeh -> Mirage Keffiyeh +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_KEFFIYEH,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_KEFFIYEH_P2,
+        },
+    },
+
+    [4805] = -- Mirage Keffiyeh +1 -> Mirage Keffiyeh +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_KEFFIYEH_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_KEFFIYEH_P2,
+        },
+    },
+
+    [4806] = -- Mirage Jubbah -> Mirage Jubbah +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_JUBBAH,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_JUBBAH_P2,
+        },
+    },
+
+    [4807] = -- Mirage Jubbah +1 -> Mirage Jubbah +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_JUBBAH_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_JUBBAH_P2,
+        },
+    },
+
+    [4808] = -- Mirage Bazubands -> Mirage Bazubands +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_BAZUBANDS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_BAZUBANDS_P2,
+        },
+    },
+
+    [4809] = -- Mirage Bazubands +1 -> Mirage Bazubands +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_BAZUBANDS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_BAZUBANDS_P2,
+        },
+    },
+
+    [4810] = -- Mirage Shalwar -> Mirage Shalwar +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_SHALWAR,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_SHALWAR_P2,
+        },
+    },
+
+    [4811] = -- Mirage Shalwar +1 -> Mirage Shalwar +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_SHALWAR_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_SHALWAR_P2,
+        },
+    },
+
+    [4812] = -- Mirage Charuqs -> Mirage Charuqs +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_CHARUQS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_CHARUQS_P2,
+        },
+    },
+
+    [4813] = -- Mirage Charuqs +1 -> Mirage Charuqs +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MIRAGE_CHARUQS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.MIRAGE_CHARUQS_P2,
+        },
+    },
+
+    [4814] = -- Commodore Tricorne -> Commodore's Tricorne +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_TRICORNE,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORES_TRICORNE_P2,
+        },
+    },
+
+    [4815] = -- Commodore Tricorne +1 -> Commodore's Tricorne +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_TRICORNE_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORES_TRICORNE_P2,
+        },
+    },
+
+    [4816] = -- Commodore Frac -> Commodore Frac +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_FRAC,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_FRAC_P2,
+        },
+    },
+
+    [4817] = -- Commodore Frac +1 -> Commodore Frac +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_FRAC_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_FRAC_P2,
+        },
+    },
+
+    [4818] = -- Commodore Gants -> Commodore Gants +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_GANTS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_GANTS_P2,
+        },
+    },
+
+    [4819] = -- Commodore Gants +1 -> Commodore Gants +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_GANTS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_GANTS_P2,
+        },
+    },
+
+    [4820] = -- Commodore Trews -> Commodore Trews +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_TREWS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_TREWS_P2,
+        },
+    },
+
+    [4821] = -- Commodore Trews +1 -> Commodore Trews +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_TREWS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_TREWS_P2,
+        },
+    },
+
+    [4822] = -- Commodore Bottes -> Commodore Bottes +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_BOTTES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_BOTTES_P2,
+        },
+    },
+
+    [4823] = -- Commodore Bottes +1 -> Commodore Bottes +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.COMMODORE_BOTTES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.COMMODORE_BOTTES_P2,
+        },
+    },
+
+    [4824] = -- Pantin Taj -> Pantin Taj +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_TAJ,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_TAJ_P2,
+        },
+    },
+
+    [4825] = -- Pantin Taj +1 -> Pantin Taj +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_TAJ_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_TAJ_P2,
+        },
+    },
+
+    [4826] = -- Pantin Tobe -> Pantin Tobe +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_TOBE,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_TOBE_P2,
+        },
+    },
+
+    [4827] = -- Pantin Tobe +1 -> Pantin Tobe +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_TOBE_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_TOBE_P2,
+        },
+    },
+
+    [4828] = -- Pantin Dastanas -> Pantin Dastanas +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_DASTANAS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_DASTANAS_P2,
+        },
+    },
+
+    [4829] = -- Pantin Dastanas +1 -> Pantin Dastanas +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_DASTANAS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_DASTANAS_P2,
+        },
+    },
+
+    [4830] = -- Pantin Churidars -> Pantin Churidars +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_CHURIDARS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_CHURIDARS_P2,
+        },
+    },
+
+    [4831] = -- Pantin Churidars +1 -> Pantin Churidars +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_CHURIDARS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_CHURIDARS_P2,
+        },
+    },
+
+    [4832] = -- Pantin Babouches -> Pantin Babouches +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_BABOUCHES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_BABOUCHES_P2,
+        },
+    },
+
+    [4833] = -- Pantin Babouches +1 -> Pantin Babouches +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.PANTIN_BABOUCHES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.PANTIN_BABOUCHES_P2,
+        },
+    },
+
+    [4834] = -- Etoile Tiara -> Etoile Tiara +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TIARA,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TIARA_P2,
+        },
+    },
+
+    [4835] = -- Etoile Tiara +1 -> Etoile Tiara +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TIARA_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TIARA_P2,
+        },
+    },
+
+    [4836] = -- Etoile Casaque -> Etoile Casaque +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_CASAQUE,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_CASAQUE_P2,
+        },
+    },
+
+    [4837] = -- Etoile Casaque +1 -> Etoile Casaque +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_CASAQUE_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_CASAQUE_P2,
+        },
+    },
+
+    [4838] = -- Etoile Bangles -> Etoile Bangles +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_BANGLES,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_BANGLES_P2,
+        },
+    },
+
+    [4839] = -- Etoile Bangles +1 -> Etoile Bangles +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_BANGLES_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_BANGLES_P2,
+        },
+    },
+
+    [4840] = -- Etoile Tights -> Etoile Tights +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TIGHTS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TIGHTS_P2,
+        },
+    },
+
+    [4841] = -- Etoile Tights +1 -> Etoile Tights +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TIGHTS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TIGHTS_P2,
+        },
+    },
+
+    [4842] = -- Etoile Toe Shoes -> Etoile Toe Shoes +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TOE_SHOES,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TOE_SHOES_P2,
+        },
+    },
+
+    [4843] = -- Etoile Toe Shoes +1 -> Etoile Toe Shoes +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ETOILE_TOE_SHOES_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ETOILE_TOE_SHOES_P2,
+        },
+    },
+    ---
+    [4844] = -- Argute Mortarboard -> Argute Mortarboard +2 - 50 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_MORTARBOARD,
+        },
+
+        textOffset  = 1302,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_MORTARBOARD_P2,
+        },
+    },
+
+    [4845] = -- Argute Mortarboard +1 -> Argute Mortarboard +2 - 30 Forgotten Thought
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_MORTARBOARD_P1,
+        },
+
+        textOffset  = 1303,
+        tradeItem   = xi.items.FORGOTTEN_THOUGHT,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_MORTARBOARD_P2,
+        },
+    },
+
+    [4846] = -- Argute Gown -> Argute Gown +2 - 50 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_GOWN,
+        },
+
+        textOffset  = 1304,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_GOWN_P2,
+        },
+    },
+
+    [4847] = -- Argute Gown +1 -> Argute Gown +2 - 30 Forgotten Hope
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_GOWN_P1,
+        },
+
+        textOffset  = 1305,
+        tradeItem   = xi.items.FORGOTTEN_HOPE,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_GOWN_P2,
+        },
+    },
+
+    [4848] = -- Argute Bracers -> Argute Bracers +2 - 50 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_BRACERS,
+        },
+
+        textOffset  = 1306,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_BRACERS_P2,
+        },
+    },
+
+    [4849] = -- Argute Bracers +1 -> Argute Bracers +2 - 30 Forgotten Touch
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_BRACERS_P1,
+        },
+
+        textOffset  = 1307,
+        tradeItem   = xi.items.FORGOTTEN_TOUCH,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_BRACERS_P2,
+        },
+    },
+
+    [4850] = -- Argute Pants -> Argute Pants +2 - 50 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_PANTS,
+        },
+
+        textOffset  = 1308,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_PANTS_P2,
+        },
+    },
+
+    [4851] = -- Argute Pants +1 -> Argute Pants +2 - 30 Forgotten Journey
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_PANTS_P1,
+        },
+
+        textOffset  = 1309,
+        tradeItem   = xi.items.FORGOTTEN_JOURNEY,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_PANTS_P2,
+        },
+    },
+
+    [4852] = -- Argute Loafers -> Argute Loafers +2 - 50 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_LOAFERS,
+        },
+
+        textOffset  = 1310,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_LOAFERS_P2,
+        },
+    },
+
+    [4853] = -- Argute Loafers +1 -> Argute Loafers +2 - 30 Forgotten Step
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ARGUTE_LOAFERS_P1,
+        },
+
+        textOffset  = 1311,
+        tradeItem   = xi.items.FORGOTTEN_STEP,
+        numRequired = 30,
+
+        rewardItem =
+        {
+            itemId = xi.items.ARGUTE_LOAFERS_P2,
         },
     },
 }
