@@ -5,7 +5,6 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    player:startEvent(14) -- doesn't want your trade dialog
 end
 
 entity.onTrigger = function(player, npc)

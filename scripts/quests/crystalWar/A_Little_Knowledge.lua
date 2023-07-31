@@ -89,6 +89,8 @@ quest.sections =
                         elseif questOption == 3 then
                             return quest:progressEvent(11)
                         end
+                    else
+                        return quest:progressEvent(14)
                     end
                 end,
 
