@@ -7,35 +7,42 @@ xi = xi or {}
 xi.nyzul = xi.nyzul or {}
 -----------------------------------
 
+local itemCost =
+{
+    LOW_GRADE    = 100 -- Event Paramter 5. Currency cost of "Low grade" temporary item category.
+    MEDIUM_GRADE = 200 -- Event Paramter 6. Currency cost of "Medium grade" temporary item category.
+    HIGH_GRADE   = 300 -- Event Paramter 7. Currency cost of "High grade" temporary item category.
+}
+
 local items =
 {
-    [8450]  = { item = 5385, cost = 100, slot = 0x02      }, -- Barbarian's Drink -+
-    [8451]  = { item = 5386, cost = 100, slot = 0x04      }, -- Fighter's Drink -+
-    [8452]  = { item = 5387, cost = 100, slot = 0x08      }, -- Oracle's Drink -+
-    [8453]  = { item = 5388, cost = 100, slot = 0x10      }, -- Assassin's Drink
-    [8454]  = { item = 5389, cost = 100, slot = 0x20      }, -- Spy's Dring -+
-    [8455]  = { item = 5394, cost = 100, slot = 0x400     }, -- Gnostic's Drink
-    [8456]  = { item = 5396, cost = 100, slot = 0x1000    }, -- Shepherd's Drink
-    [8457]  = { item = 5436, cost = 100, slot = 0x40000   }, -- Dusty Reraise -+
-    [8458]  = { item = 5437, cost = 100, slot = 0x80000   }, -- Strange Milk -+
-    [8459]  = { item = 5438, cost = 100, slot = 0x100000  }, -- Strange Juice -+
-    [8460]  = { item = 5439, cost = 100, slot = 0x200000  }, -- Viscer's Drink -+
-    [8461]  = { item = 5397, cost = 100, slot = 0x4000000 }, -- Sprinters Drink -+
+    [8450]  = { item = 5385, cost = itemCost.LOW_GRADE,    slot = 0x02      }, -- Barbarian's Drink -+
+    [8451]  = { item = 5386, cost = itemCost.LOW_GRADE,    slot = 0x04      }, -- Fighter's Drink -+
+    [8452]  = { item = 5387, cost = itemCost.LOW_GRADE,    slot = 0x08      }, -- Oracle's Drink -+
+    [8453]  = { item = 5388, cost = itemCost.LOW_GRADE,    slot = 0x10      }, -- Assassin's Drink
+    [8454]  = { item = 5389, cost = itemCost.LOW_GRADE,    slot = 0x20      }, -- Spy's Dring -+
+    [8455]  = { item = 5394, cost = itemCost.LOW_GRADE,    slot = 0x400     }, -- Gnostic's Drink
+    [8456]  = { item = 5396, cost = itemCost.LOW_GRADE,    slot = 0x1000    }, -- Shepherd's Drink
+    [8457]  = { item = 5436, cost = itemCost.LOW_GRADE,    slot = 0x40000   }, -- Dusty Reraise -+
+    [8458]  = { item = 5437, cost = itemCost.LOW_GRADE,    slot = 0x80000   }, -- Strange Milk -+
+    [8459]  = { item = 5438, cost = itemCost.LOW_GRADE,    slot = 0x100000  }, -- Strange Juice -+
+    [8460]  = { item = 5439, cost = itemCost.LOW_GRADE,    slot = 0x200000  }, -- Viscer's Drink -+
+    [8461]  = { item = 5397, cost = itemCost.LOW_GRADE,    slot = 0x4000000 }, -- Sprinters Drink -+
 
-    [12546] = { item = 5390, cost = 200, slot = 0x40      }, -- Braver's Drink -+
-    [12547] = { item = 5391, cost = 200, slot = 0x80      }, -- Soldier's Drink -+
-    [12548] = { item = 5392, cost = 200, slot = 0x100     }, -- Champion's Drink
-    [12549] = { item = 5393, cost = 200, slot = 0x200     }, -- Monarch's Drink -+
-    [12550] = { item = 5395, cost = 200, slot = 0x800     }, -- Cleric's Drink -+
-    [12551] = { item = 5431, cost = 200, slot = 0x2000    }, -- Dusty Potion -+
-    [12552] = { item = 5432, cost = 200, slot = 0x4000    }, -- Dusty Ether -+
-    [12553] = { item = 5434, cost = 200, slot = 0x10000   }, -- Fanatic's Drink -+
-    [12554] = { item = 5435, cost = 200, slot = 0x20000   }, -- Fool's Drink -+
-    [12555] = { item = 5440, cost = 200, slot = 0x400000  }, -- Dusty Wing -+
-    [12556] = { item = 4147, cost = 200, slot = 0x800000  }, -- Body Boost -+
-    [12557] = { item = 4200, cost = 200, slot = 0x1000000 }, -- Mana Boost -+
+    [12546] = { item = 5390, cost = itemCost.MEDIUM_GRADE, slot = 0x40      }, -- Braver's Drink -+
+    [12547] = { item = 5391, cost = itemCost.MEDIUM_GRADE, slot = 0x80      }, -- Soldier's Drink -+
+    [12548] = { item = 5392, cost = itemCost.MEDIUM_GRADE, slot = 0x100     }, -- Champion's Drink
+    [12549] = { item = 5393, cost = itemCost.MEDIUM_GRADE, slot = 0x200     }, -- Monarch's Drink -+
+    [12550] = { item = 5395, cost = itemCost.MEDIUM_GRADE, slot = 0x800     }, -- Cleric's Drink -+
+    [12551] = { item = 5431, cost = itemCost.MEDIUM_GRADE, slot = 0x2000    }, -- Dusty Potion -+
+    [12552] = { item = 5432, cost = itemCost.MEDIUM_GRADE, slot = 0x4000    }, -- Dusty Ether -+
+    [12553] = { item = 5434, cost = itemCost.MEDIUM_GRADE, slot = 0x10000   }, -- Fanatic's Drink -+
+    [12554] = { item = 5435, cost = itemCost.MEDIUM_GRADE, slot = 0x20000   }, -- Fool's Drink -+
+    [12555] = { item = 5440, cost = itemCost.MEDIUM_GRADE, slot = 0x400000  }, -- Dusty Wing -+
+    [12556] = { item = 4147, cost = itemCost.MEDIUM_GRADE, slot = 0x800000  }, -- Body Boost -+
+    [12557] = { item = 4200, cost = itemCost.MEDIUM_GRADE, slot = 0x1000000 }, -- Mana Boost -+
 
-    [16641] = { item = 5433, cost = 300, slot = 0x8000    }, -- Dusty Elixer -+
+    [16641] = { item = 5433, cost = itemCost.HIGH_GRADE,   slot = 0x8000    }, -- Dusty Elixer -+
 }
 
 local function playerHasTempItem(player)
@@ -114,7 +121,7 @@ xi.nyzul.vendingBoxOnTrigger = function(player)
     local preferred = player:getVar("[Nyzul]preferredItems")
     local tokens    = player:getCurrency("nyzul_isle_assault_point")
 
-    player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, 100, 200, 300)
+    player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
 end
 
 xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
@@ -142,6 +149,6 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
         end
 
         local tokens = player:getCurrency("nyzul_isle_assault_point")
-        player:updateEvent(1, tokens, playerHasTempItem(player), player:getVar("[Nyzul]preferredItems"), 100, 200, 300)
+        player:updateEvent(1, tokens, playerHasTempItem(player), player:getVar("[Nyzul]preferredItems"), itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
     end
 end
