@@ -3,7 +3,7 @@
 --  NPC: Sweepstox
 -- Gobbie Mystery Box
 -----------------------------------
-require("scripts/globals/gobbiemysterybox")
+require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}
 

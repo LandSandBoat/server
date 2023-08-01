@@ -18,6 +18,7 @@ local costs =
     [5] = 10,
     [6] = 50
 }
+
 local keyToDial =
 {
     [8973] = 6,  -- special dial
@@ -26,59 +27,182 @@ local keyToDial =
 --  [????] = 11, -- furnishing
     [9274] = 13, -- anniversary
 }
+
 local abjurationItems =
 {
-    1314, 1315, 1316, 1317, 1318, -- dryadic
-    1319, 1320, 1321, 1322, 1323, -- earthen
-    1324, 1325, 1326, 1327, 1328, -- aquarian
-    1329, 1330, 1331, 1332, 1333, -- martial
-    1334, 1335, 1336, 1337, 1338, -- wyrmal
-    1339, 1340, 1341, 1342, 1343, -- neptunal
-    1441, 1442,                   -- food
-    2429, 2430, 2431, 2432, 2433, -- phantasmal
-    2434, 2435, 2436, 2437, 2438, -- hadean
-    3559, 3560, 3561, 3562, 3563, -- corvine
-    3564, 3565, 3566, 3567, 3568, -- supernal
-    3569, 3570, 3571, 3572, 3573, -- transitory
-    3574, 3575, 3576, 3577, 3578, -- foreboding
-    3579, 3580, 3581, 3582, 3583, -- lenitive
-    8762, 8763, 8764, 8765, 8766, -- bushin
-    8767, 8768, 8769, 8770, 8771, -- vale
-    8772, 8773, 8774, 8775, 8776, -- grove
-    8777, 8778, 8779, 8780, 8781, -- triton
-    8782, 8783, 8784, 8785, 8786, -- shinryu
-    8787, 8788, 8789, 8790, 8791, -- abyssal
-    9105, 9106, 9107, 9108, 9109, -- cronian
-    9110, 9111, 9112, 9113, 9114, -- arean
-    9115, 9116, 9117, 9118, 9119, -- jovian
-    9120, 9121, 9122, 9123, 9124, -- venerian
-    9125, 9126, 9127, 9128, 9129, -- cyllenian
+    xi.items.DRYADIC_ABJURATION_HEAD,
+    xi.items.DRYADIC_ABJURATION_BODY,
+    xi.items.DRYADIC_ABJURATION_HANDS,
+    xi.items.DRYADIC_ABJURATION_LEGS,
+    xi.items.DRYADIC_ABJURATION_FEET,
+    xi.items.EARTHEN_ABJURATION_HEAD,
+    xi.items.EARTHEN_ABJURATION_BODY,
+    xi.items.EARTHEN_ABJURATION_HANDS,
+    xi.items.EARTHEN_ABJURATION_LEGS,
+    xi.items.EARTHEN_ABJURATION_FEET,
+    xi.items.AQUARIAN_ABJURATION_HEAD,
+    xi.items.AQUARIAN_ABJURATION_BODY,
+    xi.items.AQUARIAN_ABJURATION_HANDS,
+    xi.items.AQUARIAN_ABJURATION_LEGS,
+    xi.items.AQUARIAN_ABJURATION_FEET,
+    xi.items.MARTIAL_ABJURATION_HEAD,
+    xi.items.MARTIAL_ABJURATION_BODY,
+    xi.items.MARTIAL_ABJURATION_HANDS,
+    xi.items.MARTIAL_ABJURATION_LEGS,
+    xi.items.MARTIAL_ABJURATION_FEET,
+    xi.items.WYRMAL_ABJURATION_HEAD,
+    xi.items.WYRMAL_ABJURATION_BODY,
+    xi.items.WYRMAL_ABJURATION_HANDS,
+    xi.items.WYRMAL_ABJURATION_LEGS,
+    xi.items.WYRMAL_ABJURATION_FEET,
+    xi.items.NEPTUNAL_ABJURATION_HEAD,
+    xi.items.NEPTUNAL_ABJURATION_BODY,
+    xi.items.NEPTUNAL_ABJURATION_HANDS,
+    xi.items.NEPTUNAL_ABJURATION_LEGS,
+    xi.items.NEPTUNAL_ABJURATION_FEET,
+    xi.items.LIBATION_ABJURATION,
+    xi.items.OBLATION_ABJURATION,
+    xi.items.PHANTASMAL_ABJURATION_HEAD,
+    xi.items.PHANTASMAL_ABJURATION_BODY,
+    xi.items.PHANTASMAL_ABJURATION_HANDS,
+    xi.items.PHANTASMAL_ABJURATION_LEGS,
+    xi.items.PHANTASMAL_ABJURATION_FEET,
+    xi.items.HADEAN_ABJURATION_HEAD,
+    xi.items.HADEAN_ABJURATION_BODY,
+    xi.items.HADEAN_ABJURATION_HANDS,
+    xi.items.HADEAN_ABJURATION_LEGS,
+    xi.items.HADEAN_ABJURATION_FEET,
+    xi.items.CORVINE_ABJURATION_HEAD,
+    xi.items.CORVINE_ABJURATION_BODY,
+    xi.items.CORVINE_ABJURATION_HANDS,
+    xi.items.CORVINE_ABJURATION_LEGS,
+    xi.items.CORVINE_ABJURATION_FEET,
+    xi.items.SUPERNAL_ABJURATION_HEAD,
+    xi.items.SUPERNAL_ABJURATION_BODY,
+    xi.items.SUPERNAL_ABJURATION_HANDS,
+    xi.items.SUPERNAL_ABJURATION_LEGS,
+    xi.items.SUPERNAL_ABJURATION_FEET,
+    xi.items.TRANSITORY_ABJURATION_HEAD,
+    xi.items.TRANSITORY_ABJURATION_BODY,
+    xi.items.TRANSITORY_ABJURATION_HANDS,
+    xi.items.TRANSITORY_ABJURATION_LEGS,
+    xi.items.TRANSITORY_ABJURATION_FEET,
+    xi.items.FOREBODING_ABJURATION_HEAD,
+    xi.items.FOREBODING_ABJURATION_BODY,
+    xi.items.FOREBODING_ABJURATION_HANDS,
+    xi.items.FOREBODING_ABJURATION_LEGS,
+    xi.items.FOREBODING_ABJURATION_FEET,
+    xi.items.LENITIVE_ABJURATION_HEAD,
+    xi.items.LENITIVE_ABJURATION_BODY,
+    xi.items.LENITIVE_ABJURATION_HANDS,
+    xi.items.LENITIVE_ABJURATION_LEGS,
+    xi.items.LENITIVE_ABJURATION_FEET,
+    xi.items.BUSHIN_ABJURATION_HEAD,
+    xi.items.BUSHIN_ABJURATION_BODY,
+    xi.items.BUSHIN_ABJURATION_HANDS,
+    xi.items.BUSHIN_ABJURATION_LEGS,
+    xi.items.BUSHIN_ABJURATION_FEET,
+    xi.items.VALE_ABJURATION_HEAD,
+    xi.items.VALE_ABJURATION_BODY,
+    xi.items.VALE_ABJURATION_HANDS,
+    xi.items.VALE_ABJURATION_LEGS,
+    xi.items.VALE_ABJURATION_FEET,
+    xi.items.GROVE_ABJURATION_HEAD,
+    xi.items.GROVE_ABJURATION_BODY,
+    xi.items.GROVE_ABJURATION_HANDS,
+    xi.items.GROVE_ABJURATION_LEGS,
+    xi.items.GROVE_ABJURATION_FEET,
+    xi.items.TRITON_ABJURATION_HEAD,
+    xi.items.TRITON_ABJURATION_BODY,
+    xi.items.TRITON_ABJURATION_HANDS,
+    xi.items.TRITON_ABJURATION_LEGS,
+    xi.items.TRITON_ABJURATION_FEET,
+    xi.items.SHINRYU_ABJURATION_HEAD,
+    xi.items.SHINRYU_ABJURATION_BODY,
+    xi.items.SHINRYU_ABJURATION_HANDS,
+    xi.items.SHINRYU_ABJURATION_LEGS,
+    xi.items.SHINRYU_ABJURATION_FEET,
+    xi.items.ABYSSAL_ABJURATION_HEAD,
+    xi.items.ABYSSAL_ABJURATION_BODY,
+    xi.items.ABYSSAL_ABJURATION_HANDS,
+    xi.items.ABYSSAL_ABJURATION_LEGS,
+    xi.items.ABYSSAL_ABJURATION_FEET,
+    xi.items.CRONIAN_ABJURATION_HEAD,
+    xi.items.CRONIAN_ABJURATION_BODY,
+    xi.items.CRONIAN_ABJURATION_HANDS,
+    xi.items.CRONIAN_ABJURATION_LEGS,
+    xi.items.CRONIAN_ABJURATION_FEET,
+    xi.items.AREAN_ABJURATION_HEAD,
+    xi.items.AREAN_ABJURATION_BODY,
+    xi.items.AREAN_ABJURATION_HANDS,
+    xi.items.AREAN_ABJURATION_LEGS,
+    xi.items.AREAN_ABJURATION_FEET,
+    xi.items.JOVIAN_ABJURATION_HEAD,
+    xi.items.JOVIAN_ABJURATION_BODY,
+    xi.items.JOVIAN_ABJURATION_HANDS,
+    xi.items.JOVIAN_ABJURATION_LEGS,
+    xi.items.JOVIAN_ABJURATION_FEET,
+    xi.items.VENERIAN_ABJURATION_HEAD,
+    xi.items.VENERIAN_ABJURATION_BODY,
+    xi.items.VENERIAN_ABJURATION_HANDS,
+    xi.items.VENERIAN_ABJURATION_LEGS,
+    xi.items.VENERIAN_ABJURATION_FEET,
+    xi.items.CYLLENIAN_ABJURATION_HEAD,
+    xi.items.CYLLENIAN_ABJURATION_BODY,
+    xi.items.CYLLENIAN_ABJURATION_HANDS,
+    xi.items.CYLLENIAN_ABJURATION_LEGS,
+    xi.items.CYLLENIAN_ABJURATION_FEET,
 }
+
 local fortuneItems =
 {
-    5737, 5736,       -- alexandrite
-    6180, 6183, 6532, -- pluton
-    6181, 6184, 6535, -- beitetsu
-    6182, 6185, 6534, -- rift boulder
-    5854, 5855, 5856, 5857, 5858, -- frayed pouches
-    5109, 5110, 5111, 5112, 5946, 5947, 6264, 6345, 6346, 6370, 6486, 6487, 6488, -- frayed sacks
+    xi.items.FRAYED_POUCH_OF_BIRTH,
+    xi.items.FRAYED_POUCH_OF_ADVANCEMENT,
+    xi.items.FRAYED_POUCH_OF_GLORY,
+    xi.items.FRAYED_POUCH_OF_DECAY,
+    xi.items.FRAYED_POUCH_OF_RUIN,
+    xi.items.FRAYED_SACK_OF_ABUNDANCE_P1,
+    xi.items.FRAYED_SACK_OF_ABUNDANCE_P2,
+    xi.items.FRAYED_SACK_OF_MORTALITY_P1,
+    xi.items.FRAYED_SACK_OF_MORTALITY_P2,
+    xi.items.FRAYED_SACK_OF_DEVIOUSNESS,
+    xi.items.FRAYED_SACK_OF_LIMINALITY,
+    xi.items.COTTON_COIN_PURSE,
+    xi.items.LINEN_COIN_PURSE,
+    xi.items.PLUTON_CASE,
+    xi.items.BEITETSU_PARCEL,
+    xi.items.BOULDER_CASE,
+    xi.items.PLUTON_BOX,
+    xi.items.BEITETSU_BOX,
+    xi.items.BOULDER_BOX,
+    xi.items.FRAYED_SACK_OF_HORROR_P1,
+    xi.items.FRAYED_SACK_OF_HORROR_P2,
+    xi.items.FRAYED_SACK_OF_BEAUTY,
+    xi.items.FRAYED_SACK_OF_SPLENDOR,
+    xi.items.FRAYED_SACK_OF_FECUNDITY,
+    xi.items.FRAYED_SACK_OF_PLENTY,
+    xi.items.FRAYED_SACK_OF_OPULENCE,
+    xi.items.AGED_BOX_BAYLD,
+    xi.items.HEAVY_METAL_POUCH,
 }
 local anniversaryItems =
 {
     -- TODO: The anniversary item table needs to be populated
-    9274 -- just give them back their key until this table can be populated
+    xi.items.DIAL_KEY_ANV, -- just give them back their key until this table can be populated
 }
+
 local gobbieJunk =
 {
-    2542, -- Goblin Mess Tin
-    2543, -- Goblin Weel
-    4324, -- Hobgoblin Chocolate
-    4325, -- Hobgoblin Pie
-    4328, -- Hobgoblin Bread
-    4458, -- Goblin Bread
-    4495, -- Goblin Chocolate
-    4539, -- Goblin Pie
+    xi.items.GOBLIN_MESS_TIN,
+    xi.items.GOBLIN_WEEL,
+    xi.items.CHUNK_OF_HOBGOBLIN_CHOCOLATE,
+    xi.items.HOBGOBLIN_PIE,
+    xi.items.LOAF_OF_HOBGOBLIN_BREAD,
+    xi.items.LOAF_OF_GOBLIN_BREAD,
+    xi.items.CHUNK_OF_GOBLIN_CHOCOLATE,
+    xi.items.GOBLIN_PIE,
 }
+
 xi.mystery.onTrade = function(player, npc, trade, events)
     if trade:getItemCount() == 1 then
         local tradeID = trade:getItemId(0)
