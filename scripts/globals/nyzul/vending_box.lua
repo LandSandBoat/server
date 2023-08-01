@@ -6,15 +6,25 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}
 -----------------------------------
+-- Event ID : 202
+-- Parameter 1 : Unused. However, it seems to be some short of progresive count that gets reset randomly. Time-based.
+-- Parameter 2 : Current tokens
+-- Parameter 3 : Temp items currently held.
+-- Parameter 4 : Preferred items.
+-- Parameter 5 : Enables Low-Grade items.    Represents cost per item in category.
+-- Parameter 6 : Enables Medium-Grade items. Represents cost per item in category.
+-- Parameter 7 : Enables High-Grade items.   Represents cost per item in category.
+-- Parameter 8 : Unused.
+-----------------------------------
 
 local itemCost =
 {
-    LOW_GRADE    = 100 -- Event Paramter 5. Currency cost of "Low grade" temporary item category.
-    MEDIUM_GRADE = 200 -- Event Paramter 6. Currency cost of "Medium grade" temporary item category.
-    HIGH_GRADE   = 300 -- Event Paramter 7. Currency cost of "High grade" temporary item category.
+    LOW_GRADE    = 100
+    MEDIUM_GRADE = 200
+    HIGH_GRADE   = 300
 }
 
-local items =
+local itemsTable =
 {
     [ 8450] = { item = 5385, cost = itemCost.LOW_GRADE,    slot = 0x02      }, -- Barbarian's Drink -+
     [ 8451] = { item = 5386, cost = itemCost.LOW_GRADE,    slot = 0x04      }, -- Fighter's Drink -+
@@ -45,20 +55,22 @@ local items =
     [16641] = { item = 5433, cost = itemCost.HIGH_GRADE,   slot = 0x8000    }, -- Dusty Elixer -+
 }
 
-local function playerHasTempItem(player)
-    local hasTempItem = 0
+local function buildTemporaryItemBitmask(player)
+    local hasTempItem = 1 -- All players start with 1 temporary item in inventory. Can't be thrown. Uses bit 0.
 
-    for _, itemList in pairs(items) do
+    for _, itemList in pairs(itemsTable) do
         if player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
             hasTempItem = hasTempItem + itemList.slot
         end
     end
 
-    return hasTempItem + 1
+    return hasTempItem
 end
 
-local function giveAllItems(player)
-    for _, itemList in pairs(items) do
+local function giveAllTemporaryItems(player)
+    -- TODO: Check if items are given 1 by 1 or in bulk, currency wise.
+
+    for _, itemList in pairs(itemsTable) do
         if not player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
             if player:getCurrency("nyzul_isle_assault_point") >= itemList.cost then
                 player:addTempItem(itemList.item)
@@ -69,10 +81,13 @@ local function giveAllItems(player)
     end
 end
 
-local function giveAllPrefered(player)
-    local preferred = player:getCharVar("[Nyzul]preferredItems")
+local function giveAllTemporaryItemsPrefered(player)
+    -- TODO: Check if items are given 1 by 1 or in bulk, currency wise.
+
+    local preferenceBitmask = player:getCharVar("[Nyzul]preferredItems")
     local selection =
     {
+        -- [bit] = option
         [ 1] = 8450,
         [ 2] = 8451,
         [ 3] = 8452,
@@ -101,16 +116,16 @@ local function giveAllPrefered(player)
         [26] = 8461,
     }
 
-    for section = 1, 26 do
-        if utils.mask.getBit(preferred, section) then
-            local mask   = selection[section]
-            local choice = items[mask].item
+    for bit = 1, 26 do
+        if utils.mask.getBit(preferenceBitmask, bit) then
+            local option = selection[bit]
+            local itemId = itemsTable[option].item
 
-            if choice ~= nil then
-                if not player:hasItem(choice, xi.inventoryLocation.TEMPITEMS) then
-                    player:addTempItem(choice)
-                    player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, choice)
-                    player:delCurrency("nyzul_isle_assault_point", items[mask].cost)
+            if itemSelected ~= nil then
+                if not player:hasItem(itemId, xi.inventoryLocation.TEMPITEMS) then
+                    player:addTempItem(itemId)
+                    player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemId)
+                    player:delCurrency("nyzul_isle_assault_point", itemsTable[option].cost)
                 end
             end
         end
@@ -119,7 +134,7 @@ end
 
 xi.nyzul.vendingBoxOnTrigger = function(player)
     local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
-    local itemsGottenBitmask = playerHasTempItem(player)
+    local itemsGottenBitmask = buildTemporaryItemBitmask(player)
     local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
 
     player:startEvent(202, 0, playerTokens, itemsGottenBitmask, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
@@ -127,10 +142,15 @@ end
 
 xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
     if csid == 202 then
+        -- Give all items not in possesion.
         if option == 20737 then
-            giveAllItems(player)
+            giveAllTemporaryItems(player)
+
+        -- Give all (Preferred) items not in possesion.
         elseif option == 4353 then
-            giveAllPrefered(player)
+            giveAllTemporaryItemsPrefered(player)
+
+        -- Give item selected.
         else
             if option >= 4354 and option <= 4365 then
                 option = option + 4096
@@ -140,7 +160,7 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
                 option = option + 12263
             end
 
-            local vendorItems = items[option]
+            local vendorItems = itemsTable[option]
 
             if player:getCurrency("nyzul_isle_assault_point") >= vendorItems.cost then
                 player:addTempItem(vendorItems.item)
@@ -151,7 +171,7 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
 
         -- Update the event.
         local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
-        local itemsGottenBitmask = playerHasTempItem(player)
+        local itemsGottenBitmask = buildTemporaryItemBitmask(player)
         local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
 
         player:updateEvent(0, playerTokens, itemsGotten, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
