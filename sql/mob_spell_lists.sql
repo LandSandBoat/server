@@ -5642,7 +5642,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,210,1,255); -- Quake
 INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,238,1,255); -- Rasp
 INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,54,1,255);  -- Stoneskin
 
-
 -- Bukki (5076 The Die is Cast NM)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5076,146,62,72);  -- fire_iii (62~72)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5076,156,59,71);  -- aero_iii (59~71)
