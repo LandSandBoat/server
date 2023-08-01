@@ -70,7 +70,7 @@ local function giveAllItems(player)
 end
 
 local function giveAllPrefered(player)
-    local preferred = player:getVar("[Nyzul]preferredItems")
+    local preferred = player:getCharVar("[Nyzul]preferredItems")
     local selection =
     {
         [1]  = 8450,
@@ -118,7 +118,7 @@ local function giveAllPrefered(player)
 end
 
 xi.nyzul.vendingBoxOnTrigger = function(player)
-    local preferred = player:getVar("[Nyzul]preferredItems")
+    local preferred = player:getCharVar("[Nyzul]preferredItems")
     local tokens    = player:getCurrency("nyzul_isle_assault_point")
 
     player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
@@ -149,6 +149,6 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
         end
 
         local tokens = player:getCurrency("nyzul_isle_assault_point")
-        player:updateEvent(1, tokens, playerHasTempItem(player), player:getVar("[Nyzul]preferredItems"), itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
+        player:updateEvent(1, tokens, playerHasTempItem(player), player:getCharVar("[Nyzul]preferredItems"), itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
     end
 end
