@@ -18,6 +18,7 @@ local costs =
     [5] = 10,
     [6] = 50
 }
+
 local keyToDial =
 {
     [8973] = 6,  -- special dial
@@ -26,6 +27,7 @@ local keyToDial =
 --  [????] = 11, -- furnishing
     [9274] = 13, -- anniversary
 }
+
 local abjurationItems =
 {
     xi.items.DRYADIC_ABJURATION_HEAD,
@@ -186,19 +188,21 @@ local fortuneItems =
 local anniversaryItems =
 {
     -- TODO: The anniversary item table needs to be populated
-    9274 -- just give them back their key until this table can be populated
+    xi.items.DIAL_KEY_ANV, -- just give them back their key until this table can be populated
 }
+
 local gobbieJunk =
 {
-    2542, -- Goblin Mess Tin
-    2543, -- Goblin Weel
-    4324, -- Hobgoblin Chocolate
-    4325, -- Hobgoblin Pie
-    4328, -- Hobgoblin Bread
-    4458, -- Goblin Bread
-    4495, -- Goblin Chocolate
-    4539, -- Goblin Pie
+    xi.items.GOBLIN_MESS_TIN,
+    xi.items.GOBLIN_WEEL,
+    xi.items.CHUNK_OF_HOBGOBLIN_CHOCOLATE,
+    xi.items.HOBGOBLIN_PIE,
+    xi.items.LOAF_OF_HOBGOBLIN_BREAD,
+    xi.items.LOAF_OF_GOBLIN_BREAD,
+    xi.items.CHUNK_OF_GOBLIN_CHOCOLATE,
+    xi.items.GOBLIN_PIE,
 }
+
 xi.mystery.onTrade = function(player, npc, trade, events)
     if trade:getItemCount() == 1 then
         local tradeID = trade:getItemId(0)
