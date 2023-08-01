@@ -19,40 +19,40 @@ xi.nyzul = xi.nyzul or {}
 
 local itemCost =
 {
-    LOW_GRADE    = 100
-    MEDIUM_GRADE = 200
-    HIGH_GRADE   = 300
+    LOW_GRADE    = 100,
+    MEDIUM_GRADE = 200,
+    HIGH_GRADE   = 300,
 }
 
 local itemsTable =
 {
-    [ 8450] = { item = 5385, cost = itemCost.LOW_GRADE,    slot = 0x02      }, -- Barbarian's Drink -+
-    [ 8451] = { item = 5386, cost = itemCost.LOW_GRADE,    slot = 0x04      }, -- Fighter's Drink -+
-    [ 8452] = { item = 5387, cost = itemCost.LOW_GRADE,    slot = 0x08      }, -- Oracle's Drink -+
-    [ 8453] = { item = 5388, cost = itemCost.LOW_GRADE,    slot = 0x10      }, -- Assassin's Drink
-    [ 8454] = { item = 5389, cost = itemCost.LOW_GRADE,    slot = 0x20      }, -- Spy's Dring -+
-    [ 8455] = { item = 5394, cost = itemCost.LOW_GRADE,    slot = 0x400     }, -- Gnostic's Drink
-    [ 8456] = { item = 5396, cost = itemCost.LOW_GRADE,    slot = 0x1000    }, -- Shepherd's Drink
-    [ 8457] = { item = 5436, cost = itemCost.LOW_GRADE,    slot = 0x40000   }, -- Dusty Reraise -+
-    [ 8458] = { item = 5437, cost = itemCost.LOW_GRADE,    slot = 0x80000   }, -- Strange Milk -+
-    [ 8459] = { item = 5438, cost = itemCost.LOW_GRADE,    slot = 0x100000  }, -- Strange Juice -+
-    [ 8460] = { item = 5439, cost = itemCost.LOW_GRADE,    slot = 0x200000  }, -- Viscer's Drink -+
-    [ 8461] = { item = 5397, cost = itemCost.LOW_GRADE,    slot = 0x4000000 }, -- Sprinters Drink -+
+    [ 8450] = { item = xi.items.BOTTLE_OF_BARBARIANS_DRINK, cost = itemCost.LOW_GRADE,    slot = 0x02      },
+    [ 8451] = { item = xi.items.BOTTLE_OF_FIGHTERS_DRINK,   cost = itemCost.LOW_GRADE,    slot = 0x04      },
+    [ 8452] = { item = xi.items.BOTTLE_OF_ORACLES_DRINK,    cost = itemCost.LOW_GRADE,    slot = 0x08      },
+    [ 8453] = { item = xi.items.BOTTLE_OF_ASSASSINS_DRINK,  cost = itemCost.LOW_GRADE,    slot = 0x10      },
+    [ 8454] = { item = xi.items.BOTTLE_OF_SPYS_DRINK,       cost = itemCost.LOW_GRADE,    slot = 0x20      },
+    [ 8455] = { item = xi.items.BOTTLE_OF_GNOSTICS_DRINK,   cost = itemCost.LOW_GRADE,    slot = 0x400     },
+    [ 8456] = { item = xi.items.BOTTLE_OF_SPRINTERS_DRINK,  cost = itemCost.LOW_GRADE,    slot = 0x1000    },
+    [ 8457] = { item = xi.items.DUSTY_SCROLL_OF_RERAISE,    cost = itemCost.LOW_GRADE,    slot = 0x40000   },
+    [ 8458] = { item = xi.items.FLASK_OF_STRANGE_MILK,      cost = itemCost.LOW_GRADE,    slot = 0x80000   },
+    [ 8459] = { item = xi.items.BOTTLE_OF_STRANGE_JUICE,    cost = itemCost.LOW_GRADE,    slot = 0x100000  },
+    [ 8460] = { item = xi.items.BOTTLE_OF_VICARS_DRINK,     cost = itemCost.LOW_GRADE,    slot = 0x200000  },
+    [ 8461] = { item = xi.items.BOTTLE_OF_SPRINTERS_DRINK,  cost = itemCost.LOW_GRADE,    slot = 0x4000000 },
 
-    [12546] = { item = 5390, cost = itemCost.MEDIUM_GRADE, slot = 0x40      }, -- Braver's Drink -+
-    [12547] = { item = 5391, cost = itemCost.MEDIUM_GRADE, slot = 0x80      }, -- Soldier's Drink -+
-    [12548] = { item = 5392, cost = itemCost.MEDIUM_GRADE, slot = 0x100     }, -- Champion's Drink
-    [12549] = { item = 5393, cost = itemCost.MEDIUM_GRADE, slot = 0x200     }, -- Monarch's Drink -+
-    [12550] = { item = 5395, cost = itemCost.MEDIUM_GRADE, slot = 0x800     }, -- Cleric's Drink -+
-    [12551] = { item = 5431, cost = itemCost.MEDIUM_GRADE, slot = 0x2000    }, -- Dusty Potion -+
-    [12552] = { item = 5432, cost = itemCost.MEDIUM_GRADE, slot = 0x4000    }, -- Dusty Ether -+
-    [12553] = { item = 5434, cost = itemCost.MEDIUM_GRADE, slot = 0x10000   }, -- Fanatic's Drink -+
-    [12554] = { item = 5435, cost = itemCost.MEDIUM_GRADE, slot = 0x20000   }, -- Fool's Drink -+
-    [12555] = { item = 5440, cost = itemCost.MEDIUM_GRADE, slot = 0x400000  }, -- Dusty Wing -+
-    [12556] = { item = 4147, cost = itemCost.MEDIUM_GRADE, slot = 0x800000  }, -- Body Boost -+
-    [12557] = { item = 4200, cost = itemCost.MEDIUM_GRADE, slot = 0x1000000 }, -- Mana Boost -+
+    [12546] = { item = xi.items.BOTTLE_OF_BRAVERS_DRINK,    cost = itemCost.MEDIUM_GRADE, slot = 0x40      },
+    [12547] = { item = xi.items.BOTTLE_OF_SOLDIERS_DRINK,   cost = itemCost.MEDIUM_GRADE, slot = 0x80      },
+    [12548] = { item = xi.items.BOTTLE_OF_CHAMPIONS_DRINK,  cost = itemCost.MEDIUM_GRADE, slot = 0x100     },
+    [12549] = { item = xi.items.BOTTLE_OF_MONARCHS_DRINK,   cost = itemCost.MEDIUM_GRADE, slot = 0x200     },
+    [12550] = { item = xi.items.BOTTLE_OF_CLERICS_DRINK,    cost = itemCost.MEDIUM_GRADE, slot = 0x800     },
+    [12551] = { item = xi.items.DUSTY_POTION,               cost = itemCost.MEDIUM_GRADE, slot = 0x2000    },
+    [12552] = { item = xi.items.DUSTY_ETHER,                cost = itemCost.MEDIUM_GRADE, slot = 0x4000    },
+    [12553] = { item = xi.items.BOTTLE_OF_FANATICS_DRINK,   cost = itemCost.MEDIUM_GRADE, slot = 0x10000   },
+    [12554] = { item = xi.items.BOTTLE_OF_FOOLS_DRINK,      cost = itemCost.MEDIUM_GRADE, slot = 0x20000   },
+    [12555] = { item = xi.items.DUSTY_WING,                 cost = itemCost.MEDIUM_GRADE, slot = 0x400000  },
+    [12556] = { item = xi.items.BOTTLE_OF_BODY_BOOST,       cost = itemCost.MEDIUM_GRADE, slot = 0x800000  },
+    [12557] = { item = xi.items.BOTTLE_OF_MANA_BOOST,       cost = itemCost.MEDIUM_GRADE, slot = 0x1000000 },
 
-    [16641] = { item = 5433, cost = itemCost.HIGH_GRADE,   slot = 0x8000    }, -- Dusty Elixer -+
+    [16641] = { item = xi.items.DUSTY_ELIXIR,               cost = itemCost.HIGH_GRADE,   slot = 0x8000    },
 }
 
 local function buildTemporaryItemBitmask(player)
@@ -121,7 +121,7 @@ local function giveAllTemporaryItemsPrefered(player)
             local option = selection[bit]
             local itemId = itemsTable[option].item
 
-            if itemSelected ~= nil then
+            if itemId ~= nil then
                 if not player:hasItem(itemId, xi.inventoryLocation.TEMPITEMS) then
                     player:addTempItem(itemId)
                     player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemId)
@@ -174,6 +174,6 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
         local itemsGottenBitmask = buildTemporaryItemBitmask(player)
         local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
 
-        player:updateEvent(0, playerTokens, itemsGotten, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
+        player:updateEvent(0, playerTokens, itemsGottenBitmask, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
     end
 end
