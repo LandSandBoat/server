@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.events.sunbreeze_festival.goldfishVendorOnEventUpdate(player, csid, event)
+    xi.events.sunbreeze_festival.goldfishVendorOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)

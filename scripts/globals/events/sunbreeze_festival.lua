@@ -212,29 +212,37 @@ local goldfishRewardTable =
 
 local fishValue =
 {
-    [xi.items.TINY_GOLDFISH]    = 1,
-    [xi.items.BLACK_BUBBLE_EYE] = 2,
-    [xi.items.LIONHEAD]         = 10,
-    [xi.items.PEARLSCALE]       = 30,
-    [xi.items.CALICO_COMET]     = 30,
+    [xi.items.TINY_GOLDFISH]    = { amount = 1,  isStackable = true  },
+    [xi.items.BLACK_BUBBLE_EYE] = { amount = 2,  isStackable = true  },
+    [xi.items.LIONHEAD]         = { amount = 10, isStackable = false },
+    [xi.items.PEARLSCALE]       = { amount = 30, isStackable = false },
+    [xi.items.CALICO_COMET]     = { amount = 30, isStackable = false },
 }
 
 xi.events.sunbreeze_festival.goldfishVendorOnTrade = function(player, npc, trade, csid)
-    local hasBasket = player:hasItem(xi.items.GOLDFISH_BASKET) and 1 or 0
-    local points    = 0
+    local hasBasket  = player:hasItem(xi.items.GOLDFISH_BASKET) and 1 or 0
+    local tradedFish = {}
+    local points     = 0
     local itemQty
     local itemID
+    local fish
 
     -- Manually handles the trade in order to calculate the points rewarded
     for i = 0, trade:getSlotCount() - 1 do
         itemID  = trade:getItemId(i)
         itemQty = trade:getItemQty(itemID)
+        tradedFish[itemID] = itemQty
+        fish = fishValue[itemID]
 
-        if fishValue[itemID] == nil then
-            break
+        if fish.amount == nil then
+            return
         else
             trade:confirmItem(itemID, itemQty)
-            points = points + fishValue[itemID] * itemQty
+            if fish.isStackable then
+                points = points + fish.amount * tradedFish[itemID]
+            else
+                points = points + fish.amount
+            end
         end
     end
 
