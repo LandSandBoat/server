@@ -5632,7 +5632,18 @@ INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,159,2,255);  -- st
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,164,42,255); -- thunder (42~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,169,10,255); -- water (10~255)
 
--- Bukki (5075)
+-- Dynamis - Tavnazia
+
+-- Nightmare Worm
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,192,1,255); -- Stonega IV
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,255,1,255); -- Break
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,163,1,255); -- Stone V
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,210,1,255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,238,1,255); -- Rasp
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,54,1,255);  -- Stoneskin
+
+
+-- Bukki (5076 The Die is Cast NM)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5076,146,62,72);  -- fire_iii (62~72)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5076,156,59,71);  -- aero_iii (59~71)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5076,166,66,74);  -- thunder_iii (66~74)

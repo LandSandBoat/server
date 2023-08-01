@@ -16,9 +16,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-        xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
-    end
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 
     -- NM Persistence
     if xi.settings.main.ENABLE_WOTG == 1 then

@@ -2253,6 +2253,7 @@ INSERT INTO `mob_groups` VALUES (60,4149,42,'Vanguard_Eye',0,128,2561,2000,2000,
 INSERT INTO `mob_groups` VALUES (61,5121,42,'Prototype_Eye',0,128,0,2000,2000,80,82,0);
 INSERT INTO `mob_groups` VALUES (62,6052,42,'Diabolos_Somnus',0,128,3137,15000,0,105,105,0);
 INSERT INTO `mob_groups` VALUES (63,6743,42,'Diaboloss_Vestige',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,20017,42,'Nightmare_Antlion',600,0,1786,5000,0,95,97,0);
 
 -- ------------------------------------------------------------
 -- Abdhaljs_Isle-Purgonorgo (Zone 44)

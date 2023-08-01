@@ -1447,7 +1447,8 @@ Usage:
         mob_groups.allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
         mob_family_system.charmable, \
         mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
-        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem, \
+        mob_pools.roamflag, mob_family_system.superFamilyID \
         FROM mob_groups \
         INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
@@ -1578,6 +1579,8 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
                 PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(70));
+                PMob->m_roamFlags   = sql->GetUIntData(79);
+                PMob->m_SuperFamily = sql->GetUIntData(80);
                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                 // can be set in mob_spawn_mods or in their onInitialize
                 if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||

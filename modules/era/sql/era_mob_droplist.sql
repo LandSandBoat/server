@@ -26179,8 +26179,7 @@ INSERT INTO `mob_droplist` VALUES (3219,2,0,1000,1449,0);         -- Tukuku Whit
 INSERT INTO `mob_droplist` VALUES (3219,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3219,2,0,1000,1455,0);         -- One Byne Bill (Steal)
 
--- ZoneID: 134 - Hydra Dragoon
--- ZoneID: 134 - Hydra Dragoon
+-- ZoneID: 134 - Hydras Dynamis-Beaucedine
 INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,3363,@UNCOMMON); -- Traitors Fortune Parchment (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
