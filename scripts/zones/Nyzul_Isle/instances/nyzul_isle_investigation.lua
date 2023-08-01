@@ -7,27 +7,32 @@ local instanceObject = {}
 
 local function pickSetPoint(instance)
     local chars        = instance:getChars()
-    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
+    local currentFloor = instance:getLocalVar("[Nyzul]CurrentFloor")
 
     -- Random the floor layout
-    instance:setLocalVar('Nyzul_Isle_FloorLayout', math.random(1, (#xi.nyzul.FloorLayout - 1)))
-    instance:setLocalVar('gearObjective', 0)
+    instance:setLocalVar("[Nyzul]FloorLayout", math.random(1, 17))
+    instance:setLocalVar("gearObjective", 0)
 
-    -- Condition for floors
-    -- hard set objective and floor to boss stage for every 20th floor
+    -- Boss Floor.
     if currentFloor % 20 == 0 then
         instance:setStage(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER)
-        instance:setLocalVar('Nyzul_Isle_FloorLayout', 0)
-    -- 3.33% for a free floor
-    elseif math.random(1, 30) == 1 and instance:getLocalVar('freeFloor') == 0 then -- 3.33% for a free floor
+        instance:setLocalVar("[Nyzul]FloorLayout", 0)
+
+    -- Free Floor.
+    elseif
+        math.random(1, 100) <= 3 and
+        instance:getLocalVar("[Nyzul]FreeFloor") == 0
+    then
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
-        instance:setLocalVar('freeFloor', 1)
+        instance:setLocalVar("[Nyzul]FreeFloor", 1)
 
         GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000,
         function(m)
             local currentInstance = m:getInstance()
             currentInstance:setProgress(15)
-        end) -- Completes objective for free floor
+        end)
+
+    -- Regular Floor.
     else
         -- Build the valid objectives list
         local objective = {}
@@ -50,7 +55,7 @@ local function pickSetPoint(instance)
     end
 
     -- Setup points to travel to
-    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar('Nyzul_Isle_FloorLayout')]
+    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar("[Nyzul]FloorLayout")]
     local posX        = layoutPoint[1] local posY = layoutPoint[2] local posZ = layoutPoint[3]
 
     -- Set Rune of Transfer to Point

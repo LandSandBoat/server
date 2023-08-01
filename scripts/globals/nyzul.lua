@@ -64,17 +64,17 @@ xi.nyzul.penalty =
 
 xi.nyzul.FloorLayout =
 {
-    [0]  = {   -20, -0.5, -380 }, -- boss floors 20, 40, 60, 80
---  [?]  = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
-    [1]  = {   380, -0.5, -500 },
-    [2]  = {   500, -0.5,  -20 },
-    [3]  = {   500, -0.5,   60 },
-    [4]  = {   500, -0.5, -100 },
-    [5]  = {   540, -0.5, -140 },
-    [6]  = {   460, -0.5, -219 },
-    [7]  = {   420, -0.5,  500 },
-    [8]  = {    60, -0.5, -335 },
-    [9]  = {    20, -0.5, -500 },
+    [ 0] = {   -20, -0.5, -380 }, -- boss floors 20, 40, 60, 80
+--  [ ?] = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
+    [ 1] = {   380, -0.5, -500 },
+    [ 2] = {   500, -0.5,  -20 },
+    [ 3] = {   500, -0.5,   60 },
+    [ 4] = {   500, -0.5, -100 },
+    [ 5] = {   540, -0.5, -140 },
+    [ 6] = {   460, -0.5, -219 },
+    [ 7] = {   420, -0.5,  500 },
+    [ 8] = {    60, -0.5, -335 },
+    [ 9] = {    20, -0.5, -500 },
     [10] = {   -95, -0.5,   60 },
     [11] = {   100, -0.5,  100 },
     [12] = {  -460, -4.0, -180 },
@@ -94,15 +94,15 @@ xi.nyzul.FloorLayout =
 
 xi.nyzul.floorCost =
 {
-    [1]  = { level =  1, cost =    0 },
-    [2]  = { level =  6, cost =  500 },
-    [3]  = { level = 11, cost =  550 },
-    [4]  = { level = 16, cost =  600 },
-    [5]  = { level = 21, cost =  650 },
-    [6]  = { level = 26, cost =  700 },
-    [7]  = { level = 31, cost =  750 },
-    [8]  = { level = 36, cost =  800 },
-    [9]  = { level = 41, cost =  850 },
+    [ 1] = { level =  1, cost =    0 },
+    [ 2] = { level =  6, cost =  500 },
+    [ 3] = { level = 11, cost =  550 },
+    [ 4] = { level = 16, cost =  600 },
+    [ 5] = { level = 21, cost =  650 },
+    [ 6] = { level = 26, cost =  700 },
+    [ 7] = { level = 31, cost =  750 },
+    [ 8] = { level = 36, cost =  800 },
+    [ 9] = { level = 41, cost =  850 },
     [10] = { level = 46, cost =  900 },
     [11] = { level = 51, cost = 1000 },
     [12] = { level = 56, cost = 1100 },
@@ -207,7 +207,7 @@ xi.nyzul.appraisalItems =
 
 -- Local functions
 local function getTokenRate(instance)
-    local partySize = instance:getLocalVar('partySize')
+    local partySize = instance:getLocalVar("[Nyzul]PlayerCount")
     local rate      = 1
 
     if partySize > 3 then
@@ -217,7 +217,9 @@ local function getTokenRate(instance)
     return rate
 end
 
-local function calculateTokens(instance)
+-- Global functions
+
+xi.nyzul.calculateTokens = function(instance)
     local relativeFloor   = xi.nyzul.getRelativeFloor(instance)
     local rate            = getTokenRate(instance)
     local potentialTokens = instance:getLocalVar('potential_tokens')
@@ -230,18 +232,6 @@ local function calculateTokens(instance)
     potentialTokens = math.floor(potentialTokens + (200 + floorBonus) * rate)
 
     return potentialTokens
-end
-
--- Global functions
-xi.nyzul.getRelativeFloor = function(instance)
-    local currentFloor  = instance:getLocalVar('Nyzul_Current_Floor')
-    local startingFloor = instance:getLocalVar('Nyzul_Isle_StartingFloor')
-
-    if currentFloor < startingFloor then
-        return currentFloor + 100
-    end
-
-    return currentFloor
 end
 
 xi.nyzul.handleAppraisalItem = function(player, npc)
@@ -456,10 +446,11 @@ xi.nyzul.clearChests = function(instance)
     end
 end
 
+-- Handle floor 100 reward.
 xi.nyzul.handleRunicKey = function(mob)
     local instance = mob:getInstance()
 
-    if instance:getLocalVar('Nyzul_Current_Floor') == 100 then
+    if instance:getLocalVar("[Nyzul]CurrentFloor") == 100 then
         local chars      = instance:getChars()
         local startFloor = instance:getLocalVar('Nyzul_Isle_StartingFloor')
 
@@ -486,102 +477,13 @@ xi.nyzul.handleRunicKey = function(mob)
     end
 end
 
-xi.nyzul.handleProgress = function(instance, progress)
-    local stage      = instance:getStage()
-    local isComplete = false
-
-    if
-        ((stage == xi.nyzul.objective.FREE_FLOOR or
-        stage == xi.nyzul.objective.ELIMINATE_ENEMY_LEADER or
-        stage == xi.nyzul.objective.ACTIVATE_ALL_LAMPS or
-        stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY) and
-        progress == 15)
-        or
-        ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
-        progress >= instance:getLocalVar('Eliminate'))
-    then
-        local chars        = instance:getChars()
-        local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
-
-        instance:setProgress(0)
-        instance:setLocalVar('Eliminate', 0)
-        instance:setLocalVar('potential_tokens', calculateTokens(instance))
-
-        for _, players in ipairs(chars) do
-            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currentFloor)
-        end
-
-        isComplete = true
-    end
-
-    return isComplete
-end
-
-xi.nyzul.enemyLeaderKill = function(mob)
-    local instance = mob:getInstance()
-    instance:setProgress(15)
-end
-
-xi.nyzul.specifiedGroupKill = function(mob)
-    local instance = mob:getInstance()
-
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES then
-        instance:setProgress(instance:getProgress() + 1)
-    end
-end
-
-xi.nyzul.specifiedEnemySet = function(mob)
-    local instance = mob:getInstance()
-
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
-        if instance:getLocalVar('Nyzul_Specified_Enemy') == mob:getID() then
-            mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
-        end
-    end
-end
-
-xi.nyzul.specifiedEnemyKill = function(mob)
-    local instance = mob:getInstance()
-    local stage    = instance:getStage()
-
-    -- Eliminate specified enemy
-    if stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
-        if instance:getLocalVar('Nyzul_Specified_Enemy') == mob:getID() then
-            instance:setProgress(15)
-            instance:setLocalVar('Nyzul_Specified_Enemy', 0)
-        end
-
-    -- Eliminiate all enemies
-    elseif stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-        instance:setProgress(instance:getProgress() + 1)
-    end
-end
-
-xi.nyzul.eliminateAllKill = function(mob)
-    local instance = mob:getInstance()
-
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-        instance:setProgress(instance:getProgress() + 1)
-    end
-end
-
-xi.nyzul.activateRuneOfTransfer = function(instance)
-    for _, runeID in pairs(ID.npc.RUNE_OF_TRANSFER) do
-        if GetNPCByID(runeID, instance):getStatus() == xi.status.NORMAL then
-            GetNPCByID(runeID, instance):setAnimationSub(1)
-
-            break
-        end
-    end
-end
-
 xi.nyzul.vigilWeaponDrop = function(player, mob)
     local instance = mob:getInstance()
 
     -- Only floor 100 Bosses to drop 1 random weapon guarenteed and 1 of the disk holders job
     -- will not drop diskholder's weapon if anyone already has it.
-    if instance:getLocalVar('Nyzul_Current_Floor') == 100 then
-        local diskHolder = GetPlayerByID(instance:getLocalVar('diskHolder'), instance)
+    if instance:getLocalVar("[Nyzul]CurrentFloor") == 100 then
+        local diskHolder = GetPlayerByID(instance:getLocalVar("diskHolder"), instance)
         local chars      = instance:getChars()
 
         if diskHolder ~= nil then

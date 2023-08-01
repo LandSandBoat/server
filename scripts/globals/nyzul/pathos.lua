@@ -1,8 +1,7 @@
 -----------------------------------
 -- Nyzul Isle Global
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}
@@ -117,18 +116,18 @@ local function addPenalty(mob)
                 end
 
                 player:addStatusEffect(effect, power, 0, 0)
-                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                player:getStatusEffect(effect):delEffectFlag(xi.effectFlag.DISPELABLE)
+                player:getStatusEffect(effect):delEffectFlag(xi.effectFlag.ERASABLE)
+                player:getStatusEffect(effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
                 player:messageSpecial(ID.text.MALFUNCTION)
                 player:messageSpecial(pathos.textId)
 
                 if player:hasPet() then
                     local pet = player:getPet()
                     pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                    pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                    pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.DISPELABLE)
+                    pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.ERASABLE)
+                    pet:getStatusEffect(effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
                 end
             end
         end
@@ -172,18 +171,18 @@ xi.nyzul.addPathos = function(instance)
 
         for _, player in pairs(chars) do
             player:addStatusEffect(pathos.effect, pathos.power, 0, 0)
-            player:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.DISPELABLE)
-            player:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.ERASABLE)
-            player:getStatusEffect(pathos.effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+            player:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.DISPELABLE)
+            player:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.ERASABLE)
+            player:getStatusEffect(pathos.effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
 
             player:messageSpecial(pathos.textId)
 
             if player:hasPet() then
                 local pet = player:getPet()
                 pet:addStatusEffectEx(pathos.effect, pathos.effect, pathos.power, 0, 0)
-                pet:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                pet:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.ERASABLE)
-                pet:getStatusEffect(pathos.effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                pet:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.DISPELABLE)
+                pet:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.ERASABLE)
+                pet:getStatusEffect(pathos.effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
             end
         end
 

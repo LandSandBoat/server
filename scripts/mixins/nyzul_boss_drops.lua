@@ -10,7 +10,7 @@ g_mixins = g_mixins or {}
 g_mixins.nyzul_boss_drop = function(nyzulMob)
     nyzulMob:addListener('SPAWN', 'NYZUL_BOSS_SPAWN', function(mob)
         local instance = mob:getInstance()
-        local result   = instance:getLocalVar('Nyzul_Current_Floor')
+        local result   = instance:getLocalVar("[Nyzul]CurrentFloor")
 
         if result == 20 then
             mob:setDropID(7350)

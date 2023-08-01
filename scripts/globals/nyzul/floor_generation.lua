@@ -1,10 +1,11 @@
 -----------------------------------
 -- Nyzul Isle: Floor generation methods and data.
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}
+-----------------------------------
 
 -----------------------------------
 -- Data Tables
@@ -1131,15 +1132,27 @@ local pTableFloorRandomEntities =
     [17] = { ID.mob[51].OFFSET_GEARS,         ID.mob[51].OFFSET_GEARS   +   5 }, -- Gears
 }
 
+-- Local variables documentation.
+
+-- This are set once and never changed after.
+-- [Nyzul]PlayerCount : Tracks number of participants. Used for Token calculations and
+-- [Nyzul]FreeFloor   : Dissallows free floors once not 0.
+
+-- This change on each floor change.
+-- [Nyzul]FloorLayout   : Tracks "position" on the map.
+-- [Nyzul]CurrentFloor  : Tracks floor being generated.
+
+-- [Nyzul]LampObjective : Tracks Lamp objective.
+
 -----------------------------------
 -- Local functions
 -----------------------------------
 
 local function lampsActivate(instance)
-    local floorLayout      = instance:getLocalVar("Nyzul_Isle_FloorLayout")
-    local lampsObjective   = instance:getLocalVar("[Lamps]Objective")
+    local floorLayout      = instance:getLocalVar("[Nyzul]FloorLayout")
+    local lampsObjective   = instance:getLocalVar("[Nyzul]LampObjective")
     local runicLampOffset  = ID.npc.RUNIC_LAMP_OFFSET
-    local partySize        = utils.clamp(instance:getLocalVar("partySize"), 3, 5)
+    local partySize        = utils.clamp(instance:getLocalVar("[Nyzul]PlayerCount"), 3, 5)
     local spawnPoint       = 0
     local dTableLampPoints = {}
 
@@ -1201,7 +1214,7 @@ end
 -----------------------------------
 
 xi.nyzul.prepareMobs = function(instance)
-    local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+    local currentFloor = instance:getLocalVar("[Nyzul]CurrentFloor")
 
     -- 20th floor bosses.
     if currentFloor % 20 == 0 then
@@ -1221,7 +1234,7 @@ xi.nyzul.prepareMobs = function(instance)
     -- All other floors except free.
     elseif instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
         -- Build dynamic table with all the possible spawn points.
-        local floorLayout      = instance:getLocalVar("Nyzul_Isle_FloorLayout")
+        local floorLayout      = instance:getLocalVar("[Nyzul]FloorLayout")
         local pointTable       = mobSpawnPoints[floorLayout]
         local sPoint           = 0
         local dTableSpawnPoint = {}
@@ -1286,7 +1299,7 @@ xi.nyzul.prepareMobs = function(instance)
 
             -- Activate Lamps Objective
             [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
-                instance:setLocalVar("[Lamps]Objective", math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                instance:setLocalVar("[Nyzul]LampObjective", math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
                 lampsActivate(instance)
             end,
         }

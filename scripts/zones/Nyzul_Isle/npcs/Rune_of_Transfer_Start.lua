@@ -41,11 +41,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     then
         local floorCost = xi.nyzul.floorCost[option]
 
-        if player:getCurrency('nyzul_isle_assault_point') >= floorCost.cost then
-            player:delCurrency('nyzul_isle_assault_point', floorCost.cost)
-            instance:setLocalVar('Nyzul_Isle_StartingFloor', floorCost.level)
-            instance:setLocalVar('Nyzul_Current_Floor', floorCost.level)
-            instance:setLocalVar('diskHolder', player:getID())
+        if player:getCurrency("nyzul_isle_assault_point") >= floorCost.cost then
+            player:delCurrency("nyzul_isle_assault_point", floorCost.cost)
+            instance:setLocalVar("Nyzul_Isle_StartingFloor", floorCost.level)
+            instance:setLocalVar("[Nyzul]CurrentFloor", floorCost.level)
+            instance:setLocalVar("diskHolder", player:getID())
 
             local playerCount = 0
 
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 end)
             end
 
-            instance:setLocalVar('partySize', playerCount)
+            instance:setLocalVar("[Nyzul]PlayerCount", playerCount)
         else
             player:messageSpecial(ID.text.INSUFFICIENT_TOKENS)
             instance:setLocalVar('runeHandler', 0)
