@@ -16,18 +16,18 @@ local itemCost =
 
 local items =
 {
-    [8450]  = { item = 5385, cost = itemCost.LOW_GRADE,    slot = 0x02      }, -- Barbarian's Drink -+
-    [8451]  = { item = 5386, cost = itemCost.LOW_GRADE,    slot = 0x04      }, -- Fighter's Drink -+
-    [8452]  = { item = 5387, cost = itemCost.LOW_GRADE,    slot = 0x08      }, -- Oracle's Drink -+
-    [8453]  = { item = 5388, cost = itemCost.LOW_GRADE,    slot = 0x10      }, -- Assassin's Drink
-    [8454]  = { item = 5389, cost = itemCost.LOW_GRADE,    slot = 0x20      }, -- Spy's Dring -+
-    [8455]  = { item = 5394, cost = itemCost.LOW_GRADE,    slot = 0x400     }, -- Gnostic's Drink
-    [8456]  = { item = 5396, cost = itemCost.LOW_GRADE,    slot = 0x1000    }, -- Shepherd's Drink
-    [8457]  = { item = 5436, cost = itemCost.LOW_GRADE,    slot = 0x40000   }, -- Dusty Reraise -+
-    [8458]  = { item = 5437, cost = itemCost.LOW_GRADE,    slot = 0x80000   }, -- Strange Milk -+
-    [8459]  = { item = 5438, cost = itemCost.LOW_GRADE,    slot = 0x100000  }, -- Strange Juice -+
-    [8460]  = { item = 5439, cost = itemCost.LOW_GRADE,    slot = 0x200000  }, -- Viscer's Drink -+
-    [8461]  = { item = 5397, cost = itemCost.LOW_GRADE,    slot = 0x4000000 }, -- Sprinters Drink -+
+    [ 8450] = { item = 5385, cost = itemCost.LOW_GRADE,    slot = 0x02      }, -- Barbarian's Drink -+
+    [ 8451] = { item = 5386, cost = itemCost.LOW_GRADE,    slot = 0x04      }, -- Fighter's Drink -+
+    [ 8452] = { item = 5387, cost = itemCost.LOW_GRADE,    slot = 0x08      }, -- Oracle's Drink -+
+    [ 8453] = { item = 5388, cost = itemCost.LOW_GRADE,    slot = 0x10      }, -- Assassin's Drink
+    [ 8454] = { item = 5389, cost = itemCost.LOW_GRADE,    slot = 0x20      }, -- Spy's Dring -+
+    [ 8455] = { item = 5394, cost = itemCost.LOW_GRADE,    slot = 0x400     }, -- Gnostic's Drink
+    [ 8456] = { item = 5396, cost = itemCost.LOW_GRADE,    slot = 0x1000    }, -- Shepherd's Drink
+    [ 8457] = { item = 5436, cost = itemCost.LOW_GRADE,    slot = 0x40000   }, -- Dusty Reraise -+
+    [ 8458] = { item = 5437, cost = itemCost.LOW_GRADE,    slot = 0x80000   }, -- Strange Milk -+
+    [ 8459] = { item = 5438, cost = itemCost.LOW_GRADE,    slot = 0x100000  }, -- Strange Juice -+
+    [ 8460] = { item = 5439, cost = itemCost.LOW_GRADE,    slot = 0x200000  }, -- Viscer's Drink -+
+    [ 8461] = { item = 5397, cost = itemCost.LOW_GRADE,    slot = 0x4000000 }, -- Sprinters Drink -+
 
     [12546] = { item = 5390, cost = itemCost.MEDIUM_GRADE, slot = 0x40      }, -- Braver's Drink -+
     [12547] = { item = 5391, cost = itemCost.MEDIUM_GRADE, slot = 0x80      }, -- Soldier's Drink -+
@@ -73,15 +73,15 @@ local function giveAllPrefered(player)
     local preferred = player:getCharVar("[Nyzul]preferredItems")
     local selection =
     {
-        [1]  = 8450,
-        [2]  = 8451,
-        [3]  = 8452,
-        [4]  = 8453,
-        [5]  = 8454,
-        [6]  = 12546,
-        [7]  = 12547,
-        [8]  = 12548,
-        [9]  = 12549,
+        [ 1] = 8450,
+        [ 2] = 8451,
+        [ 3] = 8452,
+        [ 4] = 8453,
+        [ 5] = 8454,
+        [ 6] = 12546,
+        [ 7] = 12547,
+        [ 8] = 12548,
+        [ 9] = 12549,
         [10] = 8455,
         [11] = 12550,
         [12] = 8456,
@@ -118,10 +118,11 @@ local function giveAllPrefered(player)
 end
 
 xi.nyzul.vendingBoxOnTrigger = function(player)
-    local preferred = player:getCharVar("[Nyzul]preferredItems")
-    local tokens    = player:getCurrency("nyzul_isle_assault_point")
+    local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
+    local itemsGottenBitmask = playerHasTempItem(player)
+    local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
 
-    player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
+    player:startEvent(202, 0, playerTokens, itemsGottenBitmask, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
 end
 
 xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
@@ -148,7 +149,11 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
             end
         end
 
-        local tokens = player:getCurrency("nyzul_isle_assault_point")
-        player:updateEvent(1, tokens, playerHasTempItem(player), player:getCharVar("[Nyzul]preferredItems"), itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE)
+        -- Update the event.
+        local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
+        local itemsGottenBitmask = playerHasTempItem(player)
+        local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
+
+        player:updateEvent(0, playerTokens, itemsGotten, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
     end
 end
