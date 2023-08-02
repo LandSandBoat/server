@@ -4191,7 +4191,6 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                                              !requestedMoghouseFloorChange;
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
-            bool requestedMoghouseFloorChange  = startingZone == destinationZone;
 
             // Validate travel
             if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)

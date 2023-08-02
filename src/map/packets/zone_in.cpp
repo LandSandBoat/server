@@ -28,7 +28,6 @@
 
 #include "instance.h"
 #include "status_effect_container.h"
-#include "vana_time.h"
 #include "zone.h"
 
 // Returns the Model ID of the mog house to be used

@@ -189,7 +189,8 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
         aLadysHeart and
         flowerChild and
         not unlocked2ndFloor and
-        not using2ndFloor
+        not using2ndFloor and
+        xi.settings.main.MOG_HOUSE_2F
     then
         cs = xi.moghouse.moghouse2FUnlockCSs[player:getZoneID()]
 
