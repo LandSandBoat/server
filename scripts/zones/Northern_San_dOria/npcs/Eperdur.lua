@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Eperdur
--- Starts and Finishes Quest: Acting in Good Faith (finish), Healing the Land,
+-- Starts and Finishes Quest: Healing the Land,
 -- !pos 129 -6 96 231
 -----------------------------------
 require("scripts/globals/titles")
@@ -14,16 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local actingInGoodFaith  = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
     local healingTheLand = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
     local sorceryOfTheNorth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
     if
-        actingInGoodFaith == QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.GANTINEUXS_LETTER)
-    then
-        player:startEvent(680) -- Finish quest "Acting in Good Faith"
-    elseif
         healingTheLand == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
         player:getMainLvl() >= 10
@@ -68,18 +62,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 680 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_MEA)
-        else
-            player:addTitle(xi.title.PILGRIM_TO_MEA)
-            player:delKeyItem(xi.ki.GANTINEUXS_LETTER)
-            player:addItem(xi.items.SCROLL_OF_TELEPORT_MEA)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_MEA) -- Scroll of Teleport-Mea
-            player:addFame(xi.quest.fame_area.WINDURST, 30)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
-        end
-    elseif csid == 681 and option == 0 then
+    if csid == 681 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         player:addKeyItem(xi.ki.SEAL_OF_BANISHING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEAL_OF_BANISHING)
