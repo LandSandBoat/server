@@ -25,9 +25,11 @@ entity.onMobDespawn = function(mob)
         local mantaTwo = ID.mob.CHARYBDIS - 4
 
         if chooseManta == 2 then
+            GetMobByID(mantaTwo):setRespawnTime(GetMobRespawnTime(mantaTwo))
             DisallowRespawn(mantaOne, true)
             DisallowRespawn(mantaTwo, false)
         elseif chooseManta == 1 then
+            GetMobByID(mantaOne):setRespawnTime(GetMobRespawnTime(mantaOne))
             DisallowRespawn(mantaOne, false)
             DisallowRespawn(mantaTwo, true)
         end
