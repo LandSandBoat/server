@@ -26,37 +26,36 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "conquest_system.h"
 
 ConquestData::ConquestData(std::unique_ptr<SqlConnection>& sql)
-: regionControls(std::vector<region_control_t>(256))
-, influences(std::vector<influence_t>(256))
+: regionControls(std::vector<region_control_t>(19))
+, influences(std::vector<influence_t>(19))
 {
     load(sql);
 }
 
 void ConquestData::load(std::unique_ptr<SqlConnection>& sql)
 {
-    const char* Query = "SELECT region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
+    const char* Query = "SELECT region_id, region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
                              FROM conquest_system;";
 
     int32 ret = sql->Query(Query);
 
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        uint8 regionId = 0;
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            region_control_t regionControl;
-            regionControl.current    = sql->GetIntData(0);
-            regionControl.prev       = sql->GetIntData(1);
+            uint8 regionId = sql->GetUIntData(0);
+
+            region_control_t regionControl{};
+            regionControl.current    = sql->GetIntData(1);
+            regionControl.prev       = sql->GetIntData(2);
             regionControls[regionId] = regionControl;
 
-            influence_t influence;
-            influence.sandoria_influence = sql->GetIntData(2);
-            influence.bastok_influence   = sql->GetIntData(3);
-            influence.windurst_influence = sql->GetIntData(4);
-            influence.beastmen_influence = sql->GetIntData(5);
+            influence_t influence{};
+            influence.sandoria_influence = sql->GetIntData(3);
+            influence.bastok_influence   = sql->GetIntData(4);
+            influence.windurst_influence = sql->GetIntData(5);
+            influence.beastmen_influence = sql->GetIntData(6);
             influences[regionId]         = influence;
-
-            regionId++;
         }
     }
 }
