@@ -177,23 +177,23 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
-    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accpct = fTP(tp, a1, a2, a3)
-    local acclost = acc - (acc * accpct)
-    local hrate = hitrate - (0.005 * acclost)
+-- local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
+--     -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
+--     local accpct = fTP(tp, a1, a2, a3)
+--     local acclost = acc - (acc * accpct)
+--     local hrate = hitrate - (0.005 * acclost)
 
-    -- cap it
-    if hrate > 0.95 then
-        hrate = 0.95
-    end
+--     -- cap it
+--     if hrate > 0.95 then
+--         hrate = 0.95
+--     end
 
-    if hrate < 0.2 then
-        hrate = 0.2
-    end
+--     if hrate < 0.2 then
+--         hrate = 0.2
+--     end
 
-    return hrate
-end
+--     return hrate
+-- end
 
 local function getMultiAttacks(attacker, target, wsParams)
     local numHits      = wsParams.numHits
