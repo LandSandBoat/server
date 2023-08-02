@@ -1,6 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm_ashtaerh_the_gallvexed (???)
+--  NPC: qm_ashtaerh (???)
 -- Spawns Ashtaerh the Gallvexed
 -- !pos 360.000 -16.043 -400.000 15
 -----------------------------------
