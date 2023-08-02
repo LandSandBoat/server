@@ -62,9 +62,9 @@ zones[xi.zone.CAPE_TERIGGAN] =
     },
     npc =
     {
-        CASKET_BASE      = 17240445,
-        OVERSEER_BASE    = 17240472, -- Salimardi_RK in npc_list
-        CERMET_HEADSTONE = 17240497,
+        CASKET_BASE      = GetFirstID("Treasure_Casket"),
+        OVERSEER_BASE    = GetFirstID("Salimardi_RK"), -- Salimardi_RK in npc_list
+        CERMET_HEADSTONE = GetFirstID("Cermet_Headstone"),
     },
 }
 
