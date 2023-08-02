@@ -6,8 +6,6 @@
 -- MDB -50, 2 minute base duration
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

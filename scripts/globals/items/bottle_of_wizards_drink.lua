@@ -3,8 +3,6 @@
 -- Item: Wizards Drink
 -- Item Effect: +100% MP
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

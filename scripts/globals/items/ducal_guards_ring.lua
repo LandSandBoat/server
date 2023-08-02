@@ -4,7 +4,6 @@
 -- Enchantment: "Teleport-RuLude Gardens"
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}

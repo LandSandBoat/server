@@ -3,7 +3,6 @@
 -- Item: Stoneskin Torque
 -- Item Effect: Stoneskin
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

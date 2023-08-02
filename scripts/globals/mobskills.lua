@@ -5,7 +5,6 @@
 -- this set of functions emulates.
 -----------------------------------
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -520,7 +519,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     end
 
     -- Deal bonus damage vs mob ecosystem
-    local systemBonus = utils.getSystemStrengthBonus(mob, target)
+    local systemBonus = utils.getSystemStrengthBonus(mob:getSystem(), target:getSystem())
     damage = damage + damage * (systemBonus * 0.25)
 
     -- elemental resistence

@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- "Killer" effects bonus
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
@@ -20,7 +18,7 @@ effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEMON_KILLER, effect:getPower())
     target:addMod(xi.mod.EMPTY_KILLER, effect:getPower())
     -- target:addMod(xi.mod.HUMANOID_KILLER, effect:getPower())
-    target:addMod(xi.mod.LUMORIAN_KILLER, effect:getPower())
+    target:addMod(xi.mod.LUMINIAN_KILLER, effect:getPower())
     target:addMod(xi.mod.LUMINION_KILLER, effect:getPower())
 end
 
@@ -41,7 +39,7 @@ effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DEMON_KILLER, effect:getPower())
     target:delMod(xi.mod.EMPTY_KILLER, effect:getPower())
     -- target:delMod(xi.mod.HUMANOID_KILLER, effect:getPower())
-    target:delMod(xi.mod.LUMORIAN_KILLER, effect:getPower())
+    target:delMod(xi.mod.LUMINIAN_KILLER, effect:getPower())
     target:delMod(xi.mod.LUMINION_KILLER, effect:getPower())
 end
 

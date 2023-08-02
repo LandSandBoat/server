@@ -4,7 +4,6 @@
 -- Item Effect: Pet Regen
 -- Duration 3 Minutes
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

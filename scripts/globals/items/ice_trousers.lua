@@ -3,9 +3,6 @@
 -- Item: Ice Trousers
 -- Item Effect: Ice Spikes
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -24,9 +24,10 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.VERMIN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
+    params.attribute = xi.mod.INT
     params.multiplier = 1.50
     params.tMultiplier = 1.0
     params.duppercap = 30
@@ -37,10 +38,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.3
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 end
 
 return spellObject

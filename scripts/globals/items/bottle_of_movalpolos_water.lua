@@ -4,7 +4,6 @@
 -- Item Effect: Refresh 2 MP 3/Tic under 85% MP.
 -- Duration: 30 Mins
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

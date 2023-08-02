@@ -3,8 +3,6 @@
 -- Item: Antidote
 -- Item Effect: This potion remedies poison.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

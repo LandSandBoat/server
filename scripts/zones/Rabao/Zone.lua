@@ -9,6 +9,7 @@ require('scripts/globals/chocobo')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
     xi.chocobo.initZone(zone)
 end
 

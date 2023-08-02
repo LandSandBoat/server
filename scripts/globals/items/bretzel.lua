@@ -7,7 +7,6 @@
 -- Magic Cap 55
 -- Vitality 2
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

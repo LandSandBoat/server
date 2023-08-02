@@ -3,7 +3,6 @@
 -- Item: regen cuirass
 -- Item Effect: gives regen
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.DIVINE_CARESS
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

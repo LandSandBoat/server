@@ -4,9 +4,6 @@
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

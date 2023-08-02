@@ -3,7 +3,6 @@
 -- Recall ring: Meriphataud
 -- Enchantment: "Recall-Meriphataud"
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------

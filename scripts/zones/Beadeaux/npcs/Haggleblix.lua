@@ -182,7 +182,7 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             for i = 1, slotsReq do
                 if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
-                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+                    player:addItem(currency[2], 99)
                 else
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
                 end

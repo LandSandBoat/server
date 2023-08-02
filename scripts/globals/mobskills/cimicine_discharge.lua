@@ -4,8 +4,6 @@
 -- Duration: Variable, with max of 3 min
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,8 +2,6 @@
 -- xi.effect.SUPER_BUFF
 -- This is only used for Nidhogg, nothing else
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

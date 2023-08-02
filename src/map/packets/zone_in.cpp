@@ -29,13 +29,19 @@
 #include "map/zone.h"
 #include "zone_in.h"
 
-/************************************************************************
- *                                                                       *
- *  Returns the ID of the mog house map to be used                       *
- *                                                                       *
- ************************************************************************/
+#include "common/vana_time.h"
 
-uint16 GetMogHouseID(CCharEntity* PChar)
+#include "entities/charentity.h"
+#include "utils/zoneutils.h"
+
+#include "instance.h"
+#include "status_effect_container.h"
+#include "zone.h"
+
+// Returns the Model ID of the mog house to be used
+// This is not the same as the actual Zone ID!
+// (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
+uint16 GetMogHouseModelID(CCharEntity* PChar)
 {
     // TODO: verify wtf is going on with this function. either these aren't supposed to be zone IDs or somehow Jeuno's mog is western adoulin!
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
@@ -206,8 +212,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     if (PChar->m_moghouseID != 0)
     {
         ref<uint8>(0x80)  = 1;
-        ref<uint16>(0xAA) = GetMogHouseID(PChar);   // Mog House id
-        ref<uint8>(0xAE)  = GetMogHouseFlag(PChar); // Mog House leaving flag
+        ref<uint16>(0xAA) = GetMogHouseModelID(PChar); // Mog House id
+        ref<uint8>(0xAE)  = GetMogHouseFlag(PChar);    // Mog House leaving flag
         PChar->setCharVar("[Moghouse]Exit_Pending", 1);
     }
     else

@@ -22,6 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #pragma once
 
 #include "common/application.h"
+#include "common/taskmgr.h"
 
 #include "besieged_system.h"
 #include "campaign_system.h"

@@ -20,13 +20,16 @@
 */
 
 // TODO:
-// нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
-// у каждой из указанных зон особое поведение
+// It is necessary to divide the Czone class into basic and heirs. Already painted: Standard, Rezident, Instance and Dinamis
+// Each of these zones has special behavior
+
+#include "zone.h"
 
 #include "common/logging.h"
 #include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -82,23 +85,14 @@
 int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
 {
     CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-    PZone->ZoneServer(tick, false);
+    PZone->ZoneServer(tick);
     return 0;
 }
 
-int32 zone_server_trigger_area(time_point tick, CTaskMgr::CTask* PTask)
+int32 zone_trigger_area(time_point tick, CTaskMgr::CTask* PTask)
 {
     CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-
-    if ((tick - PZone->m_TriggerAreaCheckTime) < 800ms)
-    {
-        PZone->ZoneServer(tick, false);
-    }
-    else
-    {
-        PZone->ZoneServer(tick, true);
-        PZone->m_TriggerAreaCheckTime = tick;
-    }
+    PZone->CheckTriggerAreas();
     return 0;
 }
 
@@ -144,7 +138,9 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     m_useNavMesh = false;
     std::ignore  = m_useNavMesh;
-    ZoneTimer    = nullptr;
+
+    ZoneTimer             = nullptr;
+    ZoneTimerTriggerAreas = nullptr;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
@@ -176,12 +172,6 @@ CZone::~CZone()
     destroy(m_CampaignHandler);
     destroy(m_zoneEntities);
 }
-
-/************************************************************************
- *                                                                       *
- *  Функции доступа к полям класса                                       *
- *                                                                       *
- ************************************************************************/
 
 ZONEID CZone::GetID()
 {
@@ -358,13 +348,6 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  Загружаем ZoneLines, необходимые для правильного перемещения между   *
- *  зонами.                                                              *
- *                                                                       *
- ************************************************************************/
-
 void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
@@ -442,12 +425,6 @@ void CZone::LoadZoneWeather()
         ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
-
-/************************************************************************
- *                                                                       *
- *  Загружаем настройки зоны из базы                                     *
- *                                                                       *
- ************************************************************************/
 
 void CZone::LoadZoneSettings()
 {
@@ -801,7 +778,7 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (!ZoneTimer && !m_zoneEntities->CharListEmpty())
     {
-        createZoneTimer();
+        createZoneTimers();
     }
 
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);
@@ -970,10 +947,10 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
  *                                                                       *
  ************************************************************************/
 
-void CZone::ZoneServer(time_point tick, bool checkTriggerAreas)
+void CZone::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
-    m_zoneEntities->ZoneServer(tick, checkTriggerAreas);
+    m_zoneEntities->ZoneServer(tick);
 
     if (m_BattlefieldHandler != nullptr)
     {
@@ -984,6 +961,9 @@ void CZone::ZoneServer(time_point tick, bool checkTriggerAreas)
     {
         ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimer         = nullptr;
+
+        ZoneTimerTriggerAreas->m_type = CTaskMgr::TASK_REMOVE;
+        ZoneTimerTriggerAreas         = nullptr;
 
         m_zoneEntities->HealAllMobs();
     }
@@ -1057,13 +1037,16 @@ bool CZone::HasReducedVerticalAggro()
     return std::find(std::begin(ReducedVerticalAggroZones), std::end(ReducedVerticalAggroZones), this->m_zoneID) != std::end(ReducedVerticalAggroZones);
 }
 
-void CZone::createZoneTimer()
+void CZone::createZoneTimers()
 {
     TracyZoneScoped;
     ZoneTimer =
-        CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_triggerAreaList.empty() ? zone_server : zone_server_trigger_area,
+        CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_server,
                                          std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
+
+    ZoneTimerTriggerAreas =
+        CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_trigger_area,
+                                         std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval)));
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
@@ -1289,33 +1272,40 @@ CZoneEntities* CZone::GetZoneEntities()
     return m_zoneEntities;
 }
 
-void CZone::CheckTriggerAreas(CCharEntity* PChar)
+void CZone::CheckTriggerAreas()
 {
     TracyZoneScoped;
-    uint32 triggerAreaID = 0;
-
-    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
+    for (auto const& [targid, PEntity] : m_zoneEntities->m_charList)
     {
-        if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
+        auto* PChar = static_cast<CCharEntity*>(PEntity);
+
+        // TODO: When we start to use octrees or spatial hashing to split up zones,
+        //     : use them here to make the search domain smaller.
+
+        uint32 triggerAreaID = 0;
+        for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
         {
-            triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
-
-            if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+            if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
             {
-                luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
+                triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
+
+                if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                {
+                    luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
+                }
+
+                if (PChar->m_InsideTriggerAreaID == 0)
+                {
+                    break;
+                }
             }
-
-            if (PChar->m_InsideTriggerAreaID == 0)
+            else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
             {
-                break;
+                luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
             }
         }
-        else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
-        {
-            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
-        }
+        PChar->m_InsideTriggerAreaID = triggerAreaID;
     }
-    PChar->m_InsideTriggerAreaID = triggerAreaID;
 }
 
 //==========================================================

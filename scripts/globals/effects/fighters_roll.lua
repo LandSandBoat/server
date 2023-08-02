@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.FIGHTERS_ROLL
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

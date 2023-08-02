@@ -1,8 +1,6 @@
 -----------------------------------
 -- Effect: GEO MND Boost
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

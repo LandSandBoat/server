@@ -3,7 +3,6 @@
 -- Item: Bottle of Kitron Juice
 -- Item Effect: Restores 180 MP over 180 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

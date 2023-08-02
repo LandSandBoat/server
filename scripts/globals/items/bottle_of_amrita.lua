@@ -3,7 +3,6 @@
 -- Item: Amrita
 -- Item Effect: Restores 500 HP and MP over 300 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

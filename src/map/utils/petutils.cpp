@@ -1156,11 +1156,12 @@ namespace petutils
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
-        // Set stat modifiers
-        PPet->setModifier(Mod::DEF, mobutils::GetDefense(PPet, PPet->defRank));
-        PPet->setModifier(Mod::EVA, mobutils::GetBase(PPet, PPet->evaRank));
-        PPet->setModifier(Mod::ATT, mobutils::GetBase(PPet, PPet->attRank));
-        PPet->setModifier(Mod::ACC, mobutils::GetBase(PPet, PPet->accRank));
+        // Set A+ weapon skill
+        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        // Set D evasion and def
+        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
 
         // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
         PPet->m_dmgType = DAMAGE_TYPE::SLASHING;

@@ -22,7 +22,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
-    keyitem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
+    keyItem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
     title    = xi.title.TRADER_OF_ANTIQUITIES,
 }
 

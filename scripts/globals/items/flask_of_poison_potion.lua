@@ -3,7 +3,6 @@
 -- Item: Poison Potion
 -- Item Effect: Poison 1HP / Removes 60 HP over 180 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

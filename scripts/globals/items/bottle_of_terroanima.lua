@@ -4,8 +4,6 @@
 -- Item Effect: Terror
 -----------------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/status")
-require("scripts/globals/player")
 -----------------------------------------
 local itemObject = {}
 

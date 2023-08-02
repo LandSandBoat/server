@@ -359,14 +359,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,340,73,255); -- utsusemi_
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,341,30,64);  -- jubaku_ichi (30~64)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,342,65,255); -- jubaku_ni (65~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,344,23,47);  -- hojo_ichi (23~47)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,345,48,75);  -- hojo_ni (48~75)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,346,76,255); -- hojo_san (76~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,345,48,255); -- hojo_ni (48~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,347,19,43);  -- kurayami_ichi (19~43)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,348,44,72);  -- kurayami_ni (44~72)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,349,73,255); -- kurayami_san (73~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,348,44,255); -- kurayami_ni (44~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,350,27,55);  -- dokumori_ichi (27~55)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,351,56,74);  -- dokumori_ni (56~74)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,352,76,255); -- dokumori_san (76~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,351,56,255); -- dokumori_ni (56~255)
 
 -- Beastmen_BLU (8)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BLU',8,517,8,255);  -- metallic_body (8~255)
@@ -5634,6 +5631,16 @@ INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,154,18,255); -- ae
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,159,2,255);  -- stone (2~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,164,42,255); -- thunder (42~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,169,10,255); -- water (10~255)
+
+-- Dynamis - Tavnazia
+
+-- Nightmare Worm
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,192,1,255); -- Stonega IV
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,255,1,255); -- Break
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,163,1,255); -- Stone V
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,210,1,255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,238,1,255); -- Rasp
+INSERT INTO `mob_spell_lists` VALUES ('Nightmare_Worm',5075,54,1,255);  -- Stoneskin
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -7,7 +7,6 @@
 -- Vermin Killer 10
 -- Poison Resist 10
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BLOOD_WEAPON
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

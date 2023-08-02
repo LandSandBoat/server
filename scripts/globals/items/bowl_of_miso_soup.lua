@@ -11,7 +11,6 @@
 -- Ranged Accuracy +10% (cap 40)
 -- Ranged Attack +10% (cap 40)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

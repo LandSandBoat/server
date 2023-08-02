@@ -8,7 +8,6 @@
 -- Accuracy +11% (cap 58)
 -- Undead Killer
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

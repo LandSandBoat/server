@@ -2,8 +2,6 @@
 -- Nether Blast (Pet Version)
 -- M = 5
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 require("scripts/globals/summon")

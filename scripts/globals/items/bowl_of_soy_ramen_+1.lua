@@ -11,7 +11,6 @@
 -- Ranged Attack +11% (cap 175)
 -- Resist Slow +15
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

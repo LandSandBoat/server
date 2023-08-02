@@ -6,7 +6,6 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

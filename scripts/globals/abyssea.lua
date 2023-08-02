@@ -4,7 +4,6 @@
 require("scripts/globals/spell_data")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")

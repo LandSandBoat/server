@@ -3,7 +3,6 @@
 --  Scroll of Instant ReRaise
 --  Brings you back from the dead~!
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -3,7 +3,6 @@
 -- name: dusty_scroll_of_reraise
 -- effect: grants reraise III for 10m
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------

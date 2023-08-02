@@ -3,7 +3,6 @@
 -- White Rarab Cap +1
 --  This Hairpin functions in the same way as the spell Reraise.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.TABULA_RASA
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

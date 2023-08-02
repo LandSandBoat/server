@@ -3,7 +3,6 @@
 -- Item: Orange au Lait
 -- Item Effect: Restores 100 HP over 300 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

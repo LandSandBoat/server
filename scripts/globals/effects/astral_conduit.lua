@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ASTRAL_CONDUIT
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

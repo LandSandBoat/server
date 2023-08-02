@@ -3,7 +3,6 @@
 -- Item: bottle_of_berserkers_tonic
 -- Item Effect: Double Attack +50
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------

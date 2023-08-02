@@ -449,7 +449,7 @@ content.loot =
         },
     },
 
-    [7] =
+    [ID.TEMENOS_WESTERN_TOWER.npc.LOOT_CRATE] =
     {
         {
             quantity = 5,

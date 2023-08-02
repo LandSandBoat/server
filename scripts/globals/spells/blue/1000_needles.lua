@@ -24,26 +24,37 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-        params.tpmod = TPMOD_CRITICAL
-        params.attackType = xi.attackType.MAGICAL
-        params.damageType = xi.damageType.LIGHT
-        params.scattr = SC_COMPRESSION
-        params.numhits = 1
-        params.multiplier = 1.5
-        params.tp150 = 1.5
-        params.tp300 = 1.5
-        params.azuretp = 1.5
-        params.duppercap = 49
-        params.str_wsc = 1.0
-        params.dex_wsc = 1.5
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.0
-        params.int_wsc = 2.0
-        params.mnd_wsc = 1.0
-        params.chr_wsc = 1.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.ecosystem = xi.ecosystem.PLANTOID
+    params.tpmod = TPMOD_CRITICAL
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.LIGHT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.scattr = SC_COMPRESSION
+    params.diff = 0
+    params.bonus = -50 -- 50 magic accuracy penalty
+    params.numhits = 1
+    params.multiplier = 1.5
+    params.tp150 = 1.5
+    params.tp300 = 1.5
+    params.azuretp = 1.5
+    params.duppercap = 49
+    params.str_wsc = 1.0
+    params.dex_wsc = 1.5
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 2.0
+    params.mnd_wsc = 1.0
+    params.chr_wsc = 1.0
+
+    local damage = 1000
+    local resist = applyResistance(caster, target, spell, params)
+    if resist == 1 then
+        local targets = spell:getTotalTargets()
+        damage = damage / targets
+        damage = xi.spells.blue.applySpellDamage(caster, target, spell, damage, params)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
 
     return damage
 end

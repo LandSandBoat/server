@@ -9,7 +9,6 @@
 -- DEF +21% (cap 150)
 -- Subtle Blow +9
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -2,7 +2,6 @@
 -- func: getstats
 -- desc: prints stats of cursor target into chatlog, for debugging.
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 
 cmdprops =

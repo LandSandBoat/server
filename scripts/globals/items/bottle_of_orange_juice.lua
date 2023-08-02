@@ -3,7 +3,6 @@
 -- Item: Orange Juice
 -- Item Effect: Restores 30 MP over 1 minute and 30 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

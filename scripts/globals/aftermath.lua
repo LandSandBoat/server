@@ -1,7 +1,6 @@
 -----------------------------------
 -- Aftermath handling
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 
 xi = xi or {}

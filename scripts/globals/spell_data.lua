@@ -1,5 +1,3 @@
-require('scripts/globals/status')
-
 xi = xi or {}
 xi.magic = xi.magic or {}
 

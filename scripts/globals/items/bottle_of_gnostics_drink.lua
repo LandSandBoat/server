@@ -3,11 +3,9 @@
 -- Item: bottle_of_gnostics_drink
 -- Item Effect: Enmity -
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------------
-
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

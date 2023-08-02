@@ -9,7 +9,6 @@
 -- Magic Accuracy 5
 -- Undead Killer 5
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

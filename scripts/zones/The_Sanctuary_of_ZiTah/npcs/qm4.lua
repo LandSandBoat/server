@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/world")
 -----------------------------------
 local entity = {}
 

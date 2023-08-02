@@ -3,7 +3,6 @@
 -- Item: Hydra Haubert
 -- Item Effect: gives refresh
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

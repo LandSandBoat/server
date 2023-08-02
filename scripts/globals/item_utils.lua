@@ -1,7 +1,6 @@
 -----------------------------------
 -- Item Utils (Used by Skill Books)
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------

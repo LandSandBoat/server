@@ -43,4 +43,5 @@ WorldServer::~WorldServer() = default;
 
 void WorldServer::Tick()
 {
+    Application::Tick();
 }
