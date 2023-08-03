@@ -3,7 +3,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 xi = xi or {}
-xi.mystery = xi.mystery or {}
+xi.gobbieMysteryBox = xi.gobbieMysteryBox or {}
 
 local adoulinOptionOff = 0x80
 local pictlogicaOptionOff = 0x100
@@ -203,7 +203,7 @@ local gobbieJunk =
     xi.items.GOBLIN_PIE,
 }
 
-xi.mystery.onTrade = function(player, npc, trade, events)
+xi.gobbieMysteryBox.onTrade = function(player, npc, trade, events)
     if trade:getItemCount() == 1 then
         local tradeID = trade:getItemId(0)
         if keyToDial[tradeID] ~= nil then
@@ -224,7 +224,7 @@ xi.mystery.onTrade = function(player, npc, trade, events)
     end
 end
 
-xi.mystery.onTrigger = function(player, npc, events)
+xi.gobbieMysteryBox.onTrigger = function(player, npc, events)
     local event = events
     local playerAgeDays = (os.time() - player:getTimeCreated()) / 86400
     local dailyTallyPoints = player:getCurrency("daily_tally")
@@ -249,7 +249,7 @@ xi.mystery.onTrigger = function(player, npc, events)
     end
 end
 
-xi.mystery.onEventUpdate = function(player, csid, option, events)
+xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
     local event = events
     local dailyTallyPoints = player:getCurrency("daily_tally")
     local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
@@ -355,7 +355,7 @@ xi.mystery.onEventUpdate = function(player, csid, option, events)
     end
 end
 
-xi.mystery.onEventFinish = function(player, csid, option, events)
+xi.gobbieMysteryBox.onEventFinish = function(player, csid, option, events)
     local event = events
     if csid == event.INTRO then
         player:setCurrency("daily_tally", 50)
