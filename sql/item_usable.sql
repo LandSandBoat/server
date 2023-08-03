@@ -1944,6 +1944,7 @@ INSERT INTO `item_usable` VALUES (6468,'plate_of_sublime_sushi',1,1,28,0,0,0,0,0
 INSERT INTO `item_usable` VALUES (6469,'plate_of_sublime_sushi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6475,'pair_of_lucid_wings_ii',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6498,'bunch_of_fortune_fruits',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6499,'patio_design_plan_document',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6538,'altanas_repast',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6539,'altanas_repast_+1',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6540,'altanas_repast_+2',1,1,28,0,0,0,0,1);

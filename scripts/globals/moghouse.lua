@@ -93,6 +93,20 @@ xi.moghouse.nationRegionBits =
     [xi.nation.WINDURST] = xi.region.WINDURST,
 }
 
+xi.moghouse.moghouse2FUnlockCSs =
+{
+    [xi.zone.SOUTHERN_SAN_DORIA] = 3535,
+    [xi.zone.NORTHERN_SAN_DORIA] = 904,
+    [xi.zone.PORT_SAN_DORIA]     = 820,
+    [xi.zone.BASTOK_MINES]       = 610,
+    [xi.zone.BASTOK_MARKETS]     = 604,
+    [xi.zone.PORT_BASTOK]        = 456,
+    [xi.zone.WINDURST_WATERS]    = 1086,
+    [xi.zone.WINDURST_WALLS]     = 547,
+    [xi.zone.PORT_WINDURST]      = 903,
+    [xi.zone.WINDURST_WOODS]     = 885,
+}
+
 xi.moghouse.isInMogHouseInHomeNation = function(player)
     if not player:isInMogHouse() then
         return false
@@ -126,6 +140,67 @@ xi.moghouse.isInMogHouseInHomeNation = function(player)
     end
 
     return false
+end
+
+xi.moghouse.set2ndFloorStyle = function(player, style)
+    -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    -- 0x0100: ^ As above
+    local mhflag = player:getMoghouseFlag()
+    utils.mask.setBit(mhflag, 0x0080, utils.mask.getBit(style, 0))
+    utils.mask.setBit(mhflag, 0x0100, utils.mask.getBit(style, 1))
+    player:setMoghouseFlag(mhflag)
+end
+
+xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
+    local cs = -1
+
+    player:eraseAllStatusEffect()
+    player:setPos(0, 0, 0, 192)
+
+    -- Moghouse data (bit-packed)
+    -- 0x0001: SANDORIA exit quest flag
+    -- 0x0002: BASTOK exit quest flag
+    -- 0x0004: WINDURST exit quest flag
+    -- 0x0008: JEUNO exit quest flag
+    -- 0x0010: WEST_AHT_URHGAN exit quest flag
+    -- 0x0020: Unlocked Moghouse2F flag
+    -- 0x0040: Moghouse 2F tracker flag (0: default, 1: using 2F)
+    -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    -- 0x0100: ^ As above
+    local mhflag = player:getMoghouseFlag()
+
+    local growingFlowers   = bit.band(mhflag, 0x0001) > 0
+    local aLadysHeart      = bit.band(mhflag, 0x0002) > 0
+    local flowerChild      = bit.band(mhflag, 0x0004) > 0
+    local unlocked2ndFloor = bit.band(mhflag, 0x0020) > 0
+    local using2ndFloor    = bit.band(mhflag, 0x0040) > 0
+
+    if player:getCharVar("newMog") == 0 then
+        cs = 30000
+        player:setCharVar("newMog", 1)
+    end
+
+    -- NOTE: You can test these quest conditions with:
+    -- Reset: !exec player:setMoghouseFlag(0)
+    -- Complete quests: !exec player:setMoghouseFlag(7)
+    if
+        xi.moghouse.isInMogHouseInHomeNation(player) and
+        growingFlowers and
+        aLadysHeart and
+        flowerChild and
+        not unlocked2ndFloor and
+        not using2ndFloor and
+        xi.settings.main.MOG_HOUSE_2F
+    then
+        cs = xi.moghouse.moghouse2FUnlockCSs[player:getZoneID()]
+
+        player:setMoghouseFlag(mhflag + 0x0020) -- Set unlock flag now, rather than in onEventFinish
+
+        local nation = player:getNation()
+        xi.moghouse.set2ndFloorStyle(player, nation)
+    end
+
+    return cs
 end
 
 xi.moghouse.moogleTrade = function(player, npc, trade)

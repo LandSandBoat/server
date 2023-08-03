@@ -235,7 +235,7 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_BASTOK                 = 186,
     ZONE_DYNAMIS_WINDURST               = 187,
     ZONE_DYNAMIS_JEUNO                  = 188,
-    ZONE_189                            = 189, // Southern San d'Oria [S] Residential Area
+    ZONE_189                            = 189,
     ZONE_KING_RANPERRES_TOMB            = 190,
     ZONE_DANGRUF_WADI                   = 191,
     ZONE_INNER_HORUTOTO_RUINS           = 192,
@@ -245,7 +245,7 @@ enum ZONEID : uint16
     ZONE_GUSGEN_MINES                   = 196,
     ZONE_CRAWLERS_NEST                  = 197,
     ZONE_MAZE_OF_SHAKHRAMI              = 198,
-    ZONE_199                            = 199, // Bastok Markets [S] Residential Area
+    ZONE_199                            = 199,
     ZONE_GARLAIGE_CITADEL               = 200,
     ZONE_CLOISTER_OF_GALES              = 201,
     ZONE_CLOISTER_OF_STORMS             = 202,
@@ -260,12 +260,12 @@ enum ZONEID : uint16
     ZONE_CLOISTER_OF_TIDES              = 211,
     ZONE_GUSTAV_TUNNEL                  = 212,
     ZONE_LABYRINTH_OF_ONZOZO            = 213,
-    ZONE_214                            = 214, // Aht Urhgan Residential Area
+    ZONE_214                            = 214,
     ZONE_ABYSSEA_ATTOHWA                = 215,
     ZONE_ABYSSEA_MISAREAUX              = 216,
     ZONE_ABYSSEA_VUNKERL                = 217,
     ZONE_ABYSSEA_ALTEPA                 = 218,
-    ZONE_219                            = 219, // Windurst Waters [S] Residential Area
+    ZONE_219                            = 219,
     ZONE_SHIP_BOUND_FOR_SELBINA         = 220,
     ZONE_SHIP_BOUND_FOR_MHAURA          = 221,
     ZONE_PROVENANCE                     = 222,
