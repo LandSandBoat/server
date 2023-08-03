@@ -762,7 +762,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [417] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar("CarbuncleDebacleProgress") == 6
+            return player:getCharVar("Quest[2][83]Prog") == 6
         end,
 
         [418] = function() -- Quest: Trial-size Trial by Wind
@@ -784,7 +784,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [449] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar("CarbuncleDebacleProgress") == 3
+            return player:getCharVar("Quest[2][83]Prog") == 3
         end,
 
         [450] = function() -- Quest: Trial-size Trial by Lightning
@@ -806,7 +806,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [481] = function() -- Quest: Class Reunion
-            return player:getCharVar("ClassReunionProgress") == 5
+            return player:getCharVar("Quest[2][82]Prog") == 4
         end,
 
         [482] = function() -- Quest: Trial-size Trial by Ice
