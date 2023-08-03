@@ -3,7 +3,7 @@ xi = xi or {}
 xi.status =
 {
     NORMAL          =  0,
-    MOB             =  1,
+    UPDATE          =  1,
     DISAPPEAR       =  2,
     INVISIBLE       =  3,
     STATUS_4        =  4,
