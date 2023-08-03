@@ -503,7 +503,7 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 50
     elseif level > 60 and level <= 70 then
         rangeId = 60
-    elseif level > 70 and level <= 75 and (rank > 2) then -- If this is Rank A+ or A- then skip
+    elseif level > 70 and level <= 75 and rank > 2 then -- If this is Rank A+ or A- then skip
         rangeId = 75
     elseif level > 70 and level <= 80 then -- If B+ or below do this
         rangeId = 70
@@ -604,7 +604,7 @@ local systemStrengthTable =
     [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
-function utils.getSystemStrengthBonus(attackerSystem, defenderSystem)
+function utils.getEcosystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
             for defId, weakValue in pairs(systemStrengthTable[k]) do

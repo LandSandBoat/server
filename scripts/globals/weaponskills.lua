@@ -1218,7 +1218,7 @@ xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
     if
         target:getBlockRate(attacker) > math.random(100) and
         target:isFacing(attacker) and
-        target:getSystem() == xi.eco.BEASTMEN and
+        target:getEcosystem() == xi.eco.BEASTMEN and
         target:getMainJob() == xi.job.PLD
     then
         finaldmg = math.floor(finaldmg * 0.5)
@@ -1245,7 +1245,7 @@ xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedH
         target:getParryRate(attacker) >= math.random(100) and
         target:getMainJob() ~= xi.job.MNK and not gHit
     then -- Try parry, if so miss.
-        if target:getSystem() == xi.eco.BEASTMEN or target:isPC() then
+        if target:getEcosystem() == xi.eco.BEASTMEN or target:isPC() then
             missChance = 1
         end
 

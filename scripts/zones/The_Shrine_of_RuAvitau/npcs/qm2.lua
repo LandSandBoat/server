@@ -23,8 +23,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if
-        npcUtil.popFromQM(player, GetNPCByID(ID.npc.KIRIN_QM), ID.mob.KIRIN, { claim = true }) and
-        csid == 101
+        csid == 101 and
+        npcUtil.popFromQM(player, GetNPCByID(ID.npc.KIRIN_QM), ID.mob.KIRIN, { claim = true })
     then
         player:confirmTrade()
     end

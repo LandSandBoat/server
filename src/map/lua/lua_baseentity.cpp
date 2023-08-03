@@ -169,6 +169,8 @@
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+extern std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
+
 //======================================================//
 
 CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
@@ -1226,35 +1228,40 @@ void CLuaBaseEntity::setFlag(uint32 flags)
 }
 
 /************************************************************************
- *  Function: setMoghouseFlag()
- *  Purpose : Creates or returns exit flag for Mog House
- *  Example : player:moghouseFlag(2)
- *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
- ************************************************************************/
-
-void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    PChar->profile.mhflag |= flag;
-    charutils::SaveCharStats(PChar);
-}
-
-/************************************************************************
  *  Function: getMoghouseFlag()
  *  Purpose : Returns exit flag for Mog House
  *  Example :
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getMoghouseFlag()
+uint16 CLuaBaseEntity::getMoghouseFlag()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->profile.mhflag;
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return PChar->profile.mhflag;
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setMoghouseFlag()
+ *  Purpose : Creates or returns exit flag for Mog House
+ *  Example : player:moghouseFlag(bit.band(mhflag, 0x02))
+ *  Notes   : Used in Mog House exit quests (ex. A Lady's Heart)
+ ************************************************************************/
+
+void CLuaBaseEntity::setMoghouseFlag(uint16 flag)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->profile.mhflag = flag;
+        charutils::SaveCharStats(PChar);
+    }
 }
 
 /************************************************************************
@@ -14115,13 +14122,13 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
 }
 
 /************************************************************************
- *  Function: getSystem()
+ *  Function: getEcosystem()
  *  Purpose : Returns integer value of system associated with an Entity
- *  Example : if pet:getSystem() ~= xi.ecosystem.AVATAR then -- Not an avatar
+ *  Example : if pet:getEcosystem() ~= xi.ecosystem.AVATAR then -- Not an avatar
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getSystem()
+uint8 CLuaBaseEntity::getEcosystem()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -16599,6 +16606,28 @@ void CLuaBaseEntity::setWallhackAllowed(bool allowed)
     m_PBaseEntity->m_ignoreWallhack = !allowed;
 }
 
+void CLuaBaseEntity::addPacketMod(uint16 packetId, uint16 offset, uint8 value)
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        ShowInfo(fmt::format("Adding Packet Mod ({}): 0x{:04X}: 0x{:04X}: 0x{:02X}",
+                             PChar->name, packetId, offset, value));
+        PacketMods[PChar->id][packetId].emplace_back(std::make_pair(offset, value));
+    }
+}
+
+void CLuaBaseEntity::clearPacketMods()
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PacketMods[PChar->id].clear();
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -17324,7 +17353,7 @@ void CLuaBaseEntity::Register()
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
-    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem); // TODO: rename to getEcoSystem()
+    SOL_REGISTER("getEcosystem", CLuaBaseEntity::getEcosystem);
     SOL_REGISTER("getSuperFamily", CLuaBaseEntity::getSuperFamily);
     SOL_REGISTER("getFamily", CLuaBaseEntity::getFamily);
     SOL_REGISTER("isMobType", CLuaBaseEntity::isMobType);
@@ -17472,6 +17501,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
     SOL_REGISTER("setWallhackAllowed", CLuaBaseEntity::setWallhackAllowed);
+
+    SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
+    SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
