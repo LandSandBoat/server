@@ -231,12 +231,6 @@ namespace luautils
                 version::GetGitDate());
         });
 
-        lua.set_function("GetFirstID", [](std::string const& name)
-        {
-            return "LOOKUP_" + name;
-        });
-        // clang-format on
-
         // Register Sol Bindings
         CLuaAbility::Register();
         CLuaAction::Register();
@@ -275,6 +269,8 @@ namespace luautils
                 }
             }
         }
+
+        PopulateIDLookupsByFilename();
 
         // Then the rest...
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
@@ -649,15 +645,10 @@ namespace luautils
         // Handle IDs then return
         if (parts.size() == 3 && parts[2] == "IDs")
         {
-            auto result = lua.safe_script_file(filename, &sol::script_pass_on_error);
-            if (!result.valid())
-            {
-                sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
-                return;
-            }
+            // Strip down to just the zone name
+            auto zoneName = path.parent_path().stem().generic_string();
 
-            PopulateIDLookups();
+            PopulateIDLookupsByFilename(zoneName);
             ShowInfo("[FileWatcher] IDs %s", filename);
             return;
         }
@@ -834,7 +825,66 @@ namespace luautils
         CacheLuaObjectFromFile(filename);
     }
 
-    void PopulateIDLookups(std::optional<uint16> maybeZoneId)
+    void PopulateIDLookups(uint16 zoneId, std::string const& zoneName)
+    {
+        TracyZoneScoped;
+
+        // Load all Name/ID pairs from mobs and npcs
+        std::unordered_map<std::string, uint32> lookup;
+
+        // Mobs
+        {
+            auto query = fmt::sprintf("SELECT mobname, mobid FROM mob_spawn_points "
+                                "WHERE ((mobid >> 12) & 0xFFF) = %i;",
+                                zoneId);
+            auto ret = sql->Query(query.c_str());
+            while (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            {
+                auto name = sql->GetStringData(0);
+                auto id   = sql->GetUIntData(1);
+
+                // Only add to lookup if there isn't already an entry
+                std::ignore = lookup.try_emplace(name, id);
+            }
+        }
+
+        // NPCs
+        {
+            auto query = fmt::sprintf("SELECT name, npcid FROM npc_list "
+                                "WHERE ((npcid >> 12) & 0xFFF) = %i;",
+                                zoneId);
+            auto ret = sql->Query(query.c_str());
+            while (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            {
+                auto name = sql->GetStringData(0);
+                auto id   = sql->GetUIntData(1);
+
+                // Only add to lookup if there isn't already an entry
+                std::ignore = lookup.try_emplace(name, id);
+            }
+        }
+
+        // Update GetFirstID to use this new lookup
+        // clang-format off
+        lua.set_function("GetFirstID", [&](std::string const& name) -> uint32
+        {
+            return lookup[name];
+        });
+        // clang-format on
+
+        // Pre-require
+        auto result = lua.safe_script_file(fmt::format("scripts/zones/{}/IDs.lua", zoneName.c_str()));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError(err.what());
+        }
+
+        // Re-publish to package.loaded. This is the same as loading the contents of a script with require("name").
+        lua["package"]["loaded"][fmt::format("scripts/zones/{}/IDs", zoneName)] = lua["zones"][zoneId];
+    }
+
+    void PopulateIDLookupsByFilename(std::optional<std::string> maybeFilename)
     {
         TracyZoneScoped;
 
@@ -847,81 +897,64 @@ namespace luautils
         }
 
         // clang-format off
-        std::string lookupPrefix = "LOOKUP_";
-        auto handleZone = [&](CZone* PZone)
+        auto handleZone = [&](std::string const& zoneName)
         {
-            auto zoneName = PZone->GetName();
-            auto result   = lua.safe_script_file(fmt::format("scripts/zones/{}/IDs.lua", zoneName));
-            if (result.valid() && zoneName != "Residential_Area")
+            uint16 zoneId = 0;
             {
-                auto table = lua["zones"][PZone->GetID()].get<sol::table>();
-                for (auto [outerKey, outerValue] : table)
+                auto query = fmt::sprintf("SELECT zoneid FROM zone_settings WHERE name = '%s'", zoneName.c_str());
+                auto ret = sql->Query(query.c_str());
+                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                 {
-                    auto outerName = outerKey.as<std::string>();
-                    if (outerName == "mob" || outerName == "npc")
+                    zoneId = sql->GetUIntData(0);
+                }
+            }
+
+            PopulateIDLookups(zoneId, zoneName);
+        };
+
+        if (!maybeFilename)
+        {
+            // Pre-load all zone/IDs files so we can pre-populate their GetFirstID lookups
+            for (auto const& zoneDirEntry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/zones"))
+            {
+                for (auto const& fileEntry : sorted_directory_iterator<std::filesystem::directory_iterator>(zoneDirEntry.relative_path().generic_string()))
+                {
+                    if (fileEntry.stem() == "IDs")
                     {
-                        for (auto [innerKey, innerValue] : outerValue.as<sol::table>())
-                        {
-                            if (innerKey.get_type() == sol::type::string && innerValue.get_type() == sol::type::string)
-                            {
-                                auto innerName  = to_upper(innerKey.as<std::string>());
-                                auto lookupName = innerValue.as<std::string>();
+                        // Prepare which zone we're in using the file path
+                        auto relative_path_string = fileEntry.relative_path().generic_string();
+                        auto zoneName = fileEntry.parent_path().stem().generic_string();
 
-                                if (!starts_with(lookupName, lookupPrefix))
-                                {
-                                    continue;
-                                }
-
-                                // We have a lookup string, remove the prefix
-                                lookupName = lookupName.substr(lookupPrefix.length());
-
-                                bool found = false;
-                                if (outerName == "mob")
-                                {
-                                    // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                    auto query = fmt::sprintf("SELECT mobid FROM mob_spawn_points "
-                                                        "WHERE ((mobid >> 12) & 0xFFF) = %i AND "
-                                                        "UPPER(REPLACE(mobname, '-', '_')) = '%s' "
-                                                        "LIMIT 1;", PZone->GetID(), lookupName.c_str());
-                                    DebugIDLookup(query.c_str());
-                                    auto ret = sql->Query(query.c_str());
-                                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                                    {
-                                        lua["zones"][PZone->GetID()][outerName][innerName] = sql->GetUIntData(0);
-                                        found = true;
-                                        DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                            zoneName, outerName, innerName, lua["zones"][PZone->GetID()][outerName][innerName].get<uint32>()));
-                                    }
-                                }
-                                else if (outerName == "npc")
-                                {
-                                    // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                    auto query = fmt::sprintf("SELECT npcid FROM npc_list "
-                                                        "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
-                                                        "UPPER(REPLACE(CAST(`name` as CHAR(64)), '-', '_')) = '%s' "
-                                                        "LIMIT 1;", PZone->GetID(), lookupName.c_str());
-                                    DebugIDLookup(query.c_str());
-                                    auto ret = sql->Query(query.c_str());
-                                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                                    {
-                                        lua["zones"][PZone->GetID()][outerName][innerName] = sql->GetUIntData(0);
-                                        found = true;
-                                        DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                            zoneName, outerName, innerName, lua["zones"][PZone->GetID()][outerName][innerName].get<uint32>()));
-                                    }
-                                }
-
-                                if (!found)
-                                {
-                                    ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, innerName))
-                                }
-                            }
-                        }
+                        handleZone(zoneName);
                     }
                 }
-                // Re-publish to package.loaded. This is the same as loading the contents of a script with require("name").
-                lua["package"]["loaded"][fmt::format("scripts/zones/{}/IDs", zoneName)] = lua["zones"][PZone->GetID()];
             }
+        }
+        else
+        {
+            handleZone(maybeFilename.value());
+        }
+        // clang-format on
+    }
+
+    void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId)
+    {
+        TracyZoneScoped;
+
+        // Make sure this has been run at least once!
+        auto result = lua.safe_script_file("scripts/globals/zone.lua");
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError(fmt::format("Failed to load globals/zone.lua: {}", err.what()));
+        }
+
+        // clang-format off
+        auto handleZone = [&](CZone* PZone)
+        {
+            auto zoneId   = PZone->GetID();
+            auto zoneName = PZone->GetName();
+            PopulateIDLookups(zoneId, zoneName);
         };
 
         if (!maybeZoneId.has_value())
