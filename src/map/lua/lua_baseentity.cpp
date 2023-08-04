@@ -6749,7 +6749,6 @@ void CLuaBaseEntity::setRankPoints(uint16 rankPoints)
  *  Function: addQuest()
  *  Purpose : Adds a new quest to the character's in-progress quest log
  *  Example : player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
- *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
@@ -6764,10 +6763,9 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
-        uint8 current  = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
-        uint8 complete = PChar->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
+        uint8 current = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
 
-        if ((current == 0) && (complete == 0))
+        if (current == 0)
         {
             PChar->m_questLog[questLogID].current[questID / 8] |= (1 << (questID % 8));
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_CURRENT));
