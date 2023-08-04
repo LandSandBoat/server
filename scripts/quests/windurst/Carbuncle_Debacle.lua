@@ -185,7 +185,7 @@ quest.sections =
     --Section: Quest Complete
     {
         check = function(player, status, vars)
-            return status == QUEST_Completee
+            return status == QUEST_COMPLETED
         end,
 
         ['Koru-Moru'] = quest:event(420):replaceDefault(),
