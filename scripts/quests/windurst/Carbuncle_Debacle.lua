@@ -52,12 +52,12 @@ quest.sections =
         },
     },
 
+        --Section: Quest Accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        --Section: Quest Accepted
         [xi.zone.WINDURST_WALLS] =
         {
             ['Koru-Moru'] =
@@ -73,8 +73,6 @@ quest.sections =
                         return quest:event(418)
                     elseif questProgress == 7 then
                         return quest:progressEvent(419)
-                    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE) == QUEST_COMPLETED then
-                        return player:event(420)
                     end
                 end,
             },
@@ -88,10 +86,6 @@ quest.sections =
                 [417] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
                     npcUtil.giveKeyItem(player, xi.ki.DAZE_BREAKER_CHARM)
-                end,
-
-                [419] = function(player, csid, option, npc)
-                    quest:complete(player)
                 end,
 
                 },
@@ -188,6 +182,15 @@ quest.sections =
             },
         },
     },
+
+    --Section: Quest Complete
+    {
+        check = function(player, status, vars)
+            return status == QUEST_Completee
+        end,
+
+        ['Koru-Moru'] = quest:event(420):replaceDefault(),
+    }
 }
 
 return quest
