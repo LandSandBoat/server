@@ -2805,31 +2805,32 @@ namespace battleutils
         int32 attackerDex = PAttacker->DEX();
         int32 defenderAgi = PDefender->AGI();
         int32 dDex        = attackerDex - defenderAgi;
-        int32 dDexAbs     = std::abs(dDex);
+        // only care for values between 0 and 50
+        int32 dDexClamp = std::clamp(dDex, 0, 50);
 
         // Default to +0 crit rate for a delta of 0-6
         int32 critRate = 0;
-        if (dDexAbs > 39)
+        if (dDexClamp > 39)
         {
             // 40-50: (dDEX-35)
-            critRate = dDexAbs - 35;
+            critRate = dDexClamp - 35;
         }
-        else if (dDexAbs > 29)
+        else if (dDexClamp > 29)
         {
             // 30-39: +4
             critRate = 4;
         }
-        else if (dDexAbs > 19)
+        else if (dDexClamp > 19)
         {
             // 20-29: +3
             critRate = 3;
         }
-        else if (dDexAbs > 13)
+        else if (dDexClamp > 13)
         {
             // 14-19: +2
             critRate = 2;
         }
-        else if (dDexAbs > 6)
+        else if (dDexClamp > 6)
         {
             critRate = 1;
         }
