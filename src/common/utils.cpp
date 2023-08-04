@@ -884,7 +884,7 @@ std::string replace(std::string const& target, std::string const& search, std::s
     {
         return std::regex_replace(target, std::regex(search), replace);
     }
-    catch(std::exception& ex)
+    catch (std::exception& ex)
     {
         ShowError(ex.what());
     }
