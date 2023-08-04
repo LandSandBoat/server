@@ -896,14 +896,6 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // Make sure this has been run at least once!
-        auto result = lua.safe_script_file("scripts/globals/zone.lua");
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError(fmt::format("Failed to load globals/zone.lua: {}", err.what()));
-        }
-
         // clang-format off
         auto handleZone = [&](std::string const& zoneName)
         {
@@ -948,14 +940,6 @@ namespace luautils
     void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId)
     {
         TracyZoneScoped;
-
-        // Make sure this has been run at least once!
-        auto result = lua.safe_script_file("scripts/globals/zone.lua");
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError(fmt::format("Failed to load globals/zone.lua: {}", err.what()));
-        }
 
         // clang-format off
         auto handleZone = [&](CZone* PZone)
