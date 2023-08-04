@@ -61,7 +61,6 @@ quest.sections =
 
             ['Koru-Moru'] =
             {
-
                 {
                     onTrigger = function(player, npc)
                         local questProgress = quest:getVar(player, 'Prog')
