@@ -128,9 +128,7 @@ quest.sections =
             ['Furakku-Norakku'] =
             {
                 onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-
-                    if questProgress == 3 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:event(816)
                     end
                 end,
