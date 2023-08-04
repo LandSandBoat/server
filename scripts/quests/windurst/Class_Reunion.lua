@@ -61,7 +61,6 @@ quest.sections =
 
             ['Koru-Moru'] =
             {
-
                 {
                     onTrigger = function(player, npc)
                         local questProgress = quest:getVar(player, 'Prog')
@@ -79,7 +78,7 @@ quest.sections =
                         if npcUtil.tradeHasExactly(trade, xi.items.ASTRAGALOS) then
                             return quest:progressEvent(407)
                         end
-                    end
+                    end,
                 },
 
                 onEventFinish =
@@ -129,9 +128,7 @@ quest.sections =
             ['Furakku-Norakku'] =
             {
                 onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-
-                    if questProgress == 3 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:event(816)
                     end
                 end,

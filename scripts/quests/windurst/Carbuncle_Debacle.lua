@@ -116,9 +116,8 @@ quest.sections =
 
                 [10023] = function(player, csid, option, npc)
                     npcUtil.giveItem(player, xi.items.LIGHTNING_PENDULUM)
-                end
-            }
-
+                end,
+            },
         },
 
         [xi.zone.CLOISTER_OF_STORMS] =
