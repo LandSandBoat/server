@@ -829,6 +829,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        // NOTE:
+        // This has an entry in zone_settings, but going there crashes the client, so don't bother loading anything for it.
+        // So bail out now.
+        if (zoneName == "286")
+        {
+            return;
+        }
+
         // Load all Name/ID pairs from mobs and npcs
         std::unordered_map<std::string, uint32> lookup;
 
