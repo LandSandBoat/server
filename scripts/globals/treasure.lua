@@ -184,7 +184,8 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and
-                                player:getCharVar("Quest[1][73]Prog") == 2 and not player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
+                                xi.quest.getVar(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES, 'Prog') == 1 and
+                                not player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
                         end,
 
                         code = function(player)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Romualdo
--- Involved in Quest: Stamp Hunt
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
