@@ -79,7 +79,7 @@ quest.sections =
                         if npcUtil.tradeHasExactly(trade, xi.items.ASTRAGALOS) then
                             return quest:progressEvent(407)
                         end
-                    end
+                    end,
                 },
 
                 onEventFinish =
