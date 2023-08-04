@@ -476,7 +476,7 @@ def connect():
             print_red(
                 "Incorrect mysql_login or mysql_password, update settings/network.lua."
             )
-            close()
+            quit()
         elif err.errno == mariadb.constants.ERR.ER_BAD_DB_ERROR:
             print_red("Database " + database + " does not exist.")
             if (
@@ -504,7 +504,8 @@ def connect():
             else:
                 quit()
         else:
-            print_red(err)
+            print_red(str(err))
+            quit()
         return False
     return True
 
