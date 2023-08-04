@@ -100,10 +100,10 @@ public:
     bool didGetMessage();                // Used by interaction framework to determine if player triggered something else
     void resetGotMessage();              // Used by interaction framework to reset if player triggered something else
 
-    void  setFlag(uint32 flags);
-    uint8 getMoghouseFlag();
-    void  setMoghouseFlag(uint8 flag);
-    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
+    void   setFlag(uint32 flags);
+    uint16 getMoghouseFlag();
+    void   setMoghouseFlag(uint16 flag);
+    bool   needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
     uint32 getID();
@@ -788,7 +788,7 @@ public:
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
-    uint8  getSystem(); // TODO: rename this to getEcosystem()
+    uint8  getEcosystem();
     uint16 getSuperFamily();
     uint16 getFamily();
     bool   isMobType(uint8 mobType); // True if mob is of type passed to function
@@ -926,6 +926,9 @@ public:
     void   giveContestReward(uint16 contestId);
     auto   getAwardHistory() -> sol::table;
     void   faceTarget(CLuaBaseEntity* npc);
+
+    void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
+    void clearPacketMods();
 
     static void Register();
 };

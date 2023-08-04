@@ -454,7 +454,7 @@ namespace conquest
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
+            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
                 uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());

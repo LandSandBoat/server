@@ -56,5 +56,6 @@ xi.abyssea.surveyorOnEventFinish = function(player, csid, option, npc)
         visitantEffect:setIcon(xi.effect.VISITANT)
 
         xi.abyssea.spendTravStones(player, additionalStones)
+        xi.abyssea.displayAbysseaLights(player)
     end
 end

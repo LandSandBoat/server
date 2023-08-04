@@ -26,6 +26,10 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         STAGING_GATE_HALVUNG          = 7321, -- Halvung Staging Point.
         CANNOT_LEAVE                  = 7328, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                      = 7337, -- There is no response...
+        ORDINARY                      = 7373, -- There is nothing out of the ordinary here.
+        GATES_OF_HALVUNG              = 7374, -- There is a large keyhole here.
+        CAST_METAL_PLATE              = 7375, -- Obtained key item: <key item>. You think it may fit the large keyhole.
+        OPEN_GATES                    = 7376, -- You insert the <key item> into the keyhole.<Prompt>
         HAND_OVER_TO_IMMORTAL         = 7424, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7425, -- Your Imperial Standing has increased!
         MINING_IS_POSSIBLE_HERE       = 7426, -- Mining is possible here if you have <item>.
@@ -53,6 +57,10 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         {
             [17027421] = 17027423, -- -567.6 -15.35 252.201
             [17027422] = 17027423, -- -544.3 -14.8 262.992
+        },
+        FAHRAFAHR_THE_BLOODIED_PH =
+        {
+            [17027180] = 17027183, -- 38.967 -14.478 115.574
         },
         CERBERUS              = 17027458,
         BRASS_BORER           = 17027471,

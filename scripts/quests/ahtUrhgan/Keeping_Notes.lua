@@ -64,7 +64,8 @@ quest.sections =
                 [11] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:setMoghouseFlag(16)
+                        local mhflag = player:getMoghouseFlag()
+                        player:setMoghouseFlag(mhflag + 0x0010)
                     end
                 end,
             },

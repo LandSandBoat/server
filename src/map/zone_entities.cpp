@@ -891,6 +891,13 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
+    // If on Moghouse2F; don't spawn the Moogle
+    if (PChar->profile.mhflag & 0x40)
+    {
+        return;
+    }
+
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PCurrentNpc = (CNpcEntity*)it->second;

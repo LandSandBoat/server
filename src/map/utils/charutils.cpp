@@ -685,7 +685,7 @@ namespace charutils
             HP = sql->GetIntData(3);
             MP = sql->GetIntData(4);
 
-            PChar->profile.mhflag = (uint8)sql->GetIntData(5);
+            PChar->profile.mhflag = (uint16)sql->GetIntData(5);
             PChar->profile.title  = (uint16)sql->GetIntData(6);
 
             int8* bazaarMessage = sql->GetData(7);
@@ -3243,7 +3243,7 @@ namespace charutils
 
         PChar->delModifier(Mod::MEVA, PChar->m_magicEvasion);
 
-        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, PChar->GetMLevel());
+        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, PChar->GetMLevel()); // Player MEVA is Rank G
         PChar->addModifier(Mod::MEVA, PChar->m_magicEvasion);
     }
 

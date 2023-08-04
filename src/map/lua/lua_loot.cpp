@@ -49,6 +49,7 @@ CLuaLootContainer::CLuaLootContainer(LootContainer* loot)
  *  Purpose : Adds an item to the loot container
  *  Example : loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.GUARENTEED, 2);
  *  Notes   : Last parameter, quantity, is optional and defaults to 1
+ *            rate must be a valid value for RATE_PERCENTAGES
  ************************************************************************/
 
 void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
@@ -74,6 +75,7 @@ void CLuaLootContainer::addGroup(uint16 groupRate, sol::table items)
  *  Example : loot:addItemFixed(xi.items.ANCIENT_BEASTCOIN, 500, 2);
  *  Notes   : Last parameter, quantity, is optional and defaults to 1
  *            Fixed drop rate is 0-1000.
+ *            Does not support RATE_PERCENTAGES
  ************************************************************************/
 
 void CLuaLootContainer::addItemFixed(uint16 item, uint16 rate, sol::variadic_args va)

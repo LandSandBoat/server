@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Alois
--- Involved in Missions: Wading Beasts
 -- !pos 96 -20 14 237
 -----------------------------------
 require("scripts/globals/settings")

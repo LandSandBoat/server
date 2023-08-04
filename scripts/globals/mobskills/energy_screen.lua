@@ -1,5 +1,5 @@
 -----------------------------------
--- Energy_Screen
+-- Energy Screen
 -- Description: Invincible
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -9,11 +9,14 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getLocalVar("citadelBuster") == 0 then
-        return 0
+    if
+        mob:getStatusEffect(xi.effect.PHYSICAL_SHIELD) or
+        mob:getStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
+        return 1
     end
 
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
