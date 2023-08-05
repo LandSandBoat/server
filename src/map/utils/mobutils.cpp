@@ -1527,10 +1527,6 @@ namespace mobutils
                 mobutils::AddSqlModifiers(PMob);
             }
         }
-        else
-        {
-            ShowError("Unable to find entity with groupId: %d, zoneId: %d.", groupid, groupZoneId);
-        }
 
         return PMob;
     }
