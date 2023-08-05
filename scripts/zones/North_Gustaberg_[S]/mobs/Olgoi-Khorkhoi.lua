@@ -6,8 +6,17 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setRespawnTime(0, true)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 499)
+end
+
+entity.onMobDespawn = function(mob)
+    -- Sets to respawn between 90 to 120 minutes
+    mob:setRespawnTime(math.random(5400, 7200), true)
 end
 
 return entity
