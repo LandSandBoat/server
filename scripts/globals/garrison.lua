@@ -111,15 +111,15 @@ end
 
 -- Spawns and npc for the given zone and with the given name, look, pose
 -- Uses dynamic entities
-xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, look)
+xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look)
     local mob = zone:insertDynamicEntity({
         objtype     = xi.objType.MOB,
         allegiance  = xi.allegiance.PLAYER,
         name        = name,
-        x           = x,
-        y           = y,
-        z           = z,
-        rotation    = rot,
+        x           = pos[1],
+        y           = pos[2],
+        z           = pos[3],
+        rotation    = pos[4],
         look        = look,
         groupId     = groupId,
         groupZoneId = xi.zone.GM_HOME,
@@ -129,7 +129,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
     })
 
     -- Use the mob object as you normally would
-    mob:setSpawn(x, y, z, rot)
+    mob:setSpawn(pos[1], pos[2], pos[3], pos[4])
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 
@@ -160,17 +160,19 @@ local nationName =
     [xi.nation.OTHER]    = "Other",
 }
 
-xi.garrison.getAllyInfo = function(zoneData, nationID)
+xi.garrison.getAllyInfo = function(zoneID, zoneData, nationID)
     -- Get zone garrison data
     local allyName    = xi.garrison.allyNames[zoneData.levelCap][nationID]
     local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][nationID]
     local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+    local pos         = xi.garrison.zoneData[zoneID].pos
 
     if
         allyName    == nil or
         allyGroupId == nil or
         allyLooks   == nil or
-        #allyLooks  == 0
+        #allyLooks  == 0   or
+        pos         == nil
     then
         debugLogf("Garrison NPC data missing for %s level %u.", nationName[nationID], zoneData.levelCap)
         return nil
@@ -180,36 +182,46 @@ xi.garrison.getAllyInfo = function(zoneData, nationID)
         name    = allyName,
         looks   = allyLooks,
         groupId = allyGroupId,
+        pos     = pos,
     }
 end
 
-xi.garrison.getMobInfo = function(zone)
-    local zoneID = zone:getID()
-    local pos    = xi.garrison.zoneData[zoneID].pos
+xi.garrison.rollNPCs = function(zone, allyInfo, quantity)
+    local npcs     = {}
+    local xPos     = allyInfo.pos[1]
+    local yPos     = allyInfo.pos[2]
+    local zPos     = allyInfo.pos[3]
+    local rot      = allyInfo.pos[4]
+    local zoneID   = zone:getID()
+    local zoneData = xi.garrison.zoneData[zoneID]
 
-    if pos == nil then
-        debugLogf("Garrison position data missing for %s.", zone:getName())
-        return nil
+    debugLogf("Spawning %d npcs. GroupId: %d", quantity, allyInfo.groupId)
+
+    for i = 1, quantity do
+        table.insert(npcs, {
+            name = allyInfo.name,
+            look = utils.randomEntry(allyInfo.looks),
+            pos  = { xPos, yPos, zPos, rot },
+        })
+
+        if i == 6 then
+            xPos = allyInfo.pos[1] - zoneData.xSecondLine
+            zPos = allyInfo.pos[3] - zoneData.zSecondLine
+        elseif i == 12 then
+            xPos = allyInfo.pos[1] - zoneData.xThirdLine
+            zPos = allyInfo.pos[3] - zoneData.zThirdLine
+        else
+            xPos = xPos - zoneData.xChange
+            zPos = zPos - zoneData.zChange
+        end
     end
 
-    return {
-        pos = pos
-    }
+    return npcs
 end
 
 -- Spawns all npcs for the zone in the given garrison starting npc
 xi.garrison.spawnNPCs = function(zone, zoneData)
-    local mobInfo = xi.garrison.getMobInfo(zone)
-
-    if mobInfo == nil then
-        return false
-    end
-
-    local xPos = mobInfo.pos[1]
-    local yPos = mobInfo.pos[2]
-    local zPos = mobInfo.pos[3]
-    local rot  = mobInfo.pos[4]
-
+    local zoneID   = zone:getID()
     local nationID = GetRegionOwner(zone:getRegionID())
 
     if nationID > 2 then
@@ -217,35 +229,29 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
         return false
     end
 
-    local allyInfo = xi.garrison.getAllyInfo(zoneData, nationID)
+    local allyInfo = xi.garrison.getAllyInfo(zoneID, zoneData, nationID)
 
     -- If info is missing, a debug message will be logged and NPCs will not be spawned
     if allyInfo == nil then
         return false
     end
 
-    debugLogf("Spawning %d npcs. GroupId: %d", #zoneData.players, allyInfo.groupId)
-
     -- Spawn 1 npc per player in alliance
-    for i = 1, #zoneData.players do
-        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyInfo.name, allyInfo.groupId, utils.randomEntry(allyInfo.looks))
+    local npcs = xi.garrison.rollNPCs(zone, allyInfo, #zoneData.players)
+
+    if #npcs == 0 then
+        debugLogf("No NPC allies rolled. Unable to start Garrison.")
+        return false
+    end
+
+    for _, npcData in pairs(npcs) do
+        local mob = xi.garrison.spawnNPC(zone, zoneData, npcData.pos, npcData.name, allyInfo.groupId, npcData.look)
         -- Note: This does change the mob level because ally npcs are of type mob, and
         -- level_restriction is only applied to PCs. However, we need the status to validate that the
         -- npcs are part of the garrison.
         -- Because the npcs are not level capped, group ids should be used to define min / max level.
         xi.garrison.addLevelCap(mob, zoneData.levelCap)
         table.insert(zoneData.npcs, mob:getID())
-
-        if i == 6 then
-            xPos = zoneData.xPos - zoneData.xSecondLine
-            zPos = zoneData.zPos - zoneData.zSecondLine
-        elseif i == 12 then
-            xPos = zoneData.xPos - zoneData.xThirdLine
-            zPos = zoneData.zPos - zoneData.zThirdLine
-        else
-            xPos = xPos - zoneData.xChange
-            zPos = zPos - zoneData.zChange
-        end
     end
 
     return true
@@ -540,7 +546,7 @@ xi.garrison.tick = function(npc)
             debugPrintToPlayers(players, "Mission success")
             messagePlayers(npc, players, ID.text.GARRISON_BASE + 36)
 
-            xi.garrison.handleLootRolls(xi.garrison.loot[zoneData.levelCap], players)
+            xi.garrison.handleLootRolls(zoneData.levelCap, players)
             xi.garrison.handleGilPayout(zoneData.levelCap, players)
 
             zoneData.state = xi.garrison.state.ENDED
@@ -705,8 +711,9 @@ end
 
 -- Distributes loot amongst all players
 -- TODO: Use a central loot system: https://github.com/LandSandBoat/server/issues/3188
-xi.garrison.handleLootRolls = function(lootTable, players)
-    local max = 0
+xi.garrison.handleLootRolls = function(levelCap, players)
+    local lootTable = xi.garrison.loot[levelCap]
+    local max       = 0
 
     for _, entry in ipairs(lootTable) do
         max = max + entry.droprate
