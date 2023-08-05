@@ -4,6 +4,7 @@
 -- Turn into a stack of fire crystals
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4096, 12)
+    target:addItem(xi.items.FIRE_CRYSTAL, 12)
 end
 
 return itemObject

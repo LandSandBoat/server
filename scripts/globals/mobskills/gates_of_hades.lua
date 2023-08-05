@@ -35,12 +35,12 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BURN
-    local power = 21
+    local power = 30
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
 
-    local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 6, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmgmod = 1.0
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() * 12.5, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, nil, nil, nil, 1.0)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

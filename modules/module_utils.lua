@@ -22,6 +22,14 @@ xi.module.ensureTable = function(str)
     end
 end
 
+xi.module.modifyInteractionEntry = function(filename, modifyFunc)
+    package.loaded[filename] = nil -- Clear out the pre-required resource (it might not be there, but it doesn't matter)
+    local res = utils.prequire(filename) -- Load the resource
+    InteractionGlobal.lookup:removeContainer(res) -- Remove the resource from the container
+    modifyFunc(res) -- Run function to modify resource
+    InteractionGlobal.lookup:addContainer(res) -- Re-add resource to container
+end
+
 -- Override Object
 Override = {}
 Override.__index = Override

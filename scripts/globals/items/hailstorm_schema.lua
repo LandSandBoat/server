@@ -3,14 +3,16 @@
 -- Hailstorm Schema
 -- Teaches the white magic Hailstorm
 -----------------------------------
+require("scripts/globals/spell_data")
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(116)
+    return target:canLearnSpell(xi.magic.spell.HAILSTORM)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(116)
+    target:addSpell(xi.magic.spell.HAILSTORM)
 end
 
 return itemObject

@@ -122,7 +122,7 @@ INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
 INSERT INTO `mob_pool_mods` VALUES (676,160,-50,0); -- DMG: -50
 
 -- Cerberus
-INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
+INSERT INTO `mob_pool_mods` VALUES (680,59,155,1); -- WEAPON_BONUS: (85+2)*1.55 is 135 base dmg
 INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200
 INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
 
