@@ -216,10 +216,11 @@ local function addWeaponIfNecessary(look)
     return string.sub(look, 1, 30) .. weapon .. string.sub(look, 33, string.len(look))
 end
 
-m:addOverride("xi.garrison.getAllyInfo", function(zoneData, nationID)
+m:addOverride("xi.garrison.getAllyInfo", function(zoneID, zoneData, nationID)
     local zoneAllyName    = allyNames[zoneData.levelCap][nationID]
     local zoneAllyLooks   = allyLooks[zoneData.levelCap][nationID]
     local zoneAllyGroupId = allyGroupIds[zoneData.levelCap]
+    local pos             = posData[zoneID]
 
     for index, allyLook in pairs(zoneAllyLooks) do
         zoneAllyLooks[index] = addWeaponIfNecessary(allyLook)
@@ -229,14 +230,7 @@ m:addOverride("xi.garrison.getAllyInfo", function(zoneData, nationID)
         name    = zoneAllyName,
         looks   = zoneAllyLooks,
         groupId = zoneAllyGroupId,
-    }
-end)
-
-m:addOverride("xi.garrison.getMobInfo", function(zone)
-    local zoneID = zone:getID()
-
-    return {
-        pos = posData[zoneID]
+        pos     = pos,
     }
 end)
 
