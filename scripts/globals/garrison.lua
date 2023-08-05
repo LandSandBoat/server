@@ -69,7 +69,14 @@ end
 -- Any players that are KO'd lose their level restriction and will be unable to help afterward.
 -- Giving this the CONFRONTATION flag hooks into the target validation systme and stops outsiders
 -- participating, for mobs, allies, and players.
-xi.garrison.addLevelCap = function(entity, cap)
+xi.garrison.addLevelCap = function(entity, definedCap)
+    local cap = definedCap
+
+    -- If this Garrison is uncapped, use the server max (eg. 75)
+    if definedCap == 99 then
+        cap = xi.settings.main.MAX_LEVEL
+    end
+
     entity:addStatusEffectEx(
         xi.effect.LEVEL_RESTRICTION,
         xi.effect.LEVEL_RESTRICTION,
@@ -204,6 +211,12 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
     local rot  = mobInfo.pos[4]
 
     local nationID = GetRegionOwner(zone:getRegionID())
+
+    if nationID > 2 then
+        debugLogf("Region is beastman controlled. Unable to start Garrison.")
+        return false
+    end
+
     local allyInfo = xi.garrison.getAllyInfo(zoneData, nationID)
 
     -- If info is missing, a debug message will be logged and NPCs will not be spawned
