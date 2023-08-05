@@ -14,7 +14,7 @@ xi.garrison.allyNames =
     [30] = { "Trader",          "Mariner",         "Scholar"         },
     [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
     [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
-    [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
+    [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
 -- Group Ids are different per cap due to min / max level requirements
@@ -26,7 +26,7 @@ xi.garrison.allyGroupIds =
     [30] = 2,
     [40] = 3,
     [50] = 4,
-    [75] = 5,
+    [99] = 5,
 }
 
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost - More data needed)
@@ -56,7 +56,6 @@ xi.garrison.allyLooks =
             "0x01000E0718101820183015401850B76024700000",
         },
     },
-    --level 30 garrison looks
     [30] =
     {
         [xi.nation.SANDORIA] =
@@ -79,7 +78,6 @@ xi.garrison.allyLooks =
             "0x010000067D107820033066406850E96000700000",
         },
     },
-    --level 40 garrison looks
     [40] =
     {
         [xi.nation.SANDORIA] =
@@ -101,7 +99,6 @@ xi.garrison.allyLooks =
             -- (Missing capture)
         },
     },
-    --level 50 garrison looks
     [50] =
     {
         [xi.nation.SANDORIA] =
@@ -121,8 +118,7 @@ xi.garrison.allyLooks =
             "0x0100080669106B206B306B406B50FE6000700000",
         },
     },
-    --level 75 garrison looks
-    [75] =
+    [99] =
     {
         [xi.nation.SANDORIA] =
         {
@@ -144,7 +140,6 @@ xi.garrison.allyLooks =
 -- Loot is determined by LevelCap
 xi.garrison.loot =
 {
-    --level 20 garrison loot
     [20] =
     {
         { itemid = xi.items.DRAGON_CHRONICLES, droprate = 1000 },
@@ -154,7 +149,6 @@ xi.garrison.loot =
         { itemid = xi.items.GARRISON_GLOVES,   droprate =  350 },
         { itemid = xi.items.GARRISON_SALLET,   droprate =  350 },
     },
-    --level 30 garrison loot
     [30] =
     {
         { itemid = xi.items.DRAGON_CHRONICLES, droprate = 1000 },
@@ -165,7 +159,6 @@ xi.garrison.loot =
         { itemid = xi.items.MILITARY_SPEAR,    droprate =  350 },
         { itemid = xi.items.MILITARY_AXE,      droprate =  350 },
     },
-    --level 40 garrison loot
     [40] =
     {
         { itemid = xi.items.DRAGON_CHRONICLES, droprate = 1000 },
@@ -175,7 +168,6 @@ xi.garrison.loot =
         { itemid = xi.items.VARIABLE_RING,     droprate =  350 },
         { itemid = xi.items.MECURIAL_EARRING,  droprate =  350 },
     },
-    --level 50 garrison loot
     [50] =
     {
         { itemid = xi.items.DRAGON_CHRONICLES, droprate = 1000 },
@@ -193,9 +185,7 @@ xi.garrison.loot =
         { itemid = xi.items.REFRESH_EARRING,   droprate =  350 },
         { itemid = xi.items.ACCURATE_EARRING,  droprate =  350 },
     },
-    --level 75 garrison loot
-    --TODO: 75 era module
-    [75] =
+    [99] =
     {
         { itemid = xi.items.MIRATETES_MEMOIRS, droprate = 1000 },
         { itemid = xi.items.MIGHTY_BOW,        droprate =  350 },
@@ -560,7 +550,7 @@ xi.garrison.zoneData =
     {
         itemReq     = xi.items.BUNNY_FANG_SACK,
         textRegion  = 13,
-        levelCap    = 75,
+        levelCap    = 99,
         mobBoss     = "Goblin_Boss",
         pos         = { -174, 8, -61, 0 },
         xChange     = 0,

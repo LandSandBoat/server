@@ -17,7 +17,7 @@ local allyNames =
     [30] = { "Trader",          "Mariner",         "Scholar"         },
     [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
     [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
-    [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
+    [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
 -- Group Ids are different per cap due to min / max level requirements
@@ -29,7 +29,7 @@ local allyGroupIds =
     [30] = 2,
     [40] = 3,
     [50] = 4,
-    [75] = 5,
+    [99] = 5,
 }
 
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost - More data needed)
@@ -134,7 +134,7 @@ local allyLooks =
             "0x0100080669106B206B306B406B50FE6000700000",
         },
     },
-    [75] =
+    [99] =
     {
         [xi.nation.SANDORIA] =
         {
