@@ -1,13 +1,13 @@
 -----------------------------------
--- Garrison Placeholder NPCs
+-- Garrison Placeholder Data
 --
--- Sets placeholder NPCs for Garrison for use in lieu of capture data.
+-- Sets placeholder NPCs and mob data for Garrison for use in lieu of captures.
 -- This is a temporary work around. Please contribute capture data!
 -- The correct data should be added to: globals/garrison_data.lua
 -----------------------------------
 require("modules/module_utils")
 -----------------------------------
-local m = Module:new("garrison_placeholder_npcs")
+local m = Module:new("garrison_placeholder_data")
 
 -- Name is Determined by Nation and LevelCap
 -- Names in order of xi.nation values (sandoria, bastok, windurst)
@@ -84,6 +84,7 @@ local allyLooks =
             "0x01000B051C1073201430144014506C6000700000",
             "0x0100010777106920693066406950B46000700000",
             "0x010000067D107820033066406850E96000700000",
+            "0x0100020700100220023002400250006000700000", -- Naih_Arihmepp
         },
     },
     [40] =
@@ -182,6 +183,26 @@ local allyArsenal =
     "E6",
 }
 
+local posData =
+{
+    [xi.zone.WEST_RONFAURE]          = { -438, -20, -223,   0 },
+    [xi.zone.NORTH_GUSTABERG]        = { -575,  40,   63,   0 },
+    [xi.zone.WEST_SARUTABARUTA]      = {  -21, -12,  327, 128 },
+    [xi.zone.VALKURM_DUNES]          = {  149,  -8,   94,  32 },
+    [xi.zone.JUGNER_FOREST]          = {   54,   1,   -1, 210 }, -- Needs capture
+    [xi.zone.PASHHOW_MARSHLANDS]     = {  458,  24,  421, 130 }, -- Needs capture
+    [xi.zone.BUBURIMU_PENINSULA]     = { -485, -29,   58,   0 }, -- Needs capture
+    [xi.zone.MERIPHATAUD_MOUNTAINS]  = { -299,  17,  411,  30 }, -- Needs capture
+    [xi.zone.QUFIM_ISLAND]           = { -247, -19,  310,   0 }, -- Needs capture
+    [xi.zone.BEAUCEDINE_GLACIER]     = {  -25, -60, -110, 220 }, -- Needs capture
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = {  -43,   1, -140, 180 },
+    [xi.zone.YUHTUNGA_JUNGLE]        = { -248,   1, -392, 180 },
+    [xi.zone.XARCABARD]              = {  216, -22,  208,  90 }, -- Needs capture
+    [xi.zone.EASTERN_ALTEPA_DESERT]  = { -245,  -9, -249,   0 },
+    [xi.zone.YHOATOR_JUNGLE]         = {  214,   1,  -80,   0 },
+    [xi.zone.CAPE_TERIGGAN]          = { -174,   8,  -61,   0 },
+}
+
 -- Adds a random weapon if the given look does not contain one.
 -- Weapons are on the byte found in digits 31-32 (including 0x prefix)
 local function addWeaponIfNecessary(look)
@@ -208,6 +229,14 @@ m:addOverride("xi.garrison.getAllyInfo", function(zoneData, nationID)
         name    = zoneAllyName,
         looks   = zoneAllyLooks,
         groupId = zoneAllyGroupId,
+    }
+end)
+
+m:addOverride("xi.garrison.getMobInfo", function(zone)
+    local zoneID = zone:getID()
+
+    return {
+        pos = posData[zoneID]
     }
 end)
 

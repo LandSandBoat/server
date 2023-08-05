@@ -165,7 +165,7 @@ xi.garrison.getAllyInfo = function(zoneData, nationID)
         allyLooks   == nil or
         #allyLooks  == 0
     then
-        debugLogf("Garrison data missing for %s level %u.", nationName[nationID], zoneData.levelCap)
+        debugLogf("Garrison NPC data missing for %s level %u.", nationName[nationID], zoneData.levelCap)
         return nil
     end
 
@@ -176,12 +176,32 @@ xi.garrison.getAllyInfo = function(zoneData, nationID)
     }
 end
 
+xi.garrison.getMobInfo = function(zone)
+    local zoneID = zone:getID()
+    local pos    = xi.garrison.zoneData[zoneID].pos
+
+    if pos == nil then
+        debugLogf("Garrison position data missing for %s.", zone:getName())
+        return nil
+    end
+
+    return {
+        pos = pos
+    }
+end
+
 -- Spawns all npcs for the zone in the given garrison starting npc
 xi.garrison.spawnNPCs = function(zone, zoneData)
-    local xPos     = zoneData.xPos
-    local yPos     = zoneData.yPos
-    local zPos     = zoneData.zPos
-    local rot      = zoneData.rot
+    local mobInfo = xi.garrison.getMobInfo(zone)
+
+    if mobInfo == nil then
+        return false
+    end
+
+    local xPos = mobInfo.pos[1]
+    local yPos = mobInfo.pos[2]
+    local zPos = mobInfo.pos[3]
+    local rot  = mobInfo.pos[4]
 
     local nationID = GetRegionOwner(zone:getRegionID())
     local allyInfo = xi.garrison.getAllyInfo(zoneData, nationID)
@@ -618,7 +638,10 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     local zoneData = xi.garrison.zoneData[zoneID]
 
     -- If info is missing, a debug message will be logged and Garrison will not begin
-    if xi.garrison.getAllyInfo(zoneData, nationID) == nil then
+    if
+        xi.garrison.getAllyInfo(zoneData, nationID) == nil or
+        xi.garrison.getMobInfo(zone) == nil
+    then
         player:PrintToPlayer("Garrison is currently unavailable for this region.", xi.msg.channel.SYSTEM_3)
         debugLog("Garrison was cancelled due to missing data.")
 
