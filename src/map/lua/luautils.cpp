@@ -841,7 +841,7 @@ namespace luautils
         }
 
         // Load all Name/ID pairs from mobs and npcs
-        std::unordered_map<std::string, uint32> lookup;
+        std::unordered_map<std::string, std::vector<uint32>> lookup;
 
         // Mobs
         {
@@ -854,8 +854,7 @@ namespace luautils
                 auto name = sql->GetStringData(0);
                 auto id   = sql->GetUIntData(1);
 
-                // Only add to lookup if there isn't already an entry
-                std::ignore = lookup.try_emplace(name, id);
+                lookup[name].emplace_back(id);
             }
         }
 
@@ -870,8 +869,7 @@ namespace luautils
                 auto name = sql->GetStringData(0);
                 auto id   = sql->GetUIntData(1);
 
-                // Only add to lookup if there isn't already an entry
-                std::ignore = lookup.try_emplace(name, id);
+                lookup[name].emplace_back(id);
             }
         }
 
@@ -879,7 +877,62 @@ namespace luautils
         // clang-format off
         lua.set_function("GetFirstID", [&](std::string const& name) -> uint32
         {
-            return lookup[name];
+            return lookup[name].front();
+        });
+
+        lua.set_function("GetTableOfIDs", [&](std::string const& name, std::optional<int> optRange) -> sol::table
+        {
+            sol::table table = lua.create_table();
+
+            // Match first, +n following entries [start, start + n)
+            if (optRange)
+            {
+                int range = *optRange;
+
+                // If we have no entries, bail out and return nil
+                if (lookup.find(name) == lookup.end())
+                {
+                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning nil", name));
+                    return sol::lua_nil;
+                }
+
+                auto entriesVec = lookup[name];
+
+                if (entriesVec.empty())
+                {
+                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning empty table", name));
+                    return table;
+                }
+
+                uint32 startId = entriesVec.front();
+                uint32 endId   = startId + range;
+
+                // TODO: Set this up to be able to iterate negatively too
+                for (std::size_t idx = startId; idx < endId; ++idx)
+                {
+                    table.add(idx);
+                }
+            }
+            else // Look up all that match name
+            {
+                for (auto const& [lookupName, lookupVec] : lookup)
+                {
+                    if (name == lookupName)
+                    {
+                        for (auto const& entryId : lookupVec)
+                        {
+                            table.add(entryId);
+                        }
+                    }
+                }
+            }
+
+            if (table.empty())
+            {
+                ShowWarning(fmt::format("Tried to look do ID lookup for {}, but found nothing.", name));
+            }
+
+            return table;
         });
         // clang-format on
 
@@ -890,6 +943,18 @@ namespace luautils
             sol::error err = result;
             ShowError(err.what());
         }
+
+        // clang-format off
+        lua.set_function("GetFirstID", [&](std::string const& name) -> void
+        {
+            ShowWarning("GetFirstID is designed to be used at load/reload-time only!");
+        });
+
+        lua.set_function("GetTableOfIDs", [&](std::string const& name, std::optional<int> optRange) -> void
+        {
+            ShowWarning("GetTableOfIDs is designed to be used at load/reload-time only!");
+        });
+        // clang-format on
 
         // Re-publish to package.loaded. This is the same as loading the contents of a script with require("name").
         lua["package"]["loaded"][fmt::format("scripts/zones/{}/IDs", zoneName)] = lua["zones"][zoneId];
