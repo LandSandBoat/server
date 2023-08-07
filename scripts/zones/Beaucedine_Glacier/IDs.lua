@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine_Glacier
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

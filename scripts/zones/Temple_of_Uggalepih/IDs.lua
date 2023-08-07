@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Temple_of_Uggalepih
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

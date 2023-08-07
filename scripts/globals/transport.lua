@@ -1,7 +1,6 @@
 -----------------------------------
 -- Transport
 -----------------------------------
-require("scripts/globals/zone")
 require("scripts/globals/pathfind")
 -----------------------------------
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Maquette_Abdhaljs-Legion_A
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

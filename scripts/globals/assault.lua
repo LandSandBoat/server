@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.assault = xi.assault or {}

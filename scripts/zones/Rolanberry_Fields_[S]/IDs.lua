@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rolanberry_Fields_[S]
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

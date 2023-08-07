@@ -4,7 +4,6 @@
 -- Effect: Signet
 -----------------------------------
 require("scripts/globals/conquest")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

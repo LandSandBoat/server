@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Hazhalm_Testing_Grounds
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

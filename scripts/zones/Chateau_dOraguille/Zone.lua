@@ -2,7 +2,6 @@
 -- Zone: Chateau_dOraguille (233)
 -----------------------------------
 require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

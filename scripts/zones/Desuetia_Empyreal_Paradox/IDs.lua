@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Desuetia_Empyreal_Paradox
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

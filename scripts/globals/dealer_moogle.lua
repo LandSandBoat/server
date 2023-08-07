@@ -2,7 +2,6 @@
 -- Dealer Moogles & Kupon Global
 -- https://www.bg-wiki.com/ffxi/Category:Mog_Bonanza
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.dealerMoogle = xi.dealerMoogle or {}

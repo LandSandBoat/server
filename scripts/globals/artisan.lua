@@ -1,7 +1,6 @@
 -----------------------------------
 --  Artisan Moogles
 -----------------------------------
-require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
 xi.artisan = xi.artisan or {}

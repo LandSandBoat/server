@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Apollyon/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

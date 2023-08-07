@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Buburimu_Peninsula
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

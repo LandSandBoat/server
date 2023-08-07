@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

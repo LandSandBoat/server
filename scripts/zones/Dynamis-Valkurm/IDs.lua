@@ -2,7 +2,6 @@
 -- Area: Dynamis-Valkurm
 -----------------------------------
 require("scripts/globals/dynamis")
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

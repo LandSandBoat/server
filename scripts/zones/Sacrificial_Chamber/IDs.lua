@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Sacrificial_Chamber
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

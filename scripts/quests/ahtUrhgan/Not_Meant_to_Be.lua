@@ -6,7 +6,6 @@
 -- qm12 (Caedarva): !pos 456.993 -7.000 -270.815 79
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local caedarvaMireID = require('scripts/zones/Caedarva_Mire/IDs')

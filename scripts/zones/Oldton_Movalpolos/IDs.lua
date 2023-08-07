@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Oldton_Movalpolos
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

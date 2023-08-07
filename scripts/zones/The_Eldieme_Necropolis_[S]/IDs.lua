@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: The_Eldieme_Necropolis_[S]
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

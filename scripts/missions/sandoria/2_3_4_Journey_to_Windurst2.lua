@@ -9,7 +9,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)

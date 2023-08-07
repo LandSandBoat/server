@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: West_Sarutabaruta
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

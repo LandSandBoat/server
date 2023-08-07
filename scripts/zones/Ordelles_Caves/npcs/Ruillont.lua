@@ -4,7 +4,6 @@
 -- Involved in Mission: The Rescue Drill
 -- !pos -70 1 607 193
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 local ID = require("scripts/zones/Ordelles_Caves/IDs")
 -----------------------------------

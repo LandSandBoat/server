@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Silver_Sea_route_to_Al_Zahbi
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

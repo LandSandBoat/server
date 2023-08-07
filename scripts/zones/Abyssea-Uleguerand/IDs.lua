@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Uleguerand
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

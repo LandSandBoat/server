@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Meriphataud_Mountains
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

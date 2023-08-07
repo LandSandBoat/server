@@ -10,7 +10,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local giddeusID = require('scripts/zones/Giddeus/IDs')

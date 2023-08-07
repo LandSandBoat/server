@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/roe")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 -----------------------------------
 

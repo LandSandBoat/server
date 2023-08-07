@@ -5,7 +5,6 @@
 --     http://ffxi.allakhazam.com/wiki/Traveling_in_Vana'diel
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/zone")
 -----------------------------------
 
 xi = xi or {}

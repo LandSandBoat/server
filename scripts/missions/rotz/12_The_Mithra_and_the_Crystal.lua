@@ -11,7 +11,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
 -----------------------------------

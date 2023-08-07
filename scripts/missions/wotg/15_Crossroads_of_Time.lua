@@ -8,7 +8,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

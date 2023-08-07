@@ -3,7 +3,6 @@
 -- Item: Qiqirn Mine
 -- When used, Summons a bomb to blowup a wall
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

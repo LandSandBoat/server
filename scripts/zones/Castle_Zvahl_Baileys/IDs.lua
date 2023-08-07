@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Castle_Zvahl_Baileys
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

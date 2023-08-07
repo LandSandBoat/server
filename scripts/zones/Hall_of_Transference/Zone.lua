@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Hall_of_Transference/IDs')
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

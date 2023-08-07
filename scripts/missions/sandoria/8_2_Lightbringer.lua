@@ -19,7 +19,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local chateauID   = require('scripts/zones/Chateau_dOraguille/IDs')
 local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')

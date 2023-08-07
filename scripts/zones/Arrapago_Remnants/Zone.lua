@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Arrapago Remnants
 -----------------------------------
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

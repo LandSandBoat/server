@@ -4,7 +4,6 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -------------------------------------------
 xi = xi or {}
 xi.escha = xi.escha or {}

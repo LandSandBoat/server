@@ -10,7 +10,6 @@ require("scripts/globals/besieged")
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local caedarvaID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------

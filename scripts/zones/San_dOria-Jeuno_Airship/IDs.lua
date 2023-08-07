@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: San_dOria-Jeuno_Airship
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

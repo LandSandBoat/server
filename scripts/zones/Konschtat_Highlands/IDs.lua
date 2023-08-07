@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Konschtat_Highlands
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

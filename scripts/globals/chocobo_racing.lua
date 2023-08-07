@@ -4,7 +4,6 @@
 -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Racing_Guide
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 
 xi = xi or {}

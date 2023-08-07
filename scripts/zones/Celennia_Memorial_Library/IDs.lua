@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Celennia_Memorial_Library
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

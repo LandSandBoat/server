@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: The_Sanctuary_of_ZiTah
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

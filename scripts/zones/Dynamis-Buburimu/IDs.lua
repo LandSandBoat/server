@@ -2,7 +2,6 @@
 -- Area: Dynamis-Buburimu
 -----------------------------------
 require("scripts/globals/dynamis")
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

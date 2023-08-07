@@ -2,7 +2,6 @@
 -- Area: Leujaoam_Sanctum
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

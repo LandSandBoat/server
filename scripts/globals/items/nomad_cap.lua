@@ -4,7 +4,6 @@
 -- Transports the user to their Home Nation
 -- TODO: Confirm wiki claims of random zone destinations among a same nation.
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

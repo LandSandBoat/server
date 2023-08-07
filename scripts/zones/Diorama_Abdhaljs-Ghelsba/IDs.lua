@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Diorama_Abdhaljs-Ghelsba
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

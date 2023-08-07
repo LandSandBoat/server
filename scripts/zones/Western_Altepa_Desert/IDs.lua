@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western_Altepa_Desert
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

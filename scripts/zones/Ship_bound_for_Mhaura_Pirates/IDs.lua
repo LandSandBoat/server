@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ship bound for Mhaura Pirates
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

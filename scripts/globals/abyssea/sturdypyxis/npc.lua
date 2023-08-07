@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Npc
 -----------------------------------
-require("scripts/globals/zone")
 require("scripts/globals/abyssea/sturdypyxis/chest")
 require("scripts/globals/abyssea/sturdypyxis/red_chest")
 require("scripts/globals/abyssea/sturdypyxis/blue_chest")

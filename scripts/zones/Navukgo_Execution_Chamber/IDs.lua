@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Navukgo_Execution_Chamber
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

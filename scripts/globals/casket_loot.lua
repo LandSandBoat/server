@@ -5,7 +5,6 @@
 -- and the drops are level dependant.
 -----------------------------------
 
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.casket_loot = xi.casket_loot or {}

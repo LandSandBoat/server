@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: RaKaznar_Inner_Court
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

@@ -10,7 +10,6 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 require("scripts/globals/roe")
 require("scripts/globals/npc_util")
 require("scripts/globals/extravaganza")

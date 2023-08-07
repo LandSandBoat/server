@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Hall_of_Transference
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

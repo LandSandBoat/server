@@ -2,7 +2,6 @@
 -- Manaclipper
 -- https://ffxiclopedia.fandom.com/wiki/Manaclipper
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 xi = xi or {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper_Delkfutts_Tower
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

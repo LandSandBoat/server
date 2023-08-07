@@ -14,7 +14,6 @@ require('scripts/globals/confrontation')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local horutotoID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
 -----------------------------------

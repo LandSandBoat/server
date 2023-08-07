@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Silver_Sea_Remnants
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

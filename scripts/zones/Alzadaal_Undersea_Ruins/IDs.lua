@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Alzadaal_Undersea_Ruins
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

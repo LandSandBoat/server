@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ceizak Battlegrounds (261)
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

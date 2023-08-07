@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ruhotz_Silvermines
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

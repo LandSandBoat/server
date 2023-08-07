@@ -3,7 +3,6 @@
 -- TO DO: Add Naakaul Seven Treasures
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 require('scripts/globals/extravaganza')
 -----------------------------------
 

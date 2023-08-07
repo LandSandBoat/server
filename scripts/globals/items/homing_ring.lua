@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/conquest")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

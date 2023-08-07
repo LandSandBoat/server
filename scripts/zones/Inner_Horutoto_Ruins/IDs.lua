@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Inner Horutoto Ruins (192)
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

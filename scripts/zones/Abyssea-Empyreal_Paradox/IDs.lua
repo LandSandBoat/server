@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Empyreal_Paradox
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

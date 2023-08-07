@@ -2,7 +2,6 @@
 -- ID: 11290
 -- Item: tidal talisman
 -----------------------------------
-require('scripts/globals/zone')
 -----------------------------------
 local itemObject = {}
 

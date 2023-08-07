@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Yahse_Hunting_Grounds
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

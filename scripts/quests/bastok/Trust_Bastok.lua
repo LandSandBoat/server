@@ -9,7 +9,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local metalworksID = require('scripts/zones/Metalworks/IDs')
 -----------------------------------

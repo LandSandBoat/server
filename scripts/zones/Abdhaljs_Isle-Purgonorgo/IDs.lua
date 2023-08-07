@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abdhaljs_Isle-Purgonorgo
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

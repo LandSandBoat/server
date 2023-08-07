@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mamool_Ja_Training_Grounds
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

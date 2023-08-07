@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian_Safehold
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

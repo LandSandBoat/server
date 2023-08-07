@@ -5,7 +5,6 @@
 -- !pos 20 -34.922 0.000 245
 -----------------------------------
 require('scripts/globals/waypoint')
-require('scripts/globals/zone')
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------

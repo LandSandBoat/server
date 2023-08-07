@@ -30,7 +30,6 @@
 -----------------------------------
 require("scripts/globals/chocobo_names")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}

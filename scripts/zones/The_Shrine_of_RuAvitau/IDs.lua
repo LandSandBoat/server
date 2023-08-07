@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: The_Shrine_of_RuAvitau
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

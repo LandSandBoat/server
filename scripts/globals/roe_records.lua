@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/zone")
 -----------------------------------
 
 local abysseaAreas = set{

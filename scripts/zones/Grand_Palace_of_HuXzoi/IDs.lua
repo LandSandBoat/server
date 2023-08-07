@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Grand_Palace_of_HuXzoi
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

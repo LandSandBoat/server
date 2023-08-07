@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Behemoths_Dominion
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

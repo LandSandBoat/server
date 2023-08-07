@@ -10,7 +10,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local pastJugnerID = require('scripts/zones/Jugner_Forest_[S]/IDs')
 local presentJugnerID = require('scripts/zones/Jugner_Forest/IDs')

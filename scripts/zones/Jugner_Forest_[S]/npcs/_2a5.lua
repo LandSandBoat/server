@@ -3,7 +3,6 @@
 --  NPC: Wooden Gate
 -- !pos -200 -10.965 -511.129 82
 -----------------------------------
-require('scripts/globals/zone')
 -----------------------------------
 local entity = {}
 

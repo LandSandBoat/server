@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Pashhow_Marshlands_[S]
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

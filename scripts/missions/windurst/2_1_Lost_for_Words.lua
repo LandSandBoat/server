@@ -15,7 +15,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
 -----------------------------------

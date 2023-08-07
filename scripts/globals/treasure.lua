@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/zone")
 -----------------------------------
 
 xi = xi or {}

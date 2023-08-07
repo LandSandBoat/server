@@ -3,7 +3,6 @@
 -- Item: Zhayolm Fireflies
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

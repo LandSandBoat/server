@@ -2,7 +2,6 @@
 -- func: setProgress
 -- desc: changes progress inside an instance
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 cmdprops =

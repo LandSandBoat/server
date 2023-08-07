@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Carpenters_Landing
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

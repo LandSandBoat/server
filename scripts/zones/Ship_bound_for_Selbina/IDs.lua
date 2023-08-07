@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ship_bound_for_Selbina
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

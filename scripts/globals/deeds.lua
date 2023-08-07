@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
 xi.deeds = xi.deeds or {}

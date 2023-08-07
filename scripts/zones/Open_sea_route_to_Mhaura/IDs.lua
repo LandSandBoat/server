@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Open_sea_route_to_Mhaura
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

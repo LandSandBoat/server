@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Arrapago_Remnants
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

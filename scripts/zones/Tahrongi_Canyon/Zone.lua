@@ -8,7 +8,6 @@ require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/chocobo')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}

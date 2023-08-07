@@ -12,7 +12,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local kamihrID        = require('scripts/zones/Mount_Kamihr/IDs')
 local outerRaKaznarID = require('scripts/zones/Outer_RaKaznar/IDs')

@@ -2,7 +2,6 @@
 -- Area: Lebros_Cavern
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: VeLugannon_Palace
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

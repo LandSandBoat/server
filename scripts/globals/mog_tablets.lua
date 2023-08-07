@@ -1,7 +1,6 @@
 -----------------------------------
 -- Mog Tablets
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.mogTablet = xi.mogTablet or {}

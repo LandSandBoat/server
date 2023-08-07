@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Sauromugue_Champaign
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}

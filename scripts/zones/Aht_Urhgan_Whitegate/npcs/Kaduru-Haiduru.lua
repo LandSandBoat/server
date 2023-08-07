@@ -3,7 +3,6 @@
 --  NPC: Kaduru-Haiduru
 -- Teleport NPC
 -----------------------------------
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

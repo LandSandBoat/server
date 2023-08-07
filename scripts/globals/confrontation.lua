@@ -21,7 +21,6 @@
 -- - Often, but not always, accompanied by a Level Restriction.
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/zone")
 -----------------------------------
 
 xi = xi or {}
