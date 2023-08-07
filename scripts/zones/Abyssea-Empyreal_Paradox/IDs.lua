@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Empyreal_Paradox
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_EMPYREAL_PARADOX] =

@@ -23,7 +23,6 @@ xi.mix.uragnite.config(mob, {
 --]]
 require("scripts/globals/mixins")
 -----------------------------------
-
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.uragnite = xi.mix.uragnite or {}

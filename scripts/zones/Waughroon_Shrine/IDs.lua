@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Waughroon_Shrine
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WAUGHROON_SHRINE] =

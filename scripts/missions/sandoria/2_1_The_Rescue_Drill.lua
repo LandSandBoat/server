@@ -19,7 +19,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local laTheinePlateauID  = require('scripts/zones/La_Theine_Plateau/IDs')
 local ordellesCavesID    = require('scripts/zones/Ordelles_Caves/IDs')

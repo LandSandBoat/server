@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Newton_Movalpolos
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NEWTON_MOVALPOLOS] =

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Quicksand_Caves
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QUICKSAND_CAVES] =

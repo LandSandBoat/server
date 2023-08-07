@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Attohwa_Chasm
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ATTOHWA_CHASM] =

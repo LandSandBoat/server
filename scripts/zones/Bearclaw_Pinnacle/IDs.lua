@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bearclaw_Pinnacle
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEARCLAW_PINNACLE] =

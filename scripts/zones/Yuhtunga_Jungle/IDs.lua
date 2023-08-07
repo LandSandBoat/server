@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Yuhtunga_Jungle
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YUHTUNGA_JUNGLE] =

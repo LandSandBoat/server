@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Restore HP/MP/JA
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 xi.pyxis.restore = {}

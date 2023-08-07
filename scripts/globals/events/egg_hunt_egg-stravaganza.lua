@@ -8,7 +8,6 @@
 -- Windurst Waters     !pos -55.470 -5.391 216.362 238
 -- Windurst Woods      !pos 104.823 -5.000 -55.745 241
 ------------------------------------
-require("scripts/globals/zone")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 ------------------------------------

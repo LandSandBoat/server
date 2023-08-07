@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Red Chest
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

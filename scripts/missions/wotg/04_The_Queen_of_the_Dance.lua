@@ -12,7 +12,6 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

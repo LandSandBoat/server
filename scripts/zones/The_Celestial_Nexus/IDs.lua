@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Celestial_Nexus
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_CELESTIAL_NEXUS] =

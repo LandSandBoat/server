@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ifrits_Cauldron
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.IFRITS_CAULDRON] =

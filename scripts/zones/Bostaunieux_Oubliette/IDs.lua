@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bostaunieux_Oubliette
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =

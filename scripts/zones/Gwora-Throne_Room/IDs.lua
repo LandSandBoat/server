@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Gwora-Throne_Room (299)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GWORA_THRONE_ROOM] =

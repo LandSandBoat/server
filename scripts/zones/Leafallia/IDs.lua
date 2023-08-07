@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Leafallia
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LEAFALLIA] =

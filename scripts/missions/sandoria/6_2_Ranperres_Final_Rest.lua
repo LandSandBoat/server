@@ -14,7 +14,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local krtID = require('scripts/zones/King_Ranperres_Tomb/IDs')
 -----------------------------------

@@ -2,7 +2,6 @@
 -- Zone: Mamool_Ja_Training_Grounds
 -----------------------------------
 local ID = require('scripts/zones/Mamool_Ja_Training_Grounds/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

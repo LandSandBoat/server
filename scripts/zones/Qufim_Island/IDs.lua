@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Qufim_Island
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QUFIM_ISLAND] =

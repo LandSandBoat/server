@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Valley_of_Sorrows
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VALLEY_OF_SORROWS] =

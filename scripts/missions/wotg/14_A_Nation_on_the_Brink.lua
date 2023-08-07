@@ -8,7 +8,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local pastSauromugueID = require('scripts/zones/Sauromugue_Champaign_[S]/IDs')
 -----------------------------------

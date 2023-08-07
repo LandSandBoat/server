@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Korroloka Tunnel (173)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KORROLOKA_TUNNEL] =

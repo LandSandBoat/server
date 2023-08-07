@@ -4,7 +4,6 @@
 -- Teleport's user to Purgonorgo Isle
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Riverne-Site_A01
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RIVERNE_SITE_A01] =

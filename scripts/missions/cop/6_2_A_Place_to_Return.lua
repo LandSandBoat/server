@@ -9,7 +9,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 local misareauxID = require("scripts/zones/Misareaux_Coast/IDs")
 -----------------------------------

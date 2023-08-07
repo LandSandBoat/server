@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ilrusi_Atoll
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ILRUSI_ATOLL] =

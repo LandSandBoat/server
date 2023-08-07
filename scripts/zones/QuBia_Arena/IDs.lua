@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: QuBia_Arena
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QUBIA_ARENA] =

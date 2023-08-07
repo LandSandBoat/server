@@ -2,7 +2,6 @@
 -- Zone: Leujaoam_Sanctum
 -----------------------------------
 require('scripts/zones/Leujaoam_Sanctum/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

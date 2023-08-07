@@ -3,9 +3,7 @@
 -----------------------------------
 require("scripts/globals/mobs")
 require("scripts/globals/voidwalkerpos")
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.voidwalker = xi.voidwalker or {}
 

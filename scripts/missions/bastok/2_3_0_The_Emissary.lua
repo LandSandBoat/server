@@ -16,7 +16,6 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
 local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')

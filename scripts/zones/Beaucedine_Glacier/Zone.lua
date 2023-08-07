@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Beaucedine_Glacier/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

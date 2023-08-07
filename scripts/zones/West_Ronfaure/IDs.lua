@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: West_Ronfaure
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_RONFAURE] =

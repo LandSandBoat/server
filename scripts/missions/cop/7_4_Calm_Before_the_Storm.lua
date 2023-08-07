@@ -13,7 +13,6 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 local carpentersID = require("scripts/zones/Carpenters_Landing/IDs")
 local bibikiBayID  = require("scripts/zones/Bibiki_Bay/IDs")

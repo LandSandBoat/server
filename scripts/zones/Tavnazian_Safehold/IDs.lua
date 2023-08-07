@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian_Safehold
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TAVNAZIAN_SAFEHOLD] =

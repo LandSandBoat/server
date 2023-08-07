@@ -3,7 +3,6 @@ require("scripts/globals/gear_sets")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 require("scripts/globals/events/login_campaign")
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
@@ -41,7 +40,6 @@ local startingJobGear =
 -----------------------------------
 -- public functions
 -----------------------------------
-
 xi = xi or {}
 xi.player = {}
 

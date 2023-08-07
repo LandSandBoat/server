@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Crawlers_Nest
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CRAWLERS_NEST] =

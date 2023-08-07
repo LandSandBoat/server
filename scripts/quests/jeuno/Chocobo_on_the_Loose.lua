@@ -7,7 +7,6 @@
 -- Hantileon      : !pos -2.675 -1.1 -105.287 230
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

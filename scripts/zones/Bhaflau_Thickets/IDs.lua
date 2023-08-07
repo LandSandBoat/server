@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bhaflau_Thickets
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BHAFLAU_THICKETS] =

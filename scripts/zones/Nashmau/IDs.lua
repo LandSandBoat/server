@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NASHMAU] =

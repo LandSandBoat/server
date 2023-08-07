@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/titles')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

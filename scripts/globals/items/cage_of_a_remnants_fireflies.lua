@@ -4,7 +4,6 @@
 -- Transports the user out of Arrapago Remnants
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

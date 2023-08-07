@@ -13,7 +13,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local gusgenID        = require('scripts/zones/Gusgen_Mines/IDs')
 -----------------------------------

@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local qufimID = require("scripts/zones/Qufim_Island/IDs")
 -----------------------------------

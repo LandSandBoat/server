@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bastok_Mines
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BASTOK_MINES] =

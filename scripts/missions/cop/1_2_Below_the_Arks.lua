@@ -12,7 +12,6 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require("scripts/globals/teleports")
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/missions/cop/helpers')
 -----------------------------------
 

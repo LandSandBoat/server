@@ -4,9 +4,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
-
 xi = xi or {}
 xi.jeuno = xi.jeuno or {}
 xi.jeuno.helpers = xi.jeuno.helpers or {}

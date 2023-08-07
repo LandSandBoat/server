@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
-require("scripts/globals/zone")
 require("scripts/globals/roe")
 require("scripts/globals/voidwalker")
 -----------------------------------

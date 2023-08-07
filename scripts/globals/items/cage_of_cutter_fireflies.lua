@@ -4,7 +4,6 @@
 -- Transports the user to Arrapago Reef
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

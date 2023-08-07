@@ -2,7 +2,6 @@
 -- Dominion Sergeant Global
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}

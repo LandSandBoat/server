@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Spire_of_Mea
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SPIRE_OF_MEA] =

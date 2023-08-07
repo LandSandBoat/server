@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Cirdas_Caverns
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CIRDAS_CAVERNS] =

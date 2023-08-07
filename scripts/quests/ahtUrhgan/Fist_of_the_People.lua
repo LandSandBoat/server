@@ -11,7 +11,6 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.FIST_OF_THE_PEOPLE)

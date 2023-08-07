@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Sanctuary_of_ZiTah
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =

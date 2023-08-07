@@ -3,9 +3,7 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require('scripts/globals/interaction/container')
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.limbus = xi.limbus or {}
 

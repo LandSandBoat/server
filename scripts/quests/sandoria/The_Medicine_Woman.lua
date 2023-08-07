@@ -8,7 +8,6 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local northernSandoriaID = require("scripts/zones/Northern_San_dOria/IDs")

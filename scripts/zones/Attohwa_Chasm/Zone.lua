@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Attohwa_Chasm/IDs')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

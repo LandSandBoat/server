@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ghoyus_Reverie
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GHOYUS_REVERIE] =

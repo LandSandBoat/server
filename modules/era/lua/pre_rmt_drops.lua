@@ -3,7 +3,6 @@
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/treasure")
-require("scripts/globals/zone")
 -----------------------------------
 local m = Module:new("pre_rmt_drops")
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Port_Windurst
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PORT_WINDURST] =

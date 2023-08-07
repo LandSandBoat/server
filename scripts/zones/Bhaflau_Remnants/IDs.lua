@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bhaflau_Remnants
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BHAFLAU_REMNANTS] =

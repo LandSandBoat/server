@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Morimar_Basalt_Fields
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MORIMAR_BASALT_FIELDS] =

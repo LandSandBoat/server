@@ -2,7 +2,6 @@
 -- Moghouse Exposition
 -----------------------------------
 require('scripts/globals/moghouse')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
 

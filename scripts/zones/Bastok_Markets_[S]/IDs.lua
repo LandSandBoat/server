@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bastok_Markets_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BASTOK_MARKETS_S] =

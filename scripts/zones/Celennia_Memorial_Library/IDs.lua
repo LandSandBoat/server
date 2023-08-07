@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Celennia_Memorial_Library
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY] =

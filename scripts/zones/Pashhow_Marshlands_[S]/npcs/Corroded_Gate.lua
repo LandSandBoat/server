@@ -2,8 +2,6 @@
 -- Area : Pashhow Marshlands [S] (90)
 --  NPC : Corroded Gate
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

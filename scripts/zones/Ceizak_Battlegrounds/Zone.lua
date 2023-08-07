@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/quests')
 require('scripts/globals/colonization_reives')
-require('scripts/globals/zone')
 local ID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
 -----------------------------------
 local zoneObject = {}

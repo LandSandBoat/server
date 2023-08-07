@@ -2,11 +2,9 @@
 -- Helpers for otherAreas quests
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 local davoiID = require('scripts/zones/Davoi/IDs')
 -----------------------------------
-
 xi = xi or {}
 xi.otherAreas = xi.otherAreas or {}
 xi.otherAreas.helpers = xi.otherAreas.helpers or {}

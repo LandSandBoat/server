@@ -4,7 +4,6 @@
 -- https://www.bg-wiki.com/ffxi/Category:Mog_Bonanza
 ------------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 ------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
