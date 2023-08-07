@@ -1,4 +1,3 @@
-require("scripts/globals/zone")
 local list =
 {
     [xi.zone.KUFTAL_TUNNEL] =
