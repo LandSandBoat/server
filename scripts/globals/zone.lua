@@ -145,6 +145,7 @@ xi.zone =
     OPEN_SEA_ROUTE_TO_AL_ZAHBI      = 46,
     OPEN_SEA_ROUTE_TO_MHAURA        = 47,
     AL_ZAHBI                        = 48,
+    NONE                            = 49,
     AHT_URHGAN_WHITEGATE            = 50,
     WAJAOM_WOODLANDS                = 51,
     BHAFLAU_THICKETS                = 52,

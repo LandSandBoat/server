@@ -880,7 +880,15 @@ bool starts_with(std::string const& target, std::string const& pattern)
 
 std::string replace(std::string const& target, std::string const& search, std::string const& replace)
 {
-    return std::regex_replace(target, std::regex(search), replace);
+    try
+    {
+        return std::regex_replace(target, std::regex(search), replace);
+    }
+    catch (std::exception& ex)
+    {
+        ShowError(ex.what());
+    }
+    return "";
 }
 
 look_t stringToLook(std::string str)
