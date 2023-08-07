@@ -85,6 +85,7 @@ zones[xi.zone.DAVOI] =
     },
     npc =
     {
+        JAR              = GetFirstID('Jar'),
         HIDE_FLAP_OFFSET = 17388023,
         STORAGE_HOLE     = 17388025,
         TREASURE_CHEST   = 17388027,

@@ -6780,8 +6780,44 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 }
 
 /************************************************************************
+ *  Function: delCurrentQuest()
+ *  Purpose : Deletes an accepted quest for the player, but does not remove Completed state
+ *  Notes   : This duplicates delQuest with the above exception
+ ************************************************************************/
+
+void CLuaBaseEntity::delCurrentQuest(uint8 questLogID, uint16 questID)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
+    {
+        uint8 current = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
+
+        if (current != 0)
+        {
+            PChar->m_questLog[questLogID].current[questID / 8] &= ~(1 << (questID % 8));
+
+            PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_CURRENT));
+            PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_COMPLETE));
+
+            charutils::SaveQuestsList(PChar);
+        }
+    }
+    else
+    {
+        ShowError("Lua::delCurrentQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
+    }
+}
+
+/************************************************************************
  *  Function: delQuest()
- *  Purpose : Deletes a quest from a character's quest log
+ *  Purpose : Deletes all records of a quest from a character's quest log
  *  Example : player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
  *  Notes   : Doesn't delete any player variables associated with quest
  ************************************************************************/
@@ -16911,6 +16947,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setRankPoints", CLuaBaseEntity::setRankPoints);
 
     SOL_REGISTER("addQuest", CLuaBaseEntity::addQuest);
+    SOL_REGISTER("delCurrentQuest", CLuaBaseEntity::delCurrentQuest);
     SOL_REGISTER("delQuest", CLuaBaseEntity::delQuest);
     SOL_REGISTER("getQuestStatus", CLuaBaseEntity::getQuestStatus);
     SOL_REGISTER("hasCompletedQuest", CLuaBaseEntity::hasCompletedQuest);
