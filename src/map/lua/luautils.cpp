@@ -297,9 +297,12 @@ namespace luautils
 
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
+            ShowInfo("*** CI ONLY: Smoke testing by running all Lua files. ***")
             for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts"))
             {
-                if (entry.extension() == ".lua")
+                // If we try to reload IDs.lua files, we'll wipe out the results
+                // of GetFirstID() calls, so lets skip over those.
+                if (entry.extension() == ".lua" && entry.filename() != "IDs.lua")
                 {
                     auto result = lua.safe_script_file(entry.relative_path().generic_string());
                     if (!result.valid())
