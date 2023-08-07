@@ -6,6 +6,19 @@ require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
 
+local abysseaAreas = set{
+    xi.region.ABYSSEA_KONSCHTAT,
+    xi.region.ABYSSEA_TAHRONGI,
+    xi.region.ABYSSEA_LA_THEINE,
+    xi.region.ABYSSEA_ATTOHWA,
+    xi.region.ABYSSEA_MISAREAUX,
+    xi.region.ABYSSEA_VUNKERL,
+    xi.region.ABYSSEA_ALTEPA,
+    xi.region.ABYSSEA_ULEGUERAND,
+    xi.region.ABYSSEA_GRAUBERG,
+    xi.region.ABYSSEA_EMPYREAL_PARADOX,
+}
+
 function getRoeRecords(triggers)
     return {
 

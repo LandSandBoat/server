@@ -11,7 +11,7 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)
