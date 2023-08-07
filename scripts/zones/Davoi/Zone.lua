@@ -4,8 +4,6 @@
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/treasure")
 require("scripts/quests/otherAreas/helpers")
 -----------------------------------
@@ -61,13 +59,12 @@ zoneObject.onGameDay = function()
 end
 
 zoneObject.onGameHour = function(zone)
-    local osTime = os.time()
     local jarMoveTime = GetServerVariable("Davoi_Jar_Move_Time")
 
-    if osTime >= jarMoveTime then
+    if os.time() >= jarMoveTime then
         local npc = GetNPCByID(ID.npc.JAR)
 
-        xi.otherAreas.helpers.TestMyMettle.moveJar(npc, osTime)
+        xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
     end
 end
 

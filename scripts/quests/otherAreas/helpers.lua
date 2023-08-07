@@ -1,10 +1,7 @@
 -----------------------------------
 -- Helpers for otherAreas quests
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
-require('scripts/globals/quests')
 require('scripts/globals/zone')
 -----------------------------------
 local davoiID = require('scripts/zones/Davoi/IDs')
@@ -15,12 +12,12 @@ xi.otherAreas = xi.otherAreas or {}
 xi.otherAreas.helpers = xi.otherAreas.helpers or {}
 xi.otherAreas.helpers.TestMyMettle = {}
 
-function xi.otherAreas.helpers.TestMyMettle.moveJar(npc, osTime)
+function xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
     -- 5 min (offset by onGameHour frequency of ~2.5 min) to 3 hours
     -- full equation = ((2.5 * 10) * 6) to ((3 * 60) * 60)
     local randomHourSpan = math.random(125, 10800)
 
-    SetServerVariable("Davoi_Jar_Move_Time", osTime + randomHourSpan)
+    SetServerVariable("Davoi_Jar_Move_Time", os.time() + randomHourSpan)
 
     local positions =
     {
