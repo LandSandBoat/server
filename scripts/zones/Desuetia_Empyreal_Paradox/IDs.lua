@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Desuetia_Empyreal_Paradox
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DESUETIA_EMPYREAL_PARADOX] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Carpenters_Landing
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CARPENTERS_LANDING] =

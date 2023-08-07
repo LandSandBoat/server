@@ -7,7 +7,6 @@ require("scripts/globals/roe")
 require("scripts/globals/utils")
 require("scripts/missions/amk/helpers")
 -----------------------------------
-
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Outer_Horutoto_Ruins
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OUTER_HORUTOTO_RUINS] =

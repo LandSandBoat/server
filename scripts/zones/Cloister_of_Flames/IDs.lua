@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Cloister_of_Flames
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CLOISTER_OF_FLAMES] =

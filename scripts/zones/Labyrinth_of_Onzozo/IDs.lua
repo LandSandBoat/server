@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Labyrinth of Onzozo (213)
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LABYRINTH_OF_ONZOZO] =

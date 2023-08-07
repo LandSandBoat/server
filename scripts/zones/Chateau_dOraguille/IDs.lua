@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Chateau_dOraguille
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHATEAU_DORAGUILLE] =

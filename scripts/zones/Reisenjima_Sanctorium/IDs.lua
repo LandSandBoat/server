@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Reisenjima_Sanctorium
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.REISENJIMA_SANCTORIUM] =

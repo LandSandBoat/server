@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PHOMIUNA_AQUEDUCTS] =

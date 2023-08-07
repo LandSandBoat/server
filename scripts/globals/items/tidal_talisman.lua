@@ -2,7 +2,6 @@
 -- ID: 11290
 -- Item: tidal talisman
 -----------------------------------
------------------------------------
 local itemObject = {}
 
 local teleportData =

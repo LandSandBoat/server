@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Grand_Palace_of_HuXzoi
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =

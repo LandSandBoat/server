@@ -6,7 +6,6 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
-
 xi = xi or {}
 xi.treasure = xi.treasure or {}
 

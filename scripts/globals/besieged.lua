@@ -5,7 +5,6 @@ require('scripts/globals/npc_util')
 require('scripts/globals/teleports')
 require('scripts/globals/extravaganza')
 -----------------------------------
-
 xi = xi or {}
 xi.besieged = xi.besieged or {}
 

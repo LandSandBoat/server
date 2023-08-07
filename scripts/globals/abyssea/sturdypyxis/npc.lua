@@ -6,7 +6,6 @@ require("scripts/globals/abyssea/sturdypyxis/red_chest")
 require("scripts/globals/abyssea/sturdypyxis/blue_chest")
 require("scripts/globals/abyssea/sturdypyxis/gold_chest")
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

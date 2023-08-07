@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Arrapago Remnants
 -----------------------------------
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

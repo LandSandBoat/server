@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Rolanberry_Fields_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ROLANBERRY_FIELDS_S] =

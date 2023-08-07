@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Aydeewa_Subterrane
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AYDEEWA_SUBTERRANE] =

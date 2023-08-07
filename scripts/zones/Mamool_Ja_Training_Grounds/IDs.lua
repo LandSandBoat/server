@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Mamool_Ja_Training_Grounds
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =

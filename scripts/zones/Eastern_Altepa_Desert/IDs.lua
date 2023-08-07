@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Eastern_Altepa_Desert
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EASTERN_ALTEPA_DESERT] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Misareaux
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_MISAREAUX] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Pashhow_Marshlands
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PASHHOW_MARSHLANDS] =

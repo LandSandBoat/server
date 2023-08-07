@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Hall_of_Transference
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HALL_OF_TRANSFERENCE] =

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/assault")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LEUJAOAM_SANCTUM] =

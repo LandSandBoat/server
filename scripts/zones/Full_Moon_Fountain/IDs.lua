@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Full_Moon_Fountain
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FULL_MOON_FOUNTAIN] =

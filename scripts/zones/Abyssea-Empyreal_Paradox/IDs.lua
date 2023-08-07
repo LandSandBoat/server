@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Empyreal_Paradox
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_EMPYREAL_PARADOX] =

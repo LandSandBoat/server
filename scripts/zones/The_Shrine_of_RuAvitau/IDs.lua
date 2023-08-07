@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: The_Shrine_of_RuAvitau
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =

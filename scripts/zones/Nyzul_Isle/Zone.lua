@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Nyzul_Isle
 -----------------------------------
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

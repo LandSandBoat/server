@@ -12,7 +12,6 @@ require("scripts/globals/roe")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
 -----------------------------------
-
 xi = xi or {}
 xi.helm = xi.helm or {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: VeLugannon_Palace
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VELUGANNON_PALACE] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Inner Horutoto Ruins (192)
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.INNER_HORUTOTO_RUINS] =

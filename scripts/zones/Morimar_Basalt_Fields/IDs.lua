@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Morimar_Basalt_Fields
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MORIMAR_BASALT_FIELDS] =

@@ -4,7 +4,6 @@
 require("scripts/globals/mobs")
 require("scripts/globals/voidwalkerpos")
 -----------------------------------
-
 xi = xi or {}
 xi.voidwalker = xi.voidwalker or {}
 

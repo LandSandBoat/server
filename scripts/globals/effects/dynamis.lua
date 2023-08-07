@@ -1,7 +1,6 @@
 -----------------------------------
 -- xi.effect.DYNAMIS
 -----------------------------------
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

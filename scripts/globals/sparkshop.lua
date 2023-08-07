@@ -5,7 +5,6 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/extravaganza')
 -----------------------------------
-
 xi = xi or {}
 xi.sparkshop = xi.sparkshop or {}
 

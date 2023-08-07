@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Ceizak Battlegrounds (261)
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CEIZAK_BATTLEGROUNDS] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Buburimu_Peninsula
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BUBURIMU_PENINSULA] =

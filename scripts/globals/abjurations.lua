@@ -2,7 +2,6 @@
 -- Abjurations
 -- Used by Alphollon C Meriard
 -----------------------------------
-
 xi = xi or {}
 
 xi.abjurations =

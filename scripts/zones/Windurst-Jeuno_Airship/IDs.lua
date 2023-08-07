@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Windurst-Jeuno_Airship
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WINDURST_JEUNO_AIRSHIP] =

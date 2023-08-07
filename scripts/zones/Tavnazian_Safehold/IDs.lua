@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian_Safehold
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TAVNAZIAN_SAFEHOLD] =

@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}
 

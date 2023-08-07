@@ -1,7 +1,6 @@
 -----------------------------------
 require("scripts/globals/events/handler")
 -----------------------------------
-
 xi = xi or {}
 xi.server = xi.server or {}
 
@@ -39,7 +38,7 @@ xi.server.setExplorerMoogles = function(moogleId)
     if xi.settings.main.EXPLORER_MOOGLE_LV ~= 0 then
         local npc = GetNPCByID(moogleId)
         if npc == nil then
-            printf("'SetExplorerMoogles' Error trying to load undefined npc (%d)", moogle)
+            printf("'SetExplorerMoogles' Error trying to load undefined npc (%d)", moogleId)
         else
             npc:setStatus(0)
         end

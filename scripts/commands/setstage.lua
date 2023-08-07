@@ -2,7 +2,6 @@
 -- func: setStage
 -- desc: changes stage inside an instance
 -----------------------------------
------------------------------------
 
 cmdprops =
 {

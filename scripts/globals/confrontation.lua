@@ -22,7 +22,6 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
-
 xi = xi or {}
 xi.confrontation = xi.confrontation or {}
 

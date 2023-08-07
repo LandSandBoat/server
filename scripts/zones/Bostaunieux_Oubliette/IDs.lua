@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Bostaunieux_Oubliette
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =

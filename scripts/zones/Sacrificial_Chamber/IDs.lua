@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Sacrificial_Chamber
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SACRIFICIAL_CHAMBER] =

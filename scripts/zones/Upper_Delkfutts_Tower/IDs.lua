@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Upper_Delkfutts_Tower
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.UPPER_DELKFUTTS_TOWER] =

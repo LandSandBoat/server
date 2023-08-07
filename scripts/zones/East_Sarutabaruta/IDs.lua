@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: East_Sarutabaruta
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EAST_SARUTABARUTA] =

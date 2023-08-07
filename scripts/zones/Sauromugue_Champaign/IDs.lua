@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Sauromugue_Champaign
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Arrapago_Remnants
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ARRAPAGO_REMNANTS] =

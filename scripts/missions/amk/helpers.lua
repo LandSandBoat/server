@@ -4,7 +4,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-
 xi = xi or {}
 xi.amk = xi.amk or {}
 xi.amk.helpers = xi.amk.helpers or {}

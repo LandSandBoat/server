@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Maquette_Abdhaljs-Legion_A
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_A] =

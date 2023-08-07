@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis (195)
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_ELDIEME_NECROPOLIS] =

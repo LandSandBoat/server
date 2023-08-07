@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Konschtat_Highlands
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KONSCHTAT_HIGHLANDS] =

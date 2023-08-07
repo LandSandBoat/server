@@ -2,8 +2,6 @@
 -- Manaclipper
 -- https://ffxiclopedia.fandom.com/wiki/Manaclipper
 -----------------------------------
------------------------------------
-
 xi = xi or {}
 xi.manaclipper = xi.manaclipper or {}
 

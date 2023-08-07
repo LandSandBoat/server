@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: King Ranperres Tomb (190)
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KING_RANPERRES_TOMB] =

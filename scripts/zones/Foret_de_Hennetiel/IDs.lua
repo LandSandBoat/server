@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Foret_de_Hennetiel
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORET_DE_HENNETIEL] =

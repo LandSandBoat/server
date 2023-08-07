@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Temple_of_Uggalepih
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TEMPLE_OF_UGGALEPIH] =

@@ -2,7 +2,6 @@
 -- func: checkinstance
 -- desc: Displays Progress and Stage inside instance
 -----------------------------------
------------------------------------
 
 cmdprops =
 {

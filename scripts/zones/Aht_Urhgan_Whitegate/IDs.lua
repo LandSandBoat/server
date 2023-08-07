@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Aht_Urhgan_Whitegate
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AHT_URHGAN_WHITEGATE] =

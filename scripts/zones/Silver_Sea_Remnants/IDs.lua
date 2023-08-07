@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Silver_Sea_Remnants
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_SEA_REMNANTS] =

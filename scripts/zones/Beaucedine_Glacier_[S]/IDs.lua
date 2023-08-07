@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine_Glacier_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEAUCEDINE_GLACIER_S] =

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Hazhalm_Testing_Grounds
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HAZHALM_TESTING_GROUNDS] =

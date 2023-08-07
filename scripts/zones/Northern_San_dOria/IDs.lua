@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Northern_San_dOria
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTHERN_SAN_DORIA] =

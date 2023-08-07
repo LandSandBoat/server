@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
-
 xi = xi or {}
 xi.chocobo = xi.chocobo or {}
 

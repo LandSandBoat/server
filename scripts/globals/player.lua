@@ -40,7 +40,6 @@ local startingJobGear =
 -----------------------------------
 -- public functions
 -----------------------------------
-
 xi = xi or {}
 xi.player = {}
 

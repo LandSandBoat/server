@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Celennia_Memorial_Library
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY] =

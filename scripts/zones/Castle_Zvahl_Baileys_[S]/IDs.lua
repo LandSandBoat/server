@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Castle_Zvahl_Baileys_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S] =

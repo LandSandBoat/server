@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Sea_Serpent_Grotto
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SEA_SERPENT_GROTTO] =

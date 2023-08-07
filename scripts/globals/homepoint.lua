@@ -1,6 +1,5 @@
 require("scripts/globals/teleports")
 -----------------------------------
-
 xi = xi or {}
 xi.homepoint = xi.homepoint or {}
 

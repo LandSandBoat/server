@@ -5,7 +5,6 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-
 xi = xi or {}
 xi.wotg = xi.wotg or {}
 xi.wotg.helpers = xi.wotg.helpers or {}

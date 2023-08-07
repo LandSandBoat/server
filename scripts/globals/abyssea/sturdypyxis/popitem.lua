@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Pop Item
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

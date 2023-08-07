@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Chamber_of_Oracles
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHAMBER_OF_ORACLES] =

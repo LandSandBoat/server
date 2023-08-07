@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: RaKaznar_Inner_Court
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RAKAZNAR_INNER_COURT] =

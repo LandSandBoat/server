@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Behemoths_Dominion
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEHEMOTHS_DOMINION] =

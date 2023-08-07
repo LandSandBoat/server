@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Newton_Movalpolos
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NEWTON_MOVALPOLOS] =

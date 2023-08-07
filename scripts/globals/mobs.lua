@@ -7,7 +7,6 @@ require("scripts/globals/quests")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.mob = xi.mob or {}
 

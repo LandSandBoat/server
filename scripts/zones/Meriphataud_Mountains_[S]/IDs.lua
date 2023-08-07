@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Meriphataud_Mountains_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =

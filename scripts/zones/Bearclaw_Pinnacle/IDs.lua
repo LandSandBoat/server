@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Bearclaw_Pinnacle
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEARCLAW_PINNACLE] =

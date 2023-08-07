@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Yahse_Hunting_Grounds
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YAHSE_HUNTING_GROUNDS] =

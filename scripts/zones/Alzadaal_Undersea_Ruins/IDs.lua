@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Alzadaal_Undersea_Ruins
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =

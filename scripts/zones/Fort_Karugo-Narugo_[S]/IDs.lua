@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Fort_Karugo-Narugo_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORT_KARUGO_NARUGO_S] =

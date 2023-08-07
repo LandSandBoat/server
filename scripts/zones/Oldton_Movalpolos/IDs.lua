@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Oldton_Movalpolos
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OLDTON_MOVALPOLOS] =

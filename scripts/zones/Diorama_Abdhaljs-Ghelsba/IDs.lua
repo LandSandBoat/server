@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Diorama_Abdhaljs-Ghelsba
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DIORAMA_ABDHALJS_GHELSBA] =

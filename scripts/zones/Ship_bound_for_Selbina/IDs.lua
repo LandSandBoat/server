@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Ship_bound_for_Selbina
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =

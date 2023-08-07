@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LALOFF_AMPHITHEATER] =

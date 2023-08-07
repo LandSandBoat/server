@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Garlaige_Citadel_[S]
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GARLAIGE_CITADEL_S] =

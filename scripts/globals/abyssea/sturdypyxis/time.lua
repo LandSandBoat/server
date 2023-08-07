@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Time
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

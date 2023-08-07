@@ -12,7 +12,6 @@ require("scripts/globals/npc_util")
 require("scripts/globals/pankration")
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.znm = xi.znm or {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Navukgo_Execution_Chamber
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =

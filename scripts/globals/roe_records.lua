@@ -9503,7 +9503,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Aquans
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.AQUAN } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.AQUAN } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9512,7 +9512,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Beasts
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.BEAST } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.BEAST } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9521,7 +9521,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Plantoids
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.PLANTOID } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.PLANTOID } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9530,7 +9530,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Lizards
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.LIZARD } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.LIZARD } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9539,7 +9539,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Vermin
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.VERMIN } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.VERMIN } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9574,7 +9574,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Birds
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.BIRD } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.BIRD } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9583,7 +9583,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Amorphs
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.AMORPH } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.AMORPH } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9592,7 +9592,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Undead
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.UNDEAD } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.UNDEAD } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },
@@ -9601,7 +9601,7 @@ function getRoeRecords(triggers)
         { -- Vanquish Arcana
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set { xi.eco.ARCANA } },
+            reqs = { mobXP = true, zoneNot = abysseaAreas, mobSystem = set { xi.eco.ARCANA } },
             flags = set { "timed", "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
         },

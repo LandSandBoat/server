@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: The_Celestial_Nexus
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_CELESTIAL_NEXUS] =

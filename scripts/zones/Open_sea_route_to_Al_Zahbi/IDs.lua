@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Open_sea_route_to_Al_Zahbi
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI] =

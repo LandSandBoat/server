@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Ruhotz_Silvermines
 -----------------------------------
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RUHOTZ_SILVERMINES] =

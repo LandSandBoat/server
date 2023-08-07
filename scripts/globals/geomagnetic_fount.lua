@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
-
 xi = xi or {}
 xi.geomagneticFount = xi.geomagneticFount or {}
 

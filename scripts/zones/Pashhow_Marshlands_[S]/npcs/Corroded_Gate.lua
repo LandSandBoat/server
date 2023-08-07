@@ -2,7 +2,6 @@
 -- Area : Pashhow Marshlands [S] (90)
 --  NPC : Corroded Gate
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
