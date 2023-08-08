@@ -212,81 +212,61 @@ xi.magian.trialsold =
     -- Empyrean Armor
     -- Warrior
     [4376] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
-    [4356] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
 
     -- Monk
     [4377] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
-    [4357] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
 
     -- White Mage
     [4378] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
-    [4358] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
 
     -- Black Mage
     [4379] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
-    [4359] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
 
     -- Red Mage
     [4380] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
-    [4360] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
 
     -- Thief
     [4381] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
-    [4361] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
 
     -- Paladin
     [4382] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
-    [4362] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 
     -- Dark Knight
     [4383] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
-    [4363] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
 
     -- Beastmaster
     [4384] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
-    [4364] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
 
     -- Bard
     [4385] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
-    [4365] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
 
     -- Ranger
     [4386] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
-    [4366] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
 
     -- Samurai
     [4387] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
-    [4367] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
 
     -- Ninja
     [4388] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
-    [4368] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 
     -- Dragoon
     [4389] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
-    [4369] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 
     -- Summoner
     [4390] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
-    [4370] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
 
     -- Blue Mage
     [4391] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
-    [4371] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
 
     -- Corsair
     [4392] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
-    [4372] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 
     -- Puppetmaster
     [4393] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
-    [4373] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 
     -- Dancer
     [4394] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
-    [4374] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
 
     -- Scholar
     [4395] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
-    [4375] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
 }

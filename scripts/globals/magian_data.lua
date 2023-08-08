@@ -3837,7 +3837,7 @@ xi.magian.trials =
         },
     },
 
-    [4202] = -- Creed Sabatons -> Creed Sabatons +1 
+    [4202] = -- Creed Sabatons -> Creed Sabatons +1
     {
         previousTrial = 0,
         requiredItem  =
@@ -5886,6 +5886,366 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.items.SAVANTS_GOWN_P1,
+        },
+    },
+
+    [4356] =
+    {
+        previousTrial = 4316,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_MUFFLERS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.STONE_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_MUFFLERS_P2,
+        },
+    },
+
+    [4357] =
+    {
+        previousTrial = 4317,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_GLOVES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.JEWEL_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_GLOVES_P2,
+        },
+    },
+
+    [4358] =
+    {
+        previousTrial = 4318,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_MITTS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.COIN_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_MITTS_P2,
+        },
+    },
+
+    [4359] =
+    {
+        previousTrial = 4319,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_GLOVES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.JEWEL_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_GLOVES_P2,
+        },
+    },
+
+    [4360] =
+    {
+        previousTrial = 4320,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_GANTHEROTS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.STONE_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_GANTHEROTS_P2,
+        },
+    },
+
+    [4361] =
+    {
+        previousTrial = 4321,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_ARMLETS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.STONE_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_ARMLETS_P2,
+        },
+    },
+
+    [4362] =
+    {
+        previousTrial = 4322,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_GAUNTLETS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.CARD_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_GAUNTLETS_P2,
+        },
+    },
+
+    [4363] =
+    {
+        previousTrial = 4323,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_GAUNTLETS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.COIN_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_GAUNTLETS_P2,
+        },
+    },
+
+    [4364] =
+    {
+        previousTrial = 4324,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_MANOPLAS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.STONE_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_MANOPLAS_P2,
+        },
+    },
+
+    [4365] =
+    {
+        previousTrial = 4325,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_MANCHETTES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.JEWEL_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_MANCHETTES_P2,
+        },
+    },
+
+    [4366] =
+    {
+        previousTrial = 4326,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_GLOVELETTES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.COIN_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_GLOVELETTES_P2,
+        },
+    },
+
+    [4367] =
+    {
+        previousTrial = 4327,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_KOTE_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.JEWEL_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_KOTE_P2,
+        },
+    },
+
+    [4368] =
+    {
+        previousTrial = 4328,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_TEKKO_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.CARD_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_TEKKO_P2,
+        },
+    },
+
+    [4369] =
+    {
+        previousTrial = 4329,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_VAMBRACES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.CARD_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_VAMBRACES_P2,
+        },
+    },
+
+    [4370] =
+    {
+        previousTrial = 4330,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_BRACERS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.JEWEL_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_BRACERS_P2,
+        },
+    },
+
+    [4371] =
+    {
+        previousTrial = 4331,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_BAZUBANDS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.COIN_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_BAZUBANDS_P2,
+        },
+    },
+
+    [4372] =
+    {
+        previousTrial = 4332,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_GANTS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.CARD_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_GANTS_P2,
+        },
+    },
+
+    [4373] =
+    {
+        previousTrial = 4333,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_GUANTI_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.CARD_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_GUANTI_P2,
+        },
+    },
+
+    [4374] =
+    {
+        previousTrial = 4334,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_BANGLES_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.COIN_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_BANGLES_P2,
+        },
+    },
+
+    [4375] =
+    {
+        previousTrial = 4335,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_BRACERS_P1,
+        },
+
+        textOffset  = 1054,
+        tradeItem   = xi.items.STONE_OF_WIELDANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_BRACERS_P2,
         },
     },
 
