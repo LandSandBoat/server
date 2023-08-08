@@ -4089,6 +4089,366 @@ xi.magian.trials =
         },
     },
 
+    [4216] =
+    {
+        previousTrial = 4156,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_MASK_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.STONE_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_MASK_P2,
+        },
+    },
+
+    [4217] =
+    {
+        previousTrial = 4157,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_CROWN_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.JEWEL_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_CROWN_P2,
+        },
+    },
+
+    [4218] =
+    {
+        previousTrial = 4158,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_CAP_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.STONE_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_CAP_P2,
+        },
+    },
+
+    [4219] =
+    {
+        previousTrial = 4159,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_PETASOS_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.COIN_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_PETASOS_P2,
+        },
+    },
+
+    [4220] =
+    {
+        previousTrial = 4160,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_CHAPPEL_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.JEWEL_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_CHAPPEL_P2,
+        },
+    },
+
+    [4221] =
+    {
+        previousTrial = 4161,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_BONNET_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.STONE_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_BONNET_P2,
+        },
+    },
+
+    [4222] =
+    {
+        previousTrial = 4162,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_ARMET_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.CARD_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_ARMET_P2,
+        },
+    },
+
+    [4223] =
+    {
+        previousTrial = 4163,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_BURGEONET_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.COIN_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_BURGEONET_P2,
+        },
+    },
+
+    [4224] =
+    {
+        previousTrial = 4164,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_CABASSET_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.COIN_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_CABASSET_P2,
+        },
+    },
+
+    [4225] =
+    {
+        previousTrial = 4165,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_CALOT_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.STONE_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_CALOT_P2,
+        },
+    },
+
+    [4226] =
+    {
+        previousTrial = 4166,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_GAPETTE_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.STONE_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_GAPETTE_P2,
+        },
+    },
+
+    [4227] =
+    {
+        previousTrial = 4167,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_KABUTO_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.JEWEL_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_KABUTO_P2,
+        },
+    },
+
+    [4228] =
+    {
+        previousTrial = 4168,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_ZUKIN_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.COIN_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_ZUKIN_P2,
+        },
+    },
+
+    [4229] =
+    {
+        previousTrial = 4169,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_MEZAIL_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.CARD_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_MEZAIL_P2,
+        },
+    },
+
+    [4230] =
+    {
+        previousTrial = 4170,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_HORN_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.COIN_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_HORN_P2,
+        },
+    },
+
+    [4231] =
+    {
+        previousTrial = 4171,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_KAVUK_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.CARD_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_KAVUK_P2,
+        },
+    },
+
+    [4232] =
+    {
+        previousTrial = 4172,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_TRICORNE_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.JEWEL_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_TRICORNE_P2,
+        },
+    },
+
+    [4233] =
+    {
+        previousTrial = 4173,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_CAPPELLO_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.JEWEL_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_CAPPELLO_P2,
+        },
+    },
+
+    [4234] =
+    {
+        previousTrial = 4174,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_TIARA_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.CARD_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_TIARA_P2,
+        },
+    },
+
+    [4235] =
+    {
+        previousTrial = 4175,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_BONNET_P1,
+        },
+
+        textOffset  = 1050,
+        tradeItem   = xi.items.CARD_OF_VISION,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_BONNET_P2,
+        },
+    },
+
     [4316] = -- Ravager's Mufflers -> Ravager's Mufflers +1
     {
         previousTrial = 0,
