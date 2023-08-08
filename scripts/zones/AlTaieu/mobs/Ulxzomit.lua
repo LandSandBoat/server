@@ -72,7 +72,4 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-end
-
 return entity

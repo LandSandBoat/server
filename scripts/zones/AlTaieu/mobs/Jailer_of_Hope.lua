@@ -23,15 +23,6 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target)
-end
-
-entity.onSpellPrecast = function(mob, spell)
-end
-
-entity.onMobWeaponSkillPrepare = function(mob, target)
-end
-
 entity.onMobFight = function(mob, target)
     if
         mob:getLocalVar("SpellTime") < os.time() and

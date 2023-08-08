@@ -262,7 +262,7 @@ entity.onTrigger = function(player, npc)
         player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) and
         player:getMainJob() == xi.job.PUP
     then
-        local requiredLevel = numUnlockedHeads * 10
+        local requiredLevel = (numUnlockedHeads + 1) * 10
 
         -- Has not Accepted or Declined a new Head (or Head/Frame combination)
         if attachmentStatus == 0 and player:getMainLvl() >= requiredLevel then
@@ -294,8 +294,7 @@ entity.onTrigger = function(player, npc)
 
         -- Accepted a Head/Frame Combination, but has not provided any payment
         elseif attachmentStatus >= 2 and attachmentStatus <= 4 then
-            local option = player:getCharVar("PUP_AttachmentOption")
-            player:startEvent(622, 0, option, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+            player:startEvent(622, 0, 1, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
 
         -- Paid Mats for Head/Frame Combination, but needs to provide Currency
         elseif attachmentStatus >= 5 and attachmentStatus <= 7 then
@@ -341,15 +340,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    if csid == 620 then -- Collecting option for CS 622 param 2
-        if option == 1 then
-            player:setCharVar("PUP_AttachmentOption", option)
-        elseif option == 2 then
-            player:setCharVar("PUP_AttachmentOption", option)
-        elseif option == 3 then
-            player:setCharVar("PUP_AttachmentOption", option)
-        end
-    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -362,17 +352,14 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:unlockAttachment(xi.items.VALOREDGE_FRAME)
             player:unlockAttachment(xi.items.VALOREDGE_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_VALOREDGE_UNLOCK)
-            player:setCharVar("PUP_AttachmentOption", 0)
         elseif attachmentStatus == 9 then
             player:unlockAttachment(xi.items.SHARPSHOT_FRAME)
             player:unlockAttachment(xi.items.SHARPSHOT_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SHARPSHOT_UNLOCK)
-            player:setCharVar("PUP_AttachmentOption", 0)
         elseif attachmentStatus == 10 then
             player:unlockAttachment(xi.items.STORMWAKER_FRAME)
             player:unlockAttachment(xi.items.STORMWAKER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_STORMWAKER_UNLOCK)
-            player:setCharVar("PUP_AttachmentOption", 0)
         end
 
         player:setCharVar("PUP_AttachmentStatus", 0)
@@ -383,7 +370,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("PUP_AttachmentStatus", 14)
     elseif csid == 905 then
         local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
-        local unlockedAttachments = getHeadMask(player)
 
         if attachmentStatus == 12 then
             player:unlockAttachment(xi.items.SOULSOOTHER_HEAD)
@@ -391,12 +377,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         elseif attachmentStatus == 13 then
             player:unlockAttachment(xi.items.SPIRITREAVER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
-        elseif attachmentStatus == 14 and unlockedAttachments == 30 then
-            player:unlockAttachment(xi.items.SPIRITREAVER_HEAD)
-            player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
-        elseif attachmentStatus == 14 and unlockedAttachments == 46 then
-            player:unlockAttachment(xi.items.SOULSOOTHER_HEAD)
-            player:messageSpecial(ID.text.AUTOMATON_SOULSOOTHER_UNLOCK)
         end
 
         player:setCharVar("PUP_AttachmentStatus", 0)

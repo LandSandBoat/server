@@ -2,37 +2,14 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
-mixins = 
-{
-    require("scripts/mixins/rage"),
-    require("scripts/mixins/claim_shield")
-}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }
 
-entity.onMobInitialize = function(mob)
-    -- prevent cheesiness
-    mob:setMod(xi.mod.SILENCERES, 50)
-    mob:setMod(xi.mod.STUNRES, 50)
-    mob:setMod(xi.mod.BINDRES, 50)
-    mob:setMod(xi.mod.GRAVITYRES, 50)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.POISONRES, 100)
-    mob:setMod(xi.mod.PARALYZERES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 10000)
-end
-
-entity.onMobSpawn = function(mob)
-	mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
-end
-
 entity.onMobEngaged = function(mob, target)
---    mob:resetLocalVars() -- This would prevent us from being able to rage Vrtra, so we unset the local vars individually instead.
-    mob:setLocalVar("spawnTime", 0)
-	mob:setLocalVar("twohourTime", 0)
+    mob:resetLocalVars()
 end
 
 entity.onMobFight = function(mob, target)

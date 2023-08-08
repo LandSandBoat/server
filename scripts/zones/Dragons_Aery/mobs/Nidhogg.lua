@@ -8,20 +8,8 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    -- prevent cheesiness
-    mob:setMod(xi.mod.SILENCERES, 50)
-    mob:setMod(xi.mod.STUNRES, 50)
-    mob:setMod(xi.mod.BINDRES, 50)
-    mob:setMod(xi.mod.GRAVITYRES, 50)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.POISONRES, 100)
-    mob:setMod(xi.mod.PARALYZERES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 10000)
-end
-
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- Level 90 + 50 = 140 Base Weapon Damage
 
     -- Despawn the ???
