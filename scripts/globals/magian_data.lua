@@ -3369,6 +3369,366 @@ xi.magian.trials =
         },
     },
 
+    [4176] = -- Ravager's Cuisses -> Ravager's Cuisses +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_CUISSES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.RAVAGERS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_CUISSES_P1,
+        },
+    },
+
+    [4177] = -- Tantra Hose -> Tantra Hose +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_HOSE,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.TANTRA_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_HOSE_P1,
+        },
+    },
+
+    [4178] = -- Orison Pantaloons -> Orison Pantaloons +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_PANTALOONS,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.ORISON_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_PANTALOONS_P1,
+        },
+    },
+
+    [4179] = -- Goetia Chausses -> Goetia Chausses +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_CHAUSSES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.GOETIA_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_CHAUSSES_P1,
+        },
+    },
+
+    [4180] = -- Estoqueur's Fuseau -> Estoqueur's Fuseau +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_FUSEAU,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.ESTOQUEURS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_FUSEAU_P1,
+        },
+    },
+
+    [4181] = -- Raider's Culottes -> Raider's Culottes +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_CULOTTES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.RAIDERS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_CULOTTES_P1,
+        },
+    },
+
+    [4182] = -- Creed Cuisses -> Creed Cuisses +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_CUISSES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.CREED_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_CUISSES_P1,
+        },
+    },
+
+    [4183] = -- Bale Flanchard -> Bale Flanchard +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_FLANCHARD,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.BALE_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_FLANCHARD_P1,
+        },
+    },
+
+    [4184] = -- Ferine Quijotes -> Ferine Quijotes +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_QUIJOTES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.FERINE_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_QUIJOTES_P1,
+        },
+    },
+
+    [4185] = -- Aoidos' Rhingrave -> Aoidos' Rhingrave +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_RHINGRAVE,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.AOIDOS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_RHINGRAVE_P1,
+        },
+    },
+
+    [4186] = -- Sylvan Bragues -> Sylvan Bragues +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_BRAGUES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.SYLVAN_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_BRAGUES_P1,
+        },
+    },
+
+    [4187] = -- Unkai Haidate -> Unkai Haidate +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_HAIDATE,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.UNKAI_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_HAIDATE_P1,
+        },
+    },
+
+    [4188] = -- Iga Hakama -> Iga Hakama +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_HAKAMA,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.IGA_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_HAKAMA_P1,
+        },
+    },
+
+    [4189] = -- Lancer's Cuissots -> Lancer's Cuissots +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_CUISSOTS,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.LANCERS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_CUISSOTS_P1,
+        },
+    },
+
+    [4190] = -- Caller's Spats -> Caller's Spats +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_SPATS,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.CALLERS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_SPATS_P1,
+        },
+    },
+
+    [4191] = -- Mavi Tayt -> Mavi Tayt +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_TAYT,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.MAVI_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_TAYT_P1,
+        },
+    },
+
+    [4192] = -- Navarch's Culottes -> Navarch's Culottes +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_CULOTTES,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.NAVARCHS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_CULOTTES_P1,
+        },
+    },
+
+    [4193] = -- Cirque Pantaloni -> Cirque Pantaloni +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_PANTALONI,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.CIRQUE_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_PANTALONI_P1,
+        },
+    },
+
+    [4194] = -- Charis Tights -> Charis Tights +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_TIGHTS,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.CHARIS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_TIGHTS_P1,
+        },
+    },
+
+    [4195] = -- Savant's Pants -> Savant's Pants +1
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_PANTS,
+        },
+
+        textOffset  = 1055,
+        tradeItem   = xi.items.SAVANTS_SEAL_LEGS,
+        numRequired = 8,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_PANTS_P1,
+        },
+    },
+
     [4316] = -- Ravager's Mufflers -> Ravager's Mufflers +1
     {
         previousTrial = 0,
