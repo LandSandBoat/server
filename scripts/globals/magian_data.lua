@@ -4809,6 +4809,366 @@ xi.magian.trials =
         },
     },
 
+    [4256] =
+    {
+        previousTrial = 4196,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_CALLIGAE_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.STONE_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_CALLIGAE_P2,
+        },
+    },
+
+    [4257] =
+    {
+        previousTrial = 4197,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_GAITERS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.COIN_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_GAITERS_P2,
+        },
+    },
+
+    [4258] =
+    {
+        previousTrial = 4198,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_DUCKBILLS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.JEWEL_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_DUCKBILLS_P2,
+        },
+    },
+
+    [4259] =
+    {
+        previousTrial = 4199,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_SABOTS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.CARD_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_SABOTS_P2,
+        },
+    },
+
+    [4260] =
+    {
+        previousTrial = 4200,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_HOUSEAUX_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.STONE_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_HOUSEAUX_P2,
+        },
+    },
+
+    [4261] =
+    {
+        previousTrial = 4201,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_POULAINES_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.JEWEL_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_POULAINES_P2,
+        },
+    },
+
+    [4262] =
+    {
+        previousTrial = 4202,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_SABATONS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.STONE_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_SABATONS_P2,
+        },
+    },
+
+    [4263] =
+    {
+        previousTrial = 4203,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_SOLLERETS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.COIN_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_SOLLERETS_P2,
+        },
+    },
+
+    [4264] =
+    {
+        previousTrial = 4204,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_OCREAE_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.CARD_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_OCREAE_P2,
+        },
+    },
+
+    [4265] =
+    {
+        previousTrial = 4205,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_COTHURNES_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.JEWEL_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_COTHURNES_P2,
+        },
+    },
+
+    [4266] =
+    {
+        previousTrial = 4206,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_BOTTILLONS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.CARD_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_BOTTILLONS_P2,
+        },
+    },
+
+    [4267] =
+    {
+        previousTrial = 4207,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_SUNE_ATE_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.JEWEL_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_SUNE_ATE_P2,
+        },
+    },
+
+    [4268] =
+    {
+        previousTrial = 4208,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_KYAHAN_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.CARD_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_KYAHAN_P2,
+        },
+    },
+
+    [4269] =
+    {
+        previousTrial = 4209,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_SCHYNBALDS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.CARD_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_SCHYNBALDS_P2,
+        },
+    },
+
+    [4270] =
+    {
+        previousTrial = 4210,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_PIGACHES_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.STONE_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_PIGACHES_P2,
+        },
+    },
+
+    [4271] =
+    {
+        previousTrial = 4211,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_BASMAK_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.COIN_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_BASMAK_P2,
+        },
+    },
+
+    [4272] =
+    {
+        previousTrial = 4212,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_BOTTES_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.COIN_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_BOTTES_P2,
+        },
+    },
+
+    [4273] =
+    {
+        previousTrial = 4213,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_SCARPE_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.JEWEL_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_SCARPE_P2,
+        },
+    },
+
+    [4274] =
+    {
+        previousTrial = 4214,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_TOE_SHOES_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.STONE_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_TOE_SHOES_P2,
+        },
+    },
+
+    [4275] =
+    {
+        previousTrial = 4215,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_LOAFERS_P1,
+        },
+
+        textOffset  = 843,
+        tradeItem   = xi.items.COIN_OF_VOYAGE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_LOAFERS_P2,
+        },
+    },
+
     [4316] = -- Ravager's Mufflers -> Ravager's Mufflers +1
     {
         previousTrial = 0,
