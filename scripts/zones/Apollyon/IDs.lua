@@ -37,78 +37,31 @@ zones[xi.zone.APOLLYON] =
     },
     npc =
     {
-        ENTRANCE_OFFSET = 16933218,
+        ENTRANCE_OFFSET = GetFirstID("_127"),
     },
 
     SW_APOLLYON =
     {
         mob =
         {
-            JIDRA_BOSS = 16932881,
-            AIR_ELEMENTAL =
-            {
-                16932910,
-                16932918,
-                16932926,
-            },
-
-            DARK_ELEMENTAL =
-            {
-                16932911,
-                16932919,
-                16932927,
-            },
-
-            EARTH_ELEMENTAL =
-            {
-                16932912,
-                16932920,
-                16932928,
-            },
-
-            FIRE_ELEMENTAL =
-            {
-                16932913,
-                16932921,
-                16932929,
-            },
-
-            ICE_ELEMENTAL =
-            {
-                16932914,
-                16932922,
-                16932930,
-            },
-
-            LIGHT_ELEMENTAL =
-            {
-                16932915,
-                16932923,
-                16932931,
-            },
-
-            WATER_ELEMENTAL =
-            {
-                16932916,
-                16932924,
-                16932932,
-            },
-
-            THUNDER_ELEMENTAL =
-            {
-                16932917,
-                16932925,
-                16932933,
-            },
+            JIDRA_BOSS        = GetFirstID("Jidra_Boss"),
+            AIR_ELEMENTAL     = GetTableOfIDs("Air_Elemental"),
+            DARK_ELEMENTAL    = GetTableOfIDs("Dark_Elemental"),
+            EARTH_ELEMENTAL   = GetTableOfIDs("Earth_Elemental"),
+            FIRE_ELEMENTAL    = GetTableOfIDs("Fire_Elemental"),
+            ICE_ELEMENTAL     = GetTableOfIDs("Ice_Elemental"),
+            LIGHT_ELEMENTAL   = GetTableOfIDs("Light_Elemental"),
+            WATER_ELEMENTAL   = GetTableOfIDs("Water_Elemental"),
+            THUNDER_ELEMENTAL = GetTableOfIDs("Thunder_Elemental"),
         },
 
         npc =
         {
             PORTAL =
             {
-                16933230,
-                16933231,
-                16933232,
+                GetFirstID("_128"),
+                GetFirstID("_129"),
+                GetFirstID("_12a"),
             },
             ITEM_CRATES =
             {
@@ -149,37 +102,17 @@ zones[xi.zone.APOLLYON] =
     {
         mob =
         {
-            TIEHOLTSODI = 16933006,
-            ADAMANTSHELL =
-            {
-                16933007,
-                16933008,
-                16933009,
-                16933010,
-                16933011,
-                16933012,
-                16933013,
-                16933014,
-            },
-            FLYING_SPEAR =
-            {
-                16933033,
-                16933034,
-                16933035,
-                16933036,
-                16933037,
-                16933038,
-                16933039,
-                16933040,
-            }
+            TIEHOLTSODI  = GetFirstID("Tieholtsodi"),
+            ADAMANTSHELL = GetTableOfIDs("Adamantshell", 8),
+            FLYING_SPEAR = GetTableOfIDs("Flying_Spear"),
         },
         npc =
         {
             PORTAL =
             {
-                16933239,
-                16933238,
-                16933241,
+                GetFirstID("_12h"),
+                GetFirstID("_12g"),
+                GetFirstID("_12k"),
             },
             ITEM_CRATES =
             {
@@ -207,63 +140,25 @@ zones[xi.zone.APOLLYON] =
     {
         mob =
         {
-            PLUTO = 16932937,
-            BARDHA =
-            {
-                16932938,
-                16932939,
-                16932940,
-                16932941,
-                16932942,
-                16932943,
-                16932944,
-            },
-
-            ZLATOROG = 16932950,
-            MOUNTAIN_BUFFALO =
-            {
-                16932951,
-                16932952,
-                16932953,
-                16932954,
-                16932955,
-                16932956,
-                16932957,
-            },
-
-            MILLENARY_MOSSBACK = 16932963,
-            APOLLYON_SCAVENGER =
-            {
-                16932964,
-                16932965,
-                16932966,
-                16932967,
-                16932968,
-                16932969,
-                16932970,
-            },
-
-            CYNOPROSOPI = 16932976,
-            GORYNICH =
-            {
-                16932977,
-                16932978,
-                16932979,
-                16932980,
-                16932981,
-            },
-
-            KAISER_BEHEMOTH = 16932985,
+            PLUTO              = GetFirstID("Pluto"),
+            BARDHA             = GetTableOfIDs("Bardha"),
+            ZLATOROG           = GetFirstID("Zlatorog"),
+            MOUNTAIN_BUFFALO   = GetTableOfIDs("Mountain_Buffalo"),
+            MILLENARY_MOSSBACK = GetFirstID("Millenary_Mossback"),
+            APOLLYON_SCAVENGER = GetTableOfIDs("Apollyon_Scavenger"),
+            CYNOPROSOPI        = GetFirstID("Cynoprosopi"),
+            GORYNICH           = GetTableOfIDs("Gorynich"),
+            KAISER_BEHEMOTH    = GetFirstID("Kaiser_Behemoth"),
         },
 
         npc =
         {
             PORTAL =
             {
-                16933226,
-                16933227,
-                16933228,
-                16933224,
+                GetFirstID("_123"),
+                GetFirstID("_124"),
+                GetFirstID("_125"),
+                GetFirstID("_121"),
             },
             ITEM_CRATES =
             {
@@ -305,35 +200,19 @@ zones[xi.zone.APOLLYON] =
     {
         mob =
         {
-            GOOBBUE_HARVESTER = 16933044,
-            APOLLYON_SWEEPER =
-            {
-                16933081,
-                16933086,
-                16933091,
-            },
-
-            TROGLODYTE_DHALMEL =
-            {
-                16933115,
-                16933116,
-                16933117,
-                16933118,
-                16933119,
-                16933120,
-                16933121,
-                16933122,
-            },
+            GOOBBUE_HARVESTER  = GetFirstID("Goobbue_Harvester"),
+            APOLLYON_SWEEPER   = GetTableOfIDs("Apollyon_Sweeper"),
+            TROGLODYTE_DHALMEL = GetTableOfIDs("Troglodyte_Dhalmel"),
         },
 
         npc =
         {
             PORTAL =
             {
-                16933235,
-                16933234,
-                16933233,
-                16933237,
+                GetFirstID("_12d"),
+                GetFirstID("_12c"),
+                GetFirstID("_12b"),
+                GetFirstID("_12f"),
             },
             ITEM_CRATES =
             {
@@ -383,9 +262,9 @@ zones[xi.zone.APOLLYON] =
     {
         mob =
         {
-            CARNAGECHIEF_JACKBODOKK = 16933129,
-            NAQBA_CHIRURGEON = 16933137,
-            DEE_WAPA_THE_DESOLATOR = 16933144,
+            CARNAGECHIEF_JACKBODOKK = GetFirstID("Carnagechief_Jackbodokk"),
+            NAQBA_CHIRURGEON        = GetFirstID("NaQba_Chirurgeon"),
+            DEE_WAPA_THE_DESOLATOR  = GetFirstID("Dee_Wapa_the_Desolator"),
         },
 
         npc =

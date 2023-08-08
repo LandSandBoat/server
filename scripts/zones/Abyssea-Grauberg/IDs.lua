@@ -75,28 +75,28 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
     },
     mob =
     {
-        IRONCLAD_SUNDERER            = 17818041,
-        NINGISHZIDA                  = 17818042,
-        TEUGGHIA                     = 17818043,
-        BOMBLIX_FLAMEFINGER          = 17818044,
-        TEEKEESELCHEN                = 17818045,
-        MINARUJA                     = 17818046,
-        XIBALBA                      = 17818047,
-        IKA_ROA                      = 17818048,
-        LORELEI                      = 17818049,
-        BURSTROX_POWDERPATE          = 17818050,
-        RAJA_1                       = 17818051,
-        ALFARD_1                     = 17818052,
-        AZDAJA_1                     = 17818053,
-        AMPHITRITE_1                 = 17818054,
-        RAJA_2                       = 17818055,
-        ALFARD_2                     = 17818056,
-        AZDAJA_2                     = 17818057,
-        AMPHITRITE_2                 = 17818058,
-        RAJA_3                       = 17818059,
-        ALFARD_3                     = 17818060,
-        AZDAJA_3                     = 17818061,
-        AMPHITRITE_3                 = 17818062,
+        IRONCLAD_SUNDERER            = GetFirstID("Ironclad_Sunderer"),
+        NINGISHZIDA                  = GetFirstID("Ningishzida"),
+        TEUGGHIA                     = GetFirstID("Teugghia"),
+        BOMBLIX_FLAMEFINGER          = GetFirstID("Bomblix_Flamefinger"),
+        TEEKEESELCHEN                = GetFirstID("Teekesselchen"),
+        MINARUJA                     = GetFirstID("Minaruja"),
+        XIBALBA                      = GetFirstID("Xibalba"),
+        IKA_ROA                      = GetFirstID("Ika-Roa"),
+        LORELEI                      = GetFirstID("Lorelei"),
+        BURSTROX_POWDERPATE          = GetFirstID("Burstrox_Powderpate"),
+        RAJA_1                       = GetFirstID("Raja"),
+        ALFARD_1                     = GetFirstID("Alfard"),
+        AZDAJA_1                     = GetFirstID("Azdaja"),
+        AMPHITRITE_1                 = GetFirstID("Amphitrite"),
+        RAJA_2                       = GetFirstID("Raja") + 4,
+        ALFARD_2                     = GetFirstID("Alfard") + 4,
+        AZDAJA_2                     = GetFirstID("Azdaja") + 4,
+        AMPHITRITE_2                 = GetFirstID("Amphitrite") + 4,
+        RAJA_3                       = GetFirstID("Raja") + 8,
+        ALFARD_3                     = GetFirstID("Alfard") + 8,
+        AZDAJA_3                     = GetFirstID("Azdaja") + 8,
+        AMPHITRITE_3                 = GetFirstID("Amphitrite") + 8,
     },
     npc =
     {
@@ -127,15 +127,8 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
             --  [17818101] = { 'qm21',                  { },                                      { xi.ki.VACANT_BUGARD_EYE }, 17818061 }, -- Azdaja
             --  [17818102] = { 'qm22',                  { },                              { xi.ki.VARIEGATED_URAGNITE_SHELL }, 17818062 }, -- Amphitrite
         },
-        HARVESTING =
-        {
-            17818220,
-            17818221,
-            17818222,
-            17818223,
-            17818224,
-            17818225,
-        },
+
+        HARVESTING = GetTableOfIDs("Harvesting_Point"),
     },
 }
 

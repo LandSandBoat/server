@@ -31,31 +31,23 @@ zones[xi.zone.ATTOHWA_CHASM] =
     {
         AMBUSHER_ANTLION_PH =
         {
-            [16806171] = 16806249, -- -433.309 -4.3 113.841
+            [16806171] = GetFirstID("Ambusher_Antlion"), -- -433.309 -4.3 113.841
         },
         CITIPATI_PH         =
         {
-            [16806155] = 16806162, -- -328.973 -12.876 67.481
-            [16806158] = 16806162, -- -398.931 -4.536 79.640
-            [16806161] = 16806162, -- -381.284 -9.233 40.054
+            [16806155] = GetFirstID("Citipati"), -- -328.973 -12.876 67.481
+            [16806158] = GetFirstID("Citipati"), -- -398.931 -4.536 79.640
+            [16806161] = GetFirstID("Citipati"), -- -381.284 -9.233 40.054
         },
-        LIOUMERE            = 16806031,
-        TIAMAT              = 16806227,
-        FEELER_ANTLION      = 16806242,
+        LIOUMERE            = GetFirstID("Lioumere"),
+        TIAMAT              = GetFirstID("Tiamat"),
+        FEELER_ANTLION      = GetFirstID("Feeler_Antlion"),
     },
     npc =
     {
-        MIASMA_OFFSET   = 16806304, -- _071 in npc_list
-        GASPONIA_OFFSET = 16806327, -- _07n in npc_list
-        EXCAVATION =
-        {
-            16806369,
-            16806370,
-            16806371,
-            16806372,
-            16806373,
-            16806374,
-        },
+        MIASMA_OFFSET   = GetFirstID("_071"), -- _071 in npc_list
+        GASPONIA_OFFSET = GetFirstID("_07n"), -- _07n in npc_list
+        EXCAVATION = GetTableOfIDs("Excavation_Point"),
     },
 }
 

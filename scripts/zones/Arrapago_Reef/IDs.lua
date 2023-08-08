@@ -51,7 +51,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
     {
         BLOODY_BONES_PH =
         {
-            [16998653] = 16998655, -- 136.234 -6.831 468.779
+            [16998653] = GetFirstID("Bloody_Bones"), -- 136.234 -6.831 468.779
         },
         MEDUSA                = GetFirstID("Medusa"),
         LIL_APKALLU           = GetFirstID("Lil_Apkallu"),
