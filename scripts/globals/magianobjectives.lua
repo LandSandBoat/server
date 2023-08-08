@@ -211,7 +211,6 @@ xi.magian.trialsold =
 
     -- Empyrean Armor
     -- Warrior
-    [4196] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3190 } } }, -- 0 -> +1 (Rvg. Seal: Ft.)
     [4216] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3210 } } }, -- +1 -> +2 (Stone of Vision)
     [4376] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
     [4356] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
@@ -219,7 +218,6 @@ xi.magian.trialsold =
     [4256] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3226 } } }, -- +1 -> +2 (Stone of Voyage)
 
     -- Monk
-    [4197] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3191 } } }, -- 0 -> +1 (Tantra Seal: Ft.)
     [4217] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3212 } } }, -- +1 -> +2 (Jewel of Vision)
     [4377] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
     [4357] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
@@ -227,7 +225,6 @@ xi.magian.trialsold =
     [4257] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3227 } } }, -- +1 -> +2 (Coin of Voyage)
 
     -- White Mage
-    [4198] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3192 } } }, -- 0 -> +1 (Orison Seal: Ft.)
     [4218] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3210 } } }, -- +1 -> +2 (Stone of Vision)
     [4378] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
     [4358] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
@@ -235,7 +232,6 @@ xi.magian.trialsold =
     [4258] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3228 } } }, -- +1 -> +2 (Jewel of Voyage)
 
     -- Black Mage
-    [4199] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3193 } } }, -- 0 -> +1 (Goetia Seal: Ft.)
     [4219] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
     [4379] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
     [4359] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
@@ -243,7 +239,6 @@ xi.magian.trialsold =
     [4259] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3229 } } }, -- +1 -> +2 (Card of Voyage)
 
     -- Red Mage
-    [4200] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3194 } } }, -- 0 -> +1 (Estoqueur's Seal: Ft.)
     [4220] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3212 } } }, -- +1 -> +2 (Jewel of Vision)
     [4380] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
     [4360] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
@@ -251,7 +246,6 @@ xi.magian.trialsold =
     [4260] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3226 } } }, -- +1 -> +2 (Stone of Voyage)
 
     -- Thief
-    [4201] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3195 } } }, -- 0 -> +1 (Raider's Seal: Ft.)
     [4221] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3210 } } }, -- +1 -> +2 (Stone of Vision)
     [4381] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
     [4361] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
@@ -259,7 +253,6 @@ xi.magian.trialsold =
     [4261] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3228 } } }, -- +1 -> +2 (Jewel of Voyage)
 
     -- Paladin
-    [4202] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3196 } } }, -- 0 -> +1 (Creed Seal: Ft.)
     [4222] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
     [4382] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
     [4362] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
@@ -267,7 +260,6 @@ xi.magian.trialsold =
     [4262] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3226 } } }, -- +1 -> +2 (Stone of Voyage)
 
     -- Dark Knight
-    [4203] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3197 } } }, -- 0 -> +1 (Bale Seal: Ft.)
     [4223] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
     [4383] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
     [4363] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
@@ -275,7 +267,6 @@ xi.magian.trialsold =
     [4263] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3227 } } }, -- +1 -> +2 (Coin of Voyage)
 
     -- Beastmaster
-    [4204] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3198 } } }, -- 0 -> +1 (Ferine Seal: Ft.)
     [4224] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
     [4384] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
     [4364] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
@@ -283,7 +274,6 @@ xi.magian.trialsold =
     [4264] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3229 } } }, -- +1 -> +2 (Card of Voyage)
 
     -- Bard
-    [4205] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3199 } } }, -- 0 -> +1 (Aoidos' Seal: Ft.)
     [4225] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3210 } } }, -- +1 -> +2 (Stone of Vision)
     [4385] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
     [4365] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
@@ -291,7 +281,6 @@ xi.magian.trialsold =
     [4265] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3228 } } }, -- +1 -> +2 (Jewel of Voyage)
 
     -- Ranger
-    [4206] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3200 } } }, -- 0 -> +1 (Sylvan Seal: Ft.)
     [4226] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3210 } } }, -- +1 -> +2 (Stone of Vision)
     [4386] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
     [4366] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
@@ -299,7 +288,6 @@ xi.magian.trialsold =
     [4266] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3229 } } }, -- +1 -> +2 (Card of Voyage)
 
     -- Samurai
-    [4207] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3201 } } }, -- 0 -> +1 (Unkai Seal: Ft.)
     [4227] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3212 } } }, -- +1 -> +2 (Jewel of Vision)
     [4387] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
     [4367] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
@@ -307,7 +295,6 @@ xi.magian.trialsold =
     [4267] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3228 } } }, -- +1 -> +2 (Jewel of Voyage)
 
     -- Ninja
-    [4208] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3202 } } }, -- 0 -> +1 (Iga Seal: Ft.)
     [4228] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
     [4388] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
     [4368] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
@@ -315,7 +302,6 @@ xi.magian.trialsold =
     [4268] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3229 } } }, -- +1 -> +2 (Card of Voyage)
 
     -- Dragoon
-    [4209] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3203 } } }, -- 0 -> +1 (Lancer's Seal: Ft.)
     [4229] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
     [4389] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
     [4369] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
@@ -323,7 +309,6 @@ xi.magian.trialsold =
     [4269] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3229 } } }, -- +1 -> +2 (Card of Voyage)
 
     -- Summoner
-    [4210] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3204 } } }, -- 0 -> +1 (Caller's Seal: Ft.)
     [4230] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
     [4390] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
     [4370] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3220 } } }, -- +1 -> +2 (Jewel of Wieldance)
@@ -331,7 +316,6 @@ xi.magian.trialsold =
     [4270] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3226 } } }, -- +1 -> +2 (Stone of Voyage)
 
     -- Blue Mage
-    [4211] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3205 } } }, -- 0 -> +1 (Mavi Seal: Ft.)
     [4231] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
     [4391] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3214 } } }, -- +1 -> +2 (Stone of Ardor)
     [4371] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
@@ -339,7 +323,6 @@ xi.magian.trialsold =
     [4271] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3227 } } }, -- +1 -> +2 (Coin of Voyage)
 
     -- Corsair
-    [4212] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3206 } } }, -- 0 -> +1 (Navarch's Seal: Ft.)
     [4232] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3212 } } }, -- +1 -> +2 (Jewel of Vision)
     [4392] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3215 } } }, -- +1 -> +2 (Coin of Ardor)
     [4372] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
@@ -347,7 +330,6 @@ xi.magian.trialsold =
     [4272] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3227 } } }, -- +1 -> +2 (Coin of Voyage)
 
     -- Puppetmaster
-    [4213] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3207 } } }, -- 0 -> +1 (Cirque Seal: Ft.)
     [4233] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3212 } } }, -- +1 -> +2 (Jewel of Vision)
     [4393] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
     [4373] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
@@ -355,7 +337,6 @@ xi.magian.trialsold =
     [4273] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3228 } } }, -- +1 -> +2 (Jewel of Voyage)
 
     -- Dancer
-    [4214] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3208 } } }, -- 0 -> +1 (Charis Seal: Ft.)
     [4234] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
     [4394] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3216 } } }, -- +1 -> +2 (Jewel of Ardor)
     [4374] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3219 } } }, -- +1 -> +2 (Coin of Wieldance)
@@ -363,7 +344,6 @@ xi.magian.trialsold =
     [4274] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3226 } } }, -- +1 -> +2 (Stone of Voyage)
 
     -- Scholar
-    [4215] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3209 } } }, -- 0 -> +1 (Savant's Seal: Ft.)
     [4235] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
     [4395] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
     [4375] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3218 } } }, -- +1 -> +2 (Stone of Wieldance)
