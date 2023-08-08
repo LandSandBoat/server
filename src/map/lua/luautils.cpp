@@ -880,8 +880,16 @@ namespace luautils
             return lookup[name].front();
         });
 
+        std::unordered_map<std::string, sol::table> idLuaTables;
+
         lua.set_function("GetTableOfIDs", [&](std::string const& name, std::optional<int> optRange) -> sol::table
         {
+            // Is it already built and cached?
+            if (idLuaTables.find(name) != idLuaTables.end())
+            {
+                return idLuaTables[name];
+            }
+
             sol::table table = lua.create_table();
 
             // Match first, +n following entries [start, start + n)
@@ -931,6 +939,9 @@ namespace luautils
             {
                 ShowWarning(fmt::format("Tried to look do ID lookup for {}, but found nothing.", name));
             }
+
+            // Add to cache
+            idLuaTables[name] = table;
 
             return table;
         });
