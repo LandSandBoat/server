@@ -4449,6 +4449,366 @@ xi.magian.trials =
         },
     },
 
+    [4236] =
+    {
+        previousTrial = 4176,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_CUISSES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.STONE_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_CUISSES_P2,
+        },
+    },
+
+    [4237] =
+    {
+        previousTrial = 4177,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_HOSE_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.JEWEL_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_HOSE_P2,
+        },
+    },
+
+    [4238] =
+    {
+        previousTrial = 4178,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_PANTALOONS_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.CARD_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_PANTALOONS_P2,
+        },
+    },
+
+    [4239] =
+    {
+        previousTrial = 4179,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_CHAUSSES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.STONE_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_CHAUSSES_P2,
+        },
+    },
+
+    [4240] =
+    {
+        previousTrial = 4180,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_FUSEAU_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.COIN_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_FUSEAU_P2,
+        },
+    },
+
+    [4241] =
+    {
+        previousTrial = 4181,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_CULOTTES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.COIN_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_CULOTTES_P2,
+        },
+    },
+
+    [4242] =
+    {
+        previousTrial = 4182,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_CUISSES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.COIN_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_CUISSES_P2,
+        },
+    },
+
+    [4243] =
+    {
+        previousTrial = 4183,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_FLANCHARD_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.COIN_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_FLANCHARD_P2,
+        },
+    },
+
+    [4244] =
+    {
+        previousTrial = 4184,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_QUIJOTES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.JEWEL_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_QUIJOTES_P2,
+        },
+    },
+
+    [4245] =
+    {
+        previousTrial = 4185,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_RHINGRAVE_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.COIN_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_RHINGRAVE_P2,
+        },
+    },
+
+    [4246] =
+    {
+        previousTrial = 4186,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_BRAGUES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.JEWEL_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_BRAGUES_P2,
+        },
+    },
+
+    [4247] =
+    {
+        previousTrial = 4187,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_HAIDATE_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.JEWEL_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_HAIDATE_P2,
+        },
+    },
+
+    [4248] =
+    {
+        previousTrial = 4188,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_HAKAMA_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.STONE_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_HAKAMA_P2,
+        },
+    },
+
+    [4249] =
+    {
+        previousTrial = 4189,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_CUISSOTS_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.CARD_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_CUISSOTS_P2,
+        },
+    },
+
+    [4250] =
+    {
+        previousTrial = 4190,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_SPATS_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.CARD_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_SPATS_P2,
+        },
+    },
+
+    [4251] =
+    {
+        previousTrial = 4191,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_TAYT_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.STONE_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_TAYT_P2,
+        },
+    },
+
+    [4252] =
+    {
+        previousTrial = 4192,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_CULOTTES_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.CARD_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_CULOTTES_P2,
+        },
+    },
+
+    [4253] =
+    {
+        previousTrial = 4193,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_PANTALONI_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.STONE_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_PANTALONI_P2,
+        },
+    },
+
+    [4254] =
+    {
+        previousTrial = 4194,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_TIGHTS_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.CARD_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_TIGHTS_P2,
+        },
+    },
+
+    [4255] =
+    {
+        previousTrial = 4195,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_PANTS_P1,
+        },
+
+        textOffset  = 1056,
+        tradeItem   = xi.items.JEWEL_OF_BALANCE,
+        numRequired = 6,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_PANTS_P2,
+        },
+    },
+
     [4316] = -- Ravager's Mufflers -> Ravager's Mufflers +1
     {
         previousTrial = 0,
