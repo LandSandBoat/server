@@ -6249,6 +6249,366 @@ xi.magian.trials =
         },
     },
 
+    [4376] =
+    {
+        previousTrial = 4336,
+        requiredItem  =
+        {
+            itemId = xi.items.RAVAGERS_LORICA_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.STONE_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAVAGERS_LORICA_P2,
+        },
+    },
+
+    [4377] =
+    {
+        previousTrial = 4337,
+        requiredItem  =
+        {
+            itemId = xi.items.TANTRA_CYCLAS_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.CARD_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.TANTRA_CYCLAS_P2,
+        },
+    },
+
+    [4378] =
+    {
+        previousTrial = 4338,
+        requiredItem  =
+        {
+            itemId = xi.items.ORISON_BLIAUD_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.CARD_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.ORISON_BLIAUD_P2,
+        },
+    },
+
+    [4379] =
+    {
+        previousTrial = 4339,
+        requiredItem  =
+        {
+            itemId = xi.items.GOETIA_COAT_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.JEWEL_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.GOETIA_COAT_P2,
+        },
+    },
+
+    [4380] =
+    {
+        previousTrial = 4340,
+        requiredItem  =
+        {
+            itemId = xi.items.ESTOQUEURS_SAYON_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.JEWEL_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.ESTOQUEURS_SAYON_P2,
+        },
+    },
+
+    [4381] =
+    {
+        previousTrial = 4341,
+        requiredItem  =
+        {
+            itemId = xi.items.RAIDERS_VEST_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.COIN_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAIDERS_VEST_P2,
+        },
+    },
+
+    [4382] =
+    {
+        previousTrial = 4342,
+        requiredItem  =
+        {
+            itemId = xi.items.CREED_CUIRASS_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.STONE_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.CREED_CUIRASS_P2,
+        },
+    },
+
+    [4383] =
+    {
+        previousTrial = 4343,
+        requiredItem  =
+        {
+            itemId = xi.items.BALE_CUIRASS_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.COIN_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.BALE_CUIRASS_P2,
+        },
+    },
+
+    [4384] =
+    {
+        previousTrial = 4344,
+        requiredItem  =
+        {
+            itemId = xi.items.FERINE_GAUSAPE_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.CARD_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.FERINE_GAUSAPE_P2,
+        },
+    },
+
+    [4385] =
+    {
+        previousTrial = 4345,
+        requiredItem  =
+        {
+            itemId = xi.items.AOIDOS_HONGRELINE_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.STONE_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.AOIDOS_HONGRELINE_P2,
+        },
+    },
+
+    [4386] =
+    {
+        previousTrial = 4346,
+        requiredItem  =
+        {
+            itemId = xi.items.SYLVAN_CABAN_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.COIN_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.SYLVAN_CABAN_P2,
+        },
+    },
+
+    [4387] =
+    {
+        previousTrial = 4347,
+        requiredItem  =
+        {
+            itemId = xi.items.UNKAI_DOMARU_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.JEWEL_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.UNKAI_DOMARU_P2,
+        },
+    },
+
+    [4388] =
+    {
+        previousTrial = 4348,
+        requiredItem  =
+        {
+            itemId = xi.items.IGA_NINGI_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.STONE_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.IGA_NINGI_P2,
+        },
+    },
+
+    [4389] =
+    {
+        previousTrial = 4349,
+        requiredItem  =
+        {
+            itemId = xi.items.LANCERS_PLACKART_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.CARD_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.LANCERS_PLACKART_P2,
+        },
+    },
+
+    [4390] =
+    {
+        previousTrial = 4350,
+        requiredItem  =
+        {
+            itemId = xi.items.CALLERS_DOUBLET_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.COIN_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.CALLERS_DOUBLET_P2,
+        },
+    },
+
+    [4391] =
+    {
+        previousTrial = 4351,
+        requiredItem  =
+        {
+            itemId = xi.items.MAVI_MINTAN_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.STONE_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.MAVI_MINTAN_P2,
+        },
+    },
+
+    [4392] =
+    {
+        previousTrial = 4352,
+        requiredItem  =
+        {
+            itemId = xi.items.NAVARCHS_FRAC_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.COIN_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.NAVARCHS_FRAC_P2,
+        },
+    },
+
+    [4393] =
+    {
+        previousTrial = 4353,
+        requiredItem  =
+        {
+            itemId = xi.items.CIRQUE_FARSETTO_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.JEWEL_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.CIRQUE_FARSETTO_P2,
+        },
+    },
+
+    [4394] =
+    {
+        previousTrial = 4354,
+        requiredItem  =
+        {
+            itemId = xi.items.CHARIS_CASAQUE_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.JEWEL_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.CHARIS_CASAQUE_P2,
+        },
+    },
+
+    [4395] =
+    {
+        previousTrial = 4355,
+        requiredItem  =
+        {
+            itemId = xi.items.SAVANTS_GOWN_P1,
+        },
+
+        textOffset  = 1052,
+        tradeItem   = xi.items.CARD_OF_ARDOR,
+        numRequired = 9,
+
+        rewardItem =
+        {
+            itemId = xi.items.SAVANTS_GOWN_P2,
+        },
+    },
+
     [4654] = -- Warrior's Mask -> Warrior's Mask +2 - 50 Forgotten Thought
     {
         previousTrial = 0,
