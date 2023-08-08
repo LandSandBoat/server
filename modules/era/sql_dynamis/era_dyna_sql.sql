@@ -707,9 +707,9 @@ REPLACE INTO `mob_droplist` VALUES (3220,2,0,1000,1452,0); -- Bronzepiece (Steal
 DELETE FROM `mob_droplist` WHERE dropid = "730"; -- Dynamis Lord
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,13658,@COMMON); -- Shadow Mantle
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,14646,@UNCOMMON); -- Shadow Ring
-REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (730,1,1,@VRARE,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@ALWAYS,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@ALWAYS,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (730,1,1,@ALWAYS,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (730,0,0,1000,4249,@VCOMMON); -- Schultz's Strategems
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "521"; -- Count Zaebos
