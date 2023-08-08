@@ -77,7 +77,8 @@ quest.sections =
             onEventFinish =
             {
                 [803] = function(player, csid, option, npc)
-                    if option == 1 then
+                    -- This event uses a very big number for cancelation, making the capture suite wrongly return 0.
+                    if option == 0 then
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,
