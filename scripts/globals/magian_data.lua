@@ -3009,6 +3009,546 @@ xi.magian.trials =
         },
     },
 
+    [3556] =
+    {
+        previousTrial = 3093,
+        requiredItem  =
+        {
+            itemId = xi.items.MANDAU_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.MANDAU_99,
+        },
+    },
+
+    [3560] =
+    {
+        previousTrial = 3097,
+        requiredItem  =
+        {
+            itemId = xi.items.SPHARAI_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.SPHARAI_99,
+        },
+    },
+
+    [3563] =
+    {
+        previousTrial = 3100,
+        requiredItem  =
+        {
+            itemId = xi.items.EXCALIBUR_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.EXCALIBUR_99,
+        },
+    },
+
+    [3567] =
+    {
+        previousTrial = 3104,
+        requiredItem  =
+        {
+            itemId = xi.items.RAGNAROK_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAGNAROK_99,
+        },
+    },
+
+    [3568] =
+    {
+        previousTrial = 3105,
+        requiredItem  =
+        {
+            itemId = xi.items.GUTTLER_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.GUTTLER_99,
+        },
+    },
+
+    [3570] =
+    {
+        previousTrial = 3107,
+        requiredItem  =
+        {
+            itemId = xi.items.BRAVURA_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.BRAVURA_99,
+        },
+    },
+
+    [3572] =
+    {
+        previousTrial = 3109,
+        requiredItem  =
+        {
+            itemId = xi.items.APOCALYPSE_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.APOCALYPSE_99,
+        },
+    },
+
+    [3574] =
+    {
+        previousTrial = 3111,
+        requiredItem  =
+        {
+            itemId = xi.items.GUNGNIR_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.GUNGNIR_99,
+        },
+    },
+
+    [3576] =
+    {
+        previousTrial = 3113,
+        requiredItem  =
+        {
+            itemId = xi.items.KIKOKU_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.KIKOKU_99,
+        },
+    },
+
+    [3578] =
+    {
+        previousTrial = 3115,
+        requiredItem  =
+        {
+            itemId = xi.items.AMANOMURAKUMO_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.AMANOMURAKUMO_99,
+        },
+    },
+
+    [3581] =
+    {
+        previousTrial = 3117,
+        requiredItem  =
+        {
+            itemId = xi.items.MJOLLNIR_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.MJOLLNIR_99,
+        },
+    },
+
+    [3582] =
+    {
+        previousTrial = 3119,
+        requiredItem  =
+        {
+            itemId = xi.items.CLAUSTRUM_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLAUSTRUM_99,
+        },
+    },
+
+    [3586] =
+    {
+        previousTrial = 3123,
+        requiredItem  =
+        {
+            itemId = xi.items.YOICHINOYUMI_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.YOICHINOYUMI_99,
+        },
+    },
+
+    [3587] =
+    {
+        previousTrial = 3124,
+        requiredItem  =
+        {
+            itemId = xi.items.ANNIHILATOR_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.ANNIHILATOR_99,
+        },
+    },
+
+    [3591] =
+    {
+        previousTrial = 3128,
+        requiredItem  =
+        {
+            itemId = xi.items.GJALLARHORN_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.GJALLARHORN_99,
+        },
+    },
+
+    [3606] =
+    {
+        previousTrial = 3556,
+        requiredItem  =
+        {
+            itemId = xi.items.MANDAU_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.MANDAU_99_II,
+        },
+    },
+
+    [3610] =
+    {
+        previousTrial = 3560,
+        requiredItem  =
+        {
+            itemId = xi.items.SPHARAI_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.SPHARAI_99_II,
+        },
+    },
+
+    [3613] =
+    {
+        previousTrial = 3563,
+        requiredItem  =
+        {
+            itemId = xi.items.EXCALIBUR_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.EXCALIBUR_99_II,
+        },
+    },
+
+    [3617] =
+    {
+        previousTrial = 3567,
+        requiredItem  =
+        {
+            itemId = xi.items.RAGNAROK_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.RAGNAROK_99_II,
+        },
+    },
+
+    [3618] =
+    {
+        previousTrial = 3568,
+        requiredItem  =
+        {
+            itemId = xi.items.GUTTLER_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.GUTTLER_99_II,
+        },
+    },
+
+    [3620] =
+    {
+        previousTrial = 3570,
+        requiredItem  =
+        {
+            itemId = xi.items.BRAVURA_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.BRAVURA_99_II,
+        },
+    },
+
+    [3622] =
+    {
+        previousTrial = 3572,
+        requiredItem  =
+        {
+            itemId = xi.items.APOCALYPSE_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.APOCALYPSE_99_II,
+        },
+    },
+
+    [3624] =
+    {
+        previousTrial = 3574,
+        requiredItem  =
+        {
+            itemId = xi.items.GUNGNIR_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.GUNGNIR_99_II,
+        },
+    },
+
+    [3626] =
+    {
+        previousTrial = 3576,
+        requiredItem  =
+        {
+            itemId = xi.items.KIKOKU_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.KIKOKU_99_II,
+        },
+    },
+
+    [3628] =
+    {
+        previousTrial = 3578,
+        requiredItem  =
+        {
+            itemId = xi.items.AMANOMURAKUMO_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.AMANOMURAKUMO_99_II,
+        },
+    },
+
+    [3630] =
+    {
+        previousTrial = 3581,
+        requiredItem  =
+        {
+            itemId = xi.items.MJOLLNIR_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.MJOLLNIR_99_II,
+        },
+    },
+
+    [3632] =
+    {
+        previousTrial = 3582,
+        requiredItem  =
+        {
+            itemId = xi.items.CLAUSTRUM_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.CLAUSTRUM_99_II,
+        },
+    },
+
+    [3636] =
+    {
+        previousTrial = 3586,
+        requiredItem  =
+        {
+            itemId = xi.items.YOICHINOYUMI_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.YOICHINOYUMI_99_II,
+        },
+    },
+
+    [3637] =
+    {
+        previousTrial = 3587,
+        requiredItem  =
+        {
+            itemId = xi.items.ANNIHILATOR_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.ANNIHILATOR_99_II,
+        },
+    },
+
+    [3641] =
+    {
+        previousTrial = 3591,
+        requiredItem  =
+        {
+            itemId = xi.items.GJALLARHORN_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.GJALLARHORN_99_II,
+        },
+    },
+
     [4156] = -- Ravager's mask -> Ravager's mask +1
     {
         previousTrial = 0,
@@ -6609,6 +7149,24 @@ xi.magian.trials =
         },
     },
 
+    [4453] =
+    {
+        previousTrial = 4448,
+        requiredItem  =
+        {
+            itemId = xi.items.AEGIS_95,
+        },
+
+        textOffset  = 1329,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.items.AEGIS_99,
+        },
+    },
+
     [4654] = -- Warrior's Mask -> Warrior's Mask +2 - 50 Forgotten Thought
     {
         previousTrial = 0,
@@ -10206,6 +10764,24 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.items.ARGUTE_LOAFERS_P2,
+        },
+    },
+
+    [5056] =
+    {
+        previousTrial = 4453,
+        requiredItem  =
+        {
+            itemId = xi.items.AEGIS_99,
+        },
+
+        textOffset  = 1258,
+        tradeItem   = xi.items.VIAL_OF_UMBRAL_MARROW,
+        numRequired = 250,
+
+        rewardItem =
+        {
+            itemId = xi.items.AEGIS_99_II,
         },
     },
 }
