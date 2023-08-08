@@ -85,7 +85,7 @@ zones[xi.zone.BASTOK_MARKETS] =
 
         HALLOWEEN_SKINS =
         {
-            [17739805] = 45, -- Olwyn
+            [GetFirstID("Olwyn")] = 45, -- Olwyn
         },
     },
 }

@@ -41,38 +41,30 @@ zones[xi.zone.BHAFLAU_THICKETS] =
     {
         MAHISHASURA_PH     =
         {
-            [16990296] = 16990306, -- 215.000 -18.000 372.000
+            [GetFirstID("Marid")] = GetFirstID("Mahishasura"), -- 215.000 -18.000 372.000
         },
         EMERGENT_ELM_PH    =
         {
-            [16990374] = 16990376, -- 86.000 -35.000 621.000
+            [GetFirstID("Emergent_Elm") - 2] = GetFirstID("Emergent_Elm"), -- 86.000 -35.000 621.000
         },
         NIS_PUK_PH         =
         {
-            [16990383] = 16990403, -- -135 -18 -648
-            [16990384] = 16990403, -- -104 -18 -636
-            [16990385] = 16990403, -- -123 -16 -638
-            [16990391] = 16990403, -- -106 -16 -613
-            [16990392] = 16990403, -- -109 -15 -600
-            [16990393] = 16990403, -- -128 -15 -602
-            [16990394] = 16990403, -- -132 -16 -612
-            [16990398] = 16990403, -- -119 -15 -651
+            [GetFirstID("Sea_Puk")] = GetFirstID("Nis_Puk"), -- -135 -18 -648
+            [GetFirstID("Sea_Puk") + 1] = GetFirstID("Nis_Puk"), -- -104 -18 -636
+            [GetFirstID("Sea_Puk") + 2] = GetFirstID("Nis_Puk"), -- -123 -16 -638
+            [GetFirstID("Sea_Puk") + 8] = GetFirstID("Nis_Puk"), -- -106 -16 -613
+            [GetFirstID("Sea_Puk") + 9] = GetFirstID("Nis_Puk"), -- -109 -15 -600
+            [GetFirstID("Sea_Puk") + 10] = GetFirstID("Nis_Puk"), -- -128 -15 -602
+            [GetFirstID("Sea_Puk") + 11] = GetFirstID("Nis_Puk"), -- -132 -16 -612
+            [GetFirstID("Sea_Puk") + 15] = GetFirstID("Nis_Puk"), -- -119 -15 -651
         },
-        HARVESTMAN         = 16990252,
+        HARVESTMAN         = GetFirstID("Harvestman"),
         LIVIDROOT_AMOOSHAH = GetFirstID("Lividroot_Amooshah"),
         DEA                = GetFirstID("Dea"),
     },
     npc =
     {
-        HARVESTING =
-        {
-            16990640,
-            16990641,
-            16990642,
-            16990643,
-            16990644,
-            16990645,
-        },
+        HARVESTING = GetTableOfIDs("Harvesting_Point"),
     },
 }
 

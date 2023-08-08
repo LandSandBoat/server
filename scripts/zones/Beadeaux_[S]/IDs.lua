@@ -22,15 +22,15 @@ zones[xi.zone.BEADEAUX_S] =
     {
         EATHO_CRUELHEART_PH =
         {
-            [17154068] = 17154069,
+            [GetFirstID("EaTho_Cruelheart") - 1] = GetFirstID("EaTho_Cruelheart"),
         },
         BATHO_MERCIFULHEART_PH =
         {
-            [17154147] = 17154148,
+            [GetFirstID("BaTho_Mercifulheart") - 1] = GetFirstID("BaTho_Mercifulheart"),
         },
         DA_DHA_HUNDREDMASK_PH =
         {
-            [17154095] = 17154195, -- -37.741 0.344 -127.037
+            [GetFirstID("Gold_Quadav") - 37] = GetFirstID("DaDha_Hundredmask"), -- -37.741 0.344 -127.037
         },
     },
     npc =

@@ -52,59 +52,59 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
     {
         GARGANTUA_PH =
         {
-            [17232078] = 17232079, -- 339 -0.472 -20
+            [GetFirstID("Gargantua") - 1] = GetFirstID("Gargantua"), -- 339 -0.472 -20
         },
 
         KIRATA_PH =
         {
-            [17232042] = 17232044, -- 75.797 -0.335 -323.659
-            [17232043] = 17232044, -- 69.336 -0.234 -276.561
+            [GetFirstID("Kirata") - 2] = GetFirstID("Kirata"), -- 75.797 -0.335 -323.659
+            [GetFirstID("Kirata") - 1] = GetFirstID("Kirata"), -- 69.336 -0.234 -276.561
         },
 
         NUE_PH =
         {
-            [17231969] = 17231971, -- -342.830 -100.584 168.662
-            [17231970] = 17231971, -- -322.000 -100.000 116.000
+            [GetFirstID("Nue") - 2] = GetFirstID("Nue"), -- -342.830 -100.584 168.662
+            [GetFirstID("Nue") - 1] = GetFirstID("Nue"), -- -322.000 -100.000 116.000
         },
 
-        HUMBABA = 17232094,
+        HUMBABA = GetFirstID("Humbaba"),
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17232159, -- Gorehound
-                17232158, -- Gorehound
-                17232157, -- Gorehound
-                17232156, -- Gorehound
-                17232155, -- Gjenganger
-                17232154, -- Gjenganger
-                17232153, -- Gjenganger
-                17232152, -- Gjenganger
+                GetFirstID("Gorehound") + 3,  -- Gorehound
+                GetFirstID("Gorehound") + 2,  -- Gorehound
+                GetFirstID("Gorehound") + 1,  -- Gorehound
+                GetFirstID("Gorehound"),      -- Gorehound
+                GetFirstID("Gjenganger") + 3, -- Gjenganger
+                GetFirstID("Gjenganger") + 2, -- Gjenganger
+                GetFirstID("Gjenganger") + 1, -- Gjenganger
+                GetFirstID("Gjenganger"),     -- Gjenganger
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17232151, -- Erebus
-                17232150, -- Feuerunke
+                GetFirstID("Erebus"),
+                GetFirstID("Feuerunke"),
             },
 
             [xi.keyItem.PURPLE_ABYSSITE] =
             {
-                17232149, -- Lord Ruthven
+                GetFirstID("Lord_Ruthven"),
             },
 
             [xi.keyItem.BLACK_ABYSSITE] =
             {
-                17232148, -- Yilbegan
-            }
+                GetFirstID("Yilbegan"),
+            },
         }
     },
 
     npc =
     {
-        MIRROR_POND_J8 = 17232206, -- Mirror_Pond_1 in npc_list
-        OVERSEER_BASE  = GetFirstID('Parledaire_RK'),
+        MIRROR_POND_J8 = GetFirstID("Mirror_Pond_1"), -- Mirror_Pond_1 in npc_list
+        OVERSEER_BASE  = GetFirstID("Parledaire_RK"),
     },
 }
 

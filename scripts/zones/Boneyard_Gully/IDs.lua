@@ -30,10 +30,10 @@ zones[xi.zone.BONEYARD_GULLY] =
     {
         [1] =
         {
-            TUCHULCHA_ID      = 16810001,
-            SWIFT_HUNTER_ID   = 16810002,
-            SHREWD_HUNTER_ID  = 16810003,
-            ARMORED_HUNTER_ID = 16810004,
+            TUCHULCHA_ID      = GetFirstID("Tuchulcha"),
+            SWIFT_HUNTER_ID   = GetFirstID("Swift_Hunter"),
+            SHREWD_HUNTER_ID  = GetFirstID("Shrewd_Hunter"),
+            ARMORED_HUNTER_ID = GetFirstID("Armored_Hunter"),
             -- List of positions used to set
             -- (1) Tuchulcha's location after using sand pit
             -- (2) The starting position of the hunters
@@ -50,10 +50,10 @@ zones[xi.zone.BONEYARD_GULLY] =
         },
         [2] =
         {
-            TUCHULCHA_ID      = 16810007,
-            SWIFT_HUNTER_ID   = 16810008,
-            SHREWD_HUNTER_ID  = 16810009,
-            ARMORED_HUNTER_ID = 16810010,
+            TUCHULCHA_ID      = GetFirstID("Tuchulcha") + 6,
+            SWIFT_HUNTER_ID   = GetFirstID("Swift_Hunter") + 6,
+            SHREWD_HUNTER_ID  = GetFirstID("Shrewd_Hunter") + 6,
+            ARMORED_HUNTER_ID = GetFirstID("Armored_Hunter") + 6,
             ant_positions =
             {
                 { 43, 1.8, 40, 7 },
@@ -67,10 +67,10 @@ zones[xi.zone.BONEYARD_GULLY] =
         },
         [3] =
         {
-            TUCHULCHA_ID      = 16810013,
-            SWIFT_HUNTER_ID   = 16810014,
-            SHREWD_HUNTER_ID  = 16810015,
-            ARMORED_HUNTER_ID = 16810016,
+            TUCHULCHA_ID      = GetFirstID("Tuchulcha") + 12,
+            SWIFT_HUNTER_ID   = GetFirstID("Swift_Hunter") + 12,
+            SHREWD_HUNTER_ID  = GetFirstID("Shrewd_Hunter") + 12,
+            ARMORED_HUNTER_ID = GetFirstID("Armored_Hunter") + 12,
             ant_positions =
             {
                 { 522, 1.8, 521, 240 },
@@ -87,24 +87,44 @@ zones[xi.zone.BONEYARD_GULLY] =
     {
         [1] =
         {
-            PARATA_ID        = 16810024,
-            BLADMALL_ID      = 16810025,
-            PARATA_PET_IDS   = { 16810026, 16810027, 16810028 },
-            BLADMALL_PET_IDS = { 16810029, 16810030, 16810031 },
+            PARATA_ID        = GetFirstID("Parata"),
+            BLADMALL_ID      = GetFirstID("Bladmall"),
+            PARATA_PET_IDS   = GetTableOfIDs("Nepionic_Parata", 3),
+            BLADMALL_PET_IDS = GetTableOfIDs("Nepionic_Bladmall", 3),
         },
         [2] =
         {
-            PARATA_ID        = 16810033,
-            BLADMALL_ID      = 16810034,
-            PARATA_PET_IDS   = { 16810035, 16810036, 16810037 },
-            BLADMALL_PET_IDS = { 16810038, 16810039, 16810040 },
+            PARATA_ID        = GetFirstID("Parata") + 9,
+            BLADMALL_ID      = GetFirstID("Bladmall") + 9,
+            PARATA_PET_IDS   =
+            {
+                GetFirstID("Nepionic_Parata") + 8,
+                GetFirstID("Nepionic_Parata") + 9,
+                GetFirstID("Nepionic_Parata") + 10
+            },
+            BLADMALL_PET_IDS =
+            {
+                GetFirstID("Nepionic_Bladmall") + 8,
+                GetFirstID("Nepionic_Bladmall") + 9,
+                GetFirstID("Nepionic_Bladmall") + 10
+            },
         },
         [3] =
         {
-            PARATA_ID        = 16810042,
-            BLADMALL_ID      = 16810043,
-            PARATA_PET_IDS   = { 16810044, 16810045, 16810046 },
-            BLADMALL_PET_IDS = { 16810047, 16810048, 16810049 },
+            PARATA_ID        = GetFirstID("Parata") + 18,
+            BLADMALL_ID      = GetFirstID("Bladmall") + 18,
+            PARATA_PET_IDS   =
+            {
+                GetFirstID("Nepionic_Parata") + 16,
+                GetFirstID("Nepionic_Parata") + 17,
+                GetFirstID("Nepionic_Parata") + 18
+            },
+            BLADMALL_PET_IDS =
+            {
+                GetFirstID("Nepionic_Bladmall") + 16,
+                GetFirstID("Nepionic_Bladmall") + 17,
+                GetFirstID("Nepionic_Bladmall") + 18
+            },
         },
     },
 }

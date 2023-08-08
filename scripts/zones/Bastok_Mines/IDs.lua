@@ -95,14 +95,14 @@ zones[xi.zone.BASTOK_MINES] =
     {
         HALLOWEEN_SKINS =
         {
-            [17735742] = 41, -- Faustin
-            [17735744] = 43, -- Mille
-            [17735747] = 42, -- Aulavia
-            [17735795] = 40, -- Proud Beard
-            [17735818] = 44, -- Emaliveulaux
+            [GetFirstID("Faustin")] = 41, -- Faustin
+            [GetFirstID("Mille")] = 43, -- Mille
+            [GetFirstID("Aulavia")] = 42, -- Aulavia
+            [GetFirstID("Proud_Beard")] = 40, -- Proud Beard
+            [GetFirstID("Emaliveulaux")] = 44, -- Emaliveulaux
         },
-        LELEROON_BLUE_DOOR = 17735847,
-        EXPLORER_MOOGLE    = 17735856,
+        LELEROON_BLUE_DOOR = GetFirstID("Door_House"),
+        EXPLORER_MOOGLE    = GetFirstID("Explorer_Moogle"),
     },
 }
 

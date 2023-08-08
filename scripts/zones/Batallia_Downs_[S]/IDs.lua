@@ -37,18 +37,18 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
     {
         BURLIBIX_BRAWNBACK_PH =
         {
-            [17121398] = 17121399,
-            [17121402] = 17121399,
+            [17121398] = GetFirstID("Burlibix_Brawnback"),
+            [17121402] = GetFirstID("Burlibix_Brawnback"),
         },
 
         LA_VELUE_PH =
         {
-            [17121554] = 17121576, -- -314.365 -18.745 -56.016
+            [17121554] = GetFirstID("La_Velue"), -- -314.365 -18.745 -56.016
         },
 
         HABERGOASS_PH =
         {
-            [17121602] = 17121603,
+            [17121602] = GetFirstID("Habergoass"),
         },
 
         MENECHME = GetFirstID("Menechme"),
@@ -57,30 +57,30 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17121722,  -- Lacus
-                17121721,  -- Thunor
-                17121720, -- Beorht
-                17121719, -- Pruina
-                17121718,  -- Puretos
-                17121717,  -- Eorthe
-                17121716, -- Deorc
-                17121715, -- Aither
+                GetFirstID("Lacus"),
+                GetFirstID("Thunor"),
+                GetFirstID("Beorht"),
+                GetFirstID("Pruina"),
+                GetFirstID("Puretos"),
+                GetFirstID("Eorthe"),
+                GetFirstID("Deorc"),
+                GetFirstID("Aither"),
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17121714, -- Skuld
-                17121713  -- Urd
+                GetFirstID("Skuld"),
+                GetFirstID("Urd")
             },
 
             [xi.keyItem.YELLOW_ABYSSITE] =
             {
-                17121712  -- Verthandi
+                GetFirstID("Verthandi")
             },
 
             [xi.keyItem.BLACK_ABYSSITE] =
             {
-                17121711  -- Yilbegan
+                GetFirstID("Yilbegan")
             }
         }
     },

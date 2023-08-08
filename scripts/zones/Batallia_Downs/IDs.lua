@@ -60,49 +60,49 @@ zones[xi.zone.BATALLIA_DOWNS] =
     {
         PRANKSTER_MAVERIX_PH =
         {
-            [17207635] = 17207640,
+            [GetFirstID("Evil_Weapon")] = GetFirstID("Prankster_Maverix"),
         },
 
         TOTTERING_TOBY_PH =
         {
-            [17207449] = 17207476, -- -194.234 -18.485 132.208
+            [17207449] = GetFirstID("Tottering_Toby"), -- -194.234 -18.485 132.208
         },
 
-        AHTU              = 17207657,
+        AHTU              = GetFirstID("Ahtu"),
         BADSHAH_OFFSET    = GetFirstID('Badshah'),
-        STURMTIGER        = 17207696,
-        SUPARNA           = 17207697,
-        SUPARNA_FLEDGLING = 17207698,
-        VEGNIX_GREENTHUMB = 17207710,
+        STURMTIGER        = GetFirstID("Sturmtiger"),
+        SUPARNA           = GetFirstID("Suparna"),
+        SUPARNA_FLEDGLING = GetFirstID("Suparna_Fledgling"),
+        VEGNIX_GREENTHUMB = GetFirstID("Vegnix_Greenthumb"),
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17207722,  -- Lacus
-                17207721,  -- Thunor
-                17207720, -- Beorht
-                17207719, -- Pruina
-                17207718,  -- Puretos
-                17207717,  -- Eorthe
-                17207716, -- Deorc
-                17207715, -- Aither
+                GetFirstID("Lacus"),
+                GetFirstID("Thunor"),
+                GetFirstID("Beorht"),
+                GetFirstID("Pruina"),
+                GetFirstID("Puretos"),
+                GetFirstID("Eorthe"),
+                GetFirstID("Deorc"),
+                GetFirstID("Aither")
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17207714, -- Skuld
-                17207713  -- Urd
+                GetFirstID("Skuld"),
+                GetFirstID("Urd")
             },
 
             [xi.keyItem.YELLOW_ABYSSITE] =
             {
-                17207712  -- Verthandi
+                GetFirstID("Verthandi")
             },
 
             [xi.keyItem.BLACK_ABYSSITE] =
             {
-                17207711  -- Yilbegan
+                GetFirstID("Yilbegan")  -- Yilbegan
             }
         }
     },

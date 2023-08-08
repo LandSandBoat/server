@@ -35,12 +35,7 @@ zones[xi.zone.BALGAS_DAIS] =
     },
     mob =
     {
-        ATORI_TUTORI_QM =
-        {
-            17375491,
-            17375492,
-            17375493,
-        },
+        ATORI_TUTORI_QM = GetTableOfIDs("Atori-Tutori_qm"),
     },
     npc =
     {

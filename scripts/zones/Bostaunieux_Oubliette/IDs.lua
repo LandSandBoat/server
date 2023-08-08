@@ -40,35 +40,35 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
         SEWER_SYRUP_PH          =
         {
-            [17461305] = 17461307, -- -19.000 1.000 -173.000
-            [17461306] = 17461307, -- -20.000 1.000 -148.000
+            [GetFirstID("Sewer_Syrup") - 2] = GetFirstID("Sewer_Syrup"), -- -19.000 1.000 -173.000
+            [GetFirstID("Sewer_Syrup") - 1] = GetFirstID("Sewer_Syrup"), -- -20.000 1.000 -148.000
         },
         SHII_PH                 =
         {
-            [17461311] = 17461315, -- -59.000 0.941 -149.000
-            [17461334] = 17461315, -- -64.000 -0.500 -144.000
-            [17461277] = 17461315, -- -65.000 -1.000 -137.000
-            [17461309] = 17461315, -- -64.000 0.950 -132.000
-            [17461312] = 17461315, -- -53.000 -0.500 -137.000
-            [17461308] = 17461315, -- -57.000 0.998 -135.000
+            [17461311] = GetFirstID("Shii"), -- -59.000 0.941 -149.000
+            [17461334] = GetFirstID("Shii"), -- -64.000 -0.500 -144.000
+            [17461277] = GetFirstID("Shii"), -- -65.000 -1.000 -137.000
+            [17461309] = GetFirstID("Shii"), -- -64.000 0.950 -132.000
+            [17461312] = GetFirstID("Shii"), -- -53.000 -0.500 -137.000
+            [17461308] = GetFirstID("Shii"), -- -57.000 0.998 -135.000
         },
         ARIOCH_PH               =
         {
-            [17461322] = 17461433, -- -259 0.489 -188
+            [17461322] = GetFirstID("Arioch"), -- -259 0.489 -188
         },
         MANES_PH                =
         {
-            [17461469] = 17461471,
-            [17461470] = 17461471,
-            [17461476] = 17461471,
-            [17461477] = 17461471,
+            [17461469] = GetFirstID("Manes"),
+            [17461470] = GetFirstID("Manes"),
+            [17461476] = GetFirstID("Manes"),
+            [17461477] = GetFirstID("Manes"),
         },
-        DREXERION_THE_CONDEMNED = 17461338,
-        PHANDURON_THE_CONDEMNED = 17461343,
-        BLOODSUCKER             = 17461478,
-        BODACH                  = 17461479,
-        MANES                   = 17461471,
-        SHII                    = 17461315,
+        DREXERION_THE_CONDEMNED = GetFirstID("Drexerion_the_Condemned"),
+        PHANDURON_THE_CONDEMNED = GetFirstID("Phanduron_the_Condemned"),
+        BLOODSUCKER             = GetFirstID("Bloodsucker"),
+        BODACH                  = GetFirstID("Bodach"),
+        MANES                   = GetFirstID("Manes"),
+        SHII                    = GetFirstID("Shii"),
     },
     npc =
     {

@@ -50,29 +50,21 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     },
     mob =
     {
-        BACKOO        = 17260613,
+        BACKOO        = GetFirstID("Backoo"),
         HELLDIVER_PH  =
         {
-            [17260906] = 17260907, -- 509.641 0.151 -267.664
+            [GetFirstID("Helldiver") - 1] = GetFirstID("Helldiver"), -- 509.641 0.151 -267.664
         },
         BUBURIMBOO_PH =
         {
-            [17261002] = 17261003, -- 442.901 19.500 109.075
+            [GetFirstID("Buburimboo") - 1] = GetFirstID("Buburimboo"), -- 442.901 19.500 109.075
         },
     },
     npc =
     {
-        OVERSEER_BASE   = GetFirstID('Bonbavour_RK'),
-        SIGNPOST_OFFSET = 17261165,
-        LOGGING =
-        {
-            17261175,
-            17261176,
-            17261177,
-            17261178,
-            17261179,
-            17261180,
-        },
+        OVERSEER_BASE   = GetFirstID("Bonbavour_RK"),
+        SIGNPOST_OFFSET = GetFirstID("Signpost"),
+        LOGGING = GetTableOfIDs("Logging_Point")
     },
 }
 

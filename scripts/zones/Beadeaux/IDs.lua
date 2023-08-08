@@ -35,34 +35,34 @@ zones[xi.zone.BEADEAUX] =
     },
     mob =
     {
-        MIMIC                  = 17379783,
+        MIMIC                  = GetFirstID("Mimic"),
         BI_GHO_HEADTAKER_PH    =
         {
-            [17379350] = 17379351, -- -98.611 0.498 71.212
+            [GetFirstID("BiGho_Headtaker") - 1] = GetFirstID("BiGho_Headtaker"), -- -98.611 0.498 71.212
         },
         DA_DHA_HUNDREDMASK_PH  =
         {
-            [17379426] = 17379427, -- -71.480 0.490 -62.882
+            [GetFirstID("DaDha_Hundredmask") - 1] = GetFirstID("DaDha_Hundredmask"), -- -71.480 0.490 -62.882
         },
         GE_DHA_EVILEYE_PH      =
         {
-            [17379447] = 17379450, -- -242.709 0.5 -188.01
+            [GetFirstID("GeDha_Evileye") - 3] = GetFirstID("GeDha_Evileye"), -- -242.709 0.5 -188.01
         },
         ZO_KHU_BLACKCLOUD_PH   =
         {
-            [17379562] = 17379564, -- -294.223 -3.504 -206.657
+            [GetFirstID("ZoKhu_Blackcloud") - 2] = GetFirstID("ZoKhu_Blackcloud"), -- -294.223 -3.504 -206.657
         },
         GA_BHU_UNVANQUISHED_PH =
         {
-            [17379625] = 17379626, -- 139.642 -2.445 161.557
+            [GetFirstID("GaBhu_Unvanquished") - 1] = GetFirstID("GaBhu_Unvanquished"), -- 139.642 -2.445 161.557
         },
     },
     npc =
     {
-        QM1             = 17379800,
-        TREASURE_CHEST  = 17379842,
-        TREASURE_COFFER = 17379843,
-        AFFLICTOR_BASE  = 17379801,
+        QM1             = GetFirstID("qm1"),
+        TREASURE_CHEST  = GetFirstID("Treasure_Chest"),
+        TREASURE_COFFER = GetFirstID("Treasure_Coffer"),
+        AFFLICTOR_BASE  = GetFirstID("The_Afflictor"),
     },
 }
 

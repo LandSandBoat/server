@@ -39,16 +39,16 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
     },
     mob =
     {
-        BEHEMOTH                = 17297440,
-        KING_BEHEMOTH           = 17297441,
-        TALEKEEPERS_GIFT_OFFSET = 17297446,
-        ANCIENT_WEAPON          = 17297449,
-        LEGENDARY_WEAPON        = 17297450,
+        BEHEMOTH                = GetFirstID("Behemoth"),
+        KING_BEHEMOTH           = GetFirstID("King_Behemoth"),
+        TALEKEEPERS_GIFT_OFFSET = GetFirstID("Picklix_Longindex"),
+        ANCIENT_WEAPON          = GetFirstID("Ancient_Weapon"),
+        LEGENDARY_WEAPON        = GetFirstID("Legendary_Weapon"),
     },
     npc =
     {
-        BEHEMOTH_QM      = 17297459,
-        CERMET_HEADSTONE = 17297493,
+        BEHEMOTH_QM      = GetFirstID("qm2"),
+        CERMET_HEADSTONE = GetFirstID("Cermet_Headstone"),
     },
 }
 

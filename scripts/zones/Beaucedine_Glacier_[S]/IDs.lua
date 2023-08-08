@@ -43,39 +43,39 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
 
         GRANDGOULE_PH =
         {
-            [17334475] = 17334482,
-            [17334476] = 17334482,
-            [17334477] = 17334482,
+            [GetFirstID("GrandGoule") - 7] = GetFirstID("GrandGoule"),
+            [GetFirstID("GrandGoule") - 6] = GetFirstID("GrandGoule"),
+            [GetFirstID("GrandGoule") - 5] = GetFirstID("GrandGoule"),
         },
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17334561, -- Gorehound
-                17334560, -- Gorehound
-                17334559, -- Gorehound
-                17334558, -- Gorehound
-                17334557, -- Gjenganger
-                17334556, -- Gjenganger
-                17334555, -- Gjenganger
-                17334554, -- Gjenganger
+                GetFirstID("Gorehound") + 3,  -- Gorehound
+                GetFirstID("Gorehound") + 2,  -- Gorehound
+                GetFirstID("Gorehound") + 1,  -- Gorehound
+                GetFirstID("Gorehound"),      -- Gorehound
+                GetFirstID("Gjenganger") + 3, -- Gjenganger
+                GetFirstID("Gjenganger") + 2, -- Gjenganger
+                GetFirstID("Gjenganger") + 1, -- Gjenganger
+                GetFirstID("Gjenganger"),     -- Gjenganger
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17334555, -- Erebus
-                17334556, -- Feuerunke
+                GetFirstID("Erebus"),
+                GetFirstID("Feuerunke"),
             },
 
             [xi.keyItem.PURPLE_ABYSSITE] =
             {
-                17334557  -- Lord Ruthven
+                GetFirstID("Lord_Ruthven"),
             },
 
             [xi.keyItem.BLACK_ABYSSITE] =
             {
-                17334558, -- Yilbegan
+                GetFirstID("Yilbegan"),
             },
         }
     },
