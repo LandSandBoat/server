@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setRespawnTime(0, true)
+    mob:setRespawnTime(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -16,7 +16,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Sets to respawn between 90 to 120 minutes
-    mob:setRespawnTime(math.random(5400, 7200), true)
+    mob:setRespawnTime(math.random(5400, 7200))
 end
 
 return entity
