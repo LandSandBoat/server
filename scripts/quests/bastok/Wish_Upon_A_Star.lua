@@ -7,6 +7,8 @@
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
 require('scripts/globals/npc_util')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
