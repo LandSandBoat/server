@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Manji Shurikens
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17303, 99)
+    target:addItem(xi.items.MANJI_SHURIKEN, 99)
 end
 
 return itemObject
