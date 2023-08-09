@@ -7604,6 +7604,80 @@ void CLuaBaseEntity::resetClaimedDeeds()
 }
 
 /************************************************************************
+ *  Function: setUniqueEvent()
+ *  Purpose : Sets and saves unique event tracking value into database
+ *  Example : player:setUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE)
+ ************************************************************************/
+void CLuaBaseEntity::setUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to set Unique Event mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    PChar->m_uniqueEvents[index] |= (1 << setBit);
+
+    const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: delUniqueEvent()
+ *  Purpose : Removes and saves unique event tracking value into database
+ *  Example : player:delUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE)
+ *  NOTE    : This should never be used outside of debugging!
+ ************************************************************************/
+void CLuaBaseEntity::delUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to del from Unique Event mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    PChar->m_uniqueEvents[index] &= ~(1 << setBit);
+
+    const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: hasCompletedUniqueEvent()
+ *  Purpose : Returns true if the player has seen his event before
+ *  Example : if player:hasUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE) then
+ *  NOTE    : This should never be used outside of debugging!
+ ************************************************************************/
+bool CLuaBaseEntity::hasCompletedUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to compare Unique Event mask for Non-PC.");
+        return false;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    return PChar->m_uniqueEvents[index] & (1 << setBit);
+}
+
+/************************************************************************
  *  Function: addAssault()
  *  Purpose : Adds an assault mission to the player's log
  *  Example : player:addAssault(bit.rshift(option,4))
@@ -16974,6 +17048,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("toggleReceivedDeedRewards", CLuaBaseEntity::toggleReceivedDeedRewards);
     SOL_REGISTER("setClaimedDeed", CLuaBaseEntity::setClaimedDeed);
     SOL_REGISTER("resetClaimedDeeds", CLuaBaseEntity::resetClaimedDeeds);
+
+    SOL_REGISTER("setUniqueEvent", CLuaBaseEntity::setUniqueEvent);
+    SOL_REGISTER("delUniqueEvent", CLuaBaseEntity::delUniqueEvent);
+    SOL_REGISTER("hasCompletedUniqueEvent", CLuaBaseEntity::hasCompletedUniqueEvent);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
