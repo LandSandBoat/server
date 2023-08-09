@@ -7657,7 +7657,7 @@ void CLuaBaseEntity::delUniqueEvent(uint16 uniqueEventId)
 }
 
 /************************************************************************
- *  Function: hasUniqueEvent()
+ *  Function: hasCompletedUniqueEvent()
  *  Purpose : Returns true if the player has seen his event before
  *  Example : if player:hasUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE) then
  *  NOTE    : This should never be used outside of debugging!
