@@ -379,6 +379,10 @@ public:
     void   setClaimedDeed(uint16 deedBitNum);
     void   resetClaimedDeeds();
 
+    void setUniqueEvent(uint16 uniqueEventId);
+    void delUniqueEvent(uint16 uniqueEventId);
+    bool hasCompletedUniqueEvent(uint16 uniqueEventId);
+
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
     uint8 getCurrentAssault();                  // Gets the current mission
