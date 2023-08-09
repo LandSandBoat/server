@@ -92,7 +92,7 @@ public:
     bool findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validPoint);
 
     // Like validPosition(), but will also set the given position to the valid position that it finds.
-    void snapToValidPosition(position_t& position, float targetY, bool force = false);
+    void snapToValidPosition(position_t& position);
 
     static inline void outputError(uint32 status)
     {
