@@ -41,12 +41,9 @@ zones[xi.zone.RABAO] =
         LUCKY_ROLL_EXACT              = 10328, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
         LUCKY_ROLL_CLOSE              = 10329, -- And for bringing the total so close to 400, here is your extra prize!
         LUCKY_ROLL_GAMEOVER           = 10330, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
-        RETRIEVE_DIALOG_ID            = 10770, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 11848, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        LUCKY_ROLL_GAMEOVER           = 10324, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
-        LUCKY_ROLL_EXACT              = 10322, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
-        LUCKY_ROLL_CLOSE              = 10323, -- And for bringing the total so close to 400, here is your extra prize!
         GOLDFISH_NPC_DIALOGUE         = 10403, -- Goldfish... Goldfish...something...
+        RETRIEVE_DIALOG_ID            = 10771, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL         = 11849, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

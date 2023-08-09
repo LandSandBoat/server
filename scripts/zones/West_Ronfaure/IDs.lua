@@ -53,13 +53,13 @@ zones[xi.zone.WEST_RONFAURE] =
         GARRISON_BASE                 = 7922,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GOLDFISH_NPC_DIALOGUE         = 7965,  -- Come my childeren... Enter the world of golfdish...
         GOLDFISH_POINT_UPDATE         = 8010,  -- <player> now has <int> years (?) of fortune.
-        PLAYER_OBTAINS_ITEM           = 8058,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8059,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8060,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8061,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8066,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10432, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12433, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM           = 8059,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8060,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8061,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8062,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8067,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10433, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12434, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
