@@ -79,6 +79,7 @@ quest.sections =
                         trade:hasItemQty(xi.items.ROLANBERRY, trade:getItemCount())
                     then
                         local numAwardedVellum = math.min(4, math.floor(trade:getItemCount() / 12))
+
                         trade:confirmItem(xi.items.ROLANBERRY, numAwardedVellum * 12)
                         quest:setLocalVar(player, 'numAwarded', numAwardedVellum)
 
