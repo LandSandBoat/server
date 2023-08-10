@@ -86,7 +86,15 @@ int32 ConquestData::getInfluence(REGION_TYPE region, NATION_TYPE nation) const
 
 uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
 {
-    return regionControls[(uint8)region].current;
+    uint8 regionNum = static_cast<uint8>(region);
+
+    if (regionNum < regionControls.size())
+    {
+        return regionControls[regionNum].current;
+    }
+
+    ShowError(fmt::format("Invalid conquest region passed to function ({})", regionNum));
+    return 0;
 }
 
 uint8 ConquestData::getRegionControlCount(NATION_TYPE nation) const
