@@ -26902,9 +26902,9 @@ INSERT INTO `mob_droplist` VALUES (3292,0,0,1000,11398,@RARE);     -- Argute loa
 -- ZoneID:  187 - Tee Zaksa The Ceaseless
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,1449,@ALWAYS);   -- Tukuku whiteshell (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,3418,@ALWAYS);   -- Fiendish Tome: Chapter 15 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,10932,385);      -- Oneiros torque	(38.5%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,3497,@VCOMMON);  -- Forgotten step	(Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,15031,@COMMON);  -- Pantin dastanas (Common, 15%)	
+INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,10932,385);      -- Oneiros torque    (38.5%)
+INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,3497,@VCOMMON);  -- Forgotten step    (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,15031,@COMMON);  -- Pantin dastanas (Common, 15%)    
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,18266,@RARE);    -- Relic dagger (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,1466,@RARE);     -- Pile of relic iron (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,18272,@RARE);    -- Relic sword (Rare, 5%)
