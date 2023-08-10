@@ -5494,13 +5494,6 @@ namespace charutils
                 break;
         }
         sql->Query(fmtQuery, PChar->jobs.unlocked, PChar->jobs.job[job], PChar->id);
-
-        if (PChar->isNewPlayer() && PChar->jobs.job[job] >= 5)
-        {
-            PChar->menuConfigFlags.flags &= ~NFLAG_NEWPLAYER;
-            PChar->updatemask |= UPDATE_HP;
-            SaveMenuConfigFlags(PChar);
-        }
     }
 
     void SaveCharExp(CCharEntity* PChar, JOBTYPE job)
@@ -5839,7 +5832,8 @@ namespace charutils
 
         sql->Query("UPDATE chars SET playtime = '%u' WHERE charid = '%u' LIMIT 1;", playtime, PChar->id);
 
-        if (PChar->isNewPlayer() && playtime >= 36000)
+        // Removes new player icon if played for more than 240 hours
+        if (PChar->isNewPlayer() && playtime >= 864000)
         {
             PChar->menuConfigFlags.flags &= ~NFLAG_NEWPLAYER;
             PChar->updatemask |= UPDATE_HP;
