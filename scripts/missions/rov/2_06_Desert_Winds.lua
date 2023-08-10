@@ -5,7 +5,6 @@
 -- !addmission 13 54
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

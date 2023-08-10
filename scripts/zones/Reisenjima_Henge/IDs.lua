@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Reisenjima_Henge
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.REISENJIMA_HENGE] =

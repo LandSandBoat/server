@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: South_Gustaberg
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTH_GUSTABERG] =
@@ -32,15 +29,15 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         FIRE_TAKE                     = 7417, -- You take <item> out of the fire.
         FIRE_LONGER                   = 7418, -- It may take a little while more to cook the <item>.
         MEAT_ALREADY_PUT              = 7419, -- The <item> is already in the fire.
-        ITEMS_ITEMS_LA_LA             = 7515, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7521, -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 7535, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7536, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7537, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7538, -- You already possess that temporary item.
-        NO_COMBINATION                = 7543, -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7605, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9904, -- New training regime registered!
+        ITEMS_ITEMS_LA_LA             = 7516, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7522, -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 7536, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7537, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7538, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7539, -- You already possess that temporary item.
+        NO_COMBINATION                = 7544, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7606, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9905, -- New training regime registered!
     },
     mob =
     {

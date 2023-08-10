@@ -2,8 +2,6 @@
 -- func: spawnmob
 -- desc: Spawns a mob.
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
 
 cmdprops =
 {

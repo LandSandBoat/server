@@ -4,7 +4,6 @@
 -- Transports the user out of Zhayolm Remnants
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

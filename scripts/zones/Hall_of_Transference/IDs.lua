@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Hall_of_Transference
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HALL_OF_TRANSFERENCE] =

@@ -11,7 +11,6 @@ require('scripts/globals/npc_util')
 require("scripts/globals/teleports")
 require('scripts/globals/titles')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 local altaieuID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------

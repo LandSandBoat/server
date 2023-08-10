@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Xarcabard_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.XARCABARD_S] =

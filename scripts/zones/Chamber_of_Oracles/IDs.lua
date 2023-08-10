@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Chamber_of_Oracles
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHAMBER_OF_ORACLES] =

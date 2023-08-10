@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Temporary item
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

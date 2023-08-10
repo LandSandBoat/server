@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Heavens_Tower
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HEAVENS_TOWER] =

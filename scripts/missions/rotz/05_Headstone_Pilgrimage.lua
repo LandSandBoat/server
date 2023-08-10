@@ -17,7 +17,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
 local capeTerigganID      = require('scripts/zones/Cape_Teriggan/IDs')

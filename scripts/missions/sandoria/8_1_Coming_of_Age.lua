@@ -12,7 +12,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local quicksandCavesID   = require('scripts/zones/Quicksand_Caves/IDs')
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')

@@ -10,12 +10,11 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     zone:registerTriggerArea(1, -7, -3, 110, 7, -1, 155)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Norg
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORG] =

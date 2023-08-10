@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/pets")
 -----------------------------------
-
 xi = xi or {}
 xi.avatarsFavor = xi.avatarsFavor or {}
 

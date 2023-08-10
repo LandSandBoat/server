@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Cruor
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

@@ -2,7 +2,6 @@
 -- xi.effect.VISITANT
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/zone")
 -----------------------------------
 local effectObject = {}
 

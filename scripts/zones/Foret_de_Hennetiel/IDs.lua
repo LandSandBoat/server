@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Foret_de_Hennetiel
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORET_DE_HENNETIEL] =

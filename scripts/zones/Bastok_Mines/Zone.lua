@@ -6,12 +6,11 @@ require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/chocobo')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)

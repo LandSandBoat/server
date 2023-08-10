@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Empyreal_Paradox
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EMPYREAL_PARADOX] =

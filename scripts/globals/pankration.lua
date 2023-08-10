@@ -4,7 +4,6 @@
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.pankration = xi.pankration or {}
 

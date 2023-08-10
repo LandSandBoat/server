@@ -3,12 +3,34 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
-
 xi = xi or {}
 xi.amk = xi.amk or {}
 xi.amk.helpers = xi.amk.helpers or {}
+
+local validRegions = set{
+    xi.region.RONFAURE,
+    xi.region.ZULKHEIM,
+    xi.region.NORVALLEN,
+    xi.region.GUSTABERG,
+    xi.region.DERFLAND,
+    xi.region.SARUTABARUTA,
+    xi.region.KOLSHUSHU,
+    xi.region.ARAGONEU,
+    xi.region.FAUREGANDI,
+    xi.region.VALDEAUNIA,
+    xi.region.QUFIMISLAND,
+    xi.region.LITELOR,
+    xi.region.KUZOTZ,
+    xi.region.VOLLBOW,
+    xi.region.ELSHIMOLOWLANDS,
+    xi.region.ELSHIMOUPLANDS,
+    xi.region.SANDORIA,
+    xi.region.BASTOK,
+    xi.region.WINDURST,
+    xi.region.JEUNO,
+    xi.region.DYNAMIS,
+}
 
 xi.amk.helpers.helmTrade = function(player, helmType, broke)
     local amkChance = 5
@@ -21,21 +43,21 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
         if
             helmType == xi.helm.type.MINING and
             not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
-            xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
+            validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
         elseif
             helmType == xi.helm.type.LOGGING and
             not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-            xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
+            validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
         elseif
             helmType == xi.helm.type.HARVESTING and
             not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-            xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
+            validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)

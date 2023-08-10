@@ -11,7 +11,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local norgID = require("scripts/zones/Norg/IDs")
 -----------------------------------

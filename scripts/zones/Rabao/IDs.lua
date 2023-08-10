@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RABAO] =
@@ -37,8 +34,8 @@ zones[xi.zone.RABAO] =
         GARUDA_UNLOCKED               = 10125, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
         NOMAD_MOOGLE_DIALOG           = 10196, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
         GENEROIT_SHOP_DIALOG          = 10314, -- Ho there! I am called Generoit. I have everything here for the chocobo enthusiast, and other rare items galore.
-        RETRIEVE_DIALOG_ID            = 10770, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 11848, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RETRIEVE_DIALOG_ID            = 10771, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL         = 11849, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

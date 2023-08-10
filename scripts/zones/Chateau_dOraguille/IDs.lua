@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Chateau_dOraguille
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHATEAU_DORAGUILLE] =

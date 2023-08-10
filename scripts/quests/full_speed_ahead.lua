@@ -2,7 +2,6 @@
 -- Full Speed Ahead! Helper
 -----------------------------------
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Horlais_Peak
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HORLAIS_PEAK] =

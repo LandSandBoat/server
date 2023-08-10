@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Arrapago_Reef/IDs')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

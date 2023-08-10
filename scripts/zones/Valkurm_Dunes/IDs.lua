@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Valkurm_Dunes
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VALKURM_DUNES] =

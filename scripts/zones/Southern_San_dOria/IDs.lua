@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Southern_San_dOria
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTHERN_SAN_DORIA] =

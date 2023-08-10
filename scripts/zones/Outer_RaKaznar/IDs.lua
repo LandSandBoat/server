@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Outer_RaKaznar
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OUTER_RAKAZNAR] =

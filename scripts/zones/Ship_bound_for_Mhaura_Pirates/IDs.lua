@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ship bound for Mhaura Pirates
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =

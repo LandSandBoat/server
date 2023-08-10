@@ -13,7 +13,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local davoiID            = require('scripts/zones/Davoi/IDs')
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')

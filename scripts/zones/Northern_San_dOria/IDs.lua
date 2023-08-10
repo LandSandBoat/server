@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Northern_San_dOria
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTHERN_SAN_DORIA] =
@@ -120,7 +117,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         HERE_TAKE_THIS                = 13085, -- Here, take this...
         IF_YOU_WEAR_THIS              = 13086, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 13087, -- Thank you...
-        EGG_HUNT_OFFSET               = 13116, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
+        EGG_HUNT_OFFSET               = 13122, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         FFR_LOOKS_CURIOUSLY_BASE      = 13411, -- Coullene looks over curiously for a moment.
         FRAGMENT_FAR_TOO_SMALL        = 18119, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18120, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!

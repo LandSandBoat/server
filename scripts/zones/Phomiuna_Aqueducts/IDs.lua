@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PHOMIUNA_AQUEDUCTS] =

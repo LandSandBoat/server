@@ -4,7 +4,6 @@
 -- Transports the user out of Silver Sea Remnants
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

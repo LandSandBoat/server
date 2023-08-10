@@ -1,12 +1,9 @@
 -----------------------------------
--- Area: Walk of Echoes [P1]
+-- Area: Walk of Echoes [P2]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
-zones[xi.zone.WALK_OF_ECHOES_P1] =
+zones[xi.zone.WALK_OF_ECHOES_P2] =
 {
     text =
     {
@@ -23,4 +20,4 @@ zones[xi.zone.WALK_OF_ECHOES_P1] =
     },
 }
 
-return zones[xi.zone.WALK_OF_ECHOES_P1]
+return zones[xi.zone.WALK_OF_ECHOES_P2]

@@ -6,7 +6,6 @@
 -- Nightflowers                  : !pos -264.775 -3.718 28.767 126
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

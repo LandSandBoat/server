@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Silver_Knife
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_KNIFE] =

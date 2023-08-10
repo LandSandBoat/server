@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Ashu_Talif (60)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_ASHU_TALIF] =

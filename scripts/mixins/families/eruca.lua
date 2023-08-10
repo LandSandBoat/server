@@ -18,7 +18,6 @@ xi.mix.eruca.config(mob, {
 require("scripts/globals/mixins")
 require("scripts/globals/magic")
 -----------------------------------
-
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.eruca = xi.mix.eruca or {}

@@ -4,7 +4,6 @@
 -- !pos 412 -9 54 55
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

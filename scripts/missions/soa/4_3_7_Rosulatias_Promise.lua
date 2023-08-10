@@ -8,7 +8,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local leafalliaID = require('scripts/zones/Leafallia/IDs')
 -----------------------------------

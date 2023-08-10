@@ -12,7 +12,6 @@ require('scripts/globals/missions')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Abdhaljs_Isle-Purgonorgo
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABDHALJS_ISLE_PURGONORGO] =

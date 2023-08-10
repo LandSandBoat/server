@@ -35,6 +35,7 @@ deprecated_requires = [
     "scripts/globals/settings",
     "scripts/globals/spell_data",
     "scripts/globals/status",
+    "scripts/globals/zone",
     "scripts/enum",
     "scripts/mixins/claim_shield",
 ]
@@ -54,9 +55,11 @@ disallowed_numeric_parameters = {
     "delSpell"                : [ 0 ],
     "delStatusEffect"         : [ 0 ],
     "delStatusEffectEx"       : [ 0 ],
+    "delUniqueEvent"          : [ 0 ],
     "getEquipID"              : [ 0 ],
     "getEquippedItem"         : [ 0 ],
     "getItemQty"              : [ 0 ],
+    "hasCompletedUniqueEvent" : [ 0 ],
     "hasItem"                 : [ 0 ],
     "hasItemQty"              : [ 0 ],
     "hasSpell"                : [ 0 ],
@@ -68,6 +71,7 @@ disallowed_numeric_parameters = {
     "npcUtil.giveItem"        : [ 1 ],
     "npcUtil.tradeHas"        : [ 1 ],
     "npcUtil.tradeHasExactly" : [ 1 ],
+    "setUniqueEvent"          : [ 0 ],
     "showText"                : [ 0 ],
 }
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Western_Altepa_Desert
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WESTERN_ALTEPA_DESERT] =

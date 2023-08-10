@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/zone")
 -----------------------------------
 
 local content = Battlefield:new({

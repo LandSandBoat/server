@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/King_Ranperres_Tomb/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

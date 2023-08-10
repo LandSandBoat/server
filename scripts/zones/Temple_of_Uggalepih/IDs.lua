@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Temple_of_Uggalepih
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TEMPLE_OF_UGGALEPIH] =

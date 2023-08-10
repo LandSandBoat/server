@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Caedarva_Mire
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CAEDARVA_MIRE] =

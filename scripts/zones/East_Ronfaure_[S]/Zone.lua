@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/East_Ronfaure_[S]/IDs')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

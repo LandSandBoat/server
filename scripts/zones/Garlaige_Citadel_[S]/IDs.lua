@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Garlaige_Citadel_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GARLAIGE_CITADEL_S] =

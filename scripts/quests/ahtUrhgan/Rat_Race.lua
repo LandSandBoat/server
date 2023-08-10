@@ -10,7 +10,6 @@
 -----------------------------------
 require('scripts/globals/quests')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

@@ -2,8 +2,6 @@
 -- Common Requires
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
-
 -----------------------------------
 -- ID Requires
 -----------------------------------

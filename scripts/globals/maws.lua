@@ -5,9 +5,7 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.maws = xi.maws or {}
 

@@ -7,7 +7,6 @@ require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/chocobo')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

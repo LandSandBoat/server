@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Boyahda_Tree
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_BOYAHDA_TREE] =

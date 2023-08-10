@@ -4,7 +4,6 @@
 -- Transports the user to Ilrusi Atoll Staging Point
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

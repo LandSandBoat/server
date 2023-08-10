@@ -9,7 +9,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local westernAdoulinID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------

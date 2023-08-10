@@ -2,7 +2,6 @@
 -- Area: Lebros Cavern
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

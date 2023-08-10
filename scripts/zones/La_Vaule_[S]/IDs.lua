@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: La_Vaule_[S] (85)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LA_VAULE_S] =

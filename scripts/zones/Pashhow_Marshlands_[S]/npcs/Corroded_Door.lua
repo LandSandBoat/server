@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
 require("scripts/globals/instance")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@ require('scripts/globals/missions')
 -----------------------------------
 local hallID = require('scripts/zones/Hall_of_Transference/IDs')
 -----------------------------------
-
 xi = xi or {}
 xi.cop = xi.cop or {}
 xi.cop.helpers = xi.cop.helpers or {}

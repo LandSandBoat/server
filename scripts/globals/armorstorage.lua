@@ -3,7 +3,6 @@
 --  Armor Storage
 --
 -----------------------------------
-
 xi = xi or {}
 xi.armorStorage = xi.armorStorage or {}
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: San_dOria-Jeuno_Airship
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SAN_DORIA_JEUNO_AIRSHIP] =

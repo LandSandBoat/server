@@ -13,7 +13,6 @@ require("scripts/globals/abyssea/sturdypyxis/experience")
 require("scripts/globals/abyssea/sturdypyxis/time")
 require("scripts/globals/abyssea/sturdypyxis/restore")
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

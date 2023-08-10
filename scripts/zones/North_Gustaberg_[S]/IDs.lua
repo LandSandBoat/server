@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: North_Gustaberg_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTH_GUSTABERG_S] =

@@ -7,7 +7,6 @@ local ID = require("scripts/zones/Throne_Room/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
 
 local content = BattlefieldMission:new({

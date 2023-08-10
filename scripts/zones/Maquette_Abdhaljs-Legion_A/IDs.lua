@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Maquette_Abdhaljs-Legion_A
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_A] =
