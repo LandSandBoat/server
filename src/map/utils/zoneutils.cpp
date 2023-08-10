@@ -1212,4 +1212,11 @@ namespace zoneutils
         luautils::AfterZoneIn(PChar);
     }
 
+    void ValidateTriggerAreaVolumes()
+    {
+        for (auto& [_, PZone] : g_PZoneList)
+        {
+            PZone->ValidateTriggerAreaVolumes();
+        }
+    }
 }; // namespace zoneutils

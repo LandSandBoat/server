@@ -56,7 +56,7 @@ xi.promyvion.initZone = function(zone)
 
     -- register teleporter trigger areas
     for k, v in pairs(ID.npc.MEMORY_STREAMS) do
-        zone:registerTriggerArea(k, v[1], v[2], v[3], v[4], v[5], v[6])
+        zone:registerCuboidTriggerArea(k, v[1], v[2], v[3], v[4], v[5], v[6])
     end
 
     -- randomize floor exits

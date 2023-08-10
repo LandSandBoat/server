@@ -8,10 +8,10 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
-    zone:registerTriggerArea(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
-    zone:registerTriggerArea(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
-    zone:registerTriggerArea(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
+    zone:registerCuboidTriggerArea(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
+    zone:registerCuboidTriggerArea(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
+    zone:registerCuboidTriggerArea(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
+    zone:registerCuboidTriggerArea(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
 
     xi.treasure.initZone(zone)
 end

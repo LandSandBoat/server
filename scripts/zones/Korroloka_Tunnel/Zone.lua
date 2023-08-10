@@ -9,9 +9,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Waterfalls (ID, X, Radius, Z)
-    zone:registerTriggerArea(1,  -87, 4, -105, 0, 0, 0) -- Left pool
-    zone:registerTriggerArea(2, -101, 7, -114, 0, 0, 0) -- Center Pool
-    zone:registerTriggerArea(3, -112, 3, -103, 0, 0, 0) -- Right Pool
+    zone:registerCylindricalTriggerArea(1,  -87, -105, 4) -- Left pool
+    zone:registerCylindricalTriggerArea(2, -101, -114, 7) -- Center Pool
+    zone:registerCylindricalTriggerArea(3, -112, -103, 3) -- Right Pool
 
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end

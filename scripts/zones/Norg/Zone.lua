@@ -9,7 +9,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
-    zone:registerTriggerArea(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
+    zone:registerCuboidTriggerArea(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

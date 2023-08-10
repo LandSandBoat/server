@@ -11,7 +11,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     for k, v in pairs(ID.npc.PORTALS) do
-        zone:registerTriggerArea(k, unpack(v["coords"]))
+        zone:registerCuboidTriggerArea(k, unpack(v["coords"]))
     end
 
     xi.treasure.initZone(zone)

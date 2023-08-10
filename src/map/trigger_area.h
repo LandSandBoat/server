@@ -19,22 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _CTRIGGER_AREA_H
-#define _CTRIGGER_AREA_H
+#ifndef _ITRIGGER_AREA_H
+#define _ITRIGGER_AREA_H
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-class CTriggerArea
+class ITriggerArea
 {
 public:
-    CTriggerArea(uint32 triggerAreaID, bool isCircle);
+    ITriggerArea(uint32 _triggerAreaID);
+    virtual ~ITriggerArea() = default;
 
     uint32 GetTriggerAreaID() const;
 
@@ -42,19 +37,63 @@ public:
     int16 AddCount(int16 count);
     int16 DelCount(int16 count);
 
-    void SetULCorner(float x, float y, float z); // The upper left corner
-    void SetLRCorner(float x, float y, float z); // The lower right corner
+    virtual bool IsPointInside(position_t pos) const            = 0;
+    virtual bool IsPointInside(float x, float y, float z) const = 0;
 
-    bool isPointInside(position_t pos) const;
+    // NOTE: This is only used for a sanity check BEFORE runtime, so it doesn't matter
+    //     : that it's a bit janky. If this EVER gets used at runtime it will need to be
+    //     : cleaned up!
+    virtual bool IntersectsOtherTriggerArea(std::unique_ptr<ITriggerArea> const& other) const = 0;
 
 private:
     uint32 m_TriggerAreaID;
     int16  m_Count; // number of characters in the trigger area
-
-    float x1, y1, z1; // The upper left corner
-    float x2, y2, z2; // The lower right corner
-
-    bool circle;
 };
 
-#endif // _CTRIGGER_AREA_H
+class CCuboidTriggerArea : public ITriggerArea
+{
+public:
+    CCuboidTriggerArea(uint32 _triggerAreaID, float _xMin, float _yMin, float _zMin, float _xMax, float _yMax, float _zMax);
+
+    bool IsPointInside(float x, float y, float z) const override;
+    bool IsPointInside(position_t pos) const override;
+    bool IntersectsOtherTriggerArea(std::unique_ptr<ITriggerArea> const& other) const override;
+
+    float xMin;
+    float yMin;
+    float zMin;
+    float xMax;
+    float yMax;
+    float zMax;
+};
+
+class CCylindricalTriggerArea : public ITriggerArea
+{
+public:
+    CCylindricalTriggerArea(uint32 _triggerAreaID, float _xPos, float _zPos, float _radius);
+
+    bool IsPointInside(float x, float y, float z) const override;
+    bool IsPointInside(position_t pos) const override;
+    bool IntersectsOtherTriggerArea(std::unique_ptr<ITriggerArea> const& other) const override;
+
+    float xPos;
+    float zPos;
+    float radius;
+};
+
+class CSphericalTriggerArea : public ITriggerArea
+{
+public:
+    CSphericalTriggerArea(uint32 _triggerAreaID, float _xPos, float _yPos, float _zPos, float _radius);
+
+    bool IsPointInside(float x, float y, float z) const override;
+    bool IsPointInside(position_t pos) const override;
+    bool IntersectsOtherTriggerArea(std::unique_ptr<ITriggerArea> const& other) const override;
+
+    float xPos;
+    float yPos;
+    float zPos;
+    float radius;
+};
+
+#endif // _ITRIGGER_AREA_H

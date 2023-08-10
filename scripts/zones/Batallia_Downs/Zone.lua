@@ -19,7 +19,7 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local z        = npc:getZPos()
     local distance = 7
 
-    zone:registerTriggerArea(zoneID,
+    zone:registerCuboidTriggerArea(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end

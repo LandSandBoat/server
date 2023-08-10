@@ -62,6 +62,7 @@ namespace zoneutils
 
     void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 
+    void ValidateTriggerAreaVolumes();
 }; // namespace zoneutils
 
 #endif

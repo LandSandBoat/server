@@ -8,7 +8,7 @@ require('scripts/globals/quests')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -2, -17, 140, 2, -16, 142)
+    zone:registerCuboidTriggerArea(1, -2, -17, 140, 2, -16, 142)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -23,12 +23,12 @@
 
 #include "trigger_area.h"
 
-CLuaTriggerArea::CLuaTriggerArea(CTriggerArea* PTriggerArea)
+CLuaTriggerArea::CLuaTriggerArea(ITriggerArea* PTriggerArea)
 : m_PLuaTriggerArea(PTriggerArea)
 {
     if (PTriggerArea == nullptr)
     {
-        ShowError("CLuaTriggerArea created with nullptr instead of valid CTriggerArea*!");
+        ShowError("CLuaTriggerArea created with nullptr instead of valid ITriggerArea*!");
     }
 }
 
@@ -80,7 +80,7 @@ int16 CLuaTriggerArea::DelCount(int16 count)
 
 void CLuaTriggerArea::Register()
 {
-    SOL_USERTYPE("CTriggerArea", CLuaTriggerArea);
+    SOL_USERTYPE("ITriggerArea", CLuaTriggerArea);
     SOL_REGISTER("GetTriggerAreaID", CLuaTriggerArea::GetTriggerAreaID);
     SOL_REGISTER("GetCount", CLuaTriggerArea::GetCount);
     SOL_REGISTER("AddCount", CLuaTriggerArea::AddCount);

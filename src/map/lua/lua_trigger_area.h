@@ -25,16 +25,16 @@
 #include "common/cbasetypes.h"
 #include "luautils.h"
 
-class CTriggerArea;
+class ITriggerArea;
 
 class CLuaTriggerArea
 {
-    CTriggerArea* m_PLuaTriggerArea;
+    ITriggerArea* m_PLuaTriggerArea;
 
 public:
-    CLuaTriggerArea(CTriggerArea*);
+    CLuaTriggerArea(ITriggerArea*);
 
-    CTriggerArea* GetTriggerArea() const
+    ITriggerArea* GetTriggerArea() const
     {
         return m_PLuaTriggerArea;
     }

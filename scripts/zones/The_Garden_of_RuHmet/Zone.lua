@@ -8,44 +8,44 @@ require('scripts/globals/missions')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -421, -2, 377,  -417, 0, 381) -- RDC
-    zone:registerTriggerArea(2, -422, -2, -422,  -418, 0, -418) -- +1
-    zone:registerTriggerArea(3, 418, -2, 378,  422, 0, 382) -- +2
+    zone:registerCuboidTriggerArea(1, -421, -2, 377,  -417, 0, 381) -- RDC
+    zone:registerCuboidTriggerArea(2, -422, -2, -422,  -418, 0, -418) -- +1
+    zone:registerCuboidTriggerArea(3, 418, -2, 378,  422, 0, 382) -- +2
 
-    zone:registerTriggerArea(4,  -506, -4, 697,  -500, 4, 703)--hume niv 0  150   vers niv 1
-    zone:registerTriggerArea(5,  -507, -4, -103,  -501, 4, -97)--hume niv 1  158   vers niv 0
-    zone:registerTriggerArea(6,  -339, -4, -103,  -332, 4, -97)--hume niv 1  159   vers niv 2
-    zone:registerTriggerArea(7,  501, -4, 697,  507, 4, 702)--hume niv 2  169   vers niv 1
-    zone:registerTriggerArea(8,  332, -4, 696,  339, 4, 702)--hume niv 2  168   vers niv 3
-    zone:registerTriggerArea(9,  332, -4, -102,  338, 4, -97)--hume niv 3  178   vers niv 2
+    zone:registerCuboidTriggerArea(4,  -506, -4, 697,  -500, 4, 703)--hume niv 0  150   vers niv 1
+    zone:registerCuboidTriggerArea(5,  -507, -4, -103,  -501, 4, -97)--hume niv 1  158   vers niv 0
+    zone:registerCuboidTriggerArea(6,  -339, -4, -103,  -332, 4, -97)--hume niv 1  159   vers niv 2
+    zone:registerCuboidTriggerArea(7,  501, -4, 697,  507, 4, 702)--hume niv 2  169   vers niv 1
+    zone:registerCuboidTriggerArea(8,  332, -4, 696,  339, 4, 702)--hume niv 2  168   vers niv 3
+    zone:registerCuboidTriggerArea(9,  332, -4, -102,  338, 4, -97)--hume niv 3  178   vers niv 2
 
-    zone:registerTriggerArea(10,  -102, -4, 541,  -96, 4, 546)--elvaan niv 0 151 vers niv 1
-    zone:registerTriggerArea(11,  -103, -4, -259,  -96, 4, -252)--elvaan niv 1 160 vers niv 0
-    zone:registerTriggerArea(12,  -103, -4, -427,  -67, 4, -420)--elvaan niv 1 161 vers niv 2
-    zone:registerTriggerArea(13,  736, -4, 372,  742, 4, 379)--elvaan niv 2 171 vers niv 1
-    zone:registerTriggerArea(14,  736, -4, 540,  743, 4, 546)--elvaan niv 2 170 vers niv 3
-    zone:registerTriggerArea(15,  737, -4, -259,  743, 4, -252)--elvaan niv 3 179 vers niv 2
+    zone:registerCuboidTriggerArea(10,  -102, -4, 541,  -96, 4, 546)--elvaan niv 0 151 vers niv 1
+    zone:registerCuboidTriggerArea(11,  -103, -4, -259,  -96, 4, -252)--elvaan niv 1 160 vers niv 0
+    zone:registerCuboidTriggerArea(12,  -103, -4, -427,  -67, 4, -420)--elvaan niv 1 161 vers niv 2
+    zone:registerCuboidTriggerArea(13,  736, -4, 372,  742, 4, 379)--elvaan niv 2 171 vers niv 1
+    zone:registerCuboidTriggerArea(14,  736, -4, 540,  743, 4, 546)--elvaan niv 2 170 vers niv 3
+    zone:registerCuboidTriggerArea(15,  737, -4, -259,  743, 4, -252)--elvaan niv 3 179 vers niv 2
 
-    zone:registerTriggerArea(16,  -178, -4, 97,  -173, 4, 103)--galka niv 0 152 vers niv 1
-    zone:registerTriggerArea(17,  -178, -4, -703,  -173, 4, -697)--galka niv 1 162 vers niv 0
-    zone:registerTriggerArea(18,  -347, -4, -703,  -340, 4, -696)--galka niv 1 163 vers niv 2
-    zone:registerTriggerArea(19,  492, -4, 96,  499, 4, 103)--galka niv 2 173 vers niv 1
-    zone:registerTriggerArea(20,  660, -4, 96,  667, 4, 102)--galka niv 2 172 vers niv 3
-    zone:registerTriggerArea(21,  660, -4, -702,  667, 4, -697)--galka niv 3 180 vers niv 2
+    zone:registerCuboidTriggerArea(16,  -178, -4, 97,  -173, 4, 103)--galka niv 0 152 vers niv 1
+    zone:registerCuboidTriggerArea(17,  -178, -4, -703,  -173, 4, -697)--galka niv 1 162 vers niv 0
+    zone:registerCuboidTriggerArea(18,  -347, -4, -703,  -340, 4, -696)--galka niv 1 163 vers niv 2
+    zone:registerCuboidTriggerArea(19,  492, -4, 96,  499, 4, 103)--galka niv 2 173 vers niv 1
+    zone:registerCuboidTriggerArea(20,  660, -4, 96,  667, 4, 102)--galka niv 2 172 vers niv 3
+    zone:registerCuboidTriggerArea(21,  660, -4, -702,  667, 4, -697)--galka niv 3 180 vers niv 2
 
-    zone:registerTriggerArea(22,  -498, -4, 97,  -492, 4, 102)--taru niv 0 153 vers niv 1
-    zone:registerTriggerArea(23,  -499, -4, -703,  -492, 4, -697)--taru niv 1 164 vers niv 0
-    zone:registerTriggerArea(24,  -667, -4, -703,  -661, 4, -696)--taru niv 1 165 vers niv 2
-    zone:registerTriggerArea(25,  172, -4, 96,  178, 4, 102)--taru niv 2 175 vers niv 1
-    zone:registerTriggerArea(26,  340, -4, 97,  347, 4, 102)--taru niv 2 174 vers niv 3
-    zone:registerTriggerArea(27,  340, -4, -703,  347, 4, -697)--taru niv 3 181 vers niv 2
+    zone:registerCuboidTriggerArea(22,  -498, -4, 97,  -492, 4, 102)--taru niv 0 153 vers niv 1
+    zone:registerCuboidTriggerArea(23,  -499, -4, -703,  -492, 4, -697)--taru niv 1 164 vers niv 0
+    zone:registerCuboidTriggerArea(24,  -667, -4, -703,  -661, 4, -696)--taru niv 1 165 vers niv 2
+    zone:registerCuboidTriggerArea(25,  172, -4, 96,  178, 4, 102)--taru niv 2 175 vers niv 1
+    zone:registerCuboidTriggerArea(26,  340, -4, 97,  347, 4, 102)--taru niv 2 174 vers niv 3
+    zone:registerCuboidTriggerArea(27,  340, -4, -703,  347, 4, -697)--taru niv 3 181 vers niv 2
 
-    zone:registerTriggerArea(28,  -742, -4, 373,  -736, 4, 379)--mithra niv 0 154 vers niv 1
-    zone:registerTriggerArea(29,  -743, -4, -427,  -736, 4, -421)--mithra niv 1 166 vers niv 0
-    zone:registerTriggerArea(30,  -742, -4, -259,  -737, 4, -252)--mithra niv 1 167 vers niv 2
-    zone:registerTriggerArea(31,  97, -4, 541,  102, 4, 547)--mithra niv 2 177 vers niv 1
-    zone:registerTriggerArea(32,  97, -4, 372,  102, 4, 379)--mithra niv 2 176 vers niv 3
-    zone:registerTriggerArea(33,  97, -4, -427, 102, 4, -421)--mithra niv 3 182 vers niv 2
+    zone:registerCuboidTriggerArea(28,  -742, -4, 373,  -736, 4, 379)--mithra niv 0 154 vers niv 1
+    zone:registerCuboidTriggerArea(29,  -743, -4, -427,  -736, 4, -421)--mithra niv 1 166 vers niv 0
+    zone:registerCuboidTriggerArea(30,  -742, -4, -259,  -737, 4, -252)--mithra niv 1 167 vers niv 2
+    zone:registerCuboidTriggerArea(31,  97, -4, 541,  102, 4, 547)--mithra niv 2 177 vers niv 1
+    zone:registerCuboidTriggerArea(32,  97, -4, 372,  102, 4, 379)--mithra niv 2 176 vers niv 3
+    zone:registerCuboidTriggerArea(33,  97, -4, -427, 102, 4, -421)--mithra niv 3 182 vers niv 2
 
     -- Give the Fortitude ??? a random spawn
     local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)

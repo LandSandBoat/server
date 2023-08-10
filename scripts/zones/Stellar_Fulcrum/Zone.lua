@@ -7,8 +7,8 @@ require('scripts/globals/conquest')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -522, -2, -49,  -517, -1, -43) -- To Upper Delkfutt's Tower
-    zone:registerTriggerArea(2, 318, -3, 2,  322, 1, 6) -- Exit BCNM to ?
+    zone:registerCuboidTriggerArea(1, -522, -2, -49,  -517, -1, -43) -- To Upper Delkfutt's Tower
+    zone:registerCuboidTriggerArea(2, 318, -3, 2,  322, 1, 6) -- Exit BCNM to ?
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
