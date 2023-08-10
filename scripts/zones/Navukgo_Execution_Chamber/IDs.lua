@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Navukgo_Execution_Chamber
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =

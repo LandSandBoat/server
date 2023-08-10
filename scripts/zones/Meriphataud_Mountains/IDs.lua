@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Meriphataud_Mountains
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MERIPHATAUD_MOUNTAINS] =

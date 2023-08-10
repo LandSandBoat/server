@@ -17,7 +17,6 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------

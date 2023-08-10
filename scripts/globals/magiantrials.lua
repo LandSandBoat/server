@@ -2,7 +2,6 @@
 -- Magian trials
 -----------------------------------
 require("scripts/globals/magianobjectives")
-require("scripts/globals/zone")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

@@ -8,7 +8,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local oraclesID = require('scripts/zones/Chamber_of_Oracles/IDs')
 -----------------------------------

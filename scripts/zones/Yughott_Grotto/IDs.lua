@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Yughott Grotto (142)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YUGHOTT_GROTTO] =

@@ -2,7 +2,6 @@
 -- func: zone
 -- desc: Teleports a player to the given zone.
 -----------------------------------
-require("scripts/globals/zone")
 
 cmdprops =
 {

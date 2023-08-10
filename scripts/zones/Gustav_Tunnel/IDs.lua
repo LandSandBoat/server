@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Gustav Tunnel (212)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GUSTAV_TUNNEL] =

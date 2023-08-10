@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

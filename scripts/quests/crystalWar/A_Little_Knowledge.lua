@@ -6,7 +6,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local eldiemeSID = require('scripts/zones/The_Eldieme_Necropolis_[S]/IDs')
@@ -75,8 +74,7 @@ quest.sections =
                     if
                         questOption >= 1 and
                         questOption <= 3 and
-                        trade:hasItem(xi.items.ROLANBERRY) and
-                        trade:getItemCount() >= 12 and
+                        trade:getItemQty(xi.items.ROLANBERRY) >= 12 and
                         trade:hasItemQty(xi.items.ROLANBERRY, trade:getItemCount())
                     then
                         local numAwardedVellum = math.min(4, math.floor(trade:getItemCount() / 12))
@@ -91,6 +89,8 @@ quest.sections =
                         elseif questOption == 3 then
                             return quest:progressEvent(11)
                         end
+                    else
+                        return quest:progressEvent(14)
                     end
                 end,
 

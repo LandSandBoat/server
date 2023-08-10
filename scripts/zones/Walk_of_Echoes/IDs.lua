@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Walk_of_Echoes
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WALK_OF_ECHOES] =

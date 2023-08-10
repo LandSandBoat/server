@@ -12,7 +12,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 local toraimaraiID = require("scripts/zones/Toraimarai_Canal/IDs")
 -----------------------------------

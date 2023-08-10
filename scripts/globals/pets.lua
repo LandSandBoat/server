@@ -4,7 +4,6 @@
 --
 -----------------------------------
 require("scripts/globals/nyzul")
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.pet = xi.pet or {}

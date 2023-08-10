@@ -1,4 +1,3 @@
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.quest = xi.quest or {}
@@ -539,7 +538,7 @@ xi.quest.id =
         THE_REAL_GIFT                   = 22, -- +
         THE_RESCUE                      = 23, -- +
         ELDER_MEMORIES                  = 24, -- +
-        TEST_MY_METTLE                  = 25,
+        TEST_MY_METTLE                  = 25, -- + Converted
         INSIDE_THE_BELLY                = 26, -- ±
         TRIAL_BY_LIGHTNING              = 27, -- ±
         TRIAL_SIZE_TRIAL_BY_LIGHTNING   = 28, -- +

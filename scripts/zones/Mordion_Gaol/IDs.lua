@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Mordion_Gaol
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MORDION_GAOL] =

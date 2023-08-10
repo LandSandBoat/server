@@ -6,7 +6,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local ralaID = require('scripts/zones/Rala_Waterways/IDs')
 -----------------------------------

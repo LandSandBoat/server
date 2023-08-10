@@ -3,7 +3,6 @@
 -- Rune of Release
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

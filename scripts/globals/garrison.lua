@@ -9,6 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
+require('scripts/globals/pathfind')
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}

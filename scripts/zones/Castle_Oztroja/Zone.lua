@@ -5,7 +5,6 @@ local oztrojaGlobal = require('scripts/zones/Castle_Oztroja/globals')
 local ID = require('scripts/zones/Castle_Oztroja/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

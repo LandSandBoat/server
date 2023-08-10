@@ -2,7 +2,6 @@
 -- Zone: Kazham-Jeuno_Airship
 -----------------------------------
 local ID = require('scripts/zones/Kazham-Jeuno_Airship/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

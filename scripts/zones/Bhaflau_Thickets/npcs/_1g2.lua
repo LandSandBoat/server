@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

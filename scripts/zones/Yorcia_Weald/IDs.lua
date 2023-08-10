@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Yorcia_Weald
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YORCIA_WEALD] =

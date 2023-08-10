@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Labyrinth of Onzozo (213)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LABYRINTH_OF_ONZOZO] =

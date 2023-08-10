@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Sauromugue_Champaign_[S]/IDs')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

@@ -349,7 +349,8 @@ public:
     void   setRankPoints(uint16 rankpoints); // Set Current Rank points
 
     void  addQuest(uint8 questLogID, uint16 questID);          // Add Quest to Entity Quest Log
-    void  delQuest(uint8 questLogID, uint16 questID);          // Remove quest from quest log (should be used for debugging only)
+    void  delCurrentQuest(uint8 questLogID, uint16 questID);   // Removes active(current) quest from log
+    void  delQuest(uint8 questLogID, uint16 questID);          // Removes all references of quest from log (active + completed)
     uint8 getQuestStatus(uint8 questLogID, uint16 questID);    // Get Quest Status
     bool  hasCompletedQuest(uint8 questLogID, uint16 questID); // Checks if quest has been completed
     void  completeQuest(uint8 questLogID, uint16 questID);     // Set a quest status to complete
@@ -377,6 +378,10 @@ public:
     void   toggleReceivedDeedRewards();
     void   setClaimedDeed(uint16 deedBitNum);
     void   resetClaimedDeeds();
+
+    void setUniqueEvent(uint16 uniqueEventId);
+    void delUniqueEvent(uint16 uniqueEventId);
+    bool hasCompletedUniqueEvent(uint16 uniqueEventId);
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log

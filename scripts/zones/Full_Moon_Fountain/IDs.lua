@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Full_Moon_Fountain
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FULL_MOON_FOUNTAIN] =

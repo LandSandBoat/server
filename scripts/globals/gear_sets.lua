@@ -2,7 +2,6 @@
 -- Gear sets
 -- Allows the use of gear sets with modifiers
 -----------------------------------
-
 xi = xi or {}
 xi.gear_sets = xi.gear_sets or {}
 

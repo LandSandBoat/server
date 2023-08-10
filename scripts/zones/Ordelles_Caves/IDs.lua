@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ordelles Caves (193)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ORDELLES_CAVES] =

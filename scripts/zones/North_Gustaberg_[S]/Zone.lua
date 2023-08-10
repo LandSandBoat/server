@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/North_Gustaberg_[S]/IDs')
 require('scripts/globals/quests')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

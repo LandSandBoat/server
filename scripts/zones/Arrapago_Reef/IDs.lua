@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Arrapago_Reef
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ARRAPAGO_REEF] =

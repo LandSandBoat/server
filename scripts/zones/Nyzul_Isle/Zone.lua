@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Nyzul_Isle
 -----------------------------------
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

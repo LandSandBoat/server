@@ -10,7 +10,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

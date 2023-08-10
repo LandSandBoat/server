@@ -5,7 +5,6 @@
 -- Brutus : !pos -55 8 95 244
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')

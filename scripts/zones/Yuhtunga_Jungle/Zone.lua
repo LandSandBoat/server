@@ -6,7 +6,6 @@ require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 require('scripts/globals/beastmentreasure')
 require('scripts/missions/amk/helpers')
 -----------------------------------

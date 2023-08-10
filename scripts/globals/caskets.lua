@@ -19,7 +19,6 @@ require("scripts/globals/roe")
 -- 1932 -- Black with Red chest
 -- 2425 -- Black with Red chest 2
 -----------------------------------
-
 xi = xi or {}
 xi.caskets = xi.caskets or {}
 

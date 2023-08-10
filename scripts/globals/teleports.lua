@@ -2,7 +2,6 @@
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.teleport = xi.teleport or {}

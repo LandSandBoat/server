@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Aht_Urhgan_Whitegate/IDs')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

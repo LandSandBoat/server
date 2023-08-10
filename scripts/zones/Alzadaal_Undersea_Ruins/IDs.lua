@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Alzadaal_Undersea_Ruins
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =

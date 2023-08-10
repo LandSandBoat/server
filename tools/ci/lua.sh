@@ -107,8 +107,6 @@ global_objects=(
     error
     onTrigger
 
-    SetExplorerMoogles
-
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade

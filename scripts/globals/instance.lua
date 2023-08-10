@@ -35,7 +35,6 @@
 -- - DYNAMIS_JEUNO_D                 = 297,
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.instance = {}

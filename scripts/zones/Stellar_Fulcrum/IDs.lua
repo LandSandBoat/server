@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Stellar_Fulcrum
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.STELLAR_FULCRUM] =

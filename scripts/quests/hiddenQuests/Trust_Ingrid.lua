@@ -2,7 +2,6 @@
 -- Trust: Ingrid
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
 local easternAdoulinID = require('scripts/zones/Eastern_Adoulin/IDs')

@@ -9,7 +9,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)

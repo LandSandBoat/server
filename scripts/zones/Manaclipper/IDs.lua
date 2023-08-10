@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Manaclipper
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MANACLIPPER] =

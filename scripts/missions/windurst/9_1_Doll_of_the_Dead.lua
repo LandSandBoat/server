@@ -13,7 +13,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 local boyahdaTreeID   = require("scripts/zones/The_Boyahda_Tree/IDs")
 local windurstWoodsID = require("scripts/zones/Windurst_Woods/IDs")

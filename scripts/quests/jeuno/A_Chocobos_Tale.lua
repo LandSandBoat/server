@@ -9,7 +9,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local batalliaID = require('scripts/zones/Batallia_Downs/IDs')

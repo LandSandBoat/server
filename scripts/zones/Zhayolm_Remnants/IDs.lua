@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Zhayolm_Remnants
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ZHAYOLM_REMNANTS] =

@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local flamesID  = require("scripts/zones/Cloister_of_Flames/IDs")
 local frostID   = require("scripts/zones/Cloister_of_Frost/IDs")

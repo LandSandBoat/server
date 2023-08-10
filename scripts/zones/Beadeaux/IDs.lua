@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Beadeaux
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEADEAUX] =

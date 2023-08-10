@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Windurst_Walls/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Uleguerand_Range
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ULEGUERAND_RANGE] =

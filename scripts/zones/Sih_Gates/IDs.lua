@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Sih_Gates
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SIH_GATES] =

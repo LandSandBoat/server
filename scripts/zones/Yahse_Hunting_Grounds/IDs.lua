@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Yahse_Hunting_Grounds
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YAHSE_HUNTING_GROUNDS] =

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: King Ranperres Tomb (190)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KING_RANPERRES_TOMB] =

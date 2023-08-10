@@ -3,7 +3,6 @@
 -- https://ffxiclopedia.fandom.com/wiki/Beastmen_Treasure
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
 xi.beastmentreasure = xi.beastmentreasure or {}

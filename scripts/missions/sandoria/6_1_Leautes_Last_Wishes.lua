@@ -14,7 +14,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local westernAltepaID = require('scripts/zones/Western_Altepa_Desert/IDs')
 -----------------------------------
