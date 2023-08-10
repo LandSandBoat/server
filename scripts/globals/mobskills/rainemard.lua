@@ -6,8 +6,6 @@ require("scripts/globals/magic")
 require("scripts/globals/trust")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
-require("scripts/globals/zone")
-
 -----------------------------------
 local spell_object = {}
 
