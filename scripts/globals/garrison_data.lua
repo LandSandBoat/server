@@ -1,8 +1,6 @@
 -----------------------------------
 -- Garrison Data
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
