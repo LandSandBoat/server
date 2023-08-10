@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Throne_Room_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THRONE_ROOM_S] =

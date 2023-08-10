@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: GM_Home
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GM_HOME] =

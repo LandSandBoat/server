@@ -6749,7 +6749,6 @@ void CLuaBaseEntity::setRankPoints(uint16 rankPoints)
  *  Function: addQuest()
  *  Purpose : Adds a new quest to the character's in-progress quest log
  *  Example : player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
- *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
@@ -6764,10 +6763,9 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
-        uint8 current  = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
-        uint8 complete = PChar->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
+        uint8 current = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
 
-        if ((current == 0) && (complete == 0))
+        if (current == 0)
         {
             PChar->m_questLog[questLogID].current[questID / 8] |= (1 << (questID % 8));
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_CURRENT));
@@ -6782,8 +6780,44 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 }
 
 /************************************************************************
+ *  Function: delCurrentQuest()
+ *  Purpose : Deletes an accepted quest for the player, but does not remove Completed state
+ *  Notes   : This duplicates delQuest with the above exception
+ ************************************************************************/
+
+void CLuaBaseEntity::delCurrentQuest(uint8 questLogID, uint16 questID)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
+    {
+        uint8 current = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
+
+        if (current != 0)
+        {
+            PChar->m_questLog[questLogID].current[questID / 8] &= ~(1 << (questID % 8));
+
+            PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_CURRENT));
+            PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_COMPLETE));
+
+            charutils::SaveQuestsList(PChar);
+        }
+    }
+    else
+    {
+        ShowError("Lua::delCurrentQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
+    }
+}
+
+/************************************************************************
  *  Function: delQuest()
- *  Purpose : Deletes a quest from a character's quest log
+ *  Purpose : Deletes all records of a quest from a character's quest log
  *  Example : player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
  *  Notes   : Doesn't delete any player variables associated with quest
  ************************************************************************/
@@ -7567,6 +7601,80 @@ void CLuaBaseEntity::resetClaimedDeeds()
 
     sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
     sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: setUniqueEvent()
+ *  Purpose : Sets and saves unique event tracking value into database
+ *  Example : player:setUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE)
+ ************************************************************************/
+void CLuaBaseEntity::setUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to set Unique Event mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    PChar->m_uniqueEvents[index] |= (1 << setBit);
+
+    const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: delUniqueEvent()
+ *  Purpose : Removes and saves unique event tracking value into database
+ *  Example : player:delUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE)
+ *  NOTE    : This should never be used outside of debugging!
+ ************************************************************************/
+void CLuaBaseEntity::delUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to del from Unique Event mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    PChar->m_uniqueEvents[index] &= ~(1 << setBit);
+
+    const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: hasCompletedUniqueEvent()
+ *  Purpose : Returns true if the player has seen his event before
+ *  Example : if player:hasUniqueEvent(xi.uniqueEvent.TUCKER_INTRO_DIALOGUE) then
+ *  NOTE    : This should never be used outside of debugging!
+ ************************************************************************/
+bool CLuaBaseEntity::hasCompletedUniqueEvent(uint16 uniqueEventId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to compare Unique Event mask for Non-PC.");
+        return false;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = uniqueEventId / 32;
+    uint8 setBit = uniqueEventId % 32;
+
+    return PChar->m_uniqueEvents[index] & (1 << setBit);
 }
 
 /************************************************************************
@@ -16913,6 +17021,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setRankPoints", CLuaBaseEntity::setRankPoints);
 
     SOL_REGISTER("addQuest", CLuaBaseEntity::addQuest);
+    SOL_REGISTER("delCurrentQuest", CLuaBaseEntity::delCurrentQuest);
     SOL_REGISTER("delQuest", CLuaBaseEntity::delQuest);
     SOL_REGISTER("getQuestStatus", CLuaBaseEntity::getQuestStatus);
     SOL_REGISTER("hasCompletedQuest", CLuaBaseEntity::hasCompletedQuest);
@@ -16939,6 +17048,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("toggleReceivedDeedRewards", CLuaBaseEntity::toggleReceivedDeedRewards);
     SOL_REGISTER("setClaimedDeed", CLuaBaseEntity::setClaimedDeed);
     SOL_REGISTER("resetClaimedDeeds", CLuaBaseEntity::resetClaimedDeeds);
+
+    SOL_REGISTER("setUniqueEvent", CLuaBaseEntity::setUniqueEvent);
+    SOL_REGISTER("delUniqueEvent", CLuaBaseEntity::delUniqueEvent);
+    SOL_REGISTER("hasCompletedUniqueEvent", CLuaBaseEntity::hasCompletedUniqueEvent);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);

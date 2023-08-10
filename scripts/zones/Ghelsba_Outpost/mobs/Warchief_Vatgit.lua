@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

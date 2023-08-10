@@ -35,7 +35,6 @@
 -- - DYNAMIS_JEUNO_D                 = 297,
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.instance = {}
@@ -161,7 +160,7 @@ xi.instance.lookup =
         { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
         -- Waking the Colossus / Divine Interference
         -- Forging a New Myth
-        { 7704, { 405, 51, -4, 0, 75, 5, 1 }, { 116, 2 }, { 405, 4 } }, -- TODO: Nyzul Isle Investigation
+        { 7704, { 405, 51,  -4, 0, 75, 5, 1 }, { 116, 2 }, { 411, 5 } }, -- Nyzul Isle Investigation
     },
 
     [xi.zone.EVERBLOOM_HOLLOW] =
@@ -333,8 +332,9 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     -- TODO: Handle being valid for multiple instances from the same entrance
     local chosenEntry
     for _, entry in ipairs(zoneLookup) do
-        local instanceId = entry[1]
+        local instanceId    = entry[1]
         local hasValidEntry = checkRegistryReqs(player, instanceId)
+
         if hasValidEntry then
             chosenEntry = entry
             break
@@ -346,12 +346,14 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     end
 
     -- Play the cs + args for that instance
-    local instanceId = chosenEntry[1]
+    local instanceId          = chosenEntry[1]
     local instanceTriggerArgs = chosenEntry[2]
-    local hasValidEntry = checkRegistryReqs(player, instanceId)
+    local hasValidEntry       = checkRegistryReqs(player, instanceId)
+
     if hasValidEntry then
         player:setLocalVar("INSTANCE_ID", instanceId)
         player:startEvent(unpack(instanceTriggerArgs))
+
         return true
     else
         return false
@@ -360,8 +362,8 @@ end
 
 xi.instance.onEventUpdate = function(player, csid, option, npc)
     local instanceId = player:getLocalVar("INSTANCE_ID")
-    local party = player:getParty()
-    local ID = zones[player:getZoneID()]
+    local party      = player:getParty()
+    local ID         = zones[player:getZoneID()]
 
     if party ~= nil then
         for _, v in pairs(party) do
@@ -370,6 +372,7 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
                 if not checkEntryReqs(v, instanceId) then
                     player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(npc, 1)
+
                     return false
                 end
 
@@ -377,6 +380,7 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
                 if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
                     player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
                     player:instanceEntry(npc, 1)
+
                     return false
                 end
             end
@@ -402,6 +406,7 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
         local entryInstanceId = entry[1]
         if instanceId == entryInstanceId then
             lookupEntry = entry
+
             break
         end
     end
@@ -433,10 +438,12 @@ end
 
 xi.instance.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
+
     if instance then
-        local instanceZoneId = instance:getZone():getID()
-        local zoneLookup = xi.instance.lookup[instanceZoneId]
+        local instanceZoneId         = instance:getZone():getID()
+        local zoneLookup             = xi.instance.lookup[instanceZoneId]
         local csidEntry, optionEntry = unpack(zoneLookup[1][3])
+
         if csid == csidEntry and option == optionEntry then
             for _, v in ipairs(player:getParty()) do
                 v:setPos(0, 0, 0, 0, instance:getZone():getID())
@@ -450,7 +457,7 @@ xi.instance.onEventFinish = function(player, csid, option, npc)
 end
 
 local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
-    local message = 0
+    local message        = 0
     local lastTimeUpdate = instance:getLastTimeUpdate()
 
     if lastTimeUpdate == 0 and remainingTimeLimit < 600 then
@@ -479,23 +486,23 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
 end
 
 xi.instance.updateInstanceTime = function(instance, elapsed, text)
-    local players = instance:getChars()
-    local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
-    local wipeTime = instance:getWipeTime()
+    local players            = instance:getChars()
+    local remainingTimeLimit = instance:getTimeLimit() * 60 - (elapsed / 1000)
+    local wipeTime           = instance:getWipeTime()
 
     if
         remainingTimeLimit < 0 or
-        (
-            wipeTime ~= 0 and
-            (elapsed - wipeTime) / 1000 > 180
+        (wipeTime ~= 0 and (elapsed - wipeTime) / 1000 > 180
         )
     then
         instance:fail()
+
         return
     end
 
     if wipeTime == 0 then
         local wipe = true
+
         for i, player in pairs(players) do
             if player:getHP() ~= 0 then
                 wipe = false

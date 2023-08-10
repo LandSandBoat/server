@@ -5,9 +5,7 @@
 -- TODO: add Rune Kris, Rune Algol, Rune Scythe
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
-
 xi = xi or {}
 
 -----------------------------------

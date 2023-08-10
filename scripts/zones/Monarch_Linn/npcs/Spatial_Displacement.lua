@@ -7,7 +7,6 @@ local ID = require("scripts/zones/Monarch_Linn/IDs")
 require("scripts/globals/bcnm")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

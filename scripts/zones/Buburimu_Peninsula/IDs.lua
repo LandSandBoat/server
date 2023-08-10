@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Buburimu_Peninsula
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BUBURIMU_PENINSULA] =

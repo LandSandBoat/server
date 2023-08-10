@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Eldieme_Necropolis_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =

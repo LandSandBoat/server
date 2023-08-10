@@ -8,7 +8,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local hallID = require('scripts/zones/Hall_of_the_Gods/IDs')
 -----------------------------------

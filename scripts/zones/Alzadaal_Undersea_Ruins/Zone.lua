@@ -2,7 +2,6 @@
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
 local ID = require('scripts/zones/Alzadaal_Undersea_Ruins/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

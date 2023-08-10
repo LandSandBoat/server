@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Kuftal_Tunnel
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KUFTAL_TUNNEL] =

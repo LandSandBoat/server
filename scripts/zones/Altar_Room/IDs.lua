@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Altar_Room
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALTAR_ROOM] =

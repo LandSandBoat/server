@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SELBINA] =
@@ -23,6 +20,7 @@ zones[xi.zone.SELBINA] =
         FISHING_MESSAGE_OFFSET        = 6565, -- You can't fish here.
         NOMAD_MOOGLE_DIALOG           = 6665, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
         SUBJOB_UNLOCKED               = 6868, -- You can now designate a support job.
+        DONT_HAVE_ENOUGH_GIL          = 6891, -- You don't have enough gil.
         FERRY_ARRIVING                = 7017, -- Attention, passengers! The ship to Mhaura is here and ready to board!
         FERRY_DEPARTING               = 7019, -- All aboard!
         HERMINIA_SHOP_DIALOG          = 7042, -- Hello there. What can I do for you?

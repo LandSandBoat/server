@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Manaclipper/IDs')
 require('scripts/globals/manaclipper')
 require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

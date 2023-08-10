@@ -6,7 +6,6 @@ require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/treasure')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

@@ -2,7 +2,6 @@
 -- Zone: Ship_bound_for_Mhaura_Pirates (228)
 -----------------------------------
 local ID = require('scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

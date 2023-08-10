@@ -6,7 +6,6 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}

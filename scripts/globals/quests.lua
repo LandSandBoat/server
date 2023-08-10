@@ -1,4 +1,3 @@
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.quest = xi.quest or {}
@@ -240,7 +239,7 @@ xi.quest.id =
         A_DISCERNING_EYE                = 71,
         TRIAL_SIZE_TRIAL_BY_EARTH       = 72, -- + Converted
         FADED_PROMISES                  = 73, -- ± Converted
-        BRYGID_THE_STYLIST_RETURNS      = 74, -- ±
+        BRYGID_THE_STYLIST_RETURNS      = 74, -- ± Converted
         OUT_OF_THE_DEPTHS               = 75,
         ALL_BY_MYSELF                   = 76,
         A_QUESTION_OF_FAITH             = 77,
@@ -323,7 +322,7 @@ xi.quest.id =
         THE_AMAZIN_SCORPIO              = 61, -- +
         TWINSTONE_BONDING               = 62, -- +
         CURSES_FOILED_A_GOLEM           = 63, -- + Converted
-        ACTING_IN_GOOD_FAITH            = 64, -- ±
+        ACTING_IN_GOOD_FAITH            = 64, -- ± Converted
         FLOWER_CHILD                    = 65, -- ± Converted
         THE_THREE_MAGI                  = 66, -- ±
         RECOLLECTIONS                   = 67, -- ±
@@ -539,7 +538,7 @@ xi.quest.id =
         THE_REAL_GIFT                   = 22, -- +
         THE_RESCUE                      = 23, -- +
         ELDER_MEMORIES                  = 24, -- +
-        TEST_MY_METTLE                  = 25,
+        TEST_MY_METTLE                  = 25, -- + Converted
         INSIDE_THE_BELLY                = 26, -- ±
         TRIAL_BY_LIGHTNING              = 27, -- ±
         TRIAL_SIZE_TRIAL_BY_LIGHTNING   = 28, -- +

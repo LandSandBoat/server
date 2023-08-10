@@ -3,7 +3,6 @@
 -- Description: Restores HP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/zone")
 -----------------------------------
 local mobskillObject = {}
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Lufaise_Meadows
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LUFAISE_MEADOWS] =

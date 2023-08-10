@@ -14,7 +14,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------

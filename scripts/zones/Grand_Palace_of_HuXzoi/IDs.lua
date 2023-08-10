@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Grand_Palace_of_HuXzoi
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =

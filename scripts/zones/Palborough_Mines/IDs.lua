@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Palborough Mines (143)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PALBOROUGH_MINES] =

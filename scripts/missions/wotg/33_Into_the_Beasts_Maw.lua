@@ -8,7 +8,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local pastBaileysID   = require('scripts/zones/Castle_Zvahl_Baileys_[S]/IDs')
 local pastXarcabardID = require('scripts/zones/Xarcabard_[S]/IDs')

@@ -5,7 +5,6 @@ local ID = require('scripts/zones/Zeruhn_Mines/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/quests')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

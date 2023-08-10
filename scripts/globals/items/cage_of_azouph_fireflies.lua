@@ -4,7 +4,6 @@
 -- Transports the user to Azouph Isle
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 

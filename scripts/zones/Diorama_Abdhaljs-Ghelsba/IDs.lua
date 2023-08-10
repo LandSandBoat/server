@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Diorama_Abdhaljs-Ghelsba
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DIORAMA_ABDHALJS_GHELSBA] =

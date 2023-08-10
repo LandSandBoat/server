@@ -4,9 +4,6 @@
 -- this is because some zones have high mobs and low mobs,
 -- and the drops are level dependant.
 -----------------------------------
-
-require("scripts/globals/zone")
-
 local mazeMongersLootPool = {
 	-- Weapons
 	17964, -- Barkborer

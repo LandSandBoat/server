@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Bhaflau_Thickets/IDs')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

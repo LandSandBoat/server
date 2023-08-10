@@ -1,7 +1,6 @@
 ------------------------------
 -- SOA Geomantic Reservoirs
 ------------------------------
-require("scripts/globals/zone")
 ------------------------------
 
 xi = xi or {}

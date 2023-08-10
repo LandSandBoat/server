@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Kazham/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

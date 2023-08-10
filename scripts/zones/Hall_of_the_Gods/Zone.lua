@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Hall_of_the_Gods/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

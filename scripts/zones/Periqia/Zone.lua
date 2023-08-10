@@ -2,7 +2,6 @@
 -- Zone: Periqia
 -----------------------------------
 local ID = require('scripts/zones/Periqia/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

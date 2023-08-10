@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Cape_Teriggan
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CAPE_TERIGGAN] =

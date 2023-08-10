@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ranguemont Pass (166)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RANGUEMONT_PASS] =

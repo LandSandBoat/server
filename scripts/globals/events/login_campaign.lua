@@ -5,7 +5,6 @@
 require("scripts/globals/npc_util")
 local prizes = require("scripts/globals/events/login_campaign_data")
 ------------------------------------
-
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.loginCampaign = xi.events.loginCampaign or {}

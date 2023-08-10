@@ -3,7 +3,6 @@
 -- https://www.bg-wiki.com/ffxi/Waypoint
 -----------------------------------
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
 xi.waypoint = xi.waypoint or {}

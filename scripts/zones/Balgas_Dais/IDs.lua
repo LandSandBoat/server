@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Balgas_Dais
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BALGAS_DAIS] =

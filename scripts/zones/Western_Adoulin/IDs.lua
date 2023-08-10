@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin (256)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WESTERN_ADOULIN] =

@@ -2,7 +2,6 @@
 -- Area: Mog Dinghy
 -- !zone 280
 -----------------------------------
-require("scripts/globals/zone")
 local ID = require("scripts/zones/Mog_Garden/IDs")
 -----------------------------------
 local entity = {}

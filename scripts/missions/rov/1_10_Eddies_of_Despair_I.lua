@@ -8,7 +8,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/teleports')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.EDDIES_OF_DESPAIR_I)

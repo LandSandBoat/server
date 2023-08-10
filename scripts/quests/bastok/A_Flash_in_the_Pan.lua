@@ -5,7 +5,6 @@
 -- Aquillina : !pos -97 -5 -81 235
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]

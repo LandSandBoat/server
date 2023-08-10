@@ -7,7 +7,6 @@ require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 require('scripts/globals/beastmentreasure')
 require('scripts/missions/amk/helpers')
 -----------------------------------

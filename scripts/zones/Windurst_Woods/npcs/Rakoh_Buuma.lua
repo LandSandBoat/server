@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

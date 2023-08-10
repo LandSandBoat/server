@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: RuLude_Gardens
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RULUDE_GARDENS] =

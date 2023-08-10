@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Monastic Cavern (150)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MONASTIC_CAVERN] =

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Mamook
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAMOOK] =

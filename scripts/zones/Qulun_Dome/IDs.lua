@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Qulun_Dome
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QULUN_DOME] =

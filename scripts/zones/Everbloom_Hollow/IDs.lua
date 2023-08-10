@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Everbloom_Hollow
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EVERBLOOM_HOLLOW] =

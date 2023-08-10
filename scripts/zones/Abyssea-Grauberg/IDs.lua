@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Grauberg
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_GRAUBERG] =

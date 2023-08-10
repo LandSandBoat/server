@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local walkOfEchoesID = require('scripts/zones/Walk_of_Echoes/IDs')

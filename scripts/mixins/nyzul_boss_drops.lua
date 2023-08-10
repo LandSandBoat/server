@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/mixins")
 -----------------------------------
-
 xi = xi or {}
 xi.mix = xi.mix or {}
 g_mixins = g_mixins or {}

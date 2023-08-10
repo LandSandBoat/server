@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: RaKaznar_Turris
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RAKAZNAR_TURRIS] =

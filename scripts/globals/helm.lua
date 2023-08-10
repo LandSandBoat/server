@@ -9,11 +9,9 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
-require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
 -----------------------------------
-
 xi = xi or {}
 xi.helm = xi.helm or {}
 

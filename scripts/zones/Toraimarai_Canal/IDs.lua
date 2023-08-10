@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Toraimarai Canal (169)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TORAIMARAI_CANAL] =

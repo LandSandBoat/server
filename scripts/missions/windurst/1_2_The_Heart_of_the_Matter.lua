@@ -14,7 +14,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local eastSarutabarutaID = require("scripts/zones/East_Sarutabaruta/IDs")
 local outerHorutotoRuinsID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")

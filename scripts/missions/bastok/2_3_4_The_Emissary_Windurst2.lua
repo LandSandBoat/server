@@ -9,7 +9,6 @@
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local portWindurstID = require('scripts/zones/Port_Windurst/IDs')
 -----------------------------------

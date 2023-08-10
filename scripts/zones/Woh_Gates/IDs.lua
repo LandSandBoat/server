@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Woh_Gates
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WOH_GATES] =

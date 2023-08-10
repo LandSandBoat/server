@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: The_Shrouded_Maw
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_SHROUDED_MAW] =

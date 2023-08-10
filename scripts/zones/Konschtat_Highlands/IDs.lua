@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Konschtat_Highlands
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KONSCHTAT_HIGHLANDS] =

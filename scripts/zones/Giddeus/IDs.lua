@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Giddeus
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GIDDEUS] =

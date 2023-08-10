@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Dangruf Wadi (191)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DANGRUF_WADI] =

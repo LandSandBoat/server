@@ -9,7 +9,6 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local palboroughMinesID = require('scripts/zones/Palborough_Mines/IDs')

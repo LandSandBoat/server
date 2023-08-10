@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Rala_Waterways (258)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RALA_WATERWAYS] =

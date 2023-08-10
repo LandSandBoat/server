@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 

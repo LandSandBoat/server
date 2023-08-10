@@ -15,7 +15,6 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------

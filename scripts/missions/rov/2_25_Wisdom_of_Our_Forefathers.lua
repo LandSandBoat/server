@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

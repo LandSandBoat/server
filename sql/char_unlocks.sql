@@ -19,5 +19,6 @@ CREATE TABLE `char_unlocks` (
   `waypoints` blob DEFAULT NULL,
   `eschan_portals` blob DEFAULT NULL,
   `claimed_deeds` blob DEFAULT NULL,
+  `unique_event` blob DEFAULT NULL,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

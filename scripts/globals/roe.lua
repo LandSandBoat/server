@@ -4,7 +4,6 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
-
 xi = xi or {}
 xi.roe = xi.roe or {}
 

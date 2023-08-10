@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine_Glacier
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEAUCEDINE_GLACIER] =
