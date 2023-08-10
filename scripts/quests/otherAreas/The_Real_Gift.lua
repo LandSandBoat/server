@@ -5,7 +5,6 @@
 -- Oswald  : !pos 47.119 -15.273 7.989 248
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

@@ -12,7 +12,6 @@ require("scripts/globals/magic")
 require("scripts/globals/hunts")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
-require("scripts/globals/zone")
 ------------------------------
 local entity = {}
 

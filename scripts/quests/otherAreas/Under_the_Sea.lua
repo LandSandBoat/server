@@ -8,7 +8,6 @@
 -- Zaldon  : !pos -11.810 -7.287 -6.742
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

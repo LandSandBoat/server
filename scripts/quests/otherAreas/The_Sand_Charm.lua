@@ -7,7 +7,6 @@
 -- Celestina : !pos -37.624 -16.050 75.681 249
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
