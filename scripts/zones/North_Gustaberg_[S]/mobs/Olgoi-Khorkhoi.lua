@@ -7,7 +7,6 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setRespawnTime(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
