@@ -88,7 +88,9 @@ quest.sections =
             {
                 [475] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveCurrency(player, 'gil', 500)
+                    -- player:addGil over npcUtil:giveCurrency to avoid duplicate
+                    -- 'Obtained X gil' messages.
+                    player:addGil(500)
                 end,
 
                 [477] = function(player, csid, option, npc)
