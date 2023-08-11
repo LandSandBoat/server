@@ -77,6 +77,7 @@ INSERT INTO `item_mods_pet` VALUES (10915,27,-3,0); -- All Pets - ENMITY: -3
 
 -- Oneiros Cappa
 INSERT INTO `item_mods_pet` VALUES (10972,161,-300,0); -- All Pets - DMGPHYS: -300
+INSERT INTO `item_mods_pet` VALUES (10972,164,-300,0); -- All Pets - DMGRANGE: -300
 
 -- Esper Earring
 INSERT INTO `item_mods_pet` VALUES (11052,126,3,1); -- Avatar - BP_DAMAGE: 3
@@ -324,6 +325,7 @@ INSERT INTO `item_mods_pet` VALUES (16270,2,50,2); -- Wyvern - HP: 50
 
 -- Shepherds Chain
 INSERT INTO `item_mods_pet` VALUES (16297,161,-200,0); -- All Pets - DMGPHYS: -200
+INSERT INTO `item_mods_pet` VALUES (16297,164,-200,0); -- All Pets - DMGRANGE: -200
 
 -- Puppetry Churidars +1
 INSERT INTO `item_mods_pet` VALUES (16351,168,10,3); -- Automaton - SPELLINTERRUPT: 10
@@ -469,6 +471,7 @@ INSERT INTO `item_mods_pet` VALUES (20832,288,3,0); -- All Pets - DOUBLE_ATTACK:
 
 -- Pelagos Lance
 INSERT INTO `item_mods_pet` VALUES (20944,161,300,2); -- Wyvern - DMGPHYS: 300
+INSERT INTO `item_mods_pet` VALUES (20944,164,300,2); -- Wyvern - DMGRANGE: 300
 INSERT INTO `item_mods_pet` VALUES (20944,370,2,2);   -- Wyvern - REGEN: 2
 
 -- Nirvana
@@ -812,6 +815,7 @@ INSERT INTO `item_mods_pet` VALUES (23660,384,500,3); -- Automaton - HASTE_GEAR:
 -- Ankusa Gaiters +3
 INSERT INTO `item_mods_pet` VALUES (23674,68,38,0);    -- All Pets - EVA: 38
 INSERT INTO `item_mods_pet` VALUES (23674,161,-500,0); -- All Pets - DMGPHYS: -500
+INSERT INTO `item_mods_pet` VALUES (23674,164,-500,0); -- All Pets - DMGRANGE: -500
 
 -- Pteroslaver Greaves +3
 INSERT INTO `item_mods_pet` VALUES (23679,2,290,2);  -- Wyvern - HP: 290
@@ -1346,9 +1350,11 @@ INSERT INTO `item_mods_pet` VALUES (28432,384,500,3); -- Automaton - HASTE_GEAR:
 
 -- Handlers Earring (Checked)
 INSERT INTO `item_mods_pet` VALUES (28490,161,-300,0); -- All Pets - DMGPHYS: -300
+INSERT INTO `item_mods_pet` VALUES (28490,164,-300,0); -- All Pets - DMGRANGE: -300
 
 -- Handlers Earring +1 (Checked)
 INSERT INTO `item_mods_pet` VALUES (28491,161,-400,0); -- All Pets - DMGPHYS: -400
+INSERT INTO `item_mods_pet` VALUES (28491,164,-400,0); -- All Pets - DMGRANGE: -400
 
 -- Rimeice Earring
 INSERT INTO `item_mods_pet` VALUES (28495,27,5,0);    -- All Pets - ENMITY: 5
