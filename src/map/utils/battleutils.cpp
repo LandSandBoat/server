@@ -1547,6 +1547,12 @@ namespace battleutils
         hitrate = hitrate + (acc - eva) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
 
         uint8 finalhitrate = std::clamp(hitrate, 20, 95);
+
+        // Check to see if distance is greater than 25 and force hitrate to be 0
+        if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
+        {
+            finalhitrate = 0;
+        }
         return finalhitrate;
     }
 
