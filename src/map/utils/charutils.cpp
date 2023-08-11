@@ -4207,7 +4207,16 @@ namespace charutils
 
                     ApplyExpChainBonuses(PMember->GetMLevel(), PMember->expChain.chainNumber, PMember->expChain.chainTime,  exp, mobCheck, chainactive);
 
-                    // pet or companion exp penalty needs to be added here
+                    if (settings::get<bool>("main.ENABLE_EXP_PET_PENALTY") && PMember->PPet != nullptr)
+                    {
+                        bool isCharmPet = PMember->PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM);
+                        bool isFellow   = PMember->PPet->objtype == TYPE_FELLOW;
+                        if (isCharmPet || isFellow)
+                        {
+                            exp *= settings::get<float>("main.ENABLE_EXP_PET_PENALTY_MULTIPLER");
+                        }
+                    }
+
                     if (distance(PMember->loc.p, PMob->loc.p) > 100)
                     {
                         PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
