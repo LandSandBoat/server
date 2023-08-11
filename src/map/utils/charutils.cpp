@@ -5914,13 +5914,18 @@ namespace charutils
             {
                 // find if party exists on this server already
                 CParty* PParty = nullptr;
+                // clang-format off
                 zoneutils::ForEachZone([partyid, &PParty](CZone* PZone)
-                                       { PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
-                                                            {
+                {
+                    PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
+                    {
                         if (PChar->PParty && PChar->PParty->GetPartyID() == partyid)
                         {
                             PParty = PChar->PParty;
-                        } }); });
+                        }
+                    });
+                });
+                // clang-format on
 
                 // create new party if it doesn't exist already
                 if (!PParty)

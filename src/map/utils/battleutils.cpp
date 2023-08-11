@@ -1371,24 +1371,30 @@ namespace battleutils
                 {
                     if (auto* PLeader = dynamic_cast<CCharEntity*>(PAttacker->PParty->GetLeader()))
                     {
+                        // clang-format off
                         PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->objtype == TYPE_TRUST)
                 {
                     if (auto* PMaster = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
                     {
+                        // clang-format off
                         PMaster->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->PMaster == nullptr)
@@ -4943,12 +4949,17 @@ namespace battleutils
             charutils::BuildingCharPetAbilityTable((CCharEntity*)PCharmer, (CPetEntity*)PVictim, PVictim->id);
             ((CCharEntity*)PCharmer)->pushPacket(new CCharUpdatePacket((CCharEntity*)PCharmer));
             ((CCharEntity*)PCharmer)->pushPacket(new CPetSyncPacket((CCharEntity*)PCharmer));
+
+            // clang-format off
             PCharmer->ForAlliance([&PVictim](CBattleEntity* PMember)
-                                  {
+            {
                 if (static_cast<CCharEntity*>(PMember)->PClaimedMob == PVictim)
                 {
                     static_cast<CCharEntity*>(PMember)->PClaimedMob = nullptr;
-                } });
+                }
+            });
+            // clang-format on
+
             ((CMobEntity*)PVictim)->m_OwnerID.clean();
             PVictim->updatemask |= UPDATE_STATUS;
         }
