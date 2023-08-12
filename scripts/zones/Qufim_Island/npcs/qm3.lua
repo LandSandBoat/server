@@ -5,8 +5,6 @@
 -- !pos -120.342 -19.471 306.661 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
@@ -75,10 +73,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 31 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THE_ECHO_AWAKENS)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.GATHERER_OF_LIGHT_I)

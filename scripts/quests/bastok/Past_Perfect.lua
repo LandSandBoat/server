@@ -5,11 +5,8 @@
 -- Evi : !pos -4.656 -2.101 1.664 236
 -- qm1 : !pos -201 16 80 108
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

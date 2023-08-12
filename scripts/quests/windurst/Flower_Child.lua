@@ -4,10 +4,8 @@
 -- Log ID: 2, Quest ID: 65
 -- Ojha Rhawash : !pos -209 0 -134 239
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')

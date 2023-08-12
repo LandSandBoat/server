@@ -5,7 +5,6 @@
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 -----------------------------------
 local instanceObject = {}
 
@@ -56,7 +55,7 @@ instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 9, 8)
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return instanceObject

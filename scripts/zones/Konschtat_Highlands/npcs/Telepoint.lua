@@ -4,8 +4,6 @@
 -- !pos 220.000 19.104 300.000 106
 -----------------------------------
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -31,10 +29,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 101 then
         npcUtil.giveKeyItem(player, xi.ki.DEM_GATE_CRYSTAL)
     end

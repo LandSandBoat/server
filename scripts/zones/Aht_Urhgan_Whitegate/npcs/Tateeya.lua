@@ -4,7 +4,6 @@
 -- Automaton Attachment Unlocks
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -45,10 +44,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 650 then --unlocking attachments explanation
         player:setCharVar('TateeyaTradeStatus', 1)
     elseif csid == 651 then

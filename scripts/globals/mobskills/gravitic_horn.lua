@@ -10,8 +10,6 @@
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local mobskillObject = {}

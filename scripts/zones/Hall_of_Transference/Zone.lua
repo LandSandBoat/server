@@ -3,9 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Hall_of_Transference/IDs')
 require('scripts/globals/teleports')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -110,10 +108,10 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 103 and option == 1 then
         player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau (R)
     elseif csid == 104 and option == 1 then

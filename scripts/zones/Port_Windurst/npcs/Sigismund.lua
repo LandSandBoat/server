@@ -5,10 +5,8 @@
 -- !pos -110 -10 82 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -16,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     local starstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if
         starstatus == 1 and
-        trade:hasItemQty(546, 1) and
+        trade:hasItemQty(xi.items.STARFALL_TEAR, 1) and
         trade:getItemCount() == 1 and
         trade:getGil() == 0
     then
@@ -27,9 +25,9 @@ end
 entity.onTrigger = function(player, npc)
     local starstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if starstatus == QUEST_AVAILABLE then
-        player:startEvent(196, 0, 546) -- Quest Start
+        player:startEvent(196, 0, xi.items.STARFALL_TEAR) -- Quest Start
     elseif starstatus == QUEST_ACCEPTED then
-        player:startEvent(197, 0, 546) -- Quest Reminder
+        player:startEvent(197, 0, xi.items.STARFALL_TEAR) -- Quest Reminder
     elseif
         starstatus == QUEST_COMPLETED and
         player:getCharVar("QuestCatchAFallingStar_prog") > 0
@@ -41,18 +39,18 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 196 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     elseif csid == 199 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
-        player:addItem(12316)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 12316)
+        player:addItem(xi.items.FISH_SCALE_SHIELD)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FISH_SCALE_SHIELD)
         player:setCharVar("QuestCatchAFallingStar_prog", 2)
     end
 end

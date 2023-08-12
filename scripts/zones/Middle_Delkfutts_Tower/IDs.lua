@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Middle_Delkfutts_Tower
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =

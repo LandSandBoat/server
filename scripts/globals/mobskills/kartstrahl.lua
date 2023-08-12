@@ -1,12 +1,9 @@
 -----------------------------------
 -- Kartstrahl
---
 -- Description: Single target damage with sleep.
 -- Type: Physical
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

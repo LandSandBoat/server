@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Behemoths_Dominion
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEHEMOTHS_DOMINION] =

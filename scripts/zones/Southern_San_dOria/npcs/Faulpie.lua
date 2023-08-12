@@ -8,7 +8,6 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/missions")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -81,7 +80,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 648  649  760  761  762  763  764  765  770  771  772  773  774  775  944  914
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 648 and
         option >= xi.skill.WOODWORKING and
@@ -91,7 +90,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 648 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
             player:setCharVar("LeathercraftExpertQuest", 1)

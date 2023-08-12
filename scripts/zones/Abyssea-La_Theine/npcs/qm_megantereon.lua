@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
@@ -18,10 +17,10 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.GARGANTUAN_BLACK_TIGER_FANG })
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

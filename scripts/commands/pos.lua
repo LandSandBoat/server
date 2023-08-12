@@ -6,7 +6,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "sssss"
+    parameters = "s"
 }
 
 function error(player, msg)
@@ -14,7 +14,7 @@ function error(player, msg)
     player:PrintToPlayer("!pos (x) (y) (z) (zone ID) (player)")
 end
 
-function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
+function onTrigger(player, arg)
     local target
     local zoneId
     local x
@@ -22,28 +22,35 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
     local z
     local targ
 
+    if arg == nil then
+        player:PrintToPlayer(string.format("%s's position: X %.4f  Y %.4f  Z %.4f  Rot %i  (Zone: %i)", player:getName(), player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID()), xi.msg.channel.SYSTEM_3)
+        return
+    end
+
+    local args = utils.splitArg(arg)
+
     -- shift arguments depending on number passed
-    if arg5 ~= nil then
-        x = tonumber(arg1)
-        y = tonumber(arg2)
-        z = tonumber(arg3)
-        zoneId = arg4
-        target = arg5
-    elseif arg4 ~= nil then
-        x = tonumber(arg1)
-        y = tonumber(arg2)
-        z = tonumber(arg3)
-        if GetPlayerByName(arg4) == nil then
-            zoneId = arg4
+    if args[5] ~= nil then
+        x = tonumber(args[1])
+        y = tonumber(args[2])
+        z = tonumber(args[3])
+        zoneId = tonumber(args[4])
+        target = args[5]
+    elseif args[4] ~= nil then
+        x = tonumber(args[1])
+        y = tonumber(args[2])
+        z = tonumber(args[3])
+        if GetPlayerByName(args[4]) == nil then
+            zoneId = args[4]
         else
-            target = arg4
+            target = args[4]
         end
-    elseif arg3 ~= nil then
-        x = tonumber(arg1)
-        y = tonumber(arg2)
-        z = tonumber(arg3)
-    elseif arg1 ~= nil then
-        target = arg1
+    elseif args[3] ~= nil then
+        x = tonumber(args[1])
+        y = tonumber(args[2])
+        z = tonumber(args[3])
+    elseif args[1] ~= nil then
+        target = args[1]
     end
 
     -- validate target
@@ -68,7 +75,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
 
     -- report or move position
     if x == nil or y == nil or z == nil then
-        player:PrintToPlayer(string.format("%s's position: X %.4f  Y %.4f  Z %.4f", targ:getName(), targ:getXPos(), targ:getYPos(), targ:getZPos()))
+        player:PrintToPlayer(string.format("%s's position: X %.4f  Y %.4f  Z %.4f  Rot %i  (Zone: %i)", targ:getName(), targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), targ:getZoneID()), xi.msg.channel.SYSTEM_3)
     else
         if zoneId == nil then
             zoneId = targ:getZoneID()
@@ -78,7 +85,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
         end
 
         if player:getID() ~= targ:getID() then
-            player:PrintToPlayer(string.format("Moved %s to (%.4f, %.4f, %.4f) in zone %i.", targ:getName(), x, y, z, zoneId))
+            player:PrintToPlayer(string.format("Moved %s to (%.4f, %.4f, %.4f) in zone %i.", targ:getName(), x, y, z, targ:getZoneID()), xi.msg.channel.SYSTEM_3)
         end
     end
 end

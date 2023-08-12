@@ -21,21 +21,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "player_controller.h"
 
-#include "../../ability.h"
-#include "../../entities/charentity.h"
-#include "../../items/item_weapon.h"
-#include "../../latent_effect_container.h"
-#include "../../packets/char_update.h"
-#include "../../packets/lock_on.h"
-#include "../../recast_container.h"
-#include "../../roe.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/charutils.h"
-#include "../../weapon_skill.h"
-#include "../ai_container.h"
-#include "../states/death_state.h"
-#include "../states/inactive_state.h"
+#include "ability.h"
+#include "ai/ai_container.h"
+#include "ai/states/death_state.h"
+#include "ai/states/inactive_state.h"
+#include "entities/charentity.h"
+#include "items/item_weapon.h"
+#include "latent_effect_container.h"
+#include "packets/char_update.h"
+#include "packets/lock_on.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "weapon_skill.h"
 
 CPlayerController::CPlayerController(CCharEntity* _PChar)
 : CController(_PChar)
@@ -124,7 +124,13 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
         }
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
+            Recast_t* recast = PChar->PRecastContainer->GetRecast(RECAST_ABILITY, PAbility->getRecastId());
+            // Set recast time in seconds to the normal recast time minus any charge time with the difference of the current time minus when the recast was set.
+            // Abilities without a charge will have zero chargeTime
+            uint32 recastSeconds = recast->RecastTime - recast->chargeTime - ((uint32)time(nullptr) - recast->TimeStamp);
+
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recastSeconds, 0, MSGBASIC_TIME_LEFT));
             return false;
         }
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())

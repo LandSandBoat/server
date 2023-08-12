@@ -5,11 +5,9 @@
 -- !addmission 13 36
 -- qm11 : !pos -409.553 17.356 -380.626 123
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local yuhtungaID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 -----------------------------------

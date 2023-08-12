@@ -3,7 +3,6 @@
 --  NPC: Rabbit Footprint (Spawns White/Black Coney)
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -44,7 +43,10 @@ entity.onTrade = function(player, npc, trade)
         local y = points[currentPoint][2]
         local z = points[currentPoint][3]
         GetMobByID(coney):setSpawn(x, y, z, 0)
-        if npcUtil.tradeHas(trade, 4389) and npcUtil.popFromQM(player, npc, coney) then -- 4389 is sandorian carrot
+        if
+            npcUtil.tradeHas(trade, xi.items.SAN_DORIAN_CARROT) and
+            npcUtil.popFromQM(player, npc, coney)
+        then
             player:confirmTrade()
         end
     end
@@ -53,10 +55,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 local function moveFootprint(npc)

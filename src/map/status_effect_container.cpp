@@ -29,8 +29,8 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include <array>
 #include <cstring>
@@ -217,7 +217,12 @@ CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
 : m_StatusEffectSet(statusOrdering)
 {
     m_POwner = PEntity;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
 
     memset(m_StatusIcons, 0xFF, sizeof(m_StatusIcons));
 }
@@ -519,6 +524,8 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
 
         m_StatusEffectSet.insert(PStatusEffect);
 
+        ApplyStateAlteringEffects(PStatusEffect);
+
         luautils::OnEffectGain(m_POwner, PStatusEffect);
         m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
 
@@ -737,6 +744,40 @@ void CStatusEffectContainer::KillAllStatusEffect()
     m_POwner->UpdateHealth();
 }
 
+// Apply any state alterations for the effect if applicable.
+void CStatusEffectContainer::ApplyStateAlteringEffects(CStatusEffect* StatusEffect)
+{
+    EFFECT effect = StatusEffect->GetStatusID();
+
+    if (m_POwner->isAlive())
+    {
+        // this should actually go into a char charm AI
+        if (m_POwner->objtype == TYPE_PC)
+        {
+            if (effect == EFFECT_CHARM || effect == EFFECT_CHARM_II)
+            {
+                if (m_POwner->PPet != nullptr)
+                {
+                    petutils::DespawnPet(m_POwner);
+                }
+            }
+        }
+
+        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
+            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
+        {
+            // change icon of sleep II and lullaby. Apparently they don't stop player movement.
+            if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
+            {
+                StatusEffect->SetIcon(EFFECT_SLEEP);
+            }
+            if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
+            {
+                m_POwner->PAI->Inactive(0ms, false);
+            }
+        }
+    }
+}
 /************************************************************************
  *                                                                       *
  *  Удаляем все эффекты с указанными иконками                            *
@@ -805,7 +846,7 @@ EFFECT CStatusEffectContainer::EraseStatusEffect()
     {
         if (PStatusEffect->GetFlag() & EFFECTFLAG_ERASABLE && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            erasableList.push_back(PStatusEffect);
+            erasableList.emplace_back(PStatusEffect);
         }
     }
     if (!erasableList.empty())
@@ -826,7 +867,7 @@ EFFECT CStatusEffectContainer::HealingWaltz()
         if ((PStatusEffect->GetFlag() & EFFECTFLAG_WALTZABLE || PStatusEffect->GetFlag() & EFFECTFLAG_ERASABLE) && PStatusEffect->GetDuration() > 0 &&
             !PStatusEffect->deleted)
         {
-            waltzableList.push_back(PStatusEffect);
+            waltzableList.emplace_back(PStatusEffect);
         }
     }
     if (!waltzableList.empty())
@@ -871,7 +912,7 @@ EFFECT CStatusEffectContainer::DispelStatusEffect(EFFECTFLAG flag)
     {
         if (PStatusEffect->GetFlag() & flag && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            dispelableList.push_back(PStatusEffect);
+            dispelableList.emplace_back(PStatusEffect);
         }
     }
     if (!dispelableList.empty())
@@ -1077,7 +1118,6 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         AddStatusEffect(PStatusEffect);
         return true;
     }
-    // return false;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)
@@ -1292,7 +1332,7 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
     {
         if (PStatusEffect->GetFlag() & flag && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            dispelableList.push_back(PStatusEffect);
+            dispelableList.emplace_back(PStatusEffect);
         }
     }
     if (!dispelableList.empty())
@@ -1372,7 +1412,7 @@ std::vector<EFFECT> CStatusEffectContainer::GetStatusEffectsInIDRange(EFFECT sta
     {
         if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
         {
-            effectList.push_back(PStatusEffect->GetStatusID());
+            effectList.emplace_back(PStatusEffect->GetStatusID());
         }
     }
     return effectList;
@@ -1468,22 +1508,33 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
 
 void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 {
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() >= MAX_EFFECTID);
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0);
-    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0);
+    if (StatusEffect->GetStatusID() >= MAX_EFFECTID)
+    {
+        ShowWarning("Status Effect ID (%d) exceeds MAX_EFFECTID", StatusEffect->GetStatusID());
+        return;
+    }
+
+    auto subType = StatusEffect->GetSubID();
+
+    if (StatusEffect->GetStatusID() == EFFECT_NONE && subType == 0)
+    {
+        ShowWarning("None-type Effect has SubID of 0");
+        return;
+    }
 
     std::string name;
     EFFECT      effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
-    if (StatusEffect->GetSubID() == 0 ||
-        StatusEffect->GetSubID() > 20000 ||
+    if (subType == 0 ||
+        subType > 20000 ||
         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
         (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
         effect == EFFECT_RUNEISTS_ROLL ||
         effect == EFFECT_DRAIN_DAZE ||
         effect == EFFECT_ASPIR_DAZE ||
         effect == EFFECT_HASTE_DAZE ||
+        effect == EFFECT_ATMA ||
         effect == EFFECT_BATTLEFIELD)
     {
         name.insert(0, "globals/effects/");
@@ -1491,8 +1542,8 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     }
     else
     {
-        CItem* Ptem = itemutils::GetItemPointer(StatusEffect->GetSubID());
-        if (Ptem != nullptr)
+        CItem* Ptem = itemutils::GetItemPointer(subType);
+        if (Ptem != nullptr && subType > 0)
         {
             name.insert(0, "globals/items/");
             name.insert(name.size(), Ptem->getName());
@@ -1502,36 +1553,6 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     StatusEffect->SetName(name);
     StatusEffect->SetFlag(effects::EffectsParams[effect].Flag);
     StatusEffect->SetType(effects::EffectsParams[effect].Type);
-
-    // todo: find a better place to put this?
-    if (m_POwner->isAlive())
-    {
-        // this should actually go into a char charm AI
-        if (m_POwner->objtype == TYPE_PC)
-        {
-            if (effect == EFFECT_CHARM || effect == EFFECT_CHARM_II)
-            {
-                if (m_POwner->PPet != nullptr)
-                {
-                    petutils::DespawnPet(m_POwner);
-                }
-            }
-        }
-
-        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
-            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
-        {
-            // change icon of sleep II and lullaby. Apparently they don't stop player movement.
-            if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
-            {
-                StatusEffect->SetIcon(EFFECT_SLEEP);
-            }
-            if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
-            {
-                m_POwner->PAI->Inactive(0ms, false);
-            }
-        }
-    }
 }
 
 /************************************************************************
@@ -1542,7 +1563,11 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
-    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    if (m_POwner->objtype != TYPE_PC)
+    {
+        ShowWarning("Non-PC calling function (%s).", m_POwner->GetName());
+        return;
+    }
 
     const char* Query = "SELECT "
                         "effectid,"
@@ -1596,7 +1621,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                                   sql->GetUIntData(3), duration, sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
                                   (uint16)sql->GetUIntData(7), flags);
 
-            PEffectList.push_back(PStatusEffect);
+            PEffectList.emplace_back(PStatusEffect);
 
             // load shadows left
             if (PStatusEffect->GetStatusID() == EFFECT_COPY_IMAGE)
@@ -1709,7 +1734,12 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
 void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 {
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
+
     TracyZoneScoped;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)

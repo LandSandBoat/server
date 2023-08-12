@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -17,12 +16,12 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, ID.mob.DRAGUA_2, { xi.ki.BLOODIED_DRAGON_EAR })
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.abyssea.qmOnEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.abyssea.qmOnEventFinish(player, csid, option, npc)
 end
 
 return entity

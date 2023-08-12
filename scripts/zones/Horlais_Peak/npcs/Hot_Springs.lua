@@ -12,23 +12,24 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL) == QUEST_ACCEPTED and
-        trade:hasItemQty(1210, 1) and trade:getItemCount() == 1
+        trade:hasItemQty(xi.items.DAMP_SCROLL, 1) and
+        trade:getItemCount() == 1
     then
-        player:startEvent(2, 1210)
+        player:startEvent(2, xi.items.DAMP_SCROLL)
     end
 end
 
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 then
         player:tradeComplete()
-        player:addItem(4949) -- Scroll of Jubaku: Ichi
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 4949)
+        player:addItem(xi.items.SCROLL_OF_JUBAKU_ICHI)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_JUBAKU_ICHI)
         player:addFame(xi.quest.fame_area.NORG, 75)
         player:addTitle(xi.title.CRACKER_OF_THE_SECRET_CODE)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)

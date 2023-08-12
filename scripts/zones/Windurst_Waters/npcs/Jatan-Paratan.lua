@@ -5,8 +5,6 @@
 -- !pos -59 -4 22 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -16,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     if
         wonderingstatus == 1 and
-        trade:hasItemQty(718, 1) and
+        trade:hasItemQty(xi.items.PIECE_OF_ROSEWOOD_LUMBER, 1) and
         trade:getItemCount() == 1 and
         player:getCharVar("QuestWonderingMin_var") == 1
     then
@@ -54,20 +52,20 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 634 then    -- WONDERING_MINSTREL: Quest Start
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     elseif csid == 638 then  -- WONDERING_MINSTREL: Quest Finish
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FAERIE_PICCOLO)
         else
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-            player:addItem(17349)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)
+            player:addItem(xi.items.FAERIE_PICCOLO)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FAERIE_PICCOLO)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addTitle(xi.title.DOWN_PIPER_PIPE_UPPERER)
             player:needToZone(true)

@@ -22,7 +22,7 @@
 #ifndef _CITEMCONTAINER_H
 #define _CITEMCONTAINER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum CONTAINER_ID
 {
@@ -101,7 +101,7 @@ private:
     uint8  m_size;
     uint8  m_count;
 
-    CItem* m_ItemList[MAX_CONTAINER_SIZE + 1];
+    CItem* m_ItemList[MAX_CONTAINER_SIZE + 1]{};
 };
 
 #endif

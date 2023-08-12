@@ -3,8 +3,6 @@
 -- Lighting Cluster
 -- Turn into a stack of lighting crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4100, 12)
+    target:addItem(xi.items.LIGHTNING_CRYSTAL, 12)
 end
 
 return itemObject

@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "party_effects.h"
-#include "../entities/battleentity.h"
-#include "../party.h"
-#include "../status_effect_container.h"
+#include "entities/battleentity.h"
+#include "party.h"
+#include "status_effect_container.h"
 
 CPartyEffectsPacket::CPartyEffectsPacket()
 {
@@ -32,7 +32,12 @@ CPartyEffectsPacket::CPartyEffectsPacket()
 
 void CPartyEffectsPacket::AddMemberEffects(CBattleEntity* PMember)
 {
-    XI_DEBUG_BREAK_IF(members == 5);
+    if (members == 5)
+    {
+        ShowWarning("Member count exceeds packet maximum.");
+        return;
+    }
+
     ref<uint32>(members * 0x30 + 0x04) = PMember->id;
     ref<uint16>(members * 0x30 + 0x08) = PMember->targid;
     ref<uint64>(members * 0x30 + 0x0C) = PMember->StatusEffectContainer->m_Flags;

@@ -1,12 +1,9 @@
 -----------------------------------
 -- Seekers of Adoulin Helpers
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
-
 xi = xi or {}
 xi.soa = xi.soa or {}
 xi.soa.helpers = xi.soa.helpers or {}

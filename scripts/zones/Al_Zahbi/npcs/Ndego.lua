@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Smithing Guild
 -- !pos -37.192 0.000 -33.949 48
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
@@ -19,10 +18,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -2,7 +2,6 @@
 -- Zone: San_dOria-Jeuno_Airship
 -----------------------------------
 local ID = require('scripts/zones/San_dOria-Jeuno_Airship/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -38,10 +37,10 @@ zoneObject.onGameHour = function(zone)
     end
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
         local prevzone = player:getPreviousZone()
 

@@ -12,12 +12,9 @@
 -- Fossil Rocks      : !pos 17 18 184 198
 -- Mahogany Door     : !pos -11 0 20 192
 -- House of the Hero : !pos -26 -13 260 239
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
 -----------------------------------

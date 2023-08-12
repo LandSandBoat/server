@@ -3,8 +3,6 @@
 -- Old Quiver +7
 -- When used, you will obtain one partial stack of Crude Arrows +7
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18188, math.random(10, 20))
+    target:addItem(xi.items.CRUDE_ARROW_P7, math.random(10, 20))
 end
 
 return itemObject

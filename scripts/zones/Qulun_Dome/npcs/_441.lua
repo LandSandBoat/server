@@ -4,7 +4,6 @@
 -- Involved in Mission: Limit Break 3
 -- !pos 299.999 37.864 47.067 148
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 -----------------------------------
 local entity = {}
@@ -33,10 +32,10 @@ entity.onTrigger = function(player, npc)
     return 1
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

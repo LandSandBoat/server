@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 require("scripts/globals/assault")
-require("scripts/globals/items")
 require("scripts/globals/appraisal")
 -----------------------------------
 local entity = {}
@@ -69,10 +68,10 @@ entity.onTrigger = function(player, npc)
     xi.appraisal.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

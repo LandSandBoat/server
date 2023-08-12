@@ -7,7 +7,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/items')
 -----------------------------------
 local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
 -----------------------------------
@@ -96,7 +95,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [100] = function(player, csid, option)
+                [100] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.OINTMENT_CASE) then
                         player:confirmTrade()
                         quest:setVar(player, 'TradedAaveleon', 1)
@@ -127,7 +126,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [126] = function(player, csid, option)
+                [126] = function(player, csid, option, npc)
                     if option == 1 then
                         npcUtil.giveItem(player, xi.items.OINTMENT_CASE)
                     end

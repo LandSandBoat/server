@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Arlenne
--- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/shop")
@@ -14,32 +13,32 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        17051,  1409, 1,    -- Yew Wand
-        17090,  3245, 1,    -- Elm Staff
-        17097, 16416, 1,    -- Elm Pole
-        16770, 11286, 1,    -- Zaghnal
-        17096,  4568, 2,    -- Holly Pole
-        17024,    66, 3,    -- Ash Club
-        17049,    46, 3,    -- Maple Wand
-        17050,   333, 3,    -- Willow Wand
-        17088,    57, 3,    -- Ash Staff
-        17089,   571, 3,    -- Holly Staff
-        17095,   386, 3,    -- Ash Pole
-        16385,   132, 3,    -- Cesti
-        16391,   828, 3,    -- Brass Knuckles
-        16407,  1554, 3,    -- Brass Baghnakhs
-        16768,   309, 3,    -- Bronze Zaghnal
-        16769,  2542, 2,    -- Brass Zaghnal
+        xi.items.ASH_CLUB,           74, 3,
+        xi.items.MAPLE_WAND,         54, 3,
+        xi.items.WILLOW_WAND,       384, 3,
+        xi.items.YEW_WAND,         1628, 1,
+        xi.items.ASH_STAFF,          66, 3,
+        xi.items.HOLLY_STAFF,       660, 3,
+        xi.items.ELM_STAFF,        3750, 1,
+        xi.items.ASH_POLE,          436, 3,
+        xi.items.HOLLY_POLE,       5279, 2,
+        xi.items.ELM_POLE,        18969, 1,
+        xi.items.CESTI,             149, 3,
+        xi.items.BRASS_KNUCKLES,    936, 3,
+        xi.items.BRASS_BAGHNAKHS,  1757, 3,
+        xi.items.BRONZE_ZAGHNAL,    357, 3,
+        xi.items.BRASS_ZAGHNAL,    2938, 3,
+        xi.items.ZAGHNAL,         13041, 1,
     }
 
     player:showText(npc, ID.text.ARLENNE_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

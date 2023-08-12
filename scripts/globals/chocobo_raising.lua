@@ -29,19 +29,11 @@
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
 require("scripts/globals/chocobo_names")
-require("scripts/globals/items")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
-
--- FOR HEAVILY-IN-DEVELOPMET TESTING, you can use the `!chocoboraising`
--- command to toggle these settings
-xi.settings.main.ENABLE_CHOCOBO_RAISING = false
-xi.settings.main.DEBUG_CHOCOBO_RAISING = false
 
 local debug = function(player, ...)
     if xi.settings.main.DEBUG_CHOCOBO_RAISING then
@@ -445,7 +437,7 @@ local cutscenes =
     -- 40: Player gives the chocobo x
     -- 48: Happy to see you
     -- 51: Hangs its head in shame
-    -- 53: Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
+    HAVENT_SEEN_YOU = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
     -- 70: Chocobo full of energy!
@@ -457,6 +449,44 @@ local cutscenes =
 
 xi.chocoboRaising.newChocobo = function(player, egg)
     local newChoco = {}
+
+    -- TODO: If egg exdata is empty (historic objects, etc.) then generate it randomly now.
+    --     : Otherwise, extract the exdata for use.
+    -- local exData = egg:getExData();
+
+    --[[
+        https://github.com/Ivaar/Windower-addons/blob/master/chococard/chococard.lua
+
+        plan        = {[0]='A','B','C','D'},
+        gender      = {[0]='Male','Female'},
+        color       = {[0]='Yellow','Black','Blue','Red','Green'},
+        ability     = {[0]='None','Gallop','Canter','Burrow','Bore','Auto-Regen','Treasure Finder'},
+
+        fields.egg = {
+            DNA         = {'b3b3b3', 0x00+1,        fn=map_fields+{'color'}},
+            ability     = {'b4',     0x01+1, 1+1},
+            unknown1    = {'b1',     0x01+1, 5+1},
+            plan        = {'b2',     0x01+1, 6+1},
+            unknown2    = {'b15',    0x02+1},
+            is_bred     = {'q',      0x03+1, 7+1},
+        }
+
+        Egg exData from Dabih Jajalioh (CHOCOBO_EGG_FAINTLY_WARM: 2312):
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+        Egg exData from breeder:(CHOCOBO_EGG_A_BIT_WARM: 2317)
+
+        8C C0 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+        8C: 1000 1100
+        C0: 1100 0000
+        00: 0000 0000
+        80: 1000 0000
+
+        Plan: D
+        DNA: [Green, Black, Blue]
+        Ability: None
+    ]]
 
     newChoco.first_name = "Chocobo"
     newChoco.last_name = "Chocobo"
@@ -574,6 +604,143 @@ local compareTables = function(t1, t2)
     return true
 end
 
+-- NOTE: This is playable, but not quite right.
+-- Day1-4 should be condensed together, with the
+-- hatching CS playing at the end.
+-- Currently this outputs:
+-- Day1-4: Basic care
+-- Day 4: Hatching CS
+-- Day 5-onwards: As normal
+-- It should output:
+-- Day1-4: Basic care, then hatching CS
+-- Day5-onwards: As normal
+local condenseEvents = function(player, chocoState, events)
+    local cutEvent = function(t, eStart, eEnd, csList)
+        table.insert(t, { eStart, eEnd, csList })
+    end
+
+    local condensedEvents = {}
+    local currentStartDay = nil
+    local currentEndDay = nil
+    local currentEventCSTable = nil
+
+    -- Each event is a table of cs's
+    debug(player, "Raw Events")
+    for _, entry in pairs(events) do
+        debug(player, "Day", entry[1], ":", entry[2][1])
+        -- Only condense days with the same table contents
+        if compareTables(entry[2], currentEventCSTable) then
+            -- Increase the span
+            currentEndDay = currentEndDay + 1
+        else
+            -- If there is an active span, cut it now
+            if currentEventCSTable then
+                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+            end
+
+            -- Start a new span
+            currentEventCSTable = entry[2]
+            currentStartDay = entry[1]
+            currentEndDay = entry[1]
+        end
+    end
+
+    -- Final "cut"
+    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+
+    debug(player, "Condensed Events & Spans")
+    for _, entry in pairs(condensedEvents) do
+        debug(player, "Days", entry[1], "to", entry[2], ":", entry[3][1])
+    end
+
+    return condensedEvents
+end
+
+local onRaisingEventPlayout = function(player, csOffset, chocoState)
+    switch (csOffset): caseof
+    {
+        [cutscenes.REPORT_BASIC_CARE] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- TODO: Add settings multipliers
+            -- TODO: Make sure these are clamped!
+            chocoState.strength    = chocoState.strength + 1
+            chocoState.endurance   = chocoState.endurance + 1
+            chocoState.discernment = chocoState.discernment + 1
+            chocoState.receptivity = chocoState.receptivity + 1
+
+            chocoState.affection = chocoState.affection - 1
+            chocoState.energy    = chocoState.energy - 1
+        end,
+
+        [cutscenes.CRYING_AT_NIGHT] = function()
+            -- NOTE: The messaging is handled in the CS
+            player:addKeyItem(xi.ki.WHITE_HANDKERCHIEF)
+            player:setCharVar("[choco]WH_TIME", os.time() * utils.days(1))
+        end,
+
+        [cutscenes.HAVENT_SEEN_YOU] = function()
+            player:delKeyItem(xi.ki.WHITE_HANDKERCHIEF)
+            player:setCharVar("[choco]WH_TIME", 0)
+        end,
+    }
+
+    return chocoState
+end
+
+local handleCSUpdate = function(player, chocoState, doEventUpdate)
+    -- Generate final CS value from (location offset * 256) + cutscene offset
+    local csOffset = chocoState.csList[1]
+    local locationOffset = raisingLocation[player:getZoneID()] * 256
+    local csToPlay = locationOffset + csOffset
+
+    debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+    table.remove(chocoState.csList, 1)
+
+    local currentAgeOfChocoboDuringCutscene = 0
+
+    -- TODO: Move this into initData
+    if csOffset == cutscenes.EGG_HATCHING then
+        chocoState.stage = stage.CHICK
+    elseif csOffset == cutscenes.CHICK_TO_ADOLESCENT then
+        chocoState.stage = stage.ADOLESCENT
+    elseif csOffset == cutscenes.ADOLESCENT_TO_ADULT_1 then
+        chocoState.stage = stage.ADULT_1
+    elseif csOffset == cutscenes.ADULT_1_TO_ADULT_2 then
+        chocoState.stage = stage.ADULT_2
+    elseif csOffset == cutscenes.ADULT_2_TO_ADULT_3 then
+        chocoState.stage = stage.ADULT_3
+    elseif csOffset == cutscenes.ADULT_3_TO_ADULT_4 then
+        chocoState.stage = stage.ADULT_4
+    end
+
+    chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
+
+    if doEventUpdate then
+        player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
+            0, 0, 0, 0, 0, 0, 0, 0)
+        player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
+            chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
+    end
+
+    return chocoState
+end
+
+local updateChocoState = function(player, chocoState)
+    -- Update age and last_update_age
+    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.last_update_age = chocoState.age
+
+    debug(player, "Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+
+    -- Write to cache
+    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+    -- Write to db
+    player:setChocoboRaisingInfo(chocoState)
+
+    return chocoState
+end
+
 xi.chocoboRaising.initChocoboData = function(player)
     local chocoState = player:getChocoboRaisingInfo()
     if chocoState == nil then
@@ -660,65 +827,41 @@ xi.chocoboRaising.initChocoboData = function(player)
 
         local event = { age, { possibleCarePlanEvent } }
 
+        table.insert(events, event)
+
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
             if currentStage == entry[1] and age >= entry[2] then
-                table.insert(event[2], entry[3])
+                table.insert(events, { age, { entry[3] } })
             end
         end
 
-        table.insert(events, event)
+        -- Start White Handkerchief quest
+        local whiteHandkerchiefStarted = false
+        if
+            -- TODO: Should this be a charvar to track this?
+            not player:hasKeyItem(xi.ki.WHITE_HANDKERCHIEF) and
+            age == 7
+        then
+            table.insert(events, { age, { cutscenes.CRYING_AT_NIGHT } })
+            whiteHandkerchiefStarted = true
+        end
+
+        -- Cancel White Handkerchief quest
+        if
+            whiteHandkerchiefStarted and
+            age == 15 and
+            reportLength >= 7
+        then
+            table.insert(events, { age, { cutscenes.HAVENT_SEEN_YOU } })
+        end
 
         -- TODO: Remove used days from care plan and write back to chocoState + db
     end
 
-    -- TODO: This is not quite right. Day1-4 should be condensed together, with the
-    -- hatching CS playing at the end. Then Day5 as it's own entry afterwards.
-
     -- Step 3: Condense that table down
-    -- Example: In the above example, if days 1, 2, and 3 are the same
-    -- thing, they will be condensed down to a single Day1-Day3 update.
-
-    local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList })
-    end
-
-    local condensedEvents = {}
-    local currentStartDay = nil
-    local currentEndDay = nil
-    local currentEventCSTable = nil
-    -- local currentEventSize = nil
-
-    -- Each event is a table of cs's
-    for idx, entry in pairs(events) do
-        -- DEBUG
-        -- print(entry)
-        -- Only condense days with the same table contents
-        if compareTables(entry[2], currentEventCSTable) then
-            -- Increase the span
-            currentEndDay = currentEndDay + 1
-        else
-            -- If there is an active span, cut it now
-            if currentEventCSTable then
-                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-            end
-
-            -- Start a new span
-            currentEventCSTable = entry[2]
-            currentStartDay = chocoState.report.day_start + idx - 1
-            currentEndDay = chocoState.report.day_start + idx - 1
-            -- currentEventSize = entry[2]
-        end
-    end
-
-    -- Final "cut"
-    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-
     -- Step 4: Assign this report to the cache
-    chocoState.report.events = condensedEvents
-
-    -- DEBUG
-    -- print(condensedEvents)
+    chocoState.report.events = condenseEvents(player, chocoState, events)
 
     return chocoState
 end
@@ -731,6 +874,10 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
     local rejectionCsid = csidTable[player:getZoneID()][4]
 
     local chocoState = xi.chocoboRaising.initChocoboData(player)
+    if chocoState == nil then
+        print("ERROR! startCutscene 'chocoState' is nil!")
+        return
+    end
 
     if trade ~= nil then -- Trade
         if
@@ -834,7 +981,7 @@ xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
     xi.chocoboRaising.startCutscene(player, npc, nil)
 end
 
-xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
+xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
         return
     end
@@ -879,16 +1026,33 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             local fname = xi.chocoboNames[offset1]
             local lname = xi.chocoboNames[offset2]
 
-            if fname ~= nil and lname ~= nil then
+            local fullnamekey = string.format("%s %s", fname, lname)
+
+            -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
+            -- "... with the caveat that your chocobo's name may be no more than 15 letters in total."
+            -- NOTE: This is enforced by the client, this is here to stop malicious naming attempts
+            local nameTooLong = string.len(fullnamekey) > (15 + 1) -- 15 + the space character
+
+            -- If renaming fails, the name will remain as "Chocobo Chocobo" and the
+            -- rejection CS will play
+            if fname == nil or lname == nil then
+                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+            elseif nameTooLong then
+                print(string.format("ERROR! %s selected name combination too long for chocobo: %s", player:getName(), fullnamekey))
+            elseif xi.bannedChocoboNames[fullnamekey] then
+                print(string.format("ERROR! %s selected banned name for chocobo: %s", player:getName(), fullnamekey))
+            else
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                debug(player, string.format("%s updating chocobo name: %s %s", player:getName(), fname, lname))
+                debug(player, string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
-            else
-                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+
+                -- Set synthetic CS option for later CSs
+                option = 0xFF
+                debug(player, string.format("CS (Synthetic) Update: %i", option))
             end
         end
 
@@ -1114,13 +1278,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 end
 
                 chocoState.foodGiven = nil
-                chocoState.last_update_age = chocoState.age
 
-                -- Write to cache
-                xi.chocoboRaising.chocoState[player:getID()] = chocoState
-
-                -- Write to db
-                player:setChocoboRaisingInfo(chocoState)
+                updateChocoState(player, chocoState)
             end,
 
             [244] = function() -- Present chocobo appearance
@@ -1518,35 +1677,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
 
             [246] = function() -- Update CS
-                -- Generate final CS value from (location offset * 256) + cutscene offset
-                local csOffset = chocoState.csList[1]
-                local locationOffset = raisingLocation[player:getZoneID()] * 256
-                local csToPlay = locationOffset + csOffset
-
-                debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
-                table.remove(chocoState.csList, 1)
-
-                local currentAgeOfChocoboDuringCutscene = 0
-
-                -- TODO: Move this into initData
-                if csOffset == cutscenes.EGG_HATCHING then
-                    chocoState.stage = stage.CHICK
-                elseif csOffset == cutscenes.CHICK_TO_ADOLESCENT then
-                    chocoState.stage = stage.ADOLESCENT
-                elseif csOffset == cutscenes.ADOLESCENT_TO_ADULT_1 then
-                    chocoState.stage = stage.ADULT_1
-                elseif csOffset == cutscenes.ADULT_1_TO_ADULT_2 then
-                    chocoState.stage = stage.ADULT_2
-                elseif csOffset == cutscenes.ADULT_2_TO_ADULT_3 then
-                    chocoState.stage = stage.ADULT_3
-                elseif csOffset == cutscenes.ADULT_3_TO_ADULT_4 then
-                    chocoState.stage = stage.ADULT_4
-                end
-
-                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
-                    0, 0, 0, 0, 0, 0, 0, 0)
-                player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
-                    chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
+                chocoState = handleCSUpdate(player, chocoState, true)
             end,
 
             [256] = function() -- Brief report?
@@ -1554,10 +1685,31 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
 
             [504] = function() -- Skip report
-                -- TODO: Do empty playout of report so that age and state are up-to-date
-                chocoState.last_update_age = chocoState.age
-                xi.chocoboRaising.chocoState[player:getID()] = chocoState
-                player:setChocoboRaisingInfo(chocoState)
+                -- TODO: Set up movement between chocoState.report.events and chocoState.csList to
+                --     : include the length of each playout in days, so it can be used in handleCSUpdate()
+                --     : to multiply values etc.
+                -- Prepare chocoState.csList
+                for _, currentEvent in pairs (chocoState.report.events) do
+                    local eventStartStart = currentEvent[1]
+                    -- local eventStartEnd = currentEvent[2]
+                    local eventCSList = currentEvent[3]
+
+                    chocoState.age = eventStartStart
+                    chocoState.stage = ageToStage(chocoState.age)
+
+                    for _, cs in pairs(eventCSList) do
+                        table.insert(chocoState.csList, cs)
+                    end
+                end
+
+                chocoState.report.events = {}
+
+                -- NOTE: each cs will be popped off inside of handleCSUpdate
+                while #chocoState.csList > 0 do
+                    chocoState = handleCSUpdate(player, chocoState, false)
+                end
+
+                updateChocoState(player, chocoState)
             end,
 
             [221] = function() -- Buy your chocobo whistle
@@ -1586,6 +1738,16 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 player:deleteRaisedChocobo()
             end,
 
+            [255] = function() -- Synthetic update: Change/set chocobo name
+                -- If the name is still "Chocobo Chocobo" then the renaming failed or was
+                -- rejected, play the appropriate response.
+                if chocoState.first_name == "Chocobo" and chocoState.last_name == "Chocobo" then
+                    player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
+                else
+                    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+                end
+            end,
+
             [40] = function() -- Retire your chocobo
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
                 player:deleteRaisedChocobo()
@@ -1594,7 +1756,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
     end
 end
 
-xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
+xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
         return
     end
@@ -1604,8 +1766,11 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
     local chocoState = xi.chocoboRaising.chocoState[player:getID()]
 
     if csid == tradeCsid and option == 252 then
-        -- TODO: Pull egg exdata from item
-        local egg = {}
+        -- TODO: Validate this! Really validate this!
+        --     : It has to be the same egg item as was traded at the start of the CS!
+        local trade = player:getTrade()
+        local egg   = trade:getItem()
+        -- TODO: Make sure problems here don't leak into core and cause a crash!
         local newChoco = xi.chocoboRaising.newChocobo(player, egg)
         if player:setChocoboRaisingInfo(newChoco) then
             player:confirmTrade()
@@ -1616,8 +1781,7 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
             return
         end
 
-        chocoState.last_update_age = chocoState.age
-        player:setChocoboRaisingInfo(chocoState)
+        updateChocoState(player, chocoState)
     end
 
     -- TODO: Hand out cards and plaques etc.

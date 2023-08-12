@@ -5,7 +5,6 @@
 -- !pos -229.344 6.999 22.976 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -61,7 +60,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(895)
     elseif
         trustSandoria == QUEST_COMPLETED and
-        not player:hasSpell(902) and
+        not player:hasSpell(xi.magic.spell.CURILLA) and
         excenmilleTrustChatFlag == 0
     then
         player:startEvent(896, 0, 0, 0, 0, 0, 0, 0, rank3)
@@ -71,14 +70,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- TRUST
     if csid == 893 then
-        player:addSpell(899, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 899)
+        player:addSpell(xi.magic.spell.EXCENMILLE, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.EXCENMILLE)
         player:setCharVar("SandoriaFirstTrust", 1)
     elseif csid == 895 then
         player:delKeyItem(xi.ki.RED_INSTITUTE_CARD)
@@ -90,8 +89,8 @@ entity.onEventFinish = function(player, csid, option)
         })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 897 then
-        player:addSpell(899, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 899)
+        player:addSpell(xi.magic.spell.EXCENMILLE, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.EXCENMILLE)
         player:delKeyItem(xi.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA, {

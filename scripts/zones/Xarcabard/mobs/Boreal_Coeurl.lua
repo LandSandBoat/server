@@ -5,8 +5,6 @@
 -- !pos 580 -9 290 112
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

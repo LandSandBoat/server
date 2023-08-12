@@ -2,8 +2,6 @@
 -- Area : Pashhow Marshlands [S] (90)
 --  NPC : Corroded Gate
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,10 +11,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(102)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 102 and
         option == 1

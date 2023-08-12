@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(4096, 1) and trade:getItemCount() == 1 then
+    if trade:hasItemQty(xi.items.FIRE_CRYSTAL, 1) and trade:getItemCount() == 1 then
         player:startEvent(126)
     end
 end
@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(127)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -3,8 +3,6 @@
 -- Moogle Suit
 -- Dispense: Mog Missile
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5936, 1)
+    target:addItem(xi.items.MOG_MISSILE, 1)
 end
 
 return itemObject

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Valkurm_Dunes
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VALKURM_DUNES] =
@@ -69,7 +66,7 @@ zones[xi.zone.VALKURM_DUNES] =
     npc =
     {
         SUNSAND_QM    = 17199699, -- qm1 in npc_list
-        OVERSEER_BASE = 17199709, -- Quanteilleron_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Quanteilleron_RK'),
     },
 }
 

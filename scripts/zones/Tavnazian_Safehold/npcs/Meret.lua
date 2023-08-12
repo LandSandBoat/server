@@ -3,7 +3,6 @@
 --  NPC: Meret
 -- !pos 83.166 -25.082 4.633 26
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -61,10 +60,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 586 and option == player:getLocalVar("meretReward") then
         player:setLocalVar("meretReward", 0)
 

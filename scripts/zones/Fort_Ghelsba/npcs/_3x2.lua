@@ -3,8 +3,6 @@
 --  NPC: Elevator Lever (upper)
 -- !pos  8.112 -52.665 96.084 141
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -37,10 +35,10 @@ entity.onTrigger = function(player, npc)
     RunElevator(xi.elevator.FORT_GHELSBA_LIFT)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

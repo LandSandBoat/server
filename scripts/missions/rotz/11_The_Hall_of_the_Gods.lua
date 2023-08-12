@@ -6,10 +6,8 @@
 -- _700 (Oaken Door) : !pos 97 -7 -12 252
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local hallID = require('scripts/zones/Hall_of_the_Gods/IDs')
 -----------------------------------

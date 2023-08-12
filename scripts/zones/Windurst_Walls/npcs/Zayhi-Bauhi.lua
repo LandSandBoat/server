@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED then
-        if trade:hasItemQty(4370, 1) and trade:getItemCount() == 1 then
+        if trade:hasItemQty(xi.items.POT_OF_HONEY, 1) and trade:getItemCount() == 1 then
             local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
             if toBeeOrNotStatus == 10 then
                 player:startEvent(69) -- After Honey#1: Clearing throat
@@ -64,10 +64,10 @@ end
 --      player:startEvent(74) -- After Honey#4: Feels like its getting a lot better but there is still iritaion
 --      player:startEvent(75) -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
 --      player:startEvent(78) -- ToBee After Quest Finish but before zone (tooth still hurts)
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 then
         player:setCharVar("ToBeeOrNot_var", 10)
     elseif csid == 69 then -- After Honey#1: Clearing throat

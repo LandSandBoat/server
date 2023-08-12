@@ -4,8 +4,6 @@
 -- Type: Mission Giver
 -- !pos -358 -10 -168 235
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
@@ -29,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

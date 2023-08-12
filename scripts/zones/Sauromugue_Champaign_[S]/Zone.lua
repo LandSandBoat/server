@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Sauromugue_Champaign_[S]/IDs')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -38,10 +37,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
         player:setCharVar("DownwardHelix", 3)
     end

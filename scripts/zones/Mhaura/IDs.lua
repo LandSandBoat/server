@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MHAURA] =
@@ -32,12 +29,12 @@ zones[xi.zone.MHAURA] =
         TYAPADOLIH_SHOP_DIALOG        = 7174, -- Welcome, strrranger! Tya Padolih's the name, and dealin' in magic is my game!
         GOLDSMITHING_GUILD            = 7175, -- Everything you need for your goldsmithing needs!
         SMITHING_GUILD                = 7176, -- Welcome to the Blacksmiths' Guild salesroom!
-        RAMUH_UNLOCKED                = 7389, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        FYI_HERE_YOU_GO               = 7596, -- Alrrright! Here you go. Sorry that I couldn't ship it to your Mog House.
-        MAURIRI_DELIVERY_DIALOG       = 7767, -- Mauriri is my name, and sending parcels from Mhaura is my game.
-        PANORU_DELIVERY_DIALOG        = 7768, -- Looking for a delivery company that isn't lamey-wame? The quality of my service puts Mauriri to shame!
-        DO_NOT_POSSESS                = 7770, -- You do not possess <item>. You were not permitted to board the ship...
-        RETRIEVE_DIALOG_ID            = 7805, -- You retrieve <item> from the porter moogle's care.
+        RAMUH_UNLOCKED                = 7392, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
+        FYI_HERE_YOU_GO               = 7602, -- Alrrright! Here you go. Sorry that I couldn't ship it to your Mog House.
+        MAURIRI_DELIVERY_DIALOG       = 7773, -- Mauriri is my name, and sending parcels from Mhaura is my game.
+        PANORU_DELIVERY_DIALOG        = 7774, -- Looking for a delivery company that isn't lamey-wame? The quality of my service puts Mauriri to shame!
+        DO_NOT_POSSESS                = 7776, -- You do not possess <item>. You were not permitted to board the ship...
+        RETRIEVE_DIALOG_ID            = 7811, -- You retrieve <item> from the porter moogle's care.
     },
     mob =
     {

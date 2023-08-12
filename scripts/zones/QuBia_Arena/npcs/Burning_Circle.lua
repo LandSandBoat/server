@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -26,12 +25,12 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
     else
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

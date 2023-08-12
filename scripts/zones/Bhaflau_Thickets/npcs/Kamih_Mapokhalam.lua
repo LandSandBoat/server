@@ -3,7 +3,6 @@
 --  NPC: Kamih Mapokhalam
 -- 20 -30 597 z 52
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
 local entity = {}
@@ -11,10 +10,16 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
-    if count == 1 and trade:hasItemQty(2185, 1) then -- Silver
+    if
+        count == 1 and
+        trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1)
+    then
         player:tradeComplete()
         player:startEvent(121)
-    elseif count == 3 and trade:hasItemQty(2186, 3) then -- Mythril
+    elseif
+        count == 3 and
+        trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, 3)
+    then
         if player:hasKeyItem(xi.ki.MAP_OF_ALZADAAL_RUINS) then
             player:startEvent(147)
         else
@@ -31,10 +36,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 121 then
         player:setPos(325.137, -3.999, -619.968, 0, 72) -- To Alzadaal Undersea Ruins G-8 (R)
     elseif csid == 146 then

@@ -3,8 +3,6 @@
 -- Hi-Elixir Tank
 -- When used, you will obtain one hi-elixir
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4144, 1)
+    target:addItem(xi.items.HI_ELIXIR, 1)
 end
 
 return itemObject

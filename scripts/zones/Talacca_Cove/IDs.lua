@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Talacca_Cove
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TALACCA_COVE] =

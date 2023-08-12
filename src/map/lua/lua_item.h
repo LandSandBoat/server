@@ -86,6 +86,9 @@ public:
     void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> sol::table;
 
+    auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
+    void setExData(sol::table const& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
+
     static void Register();
 };
 

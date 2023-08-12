@@ -16,13 +16,9 @@
 -- Yaucevouchat : !pos -318 39 183 102
 -- Ruillont     : !pos -70 1 607 193
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local laTheinePlateauID  = require('scripts/zones/La_Theine_Plateau/IDs')
 local ordellesCavesID    = require('scripts/zones/Ordelles_Caves/IDs')

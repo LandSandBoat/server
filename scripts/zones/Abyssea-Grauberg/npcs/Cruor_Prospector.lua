@@ -4,8 +4,6 @@
 -- Type: Cruor NPC
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -151,10 +149,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(2002, cruor, demilune)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency("cruor")

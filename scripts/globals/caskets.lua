@@ -2,9 +2,6 @@
 -- Global Casket utility script
 -----------------------------------
 require("scripts/globals/casket_loot")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 
@@ -22,7 +19,6 @@ require("scripts/globals/roe")
 -- 1932 -- Black with Red chest
 -- 2425 -- Black with Red chest 2
 -----------------------------------
-
 xi = xi or {}
 xi.caskets = xi.caskets or {}
 
@@ -750,7 +746,7 @@ xi.caskets.onTrade = function(player, npc, trade)
     if locked == 1 then
         if
             player:getMainJob() == xi.job.THF and
-            npcUtil.tradeHasExactly(trade, 1022)
+            npcUtil.tradeHasExactly(trade, xi.items.SET_OF_THIEFS_TOOLS)
         then
             local splitNumbers = {}
             local tradeAttempt = math.random()

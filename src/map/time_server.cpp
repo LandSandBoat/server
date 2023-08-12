@@ -24,7 +24,7 @@
 #include "common/logging.h"
 #include "common/vana_time.h"
 
-#include "conquest_system.h"
+#include "common/vana_time.h"
 #include "daily_system.h"
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
@@ -50,7 +50,6 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestTally + 1h))
         {
-            conquest::UpdateWeekConquest();
             roeutils::CycleWeeklyRecords();
             roeutils::CycleUnityRankings();
             lastConquestTally = tick;
@@ -61,7 +60,6 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
-            conquest::UpdateConquestSystem();
             roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
         }

@@ -3,10 +3,9 @@
 --  Mob: Platoon Scorpion
 -- BCNM: Operation Desert Swarm
 -----------------------------------
-local entity = {}
-
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
 local mimicDistance = 15
 -- 25% should cover: "sometimes after ... " - https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm

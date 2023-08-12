@@ -9,11 +9,9 @@
 -- Halver     : !pos 2 0.1 0.1 233
 -- Gravestone : !pos 149.728 -5.109 -395.121 105
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

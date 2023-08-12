@@ -2,10 +2,7 @@
 -- Crafting Guilds
 -- Ref: http://wiki.ffxiclopedia.org/wiki/Crafts_%26_Hobbies
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
-require('scripts/globals/status')
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
@@ -96,7 +93,6 @@ end
 -----------------------------------
 -- getTestItem Action
 -----------------------------------
-
 xi.crafting.getTestItem = function(player, npc, craftID)
     local nextRank  = player:getSkillRank(craftID) + 1
 
@@ -120,7 +116,6 @@ end
 -----------------------------------
 -- tradeTestItem Action
 -----------------------------------
-
 xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
     local guildID    = craftID - 48
     local skillLvL   = player:getSkillLevel(craftID)
@@ -141,17 +136,28 @@ xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
     return newRank
 end
 
--- 1: test item
--- 2: skill point
--- 3: ??
--- 4: 0 Not in the guild 1 In the guild
--- 7: 0 Not in a guild already, 11: Multiple guilds
+-----------------------------------
+-- Guild Master event parameters
+-----------------------------------
+-- 1: Test item ID OR current vanadiel time.
+-- 2: Player REAL Skill at current guild craft.
+-- 3: Player REAL Skill cap at current guild craft.
+-- 4: Bitmask. First 9 bits used for guilds joined.
+    -- Bit 0 = Fishing
+    -- Bit 4 = Clothcraft
+    -- Bit 8 = Cooking
+    -- Higher bits unknown, but used.
+-- 5: Expert Quest status.
+-- 6: ???
+-- 7: COUNT for the number of guilds at rank ARTISAN or higher. This count seems to cycle between it and 0, for rank renouncement trigger.
+-- 8: ???
 
 -----------------------------------
 -- getCraftSkillCap
 -----------------------------------
 xi.crafting.getCraftSkillCap = function(player, craftID)
     local rank = player:getSkillRank(craftID)
+
     return (rank + 1) * 10
 end
 
@@ -164,29 +170,13 @@ end
 -----------------------------------
 xi.crafting.getAdvImageSupportCost = function(player, craftID)
     local rank = player:getSkillRank(craftID)
+
     return (rank + 1) * 30
 end
 
 -----------------------------------
--- unionRepresentative
+-- Rank Renouncement functions
 -----------------------------------
-xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
-    local rank   = player:getSkillRank(guildId + 48)
-    local cap    = (rank + 1) * 10
-    local kibits = 0
-
-    for kbit, ki in pairs(keyitems) do
-        if rank >= ki.rank then
-            if not player:hasKeyItem(ki.id) then
-                kibits = bit.bor(kibits, bit.lshift(1, kbit))
-            end
-        end
-    end
-
-    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
-end
-
 xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
     local ID = zones[player:getZoneID()]
 
@@ -196,22 +186,28 @@ xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
 end
 
 xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, realSkill, rankCap, param3)
-    if player:getLocalVar("renounceDialog") == 0 then
+    if player:getLocalVar("skipRenounceDialog") == 0 then
         local count   = 0
         local bitmask = 0
 
         for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
             local rank = player:getSkillRank(craftID)
-            if rank < 7 then
-                bitmask = bit.bor(bitmask, bit.lshift(1, craftID - 48))
-            else
+
+            if rank >= xi.crafting.rank.ARTISAN then
                 count = count + 1
+            else
+                -- This needs checking. Probably made-up.
+                bitmask = bit.bor(bitmask, bit.lshift(1, craftID - 48))
             end
         end
 
-        if count > 1 then
-            player:setLocalVar("renounceDialog", 1)
+        if count >= 2 then
+            player:setLocalVar("skipRenounceDialog", 1)
+
+            -- TODO: Param 3 is taken directly from captures, but now we know this is incorrect.
+            -- TODO: bitmask needs checking.
             player:startEvent(eventId, VanadielTime(), realSkill, rankCap, param3, 0, 0, count, bitmask)
+
             return true
         end
     end
@@ -219,81 +215,16 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
     return false
 end
 
-xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, guildID, currency, keyitems, items)
-    local rank     = player:getSkillRank(guildID + 48)
-    local category = bit.band(bit.rshift(option, 2), 3)
-    local text     = zones[player:getZoneID()].text
-
-    if bit.tobit(option) == -1 and rank >= 3 then
-        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
-        player:setCharVar('[GUILD]currentGuild', guildID + 1)
-
-        if oldGuild == -1 then
-            player:messageSpecial(text.GUILD_NEW_CONTRACT, guildID)
-        else
-            player:messageSpecial(text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
-            player:setCharVar('[GUILD]daily_points', 1)
-        end
-    elseif category == 3 then -- keyitem
-        local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
-
-        if ki and rank >= ki.rank then
-            if player:getCurrency(currency) >= ki.cost then
-                player:delCurrency(currency, ki.cost)
-                npcUtil.giveKeyItem(player, ki.id)
-            else
-                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
-            end
-        end
-    elseif category == 2 or category == 1 then -- item
-        local idx      = bit.band(option, 3)
-        local i        = items[(category - 1) * 4 + idx]
-        local quantity = math.min(bit.rshift(option, 9), 12)
-        local cost     = quantity * i.cost
-
-        if i and rank >= i.rank then
-            if player:getCurrency(currency) >= cost then
-                local delivered = 0
-                for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
-                    if player:addItem(i.id, true) then
-                        player:delCurrency(currency, i.cost)
-                        player:messageSpecial(text.ITEM_OBTAINED, i.id)
-                        delivered = delivered + 1
-                    end
-                end
-
-                if delivered == 0 then
-                    player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
-                end
-            else
-                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
-            end
-        end
-    elseif category == 0 and option ~= 1073741824 then -- HQ crystal
-        local i = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
-        local quantity = bit.rshift(option, 9)
-        local cost = quantity * i.cost
-
-        if i and rank >= 3 then
-            if
-                player:getCurrency(currency) >= cost and
-                npcUtil.giveItem(player, { { i.id, quantity } })
-            then
-                player:delCurrency(currency, cost)
-            else
-                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
-            end
-        end
-    end
-end
-
+--------------------------------------------------
+-- Guild Point NPCs (Union Representatives)
+--------------------------------------------------
 xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildID)
     local _, remainingPoints = player:getCurrentGPItem(guildID)
-    local text = zones[player:getZoneID()].text
+    local ID                 = zones[player:getZoneID()]
 
     if player:getCharVar('[GUILD]currentGuild') - 1 == guildID then
         if remainingPoints == 0 then
-            player:messageText(npc, text.NO_MORE_GP_ELIGIBLE)
+            player:messageText(npc, ID.text.NO_MORE_GP_ELIGIBLE)
         else
             local totalPoints = 0
             for i = 0, 8 do
@@ -308,6 +239,99 @@ xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildI
             if totalPoints > 0 then
                 player:confirmTrade()
                 player:startEvent(csid, totalPoints)
+            end
+        end
+    end
+end
+
+xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank                    = player:getSkillRank(guildId + 48)
+    local cap                     = (rank + 1) * 10
+    local kibits                  = 0
+
+    for kbit, ki in pairs(keyitems) do
+        if rank >= ki.rank then
+            if not player:hasKeyItem(ki.id) then
+                kibits = bit.bor(kibits, bit.lshift(1, kbit))
+            end
+        end
+    end
+
+    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
+end
+
+xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, guildID, currency, keyitems, items)
+    local rank     = player:getSkillRank(guildID + 48)
+    local category = bit.band(bit.rshift(option, 2), 3)
+    local ID       = zones[player:getZoneID()]
+
+    -- Contract Dialog.
+    if bit.tobit(option) == -1 and rank >= 3 then
+        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
+        player:setCharVar('[GUILD]currentGuild', guildID + 1)
+
+        if oldGuild == -1 then
+            player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildID)
+        else
+            player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
+            player:setCharVar('[GUILD]daily_points', 1)
+        end
+
+    -- GP Key Item Option.
+    elseif category == 3 then
+        local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
+
+        if ki and rank >= ki.rank then
+            if player:getCurrency(currency) >= ki.cost then
+                player:delCurrency(currency, ki.cost)
+                npcUtil.giveKeyItem(player, ki.id)
+            else
+                player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
+            end
+        end
+
+    -- GP Item Option.
+    elseif category == 2 or category == 1 then
+        local idx      = bit.band(option, 3)
+        local i        = items[(category - 1) * 4 + idx]
+        local quantity = math.min(bit.rshift(option, 9), 12)
+        local cost     = quantity * i.cost
+
+        if i and rank >= i.rank then
+            if player:getCurrency(currency) >= cost then
+                local delivered = 0
+
+                for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
+                    if player:addItem(i.id, true) then
+                        player:delCurrency(currency, i.cost)
+                        player:messageSpecial(ID.text.ITEM_OBTAINED, i.id)
+                        delivered = delivered + 1
+                    end
+                end
+
+                if delivered == 0 then
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, i.id)
+                end
+            else
+                player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
+            end
+        end
+
+    -- HQ crystal Option.
+    elseif category == 0 and option ~= 1073741824 then
+        local i        = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
+        local quantity = bit.rshift(option, 9)
+        local cost     = quantity * i.cost
+
+        if i and rank >= 3 then
+            if
+                player:getCurrency(currency) >= cost and
+                npcUtil.giveItem(player, { { i.id, quantity } })
+            then
+                player:delCurrency(currency, cost)
+            else
+                player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     end

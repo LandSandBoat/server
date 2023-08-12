@@ -2,7 +2,6 @@
 -- Area: Promyvion - Vahzl
 --   NM: Provoker
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

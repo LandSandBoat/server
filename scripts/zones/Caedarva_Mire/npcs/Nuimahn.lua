@@ -4,12 +4,13 @@
 -- Type: Alzadaal Undersea Ruins
 -- !pos  -380 0 -381 79
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:getItemCount() == 1 and trade:hasItemQty(2185, 1) then
+    if
+        trade:getItemCount() == 1 and
+        trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1)
+    then
         player:tradeComplete()
         player:startEvent(203)
     end
@@ -23,10 +24,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 203 then
         player:setPos(-515, -6.5, 740, 0, 72)
     end

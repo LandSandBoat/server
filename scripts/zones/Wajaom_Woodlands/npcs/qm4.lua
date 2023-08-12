@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2573) and
+        npcUtil.tradeHas(trade, xi.items.JUG_OF_MONKEY_WINE) and
         npcUtil.popFromQM(player, npc, ID.mob.TINNIN)
     then
         -- Trade Monkey Wine
@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.HEADY_FRAGRANCE)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

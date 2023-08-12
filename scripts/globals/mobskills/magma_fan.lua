@@ -1,12 +1,8 @@
 -----------------------------------
 --  Magma_Fan
---
 --  Description: Deals Fire damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical Fire (Element)
---
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

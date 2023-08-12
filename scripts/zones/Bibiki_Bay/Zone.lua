@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Bibiki_Bay/IDs')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/manaclipper')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -35,8 +34,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -51,10 +50,10 @@ zoneObject.onTransportEvent = function(player, transport)
     xi.manaclipper.onTransportEvent(player, transport)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
         player:startEvent(10) -- arrive at Sunset Docks CS
     elseif csid == 13 then

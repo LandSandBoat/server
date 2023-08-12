@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: North_Gustaberg
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTH_GUSTABERG] =
@@ -135,7 +132,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
 
     npc =
     {
-        OVERSEER_BASE = 17212060, -- Ennigreaud_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Ennigreaud_RK'),
     },
 }
 

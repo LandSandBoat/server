@@ -2,7 +2,6 @@
 -- xi.effect.SPIRIT_SURGE
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 
@@ -12,7 +11,6 @@ effectObject.onEffectGain = function(target, effect)
     -- The dragoon's MAX HP increases by % of wyvern MaxHP
     target:addMod(xi.mod.HP, effect:getPower())
     target:updateHealth()
-    target:addHP(effect:getPower())
 
     -- The dragoon gets a Strength boost relative to his level
     target:addMod(xi.mod.STR, effect:getSubPower())

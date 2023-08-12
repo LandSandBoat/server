@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Under the sea (finish), The gift, The real gift
 -- !pos 48 -15 9 248
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -14,12 +13,12 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 4375)
+        npcUtil.tradeHas(trade, xi.items.DANCESHROOM)
     then
-        player:startEvent(72, 0, 4375) -- Finish quest "The gift"
+        player:startEvent(72, 0, xi.items.DANCESHROOM) -- Finish quest "The gift"
     elseif
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 4484)
+        npcUtil.tradeHas(trade, xi.items.SHALL_SHELL)
     then
         player:startEvent(75) -- Finish quest "The real gift"
     end
@@ -42,7 +41,7 @@ entity.onTrigger = function(player, npc)
         theSandCharm ~= QUEST_AVAILABLE and
         theGift == QUEST_AVAILABLE
     then
-        player:startEvent(70, 4375) -- Start quest "The gift"
+        player:startEvent(70, xi.items.DANCESHROOM) -- Start quest "The gift"
     elseif theGift == QUEST_ACCEPTED then
         player:startEvent(71) -- During quest "The gift"
     elseif theGift == QUEST_COMPLETED and theSandCharm == QUEST_ACCEPTED then
@@ -52,9 +51,9 @@ entity.onTrigger = function(player, npc)
         theSandCharm == QUEST_COMPLETED and
         theRealGift == QUEST_AVAILABLE
     then
-        player:startEvent(73, 4484) -- Start quest "The real gift"
+        player:startEvent(73, xi.items.SHALL_SHELL) -- Start quest "The real gift"
     elseif theRealGift == QUEST_ACCEPTED then
-        player:startEvent(74, 4484) -- During quest "The real gift"
+        player:startEvent(74, xi.items.SHALL_SHELL) -- During quest "The real gift"
     elseif theRealGift == QUEST_COMPLETED then
         player:startEvent(76) -- Final dialog after "The real gift"
     else
@@ -62,10 +61,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32 then
         player:setCharVar("underTheSeaVar", 2)
     elseif

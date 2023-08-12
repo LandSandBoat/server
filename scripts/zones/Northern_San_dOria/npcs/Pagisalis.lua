@@ -12,7 +12,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED then
-        if trade:hasItemQty(913, 2) and trade:getItemCount() == 2 then -- Trade Lump of Beeswax
+        if
+            trade:hasItemQty(xi.items.LUMP_OF_BEESWAX, 2) and
+            trade:getItemCount() == 2
+        then
             player:startEvent(563)
         end
     end
@@ -33,20 +36,20 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 562 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
     elseif csid == 563 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13211) -- Friars Rope
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FRIARS_ROPE)
         else
             player:tradeComplete()
             player:addTitle(xi.title.FAITH_LIKE_A_CANDLE)
-            player:addItem(13211)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13211) -- Friars Rope
+            player:addItem(xi.items.FRIARS_ROPE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FRIARS_ROPE)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
         end

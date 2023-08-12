@@ -5,8 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/RoMaeve/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -32,10 +30,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Vunkerl_Inlet_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VUNKERL_INLET_S] =

@@ -4,10 +4,8 @@
 -----------------------------------
 -- !addmission 12 118
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local ralaID = require('scripts/zones/Rala_Waterways/IDs')
 -----------------------------------

@@ -1,6 +1,5 @@
 -----------------------------------
 -- Discharger
---
 -- Description: Places a magic barrier and shock spikes.
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
@@ -8,8 +7,6 @@
 -- Notes: Used only by Omega
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -7,7 +7,6 @@
 -- !pos 61 32 138 256
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -29,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 148 then
         -- Gave hint for SOA Mission: 'A Curse From the Past'
         player:setCharVar("SOA_ACFTP_Kongramm", 1)

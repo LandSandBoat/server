@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Promyvion-Vahzl
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PROMYVION_VAHZL] =

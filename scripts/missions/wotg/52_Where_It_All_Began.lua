@@ -5,10 +5,8 @@
 -- !addmission 5 51
 -- Lion Springs Door : !pos 96 0 106 80
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHERE_IT_ALL_BEGAN)

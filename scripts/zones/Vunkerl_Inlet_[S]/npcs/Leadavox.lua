@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("BetterPartOfValProg") == 3
     then
         if
-            trade:hasItemQty(2521, 1) and
+            trade:hasItemQty(xi.items.GNOLE_CLAW, 1) and
             trade:getItemCount() == 1 and
             trade:getGil() == 0
         then
@@ -34,10 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 101 then
         player:setCharVar("BetterPartOfValProg", 3)
     elseif csid == 103 then

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Nyzul_Isle
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NYZUL_ISLE] =

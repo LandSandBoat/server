@@ -1,11 +1,9 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -186,17 +184,12 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
     local phantomBase = corsairRollMods[abilityId][2] -- Base increment buff
     effectpower = effectpower + (phantomBase * phantombuffMultiple(caster))
 
-    -- Check if COR Main or Sub
-    if
-        caster:getMainJob() == xi.job.COR and
-        caster:getMainLvl() < target:getMainLvl()
-    then
-        effectpower = effectpower * (caster:getMainLvl() / target:getMainLvl())
-    elseif
-        caster:getSubJob() == xi.job.COR and
-        caster:getSubLvl() < target:getMainLvl()
-    then
-        effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
+    -- Effect Power varies depending on COR level (Main vs Sub)
+    local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)
+    local targetLevel = target:getMainLvl()
+
+    if actorLevel < targetLevel then
+        effectpower = effectpower * actorLevel / targetLevel
     end
 
     if not target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) then
@@ -270,7 +263,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             roll = roll + math.random(1, 6)
         end
 
-        if roll > 12 then -- bust
+        if roll >= 12 then -- bust
             roll = 12
             caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
         end

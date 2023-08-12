@@ -6,12 +6,9 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
@@ -90,7 +87,7 @@ mission.sections =
                         option == 1 and
                         player:getLocalVar("INSTANCE_ID") == 7701
                     then
-                        xi.instance.onEventFinish(player, csid, option)
+                        xi.instance.onEventFinish(player, csid, option, npc)
                     end
                 end,
             },

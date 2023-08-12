@@ -13,7 +13,7 @@ local entity = {}
 -- Lufet Salt can be obtained by killing Crabs in normal West Ronfaure.
 
 entity.onTrade = function(player, npc, trade)
-    local lufetSalt = trade:hasItemQty(1019, 1)
+    local lufetSalt = trade:hasItemQty(xi.items.CHUNK_OF_LUFET_SALT, 1)
     local cnt = trade:getItemCount()
     local beansAhoy = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
 
@@ -45,10 +45,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 334 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
     elseif csid == 337 then
@@ -56,11 +56,14 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BeansAhoy", 1)
         player:needToZone(true)
     elseif csid == 340 or csid == 342 then
-        if player:hasItem(5704, 1) or player:getFreeSlotsCount() < 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 5704)
+        if
+            player:hasItem(xi.items.ANGLERS_CASSOULET, 1) or
+            player:getFreeSlotsCount() < 1
+        then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ANGLERS_CASSOULET)
         else
-            player:addItem(5704, 1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5704)
+            player:addItem(xi.items.ANGLERS_CASSOULET, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ANGLERS_CASSOULET)
             player:setCharVar("BeansAhoy_ConquestWeek", getConquestTally())
             if csid == 340 then
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)

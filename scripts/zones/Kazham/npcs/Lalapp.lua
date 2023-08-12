@@ -34,8 +34,16 @@ entity.onTrade = function(player, npc, trade)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
-    local goodtrade = trade:hasItemQty(1147, 1)
-    local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(4600, 1)
+    local goodtrade = trade:hasItemQty(xi.items.ROCK_OF_ANCIENT_SALT, 1)
+    local badtrade = trade:hasItemQty(xi.items.BROKEN_MITHRAN_FISHING_ROD, 1) or
+        trade:hasItemQty(xi.items.WORKBENCH, 1) or
+        trade:hasItemQty(xi.items.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
+        trade:hasItemQty(xi.items.WANDERING_BULB, 1) or
+        trade:hasItemQty(xi.items.SET_OF_GIANT_FISH_BONES, 1) or
+        trade:hasItemQty(xi.items.TEN_OF_COINS_CARD, 1) or
+        trade:hasItemQty(xi.items.WYVERN_SKULL, 1) or
+        trade:hasItemQty(xi.items.BLACKENED_TOAD, 1) or
+        trade:hasItemQty(xi.items.LUCKY_EGG, 1)
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 8 or failed == 9 then
@@ -67,7 +75,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

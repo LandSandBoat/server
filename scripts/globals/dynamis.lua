@@ -2,14 +2,10 @@
 -- Dynamis
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
@@ -388,7 +384,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     end
 end
 
-xi.dynamis.entryNpcOnEventFinish = function(player, csid, option)
+xi.dynamis.entryNpcOnEventFinish = function(player, csid, option, npc)
     local info     = entryInfo[player:getZoneID()]
     local dynaMask = player:getCharVar("Dynamis_Status")
 
@@ -503,7 +499,7 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
     return cs
 end
 
-xi.dynamis.zoneOnEventFinish = function(player, csid, option)
+xi.dynamis.zoneOnEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local info   = dynaInfo[zoneId]
 
@@ -522,7 +518,7 @@ xi.dynamis.somnialThresholdOnTrigger = function(player, npc)
     player:startEvent(101, 0x27, canUnlockSJ, menuBits)
 end
 
-xi.dynamis.somnialThresholdOnEventFinish = function(player, csid, option)
+xi.dynamis.somnialThresholdOnEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local info   = dynaInfo[zoneId]
     local ID     = zones[zoneId]
@@ -848,5 +844,287 @@ xi.dynamis.procMonster = function(mob, player)
                 mob:weaknessTrigger(0)
             end
         end
+    end
+end
+
+xi.dynamis.hourglassAndCurrencyExchangeNPCLookup =
+{
+    -- Haggleblix
+    [xi.zone.BEADEAUX] =
+    {
+        baseCs = 130,
+        currency =
+        {
+            xi.items.ONE_BYNE_BILL,
+            xi.items.ONE_HUNDRED_BYNE_BILL,
+            xi.items.TEN_THOUSAND_BYNE_BILL,
+        },
+        shop =
+        {
+            7,  xi.items.LOCK_OF_SIRENS_HAIR,
+            8,  xi.items.VIAL_OF_SLIME_JUICE,
+            9,  xi.items.CHUNK_OF_WOOTZ_ORE,
+            12, xi.items.BOTTLE_OF_CANTARELLA,
+            20, xi.items.FLASK_OF_MARKSMANS_OIL,
+            25, xi.items.WOOTZ_INGOT,
+            33, xi.items.KOH_I_NOOR,
+        }
+    },
+    -- Antiquix
+    [xi.zone.CASTLE_OZTROJA] =
+    {
+        baseCs = 50,
+        currency =
+        {
+            xi.items.TUKUKU_WHITESHELL,
+            xi.items.LUNGO_NANGO_JADESHELL,
+            xi.items.RIMILALA_STRIPESHELL,
+        },
+        shop =
+        {
+            7,  xi.items.PIECE_OF_ANGEL_SKIN,
+            8,  xi.items.COLOSSAL_SKULL,
+            9,  xi.items.LANCEWOOD_LOG,
+            23, xi.items.CHRONOS_TOOTH,
+            24, xi.items.CHUNK_OF_RELIC_STEEL,
+            25, xi.items.PIECE_OF_LANCEWOOD_LUMBER,
+            28, xi.items.DAMASCUS_INGOT,
+        }
+    },
+    -- Lootblox
+    [xi.zone.DAVOI] =
+    {
+        baseCs = 130,
+        currency =
+        {
+            xi.items.ORDELLE_BRONZEPIECE,
+            xi.items.MONTIONT_SILVERPIECE,
+            xi.items.RANPERRE_GOLDPIECE,
+        },
+        shop =
+        {
+            5,  xi.items.TWINCOON,
+            6,  xi.items.PILE_OF_RELIC_IRON,
+            7,  xi.items.JAR_OF_GOBLIN_GREASE,
+            8,  xi.items.GRIFFON_HIDE,
+            23, xi.items.SQUARE_OF_GRIFFON_LEATHER,
+            25, xi.items.BEHEMOTH_HORN,
+            28, xi.items.MAMMOTH_TUSK,
+        }
+    },
+}
+
+xi.dynamis.mapShopCosts =
+{
+    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]  = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+    [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+    [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+}
+
+xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
+    local gil       = trade:getGil()
+    local count     = trade:getItemCount()
+    local tradeItem = trade:getItemId(0)
+
+    local zoneId   = player:getZoneID()
+    local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
+    local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
+    local shop     = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].shop
+
+    -- Zero this out, just in case
+    player:setLocalVar("currencyExchange", 0)
+
+    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+        -- buy prismatic hourglass
+        if
+            gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and
+            count == 1 and
+            not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)
+        then
+            player:startEvent(baseCs + 4)
+
+        -- return timeless hourglass for refund
+        elseif count == 1 and trade:hasItemQty(xi.items.TIMELESS_HOURGLASS, 1) then
+            player:startEvent(baseCs + 23)
+
+        -- currency exchanges
+        elseif -- 1's -> 100's
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
+            player:startEvent(baseCs + 5, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif -- 100's -> 10'000's
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
+            player:startEvent(baseCs + 6, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif -- 10'000's to 100's
+            count == 1 and
+            trade:hasItemQty(currency[3], 1) and
+            tradeItem == currency[3]
+        then
+            player:setLocalVar("currencyExchange", currency[2])
+            player:startEvent(baseCs + 8, tradeItem, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif -- (optional) 100's to 1's
+            xi.settings.main.ENABLE_EXCHANGE_100S_TO_1S and
+            count == 1 and
+            trade:hasItemQty(currency[2], 1) and
+            tradeItem == currency[2]
+        then
+            player:setLocalVar("currencyExchange", currency[1])
+            player:startEvent(baseCs + 8, tradeItem, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+
+        -- shop
+        else
+            local item
+            local price
+            for i = 1, 13, 2 do
+                price = shop[i]
+                item = shop[i + 1]
+                if count == price and trade:hasItemQty(currency[2], price) then
+                    player:setLocalVar("hundredItemBought", item)
+                    player:startEvent(baseCs + 7, currency[2], price, item)
+                    break
+                end
+            end
+        end
+    end
+end
+
+xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrigger = function(player, npc)
+    local zoneId   = player:getZoneID()
+    local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
+    local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
+
+    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+        player:startEvent(baseCs + 3, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.main.PRISMATIC_HOURGLASS_COST, xi.items.TIMELESS_HOURGLASS, xi.settings.main.TIMELESS_HOURGLASS_COST)
+    else
+        player:startEvent(baseCs + 0)
+    end
+end
+
+xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventUpdate = function(player, csid, option, npc)
+    local zoneId   = player:getZoneID()
+    local ID       = zones[zoneId]
+    local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
+    local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
+    local shop     = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].shop
+
+    if csid == baseCs + 3 then
+        -- asking about hourglasses
+        if option == 1 then
+            if not player:hasItem(xi.items.TIMELESS_HOURGLASS) then
+                -- must figure out what changes here to prevent the additional dialog
+                -- player:updateEvent(?)
+            end
+
+        -- shop
+        elseif option == 2 then
+            player:updateEvent(unpack(shop, 1, 8))
+        elseif option == 3 then
+            player:updateEvent(unpack(shop, 9, 14))
+
+        -- offer to trade down from a 10k
+        elseif option == 10 then
+            player:updateEvent(currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+
+        -- main menu (param1 = dynamis map bitmask, param2 = gil)
+        elseif option == 11 then
+            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
+
+        -- maps
+        elseif xi.dynamis.mapShopCosts[option] ~= nil then
+            local price = xi.dynamis.mapShopCosts[option]
+            if price > player:getGil() then
+                player:messageSpecial(ID.text.NOT_ENOUGH_GIL)
+            else
+                player:delGil(price)
+                player:addKeyItem(option)
+                player:messageSpecial(ID.text.KEYITEM_OBTAINED, option)
+            end
+
+            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
+        end
+    end
+end
+
+xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid, option, npc)
+    local zoneId   = player:getZoneID()
+    local ID       = zones[zoneId]
+    local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
+    local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
+
+    -- bought prismatic hourglass
+    if csid == baseCs + 4 then
+        player:tradeComplete()
+        player:addKeyItem(xi.ki.PRISMATIC_HOURGLASS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PRISMATIC_HOURGLASS)
+
+    -- refund timeless hourglass
+    elseif csid == baseCs + 13 then
+        player:tradeComplete()
+        npcUtil.giveCurrency(player, 'gil', xi.settings.main.TIMELESS_HOURGLASS_COST)
+
+    -- singles to hundreds
+    elseif csid == baseCs + 5 then
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
+        else
+            player:tradeComplete()
+            player:addItem(currency[2])
+            player:messageSpecial(ID.text.ITEM_OBTAINED, currency[2])
+        end
+
+    -- hundreds to 10k pieces
+    elseif csid == baseCs + 6 then
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[3])
+        else
+            player:tradeComplete()
+            player:addItem(currency[3])
+            player:messageSpecial(ID.text.ITEM_OBTAINED, currency[3])
+        end
+
+    -- 10k pieces to hundreds (or hundreds to singles)
+    elseif csid == baseCs + 8 then
+        local currencyExchange = player:getLocalVar("currencyExchange")
+        local slotsReq         = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
+        if player:getFreeSlotsCount() < slotsReq then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currencyExchange)
+        else
+            player:tradeComplete()
+            for i = 1, slotsReq do
+                if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
+                    player:addItem(currencyExchange, 99)
+                else
+                    player:addItem(currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
+                end
+            end
+
+            player:messageSpecial(ID.text.ITEMS_OBTAINED, currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        end
+
+        -- Zero this out, just in case
+        player:setLocalVar("currencyExchange", 0)
+
+    -- bought item from shop
+    elseif csid == baseCs + 7 then
+        local item = player:getLocalVar("hundredItemBought")
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
+        else
+            player:tradeComplete()
+            player:addItem(item)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+        end
+
+        player:setLocalVar("hundredItemBought", 0)
     end
 end

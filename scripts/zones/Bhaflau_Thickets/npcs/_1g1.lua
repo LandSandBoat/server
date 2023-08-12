@@ -4,7 +4,6 @@
 -- !pos -180 -10 -758 52
 -----------------------------------
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -29,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

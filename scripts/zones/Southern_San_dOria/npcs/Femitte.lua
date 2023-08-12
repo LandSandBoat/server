@@ -5,7 +5,6 @@
 -- !pos -17 2 10 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -42,10 +41,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 807 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
     elseif csid == 663 and option == 0 then
@@ -55,11 +54,11 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("DistantLoyaltiesProgress", 1)
     elseif csid == 665 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13585)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WHITE_CAPE)
         else
             player:delKeyItem(xi.ki.MYTHRIL_HEARTS)
-            player:addItem(13585, 1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13585)
+            player:addItem(xi.items.WHITE_CAPE, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.WHITE_CAPE)
             player:setCharVar("DistantLoyaltiesProgress", 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
         end

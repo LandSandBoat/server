@@ -4,7 +4,6 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos -199.635 96.106 505.624 106
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(900)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

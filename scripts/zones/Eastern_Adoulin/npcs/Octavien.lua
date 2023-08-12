@@ -5,8 +5,6 @@
 -- Starts Children of the Rune
 -- !pos 100.580 -40.150 -63.830
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Eastern_Adoulin/IDs")
@@ -61,7 +59,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 26 then
         if option == 1 then
             -- Half the players MP and HP unless the HP is really low, to avoid
@@ -79,7 +77,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
         if option == 0 then

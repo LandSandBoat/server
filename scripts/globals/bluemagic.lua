@@ -2,11 +2,8 @@
 -- Blue Magic utilities
 -- Used for Blue Magic spells.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -142,7 +139,7 @@ end
 
 -- Get the effect of ecosystem correlation
 local function calculateCorrelation(spellEcosystem, monsterEcosystem, merits)
-    local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
+    local effect = utils.getEcosystemStrengthBonus(spellEcosystem, monsterEcosystem)
     effect = effect * 0.25
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
         effect = effect + 0.001 * merits
@@ -195,7 +192,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Azure Lore
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
@@ -269,7 +266,6 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local wsc = calculateWSC(caster, params)
     if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
         wsc = wsc * 2
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
     -- INT/MND/CHR dmg bonuses
@@ -283,13 +279,13 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     end
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Final D value
     local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
 
     -- Multitarget damage reduction
-    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(caster, target, spell))
+    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(spell))
 
     -- Resistance
     finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
@@ -356,7 +352,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     end
 
     -- Monster correlation
-    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
     dmg = dmg * (1 + correlationMultiplier)
 
     -- Monster elemental adjustments
@@ -390,7 +386,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)

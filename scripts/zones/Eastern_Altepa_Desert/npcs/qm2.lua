@@ -5,7 +5,6 @@
 -- !pos 47.852 -7.808 403.391 114
 -----------------------------------
 local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -35,10 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

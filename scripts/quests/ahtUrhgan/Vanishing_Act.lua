@@ -4,10 +4,8 @@
 -- Fochacha, Whitegate , !pos 3 -1 -10.781 50
 -- Qutiba, Whitegate, !pos 92 -7.5 -130 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

@@ -15,8 +15,6 @@
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
@@ -70,10 +68,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 139 and option == 1 then
         player:addKeyItem(xi.ki.BATTLE_RATIONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BATTLE_RATIONS)
@@ -93,12 +91,12 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("BLUE_R_LETTER_USED", 0)
                 player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:addItem(15754)
+                player:addItem(xi.items.SPRINTERS_SHOES)
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPRINTERS_SHOES)
             else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15754)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SPRINTERS_SHOES)
             end
         else
             player:setCampaignAllegiance(2)

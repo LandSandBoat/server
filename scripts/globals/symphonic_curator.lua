@@ -1,7 +1,6 @@
 -----------------------------------
 -- Symphonic Curator (Moghouse)
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 -----------------------------------
 -- NOTE: You can force the Symphonic Curator to appear
@@ -126,11 +125,11 @@ local optionToSongLookup =
     [434] = 29,  -- Devils' Delight
 }
 
-xi.symphonic_curator.onEventUpdate = function(player, csid, option)
+xi.symphonic_curator.onEventUpdate = function(player, csid, option, npc)
     player:changeMusic(6, optionToSongLookup[option])
 end
 
-xi.symphonic_curator.onEventFinish = function(player, csid, option)
+xi.symphonic_curator.onEventFinish = function(player, csid, option, npc)
     if option == 0 then
         -- Reset
         player:changeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))

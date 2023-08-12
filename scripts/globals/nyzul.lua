@@ -3,11 +3,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/appraisal")
-require("scripts/globals/items")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}

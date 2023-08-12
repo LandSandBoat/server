@@ -10,12 +10,10 @@
 -- Mourices        : !pos -50.646 -0.501 -27.642 241
 -- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
@@ -118,7 +116,7 @@ mission.sections =
                     if missionStatus == 11 then
                         return mission:progressEvent(507)
                     elseif missionStatus == 0 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust = (not player:hasSpell(xi.magic.spell.HALVER) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(505, { [7] = needsHalverTrust })
                     else
@@ -134,7 +132,7 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
 
                     if
-                        not player:hasSpell(972) and
+                        not player:hasSpell(xi.magic.spell.HALVER) and
                         not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)

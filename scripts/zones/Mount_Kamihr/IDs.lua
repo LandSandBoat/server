@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Mount_Kamihr
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MOUNT_KAMIHR] =

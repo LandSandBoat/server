@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2588) and
+        npcUtil.tradeHas(trade, xi.items.LUMP_OF_BONE_CHARCOAL) and
         npcUtil.popFromQM(player, npc, ID.mob.REACTON)
     then
-        -- Trade Bone Charcoal
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.THIN_LAYER_OF_CINDER)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

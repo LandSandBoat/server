@@ -1,11 +1,8 @@
 -----------------------------------
 --  Colonization Reives
---
 -- https://www.bg-wiki.com/ffxi/Category:Reive#Colonization_Reive
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.reives = xi.reives or {}

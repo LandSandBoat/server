@@ -22,8 +22,8 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
-#include "../lua/luautils.h"
 #include "common/logging.h"
+#include "lua/luautils.h"
 
 #include <memory>
 

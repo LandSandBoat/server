@@ -5,9 +5,7 @@
 -- Horatius : !pos -158 -6 -117 235
 -- qm2      : !pos -120.041 2.621 415.989 191
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

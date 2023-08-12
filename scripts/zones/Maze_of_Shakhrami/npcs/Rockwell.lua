@@ -5,7 +5,6 @@
 -- !pos -18 -13 181 198
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -32,10 +31,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 52 and npcUtil.giveItem(player, xi.items.DIVINATION_SPHERE) then
         player:setCharVar("QuestYourCrystalBall_prog", 0)
     end

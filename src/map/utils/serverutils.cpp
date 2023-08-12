@@ -27,9 +27,9 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "../utils/serverutils.h"
+#include "utils/serverutils.h"
 
-#include "../map.h"
+#include "map.h"
 
 namespace serverutils
 {

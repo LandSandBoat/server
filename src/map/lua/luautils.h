@@ -126,18 +126,19 @@ namespace luautils
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
-    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry = false);
-    auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
+    void CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry = false);
+    auto GetCacheEntryFromFilename(std::string const& filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
 
-    void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
+    void PopulateIDLookupsByFilename(std::optional<std::string> maybeFilename = std::nullopt);
+    void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId = std::nullopt);
 
     void SendEntityVisualPacket(uint32 npcid, const char* command);
     void InitInteractionGlobal();
     auto GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
     auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetEntityByID(uint32 mobid, sol::object const& instanceObj, sol::object const& arg3) -> std::optional<CLuaBaseEntity>;
 
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
@@ -180,6 +181,7 @@ namespace luautils
     bool   IsMoonNew();  // Returns true if the moon is new
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
+    int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
     void  SetServerVariable(std::string const& name, int32 value);
@@ -208,7 +210,7 @@ namespace luautils
     int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea); // when player leaves a trigger area in a zone
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
-    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
+    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // hourly conquest update
 
     void OnServerStart();
     void OnJSTMidnight();
@@ -309,11 +311,11 @@ namespace luautils
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
     int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
-    uint32 GetMobRespawnTime(uint32 mobid);                        // get the respawn time of a mob
-    void   DisallowRespawn(uint32 mobid, bool allowRespawn);       // Allow or prevent a mob from spawning
-    void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
-    void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
-    int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
+    uint32 GetMobRespawnTime(uint32 mobid);                  // get the respawn time of a mob
+    void   DisallowRespawn(uint32 mobid, bool allowRespawn); // Allow or prevent a mob from spawning
+    void   UpdateNMSpawnPoint(uint32 mobid);                 // Update the spawn point of an NM
+
+    std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
@@ -328,7 +330,7 @@ namespace luautils
     void OnPlayerLevelDown(CCharEntity* PChar);
     void OnPlayerMount(CCharEntity* PChar);
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string const& text);
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre); // chocobo digging, pre = check
 
@@ -344,7 +346,7 @@ namespace luautils
 
     auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
     bool HasCustomMenuContext(CCharEntity* PChar);
-    void HandleCustomMenu(CCharEntity* PChar, std::string selection);
+    void HandleCustomMenu(CCharEntity* PChar, const std::string& selection);
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);

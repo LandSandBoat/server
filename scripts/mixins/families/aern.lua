@@ -31,17 +31,33 @@ g_mixins.families.aern = function(aernMob)
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         end
 
-        local target = mob:getTarget()
+        local target   = mob:getTarget()
+        local targetID = 0
+        local masterID = 0
 
-        if
-            target and
-            target:isPet() and
-            not target:isAlive()
-        then
-            target = target:getMaster()
+        if target then
+            targetID = target:getID()
+        end
+
+        if target:isPet() and target:getMaster() then
+            masterID = target:getMaster():getID()
         end
 
         mob:timer(12000, function(mobArg)
+            target = GetPlayerByID(targetID)
+            if target == nil then
+                -- try mob
+                target = GetEntityByID(targetID, mobArg:getInstance(), true)
+            end
+
+            if target == nil and masterID ~= 0 then
+                target = GetPlayerByID(masterID)
+                if target == nil then
+                    -- try mob
+                    target = GetEntityByID(masterID, mobArg:getInstance(), true)
+                end
+            end
+
             mobArg:setHP(mob:getMaxHP())
             mobArg:setAnimationSub(3)
             mobArg:setLocalVar("AERN_RERAISES", currReraise + 1)

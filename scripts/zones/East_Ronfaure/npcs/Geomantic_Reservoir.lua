@@ -5,7 +5,6 @@
 -- !pos 379.572 -39.057 57.502 101
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
 -----------------------------------
 local entity = {}
 
@@ -16,10 +15,10 @@ entity.onTrigger = function(player, npc)
     xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_POISON)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_POISON)
 end
 

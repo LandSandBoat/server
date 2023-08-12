@@ -1,14 +1,10 @@
 -----------------------------------
 --  Undead Mold
---
 --  Description: Releases undead spores that diseases targets in front.
 --  Type: Enfeebling
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Front arc
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

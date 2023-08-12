@@ -7,10 +7,8 @@
 -- Kipligg      : !pos -32 0 22 256
 -- Port Storage : !pos 85.578 30.5 180.639 256
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MELVIEN_DE_MALECROIX)

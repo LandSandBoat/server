@@ -14,13 +14,13 @@ entity.onTrade = function(player, npc, trade)
     local total = player:getCurrency("jetton")
     local max = 100000000
 
-    if trade:hasItemQty(2184, count) then
+    if trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, count) then
         result = 2 * count
-    elseif trade:hasItemQty(2185, count) then
+    elseif trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, count) then
         result = 10 * count
-    elseif trade:hasItemQty(2186, count) then
+    elseif trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, count) then
         result = 30 * count
-    elseif trade:hasItemQty(2187, count) then
+    elseif trade:hasItemQty(xi.items.IMPERIAL_GOLD_PIECE, count) then
         result = 200 * count
     end
 
@@ -42,10 +42,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(1900, player:getCurrency("jetton"))
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1900 then -- onTrigger
         local shop =
         {

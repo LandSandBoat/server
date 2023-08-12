@@ -5,10 +5,8 @@
 -- !addmission 6 138
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local lufaiseID = require('scripts/zones/Lufaise_Meadows/IDs')
 -----------------------------------

@@ -3,9 +3,7 @@
 --  NPC: Imperial Whitegate
 -- pos: 152, -2, 0, 50
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
@@ -40,7 +38,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local standardParam = 0
-        if not player:hasItem(129) then
+        if not player:hasItem(xi.items.IMPERIAL_STANDARD) then
             standardParam = 1
         end
 
@@ -50,7 +48,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 3140 or csid == 3155 then
         if option == 1 and npcUtil.giveItem(player, xi.items.BALRAHNS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
@@ -69,7 +67,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)

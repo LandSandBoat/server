@@ -6,7 +6,6 @@
 -- !pos 70 -24 21 167
 -----------------------------------
 local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
@@ -33,13 +32,13 @@ end
 entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("troubleAtTheSluiceVar") == 2 and
-        npcUtil.tradeHas(trade, 959)
-    then -- Dahlia
+        npcUtil.tradeHas(trade, xi.items.DAHLIA)
+    then
         player:startEvent(17)
     elseif
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 930)
-    then -- Beastman Blood
+        npcUtil.tradeHas(trade, xi.items.VIAL_OF_BEASTMAN_BLOOD)
+    then
         player:startEvent(12)
     end
 end
@@ -87,7 +86,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("theHolyCrestCheck", 1)
     elseif
         csid == 12 and
-        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = 4853 })
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = xi.items.SCROLL_OF_DRAIN })
     then
         player:confirmTrade()
     elseif csid == 13 and option == 1 then

@@ -3,12 +3,8 @@
 -- https://www.bg-wiki.com/ffxi/Category:Chocobo_Racing
 -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Racing_Guide
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}
 
@@ -41,7 +37,7 @@ xi.chocoboRacing.startRace = function()
 end
 
 -- 0x05C
-xi.chocoboRacing.onEventUpdate = function(player, csid, option)
+xi.chocoboRacing.onEventUpdate = function(player, csid, option, npc)
     debug(player, "update", csid, option)
 
     local chocobos =
@@ -79,7 +75,7 @@ xi.chocoboRacing.onEventUpdate = function(player, csid, option)
     end
 end
 
-xi.chocoboRacing.onEventFinish = function(player, csid, option)
+xi.chocoboRacing.onEventFinish = function(player, csid, option, npc)
     debug(player, "finish", csid, option)
     if csid == 210 and option == 17 then
         debug(player, "Hand out winnings")

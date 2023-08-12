@@ -7,7 +7,6 @@
 local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -50,10 +49,10 @@ entity.onPath = function(npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

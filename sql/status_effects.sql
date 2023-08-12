@@ -316,7 +316,7 @@ INSERT INTO `status_effects` VALUES (283,'perfect_defense',4194336,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (284,'egg',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (285,'visitant',41943296,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (286,'baramnesia',41,106,0,0,0,0,0,0,500);
-INSERT INTO `status_effects` VALUES (287,'atma',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (287,'atma',0,0,0,4,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (288,'endark',41,94,51,0,0,0,8,0,0);
 INSERT INTO `status_effects` VALUES (289,'enmity_boost',32,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (290,'subtle_blow_plus',32,0,0,0,0,0,0,0,0);
@@ -387,7 +387,7 @@ INSERT INTO `status_effects` VALUES (354,'seigan',41,353,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (355,'convergence',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (356,'diffusion',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (357,'snake_eye',4194336,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (358,'light_arts',4194592,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (358,'light_arts',13631776,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (359,'dark_arts',4194592,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (360,'penury',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (361,'parsimony',4194336,0,0,0,0,0,0,0,0);
@@ -656,7 +656,6 @@ INSERT INTO `status_effects` VALUES (785,'prowess_macc_matk',768,0,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (786,'prowess_cure_potency',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (787,'prowess_ws_dmg',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (788,'prowess_killer',768,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (789,'field_support_food',8421408,0,0,2,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (790,'mark_of_seed',768,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (791,'all_miss',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (792,'super_buff',32,0,0,0,0,0,0,0,0);

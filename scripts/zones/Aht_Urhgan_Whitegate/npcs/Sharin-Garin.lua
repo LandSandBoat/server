@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -26,10 +25,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(140, 0, mercRank, hasPermit, points, hasAstral, cost, captain)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 140 and
         option == 1 and

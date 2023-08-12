@@ -1,7 +1,6 @@
 -----------------------------------
 -- Veridical Conflux Global
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 -----------------------------------
@@ -212,7 +211,7 @@ xi.conflux.confluxOnTrigger = function(player, npc)
     end
 end
 
-xi.conflux.confluxEventUpdate = function(player, csid, option)
+xi.conflux.confluxEventUpdate = function(player, csid, option, npc)
     player:updateEvent(1, 0, 0, 0, 0, 0, 0, 0)
 end
 

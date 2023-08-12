@@ -3,8 +3,6 @@
 -- Kabura Quiver
 -- When used, you will obtain one stack of Kabura Arrows
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17325, 99)
+    target:addItem(xi.items.KABURA_ARROW, 99)
 end
 
 return itemObject

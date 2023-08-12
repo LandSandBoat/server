@@ -16,24 +16,24 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4441, 837, 1,    --Grape Juice
-        4356, 180, 2,    --White Bread
-        4380, 198, 2,    --Smoked Salmon
-        4423, 270, 2,    --Apple Juice
-        4364, 108, 3,    --Black Bread
-        4376, 108, 3,    --Meat Jerky
-        4509,  10, 3,    --Distilled Water
-        5007, 163, 3,    --Scroll of Sword Madrigal
+        xi.items.LOAF_OF_BLACK_BREAD,      124, 3,
+        xi.items.LOAF_OF_WHITE_BREAD,      208, 2,
+        xi.items.STRIP_OF_MEAT_JERKY,      124, 3,
+        xi.items.SMOKED_SALMON,            228, 2,
+        xi.items.FLASK_OF_DISTILLED_WATER,  12, 3,
+        xi.items.BOTTLE_OF_GRAPE_JUICE,    967, 1,
+        xi.items.BOTTLE_OF_APPLE_JUICE,    312, 2,
+        xi.items.SCROLL_OF_SWORD_MADRIGAL, 189, 3,
     }
 
     player:showText(npc, ID.text.BONCORT_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

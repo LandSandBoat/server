@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Southern_San_dOria_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -48,6 +45,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         NOW_ALLIED_WITH               = 12152, -- You are now a member of the [/Knights of the Iron Ram/Republican Legion's Fourth Division/Cobra Unit]!
         ALLIED_SIGIL                  = 12927, -- You have received the Allied Sigil!
         DOOR_IS_FIRMLY_LOCKED         = 13553, -- The door is firmly locked...
+        LUROUILLAT_TURN_IN            = 13660, -- Just as we suspected. This contains a great deal of information that will prove vital to our cause. Hm, what's this? Not sure what to make of this... Doesn't seem to be terribly important. Here, why don't you hang onto it? See if you can't get some use out of it down the road.
         CONCERNED_FOR_WOUNDED         = 13682, -- Concerned for the wounded Sir Ragelise, Lilisette and Portia have been paying him regular visits as of late. Alexei Mayakov suggests that the Chateau d'Oraguille is where the two of them are likely to be.
         MUST_GATHER_SIGNATURES        = 14012, -- You must gather signatures from at least <number> knights of the Kingdom.
         CURRENT_PETITIONS             = 14013, -- Current <keyitem>: <number>.

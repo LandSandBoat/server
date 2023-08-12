@@ -130,17 +130,17 @@ namespace logging
 
         // Sink to console
         std::vector<spdlog::sink_ptr> sinks;
-        sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+        sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
         // Daily Sink, creating new files at midnight
         if (appendDate)
         {
-            sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 0, false, 0));
+            sinks.emplace_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 0, false, 0));
         }
         // Basic sink, sink to file with name specified in main routine
         else
         {
-            sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
+            sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
         }
 
         for (auto& name : logNames)

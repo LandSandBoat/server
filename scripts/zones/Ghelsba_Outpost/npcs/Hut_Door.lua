@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
@@ -23,8 +22,8 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.bcnm.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.bcnm.onEventFinish(player, csid, option, npc)
 end
 
 return entity

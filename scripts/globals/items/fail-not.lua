@@ -2,8 +2,6 @@
 -- ID: 22117, 22131
 -- Item: Fail-Not
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 local itemObject = {}

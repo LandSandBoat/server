@@ -30,7 +30,7 @@
 #include <windows.h>
 #endif
 
-Application::Application(std::string serverName, int argc, char** argv)
+Application::Application(std::string const& serverName, int argc, char** argv)
 : m_ServerName(serverName)
 , m_RequestExit(false)
 , gArgParser(std::make_unique<argparse::ArgumentParser>(argv[0]))
@@ -64,7 +64,16 @@ Application::Application(std::string serverName, int argc, char** argv)
     ShowInfo("The %s-server is ready to work...", serverName);
     ShowInfo("=======================================================================");
 
+    // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+
+    gConsoleService->RegisterCommand("exit", "Terminate the program.",
+    [&](std::vector<std::string>& inputs)
+    {
+        fmt::print("> Goodbye!\n");
+        m_RequestExit = true;
+    });
+    // clang-format on
 }
 
 bool Application::IsRunning()
@@ -79,5 +88,6 @@ void Application::Tick()
     while (!m_RequestExit)
     {
         next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
+        std::this_thread::sleep_for(next);
     }
 }

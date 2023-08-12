@@ -5,7 +5,6 @@
 --                       'Vegetable Vegetable Crisis'
 -- !pos 89 0 -75 256
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -51,10 +50,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- DO NOT GO INTO THE LIGHT
     if csid == 5076 then
         player:confirmTrade()
@@ -65,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 5089 then
         player:confirmTrade()
         player:setCharVar("VVC_Status", 2)
-        player:setCharVar("VVC_Gameday_Wait", vanaDay())
+        player:setCharVar("VVC_Gameday_Wait", VanadielUniqueDay())
     end
 end
 

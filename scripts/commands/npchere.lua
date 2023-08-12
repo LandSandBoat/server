@@ -16,8 +16,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, npcId, noDepop)
-    require("scripts/globals/status")
-
     -- validate npc
     local targ
     if npcId == nil then

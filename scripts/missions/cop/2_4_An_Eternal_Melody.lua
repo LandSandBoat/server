@@ -8,10 +8,8 @@
 -- Dilapidated Gate : !pos 260 9 -435 25
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.AN_ETERNAL_MELODY)

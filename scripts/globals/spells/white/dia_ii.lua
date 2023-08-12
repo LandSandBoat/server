@@ -2,11 +2,8 @@
 -- Spell: Dia II
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -22,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.hasMultipleTargetReduction = false
     params.diff = 0
-    params.bonus = 1.0
+    params.bonus = 10
 
     -- Calculate raw damage
     local dmg = basedmg

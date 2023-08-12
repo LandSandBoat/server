@@ -115,7 +115,11 @@ UCONTAINERTYPE CUContainer::GetType()
 
 void CUContainer::SetType(UCONTAINERTYPE Type)
 {
-    XI_DEBUG_BREAK_IF(m_ContainerType != UCONTAINER_EMPTY);
+    if (m_ContainerType != UCONTAINER_EMPTY)
+    {
+        ShowWarning("Attempting to set Type of container that has previous value configured.");
+        return;
+    }
 
     m_ContainerType = Type;
 }

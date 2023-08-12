@@ -5,9 +5,7 @@
 -- !pos 242 24.395 468 110
 -----------------------------------
 local ID = require("scripts/zones/Rolanberry_Fields/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -74,10 +72,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 8004 then
         player:setCharVar("LegionStatus", 1)
     elseif csid == 8005 then

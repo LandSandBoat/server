@@ -4,11 +4,6 @@
 -- Type: Tutorial NPC
 -- !pos -364.121 -11.034 -167.456 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/status")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}
@@ -20,10 +15,10 @@ entity.onTrigger = function(player, npc)
     xi.tutorial.onTrigger(player, npc, 518, 1)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.tutorial.onEventFinish(player, csid, option, 518, 1)
 end
 

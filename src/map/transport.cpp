@@ -50,10 +50,15 @@ void Transport_Ship::setVisible(bool visible) const
     if (visible)
     {
         this->npc->status = STATUS_TYPE::NORMAL;
+        // This appears to be some sort of magic bit/flag set. In QSC 0x8001 is observed on the effects that light up the weight on the weighted doors.
+        // The effect of 0x8001 appears to be to "stay in place" and not "stand on top of" things, such as the floor -- most likely fixes positions to the exact X/Y/Z coords supplied in 0x00E.
+        this->npc->loc.p.moving = 0x8007;
     }
     else
     {
         this->npc->status = STATUS_TYPE::DISAPPEAR;
+        // Missing 0x0001 bit here
+        this->npc->loc.p.moving = 0x8006;
     }
 }
 
@@ -124,7 +129,11 @@ void Elevator_t::closeDoor(CNpcEntity* npc) const
 
 void CTransportHandler::InitializeTransport()
 {
-    XI_DEBUG_BREAK_IF(townZoneList.size() != 0);
+    if (townZoneList.size() != 0)
+    {
+        ShowError("townZoneList is not empty.");
+        return;
+    }
 
     const char* fmtQuery = "SELECT id, transport, door, dock_x, dock_y, dock_z, dock_rot, \
                             boundary, zone, anim_arrive, anim_depart, time_offset, time_interval, \
@@ -184,7 +193,7 @@ void CTransportHandler::InitializeTransport()
                 continue;
             }
 
-            townZoneList.push_back(zoneTown);
+            townZoneList.emplace_back(zoneTown);
         }
     }
 
@@ -199,7 +208,7 @@ void CTransportHandler::InitializeTransport()
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            TransportZone_Voyage voyageZone;
+            TransportZone_Voyage voyageZone{};
 
             voyageZone.voyageZone = nullptr;
             voyageZone.voyageZone = zoneutils::GetZone((uint8)sql->GetUIntData(0));
@@ -215,7 +224,7 @@ void CTransportHandler::InitializeTransport()
 
                 voyageZone.state = STATE_TRANSPORTZONE_INIT;
 
-                voyageZoneList.push_back(voyageZone);
+                voyageZoneList.emplace_back(voyageZone);
             }
             else
             {
@@ -401,6 +410,23 @@ void CTransportHandler::TransportTimer()
         }
     }
 }
+
+// gets returns a pointer to an Elevator_t if available
+Elevator_t* CTransportHandler::getElevator(uint8 elevatorID)
+{
+    for (auto& i : ElevatorList)
+    {
+        Elevator_t* elevator = &i;
+
+        if (elevator->id == elevatorID)
+        {
+            return elevator;
+        }
+    }
+
+    return nullptr;
+}
+
 /************************************************************************
  *                                                                       *
  *  Initializes an elevator                                              *
@@ -416,7 +442,8 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
 
         if (PElevator->Elevator->GetName() == elevator.Elevator->GetName() && PElevator->zoneID == elevator.zoneID)
         {
-            XI_DEBUG_BREAK_IF(true);
+            ShowError("Elevator already exists.");
+            return;
         }
     }
 
@@ -460,7 +487,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     elevator.LowerDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_CLOSE_DOOR : ANIMATION_OPEN_DOOR;
     elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_OPEN_DOOR : ANIMATION_CLOSE_DOOR;
 
-    ElevatorList.push_back(elevator);
+    ElevatorList.emplace_back(elevator);
 }
 
 /************************************************************************

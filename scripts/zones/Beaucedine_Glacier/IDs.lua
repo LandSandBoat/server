@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine_Glacier
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEAUCEDINE_GLACIER] =
@@ -106,8 +103,8 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        MIRROR_POND_J8  = 17232206, -- Mirror_Pond_1 in npc_list
-        OVERSEER_BASE   = 17232217, -- Parledaire_RK in npc_list
+        MIRROR_POND_J8 = 17232206, -- Mirror_Pond_1 in npc_list
+        OVERSEER_BASE  = GetFirstID('Parledaire_RK'),
     },
 }
 

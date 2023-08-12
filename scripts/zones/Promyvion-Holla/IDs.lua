@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Promyvion-Holla
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PROMYVION_HOLLA] =

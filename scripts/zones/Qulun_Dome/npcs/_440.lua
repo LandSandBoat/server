@@ -4,7 +4,6 @@
 -- Involved in Mission: Magicite
 -- !pos 60 24 -2 148
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 -----------------------------------
 local entity = {}
@@ -27,10 +26,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 50 or csid == 51) and option == 1 then
         player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, xi.ki.SILVER_BELL, xi.ki.CORUSCANT_ROSARY, xi.ki.BLACK_MATINEE_NECKLACE)
     end

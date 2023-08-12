@@ -1,15 +1,11 @@
 -----------------------------------
 -- Cavernous Maw global functions
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.maws = xi.maws or {}
 
@@ -109,7 +105,7 @@ xi.maws.onTrigger = function(player, npc)
     end
 end
 
-xi.maws.onEventFinish = function(player, csid, option)
+xi.maws.onEventFinish = function(player, csid, option, npc)
     local maw = xi.maws.pastMaws[player:getZoneID()]
 
     if csid == maw.cs.warp and option == 1 then

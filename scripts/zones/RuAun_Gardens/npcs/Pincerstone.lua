@@ -4,7 +4,6 @@
 -- NPCs which activates the blue teleports in sky
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -27,10 +26,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

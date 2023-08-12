@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Buburimu_Peninsula
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BUBURIMU_PENINSULA] =
@@ -65,7 +62,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     },
     npc =
     {
-        OVERSEER_BASE   = 17261150, -- Bonbavour_RK in npc_list
+        OVERSEER_BASE   = GetFirstID('Bonbavour_RK'),
         SIGNPOST_OFFSET = 17261165,
         LOGGING =
         {

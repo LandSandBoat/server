@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Quagmire Pugil
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

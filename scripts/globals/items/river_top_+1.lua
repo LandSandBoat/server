@@ -3,8 +3,6 @@
 -- River Top +1
 -- Dispense: Berry Snowcone
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5710, 1)
+    target:addItem(xi.items.BERRY_SNOW_CONE, 1)
 end
 
 return itemObject

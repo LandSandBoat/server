@@ -4,8 +4,6 @@
 -- (Corsair's Gants) !pos -200 -4 -111 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -18,10 +16,10 @@ entity.onTrade = function(player, npc, trade)
         if
             letterGreen == 2 and
             trade:getItemCount() == 4 and
-            trade:hasItemQty(823, 1) and
-            trade:hasItemQty(879, 1) and
-            trade:hasItemQty(1829, 1) and
-            trade:hasItemQty(2304, 1)
+            trade:hasItemQty(xi.items.SPOOL_OF_GOLD_THREAD, 1) and
+            trade:hasItemQty(xi.items.SQUARE_OF_KARAKUL_LEATHER, 1) and
+            trade:hasItemQty(xi.items.SQUARE_OF_RED_GRASS_CLOTH, 1) and
+            trade:hasItemQty(xi.items.SPOOL_OF_WAMOURA_SILK, 1)
         then
             player:startEvent(943) -- accepts materials, now bring me 4 imperial mythril pieces
 
@@ -29,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
         elseif
             letterGreen == 3 and
             trade:getItemCount() == 4 and
-            trade:hasItemQty(2186, 4)
+            trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, 4)
         then
             player:startEvent(946) -- accepts mythril pieces, now wait for next vana'diel day
         end
@@ -47,7 +45,7 @@ entity.onTrigger = function(player, npc)
         elseif letterGreen == 3 then
             player:startEvent(954) -- i'm waiting for 4 imperial mythril pieces
         elseif letterGreen == 4 then
-            if vanaDay() > player:getCharVar("corAfSubmitDay") then
+            if VanadielUniqueDay() > player:getCharVar("corAfSubmitDay") then
                 player:startEvent(944) -- here's your cor gants
             else
                 player:startEvent(945) -- patience. need to wait for vana'diel day
@@ -56,10 +54,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 941 then
         player:setCharVar("LeleroonsLetterGreen", 2)
         player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
@@ -69,11 +67,11 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 946 then
         player:tradeComplete()
         player:setCharVar("LeleroonsletterGreen", 4)
-        player:setCharVar("corAfSubmitDay", vanaDay())
+        player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
     elseif csid == 944 then
         player:setCharVar("LeleroonsletterGreen", 5)
-        player:addItem(14929) -- corsair's gants
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 14929)
+        player:addItem(xi.items.CORSAIRS_GANTS) -- corsair's gants
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CORSAIRS_GANTS)
     end
 end
 

@@ -342,7 +342,17 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_WINDURST_D             = 296,
     ZONE_DYNAMIS_JEUNO_D                = 297,
     ZONE_WALK_OF_ECHOES_P1              = 298,
-    MAX_ZONEID                          = 299,
+    ZONE_GWORA_THRONE_ROOM              = 299,
+    MAX_ZONEID                          = 300,
+};
+
+enum NATION_TYPE : uint8
+{
+    NATION_SANDORIA = 0x00,
+    NATION_BASTOK   = 0x01,
+    NATION_WINDURST = 0x02,
+    NATION_BEASTMEN = 0x03,
+    NATION_NEUTRAL  = 0xFF,
 };
 
 enum class REGION_TYPE : uint8
@@ -411,7 +421,7 @@ enum class ZONE_TYPE : uint8
     CITY              = 1,
     OUTDOORS          = 2,
     DUNGEON           = 3,
-    BATTLEFIELD       = 4,
+    UNUSED            = 4, // formerly BATTLEFIELD
     DYNAMIS           = 5,
     DUNGEON_INSTANCED = 6,
 };
@@ -438,6 +448,7 @@ enum class TELEPORT_TYPE : uint8
     HOMEPOINT       = 9,
     SURVIVAL        = 10,
     WAYPOINT        = 11,
+    ESCHAN_PORTAL   = 12,
 };
 
 enum ZONEMISC
@@ -547,7 +558,7 @@ public:
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(std::string name); // finds the player if exists in zone
+    virtual CCharEntity* GetCharByName(std::string const& name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
@@ -595,19 +606,18 @@ public:
     bool           IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
-    time_point      m_TriggerAreaCheckTime;
     weatherVector_t m_WeatherVector; // the probability of each weather type
 
-    virtual void ZoneServer(time_point tick, bool checkTriggerAreas);
-    void         CheckTriggerAreas(CCharEntity* PChar);
+    virtual void ZoneServer(time_point tick);
+    void         CheckTriggerAreas();
 
-    virtual void ForEachChar(std::function<void(CCharEntity*)> func);
-    virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func);
-    virtual void ForEachMob(std::function<void(CMobEntity*)> func);
-    virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func);
-    virtual void ForEachTrust(std::function<void(CTrustEntity*)> func);
-    virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func);
-    virtual void ForEachNpc(std::function<void(CNpcEntity*)> func);
+    virtual void ForEachChar(std::function<void(CCharEntity*)> const& func);
+    virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
+    virtual void ForEachMob(std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
+    virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
+    virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
 
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
@@ -630,8 +640,8 @@ private:
     CONTINENT_TYPE m_continentID;
     uint8          m_levelRestriction;
     std::string    m_zoneName;
-    uint16         m_zonePort;
-    uint32         m_zoneIP;
+    uint16         m_zonePort{};
+    uint32         m_zoneIP{};
     bool           m_useNavMesh;
 
     WEATHER m_Weather;
@@ -639,10 +649,10 @@ private:
 
     CZoneEntities* m_zoneEntities;
 
-    uint16 m_tax;
-    uint16 m_miscMask;
+    uint16 m_tax{};
+    uint16 m_miscMask{};
 
-    zoneMusic_t m_zoneMusic;
+    zoneMusic_t m_zoneMusic{};
 
     std::unordered_map<std::string, uint32> m_LocalVars;
 
@@ -660,9 +670,10 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimer;             // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimerTriggerAreas; //
 
-    void createZoneTimer();
+    void createZoneTimers();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);
 

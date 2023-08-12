@@ -2,7 +2,6 @@
 -- Claim Shield
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("claim_shield")
@@ -59,6 +58,7 @@ local tableFindPosByID = function(t, target)
             return index
         end
     end
+
     return nil
 end
 
@@ -116,10 +116,11 @@ local timerFunc = function(mob)
         -- Message winner and their party/alliance that they've won
         local alliance = claimWinner:getAlliance()
         for _, member in pairs(alliance) do
-            local str = string.format("Your group has won the lottery for %s! (out of %i players)", mob:getName(), numEntries)
+            local str = string.format("Your group has won the lottery for %s! (out of %i players)", mob:getPacketName(), numEntries)
             if #alliance == 1 then
-                str = string.format("You have won the lottery for %s! (out of %i players)", mob:getName(), numEntries)
+                str = string.format("You have won the lottery for %s! (out of %i players)", mob:getPacketName(), numEntries)
             end
+
             member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
 
             -- Remove from entries table
@@ -132,10 +133,11 @@ local timerFunc = function(mob)
         -- Everyone left in the entries table isn't part of the winning group, message them and
         -- clear them from the enmity list
         for _, member in pairs(entries) do
-            local str = string.format("Your group was not successful in the lottery for %s. (out of %i players)", mob:getName(), numEntries)
+            local str = string.format("Your group was not successful in the lottery for %s. (out of %i players)", mob:getPacketName(), numEntries)
             if #alliance == 1 then
-                str = string.format("Your were not successful in the lottery for %s. (out of %i players)", mob:getName(), numEntries)
+                str = string.format("Your were not successful in the lottery for %s. (out of %i players)", mob:getPacketName(), numEntries)
             end
+
             member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
             mob:clearEnmityForEntity(member)
         end
@@ -144,7 +146,7 @@ end
 
 -- Called on entity onMobSpawn, sets up timerFunc
 local listenerFunc = function(mob)
-    print(string.format("Applying Claimshield to %s for %ims", mob:getName(), claimshieldTime))
+    print(string.format("Applying Claimshield to %s for %ims", mob:getPacketName(), claimshieldTime))
 
     mob:setClaimable(false)
     mob:setUnkillable(true)
@@ -156,7 +158,7 @@ end
 
 -- Main entrypoint of each override
 local overrideFunc = function(mob)
-    mob:addListener("SPAWN", mob:getName() .. "_CS_SPAWN", listenerFunc)
+    mob:addListener("SPAWN", mob:getPacketName() .. "_CS_SPAWN", listenerFunc)
 
     -- Call original onMobInitialize
     super(mob)

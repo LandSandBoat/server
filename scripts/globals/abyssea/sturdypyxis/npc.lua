@@ -1,13 +1,11 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Npc
 -----------------------------------
-require("scripts/globals/zone")
 require("scripts/globals/abyssea/sturdypyxis/chest")
 require("scripts/globals/abyssea/sturdypyxis/red_chest")
 require("scripts/globals/abyssea/sturdypyxis/blue_chest")
 require("scripts/globals/abyssea/sturdypyxis/gold_chest")
 -----------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 
@@ -83,7 +81,10 @@ xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
     end
 
     if npc:getAnimationSub() == 12 then
-        if trade:hasItemQty(2490, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.FORBIDDEN_KEY, 1) and
+            trade:getItemCount() == 1
+        then
             player:tradeComplete()
             xi.pyxis.getDrops(npc, dropType, chestTier)
             xi.pyxis.messageChest(player, ID.text.TRADE_KEY_OPEN, 2490, 0, 0, 0, npc)

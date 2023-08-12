@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Lower_Jeuno
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LOWER_JEUNO] =

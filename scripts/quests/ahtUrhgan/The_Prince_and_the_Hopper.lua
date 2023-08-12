@@ -6,9 +6,7 @@
 -- Toads Footprint2 : !pos 216.1 -23.818 -102.464 65
 -- Toads Footprint1 : !pos -42.9248 5.9847 -100.2972 65
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mamookID = require('scripts/zones/Mamook/IDs')

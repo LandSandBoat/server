@@ -2,8 +2,6 @@
 -- ID: 14490
 -- mana_tunic
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

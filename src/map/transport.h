@@ -22,7 +22,7 @@
 #ifndef _CTRANSPORT_H
 #define _CTRANSPORT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "entities/npcentity.h"
 #include <vector>
 
@@ -73,7 +73,6 @@ struct Transport_Ship : Transport_Time
     void setVisible(bool) const;
     void animateSetup(uint8, uint32) const;
     void spawn() const;
-    // void Despawn();
     void setName(uint32) const;
 };
 
@@ -127,6 +126,8 @@ public:
     void startElevator(int32 elevatorID);
     void TransportTimer();
     void insertElevator(Elevator_t elevator);
+
+    Elevator_t* getElevator(uint8 elevatorID);
 
     void InitializeTransport();
 

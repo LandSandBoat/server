@@ -5,8 +5,6 @@
 -- !pos -75 -1 58 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
@@ -43,10 +41,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 197 and option == 0 then --quest denied, special eventIDs available
         player:setCharVar("QuestSearchRightWords_prereq", 0) --remove charVar from memory
         player:setCharVar("QuestSearchRightWords_denied", 1)
@@ -61,12 +59,12 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 198 then --finish quest, note: no title granted
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4882)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_SLEEPGA_II)
         else
             player:delKeyItem(xi.ki.MOONDROP)
             npcUtil.giveCurrency(player, 'gil', 3000)
-            player:addItem(4882)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4882)
+            player:addItem(xi.items.SCROLL_OF_SLEEPGA_II)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_SLEEPGA_II)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
             player:setCharVar("SearchingForRightWords_postcs", -2)

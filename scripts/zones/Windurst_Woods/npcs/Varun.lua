@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("rockracketeer_sold") == 5 and
-        npcUtil.tradeHas(trade, 598)
+        npcUtil.tradeHas(trade, xi.items.SHARP_STONE)
     then
         -- Sharp Stone
         player:startEvent(102, 2100)
@@ -26,17 +26,17 @@ entity.onTrigger = function(player, npc)
     if rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 3 then
         player:startEvent(100) -- talk about lost stone
     elseif rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 4 then
-        player:startEvent(101, 0, 598) -- send player to Palborough Mines
+        player:startEvent(101, 0, xi.items.SHARP_STONE) -- send player to Palborough Mines
 
     else
         player:startEvent(432)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
         player:setCharVar("rockracketeer_sold", 4)
     elseif csid == 101 then

@@ -6,9 +6,6 @@
 -- Duration: 00:01:00
 -- Cost: 3 Finishing Move charges
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

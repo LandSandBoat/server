@@ -2,7 +2,6 @@
 -- Missionery Moblin
 -- Koblakiq !pos -64.851 21.834 -117.521 11
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2594) and
+        npcUtil.tradeHas(trade, xi.items.BOUND_EXORCISM_TREATISE) and
         npcUtil.popFromQM(player, npc, ID.mob.MAHJLAEF_THE_PAINTORN)
     then
-        -- Trade Exorcism Treatise
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SHREDDED_SCRAPS)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

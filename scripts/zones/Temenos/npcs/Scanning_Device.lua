@@ -8,15 +8,15 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2127) then
+    if npcUtil.tradeHas(trade, xi.items.METAL_CHIP) then
         player:startEvent(121, 257)
     elseif npcUtil.tradeHas(trade, { 1986, 1908, 1907 }) then
         player:startEvent(121, 17)
-    elseif npcUtil.tradeHas(trade, 1904) then
+    elseif npcUtil.tradeHas(trade, xi.items.IVORY_CHIP) then
         player:startEvent(121, 33)
-    elseif npcUtil.tradeHas(trade, 1905) then
+    elseif npcUtil.tradeHas(trade, xi.items.SCARLET_CHIP) then
         player:startEvent(121, 65)
-    elseif npcUtil.tradeHas(trade, 1906) then
+    elseif npcUtil.tradeHas(trade, xi.items.EMERALD_CHIP) then
         player:startEvent(121, 129)
     end
 end
@@ -37,11 +37,11 @@ local timeVarNames =
     [8] = "[CENTRAL_TEMENOS_BASEMENT]Time",
 }
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     player:updateEvent(0, GetServerVariable(timeVarNames[option]), 0, 0, 0, 0, 0, 0)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -5,7 +5,6 @@
 -- !pos -102.355 7.981 253.706 108
 -----------------------------------
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -24,10 +23,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

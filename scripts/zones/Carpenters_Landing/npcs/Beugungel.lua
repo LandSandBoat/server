@@ -4,7 +4,6 @@
 -- Type: Guild Merchant NPC (Woodworking Guild)
 -- !pos -333.729, -5.512, 475.647 2
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 -----------------------------------
@@ -19,10 +18,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

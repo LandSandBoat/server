@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.MARCHELUTE):isSpawned() and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and
-        not player:hasItem(1096)
+        not player:hasItem(xi.items.TAVNAZIA_PASS)
     then
         SpawnMob(ID.mob.MARCHELUTE):updateClaim(player)
     else
@@ -24,10 +24,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

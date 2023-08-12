@@ -25,13 +25,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <memory>
 #include <stack>
 
-#include "../entities/baseentity.h"
-#include "../packets/message_basic.h"
-#include "controllers/controller.h"
+#include "ai/controllers/controller.h"
+#include "entities/baseentity.h"
 #include "helpers/action_queue.h"
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
+#include "packets/message_basic.h"
 #include "states/state.h"
 
 class CBaseEntity;
@@ -144,7 +144,12 @@ protected:
     template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
-        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        if (m_stateStack.size() > 10)
+        {
+            ShowWarning("State Stack size exceeds maximum.");
+            return false;
+        }
+
         if (CanChangeState())
         {
             try
@@ -163,7 +168,12 @@ protected:
     template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
-        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        if (m_stateStack.size() > 10)
+        {
+            ShowWarning("State Stack size exceeds maximum.");
+            return false;
+        }
+
         try
         {
             CheckCompletedStates();

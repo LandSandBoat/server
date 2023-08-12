@@ -6,9 +6,7 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
@@ -64,10 +62,10 @@ end
 --Tenzen     10011
 --Tenzen     10012
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)

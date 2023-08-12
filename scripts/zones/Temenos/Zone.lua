@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Temenos/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -53,8 +51,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(26, -580.000, 5, -584.000, 0, 0, 0) -- F4 -> Entrance
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -89,13 +87,13 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 32001 or csid == 32002 then
         player:messageSpecial(ID.text.HUM + 1)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

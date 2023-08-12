@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "battlefield.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
@@ -274,7 +274,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
             cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE, true);
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
     else
@@ -355,7 +355,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     {
         PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? STATUS_TYPE::DISAPPEAR : STATUS_TYPE::NORMAL;
         PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-        m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
+        m_NpcList.emplace_back(static_cast<CNpcEntity*>(PEntity));
     }
     else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
     {
@@ -381,11 +381,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
 
                 if (mob.condition & CONDITION_WIN_REQUIREMENT)
                 {
-                    m_RequiredEnemyList.push_back(mob);
+                    m_RequiredEnemyList.emplace_back(mob);
                 }
                 else
                 {
-                    m_AdditionalEnemyList.push_back(mob);
+                    m_AdditionalEnemyList.emplace_back(mob);
                 }
 
                 // todo: this can be greatly improved
@@ -402,7 +402,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         // ally
         else
         {
-            m_AllyList.push_back(static_cast<CMobEntity*>(PEntity));
+            m_AllyList.emplace_back(static_cast<CMobEntity*>(PEntity));
         }
     }
 
@@ -415,10 +415,20 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
 
     // mob, initiator or ally
-    if (entity && !entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
+    if (entity)
     {
-        entity->StatusEffectContainer->AddStatusEffect(
-            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        CStatusEffect* PBattlefieldEffect = entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+        // Update battlefield ID if battlefield effect exists
+        // Tango with a Tracker/Requiem of Sin corner case where NPC IDs are shared between BCs as per retail caps
+        if (PBattlefieldEffect)
+        {
+            PBattlefieldEffect->SetPower(this->GetID());
+        }
+        else
+        {
+            entity->StatusEffectContainer->AddStatusEffect(
+                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+        }
     }
 
     return true;
@@ -946,7 +956,7 @@ void CBattlefield::addGroup(BattlefieldGroup group)
     {
         group.randomMobId = xirand::GetRandomElement(group.mobIds);
     }
-    m_groups.push_back(group);
+    m_groups.emplace_back(group);
 }
 
 void CBattlefield::handleDeath(CBaseEntity* PEntity)

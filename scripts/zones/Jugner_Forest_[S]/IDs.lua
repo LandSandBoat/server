@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Jugner_Forest_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.JUGNER_FOREST_S] =

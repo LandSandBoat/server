@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
@@ -38,7 +38,11 @@
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PEntity == nullptr)
+    if (m_PEntity == nullptr)
+    {
+        ShowError("m_PEntity is null.");
+    }
+
     std::ignore = m_PEntity;
 }
 
@@ -60,7 +64,7 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
             break;
     }
     // Unhandled Scenario
-    XI_DEBUG_BREAK_IF(true);
+    ShowError("Invalid RECASTTYPE received, returning nullptr.");
     return nullptr;
 }
 
@@ -100,7 +104,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
 
     if (recast == nullptr)
     {
-        GetRecastList(type)->push_back({ id, time(nullptr), duration, chargeTime, maxCharges });
+        GetRecastList(type)->emplace_back(Recast_t{ id, time(nullptr), duration, chargeTime, maxCharges });
         return &GetRecastList(type)->back();
     }
     else
@@ -212,8 +216,14 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-                        { return recast.ID == id; }) != PRecastList->end();
+    // clang-format off
+    auto maybeRecast = std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
+    {
+        return recast.ID == id;
+    });
+    // clang-format on
+
+    return maybeRecast != PRecastList->end();
 }
 
 /************************************************************************

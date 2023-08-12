@@ -5,10 +5,8 @@
 -- !addmission 5 48
 -- Blank (Cait Sith) : !pos 221.857 -49.213 176.24 81
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_IN_THE_WOODS)

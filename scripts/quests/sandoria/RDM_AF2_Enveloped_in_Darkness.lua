@@ -6,11 +6,8 @@
 -- Chateau d'Oraguille, Curilla,     !pos 27 0.1 0.1 233
 -- Northern San'doria,  Pagisalis,   !pos 97 0.1 113 231
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/status")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local crawlersID = require("scripts/zones/Crawlers_Nest/IDs")
@@ -143,7 +140,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.OLD_BOOTS)
 
                         -- Message when acepting to bury boots and blood.
-                        player:messageSpecial(ID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
+                        player:messageSpecial(crawlersID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
                     end
                 end,
 

@@ -11,10 +11,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1190) and
+        npcUtil.tradeHas(trade, xi.items.ANTICAN_TAG) and
         npcUtil.popFromQM(player, npc, ID.mob.TRIBUNUS_VII_I)
     then
-        -- Antican Tag
         player:confirmTrade()
     end
 end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

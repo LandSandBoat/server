@@ -5,7 +5,6 @@
 -- !pos 105 1 382 104
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -20,10 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5 then
         player:delKeyItem(xi.ki.WEAPONS_ORDER)
         player:addKeyItem(xi.ki.WEAPONS_RECEIPT)

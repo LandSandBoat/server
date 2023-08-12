@@ -4,8 +4,6 @@
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Port_Jeuno/IDs")
@@ -14,9 +12,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count         = trade:getItemCount()
-    local sLux          = trade:hasItemQty(2740, 1)
-    local sLuna         = trade:hasItemQty(2741, 1)
-    local sAstrum       = trade:hasItemQty(2742, 1)
+    local sLux          = trade:hasItemQty(xi.items.SEEDSPALL_LUX, 1)
+    local sLuna         = trade:hasItemQty(xi.items.SEEDSPALL_LUNA, 1)
+    local sAstrum       = trade:hasItemQty(xi.items.SEEDSPALL_ASTRUM, 1)
     local acpMission    = player:getCurrentMission(xi.mission.log_id.ACP)
     local hasCrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local lastCrimson   = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
@@ -73,10 +71,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local acpMission     = player:getCurrentMission(xi.mission.log_id.ACP)
     local salad          = player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
     local juice          = player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)

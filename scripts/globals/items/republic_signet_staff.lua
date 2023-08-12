@@ -3,10 +3,7 @@
 -- Item: Republic Signet Staff
 -- Effect: Signet
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/conquest")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 

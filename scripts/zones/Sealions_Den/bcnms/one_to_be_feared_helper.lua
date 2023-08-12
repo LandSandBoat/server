@@ -2,7 +2,6 @@
 -- Helper file for "One to be Feared" Battlefield
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local oneToBeFeared = {}
@@ -58,7 +57,7 @@ oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
     end
 end
 
-oneToBeFeared.handleMammetBattleEnding = function(player, csid, option)
+oneToBeFeared.handleMammetBattleEnding = function(player, csid, option, npc)
     if csid == 10 then
         -- Players are healed in between fights, but their TP is set to 0
         player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
@@ -79,7 +78,7 @@ oneToBeFeared.handleOmegaDeath = function(mob, player, optParams)
     end
 end
 
-oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
+oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option, npc)
     if csid == 11 then
         -- Players are healed in between fights, but their TP is set to 0.
         player:addTitle(xi.title.OMEGA_OSTRACIZER)
@@ -106,7 +105,7 @@ oneToBeFeared.handleAirshipDoorTrigger = function(player, npc)
     player:startEvent(32003, npc:getID() - ID.npc.AIRSHIP_DOOR_OFFSET + 1, player:getLocalVar("[OTBF]battleCompleted") * 2)
 end
 
-oneToBeFeared.handleOnEventUpdate = function(player, csid, option)
+oneToBeFeared.handleOnEventUpdate = function(player, csid, option, npc)
     local battlefield = player:getBattlefield()
 
     -- Spawn Omega for given instance.
@@ -126,7 +125,7 @@ oneToBeFeared.handleOnEventUpdate = function(player, csid, option)
     end
 end
 
-oneToBeFeared.handleOnEventFinish = function(player, csid, option)
+oneToBeFeared.handleOnEventFinish = function(player, csid, option, npc)
     if csid == 32003 then
         if option >= 100 and option <= 102 then
             local party = player:getParty()

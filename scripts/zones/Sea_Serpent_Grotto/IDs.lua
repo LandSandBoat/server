@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Sea_Serpent_Grotto
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SEA_SERPENT_GROTTO] =

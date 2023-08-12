@@ -3,9 +3,6 @@
 --  Mob: Animated Kunai
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-require("scripts/globals/status")
-mixins = { require("scripts/mixins/animated_weapon") }
-mixinOptions = { item = xi.items.DEMONIAC_FRAGMENT }
 -----------------------------------
 local entity = {}
 

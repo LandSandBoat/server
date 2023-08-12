@@ -28,19 +28,19 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
-        if not player:hasSpell(300) then
-            player:addSpell(300)
+        if not player:hasSpell(xi.magic.spell.LEVIATHAN) then
+            player:addSpell(xi.magic.spell.LEVIATHAN)
             player:messageSpecial(ID.text.LEVIATHAN_UNLOCKED, 0, 0, 2)
         end
 
-        if not player:hasItem(4181) then
-            player:addItem(4181) -- Scroll of instant warp
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
+        if not player:hasItem(xi.items.SCROLL_OF_INSTANT_WARP) then
+            player:addItem(xi.items.SCROLL_OF_INSTANT_WARP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_INSTANT_WARP)
         end
 
         player:addFame(xi.quest.fame_area.NORG, 30)

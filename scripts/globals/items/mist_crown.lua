@@ -3,9 +3,6 @@
 -- Item: Mist Crown
 -- Item Effect: Evasion Boost
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

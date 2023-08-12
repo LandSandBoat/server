@@ -4,8 +4,6 @@
 -- Enchantment: "Teleport" (Party Leader)
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
-require('scripts/globals/zone')
 -----------------------------------
 local itemObject = {}
 

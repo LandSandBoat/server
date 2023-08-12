@@ -5,8 +5,6 @@
 -- !pos -721 -7 102 103
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
@@ -29,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 then
         npcUtil.giveCurrency(player, 'gil', 3000)
         player:addTitle(xi.title.WANDERING_MINSTREL)

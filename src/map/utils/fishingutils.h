@@ -22,8 +22,8 @@
 #ifndef _FISHINGUTILS_H
 #define _FISHINGUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../items/item_fish.h"
+#include "common/cbasetypes.h"
+#include "items/item_fish.h"
 
 #include <list>
 #include <map>

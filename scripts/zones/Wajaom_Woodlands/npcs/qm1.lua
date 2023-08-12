@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2580) and
+        npcUtil.tradeHas(trade, xi.items.HELLCAGE_BUTTERFLY) and
         npcUtil.popFromQM(player, npc, ID.mob.VULPANGUE)
     then
         -- Trade Hellcage Butterfly
@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.BROKEN_SHARDS)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

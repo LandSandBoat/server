@@ -1,5 +1,4 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -7,7 +6,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(300)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, door)

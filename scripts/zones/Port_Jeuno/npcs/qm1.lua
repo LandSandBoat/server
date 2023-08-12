@@ -4,7 +4,6 @@
 -- Finish Quest: Borghertz's Hands (AF Hands, Many jobs)
 -- !pos -51 8 -4 246
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -29,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 and option == 1 then
         player:setCharVar("BorghertzCS", 2)
     elseif csid == 48 then

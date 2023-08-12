@@ -16,12 +16,12 @@ entity.onTrigger = function(player, npc)
     xi.bcnm.onTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.bcnm.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.bcnm.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.bcnm.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.bcnm.onEventFinish(player, csid, option, npc)
 end
 
 return entity

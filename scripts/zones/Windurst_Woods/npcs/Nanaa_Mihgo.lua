@@ -7,14 +7,10 @@
 -- !pos 62 -4 240 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
@@ -131,10 +127,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- LURE OF THE WILDCAT (WINDURST)
     if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
@@ -163,8 +159,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:addFame(xi.quest.fame_area.NORG, 30)
     elseif csid == 865 and option == 2 then
-        player:addSpell(901, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
+        player:addSpell(xi.magic.spell.NANAA_MIHGO, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NANAA_MIHGO)
     end
 end
 

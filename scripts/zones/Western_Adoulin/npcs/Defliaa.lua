@@ -6,7 +6,6 @@
 -- !pos 43 2 -113 256
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
@@ -39,10 +38,10 @@ entity.onTrigger = function(player, npc)
     xi.shop.general(player, stock)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- ALL THE WAY TO THE BANK
     if csid == 5069 then
         player:confirmTrade()

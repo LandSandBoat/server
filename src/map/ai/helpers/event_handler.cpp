@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "event_handler.h"
 
-void CAIEventHandler::addListener(std::string const& eventname, sol::function lua_func, std::string const& identifier)
+void CAIEventHandler::addListener(std::string const& eventname, sol::function const& lua_func, std::string const& identifier)
 {
     TracyZoneScoped;
     TracyZoneString(eventname);

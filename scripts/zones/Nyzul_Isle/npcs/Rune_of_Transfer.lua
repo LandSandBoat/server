@@ -4,8 +4,6 @@
 -- Notes: Displays currentFloor floor objective, activates when objective completed.
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
 require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
@@ -28,7 +26,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- Setup 1st person to activate rune to go up to control the porting to next floor
     local instance = player:getInstance()
 

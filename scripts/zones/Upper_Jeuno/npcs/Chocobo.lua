@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(4545, 1) then
+    if trade:hasItemQty(xi.items.BUNCH_OF_GYSAHL_GREENS, 1) then
         player:startEvent(38)
     end
 end
@@ -14,10 +14,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Spell: Endark
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

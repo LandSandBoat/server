@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Silver_Sea_route_to_Nashmau
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =

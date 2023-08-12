@@ -1,8 +1,6 @@
 ------------------------------------
 -- Starlight Celebration
 ------------------------------------
-require("scripts/globals/settings")
-------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.starlightCelebration = xi.events.starlightCelebration or {}

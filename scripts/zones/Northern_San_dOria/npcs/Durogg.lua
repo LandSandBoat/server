@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(865, addonScenarios, seekersOfAdoulin, 0xFFFFFFFE, 0xFFFFFFFE, 0xFFFFFFFE, 0xFFFFFFFE, 10, gil) -- CSID, Missions, Fame, ?, ?, ?, ?, Cost, TotalGilPlayerHas
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if not player:delGil(10) then
         player:setLocalVar("Durogg_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
@@ -50,7 +50,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if player:getLocalVar("Durogg_PlayCutscene") < 2 then
         if option == 1 then        -- Drenched! It Began with a Raindrop
             player:startEvent(30025, 0, 0, 0, 0, 0, 0, 231)

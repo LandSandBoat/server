@@ -4,11 +4,10 @@
 -----------------------------------
 local global = require("scripts/zones/QuBia_Arena/Globals")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     global.phaseEventFinish(player, csid)
 end
 

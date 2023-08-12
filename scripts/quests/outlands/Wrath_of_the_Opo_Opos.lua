@@ -4,12 +4,9 @@
 -- Log ID: 5, Quest ID: 160
 -- Cermet Headstone : !pos 491 20 301 123
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local yuhtungaID = require('scripts/zones/Yuhtunga_Jungle/IDs')

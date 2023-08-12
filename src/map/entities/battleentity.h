@@ -26,12 +26,12 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../alliance.h"
-#include "../map.h"
-#include "../modifier.h"
-#include "../party.h"
-#include "../trait.h"
+#include "alliance.h"
 #include "baseentity.h"
+#include "map.h"
+#include "modifier.h"
+#include "party.h"
+#include "trait.h"
 
 enum DEATH_TYPE
 {
@@ -591,7 +591,7 @@ public:
     void  UpdateHealth();   // пересчет максимального количества hp и mp, а так же корректировка их текущих значений
 
     int16  GetWeaponDelay(bool tp);       // returns delay of combined weapons
-    uint8  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
+    float  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
     int16  GetRangedWeaponDelay(bool tp); // returns delay of ranged weapon + ammo where applicable
     int16  GetAmmoDelay();                // returns delay of ammo (for cooldown between shots)
     uint16 GetMainWeaponDmg();            // returns total main hand DMG
@@ -739,35 +739,35 @@ public:
     virtual void Tick(time_point) override;
     virtual void PostTick() override;
 
-    health_t health;         // hp,mp,tp
-    stats_t  stats;          // атрибуты STR,DEX,VIT,AGI,INT,MND,CHR
-    skills_t WorkingSkills;  // структура всех доступных сущности умений, ограниченных уровнем
-    uint16   m_Immunity;     // Mob immunity
-    uint16   m_magicEvasion; // store this so it can be removed easily
-    bool     m_unkillable;   // entity is not able to die (probably until some action removes this flag)
+    health_t health{};        // hp,mp,tp
+    stats_t  stats{};         // атрибуты STR,DEX,VIT,AGI,INT,MND,CHR
+    skills_t WorkingSkills{}; // структура всех доступных сущности умений, ограниченных уровнем
+    uint16   m_Immunity;      // Mob immunity
+    uint16   m_magicEvasion;  // store this so it can be removed easily
+    bool     m_unkillable;    // entity is not able to die (probably until some action removes this flag)
 
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
 
-    uint8           m_ModelRadius; // The radius of the entity model, for calculating the range of a physical attack
-    ECOSYSTEM       m_EcoSystem;   // Entity eco system
-    CItemEquipment* m_Weapons[4];  // Four main slots used to store weapons (weapons only)
-    bool            m_dualWield;   // True/false depending on if the entity is using two weapons
+    float           m_ModelRadius;  // The radius of the entity model, for calculating the range of a physical attack
+    ECOSYSTEM       m_EcoSystem{};  // Entity eco system
+    CItemEquipment* m_Weapons[4]{}; // Four main slots used to store weapons (weapons only)
+    bool            m_dualWield;    // True/false depending on if the entity is using two weapons
     DEATH_TYPE      m_DeathType;
 
     TraitList_t TraitList; // список постянно активных способностей в виде указателей
 
-    EntityID_t m_OwnerID; // ID атакующей сущности (после смерти будет хранить ID сущности, нанесщей последний удар)
+    EntityID_t m_OwnerID{}; // ID атакующей сущности (после смерти будет хранить ID сущности, нанесщей последний удар)
 
-    ActionList_t m_ActionList; // список совершенных действий за одну атаку (нужно будет написать структуру, включающую ActionList в которой будут категории
-                               // анимации и т.д.)
+    ActionList_t m_ActionList{}; // список совершенных действий за одну атаку (нужно будет написать структуру, включающую ActionList в которой будут категории
+                                 // анимации и т.д.)
 
     CParty*         PParty;  // описание группы, в которой состоит сущность
     CBattleEntity*  PPet;    // питомец сущности
     CBattleEntity*  PMaster; // владелец/хозяин сущности (распространяется на все боевые сущности)
     CBattleEntity*  PLastAttacker;
     time_point      LastAttacked;
-    battlehistory_t BattleHistory; // Stores info related to most recent combat actions taken towards this entity.
+    battlehistory_t BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;

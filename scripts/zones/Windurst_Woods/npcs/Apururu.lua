@@ -5,7 +5,6 @@
 -- !pos -11 -2 13 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -51,14 +50,14 @@ entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 969)
+        npcUtil.tradeHas(trade, xi.items.TEN_OF_CUPS_CARD)
     then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 551)
+        npcUtil.tradeHas(trade, xi.items.BRUISED_STARFRUIT)
     then
         player:startEvent(325, 0, 20000, 5000)
     end
@@ -95,7 +94,7 @@ entity.onTrigger = function(player, npc)
         -- TRUST
     elseif
         player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
-        not player:hasSpell(904)
+        not player:hasSpell(xi.magic.spell.AJIDO_MARUJIDO)
     then
         local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
@@ -103,10 +102,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
         -- THE KIND CARDIAN
     if csid == 392 and option == 1 then
         player:setCharVar("theKindCardianVar", 1)
@@ -127,8 +126,8 @@ entity.onEventFinish = function(player, csid, option)
 
         -- TRUST
     elseif csid == 866 and option == 2 then
-        player:addSpell(904, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 904)
+        player:addSpell(xi.magic.spell.AJIDO_MARUJIDO, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.AJIDO_MARUJIDO)
     end
 end
 

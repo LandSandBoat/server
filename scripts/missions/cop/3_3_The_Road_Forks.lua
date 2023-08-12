@@ -27,10 +27,8 @@
 -- predefined values.  These must not be changed!
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 local attohwaChasmID      = require('scripts/zones/Attohwa_Chasm/IDs')
 local carpentersLandingID = require('scripts/zones/Carpenters_Landing/IDs')

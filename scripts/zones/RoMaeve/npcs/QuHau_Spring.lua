@@ -3,7 +3,6 @@
 -- Area: Ro'Maeve
 -----------------------------------
 local ID = require("scripts/zones/RoMaeve/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -17,11 +16,11 @@ entity.onTrade = function(player, npc, trade)
 
     if (hour >= 18 or hour < 6) and IsMoonFull() then
         if dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
-            if npcUtil.tradeHasExactly(trade, { 1408, 917 }) then
-                player:startEvent(7, 917, 1408) -- Ark Pentasphere Trade
+            if npcUtil.tradeHasExactly(trade, { xi.items.BOTTLE_OF_ILLUMININK, xi.items.SHEET_OF_PARCHMENT }) then
+                player:startEvent(7, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK) -- Ark Pentasphere Trade
             elseif
                 dmRepeat == QUEST_ACCEPTED and
-                npcUtil.tradeHasExactly(trade, 1261) and
+                npcUtil.tradeHasExactly(trade, xi.items.CHUNK_OF_LIGHT_ORE) and
                 not player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
             then
                 player:startEvent(8) -- Moonlight Ore trade
@@ -33,12 +32,12 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 7 then
-        if npcUtil.giveItem(player, 1550) then
+        if npcUtil.giveItem(player, xi.items.ARK_PENTASPHERE) then
             player:confirmTrade()
         end
     elseif csid == 8 then

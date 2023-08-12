@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Sauromugue_Champaign
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =

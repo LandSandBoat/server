@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.LETHARGIC_DAZE_1
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

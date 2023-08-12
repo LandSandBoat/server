@@ -37,17 +37,17 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 128 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS)
     elseif csid == 133 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES)
     elseif csid == 134 then
-        player:addItem(139)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 139)
+        player:addItem(xi.items.STAR_GLOBE)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STAR_GLOBE)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES)
         player:needToZone(true)
         player:addTitle(xi.title.AJIDO_MARUJIDOS_MINDER)

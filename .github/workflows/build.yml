@@ -33,7 +33,7 @@ jobs:
         # Remove the above when it's no longer necessary
 
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
         npm install -g diff-so-fancy
@@ -42,6 +42,7 @@ jobs:
       uses: Ana06/get-changed-files@v2.2.0
       with:
         filter: |
+          modules/**
           src/**
           scripts/**
           sql/**
@@ -220,6 +221,37 @@ jobs:
           xi_search
           xi_world
 
+  Linux_ClangTidy14_64bit:
+    needs: Sanity_Checks
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-clang
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
+        mkdir -p build
+        cmake -S . -B build -DENABLE_CLANG_TIDY=ON
+    - name: Build
+      run: |
+        touch clang-tidy.txt
+        cmake --build build -j4 >> clang-tidy.txt || true
+        cat clang-tidy.txt
+        if grep -q warning\|error clang-tidy.txt; then
+            exit 1
+        fi
+
   Linux_GCC11_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
@@ -371,7 +403,7 @@ jobs:
     needs: Linux_Clang14_64bit
     services:
       mysql:
-        image: mariadb
+        image: mariadb:10.6
         env:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
@@ -389,7 +421,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -435,51 +467,90 @@ jobs:
           printf "\nWaiting 5m for servers to fully start up\n"
           sleep 300s
 
+          # define bash helper function to help diagnose any sql errors
+          function mysqlcmd() { mysql xidb -h 127.0.0.1 -uroot -proot --verbose -e "$@"; }
           printf "\nPopulating database\n"
-          mysql xidb -h 127.0.0.1 -uroot -proot << EOF
-          -- Clean out anything already there (just in case)
-          DELETE FROM accounts;
-          DELETE FROM chars;
-          -- Create an account
-          INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
+
+          # Clean out anything already there (just in case)
+          mysqlcmd "DELETE FROM accounts;"
+          mysqlcmd "DELETE FROM chars;"
+          mysqlcmd "DELETE FROM char_look;"
+          mysqlcmd "DELETE FROM char_stats;"
+
+          # Clean tables that are made from triggers on insert to char table
+          mysqlcmd "DELETE FROM char_equip;"
+          mysqlcmd "DELETE FROM char_exp;"
+          mysqlcmd "DELETE FROM char_history;"
+          mysqlcmd "DELETE FROM char_inventory;"
+          mysqlcmd "DELETE FROM char_jobs;"
+          mysqlcmd "DELETE FROM char_pet;"
+          mysqlcmd "DELETE FROM char_points;"
+          mysqlcmd "DELETE FROM char_profile;"
+          mysqlcmd "DELETE FROM char_storage;"
+          mysqlcmd "DELETE FROM char_unlocks;"
+
+          # Create an account
+          mysqlcmd "INSERT INTO accounts (id, login, password, timecreate, timelastmodify, status, priv)
           VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
-          SELECT id, login FROM accounts;
-          -- Create a character
-          INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
+          SELECT id, login, content_ids FROM accounts;"
+
+          # Create a character
+          mysqlcmd "INSERT INTO chars (charid, accid, charname, pos_zone, nation, gmlevel)
           VALUES(1, 1000, 'Test', 0, 0, 5);
-          -- Set char_look (default is 0 and trips up scripting)
-          INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
+          SELECT charid, accid, charname, pos_zone FROM chars;"
+
+          # Set char_look (default is 0 and trips up scripting)
+          mysqlcmd "INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
           VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-          SELECT charid, face, race FROM char_look;
-          -- Update character information
-          -- Place near some Robber Crabs in Kuftal Tunnel
-          UPDATE chars
+          SELECT charid, face, race FROM char_look;"
+
+          # Populate more char tables with defaults
+          mysqlcmd "INSERT INTO char_stats (charid, mjob)
+          VALUES(1, 1);
+          SELECT charid, mjob FROM char_stats;"
+
+          # Update character information
+          # Place near some Robber Crabs in Kuftal Tunnel
+          mysqlcmd "UPDATE chars
           SET
               pos_zone = 174,
               pos_prevzone = 174,
               pos_x = 55,
               pos_y = -9,
               pos_z = -140
-          WHERE charid = 1;
-          SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
-          -- Set GodMode CharVar = 1
-          INSERT INTO char_vars(charid, varname, value)
-          VALUES(1, 'GodMode', 1);
-          SELECT * FROM char_vars;
-          EOF
+          WHERE charid = 1;"
+
+          mysqlcmd "SELECT charid, accid, charname, pos_zone, pos_x, pos_y, pos_z FROM chars;"
+          # Set GodMode CharVar = 1
+          mysqlcmd "INSERT INTO char_vars(charid, varname, value)
+          VALUES(1, 'GodMode', 1);"
 
           printf "\nRunning HeadlessXI for 60 seconds\n"
           python3 << EOF
           import time
-          from tools.headlessxi.hxiclient import HXIClient
-          hxi_client = HXIClient('admin', 'admin', 'localhost')
-          hxi_client.login()
-          print('Sleeping 30s')
-          time.sleep(30)
-          hxi_client.logout()
+          try:
+              from tools.headlessxi.hxiclient import HXIClient
+              hxi_client = HXIClient('admin', 'admin', 'localhost')
+              hxi_client.login()
+              print('Sleeping 60s')
+              time.sleep(60)
+              hxi_client.logout()
+              exit(0)
+          except Exception as e:
+              exit(-1)
           EOF
+          hxi_result=$?
 
-          killall screen
+          pkill -SIGINT xi_map
+          pkill -SIGINT xi_search
+          pkill -SIGINT xi_connect
+          pkill -SIGINT xi_world
+
+          # fail if hxi had a non-zero exit code
+          if [[ "$hxi_result" -ne "0" ]]; then
+              echo "hxi exited with code $hxi_result"
+              exit $hxi_result
+          fi
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
@@ -509,7 +580,7 @@ jobs:
     needs: Linux_Clang14_64bit
     services:
       mysql:
-        image: mariadb
+        image: mariadb:10.6
         env:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
@@ -527,7 +598,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"

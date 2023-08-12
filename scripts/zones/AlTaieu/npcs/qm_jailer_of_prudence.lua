@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
     if
         not GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1):isSpawned() and
         not GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2):isSpawned() and
-        trade:hasItemQty(1856, 1) and -- third_virtue
-        trade:hasItemQty(1870, 1) and -- deed_of_sensibility
-        trade:hasItemQty(1871, 1) and -- high-quality_hpemde_organ
+        trade:hasItemQty(xi.items.THIRD_VIRTUE, 1) and -- third_virtue
+        trade:hasItemQty(xi.items.DEED_OF_SENSIBILITY, 1) and -- deed_of_sensibility
+        trade:hasItemQty(xi.items.HIGH_QUALITY_HPEMDE_ORGAN, 1) and -- high-quality_hpemde_organ
         trade:getItemCount() == 3
     then
         player:tradeComplete()
@@ -27,10 +27,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

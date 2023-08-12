@@ -11,12 +11,9 @@
 -- Hilda   : !pos -163 -8 13 236
 -- Gumbah  : !pos 52 0 -36 234
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
 local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')

@@ -2,8 +2,6 @@
 -- Area: Ro'Maeve
 --  NPC: _3e1 (Moongate)
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -15,10 +13,10 @@ end
 entity.onTrade = function(player, npc, trade)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

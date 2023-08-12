@@ -5,10 +5,7 @@
 -- Powhatan    : !pos -152.135 -7.48 19.014 236
 -- Steel Bones : !pos -185.766 1.999 -57.631 236
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

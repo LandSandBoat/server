@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Manaclipper/IDs')
 require('scripts/globals/manaclipper')
 require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -48,14 +47,14 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(100)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
         player:setPos(0, 0, 0, 0, xi.zone.BIBIKI_BAY)
     end

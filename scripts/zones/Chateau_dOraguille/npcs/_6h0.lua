@@ -5,9 +5,6 @@
 -- Involved in Missions: 3-1, 5-2, 8-2
 -- !pos -38 -3 73 233
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -65,7 +62,7 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getRank(player:getNation()) >= 6 and
         player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
-        not player:hasSpell(905)
+        not player:hasSpell(xi.magic.spell.TRION)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
@@ -82,21 +79,21 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 88 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GALLANT_LEGGINGS)
         else
             if player:getMainJob() == xi.job.PLD then
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
 
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
-            player:addItem(14095)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 14095) -- Gallant Leggings
+            player:addItem(xi.items.GALLANT_LEGGINGS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar("aBoysDreamCS", 0)
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
@@ -106,17 +103,17 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("UnderOathCS", 0)
     elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12644)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GALLANT_SURCOAT)
         else
-            player:addItem(12644)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 12644) -- Gallant Surcoat
+            player:addItem(xi.items.GALLANT_SURCOAT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GALLANT_SURCOAT) -- Gallant Surcoat
             player:setCharVar("UnderOathCS", 9)
             player:addFame(xi.quest.fame_area.SANDORIA, 60)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif csid == 574 and option == 2 then
-        player:addSpell(905, false, true)
+        player:addSpell(xi.magic.spell.TRION, false, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
 end

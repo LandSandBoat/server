@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2585) and
+        npcUtil.tradeHas(trade, xi.items.VINEGAR_PIE) and
         npcUtil.popFromQM(player, npc, ID.mob.KHROMASOUL_BHURBORLOR, { hide = 0 })
     then
-        -- Trade Vinegar Pie
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.ACIDIC_ODOR)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Phanauet_Channel
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PHANAUET_CHANNEL] =

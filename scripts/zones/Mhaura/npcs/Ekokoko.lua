@@ -11,19 +11,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- TODO: This is not a random sequence, but 51 is displayed on first interaction ever,
-    -- 52 is displayed all subsequent times (tested against zone and logout).
-    if math.random() > 0.5 then
+    if not player:hasCompletedUniqueEvent(xi.uniqueEvent.EKOKOKO_INTRODUCTION) then
         player:startEvent(51)
     else
         player:startEvent(52)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 51 then
+        player:setUniqueEvent(xi.uniqueEvent.EKOKOKO_INTRODUCTION)
+    end
 end
 
 return entity

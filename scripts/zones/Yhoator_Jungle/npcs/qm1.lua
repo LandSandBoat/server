@@ -9,9 +9,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local spawnChance = 0
-    if npcUtil.tradeHas(trade, 4468) then -- pamamas
+    if npcUtil.tradeHas(trade, xi.items.BUNCH_OF_PAMAMAS) then
         spawnChance = 5
-    elseif npcUtil.tradeHas(trade, 4596) then -- wild pamamas
+    elseif npcUtil.tradeHas(trade, xi.items.BUNCH_OF_WILD_PAMAMAS) then
         spawnChance = 50
     end
 
@@ -32,10 +32,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.WATER_HOLE)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

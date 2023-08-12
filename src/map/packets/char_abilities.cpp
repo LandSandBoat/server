@@ -25,7 +25,7 @@
 
 #include "char_abilities.h"
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
 {

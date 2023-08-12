@@ -4,7 +4,6 @@
 -- !pos 305.989 -14.980 18.960 97
 -----------------------------------
 local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -20,10 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1 then
         npcUtil.giveKeyItem(player, xi.ki.MERIPHATAUD_GATE_CRYSTAL)
     end

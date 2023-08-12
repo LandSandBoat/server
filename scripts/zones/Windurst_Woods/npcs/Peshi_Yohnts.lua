@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -60,7 +59,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 10016  10017  710  711  712  713  714  715  764
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 10016 and
         option >= xi.skill.WOODWORKING and
@@ -70,7 +69,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10016 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
             player:setCharVar("BonecraftExpertQuest", 1)

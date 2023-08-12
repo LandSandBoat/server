@@ -3,9 +3,6 @@
 -- Item: Blaze Feather
 -- Status Effect: Blaze Spikes
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

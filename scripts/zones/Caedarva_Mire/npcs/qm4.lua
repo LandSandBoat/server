@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2593) and
+        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_SINGED_BUFFALO) and
         npcUtil.popFromQM(player, npc, ID.mob.TYGER)
     then
-        -- Trade Singed Buffalo
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.STIFLING_STENCH)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/utils.h"
+#include "common/utils.h"
 
 #include "entities/battleentity.h"
 #include "status_effect.h"
@@ -138,7 +138,11 @@ void CStatusEffect::UnsetFlag(uint32 flag)
 
 void CStatusEffect::SetIcon(uint16 Icon)
 {
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
 
     m_Icon = Icon;
     m_POwner->StatusEffectContainer->UpdateStatusIcons();

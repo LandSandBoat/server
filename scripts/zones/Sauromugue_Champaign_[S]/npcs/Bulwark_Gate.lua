@@ -7,7 +7,6 @@
 require("scripts/globals/campaign")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -17,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("KnotQuiteThere") == 1
     then
         if
-            trade:hasItemQty(2562, 1) and
+            trade:hasItemQty(xi.items.ONE_HUNDRED_EIGHT_KNOT_QUIPU, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then
@@ -34,10 +33,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 105 then
         player:setCharVar("KnotQuiteThere", 1)
     elseif csid == 106 then

@@ -6,9 +6,7 @@
 -- !pos -111 -4 101 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
@@ -16,23 +14,26 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED then
-        if trade:hasItemQty(937, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.items.BLOCK_OF_ANIMAL_GLUE, 1) and
+            trade:getItemCount() == 1
+        then
             player:startEvent(277, 1500)
         else
-            player:startEvent(275, 0, 937)
+            player:startEvent(275, 0, xi.items.BLOCK_OF_ANIMAL_GLUE)
         end
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(17091, 1) and
-            trade:hasItemQty(17061, 1) and
-            trade:hasItemQty(17053, 1) and
+            trade:hasItemQty(xi.items.OAK_STAFF, 1) and
+            trade:hasItemQty(xi.items.MYTHRIL_ROD, 1) and
+            trade:hasItemQty(xi.items.ROSE_WAND, 1) and
             trade:getItemCount() == 3
         then
             -- Check that all 3 items have been traded, one each
             player:setCharVar("SecondRewardVar", 1)
-            player:startEvent(265, 0, 17091, 17061, 17053) -- Completion of quest cutscene for Wondering Wands
+            player:startEvent(265, 0, xi.items.OAK_STAFF, xi.items.MYTHRIL_ROD, xi.items.ROSE_WAND) -- Completion of quest cutscene for Wondering Wands
         else
-            player:startEvent(260, 0, 17091, 17061, 17053) -- Remind player which items are needed ifquest is accepted and items are not traded
+            player:startEvent(260, 0, xi.items.OAK_STAFF, xi.items.MYTHRIL_ROD, xi.items.ROSE_WAND) -- Remind player which items are needed ifquest is accepted and items are not traded
         end
     end
 end
@@ -46,9 +47,9 @@ entity.onTrigger = function(player, npc)
 
 -- Begin Making Amends Section
     if makingAmends == QUEST_AVAILABLE and pFame >= 2 then
-            player:startEvent(274, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
+            player:startEvent(274, 0, xi.items.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
     elseif makingAmends == QUEST_ACCEPTED then
-            player:startEvent(275, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
+            player:startEvent(275, 0, xi.items.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
     elseif makingAmends == QUEST_COMPLETED and needToZone then
             player:startEvent(278) -- MAKING AMENDS: After Quest
 --End Making Amends Section; Begin Wonder Wands Section
@@ -70,10 +71,10 @@ entity.onTrigger = function(player, npc)
 -- End Wonder Wands Section
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 274 and option == 1 then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif csid == 277 then
@@ -89,52 +90,52 @@ entity.onEventFinish = function(player, csid, option)
         local rand = math.random(1, 3) --Setup random variable to determine which 2 items are returned upon quest completion
         if rand == 1 then
             if player:getFreeSlotsCount() == 1 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17061)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MYTHRIL_ROD)
             elseif player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17091)
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17061)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.OAK_STAFF)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MYTHRIL_ROD)
             else
-                player:addItem(17091, 1)
-                player:addItem(17061, 1) --Returns the Oak Staff and the Mythril Rod
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17091)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17061)
+                player:addItem(xi.items.OAK_STAFF, 1)
+                player:addItem(xi.items.MYTHRIL_ROD, 1) --Returns the Oak Staff and the Mythril Rod
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.OAK_STAFF)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MYTHRIL_ROD)
                 player:setCharVar("SecondRewardVar", 0)
             end
         elseif rand == 2 then
             if player:getFreeSlotsCount() == 1 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17053)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ROSE_WAND)
             elseif player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17091)
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17053)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.OAK_STAFF)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ROSE_WAND)
             else
-                player:addItem(17091, 1)
-                player:addItem(17053, 1) --Returns the Oak Staff and the Rose Wand
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17091)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17053)
+                player:addItem(xi.items.OAK_STAFF, 1)
+                player:addItem(xi.items.ROSE_WAND, 1) --Returns the Oak Staff and the Rose Wand
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.OAK_STAFF)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ROSE_WAND)
                 player:setCharVar("SecondRewardVar", 0)
             end
         elseif rand == 3 then
             if player:getFreeSlotsCount() == 1 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17053)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ROSE_WAND)
             elseif player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17061)
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17053)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MYTHRIL_ROD)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ROSE_WAND)
             else
-                player:addItem(17061, 1)
-                player:addItem(17053, 1) --Returns the Rose Wand and the Mythril Rod
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17061)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 17053)
+                player:addItem(xi.items.MYTHRIL_ROD, 1)
+                player:addItem(xi.items.ROSE_WAND, 1) --Returns the Rose Wand and the Mythril Rod
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MYTHRIL_ROD)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ROSE_WAND)
                 player:setCharVar("SecondRewardVar", 0)
             end
         end
     elseif csid == 265 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12750) -- New Moon Armlets
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.NEW_MOON_ARMLETS)
         else
             player:tradeComplete()
             npcUtil.giveCurrency(player, 'gil', 4800)
-            player:addItem(12750) -- New Moon Armlets
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
+            player:addItem(xi.items.NEW_MOON_ARMLETS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.NEW_MOON_ARMLETS)
             player:addFame(xi.quest.fame_area.WINDURST, 150)
             player:addTitle(xi.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)

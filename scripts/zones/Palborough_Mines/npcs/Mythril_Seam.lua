@@ -6,7 +6,6 @@
 -- !pos -68 -7 173 143
 -- Rock Racketeer !pos 210 -32 -63 143
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -35,10 +34,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(30, 12, 0, xi.items.CHUNK_OF_MINE_GRAVEL)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 51 and npcUtil.giveItem(player, xi.items.SHARP_STONE) then
         player:confirmTrade()
     elseif csid == 43 and npcUtil.giveItem(player, xi.items.CHUNK_OF_MINE_GRAVEL) then

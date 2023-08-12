@@ -4,9 +4,7 @@
 -- Involved in Mission 1-3, Mission 7-2
 -- !pos 13 -9 -197 238
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -57,7 +55,7 @@ local function getFenrirRewardMask(player)
         rewardMask = rewardMask + 16
     end -- Ancient's Key
 
-    if player:hasSpell(297) then
+    if player:hasSpell(xi.magic.spell.FENRIR) then
         rewardMask = rewardMask + 64
     end  -- Pact
 
@@ -154,10 +152,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- Moonlit Path and Other Fenrir Stuff
     if csid == 842 and option == 2 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
@@ -191,7 +189,7 @@ entity.onEventFinish = function(player, csid, option)
         elseif option == 6 then
             npcUtil.giveCurrency(player, 'gil', 15000)
         elseif option == 7 then
-            player:addSpell(297) -- Pact
+            player:addSpell(xi.magic.spell.FENRIR) -- Pact
         elseif option == 8 then
             player:addKeyItem(xi.ki.FENRIR_WHISTLE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FENRIR_WHISTLE)

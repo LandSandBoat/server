@@ -3,7 +3,6 @@
 --  NPC: Green Thumb Moogle
 -----------------------------------
 local ID = require("scripts/zones/Mog_Garden/IDs")
-require('scripts/globals/items')
 require("scripts/globals/moghouse")
 require("scripts/globals/shop")
 -----------------------------------
@@ -17,10 +16,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(1016)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1016 and option == 0xFFF00FF then -- Show the Mog House menu
         -- Print the expire time for mog locker if exists
         local lockerLease = xi.moghouse.getMogLockerExpiryTimestamp(player)

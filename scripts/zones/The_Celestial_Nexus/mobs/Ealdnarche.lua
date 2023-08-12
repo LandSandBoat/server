@@ -4,8 +4,6 @@
 -- Zilart Mission 16 BCNM Fight
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
@@ -53,13 +51,13 @@ entity.onMobDeath = function(mob, player, optParams)
     player:startEvent(32004, battlefield:getArea())
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32004 then
-        DespawnMob(target:getID())
-        local mob = SpawnMob(target:getID() + 2)
+        DespawnMob(npc:getID())
+        local mob = SpawnMob(npc:getID() + 2)
         mob:updateEnmity(player)
         --the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
         mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)

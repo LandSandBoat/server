@@ -2589,6 +2589,8 @@ ID Number    Costume Name
 3120    Trust: Monberaux
 3121    Trust: Matsui-P
 
+3581    Gargantuan Moogle with Vest (Bonanza)
+
 0x0500E80400000000000000000000000000000000    Tatenashi Armor
 0x0500E90400000000000000000000000000000000    Hizamaru Armor
 0x0500F00400000000000000000000000000000000    Hachiryu Armor

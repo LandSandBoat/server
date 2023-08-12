@@ -3,10 +3,8 @@
 -- Npc: Pot Hatch
 -- !pos 267 0 -582
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/zones/Mamool_Ja_Training_Grounds/globals/zoneUtil")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,10 +14,10 @@ entity.onTrigger = function(player, npc)
     xi.zoneUtil.ImperialAgent_PotHatch(player, npc, 269, -582, 124)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

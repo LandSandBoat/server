@@ -4,7 +4,6 @@
 -- Type: Cooking Adv. Image Support
 -- !pos -119.750 -5.239 64.500 238
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
@@ -28,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
 
     if csid == 10015 and option == 1 then

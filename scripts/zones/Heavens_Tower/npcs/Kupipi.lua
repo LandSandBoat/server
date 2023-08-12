@@ -6,13 +6,10 @@
 -- !pos 2 0.1 30 242
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -61,7 +58,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(437)
     elseif
         trustWindurst == QUEST_COMPLETED and
-        not player:hasSpell(901) and
+        not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         kupipiTrustChatFlag == 0
     then
         player:startEvent(438)
@@ -77,14 +74,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     --TRUST
     if csid == 435 then
-        player:addSpell(898, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
+        player:addSpell(xi.magic.spell.KUPIPI, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:setCharVar("WindurstFirstTrust", 1)
     elseif csid == 437 then
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
@@ -95,8 +92,8 @@ entity.onEventFinish = function(player, csid, option)
             var = "WindurstFirstTrust" })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 439 then
-        player:addSpell(898, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
+        player:addSpell(xi.magic.spell.KUPIPI, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {

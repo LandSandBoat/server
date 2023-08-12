@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CPETSKILL_TATE_H
 #define _CPETSKILL_TATE_H
 
-#include "../../petskill.h"
+#include "petskill.h"
 #include "state.h"
 
 class CPetEntity;
@@ -60,7 +60,7 @@ private:
     CPetEntity* const          m_PEntity;
     std::unique_ptr<CPetSkill> m_PSkill;
     time_point                 m_finishTime;
-    duration                   m_castTime;
+    duration                   m_castTime{};
     int16                      m_spentTP;
 };
 

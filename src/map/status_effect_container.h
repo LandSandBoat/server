@@ -22,8 +22,8 @@
 #ifndef _STATUSEFFECTCONTAINER_H
 #define _STATUSEFFECTCONTAINER_H
 
-#include "../common/cbasetypes.h"
-#include "../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include <set>
 
@@ -40,8 +40,8 @@ class CBattleEntity;
 class CStatusEffectContainer
 {
 public:
-    uint64 m_Flags{ 0 };      // биты переполнения байтов m_StatusIcons (по два бита на каждый эффект)
-    uint8  m_StatusIcons[32]; // иконки статус-эффектов
+    uint64 m_Flags{ 0 };        // Bits of overflow of bytes m_statusicons (two battles for each effect)
+    uint8  m_StatusIcons[32]{}; // Icons status effects
 
     bool ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs);
     bool CanGainStatusEffect(CStatusEffect* PStatusEffect); // returns true if the status effect will take effect
@@ -49,21 +49,22 @@ public:
     bool DelStatusEffect(EFFECT StatusID);
     bool DelStatusEffectSilent(EFFECT StatusID);
     bool DelStatusEffect(EFFECT StatusID, uint16 SubID);
-    void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // удаляем все эффекты с указанным типом
-    void DelStatusEffectsByIcon(uint16 IconID);                    // удаляем все эффекты с указанной иконкой
+    void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // Remove all effects with the specified type
+    void DelStatusEffectsByIcon(uint16 IconID);                    // Remove all effects with the indicated icon
     void DelStatusEffectsByType(uint16 Type);
     bool DelStatusEffectByTier(EFFECT StatusID, uint16 power);
     void KillAllStatusEffect();
+    void ApplyStateAlteringEffects(CStatusEffect* StatusEffect);
 
-    bool HasStatusEffect(EFFECT StatusID);               // проверяем наличие эффекта
-    bool HasStatusEffect(EFFECT StatusID, uint16 SubID); // проверяем наличие эффекта с уникальным subid
+    bool HasStatusEffect(EFFECT StatusID);               // We check the presence of the effect
+    bool HasStatusEffect(EFFECT StatusID, uint16 SubID); // Check the presence of an effect with a unique Subid
     bool HasStatusEffect(std::initializer_list<EFFECT>);
     bool HasStatusEffectByFlag(uint32 flag);
 
-    EFFECT         EraseStatusEffect();                    // удаляем первый отрицательный эффект
+    EFFECT         EraseStatusEffect();                    // We delete the first negative effect
     EFFECT         HealingWaltz();                         // dancers healing waltz
     uint8          EraseAllStatusEffect();                 // erases all status effects
-    EFFECT         DispelStatusEffect(EFFECTFLAG flag);    // удаляем первый положительный эффект
+    EFFECT         DispelStatusEffect(EFFECTFLAG flag);    // We delete the first positive effect
     uint8          DispelAllStatusEffect(EFFECTFLAG flag); // dispels all status effects
     CStatusEffect* StealStatusEffect(EFFECTFLAG flag);     // dispels one effect and returns it
 
@@ -78,15 +79,15 @@ public:
     void   RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
     void   RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end);
 
-    void UpdateStatusIcons(); // пересчитываем иконки эффектов
+    void UpdateStatusIcons(); // We recall the effects of the effects
     void CheckEffectsExpiry(time_point tick);
     void TickEffects(time_point tick);
     void TickRegen(time_point tick);
 
-    void LoadStatusEffects();                    // загружаем эффекты персонажа
-    void SaveStatusEffects(bool logout = false); // сохраняем эффекты персонажа
+    void LoadStatusEffects();                    // We load the character effects
+    void SaveStatusEffects(bool logout = false); // We keep the character effects
 
-    uint8 GetEffectsCount(EFFECT ID); // получаем количество эффектов с указанным id
+    uint8 GetEffectsCount(EFFECT ID); // We get the number of effects with the specified ID
     uint8 GetLowestFreeSlot();        // returns the lowest free slot for songs/rolls
 
     bool ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration);
@@ -128,18 +129,18 @@ public:
     ~CStatusEffectContainer();
 
 private:
-    CBattleEntity* m_POwner;
+    CBattleEntity* m_POwner = nullptr;
 
     // void ReplaceStatusEffect(EFFECT effect); //this needs to be implemented
-    void RemoveStatusEffect(uint32 id, bool silent = false);              // удаляем эффект по его номеру в контейнере
-    void RemoveStatusEffect(CStatusEffect* PEffect, bool silent = false); // удаляем эффект по его номеру в контейнере
+    void RemoveStatusEffect(uint32 id, bool silent = false);              // We remove the effect by its number in the container
+    void RemoveStatusEffect(CStatusEffect* PEffect, bool silent = false); // We remove the effect by its number in the container
     void DeleteStatusEffects();
-    void SetEffectParams(CStatusEffect* StatusEffect); // устанавливаем имя эффекта
+    void SetEffectParams(CStatusEffect* StatusEffect); // We set the effect of the effect
     void HandleAura(CStatusEffect* PStatusEffect);
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);
 
-    std::multiset<CStatusEffect*, bool (*)(CStatusEffect* AStatus, CStatusEffect* BStatus)> m_StatusEffectSet;
+    std::multiset<CStatusEffect*, bool (*)(CStatusEffect* AStatus, CStatusEffect* BStatus)> m_StatusEffectSet{};
 };
 
 /************************************************************************

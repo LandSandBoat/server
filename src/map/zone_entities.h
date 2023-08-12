@@ -24,6 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "zone.h"
 
+#include <set>
+#include <vector>
+
 class CZoneEntities
 {
 public:
@@ -68,7 +71,7 @@ public:
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
-    void ZoneServer(time_point tick, bool check_trigger_areas);
+    void ZoneServer(time_point tick);
 
     CZone* GetZone();
 

@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
 require('scripts/globals/chocobo')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/extravaganza')
 -----------------------------------
 local zoneObject = {}
@@ -46,10 +45,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 62 then
         player:setCharVar("KnotQuiteThere", 3)
     elseif csid == 65 then

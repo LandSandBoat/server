@@ -4,8 +4,6 @@
 -- Obtained: Beastmaster Level 35
 -- Recast Time: 10 seconds
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -4,7 +4,6 @@
 -- NOTE: There are 3 Indescript Markings
 -----------------------------------
 local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -86,10 +85,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- ON SABBATICAL
     if csid == 2 then
         npcUtil.giveKeyItem(player, xi.ki.SCHULTZS_SEALED_LETTER)

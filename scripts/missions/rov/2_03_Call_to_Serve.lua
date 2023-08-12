@@ -4,10 +4,8 @@
 -----------------------------------
 -- !addmission 13 48
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")

@@ -1,5 +1,4 @@
 require("scripts/globals/common")
-require("scripts/globals/status")
 require("scripts/globals/interaction/quest")
 
 utils = {}
@@ -98,8 +97,19 @@ function utils.join(input1, input2)
     return result
 end
 
+-- For use alongside os.time()
 function utils.minutes(minutes)
     return minutes * 60
+end
+
+-- For use alongside os.time()
+function utils.hours(hours)
+    return hours * 60 * 60
+end
+
+-- For use alongside os.time()
+function utils.days(days)
+    return days * 60 * 60 * 24
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
@@ -315,12 +325,23 @@ function utils.thirdeye(target)
     return false
 end
 
+function utils.getActiveJobLevel(actor, job)
+    local jobLevel = 0
+
+    if actor:getMainJob() == job then
+        jobLevel = actor:getMainLvl()
+    elseif actor:getSubJob() == job then
+        jobLevel = actor:getSubLvl()
+    end
+
+    return jobLevel
+end
+
 -----------------------------------
 --     SKILL LEVEL CALCULATOR
 --     Returns a skill level based on level and rating.
 --
---    See the translation of aushacho's work by Themanii:
---    http://home.comcast.net/~themanii/skill.html
+--    See: https://wiki.ffo.jp/html/2570.html
 --
 --    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
 -----------------------------------
@@ -330,34 +351,49 @@ end
 -- Original formula: ((level - <baseInRange>) * <multiplier>) + <additive>; where level is a range defined in utils.getSkillLvl
 local skillLevelTable =
 {
-    --         A+             A-             B+             B              B-             C+             C              C-             D              E              F
-    [1]  = { { 3.00,   6 }, { 3.00,   6 }, { 2.90,   5 }, { 2.90,   5 }, { 2.90,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.70,   4 }, { 2.50,   4 }, { 2.30,   4 } }, -- Level <= 50
-    [50] = { { 5.00, 153 }, { 5.00, 153 }, { 4.90, 147 }, { 4.90, 147 }, { 4.90, 147 }, { 4.80, 142 }, { 4.80, 142 }, { 4.80, 142 }, { 4.70, 136 }, { 4.50, 126 }, { 4.30, 116 } }, -- Level > 50 and Level <= 60
-    [60] = { { 4.85, 203 }, { 4.10, 203 }, { 3.70, 196 }, { 3.23, 196 }, { 2.70, 196 }, { 2.50, 190 }, { 2.25, 190 }, { 2.00, 190 }, { 1.85, 183 }, { 1.95, 171 }, { 2.05, 159 } }, -- Level > 60 and Level <= 70
-    [70] = { { 5.00, 251 }, { 5.00, 244 }, { 3.70, 233 }, { 3.23, 228 }, { 2.70, 223 }, { 3.00, 215 }, { 2.60, 212 }, { 2.00, 210 }, { 1.85, 201 }, { 1.95, 190 }, { 2.00, 179 } }, -- Level > 70
+    --         A+             A-             B+             B              B-             C+             C              C-             D              E              F             G
+    [  0] = { { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 } }, -- No level/Fallback
+    [  1] = { { 3.00,   6 }, { 3.00,   6 }, { 2.90,   5 }, { 2.90,   5 }, { 2.90,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.70,   4 }, { 2.50,   4 }, { 2.30,   4 }, { 2.00,   3 } }, -- Level <= 50
+    [ 50] = { { 5.00, 153 }, { 5.00, 153 }, { 4.90, 147 }, { 4.90, 147 }, { 4.90, 147 }, { 4.80, 142 }, { 4.80, 142 }, { 4.80, 142 }, { 4.70, 136 }, { 4.50, 126 }, { 4.30, 116 }, { 4.00, 101 } }, -- Level > 50 and Level <= 60
+    [ 60] = { { 4.85, 203 }, { 4.10, 203 }, { 3.70, 196 }, { 3.23, 196 }, { 2.70, 196 }, { 2.50, 190 }, { 2.25, 190 }, { 2.00, 190 }, { 1.85, 183 }, { 1.95, 171 }, { 2.05, 159 }, { 2.00, 141 } }, -- Level > 60 and Level <= 70
+    [ 70] = { { 5.00, 251 }, { 5.00, 244 }, { 4.60, 233 }, { 4.40, 228 }, { 3.40, 223 }, { 3.00, 215 }, { 2.60, 212 }, { 2.00, 210 }, { 1.85, 201 }, { 2.00, 190 }, { 2.00, 179 }, { 2.00, 161 } }, -- Level > 70 and Level <= 75
+    [ 75] = { { 5.00, 251 }, { 5.00, 244 }, { 5.00, 256 }, { 5.00, 250 }, { 5.00, 240 }, { 5.00, 230 }, { 5.00, 225 }, { 5.00, 220 }, { 4.00, 210 }, { 3.00, 200 }, { 2.00, 189 }, { 2.00, 171 } }, -- Level > 75 and Level <= 80
+    [ 80] = { { 6.00, 301 }, { 6.00, 294 }, { 6.00, 281 }, { 6.00, 275 }, { 6.00, 265 }, { 6.00, 255 }, { 6.00, 250 }, { 6.00, 245 }, { 5.00, 230 }, { 4.00, 215 }, { 3.00, 199 }, { 2.00, 181 } }, -- Level > 80 and Level <= 90
+    [ 90] = { { 7.00, 361 }, { 7.00, 354 }, { 7.00, 341 }, { 7.00, 335 }, { 7.00, 325 }, { 7.00, 315 }, { 7.00, 310 }, { 7.00, 305 }, { 6.00, 280 }, { 5.00, 255 }, { 4.00, 229 }, { 2.00, 201 } }, -- Level > 90
+    [100] = { { 1.00, 424 }, { 1.00, 417 }, { 1.00, 404 }, { 1.00, 398 }, { 1.00, 388 }, { 1.00, 378 }, { 1.00, 373 }, { 1.00, 368 }, { 1.00, 334 }, { 1.00, 300 }, { 1.00, 265 }, { 1.00, 219 } }, -- Level > 99
 }
 
 -- Get the corresponding table entry to use in skillLevelTable based on level range
 -- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
-local function getSkillLevelIndex(level)
-    local rangeId = nil
+local function getSkillLevelIndex(level, rank)
+    local rangeId = 0
 
     if level <= 50 then
         rangeId = 1
-    elseif level > 50 and level <= 60 then
+    elseif level <= 60 then
         rangeId = 50
-    elseif level > 60 and level <= 70 then
+    elseif level <= 70 then
         rangeId = 60
-    else
+    elseif level <= 75 and rank > 2 then -- If this is Rank A+ or A- then skip
+        rangeId = 75
+    elseif level <= 80 then -- If B+ or below do this
         rangeId = 70
+    elseif level <= 90 then
+        rangeId = 80
+    elseif level <= 99 then
+        rangeId = 90
+    else
+        rangeId = 100
     end
 
     return rangeId
 end
 
 function utils.getSkillLvl(rank, level)
-    local levelTableIndex = getSkillLevelIndex(level)
-    return ((level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1]) + skillLevelTable[levelTableIndex][rank][2]
+    local levelTableIndex = getSkillLevelIndex(level, rank)
+    local skillLevel      = (level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1] + skillLevelTable[levelTableIndex][rank][2]
+
+    return skillLevel
 end
 
 function utils.getMobSkillLvl(rank, level)
@@ -443,7 +479,7 @@ local systemStrengthTable =
     [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
-function utils.getSystemStrengthBonus(attackerSystem, defenderSystem)
+function utils.getEcosystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
             for defId, weakValue in pairs(systemStrengthTable[k]) do
@@ -594,6 +630,21 @@ function utils.splitStr(s, sep)
     return fields
 end
 
+-- Remove whitespace from the beginning and end of a string
+function utils.trimStr(s)
+    local s1 = string.gsub(s, "^s%+", "")
+    return string.gsub(s1, "%s+$", "")
+end
+
+-- Split a single string argument into multiple arguments
+function utils.splitArg(s)
+    local comma   = string.gsub(s, ",", " ")
+    local spaces  = string.gsub(comma, "%s+", " ")
+    local trimmed = utils.trimStr(spaces)
+
+    return utils.splitStr(trimmed, " ")
+end
+
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     --TODO Table of animations that are used for teleports for reference
 
@@ -648,6 +699,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
+------------------------------
+-- Spatial position utilities
+------------------------------
 local ffxiRotConversionFactor = 360.0 / 255.0
 
 function utils.ffxiRotToDegrees(ffxiRot)
@@ -738,7 +792,7 @@ function utils.angleWithin(origin, A, B, within)
 end
 
 local ffxiRotationToAngleFactor = 2.0 * math.pi / 256.0
-local ffxiAngleToRotationFactor  = 256.0 / (2.0 * math.pi)
+local ffxiAngleToRotationFactor = 256.0 / (2.0 * math.pi)
 
 function utils.rotationToAngle(ffxiRotation)
     return ffxiRotation * ffxiRotationToAngleFactor
@@ -746,4 +800,9 @@ end
 
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
+end
+
+-- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
+function utils.vanadielClockTime()
+    return tonumber(VanadielHour() .. string.format("%02d", VanadielMinute()))
 end

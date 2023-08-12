@@ -3,7 +3,6 @@
 -- Description: Removes and disables several random equipment slots for a period of time.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

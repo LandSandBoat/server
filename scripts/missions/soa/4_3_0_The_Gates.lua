@@ -6,11 +6,9 @@
 -- Levil            : !pos -87.204 3.350 12.655 256
 -- Darkened Crevice : !pos 185.752 27.311 240.72 273
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GATES)

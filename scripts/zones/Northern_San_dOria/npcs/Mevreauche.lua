@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -60,7 +59,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 626  627  16  0  73  74
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 626 and
         option >= xi.skill.WOODWORKING and
@@ -70,17 +69,17 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 626 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
             player:setCharVar("SmithingExpertQuest", 1)
         end
     elseif csid == 626 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FIRE_CRYSTAL)
         else
-            player:addItem(4096)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
+            player:addItem(xi.items.FIRE_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FIRE_CRYSTAL) -- Fire Crystal
             xi.crafting.signupGuild(player, xi.crafting.guild.SMITHING)
         end
     else

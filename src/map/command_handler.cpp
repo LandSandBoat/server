@@ -267,11 +267,10 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
 
     // Prepare parameters
     std::string param;
-    std::string cmdparameters(parameters);
-    auto        parameter = cmdparameters.cbegin();
+    auto        parameter = parameters.cbegin();
 
     // Parse and push parameters based on symbol string
-    while (parameter != cmdparameters.cend() && !clstream.eof())
+    while (parameter != parameters.cend() && !clstream.eof())
     {
         clstream >> param;
 
@@ -282,7 +281,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
                 break;
 
             case 's':
-                if (cmdparameters.size() == 1)
+                if (parameters.size() == 1)
                 {
                     std::string str = param;
                     while (!clstream.eof())

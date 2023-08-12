@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 17957
 -- Item: Navy Axe
--- Item Effect: TP +100
+-- Item Effect: TP +1000
 -- Duration: Instant
 -----------------------------------
 local itemObject = {}

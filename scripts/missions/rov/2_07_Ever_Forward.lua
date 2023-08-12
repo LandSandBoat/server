@@ -4,10 +4,8 @@
 -----------------------------------
 -- !addmission 13 56
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")

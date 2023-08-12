@@ -2,8 +2,6 @@
 -- Area: Arrapago Remnants
 --  NPC: Armoury Crate (Arrapago)
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -25,7 +23,7 @@ entity.onTrigger = function(player, npc)
     GetNPCByID(npcID, instance):setStatus(xi.status.DISAPPEAR)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Key item
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/zone")
------------------------------------
-
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 

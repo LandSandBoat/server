@@ -6,12 +6,9 @@
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/pets")
 -----------------------------------
 local entity = {}
@@ -82,10 +79,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 774 then
         player:setCharVar("TheWaywardAutomatonProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)

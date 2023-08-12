@@ -3,10 +3,7 @@
 --  NPC: Shanene
 -- !pos 161.183 0.468 91.111 84
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 -----------------------------------
 local entity = {}
 
@@ -24,10 +21,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 36 and option == 2 then
         npcUtil.giveItem(player, xi.items.CIPHER_OF_RAINEMARDS_ALTER_EGO)
     end

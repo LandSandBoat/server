@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -13,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
     if
-        trade:hasItemQty(717, 1) and
+        trade:hasItemQty(xi.items.PIECE_OF_MAHOGANY_LUMBER, 1) and
         trade:getItemCount() == 1 and
         aNewDawnEvent == 3
     then
@@ -34,18 +33,15 @@ entity.onTrigger = function(player, npc)
             player:startEvent(147)
         end
 
-    -- Standard Dialog 54 probably isnt correct (Which is why its not living in DefaultActions)
     elseif aNewDawn == QUEST_COMPLETED then
         player:startEvent(145)
-    else
-        player:startEvent(54)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
     if csid == 146 then

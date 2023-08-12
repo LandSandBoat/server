@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -65,20 +64,20 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 77 and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif csid == 33 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13328)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MYTHRIL_EARRING)
         else
             player:addTitle(xi.title.FOOLS_ERRAND_RUNNER)
             player:delKeyItem(xi.ki.WONDER_MAGIC_SET)
-            player:addItem(13328)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13328)
+            player:addItem(xi.items.MYTHRIL_EARRING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MYTHRIL_EARRING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:needToZone(true)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
@@ -87,13 +86,13 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("theLostCardianVar", 2)
     elseif csid == 35 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13596)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GREEN_CAPE)
         else
             player:addTitle(xi.title.BRINGER_OF_BLISS)
             player:delKeyItem(xi.ki.TWO_OF_SWORDS)
             player:setCharVar("theKindCardianVar", 0)
-            player:addItem(13596)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13596) -- Green Cape
+            player:addItem(xi.items.GREEN_CAPE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GREEN_CAPE) -- Green Cape
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
         end

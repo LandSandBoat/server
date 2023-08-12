@@ -3,7 +3,6 @@
 --  ZNM: Velionis
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 -- Todo: blaze spikes effect only activates while not in casting animation

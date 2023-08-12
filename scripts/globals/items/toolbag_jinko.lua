@@ -3,8 +3,6 @@
 -- Toolbag Jinko
 -- When used, you will obtain one stack of jinko
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2643, 99)
+    target:addItem(xi.items.JINKO, 99)
 end
 
 return itemObject

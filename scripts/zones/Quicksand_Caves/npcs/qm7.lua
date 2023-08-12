@@ -5,7 +5,6 @@
 -- !pos -504 20 -419 208
 -----------------------------------
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
@@ -17,10 +16,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SOMETHING_IS_BURIED)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -24,9 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/cbasetypes.h"
 
-#include "../entities/charentity.h"
-#include "../items/item_equipment.h"
-#include "../trait.h"
+#include "entities/charentity.h"
+#include "items/item_equipment.h"
+#include "trait.h"
 
 class CPetEntity;
 class CMobEntity;
@@ -108,6 +108,7 @@ namespace charutils
 
     void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
     bool   HasItem(CCharEntity* PChar, uint16 ItemID);
+    uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);
     uint8  AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence = false);
     uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
     uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
@@ -126,6 +127,7 @@ namespace charutils
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+    void   UpdateRemovedSlots(CCharEntity* PChar);
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
 
@@ -143,9 +145,9 @@ namespace charutils
     int32 addLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // добавляем заклинание
     int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // улаляем заклинание
 
-    bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsid);
-    void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsid);
-    void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsid);
+    bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
+    void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
+    void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
 
     int32 hasAbility(CCharEntity* PChar, uint16 AbilityID); // проверяем наличие ключевого предмета
     int32 addAbility(CCharEntity* PChar, uint16 AbilityID); // добавляем ключевой предмет

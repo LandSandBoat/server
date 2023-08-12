@@ -8,7 +8,6 @@
 -- qm3 : !pos 580 -9 290 112
 -- qm4 : !pos -21 -25 -490 112
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -100,7 +99,7 @@ quest.sections =
 
         [xi.zone.XARCABARD] =
         {
-            ['qm2'] =
+            ['qm_boreal_tiger'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -112,7 +111,7 @@ quest.sections =
                 end,
             },
 
-            ['qm3'] =
+            ['qm_boreal_coeurl'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -124,7 +123,7 @@ quest.sections =
                 end,
             },
 
-            ['qm4'] =
+            ['qm_boreal_hound'] =
             {
                 onTrigger = function(player, npc)
                     if

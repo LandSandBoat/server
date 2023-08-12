@@ -6,10 +6,8 @@
 -- qm7         : !pos -26 -31 364
 -- Leafy Patch : !pos -418 -33 576
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

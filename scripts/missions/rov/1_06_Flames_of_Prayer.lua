@@ -5,10 +5,8 @@
 -- !addmission 13 10
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER)

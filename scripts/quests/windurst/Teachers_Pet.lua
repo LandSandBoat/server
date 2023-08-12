@@ -4,10 +4,8 @@
 -- Log ID: 2, Quest ID: 28
 -- Moreno-Toeno : !pos 169 -1.25 159 238
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

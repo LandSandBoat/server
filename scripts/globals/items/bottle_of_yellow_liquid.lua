@@ -2,9 +2,6 @@
 --  ID: 5264
 --  Item: Yellow Liquid
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

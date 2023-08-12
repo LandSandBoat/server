@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bastok_Markets_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BASTOK_MARKETS_S] =
@@ -32,6 +29,7 @@ zones[xi.zone.BASTOK_MARKETS_S] =
         WELDON_DELIVERY_DIALOG        = 10878, -- Do you have something you wish to send?
         ALLIED_SIGIL                  = 12366, -- You have received the Allied Sigil!
         SILKE_SHOP_DIALOG             = 12818, -- You wouldn't happen to be a fellow scholar, by any chance? The contents of these pages are beyond me, but perhaps you might glean something from them. They could be yours...for a nominal fee.
+        KEVAN_TURN_IN                 = 13565, -- Just as we suspected. This contains a great deal of information that will prove vital to our cause. Hm, what's this? Not sure what to make of this... Doesn't seem to be terribly important. Here, why don't you hang onto it? See if you can't get some use out of it down the road.
         RETRIEVE_DIALOG_ID            = 14734, -- You retrieve <item> from the porter moogle's care.
         NOT_ENOUGH_NOTES              = 14759, -- You tryin' to cheat me? That's not nearly enough notes!
         COMMON_SENSE_SURVIVAL         = 14803, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.

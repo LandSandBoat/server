@@ -7,7 +7,6 @@
 -- !pos 159.998 -2.327 0.000 18
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -20,7 +19,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1721) and
+        npcUtil.tradeHas(trade, xi.items.BERYL_MEMOSPHERE) and
         not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_DEM)
     then
         player:startEvent(49)
@@ -29,10 +28,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 49 then
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.MAP_OF_PROMYVION_DEM)

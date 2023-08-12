@@ -4,7 +4,6 @@
 -- animition sub 1 == glow
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/status")
 require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
@@ -60,7 +59,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

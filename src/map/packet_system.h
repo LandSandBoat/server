@@ -22,7 +22,7 @@
 #ifndef _PACKETSYSTEM_H
 #define _PACKETSYSTEM_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "packets/basic.h"
 
 #include "entities/charentity.h"
@@ -31,7 +31,7 @@ struct map_session_data_t;
 
 extern uint8 PacketSize[512];
 
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
+extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 void PrintPacket(CBasicPacket data);
 void PacketParserInitialize();

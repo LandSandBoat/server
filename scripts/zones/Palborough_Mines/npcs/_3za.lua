@@ -4,12 +4,10 @@
 -- Involved In Mission: Journey Abroad
 -- !pos 180 -32 167 143
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local gravelQty = trade:getItemQty(597) -- Mine Gravel
+    local gravelQty = trade:getItemQty(xi.items.CHUNK_OF_MINE_GRAVEL)
     local alreadyIn = player:getCharVar("refiner_input")
 
     if alreadyIn + gravelQty > 10 then
@@ -27,10 +25,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(18)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

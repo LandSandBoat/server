@@ -2,7 +2,6 @@
 -- Zone: Ship_bound_for_Selbina (220)
 -----------------------------------
 local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
-require('scripts/globals/keyitems')
 -----------------------------------
 local zoneObject = {}
 
@@ -36,10 +35,10 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(255)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 255 then
         player:setPos(0, 0, 0, 0, 248)
     end

@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Missionary Man
 -- !pos -42 -10 -89 250
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Kazham/IDs")
@@ -15,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("MissionaryManVar") == 1 and
-        trade:hasItemQty(1146, 1) and
+        trade:hasItemQty(xi.items.SLAB_OF_ELSHIMO_MARBLE, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(139) -- Trading elshimo marble
@@ -30,9 +28,9 @@ entity.onTrigger = function(player, npc)
         missionaryMan == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
-        player:startEvent(137, 0, 1146) -- Start quest "Missionary Man"
+        player:startEvent(137, 0, xi.items.SLAB_OF_ELSHIMO_MARBLE) -- Start quest "Missionary Man"
     elseif missionaryMan == QUEST_ACCEPTED and missionaryManVar == 1 then
-        player:startEvent(138, 0, 1146) -- During quest (before trade marble) "Missionary Man"
+        player:startEvent(138, 0, xi.items.SLAB_OF_ELSHIMO_MARBLE) -- During quest (before trade marble) "Missionary Man"
     elseif
         missionaryMan == QUEST_ACCEPTED and
         (missionaryManVar == 2 or missionaryManVar == 3)
@@ -47,10 +45,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 137 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar("MissionaryManVar", 1)
@@ -61,12 +59,12 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
     elseif csid == 141 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4728)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_YHOAT)
         else
             player:setCharVar("MissionaryManVar", 0)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
-            player:addItem(4728)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4728)
+            player:addItem(xi.items.SCROLL_OF_TELEPORT_YHOAT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_YHOAT)
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end

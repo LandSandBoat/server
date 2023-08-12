@@ -1,9 +1,6 @@
 -----------------------------------
 -- Mog Tablets
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/zone")
------------------------------------
 xi = xi or {}
 xi.mogTablet = xi.mogTablet or {}
 
@@ -220,7 +217,7 @@ xi.mogTablet.moogleOnTrigger = function(player, npc)
     end
 end
 
-xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
+xi.mogTablet.moogleOnEventUpdate = function(player, csid, option, npc)
     -- print("update", csid, option)
     -- TODO: Check server vars
 
@@ -269,12 +266,12 @@ xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
         -- Use zoneId to lookup
 
         -- Deliver results to player
-        player:updateEventString("Test")
-        player:messageSpecial(14331, xi.mogTablet.tablets.CHARITY)
+        -- player:updateEventString("Test")
+        -- player:messageSpecial(14331, xi.mogTablet.tablets.CHARITY)
     end
 end
 
-xi.mogTablet.moogleOnEventFinish = function(player, csid, option)
+xi.mogTablet.moogleOnEventFinish = function(player, csid, option, npc)
     -- print("finish", csid, option)
 
     -- Hand out prizes

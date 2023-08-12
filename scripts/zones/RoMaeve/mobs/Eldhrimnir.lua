@@ -5,8 +5,6 @@
 -- Involved in Quest: Orastery Woes
 -- !pos 200.3 -11 -24.8 122
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

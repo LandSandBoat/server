@@ -5,7 +5,6 @@
 -- !pos 107 1 -31 80
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
-require("scripts/globals/status")
 require("scripts/globals/campaign")
 require("scripts/globals/utils")
 require("scripts/globals/extravaganza")
@@ -40,7 +39,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- local itemid = 0
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits
@@ -56,7 +55,7 @@ local optionList =
     36865, 40961, 45057, 49153, 53249, 57345, 61441,
 }
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local medalRank = xi.campaign.getMedalRank(player)
     if csid == 110 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.

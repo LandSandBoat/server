@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Arrapago Remnants
 -----------------------------------
-local ID = require('scripts/zones/Arrapago_Remnants/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -23,13 +21,20 @@ zoneObject.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     if player:getInstance() == nil then
-        player:setPos(0, 0, 0, 0, 72)
+        player:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
+
         return cs
     end
 
     local pos = player:getPos()
-    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
+
+    if
+        pos.x == 0 and
+        pos.y == 0 and
+        pos.z == 0
+    then
         local entrypos = instance:getEntryPos()
+
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
 
@@ -41,31 +46,37 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
-    local chars = instance:getChars()
+    local chars    = instance:getChars()
 
     if csid == 1 then
-        for i, v in pairs(chars) do
-            v:setPos(0, 0, 0, 0, 72)
+        for _, players in pairs(chars) do
+            players:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
         end
-    elseif csid >= 200 and csid <= 210 and option == 1 then
-        for i, v in pairs(chars) do
-            if v:getID() ~= player:getID() then
-                v:startEvent(3)
-                v:timer(4000, function(playerArg)
+
+    elseif
+        csid >= 200 and
+        csid <= 210 and
+        option == 1
+    then
+        for _, players in pairs(chars) do
+            if players:getID() ~= player:getID() then
+                players:startEvent(3)
+                players:timer(4000, function(playerArg)
                     local entrypos = instance:getEntryPos()
                     playerArg:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
 
-            v:setHP(v:getMaxHP())
-            v:setMP(v:getMaxMP())
-            if v:getPet() then
-                local pet = v:getPet()
+            -- Full heal.
+            players:setHP(players:getMaxHP())
+            players:setMP(players:getMaxMP())
+            if players:getPet() then
+                local pet = players:getPet()
                 pet:setHP(pet:getMaxHP())
                 pet:setMP(pet:getMaxMP())
             end
@@ -74,7 +85,7 @@ zoneObject.onEventFinish = function(player, csid, option)
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 72
+    return xi.zone.ALZADAAL_UNDERSEA_RUINS
 end
 
 return zoneObject

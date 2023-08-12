@@ -5,12 +5,9 @@
 -- Thunder Hawk : !pos -58 -10 6 248
 -- Jail Door    : !pos 56 0.1 -23 147
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local beadeauxID = require("scripts/zones/Beadeaux/IDs")

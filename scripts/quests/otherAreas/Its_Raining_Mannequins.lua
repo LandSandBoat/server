@@ -11,12 +11,9 @@
 -- mannequin_legs  : !additem 1604
 -- mannequin_feet  : !additem 1605
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mhauraID = require('scripts/zones/Mhaura/IDs')

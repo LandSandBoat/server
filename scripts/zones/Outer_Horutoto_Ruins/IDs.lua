@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Outer_Horutoto_Ruins
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OUTER_HORUTOTO_RUINS] =

@@ -4,7 +4,6 @@
 -- Pop for the quest "Chasing Quotas"
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -29,10 +28,10 @@ end
 entity.onTrade = function(player, npc, trade)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

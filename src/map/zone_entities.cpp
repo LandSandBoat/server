@@ -215,16 +215,25 @@ void CZoneEntities::DeleteTRUST(CBaseEntity* PTrust)
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_MOB);
+    if (PEntity == nullptr)
+    {
+        ShowWarning("PEntity was null.");
+        return;
+    }
+
+    if (PEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Non-MOB was passed into function (%s).", PEntity->GetName());
+        return;
+    }
 
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
     ZONE_TYPE zonetype  = m_zone->GetType();
-    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
+    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
-    if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
+    if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && PMob->PParty == nullptr)
     {
         for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
         {
@@ -350,8 +359,18 @@ void CZoneEntities::MusicChange(uint8 BlockID, uint8 MusicTrackID)
 
 void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+    if (PChar == nullptr)
+    {
+        ShowWarning("PChar is null.");
+        return;
+    }
+
+    if (PChar->loc.zone != m_zone)
+    {
+        ShowWarning("Zone mismatch for %s.", PChar->GetName());
+        return;
+    }
+
     TracyZoneScoped;
 
     battleutils::RelinquishClaim(PChar);
@@ -570,7 +589,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
         SpawnIDList_t::iterator PET         = PChar->SpawnPETList.find(PCurrentPet->id);
 
         // Is this pet "visible" to the player?
-        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::MOB) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
+        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::UPDATE) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
         {
             // pet not in update list for player, add it in
             if (PET == PChar->SpawnPETList.end())
@@ -598,7 +617,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             CNpcEntity*             PCurrentNpc = (CNpcEntity*)it->second;
             SpawnIDList_t::iterator NPC         = PChar->SpawnNPCList.find(PCurrentNpc->id);
 
-            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::MOB)
+            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::UPDATE)
             {
                 // Is this npc "visible" to the player?
                 if (distance(PChar->loc.p, PCurrentNpc->loc.p) <= 50)
@@ -616,6 +635,12 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     PChar->SpawnNPCList.erase(NPC);
                     PChar->updateEntityPacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE);
                 }
+            }
+            // NPC not visible, remove it from spawn list if it's in there
+            else if (NPC != PChar->SpawnNPCList.end())
+            {
+                PChar->SpawnNPCList.erase(NPC);
+                PChar->updateEntityPacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE);
             }
         }
     }
@@ -711,7 +736,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
         if (pc->m_isGMHidden || PChar->m_moghouseID != pc->m_moghouseID)
         {
-            toRemove.push_back(pc);
+            toRemove.emplace_back(pc);
             continue;
         }
 
@@ -719,7 +744,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         float charDistance = distance(PChar->loc.p, pc->loc.p);
         if (charDistance >= CHARACTER_DESPAWN_DISTANCE)
         {
-            toRemove.push_back(pc);
+            toRemove.emplace_back(pc);
             continue;
         }
 
@@ -798,7 +823,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         std::vector<CharScorePair> candidates;
         while (!candidateCharacters.empty())
         {
-            candidates.push_back(candidateCharacters.top());
+            candidates.emplace_back(candidateCharacters.top());
             candidateCharacters.pop();
         }
         std::reverse(candidates.begin(), candidates.end());
@@ -1312,7 +1337,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));
 }
 
-void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
+void CZoneEntities::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(m_zone->GetName());
@@ -1370,14 +1395,14 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
             it->second = nullptr;
             m_mobList.erase(it++);
-            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
+            dynamicTargIdsToDelete.emplace_back(std::make_pair(PMob->targid, server_clock::now()));
             destroy(PMob);
             continue;
         }
 
         if (PMob->allegiance == ALLEGIANCE_TYPE::PLAYER && PMob->m_isAggroable)
         {
-            aggroableMobs.push_back(PMob);
+            aggroableMobs.emplace_back(PMob);
         }
 
         it++;
@@ -1419,7 +1444,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
             }
 
             destroy(it->second);
-            dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
+            dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
             m_npcList.erase(it++);
             continue;
@@ -1452,7 +1477,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     destroy(it->second);
                 }
 
-                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+                dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
                 m_petList.erase(it++);
                 continue;
@@ -1506,7 +1531,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
 
                 destroy(it->second);
-                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+                dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
                 m_trustList.erase(it++);
                 continue;
@@ -1530,10 +1555,6 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
             }
             PChar->PAI->Tick(tick);
             PChar->PTreasurePool->CheckItems(tick);
-            if (check_trigger_areas)
-            {
-                m_zone->CheckTriggerAreas(PChar);
-            }
         }
     }
 

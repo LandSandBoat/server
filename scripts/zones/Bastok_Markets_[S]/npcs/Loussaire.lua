@@ -4,11 +4,8 @@
 -- !pos -248.677 -8.523 -125.734 87
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -156,7 +153,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 49 or csid == 53 then
         -- Display Loafers
         if option == 2 then
@@ -188,7 +185,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 49 and option == 0 then
         player:setCharVar("AF_Loussaire", 1)
 

@@ -4,9 +4,7 @@
 -- !pos -3 0.1 -9 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -358,17 +356,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatJeuno = player:getCharVar("WildcatJeuno")
-
-    -- LURE OF THE WILDCAT
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatJeuno, 19)
-    then
-        player:startEvent(313)
-
     -- Prevent interaction until player has progressed through COP enough
-    elseif player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
+    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
         player:showText(npc, ID.text.SAGHEERA_NO_LIMBUS_ACCESS)
 
         -- DEFAULT DIALOG (menu)
@@ -442,7 +431,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
         local info = afArmorPlusOne[option]
@@ -526,15 +515,11 @@ local handleTradeChipEvent = function(player, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local coinAmount = bit.rshift(option, 16)
     option = bit.band(option, 65535) -- Only use the first 16 bits
 
-    -- LURE OF THE WILDCAT
-    if csid == 313 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
-
-    elseif csid == 310 then
+    if csid == 310 then
         handleMainEvent(player, option, coinAmount)
 
     -- Trading chips for ancient beastcoins

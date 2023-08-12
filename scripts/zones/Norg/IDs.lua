@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Norg
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORG] =
@@ -38,15 +35,15 @@ zones[xi.zone.NORG] =
         SPASIJA_DELIVERY_DIALOG       = 10360, -- Hiya! I can deliver packages to anybody, anywhere, anytime. What do you say?
         PALEILLE_DELIVERY_DIALOG      = 10361, -- We can deliver parcels to any residence in Vana'diel.
         DOOR_IS_LOCKED                = 10366, -- The door is locked tight.
-        AVATAR_UNLOCKED               = 10480, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        NOMAD_MOOGLE_DIALOG           = 10548, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
-        FOUIVA_DIALOG                 = 10572, -- Oi 'av naw business wi' de likes av you.
-        SOLBYMAHOLBY_SHOP_DIALOG      = 10586, -- Hiya! My name's Solby-Maholby! I'm new here, so they put me on tooty-fruity shop duty. I'll give you a super-duper deal on unwanted items!
-        TACHI_KASHA_LEARNED           = 10809, -- You have learned the weapon skill Tachi: Kasha!
-        BLADE_KU_LEARNED              = 10834, -- You have learned the weapon skill Blade: Ku!
-        RETRIEVE_DIALOG_ID            = 11287, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 12297, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        DIDYA_GET_BUMPED              = 12325, -- Didya get bumped about by the waves on yer way here, <name>? No matter. The boss be waitin' inside fer ya.
+        AVATAR_UNLOCKED               = 10483, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
+        NOMAD_MOOGLE_DIALOG           = 10554, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
+        FOUIVA_DIALOG                 = 10578, -- Oi 'av naw business wi' de likes av you.
+        SOLBYMAHOLBY_SHOP_DIALOG      = 10592, -- Hiya! My name's Solby-Maholby! I'm new here, so they put me on tooty-fruity shop duty. I'll give you a super-duper deal on unwanted items!
+        TACHI_KASHA_LEARNED           = 10815, -- You have learned the weapon skill Tachi: Kasha!
+        BLADE_KU_LEARNED              = 10840, -- You have learned the weapon skill Blade: Ku!
+        RETRIEVE_DIALOG_ID            = 11293, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL         = 12303, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        DIDYA_GET_BUMPED              = 12331, -- Didya get bumped about by the waves on yer way here, <name>? No matter. The boss be waitin' inside fer ya.
     },
     mob =
     {

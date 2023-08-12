@@ -6,9 +6,7 @@
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/status')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
 -----------------------------------

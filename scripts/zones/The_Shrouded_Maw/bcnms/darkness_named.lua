@@ -5,7 +5,6 @@
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local battlefieldObject = {}
@@ -36,10 +35,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
         player:addExp(1000)
     end

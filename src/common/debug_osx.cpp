@@ -15,7 +15,7 @@
 #include "kernel.h"
 
 #define BACKWARD_HAS_BFD 1
-#include "../../ext/backward/backward.hpp"
+#include "ext/backward/backward.hpp"
 
 // https://man7.org/linux/man-pages/man7/signal-safety.7.html
 void safe_print(const char* str)
@@ -72,13 +72,13 @@ bool debug::isRunningUnderDebugger()
 
     if (!isCheckedAlready)
     {
-        if (ptrace(PTRACE_TRACEME, 0, NULL, 0) < 0)
+        if (ptrace(PTRACE_TRACEME, 0, nullptr, 0) < 0)
         {
             underDebugger = true;
         }
         else
         {
-            ptrace(PTRACE_DETACH, 0, NULL, 0);
+            ptrace(PTRACE_DETACH, 0, nullptr, 0);
         }
 
         isCheckedAlready = true;

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: West_Ronfaure
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_RONFAURE] =
@@ -39,17 +36,21 @@ zones[xi.zone.WEST_RONFAURE] =
         ZOVRIACE_DIALOG               = 7393,  -- Let me be! I return to Southgate with word on La Theine.
         PICKPOCKET_PALCOMONDAU        = 7394,  -- A pickpocket? No, I haven't seen anyone matching that description. I've only seen Aaveleon, and a rather brusque woman.
         PICKPOCKET_ZOVRIACE           = 7395,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
+        DIADONOUR_DIALOG              = 7396,  -- Our people often fall prey to roving Orcs nearby. Take care out there!
+        RAMAUFONT_DIALOG              = 7399,  -- Nothing to report.
+        LAETTE_DIALOG                 = 7401,  -- This watchtower was built to strengthen Ranperre Gate. You can look around, but stay out of our way.
+        CHATARRE_DIALOG               = 7402,  -- Ghelsba and its Orcish camps lie at the foot of mountains yonder. We must be vigilant! They could attack at any time.
         DISMAYED_CUSTOMER             = 7419,  -- You find some worthless scraps of paper.
         CONQUEST                      = 7541,  -- You've earned conquest points!
         SOMETHING_IS_AMISS            = 7892,  -- Something is amiss.
         GARRISON_BASE                 = 7922,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8058,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8059,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8060,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8061,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8066,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10432, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12433, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM           = 8059,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8060,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8061,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8062,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8067,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10433, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12434, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -66,7 +67,7 @@ zones[xi.zone.WEST_RONFAURE] =
     npc =
     {
         SIGNPOST_OFFSET = 17187505,
-        OVERSEER_BASE   = 17187525, -- Doladepaiton_RK in npc_list
+        OVERSEER_BASE   = GetFirstID('Doladepaiton_RK'),
     },
 }
 

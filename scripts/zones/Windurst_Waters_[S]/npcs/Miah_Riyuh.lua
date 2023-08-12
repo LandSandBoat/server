@@ -4,9 +4,7 @@
 -- !pos 5.323 -2 37.462 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -65,10 +63,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 103 and option == 0 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:addKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
@@ -96,13 +94,13 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("GREEN_R_LETTER_USED", 0)
                 player:addTitle(xi.title.COBRA_UNIT_MERCENARY)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:addItem(15754)
+                player:addItem(xi.items.SPRINTERS_SHOES)
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
                 player:setCharVar("SEALED_DOORS", 0)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPRINTERS_SHOES)
             else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15754)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SPRINTERS_SHOES)
             end
         else
             player:setCampaignAllegiance(3)

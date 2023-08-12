@@ -6,7 +6,6 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/equipment")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 -----------------------------------
 local entity = {}
@@ -64,10 +63,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local questId = getQuestId(option)
     if csid == 10086 then
         if option == 53 then

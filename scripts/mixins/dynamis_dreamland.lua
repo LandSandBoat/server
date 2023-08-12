@@ -3,7 +3,6 @@
 
 require("scripts/globals/mixins")
 require("scripts/globals/dynamis")
-require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
@@ -43,11 +42,11 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
     -- "Without a proc, the coin drop rate is very low (~10%)"
     local thCurrency =
     {
-        [0] = { single = 100, hundo =  5 },
-        [1] = { single = 115, hundo = 10 },
-        [2] = { single = 145, hundo = 20 },
-        [3] = { single = 190, hundo = 35 },
-        [4] = { single = 250, hundo = 50 },
+        [0] = { single = 100, hundred =  5 },
+        [1] = { single = 115, hundred = 10 },
+        [2] = { single = 145, hundred = 20 },
+        [3] = { single = 190, hundred = 35 },
+        [4] = { single = 250, hundred = 50 },
     }
 
     dynamisDreamlandMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
@@ -116,7 +115,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
             end
 
             local singleChance = th.single
-            local hundoChance = th.hundo
+            local hundredChance = th.hundred
             if mob:getMainLvl() > 90 then
                 singleChance = math.floor(singleChance * 1.5)
             end
@@ -128,7 +127,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
 
             -- Base hundred slot
             if mob:isNM() then
-                killer:addTreasure(currency + 1, mob, hundoChance)
+                killer:addTreasure(currency + 1, mob, hundredChance)
             end
 
             -- Red (high) adds 100% single slot

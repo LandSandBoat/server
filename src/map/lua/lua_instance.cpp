@@ -24,11 +24,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_instance.h"
 
-#include "../instance.h"
-#include "../utils/instanceutils.h"
-#include "../utils/mobutils.h"
+#include "instance.h"
 #include "lua_baseentity.h"
 #include "luautils.h"
+#include "utils/instanceutils.h"
+#include "utils/mobutils.h"
 
 CLuaInstance::CLuaInstance(CInstance* PInstance)
 : m_PLuaInstance(PInstance)

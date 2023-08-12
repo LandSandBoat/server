@@ -5,7 +5,6 @@
 -- !pos -420 8 500 195
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -19,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("TheRequiemCS") == 3 and
         player:getCharVar("TheRequiemYumKilled") == 0 and
-        npcUtil.tradeHas(trade, 4154) and
+        npcUtil.tradeHas(trade, xi.items.FLASK_OF_HOLY_WATER) and
         offset == player:getCharVar("TheRequiemRandom") - 1 and
         npcUtil.popFromQM(player, npc, { ID.mob.YUM_KIMIL, ID.mob.YUM_KIMIL + 1, ID.mob.YUM_KIMIL + 2 }, { hide = 0 })
     then
@@ -66,10 +65,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- THE REQUIEM
     if csid == 46 then
         player:setCharVar("TheRequiemCS", 0)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Gwora-Corridor (278)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GWORA_CORRIDOR] =

@@ -8,11 +8,9 @@
 -- Echo Hawk   : !pos -0.965 5.999 -15.567 234
 -- qm1 (moves) : !pos 309.6 2.6 324 106
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

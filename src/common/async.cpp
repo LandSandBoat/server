@@ -65,7 +65,7 @@ void Async::query(std::string const& query)
 //     : If you define your arg as _sql, but then call sql, it will use the global
 //     : SQLConnection, which is on the main thread.
 //     : Remember that SQLConnection is NOT THREAD-SAFE!
-void Async::query(std::function<void(SqlConnection*)> func)
+void Async::query(std::function<void(SqlConnection*)> const& func)
 {
     // clang-format off
     _ts->schedule([func]()
@@ -80,7 +80,7 @@ void Async::query(std::function<void(SqlConnection*)> func)
     // clang-format on
 }
 
-void Async::submit(std::function<void()> func)
+void Async::submit(std::function<void()> const& func)
 {
     // clang-format off
     _ts->schedule([func]()

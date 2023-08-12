@@ -4,8 +4,6 @@
 -- !pos 100.000 35.150 340.000 117
 -----------------------------------
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -31,10 +29,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32 then
         npcUtil.giveKeyItem(player, xi.ki.MEA_GATE_CRYSTAL)
     end

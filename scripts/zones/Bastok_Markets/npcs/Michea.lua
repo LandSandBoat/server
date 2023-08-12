@@ -5,7 +5,6 @@
 -- Involed in: Distant Loyalties
 -- !pos -298 -16 -157 235
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -18,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     if
         distantLoyalties == QUEST_ACCEPTED and
         player:getCharVar("DistantLoyaltiesProgress") == 2 and
-        npcUtil.tradeHas(trade, 653)
+        npcUtil.tradeHas(trade, xi.items.MYTHRIL_INGOT)
     then
         player:startEvent(317)
     end
@@ -49,10 +48,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- DISTANT LOYALTIES
     if csid == 315 then
         player:delKeyItem(xi.ki.GOLDSMITHING_ORDER)

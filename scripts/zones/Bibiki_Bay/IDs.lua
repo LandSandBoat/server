@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bibiki_Bay
 -----------------------------------
-require('scripts/globals/zone')
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BIBIKI_BAY] =

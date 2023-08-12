@@ -20,7 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "release_special.h"
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CSpecialReleasePacket::CSpecialReleasePacket(CCharEntity* PChar)
 {

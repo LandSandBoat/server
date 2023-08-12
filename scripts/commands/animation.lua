@@ -2,9 +2,6 @@
 -- func: animation
 -- desc: Sets the players current animation.
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

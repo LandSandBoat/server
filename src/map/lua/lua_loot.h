@@ -22,8 +22,8 @@
 #ifndef _LUALOOT_H
 #define _LUALOOT_H
 
-#include "../utils/itemutils.h"
 #include "luautils.h"
+#include "utils/itemutils.h"
 
 struct action_t;
 struct actionList_t;
@@ -37,16 +37,16 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaLootContainer& action);
 
     void addItem(uint16 item, uint16 rate, sol::variadic_args va);
-    void addGroup(uint16 groupRate, sol::table items);
+    void addGroup(uint16 groupRate, sol::table const& items);
 
     void addItemFixed(uint16 item, uint16 rate, sol::variadic_args va);
-    void addGroupFixed(uint16 groupRate, sol::table items);
+    void addGroupFixed(uint16 groupRate, sol::table const& items);
 
     static void Register();
 
 private:
     void addItemToContainer(uint16 item, uint16 rate, sol::variadic_args va, bool hasFixedRate);
-    void addGroupToContainer(uint16 groupRate, sol::table items, bool hasFixedRate);
+    void addGroupToContainer(uint16 groupRate, sol::table const& items, bool hasFixedRate);
 };
 
 #endif

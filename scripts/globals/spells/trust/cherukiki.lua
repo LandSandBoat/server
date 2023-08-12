@@ -15,10 +15,10 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.MAKKI_CHEBUKKI] = xi.trust.message_offset.TEAMWORK_1,
-        [xi.magic.spell.KUKKI_CHEBUKKI] = xi.trust.message_offset.TEAMWORK_2,
-        [xi.magic.spell.PRISHE] = xi.trust.message_offset.TEAMWORK_3,
-        [xi.magic.spell.TENZEN] = xi.trust.message_offset.TEAMWORK_4,
+        [xi.magic.spell.MAKKI_CHEBUKKI] = xi.trust.messageOffset.TEAMWORK_1,
+        [xi.magic.spell.KUKKI_CHEBUKKI] = xi.trust.messageOffset.TEAMWORK_2,
+        [xi.magic.spell.PRISHE] = xi.trust.messageOffset.TEAMWORK_3,
+        [xi.magic.spell.TENZEN] = xi.trust.messageOffset.TEAMWORK_4,
     })
 
     -- TODO: Research numerous emotes
@@ -51,14 +51,16 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, 5)
 
     mob:setAutoAttackEnabled(false)
+
+    mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.MID_RANGE)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

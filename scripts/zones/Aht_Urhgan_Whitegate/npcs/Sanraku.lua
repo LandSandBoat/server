@@ -18,12 +18,12 @@ entity.onTrigger = function(player, npc)
     xi.znm.sanraku.onTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.znm.sanraku.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.znm.sanraku.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    xi.znm.sanraku.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.znm.sanraku.onEventFinish(player, csid, option, npc)
 end
 
 return entity

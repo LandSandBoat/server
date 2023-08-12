@@ -5,12 +5,8 @@
 -- !pos 117 -3 92 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -19,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     -- FIRE AND BRIMSTONE
     if
         player:getCharVar("fireAndBrimstone") == 5 and
-        npcUtil.tradeHas(trade, 1113)
+        npcUtil.tradeHas(trade, xi.items.OLD_EARRING)
     then
         -- old earring
         player:startEvent(537, 0, 13360)
@@ -77,9 +73,9 @@ entity.onTrigger = function(player, npc)
     elseif fireAndBrimstoneCS > 0 and fireAndBrimstoneCS < 4 then
         player:startEvent(532) -- during RNG AF2
     elseif fireAndBrimstoneCS == 4 then
-        player:startEvent(535, 0, 13360, 1113) -- second part RNG AF2
+        player:startEvent(535, 0, 13360, xi.items.OLD_EARRING) -- second part RNG AF2
     elseif fireAndBrimstoneCS == 5 then
-        player:startEvent(536, 0, 13360, 1113) -- during second part RNG AF2
+        player:startEvent(536, 0, 13360, xi.items.OLD_EARRING) -- during second part RNG AF2
 
     -- UNBRIDLED PASSION
     elseif
@@ -98,7 +94,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- THE FANGED ONE
     if csid == 351 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)

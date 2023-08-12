@@ -3,7 +3,6 @@
 -- random globals that may be used per zone
 -----------------------------------
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.zoneUtil = xi.zoneUtil or {}

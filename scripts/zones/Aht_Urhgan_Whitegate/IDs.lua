@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Aht_Urhgan_Whitegate
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AHT_URHGAN_WHITEGATE] =

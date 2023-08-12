@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 
 local carpentersLandingGlobal =
@@ -37,15 +36,15 @@ local carpentersLandingGlobal =
     herculesTreeOnTrade = function(player, npc, trade)
         local msgOffset = ID.text.HERCULES_TREE_NOTHING_YET
 
-        if npcUtil.tradeHas(trade, 4370) then
+        if npcUtil.tradeHas(trade, xi.items.POT_OF_HONEY) then
             if npc:getLocalVar("honey") == 0 then
-                player:messageSpecial(msgOffset + 4, 4370) -- "You plaster the contents of a pot of honey on the tree."
+                player:messageSpecial(msgOffset + 4, xi.items.POT_OF_HONEY) -- "You plaster the contents of a pot of honey on the tree."
 
                 local hour = VanadielHour()
                 npc:setLocalVar("honey", (hour >= 22 or hour < 4) and 1 or 2) -- 1 = trade was done in time (before 4am). 2 = trade was too late.
                 player:confirmTrade()
             else
-                player:messageSpecial(msgOffset + 1, 4370) -- "The bark is sticky. The tree has already been plastered with the contents of a pot of honey."
+                player:messageSpecial(msgOffset + 1, xi.items.POT_OF_HONEY) -- "The bark is sticky. The tree has already been plastered with the contents of a pot of honey."
             end
         end
     end,

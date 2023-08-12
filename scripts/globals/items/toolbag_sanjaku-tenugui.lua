@@ -3,8 +3,6 @@
 -- Toolbag Sanjaku-tenugui
 -- When used, you will obtain one stack of Sanjaku-tenugui
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2553, 99)
+    target:addItem(xi.items.SANJAKU_TENUGUI, 99)
 end
 
 return itemObject

@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "message.h"
 
 #include "alliance.h"
+#include "conquest_system.h"
 #include "linkshell.h"
 #include "party.h"
 #include "status_effect_container.h"
@@ -656,6 +657,46 @@ namespace message
 
                 break;
             }
+            case MSG_WORLD2MAP_REGIONAL_EVENT:
+            {
+                // Extract data
+                uint8* data      = (uint8*)extra.data();
+                uint8  eventType = ref<uint8>(data, 0);
+                // uint8  subtype   = ref<uint8>(data, 1);
+
+                // Handle each event type and subtype.
+                switch (eventType)
+                {
+                    case REGIONAL_EVT_MSG_CONQUEST:
+                    {
+                        conquest::HandleZMQMessage(data);
+                        break;
+                    }
+                    /*
+                    case REGIONAL_EVT_MSG_BESIEGED:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_CAMPAIGN:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    case REGIONAL_EVT_MSG_COLONIZATION:
+                    {
+                        // TODO: Handle besieged message
+                        break;
+                    }
+                    */
+                    default:
+                    {
+                        ShowWarning("Message: unhandled regional event type %d", eventType);
+                    }
+                }
+
+                break;
+            }
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);
@@ -861,7 +902,7 @@ namespace message
     void rpc_send(uint16 sendZone, uint16 recvZone, std::string const& sendStr, sol::function recvFunc)
     {
         uint64_t slotKey  = std::chrono::duration_cast<std::chrono::microseconds>(hires_clock::now().time_since_epoch()).count();
-        replyMap[slotKey] = recvFunc;
+        replyMap[slotKey] = std::move(recvFunc);
 
         std::vector<uint8> packetData(16 + sendStr.size() + 1);
 

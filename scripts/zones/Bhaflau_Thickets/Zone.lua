@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Bhaflau_Thickets/IDs')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/helm')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -45,10 +44,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 108 then
         player:setPos(0, 0, 0, 0, 66)
     end

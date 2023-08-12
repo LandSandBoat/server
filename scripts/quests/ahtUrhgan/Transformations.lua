@@ -7,12 +7,8 @@
 -- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/settings')
 -----------------------------------
 local alzadaalID  = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")

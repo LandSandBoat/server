@@ -2,6 +2,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 return {
     ['Abeaule']       = { text = ID.text.ABEAULE_DIALOG_THANKS },
+    ['Abioleget']     = { text = ID.text.ABIOLEGET_DIALOG },
     ['Ailbeche']      = { event = 868 },
     ['Aivedoir']      = { text = ID.text.AIVEDOIR_DIALOG },
     ['Arienh']        = { text = ID.text.ARIENH_DIALOG },
@@ -20,6 +21,7 @@ return {
     ['Maurine']       = { text = ID.text.MAURINE_DIALOG },  -- NOTE: These are two different NPCs
     ['Maurinne']      = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']       = { event = 517 },
+    ['Morjean']       = { event = 601 },
     ['Nouveil']       = { event = 574 },
     ['Pellimie']      = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']      = { text = ID.text.PEPIGORT_DIALOG },

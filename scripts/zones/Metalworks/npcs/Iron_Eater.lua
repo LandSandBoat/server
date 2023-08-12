@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 956 then
         player:setCharVar("FiresOfDiscProg", 2)
     end

@@ -25,17 +25,21 @@
 
 #include "guild_menu_buy_update.h"
 
-#include "../entities/charentity.h"
-#include "../item_container.h"
+#include "entities/charentity.h"
+#include "item_container.h"
 
-#include "../items/item_shop.h"
+#include "items/item_shop.h"
 
 CGuildMenuBuyUpdatePacket::CGuildMenuBuyUpdatePacket(CCharEntity* PChar, uint8 stock, uint16 itemID, uint8 quantity)
 {
     this->setType(0x82);
     this->setSize(0x08);
 
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    if (PChar == nullptr)
+    {
+        ShowWarning("PChar is null.");
+        return;
+    }
 
     ref<uint16>(0x04) = itemID;
     ref<uint8>(0x06)  = stock;

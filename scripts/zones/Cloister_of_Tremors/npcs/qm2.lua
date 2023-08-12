@@ -5,7 +5,6 @@
 -- Notes: Used to obtain a Tremor Stone
 -- !pos -545.184, 1.855, -495.693 209
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
@@ -17,10 +16,10 @@ entity.onTrigger = function(player, npc)
     npcUtil.giveItem(player, xi.items.TREMORSTONE)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

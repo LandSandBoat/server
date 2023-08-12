@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Davoi
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DAVOI] =
@@ -31,6 +28,7 @@ zones[xi.zone.DAVOI] =
         ORB_QUEST_OFFSET              = 7369, -- You carefully dip the orb into the pool.
         QUEMARICOND_DIALOG            = 7385, -- I can't believe I've lost my way! They must have used an Orcish spell to change the terrain! Yes, that must be it!
         YOU_SEE_NOTHING               = 7419, -- There is nothing here.
+        YOU_FIND_NOTHING              = 7438, -- You find nothing.
         AN_ORCISH_STORAGE_HOLE        = 7461, -- An Orcish storage hole. There is something inside, but you cannot open it without a key.
         A_WELL                        = 7463, -- A well, presumably dug by Orcs.
         CHEST_UNLOCKED                = 7482, -- You unlock the chest!
@@ -84,6 +82,7 @@ zones[xi.zone.DAVOI] =
     },
     npc =
     {
+        JAR              = GetFirstID('Jar'),
         HIDE_FLAP_OFFSET = 17388023,
         STORAGE_HOLE     = 17388025,
         TREASURE_CHEST   = 17388027,

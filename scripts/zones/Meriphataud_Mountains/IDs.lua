@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Meriphataud_Mountains
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
@@ -107,7 +104,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 
     npc =
     {
-        OVERSEER_BASE = 17265271, -- Chegourt_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Chegourt_RK'),
     },
 }
 

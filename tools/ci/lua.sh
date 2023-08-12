@@ -25,6 +25,7 @@ global_objects=(
     ai
     os
     _
+    _G
 
     Module
     Override
@@ -48,7 +49,6 @@ global_objects=(
     getVanaMidnight
     getMidnight
     getConquestTally
-    vanaDay
 
     mission
     Mission
@@ -73,8 +73,6 @@ global_objects=(
     BattlefieldQuest
     Limbus
     SeasonalEvent
-
-    removeSleepEffects
 
     QUEST_AVAILABLE
     QUEST_ACCEPTED
@@ -109,8 +107,6 @@ global_objects=(
     error
     onTrigger
 
-    SetExplorerMoogles
-
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
@@ -134,7 +130,6 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
-    getEffectResistance
     getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation
@@ -147,7 +142,6 @@ global_objects=(
     handleAfflatusMisery
     handleNinjutsuDebuff
     handleThrenody
-    hasSleepEffects
     isValidHealTarget
     takeAbilityDamage
 

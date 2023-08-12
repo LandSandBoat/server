@@ -21,6 +21,8 @@
 
 #include "console_service.h"
 
+#include "lua.h"
+
 #include <sstream>
 
 #ifdef _WIN32
@@ -97,7 +99,7 @@ ConsoleService::ConsoleService()
 {
     // clang-format off
     RegisterCommand("help", "Print a list of available console commands.",
-    [this](std::vector<std::string> inputs)
+    [this](std::vector<std::string>& inputs)
     {
         fmt::print("> Available commands:\n");
         for (auto& [name, command] : m_commands)
@@ -107,13 +109,13 @@ ConsoleService::ConsoleService()
     });
 
     RegisterCommand("tasks", "Show the current amount of tasks registered to the application task manager.",
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         fmt::print("> tasks registered to the application task manager: {}\n", CTaskMgr::getInstance()->getTaskList().size());
     });
 
     RegisterCommand("log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)",
-    [](std::vector<std::string> inputs)
+    [](std::vector<std::string>& inputs)
     {
         if (inputs.size() >= 2)
         {
@@ -125,6 +127,19 @@ ConsoleService::ConsoleService()
         else
         {
             fmt::print("> Invalid inputs.\n");
+        }
+    });
+
+    RegisterCommand("lua", "Provides a Lua REPL",
+    [](std::vector<std::string>& inputs)
+    {
+        if (inputs.size() >= 2)
+        {
+            // Remove "lua" from the front of the inputs
+            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+
+            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+            lua.safe_script(input);
         }
     });
 
@@ -168,7 +183,7 @@ ConsoleService::ConsoleService()
                         auto entry = m_commands.find(inputs[0]);
                         if (entry != m_commands.end())
                         {
-                            entry->second.func(std::move(inputs));
+                            entry->second.func(inputs);
                         }
                         else
                         {
@@ -193,11 +208,11 @@ ConsoleService::~ConsoleService()
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-void ConsoleService::RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>)> func)
+void ConsoleService::RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>&)> func)
 {
     std::lock_guard<std::mutex> lock(m_consoleInputBottleneck);
 
-    m_commands[name] = ConsoleCommand{ name, description, func };
+    m_commands[name] = ConsoleCommand{ name, description, std::move(func) };
 }
 
 void ConsoleService::stop()

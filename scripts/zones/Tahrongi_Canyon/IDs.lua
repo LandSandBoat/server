@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Tahrongi_Canyon
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TAHRONGI_CANYON] =

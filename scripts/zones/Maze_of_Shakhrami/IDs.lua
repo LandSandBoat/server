@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Maze of Shakhrami (198)
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAZE_OF_SHAKHRAMI] =

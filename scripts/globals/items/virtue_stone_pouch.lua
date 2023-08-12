@@ -3,8 +3,6 @@
 -- virtue_stone_pouch.lua
 -- When used, you will obtain one stack of virtue stone
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18244, 99)
+    target:addItem(xi.items.VIRTUE_STONE, 99)
 end
 
 return itemObject

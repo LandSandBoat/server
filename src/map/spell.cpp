@@ -658,11 +658,10 @@ namespace spell
     // Get Spell By ID
     CSpell* GetSpell(SpellID SpellID)
     {
-        XI_DEBUG_BREAK_IF(static_cast<uint16>(SpellID) >= MAX_SPELL_ID);
-
         auto id = static_cast<uint16>(SpellID);
         if (id >= MAX_SPELL_ID)
         {
+            ShowWarning("Spell ID (%d) exceeds MAX_SPELL_ID.", static_cast<uint16>(SpellID));
             return nullptr;
         }
         // False positive: this is CSpell*, so it's OK

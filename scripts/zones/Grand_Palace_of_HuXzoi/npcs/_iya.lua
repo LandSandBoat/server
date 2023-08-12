@@ -28,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 52 and option == 1 then
         player:setPos(-419.995, 0, 248.483, 191, 35) -- To The Garden of RuHmet
     elseif csid == 4 then
@@ -39,13 +39,13 @@ entity.onEventFinish = function(player, csid, option)
         player:setPos(-419.995, 0, 248.483, 191, 35)
     elseif csid == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14672)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
         else
-            if player:addItem(14672) then
+            if player:addItem(xi.items.TAVNAZIAN_RING) then
                 player:setCharVar("PromathiaStatus", 0)
                 player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
                 player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 14672)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.TAVNAZIAN_RING)
             end
         end
     end

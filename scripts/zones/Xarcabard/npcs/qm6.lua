@@ -5,7 +5,6 @@
 -- !pos -254.883 -17.003 -150.818 112
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 then
         player:setCharVar("unbridledPassion", 6)
     elseif csid == 7 and npcUtil.giveItem(player, xi.items.ICE_ARROW) then

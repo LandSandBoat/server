@@ -3,8 +3,6 @@
 -- Ice Card Case
 -- When used, you will obtain one stack of Ice Cards
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2177, 99)
+    target:addItem(xi.items.ICE_CARD, 99)
 end
 
 return itemObject

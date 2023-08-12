@@ -56,10 +56,15 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
+                g_PGuildList.emplace_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
-        XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
+
+        if (g_PGuildShopList.size() != 0)
+        {
+            ShowWarning("g_PGuildShopList contains information prior to initialization.");
+            return;
+        }
 
         fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
 
@@ -69,7 +74,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildShopList.push_back(new CItemContainer(sql->GetIntData(0)));
+                g_PGuildShopList.emplace_back(new CItemContainer(sql->GetIntData(0)));
             }
         }
         for (auto* PGuildShop : g_PGuildShopList)

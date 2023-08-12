@@ -20,10 +20,10 @@
 */
 
 #include "automaton_controller.h"
-#include "../ai_container.h"
-#include "../states/ability_state.h"
-#include "../states/magic_state.h"
-#include "../states/weaponskill_state.h"
+#include "ai/ai_container.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/trustentity.h"
@@ -447,8 +447,8 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
     threshold                  = std::clamp<float>(threshold + PAutomaton->getMod(Mod::AUTO_HEALING_THRESHOLD), 30.f, 90.f);
     CBattleEntity* PCastTarget = nullptr;
 
-    bool          haveHate = false;
-    EnmityList_t* enmityList;
+    bool          haveHate   = false;
+    EnmityList_t* enmityList = nullptr;
 
     auto* PMob = dynamic_cast<CMobEntity*>(PTarget);
     if (PMob)
@@ -615,63 +615,63 @@ bool CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers)
         std::stable_sort(reslist.begin(), reslist.end(), resistanceComparator);
         for (std::pair<SpellID, int16>& res : reslist)
         {
-            castPriority.push_back(res.first);
+            castPriority.emplace_back(res.first);
         }
     }
     else if (PAutomaton->getHead() == HEAD_SPIRITREAVER)
     {
         if (maneuvers.thunder)
         { // Thunder -> Thunder spells
-            castPriority.push_back(SpellID::Thunder);
+            castPriority.emplace_back(SpellID::Thunder);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Thunder);
+            defaultPriority.emplace_back(SpellID::Thunder);
         }
 
         if (maneuvers.ice)
         { // Ice -> Blizzard spells
-            castPriority.push_back(SpellID::Blizzard);
+            castPriority.emplace_back(SpellID::Blizzard);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Blizzard);
+            defaultPriority.emplace_back(SpellID::Blizzard);
         }
 
         if (maneuvers.fire)
         { // Fire -> Fire spells
-            castPriority.push_back(SpellID::Fire);
+            castPriority.emplace_back(SpellID::Fire);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Fire);
+            defaultPriority.emplace_back(SpellID::Fire);
         }
 
         if (maneuvers.wind)
         { // Wind -> Aero spells
-            castPriority.push_back(SpellID::Aero);
+            castPriority.emplace_back(SpellID::Aero);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Aero);
+            defaultPriority.emplace_back(SpellID::Aero);
         }
 
         if (maneuvers.water)
         { // Water -> Water spells
-            castPriority.push_back(SpellID::Water);
+            castPriority.emplace_back(SpellID::Water);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Water);
+            defaultPriority.emplace_back(SpellID::Water);
         }
 
         if (maneuvers.earth)
         { // Earth -> Stone spells
-            castPriority.push_back(SpellID::Stone);
+            castPriority.emplace_back(SpellID::Stone);
         }
         else
         {
-            defaultPriority.push_back(SpellID::Stone);
+            defaultPriority.emplace_back(SpellID::Stone);
         }
     }
     else
@@ -731,7 +731,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             // clang-format on
             if (dispel)
             {
-                castPriority.push_back(SpellID::Dispel);
+                castPriority.emplace_back(SpellID::Dispel);
             }
             break;
         }
@@ -741,11 +741,11 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.dark) // Dark -> Bio
                 {
-                    castPriority.push_back(SpellID::Bio_II);
+                    castPriority.emplace_back(SpellID::Bio_II);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Bio_II);
+                    defaultPriority.emplace_back(SpellID::Bio_II);
                 }
             }
 
@@ -753,11 +753,11 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.light)
                 {
-                    castPriority.push_back(SpellID::Dia_II);
+                    castPriority.emplace_back(SpellID::Dia_II);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Dia_II);
+                    defaultPriority.emplace_back(SpellID::Dia_II);
                 }
             }
 
@@ -765,11 +765,11 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.dark) // Dark -> Bio
                 {
-                    castPriority.push_back(SpellID::Bio);
+                    castPriority.emplace_back(SpellID::Bio);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Bio);
+                    defaultPriority.emplace_back(SpellID::Bio);
                 }
             }
 
@@ -777,68 +777,68 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.light)
                 {
-                    castPriority.push_back(SpellID::Dia);
+                    castPriority.emplace_back(SpellID::Dia);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Dia);
+                    defaultPriority.emplace_back(SpellID::Dia);
                 }
             }
 
             if (maneuvers.water) // Water -> Poison
             {
-                castPriority.push_back(SpellID::Poison_II);
-                castPriority.push_back(SpellID::Poison);
+                castPriority.emplace_back(SpellID::Poison_II);
+                castPriority.emplace_back(SpellID::Poison);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Poison_II);
-                defaultPriority.push_back(SpellID::Poison);
+                defaultPriority.emplace_back(SpellID::Poison_II);
+                defaultPriority.emplace_back(SpellID::Poison);
             }
 
             if (maneuvers.wind)
             { // Wind -> Silence
-                castPriority.push_back(SpellID::Silence);
+                castPriority.emplace_back(SpellID::Silence);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Silence);
+                defaultPriority.emplace_back(SpellID::Silence);
             }
 
             if (maneuvers.earth)
             { // Earth -> Slow
-                castPriority.push_back(SpellID::Slow);
+                castPriority.emplace_back(SpellID::Slow);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Slow);
+                defaultPriority.emplace_back(SpellID::Slow);
             }
 
             if (maneuvers.dark)
             { // Dark -> Blind
-                castPriority.push_back(SpellID::Blind);
+                castPriority.emplace_back(SpellID::Blind);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Blind);
+                defaultPriority.emplace_back(SpellID::Blind);
             }
 
             if (maneuvers.ice)
             { // Ice -> Paralyze
-                castPriority.push_back(SpellID::Paralyze);
+                castPriority.emplace_back(SpellID::Paralyze);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Paralyze);
+                defaultPriority.emplace_back(SpellID::Paralyze);
             }
 
             if (maneuvers.fire)
             { // Fire -> Addle
-                castPriority.push_back(SpellID::Addle);
+                castPriority.emplace_back(SpellID::Addle);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Addle);
+                defaultPriority.emplace_back(SpellID::Addle);
             }
             break;
         }
@@ -846,102 +846,102 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
         {
             if (PAutomaton->GetMPP() <= 75 && PTarget->health.mp > 0) // MPP <= 75 -> Aspir
             {
-                castPriority.push_back(SpellID::Aspir_II);
-                castPriority.push_back(SpellID::Aspir);
+                castPriority.emplace_back(SpellID::Aspir_II);
+                castPriority.emplace_back(SpellID::Aspir);
             }
 
             if (PAutomaton->GetHPP() <= 75 && PTarget->m_EcoSystem != ECOSYSTEM::UNDEAD)
             { // HPP <= 75 -> Drain
-                castPriority.push_back(SpellID::Drain);
+                castPriority.emplace_back(SpellID::Drain);
             }
 
             if (maneuvers.dark) // Dark -> Access to Enfeebles
             {
                 if (!PAutomaton->StatusEffectContainer->HasStatusEffect(EFFECT_INT_BOOST))
                 { // Use it ASAP
-                    defaultPriority.push_back(SpellID::Absorb_INT);
+                    defaultPriority.emplace_back(SpellID::Absorb_INT);
                 }
 
                 // Not prioritizable since it requires 1 Dark to access Enfeebles and requires 2 of another element to prioritize another
-                defaultPriority.push_back(SpellID::Blind);
+                defaultPriority.emplace_back(SpellID::Blind);
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
                 {
-                    defaultPriority.push_back(SpellID::Bio_II);
+                    defaultPriority.emplace_back(SpellID::Bio_II);
                 }
 
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BIO))
                 {
                     if (maneuvers.light >= 2) // 2 Light -> Dia
                     {
-                        castPriority.push_back(SpellID::Dia_II);
+                        castPriority.emplace_back(SpellID::Dia_II);
                     }
                     else
                     {
-                        defaultPriority.push_back(SpellID::Dia_II);
+                        defaultPriority.emplace_back(SpellID::Dia_II);
                     }
                 }
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
                 {
-                    defaultPriority.push_back(SpellID::Bio);
+                    defaultPriority.emplace_back(SpellID::Bio);
                 }
 
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BIO))
                 {
                     if (maneuvers.light >= 2) // 2 Light -> Dia
                     {
-                        castPriority.push_back(SpellID::Dia);
+                        castPriority.emplace_back(SpellID::Dia);
                     }
                     else
                     {
-                        defaultPriority.push_back(SpellID::Dia);
+                        defaultPriority.emplace_back(SpellID::Dia);
                     }
                 }
 
                 if (maneuvers.water >= 2) // 2 Water -> Poison
                 {
-                    castPriority.push_back(SpellID::Poison_II);
-                    castPriority.push_back(SpellID::Poison);
+                    castPriority.emplace_back(SpellID::Poison_II);
+                    castPriority.emplace_back(SpellID::Poison);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Poison_II);
-                    defaultPriority.push_back(SpellID::Poison);
+                    defaultPriority.emplace_back(SpellID::Poison_II);
+                    defaultPriority.emplace_back(SpellID::Poison);
                 }
 
                 if (maneuvers.wind >= 2)
                 { // 2 Wind -> Silence
-                    castPriority.push_back(SpellID::Silence);
+                    castPriority.emplace_back(SpellID::Silence);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Silence);
+                    defaultPriority.emplace_back(SpellID::Silence);
                 }
 
                 if (maneuvers.earth >= 2)
                 { // 2 Earth -> Slow
-                    castPriority.push_back(SpellID::Slow);
+                    castPriority.emplace_back(SpellID::Slow);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Slow);
+                    defaultPriority.emplace_back(SpellID::Slow);
                 }
 
                 if (maneuvers.ice >= 2)
                 { // 2 Ice -> Paralyze
-                    castPriority.push_back(SpellID::Paralyze);
+                    castPriority.emplace_back(SpellID::Paralyze);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Paralyze);
+                    defaultPriority.emplace_back(SpellID::Paralyze);
                 }
 
                 if (maneuvers.fire >= 2)
                 { // 2 Fire -> Addle
-                    castPriority.push_back(SpellID::Addle);
+                    castPriority.emplace_back(SpellID::Addle);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Addle);
+                    defaultPriority.emplace_back(SpellID::Addle);
                 }
             }
             break;
@@ -950,38 +950,38 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
         {
             if (maneuvers.earth)
             { // Earth -> Slow
-                castPriority.push_back(SpellID::Slow);
+                castPriority.emplace_back(SpellID::Slow);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Slow);
+                defaultPriority.emplace_back(SpellID::Slow);
             }
 
             if (maneuvers.water) // 2 Water -> Poison
             {
-                castPriority.push_back(SpellID::Poison_II);
-                castPriority.push_back(SpellID::Poison);
+                castPriority.emplace_back(SpellID::Poison_II);
+                castPriority.emplace_back(SpellID::Poison);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Poison_II);
-                defaultPriority.push_back(SpellID::Poison);
+                defaultPriority.emplace_back(SpellID::Poison_II);
+                defaultPriority.emplace_back(SpellID::Poison);
             }
 
             if (maneuvers.dark) // Dark -> Blind > Bio
             {
-                castPriority.push_back(SpellID::Blind);
+                castPriority.emplace_back(SpellID::Blind);
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
                 {
-                    castPriority.push_back(SpellID::Bio_II);
+                    castPriority.emplace_back(SpellID::Bio_II);
                 }
             }
             else
             {
-                defaultPriority.push_back(SpellID::Blind);
+                defaultPriority.emplace_back(SpellID::Blind);
                 if (!PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DIA))
                 {
-                    defaultPriority.push_back(SpellID::Bio_II);
+                    defaultPriority.emplace_back(SpellID::Bio_II);
                 }
             }
 
@@ -989,11 +989,11 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.light) // Light -> Dia
                 {
-                    castPriority.push_back(SpellID::Dia_II);
+                    castPriority.emplace_back(SpellID::Dia_II);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Dia_II);
+                    defaultPriority.emplace_back(SpellID::Dia_II);
                 }
             }
 
@@ -1001,11 +1001,11 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.dark) // Dark -> Blind > Bio
                 {
-                    castPriority.push_back(SpellID::Bio);
+                    castPriority.emplace_back(SpellID::Bio);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Bio);
+                    defaultPriority.emplace_back(SpellID::Bio);
                 }
             }
 
@@ -1013,39 +1013,39 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (maneuvers.light) // Light -> Dia
                 {
-                    castPriority.push_back(SpellID::Dia);
+                    castPriority.emplace_back(SpellID::Dia);
                 }
                 else
                 {
-                    defaultPriority.push_back(SpellID::Dia);
+                    defaultPriority.emplace_back(SpellID::Dia);
                 }
             }
 
             if (maneuvers.wind)
             { // Wind -> Silence
-                castPriority.push_back(SpellID::Silence);
+                castPriority.emplace_back(SpellID::Silence);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Silence);
+                defaultPriority.emplace_back(SpellID::Silence);
             }
 
             if (maneuvers.ice)
             { // Ice -> Paralyze
-                castPriority.push_back(SpellID::Paralyze);
+                castPriority.emplace_back(SpellID::Paralyze);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Paralyze);
+                defaultPriority.emplace_back(SpellID::Paralyze);
             }
 
             if (maneuvers.fire)
             { // Fire -> Addle
-                castPriority.push_back(SpellID::Addle);
+                castPriority.emplace_back(SpellID::Addle);
             }
             else
             {
-                defaultPriority.push_back(SpellID::Addle);
+                defaultPriority.emplace_back(SpellID::Addle);
             }
             break;
         }
@@ -1087,7 +1087,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
             auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
             {
-                castPriority.push_back(id.value());
+                castPriority.emplace_back(id.value());
             }
         }
     });
@@ -1111,7 +1111,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
             auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
             {
-                castPriority.push_back(id.value());
+                castPriority.emplace_back(id.value());
             }
         }
     });
@@ -1141,7 +1141,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
                         auto id = automaton::FindNaSpell(PStatus);
                         if (id.has_value())
                         {
-                            castPriority.push_back(id.value());
+                            castPriority.emplace_back(id.value());
                         }
                     }
                 });
@@ -1501,7 +1501,7 @@ bool CAutomatonController::TryTPMove()
             if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 &&
                 distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
             {
-                validSkills.push_back(PSkill);
+                validSkills.emplace_back(PSkill);
             }
         }
 
@@ -1520,9 +1520,9 @@ bool CAutomatonController::TryTPMove()
 
                 if (uint16 power = PSCEffect->GetPower())
                 {
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((power >> 4) & 0xF));
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((power >> 4) & 0xF));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 8));
                 }
 
                 for (auto* PSkill : validSkills)
@@ -1530,9 +1530,9 @@ bool CAutomatonController::TryTPMove()
                     if (PSkill->getParam() > currentSkill)
                     {
                         std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)PSkill->getPrimarySkillchain());
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)PSkill->getSecondarySkillchain());
-                        skillProperties.push_back((SKILLCHAIN_ELEMENT)PSkill->getTertiarySkillchain());
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getPrimarySkillchain());
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getSecondarySkillchain());
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getTertiarySkillchain());
                         if (battleutils::FormSkillchain(resonanceProperties, skillProperties) != SC_NONE)
                         {
                             currentManeuvers = 1;
@@ -1673,13 +1673,13 @@ namespace automaton
                 uint32 removes = sql->GetUIntData(5);
                 while (removes > 0)
                 {
-                    PSpell.removes.push_back((EFFECT)(removes & 0xFF));
+                    PSpell.removes.emplace_back((EFFECT)(removes & 0xFF));
                     removes = removes >> 8;
                 }
 
                 if (!PSpell.removes.empty())
                 {
-                    naSpells.push_back(id);
+                    naSpells.emplace_back(id);
                 }
 
                 autoSpellList[id] = std::move(PSpell);
@@ -1735,7 +1735,7 @@ namespace automaton
                 uint16           id = (uint16)sql->GetUIntData(0);
                 AutomatonAbility PAbility{ (uint8)sql->GetUIntData(2), (uint16)sql->GetUIntData(3) };
 
-                autoAbilityList[id] = std::move(PAbility);
+                autoAbilityList[id] = PAbility;
 
                 auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
                 luautils::CacheLuaObjectFromFile(filename);

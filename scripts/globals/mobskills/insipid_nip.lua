@@ -1,14 +1,10 @@
 -----------------------------------
 --  Insipid Nip
---
 --  Description: Single target damage. Additional effect: Absorbs a random attribute
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

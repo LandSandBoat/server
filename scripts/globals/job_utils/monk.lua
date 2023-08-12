@@ -1,10 +1,6 @@
 -----------------------------------
 -- Monk Job Utilities
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.monk = xi.job_utils.monk or {}
@@ -48,15 +44,18 @@ end
 
 xi.job_utils.monk.useChakra = function(player, target, ability)
     local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
+
     for k, v in pairs(chakraStatusEffects) do
         if bit.band(chakraRemoval, v) == v then
             player:delStatusEffect(xi.effect[k])
         end
     end
 
-    local jpLevel = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) * 10
-    local recover = player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10) -- TODO: Figure out "function of level" addition (August 2017 update)
-    player:setHP(player:getHP() + recover + jpLevel)
+    local jpModifier        = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) -- NOTE: Level is the modified value, so 10 per point spent
+    local maxRecoveryAmount = (player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10)) + jpModifier
+    local recoveryAmount    = math.min(player:getMaxHP() - player:getHP(), maxRecoveryAmount) -- TODO: Figure out "function of level" addition (August 2017 update)
+
+    player:setHP(player:getHP() + recoveryAmount)
 
     local merits = player:getMerit(xi.merit.INVIGORATE)
     if merits > 0 then
@@ -67,7 +66,7 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
         player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
     end
 
-    return recover
+    return recoveryAmount
 end
 
 xi.job_utils.monk.useChiBlast = function(player, target, ability)

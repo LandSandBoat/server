@@ -4,11 +4,9 @@
 -- Log ID: 1, Quest ID: 44
 -- Brygid : !pos -90 -4 -108 235
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

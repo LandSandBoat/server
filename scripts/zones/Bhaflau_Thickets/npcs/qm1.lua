@@ -9,10 +9,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2578) and
+        npcUtil.tradeHas(trade, xi.items.JAR_OF_OILY_BLOOD) and
         npcUtil.popFromQM(player, npc, ID.mob.LIVIDROOT_AMOOSHAH)
     then
-        -- Trade Oily Blood
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -22,10 +21,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.BLOOD_STAINS)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

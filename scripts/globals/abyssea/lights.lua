@@ -2,8 +2,6 @@
 -- Abyssea Lights Global
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/status")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}

@@ -2,7 +2,6 @@
 -- Unity Concord NPC Global
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.unity = xi.unity or {}
@@ -143,7 +142,7 @@ function xi.unity.onTrigger(player, npc)
     end
 end
 
-function xi.unity.onEventUpdate(player, csid, option)
+function xi.unity.onEventUpdate(player, csid, option, npc)
     local zoneId               = player:getZoneID()
     local ID                   = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local accolades            = player:getCurrency("unity_accolades")
@@ -192,7 +191,7 @@ function xi.unity.onEventUpdate(player, csid, option)
     end
 end
 
-function xi.unity.onEventFinish(player, csid, option)
+function xi.unity.onEventFinish(player, csid, option, npc)
     local zoneId    = player:getZoneID()
     local ID        = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local category  = bit.band(option, 0x1F)

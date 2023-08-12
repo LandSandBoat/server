@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 750) then
+    if npcUtil.tradeHas(trade, xi.items.SILVER_BEASTCOIN) then
         if player:getCharVar("SSG_SilverDoor") == 7 then
             npc:openDoor(5) -- Open the door if a silver beastcoin has been traded after checking the door the required number of times
         end
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.SILVER_CHECK)
             player:setCharVar("SSG_SilverDoor", 6)
         elseif silverDoorCheck == 6 or silverDoorCheck == 7 then -- Door has been checked six or more times
-            player:messageSpecial(ID.text.COMPLETED_CHECK, 750)
+            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.items.SILVER_BEASTCOIN)
             player:setCharVar("SSG_SilverDoor", 7)
         end
     elseif xPos > 280 and zPos < -100 then
@@ -49,10 +49,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

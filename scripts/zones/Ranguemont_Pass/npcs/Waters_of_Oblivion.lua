@@ -5,7 +5,6 @@
 -- !pos -284 -45 210 166
 -----------------------------------
 local ID = require("scripts/zones/Ranguemont_Pass/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -31,10 +30,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 8 then
         if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, { item = 16766 }) then
             player:delKeyItem(xi.ki.MERTAIRES_BRACELET)

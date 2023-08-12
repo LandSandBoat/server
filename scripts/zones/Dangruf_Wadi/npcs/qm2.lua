@@ -6,7 +6,6 @@
 -- Starts and Finishes: Breaking Stones, An Empty Vessel
 -- only spawns if the weather is SUNNY or CLEAR
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
@@ -18,10 +17,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(110)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 110 and option == 0 then
         npcUtil.giveItem(player, xi.items.DANGRUF_STONE)
     end

@@ -146,6 +146,10 @@ enum MSGSERVTYPE : uint8
     MSG_LUA_FUNCTION,
     MSG_CHARVAR_UPDATE,
 
+    // conquest, besieged, campaign..
+    MSG_WORLD2MAP_REGIONAL_EVENT,
+    MSG_MAP2WORLD_REGIONAL_EVENT,
+
     // gm commands
     MSG_SEND_TO_ZONE,
     MSG_SEND_TO_ENTITY,
@@ -153,6 +157,42 @@ enum MSGSERVTYPE : uint8
     // rpc
     MSG_RPC_SEND, // sent by sender -> reciever
     MSG_RPC_RECV, // sent by reciever -> sender
+};
+
+enum REGIONALMSGTYPE : uint8
+{
+    REGIONAL_EVT_MSG_CONQUEST,
+    REGIONAL_EVT_MSG_BESIEGED,
+    REGIONAL_EVT_MSG_CAMPAIGN,
+    REGIONAL_EVT_MSG_COLONIZATION,
+};
+
+enum CONQUESTMSGTYPE : uint8
+{
+    // WORLD --------> MAP
+
+    // World map broadcasts weekly update started to all zones
+    CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START,
+    // World map broadcasts that update is done, with the respective tally
+    CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END,
+    // World map broadcasts influence point updates to all zones.
+    // Used for periodic updates or initialization.
+    CONQUEST_WORLD2MAP_INFLUENCE_POINTS,
+    // World map broadcasts region control data to all zones.
+    // Used for initialization.
+    CONQUEST_WORLD2MAP_REGION_CONTROL,
+
+    // MAP ----------> WORLD
+
+    // A GM Triggers a weekly update. From one zone to world.
+    // World should send CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START and
+    // CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END when done
+    CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE,
+    // A GM requests houry conquest data (just influence points).
+    // World server should respond with CONQUEST_WORLD2MAP_INFLUENCE_POINTS triggering a zone update
+    CONQUEST_MAP2WORLD_GM_CONQUEST_UPDATE,
+    // Influence point update from any zone to world.
+    CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS,
 };
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
@@ -199,6 +239,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_RPC_SEND";
         case MSG_RPC_RECV:
             return "MSG_RPC_RECV";
+        case MSG_WORLD2MAP_REGIONAL_EVENT:
+            return "MSG_WORLD2MAP_REGIONAL_EVENT";
         default:
             return "Unknown";
     };
@@ -314,16 +356,16 @@ struct keyitems_t
 
 struct position_t
 {
-    float  x;
-    float  y; // Entity height, relative to "sea level"
-    float  z;
-    uint16 moving; // Something like the travel distance, the number of steps required for correct rendering in the client.
+    float  x      = 0.0f;
+    float  y      = 0.0f; // Entity height, relative to "sea level"
+    float  z      = 0.0f;
+    uint16 moving = 0; // Something like the travel distance, the number of steps required for correct rendering in the client.
 
     // The angle of rotation of the entity relative to its position. A maximum rotation value of
     // 255 is used as the rotation is stored in `uint8`. Use `rotationToRadian()` and
     // `radianToRotation()` util functions to convert back and forth between the 255-encoded
     // rotation value and the radian value.
-    uint8 rotation;
+    uint8 rotation = 0;
 
     position_t()
     {
@@ -346,7 +388,13 @@ struct position_t
 
 struct stats_t
 {
-    uint16 STR, DEX, VIT, AGI, INT, MND, CHR;
+    uint16 STR;
+    uint16 DEX;
+    uint16 VIT;
+    uint16 AGI;
+    uint16 INT;
+    uint16 MND;
+    uint16 CHR;
 
     stats_t()
     {
@@ -485,8 +533,8 @@ struct bazaar_t
 
 struct pathpoint_t
 {
-    position_t position;
-    uint32     wait;
+    position_t position{};
+    uint32     wait        = 0;
     bool       setRotation = false;
 };
 

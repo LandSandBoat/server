@@ -2,7 +2,6 @@
 -- Zone: Bastok-Jeuno_Airship
 -----------------------------------
 local ID = require('scripts/zones/Bastok-Jeuno_Airship/IDs')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -23,10 +22,10 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(100)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
         local prevzone = player:getPreviousZone()
 

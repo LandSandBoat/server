@@ -4,11 +4,8 @@
 -- Log ID: 5, Quest ID: 165
 -- Lokpix : !pos -61.942 3.949 224.900 114
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

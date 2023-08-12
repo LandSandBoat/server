@@ -7,8 +7,6 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 local entity = {}
@@ -18,16 +16,24 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
     if turmoil == QUEST_ACCEPTED then
-        if count == 3 and trade:getGil() == 0 and trade:hasItemQty(906, 3) then --Check that all 3 items have been traded
+        if
+            count == 3 and
+            trade:getGil() == 0 and
+            trade:hasItemQty(xi.items.STARMITE_SHELL, 3)
+        then
             player:startEvent(791)
         else
-            player:startEvent(786, 4500, 267, 906) -- Reminder of needed items
+            player:startEvent(786, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.items.STARMITE_SHELL) -- Reminder of needed items
         end
     elseif turmoil == QUEST_COMPLETED then
-        if count == 3 and trade:getGil() == 0 and trade:hasItemQty(906, 3) then --Check that all 3 items have been traded
+        if
+            count == 3 and
+            trade:getGil() == 0 and
+            trade:hasItemQty(xi.items.STARMITE_SHELL, 3)
+        then
             player:startEvent(791)
         else
-            player:startEvent(795, 4500, 0, 906) -- Reminder of needed items for repeated quest
+            player:startEvent(795, 4500, 0, xi.items.STARMITE_SHELL) -- Reminder of needed items for repeated quest
         end
     end
 end
@@ -59,18 +65,18 @@ entity.onTrigger = function(player, npc)
         pfame >= 6 and
         not needToZone
     then
-        player:startEvent(785, 4500, 267, 906)
+        player:startEvent(785, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.items.STARMITE_SHELL)
     elseif turmoil == QUEST_ACCEPTED then
-        player:startEvent(786, 4500, 267, 906) -- Reminder of needed items
+        player:startEvent(786, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.items.STARMITE_SHELL) -- Reminder of needed items
     elseif turmoil == QUEST_COMPLETED then
-        player:startEvent(795, 4500, 0, 906) -- Allows player to initiate repeat of Toraimarai Turmoil
+        player:startEvent(795, 4500, 0, xi.items.STARMITE_SHELL) -- Allows player to initiate repeat of Toraimarai Turmoil
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local flowerList =
     {
         [0] = { itemid = 948, gil = 300 }, -- Carnation

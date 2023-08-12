@@ -7,7 +7,10 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:getItemCount() == 1 and trade:hasItemQty(2185, 1) then -- Silver
+    if
+        trade:getItemCount() == 1 and
+        trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1)
+    then
         player:tradeComplete()
         player:setPos(-458, -16, 0, 189) -- using the pos method until the problem below is fixed
         -- player:startEvent(135) -- << this CS goes black at the end, never fades in
@@ -40,10 +43,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

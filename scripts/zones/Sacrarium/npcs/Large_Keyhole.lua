@@ -5,7 +5,6 @@
 -- !pos 100.231 -1.414 51.700 28
 -----------------------------------
 local ID = require("scripts/zones/Sacrarium/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -19,7 +18,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1658) then
+    if npcUtil.tradeHas(trade, xi.items.SEALION_CREST_KEY) then
         local smallKeyhole = GetNPCByID(ID.npc.SMALL_KEYHOLE)
         if smallKeyhole:getLocalVar("canTradeSecondKey") == 1 then
             GetNPCByID(npc:getID() - 2):openDoor(15)
@@ -30,10 +29,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

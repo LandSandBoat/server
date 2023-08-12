@@ -22,7 +22,7 @@
 #ifndef _CMERIT_H
 #define _CMERIT_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /************************************************************************
  *                                                                       *
@@ -552,12 +552,13 @@ struct Merit_t
         uint32 data; // data sent in packet
     };
 
-    uint32 value;     // the coefficient of variation of the parameter that is bound to merit
-    uint8  upgrade;   // maximum number of upgrades
-    uint32 jobs;      // bitmask of jobs for which merit has effect
-    uint8  upgradeid; // which set of upgrade values the merit will use
-    uint8  catid;     // cat which merit belongs to
-    uint16 spellid;   // associated spell ID to learn/unlearn
+    uint32 value;      // the coefficient of variation of the parameter that is bound to merit
+    uint8  upgrade;    // maximum number of upgrades
+    uint32 jobs;       // bitmask of jobs for which merit has effect
+    uint8  upgradeid;  // which set of upgrade values the merit will use
+    uint8  catid;      // cat which merit belongs to
+    uint16 spellid;    // associated spell ID to learn/unlearn
+    uint16 wsunlockid; // associated Weaponskill Unlock ID to learn/unlearn
 };
 
 /************************************************************************
@@ -596,10 +597,10 @@ private:
     uint16       m_LimitPoints;
     uint8        m_MeritPoints;
     CCharEntity* m_PChar;
-    Merit_t      merits[MERITS_COUNT];
+    Merit_t      merits[MERITS_COUNT]{};
 
     Merit_t* GetMeritPointer(MERIT_TYPE merit);
-    Merit_t* Categories[MCATEGORY_COUNT / 64 - 1]; // 51 pointers to the first merit of each catagory
+    Merit_t* Categories[MCATEGORY_COUNT / 64 - 1]{}; // 51 pointers to the first merit of each catagory
 };
 
 namespace meritNameSpace

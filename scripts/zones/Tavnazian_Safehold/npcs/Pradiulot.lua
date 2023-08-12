@@ -5,7 +5,6 @@
 -- !pos -20.814 -22 8.399 26
 -----------------------------------
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -28,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 204 then
         player:setCharVar("UnforgivenVar", 2)
         player:addKeyItem(xi.ki.MAP_OF_TAVNAZIA)

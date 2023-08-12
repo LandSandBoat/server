@@ -6,11 +6,8 @@
 -- !pos -26 -13 260 239
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -27,11 +24,11 @@ entity.onTrigger = function(player, npc)
     if
         iCanHearARainbow == QUEST_AVAILABLE and
         player:getMainLvl() >= 30 and
-        player:hasItem(1125)
+        player:hasItem(xi.items.CARBUNCLES_RUBY)
     then
-        player:startEvent(384, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
+        player:startEvent(384, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
     elseif iCanHearARainbow == QUEST_ACCEPTED then
-        player:startEvent(385, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
+        player:startEvent(385, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
 
     -- CLASS REUNION
     elseif
@@ -56,10 +53,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- I CAN HEAR A RAINBOW
     if csid == 384 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)

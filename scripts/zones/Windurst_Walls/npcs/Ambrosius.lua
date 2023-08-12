@@ -5,7 +5,6 @@
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -28,19 +27,19 @@ entity.onTrade = function(player, npc, trade)
         local reward = 0
 
         -- TODO: Table this on converting to Interaction
-        if trade:hasItemQty(584, 1) then
+        if trade:hasItemQty(xi.items.TORN_EPISTLE, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(585, 1) then
+        if trade:hasItemQty(xi.items.MUDDY_BAR_TAB, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(586, 1) then
+        if trade:hasItemQty(xi.items.ODD_POSTCARD, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(587, 1) then
+        if trade:hasItemQty(xi.items.DAMP_ENVELOPE, 1) then
             reward = reward + 1
         end
 
@@ -74,10 +73,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 48 and option == 0 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then

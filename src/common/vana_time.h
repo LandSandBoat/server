@@ -35,7 +35,7 @@
 
 #define JST_OFFSET 32400 // JST +offset from UTC
 
-#include "../common/cbasetypes.h"
+#include "cbasetypes.h"
 
 enum DAYTYPE : uint8
 {
@@ -104,18 +104,17 @@ private:
 
     CVanaTime();
 
-    uint32 m_vYear; // Vanadiel Year
-    uint32 m_vMon;  // Vanadiel Month
-    uint32 m_vDate; // Vanadiel Date (day of the month)
-    uint32 m_vHour; // Vanadiel Hour
-    uint32 m_vMin;  // Vanadiel Minute
-    uint32 m_vDay;  // Vanadiel day of the week (fire, earth, wind, water, ice, lightning, light, dark)
-    // uint8    m_vDayElement;                         // Vanadiel day's element (fire, ice, wind, earth, thunder, water, light dark)
-    uint32 m_vanaDate; // Vanadiel time in integer format
+    uint32 m_vYear{};    // Vanadiel Year
+    uint32 m_vMon{};     // Vanadiel Month
+    uint32 m_vDate{};    // Vanadiel Date (day of the month)
+    uint32 m_vHour{};    // Vanadiel Hour
+    uint32 m_vMin{};     // Vanadiel Minute
+    uint32 m_vDay{};     // Vanadiel day of the week (fire, earth, wind, water, ice, lightning, light, dark)
+    uint32 m_vanaDate{}; // Vanadiel time in integer format
 
-    TIMETYPE m_TimeType; // текущий тип времени
+    TIMETYPE m_TimeType{}; // The current type of time
 
-    int32 m_customEpoch; // Custom epoch to use instead of VTIME_BASEDATE
+    int32 m_customEpoch{}; // Custom epoch to use instead of VTIME_BASEDATE
 };
 
 #endif

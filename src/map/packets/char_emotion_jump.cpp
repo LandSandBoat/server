@@ -15,7 +15,7 @@
 */
 
 #include "char_emotion_jump.h"
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 
 CCharEmotionJumpPacket::CCharEmotionJumpPacket(CCharEntity* PChar, uint16 targetIndex, uint16 extra)
 {

@@ -3,9 +3,6 @@
 -- Item: Blind Bolt Quiver
 -- When used, you will obtain one stack of Blind Bolts
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

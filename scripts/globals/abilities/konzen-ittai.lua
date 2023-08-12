@@ -5,8 +5,6 @@
 -- Recast Time: 0:03:00
 -- Duration: 1:00 or until next Weapon Skill
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local abilityObject = {}
@@ -24,7 +22,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
         not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
     then
-        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 10, 0, 1)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end

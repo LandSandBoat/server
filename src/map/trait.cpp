@@ -82,7 +82,7 @@ namespace traits
                 PTrait->setValue(sql->GetIntData(5));
                 PTrait->setMeritId(sql->GetIntData(7));
 
-                PTraitsList[PTrait->getJob()].push_back(PTrait);
+                PTraitsList[PTrait->getJob()].emplace_back(PTrait);
             }
         }
 
@@ -105,7 +105,7 @@ namespace traits
                 PTrait->setMod(static_cast<Mod>(sql->GetIntData(3)));
                 PTrait->setValue(sql->GetIntData(4));
 
-                PTraitsList[JOB_BLU].push_back(PTrait);
+                PTraitsList[JOB_BLU].emplace_back(PTrait);
             }
         }
     }
@@ -118,7 +118,11 @@ namespace traits
 
     TraitList_t* GetTraits(uint8 JobID)
     {
-        XI_DEBUG_BREAK_IF(JobID >= MAX_JOBTYPE);
+        if (JobID >= MAX_JOBTYPE)
+        {
+            ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", JobID);
+            return nullptr;
+        }
 
         return &PTraitsList[JobID];
     }

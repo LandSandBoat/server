@@ -10,12 +10,9 @@
 -- Zokima-Rokima    - !pos 0 -16 124 239
 --
 -- Moreno-Toeno - !pos 169 -1.25 159 238
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)

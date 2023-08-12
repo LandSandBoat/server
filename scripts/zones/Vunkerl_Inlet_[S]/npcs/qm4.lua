@@ -5,7 +5,6 @@
 -- !pos -412 -29 -45 83
 -----------------------------------
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -18,7 +17,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS) and
         player:getCharVar("RedeemingRocksProg") == 3
     then
-        player:addKeyItem(953) -- 4th stop for quest "Redeeming Rocks"
+        player:addKeyItem(xi.ki.PIECE_OF_KIONITE) -- 4th stop for quest "Redeeming Rocks"
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PIECE_OF_KIONITE)
         player:setCharVar("RedeemingRocksProg", 4)
     else
@@ -26,10 +25,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

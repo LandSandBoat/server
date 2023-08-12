@@ -12,9 +12,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local northernFurs = trade:hasItemQty(1199, 4)
-    local easternPottery = trade:hasItemQty(1200, 4)
-    local southernMummies = trade:hasItemQty(1201, 4)
+    local northernFurs = trade:hasItemQty(xi.items.NORTHERN_FUR, 4)
+    local easternPottery = trade:hasItemQty(xi.items.PIECE_OF_EASTERN_POTTERY, 4)
+    local southernMummies = trade:hasItemQty(xi.items.SOUTHERN_MUMMY, 4)
 
     if
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
@@ -22,13 +22,13 @@ entity.onTrade = function(player, npc, trade)
     then
         if northernFurs and count == 4 then
             player:tradeComplete()
-            player:startEvent(17, 1199, 1199)
+            player:startEvent(17, xi.items.NORTHERN_FUR, xi.items.NORTHERN_FUR)
         elseif easternPottery and count == 4 then
             player:tradeComplete()
-            player:startEvent(18, 1200, 1200)
+            player:startEvent(18, xi.items.PIECE_OF_EASTERN_POTTERY, xi.items.PIECE_OF_EASTERN_POTTERY)
         elseif southernMummies and count == 4 then
             player:tradeComplete()
-            player:startEvent(19, 1201, 1201)
+            player:startEvent(19, xi.items.SOUTHERN_MUMMY, xi.items.SOUTHERN_MUMMY)
         end
     end
 end
@@ -44,10 +44,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 15 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
     elseif csid == 17 then

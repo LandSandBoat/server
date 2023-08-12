@@ -3,7 +3,6 @@
 --  NPC: Monolith
 -----------------------------------
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -34,10 +33,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

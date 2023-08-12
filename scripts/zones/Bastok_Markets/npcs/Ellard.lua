@@ -5,8 +5,6 @@
 -- !pos -214.355 -7.814 -63.809 235
 -----------------------------------
 require('scripts/globals/crafting')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 -----------------------------------
 local ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------

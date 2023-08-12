@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
-#include "../common/timer.h"
-#include "../common/logging.h"
-#include "../common/utils.h"
+#include "common/timer.h"
+#include "common/logging.h"
+#include "common/utils.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -77,12 +77,16 @@ static uint32 tick()
     //
 #elif (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0 && defined(_POSIX_MONOTONIC_CLOCK) /* posix compliant */) || \
     (defined(__FreeBSD_cc_version) && __FreeBSD_cc_version >= 500005 /* FreeBSD >= 5.1.0 */)
-    struct timespec tval;
+    struct timespec tval
+    {
+    };
     clock_gettime(CLOCK_MONOTONIC, &tval);
     return tval.tv_sec * 1000 + tval.tv_nsec / 1000000;
 #else
-    struct timeval tval;
-    gettimeofday(&tval, NULL);
+    struct timeval tval
+    {
+    };
+    gettimeofday(&tval, nullptr);
     return tval.tv_sec * 1000 + tval.tv_usec / 1000;
 #endif
 }
@@ -146,13 +150,5 @@ time_point get_server_start_time()
 
 uint32 getCurrentTimeMs()
 {
-#ifdef WIN32
-    SYSTEMTIME oSystemTime;
-    GetSystemTime(&oSystemTime);
-    return oSystemTime.wMilliseconds;
-#else
-    timeval tv;
-    gettimeofday(&tv, 0);
-    return tv.tv_usec;
-#endif
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() % 1000;
 }

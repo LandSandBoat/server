@@ -4,7 +4,6 @@
 -- !pos 450 -40 -31 139
 -----------------------------------
 local ID = require("scripts/zones/Horlais_Peak/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 13 and
         npcUtil.giveItem(player, { xi.items.AMANOMURAKUMO, { xi.items.MONTIONT_SILVERPIECE, 30 } })

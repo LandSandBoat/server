@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Trial by Wind
 -- !pos -17 7 -10 247
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
@@ -29,8 +27,8 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 6 then
-        if not player:hasItem(1174) then
-            player:startEvent(87, 0, 1174, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
+        if not player:hasItem(xi.items.WIND_PENDULUM) then
+            player:startEvent(87, 0, xi.items.WIND_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
         else
             player:startEvent(88) -- reminder to go to Cloister of Gales
         end
@@ -58,23 +56,23 @@ entity.onTrigger = function(player, npc)
     then
         local numitem = 0
 
-        if player:hasItem(17627) then
+        if player:hasItem(xi.items.GARUDAS_DAGGER) then
             numitem = numitem + 1
         end  -- Garuda's Dagger
 
-        if player:hasItem(13243) then
+        if player:hasItem(xi.items.WIND_BELT) then
             numitem = numitem + 2
         end  -- Wind Belt
 
-        if player:hasItem(13562) then
+        if player:hasItem(xi.items.WIND_RING) then
             numitem = numitem + 4
         end  -- Wind Ring
 
-        if player:hasItem(1202) then
+        if player:hasItem(xi.items.BOTTLE_OF_BUBBLY_WATER) then
             numitem = numitem + 8
         end   -- Bubbly Water
 
-        if player:hasSpell(301) then
+        if player:hasSpell(xi.magic.spell.GARUDA) then
             numitem = numitem + 32
         end  -- Ability to summon Garuda
 
@@ -84,10 +82,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 66 and option == 1 then
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
@@ -102,10 +100,14 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 69 then
         local item = 0
-        if option == 1 then item = 17627         -- Garuda's Dagger
-        elseif option == 2 then item = 13243  -- Wind Belt
-        elseif option == 3 then item = 13562  -- Wind Ring
-        elseif option == 4 then item = 1202     -- Bubbly Water
+        if option == 1 then
+            item = xi.items.GARUDAS_DAGGER
+        elseif option == 2 then
+            item = xi.items.WIND_BELT
+        elseif option == 3 then
+            item = xi.items.WIND_RING
+        elseif option == 4 then
+            item = xi.items.BOTTLE_OF_BUBBLY_WATER
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
@@ -114,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(301) -- Garuda Spell
+                player:addSpell(xi.magic.spell.GARUDA) -- Garuda Spell
                 player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)
             else
                 player:addItem(item)
@@ -129,11 +131,11 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 86 or csid == 87 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(1174)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1174)
+            player:addItem(xi.items.WIND_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.WIND_PENDULUM)
             player:setCharVar("CarbuncleDebacleProgress", 6)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1174)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WIND_PENDULUM)
         end
     end
 end

@@ -1,8 +1,6 @@
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/status")
 -----------------------------------
-
 xi = xi or {}
 xi.rhapsodies = xi.rhapsodies or {}
 

@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
-require('scripts/globals/keyitems')
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
@@ -31,10 +30,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if option == 1 then
         if csid == 124 then
             xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.AZOUPH)

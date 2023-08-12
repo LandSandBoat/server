@@ -18,6 +18,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+
 #pragma once
 
 #include "common/logging.h"
@@ -48,5 +49,5 @@ private:
     {
         uint32                                 activeSessionCount;
         std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
-    } m_apiDataCache;
+    } m_apiDataCache{};
 };

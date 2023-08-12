@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("MeaChipRegistration") == 0 and
         player:getCharVar("skyShortcut") == 1 and
-        trade:hasItemQty(478, 1) and
+        trade:hasItemQty(xi.items.CLEAR_CHIP, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(164)
@@ -28,12 +28,12 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 164 then
-        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 4, 478) -- You fit..
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 4, xi.items.CLEAR_CHIP) -- You fit..
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 5)     -- Device has been repaired
         player:setCharVar("MeaChipRegistration", 1)
         player:tradeComplete()

@@ -2,8 +2,6 @@
 -- ID: 18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267
 -- Item: Annihilator
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 local itemObject = {}

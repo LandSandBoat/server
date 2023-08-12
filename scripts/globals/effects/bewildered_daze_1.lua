@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BEWILDERED_DAZE_1
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 -- TODO: This should be crit evasion down, but is currently increasing

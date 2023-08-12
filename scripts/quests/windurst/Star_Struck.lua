@@ -4,10 +4,8 @@
 -- Log ID: 2, Quest ID: 10
 -- Koru-Moru : !pos -120 -6 124 239
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

@@ -26,14 +26,12 @@
 
 #include "message_special.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 
 CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0, uint32 param1, uint32 param2, uint32 param3, bool ShowName)
 {
     this->setType(0x2A);
     this->setSize(0x20);
-
-    // XI_DEBUG_BREAK_IF(PEntity == nullptr);
 
     ref<uint32>(0x04) = PEntity->id;
 

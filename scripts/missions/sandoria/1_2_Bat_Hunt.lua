@@ -12,12 +12,9 @@
 -- Orcish Scale Mail : ItemID 1112
 -- Bat Fang          : ItemID 891
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT)

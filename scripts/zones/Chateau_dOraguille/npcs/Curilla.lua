@@ -6,11 +6,8 @@
 -- !pos 27 0.1 0.1 233
 -----------------------------------
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
@@ -107,14 +104,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 109 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
     elseif csid == 562 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     elseif csid == 573 and option == 2 then
-        player:addSpell(902, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 902)
+        player:addSpell(xi.magic.spell.CURILLA, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.CURILLA)
     end
 end
 

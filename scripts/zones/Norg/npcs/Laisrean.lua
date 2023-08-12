@@ -5,8 +5,6 @@
 -- !pos -2.251 -1 21.654 252
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
@@ -36,19 +34,19 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 33 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
     elseif csid == 35 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4946)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_UTSUSEMI_ICHI)
         else
             player:delKeyItem(xi.ki.SEA_SERPENT_STATUE)
-            player:addItem(4946) -- Scroll of Utsusemi: Ichi
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4946)
+            player:addItem(xi.items.SCROLL_OF_UTSUSEMI_ICHI) -- Scroll of Utsusemi: Ichi
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_UTSUSEMI_ICHI)
             player:addTitle(xi.title.TREASURE_HOUSE_RANSACKER)
             player:addFame(xi.quest.fame_area.NORG, 75)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)

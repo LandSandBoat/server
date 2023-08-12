@@ -7,7 +7,6 @@
 -- Offset 2 (H-8) !pos 7 0 32 204
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -39,10 +38,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 18 then
         player:delKeyItem(xi.ki.AQUAFLORA3)
         player:setCharVar("DabotzKilled", 0)

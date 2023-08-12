@@ -6,10 +6,8 @@
 -- Levil    : !pos -87.204 3.350 12.655 256
 -- Andreine : !pos -91.944 -2.14 -91.538 284
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.JUST_THE_THING)

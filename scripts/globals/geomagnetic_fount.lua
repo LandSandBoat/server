@@ -1,10 +1,8 @@
 -----------------------------------
 -- SOA Geomagnetic Founts
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
-
 xi = xi or {}
 xi.geomagneticFount = xi.geomagneticFount or {}
 

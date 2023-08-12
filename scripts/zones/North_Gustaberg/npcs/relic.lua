@@ -4,7 +4,6 @@
 -- !pos -217 97 461 106
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 254 and
         npcUtil.giveItem(player, { xi.items.APOCALYPSE, { xi.items.LUNGO_NANGO_JADESHELL, 30 } })

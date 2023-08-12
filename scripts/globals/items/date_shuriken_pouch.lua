@@ -3,9 +3,6 @@
 -- Date Suriken Pouch
 -- A small leather pouch made for storing Date Suriken.
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

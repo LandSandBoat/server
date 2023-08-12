@@ -4,7 +4,6 @@
 local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 require("scripts/globals/pathfind")
 require("scripts/globals/utils")
 -----------------------------------
@@ -61,7 +60,7 @@ instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 8, 8)
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
 end
 
 -- TODO: Reduce complexity

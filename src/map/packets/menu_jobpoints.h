@@ -19,8 +19,8 @@
 
 #include "common/cbasetypes.h"
 
-#include "../job_points.h"
 #include "basic.h"
+#include "job_points.h"
 
 class CCharEntity;
 

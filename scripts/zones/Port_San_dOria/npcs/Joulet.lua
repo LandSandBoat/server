@@ -6,11 +6,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -20,8 +17,8 @@ end
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local moatCarp = trade:getItemQty(4401)
-    local forestCarp = trade:getItemQty(4289)
+    local moatCarp = trade:getItemQty(xi.items.MOAT_CARP)
+    local forestCarp = trade:getItemQty(xi.items.FOREST_CARP)
     local fishCountVar = player:getCharVar("theCompetitionFishCountVar")
     local totalFish = moatCarp + forestCarp + fishCountVar
 
@@ -63,17 +60,17 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 307 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17386)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
         else
             player:tradeComplete()
-            player:addItem(17386)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17386)
+            player:addItem(xi.items.LU_SHANGS_FISHING_ROD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
             player:addTitle(xi.title.CARP_DIEM)
             player:addKeyItem(xi.ki.TESTIMONIAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TESTIMONIAL)

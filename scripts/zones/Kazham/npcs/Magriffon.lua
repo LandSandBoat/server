@@ -4,10 +4,8 @@
 -- Involved in Quest: Gullible's Travels, Even More Gullible's Travels,
 -- Location: (I-7)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
 local entity = {}
@@ -84,10 +82,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 144 and option == 1 then                     -- Gullible's Travels: First CS
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
     elseif csid == 146 then                                  -- Gullible's Travels: Final CS

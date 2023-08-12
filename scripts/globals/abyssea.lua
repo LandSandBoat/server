@@ -1,13 +1,10 @@
 -----------------------------------
 -- Abyssea Global
 -----------------------------------
-require("scripts/globals/spell_data")
-require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
-require("scripts/globals/zone")
 require("scripts/globals/extravaganza")
 -----------------------------------
 xi = xi or {}
@@ -509,7 +506,7 @@ local blueWeakness =
         xi.weaponskill.BLAST_SHOT,
         xi.weaponskill.HEAVY_SHOT,
         xi.weaponskill.DETONATOR,
-        xi.weaponskill.SHADOWSTICH,
+        xi.weaponskill.SHADOWSTITCH,
         xi.weaponskill.DANCING_EDGE,
         xi.weaponskill.SHARK_BITE,
         xi.weaponskill.EVISCERATION,
@@ -677,7 +674,7 @@ end
 xi.abyssea.spendTravStones = function(player, spentstones)
     local numRemoved = 0
 
-    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
+    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1, -1 do
         if numRemoved == spentstones then
             break
         elseif player:hasKeyItem(keyItem) then
@@ -711,30 +708,31 @@ xi.abyssea.canGiveNMKI = function(mob, dropChance)
 end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
+    if not xi.abyssea.mob[mob:getName()] then
+        return
+    end
+
     local atmaDrops = xi.abyssea.mob[mob:getName()]['Atma']
     local normalDrops = xi.abyssea.mob[mob:getName()]['Normal']
     local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
 
-    for k, v in pairs(normalDrops) do
+    for _, keyItemId in pairs(normalDrops) do
         if xi.abyssea.canGiveNMKI(mob, 20) then
-            playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+            npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
         end
     end
 
-    for k, v in pairs(atmaDrops) do
+    for _, keyItemId in pairs(atmaDrops) do
         local ally = playerClaimed:getAlliance()
 
         for _, member in ipairs(ally) do
-            if not member:hasKeyItem(v) and xi.abyssea.canGiveNMKI(mob, 10) then
-                member:addKeyItem(v)
-                member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+            if not member:hasKeyItem(keyItemId) and xi.abyssea.canGiveNMKI(mob, 10) then
+                npcUtil.giveKeyItem(member, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
             end
         end
 
-        if not playerClaimed:hasKeyItem(v) then
-            playerClaimed:addKeyItem(v)
-            playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+        if not playerClaimed:hasKeyItem(keyItemId) then
+            npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
         end
     end
 
@@ -923,11 +921,11 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     end
 end
 
-xi.abyssea.qmOnEventUpdate = function(player, csid, option)
+xi.abyssea.qmOnEventUpdate = function(player, csid, option, npc)
     return false
 end
 
-xi.abyssea.qmOnEventFinish = function(player, csid, option)
+xi.abyssea.qmOnEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
     local ID = zones[player:getZoneID()]
@@ -1094,6 +1092,13 @@ xi.abyssea.onZoneIn = function(player)
     end
 end
 
+xi.abyssea.onEventFinish = function(player, csid, option, npc)
+    if csid == 2180 then
+        local zoneID = player:getZoneID()
+        player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
+    end
+end
+
 xi.abyssea.afterZoneIn = function(player)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
@@ -1227,7 +1232,7 @@ xi.abyssea.warpNPCOnTrigger = function(player, npc)
     player:startEvent(supportNPCData[player:getZoneID()][2], statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
 end
 
-xi.abyssea.warpNPCOnEventUpdate = function(player, csid, option)
+xi.abyssea.warpNPCOnEventUpdate = function(player, csid, option, npc)
 end
 
 xi.abyssea.warpNPCOnEventFinish = function(player, csid, option, npc)
@@ -1269,7 +1274,7 @@ xi.abyssea.traverserNPCOnTrigger = function(player, npc)
     end
 end
 
-xi.abyssea.traverserNPCOnUpdate = function(player, csid, option)
+xi.abyssea.traverserNPCOnUpdate = function(player, csid, option, npc)
     if csid == supportNPCData[player:getZoneID()][1] then
         if option == 3 then
             -- The following values calculates the amount of time remaining for a stone by working backwards from current time.

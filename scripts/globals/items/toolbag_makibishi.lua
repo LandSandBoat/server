@@ -3,8 +3,6 @@
 -- Toolbag Maki
 -- When used, you will obtain one stack of makibishi
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1170, 99)
+    target:addItem(xi.items.MAKIBISHI, 99)
 end
 
 return itemObject

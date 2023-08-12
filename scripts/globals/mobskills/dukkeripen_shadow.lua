@@ -3,9 +3,7 @@
 -- adds 10 shadows
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

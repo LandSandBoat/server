@@ -3,8 +3,6 @@
 --   Olduum Ring
 --   Teleports to Wajoam Woodlands Leypoint
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

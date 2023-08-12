@@ -4,8 +4,6 @@
 -- Item Effect: MPHEAL +2
 -- Duration: 30 seconds
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,10 +1,8 @@
 -----------------------------------
 -- 10000 Needles
---
 -- Description: Shoots multiple needles at enemies within range.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

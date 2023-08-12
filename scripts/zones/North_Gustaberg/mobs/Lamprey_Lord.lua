@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Lamprey Lord
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 require("scripts/globals/hunts")
 -----------------------------------

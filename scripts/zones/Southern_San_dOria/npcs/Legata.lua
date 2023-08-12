@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Starting a Flame (R)
 -- !pos 82 0 116 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
@@ -13,7 +12,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE then
-        if trade:hasItemQty(768, 4) and trade:getItemCount() == 4 then
+        if
+            trade:hasItemQty(xi.items.FLINT_STONE, 4) and
+            trade:getItemCount() == 4
+        then
             player:startEvent(36)
         end
     end
@@ -27,10 +29,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 37 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
     elseif csid == 36 then

@@ -5,10 +5,8 @@
 -- !pos 123.754 0.000 92.125 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
@@ -41,10 +39,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 3500 or csid == 3504) and option == 2 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
         npcUtil.giveKeyItem(player, xi.ki.RED_INSTITUTE_CARD)

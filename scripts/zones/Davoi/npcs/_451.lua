@@ -3,9 +3,6 @@
 --  NPC: _451 (Elevator Lever)
 -- Notes: Used to operate Elevator @450 (actual npc script is _454)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,7 +13,7 @@ entity.onTrigger = function(player, npc)
     RunElevator(xi.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

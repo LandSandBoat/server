@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/crafting")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -62,10 +61,10 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 10009  10010  595  597
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10009 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
             player:setCharVar("FishingExpertQuest", 1)

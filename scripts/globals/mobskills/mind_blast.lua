@@ -1,14 +1,10 @@
 -----------------------------------
 --  Mind Blast
---
 --  Description: Deals lightning damage to an enemy. Additional effect: "Paralysis"
 --  Type: Magical (lightning)
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Cone
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

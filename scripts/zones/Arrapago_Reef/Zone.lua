@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Arrapago_Reef/IDs')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -49,10 +48,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     end
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 108 then -- enter instance: illrusi atoll
         player:setPos(0, 0, 0, 0, 55)
     elseif csid == 222 then -- Enter instance: Black coffin

@@ -3,8 +3,6 @@
 -- Item: Revitalizer
 -- Item Effect: Resets all Job Ability Timers
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

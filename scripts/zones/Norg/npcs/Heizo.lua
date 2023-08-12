@@ -4,7 +4,6 @@
 -- Starts and Ends Quest: Like Shining Leggings
 -- !pos -1 -5 25 252
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -14,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
-    local legging = trade:getItemQty(14117)
+    local legging = trade:getItemQty(xi.items.RUSTY_LEGGINGS)
     local turnedInVar = player:getCharVar("shiningLeggings_nb")
     local totalLeggings = legging + turnedInVar
 
@@ -50,16 +49,16 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 127 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif csid == 129 then
         player:tradeComplete()
-        player:addItem(4958) -- Scroll of Dokumori: Ichi
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 4958) -- Scroll of Dokumori: Ichi
+        player:addItem(xi.items.SCROLL_OF_DOKUMORI_ICHI)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_DOKUMORI_ICHI)
         player:addFame(xi.quest.fame_area.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb", 0)

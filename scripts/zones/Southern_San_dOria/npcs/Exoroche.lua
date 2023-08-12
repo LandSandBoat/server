@@ -4,7 +4,6 @@
 -- Involved in Quests: Father and Son, A Boy's Dream
 -- !pos 72 -1 60 230
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -40,10 +39,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         player:setCharVar("aBoysDreamCS", 3)
     elseif csid == 32 and player:getCharVar("aBoysDreamCS") == 7 then

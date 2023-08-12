@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -49,7 +48,7 @@ entity.onTrigger = function(player, npc)
     player:startEvent(150, rank, badge, points, 0, 0, 0, 0, 0, 0)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

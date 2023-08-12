@@ -3,8 +3,6 @@
 --  NPC: Curio Vendor Moogle
 --  Shop NPC
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
@@ -20,10 +18,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 9601 then
         if option >= 1 and option <= 6 then
             local stock = xi.shop.curioVendorMoogleStock[option]

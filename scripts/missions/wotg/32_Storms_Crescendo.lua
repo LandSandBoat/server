@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local pastXarcabardID = require('scripts/zones/Xarcabard_[S]/IDs')
 -----------------------------------

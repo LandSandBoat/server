@@ -1,14 +1,10 @@
 -----------------------------------
 --  Fang Rush
---
 --  Description: Deals major damage with a threefold attack to a single target.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 3 shadows
 --  Range: Melee
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

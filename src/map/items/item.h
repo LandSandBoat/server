@@ -26,7 +26,6 @@
 #include "common/mmo.h"
 
 // The main type of item m_type
-
 enum ITEM_TYPE
 {
     ITEM_BASIC      = 0x00,
@@ -41,7 +40,6 @@ enum ITEM_TYPE
 };
 
 // Additional type of object m_subtype
-
 enum ITEM_SUBTYPE
 {
     ITEM_NORMAL    = 0x00,
@@ -52,7 +50,6 @@ enum ITEM_SUBTYPE
 };
 
 // Flags of objects
-
 enum ITEM_FLAG
 {
     ITEM_FLAG_WALLHANGING  = 0x0001,
@@ -113,16 +110,16 @@ public:
     void setSent(bool sent);
 
     const std::string& getName();
-    void               setName(std::string name);
+    void               setName(std::string const& name);
 
     const std::string& getSender();
-    void               setSender(std::string sender);
+    void               setSender(std::string const& sender);
 
     const std::string& getReceiver();
-    void               setReceiver(std::string receiver);
+    void               setReceiver(std::string const& receiver);
 
     virtual const std::string getSignature();
-    virtual void              setSignature(std::string signature);
+    virtual void              setSignature(std::string const& signature);
 
     bool isSoultrapper() const;
     void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
@@ -131,7 +128,7 @@ public:
     bool isMannequin() const;
 
     static constexpr uint32_t extra_size = 0x18;
-    uint8                     m_extra[extra_size]; // any extra data pertaining to item (augments, furniture location, etc)
+    uint8                     m_extra[extra_size]{}; // any extra data pertaining to item (augments, furniture location, etc)
 
 protected:
     void setType(uint8);

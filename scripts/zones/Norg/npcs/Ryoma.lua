@@ -2,14 +2,10 @@
 -- Area: Norg
 --  NPC: Ryoma
 -- Start and Finish Quest: 20 in Pirate Years, I'll Take the Big Box, True Will, Bugi Soden
--- Involved in Quest: Ayame and Kaede
 -- !pos -23 0 -9 252
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
@@ -24,13 +20,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
-        if player:getCharVar("AyameAndKaede_Event") == 3 then
-            player:startEvent(95) -- During Quest "Ayame and Kaede"
-        else
-            player:startEvent(94)
-        end
-    elseif
+    if
         twentyInPirateYears == QUEST_AVAILABLE and
         mJob == xi.job.NIN and
         mLvl >= 40
@@ -58,29 +48,22 @@ entity.onTrigger = function(player, npc)
         player:startEvent(137)
     elseif player:getCharVar("trueWillCS") == 1 then
         player:startEvent(138)
-    else
-        player:startEvent(94)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 95 then
-        player:addKeyItem(xi.ki.SEALED_DAGGER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEALED_DAGGER)
-        player:delKeyItem(xi.ki.STRANGELY_SHAPED_CORAL)
-        player:setCharVar("AyameAndKaede_Event", 4)
-    elseif csid == 133 then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 133 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         player:setCharVar("twentyInPirateYearsCS", 1)
     elseif csid == 134 then
         if player:getFreeSlotsCount() <= 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17771)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ANJU)
         else
             player:delKeyItem(xi.ki.TRICK_BOX)
-            player:addItem(17771)
-            player:addItem(17772)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17771) -- Anju
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17772) -- Zushio
+            player:addItem(xi.items.ANJU)
+            player:addItem(xi.items.ZUSHIO)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ANJU) -- Anju
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ZUSHIO) -- Zushio
             player:needToZone()
             player:setCharVar("twentyInPirateYearsCS", 0)
             player:addFame(xi.quest.fame_area.NORG, 30)

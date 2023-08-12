@@ -6,12 +6,9 @@
 -- qm1     : !pos -282.339 0.001 261.707 200
 -- Eperdur : !pos 129 -6 96 231
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

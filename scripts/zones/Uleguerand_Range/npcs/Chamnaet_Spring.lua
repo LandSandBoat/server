@@ -5,19 +5,18 @@
 -- !pos -305.240 3.605 17.977
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Cotton Pouch
-    if trade:hasItemQty(1779, 1) and trade:getItemCount() == 1 then
+    if trade:hasItemQty(xi.items.COTTON_POUCH, 1) and trade:getItemCount() == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1780) -- Chamnaet Ice
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
         else
             player:tradeComplete()
-            player:addItem(1780)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1780) -- Chamnaet Ice
+            player:addItem(xi.items.HANDFUL_OF_CHAMNAET_ICE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
         end
     end
 end

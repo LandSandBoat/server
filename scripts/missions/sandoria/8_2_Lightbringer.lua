@@ -16,13 +16,9 @@
 -- qm13                  : !pos -68 -17 -153 159
 -- Granite Door          : !pos -50 -17 -154 159
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local chateauID   = require('scripts/zones/Chateau_dOraguille/IDs')
 local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')

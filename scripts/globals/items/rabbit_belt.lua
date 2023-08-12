@@ -3,9 +3,6 @@
 -- Rabbit Belt
 -- Enchantment: 60Min, Costume - Rarab (brown)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

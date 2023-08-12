@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Ceizak Battlegrounds (261)
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/colonization_reives')
-require('scripts/globals/status')
-require('scripts/globals/zone')
 local ID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
 -----------------------------------
 local zoneObject = {}
@@ -62,10 +59,10 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

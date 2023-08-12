@@ -5,10 +5,7 @@
 -- !pos -53.9 0 10.8 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -117,25 +114,19 @@ entity.onTrigger = function(player, npc)
     local kindredsCrest = player:getSeals(2)
     local highKindredsCrest = player:getSeals(3)
     local sacredKindredsCrest = player:getSeals(4)
-    local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- TODO: player:startEvent(322, 0, 0, 0, 0, 1, 0, 1) -- First time talking to him WITH beastmen seal in inventory
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatJeuno, 17)
-    then
-        player:startEvent(317)
-    elseif beastmensSeal + kindredsSeal + kindredsCrest + highKindredsCrest + sacredKindredsCrest == 0 then
+    if beastmensSeal + kindredsSeal + kindredsCrest + highKindredsCrest + sacredKindredsCrest == 0 then
         player:startEvent(23) -- Standard dialog ?
     else
         player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, (highKindredsCrest * 65536) + kindredsCrest, sacredKindredsCrest, 0, 1, 0, 0) -- Standard dialog with menu
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- Cracked orb was traded
     if csid == 22 then
         player:confirmTrade()
@@ -162,9 +153,6 @@ entity.onEventFinish = function(player, csid, option)
                 player:delSeals(sealCost, sealType)
             end
         end
-
-    elseif csid == 317 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 17, true))
     end
 end
 

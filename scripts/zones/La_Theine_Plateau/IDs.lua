@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: La_Theine_Plateau
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LA_THEINE_PLATEAU] =

@@ -3,7 +3,6 @@
 --  NPC: Excavation Site (Olduum Ring quest)
 -- !pos 390 1 349 68
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 -----------------------------------
 local entity = {}
@@ -14,10 +13,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

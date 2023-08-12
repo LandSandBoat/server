@@ -4,10 +4,8 @@
 -----------------------------------
 -- !addmission 13 80
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local pastSandoriaID = require('scripts/zones/Southern_San_dOria_[S]/IDs')

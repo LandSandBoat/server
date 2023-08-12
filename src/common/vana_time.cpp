@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
+#include "logging.h"
 
 #include <ctime>
 
@@ -87,7 +87,7 @@ uint32 CVanaTime::getWeekday() const
 uint32 CVanaTime::getSysHour()
 {
     time_t now = time(nullptr);
-    tm     ltm;
+    tm     ltm{};
 
     _localtime_s(&ltm, &now);
 
@@ -97,7 +97,7 @@ uint32 CVanaTime::getSysHour()
 uint32 CVanaTime::getSysMinute()
 {
     time_t now = time(nullptr);
-    tm     ltm;
+    tm     ltm{};
 
     _localtime_s(&ltm, &now);
 
@@ -107,7 +107,7 @@ uint32 CVanaTime::getSysMinute()
 uint32 CVanaTime::getSysSecond()
 {
     time_t now = time(nullptr);
-    tm     ltm;
+    tm     ltm{};
 
     _localtime_s(&ltm, &now);
 
@@ -117,7 +117,7 @@ uint32 CVanaTime::getSysSecond()
 uint32 CVanaTime::getSysWeekDay()
 {
     time_t now = time(nullptr);
-    tm     ltm;
+    tm     ltm{};
 
     _localtime_s(&ltm, &now);
 
@@ -127,7 +127,7 @@ uint32 CVanaTime::getSysWeekDay()
 uint32 CVanaTime::getSysYearDay()
 {
     time_t now = time(nullptr);
-    tm     ltm;
+    tm     ltm{};
 
     _localtime_s(&ltm, &now);
 
@@ -137,7 +137,7 @@ uint32 CVanaTime::getSysYearDay()
 uint32 CVanaTime::getJstHour()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -147,7 +147,7 @@ uint32 CVanaTime::getJstHour()
 uint32 CVanaTime::getJstMinute()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -157,7 +157,7 @@ uint32 CVanaTime::getJstMinute()
 uint32 CVanaTime::getJstSecond()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -167,7 +167,7 @@ uint32 CVanaTime::getJstSecond()
 uint32 CVanaTime::getJstWeekDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -177,7 +177,7 @@ uint32 CVanaTime::getJstWeekDay()
 uint32 CVanaTime::getJstDayOfMonth()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -187,7 +187,7 @@ uint32 CVanaTime::getJstDayOfMonth()
 uint32 CVanaTime::getJstYearDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jtm;
+    tm   jtm{};
 
     _gmtime_s(&jtm, &now);
 
@@ -197,7 +197,7 @@ uint32 CVanaTime::getJstYearDay()
 uint32 CVanaTime::getJstMidnight()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm   jst;
+    tm   jst{};
 
     _gmtime_s(&jst, &now);
 

@@ -5,7 +5,6 @@
 -- !pos 673.882 -23.995 367.604 61
 -----------------------------------
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
@@ -36,10 +35,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 209 and option == 1 then
         player:delCurrency("imperial_standing", 50)

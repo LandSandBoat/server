@@ -3,9 +3,6 @@
 -- Ether Tank
 -- When used, you will obtain one Ether
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

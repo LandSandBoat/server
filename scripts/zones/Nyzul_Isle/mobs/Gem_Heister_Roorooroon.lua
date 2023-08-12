@@ -4,7 +4,6 @@
 -- Info: Enemy Leader, Thief job, runs around dropping bombs
 -----------------------------------
 require('scripts/globals/pathfind')
-require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
@@ -54,7 +53,7 @@ local function dropBomb(mob)
     local pos      = mob:getPos()
 
     bombMob:setPos(pos.x, pos.y, pos.z, pos.rot)
-    bombMob:setStatus(xi.status.MOB)
+    bombMob:setStatus(xi.status.UPDATE)
 
     if target ~= nil then
         bombMob:updateEnmity(target)

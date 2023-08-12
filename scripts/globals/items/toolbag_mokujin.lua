@@ -3,8 +3,6 @@
 -- Toolbag Moku
 -- When used, you will obtain one stack of mokujin
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2970, 99)
+    target:addItem(xi.items.MOKUJIN, 99)
 end
 
 return itemObject

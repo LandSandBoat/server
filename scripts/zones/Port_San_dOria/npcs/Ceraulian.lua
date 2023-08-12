@@ -4,10 +4,7 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 0 -8 -122 232
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
 local entity = {}
@@ -17,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and
         player:getCharVar("ChasingQuotas_Progress") == 0 and
         trade:getItemCount() == 1 and
-        trade:hasItemQty(12494, 1) and
+        trade:hasItemQty(xi.items.GOLD_HAIRPIN, 1) and
         trade:getGil() == 0
     then -- Trading gold hairpin only
             player:tradeComplete()
@@ -87,10 +84,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 24 then
         player:setCharVar("TheHolyCrest_Event", 1)
 
@@ -112,11 +109,11 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ChasingQuotas_date", 0)
     elseif csid == 15 then
         if player:getFreeSlotsCount() < 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14227)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.DRACHEN_BRAIS)
         else
             player:delKeyItem(xi.ki.RANCHURIOMES_LEGACY)
-            player:addItem(14227)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 14227) -- Drachen Brais
+            player:addItem(xi.items.DRACHEN_BRAIS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.DRACHEN_BRAIS) -- Drachen Brais
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
             player:setCharVar("ChasingQuotas_Progress", 0)

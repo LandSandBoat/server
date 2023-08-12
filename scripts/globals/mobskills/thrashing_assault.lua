@@ -3,7 +3,6 @@
 -- Physical damage + Defense Down. Absorbed by 4 shadows.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

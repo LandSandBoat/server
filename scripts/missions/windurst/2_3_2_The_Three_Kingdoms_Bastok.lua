@@ -7,12 +7,10 @@
 -- Pius            : !pos 99 -21 -12 237
 -- Patt-Pott       : !pos 23 -17 42 237
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)

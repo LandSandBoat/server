@@ -4,12 +4,8 @@
 -- Involved in quest: No Strings Attached
 -- !pos 34.325 -7.804 57.511 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
@@ -50,7 +46,7 @@ local headAndFrameItems =
 
     [3] =
     {
-        xi.items.ROSEWOOD_LUMBER,
+        xi.items.PIECE_OF_ROSEWOOD_LUMBER,
         xi.items.SQUARE_OF_KARAKUL_CLOTH,
         xi.items.SQUARE_OF_KARAKUL_LEATHER,
         xi.items.HEAVY_CROSSBOW
@@ -58,7 +54,7 @@ local headAndFrameItems =
 
     [4] =
     {
-        xi.items.GOLD_THREAD,
+        xi.items.SPOOL_OF_GOLD_THREAD,
         xi.items.SQUARE_OF_VELVET_CLOTH,
         xi.items.SQUARE_OF_WAMOURA_CLOTH,
         xi.items.BRASS_RING
@@ -344,7 +340,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 620 then -- Collecting option for CS 622 param 2
         if option == 1 then
             player:setCharVar("PUP_AttachmentOption", option)
@@ -356,7 +352,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 620 or csid == 621 then
         player:setCharVar("PUP_AttachmentStatus", option + 1)
     elseif csid == 627 then

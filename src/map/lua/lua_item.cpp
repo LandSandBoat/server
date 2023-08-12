@@ -21,13 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../items/item.h"
-#include "../items/item_equipment.h"
-#include "../items/item_general.h"
-#include "../items/item_weapon.h"
-#include "../map.h"
-#include "../utils/itemutils.h"
 #include "common/logging.h"
+#include "items/item.h"
+#include "items/item_equipment.h"
+#include "items/item_general.h"
+#include "items/item_weapon.h"
+#include "map.h"
+#include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_PLuaItem(PItem)
@@ -323,6 +323,33 @@ auto CLuaItem::getSoulPlateData() -> sol::table
     return table;
 }
 
+auto CLuaItem::getExData() -> sol::table
+{
+    sol::table table = lua.create_table();
+    for (std::size_t idx = 0; idx < m_PLuaItem->extra_size; ++idx)
+    {
+        table[idx] = m_PLuaItem->m_extra[idx];
+    }
+    return table;
+}
+
+void CLuaItem::setExData(sol::table const& newData)
+{
+    for (auto const& [keyObj, valObj] : newData)
+    {
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+
+        if (key >= CItem::extra_size)
+        {
+            ShowWarning("Tried to write to key too large for item exdata array: %s[%i]", m_PLuaItem->getName(), key);
+            continue;
+        }
+
+        m_PLuaItem->m_extra[key] = val;
+    }
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -359,6 +386,8 @@ void CLuaItem::Register()
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);
+    SOL_REGISTER("getExData", CLuaItem::getExData);
+    SOL_REGISTER("setExData", CLuaItem::setExData);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaItem& item)

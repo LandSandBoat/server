@@ -9,9 +9,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
-require("scripts/globals/items")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -90,7 +88,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 10011  10012  700  701  702  703  704  705  832  765
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 10011 and
         option >= xi.skill.WOODWORKING and
@@ -100,7 +98,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then
@@ -115,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EARTH_CRYSTAL)
         else
-            player:addItem(4099) -- earth crystal
+            player:addItem(xi.items.EARTH_CRYSTAL)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
             xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
         end

@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2583) and
+        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_BUFFALO_CORPSE) and
         npcUtil.popFromQM(player, npc, ID.mob.SARAMEYA, { hide = 0 })
     then
-        -- Trade Buffalo Corpse
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.PUTRID_ODOR)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

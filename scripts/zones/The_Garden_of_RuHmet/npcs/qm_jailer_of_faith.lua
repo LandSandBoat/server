@@ -15,10 +15,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 1899) and
+        npcUtil.tradeHas(trade, xi.items.HIGH_QUALITY_EUVHI_ORGAN) and
         npcUtil.popFromQM(player, npc, ID.mob.JAILER_OF_FAITH, { radius = 1 })
     then
-        -- High-Quality Euvhi Organ
         player:confirmTrade()
     end
 end
@@ -26,10 +25,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

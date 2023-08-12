@@ -13,10 +13,8 @@
 -- Todo: NPC moving. In retail these move around with 3-5+ pos EACH
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
@@ -67,10 +65,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 then
         player:delStatusEffectSilent(xi.effect.MARK_OF_SEED)
 

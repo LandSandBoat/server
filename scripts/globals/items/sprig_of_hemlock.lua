@@ -4,9 +4,6 @@
 -- Food Effect: 5 Min, All Races
 -- Paralysis
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

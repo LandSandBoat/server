@@ -14,9 +14,12 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS) > QUEST_AVAILABLE and
         player:getCharVar("FLOWER_PROGRESS") == 3
     then
-        if player:getFreeSlotsCount() > 0 and not player:hasItem(950) then
-            player:addItem(950) -- Tahrongi Cactus
-            player:messageSpecial(ID.text.BUD_BREAKS_OFF, 0, 950)
+        if
+            player:getFreeSlotsCount() > 0 and
+            not player:hasItem(xi.items.TAHRONGI_CACTUS)
+        then
+            player:addItem(xi.items.TAHRONGI_CACTUS)
+            player:messageSpecial(ID.text.BUD_BREAKS_OFF, 0, xi.items.TAHRONGI_CACTUS)
         else
             player:messageSpecial(ID.text.CANT_TAKE_ANY_MORE)
         end
@@ -25,10 +28,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

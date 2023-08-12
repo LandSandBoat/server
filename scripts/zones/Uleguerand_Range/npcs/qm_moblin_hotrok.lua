@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
     -- Taking a logical guess what criteria displays what message.
     if
         overTheHillsAndFarAway == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 1729)
+        npcUtil.tradeHas(trade, xi.items.MOBLIN_HOTROK)
     then
         -- 1729 = Moblin Hotrok
         if player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 14 then
@@ -57,16 +57,16 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     elseif overTheHillsAndFarAway == QUEST_ACCEPTED then
         player:messageSpecial(ID.text.SOMETHING_GLITTERING)
-        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, 1729)
+        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, xi.items.MOBLIN_HOTROK)
     else
         player:messageSpecial(ID.text.SOMETHING_GLITTERING_BUT)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 10 and
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, { gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE })

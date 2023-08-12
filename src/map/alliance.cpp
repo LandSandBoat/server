@@ -20,7 +20,7 @@
 */
 
 #include "alliance.h"
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <algorithm>
 #include <cstring>
@@ -42,7 +42,11 @@
 
 CAlliance::CAlliance(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity->PParty == nullptr);
+    if (PEntity->PParty == nullptr)
+    {
+        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->GetName());
+        return;
+    }
 
     m_AllianceID = PEntity->PParty->GetPartyID();
 
@@ -80,31 +84,15 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
                         WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                    ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
-        // first kick out the third party if it exsists
-        CParty* party = nullptr;
-        if (this->partyList.size() == 3)
+        // Remove all parties. The `delParty` call removes a party from `partyList`.
+        while (partyList.size() > 0)
         {
-            party = this->partyList.at(2);
+            CParty* party = partyList.at(0);
             this->delParty(party);
             party->ReloadParty();
         }
 
-        // kick out the second party
-        if (this->partyList.size() == 2)
-        {
-            party = this->partyList.at(1);
-            this->delParty(party);
-            party->ReloadParty();
-        }
-
-        // kick out the first party
-        if (this->partyList.size() == 1)
-        {
-            party              = this->partyList.at(0);
-            party->m_PAlliance = nullptr;
-            party->ReloadParty();
-        }
-
+        // Clear the party list -- deletion of parties is handled elsewhere if applicable.
         this->partyList.clear();
 
         // TODO: This entire system needs rewriting to both:
@@ -182,10 +170,19 @@ void CAlliance::removeParty(CParty* party)
 
 void CAlliance::delParty(CParty* party)
 {
+    // Don't delete parties when there's no party in the alliance
+    if (!party->m_PAlliance || party->m_PAlliance->partyList.size() == 0)
+    {
+        return;
+    }
+
     // Delete the party from the alliance list
-    party->m_PAlliance->partyList.erase(
-        std::remove_if(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), [=](CParty* entry)
-                       { return party == entry; }));
+    auto partyToDelete = std::find(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), party);
+
+    if (partyToDelete != party->m_PAlliance->partyList.end())
+    {
+        party->m_PAlliance->partyList.erase(partyToDelete);
+    }
 
     for (auto* entry : party->m_PAlliance->partyList)
     {
@@ -195,7 +192,7 @@ void CAlliance::delParty(CParty* party)
     party->m_PAlliance = nullptr;
     party->SetPartyNumber(0);
 
-    // Remove party members from the alliance treasure pool
+    // Remove party members from the alliance treasure pool, but not the zonewide pool.
     for (auto* entry : party->members)
     {
         auto* member = dynamic_cast<CCharEntity*>(entry);
@@ -205,38 +202,34 @@ void CAlliance::delParty(CParty* party)
         }
     }
 
-    // Create a a new treasure pool for whoever is in the server from this party (if anyone)
-    if (!party->members.empty())
+    // Reload pools, assign new ones as appropriate.
+    for (auto& member : party->members)
     {
-        auto* PChar = dynamic_cast<CCharEntity*>(party->members.at(0));
-
-        if (!PChar)
+        auto* PMember = dynamic_cast<CCharEntity*>(member);
+        if (PMember && PMember->PParty)
         {
-            ShowWarning("CAlliance::delParty - Party Member at Position 0 is not of type CCharEntity.");
-            return;
-        }
-
-        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
-        PChar->PTreasurePool->AddMember(PChar);
-        PChar->PTreasurePool->UpdatePool(PChar);
-
-        for (auto& member : party->members)
-        {
-            auto* PMember = dynamic_cast<CCharEntity*>(member);
-            if (PMember && (PChar != PMember))
-            {
-                PMember->PTreasurePool = PChar->PTreasurePool;
-                PChar->PTreasurePool->AddMember(PMember);
-                PChar->PTreasurePool->UpdatePool(PMember);
-            }
+            PMember->PParty->ReloadTreasurePool(PMember);
         }
     }
 }
 
 void CAlliance::addParty(CParty* party)
 {
+    if (std::find(partyList.begin(), partyList.end(), party) != partyList.end())
+    {
+        ShowWarning("CAlliance::addParty - party is already in the alliance list!");
+        return;
+    }
+
+    if (partyList.size() == 3)
+    {
+        ShowWarning("CAlliance::addParty - Alliance party list was full when trying to add a party.");
+        return;
+    }
+
     party->m_PAlliance = this;
-    partyList.push_back(party);
+
+    partyList.emplace_back(party);
 
     uint8 newparty = 0;
 
@@ -299,7 +292,7 @@ void CAlliance::addParty(uint32 partyid) const
 void CAlliance::pushParty(CParty* PParty, uint8 number)
 {
     PParty->m_PAlliance = this;
-    partyList.push_back(PParty);
+    partyList.emplace_back(PParty);
     PParty->SetPartyNumber(number);
 
     for (std::size_t i = 0; i < PParty->members.size(); ++i)

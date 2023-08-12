@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.surveyorOnTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

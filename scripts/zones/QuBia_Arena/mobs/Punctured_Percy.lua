@@ -3,8 +3,6 @@
 --  Mob: Punctured Percy
 -- BCNM: Celery
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

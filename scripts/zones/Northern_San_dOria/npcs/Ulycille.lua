@@ -4,7 +4,6 @@
 -- Type: Woodworking Adv. Synthesis Image Support
 -- !pos -183.320 9.999 269.651 231
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
@@ -28,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.WOODWORKING)
 
     if csid == 623 and option == 1 then

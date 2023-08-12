@@ -17,11 +17,11 @@
 #ifndef _CMODIFIER_H
 #define _CMODIFIER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum class Mod
 {
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     NONE = 0,       // Essential, but does nothing :)
                     //  NAME                  = ID, // Comment
@@ -328,6 +328,18 @@ enum class Mod
     DEATH_MEVA    = 215,
     STATUS_MEVA   = 216,
 
+    // Status effect Immunobreak modifiers.
+    SLEEP_IMMUNOBREAK    = 261,
+    POISON_IMMUNOBREAK   = 262,
+    PARALYZE_IMMUNOBREAK = 263,
+    BLIND_IMMUNOBREAK    = 264,
+    SILENCE_IMMUNOBREAK  = 265,
+    PETRIFY_IMMUNOBREAK  = 266,
+    BIND_IMMUNOBREAK     = 267,
+    GRAVITY_IMMUNOBREAK  = 268,
+    SLOW_IMMUNOBREAK     = 269,
+    ADDLE_IMMUNOBREAK    = 270,
+
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
@@ -419,6 +431,7 @@ enum class Mod
     ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
     ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
     SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
@@ -530,6 +543,7 @@ enum class Mod
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -957,18 +971,17 @@ enum class Mod
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 53
-    // 74 to 79
+    // 75 to 79
     // 138 to 143
     // 156 to 159
     // 217 to 223
-    // 261 to 280
+    // 271 to 280
     //
     // SPARE = 1076 and onward
 };

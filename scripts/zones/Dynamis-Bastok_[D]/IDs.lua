@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-Bastok_[D]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_BASTOK_D] =

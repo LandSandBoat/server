@@ -40,25 +40,25 @@ end
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
 --  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 67 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4370) -- Cannot give Honey because player Inventory is full
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.POT_OF_HONEY) -- Cannot give Honey because player Inventory is full
         else
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-            player:addItem(4370)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4370) -- Gives player Honey x1
+            player:addItem(xi.items.POT_OF_HONEY)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.POT_OF_HONEY) -- Gives player Honey x1
         end
     elseif csid == 80 then -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4156) -- Cannot give Mulsum because player Inventory is full
         else
             player:setCharVar("ToBeeOrNot_var", 0)
-            player:addItem(4156, 3) -- Mulsum x3
-            player:messageSpecial(ID.text.ITEMS_OBTAINED, 4156, 3)
+            player:addItem(xi.items.BOTTLE_OF_MULSUM, 3) -- Mulsum x3
+            player:messageSpecial(ID.text.ITEMS_OBTAINED, xi.items.BOTTLE_OF_MULSUM, 3)
             player:needToZone(true)
         end
     end

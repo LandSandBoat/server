@@ -3,8 +3,6 @@
 --  NPC: Kaduru-Haiduru
 -- Teleport NPC
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
 local entity = {}
 
 local function canUse_KaduruHaiduru_Service(player)
@@ -45,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
 
     if canUse_KaduruHaiduru_Service(player) and timesUsed == 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(2185, 1) then
+            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(154, 0, player:getNation(), 0, 0, 0, 0, 0, 0, 0)
                 player:setCharVar("ShihuDanhu_TP_date", 0)
                 player:setCharVar("Kaduru_ShihuDanhu_date", 0)
@@ -53,7 +51,7 @@ entity.onTrade = function(player, npc, trade)
         end
     elseif canUse_KaduruHaiduru_Service(player) and timesUsed < 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(2185, 1) then
+            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(152, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 player:setCharVar("ShihuDanhu_TP_date", 0)
                 player:setCharVar("Kaduru_ShihuDanhu_date", 0)
@@ -69,10 +67,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
     if csid == 154 then        -- At this point we should already have used Kaduru-Haiduru 3 times.
         if option == 1 then       -- Duchy of Jeuno

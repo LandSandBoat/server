@@ -13,10 +13,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(223, player:getGil(), 100)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 223 and option == 333 then
         player:delGil(100)
     end

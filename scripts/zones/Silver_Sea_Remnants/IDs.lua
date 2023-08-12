@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Silver_Sea_Remnants
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_SEA_REMNANTS] =

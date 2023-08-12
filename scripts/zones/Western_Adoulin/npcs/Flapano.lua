@@ -7,7 +7,6 @@
 -- !pos 70 0 -13 256
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -32,7 +31,10 @@ entity.onTrade = function(player, npc, trade)
     elseif exoticDelicacies == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { 3916, 5949, { 5954, 2 } }) then
             player:startEvent(2861)
-        elseif npcUtil.tradeHas(trade, 5974) or npcUtil.tradeHas(trade, 5975) then
+        elseif
+            npcUtil.tradeHas(trade, xi.items.PLATE_OF_BARNACLE_PAELLA) or
+            npcUtil.tradeHas(trade, xi.items.PLATE_OF_FLAPANOS_PAELLA)
+        then
             player:startEvent(2862)
         end
     end
@@ -84,10 +86,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- ALL THE WAY TO THE BANK
     if csid == 5071 then
         player:confirmTrade()
@@ -100,7 +102,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 2860 and option == 1 then
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
     elseif csid == 2861 then
-        if npcUtil.completeQuest(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES, { bayld = 500, item = 5975, xp = 1000 }) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES, { bayld = 500, item = xi.items.PLATE_OF_FLAPANOS_PAELLA, xp = 1000 }) then
             player:confirmTrade()
             player:setCharVar("Flapano_Odd_Even", 0)
         end

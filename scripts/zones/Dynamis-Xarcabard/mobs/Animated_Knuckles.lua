@@ -3,9 +3,6 @@
 --  Mob: Animated Knuckles
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-require("scripts/globals/status")
-mixins = { require("scripts/mixins/animated_weapon") }
-mixinOptions = { item = xi.items.MYSTIC_FRAGMENT }
 -----------------------------------
 local entity = {}
 

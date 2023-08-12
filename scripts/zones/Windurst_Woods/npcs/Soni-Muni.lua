@@ -35,7 +35,7 @@ end
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 1017)
+        npcUtil.tradeHas(trade, xi.items.SCORPION_STINGER)
     then
         player:startEvent(484)
     end
@@ -53,21 +53,21 @@ entity.onTrigger = function(player, npc)
     elseif amazinScorpio == QUEST_COMPLETED then
         player:startEvent(485)
     elseif amazinScorpio == QUEST_ACCEPTED then
-        player:startEvent(482, 0, 0, 1017)
+        player:startEvent(482, 0, 0, xi.items.SCORPION_STINGER)
     elseif
         amazinScorpio == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
-        player:startEvent(481, 0, 0, 1017)
+        player:startEvent(481, 0, 0, xi.items.SCORPION_STINGER)
     else
         player:startEvent(421)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 481 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
     elseif

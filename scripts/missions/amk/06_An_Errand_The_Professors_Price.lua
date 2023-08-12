@@ -11,11 +11,9 @@
 -- Shantotto      : !pos 122 -2 112 239
 -----------------------------------
 require('scripts/globals/confrontation')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local horutotoID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
 -----------------------------------

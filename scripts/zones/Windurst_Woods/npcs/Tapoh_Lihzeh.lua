@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -17,16 +16,16 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and
         player:getCharVar("ChocobiliousQuest") == 1 and
-        npcUtil.tradeHas(trade, 938)
+        npcUtil.tradeHas(trade, xi.items.PAPAKA_GRASS)
     then
-        player:startEvent(229, 0, 938)
+        player:startEvent(229, 0, xi.items.PAPAKA_GRASS)
 
     -- PAYING LIP SERVICE
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, { { 912, 3 } }) then -- beehive_chip
-            player:startEvent(479, 0, 912, 1016, 0, 0)
-        elseif npcUtil.tradeHas(trade, { { 1016, 2 } }) then -- remi_shell
-            player:startEvent(479, 0, 912, 1016, 0, 1)
+        if npcUtil.tradeHas(trade, { { xi.items.BEEHIVE_CHIP, 3 } }) then -- beehive_chip
+            player:startEvent(479, 0, xi.items.BEEHIVE_CHIP, xi.items.REMI_SHELL, 0, 0)
+        elseif npcUtil.tradeHas(trade, { { xi.items.REMI_SHELL, 2 } }) then -- remi_shell
+            player:startEvent(479, 0, xi.items.BEEHIVE_CHIP, xi.items.REMI_SHELL, 0, 1)
         end
     end
 end
@@ -40,15 +39,15 @@ entity.onTrigger = function(player, npc)
     if chocobilious == QUEST_ACCEPTED and chocobiliousCS == 2 then
         player:startEvent(230) -- after trading
     elseif chocobilious == QUEST_ACCEPTED and chocobiliousCS == 1 then
-        player:startEvent(228, 0, 938) -- after first talk
+        player:startEvent(228, 0, xi.items.PAPAKA_GRASS) -- after first talk
     elseif chocobilious == QUEST_ACCEPTED then
-        player:startEvent(227, 0, 938) -- first talk
+        player:startEvent(227, 0, xi.items.PAPAKA_GRASS) -- first talk
 
     -- PAYING LIP SERVICE
     elseif payingLipService == QUEST_ACCEPTED then
-        player:startEvent(478, 0, 912, 1016, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
+        player:startEvent(478, 0, xi.items.BEEHIVE_CHIP, xi.items.REMI_SHELL, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
     elseif payingLipService == QUEST_AVAILABLE then
-        player:startEvent(477, 0, 912, 1016, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
+        player:startEvent(477, 0, xi.items.BEEHIVE_CHIP, xi.items.REMI_SHELL, xi.settings.main.GIL_RATE * 150, xi.settings.main.GIL_RATE * 200)
 
     -- STANDARD DIALOG
     else
@@ -56,10 +55,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- CHOCOBILIOUS
     if csid == 227 then
         player:setCharVar("ChocobiliousQuest", 1)

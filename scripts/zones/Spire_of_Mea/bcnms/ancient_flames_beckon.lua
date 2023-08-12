@@ -5,9 +5,7 @@
 local ID = require("scripts/zones/Spire_of_Mea/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefieldObject = {}
@@ -43,10 +41,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if
         player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS and
         not player:getLocalVar('toLufaise') == 1

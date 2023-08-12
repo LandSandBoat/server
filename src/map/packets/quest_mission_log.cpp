@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
+#include "entities/charentity.h"
 #include "quest_mission_log.h"
 
 CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType)

@@ -5,11 +5,8 @@
 -- Southern San d'Oria : !pos -83.07 1 -55.58 230
 -- Windurst Woods      : !pos 89.9 -4.2 -47.63 241
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
 xi.deeds = xi.deeds or {}

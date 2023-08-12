@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2577) and
+        npcUtil.tradeHas(trade, xi.items.BUNCH_OF_SENORITA_PAMAMAS) and
         npcUtil.popFromQM(player, npc, ID.mob.IRIZ_IMA)
     then
         -- Trade Senorita Pamamas
@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.PAMAMA_PEELS)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

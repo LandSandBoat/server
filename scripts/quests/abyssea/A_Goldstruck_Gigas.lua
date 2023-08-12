@@ -5,7 +5,6 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/abyssea')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -58,7 +57,7 @@ quest.sections =
 
             onEventUpdate =
             {
-                [10] = function(player, csid, option)
+                [10] = function(player, csid, option, npc)
                     if option == 1 then
                         player:updateEvent(xi.abyssea.getZoneKIReward(player))
                     end

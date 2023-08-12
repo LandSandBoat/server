@@ -4,7 +4,6 @@
 -- !pos 73 4 -174 113
 -----------------------------------
 local ID = require("scripts/zones/Cape_Teriggan/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 18 and
         npcUtil.giveItem(player, { xi.items.YOICHINOYUMI, { xi.items.MONTIONT_SILVERPIECE, 30 } })

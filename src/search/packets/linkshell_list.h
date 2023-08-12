@@ -38,8 +38,8 @@ public:
     uint16 GetSize() const;
 
 private:
-    uint32 m_offset;
-    uint8  m_data[1024];
+    uint32 m_offset{};
+    uint8  m_data[1024]{};
 };
 
 #endif

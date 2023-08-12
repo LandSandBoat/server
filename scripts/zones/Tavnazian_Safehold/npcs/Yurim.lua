@@ -68,7 +68,7 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(529, gorget, earring, obi)
     elseif
         (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and
-        npcUtil.tradeHas(trade, 4413) and
+        npcUtil.tradeHas(trade, xi.items.APPLE_PIE) and
         itemInProgress > 0
     then
         -- apple pie hint
@@ -115,10 +115,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 524 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     elseif csid == 531 then

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Al_Zahbi
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AL_ZAHBI] =

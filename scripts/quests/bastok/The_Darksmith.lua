@@ -4,10 +4,8 @@
 -- Log ID: 1, Quest ID: 40
 -- Mighty Fist : !pos -47 2 -30 237
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

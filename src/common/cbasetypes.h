@@ -1,4 +1,4 @@
-﻿#ifndef _CBASETYPES_H_
+#ifndef _CBASETYPES_H_
 #define _CBASETYPES_H_
 
 #include <algorithm>

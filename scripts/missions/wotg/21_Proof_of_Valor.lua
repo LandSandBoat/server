@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local pastSandoriaID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
 -----------------------------------

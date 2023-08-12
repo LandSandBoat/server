@@ -11,7 +11,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/zone')
 -----------------------------------
 local promyvionVahzlID = require("scripts/zones/Promyvion-Vahzl/IDs")
 local psoXjaID         = require("scripts/zones/PsoXja/IDs")

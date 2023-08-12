@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 require("scripts/globals/assault")
 -----------------------------------
@@ -53,10 +52,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local portalPick =
     {
         [101]  = xi.teleport.id.AZOUPH_SP,

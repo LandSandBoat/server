@@ -12,17 +12,13 @@
 -- Attack 21% (caps @ 75)
 -- Ranged Attack 21% (caps @ 75)
 -- Resist Sleep +3
--- Resist Stun +4require("scripts/globals/status")
-require("scripts/globals/msg")
+-- Resist Stun +4
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if
-        target:hasStatusEffect(xi.effect.FOOD) or
-        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
-    then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
 

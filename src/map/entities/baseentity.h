@@ -45,7 +45,7 @@ enum ENTITYTYPE : uint8
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1,
+    UPDATE        = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
@@ -143,8 +143,9 @@ enum MOUNTTYPE : uint8
     MOUNT_BYAKKO         = 33,
     MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
     MOUNT_IXION          = 35,
+    MOUNT_PHUABO         = 36,
     //
-    MOUNT_MAX = 36,
+    MOUNT_MAX = 37,
 };
 
 enum class ALLEGIANCE_TYPE : uint8

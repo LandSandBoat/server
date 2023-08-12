@@ -37,8 +37,16 @@ entity.onTrade = function(player, npc, trade)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
-    local goodtrade = trade:hasItemQty(4600, 1)
-    local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(1147, 1)
+    local goodtrade = trade:hasItemQty(xi.items.LUCKY_EGG, 1)
+    local badtrade = trade:hasItemQty(xi.items.BROKEN_MITHRAN_FISHING_ROD, 1) or
+        trade:hasItemQty(xi.items.WORKBENCH, 1) or
+        trade:hasItemQty(xi.items.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
+        trade:hasItemQty(xi.items.WANDERING_BULB, 1) or
+        trade:hasItemQty(xi.items.SET_OF_GIANT_FISH_BONES, 1) or
+        trade:hasItemQty(xi.items.TEN_OF_COINS_CARD, 1) or
+        trade:hasItemQty(xi.items.WYVERN_SKULL, 1) or
+        trade:hasItemQty(xi.items.BLACKENED_TOAD, 1) or
+        trade:hasItemQty(xi.items.ROCK_OF_ANCIENT_SALT, 1)
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 9 or failed == 10 then
@@ -70,7 +78,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -79,10 +87,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:tradeComplete()
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-            player:addItem(13870)   -- opo opo crown
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13870)
-            player:addItem(4468, 3)  -- 3 pamamas
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4468, 3)
+            player:addItem(xi.items.OPO_OPO_CROWN)   -- opo opo crown
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.OPO_OPO_CROWN)
+            player:addItem(xi.items.BUNCH_OF_PAMAMAS, 3)  -- 3 pamamas
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BUNCH_OF_PAMAMAS, 3)
             player:setCharVar("OPO_OPO_PROGRESS", 0)
             player:setCharVar("OPO_OPO_FAILED", 0)
             player:setCharVar("OPO_OPO_RETRY", 0)

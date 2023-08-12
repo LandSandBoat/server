@@ -5,9 +5,7 @@
 -- !pos -102.754 -0.65 16.161 257
 -- !gotoid 17830177
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/extravaganza')
 -----------------------------------
 local entity = {}
@@ -48,10 +46,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local bayld = player:getCurrency('bayld')
     local ID = zones[player:getZoneID()]
 

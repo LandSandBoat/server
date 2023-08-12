@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CAHHistoryPacket
 {
 public:
-    CAHHistoryPacket(uint16 ItemID);
+    CAHHistoryPacket(ahItem item, uint8 stack);
 
     void AddItem(ahHistory* item);
 
@@ -35,8 +35,8 @@ public:
     uint16 GetSize() const;
 
 private:
-    uint8 m_count;
-    uint8 m_PData[475];
+    uint8 m_count{};
+    uint8 m_PData[475]{};
 };
 
 #endif

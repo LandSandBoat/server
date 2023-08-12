@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Temenos
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TEMENOS] =

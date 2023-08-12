@@ -1,12 +1,9 @@
 ---------------------------------------------
 -- Target Analysis
---
 -- Description: AoE Absorb All with randomness
 -- Type: Magical
 ---------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
-require("scripts/globals/settings")
 ---------------------------------------------
 local mobskillObject = {}
 

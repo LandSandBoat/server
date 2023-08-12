@@ -1,9 +1,6 @@
 -----------------------------------
 -- Mix: Dark Potion - Deals 666 damage to a single enemy.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -11,6 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    -- skill:setMsg(xi.msg.basic.READIES_WS) -- not needed?
     return 666
 end
 

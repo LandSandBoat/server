@@ -1,4 +1,3 @@
-require("scripts/globals/zone")
 
 xi = xi or {}
 xi.quest = xi.quest or {}
@@ -73,7 +72,7 @@ xi.quest.fame_area =
 xi.quest.id =
 {
     -----------------------------------
-    --  San d'Oria
+    --  San d'Oria - 0
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.SANDORIA]] =
     {
@@ -86,19 +85,19 @@ xi.quest.id =
         THE_DISMAYED_CUSTOMER           = 6,  -- + Converted
         THE_TRADER_IN_THE_FOREST        = 7,  -- + Converted
         THE_SWEETEST_THINGS             = 8,  -- + Converted
-        THE_VICASQUE_S_SERMON           = 9,  -- +
-        A_SQUIRE_S_TEST                 = 10, -- +
+        THE_VICASQUES_SERMON            = 9,  -- + Converted
+        A_SQUIRES_TEST                  = 10, -- + Converted
         GRAVE_CONCERNS                  = 11, -- ±
         THE_BRUGAIRE_CONSORTIUM         = 12, -- +
         LIZARD_SKINS                    = 15, -- + Converted
         FLYERS_FOR_REGINE               = 16, -- +
         GATES_TO_PARADISE               = 18, -- +
-        A_SQUIRE_S_TEST_II              = 19, -- +
+        A_SQUIRES_TEST_II               = 19, -- + Converted
         TO_CURE_A_COUGH                 = 20, -- +
         TIGER_S_TEETH                   = 23, -- ±
         UNDYING_FLAMES                  = 26, -- +
         A_PURCHASE_OF_ARMS              = 27, -- +
-        A_KNIGHT_S_TEST                 = 29, -- +
+        A_KNIGHTS_TEST                  = 29, -- + Converted
         THE_MEDICINE_WOMAN              = 30, -- +
         BLACK_TIGER_SKINS               = 31, -- + Converted
         GROWING_FLOWERS                 = 58, -- ± Converted
@@ -162,7 +161,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Bastok
+    --  Bastok - 1
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.BASTOK]] =
     {
@@ -226,11 +225,11 @@ xi.quest.id =
         DARK_LEGACY                     = 57, -- ± Converted
         DARK_PUPPET                     = 58, -- ± Converted
         BLADE_OF_EVIL                   = 59, -- ± Converted
-        AYAME_AND_KAEDE                 = 60, -- ±
-        TRIAL_BY_EARTH                  = 61, -- ±
-        A_TEST_OF_TRUE_LOVE             = 62, -- ±
-        LOVERS_IN_THE_DUSK              = 63, -- ±
-        WISH_UPON_A_STAR                = 64, -- ±
+        AYAME_AND_KAEDE                 = 60, -- ± Converted
+        TRIAL_BY_EARTH                  = 61, -- ± Converted
+        A_TEST_OF_TRUE_LOVE             = 62, -- ± Converted
+        LOVERS_IN_THE_DUSK              = 63, -- ± Converted
+        WISH_UPON_A_STAR                = 64, -- ± Converted
         ECO_WARRIOR                     = 65, -- ±
         THE_WEIGHT_OF_YOUR_LIMITS       = 66, -- + Converted
         SHOOT_FIRST_ASK_QUESTIONS_LATER = 67, -- + Converted
@@ -238,9 +237,9 @@ xi.quest.id =
         THE_WALLS_OF_YOUR_MIND          = 69, -- + Converted
         ESCORT_FOR_HIRE                 = 70,
         A_DISCERNING_EYE                = 71,
-        TRIAL_SIZE_TRIAL_BY_EARTH       = 72, -- +
-        FADED_PROMISES                  = 73, -- ±
-        BRYGID_THE_STYLIST_RETURNS      = 74, -- ±
+        TRIAL_SIZE_TRIAL_BY_EARTH       = 72, -- + Converted
+        FADED_PROMISES                  = 73, -- ± Converted
+        BRYGID_THE_STYLIST_RETURNS      = 74, -- ± Converted
         OUT_OF_THE_DEPTHS               = 75,
         ALL_BY_MYSELF                   = 76,
         A_QUESTION_OF_FAITH             = 77,
@@ -262,7 +261,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Windurst
+    --  Windurst - 2
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.WINDURST]] =
     {
@@ -323,7 +322,7 @@ xi.quest.id =
         THE_AMAZIN_SCORPIO              = 61, -- +
         TWINSTONE_BONDING               = 62, -- +
         CURSES_FOILED_A_GOLEM           = 63, -- + Converted
-        ACTING_IN_GOOD_FAITH            = 64, -- ±
+        ACTING_IN_GOOD_FAITH            = 64, -- ± Converted
         FLOWER_CHILD                    = 65, -- ± Converted
         THE_THREE_MAGI                  = 66, -- ±
         RECOLLECTIONS                   = 67, -- ±
@@ -359,7 +358,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Jeuno
+    --  Jeuno - 3
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.JEUNO]] =
     {
@@ -368,7 +367,7 @@ xi.quest.id =
         A_CLOCK_MOST_DELICATE           = 2,  -- + Converted
         SAVE_THE_CLOCK_TOWER            = 3,  -- + Converted
         CHOCOBOS_WOUNDS                 = 4,  -- + Converted
-        SAVE_MY_SON                     = 5,  -- +
+        SAVE_MY_SON                     = 5,  -- + Converted
         A_CANDLELIGHT_VIGIL             = 6,  -- + Converted
         THE_WONDER_MAGIC_SET            = 7,  -- +
         THE_KIND_CARDIAN                = 8,  -- +
@@ -382,7 +381,7 @@ xi.quest.id =
         COOK_S_PRIDE                    = 16, -- +
         TENSHODO_MEMBERSHIP             = 17, -- +
         THE_LOST_CARDIAN                = 18, -- +
-        PATH_OF_THE_BEASTMASTER         = 19, -- +
+        PATH_OF_THE_BEASTMASTER         = 19, -- + Converted
         PATH_OF_THE_BARD                = 20, -- +
         THE_CLOCKMASTER                 = 21, -- + Converted
         CANDLE_MAKING                   = 22, -- + Converted
@@ -435,7 +434,7 @@ xi.quest.id =
         IN_THE_MOOD_FOR_LOVE            = 69,
         EMPTY_MEMORIES                  = 70, -- + Converted
         HOOK_LINE_AND_SINKER            = 71, -- + Converted
-        A_CHOCOBO_S_TALE                = 72,
+        A_CHOCOBOS_TALE                 = 72, -- + Converted
         A_REPUTATION_IN_RUINS           = 73,
         THE_GOBBIEBAG_PART_V            = 74, -- + Converted
         THE_GOBBIEBAG_PART_VI           = 75, -- + Converted
@@ -514,7 +513,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Other Areas
+    --  Other Areas - 4
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.OTHER_AREAS]] =
     {
@@ -539,7 +538,7 @@ xi.quest.id =
         THE_REAL_GIFT                   = 22, -- +
         THE_RESCUE                      = 23, -- +
         ELDER_MEMORIES                  = 24, -- +
-        TEST_MY_METTLE                  = 25,
+        TEST_MY_METTLE                  = 25, -- + Converted
         INSIDE_THE_BELLY                = 26, -- ±
         TRIAL_BY_LIGHTNING              = 27, -- ±
         TRIAL_SIZE_TRIAL_BY_LIGHTNING   = 28, -- +
@@ -570,7 +569,7 @@ xi.quest.id =
         REQUIEM_OF_SIN                  = 83,
         VW_OP_026_TAVNAZIAN_TERRORS     = 84,
         VW_OP_004_BIBIKI_BOMBARDMENT    = 85,
-        BOMBS_AWAY                      = 96,
+        BOMBS_AWAY                      = 96, -- + Converted
         MITHRAN_DELICACIES              = 97,
         GIVE_A_MOOGLE_A_BREAK           = 100, -- ±
         THE_MOOGLE_PICNIC               = 101, -- ±
@@ -587,7 +586,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Outlands
+    --  Outlands - 5
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.OUTLANDS]] =
     {
@@ -659,7 +658,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Aht Urhgan
+    --  Aht Urhgan - 6
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.AHT_URHGAN]] =
     {
@@ -674,7 +673,7 @@ xi.quest.id =
         FINDING_FAULTS                   = 8,
         GIVE_PEACE_A_CHANCE              = 9, -- + Converted
         THE_ART_OF_WAR                   = 10,
-        -- AT QUEST 00                   = 11,
+        -- JP ENTRIES OR INVALID
         A_TASTE_OF_HONEY                 = 12, -- + Converted
         SUCH_SWEET_SORROW                = 13, -- + Converted
         FEAR_OF_THE_DARK_II              = 14, -- + Converted
@@ -696,11 +695,17 @@ xi.quest.id =
         MOMENT_OF_TRUTH                  = 30,
         THREE_MEN_AND_A_CLOSET           = 31, -- + Converted
         FIVE_SECONDS_OF_FAME             = 32,
+        -- JP ENTRIES OR INVALID
+        THE_BEAST_WITHIN                 = 40,
+        BREAKING_THE_BONDS_OF_FATE       = 41,
+        -- JP ENTRIES OR INVALID
         SAGA_OF_THE_SKYSERPENT           = 43, -- + Converted
         ODE_TO_THE_SERPENTS              = 44, -- + Converted
         WHEN_THE_BOW_BREAKS              = 45, -- + Converted
         FIST_OF_THE_PEOPLE               = 46, -- + Converted
         SOOTHING_WATERS                  = 47, -- + Converted
+        -- JP ENTRIES OR INVALID
+        THE_PRANKSTER                    = 60,
         DELIVERING_THE_GOODS             = 61, -- + Converted
         VANISHING_ACT                    = 62, -- + Converted
         STRIKING_A_BALANCE               = 63, -- + Converted
@@ -719,6 +724,7 @@ xi.quest.id =
         THE_RIDER_COMETH                 = 76,
         UNWAVERING_RESOLVE               = 77,
         A_STYGIAN_PACT                   = 78,
+        -- JP ENTRIES OR INVALID
         PROMOTION_PRIVATE_FIRST_CLASS    = 90, -- + Converted
         PROMOTION_SUPERIOR_PRIVATE       = 91, -- + Converted
         PROMOTION_LANCE_CORPORAL         = 92,
@@ -729,13 +735,14 @@ xi.quest.id =
         PROMOTION_SECOND_LIEUTENANT      = 97,
         PROMOTION_FIRST_LIEUTENANT       = 98,
         PROMOTION_CAPTAIN                = 99,
+        -- JP ENTRIES OR INVALID
         SCOUTING_THE_ASHU_TALIF          = 101,
         ROYAL_PAINTER_ESCORT             = 102,
         TARGETING_THE_CAPTAIN            = 103,
     },
 
     -----------------------------------
-    --  Crystal War
+    --  Crystal War - 7
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
@@ -745,7 +752,7 @@ xi.quest.id =
         HEALING_HERBS                    = 3,
         REDEEMING_ROCKS                  = 4,
         THE_DAWN_OF_DELECTABILITY        = 5,  -- + Converted
-        A_LITTLE_KNOWLEDGE               = 6,  -- +
+        A_LITTLE_KNOWLEDGE               = 6,  -- + Converted
         THE_FIGHTING_FOURTH              = 7,
         SNAKE_ON_THE_PLAINS              = 8,  -- +
         STEAMED_RAMS                     = 9,  -- +
@@ -837,7 +844,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Abyssea
+    --  Abyssea - 8
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.ABYSSEA]] =
     {
@@ -1038,7 +1045,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Adoulin
+    --  Adoulin - 9
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.ADOULIN]] =
     {
@@ -1144,7 +1151,7 @@ xi.quest.id =
     },
 
     -----------------------------------
-    --  Coalition
+    --  Coalition - 10
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.COALITION]] =
     {

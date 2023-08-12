@@ -2,12 +2,8 @@
 -- BCNM Functions
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}
@@ -1653,22 +1649,11 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif
-        trade:getItemCount() == 3 and
-        trade:hasItemQty(1907, 1) and
-        trade:hasItemQty(1908, 1) and
-        trade:hasItemQty(1986, 1)
-    then
+    elseif npcUtil.tradeHasExactly(trade, { xi.items.SILVER_CHIP, xi.items.CERULEAN_CHIP, xi.items.ORCHID_CHIP }) then
         itemId = -1
 
     -- Chips for limbus
-    elseif
-        trade:getItemCount() == 4 and
-        trade:hasItemQty(1909, 1) and
-        trade:hasItemQty(1910, 1) and
-        trade:hasItemQty(1987, 1) and
-        trade:hasItemQty(1988, 1)
-    then
+    elseif npcUtil.tradeHasExactly(trade, { xi.items.SMALT_CHIP, xi.items.SMOKY_CHIP, xi.items.CHARCOAL_CHIP, xi.items.MAGENTA_CHIP }) then
         itemId = -2
 
     -- Orbs / Testimonies
@@ -1899,7 +1884,7 @@ end
 -- onEventFinish Action
 -----------------------------------
 
-xi.bcnm.onEventFinish = function(player, csid, option)
+xi.bcnm.onEventFinish = function(player, csid, option, npc)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
 

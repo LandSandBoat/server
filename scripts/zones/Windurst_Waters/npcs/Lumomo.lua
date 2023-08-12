@@ -6,9 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -36,10 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 818 and option == 1 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR) == QUEST_AVAILABLE then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR)

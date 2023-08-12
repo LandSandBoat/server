@@ -5,11 +5,9 @@
 -- Nbu Latteh : !pos -114.777 -4 -113.301 235
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -37,7 +35,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status ~= QUEST_ACCEPTED and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) < 2 and
                 vars.Prog == 0
         end,
 

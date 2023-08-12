@@ -2,7 +2,6 @@
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 -----------------------------------
 local ID = require('scripts/zones/Fort_Karugo-Narugo_[S]/IDs')
-require('scripts/globals/status')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
@@ -43,10 +42,10 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

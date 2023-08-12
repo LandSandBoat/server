@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Dragons_Aery
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DRAGONS_AERY] =

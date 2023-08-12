@@ -4,9 +4,7 @@
 local ID = require('scripts/zones/Altar_Room/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/quests')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -45,17 +43,17 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 10000 then
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then

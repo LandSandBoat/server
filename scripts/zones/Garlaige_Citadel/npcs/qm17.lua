@@ -4,7 +4,6 @@
 -- Notes: Used to obtain Pouch of Weighted Stones
 -- !pos -354 0 262 200
 -----------------------------------
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
@@ -21,10 +20,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 and option == 1 then
         npcUtil.giveKeyItem(player, xi.ki.POUCH_OF_WEIGHTED_STONES)
     end

@@ -4,7 +4,6 @@
 -- Type: Leathercraft Synthesis Image Support
 -- !pos -190.120 -2.999 2.770 230
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
@@ -28,10 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 652 and option == 1 then
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
         player:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)

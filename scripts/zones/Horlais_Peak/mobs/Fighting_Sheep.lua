@@ -4,8 +4,6 @@
 -- BCNM: Hostile Herbivores
 -- Note: melee attacks cause knockback. This is handled as a mobskill substitution.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

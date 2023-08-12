@@ -5,8 +5,6 @@
 -- !pos -56 0.1 -138 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -21,12 +19,6 @@ entity.onTrigger = function(player, npc)
     local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(player:getCharVar("WildcatJeuno"), 13)
-    then
-        player:startEvent(10053)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_COMPLETED and
         cooksPride == QUEST_AVAILABLE
     then
@@ -69,10 +61,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         (csid == 189 or csid == 188) and
         option == 0
@@ -84,20 +76,17 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 187 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13446)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MYTHRIL_RING)
         else
             player:addTitle(xi.title.MERCY_ERRAND_RUNNER)
             player:delKeyItem(xi.ki.SUPER_SOUP_POT)
             player:setCharVar("CooksPrideVar", 0)
             npcUtil.giveCurrency(player, 'gil', 3000)
-            player:addItem(13446)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13446) -- Mythril Ring
+            player:addItem(xi.items.MYTHRIL_RING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MYTHRIL_RING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
         end
-
-    elseif csid == 10053 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 13, true))
     end
 end
 

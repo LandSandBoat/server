@@ -21,7 +21,7 @@
 
 #include "common/socket.h"
 
-#include "../entities/baseentity.h"
+#include "entities/baseentity.h"
 #include "position.h"
 
 CPositionPacket::CPositionPacket(CBaseEntity* PEntity)

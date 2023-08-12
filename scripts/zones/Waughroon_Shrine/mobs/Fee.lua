@@ -4,7 +4,6 @@
 -- BCNM: Up In Arms
 -----------------------------------
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

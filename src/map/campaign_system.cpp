@@ -16,9 +16,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <tuple>
 
-#include "../map/utils/zoneutils.h"
 #include "campaign_system.h"
 #include "map.h"
+#include "map/utils/zoneutils.h"
 #include "packets/campaign_map.h"
 #include "utils/charutils.h"
 
@@ -38,7 +38,7 @@ namespace campaign
                 nation.reconnaissance = (uint8)sql->GetUIntData(1);
                 nation.morale         = (uint8)sql->GetUIntData(2);
                 nation.prosperity     = (uint8)sql->GetUIntData(3);
-                CState.nations.push_back(nation);
+                CState.nations.emplace_back(nation);
             }
         }
     }
@@ -93,7 +93,7 @@ namespace campaign
                 region.maxFortifications     = PZone->m_CampaignHandler->GetMaxFortification();
                 region.maxResources          = PZone->m_CampaignHandler->GetMaxResource();
                 region.nationControl         = nation;
-                state.regions.push_back(region);
+                state.regions.emplace_back(region);
             }
         });
 

@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -63,7 +62,10 @@ entity.onMobFight = function(mob, target)
         elseif
             animation == 1 and
             (mobHP / 1000 <= changeHP - 10 or battleTime - changeTime > 120) and
-            not hasSleepEffects(mob) and mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
+            not target:hasStatusEffect(xi.effect.SLEEP_I) and
+            not target:hasStatusEffect(xi.effect.SLEEP_II) and
+            not target:hasStatusEffect(xi.effect.LULLABY) and
+            mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
         then
             mob:useMobAbility(1282) -- This ability also handles animation change to 2.
 

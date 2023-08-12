@@ -5,13 +5,12 @@
 -- !pos 345 0.1 20 184
 -----------------------------------
 local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 549) then -- Delkfutt Key
+    if npcUtil.tradeHas(trade, xi.items.DELKFUTT_KEY) then
         player:startOptionalCutscene(16)
     end
 end
@@ -24,7 +23,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

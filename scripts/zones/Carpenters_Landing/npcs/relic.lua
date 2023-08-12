@@ -4,7 +4,6 @@
 -- !pos -99 -0 -514 2
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -23,10 +22,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 44 and
         npcUtil.giveItem(player, { xi.items.AEGIS, { xi.items.MONTIONT_SILVERPIECE, 30 } })

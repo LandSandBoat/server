@@ -3,8 +3,6 @@
 -- Toolbag Tsura
 -- When used, you will obtain one stack of tsurara
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(1164, 99)
+    target:addItem(xi.items.TSURARA, 99)
 end
 
 return itemObject

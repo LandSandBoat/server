@@ -27,13 +27,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if (csid == 232 or csid == 234) and option == 99 then
         player:updateEvent(252, 15962, 15963, 15964, 15965)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 232 or csid == 234 then
         if csid == 232 then
             player:setCharVar("Apoc_Nigh_RewardCS1", 1)

@@ -4,9 +4,7 @@
 -- !pos 422.351 -5.180 -100.000 35 | Hume Tower
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -36,10 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 202 then
         player:setCharVar("PromathiaStatus", 2)
     elseif csid == 120 and option ~= 0 then -- Hume

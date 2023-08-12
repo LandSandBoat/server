@@ -22,9 +22,9 @@
 #ifndef _CONTROLLER_H
 #define _CONTROLLER_H
 
-#include "../../../common/cbasetypes.h"
-#include "../../../common/mmo.h"
-#include "../../spell.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+#include "spell.h"
 
 class CBattleEntity;
 

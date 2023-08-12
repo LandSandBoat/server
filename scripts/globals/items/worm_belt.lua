@@ -3,9 +3,6 @@
 -- Worm Belt
 -- Enchantment: 60Min, Costume - Worm (orange/brown)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

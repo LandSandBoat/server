@@ -4,9 +4,7 @@
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
@@ -33,10 +31,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 538 then
         player:setCharVar("toCureaCough", 1)
     elseif csid == 647 then

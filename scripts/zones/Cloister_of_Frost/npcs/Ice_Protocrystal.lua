@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -- !pos 558 0 596 203
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Frost/IDs")
@@ -30,14 +29,14 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 then
         player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
         player:setCharVar("ASA4_Azure", "2")
     else
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

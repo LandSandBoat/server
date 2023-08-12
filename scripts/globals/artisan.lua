@@ -1,12 +1,6 @@
 -----------------------------------
---
 --  Artisan Moogles
---
 -----------------------------------
-require('scripts/globals/zone')
-require('scripts/globals/status')
------------------------------------
-
 xi = xi or {}
 xi.artisan = xi.artisan or {}
 
@@ -43,7 +37,7 @@ xi.artisan.moogleOnTrigger = function(player, npc)
     player:startEvent(csid, 0, 0, 0, sackSize, 0, 0, menuMask, mogVisited)
 end
 
-xi.artisan.moogleOnUpdate = function(player, csid, option)
+xi.artisan.moogleOnUpdate = function(player, csid, option, npc)
     if option == 1 then -- Buy sack
         if player:getGil() >= 9980 and player:getContainerSize(xi.inv.MOGSACK) == 0 then
             player:delGil(9980)
@@ -83,16 +77,11 @@ xi.artisan.moogleOnUpdate = function(player, csid, option)
     end
 end
 
-xi.artisan.moogleOnFinish = function(player, csid, option)
-    local zone = zones[player:getZoneID()]
-
+xi.artisan.moogleOnFinish = function(player, csid, option, npc)
     if option == 99 then -- Get Scroll
         if player:getCharVar("[artisan]nextScroll") < getMidnight() then
-            if player:addItem(4181) then
-                player:messageSpecial(zone.text.ITEM_OBTAINED, 4181)
+            if npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) then
                 player:setCharVar("[artisan]nextScroll", getMidnight())
-            else
-                player:messageSpecial(zone.text.ITEM_CANNOT_BE_OBTAINED, 4181)
             end
         end
     end

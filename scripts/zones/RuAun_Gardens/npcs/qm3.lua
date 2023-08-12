@@ -5,7 +5,6 @@
 -- !pos -410 -70 394 130
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -24,10 +23,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SKY_GOD_OFFSET + 2)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -4,7 +4,6 @@
 -- A) The given zone
 -- B) another player
 -----------------------------------
-require("scripts/globals/zone")
 
 cmdprops =
 {

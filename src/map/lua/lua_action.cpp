@@ -20,7 +20,7 @@
 */
 
 #include "lua_action.h"
-#include "../packets/action.h"
+#include "packets/action.h"
 
 CLuaAction::CLuaAction(action_t* Action)
 : m_PLuaAction(Action)
@@ -31,7 +31,7 @@ CLuaAction::CLuaAction(action_t* Action)
     }
 }
 
-void CLuaAction::ID(uint32 actionTargetID, uint16 newActionTargetID)
+void CLuaAction::ID(uint32 actionTargetID, uint32 newActionTargetID)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
     {

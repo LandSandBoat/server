@@ -4,7 +4,6 @@
 -- Dia Effect: Defense Down Effect +5% and DoT + 1
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -18,7 +17,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return 216, 0
     end
 
-    if player:hasItem(2182, 0) or player:hasItem(2974, 0) then
+    if
+        player:hasItem(xi.items.LIGHT_CARD, 0) or
+        player:hasItem(xi.items.TRUMP_CARD, 0)
+    then
         return 0, 0
     else
         return 71, 0
@@ -77,7 +79,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local _ = player:delItem(2182, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(xi.items.LIGHT_CARD, 1) or player:delItem(xi.items.TRUMP_CARD, 1)
     target:updateClaim(player)
 
     return xi.effect.SLEEP_I

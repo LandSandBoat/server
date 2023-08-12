@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Misareaux_Coast
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MISAREAUX_COAST] =

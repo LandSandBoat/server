@@ -5,11 +5,9 @@
 -- _6s2   : !pos -80 0 104 244
 -- Collet : !pos -44 0 107 244
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

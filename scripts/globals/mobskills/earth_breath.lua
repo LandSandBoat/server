@@ -1,14 +1,10 @@
 -----------------------------------
 --  Earth Breath
---
 --  Description: Deals Earth damage to enemies within a fan-shaped area.
 --  Type: Breath
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
---  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

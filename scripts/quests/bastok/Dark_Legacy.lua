@@ -8,11 +8,8 @@
 -- Quu Bokye      : !pos -159 16 181 145
 -- qm1            : !pos -58 0 -449 145
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local giddeusID = require('scripts/zones/Giddeus/IDs')

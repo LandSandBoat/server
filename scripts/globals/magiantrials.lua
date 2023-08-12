@@ -2,8 +2,6 @@
 -- Magian trials
 -----------------------------------
 require("scripts/globals/magianobjectives")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -14,7 +12,10 @@ xi.magian.trialCache = xi.magian.trialCache or {}
 local function getPlayerTrials(player)
     local activeTrials = xi.magian.trialCache[player:getID()]
 
-    if activeTrials then
+    if
+        activeTrials and
+        player:getLocalVar('magianUpdated') == 1
+    then
         return activeTrials
     end
 
@@ -30,6 +31,8 @@ local function getPlayerTrials(player)
     end
 
     xi.magian.trialCache[player:getID()] = activeTrials
+
+    player:setLocalVar('magianUpdated', 1)
 
     return activeTrials
 end
@@ -332,7 +335,7 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     returnUselessItems(player, items, currentItem.id)
 end
 
-xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
+xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     local optionMod      = bit.band(option, 0xFF)
     local itemTrialId    = player:getLocalVar("storeItemTrialId")
     local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
@@ -352,7 +355,7 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
     end
 end
 
-xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
     local optionMod         = bit.band(option, 0xFF)
     local zoneid            = player:getZoneID()
     local msg               = zones[zoneid].text

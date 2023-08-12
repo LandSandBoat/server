@@ -8,11 +8,8 @@
 -- Ru'Avitau Main Entrance : !pos -0.2171 -45.013 -119.7575
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)

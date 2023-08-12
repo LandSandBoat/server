@@ -22,10 +22,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 33 and option == 1 then
         player:setPos(12.527, 0.345, -539.602, 127, 31) -- to Monarch Linn (Retail confirmed)
     elseif csid == 10 and option == 1 then
@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 17 and option == 0 then
         -- TODO: Go! Go! Gobmuffin quest. Player just ported to J-6 island
     elseif csid == 32003 then
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

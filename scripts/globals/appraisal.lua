@@ -3,9 +3,7 @@
 -- desc: Common functionality for Appraisals
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
 xi.appraisal = xi.appraisal or {}

@@ -24,28 +24,28 @@
 
 #include "battleentity.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/despawn_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/weaponskill_state.h"
-#include "../attack.h"
-#include "../attackround.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../lua/luautils.h"
-#include "../notoriety_container.h"
-#include "../packets/action.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../status_effect_container.h"
-#include "../utils/battleutils.h"
-#include "../utils/petutils.h"
-#include "../utils/puppetutils.h"
-#include "../weapon_skill.h"
+#include "ai/ai_container.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/despawn_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "attack.h"
+#include "attackround.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "lua/luautils.h"
+#include "notoriety_container.h"
+#include "packets/action.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
+#include "weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
 {
@@ -308,9 +308,9 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
     return WeaponDelay;
 }
 
-uint8 CBattleEntity::GetMeleeRange() const
+float CBattleEntity::GetMeleeRange() const
 {
-    return m_ModelRadius + 3;
+    return m_ModelRadius + 3.0f;
 }
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool tp)
@@ -587,6 +587,15 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
         this->SetLocalVar("weaponskillHit", 0);
     }
 
+    if (getMod(Mod::ABSORB_DMG_TO_MP) > 0)
+    {
+        int16 absorbedMP = (int16)(amount * getMod(Mod::ABSORB_DMG_TO_MP) / 100);
+        if (absorbedMP > 0)
+        {
+            addMP(absorbedMP);
+        }
+    }
+
     return addHP(-amount);
 }
 
@@ -793,18 +802,31 @@ uint16 CBattleEntity::DEF()
         return DEF / 2;
     }
 
-    return DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]);
+    return std::clamp(DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]), 0, 65535); // Clamp to stop underflows of defense
 }
 
 uint16 CBattleEntity::EVA()
 {
-    int16 evasion = GetSkill(SKILL_EVASION);
+    int16 evasion = 1;
 
-    if (evasion > 200)
-    { // Evasion skill is 0.9 evasion post-200
-        evasion = (int16)(200 + (evasion - 200) * 0.9);
+    if (this->objtype == TYPE_MOB || this->objtype == TYPE_PET)
+    {
+        evasion = m_modStat[Mod::EVA]; // Mobs and pets base evasion is based off the EVA mod
     }
-    return std::max(0, (m_modStat[Mod::EVA] + evasion + AGI() / 2));
+    else // If it is a player then evasion = SKILL_EVASION
+    {
+        evasion = GetSkill(SKILL_EVASION);
+    }
+
+    // Both mobs and players follow the same formula for over 200 evasion
+    if (evasion > 200)
+    {
+        evasion = 200 + (evasion - 200) * 0.9;
+    }
+
+    evasion += AGI() / 2;
+
+    return std::max(0, evasion + (this->objtype == TYPE_MOB || this->objtype == TYPE_PET ? 0 : m_modStat[Mod::EVA])); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
 /************************************************************************
@@ -839,14 +861,22 @@ uint8 CBattleEntity::GetSLevel() const
 
 void CBattleEntity::SetMJob(uint8 mjob)
 {
-    XI_DEBUG_BREAK_IF(mjob == 0 || mjob >= MAX_JOBTYPE); // выход за пределы доступных профессий
+    if (mjob == 0 || mjob >= MAX_JOBTYPE)
+    {
+        ShowWarning("Invalid Job Type passed to function (%d).", mjob);
+        return;
+    }
 
     m_mjob = (JOBTYPE)mjob;
 }
 
 void CBattleEntity::SetSJob(uint8 sjob)
 {
-    XI_DEBUG_BREAK_IF(sjob >= MAX_JOBTYPE); // выход за пределы доступных профессий
+    if (sjob >= MAX_JOBTYPE)
+    {
+        ShowWarning("sjob (%d) exceeds MAX_JOBTYPE", sjob);
+        return;
+    }
 
     m_sjob = (JOBTYPE)sjob;
 }
@@ -869,9 +899,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     TracyZoneScoped;
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
-        // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
-        // But there is no place in the DB to set subLV right now.
-        m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+        m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
     }
     else
     {
@@ -1279,7 +1307,7 @@ uint16 CBattleEntity::GetSkill(uint16 SkillID)
 void CBattleEntity::addTrait(CTrait* PTrait)
 {
     TracyZoneScoped;
-    TraitList.push_back(PTrait);
+    TraitList.emplace_back(PTrait);
     addModifier(PTrait->getMod(), PTrait->getValue());
 }
 
@@ -1741,21 +1769,22 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         else if ((xirand::GetRandomNumber(100) < attack.GetHitRate() || attackRound.GetSATAOccured()) &&
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
         {
-            // attack hit, try to be absorbed by shadow unless it is a SATA attack round
-            if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
-            {
-                actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
-                actionTarget.param     = 1;
-                actionTarget.reaction  = REACTION::EVADE;
-                attack.SetEvaded(true);
-            }
-            else if (attack.IsParried())
+            // Check parry.
+            if (attack.IsParried())
             {
                 actionTarget.messageID  = 70;
                 actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
                 actionTarget.speceffect = SPECEFFECT::NONE;
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
+            }
+            // Try to be absorbed by shadow unless it is a SATA attack round.
+            else if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
+            {
+                actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
+                actionTarget.param     = 1;
+                actionTarget.reaction  = REACTION::EVADE;
+                attack.SetEvaded(true);
             }
             else if (attack.CheckAnticipated() || attack.CheckCounter())
             {

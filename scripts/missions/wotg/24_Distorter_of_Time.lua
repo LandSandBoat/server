@@ -5,10 +5,8 @@
 -- !addmission 5 23
 -- Regal Pawprints (9) : !pos 54.437 -41.904 104.974 136
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER_OF_TIME)

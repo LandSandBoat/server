@@ -5,7 +5,6 @@
 -- !pos -62.533 -1.859 -30.634 151
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -20,10 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     local brassDoor = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE - 2)
     local torch1 = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE + 1)
     local torch2 = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE + 2)

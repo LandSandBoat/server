@@ -3,9 +3,6 @@
 -- Decennial Dress +1
 -- Dispense: Bowl of Moogurt
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -22,10 +22,10 @@
 #ifndef _AUTOMATONCONTROLLER_H
 #define _AUTOMATONCONTROLLER_H
 
-#include "../../entities/automatonentity.h"
-#include "../../spell.h"
-#include "../../status_effect.h"
+#include "entities/automatonentity.h"
 #include "pet_controller.h"
+#include "spell.h"
+#include "status_effect.h"
 #include <optional>
 
 struct CurrentManeuvers
@@ -93,15 +93,15 @@ private:
     CAutomatonEntity* PAutomaton;
 
     duration             m_actionCooldown{ 3s };
-    duration             m_rangedCooldown;
+    duration             m_rangedCooldown{};
     static constexpr int m_RangedAbility{ 1949 };
-    duration             m_magicCooldown;
-    duration             m_enfeebleCooldown;
-    duration             m_elementalCooldown;
-    duration             m_healCooldown;
-    duration             m_enhanceCooldown;
-    duration             m_statusCooldown;
-    duration             m_shieldbashCooldown;
+    duration             m_magicCooldown{};
+    duration             m_enfeebleCooldown{};
+    duration             m_elementalCooldown{};
+    duration             m_healCooldown{};
+    duration             m_enhanceCooldown{};
+    duration             m_statusCooldown{};
+    duration             m_shieldbashCooldown{};
     static constexpr int m_ShieldBashAbility{ 1944 };
 
     time_point m_LastActionTime;

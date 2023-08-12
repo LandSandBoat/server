@@ -9,10 +9,8 @@
 -- _6z0            : !pos 0 -12 48 251
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
 -----------------------------------

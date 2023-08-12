@@ -5,11 +5,9 @@
 -- !addmission 12 67
 -- Hollowed Pathway : !pos 215.371 39.025 -446.368 267
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.STONEWALLED)

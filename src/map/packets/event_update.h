@@ -29,7 +29,7 @@
 class CEventUpdatePacket : public CBasicPacket
 {
 public:
-    CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> params);
+    CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> const& params);
 };
 
 #endif

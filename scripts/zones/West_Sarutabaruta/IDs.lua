@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: West_Sarutabaruta
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_SARUTABARUTA] =
@@ -121,7 +118,7 @@ zones[xi.zone.WEST_SARUTABARUTA] =
     npc =
     {
         SIGNPOST_OFFSET = 17248797,
-        OVERSEER_BASE   = 17248830, -- Naguipeillont_RK in npc_list
+        OVERSEER_BASE   = GetFirstID('Naguipeillont_RK'),
 
         HARVESTING =
         {

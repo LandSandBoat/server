@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -16,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
     if not nm:isSpawned() then
         local chance = 0 -- percent chance that an item will drop.
 
-        if npcUtil.tradeHas(trade, { { 1900, 3 } }) then
+        if npcUtil.tradeHas(trade, { { xi.items.HIGH_QUALITY_AERN_ORGAN, 3 } }) then
             chance = 100
-        elseif npcUtil.tradeHas(trade, { { 1900, 2 } }) then
+        elseif npcUtil.tradeHas(trade, { { xi.items.HIGH_QUALITY_AERN_ORGAN, 2 } }) then
             chance = 66
-        elseif npcUtil.tradeHas(trade, 1900) then
+        elseif npcUtil.tradeHas(trade, xi.items.HIGH_QUALITY_AERN_ORGAN) then
             chance = 33
         end
 
@@ -50,10 +49,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -3,9 +3,6 @@
 -- Earth Cluster
 -- Turn into a stack of earth crystals
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

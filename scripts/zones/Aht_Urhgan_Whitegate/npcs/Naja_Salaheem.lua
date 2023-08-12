@@ -23,14 +23,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3144 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
-        player:addItem(16070)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 16070)
+        player:addItem(xi.items.GLORY_CROWN)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GLORY_CROWN)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ETERNAL_MERCENARY)
     end
 end

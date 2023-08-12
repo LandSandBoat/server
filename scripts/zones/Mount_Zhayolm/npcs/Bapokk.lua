@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2185) then -- Silver
+    if npcUtil.tradeHas(trade, xi.items.IMPERIAL_SILVER_PIECE) then
         player:startEvent(163)
     end
 end
@@ -22,10 +22,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 163 then
         player:confirmTrade()
         player:setPos(-20, -6, 0, 192) -- using the pos method until the problem below is fixed

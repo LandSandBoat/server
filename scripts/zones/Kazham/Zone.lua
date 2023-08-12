@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Kazham/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -12,8 +11,8 @@ zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -38,10 +37,10 @@ zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10000)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 10000 then
         player:setPos(0, 0, 0, 0, 226)
     end

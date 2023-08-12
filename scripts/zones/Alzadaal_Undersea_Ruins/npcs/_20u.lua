@@ -3,7 +3,6 @@
 -- Door: Gilded Gateway (Arrapago)
 -- !pos -580 0 -159 72
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
@@ -34,7 +33,7 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, npc)
     -- 9 = arrapago, 54 = base salvage number
     local instanceid = bit.rshift(option, 19) + 64
 
@@ -43,16 +42,16 @@ entity.onEventUpdate = function(player, csid, option, target)
     if party ~= nil then
         for i, v in pairs(party) do
             if not v:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
-                player:messageText(target, ID.text.MEMBER_NO_REQS, false)
-                player:instanceEntry(target, 1)
+                player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
+                player:instanceEntry(npc, 1)
                 return
             elseif v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
-                player:messageText(target, ID.text.MEMBER_TOO_FAR, false)
-                player:instanceEntry(target, 1)
+                player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
+                player:instanceEntry(npc, 1)
                 return
             elseif v:checkImbuedItems() then
-                player:messageText(target, ID.text.MEMBER_IMBUED_ITEM, false)
-                player:instanceEntry(target, 1)
+                player:messageText(npc, ID.text.MEMBER_IMBUED_ITEM, false)
+                player:instanceEntry(npc, 1)
                 return
             end
         end
@@ -61,7 +60,7 @@ entity.onEventUpdate = function(player, csid, option, target)
     player:createInstance(instanceid)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 408 and option == 4) or csid == 116 then
         player:setPos(0, 0, 0, 0, 74)
     end

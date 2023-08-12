@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SLUGGISH_DAZE_5
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -1,7 +1,5 @@
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
-
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.ladybug = xi.mix.ladybug or {}

@@ -6,12 +6,9 @@
 -- Hide Flap (1) : !pos 293 3 -213 149
 -- Naji          : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local davoiID = require('scripts/zones/Davoi/IDs')

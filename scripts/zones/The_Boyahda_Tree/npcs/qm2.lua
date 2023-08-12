@@ -5,7 +5,6 @@
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
 local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -44,10 +43,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
         player:addKeyItem(xi.ki.MOONDROP)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)

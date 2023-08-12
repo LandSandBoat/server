@@ -6,10 +6,8 @@
 -- !pos 200.3419 -2.25 37.12 168
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
-require('scripts/globals/zone')
 -----------------------------------
 local oraclesID = require('scripts/zones/Chamber_of_Oracles/IDs')
 -----------------------------------

@@ -10,10 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2386) and
+        npcUtil.tradeHas(trade, xi.items.HOARY_BATTLE_HORN) and
         npcUtil.popFromQM(player, npc, ID.mob.PALLAS)
     then
-        -- Hoary Battle Horn
         player:confirmTrade()
     end
 end
@@ -21,10 +20,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

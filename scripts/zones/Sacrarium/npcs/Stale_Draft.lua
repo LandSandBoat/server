@@ -23,7 +23,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     -- fomor codex
-    if trade:hasItemQty(1877, 1) and trade:getItemCount() == 1 then
+    if trade:hasItemQty(xi.items.FOMOR_CODEX, 1) and trade:getItemCount() == 1 then
         local draftOffset = npc:getID() - ID.npc.STALE_DRAFT_OFFSET
         local nmId = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][1]
         local races = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][2]
@@ -41,10 +41,10 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

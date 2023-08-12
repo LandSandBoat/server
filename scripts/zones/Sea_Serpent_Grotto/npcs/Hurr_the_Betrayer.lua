@@ -5,7 +5,6 @@
 -- !pos 305.882 26.768 234.279 176
 -----------------------------------
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 
@@ -61,10 +60,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 107 and
         player:getCharVar("SahaginKeyProgress") == 2 and

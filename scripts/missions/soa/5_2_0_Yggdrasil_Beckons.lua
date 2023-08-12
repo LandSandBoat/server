@@ -5,10 +5,8 @@
 -- !addmission 12 112
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL_BECKONS)

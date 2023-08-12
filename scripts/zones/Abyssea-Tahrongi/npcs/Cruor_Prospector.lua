@@ -5,9 +5,6 @@
 -- !pos 132.000 -75.856 -822.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -39,10 +36,10 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.visionsCruorProspectorOnTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.abyssea.visionsCruorProspectorOnEventFinish(player, csid, option, localProspectorItems)
 end
 

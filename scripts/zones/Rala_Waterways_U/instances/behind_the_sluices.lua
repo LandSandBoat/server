@@ -3,7 +3,6 @@
 -- !instance 25900
 -----------------------------------
 require('scripts/globals/instance')
-require('scripts/globals/keyitems')
 require('scripts/globals/allyassist')
 local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 -----------------------------------

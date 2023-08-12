@@ -6,8 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -17,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     local flyerForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     if flyerForRegine == 1 then
-        if npcUtil.tradeHasExactly(trade, 532) then
+        if npcUtil.tradeHasExactly(trade, xi.items.MAGICMART_FLYER) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
@@ -31,10 +29,10 @@ entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.CLETAE_DIALOG)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

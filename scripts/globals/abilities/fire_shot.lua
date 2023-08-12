@@ -6,7 +6,6 @@
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -20,7 +19,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return 216, 0
     end
 
-    if player:hasItem(2176, 0) or player:hasItem(2974, 0) then
+    if
+        player:hasItem(xi.items.FIRE_CARD, 0) or
+        player:hasItem(xi.items.TRUMP_CARD, 0)
+    then
         return 0, 0
     else
         return 71, 0
@@ -75,7 +77,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end
     end
 
-    local _ = player:delItem(2176, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(xi.items.FIRE_CARD, 1) or player:delItem(xi.items.TRUMP_CARD, 1)
 
     target:updateClaim(player)
 

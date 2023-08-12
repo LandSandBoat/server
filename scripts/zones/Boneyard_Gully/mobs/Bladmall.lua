@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

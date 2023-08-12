@@ -1,14 +1,11 @@
 -----------------------------------
 --  Gregale Wing
---
 --  Description: An icy wind deals Ice damage to enemies within a very wide area of effect. Additional effect: Paralyze
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 30' radial.
 --  Notes: Used only by Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

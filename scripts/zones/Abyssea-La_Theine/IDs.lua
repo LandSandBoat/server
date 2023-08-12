@@ -1,10 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-La_Theine
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_LA_THEINE] =
@@ -15,11 +11,13 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CRUOR_TOTAL                   = 6988, -- Obtained <number> cruor. (Total: <number>)
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        PLAYER_KEYITEM_OBTAINED       = 7320, -- <player> obtained the key item: <keyitem>!
         LIGHTS_MESSAGE_1              = 7325, -- Visitant Light Intensity Pearlescent: <number> / Ebon: <number> Golden: <number> / Silvery: <number>
         LIGHTS_MESSAGE_2              = 7326, -- Azure: <number> / Ruby: <number> / Amber: <number>
         STAGGERED                     = 7327, -- <name>'s attack staggers the fiend!
@@ -34,6 +32,11 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
         NO_VISITANT_WARD              = 7344, -- You do not have visitant status. Returning to the Searing Ward in <number> [second/seconds].
         RETURNING_TO_WARD             = 7346, -- Returning to the Searing Ward now.
         NO_VISITANT_STATUS            = 7403, -- You do not have visitant status. Please proceed to the nearest Conflux Surveyor to have it granted.
+        ATMA_INFUSED                  = 7446, -- <name> expends <number> cruor and is now infused with <keyitem>!
+        ATMA_PURGED                   = 7447, -- <name> has been purged of the <keyitem>.
+        ALL_ATMA_PURGED               = 7448, -- <name> has been purged of all infused atma.
+        PREVIOUS_ATMA_INFUSED         = 7454, -- <name> expends <number> cruor and [his/her] previous atma configuration is restored!
+        HISTORY_ATMA_INFUSED          = 7461, -- <name> expends <number> cruor and is now infused with [his/her] chosen atma set!
         MONSTER_CONCEALED_CHEST       = 7486, -- The monster was concealing a treasure chest!
         OBTAINS_TEMP_ITEM             = 7496, -- <name> obtains the temporary item: <item>!
         OBTAINS_ITEM                  = 7497, -- <name> obtains the item: <item>!

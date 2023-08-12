@@ -4,13 +4,15 @@
 -- Involved in Quest: Under Oath
 -----------------------------------
 local ID = require("scripts/zones/Davoi/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("UnderOathCS") == 5 and npcUtil.tradeHas(trade, 1095) then
+    if
+        player:getCharVar("UnderOathCS") == 5 and
+        npcUtil.tradeHas(trade, xi.items.WELL_WEIGHT)
+    then
         player:startEvent(113)
     else
         player:messageSpecial(ID.text.A_WELL)
@@ -21,7 +23,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("UnderOathCS") == 5 and
         player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER) and
-        not player:hasItem(1095) and
+        not player:hasItem(xi.items.WELL_WEIGHT) and
         not GetMobByID(ID.mob.ONE_EYED_GWAJBOJ):isSpawned() and
         not GetMobByID(ID.mob.THREE_EYED_PROZPUZ):isSpawned()
     then
@@ -37,10 +39,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 113 then
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_CONFESSION)

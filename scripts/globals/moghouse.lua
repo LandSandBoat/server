@@ -1,15 +1,10 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
-require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/titles")
-require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.moghouse = xi.moghouse or {}
 
@@ -169,6 +164,25 @@ xi.moghouse.moogleTrade = function(player, npc, trade)
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 2, xi.moghouse.getMogLockerExpiryTimestamp(player))
             end
         end
+
+        local eggComponents =
+        {
+            xi.items.EGG_LOCKER,
+            xi.items.EGG_TABLE,
+            xi.items.EGG_STOOL,
+            xi.items.EGG_LANTERN,
+        }
+
+        if npcUtil.tradeHasExactly(trade, eggComponents) then
+            if npcUtil.giveItem(player, xi.items.EGG_BUFFET) then
+                player:confirmTrade()
+            end
+
+        elseif npcUtil.tradeHasExactly(trade, xi.items.EGG_BUFFET) then
+            if npcUtil.giveItem(player, eggComponents) then
+                player:confirmTrade()
+            end
+        end
     end
 end
 
@@ -188,10 +202,10 @@ xi.moghouse.moogleTrigger = function(player, npc)
     end
 end
 
-xi.moghouse.moogleEventUpdate = function(player, csid, option)
+xi.moghouse.moogleEventUpdate = function(player, csid, option, npc)
 end
 
-xi.moghouse.moogleEventFinish = function(player, csid, option)
+xi.moghouse.moogleEventFinish = function(player, csid, option, npc)
 end
 
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)

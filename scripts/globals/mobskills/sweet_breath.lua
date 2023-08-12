@@ -1,12 +1,9 @@
 -----------------------------------
 -- Sweet Breath
---
 -- Description: Deals water damage to enemies within a fan-shaped area originating from the caster.
 -- Type: Magical Water (Element)
---
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

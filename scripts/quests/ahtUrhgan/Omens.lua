@@ -7,12 +7,8 @@
 -- Aydeewa (Blank) : !pos 342.129 36.509 -24.856 68
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/settings')
 -----------------------------------
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------

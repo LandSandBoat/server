@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Flames/IDs")
@@ -30,14 +29,14 @@ entity.onEventUpdate = function(player, csid, option, extras)
     xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 then
         player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
         player:addKeyItem(xi.ki.SCARLET_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCARLET_COUNTERSEAL)
         player:setCharVar("ASA4_Scarlet", "2")
     else
-        xi.bcnm.onEventFinish(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

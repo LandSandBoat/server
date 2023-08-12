@@ -8,12 +8,9 @@
 -- Rolanberry Fields    : !pos -198 8 361 110
 -- Sauromugue Champaign : !pos 369 8 -227 120
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/maws')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)

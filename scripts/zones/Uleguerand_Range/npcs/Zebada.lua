@@ -5,13 +5,15 @@
 -- !pos -308.112 -42.137 -570.096 5
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Chamnaet Ice
-    if trade:hasItemQty(1780, 1) and trade:getItemCount() == 1 then
+    if
+        trade:hasItemQty(xi.items.HANDFUL_OF_CHAMNAET_ICE, 1) and
+        trade:getItemCount() == 1
+    then
         player:tradeComplete()
         player:startEvent(13)
     end
@@ -27,7 +29,10 @@ entity.onTrigger = function(player, npc)
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
             player:startEvent(15, VanadielTime() + (zephyrFanCD - os.time()))
         else
-            if player:hasItem(1780) or player:hasItem(1779) then -- Chamnaet Ice -- Cotton Pouch
+            if
+                player:hasItem(xi.items.HANDFUL_OF_CHAMNAET_ICE) or
+                player:hasItem(xi.items.COTTON_POUCH)
+            then
                 player:startEvent(16)
             else
                 player:startEvent(14)
@@ -36,21 +41,21 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 13 then
         player:addKeyItem(xi.ki.ZEPHYR_FAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZEPHYR_FAN)
         player:setCharVar("[ENM]ZephyrFan", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 14 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779) -- Cotton Pouch
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.COTTON_POUCH) -- Cotton Pouch
             return
         else
-            player:addItem(1779)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1779) -- Cotton Pouch
+            player:addItem(xi.items.COTTON_POUCH)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.COTTON_POUCH) -- Cotton Pouch
         end
     end
 end

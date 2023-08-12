@@ -5,11 +5,8 @@
 -- Tami   : !pos 62.617 0 -68.222 234
 -- Zelman : !pos 17.095 7.704 -52.995 172
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local bastokMinesID = require('scripts/zones/Bastok_Mines/IDs')

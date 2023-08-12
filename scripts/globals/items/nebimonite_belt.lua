@@ -1,8 +1,7 @@
 -----------------------------------
 -- ID: 15300
 -- nebimonite_belt
------------------------------------
-require("scripts/globals/msg")
+-- Dispense: Nebimonite
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4361) -- nebimonite
+    target:addItem(xi.items.NEBIMONITE)
 end
 
 return itemObject

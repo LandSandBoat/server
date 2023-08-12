@@ -7,17 +7,11 @@
 -- Soul Plate          : !additem 2477
 -- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 require("scripts/globals/pankration")
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.znm = xi.znm or {}
 
@@ -55,7 +49,7 @@ end
 
 xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local hpp = target:getHPP()
-    local system = target:getSystem()
+    local system = target:getEcosystem()
     local isNM = target:isNM()
     local distance = user:checkDistance(target)
     local isFacing = target:isFacing(user)
@@ -138,7 +132,7 @@ xi.znm.ryo.onTrigger = function(player, npc)
     player:startEvent(913)
 end
 
-xi.znm.ryo.onEventUpdate = function(player, csid, option)
+xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
     if csid == 914 then
         local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
         player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
@@ -152,7 +146,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option)
     end
 end
 
-xi.znm.ryo.onEventFinish = function(player, csid, option)
+xi.znm.ryo.onEventFinish = function(player, csid, option, npc)
 end
 
 -----------------------------------
@@ -198,10 +192,10 @@ xi.znm.sanraku.onTrigger = function(player, npc)
     -- 909: Further interactions
 end
 
-xi.znm.sanraku.onEventUpdate = function(player, csid, option)
+xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
 end
 
-xi.znm.sanraku.onEventFinish = function(player, csid, option)
+xi.znm.sanraku.onEventFinish = function(player, csid, option, npc)
     if csid == 910 then
         player:confirmTrade()
         player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())

@@ -4,10 +4,8 @@
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
-require("scripts/globals/zone")
 -----------------------------------
 local spellObject = {}
 
@@ -31,7 +29,7 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
-        [xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.AYAME] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,
@@ -39,11 +37,11 @@ spellObject.onMobSpawn = function(mob)
 end
 
 spellObject.onMobDespawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.messageOffset.DESPAWN)
 end
 
 spellObject.onMobDeath = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.messageOffset.DEATH)
 end
 
 return spellObject

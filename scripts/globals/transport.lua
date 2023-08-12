@@ -1,10 +1,8 @@
 -----------------------------------
 -- Transport
 -----------------------------------
-require("scripts/globals/zone")
 require("scripts/globals/pathfind")
 -----------------------------------
-
 xi = xi or {}
 xi.transport = xi.transport or {}
 

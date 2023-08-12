@@ -3,11 +3,8 @@
 -----------------------------------
 require('scripts/globals/mobs')
 require('scripts/globals/common')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/status')
 require('scripts/globals/utils')
-require('scripts/globals/zone')
 require('scripts/globals/pathfind')
 -----------------------------------
 xi = xi or {}

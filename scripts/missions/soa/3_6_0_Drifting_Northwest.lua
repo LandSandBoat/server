@@ -4,10 +4,8 @@
 -----------------------------------
 -- !addmission 12 62
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
 -----------------------------------

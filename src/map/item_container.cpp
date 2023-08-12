@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <cstring>
 
@@ -134,7 +134,11 @@ uint8 CItemContainer::AddSize(int8 size)
 
 uint8 CItemContainer::InsertItem(CItem* PItem)
 {
-    XI_DEBUG_BREAK_IF(PItem == nullptr);
+    if (PItem == nullptr)
+    {
+        ShowWarning("Null item passed into function.");
+        return ERROR_SLOTID;
+    }
 
     for (uint8 SlotID = 1; SlotID <= m_size; ++SlotID)
     {

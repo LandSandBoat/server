@@ -3,7 +3,6 @@
 --  NPC: Charlaimagnat
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -33,10 +32,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 703 then
         player:setCharVar("TheMissingPiece_date", os.time() + 60)
         player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
@@ -44,10 +43,10 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)
     elseif csid == 705 then
         if player:getFreeSlotsCount() == 0 then -- does the player have space
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4729)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_ALTEP)
         else -- give player teleport-altep
-            player:addItem(4729)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4729)
+            player:addItem(xi.items.SCROLL_OF_TELEPORT_ALTEP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_ALTEP)
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
         end

@@ -3,8 +3,6 @@
 -- Deals critical damage. Chance of critical hit varies with TP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

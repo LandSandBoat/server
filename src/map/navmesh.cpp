@@ -33,6 +33,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <vector>
 
 constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
 constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
@@ -130,7 +131,7 @@ bool CNavMesh::load(std::string const& filename)
     }
 
     // Read header.
-    NavMeshSetHeader header;
+    NavMeshSetHeader header{};
     file.read(reinterpret_cast<char*>(&header), sizeof(header));
     if (header.magic != NAVMESHSET_MAGIC)
     {
@@ -158,7 +159,7 @@ bool CNavMesh::load(std::string const& filename)
     // Read tiles.
     for (int i = 0; i < header.numTiles; ++i)
     {
-        NavMeshTileHeader tileHeader;
+        NavMeshTileHeader tileHeader{};
         file.read(reinterpret_cast<char*>(&tileHeader), sizeof(tileHeader));
         if (!tileHeader.tileRef || !tileHeader.dataSize)
         {
@@ -209,8 +210,8 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
         return {};
     }
 
-    std::vector<pathpoint_t> ret;
-    dtStatus                 status;
+    std::vector<pathpoint_t> ret{};
+    dtStatus                 status = 0;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -222,8 +223,8 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
-    dtPolyRef endRef;
+    dtPolyRef startRef = 0;
+    dtPolyRef endRef   = 0;
 
     float enearest[3];
     float snearest[3];
@@ -284,6 +285,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
         }
 
         // i starts at 3 so the start position is ignored
+        ret.reserve(straightPathCount - 1);
         for (int i = 3; i < straightPathCount * 3;)
         {
             float pathPos[3];
@@ -293,7 +295,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.push_back({ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0 });
+            ret.emplace_back(pathpoint_t{ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0, false });
         }
     }
 
@@ -309,7 +311,7 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         return {};
     }
 
-    dtStatus status;
+    dtStatus status = 0;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -321,8 +323,8 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
-    dtPolyRef randomRef;
+    dtPolyRef startRef  = 0;
+    dtPolyRef randomRef = 0;
 
     status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 
@@ -390,7 +392,7 @@ bool CNavMesh::validPosition(const position_t& position)
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, smallPolyPickExt, &filter, &startRef, snearest);
 
@@ -423,7 +425,7 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, closestPolyPickExt, &filter, &startRef, validPoint);
 
@@ -457,7 +459,7 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
     float     validStartPoint[3];
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, furthestPolyPickExt, &filter, &startRef, validStartPoint);
@@ -501,7 +503,7 @@ void CNavMesh::snapToValidPosition(position_t& position)
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 
@@ -553,7 +555,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
 
         // Collect the heights of queried polygons
         uint8           verticalLimitTrunc = static_cast<uint8>(verticalLimit);
-        float           height;
+        float           height             = 0;
         std::set<uint8> heights;
         for (int i = 0; i < polyCount; i++)
         {
@@ -598,7 +600,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
         return true;
     }
 
-    dtStatus status;
+    dtStatus status = 0;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -620,7 +622,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
         return false;
     }
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
     float     snearest[3];
 
     status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
@@ -638,7 +640,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
         return true;
     }
 
-    dtPolyRef endRef;
+    dtPolyRef endRef = 0;
     float     enearest[3];
 
     status = m_navMeshQuery.findNearestPoly(epos, polyPickExt, &filter, &endRef, enearest);

@@ -4,7 +4,6 @@
 -- Note: Phase 1
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -62,13 +61,13 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32004 then
-        DespawnMob(target:getID())
-        local mob = SpawnMob(target:getID() + 1)
+        DespawnMob(npc:getID())
+        local mob = SpawnMob(npc:getID() + 1)
         local bcnmAllies = mob:getBattlefield():getAllies()
         for i, v in pairs(bcnmAllies) do
             v:resetLocalVars()

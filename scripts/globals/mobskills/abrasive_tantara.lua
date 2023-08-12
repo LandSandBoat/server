@@ -8,8 +8,6 @@
 -- Notes: Doesn't use this if its horn is broken.  It is possible for Abrasive Tantara to miss. - See discussion
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

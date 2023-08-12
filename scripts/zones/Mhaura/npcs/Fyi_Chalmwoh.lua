@@ -3,7 +3,6 @@
 --  NPC: Fyi_Chalmwoh
 -- !pos -39.273 -16.000 70.126 249
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
@@ -44,10 +43,10 @@ entity.onTrigger = function(player, npc)
     -- cs 321: Buy / Trade mannequins
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     --local itemId = 255 + option
     --local race = player:getRace()
 

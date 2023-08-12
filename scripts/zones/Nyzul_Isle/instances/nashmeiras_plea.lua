@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 -----------------------------------
 local instanceObject = {}
 
@@ -88,7 +87,7 @@ instanceObject.onInstanceComplete = function(instance)
     end
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return instanceObject

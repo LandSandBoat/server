@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CMOBSKILL_TATE_H
 #define _CMOBSKILL_TATE_H
 
-#include "../../mobskill.h"
+#include "mobskill.h"
 #include "state.h"
 
 class CMobEntity;
@@ -60,7 +60,7 @@ private:
     CMobEntity* const          m_PEntity;
     std::unique_ptr<CMobSkill> m_PSkill;
     time_point                 m_finishTime;
-    duration                   m_castTime;
+    duration                   m_castTime{};
     int16                      m_spentTP;
 };
 

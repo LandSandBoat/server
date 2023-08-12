@@ -6,14 +6,10 @@
 -- Kasaroro : !pos -72 -3 34 231
 -- Halver   : !pos 2 0.1 0.1 233
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
 local chateauID          = require('scripts/zones/Chateau_dOraguille/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
@@ -38,7 +34,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 8 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust = (not player:hasSpell(xi.magic.spell.HALVER) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(504, { [7] = needsHalverTrust })
                     else
@@ -53,7 +49,7 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 9)
 
                     if
-                        not player:hasSpell(972) and
+                        not player:hasSpell(xi.magic.spell.HALVER) and
                         not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
