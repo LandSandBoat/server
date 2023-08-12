@@ -204,7 +204,7 @@ namespace mobutils
         JOBTYPE   sJob     = PMob->GetSJob();
         uint8     mLvl     = PMob->GetMLevel();
         uint8     sLvl     = PMob->GetSLevel();
-        ZONE_TYPE zoneType = PMob->loc.zone->GetType();
+        ZONE_TYPE zoneType = PMob->loc.zone->GetTypeMask();
 
         uint8 mJobGrade = 0; // main jobs grade
         uint8 sJobGrade = 0; // subjobs grade
@@ -564,7 +564,7 @@ namespace mobutils
 
         PMob->m_Behaviour |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-        if (zoneType == ZONE_TYPE::DUNGEON)
+        if (zoneType & ZONE_TYPE::DUNGEON)
         {
             SetupDungeonMob(PMob);
         }
@@ -572,7 +572,7 @@ namespace mobutils
         {
             SetupBattlefieldMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::DYNAMIS)
+        else if (zoneType & ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
         }
