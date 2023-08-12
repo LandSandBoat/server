@@ -520,13 +520,13 @@ local function tradeFish(player, fishId)
             --     : because the cutscene gives away whether or not the trade was successful
             --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
             player:confirmTrade()
-
             player:startEvent(166, 0, rewards[i].itemId)
             break
         end
     end
 
     if not found then
+        player:confirmTrade()
         player:startEvent(167)
     end
 end
