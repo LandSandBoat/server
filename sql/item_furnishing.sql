@@ -481,7 +481,7 @@ INSERT INTO `item_furnishing` VALUES (3712, 'bastokan_sill', 1, 514, 3, 1);
 INSERT INTO `item_furnishing` VALUES (3713, 'pot_of_wards', 1, 515, 4, 2);
 INSERT INTO `item_furnishing` VALUES (3714, 'pot_of_white_clematis', 1, 515, 4, 2);
 INSERT INTO `item_furnishing` VALUES (3715, 'pot_of_pink_clematis', 1, 515, 4, 2);
-INSERT INTO `item_furnishing` VALUES (3717, 'birch_tree', 1, 2854, 4, 5);
+INSERT INTO `item_furnishing` VALUES (3717, 'birch_tree', 1, 2853, 4, 5);
 INSERT INTO `item_furnishing` VALUES (3718, 'handful_of_adoulinian_tomatoes', 1, 2849, 6, 6);
 INSERT INTO `item_furnishing` VALUES (3719, 'prishe_statue_ii', 4, 512, 1, 3);
 INSERT INTO `item_furnishing` VALUES (3720, 'arciela_statue', 4, 513, 2, 3);
