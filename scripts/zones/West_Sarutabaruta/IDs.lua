@@ -119,16 +119,7 @@ zones[xi.zone.WEST_SARUTABARUTA] =
     {
         SIGNPOST_OFFSET = 17248797,
         OVERSEER_BASE   = GetFirstID('Naguipeillont_RK'),
-
-        HARVESTING =
-        {
-            17248846,
-            17248847,
-            17248848,
-            17248849,
-            17248850,
-            17248851,
-        },
+        HARVESTING      = GetTableOfIDs('Harvesting_Point'),
     },
 }
 

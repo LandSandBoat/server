@@ -86,14 +86,8 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
             17281650, -- qm10
         },
 
-        HARVESTING =
-        {
-            17281636,
-            17281637,
-            17281638,
-        },
-
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        HARVESTING = GetTableOfIDs('Harvesting_Point'),
+        LOGGING    = GetTableOfIDs('Logging_Point'),
     },
 }
 

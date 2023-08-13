@@ -76,15 +76,7 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
 
     npc =
     {
-        HARVESTING =
-        {
-            17167162,
-            17167163,
-            17167164,
-            17167165,
-            17167166,
-            17167167,
-        },
+        HARVESTING = GetTableOfIDs('Harvesting_Point'),
     },
 }
 

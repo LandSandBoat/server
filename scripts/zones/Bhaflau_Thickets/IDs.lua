@@ -64,15 +64,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
     },
     npc =
     {
-        HARVESTING =
-        {
-            16990640,
-            16990641,
-            16990642,
-            16990643,
-            16990644,
-            16990645,
-        },
+        HARVESTING = GetTableOfIDs('Harvesting_Point'),
     },
 }
 
