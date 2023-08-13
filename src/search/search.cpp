@@ -669,7 +669,7 @@ void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
     uint8  stack  = ref<uint8>(data, 0x15);
 
     CDataLoader             PDataLoader;
-    std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHystory(ItemID, stack != 0);
+    std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
     ahItem                  item        = PDataLoader.GetAHItemFromItemID(ItemID);
 
     CAHHistoryPacket PAHPacket = CAHHistoryPacket(item, stack);
