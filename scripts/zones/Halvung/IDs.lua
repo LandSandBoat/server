@@ -40,20 +40,12 @@ zones[xi.zone.HALVUNG] =
     },
     npc =
     {
-        LEVER_AB_DOOR          = 17031668,
-        LEVER_CD_DOOR          = 17031672,
-        LEVER_EF_DOOR          = 17031676,
-        LEVER_GH_DOOR          = 17031680,
-        LEVER_IJ_DOOR          = 17031684,
-        MINING =
-        {
-            17031715,
-            17031716,
-            17031717,
-            17031718,
-            17031719,
-            17031720,
-        },
+        LEVER_AB_DOOR = 17031668,
+        LEVER_CD_DOOR = 17031672,
+        LEVER_EF_DOOR = 17031676,
+        LEVER_GH_DOOR = 17031680,
+        LEVER_IJ_DOOR = 17031684,
+        MINING        = GetTableOfIDs('Mining_Point'),
     },
 }
 
