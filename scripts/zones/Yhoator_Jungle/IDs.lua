@@ -75,21 +75,15 @@ zones[xi.zone.YHOATOR_JUNGLE] =
             17285694, -- qm10
             17285695, -- qm11
         },
+
         HARVESTING =
         {
             17285681,
             17285682,
             17285683,
         },
-        LOGGING =
-        {
-            17285675,
-            17285676,
-            17285677,
-            17285678,
-            17285679,
-            17285680,
-        },
+
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 
