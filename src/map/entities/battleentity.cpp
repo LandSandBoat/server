@@ -2070,8 +2070,10 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     /////////////////////////////////////////////////////////////////////////
     //  Start of the attack loop.
+    //  Make sure our target is alive on each iteration to not overkill;
+    //  And make sure we aren't dead in case we died to a counter.
     /////////////////////////////////////////////////////////////////////////
-    while (attackRound.GetAttackSwingCount() && !(PTarget->isDead()))
+    while (attackRound.GetAttackSwingCount() && PTarget->isAlive() && this->isAlive())
     {
         actionTarget_t& actionTarget = list.getNewActionTarget();
         // Reference to the current swing.
