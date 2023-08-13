@@ -18239,12 +18239,12 @@ INSERT INTO `item_basic` VALUES (21581,0,'rostam','rostam',1,2080,2,0,0);       
 INSERT INTO `item_basic` VALUES (21582,0,'etoile_knife','etoile_knife',1,2080,2,0,0);    -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21583,0,'horos_knife','horos_knife',1,2080,2,0,0);      -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21584,0,'setan_kober','setan_kober',1,2080,2,0,0);      -- Inscribable, Equippable
-INSERT INTO `item_basic` VALUES (21585,0,'crepuscular_knife','crepuscular_knife',1,63568,2,0,0);
-INSERT INTO `item_basic` VALUES (21586,0,'prime_dagger','prime_dagger',1,63552,2,0,0);
-INSERT INTO `item_basic` VALUES (21587,0,'mpu_gandring','mpu_gandring',1,63552,2,0,0);
-INSERT INTO `item_basic` VALUES (21588,0,'mpu_gandring','mpu_gandring',1,63552,2,0,0);
-INSERT INTO `item_basic` VALUES (21589,0,'mpu_gandring','mpu_gandring',1,63552,2,0,0);
-INSERT INTO `item_basic` VALUES (21590,0,'mpu_gandring','mpu_gandring',1,63552,2,0,0);
+INSERT INTO `item_basic` VALUES (21585,0,'crepuscular_knife','crepuscular_knife',1,63568,0,0,0);
+INSERT INTO `item_basic` VALUES (21586,0,'prime_dagger','prime_dagger',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21587,0,'mpu_gandring','mpu_gandring',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21588,0,'mpu_gandring','mpu_gandring',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21589,0,'mpu_gandring','mpu_gandring',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21590,0,'mpu_gandring','mpu_gandring',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21604,0,'arasy_sword','arasy_sword',1,2084,3,0,0);
 INSERT INTO `item_basic` VALUES (21605,0,'arasy_sword_+1','arasy_sword_+1',1,2080,3,0,0);
 INSERT INTO `item_basic` VALUES (21606,0,'enriching_sword','enriching_sword',1,2084,3,0,0);
@@ -18711,10 +18711,10 @@ INSERT INTO `item_basic` VALUES (22252,0,'sapience_orb','sapience_orb',1,63572,0
 INSERT INTO `item_basic` VALUES (22253,0,'falcon_eye','falcon_eye',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (22254,0,'seething_bomblet','seething_bomblet',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (22255,0,'seething_bomblet_+1','seeth._bomblet_+1',1,63569,0,1,0);
-INSERT INTO `item_basic` VALUES (22256,0,'jokushunoibuki','jokushunoibuki',12,14416,15,0,0);
-INSERT INTO `item_basic` VALUES (22257,0,'genmeinoibuki','genmeinoibuki',12,14416,15,0,0);
-INSERT INTO `item_basic` VALUES (22258,0,'shukuyunoibuki','shukuyunoibuki',12,14416,15,0,0);
-INSERT INTO `item_basic` VALUES (22259,0,'kobonoibuki','kobonoibuki',12,14416,15,0,0);
+INSERT INTO `item_basic` VALUES (22256,0,'jokushunoibuki','jokushunoibuki',12,14416,0,0,0);
+INSERT INTO `item_basic` VALUES (22257,0,'genmeinoibuki','genmeinoibuki',12,14416,0,0,0);
+INSERT INTO `item_basic` VALUES (22258,0,'shukuyunoibuki','shukuyunoibuki',12,14416,0,0,0);
+INSERT INTO `item_basic` VALUES (22259,0,'kobonoibuki','kobonoibuki',12,14416,0,0,0);
 INSERT INTO `item_basic` VALUES (22260,0,'eminent_animator_ii','e._animator_ii',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (22261,0,'divinator_ii','divinator_ii',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (22262,0,'amar_cluster','amar_cluster',1,63572,0,1,0);
@@ -19555,9 +19555,9 @@ INSERT INTO `item_basic` VALUES (25416,0,'Sibyl_scarf','Sibyl_scarf',1,63552,0,1
 INSERT INTO `item_basic` VALUES (25417,0,'warriors_bead_necklace','warriors_beads',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (25418,0,'warriors_bead_necklace_+1','war._beads_+1',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (25419,0,'warriors_bead_necklace_+2','war._beads_+2',1,2080,22,0,0);
-INSERT INTO `item_basic` VALUES (25420,0,'boii_earring','boii_earring',1,26704,24,0,0);
-INSERT INTO `item_basic` VALUES (25421,0,'boii_earring_+1','boii_earring_+1',1,26704,24,0,0);
-INSERT INTO `item_basic` VALUES (25422,0,'boii_earring_+2','boii_earring_+2',1,26704,24,0,0);
+INSERT INTO `item_basic` VALUES (25420,0,'boii_earring','boii_earring',1,26704,0,0,0);
+INSERT INTO `item_basic` VALUES (25421,0,'boii_earring_+1','boii_earring_+1',1,26704,0,0,0);
+INSERT INTO `item_basic` VALUES (25422,0,'boii_earring_+2','boii_earring_+2',1,26704,0,0,0);
 INSERT INTO `item_basic` VALUES (25423,0,'monks_nodowa','monks_nodowa',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (25424,0,'monks_nodowa_+1','mnk._nodowa_+1',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (25425,0,'monks_nodowa_+2','mnk._nodowa_+2',1,2080,22,0,0);
