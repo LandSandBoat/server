@@ -110,15 +110,7 @@ zones[xi.zone.JUGNER_FOREST] =
     npc =
     {
         OVERSEER_BASE = GetFirstID('Chaplion_RK'),
-        LOGGING =
-        {
-            17203864,
-            17203865,
-            17203866,
-            17203867,
-            17203868,
-            17203869,
-        },
+        LOGGING       = GetTableOfIDs('Logging_Point'),
     },
 }
 

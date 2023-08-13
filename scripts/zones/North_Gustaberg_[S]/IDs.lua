@@ -89,15 +89,7 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
 
     npc =
     {
-        MINING =
-        {
-            17138511,
-            17138512,
-            17138513,
-            17138514,
-            17138515,
-            17138516,
-        },
+        MINING = GetTableOfIDs('Mining_Point'),
     },
 }
 

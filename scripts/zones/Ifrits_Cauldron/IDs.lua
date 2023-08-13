@@ -83,15 +83,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
     {
         FLAME_SPOUT_OFFSET = 17617204,
         TREASURE_COFFER    = 17617224,
-        MINING =
-        {
-            17617225,
-            17617226,
-            17617227,
-            17617228,
-            17617229,
-            17617230,
-        },
+        MINING             = GetTableOfIDs('Mining_Point'),
     },
 }
 

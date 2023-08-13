@@ -64,15 +64,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
     },
     npc =
     {
-        MINING =
-        {
-            17027561,
-            17027562,
-            17027563,
-            17027564,
-            17027565,
-            17027566,
-        },
+        MINING = GetTableOfIDs('Mining_Point'),
     },
 }
 

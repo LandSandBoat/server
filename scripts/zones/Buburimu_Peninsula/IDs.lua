@@ -64,15 +64,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     {
         OVERSEER_BASE   = GetFirstID('Bonbavour_RK'),
         SIGNPOST_OFFSET = 17261165,
-        LOGGING =
-        {
-            17261175,
-            17261176,
-            17261177,
-            17261178,
-            17261179,
-            17261180,
-        },
+        LOGGING         = GetTableOfIDs('Logging_Point'),
     },
 }
 

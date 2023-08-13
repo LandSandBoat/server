@@ -53,17 +53,9 @@ zones[xi.zone.MISAREAUX_COAST] =
     },
     npc =
     {
-        LOGGING =
-        {
-            16879972,
-            16879973,
-            16879974,
-            16879975,
-            16879976,
-            16879977,
-        },
-        ZIPHIUS_QM_BASE  = 16879919,
-        ALSHA_QM         = 16879978,
+        LOGGING         = GetTableOfIDs('Logging_Point'),
+        ZIPHIUS_QM_BASE = 16879919,
+        ALSHA_QM        = 16879978,
     },
 }
 

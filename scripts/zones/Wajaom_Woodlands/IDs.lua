@@ -58,15 +58,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     },
     npc =
     {
-        HARVESTING =
-        {
-            16986725,
-            16986726,
-            16986727,
-            16986728,
-            16986729,
-            16986730,
-        },
+        HARVESTING = GetTableOfIDs('Harvesting_Point'),
     },
 }
 
