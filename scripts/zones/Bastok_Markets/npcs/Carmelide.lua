@@ -12,15 +12,15 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        806, 1713, 2,    -- Tourmaline
-        807, 1713, 2,    -- Sardonyx
-        800, 1713, 2,    -- Amethyst
-        814, 1713, 2,    -- Amber
-        795, 1713, 2,    -- Lapis Lazuli
-        809, 1713, 2,    -- Clear Topaz
-        799, 1713, 2,    -- Onyx
-        796, 1713, 2,    -- Light Opal
-        13454, 69, 3,    -- Copper Ring
+        xi.items.TOURMALINE,   1713, 2,
+        xi.items.SARDONYX,     1713, 2,
+        xi.items.AMETHYST,     1713, 2,
+        xi.items.AMBER,        1713, 2,
+        xi.items.LAPIS_LAZULI, 1713, 2,
+        xi.items.CLEAR_TOPAZ,  1713, 2,
+        xi.items.ONYX,         1713, 2,
+        xi.items.LIGHT_OPAL,   1713, 2,
+        xi.items.COPPER_RING,    79, 3,
     }
 
     player:showText(npc, ID.text.CARMELIDE_SHOP_DIALOG)

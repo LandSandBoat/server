@@ -12,19 +12,19 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12448,   154, 3,    -- Bronze Cap
-        12432,  1334, 3,    -- Faceguard
-        12433, 11776, 2,    -- Brass Mask
-        12416, 29311, 2,    -- Sallet
-        12576,   235, 3,    -- Bronze Harness
-        12560,  2051, 3,    -- Scale Mail
-        12561, 17928, 2,    -- Brass Scale Mail
-        12704,   128, 3,    -- Bronze Mittens
-        12688,  1094, 3,    -- Scale Finger Gauntlets
-        12689,  9479, 2,    -- Brass Finger Gauntlets
-        12417, 52289, 1,    -- Mythril Sallet
-        12544, 45208, 1,    -- Breastplate
-        12672, 23846, 1,    -- Gauntlets
+        xi.items.BRONZE_CAP,               174, 3,
+        xi.items.FACEGUARD,               1508, 3,
+        xi.items.BRASS_MASK,             11776, 2,
+        xi.items.SALLET,                 29311, 2,
+        xi.items.BRONZE_HARNESS,           266, 3,
+        xi.items.SCALE_MAIL,              2319, 3,
+        xi.items.BRASS_SCALE_MAIL,       17928, 2,
+        xi.items.BRONZE_MITTENS,           145, 3,
+        xi.items.SCALE_FINGER_GAUNTLETS,  1237, 3,
+        xi.items.BRASS_FINGER_GAUNTLETS,  9479, 2,
+        xi.items.MYTHRIL_SALLET,         52289, 1,
+        xi.items.BREASTPLATE,            45208, 1,
+        xi.items.GAUNTLETS,              23846, 1,
     }
 
     player:showText(npc, ID.text.BRUNHILDE_SHOP_DIALOG)
