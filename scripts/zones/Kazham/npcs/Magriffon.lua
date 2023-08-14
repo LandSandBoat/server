@@ -17,9 +17,12 @@ local pathNodes =
 }
 
 entity.onSpawn = function(npc)
-    npc:initNpcAi()
-    npc:setPos(xi.path.first(pathNodes))
-    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
+    -- Ensure that the correct Magriffon is given pathing information.
+    if npc:getID() == ID.npc.MAGRIFFON then
+        npc:initNpcAi()
+        npc:setPos(xi.path.first(pathNodes))
+        npc:pathThrough(pathNodes, xi.path.flag.PATROL)
+    end
 end
 
 entity.onTrade = function(player, npc, trade)
