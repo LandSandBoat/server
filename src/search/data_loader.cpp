@@ -45,7 +45,7 @@ CDataLoader::~CDataLoader()
  *                                                                       *
  ************************************************************************/
 
-std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
+std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
 {
     std::vector<ahHistory*> HistoryList;
 
