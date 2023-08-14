@@ -2607,6 +2607,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Amnaf_blu',782,38); -- Circle Blade
 -- While I never once saw any other WS from Raubahn, he may have others.
 INSERT INTO `mob_skill_lists` VALUES ('Raubahn',783,37); -- Seraph Blade
 INSERT INTO `mob_skill_lists` VALUES ('Raubahn',783,38); -- Circle Blade
+INSERT INTO `mob_skill_lists` VALUES ('Raubahn',783,39); -- Spirits Within
+INSERT INTO `mob_skill_lists` VALUES ('Raubahn',783,42); -- Savage Blade
 
 -- Razfahd uses only Perfect Defense, which is forced by mobscript at 50% HP so he needs no list.
 INSERT INTO `mob_skill_lists` VALUES ('Alexander',784,2141); -- Radiant Sacrament  "Offer thy worship..."

@@ -289,7 +289,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(caster, target, spell))
 
     -- Resistance
-    finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
+    finaldmg = math.floor(finaldmg * xi.magic.applyResistance(caster, target, spell, params))
 
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
@@ -305,7 +305,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
         dmg = utils.clamp(dmg, 0, softCap)
     end
 
-    dmg = dmg * applyResistance(caster, target, spell, params)
+    dmg = dmg * xi.magic.applyResistance(caster, target, spell, params)
     dmg = addBonuses(caster, spell, target, dmg)
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
@@ -357,14 +357,14 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     dmg = dmg * (1 + correlationMultiplier)
 
     -- Monster elemental adjustments
-    local mobEleAdjustments = getElementalDamageReduction(target, spell:getElement())
+    local mobEleAdjustments = xi.magic.getElementalDamageReduction(target, spell:getElement())
     dmg = dmg * mobEleAdjustments
 
     -- Modifiers
     dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
 
     -- Resistance
-    local resistance = applyResistance(caster, target, spell, params)
+    local resistance = xi.magic.applyResistance(caster, target, spell, params)
     dmg = math.floor(dmg * resistance)
 
     -- Final damage
@@ -433,7 +433,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params, powe
     -- INT and Blue Magic skill are the default resistance modifiers
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     -- If unresisted
     if resist >= resistThreshold then
@@ -498,7 +498,7 @@ xi.spells.blue.usePhysicalSpellAddedEffect = function(caster, target, spell, par
         -- INT and Blue Magic skill are the default resistance modifiers
         params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         params.skillType = xi.skill.BLUE_MAGIC
-        local resist = applyResistanceEffect(caster, target, spell, params)
+        local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
             target:addStatusEffect(params.effect, power, tick, duration * resist)
         end
@@ -511,7 +511,7 @@ xi.spells.blue.useMagicalSpellAddedEffect = function(caster, target, spell, para
     params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
     params.skillType = xi.skill.BLUE_MAGIC
     params.effect = params.addedEffect -- renamed to avoid magical spells' dmg resistance check being influenced by this
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     if resist >= 0.5 then
         target:addStatusEffect(params.effect, power, tick, duration * resist)
     end

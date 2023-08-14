@@ -1801,6 +1801,9 @@ INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039391,2);
 INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039392,2);
 INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039393,2);
 INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomacy
+INSERT INTO `bcnm_battlefield` VALUES (1154,1,17051673,3); -- the_beast_within
+INSERT INTO `bcnm_battlefield` VALUES (1154,2,17051674,3); -- the_beast_within
+INSERT INTO `bcnm_battlefield` VALUES (1154,3,17051675,3); -- the_beast_within
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
 
 -- //////////////////////////////////////////////////////////////
