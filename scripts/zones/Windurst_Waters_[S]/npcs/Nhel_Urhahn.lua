@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Nhel Urhahn
--- Type: Standard NPC
 -- !pos -47.348 -4.499 47.117 94
 -----------------------------------
 local entity = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Chomomo
--- Type: Standard NPC
 -- !pos -1.262 -11 290.224 239
 -----------------------------------
 require("scripts/globals/quests")

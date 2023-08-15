@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Icoua
--- Type: Standard NPC
 -- !pos 87.719 -1 9.256 231
 -----------------------------------
 local entity = {}

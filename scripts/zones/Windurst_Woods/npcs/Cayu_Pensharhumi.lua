@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Cayu Pensharhumi
--- Type: Standard NPC
 -- !pos 39.437 -0.91 -40.808 241
 -----------------------------------
 require("scripts/globals/quests")

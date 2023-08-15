@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Carpenters' Landing
 --  NPC: Coupulie
--- Type: Standard NPC
 -- !pos -313.585 -3.628 490.944 2
 -----------------------------------
 local entity = {}

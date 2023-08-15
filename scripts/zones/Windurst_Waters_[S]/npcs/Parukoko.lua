@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Parukoko
--- Type: Standard NPC
 -- !pos -32.400 -3.5 -103.666 94
 -----------------------------------
 local entity = {}

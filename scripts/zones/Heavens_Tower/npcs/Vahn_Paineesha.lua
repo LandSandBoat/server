@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Vahn Paineesha
--- Type: Standard NPC
 -- !pos -2.502 -47.999 -15.083 242
 -----------------------------------
 local entity = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Mheca Khetashipah
--- Type: Standard NPC
 -- !pos 66.881 -6.249 185.752 241
 -----------------------------------
 require("scripts/globals/quests")

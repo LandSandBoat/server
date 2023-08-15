@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Lulupp
--- Type: Standard NPC
 -- !pos -26.567 -3.5 -3.544 250
 -----------------------------------
 require("scripts/globals/pathfind")

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Pahpe Rauulih
--- Type: Standard NPC
 -- !pos -39.740 -4.499 53.223 94
 -----------------------------------
 local entity = {}

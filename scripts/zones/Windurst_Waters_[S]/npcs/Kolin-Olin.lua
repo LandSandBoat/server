@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Kolin-Olin
--- Type: Standard NPC
 -- !pos 9.981 -2.478 33.786 94
 -----------------------------------
 local entity = {}

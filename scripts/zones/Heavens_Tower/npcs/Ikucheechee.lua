@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Ikucheechee
--- Type: Standard NPC
 -- !pos -2.661 -26.5 -5.747 242
 -----------------------------------
 local entity = {}

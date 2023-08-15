@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Maunadolace
--- Type: Standard NPC
 -- !pos -22.800 -9.3 -148.645 232
 -----------------------------------
 local entity = {}

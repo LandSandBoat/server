@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Phanauet Channel
 --  NPC: Laiteconce
--- Type: Standard NPC
 -- !pos 4.066 -4.5 -10.450 1
 -----------------------------------
 local entity = {}

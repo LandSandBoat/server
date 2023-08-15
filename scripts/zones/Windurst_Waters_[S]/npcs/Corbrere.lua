@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Corbrere
--- Type: Standard NPC
 -- !pos -46.925 -4.5 49.006 94
 -----------------------------------
 local entity = {}

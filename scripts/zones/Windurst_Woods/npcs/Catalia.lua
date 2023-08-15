@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Catalia
--- Type: Standard NPC
 -- !pos -46.160 -0.501 -32.698 241
 -----------------------------------
 local entity = {}

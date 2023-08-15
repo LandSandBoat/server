@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Iruki-Waraki
--- Type: Standard NPC
 --  Involved in quest: No Strings Attached
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------

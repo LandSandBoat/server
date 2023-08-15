@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Aihn Sowlmirih
--- Type: Standard NPC
 -- !pos -61.102 -4.5 71.743 94
 -----------------------------------
 local entity = {}

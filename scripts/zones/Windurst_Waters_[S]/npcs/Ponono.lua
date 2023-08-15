@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Ponono
--- Type: Standard NPC
 -- !pos 156.069 -0.001 -15.667 94
 -----------------------------------
 local entity = {}
