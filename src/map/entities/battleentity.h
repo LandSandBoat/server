@@ -33,7 +33,7 @@
 #include "party.h"
 #include "trait.h"
 
-enum DEATH_TYPE
+enum class DEATH_TYPE : uint8
 {
     NONE        = 0,
     PHYSICAL    = 1,
