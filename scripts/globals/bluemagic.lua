@@ -292,7 +292,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finaldmg = math.floor(finaldmg * xi.magic.applyResistance(caster, target, spell, params))
 
     -- MAB/MDB/weather/day/affinity/burst effect on damage
-    finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
+    finaldmg = math.floor(xi.magic.addBonuses(caster, spell, target, finaldmg))
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
 end
@@ -306,8 +306,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
     end
 
     dmg = dmg * xi.magic.applyResistance(caster, target, spell, params)
-    dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
 
     -- limit damage
     if target:isUndead() then
@@ -466,7 +466,7 @@ end
 
 -- Perform a curative Blue Magic spell
 xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
-    local power = getCurePowerOld(caster)
+    local power = xi.magic.getCurePowerOld(caster)
     local divisor = params.divisor0
     local constant = params.constant0
 
@@ -478,7 +478,7 @@ xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
         constant = params.constant1
     end
 
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
+    local final = xi.magic.getCureFinal(caster, spell, xi.magic.getBaseCureOld(power, divisor, constant), params.minCure, true)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
     final = final * xi.settings.main.CURE_POWER
     final = utils.clamp(final, 0, target:getMaxHP() - target:getHP())

@@ -23,8 +23,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     end
 end
 
-abilityObject.onUseAbility = function(player, avatar, ability)
-    xi.job_utils.summoner.useManaCede(player, avatar, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.summoner.useManaCede(player, ability, action)
 end
 
 return abilityObject
