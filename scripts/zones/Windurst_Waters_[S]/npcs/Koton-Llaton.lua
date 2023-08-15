@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Koton-Llaton
--- Type: Standard NPC
 -- !pos 78.220 -3.75 -173.631 94
 -----------------------------------
 local entity = {}

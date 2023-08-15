@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Churacoco
--- Type: Standard NPC
 -- !pos -76.139 -4.499 20.986 94
 -----------------------------------
 local entity = {}

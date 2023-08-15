@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Upital-Lupital
--- Type: Standard NPC
 -- !pos -57.809 -13.339 122.753 94
 -----------------------------------
 local entity = {}

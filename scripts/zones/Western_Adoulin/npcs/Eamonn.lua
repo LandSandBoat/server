@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Eamonn
--- Type: Standard NPC and Quest NPC
--- Starts and Involved with Quests: 'Scaredy-Cats'
 -- !pos -91 3 2 256
 -----------------------------------
 require("scripts/globals/quests")

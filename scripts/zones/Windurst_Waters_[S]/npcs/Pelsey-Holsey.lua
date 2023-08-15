@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Pelsey-Holsey
--- Type: Standard NPC
 -- !pos 119.755 -4.5 209.754 94
 -----------------------------------
 local entity = {}

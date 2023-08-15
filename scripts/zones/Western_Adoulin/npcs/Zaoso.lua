@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Zaoso
--- Type: Standard NPC and Quest NPC
---  Involved with Quest: 'A Certain Substitute Patrolman'
 -- !pos -94 3 -11 256
 -----------------------------------
 require("scripts/globals/missions")

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Churara
--- Type: Standard NPC
 -- !pos 4.119 -26.5 -6.264 242
 -----------------------------------
 local entity = {}

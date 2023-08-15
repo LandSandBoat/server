@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Oldton Movalpolos
 --  NPC: Tarnotik
--- Type: Standard NPC
 -- !pos 160.896 10.999 -55.659 11
 -----------------------------------
 require("scripts/globals/missions")

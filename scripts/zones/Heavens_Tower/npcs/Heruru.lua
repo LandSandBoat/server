@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Heruru
--- Type: Standard NPC
 -- !pos 2.321 -26.5 4.641 242
 -----------------------------------
 local entity = {}

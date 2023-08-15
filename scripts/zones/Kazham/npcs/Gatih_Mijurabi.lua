@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Gatih Mijurabi
--- Type: Standard NPC
 -- !pos 58.249 -13.086 -49.084 250
 -----------------------------------
 local ID = require("scripts/zones/Kazham/IDs")

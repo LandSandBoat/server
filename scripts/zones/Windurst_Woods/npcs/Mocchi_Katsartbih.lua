@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Mocchi Katsartbih
--- Type: Standard NPC
 -- !pos -13.225 -4.888 -164.108 241
 -----------------------------------
 local entity = {}

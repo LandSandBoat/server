@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Ampiro-Mapiro
--- Type: Standard NPC
 -- !pos 131.380 -6.75 174.169 94
 -----------------------------------
 local entity = {}

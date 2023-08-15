@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Kiwawa
--- Type: Standard NPC
 -- !pos 13.369 -27.25 18.718 242
 -----------------------------------
 local entity = {}

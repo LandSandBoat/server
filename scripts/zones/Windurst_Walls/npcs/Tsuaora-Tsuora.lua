@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Tsuaora-Tsuora
--- Type: Standard NPC
 -- !pos 71.489 -3.418 -67.809 239
 -----------------------------------
 require("scripts/globals/quests")

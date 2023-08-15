@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Nayutata
--- Type: Standard NPC
 -- !pos -2.665 -26.5 -0.268 242
 -----------------------------------
 local entity = {}

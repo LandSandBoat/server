@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Moyoyo
--- Type: Standard NPC
 -- !pos 19.508 -17 26.870 237
 -----------------------------------
 local entity = {}

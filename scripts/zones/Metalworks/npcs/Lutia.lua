@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Lutia
--- Type: Standard NPC
 -- !pos 24.076 -17 -33.060 237
 -----------------------------------
 local entity = {}

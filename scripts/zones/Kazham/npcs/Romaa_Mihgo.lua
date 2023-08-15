@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Romaa Mihgo
--- Type: Standard NPC
 -- !pos 29.000 -13.023 -176.500 250
 -----------------------------------
 require("scripts/globals/missions")

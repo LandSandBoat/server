@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Phanauet Channel
 --  NPC: Riche
--- Type: Standard NPC
 -- !pos 5.945 -3.75 13.612 1
 -----------------------------------
 local entity = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Five of Diamonds
--- Type: Standard NPC
 -- !pos -220.954 -0.001 -122.708 239
 -----------------------------------
 require("scripts/globals/quests")

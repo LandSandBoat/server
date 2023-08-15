@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Dhea Prandoleh
--- Type: Standard NPC
 -- !pos 1 -1 15 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Tsuryarya
--- Type: Standard NPC
 -- !pos -0.881 -27 15.950 242
 -----------------------------------
 local entity = {}
