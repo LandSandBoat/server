@@ -12,17 +12,17 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16643, 11285, 1,    -- Battleaxe
-        16473,  5713, 1,    -- Kukri
-        16640,   290, 3,    -- Bronze Axe
-        16641,  1435, 3,    -- Brass Axe
-        16704,   618, 3,    -- Butterfly Axe
-        16705,  4186, 3,    -- Greataxe
-        16465,   150, 3,    -- Bronze Knife
-        16466,  2231, 3,    -- Knife
-        16448,   143, 3,    -- Bronze Dagger
-        16449,   855, 3,    -- Brass Dagger
-        16450,  1867, 3,    -- Dagger
+        xi.items.BRONZE_AXE,      328, 3,
+        xi.items.BRASS_AXE,      1622, 3,
+        xi.items.BATTLEAXE,     12757, 1,
+        xi.items.BUTTERFLY_AXE,   698, 3,
+        xi.items.GREATAXE,       4732, 3,
+        xi.items.BRONZE_KNIFE,    170, 3,
+        xi.items.KNIFE,          2522, 3,
+        xi.items.KUKRI,          6458, 1,
+        xi.items.BRONZE_DAGGER,   162, 3,
+        xi.items.BRASS_DAGGER,    967, 3,
+        xi.items.DAGGER,         2111, 3,
     }
 
     player:showText(npc, ID.text.PERITRAGE_SHOP_DIALOG)

@@ -14,18 +14,18 @@ entity.onTrigger = function(player, npc)
     {
         xi.items.BRONZE_SUBLIGAR,    216, 3,
         xi.items.SCALE_CUISSES,     1861, 3,
-        xi.items.BRASS_CUISSES,    14131, 2,
-        xi.items.CUISSES,          34776, 2,
+        xi.items.BRASS_CUISSES,    16074, 2,
+        xi.items.CUISSES,          39312, 2,
+        xi.items.MYTHRIL_CUISSES,  66399, 1,
         xi.items.BRONZE_LEGGINGS,    133, 3,
         xi.items.SCALE_GREAVES,     1128, 3,
-        xi.items.BRASS_GREAVES,     8419, 2,
-        xi.items.PLATE_LEGGINGS,   21859, 2,
-        xi.items.GORGET,           16891, 2,
+        xi.items.BRASS_GREAVES,     9518, 2,
+        xi.items.PLATE_LEGGINGS,   24710, 2,
+        xi.items.MYTHRIL_LEGGINGS, 41527, 1,
+        xi.items.GORGET,           19094, 2,
         xi.items.LEATHER_BELT,       442, 3,
         xi.items.SILVER_BELT,      11880, 3,
-        xi.items.MYTHRIL_CUISSES,  58738, 1,
-        xi.items.MYTHRIL_LEGGINGS, 36735, 1,
-        xi.items.SWORDBELT,        20037, 1,
+        xi.items.SWORDBELT,        22651, 1,
     }
 
     player:showText(npc, ID.text.CHARGINGCHOCOBO_SHOP_DIALOG)
