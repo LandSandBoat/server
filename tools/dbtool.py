@@ -180,6 +180,7 @@ settings, default_settings = populate_settings()
 player_data = [
     "accounts.sql",
     "accounts_banned.sql",
+    "auction_house_items.sql",
     "auction_house.sql",
     "char_blacklist.sql",
     "char_chocobos.sql",
