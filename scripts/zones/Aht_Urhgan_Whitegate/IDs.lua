@@ -48,6 +48,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         AUTOMATON_RENAME              = 5843,  -- Your automaton has a new name.
         YOU_CAN_BECOME_PUP            = 5846,  -- You can now become a puppetmaster!
         LC_PROMOTION                  = 6677,  -- <player> has been promoted to Lance Corporal!
+        C_PROMOTION                   = 6763,  -- <player> has been promoted to Corporal!
         BESIEGED_OFFSET               = 6828,  -- Your Imperial Standing has increased!
         PAY_DIVINATION                = 8780,  -- ou pay 1000 gil for the divination.
         MEMBER_OF_SALAHEEMS_SENTINELS = 9258,  -- You are now a member of Salaheem's Sentinels.
