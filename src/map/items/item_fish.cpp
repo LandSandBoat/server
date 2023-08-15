@@ -30,13 +30,13 @@
 
 CItemFish::CItemFish(const CItem& PItem)
 : CItem(PItem)
+, m_min(0)
+, m_max(0)
+, m_watertype(0)
+, m_size(0)
+, m_stamina(0)
+, m_rodflag(0)
 {
-    m_min       = 0;
-    m_max       = 0;
-    m_watertype = 0;
-    m_size      = 0;
-    m_stamina   = 0;
-    m_rodflag   = 0;
 }
 
 CItemFish::~CItemFish() = default;

@@ -107,16 +107,16 @@ namespace effects
         uint16 SortKey;
 
         EffectParams_t()
-        : NegativeId((EFFECT)0)
+        : Flag(0)
+        , Type(0)
+        , NegativeId((EFFECT)0)
         , Overwrite(EFFECTOVERWRITE::EQUAL_HIGHER)
         , BlockId((EFFECT)0)
         , RemoveId((EFFECT)0)
+        , Element(0)
+        , MinDuration(0)
+        , SortKey(0)
         {
-            Flag        = 0;
-            Type        = 0;
-            Element     = 0;
-            MinDuration = 0;
-            SortKey     = 0;
         }
     };
 

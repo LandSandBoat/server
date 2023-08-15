@@ -114,8 +114,8 @@ struct BattlefieldInitiator_t
     uint32      id;
 
     BattlefieldInitiator_t()
+    : id(0)
     {
-        id = 0;
     }
 };
 

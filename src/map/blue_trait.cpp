@@ -23,9 +23,9 @@
 
 CBlueTrait::CBlueTrait(uint8 category, uint8 id)
 : CTrait(id)
+, m_points(0)
+, m_category(category)
 {
-    m_category = category;
-    m_points   = 0;
 }
 
 uint8 CBlueTrait::getCategory() const
