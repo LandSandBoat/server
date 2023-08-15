@@ -50,7 +50,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then
         target:addStatusEffect(typeEffectOne, power, tick, duration * resist)
