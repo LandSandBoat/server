@@ -18,7 +18,7 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
-        target:addMod(i, -power)
+        target:addMod(i, power)
     end
 end
 
@@ -38,7 +38,7 @@ effectObject.onEffectLose = function(target, effect)
     end
 
     for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
-        target:delMod(i, -power)
+        target:delMod(i, power)
     end
 end
 
