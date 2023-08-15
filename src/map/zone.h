@@ -417,7 +417,7 @@ enum class CONTINENT_TYPE : uint8
 
 enum ZONE_TYPE : uint16
 {
-    NONE      = 0x0000,
+    UNKNOWN   = 0x0000,
     CITY      = 0x0001,
     OUTDOORS  = 0x0002,
     DUNGEON   = 0x0004,

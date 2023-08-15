@@ -109,7 +109,7 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
-, m_zoneType(ZONE_TYPE::NONE)
+, m_zoneType(ZONE_TYPE::UNKNOWN)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
