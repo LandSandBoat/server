@@ -16,18 +16,18 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12631, 276,    --Hume Tunic
-        12632, 276,    --Hume Vest
-        12754, 165,    --Hume M Gloves
-        12760, 165,    --Hume F Gloves
-        12883, 239,    --Hume Slacks
-        12884, 239,    --Hume Pants
-        13005, 165,    --Hume M Boots
-        13010, 165,    --Hume F Boots
-        12637, 276,    --Galkan Surcoat
-        12758, 165,    --Galkan Bracers
-        12888, 239,    --Galkan Braguette
-        13009, 165     --Galkan Sandals
+        xi.items.HUME_TUNIC,       312,
+        xi.items.HUME_VEST,        312,
+        xi.items.HUME_M_GLOVES,    187,
+        xi.items.HUME_F_GLOVES,    187,
+        xi.items.HUME_SLACKS,      270,
+        xi.items.HUME_PANTS,       270,
+        xi.items.HUME_M_BOOTS,     187,
+        xi.items.HUME_F_BOOTS,     187,
+        xi.items.GALKAN_SURCOAT,   312,
+        xi.items.GALKAN_BRACERS,   187,
+        xi.items.GALKAN_BRAGUETTE, 270,
+        xi.items.GALKAN_SANDALS,   187,
     }
 
     player:showText(npc, ID.text.PROUDBEARD_SHOP_DIALOG)

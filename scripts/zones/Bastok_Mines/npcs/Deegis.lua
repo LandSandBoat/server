@@ -14,21 +14,21 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12450, 18360, 1,     --Padded Cap
-        12424,  9234, 1,     --Iron Mask
-        12578, 28339, 1,     --Padded Armor
-        12706, 15552, 1,     --Iron Mittens
-        12449,  1471, 2,     --Brass Cap
-        12440,   396, 2,     --Leather Bandana
-        12577,  2236, 2,     --Brass Harness
-        12568,   604, 2,     --Leather Vest
-        12705,  1228, 2,     --Brass Mittens
-        12696,   324, 2,     --Leather Gloves
-        12448,   151, 3,     --Bronze Cap
-        12576,   230, 3,     --Bronze Harness
-        12552, 14256, 3,     --Chainmail
-        12704,   126, 3,     --Bronze Mittens
-        12680,  7614, 3,     --Chain Mittens
+        xi.items.BRONZE_CAP,        174, 3,
+        xi.items.BRASS_CAP,        1700, 2,
+        xi.items.PADDED_CAP,      21216, 1,
+        xi.items.LEATHER_BANDANA,   457, 2,
+        xi.items.IRON_MASK,       10670, 1,
+        xi.items.BRONZE_HARNESS,    266, 3,
+        xi.items.BRASS_HARNESS,    2584, 2,
+        xi.items.PADDED_ARMOR,    32747, 1,
+        xi.items.LEATHER_VEST,      698, 2,
+        xi.items.CHAINMAIL,       16473, 3,
+        xi.items.BRONZE_MITTENS,    145, 3,
+        xi.items.BRASS_MITTENS,    1419, 2,
+        xi.items.IRON_MITTENS,    17971, 1,
+        xi.items.LEATHER_GLOVES,    374, 2,
+        xi.items.CHAIN_MITTENS,    8798, 3,
     }
 
     player:showText(npc, ID.text.DEEGIS_SHOP_DIALOG)
