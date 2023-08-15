@@ -5,7 +5,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.UFASTCAST, 150)
-    effect:setFlag(xi.effectFlag.MAGIC_BEGIN)
+    effect:addEffectFlag(xi.effectFlag.MAGIC_BEGIN)
 end
 
 effectObject.onEffectTick = function(target, effect)

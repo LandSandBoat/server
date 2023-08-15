@@ -8,7 +8,7 @@ require("scripts/globals/magic")
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
+    spell:addEffectFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
     return 0
 end
 

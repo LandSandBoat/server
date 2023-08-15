@@ -31,7 +31,7 @@ entity.onMobFight = function(mob, target)
         not mob:hasStatusEffect(xi.effect.ATTACK_BOOST)
     then
         mob:addStatusEffect(xi.effect.ATTACK_BOOST, 75, 0, 0)
-        mob:getStatusEffect(xi.effect.ATTACK_BOOST):setFlag(xi.effectFlag.DEATH)
+        mob:getStatusEffect(xi.effect.ATTACK_BOOST):addEffectFlag(xi.effectFlag.DEATH)
     end
 
     -- Animation (Ground or flight mode) logic.

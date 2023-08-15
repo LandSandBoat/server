@@ -67,7 +67,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             local power     = effect:getPower()
             local subpower  = effect:getSubPower()
             local tier      = effect:getTier()
-            local effectId  = effect:getType()
+            local effectId  = effect:getEffectType()
             local subId     = effect:getSubType()
 
             power = power * 1.2

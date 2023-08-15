@@ -289,7 +289,7 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         end
     -- Copy an SP Ability if found
     else
-        local newID       = effectStolen:getType()
+        local newID       = effectStolen:getEffectType()
         local newIcon     = effectStolen:getIcon()
         local newPower    = effectStolen:getPower()
         local newTick     = effectStolen:getTick()
