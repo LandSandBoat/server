@@ -37,8 +37,8 @@ struct ModsList_t
     std::vector<CModifier*> mobMods;
 
     ModsList_t()
+    : id(0)
     {
-        id = 0;
     }
 };
 
