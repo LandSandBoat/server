@@ -31,9 +31,9 @@ local startingJobGear =
 {
     [xi.job.WAR] = { 16534 },       -- onion sword
     [xi.job.MNK] = { 13184 },       -- white belt
-    [xi.job.WHM] = { 17068, 4608 }, -- onion rod, scroll of cure
-    [xi.job.BLM] = { 17104, 4607 }, -- onion staff, scroll of stone
-    [xi.job.RDM] = { 16482, 4606 }, -- onion dagger, scroll of dia
+    [xi.job.WHM] = { 17068, xi.items.SCROLL_OF_CURE_EX }, -- onion rod, scroll of cure
+    [xi.job.BLM] = { 17104, xi.items.SCROLL_OF_STONE_EX }, -- onion staff, scroll of stone
+    [xi.job.RDM] = { 16482, xi.items.SCROLL_OF_DIA_EX }, -- onion dagger, scroll of dia
     [xi.job.THF] = { 16483 },       -- onion knife
 }
 
