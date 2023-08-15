@@ -2,6 +2,7 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 
 return {
     ['Ada']             = { event = 44 },
+    ['Eki_Kamalabi']    = { event = 10005 },
     ['Gold_Skull']      = { event = 43 },
     ['Gomada-Vulmada']  = { event = 363 },
     ['Hakkuru-Rinkuru'] = { event = 224 },
