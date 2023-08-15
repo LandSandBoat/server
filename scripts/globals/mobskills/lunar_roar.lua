@@ -19,10 +19,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         -- check mask bit for xi.effectFlag.DISPELABLE
         if
             utils.mask.getBit(effect:getFlag(), 0) and
-            effect:getType() ~= xi.effect.RERAISE and
+            effect:getEffectType() ~= xi.effect.RERAISE and
             num < 10
         then
-            target:delStatusEffect(effect:getType())
+            target:delStatusEffect(effect:getEffectType())
             num = num + 1
         end
     end

@@ -323,7 +323,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
         local validEffects = {}
 
         for _, effect in pairs(effects) do
-            local id = effect:getType()
+            local id = effect:getEffectType()
             if
                 bit.band(effect:getFlag(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
                 additionalRemovableEffects[id] ~= nil
@@ -382,11 +382,11 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         local copyEffect = nil
         while copyi < empathyTotal do
             copyEffect = validEffects[copyi + 1]
-            if wyvern:hasStatusEffect(copyEffect:getType()) then
-                wyvern:delStatusEffectSilent(copyEffect:getType())
+            if wyvern:hasStatusEffect(copyEffect:getEffectType()) then
+                wyvern:delStatusEffectSilent(copyEffect:getEffectType())
             end
 
-            wyvern:addStatusEffect(copyEffect:getType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining()) / 1000)) -- id, power, tick, duration(convert ms to s)
+            wyvern:addStatusEffect(copyEffect:getEffectType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining()) / 1000)) -- id, power, tick, duration(convert ms to s)
             copyi = copyi + 1
         end
     end
@@ -609,7 +609,7 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
         if wyvern:addStatusEffect(xi.effect.STONESKIN, power, 0, 300) then
             local effect = wyvern:getStatusEffect(xi.effect.STONESKIN)
             if effect then
-                effect:unsetFlag(xi.effectFlag.DISPELABLE) -- Observed to not be dispelable
+                effect:delEffectFlag(xi.effectFlag.DISPELABLE) -- Observed to not be dispelable
                 effect:setTier(5) -- Empathy doesn't overwrite this stoneskin wih player casted stoneskin
             end
         end

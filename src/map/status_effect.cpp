@@ -34,7 +34,7 @@ CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, uint32 tick, 
 , m_Power(power)
 , m_SubPower(subPower)
 , m_Tier(tier)
-, m_Flag(flags)
+, m_Flags(flags)
 , m_TickTime(tick * 1000)
 , m_Duration(duration * 1000)
 {
@@ -71,12 +71,12 @@ uint32 CStatusEffect::GetSubID() const
     return m_SubID;
 }
 
-uint16 CStatusEffect::GetType() const
+uint16 CStatusEffect::GetEffectType() const
 {
     return m_Type;
 }
 
-uint8 CStatusEffect::GetSlot() const
+uint8 CStatusEffect::GetEffectSlot() const
 {
     return m_Slot;
 }
@@ -101,9 +101,9 @@ uint16 CStatusEffect::GetTier() const
     return m_Tier;
 }
 
-uint32 CStatusEffect::GetFlag() const
+uint32 CStatusEffect::GetEffectFlags() const
 {
-    return m_Flag;
+    return m_Flags;
 }
 
 uint32 CStatusEffect::GetTickTime() const
@@ -126,14 +126,28 @@ time_point CStatusEffect::GetStartTime()
     return m_StartTime;
 }
 
-void CStatusEffect::SetFlag(uint32 Flag)
+void CStatusEffect::SetEffectFlags(uint32 Flags)
 {
-    m_Flag |= Flag;
+    m_Flags = Flags;
 }
 
-void CStatusEffect::UnsetFlag(uint32 flag)
+void CStatusEffect::AddEffectFlag(uint32 Flag)
 {
-    m_Flag &= ~flag;
+    m_Flags |= Flag;
+}
+
+void CStatusEffect::DelEffectFlag(uint32 flag)
+{
+    m_Flags &= ~flag;
+}
+
+bool CStatusEffect::HasEffectFlag(uint32 Flag)
+{
+    if (m_Flags & Flag)
+    {
+        return true;
+    }
+    return false;
 }
 
 void CStatusEffect::SetIcon(uint16 Icon)
@@ -148,12 +162,12 @@ void CStatusEffect::SetIcon(uint16 Icon)
     m_POwner->StatusEffectContainer->UpdateStatusIcons();
 }
 
-void CStatusEffect::SetType(uint16 Type)
+void CStatusEffect::SetEffectType(uint16 Type)
 {
     m_Type = Type;
 }
 
-void CStatusEffect::SetSlot(uint8 Slot)
+void CStatusEffect::SetEffectSlot(uint8 Slot)
 {
     m_Slot = Slot;
 }
@@ -194,7 +208,7 @@ void CStatusEffect::IncrementElapsedTickCount()
     ++m_tickCount;
 }
 
-void CStatusEffect::SetName(std::string name)
+void CStatusEffect::SetEffectName(std::string name)
 {
     m_Name = std::move(name);
 }

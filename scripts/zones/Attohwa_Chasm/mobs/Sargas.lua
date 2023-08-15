@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
-    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setFlag(xi.effectFlag.DEATH)
+    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
