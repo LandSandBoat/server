@@ -15,13 +15,13 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4442, 360, 1, -- Pineapple Juice
-        4391,  21, 2, -- Bretzel
-        4490, 432, 2, -- Pickled Herring
-        4424, 990, 2, -- Melon Juice
-        4499,  90, 3, -- Iron Bread
-        4376, 108, 3, -- Meat Jerky
-        4509,  10, 3, -- Distilled Water
+        xi.items.LOAF_OF_IRON_BREAD,         104, 3,
+        xi.items.BRETZEL,                     24, 2,
+        xi.items.STRIP_OF_MEAT_JERKY,        124, 3,
+        xi.items.PICKLED_HERRING,            499, 2,
+        xi.items.FLASK_OF_DISTILLED_WATER,    12, 3,
+        xi.items.BOTTLE_OF_PINEAPPLE_JUICE,  416, 1,
+        xi.items.BOTTLE_OF_MELON_JUICE,     1144, 2,
     }
 
     player:showText(npc, ID.text.GRISELDA_SHOP_DIALOG)
