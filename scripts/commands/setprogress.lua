@@ -12,7 +12,7 @@ cmdprops =
 function onTrigger(player, progress)
     local zone = player:getZone()
 
-    if zone:getType() == xi.zoneType.INSTANCED then
+    if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local startProgress = instance:getProgress()
 
