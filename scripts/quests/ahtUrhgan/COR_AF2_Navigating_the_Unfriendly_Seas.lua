@@ -53,7 +53,10 @@ quest.sections =
             ['Leleroon'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.HYDROGAUGE) then
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.HYDROGAUGE) and
+                        quest:getVar(player, 'Prog') == 0
+                    then
                         return quest:progressEvent(283)
                     end
                 end,
@@ -84,7 +87,7 @@ quest.sections =
                     then
                         player:confirmTrade()
                         quest:setVar(player, 'Prog', 2)
-                        quest:setVar(player, 'leypointTimer', os.time() + 60) -- For era time is JP Midnight (TODO: Replace in module)
+                        quest:setVar(player, 'leypointTimer', os.time() + 60) -- For era, time is JP Midnight Currently in module modules/era/lua/era_quest_timers.lua
                         return quest:messageSpecial(wajaomID.text.PLACE_HYDROGAUGE, xi.items.HYDROGAUGE)
                     end
                 end,
