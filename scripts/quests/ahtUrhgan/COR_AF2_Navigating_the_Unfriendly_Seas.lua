@@ -87,7 +87,7 @@ quest.sections =
                     then
                         player:confirmTrade()
                         quest:setVar(player, 'Prog', 2)
-                        quest:setVar(player, 'leypointTimer', os.time() + 60) -- For era, time is JP Midnight Currently in module modules/era/lua/era_quest_timers.lua
+                        quest:setVar(player, 'leypointTimer', getMidnight())
                         return quest:messageSpecial(wajaomID.text.PLACE_HYDROGAUGE, xi.items.HYDROGAUGE)
                     end
                 end,
