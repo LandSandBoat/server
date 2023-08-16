@@ -100,8 +100,8 @@ quest.sections =
                         if quest:complete(player) then
                             -- This options immediately start next quest. (All except 0 and 15).
                             if
-                                not option == 0 or
-                                not option == 15
+                                option ~= 0 and
+                                option ~= 15
                             then
                                 player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end

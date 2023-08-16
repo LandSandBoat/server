@@ -364,7 +364,7 @@ end
 function npcUtil.giveCurrency(player, currency, amount)
     local ID = zones[player:getZoneID()]
 
-    if (not type(currency) == "string") or (not type(amount) == "number") then
+    if type(currency) ~= "string" or type(amount) ~= "number" then
         print(string.format("ERROR: invalid parameter given to npcUtil.giveCurrency in zone %s.", player:getZoneName()))
         return false
     end
