@@ -18,10 +18,10 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            1108, 703,    -- Sulfur
-            619,   43,    -- Popoto
-            611,   36,    -- Rye Flour
-            4388,  40,    -- Eggplant
+            xi.items.PINCH_OF_SULFUR,  795,
+            xi.items.POPOTO,            49,
+            xi.items.BAG_OF_RYE_FLOUR,  41,
+            xi.items.EGGPLANT,          45,
         }
 
         player:showText(npc, ID.text.EVELYN_OPEN_DIALOG)

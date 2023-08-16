@@ -14,22 +14,22 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12457, 5079, 1,    -- Cotton Hachimaki
-        12585, 7654, 1,    -- Cotton Dogi
-        12713, 4212, 1,    -- Cotton Tekko
-        12841, 6133, 1,    -- Cotton Sitabaki
-        12969, 3924, 1,    -- Cotton Kyahan
-        13205, 3825, 1,    -- Silver Obi
-        12456,  759, 2,    -- Hachimaki
-        12584, 1145, 2,    -- Kenpogi
-        12712,  630, 2,    -- Tekko
-        12840,  915, 2,    -- Sitabaki
-        12968,  584, 2,    -- Kyahan
-        704,    132, 2,    -- Bamboo Stick
-        605,    180, 3,    -- Pickaxe
-        5867, 13500, 3,    -- Toolbag (Ino)
-        5868, 18000, 3,    -- Toolbag (Shika)
-        5869, 18000, 3,    -- Toolbag (Cho)
+        xi.items.HACHIMAKI,                 858, 2,
+        xi.items.COTTON_HACHIMAKI,         5079, 1,
+        xi.items.KENPOGI,                  1294, 2,
+        xi.items.COTTON_DOGI,              7654, 1,
+        xi.items.TEKKO,                     712, 2,
+        xi.items.COTTON_TEKKO,             4212, 1,
+        xi.items.SITABAKI,                 1034, 2,
+        xi.items.COTTON_SITABAKI,          6133, 1,
+        xi.items.KYAHAN,                    660, 2,
+        xi.items.COTTON_KYAHAN,            3924, 1,
+        xi.items.SILVER_OBI,               3825, 1,
+        xi.items.BAMBOO_STICK,              149, 2,
+        xi.items.TOOLBAG_INOSHISHINOFUDA, 15600, 3,
+        xi.items.TOOLBAG_SHIKANOFUDA,     20800, 3,
+        xi.items.TOOLBAG_CHONOFUDA,       20800, 3,
+        xi.items.PICKAXE,                   208, 3,
     }
 
     player:showText(npc, ID.text.NUMA_SHOP_DIALOG)
