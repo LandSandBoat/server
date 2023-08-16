@@ -47,7 +47,7 @@ end
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if
         player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS and
-        not player:getLocalVar('toLufaise') == 1
+        player:getLocalVar('toLufaise') ~= 1
     then
         player:addExp(1500)
         xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
