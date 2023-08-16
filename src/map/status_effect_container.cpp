@@ -1553,7 +1553,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     }
 
     StatusEffect->SetEffectName(name);
-    StatusEffect->HasEffectFlag(effects::EffectsParams[effect].Flag);
+    StatusEffect->AddEffectFlag(effects::EffectsParams[effect].Flag);
     StatusEffect->SetEffectType(effects::EffectsParams[effect].Type);
 }
 
