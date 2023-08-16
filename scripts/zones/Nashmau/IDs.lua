@@ -38,6 +38,7 @@ zones[xi.zone.NASHMAU] =
         SANCTION                      = 10781, -- You have received the Empire's Sanction.
         NENE_DELIVERY_DIALOG          = 10841, -- Yooo want to send gooods? Yooo want to send clink clink?
         NANA_DELIVERY_DIALOG          = 10842, -- Yooo send gooods. Yooo send clink clink.
+        TOTOROON_SERGEANT_HINT        = 11302, -- Totoroon tell yooo about smell. Totoroon smell smell in Tatooova Mire!≺Prompt≻
         YOYOROON_SHOP_DIALOG          = 11793, -- Boooss, boooss! Yoyoroon bring yooo goood custooomer! Yoyoroon goood wooorker, nooo?
         PIPIROON_SHOP_DIALOG          = 11794, -- Yes? I'm a busy man. Make it quick.
         RETRIEVE_DIALOG_ID            = 11894, -- You retrieve <item> from the porter moogle's care.
