@@ -117,12 +117,6 @@ namespace
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
 
-/************************************************************************
- *                                                                       *
- *  mapsession_getbyipp                                                  *
- *                                                                       *
- ************************************************************************/
-
 map_session_data_t* mapsession_getbyipp(uint64 ipp)
 {
     TracyZoneScoped;
@@ -138,11 +132,19 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  mapsession_createsession                                             *
- *                                                                       *
- ************************************************************************/
+map_session_data_t* mapsession_getbychar(CCharEntity* PChar)
+{
+    TracyZoneScoped;
+    for (const auto sessionPair : map_session_list)
+    {
+        map_session_data_t* session = sessionPair.second;
+        if (PChar && session->PChar->id == PChar->id)
+        {
+            return session;
+        }
+    }
+    return nullptr;
+}
 
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
@@ -568,6 +570,11 @@ int32 do_sockets(fd_set* rfd, duration next)
                 }
             }
 
+            if (map_session_data->ignoreTraffic)
+            {
+                return -1;
+            }
+
             map_session_data->last_update = time(nullptr);
             size_t size                   = ret;
 
@@ -785,7 +792,13 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
                             PChar->getName(), SmallPD_Type);
-                // TODO: Plug in optional jailutils usage
+
+                if (settings::get<bool>("map.PACKETGUARD_DROP_CONNECTION"))
+                {
+                    ShowWarning("[PacketGuard] Removing %s's session from the server", PChar->getName());
+                    charutils::ForceDropConnection(PChar);
+                }
+
                 continue; // skip this packet
             }
 
