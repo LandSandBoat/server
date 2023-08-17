@@ -22,6 +22,7 @@ local testTubes =
 quest.reward =
 {
     keyItem = xi.ki.LC_WILDCAT_BADGE,
+    title   = xi.title.LANCE_CORPORAL,
 }
 
 quest.sections =
