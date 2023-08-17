@@ -122,6 +122,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
     },
     npc =
     {
+
         HALLOWEEN_SKINS =
         {
             [17719303] = 47, -- Machielle

@@ -282,6 +282,45 @@ function npcUtil.giveItem(player, items, params)
 end
 
 --[[
+    For handling of 1/1 charged items provided in a "just used" state. Most 1/1 charged items are Rare,
+    though some exceptions do exist. Pass notRare as true for those exceptions.
+    e.g. npc_utils.giveUsedItem(player, 22132, true) will grant the player an Ex Artemis Bow +1.
+--]]
+function npcUtil.giveUsedItem(player, item, notRare)
+    local ID = zones[player:getZoneID()]
+
+    if notRare == nil or type(notRare) ~= "boolean" then
+        notRare = false
+    end
+
+    -- does player have enough inventory space?
+    if player:getFreeSlotsCount() < 1 then
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
+
+        return false
+    end
+
+    -- attempt to give the used item to player
+    if notRare then
+        player:addUsedItem(item)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+
+        return true
+    else -- handle Rare Items
+        if not player:hasItem(item) then
+            player:addUsedItem(item)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+
+            return true
+        else -- player already has this Rare item
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
+
+            return false
+        end
+    end
+end
+
+--[[
     Give temp item(s) to player.
     If player has inventory space, give items, display message, and return true.
     If not, do not give items, display a message to indicate this, and return false.

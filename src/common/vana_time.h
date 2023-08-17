@@ -84,6 +84,8 @@ public:
     uint32 getSysHour();
     uint32 getSysMinute();
     uint32 getSysSecond();
+    uint8  getSysMonth();
+    uint8  getSysDay();
     uint32 getSysWeekDay(); // Number of day since sunday
     uint32 getSysYearDay(); // Number of day since 1st january
     uint32 getJstHour();

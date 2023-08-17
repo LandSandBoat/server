@@ -3921,6 +3921,26 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
 }
 
 /************************************************************************
+ *  Function: isChargedItem()
+ *  Purpose : Checks if reference itemID is a charged item
+ *  Example : player:isChargedItem(itemID)
+ *  Notes   : Returns True if item is a Charged Item
+ ************************************************************************/
+
+bool CLuaBaseEntity::isChargedItem(uint16 itemID)
+{
+    CItem* PItem  = itemutils::GetItem(itemID);
+    uint8  SlotID = ERROR_SLOTID;
+
+    if (PItem != nullptr)
+    {
+        return (PItem->isSubType(ITEM_CHARGED));
+    }
+
+    return SlotID != ERROR_SLOTID;
+}
+
+/************************************************************************
  *  Function: getWornUses()
  *  Purpose : Gets the worn state on an item
  *  Example : if player:getWornUses(trade:getItemId()) > 0 then
@@ -16889,6 +16909,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
     SOL_REGISTER("addUsedItem", CLuaBaseEntity::addUsedItem);
+    SOL_REGISTER("isChargedItem", CLuaBaseEntity::isChargedItem);
     SOL_REGISTER("addTempItem", CLuaBaseEntity::addTempItem);
     SOL_REGISTER("getWornUses", CLuaBaseEntity::getWornUses);
     SOL_REGISTER("incrementItemWear", CLuaBaseEntity::incrementItemWear);

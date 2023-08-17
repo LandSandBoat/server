@@ -71,6 +71,7 @@ zones[xi.zone.WINDURST_WATERS] =
 
     npc =
     {
+
         HALLOWEEN_SKINS =
         {
             [17752097] = 61, -- Ensasa

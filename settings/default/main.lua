@@ -238,6 +238,27 @@ xi.settings.main =
             -- WORD = 12345,
         },
     },
+    VANAVERSARY_CAMPAIGN            = 0,  -- Set to 1 to enable the Vana'versary Campaign.
+    VANAVERSARY_ANNOUNCE            = 0,  -- Set to 1 to add announcement to player login.
+
+    -- VANAVERSARY (see: scripts/globals/events/vanaversary)
+    VANAVERSARY_ENABLED             = true,  -- if true enables the Vanaversary Celebration Event
+    VANAVERSARY_ALWAYS              = false, -- when Vanaversary is enabled, and this is set to true, will ignore Start/End Dates.
+    VANAVERSARY_START_MONTH         = 5,     -- Month to start (e.g. May = 5)
+    VANAVERSARY_START_DAY           = 16,    -- Day of Month to start (e.g. 16)
+    VANAVERSARY_END_MONTH           = 5,     -- Month to end (e.g. May = 5)
+    VANAVERSARY_END_DAY             = 31,    -- Day of Month to end (e.g. 31)
+    VANAVERSARY_ANNOUNCE            = true,  -- true/false to enable/disable announcement to player on login. (see: src/map/packet_system.cpp)
+
+    VANAVERSARY_MESSAGE_TIMED =
+        "\n \n" .. -- The space between these newlines is intentional
+        "\129\161Vana'versary Celebration Campaign [Until May 31 at 23:59 server time] " ..
+        "Speak to a Moogle in Southern San d'Oria, Bastok Markets, or Windurst Waters for details!",
+
+    VANAVERSARY_MESSAGE_ALWAYS =
+        "\n \n" .. -- The space between these newlines is intentional
+        "\129\161The Vana'versary Celebration Campaign is active! " ..
+        "Speak to a Moogle in Southern San d'Oria, Bastok Markets, or Windurst Waters for details!",
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.

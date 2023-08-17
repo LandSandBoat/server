@@ -2,6 +2,7 @@
 -- ID: 10812
 -- Item: Chocobo Shield +1
 -- Dispense: Sakura Biscuit
+-- Dispenses between 1 and 11 Biscuits
 -----------------------------------
 local itemObject = {}
 
@@ -14,7 +15,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.SAKURA_BISCUIT, 1)
+    local qty = math.random(1, 11)
+
+    npcUtil.giveItem(target, { { xi.items.SAKURA_BISCUIT, qty } })
 end
 
 return itemObject

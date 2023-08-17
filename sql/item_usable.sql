@@ -1956,9 +1956,10 @@ INSERT INTO `item_usable` VALUES (6571,'scroll_of_phalanx_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6576,'turkey_with_rolanberry_sauce',1,1,28,0,0,0,0,0); -- TODO: verify animation from retail
 INSERT INTO `item_usable` VALUES (6601,'omelette_sandwich',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6602,'omelette_sandwich_+1',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6683,'porcelain_mine',1,1,124,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (10250,'moogle_suit',1,8,0,0,1,30,86400,0);
-INSERT INTO `item_usable` VALUES (10253,'decennial_coat_+1',1,8,0,0,1,30,86400,0);
-INSERT INTO `item_usable` VALUES (10254,'decennial_dress_+1',1,8,0,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10253,'decennial_coat_+1',1,3,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10254,'decennial_dress_+1',1,3,55,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10264,'marine_gilet_+1',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10265,'marine_top_+1',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10266,'woodsy_gilet_+1',1,8,0,0,1,30,86400,0);
@@ -1969,8 +1970,13 @@ INSERT INTO `item_usable` VALUES (10270,'river_top_+1',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10271,'dune_gilet_+1',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10293,'chocobo_shirt',1,8,0,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (10383,'dream_mittens_+1',1,6,24,0,1,30,7200,0);
+INSERT INTO `item_usable` VALUES (10432,'decennial_crown_+1',1,3,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10433,'decennial_tiara_+1',1,3,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10595,'decennial_tights_+1',1,3,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10596,'decennial_hose_+1',1,3,55,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10796,'decennial_ring',1,3,76,0,10,15,3600,0);
-INSERT INTO `item_usable` VALUES (10812,'chocobo_shield_+1',1,8,0,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10810,'moogle_guard_+1',1,3,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10812,'chocobo_shield_+1',1,3,55,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10875,'snowman_cap',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (11002,'dragon_tank',1,1,55,0,5,30,60,0);
 INSERT INTO `item_usable` VALUES (11273,'custom_gilet_+1',1,8,0,0,1,30,72000,0);
@@ -2146,7 +2152,7 @@ INSERT INTO `item_usable` VALUES (15754,'sprinters_shoes',1,5,24,0,15,15,300,0);
 INSERT INTO `item_usable` VALUES (15761,'chariot_band',1,3,76,0,7,5,900,0);
 INSERT INTO `item_usable` VALUES (15762,'empress_band',1,3,76,0,7,5,900,0);
 INSERT INTO `item_usable` VALUES (15763,'emperor_band',1,3,76,0,3,5,900,0);
-INSERT INTO `item_usable` VALUES (15769,'olduum_ring',1,3,0,0,1,30,72000,0);
+INSERT INTO `item_usable` VALUES (15769,'olduum_ring',1,3,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (15770,'random_ring',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (15782,'manashell_ring',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (15783,'armored_ring',1,3,0,0,50,30,1800,0);
@@ -2335,6 +2341,7 @@ INSERT INTO `item_usable` VALUES (21268,'death_penalty',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21269,'armageddon',1,1,55,0,1,10,3600,0);
 -- INSERT INTO `item_usable` VALUES (22018,'seika_uchiwa_+1',1,1,55,0,1,30,300,0);  -- Enchantment: Cool Breeze
 -- INSERT INTO `item_usable` VALUES (22020,'jingly_rod_+1',1,1,55,0,1,30,3600,0);   -- Costume: lamb or Chacharoon
+INSERT INTO `item_usable` VALUES (22069,'hapy_staff',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22115,'yoichinoyumi',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22116,'gandiva',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22117,'fail-not',1,1,55,0,1,10,3600,0);
@@ -2356,10 +2363,13 @@ INSERT INTO `item_usable` VALUES (25679,'white_rarab_cap_+1',1,8,33,0,1,30,72000
 INSERT INTO `item_usable` VALUES (25774,'fancy_gilet',1,2,55,0,1,30,86400,0); -- Dispense: persikos snow cone
 INSERT INTO `item_usable` VALUES (25775,'fancy_top',1,2,55,0,1,30,86400,0); -- Dispense: persikos snow cone
 INSERT INTO `item_usable` VALUES (26165,'facility_ring',1,3,76,0,3,5,900,0);
+INSERT INTO `item_usable` VALUES (26546,'moogle_shirt',1,3,55,0,1,30,604800,0);
 INSERT INTO `item_usable` VALUES (26720,'sheep_cap_+1',1,2,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (26799,'behemoth_masque_+1',1,3,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (26955,'behemoth_suit_+1',1,2,55,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (27556,'echad_ring',1,3,76,0,1,5,7200,0);
 INSERT INTO `item_usable` VALUES (27557,'trizek_ring',1,3,76,0,1,5,7200,0);
+INSERT INTO `item_usable` VALUES (27623,'jody_shield',1,3,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (28469,'endorsement_ring',1,3,76,0,1,5,7200,0);
 INSERT INTO `item_usable` VALUES (28528,'undecennial_ring',1,3,76,0,11,15,3600,0);
 INSERT INTO `item_usable` VALUES (28540,'warp_ring',1,8,80,3,1,8,600,0);

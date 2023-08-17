@@ -2,6 +2,7 @@
 -- ID: 10254
 -- Decennial Dress +1
 -- Dispense: Bowl of Moogurt
+-- Dispenses between 1 and 3 Moogurts
 -----------------------------------
 local itemObject = {}
 
@@ -15,7 +16,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.BOWL_OF_MOOGURT, 1)
+    local qty = math.random(1, 3)
+
+    npcUtil.giveItem(target, { { xi.items.BOWL_OF_MOOGURT, qty } })
 end
 
 return itemObject

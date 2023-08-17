@@ -114,6 +114,26 @@ uint32 CVanaTime::getSysSecond()
     return ltm.tm_sec;
 }
 
+uint8 CVanaTime::getSysMonth()
+{
+    time_t now = time(nullptr);
+    tm     ltm;
+
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_mon + 1; // tm_mon returns 0-11
+}
+
+uint8 CVanaTime::getSysDay()
+{
+    time_t now = time(nullptr);
+    tm     ltm;
+
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_mday;
+}
+
 uint32 CVanaTime::getSysWeekDay()
 {
     time_t now = time(nullptr);

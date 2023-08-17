@@ -28,9 +28,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 #include "common/version.h"
 
 #include <cstring>
+#include <string>
 #include <utility>
 
 #include "ai/ai_container.h"

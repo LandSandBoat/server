@@ -77,7 +77,9 @@ local ids =
     ESCHA_ZITAH           = 64,
     QUFIM_CONFLUENCE      = 65,
     ESCHA_RUAUN           = 66,
-    MISAREAUX_CONFLUENCE  = 67
+    MISAREAUX_CONFLUENCE  = 67,
+    BEHEMOTHS_DOMINION    = 68,
+    WAJAOM_JODY           = 69
 }
 xi.teleport.id = ids
 
@@ -147,7 +149,9 @@ xi.teleport.destination =
     [ids.ESCHA_ZITAH]           = {     -338,        6,     -225, 172, 288 },
     [ids.QUFIM_CONFLUENCE]      = {     -203,      -20,       81,  76, 126 },
     [ids.ESCHA_RUAUN]           = {   -0.371,  -34.279, -466.980, 192, 289 },
-    [ids.MISAREAUX_CONFLUENCE]  = {  -57.385,  -21.460,  568.941, 160,  25 }
+    [ids.MISAREAUX_CONFLUENCE]  = {  -57.385,  -21.460,  568.941, 160,  25 },
+    [ids.BEHEMOTHS_DOMINION]    = { -243.359,      -20,   43.414, 192, 127 },
+    [ids.WAJAOM_JODY]           = { -547.000,   -7.688, -360.000, 128,  51 }
 }
 
 xi.teleport.type =
