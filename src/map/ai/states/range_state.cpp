@@ -102,7 +102,7 @@ bool CRangeState::CanChangeState()
 
 bool CRangeState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 

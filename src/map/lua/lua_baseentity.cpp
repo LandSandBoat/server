@@ -344,31 +344,44 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? MESSAGE_AREA_SYSTEM : arg2.as<CHAT_MESSAGE_AREA>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
-    if (messageRange == 0) // All zones world wide
+    if (messageRange == MESSAGE_AREA_SYSTEM)
     {
         message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 1) // Say range
+    else if (messageRange == MESSAGE_AREA_SAY)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 2) // Shout
+    else if (messageRange == MESSAGE_AREA_SHOUT)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 3) // Party and Alliance
+    else if (messageRange == MESSAGE_AREA_PARTY)
     {
         message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 4) // Yell zones only
+    else if (messageRange == MESSAGE_AREA_YELL)
     {
         message::send(MSG_CHAT_YELL, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else if (messageRange == MESSAGE_AREA_UNITY)
+    {
+        message::send(MSG_CHAT_UNITY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::PrintToArea : invalid message area/messageRange value %u given by script.", messageRange);
     }
     /*
-    Todo: Unity, LS 1 and LS 2 for the lols?
+    Todo: Assist channels
     */
 }
 
@@ -4782,7 +4795,7 @@ std::string CLuaBaseEntity::getPacketName()
  *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::renameEntity(std::string const& newName)
+void CLuaBaseEntity::renameEntity(std::string const& newName, sol::object const& arg2)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -4795,7 +4808,11 @@ void CLuaBaseEntity::renameEntity(std::string const& newName)
     m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
     m_PBaseEntity->isRenamed = true;
 
-    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    bool silent = arg2.get_type() == sol::type::boolean ? arg2.as<bool>() : false;
+    if (!silent)
+    {
+        ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    }
 }
 
 /************************************************************************
