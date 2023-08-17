@@ -6620,7 +6620,23 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    CItemFurnishing* PItem = (CItemFurnishing*)PChar->getStorage(containerID)->GetItem(slotID);
+    CItemContainer* PItemContainer = PChar->getStorage(containerID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PBaseItem = PItemContainer->GetItem(slotID);
+    if (PBaseItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFurnishing* PItem = dynamic_cast<CItemFurnishing*>(PBaseItem);
+    if (PItem == nullptr)
+    {
+        return;
+    }
 
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
     if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
@@ -6630,7 +6646,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
+    if (PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
     {
         if (PItem->getFlag() & ITEM_FLAG_WALLHANGING)
         {
@@ -6661,8 +6677,8 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
                 CItem* PContainerItem = PContainer->GetItem(slotIndex);
                 if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
                 {
-                    CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PContainerItem);
-                    if (PFurniture->isInstalled())
+                    CItemFurnishing* PFurniture = dynamic_cast<CItemFurnishing*>(PContainerItem);
+                    if (PFurniture && PFurniture->isInstalled())
                     {
                         placedItems[PFurniture->getOrder()] = PFurniture;
                     }
@@ -6737,8 +6753,23 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    CItemContainer*  PItemContainer = PChar->getStorage(containerID);
-    CItemFurnishing* PItem          = (CItemFurnishing*)PItemContainer->GetItem(slotID);
+    CItemContainer* PItemContainer = PChar->getStorage(containerID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PBaseItem = PItemContainer->GetItem(slotID);
+    if (PBaseItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFurnishing* PItem = dynamic_cast<CItemFurnishing*>(PBaseItem);
+    if (PItem == nullptr)
+    {
+        return;
+    }
 
     if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
     {
@@ -6842,7 +6873,18 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItemContainer* PPotItemContainer = PChar->getStorage(potContainerID);
-    CItemFlowerpot* PPotItem          = (CItemFlowerpot*)PPotItemContainer->GetItem(potSlotID);
+    if (PPotItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PBasePotItem = PPotItemContainer->GetItem(potSlotID);
+    if (PBasePotItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFlowerpot* PPotItem = dynamic_cast<CItemFlowerpot*>(PBasePotItem);
     if (PPotItem == nullptr)
     {
         return;
@@ -6856,7 +6898,12 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
-    CItem*          PItem          = PItemContainer->GetItem(slotID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PItem = PItemContainer->GetItem(slotID);
     if (PItem == nullptr || PItem->getQuantity() < 1)
     {
         return;
@@ -6924,7 +6971,18 @@ void SmallPacket0x0FD(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
-    CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PBaseItem = PItemContainer->GetItem(slotID);
+    if (PBaseItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFlowerpot* PItem = dynamic_cast<CItemFlowerpot*>(PBaseItem);
     if (PItem == nullptr)
     {
         return;
@@ -6997,7 +7055,18 @@ void SmallPacket0x0FE(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
-    CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
+
+    CItem* PBaseItem = PItemContainer->GetItem(slotID);
+    if (PBaseItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFlowerpot* PItem = dynamic_cast<CItemFlowerpot*>(PBaseItem);
     if (PItem == nullptr)
     {
         return;
@@ -7078,9 +7147,24 @@ void SmallPacket0x0FF(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
-    CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
+    if (PItemContainer == nullptr)
+    {
+        return;
+    }
 
-    if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
+    CItem* PBaseItem = PItemContainer->GetItem(slotID);
+    if (PBaseItem == nullptr)
+    {
+        return;
+    }
+
+    CItemFlowerpot* PItem = dynamic_cast<CItemFlowerpot*>(PBaseItem);
+    if (PItem == nullptr)
+    {
+        return;
+    }
+
+    if (PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
         PChar->pushPacket(new CMessageStandardPacket(itemID, 133)); // Your moogle dries the plant in the <item>.
         PChar->pushPacket(new CFurnitureInteractPacket(PItem, containerID, slotID));

@@ -95,7 +95,7 @@ namespace gardenutils
                 CItem* PItem = PContainer->GetItem(slotID);
                 if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
                 {
-                    CItemFlowerpot* PPotItem = static_cast<CItemFlowerpot*>(PItem);
+                    CItemFlowerpot* PPotItem = dynamic_cast<CItemFlowerpot*>(PItem);
                     if (PPotItem != nullptr && PPotItem->canGrow() && vanatime >= PPotItem->getStageTimestamp())
                     {
                         uint8  stageDuration        = GetStageDuration(PPotItem);
