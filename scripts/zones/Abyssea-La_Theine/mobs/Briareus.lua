@@ -2,7 +2,6 @@
 -- Area: Abyssea - La Theine
 --  Mob: Briareus
 -----------------------------------
------------------------------------
 mixins = { require("scripts/mixins/rage") }
 -----------------------------------
 local entity = {}

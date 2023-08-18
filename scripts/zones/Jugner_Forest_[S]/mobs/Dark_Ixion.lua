@@ -2,7 +2,6 @@
 -- Area: Jugner_Forest_[S]
 --  Mob: Dark Ixion
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

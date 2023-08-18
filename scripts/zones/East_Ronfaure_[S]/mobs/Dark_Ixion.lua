@@ -2,7 +2,6 @@
 -- Area: East Ronfaure [S]
 --  Mob: Dark Ixion
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

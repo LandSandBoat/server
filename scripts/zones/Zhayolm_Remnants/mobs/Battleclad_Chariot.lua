@@ -2,7 +2,6 @@
 -- Area: Zhayolm Remnants
 --   NM: Battleclad Chariot
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

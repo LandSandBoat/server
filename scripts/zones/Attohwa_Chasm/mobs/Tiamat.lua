@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
------------------------------------
 local entity = {}
 
 local function setupFlightMode(mob, battleTime, mobHP)

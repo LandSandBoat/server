@@ -2,7 +2,6 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
------------------------------------
 local entity = {}
 
 local function setupFlightMode(mob, battleTime)

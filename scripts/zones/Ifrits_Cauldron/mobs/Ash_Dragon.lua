@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Ash Dragon
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

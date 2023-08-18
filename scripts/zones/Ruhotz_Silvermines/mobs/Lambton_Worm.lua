@@ -2,7 +2,6 @@
 -- Area: Ruhotz Silvermines
 --  Mob: Lambton Worm
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

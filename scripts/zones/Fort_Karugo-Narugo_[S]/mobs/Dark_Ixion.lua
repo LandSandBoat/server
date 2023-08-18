@@ -2,7 +2,6 @@
 -- Area: Fort Karugo-Narugo [S]
 --  Mob: Dark Ixion
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

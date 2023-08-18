@@ -2,7 +2,6 @@
 -- Area: Batallia_Downs_[S]
 --  Mob: Dark Ixion
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

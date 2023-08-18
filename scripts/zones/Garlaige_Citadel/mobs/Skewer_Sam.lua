@@ -2,7 +2,6 @@
 -- Area: Garlaige Citadel (200)
 --   NM: Skewer Sam
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

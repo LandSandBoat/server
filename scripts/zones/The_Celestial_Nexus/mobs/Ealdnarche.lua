@@ -3,7 +3,6 @@
 --  Mob: Eald'narche (Phase 1)
 -- Zilart Mission 16 BCNM Fight
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

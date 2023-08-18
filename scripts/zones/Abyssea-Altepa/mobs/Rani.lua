@@ -2,7 +2,6 @@
 -- Area: Abyssea - Altepa
 --   NM: Rani
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

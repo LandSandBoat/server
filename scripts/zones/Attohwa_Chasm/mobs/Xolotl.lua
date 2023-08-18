@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Xolotl
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

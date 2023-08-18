@@ -2,7 +2,6 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

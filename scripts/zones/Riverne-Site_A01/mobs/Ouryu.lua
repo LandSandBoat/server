@@ -3,7 +3,6 @@
 -- Riverne Site A, Cloud Evokers
 -- !pos 184 0 344 30
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob, player, optParams)

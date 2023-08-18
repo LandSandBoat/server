@@ -3,7 +3,6 @@
 --  Mob: Dark Dragon
 -- Mission 2-3 BCNM Fight
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

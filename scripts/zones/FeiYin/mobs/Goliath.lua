@@ -2,7 +2,6 @@
 -- Area: Fei'Yin
 --   NM: Goliath
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

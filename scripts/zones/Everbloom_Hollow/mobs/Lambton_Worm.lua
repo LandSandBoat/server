@@ -2,7 +2,6 @@
 -- Area: Everbloom Hollow
 --  Mob: Lambton Worm
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

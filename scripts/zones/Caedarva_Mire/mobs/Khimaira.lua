@@ -2,7 +2,6 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

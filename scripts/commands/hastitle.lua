@@ -3,7 +3,6 @@
 -- desc: Check if player already has a title.
 -----------------------------------
 
-
 cmdprops =
 {
     permission = 1,

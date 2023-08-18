@@ -3,7 +3,6 @@
 -- desc: Add and set player title.
 -----------------------------------
 
-
 cmdprops =
 {
     permission = 1,

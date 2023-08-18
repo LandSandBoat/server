@@ -3,7 +3,6 @@
 --  Mob: Dread Dragon
 -- Mission 2-3 BCNM Fight
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

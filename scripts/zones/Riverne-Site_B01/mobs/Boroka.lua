@@ -2,7 +2,6 @@
 -- Area: Riverne - Site B01
 --   NM: Boroka
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
