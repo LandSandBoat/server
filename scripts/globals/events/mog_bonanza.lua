@@ -393,7 +393,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
                 end
             elseif
                 optionType == 6 and
-                npcUtil.giveItem(player, 5724) -- pinch_of_pungent_powder
+                npcUtil.giveItem(player, { { 5724, 3 } }) -- pinch_of_pungent_powder
             then
                 player:confirmTrade()
             end
