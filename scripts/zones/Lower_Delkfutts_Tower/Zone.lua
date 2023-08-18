@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Lower_Delkfutts_Tower (184)
 -----------------------------------
-local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 -----------------------------------

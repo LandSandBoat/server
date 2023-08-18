@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: The Eldieme Necropolis (195)
 -----------------------------------
-local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

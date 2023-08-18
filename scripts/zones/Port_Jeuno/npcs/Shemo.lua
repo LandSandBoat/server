@@ -2,7 +2,6 @@
 -- Area: Port Jeuno
 --  NPC: Shemo
 -----------------------------------
-local ID = zones[xi.zone.PORT_JEUNO]
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

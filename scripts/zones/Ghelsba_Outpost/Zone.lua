@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Ghelsba_Outpost (140)
 -----------------------------------
-local ID = zones[xi.zone.GHELSBA_OUTPOST]
 require('scripts/globals/conquest')
 require('scripts/globals/helm')
 -----------------------------------

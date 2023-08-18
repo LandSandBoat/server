@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Navukgo_Execution_Chamber (64)
 -----------------------------------
-local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

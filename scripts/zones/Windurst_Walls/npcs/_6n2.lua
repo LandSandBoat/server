@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: Windurst Walls
 -- Door: House of the Hero
--- Involved in Mission 2-1
 -- Involved In Quest: Know One's Onions, Onion Rings, The Puppet Master, Class Reunion
 -- !pos -26 -13 260 239
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WALLS]
-require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

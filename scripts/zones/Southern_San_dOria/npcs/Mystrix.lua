@@ -3,7 +3,6 @@
 --  NPC: Mystrix
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}

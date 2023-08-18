@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: none (49)
 -----------------------------------
-local ID = zones[xi.zone.NONE]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

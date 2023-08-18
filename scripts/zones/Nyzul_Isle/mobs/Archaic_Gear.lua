@@ -2,7 +2,6 @@
 --  MOB: Archaic Gear
 -- Area: Nyzul Isle
 -----------------------------------
-local ID = zones[xi.zone.NYZUL_ISLE]
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}

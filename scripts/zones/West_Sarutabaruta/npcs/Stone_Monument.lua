@@ -4,7 +4,6 @@
 -- Note: Involved in quest "An Explorer's Footsteps"
 -- !pos -205.593 -23.210 -119.670 115
 -----------------------------------
-local ID = zones[xi.zone.WEST_SARUTABARUTA]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

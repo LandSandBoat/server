@@ -5,7 +5,6 @@
 -- !zone 87
 -- !pos TODO
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MARKETS_S]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

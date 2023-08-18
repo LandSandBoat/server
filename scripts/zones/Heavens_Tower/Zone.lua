@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Heavens_Tower
 -----------------------------------
-local ID = zones[xi.zone.HEAVENS_TOWER]
 require('scripts/globals/conquest')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

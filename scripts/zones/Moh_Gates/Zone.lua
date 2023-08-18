@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Moh Gates
 -----------------------------------
-local ID = zones[xi.zone.MOH_GATES]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

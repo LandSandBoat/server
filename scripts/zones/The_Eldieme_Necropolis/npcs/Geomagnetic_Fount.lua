@@ -3,7 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 51.805 -2.495 6.825
 -----------------------------------
-local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

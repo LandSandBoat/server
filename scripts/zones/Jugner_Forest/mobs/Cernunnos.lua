@@ -2,7 +2,6 @@
 -- Area: Jugner Forest
 --   NM: Cernunnos
 -----------------------------------
-local ID = zones[xi.zone.JUGNER_FOREST]
 mixins = { require("scripts/mixins/job_special") } -- TODO: Is this right?
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos -499.189 12.600 373.592 117
 -----------------------------------
-local ID = zones[xi.zone.TAHRONGI_CANYON]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

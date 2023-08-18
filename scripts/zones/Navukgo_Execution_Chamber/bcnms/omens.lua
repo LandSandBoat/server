@@ -3,7 +3,6 @@
 -- BCNM: Omens
 -----------------------------------
 require("scripts/globals/battlefield")
-local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 -----------------------------------
 local battlefieldObject = {}
 

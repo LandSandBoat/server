@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Oldton_Movalpolos (11)
 -----------------------------------
-local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/treasure')

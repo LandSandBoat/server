@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Cirdas Caverns U
 -----------------------------------
-local ID = zones[xi.zone.CIRDAS_CAVERNS_U]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

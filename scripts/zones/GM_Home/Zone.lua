@@ -10,8 +10,6 @@
 -- 140 = Camera test.
 -- 141 = "Press confirm button to proceed" nonworking test.
 -----------------------------------
-local ID = zones[xi.zone.GM_HOME]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

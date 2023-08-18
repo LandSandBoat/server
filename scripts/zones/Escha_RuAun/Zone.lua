@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Escha_RuAun (289)
 -----------------------------------
-local ID = zones[xi.zone.ESCHA_RUAUN]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

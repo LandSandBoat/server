@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mount Kamihr
 -----------------------------------
-local ID = zones[xi.zone.MOUNT_KAMIHR]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

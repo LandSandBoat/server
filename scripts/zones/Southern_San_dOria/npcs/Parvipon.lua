@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: The Merchant's Bidding (R)
 -- !pos -169 -1 13 230
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

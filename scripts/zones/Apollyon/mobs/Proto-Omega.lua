@@ -2,7 +2,6 @@
 -- Area: Apollyon (Central)
 --  Mob: Proto-Omega
 -----------------------------------
-local ID = zones[xi.zone.APOLLYON]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

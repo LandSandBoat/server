@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Boneyard_Gully (8)
 -----------------------------------
-local ID = zones[xi.zone.BONEYARD_GULLY]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

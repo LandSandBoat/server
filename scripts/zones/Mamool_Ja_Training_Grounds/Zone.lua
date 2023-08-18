@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mamool_Ja_Training_Grounds
 -----------------------------------
-local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

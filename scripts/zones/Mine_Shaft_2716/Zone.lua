@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Mine_Shaft_2716 (13)
 -----------------------------------
-local ID = zones[xi.zone.MINE_SHAFT_2716]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

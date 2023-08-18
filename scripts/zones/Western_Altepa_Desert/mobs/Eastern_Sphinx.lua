@@ -2,9 +2,6 @@
 -- Area: Western Altepa Desert
 --  Mob: Eastern Sphinx
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Newton_Movalpolos (12)
 -----------------------------------
-local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')

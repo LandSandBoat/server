@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Chocobo_Circuit
 -----------------------------------
-local ID = zones[xi.zone.CHOCOBO_CIRCUIT]
 require('scripts/globals/chocobo_racing')
 -----------------------------------
 local zoneObject = {}

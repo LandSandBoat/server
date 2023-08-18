@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Spire_of_Vahzl (23)
 -----------------------------------
-local ID = zones[xi.zone.SPIRE_OF_VAHZL]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

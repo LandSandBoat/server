@@ -3,7 +3,6 @@
 --  NPC: Orlando
 -- !pos -37.268 -9 58.047 249
 -----------------------------------
-local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

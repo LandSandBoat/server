@@ -4,8 +4,6 @@
 -- Type: Adventurer's Assistant
 -- !pos 122.658 -1.315 33.001 50
 -----------------------------------
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
------------------------------------
 require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
 -----------------------------------

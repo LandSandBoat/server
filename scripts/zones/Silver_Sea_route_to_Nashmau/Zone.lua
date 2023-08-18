@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Silver_Sea_route_to_Nashmau
 -----------------------------------
-local ID = zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

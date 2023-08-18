@@ -4,9 +4,7 @@
 -- Starts & Finishes Quest: Save My Son
 -- Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

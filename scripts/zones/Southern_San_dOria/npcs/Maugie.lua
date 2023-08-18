@@ -1,9 +1,7 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Maugie
--- Type: General Info NPC
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/quests")
 -----------------------------------

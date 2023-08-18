@@ -2,8 +2,6 @@
 -- Area: Periqia
 --  NPC: Excaliace
 -----------------------------------
-local ID = zones[xi.zone.PERIQIA]
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

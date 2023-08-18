@@ -3,7 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -60.004 21.503 194.314
 -----------------------------------
-local ID = zones[xi.zone.TORAIMARAI_CANAL]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

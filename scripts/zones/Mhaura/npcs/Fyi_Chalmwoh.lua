@@ -3,9 +3,6 @@
 --  NPC: Fyi_Chalmwoh
 -- !pos -39.273 -16.000 70.126 249
 -----------------------------------
-require("scripts/globals/quests")
-local ID = zones[xi.zone.MHAURA]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

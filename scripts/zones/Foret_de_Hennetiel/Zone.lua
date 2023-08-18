@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Foret de Hennetiel
 -----------------------------------
-local ID = zones[xi.zone.FORET_DE_HENNETIEL]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

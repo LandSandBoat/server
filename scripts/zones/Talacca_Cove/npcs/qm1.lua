@@ -2,8 +2,6 @@
 -- Area: Talacca_Cove
 --  NPC: ??? (corsair job flag quest)
 -----------------------------------
-local ID = zones[xi.zone.TALACCA_COVE]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Everbloom_Hollow
 -----------------------------------
-local ID = zones[xi.zone.EVERBLOOM_HOLLOW]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,7 +2,6 @@
 -- Area: Sealion's Den
 --  Mob: Makki-Chebukki
 -----------------------------------
-local ID = zones[xi.zone.SEALIONS_DEN]
 mixins = { require("scripts/mixins/warriors_path_taru") }
 -----------------------------------
 local entity = {}

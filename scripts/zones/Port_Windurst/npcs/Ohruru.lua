@@ -6,9 +6,7 @@
 -- Note: Animation for his "Cure" is not functioning. Unable to capture option 1, so if the user says no, he heals them anyways.
 -- !pos -108 -5 94 240
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

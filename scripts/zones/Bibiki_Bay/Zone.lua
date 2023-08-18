@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Bibiki_Bay (4)
 -----------------------------------
-local ID = zones[xi.zone.BIBIKI_BAY]
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/manaclipper')
 -----------------------------------

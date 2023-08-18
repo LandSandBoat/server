@@ -2,7 +2,6 @@
 -- Ancient Flames Beckon
 -- Spire of Holla mission battlefield
 -----------------------------------
-local ID = zones[xi.zone.SPIRE_OF_HOLLA]
 require("scripts/globals/battlefield")
 require("scripts/globals/teleports")
 require("scripts/globals/missions")

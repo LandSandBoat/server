@@ -4,7 +4,6 @@
 -- Mission 9-2 SANDO
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
 local entity = {}
 

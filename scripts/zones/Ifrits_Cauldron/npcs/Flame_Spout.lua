@@ -3,7 +3,6 @@
 --  NPC: Flame Spout
 -- !pos 193.967 -0.400 19.492 205
 -----------------------------------
-local ID = zones[xi.zone.IFRITS_CAULDRON]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

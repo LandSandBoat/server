@@ -7,7 +7,6 @@
 -- EventID 2180 Teleport?
 -- EventID 2181 DEBUG Menu
 -----------------------------------
-local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require("scripts/globals/abyssea")
 -----------------------------------
 local zoneObject = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta (115)
 -----------------------------------
-local ID = zones[xi.zone.WEST_SARUTABARUTA]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

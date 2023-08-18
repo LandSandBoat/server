@@ -4,9 +4,7 @@
 -- Type: Zeni NM pop item and trophy management.
 -- !pos -125.724 0.999 22.136 50
 -----------------------------------
-require("scripts/globals/besieged")
 require("scripts/globals/znm")
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

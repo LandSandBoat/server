@@ -4,7 +4,6 @@
 -- Involved In Quest: Making Headlines, Riding on the Clouds
 -- !pos -246 -5 -308 238
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/quests")

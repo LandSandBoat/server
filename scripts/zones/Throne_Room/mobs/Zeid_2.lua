@@ -3,10 +3,8 @@
 --  Mob: Zeid (Phase 2)
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
-local ID = zones[xi.zone.THRONE_ROOM]
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobskills")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

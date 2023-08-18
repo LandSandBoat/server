@@ -1,11 +1,9 @@
 -----------------------------------
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

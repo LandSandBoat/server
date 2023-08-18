@@ -2,8 +2,6 @@
 -- Zone: Bastok_Markets (235)
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
-require('scripts/globals/cutscenes')
-local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local zoneObject = {}
 

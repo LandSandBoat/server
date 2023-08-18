@@ -4,7 +4,6 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos 520.064 -5.881 -738.356 107
 -----------------------------------
-local ID = zones[xi.zone.SOUTH_GUSTABERG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

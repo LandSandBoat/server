@@ -3,7 +3,6 @@
 --  NPC: Rune of Release
 -- !pos 412 -9 54 55
 -----------------------------------
-local ID = zones[xi.zone.PERIQIA]
 require("scripts/globals/assault")
 -----------------------------------
 local entity = {}

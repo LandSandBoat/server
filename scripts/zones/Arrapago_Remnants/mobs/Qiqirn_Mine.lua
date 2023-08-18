@@ -3,8 +3,6 @@
 --  Mob: Qiqirn Mine
 -- Note: Explosive mine from Qiqrin
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

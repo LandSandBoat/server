@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Zeruhn_Mines (172)
 -----------------------------------
-local ID = zones[xi.zone.ZERUHN_MINES]
 require('scripts/globals/conquest')
-require('scripts/globals/quests')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

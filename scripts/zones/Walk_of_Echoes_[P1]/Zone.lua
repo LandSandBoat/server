@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Walk_of_Echoes_P1
 -----------------------------------
-local ID = zones[xi.zone.WALK_OF_ECHOES_P1]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

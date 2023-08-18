@@ -2,8 +2,6 @@
 -- Area: The Ashu Talif (The Black Coffin)
 --  Mob: Ashu Talif Crew
 -----------------------------------
-local ID = zones[xi.zone.THE_ASHU_TALIF]
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

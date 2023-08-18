@@ -5,10 +5,6 @@
 -- San d'Orian Mission 3.3 "Appointment to Jeuno"
 -- !pos 636 16 20 184
 -----------------------------------
-local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

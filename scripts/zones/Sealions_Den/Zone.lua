@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Sealions_Den (32)
 -----------------------------------
-local ID = zones[xi.zone.SEALIONS_DEN]
 require('scripts/globals/conquest')
 require('scripts/globals/quests')
 -----------------------------------

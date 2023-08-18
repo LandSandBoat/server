@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Gwora-Corridor (278)
 -----------------------------------
-local ID = zones[xi.zone.GWORA_CORRIDOR]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,8 +3,6 @@
 --   NM: Bomb Queen
 --  Vid: https://www.youtube.com/watch?v=AVsEbYjSAHM
 -----------------------------------
-local ID = zones[xi.zone.IFRITS_CAULDRON]
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

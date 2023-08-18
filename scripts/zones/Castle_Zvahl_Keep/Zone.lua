@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Keep (162)
 -----------------------------------
-local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

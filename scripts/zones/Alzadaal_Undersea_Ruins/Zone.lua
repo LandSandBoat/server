@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
-local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

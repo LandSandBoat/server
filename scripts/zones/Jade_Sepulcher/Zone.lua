@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Jade_Sepulcher (67)
 -----------------------------------
-local ID = zones[xi.zone.JADE_SEPULCHER]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

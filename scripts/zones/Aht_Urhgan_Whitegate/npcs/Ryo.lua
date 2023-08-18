@@ -4,9 +4,7 @@
 -- Type: ZNM assistant
 -- !pos -127.086 0.999 22.693 50
 -----------------------------------
-require("scripts/globals/besieged")
 require("scripts/globals/znm")
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

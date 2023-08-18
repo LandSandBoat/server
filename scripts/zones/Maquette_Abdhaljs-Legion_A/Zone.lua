@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Maquette Abdhaljs-Legion A
 -----------------------------------
-local ID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_A]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Beaucedine_Glacier_[S] (136)
 -----------------------------------
-local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

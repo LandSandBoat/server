@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Valley_of_Sorrows (128)
 -----------------------------------
-local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

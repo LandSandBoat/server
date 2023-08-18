@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Aydeewa_Subterrane (68)
 -----------------------------------
-local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

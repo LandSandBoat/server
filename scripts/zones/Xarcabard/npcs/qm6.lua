@@ -4,7 +4,6 @@
 -- Involved in Quests: RNG AF3 - Unbridled Passion
 -- !pos -254.883 -17.003 -150.818 112
 -----------------------------------
-local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Outer_Horutoto_Ruins (194)
 -----------------------------------
-local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

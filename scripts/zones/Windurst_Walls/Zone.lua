@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Windurst_Walls (239)
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WALLS]
 require('scripts/globals/conquest')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 
