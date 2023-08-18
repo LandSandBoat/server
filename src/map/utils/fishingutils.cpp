@@ -1150,13 +1150,19 @@ namespace fishingutils
 
         for (auto fish : FishingGroups[groupId])
         {
-            if (FishList[fish.first]->fishFlags == FISHFLAG_GOLDFISH && BaitID == FISHINGBAIT_SUPER_SCOOP)
+            if (FishList[fish.first]->fishFlags & FISHFLAG_GOLDFISH)
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if (BaitID == FISHINGBAIT_SUPER_SCOOP)
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
-            else if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first) && FishList[fish.first]->fishFlags != FISHFLAG_GOLDFISH)
+            else
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first))
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
         }
 
