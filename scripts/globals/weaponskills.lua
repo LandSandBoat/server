@@ -142,7 +142,7 @@ end
 
 local function shadowAbsorb(target)
     local targShadows = target:getMod(xi.mod.UTSUSEMI)
-    local shadowType = xi.mod.UTSUSEMI
+    local shadowType  = xi.mod.UTSUSEMI
 
     if targShadows == 0 then
         if math.random() < 0.8 then
@@ -177,25 +177,42 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function getMultiAttacks(attacker, target, numHits, wsParams)
-    local bonusHits = 0
-    local multiChances = 1
-    local doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
-    local tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-    local quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
-    local oaThriceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_THRICE) / 100
-    local oaTwiceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_TWICE) / 100
+-- local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
+--     -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
+--     local accpct = fTP(tp, a1, a2, a3)
+--     local acclost = acc - (acc * accpct)
+--     local hrate = hitrate - (0.005 * acclost)
 
-    local isJump = wsParams.isJump or false
+--     -- cap it
+--     if hrate > 0.95 then
+--         hrate = 0.95
+--     end
+
+--     if hrate < 0.2 then
+--         hrate = 0.2
+--     end
+
+--     return hrate
+-- end
+
+local function getMultiAttacks(attacker, target, wsParams)
+    local numHits      = wsParams.numHits
+    local bonusHits    = 0
+    local multiChances = 1
+    local doubleRate   = attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)
+    local tripleRate   = attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)
+    local quadRate     = attacker:getMod(xi.mod.QUAD_ATTACK)
+    local oaThriceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_THRICE)
+    local oaTwiceRate  = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_TWICE)
+    local isJump       = wsParams.isJump or false
 
     if isJump then
         doubleRate = doubleRate + attacker:getMod(xi.mod.JUMP_DOUBLE_ATTACK)
     end
 
-    -- Add Ambush Augments to Triple Attack
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then -- TRAIT_AMBUSH
-        tripleRate = tripleRate + attacker:getMerit(xi.merit.AMBUSH) / 3 -- Value of Ambush is 3 per mert, augment gives +1 Triple Attack per merit
-    end
+    -- TODO: Assasin vest +2 Ambush augment.
+    -- The logic here wasnt actually checking for the augment.
+    -- Also, it was in a completely different scale, making triple attack trigger always.
 
     -- QA/TA/DA can only proc on the first hit of each weapon or each fist
     if
@@ -206,15 +223,15 @@ local function getMultiAttacks(attacker, target, numHits, wsParams)
     end
 
     for i = 1, multiChances, 1 do
-        if math.random() < quadRate then
+        if math.random(1, 100) <= quadRate then
             bonusHits = bonusHits + 3
-        elseif math.random() < tripleRate then
+        elseif math.random(1, 100) <= tripleRate then
             bonusHits = bonusHits + 2
-        elseif math.random() < doubleRate then
+        elseif math.random(1, 100) <= doubleRate then
             bonusHits = bonusHits + 1
-        elseif i == 1 and math.random() < oaThriceRate then -- Can only proc on first hit
+        elseif i == 1 and math.random(1, 100) <= oaThriceRate then -- Can only proc on first hit
             bonusHits = bonusHits + 2
-        elseif i == 1 and math.random() < oaTwiceRate then -- Can only proc on first hit
+        elseif i == 1 and math.random(1, 100) <= oaTwiceRate then -- Can only proc on first hit
             bonusHits = bonusHits + 1
         end
 
@@ -223,17 +240,15 @@ local function getMultiAttacks(attacker, target, numHits, wsParams)
             attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
 
             -- recalculate DA/TA/QA rate
-            doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
-            tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
+            doubleRate = attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)
+            tripleRate = attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)
+            quadRate   = attacker:getMod(xi.mod.QUAD_ATTACK)
         end
     end
 
-    if (numHits + bonusHits) > 8 then
-        return 8
-    end
+    numHits = utils.clamp(numHits + bonusHits, 1, 8)
 
-    return numHits + bonusHits
+    return numHits
 end
 
 xi.weaponskills.cRangedRatio = function(attacker, defender, params, ignoredDef, tp)
@@ -650,7 +665,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.hitsLanded = 0 -- Reset counter to start tracking additional hits (from WS or Multi-Attacks)
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
-    local numHits = utils.clamp(getMultiAttacks(attacker, target, wsParams.numHits, wsParams), 0, 8)
+    local numHits = utils.clamp(getMultiAttacks(attacker, target, wsParams), 0, 8)
 
     -- adding one to make sure the extra hit from dw or h2h doesnt eat 1 base hit of the ws
     if calcParams.extraOffhandHit then

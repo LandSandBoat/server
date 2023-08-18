@@ -31,6 +31,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_spell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_spell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_trait.cpp

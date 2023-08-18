@@ -3,7 +3,6 @@
 
 require("scripts/globals/mixins")
 require("scripts/globals/abyssea")
-require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
@@ -45,7 +44,9 @@ g_mixins.abyssea_weakness = function(mob)
         end)
 
         mob:addListener("DEATH", "ABYSSEA_DEATH_NM_KI_DROPCHECK", function(mobArg, player)
-            xi.abyssea.giveNMDrops(mobArg, player, zones[player:getZoneID()])
+            if player ~= nil then
+                xi.abyssea.giveNMDrops(mobArg, player, zones[player:getZoneID()])
+            end
         end)
     end
 end

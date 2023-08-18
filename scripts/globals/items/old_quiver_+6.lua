@@ -4,6 +4,7 @@
 -- When used, you will obtain one partial stack of Crude Arrows +6
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18187, math.random(10, 20))
+    target:addItem(xi.items.CRUDE_ARROW_P6, math.random(10, 20))
 end
 
 return itemObject

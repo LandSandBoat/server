@@ -14,6 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 48) -- Level 90 + 2 + 48 = 140 Base Weapon Damage
     mob:setMod(xi.mod.ATT, 499)
     mob:setMod(xi.mod.ACC, 444)
     mob:setMod(xi.mod.EVA, 341)

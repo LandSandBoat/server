@@ -17,26 +17,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local trialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
-    -- Carbuncle Debacle
-    if
-        carbuncleDebacle == QUEST_ACCEPTED and
-        carbuncleDebacleProgress == 5 and
-        player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM)
-    then
-        player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 6 then
-        if not player:hasItem(1174) then
-            player:startEvent(87, 0, 1174, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
-        else
-            player:startEvent(88) -- reminder to go to Cloister of Gales
-        end
-    -----------------------------------
     -- Trial by Wind
-    elseif
+    if
         (trialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or
         (trialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))
     then
@@ -126,14 +110,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("TrialByWind_date", getMidnight())
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-        end
-    elseif csid == 86 or csid == 87 then
-        if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(1174)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1174)
-            player:setCharVar("CarbuncleDebacleProgress", 6)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1174)
         end
     end
 end

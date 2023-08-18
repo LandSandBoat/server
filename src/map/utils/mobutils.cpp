@@ -80,7 +80,7 @@ namespace mobutils
 
         if (PMob->getMobMod(MOBMOD_WEAPON_BONUS) != 0)
         {
-            damage = (uint16)(damage * PMob->getMobMod(MOBMOD_WEAPON_BONUS) / 100.0f);
+            damage = (uint16)(damage + PMob->getMobMod(MOBMOD_WEAPON_BONUS)); // Add this mod to increase a mobs damage by a base amount
         }
 
         return damage;
@@ -105,6 +105,7 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
+        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -210,8 +211,8 @@ namespace mobutils
         uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
-        uint8 grade;
-        uint8 gradesj;
+        uint8 mJobGrade; // main jobs grade
+        uint8 sJobGrade; // subjobs grade
 
         if (recover == true)
         {
@@ -222,23 +223,23 @@ namespace mobutils
                 uint32 baseMobHP = 0; // Define base mobs hp
                 uint32 sjHP      = 0; // Define base subjob hp
 
-                grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
-                gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
+                mJobGrade = grade::GetJobGrade(mJob, 0); // main jobs grade
+                sJobGrade = grade::GetJobGrade(sJob, 0); // subjobs grade
 
                 uint8 base     = 0; // Column for base hp
                 uint8 jobScale = 1; // Column for job scaling
                 uint8 scaleX   = 2; // Column for modifier scale
 
-                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
-                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
-                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
-                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
-                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+                uint8 BaseHP     = grade::GetMobHPScale(mJobGrade, base);     // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(mJobGrade, jobScale); // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(mJobGrade, scaleX);   // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(sJobGrade, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(sJobGrade, scaleX);   // Sub job modifier scale
 
-                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
-                uint8 RBIbase  = 1;                        // Column for RBI base
+                uint8 RIgrade = std::min(mLvl, (uint8)5); // RI Grade
+                uint8 RIbase  = 1;                        // Column for RI base
 
-                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+                uint8 RI = grade::GetMobRBI(RIgrade, RIbase); // Random Increment addition per grade vs. base
 
                 uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
                 uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
@@ -247,7 +248,7 @@ namespace mobutils
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
                 // 50+ = 1 hp sjstats
@@ -460,7 +461,7 @@ namespace mobutils
             sVIT /= 4;
         }
 
-        // [stat] = [family Stat] + [main job Stat] + [sub job Stat]
+        // [stat] = floor[family Stat] + floor[main job Stat] + floor[sub job Stat]
         PMob->stats.STR = fSTR + mSTR + sSTR;
         PMob->stats.DEX = fDEX + mDEX + sDEX;
         PMob->stats.VIT = fVIT + mVIT + sVIT;
@@ -528,7 +529,18 @@ namespace mobutils
         PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
         PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
-        // Only mobs in dynamis can parry
+        // Note: Known Base Parry for all mobs is Rank C
+        // MOBMOD_CAN_PARRY uses the mod value as the rank. It is unknown if mobs in current retail or somewhere else have a different parry rank
+        // Known mobs to have parry rating
+        // 1) Dynamis Mobs
+        // 2) ???
+        // 3) ???
+        if (PMob->getMobMod(MOBMOD_CAN_PARRY) > 0)
+        {
+            PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
+        }
+
+        // Mobs in Dyna Can Parry
         if (PMob->isInDynamis())
         {
             PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
@@ -833,7 +845,7 @@ namespace mobutils
         PMob->setMobMod(MOBMOD_MUG_GIL, -1);
 
         // boost dynamis mobs weapon damage
-        PMob->setMobMod(MOBMOD_WEAPON_BONUS, 135);
+        PMob->setMobMod(MOBMOD_WEAPON_BONUS, 30); // Add approximately 30 flat damage until proven otherwise (In-line with the 35% added previously)
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
         ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 

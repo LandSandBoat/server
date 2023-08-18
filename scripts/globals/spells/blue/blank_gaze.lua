@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resistThreshold = 0.25
     local effect = xi.effect.NONE
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     if resist >= resistThreshold then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 

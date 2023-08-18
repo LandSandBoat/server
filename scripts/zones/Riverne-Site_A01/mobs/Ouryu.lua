@@ -1,6 +1,7 @@
 -----------------------------------
--- Area: Riverne Site A01
--- Note: Ouryu Cometh
+-- Ouryu Cometh
+-- Riverne Site A, Cloud Evokers
+-- !pos 184 0 344 30
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/status")
@@ -22,7 +23,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 53) -- Level 90 + 2 + 60 = 145 Base Weapon Damage
     mob:setMod(xi.mod.UDMGRANGE, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
     mob:setMod(xi.mod.UFASTCAST, 90)
