@@ -1,7 +1,6 @@
 -----------------------------------
 --  VNM: Void Hare
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
 -----------------------------------
 local entity = {}

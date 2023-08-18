@@ -3,7 +3,6 @@
 --   NM: Stray Mary
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
 

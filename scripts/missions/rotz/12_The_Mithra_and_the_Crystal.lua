@@ -10,7 +10,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------

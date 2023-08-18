@@ -2,8 +2,6 @@
 -- Area: Silver Sea Remnants
 --   NM: Long-Armed Chariot
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

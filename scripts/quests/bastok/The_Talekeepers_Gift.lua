@@ -8,7 +8,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]

@@ -3,8 +3,6 @@
 --  Mob: Hydra
 -- !pos -282 -24 -1 51
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

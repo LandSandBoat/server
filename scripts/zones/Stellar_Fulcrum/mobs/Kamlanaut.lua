@@ -3,8 +3,6 @@
 --  Mob: Kam'lanaut
 -- Zilart Mission 8 BCNM Fight
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local skillToAbsorb =

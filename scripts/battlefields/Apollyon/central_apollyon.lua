@@ -12,7 +12,6 @@
 local ID = zones[xi.zone.APOLLYON]
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
-require("scripts/globals/titles")
 -----------------------------------
 
 local content = Limbus:new({

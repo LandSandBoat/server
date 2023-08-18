@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.HORLAIS_PEAK]
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

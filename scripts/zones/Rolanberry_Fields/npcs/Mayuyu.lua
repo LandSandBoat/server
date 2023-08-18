@@ -4,8 +4,6 @@
 -- Legion NPC
 -- !pos 240 24.399 468
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

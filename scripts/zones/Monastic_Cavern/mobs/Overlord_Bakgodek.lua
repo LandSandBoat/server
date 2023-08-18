@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MONASTIC_CAVERN]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

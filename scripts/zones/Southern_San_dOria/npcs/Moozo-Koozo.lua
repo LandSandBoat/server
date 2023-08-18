@@ -5,7 +5,6 @@
 -- !pos 83 0 120 230
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

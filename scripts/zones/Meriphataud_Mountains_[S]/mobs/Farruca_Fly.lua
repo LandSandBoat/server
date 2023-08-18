@@ -1,7 +1,6 @@
 -----------------------------------
 --  VNM: Farruca Fly
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
 require("scripts/globals/hunts")
 -----------------------------------

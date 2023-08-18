@@ -2,8 +2,6 @@
 -- Area: Abyssea - Tahrongi
 --   NM: Iratham
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

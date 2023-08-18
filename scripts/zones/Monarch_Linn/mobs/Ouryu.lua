@@ -2,8 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Ouryu
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -6,7 +6,6 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 -----------------------------------
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------

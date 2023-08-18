@@ -3,7 +3,6 @@
 --  NPC: Edigey
 -- Starts and Ends Quest: Don't Forget the Antidote
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = zones[xi.zone.RABAO]
 -----------------------------------

@@ -4,7 +4,6 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = zones[xi.zone.BONEYARD_GULLY]
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

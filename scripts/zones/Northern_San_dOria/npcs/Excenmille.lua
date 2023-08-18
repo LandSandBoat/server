@@ -8,7 +8,6 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

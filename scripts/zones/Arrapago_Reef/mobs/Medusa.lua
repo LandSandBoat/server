@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

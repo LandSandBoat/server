@@ -3,8 +3,6 @@
 --  Mob: Black Dragon
 -- Mission 2-3 BCNM Fight
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

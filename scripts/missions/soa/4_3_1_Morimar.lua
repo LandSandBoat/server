@@ -7,7 +7,6 @@
 -- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

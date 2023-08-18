@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local oraclesID = zones[xi.zone.CHAMBER_OF_ORACLES]
 -----------------------------------

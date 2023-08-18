@@ -9,7 +9,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require("scripts/globals/teleports")
 require('scripts/globals/utils')
 require('scripts/missions/cop/helpers')

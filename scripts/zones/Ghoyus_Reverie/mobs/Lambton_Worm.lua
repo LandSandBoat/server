@@ -2,8 +2,6 @@
 -- Area: Ghoyu's Reverie
 --  Mob: Lambton Worm
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

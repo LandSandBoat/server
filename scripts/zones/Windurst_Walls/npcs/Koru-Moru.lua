@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WALLS]
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

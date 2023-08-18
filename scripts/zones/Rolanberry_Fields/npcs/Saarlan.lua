@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

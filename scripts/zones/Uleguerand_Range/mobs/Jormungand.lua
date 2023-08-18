@@ -2,8 +2,6 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local function setupFlightMode(mob, battleTime)

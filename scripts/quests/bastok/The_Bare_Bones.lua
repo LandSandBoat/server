@@ -6,7 +6,6 @@
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

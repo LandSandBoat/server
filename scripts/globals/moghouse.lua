@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 xi = xi or {}
 xi.moghouse = xi.moghouse or {}

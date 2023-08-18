@@ -3,7 +3,6 @@
 --  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

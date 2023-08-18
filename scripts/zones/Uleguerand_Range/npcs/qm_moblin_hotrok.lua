@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

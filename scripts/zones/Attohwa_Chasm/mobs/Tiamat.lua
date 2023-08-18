@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local function setupFlightMode(mob, battleTime, mobHP)

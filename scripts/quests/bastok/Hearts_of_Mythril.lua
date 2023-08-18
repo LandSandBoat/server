@@ -6,7 +6,6 @@
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

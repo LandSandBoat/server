@@ -3,7 +3,6 @@
 --  NPC: Vounebariont
 -- Starts and Finishes Quest: Thick Shells
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

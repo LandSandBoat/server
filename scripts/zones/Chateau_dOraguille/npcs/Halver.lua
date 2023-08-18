@@ -9,7 +9,6 @@ local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Greetings to the Guardian
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

@@ -9,7 +9,6 @@
 -- Ryoma    : !pos -23 0 -9 252
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local korrolokaID  = zones[xi.zone.KORROLOKA_TUNNEL]

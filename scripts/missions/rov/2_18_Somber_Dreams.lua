@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local graubergID = zones[xi.zone.GRAUBERG_S]

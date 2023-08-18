@@ -10,7 +10,6 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 -----------------------------------
 local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
 local davoiID = zones[xi.zone.DAVOI]

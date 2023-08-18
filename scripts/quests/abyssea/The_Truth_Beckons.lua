@@ -8,7 +8,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/abyssea')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)

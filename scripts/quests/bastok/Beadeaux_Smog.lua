@@ -6,7 +6,6 @@
 -- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

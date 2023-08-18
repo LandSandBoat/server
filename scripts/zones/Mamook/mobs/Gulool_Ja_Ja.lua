@@ -2,7 +2,6 @@
 -- Area: Mamook
 --  Mob: Gulool Ja Ja
 -----------------------------------
-require("scripts/globals/titles")
 local ID = zones[xi.zone.MAMOOK]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

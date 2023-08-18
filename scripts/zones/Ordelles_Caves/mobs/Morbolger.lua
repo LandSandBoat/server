@@ -2,8 +2,6 @@
 -- Area: Ordelles Caves (193)
 --   NM: Morbolger
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

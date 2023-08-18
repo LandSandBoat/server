@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local hallID = zones[xi.zone.HALL_OF_THE_GODS]
 -----------------------------------

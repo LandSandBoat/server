@@ -3,7 +3,6 @@
 --  Mob: Baronet Romwe
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

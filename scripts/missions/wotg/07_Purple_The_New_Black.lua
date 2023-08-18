@@ -10,7 +10,6 @@
 require('scripts/globals/maws')
 require('scripts/globals/missions')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

@@ -4,7 +4,6 @@
 -- Involved in Mission 2-3
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

@@ -9,7 +9,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
