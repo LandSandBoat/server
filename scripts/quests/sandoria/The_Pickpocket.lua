@@ -7,7 +7,6 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 -----------------------------------
 local portSandOriaID     = zones[xi.zone.PORT_SAN_DORIA]
 local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]

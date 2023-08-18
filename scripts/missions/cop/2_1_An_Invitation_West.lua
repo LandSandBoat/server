@@ -6,7 +6,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------

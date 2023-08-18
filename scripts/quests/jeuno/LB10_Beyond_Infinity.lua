@@ -6,7 +6,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]

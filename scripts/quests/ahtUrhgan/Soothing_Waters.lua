@@ -12,7 +12,6 @@ require('scripts/globals/besieged')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require('scripts/globals/titles')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)

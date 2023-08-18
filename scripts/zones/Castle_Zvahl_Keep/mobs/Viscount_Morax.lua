@@ -3,7 +3,6 @@
 --  Mob: Viscount Morax
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

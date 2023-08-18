@@ -6,7 +6,6 @@
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

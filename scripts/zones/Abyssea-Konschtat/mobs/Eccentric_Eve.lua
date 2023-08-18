@@ -2,7 +2,6 @@
 -- Area: Abyssea - Konschtat (15)
 --   NM: Eccentric Eve
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

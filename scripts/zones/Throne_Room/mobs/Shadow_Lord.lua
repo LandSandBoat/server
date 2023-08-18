@@ -4,7 +4,6 @@
 -- Mission 5-2 BCNM Fight
 -----------------------------------
 local ID = zones[xi.zone.THRONE_ROOM]
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

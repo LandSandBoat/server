@@ -2,7 +2,6 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

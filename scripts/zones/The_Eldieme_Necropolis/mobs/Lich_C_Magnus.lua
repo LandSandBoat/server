@@ -2,7 +2,6 @@
 -- Area: The Eldieme Necropolis
 --  Mob: Lich C Magnus
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

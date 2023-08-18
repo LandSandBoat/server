@@ -2,7 +2,6 @@
 -- Area: Silver Sea Remnants
 --   NM: Long-Armed Chariot
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

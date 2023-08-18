@@ -6,7 +6,6 @@ require("scripts/globals/garrison")
 require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}

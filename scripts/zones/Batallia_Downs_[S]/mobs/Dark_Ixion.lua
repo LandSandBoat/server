@@ -2,7 +2,6 @@
 -- Area: Batallia_Downs_[S]
 --  Mob: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

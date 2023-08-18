@@ -7,7 +7,6 @@
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

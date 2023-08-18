@@ -10,7 +10,6 @@
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/missions/wotg/helpers')
 -----------------------------------

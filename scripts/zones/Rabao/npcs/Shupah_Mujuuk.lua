@@ -4,7 +4,6 @@
 -- Title Change NPC
 -- !pos 12 8 20 247
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

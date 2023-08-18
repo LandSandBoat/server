@@ -14,7 +14,6 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]

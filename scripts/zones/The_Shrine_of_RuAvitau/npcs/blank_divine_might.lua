@@ -6,7 +6,6 @@
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

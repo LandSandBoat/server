@@ -3,7 +3,6 @@
 --   NM: Taisaijin
 -----------------------------------
 local ID = zones[xi.zone.RANGUEMONT_PASS]
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

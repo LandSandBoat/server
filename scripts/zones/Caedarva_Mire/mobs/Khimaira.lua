@@ -2,7 +2,6 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

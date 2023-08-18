@@ -2,7 +2,6 @@
 -- Area: Ghoyu's Reverie
 --  Mob: Lambton Worm
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

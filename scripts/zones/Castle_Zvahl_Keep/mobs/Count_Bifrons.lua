@@ -3,7 +3,6 @@
 --  Mob: Count Bifrons
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

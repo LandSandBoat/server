@@ -5,7 +5,6 @@
 -- Location: (I-7)
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}

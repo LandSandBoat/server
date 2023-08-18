@@ -7,7 +7,6 @@
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

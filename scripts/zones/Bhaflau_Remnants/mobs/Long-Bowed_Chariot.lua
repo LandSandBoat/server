@@ -2,7 +2,6 @@
 -- Area: Bhaflau Remnants
 --  Mob: Long-Bowed Chariot
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

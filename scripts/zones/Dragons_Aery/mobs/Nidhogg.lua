@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

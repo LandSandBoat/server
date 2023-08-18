@@ -7,7 +7,6 @@
 --        writing this quest. Once it is working please feel free to add it in ^^
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

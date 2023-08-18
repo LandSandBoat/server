@@ -2,7 +2,6 @@
 -- Area: Arrapago Remnants
 --   NM: Armored Chariot
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

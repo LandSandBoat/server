@@ -7,7 +7,6 @@
 -- Darkened Crevice : !pos 185.752 27.311 240.72 273
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 

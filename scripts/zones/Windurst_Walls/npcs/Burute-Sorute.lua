@@ -4,7 +4,6 @@
 -- Type: Title Change NPC
 -- !pos 0.080 -10.765 5.394 239
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

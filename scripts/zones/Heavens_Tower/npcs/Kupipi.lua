@@ -9,7 +9,6 @@ local ID = zones[xi.zone.HEAVENS_TOWER]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

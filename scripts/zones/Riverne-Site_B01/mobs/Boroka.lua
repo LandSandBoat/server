@@ -2,7 +2,6 @@
 -- Area: Riverne - Site B01
 --   NM: Boroka
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

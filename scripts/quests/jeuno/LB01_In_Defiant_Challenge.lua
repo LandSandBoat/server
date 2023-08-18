@@ -17,7 +17,6 @@
 -- qm9 : !pos 92.272 -32 -64.676 195
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local crawlersID = zones[xi.zone.CRAWLERS_NEST]

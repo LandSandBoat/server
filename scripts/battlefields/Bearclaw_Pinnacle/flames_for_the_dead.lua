@@ -4,7 +4,6 @@
 -- !pos -720 9 -441 6
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
 

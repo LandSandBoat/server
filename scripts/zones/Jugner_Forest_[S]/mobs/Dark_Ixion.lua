@@ -2,7 +2,6 @@
 -- Area: Jugner_Forest_[S]
 --  Mob: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

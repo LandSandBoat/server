@@ -1,7 +1,6 @@
 -----------------------------------
 --  VNM: Raker Bee
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
 -----------------------------------
 local entity = {}

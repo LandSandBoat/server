@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

@@ -11,7 +11,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local sacrariumID = zones[xi.zone.SACRARIUM]
 -----------------------------------

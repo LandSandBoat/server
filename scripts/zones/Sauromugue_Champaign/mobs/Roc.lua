@@ -3,7 +3,6 @@
 --  HNM: Roc
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

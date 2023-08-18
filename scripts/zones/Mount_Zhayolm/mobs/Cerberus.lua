@@ -2,7 +2,6 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

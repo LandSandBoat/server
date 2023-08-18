@@ -10,7 +10,6 @@
 -- _7mw                : !pos 197 58 -20 274
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 local kamihrID        = zones[xi.zone.MOUNT_KAMIHR]

@@ -2,7 +2,6 @@
 -- Area: Abyssea - Konschtat (15)
 --   NM: Kukulkan
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

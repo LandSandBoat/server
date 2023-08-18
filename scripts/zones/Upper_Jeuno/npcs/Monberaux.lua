@@ -6,7 +6,6 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = zones[xi.zone.UPPER_JEUNO]
-require("scripts/globals/titles")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------

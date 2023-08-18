@@ -7,7 +7,6 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

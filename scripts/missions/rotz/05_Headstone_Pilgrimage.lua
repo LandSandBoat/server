@@ -16,7 +16,6 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/titles')
 -----------------------------------
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 local capeTerigganID      = zones[xi.zone.CAPE_TERIGGAN]

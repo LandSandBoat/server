@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Ash Dragon
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

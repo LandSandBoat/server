@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.PORT_WINDURST]
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

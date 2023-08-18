@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 require("scripts/globals/missions")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

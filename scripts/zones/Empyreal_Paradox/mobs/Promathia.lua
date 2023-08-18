@@ -4,7 +4,6 @@
 -- Note: Phase 1
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

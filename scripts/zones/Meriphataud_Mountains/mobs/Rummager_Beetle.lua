@@ -1,7 +1,6 @@
 -----------------------------------
 --  VNM: Rummager Bettle
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
 -----------------------------------
 local entity = {}

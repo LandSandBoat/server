@@ -2,7 +2,6 @@
 -- Area: Rolanberry Fields [S]
 --   NM: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

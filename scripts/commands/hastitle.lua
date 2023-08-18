@@ -3,7 +3,6 @@
 -- desc: Check if player already has a title.
 -----------------------------------
 
-require("scripts/globals/titles")
 
 cmdprops =
 {

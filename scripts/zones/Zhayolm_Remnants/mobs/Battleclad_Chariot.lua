@@ -2,7 +2,6 @@
 -- Area: Zhayolm Remnants
 --   NM: Battleclad Chariot
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

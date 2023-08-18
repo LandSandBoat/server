@@ -1,7 +1,6 @@
 -----------------------------------
 --  VNM: Gjenganger
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
 -----------------------------------
 local entity = {}

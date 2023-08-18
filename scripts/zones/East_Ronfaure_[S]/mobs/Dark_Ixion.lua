@@ -2,7 +2,6 @@
 -- Area: East Ronfaure [S]
 --  Mob: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

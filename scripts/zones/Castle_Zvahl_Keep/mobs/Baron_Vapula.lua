@@ -3,7 +3,6 @@
 --  Mob: Baron Vapula
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

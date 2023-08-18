@@ -2,7 +2,6 @@
 -- Area: Fei'Yin
 --   NM: Goliath
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

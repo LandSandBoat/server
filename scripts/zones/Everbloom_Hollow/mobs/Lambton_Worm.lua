@@ -2,7 +2,6 @@
 -- Area: Everbloom Hollow
 --  Mob: Lambton Worm
 -----------------------------------
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

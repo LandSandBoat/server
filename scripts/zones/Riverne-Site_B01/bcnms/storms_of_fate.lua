@@ -6,7 +6,6 @@
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local battlefieldObject = {}
 

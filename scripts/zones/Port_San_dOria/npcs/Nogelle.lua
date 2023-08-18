@@ -4,7 +4,6 @@
 -- Starts Lufet's Lake Salt
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

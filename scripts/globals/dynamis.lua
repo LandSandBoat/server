@@ -4,7 +4,6 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

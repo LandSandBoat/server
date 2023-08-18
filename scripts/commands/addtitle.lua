@@ -3,7 +3,6 @@
 -- desc: Add and set player title.
 -----------------------------------
 
-require("scripts/globals/titles")
 
 cmdprops =
 {

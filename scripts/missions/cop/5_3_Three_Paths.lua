@@ -31,7 +31,6 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/titles')
 require('scripts/globals/utils')
 -----------------------------------
 local lowerDelkfuttsID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
