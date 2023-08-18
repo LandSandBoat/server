@@ -85,12 +85,15 @@ class LuaStyleCheck:
 
         self.run_style_check()
 
-    def error(self, error_string):
+    def error(self, error_string, suppress_line_ref = False):
         """Displays error_string along with filename and line.  Increments errcount for the class."""
 
         if self.show_errors:
             print(f"{error_string}: {self.filename}:{self.counter}")
-            print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+
+            if not suppress_line_ref:
+                print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+
             print("")
 
         self.errcount += 1
@@ -326,6 +329,8 @@ class LuaStyleCheck:
             in_block_comment    = False
             in_condition        = False
             full_condition      = ""
+            uses_id             = False
+            has_id_ref          = False
 
             for line in self.lines:
                 self.counter = self.counter + 1
@@ -358,6 +363,15 @@ class LuaStyleCheck:
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
                 self.check_deprecated_require(code_line)
+
+                # Keep track of ID variable assignments and if they are referenced.
+                # TODO: Track each unique variable, and expand this to potentially something
+                # more generic for other tests.
+                if re.search("ID[ ]+=[ ]+zones\[", code_line):
+                    uses_id = True
+
+                if uses_id == True and re.search("ID\.", code_line):
+                    has_id_ref = True
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)
@@ -403,7 +417,8 @@ class LuaStyleCheck:
                     if stripped_line.endswith('not'):
                         self.error('Multiline conditions should not end with not')
                 
-
+            if "DefaultActions" not in self.filename and uses_id == True and not has_id_ref:
+                self.error("ID variable is assigned but unused", suppress_line_ref = True)
             # If you want to modify the files during the checks, write your changed lines to the appropriate
             # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
             #
