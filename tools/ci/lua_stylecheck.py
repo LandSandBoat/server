@@ -37,6 +37,7 @@ deprecated_requires = [
     "scripts/globals/status",
     "scripts/globals/zone",
     "scripts/enum",
+    "IDs",
 ]
 
 # 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
@@ -295,7 +296,10 @@ class LuaStyleCheck:
         if ("require(") in line:
             for deprecated_str in deprecated_requires:
                 if deprecated_str in line:
-                    self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
+                    if deprecated_str == "IDs":
+                        self.error("IDs requires should be replaced with references to zones[xi.zone.ZONE_ENUM]")
+                    else:
+                        self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
 
     def check_function_parameters(self, line):
         # Iterate through all entries in the disallowed table
