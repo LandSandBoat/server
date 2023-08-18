@@ -1,8 +1,10 @@
 -----------------------------------
 -- ID: 14533
 -- onago_yukata
+-- Dispense: Muteppo x99
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5360, 99) -- muteppo
+    target:addItem(xi.items.MUTEPPO, 99)
 end
 
 return itemObject

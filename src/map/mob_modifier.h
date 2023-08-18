@@ -87,7 +87,7 @@ enum MOBMODIFIER : int
     MOBMOD_HP_STANDBACK           = 56, // mob will always standback with hp % higher to value
     MOBMOD_MAGIC_DELAY            = 57, // Amount of seconds mob waits before casting first spell
     MOBMOD_SPECIAL_DELAY          = 58, // Amount of seconds mob waits before using first special
-    MOBMOD_WEAPON_BONUS           = 59, // Add a bonus percentage to mob weapon damage ( bonus / 100 )
+    MOBMOD_WEAPON_BONUS           = 59, // Add a flat modifer mob weapon damage ( damage + bonus )
     MOBMOD_SPAWN_ANIMATIONSUB     = 60, // reset animationsub to this on spawn
     MOBMOD_HP_SCALE               = 61, // Scale the mobs max HP. ( hp_scale / 100 ) * maxhp
     MOBMOD_NO_STANDBACK           = 62, // Mob will never standback
@@ -103,6 +103,7 @@ enum MOBMODIFIER : int
     MOBMOD_MAGIC_RANGE            = 72, // magic aggro range
     MOBMOD_TARGET_DISTANCE_OFFSET = 73, // Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
     MOBMOD_ONE_WAY_LINKING        = 74, // Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
+    MOBMOD_CAN_PARRY              = 75, // Check if a mob is allowed to have parry rank (Rank Value 1-5)
 
     // ASB Mod Start
     MOBMOD_DRAW_IN_INCLUDE_PARTY     = 100, // this will cause the mob's draw-in to also affect all party and alliance members

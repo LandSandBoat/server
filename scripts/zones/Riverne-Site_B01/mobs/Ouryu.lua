@@ -43,7 +43,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.BLINDRES, 25)
     mob:addMod(xi.mod.PARALYZERES, 25)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 48) -- (level 90 + 2) + 48 = 140
     mob:setMod(xi.mod.UDMGRANGE, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
     mob:setMod(xi.mod.UDMGBREATH, -5000)

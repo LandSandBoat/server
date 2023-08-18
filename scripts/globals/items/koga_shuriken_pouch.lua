@@ -4,6 +4,7 @@
 -- When used, you will obtain one stack of Koga Shurikens
 -----------------------------------
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18712, 99)
+    target:addItem(xi.items.KOGA_SHURIKEN, 99)
 end
 
 return itemObject

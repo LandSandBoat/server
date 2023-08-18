@@ -488,11 +488,11 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     return true;
 }
 
-void CNavMesh::snapToValidPosition(position_t& position, float targetY, bool force)
+void CNavMesh::snapToValidPosition(position_t& position)
 {
     TracyZoneScoped;
 
-    if (!m_navMesh || !targetY || (!force && abs(position.y - targetY) < 0.1f))
+    if (!m_navMesh)
     {
         return;
     }
@@ -506,7 +506,7 @@ void CNavMesh::snapToValidPosition(position_t& position, float targetY, bool for
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 

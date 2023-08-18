@@ -21,6 +21,7 @@ zones[xi.zone.ABYSSEA_ATTOHWA] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        PLAYER_KEYITEM_OBTAINED       = 7220, -- <player> obtained the key item: <keyitem>!
         LIGHTS_MESSAGE_1              = 7225, -- Visitant Light Intensity Pearlescent: <number> / Ebon: <number> Golden: <number> / Silvery: <number>
         LIGHTS_MESSAGE_2              = 7226, -- Azure: <number> / Ruby: <number> / Amber: <number>
         STAGGERED                     = 7227, -- <name>'s attack staggers the fiend!

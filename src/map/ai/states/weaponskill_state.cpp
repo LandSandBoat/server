@@ -114,7 +114,7 @@ void CWeaponSkillState::SpendCost()
 
 bool CWeaponSkillState::Update(time_point tick)
 {
-    if (!IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {
         CBattleEntity* PTarget = dynamic_cast<CBattleEntity*>(GetTarget());
         action_t       action;
