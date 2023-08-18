@@ -3,7 +3,7 @@
 --  Mob: Buffalo
 -- Note: PH for Bonnacon
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

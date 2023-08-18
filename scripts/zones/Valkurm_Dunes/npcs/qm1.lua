@@ -5,7 +5,7 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 -----------------------------------
-local ID = require('scripts/zones/Valkurm_Dunes/IDs')
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 

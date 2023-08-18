@@ -6,7 +6,7 @@
 -- !pos -116 -3 52  238
 -- (outside the shop he is in)
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

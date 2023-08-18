@@ -5,7 +5,7 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos 13 -5 -157 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

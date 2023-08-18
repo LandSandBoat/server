@@ -5,7 +5,7 @@
 -- Note: Available during Campaign battles
 -- !pos 382.679 -39.999 3.541 175
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

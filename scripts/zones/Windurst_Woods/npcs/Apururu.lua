@@ -4,7 +4,7 @@
 -- Involved in Quests: The Kind Cardian, Can Cardians Cry?
 -- !pos -11 -2 13 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

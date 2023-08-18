@@ -3,7 +3,7 @@
 --  Mob: Giant Trapper
 -- Note: PH for Slippery Sucker
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

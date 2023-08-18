@@ -2,7 +2,7 @@
 -- Area: Quicksand Caves
 --  Mob: Spelunking Sabotender
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

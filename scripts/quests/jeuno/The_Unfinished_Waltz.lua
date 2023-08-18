@@ -10,7 +10,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local graubergID = require("scripts/zones/Grauberg_[S]/IDs")
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)

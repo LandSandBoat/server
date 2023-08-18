@@ -3,7 +3,7 @@
 --  NPC: ??? - Drone Crawler (Spawn area 2)
 -- !pos -74.939 -2.606 244.139 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

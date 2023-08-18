@@ -2,7 +2,7 @@
 -- Area: Tavnazian Safehold
 --  NPC: Nomad Moogle
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 local entity = {}
 

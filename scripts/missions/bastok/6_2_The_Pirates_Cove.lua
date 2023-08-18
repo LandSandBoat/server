@@ -15,11 +15,11 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local bastokMarketsID  = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID    = require('scripts/zones/Bastok_Mines/IDs')
-local ifritsCauldronID = require('scripts/zones/Ifrits_Cauldron/IDs')
-local metalworksID     = require('scripts/zones/Metalworks/IDs')
-local portBastokID     = require('scripts/zones/Port_Bastok/IDs')
+local bastokMarketsID  = zones[xi.zone.BASTOK_MARKETS]
+local bastokMinesID    = zones[xi.zone.BASTOK_MINES]
+local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]
+local metalworksID     = zones[xi.zone.METALWORKS]
+local portBastokID     = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE)

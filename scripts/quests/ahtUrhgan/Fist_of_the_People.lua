@@ -6,7 +6,7 @@
 -- Fari-Wari: !pos 80 -6 -137 50
 -- Leypoint : !pos -200 -10 80 51
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')

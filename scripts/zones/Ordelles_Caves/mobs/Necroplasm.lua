@@ -3,7 +3,7 @@
 --   NM: Necroplasm
 -- Involved in Eco Warrior (San d'Oria)
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 require("scripts/globals/quests")
 require("scripts/globals/mobs")
 -----------------------------------

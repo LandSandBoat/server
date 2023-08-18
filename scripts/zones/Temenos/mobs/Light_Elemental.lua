@@ -2,7 +2,7 @@
 -- Area: Temenos E T
 --  Mob: Light Elemental
 -----------------------------------
-local ID = require("scripts/zones/Temenos/IDs")
+local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 

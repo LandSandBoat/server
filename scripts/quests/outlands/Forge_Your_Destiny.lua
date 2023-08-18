@@ -13,9 +13,9 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local konschtatID = require('scripts/zones/Konschtat_Highlands/IDs')
-local norgID      = require('scripts/zones/Norg/IDs')
-local zitahID     = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
+local norgID      = zones[xi.zone.NORG]
+local zitahID     = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)

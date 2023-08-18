@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
-local ID = require('scripts/zones/Alzadaal_Undersea_Ruins/IDs')
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local zoneObject = {}
 

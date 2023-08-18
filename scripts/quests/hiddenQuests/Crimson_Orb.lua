@@ -13,7 +13,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local davoiID = require("scripts/zones/Davoi/IDs")
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
 local quest = HiddenQuest:new("CrimsonOrb")

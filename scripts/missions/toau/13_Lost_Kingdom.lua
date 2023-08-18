@@ -11,7 +11,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local caedarvaID = require("scripts/zones/Caedarva_Mire/IDs")
+local caedarvaID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LOST_KINGDOM)

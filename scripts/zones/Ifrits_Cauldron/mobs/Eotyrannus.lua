@@ -3,7 +3,7 @@
 --  Mob: Eotyrannus
 -- Note: PH for Lindwurm
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

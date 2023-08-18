@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local lufaiseID = require('scripts/zones/Lufaise_Meadows/IDs')
+local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_HARD_DAYS_KNIGHT)

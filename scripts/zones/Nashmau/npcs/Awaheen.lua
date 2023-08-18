@@ -2,7 +2,7 @@
 -- Area: Nashmau
 --  NPC: Awaheen
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 

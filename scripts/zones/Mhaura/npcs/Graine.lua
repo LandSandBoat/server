@@ -3,7 +3,7 @@
 --  NPC: Graine
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

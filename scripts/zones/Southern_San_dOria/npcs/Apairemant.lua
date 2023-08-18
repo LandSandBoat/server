@@ -4,7 +4,7 @@
 -- Gustaberg Regional Merchant
 -- !pos 72 2 0 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 -----------------------------------

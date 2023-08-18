@@ -4,7 +4,7 @@
 -- !pos 44 2 -35 80
 -- Sealed Container NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 local entity = {}
 

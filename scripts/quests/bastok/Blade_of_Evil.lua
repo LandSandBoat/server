@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local middleDelkfuttsID = require('scripts/zones/Middle_Delkfutts_Tower/IDs')
+local middleDelkfuttsID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)

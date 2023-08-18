@@ -4,7 +4,7 @@
 -- Used in quest Even More Gullible Travels
 -- !pos -468.876 -1 220.247 123 <many>
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos 448.045 -7.808 319.980 116
 -----------------------------------
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
+local ID = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

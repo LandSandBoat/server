@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/utils")
 -- local mhauraID = require("scripts/zones/Mhaura/IDs")
--- local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
+-- local maquetteID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
 -----------------------------------
 xi = xi or {}
 xi.ambuscade = {}

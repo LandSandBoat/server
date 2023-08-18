@@ -3,7 +3,7 @@
 --  Mob: Great Ameretat
 -- Note: PH for Jaded Jody
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

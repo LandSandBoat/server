@@ -9,7 +9,7 @@ require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
+local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_CURSED_TEMPLE)

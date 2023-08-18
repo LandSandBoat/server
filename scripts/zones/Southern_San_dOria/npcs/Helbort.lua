@@ -4,7 +4,7 @@
 --  Starts and Finished Quest: A purchase of Arms
 -- !pos 71 -1 65 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

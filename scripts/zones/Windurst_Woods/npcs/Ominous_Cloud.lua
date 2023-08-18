@@ -4,7 +4,7 @@
 -- Type: Ninjutsu Toolbag Maker
 -- !pos -20.632 -3.939 -40.554 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

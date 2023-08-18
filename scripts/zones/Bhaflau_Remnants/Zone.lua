@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Bhaflau_Remnants
 -----------------------------------
-local ID = require('scripts/zones/Bhaflau_Remnants/IDs')
+local ID = zones[xi.zone.BHAFLAU_REMNANTS]
 -----------------------------------
 local zoneObject = {}
 

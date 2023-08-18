@@ -8,7 +8,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 -----------------------------------
-local lufaiseID = require('scripts/zones/Lufaise_Meadows/IDs')
+local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)

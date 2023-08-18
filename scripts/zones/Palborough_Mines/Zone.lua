@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Palborough Mines (143)
 -----------------------------------
-local ID = require('scripts/zones/Palborough_Mines/IDs')
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')

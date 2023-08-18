@@ -5,7 +5,7 @@
 -- !pos -17 -16 71 204
 -----------------------------------
 require("scripts/globals/quests")
-local ID = require("scripts/zones/FeiYin/IDs")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}
 

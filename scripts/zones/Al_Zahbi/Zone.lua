@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Al_Zahbi (48)
 -----------------------------------
-local ID = require('scripts/zones/Al_Zahbi/IDs')
+local ID = zones[xi.zone.AL_ZAHBI]
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

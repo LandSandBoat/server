@@ -16,7 +16,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
+local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN)

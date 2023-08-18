@@ -4,7 +4,7 @@
 -- Note: PH for N/E/S/W Shadow NMs
 -----------------------------------
 require("scripts/globals/regimes")
-local ID = require("scripts/zones/FeiYin/IDs")
+local ID = zones[xi.zone.FEIYIN]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

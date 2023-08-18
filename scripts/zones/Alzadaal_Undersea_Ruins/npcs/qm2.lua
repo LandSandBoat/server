@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Cheese Hoarder Gigiroon(ZNM T1))
 -- !pos -184 -8 24 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Blacksmithing Guild
 -- !pos -64.278 -16.624 34.120 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

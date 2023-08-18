@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ordellesCavesID = require('scripts/zones/Ordelles_Caves/IDs')
+local ordellesCavesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)

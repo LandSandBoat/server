@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 
 return {
     ['Buntz']            = { event = 59 },

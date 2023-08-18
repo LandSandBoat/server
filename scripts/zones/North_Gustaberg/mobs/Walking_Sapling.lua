@@ -3,7 +3,7 @@
 --  Mob: Walking Sapling
 -- Note: Place Holder For Maighdean Uaine
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

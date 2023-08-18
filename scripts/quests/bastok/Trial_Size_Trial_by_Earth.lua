@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/teleports')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local tremorsID = require('scripts/zones/Cloister_of_Tremors/IDs')
+local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)

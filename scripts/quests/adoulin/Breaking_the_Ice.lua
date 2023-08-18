@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
+local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.BREAKING_THE_ICE)

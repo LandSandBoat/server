@@ -4,7 +4,7 @@
 -- !pos 270 -9 -70
 -- Teleports Players to Abyssea - Uleguerand
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
+local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

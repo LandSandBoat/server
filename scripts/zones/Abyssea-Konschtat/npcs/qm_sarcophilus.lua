@@ -4,7 +4,7 @@
 -- Spawns Sarcophilus
 -- !pos -235.000 -15.882 -120.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17134281
 -----------------------------------
-local ID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 require('scripts/globals/extravaganza')
 
 local entity = {}

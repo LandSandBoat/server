@@ -3,7 +3,7 @@
 --  NPC: ???
 -- Spawns Aroma Leech - RSE Satchets
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

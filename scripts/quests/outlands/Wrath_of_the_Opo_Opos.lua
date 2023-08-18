@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local yuhtungaID = require('scripts/zones/Yuhtunga_Jungle/IDs')
+local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)

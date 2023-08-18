@@ -4,7 +4,7 @@
 -- Spawns Azdaja
 -- !pos -582 -167 138 254
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
+local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

@@ -643,7 +643,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
     local zoneid    = player:getZoneID()
     local msg       = zones[zoneid].text
-    local ID        = require("scripts/zones/RuLude_Gardens/IDs")
+    local ID        = zones[xi.zone.RULUDE_GARDENS]
 
     if
         csid == EVENT_IDS[2] and

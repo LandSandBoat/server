@@ -3,7 +3,7 @@
 --  Mob: Parata
 --  ENM: Shell We Dance?
 -----------------------------------
-local ID = require("scripts/zones/Boneyard_Gully/IDs")
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 

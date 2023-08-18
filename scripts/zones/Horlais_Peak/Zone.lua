@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Horlais_Peak (139)
 -----------------------------------
-local ID = require('scripts/zones/Horlais_Peak/IDs')
+local ID = zones[xi.zone.HORLAIS_PEAK]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

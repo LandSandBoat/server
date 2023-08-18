@@ -3,7 +3,7 @@
 --  Mob: Evil Eye
 -- Note: PH for Shadow Eye
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
+local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

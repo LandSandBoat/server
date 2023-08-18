@@ -8,7 +8,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local ceizakID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
+local ceizakID = zones[xi.zone.CEIZAK_BATTLEGROUNDS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN)

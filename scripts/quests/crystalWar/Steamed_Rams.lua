@@ -13,7 +13,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local southernSandoriaSID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local southernSandoriaSID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)

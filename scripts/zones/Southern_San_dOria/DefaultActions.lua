@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 
 return {
     ['Amaura']      = { event = 642 },

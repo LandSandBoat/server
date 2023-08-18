@@ -3,7 +3,7 @@
 --  NPC: Perchond
 -- !pos -182.844 4 -164.948 166
 -----------------------------------
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local entity = {}
 

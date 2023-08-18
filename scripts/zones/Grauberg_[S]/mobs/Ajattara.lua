@@ -3,7 +3,7 @@
 --  Mob: Ajattara
 -- Note: PH for Scitalis
 -----------------------------------
-local ID = require("scripts/zones/Grauberg_[S]/IDs")
+local ID = zones[xi.zone.GRAUBERG_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Big Bomb)
 -- !pos -233.830 13.613 286.714 62
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

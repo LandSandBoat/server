@@ -3,7 +3,7 @@
 --  Mob: Demon Knight
 -- Note: PH for Count Bifrons
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

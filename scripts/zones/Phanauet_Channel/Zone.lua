@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Phanauet_Channel
 -----------------------------------
-local ID = require('scripts/zones/Phanauet_Channel/IDs')
+local ID = zones[xi.zone.PHANAUET_CHANNEL]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

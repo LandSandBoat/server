@@ -4,7 +4,7 @@
 -- Spawns Dragua
 -- !pos -221 1 -335 218
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

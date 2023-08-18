@@ -12,8 +12,8 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local pastJugnerID = require('scripts/zones/Jugner_Forest_[S]/IDs')
-local sandoriaSID  = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
+local sandoriaSID  = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DANCERS_IN_DISTRESS)

@@ -3,7 +3,7 @@
 --  NPC: ??? (qm1) - Morion Worm spawn
 -- !pos 254.652 -6.039 20.878 173
 -----------------------------------
-local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
+local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
 require("scripts/globals/npc_util")
 -----------------------------------

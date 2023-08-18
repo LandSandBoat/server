@@ -3,7 +3,7 @@
 --  NPC: _ir9 (Iron Gate)
 -- !pos 70 -1.5 140 27
 -----------------------------------
-local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}

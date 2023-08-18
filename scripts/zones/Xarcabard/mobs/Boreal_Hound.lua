@@ -4,7 +4,7 @@
 -- Involved in Quests: Atop the Highest Mountains
 -- !pos -21 -25 -490 112
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
+local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

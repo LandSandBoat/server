@@ -3,7 +3,7 @@
 --  NPC: cermet portal
 -- !pos 420 0 401 34
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

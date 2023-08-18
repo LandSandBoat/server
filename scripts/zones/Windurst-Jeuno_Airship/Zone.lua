@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Windurst-Jeuno_Airship
 -----------------------------------
-local ID = require('scripts/zones/Windurst-Jeuno_Airship/IDs')
+local ID = zones[xi.zone.WINDURST_JEUNO_AIRSHIP]
 -----------------------------------
 local zoneObject = {}
 

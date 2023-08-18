@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/East_Ronfaure/IDs")
+local ID = zones[xi.zone.EAST_RONFAURE]
 
 return {
     ['Andelain']     = { text = ID.text.ANDELAIN_DIALOG },

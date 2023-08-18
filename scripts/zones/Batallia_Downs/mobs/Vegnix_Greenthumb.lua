@@ -2,7 +2,7 @@
 -- Area: Batallia Downs
 --  Mob: Vegnix Greenthumb
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 

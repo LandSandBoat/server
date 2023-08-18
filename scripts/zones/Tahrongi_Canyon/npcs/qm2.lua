@@ -4,7 +4,7 @@
 -- Note: Used to spawn Yara Ma Yha Who
 -- !pos 271 0.001 -334 117
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

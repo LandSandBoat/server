@@ -14,8 +14,8 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-local boyahdaTreeID   = require("scripts/zones/The_Boyahda_Tree/IDs")
-local windurstWoodsID = require("scripts/zones/Windurst_Woods/IDs")
+local boyahdaTreeID   = zones[xi.zone.THE_BOYAHDA_TREE]
+local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD)

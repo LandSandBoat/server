@@ -2,8 +2,6 @@
 -- Area: Nyzul Isle (Nashmeira's Plea)
 --  Mob: Razfahd
 -----------------------------------
-require('scripts/zones/Nyzul_Isle/IDs')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

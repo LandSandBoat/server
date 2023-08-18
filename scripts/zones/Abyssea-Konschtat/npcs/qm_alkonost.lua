@@ -4,7 +4,7 @@
 -- Spawns Alkonost
 -- !pos 54.000 30.654 414.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

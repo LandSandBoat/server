@@ -3,7 +3,7 @@
 --  Mob: Stone Golem
 -- Note: PH for Gargantua
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

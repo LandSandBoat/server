@@ -5,7 +5,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 -----------------------------------
-local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
+local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 local entity = {}
 

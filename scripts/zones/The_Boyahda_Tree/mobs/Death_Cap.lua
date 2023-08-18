@@ -3,7 +3,7 @@
 --  Mob: Death Cap
 -- Note: PH for Ellyllon
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

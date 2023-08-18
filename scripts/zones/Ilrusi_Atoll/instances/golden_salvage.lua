@@ -3,7 +3,7 @@
 -- TODO: random the chest locations
 -----------------------------------
 require("scripts/globals/instance")
-local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
+local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local instanceObject = {}
 

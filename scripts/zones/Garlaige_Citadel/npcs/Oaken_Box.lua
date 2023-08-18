@@ -4,7 +4,7 @@
 -- Involved In Quest: Peace for the Spirit
 -- !pos -164 0.1 225 200
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

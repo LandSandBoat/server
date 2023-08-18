@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Outer_RaKaznar/IDs')
+local ID = zones[xi.zone.OUTER_RAKAZNAR]
 
 return {
     ['_7mw']                = { messageSpecial = ID.text.DOOR_TIGHTLY_SEALED },

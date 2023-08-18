@@ -4,7 +4,7 @@
 -- Type: Smithing Synthesis Image Support
 -- !pos -106.336 2.000 26.117 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}

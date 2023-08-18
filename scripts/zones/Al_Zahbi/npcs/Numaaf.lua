@@ -5,7 +5,7 @@
 -- !pos 54.966 -7 8.328 48
 -----------------------------------
 require("scripts/globals/crafting")
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}
 

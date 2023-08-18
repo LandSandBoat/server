@@ -1,7 +1,7 @@
 -- Zone: Kuftal Tunnel (174)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 
 -- Move Phantom Worm

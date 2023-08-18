@@ -4,7 +4,7 @@
 -- Note: Used to spawn Mycophile NM
 -- !pos 145.500 -9.000 -699.000 2
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -20 -11 33 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

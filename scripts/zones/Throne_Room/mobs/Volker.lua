@@ -3,7 +3,7 @@
 --  Mob: Volker
 -- Ally during Bastok Mission 9-2
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
+local ID = zones[xi.zone.THRONE_ROOM]
 -----------------------------------
 local entity = {}
 

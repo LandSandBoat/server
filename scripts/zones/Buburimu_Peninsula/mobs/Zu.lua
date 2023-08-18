@@ -3,7 +3,7 @@
 --  Mob: Zu
 -- Note: PH for Helldiver
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

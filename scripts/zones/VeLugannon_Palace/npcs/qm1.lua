@@ -3,7 +3,7 @@
 --  NPC: ??? (qm1)
 -- !pos -370.039 16.014 -274.378 177
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 

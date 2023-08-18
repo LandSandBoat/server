@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Pandemonium Warden)
 -- !pos 200 33 -140 68
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

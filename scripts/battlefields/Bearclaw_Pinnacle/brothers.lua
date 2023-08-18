@@ -4,7 +4,7 @@
 -- !addkeyitem ZEPHYR_FAN
 -- !pos 121 -171 758 6
 -----------------------------------
-local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 require("scripts/globals/battlefield")
 -----------------------------------
 

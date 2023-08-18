@@ -2,7 +2,7 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Scythe
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
 local entity = {}
 

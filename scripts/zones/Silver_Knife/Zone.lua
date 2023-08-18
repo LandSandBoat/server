@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Silver Knife
 -----------------------------------
-local ID = require('scripts/zones/Silver_Knife/IDs')
+local ID = zones[xi.zone.SILVER_KNIFE]
 -----------------------------------
 local zoneObject = {}
 

@@ -2,7 +2,7 @@
 -- Zone: The Eldieme Necropolis (195)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local eldiemeGlobal =

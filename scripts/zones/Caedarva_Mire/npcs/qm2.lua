@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Experimental Lamia(ZNM T3))
 -- !pos -773 -11 322 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

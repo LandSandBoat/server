@@ -3,7 +3,7 @@
 --  Mob: Wild Karakul
 -- Note: PH for Peallaidh
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

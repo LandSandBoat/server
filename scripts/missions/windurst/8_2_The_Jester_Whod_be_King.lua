@@ -19,7 +19,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-local outerHorutotoID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+local outerHorutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING)

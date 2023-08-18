@@ -4,7 +4,7 @@
 -- Type: Storage Moogle
 -- !zone 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Involed in Quest: The Fanged One
 -- !pos 666 -8 -379 120
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

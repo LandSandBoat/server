@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Beadeaux_[S] (92)
 -----------------------------------
-local ID = require('scripts/zones/Beadeaux_[S]/IDs')
+local ID = zones[xi.zone.BEADEAUX_S]
 -----------------------------------
 local zoneObject = {}
 

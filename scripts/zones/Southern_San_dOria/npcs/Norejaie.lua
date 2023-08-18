@@ -4,7 +4,7 @@
 -- Type: Quest NPC - Involved in Eco-Warrior (San d'Oria)
 -- !pos 83.924 1 110.54 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

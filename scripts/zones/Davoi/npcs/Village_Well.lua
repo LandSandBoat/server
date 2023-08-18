@@ -3,7 +3,7 @@
 --  NPC: Village Well
 -- Involved in Quest: Under Oath
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

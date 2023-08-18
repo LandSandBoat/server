@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Leafallia
 -----------------------------------
-local ID = require('scripts/zones/Leafallia/IDs')
+local ID = zones[xi.zone.LEAFALLIA]
 -----------------------------------
 local zoneObject = {}
 

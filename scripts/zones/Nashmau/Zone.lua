@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Nashmau (53)
 -----------------------------------
-local ID = require('scripts/zones/Nashmau/IDs')
+local ID = zones[xi.zone.NASHMAU]
 require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}

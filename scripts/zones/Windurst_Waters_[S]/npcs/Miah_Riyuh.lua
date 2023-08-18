@@ -3,7 +3,7 @@
 --  NPC: Miah Riyuh
 -- !pos 5.323 -2 37.462 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

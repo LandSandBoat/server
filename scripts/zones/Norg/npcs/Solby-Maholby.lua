@@ -3,7 +3,7 @@
 --  NPC: Solby-Maholby
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

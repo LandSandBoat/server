@@ -5,7 +5,7 @@
 -- !pos -259 -30 276 25
 -----------------------------------
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}
 

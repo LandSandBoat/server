@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Yorcia Weald U
 -----------------------------------
-local ID = require('scripts/zones/Yorcia_Weald_U/IDs')
+local ID = zones[xi.zone.YORCIA_WEALD_U]
 -----------------------------------
 local zoneObject = {}
 

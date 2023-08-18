@@ -5,7 +5,7 @@
 -- !addkeyitem cosmo_cleanse
 -- !pos 600 -0.5 -600 38
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+local ID = zones[xi.zone.APOLLYON]
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 -----------------------------------

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: FeiYin (204)
 -----------------------------------
-local ID = require('scripts/zones/FeiYin/IDs')
+local ID = zones[xi.zone.FEIYIN]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/treasure')

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Dextrose(ZNM T2))
 -- !pos -144 11 464 62
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

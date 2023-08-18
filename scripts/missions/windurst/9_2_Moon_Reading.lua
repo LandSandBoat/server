@@ -14,7 +14,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-local heavensTowerID = require("scripts/zones/Heavens_Tower/IDs")
+local heavensTowerID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)

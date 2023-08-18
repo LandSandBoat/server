@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ra'Kaznar Turris (277)
 -----------------------------------
-local ID = require('scripts/zones/RaKaznar_Turris/IDs')
+local ID = zones[xi.zone.RAKAZNAR_TURRIS]
 -----------------------------------
 local zoneObject = {}
 

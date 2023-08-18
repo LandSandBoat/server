@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global file for Nyzul's Vending Box
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}

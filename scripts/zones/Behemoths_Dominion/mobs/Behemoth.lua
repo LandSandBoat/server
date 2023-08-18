@@ -2,7 +2,7 @@
 -- Area: Behemoth's Dominion
 --  HNM: Behemoth
 -----------------------------------
-local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/titles")
 -----------------------------------

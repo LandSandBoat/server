@@ -2,7 +2,7 @@
 -- Ambuscade
 -- !instance 30000
 -----------------------------------
-local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
+local ID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
 require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}

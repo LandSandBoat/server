@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Mhaura_Pirates (228)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs')
+local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
 -----------------------------------
 local zoneObject = {}
 

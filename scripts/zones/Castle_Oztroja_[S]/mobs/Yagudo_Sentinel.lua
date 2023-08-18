@@ -3,7 +3,7 @@
 --  Mob: Yagudo Sentinel
 -- Note: PH for Aa Xalmo the Savage and Zhuu Buxu the Silent
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja_[S]/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

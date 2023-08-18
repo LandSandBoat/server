@@ -3,7 +3,7 @@
 --  NPC: Scrawled_Writing
 -- Allows players to spawn NM Goblin Wolfman
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
+local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

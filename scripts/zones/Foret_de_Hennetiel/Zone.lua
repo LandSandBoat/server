@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Foret de Hennetiel
 -----------------------------------
-local ID = require('scripts/zones/Foret_de_Hennetiel/IDs')
+local ID = zones[xi.zone.FORET_DE_HENNETIEL]
 -----------------------------------
 local zoneObject = {}
 

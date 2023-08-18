@@ -3,7 +3,7 @@
 --  NPC: ???
 -- !pos -282.742 -3.600 -210.000 9
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
+local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

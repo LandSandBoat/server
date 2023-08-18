@@ -3,7 +3,7 @@
 --  Mob: Ghast
 -- Note: PH for Namtar
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

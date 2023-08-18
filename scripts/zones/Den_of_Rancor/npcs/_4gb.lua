@@ -3,7 +3,7 @@
 --  NPC: Altar of Rancor (flame of blue rancor)
 -- !pos 400.880 22.830 359.636 160
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

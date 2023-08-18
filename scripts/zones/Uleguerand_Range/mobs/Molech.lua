@@ -3,7 +3,7 @@
 --  Mob: Molech
 -- Note: PH for Magnotaur
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

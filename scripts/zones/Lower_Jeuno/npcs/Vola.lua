@@ -5,7 +5,7 @@
 -- Involved in Quests: Beat Around the Bushin (before the quest)
 -- !pos 43 3 -45 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

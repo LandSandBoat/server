@@ -4,7 +4,7 @@
 -- Trust NPC
 -- !pos 81.478 7.500 -24.169 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/trust")

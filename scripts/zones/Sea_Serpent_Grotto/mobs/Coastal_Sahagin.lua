@@ -3,7 +3,7 @@
 --  Mob: Coastal Sahagin
 -- Note: PH for Denn the Orcavoiced
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

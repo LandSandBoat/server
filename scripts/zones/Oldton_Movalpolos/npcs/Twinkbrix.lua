@@ -4,7 +4,7 @@
 -- Type: Warp NPC
 -- !pos -292.779 6.999 -263.153 11
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
+local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 require("scripts/globals/teleports")
 require("scripts/globals/npc_util")
 -----------------------------------

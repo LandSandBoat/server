@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Windurst_Woods (241)
 -----------------------------------
-local ID = require('scripts/zones/Windurst_Woods/IDs')
+local ID = zones[xi.zone.WINDURST_WOODS]
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')

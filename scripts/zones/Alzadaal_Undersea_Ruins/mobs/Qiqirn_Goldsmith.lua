@@ -3,7 +3,7 @@
 --  Mob: Qiqirn Goldsmith
 -- Note: PH for Cookieduster Lipiroon
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

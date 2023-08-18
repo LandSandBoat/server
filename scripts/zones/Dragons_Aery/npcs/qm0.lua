@@ -4,7 +4,7 @@
 -- Spawns Fafnir or Nidhogg
 -- !pos -81 32 2 178
 -----------------------------------
-local ID = require("scripts/zones/Dragons_Aery/IDs")
+local ID = zones[xi.zone.DRAGONS_AERY]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

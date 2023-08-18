@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local portJeunoID = require('scripts/zones/Port_Jeuno/IDs')
+local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)

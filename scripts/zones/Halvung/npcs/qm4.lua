@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Achamoth(ZNM T3))
 -- !pos -34 10 336 62
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

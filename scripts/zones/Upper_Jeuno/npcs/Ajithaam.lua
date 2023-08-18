@@ -3,7 +3,7 @@
 --  NPC: Ajithaam
 -- !pos -82 0.1 160 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

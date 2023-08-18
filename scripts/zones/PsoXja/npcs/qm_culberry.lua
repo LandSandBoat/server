@@ -4,7 +4,7 @@
 -- Notes: Used to spawn Golden-Tongued Culberry
 -- !pos -270.063 31.395 256.812 9
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
+local ID = zones[xi.zone.PSOXJA]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

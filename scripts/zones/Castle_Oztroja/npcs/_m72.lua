@@ -4,7 +4,7 @@
 -- Notes: Opens door _477 when _m72 to _m75 are lit
 -- !pos -60 -72 -139 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

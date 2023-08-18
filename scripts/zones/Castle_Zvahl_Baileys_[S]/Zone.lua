@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Baileys_[S] (138)
 -----------------------------------
-local ID = require('scripts/zones/Castle_Zvahl_Baileys_[S]/IDs')
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S]
 -----------------------------------
 local zoneObject = {}
 

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 
 return {
     ['!']            = { messageSpecial = ID.text.YOU_SEE_NOTHING },

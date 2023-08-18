@@ -10,7 +10,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ralaID = require('scripts/zones/Rala_Waterways/IDs')
+local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)

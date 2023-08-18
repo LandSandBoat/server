@@ -3,7 +3,7 @@
 --  NPC: Zafif
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

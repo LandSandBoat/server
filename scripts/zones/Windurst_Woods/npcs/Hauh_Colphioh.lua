@@ -4,7 +4,7 @@
 -- Type: Guildworker's Union Representative
 -- !pos -38.173 -1.25 -113.679 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}

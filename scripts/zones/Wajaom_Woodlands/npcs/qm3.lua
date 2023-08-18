@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Gotoh Zha the Redolent(ZNM T3))
 -- !pos -337 -31 676 51
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

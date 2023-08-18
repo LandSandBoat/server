@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Lower_Jeuno (245)
 -----------------------------------
-local ID = require('scripts/zones/Lower_Jeuno/IDs')
+local ID = zones[xi.zone.LOWER_JEUNO]
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 require('scripts/globals/conquest')
 require('scripts/globals/missions')

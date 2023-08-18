@@ -5,7 +5,7 @@
 -- !pos 257 -45 212 101
 -----------------------------------
 require("scripts/globals/npc_util")
-local ID = require("scripts/zones/East_Ronfaure/IDs")
+local ID = zones[xi.zone.EAST_RONFAURE]
 -----------------------------------
 local entity = {}
 

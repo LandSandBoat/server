@@ -12,8 +12,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local chateauID          = require('scripts/zones/Chateau_dOraguille/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local chateauID          = zones[xi.zone.CHATEAU_DORAGUILLE]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)

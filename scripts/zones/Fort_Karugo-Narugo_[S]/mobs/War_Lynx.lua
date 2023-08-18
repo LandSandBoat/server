@@ -3,7 +3,7 @@
 --  Mob: War Lynx
 -- The Tigress Strikes Fight
 -----------------------------------
-local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

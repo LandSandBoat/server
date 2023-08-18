@@ -5,7 +5,7 @@
 --  Note: EventID for Twinkle Tree is unknown. Quest funtions but the full event is not played.
 -- !pos 156.003 -40.753 333.742 115
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
+local ID = zones[xi.zone.WEST_SARUTABARUTA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

@@ -2,7 +2,7 @@
 -- Area: Leujaoam Sanctum
 -- Ancient Lockbox
 -----------------------------------
-local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
+local ID = zones[xi.zone.LEUJAOAM_SANCTUM]
 require("scripts/globals/assault")
 require("scripts/globals/appraisal")
 -----------------------------------

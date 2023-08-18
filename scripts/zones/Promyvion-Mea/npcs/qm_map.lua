@@ -6,7 +6,7 @@
 -- !pos 280.001 -2.328 280.000 20
 -- !pos 239.998 -2.329 120.000 20
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Mea/IDs")
+local ID = zones[xi.zone.PROMYVION_MEA]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

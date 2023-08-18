@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local yhoatorID = require('scripts/zones/Yhoator_Jungle/IDs')
+local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 

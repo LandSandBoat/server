@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local wallsID = require('scripts/zones/Windurst_Walls/IDs')
+local wallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustShantotto")

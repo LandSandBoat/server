@@ -4,7 +4,7 @@
 -- Note: Spawns Necroplasm for Eco-Warrior (San d'Oria)
 -- !pos -116 30 50 193
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

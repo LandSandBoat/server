@@ -3,7 +3,7 @@
 -- NPC:   Armoury Crate
 -- Notes: 100% drop from NMs for ??? items and ?% drop from normal mobs for Temp items
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/utils")
 require("scripts/globals/nyzul")
 -----------------------------------

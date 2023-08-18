@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
-local denOfRancorID = require('scripts/zones/Den_of_Rancor/IDs')
+local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
+local denOfRancorID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)

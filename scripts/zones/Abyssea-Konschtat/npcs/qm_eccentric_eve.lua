@@ -4,7 +4,7 @@
 -- Spawns Eccentric Eve
 -- !pos 230.413 32.278 280.677 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

@@ -5,7 +5,7 @@
 -- !pos 132.157 7.496 -2.187 236
 -----------------------------------
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 

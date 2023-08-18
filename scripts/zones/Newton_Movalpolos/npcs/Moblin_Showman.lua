@@ -3,7 +3,7 @@
 --  NPC: Moblin Showman - Bugbear Matman
 -- !pos 124.544 19.988 -60.670 12
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

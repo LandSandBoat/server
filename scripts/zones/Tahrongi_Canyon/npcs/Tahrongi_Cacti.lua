@@ -4,7 +4,7 @@
 -- Involved in Quest: Say It with Flowers
 -- !pos -308.721 7.477 264.454
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

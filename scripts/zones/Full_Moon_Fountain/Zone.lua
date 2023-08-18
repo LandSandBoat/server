@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Full_Moon_Fountain (170)
 -----------------------------------
-local ID = require('scripts/zones/Full_Moon_Fountain/IDs')
+local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

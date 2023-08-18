@@ -2,7 +2,7 @@
 -- Area: Bibiki Bay
 --  NPC: Clamming Point
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 

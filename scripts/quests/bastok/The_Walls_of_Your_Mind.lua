@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
-local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
+local portBastokID = zones[xi.zone.PORT_BASTOK]
+local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)

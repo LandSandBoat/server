@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos -132.589 19.999 -314.261 118
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,7 @@
 -- !pos 464.350 -6 752.731 4
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 

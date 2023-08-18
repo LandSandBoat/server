@@ -4,7 +4,7 @@
 -- Trust NPC
 -- !pos 123.754 0.000 92.125 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/trust")

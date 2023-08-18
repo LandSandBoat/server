@@ -3,7 +3,7 @@
 --  Mob: Deinonychus
 -- Note: Place Holder for Yowie
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

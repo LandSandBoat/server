@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos 592.850 -16.765 -518.802 119
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 -----------------------------------
 local entity = {}
 

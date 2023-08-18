@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/conquest')
 require('scripts/globals/helm')
-local ID = require('scripts/zones/Misareaux_Coast/IDs')
+local ID = zones[xi.zone.MISAREAUX_COAST]
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
 local zoneObject = {}

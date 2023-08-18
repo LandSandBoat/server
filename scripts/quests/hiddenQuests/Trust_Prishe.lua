@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local tavnaziaID = require("scripts/zones/Tavnazian_Safehold/IDs")
+local tavnaziaID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustPrishe")

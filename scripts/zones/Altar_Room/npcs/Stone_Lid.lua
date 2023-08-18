@@ -3,7 +3,7 @@
 --  NPC: Stone Lid
 -- !pos -316.4390, 24.7654, 12.1590
 -----------------------------------
-local ID = require("scripts/zones/Altar_Room/IDs")
+local ID = zones[xi.zone.ALTAR_ROOM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

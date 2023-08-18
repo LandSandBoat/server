@@ -3,7 +3,7 @@
 --  NPC: <this space intentionally left blank>
 -- !pos 73 4 -174 113
 -----------------------------------
-local ID = require("scripts/zones/Cape_Teriggan/IDs")
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

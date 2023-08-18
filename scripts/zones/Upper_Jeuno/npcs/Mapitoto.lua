@@ -4,7 +4,7 @@
 -- Type: Full Speed Ahead Mount NPC
 -- !pos -54.310 8.200 85.940 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 require("scripts/globals/chocobo")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

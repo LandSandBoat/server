@@ -3,7 +3,7 @@
 --  NPC: Tibelda
 -- Valdeaunia Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
+local ID = zones[xi.zone.BASTOK_MINES]
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------

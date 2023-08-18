@@ -1,7 +1,7 @@
 -----------------------------------
 -- Nyzul Isle Global
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/appraisal")
 require("scripts/globals/utils")
 -----------------------------------

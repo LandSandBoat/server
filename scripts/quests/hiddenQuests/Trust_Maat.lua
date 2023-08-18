@@ -7,7 +7,7 @@ require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustMaat")

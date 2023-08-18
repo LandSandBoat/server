@@ -3,7 +3,7 @@
 --  Mob: Nimbus Hippogryph
 -- Note: Place holder Imdugud
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

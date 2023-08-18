@@ -4,7 +4,7 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 641 -15 7 119
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

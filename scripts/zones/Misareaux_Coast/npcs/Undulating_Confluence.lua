@@ -3,7 +3,7 @@
 --  NPC: Undulating Confluence
 -- !pos --48.908 -23.302 572.269 25
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}
 

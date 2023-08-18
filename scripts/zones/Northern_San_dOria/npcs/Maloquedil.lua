@@ -4,7 +4,7 @@
 -- Involved in Quest : Warding Vampires, Riding on the Clouds, Lure of the Wildcat (San d'Oria)
 -- !pos 35 0.1 60 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")

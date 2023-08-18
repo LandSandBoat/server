@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --   NM: Jailer of Faith
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

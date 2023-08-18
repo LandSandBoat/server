@@ -3,7 +3,7 @@
 --  NPC: Hot Springs
 -- !pos 444 -37 -18 139
 -----------------------------------
-local ID = require("scripts/zones/Horlais_Peak/IDs")
+local ID = zones[xi.zone.HORLAIS_PEAK]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

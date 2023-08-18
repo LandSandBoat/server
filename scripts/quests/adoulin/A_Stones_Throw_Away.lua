@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local morimarID = require('scripts/zones/Morimar_Basalt_Fields/IDs')
+local morimarID = zones[xi.zone.MORIMAR_BASALT_FIELDS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_AWAY)

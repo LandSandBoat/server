@@ -8,7 +8,7 @@ require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.APHMAUS_LIGHT)

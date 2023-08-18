@@ -2,7 +2,7 @@
 -- Area: Cloister of Gales
 -- BCNM: Trial-size Trial by Wind
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Gales/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_GALES]
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- Note: Involved in Bartholomew's Knife mini-quest
 -- !pos 0.21 0.57 -322.4 177
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

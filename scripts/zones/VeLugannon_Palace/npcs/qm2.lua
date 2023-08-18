@@ -4,7 +4,7 @@
 -- Note: Used to spawn Brigandish Blade
 -- !pos 0.1 0.1 -286 177
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

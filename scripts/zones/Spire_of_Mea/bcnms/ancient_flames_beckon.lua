@@ -2,7 +2,7 @@
 -- Ancient Flames Beckon
 -- Spire of Mea mission battlefield
 -----------------------------------
-local ID = require("scripts/zones/Spire_of_Mea/IDs")
+local ID = zones[xi.zone.SPIRE_OF_MEA]
 require("scripts/globals/battlefield")
 require("scripts/globals/teleports")
 require("scripts/globals/missions")

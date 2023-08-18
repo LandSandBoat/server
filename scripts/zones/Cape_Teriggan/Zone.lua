@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Cape_Teriggan (113)
 -----------------------------------
-local ID = require('scripts/zones/Cape_Teriggan/IDs')
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')

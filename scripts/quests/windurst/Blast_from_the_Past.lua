@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local shakhramiID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)

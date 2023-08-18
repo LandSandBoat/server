@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -305.775 -10.319 -152.173 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

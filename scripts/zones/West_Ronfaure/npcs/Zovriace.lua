@@ -4,7 +4,7 @@
 -- Type: Patrol NPC
 -- !pos -436.356 -15.851 -258.168 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
+local ID = zones[xi.zone.WEST_RONFAURE]
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}

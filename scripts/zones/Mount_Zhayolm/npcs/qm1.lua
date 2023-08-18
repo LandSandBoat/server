@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Brass Borer(ZNM T1))
 -- !pos 399 -27 120 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -259,7 +259,7 @@ xi.voidwalker.npcOnEventFinish = function(player, csid, option, npc)
 
     if csid == 10120 then
         if opt == 1 then
-            local msg = require("scripts/zones/RuLude_Gardens/IDs")
+            local msg = zones[xi.zone.RULUDE_GARDENS]
             local ki  = abyssiteKeyitems[1]
             player:delGil(1000)
             player:addKeyItem(ki)

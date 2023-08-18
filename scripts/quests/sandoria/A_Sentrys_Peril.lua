@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
+local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)

@@ -3,7 +3,7 @@
 -- NPC:   Rune of Transfer
 -- Notes: Displays currentFloor floor objective, activates when objective completed.
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")

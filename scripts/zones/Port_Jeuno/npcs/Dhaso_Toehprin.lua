@@ -3,7 +3,7 @@
 --  NPC: Dhaso Toehprin
 -- !pos 4 8 -50 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}
 

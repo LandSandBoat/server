@@ -4,7 +4,7 @@
 -- Spawns Siranpa-Kamuy
 -- !pos 370.000 1.601 10.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

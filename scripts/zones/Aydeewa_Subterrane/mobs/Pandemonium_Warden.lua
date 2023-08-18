@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/magic")
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}
 

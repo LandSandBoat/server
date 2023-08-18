@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta_[S] (95)
 -----------------------------------
-local ID = require('scripts/zones/West_Sarutabaruta_[S]/IDs')
+local ID = zones[xi.zone.WEST_SARUTABARUTA]
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

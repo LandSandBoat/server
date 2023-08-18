@@ -3,7 +3,7 @@
 --  NPC: Blingbrix
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  Mob: Orcish Beastrider
 -- Note: PH for Poisonhand Gnadgad
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos -65.976 -23.829 -661.362 104
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest/IDs")
+local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 

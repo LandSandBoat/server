@@ -13,8 +13,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
-local xarcabardID = require('scripts/zones/Xarcabard/IDs')
+local ruludeID    = zones[xi.zone.RULUDE_GARDENS]
+local xarcabardID = zones[xi.zone.XARCABARD]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)

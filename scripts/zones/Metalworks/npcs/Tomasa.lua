@@ -3,7 +3,7 @@
 --  NPC: Tomasa
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

@@ -12,9 +12,9 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mhauraID = require('scripts/zones/Mhaura/IDs')
-local phomiunaID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-local misareauxID = require('scripts/zones/Misareaux_Coast/IDs')
+local mhauraID = zones[xi.zone.MHAURA]
+local phomiunaID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.KNOCKING_ON_FORBIDDEN_DOORS)

@@ -3,7 +3,7 @@
 --  Mob: Ignis Djinn
 -- Note: PH for Big Bang
 -----------------------------------
-local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
+local ID = zones[xi.zone.VUNKERL_INLET_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

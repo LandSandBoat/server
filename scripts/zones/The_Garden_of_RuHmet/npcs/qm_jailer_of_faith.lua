@@ -8,7 +8,7 @@
 -- SW / Tarutaru tower !pos -580 0 -644 35
 -- NW / Mithra tower   !pos -683 0 -340 35
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

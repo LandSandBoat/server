@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: La_Theine_Plateau (102)
 -----------------------------------
-local ID = require('scripts/zones/La_Theine_Plateau/IDs')
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')

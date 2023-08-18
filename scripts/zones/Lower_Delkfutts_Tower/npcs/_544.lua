@@ -4,7 +4,7 @@
 -- Notes: Door opens when you trade Delkfutt Key to it
 -- !pos 345 0.1 20 184
 -----------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

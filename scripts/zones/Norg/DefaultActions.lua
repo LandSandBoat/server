@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 
 return {
     ['_700']       = { messageSpecial = ID.text.DOOR_IS_LOCKED },

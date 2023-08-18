@@ -4,7 +4,7 @@
 -- !pos 62 32 123 256
 -----------------------------------
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

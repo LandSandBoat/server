@@ -4,7 +4,7 @@
 -- Spawns Gaizkin
 -- !pos -132.253 0.015 0.753 215
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

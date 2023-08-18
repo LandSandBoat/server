@@ -2,7 +2,7 @@
 -- Area: Sauromugue Champaign
 --  Mob: Hill Lizard
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

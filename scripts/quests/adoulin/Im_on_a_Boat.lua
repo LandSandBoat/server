@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local foretID = require("scripts/zones/Foret_de_Hennetiel/IDs")
+local foretID = zones[xi.zone.FORET_DE_HENNETIEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IM_ON_A_BOAT)

@@ -4,7 +4,7 @@
 -- Note: PH for Zizzy Zillah
 -----------------------------------
 mixins = { require("scripts/mixins/families/ziz") }
-local ID = require("scripts/zones/Mamook/IDs")
+local ID = zones[xi.zone.MAMOOK]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Mahjlaef the Paintorn(ZNM T3))
 -- !pos 695 -7 527 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

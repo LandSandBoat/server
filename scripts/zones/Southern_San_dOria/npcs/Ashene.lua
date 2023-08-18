@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos 70 0 61 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

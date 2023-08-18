@@ -7,7 +7,7 @@ mixins =
     require("scripts/mixins/dynamis_beastmen"),
     require("scripts/mixins/job_special")
 }
-local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

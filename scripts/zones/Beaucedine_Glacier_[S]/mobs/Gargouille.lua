@@ -3,7 +3,7 @@
 --  Mob: Gargouille
 -- Note: PH for Grand'Goule
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 require("scripts/globals/mobs")
 mixins = { require("scripts/mixins/families/gargouille") }
 -----------------------------------

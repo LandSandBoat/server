@@ -8,7 +8,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local pastSandoriaID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PROOF_OF_VALOR)

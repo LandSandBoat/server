@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Olla Pequena)
 -- !pos 851 0.1 92 178
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
 

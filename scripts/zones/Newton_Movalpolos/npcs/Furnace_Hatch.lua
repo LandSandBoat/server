@@ -2,7 +2,7 @@
 -- Area: Newton Movalpolos
 --  NPC: Furnace_Hatch
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

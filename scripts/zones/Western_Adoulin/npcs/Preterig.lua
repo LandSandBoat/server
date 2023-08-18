@@ -5,7 +5,7 @@
 -- !pos 6 0 -53 256
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

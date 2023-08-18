@@ -4,7 +4,7 @@
 -- Type: Standard Merchant NPC
 -- !pos -415 -2 -430 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

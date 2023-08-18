@@ -3,7 +3,7 @@
 --  Mob: Sabotender Sediendo
 -- Note: Place Holder for Sabotender Mariachi
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

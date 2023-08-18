@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 
 return {
     ['Mandragora_Warden'] = { event = 10 },

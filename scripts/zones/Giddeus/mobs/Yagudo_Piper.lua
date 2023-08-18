@@ -3,7 +3,7 @@
 --  Mob: Yagudo Piper
 -- Note: PH for Vuu Puqu the Beguiler
 -----------------------------------
-local ID = require("scripts/zones/Giddeus/IDs")
+local ID = zones[xi.zone.GIDDEUS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Kazham (250)
 -----------------------------------
-local ID = require('scripts/zones/Kazham/IDs')
+local ID = zones[xi.zone.KAZHAM]
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------

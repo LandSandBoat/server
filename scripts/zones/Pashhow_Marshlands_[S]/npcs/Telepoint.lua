@@ -3,7 +3,7 @@
 --  NPC: Telepoint
 -- !pos 345.472 24.279 -114.731 90
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

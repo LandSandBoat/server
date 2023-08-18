@@ -4,7 +4,7 @@
 -- Notes: Tonberry Priest Room (Offers Tonberry Hate Reset)
 -- !pos 60.001 -1.653 -147.755 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

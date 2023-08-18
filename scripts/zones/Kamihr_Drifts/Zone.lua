@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Kamihr Drifts
 -----------------------------------
-local ID = require('scripts/zones/Kamihr_Drifts/IDs')
+local ID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 local zoneObject = {}
 

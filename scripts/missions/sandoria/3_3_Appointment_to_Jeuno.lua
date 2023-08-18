@@ -15,9 +15,9 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
-local lowerDelkfuttID    = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local lowerDelkfuttID    = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Spire_of_Dem (19)
 -----------------------------------
-local ID = require('scripts/zones/Spire_of_Dem/IDs')
+local ID = zones[xi.zone.SPIRE_OF_DEM]
 -----------------------------------
 local zoneObject = {}
 

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 

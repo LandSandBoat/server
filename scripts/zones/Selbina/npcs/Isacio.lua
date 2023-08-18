@@ -4,7 +4,7 @@
 -- Finishes Quest: Elder Memories
 -- !pos -54 -1 -44 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

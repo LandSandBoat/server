@@ -4,7 +4,7 @@
 -- !pos 512.374 0.019 10.57 125
 -- Active on EARTHSDAY in this zone. To test on off-days, setStatus(xi.status.NORMAL)
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}

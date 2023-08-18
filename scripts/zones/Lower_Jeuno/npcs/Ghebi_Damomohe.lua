@@ -5,7 +5,7 @@
 -- Starts and Finishes Quest: Tenshodo Membership
 -- !pos 16 0 -5 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/quests")

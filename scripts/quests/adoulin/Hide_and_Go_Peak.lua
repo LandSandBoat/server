@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local marjamiID = require("scripts/zones/Marjami_Ravine/IDs")
+local marjamiID = zones[xi.zone.MARJAMI_RAVINE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HIDE_AND_GO_PEAK)

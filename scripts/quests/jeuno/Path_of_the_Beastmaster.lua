@@ -7,7 +7,7 @@
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)

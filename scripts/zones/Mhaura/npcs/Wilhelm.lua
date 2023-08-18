@@ -3,7 +3,7 @@
 --  NPC: Wilhelm
 -- !pos -22.746 -5 17.157 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

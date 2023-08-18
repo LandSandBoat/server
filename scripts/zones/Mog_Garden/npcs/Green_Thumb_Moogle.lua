@@ -2,7 +2,7 @@
 -- Area: Mog Garden
 --  NPC: Green Thumb Moogle
 -----------------------------------
-local ID = require("scripts/zones/Mog_Garden/IDs")
+local ID = zones[xi.zone.MOG_GARDEN]
 require("scripts/globals/moghouse")
 require("scripts/globals/shop")
 -----------------------------------

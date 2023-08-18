@@ -6,7 +6,7 @@
 -----------------------------------
 require('scripts/quests/jeuno/helpers')
 -----------------------------------
-local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
 local params =

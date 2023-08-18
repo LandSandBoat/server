@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Navukgo_Execution_Chamber (64)
 -----------------------------------
-local ID = require('scripts/zones/Navukgo_Execution_Chamber/IDs')
+local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 -----------------------------------
 local zoneObject = {}
 

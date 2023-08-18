@@ -13,7 +13,7 @@ require('scripts/globals/missions')
 require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OF_MALIGN_MALADIES)

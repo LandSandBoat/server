@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll
 --  NPC: Cursed Chest
 -----------------------------------
-local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
+local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local entity = {}
 

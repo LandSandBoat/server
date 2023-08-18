@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local palboroughMinesID = require('scripts/zones/Palborough_Mines/IDs')
+local palboroughMinesID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)

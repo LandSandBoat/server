@@ -13,7 +13,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local talaccaCoveID = require('scripts/zones/Talacca_Cove/IDs')
+local talaccaCoveID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Labyrinth of Onzozo (213)
 -----------------------------------
-local ID = require('scripts/zones/Labyrinth_of_Onzozo/IDs')
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

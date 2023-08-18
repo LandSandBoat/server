@@ -3,7 +3,7 @@
 --  NPC: Large Apparatus (Right) - Dem
 -- !pos -243.723 -41.482 -289.937 14
 -----------------------------------
-local ID = require("scripts/zones/Hall_of_Transference/IDs")
+local ID = zones[xi.zone.HALL_OF_TRANSFERENCE]
 -----------------------------------
 local entity = {}
 

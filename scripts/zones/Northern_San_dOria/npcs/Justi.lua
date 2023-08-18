@@ -3,7 +3,7 @@
 --  NPC: Justi
 -- Conquest depending furniture seller
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

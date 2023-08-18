@@ -3,7 +3,7 @@
 --  NPC: Dimensional_Portal
 -- !pos 260.000 35.150 340.000 117
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

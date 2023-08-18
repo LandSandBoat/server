@@ -9,7 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)

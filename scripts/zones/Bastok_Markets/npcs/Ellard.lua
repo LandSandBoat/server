@@ -4,7 +4,7 @@
 -- Type: Guildworker's Union Representative
 -- !pos -214.355 -7.814 -63.809 235
 -----------------------------------
-local ID = require('scripts/zones/Bastok_Markets/IDs')
+local ID = zones[xi.zone.BASTOK_MARKETS]
 require('scripts/globals/crafting')
 -----------------------------------
 local entity = {}

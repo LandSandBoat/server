@@ -4,7 +4,7 @@
 -- Type: Involved in Quest (Flyers for Regine)
 -- !pos -127.355 0.000 130.461 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/quests/flyers_for_regine")
 -----------------------------------
 local entity = {}

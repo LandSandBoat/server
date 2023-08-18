@@ -1,7 +1,7 @@
 -- Zone: Al'Taieu (33)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

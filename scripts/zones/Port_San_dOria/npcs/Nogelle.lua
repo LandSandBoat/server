@@ -3,7 +3,7 @@
 --  NPC: Nogelle
 -- Starts Lufet's Lake Salt
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

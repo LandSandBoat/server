@@ -3,7 +3,7 @@
 --  Mob: Torama
 -- Note: Place holder Ose
 -----------------------------------
-local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- !pos -29.787 -4.499 42.603 94
 -- Sealed Container NPC
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 -- Type: Smithing Guild Master
 -- !pos -109 2 27 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
 -----------------------------------

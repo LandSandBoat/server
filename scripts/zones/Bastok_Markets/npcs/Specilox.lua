@@ -3,7 +3,7 @@
 --  NPC: Specilox
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Iriri Samariri(ZNM T2))
 -- !pos -118 7 -80 65
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
+local ID = zones[xi.zone.MAMOOK]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

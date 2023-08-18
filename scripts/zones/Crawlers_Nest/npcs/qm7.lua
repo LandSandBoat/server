@@ -3,7 +3,7 @@
 --  NPC: ??? - Awd Goggie spawn
 -- !pos -253.026 -1.867 253.055 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

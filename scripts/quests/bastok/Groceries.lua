@@ -9,8 +9,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local bastokMinesID = require('scripts/zones/Bastok_Mines/IDs')
-local zeruhnMinesID = require('scripts/zones/Zeruhn_Mines/IDs')
+local bastokMinesID = zones[xi.zone.BASTOK_MINES]
+local zeruhnMinesID = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GROCERIES)

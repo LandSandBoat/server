@@ -4,7 +4,7 @@
 -- Allows players to spawn the HNM Genbu with a Gem of the North and a Winterstone.
 -- !pos 257 -70 517 130
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
+local ID = zones[xi.zone.RUAUN_GARDENS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

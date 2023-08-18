@@ -3,7 +3,7 @@
 --  NPC: ???
 -- !pos -402.574 3.999 -202.750 7
 -----------------------------------
-local ID = require("scripts/zones/Attohwa_Chasm/IDs")
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 

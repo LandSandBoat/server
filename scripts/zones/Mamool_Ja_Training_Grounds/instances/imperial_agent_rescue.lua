@@ -2,7 +2,7 @@
 -- Assault: Imperial Agent Rescue
 -- An agent sent to spy on the secret training grounds of the Mamool Ja has been captured. Rescue him before he is interrogated for Imperial secrets.
 -----------------------------------
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 -----------------------------------

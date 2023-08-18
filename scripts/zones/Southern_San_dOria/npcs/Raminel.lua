@@ -4,7 +4,7 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -56 2 -21 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 -----------------------------------

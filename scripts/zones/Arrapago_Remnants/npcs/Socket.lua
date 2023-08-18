@@ -4,7 +4,7 @@
 -- Trade Slavage Cells to pop Wahzil
 -- Wahzil drops 2x the Cells traded
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 

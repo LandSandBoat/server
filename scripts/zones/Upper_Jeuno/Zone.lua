@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Upper_Jeuno (244)
 -----------------------------------
-local ID = require('scripts/zones/Upper_Jeuno/IDs')
+local ID = zones[xi.zone.UPPER_JEUNO]
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------

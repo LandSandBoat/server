@@ -3,7 +3,7 @@
 --  NPC: Elevator
 -- !pos -294 -143 27 158
 -----------------------------------
-local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

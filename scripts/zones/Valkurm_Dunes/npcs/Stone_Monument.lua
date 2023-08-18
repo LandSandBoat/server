@@ -4,7 +4,7 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos -311.299 -4.420 -138.878 103
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 

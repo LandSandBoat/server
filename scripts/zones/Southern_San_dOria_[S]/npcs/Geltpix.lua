@@ -3,7 +3,7 @@
 --  NPC: Geltpix
 -- !pos 154 -2 103 80
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 require("scripts/globals/shop")
 -----------------------------------
 

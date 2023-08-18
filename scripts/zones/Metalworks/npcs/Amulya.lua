@@ -5,7 +5,7 @@
 -- !pos -106.093 0.999 -24.564 237
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}
 

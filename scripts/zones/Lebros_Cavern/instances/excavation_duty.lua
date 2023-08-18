@@ -1,7 +1,7 @@
 -----------------------------------
 -- Assault: Excavation Duty
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
+local ID = zones[xi.zone.LEBROS_CAVERN]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 -----------------------------------

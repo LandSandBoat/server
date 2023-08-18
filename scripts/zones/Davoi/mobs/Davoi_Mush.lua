@@ -3,7 +3,7 @@
 --  Mob: Davoi Mush
 -- Note: PH for Blubbery Bulge
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

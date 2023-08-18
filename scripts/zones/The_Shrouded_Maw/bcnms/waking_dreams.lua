@@ -3,7 +3,7 @@
 -- The Shrouded Maw avatar battlefield
 -- !addkeyitem VIAL_OF_DREAM_INCENSE
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+local ID = zones[xi.zone.THE_SHROUDED_MAW]
 require("scripts/globals/battlefield")
 require("scripts/globals/titles")
 -----------------------------------

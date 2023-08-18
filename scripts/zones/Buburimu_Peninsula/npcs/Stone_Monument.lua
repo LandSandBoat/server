@@ -4,7 +4,7 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos 320.755 -4.000 368.722 118
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 -----------------------------------
 local entity = {}
 

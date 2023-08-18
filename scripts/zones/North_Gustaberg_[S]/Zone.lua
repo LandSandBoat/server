@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: North_Gustaberg_[S] (88)
 -----------------------------------
-local ID = require('scripts/zones/North_Gustaberg_[S]/IDs')
+local ID = zones[xi.zone.NORTH_GUSTABERG_S]
 require('scripts/globals/quests')
 require('scripts/globals/helm')
 -----------------------------------

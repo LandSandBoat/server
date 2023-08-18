@@ -10,7 +10,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-local upperJeunoID = require("scripts/zones/Upper_Jeuno/IDs")
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)

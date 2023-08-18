@@ -9,9 +9,9 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local portSandOriaID = require('scripts/zones/Port_San_dOria/IDs')
-local northernSandOriaID = require('scripts/zones/Northern_San_dOria/IDs')
-local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
+local portSandOriaID     = zones[xi.zone.PORT_SAN_DORIA]
+local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local westRonfaureID     = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)

@@ -5,7 +5,7 @@
 -- !pos -15.193 0.000 31.356 53
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Nashmau/IDs")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 

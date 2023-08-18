@@ -5,7 +5,7 @@
 -- instance 2 Promathia !pos 521 -0.500 517
 -- instance 3 Promathia !pos -519 120 -520
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")

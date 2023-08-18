@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Qu'Bia Arena (206)
 -----------------------------------
-local ID = require('scripts/zones/QuBia_Arena/IDs')
+local ID = zones[xi.zone.QUBIA_ARENA]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

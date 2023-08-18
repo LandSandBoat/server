@@ -3,7 +3,7 @@
 --  Mob: Nachzehrer
 -- Note: PH for Gwyllgi
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

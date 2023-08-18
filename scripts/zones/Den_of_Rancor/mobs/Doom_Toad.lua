@@ -3,7 +3,7 @@
 --  Mob: Doom Toad
 -- Note: PH for Ogama
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Dangruf_Wadi (191)
 -----------------------------------
-local ID = require('scripts/zones/Dangruf_Wadi/IDs')
+local ID = zones[xi.zone.DANGRUF_WADI]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

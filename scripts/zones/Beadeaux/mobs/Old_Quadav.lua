@@ -3,7 +3,7 @@
 --  Mob: Old Quadav
 -- PH for Ge'Dha Evileye
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
+local ID = zones[xi.zone.BEADEAUX]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

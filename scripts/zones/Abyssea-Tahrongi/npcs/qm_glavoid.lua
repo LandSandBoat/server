@@ -6,7 +6,7 @@
 -- !pos 196 34 415 45
 -- !pos 211 33 400 45
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Tahrongi/IDs')
+local ID = zones[xi.zone.ABYSSEA_TAHRONGI]
 require("scripts/globals/abyssea")
 -----------------------------------
 local entity = {}

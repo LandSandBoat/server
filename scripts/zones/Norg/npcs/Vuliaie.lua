@@ -5,7 +5,7 @@
 -- !pos -24.259 0.891 -19.556 252
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 

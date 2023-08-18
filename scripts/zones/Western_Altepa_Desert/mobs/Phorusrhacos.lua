@@ -3,7 +3,7 @@
 --  Mob: Phorusrhacos
 -- Note: PH for Picolaton
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

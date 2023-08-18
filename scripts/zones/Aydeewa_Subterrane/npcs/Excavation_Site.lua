@@ -3,7 +3,7 @@
 --  NPC: Excavation Site (Olduum Ring quest)
 -- !pos 390 1 349 68
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}
 

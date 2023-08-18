@@ -3,7 +3,7 @@
 --  NPC: ??? Used to spawn Edacious Opo-opo
 -- !pos 545.7346 0.1819 -433.2258
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 local entity = {}
 

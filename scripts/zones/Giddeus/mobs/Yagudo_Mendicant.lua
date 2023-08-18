@@ -2,7 +2,7 @@
 -- Area: Giddeus (145)
 --  Mob: Yagudo Mendicant
 -----------------------------------
-local ID = require("scripts/zones/Giddeus/IDs")
+local ID = zones[xi.zone.GIDDEUS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -5,7 +5,7 @@
 -----------------------------------
 require('scripts/globals/utils')
 -----------------------------------
-local ID = require('scripts/zones/Qufim_Island/IDs')
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

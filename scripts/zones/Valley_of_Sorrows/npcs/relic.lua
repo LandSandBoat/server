@@ -3,7 +3,7 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -14 -3 56 128
 -----------------------------------
-local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

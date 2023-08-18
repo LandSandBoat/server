@@ -5,7 +5,7 @@
 -- Involved in Quests: Cook's Pride
 -- !pos -105 -2 69 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

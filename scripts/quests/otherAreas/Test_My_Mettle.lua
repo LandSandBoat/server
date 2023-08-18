@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/quests/otherAreas/helpers')
 -----------------------------------
-local selbinaID = require('scripts/zones/Selbina/IDs')
+local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)

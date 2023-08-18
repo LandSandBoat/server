@@ -4,7 +4,7 @@
 -- Note: Spawns NM Cancer
 -- !pos -25.238 -12.785 -148.393 174
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: Drop Gate (by Hakutaku)
 -- !pos 5.044 23.590 -299.976 160
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}
 

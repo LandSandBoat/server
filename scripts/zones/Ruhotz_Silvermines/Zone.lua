@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ruhotz_Silvermines
 -----------------------------------
-local ID = require('scripts/zones/Ruhotz_Silvermines/IDs')
+local ID = zones[xi.zone.RUHOTZ_SILVERMINES]
 -----------------------------------
 local zoneObject = {}
 

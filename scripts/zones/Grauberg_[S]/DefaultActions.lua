@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Grauberg_[S]/IDs')
+local ID = zones[xi.zone.GRAUBERG_S]
 
 return {
     ['qm3']               = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

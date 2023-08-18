@@ -3,7 +3,7 @@
 --  NPC: ??? (Bracelet of verve)
 -- Trade Moblin Oil
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

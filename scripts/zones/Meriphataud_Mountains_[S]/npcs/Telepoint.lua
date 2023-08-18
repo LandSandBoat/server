@@ -3,7 +3,7 @@
 --  NPC: Telepoint
 -- !pos 305.989 -14.980 18.960 97
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

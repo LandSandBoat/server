@@ -4,7 +4,7 @@
 -- Involved in Quest: A Crisis in the Making
 -- !pos -137 17 177 145
 -----------------------------------
-local ID = require("scripts/zones/Giddeus/IDs")
+local ID = zones[xi.zone.GIDDEUS]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

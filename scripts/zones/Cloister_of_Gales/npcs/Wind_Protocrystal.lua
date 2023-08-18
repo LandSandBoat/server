@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Cloister_of_Gales/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_GALES]
 -----------------------------------
 local entity = {}
 

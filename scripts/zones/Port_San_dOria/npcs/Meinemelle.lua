@@ -3,7 +3,7 @@
 --  NPC: Meinemelle
 -- !pos -8.289 -9.3 -146.093 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

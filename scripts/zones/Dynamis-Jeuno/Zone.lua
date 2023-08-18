@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Dynamis-Jeuno
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Jeuno/IDs')
+local ID = zones[xi.zone.DYNAMIS_JEUNO]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

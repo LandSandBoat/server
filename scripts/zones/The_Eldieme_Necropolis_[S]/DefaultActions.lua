@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/The_Eldieme_Necropolis_[S]/IDs')
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 
 return {
     ['Erik']                  = { event = 1 },

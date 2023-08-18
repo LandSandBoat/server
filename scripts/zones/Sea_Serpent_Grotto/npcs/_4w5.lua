@@ -3,7 +3,7 @@
 --  NPC: Silver Beastcoin Door
 -- !pos 280 18.549 -100 176
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

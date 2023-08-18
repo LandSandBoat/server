@@ -3,7 +3,7 @@
 --  Mob: Bugbear Bondman
 -- Note: PH for Bugbear Strongman
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
+local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

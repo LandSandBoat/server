@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 
 return {
     ['_6ld']        = { event = 604 },

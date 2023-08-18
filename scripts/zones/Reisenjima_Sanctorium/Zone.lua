@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Reisenjima Sanctorium (293)
 -----------------------------------
-local ID = require('scripts/zones/Reisenjima_Sanctorium/IDs')
+local ID = zones[xi.zone.REISENJIMA_SANCTORIUM]
 -----------------------------------
 local zoneObject = {}
 

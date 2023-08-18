@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Lil'Apkallu(ZNM T1))
 -- !pos 488 -1 166 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

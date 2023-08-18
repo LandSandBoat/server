@@ -3,7 +3,7 @@
 --  NPC: Pincerstone
 -- NPCs which activates the blue teleports in sky
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
+local ID = zones[xi.zone.RUAUN_GARDENS]
 -----------------------------------
 local entity = {}
 

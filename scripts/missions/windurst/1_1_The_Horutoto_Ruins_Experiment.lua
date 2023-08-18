@@ -20,8 +20,8 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local innerHorutotoRuinsID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
-local eastSarutabarutaID   = require('scripts/zones/East_Sarutabaruta/IDs')
+local innerHorutotoRuinsID = zones[xi.zone.INNER_HORUTOTO_RUINS]
+local eastSarutabarutaID   = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT)

@@ -4,7 +4,7 @@
 -- Type: ENM Quest Activator
 -- !pos -308.112 -42.137 -570.096 5
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 

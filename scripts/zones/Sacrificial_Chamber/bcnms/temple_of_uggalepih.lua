@@ -2,7 +2,7 @@
 -- Temple of Uggalepih
 -- Sacrifical Chamber Mission Battlefield
 -----------------------------------
-local ID = require("scripts/zones/Sacrificial_Chamber/IDs")
+local ID = zones[xi.zone.SACRIFICIAL_CHAMBER]
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")

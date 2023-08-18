@@ -18,7 +18,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE)

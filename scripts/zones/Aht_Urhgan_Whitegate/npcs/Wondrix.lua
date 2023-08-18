@@ -3,7 +3,7 @@
 --  NPC: Wondrix
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}

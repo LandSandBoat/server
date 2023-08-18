@@ -1,7 +1,7 @@
 -- Zone: Den of Rancor (160)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 require("scripts/globals/npc_util")
 -----------------------------------
 

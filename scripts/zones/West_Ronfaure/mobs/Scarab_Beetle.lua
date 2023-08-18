@@ -3,7 +3,7 @@
 --  Mob: Scarab Beetle
 -- Note: Place holder for Fungus Beetle
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
+local ID = zones[xi.zone.WEST_RONFAURE]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

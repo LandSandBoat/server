@@ -2,7 +2,7 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'aern MNK
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 local entity = {}
 

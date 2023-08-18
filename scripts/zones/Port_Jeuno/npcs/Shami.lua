@@ -4,7 +4,7 @@
 -- Orb Seller (BCNM)
 -- !pos -53.9 0 10.8 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

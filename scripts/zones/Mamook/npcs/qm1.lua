@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Chamrosh(ZNM T1))
 -- !pos 206 14 -285 65
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
+local ID = zones[xi.zone.MAMOOK]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

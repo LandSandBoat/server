@@ -1,7 +1,7 @@
 -- Zone: La Theine Plateau (102)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require("scripts/globals/npc_util")
 -----------------------------------
 

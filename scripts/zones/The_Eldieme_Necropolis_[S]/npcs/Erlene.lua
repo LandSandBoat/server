@@ -3,7 +3,7 @@
 --  NPC: Erlene
 -- !pos 376.936 -39.999 17.914 175
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

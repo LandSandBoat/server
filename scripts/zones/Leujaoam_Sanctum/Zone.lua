@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Leujaoam_Sanctum
 -----------------------------------
-require('scripts/zones/Leujaoam_Sanctum/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

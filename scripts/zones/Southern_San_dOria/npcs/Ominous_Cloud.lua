@@ -4,7 +4,7 @@
 -- Type: Ninjutsu Toolbag Maker
 -- !pos -41.550 1.999 -2.845 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

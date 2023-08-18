@@ -3,7 +3,7 @@
 --  Mob: Goblin Mugger
 -----------------------------------
 require("scripts/globals/regimes")
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 

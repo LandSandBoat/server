@@ -3,7 +3,7 @@
 --  Mob: Garm
 -- Note: PH for Shii
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

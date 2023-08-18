@@ -2,7 +2,7 @@
 -- Area: King Ranperres Tomb
 --   NM: Corrupted Ulbrig
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

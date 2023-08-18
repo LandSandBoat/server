@@ -5,7 +5,7 @@
 -- Involved in Quest: Making the Grade, Riding on the Clouds
 -- !pos -120 -6 124 239
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = zones[xi.zone.WINDURST_WALLS]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

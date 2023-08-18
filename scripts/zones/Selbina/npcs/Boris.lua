@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos 61.074 -14.655 -7.1 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 

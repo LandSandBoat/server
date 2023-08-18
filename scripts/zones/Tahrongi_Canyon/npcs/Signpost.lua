@@ -2,7 +2,7 @@
 -- Area: Tahrongi Canyon
 --  NPC: Signpost
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 local entity = {}
 

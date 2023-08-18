@@ -4,7 +4,7 @@
 -- Quest: Your Crystal Ball
 -- !pos -18 -13 181 198
 -----------------------------------
-local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

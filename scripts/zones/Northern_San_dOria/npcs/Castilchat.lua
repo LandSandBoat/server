@@ -4,7 +4,7 @@
 -- Starts Quest: Trial Size Trial by Ice
 -- !pos -186 0 107 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/teleports")
 require("scripts/globals/quests")
 -----------------------------------

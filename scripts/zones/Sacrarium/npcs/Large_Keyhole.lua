@@ -4,7 +4,7 @@
 -- Notes: Used to open R. Gate
 -- !pos 100.231 -1.414 51.700 28
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

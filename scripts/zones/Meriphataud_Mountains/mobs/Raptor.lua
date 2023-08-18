@@ -3,7 +3,7 @@
 --  Mob: Raptor
 -- Note: PH for Daggerclaw Dracos
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

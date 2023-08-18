@@ -3,7 +3,7 @@
 --  Mob: Typhoon Wyvern
 -- Note: Place holder Ungur
 -----------------------------------
-local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+local ID = zones[xi.zone.GUSTAV_TUNNEL]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

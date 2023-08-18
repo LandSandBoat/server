@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local norgID = require('scripts/zones/Norg/IDs')
-local kuftalTunnelID = require('scripts/zones/Kuftal_Tunnel/IDs')
+local norgID         = zones[xi.zone.NORG]
+local kuftalTunnelID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)

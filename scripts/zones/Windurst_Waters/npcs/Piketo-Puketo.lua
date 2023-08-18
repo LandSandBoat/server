@@ -4,7 +4,7 @@
 -- Type: Cooking Guild Master
 -- !pos -124.012 -2.999 59.998 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
 -----------------------------------

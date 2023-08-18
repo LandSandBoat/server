@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Gwora-Corridor (278)
 -----------------------------------
-local ID = require('scripts/zones/Gwora-Corridor/IDs')
+local ID = zones[xi.zone.GWORA_CORRIDOR]
 -----------------------------------
 local zoneObject = {}
 

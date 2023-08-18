@@ -3,7 +3,7 @@
 --  NPC: Uli Pehkowa
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
+local ID = zones[xi.zone.PORT_WINDURST]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

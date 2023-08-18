@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Sacrarium (28)
 -----------------------------------
-local ID = require('scripts/zones/Sacrarium/IDs')
+local ID = zones[xi.zone.SACRARIUM]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
+local windurstWallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)

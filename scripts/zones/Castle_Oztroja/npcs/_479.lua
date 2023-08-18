@@ -4,7 +4,7 @@
 -- Involved in Mission "Saintly Invitation"
 -- !pos -99 -59 84 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

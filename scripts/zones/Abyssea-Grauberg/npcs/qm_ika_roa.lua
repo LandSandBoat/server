@@ -4,7 +4,7 @@
 -- Spawns Ika-Roa
 -- !pos 158 -29 -215 254
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
+local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

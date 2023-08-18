@@ -3,7 +3,7 @@
 --  NPC: Falgima
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

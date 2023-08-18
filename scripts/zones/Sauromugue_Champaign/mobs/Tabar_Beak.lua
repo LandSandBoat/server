@@ -3,7 +3,7 @@
 --  Mob: Tabar Beak
 -- Note: PH for Deadly Dodo
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

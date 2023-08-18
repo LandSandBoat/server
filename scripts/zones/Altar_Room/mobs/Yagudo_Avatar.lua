@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Altar Room
 -----------------------------------
-local ID = require("scripts/zones/Altar_Room/IDs")
+local ID = zones[xi.zone.ALTAR_ROOM]
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 -----------------------------------

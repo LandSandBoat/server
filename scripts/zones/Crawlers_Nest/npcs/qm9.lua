@@ -4,7 +4,7 @@
 -- Used In Quest: A Boy's Dream
 -- !pos -18 -8 124 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

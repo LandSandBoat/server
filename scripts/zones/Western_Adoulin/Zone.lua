@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Western Adoulin
 -----------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}

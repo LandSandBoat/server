@@ -3,7 +3,7 @@
 --   NM: Cryptonberry Executor
 -- !pos 120.615 -5.457 -390.133 2
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

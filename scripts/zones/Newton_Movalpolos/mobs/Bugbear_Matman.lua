@@ -2,7 +2,7 @@
 -- Area: Newton Movalpolos
 --   NM: Bugbear Matman
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}

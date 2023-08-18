@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 
 return {
     ['_6s2']          = { event = 116 },

@@ -2,7 +2,7 @@
 -- Area: Talacca_Cove
 --  NPC: ??? (corsair job flag quest)
 -----------------------------------
-local ID = require("scripts/zones/Talacca_Cove/IDs")
+local ID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 local entity = {}
 

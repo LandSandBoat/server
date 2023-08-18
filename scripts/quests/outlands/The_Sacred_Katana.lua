@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local zitahID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)

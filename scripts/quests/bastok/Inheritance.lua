@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local bastokMinesID = require('scripts/zones/Bastok_Mines/IDs')
-local westernAltepaID = require('scripts/zones/Western_Altepa_Desert/IDs')
+local bastokMinesID = zones[xi.zone.BASTOK_MINES]
+local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE)

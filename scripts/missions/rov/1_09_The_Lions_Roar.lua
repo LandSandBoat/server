@@ -8,7 +8,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local qufimID = require("scripts/zones/Qufim_Island/IDs")
+local qufimID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LIONS_ROAR)

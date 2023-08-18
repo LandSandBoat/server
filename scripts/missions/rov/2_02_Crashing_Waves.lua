@@ -9,7 +9,7 @@ require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)

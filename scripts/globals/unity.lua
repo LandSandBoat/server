@@ -9,10 +9,10 @@ xi.unity = xi.unity or {}
 -- Table Format: Needs 10 RoE Objectives, All for One not set, All for One set, Unity Joined, Zone Directory Name
 local zoneEventIds =
 {
-    [xi.zone.SOUTHERN_SAN_DORIA ] = { 3528, 3525, 3526, 3529, "Southern_San_dOria" },
-    [xi.zone.BASTOK_MARKETS     ] = {  597,  594,  595,  598, "Bastok_Markets"     },
-    [xi.zone.WINDURST_WOODS     ] = {  878,  875,  876,  879, "Windurst_Woods"     },
-    [xi.zone.WESTERN_ADOULIN    ] = { 5148, 5145, 5146, 5149, "Western_Adoulin"    },
+    [xi.zone.SOUTHERN_SAN_DORIA] = { 3528, 3525, 3526, 3529 },
+    [xi.zone.BASTOK_MARKETS    ] = {  597,  594,  595,  598 },
+    [xi.zone.WINDURST_WOODS    ] = {  878,  875,  876,  879 },
+    [xi.zone.WESTERN_ADOULIN   ] = { 5148, 5145, 5146, 5149 },
 }
 
 -- Table Format: X, Y, Z, Rot, Zone ID
@@ -144,7 +144,7 @@ end
 
 function xi.unity.onEventUpdate(player, csid, option, npc)
     local zoneId               = player:getZoneID()
-    local ID                   = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local ID                   = zones[zoneId]
     local accolades            = player:getCurrency("unity_accolades")
     local weeklyAccoladesSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit       = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
@@ -193,7 +193,7 @@ end
 
 function xi.unity.onEventFinish(player, csid, option, npc)
     local zoneId    = player:getZoneID()
-    local ID        = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local ID        = zones[zoneId]
     local category  = bit.band(option, 0x1F)
     local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
 

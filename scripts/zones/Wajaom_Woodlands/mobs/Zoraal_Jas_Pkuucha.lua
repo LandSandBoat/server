@@ -2,7 +2,7 @@
 -- Area: Wajaom Woodlands
 --  Mob: Zoraal Ja's Pkuucha
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}

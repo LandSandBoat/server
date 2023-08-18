@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Sauromugue_Champaign_[S] (98)
 -----------------------------------
-local ID = require('scripts/zones/Sauromugue_Champaign_[S]/IDs')
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}

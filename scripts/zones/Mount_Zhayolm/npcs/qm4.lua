@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Khromasoul Bhurborlor(ZNM T3))
 -- !pos 88 -22 70 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

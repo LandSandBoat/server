@@ -3,7 +3,7 @@
 -- Starts and Finishes Quest: Your Crystal Ball & Never to return
 -- !pos -4 -6 -28 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

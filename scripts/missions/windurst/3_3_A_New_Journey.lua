@@ -17,7 +17,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 -----------------------------------
-local lowerDelkfuttID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+local lowerDelkfuttID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)

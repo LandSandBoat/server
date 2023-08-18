@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields_[S] (91)
 -----------------------------------
-local ID = require('scripts/zones/Rolanberry_Fields_[S]/IDs')
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
 -----------------------------------
 local zoneObject = {}
 

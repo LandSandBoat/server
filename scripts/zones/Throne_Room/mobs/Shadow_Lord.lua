@@ -3,7 +3,7 @@
 --  Mob: Shadow Lord
 -- Mission 5-2 BCNM Fight
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
+local ID = zones[xi.zone.THRONE_ROOM]
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

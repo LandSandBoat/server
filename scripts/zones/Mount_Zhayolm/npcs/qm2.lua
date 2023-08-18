@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Claret(ZNM T1))
 -- !pos 497 -9 52 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

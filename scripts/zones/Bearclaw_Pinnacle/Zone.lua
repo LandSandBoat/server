@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Bearclaw_Pinnacle (6)
 -----------------------------------
-local ID = require('scripts/zones/Bearclaw_Pinnacle/IDs')
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------
 local zoneObject = {}
 

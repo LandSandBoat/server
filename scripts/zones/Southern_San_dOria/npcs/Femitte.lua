@@ -4,7 +4,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria), Distant Loyalties
 -- !pos -17 2 10 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

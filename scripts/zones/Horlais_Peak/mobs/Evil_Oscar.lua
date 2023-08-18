@@ -22,7 +22,7 @@
 --     },
 -- },
 -----------------------------------
-local ID = require("scripts/zones/Horlais_Peak/IDs")
+local ID = zones[xi.zone.HORLAIS_PEAK]
 -----------------------------------
 local entity = {}
 

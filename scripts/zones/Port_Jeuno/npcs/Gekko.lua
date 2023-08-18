@@ -3,7 +3,7 @@
 --  NPC: Gekko
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

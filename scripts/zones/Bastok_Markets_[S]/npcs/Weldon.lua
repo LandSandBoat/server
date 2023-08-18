@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos -191.575    -8    36.688 87
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
 local entity = {}
 

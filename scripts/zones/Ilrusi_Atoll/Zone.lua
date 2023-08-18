@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ilrusi_Atoll (55)
 -----------------------------------
-local ID = require('scripts/zones/Ilrusi_Atoll/IDs')
+local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local zoneObject = {}
 
