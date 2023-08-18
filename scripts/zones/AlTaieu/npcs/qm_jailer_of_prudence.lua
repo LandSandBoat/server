@@ -4,7 +4,7 @@
 -- Allows players to spawn the Jailer of Prudence by trading the Third Virtue, Deed of Sensibility, and High-Quality Hpemde Organ to a ???.
 -- !pos , 706 -1 22
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

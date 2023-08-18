@@ -3,7 +3,7 @@
 --  NPC: Gate of the Gods
 -- !pos -20 0.1 -283 34
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------

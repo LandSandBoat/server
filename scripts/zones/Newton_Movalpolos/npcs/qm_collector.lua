@@ -2,7 +2,7 @@
 -- Area: Newton_Movalpolos
 --  NPC: ??? for Goblin Collector
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/npc_util")
 -----------------------------------
 

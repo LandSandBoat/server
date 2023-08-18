@@ -3,7 +3,7 @@
 --  NPC: Enigmatic Footprints
 -- Entry NPC for Dynamis Divergence
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 -- Starts Windurst Missions
 -- !pos 0 -16 124 239
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = zones[xi.zone.WINDURST_WALLS]
 require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------

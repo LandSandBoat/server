@@ -4,7 +4,7 @@
 -- Spawns Raja
 -- !pos 495 56 679 254
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
+local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

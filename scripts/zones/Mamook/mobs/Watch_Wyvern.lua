@@ -3,7 +3,7 @@
 --  Mob: Watch Wyvern
 -- Note: PH for Firedance Magmaal Ja
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
+local ID = zones[xi.zone.MAMOOK]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --   NM: Bomb Queen
 --  Vid: https://www.youtube.com/watch?v=AVsEbYjSAHM
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 local entity = {}
 

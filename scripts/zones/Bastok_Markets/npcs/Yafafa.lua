@@ -3,7 +3,7 @@
 --  NPC: Yafafa
 -- Kolshushu Regional Goods
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------

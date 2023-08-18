@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Dynamis-Bastok
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Bastok/IDs')
+local ID = zones[xi.zone.DYNAMIS_BASTOK]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

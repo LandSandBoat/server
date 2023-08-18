@@ -3,7 +3,7 @@
 --  NPC: Glyke
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

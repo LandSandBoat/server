@@ -3,7 +3,7 @@
 --  NPC: Slot
 -- trade card to pop NM
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

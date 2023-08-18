@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 -----------------------------------
-local davoiID = require('scripts/zones/Davoi/IDs')
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 xi = xi or {}
 xi.otherAreas = xi.otherAreas or {}

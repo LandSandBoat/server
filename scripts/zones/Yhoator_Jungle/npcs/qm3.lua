@@ -4,7 +4,7 @@
 -- Involved in Quest: True will
 -- !pos 203 0.1 82 124
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

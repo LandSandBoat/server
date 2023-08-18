@@ -4,7 +4,7 @@
 -- Type: Tenshodo Merchant
 -- !pos 28.149 2.899 -44.780 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

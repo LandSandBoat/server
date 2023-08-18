@@ -5,7 +5,7 @@
 -- !pos -333.729, -5.512, 475.647 2
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 local entity = {}
 

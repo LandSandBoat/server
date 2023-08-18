@@ -3,7 +3,7 @@
 -- Area: Sacrarium
 -- Notes: Used to spawn Swift Belt NM's
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Tahrongi_Canyon (117)
 -----------------------------------
-local ID = require('scripts/zones/Tahrongi_Canyon/IDs')
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

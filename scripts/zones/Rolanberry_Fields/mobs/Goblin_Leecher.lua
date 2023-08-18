@@ -2,7 +2,7 @@
 -- Area: Rolanberry Fields
 --  Mob: Goblin Leecher
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

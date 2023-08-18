@@ -3,7 +3,7 @@
 --  Mob: Phasma
 -- Note: PH for Ixtab
 -----------------------------------
-local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

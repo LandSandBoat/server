@@ -4,7 +4,7 @@
 -- !pos 612 132 774 32
 -----------------------------------
 require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Sealions_Den/IDs")
+local ID = zones[xi.zone.SEALIONS_DEN]
 -----------------------------------
 local entity = {}
 

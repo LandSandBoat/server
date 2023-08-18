@@ -4,7 +4,7 @@
 -- Type: Storage Moogle
 -- !pos ? ? ?  50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos 10.883    -15.99    66.186 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 

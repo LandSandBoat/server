@@ -3,7 +3,7 @@
 -- Door: _6le (Presidential Suite)
 -- !pos 113 -20 8 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
+local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}
 

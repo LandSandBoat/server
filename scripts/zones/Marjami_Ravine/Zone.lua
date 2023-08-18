@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Marjami Ravine
 -----------------------------------
-local ID = require('scripts/zones/Marjami_Ravine/IDs')
+local ID = zones[xi.zone.MARJAMI_RAVINE]
 -----------------------------------
 local zoneObject = {}
 

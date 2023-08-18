@@ -4,7 +4,7 @@
 -- !pos 125 -2 20 72
 -----------------------------------
 require("scripts/globals/instance")
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 

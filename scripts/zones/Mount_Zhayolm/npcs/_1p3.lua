@@ -3,7 +3,7 @@
 -- Door: Runic Seal
 -- !pos 703 -18 382 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 -----------------------------------

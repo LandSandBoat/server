@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Reacton(ZNM T2))
 -- !pos 18 -9 213 62
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

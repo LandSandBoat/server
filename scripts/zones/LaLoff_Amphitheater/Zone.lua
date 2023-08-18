@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: LaLoff_Amphitheater (180)
 -----------------------------------
-local ID = require('scripts/zones/LaLoff_Amphitheater/IDs')
+local ID = zones[xi.zone.LALOFF_AMPHITHEATER]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

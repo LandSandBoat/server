@@ -4,7 +4,7 @@
 -- Mount Zhayolm Teleporter Back to Aht Urhgan Whitegate
 -- !pos 688.994 -23.960 351.496 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 require("scripts/globals/besieged")
 require("scripts/globals/missions")

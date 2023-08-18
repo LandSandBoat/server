@@ -6,7 +6,7 @@
 -- !pos 460.339 -29.137 220.311 5
 -- !pos 180.207 -77.147 500.276 5
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 

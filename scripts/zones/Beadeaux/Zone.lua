@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Beadeaux (147)
 -----------------------------------
-local ID = require('scripts/zones/Beadeaux/IDs')
+local ID = zones[xi.zone.BEADEAUX]
 require('scripts/globals/conquest')
 require('scripts/globals/npc_util')
 require('scripts/globals/treasure')

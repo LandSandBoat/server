@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 
 return {
     ['qm1'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

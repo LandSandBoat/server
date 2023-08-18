@@ -3,7 +3,7 @@
 --  Mob: Cactuar
 -- Note: Place holder for Cactuar_Cantautor
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

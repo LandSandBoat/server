@@ -7,7 +7,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

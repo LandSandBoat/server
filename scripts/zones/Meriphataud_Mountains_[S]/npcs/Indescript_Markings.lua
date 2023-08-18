@@ -4,7 +4,7 @@
 -- Type: Quest
 -- !pos -389 -9 92 97
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 -----------------------------------
 local entity = {}
 

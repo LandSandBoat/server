@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Abyssea - La_Theine
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
+local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 require('scripts/globals/abyssea')
 -----------------------------------
 local zoneObject = {}

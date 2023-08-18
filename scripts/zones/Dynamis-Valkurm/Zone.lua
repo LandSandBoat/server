@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Dynamis-Valkurm
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Valkurm/IDs')
+local ID = zones[xi.zone.DYNAMIS_VALKURM]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

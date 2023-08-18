@@ -4,7 +4,7 @@
 -- Type: Quest NPC
 -- !pos 146.619, -8.525, 242.874 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------

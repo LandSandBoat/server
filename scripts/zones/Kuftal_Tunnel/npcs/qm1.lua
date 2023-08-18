@@ -4,7 +4,7 @@
 -- Note: Spawns Phantom Worm
 -- position changes every 5 seconds
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
 require("scripts/globals/npc_util")
 -----------------------------------

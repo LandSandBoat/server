@@ -3,7 +3,7 @@
 --  NPC: Spatial Displacement
 -- !pos -35 -1 -539 31
 -----------------------------------
-local ID = require("scripts/zones/Monarch_Linn/IDs")
+local ID = zones[xi.zone.MONARCH_LINN]
 require("scripts/globals/bcnm")
 require("scripts/globals/quests")
 require("scripts/globals/missions")

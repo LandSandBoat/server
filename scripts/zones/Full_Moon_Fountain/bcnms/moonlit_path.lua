@@ -2,7 +2,7 @@
 -- Area: Full Moon Fountain
 -- Name: The Moonlit Path
 -----------------------------------
-local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
+local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 -----------------------------------

@@ -2,7 +2,7 @@
 -- Area: Windurst-Jeuno Airship
 --  NPC: Mauricio
 -----------------------------------
-local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
+local ID = zones[xi.zone.WINDURST_JEUNO_AIRSHIP]
 -----------------------------------
 local entity = {}
 

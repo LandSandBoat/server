@@ -5,7 +5,7 @@
 -- !pos -119.750 -5.239 64.500 238
 -----------------------------------
 require("scripts/globals/crafting")
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

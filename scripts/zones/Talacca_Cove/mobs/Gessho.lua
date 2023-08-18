@@ -2,7 +2,7 @@
 -- Area: Talacca Cove
 --  Mob: Gessho
 -----------------------------------
-local ID = require("scripts/zones/Talacca_Cove/IDs")
+local ID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 --  NPC: Keal
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

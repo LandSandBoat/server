@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: none (49)
 -----------------------------------
-local ID = require('scripts/zones/none/IDs')
+local ID = zones[xi.zone.NONE]
 -----------------------------------
 local zoneObject = {}
 

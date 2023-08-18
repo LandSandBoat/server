@@ -3,7 +3,7 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -99 -0 -514 2
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

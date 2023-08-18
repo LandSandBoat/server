@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Dynamis-Beaucedine
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Beaucedine/IDs')
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

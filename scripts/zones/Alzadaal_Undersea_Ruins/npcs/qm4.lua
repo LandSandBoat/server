@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Wulgaru(ZNM T2))
 -- !pos -22 -4 204 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Spawns Trudging Thomas
 -- !pos 278 24 -82 132
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
+local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

@@ -2,7 +2,7 @@
 -- Area: Behemoths Dominion
 --   NM: Ancient Weapon
 -----------------------------------
-local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/regimes")
 -----------------------------------

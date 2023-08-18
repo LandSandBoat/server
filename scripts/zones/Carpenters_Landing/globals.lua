@@ -2,7 +2,7 @@
 -- Zone: Carpenters' Landing (2)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 require("scripts/globals/npc_util")
 -----------------------------------
 

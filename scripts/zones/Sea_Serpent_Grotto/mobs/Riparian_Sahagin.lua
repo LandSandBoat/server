@@ -3,7 +3,7 @@
 --  Mob: Riparian Sahagin
 -- Note: PH for Seww the Squidlimbed and Fyuu the Seabellow
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

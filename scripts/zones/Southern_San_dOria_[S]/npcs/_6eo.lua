@@ -4,7 +4,7 @@
 -- !pos 148 0 27 80
 -- Involved in Knot Quite There
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

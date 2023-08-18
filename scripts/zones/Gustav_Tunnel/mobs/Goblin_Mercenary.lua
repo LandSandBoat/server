@@ -3,7 +3,7 @@
 --  Mob: Goblin Mercenary
 -- Note: Place holder Wyvernpoacher Drachlox
 -----------------------------------
-local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+local ID = zones[xi.zone.GUSTAV_TUNNEL]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

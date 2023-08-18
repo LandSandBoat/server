@@ -3,7 +3,7 @@
 --  NPC: Granite Door
 -- !pos 340 0.1 329 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

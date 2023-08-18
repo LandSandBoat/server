@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos 153.992 -0.001 -18.687 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 

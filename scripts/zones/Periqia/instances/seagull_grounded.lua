@@ -1,7 +1,7 @@
 -----------------------------------
 -- Assault: Seagull Grounded
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
+local ID = zones[xi.zone.PERIQIA]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 require("scripts/globals/pathfind")

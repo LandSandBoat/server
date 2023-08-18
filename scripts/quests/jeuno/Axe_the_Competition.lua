@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
-local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
+local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)

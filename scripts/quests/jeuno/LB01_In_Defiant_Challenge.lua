@@ -20,9 +20,9 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local crawlersID = require('scripts/zones/Crawlers_Nest/IDs')
-local eldiemeID  = require('scripts/zones/The_Eldieme_Necropolis/IDs')
-local garlaigeID = require('scripts/zones/Garlaige_Citadel/IDs')
+local crawlersID = zones[xi.zone.CRAWLERS_NEST]
+local eldiemeID  = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
+local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)

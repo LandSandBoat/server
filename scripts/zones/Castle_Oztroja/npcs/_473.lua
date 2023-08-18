@@ -4,7 +4,7 @@
 -- Notes: Opened by Torch Stands near Password #3
 -- !pos -43.455 -20.161 20.014 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

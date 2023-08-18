@@ -4,7 +4,7 @@
 -- Type: Storage Moogle
 -- !zone 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

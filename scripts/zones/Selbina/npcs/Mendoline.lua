@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Fishing Guild
 -- !pos -13.603 -7.287 10.916 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 

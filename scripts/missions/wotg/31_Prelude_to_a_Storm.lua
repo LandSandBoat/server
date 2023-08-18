@@ -9,7 +9,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local pastXarcabardID = require('scripts/zones/Xarcabard_[S]/IDs')
+local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PRELUDE_TO_A_STORM)

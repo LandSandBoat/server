@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
+local ID = zones[xi.zone.EAST_SARUTABARUTA]
 
 return {
     ['Pore-Ohre']    = { event = 45 },

@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos 100.528 -32.272 -58.739 171
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
+local ID = zones[xi.zone.CRAWLERS_NEST_S]
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Provenance (222)
 -----------------------------------
-local ID = require('scripts/zones/Provenance/IDs')
+local ID = zones[xi.zone.PROVENANCE]
 -----------------------------------
 local zoneObject = {}
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Rala Waterways (258)
 -----------------------------------
-local ID = require('scripts/zones/Rala_Waterways/IDs')
+local ID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 local zoneObject = {}
 

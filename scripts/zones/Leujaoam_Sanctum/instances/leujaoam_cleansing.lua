@@ -2,7 +2,7 @@
 -- Assault: Leujaoam Cleansing
 -- instance 6900
 -----------------------------------
-local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
+local ID = zones[xi.zone.LEUJAOAM_SANCTUM]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 -----------------------------------

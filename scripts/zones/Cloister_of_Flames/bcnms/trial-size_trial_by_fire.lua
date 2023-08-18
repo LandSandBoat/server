@@ -2,7 +2,7 @@
 -- Area: Cloister of Flames
 -- BCNM: Trial-size Trial by Fire
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Flames/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_FLAMES]
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 -----------------------------------

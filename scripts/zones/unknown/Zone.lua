@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: unknown (0)
 -----------------------------------
-local ID = require('scripts/zones/unknown/IDs')
+local ID = zones[xi.zone.UNKNOWN]
 -----------------------------------
 local zoneObject = {}
 

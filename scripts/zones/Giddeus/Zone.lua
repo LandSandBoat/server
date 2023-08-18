@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Giddeus (145)
 -----------------------------------
-local ID = require('scripts/zones/Giddeus/IDs')
+local ID = zones[xi.zone.GIDDEUS]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')

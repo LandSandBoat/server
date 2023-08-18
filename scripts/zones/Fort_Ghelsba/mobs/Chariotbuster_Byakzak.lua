@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Fort_Ghelsba/IDs")
+local ID = zones[xi.zone.FORT_GHELSBA]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 --  NPC: qm3 (Moongate Pass QM)
 -- !pos -277.651, -3.765, -17.895 122 and many <pos>
 -----------------------------------
-local ID = require("scripts/zones/RoMaeve/IDs")
+local ID = zones[xi.zone.ROMAEVE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

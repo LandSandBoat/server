@@ -3,7 +3,7 @@
 --  Mob: Yagudo Interrogator
 -- Note: PH for Mee Deggi the Punisher
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

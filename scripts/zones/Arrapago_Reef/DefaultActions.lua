@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 
 return {
     ['qm1']  = { messageSpecial = ID.text.SLIMY_TOUCH },

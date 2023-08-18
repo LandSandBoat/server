@@ -3,7 +3,7 @@
 --  NPC: qm1 (???)
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

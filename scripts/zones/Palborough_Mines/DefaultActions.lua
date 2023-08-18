@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Palborough_Mines/IDs')
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 
 return {
     ['Old_Toolbox']   = { event = 22 },

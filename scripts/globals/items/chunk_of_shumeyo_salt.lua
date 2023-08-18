@@ -3,7 +3,7 @@
 -- Item: Chunk Of Shu'Meyo Salt
 -- Effect: Adds 20 seconds to the Snoll Tzar fight
 -----------------------------------------
-local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------------
 local itemObject = {}
 

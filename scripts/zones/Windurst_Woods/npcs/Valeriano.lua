@@ -3,7 +3,7 @@
 --  NPC: Valeriano
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

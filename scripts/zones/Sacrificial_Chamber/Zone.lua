@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Sacrificial_Chamber (163)
 -----------------------------------
-local ID = require('scripts/zones/Sacrificial_Chamber/IDs')
+local ID = zones[xi.zone.SACRIFICIAL_CHAMBER]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

@@ -4,7 +4,7 @@
 -- !pos -299 -62 -18
 -- Involved in Quests: Over The Hills And Far Away
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 -----------------------------------

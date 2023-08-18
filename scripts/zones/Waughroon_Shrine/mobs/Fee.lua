@@ -3,7 +3,7 @@
 --  Mob: Fe'e
 -- BCNM: Up In Arms
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 local entity = {}
 

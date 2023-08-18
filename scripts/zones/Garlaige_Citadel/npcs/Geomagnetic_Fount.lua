@@ -3,7 +3,7 @@
 --  NPC: Geomagnetic Fount
 -- !pos -156.374 0.000 237.283
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

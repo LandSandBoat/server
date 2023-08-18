@@ -3,7 +3,7 @@
 --  Mob: Razorjaw Pugil
 -- Note: PH for Sea Hog
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

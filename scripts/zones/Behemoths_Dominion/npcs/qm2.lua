@@ -4,7 +4,7 @@
 -- Spawns Behemoth or King Behemoth
 -- !pos -267 -19 74 127
 -----------------------------------
-local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

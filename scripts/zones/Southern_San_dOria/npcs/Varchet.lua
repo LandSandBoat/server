@@ -3,7 +3,7 @@
 --  NPC: Varchet
 -- !pos 116.484 -1 91.554 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

@@ -3,7 +3,7 @@
 --  NPC: Oil Lamp - Wind (West)
 -- !pos -63 -26 57
 -----------------------------------
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 

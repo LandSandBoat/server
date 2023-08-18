@@ -5,7 +5,7 @@
 -- !pos -122.853 0.000 -195.605 245
 -----------------------------------
 local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  Mob: Shoal Pugil
 -- Note: PH for Buburimboo
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

@@ -8,7 +8,7 @@ require('scripts/globals/titles')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local southGustabergID = require('scripts/zones/South_Gustaberg/IDs')
+local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)

@@ -8,7 +8,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)

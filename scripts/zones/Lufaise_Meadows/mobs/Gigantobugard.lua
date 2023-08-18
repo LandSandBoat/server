@@ -3,7 +3,7 @@
 --  Mob: Gigantobugard
 -- Note: PH for Megalobugard
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  Mob: Mousse
 -- Note: PH for Sewer Syrup
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

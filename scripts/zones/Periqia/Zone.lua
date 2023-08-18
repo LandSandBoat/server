@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Periqia
 -----------------------------------
-local ID = require('scripts/zones/Periqia/IDs')
+local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local zoneObject = {}
 

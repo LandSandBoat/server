@@ -10,8 +10,8 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 -----------------------------------
-local alzadaalID  = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local alzadaalID  = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
+local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)

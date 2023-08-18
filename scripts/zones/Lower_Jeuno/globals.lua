@@ -1,7 +1,7 @@
 -- Zone: Lower Jeuno (245)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
 local lowerJeunoGlobal =

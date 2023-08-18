@@ -3,7 +3,7 @@
 --  Mob: Abyssal Demon
 -- Note: PH for Marquis Sabnock
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

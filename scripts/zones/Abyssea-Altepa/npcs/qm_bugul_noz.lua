@@ -4,7 +4,7 @@
 -- Spawns Bugul Noz
 -- !pos -608 -1 -397 218
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

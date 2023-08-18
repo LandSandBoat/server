@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Mount_Zhayolm/IDs')
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 
 return {
     ['blank11']  = { messageSpecial = ID.text.NOTHING_HAPPENS },

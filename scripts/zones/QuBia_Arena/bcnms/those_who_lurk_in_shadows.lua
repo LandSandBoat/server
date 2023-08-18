@@ -2,7 +2,7 @@
 -- Those Who Lurk in Shadows (III)
 -- Qu'Bia Arena mission battlefield
 -----------------------------------
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local ID = zones[xi.zone.QUBIA_ARENA]
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 -----------------------------------

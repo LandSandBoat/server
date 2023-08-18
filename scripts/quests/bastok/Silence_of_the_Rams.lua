@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
+local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS)

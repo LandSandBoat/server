@@ -4,7 +4,7 @@
 -- Note: Escort Quest / Map Quest
 --   DE: Dynamic Entity created by Cermet Alcoves
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 require("scripts/globals/pathfind")
 -----------------------------------
 

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 
 return {
     ['_0x0']       = { messageSpecial = ID.text.IMPERVIOUS_FIELD_BLOCKS },

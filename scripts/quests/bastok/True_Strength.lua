@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local oztrojaID = require('scripts/zones/Castle_Oztroja/IDs')
+local oztrojaID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)

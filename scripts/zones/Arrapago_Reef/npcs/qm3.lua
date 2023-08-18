@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Zareehkl the Jubilant(ZNM T2))
 -- !pos 176 -4 182 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

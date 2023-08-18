@@ -19,9 +19,9 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local dangrufID        = require("scripts/zones/Dangruf_Wadi/IDs")
-local northGustabergID = require("scripts/zones/North_Gustaberg/IDs")
-local sauromugueID     = require("scripts/zones/Sauromugue_Champaign/IDs")
+local dangrufID        = zones[xi.zone.DANGRUF_WADI]
+local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
+local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)

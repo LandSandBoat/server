@@ -5,7 +5,7 @@
 -- !pos 0 8 73 247
 -----------------------------------
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}
 

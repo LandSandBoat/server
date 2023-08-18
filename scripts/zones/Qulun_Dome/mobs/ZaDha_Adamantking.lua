@@ -3,7 +3,7 @@
 --   NM: Za'Dha Adamantking
 -- TODO: messages should be zone-wide
 -----------------------------------
-local ID = require("scripts/zones/Qulun_Dome/IDs")
+local ID = zones[xi.zone.QULUN_DOME]
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 require("scripts/globals/mobs")

@@ -3,7 +3,7 @@
 --   NM: Fraelissa
 -----------------------------------
 require("scripts/globals/hunts")
-local ID = require("scripts/zones/Jugner_Forest/IDs")
+local ID = zones[xi.zone.JUGNER_FOREST]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

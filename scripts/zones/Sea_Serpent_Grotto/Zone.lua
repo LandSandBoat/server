@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Sea_Serpent_Grotto (176)
 -----------------------------------
-local ID = require('scripts/zones/Sea_Serpent_Grotto/IDs')
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

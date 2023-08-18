@@ -4,7 +4,7 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Windurst 1st Place
 -- !pos 4 1 -43 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

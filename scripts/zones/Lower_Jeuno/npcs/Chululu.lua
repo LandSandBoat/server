@@ -5,7 +5,7 @@
 -- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

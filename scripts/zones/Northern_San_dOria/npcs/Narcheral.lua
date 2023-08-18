@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Messenger from Beyond, Prelude of Black and White (Finish), Pieuje's Decision (Finish)
 -- !pos 129 -11 126 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/shop")

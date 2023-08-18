@@ -11,7 +11,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ordellesID = require('scripts/zones/Ordelles_Caves/IDs')
+local ordellesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Halvung (62)
 -----------------------------------
-local ID = require('scripts/zones/Halvung/IDs')
+local ID = zones[xi.zone.HALVUNG]
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

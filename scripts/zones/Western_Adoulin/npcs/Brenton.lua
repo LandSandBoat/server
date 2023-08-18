@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

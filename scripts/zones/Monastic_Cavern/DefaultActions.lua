@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
+local ID = zones[xi.zone.MONASTIC_CAVERN]
 
 return {
     ['Magicite'] = { messageSpecial = ID.text.THE_MAGICITE_GLOWS_OMINOUSLY },

@@ -3,7 +3,7 @@
 --  NPC: qm25
 --  Notes: Antican Tag
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

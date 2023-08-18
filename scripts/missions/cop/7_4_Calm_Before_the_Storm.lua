@@ -14,9 +14,9 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 -----------------------------------
-local carpentersID = require("scripts/zones/Carpenters_Landing/IDs")
-local bibikiBayID  = require("scripts/zones/Bibiki_Bay/IDs")
-local misareauxID  = require("scripts/zones/Misareaux_Coast/IDs")
+local carpentersID = zones[xi.zone.CARPENTERS_LANDING]
+local bibikiBayID  = zones[xi.zone.BIBIKI_BAY]
+local misareauxID  = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)

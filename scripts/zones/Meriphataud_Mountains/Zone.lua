@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Meriphataud_Mountains (119)
 -----------------------------------
-local ID = require('scripts/zones/Meriphataud_Mountains/IDs')
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

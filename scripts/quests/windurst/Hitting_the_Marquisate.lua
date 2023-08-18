@@ -19,7 +19,7 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local garlaigeID = require("scripts/zones/Garlaige_Citadel/IDs")
+local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)

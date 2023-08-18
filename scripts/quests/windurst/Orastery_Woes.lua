@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local portWindurstID = require('scripts/zones/Port_Windurst/IDs')
-local roMaeveID = require('scripts/zones/RoMaeve/IDs')
+local portWindurstID = zones[xi.zone.PORT_WINDURST]
+local roMaeveID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES)

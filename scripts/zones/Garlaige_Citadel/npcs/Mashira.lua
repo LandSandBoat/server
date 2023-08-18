@@ -5,7 +5,7 @@
 -- !pos 141 -6 138 200
 -----------------------------------
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Xarcabard/IDs")
+local ID = zones[xi.zone.XARCABARD]
 
 return {
     ['qm2']  = { messageSpecial = ID.text.ONLY_SHARDS },

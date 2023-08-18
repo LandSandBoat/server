@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Leech
 -----------------------------------
-local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
+local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local entity = {}
 

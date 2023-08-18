@@ -6,7 +6,7 @@
 -- !pos -560 5.00 239 35
 -- !pos -600 5.00 440 35
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobskills")
 -----------------------------------

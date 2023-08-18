@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 
 return {
     ['Aindemont']        = { event = 569 },

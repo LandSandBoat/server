@@ -3,7 +3,7 @@
 --  Mob: Damselfly
 -- Note: Place holder Valkurm Emperor
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

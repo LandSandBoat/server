@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Periqia/IDs")
+local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}
 

@@ -3,7 +3,7 @@
 --  NPC: Stone Gate
 -----------------------------------
 require("scripts/globals/missions")
-local ID = require("scripts/zones/PsoXja/IDs")
+local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

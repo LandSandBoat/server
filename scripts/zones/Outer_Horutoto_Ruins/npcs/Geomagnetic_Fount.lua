@@ -3,7 +3,7 @@
 --  NPC: Geomagnetic Fount
 -- !pos 289.792 0.001 708.071
 -----------------------------------
-local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

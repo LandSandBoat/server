@@ -9,7 +9,7 @@
     7d02, 0, 80, 1, 512, 4, 4, 180 -- Neo DM (lose)
 ]]
 -----------------------------------
-local ID = require("scripts/zones/LaLoff_Amphitheater/IDs")
+local ID = zones[xi.zone.LALOFF_AMPHITHEATER]
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

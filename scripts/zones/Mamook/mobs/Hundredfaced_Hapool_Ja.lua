@@ -5,7 +5,7 @@
 require("scripts/globals/titles")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
+local ID = zones[xi.zone.MAMOOK]
 local entity = {}
 
 entity.onMobSpawn = function(mob)

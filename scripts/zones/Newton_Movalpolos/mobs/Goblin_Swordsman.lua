@@ -3,7 +3,7 @@
 --  Mob: Goblin Swordsman
 -- Note: PH for Swashstox Beadblinker
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/mobs")
 -----------------------------------
 

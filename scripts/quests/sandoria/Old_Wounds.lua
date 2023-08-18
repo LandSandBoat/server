@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
-local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
+local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
+local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Qulun_Dome (148)
 -----------------------------------
-local ID = require('scripts/zones/Qulun_Dome/IDs')
+local ID = zones[xi.zone.QULUN_DOME]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

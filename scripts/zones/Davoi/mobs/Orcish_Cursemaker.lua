@@ -3,7 +3,7 @@
 --  Mob: Orcish Cursemaker
 -- Note: PH for Hawkeyed Dnatbat
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -1,7 +1,7 @@
 -- Zone: Riverne - Site #B01 (29)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 require("scripts/globals/npc_util")
 -----------------------------------
 

@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Clothcrafting Guild
 -- !pos -80.068 -3.25 -127.686 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

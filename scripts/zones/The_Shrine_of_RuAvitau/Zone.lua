@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: The_Shrine_of_RuAvitau (178)
 -----------------------------------
-local ID = require('scripts/zones/The_Shrine_of_RuAvitau/IDs')
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

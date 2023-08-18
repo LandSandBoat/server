@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: RoMaeve (122)
 -----------------------------------
-local ID = require('scripts/zones/RoMaeve/IDs')
+local ID = zones[xi.zone.ROMAEVE]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

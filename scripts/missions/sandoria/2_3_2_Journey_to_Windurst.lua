@@ -11,7 +11,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local giddeusID = require("scripts/zones/Giddeus/IDs")
+local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)

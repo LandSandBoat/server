@@ -5,7 +5,7 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos 25 -6 6 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

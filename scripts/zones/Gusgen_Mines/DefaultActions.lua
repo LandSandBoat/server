@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Gusgen_Mines/IDs')
+local ID = zones[xi.zone.GUSGEN_MINES]
 
 return {
     ['qm2'] = { messageSpecial = ID.text.SEE_MONSTER_TRACKS },

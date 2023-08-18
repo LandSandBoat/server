@@ -20,8 +20,8 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local chateauID   = require('scripts/zones/Chateau_dOraguille/IDs')
-local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
+local chateauID   = zones[xi.zone.CHATEAU_DORAGUILLE]
+local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER)

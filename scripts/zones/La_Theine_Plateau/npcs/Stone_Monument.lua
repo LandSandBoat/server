@@ -4,7 +4,7 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos 334.133 50.623 141.163 102
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 

@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
+local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)

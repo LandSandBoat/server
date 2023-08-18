@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local kazhamID = require('scripts/zones/Kazham/IDs')
-local gustavTunnelID = require('scripts/zones/Gustav_Tunnel/IDs')
+local kazhamID       = zones[xi.zone.KAZHAM]
+local gustavTunnelID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)

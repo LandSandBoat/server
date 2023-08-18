@@ -3,7 +3,7 @@
 --  NPC: Drop Gate (by Tonberry Decapitator)
 -- !pos -139.976 3.591 -165.043 160
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}
 

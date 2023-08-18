@@ -2,7 +2,7 @@
 -- Area: AlTaieu
 --  Mob: Aw'euvhi
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

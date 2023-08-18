@@ -2,7 +2,7 @@
 -- Zone: Mog Garden (280)
 -----------------------------------
 require('scripts/globals/mog_garden')
-local ID = require('scripts/zones/Mog_Garden/IDs')
+local ID = zones[xi.zone.MOG_GARDEN]
 -----------------------------------
 local zoneObject = {}
 

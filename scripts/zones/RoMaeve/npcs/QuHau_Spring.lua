@@ -2,7 +2,7 @@
 -- QuHau_Spring
 -- Area: Ro'Maeve
 -----------------------------------
-local ID = require("scripts/zones/RoMaeve/IDs")
+local ID = zones[xi.zone.ROMAEVE]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

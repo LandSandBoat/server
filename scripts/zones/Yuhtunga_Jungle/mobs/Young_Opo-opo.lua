@@ -3,7 +3,7 @@
 --  Mob: Young Opo-opo
 -- Note: PH for Mischievous Micholas
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

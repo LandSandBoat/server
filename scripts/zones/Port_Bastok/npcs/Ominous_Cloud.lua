@@ -4,7 +4,7 @@
 -- Type: Ninjutsu Toolbag Maker
 -- !pos 146.962 7.499 -63.316 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 

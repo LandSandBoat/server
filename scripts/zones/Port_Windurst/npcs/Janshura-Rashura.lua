@@ -4,7 +4,7 @@
 -- Starts Windurst Missions
 -- !pos -227 -8 184 240
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
+local ID = zones[xi.zone.PORT_WINDURST]
 require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------

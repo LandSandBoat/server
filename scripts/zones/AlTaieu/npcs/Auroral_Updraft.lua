@@ -2,7 +2,7 @@
 -- Area: Al'Taieu
 --  NPC: Auroral Updraft
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

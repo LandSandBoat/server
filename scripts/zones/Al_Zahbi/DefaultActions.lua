@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 
 return {
     ['550']           = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

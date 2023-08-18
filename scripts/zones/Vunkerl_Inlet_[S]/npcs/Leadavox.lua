@@ -4,7 +4,7 @@
 -- Involved in Quests
 -- !pos 206 -32 316
 -----------------------------------
-local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
+local ID = zones[xi.zone.VUNKERL_INLET_S]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

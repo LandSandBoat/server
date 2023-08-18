@@ -4,7 +4,7 @@
 -- Involved in quest: Operation Teatime
 -- !pos 473 -31 75 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

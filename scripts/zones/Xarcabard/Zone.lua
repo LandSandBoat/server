@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Xarcabard (112)
 -----------------------------------
-local ID = require('scripts/zones/Xarcabard/IDs')
+local ID = zones[xi.zone.XARCABARD]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
 require('scripts/globals/teleports')

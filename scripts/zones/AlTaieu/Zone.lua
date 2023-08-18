@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: AlTaieu (33)
 -----------------------------------
-local ID = require('scripts/zones/AlTaieu/IDs')
+local ID = zones[xi.zone.ALTAIEU]
 require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}

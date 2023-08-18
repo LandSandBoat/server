@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Nosferatu(ZNM T3))
 -- !pos -199 8 -62 68
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

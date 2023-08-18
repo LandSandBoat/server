@@ -3,7 +3,7 @@
 -- Name: Mission 5-2
 -- !pos -111 -6 0.1 165
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
+local ID = zones[xi.zone.THRONE_ROOM]
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")

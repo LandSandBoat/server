@@ -4,7 +4,7 @@
 -- Caedarva Mire (Dvucca) Teleporter Back to Aht Urhgan Whitegate
 -- !pos -264 -6 -28 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 require("scripts/globals/besieged")
 require("scripts/globals/missions")

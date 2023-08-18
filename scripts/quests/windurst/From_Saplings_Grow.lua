@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local windurstWoodsID = require('scripts/zones/Windurst_Woods/IDs')
-local capeTerigganID = require('scripts/zones/Cape_Teriggan/IDs')
+local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
+local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)

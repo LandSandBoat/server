@@ -2,7 +2,7 @@
 -- Area: Mhaura
 --  NPC: Nomad Moogle
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 -- Spawns Hexenpilz
 -- !pos -182.000 2.858 32.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

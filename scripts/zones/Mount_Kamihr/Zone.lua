@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Mount Kamihr
 -----------------------------------
-local ID = require('scripts/zones/Mount_Kamihr/IDs')
+local ID = zones[xi.zone.MOUNT_KAMIHR]
 -----------------------------------
 local zoneObject = {}
 

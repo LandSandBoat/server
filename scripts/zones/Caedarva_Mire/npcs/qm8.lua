@@ -3,7 +3,7 @@
 --  NPC: qm8
 -- Gives Lamian Fang Key
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

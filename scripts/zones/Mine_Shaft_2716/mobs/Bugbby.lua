@@ -3,7 +3,7 @@
 -- CoP Mission 5-3 (A Century of Hardship)
 -- NM: Bugbby
 -----------------------------------
-local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
+local ID = zones[xi.zone.MINE_SHAFT_2716]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

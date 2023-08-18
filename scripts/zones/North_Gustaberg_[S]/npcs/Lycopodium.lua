@@ -3,7 +3,7 @@
 --  NPC: Lycopodium
 -- !pos -275.953 12.333 262.368 88
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel_[S]/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL_S]
 require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------

@@ -7,7 +7,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
+local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.DRIFTING_NORTHWEST)

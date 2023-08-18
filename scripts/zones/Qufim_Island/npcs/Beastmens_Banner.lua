@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos 0.348 -20.126 73.479 126
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

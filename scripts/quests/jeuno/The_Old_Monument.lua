@@ -11,8 +11,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local buburimuID   = require('scripts/zones/Buburimu_Peninsula/IDs')
-local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')
+local buburimuID   = zones[xi.zone.BUBURIMU_PENINSULA]
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)

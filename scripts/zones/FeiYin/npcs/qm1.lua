@@ -4,7 +4,7 @@
 -- Involved In Quest: Pieuje's Decision
 -- !pos -55 -16 69 204
 -----------------------------------
-local ID = require("scripts/zones/FeiYin/IDs")
+local ID = zones[xi.zone.FEIYIN]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

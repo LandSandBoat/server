@@ -2,7 +2,7 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Dilapidated_Gate
 -----------------------------------
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 local entity = {}
 

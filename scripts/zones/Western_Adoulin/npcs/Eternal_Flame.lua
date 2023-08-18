@@ -3,7 +3,7 @@
 --  NPC: Eternal Flame
 -- Records of Eminence NPC
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 require("scripts/globals/sparkshop")
 require("scripts/globals/roe")
 -----------------------------------

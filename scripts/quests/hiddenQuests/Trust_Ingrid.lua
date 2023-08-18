@@ -4,7 +4,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local easternAdoulinID = require('scripts/zones/Eastern_Adoulin/IDs')
+local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustIngrid")

@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  NPC: Cermet Door
 -----------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 local entity = {}
 

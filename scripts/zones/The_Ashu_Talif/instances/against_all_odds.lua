@@ -3,7 +3,7 @@
 -- !instance 6001
 -----------------------------------
 require("scripts/globals/instance")
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
+local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
 local instanceObject = {}
 

@@ -3,7 +3,7 @@
 -- NPC: ???
 -- Notes: Grants "Ethereal droplet" temporary item.
 -----------------------------------
-local ID = require("scripts/zones/Reisenjima/IDs")
+local ID = zones[xi.zone.REISENJIMA]
 -----------------------------------
 
 local entity = {}

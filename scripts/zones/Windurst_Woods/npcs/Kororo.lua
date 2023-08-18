@@ -5,7 +5,7 @@
 -- Starts quest: A Greeting Cardian
 -- Involved in quests: Lost Chick
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

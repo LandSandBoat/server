@@ -4,7 +4,7 @@
 -- Spawns Chickcharney
 -- !pos 36 0 -240 218
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

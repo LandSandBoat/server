@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 -----------------------------------
-local ID = require('scripts/zones/Fort_Karugo-Narugo_[S]/IDs')
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

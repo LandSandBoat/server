@@ -4,7 +4,7 @@
 -- Allows players to spawn the HNM Byakko with a Gem of the West and an Autumnstone.
 -- !pos -410 -70 394 130
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
+local ID = zones[xi.zone.RUAUN_GARDENS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

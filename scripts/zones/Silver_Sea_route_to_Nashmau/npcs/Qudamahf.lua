@@ -4,7 +4,7 @@
 -- Notes: Tells ship ETA time
 -- !pos 0.340 -12.232 -4.120 58
 -----------------------------------
-local ID = require("scripts/zones/Silver_Sea_route_to_Nashmau/IDs")
+local ID = zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU]
 require("scripts/globals/transport")
 -----------------------------------
 local entity = {}

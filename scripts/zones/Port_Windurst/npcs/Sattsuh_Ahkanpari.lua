@@ -3,7 +3,7 @@
 --  NPC: Sattsuh Ahkanpari
 -- Elshimo Uplands Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
+local ID = zones[xi.zone.PORT_WINDURST]
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------

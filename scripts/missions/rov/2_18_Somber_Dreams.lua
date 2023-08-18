@@ -10,7 +10,7 @@ require('scripts/globals/rhapsodies')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SOMBER_DREAMS)

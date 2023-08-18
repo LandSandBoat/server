@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
+local ID = zones[xi.zone.PROMYVION_VAHZL]
 
 return {
     ['_0m0'] = { messageSpecial = ID.text.OVERFLOWING_MEMORIES },

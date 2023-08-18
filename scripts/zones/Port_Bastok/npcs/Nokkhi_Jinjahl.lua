@@ -4,7 +4,7 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Bastok 1st Place
 -- !pos 111 8 -47 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 

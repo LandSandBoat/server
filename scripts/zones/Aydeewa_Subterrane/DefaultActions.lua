@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Aydeewa_Subterrane/IDs')
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 
 return {
     ['blank_omens'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

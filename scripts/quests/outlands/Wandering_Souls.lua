@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local terigganID = require('scripts/zones/Cape_Teriggan/IDs')
+local terigganID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)

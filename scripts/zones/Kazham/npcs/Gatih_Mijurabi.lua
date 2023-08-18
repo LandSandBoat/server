@@ -3,7 +3,7 @@
 --  NPC: Gatih Mijurabi
 -- !pos 58.249 -13.086 -49.084 250
 -----------------------------------
-local ID = require("scripts/zones/Kazham/IDs")
+local ID = zones[xi.zone.KAZHAM]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

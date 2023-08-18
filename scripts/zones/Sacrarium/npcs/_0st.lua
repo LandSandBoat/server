@@ -4,7 +4,7 @@
 -- Notes: Opens _0su (Gate)
 -- !pos 103.478 -1.563 50.181 28
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

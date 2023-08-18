@@ -8,7 +8,7 @@ require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)

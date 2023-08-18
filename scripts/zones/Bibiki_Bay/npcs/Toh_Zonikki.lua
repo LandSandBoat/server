@@ -4,7 +4,7 @@
 -- Type: Clamming NPC
 -- !pos -371 -1 -421 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 

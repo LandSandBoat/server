@@ -2,7 +2,7 @@
 -- Area: Wajaom Woodlands
 --  Mob: Percipient Zoraal Ja
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 local entity = {}
 

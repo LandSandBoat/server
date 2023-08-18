@@ -3,7 +3,7 @@
 --  NPC: Neigepance
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
+local ID = zones[xi.zone.BASTOK_MINES]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

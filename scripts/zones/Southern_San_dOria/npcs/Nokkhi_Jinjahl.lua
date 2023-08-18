@@ -4,7 +4,7 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / San d'Oria 1st Place
 -- !pos 23 2 -13 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

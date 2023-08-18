@@ -4,7 +4,7 @@
 -- Spawns Lentor
 -- !pos -248.000 47.971 403.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

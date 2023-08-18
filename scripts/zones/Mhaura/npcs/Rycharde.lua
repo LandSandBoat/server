@@ -9,7 +9,7 @@
 -- Used in: scripts/quests/otherAreas/The_Clue.lua
 -- Used in: scripts/quests/otherAreas/The_Basics.lua
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

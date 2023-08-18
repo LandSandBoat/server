@@ -3,7 +3,7 @@
 --  Mob: Evil Weapon
 -- Note: PH for Eldritch Edge
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

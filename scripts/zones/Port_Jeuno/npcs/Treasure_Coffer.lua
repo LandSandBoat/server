@@ -3,7 +3,7 @@
 --  NPC: Treasure Coffer
 -- !pos -52 0 -11 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

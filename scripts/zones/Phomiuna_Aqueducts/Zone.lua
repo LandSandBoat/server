@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
-local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local zoneObject = {}
 

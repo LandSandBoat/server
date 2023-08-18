@@ -3,7 +3,7 @@
 --  NPC: Signpost
 -- !pos -221 17 139 108
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 local entity = {}
 

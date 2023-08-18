@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Gration)
 -- !pos 113.563 -16.302 38.912 25
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

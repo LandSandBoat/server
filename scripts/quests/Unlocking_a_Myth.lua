@@ -3,7 +3,7 @@
 -- Zalsuhm
 -- !pos -33 6 -117
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/equipment")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

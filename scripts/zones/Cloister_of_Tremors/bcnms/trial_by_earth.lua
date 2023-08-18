@@ -2,7 +2,7 @@
 -- Area: Cloister of Tremors
 -- BCNM: Trial by Earth
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_TREMORS]
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

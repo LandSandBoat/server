@@ -14,8 +14,8 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)

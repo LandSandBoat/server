@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Eastern Adoulin (257)
 -----------------------------------
-local ID = require('scripts/zones/Eastern_Adoulin/IDs')
+local ID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 local zoneObject = {}
 

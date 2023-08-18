@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
-local ifritsCauldronID = require('scripts/zones/Ifrits_Cauldron/IDs')
+local windurstWallsID  = zones[xi.zone.WINDURST_WALLS]
+local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY)

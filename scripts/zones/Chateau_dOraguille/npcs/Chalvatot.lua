@@ -6,7 +6,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -105 0.1 72 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

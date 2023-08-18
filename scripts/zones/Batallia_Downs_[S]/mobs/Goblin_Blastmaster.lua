@@ -3,7 +3,7 @@
 --  Mob: Goblin Blastmaster
 -- Note: PH for Burlibix Brawnback
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs_[S]/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

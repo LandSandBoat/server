@@ -3,7 +3,7 @@
 --  Mob: Orcish Veteran
 -- Note: PH for Drumskull Zogdregg
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
+local ID = zones[xi.zone.JUGNER_FOREST_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

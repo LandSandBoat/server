@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Chamber_of_Oracles (168)
 -----------------------------------
-local ID = require('scripts/zones/Chamber_of_Oracles/IDs')
+local ID = zones[xi.zone.CHAMBER_OF_ORACLES]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 -----------------------------------

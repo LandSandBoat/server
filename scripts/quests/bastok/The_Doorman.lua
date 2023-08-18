@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local davoiID = require('scripts/zones/Davoi/IDs')
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)

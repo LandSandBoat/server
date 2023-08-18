@@ -4,7 +4,7 @@
 -- Involved In Quest: Messenger from Beyond
 -- !pos -716 -10 66 103
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

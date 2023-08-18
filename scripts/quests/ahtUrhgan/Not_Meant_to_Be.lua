@@ -8,7 +8,7 @@
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local caedarvaMireID = require('scripts/zones/Caedarva_Mire/IDs')
+local caedarvaMireID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)

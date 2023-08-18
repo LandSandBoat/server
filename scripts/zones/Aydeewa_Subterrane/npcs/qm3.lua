@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Chigre(ZNM T1))
 -- !pos -217 35 12 68
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

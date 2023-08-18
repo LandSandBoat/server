@@ -3,7 +3,7 @@
 --  Mob: Gigas Wallwatcher
 -- Note: PH for Ogygos
 -----------------------------------
-local ID = require("scripts/zones/Middle_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

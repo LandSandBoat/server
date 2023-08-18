@@ -3,7 +3,7 @@
 --  NPC: Nilerouche
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

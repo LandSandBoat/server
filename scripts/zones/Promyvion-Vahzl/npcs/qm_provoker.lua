@@ -4,7 +4,7 @@
 -- Notes: Spawn Provoker Floor 5
 -- !pos -260.000 -0.003 72.000 22
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
+local ID = zones[xi.zone.PROMYVION_VAHZL]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

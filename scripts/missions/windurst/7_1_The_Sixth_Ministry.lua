@@ -13,7 +13,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
-local toraimaraiID = require("scripts/zones/Toraimarai_Canal/IDs")
+local toraimaraiID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY)

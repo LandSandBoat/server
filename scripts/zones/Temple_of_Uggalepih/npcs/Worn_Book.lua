@@ -4,7 +4,7 @@
 -- Getting "Old Rusty Key (keyitem)"
 -- !pos 59 0 19 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

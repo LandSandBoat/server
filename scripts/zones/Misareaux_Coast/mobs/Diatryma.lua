@@ -3,7 +3,7 @@
 --  Mob: Diatryma
 -- Note: PH for Okyupete
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: Lycopodium Teleport 1
 -- !pos -258.186 -3.231 204.774 106
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Assault 51 : Nyzul Isle Investigation
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/instance")
 require("scripts/globals/nyzul")
 require("scripts/globals/utils")

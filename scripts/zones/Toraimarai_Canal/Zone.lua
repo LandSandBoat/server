@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Toraimarai Canal (169)
 -----------------------------------
-local ID = require('scripts/zones/Toraimarai_Canal/IDs')
+local ID = zones[xi.zone.TORAIMARAI_CANAL]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

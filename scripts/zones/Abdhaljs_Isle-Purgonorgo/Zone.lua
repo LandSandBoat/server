@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Abdhaljs_Isle-Purgonorgo
 -----------------------------------
-local ID = require('scripts/zones/Abdhaljs_Isle-Purgonorgo/IDs')
+local ID = zones[xi.zone.ABDHALJS_ISLE_PURGONORGO]
 -----------------------------------
 local zoneObject = {}
 

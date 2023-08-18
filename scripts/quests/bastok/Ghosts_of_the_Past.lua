@@ -9,7 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local gusgenMinesID = require('scripts/zones/Gusgen_Mines/IDs')
+local gusgenMinesID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)

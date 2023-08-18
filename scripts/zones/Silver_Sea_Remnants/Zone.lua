@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Silver_Sea_Remnants
 -----------------------------------
-local ID = require('scripts/zones/Silver_Sea_Remnants/IDs')
+local ID = zones[xi.zone.SILVER_SEA_REMNANTS]
 -----------------------------------
 local zoneObject = {}
 

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Tinnin(ZNM T4))
 -- !pos 278 0 -703 51
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

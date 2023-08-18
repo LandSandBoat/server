@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local metalworksID = require('scripts/zones/Metalworks/IDs')
-local ziTahID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local metalworksID = zones[xi.zone.METALWORKS]
+local ziTahID      = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)

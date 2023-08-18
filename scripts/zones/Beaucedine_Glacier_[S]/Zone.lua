@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Beaucedine_Glacier_[S] (136)
 -----------------------------------
-local ID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 -----------------------------------
 local zoneObject = {}
 

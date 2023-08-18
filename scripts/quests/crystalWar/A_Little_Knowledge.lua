@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local eldiemeSID = require('scripts/zones/The_Eldieme_Necropolis_[S]/IDs')
+local eldiemeSID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)

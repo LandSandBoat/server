@@ -4,7 +4,7 @@
 -- Einherjar-related NPC, Smoldering Glass, Therion Ichor items
 -- !pos 0.373 -6.667 14.712 53
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
+local ID = zones[xi.zone.NASHMAU]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

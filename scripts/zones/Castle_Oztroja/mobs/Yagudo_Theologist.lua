@@ -3,7 +3,7 @@
 --  Mob: Yagudo Theologist
 -- Note: PH for Moo Ouzi the Swiftblade
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

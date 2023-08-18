@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Arrapago_Reef (54)
 -----------------------------------
-local ID = require('scripts/zones/Arrapago_Reef/IDs')
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------

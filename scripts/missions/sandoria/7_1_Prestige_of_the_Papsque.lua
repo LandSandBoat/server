@@ -13,7 +13,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
+local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE)

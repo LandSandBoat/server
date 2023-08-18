@@ -4,7 +4,7 @@
 -- !pos -499.914 1.470 -109.039 124
 -- Active on LIGHTNINGDAY in this zone. To test on off-days, setStatus(xi.status.NORMAL)
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}

@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local beadeauxID = require('scripts/zones/Beadeaux/IDs')
+local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)

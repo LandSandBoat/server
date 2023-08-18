@@ -11,7 +11,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mazeID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)

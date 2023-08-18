@@ -5,7 +5,7 @@
 -- !pos 4.986 -2.101 -12.026 58
 -----------------------------------
 require("scripts/globals/shop")
-local ID = require("scripts/zones/Silver_Sea_route_to_Nashmau/IDs")
+local ID = zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU]
 -----------------------------------
 local entity = {}
 

@@ -10,7 +10,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local westernAdoulinID = require('scripts/zones/Western_Adoulin/IDs')
+local westernAdoulinID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_MISSIVE)

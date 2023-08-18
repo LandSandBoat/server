@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: The_Sanctuary_of_ZiTah (121)
 -----------------------------------
-local ID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

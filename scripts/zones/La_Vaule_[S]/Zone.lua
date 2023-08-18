@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: La_Vaule_[S] (85)
 -----------------------------------
-local ID = require('scripts/zones/La_Vaule_[S]/IDs')
+local ID = zones[xi.zone.LA_VAULE_S]
 require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}

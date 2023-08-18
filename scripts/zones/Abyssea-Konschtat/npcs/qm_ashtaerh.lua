@@ -4,7 +4,7 @@
 -- Spawns Ashtaerh the Gallvexed
 -- !pos 360.000 -16.043 -400.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 
 return {
     ['qm2'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

@@ -4,7 +4,7 @@
 -- Spawns Kampe
 -- !pos -401.612 3.738 -200.972 215
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

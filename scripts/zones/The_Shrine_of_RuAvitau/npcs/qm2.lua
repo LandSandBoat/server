@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawns Kirin)
 -- !pos -81 32 2 178
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  NPC: Mythril Beastcoin Door
 -- !pos 40 8.6 20.012 176
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

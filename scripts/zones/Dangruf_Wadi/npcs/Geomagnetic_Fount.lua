@@ -3,7 +3,7 @@
 --  NPC: Geomagnetic Fount
 -- !pos -480.364 2.458 -58.355
 -----------------------------------
-local ID = require("scripts/zones/Dangruf_Wadi/IDs")
+local ID = zones[xi.zone.DANGRUF_WADI]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

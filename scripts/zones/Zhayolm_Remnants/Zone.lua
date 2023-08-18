@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Zhayolm_Remnants
 -----------------------------------
-local ID = require('scripts/zones/Zhayolm_Remnants/IDs')
+local ID = zones[xi.zone.ZHAYOLM_REMNANTS]
 -----------------------------------
 local zoneObject = {}
 

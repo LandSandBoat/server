@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Cirdas Caverns U
 -----------------------------------
-local ID = require('scripts/zones/Cirdas_Caverns_U/IDs')
+local ID = zones[xi.zone.CIRDAS_CAVERNS_U]
 -----------------------------------
 local zoneObject = {}
 

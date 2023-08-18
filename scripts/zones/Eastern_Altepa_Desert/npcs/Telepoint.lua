@@ -3,7 +3,7 @@
 --  NPC: Telepoint
 -- !pos -61.942 3.949 224.900 114
 -----------------------------------
-local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

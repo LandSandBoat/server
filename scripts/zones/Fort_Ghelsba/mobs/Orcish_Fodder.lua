@@ -3,7 +3,7 @@
 --  Mob: Orcish Fodder
 -- Note: PH for Hundredscar Hajwaj
 -----------------------------------
-local ID = require("scripts/zones/Fort_Ghelsba/IDs")
+local ID = zones[xi.zone.FORT_GHELSBA]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

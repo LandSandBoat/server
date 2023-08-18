@@ -3,7 +3,7 @@
 --  Mob: Trion
 -- Ally during San d'Oria Mission 9-2
 -----------------------------------
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
 local entity = {}
 

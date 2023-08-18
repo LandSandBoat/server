@@ -3,7 +3,7 @@
 --  NPC: ??? divine might mission
 -- !pos -40 0 -151 178
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

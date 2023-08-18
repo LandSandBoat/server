@@ -4,7 +4,7 @@
 -- Involved in Quest: Trial by Earth
 -- !pos -539 1 -493 209
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_TREMORS]
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}

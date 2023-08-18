@@ -14,7 +14,7 @@ require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/utils')
 -----------------------------------
-local promyvionVahzlID = require("scripts/zones/Promyvion-Vahzl/IDs")
+local promyvionVahzlID = zones[xi.zone.PROMYVION_VAHZL]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)

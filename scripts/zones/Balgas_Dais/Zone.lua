@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Balgas_Dais (146)
 -----------------------------------
-local ID = require('scripts/zones/Balgas_Dais/IDs')
+local ID = zones[xi.zone.BALGAS_DAIS]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

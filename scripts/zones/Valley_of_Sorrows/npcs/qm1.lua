@@ -4,7 +4,7 @@
 -- Spawns Adamantoise or Aspidochelone
 -- !pos 0 0 -37 59
 -----------------------------------
-local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

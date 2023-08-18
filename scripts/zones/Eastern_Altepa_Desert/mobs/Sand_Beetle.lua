@@ -3,7 +3,7 @@
 --  Mob: Sand Beetle
 -- Note: PH for Donnergugi
 -----------------------------------
-local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

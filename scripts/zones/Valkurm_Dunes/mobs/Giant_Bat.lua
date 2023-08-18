@@ -3,7 +3,7 @@
 --  Mob: Giant Bat
 --  PH for Golden Bat
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

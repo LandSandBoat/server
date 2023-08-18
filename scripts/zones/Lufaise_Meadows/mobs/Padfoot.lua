@@ -7,7 +7,7 @@
 -- !pos -378.950 -15.742 144.215 24
 -- !pos -141.523 -15.529 91.709 24
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 local entity = {}
 

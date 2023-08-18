@@ -10,8 +10,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local northernSandoriaID = require("scripts/zones/Northern_San_dOria/IDs")
-local southernSandoriaID = require("scripts/zones/Southern_San_dOria/IDs")
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)

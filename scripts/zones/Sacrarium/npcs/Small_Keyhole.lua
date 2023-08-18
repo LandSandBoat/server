@@ -3,7 +3,7 @@
 -- Area: Sacrarium
 -- !pos 99.772 -1.614 51.545 28
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

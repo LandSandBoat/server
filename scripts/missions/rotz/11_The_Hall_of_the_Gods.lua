@@ -9,7 +9,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 -----------------------------------
-local hallID = require('scripts/zones/Hall_of_the_Gods/IDs')
+local hallID = zones[xi.zone.HALL_OF_THE_GODS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)

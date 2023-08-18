@@ -4,7 +4,7 @@
 -- !pos -39.273 -16.000 70.126 249
 -----------------------------------
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 

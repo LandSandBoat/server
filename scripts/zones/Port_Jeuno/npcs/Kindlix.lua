@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -18.820 4.000 23.302 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

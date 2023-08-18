@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local norgID = require('scripts/zones/Norg/IDs')
-local onzozoID = require('scripts/zones/Labyrinth_of_Onzozo/IDs')
+local norgID   = zones[xi.zone.NORG]
+local onzozoID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)

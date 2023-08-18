@@ -4,7 +4,7 @@
 -- Type: Guildworker's Union Representative
 -- !pos -179.458 -1 15.857 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}

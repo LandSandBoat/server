@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Maze of Shakhrami (198)
 -----------------------------------
-local ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')

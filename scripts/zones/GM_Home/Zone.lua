@@ -10,7 +10,7 @@
 -- 140 = Camera test.
 -- 141 = "Press confirm button to proceed" nonworking test.
 -----------------------------------
-local ID = require('scripts/zones/GM_Home/IDs')
+local ID = zones[xi.zone.GM_HOME]
 -----------------------------------
 local zoneObject = {}
 

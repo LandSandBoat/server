@@ -2,7 +2,7 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Overgrown Rose
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 

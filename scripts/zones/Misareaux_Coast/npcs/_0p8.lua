@@ -4,7 +4,7 @@
 --  Entrance to Sacrarium
 -----------------------------------
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}
 

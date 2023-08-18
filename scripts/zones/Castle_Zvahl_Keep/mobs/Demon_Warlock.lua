@@ -3,7 +3,7 @@
 --  Mob: Demon Warlock
 -- Note: PH for Viscount Morax
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

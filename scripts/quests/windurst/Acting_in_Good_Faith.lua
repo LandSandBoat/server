@@ -10,7 +10,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local eldiemeID = require('scripts/zones/The_Eldieme_Necropolis/IDs')
+local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)

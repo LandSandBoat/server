@@ -3,7 +3,7 @@
 --  Mob: Lost Soul
 -- Note: PH for Timeworn Warrior
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
+local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

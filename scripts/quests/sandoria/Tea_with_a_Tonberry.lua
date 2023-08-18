@@ -12,8 +12,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local phanauetID = require('scripts/zones/Phanauet_Channel/IDs')
-local davoiID = require('scripts/zones/Davoi/IDs')
+local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)

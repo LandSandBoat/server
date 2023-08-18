@@ -12,7 +12,7 @@
 -- 01 00 00 00 00 00 00 00 00 00 00 00 6B 09 72 2C 00 00 00 00 00 00 00 00
 --  ^-- ticket type                     ^-- signature: PlanA
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 

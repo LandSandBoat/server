@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local misareauxID = require("scripts/zones/Misareaux_Coast/IDs")
+local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustUlmia")

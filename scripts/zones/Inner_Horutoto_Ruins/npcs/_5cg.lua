@@ -3,7 +3,7 @@
 --  NPC: _5cg (Gate of Fire)
 -- !pos -332 0 99 192
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 --  Mob: Hoarder Hare
 -- Note: PH for Teporingo
 -----------------------------------
-local ID = require("scripts/zones/Dangruf_Wadi/IDs")
+local ID = zones[xi.zone.DANGRUF_WADI]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

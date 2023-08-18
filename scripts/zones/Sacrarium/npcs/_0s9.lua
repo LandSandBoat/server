@@ -3,7 +3,7 @@
 --  NPC: _0s9 (Wooden Gate)
 -- !pos 20.000 0.500 19.500 28
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

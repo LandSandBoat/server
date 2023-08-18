@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Bhaflau_Thickets (52)
 -----------------------------------
-local ID = require('scripts/zones/Bhaflau_Thickets/IDs')
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/helm')
 -----------------------------------

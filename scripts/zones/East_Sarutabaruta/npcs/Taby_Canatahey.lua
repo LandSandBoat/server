@@ -3,7 +3,7 @@
 --  NPC: Taby Canatahey
 -- !pos -119.119 -4.106 -524.347 116
 -----------------------------------
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
+local ID = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

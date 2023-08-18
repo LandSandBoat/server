@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/besieged")
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 

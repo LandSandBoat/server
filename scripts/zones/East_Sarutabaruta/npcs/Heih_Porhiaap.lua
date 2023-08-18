@@ -3,7 +3,7 @@
 --  NPC: Heih Porhiaap
 -- !pos -118.876 -4.088 -515.731 116
 -----------------------------------
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
+local ID = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

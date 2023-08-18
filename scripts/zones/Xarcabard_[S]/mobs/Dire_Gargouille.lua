@@ -3,7 +3,7 @@
 --  Mob: Dire Gargouille
 -- Note: PH for Graoully
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard_[S]/IDs")
+local ID = zones[xi.zone.XARCABARD_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

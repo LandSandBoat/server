@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Mamool_Ja_Training_Grounds
 -----------------------------------
-local ID = require('scripts/zones/Mamool_Ja_Training_Grounds/IDs')
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 local zoneObject = {}
 

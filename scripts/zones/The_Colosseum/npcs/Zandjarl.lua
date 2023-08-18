@@ -4,7 +4,7 @@
 -- Type: Pankration NPC
 -- !pos -599 0 45 71
 -----------------------------------
-local ID = require("scripts/zones/The_Colosseum/IDs")
+local ID = zones[xi.zone.THE_COLOSSEUM]
 -----------------------------------
 local entity = {}
 

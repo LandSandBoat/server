@@ -13,7 +13,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 -----------------------------------
-local sacrariumID = require("scripts/zones/Sacrarium/IDs")
+local sacrariumID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP)

@@ -4,7 +4,7 @@
 -- Spawns Smok
 -- !pos -530.208 -5.460 -39.323 215
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
+local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}

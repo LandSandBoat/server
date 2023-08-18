@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Escha_RuAun (289)
 -----------------------------------
-local ID = require('scripts/zones/Escha_RuAun/IDs')
+local ID = zones[xi.zone.ESCHA_RUAUN]
 -----------------------------------
 local zoneObject = {}
 

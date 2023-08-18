@@ -4,7 +4,7 @@
 -- Type: Merchant NPC
 -- !pos -7.600 0.249 25.239 242
 -----------------------------------
-local ID = require("scripts/zones/Heavens_Tower/IDs")
+local ID = zones[xi.zone.HEAVENS_TOWER]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 
 -- TODO: Add support for occasional stock.
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+local ID = zones[xi.zone.RULUDE_GARDENS]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

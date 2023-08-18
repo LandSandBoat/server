@@ -4,7 +4,7 @@
 -- Standard merchant, though he acts like a guild merchant
 -- !pos -147.593 11.999 222.550 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

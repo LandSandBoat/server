@@ -14,7 +14,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local gusgenID        = require('scripts/zones/Gusgen_Mines/IDs')
+local gusgenID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)

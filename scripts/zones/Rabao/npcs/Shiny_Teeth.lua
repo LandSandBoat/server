@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -30 8 99 247
 -----------------------------------
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = zones[xi.zone.RABAO]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

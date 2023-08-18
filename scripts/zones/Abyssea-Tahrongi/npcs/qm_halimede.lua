@@ -4,7 +4,7 @@
 -- Spawns Halimede
 -- !pos -234 15 -603 45
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Tahrongi/IDs')
+local ID = zones[xi.zone.ABYSSEA_TAHRONGI]
 require("scripts/globals/abyssea")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,7 @@
 -- Type: Add-on NPC
 -- !pos 41.169 3.899 -51.005 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

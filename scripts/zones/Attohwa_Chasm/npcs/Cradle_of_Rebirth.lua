@@ -2,7 +2,7 @@
 -- Area: Attohwa Chasm
 --  NPC: Cradle_of_Rebirth
 -----------------------------------
-local ID = require("scripts/zones/Attohwa_Chasm/IDs")
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 

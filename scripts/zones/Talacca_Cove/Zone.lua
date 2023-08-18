@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Talacca_Cove (57)
 -----------------------------------
-local ID = require('scripts/zones/Talacca_Cove/IDs')
+local ID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 local zoneObject = {}
 

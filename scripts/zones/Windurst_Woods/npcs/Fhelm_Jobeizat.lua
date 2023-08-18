@@ -4,7 +4,7 @@
 -- Records of Eminence NPC
 -- !pos 89.049 -4.108 -46.195 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/sparkshop")
 require("scripts/globals/roe")
 -----------------------------------

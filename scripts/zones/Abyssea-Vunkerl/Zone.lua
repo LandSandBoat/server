@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Abyssea - Vunkerl
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Vunkerl/IDs')
+local ID = zones[xi.zone.ABYSSEA_VUNKERL]
 require('scripts/globals/abyssea')
 -----------------------------------
 local zoneObject = {}

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Monarch_Linn
 -----------------------------------
-local ID = require('scripts/zones/Monarch_Linn/IDs')
+local ID = zones[xi.zone.MONARCH_LINN]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

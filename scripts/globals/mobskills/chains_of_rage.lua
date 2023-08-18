@@ -1,7 +1,7 @@
 -----------------------------------
 -- Chains of Rage
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

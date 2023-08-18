@@ -26,7 +26,7 @@
 --will require changing other avatar quests and making a variable for it all. (if this gets scripted, please remove this comment)
 
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Fort_Ghelsba (141)
 -----------------------------------
-local ID = require('scripts/zones/Fort_Ghelsba/IDs')
+local ID = zones[xi.zone.FORT_GHELSBA]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

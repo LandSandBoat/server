@@ -5,7 +5,7 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos 2 0.1 30 242
 -----------------------------------
-local ID = require("scripts/zones/Heavens_Tower/IDs")
+local ID = zones[xi.zone.HEAVENS_TOWER]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

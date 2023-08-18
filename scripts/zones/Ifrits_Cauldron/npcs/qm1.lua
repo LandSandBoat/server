@@ -4,7 +4,7 @@
 -- Notes: Used to spawn Tarasque
 -- !pos 126 18 166 205
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

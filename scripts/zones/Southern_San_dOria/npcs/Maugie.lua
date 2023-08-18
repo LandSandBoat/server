@@ -3,7 +3,7 @@
 --  NPC: Maugie
 -- Type: General Info NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/quests")
 -----------------------------------

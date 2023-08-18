@@ -3,7 +3,7 @@
 --  NPC: Melloa
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 require("scripts/globals/shop")
 require("scripts/globals/pathfind")
 -----------------------------------

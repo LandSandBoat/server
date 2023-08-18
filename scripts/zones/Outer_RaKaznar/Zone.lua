@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 -----------------------------------
-local ID = require('scripts/zones/Outer_RaKaznar/IDs')
+local ID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 local zoneObject = {}
 

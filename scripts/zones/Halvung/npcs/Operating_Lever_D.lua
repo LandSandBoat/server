@@ -3,7 +3,7 @@
 --  NPC: Operating Lever D
 -- TODO: more than 5/6 people still need verification as no sites show this requirment?
 -----------------------------------
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 -----------------------------------
 local entity = {}
 

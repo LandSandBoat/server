@@ -3,7 +3,7 @@
 --  Mob: Groundskeeper
 -- Note: Place holder Despot
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
+local ID = zones[xi.zone.RUAUN_GARDENS]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

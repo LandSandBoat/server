@@ -4,7 +4,7 @@
 -- Type: ENM
 -- !pos -144.711 6.246 -250.309 7
 -----------------------------------
-local ID = require("scripts/zones/Attohwa_Chasm/IDs")
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 

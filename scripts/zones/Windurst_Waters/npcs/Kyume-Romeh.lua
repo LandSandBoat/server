@@ -4,7 +4,7 @@
 --  Involved In Quest: Making Headlines, Hat in Hand
 -- !pos -58 -4 23 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

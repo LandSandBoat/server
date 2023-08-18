@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Kazham-Jeuno_Airship
 -----------------------------------
-local ID = require('scripts/zones/Kazham-Jeuno_Airship/IDs')
+local ID = zones[xi.zone.KAZHAM_JEUNO_AIRSHIP]
 -----------------------------------
 local zoneObject = {}
 

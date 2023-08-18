@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 
 return {
     ['qm3'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

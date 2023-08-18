@@ -3,7 +3,7 @@
 --  Mob: Ochu
 -- Note: PH for Delicieuse Delphine
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields_[S]/IDs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

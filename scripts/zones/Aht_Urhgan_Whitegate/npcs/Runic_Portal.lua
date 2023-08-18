@@ -3,7 +3,7 @@
 --  NPC: Runic Portal
 -- Aht Urhgan Teleporter to Other Areas
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 require("scripts/globals/besieged")
 require("scripts/globals/teleports")

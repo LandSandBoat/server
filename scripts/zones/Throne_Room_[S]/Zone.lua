@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Throne_Room_[S] (156)
 -----------------------------------
-local ID = require('scripts/zones/Throne_Room_[S]/IDs')
+local ID = zones[xi.zone.THRONE_ROOM_S]
 -----------------------------------
 local zoneObject = {}
 

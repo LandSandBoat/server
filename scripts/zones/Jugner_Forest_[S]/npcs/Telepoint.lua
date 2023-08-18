@@ -3,7 +3,7 @@
 --  NPC: Telepoint
 -- !pos -122.862 0.000 -163.154 82
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
+local ID = zones[xi.zone.JUGNER_FOREST_S]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

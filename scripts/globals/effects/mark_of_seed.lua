@@ -2,7 +2,7 @@
 -- xi.effect.MARK_OF_SEED
 -- DO NOT try to use this anywhere else but Fei'Yin!
 -----------------------------------
-local ID = require("scripts/zones/FeiYin/IDs")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local effectObject = {}
 

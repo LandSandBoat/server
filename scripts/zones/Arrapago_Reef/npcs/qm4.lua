@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Nuhn(ZNM T3))
 -- !pos -451 -7 389 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

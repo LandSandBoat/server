@@ -5,7 +5,7 @@
 -- Starts and Finishes Quests: Path of the Bard (just start), The Requiem (BARD AF2)
 -- !pos -22 0 -60 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

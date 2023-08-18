@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Davoi (149)
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 require("scripts/globals/conquest")
 require("scripts/globals/npc_util")
 require("scripts/globals/treasure")

@@ -2,7 +2,7 @@
 -- Area: Lebros Cavern (Excavation Duty)
 --  Mob: Qiqirn Ceramist
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
+local ID = zones[xi.zone.LEBROS_CAVERN]
 require("scripts/globals/assault")
 -----------------------------------
 local entity = {}

@@ -5,7 +5,7 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -61 0 -140 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local southernSandOriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local seaSerpentGrottoID = require('scripts/zones/Sea_Serpent_Grotto/IDs')
+local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)

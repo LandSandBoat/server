@@ -4,7 +4,7 @@
 -- Involved In Mission: Journey Abroad
 -- !pos 180 -32 167 143
 -----------------------------------
-local ID = require("scripts/zones/Palborough_Mines/IDs")
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 local entity = {}
 

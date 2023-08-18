@@ -3,7 +3,7 @@
 --  Mob: Tomb Wolf
 -- Note: PH for Cwn Cyrff
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

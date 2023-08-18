@@ -3,7 +3,7 @@
 --  NPC: Habitox
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}

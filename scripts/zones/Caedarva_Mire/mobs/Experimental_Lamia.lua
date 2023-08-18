@@ -3,7 +3,7 @@
 --  ZNM: Experimental Lamia
 -- !pos -773.369 -11.824 322.298 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 

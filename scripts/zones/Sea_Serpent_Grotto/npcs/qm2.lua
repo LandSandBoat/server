@@ -3,7 +3,7 @@
 --  NPC: ??? Used for Norg quest "The Sahagin's Stash"
 -- !pos 295.276 27.129 213.043 176
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

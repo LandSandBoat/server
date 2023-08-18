@@ -3,7 +3,7 @@
 --  NPC: Klaus
 -- !pos -89.355 -3.611 -15.256 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 

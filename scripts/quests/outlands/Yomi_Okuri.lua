@@ -12,8 +12,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local onzozoID  = require('scripts/zones/Labyrinth_of_Onzozo/IDs')
-local valkurmID = require('scripts/zones/Valkurm_Dunes/IDs')
+local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
+local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)

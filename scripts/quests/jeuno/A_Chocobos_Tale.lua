@@ -11,7 +11,7 @@ require('scripts/globals/missions')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
+local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE)

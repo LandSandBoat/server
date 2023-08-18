@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawns Pallas)
 -- !pos -302.000 -159.000 21.000 158
 -----------------------------------
-local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
+local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

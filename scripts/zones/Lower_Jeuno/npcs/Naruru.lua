@@ -4,7 +4,7 @@
 -- Starts and Finishes Quests: Cook's Pride
 -- !pos -56 0.1 -138 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")

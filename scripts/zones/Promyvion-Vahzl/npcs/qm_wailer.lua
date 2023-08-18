@@ -4,7 +4,7 @@
 -- Notes: Spawn Wailer Floor 4
 -- !pos 339.000 -1.883 144.000 22
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
+local ID = zones[xi.zone.PROMYVION_VAHZL]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

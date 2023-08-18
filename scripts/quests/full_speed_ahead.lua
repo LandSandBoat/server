@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/utils')
 -----------------------------------
-local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
+local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 
 --[[

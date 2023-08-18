@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Castle_Zvahl_Baileys_[S]/IDs')
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S]
 
 return {
     ['Ornate_Block']   = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

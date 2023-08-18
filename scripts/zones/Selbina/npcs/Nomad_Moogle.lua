@@ -2,7 +2,7 @@
 -- Area: Selbina
 --  NPC: Nomad Moogle
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 

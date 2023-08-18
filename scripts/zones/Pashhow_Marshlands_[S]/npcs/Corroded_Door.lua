@@ -3,7 +3,7 @@
 --  NPC: Corroded Door
 -- !pos -385.602 21.970 456.359 90
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 require("scripts/globals/instance")
 -----------------------------------
 local entity = {}

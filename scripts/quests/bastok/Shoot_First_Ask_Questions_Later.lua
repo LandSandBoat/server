@@ -8,8 +8,8 @@ require('scripts/globals/weaponskillids')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 -----------------------------------
-local metalworksID = require('scripts/zones/Metalworks/IDs')
-local boyahdaTreeID = require('scripts/zones/The_Boyahda_Tree/IDs')
+local metalworksID = zones[xi.zone.METALWORKS]
+local boyahdaTreeID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)

@@ -4,7 +4,7 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos 77.277 -2.894 -517.376 101
 -----------------------------------
-local ID = require("scripts/zones/East_Ronfaure/IDs")
+local ID = zones[xi.zone.EAST_RONFAURE]
 -----------------------------------
 local entity = {}
 

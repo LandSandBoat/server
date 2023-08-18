@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -1.139 -2.101 -9.000 221
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

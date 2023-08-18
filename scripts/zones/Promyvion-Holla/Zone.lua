@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Promyvion-Holla (16)
 -----------------------------------
-local ID = require('scripts/zones/Promyvion-Holla/IDs')
+local ID = zones[xi.zone.PROMYVION_HOLLA]
 require('scripts/globals/promyvion')
 -----------------------------------
 local zoneObject = {}

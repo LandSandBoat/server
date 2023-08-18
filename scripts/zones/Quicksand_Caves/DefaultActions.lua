@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 
 return {
     ['qm3']               = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

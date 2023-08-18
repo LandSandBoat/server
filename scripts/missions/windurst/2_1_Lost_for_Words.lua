@@ -16,7 +16,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS)

@@ -3,7 +3,7 @@
 --  NPC: Tallow Candle
 -- !pos 15.19 -18.30 339.80
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
 require('scripts/globals/npc_util')
 -----------------------------------

@@ -3,7 +3,7 @@
 --   NM: Chandelier
 -- Note: Spawned for quest "Hitting the Marquisate"
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 

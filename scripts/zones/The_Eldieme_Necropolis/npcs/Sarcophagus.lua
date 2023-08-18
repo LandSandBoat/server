@@ -4,7 +4,7 @@
 -- Involved in Quests: The Requiem (BARD AF2), A New Dawn (BST AF3)
 -- !pos -420 8 500 195
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

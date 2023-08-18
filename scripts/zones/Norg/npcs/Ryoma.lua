@@ -4,7 +4,7 @@
 -- Start and Finish Quest: 20 in Pirate Years, I'll Take the Big Box, True Will, Bugi Soden
 -- !pos -23 0 -9 252
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 -----------------------------------

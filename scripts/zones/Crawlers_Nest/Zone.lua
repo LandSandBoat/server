@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Crawlers_Nest (197)
 -----------------------------------
-local ID = require('scripts/zones/Crawlers_Nest/IDs')
+local ID = zones[xi.zone.CRAWLERS_NEST]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

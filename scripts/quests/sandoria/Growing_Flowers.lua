@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local northenSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local northenSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)

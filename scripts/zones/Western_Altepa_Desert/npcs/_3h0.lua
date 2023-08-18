@@ -3,7 +3,7 @@
 --  NPC: _3h0 (Altepa Gate)
 -- !pos -19 12 131 125
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

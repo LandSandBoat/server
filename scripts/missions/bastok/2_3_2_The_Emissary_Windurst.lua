@@ -11,7 +11,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local northSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local northSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST)

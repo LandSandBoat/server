@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Moh Gates
 -----------------------------------
-local ID = require('scripts/zones/Moh_Gates/IDs')
+local ID = zones[xi.zone.MOH_GATES]
 -----------------------------------
 local zoneObject = {}
 

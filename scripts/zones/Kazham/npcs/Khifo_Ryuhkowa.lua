@@ -3,7 +3,7 @@
 --  NPC: Khifo Ryuhkowa
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Kazham/IDs")
+local ID = zones[xi.zone.KAZHAM]
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

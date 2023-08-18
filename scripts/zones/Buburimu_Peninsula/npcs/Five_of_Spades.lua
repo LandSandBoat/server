@@ -3,7 +3,7 @@
 --  NPC: Five of Spades
 --  Invloved in quests: A Greeting Cardian
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 -----------------------------------
 local entity = {}
 

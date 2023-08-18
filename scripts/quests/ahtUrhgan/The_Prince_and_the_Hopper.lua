@@ -9,7 +9,7 @@
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mamookID = require('scripts/zones/Mamook/IDs')
+local mamookID = zones[xi.zone.MAMOOK]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER)

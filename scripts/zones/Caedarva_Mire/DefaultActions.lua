@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 
 return {
     ['Jazaraats_Headstone'] = { messageSpecial = ID.text.JAZARAATS_HEADSTONE }, -- Overwritten In scripts/missions/toau/13_Lost_Kingdom.lua

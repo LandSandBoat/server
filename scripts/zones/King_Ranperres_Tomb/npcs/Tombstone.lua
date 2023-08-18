@@ -4,7 +4,7 @@
 -- Involved in Quest: Grave Concerns
 -- !pos 1 0.1 -101 190
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

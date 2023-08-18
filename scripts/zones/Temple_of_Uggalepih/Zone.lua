@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Temple_of_Uggalepih (159)
 -----------------------------------
-local ID = require('scripts/zones/Temple_of_Uggalepih/IDs')
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

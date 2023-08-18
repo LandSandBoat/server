@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Rabao (247)
 -----------------------------------
-local ID = require('scripts/zones/Rabao/IDs')
+local ID = zones[xi.zone.RABAO]
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------

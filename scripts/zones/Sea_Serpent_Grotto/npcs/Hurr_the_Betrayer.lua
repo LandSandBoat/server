@@ -4,7 +4,7 @@
 -- Type: Involved in the "Sahagin Key Quest"
 -- !pos 305.882 26.768 234.279 176
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 local entity = {}
 

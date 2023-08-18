@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Lufaise_Meadows (24)
 -----------------------------------
-local ID = require('scripts/zones/Lufaise_Meadows/IDs')
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

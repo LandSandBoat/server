@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Jugner_Forest (104)
 -----------------------------------
-local ID = require('scripts/zones/Jugner_Forest/IDs')
+local ID = zones[xi.zone.JUGNER_FOREST]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

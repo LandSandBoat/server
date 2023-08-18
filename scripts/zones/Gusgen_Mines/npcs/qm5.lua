@@ -4,7 +4,7 @@
 -- Note: Spawns Puddings for Eco-Warrior (Bastok)
 -- !pos 22.796 -61.156 -19.687 196
 -----------------------------------
-local ID = require("scripts/zones/Gusgen_Mines/IDs")
+local ID = zones[xi.zone.GUSGEN_MINES]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,7 @@
 --  Mob: Evil Weapon
 -- Note: PH for Prankster Maverix
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

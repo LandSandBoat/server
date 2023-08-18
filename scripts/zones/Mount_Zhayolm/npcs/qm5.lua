@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Sarameya(ZNM T4))
 -- !pos 322 -14 -581 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

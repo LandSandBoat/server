@@ -10,8 +10,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local eastRonfaureID     = require('scripts/zones/East_Ronfaure/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Desuetia Empyreal Paradox (290)
 -----------------------------------
-local ID = require('scripts/zones/Desuetia_Empyreal_Paradox/IDs')
+local ID = zones[xi.zone.DESUETIA_EMPYREAL_PARADOX]
 -----------------------------------
 local zoneObject = {}
 

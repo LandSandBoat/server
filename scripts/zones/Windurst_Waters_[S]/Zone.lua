@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Windurst_Waters_[S] (94)
 -----------------------------------
-local ID = require('scripts/zones/Windurst_Waters_[S]/IDs')
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 require('scripts/globals/chocobo')
 require('scripts/globals/extravaganza')
 -----------------------------------

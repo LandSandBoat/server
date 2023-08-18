@@ -3,7 +3,7 @@
 --  Mob: Orcish Stonechucker
 -- Note: PH for Ashmaker Gotblut
 -----------------------------------
-local ID = require("scripts/zones/Yughott_Grotto/IDs")
+local ID = zones[xi.zone.YUGHOTT_GROTTO]
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

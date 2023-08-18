@@ -3,7 +3,7 @@
 --  Mob: Maze Maker
 -- Note: PH for Trembler Tabitha
 -----------------------------------
-local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

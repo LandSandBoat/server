@@ -3,7 +3,7 @@
 --  NPC: Telepoint
 -- !pos 420.000 19.104 20.000 102
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -8,7 +8,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local norgID = require('scripts/zones/Norg/IDs')
+local norgID = zones[xi.zone.NORG]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)

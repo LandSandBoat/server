@@ -8,7 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local outerRaKaznarID = require('scripts/zones/Outer_RaKaznar/IDs')
+local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.LERENES_LAMENT)
