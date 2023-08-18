@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]
 require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

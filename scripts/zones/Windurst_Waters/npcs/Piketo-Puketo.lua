@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
 require("scripts/globals/crafting")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

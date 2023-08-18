@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

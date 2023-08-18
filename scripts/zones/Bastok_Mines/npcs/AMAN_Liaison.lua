@@ -2,8 +2,6 @@
 -- Area: Bastok Mines
 --  NPC: A.M.A.N Liaison
 -----------------------------------
-require("scripts/globals/roe")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
