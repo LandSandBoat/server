@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

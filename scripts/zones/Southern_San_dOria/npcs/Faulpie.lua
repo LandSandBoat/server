@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/crafting")
 require("scripts/globals/missions")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

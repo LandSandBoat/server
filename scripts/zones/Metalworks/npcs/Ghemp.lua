@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
 require("scripts/globals/crafting")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

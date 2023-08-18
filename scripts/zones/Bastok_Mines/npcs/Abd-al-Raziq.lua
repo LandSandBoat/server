@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.BASTOK_MINES]
 require("scripts/globals/crafting")
 require("scripts/globals/missions")
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
