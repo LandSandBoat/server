@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Diorama_Abdhaljs-Ghelsba
 -----------------------------------
-local ID = zones[xi.zone.DIORAMA_ABDHALJS_GHELSBA]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

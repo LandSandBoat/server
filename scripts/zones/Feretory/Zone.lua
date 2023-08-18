@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Feretory
 -----------------------------------
-local ID = zones[xi.zone.FERETORY]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

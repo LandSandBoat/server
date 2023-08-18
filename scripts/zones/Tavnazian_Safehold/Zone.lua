@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Tavnazian_Safehold (26)
 -----------------------------------
-local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

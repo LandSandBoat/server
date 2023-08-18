@@ -2,9 +2,6 @@
 -- Area: King Ranperres Tomb
 --   NM: Corrupted Yorgos
 -----------------------------------
-local ID = zones[xi.zone.KING_RANPERRES_TOMB]
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

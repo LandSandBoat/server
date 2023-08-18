@@ -2,8 +2,6 @@
 -- Area: Mog Dinghy
 -- !zone 280
 -----------------------------------
-local ID = zones[xi.zone.MOG_GARDEN]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Silver Knife
 -----------------------------------
-local ID = zones[xi.zone.SILVER_KNIFE]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

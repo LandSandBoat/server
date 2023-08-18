@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ship bound for Selbina Pirates (227)
 -----------------------------------
-local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

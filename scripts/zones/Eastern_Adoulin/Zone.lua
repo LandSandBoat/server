@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Eastern Adoulin (257)
 -----------------------------------
-local ID = zones[xi.zone.EASTERN_ADOULIN]
------------------------------------
 local zoneObject = {}
 
 local defineZoneAroundXYZ = function(zone, id, x, y, z, distance)

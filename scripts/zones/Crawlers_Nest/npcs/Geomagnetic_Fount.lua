@@ -3,7 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -137.728 -32.314 33.123
 -----------------------------------
-local ID = zones[xi.zone.CRAWLERS_NEST]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

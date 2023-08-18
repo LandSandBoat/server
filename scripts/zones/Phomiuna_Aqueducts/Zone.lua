@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
-local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

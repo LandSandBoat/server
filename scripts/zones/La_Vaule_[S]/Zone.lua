@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: La_Vaule_[S] (85)
 -----------------------------------
-local ID = zones[xi.zone.LA_VAULE_S]
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

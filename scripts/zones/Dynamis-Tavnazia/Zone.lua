@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Tavnazia
 -----------------------------------
-local ID = zones[xi.zone.DYNAMIS_TAVNAZIA]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

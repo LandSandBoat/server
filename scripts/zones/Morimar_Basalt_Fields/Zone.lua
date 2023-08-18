@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Morimar Basalt Fields
 -----------------------------------
-local ID = zones[xi.zone.MORIMAR_BASALT_FIELDS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

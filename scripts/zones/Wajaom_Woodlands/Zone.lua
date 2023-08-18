@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Wajaom_Woodlands (51)
 -----------------------------------
-local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/chocobo')
 require('scripts/globals/helm')

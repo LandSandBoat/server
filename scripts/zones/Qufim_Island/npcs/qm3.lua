@@ -4,7 +4,6 @@
 -- Mission: ACP - The Echo Awakens
 -- !pos -120.342 -19.471 306.661 126
 -----------------------------------
-local ID = zones[xi.zone.QUFIM_ISLAND]
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

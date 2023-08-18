@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: The_Shrouded_Maw (10)
 -----------------------------------
-local ID = zones[xi.zone.THE_SHROUDED_MAW]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dragons_Aery (154)
 -----------------------------------
-local ID = zones[xi.zone.DRAGONS_AERY]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

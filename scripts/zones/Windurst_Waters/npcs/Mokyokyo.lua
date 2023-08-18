@@ -4,8 +4,6 @@
 -- Starts Windurst Missions
 -- !pos -55 -8 227 238
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
-require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

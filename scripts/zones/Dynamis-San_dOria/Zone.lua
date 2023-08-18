@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-San_dOria
 -----------------------------------
-local ID = zones[xi.zone.DYNAMIS_SAN_DORIA]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

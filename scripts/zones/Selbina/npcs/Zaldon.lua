@@ -5,7 +5,6 @@
 -- Starts and Finishes: Inside the Belly
 -- !pos -13 -7 -5 248
 -----------------------------------
-local ID = zones[xi.zone.SELBINA]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

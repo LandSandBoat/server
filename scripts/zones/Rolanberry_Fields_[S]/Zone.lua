@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields_[S] (91)
 -----------------------------------
-local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

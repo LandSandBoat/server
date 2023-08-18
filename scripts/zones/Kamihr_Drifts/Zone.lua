@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Kamihr Drifts
 -----------------------------------
-local ID = zones[xi.zone.KAMIHR_DRIFTS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Norg (252)
 -----------------------------------
-local ID = zones[xi.zone.NORG]
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------

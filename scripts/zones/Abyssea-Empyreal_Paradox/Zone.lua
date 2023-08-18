@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea - Empyreal_Paradox
 -----------------------------------
-local ID = zones[xi.zone.ABYSSEA_EMPYREAL_PARADOX]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

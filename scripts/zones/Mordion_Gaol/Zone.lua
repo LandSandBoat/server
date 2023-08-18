@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Mordion_Gaol
 -----------------------------------
-local ID = zones[xi.zone.MORDION_GAOL]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

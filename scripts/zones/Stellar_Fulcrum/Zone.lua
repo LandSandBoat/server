@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Stellar_Fulcrum
 -----------------------------------
-local ID = zones[xi.zone.STELLAR_FULCRUM]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

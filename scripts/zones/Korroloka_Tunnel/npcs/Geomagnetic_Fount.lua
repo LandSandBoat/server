@@ -3,7 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -112.997 1.500 -103.864
 -----------------------------------
-local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

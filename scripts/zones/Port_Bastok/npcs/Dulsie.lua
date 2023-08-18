@@ -3,8 +3,6 @@
 --  NPC: Dulsie
 -- Adventurer's Assistant
 -----------------------------------
-local ID = zones[xi.zone.PORT_BASTOK]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Rala Waterways (258)
 -----------------------------------
-local ID = zones[xi.zone.RALA_WATERWAYS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

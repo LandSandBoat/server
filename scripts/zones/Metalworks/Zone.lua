@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Metalworks (237)
 -----------------------------------
-local ID = zones[xi.zone.METALWORKS]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

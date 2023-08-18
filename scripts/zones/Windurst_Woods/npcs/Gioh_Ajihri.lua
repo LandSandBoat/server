@@ -3,7 +3,6 @@
 --  NPC: Gioh Ajihri
 -- Starts & Finishes Repeatable Quest: Twinstone Bonding
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

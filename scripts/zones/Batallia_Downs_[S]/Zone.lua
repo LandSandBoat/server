@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Batallia_Downs_[S] (84)
 -----------------------------------
-local ID = zones[xi.zone.BATALLIA_DOWNS_S]
 require('scripts/globals/voidwalker')
 -----------------------------------
 local zoneObject = {}

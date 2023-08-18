@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Outer Ra'Kanzar [U2] (133)
 -----------------------------------
-local ID = zones[xi.zone.OUTER_RAKAZNAR_U2]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,8 +4,6 @@
 -- Adventurer's Assistant
 -- !pos -237 -12 -41 235
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MARKETS]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

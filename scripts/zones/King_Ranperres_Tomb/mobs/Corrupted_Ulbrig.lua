@@ -2,9 +2,6 @@
 -- Area: King Ranperres Tomb
 --   NM: Corrupted Ulbrig
 -----------------------------------
-local ID = zones[xi.zone.KING_RANPERRES_TOMB]
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

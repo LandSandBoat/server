@@ -7,8 +7,6 @@
 -- Starts and Finishes Quest: A Taste For Meat
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/titles")
-local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

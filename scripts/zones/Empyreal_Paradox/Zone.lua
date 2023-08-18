@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Empyreal_Paradox
 -----------------------------------
-local ID = zones[xi.zone.EMPYREAL_PARADOX]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

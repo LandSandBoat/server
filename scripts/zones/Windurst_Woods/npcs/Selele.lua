@@ -4,8 +4,6 @@
 -- Type: Tutorial NPC
 -- !pos 106.9 -5 -31.5 241
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

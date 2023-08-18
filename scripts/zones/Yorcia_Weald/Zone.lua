@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Yorcia Weald
 -----------------------------------
-local ID = zones[xi.zone.YORCIA_WEALD]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

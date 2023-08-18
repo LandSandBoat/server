@@ -3,7 +3,6 @@
 --  NPC: Gilgamesh
 -- !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-local ID = zones[xi.zone.NORG]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

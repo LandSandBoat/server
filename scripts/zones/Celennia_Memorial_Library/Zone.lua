@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Celennia Memorial Library (284)
 -----------------------------------
-local ID = zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

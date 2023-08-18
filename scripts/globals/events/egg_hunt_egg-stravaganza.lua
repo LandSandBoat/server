@@ -820,9 +820,6 @@ xi.events.eggHunt.onTrigger = function(player, npc)
 end
 
 xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
-    local zoneID = player:getZoneID()
-    local ID = zones[zoneID]
-
     -- "Forget it." or out of range
     if option > 28 then
         return

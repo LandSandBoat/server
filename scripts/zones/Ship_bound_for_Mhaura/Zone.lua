@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Mhaura (221)
 -----------------------------------
-local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

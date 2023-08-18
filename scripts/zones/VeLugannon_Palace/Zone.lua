@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
-local ID = zones[xi.zone.VELUGANNON_PALACE]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

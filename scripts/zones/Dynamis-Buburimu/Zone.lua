@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Buburimu
 -----------------------------------
-local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

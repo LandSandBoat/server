@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: The_Boyahda_Tree (153)
 -----------------------------------
-local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

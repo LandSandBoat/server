@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Abdhaljs_Isle-Purgonorgo
 -----------------------------------
-local ID = zones[xi.zone.ABDHALJS_ISLE_PURGONORGO]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

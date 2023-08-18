@@ -2,7 +2,6 @@
 -- Area: Bastok Markets
 --  NPC: Porter Moogle
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MARKETS]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

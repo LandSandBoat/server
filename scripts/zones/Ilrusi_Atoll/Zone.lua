@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ilrusi_Atoll (55)
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

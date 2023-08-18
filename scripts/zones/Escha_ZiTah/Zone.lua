@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Escha - Zi'Tah (288)
 -----------------------------------
-local ID = zones[xi.zone.ESCHA_ZITAH]
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

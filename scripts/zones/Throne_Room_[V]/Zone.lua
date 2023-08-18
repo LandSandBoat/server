@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Throne_Room_[V] (229)
 -----------------------------------
-local ID = zones[xi.zone.THRONE_ROOM_V]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: unknown (0)
 -----------------------------------
-local ID = zones[xi.zone.UNKNOWN]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

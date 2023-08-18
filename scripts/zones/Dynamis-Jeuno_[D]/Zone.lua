@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Jeuno [D]
 -----------------------------------
-local ID = zones[xi.zone.DYNAMIS_JEUNO_D]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

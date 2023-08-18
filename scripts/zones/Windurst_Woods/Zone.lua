@@ -1,10 +1,8 @@
 -----------------------------------
 -- Zone: Windurst_Woods (241)
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

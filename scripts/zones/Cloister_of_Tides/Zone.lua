@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Cloister_of_Tides (211)
 -----------------------------------
-local ID = zones[xi.zone.CLOISTER_OF_TIDES]
 require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}

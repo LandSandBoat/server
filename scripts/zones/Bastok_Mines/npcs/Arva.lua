@@ -3,8 +3,6 @@
 --  NPC: Arva
 -- Adventurer's Assistant
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MINES]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

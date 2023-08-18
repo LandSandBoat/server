@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Chamber_of_Oracles (168)
 -----------------------------------
-local ID = zones[xi.zone.CHAMBER_OF_ORACLES]
 require('scripts/globals/conquest')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

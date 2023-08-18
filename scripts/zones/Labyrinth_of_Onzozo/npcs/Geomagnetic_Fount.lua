@@ -3,7 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 136.955 14.892 185.412
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 require("scripts/globals/geomagnetic_fount")
 -----------------------------------
 local entity = {}

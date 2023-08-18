@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Crawlers_Nest_[S] (171)
 -----------------------------------
-local ID = zones[xi.zone.CRAWLERS_NEST_S]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Hall_of_Transference
 -----------------------------------
-local ID = zones[xi.zone.HALL_OF_TRANSFERENCE]
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
 -----------------------------------

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ra'Kaznar Inner Court (276)
 -----------------------------------
-local ID = zones[xi.zone.RAKAZNAR_INNER_COURT]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

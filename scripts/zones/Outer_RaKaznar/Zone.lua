@@ -3,8 +3,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 -----------------------------------
-local ID = zones[xi.zone.OUTER_RAKAZNAR]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

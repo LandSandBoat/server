@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Desuetia Empyreal Paradox (290)
 -----------------------------------
-local ID = zones[xi.zone.DESUETIA_EMPYREAL_PARADOX]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

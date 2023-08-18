@@ -3,7 +3,6 @@
 --  NPC: Vemalpeau
 -- Involved in Quests: Under Oath
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

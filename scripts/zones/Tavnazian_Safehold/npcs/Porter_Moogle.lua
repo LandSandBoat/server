@@ -4,7 +4,6 @@
 -- Type: Storage Moogle
 -- !zone 26
 -----------------------------------
-local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

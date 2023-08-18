@@ -3,7 +3,6 @@
 --  NPC: Priztrix
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
 require("scripts/globals/gobbie_mystery_box")
 -----------------------------------
 local entity = {}

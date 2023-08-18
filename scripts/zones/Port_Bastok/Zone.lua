@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Port_Bastok (236)
 -----------------------------------
-local ID = zones[xi.zone.PORT_BASTOK]
 require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
 -----------------------------------
 local zoneObject = {}
 

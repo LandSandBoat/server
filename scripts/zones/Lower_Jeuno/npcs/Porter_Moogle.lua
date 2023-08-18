@@ -4,7 +4,6 @@
 -- Type: Storage Moogle
 -- !zone 245
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
 require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}

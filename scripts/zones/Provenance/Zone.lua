@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Provenance (222)
 -----------------------------------
-local ID = zones[xi.zone.PROVENANCE]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -5,8 +5,6 @@
 -- Only recieving Adv.Coupon and simple talk event are scrited
 -- This NPC participates in Quests and Missions
 -----------------------------------
-local ID = zones[xi.zone.PORT_SAN_DORIA]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

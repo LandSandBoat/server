@@ -4,7 +4,6 @@
 -- Quests: Black Market
 -- !pos 16.678, -2.044, -14.600 252
 -----------------------------------
-local ID = zones[xi.zone.NORG]
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

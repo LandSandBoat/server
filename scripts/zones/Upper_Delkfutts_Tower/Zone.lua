@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Upper_Delkfutts_Tower (158)
 -----------------------------------
-local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------

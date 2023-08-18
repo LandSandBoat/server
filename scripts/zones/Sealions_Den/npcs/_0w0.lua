@@ -4,7 +4,6 @@
 -- !pos 612 132 774 32
 -----------------------------------
 require("scripts/globals/bcnm")
-local ID = zones[xi.zone.SEALIONS_DEN]
 -----------------------------------
 local entity = {}
 

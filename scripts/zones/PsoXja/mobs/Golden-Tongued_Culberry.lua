@@ -3,7 +3,6 @@
 --   NM: Golden-Tongued Culberry
 -----------------------------------
 mixins = { require("scripts/mixins/families/tonberry") }
-local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

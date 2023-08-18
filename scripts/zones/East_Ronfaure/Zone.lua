@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: East_Ronfaure (101)
 -----------------------------------
-local ID = zones[xi.zone.EAST_RONFAURE]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')

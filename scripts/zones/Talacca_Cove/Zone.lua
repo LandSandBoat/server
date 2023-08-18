@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Talacca_Cove (57)
 -----------------------------------
-local ID = zones[xi.zone.TALACCA_COVE]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

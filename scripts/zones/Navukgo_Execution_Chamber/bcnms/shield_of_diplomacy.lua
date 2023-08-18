@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
-local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 -----------------------------------
 local battlefieldObject = {}
 

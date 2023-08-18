@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Xarcabard
 -----------------------------------
-local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------

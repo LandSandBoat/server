@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Spire_of_Holla (17)
 -----------------------------------
-local ID = zones[xi.zone.SPIRE_OF_HOLLA]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

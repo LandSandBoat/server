@@ -4,9 +4,8 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17134281
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 require('scripts/globals/extravaganza')
-
+-----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

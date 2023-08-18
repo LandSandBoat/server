@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ra'Kaznar Turris (277)
 -----------------------------------
-local ID = zones[xi.zone.RAKAZNAR_TURRIS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
