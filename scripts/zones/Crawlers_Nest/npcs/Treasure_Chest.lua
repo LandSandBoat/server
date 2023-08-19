@@ -4,8 +4,6 @@
 -- Involved In Quest: Enveloped in Darkness
 -- !zone 197
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

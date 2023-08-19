@@ -3,8 +3,6 @@
 --  NPC: Treasure Chest
 -- !zone 9
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

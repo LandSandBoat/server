@@ -2,7 +2,6 @@
 -- Zone: Davoi (149)
 -----------------------------------
 local ID = zones[xi.zone.DAVOI]
-require("scripts/globals/treasure")
 require("scripts/quests/otherAreas/helpers")
 -----------------------------------
 local zoneObject = {}
