@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Port_Jeuno (246)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 require('scripts/globals/quests')
 -----------------------------------

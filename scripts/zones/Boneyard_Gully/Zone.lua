@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Boneyard_Gully (8)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

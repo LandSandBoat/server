@@ -3,8 +3,6 @@
 --  NPC: Sachetan, I.M.
 -- !pos -82 -5 165 z 240
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

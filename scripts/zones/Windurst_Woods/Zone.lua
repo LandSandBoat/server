@@ -2,7 +2,6 @@
 -- Zone: Windurst_Woods (241)
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
-require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

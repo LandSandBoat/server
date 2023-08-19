@@ -4,7 +4,6 @@
 -- Type: Outpost Vendor
 -- !pos -485 -31 50 118
 -----------------------------------
-require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

@@ -2,7 +2,6 @@
 -- Zone: Temenos (37)
 -----------------------------------
 local ID = zones[xi.zone.TEMENOS]
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

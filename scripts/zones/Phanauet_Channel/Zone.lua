@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Phanauet_Channel
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

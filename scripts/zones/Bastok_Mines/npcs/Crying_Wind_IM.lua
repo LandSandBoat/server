@@ -3,8 +3,6 @@
 --  NPC: Crying Wind, I.M.
 -- !pos -2 -1 -119 234
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

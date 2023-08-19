@@ -4,8 +4,6 @@
 -- Type: Immigration NPC
 -- !pos 6.174 -1 32.285 242
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

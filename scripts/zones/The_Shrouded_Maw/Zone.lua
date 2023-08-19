@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: The_Shrouded_Maw (10)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

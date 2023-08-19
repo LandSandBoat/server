@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Empyreal_Paradox
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

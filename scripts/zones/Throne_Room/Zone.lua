@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Throne_Room (165)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

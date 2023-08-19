@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mordion_Gaol
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

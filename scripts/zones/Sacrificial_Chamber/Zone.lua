@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Sacrificial_Chamber (163)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

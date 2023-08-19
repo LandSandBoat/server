@@ -5,7 +5,6 @@
 -- !pos -194.791 -8.800 13.130 230
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/conquest")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
