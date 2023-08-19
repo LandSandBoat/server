@@ -3,8 +3,6 @@
 --  NPC: Mahogany Door
 -- !pos 300 30 -324 163
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

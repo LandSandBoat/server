@@ -2,8 +2,6 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: _0z0
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

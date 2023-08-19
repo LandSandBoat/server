@@ -3,8 +3,6 @@
 --  NPC: Burning Circle
 -- !pos -221 -24 19 206
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

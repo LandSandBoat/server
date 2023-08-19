@@ -4,8 +4,6 @@
 -- Balga's Dais Burning Circle
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

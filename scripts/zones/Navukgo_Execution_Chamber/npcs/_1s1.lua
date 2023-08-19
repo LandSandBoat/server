@@ -3,8 +3,6 @@
 --  NPC: Cast Bronze Gate (Inside BCNM)
 -- !pos 282 -123 380 64
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Spire_of_vahlz
 --  NPC: web of regret
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

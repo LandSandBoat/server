@@ -2,8 +2,6 @@
 -- Area: Spire of Vahzl
 --  NPC: Web of Recollection
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

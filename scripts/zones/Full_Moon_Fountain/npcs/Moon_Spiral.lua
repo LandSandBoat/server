@@ -4,8 +4,6 @@
 -- Involved in Quests: The Moonlit Path
 -- !pos -302 9 -260 170
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,8 +4,6 @@
 -- Involved in Missions: TOAU-22
 -- !pos -601 10 -100 64
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
