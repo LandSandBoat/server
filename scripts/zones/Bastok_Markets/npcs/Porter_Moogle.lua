@@ -2,8 +2,6 @@
 -- Area: Bastok Markets
 --  NPC: Porter Moogle
 -----------------------------------
-require("scripts/globals/porter_moogle")
------------------------------------
 local entity = {}
 
 local e =
