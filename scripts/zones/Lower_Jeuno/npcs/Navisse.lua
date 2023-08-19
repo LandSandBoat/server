@@ -2,8 +2,6 @@
 -- Area: Lower Jeuno
 --  NPC: Navisse
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

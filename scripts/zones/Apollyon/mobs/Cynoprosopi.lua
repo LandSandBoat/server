@@ -2,8 +2,6 @@
 -- Area: Apollyon NW, Floor 4
 --  Mob: Cynoprosopi
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local points =

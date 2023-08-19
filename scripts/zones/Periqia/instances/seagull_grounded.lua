@@ -4,7 +4,6 @@
 local ID = zones[xi.zone.PERIQIA]
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/pathfind")
 -----------------------------------
 local instanceObject = {}
 
