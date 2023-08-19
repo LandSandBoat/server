@@ -4,7 +4,6 @@
 -- !addkeyitem VIAL_OF_DREAM_INCENSE
 -----------------------------------
 local ID = zones[xi.zone.THE_SHROUDED_MAW]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

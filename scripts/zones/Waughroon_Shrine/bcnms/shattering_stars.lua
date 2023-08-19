@@ -3,9 +3,6 @@
 -- Waughroon Shrine Maat battlefield
 -- !pos -345 104 -260 144
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

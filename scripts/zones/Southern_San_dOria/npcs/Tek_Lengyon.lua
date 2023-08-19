@@ -4,7 +4,6 @@
 -- Type: Leathercraft Synthesis Image Support
 -- !pos -190.120 -2.999 2.770 230
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

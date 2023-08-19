@@ -3,8 +3,6 @@
 -- Ghelsba Outpost BCNM30, Sky Orb
 -- !additem 1552
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

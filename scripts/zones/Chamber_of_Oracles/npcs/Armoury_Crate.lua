@@ -2,9 +2,6 @@
 -- Area: Chamber of Oracles
 --  NPC: Armoury Crate
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 local loot =

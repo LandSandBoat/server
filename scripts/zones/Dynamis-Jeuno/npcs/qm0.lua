@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Goblin Golem / Arch Goblin Golem
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

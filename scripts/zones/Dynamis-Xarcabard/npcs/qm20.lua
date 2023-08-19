@@ -3,8 +3,6 @@
 --  NPC: ??? (qm20)
 -- Note: Spawns Animated Shield
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

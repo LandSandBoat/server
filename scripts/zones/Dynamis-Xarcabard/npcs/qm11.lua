@@ -3,8 +3,6 @@
 --  NPC: ??? (qm11)
 -- Note: Spawns Animated Spear
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

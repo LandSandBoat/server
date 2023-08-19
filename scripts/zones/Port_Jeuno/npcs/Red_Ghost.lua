@@ -2,8 +2,6 @@
 -- Area: Port Jeuno
 --  NPC: Red Ghost
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

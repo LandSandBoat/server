@@ -2,8 +2,6 @@
 -- Area: Kazham
 --  NPC: Lalapp
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

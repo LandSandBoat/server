@@ -3,8 +3,6 @@
 --  NPC: ??? (qm7)
 -- Note: Spawns Mildaunegeux
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

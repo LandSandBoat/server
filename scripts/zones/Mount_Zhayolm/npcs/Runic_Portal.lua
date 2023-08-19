@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
-require("scripts/globals/besieged")
 require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}

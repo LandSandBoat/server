@@ -3,8 +3,6 @@
 --  NPC: ??? (qm10)
 -- Note: Spawns Animated Great Axe
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

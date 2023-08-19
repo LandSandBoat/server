@@ -5,7 +5,6 @@
 -----------------------------------
 local entity = {}
 
-require("scripts/globals/bcnm")
 
 entity.onTrade = function(player, npc, trade)
     xi.bcnm.onTrade(player, npc, trade)

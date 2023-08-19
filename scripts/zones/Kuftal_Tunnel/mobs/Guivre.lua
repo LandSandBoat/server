@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Guivre
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathStart =

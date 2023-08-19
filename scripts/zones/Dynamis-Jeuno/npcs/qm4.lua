@@ -3,8 +3,6 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Wilywox Tenderpalm
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

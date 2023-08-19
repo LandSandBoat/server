@@ -5,7 +5,6 @@
 --   DE: Dynamic Entity created by Cermet Alcoves
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
-require("scripts/globals/pathfind")
 -----------------------------------
 
 local escorts =

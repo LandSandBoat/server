@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-Buburimu
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_BUBURIMU] =

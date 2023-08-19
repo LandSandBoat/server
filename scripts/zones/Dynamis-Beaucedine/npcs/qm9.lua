@@ -3,8 +3,6 @@
 --  NPC: ??? (qm9)
 -- Note: Spawns Dagourmarche
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

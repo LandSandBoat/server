@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Water, Trial Size Trial by Water
 -- !pos 560 36 560 211
 -----------------------------------
-require("scripts/globals/bcnm")
 local ID = zones[xi.zone.CLOISTER_OF_TIDES]
 -----------------------------------
 local entity = {}

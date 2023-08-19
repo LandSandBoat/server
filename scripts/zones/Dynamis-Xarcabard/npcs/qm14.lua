@@ -3,8 +3,6 @@
 --  NPC: ??? (qm14)
 -- Note: Spawns Animated Tachi
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

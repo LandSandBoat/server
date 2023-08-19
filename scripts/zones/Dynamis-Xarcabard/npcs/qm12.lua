@@ -3,8 +3,6 @@
 --  NPC: ??? (qm12)
 -- Note: Spawns Animated Scythe
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,7 +5,6 @@
 -- !pos 123.5 2 1 234
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MINES]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Dynamis - Beaucedine
 --  Mob: Rearguard Eye
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

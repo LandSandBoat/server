@@ -4,8 +4,6 @@
 -- Standard Merchant NPC
 -- !pos 68 -9 -74 232
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

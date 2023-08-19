@@ -2,8 +2,6 @@
 -- Area: Metalworks
 --  NPC: Fariel
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

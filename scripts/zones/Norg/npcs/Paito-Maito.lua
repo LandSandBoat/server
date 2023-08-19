@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Paito-Maito
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

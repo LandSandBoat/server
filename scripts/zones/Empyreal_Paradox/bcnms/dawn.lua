@@ -6,7 +6,6 @@
 -- instance 3 Promathia !pos -519 120 -520
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

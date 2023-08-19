@@ -3,7 +3,6 @@
 --  NPC: _2d1 (Reinforced Gateway)
 -- !pos -114.386 -3.599 -179.804 85
 -----------------------------------
-require("scripts/globals/bcnm")
 local ID = zones[xi.zone.LA_VAULE_S]
 -----------------------------------
 local entity = {}

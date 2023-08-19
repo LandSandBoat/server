@@ -4,8 +4,6 @@
 -- Type: Adventurer's Assistant
 -- !pos 122.658 -1.315 33.001 50
 -----------------------------------
-require("scripts/globals/besieged")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,8 +4,6 @@
 -- Involved In Quest: Signed In Blood and The Goblin Tailor
 -- !zone 193
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

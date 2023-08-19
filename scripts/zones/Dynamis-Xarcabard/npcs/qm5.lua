@@ -3,8 +3,6 @@
 --  NPC: ??? (qm5)
 -- Note: Spawns Animated Knuckles
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,8 +3,6 @@
 -- Ghelsba Outpost mission battlefield
 -- !pos -162 -11 78 140
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

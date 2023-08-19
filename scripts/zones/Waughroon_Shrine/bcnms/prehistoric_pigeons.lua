@@ -3,8 +3,6 @@
 -- Waughroon Shrine KSNM30, Atropos Orb
 -- !additem 1180
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

@@ -4,7 +4,6 @@
 -- Type: Cooking Image Support
 -- !pos -123.120 -2.999 65.472 238
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}

@@ -4,8 +4,6 @@
 -- Dynamis Buburimu Enter
 -- !pos 163 0 -174 118
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

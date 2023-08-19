@@ -4,7 +4,6 @@
 -- !pos 36 -10 620 54
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-require("scripts/globals/besieged")
 -----------------------------------
 local entity = {}
 

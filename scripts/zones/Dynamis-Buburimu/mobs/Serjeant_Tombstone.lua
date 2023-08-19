@@ -2,8 +2,6 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Serjeant Tombstone
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -2,8 +2,6 @@
 -- Area: Celestial Nexus
 --  NPC: _515
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

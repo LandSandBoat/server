@@ -2,8 +2,6 @@
 -- Area: LaLoff_Amphitheater
 --  NPC: Shimmering Circle (BCNM Exits)
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,7 +3,6 @@
 -- BCNM: Trial-size Trial by Water
 -----------------------------------
 local ID = zones[xi.zone.CLOISTER_OF_TIDES]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

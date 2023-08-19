@@ -3,8 +3,6 @@
 --  NPC: Shantotto
 -- !pos 122 -2 112 239
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,9 +3,6 @@
 --  NPC: Armoury Crate
 -- Ghelsba_Outpost Armoury_Crate
 -----------------------------------
-require("scripts/globals/bcnm")
-require("scripts/globals/battlefield")
------------------------------------
 local entity = {}
 
 local loot =

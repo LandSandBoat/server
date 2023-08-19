@@ -2,8 +2,6 @@
 -- Area: Empyreal_Paradox
 -- Name: Apocalypse Nigh
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

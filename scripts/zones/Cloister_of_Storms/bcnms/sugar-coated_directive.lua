@@ -2,8 +2,6 @@
 -- Area: Cloister of Storms
 -- BCNM: Sugar Coated Directive (ASA-4)
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

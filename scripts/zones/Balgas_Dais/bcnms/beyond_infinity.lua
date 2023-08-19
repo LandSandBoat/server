@@ -2,8 +2,6 @@
 -- Beyond Infinity
 -- Balgas Dais Level Break
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

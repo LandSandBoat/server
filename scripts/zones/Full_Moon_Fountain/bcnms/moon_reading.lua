@@ -2,8 +2,6 @@
 -- Area: Full Moon Mountain
 -- Name: Windurst Mission 9-2 Moon Reading
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

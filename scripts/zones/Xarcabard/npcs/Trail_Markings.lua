@@ -4,8 +4,6 @@
 -- Dynamis-Xarcabard Enter
 -- !pos 570 0 -272 112
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,8 +4,6 @@
 -- Type: Imperial Gate Guard
 -- !pos 9.988 -7 68.585 53
 -----------------------------------
-require("scripts/globals/besieged")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

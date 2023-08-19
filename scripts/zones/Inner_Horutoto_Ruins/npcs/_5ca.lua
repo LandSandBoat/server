@@ -6,7 +6,6 @@
 -- !pos -11 0 20 192
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

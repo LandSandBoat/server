@@ -4,7 +4,6 @@
 -- !pos 299 -123 345 146
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

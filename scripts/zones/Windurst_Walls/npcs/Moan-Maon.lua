@@ -3,8 +3,6 @@
 --  NPC: Moan-Maon
 -- !pos 88.244 -6.32 148.912 239
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

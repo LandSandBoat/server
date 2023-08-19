@@ -5,7 +5,6 @@
 mixins = { require("scripts/mixins/weapon_break") }
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 require("scripts/globals/assault")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

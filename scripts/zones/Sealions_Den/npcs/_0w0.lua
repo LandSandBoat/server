@@ -3,8 +3,6 @@
 --  NPC: Iron Gate
 -- !pos 612 132 774 32
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

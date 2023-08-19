@@ -3,8 +3,6 @@
 --  NPC: Web of Recollections
 -- !pos 0.000 -2.0 247.992 19
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

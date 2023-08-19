@@ -3,8 +3,6 @@
 --  Mob: Race Runner
 --  ENM: Like the Wind
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

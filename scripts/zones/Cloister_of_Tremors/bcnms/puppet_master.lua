@@ -3,8 +3,6 @@
 -- BCNM: The Puppet Master
 -- !pos -539 1 -493 209
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

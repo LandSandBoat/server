@@ -3,8 +3,6 @@
 --  NPC: Rarab
 -- Nonstandard NPC w/o Nametag
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

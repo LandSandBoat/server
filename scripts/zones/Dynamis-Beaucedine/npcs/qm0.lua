@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Angra Mainyu / Arch Angra Mainyu
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
