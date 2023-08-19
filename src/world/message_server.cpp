@@ -172,7 +172,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             for (const auto& ipp : yellMapEndpoints)
             {
                 ShowDebug(fmt::format("Message: -> rerouting to {}", ipp_to_string(ipp)));
-                queue_message(ipp, type, extra, packet);
+                message_server_send(ipp, type, extra, packet);
             }
             break;
         }
@@ -181,7 +181,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             for (const auto& ipp : mapEndpoints)
             {
                 ShowDebug(fmt::format("Message: -> rerouting to {}", ipp_to_string(ipp)));
-                queue_message(ipp, type, extra, packet);
+                message_server_send(ipp, type, extra, packet);
             }
             break;
         }
