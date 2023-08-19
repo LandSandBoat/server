@@ -4,8 +4,6 @@
 -- Type: Conquest Overseer
 -- !pos -227.956 -81.475 260.442 111
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

@@ -3,8 +3,6 @@
 --  NPC: Vounebariont
 -- Starts and Finishes Quest: Thick Shells
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

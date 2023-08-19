@@ -2,7 +2,6 @@
 -- Zone: Korroloka Tunnel (173)
 -----------------------------------
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
-require('scripts/globals/conquest')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

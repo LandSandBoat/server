@@ -4,8 +4,6 @@
 -- Type: Past Event Watcher
 -- !pos 15 0 -18 231
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

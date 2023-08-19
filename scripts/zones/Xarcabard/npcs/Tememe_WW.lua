@@ -4,8 +4,6 @@
 -- Type: Border Conquest Guards
 -- !pos -133.678 -22.517 112.224 112
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

@@ -3,8 +3,6 @@
 --  NPC: Rojaireaut
 -- !pos -91.781 -0.545 587.944 193
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

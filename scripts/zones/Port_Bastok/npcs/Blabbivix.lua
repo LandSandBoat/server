@@ -4,7 +4,6 @@
 -- Standard merchant, though he acts like a guild merchant
 -- !pos -110.209 4.898 22.957 236
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}

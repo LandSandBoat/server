@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: The_Celestial_Nexus (181)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

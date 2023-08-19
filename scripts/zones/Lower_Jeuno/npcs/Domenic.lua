@@ -4,7 +4,6 @@
 -- BCNM/KSNM Teleporter
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

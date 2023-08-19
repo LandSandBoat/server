@@ -4,9 +4,6 @@
 -- Type: Quest NPC - Involved in Eco-Warrior (Bastok)
 -- !pos -166.416 -8.48 7.153 236
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

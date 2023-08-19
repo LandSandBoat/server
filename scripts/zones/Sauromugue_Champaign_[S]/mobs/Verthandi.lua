@@ -1,8 +1,6 @@
 -----------------------------------
 --  Mob: Verthandi
 -----------------------------------
-require("scripts/globals/voidwalker")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

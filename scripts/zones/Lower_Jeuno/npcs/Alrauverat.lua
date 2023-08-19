@@ -3,8 +3,6 @@
 --  NPC:Alrauverat
 -- !pos -101 0 -182 245
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.OTHER

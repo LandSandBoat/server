@@ -5,7 +5,6 @@
 -- !pos 0 -5 66 243
 -----------------------------------
 local ID = zones[xi.zone.RULUDE_GARDENS]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

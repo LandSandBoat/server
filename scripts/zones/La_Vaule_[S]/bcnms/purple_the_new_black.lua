@@ -4,7 +4,6 @@
 --  Mob: Galarhigg (17125681 or 17125682 or 17125683)
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 require("scripts/globals/utils")
 -----------------------------------
 local battlefieldObject = {}

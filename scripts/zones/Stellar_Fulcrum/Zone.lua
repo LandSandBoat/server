@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Stellar_Fulcrum
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

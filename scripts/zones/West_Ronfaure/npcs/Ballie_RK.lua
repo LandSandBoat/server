@@ -4,8 +4,6 @@
 -- Type: Border Conquest Guards
 -- !pos -560.292 -0.961 -576.655 100
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

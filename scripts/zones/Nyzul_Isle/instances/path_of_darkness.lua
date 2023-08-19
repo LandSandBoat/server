@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/instance")
-require("scripts/globals/missions")
 -----------------------------------
 local instanceObject = {}
 

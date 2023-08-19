@@ -3,8 +3,6 @@
 --  NPC: Flame Spout
 -- !pos 193.967 -0.400 19.492 205
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

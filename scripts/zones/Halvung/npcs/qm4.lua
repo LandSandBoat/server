@@ -4,7 +4,6 @@
 -- !pos -34 10 336 62
 -----------------------------------
 local ID = zones[xi.zone.HALVUNG]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

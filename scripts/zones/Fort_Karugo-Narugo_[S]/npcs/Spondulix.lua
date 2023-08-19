@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

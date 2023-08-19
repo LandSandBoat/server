@@ -3,7 +3,6 @@
 --  NPC: ??? (Spawns Geush Urvan)
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

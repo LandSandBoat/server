@@ -4,7 +4,6 @@
 -- Type: Guild Merchant NPC (Woodworking Guild)
 -- !pos -333.729, -5.512, 475.647 2
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 local entity = {}

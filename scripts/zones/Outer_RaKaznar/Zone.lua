@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Outer Ra’Kanzar (274)
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,8 +4,6 @@
 -- Starts & Finishes Quest: Save My Son
 -- Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

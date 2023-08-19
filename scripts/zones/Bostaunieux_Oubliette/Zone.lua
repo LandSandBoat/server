@@ -2,7 +2,6 @@
 -- Zone: Bostaunieux_Oubliette (167)
 -----------------------------------
 local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

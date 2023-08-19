@@ -3,7 +3,6 @@
 --  NPC: Signpost
 -- Involved in Quest: Grimy Signposts
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

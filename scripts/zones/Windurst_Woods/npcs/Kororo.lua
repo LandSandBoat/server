@@ -6,7 +6,6 @@
 -- Involved in quests: Lost Chick
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos -102.355 7.981 253.706 108
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

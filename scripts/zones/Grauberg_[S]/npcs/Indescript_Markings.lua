@@ -4,7 +4,6 @@
 -- Type: Quest
 -----------------------------------
 local ID = zones[xi.zone.GRAUBERG_S]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

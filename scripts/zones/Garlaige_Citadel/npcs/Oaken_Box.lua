@@ -5,7 +5,6 @@
 -- !pos -164 0.1 225 200
 -----------------------------------
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Cloister_of_Tremors (209)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

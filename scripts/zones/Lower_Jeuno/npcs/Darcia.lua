@@ -4,9 +4,6 @@
 --  SoA: Mission NPC
 -- !pos 25 -38.617 -1.000
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

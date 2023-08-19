@@ -5,7 +5,6 @@
 -- Involved in Quests: Over The Hills And Far Away
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

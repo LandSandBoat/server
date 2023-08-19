@@ -4,8 +4,6 @@
 -- Border Conquest Guards
 -- !pos -252.454 -1.958 624.366 121
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: The Merchant's Bidding (R)
 -- !pos -169 -1 13 230
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

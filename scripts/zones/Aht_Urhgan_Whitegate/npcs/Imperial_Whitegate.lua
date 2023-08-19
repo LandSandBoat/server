@@ -3,9 +3,7 @@
 --  NPC: Imperial Whitegate
 -- pos: 152, -2, 0, 50
 -----------------------------------
-require("scripts/globals/missions")
 require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
 -----------------------------------
 local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 -----------------------------------

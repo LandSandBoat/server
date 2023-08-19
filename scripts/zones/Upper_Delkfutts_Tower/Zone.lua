@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Upper_Delkfutts_Tower (158)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

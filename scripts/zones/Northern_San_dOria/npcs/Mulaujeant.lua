@@ -4,7 +4,6 @@
 -- Involved in Quests: Missionary Man
 -- !pos -175 0 181 231
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

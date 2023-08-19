@@ -4,7 +4,6 @@
 -- Starts and Ends Quest: The Sahagin's Stash
 -- !pos -2.251 -1 21.654 252
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}

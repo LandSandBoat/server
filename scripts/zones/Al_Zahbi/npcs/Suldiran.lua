@@ -4,9 +4,6 @@
 -- Type: NPC Quest
 -- !pos 42 -7 -43 48
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

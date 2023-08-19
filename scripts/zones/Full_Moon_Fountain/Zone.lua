@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Full_Moon_Fountain (170)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

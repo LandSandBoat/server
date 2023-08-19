@@ -5,7 +5,6 @@
 -- Only sells when San d'Oria controls Vollbow.
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

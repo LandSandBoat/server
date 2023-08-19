@@ -5,8 +5,6 @@
 -- !pos 80 -1 457 89
 -----------------------------------
 local ID = zones[xi.zone.GRAUBERG_S]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,7 @@
 -- Zone: Lufaise_Meadows (24)
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
-require('scripts/globals/conquest')
 require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Trial by Fire
 -- !pos 100 -15 -97 250
 -----------------------------------
-require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}

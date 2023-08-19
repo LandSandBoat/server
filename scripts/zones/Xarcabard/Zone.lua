@@ -2,7 +2,6 @@
 -- Zone: Xarcabard (112)
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/conquest')
 require('scripts/globals/teleports')
 require('scripts/globals/utils')
 -----------------------------------

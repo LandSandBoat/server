@@ -4,8 +4,6 @@
 -- Type: Storage Moogle
 -- !zone 250
 -----------------------------------
-require("scripts/globals/porter_moogle")
------------------------------------
 local entity = {}
 
 local e =

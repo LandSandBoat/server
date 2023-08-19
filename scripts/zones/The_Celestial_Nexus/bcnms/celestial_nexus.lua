@@ -3,7 +3,6 @@
 -- Name: The Celestial Nexus (ZM16)
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

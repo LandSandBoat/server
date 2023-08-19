@@ -6,8 +6,6 @@
 -----------------------------------
 require("scripts/zones/Lower_Jeuno/globals")
 local ID = zones[xi.zone.LOWER_JEUNO]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

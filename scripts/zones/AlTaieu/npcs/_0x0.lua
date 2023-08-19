@@ -3,8 +3,6 @@
 --  NPC: Crystalline Field
 -- !pos .1 -10 -464 33
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

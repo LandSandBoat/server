@@ -5,7 +5,6 @@
 -- !pos -6.036 0.000 3.998 233
 -----------------------------------
 local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

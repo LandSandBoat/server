@@ -4,8 +4,6 @@
 -- Orb Seller (BCNM)
 -- !pos -53.9 0 10.8 246
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 local shamiSealItems =

@@ -3,10 +3,6 @@
 --  NPC: Yoran-Oran
 -- !pos -109.987 -14 203.338 239
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

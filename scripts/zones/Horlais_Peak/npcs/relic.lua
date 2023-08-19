@@ -4,7 +4,6 @@
 -- !pos 450 -40 -31 139
 -----------------------------------
 local ID = zones[xi.zone.HORLAIS_PEAK]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

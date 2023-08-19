@@ -5,7 +5,6 @@
 --  Starts and finishes quest: Toraimarai Turmoil
 -- !pos 23 -5 -193 238
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}

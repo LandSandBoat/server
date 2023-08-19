@@ -4,9 +4,6 @@
 -- Involved in Mission 1-3, Mission 7-2
 -- !pos 13 -9 -197 238
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}

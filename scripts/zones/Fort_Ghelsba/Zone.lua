@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Fort_Ghelsba (141)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

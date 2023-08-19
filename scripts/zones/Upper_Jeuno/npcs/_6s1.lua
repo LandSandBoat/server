@@ -4,7 +4,6 @@
 -- !pos -96.6 -0.2 92.3 244
 -----------------------------------
 local ID = zones[xi.zone.UPPER_JEUNO]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

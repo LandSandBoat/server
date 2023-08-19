@@ -3,7 +3,6 @@
 --  NPC: Iron Gate
 --  Entrance to Sacrarium
 -----------------------------------
-require("scripts/globals/missions")
 local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}

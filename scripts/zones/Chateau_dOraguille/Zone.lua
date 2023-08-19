@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Chateau_dOraguille (233)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

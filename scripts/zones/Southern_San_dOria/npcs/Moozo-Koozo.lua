@@ -4,8 +4,6 @@
 --  Title Change NPC
 -- !pos 83 0 120 230
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 local eventId = 675

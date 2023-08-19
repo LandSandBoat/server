@@ -5,8 +5,6 @@
 -- !pos -55 -16 69 204
 -----------------------------------
 local ID = zones[xi.zone.FEIYIN]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

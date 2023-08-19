@@ -3,7 +3,6 @@
 -- Name: When Angels Fall
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

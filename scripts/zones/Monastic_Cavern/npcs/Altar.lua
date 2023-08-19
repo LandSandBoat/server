@@ -5,7 +5,6 @@
 -- !pos 108 -2 -144 150
 -----------------------------------
 local ID = zones[xi.zone.MONASTIC_CAVERN]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

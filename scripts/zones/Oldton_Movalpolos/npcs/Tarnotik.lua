@@ -3,9 +3,6 @@
 --  NPC: Tarnotik
 -- !pos 160.896 10.999 -55.659 11
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

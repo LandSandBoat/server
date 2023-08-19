@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Capricornus
 -----------------------------------
-require("scripts/globals/voidwalker")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

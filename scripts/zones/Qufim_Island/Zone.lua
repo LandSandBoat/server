@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

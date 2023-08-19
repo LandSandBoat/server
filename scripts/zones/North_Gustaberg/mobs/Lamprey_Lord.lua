@@ -1,8 +1,6 @@
 -----------------------------------
 --  Mob: Lamprey Lord
 -----------------------------------
-require("scripts/globals/voidwalker")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

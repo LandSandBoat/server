@@ -5,7 +5,6 @@
 -- Quest NPC
 -----------------------------------
 require("scripts/globals/campaign")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

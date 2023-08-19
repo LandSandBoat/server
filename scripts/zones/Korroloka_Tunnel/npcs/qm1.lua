@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

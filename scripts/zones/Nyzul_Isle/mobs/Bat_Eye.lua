@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: NM
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

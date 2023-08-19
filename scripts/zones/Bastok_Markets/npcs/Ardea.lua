@@ -4,8 +4,6 @@
 -- !pos -198 -6 -69 235
 -- Involved in quests: Chasing Quotas, Rock Racketeer
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Tavnazia
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------
 local zoneObject = {}

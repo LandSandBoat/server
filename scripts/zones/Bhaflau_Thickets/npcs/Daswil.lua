@@ -4,8 +4,6 @@
 -- Type: Assault
 -- !pos -208.720 -12.889 -779.713 52
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}

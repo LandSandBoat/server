@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Sealions_Den (32)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}

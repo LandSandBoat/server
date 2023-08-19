@@ -4,8 +4,6 @@
 -- Type: Storage Moogle
 -- !pos ? ? ?  50
 -----------------------------------
-require("scripts/globals/porter_moogle")
------------------------------------
 local entity = {}
 
 local e =

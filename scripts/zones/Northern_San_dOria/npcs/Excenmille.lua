@@ -5,9 +5,6 @@
 -- !pos -229.344 6.999 22.976 231
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

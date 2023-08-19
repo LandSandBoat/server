@@ -3,8 +3,6 @@
 --  NPC: The ??? on the stack of papers in 2nd Flr of Vemalpeau's house.
 -- General Info NPC
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

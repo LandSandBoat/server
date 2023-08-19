@@ -6,8 +6,6 @@
 -- !pos -111 -4 101 240
 -----------------------------------
 local ID = zones[xi.zone.PORT_WINDURST]
-require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

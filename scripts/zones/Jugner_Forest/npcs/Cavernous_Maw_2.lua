@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea - Vunkerl
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

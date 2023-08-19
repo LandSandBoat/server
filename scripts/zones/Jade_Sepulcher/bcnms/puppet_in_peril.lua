@@ -3,7 +3,6 @@
 -- BCNM: TOAU-29 Puppet in Peril
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

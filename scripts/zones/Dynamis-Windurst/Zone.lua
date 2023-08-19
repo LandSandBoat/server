@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Windurst
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/dynamis')
 -----------------------------------
 local zoneObject = {}

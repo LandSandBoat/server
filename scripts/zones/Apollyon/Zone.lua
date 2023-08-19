@@ -2,7 +2,6 @@
 -- Zone: Apollyon
 -----------------------------------
 local ID = zones[xi.zone.APOLLYON]
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

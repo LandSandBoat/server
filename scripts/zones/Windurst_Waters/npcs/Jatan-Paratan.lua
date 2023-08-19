@@ -5,7 +5,6 @@
 -- !pos -59 -4 22 238
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

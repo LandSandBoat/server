@@ -4,9 +4,6 @@
 -- Starts and Ends Quests: The Immortal Lu Shang and Indomitable Spirit
 -- !pos 3.78 9.54 56.21 247
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

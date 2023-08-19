@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Norg (252)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

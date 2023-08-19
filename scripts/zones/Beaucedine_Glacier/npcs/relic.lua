@@ -4,7 +4,6 @@
 -- !pos -89 0 -374 111
 -----------------------------------
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

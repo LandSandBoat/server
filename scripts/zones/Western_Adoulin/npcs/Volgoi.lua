@@ -3,8 +3,6 @@
 --  NPC: Volgoi
 -- !pos -154 4 -22 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

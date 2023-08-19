@@ -2,7 +2,6 @@
 -- Zone: Windurst_Waters (238)
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

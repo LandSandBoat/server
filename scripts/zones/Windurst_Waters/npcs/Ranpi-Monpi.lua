@@ -7,7 +7,6 @@
 -- (outside the shop he is in)
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

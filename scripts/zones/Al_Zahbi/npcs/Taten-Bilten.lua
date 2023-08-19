@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Clothcraft Guild
 -- !pos 71.598 -6.000 -56.930 48
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

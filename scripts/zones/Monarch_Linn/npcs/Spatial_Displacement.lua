@@ -5,8 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MONARCH_LINN]
 require("scripts/globals/bcnm")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

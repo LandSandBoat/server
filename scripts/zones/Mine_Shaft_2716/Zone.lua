@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mine_Shaft_2716 (13)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

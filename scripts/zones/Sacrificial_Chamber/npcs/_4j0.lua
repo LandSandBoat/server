@@ -4,7 +4,6 @@
 -- !pos 299 0.1 349 163
 -----------------------------------
 require("scripts/globals/bcnm")
-require("scripts/globals/missions")
 local ID = zones[xi.zone.SACRIFICIAL_CHAMBER]
 -----------------------------------
 local entity = {}

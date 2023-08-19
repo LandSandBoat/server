@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Fear of the dark
 -- !pos -160 -0 137 231
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

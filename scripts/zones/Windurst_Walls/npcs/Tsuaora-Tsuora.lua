@@ -3,8 +3,6 @@
 --  NPC: Tsuaora-Tsuora
 -- !pos 71.489 -3.418 -67.809 239
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

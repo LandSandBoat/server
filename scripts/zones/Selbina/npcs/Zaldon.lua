@@ -5,9 +5,6 @@
 -- Starts and Finishes: Inside the Belly
 -- !pos -13 -7 -5 248
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 -- data from http://wiki.ffxiclopedia.org/wiki/Inside_the_Belly

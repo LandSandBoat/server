@@ -4,7 +4,6 @@
 -- !pos 150.258 -21.047 -37.256 112
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

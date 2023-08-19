@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Behemoths_Dominion (127)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

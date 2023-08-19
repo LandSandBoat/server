@@ -3,8 +3,6 @@
 -- Balgas Dais Level Break
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

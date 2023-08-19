@@ -5,7 +5,6 @@
 -- !pos 110.714 -40.856 -53.154 26
 -----------------------------------
 local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

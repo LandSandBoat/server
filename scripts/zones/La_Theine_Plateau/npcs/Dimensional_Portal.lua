@@ -3,7 +3,6 @@
 --  NPC: Dimensional Portal
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- trade card to pop NM
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

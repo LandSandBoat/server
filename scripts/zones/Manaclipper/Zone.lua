@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MANACLIPPER]
 require('scripts/globals/manaclipper')
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

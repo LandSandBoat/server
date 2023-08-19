@@ -5,7 +5,6 @@
 -- !pos -48 -4 30 249
 -----------------------------------
 local ID = zones[xi.zone.MHAURA]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

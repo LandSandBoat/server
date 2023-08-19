@@ -3,8 +3,6 @@
 --  NPC: Imasuke
 -- !pos -165 11 94 246
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

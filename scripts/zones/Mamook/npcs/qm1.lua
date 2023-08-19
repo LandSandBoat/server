@@ -4,7 +4,6 @@
 -- !pos 206 14 -285 65
 -----------------------------------
 local ID = zones[xi.zone.MAMOOK]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

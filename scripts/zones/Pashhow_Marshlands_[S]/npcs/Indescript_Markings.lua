@@ -4,8 +4,6 @@
 -- NOTE: There are 3 Indescript Markings
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

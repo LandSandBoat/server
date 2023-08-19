@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}

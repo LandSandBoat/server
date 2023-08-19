@@ -4,7 +4,6 @@
 -- Note: Spawns Unstable Cluster
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

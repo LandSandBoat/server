@@ -10,8 +10,6 @@
 ]]
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -3,7 +3,6 @@
 -- BCNM: TOAU-22 Shield of Diplomacy
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.YHOATOR_JUNGLE]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

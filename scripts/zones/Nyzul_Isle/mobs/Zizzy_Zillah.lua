@@ -3,7 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: NM
 -----------------------------------
-require('scripts/globals/nyzul')
 mixins = { require('scripts/mixins/families/ziz') }
 -----------------------------------
 local entity = {}

@@ -5,7 +5,6 @@
 -- !pos -17.580 4.000 24.600 246
 -----------------------------------
 local ID = zones[xi.zone.PORT_JEUNO]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

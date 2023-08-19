@@ -4,7 +4,6 @@
 --  Entrance to Qufim Island
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

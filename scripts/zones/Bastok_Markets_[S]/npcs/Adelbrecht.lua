@@ -15,8 +15,6 @@
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS_S]
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

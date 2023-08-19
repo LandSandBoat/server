@@ -4,7 +4,6 @@
 -- Involved in Quest: To Cure a Cough
 -- !pos -115.830 -0.427 -184.289 149
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.DAVOI]
 -----------------------------------
 local entity = {}

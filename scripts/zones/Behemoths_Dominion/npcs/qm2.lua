@@ -5,7 +5,6 @@
 -- !pos -267 -19 74 127
 -----------------------------------
 local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

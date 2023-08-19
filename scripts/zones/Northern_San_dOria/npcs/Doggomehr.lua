@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Blacksmithing Guild
 -- !pos -193.920 3.999 162.027 231
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

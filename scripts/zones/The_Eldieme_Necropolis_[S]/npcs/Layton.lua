@@ -6,7 +6,6 @@
 -- !pos 382.679 -39.999 3.541 175
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@
 -- !pos 101.468 -1 -20.088 50
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

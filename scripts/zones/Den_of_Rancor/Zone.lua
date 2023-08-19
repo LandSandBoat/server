@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Den_of_Rancor (160)
 -----------------------------------
-require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

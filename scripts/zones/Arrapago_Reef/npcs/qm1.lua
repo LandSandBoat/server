@@ -4,7 +4,6 @@
 -- !pos 488 -1 166 54
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

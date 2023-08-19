@@ -3,8 +3,6 @@
 --  NPC: Senvaleget
 -- !pos -103 -26 -49 26
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

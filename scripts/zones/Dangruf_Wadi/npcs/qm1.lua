@@ -5,7 +5,6 @@
 -- !pos -430 4 115 191
 -----------------------------------
 local ID = zones[xi.zone.DANGRUF_WADI]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
