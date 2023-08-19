@@ -2,8 +2,6 @@
 -- Beyond Infinity
 -- Wauhroon Shrine Level Break
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

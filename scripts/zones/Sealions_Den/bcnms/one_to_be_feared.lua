@@ -2,8 +2,6 @@
 -- Area: Sealion's Den
 -- Name: One to be Feared
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

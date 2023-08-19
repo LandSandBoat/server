@@ -2,8 +2,6 @@
 -- Shattering Stars
 -- Horlais Peak Maat fight
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

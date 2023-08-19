@@ -3,8 +3,6 @@
 -- Qu'Bia Arena BCNM40, Star Orb
 -- !additem 1131
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

@@ -2,8 +2,6 @@
 -- Area: Jade Sepulcher
 -- BCNM: TOAU-29 Puppet in Peril
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

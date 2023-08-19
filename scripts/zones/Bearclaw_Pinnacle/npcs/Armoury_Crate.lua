@@ -2,8 +2,6 @@
 -- Area: Bearclaw Pinnacle
 --  NPC: Armoury Crate
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local entity = {}
 
 -- Leaving this loot here until their respective battlefields are implemented

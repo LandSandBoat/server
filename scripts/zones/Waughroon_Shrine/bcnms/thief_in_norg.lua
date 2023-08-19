@@ -3,8 +3,6 @@
 -- Waughroon Shrine quest battlefield
 -- !pos -345 104 -260 144
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

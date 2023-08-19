@@ -2,8 +2,6 @@
 -- Area: Sacrificial Chamber
 --  NPC: Armoury Crate
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local entity = {}
 
 local loot =

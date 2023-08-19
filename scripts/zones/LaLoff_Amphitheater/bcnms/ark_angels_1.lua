@@ -2,8 +2,6 @@
 -- Area: LaLoff Amphitheater
 -- Name: Ark Angels 1 (Hume)
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

@@ -3,7 +3,6 @@
 --  Mob: Carnagechief Jackbodokk
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/battlefield")
 -----------------------------------
 local entity = {}
 

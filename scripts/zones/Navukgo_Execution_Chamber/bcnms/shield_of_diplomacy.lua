@@ -2,8 +2,6 @@
 -- Area: Navukgo Execution Chamber
 -- BCNM: TOAU-22 Shield of Diplomacy
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

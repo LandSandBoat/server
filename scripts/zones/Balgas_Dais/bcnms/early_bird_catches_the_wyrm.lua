@@ -3,8 +3,6 @@
 -- Balga's Dais KSNM99, Themis Orb
 -- !additem 1553
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

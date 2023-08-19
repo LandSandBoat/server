@@ -3,8 +3,6 @@
 -- Balga's Dais BCNM20, Cloudy Orb
 -- !additem 1551
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

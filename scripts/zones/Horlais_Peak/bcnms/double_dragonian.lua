@@ -3,8 +3,6 @@
 -- Horlais Peak KSNM, Clotho Orb
 -- !additem 1175
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

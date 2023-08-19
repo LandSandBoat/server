@@ -2,8 +2,6 @@
 -- Area: Cloister of Gales
 -- BCNM: Carbuncle Debacle
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

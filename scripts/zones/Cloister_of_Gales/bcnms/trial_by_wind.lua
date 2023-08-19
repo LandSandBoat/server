@@ -3,7 +3,6 @@
 -- BCNM: Trial by Wind
 -----------------------------------
 local ID = zones[xi.zone.CLOISTER_OF_GALES]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

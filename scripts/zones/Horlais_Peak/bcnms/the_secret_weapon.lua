@@ -2,8 +2,6 @@
 -- The Secret Weapon
 -- Horlais Peak mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

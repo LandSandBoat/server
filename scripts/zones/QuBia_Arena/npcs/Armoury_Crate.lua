@@ -2,8 +2,6 @@
 -- Area: Qu'Bia Arena
 --  NPC: Armoury Crate
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local entity = {}
 
 local loot =
