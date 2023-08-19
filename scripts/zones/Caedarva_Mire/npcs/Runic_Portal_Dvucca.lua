@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
-require("scripts/globals/besieged")
 require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}

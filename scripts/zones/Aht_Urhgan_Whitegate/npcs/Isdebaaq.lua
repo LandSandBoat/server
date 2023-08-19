@@ -5,7 +5,6 @@
 -- !pos 127.565 0.161 -43.846 50
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/besieged")
 require("scripts/globals/extravaganza")
 -----------------------------------
 local entity = {}
