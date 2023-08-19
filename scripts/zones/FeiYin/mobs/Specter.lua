@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/regimes")
 local ID = zones[xi.zone.FEIYIN]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

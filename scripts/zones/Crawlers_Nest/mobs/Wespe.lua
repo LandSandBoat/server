@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

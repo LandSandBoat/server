@@ -4,7 +4,6 @@
 -- Note: PH for Drumskull Zogdregg
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

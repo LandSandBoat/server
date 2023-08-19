@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

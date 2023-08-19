@@ -2,8 +2,6 @@
 -- Area: Xarcabard
 --   NM: Biast
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

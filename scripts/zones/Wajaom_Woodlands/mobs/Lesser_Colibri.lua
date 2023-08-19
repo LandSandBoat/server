@@ -4,7 +4,6 @@
 -- Note: Place holder Zoraal Ja's Pkuucha
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

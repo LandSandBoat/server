@@ -5,7 +5,6 @@
 local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/magic")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

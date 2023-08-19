@@ -4,7 +4,6 @@
 -- Note: PH for Flauros
 -----------------------------------
 local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

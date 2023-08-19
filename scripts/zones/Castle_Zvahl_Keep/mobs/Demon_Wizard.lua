@@ -4,7 +4,6 @@
 -- Note: PH for Baron Vapula
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

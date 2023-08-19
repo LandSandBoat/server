@@ -3,8 +3,6 @@
 --  Mob: Clockwork Pod
 -- Note: PH for Mind Hoarder
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

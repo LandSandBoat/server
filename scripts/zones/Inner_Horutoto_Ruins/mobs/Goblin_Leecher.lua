@@ -4,7 +4,6 @@
 -- Note: PH for Slendlix Spindlethumb
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

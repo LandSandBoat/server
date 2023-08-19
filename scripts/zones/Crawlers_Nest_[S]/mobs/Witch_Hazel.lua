@@ -4,7 +4,6 @@
 -- Note: PH for Morille Mortelle
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

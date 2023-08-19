@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.GUSGEN_MINES]
 require("scripts/globals/quests")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

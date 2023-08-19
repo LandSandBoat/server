@@ -2,8 +2,6 @@
 -- Area: Apollyon NE
 --   NM: Goobbue_Harvester
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

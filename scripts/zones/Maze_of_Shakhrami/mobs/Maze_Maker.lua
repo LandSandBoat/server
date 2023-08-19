@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

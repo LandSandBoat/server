@@ -4,7 +4,6 @@
 -- Note: PH for Bu'Ghi Howlblade
 -----------------------------------
 local ID = zones[xi.zone.PALBOROUGH_MINES]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

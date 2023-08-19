@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/ziz") }
 local ID = zones[xi.zone.MAMOOK]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

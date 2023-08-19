@@ -4,7 +4,6 @@
 -- Note: PH for Centipedal Centruroides
 -----------------------------------
 local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

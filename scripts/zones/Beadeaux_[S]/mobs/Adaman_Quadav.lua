@@ -4,7 +4,6 @@
 -- Note: PH for Ea'Tho Cruelheart and Ba'Tho Mercifulheart
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

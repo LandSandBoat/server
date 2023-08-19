@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

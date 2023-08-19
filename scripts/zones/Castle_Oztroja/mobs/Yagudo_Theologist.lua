@@ -4,7 +4,6 @@
 -- Note: PH for Moo Ouzi the Swiftblade
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

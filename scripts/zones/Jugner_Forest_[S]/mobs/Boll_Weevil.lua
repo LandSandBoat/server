@@ -3,7 +3,6 @@
 --   NM: Boll Weevil
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

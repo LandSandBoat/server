@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

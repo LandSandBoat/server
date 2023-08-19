@@ -4,7 +4,6 @@
 -- Note: PH for Kotan-kor Kamuy
 -----------------------------------
 local ID = zones[xi.zone.GRAUBERG_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

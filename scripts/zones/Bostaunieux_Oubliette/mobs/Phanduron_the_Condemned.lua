@@ -3,7 +3,6 @@
 --   NM: Phanduron the Condemned
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

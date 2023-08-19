@@ -3,8 +3,6 @@
 --   NM: Necroplasm
 -- Involved in Eco Warrior (San d'Oria)
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

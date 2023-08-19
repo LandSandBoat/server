@@ -3,7 +3,6 @@
 --   NM: Gloombound Lurker
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

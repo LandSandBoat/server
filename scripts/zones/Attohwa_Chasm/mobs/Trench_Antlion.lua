@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/antlion_ambush") }
 local ID = zones[xi.zone.ATTOHWA_CHASM]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

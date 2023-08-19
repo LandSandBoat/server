@@ -4,7 +4,6 @@
 -- Note: PH for Be'Hya Hundredwall
 -----------------------------------
 local ID = zones[xi.zone.PALBOROUGH_MINES]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

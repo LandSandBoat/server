@@ -2,8 +2,6 @@
 -- Area: Temenos Central Temenos
 --  Mob: Mystic Avatar
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

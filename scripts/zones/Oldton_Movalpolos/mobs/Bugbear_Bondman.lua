@@ -4,7 +4,6 @@
 -- Note: PH for Bugbear Strongman
 -----------------------------------
 local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

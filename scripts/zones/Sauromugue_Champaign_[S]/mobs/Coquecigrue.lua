@@ -3,7 +3,6 @@
 --   NM: Coquecigrue
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

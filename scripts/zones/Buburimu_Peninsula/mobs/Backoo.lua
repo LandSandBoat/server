@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

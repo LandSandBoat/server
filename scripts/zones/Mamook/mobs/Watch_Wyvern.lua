@@ -4,7 +4,6 @@
 -- Note: PH for Firedance Magmaal Ja
 -----------------------------------
 local ID = zones[xi.zone.MAMOOK]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

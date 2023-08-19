@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

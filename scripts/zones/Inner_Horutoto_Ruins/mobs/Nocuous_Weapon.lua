@@ -3,7 +3,6 @@
 --   NM: Nocuous Weapon
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Note: Place holder for Ankabut
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
