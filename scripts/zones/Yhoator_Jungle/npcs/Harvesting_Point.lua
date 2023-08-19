@@ -2,8 +2,6 @@
 -- Area: Yhoator Jungle
 --  NPC: Harvesting Point
 -----------------------------------
-require("scripts/globals/helm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --  NPC: Excavation Point
 -----------------------------------
-require("scripts/globals/helm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
