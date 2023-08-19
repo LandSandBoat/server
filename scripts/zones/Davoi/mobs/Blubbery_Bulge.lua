@@ -3,8 +3,6 @@
 --   NM: Blubbery Bulge
 -- Involved in Quest: The Miraculous Dale
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

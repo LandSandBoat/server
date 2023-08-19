@@ -2,8 +2,6 @@
 -- Area: Batallia Downs
 --   NM: Eyegouger
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

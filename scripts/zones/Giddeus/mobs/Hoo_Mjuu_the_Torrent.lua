@@ -2,7 +2,6 @@
 -- Area: Giddeus (145)
 --   NM: Hoo Mjuu the Torrent
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

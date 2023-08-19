@@ -2,7 +2,6 @@
 -- Area: Lufaise Meadows
 --  Mob: Sengann
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/fomor_hate") }
 -----------------------------------
 local entity = {}

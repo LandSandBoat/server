@@ -2,8 +2,6 @@
 -- Area: Lufaise Meadows
 --   NM: Yal-un Eke
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

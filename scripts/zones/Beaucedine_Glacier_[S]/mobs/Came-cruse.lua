@@ -2,8 +2,6 @@
 -- Area: Beaucedine Glacier [S]
 --   NM: Came-cruse
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,8 +2,6 @@
 -- Area: Ordelle's Caves
 --   NM: Donggu
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

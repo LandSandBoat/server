@@ -2,8 +2,6 @@
 -- Area: Bibiki Bay
 --   NM: Splacknuck
 -----------------------------------
-require('scripts/globals/hunts')
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

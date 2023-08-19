@@ -2,8 +2,6 @@
 -- Area: Uleguerand Range
 --   NM: Bonnacon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,8 +2,6 @@
 -- Area: Wajaom Woodlands
 --   NM: Gharial
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -6,7 +6,6 @@
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 require("scripts/globals/npc_util")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Xarcabard
 --   NM: Duke Focalor
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

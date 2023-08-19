@@ -3,7 +3,6 @@
 --   NM: Bugbear Matman
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 

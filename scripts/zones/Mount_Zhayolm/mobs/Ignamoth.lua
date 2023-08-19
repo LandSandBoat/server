@@ -2,8 +2,6 @@
 -- Area: Mount Zhayolm
 --   NM: Ignamoth
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

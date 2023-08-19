@@ -2,8 +2,6 @@
 -- Area: Gusgen Mines
 --   NM: Crushed Krause
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)

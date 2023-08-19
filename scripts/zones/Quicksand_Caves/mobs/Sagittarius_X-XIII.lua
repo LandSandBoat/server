@@ -2,7 +2,6 @@
 -- Area: Quicksand Caves
 --   NM: Sagittarius X-XIII
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

@@ -2,8 +2,6 @@
 -- Area: Oldton Movalpolos
 --   NM: Bugbear Muscleman
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

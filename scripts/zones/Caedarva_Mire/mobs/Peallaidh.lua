@@ -2,8 +2,6 @@
 -- Area: Caedarva Mire
 --  Mob: Peallaidh
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

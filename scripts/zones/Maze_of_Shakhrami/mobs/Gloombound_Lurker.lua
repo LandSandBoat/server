@@ -2,8 +2,6 @@
 -- Area: Maze of Shakhrami
 --   NM: Gloombound Lurker
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

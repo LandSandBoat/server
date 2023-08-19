@@ -2,8 +2,6 @@
 -- Area: Jugner Forest
 --   NM: Supplespine Mujwuj
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

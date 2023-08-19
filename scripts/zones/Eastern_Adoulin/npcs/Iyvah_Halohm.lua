@@ -6,7 +6,6 @@
 -----------------------------------
 require('scripts/globals/quests')
 -----------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)

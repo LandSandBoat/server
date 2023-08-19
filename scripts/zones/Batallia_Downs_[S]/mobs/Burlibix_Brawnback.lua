@@ -2,8 +2,6 @@
 -- Area: Batallia Downs [S]
 --   NM: Burlibix Brawnback
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

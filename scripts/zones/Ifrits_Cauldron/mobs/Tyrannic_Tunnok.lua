@@ -2,8 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Tyrannic Tunnok
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

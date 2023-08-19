@@ -2,8 +2,6 @@
 -- Area: RoMaeve
 --   NM: Nargun
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

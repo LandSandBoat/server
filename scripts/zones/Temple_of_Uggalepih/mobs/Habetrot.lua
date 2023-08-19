@@ -3,8 +3,6 @@
 --   NM: Habetrot
 -- !pos -60 -8 58 220
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

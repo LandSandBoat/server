@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

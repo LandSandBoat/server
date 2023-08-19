@@ -2,8 +2,6 @@
 -- Area: Fei'Yin
 --   NM: Jenglot
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

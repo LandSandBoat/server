@@ -2,8 +2,6 @@
 -- Area: Beaucedine Glacier
 --   NM: Calcabrina
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

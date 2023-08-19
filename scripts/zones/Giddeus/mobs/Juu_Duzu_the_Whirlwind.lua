@@ -2,7 +2,6 @@
 -- Area: Giddeus (145)
 --   NM: Juu Duzu the Whirlwind
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

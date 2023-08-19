@@ -2,7 +2,6 @@
 -- Area: RoMaeve
 --   NM: Martinet
 -----------------------------------
-require("scripts/globals/hunts")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

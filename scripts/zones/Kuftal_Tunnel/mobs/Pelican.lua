@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Pelican
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

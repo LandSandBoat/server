@@ -4,8 +4,6 @@
 -- Note: Wiki says Painful Whip does increasing damage after each use, but videos do not indicate this, so I've ignored it.
 --       Does not retreat into its shell, and does not poison you, unlike other uragnites.
 -----------------------------------
-require('scripts/globals/hunts')
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

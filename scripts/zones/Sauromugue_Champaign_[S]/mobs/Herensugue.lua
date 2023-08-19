@@ -2,8 +2,6 @@
 -- Area: Sauromugue Champaign [S]
 --   NM: Herensugue
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

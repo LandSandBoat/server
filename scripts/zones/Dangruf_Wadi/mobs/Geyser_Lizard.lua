@@ -2,8 +2,6 @@
 -- Area: Dangruf Wadi (191)
 --  Mob: Geyser Lizard
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

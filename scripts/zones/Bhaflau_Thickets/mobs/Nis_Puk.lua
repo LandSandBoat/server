@@ -3,8 +3,6 @@
 --   NM: Nis Puk
 -- !pos -155.319 -15.959 -599.366 52
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

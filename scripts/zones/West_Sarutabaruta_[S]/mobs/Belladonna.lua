@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Belladonna
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

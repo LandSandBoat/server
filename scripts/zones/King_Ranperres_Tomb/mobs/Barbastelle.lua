@@ -2,8 +2,6 @@
 -- Area: King Ranperre's Tomb
 --   NM: Barbastelle
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

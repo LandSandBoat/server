@@ -2,8 +2,6 @@
 -- Area: Gusgen Mines
 --   NM: Wounded Wurfel
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)

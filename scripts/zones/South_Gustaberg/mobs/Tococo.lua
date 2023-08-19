@@ -2,8 +2,6 @@
 -- Area: South Gustaberg
 --   NM: Tococo
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

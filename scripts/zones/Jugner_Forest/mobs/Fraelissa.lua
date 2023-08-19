@@ -2,7 +2,6 @@
 -- Area: Jugner Forest
 --   NM: Fraelissa
 -----------------------------------
-require("scripts/globals/hunts")
 local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}

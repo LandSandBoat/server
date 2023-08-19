@@ -2,8 +2,6 @@
 -- Area: East Ronfaure (101)
 --   NM: Bigmouth Billy
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

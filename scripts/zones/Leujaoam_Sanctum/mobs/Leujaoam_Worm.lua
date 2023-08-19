@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/assault")
 -----------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

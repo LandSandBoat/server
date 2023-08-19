@@ -2,8 +2,6 @@
 -- Area: Dangruf Wadi
 --   NM: Chocoboleech
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

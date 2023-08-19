@@ -2,8 +2,6 @@
 -- Area: Batallia Downs [S]
 --   NM: La Velue
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

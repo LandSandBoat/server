@@ -2,8 +2,6 @@
 -- Area: Xarcabard [S]
 --   NM: Graoully
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

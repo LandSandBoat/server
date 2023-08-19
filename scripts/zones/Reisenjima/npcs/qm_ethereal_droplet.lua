@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.REISENJIMA]
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

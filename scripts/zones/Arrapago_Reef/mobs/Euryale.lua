@@ -2,8 +2,6 @@
 -- Area: Arrapago Reef
 --   NM: Euryale
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

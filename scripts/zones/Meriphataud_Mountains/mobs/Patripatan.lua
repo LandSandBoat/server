@@ -2,8 +2,6 @@
 -- Area: Meriphataud Mountains
 --   NM: Patripatan
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

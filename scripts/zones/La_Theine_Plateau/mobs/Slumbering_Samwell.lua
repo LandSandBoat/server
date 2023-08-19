@@ -2,8 +2,6 @@
 -- Area: La Theine Plateau
 --   NM: Slumbering Samwell
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

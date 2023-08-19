@@ -2,8 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Narasimha
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,7 +2,6 @@
 -- Area: Castle Oztroja (151)
 --   NM: Lii Jixa the Somnolist
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

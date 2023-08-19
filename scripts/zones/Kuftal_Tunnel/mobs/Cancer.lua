@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Cancer
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
