@@ -6,7 +6,6 @@
 -- !pos 43 2 -113 256
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ADOULIN]
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

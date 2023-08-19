@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 require("scripts/globals/magic")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

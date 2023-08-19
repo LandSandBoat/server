@@ -27,7 +27,6 @@
 
 -----------------------------------
 local ID = zones[xi.zone.NORG]
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

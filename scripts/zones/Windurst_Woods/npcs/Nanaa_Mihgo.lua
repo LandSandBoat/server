@@ -8,7 +8,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/magic")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

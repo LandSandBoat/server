@@ -5,7 +5,6 @@
 -- !pos -165 0.1 226 231
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

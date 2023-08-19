@@ -4,8 +4,6 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -38 -4 -55 232
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

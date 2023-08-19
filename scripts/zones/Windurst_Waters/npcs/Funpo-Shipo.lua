@@ -3,8 +3,6 @@
 --  NPC: Funpo-Shipo
 -- !pos -44.091 -4.499 41.728 238
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 local pathNodes =

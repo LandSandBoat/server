@@ -5,7 +5,6 @@
 -- !pos -17.073 1.749 -59.327 241
 -----------------------------------
 require("scripts/globals/pathfind")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Port Jeuno
 --  NPC: Shemo
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 local beastmanSeal       = 0

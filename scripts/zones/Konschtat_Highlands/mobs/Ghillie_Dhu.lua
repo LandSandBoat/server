@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Ghillie Dhu
 -----------------------------------
-require("scripts/globals/utils")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

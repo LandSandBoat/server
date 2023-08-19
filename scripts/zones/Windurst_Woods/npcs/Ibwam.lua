@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/teleports")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

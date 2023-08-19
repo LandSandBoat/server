@@ -2,8 +2,6 @@
 -- Area: Ranguemont Pass
 --   NM: Gloom Eye
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)
