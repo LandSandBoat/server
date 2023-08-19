@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta
 --   NM: Numbing Norman
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

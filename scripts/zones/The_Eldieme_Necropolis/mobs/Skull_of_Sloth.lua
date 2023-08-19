@@ -2,8 +2,6 @@
 -- Area: The Eldieme Necropolis
 --   NM: Skull of Sloth
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

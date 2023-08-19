@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Rampaging Ram
 -----------------------------------
-require("scripts/globals/hunts")
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 require("scripts/quests/tutorial")
 -----------------------------------

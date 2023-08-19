@@ -2,8 +2,6 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Dame Blanche
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

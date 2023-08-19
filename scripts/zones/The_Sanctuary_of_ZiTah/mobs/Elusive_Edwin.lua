@@ -2,8 +2,6 @@
 -- Area: The Sanctuary of Zi'Tah
 --   NM: Elusive Edwin
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

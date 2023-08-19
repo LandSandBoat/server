@@ -5,7 +5,6 @@
 require("scripts/globals/appraisal")
 require("scripts/globals/assault")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)

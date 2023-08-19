@@ -2,8 +2,6 @@
 -- Area: Yhoator Jungle (124)
 --   NM: Powderer Penny
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

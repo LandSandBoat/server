@@ -2,7 +2,6 @@
 -- Area: Oldton Movalpolos
 --   NM: Goblin Wolfman
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

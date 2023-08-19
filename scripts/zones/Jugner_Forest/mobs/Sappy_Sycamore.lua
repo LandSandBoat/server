@@ -2,8 +2,6 @@
 -- Area: Jugner_Forest
 --   NM: Sappy Sycamore
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

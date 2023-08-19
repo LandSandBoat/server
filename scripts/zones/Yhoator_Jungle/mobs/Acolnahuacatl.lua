@@ -2,8 +2,6 @@
 -- Area: Yhoator Jungle
 --   NM: Acolnahuacatl
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

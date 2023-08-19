@@ -2,8 +2,6 @@
 -- Area: West Ronfaure
 --   NM: Amanita
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -2,8 +2,6 @@
 -- Area: The Sanctuary of ZiTah
 --   NM: Keeper of Halidom
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

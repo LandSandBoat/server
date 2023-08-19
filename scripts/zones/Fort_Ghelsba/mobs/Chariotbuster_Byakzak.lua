@@ -2,7 +2,6 @@
 -- Area: Fort Ghelsba
 --   NM: Chariotbuster Byakzak
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 local ID = zones[xi.zone.FORT_GHELSBA]
 -----------------------------------

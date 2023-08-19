@@ -2,8 +2,6 @@
 -- Area: Beaucedine Glacier [S]
 --   NM: Grand'Goule
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

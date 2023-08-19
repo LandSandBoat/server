@@ -2,7 +2,6 @@
 -- Area: Abyssea - Grauberg
 --  NPC: Atma Fabricant
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Meriphataud Mountains [S]
 --   NM: Centipedal Centruroides
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

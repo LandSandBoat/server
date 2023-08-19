@@ -2,8 +2,6 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Boll Weevil
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

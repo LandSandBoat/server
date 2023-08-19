@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Ramponneau
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

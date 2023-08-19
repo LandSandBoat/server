@@ -2,8 +2,6 @@
 -- Area: Ghelsba Outpost (140)
 --  Mob: Orcish Barricader
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/appraisal")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

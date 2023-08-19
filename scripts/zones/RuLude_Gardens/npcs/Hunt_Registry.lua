@@ -2,8 +2,6 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Hunt Registry
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

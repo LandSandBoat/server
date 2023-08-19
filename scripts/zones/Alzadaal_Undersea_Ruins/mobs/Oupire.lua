@@ -2,8 +2,6 @@
 -- Area: Alzadaal Undersea Ruins
 --   NM: Oupire
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

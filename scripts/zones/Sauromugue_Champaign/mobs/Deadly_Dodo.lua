@@ -2,8 +2,6 @@
 -- Area: Sauromugue Champaign
 --   NM: Deadly Dodo
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

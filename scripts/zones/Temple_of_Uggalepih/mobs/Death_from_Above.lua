@@ -2,8 +2,6 @@
 -- Area: Temple of Uggalepih
 --   NM: Death from Above
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

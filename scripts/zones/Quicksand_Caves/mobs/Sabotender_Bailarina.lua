@@ -2,8 +2,6 @@
 -- Area: Quicksand Caves
 --   NM: Sabotender Bailarina
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

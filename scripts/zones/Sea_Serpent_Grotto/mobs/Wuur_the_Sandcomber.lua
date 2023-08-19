@@ -2,7 +2,6 @@
 -- Area: Sea Serpent Grotto
 --   NM: Wuur the Sandcomber
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

@@ -2,7 +2,6 @@
 -- Area: Mamook
 --   NM: Zizzy Zillah
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/families/ziz") }
 -----------------------------------
 local entity = {}

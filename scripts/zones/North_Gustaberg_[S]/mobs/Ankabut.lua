@@ -2,8 +2,6 @@
 -- Area: North Gustaberg [S]
 --   NM: Ankabut
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

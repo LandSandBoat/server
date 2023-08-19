@@ -2,8 +2,6 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Judgmental Julika
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

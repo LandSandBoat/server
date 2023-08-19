@@ -2,7 +2,6 @@
 -- Area: Temple of Uggalepih
 --   NM: Sozu Rogberry
 -----------------------------------
-require("scripts/globals/hunts")
 mixins =
 {
     require("scripts/mixins/families/tonberry"),

@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
-
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

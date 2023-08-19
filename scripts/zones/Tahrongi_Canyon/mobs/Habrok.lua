@@ -2,7 +2,6 @@
 -- Area: Tahrongi Canyon
 --  Mob: Habrok
 -----------------------------------
-require("scripts/globals/hunts")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

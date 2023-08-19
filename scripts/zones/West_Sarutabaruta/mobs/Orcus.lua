@@ -2,7 +2,6 @@
 --  VNM: Orcus
 -----------------------------------
 require("scripts/globals/voidwalker")
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 

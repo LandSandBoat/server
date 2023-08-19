@@ -2,8 +2,6 @@
 -- Area: Yuhtunga Jungle
 --   NM: Mischievous Micholas
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --   NM: Sekhmet
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

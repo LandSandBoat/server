@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Foreseer Oramix
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

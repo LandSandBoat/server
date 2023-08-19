@@ -2,7 +2,6 @@
 -- Area: Middle Delkfutt's Tower
 --   NM: Polybotes
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

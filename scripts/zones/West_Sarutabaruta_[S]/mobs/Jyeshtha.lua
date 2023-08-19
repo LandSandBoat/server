@@ -2,7 +2,6 @@
 --  VNM: Jyeshtha
 -----------------------------------
 require("scripts/globals/voidwalker")
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 

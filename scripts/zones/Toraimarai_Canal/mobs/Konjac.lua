@@ -2,8 +2,6 @@
 -- Area: Toraimarai Canal
 --   NM: Konjac
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

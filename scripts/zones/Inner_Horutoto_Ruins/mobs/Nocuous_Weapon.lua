@@ -2,8 +2,6 @@
 -- Area: Inner Horutoto Ruins
 --   NM: Nocuous Weapon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

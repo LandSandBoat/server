@@ -2,8 +2,6 @@
 -- Area: Pashhow Marshlands [S]
 --   NM: Sugaar
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

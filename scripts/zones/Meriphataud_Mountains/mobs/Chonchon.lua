@@ -2,8 +2,6 @@
 -- Area: Meriphataud Mountains
 --   NM: Chonchon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

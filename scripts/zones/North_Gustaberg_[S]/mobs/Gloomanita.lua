@@ -2,8 +2,6 @@
 -- Area: North Gustaberg [S]
 --   NM: Gloomanita
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

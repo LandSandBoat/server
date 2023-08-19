@@ -2,8 +2,6 @@
 -- Area: Tahrongi Canyon
 --   NM: Yara Ma Yha Who
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

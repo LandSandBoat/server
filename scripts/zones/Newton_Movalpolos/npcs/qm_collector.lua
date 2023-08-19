@@ -5,7 +5,6 @@
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 require("scripts/globals/npc_util")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Manes
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

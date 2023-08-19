@@ -2,8 +2,6 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Count Bifrons
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

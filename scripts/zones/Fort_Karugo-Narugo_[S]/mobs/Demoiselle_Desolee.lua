@@ -2,8 +2,6 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Demoiselle Desolee
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,8 +2,6 @@
 -- Area: Mamook
 --   NM: Firedance Magmaal Ja
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

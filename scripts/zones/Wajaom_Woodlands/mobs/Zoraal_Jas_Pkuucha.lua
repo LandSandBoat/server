@@ -3,7 +3,6 @@
 --  Mob: Zoraal Ja's Pkuucha
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
