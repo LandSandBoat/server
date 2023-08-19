@@ -2,8 +2,6 @@
 -- Area: Abyssea - Altepa
 --  NPC: Dominion Sergeant
 -----------------------------------
-require("scripts/globals/abyssea/dominion")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

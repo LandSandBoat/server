@@ -4,8 +4,6 @@
 -- Spawns Cirein-Croin
 -- !pos 39.146 -15.500 519.988 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

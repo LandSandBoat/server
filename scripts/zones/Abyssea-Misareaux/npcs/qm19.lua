@@ -4,8 +4,6 @@
 -- Spawns Sobek
 -- !pos 443 23 -369 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

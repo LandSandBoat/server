@@ -4,8 +4,6 @@
 -- Spawns Dhorme Khimaira
 -- !pos -281.411 -155.568 267.682 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

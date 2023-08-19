@@ -4,8 +4,6 @@
 -- Spawns Ironclad Triturator
 -- !pos -10 -175 56 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

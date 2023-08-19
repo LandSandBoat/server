@@ -3,8 +3,6 @@
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 local itemType =

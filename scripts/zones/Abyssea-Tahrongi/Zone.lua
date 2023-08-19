@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea - Tahrongi
 -----------------------------------
-require('scripts/globals/abyssea')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

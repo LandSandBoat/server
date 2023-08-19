@@ -3,8 +3,6 @@
 --  NPC: Veridical Conflux #03
 -- Aybssea Teleport NPC
 -----------------------------------
-require("scripts/globals/abyssea/conflux")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

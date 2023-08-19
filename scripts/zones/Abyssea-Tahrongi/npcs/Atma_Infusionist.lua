@@ -2,8 +2,6 @@
 -- Zone: Abyssea - La-Theine
 --  NPC: Atma Infusionist
 -----------------------------------
-require('scripts/globals/abyssea/atma')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

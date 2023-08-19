@@ -4,8 +4,6 @@
 -- Spawns Isgebind
 -- !pos 175 -113 472 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

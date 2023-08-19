@@ -4,8 +4,6 @@
 -- Spawns Kadraeth the Hatespawn
 -- !pos -475 -40 -280 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

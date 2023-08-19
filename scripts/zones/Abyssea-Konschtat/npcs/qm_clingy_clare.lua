@@ -5,7 +5,6 @@
 -- !pos 150.000 17.601 90.000 15
 -----------------------------------
 local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
-require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 -- Spawns Resheph
 -- !pos 409 -51 163 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

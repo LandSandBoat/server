@@ -4,8 +4,6 @@
 -- Type: Abyssea Warp NPC
 -- !pos -7.1 0.5 -4.5 242
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

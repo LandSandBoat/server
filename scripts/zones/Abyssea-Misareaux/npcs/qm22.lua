@@ -4,8 +4,6 @@
 -- Spawns Amhuluk
 -- !pos 0 -15 -34 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

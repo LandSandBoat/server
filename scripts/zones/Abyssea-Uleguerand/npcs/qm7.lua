@@ -4,8 +4,6 @@
 -- Spawns Veri Selen
 -- !pos 13 -140 470 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
