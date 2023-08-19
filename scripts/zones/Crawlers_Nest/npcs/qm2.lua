@@ -4,7 +4,6 @@
 -- !pos 44.436 -2.602 195.381 197
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

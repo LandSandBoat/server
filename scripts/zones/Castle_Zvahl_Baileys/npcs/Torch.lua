@@ -5,7 +5,6 @@
 -- !pos 63 -24 21 161
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

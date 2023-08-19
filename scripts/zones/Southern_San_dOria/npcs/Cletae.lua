@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/shop")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

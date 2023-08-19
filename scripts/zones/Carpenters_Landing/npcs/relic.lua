@@ -4,7 +4,6 @@
 -- !pos -99 -0 -514 2
 -----------------------------------
 local ID = zones[xi.zone.CARPENTERS_LANDING]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -3,8 +3,6 @@
 --  NPC: Wilhelm
 -- !pos -22.746 -5 17.157 249
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 local limbusArmor =

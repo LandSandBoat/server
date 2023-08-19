@@ -3,7 +3,6 @@
 -- Horlais Peak Maat fight
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------
 local battlefieldObject = {}

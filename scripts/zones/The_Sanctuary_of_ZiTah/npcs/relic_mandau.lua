@@ -4,7 +4,6 @@
 -- !pos 646 -2 -165 121
 -----------------------------------
 local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

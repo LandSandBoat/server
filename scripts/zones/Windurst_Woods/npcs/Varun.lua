@@ -3,8 +3,6 @@
 --  NPC: Varun
 -- !pos 7.800 -3.5 -10.064 241
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

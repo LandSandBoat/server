@@ -4,7 +4,6 @@
 -- !pos -42 -4 -169 72
 -----------------------------------
 local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- !pos 113.563 -16.302 38.912 25
 -----------------------------------
 local ID = zones[xi.zone.MISAREAUX_COAST]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

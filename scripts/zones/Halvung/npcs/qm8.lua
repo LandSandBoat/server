@@ -4,7 +4,6 @@
 -- Trade Moblin Oil
 -----------------------------------
 local ID = zones[xi.zone.HALVUNG]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

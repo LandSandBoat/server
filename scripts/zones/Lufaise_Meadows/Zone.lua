@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
 require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}

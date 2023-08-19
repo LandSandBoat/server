@@ -5,7 +5,6 @@
 -- !pos 242 24.395 468 110
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

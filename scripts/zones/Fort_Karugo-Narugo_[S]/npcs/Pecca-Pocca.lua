@@ -4,8 +4,6 @@
 -- Involved In Quest: REQUIEM_FOR_THE_DEPARTED
 -- !pos -163 -68 -155 96
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

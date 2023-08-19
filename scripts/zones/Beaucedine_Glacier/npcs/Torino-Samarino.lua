@@ -4,8 +4,6 @@
 -- Involved in Quests: Tuning Out
 -- !pos 105 -20 140 111
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

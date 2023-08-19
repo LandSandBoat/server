@@ -4,7 +4,6 @@
 -- Involved in Quest: I Can Hear A Rainbow
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
-require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

@@ -5,7 +5,6 @@
 -- Starts and Finishes Quest: Tenshodo Membership
 -- !pos 16 0 -5 245
 -----------------------------------
-require("scripts/globals/npc_util")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

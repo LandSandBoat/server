@@ -5,8 +5,6 @@
 --                       'Vegetable Vegetable Crisis'
 -- !pos 89 0 -75 256
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

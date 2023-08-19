@@ -4,7 +4,6 @@
 --  Involved in quest: No Strings Attached
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------
-require("scripts/globals/npc_util")
 require("scripts/globals/pets")
 -----------------------------------
 local entity = {}

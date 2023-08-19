@@ -3,7 +3,6 @@
 -- Qu'Bia Arena Level Break
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
 -----------------------------------
 local battlefieldObject = {}
 

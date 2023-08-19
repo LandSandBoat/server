@@ -2,7 +2,6 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_A01]
-require("scripts/globals/npc_util")
 -----------------------------------
 
 local riverneA01Global =

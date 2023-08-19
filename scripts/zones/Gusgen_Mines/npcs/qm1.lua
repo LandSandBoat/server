@@ -4,7 +4,6 @@
 -- Spawns Aroma Fly - RSE Satchets
 -----------------------------------
 local ID = zones[xi.zone.GUSGEN_MINES]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

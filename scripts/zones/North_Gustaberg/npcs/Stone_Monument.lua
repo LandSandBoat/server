@@ -4,8 +4,6 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos -199.635 96.106 505.624 106
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,7 +3,6 @@
 -- Area: Ro'Maeve
 -----------------------------------
 local ID = zones[xi.zone.ROMAEVE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

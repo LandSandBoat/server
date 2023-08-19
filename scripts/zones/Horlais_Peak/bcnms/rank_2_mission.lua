@@ -3,7 +3,6 @@
 -- Horlais Peak mission battlefield
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -4,7 +4,6 @@
 -- !pos -294 -143 27 158
 -----------------------------------
 local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

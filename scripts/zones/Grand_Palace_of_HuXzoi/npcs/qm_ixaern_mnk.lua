@@ -5,7 +5,6 @@
 -- !pos 380 0 540 34
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

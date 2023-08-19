@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/assault")
 require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
 require("scripts/globals/extravaganza")
 -----------------------------------
 local entity = {}

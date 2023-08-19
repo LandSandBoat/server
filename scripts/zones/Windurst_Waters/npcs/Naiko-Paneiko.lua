@@ -4,7 +4,6 @@
 -- Involved In Quest: Making Headlines, Riding on the Clouds
 -- !pos -246 -5 -308 238
 -----------------------------------
-require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

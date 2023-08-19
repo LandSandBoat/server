@@ -3,8 +3,6 @@
 --  NPC: Ferchinne
 -- Note: Involved in quest: "Fly High"
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,7 +5,6 @@
 -- !pos -292.779 6.999 -263.153 11
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

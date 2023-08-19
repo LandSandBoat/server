@@ -3,8 +3,6 @@
 --  NPC: Scanning_Device
 -- !pos 586 0 66 37
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

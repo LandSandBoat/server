@@ -3,7 +3,6 @@
 --  NPC: Decorative Bronze Gate (_1qp)
 -----------------------------------
 local ID = zones[xi.zone.HALVUNG]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

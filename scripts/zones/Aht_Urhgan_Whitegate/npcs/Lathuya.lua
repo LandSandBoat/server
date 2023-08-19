@@ -4,7 +4,6 @@
 -- Involved in quests: Omens
 -- !pos -95.081 -6.000 31.638 50
 -----------------------------------
-require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- !pos -20 -11 33 237
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

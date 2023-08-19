@@ -4,7 +4,6 @@
 -- !pos 24 25 -306 160
 -----------------------------------
 local ID = zones[xi.zone.DEN_OF_RANCOR]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

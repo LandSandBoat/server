@@ -4,7 +4,6 @@
 -- !pos 739 -99 -581 178
 -----------------------------------
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
