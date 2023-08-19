@@ -3,7 +3,6 @@
 -- Area: Nyzul Isle
 -----------------------------------
 mixins = { require('scripts/mixins/families/gears') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 

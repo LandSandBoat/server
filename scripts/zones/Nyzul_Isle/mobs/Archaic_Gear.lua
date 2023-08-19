@@ -2,8 +2,6 @@
 --  MOB: Archaic Gear
 -- Area: Nyzul Isle
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

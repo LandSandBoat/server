@@ -2,8 +2,6 @@
 -- Area: Nyzul Isle
 -- NM: Steelfleece Baldarich
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

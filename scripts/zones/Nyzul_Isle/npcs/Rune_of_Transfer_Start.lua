@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/globals/npc_util")
-require("scripts/globals/nyzul")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
 -----------------------------------
 local entity = {}

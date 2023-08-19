@@ -4,7 +4,6 @@
 -- Info: Floor 60 80 and 100 Boss
 -----------------------------------
 mixins = { require('scripts/mixins/nyzul_boss_drops') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 

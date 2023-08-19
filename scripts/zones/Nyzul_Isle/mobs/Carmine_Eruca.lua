@@ -2,8 +2,6 @@
 --  MOB: Carmine Eruca
 -- Area: Nyzul Isle
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

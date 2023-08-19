@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: Specified Mob Group and Eliminate all Group
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

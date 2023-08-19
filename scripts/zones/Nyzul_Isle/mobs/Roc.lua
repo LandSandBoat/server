@@ -4,7 +4,6 @@
 -- Info: NM
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
