@@ -22,8 +22,8 @@
 */
 
 #include <chrono>
+#include <ctime>
 #include <iostream>
-#include <time.h>
 #include <unordered_map>
 #include <unordered_set>
 

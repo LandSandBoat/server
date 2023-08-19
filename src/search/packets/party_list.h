@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CPARTYLISTPACKET_H_
 
 #include "common/cbasetypes.h"
-#include <string.h>
+#include <cstring>
 
 class CPartyListPacket
 {

@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "caught_monster.h"
 #include "common/socket.h"
 #include "entities/charentity.h"
-#include <string.h>
+#include <cstring>
 
 CCaughtMonsterPacket::CCaughtMonsterPacket(CCharEntity* PChar, uint16 messageID)
 {

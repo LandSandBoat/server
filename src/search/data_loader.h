@@ -24,9 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/cbasetypes.h"
 
+#include <cstdio>
+#include <cstring>
 #include <list>
-#include <stdio.h>
-#include <string.h>
 #include <vector>
 
 struct Sql_t;

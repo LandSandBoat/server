@@ -14,7 +14,7 @@
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
