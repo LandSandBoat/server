@@ -4,8 +4,6 @@
 -- Spawns Pascerpot
 -- !pos -214 -47 -593 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

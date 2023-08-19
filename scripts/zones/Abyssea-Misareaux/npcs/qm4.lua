@@ -4,8 +4,6 @@
 -- Spawns Manohra
 -- !pos 121 -8 -120 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

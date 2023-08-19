@@ -4,7 +4,6 @@
 -- Type: Abyssea Service NPC
 -- !pos 2.3 0 -65 243
 -----------------------------------
-require("scripts/globals/abyssea")
 ----------------------------------
 local entity = {}
 

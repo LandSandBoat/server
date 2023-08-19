@@ -4,8 +4,6 @@
 -- Spawns Sirrush
 -- !pos 346 15 -437 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

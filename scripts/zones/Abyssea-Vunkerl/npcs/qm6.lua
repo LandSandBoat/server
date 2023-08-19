@@ -4,8 +4,6 @@
 -- Spawns Rakshas
 -- !pos -203 -39 -26 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

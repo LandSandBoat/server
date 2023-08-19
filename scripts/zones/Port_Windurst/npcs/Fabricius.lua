@@ -3,7 +3,6 @@
 --  NPC: Fabricius
 -- Type: Abyssea Service NPC
 -----------------------------------
-require("scripts/globals/abyssea")
 ----------------------------------
 local entity = {}
 

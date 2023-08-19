@@ -2,8 +2,6 @@
 -- Zone: Abyssea - Vunkerl
 --  NPC: Conflux Surveyor
 -----------------------------------
-require("scripts/globals/abyssea/conflux_surveyor")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

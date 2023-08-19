@@ -12,7 +12,6 @@
 -- 331 = CS after "Dawn of Death" completed.
 -- 332 = ???
 -----------------------------------
-require("scripts/globals/abyssea")
 ----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 -- Spawns Gnawtooth Gary
 -- !pos -343 -39 -644 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

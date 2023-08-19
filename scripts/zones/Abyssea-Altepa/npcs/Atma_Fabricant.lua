@@ -2,8 +2,6 @@
 -- Zone: Abyssea - Altepa
 --  NPC: Atma Fabricant
 -----------------------------------
-require("scripts/globals/abyssea/atma_fabricant")
------------------------------------
 
 local entity = {}
 

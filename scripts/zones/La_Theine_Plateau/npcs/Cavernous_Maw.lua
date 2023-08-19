@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea - La Theine
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/abyssea")
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}

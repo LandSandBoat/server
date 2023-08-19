@@ -4,8 +4,6 @@
 -- Spawns Seps
 -- !pos -238 -39 -717 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

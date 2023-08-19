@@ -4,8 +4,6 @@
 -- Spawns Apademak
 -- !pos -332 -155 361 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

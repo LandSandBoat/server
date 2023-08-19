@@ -4,8 +4,6 @@
 -- Spawns Sedna
 -- !pos 403 -31 375 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
