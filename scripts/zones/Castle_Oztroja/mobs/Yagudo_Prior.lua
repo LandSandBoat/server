@@ -4,7 +4,6 @@
 -- Note: PH for Yaa Haqa the Profane
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

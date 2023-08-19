@@ -4,7 +4,6 @@
 -- Note: PH for Jeduah
 -----------------------------------
 local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
-require("scripts/globals/mobs")
 mixins = { require("scripts/mixins/families/lycopodium") }
 -----------------------------------
 local entity = {}

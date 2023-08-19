@@ -8,7 +8,6 @@ mixins =
     require("scripts/mixins/job_special")
 }
 local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

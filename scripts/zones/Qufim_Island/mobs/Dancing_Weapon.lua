@@ -4,7 +4,6 @@
 -- Note: PH for Trickster Kinetix
 -----------------------------------
 local ID = zones[xi.zone.QUFIM_ISLAND]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

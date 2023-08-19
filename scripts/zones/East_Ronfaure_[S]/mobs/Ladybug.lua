@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 mixins = { require("scripts/mixins/families/ladybug") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

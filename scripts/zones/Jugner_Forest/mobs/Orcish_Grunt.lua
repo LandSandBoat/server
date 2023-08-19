@@ -4,7 +4,6 @@
 -- Note: PH for Supplespine Mujwuj
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

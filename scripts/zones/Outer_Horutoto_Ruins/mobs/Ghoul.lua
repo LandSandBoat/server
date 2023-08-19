@@ -4,7 +4,6 @@
 -- Note: Place holder for Ah Puch
 -----------------------------------
 local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

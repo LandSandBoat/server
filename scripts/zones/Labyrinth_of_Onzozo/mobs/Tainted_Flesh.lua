@@ -4,7 +4,6 @@
 -- Note: Place holder for Hellion
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

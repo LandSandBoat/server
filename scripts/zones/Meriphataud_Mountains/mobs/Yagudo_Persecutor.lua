@@ -4,7 +4,6 @@
 -- Note: PH for Naa Zeku the Unwaiting
 -----------------------------------
 local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

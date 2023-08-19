@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

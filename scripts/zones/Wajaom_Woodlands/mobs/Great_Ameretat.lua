@@ -4,7 +4,6 @@
 -- Note: PH for Jaded Jody
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

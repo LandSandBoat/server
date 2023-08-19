@@ -4,7 +4,6 @@
 -- Note: PH for Sewer Syrup
 -----------------------------------
 local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

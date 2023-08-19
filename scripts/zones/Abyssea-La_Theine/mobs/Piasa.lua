@@ -2,8 +2,6 @@
 -- Area: Abyssea - La Theine
 --   NM: Piasa
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

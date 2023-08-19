@@ -3,8 +3,6 @@
 --  Mob: Fistule
 -- Note: Spawn by dissolve Guimauve, Bloodguzzler or Lentor
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 local getNearestMob = function(fistule, mobs)

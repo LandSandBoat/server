@@ -3,7 +3,6 @@
 --   NM: Agar Agar
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

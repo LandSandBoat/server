@@ -4,7 +4,6 @@
 -- Note: Place holder Ramponneau
 -----------------------------------
 local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

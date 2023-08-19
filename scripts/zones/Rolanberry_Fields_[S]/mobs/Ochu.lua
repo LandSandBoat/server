@@ -4,7 +4,6 @@
 -- Note: PH for Delicieuse Delphine
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Note: PH for La Velue
 -----------------------------------
 local ID = zones[xi.zone.BATALLIA_DOWNS_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

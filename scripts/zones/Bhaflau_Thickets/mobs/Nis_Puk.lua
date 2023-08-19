@@ -4,7 +4,6 @@
 -- !pos -155.319 -15.959 -599.366 52
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

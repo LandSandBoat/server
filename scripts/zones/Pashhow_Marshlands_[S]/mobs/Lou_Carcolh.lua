@@ -4,7 +4,6 @@
 -- Note: PH for Nommo
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

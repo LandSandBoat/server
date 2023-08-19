@@ -4,7 +4,6 @@
 -- Note: Placeholder V. Vivian
 -----------------------------------
 local ID = zones[xi.zone.THE_BOYAHDA_TREE]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

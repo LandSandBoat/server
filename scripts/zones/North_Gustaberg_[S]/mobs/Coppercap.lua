@@ -4,7 +4,6 @@
 -- Note: PH for Gloomanita
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

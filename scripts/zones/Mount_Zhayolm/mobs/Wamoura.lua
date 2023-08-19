@@ -4,7 +4,6 @@
 -- Note: PH for Ignamoth
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

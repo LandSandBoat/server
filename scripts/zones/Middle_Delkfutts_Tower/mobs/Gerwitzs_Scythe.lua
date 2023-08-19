@@ -4,7 +4,6 @@
 -- Involved In Quest: Blade of Evil
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Note: Place holder Emergent Elm
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

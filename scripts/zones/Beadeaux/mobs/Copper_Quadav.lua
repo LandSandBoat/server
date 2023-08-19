@@ -5,7 +5,6 @@
 -- Involved in Mission 3-1 (Bastok)
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

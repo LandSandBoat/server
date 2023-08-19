@@ -4,7 +4,6 @@
 -- Note: PH for Balam-Quitz
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

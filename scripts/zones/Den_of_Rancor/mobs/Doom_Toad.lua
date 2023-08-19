@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.DEN_OF_RANCOR]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

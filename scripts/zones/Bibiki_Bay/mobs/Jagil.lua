@@ -3,8 +3,6 @@
 --  Mob: Jagil
 -- Note: PH for Serra
 -----------------------------------
-require('scripts/globals/mobs')
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

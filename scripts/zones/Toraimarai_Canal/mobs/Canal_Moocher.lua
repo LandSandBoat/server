@@ -3,7 +3,6 @@
 --   NM: Canal Moocher
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

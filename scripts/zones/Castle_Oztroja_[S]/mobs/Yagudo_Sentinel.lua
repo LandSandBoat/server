@@ -4,7 +4,6 @@
 -- Note: PH for Aa Xalmo the Savage and Zhuu Buxu the Silent
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

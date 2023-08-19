@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.IFRITS_CAULDRON]
 require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
