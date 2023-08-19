@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trial by Lightning
 -- !pos 29 -15 55 249
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}

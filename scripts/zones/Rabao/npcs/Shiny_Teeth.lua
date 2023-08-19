@@ -5,7 +5,6 @@
 -- !pos -30 8 99 247
 -----------------------------------
 local ID = zones[xi.zone.RABAO]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

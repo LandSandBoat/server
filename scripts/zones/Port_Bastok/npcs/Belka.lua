@@ -4,7 +4,6 @@
 -- Derfland Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.PORT_BASTOK]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

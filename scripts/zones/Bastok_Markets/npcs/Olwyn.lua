@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/events/harvest_festivals")
 local ID = zones[xi.zone.BASTOK_MARKETS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

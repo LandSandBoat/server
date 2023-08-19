@@ -4,7 +4,6 @@
 -- Type: Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

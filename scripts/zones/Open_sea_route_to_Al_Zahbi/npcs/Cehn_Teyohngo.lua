@@ -4,7 +4,6 @@
 -- Guild Merchant NPC: Fishing Guild
 -- !pos 4.986 -2.101 -12.026 46
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI]
 -----------------------------------
 local entity = {}

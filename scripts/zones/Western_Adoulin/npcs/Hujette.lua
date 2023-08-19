@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 require("scripts/globals/utils")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

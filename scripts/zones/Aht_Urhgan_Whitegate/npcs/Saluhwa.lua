@@ -6,7 +6,6 @@
 --       status of Astral Candescence
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

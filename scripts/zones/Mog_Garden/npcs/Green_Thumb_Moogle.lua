@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MOG_GARDEN]
 require("scripts/globals/moghouse")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

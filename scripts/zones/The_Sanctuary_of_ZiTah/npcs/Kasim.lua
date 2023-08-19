@@ -4,8 +4,6 @@
 -- Type: Outpost Vendor
 -- !pos -46 0 -148 121
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 local vendorRegion  = xi.region.LITELOR

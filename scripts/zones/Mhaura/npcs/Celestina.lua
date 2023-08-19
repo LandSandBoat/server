@@ -6,8 +6,6 @@
 -- Guild Merchant NPC: Goldsmithing Guild
 -- !pos -37.624 -16.050 75.681 249
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

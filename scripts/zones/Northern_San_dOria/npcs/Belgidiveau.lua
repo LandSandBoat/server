@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trouble at the Sluice
 -- !pos -98 0 69 231
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

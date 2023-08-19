@@ -4,7 +4,6 @@
 -- Type: Shop NPC
 -- !pos 154 4 -33 256
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

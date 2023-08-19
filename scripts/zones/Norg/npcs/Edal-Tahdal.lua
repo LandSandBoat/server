@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trial by Water
 -- !pos -13 1 -20 252
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}

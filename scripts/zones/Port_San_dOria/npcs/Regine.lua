@@ -5,7 +5,6 @@
 -- !pos 68 -9 -74 232
 -----------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

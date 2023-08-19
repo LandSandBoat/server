@@ -5,7 +5,6 @@
 -- !pos -82.503 -4.849 -132.376 235
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

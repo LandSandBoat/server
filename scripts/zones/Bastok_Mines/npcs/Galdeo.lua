@@ -4,7 +4,6 @@
 --  Li'Telor Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MINES]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

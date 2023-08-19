@@ -4,8 +4,6 @@
 -- Type: Outpost Vendor
 -- !pos -586 39 61 106
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 local vendorRegion  = xi.region.GUSTABERG

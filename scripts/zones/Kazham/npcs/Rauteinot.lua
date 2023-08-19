@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Missionary Man
 -- !pos -42 -10 -89 250
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}

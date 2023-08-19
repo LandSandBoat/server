@@ -4,8 +4,6 @@
 --  Linkshell Merchant
 -- !pos -142 -1 -25 236
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

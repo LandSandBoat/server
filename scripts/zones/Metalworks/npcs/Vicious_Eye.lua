@@ -5,7 +5,6 @@
 -- !pos -106.132 0.999 -28.757 237
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@
 -- !pos -1.139 -2.101 -9.000 221
 -----------------------------------
 local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 
