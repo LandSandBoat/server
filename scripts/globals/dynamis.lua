@@ -309,15 +309,6 @@ end
 -----------------------------------
 -- global functions
 -----------------------------------
-
-xi.dynamis.eye =
-{
-    NONE    = 0,
-    RED     = 1,
-    BLUE    = 2,
-    GREEN   = 3,
-}
-
 xi.dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId        = player:getZoneID()
     local info          = entryInfo[zoneId]
