@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

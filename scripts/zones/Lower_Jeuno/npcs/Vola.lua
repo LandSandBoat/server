@@ -6,7 +6,6 @@
 -- !pos 43 3 -45 245
 -----------------------------------
 local ID = zones[xi.zone.LOWER_JEUNO]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

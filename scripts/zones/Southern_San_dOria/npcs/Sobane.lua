@@ -7,7 +7,6 @@
 -- csid: 52  732  733  734  735  736  737  738  739  740  741
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

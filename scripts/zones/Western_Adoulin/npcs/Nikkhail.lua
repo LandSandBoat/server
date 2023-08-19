@@ -5,7 +5,6 @@
 -- !pos -101 3 9 256
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

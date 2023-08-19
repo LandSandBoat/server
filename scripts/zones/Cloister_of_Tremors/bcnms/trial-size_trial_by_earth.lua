@@ -3,7 +3,6 @@
 -- BCNM: Trial-size Trial by Earth
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

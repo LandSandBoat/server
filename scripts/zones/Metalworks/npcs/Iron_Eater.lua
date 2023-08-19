@@ -5,8 +5,6 @@
 -- Starts and Finishes; The Weight of Your Limits
 -- !pos 92.936 -19.532 1.814 237
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

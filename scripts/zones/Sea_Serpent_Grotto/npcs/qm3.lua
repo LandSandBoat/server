@@ -4,7 +4,6 @@
 -- !pos -173 26 252 176
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

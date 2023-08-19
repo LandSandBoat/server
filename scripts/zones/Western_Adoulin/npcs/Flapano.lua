@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------

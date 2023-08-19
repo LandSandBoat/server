@@ -2,8 +2,6 @@
 -- Area: Windurst Walls
 --  NPC: Polikal-Ramikal
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

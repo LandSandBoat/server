@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea - Attohwa
 -----------------------------------
 local ID = zones[xi.zone.BUBURIMU_PENINSULA]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

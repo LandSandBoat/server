@@ -4,8 +4,6 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,7 +2,6 @@
 -- Area: Port Jeuno
 --  NPC: Shemo
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

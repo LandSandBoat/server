@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS_S]
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

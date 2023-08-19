@@ -5,8 +5,6 @@
 -- Starts and Finishes: Making Amens!, Orastery Woes
 -- !pos -112.5 -4.2 102.9 240
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

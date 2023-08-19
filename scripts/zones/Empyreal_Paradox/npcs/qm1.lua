@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

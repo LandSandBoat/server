@@ -4,7 +4,6 @@
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
 local ID = zones[xi.zone.NORG]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

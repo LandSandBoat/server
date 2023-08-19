@@ -4,7 +4,6 @@
 -- Involved in Quests: Under Oath
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

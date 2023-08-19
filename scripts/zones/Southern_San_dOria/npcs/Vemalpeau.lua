@@ -3,8 +3,6 @@
 --  NPC: Vemalpeau
 -- Involved in Quests: Under Oath
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

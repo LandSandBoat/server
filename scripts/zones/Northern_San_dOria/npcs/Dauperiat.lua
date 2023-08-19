@@ -5,7 +5,6 @@
 -- !zone 231
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

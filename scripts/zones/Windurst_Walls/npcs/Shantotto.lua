@@ -3,7 +3,6 @@
 --  NPC: Shantotto
 -- !pos 122 -2 112 239
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

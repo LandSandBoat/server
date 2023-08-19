@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.WINDURST_WOODS]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

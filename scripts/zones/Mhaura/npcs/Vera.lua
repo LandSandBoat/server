@@ -4,7 +4,6 @@
 -- Finishes Quest: The Old Lady
 -- !pos -49 -5 20 249
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}

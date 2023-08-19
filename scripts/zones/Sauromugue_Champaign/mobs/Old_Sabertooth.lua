@@ -4,8 +4,6 @@
 -- Involved in Quest: The Fanged One
 -- !pos 676 -10 -366 120
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

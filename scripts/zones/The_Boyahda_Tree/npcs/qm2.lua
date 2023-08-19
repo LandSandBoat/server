@@ -5,7 +5,6 @@
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
 local ID = zones[xi.zone.THE_BOYAHDA_TREE]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

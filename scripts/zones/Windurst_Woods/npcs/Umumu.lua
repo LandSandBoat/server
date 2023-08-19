@@ -5,7 +5,6 @@
 -- !pos 32.575 -5.250 141.372 241
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

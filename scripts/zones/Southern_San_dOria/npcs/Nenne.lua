@@ -5,7 +5,6 @@
 -- !pos -114 -6 102 230
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

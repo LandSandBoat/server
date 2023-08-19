@@ -5,7 +5,6 @@
 -- !pos -50 8 40 247
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
 local ID = zones[xi.zone.RABAO]
 -----------------------------------

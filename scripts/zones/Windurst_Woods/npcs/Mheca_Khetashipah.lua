@@ -3,8 +3,6 @@
 --  NPC: Mheca Khetashipah
 -- !pos 66.881 -6.249 185.752 241
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

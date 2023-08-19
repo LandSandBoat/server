@@ -5,7 +5,6 @@
 -- !pos -274.334 -9.287 -64.255 79
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}

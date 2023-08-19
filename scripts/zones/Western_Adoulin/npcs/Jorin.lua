@@ -4,7 +4,6 @@
 -- Starts, Involved with, and Finishes Quest: 'The Old Man and the Harpoon'
 -- !pos 92 32 152 256
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

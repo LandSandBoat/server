@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CLOISTER_OF_FROST]
 require("scripts/globals/battlefield")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

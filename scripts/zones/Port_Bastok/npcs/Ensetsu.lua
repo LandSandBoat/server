@@ -4,8 +4,6 @@
 -- Involved in Quest: 20 in Pirate Years, I'll Take the Big Box
 -- !pos 33 -6 67 236
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

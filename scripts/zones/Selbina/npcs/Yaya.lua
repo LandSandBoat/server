@@ -4,8 +4,6 @@
 -- Starts Quest: Under the sea
 -- !pos -19 -2 -16 248
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

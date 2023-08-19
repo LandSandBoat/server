@@ -3,8 +3,6 @@
 --  Mob: Caedarva Toad
 -- Involved in Quest: The Wayward Automation
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

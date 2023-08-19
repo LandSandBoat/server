@@ -5,7 +5,6 @@
 -- !pos -144 4 -10 256
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

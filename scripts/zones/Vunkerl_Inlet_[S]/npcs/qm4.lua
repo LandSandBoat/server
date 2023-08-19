@@ -5,7 +5,6 @@
 -- !pos -412 -29 -45 83
 -----------------------------------
 local ID = zones[xi.zone.VUNKERL_INLET_S]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

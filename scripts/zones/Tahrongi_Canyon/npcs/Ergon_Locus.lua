@@ -5,7 +5,6 @@
 -- pos 90.846 40.448 339.803
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

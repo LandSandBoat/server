@@ -4,8 +4,6 @@
 -- Type: Adventurer's Assistant NPC
 -- !pos -6.347 0.000 -11.265 231
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

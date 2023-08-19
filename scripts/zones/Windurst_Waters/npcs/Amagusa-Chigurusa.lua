@@ -3,7 +3,6 @@
 --  NPC: Amagusa-Chigurusa
 -- !pos -28.746 -4.5 61.954 238
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

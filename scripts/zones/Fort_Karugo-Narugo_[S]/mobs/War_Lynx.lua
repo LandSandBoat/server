@@ -4,7 +4,6 @@
 -- The Tigress Strikes Fight
 -----------------------------------
 local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

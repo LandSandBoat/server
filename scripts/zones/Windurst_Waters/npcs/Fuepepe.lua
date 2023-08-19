@@ -4,8 +4,6 @@
 -- Involved in Quest: Class Reunion
 -- !pos 161 -2 161 238
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

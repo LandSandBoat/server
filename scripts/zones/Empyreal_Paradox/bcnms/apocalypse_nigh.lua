@@ -3,7 +3,6 @@
 -- Name: Apocalypse Nigh
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

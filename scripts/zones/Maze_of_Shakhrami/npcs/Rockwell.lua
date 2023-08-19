@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

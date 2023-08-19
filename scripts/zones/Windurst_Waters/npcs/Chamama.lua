@@ -5,7 +5,6 @@
 -- Starts Quest: In a Pickle
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

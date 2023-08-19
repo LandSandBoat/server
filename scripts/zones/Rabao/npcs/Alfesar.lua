@@ -4,7 +4,6 @@
 --Starts The Missing Piece
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}

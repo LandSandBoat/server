@@ -8,7 +8,6 @@
 -- complete this quest even with no fame.
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

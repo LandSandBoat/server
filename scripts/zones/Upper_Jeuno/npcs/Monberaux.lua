@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = zones[xi.zone.UPPER_JEUNO]
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

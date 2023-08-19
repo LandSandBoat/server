@@ -5,7 +5,6 @@
 -- !pos -1 -5 25 252
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}

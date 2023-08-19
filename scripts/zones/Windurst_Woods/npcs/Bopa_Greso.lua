@@ -3,8 +3,6 @@
 --  NPC: Bopa Greso
 -- !pos 59.773 -6.249 216.766 241
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

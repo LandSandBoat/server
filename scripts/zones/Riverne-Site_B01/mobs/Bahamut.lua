@@ -3,7 +3,6 @@
 --   NM: Bahamut
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

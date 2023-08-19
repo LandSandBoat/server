@@ -11,7 +11,6 @@
 -- spawn in npc_list is 770 0 -419
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

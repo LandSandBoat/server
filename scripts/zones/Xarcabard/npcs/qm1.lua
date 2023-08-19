@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

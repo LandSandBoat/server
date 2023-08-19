@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.PORT_BASTOK]
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/trust")
 -----------------------------------
 local entity = {}

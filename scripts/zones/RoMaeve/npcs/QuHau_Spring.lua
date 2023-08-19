@@ -5,7 +5,6 @@
 local ID = zones[xi.zone.ROMAEVE]
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

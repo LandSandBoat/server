@@ -3,7 +3,6 @@
 --  NPC: Maugie
 -----------------------------------
 require("scripts/quests/flyers_for_regine")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

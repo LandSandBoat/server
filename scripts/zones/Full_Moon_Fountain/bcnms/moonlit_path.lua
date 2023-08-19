@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 require("scripts/globals/battlefield")
-require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}
 

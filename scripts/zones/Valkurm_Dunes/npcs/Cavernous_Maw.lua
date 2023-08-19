@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea Misareaux
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

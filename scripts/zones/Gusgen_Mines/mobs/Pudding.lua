@@ -4,7 +4,6 @@
 -- Involved in Eco Warrior (Bastok)
 -----------------------------------
 local ID = zones[xi.zone.GUSGEN_MINES]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

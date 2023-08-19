@@ -3,7 +3,6 @@
 --  NPC: Moari-Kaaori
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

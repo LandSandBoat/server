@@ -4,7 +4,6 @@
 -- Involved in Quest: The Medicine Woman, To Cure a Cough
 -- !pos -85 -6 89 230
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
