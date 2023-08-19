@@ -2,8 +2,6 @@
 -- Area: Bostaunieux Oubliette
 --  Mob: Funnel Bats
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

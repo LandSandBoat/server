@@ -2,8 +2,6 @@
 -- Area: Toraimarai Canal
 --  Mob: Scavenger Crab
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

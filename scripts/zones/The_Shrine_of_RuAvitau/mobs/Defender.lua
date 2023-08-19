@@ -2,8 +2,6 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Defender
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

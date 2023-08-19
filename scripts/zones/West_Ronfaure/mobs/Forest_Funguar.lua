@@ -2,8 +2,6 @@
 -- Area: West Ronfaure
 --  Mob: Forest Funguar
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

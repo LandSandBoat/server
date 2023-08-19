@@ -4,7 +4,6 @@
 -- Note: PH for Sharp Eared Ropipi
 -----------------------------------
 local ID = zones[xi.zone.EAST_SARUTABARUTA]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

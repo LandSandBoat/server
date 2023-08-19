@@ -4,7 +4,6 @@
 -- Note: Place holder Nocuous Weapon
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

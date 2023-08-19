@@ -2,8 +2,6 @@
 -- Area: Garlaige Citadel
 --  Mob: Wingrats
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

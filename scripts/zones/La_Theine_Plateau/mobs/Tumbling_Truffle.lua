@@ -3,7 +3,6 @@
 --  Mob: Tumbling Truffle
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

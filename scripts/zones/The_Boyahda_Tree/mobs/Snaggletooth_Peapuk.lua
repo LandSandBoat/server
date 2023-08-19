@@ -2,7 +2,6 @@
 -- Area: The Boyahda Tree
 --  Mob: Snaggletooth Peapuk
 -----------------------------------
-require("scripts/globals/regimes")
 mixins = { require("scripts/mixins/families/puk") }
 -----------------------------------
 

@@ -4,7 +4,6 @@
 -- Note: PH for Trembler Tabitha
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

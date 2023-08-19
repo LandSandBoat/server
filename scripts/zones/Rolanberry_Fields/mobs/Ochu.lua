@@ -4,7 +4,6 @@
 -- Note: PH for Drooling Daisy
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Goblin Reaper
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

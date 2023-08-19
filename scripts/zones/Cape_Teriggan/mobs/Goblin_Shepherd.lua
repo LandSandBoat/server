@@ -2,8 +2,6 @@
 -- Area: Cape Teriggan
 --  Mob: Goblin Shepherd
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

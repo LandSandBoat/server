@@ -2,8 +2,6 @@
 -- Area: Valkurm Dunes
 --  Mob: Sand Hare
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,7 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Coral Crab
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

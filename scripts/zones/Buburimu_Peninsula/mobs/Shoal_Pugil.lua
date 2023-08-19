@@ -4,7 +4,6 @@
 -- Note: PH for Buburimboo
 -----------------------------------
 local ID = zones[xi.zone.BUBURIMU_PENINSULA]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

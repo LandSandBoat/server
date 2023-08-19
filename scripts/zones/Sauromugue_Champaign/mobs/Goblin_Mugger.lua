@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 require("scripts/globals/missions")
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

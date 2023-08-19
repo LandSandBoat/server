@@ -2,8 +2,6 @@
 -- Area: Quicksand Caves
 --  Mob: Girtab
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

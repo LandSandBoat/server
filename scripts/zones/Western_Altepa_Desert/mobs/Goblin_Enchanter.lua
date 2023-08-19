@@ -2,8 +2,6 @@
 -- Area: Western Altepa Desert
 --  Mob: Goblin Enchanter
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

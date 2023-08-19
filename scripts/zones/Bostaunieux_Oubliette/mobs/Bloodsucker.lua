@@ -5,7 +5,6 @@
 -- !pos -21.776 16.983 -231.477 167
 -----------------------------------
 local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

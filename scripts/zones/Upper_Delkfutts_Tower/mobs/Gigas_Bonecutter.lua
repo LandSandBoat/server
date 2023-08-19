@@ -4,7 +4,6 @@
 -- Note: PH for Enkelados
 -----------------------------------
 local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

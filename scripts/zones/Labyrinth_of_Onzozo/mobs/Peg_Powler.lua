@@ -3,7 +3,6 @@
 --   NM: Peg Powler
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

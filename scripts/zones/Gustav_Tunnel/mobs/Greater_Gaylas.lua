@@ -2,8 +2,6 @@
 -- Area: Gustav Tunnel
 --  Mob: Greater Gaylas
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -4,7 +4,6 @@
 -- Note: PH for Mischievous Micholas
 -----------------------------------
 local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

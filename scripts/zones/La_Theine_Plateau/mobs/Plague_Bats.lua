@@ -2,7 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Plague Bats
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

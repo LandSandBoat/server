@@ -2,8 +2,6 @@
 -- Area: Middle Delkfutt's Tower
 --  Mob: Gigas Jailer
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

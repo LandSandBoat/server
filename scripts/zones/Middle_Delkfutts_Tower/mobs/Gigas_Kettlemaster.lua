@@ -4,7 +4,6 @@
 -- Note: PH for Ophion
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

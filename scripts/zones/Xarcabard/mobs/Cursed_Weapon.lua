@@ -4,7 +4,6 @@
 -- Note: PH for Barbaric Weapon
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

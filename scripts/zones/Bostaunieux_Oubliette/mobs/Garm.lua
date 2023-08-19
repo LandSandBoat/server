@@ -4,7 +4,6 @@
 -- Note: PH for Shii
 -----------------------------------
 local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

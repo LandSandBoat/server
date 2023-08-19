@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --  Mob: Haunt
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

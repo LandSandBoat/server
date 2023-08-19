@@ -4,7 +4,6 @@
 -- Note: PH for Ni'Zho Bladebender
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

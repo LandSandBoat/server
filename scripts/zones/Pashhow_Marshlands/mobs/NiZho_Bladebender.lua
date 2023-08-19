@@ -2,7 +2,6 @@
 -- Area: Pashhow Marshlands
 --   NM: Ni'Zho Bladebender
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}

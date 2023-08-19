@@ -4,7 +4,6 @@
 -- Note: PH for Panzer Percival
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: The Eldieme Necropolis
 --  Mob: Lost Soul
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

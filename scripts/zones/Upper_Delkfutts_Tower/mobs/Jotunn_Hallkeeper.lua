@@ -2,8 +2,6 @@
 -- Area: Upper Delkfutt's Tower
 --  Mob: Jotunn Hallkeeper
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

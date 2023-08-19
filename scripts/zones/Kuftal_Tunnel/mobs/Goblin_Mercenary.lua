@@ -4,7 +4,6 @@
 -- Note: Place Holder for Bloodthirster Madkix
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

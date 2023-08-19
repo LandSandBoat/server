@@ -2,8 +2,6 @@
 -- Area: Upper Delkfutt's Tower
 --  Mob: Gigas Stonemason
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,8 +2,6 @@
 -- Area: Pashhow Marshlands
 --  Mob: Greater Quadav
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

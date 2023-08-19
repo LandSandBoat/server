@@ -4,7 +4,6 @@
 -- Note: PH for Jaggedy-Eared Jack
 -----------------------------------
 local ID = zones[xi.zone.WEST_RONFAURE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

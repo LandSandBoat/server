@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --  Mob: Goblin Tinkerer
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

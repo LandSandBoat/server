@@ -4,7 +4,6 @@
 -- Note: Place holder Despot
 -----------------------------------
 local ID = zones[xi.zone.RUAUN_GARDENS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

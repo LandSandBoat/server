@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --  Mob: Bark Spider
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

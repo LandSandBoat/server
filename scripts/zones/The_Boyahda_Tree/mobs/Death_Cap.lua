@@ -4,7 +4,6 @@
 -- Note: PH for Ellyllon
 -----------------------------------
 local ID = zones[xi.zone.THE_BOYAHDA_TREE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
