@@ -3,8 +3,6 @@
 --  Mob: Tzee Xicu Idol
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

@@ -3,8 +3,6 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Count Haagenti
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

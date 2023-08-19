@@ -3,8 +3,6 @@
 --  NPC: ??? (qm1)
 -- Note: Spawns Taquede
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

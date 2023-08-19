@@ -4,8 +4,6 @@
 -- Dynamis-Windurst Enter
 -- !pos -216 0 -94 239
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

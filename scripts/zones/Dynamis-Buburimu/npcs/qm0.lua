@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Apocalyptic Beast / Arch Apocalyptic Beast
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

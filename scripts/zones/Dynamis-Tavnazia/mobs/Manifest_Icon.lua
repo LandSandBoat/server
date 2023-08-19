@@ -2,8 +2,6 @@
 -- Area: Dynamis - Tavnazia
 --  Mob: Manifest Icon
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

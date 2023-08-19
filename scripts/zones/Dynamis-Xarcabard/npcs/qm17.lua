@@ -3,8 +3,6 @@
 --  NPC: ??? (qm17)
 -- Note: Spawns Animated Longbow
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

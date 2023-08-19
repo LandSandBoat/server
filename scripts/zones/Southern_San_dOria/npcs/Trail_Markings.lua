@@ -4,8 +4,6 @@
 -- Dynamis-San d'Oria Enter
 -- !pos 139 -2 122 230
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
