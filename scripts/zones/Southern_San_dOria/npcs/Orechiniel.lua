@@ -3,7 +3,6 @@
 --  NPC: Orechiniel
 -- Type: Leathercraft Adv. Synthesis Image Support
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

@@ -5,7 +5,6 @@
 -- !pos -34.800 -2.25 -119.950 241
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

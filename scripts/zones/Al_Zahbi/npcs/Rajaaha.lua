@@ -4,7 +4,6 @@
 -- Type: Goldsmithing Normal/Adv. Image Support
 -- !pos 49.9 0.1 -45.2 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

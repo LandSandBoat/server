@@ -4,7 +4,6 @@
 -- Type: Woodworking Normal/Adv. Image Support
 -- !pos -71.584 -7 -56.018 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}
