@@ -2,8 +2,6 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'ghrah
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 local spellTable =

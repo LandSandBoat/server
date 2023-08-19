@@ -3,8 +3,6 @@
 --  NPC: Pacomart
 -- Type: ROV NPC
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

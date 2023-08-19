@@ -3,7 +3,6 @@
 --  NPC: Yurim
 -- !pos 83.697 -25.000 3.250 26
 -----------------------------------
-require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- Type: Assault
 -- !pos 518.387 -24.707 -467.297 79
 -----------------------------------
-require("scripts/globals/missions")
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}

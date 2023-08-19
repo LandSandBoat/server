@@ -3,8 +3,6 @@
 --  NPC: Andrival
 -- !pos 26 0 127 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

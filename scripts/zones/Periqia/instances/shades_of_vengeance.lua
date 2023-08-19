@@ -3,7 +3,6 @@
 -- !instance 5600
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/missions")
 local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}

@@ -5,7 +5,6 @@
 -- !pos 673.882 -23.995 367.604 61
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

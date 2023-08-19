@@ -5,7 +5,6 @@
 -- !pos -504 20 -419 208
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

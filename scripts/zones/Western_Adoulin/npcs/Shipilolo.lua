@@ -7,7 +7,6 @@
 --                        'Wayward Waypoints'
 -- !pos 84 0 -60 256
 -----------------------------------
-require("scripts/globals/missions")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

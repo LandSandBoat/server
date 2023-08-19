@@ -4,7 +4,6 @@
 -- Entrance to Riverne Site #B01
 -- !pos -259 -30 276 25
 -----------------------------------
-require("scripts/globals/missions")
 local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}

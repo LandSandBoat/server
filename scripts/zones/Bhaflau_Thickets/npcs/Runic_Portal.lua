@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}

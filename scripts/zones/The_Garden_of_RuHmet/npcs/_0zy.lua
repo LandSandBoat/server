@@ -4,7 +4,6 @@
 -- !pos -419 0.1 356 35
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

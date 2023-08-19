@@ -3,7 +3,6 @@
 -- Spire of Vahzl mission battlefield
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

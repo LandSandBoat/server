@@ -4,7 +4,6 @@
 -- !pos 300 30 -324 163
 -----------------------------------
 require("scripts/globals/bcnm")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

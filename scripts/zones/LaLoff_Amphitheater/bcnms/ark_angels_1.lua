@@ -3,7 +3,6 @@
 -- Name: Ark Angels 1 (Hume)
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

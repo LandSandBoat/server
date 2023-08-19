@@ -3,7 +3,6 @@
 --  Mob: Goblin Bounty Hunter
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

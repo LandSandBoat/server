@@ -4,8 +4,6 @@
 -- Involved With Quest: 'A Pioneers Best (Imaginary) Friend'
 -- !pos -144 4 -10 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

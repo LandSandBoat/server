@@ -3,7 +3,6 @@
 -- Mine Shaft #2716 mission battlefield
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -7,7 +7,6 @@
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 require("scripts/globals/besieged")
-require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}

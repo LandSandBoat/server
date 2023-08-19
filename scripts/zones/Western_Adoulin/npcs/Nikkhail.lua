@@ -4,7 +4,6 @@
 --  Involved With Quest: 'A Thirst for the Ages'
 -- !pos -101 3 9 256
 -----------------------------------
-require("scripts/globals/missions")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

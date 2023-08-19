@@ -3,7 +3,6 @@
 -- Name: Ark Angels 5 (Galka)
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

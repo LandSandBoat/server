@@ -4,8 +4,6 @@
 -- Type: Mission Giver
 -- !pos -8.444 -2 -123.575 234
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

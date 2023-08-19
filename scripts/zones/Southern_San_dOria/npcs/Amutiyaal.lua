@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 require("scripts/globals/teleports")
-require("scripts/globals/missions")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

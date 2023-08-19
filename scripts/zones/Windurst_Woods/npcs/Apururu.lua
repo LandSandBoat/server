@@ -5,7 +5,6 @@
 -- !pos -11 -2 13 241
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
