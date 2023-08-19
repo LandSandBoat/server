@@ -2,8 +2,6 @@
 -- Area: South Gustaberg
 --   NM: Bubbly Bernie
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

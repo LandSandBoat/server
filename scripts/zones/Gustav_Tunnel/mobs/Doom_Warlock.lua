@@ -4,7 +4,6 @@
 -- Note: Place holder Taxim
 -----------------------------------
 local ID = zones[xi.zone.GUSTAV_TUNNEL]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

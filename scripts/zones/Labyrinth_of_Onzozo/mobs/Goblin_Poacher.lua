@@ -2,8 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --  Mob: Goblin Poacher
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

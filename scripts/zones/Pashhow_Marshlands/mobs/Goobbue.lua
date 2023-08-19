@@ -4,7 +4,6 @@
 -- Note: PH for Jolly Green
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

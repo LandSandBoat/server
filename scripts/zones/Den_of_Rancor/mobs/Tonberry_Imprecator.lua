@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/tonberry") }
 local ID = zones[xi.zone.DEN_OF_RANCOR]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

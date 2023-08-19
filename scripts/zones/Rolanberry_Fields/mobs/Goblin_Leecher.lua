@@ -3,7 +3,6 @@
 --  Mob: Goblin Leecher
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

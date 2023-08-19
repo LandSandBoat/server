@@ -3,7 +3,6 @@
 --   NM: Shikigami Weapon
 -----------------------------------
 require("scripts/globals/pathfind")
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

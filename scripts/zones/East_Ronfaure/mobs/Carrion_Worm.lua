@@ -4,7 +4,6 @@
 -- Note: PH for Bigmouth Billy
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

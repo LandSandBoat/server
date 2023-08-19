@@ -4,7 +4,6 @@
 -- Note: PH for Blighting Brand
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

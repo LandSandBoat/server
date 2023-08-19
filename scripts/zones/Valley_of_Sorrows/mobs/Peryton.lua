@@ -2,8 +2,6 @@
 -- Area: Valley of Sorrows
 --  Mob: Peryton
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

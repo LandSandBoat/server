@@ -4,7 +4,6 @@
 -- Note: PH for Denn the Orcavoiced
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

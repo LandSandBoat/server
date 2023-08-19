@@ -2,8 +2,6 @@
 -- Area: Maze of Shakhrami
 --  Mob: Abyss Worm
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,8 +2,6 @@
 -- Area: Ordelle's Caves
 --  Mob: Stroper
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

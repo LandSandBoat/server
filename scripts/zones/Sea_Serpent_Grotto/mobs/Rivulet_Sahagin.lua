@@ -2,8 +2,6 @@
 -- Area: Sea Serpent Grotto
 --  Mob: Rivulet Sahagin
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

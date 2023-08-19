@@ -2,8 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --  Mob: Boribaba
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

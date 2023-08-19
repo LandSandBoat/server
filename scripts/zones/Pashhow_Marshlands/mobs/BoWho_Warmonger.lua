@@ -2,8 +2,6 @@
 -- Area: Pashhow Marshlands
 --   NM: Bo'Who Warmonger
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

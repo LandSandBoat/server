@@ -2,7 +2,6 @@
 -- Area: Batallia Downs
 --  Mob: Goblin Smithy
 -----------------------------------
-require("scripts/globals/regimes")
 local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}

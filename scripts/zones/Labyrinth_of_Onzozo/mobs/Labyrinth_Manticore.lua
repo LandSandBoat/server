@@ -4,7 +4,6 @@
 -- Note: Place holder Narasimha
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

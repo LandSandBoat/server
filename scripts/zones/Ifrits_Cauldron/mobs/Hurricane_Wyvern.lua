@@ -4,7 +4,6 @@
 -- Note: PH for Vouivre
 -----------------------------------
 local ID = zones[xi.zone.IFRITS_CAULDRON]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

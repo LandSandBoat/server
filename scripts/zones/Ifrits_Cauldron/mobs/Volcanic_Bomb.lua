@@ -2,8 +2,6 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Volcanic Bomb
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

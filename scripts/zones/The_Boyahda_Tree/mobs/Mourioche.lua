@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --  Mob: Mourioche
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

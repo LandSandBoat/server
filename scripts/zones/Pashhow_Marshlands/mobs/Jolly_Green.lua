@@ -3,7 +3,6 @@
 --   NM: Jolly Green
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 --  Mob: Specter
 -- Note: PH for N/E/S/W Shadow NMs
 -----------------------------------
-require("scripts/globals/regimes")
 local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}

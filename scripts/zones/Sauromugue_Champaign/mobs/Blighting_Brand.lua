@@ -3,7 +3,6 @@
 --   NM: Blighting Brand
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

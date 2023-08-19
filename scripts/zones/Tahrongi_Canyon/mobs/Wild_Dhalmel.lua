@@ -4,7 +4,6 @@
 -- Note: PH for Serpopard Ishtar
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

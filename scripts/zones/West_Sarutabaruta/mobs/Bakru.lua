@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta
 --  Mob: Bakru
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

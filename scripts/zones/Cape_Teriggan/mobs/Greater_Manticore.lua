@@ -4,7 +4,6 @@
 -- Note: Place Holder for Frostmane
 -----------------------------------
 local ID = zones[xi.zone.CAPE_TERIGGAN]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

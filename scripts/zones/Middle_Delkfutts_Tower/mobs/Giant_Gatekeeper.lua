@@ -4,7 +4,6 @@
 -- Note: PH for Rhoitos and Polybotes
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

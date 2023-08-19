@@ -4,7 +4,6 @@
 -- Note: PH for Daggerclaw Dracos
 -----------------------------------
 local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

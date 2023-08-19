@@ -3,7 +3,6 @@
 --  Mob: Sabotender Bailaor
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

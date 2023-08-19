@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta
 --  Mob: Savanna Rarab
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

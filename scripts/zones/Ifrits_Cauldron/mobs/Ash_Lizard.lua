@@ -2,8 +2,6 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Ash Lizard
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

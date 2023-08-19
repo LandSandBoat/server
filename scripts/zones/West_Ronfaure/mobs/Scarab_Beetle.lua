@@ -4,7 +4,6 @@
 -- Note: Place holder for Fungus Beetle
 -----------------------------------
 local ID = zones[xi.zone.WEST_RONFAURE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

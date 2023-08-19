@@ -2,8 +2,6 @@
 -- Area: East Sarutabaruta
 --  Mob: Giant Bee
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

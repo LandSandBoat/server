@@ -4,7 +4,6 @@
 -- Note: PH for Seww the Squidlimbed and Fyuu the Seabellow
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

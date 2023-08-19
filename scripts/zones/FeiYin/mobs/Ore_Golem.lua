@@ -2,8 +2,6 @@
 -- Area: FeiYin
 --  Mob: Ore Golem
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

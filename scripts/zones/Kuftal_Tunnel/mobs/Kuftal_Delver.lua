@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --  Mob: Kuftal Delver
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

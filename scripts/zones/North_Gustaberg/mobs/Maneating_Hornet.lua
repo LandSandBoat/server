@@ -4,7 +4,6 @@
 -- Note: Place Holder For Stinging Sophie
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

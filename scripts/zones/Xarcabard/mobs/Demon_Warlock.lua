@@ -2,8 +2,6 @@
 -- Area: Xarcabard
 --  Mob: Demon Warlock
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

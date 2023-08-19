@@ -4,7 +4,6 @@
 -- Note: PH for Demonic Tiphia
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

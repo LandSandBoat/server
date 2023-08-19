@@ -2,8 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --  NPC: Grounds Tome
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

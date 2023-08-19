@@ -2,8 +2,6 @@
 -- Area: Bostaunieux Oubliette
 --  Mob: Wurdalak
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

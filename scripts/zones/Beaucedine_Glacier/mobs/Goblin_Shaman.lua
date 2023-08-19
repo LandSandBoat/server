@@ -2,8 +2,6 @@
 -- Area: Beaucedine Glacier
 --  Mob: Goblin Shaman
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

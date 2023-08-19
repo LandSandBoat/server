@@ -4,7 +4,6 @@
 -- Note: PH for Donggu
 -----------------------------------
 local ID = zones[xi.zone.ORDELLES_CAVES]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Gusgen Mines
 --  Mob: Ghoul
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

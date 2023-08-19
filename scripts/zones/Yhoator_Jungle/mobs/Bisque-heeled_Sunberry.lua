@@ -3,7 +3,6 @@
 --   NM: Bisque-heeled Sunberry
 -----------------------------------
 mixins = { require("scripts/mixins/families/tonberry") }
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

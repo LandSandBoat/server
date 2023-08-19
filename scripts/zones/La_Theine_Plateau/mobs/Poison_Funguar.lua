@@ -3,7 +3,6 @@
 --  Mob: Poison Funguar
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

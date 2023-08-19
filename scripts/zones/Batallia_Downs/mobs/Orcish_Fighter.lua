@@ -2,8 +2,6 @@
 -- Area: Batallia Downs
 --  Mob: Orcish Fighter
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

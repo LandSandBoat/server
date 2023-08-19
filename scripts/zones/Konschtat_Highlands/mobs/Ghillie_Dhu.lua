@@ -3,7 +3,6 @@
 --   NM: Ghillie Dhu
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/regimes")
 require("scripts/globals/utils")
 require("scripts/quests/tutorial")
 -----------------------------------

@@ -2,8 +2,6 @@
 -- Area: East Sarutabaruta
 --  Mob: Bumblebee
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

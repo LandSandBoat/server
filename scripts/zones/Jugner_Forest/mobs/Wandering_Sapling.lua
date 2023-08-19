@@ -2,8 +2,6 @@
 -- Area: Jugner Forest
 --  Mob: Wandering Sapling
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

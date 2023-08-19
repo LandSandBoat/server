@@ -2,7 +2,6 @@
 -- Area: Tahrongi Canyon
 --  Mob: Canyon Rarab
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

@@ -2,8 +2,6 @@
 -- Field Manual
 -- Area: Yhoator Jungle
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

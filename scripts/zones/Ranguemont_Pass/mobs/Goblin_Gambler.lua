@@ -2,8 +2,6 @@
 -- Area: Ranguemont Pass
 --  Mob: Goblin Gambler
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

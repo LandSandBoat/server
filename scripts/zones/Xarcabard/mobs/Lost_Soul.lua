@@ -4,7 +4,6 @@
 -- Note: PH for Timeworn Warrior
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

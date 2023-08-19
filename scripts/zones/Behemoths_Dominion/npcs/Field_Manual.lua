@@ -2,8 +2,6 @@
 -- Field Manual
 -- Area: Behemoth's Dominion
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
