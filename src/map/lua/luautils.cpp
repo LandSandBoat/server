@@ -470,7 +470,7 @@ namespace luautils
         {
             std::string mob_name = PEntity->GetName();
 
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["actions"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -538,7 +538,7 @@ namespace luautils
             break;
         }
 
-        if (auto cached_func = lua["xi"]["globals"]["spells"][switchKey][name][funcName]; cached_func.valid())
+        if (auto cached_func = lua["xi"]["actions"]["spells"][switchKey][name][funcName]; cached_func.valid())
         {
             return cached_func;
         }
@@ -822,7 +822,7 @@ namespace luautils
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->GetName();
-            filename             = fmt::format("./scripts/globals/spells/trust/{}.lua", PEntity->GetName());
+            filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->GetName());
         }
 
         CacheLuaObjectFromFile(filename);
