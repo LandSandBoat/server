@@ -65,9 +65,9 @@ end
 --     : work with Lua hot-reloading (yet)!
 xi.events.registeredEvents =
 {
-    require("scripts/globals/events/starlight_celebration"),
-    require("scripts/globals/events/egg_hunt_egg-stravaganza"),
-    require("scripts/globals/events/mog_bonanza"),
+    require("scripts/events/starlight_celebration"),
+    require("scripts/events/egg_hunt_egg-stravaganza"),
+    require("scripts/events/mog_bonanza"),
 }
 
 xi.events.handler.checkSeasonalEvents = function()
