@@ -273,7 +273,7 @@ namespace luautils
         PopulateIDLookupsByFilename();
 
         // Then the rest...
-        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts/globals"))
         {
             if (entry.extension() == ".lua")
             {
@@ -470,7 +470,7 @@ namespace luautils
         {
             std::string mob_name = PEntity->GetName();
 
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["actions"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -538,7 +538,7 @@ namespace luautils
             break;
         }
 
-        if (auto cached_func = lua["xi"]["globals"]["spells"][switchKey][name][funcName]; cached_func.valid())
+        if (auto cached_func = lua["xi"]["actions"]["spells"][switchKey][name][funcName]; cached_func.valid())
         {
             return cached_func;
         }
@@ -822,7 +822,7 @@ namespace luautils
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->GetName();
-            filename             = fmt::format("./scripts/globals/spells/trust/{}.lua", PEntity->GetName());
+            filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->GetName());
         }
 
         CacheLuaObjectFromFile(filename);
@@ -3946,7 +3946,7 @@ namespace luautils
 
         auto name = wskill->getName();
 
-        auto onUseWeaponSkill = lua["xi"]["globals"]["weaponskills"][name]["onUseWeaponSkill"];
+        auto onUseWeaponSkill = lua["xi"]["actions"]["weaponskills"][name]["onUseWeaponSkill"];
         if (!onUseWeaponSkill.valid())
         {
             return std::tuple<int32, uint8, uint8>();
@@ -4036,7 +4036,7 @@ namespace luautils
         // Mob Skill Script
         auto mobskill_name = PMobSkill->getName();
 
-        auto onMobWeaponSkill = lua["xi"]["mobskills"][mobskill_name]["onMobWeaponSkill"];
+        auto onMobWeaponSkill = lua["xi"]["actions"]["mobskills"][mobskill_name]["onMobWeaponSkill"];
         if (!onMobWeaponSkill.valid())
         {
             return 0;
@@ -4059,7 +4059,7 @@ namespace luautils
 
         auto name = PMobSkill->getName();
 
-        auto onMobSkillCheck = lua["xi"]["mobskills"][name]["onMobSkillCheck"];
+        auto onMobSkillCheck = lua["xi"]["actions"]["mobskills"][name]["onMobSkillCheck"];
         if (!onMobSkillCheck.valid())
         {
             return 1;

@@ -10270,7 +10270,7 @@ void CLuaBaseEntity::reloadParty()
  *  Function: disableLevelSync()
  *  Purpose : Disables...wait for it...Level Sync
  *  Example : target:disableLevelSync()
- *  Notes   : Only used in scripts/globals/effects/level_sync.lua
+ *  Notes   : Only used in scripts/effects/level_sync.lua
  ************************************************************************/
 
 void CLuaBaseEntity::disableLevelSync()
@@ -11273,7 +11273,7 @@ uint16 CLuaBaseEntity::getBattleID()
  *  Function: recalculateStats()
  *  Purpose : Recalculate the total Stats for a PC (force update)
  *  Example : target:recalculateStats()
- *  Notes   : See scripts/globals/effects/obliviscence.lua
+ *  Notes   : See scripts/effects/obliviscence.lua
  ************************************************************************/
 
 void CLuaBaseEntity::recalculateStats()
@@ -12862,7 +12862,7 @@ uint8 CLuaBaseEntity::getOverloadChance(uint8 element)
  *  Function: setStatDebilitation()
  *  Purpose : Updates the private member m_StatsDebilitation in CCharEntity
  *  Example : target:setStatDebilitation(power)
- *  Notes   : Used only through scripts/globals/effects/debilitation.lua
+ *  Notes   : Used only through scripts/effects/debilitation.lua
  ************************************************************************/
 
 void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)

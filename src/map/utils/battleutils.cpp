@@ -181,7 +181,7 @@ namespace battleutils
                 g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
                 g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
 
-                auto filename = fmt::format("./scripts/globals/weaponskills/{}.lua", PWeaponSkill->getName());
+                auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -224,7 +224,7 @@ namespace battleutils
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
-                auto filename = fmt::format("./scripts/mobskills/{}.lua", PMobSkill->getName());
+                auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
