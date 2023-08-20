@@ -68,7 +68,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     local jpValue = player:getJobPointLevel(xi.jp.EAGLE_EYE_SHOT_EFFECT)
     player:addMod(xi.mod.ALL_WSDMG_ALL_HITS, jpValue * 3)
 
-    local damage, _, tpHits, extraHits = doRangedWeaponskill(player, target, 0, params, 0, action, true)
+    local damage, _, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, 0, params, 0, action, true)
 
     -- Set the message id ourselves
     if tpHits + extraHits > 0 then

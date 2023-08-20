@@ -34,7 +34,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.int_wsc = 0.7 + (player:getMerit(xi.merit.SHATTERSOUL) * 0.03)
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) then
         target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 120)

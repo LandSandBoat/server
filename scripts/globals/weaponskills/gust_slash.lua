@@ -29,7 +29,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftp300 = 3 -- http://wiki.ffo.jp/html/682.html
     end
 
-    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
 end
 

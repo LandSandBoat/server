@@ -28,7 +28,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.vit_wsc = 0.8
     end
 
-    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
         local duration = (tp / 1000 * 60) * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)

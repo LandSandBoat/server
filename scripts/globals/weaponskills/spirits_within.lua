@@ -71,7 +71,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     damage = damage * xi.settings.main.WEAPON_SKILL_POWER
     calcParams.finalDmg = damage
 
-    damage = takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
+    damage = xi.weaponskills.takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
 end

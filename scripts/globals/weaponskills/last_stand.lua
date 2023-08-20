@@ -37,7 +37,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) * 0.03)
     end
 
-    local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
 end
 

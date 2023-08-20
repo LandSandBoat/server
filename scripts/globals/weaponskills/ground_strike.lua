@@ -26,7 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1.75 params.atk200 = 1.75 params.atk300 = 1.75
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end
 

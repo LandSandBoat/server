@@ -31,7 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.atk100 = 2 params.atk200 = 2 params.atk300 = 2
     end
 
-    local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
 end
 

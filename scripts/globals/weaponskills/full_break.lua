@@ -28,7 +28,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 then
         local duration = (tp / 1000 * 30) + 60

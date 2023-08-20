@@ -43,7 +43,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
     -- damage = damage * ftp(tp, ftp100, ftp200, ftp300)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     return tpHits, extraHits, criticalHit, damage
 end
