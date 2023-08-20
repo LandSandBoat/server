@@ -13,8 +13,8 @@ xi.events.mogBonanza.entities = xi.events.mogBonanza.entities or {}
 
 local localSettings =
 {
-    PEARL_COST            = 200000, -- NOTE: This number is hardcoded in the event
-    MAX_PEARLS            = 1,
+    PEARL_COST            = 300000, -- NOTE: This number is hardcoded in the event
+    MAX_PEARLS            = 3,
     DISABLE_PRIMEVAL_BREW = 1,      -- 0 will turn on the prank the moogle shows when purchasing
 
     -- 0x55: New Year's Nomad Mog Bonanza 2021
@@ -24,10 +24,10 @@ local localSettings =
     BONANZA_ID = 0x5C,
 
     -- These are local times, and should be tweaked based on your time zone
-    BUYING_PERIOD_START     = os.time({ year = 2023, month = 5, day = 17, hour = 1, min =  0 }),
-    BUYING_PERIOD_END       = os.time({ year = 2023, month = 6, day = 15, hour = 7, min = 59 }),
-    COLLECTION_PERIOD_START = os.time({ year = 2023, month = 7, day = 11, hour = 1, min =  0 }),
-    COLLECTION_PERIOD_END   = os.time({ year = 2023, month = 7, day = 31, hour = 7, min = 59 }),
+    BUYING_PERIOD_START     = os.time({ year = 2023, month = 8, day = 20, hour = 11, min =  0 }),
+    BUYING_PERIOD_END       = os.time({ year = 2023, month = 9, day =  2, hour = 11, min =  0 }),
+    COLLECTION_PERIOD_START = os.time({ year = 2023, month = 9, day =  2, hour = 18, min = 30 }),
+    COLLECTION_PERIOD_END   = os.time({ year = 2023, month = 9, day = 30, hour = 23, min = 59 }),
 
     COLLECTION_SERVER_MESSAGE =
         'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
@@ -98,32 +98,21 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.ICE_BRAND,
-            [ 1] = xi.items.ONION_SWORD_III,
-            [ 2] = xi.items.AIR_KNIFE,
-            [ 3] = xi.items.ZANMATO_P2,
-            [ 4] = xi.items.DRAGON_FANGS,
-            [ 5] = xi.items.MALEFIC_AXE,
-            [ 6] = xi.items.DRASTIC_AXE,
-            [ 7] = xi.items.ARTEMISS_BOW_P2,
-            [ 8] = xi.items.MIRACLE_CHEER,
-            [ 9] = xi.items.FINAL_SICKLE,
-            [10] = xi.items.PANDITS_STAFF,
-            [11] = xi.items.CHOCOBO_KNIFE,
-            [12] = xi.items.DIAMOND_ASPIS,
-            [13] = xi.items.FLAMETONGUE,
-            [14] = xi.items.MUTSU_NO_KAMI_YOSHIYUKI,
-            [15] = xi.items.HEBOS_SPEAR,
-            [16] = xi.items.PREMIUM_HEART,
-            [17] = xi.items.SAVE_THE_QUEEN_III,
-            [18] = xi.items.YAGYU_DARKBLADE,
-            [19] = xi.items.BRAVE_BLADE_III,
-            [20] = xi.items.WIZARDS_ROD,
-            [21] = xi.items.EXETER,
-            [22] = xi.items.COPY_OF_JUDGMENT_DAY,
-            [23] = xi.items.EBISU_FISHING_ROD,
-            [24] = xi.items.MOG_KUPON_AW_KUPO,
-            [25] = xi.items.ABDHALJS_TOME,
+            [ 0] = xi.items.CATS_EYE,
+            [ 1] = xi.items.TEN_THOUSAND_BYNE_BILL,
+            [ 2] = xi.items.RIMILALA_STRIPESHELL,
+            [ 3] = xi.items.RANPERRE_GOLDPIECE,
+            [ 4] = xi.items.OCTAVE_CLUB,
+            [ 5] = xi.items.EBISU_FISHING_ROD,
+            [ 6] = xi.items.BOREALIS,
+            [ 7] = xi.items.DREPANUM,
+            [ 8] = xi.items.IKARIGIRI,
+            [ 9] = xi.items.XOANON,
+            [10] = xi.items.KARAMBIT,
+            [11] = xi.items.HIMTHIGE,
+            [12] = xi.items.EPHEMERON,
+            [13] = xi.items.ULLR,
+            [14] = xi.items.SAGASINGER,
         },
     },
 
@@ -134,26 +123,18 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.MOG_KUPON_A_OMII,
-            [ 1] = xi.items.MOG_KUPON_AW_UWIII,
-            [ 2] = xi.items.MOG_KUPON_I_AF119,
-            [ 3] = xi.items.MOG_KUPON_AW_VGR,
-            [ 4] = xi.items.MOG_KUPON_I_RME,
-            [ 5] = xi.items.MOG_KUPON_W_PULSE,
-            [ 6] = xi.items.MOG_KUPON_AW_VGRII,
-            [ 7] = xi.items.MOG_KUPON_W_JOB,
-            [ 8] = xi.items.MOG_KUPON_A_DEII,
-            [ 9] = xi.items.MOG_KUPON_W_DEIII,
-            [10] = xi.items.WAILING_BELT,
-            [11] = xi.items.SHAPERS_SHAWL,
-            [12] = xi.items.TEN_THOUSAND_BYNE_BILL,
-            [13] = xi.items.RANPERRE_GOLDPIECE,
-            [14] = xi.items.RIMILALA_STRIPESHELL,
-            [15] = xi.items.BAYLD_CRYSTAL,
-            [16] = xi.items.DENSE_CLUSTER,
-            [17] = xi.items.CATS_EYE,
-            [18] = xi.items.MOG_KUPON_AW_GFIII,
-            [19] = xi.items.LU_SHANGS_FISHING_ROD,
+            [ 0] = 16275, -- ancient_torque
+            [ 1] = 13566, -- defending_ring
+            [ 2] = 16555, -- ridill
+            [ 3] = 17738, -- hauteclaire
+            [ 4] = 14808, -- novio_earring
+            [ 5] = 16117, -- valhalla_helm
+            [ 6] = 14577, -- valhalla_breastplate
+            [ 7] = 11285, -- morganas_cotehardie
+            [ 8] = 19212, -- black_tathlum
+            [ 9] = 19213, -- white_tathlum
+            [10] = 15458, -- ninurtas_sash
+            [11] =  9178, -- mog_kupon_a-ab
         },
     },
 
@@ -164,32 +145,18 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.MOG_KUPON_AW_UW,
-            [ 1] = xi.items.MOG_KUPON_AW_COS,
-            [ 2] = xi.items.AUCUBA_CROWN,
-            [ 3] = xi.items.CURMUDGEONS_HELMET,
-            [ 4] = xi.items.GAZERS_HELMET,
-            [ 5] = xi.items.RETCHING_HELMET,
-            [ 6] = xi.items.KARAKUL_CAP,
-            [ 7] = xi.items.HOTENGEKI,
-            [ 8] = xi.items.GRUDGE,
-            [ 9] = xi.items.PLUTON_COFFER,
-            [10] = xi.items.BEITETSU_COFFER,
-            [11] = xi.items.RIFT_BOULDER_COFFER,
-            [12] = xi.items.MARBLE_MOG_PELL,
-            [13] = xi.items.OCHRE_MOG_PELL,
-            [14] = xi.items.MARS_ORB,
-            [15] = xi.items.CHOCOBO_ROPE,
-            [16] = xi.items.CHOCOBO_TORQUE,
-            [17] = xi.items.MOG_KUPON_A_SAP,
-            [18] = xi.items.MOG_KUPON_A_JAD,
-            [19] = xi.items.MOG_KUPON_A_RUB,
-            [20] = xi.items.DEMONIC_AXE,
-            [21] = xi.items.BRAVE_BLADE_II,
-            [22] = xi.items.ONION_SWORD_II,
-            [23] = xi.items.MOG_KUPON_I_ORCHE,
-            [24] = xi.items.SHEET_OF_PROMATHIAN_TUNES,
-            [25] = xi.items.SHEET_OF_ADOULINIAN_TUNES,
+            [ 0] = 17857, -- animator_+1
+            [ 1] = 15617, -- barbarossas_zerehs
+            [ 2] = 16242, -- ixion_cape
+            [ 3] = 16267, -- ritter_gorget
+            [ 4] = 15899, -- velocious_belt
+            [ 5] = 18847, -- seveneyes
+            [ 6] = 11289, -- ixion_cloak
+            [ 7] =  2330, -- yoichis_sash
+            [ 8] = 11288, -- zahaks_mail
+            [ 9] =  2573, -- jug_of_monkey_wine
+            [10] =  2583, -- buffalo_corpse
+            [11] =  2593, -- chunk_of_singed_buffalo
         },
     },
 }
@@ -312,6 +279,9 @@ xi.events.mogBonanza.onBonanzaMoogleTrigger = function(player, npc)
     if xi.events.mogBonanza.enabledCheck() then
         local baseCs = csidLookup[player:getZoneID()]
 
+        -- Alert player to price of pearl
+        player:PrintToPlayer("NOTICE: Bonazna pearls are 300,000g for QoL, and 30,000 for Crystal Warriors!")
+
         if isInPurchasingPeriod() then
             player:startEvent(baseCs,
                 localSettings.MAX_PEARLS,
@@ -363,6 +333,9 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
             local selectedNumber = bit.rshift(option, 8)
 
             if
+                player:isCrystalWarrior() and
+                player:getGil() < 30000 or
+                not player:isCrystalWarrior() and
                 player:getGil() < localSettings.PEARL_COST or
                 player:getFreeSlotsCount() == 0
             then
@@ -392,7 +365,12 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
                 local selectedNumber = player:getLocalVar('selectedNumber')
                 local ID             = zones[zoneId]
 
-                player:delGil(localSettings.PEARL_COST)
+                if player:isCrystalWarrior() then
+                    player:delGil(30000)
+                else
+                    player:delGil(localSettings.PEARL_COST)
+                end
+
                 giveBonanzaPearl(player, selectedNumber)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BONANZA_PEARL)
             end
@@ -415,7 +393,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
                 end
             elseif
                 optionType == 6 and
-                npcUtil.giveItem(player, xi.items.BONANZA_BISCUIT)
+                npcUtil.giveItem(player, { { 5724, 3 } }) -- pinch_of_pungent_powder
             then
                 player:confirmTrade()
             end
