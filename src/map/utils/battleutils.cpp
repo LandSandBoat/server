@@ -181,7 +181,7 @@ namespace battleutils
                 g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
                 g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
 
-                auto filename = fmt::format("./scripts/globals/weaponskills/{}.lua", PWeaponSkill->getName());
+                auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
