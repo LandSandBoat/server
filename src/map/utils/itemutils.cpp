@@ -518,7 +518,7 @@ namespace itemutils
 
                     g_pItemList[PItem->getID()] = PItem;
 
-                    auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+                    auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
                     luautils::CacheLuaObjectFromFile(filename);
                 }
             }

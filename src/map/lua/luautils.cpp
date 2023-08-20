@@ -2746,7 +2746,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemCheck = GetCacheEntryFromFilename(filename)["onItemCheck"].get<sol::function>();
         if (!onItemCheck.valid())
@@ -2783,7 +2783,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemUse = GetCacheEntryFromFilename(filename)["onItemUse"].get<sol::function>();
         if (!onItemUse.valid())
@@ -2808,7 +2808,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemDrop = GetCacheEntryFromFilename(filename)["onItemDrop"].get<sol::function>();
         if (!onItemDrop.valid())
@@ -2832,7 +2832,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemEquip = GetCacheEntryFromFilename(filename)["onItemEquip"].get<sol::function>();
         if (!onItemEquip.valid())
@@ -2856,7 +2856,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemUnequip = GetCacheEntryFromFilename(filename)["onItemUnequip"].get<sol::function>();
         if (!onItemUnequip.valid())
@@ -5454,7 +5454,7 @@ namespace luautils
 
         auto name = PItem->getName();
 
-        auto onFurniturePlaced = lua["xi"]["globals"]["items"][name]["onFurniturePlaced"];
+        auto onFurniturePlaced = lua["xi"]["items"][name]["onFurniturePlaced"];
         if (!onFurniturePlaced.valid())
         {
             return;
@@ -5476,7 +5476,7 @@ namespace luautils
 
         auto name = PItem->getName();
 
-        auto onFurnitureRemoved = lua["xi"]["globals"]["items"][name]["onFurnitureRemoved"];
+        auto onFurnitureRemoved = lua["xi"]["items"][name]["onFurnitureRemoved"];
         if (!onFurnitureRemoved.valid())
         {
             return;
