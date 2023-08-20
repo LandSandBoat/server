@@ -80,8 +80,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    doAutoPhysicalWeaponskill
-    doAutoRangedWeaponskill
     doesElementMatchWeaponskill
     applyResistanceAddEffect
 

@@ -55,7 +55,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         end
     end
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     if damage > 0 then
         if not target:isUndead() then

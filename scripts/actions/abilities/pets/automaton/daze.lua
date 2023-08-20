@@ -38,7 +38,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         params.ftp300 = 11.0
     end
 
-    local damage = doAutoRangedWeaponskill(automaton, target, 0, params, skill:getTP(), true, skill, action)
+    local damage = xi.autows.doAutoRangedWeaponskill(automaton, target, 0, params, skill:getTP(), true, skill, action)
 
     if damage > 0 then
         local chance = 0.033 * skill:getTP()

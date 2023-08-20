@@ -38,7 +38,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         params.accBonus = 0.05 * skill:getTP()
     end
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     return damage
 end
