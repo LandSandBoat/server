@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: NM
 -----------------------------------
-require('scripts/globals/additional_effects')
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

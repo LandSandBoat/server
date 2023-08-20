@@ -2,8 +2,6 @@
 -- Area: Apollyon
 -- Name:
 -----------------------------------
-require("scripts/globals/limbus")
------------------------------------
 local battlefieldObject = {}
 
 -- After registering the BCNM via bcnmRegister(bcnmid)

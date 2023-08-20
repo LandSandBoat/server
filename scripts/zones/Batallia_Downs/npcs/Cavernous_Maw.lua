@@ -4,8 +4,6 @@
 -- !pos -48 0.1 435 105
 -- Teleports Players to Batallia Downs [S]
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,12 +5,11 @@
 -- Confirmed shop stock, August 2013
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

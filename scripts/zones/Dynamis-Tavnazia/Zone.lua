@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Tavnazia
 -----------------------------------
-require('scripts/globals/dynamis')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

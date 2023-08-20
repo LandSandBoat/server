@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Yughott_Grotto (142)
 -----------------------------------
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

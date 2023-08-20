@@ -2,8 +2,6 @@
 -- Area: Ifrit's Cauldron
 --  NPC: Treasure Casket
 -----------------------------------
-require("scripts/globals/caskets")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -2,8 +2,6 @@
 -- Area: Southern San d'Oria [S]
 --  NPC: Moogle
 -----------------------------------
-require("scripts/globals/moghouse")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

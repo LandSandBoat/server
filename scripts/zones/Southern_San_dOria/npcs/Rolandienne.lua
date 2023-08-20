@@ -4,7 +4,6 @@
 -- Records of Eminence NPC
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/sparkshop")
 -----------------------------------
 local entity = {}
 

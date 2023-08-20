@@ -2,8 +2,6 @@
 -- Area: Bastok Markets
 --  NPC: Artisan Moogle
 -----------------------------------
-require("scripts/globals/artisan")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

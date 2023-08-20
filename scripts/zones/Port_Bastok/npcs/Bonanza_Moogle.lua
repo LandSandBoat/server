@@ -3,8 +3,6 @@
 --  NPC: Bonanza Moogle
 -- !pos TODO
 -----------------------------------
-require('scripts/globals/events/mog_bonanza')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

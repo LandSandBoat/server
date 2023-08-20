@@ -1,7 +1,6 @@
 -----------------------------------
 -- Assault: Troll Fugitives
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.LEBROS_CAVERN]
 -----------------------------------
 local instanceObject = {}

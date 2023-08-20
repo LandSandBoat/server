@@ -1,7 +1,6 @@
 -----------------------------------
 -- Assault: Preemptive Strike
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 local instanceObject = {}

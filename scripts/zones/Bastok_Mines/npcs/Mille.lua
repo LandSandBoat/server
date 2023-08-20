@@ -4,12 +4,11 @@
 -- Norvallen Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MINES]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

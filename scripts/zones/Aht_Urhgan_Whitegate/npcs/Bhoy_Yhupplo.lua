@@ -4,9 +4,6 @@
 -- Type: Assault Mission Giver
 -- !pos 127.474 0.161 -30.418 50
 -----------------------------------
-require("scripts/globals/assault")
-require("scripts/globals/extravaganza")
------------------------------------
 local entity = {}
 
 local items =

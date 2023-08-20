@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Upper_Jeuno (244)
 -----------------------------------
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

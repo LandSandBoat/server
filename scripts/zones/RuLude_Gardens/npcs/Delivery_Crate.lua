@@ -4,8 +4,6 @@
 -- NPC used in magian trials
 -- !pos -11.844 3.099 120.421 243
 -----------------------------------
-require("scripts/globals/magiantrials")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

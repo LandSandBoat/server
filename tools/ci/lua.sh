@@ -107,10 +107,6 @@ global_objects=(
     error
     onTrigger
 
-    applyHalloweenNpcCostumes
-    isHalloweenEnabled
-    onHalloweenTrade
-
     addBonuses
     addBonusesAbility
     applyResistance

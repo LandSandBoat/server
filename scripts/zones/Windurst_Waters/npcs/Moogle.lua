@@ -2,8 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Moogle
 -----------------------------------
-require("scripts/globals/moghouse")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,7 +2,6 @@
 -- Area: Arrapago Remnants
 --  Mob: Qiqirn Treasure Hunter
 -----------------------------------
-require("scripts/globals/mobskills")
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}

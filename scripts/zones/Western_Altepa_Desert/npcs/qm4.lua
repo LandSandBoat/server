@@ -4,7 +4,6 @@
 -- !pos -113.454 -4.459 -58.319 125
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}
 

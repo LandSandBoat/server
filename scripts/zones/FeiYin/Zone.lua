@@ -2,9 +2,6 @@
 -- Zone: FeiYin (204)
 -----------------------------------
 local ID = zones[xi.zone.FEIYIN]
-require('scripts/globals/missions')
-require('scripts/globals/treasure')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

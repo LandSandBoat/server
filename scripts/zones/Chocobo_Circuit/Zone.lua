@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Chocobo_Circuit
 -----------------------------------
-require('scripts/globals/chocobo_racing')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

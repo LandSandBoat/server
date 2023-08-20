@@ -2,8 +2,6 @@
 -- Area: Crawlers' Nest
 --   NM: Aqrabuamelu
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

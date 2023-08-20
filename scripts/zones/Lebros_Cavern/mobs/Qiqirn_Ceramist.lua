@@ -3,7 +3,6 @@
 --  Mob: Qiqirn Ceramist
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
-require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
 

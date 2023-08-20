@@ -3,7 +3,6 @@
 --  Mob: Qiqirn Volcanist
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
-require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
 

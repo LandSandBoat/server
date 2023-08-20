@@ -2,7 +2,6 @@
 -- Area: Misareaux Coast
 --  Mob: Warder Thalia
 -----------------------------------
-require('scripts/globals/missions')
 mixins = { require('scripts/mixins/warders_cop') }
 -----------------------------------
 local entity = {}

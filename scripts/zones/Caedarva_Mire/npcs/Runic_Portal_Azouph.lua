@@ -6,8 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

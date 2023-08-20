@@ -1,7 +1,6 @@
 -----------------------------------
 -- Salvage: Arrapago Remnants
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local instanceObject = {}

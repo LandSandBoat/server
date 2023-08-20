@@ -2,8 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Satata
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

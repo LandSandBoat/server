@@ -2,8 +2,6 @@
 -- Zone: North_Gustaberg (106)
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

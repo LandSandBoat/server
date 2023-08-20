@@ -4,8 +4,6 @@
 -- Type: Mog Tablet
 -- !pos -5.687 8.999 -41.341 243
 -----------------------------------
-require('scripts/globals/mog_tablets')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

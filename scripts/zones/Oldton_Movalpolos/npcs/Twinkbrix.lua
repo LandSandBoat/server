@@ -4,8 +4,6 @@
 -- Type: Warp NPC
 -- !pos -292.779 6.999 -263.153 11
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

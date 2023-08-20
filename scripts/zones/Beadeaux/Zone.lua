@@ -2,8 +2,6 @@
 -- Zone: Beadeaux (147)
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX]
-require('scripts/globals/treasure')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

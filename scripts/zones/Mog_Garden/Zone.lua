@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mog Garden (280)
 -----------------------------------
-require('scripts/globals/mog_garden')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

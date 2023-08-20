@@ -1,8 +1,6 @@
 -----------------------------------
 -- doomvoid
 -----------------------------------
-require("scripts/globals/instance")
------------------------------------
 local instanceObject = {}
 
 instanceObject.onInstanceCreated = function(instance)

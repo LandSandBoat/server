@@ -3,7 +3,6 @@
 -- !instance 30000
 -----------------------------------
 local ID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
-require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 

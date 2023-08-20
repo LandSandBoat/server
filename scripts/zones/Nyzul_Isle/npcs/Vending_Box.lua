@@ -3,8 +3,6 @@
 -- NPC:   Vending Box
 -- Notes: Pick Temp items for assault
 -----------------------------------
-require("scripts/globals/nyzul/vending_box")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

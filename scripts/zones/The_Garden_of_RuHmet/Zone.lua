@@ -2,7 +2,6 @@
 -- Zone: The_Garden_of_RuHmet (35)
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

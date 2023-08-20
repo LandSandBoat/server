@@ -4,8 +4,6 @@
 -- Type: Manaclipper Timekeeper
 -- !pos -392 -3 -385 4
 -----------------------------------
-require("scripts/globals/manaclipper")
------------------------------------
 local entity = {}
 
 local timekeeperLocation = xi.manaclipper.location.PURGONORGO_ISLE

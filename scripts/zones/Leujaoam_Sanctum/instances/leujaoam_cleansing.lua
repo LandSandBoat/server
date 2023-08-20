@@ -3,8 +3,6 @@
 -- instance 6900
 -----------------------------------
 local ID = zones[xi.zone.LEUJAOAM_SANCTUM]
-require("scripts/globals/assault")
-require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 

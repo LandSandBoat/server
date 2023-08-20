@@ -3,8 +3,6 @@
 --  NPC: Greeter Moogle
 -- !pos -203 -0.276 -139 239
 -----------------------------------
-require("scripts/globals/events/login_campaign")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

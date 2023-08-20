@@ -2,8 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Explorer Moogle
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 local eventId = 854

@@ -4,8 +4,6 @@
 -- Type: Chocobo Renter
 -- !pos 85 1 -51 80
 -----------------------------------
-require("scripts/globals/chocobo")
------------------------------------
 local entity = {}
 
 local eventSucceed = 106

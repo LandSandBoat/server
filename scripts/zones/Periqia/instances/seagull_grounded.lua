@@ -2,8 +2,6 @@
 -- Assault: Seagull Grounded
 -----------------------------------
 local ID = zones[xi.zone.PERIQIA]
-require("scripts/globals/assault")
-require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 

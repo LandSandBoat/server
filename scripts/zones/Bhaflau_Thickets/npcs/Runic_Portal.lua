@@ -6,8 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

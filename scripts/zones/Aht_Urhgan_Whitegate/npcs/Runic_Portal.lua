@@ -5,9 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/assault")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

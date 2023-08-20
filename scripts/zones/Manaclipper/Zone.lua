@@ -2,7 +2,6 @@
 -- Zone: Manaclipper
 -----------------------------------
 local ID = zones[xi.zone.MANACLIPPER]
-require('scripts/globals/manaclipper')
 -----------------------------------
 local zoneObject = {}
 

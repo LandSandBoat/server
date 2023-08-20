@@ -5,7 +5,6 @@
 -- !pos 123.754 0.000 92.125 230
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
 

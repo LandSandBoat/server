@@ -4,8 +4,6 @@
 -- Type: Chocobo Vendor
 -- !pos 133.24 -5.250 -126.76 241
 -----------------------------------
-require("scripts/globals/chocobo")
------------------------------------
 local entity = {}
 
 local eventSucceed = 10002

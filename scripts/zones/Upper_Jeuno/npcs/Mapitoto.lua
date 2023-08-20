@@ -5,7 +5,6 @@
 -- !pos -54.310 8.200 85.940 244
 -----------------------------------
 local ID = zones[xi.zone.UPPER_JEUNO]
-require("scripts/globals/chocobo")
 -----------------------------------
 local entity = {}
 

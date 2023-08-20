@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Norg (252)
 -----------------------------------
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

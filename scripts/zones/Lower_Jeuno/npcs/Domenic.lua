@@ -3,8 +3,6 @@
 --  NPC: Domenic
 -- BCNM/KSNM Teleporter
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

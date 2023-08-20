@@ -2,7 +2,6 @@
 -- Zone: Mount_Zhayolm (61)
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

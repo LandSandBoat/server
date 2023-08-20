@@ -4,8 +4,6 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17134281
 -----------------------------------
-require('scripts/globals/extravaganza')
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

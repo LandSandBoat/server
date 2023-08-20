@@ -2,8 +2,6 @@
 -- Area: Al'Taieu
 --   NM: Jailer of Justice
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

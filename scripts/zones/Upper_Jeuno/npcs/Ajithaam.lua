@@ -3,8 +3,6 @@
 --  NPC: Ajithaam
 -- !pos -82 0.1 160 244
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

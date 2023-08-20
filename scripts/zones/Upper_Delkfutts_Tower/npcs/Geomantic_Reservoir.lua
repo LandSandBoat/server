@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Vex
 -- !pos -358.799 -175.425 82.985 158
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

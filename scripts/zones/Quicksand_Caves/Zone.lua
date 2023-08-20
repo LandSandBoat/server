@@ -2,7 +2,6 @@
 -- Zone: Quicksand_Caves (208)
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

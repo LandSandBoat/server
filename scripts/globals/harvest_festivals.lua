@@ -3,8 +3,13 @@
 -----------------------------------
 require("scripts/globals/utils")
 -----------------------------------
+xi = xi or {}
+xi.events = xi.events or {}
+xi.events.harvestFestival = xi.events.harvestFestival or {}
 
-function isHalloweenEnabled()
+-- TODO: Convert this to use event handler and cleanup
+
+xi.events.harvestFestival.isHalloweenEnabled = function()
     local option = 0
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
@@ -76,11 +81,11 @@ local function halloweenItemsCheck(player)
     return reward
 end
 
-function onHalloweenTrade(player, trade, npc)
+xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
     local zone = player:getZoneName()
     local ID = zones[player:getZoneID()]
 
-    local contentEnabled = isHalloweenEnabled()
+    local contentEnabled = xi.events.harvestFestival.isHalloweenEnabled()
     local item = trade:getItemId()
     -----------------------------------
     -- 2005 edition
@@ -234,8 +239,8 @@ function onHalloweenTrade(player, trade, npc)
     end
 end
 
-function applyHalloweenNpcCostumes(zoneid)
-    if isHalloweenEnabled() ~= 0 then
+xi.events.harvestFestival.applyHalloweenNpcCostumes = function(zoneid)
+    if xi.events.harvestFestival.isHalloweenEnabled() ~= 0 then
         local skins = zones[zoneid].npc.HALLOWEEN_SKINS
         if skins then
             for id, skin in pairs(skins) do

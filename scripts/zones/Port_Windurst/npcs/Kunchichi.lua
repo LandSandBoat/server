@@ -3,8 +3,6 @@
 --  NPC: Kunchichi
 -- !pos -115.933 -4.25 109.533 240
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

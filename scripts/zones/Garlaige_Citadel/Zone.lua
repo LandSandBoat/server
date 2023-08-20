@@ -2,7 +2,6 @@
 -- Zone: Garlaige_Citadel (200)
 -----------------------------------
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

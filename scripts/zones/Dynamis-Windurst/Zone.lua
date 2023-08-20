@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Windurst
 -----------------------------------
-require('scripts/globals/dynamis')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

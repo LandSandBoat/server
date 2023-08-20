@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta_[S] (95)
 -----------------------------------
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

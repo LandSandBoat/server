@@ -2,8 +2,6 @@
 -- Area: Apollyon NW, Floor 5
 --  Mob: Kaiser Behemoth
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onSpellPrecast = function(mob, spell)

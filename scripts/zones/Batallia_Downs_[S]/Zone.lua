@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Batallia_Downs_[S] (84)
 -----------------------------------
-require('scripts/globals/voidwalker')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

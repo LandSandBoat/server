@@ -4,8 +4,6 @@
 -- !pos 486 -23 -500 79
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
-require("scripts/globals/assault")
-require("scripts/globals/instance")
 -----------------------------------
 local entity = {}
 

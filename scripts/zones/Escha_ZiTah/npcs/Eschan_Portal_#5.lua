@@ -3,8 +3,6 @@
 -- NPC: Eschan Portal #5
 -- !pos 246 0.247 -148 288
 -----------------------------------
-require("scripts/globals/teleports/eschan_portals")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

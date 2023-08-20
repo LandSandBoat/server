@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Al_Zahbi (48)
 -----------------------------------
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
