@@ -2,9 +2,7 @@
 -- ID: 5845
 -- Item: bottle_of_fanatics_tonic
 -- Item Effect: When applied, grants DMGPHYS -5000 for 60s
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

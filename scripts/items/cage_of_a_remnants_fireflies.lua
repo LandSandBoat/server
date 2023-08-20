@@ -3,8 +3,6 @@
 -- A. Rem. Fireflies
 -- Transports the user out of Arrapago Remnants
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

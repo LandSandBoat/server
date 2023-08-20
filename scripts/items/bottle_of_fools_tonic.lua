@@ -3,9 +3,7 @@
 -- Item: bottle_of_fools_tonic
 -- Item Effect: When applied, grants DMGMAGIC -5000 for 60s
 --              Does not Grant Spell Immunity (nospellimmune = 1)
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

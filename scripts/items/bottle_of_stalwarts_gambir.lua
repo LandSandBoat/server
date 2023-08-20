@@ -2,9 +2,7 @@
 -- ID: 5840
 -- Item: bottle_of_stalwarts_gambir
 -- Item Effect: ACC 100 RACC 100 RATTP 50 ATTP 50
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

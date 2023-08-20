@@ -2,8 +2,6 @@
 -- ID: 4
 -- Item: Mahogany Bed
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local itemObject = {}
 
 itemObject.onFurniturePlaced = function(player)

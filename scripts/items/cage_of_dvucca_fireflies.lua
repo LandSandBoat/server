@@ -3,8 +3,6 @@
 -- Dvucca Fireflies
 -- Transports the user to Dvucca Isle Staging Point
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

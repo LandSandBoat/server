@@ -3,8 +3,6 @@
 -- Warp Ring
 --  Transports the user to their Home Point
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

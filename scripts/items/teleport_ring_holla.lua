@@ -3,8 +3,6 @@
 -- Teleport ring: Holla
 -- Enchantment: "Teleport-Holla"
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- ID 5368
 -- Unlocks hand equipment
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

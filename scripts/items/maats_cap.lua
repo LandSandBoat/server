@@ -3,8 +3,6 @@
 -- Item: Maats Cap
 -- Teleports to Ru'Lude gardens
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

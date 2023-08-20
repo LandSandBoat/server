@@ -3,8 +3,6 @@
 -- Ram Staff
 -- Enchantment: "Retrace" (Southern San d'Oria[S])
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

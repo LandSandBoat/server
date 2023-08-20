@@ -5,7 +5,6 @@
 -----------------------------------
 local itemObject = {}
 
-require("scripts/globals/teleports")
 
 itemObject.onItemCheck = function(target)
     local result = 0

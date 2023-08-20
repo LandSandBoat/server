@@ -2,9 +2,7 @@
 -- ID: 5394
 -- Item: bottle_of_gnostics_drink
 -- Item Effect: Enmity -
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

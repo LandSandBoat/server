@@ -3,8 +3,6 @@
 -- Ducal Guard Ring
 -- Enchantment: "Teleport-RuLude Gardens"
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

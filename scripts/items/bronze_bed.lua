@@ -2,8 +2,6 @@
 -- ID: 5
 -- Item: Bronze Bed
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local itemObject = {}
 
 itemObject.onFurniturePlaced = function(player)

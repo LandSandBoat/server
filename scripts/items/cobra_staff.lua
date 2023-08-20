@@ -3,8 +3,6 @@
 -- Cobra Staff
 -- Enchantment: "Retrace" (Windurst Waters[S])
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

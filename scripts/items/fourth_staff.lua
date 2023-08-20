@@ -3,8 +3,6 @@
 -- Fourth Staff
 -- Enchantment: "Retrace" (Bastok Markets[S])
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

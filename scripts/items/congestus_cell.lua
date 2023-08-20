@@ -3,8 +3,6 @@
 -- ID 5378
 -- Removes VIT Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

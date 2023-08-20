@@ -3,8 +3,6 @@
 -- ID 5372
 -- Unlocks earring and ring equipment
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

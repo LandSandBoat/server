@@ -2,9 +2,7 @@
 -- ID: 6499
 -- Item: Patio design plan document
 -- Grants keyitem: MOG_PATIO_DESIGN_DOCUMENT
------------------------------------------
-require("scripts/globals/npc_util")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

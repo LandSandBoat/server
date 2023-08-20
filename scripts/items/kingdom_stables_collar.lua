@@ -3,8 +3,6 @@
 -- Item: Kingdom Stables Collar
 -- Teleports to Chocobo Stables (San d'Oria)
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

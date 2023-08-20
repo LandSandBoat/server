@@ -3,8 +3,6 @@
 -- ID 5384
 -- Removes MP Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -4,9 +4,7 @@
 -- An educational text authored by Elivira Gogol.
 -- It discusses how to dismantle, clean, and reconstruct firearms in careful detail.
 -- Adventurers note that reading it increases one's marksmanship skill.
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

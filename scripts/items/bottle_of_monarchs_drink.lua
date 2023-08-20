@@ -2,9 +2,7 @@
 -- ID: 5393
 -- Item: bottle_of_monarchs_drink
 -- Item Effect: Regain
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

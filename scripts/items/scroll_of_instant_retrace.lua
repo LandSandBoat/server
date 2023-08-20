@@ -3,8 +3,6 @@
 -- Scroll of Instant Retrace
 -- Transports the user to their Allied Nation.
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

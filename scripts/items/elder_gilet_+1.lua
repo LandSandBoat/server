@@ -3,8 +3,6 @@
 -- Item: Elder Gilet +1
 -- Teleport's user to Purgonorgo Isle
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

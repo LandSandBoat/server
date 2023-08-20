@@ -3,8 +3,6 @@
 -- Teleport ring: Vahzl
 -- Enchantment: "Teleport-Vahzl"
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

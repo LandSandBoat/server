@@ -3,8 +3,6 @@
 -- ID 5381
 -- Removes MND Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

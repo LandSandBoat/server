@@ -3,8 +3,6 @@
 -- 5377
 -- Removes DEX Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

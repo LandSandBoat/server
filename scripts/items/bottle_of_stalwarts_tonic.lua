@@ -2,9 +2,7 @@
 -- ID: 5839
 -- Item: bottle_of_stalwarts_tonic
 -- Item Effect: ACC 50 RACC 50 RATTP 25 ATTP 25
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

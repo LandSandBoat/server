@@ -3,8 +3,6 @@
 -- Reef Fireflies
 -- Transports the user to Ilrusi Atoll Staging Point
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

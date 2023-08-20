@@ -11,9 +11,6 @@
 --  2/164 Beastly Shank
 --  0/164 Savory Shank
 -----------------------------------
-require("scripts/globals/item_utils")
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

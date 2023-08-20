@@ -2,8 +2,6 @@
 -- ID: 5345
 -- Item: Zhayolm Fireflies
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

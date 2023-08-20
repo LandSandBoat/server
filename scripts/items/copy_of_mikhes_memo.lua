@@ -4,9 +4,7 @@
 -- A memo scrawled by Mikhe Aryohcha that matter-of-factly states,
 -- "Just throw your fist at your opponent and it'll all work out."
 -- Adventurers say that their hand-to-hand skill increases after reading this note.
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

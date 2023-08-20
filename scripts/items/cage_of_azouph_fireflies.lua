@@ -3,8 +3,6 @@
 -- Azouph Fireflies
 -- Transports the user to Azouph Isle
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

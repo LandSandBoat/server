@@ -3,8 +3,6 @@
 -- ID 5365
 -- Unlocks weapons and shields
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

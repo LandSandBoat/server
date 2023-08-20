@@ -4,9 +4,7 @@
 -- An essay authored by Cerane I Virgaut,
 -- mainly concerning the night Perseus bequeathed unto her an exemplary shield.
 -- Adventurers note that reading it increases one's shield skill.
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

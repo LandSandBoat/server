@@ -3,8 +3,6 @@
 -- Item: bottle_of_sprinters_drink
 -- Item Effect: Grants Flee for 60s
 -----------------------------------
-require("scripts/globals/item_utils")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

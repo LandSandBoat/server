@@ -2,8 +2,6 @@
 -- ID: 19007
 -- Item: Death Penalty
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

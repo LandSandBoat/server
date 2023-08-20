@@ -2,9 +2,7 @@
 -- ID: 5852
 -- Item: bottle_of_swiftshot_tonic
 -- Item Effect: Double Shot +50
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

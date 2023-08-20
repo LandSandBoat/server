@@ -3,8 +3,6 @@
 -- Bhaflau Fireflies
 -- Transports the user to Mamool Ja Staging Point
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

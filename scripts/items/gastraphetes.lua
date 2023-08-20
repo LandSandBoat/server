@@ -2,8 +2,6 @@
 -- ID: 19001
 -- Item: Gastraphetes
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,9 +2,7 @@
 -- ID:          5841
 -- Item:        bottle_of_ascetics_tonic
 -- Item Effect: MATK/MACC 25
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

@@ -3,8 +3,6 @@
 -- Item: Federation Stables Scarf
 -- Teleports to Chocobo Stables (Windurst)
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

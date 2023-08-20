@@ -2,8 +2,6 @@
 -- ID: 19469
 -- Item: Armageddon
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

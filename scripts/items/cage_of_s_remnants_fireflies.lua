@@ -3,8 +3,6 @@
 -- S. Rem. Fireflies
 -- Transports the user out of Silver Sea Remnants
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

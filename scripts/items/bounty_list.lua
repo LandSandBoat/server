@@ -4,9 +4,7 @@
 -- A simple list of known criminals who are better off dead.
 -- Every single name is crossed out in Azima's handwriting.
 -- Adventurers note that reading it increases one's elemental magic skill.
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

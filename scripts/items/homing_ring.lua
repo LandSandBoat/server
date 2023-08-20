@@ -3,9 +3,6 @@
 -- Teleport Homing Ring
 -- Enchantment: "Outpost Warp"
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/conquest")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

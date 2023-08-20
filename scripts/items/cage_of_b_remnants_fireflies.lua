@@ -3,8 +3,6 @@
 -- B. Rem. Fireflies
 -- Transports the user out of Bhaflau Remnants
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

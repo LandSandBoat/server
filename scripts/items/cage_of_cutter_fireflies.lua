@@ -3,8 +3,6 @@
 -- Cutter Fireflies
 -- Transports the user to Arrapago Reef
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

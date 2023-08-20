@@ -2,8 +2,6 @@
 -- ID: 6
 -- Item: Noble's Bed
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local itemObject = {}
 
 itemObject.onFurniturePlaced = function(player)

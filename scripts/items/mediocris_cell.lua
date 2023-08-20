@@ -3,8 +3,6 @@
 -- ID 5382
 -- Removes CHR Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

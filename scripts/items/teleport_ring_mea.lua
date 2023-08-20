@@ -3,8 +3,6 @@
 -- Teleport ring: Mea
 -- Enchantment: "Teleport-Mea"
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

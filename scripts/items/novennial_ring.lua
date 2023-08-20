@@ -7,8 +7,6 @@
 -- Duration: 720 min
 -- Max bonus: 9000 exp
 -----------------------------------
-require("scripts/globals/item_utils")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

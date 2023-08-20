@@ -3,8 +3,6 @@
 -- name: dusty_scroll_of_reraise
 -- effect: grants reraise III for 10m
 -----------------------------------
-require("scripts/globals/item_utils")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

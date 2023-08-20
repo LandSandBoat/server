@@ -4,9 +4,7 @@
 -- A musical score composed by Lewenhart.
 -- Its notes symbolize the damp and musty air that stagnates within an underground cave.
 -- Adventurers note that reading it increases one's string instrument skill.
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

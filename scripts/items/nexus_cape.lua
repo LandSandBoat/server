@@ -3,8 +3,6 @@
 -- Item: Nexus Cape
 -- Enchantment: "Teleport" (Party Leader)
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

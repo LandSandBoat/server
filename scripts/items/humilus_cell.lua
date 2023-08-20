@@ -3,8 +3,6 @@
 -- ID 5383
 -- Removes HP Down effect
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

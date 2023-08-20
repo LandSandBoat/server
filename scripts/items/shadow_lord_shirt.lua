@@ -3,8 +3,6 @@
 -- Item: Shadow Lord Shirt
 -- Teleports user to Castle Zvahl Keep
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,9 +2,7 @@
 -- ID: 5847
 -- Item: pinch_of_fanatics_powder
 -- Item Effect: When applied, grants UDMGPHYS -10000 to party members in range for 60s
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

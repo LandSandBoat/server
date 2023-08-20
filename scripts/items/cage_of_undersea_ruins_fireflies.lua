@@ -3,8 +3,6 @@
 -- Alzadaal Fireflies
 -- Transports the user to Nyzul Isle Staging Point
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

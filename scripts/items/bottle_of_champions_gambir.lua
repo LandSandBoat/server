@@ -2,9 +2,7 @@
 -- ID: 5844
 -- Item: bottle_of_champions_gambir
 -- Item Effect: Haste (Magic) 18% - CRITHITRATE 5%
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

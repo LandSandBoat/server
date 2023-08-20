@@ -3,8 +3,6 @@
 -- Teleport ring: Altep
 -- Enchantment: "Teleport-Altep"
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

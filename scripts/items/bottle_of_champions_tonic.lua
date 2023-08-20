@@ -2,9 +2,7 @@
 -- ID: 5843
 -- Item: bottle_of_champions_tonic
 -- Item Effect: Haste (Magic) 15% - CRITHITRATE 3%
------------------------------------------
-require("scripts/globals/item_utils")
------------------------------------------
+-----------------------------------------------
 
 local itemObject = {}
 

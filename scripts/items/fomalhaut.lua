@@ -2,8 +2,6 @@
 -- ID: 22143
 -- Item: Fomalhaut
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

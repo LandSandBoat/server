@@ -3,8 +3,6 @@
 -- Item: Republic Stables Medal
 -- Teleports to Chocobo Stables (Bastok)
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

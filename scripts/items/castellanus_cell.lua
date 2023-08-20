@@ -3,8 +3,6 @@
 -- ID 5366
 -- Unlocks head and neck equipment
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

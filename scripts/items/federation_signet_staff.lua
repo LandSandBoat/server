@@ -3,8 +3,6 @@
 -- Item: Federation Signet Staff
 -- Effect: Signet
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, user)

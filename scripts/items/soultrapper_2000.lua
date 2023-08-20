@@ -1,8 +1,6 @@
 -----------------------------------
 -- Soultrapper (18721)
 -----------------------------------
-require("scripts/globals/znm")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, user)

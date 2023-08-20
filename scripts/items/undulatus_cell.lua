@@ -3,8 +3,6 @@
 -- ID 5371
 -- Unlocks ranged and ammo equipment
 -----------------------------------
-require("scripts/globals/salvage")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

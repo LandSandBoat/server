@@ -2,8 +2,6 @@
 -- ID: 22117, 22131
 -- Item: Fail-Not
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
