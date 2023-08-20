@@ -75,7 +75,7 @@ end
 -- TODO: implement Fly High attack +5 job points
 local function performWSJump(player, target, action, params, abilityID)
     local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 1000, action, true, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, 0, params, 1000, action, true, taChar)
     local totalHits = tpHits + extraHits
     local specEffect = 0x00
 
