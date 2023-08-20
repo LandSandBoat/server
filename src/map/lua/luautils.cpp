@@ -4036,7 +4036,7 @@ namespace luautils
         // Mob Skill Script
         auto mobskill_name = PMobSkill->getName();
 
-        auto onMobWeaponSkill = lua["xi"]["mobskills"][mobskill_name]["onMobWeaponSkill"];
+        auto onMobWeaponSkill = lua["xi"]["actions"]["mobskills"][mobskill_name]["onMobWeaponSkill"];
         if (!onMobWeaponSkill.valid())
         {
             return 0;
@@ -4059,7 +4059,7 @@ namespace luautils
 
         auto name = PMobSkill->getName();
 
-        auto onMobSkillCheck = lua["xi"]["mobskills"][name]["onMobSkillCheck"];
+        auto onMobSkillCheck = lua["xi"]["actions"]["mobskills"][name]["onMobSkillCheck"];
         if (!onMobSkillCheck.valid())
         {
             return 1;

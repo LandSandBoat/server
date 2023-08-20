@@ -224,7 +224,7 @@ namespace battleutils
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
-                auto filename = fmt::format("./scripts/mobskills/{}.lua", PMobSkill->getName());
+                auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
