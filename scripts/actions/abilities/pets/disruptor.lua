@@ -1,8 +1,6 @@
 -----------------------------------
 -- Disruptor
 -----------------------------------
-require("scripts/globals/automatonweaponskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onMobSkillCheck = function(target, automaton, skill)

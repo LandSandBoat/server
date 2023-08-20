@@ -1,8 +1,6 @@
 -----------------------------------
 -- Heat Capacitor
 -----------------------------------
-require("scripts/globals/automatonweaponskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
