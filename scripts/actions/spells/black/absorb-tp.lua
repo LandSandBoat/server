@@ -2,8 +2,6 @@
 -- Spell: Absorb-TP
 -- Steals an enemy's TP.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

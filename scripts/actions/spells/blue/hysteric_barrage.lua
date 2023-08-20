@@ -12,9 +12,6 @@
 -- Skillchain Element: Detonation
 -- Combos: Evasion Bonus
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

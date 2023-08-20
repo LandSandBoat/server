@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Tractor
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

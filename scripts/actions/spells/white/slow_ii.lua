@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Slow II
 -----------------------------------
-require("scripts/globals/spells/enfeebling_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,8 +3,6 @@
 -- Restores target's HP.
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

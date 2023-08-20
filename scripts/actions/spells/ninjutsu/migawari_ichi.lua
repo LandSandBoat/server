@@ -3,8 +3,6 @@
 -- Effect Power: Damage Threshold %
 -- Effect Sub Power: Damage Reduction % (In this case, 100%)
 -----------------------------------
-require("scripts/globals/spells/enhancing_ninjutsu")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

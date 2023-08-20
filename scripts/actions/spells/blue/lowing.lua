@@ -12,9 +12,6 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Clear Mind
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

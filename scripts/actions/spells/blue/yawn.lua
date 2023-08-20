@@ -13,8 +13,6 @@
 -- Magic Bursts on: Transfixion, Fusion, Light
 -- Combos: Resist Sleep
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

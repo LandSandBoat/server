@@ -2,10 +2,6 @@
 -- Spell: Diabolos
 -- Summons Diabolos to fight by your side
 -----------------------------------
-require("scripts/globals/summon")
-require("scripts/globals/pets")
-require("scripts/globals/avatars_favor")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,8 +2,6 @@
 -- Spell: Dragonfoe Mambo
 -- Grants evasion bonus to all members.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

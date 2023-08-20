@@ -2,8 +2,6 @@
 -- Spell: Geo-Malaise
 -- Reduces magic defense for enemies within area of effect.
 -----------------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

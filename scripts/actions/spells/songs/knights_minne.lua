@@ -2,8 +2,6 @@
 -- Spell: Knight's Minne I
 -- Grants Defense bonus to all allies.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

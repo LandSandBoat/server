@@ -2,8 +2,6 @@
 -- Spell: Regen
 -- Gradually restores target's HP.
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

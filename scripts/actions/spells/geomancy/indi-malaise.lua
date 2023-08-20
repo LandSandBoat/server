@@ -2,8 +2,6 @@
 -- Spell: Indi-Malaise
 -- Reduces magic defense of enemies near the caster.
 -----------------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

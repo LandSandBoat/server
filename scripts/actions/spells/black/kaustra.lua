@@ -3,8 +3,6 @@
 -- Consumes 20% of your maximum MP. Relentless
 -- dark damage slowly devours an enemy.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,9 +2,6 @@
 -- Spell: Bio IV
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/utils")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

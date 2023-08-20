@@ -2,8 +2,6 @@
 -- Spell: Gain-DEX
 -- Boosts DEX for the Caster
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,8 +2,6 @@
 -- Spell: Gain-VIT
 -- Boosts VIT for the Caster
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

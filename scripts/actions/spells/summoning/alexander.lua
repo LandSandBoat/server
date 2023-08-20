@@ -2,9 +2,6 @@
 -- Spell: Alexander
 -- Summons Alexander to fight by your side
 -----------------------------------
-require("scripts/globals/summon")
-require("scripts/globals/pets")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,8 +2,6 @@
 -- Spell: Logical Etude
 -- Static MND Boost, BRD 64
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

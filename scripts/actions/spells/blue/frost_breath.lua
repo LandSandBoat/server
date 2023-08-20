@@ -12,9 +12,6 @@
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Conserve MP
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

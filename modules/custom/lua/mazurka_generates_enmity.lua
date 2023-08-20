@@ -37,13 +37,13 @@ local mazurkaProvoke = function(caster, target, spell, power)
     battleTarget:addEnmity(caster, 0, enmity)
 end
 
-m:addOverride("xi.globals.spells.songs.chocobo_mazurka.onSpellCast", function(caster, target, spell)
+m:addOverride("xi.actions.spells.songs.chocobo_mazurka.onSpellCast", function(caster, target, spell)
     local songEffect = super(caster, target, spell)
     mazurkaProvoke(caster, target, spell, chocoboMazurkaPower)
     return songEffect
 end)
 
-m:addOverride("xi.globals.spells.songs.raptor_mazurka.onSpellCast", function(caster, target, spell)
+m:addOverride("xi.actions.spells.songs.raptor_mazurka.onSpellCast", function(caster, target, spell)
     local songEffect = super(caster, target, spell)
     mazurkaProvoke(caster, target, spell, raptorMazurkaPower)
     return songEffect

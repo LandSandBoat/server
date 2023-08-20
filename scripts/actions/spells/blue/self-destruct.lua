@@ -12,9 +12,6 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/bluemagic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

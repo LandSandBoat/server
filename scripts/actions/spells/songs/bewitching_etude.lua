@@ -2,8 +2,6 @@
 -- Spell: Bewitching Etude
 -- Static CHR Boost, BRD 62
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,12 +1,6 @@
 -----------------------------------
 -- Trust: Koru-Moru
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/gambits")
-require("scripts/globals/magic")
-require("scripts/globals/trust")
-require("scripts/globals/utils")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

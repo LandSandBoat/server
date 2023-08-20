@@ -2,8 +2,6 @@
 -- Spell: Boost-MND
 -- Boosts MND for Allies in AoE
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Trust: Prishe
 -----------------------------------
-require("scripts/globals/gambits")
-require("scripts/globals/magic")
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

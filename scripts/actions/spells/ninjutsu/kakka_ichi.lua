@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Kakka: Ichi
 -----------------------------------
-require("scripts/globals/spells/enhancing_ninjutsu")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

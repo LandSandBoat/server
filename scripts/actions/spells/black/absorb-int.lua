@@ -2,8 +2,6 @@
 -- Spell: Absorb-INT
 -- Steals an enemy's intelligence.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

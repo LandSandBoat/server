@@ -2,8 +2,6 @@
 -- Spell: Dextrous Etude
 -- Static DEX Boost, BRD 32
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,8 +2,6 @@
 -- Spell: Warp
 -- Transports the user to their Home Point
 -----------------------------------
-require("scripts/globals/spells/enhancing_teleport")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

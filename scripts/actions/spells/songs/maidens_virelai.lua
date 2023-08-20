@@ -2,9 +2,6 @@
 -- Spell: Maiden's Virelai
 -- Charms pet
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/pets")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

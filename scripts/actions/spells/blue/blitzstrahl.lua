@@ -12,9 +12,6 @@
 -- Magic Bursts on: Impaction, Fragmentation, Light
 -- Combos: None
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

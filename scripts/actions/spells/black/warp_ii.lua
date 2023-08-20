@@ -2,8 +2,6 @@
 -- Spell: Warp II
 -- Transports player to their home point. Can cast on allies.
 -----------------------------------
-require("scripts/globals/spells/enhancing_teleport")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

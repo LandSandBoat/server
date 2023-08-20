@@ -2,8 +2,6 @@
 -- Spell: Absorb-AGI
 -- Steals an enemy's agility.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

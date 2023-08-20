@@ -13,8 +13,6 @@
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Regen
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

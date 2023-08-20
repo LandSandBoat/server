@@ -13,8 +13,6 @@
 -----------------------------------
 -- Combos: Max MP Boost
 -----------------------------------
-require("scripts/globals/bluemagic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

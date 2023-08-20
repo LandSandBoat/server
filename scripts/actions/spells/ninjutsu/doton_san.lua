@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Doton: San
 -----------------------------------
-require("scripts/globals/spells/damage_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

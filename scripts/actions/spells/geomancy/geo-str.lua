@@ -2,8 +2,6 @@
 -- Spell: Geo-STR
 -- Enhances Strength for party members within area of effect.
 -----------------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

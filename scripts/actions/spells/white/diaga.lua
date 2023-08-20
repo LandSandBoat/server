@@ -2,9 +2,6 @@
 -- Spell: Diaga
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/utils")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

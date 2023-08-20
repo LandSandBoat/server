@@ -5,9 +5,6 @@
 -----------------------------------
 -- Raw Value is said to be 30%
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/utils")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

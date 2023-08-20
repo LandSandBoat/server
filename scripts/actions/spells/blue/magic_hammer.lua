@@ -19,9 +19,6 @@
 -- Can only drain MP from targets that have MP and cannot drain more MP than the target has.
 -- Damage and MP drained are enhanced by both Magic Attack Bonus and Magic Attack from Convergence.
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

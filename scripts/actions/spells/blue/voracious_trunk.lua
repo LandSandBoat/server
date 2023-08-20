@@ -11,8 +11,6 @@
 -- Recast Time: 56 seconds
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/bluemagic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

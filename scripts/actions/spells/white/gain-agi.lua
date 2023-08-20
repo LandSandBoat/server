@@ -2,8 +2,6 @@
 -- Spell: Gain-AGI
 -- Boosts AGI for the Caster
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Trust: Qultada
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/gambits")
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

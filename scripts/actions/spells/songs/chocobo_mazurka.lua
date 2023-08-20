@@ -2,8 +2,6 @@
 -- Spell: Chocobo Mazurka
 -- Gives party members enhanced movement
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

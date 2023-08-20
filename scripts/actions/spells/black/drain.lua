@@ -2,8 +2,6 @@
 -- Spell: Drain
 -- Drain functions only on skill level!!
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

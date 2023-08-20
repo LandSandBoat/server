@@ -2,8 +2,6 @@
 -- Spell: Retrace
 -- Transports player to their Allied Nation. Can cast on allies.
 -----------------------------------
-require("scripts/globals/spells/enhancing_teleport")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

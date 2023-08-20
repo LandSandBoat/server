@@ -2,8 +2,6 @@
 -- Spell: Indi-Fend
 -- Enhances magic defense for party members near the caster.
 -----------------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

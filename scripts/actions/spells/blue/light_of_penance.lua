@@ -12,9 +12,6 @@
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

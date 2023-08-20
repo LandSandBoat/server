@@ -2,8 +2,6 @@
 -- Spell: Army's Paeon III
 -- Gradually restores target's HP.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

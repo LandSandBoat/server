@@ -1,8 +1,6 @@
 -----------------------------------
 -- Trust: Makki-Chebukki
 -----------------------------------
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

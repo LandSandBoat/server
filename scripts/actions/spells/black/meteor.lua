@@ -2,9 +2,6 @@
 -- Spell: Meteor
 -- Deals non-elemental damage to an enemy.
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

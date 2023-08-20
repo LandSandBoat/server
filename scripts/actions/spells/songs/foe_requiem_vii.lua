@@ -1,9 +1,6 @@
 -----------------------------------
 -- Spell: Foe Requiem VII
 -----------------------------------
-require("scripts/globals/jobpoints")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

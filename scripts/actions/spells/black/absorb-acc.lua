@@ -2,8 +2,6 @@
 -- Spell: Absorb-ACC
 -- Steals an enemy's accuracy.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

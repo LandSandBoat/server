@@ -3,8 +3,6 @@
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

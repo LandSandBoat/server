@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Enaero
 -----------------------------------
-require("scripts/globals/spells/enhancing_spell")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

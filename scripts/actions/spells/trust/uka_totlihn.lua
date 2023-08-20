@@ -1,8 +1,6 @@
 -----------------------------------
 -- Trust: Uka Totlihn
 -----------------------------------
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 -- Define the main jobs with access to primary healing used to toggle Samba type

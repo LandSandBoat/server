@@ -12,9 +12,6 @@
 -- Skillchain Element(s): Liquefaction/Impaction
 -- Combos: Counter
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

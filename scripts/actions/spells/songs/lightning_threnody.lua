@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Threnody - xi.mod.THUNDER_MEVA
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

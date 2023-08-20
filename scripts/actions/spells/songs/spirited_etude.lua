@@ -2,8 +2,6 @@
 -- Spell: Spirited Etude
 -- Static MND Boost, BRD 24
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

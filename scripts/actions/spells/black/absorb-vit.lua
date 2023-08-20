@@ -2,8 +2,6 @@
 -- Spell: Absorb-VIT
 -- Steals an enemy's vitality.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

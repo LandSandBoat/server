@@ -4,8 +4,6 @@
 -- http://wiki.ffxiclopedia.org/wiki/Stoneskin
 -- Max 350 damage absorbed
 -- (before cap bonus gear, with no settings.lua adjustment)
-require("scripts/globals/magic")
-require("scripts/globals/utils")
 -----------------------------------
 local spellObject = {}
 

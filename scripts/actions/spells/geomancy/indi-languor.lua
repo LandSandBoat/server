@@ -2,8 +2,6 @@
 -- Spell: Indi-Languor
 -- Reduces magic evasion of enemies near the caster.
 -----------------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

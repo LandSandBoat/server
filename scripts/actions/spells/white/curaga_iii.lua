@@ -2,8 +2,6 @@
 -- Spell: Curaga III
 -- Restores HP of all party members within area of effect.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

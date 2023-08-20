@@ -1,8 +1,6 @@
 -----------------------------------
 -- Trust: Maximilian
 -----------------------------------
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

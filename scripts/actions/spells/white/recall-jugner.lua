@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Recall-Jugner
 -----------------------------------
-require("scripts/globals/spells/enhancing_teleport")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

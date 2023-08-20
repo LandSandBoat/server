@@ -12,9 +12,6 @@
 -- Skillchain Element(s): Detonation
 -- Combos: Undead Killer
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

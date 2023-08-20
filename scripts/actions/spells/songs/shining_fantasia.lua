@@ -2,8 +2,6 @@
 -- Spell: Shining Fantasia
 -- Enhances resistance against blind for party members within the area of effect.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

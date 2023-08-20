@@ -13,8 +13,6 @@
 -----------------------------------
 -- Combos: Clear Mind
 -----------------------------------
-require("scripts/globals/bluemagic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

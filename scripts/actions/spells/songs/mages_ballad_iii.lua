@@ -2,8 +2,6 @@
 -- Spell: Mage's Ballad III
 -- Gradually restores target's MP.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

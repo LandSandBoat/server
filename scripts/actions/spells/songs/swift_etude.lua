@@ -2,8 +2,6 @@
 -- Spell: Swift Etude
 -- Static AGI Boost, BRD 68
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

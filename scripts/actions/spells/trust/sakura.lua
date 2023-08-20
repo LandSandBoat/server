@@ -1,9 +1,6 @@
 -----------------------------------
 -- Trust: Sakura
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/trust")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

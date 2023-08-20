@@ -12,9 +12,6 @@
 -- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Resist Gravity
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

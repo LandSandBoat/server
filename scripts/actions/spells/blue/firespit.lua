@@ -12,9 +12,6 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Conserve MP
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

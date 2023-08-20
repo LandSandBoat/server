@@ -2,8 +2,6 @@
 -- Spell: Absorb-MND
 -- Steals an enemy's mind.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

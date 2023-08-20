@@ -2,8 +2,6 @@
 -- Spell: Absorb-DEX
 -- Steals an enemy's dexterity.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Dread Spikes
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

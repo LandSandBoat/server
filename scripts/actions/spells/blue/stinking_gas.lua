@@ -12,9 +12,6 @@
 -- Magic Bursts on: Detonation, Fragmentation, and Light
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

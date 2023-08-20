@@ -2,8 +2,6 @@
 -- Spell: Blade Madrigal
 -- Gives party members accuracy
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

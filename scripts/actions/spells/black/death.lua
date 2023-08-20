@@ -3,8 +3,6 @@
 -- Consumes all MP. Has a chance to knock out the target. If Death fails to knock out the target, it
 -- will instead deal darkness damage. Ineffective against undead.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Spell: Carnage Elegy
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/utils")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

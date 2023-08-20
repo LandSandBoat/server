@@ -2,8 +2,6 @@
 -- Spell: Vivacious Etude
 -- Static VIT Boost, BRD 30
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

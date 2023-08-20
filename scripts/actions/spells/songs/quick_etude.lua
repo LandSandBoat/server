@@ -2,8 +2,6 @@
 -- Spell: Quick Etude
 -- Static AGI Boost, BRD 28
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

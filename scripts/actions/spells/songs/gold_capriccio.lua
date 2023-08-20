@@ -2,8 +2,6 @@
 -- Spell: Gold Capriccio
 -- Enhances resistance against petrification for party members within the area of effect.
 -----------------------------------
-require("scripts/globals/spells/enhancing_song")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

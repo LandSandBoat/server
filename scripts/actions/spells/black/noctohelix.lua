@@ -3,8 +3,6 @@
 -- Deals dark damage that gradually reduces
 -- a target's HP. Damage dealt is greatly affected by the weather.
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

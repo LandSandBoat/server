@@ -12,9 +12,6 @@
 -- Skillchain Element(s): Impaction
 -- Combos: Max HP Boost
 -----------------------------------
-require("scripts/globals/bluemagic")
-require("scripts/globals/magic")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
