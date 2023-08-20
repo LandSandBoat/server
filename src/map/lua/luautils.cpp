@@ -2631,7 +2631,7 @@ namespace luautils
 
         auto name = attachment->getName();
 
-        auto onEquip = lua["xi"]["globals"]["abilities"]["pets"]["attachments"][name]["onEquip"];
+        auto onEquip = lua["xi"]["actions"]["abilities"]["pets"]["attachments"][name]["onEquip"];
         if (!onEquip.valid())
         {
             return -1;
@@ -2654,7 +2654,7 @@ namespace luautils
 
         auto name = attachment->getName();
 
-        auto onUnequip = lua["xi"]["globals"]["abilities"]["pets"]["attachments"][name]["onUnequip"];
+        auto onUnequip = lua["xi"]["actions"]["abilities"]["pets"]["attachments"][name]["onUnequip"];
         if (!onUnequip.valid())
         {
             return -1;
@@ -2677,7 +2677,7 @@ namespace luautils
 
         auto name = attachment->getName();
 
-        auto onManeuverGain = lua["xi"]["globals"]["abilities"]["pets"]["attachments"][name]["onManeuverGain"];
+        auto onManeuverGain = lua["xi"]["actions"]["abilities"]["pets"]["attachments"][name]["onManeuverGain"];
         if (!onManeuverGain.valid())
         {
             return -1;
@@ -2700,7 +2700,7 @@ namespace luautils
 
         auto name = attachment->getName();
 
-        auto onManeuverLose = lua["xi"]["globals"]["abilities"]["pets"]["attachments"][name]["onManeuverLose"];
+        auto onManeuverLose = lua["xi"]["actions"]["abilities"]["pets"]["attachments"][name]["onManeuverLose"];
         if (!onManeuverLose.valid())
         {
             return -1;
@@ -2723,7 +2723,7 @@ namespace luautils
 
         auto name = attachment->getName();
 
-        auto onUpdate = lua["xi"]["globals"]["abilities"]["pets"]["attachments"][name]["onUpdate"];
+        auto onUpdate = lua["xi"]["actions"]["abilities"]["pets"]["attachments"][name]["onUpdate"];
         if (!onUpdate.valid())
         {
             return -1;
@@ -2746,7 +2746,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemCheck = GetCacheEntryFromFilename(filename)["onItemCheck"].get<sol::function>();
         if (!onItemCheck.valid())
@@ -2783,7 +2783,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemUse = GetCacheEntryFromFilename(filename)["onItemUse"].get<sol::function>();
         if (!onItemUse.valid())
@@ -2808,7 +2808,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemDrop = GetCacheEntryFromFilename(filename)["onItemDrop"].get<sol::function>();
         if (!onItemDrop.valid())
@@ -2832,7 +2832,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemEquip = GetCacheEntryFromFilename(filename)["onItemEquip"].get<sol::function>();
         if (!onItemEquip.valid())
@@ -2856,7 +2856,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+        auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
         sol::function onItemUnequip = GetCacheEntryFromFilename(filename)["onItemUnequip"].get<sol::function>();
         if (!onItemUnequip.valid())
@@ -4111,7 +4111,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", PMobSkill->getName());
+        auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", PMobSkill->getName());
 
         sol::function onAutomatonAbilityCheck = GetCacheEntryFromFilename(filename)["onAutomatonAbilityCheck"];
         if (!onAutomatonAbilityCheck.valid())
@@ -4132,7 +4132,7 @@ namespace luautils
 
     int32 OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action)
     {
-        auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", PMobSkill->getName());
+        auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", PMobSkill->getName());
 
         sol::function onAutomatonAbility = GetCacheEntryFromFilename(filename)["onAutomatonAbility"];
         if (!onAutomatonAbility.valid())
@@ -4198,11 +4198,11 @@ namespace luautils
         std::string filename;
         if (PAbility->isPetAbility())
         {
-            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
+            filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
+            filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
         }
 
         sol::function onAbilityCheck = GetCacheEntryFromFilename(filename)["onAbilityCheck"];
@@ -4241,7 +4241,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PMobSkill->getName());
+        std::string filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PMobSkill->getName());
 
         sol::function onPetAbility = GetCacheEntryFromFilename(filename)["onPetAbility"];
         if (!onPetAbility.valid())
@@ -4279,7 +4279,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PPetSkill->getName());
+        std::string filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PPetSkill->getName());
 
         sol::function onPetAbility = GetCacheEntryFromFilename(filename)["onPetAbility"];
         if (!onPetAbility.valid())
@@ -4314,11 +4314,11 @@ namespace luautils
         std::string filename;
         if (PAbility->isPetAbility())
         {
-            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
+            filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
+            filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
         }
 
         sol::function onUseAbility = GetCacheEntryFromFilename(filename)["onUseAbility"];
@@ -5454,7 +5454,7 @@ namespace luautils
 
         auto name = PItem->getName();
 
-        auto onFurniturePlaced = lua["xi"]["globals"]["items"][name]["onFurniturePlaced"];
+        auto onFurniturePlaced = lua["xi"]["items"][name]["onFurniturePlaced"];
         if (!onFurniturePlaced.valid())
         {
             return;
@@ -5476,7 +5476,7 @@ namespace luautils
 
         auto name = PItem->getName();
 
-        auto onFurnitureRemoved = lua["xi"]["globals"]["items"][name]["onFurnitureRemoved"];
+        auto onFurnitureRemoved = lua["xi"]["items"][name]["onFurnitureRemoved"];
         if (!onFurnitureRemoved.valid())
         {
             return;

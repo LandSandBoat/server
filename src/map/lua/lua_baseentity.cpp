@@ -11037,7 +11037,7 @@ void CLuaBaseEntity::timer(int ms, sol::function func)
  *  Example :
  *  Notes   : For instance, Sic can be used before a Pet reaches 100% TP.
  *          : Once the Pet reaches 100%, it will use it's Special Ability.
- *          : See scripts/globals/abilities/sic.lua for how the Special
+ *          : See scripts/actions/abilities/sic.lua for how the Special
  *          : Ability is delayed until 100% (essentially loops into Action Queue)
  ************************************************************************/
 
@@ -11658,7 +11658,7 @@ void CLuaBaseEntity::updateEnmity(CLuaBaseEntity* PEntity)
  *  Function: transferEnmity()
  *  Purpose : Used to transfer an amount of Enmity from one Entity to another
  *  Example : target:transferEnmity(player, 50, 20.6)
- *  Notes   : See scripts/globals/abilities/accomplice.lua
+ *  Notes   : See scripts/actions/abilities/accomplice.lua
  ************************************************************************/
 
 void CLuaBaseEntity::transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range)
@@ -16027,7 +16027,7 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
  *  Function: hasPreventActionEffect()
  *  Purpose : Returns true if a non-NPC entity has a preventative status effect
  *  Example : if not pet:hasPreventActionEffect() then
- *  Notes   : Used in scripts/globals/abilities/stay.lua
+ *  Notes   : Used in scripts/actions/abilities/stay.lua
  ************************************************************************/
 
 bool CLuaBaseEntity::hasPreventActionEffect()
@@ -16260,7 +16260,7 @@ uint16 CLuaBaseEntity::getDespoilDebuff(uint16 itemID)
  *  Function: itemStolen()
  *  Purpose : Flags a mob's item as stolen, returns true upon update
  *  Example : target:itemStolen()
- *  Notes   : Used in scripts/globals/abilities/steal.lua
+ *  Notes   : Used in scripts/actions/abilities/steal.lua
  ************************************************************************/
 
 bool CLuaBaseEntity::itemStolen()

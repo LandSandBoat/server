@@ -404,10 +404,10 @@ namespace ability
                 PAbilityList[PAbility->getID()] = PAbility;
                 PAbilitiesList[PAbility->getJob()].emplace_back(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
+                auto filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
                 if (PAbility->isPetAbility())
                 {
-                    filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
+                    filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
                 }
                 luautils::CacheLuaObjectFromFile(filename);
             }

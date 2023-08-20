@@ -4,6 +4,10 @@ require("scripts/globals/magicburst")
 require("scripts/globals/utils")
 require("scripts/globals/magic")
 
+-- TODO: Consolidate this with weaponskills
+xi = xi or {}
+xi.autows = xi.autows or {}
+
 local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
     local acc = (melee and attacker:getACC() or attacker:getRACC()) + (bonus or 0)
     local eva = defender:getEVA()
@@ -162,7 +166,7 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
 end
 
 -- params contains: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, canCrit, crit100, crit200, crit300, acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atkmulti, kick, accBonus, weaponType, weaponDamage
-function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, action, taChar, wsParams, skill)
+xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, primaryMsg, action, taChar, wsParams, skill)
     -- Determine cratio and ccritratio
     local ignoredDef = 0
     if wsParams.ignoresDef then
@@ -251,7 +255,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
 end
 
 -- params contains: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, canCrit, crit100, crit200, crit300, acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atkmulti, accBonus, weaponDamage
-function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMsg, skill, action)
+xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, primaryMsg, skill, action)
     -- Determine cratio and ccritratio
     local ignoredDef = 0
     if wsParams.ignoresDef then
