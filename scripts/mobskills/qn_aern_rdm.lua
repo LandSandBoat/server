@@ -2,8 +2,6 @@
 -- Chainspell
 -- Meant for Qn'aern (RDM) with Ix'Aern encounter
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

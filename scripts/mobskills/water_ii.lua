@@ -2,8 +2,6 @@
 -- Water II
 -- Deals water elemental damage. Damage varies with TP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

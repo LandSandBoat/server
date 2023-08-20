@@ -7,8 +7,6 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: AoE
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

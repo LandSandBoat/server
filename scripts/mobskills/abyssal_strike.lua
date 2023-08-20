@@ -4,8 +4,6 @@
 --  effect: Stun
 --  Type: Physical
 --  Notes: zeid and shadows of rage move
------------------------------------
-require("scripts/globals/mobskills")
 ---------------------------------------------1
 local mobskillObject = {}
 

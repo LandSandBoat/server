@@ -2,8 +2,6 @@
 -- Big Scissors: Deals damage to a single target.
 -- Nightmare Crabs ignore shadows
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

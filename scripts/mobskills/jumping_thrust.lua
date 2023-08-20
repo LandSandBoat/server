@@ -3,8 +3,6 @@
 -- Jumping Attack, only used by dragoons
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Sand Pit
 -- Single target bind
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

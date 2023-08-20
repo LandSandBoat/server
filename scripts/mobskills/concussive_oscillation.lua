@@ -3,8 +3,6 @@
 -- Smacks around all nearby targets. Additional effect: Knockback + Weight
 -- Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

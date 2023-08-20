@@ -2,8 +2,6 @@
 -- Heavenly Strike
 -- Shiva deals ice damage to target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

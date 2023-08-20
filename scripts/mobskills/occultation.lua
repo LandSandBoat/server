@@ -4,8 +4,6 @@
 -- Description: Creates 25 shadows
 -- Type: Magical (Wind)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

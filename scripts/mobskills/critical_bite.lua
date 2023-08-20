@@ -6,8 +6,6 @@
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee, used by Nightmare Scorpions, KV, Serket
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Condemnation
 -- Deals damage in a threefold attack to enemies within a fan-shaped area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,8 +3,6 @@
 -- Only Used when in Bow Mode
 -- Deals a ranged attack to a single target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

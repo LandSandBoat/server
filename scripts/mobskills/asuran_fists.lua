@@ -3,8 +3,6 @@
 -- Description: Delivers an eightfold attack. Accuracy varies with TP.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

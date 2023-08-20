@@ -7,8 +7,6 @@
 -- Range: Cone gaze
 -- Notes: Only used when standing
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

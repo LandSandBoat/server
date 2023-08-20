@@ -2,8 +2,6 @@
 -- Cross Attack
 -- Hits a single target twice in a cross motion.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

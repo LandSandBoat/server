@@ -4,8 +4,6 @@
 --  Description:  300 magic damage, Gravity and short Bind, wipes Utsusemi
 --  Type: Physical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

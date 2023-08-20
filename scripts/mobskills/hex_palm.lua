@@ -7,8 +7,6 @@
 -- Range: Front cone
 -- Notes: Used only when wielding no weapon.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

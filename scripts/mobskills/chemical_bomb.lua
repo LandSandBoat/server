@@ -2,8 +2,6 @@
 -- Chemical_Bomb
 -- Description: slow + elegy
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

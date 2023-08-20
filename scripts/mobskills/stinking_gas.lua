@@ -3,8 +3,6 @@
 -- Description: Lowers Vitality of enemies within range.
 -- Type: Magical (Wind)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,8 +7,6 @@
 -- Range: Melee
 -- Notes: Used instead of Gliding Spike by certain notorious monsters.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 -----------------------------------

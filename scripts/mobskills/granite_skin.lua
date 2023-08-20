@@ -5,8 +5,6 @@
 -- This will need a new effect and some kind of check to zero it properly.
 -- https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

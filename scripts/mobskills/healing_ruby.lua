@@ -2,8 +2,6 @@
 -- healing_ruby
 -- Description: Restores HP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

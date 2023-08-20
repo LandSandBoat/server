@@ -4,8 +4,6 @@
 -- Effect varies with HP and inflicts caster with weakness.
 -- Deals souleater like damage to the user.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

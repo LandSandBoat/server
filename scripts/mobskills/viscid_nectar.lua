@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Slow is equivalent to Slow II.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

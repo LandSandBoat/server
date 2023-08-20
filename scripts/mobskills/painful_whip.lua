@@ -2,8 +2,6 @@
 -- Painful Whip
 -- Deals Water damage to targets in a fan-shaped area of effect. Additional effect: Poison
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Barracuda Dive
 -- Leviathan delivers a single-hit attack on target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -11,7 +11,6 @@
 -- 1.00      1.50      3.00
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
 

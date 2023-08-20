@@ -3,8 +3,6 @@
 -- Delivers a threefold attack. Accuracy varies with TP.
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

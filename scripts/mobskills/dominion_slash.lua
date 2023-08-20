@@ -6,8 +6,6 @@
 -- Range: Unknown radial
 -- One source also mentions that it "can dispel important buffs."
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

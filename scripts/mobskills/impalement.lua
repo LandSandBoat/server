@@ -5,7 +5,6 @@
 --  Utsusemi/Blink absorb: No
 --  Range: Single Target
 -----------------------------------
-require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
 local mobskillObject = {}

@@ -3,8 +3,6 @@
 -- Enhances defense and magic defense
 -- Marids will only use Barrier Tusk if at least one of their tusks remain unbroken
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

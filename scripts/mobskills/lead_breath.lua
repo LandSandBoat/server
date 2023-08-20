@@ -2,8 +2,6 @@
 -- Lead Breath
 -- Description: Weighs down players.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

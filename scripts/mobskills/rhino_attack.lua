@@ -3,8 +3,6 @@
 -- Deals damage to a single target. Additional effect: Knockback
 -- Utsusemi/Blink absorb: 1 shadow
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

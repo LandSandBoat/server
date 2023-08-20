@@ -5,8 +5,6 @@
 -- Range: Melee
 -- Notes: If used against undead, it will simply do damage and not drain HP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

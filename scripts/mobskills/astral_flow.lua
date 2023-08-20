@@ -1,8 +1,6 @@
 -----------------------------------
 -- Astral Flow
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 local avatarOffsets =

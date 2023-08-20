@@ -7,8 +7,6 @@
 -- Range: Unknown radial
 -- Notes: Paralysis effect has a very long duration.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

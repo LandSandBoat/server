@@ -7,8 +7,6 @@
 -- Range: Self
 -- Notes: 25% Evasion Boost.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

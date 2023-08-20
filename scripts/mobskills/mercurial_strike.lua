@@ -15,7 +15,6 @@
 -- 999 = Colossal Slam
 -- 1111 = 2hr Meikyo Shisui
 -----------------------------------
-require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------
 local mobskillObject = {}

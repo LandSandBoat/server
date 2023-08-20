@@ -3,8 +3,6 @@
 --  Description: Chance of effect varies with TP. Additional Effect: Accuracy Down.
 --  Type: Physical (Slashing)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

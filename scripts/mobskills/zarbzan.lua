@@ -7,8 +7,6 @@
 --  Range: Unknown
 --  Notes: Used by RNG trolls only.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

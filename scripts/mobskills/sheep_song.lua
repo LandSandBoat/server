@@ -2,8 +2,6 @@
 -- Sheep Song
 -- 15' AoE sleep
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

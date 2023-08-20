@@ -6,8 +6,6 @@
 --  Range: Melee
 --  Notes: Only used by Gurfurlur the Menacing. Reduces HP to 10%.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,8 +3,6 @@
 -- Description: Deals Light elemental damage to enemies within area of effect.
 -- Type: Magical (Light)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

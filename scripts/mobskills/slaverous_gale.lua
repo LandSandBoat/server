@@ -4,8 +4,6 @@
 -- Description: Deals earth damage that inflicts Plague and Slow effects on targets in front of the caster
 -- Type: Magical (Earth)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

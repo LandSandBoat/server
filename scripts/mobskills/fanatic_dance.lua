@@ -7,8 +7,6 @@
 -- Range: AoE around user
 -- Notes: Dynamis NM Orcs only
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

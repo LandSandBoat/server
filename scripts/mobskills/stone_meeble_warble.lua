@@ -2,8 +2,6 @@
 -- Stone Meeble Warble
 -- AOE Earth Elemental damage, inflicts Petrification and Rasp (50 HP/tick).
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

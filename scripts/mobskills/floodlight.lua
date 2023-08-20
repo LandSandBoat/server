@@ -3,8 +3,6 @@
 -- Description:  ~300 magic damage, Flash, Blind and Silence, ignores Utsusemi
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

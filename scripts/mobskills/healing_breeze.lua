@@ -3,8 +3,6 @@
 -- Description: Restores HP for party members within area of effect.
 -- Type: Magical (Wind)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

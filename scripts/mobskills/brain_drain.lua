@@ -2,8 +2,6 @@
 -- Brain Drain
 -- Deals damage to a single target. Additional effect: INT Down
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

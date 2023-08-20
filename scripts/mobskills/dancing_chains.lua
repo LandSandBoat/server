@@ -3,8 +3,6 @@
 --  Description:  Applies AoE drown 15hp/sec
 --  Notes: Ignores shadows, 10' AoE radius
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,8 +4,6 @@
 --  Type: Magical
 --  additional effect : 40hp/tick Poison
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,8 +6,6 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Notes: Used by Bahamut every 10% of its HP (except at 10%), but can use at will when under 10%.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

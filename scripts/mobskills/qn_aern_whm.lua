@@ -2,8 +2,6 @@
 -- Benediction
 -- Meant for Qn'aern (WHM) with Ix'Aern encounter
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

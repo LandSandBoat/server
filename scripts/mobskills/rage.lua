@@ -7,8 +7,6 @@
 -- Range: Self
 -- Notes: 25% Attack UP, -25% defense DOWN
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

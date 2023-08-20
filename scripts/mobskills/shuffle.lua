@@ -2,8 +2,6 @@
 -- Shuffle
 -- Dispels a single buff at random (which could be food)<-Pending verification. It does not reset hate.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

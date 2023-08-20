@@ -5,8 +5,6 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 15' radial
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 
 local mobskillObject = {}
 

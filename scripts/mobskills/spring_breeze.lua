@@ -2,8 +2,6 @@
 -- Spring Breeze
 -- Description: AoE TP-Reduction and Sleep xi.effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

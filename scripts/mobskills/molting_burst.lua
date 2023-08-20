@@ -7,8 +7,6 @@
 --  Range: Unknown
 --  Notes: Used by Limules affiliated with light element.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

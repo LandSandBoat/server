@@ -2,8 +2,6 @@
 -- Scream
 -- 15' Reduces MND of players in area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

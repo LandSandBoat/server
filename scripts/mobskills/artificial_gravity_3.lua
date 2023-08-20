@@ -2,8 +2,6 @@
 -- Artifical Gravity W/ 3 gears
 -- Damage plus Weight effect
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

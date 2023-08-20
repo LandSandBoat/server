@@ -6,8 +6,6 @@
 -- Range: Self
 -- Notes: Used only by Omega
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

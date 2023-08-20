@@ -4,8 +4,6 @@
 --  Description:  Single-target ranged Light damage (~700-1500), ignores Utsusemi.
 --  Type: Magical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

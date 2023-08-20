@@ -4,8 +4,6 @@
 --  Description: Deals Water damage to an enemy. Additional Effect: Bind.
 --  Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

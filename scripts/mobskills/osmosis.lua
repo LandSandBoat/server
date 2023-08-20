@@ -4,8 +4,6 @@
 -- Description: Steals an enemy's HP and one beneficial status xi.effect. Ineffective against undead.
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

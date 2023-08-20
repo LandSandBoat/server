@@ -2,8 +2,6 @@
 -- Fireball
 -- Deals Fire damage in an area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,8 +6,6 @@
 --  Utsusemi/Blink absorb: 4 Shadows
 --  Range: Single Target 7.0'
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

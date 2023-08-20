@@ -1,8 +1,6 @@
 -----------------------------------
 -- Holy Water - Removes Curse, Zombie, and Doom.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

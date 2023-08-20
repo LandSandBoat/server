@@ -3,8 +3,6 @@
 --  Aern (NIN & MNK)
 --  Blinkable 1 hit, Knockback, Hate Reset
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Grapple
 -- Deals physical damage to enemies within a fan-shaped area originating from pet.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

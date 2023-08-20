@@ -3,8 +3,6 @@
 --  Description: Delivers a fivefold attack. Damage varies with TP.
 --  Type: Physical only when weapon is broken
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

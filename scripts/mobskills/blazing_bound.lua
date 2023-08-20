@@ -3,8 +3,6 @@
 --  Description: Deals fire damage to an enemy.
 --  Type: Magical (Fire)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

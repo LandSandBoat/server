@@ -2,8 +2,6 @@
 -- Slumber Powder
 -- 10' Conal sleep
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

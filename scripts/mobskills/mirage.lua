@@ -7,8 +7,6 @@
 -- Range: Self
 -- Notes: Very sharp evasion increase.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

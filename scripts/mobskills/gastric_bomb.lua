@@ -5,8 +5,6 @@
 -- Notes: Attack Down effect is 50%.
 -- Duration: Three minutes
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

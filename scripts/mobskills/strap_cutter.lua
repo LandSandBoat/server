@@ -2,8 +2,6 @@
 -- Strap Cutter
 -- Description: Removes and disables several random equipment slots for a period of time.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

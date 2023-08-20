@@ -8,8 +8,6 @@
 --  Range: Unknown cone
 --  Notes: Water Damage Knockback.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

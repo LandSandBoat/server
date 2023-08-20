@@ -2,8 +2,6 @@
 -- Rending Deluge
 -- Deals water damage to enemies within range. Additional effect: Dispel.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

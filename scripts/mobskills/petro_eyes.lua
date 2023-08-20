@@ -5,8 +5,6 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Single gaze
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,8 +5,6 @@
 -- Wipes Shadows
 -- Range: 10' radial
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,8 +7,6 @@
 -- Range: Cone
 -- Notes: Poison is about 5/tic.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

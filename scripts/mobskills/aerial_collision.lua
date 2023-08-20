@@ -2,8 +2,6 @@
 -- Aerial Collision
 -- Description: Cone Attack damage and Defense Down, strips Utsusemi (xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

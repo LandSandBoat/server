@@ -2,8 +2,6 @@
 -- Vortex
 -- Creates a vortex that damages targets in an area of effect. Additional effect: Terror
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,8 +4,6 @@
 --  Type: Magical Enfeebling
 --  Ignore Shadows, Single target
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

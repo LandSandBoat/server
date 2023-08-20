@@ -3,8 +3,6 @@
 -- Invokes the power of a crystal to deal Light damage to targets in an area of effect.
 -- Range: 15' radial
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

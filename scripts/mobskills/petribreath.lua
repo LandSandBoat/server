@@ -5,8 +5,6 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown  cone, Seen up to 15' distance.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

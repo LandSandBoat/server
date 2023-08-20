@@ -3,8 +3,6 @@
 -- Trust: Semih Lafihna
 -- Darkness/Gravitation skillchain properties, AoE damage
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

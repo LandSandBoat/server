@@ -3,8 +3,6 @@
 -- Enhances defense.
 -- Trust: Gessho: Shiko no Mitate : Defense Boost + Stoneskin + Issekigan
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

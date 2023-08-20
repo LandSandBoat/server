@@ -2,8 +2,6 @@
 -- Eald2 Warp Out
 -- End Eald'Narche ZM16 (phase 2) teleport
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

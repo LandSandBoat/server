@@ -2,8 +2,6 @@
 -- Filamented Hold
 -- Reduces the attack speed of enemies within a fan-shaped area originating from the caster.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

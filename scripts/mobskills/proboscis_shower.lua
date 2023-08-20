@@ -3,8 +3,6 @@
 -- Description: Restores HP.
 -- Copied from Healing Breeze: needs retail calculations
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

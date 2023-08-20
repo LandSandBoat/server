@@ -2,8 +2,6 @@
 -- Infernal Deliverance
 -- Description: Deals damage to targets in range. Additional effect: Stun
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

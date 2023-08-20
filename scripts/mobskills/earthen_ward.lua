@@ -2,8 +2,6 @@
 -- Earthen Ward
 -- Titan grants Stoneskin to party members within area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

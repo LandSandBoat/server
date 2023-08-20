@@ -4,8 +4,6 @@
 --  Description: Deals ice damage to enemies within a fan-shaped area originating from the caster. Additional effect: Bind.
 --  Type: Magical Ice (Element)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

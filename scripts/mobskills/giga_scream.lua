@@ -8,8 +8,6 @@
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Triple Attack.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

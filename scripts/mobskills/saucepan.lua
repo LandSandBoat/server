@@ -2,8 +2,6 @@
 -- Saucepan
 -- Force feeds an unsavory dish.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

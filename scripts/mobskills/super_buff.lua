@@ -3,8 +3,6 @@
 -- Raises physical attack, defense, magic attack and magic evasion
 -- Used by Nidhogg at will
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

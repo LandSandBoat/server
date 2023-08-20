@@ -2,8 +2,6 @@
 -- Jet Stream
 -- Delivers a threefold attack. Accuracy varies with TP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

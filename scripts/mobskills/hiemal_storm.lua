@@ -8,7 +8,6 @@
 --  Notes: Used only by Snoll Tzar
 ---------------------------------------------
 require("scripts/globals/utils")
-require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}
 

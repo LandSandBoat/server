@@ -2,8 +2,6 @@
 -- Moonlit Charge
 -- Fenrir inflicts Blindness along with a single attack (knockback) to target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

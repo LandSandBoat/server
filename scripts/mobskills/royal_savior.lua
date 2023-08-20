@@ -2,8 +2,6 @@
 -- Royal Savior
 -- Grants effect of Protect
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

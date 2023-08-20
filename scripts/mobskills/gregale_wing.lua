@@ -6,8 +6,6 @@
 --  Range: 30' radial.
 --  Notes: Used only by Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

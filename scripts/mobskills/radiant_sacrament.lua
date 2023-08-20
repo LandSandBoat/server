@@ -9,8 +9,6 @@
 -- "Offer thy worship...
 -- I shall burn away...thy transgressions..."
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

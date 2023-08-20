@@ -4,8 +4,6 @@
 --  Description: Damage varies with TP. Additional effect: defense down
 --  Type: Physical (Blunt)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,8 +4,6 @@
 --  Spell Type: Magical (Dark)
 --  Range: Casting range 13'
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

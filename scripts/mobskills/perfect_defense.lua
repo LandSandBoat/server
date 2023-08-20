@@ -11,8 +11,6 @@
 -- "Cease thy struggles...
 -- I am immutable...indestructible...impervious...immortal..."
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,8 +5,6 @@
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 10' cone
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Sandstorm
 -- Kicks up a blinding dust cloud on targets in an area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

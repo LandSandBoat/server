@@ -6,8 +6,6 @@
 --  Wipes Shadows
 --  Range: 5 yalms
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

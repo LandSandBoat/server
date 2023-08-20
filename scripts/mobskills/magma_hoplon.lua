@@ -3,8 +3,6 @@
 -- Covers the user in fiery spikes and absorbs damage. Enemies that hit it take fire damage.
 -- Stoneskin portion cannot be removed with dispel.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

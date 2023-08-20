@@ -3,8 +3,6 @@
 -- Deals damage to a single target. Additional effect: Knockback
 -- Used in BCNM: Hostile Herbivores
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

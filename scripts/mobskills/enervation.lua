@@ -3,8 +3,6 @@
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical (Dark)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,8 +7,6 @@
 --  Range: 20
 --  Notes: Uses defense instead of attack. Curled form only.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

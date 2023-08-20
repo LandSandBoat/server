@@ -1,8 +1,6 @@
 -----------------------------------
 --  August Melee - H2H
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

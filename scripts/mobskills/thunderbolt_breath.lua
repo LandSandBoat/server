@@ -3,8 +3,6 @@
 --  Description: Deals thunder damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Thunder)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

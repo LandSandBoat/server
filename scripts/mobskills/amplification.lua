@@ -2,8 +2,6 @@
 -- Amplification
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

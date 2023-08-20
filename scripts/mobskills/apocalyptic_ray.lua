@@ -4,8 +4,6 @@
 -- Description: Inflicts Doom upon an enemy. This is not a gaze attack. Turing away will not prevent doom.
 -- Type: Magical (Dark)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

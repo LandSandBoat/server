@@ -1,7 +1,6 @@
 -----------------------------------
 --  Winds of Oblivion
 -----------------------------------
-require("scripts/globals/mobskills")
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local mobskillObject = {}

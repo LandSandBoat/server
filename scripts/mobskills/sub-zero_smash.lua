@@ -9,8 +9,6 @@
 --         still be used anytime. As a result, any other Ruszor spells
 --         should not trigger if the target is behind the mob.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

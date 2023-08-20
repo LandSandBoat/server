@@ -7,8 +7,6 @@
 -- Range: Unknown cone, backwards
 -- Notes:  Only used when the Behemoth is attacking with its tail.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

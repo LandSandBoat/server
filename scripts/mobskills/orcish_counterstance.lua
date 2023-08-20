@@ -3,8 +3,6 @@
 -- Used only by Orcs in Wings of the Goddess Areas.
 -- Certain NMs may have a higher power version of the xi.effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

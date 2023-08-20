@@ -2,8 +2,6 @@
 -- Stone IV
 -- Titan deals earth elemental damage to target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

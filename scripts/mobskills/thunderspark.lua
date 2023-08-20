@@ -2,8 +2,6 @@
 -- Thunderspark
 -- Ramuh deals lightning damage and paralyzes enemies within area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

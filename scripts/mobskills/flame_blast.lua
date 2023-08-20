@@ -7,8 +7,6 @@
 --  Range: 30'
 --  Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

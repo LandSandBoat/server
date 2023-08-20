@@ -4,8 +4,6 @@
 -- Type: Physical
 -- Utsusemi/Blink absorb: One shadow
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

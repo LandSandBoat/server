@@ -5,8 +5,6 @@
 -- Only used when wielding a spear
 -- Utsusemi/Blink absorb: 2-3 shadow
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

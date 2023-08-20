@@ -7,8 +7,6 @@
 --  Range: AoE
 --  Notes: Bio effect can take away up to 39/tick.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

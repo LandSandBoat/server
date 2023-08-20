@@ -2,8 +2,6 @@
 -- Lodesong
 -- Description: Weighs down targets in an area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

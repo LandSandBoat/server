@@ -2,8 +2,6 @@
 -- Flaming Crush
 --     Ifrit delivers a three-hit attack that deals fire elemental damage to target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

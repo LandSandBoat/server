@@ -5,8 +5,6 @@
 -- Range: Melee?
 -- Duration: 9:00
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

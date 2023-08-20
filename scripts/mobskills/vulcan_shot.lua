@@ -7,8 +7,6 @@
 -- Utsusemi/Blink absorb: Wipes shadows?
 -- Range: 14' radial
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -8,8 +8,6 @@
 -- Notes: When used by the Cemetery Cherry and leafless Jidra: it also deals damage, inflicts Poison, and resets hate.
 --        When used by Cernunnos: deals damage, also drains HP equal to the damage inflicted.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Shock Strike
 -- Ramuh delivers a single-hit blunt attack on target
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

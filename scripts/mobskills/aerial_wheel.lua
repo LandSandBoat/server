@@ -2,8 +2,6 @@
 -- Aerial Wheel
 -- Deals a ranged attack to a single target. Additional effect: stun
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

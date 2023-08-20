@@ -5,9 +5,7 @@
 --  Type: Magical (Wind)
 --  Only used by certain Buffalo NMs
 --
----------------------------------------------
-require("scripts/globals/mobskills")
----------------------------------------------
+-------------------------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

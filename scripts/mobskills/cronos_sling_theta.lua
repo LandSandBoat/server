@@ -2,8 +2,6 @@
 -- Cronos Sling: Theta
 -- Deals damage in a fan-shaped area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Ultrasonics
 -- Reduces evasion of targets in area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

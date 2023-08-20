@@ -3,8 +3,6 @@
 -- Description: restores hit points and cures some status ailments.
 -- Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

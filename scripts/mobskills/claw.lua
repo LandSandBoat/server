@@ -2,8 +2,6 @@
 -- Claw
 -- Garuda delivers a single-hit piercing attack on target
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

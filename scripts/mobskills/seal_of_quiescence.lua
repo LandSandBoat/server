@@ -1,7 +1,6 @@
 -----------------------------------
 -- Seal of Quiescence
 -----------------------------------
-require("scripts/globals/mobskills")
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local mobskillObject = {}

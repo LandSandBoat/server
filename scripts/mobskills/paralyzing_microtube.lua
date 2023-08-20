@@ -3,8 +3,6 @@
 -- Deals Magic damage to target. Additional effect: Paralyze
 -- Used by Adelheid (Trust)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

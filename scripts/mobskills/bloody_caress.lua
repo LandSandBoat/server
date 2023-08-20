@@ -8,8 +8,6 @@
 --        so the initial implemention is just a basic version similar to
 --        Goblin Rush, which is also a physical 3-hit spell.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

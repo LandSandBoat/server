@@ -3,8 +3,6 @@
 -- Emits a unnerving bleat that slows down players in range.
 -- Only used by Nightmare Sheep from Dynamis-Valkurm
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

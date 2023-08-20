@@ -5,8 +5,6 @@
 --  Utsusemi/Blink absorb:&nbsp??
 --  Range: Varying Area of Effect
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

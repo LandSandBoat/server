@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Only used in "ball" form.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 -----------------------------------

@@ -4,8 +4,6 @@
 -- Description: Charms nearby players.
 -- Utsusemi/Blink absorb:
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

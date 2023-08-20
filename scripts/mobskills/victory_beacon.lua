@@ -2,8 +2,6 @@
 -- Victory Beacon
 -- Used by Rughadjeen (Trust)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

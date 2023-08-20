@@ -7,8 +7,6 @@
 --  Range: Melee
 --  Notes: Stun doesn't always occur.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

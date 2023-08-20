@@ -2,8 +2,6 @@
 -- Sand Breath
 -- Deals Earth damage to enemies within a fan-shaped area. Additional effect: Blind
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

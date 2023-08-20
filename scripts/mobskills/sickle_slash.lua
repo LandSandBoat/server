@@ -2,8 +2,6 @@
 -- Sickle Slash
 -- Deals critical damage. Chance of critical hit varies with TP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 -----------------------------------

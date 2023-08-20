@@ -2,8 +2,6 @@
 -- Demonic Howl
 -- 10' AoE +50%. Slow (weaker than Haste)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

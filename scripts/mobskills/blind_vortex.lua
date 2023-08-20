@@ -7,8 +7,6 @@
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Scratch.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

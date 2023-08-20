@@ -5,8 +5,6 @@
 --  Type: Physical (Blunt)
 -- RDM, THF, PLD, BST, BRD, RNG, NIN, and COR fomors).
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,8 +6,6 @@
 --  2-3 Shadows
 --  Range: Backward Arc
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

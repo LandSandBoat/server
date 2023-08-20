@@ -3,8 +3,6 @@
 --  Description: Deals water damage to enemies within range. Additional effect: STR Down.
 --  Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

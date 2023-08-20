@@ -3,8 +3,6 @@
 --  Description: Activates a shield to absorb all incoming physical damage.
 --  Type: Physical
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

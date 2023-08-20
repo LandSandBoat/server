@@ -7,8 +7,6 @@
 -- Range: Radial
 -- Notes: Only used by some notorious monsters like Xolotl and Giltine.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

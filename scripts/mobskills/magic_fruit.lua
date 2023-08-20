@@ -3,8 +3,6 @@
 -- Description: Restores HP for the target party member.
 -- Type: Magical (Light)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

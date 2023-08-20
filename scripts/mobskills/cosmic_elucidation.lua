@@ -5,9 +5,7 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range:
 --  Notes: Ejects all combatants from the battlefield, resulting in a failure.
----------------------------------------------------
-require("scripts/globals/mobskills")
----------------------------------------------------
+-------------------------------------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

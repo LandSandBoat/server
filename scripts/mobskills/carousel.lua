@@ -2,8 +2,6 @@
 -- Carousel
 -- Becomes a merry-go-round of pain that damages players in range.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

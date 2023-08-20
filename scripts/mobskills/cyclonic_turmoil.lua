@@ -4,8 +4,6 @@
 -- Deals Wind damage in an area of effect. Additional effect: Knockback & Dispel
 -- Notes: Dispels multiple buffs. Wipes shadows.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

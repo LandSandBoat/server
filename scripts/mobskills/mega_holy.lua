@@ -10,8 +10,6 @@
 -- "Open thine eyes...
 -- My radiance...shall guide thee..."
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

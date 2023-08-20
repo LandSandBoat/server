@@ -5,8 +5,6 @@
 -- TODO: Verify ability duration
 -- https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

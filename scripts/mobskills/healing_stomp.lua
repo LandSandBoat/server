@@ -7,8 +7,6 @@
 -- Range: Self
 -- Notes: Only used by notorious monsters.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

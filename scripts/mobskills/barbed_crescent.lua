@@ -5,8 +5,6 @@
 -- The Additional Effect: Accuracy Down may not always process.
 -- Duration: Three minutes ?
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

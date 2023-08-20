@@ -3,8 +3,6 @@
 -- Description: Enhances defense.
 -- Type: Magical (Earth)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

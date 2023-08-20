@@ -7,8 +7,6 @@
 --  Range: Single Target
 --  Notes: Very short range, easily evaded by walking away from it.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,8 +4,6 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,8 +2,6 @@
 -- Mine Blast
 -- 20 Aoe Fire damage from a bomb
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

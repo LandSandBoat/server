@@ -7,8 +7,6 @@
 --  Range: Radial
 --  Notes: Only used when flying
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

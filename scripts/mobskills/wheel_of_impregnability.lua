@@ -2,7 +2,6 @@
 -- Wheel of Impregnability
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
-require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
 

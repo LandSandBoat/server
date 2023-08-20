@@ -7,8 +7,6 @@
 --  Range: 10' cone
 --  Notes: Additional effect can be removed with Poisona.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,7 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Vrtra and Azdaja
 -----------------------------------
-require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------
 local mobskillObject = {}

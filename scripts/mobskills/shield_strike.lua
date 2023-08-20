@@ -6,8 +6,6 @@
 --  1 shadow?
 --  Range: Melee front arc
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

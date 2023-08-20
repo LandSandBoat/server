@@ -3,8 +3,6 @@
 -- Note the subtle name difference from 'Max Potion'.
 -- This feels like a localization error otherwise.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

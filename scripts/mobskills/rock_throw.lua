@@ -2,8 +2,6 @@
 -- Rock Throw
 -- Titan delivers a single-hit slashing attack on target
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

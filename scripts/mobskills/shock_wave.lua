@@ -2,8 +2,6 @@
 -- Shock_Wave
 -- Deals damage in a frontal area of effect. Additional effect: Knockback
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

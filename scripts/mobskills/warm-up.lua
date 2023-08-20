@@ -3,8 +3,6 @@
 -- Description: Enhances accuracy and evasion.
 -- Type: Magical (Earth)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,8 +7,6 @@
 --  Range: Melee
 --  Notes: Moving to the side will avoid attack.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

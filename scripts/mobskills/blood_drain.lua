@@ -2,8 +2,6 @@
 -- Blood Drain
 -- Steals an enemy's HP. Ineffective against undead.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

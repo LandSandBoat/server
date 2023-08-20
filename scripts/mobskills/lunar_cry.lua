@@ -2,8 +2,6 @@
 -- Lunar Cry
 -- Fenrir gives accuracy and evasion down status effects to target.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

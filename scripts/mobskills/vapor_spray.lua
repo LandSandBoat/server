@@ -3,8 +3,6 @@
 --  Description: Deals Water breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

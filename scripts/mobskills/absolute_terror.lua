@@ -2,8 +2,6 @@
 -- Absolute Terror
 -- Causes Terror, which causes the victim to be stunned for the duration of the effect, this can not be removed.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,8 +6,6 @@
 -- Range: Single gaze
 -- Notes: Nightmare Cockatrice extends this to a fan-shaped AOE.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

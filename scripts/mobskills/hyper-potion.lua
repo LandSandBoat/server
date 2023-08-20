@@ -1,8 +1,6 @@
 -----------------------------------
 -- Hyper Potion - Restores 250 HP.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

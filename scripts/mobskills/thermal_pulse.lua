@@ -7,8 +7,6 @@
 --  Range: 12.5
 --  Notes: Open form only.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

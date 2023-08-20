@@ -6,8 +6,6 @@
 -- Utsusemi/Blink absorb: Wipes Shadows
 -- Range: 30 yalms
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

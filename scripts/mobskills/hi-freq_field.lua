@@ -2,8 +2,6 @@
 -- Hi-Freq Field
 -- Lowers the evasion of enemies in a fan-shaped area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

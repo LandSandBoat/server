@@ -3,8 +3,6 @@
 --  Description: Deals ice damage that lowers Agility and gradually reduces HP of enemies within range.
 --  Type: Magical (Ice)
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,8 +5,6 @@
 -- Range: Self
 -- Notes: Erases all negative effects on the mob and heals an amount for each removed.
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
