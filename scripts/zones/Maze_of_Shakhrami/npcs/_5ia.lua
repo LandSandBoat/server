@@ -3,8 +3,6 @@
 --  NPC: Strange Apparatus
 -- !pos 375 20 -259 198
 -----------------------------------
-require("scripts/globals/strangeapparatus")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

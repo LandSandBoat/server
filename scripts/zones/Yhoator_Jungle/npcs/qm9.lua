@@ -4,7 +4,6 @@
 -- !pos 240.341 -0.826 -402.532 124
 -----------------------------------
 local ID = zones[xi.zone.YHOATOR_JUNGLE]
-require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}
 

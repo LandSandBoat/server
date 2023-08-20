@@ -4,8 +4,6 @@
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
 -----------------------------------
-require("scripts/globals/gobbie_mystery_box")
------------------------------------
 local entity = {}
 
 local events =

@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Wilt
 -- !pos 412.263 4.161 111.199 260
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

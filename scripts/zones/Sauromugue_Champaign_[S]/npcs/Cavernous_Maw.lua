@@ -4,8 +4,6 @@
 -- !pos 369 8 -227 98
 -- Teleports Players to Sauromugue_Champaign
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

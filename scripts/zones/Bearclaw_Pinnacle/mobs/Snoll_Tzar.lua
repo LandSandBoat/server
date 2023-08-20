@@ -2,7 +2,6 @@
 -- Area: Bearclaw Pinnacle
 --  Mob: Snoll Tzar
 -----------------------------------
-require("scripts/globals/player")
 local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------
 local entity = {}

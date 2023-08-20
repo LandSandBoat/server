@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Lebros Cavern
 -----------------------------------
-require("scripts/globals/assault")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

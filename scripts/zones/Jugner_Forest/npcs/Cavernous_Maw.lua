@@ -4,8 +4,6 @@
 -- !pos -118 -8 -518 104
 -- Teleports Players to Jugner Forest [S]
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

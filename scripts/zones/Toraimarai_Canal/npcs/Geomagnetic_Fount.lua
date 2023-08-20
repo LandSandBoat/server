@@ -3,8 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -60.004 21.503 194.314
 -----------------------------------
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

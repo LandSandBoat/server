@@ -2,8 +2,6 @@
 -- Area: East Sarutabaruta
 --  NPC: Treasure Casket
 -----------------------------------
-require("scripts/globals/caskets")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

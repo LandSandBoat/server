@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Keep (162)
 -----------------------------------
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

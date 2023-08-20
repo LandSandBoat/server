@@ -6,7 +6,6 @@
 -- !pos 27 0.1 0.1 233
 -----------------------------------
 local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 

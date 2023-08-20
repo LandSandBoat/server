@@ -22,8 +22,6 @@
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
-require("scripts/globals/moghouse")
------------------------------------
 local entity = {}
 
 local function getNumberOfCoinsToUpgradeSize(size)

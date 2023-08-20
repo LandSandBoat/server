@@ -4,8 +4,6 @@
 -- !pos 0 0 -165 95
 -- Teleports Players to West Sarutabaruta
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

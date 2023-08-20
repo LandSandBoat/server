@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/helm')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}

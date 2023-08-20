@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: The Eldieme Necropolis (195)
 -----------------------------------
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

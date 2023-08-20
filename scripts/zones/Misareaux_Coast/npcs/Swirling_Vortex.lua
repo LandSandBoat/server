@@ -3,8 +3,6 @@
 --  NPC: Swirling Vortex
 --  Entrance to Qufim Island
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

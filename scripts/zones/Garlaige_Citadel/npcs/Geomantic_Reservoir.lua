@@ -4,8 +4,6 @@
 -- Unlocks: Geo-VIT
 -- !pos -83.898 5.568 139.600 200
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

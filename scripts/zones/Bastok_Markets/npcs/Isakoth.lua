@@ -4,7 +4,6 @@
 -- Records of Eminence NPC
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]
-require("scripts/globals/sparkshop")
 -----------------------------------
 local entity = {}
 

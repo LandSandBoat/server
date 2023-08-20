@@ -2,8 +2,6 @@
 -- Area: Upper Delkfutt's Tower
 --  NPC: Treasure Casket
 -----------------------------------
-require("scripts/globals/caskets")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

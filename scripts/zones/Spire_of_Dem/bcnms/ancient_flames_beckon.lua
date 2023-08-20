@@ -2,7 +2,6 @@
 -- Ancient Flames Beckon
 -- Spire of Dem mission battlefield
 -----------------------------------
-require("scripts/globals/teleports")
 require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefieldObject = {}

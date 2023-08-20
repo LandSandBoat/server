@@ -7,7 +7,6 @@
 -- !pos 62 -4 240 241
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 

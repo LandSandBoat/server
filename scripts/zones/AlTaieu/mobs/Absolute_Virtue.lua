@@ -3,7 +3,6 @@
 --  HNM: Absolute Virtue
 -----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
-require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 

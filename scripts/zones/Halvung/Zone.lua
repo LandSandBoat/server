@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Halvung (62)
 -----------------------------------
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

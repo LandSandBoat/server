@@ -2,8 +2,6 @@
 -- Area: Bastok Mines
 --  NPC: Explorer Moogle
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 local eventId = 585

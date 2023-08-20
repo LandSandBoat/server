@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Residential_Area
 -----------------------------------
-require('scripts/globals/moghouse')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

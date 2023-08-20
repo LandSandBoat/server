@@ -5,7 +5,6 @@
 -- Active on EARTHSDAY in this zone. To test on off-days, setStatus(xi.status.NORMAL)
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}
 

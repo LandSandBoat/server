@@ -2,8 +2,6 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
-require('scripts/globals/magic')
------------------------------------
 local entity = {}
 
 local function enterShell(mob)

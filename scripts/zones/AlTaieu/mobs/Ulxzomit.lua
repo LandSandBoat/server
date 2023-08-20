@@ -2,7 +2,6 @@
 -- Area: Al'Taieu
 --  Mob: Ul'xzomit
 -----------------------------------
-require("scripts/globals/follow")
 -----------------------------------
 local entity = {}
 

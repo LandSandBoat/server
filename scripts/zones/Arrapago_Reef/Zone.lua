@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Arrapago_Reef (54)
 -----------------------------------
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

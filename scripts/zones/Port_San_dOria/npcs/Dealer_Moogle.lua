@@ -3,8 +3,6 @@
 --  NPC: Dealer Moogle
 -- !pos 13.026 -4.000 -87.403 232
 -----------------------------------
-require("scripts/globals/dealer_moogle")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

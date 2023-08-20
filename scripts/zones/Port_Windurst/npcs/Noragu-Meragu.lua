@@ -2,8 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Noragu-Meragu
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

@@ -4,8 +4,6 @@
 -- !pos 322 -59 503 101
 -- Teleports Players to East Ronfaure [S]
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

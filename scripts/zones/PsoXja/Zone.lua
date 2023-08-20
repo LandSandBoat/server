@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: PsoXja (9)
 -----------------------------------
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

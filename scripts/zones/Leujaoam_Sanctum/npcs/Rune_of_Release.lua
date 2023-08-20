@@ -2,8 +2,6 @@
 -- Area: Leujaoam Sanctum
 -- Rune of Release
 -----------------------------------
-require("scripts/globals/assault")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

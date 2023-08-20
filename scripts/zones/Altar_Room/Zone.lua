@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Altar_Room (152)
 -----------------------------------
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

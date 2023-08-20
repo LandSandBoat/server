@@ -2,8 +2,6 @@
 -- Area: The Sanctuary of Zi'Tah
 --  NPC: Treasure Casket
 -----------------------------------
-require("scripts/globals/caskets")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

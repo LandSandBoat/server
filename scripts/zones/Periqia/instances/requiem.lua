@@ -2,7 +2,6 @@
 -- Assault: Requiem
 -- TODO: random the chest locations
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}

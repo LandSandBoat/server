@@ -4,9 +4,6 @@
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/cutscenes')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

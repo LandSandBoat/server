@@ -2,8 +2,6 @@
 -- Area: Promyvion-Mea
 --   NM: Memory Receptacle
 -----------------------------------
-require("scripts/globals/promyvion")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

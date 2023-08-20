@@ -3,8 +3,6 @@
 --  NPC: Rune of Release
 -- !pos 412 -9 54 55
 -----------------------------------
-require("scripts/globals/assault")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

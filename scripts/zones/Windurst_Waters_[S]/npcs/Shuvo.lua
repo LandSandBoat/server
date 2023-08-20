@@ -4,7 +4,6 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17163023
 -----------------------------------
-require('scripts/globals/extravaganza')
 
 local entity = {}
 

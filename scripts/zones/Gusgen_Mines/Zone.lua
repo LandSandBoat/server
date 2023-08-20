@@ -2,8 +2,6 @@
 -- Zone: Gusgen Mines (196)
 -----------------------------------
 local ID = zones[xi.zone.GUSGEN_MINES]
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

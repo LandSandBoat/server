@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Poison
 -- !pos 379.572 -39.057 57.502 101
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

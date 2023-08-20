@@ -2,8 +2,6 @@
 -- Area: Northern San d'Oria
 --  NPC: Explorer Moogle
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 local eventId = 862

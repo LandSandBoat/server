@@ -3,8 +3,6 @@
 --  NPC: Stonehoused_Adit
 -- !pos -434.655 36.708 279.983 88
 -----------------------------------
-require("scripts/globals/instance")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

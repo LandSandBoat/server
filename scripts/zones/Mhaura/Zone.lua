@@ -2,7 +2,6 @@
 -- Zone: Mhaura (249)
 -----------------------------------
 local ID = zones[xi.zone.MHAURA]
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

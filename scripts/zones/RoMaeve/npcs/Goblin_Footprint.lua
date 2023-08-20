@@ -4,8 +4,6 @@
 -- Type: NPC
 -- !pos  8.793 -8.000 -144.479 122
 -----------------------------------
-require("scripts/globals/goblinfootprint")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

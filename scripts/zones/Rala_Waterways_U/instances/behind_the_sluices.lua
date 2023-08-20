@@ -2,8 +2,6 @@
 -- behind_the_sluices
 -- !instance 25900
 -----------------------------------
-require('scripts/globals/instance')
-require('scripts/globals/allyassist')
 local ID = zones[xi.zone.RALA_WATERWAYS_U]
 -----------------------------------
 local instanceObject = {}

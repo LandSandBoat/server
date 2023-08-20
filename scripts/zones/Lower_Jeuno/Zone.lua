@@ -3,9 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.LOWER_JEUNO]
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
-require('scripts/globals/missions')
-require('scripts/globals/pathfind')
-require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}
 

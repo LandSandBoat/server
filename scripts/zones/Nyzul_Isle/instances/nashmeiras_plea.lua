@@ -3,7 +3,6 @@
 -- !instance 7701
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 

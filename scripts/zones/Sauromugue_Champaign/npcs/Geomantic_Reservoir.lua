@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Fury
 -- !pos 384.047 45.466 384.224 120
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

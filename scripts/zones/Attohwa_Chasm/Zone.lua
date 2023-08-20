@@ -2,7 +2,6 @@
 -- Zone: Attohwa_Chasm (7)
 -----------------------------------
 local ID = zones[xi.zone.ATTOHWA_CHASM]
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 
