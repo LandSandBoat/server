@@ -4,7 +4,6 @@
 -- Only sells when San d'Oria controlls Fauregandi Region
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 

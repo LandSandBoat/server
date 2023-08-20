@@ -4,7 +4,6 @@
 -- Zulkheim Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 

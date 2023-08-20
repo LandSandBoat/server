@@ -1,7 +1,6 @@
 -----------------------------------
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
-require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local zoneObject = {}

@@ -5,7 +5,6 @@
 -- !pos -66 2 -11 230
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 

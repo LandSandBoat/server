@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Windurst_Woods (241)
 -----------------------------------
-require('scripts/globals/events/harvest_festivals')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

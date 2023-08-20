@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -- !pos -322.123 -10.319 -169.418 235
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}

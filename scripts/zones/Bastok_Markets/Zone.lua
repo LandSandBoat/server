@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Bastok_Markets (235)
 -----------------------------------
-require('scripts/globals/events/harvest_festivals')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

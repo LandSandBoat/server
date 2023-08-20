@@ -5,7 +5,6 @@
 -- Confirmed shop stock, August 2013
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/events/harvest_festivals")
 -----------------------------------
 local entity = {}
 

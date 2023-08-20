@@ -2,7 +2,6 @@
 -- Area: Al'Taieu
 --  Mob: Ul'xzomit
 -----------------------------------
------------------------------------
 local entity = {}
 
 local followOptions = { forceRepathInterval = 1 }

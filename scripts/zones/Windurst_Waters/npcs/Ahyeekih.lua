@@ -4,7 +4,6 @@
 -- Only sells when Windurst controls Kolshushu
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
