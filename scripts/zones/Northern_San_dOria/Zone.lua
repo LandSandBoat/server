@@ -13,7 +13,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -7, -3, 110, 7, -1, 155)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
-    applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

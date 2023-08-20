@@ -6,7 +6,7 @@ require('scripts/globals/events/harvest_festivals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end
