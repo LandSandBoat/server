@@ -285,7 +285,7 @@ namespace battleutils
                 PPetSkill->setTertiarySkillchain(sql->GetUIntData(15));
                 g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
 
-                auto filename = fmt::format("./scripts/globals/abilities/pet/{}.lua", PPetSkill->getName());
+                auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
