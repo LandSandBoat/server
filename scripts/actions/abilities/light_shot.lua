@@ -3,8 +3,6 @@
 -- Consumes a Light Card to enhance light-based debuffs. Additional effect: Light-based Sleep
 -- Dia Effect: Defense Down Effect +5% and DoT + 1
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

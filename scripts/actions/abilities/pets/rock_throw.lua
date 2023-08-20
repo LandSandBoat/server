@@ -1,8 +1,6 @@
 -----------------------------------
 -- Rock Throw M=3.5
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

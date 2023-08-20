@@ -5,8 +5,6 @@
 -- Recast Time: 1:00:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

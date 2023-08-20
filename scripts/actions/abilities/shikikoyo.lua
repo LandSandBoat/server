@@ -6,8 +6,6 @@
 -- Duration: Instant
 -- Target: Party member, cannot target self.
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

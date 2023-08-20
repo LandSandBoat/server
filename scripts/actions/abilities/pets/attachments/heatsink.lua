@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Heatsink
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

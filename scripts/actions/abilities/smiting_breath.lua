@@ -5,8 +5,6 @@
 -- Recast Time: 01:00
 -- Duration: instant
 -----------------------------------
-require("scripts/globals/job_utils/dragoon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

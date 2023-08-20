@@ -1,8 +1,6 @@
 -----------------------------------
 -- Welt
 -----------------------------------
-require("scripts/globals/job_utils/summoner")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -24,8 +24,6 @@
 --
 -- Note that this roll will increase potency of cures received, not the potency of the caster's spells
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Mountain Buster M=12
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Rush M=5, 2
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

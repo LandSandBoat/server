@@ -1,9 +1,6 @@
 -----------------------------------
 -- Lightning Armor
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/utils")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

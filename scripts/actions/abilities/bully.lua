@@ -6,8 +6,6 @@
 -- Recast Time: 3:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/job_utils/thief")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

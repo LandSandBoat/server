@@ -5,8 +5,6 @@
 -- Recast Time: 0:10:00 (+5% MP granted per additional upgrade)
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/job_utils/paladin")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -23,8 +23,6 @@
 -- 12+         |-4hp(regen)/Tick    |-4hp(regen)/Tick
 -- A bust will cause a regen effect on you to be reduced by 4, it will not drain HP from you if no regen effect is active.
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

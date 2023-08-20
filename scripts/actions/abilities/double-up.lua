@@ -5,8 +5,6 @@
 -- Recast Time: 8 seconds
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -9,8 +9,6 @@
 --
 -- Data unknown
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

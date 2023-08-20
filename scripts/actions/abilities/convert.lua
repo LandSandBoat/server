@@ -5,8 +5,6 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/job_utils/red_mage")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

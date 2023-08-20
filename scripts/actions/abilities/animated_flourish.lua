@@ -5,8 +5,6 @@
 -- Finishing Moves Used: 1-2
 -- Recast Time: 00:30
 -----------------------------------
-require('scripts/globals/job_utils/dancer')
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

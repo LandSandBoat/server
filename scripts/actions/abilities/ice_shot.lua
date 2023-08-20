@@ -3,10 +3,6 @@
 -- Consumes a Ice Card to enhance ice-based debuffs. Deals ice-based magic damage
 -- Frost Effect: Enhanced DoT and AGI-
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -5,8 +5,6 @@
 -- Recast Time: 2:00 minutes
 -- Duration: 1:00 minutes
 -----------------------------------
-require("scripts/globals/job_utils/thief")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Flame Breath
 -----------------------------------
-require("scripts/globals/job_utils/dragoon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

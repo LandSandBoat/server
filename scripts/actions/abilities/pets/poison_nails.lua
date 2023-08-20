@@ -1,8 +1,6 @@
 -----------------------------------
 -- Poison Nails  M=3? guess
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

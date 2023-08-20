@@ -1,4 +1,3 @@
-require("scripts/globals/automaton")
 -----------------------------------
 local attachmentObject = {}
 

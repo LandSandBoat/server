@@ -22,8 +22,6 @@
 -- 11          |+20
 -- Bust        |-10
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

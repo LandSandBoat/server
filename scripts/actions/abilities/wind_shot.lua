@@ -3,10 +3,6 @@
 -- Consumes a Wind Card to enhance wind-based debuffs. Deals wind-based magic damage
 -- Choke Effect: Enhanced DoT and VIT-
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

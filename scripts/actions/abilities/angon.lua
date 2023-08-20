@@ -8,8 +8,6 @@
 -- Range: 10.0 yalms
 -- Notes: Only fails if it can't apply the def down status.
 -----------------------------------
-require("scripts/globals/job_utils/dragoon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

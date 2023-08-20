@@ -2,9 +2,6 @@
 -- Ability: Radial Arcana
 -- Causes your luopan to vanish and restores MP of party members within area of effect.
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/utils")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

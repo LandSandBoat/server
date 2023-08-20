@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Eraser
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 local removable =

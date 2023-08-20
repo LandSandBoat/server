@@ -5,8 +5,6 @@
 -- Recast Time: 1:00:00
 -- Duration: Stymie fades after either sixty seconds passes or a spell lands, but it does not fade if the spell is resisted.
 -----------------------------------
-require("scripts/globals/job_utils/red_mage")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

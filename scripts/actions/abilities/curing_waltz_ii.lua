@@ -5,8 +5,6 @@
 -- TP Required: 35%
 -- Recast Time: 00:08
 -----------------------------------
-require('scripts/globals/job_utils/dancer')
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

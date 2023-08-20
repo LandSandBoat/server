@@ -2,8 +2,6 @@
 -- Attachment: Schurzen
 -- Prevents fatal damage and instead leaves the automaton at 1HP and consumes an Earth Manuever
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

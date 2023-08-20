@@ -26,8 +26,6 @@
 -- Corsair set as subjob is 7% on Lucky roll (5) and 1% on Unlucky roll (9).
 -- The EXP bonus afforded by Corsair's Roll does not apply within Abyssea.
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

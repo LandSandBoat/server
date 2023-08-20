@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Auto-repair Kit III
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

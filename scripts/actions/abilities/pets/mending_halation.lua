@@ -5,9 +5,6 @@
 -- Note: Heals for a fixed amount based on Luopan Level:
 -- This is a light-based cure, so it can suffer Darkness day/weather penalties.
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/utils")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

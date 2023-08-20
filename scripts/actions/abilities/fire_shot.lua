@@ -3,10 +3,6 @@
 -- Consumes a Fire Card to enhance fire-based debuffs. Deals fire-based magic damage
 -- Burn effect: Enhanced DoT and INT-
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

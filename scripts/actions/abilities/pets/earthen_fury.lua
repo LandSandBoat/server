@@ -1,9 +1,6 @@
 -----------------------------------
 -- Earthen Fury
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

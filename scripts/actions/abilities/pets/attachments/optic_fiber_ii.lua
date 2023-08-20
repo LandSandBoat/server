@@ -2,8 +2,6 @@
 -- Attachment: Optic Fiber II
 -- Increases the performance of other attachments by a percentage
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

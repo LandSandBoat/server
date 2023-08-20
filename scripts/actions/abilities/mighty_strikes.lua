@@ -2,8 +2,6 @@
 -- Ability: Mighty Strikes
 -- Job: Warrior
 -----------------------------------
-require("scripts/globals/job_utils/warrior")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

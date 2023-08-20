@@ -6,8 +6,6 @@
 -- Duration: 00:01:00
 -- Cost: 100TP
 -----------------------------------
-require('scripts/globals/job_utils/dancer')
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

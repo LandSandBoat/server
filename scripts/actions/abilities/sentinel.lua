@@ -5,8 +5,6 @@
 -- Recast Time: 5:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/job_utils/paladin")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -5,8 +5,6 @@
 -- Recast Time: 3 minutes
 -- Duration: Instant
 -----------------------------------
-require('scripts/globals/job_utils/dancer')
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -24,8 +24,6 @@
 --
 -- If the Corsair is a lower level than the player receiving Wizard's Roll, the +MAB will be reduced
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

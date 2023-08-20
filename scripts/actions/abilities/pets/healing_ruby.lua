@@ -1,8 +1,6 @@
 -----------------------------------
 -- Healing Ruby
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

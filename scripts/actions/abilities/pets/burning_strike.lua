@@ -1,10 +1,6 @@
 -----------------------------------
 -- Burning Strike M = 6?
 -----------------------------------
-require("scripts/globals/summon")
-require("scripts/globals/magic")
-require("scripts/globals/mobskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

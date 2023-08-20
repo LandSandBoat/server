@@ -1,8 +1,6 @@
 -----------------------------------
 -- Predator Claws M=10 subsequent hits M=2
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

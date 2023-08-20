@@ -1,9 +1,6 @@
 -----------------------------------
 -- Spinning Dive M=12
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

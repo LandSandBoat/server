@@ -8,8 +8,6 @@
 -- You also subsequently cannot kill yourself using this JA.
 -- The increase in Life Cycle potency from Job points is applied in the same set as equipment bonuses.
 -----------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

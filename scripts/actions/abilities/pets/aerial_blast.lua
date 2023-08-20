@@ -1,9 +1,6 @@
 -----------------------------------
 -- Aerial Blast
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/mobskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

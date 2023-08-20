@@ -5,8 +5,6 @@
 -- Recast Time: 00:06:00
 -- Duration: 00:01:00
 -----------------------------------
-require("scripts/globals/job_utils/dark_knight")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

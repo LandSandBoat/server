@@ -4,8 +4,6 @@
 -- Obtained: THF Level 96
 -- Recast Time: 01:00:00
 -----------------------------------
-require("scripts/globals/job_utils/thief")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

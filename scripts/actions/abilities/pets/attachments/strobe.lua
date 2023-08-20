@@ -2,8 +2,6 @@
 -- Attachment: Strobe
 -- http://forum.square-enix.com/ffxi/threads/49065?p=565264#post565264
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

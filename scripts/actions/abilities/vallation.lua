@@ -5,8 +5,6 @@
 -- Recast Time: 3:00
 -- Duration: 2:00
 -----------------------------------
-require("scripts/globals/job_utils/rune_fencer")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

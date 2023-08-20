@@ -5,8 +5,6 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

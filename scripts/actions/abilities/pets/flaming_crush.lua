@@ -1,10 +1,6 @@
 -----------------------------------
 -- Flaming Crush M=10, 2, 2? (STILL don't know)
 -----------------------------------
-require("scripts/globals/summon")
-require("scripts/globals/magic")
-require("scripts/globals/mobskills")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Rock Buster M=4
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Barracude Dive M=3.5
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

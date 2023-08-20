@@ -5,8 +5,6 @@
 -- Recast Time: 2:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/pets")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

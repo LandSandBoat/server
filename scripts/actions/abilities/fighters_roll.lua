@@ -22,8 +22,6 @@
 -- 11          |18%     |24%
 -- 12+         |-6%     |-6%
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Double Punch M=6, 2 (still guessing here)
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

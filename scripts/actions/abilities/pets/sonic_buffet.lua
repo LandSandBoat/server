@@ -1,10 +1,6 @@
 -----------------------------------
 -- Sonic Buffet
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/magic")
-require("scripts/globals/job_utils/summoner")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

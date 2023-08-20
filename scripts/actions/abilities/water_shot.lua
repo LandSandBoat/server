@@ -3,10 +3,6 @@
 -- Consumes a Water Card to enhance water-based debuffs. Deals water-based magic damage
 -- Drown Effect: Enhanced DoT and STR-
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -5,8 +5,6 @@
 -- Recast Time: 00:03:00
 -- Duration: 00:01:00 or the next spell cast
 -----------------------------------
-require("scripts/globals/job_utils/paladin")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

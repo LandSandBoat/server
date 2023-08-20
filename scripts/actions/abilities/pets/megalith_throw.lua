@@ -1,8 +1,6 @@
 -----------------------------------
 -- Megalith Throw M=5.5 (guesstimated)
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

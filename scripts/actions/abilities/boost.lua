@@ -5,8 +5,6 @@
 -- Recast Time: 0:15
 -- Duration: 3:00
 -----------------------------------
-require("scripts/globals/job_utils/monk")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

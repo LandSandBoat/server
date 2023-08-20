@@ -24,8 +24,6 @@
 --
 -- Busting on Evoker's Roll will give you -1MP/tick less on your own total MP refreshed i.e. you do not actually lose MP
 -----------------------------------
-require("scripts/globals/job_utils/corsair")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

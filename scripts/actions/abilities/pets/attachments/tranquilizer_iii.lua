@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Tranquilizer III
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

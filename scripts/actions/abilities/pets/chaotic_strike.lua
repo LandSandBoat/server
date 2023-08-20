@@ -1,8 +1,6 @@
 -----------------------------------
 -- Chaotic Strike M=9 , 2
 -----------------------------------
-require("scripts/globals/summon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

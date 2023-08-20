@@ -6,8 +6,6 @@
 -- Refunds some of the MP consumed by the Geocolure spell that created the luopan.
 -- Amount of MP restored varies depending on remaining Luopan HP.
 -----------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

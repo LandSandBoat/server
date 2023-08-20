@@ -5,8 +5,6 @@
 -- Recast Time: 10 seconds (shared with all maneuvers)
 -- Duration: 1 minute
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

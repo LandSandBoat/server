@@ -13,8 +13,6 @@
 -- Tough            |1.5 Minutes
 -- Very Tough       |1-20 seconds
 -----------------------------------
-require("scripts/globals/pets")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

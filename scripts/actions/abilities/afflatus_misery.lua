@@ -6,8 +6,6 @@
 -- Duration: 2 hours
 -- Restriction: WHM main only
 -----------------------------------
-require("scripts/globals/job_utils/white_mage")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

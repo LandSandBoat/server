@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Shock Absorber
 -----------------------------------
-require("scripts/globals/automaton")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)

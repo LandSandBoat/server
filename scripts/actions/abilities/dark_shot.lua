@@ -3,8 +3,6 @@
 -- Consumes a Dark Card to enhance dark-based debuffs. Additional effect: Dark-based Dispel
 -- Bio Effect: Attack Down Effect +5% and DoT + 3
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

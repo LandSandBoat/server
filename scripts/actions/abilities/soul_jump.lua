@@ -4,8 +4,6 @@
 -- Obtained: DRG Level 85
 -- Recast Time: 2:00
 -----------------------------------
-require("scripts/globals/job_utils/dragoon")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
