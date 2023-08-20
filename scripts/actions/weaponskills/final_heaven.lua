@@ -8,9 +8,6 @@
 -- 3.0x        3.0x    3.0x
 -- +10 Subtle Blow for a short duration after using the weapon skill. (Not implemented)
 -----------------------------------
-require("scripts/globals/aftermath")
-require("scripts/globals/weaponskills")
------------------------------------
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)

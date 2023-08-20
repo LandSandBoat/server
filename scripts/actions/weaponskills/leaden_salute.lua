@@ -11,10 +11,6 @@
 -- 100%TP    200%TP    300%TP
 -- 4.00      4.25      4.75
 -----------------------------------
-require("scripts/globals/aftermath")
-require("scripts/globals/magic")
-require("scripts/globals/weaponskills")
------------------------------------
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)

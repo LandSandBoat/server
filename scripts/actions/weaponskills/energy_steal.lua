@@ -1,8 +1,6 @@
 -----------------------------------
 -- Energy Steal
 -----------------------------------
-require("scripts/globals/weaponskills")
------------------------------------
 local weaponskillObject = {}
 
 -- https://www.bg-wiki.com/ffxi/Energy_Steal

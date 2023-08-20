@@ -10,9 +10,6 @@
 -- 1000 TP   2000 TP   3000 TP
 -- 2.25      4.5       6.75
 -----------------------------------
-require("scripts/globals/aftermath")
-require("scripts/globals/weaponskills")
------------------------------------
 local weaponskillObject = {}
 
 -- source https://www.bg-wiki.com/ffxi/Dimidiation, http://wiki.ffo.jp/html/31450.html

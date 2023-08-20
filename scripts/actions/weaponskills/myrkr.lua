@@ -1,9 +1,6 @@
 -----------------------------------
 -- Myrkr
 -----------------------------------
-require("scripts/globals/aftermath")
-require("scripts/globals/weaponskills")
------------------------------------
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
