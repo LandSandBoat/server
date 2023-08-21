@@ -479,7 +479,7 @@ namespace trustutils
         }
 
         // add mob pool mods ahead of applying stats
-        mobutils::AddCustomMods(PTrust);
+        mobutils::AddSqlModifiers(PTrust);
 
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();

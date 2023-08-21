@@ -651,7 +651,7 @@ namespace zoneutils
 
             PZone->ForEachMob([](CMobEntity* PMob)
             {
-                mobutils::AddCustomMods(PMob);
+                mobutils::AddSqlModifiers(PMob);
 
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
