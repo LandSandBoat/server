@@ -12,21 +12,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS_OFFSET
-    local onSabbatical          = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
-    local onSabbaticalProgress  = player:getCharVar("OnSabbatical")
     local pantsQuestProgress    = player:getCharVar("AF_SCH_PANTS")
     local gownQuestProgress     = player:getCharVar("AF_SCH_BODY")
 
-    -- ON SABBATICAL
-    if
-        offset == 0 and
-        onSabbatical == QUEST_ACCEPTED and
-        onSabbaticalProgress == 2
-    then
-        player:startEvent(2)
-
     -- SCH AF SIDEQUEST: PANTS
-    elseif
+    if
         offset == 1 and
         pantsQuestProgress > 0 and
         pantsQuestProgress < 3 and
@@ -86,12 +76,7 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, npc)
-    -- ON SABBATICAL
-    if csid == 2 then
-        npcUtil.giveKeyItem(player, xi.ki.SCHULTZS_SEALED_LETTER)
-        player:setCharVar("OnSabbatical", 3)
-    end
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

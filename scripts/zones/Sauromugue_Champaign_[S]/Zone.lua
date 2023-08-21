@@ -22,14 +22,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-104, -25.36, -410, 195)
     end
 
-    if
-        prevZone == xi.zone.ROLANBERRY_FIELDS_S and
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and
-        player:getCharVar("DownwardHelix") == 2
-    then
-        cs = 3
-    end
-
     return cs
 end
 
@@ -39,10 +31,7 @@ end
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 3 then
-        player:setCharVar("DownwardHelix", 3)
-    end
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
 return zoneObject
