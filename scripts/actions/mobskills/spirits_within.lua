@@ -6,8 +6,6 @@
 -- Utsusemi/Blink absorb: Ignores shadows and most damage reduction.
 -- Range: Melee
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

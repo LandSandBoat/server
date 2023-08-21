@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.HELIX
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

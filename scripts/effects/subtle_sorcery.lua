@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SUBTLE_SORCERY
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local effectObject = {}
 
 -- Spell Cumulative Enmity reduction handled in magic_state.cpp

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.VALLATION
 -----------------------------------
-require("scripts/globals/job_utils/rune_fencer")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

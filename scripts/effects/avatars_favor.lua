@@ -1,9 +1,6 @@
 -----------------------------------
 -- xi.effect.AVATARS_FAVOR
 -----------------------------------
-require("scripts/globals/pets")
-require("scripts/globals/avatars_favor")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

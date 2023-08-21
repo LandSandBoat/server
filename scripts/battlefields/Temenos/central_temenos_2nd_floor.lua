@@ -7,8 +7,6 @@
 -- !pos 580.000 -2.375 104.000 37
 -----------------------------------
 local ID = zones[xi.zone.TEMENOS]
-require("scripts/globals/battlefield")
-require("scripts/globals/limbus")
 -----------------------------------
 
 local content = Limbus:new({

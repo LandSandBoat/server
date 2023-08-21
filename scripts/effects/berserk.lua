@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BERSERK
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local effectObject = {}
 
 -- DEFP penalty reduction from Warrior's Calligae NQ/+1/+2 handled by latent effect

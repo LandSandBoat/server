@@ -8,9 +8,6 @@
 -- Windurst Waters     !pos -55.470 -5.391 216.362 238
 -- Windurst Woods      !pos 104.823 -5.000 -55.745 241
 ------------------------------------
-require("scripts/globals/utils")
-require("scripts/globals/npc_util")
-------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.eggHunt = xi.events.eggHunt or {}

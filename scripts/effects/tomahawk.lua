@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.TOMAHAWK
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local effectObject = {}
 local physSDT = { xi.mod.SLASH_SDT, xi.mod.PIERCE_SDT, xi.mod.IMPACT_SDT, xi.mod.HTH_SDT }
 
