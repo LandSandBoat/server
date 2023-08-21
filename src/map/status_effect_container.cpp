@@ -1539,7 +1539,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         effect == EFFECT_ATMA ||
         effect == EFFECT_BATTLEFIELD)
     {
-        name.insert(0, "globals/effects/");
+        name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
     else
@@ -1547,7 +1547,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         CItem* Ptem = itemutils::GetItemPointer(subType);
         if (Ptem != nullptr && subType > 0)
         {
-            name.insert(0, "globals/items/");
+            name.insert(0, "items/");
             name.insert(name.size(), Ptem->getName());
         }
     }
