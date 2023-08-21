@@ -5,10 +5,6 @@
 -- Abeaule : !pos -136 -2 56 231
 -- Amaura  : !pos -85 -6 89 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------

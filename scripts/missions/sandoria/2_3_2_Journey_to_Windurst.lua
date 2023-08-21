@@ -7,10 +7,6 @@
 -- Mourices  : !pos -50.646 -0.501 -27.642 241
 -- Uu Zhoumo : !pos -179 16 155 145
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 

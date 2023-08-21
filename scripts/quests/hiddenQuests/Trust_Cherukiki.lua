@@ -3,12 +3,6 @@
 -----------------------------------
 -- Taillegeas : !pos 31.000 1.995 57.971 243
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 

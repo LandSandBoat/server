@@ -6,9 +6,6 @@
 -- Gilgamesh          : !pos 122.452 -9.009 -12.052 252
 -- _515 (BCNM Entry)  : !pos -665.2291 -5.8232 -32.4834 181
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
 

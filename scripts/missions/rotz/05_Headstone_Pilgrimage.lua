@@ -14,9 +14,6 @@
 -- Additional Dialogue:
 -- Gilgamesh                         - !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 local capeTerigganID      = zones[xi.zone.CAPE_TERIGGAN]
 local cloisterOfFrostID   = zones[xi.zone.CLOISTER_OF_FROST]

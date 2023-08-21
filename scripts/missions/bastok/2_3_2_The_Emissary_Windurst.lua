@@ -7,10 +7,6 @@
 -- Melek     : !pos -80 -5 158 240
 -- Uu Zhoumo : !pos -179 16 155 145
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local northSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 

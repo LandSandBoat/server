@@ -5,8 +5,6 @@
 -- !addmission 5 25
 -- Lion Springs Door : !pos 96 0 106 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

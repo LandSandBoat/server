@@ -7,10 +7,6 @@
 -- INGOT_OF_ROYAL_TREASURY_GOLD !additem 1682
 -- Davoi qm2 !pos 189.201 1.2553 -383.921 149
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------

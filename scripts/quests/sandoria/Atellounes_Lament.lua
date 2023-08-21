@@ -5,10 +5,6 @@
 -- LADYBUG_WING: !additem 2506
 -- TRAINEE_GLOVES: !additem 15008
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LAMENT)
 

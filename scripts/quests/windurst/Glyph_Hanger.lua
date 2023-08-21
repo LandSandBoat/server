@@ -5,10 +5,6 @@
 -- Hariga-Origa : !pos -62 -6 105 238
 -- Ipupu        : !pos 251.745 -5.5 35.539 115
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 

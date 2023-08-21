@@ -5,9 +5,6 @@
 -- !addmission 12 114
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_KEY_TO_THE_TURRIS)
 

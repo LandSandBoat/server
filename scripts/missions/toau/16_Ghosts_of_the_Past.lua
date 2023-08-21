@@ -5,11 +5,6 @@
 -- !addmission 4 15
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require("scripts/globals/besieged")
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 -----------------------------------
 

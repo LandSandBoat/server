@@ -5,10 +5,6 @@
 -- Abioleget : !pos 128.771 0 118.538 231
 -- Andelain  : !pos 664.231 -12.849 -539.413 101
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

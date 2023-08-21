@@ -5,10 +5,6 @@
 -- Agapito : !pos -72.093 -3.097 9.309 236
 -- qm1     : !pos -9 -5 -13 223
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 

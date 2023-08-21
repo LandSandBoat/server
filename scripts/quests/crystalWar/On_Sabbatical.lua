@@ -6,10 +6,6 @@
 -- Gentle Tiger          : !pos -203.932 -9.998 2.237 87
 -- Indescript Markings   : !pos -456.707 24.4385 -363.364 90
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local pashhowID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 

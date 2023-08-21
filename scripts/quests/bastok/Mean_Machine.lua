@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 25
 -- Unlucky Rat : -59.724 1.999 30.179 237
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 

@@ -6,10 +6,6 @@
 -- Ranemaud        : !pos 15 0 23 252
 -- qm3 (Zi'Tah)    : !pos -416 0 46 121
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 

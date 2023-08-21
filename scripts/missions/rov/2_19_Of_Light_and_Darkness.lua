@@ -5,10 +5,6 @@
 -- !addmission 13 92
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.OF_LIGHT_AND_DARKNESS)
 

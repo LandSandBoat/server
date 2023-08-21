@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 30
 -- Gwill : !pos -317.829 -15.948 -177.375 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 

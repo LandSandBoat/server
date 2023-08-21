@@ -11,10 +11,6 @@
 -- Nelcabrit            : !pos -32 9 -49 243
 -- _541 (Cermet Door)   : !pos 636 16 20 184
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local lowerDelkfuttID    = zones[xi.zone.LOWER_DELKFUTTS_TOWER]

@@ -2,10 +2,6 @@
 -- Cook-a-roon
 -- Ququroon !pos -2.400 -1 66.824 53
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.COOK_A_ROON)
 

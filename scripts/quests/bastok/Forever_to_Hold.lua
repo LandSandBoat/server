@@ -5,10 +5,6 @@
 -- Qiji    : !pos 4.257 4.898 -18.92 236
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
 

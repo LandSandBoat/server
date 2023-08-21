@@ -5,10 +5,6 @@
 -- !addmission 13 50
 -- Marble Bridge Eatery (Door) : !pos -96.6 -0.2 92.3 244
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.NUMBERING_DAYS)
 

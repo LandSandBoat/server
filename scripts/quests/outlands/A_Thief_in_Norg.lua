@@ -7,10 +7,6 @@
 -- Phoochuchu      : !pos -4 -4 69 249
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
 

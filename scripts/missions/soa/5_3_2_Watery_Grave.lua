@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 12 118
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 

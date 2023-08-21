@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 5 21
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SANGUINARY_PRELUDE)
 

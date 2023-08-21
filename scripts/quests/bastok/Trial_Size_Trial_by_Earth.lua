@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 72
 -- Ferrol : !pos 33.708 6.499 -39.425 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/teleports')
-require('scripts/globals/interaction/quest')
------------------------------------
 local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 

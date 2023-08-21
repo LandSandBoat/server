@@ -5,9 +5,6 @@
 -- Powhatan   : !pos -152.135 -7.48 19.014 236
 -- Bartolomeo : !pos -84.967 1.896 -18.679 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 

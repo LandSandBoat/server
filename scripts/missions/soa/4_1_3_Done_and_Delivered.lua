@@ -5,9 +5,6 @@
 -- !addmission 12 74
 -- Kipligg : !pos -32 0 22 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.DONE_AND_DELIVERED)
 

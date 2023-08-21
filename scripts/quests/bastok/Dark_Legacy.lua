@@ -8,10 +8,6 @@
 -- Quu Bokye      : !pos -159 16 181 145
 -- qm1            : !pos -58 0 -449 145
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 

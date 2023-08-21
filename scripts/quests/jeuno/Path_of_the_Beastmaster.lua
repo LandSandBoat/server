@@ -4,9 +4,6 @@
 -- Log ID: 3, Quest ID: 19
 -- Brutus : !pos -55 8 95 244
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 

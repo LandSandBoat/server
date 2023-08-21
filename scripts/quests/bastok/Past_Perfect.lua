@@ -5,10 +5,6 @@
 -- Evi : !pos -4.656 -2.101 1.664 236
 -- qm1 : !pos -201 16 80 108
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 

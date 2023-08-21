@@ -5,10 +5,6 @@
 -- !addmission 13 83
 -- Ornate Door (_521) : !pos -700 -20.25 -303.398 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 local walkOfEchoesID = zones[xi.zone.WALK_OF_ECHOES]
 -----------------------------------
 

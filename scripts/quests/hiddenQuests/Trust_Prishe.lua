@@ -3,12 +3,6 @@
 -----------------------------------
 -- Walnut Door : !pos 117.029 -42.799 41.997 26
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 local tavnaziaID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 

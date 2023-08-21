@@ -4,10 +4,6 @@
 -- Wyatt: !pos 124 0 84 80
 -- LADYBUG_WING: !additem 2506
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
 

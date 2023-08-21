@@ -6,10 +6,6 @@
 -- Imperial Whitegate : !pos 152 -2 0 50
 -- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
 local alzadaalID  = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------

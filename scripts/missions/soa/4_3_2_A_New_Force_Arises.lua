@@ -9,9 +9,6 @@
 -- Effigy of Sealing 2 : !pos -424 -178 -376 274
 -- _7mw                : !pos 197 58 -20 274
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local kamihrID        = zones[xi.zone.MOUNT_KAMIHR]
 local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------

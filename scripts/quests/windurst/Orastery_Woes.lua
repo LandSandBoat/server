@@ -3,11 +3,6 @@
 -- Kuroido-Moido !pos -112.5 -4.2 102.9 240
 -- qm1 !pos 197 -8 -27.5 122
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local portWindurstID = zones[xi.zone.PORT_WINDURST]
 local roMaeveID = zones[xi.zone.ROMAEVE]
 -----------------------------------

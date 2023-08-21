@@ -2,10 +2,6 @@
 -- A Pose By Any Other Name
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 

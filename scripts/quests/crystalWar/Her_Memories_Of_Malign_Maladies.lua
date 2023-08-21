@@ -8,9 +8,6 @@
 -- Fey Blossoms : !pos -141.312 -6.75 564.417 89
 -- Raustigne    : !pos 3.979 -1.999 44.456 80
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 local graubergID = zones[xi.zone.GRAUBERG_S]

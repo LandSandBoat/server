@@ -7,9 +7,6 @@
 -- History : !pos -116.250 -3.650 -90.147 284
 -- Levil   : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_CELENNIA_MEMORIAL_LIBRARY)
 

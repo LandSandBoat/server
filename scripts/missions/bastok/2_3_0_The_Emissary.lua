@@ -12,10 +12,6 @@
 -- Helaku  : !pos 49 -2 -12 231
 -- Melek   : !pos -80.6 -5.5 157.3 240
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
 local metalworksID    = zones[xi.zone.METALWORKS]

@@ -5,10 +5,6 @@
 -- !addmission 13 36
 -- qm11 : !pos -409.553 17.356 -380.626 123
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 

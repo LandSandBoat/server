@@ -9,11 +9,6 @@
 -- Cid            : !pos -12 -12 1 237
 -- Sueleen        : !pos 612 132 774 32
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
------------------------------------
 local carpentersID = zones[xi.zone.CARPENTERS_LANDING]
 local bibikiBayID  = zones[xi.zone.BIBIKI_BAY]
 local misareauxID  = zones[xi.zone.MISAREAUX_COAST]

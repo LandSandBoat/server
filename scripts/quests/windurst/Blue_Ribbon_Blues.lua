@@ -6,10 +6,6 @@
 -- Roberta    : !pos 21 -4 -157 241
 -- Hume Bones : !pos 299 0.1 19 195
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 

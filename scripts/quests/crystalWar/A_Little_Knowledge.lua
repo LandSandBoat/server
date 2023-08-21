@@ -4,11 +4,6 @@
 -- !addquest 7 6
 -- Erlene : !pos 376.936 -39.999 17.914 175
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local eldiemeSID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 -----------------------------------
 

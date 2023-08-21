@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 6 438
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS)
 

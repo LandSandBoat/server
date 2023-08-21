@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 48
 -- Paujean : !pos -93.738 4.649 34.373 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 

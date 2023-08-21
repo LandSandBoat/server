@@ -6,10 +6,6 @@
 -- Wheel Rut         : !pos 345.162 -0.743 -309.161 137
 -- Forbidding Portal : !pos 320 -10.835 158.699 137
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES)
 

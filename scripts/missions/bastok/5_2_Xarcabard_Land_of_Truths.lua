@@ -10,10 +10,6 @@
 -- _6ld    : !pos 92 -19 0.1 237
 -- Karst   : !pos 106 -21 0 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
 local metalworksID    = zones[xi.zone.METALWORKS]

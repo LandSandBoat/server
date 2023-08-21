@@ -6,9 +6,6 @@
 -- Elki        : !pos -17.087 -0.05 52.745 234
 -- Old Toolbox : !pos 113.649 -32.8 79.617 143
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
 

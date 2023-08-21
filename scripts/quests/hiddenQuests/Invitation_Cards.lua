@@ -3,9 +3,6 @@
 
 -- Naja: !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("Invitation_Cards")
 

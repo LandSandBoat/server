@@ -3,11 +3,6 @@
 -----------------------------------
 -- !addquest 8 163
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/abyssea')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
 

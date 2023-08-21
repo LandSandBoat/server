@@ -6,9 +6,6 @@
 -- Giwahb Watchtower: !pos -339 -37 654 51
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHEN_THE_BOW_BREAKS)

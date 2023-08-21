@@ -10,9 +10,6 @@
 -- Moreno-Toeno     : !pos 169 -1.25 159 238
 -- Qu'Hau Spring    : !pos 0 -29 64 122
 -- Sedal-Godjal     : !pos 185 -3 -116 149
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN)

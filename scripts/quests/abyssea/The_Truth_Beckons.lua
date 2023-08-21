@@ -4,11 +4,6 @@
 -- !addquest 8 161
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/abyssea')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
 

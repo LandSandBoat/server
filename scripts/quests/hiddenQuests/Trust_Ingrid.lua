@@ -1,9 +1,6 @@
 -----------------------------------
 -- Trust: Ingrid
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 

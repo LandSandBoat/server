@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 8
 -- Talib : !pos -101.133 4.649 28.803 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 

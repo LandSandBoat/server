@@ -5,9 +5,6 @@
 -- Devean : !pos -58 -10 6 248
 -- Jar    : !gotoname Jar
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
 require('scripts/quests/otherAreas/helpers')
 -----------------------------------
 local selbinaID = zones[xi.zone.SELBINA]

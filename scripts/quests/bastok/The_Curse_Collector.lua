@@ -5,9 +5,6 @@
 -- Zon-Fobun : !pos -241.293 -3 63.406 235
 -- The Mute  : !pos -166.230 -1 -73.685 147
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
 

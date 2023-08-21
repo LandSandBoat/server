@@ -7,10 +7,6 @@
 -- Helaku  : !pos 49 -2 -12 231
 -- Halver  : !pos 2 0.1 0.1 233
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local chateauID       = zones[xi.zone.CHATEAU_DORAGUILLE]
 local northSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

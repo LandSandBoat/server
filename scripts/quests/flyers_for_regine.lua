@@ -1,10 +1,6 @@
 -----------------------------------
 -- Flyers for Regine
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
------------------------------------
 
 quests = quests or {}
 quests.flyers_for_regine = quests.flyers_for_regine or {}

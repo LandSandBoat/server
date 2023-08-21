@@ -1,8 +1,6 @@
 -----------------------------------
 -- Full Speed Ahead! Helper
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 

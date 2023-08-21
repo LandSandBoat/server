@@ -15,10 +15,6 @@
 -- qm2 (La Theine) : !pos -72.99 54.599 -443.126 102
 -- NOTE: Garlaige QM order is based on quest progression
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 

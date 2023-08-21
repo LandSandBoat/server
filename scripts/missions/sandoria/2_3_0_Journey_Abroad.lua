@@ -10,10 +10,6 @@
 -- Mourices        : !pos -50.646 -0.501 -27.642 241
 -- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

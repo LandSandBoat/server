@@ -6,10 +6,6 @@
 -- Kerutoto       : !pos 13 -5 -157 238
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
 

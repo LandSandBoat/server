@@ -1,8 +1,6 @@
 -----------------------------------
 -- Helpers for otherAreas quests
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 xi = xi or {}

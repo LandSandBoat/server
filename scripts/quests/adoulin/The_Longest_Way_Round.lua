@@ -11,10 +11,6 @@
 -- Cunegonde      : !pos -55.964 -0.15 -129.833 257
 -- Ndah Tolohjin  : !pos -86.808 0.001 -36.867 257
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 

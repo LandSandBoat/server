@@ -4,10 +4,6 @@
 -- !addquest 3 22
 -- Rouliette : !pos -24 -2 11 244
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 

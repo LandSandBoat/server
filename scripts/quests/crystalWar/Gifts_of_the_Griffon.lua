@@ -11,10 +11,6 @@
 -- Rongelouts : !pos 0.067 2 -22 80
 -- Sabiliont  : !pos 9 2 -87 80
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
 

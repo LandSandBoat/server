@@ -5,9 +5,6 @@
 -- !addmission 5 22
 -- Regal Pawprints (G-9) : !pos -145.266 -61.851 -174.171 136
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DUNGEONS_AND_DANCERS)
 

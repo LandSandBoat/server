@@ -8,9 +8,6 @@
 -- qm7             : !pos -504 20 -419 208
 -- _6z0            : !pos 0 -12 48 251
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 

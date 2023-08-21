@@ -5,10 +5,6 @@
 -- Gumbah : !pos 52 0 -36 234
 -- qm2    : !pos 206 -60 -101 196
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
 

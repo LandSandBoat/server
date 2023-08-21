@@ -4,10 +4,6 @@
 -- !addquest 3 6
 -- Ilumida : !pos -75 -1 58 244
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
 

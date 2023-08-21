@@ -5,9 +5,6 @@
 -- !addmission 5 45
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHEN_WILLS_COLLIDE)
 

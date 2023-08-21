@@ -4,10 +4,6 @@
 -- Log ID: 2, Quest ID: 11
 -- Koru-Moru : !pos -120 -6 124 239
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 

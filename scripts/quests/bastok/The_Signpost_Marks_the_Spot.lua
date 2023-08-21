@@ -6,10 +6,6 @@
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -- Signpost   : !pos -183 65 599 108
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
 

@@ -6,9 +6,6 @@
 -- Waterfall Basin    : !pos 104.888 0.477 -114.185 176
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.LENDER_BEWARE_READ_THE_FINE_PRINT)
 

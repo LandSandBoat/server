@@ -5,10 +5,6 @@
 -- Antreneau : !pos -71 -5 -39 232
 -- Thierride : !pos -67 -5 -28 232
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
 

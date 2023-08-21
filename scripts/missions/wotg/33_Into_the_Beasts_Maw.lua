@@ -6,9 +6,6 @@
 -- Rally Point: Red : !pos -106.071 -25.5 -52.841 137
 -- Peculiar Glint   : !pos 179.439 -24.056 100.032 138
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastBaileysID   = zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S]
 local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------

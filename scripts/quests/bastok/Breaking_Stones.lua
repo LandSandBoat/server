@@ -5,9 +5,6 @@
 -- Horatius : !pos -158 -6 -117 235
 -- qm2      : !pos -120.041 2.621 415.989 191
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
 

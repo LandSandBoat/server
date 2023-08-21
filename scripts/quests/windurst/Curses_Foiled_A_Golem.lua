@@ -6,10 +6,6 @@
 -- Torino-Samarino : !pos 105 -20 140 111
 -- Cermet Door     : !pos -183 0 190 204
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
 

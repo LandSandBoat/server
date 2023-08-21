@@ -7,10 +7,6 @@
 -- qm5 (Sword) : !pos -92 -28 -70 193
 -- qm6 (Soul)  : !pos -132 -27 -245 193
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local ordellesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 

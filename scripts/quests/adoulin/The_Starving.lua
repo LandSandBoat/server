@@ -4,10 +4,6 @@
 -- !addquest 9 84
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
 

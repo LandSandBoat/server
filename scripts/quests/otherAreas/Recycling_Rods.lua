@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 30
 -- Keshab-Menjab : !pos -15.6 -8 52 249
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RECYCLING_RODS)
 

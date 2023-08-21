@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 96
 -- Buffalostalker_Dodzbraz : !pos -380.171 -24.89 -180.797 5
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BOMBS_AWAY)
 

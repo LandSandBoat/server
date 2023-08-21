@@ -9,10 +9,6 @@
 -- Nareema : !pos 518.387 -24.707 -467.297 79
 -- Waudeen : !pos 673.882 -23.995 367.604 61
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 

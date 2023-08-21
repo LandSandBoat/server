@@ -6,10 +6,6 @@
 -- Pherimociel      : !pos -31.627 1.002 67.956 243
 -- Dilapidated Gate : !pos 260 9 -435 25
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 

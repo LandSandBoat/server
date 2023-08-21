@@ -4,10 +4,6 @@
 -----------------------------------
 -- !addmission 13 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 

@@ -5,10 +5,6 @@
 -- Abelard !pos -52 -11 -13 248
 -- TORN_OUT_PAGES !addkeyitem 626
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 

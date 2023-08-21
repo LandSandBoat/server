@@ -6,10 +6,6 @@
 -- Rhea Myuliah : !pos -56.220 -1 101.805 244
 -- Harmodios    : !pos -79.928 -4.824 -135.114 235
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
 

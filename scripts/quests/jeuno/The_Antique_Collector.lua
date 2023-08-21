@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 25
 -- Imasuke : !pos -165 11 94 246
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 

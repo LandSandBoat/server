@@ -3,11 +3,6 @@
 -- Novalmauge !pos 70 -24 21 167
 -- qm2 !pos 118 36 -281 160
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local denOfRancorID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------

@@ -3,11 +3,6 @@
 -- Oggbi !pos -159 -7 5 236
 -- qm1 !pos 20 17 -140 167
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------

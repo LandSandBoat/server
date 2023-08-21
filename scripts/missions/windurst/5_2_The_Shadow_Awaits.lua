@@ -11,10 +11,6 @@
 -- Zubaba           : !pos 15 -27 18 242
 -- Thone Room Door  : !pos -111 -6 0 165
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS)
 

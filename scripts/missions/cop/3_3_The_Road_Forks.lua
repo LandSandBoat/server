@@ -26,10 +26,6 @@
 -- NOTE: This mission uses extended Mission Status.  See documentation for CoP MissionStatus for
 -- predefined values.  These must not be changed!
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 local attohwaChasmID      = zones[xi.zone.ATTOHWA_CHASM]
 local carpentersLandingID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------

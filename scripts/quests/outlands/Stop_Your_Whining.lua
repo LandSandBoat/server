@@ -5,10 +5,6 @@
 -- Washu : !pos 49 -6 15 252
 -- qm2   : !pos -94.073 -0.999 22.295 124
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)

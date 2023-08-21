@@ -4,10 +4,6 @@
 -- Altiret !pos 21 -4 -65 232
 -- Esca !pos -624 -51 278 100
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local portSandOriaID     = zones[xi.zone.PORT_SAN_DORIA]
 local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local westRonfaureID     = zones[xi.zone.WEST_RONFAURE]

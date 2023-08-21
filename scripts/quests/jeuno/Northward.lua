@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 24
 -- Radeivepart : !pos 5 9 -39 243
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 

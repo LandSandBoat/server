@@ -11,10 +11,6 @@
 -- qm4        : !pos 171 0 -25 205
 -- Gilgamesh  : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID  = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID    = zones[xi.zone.BASTOK_MINES]
 local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]

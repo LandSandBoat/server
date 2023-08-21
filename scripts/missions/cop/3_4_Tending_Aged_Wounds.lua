@@ -6,10 +6,6 @@
 -- Cid                   : !pos -12 -12 1 237
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.TENDING_AGED_WOUNDS)
 

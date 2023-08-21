@@ -3,11 +3,6 @@
 -- Balasiel !pos -136 -11 64 230
 -- qm1 !pos 107 0.7 -125.25 176
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------

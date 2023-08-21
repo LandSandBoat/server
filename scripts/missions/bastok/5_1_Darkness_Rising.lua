@@ -9,10 +9,6 @@
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -- Naji    : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING)
 

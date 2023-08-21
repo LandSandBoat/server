@@ -5,10 +5,6 @@
 -- !addmission 13 102
 -- Granite Door (_4fx) : !pos 340 -1.899 331.656 159
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 

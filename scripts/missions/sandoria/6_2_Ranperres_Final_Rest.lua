@@ -11,10 +11,6 @@
 -- _5a0: Heavy Stone Dr : !pos -39 4.823 20 190
 -- Tombstone            : !pos -73.594 7.585 20.130 190
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local krtID = zones[xi.zone.KING_RANPERRES_TOMB]
 -----------------------------------
 

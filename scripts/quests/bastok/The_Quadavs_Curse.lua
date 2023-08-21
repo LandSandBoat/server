@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 4
 -- Corann : !pos 90.935 -8.772 32.564 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE)
 

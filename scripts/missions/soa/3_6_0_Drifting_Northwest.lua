@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 12 62
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 

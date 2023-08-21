@@ -5,9 +5,6 @@
 -- !addmission 5 13
 -- Underpass_Hatch : !pos 314.083 -1.160 -181.455 84
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastSauromugueID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 -----------------------------------
 

@@ -3,11 +3,6 @@
 -- Omer, Lower Jeuno: !pos -89.43 0 -124.1 245
 -- EGRET_FISHING_ROD: !additem 1726
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
 

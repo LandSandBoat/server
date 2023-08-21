@@ -4,10 +4,6 @@
 -- Log ID: 0, Quest ID: 31
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACK_TIGER_SKINS)
 

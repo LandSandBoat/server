@@ -3,11 +3,6 @@
 -- Shantotto !pos 122 -2 112 239
 -- qm3 !pos 119 20 144 205
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local windurstWallsID  = zones[xi.zone.WINDURST_WALLS]
 local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------

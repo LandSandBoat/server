@@ -9,10 +9,6 @@
 -- * Status - Remaining Artifact Bitmask (0 = Completed)
 -- * Timer  - VanadielUniqueDay Wait Timer
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("DncArtifact")
 

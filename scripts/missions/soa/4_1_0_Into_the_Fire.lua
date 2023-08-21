@@ -6,9 +6,6 @@
 -- Levil   : !pos -87.204 3.350 12.655 256
 -- Kipligg : !pos -32 0 22 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.INTO_THE_FIRE)
 

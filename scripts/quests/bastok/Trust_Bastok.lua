@@ -5,10 +5,6 @@
 -- Clarion Star : !pos 81.478 7.500 -24.169 236
 -- Naji         : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local metalworksID = zones[xi.zone.METALWORKS]
 -----------------------------------
 

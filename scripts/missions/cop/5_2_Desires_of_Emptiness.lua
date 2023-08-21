@@ -9,10 +9,6 @@
 -- _0m0 (Flux 3) : !pos -340 -2.5 140 22
 -- Cid           : !pos -12 -12 1 237
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 local promyvionVahzlID = zones[xi.zone.PROMYVION_VAHZL]
 -----------------------------------
 

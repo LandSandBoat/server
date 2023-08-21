@@ -5,10 +5,6 @@
 -- Abeaule : !pos -136 -2 56 231
 -- Phairet : !pos -57 -2 -502 100
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 

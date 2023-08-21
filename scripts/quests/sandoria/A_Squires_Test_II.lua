@@ -6,10 +6,6 @@
 -- qm2      : !pos -94 1 273 193
 -- qm3      : !pos -139 0.1 264 193
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local ordellesCavesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 

@@ -6,9 +6,6 @@
 -- Chocobo Tracks : !pos -556 0 523 102
 -- Hantileon      : !pos -2.675 -1.1 -105.287 230
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
 

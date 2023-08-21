@@ -8,10 +8,6 @@
 -- qm3 : !pos 580 -9 290 112
 -- qm4 : !pos -21 -25 -490 112
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local ruludeID    = zones[xi.zone.RULUDE_GARDENS]
 local xarcabardID = zones[xi.zone.XARCABARD]
 -----------------------------------

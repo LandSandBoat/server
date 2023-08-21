@@ -5,9 +5,6 @@
 -- !addmission 3 14
 -- !pos 200.3419 -2.25 37.12 168
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 local oraclesID = zones[xi.zone.CHAMBER_OF_ORACLES]
 -----------------------------------
 
