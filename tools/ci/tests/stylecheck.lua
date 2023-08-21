@@ -182,3 +182,9 @@ end
 ('a', b)  -- PASS
 (',', b)  -- PASS
 (',',b)   -- FAIL
+
+xi.items.SOMETHING -- FAIL
+xi.item.SOMETHING  -- PASS
+
+xi.effects.SOMETHING -- FAIL
+xi.effect.SOMETHING  -- PASS

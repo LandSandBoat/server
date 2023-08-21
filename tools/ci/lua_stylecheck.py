@@ -41,6 +41,11 @@ deprecated_requires = [
     "IDs",
 ]
 
+invalid_enums = [
+    "xi.items.",
+    "xi.effects.",
+]
+
 # 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
 # Parameters are 0-indexed
 disallowed_numeric_parameters = {
@@ -305,6 +310,11 @@ class LuaStyleCheck:
                     else:
                         self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
 
+    def check_invalid_enum(self, line):
+            for invalid_enum in invalid_enums:
+                if invalid_enum in line:
+                    self.error(f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?")
+
     def check_function_parameters(self, line):
         # Iterate through all entries in the disallowed table
         for fn_name, param_locations in disallowed_numeric_parameters.items():
@@ -364,6 +374,7 @@ class LuaStyleCheck:
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
                 self.check_deprecated_require(code_line)
+                self.check_invalid_enum(code_line)
 
                 # Keep track of ID variable assignments and if they are referenced.
                 # TODO: Track each unique variable, and expand this to potentially something
@@ -454,7 +465,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 47
+    expected_errors = 49
 else:
     total_errors = LuaStyleCheck(target).errcount
 
