@@ -9,8 +9,6 @@
 -- EAST_RONFAURE_S      : !zone 81
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

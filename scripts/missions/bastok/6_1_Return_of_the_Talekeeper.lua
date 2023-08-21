@@ -12,10 +12,6 @@
 -- qm2 (W.Altepa) : !pos -325 0 -111 125
 -- Tall Mountain  : !pos 71 7 -7 234
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
 local metalworksID    = zones[xi.zone.METALWORKS]

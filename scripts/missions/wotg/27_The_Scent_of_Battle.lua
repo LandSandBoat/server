@@ -5,9 +5,6 @@
 -- !addmission 5 26
 -- Bulwark Gate : !pos -447.174 -1.831 342.417 98
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_SCENT_OF_BATTLE)
 

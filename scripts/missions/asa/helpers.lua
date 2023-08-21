@@ -1,8 +1,6 @@
 -----------------------------------
 -- A Shantotto Ascension Helpers
 -----------------------------------
-require('scripts/globals/missions')
------------------------------------
 xi = xi or {}
 xi.asa = xi.asa or {}
 xi.asa.helpers = xi.asa.helpers or {}

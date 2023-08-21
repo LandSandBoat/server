@@ -9,9 +9,6 @@
 -- Nareema       : !pos 518.387 -24.707 -467.297 79
 -- Waudeen       : !pos 673.882 -23.995 367.604 61
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 local arrapagoID  = zones[xi.zone.ARRAPAGO_REEF]

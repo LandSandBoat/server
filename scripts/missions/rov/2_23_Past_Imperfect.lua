@@ -5,10 +5,6 @@
 -- !addmission 13 100
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 

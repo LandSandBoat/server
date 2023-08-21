@@ -6,10 +6,6 @@
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -- EAST_RONFAURE_S      : !zone 81
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
 

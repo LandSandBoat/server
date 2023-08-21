@@ -8,10 +8,6 @@
 -- Malduc  : !pos 66.200 -14.999 4.426 237
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
 local metalworksID    = zones[xi.zone.METALWORKS]

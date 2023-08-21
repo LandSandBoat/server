@@ -5,9 +5,6 @@
 -- !addmission 5 53
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 

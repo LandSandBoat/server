@@ -7,10 +7,6 @@
 -- Lower Jeuno : !zone 245
 -- Norg        : !zone 252
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
 

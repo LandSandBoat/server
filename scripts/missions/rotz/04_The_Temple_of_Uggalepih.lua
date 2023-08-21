@@ -7,9 +7,6 @@
 -- Jakoh Wahcondalo     : !pos 101 -16 -115 250
 -- Mahogany Door (BCNM) : !pos 299 0.1 349 163
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
 

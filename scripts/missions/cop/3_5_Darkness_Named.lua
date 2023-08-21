@@ -6,10 +6,6 @@
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -- Monberaux             : !pos -42 0 -2 244
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 

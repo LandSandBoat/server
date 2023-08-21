@@ -10,10 +10,6 @@
 -- Zubaba           : !pos 15 -27 18 242
 -- Gate of Light    : !pos -331 0 139 192
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
 

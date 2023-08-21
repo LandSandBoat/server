@@ -9,9 +9,6 @@
 -- Heillal    : !pos 30.8 -5.8 2.3 252
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 

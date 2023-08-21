@@ -6,10 +6,6 @@
 -- Walnut Door    : !pos 111 -41 41 26
 -- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
 

@@ -6,9 +6,6 @@
 -- Despachiaire   : !pos 108 -40 -83 26
 -- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
 

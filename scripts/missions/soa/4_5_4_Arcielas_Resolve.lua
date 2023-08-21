@@ -7,9 +7,6 @@
 -- Ploh Trishbahk  : !pos 100.580 -40.150 -63.830 257
 -- Royal Sepulcher : !pos 319 -7.5 -300 258
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_RESOLVE)
 

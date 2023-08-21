@@ -10,10 +10,6 @@
 -- Arnau      : !pos 148 0 139 231
 -- Hut_Door   : !pos -165.357 -11.672 77.771 140
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

@@ -5,9 +5,6 @@
 -- !addmission 5 16
 -- BEAUCEDINE_GLACIER_S : !zone 136
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.NORTHLAND_EXPOSURE)
 

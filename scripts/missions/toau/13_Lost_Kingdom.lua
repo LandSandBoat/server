@@ -6,11 +6,6 @@
 -- Pyopyoroon           : !pos 22.112 0 24.682 53
 -- Jazaraat's Headstone : !pos -389 6 -570 79
 -----------------------------------
-require("scripts/globals/besieged")
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local caedarvaID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 

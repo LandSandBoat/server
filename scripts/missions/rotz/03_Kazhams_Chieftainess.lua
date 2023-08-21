@@ -6,9 +6,6 @@
 -- Gilgamesh        : !pos 122.452 -9.009 -12.052 252
 -- Jakoh Wahcondalo : !pos 101 -16 -115 250
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZHAMS_CHIEFTAINESS)
 

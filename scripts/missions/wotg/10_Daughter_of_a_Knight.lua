@@ -8,9 +8,6 @@
 -- Humus-rich Earth (past)    : !pos -510.535 7.568 289.283 82
 -- Humus-rich Earth (present) : !pos -510.535 7.568 289.283 104
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
 local presentJugnerID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------

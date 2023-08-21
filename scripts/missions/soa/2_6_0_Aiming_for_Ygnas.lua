@@ -5,9 +5,6 @@
 -- !addmission 12 26
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.AIMING_FOR_YGNAS)
 

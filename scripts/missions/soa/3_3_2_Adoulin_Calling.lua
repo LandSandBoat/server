@@ -6,9 +6,6 @@
 -- Levil          : !pos -87.204 3.350 12.655 256
 -- Boarding House : !pos -41.693 -0.15 -38.29 257
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ADOULIN_CALLING)
 

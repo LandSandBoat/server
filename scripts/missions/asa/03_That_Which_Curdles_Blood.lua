@@ -8,9 +8,6 @@
 -- Abd-al-Raziq  : !pos 126.7 2.0 -0.23 234
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
 

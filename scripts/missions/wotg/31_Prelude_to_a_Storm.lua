@@ -6,9 +6,6 @@
 -- Rally Point: Green : !pos 54.013 -23.402 -203.103 137
 -- Spell-worked Snow  : !pos 75.989 -24.249 -248.089 137
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 

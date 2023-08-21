@@ -5,9 +5,6 @@
 -- !addmission 5 18
 -- Regal Pawprints : -15.066 -40.249 -217.276 136
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastBeaucedineID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 -----------------------------------
 

@@ -5,9 +5,6 @@
 -- !addmission 3 22
 -- _700 (Oaken Door) : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 local hallID = zones[xi.zone.HALL_OF_THE_GODS]
 -----------------------------------
 

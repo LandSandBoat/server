@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 13 44
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
 

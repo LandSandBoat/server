@@ -5,10 +5,6 @@
 -- !addmission 13 86
 -- qm_cetus : !pos -127.055 -7.849 600.22 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 

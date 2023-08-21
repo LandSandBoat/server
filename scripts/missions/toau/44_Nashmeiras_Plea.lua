@@ -6,10 +6,6 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
 

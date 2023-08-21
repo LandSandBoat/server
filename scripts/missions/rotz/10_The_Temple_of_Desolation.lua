@@ -6,9 +6,6 @@
 -- Kamui : !pos 120.121 -8.009 -7.298 252
 -- _6z0  : !pos 0 -12 48 251
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
 

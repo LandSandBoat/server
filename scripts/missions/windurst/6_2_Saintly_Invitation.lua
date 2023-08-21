@@ -9,9 +9,6 @@
 -- Zokima-Rokima     : !pos 0 -16 124 239
 -- Vestal Chamber    : !pos 0.1 -49 37 242
 -- Kaa Toru the Just : !pos -100.188 -62.125 145.422 151
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION)

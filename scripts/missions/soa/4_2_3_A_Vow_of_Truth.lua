@@ -5,9 +5,6 @@
 -- !addmission 12 80
 -- Levil   : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_VOW_OF_TRUTH)
 

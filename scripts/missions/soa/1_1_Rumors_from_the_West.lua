@@ -6,10 +6,6 @@
 -- !addmission 12 0
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)
 

@@ -5,9 +5,6 @@
 -- !addmission 5 20
 -- Raustigne : !pos 3.979 -1.999 44.456 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 

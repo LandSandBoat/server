@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 12 59
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_SEARCH_OF_ARCIELA)
 

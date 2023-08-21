@@ -5,10 +5,6 @@
 -- !addmission 13 96
 -- qm_rov2_20 : !pos -44.741 -23.753 568.504 25
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.KEEP_ON_GIVING)
 

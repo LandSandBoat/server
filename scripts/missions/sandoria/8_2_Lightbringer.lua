@@ -16,10 +16,6 @@
 -- qm13                  : !pos -68 -17 -153 159
 -- Granite Door          : !pos -50 -17 -154 159
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local chateauID   = zones[xi.zone.CHATEAU_DORAGUILLE]
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------

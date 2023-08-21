@@ -5,9 +5,6 @@
 -- !addmission 3 4
 -- _700 (Oaken Door) : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
 

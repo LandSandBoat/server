@@ -16,10 +16,6 @@
 -- Yaucevouchat : !pos -318 39 183 102
 -- Ruillont     : !pos -70 1 607 193
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local laTheinePlateauID  = zones[xi.zone.LA_THEINE_PLATEAU]
 local ordellesCavesID    = zones[xi.zone.ORDELLES_CAVES]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]

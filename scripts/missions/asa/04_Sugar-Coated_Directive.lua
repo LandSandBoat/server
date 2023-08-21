@@ -5,9 +5,6 @@
 -- !addmission 11 3
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local flamesID  = zones[xi.zone.CLOISTER_OF_FLAMES]
 local frostID   = zones[xi.zone.CLOISTER_OF_FROST]
 local galesID   = zones[xi.zone.CLOISTER_OF_GALES]

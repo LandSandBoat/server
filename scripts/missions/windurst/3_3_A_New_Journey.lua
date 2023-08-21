@@ -12,10 +12,6 @@
 -- Embassy Door     : !pos 31 9 -22 243
 -- Cermet Door      : !pos 636 16 59 184
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 local lowerDelkfuttID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 

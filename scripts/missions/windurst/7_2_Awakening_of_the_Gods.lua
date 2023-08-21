@@ -13,9 +13,6 @@
 -- Romaa Mihgo      : !pos 29 -13.023 -176.5 250
 -- Vanono           : !pos -23.140 -5 -23.101 250
 -- Granite Door     : !pos 340 0.1 329 159
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS)

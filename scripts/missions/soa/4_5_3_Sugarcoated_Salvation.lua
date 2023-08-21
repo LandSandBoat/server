@@ -7,9 +7,6 @@
 -- Andreine       : !pos -91.944 -2.14 -91.538 284
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 

@@ -13,10 +13,6 @@
 -- '!' South Block Code : !pos 335.5 0 -136 149
 -- '!' North Block Code : !pos 163 0 -18 149
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

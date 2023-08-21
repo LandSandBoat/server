@@ -7,10 +7,6 @@
 -- Warchief Vatgit : !pos -74.960 -34.692 256.968 140
 -- Kasaroro        : !pos -72 -3 34 231
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local chateauID          = zones[xi.zone.CHATEAU_DORAGUILLE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------

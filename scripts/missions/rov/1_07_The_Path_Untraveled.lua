@@ -8,9 +8,6 @@
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -- Gilgamesh                       : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 

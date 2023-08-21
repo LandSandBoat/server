@@ -6,10 +6,6 @@
 -- Pherimociel : !pos -31.627 1.002 67.956 243
 -- Mathilde    : !pos 12.578 -8.287 -7.576 248
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
 

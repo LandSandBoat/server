@@ -9,9 +9,6 @@
 -- Stout_Weir         : !pos -427.506 -1 -48.217 258
 -- Waterways Overlook : !pos -17.995 -6.507 37.43 258
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 local ralaID           = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------

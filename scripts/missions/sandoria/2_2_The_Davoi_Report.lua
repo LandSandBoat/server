@@ -10,10 +10,6 @@
 -- '!'            : !pos 211 2 -104 149
 -- Papal Chambers : !pos 131 -11 122 231
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local davoiID            = zones[xi.zone.DAVOI]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]

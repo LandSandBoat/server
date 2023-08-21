@@ -9,9 +9,6 @@
 -- Wooden Gate : !pos 45.500 -1.500 10.000 28
 -- ???         : !pos 102.669 -3.111 127.279 28 (Varies in area)
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 local sacrariumID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 

@@ -9,10 +9,6 @@
 -- Halver                : !pos 2 0.1 0.1 233
 -- Fountain of Kings     : !pos 567 18 -939 208
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local quicksandCavesID   = zones[xi.zone.QUICKSAND_CAVES]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]

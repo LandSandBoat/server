@@ -5,10 +5,6 @@
 -- Erlene                : !pos 376.936 -39.999 17.914 175
 -- Indescript Markings   : !pos 322 24 113 98
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 

@@ -5,9 +5,6 @@
 -- !addmission 11 4
 -- Andrause : !pos 22.72 -5.13 18.51 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 

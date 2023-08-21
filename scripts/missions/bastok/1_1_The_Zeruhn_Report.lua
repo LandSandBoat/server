@@ -10,10 +10,6 @@
 -- Makarim : !pos -58 8 -333 172
 -- Naji    : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
 local metalworksID    = zones[xi.zone.METALWORKS]

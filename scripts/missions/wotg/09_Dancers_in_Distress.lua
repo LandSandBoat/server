@@ -9,9 +9,6 @@
 -- GOLD_BEASTCOIN     : !additem 748
 -- NYUMOMO_DOLL       : !additem 1706
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
 local sandoriaSID  = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
