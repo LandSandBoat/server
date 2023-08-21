@@ -1,5 +1,5 @@
 -----------------------------------
--- Nyzul Isle: Floor generation methods and data.
+-- Nyzul Isle: Floor progression logic.
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
