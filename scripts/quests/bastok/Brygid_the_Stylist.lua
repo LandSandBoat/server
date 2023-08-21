@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.GLOVES,
+    item     = xi.item.GLOVES,
     title    = xi.title.BRYGID_APPROVED,
 }
 
@@ -46,8 +46,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getEquipID(xi.slot.BODY) == xi.items.ROBE and
-                        player:getEquipID(xi.slot.LEGS) == xi.items.BRONZE_SUBLIGAR
+                        player:getEquipID(xi.slot.BODY) == xi.item.ROBE and
+                        player:getEquipID(xi.slot.LEGS) == xi.item.BRONZE_SUBLIGAR
                     then
                         return quest:progressEvent(311)
                     else

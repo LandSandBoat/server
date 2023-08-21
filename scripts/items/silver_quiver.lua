@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.SILVER_ARROW, 99)
+    target:addItem(xi.item.SILVER_ARROW, 99)
 end
 
 return itemObject

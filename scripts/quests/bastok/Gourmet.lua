@@ -19,9 +19,9 @@ quest.reward =
 -- logic, all time comparisons are 6 less than the actual time.
 local tradeItemData =
 {
-    [xi.items.SLEEPSHROOM] = { 201, 12, 24 }, -- 18:00 ~ 06:00
-    [xi.items.TREANT_BULB] = { 201,  0,  6 }, -- 06:00 ~ 12:00
-    [xi.items.WILD_ONION]  = { 202,  6, 12 }, -- 12:00 ~ 18:00
+    [xi.item.SLEEPSHROOM] = { 201, 12, 24 }, -- 18:00 ~ 06:00
+    [xi.item.TREANT_BULB] = { 201,  0,  6 }, -- 06:00 ~ 12:00
+    [xi.item.WILD_ONION]  = { 202,  6, 12 }, -- 12:00 ~ 18:00
 }
 
 local function tradeEventFinish(player, gilReward, additionalFame)

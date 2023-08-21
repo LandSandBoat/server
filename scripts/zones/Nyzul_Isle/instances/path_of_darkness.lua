@@ -49,7 +49,7 @@ instanceObject.afterInstanceRegister = function(player)
         player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.NYZUL_ISLE_ROUTE)
     end
 
-    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
+    player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"

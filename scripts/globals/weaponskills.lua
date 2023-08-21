@@ -1268,26 +1268,26 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
     if attacker:getObjType() == xi.objType.PC then
         local elementalGorget = -- Ordered by element correctly. TODO: mods/latents instead of items
         {
-            xi.items.FLAME_GORGET,
-            xi.items.SNOW_GORGET,
-            xi.items.BREEZE_GORGET,
-            xi.items.SOIL_GORGET,
-            xi.items.THUNDER_GORGET,
-            xi.items.AQUA_GORGET,
-            xi.items.LIGHT_GORGET,
-            xi.items.SHADOW_GORGET
+            xi.item.FLAME_GORGET,
+            xi.item.SNOW_GORGET,
+            xi.item.BREEZE_GORGET,
+            xi.item.SOIL_GORGET,
+            xi.item.THUNDER_GORGET,
+            xi.item.AQUA_GORGET,
+            xi.item.LIGHT_GORGET,
+            xi.item.SHADOW_GORGET
         }
 
         local elementalBelt = -- Ordered by element correctly. TODO: mods/latents instead of items
         {
-            xi.items.FLAME_BELT,
-            xi.items.SNOW_BELT,
-            xi.items.BREEZE_BELT,
-            xi.items.SOIL_BELT,
-            xi.items.THUNDER_BELT,
-            xi.items.AQUA_BELT,
-            xi.items.LIGHT_BELT,
-            xi.items.SHADOW_BELT
+            xi.item.FLAME_BELT,
+            xi.item.SNOW_BELT,
+            xi.item.BREEZE_BELT,
+            xi.item.SOIL_BELT,
+            xi.item.THUNDER_BELT,
+            xi.item.AQUA_BELT,
+            xi.item.LIGHT_BELT,
+            xi.item.SHADOW_BELT
         }
 
         local neck = attacker:getEquipID(xi.slot.NECK)
@@ -1309,7 +1309,7 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
             end
         end
 
-        if neck == xi.items.FOTIA_GORGET then -- Fotia Gorget
+        if neck == xi.item.FOTIA_GORGET then -- Fotia Gorget
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end
@@ -1329,7 +1329,7 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
             end
         end
 
-        if belt == xi.items.FOTIA_BELT then -- Fotia Belt
+        if belt == xi.item.FOTIA_BELT then -- Fotia Belt
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end

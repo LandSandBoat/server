@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TRAVELERS_HAT,
+    item     = xi.item.TRAVELERS_HAT,
 }
 
 quest.sections =
@@ -45,7 +45,7 @@ quest.sections =
             ['Benita'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.PINCH_OF_BOMB_ASH) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_BOMB_ASH) then
                         return quest:progressEvent(176)
                     end
                 end,

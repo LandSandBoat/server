@@ -9,11 +9,11 @@ local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.EMPERADOR_DE_ALTEPA, { xi.items.BOTTLE_OF_OASIS_WATER, xi.items.SPRIG_OF_GIANT_MISTLETOE })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.EMPERADOR_DE_ALTEPA, { xi.item.BOTTLE_OF_OASIS_WATER, xi.item.SPRIG_OF_GIANT_MISTLETOE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.BOTTLE_OF_OASIS_WATER, xi.items.SPRIG_OF_GIANT_MISTLETOE })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.BOTTLE_OF_OASIS_WATER, xi.item.SPRIG_OF_GIANT_MISTLETOE })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

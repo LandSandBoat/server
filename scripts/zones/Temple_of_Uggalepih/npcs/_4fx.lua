@@ -9,12 +9,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHasExactly(trade, xi.items.CURSED_KEY) and
+        npcUtil.tradeHasExactly(trade, xi.item.CURSED_KEY) and
         player:getZPos() < 332
     then
         -- Cursed Key
         player:confirmTrade()
-        player:messageSpecial(ID.text.YOUR_KEY_BREAKS, 0, xi.items.CURSED_KEY)
+        player:messageSpecial(ID.text.YOUR_KEY_BREAKS, 0, xi.item.CURSED_KEY)
         player:startEvent(25)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

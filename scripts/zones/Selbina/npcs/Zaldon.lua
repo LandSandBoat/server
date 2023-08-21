@@ -569,7 +569,7 @@ entity.onTrade = function(player, npc, trade)
     if
         underTheSea == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ETCHED_RING) and
-        npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE)
+        npcUtil.tradeHas(trade, xi.item.FAT_GREEDIE)
     then
         if math.random(1, 100) <= 20 then
             player:startEvent(35) -- Ring found !
@@ -580,7 +580,7 @@ entity.onTrade = function(player, npc, trade)
     -- A BOY'S DREAM
     elseif
         player:getCharVar("aBoysDreamCS") == 5 and
-        npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS)
+        npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS)
     then
         player:startEvent(85)
 

@@ -15,7 +15,7 @@ quest.reward =
 }
 
 local raimbroyOnTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, { { xi.items.POT_OF_HONEY, 5 } }) then
+    if npcUtil.tradeHasExactly(trade, { { xi.item.POT_OF_HONEY, 5 } }) then
         return quest:progressEvent(535, 400 * xi.settings.main.GIL_RATE)
     else
         return quest:event(522)

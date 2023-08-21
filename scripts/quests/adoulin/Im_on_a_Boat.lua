@@ -18,9 +18,9 @@ quest.reward =
 
 local requiredTradeItems =
 {
-    { xi.items.SQUARE_OF_DHALMEL_LEATHER, 3 },
-    { xi.items.UMBRIL_OOZE,               1 },
-    { xi.items.TWITHERYM_SCALE,           1 },
+    { xi.item.SQUARE_OF_DHALMEL_LEATHER, 3 },
+    { xi.item.UMBRIL_OOZE,               1 },
+    { xi.item.TWITHERYM_SCALE,           1 },
 }
 
 quest.sections =

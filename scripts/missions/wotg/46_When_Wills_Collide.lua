@@ -27,7 +27,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.BOTTLED_PUNCH_BUG) and
-                        npcUtil.tradeHasExactly(trade, xi.items.PUNCH_BUG)
+                        npcUtil.tradeHasExactly(trade, xi.item.PUNCH_BUG)
                     then
                         return mission:progressEvent(42, 76, 0, 1267351, 120, 0, 8323092, 0, 0)
                     end

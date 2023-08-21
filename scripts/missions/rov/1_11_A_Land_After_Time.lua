@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTE
 
 mission.reward =
 {
-    item        = xi.items.CIPHER_OF_LIONS_ALTER_EGO_II,
+    item        = xi.item.CIPHER_OF_LIONS_ALTER_EGO_II,
     keyItem     = xi.ki.RHAPSODY_IN_UMBER,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL },
 }

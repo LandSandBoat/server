@@ -35,7 +35,7 @@ end
 
 local handleFetichTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHasExactly(trade, { xi.items.QUADAV_FETICH_HEAD, xi.items.QUADAV_FETICH_TORSO, xi.items.QUADAV_FETICH_ARMS, xi.items.QUADAV_FETICH_LEGS })
+        npcUtil.tradeHasExactly(trade, { xi.item.QUADAV_FETICH_HEAD, xi.item.QUADAV_FETICH_TORSO, xi.item.QUADAV_FETICH_ARMS, xi.item.QUADAV_FETICH_LEGS })
     then
         if not player:hasCompletedMission(mission.areaId, mission.missionId) then
             return mission:progressEvent(1008)

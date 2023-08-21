@@ -17,10 +17,10 @@ quest.reward =
 
 local rewardItems =
 {
-    [0] = xi.items.TITANS_CUDGEL,
-    [1] = xi.items.EARTH_BELT,
-    [2] = xi.items.EARTH_RING,
-    [3] = xi.items.DOSE_OF_DESERT_LIGHT,
+    [0] = xi.item.TITANS_CUDGEL,
+    [1] = xi.item.EARTH_BELT,
+    [2] = xi.item.EARTH_RING,
+    [3] = xi.item.DOSE_OF_DESERT_LIGHT,
 }
 
 local function getRewardMask(player)

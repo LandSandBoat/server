@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.IMPERIAL_SILVER_PIECE) then
+    if npcUtil.tradeHas(trade, xi.item.IMPERIAL_SILVER_PIECE) then
         player:startEvent(163)
     end
 end

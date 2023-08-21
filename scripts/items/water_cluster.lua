@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.WATER_CRYSTAL, 12)
+    target:addItem(xi.item.WATER_CRYSTAL, 12)
 end
 
 return itemObject

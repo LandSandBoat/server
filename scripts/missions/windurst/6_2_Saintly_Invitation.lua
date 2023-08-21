@@ -134,7 +134,7 @@ mission.sections =
             onEventFinish =
             {
                 [45] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.ASHURA_NECKLACE) then
+                    if npcUtil.giveItem(player, xi.item.ASHURA_NECKLACE) then
                         player:delKeyItem(xi.ki.HOLY_ONES_INVITATION)
                         npcUtil.giveKeyItem(player, xi.ki.HOLY_ONES_OATH)
                         player:setMissionStatus(mission.areaId, 3)

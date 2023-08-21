@@ -108,7 +108,7 @@ mission.sections =
                 [22] = function(player, csid, option, npc)
                     mission:complete(player)
 
-                    if not npcUtil.giveItem(player, xi.items.JEUNOAN_FLAG) then
+                    if not npcUtil.giveItem(player, xi.item.JEUNOAN_FLAG) then
                         mission:setVar(player, 'Unclaimed', 1)
                     end
                 end,
@@ -152,7 +152,7 @@ mission.sections =
                 [5] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        npcUtil.giveItem(player, xi.items.JEUNOAN_FLAG)
+                        npcUtil.giveItem(player, xi.item.JEUNOAN_FLAG)
                     then
                         mission:setVar(player, 'Unclaimed', 0)
                     end

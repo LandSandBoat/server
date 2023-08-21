@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.MUTEPPO, 99)
+    target:addItem(xi.item.MUTEPPO, 99)
 end
 
 return itemObject

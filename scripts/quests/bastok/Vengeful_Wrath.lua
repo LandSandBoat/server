@@ -45,7 +45,7 @@ quest.sections =
             ['Goraow'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_HELM) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_HELM) then
                         return quest:progressEvent(107)
                     end
                 end,

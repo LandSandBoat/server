@@ -18,9 +18,9 @@ mission.reward =
 
 local rewardItems =
 {
-    xi.items.ELIXIR,
-    xi.items.VILE_ELIXIR,
-    xi.items.VILE_ELIXIR_P1,
+    xi.item.ELIXIR,
+    xi.item.VILE_ELIXIR,
+    xi.item.VILE_ELIXIR_P1,
 }
 
 -- NOTE: Instance is triggered at the Spell-Worked Snow behind the Green Rally point, and

@@ -143,7 +143,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.RUSTY_DAGGER, 3 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.RUSTY_DAGGER, 3 } })
                     then
                         return mission:progressEvent(151)
                     end
@@ -153,9 +153,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(257, 0, xi.items.RUSTY_DAGGER)
+                        return mission:progressEvent(257, 0, xi.item.RUSTY_DAGGER)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(150, 0, xi.items.RUSTY_DAGGER)
+                        return mission:progressEvent(150, 0, xi.item.RUSTY_DAGGER)
                     end
                 end,
             },

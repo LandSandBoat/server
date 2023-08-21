@@ -69,7 +69,7 @@ local function getISPItem(i)
         [45057] = { id = 3309, price = 5000 }, -- barrage turbine
         [53249] = { id = 3311, price = 5000 }, -- galvanizer
         [57345] = { id = 6409, price = 50000 },
-        [69633] = { id = xi.items.CIPHER_OF_MIHLIS_ALTER_EGO, price = 5000 }, -- mihli
+        [69633] = { id = xi.item.CIPHER_OF_MIHLIS_ALTER_EGO, price = 5000 }, -- mihli
         -- Private Second Class
         -- Map Key Items (handled separately)
         -- Private First Class

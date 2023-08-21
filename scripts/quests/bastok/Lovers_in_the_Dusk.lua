@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SIREN_FLUTE,
+    item     = xi.item.SIREN_FLUTE,
 }
 
 quest.sections =

@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.IRON_MUSKETEERS_BOLT)
+    target:addItem(xi.item.IRON_MUSKETEERS_BOLT)
 end
 
 return itemObject

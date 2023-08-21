@@ -14,8 +14,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dmg                = pet:getHP()
 
     if
-        masterEquippedHead == xi.items.BAGUA_GALERO_P2 or
-        masterEquippedHead == xi.items.BAGUA_GALERO_P3
+        masterEquippedHead == xi.item.BAGUA_GALERO_P2 or
+        masterEquippedHead == xi.item.BAGUA_GALERO_P3
     then
         dmg = pet:getMaxHP()
     end

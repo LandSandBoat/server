@@ -25,7 +25,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 then
         player:setCharVar("unbridledPassion", 6)
-    elseif csid == 7 and npcUtil.giveItem(player, xi.items.ICE_ARROW) then
+    elseif csid == 7 and npcUtil.giveItem(player, xi.item.ICE_ARROW) then
         player:setCharVar("unbridledPassion", 7)
     end
 end

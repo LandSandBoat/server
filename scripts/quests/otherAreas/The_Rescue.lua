@@ -77,7 +77,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.TRADERS_SACK) and
-                        npcUtil.tradeHasExactly(trade, xi.items.QUADAV_CHARM)
+                        npcUtil.tradeHasExactly(trade, xi.item.QUADAV_CHARM)
                     then
                         return quest:progressEvent(1000)
                     end

@@ -17,12 +17,12 @@ entity.onTrade = function(player, npc, trade)
         not GetMobByID(ID.mob.KING_BEHEMOTH):isSpawned()
     then
         if
-            npcUtil.tradeHasExactly(trade, xi.items.BEASTLY_SHANK) and
+            npcUtil.tradeHasExactly(trade, xi.item.BEASTLY_SHANK) and
             npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH)
         then
             player:confirmTrade()
         elseif
-            npcUtil.tradeHasExactly(trade, xi.items.SAVORY_SHANK) and
+            npcUtil.tradeHasExactly(trade, xi.item.SAVORY_SHANK) and
             npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH)
         then
             player:confirmTrade()

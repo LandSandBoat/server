@@ -19,7 +19,7 @@ local content = Limbus:new({
     area             = 8,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.METAL_CHIP },
+    requiredItems    = { xi.item.METAL_CHIP },
     name             = "CENTRAL_TEMENOS_BASEMENT",
     timeExtension    = 5,
 })
@@ -57,7 +57,7 @@ content.groups =
                 mob:addListener("ITEM_DROPS", "ITEM_DROPS_AERN", function(mobArg, loot)
                     local quantity = math.min(3, mob:getLocalVar("AERN_RERAISES"))
 
-                    loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.drop_rate.GUARANTEED, quantity)
+                    loot:addItem(xi.item.ANCIENT_BEASTCOIN, xi.drop_rate.GUARANTEED, quantity)
                 end)
             end
 
@@ -125,12 +125,12 @@ content.loot =
     {
         {
             quantity = 7,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = 1000 },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = 1000 },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.NORMAL    },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.NORMAL    },
         },
     }
 }

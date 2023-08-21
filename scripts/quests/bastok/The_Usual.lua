@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SPEED_BOW,
+    item     = xi.item.SPEED_BOW,
     title    = xi.title.STEAMING_SHEEP_REGULAR,
 }
 
@@ -51,7 +51,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.KING_TRUFFLE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.KING_TRUFFLE) and
                         not player:hasKeyItem(xi.ki.STEAMING_SHEEP_INVITATION)
                     then
                         return quest:progressEvent(135)

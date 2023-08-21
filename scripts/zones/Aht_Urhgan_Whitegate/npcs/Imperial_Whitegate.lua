@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local standardParam = 0
-        if not player:hasItem(xi.items.IMPERIAL_STANDARD) then
+        if not player:hasItem(xi.item.IMPERIAL_STANDARD) then
             standardParam = 1
         end
 
@@ -44,19 +44,19 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 3140 or csid == 3155 then
-        if option == 1 and npcUtil.giveItem(player, xi.items.BALRAHNS_RING) then
+        if option == 1 and npcUtil.giveItem(player, xi.item.BALRAHNS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
-        elseif option == 2 and npcUtil.giveItem(player, xi.items.ULTHALAMS_RING) then
+        elseif option == 2 and npcUtil.giveItem(player, xi.item.ULTHALAMS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
-        elseif option == 3 and npcUtil.giveItem(player, xi.items.JALZAHNS_RING) then
+        elseif option == 3 and npcUtil.giveItem(player, xi.item.JALZAHNS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
         elseif option == 4 then
-            npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
+            npcUtil.giveItem(player, xi.item.IMPERIAL_STANDARD)
         elseif option == 99 then
-            player:updateEvent(xi.items.BALRAHNS_RING, xi.items.ULTHALAMS_RING, xi.items.JALZAHNS_RING)
+            player:updateEvent(xi.item.BALRAHNS_RING, xi.item.ULTHALAMS_RING, xi.item.JALZAHNS_RING)
         end
     end
 end
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
-        npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
+        npcUtil.giveItem(player, xi.item.IMPERIAL_STANDARD)
     end
 end
 

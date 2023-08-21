@@ -12,7 +12,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAW
 
 quest.reward =
 {
-    item = xi.items.ANGELSTONE,
+    item = xi.item.ANGELSTONE,
 }
 
 quest.sections =

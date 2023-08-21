@@ -6,7 +6,7 @@ xi = xi or {}
 
 -- NOTE: When adding items to this list, be sure to add the long name variant, not the short name.
 -- Example: PONZE_OF_SHELL_POWDER instead of SHELL_POWDER
-xi.items =
+xi.item =
 {
     NONE                            = 0,
     WORKBENCH                       = 22,

@@ -222,7 +222,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId, xi.mission.status.COP.LOUVERANCE) == 11 and
-                        npcUtil.tradeHasExactly(trade, xi.items.GOLD_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.GOLD_KEY)
                     then
                         return mission:progressEvent(3)
                     end

@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISH
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE
+    item = xi.item.IMPERIAL_SILVER_PIECE
 }
 
 quest.sections =
@@ -142,7 +142,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.SICKLE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.SICKLE) and
                         quest:getVar(player, 'Prog') == 2 and
                         not player:hasKeyItem(xi.ki.RAINBOW_BERRY)
                     then

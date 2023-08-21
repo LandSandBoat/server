@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.CARBUNCLES_RUBY) and
+        npcUtil.tradeHas(trade, xi.item.CARBUNCLES_RUBY) and
         utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7)
     then
         player:startEvent(124)

@@ -49,7 +49,7 @@ quest.sections =
             ['Michea'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.COPPER_INGOT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.COPPER_INGOT) then
                         return quest:progressEvent(216)
                     end
                 end,

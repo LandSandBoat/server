@@ -15,7 +15,7 @@ quest.reward =
 {
     fame = 20,
     fameArea = xi.quest.fame_area.NORG,
-    item = xi.items.MAGOROKU,
+    item = xi.item.MAGOROKU,
 }
 
 quest.sections =
@@ -55,7 +55,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and
-                        npcUtil.tradeHasExactly(trade, xi.items.MUMEITO)
+                        npcUtil.tradeHasExactly(trade, xi.item.MUMEITO)
                     then
                         return quest:progressEvent(141)
                     end
@@ -70,7 +70,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:findItem(xi.items.MUMEITO) and
+                        not player:findItem(xi.item.MUMEITO) and
                         npcUtil.tradeHasExactly(trade, { { "gil", 30000 } })
                     then
                         return quest:progressEvent(145)
@@ -78,7 +78,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if not player:findItem(xi.items.MUMEITO) then
+                    if not player:findItem(xi.item.MUMEITO) then
                         return quest:progressEvent(144)
                     end
                 end,
@@ -103,7 +103,7 @@ quest.sections =
                 end,
 
                 [145] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.MUMEITO) then
+                    if npcUtil.giveItem(player, xi.item.MUMEITO) then
                         player:confirmTrade()
                     end
                 end,
@@ -123,7 +123,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.SACK_OF_FISH_BAIT) and
+                        npcUtil.tradeHasExactly(trade, xi.item.SACK_OF_FISH_BAIT) and
                         npcUtil.popFromQM(player, npc, zitahID.mob.ISONADE, { hide = 0 })
                     then
                         player:confirmTrade()

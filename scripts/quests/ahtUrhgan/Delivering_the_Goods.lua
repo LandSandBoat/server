@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVE
 
 quest.reward =
 {
-    item = { { xi.items.IMPERIAL_BRONZE_PIECE, 3 } }
+    item = { { xi.item.IMPERIAL_BRONZE_PIECE, 3 } }
 }
 
 quest.sections =

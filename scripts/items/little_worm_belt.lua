@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.LITTLE_WORM, 12)
+    target:addItem(xi.item.LITTLE_WORM, 12)
 end
 
 return itemObject

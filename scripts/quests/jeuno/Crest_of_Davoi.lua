@@ -52,7 +52,7 @@ quest.sections =
             ['Baudin'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_COEURL_MEAT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_COEURL_MEAT) then
                         return quest:progressEvent(171)
                     end
                 end,

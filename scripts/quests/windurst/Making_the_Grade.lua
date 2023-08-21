@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 75,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.SCROLL_OF_ASPIR,
+    item     = xi.item.SCROLL_OF_ASPIR,
 }
 
 quest.sections =
@@ -69,7 +69,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PILE_OF_ANSWER_SHEETS) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PILE_OF_ANSWER_SHEETS) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         return quest:progressEvent(455)
@@ -124,7 +124,7 @@ quest.sections =
             ['Koru-Moru'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.PILE_OF_ANSWER_SHEETS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.PILE_OF_ANSWER_SHEETS) then
                         if quest:getVar(player, 'Prog') == 1 then
                             return quest:progressEvent(285)
                         else
@@ -138,7 +138,7 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        player:hasItem(xi.items.PILE_OF_ANSWER_SHEETS)
+                        player:hasItem(xi.item.PILE_OF_ANSWER_SHEETS)
                     then
                         return quest:event(287)
                     elseif questProgress >= 2 then

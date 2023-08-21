@@ -16,12 +16,12 @@ quest.reward =
 local rewardItems =
 {
 --  Awarded Item id                       Required Items for Trade
-    [xi.items.BOTTLE_OF_HYSTEROANIMA] = { tradeItem = xi.items.RECOLLECTION_OF_PAIN,      gil = 2000 },
-    [xi.items.BOTTLE_OF_PSYCHOANIMA ] = { tradeItem = xi.items.RECOLLECTION_OF_FEAR,      gil = 2000 },
-    [xi.items.BOTTLE_OF_TERROANIMA  ] = { tradeItem = xi.items.RECOLLECTION_OF_GUILT,     gil = 2000 },
-    [xi.items.HAMAYUMI              ] = { tradeItem = xi.items.RECOLLECTION_OF_SUFFERING, gil =  nil },
-    [xi.items.STONE_GORGET          ] = { tradeItem = xi.items.RECOLLECTION_OF_ANXIETY,   gil =  nil },
-    [xi.items.DIA_WAND              ] = { tradeItem = xi.items.RECOLLECTION_OF_ANIMOSITY, gil =  nil },
+    [xi.item.BOTTLE_OF_HYSTEROANIMA] = { tradeItem = xi.item.RECOLLECTION_OF_PAIN,      gil = 2000 },
+    [xi.item.BOTTLE_OF_PSYCHOANIMA ] = { tradeItem = xi.item.RECOLLECTION_OF_FEAR,      gil = 2000 },
+    [xi.item.BOTTLE_OF_TERROANIMA  ] = { tradeItem = xi.item.RECOLLECTION_OF_GUILT,     gil = 2000 },
+    [xi.item.HAMAYUMI              ] = { tradeItem = xi.item.RECOLLECTION_OF_SUFFERING, gil =  nil },
+    [xi.item.STONE_GORGET          ] = { tradeItem = xi.item.RECOLLECTION_OF_ANXIETY,   gil =  nil },
+    [xi.item.DIA_WAND              ] = { tradeItem = xi.item.RECOLLECTION_OF_ANIMOSITY, gil =  nil },
 }
 
 local memoriesOnEventFinish = function(player, csid, option, npc)

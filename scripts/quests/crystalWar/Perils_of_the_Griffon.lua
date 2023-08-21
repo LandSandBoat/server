@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.PERI
 
 quest.reward =
 {
-    item  = xi.items.ELIXIR,
+    item  = xi.item.ELIXIR,
     title = xi.title.KNIGHT_OF_THE_SWIFTWING_GRIFFIN,
 }
 

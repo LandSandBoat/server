@@ -48,7 +48,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLEAN_SNAP_ROD) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLEAN_SNAP_ROD) then
                         return quest:progressEvent(317)
                     else
                         return quest:event(316)

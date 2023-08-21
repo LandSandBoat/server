@@ -13,10 +13,10 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.items.BOMB_ARM,                  780, 2,
-        xi.items.GRENADE,                  1252, 3,
-        xi.items.FLASQUE_OF_CATALYTIC_OIL,  104, 3,
-        xi.items.PINCH_OF_SOOT,             655, 1,
+        xi.item.BOMB_ARM,                  780, 2,
+        xi.item.GRENADE,                  1252, 3,
+        xi.item.FLASQUE_OF_CATALYTIC_OIL,  104, 3,
+        xi.item.PINCH_OF_SOOT,             655, 1,
     }
 
     player:showText(npc, ID.text.NOGGA_SHOP_DIALOG)

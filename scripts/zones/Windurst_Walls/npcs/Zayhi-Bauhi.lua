@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED then
-        if trade:hasItemQty(xi.items.POT_OF_HONEY, 1) and trade:getItemCount() == 1 then
+        if trade:hasItemQty(xi.item.POT_OF_HONEY, 1) and trade:getItemCount() == 1 then
             local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
             if toBeeOrNotStatus == 10 then
                 player:startEvent(69) -- After Honey#1: Clearing throat

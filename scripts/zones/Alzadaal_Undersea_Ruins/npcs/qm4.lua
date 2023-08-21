@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.OPALUS_GEM) and
+        npcUtil.tradeHas(trade, xi.item.OPALUS_GEM) and
         npcUtil.popFromQM(player, npc, ID.mob.WULGARU)
     then
         -- Trade Opalus Gem

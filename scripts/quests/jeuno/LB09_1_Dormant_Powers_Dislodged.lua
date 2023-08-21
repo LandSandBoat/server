@@ -16,16 +16,16 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_
 
 local itemWantedTable =
 {
-    [0] = { xi.items.PINCH_OF_VALKURM_SUNSAND },
-    [1] = { xi.items.FADED_CRYSTAL            },
-    [2] = { xi.items.ORCISH_PLATE_ARMOR       },
-    [3] = { xi.items.MAGICKED_SKULL           },
-    [4] = { xi.items.CUP_OF_DHALMEL_SALIVA    },
-    [5] = { xi.items.YAGUDO_CAULK             },
-    [6] = { xi.items.SIRENS_TEAR              },
-    [7] = { xi.items.DANGRUF_STONE            },
-    [8] = { xi.items.ORCISH_AXE               },
-    [9] = { xi.items.QUADAV_BACKSCALE         },
+    [0] = { xi.item.PINCH_OF_VALKURM_SUNSAND },
+    [1] = { xi.item.FADED_CRYSTAL            },
+    [2] = { xi.item.ORCISH_PLATE_ARMOR       },
+    [3] = { xi.item.MAGICKED_SKULL           },
+    [4] = { xi.item.CUP_OF_DHALMEL_SALIVA    },
+    [5] = { xi.item.YAGUDO_CAULK             },
+    [6] = { xi.item.SIRENS_TEAR              },
+    [7] = { xi.item.DANGRUF_STONE            },
+    [8] = { xi.item.ORCISH_AXE               },
+    [9] = { xi.item.QUADAV_BACKSCALE         },
     -- 10+ = It repeats the pattern ad nauseam. Supposedly, it can request more items, but I cannot figure them out without a cap.
 }
 
@@ -94,7 +94,7 @@ quest.sections =
                     local itemToTrade = itemWantedTable[itemWanted][1]
 
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.KINDREDS_CREST, 1 }, { itemToTrade, 1 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_CREST, 1 }, { itemToTrade, 1 } }) and
                         player:getMeritCount() > 9
                     then
                         return quest:progressEvent(10191)

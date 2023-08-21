@@ -47,7 +47,7 @@ quest.sections =
             ['Qiji'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BRASS_HAIRPIN) then
                         return quest:event(124)
                     end
                 end,
@@ -62,7 +62,7 @@ quest.sections =
             ['Romilda'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BRASS_HAIRPIN) then
                         return quest:progressEvent(125)
                     end
                 end,

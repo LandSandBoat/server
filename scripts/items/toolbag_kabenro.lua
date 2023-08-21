@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.KABENRO, 99)
+    target:addItem(xi.item.KABENRO, 99)
 end
 
 return itemObject

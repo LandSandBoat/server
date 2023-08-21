@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.ICE_CRYSTAL, 12)
+    target:addItem(xi.item.ICE_CRYSTAL, 12)
 end
 
 return itemObject

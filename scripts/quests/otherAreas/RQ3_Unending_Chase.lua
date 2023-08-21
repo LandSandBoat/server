@@ -35,9 +35,9 @@ quest.sections =
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         if quest:getVar(player, 'Prog') == 0 then
-                            return quest:progressEvent(82, xi.items.PUFFBALL) -- Unending Chase starting event.
+                            return quest:progressEvent(82, xi.item.PUFFBALL) -- Unending Chase starting event.
                         else
-                            return quest:progressEvent(84, xi.items.PUFFBALL) -- Unending Chase starting event after rejecting it.
+                            return quest:progressEvent(84, xi.item.PUFFBALL) -- Unending Chase starting event after rejecting it.
                         end
                     else
                         return quest:event(75)
@@ -82,7 +82,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.PUFFBALL }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.PUFFBALL }) then
                         return quest:progressEvent(83) -- Quest completed.
                     end
                 end,

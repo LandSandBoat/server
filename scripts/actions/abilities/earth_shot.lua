@@ -16,8 +16,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     end
 
     if
-        player:hasItem(xi.items.EARTH_CARD, 0) or
-        player:hasItem(xi.items.TRUMP_CARD, 0)
+        player:hasItem(xi.item.EARTH_CARD, 0) or
+        player:hasItem(xi.item.TRUMP_CARD, 0)
     then
         return 0, 0
     else
@@ -76,7 +76,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end
     end
 
-    local _ = player:delItem(xi.items.EARTH_CARD, 1) or player:delItem(xi.items.TRUMP_CARD, 1)
+    local _ = player:delItem(xi.item.EARTH_CARD, 1) or player:delItem(xi.item.TRUMP_CARD, 1)
     target:updateClaim(player)
 
     return dmg

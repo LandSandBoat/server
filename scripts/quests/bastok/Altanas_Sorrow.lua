@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SCROLL_OF_TELEPORT_DEM,
+    item     = xi.item.SCROLL_OF_TELEPORT_DEM,
     title    = xi.title.PILGRIM_TO_DEM,
 }
 

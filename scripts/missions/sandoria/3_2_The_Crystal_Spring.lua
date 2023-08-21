@@ -107,7 +107,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(2030)
                     end
                 end,
@@ -126,7 +126,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(1030)
                     end
                 end,
@@ -161,7 +161,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(1030)
                     end
                 end,
@@ -194,7 +194,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(2013)
                     end
                 end,
@@ -209,7 +209,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(1013)
                     end
                 end,
@@ -242,7 +242,7 @@ mission.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CRYSTAL_BASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
                         return mission:progressEvent(1013)
                     end
                 end,

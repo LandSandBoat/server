@@ -50,7 +50,7 @@ quest.sections =
             ['Degenhard'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BONE_CHIP) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BONE_CHIP) then
                         return quest:progressEvent(258)
                     end
                 end,

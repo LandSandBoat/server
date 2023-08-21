@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.DARK_ADAMAN_BULLET, 99)
+    target:addItem(xi.item.DARK_ADAMAN_BULLET, 99)
 end
 
 return itemObject

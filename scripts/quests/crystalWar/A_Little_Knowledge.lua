@@ -20,7 +20,7 @@ local validMageJobs = set{ xi.job.BLM, xi.job.RDM, xi.job.SMN, xi.job.BLU }
 local tuckerEventFinish = function(player, csid, option, npc)
     local numAwarded = quest:getLocalVar(player, 'numAwarded')
 
-    if npcUtil.giveItem(player, { { xi.items.SHEET_OF_VELLUM, numAwarded } }) then
+    if npcUtil.giveItem(player, { { xi.item.SHEET_OF_VELLUM, numAwarded } }) then
         player:confirmTrade()
         quest:incrementVar(player, 'Option', 1)
     end
@@ -70,12 +70,12 @@ quest.sections =
                     if
                         questOption >= 1 and
                         questOption <= 3 and
-                        trade:getItemQty(xi.items.ROLANBERRY) >= 12 and
-                        trade:hasItemQty(xi.items.ROLANBERRY, trade:getItemCount())
+                        trade:getItemQty(xi.item.ROLANBERRY) >= 12 and
+                        trade:hasItemQty(xi.item.ROLANBERRY, trade:getItemCount())
                     then
                         local numAwardedVellum = math.min(4, math.floor(trade:getItemCount() / 12))
 
-                        trade:confirmItem(xi.items.ROLANBERRY, numAwardedVellum * 12)
+                        trade:confirmItem(xi.item.ROLANBERRY, numAwardedVellum * 12)
                         quest:setLocalVar(player, 'numAwarded', numAwardedVellum)
 
                         if questOption == 1 then
@@ -126,7 +126,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.SHEET_OF_VELLUM, 12 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.SHEET_OF_VELLUM, 12 } })
                     then
                         local isMageJob = validMageJobs[player:getMainJob()] and 1 or 0
 

@@ -15,9 +15,9 @@ mission.reward =
 
 local itemOptions =
 {
-    [0] = { xi.items.BEEF_STEWPOT,          1 },
-    [1] = { xi.items.SERVING_OF_ZARU_SOBA,  1 },
-    [2] = { xi.items.SPICY_CRACKER,        30 },
+    [0] = { xi.item.BEEF_STEWPOT,          1 },
+    [1] = { xi.item.SERVING_OF_ZARU_SOBA,  1 },
+    [2] = { xi.item.SPICY_CRACKER,        30 },
 }
 
 mission.sections =

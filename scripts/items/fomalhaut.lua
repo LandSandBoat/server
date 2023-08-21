@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.CHRONO_BULLET, 99 } }) -- Chrono Bullet x99
+    npcUtil.giveItem(target, { { xi.item.CHRONO_BULLET, 99 } }) -- Chrono Bullet x99
 end
 
 return itemObject

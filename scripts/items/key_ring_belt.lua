@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.SKELETON_KEY)
+    target:addItem(xi.item.SKELETON_KEY)
 end
 
 return itemObject

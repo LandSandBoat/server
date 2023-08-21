@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
     then
         if
             player:getFreeSlotsCount() > 0 and
-            not player:hasItem(xi.items.TAHRONGI_CACTUS)
+            not player:hasItem(xi.item.TAHRONGI_CACTUS)
         then
-            player:addItem(xi.items.TAHRONGI_CACTUS)
-            player:messageSpecial(ID.text.BUD_BREAKS_OFF, 0, xi.items.TAHRONGI_CACTUS)
+            player:addItem(xi.item.TAHRONGI_CACTUS)
+            player:messageSpecial(ID.text.BUD_BREAKS_OFF, 0, xi.item.TAHRONGI_CACTUS)
         else
             player:messageSpecial(ID.text.CANT_TAKE_ANY_MORE)
         end

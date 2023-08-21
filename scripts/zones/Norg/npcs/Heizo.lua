@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
-    local legging = trade:getItemQty(xi.items.RUSTY_LEGGINGS)
+    local legging = trade:getItemQty(xi.item.RUSTY_LEGGINGS)
     local turnedInVar = player:getCharVar("shiningLeggings_nb")
     local totalLeggings = legging + turnedInVar
 
@@ -54,8 +54,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif csid == 129 then
         player:tradeComplete()
-        player:addItem(xi.items.SCROLL_OF_DOKUMORI_ICHI)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_DOKUMORI_ICHI)
+        player:addItem(xi.item.SCROLL_OF_DOKUMORI_ICHI)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_DOKUMORI_ICHI)
         player:addFame(xi.quest.fame_area.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb", 0)

@@ -45,7 +45,7 @@ quest.sections =
             ['Mighty_Fist'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_DARKSTEEL_ORE, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.CHUNK_OF_DARKSTEEL_ORE, 2 } }) then
                         return quest:progressEvent(566)
                     end
                 end,

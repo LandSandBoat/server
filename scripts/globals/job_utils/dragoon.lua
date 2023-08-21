@@ -202,7 +202,7 @@ end
 xi.job_utils.dragoon.abilityCheckAngon = function(player, target, ability)
     local id = player:getEquipID(xi.slot.AMMO)
 
-    if id == xi.items.ANGON then
+    if id == xi.item.ANGON then
         return 0, 0
     else
         return xi.msg.basic.CANNOT_PERFORM, 0

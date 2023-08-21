@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 80,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.COTTON_HEADBAND,
+    item     = xi.item.COTTON_HEADBAND,
     title    = xi.title.KULATZ_BRIDGE_COMPANION,
 }
 
@@ -47,7 +47,7 @@ quest.sections =
             ['Gwill'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.STICK_OF_CINNAMON) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.STICK_OF_CINNAMON) then
                         return quest:progressEvent(243)
                     end
                 end,

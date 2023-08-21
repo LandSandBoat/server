@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED
 
 quest.reward =
 {
-    item     = xi.items.WARLOCKS_BOOTS,
+    item     = xi.item.WARLOCKS_BOOTS,
     fame     = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
 }
@@ -151,7 +151,7 @@ quest.sections =
             ['Pagisalis'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SQUARE_OF_VELVET_CLOTH) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SQUARE_OF_VELVET_CLOTH) then
                         return quest:progressEvent(37)
                     end
                 end,

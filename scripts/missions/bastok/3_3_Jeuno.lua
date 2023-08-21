@@ -160,7 +160,7 @@ mission.sections =
                     -- the key into a key item, allowing the player to drop the inventory key for space.
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DELKFUTT_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
                     then
                         return mission:progressEvent(1)
                     end

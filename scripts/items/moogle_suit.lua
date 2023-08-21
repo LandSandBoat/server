@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.MOG_MISSILE, 1)
+    target:addItem(xi.item.MOG_MISSILE, 1)
 end
 
 return itemObject

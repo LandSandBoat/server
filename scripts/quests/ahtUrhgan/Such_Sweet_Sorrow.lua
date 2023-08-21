@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SUCH_S
 
 quest.reward =
 {
-    item = xi.items.MERROW_NO_17_LOCKET,
+    item = xi.item.MERROW_NO_17_LOCKET,
 }
 
 quest.sections =
@@ -81,7 +81,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.MERROW_SCALE }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.MERROW_SCALE }) then
                         return quest:progressEvent(583, { text_table = 0 })
                     end
                 end,

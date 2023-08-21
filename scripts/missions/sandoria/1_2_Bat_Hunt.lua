@@ -31,12 +31,12 @@ local function handleTradeEvent(player, trade, firstId, repeatId)
 
     if
         not isRepeated and
-        npcUtil.tradeHasExactly(trade, xi.items.ORCISH_MAIL_SCALES)
+        npcUtil.tradeHasExactly(trade, xi.item.ORCISH_MAIL_SCALES)
     then
         return mission:progressEvent(firstId)
     elseif
         isRepeated and
-        npcUtil.tradeHasExactly(trade, xi.items.BAT_FANG)
+        npcUtil.tradeHasExactly(trade, xi.item.BAT_FANG)
     then
         return mission:progressEvent(repeatId)
     end

@@ -20,7 +20,7 @@ local content = Limbus:new({
     area             = 6,
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.METAL_CHIP },
+    requiredItems    = { xi.item.METAL_CHIP },
     name             = "CS_APOLLYON",
     timeExtension    = 5,
 })
@@ -281,18 +281,18 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }

@@ -55,7 +55,7 @@ quest.sections =
             ['Garnev'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.GOLD_ORCMASK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.GOLD_ORCMASK) then
                         return quest:progressEvent(166)
                     end
                 end,

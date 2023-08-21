@@ -32,9 +32,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][4]DayCompleted") + 7 < VanadielUniqueDay() then
                         if quest:getVar(player, 'Prog') == 0 then
-                            return quest:progressEvent(90, xi.items.CRAWLER_EGG) -- Starting event.
+                            return quest:progressEvent(90, xi.item.CRAWLER_EGG) -- Starting event.
                         else
-                            return quest:progressEvent(91, xi.items.CRAWLER_EGG) -- Starting event after rejecting.
+                            return quest:progressEvent(91, xi.item.CRAWLER_EGG) -- Starting event after rejecting.
                         end
                     end
                 end,
@@ -98,11 +98,11 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.CRAWLER_EGG, 4 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.CRAWLER_EGG, 4 } }) then
                         return quest:progressEvent(92) -- Quest completed.
                     else
                         local count      = trade:getItemCount()
-                        local crawlerEgg = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())
+                        local crawlerEgg = trade:hasItemQty(xi.item.CRAWLER_EGG, trade:getItemCount())
 
                         if crawlerEgg and count < 4 then
                             return quest:event(93)

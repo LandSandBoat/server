@@ -43,7 +43,7 @@ quest.sections =
         ['Westerly_Breeze'] =
         {
             onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_GOBLIN_DRINK) then
+                if npcUtil.tradeHasExactly(trade, xi.item.BOTTLE_OF_GOBLIN_DRINK) then
                     return quest:progressEvent(3007)
                 elseif
                     trade:getItemCount() == 1 and

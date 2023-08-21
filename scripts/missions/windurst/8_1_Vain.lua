@@ -177,7 +177,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CURSE_WAND) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CURSE_WAND) and
                         player:getMissionStatus(mission.areaId) == 3 and
                         player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
                     then
@@ -190,14 +190,14 @@ mission.sections =
 
                     if missionStatus >= 2 then
                         if player:hasKeyItem(xi.ki.STAR_SEEKER) then
-                            return mission:progressEvent(118, 0, xi.items.CURSE_WAND, xi.ki.STAR_SEEKER)
+                            return mission:progressEvent(118, 0, xi.item.CURSE_WAND, xi.ki.STAR_SEEKER)
                         elseif
                             player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and
                             missionStatus == 4
                         then
                             return mission:progressEvent(121)
                         else
-                            return mission:progressEvent(119, 0, xi.items.CURSE_WAND)
+                            return mission:progressEvent(119, 0, xi.item.CURSE_WAND)
                         end
                     end
                 end,

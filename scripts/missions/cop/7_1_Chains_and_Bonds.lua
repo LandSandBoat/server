@@ -35,14 +35,14 @@ mission.sections =
             onEventUpdate =
             {
                 [111] = function(player, csid, option, npc)
-                    player:updateEvent(0, xi.items.DUCAL_GUARDS_RING)
+                    player:updateEvent(0, xi.item.DUCAL_GUARDS_RING)
                 end,
             },
 
             onEventFinish =
             {
                 [111] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
+                    if npcUtil.giveItem(player, xi.item.DUCAL_GUARDS_RING) then
                         mission:setVar(player, 'Status', 1)
                     end
                 end,

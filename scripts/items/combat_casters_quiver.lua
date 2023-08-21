@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.COMBAT_CASTERS_ARROW)
+    target:addItem(xi.item.COMBAT_CASTERS_ARROW)
 end
 
 return itemObject

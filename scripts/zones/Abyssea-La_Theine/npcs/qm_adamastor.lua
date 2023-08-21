@@ -9,11 +9,11 @@ local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.ADAMASTOR, { xi.items.TROPHY_SHIELD })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.ADAMASTOR, { xi.item.TROPHY_SHIELD })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.TROPHY_SHIELD })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.TROPHY_SHIELD })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

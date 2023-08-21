@@ -135,7 +135,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.items.SILVER_BEASTCOIN)
+                        npcUtil.tradeHasExactly(trade, xi.item.SILVER_BEASTCOIN)
                     then
                         return quest:progressEvent(58)
                     end

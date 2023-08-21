@@ -49,7 +49,7 @@ quest.sections =
                     -- on mining a Marble Nugget, set the Prog quest variable to 1, as this quest requires
                     -- the player to mine this object.
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.MARBLE_NUGGET) and
+                        npcUtil.tradeHasExactly(trade, xi.item.MARBLE_NUGGET) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(2573)

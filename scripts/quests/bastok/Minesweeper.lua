@@ -45,7 +45,7 @@ quest.sections =
             ['Gerbaum'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.PINCH_OF_ZERUHN_SOOT, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.PINCH_OF_ZERUHN_SOOT, 3 } }) then
                         return quest:progressEvent(109)
                     end
                 end,

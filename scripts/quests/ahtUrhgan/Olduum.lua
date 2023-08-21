@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM
 
 quest.reward =
 {
-    item = xi.items.LIGHTNING_BAND,
+    item = xi.item.LIGHTNING_BAND,
 }
 
 local keyItems =
@@ -92,9 +92,9 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasItem(xi.items.OLDUUM_RING) and
+                        not player:hasItem(xi.item.OLDUUM_RING) and
                         not quest.hasKeyItem(player) and
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE)
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
                         if math.random(1, 10) > 5 then
                             quest:setVar(player, 'Prog', math.random(1, 3))
@@ -137,8 +137,8 @@ quest.sections =
                     if quest.hasKeyItem(player) then
                         return quest:progressEvent(8)
                     elseif
-                        player:hasItem(xi.items.OLDUUM_RING) or
-                        player:hasItem(xi.items.LIGHTNING_BAND)
+                        player:hasItem(xi.item.OLDUUM_RING) or
+                        player:hasItem(xi.item.LIGHTNING_BAND)
                     then
                         return quest:event(7)
                     else
@@ -156,7 +156,7 @@ quest.sections =
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.LIGHTNING_BAND)
+                    npcUtil.giveItem(player, xi.item.LIGHTNING_BAND)
                     player:delKeyItem(keyItems[quest:getVar(player, 'Prog')])
                     quest:setVar(player, 'Prog', 0)
                 end,
@@ -168,13 +168,13 @@ quest.sections =
             ['Leypoint'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasItem(xi.items.LIGHTNING_BAND) then
-                        return quest:messageSpecial(zones[player:getZoneID()].text.LEYPOINT + 1, xi.items.LIGHTNING_BAND)
+                    if player:hasItem(xi.item.LIGHTNING_BAND) then
+                        return quest:messageSpecial(zones[player:getZoneID()].text.LEYPOINT + 1, xi.item.LIGHTNING_BAND)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LIGHTNING_BAND) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LIGHTNING_BAND) then
                         if player:getFreeSlotsCount() == 0 then
                             return quest:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED)
                         else
@@ -187,7 +187,7 @@ quest.sections =
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.OLDUUM_RING) then
+                    if npcUtil.giveItem(player, xi.item.OLDUUM_RING) then
                         player:confirmTrade()
                     end
                 end,
@@ -200,9 +200,9 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasItem(xi.items.OLDUUM_RING) and
+                        not player:hasItem(xi.item.OLDUUM_RING) and
                         not quest.hasKeyItem(player) and
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE)
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
                         if math.random(1, 10) > 5 then
                             quest:setVar(player, 'Prog', math.random(1, 3))

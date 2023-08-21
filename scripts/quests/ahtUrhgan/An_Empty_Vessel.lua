@@ -16,9 +16,9 @@ quest.reward =
 
 local requiredItemList =
 {
-    xi.items.SIRENS_TEAR,
-    xi.items.PINCH_OF_VALKURM_SUNSAND,
-    xi.items.DANGRUF_STONE,
+    xi.item.SIRENS_TEAR,
+    xi.item.PINCH_OF_VALKURM_SUNSAND,
+    xi.item.DANGRUF_STONE,
 }
 
 quest.sections =

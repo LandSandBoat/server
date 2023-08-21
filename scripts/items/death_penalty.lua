@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.LIVING_BULLET, 99 } }) -- Living Bullet x99
+    npcUtil.giveItem(target, { { xi.item.LIVING_BULLET, 99 } }) -- Living Bullet x99
 end
 
 return itemObject

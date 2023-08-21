@@ -9,11 +9,11 @@ local ID = zones[xi.zone.ABYSSEA_TAHRONGI]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TEFENET, { xi.items.SHOCKING_WHISKER })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TEFENET, { xi.item.SHOCKING_WHISKER })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SHOCKING_WHISKER })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.SHOCKING_WHISKER })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

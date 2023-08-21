@@ -34,7 +34,7 @@ local questAvailable =
     ['Moogle'] =
     {
         onTrigger = function(player, npc)
-            return quest:progressEvent(30009, 0, 0, 0, 4, 0, xi.items.SHRIMP_LURE, xi.items.STICK_OF_SELBINA_BUTTER)
+            return quest:progressEvent(30009, 0, 0, 0, 4, 0, xi.item.SHRIMP_LURE, xi.item.STICK_OF_SELBINA_BUTTER)
         end,
     },
 
@@ -60,7 +60,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.items.SHRIMP_LURE, xi.items.STICK_OF_SELBINA_BUTTER }) then
+            if npcUtil.tradeHasExactly(trade, { xi.item.SHRIMP_LURE, xi.item.STICK_OF_SELBINA_BUTTER }) then
                 return quest:progressEvent(30011)
             end
         end,
@@ -74,7 +74,7 @@ local questAccepted =
             end
 
             if questProgress == 0 then
-                return quest:progressEvent(30010, 0, 0, 0, 0, 0, xi.items.SHRIMP_LURE, xi.items.STICK_OF_SELBINA_BUTTER)
+                return quest:progressEvent(30010, 0, 0, 0, 0, 0, xi.item.SHRIMP_LURE, xi.item.STICK_OF_SELBINA_BUTTER)
             elseif
                 questProgress == 1 and
                 quest:getVar(player, 'Timer') < os.time()

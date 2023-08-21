@@ -32,7 +32,7 @@ mission.sections =
                         local onPathUntraveled = player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.THE_PATH_UNTRAVELED and 1 or 0
 
                         return mission:progressEvent(423, { [7] = onPathUntraveled })
-                    elseif missionStatus == 5 and not player:hasItem(xi.items.ONZ_OF_MYTHRIL_SAND) then
+                    elseif missionStatus == 5 and not player:hasItem(xi.item.ONZ_OF_MYTHRIL_SAND) then
                         return mission:progressEvent(424)
                     else
                         return mission:progressEvent(422)
@@ -56,7 +56,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
-                        npcUtil.tradeHasExactly(trade, xi.items.ONZ_OF_MYTHRIL_SAND)
+                        npcUtil.tradeHasExactly(trade, xi.item.ONZ_OF_MYTHRIL_SAND)
                     then
                         return mission:progressEvent(255)
                     end
@@ -78,7 +78,7 @@ mission.sections =
                 end,
 
                 [423] = function(player, csid, option, npc)
-                    if not npcUtil.giveItem(player, { { xi.items.PICKAXE, 5 } }) then
+                    if not npcUtil.giveItem(player, { { xi.item.PICKAXE, 5 } }) then
                         mission:setVar(player, 'Option', 1)
                     else
                         player:setMissionStatus(mission.areaId, 5)
@@ -86,7 +86,7 @@ mission.sections =
                 end,
 
                 [425] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, { { xi.items.PICKAXE, 5 } }) then
+                    if npcUtil.giveItem(player, { { xi.item.PICKAXE, 5 } }) then
                         player:setMissionStatus(mission.areaId, 5)
                         mission:setVar(player, 'Option', 0)
                     end

@@ -9,7 +9,7 @@ quest.sections =
     {
         check = function(player, questVars, vars)
             return not player:hasSpell(xi.magic.spell.HALVER) and
-                not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO) and
+                not player:findItem(xi.item.CIPHER_OF_HALVERS_ALTER_EGO) and
                 player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
         end,
 
@@ -22,7 +22,7 @@ quest.sections =
                     -- exists as a stopgap to ensure that the player can receive the item in case of full
                     -- inventory, or having already progressed.
 
-                    npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
+                    npcUtil.giveItem(player, xi.item.CIPHER_OF_HALVERS_ALTER_EGO)
                     return quest:noAction()
                 end,
             },

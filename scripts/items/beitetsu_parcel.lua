@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.BEITETSU, math.random(3, 15))
+    target:addItem(xi.item.BEITETSU, math.random(3, 15))
 end
 
 return itemObject

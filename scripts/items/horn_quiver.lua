@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.HORN_ARROW, 99)
+    target:addItem(xi.item.HORN_ARROW, 99)
 end
 
 return itemObject

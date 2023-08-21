@@ -16,9 +16,9 @@ mission.reward =
 
 local rewardItems =
 {
-    xi.items.ADOULINS_REFUGE,
-    xi.items.YGNASS_RESOLVE,
-    xi.items.ARCIELAS_GRACE,
+    xi.item.ADOULINS_REFUGE,
+    xi.item.YGNASS_RESOLVE,
+    xi.item.ARCIELAS_GRACE,
 }
 
 local function findRewardItem(player)

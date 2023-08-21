@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
     if
         letterRed == 2 and
         trade:getItemCount() == 4 and
-        trade:hasItemQty(xi.items.GOLD_CHAIN, 1) and
-        trade:hasItemQty(xi.items.SQUARE_OF_VELVET_CLOTH, 1) and
-        trade:hasItemQty(xi.items.SQUARE_OF_RED_GRASS_CLOTH, 1) and
-        trade:hasItemQty(xi.items.SQUARE_OF_SAILCLOTH, 1)
+        trade:hasItemQty(xi.item.GOLD_CHAIN, 1) and
+        trade:hasItemQty(xi.item.SQUARE_OF_VELVET_CLOTH, 1) and
+        trade:hasItemQty(xi.item.SQUARE_OF_RED_GRASS_CLOTH, 1) and
+        trade:hasItemQty(xi.item.SQUARE_OF_SAILCLOTH, 1)
     then
         player:startEvent(755) -- accepts materials, now bring me imperial gold piece
 
@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
     elseif
         letterRed == 3 and
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.IMPERIAL_GOLD_PIECE, 1)
+        trade:hasItemQty(xi.item.IMPERIAL_GOLD_PIECE, 1)
     then
         player:startEvent(760) -- accepts gold piece, now wait for next vana'diel day
     end
@@ -68,8 +68,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
     elseif csid == 756 then
         player:setCharVar("LeleroonsLetterRed", 5)
-        player:addItem(xi.items.CORSAIRS_FRAC)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CORSAIRS_FRAC)
+        player:addItem(xi.item.CORSAIRS_FRAC)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CORSAIRS_FRAC)
     end
 end
 

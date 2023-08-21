@@ -23,7 +23,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local lockerLease = xi.moghouse.getMogLockerExpiryTimestamp(player)
         if lockerLease ~= nil then
             if lockerLease == -1 then -- Lease expired..
-                player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, xi.items.IMPERIAL_BRONZE_PIECE)
+                player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, xi.item.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 1, lockerLease)
             end

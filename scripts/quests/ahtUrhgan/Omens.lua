@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
 
 quest.reward =
 {
-    item = xi.items.MAGUS_CHARUQS,
+    item = xi.item.MAGUS_CHARUQS,
     title = xi.title.IMMORTAL_LION,
 }
 

@@ -13,16 +13,16 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.items.ASH_LOG,                     99, 2,
-        xi.items.CHESTNUT_LOG,              2939, 2,
-        xi.items.OAK_LOG,                   6572, 1,
-        xi.items.CHUNK_OF_COPPER_ORE,         12, 3,
-        xi.items.CHUNK_OF_IRON_ORE,          936, 2,
-        xi.items.CHUNK_OF_MYTHRIL_ORE,      2080, 1,
-        xi.items.CLUMP_OF_MOKO_GRASS,         20, 2,
-        xi.items.BIRD_EGG,                    58, 2,
-        xi.items.FLAX_FLOWER,                260, 1,
-        xi.items.SET_OF_KAISERIN_COSMETICS, 2080, 3,
+        xi.item.ASH_LOG,                     99, 2,
+        xi.item.CHESTNUT_LOG,              2939, 2,
+        xi.item.OAK_LOG,                   6572, 1,
+        xi.item.CHUNK_OF_COPPER_ORE,         12, 3,
+        xi.item.CHUNK_OF_IRON_ORE,          936, 2,
+        xi.item.CHUNK_OF_MYTHRIL_ORE,      2080, 1,
+        xi.item.CLUMP_OF_MOKO_GRASS,         20, 2,
+        xi.item.BIRD_EGG,                    58, 2,
+        xi.item.FLAX_FLOWER,                260, 1,
+        xi.item.SET_OF_KAISERIN_COSMETICS, 2080, 3,
     }
 
     player:showText(npc, ID.text.DENVIHR_SHOP_DIALOG)

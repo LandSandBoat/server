@@ -24,7 +24,7 @@ instanceObject.afterInstanceRegister = function(player)
         player:delKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
     end
 
-    player:addTempItem(xi.items.CAGE_OF_DVUCCA_FIREFLIES)
+    player:addTempItem(xi.item.CAGE_OF_DVUCCA_FIREFLIES)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 

@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.BIND_MEVA, 40)
     mob:setMod(xi.mod.GRAVITY_MEVA, 40)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
-    mob:showText(mob, ID.text.COLLECTOR_SPAWN, xi.items.PREMIUM_BAG)
+    mob:showText(mob, ID.text.COLLECTOR_SPAWN, xi.item.PREMIUM_BAG)
 end
 
 entity.onMobFight = function(mob, target)

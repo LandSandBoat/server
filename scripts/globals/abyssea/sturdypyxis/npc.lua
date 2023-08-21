@@ -82,7 +82,7 @@ xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
 
     if npc:getAnimationSub() == 12 then
         if
-            trade:hasItemQty(xi.items.FORBIDDEN_KEY, 1) and
+            trade:hasItemQty(xi.item.FORBIDDEN_KEY, 1) and
             trade:getItemCount() == 1
         then
             player:tradeComplete()

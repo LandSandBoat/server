@@ -62,7 +62,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.KINDREDS_CREST, 5 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_CREST, 5 } }) and
                         player:getMeritCount() > 3
                     then
                         return quest:progressEvent(10136)

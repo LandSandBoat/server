@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
         if
             player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and
-            npcUtil.tradeHas(trade, xi.items.PETRIFIED_LOG)
+            npcUtil.tradeHas(trade, xi.item.PETRIFIED_LOG)
         then
             player:startEvent(34)
         end
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getLocalVar("Sylvie_Need_Zone") == 0 and
         player:getMainJob() == xi.job.GEO and
-        not player:hasItem(xi.items.MATRE_BELL)
+        not player:hasItem(xi.item.MATRE_BELL)
     then
         player:setLocalVar("Sylvie_Need_Zone", 1)
         player:startEvent(37)
@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL)
         npcUtil.giveKeyItem(player, xi.ki.LUOPAN)
     elseif csid == 36 then
-        if npcUtil.giveItem(player, { xi.items.PLATE_OF_INDI_POISON, xi.items.MATRE_BELL }) then -- 'plate of Indi-Poison' and 'Matre Bell'
+        if npcUtil.giveItem(player, { xi.item.PLATE_OF_INDI_POISON, xi.item.MATRE_BELL }) then -- 'plate of Indi-Poison' and 'Matre Bell'
             player:unlockJob(xi.job.GEO)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 0)  -- You can now become a geomancer!
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
@@ -101,7 +101,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local purchaseOption = player:getLocalVar("Sylvie_Matre_Bell")
         if
             purchaseOption ~= 0 and
-            npcUtil.giveItem(player, { xi.items.MATRE_BELL })
+            npcUtil.giveItem(player, { xi.item.MATRE_BELL })
         then
             player:setLocalVar("Sylvie_Matre_Bell", 0)
             if purchaseOption == 1 then  -- gil

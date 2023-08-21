@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.VOLUSPA_BULLET, 99)
+    target:addItem(xi.item.VOLUSPA_BULLET, 99)
 end
 
 return itemObject

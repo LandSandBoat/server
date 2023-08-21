@@ -31,19 +31,19 @@ entity.onTrigger = function(player, npc)
     elseif trialByWater == QUEST_ACCEPTED and hasWhisperOfTides then
         local numitem = 0
 
-        if player:hasItem(xi.items.LEVIATHANS_ROD) then
+        if player:hasItem(xi.item.LEVIATHANS_ROD) then
             numitem = numitem + 1
         end
 
-        if player:hasItem(xi.items.WATER_BELT) then
+        if player:hasItem(xi.item.WATER_BELT) then
             numitem = numitem + 2
         end
 
-        if player:hasItem(xi.items.WATER_RING) then
+        if player:hasItem(xi.item.WATER_RING) then
             numitem = numitem + 4
         end
 
-        if player:hasItem(xi.items.EYE_OF_NEPT) then
+        if player:hasItem(xi.item.EYE_OF_NEPT) then
             numitem = numitem + 8
         end
 
@@ -76,13 +76,13 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 112 then
         local item = 0
         if option == 1 then
-            item = xi.items.LEVIATHANS_ROD
+            item = xi.item.LEVIATHANS_ROD
         elseif option == 2 then
-            item = xi.items.WATER_BELT
+            item = xi.item.WATER_BELT
         elseif option == 3 then
-            item = xi.items.WATER_RING
+            item = xi.item.WATER_RING
         elseif option == 4 then
-            item = xi.items.EYE_OF_NEPT
+            item = xi.item.EYE_OF_NEPT
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then

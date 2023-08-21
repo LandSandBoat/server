@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.DOGBOLT_P5, math.random(10, 20))
+    target:addItem(xi.item.DOGBOLT_P5, math.random(10, 20))
 end
 
 return itemObject

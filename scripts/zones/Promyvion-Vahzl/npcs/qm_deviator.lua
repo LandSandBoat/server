@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.REMNANT_OF_A_CEREBRATOR) and
+        npcUtil.tradeHas(trade, xi.item.REMNANT_OF_A_CEREBRATOR) and
         npcUtil.popFromQM(player, npc, ID.mob.DEVIATOR)
     then
         player:messageSpecial(ID.text.ON_NM_SPAWN)

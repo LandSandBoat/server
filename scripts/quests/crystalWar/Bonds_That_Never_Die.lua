@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOND
 
 quest.reward =
 {
-    item = xi.items.BEHEMOTH_HORN,
+    item = xi.item.BEHEMOTH_HORN,
 }
 
 quest.sections =
@@ -106,7 +106,7 @@ quest.sections =
             onEventFinish =
             {
                 [212] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.HATCHET) then
+                    if npcUtil.giveItem(player, xi.item.HATCHET) then
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,

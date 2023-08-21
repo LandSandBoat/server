@@ -84,7 +84,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DELKFUTT_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
                     then
                         return mission:progressEvent(2)
                     end

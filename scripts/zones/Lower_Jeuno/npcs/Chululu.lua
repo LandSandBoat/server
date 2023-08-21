@@ -11,11 +11,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, { xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT }, true) then
+        if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, { xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT }, true) then
+        if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
     end
@@ -109,13 +109,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         local card = 0
 
         if rand == 1 then
-            card = xi.items.TARUT_CARD_DEATH
+            card = xi.item.TARUT_CARD_DEATH
         elseif rand == 2 then
-            card = xi.items.TARUT_CARD_THE_HERMIT
+            card = xi.item.TARUT_CARD_THE_HERMIT
         elseif rand == 3 then
-            card = xi.items.TARUT_CARD_THE_KING
+            card = xi.item.TARUT_CARD_THE_KING
         else
-            card = xi.items.TARUT_CARD_THE_FOOL
+            card = xi.item.TARUT_CARD_THE_FOOL
         end
 
         if player:getFreeSlotsCount() == 0 then
@@ -151,13 +151,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         local card = 0
 
         if rand == 1 then
-            card = xi.items.TARUT_CARD_DEATH
+            card = xi.item.TARUT_CARD_DEATH
         elseif rand == 2 then
-            card = xi.items.TARUT_CARD_THE_HERMIT
+            card = xi.item.TARUT_CARD_THE_HERMIT
         elseif rand == 3 then
-            card = xi.items.TARUT_CARD_THE_KING
+            card = xi.item.TARUT_CARD_THE_KING
         else
-            card = xi.items.TARUT_CARD_THE_FOOL
+            card = xi.item.TARUT_CARD_THE_FOOL
         end
 
         if npcUtil.giveItem(player, { { card, 5 } }) then
@@ -183,7 +183,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 197 then
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
-            item = xi.items.CHAIN_CHOKER,
+            item = xi.item.CHAIN_CHOKER,
             var = { "RubbishDayVar" }
         })
     end

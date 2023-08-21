@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("UnderOathCS") == 5 and
-        npcUtil.tradeHas(trade, xi.items.WELL_WEIGHT)
+        npcUtil.tradeHas(trade, xi.item.WELL_WEIGHT)
     then
         player:startEvent(113)
     else
@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("UnderOathCS") == 5 and
         player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER) and
-        not player:hasItem(xi.items.WELL_WEIGHT) and
+        not player:hasItem(xi.item.WELL_WEIGHT) and
         not GetMobByID(ID.mob.ONE_EYED_GWAJBOJ):isSpawned() and
         not GetMobByID(ID.mob.THREE_EYED_PROZPUZ):isSpawned()
     then

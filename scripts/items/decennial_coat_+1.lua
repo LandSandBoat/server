@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.BOWL_OF_MOOGURT, 1)
+    target:addItem(xi.item.BOWL_OF_MOOGURT, 1)
 end
 
 return itemObject

@@ -90,13 +90,13 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:setCharVar("GREEN_R_LETTER_USED", 0)
                 player:addTitle(xi.title.COBRA_UNIT_MERCENARY)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:addItem(xi.items.SPRINTERS_SHOES)
+                player:addItem(xi.item.SPRINTERS_SHOES)
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
                 player:setCharVar("SEALED_DOORS", 0)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SPRINTERS_SHOES)
             else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SPRINTERS_SHOES)
             end
         else
             player:setCampaignAllegiance(3)

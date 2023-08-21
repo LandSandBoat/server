@@ -16,13 +16,13 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            xi.items.SLICE_OF_GIANT_SHEEP_MEAT,   49,
-            xi.items.PINCH_OF_DRIED_MARJORAM,     49,
-            xi.items.BAG_OF_SAN_DORIAN_FLOUR,     62,
-            xi.items.BAG_OF_RYE_FLOUR,            41,
-            xi.items.BAG_OF_SEMOLINA,           2080,
-            xi.items.LA_THEINE_CABBAGE,           24,
-            xi.items.JUG_OF_SELBINA_MILK,         62,
+            xi.item.SLICE_OF_GIANT_SHEEP_MEAT,   49,
+            xi.item.PINCH_OF_DRIED_MARJORAM,     49,
+            xi.item.BAG_OF_SAN_DORIAN_FLOUR,     62,
+            xi.item.BAG_OF_RYE_FLOUR,            41,
+            xi.item.BAG_OF_SEMOLINA,           2080,
+            xi.item.LA_THEINE_CABBAGE,           24,
+            xi.item.JUG_OF_SELBINA_MILK,         62,
         }
 
         player:showText(npc, ID.text.ROSSWALD_OPEN_DIALOG)

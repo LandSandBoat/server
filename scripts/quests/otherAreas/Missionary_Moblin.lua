@@ -47,7 +47,7 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SOILED_LETTER) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SOILED_LETTER) then
                         return quest:progressCutscene(9)
                     end
                 end,

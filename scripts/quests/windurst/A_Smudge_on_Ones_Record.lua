@@ -28,7 +28,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Hariga-Origa'] = quest:progressEvent(413, 0, xi.items.VIAL_OF_SLIME_OIL, xi.items.FROST_TURNIP),
+            ['Hariga-Origa'] = quest:progressEvent(413, 0, xi.item.VIAL_OF_SLIME_OIL, xi.item.FROST_TURNIP),
 
             onEventFinish =
             {
@@ -51,17 +51,17 @@ quest.sections =
             ['Hariga-Origa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.VIAL_OF_SLIME_OIL, xi.items.FROST_TURNIP }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.VIAL_OF_SLIME_OIL, xi.item.FROST_TURNIP }) then
                         return quest:progressEvent(417, quest.reward.gil)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(414, 0, xi.items.VIAL_OF_SLIME_OIL, xi.items.FROST_TURNIP)
+                    return quest:progressEvent(414, 0, xi.item.VIAL_OF_SLIME_OIL, xi.item.FROST_TURNIP)
                 end,
             },
 
-            ['Serukoko'] = quest:progressEvent(415, 0, xi.items.VIAL_OF_SLIME_OIL, xi.items.FROST_TURNIP),
+            ['Serukoko'] = quest:progressEvent(415, 0, xi.item.VIAL_OF_SLIME_OIL, xi.item.FROST_TURNIP),
 
             onEventFinish =
             {

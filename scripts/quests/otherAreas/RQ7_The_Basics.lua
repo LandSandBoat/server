@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.TEA_SET,
+    item     = xi.item.TEA_SET,
     title    = xi.title.FIVE_STAR_PURVEYOR,
 }
 
@@ -84,7 +84,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { xi.items.BAKED_POPOTO }) and
+                        npcUtil.tradeHasExactly(trade, { xi.item.BAKED_POPOTO }) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(96) -- Quest completed.
@@ -125,7 +125,7 @@ quest.sections =
             onEventFinish =
             {
                 [106] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.BAKED_POPOTO)
+                    npcUtil.giveItem(player, xi.item.BAKED_POPOTO)
                     player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
                     player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.MHAURAN_COUSCOUS)
                     quest:setVar(player, 'Prog', 1)

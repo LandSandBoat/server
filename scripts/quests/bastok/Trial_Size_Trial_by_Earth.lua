@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SCROLL_OF_INSTANT_WARP,
+    item     = xi.item.SCROLL_OF_INSTANT_WARP,
 }
 
 quest.sections =
@@ -31,14 +31,14 @@ quest.sections =
             -- NOTE: The below event supports multiple zone references, and which level the Mini Tuning Fork
             -- drops the Avatar fight to.  1 represents Qucksand Caves, and 20 is the level.
 
-            ['Ferrol'] = quest:progressEvent(297, 0, xi.items.MINI_TUNING_FORK_OF_EARTH, 1, 20),
+            ['Ferrol'] = quest:progressEvent(297, 0, xi.item.MINI_TUNING_FORK_OF_EARTH, 1, 20),
 
             onEventFinish =
             {
                 [297] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        npcUtil.giveItem(player, xi.items.MINI_TUNING_FORK_OF_EARTH)
+                        npcUtil.giveItem(player, xi.item.MINI_TUNING_FORK_OF_EARTH)
                     then
                         quest:begin(player)
                     end
@@ -59,15 +59,15 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMainJob() == xi.job.SMN and
-                        trade:hasItemQty(xi.items.MINI_TUNING_FORK_OF_EARTH, 1)
+                        trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_EARTH, 1)
                     then
-                        return quest:progressEvent(298, 0, xi.items.MINI_TUNING_FORK_OF_EARTH, 1, 20)
+                        return quest:progressEvent(298, 0, xi.item.MINI_TUNING_FORK_OF_EARTH, 1, 20)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.MINI_TUNING_FORK_OF_EARTH) then
-                        return quest:progressEvent(301, 0, xi.items.MINI_TUNING_FORK_OF_EARTH, 1, 20)
+                    if not player:hasItem(xi.item.MINI_TUNING_FORK_OF_EARTH) then
+                        return quest:progressEvent(301, 0, xi.item.MINI_TUNING_FORK_OF_EARTH, 1, 20)
                     else
                         return quest:event(251)
                     end
@@ -84,7 +84,7 @@ quest.sections =
 
                 [301] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveItem(player, xi.items.MINI_TUNING_FORK_OF_EARTH)
+                        npcUtil.giveItem(player, xi.item.MINI_TUNING_FORK_OF_EARTH)
                     end
                 end,
             },

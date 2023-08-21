@@ -207,7 +207,7 @@ mission.sections =
                     mission:complete(player)
                     mission:setVar(player, 'Option', 1)
 
-                    if not npcUtil.giveItem(player, xi.items.SAN_DORIAN_FLAG) then
+                    if not npcUtil.giveItem(player, xi.item.SAN_DORIAN_FLAG) then
                         mission:setVar(player, 'Flag', 1)
                     end
                 end,
@@ -341,7 +341,7 @@ mission.sections =
                 -- with one conditional, but playing it safe.
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Flag') == 1 then
-                        if npcUtil.giveItem(player, xi.items.SAN_DORIAN_FLAG) then
+                        if npcUtil.giveItem(player, xi.item.SAN_DORIAN_FLAG) then
                             mission:setVar(player, 'Flag', 0)
                         end
                     end

@@ -9,11 +9,11 @@ local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.GAIZKIN, { xi.items.VIAL_OF_UNDYING_OOZE })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.GAIZKIN, { xi.item.VIAL_OF_UNDYING_OOZE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.VIAL_OF_UNDYING_OOZE })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.VIAL_OF_UNDYING_OOZE })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

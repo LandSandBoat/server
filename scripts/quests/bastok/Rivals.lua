@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.WOLF_GORGET,
+    item     = xi.item.WOLF_GORGET,
     title    = xi.title.CONTEST_RIGGER,
 }
 
@@ -48,7 +48,7 @@ quest.sections =
             ['Detzo'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.MYTHRIL_SALLET) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.MYTHRIL_SALLET) then
                         return quest:progressEvent(94)
                     end
                 end,

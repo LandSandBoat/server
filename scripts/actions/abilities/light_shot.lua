@@ -16,8 +16,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     end
 
     if
-        player:hasItem(xi.items.LIGHT_CARD, 0) or
-        player:hasItem(xi.items.TRUMP_CARD, 0)
+        player:hasItem(xi.item.LIGHT_CARD, 0) or
+        player:hasItem(xi.item.TRUMP_CARD, 0)
     then
         return 0, 0
     else
@@ -77,7 +77,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local _ = player:delItem(xi.items.LIGHT_CARD, 1) or player:delItem(xi.items.TRUMP_CARD, 1)
+    local _ = player:delItem(xi.item.LIGHT_CARD, 1) or player:delItem(xi.item.TRUMP_CARD, 1)
     target:updateClaim(player)
 
     return xi.effect.SLEEP_I

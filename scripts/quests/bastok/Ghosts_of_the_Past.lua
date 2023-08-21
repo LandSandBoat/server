@@ -14,7 +14,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BEAT_CESTI,
+    item     = xi.item.BEAT_CESTI,
 }
 
 quest.sections =
@@ -50,8 +50,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
-                        not player:hasItem(xi.items.MINERS_PENDANT) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
+                        not player:hasItem(xi.item.MINERS_PENDANT) and
                         not GetMobByID(gusgenMinesID.mob.WANDERING_GHOST):isSpawned()
                     then
                         player:confirmTrade()
@@ -69,7 +69,7 @@ quest.sections =
             ['Oggbi'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.MINERS_PENDANT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.MINERS_PENDANT) then
                         return quest:progressEvent(232)
                     end
                 end,

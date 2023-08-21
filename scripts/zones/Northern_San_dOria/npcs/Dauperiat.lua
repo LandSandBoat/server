@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 
     if black == QUEST_ACCEPTED and questState == 2 or black == QUEST_COMPLETED then
         if
-            trade:hasItemQty(xi.items.COPY_OF_THE_CASTLE_FLOOR_PLANS, 1) and
+            trade:hasItemQty(xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(648, 0, xi.items.COPY_OF_THE_CASTLE_FLOOR_PLANS)
+            player:startEvent(648, 0, xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS)
         end
     end
 end
@@ -38,10 +38,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(645)  -- 645 recap, take envelope!
 
     elseif blackMail == QUEST_ACCEPTED and questState == 1 then
-        player:startEvent(646, 0, xi.items.COPY_OF_THE_CASTLE_FLOOR_PLANS)
+        player:startEvent(646, 0, xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS)
 
     elseif blackMail == QUEST_ACCEPTED and questState == 2 then
-        player:startEvent(647, 0, xi.items.COPY_OF_THE_CASTLE_FLOOR_PLANS)
+        player:startEvent(647, 0, xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS)
 
     else
         if player:needToZone() then

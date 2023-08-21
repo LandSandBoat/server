@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("NavigatingtheUnfriendlySeas") <= 2
     then
         if
-            trade:hasItemQty(xi.items.HYDROGAUGE, 1) and
+            trade:hasItemQty(xi.item.HYDROGAUGE, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(283)

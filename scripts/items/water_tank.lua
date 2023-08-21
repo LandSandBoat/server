@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.FLASK_OF_DISTILLED_WATER, 12)
+    target:addItem(xi.item.FLASK_OF_DISTILLED_WATER, 12)
 end
 
 return itemObject

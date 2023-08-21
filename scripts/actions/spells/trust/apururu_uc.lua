@@ -12,7 +12,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 local isWearingApururuShirt = function(player)
-    local wearingBody = player:getEquipID(xi.slot.BODY) == xi.items.APURURU_UNITY_SHIRT
+    local wearingBody = player:getEquipID(xi.slot.BODY) == xi.item.APURURU_UNITY_SHIRT
     return wearingBody
 end
 

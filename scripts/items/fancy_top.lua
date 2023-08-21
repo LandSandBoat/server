@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.PERSIKOS_SNOW_CONE)
+    target:addItem(xi.item.PERSIKOS_SNOW_CONE)
 end
 
 return itemObject

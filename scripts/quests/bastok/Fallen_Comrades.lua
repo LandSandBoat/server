@@ -45,7 +45,7 @@ quest.sections =
             ['Pavvke'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SILVER_NAME_TAG) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SILVER_NAME_TAG) then
                         if player:hasCompletedQuest(quest.areaId, quest.questId) then
                             return quest:progressEvent(92)
                         else

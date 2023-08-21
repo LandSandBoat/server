@@ -25,7 +25,7 @@ quest.sections =
             ['Omer'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10040, 0, xi.items.THREE_EYED_FISH, xi.items.CRESCENT_FISH, 0, xi.items.EGRET_FISHING_ROD)
+                    return quest:progressEvent(10040, 0, xi.item.THREE_EYED_FISH, xi.item.CRESCENT_FISH, 0, xi.item.EGRET_FISHING_ROD)
                 end,
             },
 
@@ -50,12 +50,12 @@ quest.sections =
             ['Omer'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10041, 0, 0, 0, 0, xi.items.EGRET_FISHING_ROD)
+                    return quest:progressEvent(10041, 0, 0, 0, 0, xi.item.EGRET_FISHING_ROD)
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.EGRET_FISHING_ROD) then
-                        return quest:progressEvent(10042, 0, 0, 0, 0, xi.items.EGRET_FISHING_ROD)
+                    if npcUtil.tradeHasExactly(trade, xi.item.EGRET_FISHING_ROD) then
+                        return quest:progressEvent(10042, 0, 0, 0, 0, xi.item.EGRET_FISHING_ROD)
                     end
                 end,
             },

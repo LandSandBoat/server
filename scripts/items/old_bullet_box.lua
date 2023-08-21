@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.ANTIQUE_BULLET, math.random(10, 20))
+    target:addItem(xi.item.ANTIQUE_BULLET, math.random(10, 20))
 end
 
 return itemObject

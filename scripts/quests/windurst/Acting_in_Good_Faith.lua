@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.SCROLL_OF_TELEPORT_MEA,
+    item     = xi.item.SCROLL_OF_TELEPORT_MEA,
     title    = xi.title.PILGRIM_TO_MEA,
 }
 

@@ -47,7 +47,7 @@ quest.sections =
             ['Lerene'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.SQUARE_OF_ANCESTRAL_CLOTH, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.SQUARE_OF_ANCESTRAL_CLOTH, 2 } }) then
                         return quest:progressEvent(24)
                     end
                 end,

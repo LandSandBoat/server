@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.DEATHBRINGER,
+    item     = xi.item.DEATHBRINGER,
     title    = xi.title.BLACK_DEATH,
 }
 
@@ -51,7 +51,7 @@ quest.sections =
                 function(player, prevZone)
                     if
                         prevZone == xi.zone.PALBOROUGH_MINES and
-                        not player:hasItem(xi.items.CHAOSBRINGER)
+                        not player:hasItem(xi.item.CHAOSBRINGER)
                     then
                         return 131
                     end
@@ -61,7 +61,7 @@ quest.sections =
             onEventFinish =
             {
                 [131] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.CHAOSBRINGER)
+                    npcUtil.giveItem(player, xi.item.CHAOSBRINGER)
                 end,
             },
         },
@@ -72,7 +72,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CHAOSBRINGER) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CHAOSBRINGER) and
                         player:getCharVar("ChaosbringerKills") >= 200
                     then
                         return quest:progressEvent(10)

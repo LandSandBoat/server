@@ -13,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF
 
 mission.reward =
 {
-    item        = xi.items.IMPERIAL_MYTHRIL_PIECE,
+    item        = xi.item.IMPERIAL_MYTHRIL_PIECE,
     title       = xi.title.OVJANGS_ERRAND_RUNNER,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY },
 }

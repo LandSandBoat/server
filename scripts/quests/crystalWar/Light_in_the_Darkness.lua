@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGH
 
 quest.reward =
 {
-    item = xi.items.ADAMAN_INGOT,
+    item = xi.item.ADAMAN_INGOT,
 }
 
 quest.sections =
@@ -122,7 +122,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_GOBLIN_CHOCOLATE, 30 } }) or
+                        npcUtil.tradeHasExactly(trade, { { xi.item.CHUNK_OF_GOBLIN_CHOCOLATE, 30 } }) or
                         npcUtil.tradeHasExactly(trade, { { "gil", 5000 } })
                     then
                         return quest:progressEvent(23)
@@ -270,7 +270,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_GOBLIN_CHOCOLATE, 10 } }) or
+                        npcUtil.tradeHasExactly(trade, { { xi.item.CHUNK_OF_GOBLIN_CHOCOLATE, 10 } }) or
                         npcUtil.tradeHasExactly(trade, { { "gil", 1000 } })
                     then
                         return quest:progressEvent(23)

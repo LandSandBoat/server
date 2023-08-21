@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_
 
 quest.reward =
 {
-    item = xi.items.PEISTE_SKIN,
+    item = xi.item.PEISTE_SKIN,
 }
 
 quest.sections =

@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- Trade Parradamo Stones
     if
-        trade:hasItemQty(xi.items.POUCH_OF_PARRADAMO_STONES, 1) and
+        trade:hasItemQty(xi.item.POUCH_OF_PARRADAMO_STONES, 1) and
         trade:getItemCount() == 1
     then
         player:tradeComplete()
@@ -30,8 +30,8 @@ entity.onTrigger = function(player, npc)
             player:startEvent(14, VanadielTime() + (miasmaFilterCD - os.time()))
         else
             if
-                player:hasItem(xi.items.POUCH_OF_PARRADAMO_STONES) or
-                player:hasItem(xi.items.FLAXEN_POUCH)
+                player:hasItem(xi.item.POUCH_OF_PARRADAMO_STONES) or
+                player:hasItem(xi.item.FLAXEN_POUCH)
             then
                 player:startEvent(15)
             else
@@ -51,11 +51,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("[ENM]MiasmaFilter", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 13 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FLAXEN_POUCH)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.FLAXEN_POUCH)
             return
         else
-            player:addItem(xi.items.FLAXEN_POUCH)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FLAXEN_POUCH)
+            player:addItem(xi.item.FLAXEN_POUCH)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FLAXEN_POUCH)
         end
     end
 end

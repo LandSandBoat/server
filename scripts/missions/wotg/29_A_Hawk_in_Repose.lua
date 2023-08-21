@@ -26,7 +26,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.LILAC) and
+                        npcUtil.tradeHasExactly(trade, xi.item.LILAC) and
                         mission:getVar(player, 'Status') == 1
                     then
                         return mission:progressEvent(503, 0, 23, 1753, 0, 0, 0, 1, 3871)

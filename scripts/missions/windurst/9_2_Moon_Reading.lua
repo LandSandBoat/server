@@ -19,7 +19,7 @@ local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.M
 mission.reward =
 {
     gil   = 100000,
-    item  = xi.items.WINDURSTIAN_FLAG,
+    item  = xi.item.WINDURSTIAN_FLAG,
     rank  = 10,
     title = xi.title.VESTAL_CHAMBERLAIN,
 }
@@ -137,7 +137,7 @@ mission.sections =
                         -- an appropriate mission function.
 
                         if player:getFreeSlotsCount() == 0 then
-                            return mission:messageSpecial(heavensTowerID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WINDURSTIAN_FLAG)
+                            return mission:messageSpecial(heavensTowerID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WINDURSTIAN_FLAG)
                         else
                             return mission:progressEvent(407)
                         end

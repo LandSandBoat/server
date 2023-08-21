@@ -20,13 +20,13 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Class Reunion
     if classReunion == 1 and classReunionProgress == 4 then
-        player:startEvent(713, 0, xi.items.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- he gives you an ice pendulum and wants you to go to Cloister of Frost
+        player:startEvent(713, 0, xi.item.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- he gives you an ice pendulum and wants you to go to Cloister of Frost
     elseif
         classReunion == 1 and
         classReunionProgress == 5 and
-        not player:hasItem(xi.items.ICE_PENDULUM)
+        not player:hasItem(xi.item.ICE_PENDULUM)
     then
-        player:startEvent(712, 0, xi.items.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
+        player:startEvent(712, 0, xi.item.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif
         (trialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
@@ -50,19 +50,19 @@ entity.onTrigger = function(player, npc)
     then
         local numitem = 0
 
-        if player:hasItem(xi.items.SHIVAS_CLAWS) then
+        if player:hasItem(xi.item.SHIVAS_CLAWS) then
             numitem = numitem + 1
         end  -- Shiva's Claws
 
-        if player:hasItem(xi.items.ICE_BELT) then
+        if player:hasItem(xi.item.ICE_BELT) then
             numitem = numitem + 2
         end  -- Ice Belt
 
-        if player:hasItem(xi.items.ICE_RING) then
+        if player:hasItem(xi.item.ICE_RING) then
             numitem = numitem + 4
         end  -- Ice Ring
 
-        if player:hasItem(xi.items.BOTTLE_OF_RUST_B_GONE) then
+        if player:hasItem(xi.item.BOTTLE_OF_RUST_B_GONE) then
             numitem = numitem + 8
         end   -- Rust 'B' Gone
 
@@ -96,13 +96,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         local item = 0
 
         if option == 1 then
-            item = xi.items.SHIVAS_CLAWS -- Shiva's Claws
+            item = xi.item.SHIVAS_CLAWS -- Shiva's Claws
         elseif option == 2 then
-            item = xi.items.ICE_BELT -- Ice Belt
+            item = xi.item.ICE_BELT -- Ice Belt
         elseif option == 3 then
-            item = xi.items.ICE_RING -- Ice Ring
+            item = xi.item.ICE_RING -- Ice Ring
         elseif option == 4 then
-            item = xi.items.BOTTLE_OF_RUST_B_GONE  -- Rust 'B' Gone
+            item = xi.item.BOTTLE_OF_RUST_B_GONE  -- Rust 'B' Gone
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
@@ -126,11 +126,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 713 or csid == 712 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(xi.items.ICE_PENDULUM)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ICE_PENDULUM)
+            player:addItem(xi.item.ICE_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ICE_PENDULUM)
             player:setCharVar("ClassReunionProgress", 5)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ICE_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.ICE_PENDULUM)
         end
     end
 end

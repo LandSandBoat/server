@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 60,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.FIGHTERS_LORICA,
+    item     = xi.item.FIGHTERS_LORICA,
     title    = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE,
 }
 
@@ -37,7 +37,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.GINGER_COOKIE)
+                        npcUtil.tradeHasExactly(trade, xi.item.GINGER_COOKIE)
                     then
                         return quest:progressEvent(172)
                     end

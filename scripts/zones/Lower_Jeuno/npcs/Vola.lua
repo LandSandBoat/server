@@ -12,9 +12,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY) == QUEST_ACCEPTED and
-        trade:hasItemQty(xi.items.NUE_FANG, 1) and
-        trade:hasItemQty(xi.items.MORBOLGER_VINE, 1) and
-        trade:hasItemQty(xi.items.DODO_SKIN, 1) and
+        trade:hasItemQty(xi.item.NUE_FANG, 1) and
+        trade:hasItemQty(xi.item.MORBOLGER_VINE, 1) and
+        trade:hasItemQty(xi.item.DODO_SKIN, 1) and
         trade:getItemCount() == 3
     then
         player:startEvent(213) -- Finish Quest "Fistful of Fury"
@@ -60,11 +60,11 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 213 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.BROWN_BELT)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.BROWN_BELT)
         else
             player:addTitle(xi.title.BROWN_BELT)
-            player:addItem(xi.items.BROWN_BELT)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BROWN_BELT)
+            player:addItem(xi.item.BROWN_BELT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BROWN_BELT)
             player:addFame(xi.quest.fame_area.NORG, 125)
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)

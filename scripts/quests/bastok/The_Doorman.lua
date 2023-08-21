@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RAZOR_AXE,
+    item     = xi.item.RAZOR_AXE,
 }
 
 quest.sections =

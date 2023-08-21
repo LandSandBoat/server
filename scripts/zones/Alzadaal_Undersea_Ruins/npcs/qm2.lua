@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.WEDGE_OF_RODENT_CHEESE) and
+        npcUtil.tradeHas(trade, xi.item.WEDGE_OF_RODENT_CHEESE) and
         npcUtil.popFromQM(player, npc, ID.mob.CHEESE_HOARDER_GIGIROON)
     then
         -- Trade Rodent Cheese

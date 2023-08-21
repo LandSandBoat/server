@@ -40,7 +40,7 @@ quest.sections =
             onEventFinish =
             {
                 [230] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.FIRE_CRYSTAL) then
+                    if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
                         quest:setVar(player, 'Prog', 1)
 
                         if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
@@ -88,7 +88,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.COPPER_RING) and
+                        npcUtil.tradeHasExactly(trade, xi.item.COPPER_RING) and
                         not player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
                     then
                         return quest:progressEvent(95)

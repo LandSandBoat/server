@@ -15,10 +15,10 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(math.random(xi.items.A_EGG, xi.items.Z_EGG))
+    target:addItem(math.random(xi.item.A_EGG, xi.item.Z_EGG))
 
     if math.random(1, 5) > 4 then
-        target:addItem(math.random(xi.items.A_EGG, xi.items.Z_EGG))
+        target:addItem(math.random(xi.item.A_EGG, xi.item.Z_EGG))
     end
 end
 

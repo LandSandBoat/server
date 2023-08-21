@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.LUGWORM, 12)
+    target:addItem(xi.item.LUGWORM, 12)
 end
 
 return itemObject

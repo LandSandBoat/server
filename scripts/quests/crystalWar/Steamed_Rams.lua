@@ -151,7 +151,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.OXIDIZED_PLATE)
                         player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
 
-                        npcUtil.giveItem(player, xi.items.SPRINTERS_SHOES)
+                        npcUtil.giveItem(player, xi.item.SPRINTERS_SHOES)
 
                         player:messageSpecial(southernSandoriaSID.text.NOW_ALLIED_WITH, 1)
                     end

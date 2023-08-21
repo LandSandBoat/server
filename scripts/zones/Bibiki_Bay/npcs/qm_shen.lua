@@ -9,7 +9,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local shenId = player:getZone():queryEntitiesByName("Shen")[1]:getID()
     if
-        npcUtil.tradeHasExactly(trade, xi.items.SHRIMP_LANTERN) and
+        npcUtil.tradeHasExactly(trade, xi.item.SHRIMP_LANTERN) and
         npcUtil.popFromQM(player, npc, shenId)
     then
         player:confirmTrade()

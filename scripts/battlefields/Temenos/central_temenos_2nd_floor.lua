@@ -20,7 +20,7 @@ local content = Limbus:new({
     area             = 6,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.SCARLET_CHIP },
+    requiredItems    = { xi.item.SCARLET_CHIP },
     name             = "CENTRAL_TEMENOS_2ND_FLOOR",
 })
 
@@ -301,38 +301,38 @@ content.loot =
     {
         {
             quantity = 6,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_SMALT_LEATHER,  weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_FILET_LACE,     weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_SMALT_LEATHER,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_FILET_LACE,     weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.NORMAL },
-            { item = xi.items.PLAITED_CORD,             weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.NORMAL },
+            { item = xi.item.PLAITED_CORD,             weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_SUPPLE_SKIN,    weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_SUPPLE_SKIN,    weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.CERULEAN_CHIP, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.CERULEAN_CHIP, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     }
 }

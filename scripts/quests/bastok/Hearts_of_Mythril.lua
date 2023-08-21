@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 80,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SITABAKI,
+    item     = xi.item.SITABAKI,
     title    = xi.title.PURSUER_OF_THE_PAST,
 }
 

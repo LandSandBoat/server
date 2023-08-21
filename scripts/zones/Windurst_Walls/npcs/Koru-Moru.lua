@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
     if
-        trade:hasItemQty(xi.items.SQUARE_OF_SILK_CLOTH, 1) and
+        trade:hasItemQty(xi.item.SQUARE_OF_SILK_CLOTH, 1) and
         count == 1 and
         trade:getGil() == 0
     then
@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
             player:setCharVar("rootProblem", 2)
         end
     elseif
-        trade:hasItemQty(xi.items.ASTRAGALOS, 4) and
+        trade:hasItemQty(xi.item.ASTRAGALOS, 4) and
         count == 4 and
         trade:getGil() == 0
     then
@@ -69,9 +69,9 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Class Reunion
     elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 1 then
-        player:startEvent(412, 0, 450, xi.items.ASTRAGALOS, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
+        player:startEvent(412, 0, 450, xi.item.ASTRAGALOS, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
     elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 2 then
-        player:startEvent(414, 0, 0, xi.items.ASTRAGALOS, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
+        player:startEvent(414, 0, 0, xi.item.ASTRAGALOS, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
     elseif
         classReunion == QUEST_ACCEPTED and
         classReunionProgress >= 3 and
@@ -89,7 +89,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
-        player:startEvent(348, 0, xi.items.SQUARE_OF_SILK_CLOTH)
+        player:startEvent(348, 0, xi.item.SQUARE_OF_SILK_CLOTH)
     end
 end
 
@@ -105,8 +105,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("ClassReunionProgress", 3)
     elseif csid == 410 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(xi.items.EVOKERS_SPATS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EVOKERS_SPATS)
+            player:addItem(xi.item.EVOKERS_SPATS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_SPATS)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
             player:setCharVar("ClassReunionProgress", 0)
             player:setCharVar("ClassReunion_TalkedToFurakku", 0)
@@ -114,7 +114,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:needToZone(true)
             player:addFame(xi.quest.fame_area.WINDURST, 40)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EVOKERS_SPATS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EVOKERS_SPATS)
         end
     elseif csid == 416 then
         player:setCharVar("CarbuncleDebacleProgress", 2)
@@ -124,15 +124,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DAZE_BREAKER_CHARM)
     elseif csid == 419 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(xi.items.EVOKERS_HORN) -- Evoker's Horn
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EVOKERS_HORN)
+            player:addItem(xi.item.EVOKERS_HORN) -- Evoker's Horn
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_HORN)
             player:addTitle(xi.title.PARAGON_OF_SUMMONER_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
             player:addFame(xi.quest.fame_area.WINDURST, 60)
             player:setCharVar("CarbuncleDebacleProgress", 0)
             player:needToZone(true)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EVOKERS_HORN)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EVOKERS_HORN)
         end
     end
 end

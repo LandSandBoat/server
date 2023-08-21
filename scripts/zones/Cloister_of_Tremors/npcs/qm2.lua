@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    npcUtil.giveItem(player, xi.items.TREMORSTONE)
+    npcUtil.giveItem(player, xi.item.TREMORSTONE)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

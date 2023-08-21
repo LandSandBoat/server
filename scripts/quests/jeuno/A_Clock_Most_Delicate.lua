@@ -13,7 +13,7 @@ quest.reward =
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
     gil      = 1200,
-    item     = xi.items.ENGINEERS_GLOVES,
+    item     = xi.item.ENGINEERS_GLOVES,
     title    = xi.title.PROFESSIONAL_LOAFER,
 }
 

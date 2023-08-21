@@ -46,7 +46,7 @@ quest.sections =
             ['Baldric'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.PINCH_OF_VALKURM_SUNSAND) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_VALKURM_SUNSAND) then
                         return quest:progressEvent(555)
                     end
                 end,

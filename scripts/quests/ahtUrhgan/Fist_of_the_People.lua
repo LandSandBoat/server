@@ -64,7 +64,7 @@ quest.sections =
             ['Leypoint'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.RUSTY_MEDAL) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.RUSTY_MEDAL) then
                         return quest:progressEvent(511)
                     end
                 end,

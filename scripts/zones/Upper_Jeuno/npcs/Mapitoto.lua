@@ -13,19 +13,19 @@ entity.onTrade = function(player, npc, trade)
         player:hasKeyItem(xi.ki.TRAINERS_WHISTLE) and
         trade:getSlotCount() == 1 and
         -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
-        not (npcUtil.tradeHasExactly(trade, xi.items.MOUNT_FENRIR) or npcUtil.tradeHasExactly(trade, xi.items.MOUNT_OMEGA))
+        not (npcUtil.tradeHasExactly(trade, xi.item.MOUNT_FENRIR) or npcUtil.tradeHasExactly(trade, xi.item.MOUNT_OMEGA))
     then
         local item = trade:getItemId(0)
-        local mount = item - xi.items.MOUNT_TIGER
-        if item == xi.items.CHOCOBO_WHISTLE then
-            player:startEvent(10227, xi.items.CHOCOBO_WHISTLE, xi.ki.TRAINERS_WHISTLE, xi.mount.CHOCOBO)
+        local mount = item - xi.item.MOUNT_TIGER
+        if item == xi.item.CHOCOBO_WHISTLE then
+            player:startEvent(10227, xi.item.CHOCOBO_WHISTLE, xi.ki.TRAINERS_WHISTLE, xi.mount.CHOCOBO)
             player:setLocalVar("FullSpeedAheadReward", xi.ki.CHOCOBO_COMPANION)
-        elseif item == xi.items.RED_RAPTOR_NOTEBOOK then -- Key Items, Items, and Mount IDs don't line up for 4 mounts starting with Red Raptor
+        elseif item == xi.item.RED_RAPTOR_NOTEBOOK then -- Key Items, Items, and Mount IDs don't line up for 4 mounts starting with Red Raptor
             player:setLocalVar("FullSpeedAheadReward", xi.ki.TIGER_COMPANION + mount + 3)
             player:startEvent(10227, item, xi.ki.TRAINERS_WHISTLE, xi.mount.TIGER + mount + 2)
         elseif
-            item >= xi.items.GOLDEN_BOMB_NOTEBOOK and
-            item <= xi.items.WIVRE_NOTEBOOK
+            item >= xi.item.GOLDEN_BOMB_NOTEBOOK and
+            item <= xi.item.WIVRE_NOTEBOOK
         then
             -- These are all offset by one due to Red Raptor
             player:setLocalVar("FullSpeedAheadReward", xi.ki.TIGER_COMPANION + mount - 1)

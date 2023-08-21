@@ -9,7 +9,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.JUG_OF_MARYS_MILK, 1) and
+            trade:hasItemQty(xi.item.JUG_OF_MARYS_MILK, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(84)
