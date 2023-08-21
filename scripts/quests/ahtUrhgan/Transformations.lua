@@ -14,7 +14,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSF
 
 quest.reward =
 {
-    item  = xi.items.MAGUS_KEFFIYEH,
+    item  = xi.item.MAGUS_KEFFIYEH,
     title = xi.title.PARAGON_OF_BLUE_MAGE_EXCELLENCE,
 }
 

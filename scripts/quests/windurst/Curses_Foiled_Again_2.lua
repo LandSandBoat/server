@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 90,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.MISERY_STAFF,
+    item     = xi.item.MISERY_STAFF,
     title    = xi.title.HEXER_VEXER,
 }
 
@@ -43,7 +43,7 @@ quest.sections =
                             questProgress == 2 and
                             not quest:getMustZone(player)
                         then
-                            return quest:progressEvent(180, 0, 0, 0, 0, xi.items.PINCH_OF_BOMB_ASH, xi.items.BONE_CHIP, xi.items.BOMB_ARM, xi.items.REVIVAL_TREE_ROOT)
+                            return quest:progressEvent(180, 0, 0, 0, 0, xi.item.PINCH_OF_BOMB_ASH, xi.item.BONE_CHIP, xi.item.BOMB_ARM, xi.item.REVIVAL_TREE_ROOT)
                         end
                     else
                         return quest:event(174)
@@ -109,12 +109,12 @@ quest.sections =
             ['Shantotto'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.BOMB_ARM, 2 }, xi.items.REVIVAL_TREE_ROOT, xi.items.LOCK_OF_HIWONS_HAIR }) then
-                        return quest:progressEvent(183, 0, 0, 0, 0, 0, 0, xi.items.BOMB_ARM, xi.items.REVIVAL_TREE_ROOT)
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.BOMB_ARM, 2 }, xi.item.REVIVAL_TREE_ROOT, xi.item.LOCK_OF_HIWONS_HAIR }) then
+                        return quest:progressEvent(183, 0, 0, 0, 0, 0, 0, xi.item.BOMB_ARM, xi.item.REVIVAL_TREE_ROOT)
                     end
                 end,
 
-                onTrigger = quest:event(181, 0, 0, 0, 0, 0, 0, xi.items.BOMB_ARM, xi.items.REVIVAL_TREE_ROOT),
+                onTrigger = quest:event(181, 0, 0, 0, 0, 0, 0, xi.item.BOMB_ARM, xi.item.REVIVAL_TREE_ROOT),
             },
 
             ['Hiwon-Biwon'] = quest:progressEvent(182),
@@ -125,7 +125,7 @@ quest.sections =
                     -- NOTE: This event is blocking, and always attempts to give to player, even
                     -- if one is currently in inventory.
 
-                    npcUtil.giveItem(player, xi.items.LOCK_OF_HIWONS_HAIR)
+                    npcUtil.giveItem(player, xi.item.LOCK_OF_HIWONS_HAIR)
                 end,
 
                 [183] = function(player, csid, option, npc)

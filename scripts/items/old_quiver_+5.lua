@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.CRUDE_ARROW_P5, math.random(10, 20))
+    target:addItem(xi.item.CRUDE_ARROW_P5, math.random(10, 20))
 end
 
 return itemObject

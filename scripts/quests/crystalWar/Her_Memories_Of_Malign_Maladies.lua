@@ -101,7 +101,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PHILOSOPHERS_STONE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PHILOSOPHERS_STONE) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(30, 89, 23, 2964, 56, 0, 6029313, 0, 0)
@@ -112,7 +112,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 2 then
-                        return quest:messageSpecial(graubergID.text.SUITABLE_PLACE_TO_SOAK, xi.items.PHILOSOPHERS_STONE)
+                        return quest:messageSpecial(graubergID.text.SUITABLE_PLACE_TO_SOAK, xi.item.PHILOSOPHERS_STONE)
                     elseif
                         questProgress == 3 and
                         not player:hasKeyItem(xi.ki.FEY_STONE)

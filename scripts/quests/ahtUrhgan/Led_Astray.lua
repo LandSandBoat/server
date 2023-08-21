@@ -14,7 +14,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LED_AS
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE,
+    item = xi.item.IMPERIAL_SILVER_PIECE,
 }
 
 quest.sections =

@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 80,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TARGE,
+    item     = xi.item.TARGE,
 }
 
 quest.sections =
@@ -65,8 +65,8 @@ quest.sections =
 
                     if
                         not player:hasKeyItem(xi.ki.LETTER_FROM_DOMIEN) and
-                        (mainSlot == xi.items.MAUL or
-                        mainSlot == xi.items.REPLICA_MAUL)
+                        (mainSlot == xi.item.MAUL or
+                        mainSlot == xi.item.REPLICA_MAUL)
                     then
                         return quest:progressEvent(57)
                     end

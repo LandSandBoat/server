@@ -25,7 +25,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:getCharVar("peaceForTheSpiritCS") == 1 and
-        not player:hasItem(xi.items.ANTIQUE_COIN) -- Antique Coin
+        not player:hasItem(xi.item.ANTIQUE_COIN) -- Antique Coin
     then
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end

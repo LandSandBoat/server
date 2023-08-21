@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- Trade Distilled water to Spawn Yara Ma Yha Who
     if
-        npcUtil.tradeHas(trade, xi.items.FLASK_OF_DISTILLED_WATER) and
+        npcUtil.tradeHas(trade, xi.item.FLASK_OF_DISTILLED_WATER) and
         not GetMobByID(ID.mob.YARA_MA_YHA_WHO):isSpawned()
     then
         if os.time() > npc:getLocalVar("tradeCooldown") then

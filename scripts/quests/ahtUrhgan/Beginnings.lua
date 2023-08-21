@@ -16,7 +16,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINN
 
 quest.reward =
 {
-    item = xi.items.IMMORTALS_SCIMITAR,
+    item = xi.item.IMMORTALS_SCIMITAR,
 }
 
 local brandKeyItems =

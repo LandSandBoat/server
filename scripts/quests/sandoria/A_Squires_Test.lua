@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item     = xi.items.SPATHA,
+    item     = xi.item.SPATHA,
     title    = xi.title.KNIGHT_IN_TRAINING,
 }
 
@@ -66,12 +66,12 @@ quest.sections =
             ['Balasiel'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.REVIVAL_TREE_ROOT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.REVIVAL_TREE_ROOT) then
                         return quest:progressEvent(617)
                     end
                 end,
 
-                onTrigger = quest:messageName(southernSandoriaID.text.GO_TO_KING_RANPERRES, xi.items.REVIVAL_TREE_ROOT),
+                onTrigger = quest:messageName(southernSandoriaID.text.GO_TO_KING_RANPERRES, xi.item.REVIVAL_TREE_ROOT),
             },
 
             onEventFinish =

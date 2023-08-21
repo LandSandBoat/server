@@ -52,7 +52,7 @@ quest.sections =
             ['Sattal-Mansal'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_CHARM) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_CHARM) then
                         return quest:progressEvent(91)
                     end
                 end,

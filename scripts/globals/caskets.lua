@@ -746,7 +746,7 @@ xi.caskets.onTrade = function(player, npc, trade)
     if locked == 1 then
         if
             player:getMainJob() == xi.job.THF and
-            npcUtil.tradeHasExactly(trade, xi.items.SET_OF_THIEFS_TOOLS)
+            npcUtil.tradeHasExactly(trade, xi.item.SET_OF_THIEFS_TOOLS)
         then
             local splitNumbers = {}
             local tradeAttempt = math.random()

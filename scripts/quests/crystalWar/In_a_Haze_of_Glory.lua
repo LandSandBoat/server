@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.IN_A
 
 quest.reward =
 {
-    item = xi.items.FULLMETAL_BULLET,
+    item = xi.item.FULLMETAL_BULLET,
 }
 
 quest.sections =

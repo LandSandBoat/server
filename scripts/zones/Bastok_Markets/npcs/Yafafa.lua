@@ -16,11 +16,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            xi.items.BULB_OF_MHAURA_GARLIC,      83,
-            xi.items.YAGUDO_CHERRY,              45,
-            xi.items.DHALMEL_MEAT,              249,
-            xi.items.BUNCH_OF_BUBURIMU_GRAPES,  208,
-            xi.items.CASABLANCA,               1872,
+            xi.item.BULB_OF_MHAURA_GARLIC,      83,
+            xi.item.YAGUDO_CHERRY,              45,
+            xi.item.DHALMEL_MEAT,              249,
+            xi.item.BUNCH_OF_BUBURIMU_GRAPES,  208,
+            xi.item.CASABLANCA,               1872,
         }
 
         player:showText(npc, ID.text.YAFAFA_OPEN_DIALOG)

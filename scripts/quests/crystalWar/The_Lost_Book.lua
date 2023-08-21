@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_
 
 quest.reward =
 {
-    item = xi.items.SCROLL_OF_RETRACE,
+    item = xi.item.SCROLL_OF_RETRACE,
 }
 
 quest.sections =
@@ -58,7 +58,7 @@ quest.sections =
             ['Quu_Bokye'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.MYTHRIL_BEASTCOIN) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.MYTHRIL_BEASTCOIN) then
                         return quest:progressEvent(65)
                     end
                 end,
@@ -149,7 +149,7 @@ quest.sections =
             ['Door_Optistery'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SHEET_OF_VELLUM) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SHEET_OF_VELLUM) then
                         return quest:progressEvent(146)
                     end
                 end,

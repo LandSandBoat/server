@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.QUELLING_BOLT, 99 } }) -- Quelling Bolt x99
+    npcUtil.giveItem(target, { { xi.item.QUELLING_BOLT, 99 } }) -- Quelling Bolt x99
 end
 
 return itemObject

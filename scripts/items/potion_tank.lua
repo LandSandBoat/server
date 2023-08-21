@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.POTION, 1)
+    target:addItem(xi.item.POTION, 1)
 end
 
 return itemObject

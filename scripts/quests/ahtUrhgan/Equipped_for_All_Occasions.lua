@@ -14,7 +14,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPP
 
 quest.reward =
 {
-    item  = xi.items.TRUMP_GUN,
+    item  = xi.item.TRUMP_GUN,
 }
 
 quest.sections =

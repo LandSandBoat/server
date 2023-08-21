@@ -13,16 +13,16 @@ entity.onTrade = function(player, npc, trade)
 
     if
         guardian == QUEST_ACCEPTED and
-        trade:hasItemQty(xi.items.BUNCH_OF_WILD_PAMAMAS, 1)
+        trade:hasItemQty(xi.item.BUNCH_OF_WILD_PAMAMAS, 1)
     then
-        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.items.BUNCH_OF_WILD_PAMAMAS)
+        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.item.BUNCH_OF_WILD_PAMAMAS)
         player:setCharVar("PamamaVar", 1) -- Set variable to reflect first completion of quest
         player:tradeComplete()
     elseif
         guardian == QUEST_COMPLETED and
-        trade:hasItemQty(xi.items.BUNCH_OF_WILD_PAMAMAS, 1)
+        trade:hasItemQty(xi.item.BUNCH_OF_WILD_PAMAMAS, 1)
     then
-        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.items.BUNCH_OF_WILD_PAMAMAS)
+        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.item.BUNCH_OF_WILD_PAMAMAS)
         player:setCharVar("PamamaVar", 2) -- Set variable to reflect repeat of quest, not first time
         player:tradeComplete()
     end

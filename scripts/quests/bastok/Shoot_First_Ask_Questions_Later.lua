@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.GUN_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.GUN_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.MARKSMANSHIP) / 10 >= 250 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -39,8 +39,8 @@ quest.sections =
             {
                 [795] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.GUN_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.GUN_OF_TRIALS)
+                        player:hasItem(xi.item.GUN_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.GUN_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -64,13 +64,13 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(799) -- complete
                     else
-                        local hideReacquireMenuItem = (player:hasItem(xi.items.GUN_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
+                        local hideReacquireMenuItem = (player:hasItem(xi.item.GUN_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
                         return quest:event(796, hideReacquireMenuItem) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.GUN_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.GUN_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -87,9 +87,9 @@ quest.sections =
                 [796] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        not player:hasItem(xi.items.GUN_OF_TRIALS)
+                        not player:hasItem(xi.item.GUN_OF_TRIALS)
                     then
-                        npcUtil.giveItem(player, xi.items.GUN_OF_TRIALS)
+                        npcUtil.giveItem(player, xi.item.GUN_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

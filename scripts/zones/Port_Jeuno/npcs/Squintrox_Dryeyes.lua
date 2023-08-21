@@ -10,9 +10,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count         = trade:getItemCount()
-    local sLux          = trade:hasItemQty(xi.items.SEEDSPALL_LUX, 1)
-    local sLuna         = trade:hasItemQty(xi.items.SEEDSPALL_LUNA, 1)
-    local sAstrum       = trade:hasItemQty(xi.items.SEEDSPALL_ASTRUM, 1)
+    local sLux          = trade:hasItemQty(xi.item.SEEDSPALL_LUX, 1)
+    local sLuna         = trade:hasItemQty(xi.item.SEEDSPALL_LUNA, 1)
+    local sAstrum       = trade:hasItemQty(xi.item.SEEDSPALL_ASTRUM, 1)
     local acpMission    = player:getCurrentMission(xi.mission.log_id.ACP)
     local hasCrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local lastCrimson   = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained

@@ -15,12 +15,12 @@ entity.onTrade = function(player, npc, trade)
         VanadielHour() <= 3
     then
         if
-            npcUtil.tradeHas(trade, xi.items.HANDFUL_OF_PUGIL_SCALES) and
+            npcUtil.tradeHas(trade, xi.item.HANDFUL_OF_PUGIL_SCALES) and
             player:getCharVar("QuestCatchAFallingStar_prog") == 0
         then
             player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
             player:messageSpecial(ID.text.MELT_BARE_HANDS)
-            if npcUtil.giveItem(player, xi.items.STARFALL_TEAR) then
+            if npcUtil.giveItem(player, xi.item.STARFALL_TEAR) then
                 player:confirmTrade()
                 player:setCharVar("QuestCatchAFallingStar_prog", 1)
             end

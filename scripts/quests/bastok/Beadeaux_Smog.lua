@@ -68,7 +68,7 @@ quest.sections =
             onEventFinish =
             {
                 [732] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.CHAKRAM) then
+                    if npcUtil.giveItem(player, xi.item.CHAKRAM) then
                         quest:complete(player)
                     end
                 end,

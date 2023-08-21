@@ -12,28 +12,28 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.WYRM_BEARD, 1) and
+            trade:hasItemQty(xi.item.WYRM_BEARD, 1) and
             trade:getItemCount() == 1 and
             player:getCharVar("BeatAroundTheBushin") == 2
         then
             player:startEvent(156) -- After trade Wyrm Beard
 
         elseif
-            trade:hasItemQty(xi.items.BEHEMOTH_TONGUE, 1) and
+            trade:hasItemQty(xi.item.BEHEMOTH_TONGUE, 1) and
             trade:getItemCount() == 1 and
             player:getCharVar("BeatAroundTheBushin") == 4
         then
             player:startEvent(157) -- After trade Behemoth Tongue
 
         elseif
-            trade:hasItemQty(xi.items.ADAMANTOISE_EGG, 1) and
+            trade:hasItemQty(xi.item.ADAMANTOISE_EGG, 1) and
             trade:getItemCount() == 1 and
             player:getCharVar("BeatAroundTheBushin") == 6
         then
             player:startEvent(158) -- After trade Adamantoise Egg
 
         elseif
-            trade:hasItemQty(xi.items.BROWN_BELT, 1) and
+            trade:hasItemQty(xi.item.BROWN_BELT, 1) and
             trade:getItemCount() == 1 and
             player:getCharVar("BeatAroundTheBushin") == 7
         then
@@ -72,11 +72,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
     elseif csid == 159 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.BLACK_BELT)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.BLACK_BELT)
         else
             player:addTitle(xi.title.BLACK_BELT)
-            player:addItem(xi.items.BLACK_BELT)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BLACK_BELT)
+            player:addItem(xi.item.BLACK_BELT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BLACK_BELT)
             player:setCharVar("BeatAroundTheBushin", 0)
             player:addFame(xi.quest.fame_area.NORG, 125)
             player:tradeComplete()

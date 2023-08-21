@@ -82,7 +82,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') < 2 and
-                        not player:findItem(xi.items.SIRENS_TEAR)
+                        not player:findItem(xi.item.SIRENS_TEAR)
                     then
                         return quest:progressEvent(19)
                     end
@@ -109,7 +109,7 @@ quest.sections =
             ['Wahid'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SIRENS_TEAR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SIRENS_TEAR) then
                         return quest:progressEvent(82)
                     end
                 end,

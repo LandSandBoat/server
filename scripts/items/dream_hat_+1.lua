@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.GINGER_COOKIE, math.random(1, 10))
+    target:addItem(xi.item.GINGER_COOKIE, math.random(1, 10))
 end
 
 return itemObject

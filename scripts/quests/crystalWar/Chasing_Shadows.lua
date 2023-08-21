@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAS
 
 quest.reward =
 {
-    item = xi.items.DARKSTEEL_SHEET,
+    item = xi.item.DARKSTEEL_SHEET,
 }
 
 quest.sections =

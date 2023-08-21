@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONF
 
 quest.reward =
 {
-    item = xi.items.MINSTRELS_DAGGER,
+    item = xi.item.MINSTRELS_DAGGER,
 }
 
 quest.sections =

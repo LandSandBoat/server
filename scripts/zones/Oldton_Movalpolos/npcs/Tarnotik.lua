@@ -8,7 +8,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS and
-        npcUtil.tradeHas(trade, xi.items.SNOW_LILY)
+        npcUtil.tradeHas(trade, xi.item.SNOW_LILY)
     then
         player:startEvent(32)
     end

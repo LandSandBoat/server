@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.RUSTY_BOLT, 99) -- 99x rusty_bolt
+    target:addItem(xi.item.RUSTY_BOLT, 99) -- 99x rusty_bolt
 end
 
 return itemObject

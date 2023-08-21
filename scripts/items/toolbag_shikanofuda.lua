@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.SHIKANOFUDA, 99)
+    target:addItem(xi.item.SHIKANOFUDA, 99)
 end
 
 return itemObject

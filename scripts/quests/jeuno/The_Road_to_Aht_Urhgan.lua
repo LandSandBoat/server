@@ -15,57 +15,57 @@ quest.reward =
 
 local beginnerList =
 {
-    xi.items.DAMSELFLY_WORM,
-    xi.items.MAGICKED_SKULL,
-    xi.items.CRAB_APRON,
-    xi.items.BLOODY_ROBE,
-    xi.items.CUP_OF_DHALMEL_SALIVA,
-    xi.items.WILD_RABBIT_TAIL,
+    xi.item.DAMSELFLY_WORM,
+    xi.item.MAGICKED_SKULL,
+    xi.item.CRAB_APRON,
+    xi.item.BLOODY_ROBE,
+    xi.item.CUP_OF_DHALMEL_SALIVA,
+    xi.item.WILD_RABBIT_TAIL,
 }
 
 local intermediateList =
 {
-    xi.items.JADE_CRYPTEX,
-    xi.items.SILVER_ENGRAVING,
-    xi.items.THIRTEEN_KNOT_QUIPU,
+    xi.item.JADE_CRYPTEX,
+    xi.item.SILVER_ENGRAVING,
+    xi.item.THIRTEEN_KNOT_QUIPU,
 }
 
 local chipList =
 {
-    xi.items.CARMINE_CHIP,
-    xi.items.CYAN_CHIP,
-    xi.items.GRAY_CHIP,
+    xi.item.CARMINE_CHIP,
+    xi.item.CYAN_CHIP,
+    xi.item.GRAY_CHIP,
 }
 
 local advancedSingleList =
 {
-    xi.items.DAVOI_COFFER_KEY,
-    xi.items.BEADEAUX_COFFER_KEY,
-    xi.items.OZTROJA_COFFER_KEY,
-    xi.items.UGGALEPIH_COFFER_KEY,
-    xi.items.RANCOR_DEN_COFFER_KEY,
-    xi.items.QUICKSAND_COFFER_KEY,
-    xi.items.GROTTO_COFFER_KEY,
-    xi.items.WARRIORS_TESTIMONY,
-    xi.items.MONKS_TESTIMONY,
-    xi.items.WHITE_MAGES_TESTIMONY,
-    xi.items.BLACK_MAGES_TESTIMONY,
-    xi.items.RED_MAGES_TESTIMONY,
-    xi.items.THIEFS_TESTIMONY,
-    xi.items.PALADINS_TESTIMONY,
-    xi.items.DARK_KNIGHTS_TESTIMONY,
-    xi.items.BEASTMASTERS_TESTIMONY,
-    xi.items.BARDS_TESTIMONY,
-    xi.items.RANGERS_TESTIMONY,
-    xi.items.SAMURAIS_TESTIMONY,
-    xi.items.NINJAS_TESTIMONY,
-    xi.items.DRAGOONS_TESTIMONY,
-    xi.items.SUMMONERS_TESTIMONY,
-    xi.items.BLUE_MAGES_TESTIMONY,
-    xi.items.CORSAIRS_TESTIMONY,
-    xi.items.PUPPETMASTERS_TESTIMONY,
-    xi.items.DANCERS_TESTIMONY,
-    xi.items.SCHOLARS_TESTIMONY,
+    xi.item.DAVOI_COFFER_KEY,
+    xi.item.BEADEAUX_COFFER_KEY,
+    xi.item.OZTROJA_COFFER_KEY,
+    xi.item.UGGALEPIH_COFFER_KEY,
+    xi.item.RANCOR_DEN_COFFER_KEY,
+    xi.item.QUICKSAND_COFFER_KEY,
+    xi.item.GROTTO_COFFER_KEY,
+    xi.item.WARRIORS_TESTIMONY,
+    xi.item.MONKS_TESTIMONY,
+    xi.item.WHITE_MAGES_TESTIMONY,
+    xi.item.BLACK_MAGES_TESTIMONY,
+    xi.item.RED_MAGES_TESTIMONY,
+    xi.item.THIEFS_TESTIMONY,
+    xi.item.PALADINS_TESTIMONY,
+    xi.item.DARK_KNIGHTS_TESTIMONY,
+    xi.item.BEASTMASTERS_TESTIMONY,
+    xi.item.BARDS_TESTIMONY,
+    xi.item.RANGERS_TESTIMONY,
+    xi.item.SAMURAIS_TESTIMONY,
+    xi.item.NINJAS_TESTIMONY,
+    xi.item.DRAGOONS_TESTIMONY,
+    xi.item.SUMMONERS_TESTIMONY,
+    xi.item.BLUE_MAGES_TESTIMONY,
+    xi.item.CORSAIRS_TESTIMONY,
+    xi.item.PUPPETMASTERS_TESTIMONY,
+    xi.item.DANCERS_TESTIMONY,
+    xi.item.SCHOLARS_TESTIMONY,
 }
 
 local function handleEventUpdate(player, csid, option, npc)

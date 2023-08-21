@@ -1326,13 +1326,13 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['CIPHER_SAKURA'] = function()
-                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_SAKURAS_ALTER_EGO) then
+                if not npcUtil.giveItem(player, xi.item.CIPHER_OF_SAKURAS_ALTER_EGO) then
                     player:addCurrency("valor_point", 300) --refund player if they can't obtain
                 end
             end,
 
             ['CIPHER_KORU'] = function()
-                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO) then
+                if not npcUtil.giveItem(player, xi.item.CIPHER_OF_KORU_MORUS_ALTER_EGO) then
                     player:addCurrency("valor_point", 300) --refund player if they can't obtain
                 end
             end,

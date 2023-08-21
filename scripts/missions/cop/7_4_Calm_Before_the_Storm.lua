@@ -144,7 +144,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if not getMissionStatusBit(player, 0) then
                         if mission:getLocalVar(player, 'nmMisareaux') == 1 then
-                            return mission:progressEvent(13, { [1] = xi.items.DUCAL_GUARDS_RING })
+                            return mission:progressEvent(13, { [1] = xi.item.DUCAL_GUARDS_RING })
                         elseif not GetMobByID(misareauxID.mob.BOGGELMANN):isSpawned() then
                             SpawnMob(misareauxID.mob.BOGGELMANN):updateClaim(player)
 

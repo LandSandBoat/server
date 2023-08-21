@@ -78,19 +78,19 @@ local unityOptions =
 
     [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
     {
-        [ 0] = { xi.items.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
-        [ 1] = { xi.items.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
-        [ 2] = { xi.items.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
-        [ 3] = { xi.items.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
-        [ 4] = { xi.items.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
-        [ 5] = { xi.items.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
-        [ 6] = { xi.items.MOIST_ROLANBERRY,            0, 99, 10    },
-        [ 7] = { xi.items.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
-        [ 8] = { xi.items.CAVORTING_WORM,              0, 99, 10    },
-        [ 9] = { xi.items.LEVIGATED_ROCK,              0, 99, 10    },
-        [10] = { xi.items.LITTLE_LUGWORM,              0, 99, 10    },
-        [11] = { xi.items.TRAINING_MANUAL,             0, 99, 10    },
-        [12] = { xi.items.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
+        [ 0] = { xi.item.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
+        [ 1] = { xi.item.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
+        [ 2] = { xi.item.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
+        [ 3] = { xi.item.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
+        [ 4] = { xi.item.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
+        [ 5] = { xi.item.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
+        [ 6] = { xi.item.MOIST_ROLANBERRY,            0, 99, 10    },
+        [ 7] = { xi.item.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
+        [ 8] = { xi.item.CAVORTING_WORM,              0, 99, 10    },
+        [ 9] = { xi.item.LEVIGATED_ROCK,              0, 99, 10    },
+        [10] = { xi.item.LITTLE_LUGWORM,              0, 99, 10    },
+        [11] = { xi.item.TRAINING_MANUAL,             0, 99, 10    },
+        [12] = { xi.item.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
     },
 }
 

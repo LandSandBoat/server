@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(xi.items.PINCH_OF_GLITTERSAND, 1) and
+        trade:hasItemQty(xi.item.PINCH_OF_GLITTERSAND, 1) and
         trade:getItemCount() == 1
     then
         local sinHunting = player:getCharVar("sinHunting")    -- RNG AF1
@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local sinHunting = player:getCharVar("sinHunting")    -- RNG AF1
 
     if sinHunting == 1 then
-        player:startEvent(3, 0, xi.items.PINCH_OF_GLITTERSAND)
+        player:startEvent(3, 0, xi.item.PINCH_OF_GLITTERSAND)
     else
         player:startEvent(2)
     end

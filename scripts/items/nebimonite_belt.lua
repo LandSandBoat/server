@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.NEBIMONITE)
+    target:addItem(xi.item.NEBIMONITE)
 end
 
 return itemObject

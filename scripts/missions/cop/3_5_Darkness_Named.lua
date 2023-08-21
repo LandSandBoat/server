@@ -41,9 +41,9 @@ mission.sections =
                         not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
                         mission:getVar(player, 'Status') == 2 and
                         (
-                            npcUtil.tradeHasExactly(trade, xi.items.CARMINE_CHIP) or
-                            npcUtil.tradeHasExactly(trade, xi.items.CYAN_CHIP) or
-                            npcUtil.tradeHasExactly(trade, xi.items.GRAY_CHIP)
+                            npcUtil.tradeHasExactly(trade, xi.item.CARMINE_CHIP) or
+                            npcUtil.tradeHasExactly(trade, xi.item.CYAN_CHIP) or
+                            npcUtil.tradeHasExactly(trade, xi.item.GRAY_CHIP)
                         )
                     then
                         return mission:progressEvent(52, 500 * xi.settings.main.GIL_RATE)

@@ -72,7 +72,7 @@ mission.sections =
             {
                 function(player)
                     if
-                        not player:hasItem(xi.items.MOONSHADE_EARRING) and
+                        not player:hasItem(xi.item.MOONSHADE_EARRING) and
                         mission:getVar(player, 'Status') == 0
                     then
                         mission:setLocalVar(player, 'Option', 1)
@@ -106,14 +106,14 @@ mission.sections =
                         if player:getFreeSlotsCount() < 1 then
                             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
                         else
-                            player:addItem(xi.items.MOONSHADE_EARRING, 1,
+                            player:addItem(xi.item.MOONSHADE_EARRING, 1,
                                 firstAugInfo[firstAugSel][1],
                                 firstAugInfo[firstAugSel][2],
                                 secondAugInfo[secondAugSel][1],
                                 secondAugInfo[secondAugSel][2]
                             )
 
-                            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MOONSHADE_EARRING)
+                            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MOONSHADE_EARRING)
 
                             mission:setVar(player, 'Status', 0)
                         end

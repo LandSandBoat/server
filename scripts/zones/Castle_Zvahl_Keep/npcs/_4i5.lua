@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("recollectionsQuest") == 2
     then
         if
-            trade:hasItemQty(xi.items.WHINE_CELLAR_KEY, 1) and
+            trade:hasItemQty(xi.item.WHINE_CELLAR_KEY, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(8, xi.items.WHINE_CELLAR_KEY)
+            player:startEvent(8, xi.item.WHINE_CELLAR_KEY)
         end
     end
 end

@@ -44,7 +44,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.IMP_WING) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.IMP_WING) then
                         return quest:progressEvent(5002, { text_table = 0 })
                     end
                 end,

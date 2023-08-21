@@ -10,15 +10,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
-        if npcUtil.tradeHasExactly(trade, xi.items.SAND_CHARM) then
-            player:startEvent(127, 0, xi.items.SAND_CHARM) -- Finish quest "The Sand Charm"
+        if npcUtil.tradeHasExactly(trade, xi.item.SAND_CHARM) then
+            player:startEvent(127, 0, xi.item.SAND_CHARM) -- Finish quest "The Sand Charm"
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar("theSandCharmVar") == 3 then
-        player:startEvent(126, xi.items.SAND_CHARM) -- During quest "The Sand Charm" - 3rd dialog
+        player:startEvent(126, xi.item.SAND_CHARM) -- During quest "The Sand Charm" - 3rd dialog
     else
         local guildSkillId = xi.skill.GOLDSMITHING
         local stock = xi.shop.generalGuildStock[guildSkillId]

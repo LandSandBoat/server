@@ -8,8 +8,8 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.UNLIT_LANTERN) then -- Unlit Lantern
-        if npcUtil.giveItem(player, xi.items.FLAME_OF_CRIMSON_RANCOR) then -- Flame of Crimson Rancor
+    if npcUtil.tradeHas(trade, xi.item.UNLIT_LANTERN) then -- Unlit Lantern
+        if npcUtil.giveItem(player, xi.item.FLAME_OF_CRIMSON_RANCOR) then -- Flame of Crimson Rancor
             player:confirmTrade()
         end
     end

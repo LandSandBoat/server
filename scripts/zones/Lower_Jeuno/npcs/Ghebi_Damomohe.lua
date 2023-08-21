@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and
-        npcUtil.tradeHas(trade, xi.items.TENSHODO_INVITE)
+        npcUtil.tradeHas(trade, xi.item.TENSHODO_INVITE)
     then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)

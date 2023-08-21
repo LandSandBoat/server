@@ -137,7 +137,7 @@ mission.sections =
 
                     if
                         (missionStatus == 4 or missionStatus == 5) and
-                        npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GOOBBUE_HUMUS)
+                        npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GOOBBUE_HUMUS)
                     then
                         return mission:progressEvent(13)
                     end
@@ -168,7 +168,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 4 then
-                        return mission:progressEvent(439, 0, xi.items.JUG_OF_HUMUS, xi.items.CLUMP_OF_GOOBBUE_HUMUS)
+                        return mission:progressEvent(439, 0, xi.item.JUG_OF_HUMUS, xi.item.CLUMP_OF_GOOBBUE_HUMUS)
                     end
                 end,
             },

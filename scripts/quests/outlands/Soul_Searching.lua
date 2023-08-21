@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SOUL_SEAR
 
 quest.reward =
 {
-    item  = xi.items.BAT_EARRING,
+    item  = xi.item.BAT_EARRING,
     title = xi.title.GUIDER_OF_SOULS_TO_THE_SANCTUARY,
 }
 

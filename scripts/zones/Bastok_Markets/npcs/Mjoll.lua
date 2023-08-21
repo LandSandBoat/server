@@ -11,17 +11,17 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.items.WOODEN_ARROW,                4, 2,
-        xi.items.IRON_ARROW,                  8, 3,
-        xi.items.SILVER_ARROW,               18, 1,
-        xi.items.SCROLL_OF_DARK_THRENODY,   225, 3,
-        xi.items.SCROLL_OF_ICE_THRENODY,   1131, 3,
-        xi.items.LIGHT_CROSSBOW,            187, 3,
-        xi.items.CROSSBOW,                 2449, 3,
-        xi.items.ZAMBURAK,                16005, 1,
-        xi.items.CROSSBOW_BOLT,               6, 3,
-        xi.items.MYTHRIL_BOLT,               24, 2,
-        xi.items.TATHLUM,                   334, 1,
+        xi.item.WOODEN_ARROW,                4, 2,
+        xi.item.IRON_ARROW,                  8, 3,
+        xi.item.SILVER_ARROW,               18, 1,
+        xi.item.SCROLL_OF_DARK_THRENODY,   225, 3,
+        xi.item.SCROLL_OF_ICE_THRENODY,   1131, 3,
+        xi.item.LIGHT_CROSSBOW,            187, 3,
+        xi.item.CROSSBOW,                 2449, 3,
+        xi.item.ZAMBURAK,                16005, 1,
+        xi.item.CROSSBOW_BOLT,               6, 3,
+        xi.item.MYTHRIL_BOLT,               24, 2,
+        xi.item.TATHLUM,                   334, 1,
     }
 
     player:showText(npc, ID.text.MJOLL_SHOP_DIALOG)

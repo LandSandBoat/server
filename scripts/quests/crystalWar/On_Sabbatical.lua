@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_S
 
 quest.reward =
 {
-    item = xi.items.KLIMAFORM_SCHEMA
+    item = xi.item.KLIMAFORM_SCHEMA
 }
 
 quest.sections =

@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 75,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BRONZE_KNIFE,
+    item     = xi.item.BRONZE_KNIFE,
 }
 
 quest.sections =
@@ -83,7 +83,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CHUNK_OF_ZINC_ORE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_ZINC_ORE) and
                         not player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS)
                     then
                         return quest:progressEvent(3)

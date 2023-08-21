@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(xi.items.FLASK_OF_ROMAEVE_SPRING_WATER, 1) and
+        trade:hasItemQty(xi.item.FLASK_OF_ROMAEVE_SPRING_WATER, 1) and
         trade:getItemCount() == 1
     then
         for i = ID.mob.OLLAS_OFFSET, ID.mob.OLLAS_OFFSET + 2 do

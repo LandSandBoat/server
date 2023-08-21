@@ -14,7 +14,7 @@ quest.reward =
 {
     fame     = 40,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TEMPLE_GAITERS,
+    item     = xi.item.TEMPLE_GAITERS,
 }
 
 quest.sections =

@@ -122,7 +122,7 @@ entity.onTrade = function(player, npc, trade)
     -- check for correct number of carnations
     if
         carnationsNeeded == 0 or
-        trade:getItemQty(xi.items.CARNATION) ~= carnationsNeeded
+        trade:getItemQty(xi.item.CARNATION) ~= carnationsNeeded
     then
         player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
         return

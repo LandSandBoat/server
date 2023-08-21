@@ -12,7 +12,7 @@ quest.reward =
 {
     fame = 100,
     fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.POWER_GI,
+    item = xi.item.POWER_GI,
 }
 
 quest.sections =

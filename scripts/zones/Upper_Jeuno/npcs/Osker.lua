@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
     local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
     if
-        trade:hasItemQty(xi.items.PIECE_OF_MAHOGANY_LUMBER, 1) and
+        trade:hasItemQty(xi.item.PIECE_OF_MAHOGANY_LUMBER, 1) and
         trade:getItemCount() == 1 and
         aNewDawnEvent == 3
     then

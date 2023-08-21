@@ -16,11 +16,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            xi.items.RARAB_TAIL,                      24,
-            xi.items.LAUAN_LOG,                       37,
-            xi.items.POPOTO,                          49,
-            xi.items.SARUTA_ORANGE,                   33,
-            xi.items.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 20,
+            xi.item.RARAB_TAIL,                      24,
+            xi.item.LAUAN_LOG,                       37,
+            xi.item.POPOTO,                          49,
+            xi.item.SARUTA_ORANGE,                   33,
+            xi.item.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 20,
         }
 
         player:showText(npc, ID.text.SOMNPAEMN_OPEN_DIALOG)

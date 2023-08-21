@@ -103,7 +103,7 @@ quest.sections =
                     elseif questProgress <= 2 then
                         return quest:event(246)
                     elseif questProgress == 3 then
-                        return quest:progressEvent(247, 0, xi.items.BOTTLE_OF_WARDING_OIL)
+                        return quest:progressEvent(247, 0, xi.item.BOTTLE_OF_WARDING_OIL)
                     else
                         return quest:event(248)
                     end
@@ -128,7 +128,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.BOTTLE_OF_WARDING_OIL, 3 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.BOTTLE_OF_WARDING_OIL, 3 } }) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(22)
@@ -139,7 +139,7 @@ quest.sections =
                     -- TODO: The followup after CS 21 may be different, and needs capture.
 
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(21, 0, xi.items.BOTTLE_OF_WARDING_OIL)
+                        return quest:progressEvent(21, 0, xi.item.BOTTLE_OF_WARDING_OIL)
                     end
                 end,
             },

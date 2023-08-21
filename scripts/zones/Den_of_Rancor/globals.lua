@@ -10,12 +10,12 @@ local denOfRancorGlobal =
         trade to lanterns next to Sacrificial Chamber (Rancor Flame)
         ..............................................................................................]]
     onTradeLanternChamber = function(player, npc, trade)
-        if npcUtil.tradeHas(trade, xi.items.RANCOR_FLAME) then -- Rancor Flame
+        if npcUtil.tradeHas(trade, xi.item.RANCOR_FLAME) then -- Rancor Flame
             if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
@@ -43,12 +43,12 @@ local denOfRancorGlobal =
         trade to lanterns next to Hakutaku (Rancor Flame)
         ..............................................................................................]]
     onTradeLanternHaku = function(player, npc, trade)
-        if npcUtil.tradeHas(trade, xi.items.RANCOR_FLAME) then -- Rancor Flame
+        if npcUtil.tradeHas(trade, xi.item.RANCOR_FLAME) then -- Rancor Flame
             if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
@@ -82,7 +82,7 @@ local denOfRancorGlobal =
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 

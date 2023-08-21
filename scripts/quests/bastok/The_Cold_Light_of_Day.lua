@@ -46,7 +46,7 @@ quest.sections =
             ['Malene'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.STEAM_CLOCK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.STEAM_CLOCK) then
                         return quest:progressEvent(104)
                     end
                 end,

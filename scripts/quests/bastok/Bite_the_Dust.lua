@@ -46,7 +46,7 @@ quest.sections =
             ['Yazan'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SAND_BAT_FANG) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SAND_BAT_FANG) then
                         return quest:progressEvent(193)
                     end
                 end,

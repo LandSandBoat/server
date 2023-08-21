@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.DATECHOCHIN, 99)
+    target:addItem(xi.item.DATECHOCHIN, 99)
 end
 
 return itemObject

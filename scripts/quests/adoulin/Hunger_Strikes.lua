@@ -42,7 +42,7 @@ quest.sections =
         ['Westerly_Breeze'] =
         {
             onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_WISDOM_SOUP) then
+                if npcUtil.tradeHasExactly(trade, xi.item.BOWL_OF_WISDOM_SOUP) then
                     return quest:progressEvent(2532)
                 elseif
                     trade:getItemCount() == 1 and

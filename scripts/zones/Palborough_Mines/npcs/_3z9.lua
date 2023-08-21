@@ -17,8 +17,8 @@ entity.onTrigger = function(player, npc)
     if refinerOutput > 0 and player:getFreeSlotsCount() >= 1 then
         player:setCharVar("refiner_output", refinerOutput - 1)
         player:messageSpecial(ID.text.SOMETHING_FALLS_OUT_OF_THE_MACHINE)
-        player:addItem(xi.items.ONZ_OF_MYTHRIL_SAND)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ONZ_OF_MYTHRIL_SAND, 1)
+        player:addItem(xi.item.ONZ_OF_MYTHRIL_SAND)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ONZ_OF_MYTHRIL_SAND, 1)
     elseif refinerOutput > 0 and player:getFreeSlotsCount() == 0 then
         player:messageSpecial(ID.text.YOU_CANT_CARRY_ANY_MORE_ITEMS)
     else

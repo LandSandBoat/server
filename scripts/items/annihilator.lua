@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.ERADICATING_BULLET, 99 } })
+    npcUtil.giveItem(target, { { xi.item.ERADICATING_BULLET, 99 } })
 end
 
 return itemObject

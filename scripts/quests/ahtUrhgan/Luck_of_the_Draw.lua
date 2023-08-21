@@ -16,7 +16,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_O
 
 quest.reward =
 {
-    item    = xi.items.CORSAIR_DIE,
+    item    = xi.item.CORSAIR_DIE,
     keyItem = xi.ki.JOB_GESTURE_CORSAIR,
     title   = xi.title.SEAGULL_PHRATRIE_CREW_MEMBER,
 }

@@ -16,64 +16,64 @@ quest.reward =
 
 local requestedBodyItems =
 {
-    xi.items.BREASTPLATE,
-    xi.items.SILVER_MAIL,
-    xi.items.BANDED_MAIL,
-    xi.items.CUIR_BOUILLI,
-    xi.items.RAPTOR_JERKIN,
-    xi.items.PADDED_ARMOR,
-    xi.items.GAMBISON,
-    xi.items.WOOL_GAMBISON,
-    xi.items.VELVET_ROBE,
-    xi.items.SILK_COAT,
-    xi.items.CLOAK,
-    xi.items.WHITE_CLOAK,
-    xi.items.BEAK_JERKIN,
-    xi.items.CARAPACE_HARNESS,
-    xi.items.PYRO_ROBE,
-    xi.items.FROST_ROBE,
-    xi.items.LINEN_DOUBLET,
-    xi.items.WOOL_DOUBLET,
-    xi.items.IRON_SCALE_MAIL,
-    xi.items.BISHOPS_ROBE,
+    xi.item.BREASTPLATE,
+    xi.item.SILVER_MAIL,
+    xi.item.BANDED_MAIL,
+    xi.item.CUIR_BOUILLI,
+    xi.item.RAPTOR_JERKIN,
+    xi.item.PADDED_ARMOR,
+    xi.item.GAMBISON,
+    xi.item.WOOL_GAMBISON,
+    xi.item.VELVET_ROBE,
+    xi.item.SILK_COAT,
+    xi.item.CLOAK,
+    xi.item.WHITE_CLOAK,
+    xi.item.BEAK_JERKIN,
+    xi.item.CARAPACE_HARNESS,
+    xi.item.PYRO_ROBE,
+    xi.item.FROST_ROBE,
+    xi.item.LINEN_DOUBLET,
+    xi.item.WOOL_DOUBLET,
+    xi.item.IRON_SCALE_MAIL,
+    xi.item.BISHOPS_ROBE,
 }
 
 local requestedLegItems =
 {
-    xi.items.CUISSES,
-    xi.items.SILVER_HOSE,
-    xi.items.BREECHES,
-    xi.items.CUIR_TROUSERS,
-    xi.items.RAPTOR_TROUSERS,
-    xi.items.BEAK_TROUSERS,
-    xi.items.IRON_SUBLIGAR,
-    xi.items.CARAPACE_SUBLIGAR,
-    xi.items.SCORPION_SUBLIGAR,
-    xi.items.HOSE,
-    xi.items.WOOL_HOSE,
-    xi.items.VELVET_SLOPS,
-    xi.items.SILK_SLOPS,
-    xi.items.LINEN_SLACKS,
-    xi.items.WHITE_SLACKS,
-    xi.items.IRON_CUISSES,
+    xi.item.CUISSES,
+    xi.item.SILVER_HOSE,
+    xi.item.BREECHES,
+    xi.item.CUIR_TROUSERS,
+    xi.item.RAPTOR_TROUSERS,
+    xi.item.BEAK_TROUSERS,
+    xi.item.IRON_SUBLIGAR,
+    xi.item.CARAPACE_SUBLIGAR,
+    xi.item.SCORPION_SUBLIGAR,
+    xi.item.HOSE,
+    xi.item.WOOL_HOSE,
+    xi.item.VELVET_SLOPS,
+    xi.item.SILK_SLOPS,
+    xi.item.LINEN_SLACKS,
+    xi.item.WHITE_SLACKS,
+    xi.item.IRON_CUISSES,
 }
 
 -- [option] = { rewardItem, requiredItem }
 local optionToItems =
 {
-    [ 1] = { xi.items.DUENDE_COTEHARDIE,   xi.items.ARIES_SUBLIGAR       },
-    [ 2] = { xi.items.NOKIZARU_GI,         xi.items.TAURUS_SUBLIGAR      },
-    [ 3] = { xi.items.RAPPAREE_HARNESS,    xi.items.GEMINI_SUBLIGAR      },
-    [ 4] = { xi.items.SHINIMUSHA_HARA_ATE, xi.items.CANCER_SUBLIGAR      },
-    [ 5] = { xi.items.WYVERN_MAIL,         xi.items.LEO_SUBLIGAR         },
-    [ 6] = { xi.items.SHIKAREE_AKETON,     xi.items.VIRGO_SUBLIGAR       },
-    [ 7] = { xi.items.CERISE_DOUBLET,      xi.items.LIBRA_SUBLIGAR       },
-    [ 8] = { xi.items.GLAMOR_JUPON,        xi.items.SCORPIUS_SUBLIGAR    },
-    [ 9] = { xi.items.GLOOM_BREASTPLATE,   xi.items.SAGITTARIUS_SUBLIGAR },
-    [10] = { xi.items.NIMBUS_DOUBLET,      xi.items.CAPRICORNUS_SUBLIGAR },
-    [11] = { xi.items.AIKIDO_GI,           xi.items.AQUARIUS_SUBLIGAR    },
-    [12] = { xi.items.PARADE_CUIRASS,      xi.items.PISCES_SUBLIGAR      },
-    [13] = { xi.items.GAUDY_HARNESS,       xi.items.OPHIUCHUS_SUBLIGAR   },
+    [ 1] = { xi.item.DUENDE_COTEHARDIE,   xi.item.ARIES_SUBLIGAR       },
+    [ 2] = { xi.item.NOKIZARU_GI,         xi.item.TAURUS_SUBLIGAR      },
+    [ 3] = { xi.item.RAPPAREE_HARNESS,    xi.item.GEMINI_SUBLIGAR      },
+    [ 4] = { xi.item.SHINIMUSHA_HARA_ATE, xi.item.CANCER_SUBLIGAR      },
+    [ 5] = { xi.item.WYVERN_MAIL,         xi.item.LEO_SUBLIGAR         },
+    [ 6] = { xi.item.SHIKAREE_AKETON,     xi.item.VIRGO_SUBLIGAR       },
+    [ 7] = { xi.item.CERISE_DOUBLET,      xi.item.LIBRA_SUBLIGAR       },
+    [ 8] = { xi.item.GLAMOR_JUPON,        xi.item.SCORPIUS_SUBLIGAR    },
+    [ 9] = { xi.item.GLOOM_BREASTPLATE,   xi.item.SAGITTARIUS_SUBLIGAR },
+    [10] = { xi.item.NIMBUS_DOUBLET,      xi.item.CAPRICORNUS_SUBLIGAR },
+    [11] = { xi.item.AIKIDO_GI,           xi.item.AQUARIUS_SUBLIGAR    },
+    [12] = { xi.item.PARADE_CUIRASS,      xi.item.PISCES_SUBLIGAR      },
+    [13] = { xi.item.GAUDY_HARNESS,       xi.item.OPHIUCHUS_SUBLIGAR   },
 }
 
 local getRandomEquippableItem = function(player, itemList)
@@ -114,7 +114,7 @@ quest.sections =
             ['Brygid'] =
             {
                 onTrigger = function(player, npc)
-                    local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.items.ROBE and 1 or 0
+                    local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.item.ROBE and 1 or 0
                     local requestedBody   = getRandomEquippableItem(player, requestedBodyItems)
                     local requestedLegs   = getRandomEquippableItem(player, requestedLegItems)
 
@@ -160,7 +160,7 @@ quest.sections =
                         then
                             return quest:progressEvent(382)
                         else
-                            local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.items.ROBE and 1 or 0
+                            local hasRobeEquipped = player:getEquipID(xi.slot.BODY) == xi.item.ROBE and 1 or 0
                             local requestedBody   = quest:getVar(player, 'requestedBody')
                             local requestedLegs   = quest:getVar(player, 'requestedLegs')
 
@@ -177,7 +177,7 @@ quest.sections =
             onEventUpdate =
             {
                 [382] = function(player, csid, option, npc)
-                    local rewardItem     = xi.items.DUENDE_COTEHARDIE - 1 + option
+                    local rewardItem     = xi.item.DUENDE_COTEHARDIE - 1 + option
                     local canEquipReward = player:canEquipItem(rewardItem, true) and 1 or 0
                     local hasReward      = not player:hasItem(rewardItem) and 1 or 0
 

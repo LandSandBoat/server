@@ -55,7 +55,7 @@ quest.sections =
             ['Romilda'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.COTTON_GLOVES) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.COTTON_GLOVES) then
                         return quest:progressEvent(129)
                     end
                 end,

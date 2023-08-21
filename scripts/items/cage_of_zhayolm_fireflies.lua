@@ -17,7 +17,7 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onItemDrop = function(target, item)
-    target:addTempItem(xi.items.CAGE_OF_ZHAYOLM_FIREFLIES)
+    target:addTempItem(xi.item.CAGE_OF_ZHAYOLM_FIREFLIES)
 end
 
 return itemObject

@@ -46,7 +46,7 @@ quest.sections =
             ['Karl'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.WHITE_ROCK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.WHITE_ROCK) then
                         return quest:progressEvent(1)
                     end
                 end,

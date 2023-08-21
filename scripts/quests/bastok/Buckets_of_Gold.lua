@@ -47,7 +47,7 @@ quest.sections =
             ['Foss'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.RUSTY_BUCKET, 5 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.RUSTY_BUCKET, 5 } }) then
                         return quest:progressEvent(272)
                     end
                 end,

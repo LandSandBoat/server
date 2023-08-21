@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
-    item     = xi.items.FLOWER_NECKLACE,
+    item     = xi.item.FLOWER_NECKLACE,
     title    = xi.title.ACTIVIST_FOR_KINDNESS,
 }
 

@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.ANGELWING, 99) -- Angelwing x99
+    target:addItem(xi.item.ANGELWING, 99) -- Angelwing x99
     target:messageBasic(xi.msg.basic.ITEM_OBTAINED, 5441)
 end
 

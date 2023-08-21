@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.ALEXANDRITE, math.random(5, 20))
+    target:addItem(xi.item.ALEXANDRITE, math.random(5, 20))
 end
 
 return itemObject

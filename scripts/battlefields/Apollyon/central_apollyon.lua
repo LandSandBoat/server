@@ -23,7 +23,7 @@ local content = Limbus:new({
     area             = 5,
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.SMALT_CHIP, xi.items.SMOKY_CHIP, xi.items.CHARCOAL_CHIP, xi.items.MAGENTA_CHIP },
+    requiredItems    = { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP },
     name             = "CENTRAL_APOLLYON",
 })
 
@@ -65,20 +65,20 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item = xi.items.PIECE_OF_OMEGAS_EYE,        weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SEGMENT_OF_OMEGAS_FORELEG,  weight = xi.loot.weight.LOW    },
-            { item = xi.items.SEGMENT_OF_OMEGAS_HIND_LEG, weight = xi.loot.weight.LOW    },
-            { item = xi.items.SEGMENT_OF_OMEGAS_TAIL,     weight = xi.loot.weight.LOW    },
+            { item = xi.item.PIECE_OF_OMEGAS_EYE,        weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SEGMENT_OF_OMEGAS_FORELEG,  weight = xi.loot.weight.LOW    },
+            { item = xi.item.SEGMENT_OF_OMEGAS_HIND_LEG, weight = xi.loot.weight.LOW    },
+            { item = xi.item.SEGMENT_OF_OMEGAS_TAIL,     weight = xi.loot.weight.LOW    },
         },
 
         {
-            { item = xi.items.NONE,                  weight = xi.loot.weight.EXTREMELY_HIGH },
-            { item = xi.items.PIECE_OF_OMEGAS_HEART, weight = xi.loot.weight.NORMAL         },
+            { item = xi.item.NONE,                  weight = xi.loot.weight.EXTREMELY_HIGH },
+            { item = xi.item.PIECE_OF_OMEGAS_HEART, weight = xi.loot.weight.NORMAL         },
         },
     },
 }

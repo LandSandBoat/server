@@ -15,7 +15,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.WILLOW_FISHING_ROD,
+    item = xi.item.WILLOW_FISHING_ROD,
     title = xi.title.LOST_CHILD_OFFICER,
 }
 
@@ -108,7 +108,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.WILLOW_FISHING_ROD)
+                        npcUtil.tradeHasExactly(trade, xi.item.WILLOW_FISHING_ROD)
                     then
                         return quest:progressEvent(61)
                     end
@@ -118,7 +118,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:messageSpecial(northenSandoriaID.text.AILBECHE_WHEN_FISHING):replaceDefault()
                     elseif quest:getVar(player, 'Prog') == 2 then
-                        return quest:messageSpecial(northenSandoriaID.text.OH_I_WANT_MY_ITEM, xi.items.WILLOW_FISHING_ROD):progress()
+                        return quest:messageSpecial(northenSandoriaID.text.OH_I_WANT_MY_ITEM, xi.item.WILLOW_FISHING_ROD):progress()
                     end
                 end,
             },

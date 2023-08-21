@@ -104,13 +104,13 @@ quest.sections =
                     -- TODO: Needs verification for single-trade events
                     if not player:hasKeyItem(xi.ki.TEMPLE_KNIGHT_KEY) then
                         if
-                            npcUtil.tradeHasExactly(trade, xi.items.SEALION_CREST_KEY) or
-                            npcUtil.tradeHasExactly(trade, xi.items.CORAL_CREST_KEY)
+                            npcUtil.tradeHasExactly(trade, xi.item.SEALION_CREST_KEY) or
+                            npcUtil.tradeHasExactly(trade, xi.item.CORAL_CREST_KEY)
                         then
                             return quest:progressEvent(631, trade:getItemId())
-                        elseif npcUtil.tradeHasExactly(trade, { xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY }) then
+                        elseif npcUtil.tradeHasExactly(trade, { xi.item.SEALION_CREST_KEY, xi.item.CORAL_CREST_KEY }) then
                             quest:setVar(player, 'Prog', 2)
-                            return quest:progressEvent(631, xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY)
+                            return quest:progressEvent(631, xi.item.SEALION_CREST_KEY, xi.item.CORAL_CREST_KEY)
                         end
                     end
                 end,
@@ -119,7 +119,7 @@ quest.sections =
                     local itemCount = 0
                     local itemTable = { 0, 0 }
 
-                    for itemId = xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY do
+                    for itemId = xi.item.SEALION_CREST_KEY, xi.item.CORAL_CREST_KEY do
                         if player:findItem(itemId) then
                             itemCount = itemCount + 1
                             itemTable[itemCount] = itemId

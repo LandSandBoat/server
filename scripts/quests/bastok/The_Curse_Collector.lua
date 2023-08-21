@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.POISON_CESTI,
+    item     = xi.item.POISON_CESTI,
 }
 
 local handleAfflictorTriggerArea = function(player, triggerArea)

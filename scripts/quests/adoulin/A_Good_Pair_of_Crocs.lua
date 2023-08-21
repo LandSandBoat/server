@@ -95,8 +95,8 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.VELKK_NECKLACE) or
-                        npcUtil.tradeHasExactly(trade, xi.items.VELKK_MASK)
+                        npcUtil.tradeHasExactly(trade, xi.item.VELKK_NECKLACE) or
+                        npcUtil.tradeHasExactly(trade, xi.item.VELKK_MASK)
                     then
                         return quest:progressEvent(3002)
                     end

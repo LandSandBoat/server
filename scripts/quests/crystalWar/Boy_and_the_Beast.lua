@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_
 
 quest.reward =
 {
-    item = xi.items.CARBON_FISHING_ROD,
+    item = xi.item.CARBON_FISHING_ROD,
 }
 
 quest.sections =

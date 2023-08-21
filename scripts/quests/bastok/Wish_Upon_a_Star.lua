@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 50,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = { { xi.items.BAG_OF_CACTUS_STEMS, 4 } },
+    item     = { { xi.item.BAG_OF_CACTUS_STEMS, 4 } },
 }
 
 quest.sections =
@@ -80,7 +80,7 @@ quest.sections =
             ['Enu'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.FALLEN_STAR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.FALLEN_STAR) then
                         local isNight = VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT
 
                         if

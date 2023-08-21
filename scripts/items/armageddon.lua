@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.DEVASTATING_BULLET, 99 } }) -- Devastating Bullet x99
+    npcUtil.giveItem(target, { { xi.item.DEVASTATING_BULLET, 99 } }) -- Devastating Bullet x99
 end
 
 return itemObject

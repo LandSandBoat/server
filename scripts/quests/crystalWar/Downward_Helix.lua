@@ -10,7 +10,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWN
 
 quest.reward =
 {
-    item = xi.items.SCHOLARS_BRACERS
+    item = xi.item.SCHOLARS_BRACERS
 }
 
 quest.sections =

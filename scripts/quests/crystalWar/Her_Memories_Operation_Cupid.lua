@@ -87,7 +87,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.POT_OF_MARTIAL_RELISH) and
-                        npcUtil.tradeHasExactly(trade, { xi.items.BOTTLE_OF_RICE_VINEGAR, xi.items.JAR_OF_GROUND_WASABI, xi.items.SPRIG_OF_HOLY_BASIL }) and
+                        npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_RICE_VINEGAR, xi.item.JAR_OF_GROUND_WASABI, xi.item.SPRIG_OF_HOLY_BASIL }) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(4)

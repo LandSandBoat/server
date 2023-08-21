@@ -36,7 +36,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.items.VIAL_OF_JODYS_ACID)
+                        npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_JODYS_ACID)
                     then
                         return mission:progressEvent(279)
                     end

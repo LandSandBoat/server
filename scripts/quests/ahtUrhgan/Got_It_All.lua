@@ -9,7 +9,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT
 
 quest.reward =
 {
-    item = xi.items.BIBIKI_SEASHELL,
+    item = xi.item.BIBIKI_SEASHELL,
 }
 
 quest.sections =

@@ -67,7 +67,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    local properTestimony = xi.items.WARRIORS_TESTIMONY + player:getMainJob() - 1
+                    local properTestimony = xi.item.WARRIORS_TESTIMONY + player:getMainJob() - 1
 
                     if
                         npcUtil.tradeHasExactly(trade, properTestimony) and

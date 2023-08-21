@@ -17,7 +17,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RAVEN_SCYTHE,
+    item     = xi.item.RAVEN_SCYTHE,
 }
 
 quest.sections =
@@ -116,7 +116,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.YAGUDO_CHERRY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
                         not GetMobByID(giddeusID.mob.VAA_HUJA_THE_ERUDITE):isSpawned() and
                         quest:getVar(player, 'Prog') == 2
                     then
@@ -141,7 +141,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.YAGUDO_CHERRY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
                         quest:getVar(player, 'Prog') == 2 and
                         quest:getVar(player, 'Option') == 0
                     then

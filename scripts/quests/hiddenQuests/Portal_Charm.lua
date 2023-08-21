@@ -25,7 +25,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.ROLANBERRY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.ROLANBERRY) and
                         not player:hasKeyItem(xi.ki.PORTAL_CHARM)
                     then
                         if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS) then

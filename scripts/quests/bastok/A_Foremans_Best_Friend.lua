@@ -47,7 +47,7 @@ quest.sections =
             ['Gudav'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.DOG_COLLAR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.DOG_COLLAR) then
                         return quest:progressEvent(112)
                     end
                 end,

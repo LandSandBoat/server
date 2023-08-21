@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.MONKS_HEADGEAR,
+    item     = xi.item.MONKS_HEADGEAR,
     title    = xi.title.SHELL_OUTER,
 }
 
@@ -50,7 +50,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.SHELL_BUG, 3 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.SHELL_BUG, 3 } }) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         return quest:progressEvent(84)

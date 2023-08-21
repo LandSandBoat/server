@@ -14,18 +14,18 @@ mission.reward = {}
 
 local rewardItems =
 {
-    xi.items.ADOULIN_RING,
-    xi.items.WOLTARIS_RING,
-    xi.items.WEATHERSPOON_RING,
-    xi.items.JANNISTON_RING,
-    xi.items.RENAYE_RING,
-    xi.items.GORNEY_RING,
-    xi.items.HAVERTON_RING,
-    xi.items.KARIEYH_RING,
-    xi.items.VOCANE_RING,
-    xi.items.THURANDAUT_RING,
-    xi.items.SHNEDDICK_RING,
-    xi.items.ORVAIL_RING,
+    xi.item.ADOULIN_RING,
+    xi.item.WOLTARIS_RING,
+    xi.item.WEATHERSPOON_RING,
+    xi.item.JANNISTON_RING,
+    xi.item.RENAYE_RING,
+    xi.item.GORNEY_RING,
+    xi.item.HAVERTON_RING,
+    xi.item.KARIEYH_RING,
+    xi.item.VOCANE_RING,
+    xi.item.THURANDAUT_RING,
+    xi.item.SHNEDDICK_RING,
+    xi.item.ORVAIL_RING,
 }
 
 mission.sections =
@@ -140,7 +140,7 @@ mission.sections =
             {
                 [1555] = function(player, csid, option, npc)
                     if option >= 1 and option <= 12 then
-                        if npcUtil.giveItem(player, { rewardItems[option], xi.items.COUNCILORS_GARB, xi.items.COUNCILORS_CUFFS }) then
+                        if npcUtil.giveItem(player, { rewardItems[option], xi.item.COUNCILORS_GARB, xi.item.COUNCILORS_CUFFS }) then
                             -- NOTE: This mission is not completed here.  Since we started the Status for this mission at 1, reset
                             -- to 0 to signal that it has been completed and avoid 'forever' charVars
 

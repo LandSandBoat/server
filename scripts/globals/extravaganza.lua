@@ -25,9 +25,9 @@ end
 xi.extravaganza.getShadowEraCiphers = function(npc)
     local cipherNpcs =
     {
-        ["Shixo"]   =   { xi.items.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.items.CIPHER_OF_LEONOYNES_ALTER_EGO },
-        ["Shenni"]  =   { xi.items.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.items.CIPHER_OF_MAXIMILIANS_ALTER_EGO },
-        ["Shuvo"]   =   { xi.items.CIPHER_OF_LHUS_ALTER_EGO, xi.items.CIPHER_OF_KAYEELS_ALTER_EGO },
+        ["Shixo"]   =   { xi.item.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.item.CIPHER_OF_LEONOYNES_ALTER_EGO },
+        ["Shenni"]  =   { xi.item.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.item.CIPHER_OF_MAXIMILIANS_ALTER_EGO },
+        ["Shuvo"]   =   { xi.item.CIPHER_OF_LHUS_ALTER_EGO, xi.item.CIPHER_OF_KAYEELS_ALTER_EGO },
     }
     return cipherNpcs[npc:getName()]
 end

@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 75,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RABBIT_MANTLE,
+    item     = xi.item.RABBIT_MANTLE,
 }
 
 quest.sections =
@@ -53,7 +53,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.STRIP_OF_MEAT_JERKY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.STRIP_OF_MEAT_JERKY) and
                         quest:getVar(player, 'Prog') == 3
                     then
                         return quest:progressEvent(113)

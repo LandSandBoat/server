@@ -57,7 +57,7 @@ quest.sections =
 
         [xi.zone.SELBINA] =
         {
-            ['Devean'] = quest:progressEvent(120, 0, xi.items.POWER_SANDALS, 0, 0, 0, xi.items.FLINT_STONE),
+            ['Devean'] = quest:progressEvent(120, 0, xi.item.POWER_SANDALS, 0, 0, 0, xi.item.FLINT_STONE),
 
             onEventFinish =
             {
@@ -93,7 +93,7 @@ quest.sections =
             ['Devean'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.POWER_SANDALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.POWER_SANDALS) then
                         local timeRemaining = quest:getVar(player, 'Timer') - os.time()
 
                         if timeRemaining > 0 then
@@ -110,10 +110,10 @@ quest.sections =
                     if timeRemaining > 0 then
                         local hoursRemaining = math.floor(timeRemaining / 144)
 
-                        return quest:event(121, xi.items.POWER_SANDALS, hoursRemaining)
+                        return quest:event(121, xi.item.POWER_SANDALS, hoursRemaining)
                     else
                         if
-                            player:hasItem(xi.items.POWER_SANDALS) and
+                            player:hasItem(xi.item.POWER_SANDALS) and
                             quest:getVar(player, 'Option') == 0
                         then
                             return quest:progressEvent(125)
@@ -155,8 +155,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     -- TODO: Find the Jar's default action
 
-                    if not player:hasItem(xi.items.POWER_SANDALS) then
-                        if npcUtil.giveItem(player, xi.items.POWER_SANDALS) then
+                    if not player:hasItem(xi.item.POWER_SANDALS) then
+                        if npcUtil.giveItem(player, xi.item.POWER_SANDALS) then
                             xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
                         end
 

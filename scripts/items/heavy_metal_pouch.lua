@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.PLATE_OF_HEAVY_METAL, math.random(3, 19))
+    target:addItem(xi.item.PLATE_OF_HEAVY_METAL, math.random(3, 19))
 end
 
 return itemObject

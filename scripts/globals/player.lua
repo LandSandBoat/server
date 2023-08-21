@@ -9,31 +9,31 @@ require("scripts/quests/full_speed_ahead")
 
 local startingRaceInfo =
 {
-    [xi.race.HUME_M  ] = { gear = { body = xi.items.HUME_TUNIC,        hand = xi.items.HUME_M_GLOVES,     leg = xi.items.HUME_SLACKS,       feet = xi.items.HUME_M_BOOTS       }, homeNation = xi.nation.BASTOK   },
-    [xi.race.HUME_F  ] = { gear = { body = xi.items.HUME_VEST,         hand = xi.items.HUME_F_GLOVES,     leg = xi.items.HUME_PANTS,        feet = xi.items.HUME_F_BOOTS       }, homeNation = xi.nation.BASTOK   },
-    [xi.race.ELVAAN_M] = { gear = { body = xi.items.ELVAAN_JERKIN,     hand = xi.items.ELVAAN_GLOVES,     leg = xi.items.ELVAAN_M_CHAUSSES, feet = xi.items.ELVAAN_M_LEDELSENS }, homeNation = xi.nation.SANDORIA },
-    [xi.race.ELVAAN_F] = { gear = { body = xi.items.ELVAAN_BODICE,     hand = xi.items.ELVAAN_GAUNTLETS,  leg = xi.items.ELVAAN_F_CHAUSSES, feet = xi.items.ELVAAN_F_LEDELSENS }, homeNation = xi.nation.SANDORIA },
-    [xi.race.TARU_M  ] = { gear = { body = xi.items.TARUTARU_KAFTAN,   hand = xi.items.TARUTARU_MITTS,    leg = xi.items.TARUTARU_BRACCAE,  feet = xi.items.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
-    [xi.race.TARU_F  ] = { gear = { body = xi.items.TARUTARU_KAFTAN,   hand = xi.items.TARUTARU_MITTS,    leg = xi.items.TARUTARU_BRACCAE,  feet = xi.items.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
-    [xi.race.MITHRA  ] = { gear = { body = xi.items.MITHRAN_SEPARATES, hand = xi.items.MITHRAN_GAUNTLETS, leg = xi.items.MITHRAN_LOINCLOTH, feet = xi.items.MITHRAN_GAITERS    }, homeNation = xi.nation.WINDURST },
-    [xi.race.GALKA   ] = { gear = { body = xi.items.GALKAN_SURCOAT,    hand = xi.items.GALKAN_BRACERS,    leg = xi.items.GALKAN_BRAGUETTE,  feet = xi.items.GALKAN_SANDALS     }, homeNation = xi.nation.BASTOK   },
+    [xi.race.HUME_M  ] = { gear = { body = xi.item.HUME_TUNIC,        hand = xi.item.HUME_M_GLOVES,     leg = xi.item.HUME_SLACKS,       feet = xi.item.HUME_M_BOOTS       }, homeNation = xi.nation.BASTOK   },
+    [xi.race.HUME_F  ] = { gear = { body = xi.item.HUME_VEST,         hand = xi.item.HUME_F_GLOVES,     leg = xi.item.HUME_PANTS,        feet = xi.item.HUME_F_BOOTS       }, homeNation = xi.nation.BASTOK   },
+    [xi.race.ELVAAN_M] = { gear = { body = xi.item.ELVAAN_JERKIN,     hand = xi.item.ELVAAN_GLOVES,     leg = xi.item.ELVAAN_M_CHAUSSES, feet = xi.item.ELVAAN_M_LEDELSENS }, homeNation = xi.nation.SANDORIA },
+    [xi.race.ELVAAN_F] = { gear = { body = xi.item.ELVAAN_BODICE,     hand = xi.item.ELVAAN_GAUNTLETS,  leg = xi.item.ELVAAN_F_CHAUSSES, feet = xi.item.ELVAAN_F_LEDELSENS }, homeNation = xi.nation.SANDORIA },
+    [xi.race.TARU_M  ] = { gear = { body = xi.item.TARUTARU_KAFTAN,   hand = xi.item.TARUTARU_MITTS,    leg = xi.item.TARUTARU_BRACCAE,  feet = xi.item.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.TARU_F  ] = { gear = { body = xi.item.TARUTARU_KAFTAN,   hand = xi.item.TARUTARU_MITTS,    leg = xi.item.TARUTARU_BRACCAE,  feet = xi.item.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.MITHRA  ] = { gear = { body = xi.item.MITHRAN_SEPARATES, hand = xi.item.MITHRAN_GAUNTLETS, leg = xi.item.MITHRAN_LOINCLOTH, feet = xi.item.MITHRAN_GAITERS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.GALKA   ] = { gear = { body = xi.item.GALKAN_SURCOAT,    hand = xi.item.GALKAN_BRACERS,    leg = xi.item.GALKAN_BRAGUETTE,  feet = xi.item.GALKAN_SANDALS     }, homeNation = xi.nation.BASTOK   },
 }
 
 local startingNationInfo =
 {
-    [xi.nation.SANDORIA] = { ring = xi.items.SAN_DORIAN_RING,  map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
-    [xi.nation.BASTOK  ] = { ring = xi.items.BASTOKAN_RING,    map = xi.ki.MAP_OF_THE_BASTOK_AREA    },
-    [xi.nation.WINDURST] = { ring = xi.items.WINDURSTIAN_RING, map = xi.ki.MAP_OF_THE_WINDURST_AREA  },
+    [xi.nation.SANDORIA] = { ring = xi.item.SAN_DORIAN_RING,  map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
+    [xi.nation.BASTOK  ] = { ring = xi.item.BASTOKAN_RING,    map = xi.ki.MAP_OF_THE_BASTOK_AREA    },
+    [xi.nation.WINDURST] = { ring = xi.item.WINDURSTIAN_RING, map = xi.ki.MAP_OF_THE_WINDURST_AREA  },
 }
 
 local startingJobGear =
 {
-    [xi.job.WAR] = { xi.items.ONION_SWORD                               },
-    [xi.job.MNK] = { xi.items.WHITE_BELT                                },
-    [xi.job.WHM] = { xi.items.ONION_ROD,    xi.items.SCROLL_OF_CURE_EX  },
-    [xi.job.BLM] = { xi.items.ONION_STAFF,  xi.items.SCROLL_OF_STONE_EX },
-    [xi.job.RDM] = { xi.items.ONION_DAGGER, xi.items.SCROLL_OF_DIA_EX   },
-    [xi.job.THF] = { xi.items.ONION_KNIFE                               },
+    [xi.job.WAR] = { xi.item.ONION_SWORD                               },
+    [xi.job.MNK] = { xi.item.WHITE_BELT                                },
+    [xi.job.WHM] = { xi.item.ONION_ROD,    xi.item.SCROLL_OF_CURE_EX  },
+    [xi.job.BLM] = { xi.item.ONION_STAFF,  xi.item.SCROLL_OF_STONE_EX },
+    [xi.job.RDM] = { xi.item.ONION_DAGGER, xi.item.SCROLL_OF_DIA_EX   },
+    [xi.job.THF] = { xi.item.ONION_KNIFE                               },
 }
 
 -----------------------------------
@@ -134,7 +134,7 @@ xi.player.charCreate = function(player)
     end
 
     if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Do things that would normally be done in opening cutscene.
-        player:addItem(xi.items.ADVENTURER_COUPON)
+        player:addItem(xi.item.ADVENTURER_COUPON)
         player:setHomePoint()
     end
 

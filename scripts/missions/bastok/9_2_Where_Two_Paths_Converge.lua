@@ -115,7 +115,7 @@ mission.sections =
                 [782] = function(player, csid, option, npc)
                     mission:complete(player)
 
-                    if not npcUtil.giveItem(player, xi.items.BASTOKAN_FLAG) then
+                    if not npcUtil.giveItem(player, xi.item.BASTOKAN_FLAG) then
                         mission:setVar(player, 'Flag', 1)
                     end
                 end,
@@ -158,7 +158,7 @@ mission.sections =
                 -- with one conditional, but playing it safe.
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Flag') == 1 then
-                        if npcUtil.giveItem(player, xi.items.BASTOKAN_FLAG) then
+                        if npcUtil.giveItem(player, xi.item.BASTOKAN_FLAG) then
                             mission:setVar(player, 'Flag', 0)
                         end
                     end

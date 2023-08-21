@@ -12,7 +12,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_
 
 quest.reward =
 {
-    item  = xi.items.WAR_HOOP,
+    item  = xi.item.WAR_HOOP,
     title = xi.title.PROMISING_DANCER,
 }
 

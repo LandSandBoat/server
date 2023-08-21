@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.TOMB_GUARDS_WATERSKIN, 1) and
+            trade:hasItemQty(xi.item.TOMB_GUARDS_WATERSKIN, 1) and
             trade:getItemCount() == 1 and
             player:getCharVar("OfferingWaterOK") == 1
         then
@@ -27,13 +27,13 @@ entity.onTrigger = function(player, npc)
         player:startEvent(541)
     elseif
         tomb == QUEST_ACCEPTED and
-        not player:hasItem(xi.items.SKIN_OF_WELL_WATER) and
+        not player:hasItem(xi.item.SKIN_OF_WELL_WATER) and
         player:getCharVar("OfferingWaterOK") == 0
     then
         player:startEvent(622)
     elseif
         tomb == QUEST_ACCEPTED and
-        player:hasItem(xi.items.TOMB_GUARDS_WATERSKIN) and
+        player:hasItem(xi.item.TOMB_GUARDS_WATERSKIN) and
         player:getCharVar("OfferingWaterOK") == 0
     then
         player:startEvent(623)
@@ -54,8 +54,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar("graveConcernsVar", 0)
-            player:addItem(xi.items.SKIN_OF_WELL_WATER)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SKIN_OF_WELL_WATER) -- Well Water
+            player:addItem(xi.item.SKIN_OF_WELL_WATER)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SKIN_OF_WELL_WATER) -- Well Water
         end
     elseif csid == 624 then
         player:tradeComplete()

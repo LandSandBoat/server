@@ -48,7 +48,7 @@ quest.sections =
             ['Horatius'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.DANGRUF_STONE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.DANGRUF_STONE) then
                         return quest:progressEvent(101)
                     end
                 end,

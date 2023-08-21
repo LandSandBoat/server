@@ -57,12 +57,12 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 198 then --finish quest, note: no title granted
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_SLEEPGA_II)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_SLEEPGA_II)
         else
             player:delKeyItem(xi.ki.MOONDROP)
             npcUtil.giveCurrency(player, 'gil', 3000)
-            player:addItem(xi.items.SCROLL_OF_SLEEPGA_II)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_SLEEPGA_II)
+            player:addItem(xi.item.SCROLL_OF_SLEEPGA_II)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_SLEEPGA_II)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
             player:setCharVar("SearchingForRightWords_postcs", -2)

@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SMALL_SWORD,
+    item     = xi.item.SMALL_SWORD,
     title    = xi.title.PURSUER_OF_THE_TRUTH,
 }
 

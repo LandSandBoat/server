@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.PEBBLE, 12)
+    target:addItem(xi.item.PEBBLE, 12)
 end
 
 return itemObject

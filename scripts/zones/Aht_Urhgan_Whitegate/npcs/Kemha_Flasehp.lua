@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
-        if npcUtil.tradeHas(trade, xi.items.IMPERIAL_BRONZE_PIECE) then
+        if npcUtil.tradeHas(trade, xi.item.IMPERIAL_BRONZE_PIECE) then
             if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
                 player:confirmTrade()
                 player:startEvent(643, 8, 0, 0, 0, 188, 0, 6, 0)

@@ -8,11 +8,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("SahaginKeyItems") == 1 then -- If player was told to use 3 Mythril Beastcoins
-        if npcUtil.tradeHas(trade, { { xi.items.MYTHRIL_BEASTCOIN, 3 }, { xi.items.NORG_SHELL, 1 } }) then
+        if npcUtil.tradeHas(trade, { { xi.item.MYTHRIL_BEASTCOIN, 3 }, { xi.item.NORG_SHELL, 1 } }) then
             player:startEvent(107)
         end
     elseif player:getCharVar("SahaginKeyItems") == 2 then -- If player was told to use a Gold Beastcoin
-        if npcUtil.tradeHas(trade, { xi.items.GOLD_BEASTCOIN, xi.items.NORG_SHELL }) then
+        if npcUtil.tradeHas(trade, { xi.item.GOLD_BEASTCOIN, xi.item.NORG_SHELL }) then
             player:startEvent(107)
         end
     end
@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCharVar("SahaginKeyProgress") == 2 and
-        not player:hasItem(xi.items.SAHAGIN_KEY)
+        not player:hasItem(xi.item.SAHAGIN_KEY)
     then
         -- If player has never before finished the quest
         player:startEvent(105)
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getCharVar("SahaginKeyProgress") == 3 and
         player:getCharVar("SahaginKeyItems") == 0 and
-        not player:hasItem(xi.items.SAHAGIN_KEY)
+        not player:hasItem(xi.item.SAHAGIN_KEY)
     then
         if math.random(1, 2) == 1 then
             player:startEvent(105) -- Requires 3 Mythril Beastcoins and a Norg Shell
@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(106) -- If player was told to use a Gold Beastcoin
     elseif
         player:getCharVar("SahaginKeyProgress") == 2 and
-        player:hasItem(xi.items.SAHAGIN_KEY)
+        player:hasItem(xi.item.SAHAGIN_KEY)
     then
         player:startEvent(104) -- Doesn't offer the key again if the player has one
     else
@@ -65,7 +65,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 107 and
         player:getCharVar("SahaginKeyProgress") == 2 and
-        npcUtil.giveItem(player, xi.items.SAHAGIN_KEY)
+        npcUtil.giveItem(player, xi.item.SAHAGIN_KEY)
     then
         player:confirmTrade()
         player:setCharVar("SahaginKeyProgress", 3) -- Mark the quest progress
@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif
         csid == 107 and
         player:getCharVar("SahaginKeyProgress") == 3 and
-        npcUtil.giveItem(player, xi.items.SAHAGIN_KEY)
+        npcUtil.giveItem(player, xi.item.SAHAGIN_KEY)
     then
         player:confirmTrade()
         player:setCharVar("SahaginKeyItems", 0)

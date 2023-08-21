@@ -8,7 +8,7 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.GOLD_BEASTCOIN) then
+    if npcUtil.tradeHas(trade, xi.item.GOLD_BEASTCOIN) then
         if player:getCharVar("SSG_GoldDoor") == 7 then
             npc:openDoor(5) -- Open the door if a gold beastcoin has been traded after checking the door the required number of times
         end
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.GOLD_CHECK)
             player:setCharVar("SSG_GoldDoor", 6)
         elseif goldDoorCheck == 6 or goldDoorCheck == 7 then -- Door has been checked six or more times
-            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.items.GOLD_BEASTCOIN)
+            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.item.GOLD_BEASTCOIN)
             player:setCharVar("SSG_GoldDoor", 7)
         end
     elseif xPos > 55 and zPos < -81 then

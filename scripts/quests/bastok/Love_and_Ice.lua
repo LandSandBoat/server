@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.LAMIA_HARP,
+    item     = xi.item.LAMIA_HARP,
     title    = xi.title.SORROW_DROWNER,
 }
 

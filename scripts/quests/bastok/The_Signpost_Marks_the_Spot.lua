@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_
 
 quest.reward =
 {
-    item     = xi.items.LINEN_ROBE,
+    item     = xi.item.LINEN_ROBE,
     fame     = 50,
     fameArea = xi.quest.fame_area.BASTOK,
     title    = xi.title.TREASURE_SCAVENGER,

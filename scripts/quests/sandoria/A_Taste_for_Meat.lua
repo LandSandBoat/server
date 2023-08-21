@@ -32,7 +32,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHas(trade, xi.items.SLICE_OF_HARE_MEAT)
+                        npcUtil.tradeHas(trade, xi.item.SLICE_OF_HARE_MEAT)
                     then
                         return quest:progressEvent(531)
                     else
@@ -54,7 +54,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.SLICE_OF_HARE_MEAT, 5 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.SLICE_OF_HARE_MEAT, 5 } })
                     then
                         return quest:progressEvent(528)
                     else
@@ -110,7 +110,7 @@ quest.sections =
             onEventFinish =
             {
                 [530] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.SLICE_OF_GRILLED_HARE) then
+                    if npcUtil.giveItem(player, xi.item.SLICE_OF_GRILLED_HARE) then
                         quest:setVar(player, 'Option', 0)
                     else
                         return quest:progressEvent(538)

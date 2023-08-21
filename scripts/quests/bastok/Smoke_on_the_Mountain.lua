@@ -47,7 +47,7 @@ quest.sections =
             ['Hungry_Wolf'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.GALKAN_SAUSAGE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.GALKAN_SAUSAGE) then
                         return quest:progressEvent(429)
                     end
                 end,
@@ -74,14 +74,14 @@ quest.sections =
             ['qm2'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_GIANT_SHEEP_MEAT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_GIANT_SHEEP_MEAT) then
                         if quest:getLocalVar(player, 'Timer') == 0 then
                             player:confirmTrade()
                             quest:setLocalVar(player, 'Timer', os.time() + 60)
 
-                            return quest:messageSpecial(southGustabergID.text.FIRE_PUT, xi.items.SLICE_OF_GIANT_SHEEP_MEAT)
+                            return quest:messageSpecial(southGustabergID.text.FIRE_PUT, xi.item.SLICE_OF_GIANT_SHEEP_MEAT)
                         else
-                            return quest:messageSpecial(southGustabergID.text.MEAT_ALREADY_PUT, xi.items.SLICE_OF_GIANT_SHEEP_MEAT)
+                            return quest:messageSpecial(southGustabergID.text.MEAT_ALREADY_PUT, xi.item.SLICE_OF_GIANT_SHEEP_MEAT)
                         end
                     end
                 end,
@@ -92,15 +92,15 @@ quest.sections =
                     if cookTimer == 0 then
                         return quest:messageSpecial(southGustabergID.text.FIRE_GOOD)
                     elseif os.time() < cookTimer then
-                        return quest:messageSpecial(southGustabergID.text.FIRE_LONGER, xi.items.SLICE_OF_GIANT_SHEEP_MEAT)
+                        return quest:messageSpecial(southGustabergID.text.FIRE_LONGER, xi.item.SLICE_OF_GIANT_SHEEP_MEAT)
                     else
                         quest:setLocalVar(player, 'Timer', 0)
 
                         if player:getFreeSlotsCount() == 0 then
-                            return quest:messageSpecial(southGustabergID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GALKAN_SAUSAGE)
+                            return quest:messageSpecial(southGustabergID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GALKAN_SAUSAGE)
                         else
-                            player:messageSpecial(southGustabergID.text.FIRE_TAKE, xi.items.GALKAN_SAUSAGE)
-                            npcUtil.giveItem(player, xi.items.GALKAN_SAUSAGE)
+                            player:messageSpecial(southGustabergID.text.FIRE_TAKE, xi.item.GALKAN_SAUSAGE)
+                            npcUtil.giveItem(player, xi.item.GALKAN_SAUSAGE)
 
                             return quest:noAction()
                         end

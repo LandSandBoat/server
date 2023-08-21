@@ -261,7 +261,7 @@ local messageOffset =
 xi.events.eggHunt.charToEgg = function(char)
     -- Char offset from "A", eg. B = 1, C = 2, etc.
     local charOffset = string.byte(string.lower(char)) - 97
-    return xi.items.A_EGG + charOffset
+    return xi.item.A_EGG + charOffset
 end
 
 -- If egg is already in table, return index so it can be added to total eg. 2x "A" Egg
@@ -282,7 +282,7 @@ xi.events.eggHunt.stringToEggs = function(text)
 
     for char = 1, #str do
         local ascii   = string.byte(string.sub(str, char, char))
-        local itemID  = xi.items.A_EGG + (ascii - 97)
+        local itemID  = xi.item.A_EGG + (ascii - 97)
         local itemPos = xi.events.eggHunt.findEggIndex(eggList, itemID)
 
         -- If table already contains this egg, add to total
@@ -299,7 +299,7 @@ end
 local hasFirstThree = function(player)
     return (
         player:getCharVar(settings.VAR.FIRST_THREE) == 1 or
-        player:hasItem(xi.items.EGG_HELM)
+        player:hasItem(xi.item.EGG_HELM)
     )
 end
 
@@ -309,15 +309,15 @@ end
 
 local minorRewards =
 {
-    xi.items.CHOCOBO_TICKET,
-    xi.items.RED_DROP,
-    xi.items.YELLOW_DROP,
-    xi.items.BLUE_DROP,
-    xi.items.GREEN_DROP,
-    xi.items.CLEAR_DROP,
-    xi.items.PURPLE_DROP,
-    xi.items.WHITE_DROP,
-    xi.items.BLACK_DROP,
+    xi.item.CHOCOBO_TICKET,
+    xi.item.RED_DROP,
+    xi.item.YELLOW_DROP,
+    xi.item.BLUE_DROP,
+    xi.item.GREEN_DROP,
+    xi.item.CLEAR_DROP,
+    xi.item.PURPLE_DROP,
+    xi.item.WHITE_DROP,
+    xi.item.BLACK_DROP,
 }
 
 local minorReward = function()
@@ -336,15 +336,15 @@ local tradeInReward =
         rewardAmount = 1,
         itemsAccepted =
         {
-            { { xi.items.BIRD_EGG, 12 } },
-            { { xi.items.LIZARD_EGG, 6 } },
-            xi.items.SOFT_BOILED_EGG,
-            xi.items.COLORED_EGG,
+            { { xi.item.BIRD_EGG, 12 } },
+            { { xi.item.LIZARD_EGG, 6 } },
+            xi.item.SOFT_BOILED_EGG,
+            xi.item.COLORED_EGG,
         },
         conditional =
         {
-            { settings.ERA_2008, { { xi.items.HARD_BOILED_EGG, 12 } } },
-            { settings.ERA_2019, xi.items.APKALLU_EGG },
+            { settings.ERA_2008, { { xi.item.HARD_BOILED_EGG, 12 } } },
+            { settings.ERA_2019, xi.item.APKALLU_EGG },
         },
     },
 
@@ -355,7 +355,7 @@ local tradeInReward =
         rewardAmount  = 2,
         itemsAccepted =
         {
-            xi.items.PARTY_EGG
+            xi.item.PARTY_EGG
         },
     },
 
@@ -366,11 +366,11 @@ local tradeInReward =
         rewardAmount  = 3,
         itemsAccepted =
         {
-            xi.items.LUCKY_EGG
+            xi.item.LUCKY_EGG
         },
         conditional   =
         {
-            { settings.ERA_2018, { { xi.items.SAIRUI_RAN, 99 } } },
+            { settings.ERA_2018, { { xi.item.SAIRUI_RAN, 99 } } },
         },
     },
 
@@ -381,20 +381,20 @@ local tradeInReward =
         rewardAmount = 8,
         conditional  =
         {
-            { settings.ERA_2018, xi.items.IMPERIAL_EGG },
+            { settings.ERA_2018, xi.item.IMPERIAL_EGG },
         },
     },
 }
 
 local rollRewardAmount = function(rewardAmount)
     if rewardAmount == 1 then
-        return { math.random(xi.items.A_EGG, xi.items.Z_EGG) }
+        return { math.random(xi.item.A_EGG, xi.item.Z_EGG) }
     end
 
     local rewardTable = {}
 
     for i = 1, rewardAmount do
-        table.insert(rewardTable, math.random(xi.items.A_EGG, xi.items.Z_EGG))
+        table.insert(rewardTable, math.random(xi.item.A_EGG, xi.item.Z_EGG))
     end
 
     return rewardTable
@@ -462,9 +462,9 @@ local firstThree = function(player, npc, trade)
         })
     then
         -- If not 2007, or player already has Egg Helm,.minor reward is issued instead
-        if settings.ERA_2007 and not player:hasItem(xi.items.EGG_HELM) then
+        if settings.ERA_2007 and not player:hasItem(xi.item.EGG_HELM) then
             player:setVar(settings.VAR.FIRST_THREE, 1)
-            return xi.items.EGG_HELM
+            return xi.item.EGG_HELM
         end
 
         player:setVar(settings.VAR.FIRST_THREE, 1)
@@ -479,9 +479,9 @@ local sevenKind = function(player, npc, trade)
     end
 
     for letterOffset = 0, 26 do
-        if npcUtil.tradeHasExactly(trade, { { xi.items.A_EGG + letterOffset, 7 } }) then
-            if not player:hasItem(xi.items.FORTUNE_EGG) then
-                return xi.items.FORTUNE_EGG
+        if npcUtil.tradeHasExactly(trade, { { xi.item.A_EGG + letterOffset, 7 } }) then
+            if not player:hasItem(xi.item.FORTUNE_EGG) then
+                return xi.item.FORTUNE_EGG
             end
 
             if settings.MINOR_REWARDS then
@@ -500,21 +500,21 @@ local straightEight = function(player, npc, trade)
     end
 
     local initial = string.lower(string.sub(player:getName(), 1, 1)) -- eg. "a"
-    local letter = string.byte(initial) - 97 + xi.items.A_EGG        -- itemID
+    local letter = string.byte(initial) - 97 + xi.item.A_EGG        -- itemID
     local eggs = {}
 
     for i = 1, 8 do
         table.insert(eggs, letter)
         letter = letter + 1
 
-        if letter > xi.items.Z_EGG then
-            letter = xi.items.A_EGG
+        if letter > xi.item.Z_EGG then
+            letter = xi.item.A_EGG
         end
     end
 
     if npcUtil.tradeHasExactly(trade, eggs) then
-        if not player:hasItem(xi.items.HAPPY_EGG) then
-            return xi.items.HAPPY_EGG
+        if not player:hasItem(xi.item.HAPPY_EGG) then
+            return xi.item.HAPPY_EGG
         end
 
         if settings.MINOR_REWARDS then
@@ -555,9 +555,9 @@ local beastCostumes =
 
 local nationRewards =
 {
-    { xi.items.WING_EGG,   xi.items.MELODIUS_EGG,  xi.items.EGG_STOOL, },
-    { xi.items.LAMP_EGG,   xi.items.CLOCKWORK_EGG, xi.items.EGG_TABLE, },
-    { xi.items.FLOWER_EGG, xi.items.HATCHLING_EGG, xi.items.EGG_LOCKER, },
+    { xi.item.WING_EGG,   xi.item.MELODIUS_EGG,  xi.item.EGG_STOOL, },
+    { xi.item.LAMP_EGG,   xi.item.CLOCKWORK_EGG, xi.item.EGG_TABLE, },
+    { xi.item.FLOWER_EGG, xi.item.HATCHLING_EGG, xi.item.EGG_LOCKER, },
 }
 
 local regionControl = function(player, npc, trade)
@@ -587,9 +587,9 @@ local regionControl = function(player, npc, trade)
                 -- 2007 Reward
                 elseif
                     settings.ERA_2007 and
-                    not player:hasItem(xi.items.JEWELED_EGG)
+                    not player:hasItem(xi.item.JEWELED_EGG)
                 then
-                    return xi.items.JEWELED_EGG
+                    return xi.item.JEWELED_EGG
 
                 -- 2008 Reward
                 elseif
@@ -607,19 +607,19 @@ local regionControl = function(player, npc, trade)
 
                 elseif
                     settings.ERA_2009 and
-                    not player:hasItem(xi.items.EGG_LANTERN)
+                    not player:hasItem(xi.item.EGG_LANTERN)
                 then
-                    return xi.items.EGG_LANTERN
+                    return xi.item.EGG_LANTERN
 
                 -- 2013 Reward
                 elseif
                     settings.ERA_2013 and
                     player:hasItem(reward[2]) and
                     player:hasItem(reward[3]) and
-                    player:hasItem(xi.items.EGG_LANTERN) and
-                    not player:hasItem(xi.items.PRINSEGGSTARTA)
+                    player:hasItem(xi.item.EGG_LANTERN) and
+                    not player:hasItem(xi.item.PRINSEGGSTARTA)
                 then
-                    return xi.items.PRINSEGGSTARTA
+                    return xi.item.PRINSEGGSTARTA
 
                 -- Repeat Reward (If enabled)
                 elseif
@@ -638,14 +638,14 @@ end
 
 local elementNames =
 {
-    { xi.events.eggHunt.stringToEggs("FIRE"),    xi.items.RED_DROP    },
-    { xi.events.eggHunt.stringToEggs("ICE"),     xi.items.CLEAR_DROP  },
-    { xi.events.eggHunt.stringToEggs("AIR"),     xi.items.GREEN_DROP  },
-    { xi.events.eggHunt.stringToEggs("EARTH"),   xi.items.YELLOW_DROP },
-    { xi.events.eggHunt.stringToEggs("THUNDER"), xi.items.PURPLE_DROP },
-    { xi.events.eggHunt.stringToEggs("WATER"),   xi.items.BLUE_DROP   },
-    { xi.events.eggHunt.stringToEggs("LIGHT"),   xi.items.WHITE_DROP  },
-    { xi.events.eggHunt.stringToEggs("DARK"),    xi.items.BLACK_DROP  },
+    { xi.events.eggHunt.stringToEggs("FIRE"),    xi.item.RED_DROP    },
+    { xi.events.eggHunt.stringToEggs("ICE"),     xi.item.CLEAR_DROP  },
+    { xi.events.eggHunt.stringToEggs("AIR"),     xi.item.GREEN_DROP  },
+    { xi.events.eggHunt.stringToEggs("EARTH"),   xi.item.YELLOW_DROP },
+    { xi.events.eggHunt.stringToEggs("THUNDER"), xi.item.PURPLE_DROP },
+    { xi.events.eggHunt.stringToEggs("WATER"),   xi.item.BLUE_DROP   },
+    { xi.events.eggHunt.stringToEggs("LIGHT"),   xi.item.WHITE_DROP  },
+    { xi.events.eggHunt.stringToEggs("DARK"),    xi.item.BLACK_DROP  },
 }
 
 local weekDay = function(player, npc, trade)
@@ -657,22 +657,22 @@ local weekDay = function(player, npc, trade)
     local elementDay = elementNames[VanadielDayElement()]
 
     if npcUtil.tradeHasExactly(trade, elementDay[1]) then
-        if player:hasItem(xi.items.ORPHIC_EGG) then
+        if player:hasItem(xi.item.ORPHIC_EGG) then
             return elementDay[2] -- Colored Drop
         else
-            return xi.items.ORPHIC_EGG
+            return xi.item.ORPHIC_EGG
         end
     end
 end
 
 local eraCombo =
 {
-    ELEVEN   = { xi.events.eggHunt.stringToEggs("ELEVEN"),   xi.items.HATCHLING_SHIELD     },
-    LEAFKIN  = { xi.events.eggHunt.stringToEggs("LEAFKIN"),  xi.items.PIECE_OF_COPSE_CANDY },
-    VANADIEL = { xi.events.eggHunt.stringToEggs("VANADIEL"), xi.items.CRACKER              },
-    HARE     = { xi.events.eggHunt.stringToEggs("HARE"),     xi.items.RABBIT_CAP           },
-    BUNNY    = { xi.events.eggHunt.stringToEggs("BUNNY"),    xi.items.RABBIT_CAP           },
-    RABBIT   = { xi.events.eggHunt.stringToEggs("RABBIT"),   xi.items.RABBIT_CAP           },
+    ELEVEN   = { xi.events.eggHunt.stringToEggs("ELEVEN"),   xi.item.HATCHLING_SHIELD     },
+    LEAFKIN  = { xi.events.eggHunt.stringToEggs("LEAFKIN"),  xi.item.PIECE_OF_COPSE_CANDY },
+    VANADIEL = { xi.events.eggHunt.stringToEggs("VANADIEL"), xi.item.CRACKER              },
+    HARE     = { xi.events.eggHunt.stringToEggs("HARE"),     xi.item.RABBIT_CAP           },
+    BUNNY    = { xi.events.eggHunt.stringToEggs("BUNNY"),    xi.item.RABBIT_CAP           },
+    RABBIT   = { xi.events.eggHunt.stringToEggs("RABBIT"),   xi.item.RABBIT_CAP           },
 }
 
 local testEraCombo = function(player, npc, trade, combo, rewardQty)
@@ -737,9 +737,9 @@ local getSecondInitial = function(player, option)
 
             if
                 firstLetter == (option - 3) and
-                member:getEquipID(xi.slot.HEAD) == xi.items.EGG_HELM
+                member:getEquipID(xi.slot.HEAD) == xi.item.EGG_HELM
             then
-                return xi.items.A_EGG + secondLetter
+                return xi.item.A_EGG + secondLetter
             end
         end
     end
@@ -826,7 +826,7 @@ xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
 
     -- Selected party member initial
     elseif option >= 3 then
-        local eggsGiven = { xi.items.A_EGG + option - 3 }
+        local eggsGiven = { xi.item.A_EGG + option - 3 }
         local second = getSecondInitial(player, option)
 
         -- Give second letter if selected player has Egg Helm equipped
@@ -840,7 +840,7 @@ xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
 
     -- Random daily letter
     else
-        if npcUtil.giveItem(player, math.random(xi.items.A_EGG, xi.items.Z_EGG)) then
+        if npcUtil.giveItem(player, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
             player:setVar(settings.VAR.DAILY_EGG, VanadielUniqueDay())
         end
     end

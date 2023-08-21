@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BRONZE_SUBLIGAR,
+    item     = xi.item.BRONZE_SUBLIGAR,
 }
 
 quest.sections =
@@ -44,7 +44,7 @@ quest.sections =
             ['Corann'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_BACKPLATE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_BACKPLATE) then
                         return quest:progressEvent(81)
                     end
                 end,

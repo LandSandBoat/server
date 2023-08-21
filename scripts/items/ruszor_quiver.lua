@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.RUSZOR_ARROW, 99)
+    target:addItem(xi.item.RUSZOR_ARROW, 99)
 end
 
 return itemObject

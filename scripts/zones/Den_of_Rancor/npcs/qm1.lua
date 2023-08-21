@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.HAKUTAKU_EYE_CLUSTER) and
+        npcUtil.tradeHas(trade, xi.item.HAKUTAKU_EYE_CLUSTER) and
         npcUtil.popFromQM(player, npc, ID.mob.HAKUTAKU)
     then
         player:confirmTrade()

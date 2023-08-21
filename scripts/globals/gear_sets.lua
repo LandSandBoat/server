@@ -17,11 +17,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.USUKANE_SOMEN,
-            xi.items.USUKANE_HARAMAKI,
-            xi.items.USUKANE_GOTE,
-            xi.items.USUKANE_HIZAYOROI,
-            xi.items.USUKANE_SUNE_ATE,
+            xi.item.USUKANE_SOMEN,
+            xi.item.USUKANE_HARAMAKI,
+            xi.item.USUKANE_GOTE,
+            xi.item.USUKANE_HIZAYOROI,
+            xi.item.USUKANE_SUNE_ATE,
         },
         minEquipped = 5,
         mods =
@@ -34,11 +34,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.SKADIS_VISOR,
-            xi.items.SKADIS_CUIRIE,
-            xi.items.SKADIS_BAZUBANDS,
-            xi.items.SKADIS_CHAUSSES,
-            xi.items.SKADIS_JAMBEAUX,
+            xi.item.SKADIS_VISOR,
+            xi.item.SKADIS_CUIRIE,
+            xi.item.SKADIS_BAZUBANDS,
+            xi.item.SKADIS_CHAUSSES,
+            xi.item.SKADIS_JAMBEAUX,
         },
         minEquipped = 5,
         mods =
@@ -51,11 +51,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ARES_MASK,
-            xi.items.ARES_CUIRASS,
-            xi.items.ARES_GAUNTLETS,
-            xi.items.ARES_FLANCHARD,
-            xi.items.ARES_SOLLERETS,
+            xi.item.ARES_MASK,
+            xi.item.ARES_CUIRASS,
+            xi.item.ARES_GAUNTLETS,
+            xi.item.ARES_FLANCHARD,
+            xi.item.ARES_SOLLERETS,
         },
         minEquipped = 5,
         mods =
@@ -68,11 +68,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.DENALI_BONNET,
-            xi.items.DENALI_JACKET,
-            xi.items.DENALI_WRISTBANDS,
-            xi.items.DENALI_KECKS,
-            xi.items.DENALI_GAMASHES,
+            xi.item.DENALI_BONNET,
+            xi.item.DENALI_JACKET,
+            xi.item.DENALI_WRISTBANDS,
+            xi.item.DENALI_KECKS,
+            xi.item.DENALI_GAMASHES,
         },
         minEquipped = 5,
         mods =
@@ -85,11 +85,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ASKAR_ZUCCHETTO,
-            xi.items.ASKAR_KORAZIN,
-            xi.items.ASKAR_MANOPOLAS,
-            xi.items.ASKAR_DIRS,
-            xi.items.ASKAR_GAMBIERAS,
+            xi.item.ASKAR_ZUCCHETTO,
+            xi.item.ASKAR_KORAZIN,
+            xi.item.ASKAR_MANOPOLAS,
+            xi.item.ASKAR_DIRS,
+            xi.item.ASKAR_GAMBIERAS,
         },
         minEquipped = 5,
         mods =
@@ -102,11 +102,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.PAHLUWAN_QALANSUWA,
-            xi.items.PAHLUWAN_KHAZAGAND,
-            xi.items.PAHLUWAN_DASTANAS,
-            xi.items.PAHLUWAN_SERAWEELS,
-            xi.items.PAHLUWAN_CRACKOWS,
+            xi.item.PAHLUWAN_QALANSUWA,
+            xi.item.PAHLUWAN_KHAZAGAND,
+            xi.item.PAHLUWAN_DASTANAS,
+            xi.item.PAHLUWAN_SERAWEELS,
+            xi.item.PAHLUWAN_CRACKOWS,
         },
         minEquipped = 5,
         mods =
@@ -119,11 +119,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MORRIGANS_CORONAL,
-            xi.items.MORRIGANS_ROBE,
-            xi.items.MORRIGANS_CUFFS,
-            xi.items.MORRIGANS_SLOPS,
-            xi.items.MORRIGANS_PIGACHES,
+            xi.item.MORRIGANS_CORONAL,
+            xi.item.MORRIGANS_ROBE,
+            xi.item.MORRIGANS_CUFFS,
+            xi.item.MORRIGANS_SLOPS,
+            xi.item.MORRIGANS_PIGACHES,
         },
         minEquipped = 5,
         mods =
@@ -136,11 +136,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MARDUKS_TIARA,
-            xi.items.MARDUKS_JUBBAH,
-            xi.items.MARDUKS_DASTANAS,
-            xi.items.MARDUKS_SHALWAR,
-            xi.items.MARDUKS_CRACKOWS,
+            xi.item.MARDUKS_TIARA,
+            xi.item.MARDUKS_JUBBAH,
+            xi.item.MARDUKS_DASTANAS,
+            xi.item.MARDUKS_SHALWAR,
+            xi.item.MARDUKS_CRACKOWS,
         },
         minEquipped = 5,
         mods =
@@ -153,11 +153,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.GOLIARD_CHAPEAU,
-            xi.items.GOLIARD_SAIO,
-            xi.items.GOLIARD_CUFFS,
-            xi.items.GOLIARD_TREWS,
-            xi.items.GOLIARD_CLOGS,
+            xi.item.GOLIARD_CHAPEAU,
+            xi.item.GOLIARD_SAIO,
+            xi.item.GOLIARD_CUFFS,
+            xi.item.GOLIARD_TREWS,
+            xi.item.GOLIARD_CLOGS,
         },
         minEquipped = 5,
         mods =
@@ -170,11 +170,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.YIGIT_TURBAN,
-            xi.items.YIGIT_GOMLEK,
-            xi.items.YIGIT_GAGES,
-            xi.items.YIGIT_SERAWEELS,
-            xi.items.YIGIT_CRACKOWS,
+            xi.item.YIGIT_TURBAN,
+            xi.item.YIGIT_GOMLEK,
+            xi.item.YIGIT_GAGES,
+            xi.item.YIGIT_SERAWEELS,
+            xi.item.YIGIT_CRACKOWS,
         },
         minEquipped = 5,
         mods =
@@ -187,11 +187,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.PERLE_SALADE,
-            xi.items.PERLE_HAUBERK,
-            xi.items.PERLE_MOUFLES,
-            xi.items.PERLE_BRAYETTES,
-            xi.items.PERLE_SOLLERETS,
+            xi.item.PERLE_SALADE,
+            xi.item.PERLE_HAUBERK,
+            xi.item.PERLE_MOUFLES,
+            xi.item.PERLE_BRAYETTES,
+            xi.item.PERLE_SOLLERETS,
         },
         minEquipped = 5,
         mods =
@@ -204,11 +204,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.AURORE_BERET,
-            xi.items.AURORE_DOUBLET,
-            xi.items.AURORE_GLOVES,
-            xi.items.AURORE_BRAIS,
-            xi.items.AURORE_GAITERS,
+            xi.item.AURORE_BERET,
+            xi.item.AURORE_DOUBLET,
+            xi.item.AURORE_GLOVES,
+            xi.item.AURORE_BRAIS,
+            xi.item.AURORE_GAITERS,
         },
         minEquipped = 5,
         mods =
@@ -221,11 +221,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.TEAL_CHAPEAU,
-            xi.items.TEAL_SAIO,
-            xi.items.TEAL_CUFFS,
-            xi.items.TEAL_SLOPS,
-            xi.items.TEAL_PIGACHES,
+            xi.item.TEAL_CHAPEAU,
+            xi.item.TEAL_SAIO,
+            xi.item.TEAL_CUFFS,
+            xi.item.TEAL_SLOPS,
+            xi.item.TEAL_PIGACHES,
         },
         minEquipped = 2,
         mods =
@@ -238,11 +238,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.CALMA_ARMET,
-            xi.items.CALMA_BREASTPLATE,
-            xi.items.CALMA_GAUNTLETS,
-            xi.items.CALMA_HOSE,
-            xi.items.CALMA_LEGGINGS,
+            xi.item.CALMA_ARMET,
+            xi.item.CALMA_BREASTPLATE,
+            xi.item.CALMA_GAUNTLETS,
+            xi.item.CALMA_HOSE,
+            xi.item.CALMA_LEGGINGS,
         },
         minEquipped = 5,
         mods =
@@ -255,11 +255,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MAGAVAN_BERET,
-            xi.items.MAGAVAN_FROCK,
-            xi.items.MAGAVAN_MITTS,
-            xi.items.MAGAVAN_SLOPS,
-            xi.items.MAGAVAN_CLOGS,
+            xi.item.MAGAVAN_BERET,
+            xi.item.MAGAVAN_FROCK,
+            xi.item.MAGAVAN_MITTS,
+            xi.item.MAGAVAN_SLOPS,
+            xi.item.MAGAVAN_CLOGS,
         },
         minEquipped = 5,
         mods =
@@ -272,11 +272,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MUSTELA_MASK,
-            xi.items.MUSTELA_HARNESS,
-            xi.items.MUSTELA_GLOVES,
-            xi.items.MUSTELA_BRAIS,
-            xi.items.MUSTELA_BOOTS,
+            xi.item.MUSTELA_MASK,
+            xi.item.MUSTELA_HARNESS,
+            xi.item.MUSTELA_GLOVES,
+            xi.item.MUSTELA_BRAIS,
+            xi.item.MUSTELA_BOOTS,
         },
         minEquipped = 5,
         mods =
@@ -289,8 +289,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.BOWMANS_MASK,
-            xi.items.BOWMANS_LEDELSENS,
+            xi.item.BOWMANS_MASK,
+            xi.item.BOWMANS_LEDELSENS,
         },
         minEquipped = 2,
         mods =
@@ -303,11 +303,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.FOURTH_DIVISION_HAUBE,
-            xi.items.FOURTH_DIVISION_BRUNNE,
-            xi.items.FOURTH_DIVISION_HENTZES,
-            xi.items.FOURTH_DIVISION_SCHOSS,
-            xi.items.FOURTH_DIVISION_SCHUHS,
+            xi.item.FOURTH_DIVISION_HAUBE,
+            xi.item.FOURTH_DIVISION_BRUNNE,
+            xi.item.FOURTH_DIVISION_HENTZES,
+            xi.item.FOURTH_DIVISION_SCHOSS,
+            xi.item.FOURTH_DIVISION_SCHUHS,
         },
         minEquipped = 2,
         mods =
@@ -320,11 +320,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.COBRA_UNIT_CAP,
-            xi.items.COBRA_UNIT_HARNESS,
-            xi.items.COBRA_UNIT_MITTENS,
-            xi.items.COBRA_UNIT_SUBLIGAR,
-            xi.items.COBRA_UNIT_LEGGINGS,
+            xi.item.COBRA_UNIT_CAP,
+            xi.item.COBRA_UNIT_HARNESS,
+            xi.item.COBRA_UNIT_MITTENS,
+            xi.item.COBRA_UNIT_SUBLIGAR,
+            xi.item.COBRA_UNIT_LEGGINGS,
         },
         minEquipped = 2,
         mods =
@@ -337,11 +337,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.COBRA_UNIT_CLOCHE,
-            xi.items.COBRA_UNIT_ROBE,
-            xi.items.COBRA_UNIT_GLOVES,
-            xi.items.COBRA_UNIT_TREWS,
-            xi.items.COBRA_UNIT_CRACKOWS,
+            xi.item.COBRA_UNIT_CLOCHE,
+            xi.item.COBRA_UNIT_ROBE,
+            xi.item.COBRA_UNIT_GLOVES,
+            xi.item.COBRA_UNIT_TREWS,
+            xi.item.COBRA_UNIT_CRACKOWS,
         },
         minEquipped = 2,
         mods =
@@ -354,11 +354,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.IRON_RAM_HELM,
-            xi.items.IRON_RAM_CHAINMAIL,
-            xi.items.IRON_RAM_MUFFLERS,
-            xi.items.IRON_RAM_BREECHES,
-            xi.items.IRON_RAM_SOLLERETS,
+            xi.item.IRON_RAM_HELM,
+            xi.item.IRON_RAM_CHAINMAIL,
+            xi.item.IRON_RAM_MUFFLERS,
+            xi.item.IRON_RAM_BREECHES,
+            xi.item.IRON_RAM_SOLLERETS,
         },
         minEquipped = 2,
         mods =
@@ -372,11 +372,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.FOURTH_DIVISION_ARMET,
-            xi.items.FOURTH_DIVISION_CUIRASS,
-            xi.items.FOURTH_DIVISION_GAUNTLETS,
-            xi.items.FOURTH_DIVISION_CUISSES,
-            xi.items.FOURTH_DIVISION_SABATONS,
+            xi.item.FOURTH_DIVISION_ARMET,
+            xi.item.FOURTH_DIVISION_CUIRASS,
+            xi.item.FOURTH_DIVISION_GAUNTLETS,
+            xi.item.FOURTH_DIVISION_CUISSES,
+            xi.item.FOURTH_DIVISION_SABATONS,
         },
         minEquipped = 2,
         mods =
@@ -389,11 +389,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.COBRA_UNIT_HAT,
-            xi.items.COBRA_UNIT_COAT,
-            xi.items.COBRA_UNIT_CUFFS,
-            xi.items.COBRA_UNIT_SLOPS,
-            xi.items.COBRA_UNIT_PIGACHES,
+            xi.item.COBRA_UNIT_HAT,
+            xi.item.COBRA_UNIT_COAT,
+            xi.item.COBRA_UNIT_CUFFS,
+            xi.item.COBRA_UNIT_SLOPS,
+            xi.item.COBRA_UNIT_PIGACHES,
         },
         minEquipped = 2,
         mods =
@@ -406,11 +406,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.AMIR_PUGGAREE,
-            xi.items.AMIR_KORAZIN,
-            xi.items.AMIR_KOLLUKS,
-            xi.items.AMIR_DIRS,
-            xi.items.AMIR_BOOTS,
+            xi.item.AMIR_PUGGAREE,
+            xi.item.AMIR_KORAZIN,
+            xi.item.AMIR_KOLLUKS,
+            xi.item.AMIR_DIRS,
+            xi.item.AMIR_BOOTS,
         },
         minEquipped = 5,
         mods =
@@ -424,10 +424,10 @@ local gearSets =
     {
         items =
         {
-            xi.items.HACHIRYU_HARAMAKI,
-            xi.items.HACHIRYU_KOTE,
-            xi.items.HACHIRYU_HAIDATE,
-            xi.items.HACHIRYU_SUNE_ATE,
+            xi.item.HACHIRYU_HARAMAKI,
+            xi.item.HACHIRYU_KOTE,
+            xi.item.HACHIRYU_HAIDATE,
+            xi.item.HACHIRYU_SUNE_ATE,
         },
         minEquipped = 2,
         mods =
@@ -440,11 +440,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.RAVAGERS_MASK_P2,
-            xi.items.RAVAGERS_LORICA_P2,
-            xi.items.RAVAGERS_MUFFLERS_P2,
-            xi.items.RAVAGERS_CUISSES_P2,
-            xi.items.RAVAGERS_CALLIGAE_P2,
+            xi.item.RAVAGERS_MASK_P2,
+            xi.item.RAVAGERS_LORICA_P2,
+            xi.item.RAVAGERS_MUFFLERS_P2,
+            xi.item.RAVAGERS_CUISSES_P2,
+            xi.item.RAVAGERS_CALLIGAE_P2,
         },
         minEquipped = 2,
         mods =
@@ -457,11 +457,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.FAZHELUO_HELM,
-            xi.items.FAZHELUO_HELM_P1,
-            xi.items.FAZHELUO_MAIL,
-            xi.items.FAZHELUO_RADIANT_MAIL,
-            xi.items.FAZHELUO_MAIL_P1,
+            xi.item.FAZHELUO_HELM,
+            xi.item.FAZHELUO_HELM_P1,
+            xi.item.FAZHELUO_MAIL,
+            xi.item.FAZHELUO_RADIANT_MAIL,
+            xi.item.FAZHELUO_MAIL_P1,
         },
         minEquipped = 2,
         mods =
@@ -474,11 +474,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.CUAUHTLI_HEADPIECE,
-            xi.items.CUAUHTLI_HEADPIECE_P1,
-            xi.items.CUAUHTLI_HARNESS,
-            xi.items.MEXTLI_HARNESS,
-            xi.items.CUAUHTLI_HARNESS_P1,
+            xi.item.CUAUHTLI_HEADPIECE,
+            xi.item.CUAUHTLI_HEADPIECE_P1,
+            xi.item.CUAUHTLI_HARNESS,
+            xi.item.MEXTLI_HARNESS,
+            xi.item.CUAUHTLI_HARNESS_P1,
         },
         minEquipped = 2,
         mods =
@@ -491,11 +491,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.HYKSOS_KHAT,
-            xi.items.HYKSOS_KHAT_P1,
-            xi.items.HYKSOS_ROBE,
-            xi.items.ANHUR_ROBE,
-            xi.items.HYKSOS_ROBE_P1,
+            xi.item.HYKSOS_KHAT,
+            xi.item.HYKSOS_KHAT_P1,
+            xi.item.HYKSOS_ROBE,
+            xi.item.ANHUR_ROBE,
+            xi.item.HYKSOS_ROBE_P1,
         },
         minEquipped = 2,
         mods =
@@ -508,11 +508,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.OGIERS_HELM,
-            xi.items.OGIERS_SURCOAT,
-            xi.items.OGIERS_GAUNTLETS,
-            xi.items.OGIERS_BREECHES,
-            xi.items.OGIERS_LEGGINGS,
+            xi.item.OGIERS_HELM,
+            xi.item.OGIERS_SURCOAT,
+            xi.item.OGIERS_GAUNTLETS,
+            xi.item.OGIERS_BREECHES,
+            xi.item.OGIERS_LEGGINGS,
         },
         minEquipped = 2,
         mods =
@@ -525,11 +525,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ATHOSS_CHAPEAU,
-            xi.items.ATHOSS_TABARD,
-            xi.items.ATHOSS_GLOVES,
-            xi.items.ATHOSS_TIGHTS,
-            xi.items.ATHOSS_BOOTS,
+            xi.item.ATHOSS_CHAPEAU,
+            xi.item.ATHOSS_TABARD,
+            xi.item.ATHOSS_GLOVES,
+            xi.item.ATHOSS_TIGHTS,
+            xi.item.ATHOSS_BOOTS,
         },
         minEquipped = 2,
         mods =
@@ -542,11 +542,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.RUBEUS_BANDEAU,
-            xi.items.RUBEUS_JACKET,
-            xi.items.RUBEUS_GLOVES,
-            xi.items.RUBEUS_SPATS,
-            xi.items.RUBEUS_BOOTS,
+            xi.item.RUBEUS_BANDEAU,
+            xi.item.RUBEUS_JACKET,
+            xi.item.RUBEUS_GLOVES,
+            xi.item.RUBEUS_SPATS,
+            xi.item.RUBEUS_BOOTS,
         },
         minEquipped = 2,
         mods =
@@ -559,11 +559,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.NAVARCHS_TRICORNE_P2,
-            xi.items.NAVARCHS_FRAC_P2,
-            xi.items.NAVARCHS_GANTS_P2,
-            xi.items.NAVARCHS_CULOTTES_P2,
-            xi.items.NAVARCHS_BOTTES_P2,
+            xi.item.NAVARCHS_TRICORNE_P2,
+            xi.item.NAVARCHS_FRAC_P2,
+            xi.item.NAVARCHS_GANTS_P2,
+            xi.item.NAVARCHS_CULOTTES_P2,
+            xi.item.NAVARCHS_BOTTES_P2,
         },
         minEquipped = 2,
         mods =
@@ -576,11 +576,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.CHARIS_TIARA_P2,
-            xi.items.CHARIS_CASAQUE_P2,
-            xi.items.CHARIS_BANGLES_P2,
-            xi.items.CHARIS_TIGHTS_P2,
-            xi.items.CHARIS_TOE_SHOES_P2,
+            xi.item.CHARIS_TIARA_P2,
+            xi.item.CHARIS_CASAQUE_P2,
+            xi.item.CHARIS_BANGLES_P2,
+            xi.item.CHARIS_TIGHTS_P2,
+            xi.item.CHARIS_TOE_SHOES_P2,
         },
         minEquipped = 2,
         mods =
@@ -593,11 +593,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.IGA_ZUKIN_P2,
-            xi.items.IGA_NINGI_P2,
-            xi.items.IGA_TEKKO_P2,
-            xi.items.IGA_HAKAMA_P2,
-            xi.items.IGA_KYAHAN_P2,
+            xi.item.IGA_ZUKIN_P2,
+            xi.item.IGA_NINGI_P2,
+            xi.item.IGA_TEKKO_P2,
+            xi.item.IGA_HAKAMA_P2,
+            xi.item.IGA_KYAHAN_P2,
         },
         minEquipped = 2,
         mods =
@@ -610,11 +610,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.SYLVAN_GAPETTE_P2,
-            xi.items.SYLVAN_CABAN_P2,
-            xi.items.SYLVAN_GLOVELETTES_P2,
-            xi.items.SYLVAN_BRAGUES_P2,
-            xi.items.SYLVAN_BOTTILLONS_P2,
+            xi.item.SYLVAN_GAPETTE_P2,
+            xi.item.SYLVAN_CABAN_P2,
+            xi.item.SYLVAN_GLOVELETTES_P2,
+            xi.item.SYLVAN_BRAGUES_P2,
+            xi.item.SYLVAN_BOTTILLONS_P2,
         },
         minEquipped = 2,
         mods =
@@ -627,11 +627,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.CREED_ARMET_P2,
-            xi.items.CREED_CUIRASS_P2,
-            xi.items.CREED_GAUNTLETS_P2,
-            xi.items.CREED_CUISSES_P2,
-            xi.items.CREED_SABATONS_P2,
+            xi.item.CREED_ARMET_P2,
+            xi.item.CREED_CUIRASS_P2,
+            xi.item.CREED_GAUNTLETS_P2,
+            xi.item.CREED_CUISSES_P2,
+            xi.item.CREED_SABATONS_P2,
         },
         minEquipped = 2,
         mods =
@@ -644,11 +644,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.UNKAI_KABUTO_P2,
-            xi.items.UNKAI_DOMARU_P2,
-            xi.items.UNKAI_KOTE_P2,
-            xi.items.UNKAI_HAIDATE_P2,
-            xi.items.UNKAI_SUNE_ATE_P2,
+            xi.item.UNKAI_KABUTO_P2,
+            xi.item.UNKAI_DOMARU_P2,
+            xi.item.UNKAI_KOTE_P2,
+            xi.item.UNKAI_HAIDATE_P2,
+            xi.item.UNKAI_SUNE_ATE_P2,
         },
         minEquipped = 2,
         mods =
@@ -661,11 +661,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.TANTRA_CROWN_P2,
-            xi.items.TANTRA_CYCLAS_P2,
-            xi.items.TANTRA_GLOVES_P2,
-            xi.items.TANTRA_HOSE_P2,
-            xi.items.TANTRA_GAITERS_P2,
+            xi.item.TANTRA_CROWN_P2,
+            xi.item.TANTRA_CYCLAS_P2,
+            xi.item.TANTRA_GLOVES_P2,
+            xi.item.TANTRA_HOSE_P2,
+            xi.item.TANTRA_GAITERS_P2,
         },
         minEquipped = 2,
         mods =
@@ -678,11 +678,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.RAIDERS_BONNET_P2,
-            xi.items.RAIDERS_VEST_P2,
-            xi.items.RAIDERS_ARMLETS_P2,
-            xi.items.RAIDERS_CULOTTES_P2,
-            xi.items.RAIDERS_POULAINES_P2,
+            xi.item.RAIDERS_BONNET_P2,
+            xi.item.RAIDERS_VEST_P2,
+            xi.item.RAIDERS_ARMLETS_P2,
+            xi.item.RAIDERS_CULOTTES_P2,
+            xi.item.RAIDERS_POULAINES_P2,
         },
         minEquipped = 2,
         mods =
@@ -695,11 +695,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ORISON_CAP_P2,
-            xi.items.ORISON_BLIAUD_P2,
-            xi.items.ORISON_MITTS_P2,
-            xi.items.ORISON_PANTALOONS_P2,
-            xi.items.ORISON_DUCKBILLS_P2,
+            xi.item.ORISON_CAP_P2,
+            xi.item.ORISON_BLIAUD_P2,
+            xi.item.ORISON_MITTS_P2,
+            xi.item.ORISON_PANTALOONS_P2,
+            xi.item.ORISON_DUCKBILLS_P2,
         },
         minEquipped = 2,
         mods =
@@ -712,11 +712,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.SAVANTS_BONNET_P2,
-            xi.items.SAVANTS_GOWN_P2,
-            xi.items.SAVANTS_BRACERS_P2,
-            xi.items.SAVANTS_PANTS_P2,
-            xi.items.SAVANTS_LOAFERS_P2,
+            xi.item.SAVANTS_BONNET_P2,
+            xi.item.SAVANTS_GOWN_P2,
+            xi.item.SAVANTS_BRACERS_P2,
+            xi.item.SAVANTS_PANTS_P2,
+            xi.item.SAVANTS_LOAFERS_P2,
         },
         minEquipped = 2,
         mods =
@@ -729,15 +729,15 @@ local gearSets =
     {
         items =
         {
-            xi.items.PARAMOUNT_EARRING,
-            xi.items.SINFENDER,
-            xi.items.FLEETWING,
-            xi.items.KEBBIE,
-            xi.items.USESHI,
-            xi.items.FARSEER,
-            xi.items.AMANOKAKOYUMI,
-            xi.items.OSORAKU,
-            xi.items.BALISARDE,
+            xi.item.PARAMOUNT_EARRING,
+            xi.item.SINFENDER,
+            xi.item.FLEETWING,
+            xi.item.KEBBIE,
+            xi.item.USESHI,
+            xi.item.FARSEER,
+            xi.item.AMANOKAKOYUMI,
+            xi.item.OSORAKU,
+            xi.item.BALISARDE,
         },
         minEquipped = 2,
         maxEquipped = 2,
@@ -754,14 +754,14 @@ local gearSets =
     {
         items =
         {
-            xi.items.SUPREMACY_EARRING,
-            xi.items.ACANTHA_SHAVERS,
-            xi.items.CATALYST,
-            xi.items.MERVEILLEUSE,
-            xi.items.MURDERER,
-            xi.items.SKYSTRIDER,
-            xi.items.SPARTH,
-            xi.items.VENDETTA,
+            xi.item.SUPREMACY_EARRING,
+            xi.item.ACANTHA_SHAVERS,
+            xi.item.CATALYST,
+            xi.item.MERVEILLEUSE,
+            xi.item.MURDERER,
+            xi.item.SKYSTRIDER,
+            xi.item.SPARTH,
+            xi.item.VENDETTA,
         },
         minEquipped = 2,
         maxEquipped = 2,
@@ -778,15 +778,15 @@ local gearSets =
     {
         items =
         {
-            xi.items.BRILLIANT_EARRING,
-            xi.items.MUKADEMARU,
-            xi.items.ALASTOR,
-            xi.items.GRANDEUR,
-            xi.items.CLEARPATH,
-            xi.items.FAUCHEUSE,
-            xi.items.SILKTONE,
-            xi.items.BASILISK,
-            xi.items.YAGENTOSHIRO,
+            xi.item.BRILLIANT_EARRING,
+            xi.item.MUKADEMARU,
+            xi.item.ALASTOR,
+            xi.item.GRANDEUR,
+            xi.item.CLEARPATH,
+            xi.item.FAUCHEUSE,
+            xi.item.SILKTONE,
+            xi.item.BASILISK,
+            xi.item.YAGENTOSHIRO,
         },
         minEquipped = 2,
         maxEquipped = 2,
@@ -802,8 +802,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.TWILIGHT_HELM,
-            xi.items.TWILIGHT_MAIL,
+            xi.item.TWILIGHT_HELM,
+            xi.item.TWILIGHT_MAIL,
         },
         minEquipped = 2,
         mods =
@@ -816,8 +816,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.HOPE_STAFF,
+            xi.item.VIRTUE_STONE,
+            xi.item.HOPE_STAFF,
         },
         minEquipped = 2,
         mods =
@@ -830,8 +830,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.JUSTICE_SWORD,
+            xi.item.VIRTUE_STONE,
+            xi.item.JUSTICE_SWORD,
         },
         minEquipped = 2,
         mods =
@@ -844,8 +844,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.TEMPERANCE_AXE,
+            xi.item.VIRTUE_STONE,
+            xi.item.TEMPERANCE_AXE,
         },
         minEquipped = 2,
         mods =
@@ -858,8 +858,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.LOVE_HALBERD,
+            xi.item.VIRTUE_STONE,
+            xi.item.LOVE_HALBERD,
         },
         minEquipped = 2,
         mods =
@@ -872,8 +872,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.FORTITUDE_AXE,
+            xi.item.VIRTUE_STONE,
+            xi.item.FORTITUDE_AXE,
         },
         minEquipped = 2,
         mods =
@@ -886,8 +886,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.FAITH_BAGHNAKHS,
+            xi.item.VIRTUE_STONE,
+            xi.item.FAITH_BAGHNAKHS,
         },
         minEquipped = 2,
         mods =
@@ -900,8 +900,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
-            xi.items.PRUDENCE_ROD,
+            xi.item.VIRTUE_STONE,
+            xi.item.PRUDENCE_ROD,
         },
         minEquipped = 2,
         mods =
@@ -914,8 +914,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.STEELFLASH_EARRING,
-            xi.items.BLADEBORN_EARRING,
+            xi.item.STEELFLASH_EARRING,
+            xi.item.BLADEBORN_EARRING,
         },
         minEquipped = 2,
         mods =
@@ -928,8 +928,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.DUDGEON_EARRING,
-            xi.items.HEARTSEEKER_EARRING,
+            xi.item.DUDGEON_EARRING,
+            xi.item.HEARTSEEKER_EARRING,
         },
         minEquipped = 2,
         mods =
@@ -942,8 +942,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.LIFESTORM_EARRING,
-            xi.items.PSYSTORM_EARRING,
+            xi.item.LIFESTORM_EARRING,
+            xi.item.PSYSTORM_EARRING,
         },
         minEquipped = 2,
         mods =
@@ -956,16 +956,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.KASUGA_DOMARU,
-            xi.items.KASUGA_DOMARU_P1,
-            xi.items.KASUGA_SUNE_ATE_P1,
-            xi.items.KASUGA_HAIDATE,
-            xi.items.KASUGA_HAIDATE_P1,
-            xi.items.KASUGA_KABUTO,
-            xi.items.KASUGA_KABUTO_P1,
-            xi.items.KASUGA_KOTE,
-            xi.items.KASUGA_KOTE_P1,
-            xi.items.KASUGA_SUNE_ATE,
+            xi.item.KASUGA_DOMARU,
+            xi.item.KASUGA_DOMARU_P1,
+            xi.item.KASUGA_SUNE_ATE_P1,
+            xi.item.KASUGA_HAIDATE,
+            xi.item.KASUGA_HAIDATE_P1,
+            xi.item.KASUGA_KABUTO,
+            xi.item.KASUGA_KABUTO_P1,
+            xi.item.KASUGA_KOTE,
+            xi.item.KASUGA_KOTE_P1,
+            xi.item.KASUGA_SUNE_ATE,
         },
         minEquipped = 2,
         mods =
@@ -978,16 +978,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.BHIKKU_GAITERS_P1,
-            xi.items.BHIKKU_GAITERS,
-            xi.items.BHIKKU_HOSE_P1,
-            xi.items.BHIKKU_HOSE,
-            xi.items.BHIKKU_GLOVES_P1,
-            xi.items.BHIKKU_GLOVES,
-            xi.items.BHIKKU_CYCLAS_P1,
-            xi.items.BHIKKU_CYCLAS,
-            xi.items.BHIKKU_CROWN_P1,
-            xi.items.BHIKKU_CROWN,
+            xi.item.BHIKKU_GAITERS_P1,
+            xi.item.BHIKKU_GAITERS,
+            xi.item.BHIKKU_HOSE_P1,
+            xi.item.BHIKKU_HOSE,
+            xi.item.BHIKKU_GLOVES_P1,
+            xi.item.BHIKKU_GLOVES,
+            xi.item.BHIKKU_CYCLAS_P1,
+            xi.item.BHIKKU_CYCLAS,
+            xi.item.BHIKKU_CROWN_P1,
+            xi.item.BHIKKU_CROWN,
         },
         minEquipped = 2,
         mods =
@@ -1000,16 +1000,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.BOII_MASK,
-            xi.items.BOII_MASK_P1,
-            xi.items.BOII_CALLIGAE,
-            xi.items.BOII_CALLIGAE_P1,
-            xi.items.BOII_CUISSES_P1,
-            xi.items.BOII_CUISSES,
-            xi.items.BOII_MUFFLERS_P1,
-            xi.items.BOII_MUFFLERS,
-            xi.items.BOII_LORICA_P1,
-            xi.items.BOII_LORICA,
+            xi.item.BOII_MASK,
+            xi.item.BOII_MASK_P1,
+            xi.item.BOII_CALLIGAE,
+            xi.item.BOII_CALLIGAE_P1,
+            xi.item.BOII_CUISSES_P1,
+            xi.item.BOII_CUISSES,
+            xi.item.BOII_MUFFLERS_P1,
+            xi.item.BOII_MUFFLERS,
+            xi.item.BOII_LORICA_P1,
+            xi.item.BOII_LORICA,
         },
         minEquipped = 2,
         mods =
@@ -1022,16 +1022,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.SKULKERS_BONNET,
-            xi.items.SKULKERS_BONNET_P1,
-            xi.items.SKULKERS_POULAINES,
-            xi.items.SKULKERS_POULAINES_P1,
-            xi.items.SKULKERS_CULOTTES,
-            xi.items.SKULKERS_CULOTTES_P1,
-            xi.items.SKULKERS_ARMLETS_P1,
-            xi.items.SKULKERS_ARMLETS,
-            xi.items.SKULKERS_VEST,
-            xi.items.SKULKERS_VEST_P1,
+            xi.item.SKULKERS_BONNET,
+            xi.item.SKULKERS_BONNET_P1,
+            xi.item.SKULKERS_POULAINES,
+            xi.item.SKULKERS_POULAINES_P1,
+            xi.item.SKULKERS_CULOTTES,
+            xi.item.SKULKERS_CULOTTES_P1,
+            xi.item.SKULKERS_ARMLETS_P1,
+            xi.item.SKULKERS_ARMLETS,
+            xi.item.SKULKERS_VEST,
+            xi.item.SKULKERS_VEST_P1,
         },
         minEquipped = 2,
         mods =
@@ -1044,16 +1044,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.AMINI_CABAN,
-            xi.items.AMINI_CABAN_P1,
-            xi.items.AMINI_GAPETTE_P1,
-            xi.items.AMINI_GAPETTE,
-            xi.items.AMINI_BOTTILLONS,
-            xi.items.AMINI_BOTTILLONS_P1,
-            xi.items.AMINI_BRAGUE,
-            xi.items.AMINI_BRAGUE_P1,
-            xi.items.AMINI_GLOVELETTES,
-            xi.items.AMINI_GLOVELETTES_P1,
+            xi.item.AMINI_CABAN,
+            xi.item.AMINI_CABAN_P1,
+            xi.item.AMINI_GAPETTE_P1,
+            xi.item.AMINI_GAPETTE,
+            xi.item.AMINI_BOTTILLONS,
+            xi.item.AMINI_BOTTILLONS_P1,
+            xi.item.AMINI_BRAGUE,
+            xi.item.AMINI_BRAGUE_P1,
+            xi.item.AMINI_GLOVELETTES,
+            xi.item.AMINI_GLOVELETTES_P1,
         },
         minEquipped = 2,
         mods =
@@ -1066,16 +1066,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.CHEVALIERS_CUIRASS,
-            xi.items.CHEVALIERS_CUIRASS_P1,
-            xi.items.CHEVALIERS_ARMET,
-            xi.items.CHEVALIERS_ARMET_P1,
-            xi.items.CHEVALIERS_SABATONS_P1,
-            xi.items.CHEVALIERS_SABATONS,
-            xi.items.CHEVALIERS_GAUNTLETS,
-            xi.items.CHEVALIERS_GAUNTLETS_P1,
-            xi.items.CHEVALIERS_CUISSES,
-            xi.items.CHEVALIERS_CUISSES_P1,
+            xi.item.CHEVALIERS_CUIRASS,
+            xi.item.CHEVALIERS_CUIRASS_P1,
+            xi.item.CHEVALIERS_ARMET,
+            xi.item.CHEVALIERS_ARMET_P1,
+            xi.item.CHEVALIERS_SABATONS_P1,
+            xi.item.CHEVALIERS_SABATONS,
+            xi.item.CHEVALIERS_GAUNTLETS,
+            xi.item.CHEVALIERS_GAUNTLETS_P1,
+            xi.item.CHEVALIERS_CUISSES,
+            xi.item.CHEVALIERS_CUISSES_P1,
         },
         minEquipped = 2,
         mods =
@@ -1088,16 +1088,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.HATTORI_NINGI,
-            xi.items.HATTORI_NINGI_P1,
-            xi.items.HATTORI_ZUKIN,
-            xi.items.HATTORI_ZUKIN_P1,
-            xi.items.HATTORI_TEKKO,
-            xi.items.HATTORI_TEKKO_P1,
-            xi.items.HATTORI_HAKAMA,
-            xi.items.HATTORI_HAKAMA_P1,
-            xi.items.HATTORI_KYAHAN,
-            xi.items.HATTORI_KYAHAN_P1,
+            xi.item.HATTORI_NINGI,
+            xi.item.HATTORI_NINGI_P1,
+            xi.item.HATTORI_ZUKIN,
+            xi.item.HATTORI_ZUKIN_P1,
+            xi.item.HATTORI_TEKKO,
+            xi.item.HATTORI_TEKKO_P1,
+            xi.item.HATTORI_HAKAMA,
+            xi.item.HATTORI_HAKAMA_P1,
+            xi.item.HATTORI_KYAHAN,
+            xi.item.HATTORI_KYAHAN_P1,
         },
         minEquipped = 2,
         mods =
@@ -1110,16 +1110,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.CHASSEURS_BOTTES,
-            xi.items.CHASSEURS_BOTTES_P1,
-            xi.items.CHASSEURS_TRICORNE,
-            xi.items.CHASSEURS_TRICORNE_P1,
-            xi.items.CHASSEURS_FRAC,
-            xi.items.CHASSEURS_FRAC_P1,
-            xi.items.CHASSEURS_GANTS,
-            xi.items.CHASSEURS_GANTS_P1,
-            xi.items.CHASSEURS_CULOTTES,
-            xi.items.CHASSEURS_CULOTTES_P1,
+            xi.item.CHASSEURS_BOTTES,
+            xi.item.CHASSEURS_BOTTES_P1,
+            xi.item.CHASSEURS_TRICORNE,
+            xi.item.CHASSEURS_TRICORNE_P1,
+            xi.item.CHASSEURS_FRAC,
+            xi.item.CHASSEURS_FRAC_P1,
+            xi.item.CHASSEURS_GANTS,
+            xi.item.CHASSEURS_GANTS_P1,
+            xi.item.CHASSEURS_CULOTTES,
+            xi.item.CHASSEURS_CULOTTES_P1,
         },
         minEquipped = 2,
         mods =
@@ -1132,16 +1132,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.ARBATEL_PANTS,
-            xi.items.ARBATEL_PANTS_P1,
-            xi.items.ARBATEL_LOAFERS,
-            xi.items.ARBATEL_LOAFERS_P1,
-            xi.items.ARBATEL_BONNET,
-            xi.items.ARBATEL_BONNET_P1,
-            xi.items.ARBATEL_GOWN,
-            xi.items.ARBATEL_GOWN_P1,
-            xi.items.ARBATEL_BRACERS,
-            xi.items.ARBATEL_BRACERS_P1,
+            xi.item.ARBATEL_PANTS,
+            xi.item.ARBATEL_PANTS_P1,
+            xi.item.ARBATEL_LOAFERS,
+            xi.item.ARBATEL_LOAFERS_P1,
+            xi.item.ARBATEL_BONNET,
+            xi.item.ARBATEL_BONNET_P1,
+            xi.item.ARBATEL_GOWN,
+            xi.item.ARBATEL_GOWN_P1,
+            xi.item.ARBATEL_BRACERS,
+            xi.item.ARBATEL_BRACERS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1154,16 +1154,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.EBERS_PANTALOONS,
-            xi.items.EBERS_PANTALOONS_P1,
-            xi.items.EBERS_DUCKBILLS,
-            xi.items.EBERS_DUCKBILLS_P1,
-            xi.items.EBERS_CAP,
-            xi.items.EBERS_CAP_P1,
-            xi.items.EBERS_BLIAUD,
-            xi.items.EBERS_BLIAUD_P1,
-            xi.items.EBERS_MITTS,
-            xi.items.EBERS_MITTS_P1,
+            xi.item.EBERS_PANTALOONS,
+            xi.item.EBERS_PANTALOONS_P1,
+            xi.item.EBERS_DUCKBILLS,
+            xi.item.EBERS_DUCKBILLS_P1,
+            xi.item.EBERS_CAP,
+            xi.item.EBERS_CAP_P1,
+            xi.item.EBERS_BLIAUD,
+            xi.item.EBERS_BLIAUD_P1,
+            xi.item.EBERS_MITTS,
+            xi.item.EBERS_MITTS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1176,11 +1176,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.HEKAS_KALASIRIS,
-            xi.items.NEFER_KHAT,
-            xi.items.NEFER_KHAT_P1,
-            xi.items.NEFER_KALASIRIS,
-            xi.items.NEFER_KALASIRIS_P1,
+            xi.item.HEKAS_KALASIRIS,
+            xi.item.NEFER_KHAT,
+            xi.item.NEFER_KHAT_P1,
+            xi.item.NEFER_KALASIRIS,
+            xi.item.NEFER_KALASIRIS_P1,
         },
         minEquipped = 2,
         maxEquipped = 2,
@@ -1194,8 +1194,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.NASATYAS_RING,
-            xi.items.DASRAS_RING,
+            xi.item.NASATYAS_RING,
+            xi.item.DASRAS_RING,
         },
         minEquipped = 2,
         mods =
@@ -1209,8 +1209,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.HELENUSS_EARRING,
-            xi.items.CASSANDRAS_EARRING,
+            xi.item.HELENUSS_EARRING,
+            xi.item.CASSANDRAS_EARRING,
         },
         minEquipped = 2,
         mods =
@@ -1224,8 +1224,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.LAVAS_RING,
-            xi.items.KUSHAS_RING,
+            xi.item.LAVAS_RING,
+            xi.item.KUSHAS_RING,
         },
         minEquipped = 2,
         mods =
@@ -1240,11 +1240,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.IRON_RAM_SALLET,
-            xi.items.IRON_RAM_HAUBERK,
-            xi.items.IRON_RAM_DASTANAS,
-            xi.items.IRON_RAM_HOSE,
-            xi.items.IRON_RAM_GREAVES,
+            xi.item.IRON_RAM_SALLET,
+            xi.item.IRON_RAM_HAUBERK,
+            xi.item.IRON_RAM_DASTANAS,
+            xi.item.IRON_RAM_HOSE,
+            xi.item.IRON_RAM_GREAVES,
         },
         minEquipped = 2,
         mods =
@@ -1264,8 +1264,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.ALTDORFS_EARRING,
-            xi.items.WILHELMS_EARRING,
+            xi.item.ALTDORFS_EARRING,
+            xi.item.WILHELMS_EARRING,
         },
         minEquipped = 2,
         mods =
@@ -1278,8 +1278,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.GOTHIC_GAUNTLETS,
-            xi.items.GOTHIC_SABATONS,
+            xi.item.GOTHIC_GAUNTLETS,
+            xi.item.GOTHIC_SABATONS,
         },
         minEquipped = 2,
         mods =
@@ -1293,11 +1293,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.TEAL_CHAPEAU_P1,
-            xi.items.TEAL_SAIO_P1,
-            xi.items.TEAL_CUFFS_P1,
-            xi.items.TEAL_SLOPS_P1,
-            xi.items.TEAL_PIGACHES_P1,
+            xi.item.TEAL_CHAPEAU_P1,
+            xi.item.TEAL_SAIO_P1,
+            xi.item.TEAL_CUFFS_P1,
+            xi.item.TEAL_SLOPS_P1,
+            xi.item.TEAL_PIGACHES_P1,
         },
         minEquipped = 2,
         mods =
@@ -1310,11 +1310,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.AURORE_BERET_P1,
-            xi.items.AURORE_DOUBLET_P1,
-            xi.items.AURORE_GLOVES_P1,
-            xi.items.AURORE_BRAIS_P1,
-            xi.items.AURORE_GAITERS_P1,
+            xi.item.AURORE_BERET_P1,
+            xi.item.AURORE_DOUBLET_P1,
+            xi.item.AURORE_GLOVES_P1,
+            xi.item.AURORE_BRAIS_P1,
+            xi.item.AURORE_GAITERS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1327,11 +1327,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.PERLE_SALADE_P1,
-            xi.items.PERLE_HAUBERK_P1,
-            xi.items.PERLE_MOUFLES_P1,
-            xi.items.PERLE_BRAYETTES_P1,
-            xi.items.PERLE_SOLLERETS_P1,
+            xi.item.PERLE_SALADE_P1,
+            xi.item.PERLE_HAUBERK_P1,
+            xi.item.PERLE_MOUFLES_P1,
+            xi.item.PERLE_BRAYETTES_P1,
+            xi.item.PERLE_SOLLERETS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1344,11 +1344,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MORRIGANS_CORONAL_P1,
-            xi.items.MORRIGANS_ROBE_P1,
-            xi.items.MORRIGANS_CUFFS_P1,
-            xi.items.MORRIGANS_SLOPS_P1,
-            xi.items.MORRIGANS_PIGACHES_P1,
+            xi.item.MORRIGANS_CORONAL_P1,
+            xi.item.MORRIGANS_ROBE_P1,
+            xi.item.MORRIGANS_CUFFS_P1,
+            xi.item.MORRIGANS_SLOPS_P1,
+            xi.item.MORRIGANS_PIGACHES_P1,
         },
         minEquipped = 2,
         mods =
@@ -1361,11 +1361,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MARDUKS_TIARA_P1,
-            xi.items.MARDUKS_JUBBAH_P1,
-            xi.items.MARDUKS_DASTANAS_P1,
-            xi.items.MARDUKS_SHALWAR_P1,
-            xi.items.MARDUKS_CRACKOWS_P1,
+            xi.item.MARDUKS_TIARA_P1,
+            xi.item.MARDUKS_JUBBAH_P1,
+            xi.item.MARDUKS_DASTANAS_P1,
+            xi.item.MARDUKS_SHALWAR_P1,
+            xi.item.MARDUKS_CRACKOWS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1378,11 +1378,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.USUKANE_SOMEN_P1,
-            xi.items.USUKANE_HARAMAKI_P1,
-            xi.items.USUKANE_GOTE_P1,
-            xi.items.USUKANE_HIZAYOROI_P1,
-            xi.items.USUKANE_SUNE_ATE_P1,
+            xi.item.USUKANE_SOMEN_P1,
+            xi.item.USUKANE_HARAMAKI_P1,
+            xi.item.USUKANE_GOTE_P1,
+            xi.item.USUKANE_HIZAYOROI_P1,
+            xi.item.USUKANE_SUNE_ATE_P1,
         },
         minEquipped = 2,
         mods =
@@ -1395,11 +1395,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.SKADIS_VISOR_P1,
-            xi.items.SKADIS_CUIRIE_P1,
-            xi.items.SKADIS_BAZUBANDS_P1,
-            xi.items.SKADIS_CHAUSSES_P1,
-            xi.items.SKADIS_JAMBEAUX_P1,
+            xi.item.SKADIS_VISOR_P1,
+            xi.item.SKADIS_CUIRIE_P1,
+            xi.item.SKADIS_BAZUBANDS_P1,
+            xi.item.SKADIS_CHAUSSES_P1,
+            xi.item.SKADIS_JAMBEAUX_P1,
         },
         minEquipped = 2,
         mods =
@@ -1412,11 +1412,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ARES_MASK_P1,
-            xi.items.ARES_CUIRASS_P1,
-            xi.items.ARES_GAUNTLETS_P1,
-            xi.items.ARES_FLANCHARD_P1,
-            xi.items.ARES_SOLLERETS_P1,
+            xi.item.ARES_MASK_P1,
+            xi.item.ARES_CUIRASS_P1,
+            xi.item.ARES_GAUNTLETS_P1,
+            xi.item.ARES_FLANCHARD_P1,
+            xi.item.ARES_SOLLERETS_P1,
         },
         minEquipped = 2,
         mods =
@@ -1429,8 +1429,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.ALCEDO_GAUNTLETS,
-            xi.items.ALCEDO_CUISSES,
+            xi.item.ALCEDO_GAUNTLETS,
+            xi.item.ALCEDO_CUISSES,
         },
         minEquipped = 2,
         mods =
@@ -1443,12 +1443,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.SULEVIAS_RING,
-            xi.items.SULEVIAS_MASK_P2,
-            xi.items.SULEVIAS_PLATEMAIL_P2,
-            xi.items.SULEVIAS_GAUNTLETS_P2,
-            xi.items.SULEVIAS_CUISSES_P2,
-            xi.items.SULEVIAS_LEGGINGS_P2,
+            xi.item.SULEVIAS_RING,
+            xi.item.SULEVIAS_MASK_P2,
+            xi.item.SULEVIAS_PLATEMAIL_P2,
+            xi.item.SULEVIAS_GAUNTLETS_P2,
+            xi.item.SULEVIAS_CUISSES_P2,
+            xi.item.SULEVIAS_LEGGINGS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1462,12 +1462,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.HIZAMARU_RING,
-            xi.items.HIZAMARU_SOMEN_P2,
-            xi.items.HIZAMARU_HARAMAKI_P2,
-            xi.items.HIZAMARU_KOTE_P2,
-            xi.items.HIZAMARU_HIZAYOROI_P2,
-            xi.items.HIZAMARU_SUNE_ATE_P2,
+            xi.item.HIZAMARU_RING,
+            xi.item.HIZAMARU_SOMEN_P2,
+            xi.item.HIZAMARU_HARAMAKI_P2,
+            xi.item.HIZAMARU_KOTE_P2,
+            xi.item.HIZAMARU_HIZAYOROI_P2,
+            xi.item.HIZAMARU_SUNE_ATE_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1481,12 +1481,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.INYANGA_RING,
-            xi.items.INYANGA_TIARA_P2,
-            xi.items.INYANGA_JUBBAH_P2,
-            xi.items.INYANGA_DASTANAS_P2,
-            xi.items.INYANGA_SHALWAR_P2,
-            xi.items.INYANGA_CRACKOWS_P2,
+            xi.item.INYANGA_RING,
+            xi.item.INYANGA_TIARA_P2,
+            xi.item.INYANGA_JUBBAH_P2,
+            xi.item.INYANGA_DASTANAS_P2,
+            xi.item.INYANGA_SHALWAR_P2,
+            xi.item.INYANGA_CRACKOWS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1500,12 +1500,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.MEGHANADA_RING,
-            xi.items.MEGHANADA_VISOR_P2,
-            xi.items.MEGHANADA_CUIRIE_P2,
-            xi.items.MEGHANADA_GLOVES_P2,
-            xi.items.MEGHANADA_CHAUSSES_P2,
-            xi.items.MEGHANADA_JAMBEAUX_P2,
+            xi.item.MEGHANADA_RING,
+            xi.item.MEGHANADA_VISOR_P2,
+            xi.item.MEGHANADA_CUIRIE_P2,
+            xi.item.MEGHANADA_GLOVES_P2,
+            xi.item.MEGHANADA_CHAUSSES_P2,
+            xi.item.MEGHANADA_JAMBEAUX_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1519,12 +1519,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.JHAKRI_RING,
-            xi.items.JHAKRI_CORONAL_P2,
-            xi.items.JHAKRI_ROBE_P2,
-            xi.items.JHAKRI_CUFFS_P2,
-            xi.items.JHAKRI_SLOPS_P2,
-            xi.items.JHAKRI_PIGACHES_P2,
+            xi.item.JHAKRI_RING,
+            xi.item.JHAKRI_CORONAL_P2,
+            xi.item.JHAKRI_ROBE_P2,
+            xi.item.JHAKRI_CUFFS_P2,
+            xi.item.JHAKRI_SLOPS_P2,
+            xi.item.JHAKRI_PIGACHES_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1538,12 +1538,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.FLAMMA_RING,
-            xi.items.FLAMMA_ZUCCHETTO_P2,
-            xi.items.FLAMMA_KORAZIN_P2,
-            xi.items.FLAMMA_MANOPOLAS_P2,
-            xi.items.FLAMMA_DIRS_P2,
-            xi.items.FLAMMA_GAMBIERAS_P2,
+            xi.item.FLAMMA_RING,
+            xi.item.FLAMMA_ZUCCHETTO_P2,
+            xi.item.FLAMMA_KORAZIN_P2,
+            xi.item.FLAMMA_MANOPOLAS_P2,
+            xi.item.FLAMMA_DIRS_P2,
+            xi.item.FLAMMA_GAMBIERAS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1559,12 +1559,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.TALIAH_RING,
-            xi.items.TALIAH_TURBAN_P2,
-            xi.items.TALIAH_MANTEEL_P2,
-            xi.items.TALIAH_GAGES_P2,
-            xi.items.TALIAH_SERAWEELS_P2,
-            xi.items.TALIAH_CRACKOWS_P2,
+            xi.item.TALIAH_RING,
+            xi.item.TALIAH_TURBAN_P2,
+            xi.item.TALIAH_MANTEEL_P2,
+            xi.item.TALIAH_GAGES_P2,
+            xi.item.TALIAH_SERAWEELS_P2,
+            xi.item.TALIAH_CRACKOWS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1580,12 +1580,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.MUMMU_RING,
-            xi.items.MUMMU_BONNET_P2,
-            xi.items.MUMMU_JACKET_P2,
-            xi.items.MUMMU_WRISTS_P2,
-            xi.items.MUMMU_KECKS_P2,
-            xi.items.MUMMU_GAMASHES_P2,
+            xi.item.MUMMU_RING,
+            xi.item.MUMMU_BONNET_P2,
+            xi.item.MUMMU_JACKET_P2,
+            xi.item.MUMMU_WRISTS_P2,
+            xi.item.MUMMU_KECKS_P2,
+            xi.item.MUMMU_GAMASHES_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1601,12 +1601,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.AYANMO_RING,
-            xi.items.AYANMO_ZUCCHETTO_P2,
-            xi.items.AYANMO_CORAZZA_P2,
-            xi.items.AYANMO_MANOPOLAS_P2,
-            xi.items.AYANMO_COSCIALES_P2,
-            xi.items.AYANMO_GAMBIERAS_P2,
+            xi.item.AYANMO_RING,
+            xi.item.AYANMO_ZUCCHETTO_P2,
+            xi.item.AYANMO_CORAZZA_P2,
+            xi.item.AYANMO_MANOPOLAS_P2,
+            xi.item.AYANMO_COSCIALES_P2,
+            xi.item.AYANMO_GAMBIERAS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1622,12 +1622,12 @@ local gearSets =
     {
         items =
         {
-            xi.items.MALLQUIS_RING,
-            xi.items.MALLQUIS_CHAPEAU_P2,
-            xi.items.MALLQUIS_SAIO_P2,
-            xi.items.MALLQUIS_CUFFS_P2,
-            xi.items.MALLQUIS_TREWS_P2,
-            xi.items.MALLQUIS_CLOGS_P2,
+            xi.item.MALLQUIS_RING,
+            xi.item.MALLQUIS_CHAPEAU_P2,
+            xi.item.MALLQUIS_SAIO_P2,
+            xi.item.MALLQUIS_CUFFS_P2,
+            xi.item.MALLQUIS_TREWS_P2,
+            xi.item.MALLQUIS_CLOGS_P2,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1643,17 +1643,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.PUMMELERS_CALLIGAE_P2,
-            xi.items.PUMMELERS_CALLIGAE_P3,
-            xi.items.PUMMELERS_CUISSES_P2,
-            xi.items.PUMMELERS_CUISSES_P3,
-            xi.items.PUMMELERS_MUFFLERS_P2,
-            xi.items.PUMMELERS_MUFFLERS_P3,
-            xi.items.PUMMELERS_LORICA_P2,
-            xi.items.PUMMELERS_LORICA_P3,
-            xi.items.PUMMELERS_MASK_P2,
-            xi.items.PUMMELERS_MASK_P3,
+            xi.item.REGAL_RING,
+            xi.item.PUMMELERS_CALLIGAE_P2,
+            xi.item.PUMMELERS_CALLIGAE_P3,
+            xi.item.PUMMELERS_CUISSES_P2,
+            xi.item.PUMMELERS_CUISSES_P3,
+            xi.item.PUMMELERS_MUFFLERS_P2,
+            xi.item.PUMMELERS_MUFFLERS_P3,
+            xi.item.PUMMELERS_LORICA_P2,
+            xi.item.PUMMELERS_LORICA_P3,
+            xi.item.PUMMELERS_MASK_P2,
+            xi.item.PUMMELERS_MASK_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1669,17 +1669,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.ANCHORITES_GAITERS_P2,
-            xi.items.ANCHORITES_GAITERS_P3,
-            xi.items.ANCHORITES_HOSE_P2,
-            xi.items.ANCHORITES_HOSE_P3,
-            xi.items.ANCHORITES_GLOVES_P2,
-            xi.items.ANCHORITES_GLOVES_P3,
-            xi.items.ANCHORITES_CYCLAS_P2,
-            xi.items.ANCHORITES_CYCLAS_P3,
-            xi.items.ANCHORITES_CROWN_P2,
-            xi.items.ANCHORITES_CROWN_P3,
+            xi.item.REGAL_RING,
+            xi.item.ANCHORITES_GAITERS_P2,
+            xi.item.ANCHORITES_GAITERS_P3,
+            xi.item.ANCHORITES_HOSE_P2,
+            xi.item.ANCHORITES_HOSE_P3,
+            xi.item.ANCHORITES_GLOVES_P2,
+            xi.item.ANCHORITES_GLOVES_P3,
+            xi.item.ANCHORITES_CYCLAS_P2,
+            xi.item.ANCHORITES_CYCLAS_P3,
+            xi.item.ANCHORITES_CROWN_P2,
+            xi.item.ANCHORITES_CROWN_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1695,17 +1695,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.THEOPHANY_DUCKBILLS_P2,
-            xi.items.THEOPHANY_DUCKBILLS_P3,
-            xi.items.THEOPHANY_PANTALOONS_P2,
-            xi.items.THEOPHANY_PANTALOONS_P3,
-            xi.items.THEOPHANY_MITTS_P2,
-            xi.items.THEOPHANY_MITTS_P3,
-            xi.items.THEOPHANY_BRIAULT_P2,
-            xi.items.THEOPHANY_BRIAULT_P3,
-            xi.items.THEOPHANY_CAP_P2,
-            xi.items.THEOPHANY_CAP_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.THEOPHANY_DUCKBILLS_P2,
+            xi.item.THEOPHANY_DUCKBILLS_P3,
+            xi.item.THEOPHANY_PANTALOONS_P2,
+            xi.item.THEOPHANY_PANTALOONS_P3,
+            xi.item.THEOPHANY_MITTS_P2,
+            xi.item.THEOPHANY_MITTS_P3,
+            xi.item.THEOPHANY_BRIAULT_P2,
+            xi.item.THEOPHANY_BRIAULT_P3,
+            xi.item.THEOPHANY_CAP_P2,
+            xi.item.THEOPHANY_CAP_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1721,17 +1721,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.SPAEKONAS_SABOTS_P2,
-            xi.items.SPAEKONAS_SABOTS_P3,
-            xi.items.SPAEKONAS_TONBAN_P2,
-            xi.items.SPAEKONAS_TONBAN_P3,
-            xi.items.SPAEKONAS_GLOVES_P2,
-            xi.items.SPAEKONAS_GLOVES_P3,
-            xi.items.SPAEKONAS_COAT_P2,
-            xi.items.SPAEKONAS_COAT_P3,
-            xi.items.SPAEKONAS_PETASOS_P2,
-            xi.items.SPAEKONAS_PETASOS_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.SPAEKONAS_SABOTS_P2,
+            xi.item.SPAEKONAS_SABOTS_P3,
+            xi.item.SPAEKONAS_TONBAN_P2,
+            xi.item.SPAEKONAS_TONBAN_P3,
+            xi.item.SPAEKONAS_GLOVES_P2,
+            xi.item.SPAEKONAS_GLOVES_P3,
+            xi.item.SPAEKONAS_COAT_P2,
+            xi.item.SPAEKONAS_COAT_P3,
+            xi.item.SPAEKONAS_PETASOS_P2,
+            xi.item.SPAEKONAS_PETASOS_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1747,17 +1747,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.ATROPHY_BOOTS_P2,
-            xi.items.ATROPHY_BOOTS_P3,
-            xi.items.ATROPHY_TIGHTS_P2,
-            xi.items.ATROPHY_TIGHTS_P3,
-            xi.items.ATROPHY_GLOVES_P2,
-            xi.items.ATROPHY_GLOVES_P3,
-            xi.items.ATROPHY_TABARD_P2,
-            xi.items.ATROPHY_TABARD_P3,
-            xi.items.ATROPHY_CHAPEAU_P2,
-            xi.items.ATROPHY_CHAPEAU_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.ATROPHY_BOOTS_P2,
+            xi.item.ATROPHY_BOOTS_P3,
+            xi.item.ATROPHY_TIGHTS_P2,
+            xi.item.ATROPHY_TIGHTS_P3,
+            xi.item.ATROPHY_GLOVES_P2,
+            xi.item.ATROPHY_GLOVES_P3,
+            xi.item.ATROPHY_TABARD_P2,
+            xi.item.ATROPHY_TABARD_P3,
+            xi.item.ATROPHY_CHAPEAU_P2,
+            xi.item.ATROPHY_CHAPEAU_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1773,17 +1773,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.PILLAGERS_POULAINES_P2,
-            xi.items.PILLAGERS_POULAINES_P3,
-            xi.items.PILLAGERS_CULOTTES_P2,
-            xi.items.PILLAGERS_CULOTTES_P3,
-            xi.items.PILLAGERS_ARMLETS_P2,
-            xi.items.PILLAGERS_ARMLETS_P3,
-            xi.items.PILLAGERS_VEST_P2,
-            xi.items.PILLAGERS_VEST_P3,
-            xi.items.PILLAGERS_BONNET_P2,
-            xi.items.PILLAGERS_BONNET_P3,
+            xi.item.REGAL_RING,
+            xi.item.PILLAGERS_POULAINES_P2,
+            xi.item.PILLAGERS_POULAINES_P3,
+            xi.item.PILLAGERS_CULOTTES_P2,
+            xi.item.PILLAGERS_CULOTTES_P3,
+            xi.item.PILLAGERS_ARMLETS_P2,
+            xi.item.PILLAGERS_ARMLETS_P3,
+            xi.item.PILLAGERS_VEST_P2,
+            xi.item.PILLAGERS_VEST_P3,
+            xi.item.PILLAGERS_BONNET_P2,
+            xi.item.PILLAGERS_BONNET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1799,17 +1799,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.REVERENCE_LEGGINGS_P2,
-            xi.items.REVERENCE_LEGGINGS_P3,
-            xi.items.REVERENCE_BREECHES_P2,
-            xi.items.REVERENCE_BREECHES_P3,
-            xi.items.REVERENCE_GAUNTLETS_P2,
-            xi.items.REVERENCE_GAUNTLETS_P3,
-            xi.items.REVERENCE_SURCOAT_P2,
-            xi.items.REVERENCE_SURCOAT_P3,
-            xi.items.REVERENCE_CORONET_P2,
-            xi.items.REVERENCE_CORONET_P3,
+            xi.item.REGAL_RING,
+            xi.item.REVERENCE_LEGGINGS_P2,
+            xi.item.REVERENCE_LEGGINGS_P3,
+            xi.item.REVERENCE_BREECHES_P2,
+            xi.item.REVERENCE_BREECHES_P3,
+            xi.item.REVERENCE_GAUNTLETS_P2,
+            xi.item.REVERENCE_GAUNTLETS_P3,
+            xi.item.REVERENCE_SURCOAT_P2,
+            xi.item.REVERENCE_SURCOAT_P3,
+            xi.item.REVERENCE_CORONET_P2,
+            xi.item.REVERENCE_CORONET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1825,17 +1825,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.IGNOMINY_SOLLERETS_P2,
-            xi.items.IGNOMINY_SOLLERETS_P3,
-            xi.items.IGNOMINY_FLANCHARD_P2,
-            xi.items.IGNOMINY_FLANCHARD_P3,
-            xi.items.IGNOMINY_GAUNTLETS_P2,
-            xi.items.IGNOMINY_GAUNTLETS_P3,
-            xi.items.IGNOMINY_CUIRASS_P2,
-            xi.items.IGNOMINY_CUIRASS_P3,
-            xi.items.IGNOMINY_BURGEONET_P2,
-            xi.items.IGNOMINY_BURGEONET_P3,
+            xi.item.REGAL_RING,
+            xi.item.IGNOMINY_SOLLERETS_P2,
+            xi.item.IGNOMINY_SOLLERETS_P3,
+            xi.item.IGNOMINY_FLANCHARD_P2,
+            xi.item.IGNOMINY_FLANCHARD_P3,
+            xi.item.IGNOMINY_GAUNTLETS_P2,
+            xi.item.IGNOMINY_GAUNTLETS_P3,
+            xi.item.IGNOMINY_CUIRASS_P2,
+            xi.item.IGNOMINY_CUIRASS_P3,
+            xi.item.IGNOMINY_BURGEONET_P2,
+            xi.item.IGNOMINY_BURGEONET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1851,17 +1851,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.TOTEMIC_GAITERS_P2,
-            xi.items.TOTEMIC_GAITERS_P3,
-            xi.items.TOTEMIC_TROUSERS_P2,
-            xi.items.TOTEMIC_TROUSERS_P3,
-            xi.items.TOTEMIC_GLOVES_P2,
-            xi.items.TOTEMIC_GLOVES_P3,
-            xi.items.TOTEMIC_JACKCOAT_P2,
-            xi.items.TOTEMIC_JACKCOAT_P3,
-            xi.items.TOTEMIC_HELM_P2,
-            xi.items.TOTEMIC_HELM_P3,
+            xi.item.REGAL_RING,
+            xi.item.TOTEMIC_GAITERS_P2,
+            xi.item.TOTEMIC_GAITERS_P3,
+            xi.item.TOTEMIC_TROUSERS_P2,
+            xi.item.TOTEMIC_TROUSERS_P3,
+            xi.item.TOTEMIC_GLOVES_P2,
+            xi.item.TOTEMIC_GLOVES_P3,
+            xi.item.TOTEMIC_JACKCOAT_P2,
+            xi.item.TOTEMIC_JACKCOAT_P3,
+            xi.item.TOTEMIC_HELM_P2,
+            xi.item.TOTEMIC_HELM_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1877,17 +1877,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.BRIOSO_SLIPPERS_P2,
-            xi.items.BRIOSO_SLIPPERS_P3,
-            xi.items.BRIOSO_CANNIONS_P2,
-            xi.items.BRIOSO_CANNIONS_P3,
-            xi.items.BRIOSO_CUFFS_P2,
-            xi.items.BRIOSO_CUFFS_P3,
-            xi.items.BRIOSO_JUSTAUCORPS_P2,
-            xi.items.BRIOSO_JUSTAUCORPS_P3,
-            xi.items.BRIOSO_ROUNDLET_P2,
-            xi.items.BRIOSO_ROUNDLET_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.BRIOSO_SLIPPERS_P2,
+            xi.item.BRIOSO_SLIPPERS_P3,
+            xi.item.BRIOSO_CANNIONS_P2,
+            xi.item.BRIOSO_CANNIONS_P3,
+            xi.item.BRIOSO_CUFFS_P2,
+            xi.item.BRIOSO_CUFFS_P3,
+            xi.item.BRIOSO_JUSTAUCORPS_P2,
+            xi.item.BRIOSO_JUSTAUCORPS_P3,
+            xi.item.BRIOSO_ROUNDLET_P2,
+            xi.item.BRIOSO_ROUNDLET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1903,17 +1903,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.ORION_SOCKS_P2,
-            xi.items.ORION_SOCKS_P3,
-            xi.items.ORION_BRACCAE_P2,
-            xi.items.ORION_BRACCAE_P3,
-            xi.items.ORION_BRACERS_P2,
-            xi.items.ORION_BRACERS_P3,
-            xi.items.ORION_JERKIN_P2,
-            xi.items.ORION_JERKIN_P3,
-            xi.items.ORION_BERET_P2,
-            xi.items.ORION_BERET_P3,
+            xi.item.REGAL_RING,
+            xi.item.ORION_SOCKS_P2,
+            xi.item.ORION_SOCKS_P3,
+            xi.item.ORION_BRACCAE_P2,
+            xi.item.ORION_BRACCAE_P3,
+            xi.item.ORION_BRACERS_P2,
+            xi.item.ORION_BRACERS_P3,
+            xi.item.ORION_JERKIN_P2,
+            xi.item.ORION_JERKIN_P3,
+            xi.item.ORION_BERET_P2,
+            xi.item.ORION_BERET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1929,17 +1929,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.WAKIDO_SUNE_ATE_P2,
-            xi.items.WAKIDO_SUNE_ATE_P3,
-            xi.items.WAKIDO_HAIDATE_P2,
-            xi.items.WAKIDO_HAIDATE_P3,
-            xi.items.WAKIDO_KOTE_P2,
-            xi.items.WAKIDO_KOTE_P3,
-            xi.items.WAKIDO_DOMARU_P2,
-            xi.items.WAKIDO_DOMARU_P3,
-            xi.items.WAKIDO_KABUTO_P2,
-            xi.items.WAKIDO_KABUTO_P3,
+            xi.item.REGAL_RING,
+            xi.item.WAKIDO_SUNE_ATE_P2,
+            xi.item.WAKIDO_SUNE_ATE_P3,
+            xi.item.WAKIDO_HAIDATE_P2,
+            xi.item.WAKIDO_HAIDATE_P3,
+            xi.item.WAKIDO_KOTE_P2,
+            xi.item.WAKIDO_KOTE_P3,
+            xi.item.WAKIDO_DOMARU_P2,
+            xi.item.WAKIDO_DOMARU_P3,
+            xi.item.WAKIDO_KABUTO_P2,
+            xi.item.WAKIDO_KABUTO_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1955,17 +1955,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.HACHIYA_KYAHAN_P2,
-            xi.items.HACHIYA_KYAHAN_P3,
-            xi.items.HACHIYA_HAKAMA_P2,
-            xi.items.HACHIYA_HAKAMA_P3,
-            xi.items.HACHIYA_TEKKO_P2,
-            xi.items.HACHIYA_TEKKO_P3,
-            xi.items.HACHIYA_CHAINMAIL_P2,
-            xi.items.HACHIYA_CHAINMAIL_P3,
-            xi.items.HACHIYA_HATSUBURI_P2,
-            xi.items.HACHIYA_HATSUBURI_P3,
+            xi.item.REGAL_RING,
+            xi.item.HACHIYA_KYAHAN_P2,
+            xi.item.HACHIYA_KYAHAN_P3,
+            xi.item.HACHIYA_HAKAMA_P2,
+            xi.item.HACHIYA_HAKAMA_P3,
+            xi.item.HACHIYA_TEKKO_P2,
+            xi.item.HACHIYA_TEKKO_P3,
+            xi.item.HACHIYA_CHAINMAIL_P2,
+            xi.item.HACHIYA_CHAINMAIL_P3,
+            xi.item.HACHIYA_HATSUBURI_P2,
+            xi.item.HACHIYA_HATSUBURI_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -1981,17 +1981,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.VISHAP_GREAVES_P2,
-            xi.items.VISHAP_GREAVES_P3,
-            xi.items.VISHAP_BRAIS_P2,
-            xi.items.VISHAP_BRAIS_P3,
-            xi.items.VISHAP_FINGER_GAUNTLETS_P2,
-            xi.items.VISHAP_FINGER_GAUNTLETS_P3,
-            xi.items.VISHAP_MAIL_P2,
-            xi.items.VISHAP_MAIL_P3,
-            xi.items.VISHAP_ARMET_P2,
-            xi.items.VISHAP_ARMET_P3,
+            xi.item.REGAL_RING,
+            xi.item.VISHAP_GREAVES_P2,
+            xi.item.VISHAP_GREAVES_P3,
+            xi.item.VISHAP_BRAIS_P2,
+            xi.item.VISHAP_BRAIS_P3,
+            xi.item.VISHAP_FINGER_GAUNTLETS_P2,
+            xi.item.VISHAP_FINGER_GAUNTLETS_P3,
+            xi.item.VISHAP_MAIL_P2,
+            xi.item.VISHAP_MAIL_P3,
+            xi.item.VISHAP_ARMET_P2,
+            xi.item.VISHAP_ARMET_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2007,17 +2007,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_BELT,
-            xi.items.CONVOKERS_PIGACHES_P2,
-            xi.items.CONVOKERS_PIGACHES_P3,
-            xi.items.CONVOKERS_SPATS_P2,
-            xi.items.CONVOKERS_SPATS_P3,
-            xi.items.CONVOKERS_BRACERS_P2,
-            xi.items.CONVOKERS_BRACERS_P3,
-            xi.items.CONVOKERS_DOUBLET_P2,
-            xi.items.CONVOKERS_DOUBLET_P3,
-            xi.items.CONVOKERS_HORN_P2,
-            xi.items.CONVOKERS_HORN_P3,
+            xi.item.REGAL_BELT,
+            xi.item.CONVOKERS_PIGACHES_P2,
+            xi.item.CONVOKERS_PIGACHES_P3,
+            xi.item.CONVOKERS_SPATS_P2,
+            xi.item.CONVOKERS_SPATS_P3,
+            xi.item.CONVOKERS_BRACERS_P2,
+            xi.item.CONVOKERS_BRACERS_P3,
+            xi.item.CONVOKERS_DOUBLET_P2,
+            xi.item.CONVOKERS_DOUBLET_P3,
+            xi.item.CONVOKERS_HORN_P2,
+            xi.item.CONVOKERS_HORN_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2033,17 +2033,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.ASSIMILATORS_CHARUQS_P2,
-            xi.items.ASSIMILATORS_CHARUQS_P3,
-            xi.items.ASSIMILATORS_SHALWAR_P2,
-            xi.items.ASSIMILATORS_SHALWAR_P3,
-            xi.items.ASSIMILATORS_BAZUBANDS_P2,
-            xi.items.ASSIMILATORS_BAZUBANDS_P3,
-            xi.items.ASSIMILATORS_JUBBAH_P2,
-            xi.items.ASSIMILATORS_JUBBAH_P3,
-            xi.items.ASSIMILATORS_KEFFIYEH_P2,
-            xi.items.ASSIMILATORS_KEFFIYEH_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.ASSIMILATORS_CHARUQS_P2,
+            xi.item.ASSIMILATORS_CHARUQS_P3,
+            xi.item.ASSIMILATORS_SHALWAR_P2,
+            xi.item.ASSIMILATORS_SHALWAR_P3,
+            xi.item.ASSIMILATORS_BAZUBANDS_P2,
+            xi.item.ASSIMILATORS_BAZUBANDS_P3,
+            xi.item.ASSIMILATORS_JUBBAH_P2,
+            xi.item.ASSIMILATORS_JUBBAH_P3,
+            xi.item.ASSIMILATORS_KEFFIYEH_P2,
+            xi.item.ASSIMILATORS_KEFFIYEH_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2059,17 +2059,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.LAKSAMANAS_BOTTES_P2,
-            xi.items.LAKSAMANAS_BOTTES_P3,
-            xi.items.LAKSAMANAS_TREWS_P2,
-            xi.items.LAKSAMANAS_TREWS_P3,
-            xi.items.LASKAMANAS_GANTS_P2,
-            xi.items.LASKAMANAS_GANTS_P3,
-            xi.items.LAKSAMANAS_FRAC_P2,
-            xi.items.LAKSAMANAS_FRAC_P3,
-            xi.items.LAKSAMANAS_TRICORNE_P2,
-            xi.items.LAKSAMANAS_TRICORNE_P3,
+            xi.item.REGAL_RING,
+            xi.item.LAKSAMANAS_BOTTES_P2,
+            xi.item.LAKSAMANAS_BOTTES_P3,
+            xi.item.LAKSAMANAS_TREWS_P2,
+            xi.item.LAKSAMANAS_TREWS_P3,
+            xi.item.LASKAMANAS_GANTS_P2,
+            xi.item.LASKAMANAS_GANTS_P3,
+            xi.item.LAKSAMANAS_FRAC_P2,
+            xi.item.LAKSAMANAS_FRAC_P3,
+            xi.item.LAKSAMANAS_TRICORNE_P2,
+            xi.item.LAKSAMANAS_TRICORNE_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2085,17 +2085,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.FOIRE_BABOUCHES_P2,
-            xi.items.FOIRE_BABOUCHES_P3,
-            xi.items.FOIRE_CHURIDARS_P2,
-            xi.items.FOIRE_CHURIDARS_P3,
-            xi.items.FOIRE_DASTANAS_P2,
-            xi.items.FOIRE_DASTANAS_P3,
-            xi.items.FOIRE_TOBE_P2,
-            xi.items.FOIRE_TOBE_P3,
-            xi.items.FOIRE_TAJ_P2,
-            xi.items.FOIRE_TAJ_P3,
+            xi.item.REGAL_RING,
+            xi.item.FOIRE_BABOUCHES_P2,
+            xi.item.FOIRE_BABOUCHES_P3,
+            xi.item.FOIRE_CHURIDARS_P2,
+            xi.item.FOIRE_CHURIDARS_P3,
+            xi.item.FOIRE_DASTANAS_P2,
+            xi.item.FOIRE_DASTANAS_P3,
+            xi.item.FOIRE_TOBE_P2,
+            xi.item.FOIRE_TOBE_P3,
+            xi.item.FOIRE_TAJ_P2,
+            xi.item.FOIRE_TAJ_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2111,17 +2111,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.MAXIXI_TIARA_M_P2,
-            xi.items.MAXIXI_CASAQUE_M_P2,
-            xi.items.MAXIXI_BANGLES_M_P2,
-            xi.items.MAXIXI_TIGHTS_M_P2,
-            xi.items.MAXIXI_TOE_SHOES_M_P2,
-            xi.items.MAXIXI_TIARA_M_P3,
-            xi.items.MAXIXI_CASAQUE_M_P3,
-            xi.items.MAXIXI_BANGLES_M_P3,
-            xi.items.MAXIXI_TIGHTS_M_P3,
-            xi.items.MAXIXI_TOE_SHOES_M_P3,
+            xi.item.REGAL_RING,
+            xi.item.MAXIXI_TIARA_M_P2,
+            xi.item.MAXIXI_CASAQUE_M_P2,
+            xi.item.MAXIXI_BANGLES_M_P2,
+            xi.item.MAXIXI_TIGHTS_M_P2,
+            xi.item.MAXIXI_TOE_SHOES_M_P2,
+            xi.item.MAXIXI_TIARA_M_P3,
+            xi.item.MAXIXI_CASAQUE_M_P3,
+            xi.item.MAXIXI_BANGLES_M_P3,
+            xi.item.MAXIXI_TIGHTS_M_P3,
+            xi.item.MAXIXI_TOE_SHOES_M_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2137,17 +2137,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.MAXIXI_TIARA_F_P2,
-            xi.items.MAXIXI_CASAQUE_F_P2,
-            xi.items.MAXIXI_BANGLES_F_P2,
-            xi.items.MAXIXI_TIGHTS_F_P2,
-            xi.items.MAXIXI_TOE_SHOES_F_P2,
-            xi.items.MAXIXI_TIARA_F_P3,
-            xi.items.MAXIXI_CASAQUE_F_P3,
-            xi.items.MAXIXI_BANGLES_F_P3,
-            xi.items.MAXIXI_TIGHTS_F_P3,
-            xi.items.MAXIXI_TOE_SHOES_F_P3,
+            xi.item.REGAL_RING,
+            xi.item.MAXIXI_TIARA_F_P2,
+            xi.item.MAXIXI_CASAQUE_F_P2,
+            xi.item.MAXIXI_BANGLES_F_P2,
+            xi.item.MAXIXI_TIGHTS_F_P2,
+            xi.item.MAXIXI_TOE_SHOES_F_P2,
+            xi.item.MAXIXI_TIARA_F_P3,
+            xi.item.MAXIXI_CASAQUE_F_P3,
+            xi.item.MAXIXI_BANGLES_F_P3,
+            xi.item.MAXIXI_TIGHTS_F_P3,
+            xi.item.MAXIXI_TOE_SHOES_F_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2163,17 +2163,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.ACADEMICS_LOAFERS_P2,
-            xi.items.ACADEMICS_LOAFERS_P3,
-            xi.items.ACADEMICS_PANTS_P2,
-            xi.items.ACADEMICS_PANTS_P3,
-            xi.items.ACADEMICS_BRACERS_P2,
-            xi.items.ACADEMICS_BRACERS_P3,
-            xi.items.ACADEMICS_GOWN_P2,
-            xi.items.ACADEMICS_GOWN_P3,
-            xi.items.ACADEMICS_MORTARBOARD_P2,
-            xi.items.ACADEMICS_MORTARBOARD_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.ACADEMICS_LOAFERS_P2,
+            xi.item.ACADEMICS_LOAFERS_P3,
+            xi.item.ACADEMICS_PANTS_P2,
+            xi.item.ACADEMICS_PANTS_P3,
+            xi.item.ACADEMICS_BRACERS_P2,
+            xi.item.ACADEMICS_BRACERS_P3,
+            xi.item.ACADEMICS_GOWN_P2,
+            xi.item.ACADEMICS_GOWN_P3,
+            xi.item.ACADEMICS_MORTARBOARD_P2,
+            xi.item.ACADEMICS_MORTARBOARD_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2189,17 +2189,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_EARRING,
-            xi.items.GEOMANCY_SANDALS_P2,
-            xi.items.GEOMANCY_SANDALS_P3,
-            xi.items.GEOMANCY_PANTS_P2,
-            xi.items.GEOMANCY_PANTS_P3,
-            xi.items.GEOMANCY_MITAINES_P2,
-            xi.items.GEOMANCY_MITAINES_P3,
-            xi.items.GEOMANCY_TUNIC_P2,
-            xi.items.GEOMANCY_TUNIC_P3,
-            xi.items.GEOMANCY_GALERO_P2,
-            xi.items.GEOMANCY_GALERO_P3,
+            xi.item.REGAL_EARRING,
+            xi.item.GEOMANCY_SANDALS_P2,
+            xi.item.GEOMANCY_SANDALS_P3,
+            xi.item.GEOMANCY_PANTS_P2,
+            xi.item.GEOMANCY_PANTS_P3,
+            xi.item.GEOMANCY_MITAINES_P2,
+            xi.item.GEOMANCY_MITAINES_P3,
+            xi.item.GEOMANCY_TUNIC_P2,
+            xi.item.GEOMANCY_TUNIC_P3,
+            xi.item.GEOMANCY_GALERO_P2,
+            xi.item.GEOMANCY_GALERO_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2215,17 +2215,17 @@ local gearSets =
     {
         items =
         {
-            xi.items.REGAL_RING,
-            xi.items.RUNEIST_BOOTS_P2,
-            xi.items.RUNEIST_BOOTS_P3,
-            xi.items.RUNIEST_TROUSERS_P2,
-            xi.items.RUNEIST_TROUSERS_P3,
-            xi.items.RUNEIST_MITONS_P2,
-            xi.items.RUNEIST_MITONS_P3,
-            xi.items.RUNEIST_COAT_P2,
-            xi.items.RUNEIST_COAT_P3,
-            xi.items.RUNEIST_BANDEAU_P2,
-            xi.items.RUNEIST_BANDEAU_P3,
+            xi.item.REGAL_RING,
+            xi.item.RUNEIST_BOOTS_P2,
+            xi.item.RUNEIST_BOOTS_P3,
+            xi.item.RUNIEST_TROUSERS_P2,
+            xi.item.RUNEIST_TROUSERS_P3,
+            xi.item.RUNEIST_MITONS_P2,
+            xi.item.RUNEIST_MITONS_P3,
+            xi.item.RUNEIST_COAT_P2,
+            xi.item.RUNEIST_COAT_P3,
+            xi.item.RUNEIST_BANDEAU_P2,
+            xi.item.RUNEIST_BANDEAU_P3,
         },
         minEquipped = 2,
         maxEquipped = 5,
@@ -2241,11 +2241,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.OUTRIDER_MASK,
-            xi.items.OUTRIDER_MAIL,
-            xi.items.OUTRIDER_MITTENS,
-            xi.items.OUTRIDER_HOSE,
-            xi.items.OUTRIDER_GREAVES,
+            xi.item.OUTRIDER_MASK,
+            xi.item.OUTRIDER_MAIL,
+            xi.item.OUTRIDER_MITTENS,
+            xi.item.OUTRIDER_HOSE,
+            xi.item.OUTRIDER_GREAVES,
         },
         minEquipped = 5,
         mods =
@@ -2258,11 +2258,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ESPIAL_CAP,
-            xi.items.ESPIAL_GAMBISON,
-            xi.items.ESPIAL_BRACERS,
-            xi.items.ESPIAL_HOSE,
-            xi.items.ESPIAL_SOCKS,
+            xi.item.ESPIAL_CAP,
+            xi.item.ESPIAL_GAMBISON,
+            xi.item.ESPIAL_BRACERS,
+            xi.item.ESPIAL_HOSE,
+            xi.item.ESPIAL_SOCKS,
         },
         minEquipped = 5,
         mods =
@@ -2275,11 +2275,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.WAYFARER_CIRCLET,
-            xi.items.WAYFARER_ROBE,
-            xi.items.WAYFARER_CUFFS,
-            xi.items.WAYFARER_SLOPS,
-            xi.items.WAYFARER_CLOGS,
+            xi.item.WAYFARER_CIRCLET,
+            xi.item.WAYFARER_ROBE,
+            xi.item.WAYFARER_CUFFS,
+            xi.item.WAYFARER_SLOPS,
+            xi.item.WAYFARER_CLOGS,
         },
         minEquipped = 5,
         mods =
@@ -2292,11 +2292,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.APOGEE_CROWN_P1,
-            xi.items.APOGEE_DALMATICA_P1,
-            xi.items.APOGEE_MITTS_P1,
-            xi.items.APOGEE_SLACKS_P1,
-            xi.items.APOGEE_PUMPS_P1,
+            xi.item.APOGEE_CROWN_P1,
+            xi.item.APOGEE_DALMATICA_P1,
+            xi.item.APOGEE_MITTS_P1,
+            xi.item.APOGEE_SLACKS_P1,
+            xi.item.APOGEE_PUMPS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2309,11 +2309,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.RYUO_SOMEN_P1,
-            xi.items.RYUO_DOMARU_P1,
-            xi.items.RYUO_TEKKO_P1,
-            xi.items.RYUO_HAKAMA_P1,
-            xi.items.RYUO_SUNE_ATE_P1,
+            xi.item.RYUO_SOMEN_P1,
+            xi.item.RYUO_DOMARU_P1,
+            xi.item.RYUO_TEKKO_P1,
+            xi.item.RYUO_HAKAMA_P1,
+            xi.item.RYUO_SUNE_ATE_P1,
         },
         minEquipped = 2,
         mods =
@@ -2326,11 +2326,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.SOUVERAN_SCHALLER_P1,
-            xi.items.SOUVERAN_CUIRASS_P1,
-            xi.items.SOUVERAN_HANDSCHUHS_P1,
-            xi.items.SOUVERAN_DIECHLINGS_P1,
-            xi.items.SOUVERAN_SCHUHS_P1,
+            xi.item.SOUVERAN_SCHALLER_P1,
+            xi.item.SOUVERAN_CUIRASS_P1,
+            xi.item.SOUVERAN_HANDSCHUHS_P1,
+            xi.item.SOUVERAN_DIECHLINGS_P1,
+            xi.item.SOUVERAN_SCHUHS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2343,11 +2343,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.EMICHO_CORONET_P1,
-            xi.items.EMICHO_HAUBERT_P1,
-            xi.items.EMICHO_GAUNTLETS_P1,
-            xi.items.EMICHO_HOSE_P1,
-            xi.items.EMICHO_GAMBIERAS_P1,
+            xi.item.EMICHO_CORONET_P1,
+            xi.item.EMICHO_HAUBERT_P1,
+            xi.item.EMICHO_GAUNTLETS_P1,
+            xi.item.EMICHO_HOSE_P1,
+            xi.item.EMICHO_GAMBIERAS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2360,11 +2360,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.KAYKAUS_MITRA_P1,
-            xi.items.KAYKAUS_BLIAUT_P1,
-            xi.items.KAYKAUS_CUFFS_P1,
-            xi.items.KAYKAUS_TIGHTS_P1,
-            xi.items.KAYKAUS_BOOTS_P1,
+            xi.item.KAYKAUS_MITRA_P1,
+            xi.item.KAYKAUS_BLIAUT_P1,
+            xi.item.KAYKAUS_CUFFS_P1,
+            xi.item.KAYKAUS_TIGHTS_P1,
+            xi.item.KAYKAUS_BOOTS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2377,11 +2377,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.RAO_KABUTO_P1,
-            xi.items.RAO_TOGI_P1,
-            xi.items.RAO_KOTE_P1,
-            xi.items.RAO_HAIDATE_P1,
-            xi.items.RAO_SUNE_ATE_P1,
+            xi.item.RAO_KABUTO_P1,
+            xi.item.RAO_TOGI_P1,
+            xi.item.RAO_KOTE_P1,
+            xi.item.RAO_HAIDATE_P1,
+            xi.item.RAO_SUNE_ATE_P1,
         },
         minEquipped = 2,
         mods =
@@ -2394,11 +2394,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ADHEMAR_BONNET_P1,
-            xi.items.ADHEMAR_JACKET_P1,
-            xi.items.ADHEMAR_WRISTBANDS_P1,
-            xi.items.ADHEMAR_KECKS_P1,
-            xi.items.ADHEMAR_GAMASHES_P1,
+            xi.item.ADHEMAR_BONNET_P1,
+            xi.item.ADHEMAR_JACKET_P1,
+            xi.item.ADHEMAR_WRISTBANDS_P1,
+            xi.item.ADHEMAR_KECKS_P1,
+            xi.item.ADHEMAR_GAMASHES_P1,
         },
         minEquipped = 2,
         mods =
@@ -2411,11 +2411,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.CARMINE_MASK_P1,
-            xi.items.CARMINE_SCALE_MAIL_P1,
-            xi.items.CARMINE_FINGER_GAUNTLETS_P1,
-            xi.items.CARMINE_CUISSES_P1,
-            xi.items.CARMINE_GREAVES_P1,
+            xi.item.CARMINE_MASK_P1,
+            xi.item.CARMINE_SCALE_MAIL_P1,
+            xi.item.CARMINE_FINGER_GAUNTLETS_P1,
+            xi.item.CARMINE_CUISSES_P1,
+            xi.item.CARMINE_GREAVES_P1,
         },
         minEquipped = 2,
         mods =
@@ -2428,11 +2428,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.LUSTRATIO_CAP_P1,
-            xi.items.LUSTRATIO_HARNESS_P1,
-            xi.items.LUSTRATIO_MITTENS_P1,
-            xi.items.LUSTRATIO_SUBLIGAR_P1,
-            xi.items.LUSTRATIO_LEGGINGS_P1,
+            xi.item.LUSTRATIO_CAP_P1,
+            xi.item.LUSTRATIO_HARNESS_P1,
+            xi.item.LUSTRATIO_MITTENS_P1,
+            xi.item.LUSTRATIO_SUBLIGAR_P1,
+            xi.item.LUSTRATIO_LEGGINGS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2445,11 +2445,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.ARGOSY_CELATA_P1,
-            xi.items.ARGOSY_HAUBERK_P1,
-            xi.items.ARGOSY_MUFFLERS_P1,
-            xi.items.ARGOSY_BREECHES_P1,
-            xi.items.ARGOSY_SOLLERETS_P1,
+            xi.item.ARGOSY_CELATA_P1,
+            xi.item.ARGOSY_HAUBERK_P1,
+            xi.item.ARGOSY_MUFFLERS_P1,
+            xi.item.ARGOSY_BREECHES_P1,
+            xi.item.ARGOSY_SOLLERETS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2462,11 +2462,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.AMALRIC_COIF_P1,
-            xi.items.AMALRIC_DOUBLET_P1,
-            xi.items.AMALRIC_GAGES_P1,
-            xi.items.AMALRIC_SLOPS_P1,
-            xi.items.AMALRIC_NAILS_P1,
+            xi.item.AMALRIC_COIF_P1,
+            xi.item.AMALRIC_DOUBLET_P1,
+            xi.item.AMALRIC_GAGES_P1,
+            xi.item.AMALRIC_SLOPS_P1,
+            xi.item.AMALRIC_NAILS_P1,
         },
         minEquipped = 2,
         mods =
@@ -2479,8 +2479,8 @@ local gearSets =
     {
         items =
         {
-            xi.items.MOLIONESS_SICKLE,
-            xi.items.MOLIONESS_RING,
+            xi.item.MOLIONESS_SICKLE,
+            xi.item.MOLIONESS_RING,
         },
         minEquipped = 2,
         mods =
@@ -2494,11 +2494,11 @@ local gearSets =
     {
         items =
         {
-            xi.items.MAVI_KAVUK_P2,
-            xi.items.MAVI_MINTAN_P2,
-            xi.items.MAVI_BAZUBANDS_P2,
-            xi.items.MAVI_TAYT_P2,
-            xi.items.MAVI_BASMAK_P2,
+            xi.item.MAVI_KAVUK_P2,
+            xi.item.MAVI_MINTAN_P2,
+            xi.item.MAVI_BAZUBANDS_P2,
+            xi.item.MAVI_TAYT_P2,
+            xi.item.MAVI_BASMAK_P2,
         },
         minEquipped = 2,
         mods =
@@ -2511,16 +2511,16 @@ local gearSets =
     {
         items =
         {
-            xi.items.HASHISHIN_KAVUK,
-            xi.items.HASHISHIN_KAVUK_P1,
-            xi.items.HASHISHIN_MINTAN,
-            xi.items.HASHISHIN_MINTAN_P1,
-            xi.items.HASHISHIN_BAZUBANDS,
-            xi.items.HASHISHIN_BAZUBANDS_P1,
-            xi.items.HASHISHIN_TAYT,
-            xi.items.HASHISHIN_TAYT_P1,
-            xi.items.HASHISHIN_BASMAK,
-            xi.items.HASHISHIN_BASMAK_P1,
+            xi.item.HASHISHIN_KAVUK,
+            xi.item.HASHISHIN_KAVUK_P1,
+            xi.item.HASHISHIN_MINTAN,
+            xi.item.HASHISHIN_MINTAN_P1,
+            xi.item.HASHISHIN_BAZUBANDS,
+            xi.item.HASHISHIN_BAZUBANDS_P1,
+            xi.item.HASHISHIN_TAYT,
+            xi.item.HASHISHIN_TAYT_P1,
+            xi.item.HASHISHIN_BASMAK,
+            xi.item.HASHISHIN_BASMAK_P1,
         },
         minEquipped = 2,
         mods =

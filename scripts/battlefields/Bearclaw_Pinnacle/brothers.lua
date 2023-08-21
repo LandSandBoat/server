@@ -57,25 +57,25 @@ content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
 content.loot =
 {
     {
-        { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_LOW },
-        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL   },
-        { item = xi.items.PIECE_OF_CASSIA_LUMBER,   weight = xi.loot.weight.NORMAL   },
-        { item = xi.items.DRAGON_BONE,              weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_LOW },
+        { item = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.DRAGON_BONE,              weight = xi.loot.weight.NORMAL   },
     },
 
     {
-        { item = xi.items.NONE,         weight = xi.loot.weight.EXTREMELY_HIGH },
-        { item = xi.items.CLOUD_EVOKER, weight = xi.loot.weight.LOW            },
+        { item = xi.item.NONE,         weight = xi.loot.weight.EXTREMELY_HIGH },
+        { item = xi.item.CLOUD_EVOKER, weight = xi.loot.weight.LOW            },
     },
 
     {
         quantity = 2,
-        { item = xi.items.NONE,                weight = xi.loot.weight.HIGH },
-        { item = xi.items.SCOUTERS_ROPE,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.HEDGEHOG_BOMB,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.MARTIAL_ANELACE,     weight = xi.loot.weight.LOW  },
-        { item = xi.items.MARTIAL_LANCE,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
+        { item = xi.item.NONE,                weight = xi.loot.weight.HIGH },
+        { item = xi.item.SCOUTERS_ROPE,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.HEDGEHOG_BOMB,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.MARTIAL_ANELACE,     weight = xi.loot.weight.LOW  },
+        { item = xi.item.MARTIAL_LANCE,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
     },
 }
 

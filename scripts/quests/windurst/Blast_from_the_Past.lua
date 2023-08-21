@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.GREAT_CLUB,
+    item     = xi.item.GREAT_CLUB,
     title    = xi.title.FOSSILIZED_SEA_FARER,
 }
 
@@ -53,7 +53,7 @@ quest.sections =
             ['Koru-Moru'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BURNITE_SHELL_STONE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BURNITE_SHELL_STONE) then
                         return quest:progressEvent(224)
                     else
                         return quest:event(225)
@@ -129,7 +129,7 @@ quest.sections =
                     if rockOffset == 8 then
                         if
                             not GetMobByID(shakhramiID.mob.ICHOROUS_IRE):isSpawned() and
-                            not player:hasItem(xi.items.BURNITE_SHELL_STONE)
+                            not player:hasItem(xi.item.BURNITE_SHELL_STONE)
                         then
                             SpawnMob(shakhramiID.mob.ICHOROUS_IRE):updateClaim(player)
                         else

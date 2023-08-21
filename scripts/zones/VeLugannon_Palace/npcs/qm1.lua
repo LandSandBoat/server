@@ -13,14 +13,14 @@ end
 entity.onTrigger = function(player, npc)
     local hideTime = 0
 
-    if not player:hasItem(xi.items.CURTANA) and player:getFreeSlotsCount() >= 1 then
-        player:addItem(xi.items.CURTANA)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CURTANA) -- Curtana
+    if not player:hasItem(xi.item.CURTANA) and player:getFreeSlotsCount() >= 1 then
+        player:addItem(xi.item.CURTANA)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CURTANA) -- Curtana
 
         -- ??? dissapears for 2 hours and reappears on new position
         hideTime = 7200
     else
-        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CURTANA) -- Curtana
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CURTANA) -- Curtana
 
         -- ??? just change position
         hideTime = 1

@@ -13,13 +13,13 @@ entity.onTrade = function(player, npc, trade)
 
         if
             letterBlue == 2 and
-            npcUtil.tradeHas(trade, { xi.items.MYTHRIL_SHEET, xi.items.SQUARE_OF_KARAKUL_LEATHER, xi.items.SQUARE_OF_LM_BUFFALO_LEATHER, xi.items.SQUARE_OF_WOLF_FELT }) -- mythril sheet, karakul leather, laminated buffalo leather, wolf felt
+            npcUtil.tradeHas(trade, { xi.item.MYTHRIL_SHEET, xi.item.SQUARE_OF_KARAKUL_LEATHER, xi.item.SQUARE_OF_LM_BUFFALO_LEATHER, xi.item.SQUARE_OF_WOLF_FELT }) -- mythril sheet, karakul leather, laminated buffalo leather, wolf felt
         then
             player:startEvent(521) -- accepts materials, now bring me 4 imperial mythril pieces
 
         elseif
             letterBlue == 3 and
-            npcUtil.tradeHas(trade, { { xi.items.IMPERIAL_MYTHRIL_PIECE, 4 } }) -- 4 imperial mythril pieces
+            npcUtil.tradeHas(trade, { { xi.item.IMPERIAL_MYTHRIL_PIECE, 4 } }) -- 4 imperial mythril pieces
         then
             player:startEvent(524) -- accepts mythril pieces, now wait for next vana'diel day
         end
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif
         csid == 522 and
-        npcUtil.giveItem(player, xi.items.CORSAIRS_BOTTES)
+        npcUtil.giveItem(player, xi.item.CORSAIRS_BOTTES)
     then
         player:setCharVar("LeleroonsletterBlue", 5)
     end

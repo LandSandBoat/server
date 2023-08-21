@@ -9,9 +9,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local spawnChance = 0
-    if npcUtil.tradeHas(trade, xi.items.BUNCH_OF_PAMAMAS) then
+    if npcUtil.tradeHas(trade, xi.item.BUNCH_OF_PAMAMAS) then
         spawnChance = 5
-    elseif npcUtil.tradeHas(trade, xi.items.BUNCH_OF_WILD_PAMAMAS) then
+    elseif npcUtil.tradeHas(trade, xi.item.BUNCH_OF_WILD_PAMAMAS) then
         spawnChance = 50
     end
 

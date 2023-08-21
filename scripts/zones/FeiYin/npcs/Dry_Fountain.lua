@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.ANTIQUE_COIN, 1) and
+            trade:hasItemQty(xi.item.ANTIQUE_COIN, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(17)

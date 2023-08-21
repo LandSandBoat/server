@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.TATHLUM, 8) -- tathlum
+    target:addItem(xi.item.TATHLUM, 8) -- tathlum
 end
 
 return itemObject

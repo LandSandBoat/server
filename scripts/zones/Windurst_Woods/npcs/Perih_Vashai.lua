@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     -- FIRE AND BRIMSTONE
     if
         player:getCharVar("fireAndBrimstone") == 5 and
-        npcUtil.tradeHas(trade, xi.items.OLD_EARRING)
+        npcUtil.tradeHas(trade, xi.item.OLD_EARRING)
     then
         -- old earring
         player:startEvent(537, 0, 13360)
@@ -70,9 +70,9 @@ entity.onTrigger = function(player, npc)
     elseif fireAndBrimstoneCS > 0 and fireAndBrimstoneCS < 4 then
         player:startEvent(532) -- during RNG AF2
     elseif fireAndBrimstoneCS == 4 then
-        player:startEvent(535, 0, 13360, xi.items.OLD_EARRING) -- second part RNG AF2
+        player:startEvent(535, 0, 13360, xi.item.OLD_EARRING) -- second part RNG AF2
     elseif fireAndBrimstoneCS == 5 then
-        player:startEvent(536, 0, 13360, xi.items.OLD_EARRING) -- during second part RNG AF2
+        player:startEvent(536, 0, 13360, xi.item.OLD_EARRING) -- during second part RNG AF2
 
     -- UNBRIDLED PASSION
     elseif

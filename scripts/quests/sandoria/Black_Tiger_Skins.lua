@@ -11,7 +11,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.TIGER_STOLE,
+    item = xi.item.TIGER_STOLE,
     itemParams = { fromTrade = true },
     title = xi.title.CAT_SKINNER,
 }
@@ -69,7 +69,7 @@ quest.sections =
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.TIGER_HIDE, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.TIGER_HIDE, 3 } }) then
                         return quest:progressEvent(577)
                     end
                 end,

@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHI
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_GOLD_PIECE,
+    item = xi.item.IMPERIAL_GOLD_PIECE,
     title = xi.title.SPRINGSERPENT_SENTRY
 }
 
@@ -116,7 +116,7 @@ quest.sections =
             ['qm10'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.TUFT_OF_COLORFUL_HAIR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.TUFT_OF_COLORFUL_HAIR) then
                         return quest:progressCutscene(34)
                     end
                 end,

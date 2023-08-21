@@ -181,7 +181,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CURSED_KEY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CURSED_KEY) and
                         player:getZPos() < 332 and
                         player:getMissionStatus(mission.areaId) >= 3
                     then

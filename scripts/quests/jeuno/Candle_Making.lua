@@ -46,7 +46,7 @@ quest.sections =
             ['Rouliette'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LANOLIN_CUBE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LANOLIN_CUBE) then
                         return quest:progressEvent(37)
                     end
                 end,

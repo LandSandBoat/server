@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMS
 
 quest.reward =
 {
-    item     = xi.items.FENCING_DEGEN,
+    item     = xi.item.FENCING_DEGEN,
     fame     = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
 }
@@ -94,7 +94,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.DAVOI_STORAGE_KEY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.DAVOI_STORAGE_KEY) and
                         not player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
                     then
                         player:tradeComplete()

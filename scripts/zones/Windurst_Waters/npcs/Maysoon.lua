@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.SERVING_OF_ROYAL_JELLY, 1) and
+            trade:hasItemQty(xi.item.SERVING_OF_ROYAL_JELLY, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then

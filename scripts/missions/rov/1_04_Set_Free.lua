@@ -18,7 +18,7 @@ local handleTradeEventFinish = function(player, csid, option, npc)
     if not player:hasJob(0) then
         npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
     else
-        if not npcUtil.giveItem(player, xi.items.COPPER_AMAN_VOUCHER) then
+        if not npcUtil.giveItem(player, xi.item.COPPER_AMAN_VOUCHER) then
             -- Do not complete mission or confirm trade if the player is not
             -- able to receive the reward.  Instead, bail out here.
             return
@@ -45,7 +45,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.CLUMP_OF_BEE_POLLEN, 3 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.CLUMP_OF_BEE_POLLEN, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 1
                     then
                         return mission:progressEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
@@ -69,7 +69,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.MANDRAGORA_DEWDROP, 3 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.MANDRAGORA_DEWDROP, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 2
                     then
                         return mission:progressEvent(370, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)

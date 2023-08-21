@@ -46,7 +46,7 @@ quest.sections =
             ['Giwahb_Watchtower'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.FRAYED_ARROW) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.FRAYED_ARROW) then
                         return quest:progressEvent(512)
                     end
                 end,

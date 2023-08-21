@@ -17,8 +17,8 @@ quest.reward =
 
 local requiredTradeItems =
 {
-    { xi.items.RABBIT_HIDE, 3 },
-    { xi.items.RAAZ_TUSK,   1 },
+    { xi.item.RABBIT_HIDE, 3 },
+    { xi.item.RAAZ_TUSK,   1 },
 }
 
 quest.sections =

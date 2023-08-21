@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.DARK_CARD, 99)
+    target:addItem(xi.item.DARK_CARD, 99)
 end
 
 return itemObject

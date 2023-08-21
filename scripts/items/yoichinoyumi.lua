@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.items.YOICHIS_ARROW, 99 } })
+    npcUtil.giveItem(target, { { xi.item.YOICHIS_ARROW, 99 } })
 end
 
 return itemObject

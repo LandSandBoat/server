@@ -107,11 +107,11 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, {
-                            xi.items.MANNEQUIN_HEAD,
-                            xi.items.MANNEQUIN_BODY,
-                            xi.items.MANNEQUIN_HANDS,
-                            xi.items.MANNEQUIN_LEGS,
-                            xi.items.MANNEQUIN_FEET
+                            xi.item.MANNEQUIN_HEAD,
+                            xi.item.MANNEQUIN_BODY,
+                            xi.item.MANNEQUIN_HANDS,
+                            xi.item.MANNEQUIN_LEGS,
+                            xi.item.MANNEQUIN_FEET
                         })
                     then
                         return quest:progressEvent(309)
@@ -155,7 +155,7 @@ quest.sections =
             {
                 [311] = function(player, csid, option, npc)
                     local race = player:getRace()
-                    local chosenMannequin = xi.items.HUME_M_MANNEQUIN + race - 1
+                    local chosenMannequin = xi.item.HUME_M_MANNEQUIN + race - 1
                     if player:getFreeSlotsCount() > 0 and not player:hasItem(chosenMannequin) then
                         if quest:complete(player) then
                             player:tradeComplete()

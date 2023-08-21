@@ -9,11 +9,11 @@ local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.FEAR_GORTA, { xi.items.SQUARE_OF_MOONGLOW_CLOTH })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.FEAR_GORTA, { xi.item.SQUARE_OF_MOONGLOW_CLOTH })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SQUARE_OF_MOONGLOW_CLOTH })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.SQUARE_OF_MOONGLOW_CLOTH })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

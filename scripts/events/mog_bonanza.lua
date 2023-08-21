@@ -98,32 +98,32 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.ICE_BRAND,
-            [ 1] = xi.items.ONION_SWORD_III,
-            [ 2] = xi.items.AIR_KNIFE,
-            [ 3] = xi.items.ZANMATO_P2,
-            [ 4] = xi.items.DRAGON_FANGS,
-            [ 5] = xi.items.MALEFIC_AXE,
-            [ 6] = xi.items.DRASTIC_AXE,
-            [ 7] = xi.items.ARTEMISS_BOW_P2,
-            [ 8] = xi.items.MIRACLE_CHEER,
-            [ 9] = xi.items.FINAL_SICKLE,
-            [10] = xi.items.PANDITS_STAFF,
-            [11] = xi.items.CHOCOBO_KNIFE,
-            [12] = xi.items.DIAMOND_ASPIS,
-            [13] = xi.items.FLAMETONGUE,
-            [14] = xi.items.MUTSU_NO_KAMI_YOSHIYUKI,
-            [15] = xi.items.HEBOS_SPEAR,
-            [16] = xi.items.PREMIUM_HEART,
-            [17] = xi.items.SAVE_THE_QUEEN_III,
-            [18] = xi.items.YAGYU_DARKBLADE,
-            [19] = xi.items.BRAVE_BLADE_III,
-            [20] = xi.items.WIZARDS_ROD,
-            [21] = xi.items.EXETER,
-            [22] = xi.items.COPY_OF_JUDGMENT_DAY,
-            [23] = xi.items.EBISU_FISHING_ROD,
-            [24] = xi.items.MOG_KUPON_AW_KUPO,
-            [25] = xi.items.ABDHALJS_TOME,
+            [ 0] = xi.item.ICE_BRAND,
+            [ 1] = xi.item.ONION_SWORD_III,
+            [ 2] = xi.item.AIR_KNIFE,
+            [ 3] = xi.item.ZANMATO_P2,
+            [ 4] = xi.item.DRAGON_FANGS,
+            [ 5] = xi.item.MALEFIC_AXE,
+            [ 6] = xi.item.DRASTIC_AXE,
+            [ 7] = xi.item.ARTEMISS_BOW_P2,
+            [ 8] = xi.item.MIRACLE_CHEER,
+            [ 9] = xi.item.FINAL_SICKLE,
+            [10] = xi.item.PANDITS_STAFF,
+            [11] = xi.item.CHOCOBO_KNIFE,
+            [12] = xi.item.DIAMOND_ASPIS,
+            [13] = xi.item.FLAMETONGUE,
+            [14] = xi.item.MUTSU_NO_KAMI_YOSHIYUKI,
+            [15] = xi.item.HEBOS_SPEAR,
+            [16] = xi.item.PREMIUM_HEART,
+            [17] = xi.item.SAVE_THE_QUEEN_III,
+            [18] = xi.item.YAGYU_DARKBLADE,
+            [19] = xi.item.BRAVE_BLADE_III,
+            [20] = xi.item.WIZARDS_ROD,
+            [21] = xi.item.EXETER,
+            [22] = xi.item.COPY_OF_JUDGMENT_DAY,
+            [23] = xi.item.EBISU_FISHING_ROD,
+            [24] = xi.item.MOG_KUPON_AW_KUPO,
+            [25] = xi.item.ABDHALJS_TOME,
         },
     },
 
@@ -134,26 +134,26 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.MOG_KUPON_A_OMII,
-            [ 1] = xi.items.MOG_KUPON_AW_UWIII,
-            [ 2] = xi.items.MOG_KUPON_I_AF119,
-            [ 3] = xi.items.MOG_KUPON_AW_VGR,
-            [ 4] = xi.items.MOG_KUPON_I_RME,
-            [ 5] = xi.items.MOG_KUPON_W_PULSE,
-            [ 6] = xi.items.MOG_KUPON_AW_VGRII,
-            [ 7] = xi.items.MOG_KUPON_W_JOB,
-            [ 8] = xi.items.MOG_KUPON_A_DEII,
-            [ 9] = xi.items.MOG_KUPON_W_DEIII,
-            [10] = xi.items.WAILING_BELT,
-            [11] = xi.items.SHAPERS_SHAWL,
-            [12] = xi.items.TEN_THOUSAND_BYNE_BILL,
-            [13] = xi.items.RANPERRE_GOLDPIECE,
-            [14] = xi.items.RIMILALA_STRIPESHELL,
-            [15] = xi.items.BAYLD_CRYSTAL,
-            [16] = xi.items.DENSE_CLUSTER,
-            [17] = xi.items.CATS_EYE,
-            [18] = xi.items.MOG_KUPON_AW_GFIII,
-            [19] = xi.items.LU_SHANGS_FISHING_ROD,
+            [ 0] = xi.item.MOG_KUPON_A_OMII,
+            [ 1] = xi.item.MOG_KUPON_AW_UWIII,
+            [ 2] = xi.item.MOG_KUPON_I_AF119,
+            [ 3] = xi.item.MOG_KUPON_AW_VGR,
+            [ 4] = xi.item.MOG_KUPON_I_RME,
+            [ 5] = xi.item.MOG_KUPON_W_PULSE,
+            [ 6] = xi.item.MOG_KUPON_AW_VGRII,
+            [ 7] = xi.item.MOG_KUPON_W_JOB,
+            [ 8] = xi.item.MOG_KUPON_A_DEII,
+            [ 9] = xi.item.MOG_KUPON_W_DEIII,
+            [10] = xi.item.WAILING_BELT,
+            [11] = xi.item.SHAPERS_SHAWL,
+            [12] = xi.item.TEN_THOUSAND_BYNE_BILL,
+            [13] = xi.item.RANPERRE_GOLDPIECE,
+            [14] = xi.item.RIMILALA_STRIPESHELL,
+            [15] = xi.item.BAYLD_CRYSTAL,
+            [16] = xi.item.DENSE_CLUSTER,
+            [17] = xi.item.CATS_EYE,
+            [18] = xi.item.MOG_KUPON_AW_GFIII,
+            [19] = xi.item.LU_SHANGS_FISHING_ROD,
         },
     },
 
@@ -164,32 +164,32 @@ local rewardList =
 
         rewardItems =
         {
-            [ 0] = xi.items.MOG_KUPON_AW_UW,
-            [ 1] = xi.items.MOG_KUPON_AW_COS,
-            [ 2] = xi.items.AUCUBA_CROWN,
-            [ 3] = xi.items.CURMUDGEONS_HELMET,
-            [ 4] = xi.items.GAZERS_HELMET,
-            [ 5] = xi.items.RETCHING_HELMET,
-            [ 6] = xi.items.KARAKUL_CAP,
-            [ 7] = xi.items.HOTENGEKI,
-            [ 8] = xi.items.GRUDGE,
-            [ 9] = xi.items.PLUTON_COFFER,
-            [10] = xi.items.BEITETSU_COFFER,
-            [11] = xi.items.RIFT_BOULDER_COFFER,
-            [12] = xi.items.MARBLE_MOG_PELL,
-            [13] = xi.items.OCHRE_MOG_PELL,
-            [14] = xi.items.MARS_ORB,
-            [15] = xi.items.CHOCOBO_ROPE,
-            [16] = xi.items.CHOCOBO_TORQUE,
-            [17] = xi.items.MOG_KUPON_A_SAP,
-            [18] = xi.items.MOG_KUPON_A_JAD,
-            [19] = xi.items.MOG_KUPON_A_RUB,
-            [20] = xi.items.DEMONIC_AXE,
-            [21] = xi.items.BRAVE_BLADE_II,
-            [22] = xi.items.ONION_SWORD_II,
-            [23] = xi.items.MOG_KUPON_I_ORCHE,
-            [24] = xi.items.SHEET_OF_PROMATHIAN_TUNES,
-            [25] = xi.items.SHEET_OF_ADOULINIAN_TUNES,
+            [ 0] = xi.item.MOG_KUPON_AW_UW,
+            [ 1] = xi.item.MOG_KUPON_AW_COS,
+            [ 2] = xi.item.AUCUBA_CROWN,
+            [ 3] = xi.item.CURMUDGEONS_HELMET,
+            [ 4] = xi.item.GAZERS_HELMET,
+            [ 5] = xi.item.RETCHING_HELMET,
+            [ 6] = xi.item.KARAKUL_CAP,
+            [ 7] = xi.item.HOTENGEKI,
+            [ 8] = xi.item.GRUDGE,
+            [ 9] = xi.item.PLUTON_COFFER,
+            [10] = xi.item.BEITETSU_COFFER,
+            [11] = xi.item.RIFT_BOULDER_COFFER,
+            [12] = xi.item.MARBLE_MOG_PELL,
+            [13] = xi.item.OCHRE_MOG_PELL,
+            [14] = xi.item.MARS_ORB,
+            [15] = xi.item.CHOCOBO_ROPE,
+            [16] = xi.item.CHOCOBO_TORQUE,
+            [17] = xi.item.MOG_KUPON_A_SAP,
+            [18] = xi.item.MOG_KUPON_A_JAD,
+            [19] = xi.item.MOG_KUPON_A_RUB,
+            [20] = xi.item.DEMONIC_AXE,
+            [21] = xi.item.BRAVE_BLADE_II,
+            [22] = xi.item.ONION_SWORD_II,
+            [23] = xi.item.MOG_KUPON_I_ORCHE,
+            [24] = xi.item.SHEET_OF_PROMATHIAN_TUNES,
+            [25] = xi.item.SHEET_OF_ADOULINIAN_TUNES,
         },
     },
 }
@@ -269,7 +269,7 @@ local giveBonanzaPearl = function(player, number)
         return nil
     end
 
-    player:addItem({ id = xi.items.BONANZA_PEARL,
+    player:addItem({ id = xi.item.BONANZA_PEARL,
         exdata =
         {
             [0] = bit.band(number, 0xFF),
@@ -288,7 +288,7 @@ xi.events.mogBonanza.onBonanzaMoogleTrade = function(player, npc, trade)
     if
         xi.events.mogBonanza.enabledCheck() and
         isInCollectionPeriod() and
-        npcUtil.tradeHasExactly(trade, xi.items.BONANZA_PEARL)
+        npcUtil.tradeHasExactly(trade, xi.item.BONANZA_PEARL)
     then
         local bonanzaPearl = trade:getItem(0)
         local exData       = bonanzaPearl:getExData()
@@ -370,7 +370,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
                 -- for lack of gil.
 
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 1)
-            elseif player:getItemCount(xi.items.BONANZA_PEARL) >= localSettings.MAX_PEARLS then
+            elseif player:getItemCount(xi.item.BONANZA_PEARL) >= localSettings.MAX_PEARLS then
                 player:updateEvent(0, localSettings.MAX_PEARLS, 0, 0, 0, 0, 0, 3)
             else
                 player:setLocalVar('selectedNumber', selectedNumber)
@@ -394,7 +394,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
 
                 player:delGil(localSettings.PEARL_COST)
                 giveBonanzaPearl(player, selectedNumber)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BONANZA_PEARL)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BONANZA_PEARL)
             end
         elseif csid == baseCs + 2 then
             local optionType = bit.band(option, 0xFF)
@@ -415,7 +415,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
                 end
             elseif
                 optionType == 6 and
-                npcUtil.giveItem(player, xi.items.BONANZA_BISCUIT)
+                npcUtil.giveItem(player, xi.item.BONANZA_BISCUIT)
             then
                 player:confirmTrade()
             end

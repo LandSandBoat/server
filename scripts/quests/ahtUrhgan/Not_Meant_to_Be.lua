@@ -14,7 +14,7 @@ quest.reward =
 {
     item =
     {
-        { xi.items.IMPERIAL_GOLD_PIECE, 3 },
+        { xi.item.IMPERIAL_GOLD_PIECE, 3 },
     },
 }
 

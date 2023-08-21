@@ -551,29 +551,29 @@ local overseerOffsets =
 
 local crystals =
 {
-    [xi.items.FIRE_CRYSTAL]      = 12,
-    [xi.items.ICE_CRYSTAL]       = 12,
-    [xi.items.WIND_CRYSTAL]      = 12,
-    [xi.items.EARTH_CRYSTAL]     = 12,
-    [xi.items.LIGHTNING_CRYSTAL] = 12,
-    [xi.items.WATER_CRYSTAL]     = 12,
-    [xi.items.LIGHT_CRYSTAL]     = 16,
-    [xi.items.DARK_CRYSTAL]      = 16,
-    [xi.items.INFERNO_CRYSTAL]   = 12,
-    [xi.items.GLACIER_CRYSTAL]   = 12,
-    [xi.items.CYCLONE_CRYSTAL]   = 12,
-    [xi.items.TERRA_CRYSTAL]     = 12,
-    [xi.items.PLASMA_CRYSTAL]    = 12,
-    [xi.items.TORRENT_CRYSTAL]   = 12,
-    [xi.items.AURORA_CRYSTAL]    = 16,
-    [xi.items.TWILIGHT_CRYSTAL]  = 16,
+    [xi.item.FIRE_CRYSTAL]      = 12,
+    [xi.item.ICE_CRYSTAL]       = 12,
+    [xi.item.WIND_CRYSTAL]      = 12,
+    [xi.item.EARTH_CRYSTAL]     = 12,
+    [xi.item.LIGHTNING_CRYSTAL] = 12,
+    [xi.item.WATER_CRYSTAL]     = 12,
+    [xi.item.LIGHT_CRYSTAL]     = 16,
+    [xi.item.DARK_CRYSTAL]      = 16,
+    [xi.item.INFERNO_CRYSTAL]   = 12,
+    [xi.item.GLACIER_CRYSTAL]   = 12,
+    [xi.item.CYCLONE_CRYSTAL]   = 12,
+    [xi.item.TERRA_CRYSTAL]     = 12,
+    [xi.item.PLASMA_CRYSTAL]    = 12,
+    [xi.item.TORRENT_CRYSTAL]   = 12,
+    [xi.item.AURORA_CRYSTAL]    = 16,
+    [xi.item.TWILIGHT_CRYSTAL]  = 16,
 }
 
 local expRings =
 {
-    [xi.items.CHARIOT_BAND] = { cp = 350, charges = 7 },
-    [xi.items.EMPRESS_BAND] = { cp = 700, charges = 7 },
-    [xi.items.EMPEROR_BAND] = { cp = 600, charges = 3 },
+    [xi.item.CHARIOT_BAND] = { cp = 350, charges = 7 },
+    [xi.item.EMPRESS_BAND] = { cp = 700, charges = 7 },
+    [xi.item.EMPEROR_BAND] = { cp = 600, charges = 3 },
 }
 
 local function conquestRanking()
@@ -714,11 +714,11 @@ local overseerInvCommon =
     [32934] = { cp =  1000, lvl =  1, item = 15762 },             -- empress_band
     [32935] = { cp =  2000, lvl =  1, item = 15763 },             -- emperor_band
     [32936] = { cp =  5000, lvl =  1, item = 28540 },             -- warp_ring
-    [32937] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_TENZENS_ALTER_EGO  },
-    [32938] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_RAHALS_ALTER_EGO   },
-    [32939] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_KUKKIS_ALTER_EGO   },
-    [32941] = { cp = 20000, lvl =  1, item = xi.items.REFINED_CHAIR_SET, rank = 10 },
-    [32942] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_MAKKIS_ALTER_EGO   },
+    [32937] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_TENZENS_ALTER_EGO  },
+    [32938] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_RAHALS_ALTER_EGO   },
+    [32939] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_KUKKIS_ALTER_EGO   },
+    [32941] = { cp = 20000, lvl =  1, item = xi.item.REFINED_CHAIR_SET, rank = 10 },
+    [32942] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_MAKKIS_ALTER_EGO   },
 }
 
 local overseerInvNation =

@@ -82,15 +82,15 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 88 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GALLANT_LEGGINGS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GALLANT_LEGGINGS)
         else
             if player:getMainJob() == xi.job.PLD then
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
 
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
-            player:addItem(xi.items.GALLANT_LEGGINGS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GALLANT_LEGGINGS) -- Gallant Leggings
+            player:addItem(xi.item.GALLANT_LEGGINGS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar("aBoysDreamCS", 0)
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
@@ -100,10 +100,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("UnderOathCS", 0)
     elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.GALLANT_SURCOAT)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GALLANT_SURCOAT)
         else
-            player:addItem(xi.items.GALLANT_SURCOAT)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GALLANT_SURCOAT) -- Gallant Surcoat
+            player:addItem(xi.item.GALLANT_SURCOAT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_SURCOAT) -- Gallant Surcoat
             player:setCharVar("UnderOathCS", 9)
             player:addFame(xi.quest.fame_area.SANDORIA, 60)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)

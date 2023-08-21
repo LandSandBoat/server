@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(xi.items.GARLAIGE_KEY, 1) and
+        trade:hasItemQty(xi.item.GARLAIGE_KEY, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(4) -- Open the door

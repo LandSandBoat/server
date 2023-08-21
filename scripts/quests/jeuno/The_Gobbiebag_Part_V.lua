@@ -16,14 +16,14 @@ local params =
     message            = lowerJeunoID.text.INVENTORY_INCREASED,
     startInventorySize = 50,
     fame               = 3,
-    tradeStew          = xi.items.BOWL_OF_GOBLIN_STEW_880,
+    tradeStew          = xi.item.BOWL_OF_GOBLIN_STEW_880,
 
     tradeItems =
     {
-        xi.items.RHODONITE,
-        xi.items.PAKTONG_INGOT,
-        xi.items.SQUARE_OF_MOBLINWEAVE,
-        xi.items.SQUARE_OF_BUGARD_LEATHER,
+        xi.item.RHODONITE,
+        xi.item.PAKTONG_INGOT,
+        xi.item.SQUARE_OF_MOBLINWEAVE,
+        xi.item.SQUARE_OF_BUGARD_LEATHER,
     },
 
     reward =

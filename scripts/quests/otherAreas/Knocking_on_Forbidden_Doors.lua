@@ -202,7 +202,7 @@ quest.sections =
                     -- Trade exactly one mannequin without gil.  Gil taken separately.
                     local tradedMannequin = 0
 
-                    for itemId = xi.items.HUME_M_MANNEQUIN, xi.items.GALKA_MANNEQUIN do
+                    for itemId = xi.item.HUME_M_MANNEQUIN, xi.item.GALKA_MANNEQUIN do
                         if npcUtil.tradeHasExactly(trade, itemId) then
                             tradedMannequin = itemId
                         end
@@ -258,7 +258,7 @@ quest.sections =
                         player:delGil(xi.mannequin.cost.TRADE)
                     then
                         player:confirmTrade()
-                        npcUtil.giveItem(player, xi.items.HUME_M_MANNEQUIN + option - 1)
+                        npcUtil.giveItem(player, xi.item.HUME_M_MANNEQUIN + option - 1)
                     end
                 end,
 
@@ -270,8 +270,8 @@ quest.sections =
                         option <= 8 and
                         player:delGil(xi.mannequin.cost.PURCHASE)
                     then
-                        player:messageSpecial(mhauraID.text.ITEM_OBTAINED, xi.items.HUME_M_MANNEQUIN + option - 1)
-                        player:addItem(xi.items.HUME_M_MANNEQUIN + option - 1)
+                        player:messageSpecial(mhauraID.text.ITEM_OBTAINED, xi.item.HUME_M_MANNEQUIN + option - 1)
+                        player:addItem(xi.item.HUME_M_MANNEQUIN + option - 1)
                     elseif
                         option >= 10 and
                         player:delGil(xi.mannequin.cost.POSE)

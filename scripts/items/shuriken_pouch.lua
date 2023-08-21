@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.SHURIKEN, 99)
+    target:addItem(xi.item.SHURIKEN, 99)
 end
 
 return itemObject

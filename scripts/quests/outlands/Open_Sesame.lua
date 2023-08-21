@@ -16,9 +16,9 @@ quest.reward =
 
 local tradeItems =
 {
-    { xi.items.METEORITE,   1 },
-    { xi.items.SOIL_GEM,    1 },
-    { xi.items.SOIL_GEODE, 12 },
+    { xi.item.METEORITE,   1 },
+    { xi.item.SOIL_GEM,    1 },
+    { xi.item.SOIL_GEODE, 12 },
 }
 
 quest.sections =
@@ -54,7 +54,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     for _, tradeOption in ipairs(tradeItems) do
-                        if npcUtil.tradeHasExactly(trade, { tradeOption, { xi.items.TREMORSTONE, 1 } }) then
+                        if npcUtil.tradeHasExactly(trade, { tradeOption, { xi.item.TREMORSTONE, 1 } }) then
                             return quest:progressEvent(22)
                         end
                     end

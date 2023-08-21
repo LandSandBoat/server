@@ -22,7 +22,7 @@ mission.reward =
 }
 
 local function handleTradeEvent(player, trade, firstId, repeatId)
-    if npcUtil.tradeHasExactly(trade, xi.items.ORCISH_AXE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.ORCISH_AXE) then
         if not player:hasCompletedMission(mission.areaId, mission.missionId) then
             return mission:progressEvent(firstId)
         else

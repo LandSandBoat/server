@@ -251,20 +251,20 @@ local abcShop =
 -----------------------------------
 local tier1Chips =
 {
-    xi.items.IVORY_CHIP,
-    xi.items.SCARLET_CHIP,
-    xi.items.EMERALD_CHIP,
-    xi.items.SILVER_CHIP,
-    xi.items.CERULEAN_CHIP,
-    xi.items.SMALT_CHIP,
-    xi.items.SMOKY_CHIP,
+    xi.item.IVORY_CHIP,
+    xi.item.SCARLET_CHIP,
+    xi.item.EMERALD_CHIP,
+    xi.item.SILVER_CHIP,
+    xi.item.CERULEAN_CHIP,
+    xi.item.SMALT_CHIP,
+    xi.item.SMOKY_CHIP,
 }
 
 local tier2Chips =
 {
-    xi.items.ORCHID_CHIP,
-    xi.items.CHARCOAL_CHIP,
-    xi.items.MAGENTA_CHIP,
+    xi.item.ORCHID_CHIP,
+    xi.item.CHARCOAL_CHIP,
+    xi.item.MAGENTA_CHIP,
 }
 
 local tier1ChipValue = 5
@@ -296,7 +296,7 @@ entity.onTrade = function(player, npc, trade)
     local afUpgrade = player:getCharVar("AFupgrade")
 
     -- store ancient beastcoins
-    if trade:hasItemQty(xi.items.ANCIENT_BEASTCOIN, count) then
+    if trade:hasItemQty(xi.item.ANCIENT_BEASTCOIN, count) then
         local total = player:getCurrency("ancient_beastcoin") + count
 
         if total < 9999 then -- store max 9999 ancient beastcoins
@@ -309,9 +309,9 @@ entity.onTrade = function(player, npc, trade)
 
     -- Trade chips for ancient beastcoins
     elseif npcUtil.tradeSetInList(trade, tier1Chips) then
-        player:startEvent(361, xi.items.ANCIENT_BEASTCOIN, tier1ChipValue)
+        player:startEvent(361, xi.item.ANCIENT_BEASTCOIN, tier1ChipValue)
     elseif npcUtil.tradeSetInList(trade, tier2Chips) then
-        player:startEvent(361, xi.items.ANCIENT_BEASTCOIN, tier2ChipValue)
+        player:startEvent(361, xi.item.ANCIENT_BEASTCOIN, tier2ChipValue)
 
     -- af and relic upgrade trades
     elseif afUpgrade == 0 then
@@ -461,7 +461,7 @@ local handleMainEvent = function(player, option, coinAmount)
     elseif option == 4 then
         if
             player:getCurrency("ancient_beastcoin") >= coinAmount and
-            npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } })
+            npcUtil.giveItem(player, { { xi.item.ANCIENT_BEASTCOIN, coinAmount } })
         then
             player:delCurrency("ancient_beastcoin", coinAmount)
         end
@@ -501,12 +501,12 @@ local handleTradeChipEvent = function(player, option)
     local trade = player:getTrade()
     if
         npcUtil.tradeSetInList(trade, tier1Chips) and
-        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })
+        npcUtil.giveItem(player, { { xi.item.ANCIENT_BEASTCOIN, tier1ChipValue } })
     then
         player:confirmTrade()
     elseif
         npcUtil.tradeSetInList(trade, tier2Chips) and
-        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } })
+        npcUtil.giveItem(player, { { xi.item.ANCIENT_BEASTCOIN, tier2ChipValue } })
     then
         player:confirmTrade()
     end

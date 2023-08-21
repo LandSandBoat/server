@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if
         distantLoyalties == QUEST_ACCEPTED and
         player:getCharVar("DistantLoyaltiesProgress") == 2 and
-        npcUtil.tradeHas(trade, xi.items.MYTHRIL_INGOT)
+        npcUtil.tradeHas(trade, xi.item.MYTHRIL_INGOT)
     then
         player:startEvent(317)
     end

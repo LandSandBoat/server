@@ -17,19 +17,19 @@ mission.reward =
 
 local itemRewards =
 {
-    [xi.items.MOLYBDENUM_INGOT ] = 120,
-    [xi.items.ORICHALCUM_INGOT ] = 100,
-    [xi.items.ANGEL_SKIN_ORB   ] = 81,
-    [xi.items.SQUARE_OF_FOULARD] = 41,
-    [xi.items.OXBLOOD_ORB      ] = 30,
+    [xi.item.MOLYBDENUM_INGOT ] = 120,
+    [xi.item.ORICHALCUM_INGOT ] = 100,
+    [xi.item.ANGEL_SKIN_ORB   ] = 81,
+    [xi.item.SQUARE_OF_FOULARD] = 41,
+    [xi.item.OXBLOOD_ORB      ] = 30,
 }
 
 local orcItems =
 {
-    [xi.items.ORCISH_AXE  ] = 5,
-    [xi.items.ORC_HELMET  ] = 10,
-    [xi.items.ORC_PAULDRON] = 10,
-    [xi.items.GOLD_ORCMASK] = 15,
+    [xi.item.ORCISH_AXE  ] = 5,
+    [xi.item.ORC_HELMET  ] = 10,
+    [xi.item.ORC_PAULDRON] = 10,
+    [xi.item.GOLD_ORCMASK] = 15,
 }
 
 local function completePetition(player, posBit, numSignatures)
@@ -168,7 +168,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.ANGLERS_CASSOULET) and
+                        npcUtil.tradeHasExactly(trade, xi.item.ANGLERS_CASSOULET) and
                         mission:isVarBitsSet(player, 'Remind', 0)
                     then
                         return mission:progressEvent(135)
@@ -205,7 +205,7 @@ mission.sections =
                     -- discovered with Sabiliont.  A single crossbow bolt may be an
                     -- acceptable trade.
                     if
-                        npcUtil.tradeHasOnly(trade, xi.items.CROSSBOW_BOLT) and
+                        npcUtil.tradeHasOnly(trade, xi.item.CROSSBOW_BOLT) and
                         trade:getItemCount() >= 99 and
                         mission:isVarBitsSet(player, 'Remind', 2)
                     then
@@ -286,7 +286,7 @@ mission.sections =
             ['Rongelouts_N_Distaud'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.GNOLE_CLAW) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.GNOLE_CLAW) then
                         return mission:progressEvent(144)
                     end
                 end,
@@ -312,7 +312,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasOnly(trade, xi.items.BUNCH_OF_GYSAHL_GREENS) and
+                        npcUtil.tradeHasOnly(trade, xi.item.BUNCH_OF_GYSAHL_GREENS) and
                         mission:isVarBitsSet(player, 'Remind', 3)
                     then
                         -- TODO: This formula is estimated; however, a trade of a single gysahl green

@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item     = xi.items.ROBE,
+    item     = xi.item.ROBE,
     title    = xi.title.GREEN_GROCER,
 }
 
@@ -41,7 +41,7 @@ quest.sections =
             onEventFinish =
             {
                 [524] = function(player, csid, option, npc)
-                    if option == 0 and npcUtil.giveItem(player, xi.items.SUPPLIES_ORDER) then
+                    if option == 0 and npcUtil.giveItem(player, xi.item.SUPPLIES_ORDER) then
                         quest:begin(player)
                     else
                         quest:setVar(player, 'Prog', 1)
@@ -49,7 +49,7 @@ quest.sections =
                 end,
 
                 [592] = function(player, csid, option, npc)
-                    if option == 0 and npcUtil.giveItem(player, xi.items.SUPPLIES_ORDER) then
+                    if option == 0 and npcUtil.giveItem(player, xi.item.SUPPLIES_ORDER) then
                         quest:begin(player)
                         quest:setVar(player, 'Prog', 0)
                     end
@@ -68,7 +68,7 @@ quest.sections =
             ['Abeaule'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_BATAGREENS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_BATAGREENS) then
                         return quest:progressEvent(525)
                     end
                 end,
@@ -86,7 +86,7 @@ quest.sections =
 
                 [593] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveItem(player, xi.items.SUPPLIES_ORDER)
+                        npcUtil.giveItem(player, xi.item.SUPPLIES_ORDER)
                     end
                 end,
             },
@@ -106,11 +106,11 @@ quest.sections =
                 -- completed, should the player have purchased a batagreen, or picked up
                 -- an additional order prior to completion.
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SUPPLIES_ORDER) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SUPPLIES_ORDER) then
                         return quest:progressEvent(124)
                     elseif
                         npcUtil.tradeHas(trade, { { "gil", 50 } }) and
-                        npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS)
+                        npcUtil.giveItem(player, xi.item.CLUMP_OF_BATAGREENS)
                     then
                         player:confirmTrade()
 
@@ -129,7 +129,7 @@ quest.sections =
                         player:hasCompletedQuest(quest.areaId, quest.questId) or
                         quest:getVar(player, 'Prog') == 2
                     then
-                        return quest:progressEvent(127, xi.items.CLUMP_OF_BATAGREENS)
+                        return quest:progressEvent(127, xi.item.CLUMP_OF_BATAGREENS)
                     end
                 end,
             },
@@ -137,7 +137,7 @@ quest.sections =
             onEventFinish =
             {
                 [124] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
+                    if npcUtil.giveItem(player, xi.item.CLUMP_OF_BATAGREENS) then
                         player:confirmTrade()
 
                         if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then

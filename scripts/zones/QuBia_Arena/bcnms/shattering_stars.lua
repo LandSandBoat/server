@@ -32,7 +32,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         local maatsCap = player:getCharVar("maatsCap")
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
-            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
+            npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
             player:setCharVar("Quest[3][132]Prog", pjob)
         end
 

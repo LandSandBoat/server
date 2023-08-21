@@ -561,7 +561,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if
             option == 16777216 and
             player:getCharVar("receivedNexusCape") == 0 and
-            npcUtil.giveItem(player, xi.items.NEXUS_CAPE)
+            npcUtil.giveItem(player, xi.item.NEXUS_CAPE)
         then
             player:setCharVar("receivedNexusCape", 1)
 
@@ -569,7 +569,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             option == 33554432 or
             (option == 16777216 and player:getCharVar("receivedNexusCape") == 0)
         then
-            player:addUsedItem(xi.items.NEXUS_CAPE)
+            player:addUsedItem(xi.item.NEXUS_CAPE)
 
         elseif option >= 1 and option <= 20 then
             local ki = optionToKI[option]

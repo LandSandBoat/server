@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 133 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES)
     elseif csid == 134 then
-        player:addItem(xi.items.STAR_GLOBE)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STAR_GLOBE)
+        player:addItem(xi.item.STAR_GLOBE)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.STAR_GLOBE)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES)
         player:needToZone(true)
         player:addTitle(xi.title.AJIDO_MARUJIDOS_MINDER)

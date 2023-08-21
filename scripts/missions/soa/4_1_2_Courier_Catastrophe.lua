@@ -19,11 +19,11 @@ mission.reward =
 
 local missionItems =
 {
-    { xi.items.EFT_SKIN,                    5 },
-    { xi.items.LOCK_OF_MANTICORE_HAIR,      4 },
-    { xi.items.BUFFALO_HORN,                1 },
-    { xi.items.SQUARE_OF_MANTICORE_LEATHER, 1 },
-    { xi.items.SQUARE_OF_BUFFALO_LEATHER,   1 },
+    { xi.item.EFT_SKIN,                    5 },
+    { xi.item.LOCK_OF_MANTICORE_HAIR,      4 },
+    { xi.item.BUFFALO_HORN,                1 },
+    { xi.item.SQUARE_OF_MANTICORE_LEATHER, 1 },
+    { xi.item.SQUARE_OF_BUFFALO_LEATHER,   1 },
 }
 
 mission.sections =

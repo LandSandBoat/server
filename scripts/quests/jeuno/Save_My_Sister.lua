@@ -18,7 +18,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 quest.reward =
 {
     gil   = 3000,
-    item  = xi.items.HOLY_MACE,
+    item  = xi.item.HOLY_MACE,
     title = xi.title.EXORCIST_IN_TRAINING,
 }
 

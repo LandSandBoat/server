@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_SUN)
 
 quest.reward =
 {
-    item = xi.items.MAATS_CAP,
+    item = xi.item.MAATS_CAP,
     title = xi.title.ULTIMATE_CHAMPION_OF_THE_WORLD,
 }
 

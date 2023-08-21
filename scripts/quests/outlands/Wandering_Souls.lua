@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WANDERING
 
 quest.reward =
 {
-    item  = xi.items.FLAGELLANTS_ROPE,
+    item  = xi.item.FLAGELLANTS_ROPE,
     title = xi.title.BEARER_OF_BONDS_BEYOND_TIME,
 }
 
@@ -27,8 +27,8 @@ quest.sections =
             ['Cermet_Headstone'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.RAIN_LILY) then
-                        return quest:progressEvent(202, xi.items.RAIN_LILY)
+                    if npcUtil.tradeHasExactly(trade, xi.item.RAIN_LILY) then
+                        return quest:progressEvent(202, xi.item.RAIN_LILY)
                     end
                 end,
 

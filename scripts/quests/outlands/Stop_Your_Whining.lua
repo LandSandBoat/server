@@ -11,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR
 
 quest.reward =
 {
-    item = xi.items.SCROLL_OF_HOJO_ICHI,
+    item = xi.item.SCROLL_OF_HOJO_ICHI,
     fameArea = xi.quest.fame_area.NORG,
     fame = 75,
     title = xi.title.APPRENTICE_SOMMELIER,

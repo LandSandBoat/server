@@ -72,26 +72,26 @@ local pDifWeaponCapTable =
 
 local elementalGorget = -- Ordered by element.
 {
-    xi.items.FLAME_GORGET,
-    xi.items.SNOW_GORGET,
-    xi.items.BREEZE_GORGET,
-    xi.items.SOIL_GORGET,
-    xi.items.THUNDER_GORGET,
-    xi.items.AQUA_GORGET,
-    xi.items.LIGHT_GORGET,
-    xi.items.SHADOW_GORGET
+    xi.item.FLAME_GORGET,
+    xi.item.SNOW_GORGET,
+    xi.item.BREEZE_GORGET,
+    xi.item.SOIL_GORGET,
+    xi.item.THUNDER_GORGET,
+    xi.item.AQUA_GORGET,
+    xi.item.LIGHT_GORGET,
+    xi.item.SHADOW_GORGET
 }
 
 local elementalBelt = -- Ordered by element.
 {
-    xi.items.FLAME_BELT,
-    xi.items.SNOW_BELT,
-    xi.items.BREEZE_BELT,
-    xi.items.SOIL_BELT,
-    xi.items.THUNDER_BELT,
-    xi.items.AQUA_BELT,
-    xi.items.LIGHT_BELT,
-    xi.items.SHADOW_BELT
+    xi.item.FLAME_BELT,
+    xi.item.SNOW_BELT,
+    xi.item.BREEZE_BELT,
+    xi.item.SOIL_BELT,
+    xi.item.THUNDER_BELT,
+    xi.item.AQUA_BELT,
+    xi.item.LIGHT_BELT,
+    xi.item.SHADOW_BELT
 }
 
 -- "fSTR" in English Wikis. "SV function" in JP wiki and Studio Gobli.
@@ -258,7 +258,7 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
             wsElementalProperties[scProp1][neckElement] == 1 or
             wsElementalProperties[scProp2][neckElement] == 1 or
             wsElementalProperties[scProp3][neckElement] == 1 or
-            neckItem == xi.items.FOTIA_GORGET
+            neckItem == xi.item.FOTIA_GORGET
         then
             neckFtpBonus = 0.1
         end
@@ -281,7 +281,7 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
             wsElementalProperties[scProp1][waistElement] == 1 or
             wsElementalProperties[scProp2][waistElement] == 1 or
             wsElementalProperties[scProp3][waistElement] == 1 or
-            waistItem == xi.items.FOTIA_BELT
+            waistItem == xi.item.FOTIA_BELT
         then
             waistFtpBonus = 0.1
         end
@@ -295,11 +295,11 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
             wsElementalProperties[scProp3][dayElement] == 1
         then
             if
-                headItem == xi.items.MEKIRA_OTO or
-                headItem == xi.items.MEKIRA_OTO_P1
+                headItem == xi.item.MEKIRA_OTO or
+                headItem == xi.item.MEKIRA_OTO_P1
             then
                 headFtpBonus = 0.1
-            elseif headItem == xi.items.GAVIALIS_HELM then
+            elseif headItem == xi.item.GAVIALIS_HELM then
                 headFtpBonus = 0.117
             end
         end
@@ -312,7 +312,7 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
             wsElementalProperties[scProp2][dayElement] == 1 or
             wsElementalProperties[scProp3][dayElement] == 1
         then
-            if handsItem == xi.items.ATHOSS_GLOVES then
+            if handsItem == xi.item.ATHOSS_GLOVES then
                 handsFtpBonus = 0.06
             end
         end

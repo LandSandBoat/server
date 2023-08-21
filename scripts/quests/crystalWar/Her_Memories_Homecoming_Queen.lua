@@ -222,7 +222,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.LILAC) and
+                        npcUtil.tradeHasExactly(trade, xi.item.LILAC) and
                         quest:getVar(player, 'Prog3') == 2
                     then
                         player:confirmTrade()
