@@ -1181,7 +1181,7 @@ int32 map_garbage_collect(time_point tick, CTaskMgr::CTask* PTask)
 
     ShowInfo("CTaskMgr Active Tasks: %i", CTaskMgr::getInstance()->getTaskList().size());
 
-    luautils::garbageCollectStep();
+    luautils::garbageCollectFull();
     return 0;
 }
 
