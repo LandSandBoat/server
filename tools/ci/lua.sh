@@ -50,9 +50,7 @@ global_objects=(
     getMidnight
     getConquestTally
 
-    mission
     Mission
-    quest
     Quest
     HiddenQuest
     fileExists
