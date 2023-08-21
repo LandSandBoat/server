@@ -4,8 +4,6 @@
 -- !pos -111 -6 0.1 165
 -----------------------------------
 local ID = zones[xi.zone.THRONE_ROOM]
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 
 local content = BattlefieldMission:new({

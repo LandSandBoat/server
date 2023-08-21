@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SOUL_VOICE
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

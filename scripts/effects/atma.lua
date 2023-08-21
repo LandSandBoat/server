@@ -1,9 +1,6 @@
 -----------------------------------
 -- xi.effect.ATMA
 -----------------------------------
-require("scripts/globals/abyssea/atma")
-require("scripts/globals/abyssea")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

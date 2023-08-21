@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.CAROL
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

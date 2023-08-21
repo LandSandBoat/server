@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.TELEPORT
 -----------------------------------
-require("scripts/globals/teleports")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BRAZEN_RUSH
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

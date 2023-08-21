@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.VISITANT
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local effectObject = {}
 
 local remainingTimeLimits = { 300, 240, 180, 120, 60, 30, 10, 5, 4, 3, 2, 1 }

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.AFTERMATH
 -----------------------------------
-require("scripts/globals/aftermath")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

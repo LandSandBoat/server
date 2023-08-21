@@ -2,11 +2,6 @@
 -- xi.effect.HEALING
 -- Activated through the /heal command
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
-require("scripts/globals/roe")
-require("scripts/globals/voidwalker")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

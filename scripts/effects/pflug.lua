@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.PFLUG
 -----------------------------------
-require("scripts/globals/job_utils/rune_fencer")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

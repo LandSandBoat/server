@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BOLSTER
 -----------------------------------
-require("scripts/globals/job_utils/geomancer")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

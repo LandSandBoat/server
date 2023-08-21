@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SPIRIT_SURGE
 -----------------------------------
-require("scripts/globals/jobpoints")
------------------------------------
 local effectObject = {}
 
 -- https://www.bg-wiki.com/ffxi/Spirit_Surge

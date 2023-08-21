@@ -15,8 +15,6 @@
 -- 999 = Colossal Slam
 -- 1111 = 2hr Meikyo Shisui
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

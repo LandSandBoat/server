@@ -2,8 +2,6 @@
 -- Lunar Roar
 -- Fenrir removes up to 10 beneficial status effects from enemies within Area of Effect.
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

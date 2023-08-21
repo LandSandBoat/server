@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Tiamat, Smok and Ildebrann
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

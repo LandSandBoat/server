@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Snoll Tzar
 ---------------------------------------------
-require("scripts/globals/utils")
----------------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
