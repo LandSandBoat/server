@@ -2,7 +2,6 @@
 -- Zone: Grauberg_[S] (89)
 -----------------------------------
 local ID = zones[xi.zone.GRAUBERG_S]
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

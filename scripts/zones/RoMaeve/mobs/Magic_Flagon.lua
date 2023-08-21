@@ -4,8 +4,6 @@
 -- Note: PH for Nightmare Vase and Rogue Receptacle
 -----------------------------------
 local ID = zones[xi.zone.ROMAEVE]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

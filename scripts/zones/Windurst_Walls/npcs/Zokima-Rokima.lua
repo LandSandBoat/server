@@ -4,8 +4,6 @@
 -- Starts Windurst Missions
 -- !pos 0 -16 124 239
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

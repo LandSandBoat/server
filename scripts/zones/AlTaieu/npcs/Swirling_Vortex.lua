@@ -4,7 +4,6 @@
 -- !pos ? ? ? 33
 -----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
-require("scripts/globals/limbus")
 -----------------------------------
 local entity = {}
 

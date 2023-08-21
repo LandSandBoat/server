@@ -2,7 +2,6 @@
 -- Area: Temenos
 --  Mob: Proto-Ultima
 -----------------------------------
-require("scripts/globals/limbus")
 local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}

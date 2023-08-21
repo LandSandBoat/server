@@ -6,7 +6,6 @@
 -- !pos -120 -6 124 239
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WALLS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

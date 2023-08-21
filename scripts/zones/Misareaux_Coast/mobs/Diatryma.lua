@@ -4,7 +4,6 @@
 -- Note: PH for Okyupete
 -----------------------------------
 local ID = zones[xi.zone.MISAREAUX_COAST]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

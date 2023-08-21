@@ -4,8 +4,6 @@
 -- Note: Place holder Ose
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

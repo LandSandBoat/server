@@ -2,8 +2,6 @@
 -- Area: Dragon's Aery
 --  NPC: Survival Guide
 -----------------------------------
-require("scripts/globals/teleports/survival_guide")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

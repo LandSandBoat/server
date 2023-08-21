@@ -4,7 +4,6 @@
 -- Note: PH for Black Triple Stars
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

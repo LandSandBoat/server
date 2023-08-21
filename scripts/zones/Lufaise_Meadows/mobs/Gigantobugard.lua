@@ -4,7 +4,6 @@
 -- Note: PH for Megalobugard
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

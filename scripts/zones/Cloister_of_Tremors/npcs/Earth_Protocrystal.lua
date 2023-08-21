@@ -5,7 +5,6 @@
 -- !pos -539 1 -493 209
 -----------------------------------
 local ID = zones[xi.zone.CLOISTER_OF_TREMORS]
-require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
 

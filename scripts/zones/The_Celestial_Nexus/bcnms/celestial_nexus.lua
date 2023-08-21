@@ -2,9 +2,6 @@
 -- Area: The Celestial Nexus
 -- Name: The Celestial Nexus (ZM16)
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

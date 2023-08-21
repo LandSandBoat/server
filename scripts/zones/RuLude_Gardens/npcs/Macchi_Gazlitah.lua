@@ -4,7 +4,6 @@
 -- TODO: Add support for occasional stock.
 -----------------------------------
 local ID = zones[xi.zone.RULUDE_GARDENS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

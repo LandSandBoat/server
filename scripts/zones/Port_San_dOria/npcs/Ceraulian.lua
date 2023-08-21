@@ -4,7 +4,6 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 0 -8 -122 232
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}

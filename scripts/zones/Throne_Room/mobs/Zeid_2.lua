@@ -4,7 +4,6 @@
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobskills")
 -----------------------------------
 local entity = {}
 

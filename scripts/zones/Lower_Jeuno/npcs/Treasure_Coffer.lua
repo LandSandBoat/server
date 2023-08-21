@@ -5,7 +5,6 @@
 -- !pos 41.169 3.899 -51.005 245
 -----------------------------------
 local ID = zones[xi.zone.LOWER_JEUNO]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

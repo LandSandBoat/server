@@ -2,8 +2,6 @@
 -- Zone: Port_San_dOria (232)
 -----------------------------------
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

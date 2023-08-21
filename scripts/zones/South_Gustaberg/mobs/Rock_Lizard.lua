@@ -4,8 +4,6 @@
 -- Note: Place holder Leaping Lizzy
 -----------------------------------
 local ID = zones[xi.zone.SOUTH_GUSTABERG]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

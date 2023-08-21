@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Port_Bastok (236)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,8 +2,6 @@
 -- Zone: Port_Windurst (240)
 -----------------------------------
 local ID = zones[xi.zone.PORT_WINDURST]
-require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
 -----------------------------------
 local zoneObject = {}
 

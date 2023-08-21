@@ -5,7 +5,6 @@
 -- !pos -81 32 2 178
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -4,10 +4,6 @@
 -- Starts and Finishes Quest: Hat in Hand
 -- !pos -66 -3 -148 238
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

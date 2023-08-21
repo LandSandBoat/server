@@ -5,7 +5,6 @@
 -- !pos 16 .1 -58 205
 -----------------------------------
 local ID = zones[xi.zone.IFRITS_CAULDRON]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 --  NPC: Magephaud
 -----------------------------------
 local ID = zones[xi.zone.NORG]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

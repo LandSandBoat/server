@@ -2,9 +2,6 @@
 -- Area: Upper Delkfutt's Tower
 --   NM: Autarch
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

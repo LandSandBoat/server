@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Promyvion-Holla (16)
 -----------------------------------
-require('scripts/globals/promyvion')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

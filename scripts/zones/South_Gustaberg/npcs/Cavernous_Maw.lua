@@ -5,8 +5,6 @@
 -- Teleports Players to Abyssea - Altepa
 -----------------------------------
 local ID = zones[xi.zone.SOUTH_GUSTABERG]
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

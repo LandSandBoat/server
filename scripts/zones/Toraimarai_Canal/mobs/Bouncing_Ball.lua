@@ -4,7 +4,6 @@
 -- Note: PH for Canal Moocher
 -----------------------------------
 local ID = zones[xi.zone.TORAIMARAI_CANAL]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

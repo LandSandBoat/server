@@ -2,8 +2,6 @@
 -- Zone: Ordelles Caves (193)
 -----------------------------------
 local ID = zones[xi.zone.ORDELLES_CAVES]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

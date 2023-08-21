@@ -3,7 +3,6 @@
 --  NPC: Abda Lurabda
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
-require("scripts/globals/pets")
 -----------------------------------
 local entity = {}
 

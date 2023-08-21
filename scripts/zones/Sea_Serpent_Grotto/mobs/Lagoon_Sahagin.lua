@@ -4,8 +4,6 @@
 -- Note: PH for Yarr the Pearleyed and Novv the Whitehearted
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

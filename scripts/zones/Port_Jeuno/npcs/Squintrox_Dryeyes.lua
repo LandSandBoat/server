@@ -4,8 +4,6 @@
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}

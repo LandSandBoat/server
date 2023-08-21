@@ -2,11 +2,6 @@
 -- Shattering Stars
 -- Horlais Peak Maat fight
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

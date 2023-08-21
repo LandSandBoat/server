@@ -3,8 +3,6 @@
 --  NPC: Lulupp
 -- !pos -26.567 -3.5 -3.544 250
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

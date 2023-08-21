@@ -7,7 +7,6 @@
 -- Offset 2 (H-8) !pos 7 0 32 204
 -----------------------------------
 local ID = zones[xi.zone.FEIYIN]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

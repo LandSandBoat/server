@@ -6,8 +6,6 @@
 -- Starts and Finishes: Breaking Stones, An Empty Vessel
 -- only spawns if the weather is SUNNY or CLEAR
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

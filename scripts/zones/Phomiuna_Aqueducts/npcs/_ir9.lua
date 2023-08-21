@@ -4,7 +4,6 @@
 -- !pos 70 -1.5 140 27
 -----------------------------------
 local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
-require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 

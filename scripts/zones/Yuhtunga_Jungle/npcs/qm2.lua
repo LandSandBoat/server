@@ -4,7 +4,6 @@
 -- !pos 362.586 3.999 220.106 123
 -----------------------------------
 local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Zeruhn_Mines (172)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

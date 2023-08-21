@@ -3,7 +3,6 @@
 --  NPC: ??? (Spawns Sozu Rogberry NM)
 -----------------------------------
 local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

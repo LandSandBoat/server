@@ -4,7 +4,6 @@
 -- Spawns Aroma Crawler - RSE Satchets
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

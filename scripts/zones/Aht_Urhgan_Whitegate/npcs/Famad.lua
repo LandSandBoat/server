@@ -4,11 +4,6 @@
 -- Type: Assault Mission Giver
 -- !pos 134.098 0.161 -43.759 50
 -----------------------------------
-require("scripts/globals/assault")
-require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
-require("scripts/globals/extravaganza")
------------------------------------
 local entity = {}
 
 local items =

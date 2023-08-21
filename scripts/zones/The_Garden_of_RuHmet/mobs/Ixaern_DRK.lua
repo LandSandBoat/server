@@ -7,7 +7,6 @@
 -- !pos -600 5.00 440 35
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobskills")
 -----------------------------------
 local entity = {}
 

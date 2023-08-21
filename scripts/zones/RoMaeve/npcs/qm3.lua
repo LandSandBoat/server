@@ -4,7 +4,6 @@
 -- !pos -277.651, -3.765, -17.895 122 and many <pos>
 -----------------------------------
 local ID = zones[xi.zone.ROMAEVE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

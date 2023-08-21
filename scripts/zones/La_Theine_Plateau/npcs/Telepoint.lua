@@ -4,7 +4,6 @@
 -- !pos 420.000 19.104 20.000 102
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

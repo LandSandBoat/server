@@ -4,7 +4,6 @@
 -- Involved in Quests: Rubbish day, Making Amens!
 -- !pos 141 -6 138 200
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}

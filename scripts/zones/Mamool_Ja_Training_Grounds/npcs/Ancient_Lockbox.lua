@@ -2,10 +2,6 @@
 -- Area: Mamool Ja Training Grounds
 -- Ancient Lockbox
 -----------------------------------
-require("scripts/globals/appraisal")
-require("scripts/globals/assault")
------------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)

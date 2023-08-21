@@ -5,7 +5,6 @@
 -- !pos -177.811 -2.835 65.639 240
 -----------------------------------
 local ID = zones[xi.zone.PORT_WINDURST]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

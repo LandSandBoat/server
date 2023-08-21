@@ -2,7 +2,7 @@ require('scripts/globals/abyssea')
 require("scripts/globals/gear_sets")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
-require("scripts/globals/events/login_campaign")
+require("scripts/events/login_campaign")
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
 -----------------------------------

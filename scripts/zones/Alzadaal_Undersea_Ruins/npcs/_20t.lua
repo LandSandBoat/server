@@ -3,8 +3,6 @@
 -- Door: Gilded Gateway (Arrapago)
 -- !pos -580 0 -159 72
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/besieged")
 local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}

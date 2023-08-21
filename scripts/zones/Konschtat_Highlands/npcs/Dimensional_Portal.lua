@@ -4,7 +4,6 @@
 -- !pos 220.000 19.104 140.000 108
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

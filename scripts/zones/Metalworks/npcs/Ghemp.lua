@@ -5,7 +5,6 @@
 -- !pos -109 2 27 237
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

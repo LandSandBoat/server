@@ -3,9 +3,6 @@
 --  Mob: Qiqirn Astrologer
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-require("scripts/globals/mobskills")
-require("scripts/globals/teleports")
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 

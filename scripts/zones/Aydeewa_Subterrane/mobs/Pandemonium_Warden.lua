@@ -2,7 +2,6 @@
 -- Area: Aydeewa Subterrane
 --  ZNM: Pandemonium Warden
 -----------------------------------
-require("scripts/globals/magic")
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}

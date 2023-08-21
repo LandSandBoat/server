@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
-require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 

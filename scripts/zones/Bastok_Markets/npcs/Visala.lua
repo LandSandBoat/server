@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Goldsmithing Guild
 -- !pos -202.000 -7.814 -56.823 235
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}

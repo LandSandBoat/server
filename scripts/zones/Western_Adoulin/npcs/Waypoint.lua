@@ -12,8 +12,6 @@
 -- Airship Docks        : !pos 14.586 0 162.608 256
 -- Adoulin Waterfront   : !pos 51.094 32 126.299 256
 -----------------------------------
-require('scripts/globals/waypoint')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

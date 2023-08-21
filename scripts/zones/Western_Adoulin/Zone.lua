@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Western Adoulin
 -----------------------------------
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

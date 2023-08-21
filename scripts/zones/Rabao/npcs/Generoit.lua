@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.RABAO]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

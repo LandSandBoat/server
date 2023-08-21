@@ -4,8 +4,6 @@
 -- Note: Place holder Baobhan Sith
 -----------------------------------
 local ID = zones[xi.zone.GUSTAV_TUNNEL]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

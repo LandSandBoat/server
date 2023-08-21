@@ -6,7 +6,6 @@
 -- !pos 252.000 -2.326 -119.994 22
 -----------------------------------
 local ID = zones[xi.zone.PROMYVION_VAHZL]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

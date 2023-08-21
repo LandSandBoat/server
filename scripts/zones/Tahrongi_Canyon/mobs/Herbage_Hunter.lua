@@ -2,8 +2,6 @@
 -- Area: Tahrongi Canyon
 --   NM: Herbage Hunter
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

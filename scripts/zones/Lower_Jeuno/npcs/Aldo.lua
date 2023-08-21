@@ -4,8 +4,6 @@
 -- Involved in Mission: Magicite, Return to Delkfutt's Tower (Zilart)
 -- !pos 20 3 -58 245
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

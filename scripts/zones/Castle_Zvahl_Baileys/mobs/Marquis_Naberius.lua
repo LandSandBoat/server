@@ -2,9 +2,6 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Marquis Naberius
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

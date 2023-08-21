@@ -3,8 +3,6 @@
 -- Balga's Dais BCNM50, Comet Orb
 -- !additem 1177
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

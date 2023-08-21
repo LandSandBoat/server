@@ -5,8 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 mixins = { require("scripts/mixins/families/tonberry") }
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

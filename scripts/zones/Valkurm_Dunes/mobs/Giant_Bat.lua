@@ -4,7 +4,6 @@
 --  PH for Golden Bat
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

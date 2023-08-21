@@ -4,8 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.SACRARIUM]
 local professorTables = require('scripts/zones/Sacrarium/globals')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 

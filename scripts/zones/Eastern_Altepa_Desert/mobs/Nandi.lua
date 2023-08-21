@@ -2,9 +2,6 @@
 -- Area: Eastern Altepa Desert (114)
 --   NM: Nandi
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

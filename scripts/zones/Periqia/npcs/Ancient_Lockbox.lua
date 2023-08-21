@@ -2,9 +2,6 @@
 -- Area: Periqia
 -- Ancient Lockbox
 -----------------------------------
-require("scripts/globals/appraisal")
------------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)

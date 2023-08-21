@@ -2,8 +2,6 @@
 -- Area: Xarcabard [S]
 --   NM: Prince Orobas
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

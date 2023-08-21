@@ -2,8 +2,6 @@
 -- Area: Uleguerand_Range
 --  NPC: HomePoint#5
 -----------------------------------
-require("scripts/globals/homepoint")
------------------------------------
 local entity = {}
 
 local hpEvent = 8704

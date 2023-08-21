@@ -4,8 +4,6 @@
 -- Involved In Quest: Wild Card
 -- !zone 169
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

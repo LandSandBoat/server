@@ -4,7 +4,6 @@
 -- Note: PH for Teporingo
 -----------------------------------
 local ID = zones[xi.zone.DANGRUF_WADI]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

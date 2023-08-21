@@ -3,8 +3,6 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Spellspear Djokvukk
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

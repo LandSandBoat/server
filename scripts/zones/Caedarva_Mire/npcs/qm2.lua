@@ -4,7 +4,6 @@
 -- !pos -773 -11 322 79
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

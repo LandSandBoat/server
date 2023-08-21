@@ -9,10 +9,6 @@
     7d02, 0, 80, 1, 512, 4, 4, 180 -- Neo DM (lose)
 ]]
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

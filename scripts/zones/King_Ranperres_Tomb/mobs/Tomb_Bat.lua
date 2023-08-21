@@ -4,7 +4,6 @@
 -- Note: Place holder Crypt Ghost
 -----------------------------------
 local ID = zones[xi.zone.KING_RANPERRES_TOMB]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

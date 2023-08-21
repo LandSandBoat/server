@@ -4,7 +4,6 @@
 -- Note: PH for Da'Dha Hundredmask
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

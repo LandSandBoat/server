@@ -3,8 +3,6 @@
 -- Waughroon Shrine KSNM30, Lachesis Orb
 -- !additem 1178
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

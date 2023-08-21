@@ -2,7 +2,6 @@
 -- Zone: Aht_Urhgan_Whitegate (50)
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

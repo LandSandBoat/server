@@ -2,8 +2,6 @@
 -- Zone: Crawlers_Nest (197)
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

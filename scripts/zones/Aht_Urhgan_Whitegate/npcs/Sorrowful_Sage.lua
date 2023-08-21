@@ -5,8 +5,6 @@
 -- !pos 134.096 0.161 -30.401 50
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

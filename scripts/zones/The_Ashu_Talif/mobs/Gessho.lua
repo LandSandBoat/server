@@ -4,7 +4,6 @@
 -- TOAU-15 Mission Battle
 -----------------------------------
 local ID = zones[xi.zone.THE_ASHU_TALIF]
-require("scripts/globals/allyassist")
 -----------------------------------
 local entity = {}
 

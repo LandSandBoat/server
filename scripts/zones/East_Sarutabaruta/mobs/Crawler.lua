@@ -4,8 +4,6 @@
 -- Note: PH for Spiny Spipi
 -----------------------------------
 local ID = zones[xi.zone.EAST_SARUTABARUTA]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

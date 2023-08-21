@@ -2,8 +2,6 @@
 -- Zone: Monastic Cavern (150)
 -----------------------------------
 local ID = zones[xi.zone.MONASTIC_CAVERN]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

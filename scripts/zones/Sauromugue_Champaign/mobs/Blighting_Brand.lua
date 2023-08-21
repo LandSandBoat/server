@@ -2,9 +2,6 @@
 -- Area: Sauromugue Champaign
 --   NM: Blighting Brand
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Goldsmithing Guild
 -- !pos -36.459 -16.000 76.840 249
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}

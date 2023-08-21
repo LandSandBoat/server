@@ -4,7 +4,6 @@
 -- Note: PH for Sea Hog
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

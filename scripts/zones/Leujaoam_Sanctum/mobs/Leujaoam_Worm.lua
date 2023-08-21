@@ -2,9 +2,6 @@
 -- Area: Leujaoam Sanctum (Leujaoam Cleansing)
 --  Mob: Leujaoam Worm
 -----------------------------------
-require("scripts/globals/assault")
------------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

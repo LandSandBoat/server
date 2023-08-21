@@ -3,7 +3,6 @@
 --  Mob: Goblin Gambler
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

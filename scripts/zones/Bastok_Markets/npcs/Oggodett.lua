@@ -4,8 +4,6 @@
 -- Aragoneu Regional Goods
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

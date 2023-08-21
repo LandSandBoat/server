@@ -3,8 +3,6 @@
 --  NPC: Nenepp
 -----------------------------------
 local ID = zones[xi.zone.KAZHAM]
-require("scripts/globals/pathfind")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

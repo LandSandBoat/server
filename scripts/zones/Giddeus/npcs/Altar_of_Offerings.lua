@@ -5,7 +5,6 @@
 -- !pos -137 17 177 145
 -----------------------------------
 local ID = zones[xi.zone.GIDDEUS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

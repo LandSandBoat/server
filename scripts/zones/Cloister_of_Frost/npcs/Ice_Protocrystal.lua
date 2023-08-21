@@ -4,8 +4,6 @@
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -- !pos 558 0 596 203
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
 local ID = zones[xi.zone.CLOISTER_OF_FROST]
 -----------------------------------
 local entity = {}

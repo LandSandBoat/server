@@ -2,8 +2,6 @@
 -- Area: Windurst Walls
 --  NPC: Karija-Marija
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 -- Karija-Marija doesn't stop walking, so all the points

@@ -4,9 +4,7 @@
 -- Note: PH for Swashstox Beadblinker
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
-require("scripts/globals/mobs")
 -----------------------------------
-
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

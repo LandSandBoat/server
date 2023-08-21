@@ -4,7 +4,6 @@
 -- !pos 345.472 24.279 -114.731 90
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

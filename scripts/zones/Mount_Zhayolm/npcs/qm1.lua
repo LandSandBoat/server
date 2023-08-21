@@ -4,7 +4,6 @@
 -- !pos 399 -27 120 61
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

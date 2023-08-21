@@ -5,7 +5,6 @@
 -- !pos -49.944 -0.891 -139.485 208
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

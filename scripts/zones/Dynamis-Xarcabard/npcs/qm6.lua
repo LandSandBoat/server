@@ -3,8 +3,6 @@
 --  NPC: ??? (qm6)
 -- Note: Spawns Animated Dagger
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

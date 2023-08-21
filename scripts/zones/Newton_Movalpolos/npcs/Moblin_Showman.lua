@@ -4,7 +4,6 @@
 -- !pos 124.544 19.988 -60.670 12
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

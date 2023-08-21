@@ -5,10 +5,6 @@
 -- Involved in Quest: The Holy Crest, Trouble at the Sluice
 -- !pos 70 -24 21 167
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/pathfind")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 local pathNodes =

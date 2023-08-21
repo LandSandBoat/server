@@ -4,8 +4,6 @@
 -- Fame Checker
 -- !zone 236
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

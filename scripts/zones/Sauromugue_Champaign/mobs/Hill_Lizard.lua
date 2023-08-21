@@ -3,7 +3,6 @@
 --  Mob: Hill Lizard
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

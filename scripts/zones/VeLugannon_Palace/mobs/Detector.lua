@@ -3,7 +3,6 @@
 --  Mob: Detector
 -----------------------------------
 local ID = zones[xi.zone.VELUGANNON_PALACE]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

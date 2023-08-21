@@ -5,7 +5,6 @@
 -- !pos 0 0 -37 59
 -----------------------------------
 local ID = zones[xi.zone.VALLEY_OF_SORROWS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,7 @@
 -- !pos 154 -2 103 80
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
-require("scripts/globals/shop")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

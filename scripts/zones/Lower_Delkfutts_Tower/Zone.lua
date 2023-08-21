@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Lower_Delkfutts_Tower (184)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

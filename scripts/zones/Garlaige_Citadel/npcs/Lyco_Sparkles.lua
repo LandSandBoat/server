@@ -4,8 +4,6 @@
 -- !pos -176.759 -1.249 71.511 200
 -----------------------------------
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 -- Type: Magian Trials NPC (Weapon/Empyrean Armor)
 -- !pos -11 2.453 118 64
 -----------------------------------
-require("scripts/globals/magiantrials")
------------------------------------
 local entity = {}
 
 local eventIds =

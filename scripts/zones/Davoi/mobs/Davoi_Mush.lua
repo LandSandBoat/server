@@ -4,7 +4,6 @@
 -- Note: PH for Blubbery Bulge
 -----------------------------------
 local ID = zones[xi.zone.DAVOI]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

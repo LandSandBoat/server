@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Kazham (250)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

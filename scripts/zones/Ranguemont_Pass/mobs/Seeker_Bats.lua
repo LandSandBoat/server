@@ -4,8 +4,6 @@
 -- Note: PH for Gloom Eye
 -----------------------------------
 local ID = zones[xi.zone.RANGUEMONT_PASS]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

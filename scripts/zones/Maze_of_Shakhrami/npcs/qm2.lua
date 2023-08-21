@@ -5,7 +5,6 @@
 -- !pos 143 9 -219 198
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

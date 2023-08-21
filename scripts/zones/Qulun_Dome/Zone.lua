@@ -2,7 +2,6 @@
 -- Zone: Qulun_Dome (148)
 -----------------------------------
 local ID = zones[xi.zone.QULUN_DOME]
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

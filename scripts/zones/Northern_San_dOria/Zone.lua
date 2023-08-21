@@ -2,13 +2,7 @@
 -- Zone: Northern_San_dOria (231)
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 
@@ -18,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -7, -3, 110, 7, -1, 155)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
-    applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

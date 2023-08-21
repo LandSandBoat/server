@@ -4,7 +4,6 @@
 -- Note: PH for Tigerbane Bakdak
 -----------------------------------
 local ID = zones[xi.zone.DAVOI]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -6,8 +6,6 @@
 --  Note: In a Stew should only repeat once per conquest tally. The tally is not implemented at time of
 --        writing this quest. Once it is working please feel free to add it in ^^
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

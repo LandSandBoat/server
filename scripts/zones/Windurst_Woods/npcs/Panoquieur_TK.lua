@@ -3,8 +3,6 @@
 --  NPC: Panoquieur, T.K.
 -- !pos -60 0 -31 241
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

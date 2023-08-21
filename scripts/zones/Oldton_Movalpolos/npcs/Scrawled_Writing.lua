@@ -4,7 +4,6 @@
 -- Allows players to spawn NM Goblin Wolfman
 -----------------------------------
 local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

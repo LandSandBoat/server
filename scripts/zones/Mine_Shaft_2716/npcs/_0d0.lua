@@ -2,8 +2,6 @@
 -- Area: Mine_Shaft_2716
 --  NPC: Shaft entrance
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

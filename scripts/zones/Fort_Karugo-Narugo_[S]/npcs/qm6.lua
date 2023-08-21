@@ -5,7 +5,6 @@
 -- !pos 280 -20 85 96
 -----------------------------------
 local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

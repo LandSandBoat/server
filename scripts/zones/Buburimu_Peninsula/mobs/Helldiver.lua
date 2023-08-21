@@ -2,8 +2,6 @@
 -- Area: Buburimu Peninsula (118)
 --  Mob: Helldiver
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

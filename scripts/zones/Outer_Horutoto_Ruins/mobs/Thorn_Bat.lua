@@ -2,8 +2,6 @@
 -- Area: Outer Horutoto Ruins
 --  Mob: Thorn Bat
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

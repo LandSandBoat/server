@@ -2,8 +2,6 @@
 -- Area: Lower Delkfutt's Tower
 --  Mob: Magic Pot
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

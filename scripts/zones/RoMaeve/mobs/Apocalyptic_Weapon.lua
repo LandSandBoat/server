@@ -2,8 +2,6 @@
 -- Area: RoMaeve
 --  Mob: Apocalyptic Weapon
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

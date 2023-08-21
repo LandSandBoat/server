@@ -5,7 +5,6 @@
 -- !pos -7.600 0.249 25.239 242
 -----------------------------------
 local ID = zones[xi.zone.HEAVENS_TOWER]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

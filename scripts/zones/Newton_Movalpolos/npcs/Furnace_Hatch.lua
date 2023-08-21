@@ -3,7 +3,6 @@
 --  NPC: Furnace_Hatch
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

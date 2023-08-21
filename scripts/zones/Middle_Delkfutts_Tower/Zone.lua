@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Middle_Delkfutts_Tower
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

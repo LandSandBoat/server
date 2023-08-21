@@ -4,7 +4,6 @@
 local ID = zones[xi.zone.BATALLIA_DOWNS]
 require('scripts/quests/full_speed_ahead')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
 -----------------------------------
 local zoneObject = {}
 

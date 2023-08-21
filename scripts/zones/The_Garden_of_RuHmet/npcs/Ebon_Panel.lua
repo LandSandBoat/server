@@ -7,7 +7,6 @@
 -- !pos 577.648 -5.180 -700.000 35 | Galka Tower
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

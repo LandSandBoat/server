@@ -1,17 +1,14 @@
 -----------------------------------
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
-require('scripts/globals/events/harvest_festivals')
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
-    applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end

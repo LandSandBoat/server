@@ -4,7 +4,6 @@
 -- Immune to sleep (light, dark), poison, cannot regain HP on deaggro
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
-require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
 

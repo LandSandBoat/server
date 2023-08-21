@@ -4,7 +4,6 @@
 -- !pos 347.897 -10.895 264.382 24
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

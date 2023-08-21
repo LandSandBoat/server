@@ -4,7 +4,6 @@
 -- Note: PH for Ashmaker Gotblut
 -----------------------------------
 local ID = zones[xi.zone.YUGHOTT_GROTTO]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

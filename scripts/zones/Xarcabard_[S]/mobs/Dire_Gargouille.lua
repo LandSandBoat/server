@@ -4,7 +4,6 @@
 -- Note: PH for Graoully
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

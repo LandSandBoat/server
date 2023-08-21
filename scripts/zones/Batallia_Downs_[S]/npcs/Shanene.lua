@@ -3,8 +3,6 @@
 --  NPC: Shanene
 -- !pos 161.183 0.468 91.111 84
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

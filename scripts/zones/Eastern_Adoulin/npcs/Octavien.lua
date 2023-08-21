@@ -5,8 +5,6 @@
 -- Starts Children of the Rune
 -- !pos 100.580 -40.150 -63.830
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 local ID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 local entity = {}

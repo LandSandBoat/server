@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Slip
 -- !pos 10.804 -0.031 -18.927 195
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

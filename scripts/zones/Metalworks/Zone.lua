@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Metalworks (237)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

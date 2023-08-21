@@ -4,8 +4,6 @@
 -- !pos -281.182 40.113 263.102 106
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG]
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

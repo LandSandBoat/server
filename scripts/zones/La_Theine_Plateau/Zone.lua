@@ -4,12 +4,6 @@
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

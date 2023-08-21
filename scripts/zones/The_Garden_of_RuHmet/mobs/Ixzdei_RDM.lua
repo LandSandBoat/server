@@ -5,8 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/magic")
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 

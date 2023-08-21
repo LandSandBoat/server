@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Hall_of_Transference
 -----------------------------------
-require('scripts/globals/teleports')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

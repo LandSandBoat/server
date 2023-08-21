@@ -154,7 +154,7 @@ namespace effects
                 uint16 sortKey                  = sql->GetIntData(10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
 
-                auto filename = fmt::format("./scripts/globals/effects/{}.lua", EffectsParams[EffectID].Name);
+                auto filename = fmt::format("./scripts/effects/{}.lua", EffectsParams[EffectID].Name);
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -1539,7 +1539,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         effect == EFFECT_ATMA ||
         effect == EFFECT_BATTLEFIELD)
     {
-        name.insert(0, "globals/effects/");
+        name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
     else
@@ -1547,7 +1547,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         CItem* Ptem = itemutils::GetItemPointer(subType);
         if (Ptem != nullptr && subType > 0)
         {
-            name.insert(0, "globals/items/");
+            name.insert(0, "items/");
             name.insert(name.size(), Ptem->getName());
         }
     }

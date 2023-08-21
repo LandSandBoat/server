@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea - Grauberg
 -----------------------------------
-require('scripts/globals/abyssea')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

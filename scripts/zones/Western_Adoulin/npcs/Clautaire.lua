@@ -4,7 +4,6 @@
 -- Starts, Involved with, and Finishes Quest: 'F.A.I.L.ure Is Not an Option'
 -- !pos 44 4 -159 256
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

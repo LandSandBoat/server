@@ -3,10 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/mog_tablets')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}

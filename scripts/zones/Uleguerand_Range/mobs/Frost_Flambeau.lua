@@ -2,8 +2,6 @@
 -- Area: Uleguerand Range
 --   NM: Frost Flambeau
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

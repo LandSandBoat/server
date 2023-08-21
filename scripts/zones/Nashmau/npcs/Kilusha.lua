@@ -5,8 +5,6 @@
 -- !pos 0.373 -6.667 14.712 53
 -----------------------------------
 local ID = zones[xi.zone.NASHMAU]
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Note: PH for Thousandarm Deshglesh
 -----------------------------------
 local ID = zones[xi.zone.GHELSBA_OUTPOST]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

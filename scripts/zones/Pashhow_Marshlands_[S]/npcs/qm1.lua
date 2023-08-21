@@ -4,7 +4,6 @@
 -- Allow player to spawn Kinepikwa with Peiste pellets
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

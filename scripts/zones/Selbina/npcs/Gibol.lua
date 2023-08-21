@@ -5,7 +5,6 @@
 -- !pos 13.591 -7.287 8.569 248
 -----------------------------------
 local ID = zones[xi.zone.SELBINA]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

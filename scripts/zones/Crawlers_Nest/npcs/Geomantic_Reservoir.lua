@@ -4,8 +4,6 @@
 -- Unlocks: Geo-STR
 -- !pos -170.623 -1.376 347.089 197
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

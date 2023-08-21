@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Valley_of_Sorrows (128)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

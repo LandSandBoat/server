@@ -2,10 +2,6 @@
 -- Zone: Selbina (248)
 -----------------------------------
 local ID = zones[xi.zone.SELBINA]
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 

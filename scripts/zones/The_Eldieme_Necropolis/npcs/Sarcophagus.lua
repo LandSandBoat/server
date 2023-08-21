@@ -5,8 +5,6 @@
 -- !pos -420 8 500 195
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

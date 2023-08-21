@@ -2,7 +2,6 @@
 -- Zone: East_Ronfaure_[S] (81)
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

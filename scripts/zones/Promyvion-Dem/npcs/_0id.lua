@@ -3,7 +3,6 @@
 --  NPC: Memory Flux 4th floor
 -----------------------------------
 local ID = zones[xi.zone.PROMYVION_DEM]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

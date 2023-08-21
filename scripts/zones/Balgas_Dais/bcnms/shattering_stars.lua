@@ -3,11 +3,6 @@
 -- Name: Shattering stars - Maat Fight
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

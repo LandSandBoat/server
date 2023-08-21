@@ -6,10 +6,6 @@
 -- !pos 2 0.1 0.1 233
 -----------------------------------
 local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

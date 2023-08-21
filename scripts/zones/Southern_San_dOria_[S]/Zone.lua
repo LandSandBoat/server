@@ -2,9 +2,6 @@
 -- Zone: Southern_San_dOria_[S] (80)
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
-require('scripts/globals/extravaganza')
 -----------------------------------
 local zoneObject = {}
 

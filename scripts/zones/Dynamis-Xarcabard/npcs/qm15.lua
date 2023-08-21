@@ -3,8 +3,6 @@
 --  NPC: ??? (qm15)
 -- Note: Spawns Animated Hammer
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

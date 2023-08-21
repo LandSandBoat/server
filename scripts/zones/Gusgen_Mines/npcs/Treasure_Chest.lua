@@ -4,8 +4,6 @@
 -- Involved In Quest: The Goblin Tailor
 -- !zone 196
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

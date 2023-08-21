@@ -2,8 +2,6 @@
 -- Area: East Ronfaure [S]
 --   NM: Skogs Fru
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

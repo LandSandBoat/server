@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS_S]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

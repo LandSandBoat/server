@@ -3,8 +3,6 @@
 -- NPC : Tohopka
 -- !pos -105.723 -10 83.813 240
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,8 +4,6 @@
 -- Note: PH for Leshonki
 -----------------------------------
 local ID = zones[xi.zone.THE_BOYAHDA_TREE]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Note: PH for Magnotaur
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

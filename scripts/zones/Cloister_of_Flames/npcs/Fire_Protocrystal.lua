@@ -4,8 +4,6 @@
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
 local ID = zones[xi.zone.CLOISTER_OF_FLAMES]
 -----------------------------------
 local entity = {}

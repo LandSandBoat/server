@@ -3,8 +3,6 @@
 --  NPC: ??? (qm19)
 -- Note: Spawns Animated Horn
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

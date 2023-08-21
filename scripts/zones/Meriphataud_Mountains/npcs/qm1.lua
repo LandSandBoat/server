@@ -5,7 +5,6 @@
 -- !pos 641 -15 7 119
 -----------------------------------
 local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

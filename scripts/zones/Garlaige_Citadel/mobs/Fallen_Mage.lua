@@ -4,8 +4,6 @@
 -- Note: Place holder Hovering Hotpot
 -----------------------------------
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

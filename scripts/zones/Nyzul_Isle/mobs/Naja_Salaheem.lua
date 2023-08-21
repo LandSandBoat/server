@@ -3,7 +3,6 @@
 --  Mob: Naja Salaheem
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/globals/allyassist")
 -----------------------------------
 local entity = {}
 

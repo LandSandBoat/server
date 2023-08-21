@@ -3,8 +3,6 @@
 --  NPC: Romaa Mihgo
 -- !pos 29.000 -13.023 -176.500 250
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

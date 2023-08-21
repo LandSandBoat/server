@@ -4,14 +4,12 @@
 -- Standard Merchant NPC
 -- !pos -322.123 -10.319 -169.418 235
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = zones[xi.zone.BASTOK_MARKETS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

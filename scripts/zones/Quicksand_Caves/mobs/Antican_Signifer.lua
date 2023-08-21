@@ -4,8 +4,6 @@
 -- Note: PH for Centurio X-I and Antican Proconsul
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

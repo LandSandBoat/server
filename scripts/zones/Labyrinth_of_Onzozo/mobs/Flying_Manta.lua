@@ -4,8 +4,6 @@
 -- Note: PH for Lord of Onzozo and Peg Powler
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

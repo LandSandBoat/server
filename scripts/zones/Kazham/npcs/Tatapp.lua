@@ -3,8 +3,6 @@
 --  NPC: Tatapp
 -- Standard Merchant NPC
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

@@ -2,8 +2,6 @@
 -- Area: RoMaeve
 --  Mob: Darksteel Golem
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

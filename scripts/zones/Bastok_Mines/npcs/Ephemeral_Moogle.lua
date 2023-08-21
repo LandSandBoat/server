@@ -4,8 +4,6 @@
 -- Type: Crystal Strage NPC
 -- !pos 118.870 2.020 4.290 234
 -----------------------------------
-require("scripts/globals/ephemeral")
------------------------------------
 local entity = {}
 
 local triggerEvent = 617

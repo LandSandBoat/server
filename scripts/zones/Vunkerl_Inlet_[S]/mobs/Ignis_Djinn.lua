@@ -4,7 +4,6 @@
 -- Note: PH for Big Bang
 -----------------------------------
 local ID = zones[xi.zone.VUNKERL_INLET_S]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,6 @@
 -- Zone: Abyssea - Tahrongi
 --  NPC: Atma Fabricant
 -----------------------------------
-require("scripts/globals/abyssea/atma_fabricant")
------------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,8 +3,6 @@
 --  NPC: Orudoba-Sondeba
 -- !pos 70.086 -3.503 -69.939 239
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,7 +4,6 @@
 -- !pos 200 33 -140 68
 -----------------------------------
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

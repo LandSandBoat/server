@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Port_Jeuno (246)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

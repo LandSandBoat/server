@@ -2,9 +2,6 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Drumskull Zogdregg
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

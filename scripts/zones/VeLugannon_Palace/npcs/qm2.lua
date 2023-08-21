@@ -5,7 +5,6 @@
 -- !pos 0.1 0.1 -286 177
 -----------------------------------
 local ID = zones[xi.zone.VELUGANNON_PALACE]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

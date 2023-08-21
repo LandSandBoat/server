@@ -2,9 +2,6 @@
 -- Area: Qufim Island
 --   NM: Slippery Sucker
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

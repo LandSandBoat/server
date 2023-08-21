@@ -3,7 +3,6 @@
 --  NPC: Harvesting Point
 -----------------------------------
 local ID = zones[xi.zone.GRAUBERG_S]
-require("scripts/globals/helm")
 -----------------------------------
 local entity = {}
 

@@ -3,8 +3,6 @@
 -- Qu'Bia Arena mission battlefield
 -----------------------------------
 local ID = zones[xi.zone.QUBIA_ARENA]
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

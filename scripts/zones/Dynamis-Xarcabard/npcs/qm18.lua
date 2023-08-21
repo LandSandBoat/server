@@ -3,8 +3,6 @@
 --  NPC: ??? (qm18)
 -- Note: Spawns Animated Gun
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

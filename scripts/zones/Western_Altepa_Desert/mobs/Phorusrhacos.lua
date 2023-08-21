@@ -4,7 +4,6 @@
 -- Note: PH for Picolaton
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

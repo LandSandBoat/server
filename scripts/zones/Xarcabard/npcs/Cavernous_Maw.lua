@@ -5,8 +5,6 @@
 -- Teleports Players to Abyssea - Uleguerand
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

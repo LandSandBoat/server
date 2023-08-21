@@ -4,7 +4,6 @@
 -- Note: PH for Vuu Puqu the Beguiler
 -----------------------------------
 local ID = zones[xi.zone.GIDDEUS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

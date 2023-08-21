@@ -3,7 +3,6 @@
 --  MOB: Imp
 -----------------------------------
 mixins = { require('scripts/mixins/families/imp') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 

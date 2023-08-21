@@ -3,9 +3,6 @@
 --  Mob: Colossus
 -- Note: PH for Goliath
 -----------------------------------
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -4,8 +4,6 @@
 -- Elshimo Uplands Regional Merchant
 -----------------------------------
 local ID = zones[xi.zone.PORT_WINDURST]
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

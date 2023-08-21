@@ -4,8 +4,6 @@
 --  Starts Quest: Trial Size Trial By Fire
 -- !pos 102.647 -14.999 -97.664 250
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/teleports")
 local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}

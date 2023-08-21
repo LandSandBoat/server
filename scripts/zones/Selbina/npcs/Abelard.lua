@@ -7,9 +7,6 @@
 -- quickly earn gil. However, as this is not a legitimate concern on private servers players may
 -- complete this quest even with no fame.
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 local zoneId =

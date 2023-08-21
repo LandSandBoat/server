@@ -4,8 +4,6 @@
 -- Note: Place Holder For Maighdean Uaine
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

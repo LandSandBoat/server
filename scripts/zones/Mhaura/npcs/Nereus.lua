@@ -3,9 +3,6 @@
 --  NPC: Nereus
 -- Starts and ends repeteable quest A_POTTER_S_PREFERENCE
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 --    player:startEvent(110) -- standar dialog

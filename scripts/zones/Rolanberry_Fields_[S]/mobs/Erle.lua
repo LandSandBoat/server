@@ -2,8 +2,6 @@
 -- Area: Rolanberry Fields [S]
 --   NM: Erle
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

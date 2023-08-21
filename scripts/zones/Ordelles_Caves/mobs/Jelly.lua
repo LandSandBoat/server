@@ -4,8 +4,6 @@
 -- Note: PH for Agar Agar
 -----------------------------------
 local ID = zones[xi.zone.ORDELLES_CAVES]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

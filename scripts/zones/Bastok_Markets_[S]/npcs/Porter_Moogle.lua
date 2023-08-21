@@ -5,8 +5,6 @@
 -- !zone 87
 -- !pos TODO
 -----------------------------------
-require("scripts/globals/porter_moogle")
------------------------------------
 local entity = {}
 
 local e =

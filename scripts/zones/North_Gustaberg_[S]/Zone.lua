@@ -2,8 +2,6 @@
 -- Zone: North_Gustaberg_[S] (88)
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG_S]
-require('scripts/globals/quests')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

@@ -4,10 +4,6 @@
 -- !pos -162 -11 78 140
 -----------------------------------
 local ID = zones[xi.zone.GHELSBA_OUTPOST]
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/pets")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -1525,6 +1525,7 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(70));
 
                 mobutils::InitializeMob(PMob);
+                mobutils::AddCustomMods(PMob);
             }
         }
         return PMob;

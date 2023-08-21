@@ -4,8 +4,6 @@
 -- Note: PH for Antican Tribunus
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

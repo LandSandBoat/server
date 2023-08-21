@@ -3,8 +3,6 @@
 --  NPC: Specilox
 -- Gobbie Mystery Box
 -----------------------------------
-require("scripts/globals/gobbie_mystery_box")
------------------------------------
 local entity = {}
 
 local events =

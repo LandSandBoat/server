@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: LaLoff_Amphitheater (180)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

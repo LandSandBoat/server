@@ -2,9 +2,6 @@
 -- Ancient Flames Beckon
 -- Spire of Holla mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
 require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefieldObject = {}

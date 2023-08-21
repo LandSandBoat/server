@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Chamber_of_Oracles (168)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

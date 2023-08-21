@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Temple_of_Uggalepih (159)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

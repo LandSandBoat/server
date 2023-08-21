@@ -219,7 +219,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         player:delTP(100)
     end
 
-    if math.random() <= getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
         local debuffEffect = target:getStatusEffect(stepEffect)
         hitType            = hitId
 
@@ -324,7 +324,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local spell  = GetSpell(xi.magic.spell.GRAVITY)
@@ -361,7 +361,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= getHitRate(player, target, true, 100) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, true, 100) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local hitType = 3
@@ -384,9 +384,9 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             weaponDamage = weaponDamage - 3 + h2hSkill
         end
 
-        local baseDmg   = weaponDamage + fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
-        local cRatio, _ = cMeleeRatio(player, target, params, 0, 1000)
-        local dmg       = baseDmg * generatePdif(cRatio[1], cRatio[2], true)
+        local baseDmg   = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
+        local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
+        local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
 
         if applyResistance(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)

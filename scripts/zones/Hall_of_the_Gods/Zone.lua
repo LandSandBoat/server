@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Hall_of_the_Gods (251)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,9 +4,6 @@
 -- Type: Adoulin Fame Checking NPC
 -- !pos -61.044 -0.150 -5.239 257
 -----------------------------------
-require('scripts/globals/quests')
------------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)

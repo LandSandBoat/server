@@ -2,8 +2,6 @@
 -- Assault: Excavation Duty
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
-require("scripts/globals/assault")
-require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 

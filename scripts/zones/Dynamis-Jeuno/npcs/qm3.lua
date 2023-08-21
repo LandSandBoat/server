@@ -3,8 +3,6 @@
 --  NPC: ??? (qm3)
 -- Note: Spawns Scourquix Scaleskin
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

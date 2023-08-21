@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 mixins = { require("scripts/mixins/families/puk") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

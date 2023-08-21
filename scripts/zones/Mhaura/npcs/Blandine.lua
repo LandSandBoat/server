@@ -4,8 +4,6 @@
 -- Start Quest: The Sand Charmz
 -- !pos 23 -7 41 249
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

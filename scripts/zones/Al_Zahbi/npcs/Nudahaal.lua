@@ -4,7 +4,6 @@
 -- Type: Bonecraft Normal/Adv. Image Support
 -- !pos -57.056 -7 -88.377 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

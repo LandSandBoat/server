@@ -2,8 +2,6 @@
 -- Area: Batallia Downs [S]
 --   NM: Habergoass
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

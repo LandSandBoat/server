@@ -5,8 +5,6 @@
 -- !pos 203 0.1 82 124
 -----------------------------------
 local ID = zones[xi.zone.YHOATOR_JUNGLE]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Type: Guild Merchant: Fishing Guild
 -- !pos -31.720 -6.000 -94.919 50
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}

@@ -2,9 +2,6 @@
 -- Area: LaLoff Amphitheater
 -- Name: Ark Angels 2 (Tarutaru)
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

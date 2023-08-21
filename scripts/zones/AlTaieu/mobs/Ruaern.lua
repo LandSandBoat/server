@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 local ID = zones[xi.zone.ALTAIEU]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

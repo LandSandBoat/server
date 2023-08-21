@@ -183,7 +183,7 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
         fSTRlowerCap = -3
     end
 
-    fSTR = utils.clamp(fSTR2 / 2, fSTRlowerCap, fSTRupperCap)
+    fSTR = utils.clamp(fSTR / 2, fSTRlowerCap, fSTRupperCap)
 
     return fSTR
 end

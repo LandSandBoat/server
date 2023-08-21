@@ -2,8 +2,6 @@
 -- Zone: Caedarva_Mire (79)
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
-require('scripts/globals/missions')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

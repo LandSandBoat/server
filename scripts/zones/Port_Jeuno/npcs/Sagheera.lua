@@ -4,9 +4,6 @@
 -- !pos -3 0.1 -9 246
 -----------------------------------
 local ID = zones[xi.zone.PORT_JEUNO]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

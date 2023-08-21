@@ -2,8 +2,6 @@
 -- Zone: Sacrarium (28)
 -----------------------------------
 local ID = zones[xi.zone.SACRARIUM]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

@@ -5,8 +5,6 @@
 -- !pos -436.000 -13.499 340.117 126
 -----------------------------------
 local ID = zones[xi.zone.QUFIM_ISLAND]
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

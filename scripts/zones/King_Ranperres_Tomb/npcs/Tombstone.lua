@@ -4,9 +4,6 @@
 -- Involved in Quest: Grave Concerns
 -- !pos 1 0.1 -101 190
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

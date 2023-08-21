@@ -4,7 +4,6 @@
 -- Note: PH for Friar Rush
 -----------------------------------
 local ID = zones[xi.zone.DEN_OF_RANCOR]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

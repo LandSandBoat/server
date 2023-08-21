@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: The_Boyahda_Tree (153)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

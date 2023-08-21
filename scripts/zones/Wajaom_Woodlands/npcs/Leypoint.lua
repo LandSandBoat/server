@@ -5,7 +5,6 @@
 -- !pos -200.027 -8.500 80.058 51
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

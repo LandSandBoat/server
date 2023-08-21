@@ -4,7 +4,6 @@
 -- Type: Cooking Normal/Adv. Image Support
 -- !pos 54.966 -7 8.328 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

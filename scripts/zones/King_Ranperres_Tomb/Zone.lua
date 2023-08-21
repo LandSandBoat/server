@@ -2,8 +2,6 @@
 -- Zone: King Ranperres Tomb (190)
 -----------------------------------
 local ID = zones[xi.zone.KING_RANPERRES_TOMB]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

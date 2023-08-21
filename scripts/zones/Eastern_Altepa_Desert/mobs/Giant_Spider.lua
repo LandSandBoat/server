@@ -4,8 +4,6 @@
 -- Note: PH for Dune Widow
 -----------------------------------
 local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

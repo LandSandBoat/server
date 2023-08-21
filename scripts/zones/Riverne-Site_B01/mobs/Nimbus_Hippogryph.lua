@@ -4,7 +4,6 @@
 -- Note: Place holder Imdugud
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

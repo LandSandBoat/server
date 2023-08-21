@@ -2,9 +2,6 @@
 -- Area: Aydeewa Subterrane
 --   NM: Lizardtrap
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

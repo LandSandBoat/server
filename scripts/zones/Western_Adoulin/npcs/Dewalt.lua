@@ -4,8 +4,6 @@
 -- Involved with Quests: 'Flavors of our Lives', 'Dont Ever Leaf Me'
 --  !pos -23 0 28 256
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

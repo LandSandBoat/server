@@ -3,7 +3,6 @@
 --  Mob: Yagudo Mendicant
 -----------------------------------
 local ID = zones[xi.zone.GIDDEUS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

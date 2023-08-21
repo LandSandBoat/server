@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Altar_Room (152)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

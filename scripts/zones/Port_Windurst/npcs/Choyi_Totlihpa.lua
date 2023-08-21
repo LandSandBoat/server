@@ -3,9 +3,6 @@
 --  NPC: Choyi Totlihpa
 -- !pos -58.927 -5.732 132.819 240
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

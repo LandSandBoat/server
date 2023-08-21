@@ -9,7 +9,6 @@
 -- NW / Mithra tower   !pos -796 0 460 35
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

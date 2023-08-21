@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Toraimarai Canal (169)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

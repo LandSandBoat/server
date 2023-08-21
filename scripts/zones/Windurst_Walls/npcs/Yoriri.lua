@@ -3,9 +3,6 @@
 --  NPC: Yoriri
 -- !pos 65.268 -8.5 -58.309 239
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

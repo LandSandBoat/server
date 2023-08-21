@@ -2,8 +2,6 @@
 -- Area: East Ronfaure
 --   NM: Swamfisk
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

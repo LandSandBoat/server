@@ -3,10 +3,6 @@
 --  NPC: Zalsuhm
 -----------------------------------
 local ID = zones[xi.zone.LOWER_JEUNO]
-require("scripts/globals/equipment")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/weaponskillids")
 -----------------------------------
 local entity = {}
 

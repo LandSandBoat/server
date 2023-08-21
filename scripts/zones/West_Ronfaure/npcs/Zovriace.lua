@@ -5,7 +5,6 @@
 -- !pos -436.356 -15.851 -258.168 100
 -----------------------------------
 local ID = zones[xi.zone.WEST_RONFAURE]
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 

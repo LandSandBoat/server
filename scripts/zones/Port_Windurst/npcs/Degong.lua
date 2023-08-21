@@ -4,7 +4,6 @@
 -- Type: Fishing Synthesis Image Support
 -- !pos -178.400 -3.835 60.480 240
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}

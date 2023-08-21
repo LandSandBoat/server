@@ -5,8 +5,6 @@
 -- !pos -612.800 1.750 693.190 29
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
-require("scripts/globals/quests")
-require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
 

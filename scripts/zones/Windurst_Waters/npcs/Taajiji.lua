@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}

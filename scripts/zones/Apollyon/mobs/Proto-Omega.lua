@@ -2,8 +2,6 @@
 -- Area: Apollyon (Central)
 --  Mob: Proto-Omega
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 local quadrupedForm = function(mob)

@@ -4,7 +4,6 @@
 -- Type: Woodworking Adv. Synthesis Image Support
 -- !pos -183.320 9.999 269.651 231
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}

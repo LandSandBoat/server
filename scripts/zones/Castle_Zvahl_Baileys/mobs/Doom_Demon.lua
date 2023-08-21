@@ -4,7 +4,6 @@
 -- Note: PH for Marquis Sabnock
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

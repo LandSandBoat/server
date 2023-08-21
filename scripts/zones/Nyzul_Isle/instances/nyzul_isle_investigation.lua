@@ -2,9 +2,6 @@
 -- Assault 51 : Nyzul Isle Investigation
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/globals/instance")
-require("scripts/globals/nyzul")
-require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
 local instanceObject = {}

@@ -2,8 +2,6 @@
 -- Area: Carpenters' Landing
 --   NM: Tempest Tigon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

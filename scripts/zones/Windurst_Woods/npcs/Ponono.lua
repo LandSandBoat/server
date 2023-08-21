@@ -8,7 +8,6 @@
 -- TODO Requre check for other 3 quests An Understanding General, A Generous General,
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

@@ -5,8 +5,6 @@
 -- Teleports Players to Abyssea - Grauberg
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG]
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

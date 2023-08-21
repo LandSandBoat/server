@@ -4,7 +4,6 @@
 -- !pos 444 -37 -18 139
 -----------------------------------
 local ID = zones[xi.zone.HORLAIS_PEAK]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

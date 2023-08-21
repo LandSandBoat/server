@@ -2,9 +2,6 @@
 -- Zone: Maze of Shakhrami (198)
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

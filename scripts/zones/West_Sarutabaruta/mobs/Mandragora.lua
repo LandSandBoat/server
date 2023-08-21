@@ -4,8 +4,6 @@
 -- Note: PH for Tom Tit Tat
 -----------------------------------
 local ID = zones[xi.zone.WEST_SARUTABARUTA]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

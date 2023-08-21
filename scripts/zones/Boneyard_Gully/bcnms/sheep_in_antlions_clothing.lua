@@ -4,7 +4,6 @@
 -- !addkeyitem MIASMA_FILTER
 -----------------------------------
 local ID = zones[xi.zone.BONEYARD_GULLY]
-require("scripts/globals/battlefield")
 -----------------------------------
 local battlefieldObject = {}
 

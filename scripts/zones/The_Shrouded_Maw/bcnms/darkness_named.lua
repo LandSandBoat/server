@@ -3,8 +3,6 @@
 -- The Shrouded Maw mission battlefield
 -----------------------------------
 local ID = zones[xi.zone.THE_SHROUDED_MAW]
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -4,9 +4,6 @@
 -- Used in Quest: The Holy Crest
 -- !pos 234 0.1 -110 198
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/helm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

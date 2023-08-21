@@ -3,8 +3,6 @@
 --  NPC: Eamonn
 -- !pos -91 3 2 256
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

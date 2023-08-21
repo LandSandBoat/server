@@ -4,7 +4,6 @@
 -- Note: PH for Quu Domi the Gallant
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,6 @@
 -- Area: Newton Movalpolos
 --   NM: Swashstox Beadblinker
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

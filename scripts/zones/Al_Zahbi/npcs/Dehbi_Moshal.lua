@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Woodworking Guild
 -- !pos -71.563 -5.999 -57.544 48
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

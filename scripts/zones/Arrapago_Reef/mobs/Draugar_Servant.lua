@@ -4,7 +4,6 @@
 -- Note: PH for Bloody Bones
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

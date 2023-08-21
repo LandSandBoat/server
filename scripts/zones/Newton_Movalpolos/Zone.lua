@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Newton_Movalpolos (12)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

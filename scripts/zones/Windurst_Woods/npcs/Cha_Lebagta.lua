@@ -4,8 +4,6 @@
 -- !pos 58.385 -6.249 216.670 241
 -- Involved in Quests: As Thick as Thieves, Mihgo's Amigo
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

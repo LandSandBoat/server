@@ -5,8 +5,6 @@
 -- Teleports Players to Abyssea - Tahrongi
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

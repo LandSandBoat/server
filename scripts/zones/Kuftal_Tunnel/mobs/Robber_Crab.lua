@@ -3,7 +3,6 @@
 --  Mob: Robber Crab
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

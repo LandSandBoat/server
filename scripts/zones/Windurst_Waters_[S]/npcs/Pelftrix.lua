@@ -4,7 +4,6 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS_S]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

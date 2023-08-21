@@ -4,8 +4,6 @@
 -- Note: PH for Dame Blanche
 -----------------------------------
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

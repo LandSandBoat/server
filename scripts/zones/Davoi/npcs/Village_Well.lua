@@ -4,7 +4,6 @@
 -- Involved in Quest: Under Oath
 -----------------------------------
 local ID = zones[xi.zone.DAVOI]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

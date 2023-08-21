@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Palborough Mines (143)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

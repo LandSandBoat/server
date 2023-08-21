@@ -2,9 +2,6 @@
 -- Zone: Ifrits_Cauldron (205)
 -----------------------------------
 local ID = zones[xi.zone.IFRITS_CAULDRON]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

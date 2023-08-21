@@ -4,7 +4,6 @@
 -- Type: Guild Merchant (Blacksmithing Guild)
 -- !pos -106.093 0.999 -24.564 237
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}

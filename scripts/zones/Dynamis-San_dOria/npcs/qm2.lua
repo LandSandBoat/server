@@ -3,8 +3,6 @@
 --  NPC: ??? (qm2)
 -- Note: Spawns Steelshank Kratzvatz
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,7 +3,6 @@
 -- !pos 334 -10 184 52
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

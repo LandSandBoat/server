@@ -4,7 +4,6 @@
 -- Type: Door
 -- !pos 139 -6 127 200
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}

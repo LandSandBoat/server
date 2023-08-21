@@ -3,7 +3,6 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = zones[xi.zone.CARPENTERS_LANDING]
-require("scripts/globals/npc_util")
 -----------------------------------
 
 local carpentersLandingGlobal =

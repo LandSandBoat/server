@@ -2,8 +2,6 @@
 -- Area: Navukgo Execution Chamber
 -- BCNM: Omens
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

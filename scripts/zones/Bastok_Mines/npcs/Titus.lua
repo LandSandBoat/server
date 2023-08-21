@@ -4,7 +4,6 @@
 -- Alchemy Synthesis Image Support
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MINES]
-require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
 

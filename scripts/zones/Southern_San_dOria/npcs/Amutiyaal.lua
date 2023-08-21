@@ -5,10 +5,6 @@
 -- !pos 116 0.1 84 230
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

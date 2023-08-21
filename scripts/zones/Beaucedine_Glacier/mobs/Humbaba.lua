@@ -2,9 +2,6 @@
 -- Area: Beaucedine Glacier
 --   NM: Humbaba
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

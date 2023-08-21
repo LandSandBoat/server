@@ -4,8 +4,6 @@
 -- Involved in Quest: To Cure a Cough
 -- !pos 257 -45 212 101
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 -- TODO: These really should be split out into unique NPCs, as this handles all

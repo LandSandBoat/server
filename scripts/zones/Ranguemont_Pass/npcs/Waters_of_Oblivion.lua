@@ -5,8 +5,6 @@
 -- !pos -284 -45 210 166
 -----------------------------------
 local ID = zones[xi.zone.RANGUEMONT_PASS]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

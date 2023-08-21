@@ -4,7 +4,6 @@
 -- Type: Guild Merchant: Fishing Guild
 -----------------------------------
 local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

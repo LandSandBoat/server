@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
 local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

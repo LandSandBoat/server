@@ -4,7 +4,6 @@
 -- Note: PH for Hundredscar Hajwaj
 -----------------------------------
 local ID = zones[xi.zone.FORT_GHELSBA]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

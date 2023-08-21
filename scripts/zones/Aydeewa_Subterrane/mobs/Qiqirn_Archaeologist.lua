@@ -4,7 +4,6 @@
 -- Note: PH for Bluestreak Gyugyuroon
 -----------------------------------
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

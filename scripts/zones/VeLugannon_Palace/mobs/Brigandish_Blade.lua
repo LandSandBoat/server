@@ -3,7 +3,6 @@
 --   NM: Brigandish Blade
 -----------------------------------
 local ID = zones[xi.zone.VELUGANNON_PALACE]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

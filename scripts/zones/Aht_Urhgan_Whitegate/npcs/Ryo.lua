@@ -4,8 +4,6 @@
 -- Type: ZNM assistant
 -- !pos -127.086 0.999 22.693 50
 -----------------------------------
-require("scripts/globals/znm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

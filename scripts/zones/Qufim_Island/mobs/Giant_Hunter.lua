@@ -4,8 +4,6 @@
 -- Note: PH for Slippery Sucker
 -----------------------------------
 local ID = zones[xi.zone.QUFIM_ISLAND]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

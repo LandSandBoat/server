@@ -2,8 +2,6 @@
 -- Area: Eastern Altepa Desert
 -- NM  : Cactrot Rapido
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

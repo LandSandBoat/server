@@ -3,8 +3,6 @@
 --  NPC: Apstaule
 -- Not used cutscenes: 541
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

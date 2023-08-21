@@ -3,8 +3,6 @@
 --  Mob: Warchief Vatgit
 -- Involved in Mission 2-3
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

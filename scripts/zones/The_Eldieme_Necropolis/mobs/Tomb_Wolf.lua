@@ -4,8 +4,6 @@
 -- Note: PH for Cwn Cyrff
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

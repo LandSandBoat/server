@@ -3,9 +3,6 @@
 -----------------------------------
 local func = require('scripts/zones/Carpenters_Landing/globals')
 local ID = zones[xi.zone.CARPENTERS_LANDING]
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

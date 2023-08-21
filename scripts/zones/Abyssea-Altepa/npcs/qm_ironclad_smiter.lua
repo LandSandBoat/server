@@ -5,7 +5,6 @@
 -- !pos -744 -17 -696 218
 -----------------------------------
 local ID = zones[xi.zone.ABYSSEA_ALTEPA]
-require('scripts/globals/abyssea')
 -----------------------------------
 local entity = {}
 

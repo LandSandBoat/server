@@ -4,7 +4,6 @@
 -- Involved in Quest: A New Dawn (BST AF3)
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

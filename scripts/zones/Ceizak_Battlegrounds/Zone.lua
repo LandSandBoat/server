@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ceizak Battlegrounds (261)
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/colonization_reives')
 local ID = zones[xi.zone.CEIZAK_BATTLEGROUNDS]
 -----------------------------------
 local zoneObject = {}

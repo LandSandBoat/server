@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

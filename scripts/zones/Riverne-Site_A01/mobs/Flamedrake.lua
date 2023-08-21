@@ -3,7 +3,6 @@
 --  Mob: Flamedrake PH
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_A01]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

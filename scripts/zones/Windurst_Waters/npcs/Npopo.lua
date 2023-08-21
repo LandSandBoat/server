@@ -3,9 +3,6 @@
 --  NPC: Npopo
 -- !pos -35.464 -5.999 239.120 238
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

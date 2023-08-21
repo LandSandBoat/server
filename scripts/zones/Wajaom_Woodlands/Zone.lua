@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Wajaom_Woodlands (51)
 -----------------------------------
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/chocobo')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onChocoboDig = function(player, precheck)

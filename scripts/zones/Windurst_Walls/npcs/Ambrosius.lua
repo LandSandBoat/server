@@ -4,8 +4,6 @@
 -----------------------------------
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

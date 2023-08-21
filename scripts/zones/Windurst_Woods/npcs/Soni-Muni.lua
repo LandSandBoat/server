@@ -4,11 +4,6 @@
 -- Starts & Finishes Quest: The Amazin' Scorpio
 -- !pos -17.073 1.749 -59.327 241
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/pathfind")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 local pathNodes =

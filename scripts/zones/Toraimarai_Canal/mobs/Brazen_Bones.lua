@@ -2,8 +2,6 @@
 -- Area: Toraimarai Canal
 --   NM: Brazen Bones
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

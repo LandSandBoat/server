@@ -4,7 +4,6 @@
 -- !pos 100.000 35.150 340.000 117
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

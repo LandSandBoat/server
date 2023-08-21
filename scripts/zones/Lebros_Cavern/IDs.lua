@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Lebros_Cavern
 -----------------------------------
-require("scripts/globals/assault")
------------------------------------
 zones = zones or {}
 
 zones[xi.zone.LEBROS_CAVERN] =

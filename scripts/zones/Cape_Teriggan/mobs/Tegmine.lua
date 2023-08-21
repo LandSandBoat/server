@@ -2,9 +2,6 @@
 -- Area: Cape Teriggan
 --   NM: Tegmine
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

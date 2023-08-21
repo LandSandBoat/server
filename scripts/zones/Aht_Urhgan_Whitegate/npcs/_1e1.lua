@@ -3,8 +3,6 @@
 --  NPC: Salaheem's Sentinels (Door)
 -- !pos 23 -6 -63 50
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Outer_Horutoto_Ruins (194)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,8 +4,6 @@
 -- Starts Quest: Trial Size Trial by Wind
 -- !pos -17 7 -10 247
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/teleports")
 local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}

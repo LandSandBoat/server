@@ -5,7 +5,6 @@
 -- !pos 0.1 30 21 242
 -----------------------------------
 local ID = zones[xi.zone.HEAVENS_TOWER]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

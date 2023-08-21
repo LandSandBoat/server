@@ -2,8 +2,6 @@
 -- Zone: Bhaflau_Thickets (52)
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 

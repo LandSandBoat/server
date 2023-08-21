@@ -2,8 +2,6 @@
 -- Area: Ordelles Caves
 --   NM: Bombast
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

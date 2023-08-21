@@ -5,7 +5,6 @@
 -- !pos -716 -10 66 103
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

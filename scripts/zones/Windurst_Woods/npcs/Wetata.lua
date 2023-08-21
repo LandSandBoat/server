@@ -5,9 +5,6 @@
 -- !pos -23.825 2.533 -44.567 241
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
 

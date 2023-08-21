@@ -4,8 +4,6 @@
 -- Note: PH for Bloodpool Vorax
 -----------------------------------
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

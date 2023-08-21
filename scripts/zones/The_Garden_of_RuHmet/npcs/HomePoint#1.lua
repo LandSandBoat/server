@@ -3,8 +3,6 @@
 --  NPC: HomePoint#1
 -- !pos -426 0 368 35
 -----------------------------------
-require("scripts/globals/homepoint")
------------------------------------
 local entity = {}
 
 local hpEvent = 8700

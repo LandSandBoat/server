@@ -3,9 +3,6 @@
 --  NPC: Mojo-Pojo
 -- !pos -108.041 -4.25 109.545 240
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

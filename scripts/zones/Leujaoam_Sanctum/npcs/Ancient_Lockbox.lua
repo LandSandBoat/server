@@ -2,9 +2,6 @@
 -- Area: Leujaoam Sanctum
 -- Ancient Lockbox
 -----------------------------------
-require("scripts/globals/assault")
-require("scripts/globals/appraisal")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

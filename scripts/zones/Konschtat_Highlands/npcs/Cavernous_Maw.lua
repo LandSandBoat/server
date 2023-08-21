@@ -5,9 +5,6 @@
 -- Teleports Players to Abyssea - Konschtat
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require("scripts/globals/abyssea")
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Zone: Kuftal_Tunnel (174)
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

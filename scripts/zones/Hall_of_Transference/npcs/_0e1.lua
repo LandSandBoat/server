@@ -3,8 +3,6 @@
 --  NPC: Cermet Gate - Dem
 -- !pos -220 -46 -279 14
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

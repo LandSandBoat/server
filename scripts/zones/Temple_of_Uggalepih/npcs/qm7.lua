@@ -5,7 +5,6 @@
 -- !pos 53 1 -32 159
 -----------------------------------
 local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

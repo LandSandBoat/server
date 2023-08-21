@@ -5,8 +5,6 @@
 -- !pos -116 30 50 193
 -----------------------------------
 local ID = zones[xi.zone.ORDELLES_CAVES]
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

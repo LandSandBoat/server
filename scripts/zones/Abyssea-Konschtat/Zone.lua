@@ -7,8 +7,6 @@
 -- EventID 2180 Teleport?
 -- EventID 2181 DEBUG Menu
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

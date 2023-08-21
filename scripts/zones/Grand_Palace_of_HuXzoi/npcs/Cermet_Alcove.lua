@@ -4,7 +4,6 @@
 -- Note: Escort Quest
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
-require("scripts/globals/pathfind")
 -----------------------------------
 
 local escorts =

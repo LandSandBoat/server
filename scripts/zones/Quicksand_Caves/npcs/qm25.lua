@@ -4,7 +4,6 @@
 --  Notes: Antican Tag
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

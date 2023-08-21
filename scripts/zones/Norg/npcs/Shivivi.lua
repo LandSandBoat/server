@@ -4,10 +4,6 @@
 -- Starts Quest: Secret of the Damp Scroll
 -- !pos 68.729 -6.281 -6.432 252
 -----------------------------------
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

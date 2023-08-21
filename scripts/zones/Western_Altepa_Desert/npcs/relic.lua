@@ -4,7 +4,6 @@
 -- !pos -152 -16 20 125
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

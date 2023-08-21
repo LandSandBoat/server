@@ -4,8 +4,6 @@
 -- !pos -180 -6.8 -833 52
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-require("scripts/globals/assault")
-require("scripts/globals/instance")
 -----------------------------------
 local entity = {}
 

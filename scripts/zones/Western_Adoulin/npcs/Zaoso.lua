@@ -3,8 +3,6 @@
 --  NPC: Zaoso
 -- !pos -94 3 -11 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

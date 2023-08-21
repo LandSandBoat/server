@@ -1,11 +1,6 @@
 -----------------------------------
 -- Zone: Oldton_Movalpolos (11)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

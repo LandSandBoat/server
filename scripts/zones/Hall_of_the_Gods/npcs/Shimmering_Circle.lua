@@ -5,7 +5,6 @@
 -- !pos 0 -20 147 251
 -----------------------------------
 local ID = zones[xi.zone.HALL_OF_THE_GODS]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

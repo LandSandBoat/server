@@ -2,8 +2,6 @@
 -- Area: Beaucedine Glacier
 --  Mob: Cold Gigas
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

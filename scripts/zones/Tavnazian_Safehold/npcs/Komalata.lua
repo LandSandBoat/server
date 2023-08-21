@@ -4,8 +4,6 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
-require("scripts/globals/missions")
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

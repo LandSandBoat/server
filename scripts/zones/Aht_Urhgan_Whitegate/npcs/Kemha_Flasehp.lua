@@ -4,8 +4,6 @@
 -- Type: Fishing Normal/Adv. Image Support
 -- !pos -28.4 -6 -98 50
 -----------------------------------
-require("scripts/globals/crafting")
-require("scripts/globals/npc_util")
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}

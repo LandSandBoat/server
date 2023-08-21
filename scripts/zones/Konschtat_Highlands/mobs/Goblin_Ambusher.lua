@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --  Mob: Goblin Ambusher
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

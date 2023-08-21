@@ -4,7 +4,6 @@
 -- Info: Floor 20 and 40 Boss, Tortoise song dispels 3 buffs
 -----------------------------------
 mixins = { require('scripts/mixins/nyzul_boss_drops') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 

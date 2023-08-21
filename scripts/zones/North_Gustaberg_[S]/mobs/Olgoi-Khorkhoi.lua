@@ -2,8 +2,6 @@
 -- Area: North Gustaberg [S]
 --   NM: Olgoi-Khorkhoi
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

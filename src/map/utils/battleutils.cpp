@@ -181,7 +181,7 @@ namespace battleutils
                 g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
                 g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
 
-                auto filename = fmt::format("./scripts/globals/weaponskills/{}.lua", PWeaponSkill->getName());
+                auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -224,7 +224,7 @@ namespace battleutils
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
-                auto filename = fmt::format("./scripts/globals/mobskills/{}.lua", PMobSkill->getName());
+                auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -285,7 +285,7 @@ namespace battleutils
                 PPetSkill->setTertiarySkillchain(sql->GetUIntData(15));
                 g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
 
-                auto filename = fmt::format("./scripts/globals/abilities/pet/{}.lua", PPetSkill->getName());
+                auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -1499,6 +1499,12 @@ namespace battleutils
     {
         int acc     = 0;
         int hitrate = 75;
+
+        // Check to see if distance is greater than 25 and force hitrate to be 0
+        if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
+        {
+            return 0;
+        }
 
         if (PAttacker->objtype == TYPE_PC)
         {

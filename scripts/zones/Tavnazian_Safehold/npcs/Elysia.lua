@@ -4,8 +4,6 @@
 -- Starts Quest: Unforgiven
 -- !pos -50.410 -22.204 -41.640 26
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

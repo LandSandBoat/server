@@ -2,9 +2,6 @@
 -- A Century of Hardship
 -- Mine Shaft #2716 mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

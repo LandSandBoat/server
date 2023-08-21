@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mamook (65)
 -----------------------------------
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

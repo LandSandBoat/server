@@ -4,7 +4,6 @@
 -- Type: Smithing Normal/Adv. Image Support
 -- !pos -35.163 -1 -31.351 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

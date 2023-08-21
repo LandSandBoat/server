@@ -2,8 +2,6 @@
 -- Area: Monastic Cavern
 --   NM: Bugaboo
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

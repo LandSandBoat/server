@@ -2,7 +2,6 @@
 -- Zone: Gustav Tunnel (212)
 -----------------------------------
 local ID = zones[xi.zone.GUSTAV_TUNNEL]
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

@@ -4,8 +4,6 @@
 -- !pos -366.262 -16.000 325.967 105
 -----------------------------------
 local ID = zones[xi.zone.BATALLIA_DOWNS]
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

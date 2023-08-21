@@ -4,7 +4,6 @@
 -- Guild Merchant NPC: Cooking Guild
 -- !pos -103.935 -2.875 74.304 238
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}

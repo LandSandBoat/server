@@ -5,8 +5,6 @@
 -- !pos -189.142 -8.800 14.449 230
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-require("scripts/globals/shop")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

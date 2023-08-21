@@ -2,8 +2,6 @@
 -- Area: Qufim Island
 --   NM: Ingaevon
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

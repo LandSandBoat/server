@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Ghelsba_Outpost (140)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

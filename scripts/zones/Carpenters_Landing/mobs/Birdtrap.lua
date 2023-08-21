@@ -4,7 +4,6 @@
 -- Note: Placeholder Orctrap
 -----------------------------------
 local ID = zones[xi.zone.CARPENTERS_LANDING]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

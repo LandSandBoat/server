@@ -4,7 +4,6 @@
 -- Starts, Involved with, and Finishes Quest: 'A Pioneers Best (Imaginary) Friend'
 -- !pos 34 0 -131 256
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}

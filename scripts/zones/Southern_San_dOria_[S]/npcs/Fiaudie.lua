@@ -5,8 +5,6 @@
 -- Explains Campaign Ops, freelances
 -- Trigger event 313 for ENDLESS DEBUG HELL
 -----------------------------------
-require("scripts/globals/campaign")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

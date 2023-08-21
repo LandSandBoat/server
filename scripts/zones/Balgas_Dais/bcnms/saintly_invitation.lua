@@ -3,9 +3,6 @@
 -- Name: Saintly Invitation
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

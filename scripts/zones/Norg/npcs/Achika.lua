@@ -4,7 +4,6 @@
 -- Type: Tenshodo Merchant
 -- !pos 1.300 0.000 19.259 252
 -----------------------------------
-require("scripts/globals/shop")
 local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}

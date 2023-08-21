@@ -4,7 +4,6 @@
 -- !pos 73 4 -174 113
 -----------------------------------
 local ID = zones[xi.zone.CAPE_TERIGGAN]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

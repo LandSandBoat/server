@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Louartain
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

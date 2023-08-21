@@ -5,7 +5,6 @@
 -- !pos -308.721 7.477 264.454
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,6 @@
 -- Zone: RoMaeve (122)
 -----------------------------------
 local ID = zones[xi.zone.ROMAEVE]
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
 local zoneObject = {}
 

@@ -5,7 +5,6 @@
 -- !pos -6.142 -6.55 -132.639 241
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
-require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 

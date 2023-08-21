@@ -2,8 +2,6 @@
 -- Area: Pashhow Marshlands
 --  Mob: Marsh Funguar
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

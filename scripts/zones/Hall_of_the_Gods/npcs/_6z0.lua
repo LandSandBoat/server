@@ -4,8 +4,6 @@
 -- Gives qualified players access to Ru'Aun Gardens.
 -- !pos 0 -12 48 251
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

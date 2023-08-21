@@ -4,8 +4,6 @@
 -- Involved with Quest: 'Raptor Rapture'
 -- !pos 13 0 -143 256
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

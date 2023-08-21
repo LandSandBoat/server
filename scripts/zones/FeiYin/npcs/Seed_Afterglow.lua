@@ -13,9 +13,6 @@
 -- Todo: NPC moving. In retail these move around with 3-5+ pos EACH
 -----------------------------------
 local ID = zones[xi.zone.FEIYIN]
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

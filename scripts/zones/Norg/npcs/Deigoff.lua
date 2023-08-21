@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Deigoff
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

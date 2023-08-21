@@ -4,7 +4,6 @@
 -- !pos 420 0 401 34
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Windurst_Walls (239)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

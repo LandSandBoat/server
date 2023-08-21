@@ -5,7 +5,6 @@
 -- Involved in Quest: Gates of Paradise
 -- !pos 484 24 -89 102
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}

@@ -80,24 +80,8 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    doAutoPhysicalWeaponskill
-    doAutoRangedWeaponskill
-    doPhysicalWeaponskill
-    doRangedWeaponskill
-    doMagicWeaponskill
     doesElementMatchWeaponskill
     applyResistanceAddEffect
-    takeWeaponskillDamage
-
-    fTP
-    fSTR
-    fSTR2
-    calculateRawWSDmg
-    calculatedIgnoredDef
-    cMeleeRatio
-    generatePdif
-    getMeleeDmg
-    handleWSGorgetBelt
 
     RoeParseTimed
     getRoeRecords
@@ -106,10 +90,6 @@ global_objects=(
     cmdprops
     error
     onTrigger
-
-    applyHalloweenNpcCostumes
-    isHalloweenEnabled
-    onHalloweenTrade
 
     addBonuses
     addBonusesAbility
@@ -134,7 +114,6 @@ global_objects=(
     getElementalDebuffDOT
     getFlourishAnimation
     getHelixDuration
-    getHitRate
     getMagicHitRate
     getMagicResist
     getStepAnimation

@@ -4,8 +4,6 @@
 -- Type: Event NPC
 --  !pos 70.641 -16.000 -118.589 232
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 local stock =

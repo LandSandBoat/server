@@ -4,8 +4,6 @@
 -- Spawns Karkadann
 -- !pos -157 -31 88 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,7 +5,6 @@
 -- !pos 341 -29 370 112
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

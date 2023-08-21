@@ -2,8 +2,6 @@
 -- Zone: Dangruf_Wadi (191)
 -----------------------------------
 local ID = zones[xi.zone.DANGRUF_WADI]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

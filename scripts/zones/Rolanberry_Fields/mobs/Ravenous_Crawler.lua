@@ -2,8 +2,6 @@
 -- Area: Rolanberry Fields
 --   NM: Ravenous Crawler
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

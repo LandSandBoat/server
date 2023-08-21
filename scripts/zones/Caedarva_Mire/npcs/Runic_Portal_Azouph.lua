@@ -6,10 +6,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

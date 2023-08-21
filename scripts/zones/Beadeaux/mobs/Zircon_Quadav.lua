@@ -6,7 +6,6 @@
 --  Quest THE_TENSHODO_SHOWDOWN active
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

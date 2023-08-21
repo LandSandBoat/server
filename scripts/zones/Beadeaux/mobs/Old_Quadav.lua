@@ -4,7 +4,6 @@
 -- PH for Ge'Dha Evileye
 -----------------------------------
 local ID = zones[xi.zone.BEADEAUX]
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

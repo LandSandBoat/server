@@ -4,8 +4,6 @@
 -- Note: PH for Keeper of Halidom
 -----------------------------------
 local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

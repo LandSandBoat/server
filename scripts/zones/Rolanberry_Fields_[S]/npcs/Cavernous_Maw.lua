@@ -4,8 +4,6 @@
 -- !pos -198 8 360 91
 -- Teleports Players to Rolanberry Fields
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

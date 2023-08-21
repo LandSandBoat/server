@@ -5,7 +5,6 @@
 -- Active on WINDSDAY in this zone. To test on off-days, setStatus(xi.status.NORMAL)
 -----------------------------------
 local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
-require("scripts/globals/beastmentreasure")
 -----------------------------------
 local entity = {}
 

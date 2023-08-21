@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Dragons_Aery (154)
 -----------------------------------
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

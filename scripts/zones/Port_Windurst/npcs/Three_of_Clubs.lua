@@ -3,9 +3,6 @@
 --  NPC: Three of Clubs
 -- !pos -7.238 -5 106.982 240
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

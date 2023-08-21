@@ -3,8 +3,6 @@
 --  NPC: Lacia
 -- Starts Quest: Trial Size Trial By Lightning
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/teleports")
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}

@@ -2,8 +2,6 @@
 -- Zone: Labyrinth of Onzozo (213)
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

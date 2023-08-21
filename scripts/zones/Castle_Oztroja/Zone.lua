@@ -3,8 +3,6 @@
 -----------------------------------
 local oztrojaGlobal = require('scripts/zones/Castle_Oztroja/globals')
 local ID = zones[xi.zone.CASTLE_OZTROJA]
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}
 

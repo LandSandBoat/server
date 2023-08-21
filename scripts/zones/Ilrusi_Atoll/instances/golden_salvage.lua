@@ -2,7 +2,6 @@
 -- Assault: Golden Salvage
 -- TODO: random the chest locations
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local instanceObject = {}

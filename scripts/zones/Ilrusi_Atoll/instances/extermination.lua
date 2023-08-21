@@ -1,7 +1,6 @@
 -----------------------------------
 -- Assault: Extermination
 -----------------------------------
-require("scripts/globals/instance")
 local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local instanceObject = {}

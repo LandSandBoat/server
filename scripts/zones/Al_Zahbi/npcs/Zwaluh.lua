@@ -4,7 +4,6 @@
 -- Type: Leathercraft Normal/Adv. Image Support
 -- !pos -71.556 -6.999 -103.015 48
 -----------------------------------
-require("scripts/globals/crafting")
 local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}

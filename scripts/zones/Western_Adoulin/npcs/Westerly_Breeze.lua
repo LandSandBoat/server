@@ -3,7 +3,6 @@
 --  NPC: Westerly Breeze
 -- !pos 62 32 123 256
 -----------------------------------
-require("scripts/globals/quests")
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
