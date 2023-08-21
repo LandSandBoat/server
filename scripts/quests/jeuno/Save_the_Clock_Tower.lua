@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 3
 -- Derrick : !pos -32 -1 -7 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
 

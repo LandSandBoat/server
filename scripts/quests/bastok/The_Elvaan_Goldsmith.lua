@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 13
 -- Michea : !pos -298 -16 -157 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
 

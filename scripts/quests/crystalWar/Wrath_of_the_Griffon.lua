@@ -5,10 +5,6 @@
 -- Rholont : !pos -168 -2 56 80
 -- qm8     : !pos -6 0 -295 82
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local jugnerSID = zones[xi.zone.JUGNER_FOREST_S]
 -----------------------------------
 

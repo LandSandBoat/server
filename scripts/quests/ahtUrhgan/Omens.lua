@@ -6,10 +6,6 @@
 -- Lathuya         : !pos -95.081 -6 31.638 50
 -- Aydeewa (Blank) : !pos 342.129 36.509 -24.856 68
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 

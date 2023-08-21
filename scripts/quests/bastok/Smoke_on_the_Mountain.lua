@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 15
 -- Hungry Wolf : !pos -25.861 -11 -30.172 237
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 

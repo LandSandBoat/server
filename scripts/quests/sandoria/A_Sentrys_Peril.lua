@@ -3,10 +3,6 @@
 -- Glenne - Southern Sandoria, !pos -122 -2 15 230
 -- Aaveleon - West Ronfaure, !pos -431 -45 343 100
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 

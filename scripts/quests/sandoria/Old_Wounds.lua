@@ -3,11 +3,6 @@
 -- Curilla !pos 27 0.1 0.1 233
 -- qm3 !pos -145 2 446 208
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------

@@ -5,9 +5,6 @@
 -- Bulwark Gate : !pos -447.174 -1.831 342.417 98
 -- Leadavox     : !pos 206 -32 316 83
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

@@ -5,10 +5,6 @@
 -- Collet : !pos -44 0 107 244
 -- _6s2   : !pos -80 0 104 244
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 

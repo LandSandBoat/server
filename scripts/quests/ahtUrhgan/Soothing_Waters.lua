@@ -8,11 +8,6 @@
 -- Mihli Aliapoh: !pos -22.615 -7 78.907 48
 -- qm10         : !pos 352 2 376 68
 -----------------------------------
-require('scripts/globals/besieged')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)
 

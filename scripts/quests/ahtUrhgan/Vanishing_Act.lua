@@ -4,10 +4,6 @@
 -- Fochacha, Whitegate , !pos 3 -1 -10.781 50
 -- Qutiba, Whitegate, !pos 92 -7.5 -130 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
 

@@ -3,11 +3,6 @@
 -----------------------------------
 -- !addquest 8 164
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/abyssea')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.TO_PASTE_A_PEISTE)
 

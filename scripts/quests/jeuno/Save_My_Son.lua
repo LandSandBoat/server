@@ -5,9 +5,6 @@
 -- Door: Merchant's House (_6t2) : !pos -82.22 -7.65 -168.839 245
 -- Nightflowers                  : !pos -264.775 -3.718 28.767 126
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
 

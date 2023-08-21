@@ -8,9 +8,6 @@
 -- qm2      : !pos -208 -9 176 173
 -- Ryoma    : !pos -23 0 -9 252
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local korrolokaID  = zones[xi.zone.KORROLOKA_TUNNEL]
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------

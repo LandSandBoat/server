@@ -1,8 +1,6 @@
 -----------------------------------
 -- Tutorial Mini-Quest
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 xi = xi or {}
 xi.tutorial = xi.tutorial or {}
 

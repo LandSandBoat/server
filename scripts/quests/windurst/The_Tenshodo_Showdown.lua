@@ -6,10 +6,6 @@
 -- Harnek      : !pos 44 0 -19 245
 -- Elfriede    : !pos 61 -15 10 248
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
 

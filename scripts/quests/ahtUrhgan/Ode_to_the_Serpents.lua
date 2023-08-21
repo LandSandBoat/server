@@ -4,10 +4,6 @@
 -- Log ID: 6, Quest ID: 44
 -- Fari-Wari: !pos 80 -6 -137 50
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ODE_TO_THE_SERPENTS)
 

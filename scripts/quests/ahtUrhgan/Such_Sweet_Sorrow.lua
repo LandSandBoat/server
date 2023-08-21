@@ -4,10 +4,6 @@
 -- Log ID: 6, Quest ID: 13
 -- Dabhuh: !pos 97.939 0 -91.530 50
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SUCH_SWEET_SORROW)
 

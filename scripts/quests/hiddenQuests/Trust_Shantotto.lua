@@ -3,12 +3,6 @@
 -----------------------------------
 -- Shantotto : !pos 122 -2 112 239
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 local wallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 

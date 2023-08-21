@@ -1,10 +1,6 @@
 -----------------------------------
 -- New Character Cutscenes
 -----------------------------------
-require('scripts/globals/cutscenes')
-require('scripts/globals/interaction/hidden_quest')
-require('scripts/globals/npc_util')
------------------------------------
 local quest = HiddenQuest:new("newCharacterCS")
 
 quest.reward = {}

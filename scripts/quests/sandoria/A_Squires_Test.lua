@@ -4,10 +4,6 @@
 -- Log ID: 0, Quest ID: 10
 -- Balasiel : !pos -136 -11 64 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 

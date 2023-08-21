@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 44
 -- Brygid : !pos -90 -4 -108 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
 

@@ -6,10 +6,6 @@
 -- Detzo         : !pos 5.365 6.999 9.891 234
 -- qm_talekeeper : !pos 211 4 -79 127
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 -----------------------------------
 

@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 31
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
 

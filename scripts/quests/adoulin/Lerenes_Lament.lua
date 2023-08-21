@@ -4,10 +4,6 @@
 -- !addquest 9 126
 -- Lerene : !pos -46.876 -179.334 -28.602 274
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 

@@ -3,9 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 170
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)

@@ -5,10 +5,6 @@
 -- Laila : !pos -54.045 -1 100.996 244
 -- qm1   : !pos -157.16 -8 596.9 89
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 

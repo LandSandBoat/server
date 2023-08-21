@@ -6,10 +6,6 @@
 -- HEAVY_QUADAV_BACKPLATE: !additem 2505
 -- TRAINEE_HAMMER: !additem 18855
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HAMMERING_HEARTS)
 

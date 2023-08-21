@@ -4,10 +4,6 @@
 -- Excavation Site !pos 390 1 349 68
 -- Leypoint !pos -200 -8.5 80 51
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
 

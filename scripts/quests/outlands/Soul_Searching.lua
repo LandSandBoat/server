@@ -4,10 +4,6 @@
 -- Log ID: 5, Quest ID: 162
 -- Cermet Headstone : !pos 235 0 280 121
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 

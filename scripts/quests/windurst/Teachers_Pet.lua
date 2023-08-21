@@ -4,10 +4,6 @@
 -- Log ID: 2, Quest ID: 28
 -- Moreno-Toeno : !pos 169 -1.25 159 238
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
 

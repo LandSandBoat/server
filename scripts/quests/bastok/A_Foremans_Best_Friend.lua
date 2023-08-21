@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 9
 -- Gudav : !pos -3.286 1.407 50.591 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_FRIEND)
 

@@ -6,10 +6,6 @@
 -- Juroro                   : !pos 32 7 -41 236
 -- Koru-Moru                : !pos -120 -6 124 239
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
 

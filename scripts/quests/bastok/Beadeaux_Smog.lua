@@ -5,9 +5,6 @@
 -- High Bear    : !pos 25.231 -14.999 4.552 237
 -- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
 

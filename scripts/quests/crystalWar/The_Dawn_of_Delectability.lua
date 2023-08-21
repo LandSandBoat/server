@@ -10,10 +10,6 @@
 -- Ranpi-Monpi (S) - !pos -115 -3 43 94
 -- Ranpi-Monpi     - !pos -116 -3 52 238
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_DAWN_OF_DELECTABILITY)
 

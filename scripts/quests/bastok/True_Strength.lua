@@ -5,10 +5,6 @@
 -- Ayame           : !pos 133 -19 34 237
 -- qm_truestrength : !pos -100 -71 -132 151
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local oztrojaID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 

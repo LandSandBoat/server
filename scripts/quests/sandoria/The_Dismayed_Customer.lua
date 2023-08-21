@@ -7,10 +7,6 @@
 -- qm2      : !pos -550 -0 -542 100
 -- qm3      : !pos -399 -10 -438 100
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
 

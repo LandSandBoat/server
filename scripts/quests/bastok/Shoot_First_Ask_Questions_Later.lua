@@ -3,11 +3,6 @@
 -- Cid !pos -12 -12 1 237
 -- qm1 !pos -11 -19 -177 153
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local metalworksID = zones[xi.zone.METALWORKS]
 local boyahdaTreeID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------

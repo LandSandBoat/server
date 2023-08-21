@@ -4,11 +4,6 @@
 -- !addquest 3 90
 -- Ajithaam : !pos -82 0.1 160 244
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 

@@ -5,10 +5,6 @@
 -- Cid   : !pos -12 -12 1 237
 -- Hilda : !pos -163 -8 13 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 

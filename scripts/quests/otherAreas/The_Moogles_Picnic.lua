@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 101
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
-require('scripts/globals/moghouse')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC)
 

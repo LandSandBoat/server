@@ -4,10 +4,6 @@
 -- Log ID: 5, Quest ID: 165
 -- Lokpix : !pos -61.942 3.949 224.900 114
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 

@@ -7,10 +7,6 @@
 -- qm2 (Onzozo)    : !pos -176 10 -60 213
 -- qm3 (Valkurm)   : !pos -767 -4 192 103
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------

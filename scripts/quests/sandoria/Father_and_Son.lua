@@ -5,10 +5,6 @@
 -- Ailbeche : !pos 4 -1 24 231
 -- Exoroche : !pos 72 -1 60 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local northenSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------

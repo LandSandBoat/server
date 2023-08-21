@@ -4,10 +4,6 @@
 -- !addquest 7 44
 -- Rholont       : !pos -168 -2 56 80
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local vunkerlID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 

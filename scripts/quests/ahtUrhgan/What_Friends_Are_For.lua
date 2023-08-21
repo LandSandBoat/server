@@ -4,10 +4,6 @@
 -- Tsetseroon !pos -13 -6 69 53
 -- Qm9 !pos -406 6.5 -440 68
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
 

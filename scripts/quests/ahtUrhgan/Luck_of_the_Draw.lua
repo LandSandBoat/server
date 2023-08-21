@@ -9,9 +9,6 @@
 -- qm1              : !pos -62.239 -7.9619 -137.1251
 -- _1l0 (Rock Slab) : !pos -99 -7 -91 57
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local talaccaCoveID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 

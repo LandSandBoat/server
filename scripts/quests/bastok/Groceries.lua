@@ -5,10 +5,6 @@
 -- Tami   : !pos 62.617 0 -68.222 234
 -- Zelman : !pos 17.095 7.704 -52.995 172
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local zeruhnMinesID = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------

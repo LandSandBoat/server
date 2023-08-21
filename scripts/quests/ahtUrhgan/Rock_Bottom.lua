@@ -2,10 +2,6 @@
 -- Rock Bottom
 -- !pos 838.243 -14.475 231.871 61
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ROCK_BOTTOM)
 

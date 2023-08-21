@@ -5,11 +5,6 @@
 -- qm7:       !pos -11 8 -185 62
 -- Biyaada:   !pos -65.802 -6.999 69.273 48
 -----------------------------------
-require('scripts/globals/common')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SAGA_OF_THE_SKYSERPENT)
 

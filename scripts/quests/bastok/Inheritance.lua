@@ -3,11 +3,6 @@
 -- Gumbah !pos 52 0 -36 234
 -- qm1 !pos -660 0 -338 125
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------

@@ -6,10 +6,6 @@
 -- Malene : !pos -173 -5 64 235
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
 

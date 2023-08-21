@@ -5,9 +5,6 @@
 -- Degenhard : !pos -175 2 -135 235
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
 

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Trust: Halver
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("TrustHalver")
 

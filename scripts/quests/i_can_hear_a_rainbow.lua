@@ -1,9 +1,6 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/utils')
------------------------------------
 
 quests = quests or {}
 quests.i_can_hear_a_rainbow = quests.i_can_hear_a_rainbow or {}

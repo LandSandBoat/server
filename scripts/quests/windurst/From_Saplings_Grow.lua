@@ -3,11 +3,6 @@
 -- Perih Vashai !pos 117 -3 92 241
 -- qm1 !pos -157 -8 198.2 113
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------

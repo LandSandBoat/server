@@ -8,10 +8,6 @@
 -- qm2 (Konschtat) : !pos -709 2 102 108
 -- qm2 (Zi'Tah)    : !pos 639 -1 -151 121
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 local norgID      = zones[xi.zone.NORG]
 local zitahID     = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]

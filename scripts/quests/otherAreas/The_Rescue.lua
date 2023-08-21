@@ -5,10 +5,6 @@
 -- Thunder Hawk : !pos -58 -10 6 248
 -- Jail Door    : !pos 56 0.1 -23 147
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 

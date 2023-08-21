@@ -8,10 +8,6 @@
 -- MINE_SHAFT_KEY : !addkeyitem 961
 -- Corroded Door  : !pos -385.602 21.970 456.359 90
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
 

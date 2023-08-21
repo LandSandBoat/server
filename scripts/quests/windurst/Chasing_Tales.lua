@@ -8,11 +8,6 @@
 -- Hae Jakhya      : !pos -75.36 -7.4 -23.82 230
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
 

@@ -4,11 +4,6 @@
 -- !addquest 3 70
 -- Harith : !pos -4.349 1 134.014 243
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
 

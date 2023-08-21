@@ -3,11 +3,6 @@
 -- Brutus !pos -55 8 95 244
 -- qm9 !pos 218 -8 206 159
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------

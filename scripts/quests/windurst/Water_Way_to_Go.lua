@@ -5,10 +5,6 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -- Giddeus Spring : !pos -258 -2 -249 145
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
 

@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 14
 -- Aquillina : !pos -97 -5 -81 235
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 

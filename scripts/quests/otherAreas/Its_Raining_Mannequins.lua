@@ -11,10 +11,6 @@
 -- mannequin_legs  : !additem 1604
 -- mannequin_feet  : !additem 1605
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local mhauraID = zones[xi.zone.MHAURA]
 -----------------------------------
 

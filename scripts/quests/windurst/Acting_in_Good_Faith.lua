@@ -6,10 +6,6 @@
 -- qm1       : !pos -17 0 59 195 (I-10)
 -- Eperdur   : !pos 129 -6 96 231
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 

@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 19
 -- Pavvke : !pos 16.586 6.985 -14.843 234
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 

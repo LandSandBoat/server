@@ -3,11 +3,6 @@
 -- Ryoma !pos -23 0 -9 252
 -- qm1 !pos 110 15 162 213
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local norgID   = zones[xi.zone.NORG]
 local onzozoID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------

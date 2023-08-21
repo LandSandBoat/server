@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 61
 -- Juroro : !pos 32 7 -41 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 

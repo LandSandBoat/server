@@ -6,10 +6,6 @@
 -- Bki Tbujhja : !pos -22 0 -60 245
 -- Song Runes  : !pos -244 16 -280 118
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local buburimuID   = zones[xi.zone.BUBURIMU_PENINSULA]
 local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------

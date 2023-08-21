@@ -10,10 +10,6 @@
 -- Brazier (F-7) : !pos 99 -33 98 195
 -- Brazier (H-9) : !pos 259 -33 -58 195
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 

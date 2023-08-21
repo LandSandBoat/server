@@ -4,10 +4,6 @@
 -- !addquest 3 167
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local ruLudeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 

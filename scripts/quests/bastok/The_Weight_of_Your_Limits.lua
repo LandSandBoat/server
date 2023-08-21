@@ -3,11 +3,6 @@
 -- Iron Eater !pos 92 -19.6 2 237
 -- qm1 !pos -324 1 474 121
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local metalworksID = zones[xi.zone.METALWORKS]
 local ziTahID      = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------

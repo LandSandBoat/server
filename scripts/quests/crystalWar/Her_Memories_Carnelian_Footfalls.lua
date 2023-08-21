@@ -7,9 +7,6 @@
 -- qm4         : !pos 541.425 -49.83 178.563 81
 -- qm5         : !pos 380.015 -26.5 -22.525 81
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 

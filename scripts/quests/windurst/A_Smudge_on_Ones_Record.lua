@@ -4,10 +4,6 @@
 -- !addquest 2 12
 -- Hariga-Origa : !pos -62 -6 105 238
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONES_RECORD)
 

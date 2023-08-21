@@ -3,9 +3,6 @@
 --
 -- Honoi-Gumoi: !pos -195 -11 -120 238
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 

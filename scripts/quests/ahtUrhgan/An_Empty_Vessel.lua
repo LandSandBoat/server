@@ -4,10 +4,6 @@
 -- Log ID: 6, Quest ID: 5
 -- Waoud : !pos 65 -6 -78 50
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 

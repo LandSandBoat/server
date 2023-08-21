@@ -1,11 +1,6 @@
 -----------------------------------
 -- Trust: Abquhbah
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/trust')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("TrustAbquhbah")
 

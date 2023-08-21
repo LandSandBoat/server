@@ -7,10 +7,6 @@
 -- Kagetora : !pos -96 -2 29 236
 -- Alois    : !pos 96 -20 14 237
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 

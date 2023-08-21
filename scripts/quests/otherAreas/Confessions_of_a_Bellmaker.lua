@@ -4,11 +4,6 @@
 -- Reinberta !pos -190 -7 -59 235
 -- Mevreauche !pos -193 11 148 231
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 

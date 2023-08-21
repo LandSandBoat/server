@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 26
 -- Garnev : !pos 30 4 -36 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 

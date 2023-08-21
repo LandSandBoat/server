@@ -11,10 +11,6 @@
 -- Dangueubert     : !pos 5 0 -136 256
 -- Nylene          : !pos 12 0 -82 256
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local westernAdoulinID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 

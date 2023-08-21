@@ -4,10 +4,6 @@
 -- Curilla : !pos 27 0.1 0.1 233
 -- Hot Springs : !pos 444 -37 -18 139
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_GENERALS_SECRET)
 

@@ -3,10 +3,6 @@
 -----------------------------------
 -- Kupipi : !pos 2 0.1 30 242
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("portalCharm")
 

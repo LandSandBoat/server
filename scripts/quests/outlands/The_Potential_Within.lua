@@ -3,11 +3,6 @@
 -- Jaucribaix !pos 91 -7 -8 252
 -- qm3 !pos 200 11 99 174
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local norgID         = zones[xi.zone.NORG]
 local kuftalTunnelID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------

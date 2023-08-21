@@ -7,10 +7,6 @@
 -- Orn             : !pos -68 -9 30 238
 -- Quu Bokye       : !pos -159 16 181 145
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 

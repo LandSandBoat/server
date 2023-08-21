@@ -9,11 +9,6 @@
 -- Harvesting Point : !pos 196.000 0.001 289.500 260
 -- Sickle           : !additem 1020
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/helm')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
 

@@ -5,9 +5,6 @@
 -- Powhatan    : !pos -152.135 -7.48 19.014 236
 -- Steel Bones : !pos -185.766 1.999 -57.631 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 

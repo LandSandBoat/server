@@ -15,10 +15,6 @@
 -- qm5 (Eggblix)  : !pos -462.436 2.456 -141.171 191
 -- qm2 (???)      : !pos -232.924 99.107 442.990 106
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local dangrufID        = zones[xi.zone.DANGRUF_WADI]
 local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
 local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]

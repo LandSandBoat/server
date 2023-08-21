@@ -3,11 +3,6 @@
 -----------------------------------
 -- !addquest 8 165
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/abyssea')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local tahrongiID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 

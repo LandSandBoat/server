@@ -3,11 +3,6 @@
 -- Jakoh_Wahcondalo !pos 101 -16 -115 250
 -- qm1 !pos 52.8 -1 19.9 212
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 local kazhamID       = zones[xi.zone.KAZHAM]
 local gustavTunnelID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------

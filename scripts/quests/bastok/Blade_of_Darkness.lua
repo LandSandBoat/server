@@ -5,10 +5,6 @@
 -- Gumbah : !pos 52 0 -36 234
 -- TODO: This quest needs verification!
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 

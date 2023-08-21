@@ -1,12 +1,6 @@
 -----------------------------------
 -- Trust: Maat
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
