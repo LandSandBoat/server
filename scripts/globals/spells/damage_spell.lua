@@ -380,7 +380,7 @@ end
 
 xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
     local magicBurst         = 1 -- The variable we want to calculate
-    local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     if skillchainCount > 0 then
         local rankBonus  = 0
@@ -408,7 +408,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     local magicBurstBonus        = 1 -- The variable we want to calculate
     local modBurst               = 1
     local ancientMagicBurstBonus = 0
-    local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local _, skillchainCount     = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
     if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then

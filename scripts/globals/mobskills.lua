@@ -72,7 +72,7 @@ end
 
 local function calculateMobMagicBurst(caster, ele, target)
     local burst = 1.0
-    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
+    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
 
     if skillchainTier > 0 then
         if skillchainCount == 1 then

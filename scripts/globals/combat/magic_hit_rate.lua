@@ -210,7 +210,7 @@ end
 -- Magic Accuracy from Magic Burst.
 local function magicAccuracyFromMagicBurst(target, spellElement)
     local magicAcc           = 0
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
 
     if skillchainCount > 0 then
         magicAcc = 100
@@ -410,7 +410,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     end
 
     -- Skillchains lowers target resistance rank by 1.
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
 
     if skillchainCount > 0 then
         targetResistRank = targetResistRank - 1
