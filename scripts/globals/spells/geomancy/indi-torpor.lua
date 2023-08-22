@@ -2,7 +2,6 @@
 -- Spell: Indi-Torpor
 -- Reduces evasion of enemies near the caster.
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

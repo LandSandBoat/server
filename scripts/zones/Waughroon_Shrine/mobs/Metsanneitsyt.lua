@@ -3,7 +3,6 @@
 --  Mob: Metsanneitsyt
 -- BCNM: Grove Guardians
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

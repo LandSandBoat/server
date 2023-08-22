@@ -3,7 +3,6 @@
 --  Mob: Nasus
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Stat mods unknown
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/status")
 -----------------------------------
 local weaponskillObject = {}
 

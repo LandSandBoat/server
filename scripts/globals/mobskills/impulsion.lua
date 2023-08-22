@@ -7,7 +7,6 @@
 --  Note: Used by Bahamut in The Wyrmking Descends
 ---------------------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

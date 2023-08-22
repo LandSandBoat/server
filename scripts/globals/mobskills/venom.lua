@@ -8,7 +8,6 @@
 --  Notes: Additional effect can be removed with Poisona.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

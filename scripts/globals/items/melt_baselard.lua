@@ -4,7 +4,6 @@
 -- Item Effect: MP +9
 -- Duration:
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

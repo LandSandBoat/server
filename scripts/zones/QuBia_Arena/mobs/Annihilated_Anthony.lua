@@ -3,7 +3,6 @@
 --  Mob: Annihilated Anthony
 -- BCNM: Celery
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

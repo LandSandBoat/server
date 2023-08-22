@@ -3,7 +3,6 @@
 -- Item: Perpetual Hourglass
 -- Use: Creates a replica of the Perpetual Hourglass
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/dynamis")
 -----------------------------------

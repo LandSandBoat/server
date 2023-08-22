@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/magiantrials")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -6,7 +6,6 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/mobskills")
 require("scripts/globals/teleports")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local entity = {}

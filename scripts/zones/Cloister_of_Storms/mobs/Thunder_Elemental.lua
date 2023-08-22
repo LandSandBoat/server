@@ -3,7 +3,6 @@
 -- Mob: Thunder Elemental
 -- Quest: Waking the Beast
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

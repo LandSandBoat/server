@@ -5,7 +5,6 @@
 -- !pos 102.647 -14.999 -97.664 250
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Kazham/IDs")

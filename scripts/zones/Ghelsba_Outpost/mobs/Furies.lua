@@ -3,7 +3,6 @@
 --  Mob: Furies
 -- BCNM: Wings of Fury
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -8,7 +8,6 @@ mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

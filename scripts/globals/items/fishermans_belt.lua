@@ -8,7 +8,6 @@
 -- Duration: 2 Earth Hours
 -- Fishing Skill +2
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

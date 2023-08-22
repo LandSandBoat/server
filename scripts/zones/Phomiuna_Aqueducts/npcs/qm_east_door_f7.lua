@@ -4,7 +4,6 @@
 -- Notes: Opens east door @ F-7
 -- !pos -44.550 -24.601 106.495 27
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

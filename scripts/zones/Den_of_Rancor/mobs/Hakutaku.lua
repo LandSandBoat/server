@@ -2,7 +2,6 @@
 -- Area: Den of Rancor
 --  Mob: Hakutaku
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

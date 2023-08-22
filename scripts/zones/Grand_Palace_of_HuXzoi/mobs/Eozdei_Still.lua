@@ -3,7 +3,6 @@
 --  Mob: Eo'zdei
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/status")
 mixins = { require("scripts/mixins/families/zdei") }
 -----------------------------------
 local entity = {}

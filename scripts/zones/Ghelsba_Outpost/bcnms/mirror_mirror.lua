@@ -9,7 +9,6 @@ require("scripts/globals/fellow_utils")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/pets")
 -----------------------------------

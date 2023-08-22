@@ -11,7 +11,6 @@ require('scripts/globals/items')
 require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/status")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")

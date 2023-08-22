@@ -7,7 +7,6 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

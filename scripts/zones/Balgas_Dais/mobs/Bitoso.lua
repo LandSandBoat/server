@@ -3,7 +3,6 @@
 --  Mob: Bitoso
 -- BCNM: Creeping Doom
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

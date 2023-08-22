@@ -24,7 +24,12 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     duration = duration * resm
-    if target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target) then
+    if
+        target:hasImmunity(xi.immunity.SLEEP) or
+        target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY)
+    then
         --No effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else

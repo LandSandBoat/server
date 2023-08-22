@@ -1,5 +1,4 @@
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 
 -- Animation Sub 0 Pot Form

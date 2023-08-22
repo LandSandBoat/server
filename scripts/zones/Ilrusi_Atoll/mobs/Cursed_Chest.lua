@@ -2,7 +2,6 @@
 -- Area: Ilrusi Atoll
 --  Mob: Cursed Chest
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

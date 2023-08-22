@@ -3,7 +3,6 @@
 -- Note: Weaker version of Jormungand summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -117,8 +116,10 @@ entity.onMobFight = function(mob, target)
 
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
+        mob:getAnimationSub() == 1 and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
     then
         mob:wakeUp()
     end

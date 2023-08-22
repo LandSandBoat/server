@@ -3,7 +3,6 @@
 -- paralyzes target
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")
 -----------------------------------

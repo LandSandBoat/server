@@ -3,7 +3,6 @@
 --  Mob: Flesh Eater
 -- BCNM: The Worm's Turn
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

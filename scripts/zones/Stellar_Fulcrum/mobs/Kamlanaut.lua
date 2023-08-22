@@ -3,7 +3,6 @@
 --  Mob: Kam'lanaut
 -- Zilart Mission 8 BCNM Fight
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

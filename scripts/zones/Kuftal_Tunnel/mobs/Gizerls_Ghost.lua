@@ -2,7 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Gizerl's Ghost
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

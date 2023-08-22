@@ -8,7 +8,6 @@
 --  Notes: Used by Murex affiliated with lightning element. Shock effect is fairly strong (28/tick).
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

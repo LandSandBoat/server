@@ -2,7 +2,6 @@
 -- Spell: Doton: Ichi
 -----------------------------------
 require("scripts/globals/spells/damage_spell")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

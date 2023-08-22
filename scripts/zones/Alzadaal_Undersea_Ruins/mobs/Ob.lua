@@ -3,7 +3,6 @@
 --  Mob: Ob
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 -- Todo: Pups can make it change frames, Overload causes Rage

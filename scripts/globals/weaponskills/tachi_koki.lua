@@ -11,7 +11,6 @@
 -- 100%TP    200%TP    300%TP
 -- .5        .75        1.00
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------

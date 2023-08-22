@@ -3,7 +3,6 @@
 -- Delivers an area attack that stuns enemies. Damage varies with TP.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

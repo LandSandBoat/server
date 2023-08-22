@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

@@ -2,7 +2,6 @@
 -- Area: Palborough Mines
 --  NPC: @3z0
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

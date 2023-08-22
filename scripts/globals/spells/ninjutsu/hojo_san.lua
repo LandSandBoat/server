@@ -3,7 +3,6 @@
 -- Description: Inflicts Slow on target.
 -- Edited from slow.lua
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

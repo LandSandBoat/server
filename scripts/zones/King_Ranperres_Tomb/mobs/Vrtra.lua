@@ -2,7 +2,6 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

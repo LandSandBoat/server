@@ -3,7 +3,6 @@
 --   NM: Steelfleece Baldarich
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------

@@ -4,7 +4,6 @@
 -- Item Effect: Conserve MP
 -- Duration: 45 seconds
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

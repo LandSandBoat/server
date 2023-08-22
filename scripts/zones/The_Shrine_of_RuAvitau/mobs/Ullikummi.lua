@@ -3,7 +3,6 @@
 --  Mob: Ullikummi
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

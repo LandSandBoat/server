@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Princess
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

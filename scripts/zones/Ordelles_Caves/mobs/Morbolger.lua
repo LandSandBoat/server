@@ -2,7 +2,6 @@
 -- Area: Ordelles Caves (193)
 --   NM: Morbolger
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

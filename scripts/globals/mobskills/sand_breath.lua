@@ -3,7 +3,6 @@
 -- Deals Earth damage to enemies within a fan-shaped area. Additional effect: Blind
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

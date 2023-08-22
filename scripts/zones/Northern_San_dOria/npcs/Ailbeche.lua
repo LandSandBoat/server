@@ -9,7 +9,6 @@ require("scripts/globals/events/starlight_celebrations")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
 -----------------------------------

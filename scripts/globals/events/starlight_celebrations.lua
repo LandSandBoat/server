@@ -2,7 +2,6 @@
 -- Starlight Celebrations
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 ------------------------------------

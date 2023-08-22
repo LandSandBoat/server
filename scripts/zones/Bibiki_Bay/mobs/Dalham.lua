@@ -2,7 +2,6 @@
 -- Area: Bibiki Bay
 -- NM: Dalham
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

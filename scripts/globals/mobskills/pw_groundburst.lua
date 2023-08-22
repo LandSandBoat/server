@@ -8,7 +8,6 @@
 -- Notes: Only used by notorious monsters, and from any Mamool Ja in besieged.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

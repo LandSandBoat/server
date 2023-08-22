@@ -6,7 +6,6 @@
 -- todo: when mimics a spell will cast the next tier spell
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

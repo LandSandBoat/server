@@ -3,7 +3,6 @@
 --  Mob: Cottontail
 -- BCNM: Tails of Woe
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

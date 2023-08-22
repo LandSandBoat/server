@@ -3,7 +3,6 @@
 -- Mob: Hamadryad
 -- ENM: Bad Seed
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

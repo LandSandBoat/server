@@ -3,7 +3,6 @@
 --  Mob: Mauled Murdock
 -- BCNM: Celery
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

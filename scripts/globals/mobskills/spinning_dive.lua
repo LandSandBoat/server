@@ -3,7 +3,6 @@
 -- Leviathan delivers a single-hit attack on target.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

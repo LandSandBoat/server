@@ -3,7 +3,6 @@
 --     Ifrit delivers a three-hit attack that deals fire elemental damage to target.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,7 +3,6 @@
 --  This listener will open the prelate door when a mob is engaged and near it.
 -----------------------------------
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 local ID = require('scripts/zones/Temple_of_Uggalepih/IDs')
 -----------------------------------
 

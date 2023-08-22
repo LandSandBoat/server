@@ -8,7 +8,6 @@
 --  Notes: Stun may or may not take xi.effect.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

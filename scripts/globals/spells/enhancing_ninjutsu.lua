@@ -2,7 +2,6 @@
 -- Enhancing Spell Utilities
 -----------------------------------
 require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}

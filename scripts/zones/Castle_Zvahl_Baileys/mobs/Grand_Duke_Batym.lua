@@ -3,7 +3,6 @@
 --   NM: Grand Duke Batym
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 
 local denOfRancorGlobal =

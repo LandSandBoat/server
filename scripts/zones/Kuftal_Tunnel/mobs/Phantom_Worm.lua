@@ -4,7 +4,6 @@
 -----------------------------------
 local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
 local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 --  Mob: Ghul-I-Beaban
 -- BCNM: Undying Promise
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 
 local entityFlags = { 2, 4, 6, 6 }

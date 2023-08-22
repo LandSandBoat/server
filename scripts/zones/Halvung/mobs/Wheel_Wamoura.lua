@@ -3,7 +3,6 @@
 --  Mob: Wheel Wamoura
 -- TODO: Damage resistances in streched and curled stances. Halting movement during stance change.
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

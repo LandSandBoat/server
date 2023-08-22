@@ -3,7 +3,6 @@
 -- Mob: Razon
 -- ENM: Fire in the Sky
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

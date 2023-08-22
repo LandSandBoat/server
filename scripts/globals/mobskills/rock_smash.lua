@@ -8,7 +8,6 @@
 --  Notes: Requires No Weapon or Broken Weapon
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

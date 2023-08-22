@@ -5,7 +5,6 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 -----------------------------------

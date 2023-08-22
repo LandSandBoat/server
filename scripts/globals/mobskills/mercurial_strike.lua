@@ -17,7 +17,6 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local mobskillObject = {}

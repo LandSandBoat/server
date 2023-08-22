@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Feeler Antlion
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

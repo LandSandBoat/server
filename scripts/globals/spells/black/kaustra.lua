@@ -4,7 +4,6 @@
 -- dark damage slowly devours an enemy.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

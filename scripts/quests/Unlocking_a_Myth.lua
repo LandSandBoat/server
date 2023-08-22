@@ -8,7 +8,6 @@ require("scripts/globals/equipment")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 require("scripts/globals/nyzul")
 -----------------------------------

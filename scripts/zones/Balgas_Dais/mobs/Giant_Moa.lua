@@ -3,7 +3,6 @@
 --  Mob: Giant Moa
 -- KSNM: Moa Constrictors
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

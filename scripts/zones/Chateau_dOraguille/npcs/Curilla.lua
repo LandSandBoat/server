@@ -10,7 +10,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

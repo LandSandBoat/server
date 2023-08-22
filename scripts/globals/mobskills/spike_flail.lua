@@ -3,7 +3,6 @@
 -- Deals extreme damage in a threefold attack to targets behind the user.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

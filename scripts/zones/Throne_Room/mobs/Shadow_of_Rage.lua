@@ -3,7 +3,6 @@
 --  Mob: Shadow of Rage
 -- Mission 9-2 BCNM Fight
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

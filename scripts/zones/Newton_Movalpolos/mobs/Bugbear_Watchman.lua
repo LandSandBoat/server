@@ -2,7 +2,6 @@
 -- Area: Newton Movalpolos
 --  Mob: Bugbear Watchman
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

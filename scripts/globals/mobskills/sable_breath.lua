@@ -8,7 +8,6 @@
 --  Notes: Used only by Vrtra and Azdaja
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------

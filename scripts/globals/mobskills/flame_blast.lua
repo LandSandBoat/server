@@ -8,7 +8,6 @@
 --  Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

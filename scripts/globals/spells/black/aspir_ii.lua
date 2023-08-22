@@ -3,7 +3,6 @@
 -- Drain functions only on skill level!!
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

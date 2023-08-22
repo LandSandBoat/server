@@ -8,7 +8,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

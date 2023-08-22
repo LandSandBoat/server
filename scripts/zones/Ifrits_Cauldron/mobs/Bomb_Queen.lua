@@ -4,7 +4,6 @@
 --  Vid: https://www.youtube.com/watch?v=AVsEbYjSAHM
 -----------------------------------
 local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

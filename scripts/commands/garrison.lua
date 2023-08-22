@@ -6,7 +6,6 @@
 -- !garrison win (player) win the garrison (if any) currently running in the player's zone
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/status")
 require("scripts/globals/common")
 
 cmdprops =

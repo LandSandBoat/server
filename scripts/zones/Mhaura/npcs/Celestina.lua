@@ -11,7 +11,6 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

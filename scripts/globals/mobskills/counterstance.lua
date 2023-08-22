@@ -3,7 +3,6 @@
 -- Increases chance to counter but lowers defense.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

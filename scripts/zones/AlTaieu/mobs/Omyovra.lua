@@ -3,7 +3,6 @@
 --  Mob: Om'yovra
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

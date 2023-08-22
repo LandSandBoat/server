@@ -3,7 +3,6 @@
 -- Throws a spiky projectile at a single target. Additional effect: Poison
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

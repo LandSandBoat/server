@@ -4,7 +4,6 @@
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/utils")

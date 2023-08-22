@@ -9,7 +9,6 @@ local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

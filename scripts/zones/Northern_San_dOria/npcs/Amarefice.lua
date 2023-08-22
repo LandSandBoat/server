@@ -4,7 +4,6 @@
 -- Type: Woodworking Synthesis Image Support
 -- !pos -181.506 10.15 259.905 231
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

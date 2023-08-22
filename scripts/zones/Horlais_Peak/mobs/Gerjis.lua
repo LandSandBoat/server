@@ -3,7 +3,6 @@
 --  Mob: Gerjis
 -- BCNM: Eye of the Tiger
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

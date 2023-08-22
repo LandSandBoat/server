@@ -2,7 +2,6 @@
 -- Area: Port Bastok
 --  NPC: Drawbridge
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

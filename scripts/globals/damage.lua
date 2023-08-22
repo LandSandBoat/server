@@ -1,7 +1,6 @@
 -----------------------------------------------
 -- Global Damage Taken Calculation
 -----------------------------------------------
-require("scripts/globals/status")
 
 xi = xi or {}
 xi.damage = {} or xi.damage

@@ -8,7 +8,6 @@
 --  Notes: Has additional effect of Poison when used by King Vinegarroon.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

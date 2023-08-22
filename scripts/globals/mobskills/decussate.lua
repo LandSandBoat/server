@@ -8,7 +8,6 @@
 --  Notes: Only used by Gulool Ja Ja when below 35% health.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------

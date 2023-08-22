@@ -6,7 +6,6 @@
 local entity = {}
 
 require("scripts/globals/titles")
-require("scripts/globals/status")
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)

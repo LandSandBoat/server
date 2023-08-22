@@ -4,7 +4,6 @@
 -- Starts Quest: Trial Size Trial By Lightning
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Mhaura/IDs")

@@ -16,7 +16,6 @@ local spellObject = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/bluemagic")
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

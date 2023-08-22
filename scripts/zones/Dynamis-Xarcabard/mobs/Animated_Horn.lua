@@ -3,7 +3,6 @@
 --  Mob: Animated Horn
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-require("scripts/globals/status")
 mixins = { require("scripts/mixins/families/animated_weapons") }
 -----------------------------------
 local entity = {}

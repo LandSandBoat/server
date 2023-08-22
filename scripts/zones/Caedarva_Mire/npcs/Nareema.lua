@@ -5,7 +5,6 @@
 -- !pos 518.387 -24.707 -467.297 79
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

@@ -2,7 +2,6 @@
 -- Area: Arrapago Remnants
 --  NPC: Armoury Crate (Arrapago)
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/shop")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

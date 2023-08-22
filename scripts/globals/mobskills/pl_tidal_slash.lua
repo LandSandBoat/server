@@ -10,7 +10,6 @@
 -- If they lost their spear, they'll use Hysteric Barrage instead.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

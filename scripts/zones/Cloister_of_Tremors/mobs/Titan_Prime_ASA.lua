@@ -5,7 +5,6 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,6 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Mandragora
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

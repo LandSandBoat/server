@@ -1,7 +1,6 @@
 -----------------------------------
 --  Adventuring Fellow
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 require("scripts/globals/msg")

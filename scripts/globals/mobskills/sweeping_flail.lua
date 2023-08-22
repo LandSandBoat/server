@@ -8,7 +8,6 @@
 --  Notes: Used when someone pulls hate from behind Bahamut.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

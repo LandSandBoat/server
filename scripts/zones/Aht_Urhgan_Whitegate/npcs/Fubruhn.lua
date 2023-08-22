@@ -24,7 +24,6 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/moghouse")
 -----------------------------------

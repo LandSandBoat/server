@@ -4,7 +4,6 @@
 --  Blinkable 1-2 hit, addtional effect stun on hit.
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,7 +3,6 @@
 --  Mob: Macha
 -- BCNM: Birds of a Feather
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

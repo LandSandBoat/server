@@ -4,7 +4,6 @@
 -- Quest: Waking the Beast
 -----------------------------------
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

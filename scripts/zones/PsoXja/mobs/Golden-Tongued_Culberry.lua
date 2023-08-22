@@ -5,7 +5,6 @@
 mixins = { require("scripts/mixins/families/tonberry") }
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/items")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

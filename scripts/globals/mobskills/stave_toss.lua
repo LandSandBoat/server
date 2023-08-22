@@ -2,7 +2,6 @@
 -- Stave Toss (staff wielding Mamool Ja only!)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

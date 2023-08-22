@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Dokumori: Ichi
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

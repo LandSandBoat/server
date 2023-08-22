@@ -3,7 +3,6 @@
 --  mob: Peerifool
 --  Quest: One Good Deed?
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

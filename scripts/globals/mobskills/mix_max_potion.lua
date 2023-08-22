@@ -3,7 +3,6 @@
 -- Note the subtle name difference from 'Max Potion'.
 -- This feels like a localization error otherwise.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
