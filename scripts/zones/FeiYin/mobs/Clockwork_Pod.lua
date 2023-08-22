@@ -3,6 +3,8 @@
 --  Mob: Clockwork Pod
 -- Note: PH for Mind Hoarder
 -----------------------------------
+local ID = zones[xi.zone.FEIYIN]
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

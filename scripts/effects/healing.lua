@@ -33,11 +33,10 @@ effectObject.onEffectGain = function(target, effect)
         local minWaitTime = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
         target:setLocalVar("GEO_DWL_Resting", os.time() + waitTimeInSeconds)
-        target:timer(waitTimeInSeconds * 1000, function(targetArg)
+        target:timer(waitTimeInSeconds * 1000, function(targetArg, IdArg)
             local finishTime = targetArg:getLocalVar("GEO_DWL_Resting")
             if finishTime > 0 and os.time() >= finishTime then
-                local ID = zones[targetArg:getZoneID()]
-                targetArg:messageSpecial(ID.text.MYSTICAL_WARMTH)  -- You feel a mystical warmth welling up inside you!
+                targetArg:messageSpecial(IdArg.text.MYSTICAL_WARMTH)  -- You feel a mystical warmth welling up inside you!
                 targetArg:setLocalVar("GEO_DWL_Resting", 0)
                 targetArg:setCharVar("GEO_DWL_Luopan", 1)
             end

@@ -4,6 +4,8 @@
 -- Note: Used to spawn Shen
 -- !pos -115.108 0.300 -724.664 4
 -----------------------------------
+local ID = zones[xi.zone.BIBIKI_BAY]
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

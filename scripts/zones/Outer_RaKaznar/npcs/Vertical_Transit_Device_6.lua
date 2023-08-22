@@ -3,6 +3,8 @@
 --  NPC: Vertical Transit Device (6)
 -- !pos 532.889 99 -19.942 274
 -----------------------------------
+local ID = zones[xi.zone.OUTER_RAKAZNAR]
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

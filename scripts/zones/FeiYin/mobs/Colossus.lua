@@ -3,6 +3,8 @@
 --  Mob: Colossus
 -- Note: PH for Goliath
 -----------------------------------
+local ID = zones[xi.zone.FEIYIN]
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
