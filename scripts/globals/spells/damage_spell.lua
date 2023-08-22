@@ -336,7 +336,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdt    = 1 -- The variable we want to calculate
     local sdtMod = 0
 
-    if spellElement > 0 then
+    if spellElement ~= xi.element.NONE then
         sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
@@ -750,7 +750,7 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     -- Initial check.
     if
         not target:isNM() or
-        spellElement <= 0 or
+        spellElement ~= xi.element.NONE or
         finalDamage < 0
     then
         return nukeWallFactor
