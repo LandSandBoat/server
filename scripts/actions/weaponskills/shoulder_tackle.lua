@@ -31,7 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) then
-        local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.element.LIGHTNING, 0)
+        local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
 

@@ -23,7 +23,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.hybridWS = true
-    params.ele = xi.element.LIGHTNING
+    params.ele = xi.element.THUNDER
     params.skill = xi.skill.GREAT_KATANA
     params.includemab = true
 

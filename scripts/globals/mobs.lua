@@ -219,7 +219,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENTHUNDER] =
     {
-        ele                = xi.element.LIGHTNING,
+        ele                = xi.element.THUNDER,
         sub                = xi.subEffect.LIGHTNING_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -367,7 +367,7 @@ local additionalEffects =
     [xi.mob.ae.STUN] =
     {
         chance      = 20,
-        ele         = xi.element.LIGHTNING,
+        ele         = xi.element.THUNDER,
         sub         = xi.subEffect.STUN,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
