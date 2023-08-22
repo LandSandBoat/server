@@ -456,7 +456,7 @@ namespace luautils
         {
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
 
-            if (auto cached_func = lua["xi"]["globals"]["pets"][mob_name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["pets"][mob_name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
