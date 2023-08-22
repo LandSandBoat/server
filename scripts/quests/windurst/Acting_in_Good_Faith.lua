@@ -36,7 +36,7 @@ quest.sections =
             {
                 [10019] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(xi.ki.SPIRIT_INCENSE)
+                        npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
                         quest:begin(player)
                     end
                 end,
