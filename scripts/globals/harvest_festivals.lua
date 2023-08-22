@@ -144,6 +144,9 @@ xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
         for itemInList = 1, #treatsTable do
             if item == treatsTable[itemInList] then
                 local itemReward = halloweenItemsCheck(player)
+
+                -- TODO: These varName values below need to be cleared onGameDay
+
                 local varName = "harvestFestTreats"
                 local harvestFestTreats
                 if itemInList < 32 then -- The size of the list is too big for int 32 used that stores the bit mask, as such there are two lists

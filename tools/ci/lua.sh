@@ -45,7 +45,6 @@ global_objects=(
     set
     printf
     switch
-    clearVarFromAll
     getVanaMidnight
     getMidnight
     getConquestTally

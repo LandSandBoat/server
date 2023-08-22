@@ -27,11 +27,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameDay = function()
-    -- Removes daily the bit mask that tracks the treats traded for Harvest Festival.
-    if xi.events.harvestFestival.isHalloweenEnabled() ~= 0 then
-        clearVarFromAll("harvestFestTreats")
-        clearVarFromAll("harvestFestTreats2")
-    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
