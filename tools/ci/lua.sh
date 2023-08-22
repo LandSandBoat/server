@@ -77,8 +77,6 @@ global_objects=(
     QUEST_COMPLETED
 
     onBattlefieldHandlerInitialise
-
-    doesElementMatchWeaponskill
     applyResistanceAddEffect
 
     RoeParseTimed
@@ -122,9 +120,6 @@ global_objects=(
     isValidHealTarget
     takeAbilityDamage
 
-    FormMagicBurst
-    MobFormMagicBurst
-
     AbilityFinalAdjustments
 
     TPMOD_NONE
@@ -134,23 +129,7 @@ global_objects=(
     TPMOD_ACC
     TPMOD_ATTACK
     TPMOD_DURATION
-    SC_NONE
-    SC_IMPACTION
-    SC_TRANSFIXION
-    SC_DETONATION
-    SC_REVERBERATION
-    SC_SCISSION
-    SC_INDURATION
-    SC_LIQUEFACTION
-    SC_COMPRESSION
-    SC_FUSION
-    SC_FRAGMENTATION
-    SC_DISTORTION
-    SC_GRAVITATION
-    SC_DARKNESS
-    SC_LIGHT
-    SC_LIGHT_II
-    SC_DARKNESS_II
+
     INT_BASED
     CHR_BASED
     MND_BASED

@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
-    params.scattr = SC_LIQUEFACTION
+    params.scattr = xi.skillchainType.LIQUEFACTION
 
     params.numhits = 1
     params.multiplier = 2.25

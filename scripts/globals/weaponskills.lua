@@ -1297,9 +1297,9 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
         for i, v in ipairs(elementalGorget) do
             if neck == v then
                 if
-                    doesElementMatchWeaponskill(i, scProp1) or
-                    doesElementMatchWeaponskill(i, scProp2) or
-                    doesElementMatchWeaponskill(i, scProp3)
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp1) or
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp2) or
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
@@ -1317,9 +1317,9 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
         for i, v in ipairs(elementalBelt) do
             if belt == v then
                 if
-                    doesElementMatchWeaponskill(i, scProp1) or
-                    doesElementMatchWeaponskill(i, scProp2) or
-                    doesElementMatchWeaponskill(i, scProp3)
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp1) or
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp2) or
+                    xi.magicburst.doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
