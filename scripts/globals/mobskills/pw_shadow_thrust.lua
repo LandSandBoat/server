@@ -7,7 +7,6 @@
 -- Range: Melee
 -- Notes: Used only by Medusa.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

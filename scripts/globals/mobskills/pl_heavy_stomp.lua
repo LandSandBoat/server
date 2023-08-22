@@ -7,7 +7,6 @@
 -- Range: Unknown radial
 -- Notes: Paralysis effect has a very long duration.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

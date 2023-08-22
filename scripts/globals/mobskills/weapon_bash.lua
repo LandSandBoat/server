@@ -4,7 +4,6 @@
 --  Type: Physical
 --  Range: Melee
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

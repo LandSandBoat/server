@@ -9,7 +9,6 @@
 -----------------------------------
 local mobskillObject = {}
 
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

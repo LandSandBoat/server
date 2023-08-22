@@ -27,7 +27,7 @@ itemObject.onItemCheck = function(target)
     }
 
     for _, effect in ipairs(imagery) do
-        if (target:hasStatusEffect(effect)) then
+        if target:hasStatusEffect(effect) then
             result = xi.msg.basic.ITEM_UNABLE_TO_USE
         end
     end

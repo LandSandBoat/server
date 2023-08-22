@@ -7,7 +7,6 @@
 --  Range: Cone
 --  Notes: Burn is 10-30/tic
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,7 +3,6 @@
 -- Restores target's HP.
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spells/healing_spell")

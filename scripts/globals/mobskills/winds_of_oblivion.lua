@@ -2,7 +2,6 @@
 --  Winds of Oblivion
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
 local mobskillObject = {}

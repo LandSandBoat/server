@@ -5,7 +5,6 @@
 -- !pos 91 0 121 231
 -- Starts and Finishes Quest: Gates of Paradise
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

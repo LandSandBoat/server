@@ -5,7 +5,6 @@
 --  Type: Magical Fire (Element)
 --
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

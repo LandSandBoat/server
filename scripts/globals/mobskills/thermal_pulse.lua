@@ -7,7 +7,6 @@
 --  Range: 12.5
 --  Notes: Open form only.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

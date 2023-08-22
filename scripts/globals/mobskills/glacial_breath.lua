@@ -7,7 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------

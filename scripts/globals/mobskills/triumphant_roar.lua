@@ -8,7 +8,6 @@
 --  Notes: Only used when standing
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

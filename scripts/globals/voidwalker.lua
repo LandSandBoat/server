@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
-require("scripts/globals/settings")
 require("scripts/globals/voidwalkerpos")
 require("scripts/globals/zone")
 

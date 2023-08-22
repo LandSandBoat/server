@@ -3,7 +3,6 @@
 -- Item: bottle_of_mana_powder
 -- Item Effect: Restores 25% of Maximum MP to Party members within 10'
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

@@ -2,7 +2,6 @@
 -- Stomping
 -- Deals heavy damage to a single target.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -7,7 +7,6 @@
 --  Range: Front arc
 --  Notes:
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

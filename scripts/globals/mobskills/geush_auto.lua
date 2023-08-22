@@ -2,7 +2,6 @@
 -- Geush Urvan Auto Attack
 -- Skill used by Guesh Urvan in place of his auto attack. Wipes shadows, and knockbacks.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

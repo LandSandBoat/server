@@ -4,7 +4,6 @@
 -- Description: AoE Powerful plague
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

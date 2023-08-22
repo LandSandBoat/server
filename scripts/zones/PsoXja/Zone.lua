@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/PsoXja/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

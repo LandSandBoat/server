@@ -2,7 +2,6 @@
 -- Thunder II
 -- Deals thunder elemental damage. Damage varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,7 +3,6 @@
 --  NPC: The ??? on the stack of papers in 2nd Flr of Vemalpeau's house.
 -- General Info NPC
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

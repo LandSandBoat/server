@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Rolanberry_Fields/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

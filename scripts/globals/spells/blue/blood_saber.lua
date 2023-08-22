@@ -13,7 +13,6 @@
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

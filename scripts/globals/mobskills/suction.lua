@@ -7,7 +7,6 @@
 --  Range: Melee
 --  Notes: Stun doesn't always occur.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

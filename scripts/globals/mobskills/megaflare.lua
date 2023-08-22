@@ -7,7 +7,6 @@
 --  Range:
 --  Notes: Used by Bahamut every 10% of its HP (except at 10%), but can use at will when under 10%.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

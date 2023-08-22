@@ -4,7 +4,6 @@
 -- Item Effect: Instantly removes all negative status effects from target
 --              Does not remove Plague or Curse
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 require("scripts/globals/item_utils")
 -----------------------------------

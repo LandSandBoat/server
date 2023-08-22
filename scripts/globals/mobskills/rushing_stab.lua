@@ -7,7 +7,6 @@
 --  Range: Melee
 --  Notes: Only used by Mamool Ja with piercing weapons.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

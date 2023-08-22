@@ -4,7 +4,6 @@
 -- Type: Physical
 -- This should not be ranged or PIERCING
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

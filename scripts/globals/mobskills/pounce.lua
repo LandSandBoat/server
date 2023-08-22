@@ -2,7 +2,6 @@
 -- Pounce: Deals damage to a single target.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

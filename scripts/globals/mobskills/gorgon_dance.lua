@@ -8,7 +8,6 @@
 -- Notes: Used only by Medusa. Starts using it at 25%.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

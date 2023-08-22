@@ -2,7 +2,6 @@
 -- Megalith Throw
 -- Titan delivers a ranged attack that slows target.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

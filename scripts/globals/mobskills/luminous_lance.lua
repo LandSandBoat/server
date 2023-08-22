@@ -2,7 +2,6 @@
 --  Luminous Lance
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

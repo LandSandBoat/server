@@ -7,7 +7,6 @@
 --  Range: Unknown
 --  Notes: Additional effect - paralyze
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

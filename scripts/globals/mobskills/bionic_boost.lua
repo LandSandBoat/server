@@ -4,7 +4,6 @@
 -- Gives the user the effect of counterstance
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

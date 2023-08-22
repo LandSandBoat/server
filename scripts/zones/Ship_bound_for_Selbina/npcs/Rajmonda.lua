@@ -5,7 +5,6 @@
 -- !pos 1.841 -2.101 -9.000 220
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

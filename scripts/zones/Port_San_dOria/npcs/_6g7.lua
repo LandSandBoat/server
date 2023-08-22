@@ -3,7 +3,6 @@
 --  NPC: Door: Arrivals Entrance
 -- !pos -24 -8 15 232
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

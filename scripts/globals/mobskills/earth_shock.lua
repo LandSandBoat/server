@@ -4,7 +4,6 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

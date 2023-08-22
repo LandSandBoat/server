@@ -1,7 +1,6 @@
 -----------------------------------
 -- Aerial Blast
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------

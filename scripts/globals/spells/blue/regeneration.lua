@@ -13,7 +13,6 @@
 -----------------------------------
 -- Combos: None
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

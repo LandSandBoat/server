@@ -3,7 +3,6 @@
 --  Zedi, while in Animation form 3 (Rings)
 --  Blinkable 1-3 hit, addtional effect Silence on hit.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -2,7 +2,6 @@
 -- Phase Shift
 -- A shockwave deals damage to targets in an area of effect. Additional effect: Stun + Bind
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

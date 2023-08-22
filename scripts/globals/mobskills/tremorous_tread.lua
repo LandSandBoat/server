@@ -6,7 +6,6 @@
 --  2-3 Shadows
 --  Range: Unknown
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

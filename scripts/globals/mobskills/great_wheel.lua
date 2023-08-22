@@ -6,7 +6,6 @@
 --  Wipes Shadows
 --  Range: Melee range radial
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

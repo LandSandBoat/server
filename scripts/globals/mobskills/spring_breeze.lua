@@ -4,7 +4,6 @@
 -- Description: AoE TP-Reduction and Sleep xi.effect.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -7,7 +7,6 @@
 --  Range: Melee
 --  Notes: Only used by "destroyers" (carrying massive warhammers).
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

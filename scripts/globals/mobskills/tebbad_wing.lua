@@ -7,7 +7,6 @@
 --  Range: 30' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

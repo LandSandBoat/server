@@ -7,7 +7,6 @@
 --  Range: 30' radial.
 --  Notes: Used only Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

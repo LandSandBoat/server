@@ -4,7 +4,6 @@
 --  Type: Magical
 --  additional effect : Silence.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

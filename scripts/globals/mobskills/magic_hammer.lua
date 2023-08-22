@@ -4,7 +4,6 @@
 --  Description: Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead.
 --  Type: Magical (Light)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

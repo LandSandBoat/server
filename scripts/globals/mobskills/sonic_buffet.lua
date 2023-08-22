@@ -2,7 +2,6 @@
 -- Sonic Buffet
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

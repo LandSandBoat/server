@@ -2,7 +2,6 @@
 -- Mobskill: Counterstance
 -- Increases chance to counter but lowers defense.
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -5,7 +5,6 @@
 -- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")

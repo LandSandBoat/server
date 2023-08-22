@@ -7,7 +7,6 @@
 --  Notes: Used by Fe'e in Up in Arms BCNM
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

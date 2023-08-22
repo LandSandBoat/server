@@ -8,7 +8,6 @@
 -- Notes: Poison is about 5/tic.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

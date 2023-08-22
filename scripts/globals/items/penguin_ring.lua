@@ -14,6 +14,7 @@ itemObject.onItemCheck = function(target)
     if target:getMod(xi.mod.PENGUIN_RING_EFFECT) ~= 0 then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 

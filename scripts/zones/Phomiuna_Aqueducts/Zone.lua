@@ -2,7 +2,6 @@
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-require('scripts/globals/settings')
 -----------------------------------
 local zoneObject = {}
 

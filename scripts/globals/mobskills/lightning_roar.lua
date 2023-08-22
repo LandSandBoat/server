@@ -3,7 +3,6 @@
 -- Emits the roar of an impact event, dealing damage in a fan-shaped area of effect. Lightning damage
 -- Ignores Shadows
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

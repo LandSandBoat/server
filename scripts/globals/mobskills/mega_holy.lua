@@ -11,7 +11,6 @@
 -- My radiance...shall guide thee..."
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

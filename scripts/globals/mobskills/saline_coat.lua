@@ -9,7 +9,6 @@
 -- Notes: ~50% Magic DEF boost.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- Dimensional Death
 -- Damage varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

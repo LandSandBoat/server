@@ -2,7 +2,6 @@
 -- Thunder IV
 -- Deals thunder elemental damage.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

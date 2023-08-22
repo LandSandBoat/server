@@ -8,7 +8,6 @@
 -- Notes: Used only by Omega
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

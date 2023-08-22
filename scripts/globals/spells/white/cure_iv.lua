@@ -2,7 +2,6 @@
 -- Spell: Cure IV
 -- Restores target's HP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spells/healing_spell")

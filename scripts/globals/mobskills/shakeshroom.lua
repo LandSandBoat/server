@@ -5,7 +5,6 @@
 -- Piercing damage Ranged Attack.
 -- Secondary modifiers: INT: 20%.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

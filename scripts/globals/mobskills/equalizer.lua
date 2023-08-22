@@ -2,7 +2,6 @@
 -- Equalizer
 -- AoE damage (~600-800)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 
 -----------------------------------

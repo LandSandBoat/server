@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

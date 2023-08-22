@@ -4,7 +4,6 @@
 -- Involved in Quest: Gullible's Travels, Even More Gullible's Travels,
 -- Location: (I-7)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")

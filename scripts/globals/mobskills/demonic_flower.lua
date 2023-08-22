@@ -5,7 +5,6 @@
 -- Deals souleater like damage to the user.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -3,7 +3,6 @@
 -- Description: Blinds target.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

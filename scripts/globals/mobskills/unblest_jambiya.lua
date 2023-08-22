@@ -8,7 +8,6 @@
 --  Notes: Used only by certain NM's when their primary sword isn't broken.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

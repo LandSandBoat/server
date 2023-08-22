@@ -2,7 +2,6 @@
 -- Toxic Pick
 -- Deals damage to a single target. Additional effect: Poison, Plague, Gravity effect on target
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

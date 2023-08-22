@@ -4,7 +4,6 @@
 -- Description: AoE Absorb All with randomness
 -- Type: Magical
 ---------------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 ---------------------------------------------
@@ -39,7 +38,6 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     return drained
-
 end
 
 return abilityObject

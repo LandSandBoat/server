@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/RoMaeve/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

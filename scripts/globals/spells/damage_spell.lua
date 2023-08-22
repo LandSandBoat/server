@@ -8,7 +8,6 @@ require("scripts/globals/magicburst")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
 require("scripts/globals/damage")
 -----------------------------------
 xi = xi or {}

@@ -2,7 +2,6 @@
 -- Ice Break
 -- Deals ice damage to enemies within range. Additional Effect: "Bind."
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

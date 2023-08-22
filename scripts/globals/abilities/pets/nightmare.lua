@@ -3,7 +3,6 @@
 -- AOE Sleep with Bio dot
 ---------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spell_data")
@@ -30,6 +29,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I
     end
+
     duration = duration * resm
     if
         target:hasImmunity(1) or

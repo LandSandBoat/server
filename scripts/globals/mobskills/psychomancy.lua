@@ -5,7 +5,6 @@
 -- Utsusemi/Blink absorb: ignore shadow
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

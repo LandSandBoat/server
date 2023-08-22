@@ -1,7 +1,6 @@
 -----------------------------------
 -- Lesson in Pain
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

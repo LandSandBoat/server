@@ -7,7 +7,6 @@
 -- Notes: If used against undead, it will simply do damage and not drain MP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

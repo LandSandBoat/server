@@ -5,7 +5,6 @@
 -- Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

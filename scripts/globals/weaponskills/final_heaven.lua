@@ -9,7 +9,6 @@
 -- +10 Subtle Blow for a short duration after using the weapon skill. (Not implemented)
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

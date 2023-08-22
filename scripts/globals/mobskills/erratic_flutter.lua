@@ -17,7 +17,6 @@
 -- Player Blue magic version is wind element instead of fire.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

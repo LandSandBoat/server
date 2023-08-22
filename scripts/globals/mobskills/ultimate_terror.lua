@@ -4,7 +4,6 @@
 -- Description: AoE Absorb All with randomness
 -- Type: Magical
 ---------------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

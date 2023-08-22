@@ -7,7 +7,6 @@
 --  Range: Unknown Radial (Using 15' as an estimate)
 --  Notes: Used by some versions of Diabolos, but not all.
 ---------------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}
@@ -16,6 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if target:hasStatusEffect(xi.effect.CURSE_I) then
         return 1
     end
+
     return 0
 end
 

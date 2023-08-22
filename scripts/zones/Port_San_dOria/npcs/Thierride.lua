@@ -6,7 +6,6 @@
 -----------------------------------
 -- Starts and Finishes Quest: A Taste For Meat
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")

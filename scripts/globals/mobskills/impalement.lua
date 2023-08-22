@@ -6,7 +6,6 @@
 --  Utsusemi/Blink absorb: No
 --  Range: Single Target
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------

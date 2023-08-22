@@ -7,7 +7,6 @@
 --  Range: AoE 10'
 --  Notes: Poison is 20/tic
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

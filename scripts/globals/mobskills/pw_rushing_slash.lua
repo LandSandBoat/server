@@ -7,7 +7,6 @@
 -- Range: Melee
 -- Notes: Only used by Mamool Ja with slashing weapons.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

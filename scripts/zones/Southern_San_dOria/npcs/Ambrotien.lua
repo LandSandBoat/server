@@ -3,7 +3,6 @@
 --  NPC: Ambrotien
 -- !pos 93.419 -0.001 -57.347 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------

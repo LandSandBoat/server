@@ -7,7 +7,6 @@
 --  Range: Melee
 --  Notes: Used only when wielding their initial sword.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

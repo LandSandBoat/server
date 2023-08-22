@@ -11,7 +11,6 @@
 -- 2.25      4.5       6.75
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

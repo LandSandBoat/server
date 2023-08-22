@@ -12,7 +12,6 @@
 -- Revelation...is within thy reach..."
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

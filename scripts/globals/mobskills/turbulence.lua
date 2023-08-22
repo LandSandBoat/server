@@ -3,7 +3,6 @@
 -- Deals wind based damage in an area of effect
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

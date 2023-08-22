@@ -2,7 +2,6 @@
 -- Meltdown
 -- Reactor failure causes self-destruct, dealing magic damage to targets in an area of effect.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

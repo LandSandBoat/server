@@ -1,7 +1,6 @@
 -----------------------------------
 -- Energy Steal
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/msg")
 -----------------------------------

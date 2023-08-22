@@ -4,7 +4,6 @@
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

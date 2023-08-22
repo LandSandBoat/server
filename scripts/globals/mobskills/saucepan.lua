@@ -2,7 +2,6 @@
 -- Saucepan
 -- Force feeds an unsavory dish.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

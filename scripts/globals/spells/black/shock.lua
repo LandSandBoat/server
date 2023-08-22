@@ -2,7 +2,6 @@
 -- Spell: Shock
 -- Deals lightning damage that lowers an enemy's mind and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

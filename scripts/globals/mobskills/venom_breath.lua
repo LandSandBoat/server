@@ -3,7 +3,6 @@
 -- Venom Breath
 --
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

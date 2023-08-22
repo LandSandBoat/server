@@ -7,7 +7,6 @@
 --  Range: 10' cone
 --  Notes: Additional effect can be removed with Poisona.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

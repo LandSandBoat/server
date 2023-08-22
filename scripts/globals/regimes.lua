@@ -10,7 +10,6 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")

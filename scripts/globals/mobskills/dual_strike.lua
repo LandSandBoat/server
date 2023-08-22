@@ -9,7 +9,6 @@
 -- Notes: Double attacks a single target. Additional effect: Stun
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

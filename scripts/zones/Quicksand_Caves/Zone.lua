@@ -5,7 +5,6 @@ local ID = require('scripts/zones/Quicksand_Caves/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/treasure')
 -----------------------------------
 local zoneObject = {}

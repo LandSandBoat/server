@@ -2,7 +2,6 @@
 -- Rail Cannon 2 gears
 -- 2 Gears: Rail Cannon is directional (fan-shaped) AoE and ignores Utsusemi
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

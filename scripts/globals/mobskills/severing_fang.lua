@@ -6,7 +6,6 @@
 --  Utsusemi/Blink absorb: 2 shadows
 --  Range: Front arc (cone)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

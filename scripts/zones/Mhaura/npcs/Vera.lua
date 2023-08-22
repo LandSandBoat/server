@@ -5,7 +5,6 @@
 -- !pos -49 -5 20 249
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------

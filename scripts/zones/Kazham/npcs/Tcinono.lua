@@ -3,7 +3,6 @@
 --  NPC: Tcinono
 -- Type: Weather Reporter
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

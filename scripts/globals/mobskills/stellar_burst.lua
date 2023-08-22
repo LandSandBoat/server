@@ -2,7 +2,6 @@
 -- Stellar Burst
 -- A starburst damages targets in an area of effect. Additional effect: Silence
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

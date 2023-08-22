@@ -8,7 +8,6 @@
 -- Notes: Target has to be facing user
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- Slugshot
 -- Delivers an inaccurate attack that deals quadruple damage. Accuracy varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

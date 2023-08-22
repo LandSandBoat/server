@@ -8,7 +8,6 @@
 --  Notes: FTP is 3.0 for 1k TP.
 --  TODO: Attack boost 100%
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

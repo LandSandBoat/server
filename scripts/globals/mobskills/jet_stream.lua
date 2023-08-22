@@ -2,7 +2,6 @@
 -- Jet Stream
 -- Delivers a threefold attack. Accuracy varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

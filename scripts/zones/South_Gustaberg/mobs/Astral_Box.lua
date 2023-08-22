@@ -3,7 +3,6 @@
 --  Mob: Astral Box
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

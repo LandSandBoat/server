@@ -4,7 +4,6 @@
 -- Power: Base defense (i.e. defense bonus defense excluded) * 2
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

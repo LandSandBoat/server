@@ -2,7 +2,6 @@
 -- Nimble Snap
 -- Single target damage.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

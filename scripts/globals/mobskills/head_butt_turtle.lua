@@ -2,7 +2,6 @@
 -- Head Butt (Adamantoise)
 -- Deals damage to single target. Additional effects: Accuracy Down and large knockback
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

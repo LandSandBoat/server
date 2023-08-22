@@ -7,7 +7,6 @@
 -- Notes: Nightmare Cockatrice extends this to a fan-shaped AOE.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

@@ -6,7 +6,6 @@
 --  Range: Unknown
 -- Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

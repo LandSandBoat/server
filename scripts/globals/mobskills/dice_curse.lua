@@ -3,7 +3,6 @@
 -- Description: AoE curse.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

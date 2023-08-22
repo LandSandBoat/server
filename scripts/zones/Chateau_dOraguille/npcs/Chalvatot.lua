@@ -9,7 +9,6 @@
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

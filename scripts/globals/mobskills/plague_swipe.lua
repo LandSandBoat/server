@@ -6,7 +6,6 @@
 --  2-3 Shadows
 --  Range: Backward Arc
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

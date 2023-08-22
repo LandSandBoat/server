@@ -4,7 +4,6 @@
 -- Description: Delivers an area attack. Damage varies with TP.
 -- Type: Physical (Blunt)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

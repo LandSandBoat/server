@@ -3,7 +3,6 @@
 -- Description: Ignores targets defense. Damage varies with TP.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,7 +3,6 @@
 -- Emits a booming cry, inflicting curse and plague
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

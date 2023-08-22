@@ -5,7 +5,6 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Skillchain Properties: Fragmentation-IconFragmentation
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

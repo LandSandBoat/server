@@ -7,7 +7,6 @@
 --  Range: Front cone
 --  Notes: Used only when wielding their initial sword, or the dagger on their backs.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

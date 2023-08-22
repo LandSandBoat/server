@@ -8,7 +8,6 @@
 --  Notes: Only used in "ball" form.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

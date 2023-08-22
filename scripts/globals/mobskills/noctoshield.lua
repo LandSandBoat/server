@@ -4,7 +4,6 @@
 -- Description: Gives the effect of "Phalanx."
 -- Type: Magical
 ---------------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

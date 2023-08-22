@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Maximin
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

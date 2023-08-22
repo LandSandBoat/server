@@ -4,7 +4,6 @@
 -- TODO: Verify 'info', duration
 -- https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

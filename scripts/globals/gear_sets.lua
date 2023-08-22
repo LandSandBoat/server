@@ -2567,7 +2567,11 @@ xi.gear_sets.checkForGearSet = function(player)
             local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
 
             for _, modData in ipairs(gearSets[setId].mods) do
-                if (setId >= 47 and setId <= 53 and player:getEquipID(xi.slot.AMMO) == xi.items.VIRTUE_STONE) then
+                if
+                    setId >= 47 and
+                    setId <= 53 and
+                    player:getEquipID(xi.slot.AMMO) == xi.items.VIRTUE_STONE
+                then
                     player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
                 elseif setId < 47 or setId > 53 then
                     player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])

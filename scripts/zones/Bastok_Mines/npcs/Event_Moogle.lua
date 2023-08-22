@@ -4,7 +4,6 @@
 -- Type: Special Events Moogle
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/events/starlight_celebrations")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")

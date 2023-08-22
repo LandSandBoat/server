@@ -6,7 +6,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
-require("scripts/globals/settings")
 -----------------------------------
 
 xi = xi or {}

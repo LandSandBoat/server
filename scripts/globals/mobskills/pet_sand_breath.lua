@@ -4,7 +4,6 @@
 --  Description: Deals Earth breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Earth)
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

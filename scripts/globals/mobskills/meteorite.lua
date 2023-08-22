@@ -4,7 +4,6 @@
 --  Description: Carbuncle deals Light damage to an enemy.
 --
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

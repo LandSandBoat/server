@@ -2,7 +2,6 @@
 -- Shoulder Attack
 -- Deals damage to a single target. Additional effect: knockback
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

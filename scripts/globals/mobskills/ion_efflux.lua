@@ -7,7 +7,6 @@
 -- Range: 10 yalms
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

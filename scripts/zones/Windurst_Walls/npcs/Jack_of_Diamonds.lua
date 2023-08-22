@@ -3,7 +3,6 @@
 --  NPC: Jack of Diamonds
 -- Adventurer's Assistant
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

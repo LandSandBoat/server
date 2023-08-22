@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/pets")

@@ -4,7 +4,6 @@
 -- Involved in Quest: 20 in Pirate Years, I'll Take the Big Box, True Will
 -- !pos -50 8 40 247
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

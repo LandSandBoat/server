@@ -5,7 +5,6 @@
 -- !pos 129 -11 126 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/shop")

@@ -3,7 +3,6 @@
 -- Description: Delivers a twofold attack.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

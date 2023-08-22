@@ -6,7 +6,6 @@
 --  Shadow per hit
 --  Range: Unknown range
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

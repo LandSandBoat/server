@@ -7,7 +7,6 @@
 -- Range: Melee
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
