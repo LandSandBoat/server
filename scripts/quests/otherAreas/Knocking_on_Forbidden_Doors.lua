@@ -6,8 +6,8 @@
 -- Fyi_Chalmwoh    : !pos -39.273 -16.000 70.126 249
 -- Mire Incense KI : 709
 -----------------------------------
-local mhauraID = zones[xi.zone.MHAURA]
-local phomiunaID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+local mhauraID    = zones[xi.zone.MHAURA]
+local phomiunaID  = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
@@ -138,7 +138,7 @@ quest.sections =
                 [557] = function(player, csid, option, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
-                        npcUtil.popFromQM(player, npc, ID.mob.ALSHA, { claim = true, hide = 0 })
+                        npcUtil.popFromQM(player, npc, misareauxID.mob.ALSHA, { claim = true, hide = 0 })
                     then
                         return quest:messageSpecial(misareauxID.text.FOUL_STENCH)
                     end

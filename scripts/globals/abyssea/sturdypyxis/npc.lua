@@ -162,7 +162,6 @@ xi.pyxis.npc.onPyxisTrigger = function(player, npc)
 end
 
 xi.pyxis.npc.onPyxisEventUpdate = function(player, csid, option, input)
-    local ID             = zones[player:getZoneID()]
     local npc            = player:getEventTarget()
     local dropType       = npc:getLocalVar("DROPTYPE")
     local tier           = npc:getLocalVar("TIER")

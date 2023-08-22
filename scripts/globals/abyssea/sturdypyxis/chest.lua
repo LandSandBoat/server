@@ -144,7 +144,6 @@ xi.pyxis.getDrops = function(npc, dropType, tier)
 end
 
 xi.pyxis.openChest = function(player, npc)
-    local ID       = zones[player:getZoneID()]
     local dropType = npc:getLocalVar("DROPTYPE")
 
     npc:setAnimationSub(13)

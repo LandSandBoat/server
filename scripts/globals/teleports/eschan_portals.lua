@@ -112,6 +112,8 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     local portalCost = getPortalCost(player)
 
     if option == 3 then-- Ethereal droplet usage.
+        local ID = zones[player:getZoneID()]
+
         player:delItem(xi.item.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
         player:messageSpecial(ID.text.YOU_HAVE_USED, xi.item.ETHEREAL_DROPLET)
     elseif
