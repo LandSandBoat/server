@@ -404,7 +404,7 @@ local redWeakness =
 
 local yellowWeakness =
 {
-    [xi.magic.element.FIRE] =
+    [xi.element.FIRE] =
     {
         xi.magic.spell.FIRE_III,
         xi.magic.spell.FIRE_IV,
@@ -415,7 +415,7 @@ local yellowWeakness =
         xi.magic.spell.ICE_THRENODY,
     },
 
-    [xi.magic.element.ICE] =
+    [xi.element.ICE] =
     {
         xi.magic.spell.BLIZZARD_III,
         xi.magic.spell.BLIZZARD_IV,
@@ -426,7 +426,7 @@ local yellowWeakness =
         xi.magic.spell.WIND_THRENODY,
     },
 
-    [xi.magic.element.WIND] =
+    [xi.element.WIND] =
     {
         xi.magic.spell.AERO_III,
         xi.magic.spell.AERO_IV,
@@ -437,7 +437,7 @@ local yellowWeakness =
         xi.magic.spell.EARTH_THRENODY,
     },
 
-    [xi.magic.element.EARTH] =
+    [xi.element.EARTH] =
     {
         xi.magic.spell.STONE_III,
         xi.magic.spell.STONE_IV,
@@ -448,7 +448,7 @@ local yellowWeakness =
         xi.magic.spell.LIGHTNING_THRENODY,
     },
 
-    [xi.magic.element.THUNDER] =
+    [xi.element.THUNDER] =
     {
         xi.magic.spell.THUNDER_III,
         xi.magic.spell.THUNDER_IV,
@@ -459,7 +459,7 @@ local yellowWeakness =
         xi.magic.spell.WATER_THRENODY,
     },
 
-    [xi.magic.element.WATER] =
+    [xi.element.WATER] =
     {
         xi.magic.spell.WATER_III,
         xi.magic.spell.WATER_IV,
@@ -470,7 +470,7 @@ local yellowWeakness =
         xi.magic.spell.FIRE_THRENODY,
     },
 
-    [xi.magic.element.LIGHT] =
+    [xi.element.LIGHT] =
     {
         xi.magic.spell.BANISH_II,
         xi.magic.spell.BANISH_III,
@@ -482,7 +482,7 @@ local yellowWeakness =
         xi.magic.spell.DARK_THRENODY,
     },
 
-    [xi.magic.element.DARK] =
+    [xi.element.DARK] =
     {
         xi.magic.spell.ASPIR,
         xi.magic.spell.DRAIN,

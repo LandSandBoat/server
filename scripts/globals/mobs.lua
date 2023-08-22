@@ -132,7 +132,7 @@ local additionalEffects =
     [xi.mob.ae.BLIND] =
     {
         chance = 25,
-        ele         = xi.magic.ele.DARK,
+        ele         = xi.element.DARK,
         sub         = xi.subEffect.BLIND,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -146,7 +146,7 @@ local additionalEffects =
     [xi.mob.ae.CURSE] =
     {
         chance      = 20,
-        ele         = xi.magic.ele.DARK,
+        ele         = xi.element.DARK,
         sub         = xi.subEffect.CURSE,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -159,7 +159,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENAERO] =
     {
-        ele                = xi.magic.ele.WIND,
+        ele                = xi.element.WIND,
         sub                = xi.subEffect.WIND_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -169,7 +169,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENBLIZZARD] =
     {
-        ele                = xi.magic.ele.ICE,
+        ele                = xi.element.ICE,
         sub                = xi.subEffect.ICE_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -179,7 +179,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENDARK] =
     {
-        ele                = xi.magic.ele.DARK,
+        ele                = xi.element.DARK,
         sub                = xi.subEffect.DARKNESS_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -189,7 +189,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENFIRE] =
     {
-        ele                = xi.magic.ele.FIRE,
+        ele                = xi.element.FIRE,
         sub                = xi.subEffect.FIRE_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -199,7 +199,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENLIGHT] =
     {
-        ele                = xi.magic.ele.LIGHT,
+        ele                = xi.element.LIGHT,
         sub                = xi.subEffect.LIGHT_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -209,7 +209,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENSTONE] =
     {
-        ele                = xi.magic.ele.EARTH,
+        ele                = xi.element.EARTH,
         sub                = xi.subEffect.EARTH_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -219,7 +219,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENTHUNDER] =
     {
-        ele                = xi.magic.ele.LIGHTNING,
+        ele                = xi.element.LIGHTNING,
         sub                = xi.subEffect.LIGHTNING_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -229,7 +229,7 @@ local additionalEffects =
 
     [xi.mob.ae.ENWATER] =
     {
-        ele                = xi.magic.ele.WATER,
+        ele                = xi.element.WATER,
         sub                = xi.subEffect.WATER_DAMAGE,
         msg                = xi.msg.basic.ADD_EFFECT_DMG,
         negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
@@ -240,7 +240,7 @@ local additionalEffects =
     [xi.mob.ae.EVA_DOWN] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.ICE,
+        ele         = xi.element.ICE,
         sub         = xi.subEffect.EVASION_DOWN,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -254,7 +254,7 @@ local additionalEffects =
     [xi.mob.ae.HP_DRAIN] =
     {
         chance             = 10,
-        ele                = xi.magic.ele.DARK,
+        ele                = xi.element.DARK,
         sub                = xi.subEffect.HP_DRAIN,
         msg                = xi.msg.basic.ADD_EFFECT_HP_DRAIN,
         mod                = xi.mod.INT,
@@ -267,7 +267,7 @@ local additionalEffects =
     [xi.mob.ae.MP_DRAIN] =
     {
         chance             = 10,
-        ele                = xi.magic.ele.DARK,
+        ele                = xi.element.DARK,
         sub                = xi.subEffect.MP_DRAIN,
         msg                = xi.msg.basic.ADD_EFFECT_MP_DRAIN,
         mod                = xi.mod.INT,
@@ -282,7 +282,7 @@ local additionalEffects =
     [xi.mob.ae.PARALYZE] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.ICE,
+        ele         = xi.element.ICE,
         sub         = xi.subEffect.PARALYSIS,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -296,7 +296,7 @@ local additionalEffects =
     [xi.mob.ae.PETRIFY] =
     {
         chance      = 20,
-        ele         = xi.magic.ele.EARTH,
+        ele         = xi.element.EARTH,
         sub         = xi.subEffect.PETRIFY,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -310,7 +310,7 @@ local additionalEffects =
     [xi.mob.ae.PLAGUE] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.WATER,
+        ele         = xi.element.WATER,
         sub         = xi.subEffect.PLAGUE,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -324,7 +324,7 @@ local additionalEffects =
     [xi.mob.ae.POISON] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.WATER,
+        ele         = xi.element.WATER,
         sub         = xi.subEffect.POISON,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -339,7 +339,7 @@ local additionalEffects =
     [xi.mob.ae.SILENCE] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.WIND,
+        ele         = xi.element.WIND,
         sub         = xi.subEffect.SILENCE,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -353,7 +353,7 @@ local additionalEffects =
     [xi.mob.ae.SLOW] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.EARTH,
+        ele         = xi.element.EARTH,
         sub         = xi.subEffect.DEFENSE_DOWN,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -367,7 +367,7 @@ local additionalEffects =
     [xi.mob.ae.STUN] =
     {
         chance      = 20,
-        ele         = xi.magic.ele.LIGHTNING,
+        ele         = xi.element.LIGHTNING,
         sub         = xi.subEffect.STUN,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
@@ -391,7 +391,7 @@ local additionalEffects =
     [xi.mob.ae.TP_DRAIN] =
     {
         chance             = 25,
-        ele                = xi.magic.ele.DARK,
+        ele                = xi.element.DARK,
         sub                = xi.subEffect.TP_DRAIN,
         msg                = xi.msg.basic.ADD_EFFECT_TP_DRAIN,
         mod                = xi.mod.INT,
@@ -406,7 +406,7 @@ local additionalEffects =
     [xi.mob.ae.WEIGHT] =
     {
         chance      = 25,
-        ele         = xi.magic.ele.WIND,
+        ele         = xi.element.WIND,
         sub         = xi.subEffect.BLIND, -- TODO
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,

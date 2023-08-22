@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.hybridWS = true
-    params.ele = xi.magic.ele.FIRE
+    params.ele = xi.element.FIRE
     params.skill = xi.skill.ARCHERY
     params.includemab = true
 

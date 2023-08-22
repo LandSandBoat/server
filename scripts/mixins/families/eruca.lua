@@ -86,12 +86,12 @@ g_mixins.families.eruca = function(erucaMob)
         end
 
         if
-            VanadielDayElement() == xi.magic.ele.FIRE and
+            VanadielDayElement() == xi.element.FIRE and
             mob:getMod(xi.mod.REGAIN) == 0
         then
             mob:setMod(xi.mod.REGAIN, 30)
         elseif
-            VanadielDayElement() ~= xi.magic.ele.FIRE and
+            VanadielDayElement() ~= xi.element.FIRE and
             mob:getMod(xi.mod.REGAIN) ~= 0
         then
             mob:setMod(xi.mod.REGAIN, 0)

@@ -1393,14 +1393,14 @@ local helmInfo =
 
 local rocks =
 {
-    [xi.magic.element.FIRE   ] = xi.item.RED_ROCK,
-    [xi.magic.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
-    [xi.magic.element.WIND   ] = xi.item.GREEN_ROCK,
-    [xi.magic.element.EARTH  ] = xi.item.YELLOW_ROCK,
-    [xi.magic.element.THUNDER] = xi.item.PURPLE_ROCK,
-    [xi.magic.element.WATER  ] = xi.item.BLUE_ROCK,
-    [xi.magic.element.LIGHT  ] = xi.item.WHITE_ROCK,
-    [xi.magic.element.DARK   ] = xi.item.BLACK_ROCK,
+    [xi.element.FIRE   ] = xi.item.RED_ROCK,
+    [xi.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
+    [xi.element.WIND   ] = xi.item.GREEN_ROCK,
+    [xi.element.EARTH  ] = xi.item.YELLOW_ROCK,
+    [xi.element.THUNDER] = xi.item.PURPLE_ROCK,
+    [xi.element.WATER  ] = xi.item.BLUE_ROCK,
+    [xi.element.LIGHT  ] = xi.item.WHITE_ROCK,
+    [xi.element.DARK   ] = xi.item.BLACK_ROCK,
 }
 
 -----------------------------------

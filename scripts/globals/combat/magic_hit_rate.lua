@@ -30,7 +30,7 @@ end
 local function magicAccuracyFromElement(actor, spellElement)
     local magicAcc = 0
 
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         magicAcc = actor:getMod(xi.combat.element.elementalMagicAcc[spellElement]) + actor:getMod(xi.combat.element.strongAffinityAcc[spellElement]) * 10
     end
 
@@ -134,8 +134,8 @@ local function magicAccuracyFromMerits(actor, skillType, spellElement)
         [xi.job.RDM] = function()
             -- Category 1
             if
-                spellElement >= xi.magic.element.FIRE and
-                spellElement <= xi.magic.element.WATER
+                spellElement >= xi.element.FIRE and
+                spellElement <= xi.element.WATER
             then
                 magicAcc = actor:getMerit(xi.combat.element.rdmMerit[spellElement])
             end
@@ -224,7 +224,7 @@ local function magicAccuracyFromDayElement(actor, spellElement)
     local magicAcc = 0
 
     if
-        spellElement ~= xi.magic.ele.NONE and
+        spellElement ~= xi.element.NONE and
         (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1)
     then
         local dayElement = VanadielDayElement()
@@ -248,7 +248,7 @@ local function magicAccuracyFromWeatherElement(actor, spellElement)
 
     -- Calculate if weather bonus triggers.
     if
-        spellElement ~= xi.magic.ele.NONE and
+        spellElement ~= xi.element.NONE and
         (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1)
     then
         local actorWeather = actor:getWeather()
@@ -339,7 +339,7 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     local levelDiff  = target:getMainLvl() - actor:getMainLvl()
 
     -- Elemental magic evasion.
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
         resMod     = target:getMod(xi.combat.element.elementalMagicEva[spellElement])
         resistRank = utils.clamp(target:getMod(xi.combat.element.resistRankMod[spellElement]), -3, 11)
@@ -403,7 +403,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     -- Handle target resistance rank.
     ----------------------------------------
     -- Elemental resistance rank.
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         if targetResistRank > 4 then
             targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
         end

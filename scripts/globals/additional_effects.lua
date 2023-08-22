@@ -27,7 +27,7 @@ xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damag
     -- Copied from existing scripts. Todo: rework into additional modifier for dStat?
     local bonus = 0
 
-    if element == xi.magic.ele.LIGHT then
+    if element == xi.element.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
             bonus = bonus + (bonus - 40) / 2

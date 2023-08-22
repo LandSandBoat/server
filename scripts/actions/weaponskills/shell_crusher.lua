@@ -31,7 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
-        local duration = (120 + (tp / 1000 * 60)) * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0)
+        local duration = (120 + (tp / 1000 * 60)) * applyResistanceAddEffect(player, target, xi.element.WIND, 0)
         target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 0, duration)
     end
 

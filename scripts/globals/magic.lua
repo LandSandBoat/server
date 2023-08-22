@@ -11,14 +11,14 @@ xi.magic = xi.magic or {}
 
 xi.magic.dayElement =
 {
-    [xi.day.FIRESDAY]     = xi.magic.element.FIRE,
-    [xi.day.ICEDAY]       = xi.magic.element.ICE,
-    [xi.day.WINDSDAY]     = xi.magic.element.WIND,
-    [xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
-    [xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
-    [xi.day.WATERSDAY]    = xi.magic.element.WATER,
-    [xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
-    [xi.day.DARKSDAY]     = xi.magic.element.DARK,
+    [xi.day.FIRESDAY]     = xi.element.FIRE,
+    [xi.day.ICEDAY]       = xi.element.ICE,
+    [xi.day.WINDSDAY]     = xi.element.WIND,
+    [xi.day.EARTHSDAY]    = xi.element.EARTH,
+    [xi.day.LIGHTNINGDAY] = xi.element.THUNDER,
+    [xi.day.WATERSDAY]    = xi.element.WATER,
+    [xi.day.LIGHTSDAY]    = xi.element.LIGHT,
+    [xi.day.DARKSDAY]     = xi.element.DARK,
 }
 
 -----------------------------------
@@ -164,7 +164,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
         [xi.job.RDM] = function()
             -- Add MACC for RDM group 1 merits
-            if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+            if element >= xi.element.FIRE and element <= xi.element.WATER then
                 magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
             end
 
@@ -569,7 +569,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     end
 
     local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
-    if element ~= xi.magic.ele.NONE then
+    if element ~= xi.element.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
@@ -881,7 +881,7 @@ function addBonuses(caster, spell, target, dmg, params)
         end
 
         local mdefBarBonus = 0
-        if ele >= xi.magic.element.FIRE and ele <= xi.magic.element.WATER then
+        if ele >= xi.element.FIRE and ele <= xi.element.WATER then
             mab = mab + caster:getMerit(blmMerit[ele])
             if target:hasStatusEffect(xi.magic.barSpell[ele]) then -- bar- spell magic defense bonus
                 mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
@@ -959,8 +959,8 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local mab = 1
     local mdefBarBonus = 0
     if
-        ele >= xi.magic.element.FIRE and
-        ele <= xi.magic.element.WATER and
+        ele >= xi.element.FIRE and
+        ele <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()

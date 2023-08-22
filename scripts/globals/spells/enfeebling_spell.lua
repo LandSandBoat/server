@@ -409,7 +409,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         -- Attempt immunobreak. Fetch resistance rank modifier.
         local resistRank = 0
 
-        if spellElement ~= xi.magic.ele.NONE then
+        if spellElement ~= xi.element.NONE then
             resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
         end
 

@@ -22,9 +22,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skill = xi.skill.STAFF
     params.includemab = true
     -- 50/50 shot of being light or dark
-    params.ele = xi.magic.ele.LIGHT
+    params.ele = xi.element.LIGHT
     if math.random() < 0.5 then
-        params.ele = xi.magic.ele.DARK
+        params.ele = xi.element.DARK
     end
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

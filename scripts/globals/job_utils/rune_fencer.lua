@@ -222,14 +222,14 @@ end
 local function getSwipeLungeElement(type)
     local runeElementEffectMap =
     {
-        [xi.effect.IGNIS]    = xi.magic.ele.FIRE,
-        [xi.effect.GELUS]    = xi.magic.ele.ICE,
-        [xi.effect.FLABRA]   = xi.magic.ele.WIND,
-        [xi.effect.TELLUS]   = xi.magic.ele.EARTH,
-        [xi.effect.SULPOR]   = xi.magic.ele.THUNDER,
-        [xi.effect.UNDA]     = xi.magic.ele.WATER,
-        [xi.effect.LUX]      = xi.magic.ele.LIGHT,
-        [xi.effect.TENEBRAE] = xi.magic.ele.DARK,
+        [xi.effect.IGNIS]    = xi.element.FIRE,
+        [xi.effect.GELUS]    = xi.element.ICE,
+        [xi.effect.FLABRA]   = xi.element.WIND,
+        [xi.effect.TELLUS]   = xi.element.EARTH,
+        [xi.effect.SULPOR]   = xi.element.THUNDER,
+        [xi.effect.UNDA]     = xi.element.WATER,
+        [xi.effect.LUX]      = xi.element.LIGHT,
+        [xi.effect.TENEBRAE] = xi.element.DARK,
     }
 
     return runeElementEffectMap[type]

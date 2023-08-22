@@ -16,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local totaldamage = 0
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     --get resist multiplier (1x if no resist)
-    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.FIRE)
+    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.element.FIRE)
     --get the resisted damage
     damage.dmg = damage.dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
