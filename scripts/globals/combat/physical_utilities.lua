@@ -25,24 +25,24 @@ xi.combat.physical = xi.combat.physical or {}
 -----------------------------------
 local wsElementalProperties =
 {
--- [Resonance] = { None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark },
-    [       0] = {    0,    0,   0,    0,     0,       0,     0,     0,    0 }, -- Lv 0, NONE
-    [       1] = {    0,    0,   0,    0,     0,       0,     0,     1,    0 }, -- Lv 1, Transfixion
-    [       2] = {    0,    0,   0,    0,     0,       0,     0,     0,    1 }, -- Lv 1, Compression
-    [       3] = {    0,    1,   0,    0,     0,       0,     0,     0,    0 }, -- Lv 1, Liquefaction
-    [       4] = {    0,    0,   0,    0,     1,       0,     0,     0,    0 }, -- Lv 1, Scission
-    [       5] = {    0,    0,   0,    0,     0,       0,     1,     0,    0 }, -- Lv 1, Reverberation
-    [       6] = {    0,    0,   0,    1,     0,       0,     0,     0,    0 }, -- Lv 1, Detonation
-    [       7] = {    0,    0,   1,    0,     0,       0,     0,     0,    0 }, -- Lv 1, Induration
-    [       8] = {    0,    0,   0,    0,     0,       1,     0,     0,    0 }, -- Lv 1, Impaction
-    [       9] = {    0,    0,   0,    0,     1,       0,     0,     0,    1 }, -- Lv 2, Gravitation
-    [      10] = {    0,    0,   1,    0,     0,       0,     1,     0,    0 }, -- Lv 2, Distorsion
-    [      11] = {    0,    1,   0,    0,     0,       0,     0,     1,    0 }, -- Lv 2, Fusion
-    [      12] = {    0,    0,   0,    1,     0,       1,     0,     0,    0 }, -- Lv 2, Fragmentation
-    [      13] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 3, Light
-    [      14] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 3, Darkness
-    [      15] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 4, Light
-    [      16] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 4, Darkness
+    -- [Skillchain type             ] = { None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark },
+    [xi.skillchainType.NONE         ] = {    0,    0,   0,    0,     0,       0,     0,     0,    0 }, -- Lv0 None
+    [xi.skillchainType.TRANSFIXION  ] = {    0,    0,   0,    0,     0,       0,     0,     1,    0 }, -- Lv1 Light
+    [xi.skillchainType.COMPRESSION  ] = {    0,    0,   0,    0,     0,       0,     0,     0,    1 }, -- Lv1 Dark
+    [xi.skillchainType.LIQUEFACTION ] = {    0,    1,   0,    0,     0,       0,     0,     0,    0 }, -- Lv1 Fire
+    [xi.skillchainType.SCISSION     ] = {    0,    0,   0,    0,     1,       0,     0,     0,    0 }, -- Lv1 Earth
+    [xi.skillchainType.REVERBERATION] = {    0,    0,   0,    0,     0,       0,     1,     0,    0 }, -- Lv1 Water
+    [xi.skillchainType.DETONATION   ] = {    0,    0,   0,    1,     0,       0,     0,     0,    0 }, -- Lv1 Wind
+    [xi.skillchainType.INDURATION   ] = {    0,    0,   1,    0,     0,       0,     0,     0,    0 }, -- Lv1 Ice
+    [xi.skillchainType.IMPACTION    ] = {    0,    0,   0,    0,     0,       1,     0,     0,    0 }, -- Lv1 Thunder
+    [xi.skillchainType.GRAVITATION  ] = {    0,    0,   0,    0,     1,       0,     0,     0,    1 }, -- Lv2 Earth & Dark
+    [xi.skillchainType.DISTORTION   ] = {    0,    0,   1,    0,     0,       0,     1,     0,    0 }, -- Lv2 Ice & Water
+    [xi.skillchainType.FUSION       ] = {    0,    1,   0,    0,     0,       0,     0,     1,    0 }, -- Lv2 Fire & Light
+    [xi.skillchainType.FRAGMENTATION] = {    0,    0,   0,    1,     0,       1,     0,     0,    0 }, -- Lv2 Wind & Thunder
+    [xi.skillchainType.LIGHT        ] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv3 Fire, Wind, Thunder, Light
+    [xi.skillchainType.DARKNESS     ] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv3 Ice, Earth, Water, Dark
+    [xi.skillchainType.LIGHT_II     ] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv4 Fire, Wind, Thunder, Light
+    [xi.skillchainType.DARKNESS_II  ] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv4 Ice, Earth, Water, Dark
 }
 
 -- Table with pDIF caps per weapon/skill type.
