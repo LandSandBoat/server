@@ -44,6 +44,18 @@ xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY, 
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
 
+local elementDescendant =
+{
+    [xi.element.FIRE   ] = xi.element.WATER,
+    [xi.element.ICE    ] = xi.element.FIRE,
+    [xi.element.WIND   ] = xi.element.ICE,
+    [xi.element.EARTH  ] = xi.element.WIND,
+    [xi.element.THUNDER] = xi.element.EARTH,
+    [xi.element.WATER  ] = xi.element.THUNDER,
+    [xi.element.LIGHT  ] = xi.element.DARK,
+    [xi.element.DARK   ] = xi.element.LIGHT,
+}
+
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 --Calculates magic damage using the standard magic damage calc.
 --Does NOT handle resistance.
@@ -429,7 +441,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -841,7 +853,7 @@ function addBonuses(caster, spell, target, dmg, params)
         if dayWeatherBonusCheck then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if dayWeatherBonusCheck then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -946,7 +958,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end

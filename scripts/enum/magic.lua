@@ -46,33 +46,6 @@ xi.magic.spellGroup =
 }
 
 -----------------------------------
--- Elemental Strength Ordering
------------------------------------
-xi.magic.elementAscendant =
-{
-    [xi.element.FIRE   ] = xi.element.ICE,
-    [xi.element.ICE    ] = xi.element.WIND,
-    [xi.element.WIND   ] = xi.element.EARTH,
-    [xi.element.EARTH  ] = xi.element.THUNDER,
-    [xi.element.THUNDER] = xi.element.WATER,
-    [xi.element.WATER  ] = xi.element.FIRE,
-    [xi.element.LIGHT  ] = xi.element.DARK,
-    [xi.element.DARK   ] = xi.element.LIGHT,
-}
-
-xi.magic.elementDescendant =
-{
-    [xi.element.FIRE   ] = xi.element.WATER,
-    [xi.element.ICE    ] = xi.element.FIRE,
-    [xi.element.WIND   ] = xi.element.ICE,
-    [xi.element.EARTH  ] = xi.element.WIND,
-    [xi.element.THUNDER] = xi.element.EARTH,
-    [xi.element.WATER  ] = xi.element.THUNDER,
-    [xi.element.LIGHT  ] = xi.element.DARK,
-    [xi.element.DARK   ] = xi.element.LIGHT,
-}
-
------------------------------------
 -- Spell Families
 -----------------------------------
 
