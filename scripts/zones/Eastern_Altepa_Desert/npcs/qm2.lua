@@ -29,8 +29,6 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)
         player:setCharVar("twentyInPirateYearsCS", 4)
         player:setCharVar("TsuchigumoKilled", 0)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 

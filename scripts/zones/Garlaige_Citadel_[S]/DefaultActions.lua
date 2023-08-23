@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.GARLAIGE_CITADEL_S]
+-- local ID = zones[xi.zone.GARLAIGE_CITADEL_S]
 
 return {
     ['Diordinne'] = { event = 14 },
