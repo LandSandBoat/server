@@ -93,7 +93,6 @@ global_objects=(
     applyResistanceEffect
     adjustForTarget
     calculateDuration
-    calculateDurationForLvl
     calculateMagicDamage
     calculatePotency
     canOverwrite
