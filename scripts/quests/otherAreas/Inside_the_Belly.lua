@@ -14,44 +14,44 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSI
 local fishRewards =
 {
     ----- Quest 1 -----
-    [     xi.items.DARK_BASS] = { gil =  10, items = { { chance =  4.9, itemId =                 xi.items.GREEN_ROCK } } },
-    [ xi.items.VEYDAL_WRASSE] = { gil = 225, items = { { chance =    5, itemId =                 xi.items.NEBIMONITE }, { chance = 5, itemId = xi.items.SEASHELL } } },
-    [      xi.items.OGRE_EEL] = { gil =  16, items = { { chance =  2.6, itemId =             xi.items.TURQUOISE_RING } }, title = xi.title.CORDON_BLEU_FISHER },
-    [ xi.items.GIANT_CATFISH] = { gil =  50, items = { { chance =  7.2, itemId =                 xi.items.EARTH_WAND } }, title = xi.title.CORDON_BLEU_FISHER },
+    [     xi.item.DARK_BASS] = { gil =  10, items = { { chance =  4.9, itemId =                 xi.item.GREEN_ROCK } } },
+    [ xi.item.VEYDAL_WRASSE] = { gil = 225, items = { { chance =    5, itemId =                 xi.item.NEBIMONITE }, { chance = 5, itemId = xi.item.SEASHELL } } },
+    [      xi.item.OGRE_EEL] = { gil =  16, items = { { chance =  2.6, itemId =             xi.item.TURQUOISE_RING } }, title = xi.title.CORDON_BLEU_FISHER },
+    [ xi.item.GIANT_CATFISH] = { gil =  50, items = { { chance =  7.2, itemId =                 xi.item.EARTH_WAND } }, title = xi.title.CORDON_BLEU_FISHER },
     ----- Quest 2 -----
-    [  xi.items.ZAFMLUG_BASS] = { gil =  15, items = { { chance =  1.4, itemId =                  xi.items.BLUE_ROCK } } },
-    [   xi.items.GIANT_DONKO] = { gil =  96, items = { { chance =  4.7, itemId = xi.items.BROKEN_HALCYON_FISHING_ROD } } },
-    [     xi.items.BLADEFISH] = { gil = 200, items = { { chance = 11.7, itemId =                 xi.items.ROBBER_RIG } } },
-    [xi.items.BHEFHEL_MARLIN] = { gil = 150, items = { { chance =  3.0, itemId =             xi.items.BRIGANDS_CHART }, { chance = 4.4, itemId = xi.items.PIRATES_CHART } } },
-    [  xi.items.SILVER_SHARK] = { gil = 250, items = { { chance =  1.3, itemId =                    xi.items.TRIDENT } }, title = xi.title.ACE_ANGLER },
+    [  xi.item.ZAFMLUG_BASS] = { gil =  15, items = { { chance =  1.4, itemId =                  xi.item.BLUE_ROCK } } },
+    [   xi.item.GIANT_DONKO] = { gil =  96, items = { { chance =  4.7, itemId = xi.item.BROKEN_HALCYON_FISHING_ROD } } },
+    [     xi.item.BLADEFISH] = { gil = 200, items = { { chance = 11.7, itemId =                 xi.item.ROBBER_RIG } } },
+    [xi.item.BHEFHEL_MARLIN] = { gil = 150, items = { { chance =  3.0, itemId =             xi.item.BRIGANDS_CHART }, { chance = 4.4, itemId = xi.item.PIRATES_CHART } } },
+    [  xi.item.SILVER_SHARK] = { gil = 250, items = { { chance =  1.3, itemId =                    xi.item.TRIDENT } }, title = xi.title.ACE_ANGLER },
     ----- Quest 3 -----
-    [xi.items.JUNGLE_CATFISH] = { gil = 300, items = { { chance =    3, itemId =    xi.items.BROKEN_HUME_FISHING_ROD } } },
-    [   xi.items.GAVIAL_FISH] = { gil = 250, items = { { chance =    5, itemId =              xi.items.DRONE_EARRING } } },
-    [  xi.items.EMPEROR_FISH] = { gil = 300, items = { { chance =    1, itemId =             xi.items.CUIR_HIGHBOOTS } } },
-    [  xi.items.MORINABALIGI] = { gil = 300, items = { { chance =    5, itemId =                xi.items.CUIR_GLOVES } } },
-    [      xi.items.PIRARUCU] = { gil = 516, items = { { chance =    5, itemId =                xi.items.WYVERN_SKIN }, { chance = 2.5, itemId =         xi.items.PEISTE_SKIN } } },
-    [     xi.items.MEGALODON] = { gil = 532, items = { { chance =    3, itemId = xi.items.BROKEN_MITHRAN_FISHING_ROD }, { chance =   3, itemId = xi.items.MITHRAN_FISHING_ROD } } },
+    [xi.item.JUNGLE_CATFISH] = { gil = 300, items = { { chance =    3, itemId =    xi.item.BROKEN_HUME_FISHING_ROD } } },
+    [   xi.item.GAVIAL_FISH] = { gil = 250, items = { { chance =    5, itemId =              xi.item.DRONE_EARRING } } },
+    [  xi.item.EMPEROR_FISH] = { gil = 300, items = { { chance =    1, itemId =             xi.item.CUIR_HIGHBOOTS } } },
+    [  xi.item.MORINABALIGI] = { gil = 300, items = { { chance =    5, itemId =                xi.item.CUIR_GLOVES } } },
+    [      xi.item.PIRARUCU] = { gil = 516, items = { { chance =    5, itemId =                xi.item.WYVERN_SKIN }, { chance = 2.5, itemId =         xi.item.PEISTE_SKIN } } },
+    [     xi.item.MEGALODON] = { gil = 532, items = { { chance =    3, itemId = xi.item.BROKEN_MITHRAN_FISHING_ROD }, { chance =   3, itemId = xi.item.MITHRAN_FISHING_ROD } } },
     ----- Quest 4 -----
-    [    xi.items.PTERYGOTUS] = { gil = 390, items = { { chance =  6.6, itemId =               xi.items.LAPIS_LAZULI } } },
-    [  xi.items.KALKANBALIGI] = { gil = 390, items = { { chance =  3.3, itemId =                xi.items.FLAT_SHIELD } } },
-    [      xi.items.TAKITARO] = { gil = 350, items = { { chance =  2.1, itemId =         xi.items.PHILOSOPHERS_STONE } } },
-    [    xi.items.SEA_ZOMBIE] = { gil = 350, items = { { chance = 23.4, itemId =             xi.items.DRILL_CALAMARY } } },
-    [   xi.items.CAVE_CHERAX] = { gil = 800, items = { { chance = 23.2, itemId =                xi.items.DWARF_PUGIL } } },
-    [       xi.items.TRICORN] = { gil = 810, items = { { chance =    4, itemId =     xi.items.CHUNK_OF_DARKSTEEL_ORE } } },
-    [   xi.items.TURNABALIGI] = { gil = 340, items = { { chance =  0.8, itemId =          xi.items.CHUNK_OF_DARK_ORE }, { chance = 1.6, itemId = xi.items.CHUNK_OF_ICE_ORE }, { chance = 1.3, itemId = xi.items.CHUNK_OF_WATER_ORE } } },
-    [    xi.items.TITANICTUS] = { gil = 350, items = { { chance =  1.4, itemId =              xi.items.ANCIENT_SWORD } }, title = xi.title.LU_SHANG_LIKE_FISHER_KING },
+    [    xi.item.PTERYGOTUS] = { gil = 390, items = { { chance =  6.6, itemId =               xi.item.LAPIS_LAZULI } } },
+    [  xi.item.KALKANBALIGI] = { gil = 390, items = { { chance =  3.3, itemId =                xi.item.FLAT_SHIELD } } },
+    [      xi.item.TAKITARO] = { gil = 350, items = { { chance =  2.1, itemId =         xi.item.PHILOSOPHERS_STONE } } },
+    [    xi.item.SEA_ZOMBIE] = { gil = 350, items = { { chance = 23.4, itemId =             xi.item.DRILL_CALAMARY } } },
+    [   xi.item.CAVE_CHERAX] = { gil = 800, items = { { chance = 23.2, itemId =                xi.item.DWARF_PUGIL } } },
+    [       xi.item.TRICORN] = { gil = 810, items = { { chance =    4, itemId =     xi.item.CHUNK_OF_DARKSTEEL_ORE } } },
+    [   xi.item.TURNABALIGI] = { gil = 340, items = { { chance =  0.8, itemId =          xi.item.CHUNK_OF_DARK_ORE }, { chance = 1.6, itemId = xi.item.CHUNK_OF_ICE_ORE }, { chance = 1.3, itemId = xi.item.CHUNK_OF_WATER_ORE } } },
+    [    xi.item.TITANICTUS] = { gil = 350, items = { { chance =  1.4, itemId =              xi.item.ANCIENT_SWORD } }, title = xi.title.LU_SHANG_LIKE_FISHER_KING },
     ----- Unlisted -----
-    [  xi.items.GIANT_CHIRAI] = { gil = 550, items = { { chance =  1.2, itemId =        xi.items.SPOOL_OF_TWINTHREAD } } },
-    [   xi.items.GUGRUSAURUS] = { gil = 880, items = { { chance =  0.4, itemId =                xi.items.SABER_SHOOT } } },
-    [           xi.items.LIK] = { gil = 880, items = { { chance =  0.5, itemId =         xi.items.SPOOL_OF_OPAL_SILK } } },
-    [   xi.items.RYUGU_TITAN] = { gil = 800, items = { { chance =    1, itemId =            xi.items.MERCURIAL_SWORD } } },
-    [   xi.items.GERROTHORAX] = { gil = 423, items = { { chance =  1.2, itemId =                xi.items.RISKY_PATCH } } },
-    [    xi.items.MONKE_ONKE] = { gil = 150, items = { { chance =    2, itemId =       xi.items.PINCH_OF_POISON_DUST } } },
-    [   xi.items.KILICBALIGI] = { gil = 150, items = { { chance =    2, itemId =           xi.items.RUSTY_GREATSWORD } } },
-    [xi.items.ARMORED_PISCES] = { gil = 475, items = { { chance =  0.4, itemId =         xi.items.STOLID_BREASTPLATE } } },
-    [     xi.items.MOLA_MOLA] = { gil = 478, items = { { chance =  1.8, itemId =            xi.items.MERCURIAL_SPEAR } } },
-    [       xi.items.AHTAPOT] = { gil = 350, items = { { chance = 18.8, itemId =              xi.items.DECAYED_INGOT }, { chance = 10.6, itemId = xi.items.MILDEWY_INGOT } } },
-    [       xi.items.LAKERDA] = { gil =  51, items = { { chance =    2, itemId =                      xi.items.PEARL }, { chance = 10.6, itemId =   xi.items.BLACK_PEARL } } },
+    [  xi.item.GIANT_CHIRAI] = { gil = 550, items = { { chance =  1.2, itemId =        xi.item.SPOOL_OF_TWINTHREAD } } },
+    [   xi.item.GUGRUSAURUS] = { gil = 880, items = { { chance =  0.4, itemId =                xi.item.SABER_SHOOT } } },
+    [           xi.item.LIK] = { gil = 880, items = { { chance =  0.5, itemId =         xi.item.SPOOL_OF_OPAL_SILK } } },
+    [   xi.item.RYUGU_TITAN] = { gil = 800, items = { { chance =    1, itemId =            xi.item.MERCURIAL_SWORD } } },
+    [   xi.item.GERROTHORAX] = { gil = 423, items = { { chance =  1.2, itemId =                xi.item.RISKY_PATCH } } },
+    [    xi.item.MONKE_ONKE] = { gil = 150, items = { { chance =    2, itemId =       xi.item.PINCH_OF_POISON_DUST } } },
+    [   xi.item.KILICBALIGI] = { gil = 150, items = { { chance =    2, itemId =           xi.item.RUSTY_GREATSWORD } } },
+    [xi.item.ARMORED_PISCES] = { gil = 475, items = { { chance =  0.4, itemId =         xi.item.STOLID_BREASTPLATE } } },
+    [     xi.item.MOLA_MOLA] = { gil = 478, items = { { chance =  1.8, itemId =            xi.item.MERCURIAL_SPEAR } } },
+    [       xi.item.AHTAPOT] = { gil = 350, items = { { chance = 18.8, itemId =              xi.item.DECAYED_INGOT }, { chance = 10.6, itemId = xi.item.MILDEWY_INGOT } } },
+    [       xi.item.LAKERDA] = { gil =  51, items = { { chance =    2, itemId =                      xi.item.PEARL }, { chance = 10.6, itemId =   xi.item.BLACK_PEARL } } },
 }
 
 quest.reward = { }
@@ -176,13 +176,13 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if skillCheck(player) >= 30 and skillCheck(player) < 39 then
-                        return quest:event(162, xi.items.DARK_BASS, xi.items.GIANT_CATFISH, xi.items.OGRE_EEL, xi.items.VEYDAL_WRASSE)
+                        return quest:event(162, xi.item.DARK_BASS, xi.item.GIANT_CATFISH, xi.item.OGRE_EEL, xi.item.VEYDAL_WRASSE)
                     elseif skillCheck(player) >= 40 and skillCheck(player) < 49 then
-                        return quest:event(163, xi.items.ZAFMLUG_BASS, xi.items.GIANT_DONKO, xi.items.BHEFHEL_MARLIN, xi.items.BLADEFISH, xi.items.SILVER_SHARK)
+                        return quest:event(163, xi.item.ZAFMLUG_BASS, xi.item.GIANT_DONKO, xi.item.BHEFHEL_MARLIN, xi.item.BLADEFISH, xi.item.SILVER_SHARK)
                     elseif skillCheck(player) >= 50 and skillCheck(player) <= 74 then
-                        return quest:event(164, xi.items.JUNGLE_CATFISH, xi.items.GAVIAL_FISH, xi.items.PIRARUCU, xi.items.EMPEROR_FISH, xi.items.MEGALODON, xi.items.MORINABALIGI)
+                        return quest:event(164, xi.item.JUNGLE_CATFISH, xi.item.GAVIAL_FISH, xi.item.PIRARUCU, xi.item.EMPEROR_FISH, xi.item.MEGALODON, xi.item.MORINABALIGI)
                     elseif skillCheck(player) >= 75 then
-                        return quest:event(165, xi.items.PTERYGOTUS, xi.items.KALKANBALIGI, xi.items.TAKITARO, xi.items.SEA_ZOMBIE, xi.items.TITANICTUS, xi.items.TURNABALIGI, xi.items.CAVE_CHERAX, xi.items.TRICORN)
+                        return quest:event(165, xi.item.PTERYGOTUS, xi.item.KALKANBALIGI, xi.item.TAKITARO, xi.item.SEA_ZOMBIE, xi.item.TITANICTUS, xi.item.TURNABALIGI, xi.item.CAVE_CHERAX, xi.item.TRICORN)
                     end
                 end,
             },
@@ -221,13 +221,13 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if skillCheck(player) >= 30 and skillCheck(player) < 39 then
-                        return quest:event(162, xi.items.DARK_BASS, xi.items.GIANT_CATFISH, xi.items.OGRE_EEL, xi.items.VEYDAL_WRASSE)
+                        return quest:event(162, xi.item.DARK_BASS, xi.item.GIANT_CATFISH, xi.item.OGRE_EEL, xi.item.VEYDAL_WRASSE)
                     elseif skillCheck(player) >= 40 and skillCheck(player) < 49 then
-                        return quest:event(163, xi.items.ZAFMLUG_BASS, xi.items.GIANT_DONKO, xi.items, xi.items.BHEFHEL_MARLIN, xi.items.SILVER_SHARK)
+                        return quest:event(163, xi.item.ZAFMLUG_BASS, xi.item.GIANT_DONKO, xi.items, xi.item.BHEFHEL_MARLIN, xi.item.SILVER_SHARK)
                     elseif skillCheck(player) >= 50 and skillCheck(player) <= 74 then
-                        return quest:event(164, xi.items.JUNGLE_CATFISH, xi.items.GAVIAL_FISH, xi.items.PIRARUCU, xi.items.EMPEROR_FISH, xi.items.MEGALODON, xi.items.MORINABALIGI)
+                        return quest:event(164, xi.item.JUNGLE_CATFISH, xi.item.GAVIAL_FISH, xi.item.PIRARUCU, xi.item.EMPEROR_FISH, xi.item.MEGALODON, xi.item.MORINABALIGI)
                     elseif skillCheck(player) >= 75 then
-                        return quest:event(165, xi.items.PTERYGOTUS, xi.items.KALKANBALIGI, xi.items.TAKITARO, xi.items.SEA_ZOMBIE, xi.items.TITANICTUS, xi.items.TURNABALIGI, xi.items.CAVE_CHERAX, xi.items.TRICORN)
+                        return quest:event(165, xi.item.PTERYGOTUS, xi.item.KALKANBALIGI, xi.item.TAKITARO, xi.item.SEA_ZOMBIE, xi.item.TITANICTUS, xi.item.TURNABALIGI, xi.item.CAVE_CHERAX, xi.item.TRICORN)
                     end
                 end,
             },

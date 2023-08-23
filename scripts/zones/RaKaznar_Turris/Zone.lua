@@ -4,10 +4,6 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    GetNPCByID(ID.npc.MOOGLE1):renameEntity("Seismic Tower")
-    GetNPCByID(ID.npc.MOOGLE2):renameEntity("Seismic Tower")
-    GetNPCByID(ID.npc.MOOGLE1):setStatus(xi.status.INVISIBLE)
-    GetNPCByID(ID.npc.MOOGLE2):setStatus(xi.status.INVISIBLE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
