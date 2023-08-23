@@ -1,7 +1,6 @@
 require("scripts/globals/abyssea/lights")
 require("scripts/globals/abyssea")
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 

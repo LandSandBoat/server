@@ -3,7 +3,6 @@
 --  Mob: Kam'lanaut
 -- Apocalypse Nigh Final Fight
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

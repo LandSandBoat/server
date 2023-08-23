@@ -1,7 +1,6 @@
 -----------------------------------
 -- Adds Rent A Room To NPCs
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 local m = Module:new("era_rent_a_room")

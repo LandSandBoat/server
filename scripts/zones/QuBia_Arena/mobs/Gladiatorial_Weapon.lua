@@ -3,7 +3,6 @@
 -- Mob: Gladiatorial Weapon
 -- BCNM: Die by the Sword
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

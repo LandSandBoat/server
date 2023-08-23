@@ -10,7 +10,6 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
-require('scripts/globals/settings')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)

@@ -3,8 +3,6 @@
 -- Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

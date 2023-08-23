@@ -3,7 +3,6 @@
 --  Mob: Searcher
 -- Mission 2-3 BCNM Fight
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

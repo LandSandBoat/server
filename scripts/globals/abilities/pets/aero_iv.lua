@@ -1,7 +1,6 @@
 -----------------------------------
 -- Aero 4
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------

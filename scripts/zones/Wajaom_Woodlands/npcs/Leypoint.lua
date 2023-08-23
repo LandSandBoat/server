@@ -5,7 +5,6 @@
 -- !pos -200.027 -8.500 80.058 51
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

@@ -3,7 +3,6 @@
 -- Item: pair_of_lucid_wings_i
 -- Item Effect: Grants 500 TP to Party members within 10'
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

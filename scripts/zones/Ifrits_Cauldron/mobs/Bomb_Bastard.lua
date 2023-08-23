@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Bastard
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

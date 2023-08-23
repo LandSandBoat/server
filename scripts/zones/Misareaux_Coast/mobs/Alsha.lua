@@ -4,7 +4,6 @@
 -- Quest: Knocking on Forbidden Doors
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

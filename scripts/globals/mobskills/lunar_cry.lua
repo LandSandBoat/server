@@ -3,8 +3,6 @@
 -- Fenrir gives accuracy and evasion down status effects to target.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

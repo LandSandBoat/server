@@ -7,8 +7,6 @@
 -- Notes: If used against undead, it will simply do damage and not drain HP.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

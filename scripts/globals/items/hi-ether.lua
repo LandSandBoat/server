@@ -3,7 +3,6 @@
 -- Item: Hi-Ether
 -- Item Effect: Restores 50 MP
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

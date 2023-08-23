@@ -3,7 +3,6 @@
 --  NPC: Rabbit Footprint (Spawns White/Black Coney)
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

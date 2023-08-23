@@ -4,7 +4,6 @@
 -- Assault: Orichalcum Survey
 -----------------------------------
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
-require('scripts/globals/settings')
 require("scripts/globals/assault")
 -----------------------------------
 local entity = {}

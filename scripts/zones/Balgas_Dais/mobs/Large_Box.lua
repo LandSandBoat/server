@@ -3,7 +3,6 @@
 --   NM: Large Box
 -- BCNM: Treasures and Tribulations
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

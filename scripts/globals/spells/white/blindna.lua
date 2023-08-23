@@ -2,7 +2,6 @@
 -- Spell: Blindna
 -- Removes blindness from target.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

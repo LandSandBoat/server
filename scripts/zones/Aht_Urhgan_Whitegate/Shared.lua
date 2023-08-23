@@ -1,7 +1,6 @@
 -----------------------------------
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 
 local sharedObj = {}

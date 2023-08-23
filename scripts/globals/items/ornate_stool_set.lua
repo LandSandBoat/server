@@ -3,7 +3,6 @@
 -- Item: Ornate Stool
 -- Item Effect: Grant Ornate stool key item
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------

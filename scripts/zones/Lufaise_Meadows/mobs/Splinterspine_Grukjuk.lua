@@ -2,7 +2,6 @@
 -- Area: Lufaise Meadows (24)
 --  Mob: Splinterspine Grukjuk
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

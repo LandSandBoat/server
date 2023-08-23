@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trial by Earth
 -- !pos 32 7 -41 236
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")

@@ -4,7 +4,6 @@
 -- Type: Standard NPC
 -- !pos -15.727 -9.032 54.049 249
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

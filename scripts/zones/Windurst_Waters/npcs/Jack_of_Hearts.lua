@@ -3,7 +3,6 @@
 --  NPC: Jack of Hearts
 -- Adventurer's Assistant
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

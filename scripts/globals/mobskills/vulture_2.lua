@@ -3,7 +3,6 @@
 -- Dummy ability used for 2hr animation.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}

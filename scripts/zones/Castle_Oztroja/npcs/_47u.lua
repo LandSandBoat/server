@@ -4,7 +4,6 @@
 -- Notes: Opens door _474 from behind
 -- !pos -60 24 -77 151
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

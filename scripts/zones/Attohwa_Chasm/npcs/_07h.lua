@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  NPC: Miasma
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

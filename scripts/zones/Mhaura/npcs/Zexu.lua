@@ -4,7 +4,6 @@
 -- Involved in Quests: The Sand Charm
 -- !pos 30 -8 25 249
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

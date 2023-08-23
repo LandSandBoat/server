@@ -4,7 +4,6 @@
 -- !pos 23.257 0.000 21.532 50
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 local entity = {}

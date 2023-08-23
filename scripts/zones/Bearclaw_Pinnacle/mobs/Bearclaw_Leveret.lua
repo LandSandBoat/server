@@ -3,7 +3,6 @@
 -- Mob: Bearclaw Leveret
 -- ENM: Follow the White Rabbit
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

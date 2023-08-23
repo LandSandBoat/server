@@ -3,7 +3,6 @@
 --  NPC: Pekuku
 -- Type: Weather Reporter
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

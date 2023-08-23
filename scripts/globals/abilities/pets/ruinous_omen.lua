@@ -8,8 +8,6 @@
 -- Version used by player summoners seems capped at ~2% except against Behemoths
 -- https://www.bluegartr.com/threads/108197-Random-Facts-Thread-Abilities?p=6003851&viewfull=1#post6003851
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/summon")
 ---------------------------------------------

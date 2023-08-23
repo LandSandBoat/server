@@ -3,7 +3,6 @@
 --  Mob: Myrmidon Spo-spo
 -- BCNM: Royal Succession
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

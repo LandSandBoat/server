@@ -2,7 +2,6 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Tiger
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

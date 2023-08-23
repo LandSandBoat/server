@@ -6,8 +6,6 @@
 -- https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

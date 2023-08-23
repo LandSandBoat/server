@@ -4,9 +4,7 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 0 -8 -122 232
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------

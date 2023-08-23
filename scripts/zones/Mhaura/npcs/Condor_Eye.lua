@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Condor Eye
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

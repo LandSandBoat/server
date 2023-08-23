@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

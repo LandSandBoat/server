@@ -3,7 +3,6 @@
 --  Mob: Eldertaur
 --  ENM: Brothers
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@
 -- !pos -182 -15 -19 151
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

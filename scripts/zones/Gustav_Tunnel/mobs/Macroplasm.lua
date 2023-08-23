@@ -4,7 +4,6 @@
 -- Note: Part of mission "The Salt of the Earth"
 -----------------------------------
 local ID = require("scripts/zones/Gustav_Tunnel/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

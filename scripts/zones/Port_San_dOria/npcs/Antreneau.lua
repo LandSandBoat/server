@@ -6,7 +6,6 @@
 -- Involved in Quests: A Taste For Meat, Over The Hills And Far Away
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

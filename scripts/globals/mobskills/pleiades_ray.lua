@@ -6,7 +6,6 @@
 --  Range: Unknown
 --  Notes: Only used by Gurfurlur the Menacing with health below 20%.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

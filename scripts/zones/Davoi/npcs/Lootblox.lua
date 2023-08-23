@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}

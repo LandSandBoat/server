@@ -3,7 +3,6 @@
 --   NM: Sureshot Snatgat
 -- Involved in Mission: Save the Children
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

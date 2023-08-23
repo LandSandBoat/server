@@ -1,7 +1,6 @@
 -- ----------------------------------
 -- Egg Hunt Egg-Stravaganza
 -- ----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 -- ----------------------------------

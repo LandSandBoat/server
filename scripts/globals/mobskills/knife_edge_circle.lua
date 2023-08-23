@@ -3,8 +3,6 @@
 -- Poisons (20/tick) targets in a conical AoE.
 -- Used by Tres Duendes
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

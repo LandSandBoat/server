@@ -3,8 +3,6 @@
 -- Deals damage to a single target. Additional effect: Knockback.
 -- 0% TP: ??? / 150% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

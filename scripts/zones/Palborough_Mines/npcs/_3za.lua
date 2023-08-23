@@ -4,7 +4,6 @@
 -- Involved In Mission: Journey Abroad
 -- !pos 180 -32 167 143
 -----------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

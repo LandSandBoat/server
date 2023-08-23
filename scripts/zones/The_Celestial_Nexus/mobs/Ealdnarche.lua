@@ -4,7 +4,6 @@
 -- Zilart Mission 16 BCNM Fight
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

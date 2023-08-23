@@ -6,7 +6,6 @@
 -- Bonus: The effect of the ring dramatically increases the rate of stamina drain of a fish while you try to reel it in.
 -- Duration: 20:00 min
 -----------------------------------------
-require("scripts/globals/status")
 -----------------------------------------
 local itemObject = {}
 
@@ -15,6 +14,7 @@ itemObject.onItemCheck = function(target)
     if target:getMod(xi.mod.PENGUIN_RING_EFFECT) ~= 0 then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 

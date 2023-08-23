@@ -3,7 +3,6 @@
 --   NM: Goblin Collector
 ------------------------------
 local ID = require("scripts/zones/Newton_Movalpolos/IDs")
-require("scripts/globals/status")
 ------------------------------
 
 local entity = {}

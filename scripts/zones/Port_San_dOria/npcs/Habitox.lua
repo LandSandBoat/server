@@ -4,7 +4,6 @@
 -- Gobbie Mystery Box
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 local entity = {}

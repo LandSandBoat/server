@@ -2,7 +2,6 @@
 -- Mix: Antidote - Removes Poison Monberaux will not remove the effects
 -- of Poison Potion or other consumables like it.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

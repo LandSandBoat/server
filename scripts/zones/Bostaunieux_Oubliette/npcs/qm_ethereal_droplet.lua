@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Reisenjima/IDs")
 require("scripts/globals/items")
-require("scripts/globals/status")
 -----------------------------------
 
 local entity = {}

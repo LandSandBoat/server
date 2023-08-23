@@ -4,7 +4,6 @@
 -- Item Effect: Grants Wyvren Stoneskin (200)
 -- Duration: Not stated on wiki
 -----------------------------------------
-require("scripts/globals/status")
 -----------------------------------------
 local itemObject = {}
 
@@ -26,6 +25,7 @@ itemObject.onItemUse = function(target)
         if wyvern:getStatusEffect(xi.effect.STONESKIN) then
             wyvern:delStatusEffectSilent(xi.effect.STONESKIN)
         end
+
         wyvern:addStatusEffect(xi.effect.STONESKIN, 200, 0, 180)
     end
 end

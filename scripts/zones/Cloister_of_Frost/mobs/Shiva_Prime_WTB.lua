@@ -3,7 +3,6 @@
 -- Mob: Shiva Prime
 -- Quest: Waking the Beast
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/spell_data")
 -----------------------------------
 local entity = {}

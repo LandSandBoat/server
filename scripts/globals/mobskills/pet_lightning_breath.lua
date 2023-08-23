@@ -4,8 +4,6 @@
 --  Description: Deals Lightning breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Lightning)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

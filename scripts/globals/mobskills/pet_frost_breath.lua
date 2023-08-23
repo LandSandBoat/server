@@ -4,8 +4,6 @@
 --  Description: Deals Ice breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Ice)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

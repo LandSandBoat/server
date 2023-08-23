@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Missionary Man
 -- !pos -42 -10 -89 250
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

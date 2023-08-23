@@ -3,7 +3,6 @@
 --  Mob: Sobbing Eyes
 -- BCNM: Under Observation
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Indi-Poison
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

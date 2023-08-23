@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Magma
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

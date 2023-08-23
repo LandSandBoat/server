@@ -8,7 +8,6 @@ require("scripts/globals/spell_data")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------

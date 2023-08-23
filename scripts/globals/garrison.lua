@@ -7,7 +7,6 @@ require('scripts/globals/items')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
-require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------

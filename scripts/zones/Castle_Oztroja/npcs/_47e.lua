@@ -4,7 +4,6 @@
 -- Notes: Opens _470 (Brass Door) from behind
 -- !pos 22.905 -1.087 -8.003 151
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

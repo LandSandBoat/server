@@ -3,7 +3,6 @@
 --   NM: Medium Box
 -- BCNM: Treasures and Tribulations
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

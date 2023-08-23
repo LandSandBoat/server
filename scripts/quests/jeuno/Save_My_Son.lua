@@ -8,7 +8,6 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 

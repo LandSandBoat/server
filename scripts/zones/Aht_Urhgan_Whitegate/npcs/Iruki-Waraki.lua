@@ -6,12 +6,10 @@
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/pets")
 -----------------------------------
 local entity = {}

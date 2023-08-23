@@ -3,7 +3,6 @@
 --  Mob: Archaic Rampart
 -----------------------------------
 mixins = { require("scripts/mixins/families/rampart") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

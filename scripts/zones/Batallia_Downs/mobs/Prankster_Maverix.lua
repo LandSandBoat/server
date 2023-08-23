@@ -3,7 +3,6 @@
 --   NM: Prankster Maverix
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

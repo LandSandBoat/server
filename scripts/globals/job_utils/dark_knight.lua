@@ -4,7 +4,6 @@
 require('scripts/globals/items')
 require("scripts/globals/msg")
 require("scripts/globals/utils")
-require("scripts/globals/settings")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}

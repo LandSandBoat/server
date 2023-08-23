@@ -2,8 +2,6 @@
 -- Spell: Cure II
 -- Restores target's HP.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spells/healing_spell")

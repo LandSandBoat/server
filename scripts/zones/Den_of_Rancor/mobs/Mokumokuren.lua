@@ -5,7 +5,6 @@
 -- !pos 117 36 -280 160
 -- Involved in Quest: Souls in Shadow
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

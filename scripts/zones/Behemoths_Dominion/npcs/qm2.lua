@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 require('scripts/globals/items')
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

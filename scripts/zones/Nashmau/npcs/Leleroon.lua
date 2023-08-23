@@ -5,8 +5,6 @@
 -- !pos -14.687 0.000 25.114 53
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------

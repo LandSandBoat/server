@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

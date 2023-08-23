@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trouble at the Sluice
 -- !pos -98 0 69 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

@@ -3,7 +3,6 @@
 --   NM: Migratory Hippogryph
 -- Note: Spawned for quest "The Unfinished Waltz"
 -----------------------------------
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

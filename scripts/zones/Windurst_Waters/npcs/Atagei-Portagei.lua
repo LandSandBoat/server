@@ -4,8 +4,6 @@
 -- Type: Special Event NPC
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 require("scripts/globals/teleports")

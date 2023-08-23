@@ -17,7 +17,6 @@
 require('scripts/globals/keyitems')
 require('scripts/globals/maws')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

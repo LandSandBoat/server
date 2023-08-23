@@ -4,7 +4,6 @@
 require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/colonization_reives')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 local ID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
 -----------------------------------

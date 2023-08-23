@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
-require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 -----------------------------------
 local entity = {}

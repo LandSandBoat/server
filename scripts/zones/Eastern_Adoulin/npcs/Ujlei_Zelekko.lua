@@ -7,7 +7,6 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/extravaganza')
 -----------------------------------
 local entity = {}

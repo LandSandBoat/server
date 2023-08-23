@@ -5,7 +5,6 @@
 -- !pos 1.841 -2.101 -9.000 221
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

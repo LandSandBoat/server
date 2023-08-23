@@ -3,7 +3,6 @@
 --  Mob: Chaos Wyvern
 -- KSNM: Eye of the Storm
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

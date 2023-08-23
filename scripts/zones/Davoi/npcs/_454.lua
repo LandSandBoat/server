@@ -2,7 +2,6 @@
 -- Area: Davoi
 --  NPC: _454
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

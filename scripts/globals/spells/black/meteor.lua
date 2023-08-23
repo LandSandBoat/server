@@ -3,9 +3,7 @@
 -- Deals non-elemental damage to an enemy.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}

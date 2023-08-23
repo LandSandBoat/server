@@ -4,7 +4,6 @@
 -- Starts & Finishes Repeatable Quest: Something Fishy
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

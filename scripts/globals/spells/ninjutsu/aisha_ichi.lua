@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Aisha: Ichi
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------

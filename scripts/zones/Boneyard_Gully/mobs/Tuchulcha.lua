@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/antlion_ambush") }
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
