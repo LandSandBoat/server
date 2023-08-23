@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Vunkerl
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

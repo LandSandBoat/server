@@ -4,7 +4,6 @@
 -- http://ffxiclopedia.wikia.com/wiki/Treasure_Chest_and_Coffer_Guide
 -----------------------------------
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/zone")

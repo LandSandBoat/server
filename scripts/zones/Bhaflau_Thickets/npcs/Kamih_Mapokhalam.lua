@@ -3,7 +3,6 @@
 --  NPC: Kamih Mapokhalam
 -- 20 -30 597 z 52
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- Gives qualified players access to Ru'Aun Gardens.
 -- !pos 0 -12 48 251
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------

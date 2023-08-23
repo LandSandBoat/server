@@ -2,7 +2,6 @@
 -- Area: FeiYin
 --   NM: Dabotz's Ghost
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

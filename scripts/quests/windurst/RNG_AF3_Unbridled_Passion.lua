@@ -8,7 +8,6 @@
 -- qm6: !pos -254.883 -17.003 -150.818 112
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

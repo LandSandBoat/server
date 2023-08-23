@@ -4,7 +4,6 @@
 -- Involved in Mission 3-2
 -- !pos 15 -27 18 242
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Functions for Map Vendor NPCs
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 xi = xi or {}
 xi.maps = xi.maps or {}

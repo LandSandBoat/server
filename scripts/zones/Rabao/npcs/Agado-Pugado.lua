@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Trial by Wind
 -- !pos -17 7 -10 247
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")

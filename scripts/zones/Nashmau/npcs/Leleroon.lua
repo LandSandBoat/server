@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

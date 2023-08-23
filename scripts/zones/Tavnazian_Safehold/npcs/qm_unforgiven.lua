@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

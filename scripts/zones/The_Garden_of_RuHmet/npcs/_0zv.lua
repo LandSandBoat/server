@@ -3,7 +3,6 @@
 --  NPC: particle gate
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

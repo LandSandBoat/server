@@ -3,7 +3,6 @@
 --  NPC: Honorio
 -- !pos 218 -5 114 240
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

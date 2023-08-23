@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

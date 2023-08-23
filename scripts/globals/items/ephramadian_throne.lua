@@ -3,7 +3,6 @@
 -- Item: Ephramadian Throne
 -- Item Effect: Grant Ephramadian throne key item
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

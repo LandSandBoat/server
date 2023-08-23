@@ -4,7 +4,6 @@
 -- Type: Cruor NPC
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

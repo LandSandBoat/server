@@ -4,7 +4,6 @@
 ------------------------------------
 -- Cut Scenes
 ------------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 require("scripts/globals/npc_util")
 local ID = require('scripts/zones/Carpenters_Landing/IDs')

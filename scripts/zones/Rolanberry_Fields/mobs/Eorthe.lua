@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Eorthe
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

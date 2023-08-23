@@ -7,7 +7,6 @@
 -- (outside the shop he is in)
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

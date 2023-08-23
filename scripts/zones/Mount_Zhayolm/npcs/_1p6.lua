@@ -3,7 +3,6 @@
 --  NPC: Engraved Tablet
 -- !pos 320 -15.35 -379 61
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

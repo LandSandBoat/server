@@ -6,7 +6,6 @@
 -- !pos -19 -17 104 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------

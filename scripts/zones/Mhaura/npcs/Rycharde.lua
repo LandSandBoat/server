@@ -12,7 +12,6 @@
 local ID = require("scripts/zones/Mhaura/IDs")
 require('scripts/globals/items')
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

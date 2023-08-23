@@ -4,7 +4,6 @@
 -- Type: Standard NPC
 -- !pos 6.612 -3.5 278.553 239
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

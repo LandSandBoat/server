@@ -3,7 +3,6 @@
 --  Mob: Lioumere
 -----------------------------------
 mixins = { require("scripts/mixins/families/antlion_ambush") }
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

@@ -13,7 +13,6 @@ local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
 

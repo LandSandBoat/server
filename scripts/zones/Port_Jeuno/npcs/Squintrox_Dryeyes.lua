@@ -4,7 +4,6 @@
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Port_Jeuno/IDs")

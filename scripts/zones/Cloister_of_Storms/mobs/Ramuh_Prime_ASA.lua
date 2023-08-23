@@ -3,7 +3,6 @@
 --  Mob: Ramuh Prime
 -- Involved in Mission: ASA-4 Sugar Coated Directive
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

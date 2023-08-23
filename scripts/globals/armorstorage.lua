@@ -3,7 +3,6 @@
 --  Armor Storage
 --
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 
 xi = xi or {}

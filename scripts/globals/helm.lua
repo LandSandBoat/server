@@ -6,7 +6,6 @@
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
 require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

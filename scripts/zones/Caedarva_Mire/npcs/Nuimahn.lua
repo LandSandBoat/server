@@ -4,7 +4,6 @@
 -- Type: Alzadaal Undersea Ruins
 -- !pos  -380 0 -381 79
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

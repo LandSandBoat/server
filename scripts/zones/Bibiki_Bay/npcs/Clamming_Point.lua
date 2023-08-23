@@ -3,7 +3,6 @@
 --  NPC: Clamming Point
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

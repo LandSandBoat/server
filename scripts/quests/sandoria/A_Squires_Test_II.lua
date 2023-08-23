@@ -8,7 +8,6 @@
 --  qm2 !pos -94 1 273 193
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

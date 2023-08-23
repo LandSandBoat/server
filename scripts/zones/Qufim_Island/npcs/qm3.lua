@@ -5,7 +5,6 @@
 -- !pos -120.342 -19.471 306.661 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
