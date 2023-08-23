@@ -169,7 +169,6 @@ xi.settings.main =
 
     -- GARRISON SETTINGS
     ENABLE_GARRISON        = true,  -- If true, enables garrison functionality
-    DEBUG_GARRISON         = false, -- If true, garrison will print out debug messages in logs as well as players as smes.
     GARRISON_LOCKOUT       = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
     GARRISON_TIME_LIMIT    = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
     GARRISON_ONCE_PER_WEEK = true,  -- Set to false to bypass the limit of one garrison per Conquest Tally Week.
