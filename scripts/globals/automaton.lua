@@ -34,14 +34,14 @@ xi.automaton.abilities =
 
 local maneuverList =
 {
-    ['dark_maneuver']    = { xi.effect.DARK_MANEUVER,    xi.magic.ele.DARK,    nil        },
-    ['earth_maneuver']   = { xi.effect.EARTH_MANEUVER,   xi.magic.ele.EARTH,   xi.mod.VIT },
-    ['fire_maneuver']    = { xi.effect.FIRE_MANEUVER,    xi.magic.ele.FIRE,    xi.mod.STR },
-    ['ice_maneuver']     = { xi.effect.ICE_MANEUVER,     xi.magic.ele.ICE,     xi.mod.INT },
-    ['light_maneuver']   = { xi.effect.LIGHT_MANEUVER,   xi.magic.ele.LIGHT,   xi.mod.CHR },
-    ['thunder_maneuver'] = { xi.effect.THUNDER_MANEUVER, xi.magic.ele.THUNDER, xi.mod.DEX },
-    ['water_maneuver']   = { xi.effect.WATER_MANEUVER,   xi.magic.ele.WATER,   xi.mod.MND },
-    ['wind_maneuver']    = { xi.effect.WIND_MANEUVER,    xi.magic.ele.WIND,    xi.mod.AGI },
+    ['dark_maneuver']    = { xi.effect.DARK_MANEUVER,    xi.element.DARK,    nil        },
+    ['earth_maneuver']   = { xi.effect.EARTH_MANEUVER,   xi.element.EARTH,   xi.mod.VIT },
+    ['fire_maneuver']    = { xi.effect.FIRE_MANEUVER,    xi.element.FIRE,    xi.mod.STR },
+    ['ice_maneuver']     = { xi.effect.ICE_MANEUVER,     xi.element.ICE,     xi.mod.INT },
+    ['light_maneuver']   = { xi.effect.LIGHT_MANEUVER,   xi.element.LIGHT,   xi.mod.CHR },
+    ['thunder_maneuver'] = { xi.effect.THUNDER_MANEUVER, xi.element.THUNDER, xi.mod.DEX },
+    ['water_maneuver']   = { xi.effect.WATER_MANEUVER,   xi.element.WATER,   xi.mod.MND },
+    ['wind_maneuver']    = { xi.effect.WIND_MANEUVER,    xi.element.WIND,    xi.mod.AGI },
 }
 
 -- This table contains modifiers granted by attachments based on maneuver.  It uses

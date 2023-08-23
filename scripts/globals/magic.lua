@@ -11,14 +11,14 @@ xi.magic = xi.magic or {}
 
 xi.magic.dayElement =
 {
-    [xi.day.FIRESDAY]     = xi.magic.element.FIRE,
-    [xi.day.ICEDAY]       = xi.magic.element.ICE,
-    [xi.day.WINDSDAY]     = xi.magic.element.WIND,
-    [xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
-    [xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
-    [xi.day.WATERSDAY]    = xi.magic.element.WATER,
-    [xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
-    [xi.day.DARKSDAY]     = xi.magic.element.DARK,
+    [xi.day.FIRESDAY]     = xi.element.FIRE,
+    [xi.day.ICEDAY]       = xi.element.ICE,
+    [xi.day.WINDSDAY]     = xi.element.WIND,
+    [xi.day.EARTHSDAY]    = xi.element.EARTH,
+    [xi.day.LIGHTNINGDAY] = xi.element.THUNDER,
+    [xi.day.WATERSDAY]    = xi.element.WATER,
+    [xi.day.LIGHTSDAY]    = xi.element.LIGHT,
+    [xi.day.DARKSDAY]     = xi.element.DARK,
 }
 
 -----------------------------------
@@ -43,6 +43,18 @@ xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZ
 xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY           }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
+
+local elementDescendant =
+{
+    [xi.element.FIRE   ] = xi.element.WATER,
+    [xi.element.ICE    ] = xi.element.FIRE,
+    [xi.element.WIND   ] = xi.element.ICE,
+    [xi.element.EARTH  ] = xi.element.WIND,
+    [xi.element.THUNDER] = xi.element.EARTH,
+    [xi.element.WATER  ] = xi.element.THUNDER,
+    [xi.element.LIGHT  ] = xi.element.DARK,
+    [xi.element.DARK   ] = xi.element.LIGHT,
+}
 
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 --Calculates magic damage using the standard magic damage calc.
@@ -164,7 +176,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
         [xi.job.RDM] = function()
             -- Add MACC for RDM group 1 merits
-            if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+            if element >= xi.element.FIRE and element <= xi.element.WATER then
                 magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
             end
 
@@ -429,7 +441,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -569,7 +581,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     end
 
     local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
-    if element ~= xi.magic.ele.NONE then
+    if element ~= xi.element.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
@@ -841,7 +853,7 @@ function addBonuses(caster, spell, target, dmg, params)
         if dayWeatherBonusCheck then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if dayWeatherBonusCheck then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -881,7 +893,7 @@ function addBonuses(caster, spell, target, dmg, params)
         end
 
         local mdefBarBonus = 0
-        if ele >= xi.magic.element.FIRE and ele <= xi.magic.element.WATER then
+        if ele >= xi.element.FIRE and ele <= xi.element.WATER then
             mab = mab + caster:getMerit(blmMerit[ele])
             if target:hasStatusEffect(xi.magic.barSpell[ele]) then -- bar- spell magic defense bonus
                 mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
@@ -946,7 +958,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif dayElement == xi.magic.elementDescendant[ele] then
+    elseif dayElement == elementDescendant[ele] then
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -959,8 +971,8 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local mab = 1
     local mdefBarBonus = 0
     if
-        ele >= xi.magic.element.FIRE and
-        ele <= xi.magic.element.WATER and
+        ele >= xi.element.FIRE and
+        ele <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()

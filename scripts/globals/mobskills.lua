@@ -322,8 +322,8 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     local mdefBarBonus = 0
     if
-        element >= xi.magic.element.FIRE and
-        element <= xi.magic.element.WATER and
+        element >= xi.element.FIRE and
+        element <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[element])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
@@ -438,8 +438,8 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
 
     local mdefBarBonus = 0
     if
-        ele >= xi.magic.element.FIRE and
-        ele <= xi.magic.element.WATER and
+        ele >= xi.element.FIRE and
+        ele <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()

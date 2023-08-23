@@ -336,7 +336,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdt    = 1 -- The variable we want to calculate
     local sdtMod = 0
 
-    if spellElement > 0 then
+    if spellElement ~= xi.element.NONE then
         sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
@@ -385,7 +385,7 @@ xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
     if skillchainCount > 0 then
         local rankBonus  = 0
 
-        if spellElement ~= xi.magic.ele.NONE then
+        if spellElement ~= xi.element.NONE then
             local resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
             local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
 
@@ -565,8 +565,8 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
 
     -- Bar Spells bonuses and BLM merits.
     if
-        spellElement >= xi.magic.element.FIRE and
-        spellElement <= xi.magic.element.WATER
+        spellElement >= xi.element.FIRE and
+        spellElement <= xi.element.WATER
     then
         mab = mab + caster:getMerit(xi.combat.element.blmMerit[spellElement])
 
@@ -750,7 +750,7 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     -- Initial check.
     if
         not target:isNM() or
-        spellElement <= 0 or
+        spellElement ~= xi.element.NONE or
         finalDamage < 0
     then
         return nukeWallFactor

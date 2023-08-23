@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         basedmg = basedmg + 520
     end
 
-    if VanadielDayElement() == xi.magic.ele.LIGHT then
+    if VanadielDayElement() == xi.element.LIGHT then
         basedmg = basedmg + 208
     end
 

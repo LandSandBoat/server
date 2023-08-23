@@ -26,7 +26,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         return 0
     end
 
-    local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, xi.skill.NONE, player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    local resist = applyResistanceAbility(player, target, xi.element.NONE, xi.skill.NONE, player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)

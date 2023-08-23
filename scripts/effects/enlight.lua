@@ -6,7 +6,7 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.ENLIGHT_EFFECT)
 
-    target:addMod(xi.mod.ENSPELL, xi.magic.element.LIGHT)
+    target:addMod(xi.mod.ENSPELL, xi.element.LIGHT)
     target:addMod(xi.mod.ENSPELL_DMG, effect:getPower() + jpValue)
     target:addMod(xi.mod.ACC, jpValue)
 end

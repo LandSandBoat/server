@@ -405,56 +405,56 @@ content.groups =
         mobs      = { "Air_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate, xi.magic.element.WIND),
+        allDeath  = utils.bind(checkElementalCrate, xi.element.WIND),
     },
 
     {
         mobs      = { "Dark_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.DARK),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.DARK),
     },
 
     {
         mobs      = { "Earth_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.EARTH),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.EARTH),
     },
 
     {
         mobs      = { "Fire_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.FIRE),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.FIRE),
     },
 
     {
         mobs      = { "Ice_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.ICE),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.ICE),
     },
 
     {
         mobs      = { "Light_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.LIGHT),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.LIGHT),
     },
 
     {
         mobs      = { "Water_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.WATER),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.WATER),
     },
 
     {
         mobs      = { "Thunder_Elemental" },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.THUNDER),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.THUNDER),
     },
 }
 
