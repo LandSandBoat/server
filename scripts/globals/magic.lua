@@ -1151,20 +1151,4 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     return math.floor(duration)
 end
 
-function calculatePotency(basePotency, magicSkill, caster, target)
-    if magicSkill ~= xi.skill.ENFEEBLING_MAGIC then
-        return basePotency
-    end
-
-    if caster:hasStatusEffect(xi.effect.SABOTEUR) then
-        if target:isNM() then
-            basePotency = math.floor(basePotency * (1.3 + caster:getMod(xi.mod.ENHANCES_SABOTEUR)))
-        else
-            basePotency = math.floor(basePotency * (2 + caster:getMod(xi.mod.ENHANCES_SABOTEUR)))
-        end
-    end
-
-    return math.floor(basePotency * (1 + caster:getMod(xi.mod.ENF_MAG_POTENCY) / 100))
-end
-
 xi.ma = xi.magic
