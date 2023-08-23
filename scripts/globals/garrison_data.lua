@@ -230,114 +230,30 @@ xi.garrison.waves =
         -- 1 Party
         [1] =
         {
-            -- Wave 1
-            -- 2 Mobs at once
-            [1] =
-            {
-                2
-            },
-            -- Wave 2
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 4 total
-            [2] =
-            {
-                2,
-                2
-            },
-            -- Wave 3
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 6 total
-            [3] =
-            {
-                2,
-                2,
-                2
-            },
-            -- Wave 4
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 8 total
-            -- Boss spawns after all 8 are killed
-            [4] =
-            {
-                2,
-                2,
-                2,
-                2
-            }
+            [1] = { 2 },         -- Wave 1: 2 Mobs.
+            [2] = { 2, 2 },      -- Wave 2: 2 Mobs + 2 Mobs after "delayBetweenGroups". 4 total.
+            [3] = { 2, 2, 2 },   -- Wave 3: 2 Mobs + 2 Mobs after every "delayBetweenGroups". 6 total.
+            [4] = { 2, 2, 2, 2 } -- Wave 4: 2 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
+
         -- 2 Parties
         [2] =
         {
-            -- Wave 1
-            -- 4 Mobs at once
-            [1] =
-            {
-                4
-            },
-            -- Wave 2
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            [2] =
-            {
-                4,
-                2
-            },
-            -- Wave 3
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            [3] =
-            {
-                4,
-                2,
-                2
-            },
-            -- Wave 4
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            -- Boss after all 8 mobs are killed
-            [4] =
-            {
-                4,
-                2,
-                2,
-            }
+            [1] = { 4 },       -- Wave 1: 4 Mobs.
+            [2] = { 4, 2 },    -- Wave 2: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 6 total.
+            [3] = { 4, 2, 2 }, -- Wave 3: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total.
+            [4] = { 4, 2, 2 }, -- Wave 4: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
+
         -- 3 Parties
-        -- Only 3 waves with 3 parties.
-        -- I don't understand the thinking behind this, but this matches the two videos
-        -- I found showing garrison gameplay with 3 parties.
         [3] =
         {
-            -- Wave 1
-            -- 4 Mobs at once
-            [1] =
-            {
-                4,
-                2
-            },
-            -- Wave 2
-            -- 6 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            [2] =
-            {
-                6,
-                2
-            },
-            -- Wave 3
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            -- Boss after all 8 mobs are killed
-            [3] =
-            {
-                4,
-                2,
-                2
-            },
+            [1] = { 4, 2 },    -- Wave 1: 4 Mobs + 2 Mobs after "delayBetweenGroups". 6 total.
+            [2] = { 6, 2 },    -- Wave 2: 6 Mobs + 2 Mobs after "delayBetweenGroups". 8 total.
+            [3] = { 4, 2, 2 }, -- Wave 3: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
     },
+
     -- How many seconds before each group spawns
     delayBetweenGroups = 15,
 }
