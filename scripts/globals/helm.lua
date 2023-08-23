@@ -1543,7 +1543,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 end)
             end
 
-            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+            player:triggerRoeEvent(xi.roeTriggers.HELM_SUCCESS, { ["skillType"] = helmType })
         end
 
         -- quest stuff

@@ -20,7 +20,7 @@ function getRoeRecords(triggers)
 
         [2] =
         { -- Vanquish 1 Enemy +
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reward = { sparks = 100, xp = 500 }
         },
 
@@ -116,7 +116,7 @@ function getRoeRecords(triggers)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
 
-            trigger = triggers.talkToRoeNpc,
+            trigger = xi.roeTriggers.TRIGGER_NPC,
             reqs = { collectSparks = 2000 },
             reward =
             {
@@ -132,7 +132,7 @@ function getRoeRecords(triggers)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
 
-            trigger = triggers.talkToRoeNpc,
+            trigger = xi.roeTriggers.TRIGGER_NPC,
             reqs = { collectSparks = 4000 },
             reward =
             {
@@ -148,7 +148,7 @@ function getRoeRecords(triggers)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
 
-            trigger = triggers.talkToRoeNpc,
+            trigger = xi.roeTriggers.TRIGGER_NPC,
             reqs = { collectSparks = 6000 },
             reward =
             {
@@ -164,7 +164,7 @@ function getRoeRecords(triggers)
                 return player:getAverageItemLevel() >= self.reqs.hasItemLevel and true or false
             end,
 
-            trigger = triggers.talkToRoeNpc,
+            trigger = xi.roeTriggers.TRIGGER_NPC,
             reqs = { hasItemLevel = 117 },
             reward =
             {
@@ -220,56 +220,56 @@ function getRoeRecords(triggers)
 
         [108] =
         { -- Woodworking: Padded Box
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.PADDED_BOX } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [109] =
         { -- Smithing: Bronze Knife
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.BRONZE_KNIFE, xi.item.BRONZE_KNIFE_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [110] =
         { -- Goldsmithing: Copper Ring
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.COPPER_RING, xi.item.COPPER_RING_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [111] =
         { -- Weaving: Headgear
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.HEADGEAR, xi.item.HEADGEAR_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [112] =
         { -- Tanning: Leather Bandana
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.LEATHER_BANDANA, xi.item.LEATHER_BANDANA_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [113] =
         { -- Boneworking: Shell Powder
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.PONZE_OF_SHELL_POWDER } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [114] =
         { -- Alchemy: Black Ink
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.JAR_OF_BLACK_INK } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [115] =
         { -- Cooking: Pebble Soup
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             reqs = { itemID = set { xi.item.BOWL_OF_PEBBLE_SOUP, xi.item.BOWL_OF_WISDOM_SOUP } },
             reward = { sparks = 100, xp = 500 },
         },
@@ -280,7 +280,7 @@ function getRoeRecords(triggers)
 
         [500] =
         { -- Mog House Exit: San d'Oria
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -288,7 +288,7 @@ function getRoeRecords(triggers)
 
         [501] =
         { -- Mog House Exit: Bastok
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -296,7 +296,7 @@ function getRoeRecords(triggers)
 
         [502] =
         { -- Mog House Exit: Windurst
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -304,7 +304,7 @@ function getRoeRecords(triggers)
 
         [503] =
         { -- Mog House Exit: Jeuno
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -312,7 +312,7 @@ function getRoeRecords(triggers)
 
         [504] =
         { -- Mog House Exit: Aht Urhgan
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -320,7 +320,7 @@ function getRoeRecords(triggers)
 
         [505] =
         { -- Obtain a Support Job
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             flags = set { "retro" },
             check = function(self, player, params)
                 return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
@@ -332,7 +332,7 @@ function getRoeRecords(triggers)
 
         [506] =
         { -- Obtain an Alter Ego: San d'Oria
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500 },
@@ -340,7 +340,7 @@ function getRoeRecords(triggers)
 
         [507] =
         { -- Obtain an Alter Ego: Bastok
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500 },
@@ -348,7 +348,7 @@ function getRoeRecords(triggers)
 
         [508] =
         { -- Obtain an Alter Ego: Windurst
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500 },
@@ -356,7 +356,7 @@ function getRoeRecords(triggers)
 
         [509] =
         { -- Obtain a Chocobo License
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 600 },
@@ -364,7 +364,7 @@ function getRoeRecords(triggers)
 
         [510] =
         { -- Obtain Job: Paladin
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -372,7 +372,7 @@ function getRoeRecords(triggers)
 
         [511] =
         { -- Obtain Job: Dark Knight
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -380,7 +380,7 @@ function getRoeRecords(triggers)
 
         [512] =
         { -- Obtain Job: Beastmaster
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -388,7 +388,7 @@ function getRoeRecords(triggers)
 
         [513] =
         { -- Obtain Job: Bard
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -396,7 +396,7 @@ function getRoeRecords(triggers)
 
         [514] =
         { -- Obtain Job: Ranger
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -404,7 +404,7 @@ function getRoeRecords(triggers)
 
         [515] =
         { -- Obtain Job: Samurai
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -412,7 +412,7 @@ function getRoeRecords(triggers)
 
         [516] =
         { -- Obtain Job: Ninja
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -420,7 +420,7 @@ function getRoeRecords(triggers)
 
         [517] =
         { -- Obtain Job: Dragoon
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -428,7 +428,7 @@ function getRoeRecords(triggers)
 
         [518] =
         { -- Obtain Job: Summoner
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -436,7 +436,7 @@ function getRoeRecords(triggers)
 
         [519] =
         { -- Obtain Job: Blue Mage
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -444,7 +444,7 @@ function getRoeRecords(triggers)
 
         [520] =
         { -- Obtain Job: Corsair
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -452,7 +452,7 @@ function getRoeRecords(triggers)
 
         [521] =
         { -- Obtain Job: Puppetmaster
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -460,7 +460,7 @@ function getRoeRecords(triggers)
 
         [522] =
         { -- Obtain Job: Dancer
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -468,7 +468,7 @@ function getRoeRecords(triggers)
 
         [523] =
         { -- Obtain Job: Scholar
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -476,7 +476,7 @@ function getRoeRecords(triggers)
 
         [524] =
         { -- Obtain Job: Geomancer
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -484,7 +484,7 @@ function getRoeRecords(triggers)
 
         [525] =
         { -- Obtain Job: Runefencer
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -496,7 +496,7 @@ function getRoeRecords(triggers)
 
         [629] =
         { -- WAR Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -504,7 +504,7 @@ function getRoeRecords(triggers)
 
         [630] =
         { -- WAR Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -512,7 +512,7 @@ function getRoeRecords(triggers)
 
         [631] =
         { -- WAR Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -520,7 +520,7 @@ function getRoeRecords(triggers)
 
         [632] =
         { -- MNK Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -528,7 +528,7 @@ function getRoeRecords(triggers)
 
         [633] =
         { -- MNK Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -536,7 +536,7 @@ function getRoeRecords(triggers)
 
         [634] =
         { -- MNK Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -544,7 +544,7 @@ function getRoeRecords(triggers)
 
         [635] =
         { -- WHM Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -552,7 +552,7 @@ function getRoeRecords(triggers)
 
         [636] =
         { -- WHM Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -560,7 +560,7 @@ function getRoeRecords(triggers)
 
         [637] =
         { -- WHM Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -568,7 +568,7 @@ function getRoeRecords(triggers)
 
         [638] =
         { -- BLM Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -576,7 +576,7 @@ function getRoeRecords(triggers)
 
         [639] =
         { -- BLM Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -584,7 +584,7 @@ function getRoeRecords(triggers)
 
         [640] =
         { -- BLM Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -592,7 +592,7 @@ function getRoeRecords(triggers)
 
         [641] =
         { -- RDM Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -600,7 +600,7 @@ function getRoeRecords(triggers)
 
         [642] =
         { -- RDM Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -608,7 +608,7 @@ function getRoeRecords(triggers)
 
         [643] =
         { -- RDM Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -616,7 +616,7 @@ function getRoeRecords(triggers)
 
         [644] =
         { -- THF Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -624,7 +624,7 @@ function getRoeRecords(triggers)
 
         [645] =
         { -- THF Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -632,7 +632,7 @@ function getRoeRecords(triggers)
 
         [646] =
         { -- THF Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -640,7 +640,7 @@ function getRoeRecords(triggers)
 
         [647] =
         { -- PLD Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -648,7 +648,7 @@ function getRoeRecords(triggers)
 
         [648] =
         { -- PLD Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -656,7 +656,7 @@ function getRoeRecords(triggers)
 
         [649] =
         { -- PLD Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -664,7 +664,7 @@ function getRoeRecords(triggers)
 
         [650] =
         { -- DRK Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -672,7 +672,7 @@ function getRoeRecords(triggers)
 
         [651] =
         { -- DRK Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -680,7 +680,7 @@ function getRoeRecords(triggers)
 
         [652] =
         { -- DRK Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -688,7 +688,7 @@ function getRoeRecords(triggers)
 
         [653] =
         { -- BST Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -696,7 +696,7 @@ function getRoeRecords(triggers)
 
         [654] =
         { -- BST Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -704,7 +704,7 @@ function getRoeRecords(triggers)
 
         [655] =
         { -- BST Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -716,7 +716,7 @@ function getRoeRecords(triggers)
 
         [656] =
         { -- BRD Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -724,7 +724,7 @@ function getRoeRecords(triggers)
 
         [657] =
         { -- BRD Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -732,7 +732,7 @@ function getRoeRecords(triggers)
 
         [658] =
         { -- BRD Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -740,7 +740,7 @@ function getRoeRecords(triggers)
 
         [659] =
         { -- RNG Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -748,7 +748,7 @@ function getRoeRecords(triggers)
 
         [660] =
         { -- RNG Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -756,7 +756,7 @@ function getRoeRecords(triggers)
 
         [661] =
         { -- RNG Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -764,7 +764,7 @@ function getRoeRecords(triggers)
 
         [662] =
         { -- SAM Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -772,7 +772,7 @@ function getRoeRecords(triggers)
 
         [663] =
         { -- SAM Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -780,7 +780,7 @@ function getRoeRecords(triggers)
 
         [664] =
         { -- SAM Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -788,7 +788,7 @@ function getRoeRecords(triggers)
 
         [665] =
         { -- NIN Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -796,7 +796,7 @@ function getRoeRecords(triggers)
 
         [666] =
         { -- NIN Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -804,7 +804,7 @@ function getRoeRecords(triggers)
 
         [667] =
         { -- NIN Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -812,7 +812,7 @@ function getRoeRecords(triggers)
 
         [668] =
         { -- DRG Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -820,7 +820,7 @@ function getRoeRecords(triggers)
 
         [669] =
         { -- DRG Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -828,7 +828,7 @@ function getRoeRecords(triggers)
 
         [670] =
         { -- DRG Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -836,7 +836,7 @@ function getRoeRecords(triggers)
 
         [671] =
         { -- SMN Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -844,7 +844,7 @@ function getRoeRecords(triggers)
 
         [672] =
         { -- SMN Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -852,7 +852,7 @@ function getRoeRecords(triggers)
 
         [673] =
         { -- SMN Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -860,7 +860,7 @@ function getRoeRecords(triggers)
 
         [674] =
         { -- BLU Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -868,7 +868,7 @@ function getRoeRecords(triggers)
 
         [675] =
         { -- BLU Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -876,7 +876,7 @@ function getRoeRecords(triggers)
 
         [676] =
         { -- BLU Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -884,7 +884,7 @@ function getRoeRecords(triggers)
 
         [677] =
         { -- COR Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -892,7 +892,7 @@ function getRoeRecords(triggers)
 
         [678] =
         { -- COR Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -900,7 +900,7 @@ function getRoeRecords(triggers)
 
         [679] =
         { -- COR Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -908,7 +908,7 @@ function getRoeRecords(triggers)
 
         [680] =
         { -- PUP Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -916,7 +916,7 @@ function getRoeRecords(triggers)
 
         [681] =
         { -- PUP Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -924,7 +924,7 @@ function getRoeRecords(triggers)
 
         [682] =
         { -- PUP Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -936,7 +936,7 @@ function getRoeRecords(triggers)
 
         [683] =
         { -- DNC Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -944,7 +944,7 @@ function getRoeRecords(triggers)
 
         [684] =
         { -- DNC Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -952,7 +952,7 @@ function getRoeRecords(triggers)
 
         [685] =
         { -- DNC Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -960,7 +960,7 @@ function getRoeRecords(triggers)
 
         [686] =
         { -- SCH Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -968,7 +968,7 @@ function getRoeRecords(triggers)
 
         [687] =
         { -- SCH Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -976,7 +976,7 @@ function getRoeRecords(triggers)
 
         [688] =
         { -- SCH Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -984,7 +984,7 @@ function getRoeRecords(triggers)
 
         [689] =
         { -- GEO Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -992,7 +992,7 @@ function getRoeRecords(triggers)
 
         [690] =
         { -- GEO Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1000,7 +1000,7 @@ function getRoeRecords(triggers)
 
         [691] =
         { -- GEO Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_COMMUNION } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1008,7 +1008,7 @@ function getRoeRecords(triggers)
 
         [692] =
         { -- RUN Artifact Quest I
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1016,7 +1016,7 @@ function getRoeRecords(triggers)
 
         [693] =
         { -- RUN Artifact Quest II
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.LEGACIES_LOST_AND_FOUND } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1024,7 +1024,7 @@ function getRoeRecords(triggers)
 
         [694] =
         { -- RUN Artifact Quest III
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1036,7 +1036,7 @@ function getRoeRecords(triggers)
 
         [705] =
         { -- Level Cap Increase: 55 +
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1044,7 +1044,7 @@ function getRoeRecords(triggers)
 
         [706] =
         { -- Level Cap Increase: 60
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1052,7 +1052,7 @@ function getRoeRecords(triggers)
 
         [707] =
         { -- Level Cap Increase: 65
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1060,7 +1060,7 @@ function getRoeRecords(triggers)
 
         [708] =
         { -- Level Cap Increase: 70
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1068,7 +1068,7 @@ function getRoeRecords(triggers)
 
         [709] =
         { -- Level Cap Increase: 75
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1076,7 +1076,7 @@ function getRoeRecords(triggers)
 
         [710] =
         { -- Level Cap Increase: 80
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1084,7 +1084,7 @@ function getRoeRecords(triggers)
 
         [711] =
         { -- Level Cap Increase: 85
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1092,7 +1092,7 @@ function getRoeRecords(triggers)
 
         [712] =
         { -- Level Cap Increase: 90
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1100,7 +1100,7 @@ function getRoeRecords(triggers)
 
         [713] =
         { -- Level Cap Increase: 95
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1108,7 +1108,7 @@ function getRoeRecords(triggers)
 
         [714] =
         { -- Level Cap Increase: 99
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1120,7 +1120,7 @@ function getRoeRecords(triggers)
 
         [715] =
         { -- Inventory Expansion 35
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1128,7 +1128,7 @@ function getRoeRecords(triggers)
 
         [716] =
         { -- Inventory Expansion 40
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1136,7 +1136,7 @@ function getRoeRecords(triggers)
 
         [717] =
         { -- Inventory Expansion 45
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1144,7 +1144,7 @@ function getRoeRecords(triggers)
 
         [718] =
         { -- Inventory Expansion 50
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1152,7 +1152,7 @@ function getRoeRecords(triggers)
 
         [719] =
         { -- Inventory Expansion 55
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1160,7 +1160,7 @@ function getRoeRecords(triggers)
 
         [720] =
         { -- Inventory Expansion 60
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1168,7 +1168,7 @@ function getRoeRecords(triggers)
 
         [721] =
         { -- Inventory Expansion 65
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1176,7 +1176,7 @@ function getRoeRecords(triggers)
 
         [722] =
         { -- Inventory Expansion 70
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1184,7 +1184,7 @@ function getRoeRecords(triggers)
 
         [723] =
         { -- Inventory Expansion 75
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1192,7 +1192,7 @@ function getRoeRecords(triggers)
 
         [724] =
         { -- Inventory Expansion 80
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1200,7 +1200,7 @@ function getRoeRecords(triggers)
 
         [939] =
         { -- Mog Safe Expansion: 60
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1208,7 +1208,7 @@ function getRoeRecords(triggers)
 
         [940] =
         { -- Mog Safe Expansion: 70
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1216,7 +1216,7 @@ function getRoeRecords(triggers)
 
         [941] =
         { -- Mog Safe Expansion: 80
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1228,7 +1228,7 @@ function getRoeRecords(triggers)
 
         [839] =
         { -- Asuran Fists
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1236,7 +1236,7 @@ function getRoeRecords(triggers)
 
         [840] =
         { -- Evisceration
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1244,7 +1244,7 @@ function getRoeRecords(triggers)
 
         [841] =
         { -- Savage Blade
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1252,7 +1252,7 @@ function getRoeRecords(triggers)
 
         [842] =
         { -- Ground Strike
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1260,7 +1260,7 @@ function getRoeRecords(triggers)
 
         [843] =
         { -- Decimation
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1268,7 +1268,7 @@ function getRoeRecords(triggers)
 
         [844] =
         { -- Steel Cyclone
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1276,7 +1276,7 @@ function getRoeRecords(triggers)
 
         [845] =
         { -- Spiral Hell
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1284,7 +1284,7 @@ function getRoeRecords(triggers)
 
         [846] =
         { -- Impulse Drive
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1292,7 +1292,7 @@ function getRoeRecords(triggers)
 
         [847] =
         { -- Blade: Ku
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1300,7 +1300,7 @@ function getRoeRecords(triggers)
 
         [848] =
         { -- Tachi: Kasha
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1308,7 +1308,7 @@ function getRoeRecords(triggers)
 
         [849] =
         { -- Black Halo
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1316,7 +1316,7 @@ function getRoeRecords(triggers)
 
         [850] =
         { -- Retribution
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1324,7 +1324,7 @@ function getRoeRecords(triggers)
 
         [851] =
         { -- Empyreal Arrow
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1332,7 +1332,7 @@ function getRoeRecords(triggers)
 
         [852] =
         { -- Detonator
-            trigger = triggers.questComplete,
+            trigger = xi.roeTriggers.COMPLETE_QUEST,
             reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
@@ -1344,7 +1344,7 @@ function getRoeRecords(triggers)
 
         [1313] =
         { -- San d'Oria Rank 1-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1352,7 +1352,7 @@ function getRoeRecords(triggers)
 
         [1314] =
         { -- San d'Oria Rank 1-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1360,7 +1360,7 @@ function getRoeRecords(triggers)
 
         [1315] =
         { -- San d'Oria Rank 1-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1368,7 +1368,7 @@ function getRoeRecords(triggers)
 
         [1316] =
         { -- San d'Oria Rank 2-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1376,7 +1376,7 @@ function getRoeRecords(triggers)
 
         [1317] =
         { -- San d'Oria Rank 2-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_DAVOI_REPORT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1384,7 +1384,7 @@ function getRoeRecords(triggers)
 
         [1318] =
         { -- San d'Oria Rank 2-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1392,7 +1392,7 @@ function getRoeRecords(triggers)
 
         [1319] =
         { -- San d'Oria Rank 3-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1400,7 +1400,7 @@ function getRoeRecords(triggers)
 
         [1320] =
         { -- San d'Oria Rank 3-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1408,7 +1408,7 @@ function getRoeRecords(triggers)
 
         [1321] =
         { -- San d'Oria Rank 3-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1416,7 +1416,7 @@ function getRoeRecords(triggers)
 
         [1322] =
         { -- San d'Oria Rank 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1424,7 +1424,7 @@ function getRoeRecords(triggers)
 
         [1323] =
         { -- San d'Oria Rank 5-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1432,7 +1432,7 @@ function getRoeRecords(triggers)
 
         [1324] =
         { -- San d'Oria Rank 5-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1440,7 +1440,7 @@ function getRoeRecords(triggers)
 
         [1325] =
         { -- San d'Oria Rank 6-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1448,7 +1448,7 @@ function getRoeRecords(triggers)
 
         [1326] =
         { -- San d'Oria Rank 6-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1456,7 +1456,7 @@ function getRoeRecords(triggers)
 
         [1327] =
         { -- San d'Oria Rank 7-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1464,7 +1464,7 @@ function getRoeRecords(triggers)
 
         [1328] =
         { -- San d'Oria Rank 7-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1472,7 +1472,7 @@ function getRoeRecords(triggers)
 
         [1329] =
         { -- San d'Oria Rank 8-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1480,7 +1480,7 @@ function getRoeRecords(triggers)
 
         [1330] =
         { -- San d'Oria Rank 8-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1488,7 +1488,7 @@ function getRoeRecords(triggers)
 
         [1331] =
         { -- San d'Oria Rank 9-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1496,7 +1496,7 @@ function getRoeRecords(triggers)
 
         [1332] =
         { -- San d'Oria Rank 9-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1508,7 +1508,7 @@ function getRoeRecords(triggers)
 
         [1333] =
         { -- Bastok Rank 1-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1516,7 +1516,7 @@ function getRoeRecords(triggers)
 
         [1334] =
         { -- Bastok Rank 1-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.GEOLOGICAL_SURVEY } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1524,7 +1524,7 @@ function getRoeRecords(triggers)
 
         [1335] =
         { -- Bastok Rank 1-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1532,7 +1532,7 @@ function getRoeRecords(triggers)
 
         [1336] =
         { -- Bastok Rank 2-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CRYSTAL_LINE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1540,7 +1540,7 @@ function getRoeRecords(triggers)
 
         [1337] =
         { -- Bastok Rank 2-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WADING_BEASTS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1548,7 +1548,7 @@ function getRoeRecords(triggers)
 
         [1338] =
         { -- Bastok Rank 2-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1556,7 +1556,7 @@ function getRoeRecords(triggers)
 
         [1339] =
         { -- Bastok Rank 3-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1564,7 +1564,7 @@ function getRoeRecords(triggers)
 
         [1340] =
         { -- Bastok Rank 3-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1572,7 +1572,7 @@ function getRoeRecords(triggers)
 
         [1341] =
         { -- Bastok Rank 3-3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1580,7 +1580,7 @@ function getRoeRecords(triggers)
 
         [1342] =
         { -- Bastok Rank 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1588,7 +1588,7 @@ function getRoeRecords(triggers)
 
         [1343] =
         { -- Bastok Rank 5-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1596,7 +1596,7 @@ function getRoeRecords(triggers)
 
         [1344] =
         { -- Bastok Rank 5-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1604,7 +1604,7 @@ function getRoeRecords(triggers)
 
         [1345] =
         { -- Bastok Rank 6-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1612,7 +1612,7 @@ function getRoeRecords(triggers)
 
         [1346] =
         { -- Bastok Rank 6-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1620,7 +1620,7 @@ function getRoeRecords(triggers)
 
         [1347] =
         { -- Bastok Rank 7-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FINAL_IMAGE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1628,7 +1628,7 @@ function getRoeRecords(triggers)
 
         [1348] =
         { -- Bastok Rank 7-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1636,7 +1636,7 @@ function getRoeRecords(triggers)
 
         [1349] =
         { -- Bastok Rank 8-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1644,7 +1644,7 @@ function getRoeRecords(triggers)
 
         [1350] =
         { -- Bastok Rank 8-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1652,7 +1652,7 @@ function getRoeRecords(triggers)
 
         [1351] =
         { -- Bastok Rank 9-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_SALT_OF_THE_EARTH } },
             flags = set { "retro" },
             reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1660,7 +1660,7 @@ function getRoeRecords(triggers)
 
         [1352] =
         { -- Bastok Rank 9-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1672,7 +1672,7 @@ function getRoeRecords(triggers)
 
         [1353] =
         { -- Windurst Rank 1-1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1680,7 +1680,7 @@ function getRoeRecords(triggers)
 
         [1354] =
         { -- Windurst Rank 1-2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1688,7 +1688,7 @@ function getRoeRecords(triggers)
 
         [1355] =
         { -- Windurst Rank 1-3 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1696,7 +1696,7 @@ function getRoeRecords(triggers)
 
         [1356] =
         { -- Windurst Rank 2-1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1704,7 +1704,7 @@ function getRoeRecords(triggers)
 
         [1357] =
         { -- Windurst Rank 2-2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1714,7 +1714,7 @@ function getRoeRecords(triggers)
         { -- Windurst Rank 2-3 +
             -- Note: For testing purposes, this mission required changes to Kupipi.lua
             -- missionStatus for THE_THREE_KINGDOMS should == 1, since it was accepted before onTrigger
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1722,7 +1722,7 @@ function getRoeRecords(triggers)
 
         [1359] =
         { -- Windurst Rank 3-1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1730,7 +1730,7 @@ function getRoeRecords(triggers)
 
         [1360] =
         { -- Windurst Rank 3-2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
@@ -1738,7 +1738,7 @@ function getRoeRecords(triggers)
 
         [1361] =
         { -- Windurst Rank 3-3 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1746,7 +1746,7 @@ function getRoeRecords(triggers)
 
         [1362] =
         { -- Windurst Rank 4 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MAGICITE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1754,7 +1754,7 @@ function getRoeRecords(triggers)
 
         [1363] =
         { -- Windurst Rank 5-1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1762,7 +1762,7 @@ function getRoeRecords(triggers)
 
         [1364] =
         { -- Windurst Rank 5-2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
@@ -1770,7 +1770,7 @@ function getRoeRecords(triggers)
 
         [1365] =
         { -- Windurst Rank 6-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.FULL_MOON_FOUNTAIN } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1778,7 +1778,7 @@ function getRoeRecords(triggers)
 
         [1366] =
         { -- Windurst Rank 6-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1786,7 +1786,7 @@ function getRoeRecords(triggers)
 
         [1367] =
         { -- Windurst Rank 7-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1794,7 +1794,7 @@ function getRoeRecords(triggers)
 
         [1368] =
         { -- Windurst Rank 7-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
@@ -1802,7 +1802,7 @@ function getRoeRecords(triggers)
 
         [1369] =
         { -- Windurst Rank 8-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1810,7 +1810,7 @@ function getRoeRecords(triggers)
 
         [1370] =
         { -- Windurst Rank 8-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1818,7 +1818,7 @@ function getRoeRecords(triggers)
 
         [1371] =
         { -- Windurst Rank 9-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD } },
             flags = set { "retro" },
             reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1826,7 +1826,7 @@ function getRoeRecords(triggers)
 
         [1372] =
         { -- Windurst Rank 9-2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING } },
             flags = set { "retro" },
             reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
@@ -1838,7 +1838,7 @@ function getRoeRecords(triggers)
 
         [1373] =
         { -- Rhapsodies of Vana'diel 1-1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER } },
             flags = set { "retro" },
             reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
@@ -1846,7 +1846,7 @@ function getRoeRecords(triggers)
 
         [1374] =
         { -- Rhapsodies of Vana'diel 1-2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME } },
             flags = set { "retro" },
             reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
@@ -1854,7 +1854,7 @@ function getRoeRecords(triggers)
 
         [1375] =
         { -- Rhapsodies of Vana'diel 1-3 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE } },
             flags = set { "retro" },
             reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
@@ -1862,7 +1862,7 @@ function getRoeRecords(triggers)
 
         [1416] =
         { -- Rhapsodies of Vana'diel 2-1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES } },
             flags = set { "retro" },
             reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
@@ -1874,7 +1874,7 @@ function getRoeRecords(triggers)
 
         [1377] =
         { -- Zilart Mission 1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1882,7 +1882,7 @@ function getRoeRecords(triggers)
 
         [1378] =
         { -- Zilart Mission 2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1890,7 +1890,7 @@ function getRoeRecords(triggers)
 
         [1379] =
         { -- Zilart Mission 3 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZHAMS_CHIEFTAINESS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1898,7 +1898,7 @@ function getRoeRecords(triggers)
 
         [1380] =
         { -- Zilart Mission 4 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1906,7 +1906,7 @@ function getRoeRecords(triggers)
 
         [1381] =
         { -- Zilart Mission 5 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1914,7 +1914,7 @@ function getRoeRecords(triggers)
 
         [1382] =
         { -- Zilart Mission 6 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1922,7 +1922,7 @@ function getRoeRecords(triggers)
 
         [1383] =
         { -- Zilart Mission 7 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1930,7 +1930,7 @@ function getRoeRecords(triggers)
 
         [1384] =
         { -- Zilart Mission 8 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1938,7 +1938,7 @@ function getRoeRecords(triggers)
 
         [1385] =
         { -- Zilart Mission 9 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1946,7 +1946,7 @@ function getRoeRecords(triggers)
 
         [1386] =
         { -- Zilart Mission 10 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1954,7 +1954,7 @@ function getRoeRecords(triggers)
 
         [1387] =
         { -- Zilart Mission 11 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1962,7 +1962,7 @@ function getRoeRecords(triggers)
 
         [1388] =
         { -- Zilart Mission 12 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1970,7 +1970,7 @@ function getRoeRecords(triggers)
 
         [1389] =
         { -- Zilart Mission 13 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1978,7 +1978,7 @@ function getRoeRecords(triggers)
 
         [1390] =
         { -- Zilart Mission 14 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1986,7 +1986,7 @@ function getRoeRecords(triggers)
 
         [1391] =
         { -- Zilart Mission 15 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -1994,7 +1994,7 @@ function getRoeRecords(triggers)
 
         [1392] =
         { -- Zilart Mission 16 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2006,7 +2006,7 @@ function getRoeRecords(triggers)
 
         [1393] =
         { -- Chains of Promathia Chapter 1 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2014,7 +2014,7 @@ function getRoeRecords(triggers)
 
         [1394] =
         { -- Chains of Promathia Chapter 2 +
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2022,7 +2022,7 @@ function getRoeRecords(triggers)
 
         [1395] =
         { -- Chains of Promathia Chapter 3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2030,7 +2030,7 @@ function getRoeRecords(triggers)
 
         [1396] =
         { -- Chains of Promathia Chapter 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2038,7 +2038,7 @@ function getRoeRecords(triggers)
 
         [1397] =
         { -- Chains of Promathia Chapter 5
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2046,7 +2046,7 @@ function getRoeRecords(triggers)
 
         [1398] =
         { -- Chains of Promathia Chapter 6
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2054,7 +2054,7 @@ function getRoeRecords(triggers)
 
         [1399] =
         { -- Chains of Promathia Chapter 7
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2062,7 +2062,7 @@ function getRoeRecords(triggers)
 
         [1400] =
         { -- Chains of Promathia Chapter 8
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.DAWN } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2077,7 +2077,7 @@ function getRoeRecords(triggers)
 
         [1410] =
         { -- Treasures of Aht Urhgan 1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2085,7 +2085,7 @@ function getRoeRecords(triggers)
 
         [1411] =
         { -- Treasures of Aht Urhgan 2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2093,7 +2093,7 @@ function getRoeRecords(triggers)
 
         [1412] =
         { -- Treasures of Aht Urhgan 3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PLAYING_THE_PART } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2101,7 +2101,7 @@ function getRoeRecords(triggers)
 
         [1413] =
         { -- Treasures of Aht Urhgan 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS_HONOR } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2109,7 +2109,7 @@ function getRoeRecords(triggers)
 
         [1414] =
         { -- Treasures of Aht Urhgan 5
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2117,7 +2117,7 @@ function getRoeRecords(triggers)
 
         [1415] =
         { -- Treasures of Aht Urhgan 6
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2129,7 +2129,7 @@ function getRoeRecords(triggers)
 
         [1402] =
         { -- Wings of the Goddess 1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2137,7 +2137,7 @@ function getRoeRecords(triggers)
 
         [1403] =
         { -- Wings of the Goddess 2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2145,7 +2145,7 @@ function getRoeRecords(triggers)
 
         [1404] =
         { -- Wings of the Goddess 3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.IN_THE_NAME_OF_THE_FATHER } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2153,7 +2153,7 @@ function getRoeRecords(triggers)
 
         [1405] =
         { -- Wings of the Goddess 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CROSSROADS_OF_TIME } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2161,7 +2161,7 @@ function getRoeRecords(triggers)
 
         [1406] =
         { -- Wings of the Goddess 5
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.FATE_IN_HAZE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2169,7 +2169,7 @@ function getRoeRecords(triggers)
 
         [1407] =
         { -- Wings of the Goddess 6
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.ADIEU_LILISETTE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2177,7 +2177,7 @@ function getRoeRecords(triggers)
 
         [1408] =
         { -- Wings of the Goddess 7
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2185,7 +2185,7 @@ function getRoeRecords(triggers)
 
         [1409] =
         { -- Wings of the Goddess 8
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TOKEN_OF_TROTH } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2197,7 +2197,7 @@ function getRoeRecords(triggers)
 
         [1426] =
         { -- Seekers of Adoulin Chapter 1
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2205,7 +2205,7 @@ function getRoeRecords(triggers)
 
         [1427] =
         { -- Seekers of Adoulin Chapter 2
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2213,7 +2213,7 @@ function getRoeRecords(triggers)
 
         [1428] =
         { -- Seekers of Adoulin Chapter 3
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2221,7 +2221,7 @@ function getRoeRecords(triggers)
 
         [1429] =
         { -- Seekers of Adoulin Chapter 4
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ROYAL_BLESSINGS } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2229,7 +2229,7 @@ function getRoeRecords(triggers)
 
         [1430] =
         { -- Seekers of Adoulin Chapter 5
-            trigger = triggers.missionComplete,
+            trigger = xi.roeTriggers.COMPLETE_MISSION,
             reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.UNDYING_LIGHT } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500 },
@@ -2241,7 +2241,7 @@ function getRoeRecords(triggers)
 
         [12] =
         { -- Vanquish Multiple Enemies I - 200
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 200,
             reqs = { mobXP = true },
             flags = set { "repeat" },
@@ -2250,7 +2250,7 @@ function getRoeRecords(triggers)
 
         [13] =
         { -- Vanquish Multiple Enemies II - 500
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 500,
             reqs = { mobXP = true },
             reward = { sparks = 2000, xp = 6000, item = { xi.item.PLUTON_CASE } },
@@ -2258,7 +2258,7 @@ function getRoeRecords(triggers)
 
         [14] =
         { -- Vanquish Multiple Enemies III - 750
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 750,
             reqs = { mobXP = true },
             reward = { sparks = 5000, xp = 10000, item = { xi.item.PLUTON_BOX } },
@@ -2266,7 +2266,7 @@ function getRoeRecords(triggers)
 
         [15] =
         { -- Level Sync to Vanquish I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 200,
             reqs = { mobXP = true, levelSync = true },
             reward = { sparks = 2000, xp = 6000, accolades = 200 },
@@ -2274,7 +2274,7 @@ function getRoeRecords(triggers)
 
         [117] =
         { -- Level Sync to Vanquish II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, levelSync = true },
             flags = set { "repeat" },
@@ -2283,7 +2283,7 @@ function getRoeRecords(triggers)
 
         [16] =
         { -- Deal 500+ Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 200,
             reqs = { dmgMin = 500 },
             flags = set { "repeat" },
@@ -2292,7 +2292,7 @@ function getRoeRecords(triggers)
 
         [17] =
         { -- Deal 1000+ Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 150,
             reqs = { dmgMin = 1000 },
             reward = { sparks = 1000, xp = 5000 },
@@ -2300,7 +2300,7 @@ function getRoeRecords(triggers)
 
         [18] =
         { -- Deal 1500+ Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 100,
             reqs = { dmgMin = 1500 },
             reward = { sparks = 1000, xp = 5000 },
@@ -2308,7 +2308,7 @@ function getRoeRecords(triggers)
 
         [698] =
         { -- Deal 2000+ Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 100,
             reqs = { dmgMin = 2000 },
             reward = { sparks = 2000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
@@ -2316,7 +2316,7 @@ function getRoeRecords(triggers)
 
         [19] =
         { -- Deal 10-20 Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 10,
             reqs = { dmgMin = 10, dmgMax = 20 },
             reward = { sparks = 300, xp = 2500 },
@@ -2324,7 +2324,7 @@ function getRoeRecords(triggers)
 
         [20] =
         { -- Deal 110-120 Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 10,
             reqs = { dmgMin = 110, dmgMax = 120 },
             reward = { sparks = 300, xp = 1500 },
@@ -2332,7 +2332,7 @@ function getRoeRecords(triggers)
 
         [21] =
         { -- Deal 310-320 Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 10,
             reqs = { dmgMin = 310, dmgMax = 320 },
             reward = { sparks = 300, xp = 1500 },
@@ -2340,7 +2340,7 @@ function getRoeRecords(triggers)
 
         [22] =
         { -- Deal 510-520 Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 10,
             reqs = { dmgMin = 510, dmgMax = 520 },
             reward = { sparks = 300, xp = 1500 },
@@ -2348,7 +2348,7 @@ function getRoeRecords(triggers)
 
         [23] =
         { -- Deal 1110-1120 Damage
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 10,
             reqs = { dmgMin = 1110, dmgMax = 1120 },
             reward = { sparks = 300, xp = 1500, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
@@ -2356,7 +2356,7 @@ function getRoeRecords(triggers)
 
         [29] =
         { -- Total Damage I
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 100000,
             increment = 0,
             notify = 5000,
@@ -2373,7 +2373,7 @@ function getRoeRecords(triggers)
 
         [30] =
         { -- Total Damage II
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 200000,
             increment = 0,
             notify = 10000,
@@ -2390,7 +2390,7 @@ function getRoeRecords(triggers)
 
         [696] =
         { -- Total Damage III
-            trigger = triggers.dmgDealt,
+            trigger = xi.roeTriggers.DEAL_DAMAGE,
             goal = 300000,
             increment = 0,
             notify = 10000,
@@ -2407,7 +2407,7 @@ function getRoeRecords(triggers)
 
         [31] =
         { -- Total Healing I
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 10000,
             increment = 0,
             notify = 500,
@@ -2424,7 +2424,7 @@ function getRoeRecords(triggers)
 
         [32] =
         { -- Total Healing II
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 20000,
             increment = 0,
             notify = 1000,
@@ -2441,7 +2441,7 @@ function getRoeRecords(triggers)
 
         [699] =
         { -- Total Healing III
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 30000,
             increment = 0,
             notify = 1000,
@@ -2458,7 +2458,7 @@ function getRoeRecords(triggers)
 
         [33] =
         { -- Total Damage Taken I
-            trigger = triggers.dmgTaken,
+            trigger = xi.roeTriggers.TAKE_DAMAGE,
             goal = 10000,
             increment = 0,
             notify = 500,
@@ -2475,7 +2475,7 @@ function getRoeRecords(triggers)
 
         [34] =
         { -- Total Damage Taken II
-            trigger = triggers.dmgTaken,
+            trigger = xi.roeTriggers.TAKE_DAMAGE,
             goal = 20000,
             increment = 0,
             notify = 1000,
@@ -2492,7 +2492,7 @@ function getRoeRecords(triggers)
 
         [697] =
         { -- Total Damage Taken III
-            trigger = triggers.dmgTaken,
+            trigger = xi.roeTriggers.TAKE_DAMAGE,
             goal = 30000,
             increment = 0,
             notify = 1000,
@@ -2509,14 +2509,14 @@ function getRoeRecords(triggers)
 
         [45] =
         { -- Weapon Skills 1
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 100,
             reward = { sparks = 500, xp = 2500 },
         },
 
         [488] =
         { -- Heal for 500+ HP
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 100,
             reqs = { healMin = 500 },
             reward = { sparks = 2000, xp = 6000 },
@@ -2524,7 +2524,7 @@ function getRoeRecords(triggers)
 
         [700] =
         { -- Heal for 750+ HP
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 100,
             reqs = { healMin = 750 },
             reward = { sparks = 3000, xp = 7000, item = { xi.item.PLUTON_BOX } },
@@ -2536,7 +2536,7 @@ function getRoeRecords(triggers)
 
         [57] =
         { -- Total Successful Synthesis Attempts
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 30,
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 500, accolades = 10 },
@@ -2548,7 +2548,7 @@ function getRoeRecords(triggers)
 
         [71] =
         { -- Spoils - Fire Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.FIRE_CRYSTAL } },
             flags = set { "repeat" },
@@ -2557,7 +2557,7 @@ function getRoeRecords(triggers)
 
         [72] =
         { -- Spoils - Ice Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.ICE_CRYSTAL } },
             flags = set { "repeat" },
@@ -2566,7 +2566,7 @@ function getRoeRecords(triggers)
 
         [73] =
         { -- Spoils - Wind Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.WIND_CRYSTAL } },
             flags = set { "repeat" },
@@ -2575,7 +2575,7 @@ function getRoeRecords(triggers)
 
         [74] =
         { -- Spoils - Earth Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.EARTH_CRYSTAL } },
             flags = set { "repeat" },
@@ -2584,7 +2584,7 @@ function getRoeRecords(triggers)
 
         [75] =
         { -- Spoils - Lightning Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.LIGHTNING_CRYSTAL } },
             flags = set { "repeat" },
@@ -2593,7 +2593,7 @@ function getRoeRecords(triggers)
 
         [76] =
         { -- Spoils - Water Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.WATER_CRYSTAL } },
             flags = set { "repeat" },
@@ -2602,7 +2602,7 @@ function getRoeRecords(triggers)
 
         [77] =
         { -- Spoils - Light Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.LIGHT_CRYSTAL } },
             flags = set { "repeat" },
@@ -2611,7 +2611,7 @@ function getRoeRecords(triggers)
 
         [78] =
         { -- Spoils - Dark Crystals
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 10,
             reqs = { itemID = set { xi.item.DARK_CRYSTAL } },
             flags = set { "repeat" },
@@ -2620,7 +2620,7 @@ function getRoeRecords(triggers)
 
         [84] =
         { -- Spoils - Flame Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.FLAME_GEODE } },
             flags = set { "repeat" },
@@ -2629,7 +2629,7 @@ function getRoeRecords(triggers)
 
         [85] =
         { -- Spoils - Snow Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.SNOW_GEODE } },
             flags = set { "repeat" },
@@ -2638,7 +2638,7 @@ function getRoeRecords(triggers)
 
         [86] =
         { -- Spoils - Breeze Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.BREEZE_GEODE } },
             flags = set { "repeat" },
@@ -2647,7 +2647,7 @@ function getRoeRecords(triggers)
 
         [87] =
         { -- Spoils - Soil Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.SOIL_GEODE } },
             flags = set { "repeat" },
@@ -2656,7 +2656,7 @@ function getRoeRecords(triggers)
 
         [88] =
         { -- Spoils - Thunder Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.THUNDER_GEODE } },
             flags = set { "repeat" },
@@ -2665,7 +2665,7 @@ function getRoeRecords(triggers)
 
         [89] =
         { -- Spoils - Aqua Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.AQUA_GEODE } },
             flags = set { "repeat" },
@@ -2674,7 +2674,7 @@ function getRoeRecords(triggers)
 
         [90] =
         { -- Spoils - Light Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.LIGHT_GEODE } },
             flags = set { "repeat" },
@@ -2683,7 +2683,7 @@ function getRoeRecords(triggers)
 
         [91] =
         { -- Spoils - Shadow Geode
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.SHADOW_GEODE } },
             flags = set { "repeat" },
@@ -2692,7 +2692,7 @@ function getRoeRecords(triggers)
 
         [92] =
         { -- Spoils - Ifritite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.IFRITITE } },
             flags = set { "repeat" },
@@ -2701,7 +2701,7 @@ function getRoeRecords(triggers)
 
         [93] =
         { -- Spoils - Shivite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.SHIVITE } },
             flags = set { "repeat" },
@@ -2710,7 +2710,7 @@ function getRoeRecords(triggers)
 
         [94] =
         { -- Spoils - Garudite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.GARUDITE } },
             flags = set { "repeat" },
@@ -2719,7 +2719,7 @@ function getRoeRecords(triggers)
 
         [95] =
         { -- Spoils - Titanite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.TITANITE } },
             flags = set { "repeat" },
@@ -2728,7 +2728,7 @@ function getRoeRecords(triggers)
 
         [96] =
         { -- Spoils - Ramuite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.RAMUITE } },
             flags = set { "repeat" },
@@ -2737,7 +2737,7 @@ function getRoeRecords(triggers)
 
         [97] =
         { -- Spoils - Leviatite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.LEVIATITE } },
             flags = set { "repeat" },
@@ -2746,7 +2746,7 @@ function getRoeRecords(triggers)
 
         [98] =
         { -- Spoils - Carbite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.CARBITE } },
             flags = set { "repeat" },
@@ -2755,7 +2755,7 @@ function getRoeRecords(triggers)
 
         [99] =
         { -- Spoils - Fenrite
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.FENRITE } },
             flags = set { "repeat" },
@@ -2768,7 +2768,7 @@ function getRoeRecords(triggers)
 
         [120] =
         { -- Spoils - Bat Wing
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.BAT_WING } },
             flags = set { "repeat" },
@@ -2777,7 +2777,7 @@ function getRoeRecords(triggers)
 
         [121] =
         { -- Spoils - Black Tiger Fang
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.BLACK_TIGER_FANG } },
             flags = set { "repeat" },
@@ -2786,7 +2786,7 @@ function getRoeRecords(triggers)
 
         [122] =
         { -- Spoils - Flint Stone
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.FLINT_STONE } },
             flags = set { "repeat" },
@@ -2795,7 +2795,7 @@ function getRoeRecords(triggers)
 
         [123] =
         { -- Spoils - Rabbit Hide
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.RABBIT_HIDE } },
             flags = set { "repeat" },
@@ -2804,7 +2804,7 @@ function getRoeRecords(triggers)
 
         [124] =
         { -- Spoils - Honey
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.POT_OF_HONEY } },
             flags = set { "repeat" },
@@ -2813,7 +2813,7 @@ function getRoeRecords(triggers)
 
         [125] =
         { -- Spoils - Sheepskin
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.SHEEPSKIN } },
             flags = set { "repeat" },
@@ -2822,7 +2822,7 @@ function getRoeRecords(triggers)
 
         [126] =
         { -- Spoils - Lizard Skin
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.LIZARD_SKIN } },
             flags = set { "repeat" },
@@ -2831,7 +2831,7 @@ function getRoeRecords(triggers)
 
         [127] =
         { -- Spoils - Beetle Shell
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.BEETLE_SHELL } },
             flags = set { "repeat" },
@@ -2840,7 +2840,7 @@ function getRoeRecords(triggers)
 
         [128] =
         { -- Spoils - Zeruhn Soot
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.PINCH_OF_ZERUHN_SOOT } },
             flags = set { "repeat" },
@@ -2849,7 +2849,7 @@ function getRoeRecords(triggers)
 
         [129] =
         { -- Spoils - Silver Name Tag
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SILVER_NAME_TAG } },
             flags = set { "repeat" },
@@ -2858,7 +2858,7 @@ function getRoeRecords(triggers)
 
         [130] =
         { -- Spoils - Quadav Helm
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.QUADAV_HELM } },
             flags = set { "repeat" },
@@ -2867,7 +2867,7 @@ function getRoeRecords(triggers)
 
         [132] =
         { -- Spoils - Treant Bulb
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.TREANT_BULB } },
             flags = set { "repeat" },
@@ -2876,7 +2876,7 @@ function getRoeRecords(triggers)
 
         [133] =
         { -- Spoils - Wild Onion
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.WILD_ONION } },
             flags = set { "repeat" },
@@ -2885,7 +2885,7 @@ function getRoeRecords(triggers)
 
         [134] =
         { -- Spoils - Sleepshroom
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.SLEEPSHROOM } },
             flags = set { "repeat" },
@@ -2894,7 +2894,7 @@ function getRoeRecords(triggers)
 
         [135] =
         { -- Spoils - Sand Bat Fang
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.SAND_BAT_FANG } },
             flags = set { "repeat" },
@@ -2903,7 +2903,7 @@ function getRoeRecords(triggers)
 
         [136] =
         { -- Spoils - Zinc Ore
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.CHUNK_OF_ZINC_ORE } },
             flags = set { "repeat" },
@@ -2912,7 +2912,7 @@ function getRoeRecords(triggers)
 
         [137] =
         { -- Spoils - Giant Bird Feather
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.GIANT_BIRD_FEATHER } },
             flags = set { "repeat" },
@@ -2921,7 +2921,7 @@ function getRoeRecords(triggers)
 
         [138] =
         { -- Spoils - Three-leaf Mandragora Bud
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.THREE_LEAF_MANDRAGORA_BUD } },
             flags = set { "repeat" },
@@ -2930,7 +2930,7 @@ function getRoeRecords(triggers)
 
         [139] =
         { -- Spoils - Four-leaf Mandragora Bud
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.FOUR_LEAF_MANDRAGORA_BUD } },
             flags = set { "repeat" },
@@ -2939,7 +2939,7 @@ function getRoeRecords(triggers)
 
         [140] =
         { -- Spoils - Cornette
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.CORNETTE } },
             flags = set { "repeat" },
@@ -2948,7 +2948,7 @@ function getRoeRecords(triggers)
 
         [141] =
         { -- Spoils - Yuhtunga Sulfur
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.PINCH_OF_YUHTUNGA_SULFUR } },
             flags = set { "repeat" },
@@ -2957,7 +2957,7 @@ function getRoeRecords(triggers)
 
         [142] =
         { -- Spoils - Snobby Letter
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SNOBBY_LETTER } },
             flags = set { "repeat" },
@@ -2966,7 +2966,7 @@ function getRoeRecords(triggers)
 
         [143] =
         { -- Spoils - Yagudo Bead Necklace
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.YAGUDO_BEAD_NECKLACE } },
             flags = set { "repeat" },
@@ -2975,7 +2975,7 @@ function getRoeRecords(triggers)
 
         [144] =
         { -- Spoils - Woozyshroom
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.WOOZYSHROOM } },
             flags = set { "repeat" },
@@ -2984,7 +2984,7 @@ function getRoeRecords(triggers)
 
         [145] =
         { -- Spoils - Beehive Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.BEEHIVE_CHIP } },
             flags = set { "repeat" },
@@ -2993,7 +2993,7 @@ function getRoeRecords(triggers)
 
         [146] =
         { -- Spoils - Remi Shell
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.REMI_SHELL } },
             flags = set { "repeat" },
@@ -3002,7 +3002,7 @@ function getRoeRecords(triggers)
 
         [147] =
         { -- Spoils - Twinstone Earring
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 2,
             reqs = { itemID = set { xi.item.TWINSTONE_EARRING } },
             flags = set { "repeat" },
@@ -3015,7 +3015,7 @@ function getRoeRecords(triggers)
 
         [215] =
         { -- Conflict: West Ronfaure
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 100 } },
             flags = set { "repeat" },
@@ -3024,14 +3024,14 @@ function getRoeRecords(triggers)
 
         [216] =
         { -- Subjugation: Jaggedy-Eared Jack
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17187111 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [217] =
         { -- Conflict: East Ronfaure
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 101 } },
             flags = set { "repeat" },
@@ -3040,14 +3040,14 @@ function getRoeRecords(triggers)
 
         [218] =
         { -- Subjugation: Swamfisk
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17191189, 17191291 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [219] =
         { -- Conflict: Ghelsba Outpost
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 140 } },
             flags = set { "repeat" },
@@ -3056,14 +3056,14 @@ function getRoeRecords(triggers)
 
         [220] =
         { -- Subjugation: Thousandarm Deshglesh
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17350826 } },
             reward = { sparks = 250, xp = 550 },
         },
 
         [221] =
         { -- Conflict: Fort Ghelsba
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 141 } },
             flags = set { "repeat" },
@@ -3072,14 +3072,14 @@ function getRoeRecords(triggers)
 
         [222] =
         { -- Subjugation: Hundredscar Hajwaj
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17354828 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [223] =
         { -- Conflict: Yughott Grotto
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 142 } },
             flags = set { "repeat" },
@@ -3088,14 +3088,14 @@ function getRoeRecords(triggers)
 
         [224] =
         { -- Subjugation: Ashmaker Gotblut
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17358932 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [225] =
         { -- Conflict: King Ranperre's Tomb
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 190 } },
             flags = set { "repeat" },
@@ -3104,14 +3104,14 @@ function getRoeRecords(triggers)
 
         [226] =
         { -- Subjugation: Barbastelle
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17555721 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [227] =
         { -- Conflict: Bostaunieux Oubliette
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 167 } },
             flags = set { "repeat" },
@@ -3120,14 +3120,14 @@ function getRoeRecords(triggers)
 
         [228] =
         { -- Subjugation: Bloodsucker
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17461478 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [229] =
         { -- Conflict: Valkurm Dunes
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 103 } },
             flags = set { "repeat" },
@@ -3136,14 +3136,14 @@ function getRoeRecords(triggers)
 
         [230] =
         { -- Subjugation: Valkurm Emperor
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17199438 } },
             reward = { sparks = 250, xp = 550 },
         },
 
         [231] =
         { -- Conflict: Konschtat Highlands
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 108 } },
             flags = set { "repeat" },
@@ -3152,14 +3152,14 @@ function getRoeRecords(triggers)
 
         [232] =
         { -- Subjugation: Bendigeit Vran
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17220001 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [233] =
         { -- Conflict: Gusgen Mines
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 196 } },
             flags = set { "repeat" },
@@ -3168,14 +3168,14 @@ function getRoeRecords(triggers)
 
         [234] =
         { -- Subjugation: Juggler Hecatomb
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17580248 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [235] =
         { -- Conflict: La Theine Plateau
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 102 } },
             flags = set { "repeat" },
@@ -3184,14 +3184,14 @@ function getRoeRecords(triggers)
 
         [236] =
         { -- Subjugation: Bloodtear Baldurf
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17195318 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [237] =
         { -- Conflict: Ordelle's Caves
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 193 } },
             flags = set { "repeat" },
@@ -3200,7 +3200,7 @@ function getRoeRecords(triggers)
 
         [238] =
         { -- Subjugation: Morbolger
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17568127 } },
             reward = { sparks = 500, xp = 1000 },
         },
@@ -3211,7 +3211,7 @@ function getRoeRecords(triggers)
 
         [239] =
         { -- Conflict: Jugner Forest
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 104 } },
             flags = set { "repeat" },
@@ -3220,14 +3220,14 @@ function getRoeRecords(triggers)
 
         [240] =
         { -- Subjugation: King Arthro
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17203216 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [241] =
         { -- Conflict: Batallia Downs
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 105 } },
             flags = set { "repeat" },
@@ -3236,14 +3236,14 @@ function getRoeRecords(triggers)
 
         [242] =
         { -- Subjugation: Lumber Jack
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17207308 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [243] =
         { -- Conflict: Eldieme Necropolis
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 195 } },
             flags = set { "repeat" },
@@ -3252,14 +3252,14 @@ function getRoeRecords(triggers)
 
         [244] =
         { -- Subjugation: Cwn Cyrff
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17576054 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [245] =
         { -- Conflict: Davoi
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 149 } },
             flags = set { "repeat" },
@@ -3268,14 +3268,14 @@ function getRoeRecords(triggers)
 
         [246] =
         { -- Subjugation: Hawkeyed Dnatbat
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17387567 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [247] =
         { -- Conflict: N. Gustaberg
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 106 } },
             flags = set { "repeat" },
@@ -3284,14 +3284,14 @@ function getRoeRecords(triggers)
 
         [248] =
         { -- Subjugation: Maighdean Uaine
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17211702, 17211714 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [249] =
         { -- Conflict: S. Gustaberg
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 107 } },
             flags = set { "repeat" },
@@ -3300,14 +3300,14 @@ function getRoeRecords(triggers)
 
         [250] =
         { -- Subjugation: Carnero
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17215613, 17215626 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [251] =
         { -- Conflict: Zeruhn Mines
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 172 } },
             flags = set { "repeat" },
@@ -3316,7 +3316,7 @@ function getRoeRecords(triggers)
 
         [252] =
         { -- Conflict: Palborough Mines
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 143 } },
             flags = set { "repeat" },
@@ -3325,14 +3325,14 @@ function getRoeRecords(triggers)
 
         [253] =
         { -- Subjugation: Zi-Ghi Bone-eater
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17363208 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [254] =
         { -- Conflict: Dangruf Wadi
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 191 } },
             flags = set { "repeat" },
@@ -3341,14 +3341,14 @@ function getRoeRecords(triggers)
 
         [255] =
         { -- Subjugation: Teporingo
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17559584 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [256] =
         { -- Conflict: Pashhow Marshlands
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 109 } },
             flags = set { "repeat" },
@@ -3357,14 +3357,14 @@ function getRoeRecords(triggers)
 
         [257] =
         { -- Subjugation: Ni'Zho Bladebender
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17223797 } },
             reward = { sparks = 250, xp = 700 },
         },
 
         [258] =
         { -- Conflict: Rolanberry Fields
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 110 } },
             flags = set { "repeat" },
@@ -3373,14 +3373,14 @@ function getRoeRecords(triggers)
 
         [259] =
         { -- Subjugation: Simurgh
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17228242 } },
             reward = { sparks = 250, xp = 1000 },
         },
 
         [260] =
         { -- Conflict: Crawler's Nest
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 197 } },
             flags = set { "repeat" },
@@ -3389,14 +3389,14 @@ function getRoeRecords(triggers)
 
         [261] =
         { -- Subjugation: Demonic Tiphia
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17584398 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [262] =
         { -- Conflict: Beadeaux
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 147 } },
             flags = set { "repeat" },
@@ -3405,7 +3405,7 @@ function getRoeRecords(triggers)
 
         [263] =
         { -- Subjugation: Zo'Khu Blackcloud
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17379564 } },
             reward = { sparks = 250, xp = 700 },
         },
@@ -3416,7 +3416,7 @@ function getRoeRecords(triggers)
 
         [264] =
         { -- Conflict: West Sarutabaruta
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 115 } },
             flags = set { "repeat" },
@@ -3425,14 +3425,14 @@ function getRoeRecords(triggers)
 
         [265] =
         { -- Subjugation: Nunyenunc
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17248517 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [266] =
         { -- Conflict: East Sarutabaruta
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 116 } },
             flags = set { "repeat" },
@@ -3441,14 +3441,14 @@ function getRoeRecords(triggers)
 
         [267] =
         { -- Subjugation: Spiny Spipi
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17252657 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [268] =
         { -- Conflict: Giddeus
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 145 } },
             flags = set { "repeat" },
@@ -3457,14 +3457,14 @@ function getRoeRecords(triggers)
 
         [269] =
         { -- Subjugation: Hoo Mjuu the Torrent
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17371515 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [270] =
         { -- Conflict: Toraimarai Canal
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 169 } },
             flags = set { "repeat" },
@@ -3473,14 +3473,14 @@ function getRoeRecords(triggers)
 
         [271] =
         { -- Subjugation: Oni Carcass
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17469587 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [272] =
         { -- Conflict: Inner Horutoto Ruins
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 192 } },
             flags = set { "repeat" },
@@ -3489,14 +3489,14 @@ function getRoeRecords(triggers)
 
         [273] =
         { -- Subjugation: Maltha
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17563749 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [274] =
         { -- Conflict: Outer Horutoto Ruins
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 194 } },
             flags = set { "repeat" },
@@ -3505,14 +3505,14 @@ function getRoeRecords(triggers)
 
         [275] =
         { -- Subjugation: Bomb King
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17572094, 17572142, 17572146 } },
             reward = { sparks = 250, xp = 500 },
         },
 
         [276] =
         { -- Conflict: Buburimu Peninsula
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 118 } },
             flags = set { "repeat" },
@@ -3521,14 +3521,14 @@ function getRoeRecords(triggers)
 
         [277] =
         { -- Subjugation: Helldiver
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17260907 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [278] =
         { -- Conflict: Tahrongi Canyon
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 117 } },
             flags = set { "repeat" },
@@ -3537,14 +3537,14 @@ function getRoeRecords(triggers)
 
         [279] =
         { -- Subjugation: Serpopard Ishtar
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17256563, 17256690 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [280] =
         { -- Conflict: Maze of Shakhrami
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 198 } },
             flags = set { "repeat" },
@@ -3553,14 +3553,14 @@ function getRoeRecords(triggers)
 
         [281] =
         { -- Subjugation: Argus
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17588674 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [282] =
         { -- Conflict: Meriphataud Mountains
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 119 } },
             flags = set { "repeat" },
@@ -3569,14 +3569,14 @@ function getRoeRecords(triggers)
 
         [283] =
         { -- Subjugation: Daggerclaw Dracos
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17264818 } },
             reward = { sparks = 250, xp = 600 },
         },
 
         [284] =
         { -- Conflict: Sauromugue Champaign
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 120 } },
             flags = set { "repeat" },
@@ -3585,14 +3585,14 @@ function getRoeRecords(triggers)
 
         [285] =
         { -- Subjugation: Roc
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17269106 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [286] =
         { -- Conflict: Garlaige Citadel
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 200 } },
             flags = set { "repeat" },
@@ -3601,14 +3601,14 @@ function getRoeRecords(triggers)
 
         [287] =
         { -- Subjugation: Serket
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17596720 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [288] =
         { -- Conflict: Castle Oztroja
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 151 } },
             flags = set { "repeat" },
@@ -3617,7 +3617,7 @@ function getRoeRecords(triggers)
 
         [289] =
         { -- Subjugation: Lii Jixa the Somnolist
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17395896 } },
             reward = { sparks = 250, xp = 800 },
         },
@@ -3628,7 +3628,7 @@ function getRoeRecords(triggers)
 
         [290] =
         { -- Conflict: Beaucedine Glacier
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 111 } },
             flags = set { "repeat" },
@@ -3637,14 +3637,14 @@ function getRoeRecords(triggers)
 
         [291] =
         { -- Subjugation: Nue
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17231971 } },
             reward = { sparks = 250, xp = 700 },
         },
 
         [292] =
         { -- Conflict: Ranguemont Pass
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 166 } },
             flags = set { "repeat" },
@@ -3653,14 +3653,14 @@ function getRoeRecords(triggers)
 
         [293] =
         { -- Subjugation: Gloom Eye
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17457204 } },
             reward = { sparks = 250, xp = 700 },
         },
 
         [294] =
         { -- Conflict: Fei'Yin
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 204 } },
             flags = set { "repeat" },
@@ -3669,14 +3669,14 @@ function getRoeRecords(triggers)
 
         [295] =
         { -- Subjugation: Goliath
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17613046, 17613048, 17613052, 17613054 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [296] =
         { -- Conflict: Xarcabard
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 112 } },
             flags = set { "repeat" },
@@ -3685,14 +3685,14 @@ function getRoeRecords(triggers)
 
         [297] =
         { -- Subjugation: Biast
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17235988 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [298] =
         { -- Conflict: Castle Zvahl Baileys
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 161 } },
             flags = set { "repeat" },
@@ -3701,14 +3701,14 @@ function getRoeRecords(triggers)
 
         [299] =
         { -- Subjugation: Duke Haborym
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17436923 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [300] =
         { -- Conflict: Castle Zvahl Keep
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 162 } },
             flags = set { "repeat" },
@@ -3717,14 +3717,14 @@ function getRoeRecords(triggers)
 
         [301] =
         { -- Subjugation: Baron Vapula
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17440963 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [302] =
         { -- Conflict: Qufim Island
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 126 } },
             flags = set { "repeat" },
@@ -3733,14 +3733,14 @@ function getRoeRecords(triggers)
 
         [303] =
         { -- Subjugation: Dosetsu Tree
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17293640 } },
             reward = { sparks = 500, xp = 1000 },
         },
 
         [304] =
         { -- Conflict: Lower Delkfutt's Tower
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 184 } },
             flags = set { "repeat" },
@@ -3749,14 +3749,14 @@ function getRoeRecords(triggers)
 
         [305] =
         { -- Subjugation: Epialtes
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17530881 } },
             reward = { sparks = 250, xp = 700 },
         },
 
         [306] =
         { -- Conflict: Middle Delkfutt's Tower
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 157 } },
             flags = set { "repeat" },
@@ -3765,14 +3765,14 @@ function getRoeRecords(triggers)
 
         [307] =
         { -- Subjugation: Ogygos
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17420592 } },
             reward = { sparks = 250, xp = 700 },
         },
 
         [308] =
         { -- Conflict: Upper Delkfutt's Tower
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 158 } },
             flags = set { "repeat" },
@@ -3781,14 +3781,14 @@ function getRoeRecords(triggers)
 
         [309] =
         { -- Subjugation: Enkelados
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17424385, 17424423 } },
             reward = { sparks = 250, xp = 800 },
         },
 
         [380] =
         { -- Conflict: Behemoth's Dominion
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 127 } },
             flags = set { "repeat" },
@@ -3801,7 +3801,7 @@ function getRoeRecords(triggers)
 
         [310] =
         { -- Conflict: Rala Waterways I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Spoutdrenched_Toad" }, zone = set { 258 } },
             flags = set { "repeat" },
@@ -3810,7 +3810,7 @@ function getRoeRecords(triggers)
 
         [311] =
         { -- Conflict: Rala Waterways II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Stillwater_Funguar" }, zone = set { 258 } },
             flags = set { "repeat" },
@@ -3819,7 +3819,7 @@ function getRoeRecords(triggers)
 
         [312] =
         { -- Conflict: Rala Waterways III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Pewter_Diremite" }, zone = set { 258 } },
             flags = set { "repeat" },
@@ -3828,7 +3828,7 @@ function getRoeRecords(triggers)
 
         [313] =
         { -- Conflict: Ceizak Battlegrounds I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Blanched_Mandragora" }, zone = set { 261 } },
             flags = set { "repeat" },
@@ -3837,7 +3837,7 @@ function getRoeRecords(triggers)
 
         [314] =
         { -- Conflict: Ceizak Battlegrounds II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Careening_Twitherym" }, zone = set { 261 } },
             flags = set { "repeat" },
@@ -3846,7 +3846,7 @@ function getRoeRecords(triggers)
 
         [315] =
         { -- Conflict: Ceizak Battlegrounds III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Resplendent_Luckybug" }, zone = set { 261 } },
             flags = set { "repeat" },
@@ -3855,7 +3855,7 @@ function getRoeRecords(triggers)
 
         [316] =
         { -- Conflict: Yahse Hunting Grounds I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Calfcleaving_Chapuli" }, zone = set { 260 } },
             flags = set { "repeat" },
@@ -3864,7 +3864,7 @@ function getRoeRecords(triggers)
 
         [317] =
         { -- Conflict: Yahse Hunting Grounds II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Twitherym_Infestation" }, zone = set { 260 } },
             flags = set { "repeat" },
@@ -3873,7 +3873,7 @@ function getRoeRecords(triggers)
 
         [318] =
         { -- Conflict: Yahse Hunting Grounds III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Nettled_Wasp" }, zone = set { 260 } },
             flags = set { "repeat" },
@@ -3882,7 +3882,7 @@ function getRoeRecords(triggers)
 
         [319] =
         { -- Conflict: Foret de Hennitiel I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Perfidious_Crab" }, zone = set { 262 } },
             flags = set { "repeat" },
@@ -3891,7 +3891,7 @@ function getRoeRecords(triggers)
 
         [320] =
         { -- Conflict: Foret de Hennitiel II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Scummy_Slug" }, zone = set { 262 } },
             flags = set { "repeat" },
@@ -3900,7 +3900,7 @@ function getRoeRecords(triggers)
 
         [321] =
         { -- Conflict: Foret de Hennitiel III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Vorst_Gnat" }, zone = set { 262 } },
             flags = set { "repeat" },
@@ -3909,7 +3909,7 @@ function getRoeRecords(triggers)
 
         [322] =
         { -- Conflict: Morimar Basalt Fields I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Sinewy_Matamata" }, zone = set { 265 } },
             flags = set { "repeat" },
@@ -3918,7 +3918,7 @@ function getRoeRecords(triggers)
 
         [323] =
         { -- Conflict: Morimar Basalt Fields II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Tephra_Lizard" }, zone = set { 265 } },
             flags = set { "repeat" },
@@ -3927,7 +3927,7 @@ function getRoeRecords(triggers)
 
         [324] =
         { -- Conflict: Morimar Basalt Fields III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Maca_Maca" }, zone = set { 265 } },
             flags = set { "repeat" },
@@ -3936,7 +3936,7 @@ function getRoeRecords(triggers)
 
         [325] =
         { -- Conflict: Yorcia Weald I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Snapweed" }, zone = set { 263 } },
             flags = set { "repeat" },
@@ -3945,7 +3945,7 @@ function getRoeRecords(triggers)
 
         [326] =
         { -- Conflict: Yorcia Weald II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Cheeky_Opo-opo" }, zone = set { 263 } },
             flags = set { "repeat" },
@@ -3954,7 +3954,7 @@ function getRoeRecords(triggers)
 
         [327] =
         { -- Conflict: Yorcia Weald III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Bronzecap" }, zone = set { 263 } },
             flags = set { "repeat" },
@@ -3963,7 +3963,7 @@ function getRoeRecords(triggers)
 
         [328] =
         { -- Conflict: Marjami Ravine I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Vinelash_Vulture" }, zone = set { 266 } },
             flags = set { "repeat" },
@@ -3972,7 +3972,7 @@ function getRoeRecords(triggers)
 
         [329] =
         { -- Conflict: Marjami Ravine II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Stryx" }, zone = set { 266 } },
             flags = set { "repeat" },
@@ -3981,7 +3981,7 @@ function getRoeRecords(triggers)
 
         [330] =
         { -- Conflict: Marjami Ravine III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Lapinion" }, zone = set { 266 } },
             flags = set { "repeat" },
@@ -3994,7 +3994,7 @@ function getRoeRecords(triggers)
 
         [331] =
         { -- Conflict: Kamihr Drifts I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Snowpelt_Rabbit" }, zone = set { 267 } },
             flags = set { "repeat" },
@@ -4003,7 +4003,7 @@ function getRoeRecords(triggers)
 
         [332] =
         { -- Conflict: Kamihr Drifts II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Cicatricose_Raaz" }, zone = set { 267 } },
             flags = set { "repeat" },
@@ -4012,7 +4012,7 @@ function getRoeRecords(triggers)
 
         [333] =
         { -- Conflict: Kamihr Drifts III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Shaggy_Ovim" }, zone = set { 267 } },
             flags = set { "repeat" },
@@ -4021,7 +4021,7 @@ function getRoeRecords(triggers)
 
         [334] =
         { -- Conflict: Sih Gates I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Bonaria" }, zone = set { 268 } },
             flags = set { "repeat" },
@@ -4030,7 +4030,7 @@ function getRoeRecords(triggers)
 
         [335] =
         { -- Conflict: Sih Gates II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Loathsome_Obdella" }, zone = set { 268 } },
             flags = set { "repeat" },
@@ -4039,7 +4039,7 @@ function getRoeRecords(triggers)
 
         [336] =
         { -- Conflict: Sih Gates III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Ferocious_Funguar" }, zone = set { 268 } },
             flags = set { "repeat" },
@@ -4048,7 +4048,7 @@ function getRoeRecords(triggers)
 
         [337] =
         { -- Conflict: Moh Gates I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Conflagrant_Eruca" }, zone = set { 269 } },
             flags = set { "repeat" },
@@ -4057,7 +4057,7 @@ function getRoeRecords(triggers)
 
         [338] =
         { -- Conflict: Moh Gates II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Erythemic_Eft" }, zone = set { 269 } },
             flags = set { "repeat" },
@@ -4066,7 +4066,7 @@ function getRoeRecords(triggers)
 
         [339] =
         { -- Conflict: Moh Gates III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Ferocious_Funguar" }, zone = set { 269 } },
             flags = set { "repeat" },
@@ -4075,7 +4075,7 @@ function getRoeRecords(triggers)
 
         [340] =
         { -- Conflict: Cirdas Caverns I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Subterrane_Spider" }, zone = set { 270 } },
             flags = set { "repeat" },
@@ -4084,7 +4084,7 @@ function getRoeRecords(triggers)
 
         [341] =
         { -- Conflict: Cirdas Caverns II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Livid_Umbril" }, zone = set { 270 } },
             flags = set { "repeat" },
@@ -4093,7 +4093,7 @@ function getRoeRecords(triggers)
 
         [342] =
         { -- Conflict: Cirdas Caverns III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Flatus_Acuex" }, zone = set { 270 } },
             flags = set { "repeat" },
@@ -4102,7 +4102,7 @@ function getRoeRecords(triggers)
 
         [343] =
         { -- Conflict: Dho Gates I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Velkk_Magus" }, zone = set { 272 } },
             flags = set { "repeat" },
@@ -4111,7 +4111,7 @@ function getRoeRecords(triggers)
 
         [344] =
         { -- Conflict: Dho Gates II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Ripsaw_Jagil" }, zone = set { 272 } },
             flags = set { "repeat" },
@@ -4120,7 +4120,7 @@ function getRoeRecords(triggers)
 
         [345] =
         { -- Conflict: Dho Gates III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Unyielding_Tarichuk" }, zone = set { 272 } },
             flags = set { "repeat" },
@@ -4129,7 +4129,7 @@ function getRoeRecords(triggers)
 
         [346] =
         { -- Conflict: Woh Gates I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Metalcruncher_Worm" }, zone = set { 273 } },
             flags = set { "repeat" },
@@ -4138,7 +4138,7 @@ function getRoeRecords(triggers)
 
         [347] =
         { -- Conflict: Woh Gates II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Drusy_Twitherym" }, zone = set { 273 } },
             flags = set { "repeat" },
@@ -4147,7 +4147,7 @@ function getRoeRecords(triggers)
 
         [348] =
         { -- Conflict: Woh Gates III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Wheezing_Acuex" }, zone = set { 273 } },
             flags = set { "repeat" },
@@ -4156,7 +4156,7 @@ function getRoeRecords(triggers)
 
         [494] =
         { -- Conflict: Outer Ra'Kaznar I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Restless_Twitherym" }, zone = set { 274 } },
             flags = set { "repeat" },
@@ -4165,7 +4165,7 @@ function getRoeRecords(triggers)
 
         [495] =
         { -- Conflict: Outer Ra'Kaznar II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Bristlehair_Bat" }, zone = set { 274 } },
             flags = set { "repeat" },
@@ -4174,7 +4174,7 @@ function getRoeRecords(triggers)
 
         [496] =
         { -- Conflict: Outer Ra'Kaznar III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Astringent_Acuex" }, zone = set { 274 } },
             flags = set { "repeat" },
@@ -4183,7 +4183,7 @@ function getRoeRecords(triggers)
 
         [762] =
         { -- Conflict: Ra'Kaznar Inner Court I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Bilespouting_Acuex" }, zone = set { 276 } },
             flags = set { "repeat" },
@@ -4192,7 +4192,7 @@ function getRoeRecords(triggers)
 
         [763] =
         { -- Conflict: Ra'Kaznar Inner Court II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Scowling_Vodoriga" }, zone = set { 276 } },
             flags = set { "repeat" },
@@ -4201,7 +4201,7 @@ function getRoeRecords(triggers)
 
         [764] =
         { -- Conflict: Ra'Kaznar Inner Court III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 5,
             reqs = { mobName = set { "Unrepentant_Byrgen" }, zone = set { 276 } },
             flags = set { "repeat" },
@@ -4214,7 +4214,7 @@ function getRoeRecords(triggers)
 
         [390] =
         { -- Conflict: Sanctuary of Zi'Tah
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 121 } },
             flags = set { "repeat" },
@@ -4223,7 +4223,7 @@ function getRoeRecords(triggers)
 
         [392] =
         { -- Conflict: Ro'Maeve
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 122 } },
             flags = set { "repeat" },
@@ -4232,7 +4232,7 @@ function getRoeRecords(triggers)
 
         [394] =
         { -- Conflict: Boyahda Tree
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 153 } },
             flags = set { "repeat" },
@@ -4241,7 +4241,7 @@ function getRoeRecords(triggers)
 
         [396] =
         { -- Conflict: Dragon's Aery
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 154 } },
             flags = set { "repeat" },
@@ -4250,7 +4250,7 @@ function getRoeRecords(triggers)
 
         [398] =
         { -- Conflict: Eastern Altepa Desert
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 114 } },
             flags = set { "repeat" },
@@ -4259,7 +4259,7 @@ function getRoeRecords(triggers)
 
         [400] =
         { -- Conflict: Western Altepa Desert
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 125 } },
             flags = set { "repeat" },
@@ -4268,7 +4268,7 @@ function getRoeRecords(triggers)
 
         [402] =
         { -- Conflict: Quicksand Caves
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 208 } },
             flags = set { "repeat" },
@@ -4277,7 +4277,7 @@ function getRoeRecords(triggers)
 
         [404] =
         { -- Conflict: Gustav Tunnel
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 212 } },
             flags = set { "repeat" },
@@ -4286,7 +4286,7 @@ function getRoeRecords(triggers)
 
         [406] =
         { -- Conflict: Kuftal Tunnel
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 174 } },
             flags = set { "repeat" },
@@ -4295,7 +4295,7 @@ function getRoeRecords(triggers)
 
         [408] =
         { -- Conflict: Cape Terrigan
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 113 } },
             flags = set { "repeat" },
@@ -4304,7 +4304,7 @@ function getRoeRecords(triggers)
 
         [410] =
         { -- Conflict: Valley of Sorrows
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 128 } },
             flags = set { "repeat" },
@@ -4313,7 +4313,7 @@ function getRoeRecords(triggers)
 
         [412] =
         { -- Conflict: Yuhtunga Jungle
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 123 } },
             flags = set { "repeat" },
@@ -4326,7 +4326,7 @@ function getRoeRecords(triggers)
 
         [414] =
         { -- Conflict: Sea Serpent Grotto
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 176 } },
             flags = set { "repeat" },
@@ -4335,7 +4335,7 @@ function getRoeRecords(triggers)
 
         [416] =
         { -- Conflict: Yhoator Jungle
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 124 } },
             flags = set { "repeat" },
@@ -4344,7 +4344,7 @@ function getRoeRecords(triggers)
 
         [418] =
         { -- Conflict: Temple of Uggalepih
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 159 } },
             flags = set { "repeat" },
@@ -4353,7 +4353,7 @@ function getRoeRecords(triggers)
 
         [420] =
         { -- Conflict: Den of Rancor
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 160 } },
             flags = set { "repeat" },
@@ -4362,7 +4362,7 @@ function getRoeRecords(triggers)
 
         [422] =
         { -- Conflict: Ifrit's Cauldron
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 205 } },
             flags = set { "repeat" },
@@ -4371,7 +4371,7 @@ function getRoeRecords(triggers)
 
         [424] =
         { -- Conflict: Ru'Aun Gardens
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 130 } },
             flags = set { "repeat" },
@@ -4380,7 +4380,7 @@ function getRoeRecords(triggers)
 
         [426] =
         { -- Conflict: Ve'Lugannon Palace
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 177 } },
             flags = set { "repeat" },
@@ -4389,7 +4389,7 @@ function getRoeRecords(triggers)
 
         [428] =
         { -- Conflict: Shrine of Ru'Avitau
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 178 } },
             flags = set { "repeat" },
@@ -4398,7 +4398,7 @@ function getRoeRecords(triggers)
 
         [430] =
         { -- Conflict: Labyrinth of Onzozo
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 213 } },
             flags = set { "repeat" },
@@ -4407,7 +4407,7 @@ function getRoeRecords(triggers)
 
         [432] =
         { -- Conflict: Korroloka Tunnel
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 173 } },
             flags = set { "repeat" },
@@ -4420,7 +4420,7 @@ function getRoeRecords(triggers)
 
         [434] =
         { -- Conflict: Oldton Movalpolos
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 11 } },
             flags = set { "repeat" },
@@ -4429,7 +4429,7 @@ function getRoeRecords(triggers)
 
         [436] =
         { -- Conflict: Newton Movalpolos
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 12 } },
             flags = set { "repeat" },
@@ -4438,7 +4438,7 @@ function getRoeRecords(triggers)
 
         [438] =
         { -- Conflict: Lufaise Meadows
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 24 } },
             flags = set { "repeat" },
@@ -4447,7 +4447,7 @@ function getRoeRecords(triggers)
 
         [440] =
         { -- Conflict: Misareaux Coast
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 25 } },
             flags = set { "repeat" },
@@ -4456,7 +4456,7 @@ function getRoeRecords(triggers)
 
         [442] =
         { -- Conflict: Phomiuna Aqueducts
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 27 } },
             flags = set { "repeat" },
@@ -4465,7 +4465,7 @@ function getRoeRecords(triggers)
 
         [444] =
         { -- Conflict: Riverne - Site #A01
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 30 } },
             flags = set { "repeat" },
@@ -4474,7 +4474,7 @@ function getRoeRecords(triggers)
 
         [446] =
         { -- Conflict: Riverne - Site #B01
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 29 } },
             flags = set { "repeat" },
@@ -4483,7 +4483,7 @@ function getRoeRecords(triggers)
 
         [448] =
         { -- Conflict: Sacrarium
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 28 } },
             flags = set { "repeat" },
@@ -4492,7 +4492,7 @@ function getRoeRecords(triggers)
 
         [450] =
         { -- Conflict: Promyvion - Holla
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 16 } },
             flags = set { "repeat" },
@@ -4501,7 +4501,7 @@ function getRoeRecords(triggers)
 
         [452] =
         { -- Conflict: Promyvion - Dem
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 18 } },
             flags = set { "repeat" },
@@ -4510,7 +4510,7 @@ function getRoeRecords(triggers)
 
         [454] =
         { -- Conflict: Promyvion - Mea
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 20 } },
             flags = set { "repeat" },
@@ -4519,7 +4519,7 @@ function getRoeRecords(triggers)
 
         [456] =
         { -- Conflict: Promyvion - Vahzl
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 22 } },
             flags = set { "repeat" },
@@ -4532,7 +4532,7 @@ function getRoeRecords(triggers)
 
         [458] =
         { -- Conflict: Al'Taieu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 33 } },
             flags = set { "repeat" },
@@ -4541,7 +4541,7 @@ function getRoeRecords(triggers)
 
         [460] =
         { -- Conflict: Grand Palace of Hu'Xzoi
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 34 } },
             flags = set { "repeat" },
@@ -4550,7 +4550,7 @@ function getRoeRecords(triggers)
 
         [462] =
         { -- Conflict: Garden of Ru'Hmet
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 35 } },
             flags = set { "repeat" },
@@ -4559,7 +4559,7 @@ function getRoeRecords(triggers)
 
         [464] =
         { -- Conflict: Carpenters' Landing
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 2 } },
             flags = set { "repeat" },
@@ -4568,7 +4568,7 @@ function getRoeRecords(triggers)
 
         [468] =
         { -- Conflict: Bibiki Bay
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 4 } },
             flags = set { "repeat" },
@@ -4577,7 +4577,7 @@ function getRoeRecords(triggers)
 
         [472] =
         { -- Conflict: Attohwa Chasm
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 7 } },
             flags = set { "repeat" },
@@ -4586,7 +4586,7 @@ function getRoeRecords(triggers)
 
         [474] =
         { -- Conflict: Pso'Xja
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 9 } },
             flags = set { "repeat" },
@@ -4595,7 +4595,7 @@ function getRoeRecords(triggers)
 
         [476] =
         { -- Conflict: Uleguerand Range
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 5 } },
             flags = set { "repeat" },
@@ -4608,7 +4608,7 @@ function getRoeRecords(triggers)
 
         [533] =
         { -- Conflict: Bhaflau Thickets
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 52 } },
             flags = set { "repeat" },
@@ -4617,7 +4617,7 @@ function getRoeRecords(triggers)
 
         [535] =
         { -- Conflict: Mamook
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 65 } },
             flags = set { "repeat" },
@@ -4626,7 +4626,7 @@ function getRoeRecords(triggers)
 
         [537] =
         { -- Conflict: Wajaom Woodlands
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 51 } },
             flags = set { "repeat" },
@@ -4635,7 +4635,7 @@ function getRoeRecords(triggers)
 
         [539] =
         { -- Conflict: Aydeewa Subterrane
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 68 } },
             flags = set { "repeat" },
@@ -4644,7 +4644,7 @@ function getRoeRecords(triggers)
 
         [541] =
         { -- Conflict: Halvung
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 62 } },
             flags = set { "repeat" },
@@ -4653,7 +4653,7 @@ function getRoeRecords(triggers)
 
         [543] =
         { -- Conflict: Mount Zhayolm
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 61 } },
             flags = set { "repeat" },
@@ -4662,7 +4662,7 @@ function getRoeRecords(triggers)
 
         [545] =
         { -- Conflict: Caedarva Mire
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 79 } },
             flags = set { "repeat" },
@@ -4671,7 +4671,7 @@ function getRoeRecords(triggers)
 
         [547] =
         { -- Conflict: Arrapago Reef
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 54 } },
             flags = set { "repeat" },
@@ -4680,7 +4680,7 @@ function getRoeRecords(triggers)
 
         [549] =
         { -- Conflict: Alza. Undersea Ruins
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 72 } },
             flags = set { "repeat" },
@@ -4693,7 +4693,7 @@ function getRoeRecords(triggers)
 
         [553] =
         { -- Conflict: East Ronfaure [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 81 } },
             flags = set { "repeat" },
@@ -4702,7 +4702,7 @@ function getRoeRecords(triggers)
 
         [555] =
         { -- Conflict: Jugner Forest [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 82 } },
             flags = set { "repeat" },
@@ -4711,7 +4711,7 @@ function getRoeRecords(triggers)
 
         [557] =
         { -- Conflict: Batallia Downs [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 84 } },
             flags = set { "repeat" },
@@ -4720,7 +4720,7 @@ function getRoeRecords(triggers)
 
         [559] =
         { -- Conflict: La Vaule [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 85 } },
             flags = set { "repeat" },
@@ -4729,7 +4729,7 @@ function getRoeRecords(triggers)
 
         [561] =
         { -- Conflict: Eldieme Necropolis [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 175 } },
             flags = set { "repeat" },
@@ -4738,7 +4738,7 @@ function getRoeRecords(triggers)
 
         [563] =
         { -- Conflict: North Gustaberg [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 88 } },
             flags = set { "repeat" },
@@ -4747,7 +4747,7 @@ function getRoeRecords(triggers)
 
         [565] =
         { -- Conflict: Grauberg [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 89 } },
             flags = set { "repeat" },
@@ -4756,7 +4756,7 @@ function getRoeRecords(triggers)
 
         [567] =
         { -- Conflict: Vunkerl Inlet [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 83 } },
             flags = set { "repeat" },
@@ -4765,7 +4765,7 @@ function getRoeRecords(triggers)
 
         [569] =
         { -- Conflict: Pashhow Marshlands [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 90 } },
             flags = set { "repeat" },
@@ -4774,7 +4774,7 @@ function getRoeRecords(triggers)
 
         [571] =
         { -- Conflict: Rolanberry Fields [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 91 } },
             flags = set { "repeat" },
@@ -4783,7 +4783,7 @@ function getRoeRecords(triggers)
 
         [573] =
         { -- Conflict: Beadeaux [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 92 } },
             flags = set { "repeat" },
@@ -4792,7 +4792,7 @@ function getRoeRecords(triggers)
 
         [575] =
         { -- Conflict: Crawlers' Nest [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 171 } },
             flags = set { "repeat" },
@@ -4805,7 +4805,7 @@ function getRoeRecords(triggers)
 
         [577] =
         { -- Conflict: West Sarutabaruta [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 95 } },
             flags = set { "repeat" },
@@ -4814,7 +4814,7 @@ function getRoeRecords(triggers)
 
         [579] =
         { -- Conflict: Fort Karugo-Narugo [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 96 } },
             flags = set { "repeat" },
@@ -4823,7 +4823,7 @@ function getRoeRecords(triggers)
 
         [581] =
         { -- Conflict: Meriph. Mountains [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 97 } },
             flags = set { "repeat" },
@@ -4832,7 +4832,7 @@ function getRoeRecords(triggers)
 
         [583] =
         { -- Conflict: Sauro. Champaign [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 98 } },
             flags = set { "repeat" },
@@ -4841,7 +4841,7 @@ function getRoeRecords(triggers)
 
         [585] =
         { -- Conflict: Castle Oztroja [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 99 } },
             flags = set { "repeat" },
@@ -4850,7 +4850,7 @@ function getRoeRecords(triggers)
 
         [587] =
         { -- Conflict: Garlaige Citadel [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 164 } },
             flags = set { "repeat" },
@@ -4859,7 +4859,7 @@ function getRoeRecords(triggers)
 
         [589] =
         { -- Conflict: Beaucedine Glacier [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 136 } },
             flags = set { "repeat" },
@@ -4868,7 +4868,7 @@ function getRoeRecords(triggers)
 
         [591] =
         { -- Conflict: Xarcabard [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 137 } },
             flags = set { "repeat" },
@@ -4877,7 +4877,7 @@ function getRoeRecords(triggers)
 
         [593] =
         { -- Conflict: Castle Zvahl Baileys [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 138 } },
             flags = set { "repeat" },
@@ -4886,7 +4886,7 @@ function getRoeRecords(triggers)
 
         [595] =
         { -- Conflict: Castle Zvahl Keep [S]
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 155 } },
             flags = set { "repeat" },
@@ -4899,7 +4899,7 @@ function getRoeRecords(triggers)
 
         [613] =
         { -- Conflict: Abyssea - La Theine
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 132 } },
             flags = set { "repeat" },
@@ -4908,7 +4908,7 @@ function getRoeRecords(triggers)
 
         [614] =
         { -- Conflict: Abyssea - Konschtat
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 15 } },
             flags = set { "repeat" },
@@ -4917,7 +4917,7 @@ function getRoeRecords(triggers)
 
         [615] =
         { -- Conflict: Abyssea - Tahrongi
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 45 } },
             flags = set { "repeat" },
@@ -4926,7 +4926,7 @@ function getRoeRecords(triggers)
 
         [616] =
         { -- Conflict: Abyssea - Attohwa
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 215 } },
             flags = set { "repeat" },
@@ -4935,7 +4935,7 @@ function getRoeRecords(triggers)
 
         [617] =
         { -- Conflict: Abyssea - Misareaux
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 216 } },
             flags = set { "repeat" },
@@ -4944,7 +4944,7 @@ function getRoeRecords(triggers)
 
         [618] =
         { -- Conflict: Abyssea - Vunkerl
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 217 } },
             flags = set { "repeat" },
@@ -4953,7 +4953,7 @@ function getRoeRecords(triggers)
 
         [619] =
         { -- Conflict: Abyssea - Altepa
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 218 } },
             flags = set { "repeat" },
@@ -4962,7 +4962,7 @@ function getRoeRecords(triggers)
 
         [620] =
         { -- Conflict: Abyssea - Uleguerand
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 253 } },
             flags = set { "repeat" },
@@ -4971,7 +4971,7 @@ function getRoeRecords(triggers)
 
         [621] =
         { -- Conflict: Abyssea - Grauberg
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { zone = set { 254 } },
             flags = set { "repeat" },
@@ -4983,7 +4983,7 @@ function getRoeRecords(triggers)
         -----------------------------------
         [885] =
         { -- Conflict: Escha - Zi'Tah I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Yztarg" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -4992,7 +4992,7 @@ function getRoeRecords(triggers)
 
         [886] =
         { -- Conflict: Escha - Zi'Tah II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5001,7 +5001,7 @@ function getRoeRecords(triggers)
 
         [887] =
         { -- Conflict: Escha - Zi'Tah III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Tarichuk" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5010,7 +5010,7 @@ function getRoeRecords(triggers)
 
         [888] =
         { -- Conflict: Escha - Zi'Tah IV
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Shadow_Dragon" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5019,7 +5019,7 @@ function getRoeRecords(triggers)
 
         [889] =
         { -- Conflict: Escha - Zi'Tah V
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Mosquito" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5028,7 +5028,7 @@ function getRoeRecords(triggers)
 
         [901] =
         { -- Conflict: Escha - Zi'Tah VI
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Puk" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5037,7 +5037,7 @@ function getRoeRecords(triggers)
 
         [902] =
         { -- Conflict: Escha - Zi'Tah VII
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Opo-opo" }, zone = set { 288 } },
             flags = set { "repeat" },
@@ -5046,7 +5046,7 @@ function getRoeRecords(triggers)
 
         [903] =
         { -- Conflict: Escha - Ru'Aun I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Ilaern" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5055,7 +5055,7 @@ function getRoeRecords(triggers)
 
         [904] =
         { -- Conflict: Escha - Ru'Aun II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Phuabo" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5064,7 +5064,7 @@ function getRoeRecords(triggers)
 
         [905] =
         { -- Conflict: Escha - Ru'Aun III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Euvhi" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5073,7 +5073,7 @@ function getRoeRecords(triggers)
 
         [906] =
         { -- Conflict: Escha - Ru'Aun IV
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Clionid" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5082,7 +5082,7 @@ function getRoeRecords(triggers)
 
         [907] =
         { -- Conflict: Escha - Ru'Aun V
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Hpemde" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5091,7 +5091,7 @@ function getRoeRecords(triggers)
 
         [908] =
         { -- Conflict: Escha - Ru'Aun VI
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Amoeban" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5100,7 +5100,7 @@ function getRoeRecords(triggers)
 
         [909] =
         { -- Conflict: Escha - Ru'Aun VII
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Xzomit" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5109,7 +5109,7 @@ function getRoeRecords(triggers)
 
         [910] =
         { -- Conflict: Escha - Ru'Aun VIII
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Murex" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5118,7 +5118,7 @@ function getRoeRecords(triggers)
 
         [911] =
         { -- Conflict: Escha - Ru'Aun IX
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Ghrah" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5127,7 +5127,7 @@ function getRoeRecords(triggers)
 
         [912] =
         { -- Conflict: Escha - Ru'Aun X
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Eschan_Limule" }, zone = set { 289 } },
             flags = set { "repeat" },
@@ -5139,7 +5139,7 @@ function getRoeRecords(triggers)
         -----------------------------------
         [943] =
         { -- Conflict: Reisenjima I
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Obstreperous_Panopt" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5148,7 +5148,7 @@ function getRoeRecords(triggers)
 
         [944] =
         { -- Conflict: Reisenjima II
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Snaggletoothed_Tiger" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5157,7 +5157,7 @@ function getRoeRecords(triggers)
 
         [945] =
         { -- Conflict: Reisenjima III
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Agitated_Chapuli" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5166,7 +5166,7 @@ function getRoeRecords(triggers)
 
         [946] =
         { -- Conflict: Reisenjima IV
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Indomitable_Faaz" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5175,7 +5175,7 @@ function getRoeRecords(triggers)
 
         [947] =
         { -- Conflict: Reisenjima V
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Territorial_Mantis" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5184,7 +5184,7 @@ function getRoeRecords(triggers)
 
         [948] =
         { -- Conflict: Reisenjima VI
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Devouring_Mosquito" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5193,7 +5193,7 @@ function getRoeRecords(triggers)
 
         [949] =
         { -- Conflict: Reisenjima VII
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Lentic_Toad" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5202,7 +5202,7 @@ function getRoeRecords(triggers)
 
         [950] =
         { -- Conflict: Reisenjima VIII
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Quarrelsome_Hippogryph" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5211,7 +5211,7 @@ function getRoeRecords(triggers)
 
         [951] =
         { -- Conflict: Reisenjima IX
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Rampaging_Beetle" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5220,7 +5220,7 @@ function getRoeRecords(triggers)
 
         [952] =
         { -- Conflict: Reisenjima X
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Glowering_Ladybug" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5229,7 +5229,7 @@ function getRoeRecords(triggers)
 
         [953] =
         { -- Conflict: Reisenjima XI
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobName = set { "Lucani" }, zone = set { 291 } },
             flags = set { "repeat" },
@@ -5242,7 +5242,7 @@ function getRoeRecords(triggers)
 
         [180] =
         { -- Harvesting: East Ronfaure
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 101 } },
             flags = set { "repeat" },
@@ -5251,7 +5251,7 @@ function getRoeRecords(triggers)
 
         [181] =
         { -- Harvesting: Ghelsba Outpost
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 140 } },
             flags = set { "repeat" },
@@ -5260,7 +5260,7 @@ function getRoeRecords(triggers)
 
         [182] =
         { -- Harvesting: Gusgen Mines
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 196 } },
             flags = set { "repeat" },
@@ -5269,7 +5269,7 @@ function getRoeRecords(triggers)
 
         [183] =
         { -- Harvesting: Jugner Forest
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 104 } },
             flags = set { "repeat" },
@@ -5278,7 +5278,7 @@ function getRoeRecords(triggers)
 
         [184] =
         { -- Harvesting: Zeruhn Mines
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 172 } },
             flags = set { "repeat" },
@@ -5287,7 +5287,7 @@ function getRoeRecords(triggers)
 
         [185] =
         { -- Harvesting: Palborough Mines
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 143 } },
             flags = set { "repeat" },
@@ -5296,7 +5296,7 @@ function getRoeRecords(triggers)
 
         [186] =
         { -- Harvesting: West Sarutabaruta
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 115 } },
             flags = set { "repeat" },
@@ -5305,7 +5305,7 @@ function getRoeRecords(triggers)
 
         [187] =
         { -- Harvesting: Giddeus
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 145 } },
             flags = set { "repeat" },
@@ -5314,7 +5314,7 @@ function getRoeRecords(triggers)
 
         [188] =
         { -- Harvesting: Buburimu Peninsula
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 118 } },
             flags = set { "repeat" },
@@ -5323,7 +5323,7 @@ function getRoeRecords(triggers)
 
         [189] =
         { -- Harvesting: Tahrongi Canyon
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 117 } },
             flags = set { "repeat" },
@@ -5332,7 +5332,7 @@ function getRoeRecords(triggers)
 
         [190] =
         { -- Harvesting: Maze of Shakhrami
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 198 } },
             flags = set { "repeat" },
@@ -5341,7 +5341,7 @@ function getRoeRecords(triggers)
 
         [389] =
         { -- Harvesting: Yughott Grotto
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 142 } },
             flags = set { "repeat" },
@@ -5358,7 +5358,7 @@ function getRoeRecords(triggers)
 
         [478] =
         { -- Harvesting: Yuhtunga Jungle
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 123 } },
             flags = set { "repeat" },
@@ -5367,7 +5367,7 @@ function getRoeRecords(triggers)
 
         [479] =
         { -- Harvesting: Yhoator Jungle
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 124 } },
             flags = set { "repeat" },
@@ -5376,7 +5376,7 @@ function getRoeRecords(triggers)
 
         [480] =
         { -- Harvesting: Ifrit's Cauldron
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 205 } },
             flags = set { "repeat" },
@@ -5385,7 +5385,7 @@ function getRoeRecords(triggers)
 
         [485] =
         { -- Harvesting: Korroloka Tunnel
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 173 } },
             flags = set { "repeat" },
@@ -5398,7 +5398,7 @@ function getRoeRecords(triggers)
 
         [481] =
         { -- Harvesting: Oldton Movalpolos
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 11 } },
             flags = set { "repeat" },
@@ -5407,7 +5407,7 @@ function getRoeRecords(triggers)
 
         [482] =
         { -- Harvesting: Newton Movalpolos
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 12 } },
             flags = set { "repeat" },
@@ -5416,7 +5416,7 @@ function getRoeRecords(triggers)
 
         [483] =
         { -- Harvesting: Lufaise Meadows
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 24 } },
             flags = set { "repeat" },
@@ -5425,7 +5425,7 @@ function getRoeRecords(triggers)
 
         [484] =
         { -- Harvesting: Misareaux Coast
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 25 } },
             flags = set { "repeat" },
@@ -5434,7 +5434,7 @@ function getRoeRecords(triggers)
 
         [486] =
         { -- Harvesting: Carpenters' Landing
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 2 } },
             flags = set { "repeat" },
@@ -5443,7 +5443,7 @@ function getRoeRecords(triggers)
 
         [487] =
         { -- Harvesting: Attohwa Chasm
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 7 } },
             flags = set { "repeat" },
@@ -5456,7 +5456,7 @@ function getRoeRecords(triggers)
 
         [599] =
         { -- Harvesting: Bhaflau Thickets
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 52 } },
             flags = set { "repeat" },
@@ -5465,7 +5465,7 @@ function getRoeRecords(triggers)
 
         [600] =
         { -- Harvesting: Mamook
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 65 } },
             flags = set { "repeat" },
@@ -5474,7 +5474,7 @@ function getRoeRecords(triggers)
 
         [601] =
         { -- Harvesting: Wajaom Woodlands
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 51 } },
             flags = set { "repeat" },
@@ -5483,7 +5483,7 @@ function getRoeRecords(triggers)
 
         [602] =
         { -- Harvesting: Halvung
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 62 } },
             flags = set { "repeat" },
@@ -5492,7 +5492,7 @@ function getRoeRecords(triggers)
 
         [603] =
         { -- Harvesting: Mount Zhayolm
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 61 } },
             flags = set { "repeat" },
@@ -5501,7 +5501,7 @@ function getRoeRecords(triggers)
 
         [604] =
         { -- Harvesting: Caedarva Mire
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 79 } },
             flags = set { "repeat" },
@@ -5514,7 +5514,7 @@ function getRoeRecords(triggers)
 
         [606] =
         { -- Harvesting: East Ronfaure [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 81 } },
             flags = set { "repeat" },
@@ -5523,7 +5523,7 @@ function getRoeRecords(triggers)
 
         [607] =
         { -- Harvesting: Jugner Forest [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 82 } },
             flags = set { "repeat" },
@@ -5532,7 +5532,7 @@ function getRoeRecords(triggers)
 
         [608] =
         { -- Harvesting: North Gustaberg [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 88 } },
             flags = set { "repeat" },
@@ -5541,7 +5541,7 @@ function getRoeRecords(triggers)
 
         [609] =
         { -- Harvesting: Grauberg [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 89 } },
             flags = set { "repeat" },
@@ -5550,7 +5550,7 @@ function getRoeRecords(triggers)
 
         [610] =
         { -- Harvesting: West Sarutabaruta [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 95 } },
             flags = set { "repeat" },
@@ -5559,7 +5559,7 @@ function getRoeRecords(triggers)
 
         [611] =
         { -- Harvesting: Fort Karugo-Narugo [S]
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 5,
             reqs = { zone = set { 96 } },
             flags = set { "repeat" },
@@ -5572,7 +5572,7 @@ function getRoeRecords(triggers)
 
         [63] =
         { -- Total Suc. Chocobo Digs
-            trigger = triggers.chocoboDigSuccess,
+            trigger = xi.roeTriggers.CHOCOBO_DIG_SUCCESS,
             goal = 30,
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 500, accolades = 10 },
@@ -5603,7 +5603,7 @@ function getRoeRecords(triggers)
 
         [727] =
         { -- Subjugation: Kirin
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17506670 } },
             flags = set { "repeat" },
             reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
@@ -5611,7 +5611,7 @@ function getRoeRecords(triggers)
 
         [728] =
         { -- Subjugation: Genbu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17309980 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5619,7 +5619,7 @@ function getRoeRecords(triggers)
 
         [729] =
         { -- Subjugation: Suzaku
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17309983 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5627,7 +5627,7 @@ function getRoeRecords(triggers)
 
         [730] =
         { -- Subjugation: Seiryu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17309981 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5635,7 +5635,7 @@ function getRoeRecords(triggers)
 
         [731] =
         { -- Subjugation: Byakko
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17309982 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5643,7 +5643,7 @@ function getRoeRecords(triggers)
 
         [768] =
         { -- Subjugation: Jailer of Justice
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16912839 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5651,7 +5651,7 @@ function getRoeRecords(triggers)
 
         [769] =
         { -- Subjugation: Jailer of Hope
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16912838 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5666,7 +5666,7 @@ function getRoeRecords(triggers)
 
         [771] =
         { -- Subjugation: Jailer of Love
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16912848 } },
             flags = set { "repeat" },
             reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
@@ -5674,7 +5674,7 @@ function getRoeRecords(triggers)
 
         [812] =
         { -- Subjugation: Battleclad Chariot
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17076578 } },
             flags = set { "repeat" },
             reward = { sparks = 500, xp = 2500, accolades = 50 },
@@ -5682,7 +5682,7 @@ function getRoeRecords(triggers)
 
         [813] =
         { -- Subjugation: Armored Chariot
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17080585 } },
             flags = set { "repeat" },
             reward = { sparks = 500, xp = 2500, accolades = 50 },
@@ -5690,7 +5690,7 @@ function getRoeRecords(triggers)
 
         [814] =
         { -- Subjugation: Long-Bowed Chariot
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17084687 } },
             flags = set { "repeat" },
             reward = { sparks = 500, xp = 2500, accolades = 50 },
@@ -5698,7 +5698,7 @@ function getRoeRecords(triggers)
 
         [815] =
         { -- Subjugation: Long-Armed Chariot
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17088786 } },
             flags = set { "repeat" },
             reward = { sparks = 500, xp = 2500, accolades = 50 },
@@ -5710,7 +5710,7 @@ function getRoeRecords(triggers)
 
         [732] =
         { -- Subjugation: Overlord's Tombstone
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17534977 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5718,7 +5718,7 @@ function getRoeRecords(triggers)
 
         [733] =
         { -- Subjugation: Bladeburner Rokgevok
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17535207 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5726,7 +5726,7 @@ function getRoeRecords(triggers)
 
         [734] =
         { -- Subjugation: Steelshank Kratzvatz
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17535208 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5734,7 +5734,7 @@ function getRoeRecords(triggers)
 
         [735] =
         { -- Subjugation: Bloodfist Voshgrosh
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17535210 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5742,7 +5742,7 @@ function getRoeRecords(triggers)
 
         [736] =
         { -- Subjugation: Spellspear Djokvukk
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17535211 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5750,7 +5750,7 @@ function getRoeRecords(triggers)
 
         [737] =
         { -- Subjugation: Gu'Dha Effigy
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17539073 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5758,7 +5758,7 @@ function getRoeRecords(triggers)
 
         [738] =
         { -- Subjugation: Zo'Pha Forgesoul
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17539307 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5766,7 +5766,7 @@ function getRoeRecords(triggers)
 
         [739] =
         { -- Subjugation: Ra'Gho Darkfount
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17539308 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5774,7 +5774,7 @@ function getRoeRecords(triggers)
 
         [740] =
         { -- Subjugation: Va'Zhe Pummelsong
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17539310 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5782,7 +5782,7 @@ function getRoeRecords(triggers)
 
         [741] =
         { -- Subjugation: Bu'Bho Truesteel
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17539311 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5790,7 +5790,7 @@ function getRoeRecords(triggers)
 
         [742] =
         { -- Subjugation: Tzee Xicu Idol
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17543169 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5798,7 +5798,7 @@ function getRoeRecords(triggers)
 
         [743] =
         { -- Subjugation: Xuu Bhoqa the Enigma
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17543464 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5806,7 +5806,7 @@ function getRoeRecords(triggers)
 
         [744] =
         { -- Subjugation: Fuu Tzapo the Blessed
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17543466 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5814,7 +5814,7 @@ function getRoeRecords(triggers)
 
         [745] =
         { -- Subjugation: Naa Yixo the Stillrage
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17543467 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5822,7 +5822,7 @@ function getRoeRecords(triggers)
 
         [746] =
         { -- Subjugation: Tee Zaska the Ceaseless
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17543468 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5830,7 +5830,7 @@ function getRoeRecords(triggers)
 
         [747] =
         { -- Subjugation: Goblin Golem
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17547265 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5838,7 +5838,7 @@ function getRoeRecords(triggers)
 
         [748] =
         { -- Subjugation: Quicktrix Hexhands
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17547493 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5846,7 +5846,7 @@ function getRoeRecords(triggers)
 
         [749] =
         { -- Subjugation: Feralox Honeylips
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17547494 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5854,7 +5854,7 @@ function getRoeRecords(triggers)
 
         [750] =
         { -- Subjugation: Scourquix Scaleskin
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17547496 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5862,7 +5862,7 @@ function getRoeRecords(triggers)
 
         [751] =
         { -- Subjugation: Wilywox Tenderpalm
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17547498 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5874,7 +5874,7 @@ function getRoeRecords(triggers)
 
         [752] =
         { -- Subjugation: Angra Mainyu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17326081 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5882,7 +5882,7 @@ function getRoeRecords(triggers)
 
         [753] =
         { -- Subjugation: Taquede
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17326093 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5890,7 +5890,7 @@ function getRoeRecords(triggers)
 
         [754] =
         { -- Subjugation: Pignonpausard
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17326095 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5898,7 +5898,7 @@ function getRoeRecords(triggers)
 
         [755] =
         { -- Subjugation: Hitaume
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17326096 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5906,7 +5906,7 @@ function getRoeRecords(triggers)
 
         [756] =
         { -- Subjugation: Cavanneche
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17326097 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5914,7 +5914,7 @@ function getRoeRecords(triggers)
 
         [757] =
         { -- Subjugation: Dynamis Lord
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17330177 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5922,7 +5922,7 @@ function getRoeRecords(triggers)
 
         [758] =
         { -- Subjugation: Duke Haures
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17330185 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5930,7 +5930,7 @@ function getRoeRecords(triggers)
 
         [759] =
         { -- Subjugation: Marquis Caim
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17330186 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5938,7 +5938,7 @@ function getRoeRecords(triggers)
 
         [760] =
         { -- Subjugation: Baron Avnas
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17330188 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5946,7 +5946,7 @@ function getRoeRecords(triggers)
 
         [761] =
         { -- Subjugation: Count Haagenti
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17330189 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -5958,7 +5958,7 @@ function getRoeRecords(triggers)
 
         [772] =
         { -- Spoils - Ivory Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.IVORY_CHIP } },
             flags = set { "repeat" },
@@ -5967,7 +5967,7 @@ function getRoeRecords(triggers)
 
         [773] =
         { -- Spoils - Scarlet Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SCARLET_CHIP } },
             flags = set { "repeat" },
@@ -5976,7 +5976,7 @@ function getRoeRecords(triggers)
 
         [774] =
         { -- Spoils - Emerald Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.EMERALD_CHIP } },
             flags = set { "repeat" },
@@ -5985,7 +5985,7 @@ function getRoeRecords(triggers)
 
         [775] =
         { -- Spoils - Orchid Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.ORCHID_CHIP } },
             flags = set { "repeat" },
@@ -5994,7 +5994,7 @@ function getRoeRecords(triggers)
 
         [776] =
         { -- Spoils - Cerulean Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.CERULEAN_CHIP } },
             flags = set { "repeat" },
@@ -6003,7 +6003,7 @@ function getRoeRecords(triggers)
 
         [777] =
         { -- Spoils - Silver Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SILVER_CHIP } },
             flags = set { "repeat" },
@@ -6012,7 +6012,7 @@ function getRoeRecords(triggers)
 
         [778] =
         { -- Spoils - Smoky Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SMOKY_CHIP } },
             flags = set { "repeat" },
@@ -6021,7 +6021,7 @@ function getRoeRecords(triggers)
 
         [779] =
         { -- Spoils - Magenta Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.MAGENTA_CHIP } },
             flags = set { "repeat" },
@@ -6030,7 +6030,7 @@ function getRoeRecords(triggers)
 
         [780] =
         { -- Spoils - Charcoal Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.CHARCOAL_CHIP } },
             flags = set { "repeat" },
@@ -6039,7 +6039,7 @@ function getRoeRecords(triggers)
 
         [781] =
         { -- Spoils - Smalt Chip
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 1,
             reqs = { itemID = set { xi.item.SMALT_CHIP } },
             flags = set { "repeat" },
@@ -6048,7 +6048,7 @@ function getRoeRecords(triggers)
 
         [782] =
         { -- Subjugation: Proto-Ultima
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16928966 } },
             flags = set { "repeat" },
             reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
@@ -6056,7 +6056,7 @@ function getRoeRecords(triggers)
 
         [783] =
         { -- Subjugation: Proto-Omega
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16933124 } },
             flags = set { "repeat" },
             reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
@@ -6068,7 +6068,7 @@ function getRoeRecords(triggers)
 
         [785] =
         { -- Subjugation: Vulpangue
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16986428 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6076,7 +6076,7 @@ function getRoeRecords(triggers)
 
         [786] =
         { -- Subjugation: Chamrosh
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17043887 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6084,7 +6084,7 @@ function getRoeRecords(triggers)
 
         [787] =
         { -- Subjugation: Cheese Hoarder Gigiroon
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17072172 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6092,7 +6092,7 @@ function getRoeRecords(triggers)
 
         [788] =
         { -- Subjugation: Brass Borer
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17027471 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6100,7 +6100,7 @@ function getRoeRecords(triggers)
 
         [789] =
         { -- Subjugation: Claret
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17027472 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6108,7 +6108,7 @@ function getRoeRecords(triggers)
 
         [790] =
         { -- Subjugation: Ob
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17072171 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6116,7 +6116,7 @@ function getRoeRecords(triggers)
 
         [791] =
         { -- Subjugation: Velionis
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16998872 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6124,7 +6124,7 @@ function getRoeRecords(triggers)
 
         [792] =
         { -- Subjugation Lil' Apkallu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16998871 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6132,7 +6132,7 @@ function getRoeRecords(triggers)
 
         [793] =
         { -- Subjugation: Chigre
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17056186 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6140,7 +6140,7 @@ function getRoeRecords(triggers)
 
         [794] =
         { -- Subjugation: Iriz Ima
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16986429 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6148,7 +6148,7 @@ function getRoeRecords(triggers)
 
         [795] =
         { -- Subjugation: Lividroot Amooshah
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16990506 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6156,7 +6156,7 @@ function getRoeRecords(triggers)
 
         [796] =
         { -- Subjugation: Iriri Samariri
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17043888 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6164,7 +6164,7 @@ function getRoeRecords(triggers)
 
         [797] =
         { -- Subjugation: Anantaboga
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17027473 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6172,7 +6172,7 @@ function getRoeRecords(triggers)
 
         [798] =
         { -- Subjugation: Reacton
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17031599 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6180,7 +6180,7 @@ function getRoeRecords(triggers)
 
         [799] =
         { -- Subjugation: Dextrose
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17031598 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6188,7 +6188,7 @@ function getRoeRecords(triggers)
 
         [800] =
         { -- Subjugation: Wulgaru
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17072179 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6196,7 +6196,7 @@ function getRoeRecords(triggers)
 
         [801] =
         { -- Subjugation: Zareehkl the Jubilant
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16998873 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6204,7 +6204,7 @@ function getRoeRecords(triggers)
 
         [802] =
         { -- Subjugation: Verdelet
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17101202 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6212,7 +6212,7 @@ function getRoeRecords(triggers)
 
         [803] =
         { -- Subjugation: Armed Gears
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17072178 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6220,7 +6220,7 @@ function getRoeRecords(triggers)
 
         [804] =
         { -- Subjugation: Gotoh Zha the Redolent
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16986430 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6228,7 +6228,7 @@ function getRoeRecords(triggers)
 
         [805] =
         { -- Subjugation: Dea
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16990507 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6236,7 +6236,7 @@ function getRoeRecords(triggers)
 
         [806] =
         { -- Subjugation: Nosferatu
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17056157 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6244,7 +6244,7 @@ function getRoeRecords(triggers)
 
         [807] =
         { -- Subjugation: Khromasoul Bhurborlor
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17027474 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6252,7 +6252,7 @@ function getRoeRecords(triggers)
 
         [808] =
         { -- Subjugation: Achamoth
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17031600 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6260,7 +6260,7 @@ function getRoeRecords(triggers)
 
         [809] =
         { -- Subjugation: Mahjlaef the Paintorn
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17101204 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6268,7 +6268,7 @@ function getRoeRecords(triggers)
 
         [810] =
         { -- Subjugation: Experimental Lamia
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17101205 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6276,7 +6276,7 @@ function getRoeRecords(triggers)
 
         [811] =
         { -- Subjugation: Nuhn
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16998874 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
@@ -6288,7 +6288,7 @@ function getRoeRecords(triggers)
 
         [1200] =
         { -- Level 30 Warrior +
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WAR, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_DEATH_FOR_DIMWITS, 12 } } },
@@ -6296,7 +6296,7 @@ function getRoeRecords(triggers)
 
         [1201] =
         { -- Level 50 Warrior
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WAR, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
@@ -6304,7 +6304,7 @@ function getRoeRecords(triggers)
 
         [1202] =
         { -- Level 75 Warrior
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WAR, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.RAVAGERS_SEAL_FEET, 4 } } },
@@ -6312,7 +6312,7 @@ function getRoeRecords(triggers)
 
         [1203] =
         { -- Level 99 Warrior
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WAR, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
@@ -6320,7 +6320,7 @@ function getRoeRecords(triggers)
 
         [1204] =
         { -- Level 30 Monk
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.MNK, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
@@ -6328,7 +6328,7 @@ function getRoeRecords(triggers)
 
         [1205] =
         { -- Level 50 Monk
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.MNK, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
@@ -6336,7 +6336,7 @@ function getRoeRecords(triggers)
 
         [1206] =
         { -- Level 75 Monk
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.MNK, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.TANTRA_SEAL_FEET, 4 } } },
@@ -6344,7 +6344,7 @@ function getRoeRecords(triggers)
 
         [1207] =
         { -- Level 99 Monk
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.MNK, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
@@ -6352,7 +6352,7 @@ function getRoeRecords(triggers)
 
         [1208] =
         { -- Level 30 White Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WHM, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_COVEFFE_BARROWS_MUSINGS, 12 } } },
@@ -6360,7 +6360,7 @@ function getRoeRecords(triggers)
 
         [1209] =
         { -- Level 50 White Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WHM, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_ALTANAS_HYMN, 12 } } },
@@ -6368,7 +6368,7 @@ function getRoeRecords(triggers)
 
         [1210] =
         { -- Level 75 White Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WHM, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.ORISON_SEAL_FEET, 4 } } },
@@ -6376,7 +6376,7 @@ function getRoeRecords(triggers)
 
         [1211] =
         { -- Level 99 White Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.WHM, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
@@ -6384,7 +6384,7 @@ function getRoeRecords(triggers)
 
         [1212] =
         { -- Level 30 Black Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLM, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.BOUNTY_LIST, 12 } } },
@@ -6392,7 +6392,7 @@ function getRoeRecords(triggers)
 
         [1213] =
         { -- Level 50 Black Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLM, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_DARK_DEEDS, 12 } } },
@@ -6400,7 +6400,7 @@ function getRoeRecords(triggers)
 
         [1214] =
         { -- Level 75 Black Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLM, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.GOETIA_SEAL_FEET, 4 } } },
@@ -6408,7 +6408,7 @@ function getRoeRecords(triggers)
 
         [1215] =
         { -- Level 99 Black Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLM, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
@@ -6416,7 +6416,7 @@ function getRoeRecords(triggers)
 
         [1216] =
         { -- Level 30 Red Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RDM, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.INVESTIGATIVE_REPORT, 12 } } },
@@ -6424,7 +6424,7 @@ function getRoeRecords(triggers)
 
         [1217] =
         { -- Level 50 Red Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RDM, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_AID_FOR_ALL, 12 } } },
@@ -6432,7 +6432,7 @@ function getRoeRecords(triggers)
 
         [1218] =
         { -- Level 75 Red Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RDM, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.ESTOQUEURS_SEAL_FEET, 4 } } },
@@ -6440,7 +6440,7 @@ function getRoeRecords(triggers)
 
         [1219] =
         { -- Level 99 Red Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RDM, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
@@ -6448,7 +6448,7 @@ function getRoeRecords(triggers)
 
         [1220] =
         { -- Level 30 Thief
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.THF, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
@@ -6456,7 +6456,7 @@ function getRoeRecords(triggers)
 
         [1221] =
         { -- Level 50 Thief
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.THF, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
@@ -6464,7 +6464,7 @@ function getRoeRecords(triggers)
 
         [1222] =
         { -- Level 75 Thief
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.THF, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.RAIDERS_SEAL_FEET, 4 } } },
@@ -6472,7 +6472,7 @@ function getRoeRecords(triggers)
 
         [1223] =
         { -- Level 99 Thief
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.THF, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 2 } } },
@@ -6484,7 +6484,7 @@ function getRoeRecords(triggers)
 
         [1224] =
         { -- Level 30 Paladin
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PLD, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
@@ -6492,7 +6492,7 @@ function getRoeRecords(triggers)
 
         [1225] =
         { -- Level 50 Paladin
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PLD, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_SUCCESSOR, 12 } } },
@@ -6500,7 +6500,7 @@ function getRoeRecords(triggers)
 
         [1226] =
         { -- Level 75 Paladin
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PLD, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.CREED_SEAL_FEET, 4 } } },
@@ -6508,7 +6508,7 @@ function getRoeRecords(triggers)
 
         [1227] =
         { -- Level 99 Paladin
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PLD, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
@@ -6516,7 +6516,7 @@ function getRoeRecords(triggers)
 
         [1228] =
         { -- Level 30 Dark Knight
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRK, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
@@ -6524,7 +6524,7 @@ function getRoeRecords(triggers)
 
         [1229] =
         { -- Level 50 Dark Knight
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRK, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
@@ -6532,7 +6532,7 @@ function getRoeRecords(triggers)
 
         [1230] =
         { -- Level 75 Dark Knight
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRK, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.BALE_SEAL_FEET, 4 } } },
@@ -6540,7 +6540,7 @@ function getRoeRecords(triggers)
 
         [1231] =
         { -- Level 99 Dark Knight
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRK, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
@@ -6548,7 +6548,7 @@ function getRoeRecords(triggers)
 
         [1232] =
         { -- Level 30 Beastmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BST, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
@@ -6556,7 +6556,7 @@ function getRoeRecords(triggers)
 
         [1233] =
         { -- Level 50 Beastmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BST, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
@@ -6564,7 +6564,7 @@ function getRoeRecords(triggers)
 
         [1234] =
         { -- Level 75 Beastmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BST, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.FERINE_SEAL_FEET, 4 } } },
@@ -6572,7 +6572,7 @@ function getRoeRecords(triggers)
 
         [1235] =
         { -- Level 99 Beastmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BST, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
@@ -6580,7 +6580,7 @@ function getRoeRecords(triggers)
 
         [1236] =
         { -- Level 30 Bard
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BRD, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_BREEZY_LIBRETTO, 12 } } },
@@ -6588,7 +6588,7 @@ function getRoeRecords(triggers)
 
         [1237] =
         { -- Level 50 Bard
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BRD, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.CAVERNOUS_SCORE, 12 } } },
@@ -6596,7 +6596,7 @@ function getRoeRecords(triggers)
 
         [1238] =
         { -- Level 75 Bard
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BRD, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.AOIDOS_SEAL_FEET, 4 } } },
@@ -6604,7 +6604,7 @@ function getRoeRecords(triggers)
 
         [1239] =
         { -- Level 99 Bard
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BRD, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
@@ -6612,7 +6612,7 @@ function getRoeRecords(triggers)
 
         [1240] =
         { -- Level 30 Ranger
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RNG, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_PERIHS_PRIMER, 12 } } },
@@ -6620,7 +6620,7 @@ function getRoeRecords(triggers)
 
         [1241] =
         { -- Level 50 Ranger
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RNG, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
@@ -6628,7 +6628,7 @@ function getRoeRecords(triggers)
 
         [1242] =
         { -- Level 75 Ranger
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RNG, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.SYLVAN_SEAL_FEET, 4 } } },
@@ -6636,7 +6636,7 @@ function getRoeRecords(triggers)
 
         [1243] =
         { -- Level 99 Ranger
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RNG, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
@@ -6644,7 +6644,7 @@ function getRoeRecords(triggers)
 
         [1244] =
         { -- Level 30 Samurai
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SAM, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_NOILLURIES_LOG, 12 } } },
@@ -6652,7 +6652,7 @@ function getRoeRecords(triggers)
 
         [1245] =
         { -- Level 50 Samurai
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SAM, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
@@ -6660,7 +6660,7 @@ function getRoeRecords(triggers)
 
         [1246] =
         { -- Level 75 Samurai
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SAM, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.UNKAI_SEAL_FEET, 4 } } },
@@ -6668,7 +6668,7 @@ function getRoeRecords(triggers)
 
         [1247] =
         { -- Level 99 Samurai
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SAM, 99 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
@@ -6680,7 +6680,7 @@ function getRoeRecords(triggers)
 
         [1248] =
         { -- Level 30 Ninja
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.NIN, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAGETORAS_DIARY, 12 } } },
@@ -6688,7 +6688,7 @@ function getRoeRecords(triggers)
 
         [1249] =
         { -- Level 50 Ninja
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.NIN, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_YOMIS_DIAGRAM, 12 } } },
@@ -6696,7 +6696,7 @@ function getRoeRecords(triggers)
 
         [1250] =
         { -- Level 75 Ninja
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.NIN, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.IGA_SEAL_FEET, 4 } } },
@@ -6704,7 +6704,7 @@ function getRoeRecords(triggers)
 
         [1251] =
         { -- Level 99 Ninja
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.NIN, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
@@ -6712,7 +6712,7 @@ function getRoeRecords(triggers)
 
         [1252] =
         { -- Level 30 Dragoon
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRG, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
@@ -6720,7 +6720,7 @@ function getRoeRecords(triggers)
 
         [1253] =
         { -- Level 50 Dragoon
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRG, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
@@ -6728,7 +6728,7 @@ function getRoeRecords(triggers)
 
         [1254] =
         { -- Level 75 Dragoon
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRG, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.LANCERS_SEAL_FEET, 4 } } },
@@ -6736,7 +6736,7 @@ function getRoeRecords(triggers)
 
         [1255] =
         { -- Level 99 Dragoon
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DRG, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
@@ -6744,7 +6744,7 @@ function getRoeRecords(triggers)
 
         [1256] =
         { -- Level 30 Summoner
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SMN, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_ASTRAL_HOMELAND, 12 } } },
@@ -6752,7 +6752,7 @@ function getRoeRecords(triggers)
 
         [1257] =
         { -- Level 50 Summoner
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SMN, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
@@ -6760,7 +6760,7 @@ function getRoeRecords(triggers)
 
         [1258] =
         { -- Level 75 Summoner
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SMN, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.CALLERS_SEAL_FEET, 4 } } },
@@ -6768,7 +6768,7 @@ function getRoeRecords(triggers)
 
         [1259] =
         { -- Level 99 Summoner
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SMN, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
@@ -6776,7 +6776,7 @@ function getRoeRecords(triggers)
 
         [1260] =
         { -- Level 30 Blue Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLU, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
@@ -6784,7 +6784,7 @@ function getRoeRecords(triggers)
 
         [1261] =
         { -- Level 50 Blue Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLU, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LIFE_FORM_STUDY, 12 } } },
@@ -6792,7 +6792,7 @@ function getRoeRecords(triggers)
 
         [1262] =
         { -- Level 75 Blue Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLU, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.MAVI_SEAL_FEET, 4 } } },
@@ -6800,7 +6800,7 @@ function getRoeRecords(triggers)
 
         [1263] =
         { -- Level 99 Blue Mage
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.BLU, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
@@ -6808,7 +6808,7 @@ function getRoeRecords(triggers)
 
         [1264] =
         { -- Level 30 Corsair
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.COR, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
@@ -6816,7 +6816,7 @@ function getRoeRecords(triggers)
 
         [1265] =
         { -- Level 50 Corsair
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.COR, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
@@ -6824,7 +6824,7 @@ function getRoeRecords(triggers)
 
         [1266] =
         { -- Level 75 Corsair
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.COR, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.NAVARCHS_SEAL_FEET, 4 } } },
@@ -6832,7 +6832,7 @@ function getRoeRecords(triggers)
 
         [1267] =
         { -- Level 99 Corsair
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.COR, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
@@ -6840,7 +6840,7 @@ function getRoeRecords(triggers)
 
         [1268] =
         { -- Level 30 Puppetmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PUP, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
@@ -6848,7 +6848,7 @@ function getRoeRecords(triggers)
 
         [1269] =
         { -- Level 50 Puppetmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PUP, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
@@ -6856,7 +6856,7 @@ function getRoeRecords(triggers)
 
         [1270] =
         { -- Level 75 Puppetmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PUP, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.CIRQUE_SEAL_FEET, 4 } } },
@@ -6864,7 +6864,7 @@ function getRoeRecords(triggers)
 
         [1271] =
         { -- Level 99 Puppetmaster
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.PUP, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
@@ -6876,7 +6876,7 @@ function getRoeRecords(triggers)
 
         [1272] =
         { -- Level 30 Dancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DNC, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
@@ -6884,7 +6884,7 @@ function getRoeRecords(triggers)
 
         [1273] =
         { -- Level 50 Dancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DNC, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
@@ -6892,7 +6892,7 @@ function getRoeRecords(triggers)
 
         [1274] =
         { -- Level 75 Dancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DNC, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.CHARIS_SEAL_FEET, 4 } } },
@@ -6900,7 +6900,7 @@ function getRoeRecords(triggers)
 
         [1275] =
         { -- Level 99 Dancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.DNC, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
@@ -6908,7 +6908,7 @@ function getRoeRecords(triggers)
 
         [1276] =
         { -- Level 30 Scholar
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SCH, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
@@ -6916,7 +6916,7 @@ function getRoeRecords(triggers)
 
         [1277] =
         { -- Level 50 Scholar
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SCH, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_FERREOUSS_DIARY, 12 } } },
@@ -6924,7 +6924,7 @@ function getRoeRecords(triggers)
 
         [1278] =
         { -- Level 75 Scholar
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SCH, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.SAVANTS_SEAL_FEET, 4 } } },
@@ -6932,7 +6932,7 @@ function getRoeRecords(triggers)
 
         [1279] =
         { -- Level 99 Scholar
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.SCH, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
@@ -6940,7 +6940,7 @@ function getRoeRecords(triggers)
 
         [1280] =
         { -- Level 30 Geomancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.GEO, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_HROHJS_RECORD, 12 } } },
@@ -6948,7 +6948,7 @@ function getRoeRecords(triggers)
 
         [1281] =
         { -- Level 50 Geomancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.GEO, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_BELL_TOLLS, 12 } } },
@@ -6956,7 +6956,7 @@ function getRoeRecords(triggers)
 
         [1282] =
         { -- Level 75 Geomancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.GEO, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.PLATE_OF_INDI_FRAILTY, 1 } } },
@@ -6964,7 +6964,7 @@ function getRoeRecords(triggers)
 
         [1283] =
         { -- Level 99 Geomancer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.GEO, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 1 } } },
@@ -6972,7 +6972,7 @@ function getRoeRecords(triggers)
 
         [1284] =
         { -- Level 30 Runefencer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RUN, 30 } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
@@ -6980,7 +6980,7 @@ function getRoeRecords(triggers)
 
         [1285] =
         { -- Level 50 Runefencer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RUN, 50 } },
             flags = set { "retro" },
             reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
@@ -6988,7 +6988,7 @@ function getRoeRecords(triggers)
 
         [1286] =
         { -- Level 75 Runefencer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RUN, 75 } },
             flags = set { "retro" },
             reward = { sparks = 300, xp = 500, item = { { xi.item.SCROLL_OF_CRUSADE, 1 } } },
@@ -6996,7 +6996,7 @@ function getRoeRecords(triggers)
 
         [1287] =
         { -- Level 99 Runefencer
-            trigger = triggers.levelUp,
+            trigger = xi.roeTriggers.ACHIEVE_LEVEL,
             reqs = { jobLvl = { xi.job.RUN, 99 } },
             flags = set { "retro" },
             reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_7, 1 } } },
@@ -7008,14 +7008,14 @@ function getRoeRecords(triggers)
 
         [3000] =
         { -- Unity Communique A (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3002] =
         { -- Vanquish Multiple Enemies A (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7024,7 +7024,7 @@ function getRoeRecords(triggers)
 
         [3003] =
         { -- Vanquish Aquans A (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.AQUAN } },
             flags = set { "unity" },
@@ -7033,7 +7033,7 @@ function getRoeRecords(triggers)
 
         [3004] =
         { -- Vanquish Amorphs with Physical Damage A (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.AMORPH } },
             flags = set { "unity" },
@@ -7042,7 +7042,7 @@ function getRoeRecords(triggers)
 
         [3005] =
         { -- Vanquish Beasts with Magic A (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.BEAST } },
             flags = set { "unity" },
@@ -7051,7 +7051,7 @@ function getRoeRecords(triggers)
 
         [3006] =
         { -- Total Successful Woodworking Syntheses A (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.WOODWORKING },
             flags = set { "unity" },
@@ -7060,7 +7060,7 @@ function getRoeRecords(triggers)
 
         [3007] =
         { -- Total Successful Leatherworking Syntheses A (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.LEATHERCRAFT },
             flags = set { "unity" },
@@ -7069,7 +7069,7 @@ function getRoeRecords(triggers)
 
         [3008] =
         { -- Total Suc. Mining Attempts A (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 4 },
             flags = set { "unity" },
@@ -7082,14 +7082,14 @@ function getRoeRecords(triggers)
 
         [3009] =
         { -- Unity Communique B (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3010] =
         { -- Chocobo Digging B (UC)
-            trigger = triggers.chocoboDigSuccess,
+            trigger = xi.roeTriggers.CHOCOBO_DIG_SUCCESS,
             goal = 10,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
@@ -7097,7 +7097,7 @@ function getRoeRecords(triggers)
 
         [3011] =
         { -- Vanquish Multiple Enemies B (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7106,7 +7106,7 @@ function getRoeRecords(triggers)
 
         [3012] =
         { -- Vanquish Arcana B (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.ARCANA } },
             flags = set { "unity" },
@@ -7115,7 +7115,7 @@ function getRoeRecords(triggers)
 
         [3013] =
         { -- Vanquish Undead with Physical Damage B (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.UNDEAD } },
             flags = set { "unity" },
@@ -7124,7 +7124,7 @@ function getRoeRecords(triggers)
 
         [3014] =
         { -- Vanquish Plantoids with Magic B (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.PLANTOID } },
             flags = set { "unity" },
@@ -7133,7 +7133,7 @@ function getRoeRecords(triggers)
 
         [3015] =
         { -- Total Successful Blacksmithing Syntheses B (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.SMITHING },
             flags = set { "unity" },
@@ -7142,7 +7142,7 @@ function getRoeRecords(triggers)
 
         [3017] =
         { -- Total Suc. Logging Attempts B (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 3 },
             flags = set { "unity" },
@@ -7155,14 +7155,14 @@ function getRoeRecords(triggers)
 
         [3018] =
         { -- Unity Communique C (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3020] =
         { -- Vanquish Multiple Enemies C (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7171,7 +7171,7 @@ function getRoeRecords(triggers)
 
         [3021] =
         { -- Vanquish Vermin C (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.VERMIN } },
             flags = set { "unity" },
@@ -7180,7 +7180,7 @@ function getRoeRecords(triggers)
 
         [3022] =
         { -- Vanquish Birds with Physical Damage C (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.BIRD } },
             flags = set { "unity" },
@@ -7189,7 +7189,7 @@ function getRoeRecords(triggers)
 
         [3023] =
         { -- Vanquish Lizards with Magic C (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.LIZARD } },
             flags = set { "unity" },
@@ -7198,7 +7198,7 @@ function getRoeRecords(triggers)
 
         [3024] =
         { -- Total Successful Goldsmithing Syntheses C (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.GOLDSMITHING },
             flags = set { "unity" },
@@ -7207,7 +7207,7 @@ function getRoeRecords(triggers)
 
         [3026] =
         { -- Total Suc. Harvesting Attempts C (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 1 },
             flags = set { "unity" },
@@ -7220,14 +7220,14 @@ function getRoeRecords(triggers)
 
         [3027] =
         { -- Unity Communique D (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3029] =
         { -- Vanquish Multiple Enemies D (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7236,7 +7236,7 @@ function getRoeRecords(triggers)
 
         [3030] =
         { -- Vanquish Beasts D (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.BEAST } },
             flags = set { "unity" },
@@ -7245,7 +7245,7 @@ function getRoeRecords(triggers)
 
         [3031] =
         { -- Vanquish Aquans with Physical Damage D (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.AQUAN } },
             flags = set { "unity" },
@@ -7254,7 +7254,7 @@ function getRoeRecords(triggers)
 
         [3032] =
         { -- Vanquish Amorphs with Magic D (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.AMORPH } },
             flags = set { "unity" },
@@ -7263,7 +7263,7 @@ function getRoeRecords(triggers)
 
         [3033] =
         { -- Total Successful Cloth Syntheses D (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.CLOTHCRAFT },
             flags = set { "unity" },
@@ -7272,7 +7272,7 @@ function getRoeRecords(triggers)
 
         [3034] =
         { -- Total Successful Bone Syntheses D (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.BONECRAFT },
             flags = set { "unity" },
@@ -7281,7 +7281,7 @@ function getRoeRecords(triggers)
 
         [3035] =
         { -- Total Suc. Mining Attempts D (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 4 },
             flags = set { "unity" },
@@ -7294,14 +7294,14 @@ function getRoeRecords(triggers)
 
         [3036] =
         { -- Unity Communique E (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3038] =
         { -- Vanquish Multiple Enemies E (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7310,7 +7310,7 @@ function getRoeRecords(triggers)
 
         [3039] =
         { -- Vanquish Plantoids E (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.PLANTOID } },
             flags = set { "unity" },
@@ -7319,7 +7319,7 @@ function getRoeRecords(triggers)
 
         [3040] =
         { -- Vanquish Arcana with Physical Damage E (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.ARCANA } },
             flags = set { "unity" },
@@ -7328,7 +7328,7 @@ function getRoeRecords(triggers)
 
         [3041] =
         { -- Vanquish Undead with Magic E (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.UNDEAD } },
             flags = set { "unity" },
@@ -7337,7 +7337,7 @@ function getRoeRecords(triggers)
 
         [3042] =
         { -- Total Successful Cooking Syntheses E (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.COOKING },
             flags = set { "unity" },
@@ -7346,7 +7346,7 @@ function getRoeRecords(triggers)
 
         [3044] =
         { -- Total Suc. Logging Attempts E (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 3 },
             flags = set { "unity" },
@@ -7359,14 +7359,14 @@ function getRoeRecords(triggers)
 
         [3045] =
         { -- Unity Communique F (UC)
-            trigger = triggers.unityChat,
+            trigger = xi.roeTriggers.UNITY_CHAT,
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 100 },
         },
 
         [3046] =
         { -- Level Sync to Vanquish Enemies F (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, levelSync = true },
             flags = set { "unity" },
@@ -7375,7 +7375,7 @@ function getRoeRecords(triggers)
 
         [3047] =
         { -- Vanquish Multiple Enemies F (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true },
             flags = set { "unity" },
@@ -7384,7 +7384,7 @@ function getRoeRecords(triggers)
 
         [3048] =
         { -- Vanquish Lizards F (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, mobSystem = set { xi.eco.LIZARD } },
             flags = set { "unity" },
@@ -7393,7 +7393,7 @@ function getRoeRecords(triggers)
 
         [3049] =
         { -- Vanquish Vermin with Physical Damage F (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.VERMIN } },
             flags = set { "unity" },
@@ -7402,7 +7402,7 @@ function getRoeRecords(triggers)
 
         [3050] =
         { -- Vanquish Birds with Magic F (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.BIRD } },
             flags = set { "unity" },
@@ -7411,7 +7411,7 @@ function getRoeRecords(triggers)
 
         [3051] =
         { -- Total Successful Alchemy Syntheses F (UC)
-            trigger = triggers.synthSuccess,
+            trigger = xi.roeTriggers.SUCCESSFUL_SYNTHESIS,
             goal = 10,
             reqs = { skillType = xi.skill.ALCHEMY },
             flags = set { "unity" },
@@ -7420,7 +7420,7 @@ function getRoeRecords(triggers)
 
         [3053] =
         { -- Total Suc. Harvesting Attempts F (UC)
-            trigger = triggers.helmSuccess,
+            trigger = xi.roeTriggers.HELM_SUCCESS,
             goal = 10,
             reqs = { skillType = 1 },
             flags = set { "unity" },
@@ -7433,7 +7433,7 @@ function getRoeRecords(triggers)
 
         [3488] =
         { -- Club Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7442,7 +7442,7 @@ function getRoeRecords(triggers)
 
         [3489] =
         { -- Conflict: Rala Waterways (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 258 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7451,7 +7451,7 @@ function getRoeRecords(triggers)
 
         [3490] =
         { -- Vanquish Rabbits (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 206 }, mobXP = true, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7460,7 +7460,7 @@ function getRoeRecords(triggers)
 
         [3491] =
         { -- Subjugation: Rambukk (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17191044 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7468,7 +7468,7 @@ function getRoeRecords(triggers)
 
         [3492] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7481,7 +7481,7 @@ function getRoeRecords(triggers)
 
         [3493] =
         { -- Spoils - Bat Fangs (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BAT_FANG }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7490,7 +7490,7 @@ function getRoeRecords(triggers)
 
         [3494] =
         { -- Conflict: La Theine Plateau (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 102 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7499,7 +7499,7 @@ function getRoeRecords(triggers)
 
         [3495] =
         { -- Vanquish Bats (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 46, 47 }, mobXP = true, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7508,7 +7508,7 @@ function getRoeRecords(triggers)
 
         [3496] =
         { -- Subjugation: Tumbling Truffle (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17195259 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7520,7 +7520,7 @@ function getRoeRecords(triggers)
 
         [3498] =
         { -- Staff Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7529,7 +7529,7 @@ function getRoeRecords(triggers)
 
         [3499] =
         { -- Conflict: Eldieme Necropolis (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 195 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7538,7 +7538,7 @@ function getRoeRecords(triggers)
 
         [3500] =
         { -- Vanquish Treants (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 245 }, mobXP = true, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7547,7 +7547,7 @@ function getRoeRecords(triggers)
 
         [3501] =
         { -- Subjugation: Duke Decapod (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17252725 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7555,7 +7555,7 @@ function getRoeRecords(triggers)
 
         [3502] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7568,7 +7568,7 @@ function getRoeRecords(triggers)
 
         [3503] =
         { -- Spoils - Bomb Ash (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.PINCH_OF_BOMB_ASH }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7577,7 +7577,7 @@ function getRoeRecords(triggers)
 
         [3504] =
         { -- Conflict: Davoi (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 149 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7586,7 +7586,7 @@ function getRoeRecords(triggers)
 
         [3505] =
         { -- Vanquish Bombs (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 56 }, mobXP = true, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7595,7 +7595,7 @@ function getRoeRecords(triggers)
 
         [3506] =
         { -- Subjugation: Poisonhand Gnadgad (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17387644 }, unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7603,7 +7603,7 @@ function getRoeRecords(triggers)
 
         [3507] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.PIEUJE },
             flags = set { "unity" },
@@ -7616,7 +7616,7 @@ function getRoeRecords(triggers)
 
         [3508] =
         { -- Great Katana Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.GREAT_KATANA, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7625,7 +7625,7 @@ function getRoeRecords(triggers)
 
         [3509] =
         { -- Conflict: North Gustaberg (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 106 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7634,7 +7634,7 @@ function getRoeRecords(triggers)
 
         [3510] =
         { -- Vanquish Worms (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 258 }, mobXP = true, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7643,7 +7643,7 @@ function getRoeRecords(triggers)
 
         [3511] =
         { -- Subjugation: Stinging Sophie (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17211537, 17211561 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7651,7 +7651,7 @@ function getRoeRecords(triggers)
 
         [3512] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7664,7 +7664,7 @@ function getRoeRecords(triggers)
 
         [3513] =
         { -- Spoils - Cockatrice Meat (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SLICE_OF_COCKATRICE_MEAT }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7673,7 +7673,7 @@ function getRoeRecords(triggers)
 
         [3514] =
         { -- Conflict: Yahse Hunting Grounds (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 260 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7682,7 +7682,7 @@ function getRoeRecords(triggers)
 
         [3515] =
         { -- Vanquish Cockatrices (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 70 }, mobXP = true, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7691,7 +7691,7 @@ function getRoeRecords(triggers)
 
         [3516] =
         { -- Subjugation: Tococo (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17215778 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7703,7 +7703,7 @@ function getRoeRecords(triggers)
 
         [3518] =
         { -- Archery Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7712,7 +7712,7 @@ function getRoeRecords(triggers)
 
         [3519] =
         { -- Conflict: Crawlers' Nest (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 197 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7721,7 +7721,7 @@ function getRoeRecords(triggers)
 
         [3520] =
         { -- Vanquish Lizards (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 174 }, mobXP = true, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7730,7 +7730,7 @@ function getRoeRecords(triggers)
 
         [3521] =
         { -- Subjugation: Aqrabuamelu (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17584416 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7738,7 +7738,7 @@ function getRoeRecords(triggers)
 
         [3522] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7751,7 +7751,7 @@ function getRoeRecords(triggers)
 
         [3523] =
         { -- Spoils - Land Crab Meat (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.LAND_CRAB_MEAT }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7760,7 +7760,7 @@ function getRoeRecords(triggers)
 
         [3524] =
         { -- Conflict: Beadeaux (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 147 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7769,7 +7769,7 @@ function getRoeRecords(triggers)
 
         [3525] =
         { -- Vanquish Crabs (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 75, 76, 77, 372 }, mobXP = true, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7778,7 +7778,7 @@ function getRoeRecords(triggers)
 
         [3526] =
         { -- Subjugation: Ge'Dha Evileye (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17379450 }, unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7786,7 +7786,7 @@ function getRoeRecords(triggers)
 
         [3527] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 5,
             reqs = { unityLeader = xi.unityLeaders.AYAME },
             flags = set { "unity" },
@@ -7799,7 +7799,7 @@ function getRoeRecords(triggers)
 
         [3528] =
         { -- Axe Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.AXE, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7808,7 +7808,7 @@ function getRoeRecords(triggers)
 
         [3529] =
         { -- Conflict: South Gustaberg (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 107 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7817,7 +7817,7 @@ function getRoeRecords(triggers)
 
         [3530] =
         { -- Vanquish Sea Monks (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 218, 219 }, mobXP = true, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7826,7 +7826,7 @@ function getRoeRecords(triggers)
 
         [3531] =
         { -- Subjugation: Leaping Lizzy (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17215868, 17215888 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7834,7 +7834,7 @@ function getRoeRecords(triggers)
 
         [3532] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7847,7 +7847,7 @@ function getRoeRecords(triggers)
 
         [3533] =
         { -- Spoils - Sleepshroom (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SLEEPSHROOM }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7856,7 +7856,7 @@ function getRoeRecords(triggers)
 
         [3534] =
         { -- Conflict: Pashhow Marshlands (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 109 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7865,7 +7865,7 @@ function getRoeRecords(triggers)
 
         [3535] =
         { -- Vanquish Funguars (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 116 }, mobXP = true, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7874,7 +7874,7 @@ function getRoeRecords(triggers)
 
         [3536] =
         { -- Subjugation: Bloodpool Vorax (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17224019 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7886,7 +7886,7 @@ function getRoeRecords(triggers)
 
         [3538] =
         { -- Great Axe Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.GREAT_AXE, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7895,7 +7895,7 @@ function getRoeRecords(triggers)
 
         [3539] =
         { -- Conflict: Ceizak Battlegrounds (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 261 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7904,7 +7904,7 @@ function getRoeRecords(triggers)
 
         [3540] =
         { -- Vanquish Flies (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 113, 374 }, mobXP = true, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7913,7 +7913,7 @@ function getRoeRecords(triggers)
 
         [3541] =
         { -- Subjugation: Be'Hya Hundredwall (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17363258 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7921,7 +7921,7 @@ function getRoeRecords(triggers)
 
         [3542] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7934,7 +7934,7 @@ function getRoeRecords(triggers)
 
         [3543] =
         { -- Spoils - Raptor Skin (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.RAPTOR_SKIN }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7943,7 +7943,7 @@ function getRoeRecords(triggers)
 
         [3544] =
         { -- Conflict: Beaucedine Glacier (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 111 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7952,7 +7952,7 @@ function getRoeRecords(triggers)
 
         [3545] =
         { -- Vanquish Raptors (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 210, 376, 377 }, mobXP = true, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7961,7 +7961,7 @@ function getRoeRecords(triggers)
 
         [3546] =
         { -- Subjugation: Gargantua (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17232079 }, unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -7969,7 +7969,7 @@ function getRoeRecords(triggers)
 
         [3547] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 5,
             reqs = { unityLeader = xi.unityLeaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
@@ -7982,7 +7982,7 @@ function getRoeRecords(triggers)
 
         [3548] =
         { -- Club Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -7991,7 +7991,7 @@ function getRoeRecords(triggers)
 
         [3549] =
         { -- Conflict: West Sarutabaruta (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 115 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8000,7 +8000,7 @@ function getRoeRecords(triggers)
 
         [3550] =
         { -- Vanquish Bees (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 48 }, mobXP = true, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8009,7 +8009,7 @@ function getRoeRecords(triggers)
 
         [3551] =
         { -- Subjugation: Tom Tit Tat (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17248468, 17248486 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8017,7 +8017,7 @@ function getRoeRecords(triggers)
 
         [3552] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8030,7 +8030,7 @@ function getRoeRecords(triggers)
 
         [3553] =
         { -- Spoils - Silk Thread (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SPOOL_OF_SILK_THREAD }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8039,7 +8039,7 @@ function getRoeRecords(triggers)
 
         [3554] =
         { -- Conflict: Buburimu Peninsula (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 118 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8048,7 +8048,7 @@ function getRoeRecords(triggers)
 
         [3555] =
         { -- Vanquish Crawlers (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 79 }, mobXP = true, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8057,7 +8057,7 @@ function getRoeRecords(triggers)
 
         [3556] =
         { -- Subjugation: Buburimboo (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17261003 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8069,7 +8069,7 @@ function getRoeRecords(triggers)
 
         [3558] =
         { -- Staff Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8078,7 +8078,7 @@ function getRoeRecords(triggers)
 
         [3559] =
         { -- Conflict: Castle Oztroja (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 151 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8087,7 +8087,7 @@ function getRoeRecords(triggers)
 
         [3560] =
         { -- Vanquish Ghosts (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 121 }, mobXP = true, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8096,7 +8096,7 @@ function getRoeRecords(triggers)
 
         [3561] =
         { -- Subjugation: Mee Deggi the Punisher (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17395800 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8104,7 +8104,7 @@ function getRoeRecords(triggers)
 
         [3562] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8117,7 +8117,7 @@ function getRoeRecords(triggers)
 
         [3563] =
         { -- Spoils - Saruta Cotton (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BALL_OF_SARUTA_COTTON }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8126,7 +8126,7 @@ function getRoeRecords(triggers)
 
         [3564] =
         { -- Conflict: Foret de Hennetiel (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 262 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8135,7 +8135,7 @@ function getRoeRecords(triggers)
 
         [3565] =
         { -- Vanquish Mandragoras (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 178 }, mobXP = true, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8144,7 +8144,7 @@ function getRoeRecords(triggers)
 
         [3566] =
         { -- Subjugation: Juu Duzu the Whirlwind (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17371300 }, unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8152,7 +8152,7 @@ function getRoeRecords(triggers)
 
         [3567] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.APURURU },
             flags = set { "unity" },
@@ -8165,7 +8165,7 @@ function getRoeRecords(triggers)
 
         [3568] =
         { -- Hand-to-Hand Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.HAND_TO_HAND, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8174,7 +8174,7 @@ function getRoeRecords(triggers)
 
         [3569] =
         { -- Conflict: Yorcia Weald (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 263 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8183,7 +8183,7 @@ function getRoeRecords(triggers)
 
         [3570] =
         { -- Vanquish Leeches (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 172, 369 }, mobXP = true, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8192,7 +8192,7 @@ function getRoeRecords(triggers)
 
         [3571] =
         { -- Subjugation: Canal Moocher (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17469578 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8200,7 +8200,7 @@ function getRoeRecords(triggers)
 
         [3572] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8213,7 +8213,7 @@ function getRoeRecords(triggers)
 
         [3573] =
         { -- Spoils - Spider Web (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SPIDER_WEB }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8222,7 +8222,7 @@ function getRoeRecords(triggers)
 
         [3574] =
         { -- Conflict: Rolanberry Fields (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 110 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8231,7 +8231,7 @@ function getRoeRecords(triggers)
 
         [3575] =
         { -- Vanquish Spiders (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 235 }, mobXP = true, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8240,7 +8240,7 @@ function getRoeRecords(triggers)
 
         [3576] =
         { -- Subjugation: Eldritch Edge (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17228150 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8252,7 +8252,7 @@ function getRoeRecords(triggers)
 
         [3578] =
         { -- Great Sword Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.GREAT_SWORD, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8261,7 +8261,7 @@ function getRoeRecords(triggers)
 
         [3579] =
         { -- Conflict: Meriphataud Mountains (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 119 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8270,7 +8270,7 @@ function getRoeRecords(triggers)
 
         [3580] =
         { -- Vanquish Wyverns (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 266, 268 }, mobXP = true, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8279,7 +8279,7 @@ function getRoeRecords(triggers)
 
         [3581] =
         { -- Subjugation: Patripatan (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17264972 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8287,7 +8287,7 @@ function getRoeRecords(triggers)
 
         [3582] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8300,7 +8300,7 @@ function getRoeRecords(triggers)
 
         [3583] =
         { -- Spoils - Hecteyes Eye (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.HECTEYES_EYE }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8309,7 +8309,7 @@ function getRoeRecords(triggers)
 
         [3584] =
         { -- Conflict: Sauromugue Champaign (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 120 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8318,7 +8318,7 @@ function getRoeRecords(triggers)
 
         [3585] =
         { -- Vanquish Hecteyes (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 139 }, mobXP = true, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8327,7 +8327,7 @@ function getRoeRecords(triggers)
 
         [3586] =
         { -- Subjugation: Bashe (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17268788 }, unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8335,7 +8335,7 @@ function getRoeRecords(triggers)
 
         [3587] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.MAAT },
             flags = set { "unity" },
@@ -8348,7 +8348,7 @@ function getRoeRecords(triggers)
 
         [3588] =
         { -- Dagger Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8357,7 +8357,7 @@ function getRoeRecords(triggers)
 
         [3589] =
         { -- Conflict: Sanctuary of Zi'Tah (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 121 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8366,7 +8366,7 @@ function getRoeRecords(triggers)
 
         [3590] =
         { -- Vanquish Hounds (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 142, 143 }, mobXP = true, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8375,7 +8375,7 @@ function getRoeRecords(triggers)
 
         [3591] =
         { -- Subjugation: Bastet (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17273190 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8383,7 +8383,7 @@ function getRoeRecords(triggers)
 
         [3592] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8396,7 +8396,7 @@ function getRoeRecords(triggers)
 
         [3593] =
         { -- Spoils - Doll Shard (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.DOLL_SHARD }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8405,7 +8405,7 @@ function getRoeRecords(triggers)
 
         [3594] =
         { -- Conflict: Morimar Basalt Fields (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 265 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8414,7 +8414,7 @@ function getRoeRecords(triggers)
 
         [3595] =
         { -- Vanquish Dolls (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 83, 84, 85, 498 }, mobXP = true, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8423,7 +8423,7 @@ function getRoeRecords(triggers)
 
         [3596] =
         { -- Subjugation: Nocuous Weapon (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17563801 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8435,7 +8435,7 @@ function getRoeRecords(triggers)
 
         [3598] =
         { -- Marksmanship Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.MARKSMANSHIP, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8444,7 +8444,7 @@ function getRoeRecords(triggers)
 
         [3599] =
         { -- Conflict: Boyahda Tree (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 153 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8453,7 +8453,7 @@ function getRoeRecords(triggers)
 
         [3600] =
         { -- Vanquish Slimes (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 228, 229, 230 }, mobXP = true, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8462,7 +8462,7 @@ function getRoeRecords(triggers)
 
         [3601] =
         { -- Subjugation: Aquarius (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17404000 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8470,7 +8470,7 @@ function getRoeRecords(triggers)
 
         [3602] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8483,7 +8483,7 @@ function getRoeRecords(triggers)
 
         [3603] =
         { -- Spoils - Bird Egg (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BIRD_EGG }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8492,7 +8492,7 @@ function getRoeRecords(triggers)
 
         [3604] =
         { -- Conflict: Western Altepa Desert (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 125 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8501,7 +8501,7 @@ function getRoeRecords(triggers)
 
         [3605] =
         { -- Vanquish Crow-Type Birds (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 55 }, mobXP = true, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8510,7 +8510,7 @@ function getRoeRecords(triggers)
 
         [3606] =
         { -- Subjugation: Cactuar Cantautor (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17289560 }, unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8518,7 +8518,7 @@ function getRoeRecords(triggers)
 
         [3607] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.ALDO },
             flags = set { "unity" },
@@ -8531,7 +8531,7 @@ function getRoeRecords(triggers)
 
         [3608] =
         { -- Dagger Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8540,7 +8540,7 @@ function getRoeRecords(triggers)
 
         [3609] =
         { -- Conflict: Yuhtunga Jungle (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 123 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8549,7 +8549,7 @@ function getRoeRecords(triggers)
 
         [3610] =
         { -- Vanquish Sheep (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 226 }, mobXP = true, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8558,7 +8558,7 @@ function getRoeRecords(triggers)
 
         [3611] =
         { -- Subjugation: Mischievous Micholas (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17281149 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8566,7 +8566,7 @@ function getRoeRecords(triggers)
 
         [3612] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8579,7 +8579,7 @@ function getRoeRecords(triggers)
 
         [3613] =
         { -- Spoils - Scorpion Claw (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SCORPION_CLAW }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8588,7 +8588,7 @@ function getRoeRecords(triggers)
 
         [3614] =
         { -- Conflict: East Sarutabaruta (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 116 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8597,7 +8597,7 @@ function getRoeRecords(triggers)
 
         [3615] =
         { -- Vanquish Scorpions (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 217 }, mobXP = true, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8606,7 +8606,7 @@ function getRoeRecords(triggers)
 
         [3616] =
         { -- Subjugation: Sharp-Eared Ropipi (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17252489, 17252508 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8618,7 +8618,7 @@ function getRoeRecords(triggers)
 
         [3618] =
         { -- Archery Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8627,7 +8627,7 @@ function getRoeRecords(triggers)
 
         [3619] =
         { -- Conflict: Marjami Ravine (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 266 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8636,7 +8636,7 @@ function getRoeRecords(triggers)
 
         [3620] =
         { -- Vanquish Opo-Opos (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 188 }, mobXP = true, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8645,7 +8645,7 @@ function getRoeRecords(triggers)
 
         [3621] =
         { -- Subjugation: Ah Puch (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17571903 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8653,7 +8653,7 @@ function getRoeRecords(triggers)
 
         [3622] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8666,7 +8666,7 @@ function getRoeRecords(triggers)
 
         [3623] =
         { -- Spoils - Black Tiger Fang (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BLACK_TIGER_FANG }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8675,7 +8675,7 @@ function getRoeRecords(triggers)
 
         [3624] =
         { -- Conflict: Sea Serpent Grotto (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 176 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8684,7 +8684,7 @@ function getRoeRecords(triggers)
 
         [3625] =
         { -- Vanquish Tigers (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 242 }, mobXP = true, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8693,7 +8693,7 @@ function getRoeRecords(triggers)
 
         [3626] =
         { -- Subjugation: Fyuu the Seabellow (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17498269 }, unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8701,7 +8701,7 @@ function getRoeRecords(triggers)
 
         [3627] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
@@ -8714,7 +8714,7 @@ function getRoeRecords(triggers)
 
         [3628] =
         { -- Club Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8723,7 +8723,7 @@ function getRoeRecords(triggers)
 
         [3629] =
         { -- Conflict: Bhaflau Thickets (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 52 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8732,7 +8732,7 @@ function getRoeRecords(triggers)
 
         [3630] =
         { -- Vanquish Evil Weapons (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 110 }, mobXP = true, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8741,7 +8741,7 @@ function getRoeRecords(triggers)
 
         [3631] =
         { -- Subjugation: Emergent Elm (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16990376 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8749,7 +8749,7 @@ function getRoeRecords(triggers)
 
         [3632] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8762,7 +8762,7 @@ function getRoeRecords(triggers)
 
         [3633] =
         { -- Spoils - Puk Wing (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.PUK_WING }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8771,7 +8771,7 @@ function getRoeRecords(triggers)
 
         [3634] =
         { -- Conflict: West Ronfaure (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 100 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8780,7 +8780,7 @@ function getRoeRecords(triggers)
 
         [3635] =
         { -- Vanquish Puks (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 198 }, mobXP = true, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8789,7 +8789,7 @@ function getRoeRecords(triggers)
 
         [3636] =
         { -- Subjugation: Fungus Beetle (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17187047 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8801,7 +8801,7 @@ function getRoeRecords(triggers)
 
         [3638] =
         { -- Staff Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8810,7 +8810,7 @@ function getRoeRecords(triggers)
 
         [3639] =
         { -- Conflict: Wajaom Woodlands (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 51 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8819,7 +8819,7 @@ function getRoeRecords(triggers)
 
         [3640] =
         { -- Vanquish Elementals (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 99, 100, 101, 102, 103, 104, 105, 106 }, mobXP = true,
                 unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
@@ -8829,7 +8829,7 @@ function getRoeRecords(triggers)
 
         [3641] =
         { -- Subjugation: Jaded Jody (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16986378 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8837,7 +8837,7 @@ function getRoeRecords(triggers)
 
         [3642] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8850,7 +8850,7 @@ function getRoeRecords(triggers)
 
         [3643] =
         { -- Spoils - Dhalmel Meat (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.DHALMEL_MEAT }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8859,7 +8859,7 @@ function getRoeRecords(triggers)
 
         [3644] =
         { -- Conflict: Kamihr Drifts (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 267 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8868,7 +8868,7 @@ function getRoeRecords(triggers)
 
         [3645] =
         { -- Vanquish Dhalmel (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 80 }, mobXP = true, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8877,7 +8877,7 @@ function getRoeRecords(triggers)
 
         [3646] =
         { -- Subjugation: Trembler Tabitha (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17588278 }, unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8885,7 +8885,7 @@ function getRoeRecords(triggers)
 
         [3647] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 5,
             reqs = { unityLeader = xi.unityLeaders.NAJA_SALAHEEM },
             flags = set { "unity" },
@@ -8898,7 +8898,7 @@ function getRoeRecords(triggers)
 
         [3648] =
         { -- Polearm Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.POLEARM, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8907,7 +8907,7 @@ function getRoeRecords(triggers)
 
         [3649] =
         { -- Conflict: Cirdas Caverns (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 270 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8916,7 +8916,7 @@ function getRoeRecords(triggers)
 
         [3650] =
         { -- Vanquish Pugils (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 197 }, mobXP = true, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8925,7 +8925,7 @@ function getRoeRecords(triggers)
 
         [3651] =
         { -- Subjugation: Hovering Hotpot (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17596628 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8933,7 +8933,7 @@ function getRoeRecords(triggers)
 
         [3652] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8946,7 +8946,7 @@ function getRoeRecords(triggers)
 
         [3653] =
         { -- Spoils - Beetle Shell (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BEETLE_SHELL }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8955,7 +8955,7 @@ function getRoeRecords(triggers)
 
         [3654] =
         { -- Conflict: East Ronfaure (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 101 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8964,7 +8964,7 @@ function getRoeRecords(triggers)
 
         [3655] =
         { -- Vanquish Beetles (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 49 }, mobXP = true, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8973,7 +8973,7 @@ function getRoeRecords(triggers)
 
         [3656] =
         { -- Subjugation: Bigmouth Billy (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17191196 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -8985,7 +8985,7 @@ function getRoeRecords(triggers)
 
         [3658] =
         { -- Sword Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.SWORD, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -8994,7 +8994,7 @@ function getRoeRecords(triggers)
 
         [3659] =
         { -- Conflict: Xarcabard (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 112 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9003,7 +9003,7 @@ function getRoeRecords(triggers)
 
         [3660] =
         { -- Vanquish Goobbues (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 136 }, mobXP = true, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9012,7 +9012,7 @@ function getRoeRecords(triggers)
 
         [3661] =
         { -- Subjugation: Barbaric Weapon (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17236027 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9020,7 +9020,7 @@ function getRoeRecords(triggers)
 
         [3662] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9033,7 +9033,7 @@ function getRoeRecords(triggers)
 
         [3663] =
         { -- Spoils - Bone Chip (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.BONE_CHIP }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9042,7 +9042,7 @@ function getRoeRecords(triggers)
 
         [3664] =
         { -- Conflict: Woh Gates (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 273 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9051,7 +9051,7 @@ function getRoeRecords(triggers)
 
         [3665] =
         { -- Vanquish Skeletons (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 227 }, mobXP = true, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9060,7 +9060,7 @@ function getRoeRecords(triggers)
 
         [3666] =
         { -- Subjugation: Hyakume (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17457236 }, unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9068,7 +9068,7 @@ function getRoeRecords(triggers)
 
         [3667] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.FLAVIRIA },
             flags = set { "unity" },
@@ -9081,7 +9081,7 @@ function getRoeRecords(triggers)
 
         [3668] =
         { -- Club Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9090,7 +9090,7 @@ function getRoeRecords(triggers)
 
         [3669] =
         { -- Conflict: Giddeus (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 145 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9099,7 +9099,7 @@ function getRoeRecords(triggers)
 
         [3670] =
         { -- Vanquish Efts (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 98 }, mobXP = true, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9108,7 +9108,7 @@ function getRoeRecords(triggers)
 
         [3671] =
         { -- Subjugation: Herbage Hunter (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17256836 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9116,7 +9116,7 @@ function getRoeRecords(triggers)
 
         [3672] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9129,7 +9129,7 @@ function getRoeRecords(triggers)
 
         [3673] =
         { -- Spoils - Rotten Meat (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.PIECE_OF_ROTTEN_MEAT }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9138,7 +9138,7 @@ function getRoeRecords(triggers)
 
         [3674] =
         { -- Conflict: Moh Gates (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 269 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9147,7 +9147,7 @@ function getRoeRecords(triggers)
 
         [3675] =
         { -- Vanquish Antica (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 25 }, mobXP = true, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9156,7 +9156,7 @@ function getRoeRecords(triggers)
 
         [3676] =
         { -- Subjugation: Antican Praefectus (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17629281 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9168,7 +9168,7 @@ function getRoeRecords(triggers)
 
         [3678] =
         { -- Staff Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9177,7 +9177,7 @@ function getRoeRecords(triggers)
 
         [3679] =
         { -- Conflict: Toraimarai Canal (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 169 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9186,7 +9186,7 @@ function getRoeRecords(triggers)
 
         [3680] =
         { -- Vanquish Coeurls (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 71 }, mobXP = true, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9195,7 +9195,7 @@ function getRoeRecords(triggers)
 
         [3681] =
         { -- Subjugation: Ose (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17649822 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9203,7 +9203,7 @@ function getRoeRecords(triggers)
 
         [3682] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9216,7 +9216,7 @@ function getRoeRecords(triggers)
 
         [3683] =
         { -- Spoils - Dullahan Armor (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.SUIT_OF_DULLAHAN_ARMOR }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9225,7 +9225,7 @@ function getRoeRecords(triggers)
 
         [3684] =
         { -- Conflict: Outer Ra'Kaznar (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 274 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9234,7 +9234,7 @@ function getRoeRecords(triggers)
 
         [3685] =
         { -- Vanquish Dullahan (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 447 }, mobXP = true, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9243,7 +9243,7 @@ function getRoeRecords(triggers)
 
         [3686] =
         { -- Subjugation: Capricious Cassie (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17613130 }, unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9251,7 +9251,7 @@ function getRoeRecords(triggers)
 
         [3687] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.YORAN_ORAN },
             flags = set { "unity" },
@@ -9264,7 +9264,7 @@ function getRoeRecords(triggers)
 
         [3688] =
         { -- Club Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9273,7 +9273,7 @@ function getRoeRecords(triggers)
 
         [3689] =
         { -- Conflict: Sih Gates (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 268 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9283,7 +9283,7 @@ function getRoeRecords(triggers)
         --[[
         [3690] =
         { -- Vanquish Acuex (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set{ ??? }, mobXP = true, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set{ "unity" },
@@ -9293,7 +9293,7 @@ function getRoeRecords(triggers)
 
         [3691] =
         { -- Subjugation: Intulo (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 16793742 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9301,7 +9301,7 @@ function getRoeRecords(triggers)
 
         [3692] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9314,7 +9314,7 @@ function getRoeRecords(triggers)
 
         [3693] =
         { -- Spoils - Demon Horn (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.DEMON_HORN }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9323,7 +9323,7 @@ function getRoeRecords(triggers)
 
         [3694] =
         { -- Conflict: Konschtat Highlands (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 108 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9332,7 +9332,7 @@ function getRoeRecords(triggers)
 
         [3695] =
         { -- Vanquish Demons (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobSystem = set { xi.eco.DEMON }, mobXP = true, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9341,7 +9341,7 @@ function getRoeRecords(triggers)
 
         [3696] =
         { -- Subjugation: Marquis Naberius (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17436876 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9353,7 +9353,7 @@ function getRoeRecords(triggers)
 
         [3698] =
         { -- Staff Weapon Skills (UC)
-            trigger = triggers.wSkillUse,
+            trigger = xi.roeTriggers.USE_WEAPONSKILL,
             goal = 30,
             reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9362,7 +9362,7 @@ function getRoeRecords(triggers)
 
         [3699] =
         { -- Conflict: Dho Gates (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 272 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9371,7 +9371,7 @@ function getRoeRecords(triggers)
 
         [3700] =
         { -- Vanquish Velkk (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 342 }, mobXP = true, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9380,7 +9380,7 @@ function getRoeRecords(triggers)
 
         [3701] =
         { -- Subjugation: Dune Widow (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17244396 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9388,7 +9388,7 @@ function getRoeRecords(triggers)
 
         [3702] =
         { -- Heal Unity Allies (UC)
-            trigger = triggers.healUnityAlly,
+            trigger = xi.roeTriggers.HEAL_UNITY_ALLY,
             goal = 30,
             reqs = { unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9401,7 +9401,7 @@ function getRoeRecords(triggers)
 
         [3703] =
         { -- Spoils - Twitherym Wing (UC)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 5,
             reqs = { itemID = set { xi.item.TWITHERYM_WING }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9410,7 +9410,7 @@ function getRoeRecords(triggers)
 
         [3704] =
         { -- Conflict: Qufim Island (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { zone = set { 126 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9419,7 +9419,7 @@ function getRoeRecords(triggers)
 
         [3705] =
         { -- Vanquish Twitherym (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 10,
             reqs = { mobFamily = set { 338 }, mobXP = true, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9428,7 +9428,7 @@ function getRoeRecords(triggers)
 
         [3706] =
         { -- Subjugation: Atkorkamuy (UC)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             reqs = { mobID = set { 17293485 }, unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
@@ -9436,7 +9436,7 @@ function getRoeRecords(triggers)
 
         [3707] =
         { -- Magic Bursts (UC)
-            trigger = triggers.magicBurst,
+            trigger = xi.roeTriggers.MAGIC_BURST,
             goal = 10,
             reqs = { unityLeader = xi.unityLeaders.SYLVIE },
             flags = set { "unity" },
@@ -9459,7 +9459,7 @@ function getRoeRecords(triggers)
 
         [4082] =
         { -- Vanquish Multiple Enemies (D)
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 30,
             reqs = { mobXP = true },
             flags = set { "daily" },
@@ -9468,7 +9468,7 @@ function getRoeRecords(triggers)
 
         [4083] =
         { -- Buff Allies (D)
-            trigger = triggers.buffAlly,
+            trigger = xi.roeTriggers.BUFF_ALLY,
             goal = 20,
             flags = set { "daily" },
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
@@ -9476,7 +9476,7 @@ function getRoeRecords(triggers)
 
         [4084] =
         { -- Heal for 500+ HP (D)
-            trigger = triggers.healAlly,
+            trigger = xi.roeTriggers.HEAL_ALLY,
             goal = 100,
             reqs = { healMin = 500 },
             flags = set { "daily" },
@@ -9489,7 +9489,7 @@ function getRoeRecords(triggers)
 
         [4008] =
         { -- Vanquish Aquans
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AQUAN } },
             flags = set { "timed", "repeat" },
@@ -9498,7 +9498,7 @@ function getRoeRecords(triggers)
 
         [4009] =
         { -- Vanquish Beasts
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BEAST } },
             flags = set { "timed", "repeat" },
@@ -9507,7 +9507,7 @@ function getRoeRecords(triggers)
 
         [4010] =
         { -- Vanquish Plantoids
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.PLANTOID } },
             flags = set { "timed", "repeat" },
@@ -9516,7 +9516,7 @@ function getRoeRecords(triggers)
 
         [4011] =
         { -- Vanquish Lizards
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.LIZARD } },
             flags = set { "timed", "repeat" },
@@ -9525,7 +9525,7 @@ function getRoeRecords(triggers)
 
         [4012] =
         { -- Vanquish Vermin
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.VERMIN } },
             flags = set { "timed", "repeat" },
@@ -9534,7 +9534,7 @@ function getRoeRecords(triggers)
 
         [4013] =
         { -- Gain Experience
-            trigger = triggers.expGain,
+            trigger = xi.roeTriggers.GAIN_EXPERIENCE,
             goal = 5000,
             increment = 0,
             flags = set { "timed", "repeat" },
@@ -9551,7 +9551,7 @@ function getRoeRecords(triggers)
 
         [4014] =
         { -- Spoils (Seals)
-            trigger = triggers.itemLooted,
+            trigger = xi.roeTriggers.LOOT_ITEM,
             goal = 3,
             reqs = { itemID = set { xi.item.BEASTMENS_SEAL, xi.item.KINDREDS_SEAL, xi.item.KINDREDS_CREST, xi.item.HIGH_KINDREDS_CREST, xi.item.SACRED_KINDREDS_CREST } },
             flags = set { "timed", "repeat" },
@@ -9560,7 +9560,7 @@ function getRoeRecords(triggers)
 
         [4015] =
         { -- Vanquish Birds
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BIRD } },
             flags = set { "timed", "repeat" },
@@ -9569,7 +9569,7 @@ function getRoeRecords(triggers)
 
         [4016] =
         { -- Vanquish Amorphs
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AMORPH } },
             flags = set { "timed", "repeat" },
@@ -9578,7 +9578,7 @@ function getRoeRecords(triggers)
 
         [4017] =
         { -- Vanquish Undead
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.UNDEAD } },
             flags = set { "timed", "repeat" },
@@ -9587,7 +9587,7 @@ function getRoeRecords(triggers)
 
         [4018] =
         { -- Vanquish Arcana
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.ARCANA } },
             flags = set { "timed", "repeat" },
@@ -9603,7 +9603,7 @@ function getRoeRecords(triggers)
 
         [4020] =
         { -- Physical Damage Kills
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL },
             flags = set { "timed", "repeat" },
@@ -9612,7 +9612,7 @@ function getRoeRecords(triggers)
 
         [4021] =
         { -- Magic Damage Kills
-            trigger = triggers.mobKill,
+            trigger = xi.roeTriggers.DEFEAT_MOB,
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL },
             flags = set { "timed", "repeat" },

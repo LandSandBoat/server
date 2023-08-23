@@ -996,7 +996,7 @@ xi.chocoboDig.start = function(player, precheck)
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
                 end
 
-                player:triggerRoeEvent(xi.roe.triggers.chocoboDigSuccess)
+                player:triggerRoeEvent(xi.roeTriggers.CHOCOBO_DIG_SUCCESS)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else

@@ -8,34 +8,6 @@ xi = xi or {}
 xi.roe = xi.roe or {}
 
 -----------------------------------
--- Triggers
------------------------------------
-
-xi.roe.triggers =
-{
-    mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
-    wSkillUse = 2,          -- Player Weapon skill used
-    itemLooted = 3,         -- Player successfully loots an item
-    synthSuccess = 4,       -- Player synth success
-    dmgTaken = 5,           -- Player takes Damage
-    dmgDealt = 6,           -- Player deals Damage
-    expGain = 7,            -- Player gains EXP
-    healAlly = 8,           -- Player heals self/ally with spell
-    buffAlly = 9,           -- Player buffs ally
-    levelUp = 10,           -- Player levelup
-    questComplete = 11,     -- Player completes quest
-    missionComplete = 12,   -- Player completes mission
-    helmSuccess = 13,       -- Player has a successful harvesting event
-    chocoboDigSuccess = 14, -- Player successfully chocobo digs
-    unityChat = 15,         -- Player uses Unity Chat
-    magicBurst = 16,        -- Player performs a Magic Burst
-    healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
-    talkToRoeNpc = 18,      -- Player talk to RoE
-}
-
-local triggers = xi.roe.triggers
-
------------------------------------
 -- Checks
 -----------------------------------
 
@@ -149,7 +121,7 @@ if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
 end
 
 dofile("scripts/globals/roe_records.lua")
-local records = getRoeRecords(triggers)
+local records = getRoeRecords(xi.roeTriggers)
 
 local defaults =
 {
