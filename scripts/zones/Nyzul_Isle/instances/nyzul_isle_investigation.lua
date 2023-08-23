@@ -1,10 +1,7 @@
 -----------------------------------
 -- Assault 51 : Nyzul Isle Investigation
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/nyzul")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
 local instanceObject = {}
@@ -46,7 +43,7 @@ local function pickSetPoint(instance)
         end
 
         -- Randomly pick the objective from the generated list
-        instance:setStage(utils.randomEntry(objective))
+        instance:setStage(utils.pickRandom(objective))
 
         if math.random(1, 30) <= 5 then
             instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
@@ -413,10 +410,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:messageName(ID.text.COMMENCE, player, 51)
     player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
 
-    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
-    player:setCharVar("AssaultEntered", 1)
-    player:delKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
-    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"
@@ -445,11 +439,6 @@ end
 
 -- On win
 instanceObject.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-
-    for _, players in ipairs(chars) do
-      player:setCharVar("AssaultComplete", 1)
-    end
 end
 
 -- Standard event hooks, these will take priority over everything apart from m_event.Script

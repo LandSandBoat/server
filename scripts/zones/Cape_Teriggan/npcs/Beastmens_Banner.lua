@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos 162.059 -0.859 250.538 113
 -----------------------------------
-local ID = require("scripts/zones/Cape_Teriggan/IDs")
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 local entity = {}
 

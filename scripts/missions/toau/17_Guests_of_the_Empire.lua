@@ -6,11 +6,6 @@
 -- Naja Salaheem      : !pos 22.700 -8.804 -45.591 50
 -- Imperial Whitegate : !pos 152 -2 0 50
 -----------------------------------
-require("scripts/globals/besieged")
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 -----------------------------------
 
@@ -18,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF
 
 mission.reward =
 {
-    item        = xi.items.IMPERIAL_MYTHRIL_PIECE,
+    item        = xi.item.IMPERIAL_MYTHRIL_PIECE,
     title       = xi.title.OVJANGS_ERRAND_RUNNER,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY },
 }

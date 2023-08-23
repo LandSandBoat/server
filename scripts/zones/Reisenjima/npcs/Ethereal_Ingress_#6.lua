@@ -3,8 +3,6 @@
 -- NPC: Ethereal Ingress #6
 -- !pos 242.5 -87.4 106 291
 -----------------------------------
-require("scripts/globals/teleports/eschan_portals")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

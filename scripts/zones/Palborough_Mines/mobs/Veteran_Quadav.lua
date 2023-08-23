@@ -3,8 +3,7 @@
 --  Mob: Veteran Quadav
 -- Note: PH for Zi'Ghi Boneeater
 -----------------------------------
-local ID = require("scripts/zones/Palborough_Mines/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 local entity = {}
 

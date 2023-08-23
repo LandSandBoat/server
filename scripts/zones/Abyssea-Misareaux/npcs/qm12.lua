@@ -4,8 +4,6 @@
 -- Spawns Npfundlwa
 -- !pos 412 -7 50 216
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

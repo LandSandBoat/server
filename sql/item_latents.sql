@@ -2214,7 +2214,7 @@ INSERT INTO `item_latents` VALUES (17471,25,10,0,25);    -- Accuracy+10 when HP 
 -- -------------------------------------------------------
 -- Shiva's Claws
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(17492, 501, 6, 34, 0);    -- Increased Add Effect rate on Iceday (base of 10 plus 6)
+INSERT INTO `item_latents` VALUES (17492, 501, 6, 34, 0);    -- Increased Add Effect rate on Iceday (base of 10 plus 6)
 
 -- -------------------------------------------------------
 -- Tactician Magician's Hooks +1/+2

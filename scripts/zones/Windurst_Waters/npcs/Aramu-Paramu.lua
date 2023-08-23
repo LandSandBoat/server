@@ -4,9 +4,6 @@
 -- Involved In Quest: Wondering Minstrel
 -- !pos -63 -4 27 238
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,8 +3,6 @@
 --  NPC: rock slab (corsair job flag quest)
 -- !pos -99 -7 -91 57
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

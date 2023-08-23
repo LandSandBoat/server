@@ -37,15 +37,7 @@ zones[xi.zone.YUGHOTT_GROTTO] =
     npc =
     {
         TREASURE_CHEST = 17359052,
-        MINING =
-        {
-            17359053,
-            17359054,
-            17359055,
-            17359056,
-            17359057,
-            17359058,
-        },
+        MINING         = GetTableOfIDs('Mining_Point'),
     },
 }
 

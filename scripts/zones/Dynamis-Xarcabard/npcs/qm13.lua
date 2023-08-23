@@ -3,8 +3,6 @@
 --  NPC: ??? (qm13)
 -- Note: Spawns Animated Kunai
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,6 @@
 -- Area: Boneyard_Gully
 --  NPC: _081 (Dark Miasma)
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

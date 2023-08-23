@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: A Sentry's Peril
 -- !pos -122 -2 15 230
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

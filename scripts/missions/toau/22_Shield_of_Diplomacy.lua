@@ -5,11 +5,6 @@
 -- !addmission 4 21
 -- Decorative Bronze Gate : !pos -601 10 -100 64
 -----------------------------------
-require("scripts/globals/besieged")
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SHIELD_OF_DIPLOMACY)
 

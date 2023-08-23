@@ -3,8 +3,7 @@
 --  Mob: Orcish Augur
 -- Note: PH for Ashmaker Gotblut
 -----------------------------------
-local ID = require("scripts/zones/La_Vaule_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.LA_VAULE_S]
 -----------------------------------
 local entity = {}
 

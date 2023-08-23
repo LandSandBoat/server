@@ -2,9 +2,6 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Cargo Crab Colin
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

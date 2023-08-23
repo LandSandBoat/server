@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 12 61
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LOOKING_FOR_LEADS)
 

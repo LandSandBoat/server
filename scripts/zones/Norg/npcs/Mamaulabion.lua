@@ -26,10 +26,7 @@
 --will require changing other avatar quests and making a variable for it all. (if this gets scripted, please remove this comment)
 
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 
@@ -38,10 +35,10 @@ entity.onTrade = function(player, npc, trade)
         -- check whether trade is an item with id 1202 to 1208
         local tradedItem
         local bitToSet
-        for i = xi.items.BOTTLE_OF_BUBBLY_WATER, xi.items.ANCIENTS_KEY do
+        for i = xi.item.BOTTLE_OF_BUBBLY_WATER, xi.item.ANCIENTS_KEY do
             if npcUtil.tradeHasExactly(trade, i) then
                 tradedItem = i
-                bitToSet = i - xi.items.BOTTLE_OF_BUBBLY_WATER
+                bitToSet = i - xi.item.BOTTLE_OF_BUBBLY_WATER
                 break
             end
         end
@@ -69,7 +66,7 @@ end
 entity.onTrigger = function(player, npc)
     local mamaMia = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
     local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
-    local evokersRing = player:hasItem(xi.items.EVOKERS_RING)
+    local evokersRing = player:hasItem(xi.item.EVOKERS_RING)
     local questday = player:getCharVar("MamaMia_date")
 
     if
@@ -118,8 +115,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14625) -- Evokers Ring
         else
-            player:addItem(xi.items.EVOKERS_RING) -- Evokers Ring
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EVOKERS_RING) -- Evokers Ring
+            player:addItem(xi.item.EVOKERS_RING) -- Evokers Ring
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_RING) -- Evokers Ring
             player:addFame(xi.quest.fame_area.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar("tradesMamaMia", 0)

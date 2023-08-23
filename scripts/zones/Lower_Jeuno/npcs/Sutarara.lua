@@ -4,8 +4,6 @@
 -- Involved in Quests: Tenshodo Membership
 -- !pos 30 0.1 -2 245
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

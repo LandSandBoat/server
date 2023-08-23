@@ -4,11 +4,6 @@
 -- !addquest 3 23
 -- Karl : !pos -60 0.1 -8 246
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
 
@@ -51,7 +46,7 @@ quest.sections =
             ['Karl'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.WHITE_ROCK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.WHITE_ROCK) then
                         return quest:progressEvent(1)
                     end
                 end,

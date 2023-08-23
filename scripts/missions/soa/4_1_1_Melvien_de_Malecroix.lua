@@ -7,9 +7,6 @@
 -- Kipligg      : !pos -32 0 22 256
 -- Port Storage : !pos 85.578 30.5 180.639 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MELVIEN_DE_MALECROIX)
 
@@ -20,11 +17,11 @@ mission.reward =
 
 local missionItems =
 {
-    { xi.items.EFT_SKIN,                    5 },
-    { xi.items.LOCK_OF_MANTICORE_HAIR,      4 },
-    { xi.items.BUFFALO_HORN,                1 },
-    { xi.items.SQUARE_OF_MANTICORE_LEATHER, 1 },
-    { xi.items.SQUARE_OF_BUFFALO_LEATHER,   1 },
+    { xi.item.EFT_SKIN,                    5 },
+    { xi.item.LOCK_OF_MANTICORE_HAIR,      4 },
+    { xi.item.BUFFALO_HORN,                1 },
+    { xi.item.SQUARE_OF_MANTICORE_LEATHER, 1 },
+    { xi.item.SQUARE_OF_BUFFALO_LEATHER,   1 },
 }
 
 mission.sections =
@@ -52,11 +49,11 @@ mission.sections =
                     xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.COURIER_CATASTROPHE, 'Option', selectedSet)
 
                     return mission:progressEvent(156,
-                        xi.items.EFT_SKIN,
-                        xi.items.LOCK_OF_MANTICORE_HAIR,
-                        xi.items.BUFFALO_HORN,
-                        xi.items.SQUARE_OF_MANTICORE_LEATHER,
-                        xi.items.SQUARE_OF_BUFFALO_LEATHER,
+                        xi.item.EFT_SKIN,
+                        xi.item.LOCK_OF_MANTICORE_HAIR,
+                        xi.item.BUFFALO_HORN,
+                        xi.item.SQUARE_OF_MANTICORE_LEATHER,
+                        xi.item.SQUARE_OF_BUFFALO_LEATHER,
                         missionItems[selectedSet][1],
                         missionItems[selectedSet][2]
                     )

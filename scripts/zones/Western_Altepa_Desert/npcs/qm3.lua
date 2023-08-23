@@ -3,8 +3,7 @@
 --  NPC: ??? (Beastmen Treasure qm3/chest0)
 -- !pos -197.901 -0.733 357.648 125
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/beastmentreasure")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

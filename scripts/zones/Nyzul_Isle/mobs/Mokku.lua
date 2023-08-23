@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Only uses Frenetic Rip
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

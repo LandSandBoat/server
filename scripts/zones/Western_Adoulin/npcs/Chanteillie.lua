@@ -5,10 +5,6 @@
 --                       'Vegetable Vegetable Crisis'
 -- !pos 89 0 -75 256
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

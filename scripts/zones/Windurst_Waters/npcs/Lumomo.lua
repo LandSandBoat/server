@@ -4,11 +4,6 @@
 -- Type: Quest NPC - Involved in Eco-Warrior (Windurst)
 -- !pos -55.770 -5.499 18.914 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

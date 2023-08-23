@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Yahse Hunting Grounds
 -----------------------------------
-local ID = require('scripts/zones/Yahse_Hunting_Grounds/IDs')
+local ID = zones[xi.zone.YAHSE_HUNTING_GROUNDS]
 -----------------------------------
 local zoneObject = {}
 

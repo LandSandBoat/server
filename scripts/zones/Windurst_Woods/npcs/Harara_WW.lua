@@ -2,8 +2,6 @@
 -- Area: Windurst Woods
 --  NPC: Harara, W.W.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

@@ -5,9 +5,6 @@
 -- !addmission 13 34
 -- qm11 : !pos -409.553 17.356 -380.626 123
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.IMPURITY)
 

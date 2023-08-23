@@ -1,11 +1,8 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Matata
--- Type: Standard NPC
 -- Involved in quest: In a Stew
 -- !pos 131 -5 -109 241
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,7 @@
 -- !addkeyitem ZEPHYR_FAN
 -- !pos -520 25 -801 6
 -----------------------------------
-local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
-require("scripts/globals/battlefield")
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------
 
 local content = Battlefield:new({
@@ -26,25 +25,25 @@ content:addEssentialMobs({ "Apis" })
 content.loot =
 {
     {
-        { item = xi.items.NONE, weight = xi.loot.weight.VERY_LOW },
-        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL },
-        { item = xi.items.PIECE_OF_CASSIA_LUMBER, weight = xi.loot.weight.NORMAL },
-        { item = xi.items.DRAGON_BONE, weight = xi.loot.weight.NORMAL },
+        { item = xi.item.NONE, weight = xi.loot.weight.VERY_LOW },
+        { item = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL },
+        { item = xi.item.PIECE_OF_CASSIA_LUMBER, weight = xi.loot.weight.NORMAL },
+        { item = xi.item.DRAGON_BONE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.items.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
-        { item = xi.items.CLOUD_EVOKER, weight = xi.loot.weight.LOW },
+        { item = xi.item.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
+        { item = xi.item.CLOUD_EVOKER, weight = xi.loot.weight.LOW },
     },
 
     {
         quantity = 2,
-        { item = xi.items.NONE, weight = xi.loot.weight.HIGH },
-        { item = xi.items.GIGANT_MANTLE, weight = xi.loot.weight.LOW },
-        { item = xi.items.PSILOS_MANTLE, weight = xi.loot.weight.LOW },
-        { item = xi.items.MARTIAL_BOW, weight = xi.loot.weight.LOW },
-        { item = xi.items.MARTIAL_KNUCKLES, weight = xi.loot.weight.LOW },
-        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
+        { item = xi.item.NONE, weight = xi.loot.weight.HIGH },
+        { item = xi.item.GIGANT_MANTLE, weight = xi.loot.weight.LOW },
+        { item = xi.item.PSILOS_MANTLE, weight = xi.loot.weight.LOW },
+        { item = xi.item.MARTIAL_BOW, weight = xi.loot.weight.LOW },
+        { item = xi.item.MARTIAL_KNUCKLES, weight = xi.loot.weight.LOW },
+        { item = xi.item.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
     },
 }
 

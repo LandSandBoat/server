@@ -2,8 +2,6 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Goblin Replica
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

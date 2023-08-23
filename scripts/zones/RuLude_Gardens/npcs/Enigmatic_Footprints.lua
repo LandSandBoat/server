@@ -3,7 +3,7 @@
 --  NPC: Enigmatic Footprints
 -- Entry NPC for Dynamis Divergence
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+local ID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 local entity = {}
 

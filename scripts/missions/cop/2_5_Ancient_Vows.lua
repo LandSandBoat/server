@@ -5,10 +5,6 @@
 -- !addmission 6 248
 -- Dilapidated Gate : !pos -259 -30 276 25
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
 

@@ -7,7 +7,7 @@
 -- !pos -60 22 -100 151            (3)
 -- !pos -100 -72 -19 151           (4)
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

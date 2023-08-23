@@ -5,9 +5,7 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -10 -10 -122 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -16,13 +14,13 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED then
         if count == 1 and trade:getGil() == 100 then  -- pay to replace package
             local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
-            if prog == 10 and not player:hasItem(xi.items.PARCEL_FOR_THE_MAGIC_SHOP) then
+            if prog == 10 and not player:hasItem(xi.item.PARCEL_FOR_THE_MAGIC_SHOP) then
                 player:startEvent(608)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 11)
-            elseif prog == 20 and not player:hasItem(xi.items.PARCEL_FOR_THE_AUCTION_HOUSE) then
+            elseif prog == 20 and not player:hasItem(xi.item.PARCEL_FOR_THE_AUCTION_HOUSE) then
                 player:startEvent(609)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 21)
-            elseif prog == 30 and not player:hasItem(xi.items.PARCEL_FOR_THE_PUB) then
+            elseif prog == 30 and not player:hasItem(xi.item.PARCEL_FOR_THE_PUB) then
                 player:startEvent(610)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 31)
             end
@@ -61,8 +59,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     local freeSlots = player:getFreeSlotsCount()
     if csid == 509 and option == 0 then
         if freeSlots ~= 0 then
-            player:addItem(xi.items.PARCEL_FOR_THE_MAGIC_SHOP)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PARCEL_FOR_THE_MAGIC_SHOP)
+            player:addItem(xi.item.PARCEL_FOR_THE_MAGIC_SHOP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PARCEL_FOR_THE_MAGIC_SHOP)
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:setCharVar("TheBrugaireConsortium-Parcels", 10)
         else
@@ -70,16 +68,16 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 511 then
         if freeSlots ~= 0 then
-            player:addItem(xi.items.PARCEL_FOR_THE_AUCTION_HOUSE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PARCEL_FOR_THE_AUCTION_HOUSE)
+            player:addItem(xi.item.PARCEL_FOR_THE_AUCTION_HOUSE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PARCEL_FOR_THE_AUCTION_HOUSE)
             player:setCharVar("TheBrugaireConsortium-Parcels", 20)
         else
             player:startEvent(537)
         end
     elseif csid == 512 then
         if freeSlots ~= 0 then
-            player:addItem(xi.items.PARCEL_FOR_THE_PUB)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PARCEL_FOR_THE_PUB)
+            player:addItem(xi.item.PARCEL_FOR_THE_PUB)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PARCEL_FOR_THE_PUB)
             player:setCharVar("TheBrugaireConsortium-Parcels", 30)
         else
             player:startEvent(537)
@@ -88,8 +86,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
     elseif csid == 515 then
         if freeSlots ~= 0 then
-            player:addItem(xi.items.LAUAN_SHIELD)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LAUAN_SHIELD)
+            player:addItem(xi.item.LAUAN_SHIELD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LAUAN_SHIELD)
             player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)

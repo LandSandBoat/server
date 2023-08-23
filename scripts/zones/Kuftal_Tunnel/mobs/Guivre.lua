@@ -2,9 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Guivre
 -----------------------------------
-mixins = { require("scripts/mixins/claim_shield") }
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathStart =
@@ -216,9 +213,6 @@ end
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

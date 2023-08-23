@@ -3,8 +3,7 @@
 --  Mob: Polar Hare
 -- Note: PH for Skvader
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 

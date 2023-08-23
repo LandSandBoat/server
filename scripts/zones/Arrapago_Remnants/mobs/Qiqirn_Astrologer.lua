@@ -2,10 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Qiqirn Astrologer
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
-require("scripts/globals/mobskills")
-require("scripts/globals/teleports")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 

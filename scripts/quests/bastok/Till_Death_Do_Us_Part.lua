@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 18
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
 
@@ -60,7 +55,7 @@ quest.sections =
             ['Romilda'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.COTTON_GLOVES) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.COTTON_GLOVES) then
                         return quest:progressEvent(129)
                     end
                 end,

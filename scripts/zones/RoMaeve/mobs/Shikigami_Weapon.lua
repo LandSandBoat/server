@@ -2,10 +2,6 @@
 -- Area: RoMaeve
 --   NM: Shikigami Weapon
 -----------------------------------
-mixins = { require("scripts/mixins/claim_shield") }
-require("scripts/globals/pathfind")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 local pathNodes =

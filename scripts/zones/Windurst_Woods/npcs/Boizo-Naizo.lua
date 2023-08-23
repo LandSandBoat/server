@@ -4,9 +4,6 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos -9.581 -3.75 -26.062 241
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

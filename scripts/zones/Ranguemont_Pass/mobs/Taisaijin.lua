@@ -2,8 +2,7 @@
 -- Area: Ranguemont Pass
 --   NM: Taisaijin
 -----------------------------------
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local entity = {}
 

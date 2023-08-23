@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Cirdas Caverns U
 -----------------------------------
-local ID = require('scripts/zones/Cirdas_Caverns_U/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

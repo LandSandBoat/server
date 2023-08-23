@@ -4,8 +4,7 @@
 -- Type: Alchemy Image Support
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

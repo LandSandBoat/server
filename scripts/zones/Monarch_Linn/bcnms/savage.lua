@@ -2,10 +2,6 @@
 -- Area: Monarch Linn
 -- Name: The Savage
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

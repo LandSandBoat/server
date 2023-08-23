@@ -5,11 +5,7 @@
 -- !addmission 3 14
 -- !pos 200.3419 -2.25 37.12 168
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
------------------------------------
-local oraclesID = require('scripts/zones/Chamber_of_Oracles/IDs')
+local oraclesID = zones[xi.zone.CHAMBER_OF_ORACLES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES)

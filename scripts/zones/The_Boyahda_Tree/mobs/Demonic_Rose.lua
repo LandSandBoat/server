@@ -3,8 +3,7 @@
 --  Mob: Demonic Rose
 -- Note: Placeholder V. Vivian
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 local entity = {}
 

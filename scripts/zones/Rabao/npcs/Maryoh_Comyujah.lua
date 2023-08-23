@@ -4,9 +4,6 @@
 -- Involved in Mission: The Mithra and the Crystal (Zilart 12)
 -- !pos 0 8 73 247
 -----------------------------------
-require("scripts/globals/missions")
-local ID = require("scripts/zones/Rabao/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

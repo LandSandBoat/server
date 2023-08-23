@@ -3,7 +3,7 @@
 --  NPC: Starway Stairway
 -- !pos -10 0.1 30 242
 -----------------------------------
-local ID = require("scripts/zones/Heavens_Tower/IDs")
+local ID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 local entity = {}
 

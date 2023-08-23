@@ -4,8 +4,7 @@
 -- Type: Clothcraft Adv. Image Support
 -- !pos -32.350 -2.679 -116.450 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

@@ -4,14 +4,13 @@
 -- Type: spawns Chocoboleech
 -- !pos -430 4 115 191
 -----------------------------------
-local ID = require("scripts/zones/Dangruf_Wadi/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.DANGRUF_WADI]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.VIAL_OF_FRESH_BLOOD) and
+        npcUtil.tradeHas(trade, xi.item.VIAL_OF_FRESH_BLOOD) and
         npcUtil.popFromQM(player, npc, ID.mob.CHOCOBOLEECH, { radius = 1 })
     then
         player:confirmTrade()

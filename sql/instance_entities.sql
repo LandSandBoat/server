@@ -201,6 +201,8 @@ INSERT INTO `instance_entities` VALUES (5602,17006881);
 INSERT INTO `instance_entities` VALUES (5602,17006882);
 INSERT INTO `instance_entities` VALUES (5602,17006892);
 -- The Black Coffin
+-- npcs
+INSERT INTO `instance_entities` VALUES (6000,17022979);
 -- mobs
 INSERT INTO `instance_entities` VALUES (6000,17022980);
 INSERT INTO `instance_entities` VALUES (6000,17022981);
@@ -212,8 +214,6 @@ INSERT INTO `instance_entities` VALUES (6000,17022986);
 INSERT INTO `instance_entities` VALUES (6000,17022987);
 INSERT INTO `instance_entities` VALUES (6000,17022988);
 INSERT INTO `instance_entities` VALUES (6000,17022989);
--- npcs
-INSERT INTO `instance_entities` VALUES (6000,17022979);
 
 -- Against All Odds COR AF2
 INSERT INTO `instance_entities` VALUES (6001,17022977);
@@ -813,17 +813,6 @@ INSERT INTO `instance_entities` VALUES (7704,17092617);
 INSERT INTO `instance_entities` VALUES (7704,17092618);
 INSERT INTO `instance_entities` VALUES (7704,17092619);
 INSERT INTO `instance_entities` VALUES (7704,17092620);
-INSERT INTO `instance_entities` VALUES (7704,17093330); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093331); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093332); -- Runic Lamp 1
-INSERT INTO `instance_entities` VALUES (7704,17093333); -- Runic Lamp 2
-INSERT INTO `instance_entities` VALUES (7704,17093334); -- Runic Lamp 3
-INSERT INTO `instance_entities` VALUES (7704,17093335); -- Runic Lamp 4
-INSERT INTO `instance_entities` VALUES (7704,17093336); -- Runic Lamp 5
-INSERT INTO `instance_entities` VALUES (7704,17093353);
-INSERT INTO `instance_entities` VALUES (7704,17093354);
-INSERT INTO `instance_entities` VALUES (7704,17093429); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093430); -- Vending box
 -- mobs
 INSERT INTO `instance_entities` VALUES (7704,17092629);
 INSERT INTO `instance_entities` VALUES (7704,17092630);
@@ -1299,6 +1288,18 @@ INSERT INTO `instance_entities` VALUES (7704,17093101);
 INSERT INTO `instance_entities` VALUES (7704,17093102);
 INSERT INTO `instance_entities` VALUES (7704,17093103);
 INSERT INTO `instance_entities` VALUES (7704,17093104);
+-- more npcs
+INSERT INTO `instance_entities` VALUES (7704,17093330); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093331); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093332); -- Runic Lamp 1
+INSERT INTO `instance_entities` VALUES (7704,17093333); -- Runic Lamp 2
+INSERT INTO `instance_entities` VALUES (7704,17093334); -- Runic Lamp 3
+INSERT INTO `instance_entities` VALUES (7704,17093335); -- Runic Lamp 4
+INSERT INTO `instance_entities` VALUES (7704,17093336); -- Runic Lamp 5
+INSERT INTO `instance_entities` VALUES (7704,17093353);
+INSERT INTO `instance_entities` VALUES (7704,17093354);
+INSERT INTO `instance_entities` VALUES (7704,17093429); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093430); -- Vending box
 
 -- Light in the Darkness (9300)
 -- mobs

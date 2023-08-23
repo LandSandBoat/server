@@ -3,13 +3,8 @@
 -- Balasiel !pos -136 -11 64 230
 -- qm1 !pos 107 0.7 -125.25 176
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local southernSandOriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local seaSerpentGrottoID = require('scripts/zones/Sea_Serpent_Grotto/IDs')
+local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
@@ -26,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.SPEAR_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.SPEAR_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.POLEARM) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -45,7 +40,7 @@ quest.sections =
                 [8] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        (player:hasItem(xi.items.SPEAR_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS))
+                        (player:hasItem(xi.item.SPEAR_OF_TRIALS) or npcUtil.giveItem(player, xi.item.SPEAR_OF_TRIALS))
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -76,12 +71,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(12) -- cont 2
                     else
-                        return quest:event(11, player:hasItem(xi.items.SPEAR_OF_TRIALS) and 1 or 0) -- cont 1
+                        return quest:event(11, player:hasItem(xi.item.SPEAR_OF_TRIALS) and 1 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SPEAR_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SPEAR_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -96,8 +91,8 @@ quest.sections =
             onEventFinish =
             {
                 [11] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.SPEAR_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.SPEAR_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.SPEAR_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

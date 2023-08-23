@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Toraimarai Canal (169)
 -----------------------------------
-local ID = require('scripts/zones/Toraimarai_Canal/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,9 +3,7 @@
 --  Mob: Boggart
 -- Note: Place holder Nocuous Weapon
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

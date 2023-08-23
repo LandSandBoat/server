@@ -3,9 +3,7 @@
 --  NPC: The Picture ??? in Vemalpeau's house
 -- Involved in Quests: Under Oath
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

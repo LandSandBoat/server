@@ -4,9 +4,7 @@
 -- Note: This script will be loaded for both the NM and non-NM mobs of this name.
 -- !pos -21.776 16.983 -231.477 167
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 local entity = {}
 

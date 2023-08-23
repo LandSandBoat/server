@@ -3,9 +3,7 @@
 --  Mob: Antican Triarius
 -- Note: PH for Triarius X-XV and Hastatus XI-XII
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 

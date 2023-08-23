@@ -3,7 +3,7 @@
 --  NPC: Door_House
 -- (Corsair's Gants) !pos -200 -4 -111 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
@@ -16,10 +16,10 @@ entity.onTrade = function(player, npc, trade)
         if
             letterGreen == 2 and
             trade:getItemCount() == 4 and
-            trade:hasItemQty(xi.items.SPOOL_OF_GOLD_THREAD, 1) and
-            trade:hasItemQty(xi.items.SQUARE_OF_KARAKUL_LEATHER, 1) and
-            trade:hasItemQty(xi.items.SQUARE_OF_RED_GRASS_CLOTH, 1) and
-            trade:hasItemQty(xi.items.SPOOL_OF_WAMOURA_SILK, 1)
+            trade:hasItemQty(xi.item.SPOOL_OF_GOLD_THREAD, 1) and
+            trade:hasItemQty(xi.item.SQUARE_OF_KARAKUL_LEATHER, 1) and
+            trade:hasItemQty(xi.item.SQUARE_OF_RED_GRASS_CLOTH, 1) and
+            trade:hasItemQty(xi.item.SPOOL_OF_WAMOURA_SILK, 1)
         then
             player:startEvent(943) -- accepts materials, now bring me 4 imperial mythril pieces
 
@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
         elseif
             letterGreen == 3 and
             trade:getItemCount() == 4 and
-            trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, 4)
+            trade:hasItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE, 4)
         then
             player:startEvent(946) -- accepts mythril pieces, now wait for next vana'diel day
         end
@@ -70,8 +70,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
     elseif csid == 944 then
         player:setCharVar("LeleroonsletterGreen", 5)
-        player:addItem(xi.items.CORSAIRS_GANTS) -- corsair's gants
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CORSAIRS_GANTS)
+        player:addItem(xi.item.CORSAIRS_GANTS) -- corsair's gants
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CORSAIRS_GANTS)
     end
 end
 

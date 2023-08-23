@@ -4,9 +4,7 @@
 -- !pos -334 -24 52
 -- Teleports Players to Abyssea - Attohwa
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/abyssea")
+local ID = zones[xi.zone.BUBURIMU_PENINSULA]
 -----------------------------------
 local entity = {}
 

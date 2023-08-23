@@ -4,8 +4,7 @@
 -- Type: Guild Merchant: Fishing Guild
 -- !pos 1.841 -2.101 -9.000 221
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA]
 -----------------------------------
 local entity = {}
 

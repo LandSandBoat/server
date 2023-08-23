@@ -66,7 +66,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         end
 
         -- Ethereal droplet. Warps you to Portal #1.
-        if player:hasItem(xi.items.ETHEREAL_DROPLET, xi.inv.TEMPITEMS) then
+        if player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMPITEMS) then
             lockValue = lockValue + 2
         end
     end
@@ -112,8 +112,10 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     local portalCost = getPortalCost(player)
 
     if option == 3 then-- Ethereal droplet usage.
-        player:delItem(xi.items.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
-        player:messageSpecial(ID.text.YOU_HAVE_USED, xi.items.ETHEREAL_DROPLET)
+        local ID = zones[player:getZoneID()]
+
+        player:delItem(xi.item.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
+        player:messageSpecial(ID.text.YOU_HAVE_USED, xi.item.ETHEREAL_DROPLET)
     elseif
         option ~= 0 and
         option ~= 4 and -- Scintillating Rhapsody usage.

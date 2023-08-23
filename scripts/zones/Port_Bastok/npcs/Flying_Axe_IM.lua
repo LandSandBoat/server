@@ -2,8 +2,6 @@
 -- Area: Port Bastok
 --  NPC: Flying Axe, I.M.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Bibiki_Bay/IDs')
+local ID = zones[xi.zone.BIBIKI_BAY]
 
 return {
     ['qm_dalham']  = { messageSpecial = ID.text.NOTHING_LEFT_INTEREST },

@@ -4,8 +4,6 @@
 -----------------------------------
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -27,19 +25,19 @@ entity.onTrade = function(player, npc, trade)
         local reward = 0
 
         -- TODO: Table this on converting to Interaction
-        if trade:hasItemQty(xi.items.TORN_EPISTLE, 1) then
+        if trade:hasItemQty(xi.item.TORN_EPISTLE, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(xi.items.MUDDY_BAR_TAB, 1) then
+        if trade:hasItemQty(xi.item.MUDDY_BAR_TAB, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(xi.items.ODD_POSTCARD, 1) then
+        if trade:hasItemQty(xi.item.ODD_POSTCARD, 1) then
             reward = reward + 1
         end
 
-        if trade:hasItemQty(xi.items.DAMP_ENVELOPE, 1) then
+        if trade:hasItemQty(xi.item.DAMP_ENVELOPE, 1) then
             reward = reward + 1
         end
 

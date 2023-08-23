@@ -4,8 +4,7 @@
 -- Type: Bonecraft Image Support
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

@@ -3,8 +3,6 @@
 --  NPC: Dilapidated Gate
 -- Note: Entrance to Misareaux Coast
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

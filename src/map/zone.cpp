@@ -108,10 +108,11 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
-, m_zoneType(ZONE_TYPE::NONE)
+, m_zoneType(ZONE_TYPE::UNKNOWN)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
+, m_WeatherChangeTime(0)
 {
     TracyZoneScoped;
 
@@ -124,7 +125,6 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;
-    m_WeatherChangeTime  = 0;
     m_navMesh            = nullptr;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
@@ -150,7 +150,7 @@ ZONEID CZone::GetID()
     return m_zoneID;
 }
 
-ZONE_TYPE CZone::GetType()
+ZONE_TYPE CZone::GetTypeMask()
 {
     return m_zoneType;
 }
@@ -462,7 +462,7 @@ void CZone::LoadNavMesh()
 
 void CZone::LoadZoneLos()
 {
-    if (GetType() == ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
+    if (GetTypeMask() & ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
     {
         // Skip cities and zones with line of sight turned off
         return;
@@ -666,8 +666,12 @@ void CZone::UpdateWeather()
         Weather = weatherType.normal;
     }
 
-    // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
-    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONE_TYPE::CITY))
+    // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
+    // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
+    if ((CurrentVanaDate >= StartFogVanaDate) &&
+        (CurrentVanaDate < EndFogVanaDate) &&
+        (Weather < WEATHER_HOT_SPELL) &&
+        !(GetTypeMask() & ZONE_TYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -1044,7 +1048,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->PTreasurePool->AddMember(PChar);
     }
 
-    if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
+    if (!(m_zoneType & ZONE_TYPE::INSTANCED))
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;

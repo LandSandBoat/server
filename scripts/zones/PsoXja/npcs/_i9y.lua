@@ -3,7 +3,7 @@
 --  NPC: _i9y (Crystal Receptor)
 -- !pos -389.980 -3.198 -203.595 9
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
+local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

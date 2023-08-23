@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Oruga
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

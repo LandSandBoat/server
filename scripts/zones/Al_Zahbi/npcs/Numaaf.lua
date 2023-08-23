@@ -4,15 +4,14 @@
 -- Type: Cooking Normal/Adv. Image Support
 -- !pos 54.966 -7 8.328 48
 -----------------------------------
-require("scripts/globals/crafting")
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
         if
-            trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, 1) and
             trade:getItemCount() == 1
         then
             if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
@@ -30,9 +29,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
         if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
-            player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, xi.items.IMPERIAL_BRONZE_PIECE)
+            player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, xi.item.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, xi.items.IMPERIAL_BRONZE_PIECE)
+            player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, xi.item.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(222, 0, 0, 0, 0, 0, 0, 8, 0) -- Standard Dialogue

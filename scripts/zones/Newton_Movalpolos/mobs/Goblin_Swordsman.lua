@@ -3,10 +3,8 @@
 --  Mob: Goblin Swordsman
 -- Note: PH for Swashstox Beadblinker
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
-
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

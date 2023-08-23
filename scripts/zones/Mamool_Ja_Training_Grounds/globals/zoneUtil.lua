@@ -2,7 +2,7 @@
 -- Zone Utilities
 -- random globals that may be used per zone
 -----------------------------------
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 xi = xi or {}
 xi.zoneUtil = xi.zoneUtil or {}

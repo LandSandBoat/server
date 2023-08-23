@@ -2,8 +2,6 @@
 -- Area: Maze of Shakhrami
 --  Mob: Stink Bats
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

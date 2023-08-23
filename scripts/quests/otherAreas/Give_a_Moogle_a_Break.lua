@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 100
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
-require('scripts/globals/moghouse')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
 
@@ -37,7 +33,7 @@ local questAvailable =
     ['Moogle'] =
     {
         onTrigger = function(player, npc)
-            return quest:progressEvent(30005, 0, 0, 0, 5, 0, xi.items.POWER_BOW, xi.items.BEETLE_RING)
+            return quest:progressEvent(30005, 0, 0, 0, 5, 0, xi.item.POWER_BOW, xi.item.BEETLE_RING)
         end,
     },
 
@@ -63,7 +59,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.items.POWER_BOW, xi.items.BEETLE_RING }) then
+            if npcUtil.tradeHasExactly(trade, { xi.item.POWER_BOW, xi.item.BEETLE_RING }) then
                 return quest:progressEvent(30007)
             end
         end,
@@ -77,7 +73,7 @@ local questAccepted =
             end
 
             if questProgress == 0 then
-                return quest:progressEvent(30006, 0, 0, 0, 0, 0, xi.items.POWER_BOW, xi.items.BEETLE_RING)
+                return quest:progressEvent(30006, 0, 0, 0, 0, 0, xi.item.POWER_BOW, xi.item.BEETLE_RING)
             elseif
                 questProgress == 1 and
                 quest:getVar(player, 'Timer') < os.time()

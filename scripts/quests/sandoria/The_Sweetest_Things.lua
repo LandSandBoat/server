@@ -4,11 +4,6 @@
 -- Log ID: 0, Quest ID: 8
 -- Raimbroy : !pos -141 -3 34.6 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
@@ -20,7 +15,7 @@ quest.reward =
 }
 
 local raimbroyOnTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, { { xi.items.POT_OF_HONEY, 5 } }) then
+    if npcUtil.tradeHasExactly(trade, { { xi.item.POT_OF_HONEY, 5 } }) then
         return quest:progressEvent(535, 400 * xi.settings.main.GIL_RATE)
     else
         return quest:event(522)

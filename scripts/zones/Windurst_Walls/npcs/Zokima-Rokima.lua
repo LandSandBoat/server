@@ -4,10 +4,6 @@
 -- Starts Windurst Missions
 -- !pos 0 -16 124 239
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

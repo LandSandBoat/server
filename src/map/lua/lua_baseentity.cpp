@@ -10270,7 +10270,7 @@ void CLuaBaseEntity::reloadParty()
  *  Function: disableLevelSync()
  *  Purpose : Disables...wait for it...Level Sync
  *  Example : target:disableLevelSync()
- *  Notes   : Only used in scripts/globals/effects/level_sync.lua
+ *  Notes   : Only used in scripts/effects/level_sync.lua
  ************************************************************************/
 
 void CLuaBaseEntity::disableLevelSync()
@@ -11037,7 +11037,7 @@ void CLuaBaseEntity::timer(int ms, sol::function func)
  *  Example :
  *  Notes   : For instance, Sic can be used before a Pet reaches 100% TP.
  *          : Once the Pet reaches 100%, it will use it's Special Ability.
- *          : See scripts/globals/abilities/sic.lua for how the Special
+ *          : See scripts/actions/abilities/sic.lua for how the Special
  *          : Ability is delayed until 100% (essentially loops into Action Queue)
  ************************************************************************/
 
@@ -11273,7 +11273,7 @@ uint16 CLuaBaseEntity::getBattleID()
  *  Function: recalculateStats()
  *  Purpose : Recalculate the total Stats for a PC (force update)
  *  Example : target:recalculateStats()
- *  Notes   : See scripts/globals/effects/obliviscence.lua
+ *  Notes   : See scripts/effects/obliviscence.lua
  ************************************************************************/
 
 void CLuaBaseEntity::recalculateStats()
@@ -11658,7 +11658,7 @@ void CLuaBaseEntity::updateEnmity(CLuaBaseEntity* PEntity)
  *  Function: transferEnmity()
  *  Purpose : Used to transfer an amount of Enmity from one Entity to another
  *  Example : target:transferEnmity(player, 50, 20.6)
- *  Notes   : See scripts/globals/abilities/accomplice.lua
+ *  Notes   : See scripts/actions/abilities/accomplice.lua
  ************************************************************************/
 
 void CLuaBaseEntity::transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range)
@@ -12862,7 +12862,7 @@ uint8 CLuaBaseEntity::getOverloadChance(uint8 element)
  *  Function: setStatDebilitation()
  *  Purpose : Updates the private member m_StatsDebilitation in CCharEntity
  *  Example : target:setStatDebilitation(power)
- *  Notes   : Used only through scripts/globals/effects/debilitation.lua
+ *  Notes   : Used only through scripts/effects/debilitation.lua
  ************************************************************************/
 
 void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
@@ -16027,7 +16027,7 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
  *  Function: hasPreventActionEffect()
  *  Purpose : Returns true if a non-NPC entity has a preventative status effect
  *  Example : if not pet:hasPreventActionEffect() then
- *  Notes   : Used in scripts/globals/abilities/stay.lua
+ *  Notes   : Used in scripts/actions/abilities/stay.lua
  ************************************************************************/
 
 bool CLuaBaseEntity::hasPreventActionEffect()
@@ -16260,7 +16260,7 @@ uint16 CLuaBaseEntity::getDespoilDebuff(uint16 itemID)
  *  Function: itemStolen()
  *  Purpose : Flags a mob's item as stolen, returns true upon update
  *  Example : target:itemStolen()
- *  Notes   : Used in scripts/globals/abilities/steal.lua
+ *  Notes   : Used in scripts/actions/abilities/steal.lua
  ************************************************************************/
 
 bool CLuaBaseEntity::itemStolen()

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Nashmau (53)
 -----------------------------------
-local ID = require('scripts/zones/Nashmau/IDs')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,7 +3,7 @@
 --  Mob: Clockwork Pod
 -- Note: PH for Mind Hoarder
 -----------------------------------
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}
 

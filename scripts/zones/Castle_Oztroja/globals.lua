@@ -1,7 +1,7 @@
 -- Zone: Castle Oztroja (151)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
 local oztrojaGlobal =

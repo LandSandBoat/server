@@ -3,9 +3,8 @@
 --   NM: Kappa Biwa
 -- Involved in Quest: True will
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

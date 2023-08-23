@@ -30,65 +30,65 @@ xi.garrison.loot =
 {
     [20] =
     {
-        { itemId = xi.items.DRAGON_CHRONICLES, dropRate = 1000 },
-        { itemId = xi.items.GARRISON_TUNICA,   dropRate = 350  },
-        { itemId = xi.items.GARRISON_BOOTS,    dropRate = 350  },
-        { itemId = xi.items.GARRISON_HOSE,     dropRate = 350  },
-        { itemId = xi.items.GARRISON_GLOVES,   dropRate = 350  },
-        { itemId = xi.items.GARRISON_SALLET,   dropRate = 350  },
+        { itemId = xi.item.DRAGON_CHRONICLES, dropRate = 1000 },
+        { itemId = xi.item.GARRISON_TUNICA,   dropRate = 350  },
+        { itemId = xi.item.GARRISON_BOOTS,    dropRate = 350  },
+        { itemId = xi.item.GARRISON_HOSE,     dropRate = 350  },
+        { itemId = xi.item.GARRISON_GLOVES,   dropRate = 350  },
+        { itemId = xi.item.GARRISON_SALLET,   dropRate = 350  },
     },
     [30] =
     {
-        { itemId = xi.items.DRAGON_CHRONICLES, dropRate = 1000 },
-        { itemId = xi.items.MILITARY_GUN,      dropRate = 350  },
-        { itemId = xi.items.MILITARY_POLE,     dropRate = 350  },
-        { itemId = xi.items.MILITARY_HARP,     dropRate = 350  },
-        { itemId = xi.items.MILITARY_PICK,     dropRate = 350  },
-        { itemId = xi.items.MILITARY_SPEAR,    dropRate = 350  },
-        { itemId = xi.items.MILITARY_AXE,      dropRate = 350  },
+        { itemId = xi.item.DRAGON_CHRONICLES, dropRate = 1000 },
+        { itemId = xi.item.MILITARY_GUN,      dropRate = 350  },
+        { itemId = xi.item.MILITARY_POLE,     dropRate = 350  },
+        { itemId = xi.item.MILITARY_HARP,     dropRate = 350  },
+        { itemId = xi.item.MILITARY_PICK,     dropRate = 350  },
+        { itemId = xi.item.MILITARY_SPEAR,    dropRate = 350  },
+        { itemId = xi.item.MILITARY_AXE,      dropRate = 350  },
     },
     [40] =
     {
-        { itemId = xi.items.DRAGON_CHRONICLES, dropRate = 1000 },
-        { itemId = xi.items.VARIABLE_MANTLE,   dropRate = 350  },
-        { itemId = xi.items.VARIABLE_CAPE,     dropRate = 350  },
-        { itemId = xi.items.PROTEAN_RING,      dropRate = 350  },
-        { itemId = xi.items.VARIABLE_RING,     dropRate = 350  },
-        { itemId = xi.items.MECURIAL_EARRING,  dropRate = 350  },
+        { itemId = xi.item.DRAGON_CHRONICLES, dropRate = 1000 },
+        { itemId = xi.item.VARIABLE_MANTLE,   dropRate = 350  },
+        { itemId = xi.item.VARIABLE_CAPE,     dropRate = 350  },
+        { itemId = xi.item.PROTEAN_RING,      dropRate = 350  },
+        { itemId = xi.item.VARIABLE_RING,     dropRate = 350  },
+        { itemId = xi.item.MECURIAL_EARRING,  dropRate = 350  },
     },
     [50] =
     {
-        { itemId = xi.items.DRAGON_CHRONICLES, dropRate = 1000 },
-        { itemId = xi.items.UNDEAD_EARRING,    dropRate = 350  },
-        { itemId = xi.items.ARCANA_EARRING,    dropRate = 350  },
-        { itemId = xi.items.VERMIN_EARRING,    dropRate = 350  },
-        { itemId = xi.items.BIRD_EARRING,      dropRate = 350  },
-        { itemId = xi.items.AMORPH_EARRING,    dropRate = 350  },
-        { itemId = xi.items.LIZARD_EARRING,    dropRate = 350  },
-        { itemId = xi.items.AQUAN_EARRING,     dropRate = 350  },
-        { itemId = xi.items.PLANTOID_EARRING,  dropRate = 350  },
-        { itemId = xi.items.BEAST_EARRING,     dropRate = 350  },
-        { itemId = xi.items.DEMON_EARRING,     dropRate = 350  },
-        { itemId = xi.items.DRAGON_EARRING,    dropRate = 350  },
-        { itemId = xi.items.REFRESH_EARRING,   dropRate = 350  },
-        { itemId = xi.items.ACCURATE_EARRING,  dropRate = 350  },
+        { itemId = xi.item.DRAGON_CHRONICLES, dropRate = 1000 },
+        { itemId = xi.item.UNDEAD_EARRING,    dropRate = 350  },
+        { itemId = xi.item.ARCANA_EARRING,    dropRate = 350  },
+        { itemId = xi.item.VERMIN_EARRING,    dropRate = 350  },
+        { itemId = xi.item.BIRD_EARRING,      dropRate = 350  },
+        { itemId = xi.item.AMORPH_EARRING,    dropRate = 350  },
+        { itemId = xi.item.LIZARD_EARRING,    dropRate = 350  },
+        { itemId = xi.item.AQUAN_EARRING,     dropRate = 350  },
+        { itemId = xi.item.PLANTOID_EARRING,  dropRate = 350  },
+        { itemId = xi.item.BEAST_EARRING,     dropRate = 350  },
+        { itemId = xi.item.DEMON_EARRING,     dropRate = 350  },
+        { itemId = xi.item.DRAGON_EARRING,    dropRate = 350  },
+        { itemId = xi.item.REFRESH_EARRING,   dropRate = 350  },
+        { itemId = xi.item.ACCURATE_EARRING,  dropRate = 350  },
     },
     [99] =
     {
-        { itemId = xi.items.MIRATETES_MEMOIRS, dropRate = 1000 },
-        { itemId = xi.items.MIGHTY_BOW,        dropRate = 350  },
-        { itemId = xi.items.MIGHTY_CUDGEL,     dropRate = 350  },
-        { itemId = xi.items.MIGHTY_POLE,       dropRate = 350  },
-        { itemId = xi.items.MIGHTY_TALWAR,     dropRate = 350  },
-        { itemId = xi.items.RAI_KUNIMITSU,     dropRate = 350  },
-        { itemId = xi.items.NUKEMARU,          dropRate = 350  },
-        { itemId = xi.items.MIGHTY_PICK,       dropRate = 350  },
-        { itemId = xi.items.MIGHTY_KNIFE,      dropRate = 350  },
-        { itemId = xi.items.MIGHTY_ZAGHNAL,    dropRate = 350  },
-        { itemId = xi.items.MIGHTY_LANCE,      dropRate = 350  },
-        { itemId = xi.items.MIGHTY_AXE,        dropRate = 350  },
-        { itemId = xi.items.MIGHTY_PATAS,      dropRate = 350  },
-        { itemId = xi.items.MIGHTY_SWORD,      dropRate = 350  },
+        { itemId = xi.item.MIRATETES_MEMOIRS, dropRate = 1000 },
+        { itemId = xi.item.MIGHTY_BOW,        dropRate = 350  },
+        { itemId = xi.item.MIGHTY_CUDGEL,     dropRate = 350  },
+        { itemId = xi.item.MIGHTY_POLE,       dropRate = 350  },
+        { itemId = xi.item.MIGHTY_TALWAR,     dropRate = 350  },
+        { itemId = xi.item.RAI_KUNIMITSU,     dropRate = 350  },
+        { itemId = xi.item.NUKEMARU,          dropRate = 350  },
+        { itemId = xi.item.MIGHTY_PICK,       dropRate = 350  },
+        { itemId = xi.item.MIGHTY_KNIFE,      dropRate = 350  },
+        { itemId = xi.item.MIGHTY_ZAGHNAL,    dropRate = 350  },
+        { itemId = xi.item.MIGHTY_LANCE,      dropRate = 350  },
+        { itemId = xi.item.MIGHTY_AXE,        dropRate = 350  },
+        { itemId = xi.item.MIGHTY_PATAS,      dropRate = 350  },
+        { itemId = xi.item.MIGHTY_SWORD,      dropRate = 350  },
     },
 }
 
@@ -98,7 +98,7 @@ xi.garrison.data =
 {
     [xi.zone.WEST_RONFAURE] =
     {
-        itemReq = xi.items.RED_CRYPTEX,
+        itemReq = xi.item.RED_CRYPTEX,
         textRegion = 0,
         levelCap = 20,
         mobBoss = "Orcish_Fighterchief",
@@ -116,7 +116,7 @@ xi.garrison.data =
     },
     [xi.zone.NORTH_GUSTABERG] =
     {
-        itemReq = xi.items.DARKSTEEL_ENGRAVING,
+        itemReq = xi.item.DARKSTEEL_ENGRAVING,
         textRegion = 1,
         levelCap = 20,
         mobBoss = "Lead_Quadav",
@@ -134,7 +134,7 @@ xi.garrison.data =
     },
     [xi.zone.WEST_SARUTABARUTA] =
     {
-        itemReq = xi.items.SEVEN_KNOT_QUIPU,
+        itemReq = xi.item.SEVEN_KNOT_QUIPU,
         textRegion = 2,
         levelCap = 20,
         mobBoss = "Yagudo_Condottiere",
@@ -152,7 +152,7 @@ xi.garrison.data =
     },
     [xi.zone.VALKURM_DUNES] =
     {
-        itemReq = xi.items.GALKA_FANG_SACK,
+        itemReq = xi.item.GALKA_FANG_SACK,
         textRegion = 3,
         levelCap = 30,
         mobBoss = "Goblin_Swindler",
@@ -170,7 +170,7 @@ xi.garrison.data =
     },
     [xi.zone.JUGNER_FOREST] =
     {
-        itemReq = xi.items.JADE_CRYPTEX,
+        itemReq = xi.item.JADE_CRYPTEX,
         textRegion = 4,
         levelCap = 30,
         mobBoss = "Orcish_Colonel",
@@ -188,7 +188,7 @@ xi.garrison.data =
     },
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        itemReq = xi.items.SILVER_ENGRAVING,
+        itemReq = xi.item.SILVER_ENGRAVING,
         textRegion = 5,
         levelCap = 30,
         mobBoss = "Cobalt_Quadav",
@@ -206,7 +206,7 @@ xi.garrison.data =
     },
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        itemReq = xi.items.MITHRA_FANG_SACK,
+        itemReq = xi.item.MITHRA_FANG_SACK,
         textRegion = 6,
         levelCap = 30,
         mobBoss = "Goblin_Guide",
@@ -224,7 +224,7 @@ xi.garrison.data =
     },
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        itemReq = xi.items.THIRTEEN_KNOT_QUIPU,
+        itemReq = xi.item.THIRTEEN_KNOT_QUIPU,
         textRegion = 7,
         levelCap = 30,
         mobBoss = "Yagudo_Missionary",
@@ -242,7 +242,7 @@ xi.garrison.data =
     },
     [xi.zone.QUFIM_ISLAND] =
     {
-        itemReq = xi.items.RAM_LEATHER_MISSIVE,
+        itemReq = xi.item.RAM_LEATHER_MISSIVE,
         textRegion = 10,
         levelCap = 30,
         mobBoss = "Hunting_Chief",
@@ -260,7 +260,7 @@ xi.garrison.data =
     },
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
-        itemReq = xi.items.TIGER_LEATHER_MISSIVE,
+        itemReq = xi.item.TIGER_LEATHER_MISSIVE,
         textRegion = 8,
         levelCap = 40,
         mobBoss = "Gigas_Overseer",
@@ -278,7 +278,7 @@ xi.garrison.data =
     },
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        itemReq = xi.items.HOUND_FANG_SACK,
+        itemReq = xi.item.HOUND_FANG_SACK,
         textRegion = 11,
         levelCap = 40,
         mobBoss = "Goblin_Doyen",
@@ -296,7 +296,7 @@ xi.garrison.data =
     },
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        itemReq = xi.items.SHEEP_LEATHER_MISSIVE,
+        itemReq = xi.item.SHEEP_LEATHER_MISSIVE,
         textRegion = 14,
         levelCap = 40,
         mobBoss = "Sahagin_Patriarch",
@@ -314,7 +314,7 @@ xi.garrison.data =
     },
     [xi.zone.XARCABARD] =
     {
-        itemReq = xi.items.BEHEMOTH_LEATHER_MISSIVE,
+        itemReq = xi.item.BEHEMOTH_LEATHER_MISSIVE,
         textRegion = 9,
         levelCap = 50,
         mobBoss = "Demon_Aristocrat",
@@ -332,7 +332,7 @@ xi.garrison.data =
     },
     [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
-        itemReq = xi.items.DHALMEL_LEATHER_MISSIVE,
+        itemReq = xi.item.DHALMEL_LEATHER_MISSIVE,
         textRegion = 12,
         levelCap = 50,
         mobBoss = "Centurio_XIII-V",
@@ -350,7 +350,7 @@ xi.garrison.data =
     },
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        itemReq = xi.items.COEURL_LEATHER_MISSIVE,
+        itemReq = xi.item.COEURL_LEATHER_MISSIVE,
         textRegion = 15,
         levelCap = 50,
         mobBoss = "Tonberry_Decimator",
@@ -368,7 +368,7 @@ xi.garrison.data =
     },
     [xi.zone.CAPE_TERIGGAN] =
     {
-        itemReq = xi.items.BUNNY_FANG_SACK,
+        itemReq = xi.item.BUNNY_FANG_SACK,
         textRegion = 13,
         levelCap = 99,
         mobBoss = "Goblin_Boss",

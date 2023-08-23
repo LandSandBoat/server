@@ -6,8 +6,7 @@
 -- !pos 539.000 24.198 714.000 15
 -- !pos 554.000 23.098 699.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 -----------------------------------
 local entity = {}
 

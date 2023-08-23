@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Gustav Tunnel (212)
 -----------------------------------
-local ID = require('scripts/zones/Gustav_Tunnel/IDs')
-require('scripts/globals/conquest')
+local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 local zoneObject = {}
 

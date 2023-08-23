@@ -3,8 +3,6 @@
 -- Boneyard Gully ENM, Miasma Filter
 -- !addkeyitem MIASMA_FILTER
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

@@ -6,10 +6,7 @@
 -- Rally Point: Green : !pos 54.013 -23.402 -203.103 137
 -- Spell-worked Snow  : !pos 75.989 -24.249 -248.089 137
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local pastXarcabardID = require('scripts/zones/Xarcabard_[S]/IDs')
+local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PRELUDE_TO_A_STORM)
@@ -21,9 +18,9 @@ mission.reward =
 
 local rewardItems =
 {
-    xi.items.ELIXIR,
-    xi.items.VILE_ELIXIR,
-    xi.items.VILE_ELIXIR_P1,
+    xi.item.ELIXIR,
+    xi.item.VILE_ELIXIR,
+    xi.item.VILE_ELIXIR_P1,
 }
 
 -- NOTE: Instance is triggered at the Spell-Worked Snow behind the Green Rally point, and

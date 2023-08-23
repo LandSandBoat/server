@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Pygmalion
--- Type: Standard NPC
 -- !pos 228.710 -7 93.314 240
 -----------------------------------
 local entity = {}

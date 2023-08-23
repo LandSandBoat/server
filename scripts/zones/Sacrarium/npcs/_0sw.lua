@@ -3,7 +3,7 @@
 --  NPC: _0sw (Reliquiarium Gate)
 -- !pos 23.447 -1.563 50.941 28
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

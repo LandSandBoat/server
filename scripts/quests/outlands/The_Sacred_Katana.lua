@@ -6,12 +6,7 @@
 -- Ranemaud        : !pos 15 0 23 252
 -- qm3 (Zi'Tah)    : !pos -416 0 46 121
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local zitahID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame = 20,
     fameArea = xi.quest.fame_area.NORG,
-    item = xi.items.MAGOROKU,
+    item = xi.item.MAGOROKU,
 }
 
 quest.sections =
@@ -60,7 +55,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and
-                        npcUtil.tradeHasExactly(trade, xi.items.MUMEITO)
+                        npcUtil.tradeHasExactly(trade, xi.item.MUMEITO)
                     then
                         return quest:progressEvent(141)
                     end
@@ -75,7 +70,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:findItem(xi.items.MUMEITO) and
+                        not player:findItem(xi.item.MUMEITO) and
                         npcUtil.tradeHasExactly(trade, { { "gil", 30000 } })
                     then
                         return quest:progressEvent(145)
@@ -83,7 +78,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if not player:findItem(xi.items.MUMEITO) then
+                    if not player:findItem(xi.item.MUMEITO) then
                         return quest:progressEvent(144)
                     end
                 end,
@@ -108,7 +103,7 @@ quest.sections =
                 end,
 
                 [145] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.MUMEITO) then
+                    if npcUtil.giveItem(player, xi.item.MUMEITO) then
                         player:confirmTrade()
                     end
                 end,
@@ -128,7 +123,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.SACK_OF_FISH_BAIT) and
+                        npcUtil.tradeHasExactly(trade, xi.item.SACK_OF_FISH_BAIT) and
                         npcUtil.popFromQM(player, npc, zitahID.mob.ISONADE, { hide = 0 })
                     then
                         player:confirmTrade()

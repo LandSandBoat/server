@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields_[S] (91)
 -----------------------------------
-local ID = require('scripts/zones/Rolanberry_Fields_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

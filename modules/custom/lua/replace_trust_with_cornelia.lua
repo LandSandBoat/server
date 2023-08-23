@@ -12,7 +12,7 @@ local m = Module:new("replace_trust_with_cornelia")
 -- This is the filename of the trust you're trying to replace, without the ".lua" extension
 local trustToReplaceName = "kuyin_hathdenna"
 
-m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToReplaceName), function(caster, target, spell)
+m:addOverride(string.format("xi.actions.spells.trust.%s.onSpellCast", trustToReplaceName), function(caster, target, spell)
     -----------------------------------
     -- NOTE: This is the logic from xi.trust.spawn()
     -----------------------------------
@@ -42,7 +42,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
     trust:setLocalVar("MASTER_ID", trust:getMaster():getID())
 end)
 
-m:addOverride(string.format("xi.globals.spells.trust.%s.onMobSpawn", trustToReplaceName), function(mob)
+m:addOverride(string.format("xi.actions.spells.trust.%s.onMobSpawn", trustToReplaceName), function(mob)
     for _, member in ipairs(mob:getMaster():getParty()) do
         if member:isPC() then
             member:PrintToPlayer("Cornelia, at your service.", 4, "Cornelia") -- 4: MESSAGE_PARTY
@@ -50,7 +50,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onMobSpawn", trustToRepl
     end
 end)
 
-m:addOverride(string.format("xi.globals.spells.trust.%s.onMobDespawn", trustToReplaceName), function(mob)
+m:addOverride(string.format("xi.actions.spells.trust.%s.onMobDespawn", trustToReplaceName), function(mob)
     -- NOTE: Apparently getMaster() returns nil by now, so we're going to get the master's ID that
     --     : we cached earlier
     local masterId = mob:getLocalVar("MASTER_ID")
@@ -62,7 +62,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onMobDespawn", trustToRe
     end
 end)
 
-m:addOverride(string.format("xi.globals.spells.trust.%s.onMobDeath", trustToReplaceName), function(mob)
+m:addOverride(string.format("xi.actions.spells.trust.%s.onMobDeath", trustToReplaceName), function(mob)
     -- Intentionally blank
 end)
 

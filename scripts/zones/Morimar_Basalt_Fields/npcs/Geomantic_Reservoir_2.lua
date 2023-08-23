@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Fade
 -- !pos 337.643 -16.745 305.544 265
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

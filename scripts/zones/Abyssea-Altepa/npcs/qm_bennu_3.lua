@@ -4,8 +4,7 @@
 -- Spawns Bennu
 -- !pos -221 0.950 -320 218
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 -----------------------------------
 local entity = {}
 

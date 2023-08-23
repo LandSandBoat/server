@@ -4,7 +4,7 @@
 -- Door blocked by Weight system
 -- !pos -345 0 820 208
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 

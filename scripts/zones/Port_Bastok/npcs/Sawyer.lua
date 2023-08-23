@@ -3,8 +3,7 @@
 --  NPC: Sawyer
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 
@@ -14,17 +13,17 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4591,  147, 1,    -- Pumpernickel
-        4417, 3036, 1,    -- Egg Soup
-        4442,  368, 1,    -- Pineapple Juice
-        4391,   22, 2,    -- Bretzel
-        4578,  143, 2,    -- Sausage
-        4424, 1012, 2,    -- Melon Juice
-        4437,  662, 2,    -- Roast Mutton
-        4499,   92, 3,    -- Iron Bread
-        4436,  294, 3,    -- Baked Popoto
-        4455,  184, 3,    -- Pebble Soup
-        4509,   10, 3,    -- Distilled Water
+        xi.item.LOAF_OF_IRON_BREAD,         104, 3,
+        xi.item.BRETZEL,                     24, 2,
+        xi.item.LOAF_OF_PUMPERNICKEL,       166, 1,
+        xi.item.BAKED_POPOTO,               332, 3,
+        xi.item.SAUSAGE,                    162, 2,
+        xi.item.BOWL_OF_PEBBLE_SOUP,        208, 3,
+        xi.item.BOWL_OF_EGG_SOUP,          3432, 1,
+        xi.item.FLASK_OF_DISTILLED_WATER,    12, 3,
+        xi.item.BOTTLE_OF_MELON_JUICE,     1144, 2,
+        xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  416, 1,
+        xi.item.SLICE_OF_ROAST_MUTTON,      748, 2,
     }
 
     player:showText(npc, ID.text.SAWYER_SHOP_DIALOG)

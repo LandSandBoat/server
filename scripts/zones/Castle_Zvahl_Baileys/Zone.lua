@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Baileys (161)
 -----------------------------------
-local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 local zoneObject = {}
 

@@ -16,14 +16,10 @@
 -- Yaucevouchat : !pos -318 39 183 102
 -- Ruillont     : !pos -70 1 607 193
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local laTheinePlateauID  = require('scripts/zones/La_Theine_Plateau/IDs')
-local ordellesCavesID    = require('scripts/zones/Ordelles_Caves/IDs')
-local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local laTheinePlateauID  = zones[xi.zone.LA_THEINE_PLATEAU]
+local ordellesCavesID    = zones[xi.zone.ORDELLES_CAVES]
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL)
@@ -348,19 +344,19 @@ mission.sections =
                 end,
 
                 [112] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BRONZE_SWORD) then
+                    if npcUtil.giveItem(player, xi.item.BRONZE_SWORD) then
                         player:setMissionStatus(mission.areaId, 9)
                     end
                 end,
 
                 [113] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BRONZE_SWORD) then
+                    if npcUtil.giveItem(player, xi.item.BRONZE_SWORD) then
                         player:setMissionStatus(mission.areaId, 9)
                     end
                 end,
 
                 [114] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BRONZE_SWORD) then
+                    if npcUtil.giveItem(player, xi.item.BRONZE_SWORD) then
                         player:setMissionStatus(mission.areaId, 9)
                     end
                 end,
@@ -379,7 +375,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 9 and
-                        npcUtil.tradeHasExactly(trade, xi.items.BRONZE_SWORD)
+                        npcUtil.tradeHasExactly(trade, xi.item.BRONZE_SWORD)
                     then
                         return mission:progressEvent(2)
                     end

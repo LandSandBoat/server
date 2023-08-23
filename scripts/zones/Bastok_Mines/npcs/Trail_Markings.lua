@@ -4,8 +4,6 @@
 -- Dynamis-Bastok Enter
 -- !pos 99 1 -67 234
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

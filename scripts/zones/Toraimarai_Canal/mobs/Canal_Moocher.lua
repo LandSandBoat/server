@@ -2,9 +2,6 @@
 -- Area: Toraimarai Canal
 --   NM: Canal Moocher
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

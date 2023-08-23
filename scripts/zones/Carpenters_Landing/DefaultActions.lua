@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 
 return {
     ['Anguenet']          = { event = 21 },

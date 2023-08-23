@@ -1,5 +1,5 @@
 -----------------------------------
-require("scripts/globals/events/handler")
+require("scripts/events/handler")
 -----------------------------------
 xi = xi or {}
 xi.server = xi.server or {}

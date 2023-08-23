@@ -4,11 +4,7 @@
 -- Log ID: 2, Quest ID: 65
 -- Ojha Rhawash : !pos -209 0 -134 239
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
+local windurstWallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
@@ -21,27 +17,27 @@ quest.reward =
 
 local flowerItems =
 {
-    xi.items.AMARYLLIS,
-    xi.items.ASPHODEL,
-    xi.items.CARNATION,
-    xi.items.CASABLANCA,
-    xi.items.CATTLEYA,
-    xi.items.CHAMOMILE,
-    xi.items.DAHLIA,
-    xi.items.FLAX_FLOWER,
-    xi.items.LILAC,
-    xi.items.LYCOPODIUM_FLOWER,
-    xi.items.MARGUERITE,
-    xi.items.OLIVE_FLOWER,
-    xi.items.PAPAKA_GRASS,
-    xi.items.PHALAENOPSIS,
-    xi.items.RAIN_LILY,
-    xi.items.RED_ROSE,
-    xi.items.SNOW_LILY,
-    xi.items.SWEET_WILLIAM,
-    xi.items.TAHRONGI_CACTUS,
-    xi.items.WATER_LILY,
-    xi.items.WIJNRUIT,
+    xi.item.AMARYLLIS,
+    xi.item.ASPHODEL,
+    xi.item.CARNATION,
+    xi.item.CASABLANCA,
+    xi.item.CATTLEYA,
+    xi.item.CHAMOMILE,
+    xi.item.DAHLIA,
+    xi.item.FLAX_FLOWER,
+    xi.item.LILAC,
+    xi.item.LYCOPODIUM_FLOWER,
+    xi.item.MARGUERITE,
+    xi.item.OLIVE_FLOWER,
+    xi.item.PAPAKA_GRASS,
+    xi.item.PHALAENOPSIS,
+    xi.item.RAIN_LILY,
+    xi.item.RED_ROSE,
+    xi.item.SNOW_LILY,
+    xi.item.SWEET_WILLIAM,
+    xi.item.TAHRONGI_CACTUS,
+    xi.item.WATER_LILY,
+    xi.item.WIJNRUIT,
 }
 
 local function isTradeInTable(trade, itemTable)
@@ -66,7 +62,7 @@ quest.sections =
             ['Ojha_Rhawash'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LILAC) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LILAC) then
                         return quest:progressEvent(10000, 0, 239, 2)
                     elseif isTradeInTable(trade, flowerItems) then
                         return quest:progressEvent(10000, 0, 239, 1)
@@ -124,7 +120,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     -- NOTE: After completing this quest, trade is not consumed.
 
-                    if npcUtil.tradeHasExactly(trade, xi.items.LILAC) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LILAC) then
                         return quest:progressEvent(10000, 0, 239, 4)
                     elseif isTradeInTable(trade, flowerItems) then
                         return quest:progressEvent(10000, 0, 239, 5)

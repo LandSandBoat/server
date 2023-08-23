@@ -3,13 +3,8 @@
 -- Brutus !pos -55 8 95 244
 -- qm9 !pos 218 -8 206 159
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
-local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
+local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
@@ -25,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.PICK_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.PICK_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.AXE) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -44,7 +39,7 @@ quest.sections =
                 [12] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        (player:hasItem(xi.items.PICK_OF_TRIALS) or npcUtil.giveItem(player, xi.items.PICK_OF_TRIALS))
+                        (player:hasItem(xi.item.PICK_OF_TRIALS) or npcUtil.giveItem(player, xi.item.PICK_OF_TRIALS))
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -69,12 +64,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(16) -- cont 2
                     else
-                        return quest:event(15, player:hasItem(xi.items.PICK_OF_TRIALS) and 1 or 0) -- cont 1
+                        return quest:event(15, player:hasItem(xi.item.PICK_OF_TRIALS) and 1 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.PICK_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.PICK_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -89,8 +84,8 @@ quest.sections =
             onEventFinish =
             {
                 [15] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.PICK_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.PICK_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.PICK_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.PICK_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

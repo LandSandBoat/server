@@ -12,11 +12,8 @@
 -- Fossil Rocks      : !pos 17 18 184 198
 -- Mahogany Door     : !pos -11 0 20 192
 -- House of the Hero : !pos -26 -13 260 239
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
-local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS)

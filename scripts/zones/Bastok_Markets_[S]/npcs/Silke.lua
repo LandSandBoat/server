@@ -3,8 +3,7 @@
 --  NPC: Silke
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
 local entity = {}
 

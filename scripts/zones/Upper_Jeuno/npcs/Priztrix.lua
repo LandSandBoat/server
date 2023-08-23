@@ -3,9 +3,6 @@
 --  NPC: Priztrix
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/gobbie_mystery_box")
------------------------------------
 local entity = {}
 
 local events =

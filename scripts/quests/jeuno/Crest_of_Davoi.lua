@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 0
 -- Baudin : !pos -75 0 80 244
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
@@ -56,7 +52,7 @@ quest.sections =
             ['Baudin'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_COEURL_MEAT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_COEURL_MEAT) then
                         return quest:progressEvent(171)
                     end
                 end,

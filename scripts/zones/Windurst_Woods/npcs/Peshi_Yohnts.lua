@@ -4,9 +4,7 @@
 -- Type: Bonecraft Guild Master
 -- !pos -6.175 -6.249 -144.667 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

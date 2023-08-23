@@ -1,12 +1,6 @@
 -----------------------------------
 -- Zone: Oldton_Movalpolos (11)
 -----------------------------------
-local ID = require('scripts/zones/Oldton_Movalpolos/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

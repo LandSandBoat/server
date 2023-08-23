@@ -5,9 +5,6 @@
 -- NOTE: xi.mission.id.rov.RHAPSODIES_OF_VANADIEL is set by default
 -- !addmission 13 0
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
 

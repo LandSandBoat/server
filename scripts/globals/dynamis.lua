@@ -4,7 +4,6 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -310,15 +309,6 @@ end
 -----------------------------------
 -- global functions
 -----------------------------------
-
-xi.dynamis.eye =
-{
-    NONE    = 0,
-    RED     = 1,
-    BLUE    = 2,
-    GREEN   = 3,
-}
-
 xi.dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId        = player:getZoneID()
     local info          = entryInfo[zoneId]
@@ -855,19 +845,19 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCLookup =
         baseCs = 130,
         currency =
         {
-            xi.items.ONE_BYNE_BILL,
-            xi.items.ONE_HUNDRED_BYNE_BILL,
-            xi.items.TEN_THOUSAND_BYNE_BILL,
+            xi.item.ONE_BYNE_BILL,
+            xi.item.ONE_HUNDRED_BYNE_BILL,
+            xi.item.TEN_THOUSAND_BYNE_BILL,
         },
         shop =
         {
-            7,  xi.items.LOCK_OF_SIRENS_HAIR,
-            8,  xi.items.VIAL_OF_SLIME_JUICE,
-            9,  xi.items.CHUNK_OF_WOOTZ_ORE,
-            12, xi.items.BOTTLE_OF_CANTARELLA,
-            20, xi.items.FLASK_OF_MARKSMANS_OIL,
-            25, xi.items.WOOTZ_INGOT,
-            33, xi.items.KOH_I_NOOR,
+            7,  xi.item.LOCK_OF_SIRENS_HAIR,
+            8,  xi.item.VIAL_OF_SLIME_JUICE,
+            9,  xi.item.CHUNK_OF_WOOTZ_ORE,
+            12, xi.item.BOTTLE_OF_CANTARELLA,
+            20, xi.item.FLASK_OF_MARKSMANS_OIL,
+            25, xi.item.WOOTZ_INGOT,
+            33, xi.item.KOH_I_NOOR,
         }
     },
     -- Antiquix
@@ -876,19 +866,19 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCLookup =
         baseCs = 50,
         currency =
         {
-            xi.items.TUKUKU_WHITESHELL,
-            xi.items.LUNGO_NANGO_JADESHELL,
-            xi.items.RIMILALA_STRIPESHELL,
+            xi.item.TUKUKU_WHITESHELL,
+            xi.item.LUNGO_NANGO_JADESHELL,
+            xi.item.RIMILALA_STRIPESHELL,
         },
         shop =
         {
-            7,  xi.items.PIECE_OF_ANGEL_SKIN,
-            8,  xi.items.COLOSSAL_SKULL,
-            9,  xi.items.LANCEWOOD_LOG,
-            23, xi.items.CHRONOS_TOOTH,
-            24, xi.items.CHUNK_OF_RELIC_STEEL,
-            25, xi.items.PIECE_OF_LANCEWOOD_LUMBER,
-            28, xi.items.DAMASCUS_INGOT,
+            7,  xi.item.PIECE_OF_ANGEL_SKIN,
+            8,  xi.item.COLOSSAL_SKULL,
+            9,  xi.item.LANCEWOOD_LOG,
+            23, xi.item.CHRONOS_TOOTH,
+            24, xi.item.CHUNK_OF_RELIC_STEEL,
+            25, xi.item.PIECE_OF_LANCEWOOD_LUMBER,
+            28, xi.item.DAMASCUS_INGOT,
         }
     },
     -- Lootblox
@@ -897,19 +887,19 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCLookup =
         baseCs = 130,
         currency =
         {
-            xi.items.ORDELLE_BRONZEPIECE,
-            xi.items.MONTIONT_SILVERPIECE,
-            xi.items.RANPERRE_GOLDPIECE,
+            xi.item.ORDELLE_BRONZEPIECE,
+            xi.item.MONTIONT_SILVERPIECE,
+            xi.item.RANPERRE_GOLDPIECE,
         },
         shop =
         {
-            5,  xi.items.TWINCOON,
-            6,  xi.items.PILE_OF_RELIC_IRON,
-            7,  xi.items.JAR_OF_GOBLIN_GREASE,
-            8,  xi.items.GRIFFON_HIDE,
-            23, xi.items.SQUARE_OF_GRIFFON_LEATHER,
-            25, xi.items.BEHEMOTH_HORN,
-            28, xi.items.MAMMOTH_TUSK,
+            5,  xi.item.TWINCOON,
+            6,  xi.item.PILE_OF_RELIC_IRON,
+            7,  xi.item.JAR_OF_GOBLIN_GREASE,
+            8,  xi.item.GRIFFON_HIDE,
+            23, xi.item.SQUARE_OF_GRIFFON_LEATHER,
+            25, xi.item.BEHEMOTH_HORN,
+            28, xi.item.MAMMOTH_TUSK,
         }
     },
 }
@@ -951,7 +941,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
             player:startEvent(baseCs + 4)
 
         -- return timeless hourglass for refund
-        elseif count == 1 and trade:hasItemQty(xi.items.TIMELESS_HOURGLASS, 1) then
+        elseif count == 1 and trade:hasItemQty(xi.item.TIMELESS_HOURGLASS, 1) then
             player:startEvent(baseCs + 23)
 
         -- currency exchanges
@@ -1004,7 +994,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrigger = function(player, npc)
     local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
-        player:startEvent(baseCs + 3, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.main.PRISMATIC_HOURGLASS_COST, xi.items.TIMELESS_HOURGLASS, xi.settings.main.TIMELESS_HOURGLASS_COST)
+        player:startEvent(baseCs + 3, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.main.PRISMATIC_HOURGLASS_COST, xi.item.TIMELESS_HOURGLASS, xi.settings.main.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(baseCs + 0)
     end
@@ -1020,7 +1010,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventUpdate = function(player, csid,
     if csid == baseCs + 3 then
         -- asking about hourglasses
         if option == 1 then
-            if not player:hasItem(xi.items.TIMELESS_HOURGLASS) then
+            if not player:hasItem(xi.item.TIMELESS_HOURGLASS) then
                 -- must figure out what changes here to prevent the additional dialog
                 -- player:updateEvent(?)
             end

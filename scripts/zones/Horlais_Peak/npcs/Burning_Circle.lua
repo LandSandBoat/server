@@ -4,8 +4,6 @@
 -- Horlais Peak Burning Circle
 -- !pos -509 158 -211 139
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,12 +2,7 @@
 -- Area: Garlaige Citadel (200)
 --   NM: Serket
 -----------------------------------
-mixins = 
-{
-    require("scripts/mixins/rage"),
-    require("scripts/mixins/claim_shield")
-}
-require("scripts/globals/titles")
+mixins = { require("scripts/mixins/rage") }
 -----------------------------------
 local entity = {}
 

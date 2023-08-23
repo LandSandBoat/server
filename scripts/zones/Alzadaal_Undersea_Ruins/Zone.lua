@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
-local ID = require('scripts/zones/Alzadaal_Undersea_Ruins/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

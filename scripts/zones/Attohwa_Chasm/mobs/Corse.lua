@@ -3,8 +3,7 @@
 --  Mob: Corse
 -- Note: PH for Citipati
 -----------------------------------
-local ID = require("scripts/zones/Attohwa_Chasm/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 

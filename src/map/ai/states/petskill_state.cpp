@@ -93,7 +93,7 @@ void CPetSkillState::SpendCost()
 
 bool CPetSkillState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_castTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
     {
         action_t action;
         m_PEntity->OnPetSkillFinished(*this, action);
@@ -130,7 +130,7 @@ bool CPetSkillState::Update(time_point tick)
 
 void CPetSkillState::Cleanup(time_point tick)
 {
-    if (!IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {
         action_t action;
         action.id         = m_PEntity->id;

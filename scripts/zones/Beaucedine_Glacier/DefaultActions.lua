@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Beaucedine_Glacier/IDs')
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 
 return {
     ['Leigon-Moigon']   = { event = 103 },

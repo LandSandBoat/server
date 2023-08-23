@@ -4,8 +4,7 @@
 -- Corsair AF2 and AF3 quests
 -- !pos -14.687 0.000 25.114 53
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("NavigatingtheUnfriendlySeas") <= 2
     then
         if
-            trade:hasItemQty(xi.items.HYDROGAUGE, 1) and
+            trade:hasItemQty(xi.item.HYDROGAUGE, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(283)

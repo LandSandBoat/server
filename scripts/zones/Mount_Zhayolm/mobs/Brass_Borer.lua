@@ -4,7 +4,6 @@
 -- TODO: Halting movement during stance change.
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

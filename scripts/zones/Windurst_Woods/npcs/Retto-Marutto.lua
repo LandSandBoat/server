@@ -4,8 +4,7 @@
 -- Guild Merchant NPC: Bonecrafting Guild
 -- !pos -6.142 -6.55 -132.639 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

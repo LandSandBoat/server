@@ -3,9 +3,7 @@
 --  NPC: Belka
 -- Derfland Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 

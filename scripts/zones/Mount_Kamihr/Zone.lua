@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mount Kamihr
 -----------------------------------
-local ID = require('scripts/zones/Mount_Kamihr/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,11 +4,6 @@
 -- Type: Adventurer's Assistant
 -- !pos 122.658 -1.315 33.001 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

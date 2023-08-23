@@ -4,9 +4,7 @@
 -- Only sells when Windurst controlls Elshimo Lowlands
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

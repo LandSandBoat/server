@@ -3,10 +3,6 @@
 -- NPC:   Armoury Crate
 -- Notes: 100% drop from NMs for ??? items and ?% drop from normal mobs for Temp items
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/utils")
-require("scripts/globals/nyzul")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

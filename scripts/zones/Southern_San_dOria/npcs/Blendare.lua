@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Blendare
--- Type: Standard NPC
 -- !pos 33.033 0.999 -30.119 230
 -----------------------------------
 require("scripts/quests/flyers_for_regine")

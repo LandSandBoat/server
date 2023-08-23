@@ -2,8 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Ose
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,9 +2,8 @@
 -- Area: La Theine Plateau
 --  Mob: Battering Ram
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
-require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

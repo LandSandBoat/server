@@ -4,10 +4,7 @@
 -- Type: Leathercraft Guild Master
 -- !pos -178.882 -2 9.891 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/missions")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

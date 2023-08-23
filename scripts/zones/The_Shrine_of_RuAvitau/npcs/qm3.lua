@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawns Ullikummi)
 -- !pos 739 -99 -581 178
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_DIORITE) and
+        npcUtil.tradeHas(trade, xi.item.CHUNK_OF_DIORITE) and
         npcUtil.popFromQM(player, npc, ID.mob.ULLIKUMMI)
     then
         -- Diorite

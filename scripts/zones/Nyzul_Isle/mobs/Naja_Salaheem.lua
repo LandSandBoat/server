@@ -2,8 +2,7 @@
 -- Area: Nyzul Isle (Path of Darkness)
 --  Mob: Naja Salaheem
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/allyassist")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 

@@ -4,8 +4,6 @@
 -- Title Change NPC
 -- !pos 23 -8 63 249
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local eventId = 10001
@@ -113,14 +111,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.title.changerOnTrigger(player, eventId, titleInfo)
+    xi.titleChanger.onTrigger(player, eventId, titleInfo)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+    xi.titleChanger.onEventFinish(player, csid, option, eventId, titleInfo)
 end
 
 return entity

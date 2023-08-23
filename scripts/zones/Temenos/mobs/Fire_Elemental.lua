@@ -2,8 +2,6 @@
 -- Area: Central Temenos 2nd Floor
 --  Mob: Fire Elemental
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

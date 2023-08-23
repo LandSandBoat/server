@@ -34,15 +34,7 @@ zones[xi.zone.ZERUHN_MINES] =
     },
     npc =
     {
-        MINING      =
-        {
-            17481844,
-            17481845,
-            17481846,
-            17481847,
-            17481848,
-            17481849,
-        },
+        MINING = GetTableOfIDs('Mining_Point'),
     },
 }
 

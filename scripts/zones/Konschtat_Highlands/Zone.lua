@@ -1,12 +1,8 @@
 -----------------------------------
 -- Zone: Konschtat_Highlands (108)
 -----------------------------------
-local ID = require('scripts/zones/Konschtat_Highlands/IDs')
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/chocobo')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}

@@ -2,8 +2,7 @@
 -- Area: Bearclaw Pinnacle
 --  Mob: Snoll Tzar
 -----------------------------------
-require("scripts/globals/player")
-local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------
 local entity = {}
 

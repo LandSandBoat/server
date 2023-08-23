@@ -2,7 +2,7 @@
 -- Area: Fort Ghelsba
 --  Mob: Orcish Fighter
 -----------------------------------
-local ID = require("scripts/zones/Fort_Ghelsba/IDs")
+local ID = zones[xi.zone.FORT_GHELSBA]
 -----------------------------------
 local entity = {}
 

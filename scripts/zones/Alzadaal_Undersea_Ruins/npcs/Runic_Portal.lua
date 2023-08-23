@@ -5,11 +5,7 @@
 -- !pos 206.500 -1.220 33.500 72
 -- !pos 206.500 -1.220 6.500 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 

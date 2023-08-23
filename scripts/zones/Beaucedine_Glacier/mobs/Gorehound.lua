@@ -1,9 +1,6 @@
 -----------------------------------
 --  VNM: Gorehound
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/voidwalker")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

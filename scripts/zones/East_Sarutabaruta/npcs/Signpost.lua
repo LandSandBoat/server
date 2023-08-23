@@ -2,7 +2,7 @@
 -- Area: East Sarutabaruta
 --  NPC: Signpost
 -----------------------------------
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
+local ID = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

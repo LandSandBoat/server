@@ -3,9 +3,7 @@
 --  Mob: Recluse Spider
 -- Note: Place Holder for Arachne
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 local entity = {}
 

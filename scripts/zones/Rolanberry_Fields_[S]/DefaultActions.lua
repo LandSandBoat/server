@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Rolanberry_Fields_[S]/IDs')
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
 
 return {
     ['qm_maw'] = { messageSpecial = ID.text.NOTHING_HAPPENS },

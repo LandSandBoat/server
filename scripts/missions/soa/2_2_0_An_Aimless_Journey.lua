@@ -5,9 +5,6 @@
 -- !addmission 12 14
 -- Ergon Locus : !pos -140.000 10.000 60.000 270
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.AN_AIMLESS_JOURNEY)
 

@@ -4,8 +4,7 @@
 -- Type: Merchant NPC
 -- !pos -6.036 0.000 3.998 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 

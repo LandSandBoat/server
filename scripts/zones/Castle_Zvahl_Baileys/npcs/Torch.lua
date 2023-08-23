@@ -4,8 +4,7 @@
 -- Involved in Quests: Borghertz's Hands (AF Hands, Many job)
 -- !pos 63 -24 21 161
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 local entity = {}
 

@@ -3,9 +3,7 @@
 --  NPC: Rolandienne
 -- Records of Eminence NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

@@ -4,29 +4,23 @@
 -- Type: Assault Mission Giver
 -- !pos 127.474 0.161 -30.418 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
-require("scripts/globals/extravaganza")
------------------------------------
 local entity = {}
 
 local items =
 {
-    [1]  = { itemid = xi.items.VELOCITY_EARRING,             price =  3000 },
-    [2]  = { itemid = xi.items.GARRULOUS_RING,               price =  5000 },
-    [3]  = { itemid = xi.items.GRANDIOSE_CHAIN,              price =  8000 },
-    [4]  = { itemid = xi.items.HURLING_BELT,                 price = 10000 },
-    [5]  = { itemid = xi.items.INVIGORATING_CAPE,            price = 10000 },
-    [6]  = { itemid = xi.items.IMPERIAL_KAMAN,               price = 15000 },
-    [7]  = { itemid = xi.items.STORM_ZAGHNAL,                price = 15000 },
-    [8]  = { itemid = xi.items.STORM_FIFE,                   price = 15000 },
-    [9]  = { itemid = xi.items.YIGIT_TURBAN,                 price = 20000 },
-    [10] = { itemid = xi.items.AMIR_DIRS,                    price = 20000 },
-    [11] = { itemid = xi.items.PAHLUWAN_KHAZAGAND,           price = 20000 },
-    [12] = { itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price =  3000 },
-    [13] = { itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price =  3000 },
+    [1]  = { itemid = xi.item.VELOCITY_EARRING,             price =  3000 },
+    [2]  = { itemid = xi.item.GARRULOUS_RING,               price =  5000 },
+    [3]  = { itemid = xi.item.GRANDIOSE_CHAIN,              price =  8000 },
+    [4]  = { itemid = xi.item.HURLING_BELT,                 price = 10000 },
+    [5]  = { itemid = xi.item.INVIGORATING_CAPE,            price = 10000 },
+    [6]  = { itemid = xi.item.IMPERIAL_KAMAN,               price = 15000 },
+    [7]  = { itemid = xi.item.STORM_ZAGHNAL,                price = 15000 },
+    [8]  = { itemid = xi.item.STORM_FIFE,                   price = 15000 },
+    [9]  = { itemid = xi.item.YIGIT_TURBAN,                 price = 20000 },
+    [10] = { itemid = xi.item.AMIR_DIRS,                    price = 20000 },
+    [11] = { itemid = xi.item.PAHLUWAN_KHAZAGAND,           price = 20000 },
+    [12] = { itemid = xi.item.CIPHER_OF_OVJANGS_ALTER_EGO,  price =  3000 },
+    [13] = { itemid = xi.item.CIPHER_OF_MNEJINGS_ALTER_EGO, price =  3000 },
 }
 
 entity.onTrade = function(player, npc, trade)

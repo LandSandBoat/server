@@ -4,9 +4,6 @@
 -- Type: Outpost Vendor
 -- !pos 144 -7 104 103
 -----------------------------------
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 local vendorRegion  = xi.region.ZULKHEIM

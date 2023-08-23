@@ -2,9 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Aquarius
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

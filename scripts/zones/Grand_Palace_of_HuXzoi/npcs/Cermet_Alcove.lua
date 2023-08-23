@@ -3,8 +3,7 @@
 --  NPC: Cermet Alcove
 -- Note: Escort Quest
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
 local escorts =

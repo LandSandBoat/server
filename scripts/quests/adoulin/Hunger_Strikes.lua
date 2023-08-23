@@ -4,10 +4,6 @@
 -- !addquest 9 76
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
 
@@ -46,7 +42,7 @@ quest.sections =
         ['Westerly_Breeze'] =
         {
             onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_WISDOM_SOUP) then
+                if npcUtil.tradeHasExactly(trade, xi.item.BOWL_OF_WISDOM_SOUP) then
                     return quest:progressEvent(2532)
                 elseif
                     trade:getItemCount() == 1 and

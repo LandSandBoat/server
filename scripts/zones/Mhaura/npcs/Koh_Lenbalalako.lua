@@ -1,16 +1,14 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Koh Lenbalalako
--- Type: Standard NPC
 -- !pos -64.412 -17 29.213 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(xi.items.GOLD_EARRING, 1) and trade:getItemCount() == 1 then -- Trade gold earring (during Rng AF3 quest)
+    if trade:hasItemQty(xi.item.GOLD_EARRING, 1) and trade:getItemCount() == 1 then -- Trade gold earring (during Rng AF3 quest)
         local unbridledPassionCS = player:getCharVar("unbridledPassion")
         if unbridledPassionCS == 2 then
             player:startEvent(10011)
@@ -28,9 +26,9 @@ entity.onTrigger = function(player, npc)
 
     -- during RNG af3
     elseif unbridledPassionCS == 1 then
-        player:startEvent(10009, 0, 13360, xi.items.GOLD_EARRING)
+        player:startEvent(10009, 0, 13360, xi.item.GOLD_EARRING)
     elseif unbridledPassionCS == 2 then
-        player:startEvent(10010, 0, 0, xi.items.GOLD_EARRING)
+        player:startEvent(10010, 0, 0, xi.item.GOLD_EARRING)
     elseif unbridledPassionCS == 3 then
         player:startEvent(10012)
 

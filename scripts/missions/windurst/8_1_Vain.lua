@@ -10,9 +10,6 @@
 -- Moreno-Toeno     : !pos 169 -1.25 159 238
 -- Qu'Hau Spring    : !pos 0 -29 64 122
 -- Sedal-Godjal     : !pos 185 -3 -116 149
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN)
@@ -180,7 +177,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CURSE_WAND) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CURSE_WAND) and
                         player:getMissionStatus(mission.areaId) == 3 and
                         player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
                     then
@@ -193,14 +190,14 @@ mission.sections =
 
                     if missionStatus >= 2 then
                         if player:hasKeyItem(xi.ki.STAR_SEEKER) then
-                            return mission:progressEvent(118, 0, xi.items.CURSE_WAND, xi.ki.STAR_SEEKER)
+                            return mission:progressEvent(118, 0, xi.item.CURSE_WAND, xi.ki.STAR_SEEKER)
                         elseif
                             player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and
                             missionStatus == 4
                         then
                             return mission:progressEvent(121)
                         else
-                            return mission:progressEvent(119, 0, xi.items.CURSE_WAND)
+                            return mission:progressEvent(119, 0, xi.item.CURSE_WAND)
                         end
                     end
                 end,

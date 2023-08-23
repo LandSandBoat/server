@@ -3,9 +3,7 @@
 --  Mob: Greater Manticore
 -- Note: Place Holder for Frostmane
 -----------------------------------
-local ID = require("scripts/zones/Cape_Teriggan/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 local entity = {}
 

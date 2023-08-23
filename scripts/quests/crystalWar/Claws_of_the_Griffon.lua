@@ -5,18 +5,14 @@
 -- Rholont : !pos -168 -2 56 80
 -- qm6     : !pos 68 -0.5 324 82
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local jugnerSID = require('scripts/zones/Jugner_Forest_[S]/IDs')
+local jugnerSID = zones[xi.zone.JUGNER_FOREST_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
 
 quest.reward =
 {
-    item = xi.items.ANGELSTONE,
+    item = xi.item.ANGELSTONE,
 }
 
 quest.sections =

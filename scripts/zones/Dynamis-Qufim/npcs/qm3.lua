@@ -3,8 +3,6 @@
 --  NPC: ??? (qm3)
 -- Note: Spawns Lost Suttung
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

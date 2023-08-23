@@ -4,8 +4,7 @@
 -- Quests: An Undying Pledge
 -- !pos 135 -9 220
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 local entity = {}
 

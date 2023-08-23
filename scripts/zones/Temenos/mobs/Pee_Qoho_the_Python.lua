@@ -3,7 +3,7 @@
 --  Mob: Pee Qoho the Python
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Temenos/IDs")
+local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 

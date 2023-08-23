@@ -1,9 +1,6 @@
 -----------------------------------
 -- Moghouse Exposition
 -----------------------------------
-require('scripts/globals/moghouse')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("mogExpo")
 

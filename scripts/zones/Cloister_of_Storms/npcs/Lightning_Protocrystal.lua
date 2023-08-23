@@ -4,9 +4,7 @@
 -- Involved in Quests: Trial by Lightning
 -- !pos 534.5 -13 492 202
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Cloister_of_Storms/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_STORMS]
 -----------------------------------
 local entity = {}
 

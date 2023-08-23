@@ -3,7 +3,7 @@
 --  NPC: Enigmatic Footprints
 -- Entry NPC for Dynamis Divergence
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 local entity = {}
 

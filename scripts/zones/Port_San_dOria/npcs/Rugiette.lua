@@ -4,9 +4,6 @@
 -- Involved in Quests: Riding on the Clouds, Lure of the Wildcat (San d'Oria)
 -- !pos 71 -9 -73 232
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

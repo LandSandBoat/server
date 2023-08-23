@@ -2,8 +2,6 @@
 -- Area: Eastern Adoulin (257)
 --  NPC: Moogle
 -----------------------------------
-require("scripts/globals/moghouse")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

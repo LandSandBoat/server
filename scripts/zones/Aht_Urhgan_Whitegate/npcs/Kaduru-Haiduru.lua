@@ -43,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
 
     if canUse_KaduruHaiduru_Service(player) and timesUsed == 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
+            if trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(154, 0, player:getNation(), 0, 0, 0, 0, 0, 0, 0)
                 player:setCharVar("ShihuDanhu_TP_date", 0)
                 player:setCharVar("Kaduru_ShihuDanhu_date", 0)
@@ -51,7 +51,7 @@ entity.onTrade = function(player, npc, trade)
         end
     elseif canUse_KaduruHaiduru_Service(player) and timesUsed < 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
+            if trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(152, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 player:setCharVar("ShihuDanhu_TP_date", 0)
                 player:setCharVar("Kaduru_ShihuDanhu_date", 0)

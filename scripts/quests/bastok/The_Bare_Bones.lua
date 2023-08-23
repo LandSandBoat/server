@@ -5,10 +5,6 @@
 -- Degenhard : !pos -175 2 -135 235
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
 
@@ -54,7 +50,7 @@ quest.sections =
             ['Degenhard'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BONE_CHIP) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BONE_CHIP) then
                         return quest:progressEvent(258)
                     end
                 end,

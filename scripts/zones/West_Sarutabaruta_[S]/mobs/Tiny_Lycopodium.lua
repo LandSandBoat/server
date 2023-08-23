@@ -3,8 +3,7 @@
 --  Mob: Tiny Lycopodium
 -- Note: PH for Jeduah
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
 mixins = { require("scripts/mixins/families/lycopodium") }
 -----------------------------------
 local entity = {}

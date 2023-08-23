@@ -2,8 +2,7 @@
 -- Area: VeLugannon Palace
 --   NM: Brigandish Blade
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 

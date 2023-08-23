@@ -3,14 +3,13 @@
 --   NM: Golden-Tongued Culberry
 -----------------------------------
 mixins = { require("scripts/mixins/families/tonberry") }
-local ID = require("scripts/zones/PsoXja/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
     mob:addListener("ITEM_DROPS", "ITEM_DROPS_CULBERRY", function(mobArg, loot)
-        loot:addItemFixed(xi.items.UGGALEPIH_PENDANT, mob:getLocalVar("DropRate"))
+        loot:addItemFixed(xi.item.UGGALEPIH_PENDANT, mob:getLocalVar("DropRate"))
     end)
 end
 

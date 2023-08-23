@@ -4,10 +4,7 @@
 -- !pos 96.344, -69.080, -580.008 108
 -- Teleports Players to Abyssea - Konschtat
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/abyssea")
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 local entity = {}
 

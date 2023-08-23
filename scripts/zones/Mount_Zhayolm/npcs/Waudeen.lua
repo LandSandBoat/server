@@ -4,9 +4,7 @@
 -- Type: Assault
 -- !pos 673.882 -23.995 367.604 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 

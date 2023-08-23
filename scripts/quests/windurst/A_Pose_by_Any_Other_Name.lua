@@ -2,45 +2,40 @@
 -- A Pose By Any Other Name
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
 local poseItems =
 {
-    [xi.job.WAR] = xi.items.BRONZE_HARNESS,
-    [xi.job.MNK] = xi.items.ROBE,
-    [xi.job.WHM] = xi.items.TUNIC,
-    [xi.job.BLM] = xi.items.TUNIC,
-    [xi.job.RDM] = xi.items.TUNIC,
-    [xi.job.THF] = xi.items.LEATHER_VEST,
-    [xi.job.PLD] = xi.items.BRONZE_HARNESS,
-    [xi.job.DRK] = xi.items.BRONZE_HARNESS,
-    [xi.job.BST] = xi.items.LEATHER_VEST,
-    [xi.job.BRD] = xi.items.ROBE,
-    [xi.job.RNG] = xi.items.LEATHER_VEST,
-    [xi.job.SAM] = xi.items.KENPOGI,
-    [xi.job.NIN] = xi.items.KENPOGI,
-    [xi.job.DRG] = xi.items.BRONZE_HARNESS,
-    [xi.job.SMN] = xi.items.TUNIC,
-    [xi.job.BLU] = xi.items.ROBE,
-    [xi.job.COR] = xi.items.BRONZE_HARNESS,
-    [xi.job.PUP] = xi.items.TUNIC,
-    [xi.job.DNC] = xi.items.LEATHER_VEST,
-    [xi.job.SCH] = xi.items.TUNIC,
-    [xi.job.GEO] = xi.items.TUNIC,
-    [xi.job.RUN] = xi.items.BRONZE_HARNESS,
+    [xi.job.WAR] = xi.item.BRONZE_HARNESS,
+    [xi.job.MNK] = xi.item.ROBE,
+    [xi.job.WHM] = xi.item.TUNIC,
+    [xi.job.BLM] = xi.item.TUNIC,
+    [xi.job.RDM] = xi.item.TUNIC,
+    [xi.job.THF] = xi.item.LEATHER_VEST,
+    [xi.job.PLD] = xi.item.BRONZE_HARNESS,
+    [xi.job.DRK] = xi.item.BRONZE_HARNESS,
+    [xi.job.BST] = xi.item.LEATHER_VEST,
+    [xi.job.BRD] = xi.item.ROBE,
+    [xi.job.RNG] = xi.item.LEATHER_VEST,
+    [xi.job.SAM] = xi.item.KENPOGI,
+    [xi.job.NIN] = xi.item.KENPOGI,
+    [xi.job.DRG] = xi.item.BRONZE_HARNESS,
+    [xi.job.SMN] = xi.item.TUNIC,
+    [xi.job.BLU] = xi.item.ROBE,
+    [xi.job.COR] = xi.item.BRONZE_HARNESS,
+    [xi.job.PUP] = xi.item.TUNIC,
+    [xi.job.DNC] = xi.item.LEATHER_VEST,
+    [xi.job.SCH] = xi.item.TUNIC,
+    [xi.job.GEO] = xi.item.TUNIC,
+    [xi.job.RUN] = xi.item.BRONZE_HARNESS,
 }
 
 quest.reward =
 {
     fame = 75,
     fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.COPY_OF_ANCIENT_BLOOD,
+    item = xi.item.COPY_OF_ANCIENT_BLOOD,
     title = xi.title.SUPER_MODEL,
     keyItem = xi.ki.ANGELICAS_AUTOGRAPH,
 }

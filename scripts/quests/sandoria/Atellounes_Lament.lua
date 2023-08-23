@@ -5,10 +5,6 @@
 -- LADYBUG_WING: !additem 2506
 -- TRAINEE_GLOVES: !additem 15008
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LAMENT)
 
@@ -16,7 +12,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.TRAINEE_GLOVES,
+    item = xi.item.TRAINEE_GLOVES,
 }
 
 quest.sections =
@@ -62,7 +58,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LADYBUG_WING) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LADYBUG_WING) then
                         return quest:progressEvent(891)
                     end
                 end,

@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: King Ranperres Tomb (190)
 -----------------------------------
-local ID = require('scripts/zones/King_Ranperres_Tomb/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 -----------------------------------
 local zoneObject = {}
 

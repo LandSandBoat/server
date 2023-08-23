@@ -4,7 +4,7 @@
 -- Notes: Tells ship ETA time
 -- !pos 0.278 -14.707 -1.411 221
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA]
 -----------------------------------
 local entity = {}
 

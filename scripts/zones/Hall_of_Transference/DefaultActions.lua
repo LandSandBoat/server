@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Hall_of_Transference/IDs")
+local ID = zones[xi.zone.HALL_OF_TRANSFERENCE]
 
 return {
     ['_0e3'] = { messageSpecial = ID.text.NO_RESPONSE_OFFSET },

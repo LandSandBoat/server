@@ -4,7 +4,7 @@
 -- Involved in Mission: Limit Break 3
 -- !pos 299.999 37.864 47.067 148
 -----------------------------------
-local ID = require("scripts/zones/Qulun_Dome/IDs")
+local ID = zones[xi.zone.QULUN_DOME]
 -----------------------------------
 local entity = {}
 

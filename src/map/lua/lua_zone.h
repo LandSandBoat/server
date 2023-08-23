@@ -52,7 +52,7 @@ public:
     ZONEID             getID();
     const std::string& getName();
     REGION_TYPE        getRegionID();
-    ZONE_TYPE          getType();
+    ZONE_TYPE          getTypeMask();
     auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool               battlefieldsFull(int battlefieldId);
     WEATHER            getWeather();

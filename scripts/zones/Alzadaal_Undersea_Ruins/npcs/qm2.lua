@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Cheese Hoarder Gigiroon(ZNM T1))
 -- !pos -184 -8 24 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.WEDGE_OF_RODENT_CHEESE) and
+        npcUtil.tradeHas(trade, xi.item.WEDGE_OF_RODENT_CHEESE) and
         npcUtil.popFromQM(player, npc, ID.mob.CHEESE_HOARDER_GIGIROON)
     then
         -- Trade Rodent Cheese

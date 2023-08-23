@@ -4,9 +4,7 @@
 -- Entrance to Lufaise Meadows
 -- !pos 420.057 0.000 -199.905 103
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = zones[xi.zone.WINDURST_WALLS]
 
 return {
     ['_6n2']            = { messageSpecial = ID.text.DOORS_SEALED_SHUT },

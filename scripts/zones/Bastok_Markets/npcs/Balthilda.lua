@@ -4,24 +4,23 @@
 -- Type: Merchant
 -- !pos -300 -10 -161 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12473, 1904, 3,    -- Poet's Circlet
-        12608, 1288, 3,    -- Tunic
-        12601, 2838, 3,    -- Linen Robe
-        12736,  602, 3,    -- Mitts
-        12729, 1605, 3,    -- Linen Cuffs
-        12864,  860, 3,    -- Slacks
-        12857, 2318, 3,    -- Linen Slops
-        12992,  556, 3,    -- Solea
-        12985, 1495, 3,    -- Holly Clogs
-        13469, 1150, 3,    -- Leather Ring
+        xi.item.POETS_CIRCLET, 2152, 3,
+        xi.item.TUNIC,         1456, 3,
+        xi.item.LINEN_ROBE,    3208, 3,
+        xi.item.MITTS,          681, 3,
+        xi.item.LINEN_CUFFS,   1814, 3,
+        xi.item.SLACKS,         972, 3,
+        xi.item.LINEN_SLOPS,   2620, 3,
+        xi.item.SOLEA,          629, 3,
+        xi.item.HOLLY_CLOGS,   1690, 3,
+        xi.item.LEATHER_RING,  1300, 3,
     }
 
     player:showText(npc, ID.text.BALTHILDA_SHOP_DIALOG)

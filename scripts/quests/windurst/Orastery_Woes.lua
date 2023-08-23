@@ -3,13 +3,8 @@
 -- Kuroido-Moido !pos -112.5 -4.2 102.9 240
 -- qm1 !pos 197 -8 -27.5 122
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local portWindurstID = require('scripts/zones/Port_Windurst/IDs')
-local roMaeveID = require('scripts/zones/RoMaeve/IDs')
+local portWindurstID = zones[xi.zone.PORT_WINDURST]
+local roMaeveID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES)
@@ -26,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.CLUB_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.CLUB_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.CLUB) / 10 >= 230 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -44,8 +39,8 @@ quest.sections =
             {
                 [578] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.CLUB_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.CLUB_OF_TRIALS)
+                        player:hasItem(xi.item.CLUB_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.CLUB_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -71,12 +66,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(582) -- cont 2
                     else
-                        return quest:event(579, 0, xi.items.CLUB_OF_TRIALS, 0, 0, player:hasItem(xi.items.CLUB_OF_TRIALS) and 2 or 0) -- cont 1
+                        return quest:event(579, 0, xi.item.CLUB_OF_TRIALS, 0, 0, player:hasItem(xi.item.CLUB_OF_TRIALS) and 2 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLUB_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLUB_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -91,8 +86,8 @@ quest.sections =
             onEventFinish =
             {
                 [579] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.CLUB_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.CLUB_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.CLUB_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.CLUB_OF_TRIALS)
                     elseif option == 3 then
                         player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

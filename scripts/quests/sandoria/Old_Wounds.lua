@@ -3,13 +3,8 @@
 -- Curilla !pos 27 0.1 0.1 233
 -- qm3 !pos -145 2 446 208
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
-local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
+local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
+local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
@@ -25,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.SAPARA_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.SAPARA_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.SWORD) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -45,8 +40,8 @@ quest.sections =
                     if
                         option == 1 and
                         (
-                            player:hasItem(xi.items.SAPARA_OF_TRIALS) or
-                            npcUtil.giveItem(player, xi.items.SAPARA_OF_TRIALS)
+                            player:hasItem(xi.item.SAPARA_OF_TRIALS) or
+                            npcUtil.giveItem(player, xi.item.SAPARA_OF_TRIALS)
                         )
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -72,12 +67,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(47) -- cont 2
                     else
-                        return quest:event(46, player:hasItem(xi.items.SAPARA_OF_TRIALS) and 1 or 0) -- cont 1
+                        return quest:event(46, player:hasItem(xi.item.SAPARA_OF_TRIALS) and 1 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SAPARA_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SAPARA_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -92,8 +87,8 @@ quest.sections =
             onEventFinish =
             {
                 [46] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.SAPARA_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.SAPARA_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.SAPARA_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.SAPARA_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

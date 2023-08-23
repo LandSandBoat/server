@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Davoi
 --  NPC: Lootblox
--- Type: Standard NPC
 -- !pos 218.073 -0.982 -20.746 149
------------------------------------
-require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
 

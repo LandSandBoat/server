@@ -2,8 +2,6 @@
 -- Area: Yhoator Jungle
 --  Mob: Goblin Hunter
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

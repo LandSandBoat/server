@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Rabao (247)
 -----------------------------------
-local ID = require('scripts/zones/Rabao/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

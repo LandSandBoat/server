@@ -7,10 +7,6 @@
 -- UMBRIL_OOZE : !additem 3935
 -- Pudith      : !pos -109.533 -0.150 56.939 257
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
 
@@ -97,7 +93,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.UMBRIL_OOZE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.UMBRIL_OOZE) then
                         return quest:progressEvent(3012)
                     end
                 end,

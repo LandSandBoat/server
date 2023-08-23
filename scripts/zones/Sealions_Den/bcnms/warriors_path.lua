@@ -2,10 +2,6 @@
 -- Area: Sealion's Den
 -- Name: The Warrior's Path
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

@@ -3,9 +3,7 @@
 --  NPC: Lebondur
 -- Vollbow Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}
 

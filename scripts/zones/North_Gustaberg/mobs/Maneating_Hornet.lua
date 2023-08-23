@@ -3,9 +3,7 @@
 --  Mob: Maneating Hornet
 -- Note: Place Holder For Stinging Sophie
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 

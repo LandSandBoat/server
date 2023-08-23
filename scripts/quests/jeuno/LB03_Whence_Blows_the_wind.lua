@@ -6,12 +6,8 @@
 -- qm1 (Monastic Caverns) : !pos 168 -1 -22 150
 -- qm2 (Castle Oztroja)   : !pos -100 -63 58 151
 -- qm1 (Qulun Dome)       : !pos 261 39 79 148
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)

@@ -5,11 +5,7 @@
 -- !addmission 13 46
 -- Ru'Lude Homepoint 1 : !pos -6 3 0.001 243
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
@@ -34,7 +30,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         mission:getVar(player, 'Retrieve') == 1 and
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_TENZENS_ALTER_EGO_II)
                     then
                         mission:complete(player)
                     end
@@ -84,10 +80,10 @@ mission.sections =
             {
                 [10244] = function(player, csid, option, npc)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ruludeID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
+                        player:messageSpecial(ruludeID.text.MYSTIC_RETRIEVER, xi.item.CIPHER_OF_TENZENS_ALTER_EGO_II)
                         mission:setVar(player, 'Retrieve', 1)
                     else
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_TENZENS_ALTER_EGO_II)
                         mission:complete(player)
                     end
                 end,

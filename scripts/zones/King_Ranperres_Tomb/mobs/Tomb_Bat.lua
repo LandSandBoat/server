@@ -3,8 +3,7 @@
 --  Mob: Tomb Bat
 -- Note: Place holder Crypt Ghost
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 -----------------------------------
 local entity = {}
 

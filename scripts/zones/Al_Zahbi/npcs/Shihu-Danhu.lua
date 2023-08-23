@@ -4,8 +4,7 @@
 -- Warp NPC
 -- !pos 62.768 -1.98 -51.299 48
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/besieged")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

@@ -1,12 +1,7 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Wilhelm
--- Type: Standard NPC
 -- !pos -22.746 -5 17.157 249
------------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

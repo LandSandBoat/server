@@ -4,9 +4,7 @@
 -- Legion NPC
 -- !pos 242 24.395 468 110
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 -----------------------------------
 local entity = {}
 

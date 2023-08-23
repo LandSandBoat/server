@@ -2,8 +2,6 @@
 -- Area: Sea Serpent Grotto
 --  Mob: Ironshell
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

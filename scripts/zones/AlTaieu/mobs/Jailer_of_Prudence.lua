@@ -3,9 +3,8 @@
 --   NM: Jailer of Prudence
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 

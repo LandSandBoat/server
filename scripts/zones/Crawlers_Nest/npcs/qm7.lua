@@ -3,13 +3,12 @@
 --  NPC: ??? - Awd Goggie spawn
 -- !pos -253.026 -1.867 253.055 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.ROLANBERRY_864_CE) then -- Rolanberry 864
+    if npcUtil.tradeHas(trade, xi.item.ROLANBERRY_864_CE) then -- Rolanberry 864
         player:confirmTrade()
         if
             math.random(1, 100) > 73 or

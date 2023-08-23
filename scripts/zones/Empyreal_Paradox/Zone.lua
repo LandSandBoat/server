@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Empyreal_Paradox
 -----------------------------------
-local ID = require('scripts/zones/Empyreal_Paradox/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

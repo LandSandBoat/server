@@ -108,7 +108,7 @@ bool CBattleEntity::isInDynamis()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONE_TYPE::DYNAMIS;
+        return loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
     }
     return false;
 }
@@ -117,7 +117,7 @@ bool CBattleEntity::isInAssault()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONE_TYPE::DUNGEON_INSTANCED &&
+        return loc.zone->GetTypeMask() & ZONE_TYPE::INSTANCED &&
                (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
     }
     return false;
@@ -1744,8 +1744,10 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     /////////////////////////////////////////////////////////////////////////
     //  Start of the attack loop.
+    //  Make sure our target is alive on each iteration to not overkill;
+    //  And make sure we aren't dead in case we died to a counter.
     /////////////////////////////////////////////////////////////////////////
-    while (attackRound.GetAttackSwingCount() && !(PTarget->isDead()))
+    while (attackRound.GetAttackSwingCount() && PTarget->isAlive() && this->isAlive())
     {
         actionTarget_t& actionTarget = list.getNewActionTarget();
         // Reference to the current swing.

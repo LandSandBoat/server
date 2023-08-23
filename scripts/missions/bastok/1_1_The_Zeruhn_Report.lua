@@ -10,15 +10,11 @@
 -- Makarim : !pos -58 8 -333 172
 -- Naji    : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
-local metalworksID    = require('scripts/zones/Metalworks/IDs')
-local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
-local zeruhnID        = require('scripts/zones/Zeruhn_Mines/IDs')
+local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
+local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
+local metalworksID    = zones[xi.zone.METALWORKS]
+local portBastokID    = zones[xi.zone.PORT_BASTOK]
+local zeruhnID        = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT)

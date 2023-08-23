@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Uleguerand_Range (5)
 -----------------------------------
-local ID = require('scripts/zones/Uleguerand_Range/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local zoneObject = {}
 

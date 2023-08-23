@@ -2,8 +2,6 @@
 -- Area: Cape Teriggan
 --   NM: Killer Jonny
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

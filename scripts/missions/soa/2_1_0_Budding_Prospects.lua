@@ -5,10 +5,6 @@
 -- !addmission 12 11
 -- Masad : !pos -28.182 -0.650 -91.991 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS)
 

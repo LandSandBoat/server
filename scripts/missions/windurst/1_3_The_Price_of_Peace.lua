@@ -11,11 +11,8 @@
 -- Ohbiru-Dohbiru   : !pos 23 -5 -193 238
 -- Laa Mozi         : !pos -22 0 148 145
 -- Ghoo Pakya       : !pos -139 0 147 145
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
-local giddeusID = require("scripts/zones/Giddeus/IDs")
+local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE)

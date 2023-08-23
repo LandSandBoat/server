@@ -4,8 +4,7 @@
 -- Involved In Quest: REDEEMING_ROCKS
 -- !pos -412 -29 -45 83
 -----------------------------------
-local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 local entity = {}
 

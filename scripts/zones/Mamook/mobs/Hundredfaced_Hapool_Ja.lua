@@ -2,14 +2,8 @@
 -- Area: Mamook
 --  Mob: Hundredfaced Hapool Ja
 -----------------------------------
-require("scripts/globals/titles")
-mixins = 
-{
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/claim_shield")
-}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)

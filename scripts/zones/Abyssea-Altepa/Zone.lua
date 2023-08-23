@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea - Altepa
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
-require('scripts/globals/abyssea')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -11,16 +11,12 @@
 -- Rongelouts : !pos 0.067 2 -22 80
 -- Sabiliont  : !pos 9 2 -87 80
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
 
 quest.reward =
 {
-    item = xi.items.DEATHSTONE,
+    item = xi.item.DEATHSTONE,
 }
 
 local npcTradeEvents =
@@ -40,7 +36,7 @@ local plumeTradeNpc =
         local tradeEventId = npcTradeEvents[npc:getName()]
 
         if
-            npcUtil.tradeHasExactly(trade, xi.items.PLUME_DOR) and
+            npcUtil.tradeHasExactly(trade, xi.item.PLUME_DOR) and
             not quest:isVarBitsSet(player, 'Option', tradeEventId - 25)
         then
             return quest:progressEvent(tradeEventId)
@@ -103,7 +99,7 @@ quest.sections =
 
                 [23] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveItem(player, { { xi.items.PLUME_DOR, 7 } })
+                    npcUtil.giveItem(player, { { xi.item.PLUME_DOR, 7 } })
                 end,
             },
         },
@@ -122,7 +118,7 @@ quest.sections =
                     local plumesTraded = utils.mask.countBits(quest:getVar(player, 'Option'), 7)
 
                     if
-                        not player:hasItem(xi.items.PLUME_DOR) and
+                        not player:hasItem(xi.item.PLUME_DOR) and
                         plumesTraded < 7
                     then
                         local waitTime = quest:getVar(player, 'Timer')
@@ -174,7 +170,7 @@ quest.sections =
                     local numPlumes = 7 - utils.mask.countBits(quest:getVar(player, 'Option'), 7)
 
                     quest:setVar(player, 'Timer', 0)
-                    npcUtil.giveItem(player, { { xi.items.PLUME_DOR, numPlumes } })
+                    npcUtil.giveItem(player, { { xi.item.PLUME_DOR, numPlumes } })
                 end,
             },
         },

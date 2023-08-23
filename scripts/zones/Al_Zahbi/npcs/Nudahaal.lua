@@ -4,15 +4,14 @@
 -- Type: Bonecraft Normal/Adv. Image Support
 -- !pos -57.056 -7 -88.377 48
 -----------------------------------
-require("scripts/globals/crafting")
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
         if
-            trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, 1) and
             trade:getItemCount() == 1
         then
             if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
@@ -30,9 +29,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
-            player:startEvent(224, 8, skillLevel, 0, 511, 188, 0, 6, xi.items.IMPERIAL_BRONZE_PIECE)
+            player:startEvent(224, 8, skillLevel, 0, 511, 188, 0, 6, xi.item.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(224, 8, skillLevel, 0, 511, 188, 7121, 6, xi.items.IMPERIAL_BRONZE_PIECE)
+            player:startEvent(224, 8, skillLevel, 0, 511, 188, 7121, 6, xi.item.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(224, 0, 0, 0, 0, 0, 0, 6, 0) -- Standard Dialogue

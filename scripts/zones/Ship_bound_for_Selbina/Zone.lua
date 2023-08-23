@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Selbina (220)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
 -----------------------------------
 local zoneObject = {}
 

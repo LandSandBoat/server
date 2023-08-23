@@ -6,11 +6,6 @@
 -- Rhea Myuliah    : !pos -56.220 -1 101.805 244
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
 
@@ -78,7 +73,7 @@ quest.sections =
             onEventFinish =
             {
                 [10170] = function(player, csid, option, npc)
-                    local tightsItemID = xi.items.DANCERS_TIGHTS_F - player:getGender()
+                    local tightsItemID = xi.item.DANCERS_TIGHTS_F - player:getGender()
 
                     if npcUtil.giveItem(player, tightsItemID) then
                         quest:complete(player)
@@ -100,7 +95,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.BLOCK_OF_YAGUDO_GLUE)
+                        npcUtil.tradeHasExactly(trade, xi.item.BLOCK_OF_YAGUDO_GLUE)
                     then
                         return quest:progressEvent(107)
                     end

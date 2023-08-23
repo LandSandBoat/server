@@ -5,12 +5,7 @@
 -- Oggbi         : !pos -159 -7 5 236
 -- Hide Flap (2) : !pos -124 3 -43 149
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
-local davoiID = require('scripts/zones/Davoi/IDs')
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
@@ -19,7 +14,7 @@ quest.reward =
 {
     fame     = 40,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TEMPLE_GAITERS,
+    item     = xi.item.TEMPLE_GAITERS,
 }
 
 quest.sections =

@@ -4,11 +4,7 @@
 --  Warp NPC (Aht Urhgan)
 -- !pos 116 0.1 84 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

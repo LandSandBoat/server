@@ -3,8 +3,7 @@
 --  Mob: Yagudo Persecutor
 -- Note: PH for Naa Zeku the Unwaiting
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Alzadaal Undersea Ruins (72)
 --   NM: Cookieduster Lipiroon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

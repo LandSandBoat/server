@@ -3,9 +3,7 @@
 --  Mob: Giant Spider
 -- Note: PH for Dune Widow
 -----------------------------------
-local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

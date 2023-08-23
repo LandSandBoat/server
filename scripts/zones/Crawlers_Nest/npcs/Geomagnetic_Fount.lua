@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -137.728 -32.314 33.123
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

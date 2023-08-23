@@ -3,9 +3,7 @@
 --  Mob: Wespe
 -- Note: PH for Demonic Tiphia
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 local entity = {}
 

@@ -27,16 +27,13 @@
 #include "utils/itemutils.h"
 
 CItemContainer::CItemContainer(uint16 LocationID)
+: SortingPacket(0)
+, LastSortingTime(0)
+, m_id(LocationID)
+, m_buff(0)
+, m_size(0)
+, m_count(0)
 {
-    m_id = LocationID;
-
-    SortingPacket   = 0;
-    LastSortingTime = 0;
-
-    m_buff  = 0;
-    m_size  = 0;
-    m_count = 0;
-
     memset(m_ItemList, 0, sizeof(m_ItemList));
 }
 

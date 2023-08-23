@@ -446,7 +446,7 @@ namespace itemutils
                         ((CItemPuppet*)PItem)->setElementSlots(sql->GetUIntData(39));
 
                         // If this is a PUP attachment, load the appropriate script as well
-                        auto attachmentFile = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", PItem->getName());
+                        auto attachmentFile = fmt::format("./scripts/actions/abilities/pets/attachments/{}.lua", PItem->getName());
                         luautils::CacheLuaObjectFromFile(attachmentFile);
                     }
 
@@ -518,7 +518,7 @@ namespace itemutils
 
                     g_pItemList[PItem->getID()] = PItem;
 
-                    auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+                    auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
                     luautils::CacheLuaObjectFromFile(filename);
                 }
             }

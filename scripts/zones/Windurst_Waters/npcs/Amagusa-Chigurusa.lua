@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Amagusa-Chigurusa
--- Type: Standard NPC
 -- !pos -28.746 -4.5 61.954 238
------------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

@@ -4,15 +4,12 @@
 -- Starts and Finishes Quest: The Merchant's Bidding (R)
 -- !pos -169 -1 13 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING) ~= QUEST_AVAILABLE then
         if
-            trade:hasItemQty(xi.items.RABBIT_HIDE, 3) and
+            trade:hasItemQty(xi.item.RABBIT_HIDE, 3) and
             trade:getItemCount() == 3
         then
             player:startEvent(89)

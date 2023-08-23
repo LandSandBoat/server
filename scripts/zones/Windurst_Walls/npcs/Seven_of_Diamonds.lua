@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Seven of Diamonds
--- Type: Standard NPC
 -- !pos 6.612 -3.5 278.553 239
 -----------------------------------
 local entity = {}

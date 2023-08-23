@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos -130 -6 95 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

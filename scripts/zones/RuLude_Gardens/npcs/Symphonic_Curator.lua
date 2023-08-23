@@ -2,8 +2,6 @@
 -- Area: Ru'Lude Gardens: Moghouse
 --  NPC: Symphonic Curator
 -----------------------------------
-require("scripts/globals/symphonic_curator")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

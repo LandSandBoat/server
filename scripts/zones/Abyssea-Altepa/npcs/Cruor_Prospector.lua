@@ -3,8 +3,6 @@
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 local itemType =
@@ -20,38 +18,38 @@ local prospectorItems =
     [itemType.ITEM] =
     {
     --  Sel      Item                            Cost
-        [ 1] = { xi.items.RAVAGERS_MUFFLERS,     5000 },
-        [ 2] = { xi.items.TANTRA_GLOVES,         5000 },
-        [ 3] = { xi.items.ORISON_MITTS,          5000 },
-        [ 4] = { xi.items.GOETIA_GLOVES,         5000 },
-        [ 5] = { xi.items.ESTOQUEURS_GANTHEROTS, 5000 },
-        [ 6] = { xi.items.RAIDERS_ARMLETS,       5000 },
-        [ 7] = { xi.items.UTILIS_SHIELD,         5000 },
-        [ 8] = { xi.items.PYF_HARP,              5000 },
-        [ 9] = { xi.items.FORBIDDEN_KEY,          500 },
-        [10] = { xi.items.SHADOW_THRONE,      2000000 },
+        [ 1] = { xi.item.RAVAGERS_MUFFLERS,     5000 },
+        [ 2] = { xi.item.TANTRA_GLOVES,         5000 },
+        [ 3] = { xi.item.ORISON_MITTS,          5000 },
+        [ 4] = { xi.item.GOETIA_GLOVES,         5000 },
+        [ 5] = { xi.item.ESTOQUEURS_GANTHEROTS, 5000 },
+        [ 6] = { xi.item.RAIDERS_ARMLETS,       5000 },
+        [ 7] = { xi.item.UTILIS_SHIELD,         5000 },
+        [ 8] = { xi.item.PYF_HARP,              5000 },
+        [ 9] = { xi.item.FORBIDDEN_KEY,          500 },
+        [10] = { xi.item.SHADOW_THRONE,      2000000 },
     },
 
     [itemType.TEMP] =
     {
     --  Sel      Item                               Cost
-        [ 1] = { xi.items.LUCID_POTION_I,             80 },
-        [ 2] = { xi.items.LUCID_ETHER_I,              80 },
-        [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
-        [ 4] = { xi.items.DUSTY_ELIXIR,              120 },
-        [ 5] = { xi.items.TUBE_OF_CLEAR_SALVE_I,     120 },
-        [ 6] = { xi.items.BOTTLE_OF_STALWARTS_TONIC, 150 },
-        [ 7] = { xi.items.BOTTLE_OF_ASCETICS_TONIC,  150 },
-        [ 8] = { xi.items.BOTTLE_OF_CHAMPIONS_TONIC, 150 },
-        [ 9] = { xi.items.LUCID_POTION_II,           200 },
-        [10] = { xi.items.LUCID_ETHER_II,            200 },
-        [11] = { xi.items.LUCID_ELIXIR_I,            300 },
-        [12] = { xi.items.FLASK_OF_HEALING_POWDER,   300 },
-        [13] = { xi.items.PINCH_OF_MANA_POWDER,      300 },
-        [14] = { xi.items.TUBE_OF_HEALING_SALVE_I,   300 },
-        [15] = { xi.items.BOTTLE_OF_VICARS_DRINK,    300 },
-        [16] = { xi.items.TUBE_OF_CLEAR_SALVE_II,    300 },
-        [17] = { xi.items.PRIMEVAL_BREW,         2000000 },
+        [ 1] = { xi.item.LUCID_POTION_I,             80 },
+        [ 2] = { xi.item.LUCID_ETHER_I,              80 },
+        [ 3] = { xi.item.BOTTLE_OF_CATHOLICON,       80 },
+        [ 4] = { xi.item.DUSTY_ELIXIR,              120 },
+        [ 5] = { xi.item.TUBE_OF_CLEAR_SALVE_I,     120 },
+        [ 6] = { xi.item.BOTTLE_OF_STALWARTS_TONIC, 150 },
+        [ 7] = { xi.item.BOTTLE_OF_ASCETICS_TONIC,  150 },
+        [ 8] = { xi.item.BOTTLE_OF_CHAMPIONS_TONIC, 150 },
+        [ 9] = { xi.item.LUCID_POTION_II,           200 },
+        [10] = { xi.item.LUCID_ETHER_II,            200 },
+        [11] = { xi.item.LUCID_ELIXIR_I,            300 },
+        [12] = { xi.item.FLASK_OF_HEALING_POWDER,   300 },
+        [13] = { xi.item.PINCH_OF_MANA_POWDER,      300 },
+        [14] = { xi.item.TUBE_OF_HEALING_SALVE_I,   300 },
+        [15] = { xi.item.BOTTLE_OF_VICARS_DRINK,    300 },
+        [16] = { xi.item.TUBE_OF_CLEAR_SALVE_II,    300 },
+        [17] = { xi.item.PRIMEVAL_BREW,         2000000 },
     },
 
     [itemType.KEYITEM] =
@@ -156,7 +154,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     if itemCategory == itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
-        local itemQty = itemData[1] ~= xi.items.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
+        local itemQty = itemData[1] ~= xi.item.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
         local itemCost = itemData[2] * itemQty
 
         if

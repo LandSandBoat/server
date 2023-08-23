@@ -109,66 +109,57 @@ struct Trust_t
     int8 dark_res_rank;
 
     Trust_t()
-    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    : trustID(0)
+    , pool(0)
+    , EcoSystem(ECOSYSTEM::ECO_ERROR)
+    , name_prefix(0)
+    , radius(0)
+    , m_Family(0)
+    , mJob(0)
+    , sJob(0)
+    , HPscale(0.f)
+    , MPscale(0.f)
+    , cmbSkill(0)
+    , cmbDmgMult(0)
+    , cmbDelay(0)
+    , speed(0)
+    , subSpeed(0)
+    , strRank(0)
+    , dexRank(0)
+    , vitRank(0)
+    , agiRank(0)
+    , intRank(0)
+    , mndRank(0)
+    , chrRank(0)
+    , attRank(0)
+    , defRank(0)
+    , evaRank(0)
+    , accRank(0)
+    , m_MobSkillList(0)
+    , hasSpellScript(false)
+    , spellList(0)
+    , slash_sdt(0)
+    , pierce_sdt(0)
+    , hth_sdt(0)
+    , impact_sdt(0)
+    , magical_sdt(0)
+    , fire_sdt(0)
+    , ice_sdt(0)
+    , wind_sdt(0)
+    , earth_sdt(0)
+    , thunder_sdt(0)
+    , water_sdt(0)
+    , light_sdt(0)
+    , dark_sdt(0)
+    , fire_res_rank(0)
+    , ice_res_rank(0)
+    , wind_res_rank(0)
+    , earth_res_rank(0)
+    , thunder_res_rank(0)
+    , water_res_rank(0)
+    , light_res_rank(0)
+    , dark_res_rank(0)
     {
-        trustID = 0;
-        pool    = 0;
-
-        name_prefix = 0;
-        radius      = 0;
-        m_Family    = 0;
-
-        mJob    = 0;
-        sJob    = 0;
-        HPscale = 0.f;
-        MPscale = 0.f;
-
-        cmbSkill   = 0;
-        cmbDmgMult = 0;
-        cmbDelay   = 0;
-        speed      = 0;
-        subSpeed   = 0;
-
-        strRank = 0;
-        dexRank = 0;
-        vitRank = 0;
-        agiRank = 0;
-        intRank = 0;
-        mndRank = 0;
-        chrRank = 0;
-        attRank = 0;
-        defRank = 0;
-        evaRank = 0;
-        accRank = 0;
-
-        m_MobSkillList = 0;
-
-        hasSpellScript = false;
-        spellList      = 0;
-
-        slash_sdt  = 0;
-        pierce_sdt = 0;
-        hth_sdt    = 0;
-        impact_sdt = 0;
-
-        magical_sdt = 0;
-        fire_sdt    = 0;
-        ice_sdt     = 0;
-        wind_sdt    = 0;
-        earth_sdt   = 0;
-        thunder_sdt = 0;
-        water_sdt   = 0;
-        light_sdt   = 0;
-        dark_sdt    = 0;
-
-        fire_res_rank    = 0;
-        ice_res_rank     = 0;
-        wind_res_rank    = 0;
-        earth_res_rank   = 0;
-        thunder_res_rank = 0;
-        water_res_rank   = 0;
-        light_res_rank   = 0;
-        dark_res_rank    = 0;
     }
 };
 
@@ -488,7 +479,7 @@ namespace trustutils
         }
 
         // add mob pool mods ahead of applying stats
-        mobutils::AddCustomMods(PTrust);
+        mobutils::AddSqlModifiers(PTrust);
 
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Sacrificial_Chamber (163)
 -----------------------------------
-local ID = require('scripts/zones/Sacrificial_Chamber/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

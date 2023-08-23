@@ -3,8 +3,7 @@
 --  NPC: ??? (Beastmen Treasure qm9/chest6)
 -- !pos -294.827 -1.53 -453.237 123
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/beastmentreasure")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 

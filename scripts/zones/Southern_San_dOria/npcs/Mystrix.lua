@@ -3,9 +3,6 @@
 --  NPC: Mystrix
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/gobbie_mystery_box")
------------------------------------
 local entity = {}
 
 local events =

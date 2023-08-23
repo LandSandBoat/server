@@ -4,8 +4,6 @@
 -- Starts Quest: Borghertz's Hands (AF Hands, Many job)
 -- !pos -5 1 48 244
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 local prerequisites =

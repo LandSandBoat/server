@@ -5,9 +5,6 @@
 -- !addmission 12 19
 -- Yeggha_Dolashi : !pos 260 -5.768 60 258
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_WATERGARDEN_COLISEUM)
 

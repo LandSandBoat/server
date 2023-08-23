@@ -5,9 +5,6 @@
 -- !addmission 12 1
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
 

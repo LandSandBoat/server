@@ -90,7 +90,7 @@ local function calculateVivaciousPulseHealing(target)
 
     local effects = target:getStatusEffects()
     for _, effect in ipairs(effects) do
-        local type = effect:getType()
+        local type = effect:getEffectType()
 
         hpHealAmount = hpHealAmount + getRuneHealAmount(type, target) -- type checked internally
 

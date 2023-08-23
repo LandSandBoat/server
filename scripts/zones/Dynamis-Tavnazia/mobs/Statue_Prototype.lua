@@ -2,8 +2,6 @@
 -- Area: Dynamis - Tavnazia
 --  Mob: Statue Prototype
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

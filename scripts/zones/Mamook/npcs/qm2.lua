@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Iriri Samariri(ZNM T2))
 -- !pos -118 7 -80 65
 -----------------------------------
-local ID = require("scripts/zones/Mamook/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MAMOOK]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.STRAND_OF_SAMARIRI_CORPSEHAIR) and
+        npcUtil.tradeHas(trade, xi.item.STRAND_OF_SAMARIRI_CORPSEHAIR) and
         npcUtil.popFromQM(player, npc, ID.mob.IRIRI_SAMARIRI)
     then
         player:confirmTrade()

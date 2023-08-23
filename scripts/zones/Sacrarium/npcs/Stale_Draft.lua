@@ -3,7 +3,7 @@
 -- Area: Sacrarium
 -- Notes: Used to spawn Swift Belt NM's
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 
@@ -23,7 +23,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     -- fomor codex
-    if trade:hasItemQty(xi.items.FOMOR_CODEX, 1) and trade:getItemCount() == 1 then
+    if trade:hasItemQty(xi.item.FOMOR_CODEX, 1) and trade:getItemCount() == 1 then
         local draftOffset = npc:getID() - ID.npc.STALE_DRAFT_OFFSET
         local nmId = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][1]
         local races = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][2]

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Crawlers_Nest_[S] (171)
 -----------------------------------
-local ID = require('scripts/zones/Crawlers_Nest_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

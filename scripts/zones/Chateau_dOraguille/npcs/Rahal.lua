@@ -4,9 +4,7 @@
 -- Involved in Quests: The Holy Crest, Lure of the Wildcat (San d'Oria)
 -- !pos -28 0.1 -6 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 

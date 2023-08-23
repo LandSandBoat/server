@@ -3,8 +3,7 @@
 --  Mob: Midnight Wings
 -- Note: PH for Black Triple Stars
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 -----------------------------------
 local entity = {}
 

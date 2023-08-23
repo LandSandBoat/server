@@ -3,8 +3,6 @@
 --  NPC: ??? (qm16)
 -- Note: Spawns Animated Staff
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -42,10 +42,9 @@ static constexpr duration treasure_livetime  = 5min;
  ************************************************************************/
 
 CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType)
+: m_count(0)
+, m_TreasurePoolType(PoolType)
 {
-    m_count            = 0;
-    m_TreasurePoolType = PoolType;
-
     for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
     {
         m_PoolItems[i].ID     = 0;

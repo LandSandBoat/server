@@ -8,10 +8,7 @@
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -- Gilgamesh                       : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local norgID = require("scripts/zones/Norg/IDs")
+local norgID = zones[xi.zone.NORG]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)

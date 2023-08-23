@@ -4,10 +4,6 @@
 -- Log ID: 3, Quest ID: 24
 -- Radeivepart : !pos 5 9 -39 243
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 
@@ -54,7 +50,7 @@ quest.sections =
             ['Radeivepart'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.FLAME_DEGEN) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.FLAME_DEGEN) then
                         return quest:progressEvent(61)
                     end
                 end,

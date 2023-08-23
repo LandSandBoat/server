@@ -3,8 +3,6 @@
 --  NPC: Solitary Ant
 -- Involved in Quests: Fire in the Hole
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

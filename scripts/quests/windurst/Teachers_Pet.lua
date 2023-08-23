@@ -4,10 +4,6 @@
 -- Log ID: 2, Quest ID: 28
 -- Moreno-Toeno : !pos 169 -1.25 159 238
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
 
@@ -33,7 +29,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(437)
                     else
-                        return quest:progressEvent(438, 0, xi.items.BIRD_FEATHER, xi.items.TWO_LEAF_MANDRAGORA_BUD)
+                        return quest:progressEvent(438, 0, xi.item.BIRD_FEATHER, xi.item.TWO_LEAF_MANDRAGORA_BUD)
                     end
                 end,
             },
@@ -65,12 +61,12 @@ quest.sections =
             ['Moreno-Toeno'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.BIRD_FEATHER, xi.items.TWO_LEAF_MANDRAGORA_BUD }) then
-                        return quest:progressEvent(440, 250, xi.items.BIRD_FEATHER, xi.items.TWO_LEAF_MANDRAGORA_BUD)
+                    if npcUtil.tradeHasExactly(trade, { xi.item.BIRD_FEATHER, xi.item.TWO_LEAF_MANDRAGORA_BUD }) then
+                        return quest:progressEvent(440, 250, xi.item.BIRD_FEATHER, xi.item.TWO_LEAF_MANDRAGORA_BUD)
                     end
                 end,
 
-                onTrigger = quest:event(439, 0, xi.items.BIRD_FEATHER, xi.items.TWO_LEAF_MANDRAGORA_BUD),
+                onTrigger = quest:event(439, 0, xi.item.BIRD_FEATHER, xi.item.TWO_LEAF_MANDRAGORA_BUD),
             },
 
             onEventFinish =

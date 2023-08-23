@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: La_Vaule_[S] (85)
 -----------------------------------
-local ID = require('scripts/zones/La_Vaule_[S]/IDs')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

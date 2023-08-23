@@ -4,8 +4,7 @@
 -- Involved In Quest: Messenger from Beyond
 -- !pos -716 -10 66 103
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 
@@ -16,7 +15,7 @@ entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.MARCHELUTE):isSpawned() and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and
-        not player:hasItem(xi.items.TAVNAZIA_PASS)
+        not player:hasItem(xi.item.TAVNAZIA_PASS)
     then
         SpawnMob(ID.mob.MARCHELUTE):updateClaim(player)
     else

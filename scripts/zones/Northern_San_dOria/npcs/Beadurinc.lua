@@ -4,8 +4,7 @@
 -- Type: Smithing Synthesis Image Support
 -- !pos -182.300 10.999 146.650 231
 -----------------------------------
-require("scripts/globals/crafting")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

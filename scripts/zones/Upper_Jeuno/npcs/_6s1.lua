@@ -3,8 +3,7 @@
 --  NPC: Marble Bridge Eatery (Door)
 -- !pos -96.6 -0.2 92.3 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 

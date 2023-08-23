@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Everbloom_Hollow
 -----------------------------------
-local ID = require('scripts/zones/Everbloom_Hollow/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

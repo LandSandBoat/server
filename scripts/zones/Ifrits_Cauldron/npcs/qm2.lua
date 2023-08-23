@@ -4,8 +4,7 @@
 -- Notes: Used to spawn Bomb Queen
 -- !pos 18 20 -104 205
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 local entity = {}
 

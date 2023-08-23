@@ -4,7 +4,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/families/lycopodium") }
 -----------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

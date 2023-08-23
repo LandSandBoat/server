@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Rakih Lyhall
--- Type: Standard NPC
 -- !pos -48.111 -4.5 69.712 94
 -----------------------------------
 local entity = {}

@@ -5,10 +5,7 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos -43 0 -1 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 

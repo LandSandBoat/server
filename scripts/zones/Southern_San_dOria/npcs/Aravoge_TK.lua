@@ -2,8 +2,6 @@
 -- Area: Southern San d'Oria
 --  NPC: Aravoge, T.K.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

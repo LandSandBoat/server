@@ -4,10 +4,6 @@
 -- Starts and Finishes Quest: Donate to Recycling
 -- !pos -11 -11 -6 248
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

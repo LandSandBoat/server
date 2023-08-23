@@ -114,15 +114,15 @@ local function checkForElevenRoll(caster)
 
     for _, effect in pairs(effects) do
         if
-            effect:getType() >= xi.effect.FIGHTERS_ROLL and
-            effect:getType() <= xi.effect.NATURALISTS_ROLL and
+            effect:getEffectType() >= xi.effect.FIGHTERS_ROLL and
+            effect:getEffectType() <= xi.effect.NATURALISTS_ROLL and
             effect:getSubPower() == 11
         then
             return true
         end
 
         if
-            effect:getType() == xi.effect.RUNEISTS_ROLL and
+            effect:getEffectType() == xi.effect.RUNEISTS_ROLL and
             effect:getSubPower() == 11
         then
             return true

@@ -41,7 +41,6 @@ function onTrigger(player, minutes, target)
     end
 
     -- add time
-    local ID = zones[targ:getZoneID()]
     local oldDuration = tonumber(effect:getDuration())
     local newDuration = (oldDuration + (tonumber(minutes) * 60)) * 1000
 

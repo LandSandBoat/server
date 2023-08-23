@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Parlemaille
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

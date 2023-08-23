@@ -3,8 +3,6 @@
 --  NPC: Lexun-Maxirun, W.W.
 -- !pos 28 -16 28 237
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

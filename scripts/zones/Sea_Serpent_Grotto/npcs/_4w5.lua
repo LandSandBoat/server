@@ -3,13 +3,12 @@
 --  NPC: Silver Beastcoin Door
 -- !pos 280 18.549 -100 176
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.SILVER_BEASTCOIN) then
+    if npcUtil.tradeHas(trade, xi.item.SILVER_BEASTCOIN) then
         if player:getCharVar("SSG_SilverDoor") == 7 then
             npc:openDoor(5) -- Open the door if a silver beastcoin has been traded after checking the door the required number of times
         end
@@ -41,7 +40,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.SILVER_CHECK)
             player:setCharVar("SSG_SilverDoor", 6)
         elseif silverDoorCheck == 6 or silverDoorCheck == 7 then -- Door has been checked six or more times
-            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.items.SILVER_BEASTCOIN)
+            player:messageSpecial(ID.text.COMPLETED_CHECK, xi.item.SILVER_BEASTCOIN)
             player:setCharVar("SSG_SilverDoor", 7)
         end
     elseif xPos > 280 and zPos < -100 then

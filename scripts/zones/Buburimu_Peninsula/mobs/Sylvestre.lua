@@ -2,8 +2,6 @@
 -- Area: Buburimu Peninsula
 --  Mob: Sylvestre
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

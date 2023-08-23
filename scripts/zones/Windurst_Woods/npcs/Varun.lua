@@ -1,18 +1,14 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Varun
--- Type: Standard NPC
 -- !pos 7.800 -3.5 -10.064 241
------------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("rockracketeer_sold") == 5 and
-        npcUtil.tradeHas(trade, xi.items.SHARP_STONE)
+        npcUtil.tradeHas(trade, xi.item.SHARP_STONE)
     then
         -- Sharp Stone
         player:startEvent(102, 2100)
@@ -26,7 +22,7 @@ entity.onTrigger = function(player, npc)
     if rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 3 then
         player:startEvent(100) -- talk about lost stone
     elseif rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 4 then
-        player:startEvent(101, 0, xi.items.SHARP_STONE) -- send player to Palborough Mines
+        player:startEvent(101, 0, xi.item.SHARP_STONE) -- send player to Palborough Mines
 
     else
         player:startEvent(432)

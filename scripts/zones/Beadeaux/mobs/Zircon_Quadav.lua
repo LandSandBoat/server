@@ -5,17 +5,16 @@
 --  Bowl of Quadav Stew is a guaranteed steal with
 --  Quest THE_TENSHODO_SHOWDOWN active
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 local entity = {}
 
 entity.onSteal = function(player, target, ability, action)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == QUEST_ACCEPTED and
-        not player:hasItem(xi.items.BOWL_OF_QUADAV_STEW)
+        not player:hasItem(xi.item.BOWL_OF_QUADAV_STEW)
     then
-        return xi.items.BOWL_OF_QUADAV_STEW
+        return xi.item.BOWL_OF_QUADAV_STEW
     else
         return 0
     end

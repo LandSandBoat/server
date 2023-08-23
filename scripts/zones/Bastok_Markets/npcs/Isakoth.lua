@@ -3,9 +3,7 @@
 --  NPC: Isakoth
 -- Records of Eminence NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 

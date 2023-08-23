@@ -7,12 +7,7 @@
 -- Valderotaux     : !pos 97 0.1 113 230
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
-local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)

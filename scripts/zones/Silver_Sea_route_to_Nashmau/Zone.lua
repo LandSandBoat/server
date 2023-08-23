@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Silver_Sea_route_to_Nashmau
 -----------------------------------
-local ID = require('scripts/zones/Silver_Sea_route_to_Nashmau/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

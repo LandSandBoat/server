@@ -2,8 +2,6 @@
 -- Area: Den of Rancor
 --  Mob: Million Eyes
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

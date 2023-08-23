@@ -7,10 +7,6 @@
 -- Orn             : !pos -68 -9 30 238
 -- Quu Bokye       : !pos -159 16 181 145
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
@@ -42,8 +38,8 @@ quest.sections =
                     -- https://ffxiclopedia.fandom.com/wiki/Early_Bird_Catches_the_Bookworm
                     if
                         player:getNation() ~= xi.nation.WINDURST or
-                        (not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and
-                        not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY)
+                        (player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.LOST_FOR_WORDS and
+                        player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.THE_SIXTH_MINISTRY)
                     then
                         return quest:progressEvent(387)
                     end
@@ -139,7 +135,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.items.SILVER_BEASTCOIN)
+                        npcUtil.tradeHasExactly(trade, xi.item.SILVER_BEASTCOIN)
                     then
                         return quest:progressEvent(58)
                     end

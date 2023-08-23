@@ -5,12 +5,7 @@
 -- Ayame           : !pos 133 -19 34 237
 -- qm_truestrength : !pos -100 -71 -132 151
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local oztrojaID = require('scripts/zones/Castle_Oztroja/IDs')
+local oztrojaID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
@@ -19,7 +14,7 @@ quest.reward =
 {
     fame     = 60,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TEMPLE_HOSE,
+    item     = xi.item.TEMPLE_HOSE,
     title    = xi.title.PARAGON_OF_MONK_EXCELLENCE,
 }
 
@@ -57,8 +52,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_YAGUDO_DRINK) and
-                        not player:hasItem(xi.items.XALMO_FEATHER) and
+                        npcUtil.tradeHasExactly(trade, xi.item.BOTTLE_OF_YAGUDO_DRINK) and
+                        not player:hasItem(xi.item.XALMO_FEATHER) and
                         npcUtil.popFromQM(player, npc, oztrojaID.mob.HUU_XALMO_THE_SAVAGE, { hide = 0 })
                     then
                         player:confirmTrade()
@@ -74,7 +69,7 @@ quest.sections =
             ['Ayame'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.XALMO_FEATHER) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.XALMO_FEATHER) then
                         return quest:progressEvent(749)
                     end
                 end,

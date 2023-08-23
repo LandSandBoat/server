@@ -2,8 +2,7 @@
 -- Zone: Misareaux_Coast (25)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local misareauxGlobal =
@@ -41,11 +40,11 @@ local misareauxGlobal =
     -----------------------------------
     ziphiusOnTrade = function(player, npc, trade)
         local baited = npc:getLocalVar("[Ziphius]Baited") == 1
-        if not baited and npcUtil.tradeHas(trade, xi.items.SLICE_OF_MOAT_CARP) then
+        if not baited and npcUtil.tradeHas(trade, xi.item.SLICE_OF_MOAT_CARP) then
             npc:setLocalVar("[Ziphius]Bait"..player:getName(), 1)
             npc:setLocalVar("[Ziphius]Baited", 1)
             player:confirmTrade()
-            player:messageSpecial(ID.text.PUT_IN_TRAP, xi.items.SLICE_OF_MOAT_CARP)
+            player:messageSpecial(ID.text.PUT_IN_TRAP, xi.item.SLICE_OF_MOAT_CARP)
         end
     end,
 

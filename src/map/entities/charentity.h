@@ -59,11 +59,11 @@ struct jobs_t
     uint8  genkai;           // the maximum genkai level achieved
 
     jobs_t()
+    : unlocked(0)
+    , genkai(0)
     {
-        unlocked = 0;
         std::memset(&job, 0, sizeof(job));
         std::memset(&exp, 0, sizeof(exp));
-        genkai = 0;
     }
 };
 
@@ -92,15 +92,15 @@ struct profile_t
     uint8      unity_leader;
 
     profile_t()
+    : nation(0)
+    , mhflag(0)
+    , title(0)
+    , rankpoints(0)
+    , campaign_allegiance(0)
+    , unity_leader(0)
     {
-        nation = 0;
-        mhflag = 0;
-        title  = 0;
         std::memset(&fame, 0, sizeof(fame));
         std::memset(&rank, 0, sizeof(rank));
-        rankpoints          = 0;
-        campaign_allegiance = 0;
-        unity_leader        = 0;
     }
 };
 
@@ -110,9 +110,9 @@ struct capacityChain_t
     uint32 chainTime;
 
     capacityChain_t()
+    : chainNumber(0)
+    , chainTime(0)
     {
-        chainNumber = 0;
-        chainTime   = 0;
     }
 };
 
@@ -122,9 +122,9 @@ struct expChain_t
     uint32 chainTime;
 
     expChain_t()
+    : chainNumber(0)
+    , chainTime(0)
     {
-        chainNumber = 0;
-        chainTime   = 0;
     }
 };
 
@@ -169,15 +169,15 @@ struct teleport_t
     uint32      eschanPortal;
 
     teleport_t()
+    : outpostSandy(0)
+    , outpostBastok(0)
+    , outpostWindy(0)
+    , runicPortal(0)
+    , pastMaw(0)
+    , campaignSandy(0)
+    , campaignBastok(0)
+    , campaignWindy(0)
     {
-        outpostSandy   = 0;
-        outpostBastok  = 0;
-        outpostWindy   = 0;
-        runicPortal    = 0;
-        pastMaw        = 0;
-        campaignSandy  = 0;
-        campaignBastok = 0;
-        campaignWindy  = 0;
         std::memset(&abysseaConflux, 0, sizeof(abysseaConflux));
     }
 };

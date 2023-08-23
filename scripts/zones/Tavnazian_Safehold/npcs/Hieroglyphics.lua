@@ -4,8 +4,6 @@
 -- Notes: Dynamis Tavnazia Enter
 -- !pos 3.674 -7.278 -27.856 26
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

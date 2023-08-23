@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 
 return {
     ['blank_fork']         = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

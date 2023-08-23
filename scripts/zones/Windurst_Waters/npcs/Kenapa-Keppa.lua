@@ -4,9 +4,7 @@
 -- Involved in Quest: Food For Thought, Hat in Hand
 -- !pos 27 -6 -199 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

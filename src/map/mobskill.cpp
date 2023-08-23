@@ -23,24 +23,24 @@
 #include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
+: m_ID(id)
+, m_TotalTargets(1)
+, m_Param(0)
+, m_AnimID(0)
+, m_Aoe(0)
+, m_Distance(0)
+, m_Flag(0)
+, m_ValidTarget(0)
+, m_AnimationTime(0)
+, m_ActivationTime(0)
+, m_Message(0)
+, m_TP(0)
+, m_HPP(0)
+, m_knockback(0)
+, m_primarySkillchain(0)
+, m_secondarySkillchain(0)
+, m_tertiarySkillchain(0)
 {
-    m_ID                  = id;
-    m_AnimID              = 0;
-    m_Aoe                 = 0;
-    m_Distance            = 0;
-    m_TotalTargets        = 1;
-    m_Flag                = 0;
-    m_ValidTarget         = 0;
-    m_AnimationTime       = 0;
-    m_ActivationTime      = 0;
-    m_Message             = 0;
-    m_Param               = 0;
-    m_primarySkillchain   = 0;
-    m_secondarySkillchain = 0;
-    m_tertiarySkillchain  = 0;
-    m_TP                  = 0;
-    m_HPP                 = 0;
-    m_knockback           = 0;
 }
 
 bool CMobSkill::hasMissMsg() const

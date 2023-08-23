@@ -9,11 +9,8 @@
 -- Zokima-Rokima    : !pos 0 -16 124 239
 -- Tosuka-Porika    : !pos -26 -6 103 238
 -- _4pc             : !pos 132 12 -19 169
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
-local toraimaraiID = require("scripts/zones/Toraimarai_Canal/IDs")
+local toraimaraiID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY)

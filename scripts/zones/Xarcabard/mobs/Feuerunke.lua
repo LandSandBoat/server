@@ -1,10 +1,6 @@
 -----------------------------------
 --  VNM: Feurunke
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/voidwalker")
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

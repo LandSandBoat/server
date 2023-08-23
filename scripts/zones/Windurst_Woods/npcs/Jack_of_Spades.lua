@@ -3,12 +3,10 @@
 --  NPC: Jack of Spades
 -- Adventurer's Assistant
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.ADVENTURER_COUPON) then -- adventurer coupon
+    if npcUtil.tradeHas(trade, xi.item.ADVENTURER_COUPON) then -- adventurer coupon
         player:startEvent(10010, xi.settings.main.GIL_RATE * 50)
     end
 end

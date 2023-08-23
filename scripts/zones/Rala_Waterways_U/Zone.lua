@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Rala Waterways U
 -----------------------------------
-local ID = require('scripts/zones/Rala_Waterways_U/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

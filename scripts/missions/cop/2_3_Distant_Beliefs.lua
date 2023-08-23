@@ -8,9 +8,6 @@
 -- Ornate Gate : !pos -95 -24 60 27
 -- Justinius   : !pos 76 -34 68 26
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS)
 

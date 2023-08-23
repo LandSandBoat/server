@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 
 return {
     ['_5a0'] = { messageSpecial = ID.text.HEAVY_DOOR },

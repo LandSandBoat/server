@@ -4,8 +4,7 @@
 -- Type: Wyvern Name Changer
 -- !pos -84.066 -6.414 47.826 252
 -----------------------------------
-require("scripts/globals/pets")
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 

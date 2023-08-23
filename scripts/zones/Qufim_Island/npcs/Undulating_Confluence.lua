@@ -3,9 +3,6 @@
 --  NPC: Undulating Confluence
 -- !pos -204.531 -20.027 75.318 126
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

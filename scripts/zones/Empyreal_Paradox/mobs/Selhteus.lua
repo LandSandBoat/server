@@ -3,8 +3,7 @@
 --  Mob: Selh'teus
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
-require("scripts/globals/magic")
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 

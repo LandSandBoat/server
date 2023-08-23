@@ -2,7 +2,7 @@
 -- Area: Kazham-Jeuno Airship
 --  NPC: Oslam
 -----------------------------------
-local ID = require("scripts/zones/Kazham-Jeuno_Airship/IDs")
+local ID = zones[xi.zone.KAZHAM_JEUNO_AIRSHIP]
 -----------------------------------
 local entity = {}
 

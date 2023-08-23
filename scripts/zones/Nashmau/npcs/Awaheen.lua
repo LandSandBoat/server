@@ -2,7 +2,7 @@
 -- Area: Nashmau
 --  NPC: Awaheen
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 
@@ -14,15 +14,15 @@ entity.onTrade = function(player, npc, trade)
     local nbr = 0
     local reward = 0
     if trade:getItemCount() == 1 then
-        if trade:hasItemQty(xi.items.IMPERIAL_GOLD_PIECE, 1) then
+        if trade:hasItemQty(xi.item.IMPERIAL_GOLD_PIECE, 1) then
             nbr = 5
-            reward = xi.items.IMPERIAL_MYTHRIL_PIECE
-        elseif trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, 1) then
+            reward = xi.item.IMPERIAL_MYTHRIL_PIECE
+        elseif trade:hasItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE, 1) then
             nbr = 2
-            reward = xi.items.IMPERIAL_SILVER_PIECE
-        elseif trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
+            reward = xi.item.IMPERIAL_SILVER_PIECE
+        elseif trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1) then
             nbr = 5
-            reward = xi.items.IMPERIAL_BRONZE_PIECE
+            reward = xi.item.IMPERIAL_BRONZE_PIECE
         end
     end
 

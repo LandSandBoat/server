@@ -2,9 +2,6 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Peg Powler
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -62,15 +62,15 @@ struct CParty::partyInfo_t
 
 // Constructor
 CParty::CParty(CBattleEntity* PEntity)
+: m_PartyID(0)
+, m_PartyType(PARTY_MOBS)
+, m_PartyNumber(0)
 {
     m_PLeader        = nullptr;
     m_PAlliance      = nullptr;
     m_PSyncTarget    = nullptr;
     m_PQuarterMaster = nullptr;
     m_EffectsChanged = false;
-    m_PartyID        = 0;
-    m_PartyType      = PARTY_MOBS;
-    m_PartyNumber    = 0;
 
     if (PEntity != nullptr && PEntity->PParty == nullptr)
     {
@@ -87,12 +87,11 @@ CParty::CParty(CBattleEntity* PEntity)
 }
 
 CParty::CParty(uint32 id)
+: m_PartyID(id)
+, m_PartyType(PARTY_PCS)
+, m_PartyNumber(0)
 {
     m_PAlliance = nullptr;
-
-    m_PartyID     = id;
-    m_PartyType   = PARTY_PCS;
-    m_PartyNumber = 0;
 
     m_PLeader        = nullptr;
     m_PSyncTarget    = nullptr;

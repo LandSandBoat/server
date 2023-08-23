@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 
 return {
     ['Shattered_Telepoint'] = { messageSpecial = ID.text.TELEPOINT_HAS_BEEN_SHATTERED },

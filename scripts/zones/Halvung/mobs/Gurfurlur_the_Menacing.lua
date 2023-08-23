@@ -4,8 +4,7 @@
 -- !pos -59.000 -23.000 3.000 62
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Halvung/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.HALVUNG]
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria), Distant Loyalties
 -- !pos -17 2 10 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -54,11 +52,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("DistantLoyaltiesProgress", 1)
     elseif csid == 665 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WHITE_CAPE)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WHITE_CAPE)
         else
             player:delKeyItem(xi.ki.MYTHRIL_HEARTS)
-            player:addItem(xi.items.WHITE_CAPE, 1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.WHITE_CAPE)
+            player:addItem(xi.item.WHITE_CAPE, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WHITE_CAPE)
             player:setCharVar("DistantLoyaltiesProgress", 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
         end

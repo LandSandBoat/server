@@ -2,8 +2,6 @@
 -- Area: Eastern_Adoulin
 --  NPC: HomePoint#2
 -----------------------------------
-require("scripts/globals/homepoint")
------------------------------------
 local entity = {}
 
 local hpEvent = 8701

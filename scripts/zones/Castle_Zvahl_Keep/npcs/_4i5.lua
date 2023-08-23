@@ -4,7 +4,7 @@
 -- Involved In Quest: Recollections
 -- !pos -14 0 69 162
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 local entity = {}
 
@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("recollectionsQuest") == 2
     then
         if
-            trade:hasItemQty(xi.items.WHINE_CELLAR_KEY, 1) and
+            trade:hasItemQty(xi.item.WHINE_CELLAR_KEY, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(8, xi.items.WHINE_CELLAR_KEY)
+            player:startEvent(8, xi.item.WHINE_CELLAR_KEY)
         end
     end
 end

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Windurst_Walls (239)
 -----------------------------------
-local ID = require('scripts/zones/Windurst_Walls/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

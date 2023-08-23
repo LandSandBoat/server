@@ -2,8 +2,6 @@
 -- Area: Windurst Waters [S]
 --  NPC: Survival Guide
 -----------------------------------
-require("scripts/globals/teleports/survival_guide")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

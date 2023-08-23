@@ -3,12 +3,8 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 132
 -- Maat : !pos 8 3 118 243
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
@@ -71,7 +67,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    local properTestimony = xi.items.WARRIORS_TESTIMONY + player:getMainJob() - 1
+                    local properTestimony = xi.item.WARRIORS_TESTIMONY + player:getMainJob() - 1
 
                     if
                         npcUtil.tradeHasExactly(trade, properTestimony) and

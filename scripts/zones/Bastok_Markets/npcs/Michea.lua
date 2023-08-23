@@ -5,9 +5,6 @@
 -- Involed in: Distant Loyalties
 -- !pos -298 -16 -157 235
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -17,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if
         distantLoyalties == QUEST_ACCEPTED and
         player:getCharVar("DistantLoyaltiesProgress") == 2 and
-        npcUtil.tradeHas(trade, xi.items.MYTHRIL_INGOT)
+        npcUtil.tradeHas(trade, xi.item.MYTHRIL_INGOT)
     then
         player:startEvent(317)
     end

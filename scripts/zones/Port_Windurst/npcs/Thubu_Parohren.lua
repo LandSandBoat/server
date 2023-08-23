@@ -4,8 +4,7 @@
 -- Type: Fishing Guild Master
 -- !pos -182.230 -3.835 61.373 240
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}
 

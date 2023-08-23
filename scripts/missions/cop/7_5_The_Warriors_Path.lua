@@ -5,14 +5,7 @@
 -- !addmission 6 748
 -- Iron Gate : !pos 612 132 774 32
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require("scripts/globals/teleports")
-require('scripts/globals/titles')
-require('scripts/globals/utils')
------------------------------------
-local altaieuID = require("scripts/zones/AlTaieu/IDs")
+local altaieuID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)

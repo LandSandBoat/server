@@ -2,9 +2,6 @@
 -- Area: Fort Ghelsba
 --   NM: Kegpaunch Doshgnosh
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

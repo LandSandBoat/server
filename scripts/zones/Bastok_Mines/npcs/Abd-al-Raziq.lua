@@ -4,10 +4,7 @@
 -- Type: Alchemy Guild Master
 -- !pos 126.768 1.017 -0.234 234
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/missions")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 

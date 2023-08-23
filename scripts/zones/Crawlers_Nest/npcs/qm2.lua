@@ -3,13 +3,12 @@
 --  NPC: ??? - Guardian Crawler (Spawn area 2)
 -- !pos 44.436 -2.602 195.381 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.ROLANBERRY) then -- Rolanberry
+    if npcUtil.tradeHas(trade, xi.item.ROLANBERRY) then -- Rolanberry
         player:confirmTrade()
         if
             math.random(1, 100) > 38 or

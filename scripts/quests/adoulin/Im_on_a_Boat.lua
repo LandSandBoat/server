@@ -5,12 +5,7 @@
 -- Choubollet      : !pos 380.818 -2.094 290.792 262
 -- Castoff_Point_4 : !pos 220 0.800 146 262
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local foretID = require("scripts/zones/Foret_de_Hennetiel/IDs")
+local foretID = zones[xi.zone.FORET_DE_HENNETIEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IM_ON_A_BOAT)
@@ -23,9 +18,9 @@ quest.reward =
 
 local requiredTradeItems =
 {
-    { xi.items.SQUARE_OF_DHALMEL_LEATHER, 3 },
-    { xi.items.UMBRIL_OOZE,               1 },
-    { xi.items.TWITHERYM_SCALE,           1 },
+    { xi.item.SQUARE_OF_DHALMEL_LEATHER, 3 },
+    { xi.item.UMBRIL_OOZE,               1 },
+    { xi.item.TWITHERYM_SCALE,           1 },
 }
 
 quest.sections =

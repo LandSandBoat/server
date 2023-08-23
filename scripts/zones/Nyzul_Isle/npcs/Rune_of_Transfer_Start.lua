@@ -4,9 +4,7 @@
 -- Notes: Allows players to select a floor to transport to
 -- !pos -20.000 -4.000 -11.000
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/nyzul")
+local ID = zones[xi.zone.NYZUL_ISLE]
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
 -----------------------------------
 local entity = {}

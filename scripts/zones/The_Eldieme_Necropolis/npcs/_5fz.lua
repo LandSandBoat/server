@@ -3,9 +3,8 @@
 --  NPC: Tallow Candle
 -- !pos -655.27 -2.30 214.58
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
-require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
 
     if
-        npcUtil.tradeHasExactly(trade, xi.items.FLINT_STONE) and
+        npcUtil.tradeHasExactly(trade, xi.item.FLINT_STONE) and
         os.time() > timer
     then
         func.skullTrade(player, npc)
@@ -29,7 +28,7 @@ entity.onTrigger = function(player, npc)
     if os.time() < active then
         player:messageSpecial(ID.text.BRAZIER_ACTIVE)
     elseif os.time() > timer and os.time() > active then
-        player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.items.FLINT_STONE)
+        player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.item.FLINT_STONE)
     else
         player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
     end

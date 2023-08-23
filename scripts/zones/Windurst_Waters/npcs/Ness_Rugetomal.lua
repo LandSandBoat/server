@@ -4,14 +4,12 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop")
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

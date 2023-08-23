@@ -4,7 +4,6 @@
 -- Mission 9-2 San d'Oria
 -----------------------------------
 local global = require("scripts/zones/QuBia_Arena/Globals")
-local ID = require("scripts/zones/QuBia_Arena/IDs")
 -----------------------------------
 local entity = {}
 

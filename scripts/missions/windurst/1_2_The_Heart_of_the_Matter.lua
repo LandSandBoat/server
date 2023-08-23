@@ -11,12 +11,9 @@
 -- Pore-Ohre        : !pos 261 -17 -458 116
 -- Outer Horu. Ruin : !pos 466 0 -660 194
 -- _5e9 - Gate      : !pos 584 0 -660 194
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
-local eastSarutabarutaID = require("scripts/zones/East_Sarutabaruta/IDs")
-local outerHorutotoRuinsID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+local eastSarutabarutaID   = zones[xi.zone.EAST_SARUTABARUTA]
+local outerHorutotoRuinsID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER)

@@ -3,8 +3,7 @@
 --  NPC: Rajmonda
 -- Type: Guild Merchant: Fishing Guild
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Selbina_Pirates/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
 -----------------------------------
 local entity = {}
 

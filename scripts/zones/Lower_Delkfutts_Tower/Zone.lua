@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Lower_Delkfutts_Tower (184)
 -----------------------------------
-local ID = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

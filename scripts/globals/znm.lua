@@ -33,8 +33,8 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
     -- Equipment checks.
     local id = user:getEquipID(xi.slot.AMMO)
     if
-        id ~= xi.items.BLANK_SOUL_PLATE and
-        id ~= xi.items.BLANK_HIGH_SPEED_SOUL_PLATE
+        id ~= xi.item.BLANK_SOUL_PLATE and
+        id ~= xi.item.BLANK_HIGH_SPEED_SOUL_PLATE
     then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
@@ -86,7 +86,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     end
 
     -- Bonus for HS Soul Plate
-    if user:getEquipID(xi.slot.AMMO) == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
+    if user:getEquipID(xi.slot.AMMO) == xi.item.BLANK_HIGH_SPEED_SOUL_PLATE then
         zeni = zeni * 1.5
     end
 
@@ -119,7 +119,7 @@ end
 xi.znm.ryo = xi.znm.ryo or {}
 
 xi.znm.ryo.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()
@@ -178,7 +178,7 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
         player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
     end
 
-    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()

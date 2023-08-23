@@ -4,15 +4,12 @@
 -- Starts and Finishes Quest: The Setting Sun
 -- !pos -137.070 10.999 161.855 231
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- "The Setting Sun" conditional script
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED then
-        if trade:hasItemQty(xi.items.ENGRAVED_KEY, 1) and trade:getItemCount() == 1 then
+        if trade:hasItemQty(xi.item.ENGRAVED_KEY, 1) and trade:getItemCount() == 1 then
             player:startEvent (658)
         end
     end
@@ -27,9 +24,9 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5 and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) ~= QUEST_COMPLETED
     then
-        player:startEvent(654, 0, xi.items.ENGRAVED_KEY, xi.items.ENGRAVED_KEY) --The quest is offered to the player.
+        player:startEvent(654, 0, xi.item.ENGRAVED_KEY, xi.item.ENGRAVED_KEY) --The quest is offered to the player.
     elseif theSettingSun == QUEST_ACCEPTED then
-        player:startEvent(655, 0, 0, xi.items.ENGRAVED_KEY) --The NPC asks if the player got the key.'
+        player:startEvent(655, 0, 0, xi.item.ENGRAVED_KEY) --The NPC asks if the player got the key.'
     elseif theSettingSun == QUEST_COMPLETED and player:needToZone() then
         player:startEvent(659) --The quest is already done by the player and the NPC does small talks.
     else

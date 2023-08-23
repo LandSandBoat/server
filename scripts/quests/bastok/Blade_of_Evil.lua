@@ -4,12 +4,7 @@
 -- Log ID: 1, Quest ID: 59
 -- qm1 : !pos 84 -79 77 157
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local middleDelkfuttsID = require('scripts/zones/Middle_Delkfutts_Tower/IDs')
+local middleDelkfuttsID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
@@ -18,7 +13,7 @@ quest.reward =
 {
     fame     = 60,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.CHAOS_BURGEONET,
+    item     = xi.item.CHAOS_BURGEONET,
     title    = xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE,
 }
 
@@ -62,7 +57,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.VIAL_OF_QUADAV_MAGE_BLOOD) and
+                        npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_QUADAV_MAGE_BLOOD) and
                         quest:getVar(player, 'Prog') == 0 and
                         not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):isSpawned() and
                         not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 1):isSpawned() and

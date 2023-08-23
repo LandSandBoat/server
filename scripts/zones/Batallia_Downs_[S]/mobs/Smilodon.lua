@@ -3,8 +3,7 @@
 --  Mob: Smilodon
 -- Note: PH for La Velue
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BATALLIA_DOWNS_S]
 -----------------------------------
 local entity = {}
 

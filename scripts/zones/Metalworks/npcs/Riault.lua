@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Riault
--- Type: Standard NPC
 -- !pos 26.988 -17.39 -41.931 237
 -----------------------------------
 local entity = {}

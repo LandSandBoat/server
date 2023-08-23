@@ -4,9 +4,6 @@
 -- !pos 113 1 -40 80
 -- Retrace NPC
 -----------------------------------
-require("scripts/globals/campaign")
-require("scripts/globals/teleports")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

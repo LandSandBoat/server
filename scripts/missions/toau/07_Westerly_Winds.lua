@@ -5,16 +5,12 @@
 -- !addmission 4 6
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
 
 mission.reward =
 {
-    item        = xi.items.IMPERIAL_SILVER_PIECE,
+    item        = xi.item.IMPERIAL_SILVER_PIECE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE },
 }
 
@@ -51,7 +47,7 @@ mission.sections =
                     -- Don't change order. In retail, Keyitem is gotten before item.
                     if player:getFreeSlotsCount() >= 1 then
                         npcUtil.giveKeyItem(player, xi.ki.RAILLEFALS_NOTE)
-                        npcUtil.giveItem(player, xi.items.IMPERIAL_SILVER_PIECE)
+                        npcUtil.giveItem(player, xi.item.IMPERIAL_SILVER_PIECE)
                         player:setTitle(xi.title.AGENT_OF_THE_ALLIED_FORCES)
                         player:setMissionStatus(mission.areaId, 1)
                     end

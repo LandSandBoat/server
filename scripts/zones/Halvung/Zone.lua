@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Halvung (62)
 -----------------------------------
-local ID = require('scripts/zones/Halvung/IDs')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

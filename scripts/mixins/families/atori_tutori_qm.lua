@@ -31,14 +31,14 @@ g_mixins.atori_tutori_qm = function(atoriMob)
 
     atoriMob:addListener("EFFECT_GAIN", "TERRORIZED", function(mob, effect)
         local ID = zones[mob:getZoneID()]
-        if effect:getType() == xi.effect.TERROR then
+        if effect:getEffectType() == xi.effect.TERROR then
             mob:showText(mob, ID.text.YIKEY_WIKEYS)
         end
     end)
 
     atoriMob:addListener("EFFECT_LOSE", "TERRORIZED", function(mob, effect)
         local ID = zones[mob:getZoneID()]
-        if effect:getType() == xi.effect.TERROR then
+        if effect:getEffectType() == xi.effect.TERROR then
             mob:showText(mob, ID.text.WHATS_THE_MATTARU)
         end
     end)

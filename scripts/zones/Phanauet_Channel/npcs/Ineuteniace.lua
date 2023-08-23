@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Phanauet Channel
 --  NPC: Ineuteniace
--- Type: Standard NPC
 -- !pos 11.701 -3 1.360 1
 -----------------------------------
 local entity = {}

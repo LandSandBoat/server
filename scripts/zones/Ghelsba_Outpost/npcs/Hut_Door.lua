@@ -3,11 +3,6 @@
 --  NPC: Hut Door
 -- !pos -165.357 -11.672 77.771 140
 -----------------------------------
-require("scripts/globals/bcnm")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -6,12 +6,7 @@
 -- Hide Flap (1) : !pos 293 3 -213 149
 -- Naji          : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
-local davoiID = require('scripts/zones/Davoi/IDs')
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RAZOR_AXE,
+    item     = xi.item.RAZOR_AXE,
 }
 
 quest.sections =

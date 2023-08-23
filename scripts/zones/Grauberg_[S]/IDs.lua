@@ -50,15 +50,7 @@ zones[xi.zone.GRAUBERG_S] =
     },
     npc =
     {
-        HARVESTING =
-        {
-            17142545,
-            17142546,
-            17142547,
-            17142548,
-            17142549,
-            17142550,
-        },
+        HARVESTING          = GetTableOfIDs('Harvesting_Point'),
         INDESCRIPT_MARKINGS = 17142586,
     },
 }

@@ -3,8 +3,7 @@
 --  NPC: Sieglinde
 -- Alchemy Synthesis Image Support
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 

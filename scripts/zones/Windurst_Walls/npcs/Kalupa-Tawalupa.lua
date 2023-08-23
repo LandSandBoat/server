@@ -4,8 +4,6 @@
 --  NPC: Kalupa-Tawalupa
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

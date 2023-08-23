@@ -4,7 +4,7 @@
 -- Note: Opened by handles _47f to _47i
 -- !pos -182 -15 -19 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

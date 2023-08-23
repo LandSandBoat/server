@@ -4,8 +4,7 @@
 -- Spawns Ulhuadshi
 -- !pos 350.692 19.455 209.839 215
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 -----------------------------------
 local entity = {}
 

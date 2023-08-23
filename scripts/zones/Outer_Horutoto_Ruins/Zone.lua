@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Outer_Horutoto_Ruins (194)
 -----------------------------------
-local ID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,8 +2,6 @@
 --  MOB: Dahak
 -- Area: Nyzul Isle
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

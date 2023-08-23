@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Walk_of_Echoes
 -----------------------------------
-local ID = require('scripts/zones/Walk_of_Echoes/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

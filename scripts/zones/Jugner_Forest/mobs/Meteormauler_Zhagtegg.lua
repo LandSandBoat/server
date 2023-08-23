@@ -3,7 +3,6 @@
 --   NM: Meteormauler Zhagtegg
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Jugner_Forest/IDs")
 -----------------------------------
 local entity = {}
 

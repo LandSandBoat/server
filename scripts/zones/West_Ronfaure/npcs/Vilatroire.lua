@@ -5,11 +5,6 @@
 -- "Advanced Teamwork"
 -- !pos -260.361 -70.999 423.420 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

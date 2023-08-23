@@ -4,12 +4,6 @@
 -- Involved In Quest: Making Headlines, Riding on the Clouds
 -- !pos -246 -5 -308 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

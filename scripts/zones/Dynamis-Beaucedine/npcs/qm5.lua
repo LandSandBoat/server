@@ -3,8 +3,6 @@
 --  NPC: ??? (qm5)
 -- Note: Spawns Goublefaupe
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,7 +2,7 @@
 -- Area: VeLugannon Palace
 --  NPC: Monolith
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 

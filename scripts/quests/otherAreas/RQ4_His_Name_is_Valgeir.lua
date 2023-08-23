@@ -6,12 +6,6 @@
 -- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 

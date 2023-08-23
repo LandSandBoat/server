@@ -2,7 +2,6 @@
 -- Area: Sea Serpent Grotto
 --   NM: Yarr the Pearleyed
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

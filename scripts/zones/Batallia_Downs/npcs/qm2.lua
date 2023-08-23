@@ -3,7 +3,7 @@
 --  NPC: qm2 (???)
 -- Pop for the quest "Chasing Quotas"
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 

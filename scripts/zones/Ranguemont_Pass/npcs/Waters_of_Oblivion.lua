@@ -4,9 +4,7 @@
 -- Finish Quest: Painful Memory (BARD AF1)
 -- !pos -284 -45 210 166
 -----------------------------------
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local entity = {}
 

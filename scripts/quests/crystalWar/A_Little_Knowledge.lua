@@ -4,11 +4,7 @@
 -- !addquest 7 6
 -- Erlene : !pos 376.936 -39.999 17.914 175
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local eldiemeSID = require('scripts/zones/The_Eldieme_Necropolis_[S]/IDs')
+local eldiemeSID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
@@ -24,7 +20,7 @@ local validMageJobs = set{ xi.job.BLM, xi.job.RDM, xi.job.SMN, xi.job.BLU }
 local tuckerEventFinish = function(player, csid, option, npc)
     local numAwarded = quest:getLocalVar(player, 'numAwarded')
 
-    if npcUtil.giveItem(player, { { xi.items.SHEET_OF_VELLUM, numAwarded } }) then
+    if npcUtil.giveItem(player, { { xi.item.SHEET_OF_VELLUM, numAwarded } }) then
         player:confirmTrade()
         quest:incrementVar(player, 'Option', 1)
     end
@@ -74,12 +70,12 @@ quest.sections =
                     if
                         questOption >= 1 and
                         questOption <= 3 and
-                        trade:getItemQty(xi.items.ROLANBERRY) >= 12 and
-                        trade:hasItemQty(xi.items.ROLANBERRY, trade:getItemCount())
+                        trade:getItemQty(xi.item.ROLANBERRY) >= 12 and
+                        trade:hasItemQty(xi.item.ROLANBERRY, trade:getItemCount())
                     then
                         local numAwardedVellum = math.min(4, math.floor(trade:getItemCount() / 12))
 
-                        trade:confirmItem(xi.items.ROLANBERRY, numAwardedVellum * 12)
+                        trade:confirmItem(xi.item.ROLANBERRY, numAwardedVellum * 12)
                         quest:setLocalVar(player, 'numAwarded', numAwardedVellum)
 
                         if questOption == 1 then
@@ -130,7 +126,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.SHEET_OF_VELLUM, 12 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.SHEET_OF_VELLUM, 12 } })
                     then
                         local isMageJob = validMageJobs[player:getMainJob()] and 1 or 0
 
@@ -182,7 +178,28 @@ quest.sections =
 
         [xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         {
-            ['Erlene'] = quest:event(15):replaceDefault(),
+            ['Erlene'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:canLearnSpell(xi.magic.spell.EMBRAVA) and
+                        player:canLearnSpell(xi.magic.spell.KAUSTRA)
+                    then
+                        return quest:progressEvent(47)
+                    else
+                        return quest:event(15):replaceDefault()
+                    end
+                end
+            },
+
+            onEventFinish =
+            {
+                [47] = function(player, csid, option, npc)
+                    player:addSpell(xi.magic.spell.EMBRAVA, true)
+                    player:addSpell(xi.magic.spell.KAUSTRA, true)
+                    player:messageSpecial(eldiemeSID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
+                end,
+            }
         },
     },
 }

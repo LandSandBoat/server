@@ -4,9 +4,6 @@
 -- Starts and Finishes Quest: The Fumbling Friar
 -- !pos -95 0 196 164
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

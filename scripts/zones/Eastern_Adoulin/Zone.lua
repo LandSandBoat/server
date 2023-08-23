@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Eastern Adoulin (257)
 -----------------------------------
-local ID = require('scripts/zones/Eastern_Adoulin/IDs')
------------------------------------
 local zoneObject = {}
 
 local defineZoneAroundXYZ = function(zone, id, x, y, z, distance)

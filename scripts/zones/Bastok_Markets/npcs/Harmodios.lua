@@ -4,26 +4,27 @@
 -- Standard Merchant NPC
 -- !pos -79.928 -4.824 -135.114 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        17347,   990, 1,    -- Piccolo
-        17344,   219, 2,    -- Cornette
-        17353,    43, 2,    -- Maple Harp
-        5041,  69120, 2,    -- Scroll of Vital Etude
-        5042,  66240, 2,    -- Scroll of Swift Etude
-        5043,  63360, 2,    -- Scroll of Sage Etude
-        5044,  56700, 2,    -- Scroll of Logical Etude
-        5039,  79560, 2,    -- Scroll of Herculean Etude
-        5040,  76500, 2,    -- Scroll of Uncanny Etude
-        17351,  4644, 3,    -- Gemshorn
-        17345,    43, 3,    -- Flute
-        5045,  54000, 3,    -- Scroll of Bewitching Etude
+        xi.item.GEMSHORN,                      5366, 3,
+        xi.item.CORNETTE,                       253, 2,
+        xi.item.FLUTE,                           49, 3,
+        xi.item.PICCOLO,                       1144, 1,
+        xi.item.MAPLE_HARP,                      49, 2,
+        xi.item.SCROLL_OF_VITAL_ETUDE,        79872, 2,
+        xi.item.SCROLL_OF_SWIFT_ETUDE,        76544, 2,
+        xi.item.SCROLL_OF_SAGE_ETUDE,         73216, 2,
+        xi.item.SCROLL_OF_LOGICAL_ETUDE,      65520, 2,
+        xi.item.SCROLL_OF_BEWITCHING_ETUDE,   62400, 3,
+        xi.item.SCROLL_OF_HERCULEAN_ETUDE,    91936, 2,
+        xi.item.SCROLL_OF_UNCANNY_ETUDE,      88400, 2,
+        xi.item.SCROLL_OF_FOE_SIRVENTE,      103350, 3,
+        xi.item.SCROLL_OF_ADVENTURERS_DIRGE, 103350, 3,
     }
 
     player:showText(npc, ID.text.HARMODIOS_SHOP_DIALOG)

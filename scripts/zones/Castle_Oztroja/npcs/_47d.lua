@@ -3,7 +3,7 @@
 --  NPC: _47d
 -- !pos 20.000 24.168 -25.000 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

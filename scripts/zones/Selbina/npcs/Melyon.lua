@@ -5,10 +5,6 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos 25 -6 6 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -17,17 +13,17 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(62, 0, 4366)
         elseif npcUtil.tradeHas(trade, { { 629, 3 } }) then -- Millioncorn x3
             player:startEvent(63, 0, 629)
-        elseif npcUtil.tradeHas(trade, xi.items.CLUMP_OF_BOYAHDA_MOSS) then -- Boyahda Moss x1
-            player:startEvent(64, 0, xi.items.CLUMP_OF_BOYAHDA_MOSS)
+        elseif npcUtil.tradeHas(trade, xi.item.CLUMP_OF_BOYAHDA_MOSS) then -- Boyahda Moss x1
+            player:startEvent(64, 0, xi.item.CLUMP_OF_BOYAHDA_MOSS)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
-        player:startEvent(60, 4366, 629, xi.items.CLUMP_OF_BOYAHDA_MOSS) -- Start quest "Only the Best"
+        player:startEvent(60, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- Start quest "Only the Best"
     else
-        player:startEvent(61, 4366, 629, xi.items.CLUMP_OF_BOYAHDA_MOSS) -- During & after completed quest "Only the Best"
+        player:startEvent(61, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- During & after completed quest "Only the Best"
     end
 end
 

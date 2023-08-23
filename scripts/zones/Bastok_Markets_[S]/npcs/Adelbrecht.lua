@@ -14,10 +14,7 @@
 -- 361 = 361 = After asking in CS 359
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
 local entity = {}
 
@@ -91,12 +88,12 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:setCharVar("BLUE_R_LETTER_USED", 0)
                 player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:addItem(xi.items.SPRINTERS_SHOES)
+                player:addItem(xi.item.SPRINTERS_SHOES)
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SPRINTERS_SHOES)
             else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SPRINTERS_SHOES)
             end
         else
             player:setCampaignAllegiance(2)

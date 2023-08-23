@@ -3,7 +3,7 @@
 --  MOB: White Coney
 -- Note: exclusively uses Wild Carrot
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 

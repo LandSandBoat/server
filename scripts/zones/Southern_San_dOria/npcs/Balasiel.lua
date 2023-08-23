@@ -4,9 +4,6 @@
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test, Methods Create Madness
 -- !pos -136 -11 64 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

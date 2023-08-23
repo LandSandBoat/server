@@ -10,12 +10,7 @@
 -- RIPE_STARFRUIT : !addkeyitem 1143
 -- Shantotto      : !pos 122 -2 112 239
 -----------------------------------
-require('scripts/globals/confrontation')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local horutotoID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
+local horutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)

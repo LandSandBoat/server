@@ -7,15 +7,12 @@
 -- Shattered Telepoint (La Theine) : !pos 334 19 -60 102
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME)
 
 mission.reward =
 {
-    item        = xi.items.CIPHER_OF_LIONS_ALTER_EGO_II,
+    item        = xi.item.CIPHER_OF_LIONS_ALTER_EGO_II,
     keyItem     = xi.ki.RHAPSODY_IN_UMBER,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL },
 }

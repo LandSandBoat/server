@@ -2,9 +2,6 @@
 -- Area: Valkurm Dunes
 --   NM: Metal Shears
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

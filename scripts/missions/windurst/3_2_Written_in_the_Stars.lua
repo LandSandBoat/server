@@ -10,11 +10,6 @@
 -- Zubaba           : !pos 15 -27 18 242
 -- Gate of Light    : !pos -331 0 139 192
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
@@ -148,7 +143,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.RUSTY_DAGGER, 3 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.RUSTY_DAGGER, 3 } })
                     then
                         return mission:progressEvent(151)
                     end
@@ -158,9 +153,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(257, 0, xi.items.RUSTY_DAGGER)
+                        return mission:progressEvent(257, 0, xi.item.RUSTY_DAGGER)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(150, 0, xi.items.RUSTY_DAGGER)
+                        return mission:progressEvent(150, 0, xi.item.RUSTY_DAGGER)
                     end
                 end,
             },

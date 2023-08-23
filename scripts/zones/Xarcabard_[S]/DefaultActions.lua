@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Xarcabard_[S]/IDs')
+local ID = zones[xi.zone.XARCABARD_S]
 
 return {
     ['Animal_Spoor']      = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

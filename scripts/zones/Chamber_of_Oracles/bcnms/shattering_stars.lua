@@ -3,12 +3,6 @@
 -- Name: Shattering stars - Maat Fight
 -- !pos -221 -24 19 206
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -39,7 +33,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         local maatsCap = player:getCharVar("maatsCap")
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
-            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
+            npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
             player:setCharVar("Quest[3][132]Prog", pjob)
         end
 

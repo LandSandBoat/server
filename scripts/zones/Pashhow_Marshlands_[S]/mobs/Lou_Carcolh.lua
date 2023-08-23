@@ -3,8 +3,7 @@
 --  Mob: Lou Carcolh
 -- Note: PH for Nommo
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 local entity = {}
 

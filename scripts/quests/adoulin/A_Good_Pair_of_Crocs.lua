@@ -8,10 +8,6 @@
 -- VELKK_MASK     : !additem 3929
 -- Felmsy         : !pos -53.111 -0.150 88.456 257
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS)
 
@@ -99,8 +95,8 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.VELKK_NECKLACE) or
-                        npcUtil.tradeHasExactly(trade, xi.items.VELKK_MASK)
+                        npcUtil.tradeHasExactly(trade, xi.item.VELKK_NECKLACE) or
+                        npcUtil.tradeHasExactly(trade, xi.item.VELKK_MASK)
                     then
                         return quest:progressEvent(3002)
                     end

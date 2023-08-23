@@ -2,9 +2,7 @@
 -- Zone: Castle_Oztroja (151)
 -----------------------------------
 local oztrojaGlobal = require('scripts/zones/Castle_Oztroja/globals')
-local ID = require('scripts/zones/Castle_Oztroja/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local zoneObject = {}
 

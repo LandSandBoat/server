@@ -2,9 +2,6 @@
 -- Area: Navukgo Execution Chamber
 -- BCNM: Omens
 -----------------------------------
-require("scripts/globals/battlefield")
-local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)

@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Ranguemont Pass (166)
 -----------------------------------
-local ID = require('scripts/zones/Ranguemont_Pass/IDs')
-require('scripts/globals/conquest')
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local zoneObject = {}
 

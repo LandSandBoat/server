@@ -4,13 +4,12 @@
 -- !pos -34 -32 481 52
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.OLZHIRYAN_CACTUS_PADDLE) and
+        npcUtil.tradeHas(trade, xi.item.OLZHIRYAN_CACTUS_PADDLE) and
         npcUtil.popFromQM(player, npc, ID.mob.DEA)
     then
         player:confirmTrade()

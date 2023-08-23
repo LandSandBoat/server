@@ -1,11 +1,7 @@
 -----------------------------------
 -- Assault: Seagull Grounded
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/instance")
-require("scripts/globals/pathfind")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}
 
@@ -35,7 +31,7 @@ end
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
-    xi.assault.afterInstanceRegister(player, xi.items.CAGE_OF_REEF_FIREFLIES)
+    xi.assault.afterInstanceRegister(player, xi.item.CAGE_OF_REEF_FIREFLIES)
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-495.000, -9.695, -72.000, 0)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-490.000, -9.900, -72.000, 0)
 end

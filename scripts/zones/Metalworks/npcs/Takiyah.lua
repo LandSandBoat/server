@@ -3,9 +3,7 @@
 --  NPC: Takiyah
 -- Type: Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}
 

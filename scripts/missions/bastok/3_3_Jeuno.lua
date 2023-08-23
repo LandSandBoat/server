@@ -11,11 +11,7 @@
 -- Goggehn : !pos 3 9 -76 243
 -- _542    : !pos 596 16 -19 184
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local lowerDelkfuttID = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
+local lowerDelkfuttID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO)
@@ -164,7 +160,7 @@ mission.sections =
                     -- the key into a key item, allowing the player to drop the inventory key for space.
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DELKFUTT_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
                     then
                         return mission:progressEvent(1)
                     end

@@ -4,8 +4,7 @@
 -- Lifts players up to the sky!
 -- !pos 0 -20 147 251
 -----------------------------------
-local ID = require("scripts/zones/Hall_of_the_Gods/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.HALL_OF_THE_GODS]
 -----------------------------------
 local entity = {}
 

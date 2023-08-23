@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Pettette
--- Type: Standard NPC
 -- !pos 164.026 -0.001 -26.690 94
 -----------------------------------
 local entity = {}

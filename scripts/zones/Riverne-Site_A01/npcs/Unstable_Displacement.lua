@@ -4,8 +4,7 @@
 -- Note: entrance for "Ouryu Cometh"
 -- !pos 183.390 -3.250 341.550 30
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/bcnm")
+local ID = zones[xi.zone.RIVERNE_SITE_A01]
 -----------------------------------
 local entity = {}
 

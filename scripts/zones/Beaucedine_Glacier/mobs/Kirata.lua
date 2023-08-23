@@ -2,9 +2,6 @@
 -- Area: Beaucedine Glacier (111)
 --   NM: Kirata
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

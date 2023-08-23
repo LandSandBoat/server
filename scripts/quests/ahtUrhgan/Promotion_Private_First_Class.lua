@@ -3,10 +3,6 @@
 -- Log ID: 6, Quest ID: 90
 -- Naja Salaheem !pos 26 -8 -45.5 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_PRIVATE_FIRST_CLASS)
 
@@ -48,7 +44,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.IMP_WING) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.IMP_WING) then
                         return quest:progressEvent(5002, { text_table = 0 })
                     end
                 end,

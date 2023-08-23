@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 11 0
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.A_SHANTOTTO_ASCENSION)
 

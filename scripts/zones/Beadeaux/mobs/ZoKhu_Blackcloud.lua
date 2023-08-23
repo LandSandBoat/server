@@ -3,7 +3,6 @@
 --   NM: Zo'Khu Blackcloud
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 

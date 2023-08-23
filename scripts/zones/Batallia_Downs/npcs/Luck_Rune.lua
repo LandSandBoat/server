@@ -4,7 +4,7 @@
 --  Involved in Quest: Mhaura Fortune
 -- !pos -362.167 -12.199 157.158 105
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 

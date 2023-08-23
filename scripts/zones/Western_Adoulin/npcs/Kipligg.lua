@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Kipligg
--- Type: Standard NPC and Mission NPC,
--- Involved with Missions: '...Into the Fire', 'Done and Delivered'
 -- !pos -32 0 22 256
------------------------------------
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

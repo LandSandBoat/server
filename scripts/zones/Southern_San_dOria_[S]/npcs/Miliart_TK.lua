@@ -4,10 +4,7 @@
 -- Type: Sigil NPC
 -- !pos 107 1 -31 80
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
-require("scripts/globals/campaign")
-require("scripts/globals/utils")
-require("scripts/globals/extravaganza")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 local entity = {}
 

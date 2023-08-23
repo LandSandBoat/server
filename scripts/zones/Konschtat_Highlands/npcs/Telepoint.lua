@@ -3,8 +3,7 @@
 --  NPC: Telepoint
 -- !pos 220.000 19.104 300.000 106
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 local entity = {}
 
@@ -13,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
     local item = trade:getItemId()
     if
         trade:getItemCount() == 1 and
-        item >= xi.items.FIRE_CRYSTAL and
-        item <= xi.items.DARK_CRYSTAL and
-        npcUtil.giveItem(player, xi.items.FADED_CRYSTAL)
+        item >= xi.item.FIRE_CRYSTAL and
+        item <= xi.item.DARK_CRYSTAL and
+        npcUtil.giveItem(player, xi.item.FADED_CRYSTAL)
     then
         player:tradeComplete()
     end

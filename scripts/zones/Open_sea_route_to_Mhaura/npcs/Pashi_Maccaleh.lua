@@ -4,8 +4,7 @@
 -- Guild Merchant NPC: Fishing Guild
 -- !pos 4.986 -2.101 -12.026 47
 -----------------------------------
-require("scripts/globals/shop")
-local ID = require("scripts/zones/Open_sea_route_to_Mhaura/IDs")
+local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]
 -----------------------------------
 local entity = {}
 

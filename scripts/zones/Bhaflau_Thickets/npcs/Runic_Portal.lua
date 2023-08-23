@@ -4,11 +4,7 @@
 -- Mamool Ja Teleporter Back to Aht Urhgan Whitegate
 -- !pos -211 -11 -818 52
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 

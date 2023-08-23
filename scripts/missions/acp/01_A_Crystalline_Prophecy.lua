@@ -4,9 +4,6 @@
 -----------------------------------
 -- !addmission 9 0
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
 

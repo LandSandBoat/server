@@ -2,10 +2,6 @@
 -- Head Wind
 -- Boneyard Gully mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/titles")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

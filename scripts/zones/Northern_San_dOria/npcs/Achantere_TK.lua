@@ -2,8 +2,6 @@
 -- Area: Northern San d'Oria
 --  NPC: Achatere, T.K.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

@@ -1,8 +1,3 @@
-require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/zones/Promyvion-Mea/IDs")
-require("scripts/zones/Promyvion-Vahzl/IDs")
------------------------------------
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 

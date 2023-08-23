@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Paytah
--- Type: Standard NPC
 -- !pos 77.550 -6 117.769 240
 -----------------------------------
 local entity = {}

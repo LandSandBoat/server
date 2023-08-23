@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ra'Kaznar Inner Court (276)
 -----------------------------------
-local ID = require('scripts/zones/RaKaznar_Inner_Court/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

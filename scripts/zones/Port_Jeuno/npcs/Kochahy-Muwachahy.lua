@@ -3,8 +3,6 @@
 --  NPC: Kochahy-Muwachahy
 -- !pos 40 0 6 246
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.OTHER

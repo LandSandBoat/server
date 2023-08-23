@@ -4,8 +4,7 @@
 -- Involved in Quest: Searching for the Right Words
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 local entity = {}
 

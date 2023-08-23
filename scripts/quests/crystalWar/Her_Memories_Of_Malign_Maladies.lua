@@ -8,12 +8,9 @@
 -- Fey Blossoms : !pos -141.312 -6.75 564.417 89
 -- Raustigne    : !pos 3.979 -1.999 44.456 80
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OF_MALIGN_MALADIES)
@@ -104,7 +101,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PHILOSOPHERS_STONE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PHILOSOPHERS_STONE) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(30, 89, 23, 2964, 56, 0, 6029313, 0, 0)
@@ -115,7 +112,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 2 then
-                        return quest:messageSpecial(graubergID.text.SUITABLE_PLACE_TO_SOAK, xi.items.PHILOSOPHERS_STONE)
+                        return quest:messageSpecial(graubergID.text.SUITABLE_PLACE_TO_SOAK, xi.item.PHILOSOPHERS_STONE)
                     elseif
                         questProgress == 3 and
                         not player:hasKeyItem(xi.ki.FEY_STONE)

@@ -4,8 +4,7 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

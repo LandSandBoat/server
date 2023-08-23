@@ -2,8 +2,6 @@
 -- Area: Bastok Markets
 --  NPC: Rabid Wolf, I.M.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

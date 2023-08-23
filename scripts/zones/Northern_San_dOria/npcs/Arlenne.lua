@@ -2,8 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Arlenne
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -13,22 +12,22 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.items.ASH_CLUB,           74, 3,
-        xi.items.MAPLE_WAND,         54, 3,
-        xi.items.WILLOW_WAND,       384, 3,
-        xi.items.YEW_WAND,         1628, 1,
-        xi.items.ASH_STAFF,          66, 3,
-        xi.items.HOLLY_STAFF,       660, 3,
-        xi.items.ELM_STAFF,        3750, 1,
-        xi.items.ASH_POLE,          436, 3,
-        xi.items.HOLLY_POLE,       5279, 2,
-        xi.items.ELM_POLE,        18969, 1,
-        xi.items.CESTI,             149, 3,
-        xi.items.BRASS_KNUCKLES,    936, 3,
-        xi.items.BRASS_BAGHNAKHS,  1757, 3,
-        xi.items.BRONZE_ZAGHNAL,    357, 3,
-        xi.items.BRASS_ZAGHNAL,    2938, 3,
-        xi.items.ZAGHNAL,         13041, 1,
+        xi.item.ASH_CLUB,           74, 3,
+        xi.item.MAPLE_WAND,         54, 3,
+        xi.item.WILLOW_WAND,       384, 3,
+        xi.item.YEW_WAND,         1628, 1,
+        xi.item.ASH_STAFF,          66, 3,
+        xi.item.HOLLY_STAFF,       660, 3,
+        xi.item.ELM_STAFF,        3750, 1,
+        xi.item.ASH_POLE,          436, 3,
+        xi.item.HOLLY_POLE,       5279, 2,
+        xi.item.ELM_POLE,        18969, 1,
+        xi.item.CESTI,             149, 3,
+        xi.item.BRASS_KNUCKLES,    936, 3,
+        xi.item.BRASS_BAGHNAKHS,  1757, 3,
+        xi.item.BRONZE_ZAGHNAL,    357, 3,
+        xi.item.BRASS_ZAGHNAL,    2938, 3,
+        xi.item.ZAGHNAL,         13041, 1,
     }
 
     player:showText(npc, ID.text.ARLENNE_SHOP_DIALOG)

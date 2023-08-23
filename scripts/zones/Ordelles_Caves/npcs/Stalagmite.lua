@@ -4,8 +4,7 @@
 -- Involved In Quest: Sharpening the Sword
 -- !pos -51 0.1 3 193
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 local entity = {}
 

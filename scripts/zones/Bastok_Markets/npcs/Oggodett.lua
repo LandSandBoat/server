@@ -3,9 +3,7 @@
 --  NPC: Oggodett
 -- Aragoneu Regional Goods
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
@@ -18,11 +16,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            631,    36,    -- Horo Flour
-            629,    43,    -- Millioncorn
-            4415,  111,    -- Roasted Corn
-            4505,   90,    -- Sunflower Seeds
-            841,    36,     -- Yagudo Feather
+            xi.item.BAG_OF_HORO_FLOUR,           41,
+            xi.item.EAR_OF_MILLIONCORN,          49,
+            xi.item.EAR_OF_ROASTED_CORN,        128,
+            xi.item.YAGUDO_FEATHER,              41,
+            xi.item.HANDFUL_OF_SUNFLOWER_SEEDS, 104,
         }
 
         player:showText(npc, ID.text.OGGODETT_OPEN_DIALOG)

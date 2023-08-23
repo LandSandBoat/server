@@ -2,8 +2,6 @@
 -- Area: The Sanctuary of Zi'Tah
 --   NM: Huwasi
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

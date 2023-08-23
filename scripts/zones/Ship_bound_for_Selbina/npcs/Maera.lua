@@ -4,8 +4,7 @@
 -- Type: Standard Merchant NPC
 -- !pos -1.139 -2.101 -9.000 220
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
 -----------------------------------
 local entity = {}
 

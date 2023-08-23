@@ -5,16 +5,12 @@
 -- Tehf Kimasnahya !pos -89.897 -1 6.199 50
 -- Ekhu Pesshyadha !pos -13.043 0.999 103.423 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THREE_MEN_AND_A_CLOSET)
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_BRONZE_PIECE,
+    item = xi.item.IMPERIAL_BRONZE_PIECE,
 }
 
 quest.sections =

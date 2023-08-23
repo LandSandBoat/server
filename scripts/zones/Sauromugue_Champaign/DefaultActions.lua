@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Sauromugue_Champaign/IDs')
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 
 return {
     ['qm2']    = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

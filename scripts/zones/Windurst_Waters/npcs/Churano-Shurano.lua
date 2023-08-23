@@ -3,9 +3,6 @@
 --  NPC: Churano-Shurano
 -- !pos -60.8 -11.2 98.9 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

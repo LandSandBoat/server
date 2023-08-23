@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Silver_Sea_Remnants
 -----------------------------------
-local ID = require('scripts/zones/Silver_Sea_Remnants/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

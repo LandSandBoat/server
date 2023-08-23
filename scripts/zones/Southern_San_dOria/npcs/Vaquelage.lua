@@ -4,7 +4,7 @@
 -- Type: Item Deliverer NPC
 -- !pos 17.396 1.699 -29.357 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

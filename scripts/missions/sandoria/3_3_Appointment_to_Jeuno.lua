@@ -11,13 +11,9 @@
 -- Nelcabrit            : !pos -32 9 -49 243
 -- _541 (Cermet Door)   : !pos 636 16 20 184
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
-local lowerDelkfuttID    = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local lowerDelkfuttID    = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO)
@@ -200,7 +196,7 @@ mission.sections =
                     -- the key into a key item, allowing the player to drop the inventory key for space.
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DELKFUTT_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
                     then
                         return mission:progressEvent(0)
                     end

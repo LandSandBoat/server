@@ -278,7 +278,7 @@ xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local digsite = getAssignedDigSite(player)
 
     if
-        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
+        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
         player:getCharVar(zoneData[zoneid].statusvar) == QUEST_COMPLETED and
         npc:getID() == digsiteids[digsite]
     then

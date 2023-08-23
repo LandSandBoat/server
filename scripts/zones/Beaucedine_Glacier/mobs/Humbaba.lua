@@ -2,15 +2,12 @@
 -- Area: Beaucedine Glacier
 --   NM: Humbaba
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.ICE_SPIKES, 45, 0, 0)
-    mob:getStatusEffect(xi.effect.ICE_SPIKES):setFlag(xi.effectFlag.DEATH)
+    mob:getStatusEffect(xi.effect.ICE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
 entity.onMobSpawn = function(mob)

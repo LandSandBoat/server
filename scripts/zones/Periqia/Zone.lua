@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Periqia
 -----------------------------------
-local ID = require('scripts/zones/Periqia/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

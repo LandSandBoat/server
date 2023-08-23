@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 35
 -- Kurando : !pos -23.887 3.898 0.870 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
 
@@ -15,7 +11,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BLACK_SILK_NECKERCHIEF,
+    item     = xi.item.BLACK_SILK_NECKERCHIEF,
     title    = xi.title.AIRSHIP_DENOUNCER,
 }
 
@@ -50,7 +46,7 @@ quest.sections =
             ['Kurando'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SILKWORM_EGG) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SILKWORM_EGG) then
                         return quest:progressEvent(171)
                     end
                 end,

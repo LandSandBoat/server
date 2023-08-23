@@ -2,8 +2,6 @@
 -- Area: Batallia Downs (105)
 --  Mob: Skirling Liger
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

@@ -5,9 +5,6 @@
 -- !addmission 5 28
 -- Weathered Gravestone : !pos 149.728 -5.109 -395.121 105
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_HAWK_IN_REPOSE)
 
@@ -29,7 +26,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.LILAC) and
+                        npcUtil.tradeHasExactly(trade, xi.item.LILAC) and
                         mission:getVar(player, 'Status') == 1
                     then
                         return mission:progressEvent(503, 0, 23, 1753, 0, 0, 0, 1, 3871)

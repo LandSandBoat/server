@@ -5,10 +5,7 @@
 --                            Lure of the Wildcat (San d'Oria), Old Wounds
 -- !pos 27 0.1 0.1 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/magic")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 

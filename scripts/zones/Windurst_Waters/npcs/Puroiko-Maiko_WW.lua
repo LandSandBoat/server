@@ -2,8 +2,6 @@
 -- Area: Windurst Water
 --  NPC: Puroiko-Maiko, W.W.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

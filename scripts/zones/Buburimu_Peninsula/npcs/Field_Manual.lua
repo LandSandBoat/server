@@ -2,8 +2,6 @@
 -- Field Manual
 -- Area: Buburimu Peninsula
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

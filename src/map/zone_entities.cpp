@@ -75,9 +75,9 @@ typedef std::pair<float, CCharEntity*> CharScorePair;
 CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
+, lastCharComputeTargId(0)
 , lastCharPersistTargId(0)
 {
-    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -230,8 +230,8 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
-    ZONE_TYPE zonetype  = m_zone->GetType();
-    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
+    ZONE_TYPE zonetype  = m_zone->GetTypeMask();
+    bool      forceLink = zonetype & ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && PMob->PParty == nullptr)
     {

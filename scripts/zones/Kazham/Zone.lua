@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Kazham (250)
 -----------------------------------
-local ID = require('scripts/zones/Kazham/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

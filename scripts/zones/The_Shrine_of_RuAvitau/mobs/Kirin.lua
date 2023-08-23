@@ -2,10 +2,8 @@
 -- Area: The Shrine of Ru'Avitau
 --   NM: Kirin
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

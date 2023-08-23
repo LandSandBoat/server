@@ -4,11 +4,7 @@
 -- Involved in Quest: Knight Stalker
 -- !pos 58 1 -70 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/pets")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

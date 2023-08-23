@@ -3,10 +3,8 @@
 --  Mob: Ix'zdei (Black Mage)
 -- Note: CoP Mission 8-3
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/magic")
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 

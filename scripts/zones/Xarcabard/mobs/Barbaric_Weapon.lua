@@ -3,8 +3,6 @@
 --   NM: Barbaric Weapon
 -- TODO: "Gains a Dread Spikes effect whenever Whirl of Rage is used."
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

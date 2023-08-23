@@ -4,8 +4,7 @@
 -- !pos -103.286 0.6 434.866 123
 -- Active on WINDSDAY in this zone. To test on off-days, setStatus(xi.status.NORMAL)
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/beastmentreasure")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 

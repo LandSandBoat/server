@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Gusgen Mines (196)
 -----------------------------------
-local ID = require('scripts/zones/Gusgen_Mines/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 local zoneObject = {}
 

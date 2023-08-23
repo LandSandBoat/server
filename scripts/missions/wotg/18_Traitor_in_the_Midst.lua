@@ -10,9 +10,6 @@
 -- Regal Pawprints (Coig)    : !pos 272.314 0.02 -23.815 136
 -- Regal Pawprints (Naoi)    : !pos 53.812 0.307 -299.136 136
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.TRAITOR_IN_THE_MIDST)
 

@@ -3,9 +3,6 @@
 --  NPC: Bountibox
 -- Gobbie Mystery Box
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/gobbie_mystery_box")
------------------------------------
 local entity = {}
 
 local events =

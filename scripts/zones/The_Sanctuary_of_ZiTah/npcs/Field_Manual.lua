@@ -2,8 +2,6 @@
 -- Field Manual
 -- Area: The Sanctuary of Zi'Tah
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

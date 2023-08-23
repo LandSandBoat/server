@@ -4,9 +4,7 @@
 -- Involved in Quest: A Crisis in the Making
 -- !pos -137 17 177 145
 -----------------------------------
-local ID = require("scripts/zones/Giddeus/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 -- Door: Heavy Iron Gate
 -- !pos 660 -27 328 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 

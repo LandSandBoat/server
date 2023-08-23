@@ -3,9 +3,7 @@
 --  Mob: Huge Spider
 -- Note: PH for Falcatus Aranei
 -----------------------------------
-local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 -----------------------------------
 local entity = {}
 

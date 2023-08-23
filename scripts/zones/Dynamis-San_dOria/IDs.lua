@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-San_dOria
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_SAN_DORIA] =

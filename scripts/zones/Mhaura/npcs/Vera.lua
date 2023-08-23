@@ -4,8 +4,7 @@
 -- Finishes Quest: The Old Lady
 -- !pos -49 -5 20 249
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 
@@ -17,17 +16,17 @@ entity.onTrade = function(player, npc, trade)
 
         if
             veraOldLadyVar == 1 and
-            trade:hasItemQty(xi.items.WILD_RABBIT_TAIL, 1)
+            trade:hasItemQty(xi.item.WILD_RABBIT_TAIL, 1)
         then
-            player:startEvent(135, xi.items.CUP_OF_DHALMEL_SALIVA)
+            player:startEvent(135, xi.item.CUP_OF_DHALMEL_SALIVA)
         elseif
             veraOldLadyVar == 2 and
-            trade:hasItemQty(xi.items.CUP_OF_DHALMEL_SALIVA, 1)
+            trade:hasItemQty(xi.item.CUP_OF_DHALMEL_SALIVA, 1)
         then
-            player:startEvent(136, xi.items.BLOODY_ROBE)
+            player:startEvent(136, xi.item.BLOODY_ROBE)
         elseif
             veraOldLadyVar == 3 and
-            trade:hasItemQty(xi.items.BLOODY_ROBE, 1)
+            trade:hasItemQty(xi.item.BLOODY_ROBE, 1)
         then
             player:startEvent(137)
         end
@@ -47,15 +46,15 @@ entity.onTrigger = function(player, npc)
         if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(137)
         elseif veraOldLadyVar == 1 then
-            player:startEvent(132, xi.items.WILD_RABBIT_TAIL)
+            player:startEvent(132, xi.item.WILD_RABBIT_TAIL)
         elseif veraOldLadyVar == 2 then
-            player:startEvent(132, xi.items.CUP_OF_DHALMEL_SALIVA)
+            player:startEvent(132, xi.item.CUP_OF_DHALMEL_SALIVA)
         elseif veraOldLadyVar == 3 then
-            player:startEvent(132, xi.items.BLOODY_ROBE)
+            player:startEvent(132, xi.item.BLOODY_ROBE)
         end
     else
         if player:getMainLvl() >= xi.settings.main.SUBJOB_QUEST_LEVEL then
-            player:startEvent(131, xi.items.WILD_RABBIT_TAIL)
+            player:startEvent(131, xi.item.WILD_RABBIT_TAIL)
         else
             player:startEvent(133)
         end

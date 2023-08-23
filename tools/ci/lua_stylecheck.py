@@ -35,9 +35,15 @@ deprecated_requires = [
     "scripts/globals/settings",
     "scripts/globals/spell_data",
     "scripts/globals/status",
+    "scripts/globals/titles",
     "scripts/globals/zone",
     "scripts/enum",
-    "scripts/mixins/claim_shield",
+    "IDs",
+]
+
+invalid_enums = [
+    "xi.items.",
+    "xi.effects.",
 ]
 
 # 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
@@ -85,12 +91,15 @@ class LuaStyleCheck:
 
         self.run_style_check()
 
-    def error(self, error_string):
+    def error(self, error_string, suppress_line_ref = False):
         """Displays error_string along with filename and line.  Increments errcount for the class."""
 
         if self.show_errors:
             print(f"{error_string}: {self.filename}:{self.counter}")
-            print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+
+            if not suppress_line_ref:
+                print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+
             print("")
 
         self.errcount += 1
@@ -296,7 +305,15 @@ class LuaStyleCheck:
         if ("require(") in line:
             for deprecated_str in deprecated_requires:
                 if deprecated_str in line:
-                    self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
+                    if deprecated_str == "IDs":
+                        self.error("IDs requires should be replaced with references to zones[xi.zone.ZONE_ENUM]")
+                    else:
+                        self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
+
+    def check_invalid_enum(self, line):
+            for invalid_enum in invalid_enums:
+                if invalid_enum in line:
+                    self.error(f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?")
 
     def check_function_parameters(self, line):
         # Iterate through all entries in the disallowed table
@@ -323,6 +340,8 @@ class LuaStyleCheck:
             in_block_comment    = False
             in_condition        = False
             full_condition      = ""
+            uses_id             = False
+            has_id_ref          = False
 
             for line in self.lines:
                 self.counter = self.counter + 1
@@ -355,6 +374,16 @@ class LuaStyleCheck:
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
                 self.check_deprecated_require(code_line)
+                self.check_invalid_enum(code_line)
+
+                # Keep track of ID variable assignments and if they are referenced.
+                # TODO: Track each unique variable, and expand this to potentially something
+                # more generic for other tests.
+                if re.search("ID[ ]+=[ ]+zones\[", code_line):
+                    uses_id = True
+
+                if uses_id == True and re.search("ID\.", code_line):
+                    has_id_ref = True
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)
@@ -400,7 +429,8 @@ class LuaStyleCheck:
                     if stripped_line.endswith('not'):
                         self.error('Multiline conditions should not end with not')
                 
-
+            if "DefaultActions" not in self.filename and uses_id == True and not has_id_ref:
+                self.error("ID variable is assigned but unused", suppress_line_ref = True)
             # If you want to modify the files during the checks, write your changed lines to the appropriate
             # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
             #
@@ -435,7 +465,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 47
+    expected_errors = 49
 else:
     total_errors = LuaStyleCheck(target).errcount
 

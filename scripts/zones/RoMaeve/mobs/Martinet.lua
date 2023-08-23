@@ -2,15 +2,12 @@
 -- Area: RoMaeve
 --   NM: Martinet
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 55, 0, 0)
-    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setFlag(xi.effectFlag.DEATH)
+    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
 entity.onSpikesDamage = function(mob, target, damage)

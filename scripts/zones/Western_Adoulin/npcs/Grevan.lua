@@ -4,9 +4,6 @@
 -- Involved With Quest: 'Order Up'
 -- !pos 50 0 6 256
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

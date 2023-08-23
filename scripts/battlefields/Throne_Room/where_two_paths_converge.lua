@@ -3,9 +3,7 @@
 -- Name: Bastok Mission 9-2
 -- !pos -111 -6 0 165
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.THRONE_ROOM]
 -----------------------------------
 
 local content = BattlefieldMission:new({

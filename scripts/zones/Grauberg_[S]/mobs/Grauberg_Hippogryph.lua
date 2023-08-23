@@ -3,8 +3,7 @@
 --  Mob: Grauberg Hippogryph
 -- Note: PH for Kotan-kor Kamuy
 -----------------------------------
-local ID = require("scripts/zones/Grauberg_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 local entity = {}
 

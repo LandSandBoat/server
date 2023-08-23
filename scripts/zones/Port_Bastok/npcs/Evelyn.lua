@@ -3,9 +3,7 @@
 --  NPC: Evelyn
 -- Gustaberg Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 
@@ -18,10 +16,10 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            1108, 703,    -- Sulfur
-            619,   43,    -- Popoto
-            611,   36,    -- Rye Flour
-            4388,  40,    -- Eggplant
+            xi.item.PINCH_OF_SULFUR,  795,
+            xi.item.POPOTO,            49,
+            xi.item.BAG_OF_RYE_FLOUR,  41,
+            xi.item.EGGPLANT,          45,
         }
 
         player:showText(npc, ID.text.EVELYN_OPEN_DIALOG)

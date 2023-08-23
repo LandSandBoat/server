@@ -4,11 +4,6 @@
 -- Log ID: 0, Quest ID: 15
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
 
@@ -17,7 +12,7 @@ quest.reward =
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
     -- Repeatable Items handled within the Trigger:
-    -- item = xi.items.LIZARD_GLOVES,
+    -- item = xi.item.LIZARD_GLOVES,
     -- title = xi.title.LIZARD_SKINNER,
 }
 
@@ -87,7 +82,7 @@ quest.sections =
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.LIZARD_SKIN, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.LIZARD_SKIN, 3 } }) then
                         return quest:progressEvent(561)
                     end
                 end,
@@ -96,7 +91,7 @@ quest.sections =
             onEventFinish =
             {
                 [561] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.LIZARD_GLOVES, { fromTrade = true }) then
+                    if npcUtil.giveItem(player, xi.item.LIZARD_GLOVES, { fromTrade = true }) then
                         player:confirmTrade()
                         player:addTitle(xi.title.LIZARD_SKINNER)
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then

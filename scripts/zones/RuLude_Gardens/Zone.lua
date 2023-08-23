@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: RuLude_Gardens (243)
 -----------------------------------
-local ID = require('scripts/zones/RuLude_Gardens/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
+local ID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 local zoneObject = {}
 

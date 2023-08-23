@@ -5,8 +5,7 @@
 -- known positions include:
 -- !pos -35.988 -2.325 -196.000 16
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.PROMYVION_HOLLA]
 -----------------------------------
 local entity = {}
 
@@ -16,7 +15,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.TEAL_MEMOSPHERE) and
+        npcUtil.tradeHas(trade, xi.item.TEAL_MEMOSPHERE) and
         not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_HOLLA)
     then
         player:startEvent(49)

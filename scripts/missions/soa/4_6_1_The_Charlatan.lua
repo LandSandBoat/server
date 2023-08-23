@@ -6,9 +6,6 @@
 -- Levil           : !pos -87.204 3.350 12.655 256
 -- Ploh Trishbahk  : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_CHARLATAN)
 
@@ -19,9 +16,9 @@ mission.reward =
 
 local rewardItems =
 {
-    xi.items.ADOULINS_REFUGE_P1,
-    xi.items.YGNASS_RESOLVE_P1,
-    xi.items.ARCIELAS_GRACE_P1,
+    xi.item.ADOULINS_REFUGE_P1,
+    xi.item.YGNASS_RESOLVE_P1,
+    xi.item.ARCIELAS_GRACE_P1,
 }
 
 mission.sections =

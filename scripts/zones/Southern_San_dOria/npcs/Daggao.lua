@@ -4,9 +4,6 @@
 -- Involved in Quest: Peace for the Spirit, Lure of the Wildcat (San d'Oria)
 -- !pos 89 0 119 230
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

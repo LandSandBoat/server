@@ -3,8 +3,7 @@
 --  Mob: Sturm
 -- Involved in Quest: A New Dawn (BST AF3)
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 local entity = {}
 

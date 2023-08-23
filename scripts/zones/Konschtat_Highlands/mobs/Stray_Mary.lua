@@ -2,11 +2,8 @@
 -- Area: Konschtat Highlands
 --   NM: Stray Mary
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

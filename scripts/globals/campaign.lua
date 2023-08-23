@@ -118,8 +118,8 @@ xi.campaign.getSandOriaNotesItem = function(i)
         [1282] = { id = 15841, price = 5000, adj = 5000 }, -- Recall Ring: Jugner
         [1538] = { id = 15842, price = 5000, adj = 5000 }, -- Recall Ring: Pashow
         [1794] = { id = 15843, price = 5000, adj = 5000 }, -- Recall Ring: Meriphataud
-        [2050] = { id = xi.items.CIPHER_OF_VALAINERALS_ALTER_EGO, price = 2000 }, -- Cipher: Valaineral
-        [2306] = { id = xi.items.CIPHER_OF_ADELHEIDS_ALTER_EGO, price = 2000 }, -- Cipher: Adelheid
+        [2050] = { id = xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO, price = 2000 }, -- Cipher: Valaineral
+        [2306] = { id = xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO, price = 2000 }, -- Cipher: Adelheid
         -- Stars Service
         [18] = { id = 14581, price = 15000, adj = 10000 }, -- Iron Ram Chainmain
         [274] = { id = 15005, price = 10500, adj = 7000 }, -- Iron Ram Mufflers

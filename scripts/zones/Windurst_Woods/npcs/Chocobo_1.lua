@@ -3,8 +3,6 @@
 --  NPC: Chocobo
 -- Nonstandard Moving NPC
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

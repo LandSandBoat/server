@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: West_Ronfaure (100)
 -----------------------------------
-local ID = require('scripts/zones/West_Ronfaure/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 
