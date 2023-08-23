@@ -91,7 +91,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
     if (settings::get<bool>("search.OMIT_NO_HISTORY"))
     {
         // Get items that have been listed before
-        selectFrom = "(SELECT item_basic.aH, item_basic.itemid, item_basic.stackSize "
+        selectFrom = "(SELECT item_basic.* "
                      "FROM item_basic "
                      "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid"
                      ") AS item_basic";
