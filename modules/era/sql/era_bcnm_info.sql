@@ -3,7 +3,7 @@
 -- Replace BCNM data where required
 -- --------------------------------------------------------
 
-LOCK TABLES `bcnm_info` WRITE, 
+LOCK TABLES `bcnm_info` WRITE,
     `bcnm_battlefield` WRITE,
     `mob_pools` WRITE;
 
@@ -22,7 +22,7 @@ INSERT INTO `bcnm_battlefield` VALUES
     (737, 1, 16830482, 1), -- Moblin Clergyman
     (737, 1, 16830484, 1),
     (737, 1, 16830486, 1),
-    
+
     (737, 2, 16830487, 3),
     (737, 2, 16830488, 1),
     (737, 2, 16830490, 1),
